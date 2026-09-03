@@ -1,0 +1,540 @@
+{
+ "pack": "tianzes-otari-extras.tianzes-otari-extras",
+ "unit": "09",
+ "leaves": 35,
+ "chars": 41284,
+ "styles": {
+  "prose": 35
+ },
+ "convention": {
+  "bilingual": "中文 English - one ASCII space, no parentheses",
+  "prose": "pure Chinese; keep every @X[...] / [[...]] bracket byte-identical, translate only the {label} tail; keep HTML tags and their order"
+ },
+ "items": [
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Fish Camp Base",
+    "pages",
+    "Fish Camp Base",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>This map is based on the Fish Camp that originally appeared in <em>Troubles in Otari</em>. It is rotated 90 degrees from the original map. I am including it here as a potential home base for your heroes.</p><p><strong>Location</strong></p><p>In the original scenario, the Fish Camp was some distance from town - certainly not within the town limits. From my own experience, your heroes might prefer a more convenient location.</p><p>Therefore, in my own game, I moved it to the far side of the logging flume, on a wide portion of the cliff (not represented on the Otari map), twenty to thirty feet above the beach. A switchback path leads down to the beach.</p><p>From here, town is just a short walk down the beach and under the flume.</p><p><strong>Why Are All the Windows Doors?</strong></p><p>As you probably guessed from the other scenes in this module, I am a big believer in period-specific construction, and glass simply would not be feasible for most buildings. Magiloy's place has oilcloth window coverings, but shutters are more appropriate for a fish camp, which is probably subject to some harsh weather.</p><p>Therefore, all windows are actually small doors, to represent shutters that the players should be able to open and close. A small character could easily use these to enter and exit.</p><p><strong>Encounter</strong></p><p>I have prepared an encounter for this scene: @UUID[JournalEntry.mW1pwcr2Wi5l31gp.JournalEntryPage.yhHq5Eif2VdeuPfi]{Home Invasion}</p><p><strong>A Tour</strong></p><p>The house includes:</p><ul><li><p>Four single bedrooms</p></li><li><p>One double room in the center of the house. This could be for humanoids with darkvision.</p></li><li><p>Kitchen with stove and oven</p></li><li><p>Dining Room</p></li><li><p>Living Room</p></li><li><p>Entry</p></li><li><p>Study</p></li></ul><p>Outer buildings, with</p><ul><li><p>Alchemy Crafting Station</p></li><li><p>General Crafting Station</p></li><li><p>Magical Crafting Station with separate rune crafting and scroll writing areas.</p></li><li><p>Wraparound Porch</p></li><li><p>Two Storage Sheds</p></li><li><p>1-Horse Stable with Storage</p></li></ul><p></p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Fish Camp Base",
+    "pages",
+    "Home Base Decorating",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>I left some room for a bit of creativity and personalization for the players. I think it is worth part of a game session for a bit of home base decorating, especially since a great deal of downtime will be spent here.</p><p>Ideally, each bedroom should get either a bedroll or a mattress on the bed, and each should have a functional chest using a loot actor.</p><p>You can download asses for free at Forgotten Adventures.</p><p><strong>Bedroom Furnishings</strong></p><ul><li><p>Bedrolls - https://forgottenadventures.piwigo.com/index?/category/811-bedrolls_and_sleeping_bags</p></li><li><p>Mattresses with blankets - https://forgottenadventures.piwigo.com/index?/category/987-single_beds</p></li><li><p>Chests - https://forgottenadventures.piwigo.com/index?/category/934-chests</p></li></ul><p><strong>Outdoor Fun</strong></p><p>Additionally, a campfire is always fun. Pick a spot and put down either a campfire or a more elaborate outdoor cooking area:</p><ul><li><p>Campfires - https://forgottenadventures.piwigo.com/index?/category/1047-campfires_and_firepits</p></li><li><p>Outdoor Cooking - https://forgottenadventures.piwigo.com/index?/category/2004-outdoor_cooking</p></li></ul><p>For the fire, I put a flickering fire on the stove in the kitchen. You could copy that light for the fire itself, and then make another copy using the \"flickering\" special effect option, and extend the range to 40/20.</p><p><strong>Trees and Shrubs</strong></p><p>You can find trees and plants here:</p><ul><li><p>Flora: https://forgottenadventures.piwigo.com/index?/category/952-trees</p></li></ul><p>I like to use the \"Tree Tops\" as overhead tiles set on Fade with 50% occlusion. If you really want to get fancy, download the matching shadow and put it under the tree.</p><h2>The Decorating Session</h2><p>A decorating session that involves the players will involve a little setup, but should be fun. I could not find any way to give players the ability to drop tiles onto the map, so here's what I came up with.</p><ul><li><p>Download a selection of the tiles linked above and put it in a \"tiles\" folder of your game world. Don't put it in the Tianze's Otari Extras folder, because then it would be overwritten on the next update.</p></li><li><p>Then, put a copy of the same folders into a cloud drive such as Dropbox, OneDrive or Google Drive, and share it with your players so they can browse it.</p></li><li><p>Next, have each player claim a bedroom, and walk through each player one by one, choosing bed and chest options.</p></li><li><p>As they pick things out, pull the tiles out of the tiles folder and position as desired.</p></li></ul><p>Try not to let your players go too wild, or you will bog down your scene with too many assets.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Fishery Sundries",
+    "pages",
+    "Fishery Sundries",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Tami is the niece of Tamily. She is only fourteen years old, but is a very competent merchant. </p>\n<p>For serval hours every morning, Tamily joins her at the stall.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Hunk's Hunks of Meat",
+    "pages",
+    "Hunk's Hunks of Meat",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Hunk is Jala's younger brother. Together, they run their family farm and sell the output here on most days.</p>\n<p>Jala hates the name of his stall, but he gets a kick out of it. He loves it when patrons joke about it as well, and will give a discount for a good laugh.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Into the Ruins",
+    "pages",
+    "Thirsty Alpaca Ruin",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<blockquote><p>Before you stands an impressive, rubble-filled pit. The townspeople have cleared away the larger sections of the walls and roof, and what remains is a jumble of building stones, lumber, bedding and furnishings.</p><p>A lean-to is set up near the north wall of the pit.</p></blockquote><hr /><p>The pit is 6 to 8 feet deep, and climbing in and out is trivial with a rope, and only a DC 10 without one.</p><h1>Strange Lights</h1><p>If the players visit after full dark, two light near the southern end of the ruin will activate. The dragon mage plants these lights for a few hours nightly in order to keep the investigations of the curious and brave away from their lean-to.</p><h1>Spooky Sounds</h1><p>Day or night, when the players draw near the lean-to, the kobolds within will begin to make spooky moaning sounds, in order to drive away the timid.</p><h1>The Dead Kobold</h1><p>Near the center of the pit, a bloodstain and bloody footprints leads to the body of a kobold warrior.</p><p>Use this macro to make the kobold visible:</p><p>@UUID[Macro.ZxEchksOJCeaGiLk]{Toggle Dead Kobold Visibility}</p><p><em><strong>Note</strong>: the kobold is represented by a tile rather than an actor, to avoid situations where a mod or the system forces dead token invisibility.</em></p><p>The kobold has already been stripped of all valuables.</p><h1>The Lean-To</h1><p>Behind the lean-to, two kobold warriors and one kobold scout are hiding and keeping watch on the PCs. If they get too close, they will start their attack with distance attacks. One warrior will attempt to go down into the hole to warn their leader.</p><p>1: @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.rPaHIh0ICnTLnRO6]{Kobold Scout}</p><p>2: @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.r9w1n85mp9Ip4QiS]{Kobold Warrior}</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Into the Ruins",
+    "pages",
+    "Kobold Warren Entry",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>The ladder descends to an area that is mostly to the north of the area where the Thirsty Alpaca once stood. When it collapsed, it entirely collapsed one tunnel, plus a whole network of rooms. Another tunnel was partially collapsed. The kobolds are working to clear out the collapsed areas.</p><blockquote><p>As you descend the ladder, you see a dim light reflecting on a rocky floor below. Once at the bottom, you find yourself in a cavern that has been partially collapsed in the destruction of the inn above.</p><p>Piles of rubble and earth surround you.</p><p>A flickering light is to the north.</p><p>A blocked tunnel is to the south.</p></blockquote><p></p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Into the Ruins",
+    "pages",
+    "Kobold Warren",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<blockquote><p>Beyond the piles of rubble, three kobolds are seated at a dilapidated table, dining on disgusting food and speaking together in their muttery language. A campfire burns near the table.</p></blockquote><img src=\"modules/tianzes-otari-extras/Assets/Vignettes/Kobolds-Dining.jpg\" /><p><em>(Image courtesy of Bing Image Creator)</em></p><p>One Red Kobold Dragon Mage leads this intrepid crew of kobold invaders:</p><p>1: @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.CJuHwIRCAgTB1SEl]{Red Kobold Dragon Mage}</p><p>1: @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.rPaHIh0ICnTLnRO6]{Kobold Scout}</p><p>1: @UUID[Compendium.pf2e.troubles-in-otari-bestiary.Actor.fhItdltCmcAZkvcI]{Kobold Trapmaster}</p><p>2:@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.r9w1n85mp9Ip4QiS]{Kobold Warrior}</p><p>The Kobold Scout is asleep in the northwest warren, and one of the kobold warriors is asleep in the southwest warren.</p><h1>Encounter Notes</h1><ul><li><p>If the kobold warrior from the surface manages to get down the ladder to warn the leader, and if the heroes immediately pursue them down, then add one kobold warrior to the battle, along with the two kobolds from the caverns near the entry. Awaken the kobolds in the sleeping caverns.</p></li><li><p>If the PCs engage all of these kobolds at once, it would make the battle very tough. However, the kobolds will not pursue the PCs back up the ladder. Plus, they will only be on the alert for an hour or two before they will disperse to their usual activities.</p></li><li><p>The Red Kobold Dragon Mage has an Onyx Dog. To avoid overbalancing this encounter, the Dragon Mage should fumble when attempting to activate the dog, and it falls to the ground. @Check[perception|dc:15] to see the dog fall. Otherwise, it should be easy to spot the dog while searching for loot.</p></li><li><p>The Kobold Scout and Kobold Warriors in that are asleep in the warrens will take one complete round to wake up, get up, grab a weapon, and start moving toward the battle.</p></li></ul><h1>Kobold Tactics</h1><ul><li><p>All kobolds have a sneak attack, which inflicts extra damage. While they do not roll their initiative with stealth, they can use an action to hide and thus make their opponent Off-Guard to them.</p></li><li><p>Kobold Warriors have the Hurried Retreat perk, which allows them to dart away with limited opportunity for Reactive Strikes.</p></li><li><p>The Kobold Trapmaster can deploy a trap with their Quick Trap action, which sets up a spike trap in three actions. The Trapmaster should only attempt this while in a concealed condition, or while retreating.</p></li><li><p>The Kobold Scout has a crossbow, and is tougher than the warriors.</p></li></ul><h1>Treasure</h1><p>Each kobold carried most of his or her valuables on their person. Additionally, each has possessions in sacks near or under their sleeping mats. All of these items are collected in the @UUID[Actor.eNli7XDXWRou3i0C]{Kobold Warren Treasure} token near the firepit.</p><h1>Experience</h1><p>This entire adventure should be worth about 100 experience points for each player.</p><p></p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Into the Ruins",
+    "pages",
+    "Into the Ruins",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<img src=\"modules/tianzes-otari-extras/Assets/Vignettes/Into-the-Ruins-Cover.jpg\" /><p><em>(Image courtesy of Bing Image Creator)</em></p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Into the Ruins",
+    "pages",
+    "Introduction",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>This is a short adventure designed for heroes who have begun to establish a name for themselves in Otari, perhaps by finishing the Beginner Box adventure, but have not delved too deeply into any other Otari-based adventure.</p><h1>How it Starts</h1><p>The adventure begins when Magiloy, the proprietress of the Crow's Casks Tavern, sends a messenger asking the party to come see her.</p><p>(Note: this is an adventure hook from <em>Abomination Vaults</em>.)</p><p>Magiloy is a former pirate - ahem - seafarer - and is also an accomplished alchemist. She runs the most popular inn in town. She is concerned with not only the collapse of the inn, but also with some more recent developments.</p><p>When they arrive, she takes them out the back door and gestures across the river.</p><blockquote><p>That crater across the river from here—something needs to be done about it. The people who live near it are saying that strange lights and spooky sounds have started coming from it. Plus, <strong>something</strong> constructed a lean-to within it. I'm worried that whatever is undermining that place might cause some sort of collapse near the river itself, which could wash out this entire area.</p></blockquote><p>Some potential questions and answers:</p><p>What happened to the owner?</p><blockquote><p>It was terrible. We pulled his body out of the rubble, along with several members of his family. We had to assume that the rest are buried deeper in the rubble.</p></blockquote><p>Why haven't the guards dealt with this?</p><blockquote><p>Well, they were guarding the place, but the goings on over there—especially at night—have them a bit spooked. There're here to guard the town against brigands and pirates, and they do well enough against that sort. But they want no part of investigating spooks.</p></blockquote><p>When did the lean-to show up?</p><blockquote><p>Two nights ago. The guards went to pull it down, but the lights and sounds scared them away. They're trying to decide what to do, but I'm tired of the dithering, and so are my neighbors.</p></blockquote><p>After they have finished their questions, she will add:</p><blockquote><p>As a reward, I can give you each 10 gold, plus I'll put in a petition with the mayor that you be granted the deed to the land. I could also get some of the neighbors to sign the petition. I can't guarantee anything, but with what you've already done since you came here, I think the old man will want to keep you around.</p></blockquote><h1>Further Investigations</h1><p>If the players ask the neighbors of the Thirsty Alpaca about what happened, they will confirm the weird sights and sounds, but have little else to offer. They now avoid the area as best they can, and are keen to have the problem solved.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Into the Ruins",
+    "pages",
+    "Afterward",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Once the heroes report success to Magiloy, she is delighted and offers the 10 gold that she promised for each party member.</p><p>She also circulates the petition, as she promised, among the neighbors on both sides of the river, and delivers the petition to the mayor, herself.</p><p>The problem of the tunnel beyond the collapse still needs to be solved, and its existence helps the Mayor to decide to simply give the PCs the property.</p><p>Therefore, three days later, Magiloy is able to present the deed to the property, herself.</p><p></p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Into the Ruins",
+    "pages",
+    "Hazard",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Just to the west of the ladder is a hazard:</p><p>@UUID[Compendium.pf2e.abomination-vaults-bestiary.Actor.6NijRSpkIuQpSxUp]{Spike Launcher}</p><p>@Check[perception|dc:19] to detect the spike launcher.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Into the Ruins",
+    "pages",
+    "Blocked Passages",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>To the south are two partially-excavated areas where the Thirsty Alpaca actually caved in. Within each passage, a kobold is working clear the rubble. They are focused on their work and will not have a chance of noticing the PCs until they come within 15 feet.</p><p>2 @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.r9w1n85mp9Ip4QiS]{Kobold Warrior}</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Into the Ruins",
+    "pages",
+    "Glimpse of Passage Beyond",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>If the players search the rear of the southeast tunnel, they can find places that provide visibility to the tunnel beyond, showing that the tunnel continues in a southeasterly direction after the blocked point.</p><p>The destination of the passage is beyond the scope of this adventure, but it could easily lead to a larger kobold warren, to one of the other dungeons around Otari, the basement of someone in league with the kobolds, or somewhere else, entirely.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Lathenar's Pots",
+    "pages",
+    "Lathenar's Pots",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Keeleno is the owner of the marketplace and the nearby general store, and also works as a potter. His is a widower who has never gotten over the loss of his late wife.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Lathenar's Shop",
+    "pages",
+    "Lathenar's Shop",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Leno is Keeleno's oldest child and heir, and he is in a partnership with is father for ownership of this shop.</p>\n<p>He has complete responsibility for and authority over the shop. He lives behind and above the shop with his wife, Debrann. The are expecting their first child.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Magical Sundries",
+    "pages",
+    "Magical Sundries",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Bethela is seventeen years old, and recently returned from magical studies in Absalom.</p>\n<p>Even though her family lives in town, she is accustomed to her independence and now rents a room from Alymora Inkleholtz.</p>\n<p>In the mornings, she sells magical items from Wrin's Wonders and Odd Stories, and in the afternoons she tutors the Inlkeholtz children.</p>\n<p>She is saving money to return to Absalom and open a magic item stall of her own.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Osprey Club Store",
+    "pages",
+    "Osprey Club Store",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Yinyasmira's secret shop is only accessable to heroes who have earned her support, and who are also thieves.</p>\n<p>If such thieves join her Osprey Club, they enjoy a 10% discount.</p>\n<p>She will buy only items that interest her, and that seem of use to a thiefly type.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Otari Market",
+    "pages",
+    "Otari Market",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>The Otari Market, owned and operated by Keeleno Lathenar, is in full swing by 10am, and starts to wind down at about 4pm. Each vendor keeps their own hours, or remains only as long as they have stock.</p><p>@UUID[JournalEntry.qZmKiVdN1Gi72Fws]{Encounter - Rival Gang} takes place here.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Otari Market",
+    "pages",
+    "Fishery Sundries",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Selling fish-based medieval junk food and bounties from the sea from the Otari Fishery.</p><p>Vendor: @UUID[Actor.WTOucHvTsv6Cnb5I]{Tami}</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Otari Market",
+    "pages",
+    "Lathenar's Pots",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Selling cookware and crokery, handcrafted by Keeleno Lathenar.</p><p>This stall also serves as market headquarters.</p><p>Vendor: @UUID[Actor.4QttEBRfNtwti5i6]{Keeleno Lathenar}</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Otari Market",
+    "pages",
+    "Hunk's Hunks of Meat",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Selling meat-based medieval junk food.</p><p>Vendor: @UUID[Actor.YIdym8aYOgcwL6yv]{Hunk Highstepper}</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Otari Market",
+    "pages",
+    "Stall 4",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>A sign reads</p><p style=\"text-align:center\"><em>Stall 4 is available</em></p><p style=\"text-align:center\"><em>See Keeleno at Lathenar's Pots</em></p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Otari Market",
+    "pages",
+    "Stall 5",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>A sign reads</p><p style=\"text-align:center\"><em>Stall 5 is available</em></p><p style=\"text-align:center\"><em>See Keeleno at Lathenar's Pots</em></p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Otari Market",
+    "pages",
+    "Magical Sundries",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Bethela is the market's youngest independent vendor. She sells magical consumables.</p><p>Vendor: @UUID[Actor.BU9rGVV9FsX8Pikq]{Bethela}</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Otari Market",
+    "pages",
+    "Crow's Elixirs",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Zeek is Magiloy's apprentice, and sells low-end elixirs and consumables from Crow's Casks.</p><p>Vendor: @UUID[Actor.mGmjwfNEVx95hNS8]{Zeek}</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Otari Market",
+    "pages",
+    "Stall 8",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p><span style=\"font-family:Signika, sans-serif\">A sign reads</span></p><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px;min-height:unset;color:rgb(25, 24, 19);font-family:Signika, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:center\"><span style=\"font-family:Signika, sans-serif\"><em style=\"box-sizing:border-box;user-select:text\">Stall 8 is available</em></span></p><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px;min-height:unset;color:rgb(25, 24, 19);font-family:Signika, sans-serif;font-size:14px;font-style:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-weight:400;letter-spacing:normal;orphans:2;text-indent:0px;text-transform:none;white-space:normal;widows:2;word-spacing:0px;-webkit-text-stroke-width:0px;text-decoration-thickness:initial;text-decoration-style:initial;text-decoration-color:initial;text-align:center\"><span style=\"font-family:Signika, sans-serif\"><em style=\"box-sizing:border-box;user-select:text\">See Keeleno at Lathenar's Pots</em></span></p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Otari Market",
+    "pages",
+    "Crisp and Fresh",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Jala sells fresh fruit, rations and animal provisions.</p><p>Vendor: @UUID[Actor.k25Iq4RxkpleszB8]{Jala Highstepper}</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Otari Market",
+    "pages",
+    "Clodia's Clothery",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Clodia is a local spinster and an accomplished dressmaker and tailor.</p><p>Vendor: @UUID[Actor.okJ7kB3aRPOUKW1E]{Clodia}</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Otari Market",
+    "pages",
+    "Brelda's Bakery",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>A local dwarven widow runs this stall for her good friend, Brelda Venkervale, who is busy running her son's inn.</p><p>Vendor: @UUID[Actor.nc9zNVOrlfUwjC9m]{Drarda Hanley}</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Otari Market",
+    "pages",
+    "Also Crisp and Fresh",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>The mayor's daughter work here as Jala's apprentice, selling vegetables.</p><p>Vendor: @UUID[Actor.u61cBE2NGSCqTedZ]{Dorianne Menhames}</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Rowdy Rockfish Inn and Tavern",
+    "pages",
+    "Rowdy Rockfish Inn and Tavern",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>The Rowdy Rockfish is a quiet, full-serviced, comfortable inn.</p><p>Brelda Venkervale runs this inn in the absense of her son, Lasda, who has been missing for many months.</p><p>Agnar is an alcohol-free, stimulating hot beverage.</p><p>Mulling is a service to heat any drink.</p><p>The following are reflected in the list of items.</p><ul><li>2 rooms with double beds</li><li>8 rooms with single beds</li><li>8 horse stalls</li><li>can accomodate 8 baths per night</li></ul><p> </p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Shop Journals (MEJ Required)",
+    "pages",
+    "Shop Journals",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p><strong>NOTE</strong>: As of the release of v13, Monk's Enhanced Journals is indefinitely broken. He stated on his github that he does not know when he will have it fixed.</p><p>I am leaving these jouranls in this module for now, but be advised that the shop journals may not work properly. I have not tested them.</p><hr /><p>I have provided a set of merchant journals by user request. They require the <strong>Monk's Enhanced Journal</strong> module in order to function. It is in a separate optional compendium called \"Tianze's Otari Shops.\"</p><p>Before importing it, keep in mind that it will require some setup.</p><ul><li><p>The journals will be redundant since you will already have merchant tokens on many of the scenes. Here's what I recommend:</p><ul><li><p>In the Actor folder, set \"All Players\" permission for each merchant actor to \"none\"</p></li><li><p>Replace the merchants in each scene. This way, they are visible but players are not able to interact with them.</p></li><li><p>Drag journal for the merchant out in front of each merchant actor. I have already set the \"All Player\" permission to \"Observer\" so your players will be able to interact with them.</p></li></ul></li></ul><p>I generated the contents of the journal shop inventories with rolltables that I crafted for each shop. They probably will not match the shop inventories of the merchant actors.</p><p></p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Shop Rolltables (Item Piles required)",
+    "pages",
+    "Shop Rolltables",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>If you use Item Piles, you will be able to use these rolltables to populate any loot actors that you have set as a \"merchant\" in the item pile setting for each loot actor.</p><p>Once you have set them up as merchant, go to the Populate tab, then add the rolltable.</p><p>Most of the rolltables do not have a weight of other than 1. Clodia's Clothery is the only exception, where I gave greater weight to the more common items.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Tianze's Otari Extras",
+    "pages",
+    "Introduction",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<img src=\"modules/tianzes-otari-extras/Assets/Vignettes/Otari-Street.jpg\" /><p>Tianze's Otari Extras is a collection of maps and content set in the town of Otari, which is the setting for Pathfinder scenarios including <em>Menace Under Otari</em> (the Beginner Box adventure), <em>Abomination Vaults Adventure Path</em> and <em>Troubles in Otari</em>. </p><p>I decided to create this module as an introductory free work for my adventurers and maps. I created the original version of these maps while running the adventure, and once I started improving the maps using Forgotten Adventures assets, I decided to try my hand at module-making.</p><p><span style=\"font-family:Signika, sans-serif\">Maps were created with <a href=\"https://dungeondraft.net/\">DungeonDraft </a>using assets from <a href=\"http://localhost:30000/forgotten-adventures.net\" style=\"box-sizing:border-box;user-select:text;cursor:pointer;color:var(--color-text-hyperlink);transition:text-shadow 0.15s ease-in-out 0s, background-color 0.15s ease-in-out 0s, border 0.15s ease-in-out 0s, color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s, backdrop-filter 0.15s ease-in-out 0s, border-radius 0.15s ease 0s\">Forgotten Adventures</a>.</span></p><p><span style=\"font-family:Signika, sans-serif\">Portraits and vignettes were created using <a href=\"https://www.bing.com/images/create\" style=\"box-sizing:border-box;user-select:text;cursor:pointer;color:var(--color-text-hyperlink);transition:text-shadow 0.15s ease-in-out 0s, background-color 0.15s ease-in-out 0s, border 0.15s ease-in-out 0s, color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s, backdrop-filter 0.15s ease-in-out 0s, border-radius 0.15s ease 0s\">Bing Image Creator</a> and then refined and tokenized.</span></p><p>Macros were pulled together using using examples I found on either the Foundry's Reddit Pages, in the Macro Polo chat in Foundry's discord, or in the Abomination Vaults Adventure Path.</p><h2>Update 3.1 - General Cleanup</h2><p>I cleaned up some of the merchant actors that were configured as Item Piles, and which may have resulted in zero pricing.</p><p>Added a roletable for Weapons and Armor.</p><p>Repopulated several of the merchant actor inventories.</p><p>Removed some actors that no longer had token art, and that should have been removed last time.</p><h2>What's Included</h2><ul><li><p>Crow's Casks</p><ul><li><p>Map with tokens</p></li><li><p>Location Journal Pages</p></li><li><p>Encounter - Rowdy Gamblers</p></li></ul></li><li><p>Crook's Nook</p><ul><li><p>Bridge Map</p></li><li><p>Tavern Map with tokens</p></li><li><p>Upper Story Map with token</p></li><li><p>Location Journal Pages</p></li><li style=\"box-sizing:border-box;user-select:text\"><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px\"><span style=\"font-family:Signika, sans-serif\"><em style=\"box-sizing:border-box;user-select:text\">An Invitation to the Osprey Club</em>, a short adventure for a rogue character.</span></p></li></ul></li><li><p>Otari Market</p><ul><li><p>Map with tokens</p></li><li><p>Location Journal Pages</p></li><li><p>Encounter - Rival Gang</p></li></ul></li><li><p><em>Into the Ruins</em>, a short adventure based on an adventure hook from <em>Abomination Vaults</em>.</p><ul><li><p>Ruin Map with tokens</p></li><li><p>Warren Map with tokens</p></li><li><p>Location Journal Pages</p></li><li><p>Actors and Items</p></li></ul></li><li><p>Fish Camp</p><ul><li><p>Fish camp map</p></li><li><p>Location journal pages</p></li><li><p>Encounter - Home Invasion, with tokens</p></li></ul></li><li><p>Tavern Items</p><ul><li><p>A menu of consumable items used to stock service merchants including inns, market vendors, and stables.</p></li></ul></li><li><p>Merchant Actors with fully stocked inventory</p><ul><li><p>7 Merchant Actors based on Otari locations</p></li><li><p>7 Original Merchants for the Otari Market</p></li></ul></li><li><p>Convenience Macros</p><ul><li><p>Many of the maps have tiny macros that will either toggle the visibility of tiles, or turn lights on and off at the same time. You can find these macros either in the relevant journal pages, or in the Macros folder. Look for the Otari Extras folder.</p></li></ul></li></ul><h2>Encounter Assumptions</h2><p>The encounters assume the party is around level 2 and have adventured around Otari. Perhaps they have completed one of the following:</p><ul><li><p><em>Pathfinder Beginner Box</em></p></li><li><p>The starting scenarios in <em>Troubles in Otari</em></p></li><li><p>The first level of <em>Abomination Vaults</em></p></li></ul><p>They should have already started to develop a positive reputation around town, and many of the merchants should at least know who they are.</p><h2>Encounters and Map Philosophy</h2><p>After making many maps that really served no purpose except for eye candy, maps such as inns and shops for which I never had enough miniatures or tokens to populate, I came up with the following rule:</p><p style=\"text-align:center\"><em>Every map deserves an encounter.</em></p><p>Think of it as your creator's blessing for your map. After all, once you have a battle or other plot-moving encounter, the map setting is still available for its original purpose, whether it is an inn to stay at, a market to shop in, or a ruin to rebuild as a home base.</p><p>But to justify the existence of the map, I like to use it in some encounter that will move along the plot of the story I am trying to tell — whether it involves combat or not.</p><p>With that in mind, every map in this module has at least one encounter, which should fit into any Otari-based game.</p><h2>Tavern Items</h2><p>Players like things to buy, and eye candy to look at. These items give them something that will actually go into their inventory, and which they can then use by clicking that <em>Consume</em> button. Think of it as a virtual mug of ale, a virtual bath, or a virtual night in the room of an inn. These have been a big hit in my own games.</p><p>All tavern items use icons from the Foundry Core icons, and should persist in your game world.</p><p>The drink <em>agnar</em> is a hot stimulating beverage, similar to coffee or tea, and is my own invention.</p><h2>Merchant Actors</h2><p>The merchant actors were inspired by an excellent little content mod called <em>PF2e a shopping experience</em>. However, I created my own.</p><p>Most of the merchants are inspired by or associated with characters in <em>Abomination Vaults</em>, and a few come directly from that module. Each merchant has the shop name in its description, along with a brief bio or noteworthy information for each merchant.</p><p>I only created actors for the maps included in this module. Other possible merchants you can create for these maps are:</p><ul><li><p>Tamily at the Otari Fisher with drinks and medieval junk food.</p></li><li><p>Oloria at Gallentine Deliveries, with stabling services.</p></li><li><p>Lardus at the Otari Garrison, with stabling services</p></li></ul><p>I also included these merchant actors, but the actual scenes are part of Tianze's Gauntlight Extras:</p><ul><li><p>The Rowdy Rockfish, with food, drinks, beds, baths, and stabling.</p></li><li><p>Dawnflower Library shop, with potions, clerical supplies, magical consumables and weapons, and runes.</p></li></ul><p>I highly recommend the use of the <em><strong>Item Piles</strong></em> module to flesh out the merchants actors, and to add full buy/sell functionality, along with other tweaks such as store hours and dedicated inventory roll tables.</p><h2>Characters from Abomination Vaults</h2><p>In order to avoid a dependency upon the portraits and token art installed with <em>Abomination Vaults</em>, I recreated any actors that are needed for the various encounters.</p><h2>Official Actors and Items</h2><p>Everything in the Actors and Items tabs, except those I created as described above, come directly from the Compendium.</p><p>The maps are fully populated with the same actors in the Actors tab. The actors in the journals point to the compendium.</p><p>For convenience and playtesting purposes, I also included a set of Iconics, scaled to Level 2.</p><h2>Recommended</h2><p>I would like to take this opportunity to thank and recommend the creators of these additional modules and services.</p><h3>Paid Modules</h3><ul><li><p><em><strong>Abomination Vaults</strong></em> is not only an excellent adventure path, but it is a full multimedia experience with maps, actors, vignettes, music, ambient sounds, and scene-specific sounds. It is loaded with useful tools that you will find yourself using elsewhere. Plus, it is teaching me how to build better macros. :)</p></li><li><p><em><strong>Troubles in Otari</strong></em>, is a series of short adventures from Paizo, which all take place in Otari and in the surrounding areas.</p></li><li><p><em><strong>Mercenary Marketplace</strong></em>, which I used in Gauntlight Extras, and which helps you to build NPC actors based on character classes, jobs, or roles.</p></li></ul><h3>Free Modules</h3><ul><li><p>As a companion to this module, I cannot recommend <em><strong>Footsteps of Otari</strong></em>, by <a href=\"https://github.com/MarkPearce\">Mark Pearce</a> enough. Mark's collection inspired me to create this one, and I only created maps that were not in his collection. It does include a number of redrawn maps from Abomination Vaults, but has no dependency on that module.</p></li><li><p><em><strong>PF2e a shopping experience</strong></em> is a sweet little content module with one set of prebuilt shops for Otari merchants, and another set of leveled prebuilt shops suitable for any campaign.</p></li><li><p><em><strong>Item Piles</strong></em>. I highly recommend the use of this module to bring more convenience and automation to the merchant actors. I liked this module so much that I almost included it as a dependency on this module. However, the specifics of how each merchant should operate should be up to the gamemaster.</p></li></ul>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Tianze's Otari Extras",
+    "pages",
+    "Credits and Licenses",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<h2>Credits</h2><p><span style=\"font-family:Signika, sans-serif\">Maps were created with <a href=\"https://dungeondraft.net/\" style=\"box-sizing:border-box;user-select:text;cursor:pointer;color:var(--color-text-hyperlink)\">DungeonDraft </a>using assets from <a href=\"http://localhost:30000/forgotten-adventures.net\" style=\"box-sizing:border-box;user-select:text;cursor:pointer;color:var(--color-text-hyperlink);transition:text-shadow 0.15s ease-in-out 0s, background-color 0.15s ease-in-out 0s, border 0.15s ease-in-out 0s, color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s, backdrop-filter 0.15s ease-in-out 0s, border-radius 0.15s ease 0s\">Forgotten Adventures</a>.</span></p><p><span style=\"font-family:Signika, sans-serif\">Top-down token images are also from <a href=\"http://localhost:30000/forgotten-adventures.net\" style=\"box-sizing:border-box;user-select:text;cursor:pointer;color:var(--color-text-hyperlink);transition:text-shadow 0.15s ease-in-out 0s, background-color 0.15s ease-in-out 0s, border 0.15s ease-in-out 0s, color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s, backdrop-filter 0.15s ease-in-out 0s, border-radius 0.15s ease 0s\">Forgotten Adventures</a>.Portraits and vignettes were created using <a href=\"https://www.bing.com/images/create\" style=\"box-sizing:border-box;user-select:text;cursor:pointer;color:var(--color-text-hyperlink);transition:text-shadow 0.15s ease-in-out 0s, background-color 0.15s ease-in-out 0s, border 0.15s ease-in-out 0s, color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s, backdrop-filter 0.15s ease-in-out 0s, border-radius 0.15s ease 0s\">Bing Image Creator</a>.</span></p><h2>Paizo</h2><p>Tianze's Otari Extras uses trademarks and/or copyrights owned by Paizo Inc., used under Paizo's Community Use Policy (<a href=\"http://paizo.com/communityuse\">paizo.com/communityuse</a>). We are expressly prohibited from charging you to use or access this content. Tianze's Otari Extras is not published, endorsed, or specifically approved by Paizo. For more information about Paizo Inc. and Paizo products, visit <a href=\"http://paizo.com/\">paizo.com</a>.</p><h2>OPEN GAME LICENSE Version 1.0a</h2><p>The following text is the property of Wizards of the Coast, Inc. and is Copyright 2000 Wizards of the Coast, Inc (\"Wizards\"). All Rights Reserved.</p><ol><li><p>Definitions:</p><ol><li>\"Contributors\" means the copyright and/or trademark owners who have contributed Open Game Content;</li><li>\"Derivative Material\" means copyrighted material including derivative works and translations (including into other computer languages), potation, modification, correction, addition, extension, upgrade, improvement, compilation, abridgment or other form in which an existing work may be recast, transformed or adapted;</li><li>\"Distribute\" means to reproduce, license, rent, lease, sell, broadcast, publicly display, transmit or otherwise distribute;</li><li>\"Open Game Content\" means the game mechanic and includes the methods, procedures, processes and routines to the extent such content does not embody the Product Identity and is an enhancement over the prior art and any additional content clearly identified as Open Game Content by the Contributor, and means any work covered by this License, including translations and derivative works under copyright law, but specifically excludes Product Identity.</li><li>\"Product Identity\" means product and product line names, logos and identifying marks including trade dress; artifacts; creatures characters; stories, storylines, plots, thematic elements, dialogue, incidents, language, artwork, symbols, designs, depictions, likenesses, formats, poses, concepts, themes and graphic, photographic and other visual or audio representations; names and descriptions of characters, spells, enchantments, personalities, teams, personas, likenesses and special abilities; places, locations, environments, creatures, equipment, magical or supernatural abilities or effects, logos, symbols, or graphic designs; and any other trademark or registered trademark clearly identified as Product identity by the owner of the Product Identity, and which specifically excludes the Open Game Content;</li><li>\"Trademark\" means the logos, names, mark, sign, motto, designs that are used by a Contributor to identify itself or its products or the associated products contributed to the Open Game License by the Contributor</li><li>\"Use\", \"Used\" or \"Using\" means to use, Distribute, copy, edit, format, modify, translate and otherwise create Derivative Material of Open Game Content.</li><li>\"You\" or \"Your\" means the licensee in terms of this agreement.</li></ol></li><li>The License: This License applies to any Open Game Content that contains a notice indicating that the Open Game Content may only be Used under and in terms of this License. You must affix such a notice to any Open Game Content that you Use. No terms may be added to or subtracted from this License except as described by the License itself. No other terms or conditions may be applied to any Open Game Content distributed using this License.</li><li>Offer and Acceptance: By Using the Open Game Content You indicate Your acceptance of the terms of this License.</li><li>Grant and Consideration: In consideration for agreeing to use this License, the Contributors grant You a perpetual, worldwide, royalty-free, non-exclusive license with the exact terms of this License to Use, the Open Game Content.</li><li>Representation of Authority to Contribute: If You are contributing original material as Open Game Content, You represent that Your Contributions are Your original creation and/or You have sufficient rights to grant the rights conveyed by this License.</li><li>Notice of License Copyright: You must update the COPYRIGHT NOTICE portion of this License to include the exact text of the COPYRIGHT NOTICE of any Open Game Content You are copying, modifying or distributing, and You must add the title, the copyright date, and the copyright holder’s name to the COPYRIGHT NOTICE of any original Open Game Content you Distribute.</li><li>Use of Product Identity: You agree not to Use any Product Identity, including as an indication as to compatibility, except as expressly licensed in another, independent Agreement with the owner of each element of that Product Identity. You agree not to indicate compatibility or co-adaptability with any Trademark or Registered Trademark in conjunction with a work containing Open Game Content except as expressly licensed in another, independent Agreement with the owner of such Trademark or Registered Trademark. The use of any Product Identity in Open Game Content does not constitute a challenge to the ownership of that Product Identity. The owner of any Product Identity used in Open Game Content shall retain all rights, title and interest in and to that Product Identity.</li><li>Identification: If you distribute Open Game Content You must clearly indicate which portions of the work that you are distributing are Open Game Content.</li><li>Updating the License: Wizards or its designated Agents may publish updated versions of this License. You may use any authorized version of this License to copy, modify and distribute any Open Game Content originally distributed under any version of this License.</li><li>Copy of this License: You MUST include a copy of this License with every copy of the Open Game Content You Distribute.</li><li>Use of Contributor Credits: You may not market or advertise the Open Game Content using the name of any Contributor unless You have written permission from the Contributor to do so.</li><li>Inability to Comply: If it is impossible for You to comply with any of the terms of this License with respect to some or all of the Open Game Content due to statute, judicial order, or governmental regulation then You may not Use any Open Game Material so affected.</li><li>Termination: This License will terminate automatically if You fail to comply with all terms herein and fail to cure such breach within 30 days of becoming aware of the breach. All sublicenses shall survive the termination of this License.</li><li>Reformation: If any provision of this License is held to be unenforceable, such provision shall be reformed only to the extent necessary to make it enforceable.</li><li><p>COPYRIGHT NOTICE</p><p><em>Open Game License</em> v 1.0a Copyright 2000, Wizards of the Coast, Inc.</p><p><em>System Reference Document</em> Copyright 2000-2003, Wizards of the Coast, Inc.; Authors Jonathan Tweet, Monte Cook, Skip Williams, Rich Baker, Andy Collins, David Noonan, Rich Redman, Bruce R. Cordell, John D. Rateliff, Thomas Reid, James Wyatt, based on original material by E. Gary Gygax and Dave Arneson.</p><p><em>Pathfinder Core Rulebook (Second Edition)</em> © 2019, Paizo Inc.; Authors: Logan Bonner, JasonBulmahn, Stephen Radney-MacFarland, and Mark Seifter.</p><p><em>Abomination Vaults Adventure Path</em> © 2022, Paizo Inc.; Authors: Vanessa Hoskins, James Jacobs, and Stephen Radney-MacFarland, with Ron Lundeen.</p><p><em>Tianze's Otari Extras</em> © 2024, Patricia Nevitt</p></li></ol><p></p>",
+   "current": null
+  }
+ ]
+}

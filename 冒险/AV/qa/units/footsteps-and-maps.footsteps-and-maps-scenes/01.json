@@ -1,0 +1,114 @@
+{
+ "pack": "footsteps-and-maps.footsteps-and-maps-scenes",
+ "unit": "01",
+ "leaves": 9,
+ "chars": 152,
+ "styles": {
+  "bilingual": 9
+ },
+ "convention": {
+  "bilingual": "中文 English - one ASCII space, no parentheses",
+  "prose": "pure Chinese; keep every @X[...] / [[...]] bracket byte-identical, translate only the {label} tail; keep HTML tags and their order"
+ },
+ "items": [
+  {
+   "path": [
+    "entries",
+    "Bookshop-Exterior",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Bookshop-Exterior",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Bookshop-Ground Floor",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Bookshop-Ground Floor",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Bookshop-Second Floor",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Bookshop-Second Floor",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Bookshop-Third Floor",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Bookshop-Third Floor",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Caligni Maps",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Caligni Maps",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Drow Map",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Drow Map",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Urevian's Blueprints",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Urevian's Blueprints",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Volluk's Blueprints",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Volluk's Blueprints",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Wrin's Wonders",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Wrin's Wonders",
+   "current": null
+  }
+ ]
+}

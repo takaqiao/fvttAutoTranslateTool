@@ -1,0 +1,210 @@
+{
+ "pack": "tianzes-otari-extras.tianzes-otari-extras",
+ "unit": "08",
+ "leaves": 13,
+ "chars": 24052,
+ "styles": {
+  "prose": 13
+ },
+ "convention": {
+  "bilingual": "中文 English - one ASCII space, no parentheses",
+  "prose": "pure Chinese; keep every @X[...] / [[...]] bracket byte-identical, translate only the {label} tail; keep HTML tags and their order"
+ },
+ "items": [
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Clodia's Clothery",
+    "pages",
+    "Clodia's Clothery",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Clodia is a clothier with a perpetual squint from a lifetime of up-close work. Her thick and expensive glasses no longer really help.</p>\n<p>She carries clothing in a variety of sizes for small and medium creatures, and can make alternations to fit.</p>\n<p>Clodia is a true artist, even if she has humble means. She loves nothing more to see someone beautifully clothed in her work.</p>\n<p>She opens her shop at noon, so she can take advantage of the morning light for her work.</p>\n<p><em><strong>Note</strong>: I added weights to the associated roll table to limit how often certain armors and clothing appears.</em></p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Crisp and Fresh",
+    "pages",
+    "Crisp and Fresh",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Jala Highstepper leads the Farmer's Guild, and always has a basket of things to sell. </p><p>She does not open until late in the morning, and sells until midafternoon, before teatime.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Crook's Nook",
+    "pages",
+    "Crook's Nook",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Crooks Nook is a popular tavern offering brews, meals and fishing.</p>\n<p>Patrons can either bring their own fishing rods, or use one of the rods on the rack between the fireplaces.</p>\n<p>Yinyasmera will buy fresh fish, but only one bulk at a time, assuming each fish weighs one light. She will pay one silver piece per bulk.</p>\n<p>Agnar is an alcohol-free, stimulating hot beverage.</p>\n<p>Mulling is a service to heat any drink.</p>\n<p>The following are reflected in the list of items.</p>\n<ul>\n<li>2 rooms with double beds</li>\n<li>8 rooms with single beds</li>\n<li>floproom with 10 single beds</li>\n</ul>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Crook's Nook and Bridge",
+    "pages",
+    "Crook's Nook and Bridge",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Crook's Nook was originally a fishery built on the bridge. When Yinyasmira inherited it, she first converted it to a tavern with its audacious name, and gradually established the Osprey Club.</p><p>The bridge is now affectionately known as Crook's Bridge.</p><p>The structure has four levels:</p><ul><li><p>The Underbridge</p></li><li><p>The Tavern level</p></li><li><p>The Upper level</p></li><li><p>Yinyasmira's Private Apartments (outside of the scope of this module … for now)</p></li></ul><p>From here, you can launch one of the heroes on the path to becoming a member of the Osprey Club: @UUID[JournalEntry.81Vsse742fCE9COq]{An Invitation to the Osprey Club}.</p><p></p><p></p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Crook's Nook and Bridge",
+    "pages",
+    "The Underbridge",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>One can access the Underbridge by walking down the slopes on either side of the bridge.</p><h2>Gravel Paths</h2><p>Gravel paths on each side of the river can be used as possible fishing spots. Well within the shady spots are convenient stone benches.</p><p>The water here is not deep, but at this point, as it rushes the last distance toward the ocean, the current gets quite rapid.</p><p>If one of the heroes ends up in the water, they need to @UUID[Compendium.pf2e.actionspf2e.Item.c8TGiZ48ygoSPofx]{Swim} (@Check[type:athletics|dc:13]{Athletics}) to avoid being swept out into the bay.</p><p>If they fail a check, they will need two additional checks at the same difficulty level to fight the current enough to swim back to shore.</p><h2>The Walkway</h2><p>This broad boardwalk has rope bridges equipped with convenient ties for fishing rods. There is also a crane used for raising and lowering nets. Yinyasmira lowers and raises the net several times a day, catching a wide variety of fish from the brackish coastal water.</p><p>To successfully fish from the bridge, the hero needs a survival check: @Check[type:survival|dc:15].</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Crook's Nook and Bridge",
+    "pages",
+    "The Tavern Level",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>This cozy tavern level has fishing hatches, twin bars and fireplaces, and a lovely view of the river beyond.</p><h2>Stairways Leading Up</h2><p>At the southwest and southeast corners of the building, wooden stairs lead up.</p><h2>Twin Bars</h2><p>Identical bars are at the west and east sides of the building, and each seats six. Under each bar are kegs with ale, beer and mead.</p><h2>Tables for Four</h2><p>Cozy tables for four are each places a discreet distance away from each other, allowing for mostly private conversations.</p><h2>Riverview Windows</h2><p>These wired windows allow for a lovely view of the river to the north.</p><h2>Fishing Hatches</h2><p>Three fishing hatches allow access to the river below with one of the fishing rods between the two fireplaces. Toggle their visibility as needed with these macros:</p><p>@UUID[Macro.C4awKLQDBhDo8Nlu]{Toggle Left Hatch Visibility}</p><p>@UUID[Macro.HdNOTXq3iNBE2qdh]{Toggle Middle Hatch Visibility}</p><p>@UUID[Macro.1wl30MTr9uczQGqV]{Toggle Right Hatch Visibility}</p><p>To successfully fish from the hatch, the hero needs a survival check: @Check[type:survival|dc:15].</p><p>It could also provide a way for a quick getaway, as a nimble thief could either swing out to the south into the river below, or swing out to the north onto the boardwalk.</p><p>Check: @Check[type:acrobatics|dc:18|name:Swing onto Boardwalk] to swing onto the boardwalk.</p><p>NOTE: the town constabulary is wise to this method of escape, and if they send anyone to Crook's Nook to detain a suspected criminal, they always have guards ready under the bridge to give chase.</p><h2>Twin Fireplaces</h2><p>These are both lit to ensure efficient kitchen operations in all but the hottest months.</p><h2>Kitchen Area</h2><p>This well-stocked and efficient kitchen serves both full meals and medieval junk food.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Crook's Nook and Bridge",
+    "pages",
+    "The Upper Level",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<h2>Twin Staircases</h2><p>These staircases are at the SW and SE corners of the building.</p><h2>Single Bedrooms</h2><p>Each room has two single beds and a small sturdy chest with a good lock. A side table is between the beds, and a sconce is on the wall beside the door.</p><h2>Double Bedrooms</h2><p>Each room has a double bed, a large sturdy chest with a good lock, two side tables, and a sconce on the wall beside the door.</p><h2>Flop Room</h2><p>This common sleeping room has 10 bedframes, each with a straw mattress. They are reasonably clean, but not entirely. The two fireplaces sometimes keeps the room too warm, but two large windows opposite the fireplace can help. A table between the fireplaces seats six.</p><p>Check: @Check[type:fortitude|dc:12|]to avoid being @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1} by bedbugs.</p><h2>Osprey Club Headquarters</h2><h3>Getting In</h3><p>The Osprey Club Headquarters have magical good-quality locks on the doors, which requires 5 consecutive checks to get in:</p><p>5 consecutive @Check[type thievery|dc:30] checks.</p><p>Upon any failure, a bell rings within, and the locks reset.</p><p>There is a hidden panel at face-level. Any ringing of the bell will be investigated.</p><h3>Room Interior</h3><p>This room has the following features:</p><ul><li><p>Ample seating in front of the two fireplaces.</p></li><li><p>Two tables with comfortable chairs.</p></li><li><p>The guildmaster's desk</p></li><li><p>Two sturdy cabinets for the Osprey Club Store.</p></li></ul><p>The room is almost always occupied by at least a thief or two.</p><h3>Osprey Club Store</h3><p>Either Yinyasmira or a trusted lieutenant mans the store. Whoever is in charge of the store is in charge of the room.</p><p>The desk and each cabinet has Good quality locks, which require 5 @Check[type thievery|dc:30] checks to open.</p><p>@UUID[Actor.uOZVSXUt2ZSw8Dsq]{Osprey Club Store}</p><p>Note: In this room, Yinyasmira is represented by a regular NPC actor, rather than the merchant actor with the same name, which is her guise on the first floor.</p><p>@UUID[Actor.ui5mbNv2CuZxmkdO]{Yinyasmira}</p><h2>Stairs Up</h2><p>The stairs lead up to Yinyasmira's private quarters, which are beyond the scope of this module (for now).</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Crow's Casks",
+    "pages",
+    "Crow's Casks",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Crow's Casks is part brewery, one part alchemy shop, and one part tavern. Magiloy is one busy bird.</p><p>This tavern features an alchemy shop in the NE corner, a shrine to Cayden Cailean in the SW corner, a fireplace with a place for a bard or storyteller in the east wall, and a bar just inside the entry.</p><p>A few notes:</p><ul><li><p>Magiloy brews and serves her own mead, ale and beer. Her still is in the back. She also has whiskey available.</p></li><li><p>The menu features a selection of breads, cheeses, meats and fish, but never poultry or egg products.</p></li><li><p>The windows are made of oilcloth, which is a sturdy medieval window covering that is translucent, but is otherwise opaque. This is why there are no windows on the wall layer.</p><ul><li><p>However, there are individual walls in front of each window, to allow you to quickly change the window type in case a rowdy patron tears through the oilcloth.</p></li><li><p>Also, a light in front of each window will illuminate during daylight hours, casting an indirect light.</p></li></ul></li><li><p>Merchant Actor: @UUID[Actor.vAR07Am0iB8uhlE1]{Crow's Casks}</p></li><li><p>Merchant Actor: @UUID[Actor.mGmjwfNEVx95hNS8]{Zeek} (in the kitchen with visibility off. Should only be visible when the market is closed.)</p></li><li><p>The actors from the @UUID[JournalEntry.sdhbLcAPYiE7Lkcm]{Rowdy Gamblers} encounter are also on the scene.</p></li></ul><h2>Bar</h2><p>Mags likes to hang out near the bar. She keeps six varieties of ale, mead and beer on tap.</p><h2>Kitchen</h2><p>Mags manages to keep something cooking most of the time, rotating food on and off the fire, and preparing it on a large table. Her apprentice, Zeek, works here when not running the market stall. She also has some part-time barmaids and barkeeps that you can populate as desired.</p><h2>Alchemy Workstation</h2><p>This workstation is in the NE corner. If the heroes earn her support, she will take a fledgling alchemist on as a part time assistant. Most of the time, such assistants will be manning the bar or the ovens. However, she will lend her assistance in alchemical crafting, providing a +1 bonus for her superior equipment, and a +1 bonus for her superior skill.</p><h2>Alchemy Items for Sale</h2><p>This area is south of the alchemy workstation, and has a variety of potions for sale. Powders and other items are on the lower shelves.</p><h2>Tavern</h2><p>The bar separates the kitchen and alchemy shop from the tavern to the south. The tables in this are are widely-spaced apart, giving each table an unusual amount of privacy.</p><p>The tables on the west side of the tavern are often taken over by card players.</p><h2>Bread Board</h2><p>In the south end of the tavern is the bread board. Freshly cooked items are placed here, and are included with the cost of a full meal.</p><h2>Shrine</h2><p>In the SW corner is a shrine to Cayden Caelean. It features an oversized, two-handled pewter stein.</p><p>Magiloy fills it each morning as an offering, and she will give away the contents throughout the day whenever she thinks someone deserves it.</p><p>The stein can fill four ordinary tankards.</p><h2>Fireplace</h2><p>In front of the cheerful hearth is a chair for any bard or storyteller to have a seat and spin some yarns.</p><p></p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Crow's Elixirs",
+    "pages",
+    "Crow's Elixirs",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Zeek is a good-looking young man who is assistant and apprentice to Magiloy the alchemist. He has an intriguing burn scar on his neck. </p>\n<p>He enjoys selling their less-expensive wares at the market.</p>\n<p>He is an indifferent alchemist, and is far more interested in the art of brewing, but Magaloy is insisting he learn alchemy as well as brewing. </p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Dawnflower Library Store",
+    "pages",
+    "Dawnflower Library Store",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>The Library sells items and weapons, but will only purchase items that would fit in with their usual stock.</p>\n<p>They absolutely will not purchase any item that they perceive as evil. They will urge the heroes to leave any such items with them for disposal.</p>\n<p>They will cast spells, such as for disease curing and curse removals, for the same cost it would be to make a scroll for the same spell.</p>\n<p>If, as part of a curse removal, a hero needs to be rid of a cursed item, they accept such items for disposal free of charge, but may ask for a quest to facilitate any difficult-to-destroy items.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Encounter - Home Invasion",
+    "pages",
+    "Home Invasion",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<h2>Background</h2><p>In this encounter, a family of boggards invades the heroes' home.</p><p>This adventure should occur not long after the heroes have moved in, after they return to their house after a few days away.</p><p>This should be a tough challenge for Level 2 characters. If your characters are a different level, either add or remove opponents to adjust the encounter level.</p><img src=\"modules/tianzes-otari-extras/Assets/Portraits/Adversaries/Boggard-Warrior.webp\" class=\" centered\" style=\"border:none\" /><h2>Creatures</h2><p>For this encounter, I have tweaked the Boggards into a variant that lives along the seashore.</p><p>The only functional change is that I changed their Swamp Passage into Sandy Passage, so they ignore difficult terrain while in sandy environments. It should not apply to this encounter, though.</p><p>@UUID[Actor.JlgB5nKgzgnGLYBI]{Sea Boggard Scout}</p><p>@UUID[Actor.SCotNnN2jNvGk1AJ]{Sea Boggard Warrior}</p><p>@UUID[Actor.uUYG3eEjC69CPyLr]{Boggard Shoreseer}</p><h2>Setup</h2><p>Most of the boggards aren't interested in the upper house, but after an initial ransacking, have taken over the stable, and the area underneath. The only exception is the Shoreseer, who has moved into the central room with his bodyguard.</p><p>When they arrive, any fires have been put out, and every interior door is open.</p><p><strong>Stable</strong></p><p>This is a guard post. If any intruders approach, the guards will make noise to either frighten away the cowardly, or lure in the brave.</p><p>2 Sea Boggard Scouts</p><p>1 Sea Boggard Warrior</p><p>XP: 120</p><p><strong>Under the Porch</strong></p><p>These boggards are in the area between the house and the workshop buildings, where they have set up a nest.</p><p>4 Sea Boggard Scouts under the porch.</p><p>XP: 120</p><p><strong>Interior</strong></p><p>The Shoreseer has taken over the central room with his bodyguard, but will set up an ambush in the central hallways if he becomes aware of an attack.</p><p>Turn off all lights</p><p>Open all interior doors</p><p>Place creatures:</p><p>1 Boggard Shoreseer</p><p>1 Sea Boggard Scout</p><p>XP: 120</p><p></p><img src=\"modules/tianzes-otari-extras/Assets/Portraits/Adversaries/Boggard-Shaman.webp\" class=\" centered\" style=\"border:none\" /><h2>Progress of Encounter</h2><ol><li><p>When the heroes arrive home, they hear a door slam in the direction of the stable, which should alert them that something is amiss in that direction.</p></li><li><p>When they approach the stable, the door slams open and the encounter begins.</p></li><li><p>When two of the boggards have fallen, the last one should attempt to to get away by running to the south and alerting the boggards under the front porch.</p></li><li><p>Ideally, the four boggards under the porch should then join the battle, which would make it one extended encounter.</p></li><li><p>When most have fallen, one of the Scouts tries to get away to alert the Shoreseer. If that happens, the scout and the warrior should attempt to flank the first person who enters the central hallway.</p></li><li><p>If the heroes withdraw from the map for an extended recovery, then the Shoreseer and his trusty lieutenant will also withdraw after assessing his losses, and they will not attempt to take the house again. He will bring his treasure with him, but might leave behind a couple of things in the rush of his departure.</p></li></ol><h2>Treasure</h2><p>Each boggard is wearing leather armor that is somewhat uncommon and therefore is worth more than similar, more common leathers. Or it will be if the heroes clean it up before attempting to sell them. Additionally, the Shoreseer kept all their accumulated treasure in the central room:</p><p>@UUID[Actor.l7OEHrqvnxSmUkGj]{Boggard Treasure}</p><h2>Playtest Notes</h2><ol><li><p>I playtested this as one extended encounter using the Leveled Iconics, who approached from the cliff path. The battle wiped out all of Ezren's 1st level spells and at one point, Kyra had to keep casting healing spells at Val to keep him alive while he was flanked and his Warrior opponent was benefiting from the Runic Weapon spell.</p></li><li><p>Ideally, the heroes should take any opportunity for a rest and recovery period before taking on the Shoreseer in the central room of the house. Maybe they could even hide nearby and ambush him when he tries to get away.</p></li><li><p>The area just inside the central hallway makes a wonderful kill zone for the defenders. This is where Val was flanked. Probably not the wisest decision, but he figured he was tough enough to withstand a couple of frogs.</p></li></ol>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Encounter - Rival Gang",
+    "pages",
+    "Encounter - Rival Gang",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>This encounter should take place late in the morning, once all the vendors have set up for the day, and the lunch rush is beginning.</p><p>Start the encounter when at least one of the heroes draws near Keeleno's stall.</p><p>A group of thieves, wearing clothing and items intended to deceive everyone into thinking they are from the Osprey Club, attack the market from the grassy area to the east of Keeleno's stall.</p><p>After the attack begins, Keeleno will snarl to the nearest hero:</p><blockquote><p>I hear you and your friends have been helping folks out around town. Help me rout these thugs and I'll pay you well.</p></blockquote><h2>Background</h2><p>The Osprey Club is the local thieves guild. It is run by Yinyasmira at the Crook's Nook, and she is careful to ensure the members never \"hit\" any of the town's businesses. This keeps her on neutral terms with the Mayor.</p><p>The thieves are from a gang to the southeast. They decided to hit the town with the intention of making Yinyasmira look bad, and to sour the relationship between the Osprey Club and the people and merchants of Otari.</p><p>It is a clumsy attack, but still is a danger to the vendors and customers.</p><h2>Bandit Gang</h2><p>2 @UUID[Compendium.pf2e.npc-gallery.Actor.KPUDfkVpemug2gKj]{Bandit } - He attackes with a hatchet or sling, and is able to demoralize his opponent as a free action. Such opponents are Off-Guard to him.</p><p>4 @UUID[Compendium.pf2e.pfs-season-1-bestiary.Actor.ZMGXiRuVZ8r7hQVe]{Bandit Scout} - They keep their distance with shortbows or Alchemists Fire. Three have been weakened; adjust as necessary.</p><h2>Tactics</h2><p>The gang will move swiftly to demoralize the vendors and customers, steal as much as they can grab, and cause mayhem. Then they will retreat to a boat that is waiting at the docks. They will try to take out Keeleno early, as they consider him to be the greatest threat.</p><p>Their plan involves avoiding any guards as much as possible, and especially avoiding getting in range of their Attacks of Opportunity. They watch carefully so as to attack when the guards' attention is elsewhere.</p><p>They did not count on a capable group of adventurers at the market.</p><p>If you care to create an additional map, this encounter could easily turn into a thrilling chase down the road to the Fishery and the docks, and maybe even onto the boat itself.</p><h2>Allies</h2><p>Three guards are on hand to assist, but will mostly be concerned with protecting bystanders:</p><p>3 @UUID[Compendium.pf2e.npc-gallery.Actor.rsATu823vatRe7QJ]{Guard} - The Guard and Guard Archer share the same actor type. They also have an Attack of Opportunity. They have crossbows and bludgeoning weapons, including a sap.</p><p>The vendors are all non-combatants with the possible exception of the following:</p><p><strong>Keeleno</strong>, Level 2 @UUID[Compendium.pf2e.npc-gallery.Actor.cAOWcPIjtZYXYZ3i]{Merchant}</p><p><strong>Zeek</strong>, Level 1 @UUID[Compendium.pf2e.npc-gallery.Actor.8WFGygPv7UHh7zdJ]{Apothecary}</p><p><strong>Bethela</strong>, Level 1 @UUID[Compendium.pf2e.npc-gallery.Actor.sKSfQmJMEsj8QN12]{Adept}</p><p>If you decide to add these to the combat, pull the NPC actors in from the compendium, and scale them accordingly. For added color, you might want to have them grab items from their vendor tables to assist in combat.</p><p>If you do add them to the combat, don't forget to add additional enemy combatants, or the encounter will quickly become trivial.</p><h2>Experience</h2><p>This encounter is worth 40 experience points.</p><h2>Treasure</h2><p>Keeleno makes good on his promise, and he pays the heroes five gold pieces each.</p><p>In addition to the loot on the enemy tokens, they have a few valuables, which the guard captain gives to the heroes:</p><p>@UUID[Actor.g80tntJEkpVGYXFC]{Bandit Loot}</p><p>And finally, when Yinyasmira hears of the plot against her, and if the bandits were killed or captured, she will also pay 5 gold pieces each.</p><p>This could possibly spawn another quest in which Yinyasmira or the Mayor sends the heroes down the coast to investigate the bandit gang.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Encounter - Rowdy Gamblers",
+    "pages",
+    "An Accusation",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p><em>Note: This encounter assumes that the heroes have already become to amass a bit of a reputation for themselves as problem solvers.</em></p><h2>Setup</h2><p>Bring some other townspeople into the tavern, and seat them throuought the inn. Activate Zeek near the oven.</p><h2>Starting the Encounter</h2><p>As the group relaxes one evening at Crow's Casks, fighting words erupt at a card table: \"You're cheating!\"</p><p>The two card players at a table along the western wall jump to their feet, and fists begin to fly. Two others at the nearby bar s rush over to join in. The rest of the patrons jump up to watch.</p><p>Magiloy rushes over to the heroes.</p><blockquote><p>I'll pay you five gold each if you can put a stop to this brawl without killing anyone. Oh, and a bonus if nothing is damaged!</p></blockquote><h2>The Brawlers</h2><p>@UUID[Compendium.pf2e.pfs-season-1-bestiary.Actor.XiGTud90i1WkJYz2]{Offended Gambler} - He is pretty sure he was cheated, and will not give up easily.</p><p>@UUID[Compendium.pf2e.npc-gallery.Actor.DFurZlcpcNrUmmER]{Ruffian} - The ruffian did the cheating, and he is the toughest of the group. Once the fight starts, he doesn't want stop for fear of going to jail, but also will not fight to the death.</p><p>@UUID[Compendium.pf2e.fall-of-plaguestone-bestiary.Actor.BgBTntoz1qQ3h1X5]{Drunken Farmer} - The farmer just took advantage of the chaos to blow off steam, and is easily subdued. He takes the side of the ruffian.</p><p>@UUID[Compendium.pf2e.extinction-curse-bestiary.Actor.s6Yfy1AgPp4ky7QI]{Drunken Brawler} - This guy likes any excuse for a fight, and he has plenty of liquid bravery running through his veins. He takes the side of the gambler.</p><h2>The Brawl</h2><p>After the fight begins, the patrons of the inn will clear a space around the four combatants. The fight should be chaotic, but none of the participants are out for blood.</p><p>Every once in a while, Magiloy will yell that if they stop now, she won't summon the constables. She'll give them 3 opportunities to stop, once each round.</p><h2>Options for Nonviolent Resolution</h2><p>Here are some ways that the heroes might use to resolve the situation without undue violence:</p><ul><li><p>Talk some sense into them with @Check[diplomacy|dc:15]</p></li><li><p>Disarm combatants: @Check[disarm|dc:15]</p></li><li><p>Separate combatants: @Check[athletics|dc:15]</p></li><li><p>Distract with a diversion via deception @Check[deception|dc:15]</p></li><li><p>Demoralize: @Check[intimidation|dc:15]</p></li></ul><p>The possibilities are limitless.</p><h2>Aftermath</h2><p>Once the combatants are subdued, Magiloy will extract a certain price from each of them in return for not summoning the constable.</p><p>They all must also help clean up the mess while the heroes stand guard.</p><ul><li><p>From the gambler, she demands his set of ivory dice. If he objects, she will say that he should have come to her, rather than starting a fight.</p></li><li><p>From the ruffian, she demands he forfeit his dubious winnings - 12 gold pieces.</p></li><li><p>From the farmer, she wants two sacks of grain.</p></li><li><p>From the brawler, she wants a week's worth of labor.</p></li></ul><h2>Experience</h2><p>Assuming a 2nd level party:</p><p>40 XP for subduing the ruffians</p><p>20 XP bonus if no NPCs are killed.</p><h2>Treasure</h2><p>Magiloy will provide the gold that promised, plus will split the 12 gold pieces with the offended gambler and the heroes. She will give the ivory dice to the heroes, and will throw in five potions.</p><p>Amounts assume 4 players.</p><p>@UUID[Actor.iZm7lK2pnQm9pn2h]{Rowdy Patron Loot}</p><p></p><p></p>",
+   "current": null
+  }
+ ]
+}

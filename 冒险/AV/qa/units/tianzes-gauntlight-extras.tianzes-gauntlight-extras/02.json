@@ -1,0 +1,366 @@
+{
+ "pack": "tianzes-gauntlight-extras.tianzes-gauntlight-extras",
+ "unit": "02",
+ "leaves": 25,
+ "chars": 17290,
+ "styles": {
+  "prose": 25
+ },
+ "convention": {
+  "bilingual": "中文 English - one ASCII space, no parentheses",
+  "prose": "pure Chinese; keep every @X[...] / [[...]] bracket byte-identical, translate only the {label} tail; keep HTML tags and their order"
+ },
+ "items": [
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "actors",
+    "Horned Dragon (Adult)",
+    "allSaves"
+   ],
+   "style": "prose",
+   "field": "allSaves",
+   "en": "+1 status to all saves vs. magic",
+   "current": "+1 status to all saves vs. magic"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "actors",
+    "Jala Highstepper",
+    "items",
+    "Pitchfork",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>This three-pronged, spear-like weapon typically has a 4-foot shaft. Like a spear, it can be wielded with one hand or thrown.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "actors",
+    "Lardus Longsaddle",
+    "ac"
+   ],
+   "style": "prose",
+   "field": "ac",
+   "en": "(26 with shield raised)",
+   "current": "(26 with shield raised)"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "actors",
+    "Mimnivix Ghoul",
+    "hp"
+   ],
+   "style": "prose",
+   "field": "hp",
+   "en": "void healing",
+   "current": "void healing"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "actors",
+    "Morrigna",
+    "hp"
+   ],
+   "style": "prose",
+   "field": "hp",
+   "en": "regeneration 20 (deactivated by acid or fire)",
+   "current": "regeneration 20 (deactivated by acid or fire)"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "actors",
+    "Morrigna",
+    "allSaves"
+   ],
+   "style": "prose",
+   "field": "allSaves",
+   "en": "+1 status to all saves vs. magic",
+   "current": "+1 status to all saves vs. magic"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "actors",
+    "Natanya Rajani",
+    "items",
+    "Improvised Crafting Weapon",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>The saavy crafter knows how to make a weapon out of crafting equipment when necessary.</p>\n<p>Adjust the equipment damage type as appropriate for the craft. Examples:</p>\n<ul>\n<li>Glassblower - slashing (from glass) or burning (from glassblower)</li>\n<li>Weaver - bludgeoning (from distaff) or piercing (from large needle)</li>\n<li>Leatherworker - poison (from tanning fluid) or slashing (from tanning knife)</li>\n</ul>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "actors",
+    "Otari Ilvashti",
+    "hp"
+   ],
+   "style": "prose",
+   "field": "hp",
+   "en": "negative healing, rejuvenation",
+   "current": "negative healing, rejuvenation"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "actors",
+    "Seugathi Guard Ghoul",
+    "hp"
+   ],
+   "style": "prose",
+   "field": "hp",
+   "en": "Void healing",
+   "current": "Void healing"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "actors",
+    "Seugathi Guard Ghoul",
+    "allSaves"
+   ],
+   "style": "prose",
+   "field": "allSaves",
+   "en": "+1 status to all saves vs. magic",
+   "current": "+1 status to all saves vs. magic"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "actors",
+    "Seugathi Guard Ghoul",
+    "items",
+    "Magic Item Mastery",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>A seugathi can Cast a Spell from a magic item even if the spell isn't on their spell list. All such spells are occult spells and use the seugathi's innate spell DC and attack modifier.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "actors",
+    "Sp1IdnLnxDrVYsrw",
+    "privateNotes"
+   ],
+   "style": "prose",
+   "field": "privateNotes",
+   "en": "<p>DudNoo was created with the assitance of Mercenary Marketplace Volume 1.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "actors",
+    "Sp1IdnLnxDrVYsrw",
+    "ac"
+   ],
+   "style": "prose",
+   "field": "ac",
+   "en": "+1 Potency Rune",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "actors",
+    "Sp1IdnLnxDrVYsrw",
+    "items",
+    "Ancestry, Goblin (Ability Boosts)",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>This NPC is of Goblin Ancestry</p>\n<hr />\n<p>Decrease the NPC's hp by [[2]], increase the NPC's reflex saves, dexterity and charisma based skill checks and spell damage by 1, decrease the NPC's will saves, perception and wisdom based skill checks by 1. </p>\n<p>The NPC gains the Goblin trait, the Goblin language and Darkvision. It becomes size small.</p>\n<p>Select a goblin heritage for the NPC from the following list: @Compendium[pf2e-mercenary-marketplace-vol1.mmv1-abilities.CoOrXFrQVHrwnps7]{Goblin, Charhide}, @Compendium[pf2e-mercenary-marketplace-vol1.mmv1-abilities.lmXqsXcds4Mhr4DK]{Goblin, Hordefodder}, @Compendium[pf2e-mercenary-marketplace-vol1.mmv1-abilities.4VISujTycO8wnZgF]{Goblin, Irongut}, @Compendium[pf2e-mercenary-marketplace-vol1.mmv1-abilities.wQmL3nfggSWSqkLw]{Goblin, Snow},  @Compendium[pf2e-mercenary-marketplace-vol1.mmv1-abilities.OOSS8ypyWtaCJo2M]{Goblin, Unbreakable}</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "actors",
+    "Sp1IdnLnxDrVYsrw",
+    "items",
+    "Goblin, Unbreakable",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>This goblin can easily bounce back from injuries. It gains 4 additional HP, and when it falls reduce the falling damage as if it had fallen half the distance. </p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "actors",
+    "Sp1IdnLnxDrVYsrw",
+    "items",
+    "Goblin Scuttle",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p><strong>Trigger</strong> A goblin ally ends a move action adjacent to the goblin.</p>\n<hr />\n<p><strong>Effect</strong> The goblin @UUID[Compendium.pf2e.actionspf2e.Item.UHpkTuCtyaPqiCAB]{Steps}.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "actors",
+    "Vol Rajani",
+    "hp"
+   ],
+   "style": "prose",
+   "field": "hp",
+   "en": "void healing, rejuvenation",
+   "current": "void healing, rejuvenation"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "actors",
+    "Zarmavdian",
+    "hp"
+   ],
+   "style": "prose",
+   "field": "hp",
+   "en": "void healing, rejuvenation",
+   "current": "void healing, rejuvenation"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "journals",
+    "zRsCI6WErFnSNEqN",
+    "pages",
+    "Belcorra Battle - Setup",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<img src=\"modules/pf2e-abomination-vaults/assets/bestiary-portraits/ch-10/belcorra-haruvex-cover.webp\" /><h2>Summary of Changes</h2><p>I made a few changes to Belcorra's final battle, because, of course I did.</p><p>Although the origional ending, where Belcorra decides at the very end that the last thing she wants is an empty death, is quite dramatic, it was not quite in keeping with the lore I had established, where Nhimbaloth denies her followers an empty death so she can use them at some other time.</p><p>In order to keep consistant with that lore, I wanted to deny the empty death to Belcorra.</p><p>I also thought it would be quite exciting and unforgettable if the heroes were involved in a historic and cataclismic event where two deities actually come together to do battle a second time. For more information about their first encounter, see @UUID[JournalEntry.YbOS6pQRxoWI0Q56.JournalEntryPage.ohFJrgStEzdvGEEU]{Nhimbaloth} and scroll almost to the bottom.</p><p>Therefore, one of the heroes is selected to be given the means to actually summon Pharasma when the time is right. She comes for two reasons: to forcibly collect Belcorra's soul, for which she has prepared a special afterlife, and to once again face Nhimbaloth.</p><p>Finally, I added some combatants. Since I long planned to have the Roseguard make a limited reappearance, I also added a few creatures on Belcorra's side, to keep things balanced.</p><p>If these changes intrigue you, read on!</p><h2>Preparations before reaching the Temple Level</h2><p>Early in this module, I first introduced a more active Pharasma when I brought Saam, the priest of Pharasma, into town shortly after the heroes completed the Library level, in order to teach an adventurer the Ghost Hunter dedication.</p><p>As they draw near the temple, he will approach one of them for a special task:</p><ul><li><p>If one of the heroes follows Pharasma, Saam will choose that hero.</p></li><li><p>If not, if one of the heroes took on the Ghost Hunter Dedication, Saam will choose that person.</p></li><li><p>If not, Saam will choose someone from either the cleric or other divine class, or a champion.</p></li></ul><p>If you have no such character, then, perhaps this ending is not right for your party.</p><h3>The Psychopomp Mask</h3><p>Saam presents the chosen hero with what appeared to be an ordinary @UUID[Compendium.pf2e.equipment-srd.Item.i5SEEbSALTzH9rgg]{Psychopomp Mask}.</p><p>He requests the following:</p><ul><li><p>The hero should keep the mask in an easily-accessable spot, without actually investing it or attempting to use it. On a belt would be ideal.</p></li><li><p>During the battle with Belcorra, after the party has invested all three fulcrum lens splinters into Belcorra, if the hero feels Nhimbaloth's presance very strongly (which he will), the hero should smash it.</p></li></ul><p>Saam explains:</p><blockquote><p>I don't know what is to happen when you break it, but I will let you into a Pharasma secret about psychopomp masks. According to their legend, if you are wearing one when you die, the psychopomp that comes to collect your soul will be fooled by the mask and attempt to take it instead, which shatters the mask. This way, you can cheat death, at least for a while.</p><p>Do you honestly think that Pharasma's minions are fooled by such a thing? These minor magical items do work, but only because she allows them to work, and to exist.</p><p>She wanted them to be somewhat common because every once in a while, Pharasma has another purpose for one of these masks. This is such a time.</p></blockquote><p>He will further add:</p><blockquote><p>It will not break easily if you happen to drop it. Only if you smash it with purpose. Do so if you sense Nhimbaloth's presance.</p></blockquote><h2>Preparing the Scene of Battle</h2><h3>Belcorra's Allies</h3><p>(The ideas here assume that the heroes killed the wisps in J08 Devoruing Chamber instead of allowing them to teleport to the temple room.)</p><p>While the battle with Belcorra seemed quite tough, I thought it would be more impactful if it brought more plot threads full circle.</p><p>Therefore, I added some tough creatures to this encounter, which are probably still alive:</p><ul><li><p>The wisp that stayed behind in I64 Initiates Chamber, beyond the Ebon Doors in the Hunting Grounds. It is to Belcorra's right.</p></li><li><p>Caliddo Haruvex, who by now has rejuvinated from his previous battle with the heroes. He is lurking north of the doors.</p></li></ul><h3>The Roseguard</h3><p>During all this time, the heroes have seen various members of the Roseguard standing guard at level exits. The last real interaction with them was probably on the Farm level.</p><p>The Roseguard will take some limited actions in the battle, as detailed in The Final Conflict journal page. They will also help the morrigna take Belcorra away in the final climatic scene.</p><h3>Pharasma and Nhimbaloth</h3><p>The tokens for Pharasma and Nhimbaloth are set up at the NE and SW corners of the room, with the following settings:</p><ul><li><p>Neither token has a visible image. They only have light effects. In order to surpress the token image, I set their elevations to -1. This way, the light effect works without a token being visible.</p><ul><li><p>You may want to test this to ensure the player cannot see the token. A mod may change this behavior. One example of this is the Underground setting in PF2E Toolbelt. Just set it to No Filter.</p></li></ul></li><li><p>The token visiblity is off to surpress the light effect until you are ready for them. This means that they are not visible at all on the game canvas. I put each of them in front of the notch in the walls in the NE and SW corners. Hover over them to see the token outline.</p></li><li><p>Each token is set up to use the Simple NPC Sheet because their divine stats do not matter.</p></li></ul><h3>Scene Regions for Doom Check</h3><p>As a gamemaster, one of my weaknesses is remembering things like checking for doom when the heroes pass over a rivulet in the heat of combat. This is espeically true for a battle as complicated as this one.</p><p>Therefore I created scene regions over all the swamp rivulets, and attached them to a simple chat macro that dumps the relevant journal text into the chat whenever an actor crosses a rivulet during their turn.</p><p>@UUID[Macro.LKNokcnnxRzogend]{Player Doom Check}</p><p>Apologies if this gets irritating. I also made the regions visible to the GM as an extra reminder.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "journals",
+    "zRsCI6WErFnSNEqN",
+    "pages",
+    "J10, J11, J12 - Paths of Memories",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>I added additional sounds to the the @UUID[JournalEntry.yn21bNM6kpV4xRol.JournalEntryPage.YtiItJUQB7PEc61I]{J10. Path of Pleasant Memories}, the @UUID[JournalEntry.yn21bNM6kpV4xRol.JournalEntryPage.kzauNC4XPJrmBf4e]{J11. Path of Failure} and the @UUID[JournalEntry.yn21bNM6kpV4xRol.JournalEntryPage.xiziHQMNSOhwPi4t]{J12. Path of Powerlessness} to make these areas a bit more memorable.</p><p>I also added a new sound — wind chimes for the Chamber of Reflection.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "journals",
+    "zRsCI6WErFnSNEqN",
+    "pages",
+    "J06 Crematorium",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Few adventurers will have the stomach to remain in this room to fight the magma scorpians. However, when the heroes retreat down either passage, the scorpion will chase them. </p><p>Since the scorpions are large and the halls are only 5'wide, the squeeze rules will apply to them.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "journals",
+    "zRsCI6WErFnSNEqN",
+    "pages",
+    "Overview",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Except for the final battle with Belcorra, the majority of changes I made to the temple were to simply to add lights and sounds, with a few small additional changes.</p><ul><li><p>Sounds added to the Challenge of Despair rooms, to add both pleasant and unpleasant memories.</p></li><li><p>Drone sound added to the First, Second and Third challenge chambers.</p></li><li><p>Swamp sounds added to the Deadly Swamp, and the waterfall.</p></li><li><p>Lever tiles that point north, in the Deadly Swamp.</p></li><li><p>Additional sounds added to the Temple, along with Belcorra's battle music.</p></li><li><p>Walls modified for the pipes so they are not larger than the pipe, itself.</p></li><li><p>Encounter - @UUID[.U8sC2KOCcj1ZUgrI]{Final Battle with Belcorra}.</p></li></ul>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "journals",
+    "zRsCI6WErFnSNEqN",
+    "pages",
+    "J15 Deadly Swamp",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>I added tiles with the same lever image to help you keep track of which levers the heroes have turned to the north.</p><p>As the heroes turn each valve, simply make it visible.</p><p>It is not a perfect solution, because the lever under it will still be visible, but I still think it will help.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "journals",
+    "zRsCI6WErFnSNEqN",
+    "pages",
+    "J19 Passage to the Depths",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>I placed the Irlgaunt over the pit and set its elevation to -180, to account for the two rounds it takes to arrive after disturbing the corpse or making significant noise.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Gauntlight Extras",
+    "journals",
+    "zRsCI6WErFnSNEqN",
+    "pages",
+    "The Final Conflict",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<img src=\"modules/pf2e-abomination-vaults/assets/bestiary-portraits/ch-10/belcorra-haruvex-half.webp\" /><p>Except as noted below, the battle proceeds as described in @UUID[JournalEntry.yn21bNM6kpV4xRol.JournalEntryPage.a9b40LjI7QwLgirk]{J20. Empty Vault}, heading \"The Final Battle\".</p><h2>Roseguard Participation</h2><p>Roseguard will participate as follows:</p><ul><li><p>Aesephna will appear the first time someone's health drops below 10%. She will cast her most powerful healing spell on the hero.</p></li><li><p>Vol will appear if the heroes lack the ability to fly and are therefore unable to inflict a touch attack on Belcorra while trying to invest the lenses. She will use her athletics to try to grab Belcorra and wrestle her to the ground. Because they are both ghosts, she is able to do this.</p></li><li><p>Zarmavdian will appear if the presance of Caliddo overbalances the encounter too much. He will attempt to unlease a devastating spell to soak up Caliddo's health.</p></li><li><p>Otari will appear if the heroes are overmatched at any point after this.</p></li></ul><p>I have placed the invisible Roseguard tokens in the swamp pools, where they will probably be out of the way until needed.</p><p>Each ghost will appear for the duration of one round. Try not to have more than one active during any one round. After all four ghosts have appeared, use your best judgement when and how to use them again.</p><p>Also, if any of the ghosts are damaged, remember that they will be healed by crossing the rivulets, thus using Belcorra's room against her.</p><h2>Hand-to-Hand Combat with a Ghost</h2><p>To force the \"splinters\" from the various Fulcrum Lenses upon Belcorra, it is necessary to make a \"melee spell attack roll\" upon Belcorra. This is essentially hand-to-hand combat.</p><p>If your heroes have not properly prepared for hand-to-hand combat with a flying target, then this battle might be impossible for them to succeed without Vol's help in wrestling Belcorra to the ground.</p><p>However, Vol should only be able to help so much. If the heroes cannot engage Belcorra, then the heroes will have to retreat to acquire either a fly spell, or to find some way to bring Belcorra into reach.</p><p>Some possible spells and items that I found, that are under 12th level:</p><ul><li><p>@UUID[Compendium.pf2e.spells-srd.Item.A2JfEKe6BZcTG1S8]{Fly} spell</p></li><li><p>@UUID[Compendium.pf2e.equipment-srd.Item.KlJSw919hpN6V9oK]{Potion of Flying (Standard)}</p></li><li><p>@UUID[Compendium.pf2e.equipment-srd.Item.1erd18HS57aCyC6r]{Flying Broomstick}</p></li><li><p>@UUID[Compendium.pf2e.equipment-srd.Item.aaua3vcUXyBFpRe9]{Soaring Wings}</p></li><li><p>@UUID[Compendium.pf2e.equipment-srd.Item.aKoMqPDmVzPI7Q20]{Winged Sandals}</p></li></ul><p>There are probably more.</p><h2>If your Hero Breaks the Mask</h2><p>Take your time while playing out this scene. After the heroes have invested the splinters and broken the mask, they have done their part, and they are now observers in a cosmic drama. Use your narrative powers honed over the last 10 dungeon levels to describe the action, while illustrating the action with token movements. However, do not drag it out too much.</p><p>Your hero should break the mask when Nhimbaloth makes her appearance just after the final splinter from the fulcrum lenses has been inflicted upon Belcorra.</p><ul><li><p>First, introduce Nhimbaloth by activating the invisible token at the southwest end of the chamber.</p></li><li><p>Read the block text in the Nhimbaloth's Entrance heading of @UUID[JournalEntry.yn21bNM6kpV4xRol.JournalEntryPage.a9b40LjI7QwLgirk]{J20. Empty Vault}.</p></li></ul><p>Ideally, your hero should break the mask at this point. The breaking of the mask will summon Pharasma. A @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.z9jEyLrsoBMmh9qg]{Morrigna} will accompany her.</p><p>First, activate the invisible token at the northeast end of the chamber, and then read the following:</p><blockquote><p>A whirlwind of ghostly blue energy appears at the northeast end of the chamber, accompanied by the howl of winds that buffet your soul, rather than your flesh.</p></blockquote><p>Next, activate the morrigna next to her. The morrigna is there to collect Belcorra's soul. Pharasma is there to face Nhimbaloth.</p><blockquote><p>A glowing being appears within the torrent of Pharasmid winds. It has a female aspect, and wears long, flowing web-like wrappings and a mask with a web design. It is a morrigna, a psychopomp of Pharsama.</p></blockquote><p>The morrigna will swoop in and attempt to grab Belcorra.</p><blockquote><p>The morrigna swoops toward Belcorra. At the same time, each member of the Roseguard appears above the murky pools. They fly toward Belcorra as she attemps to back away. Together, they surround her as the morrigna lashes Belcorra with her wrappings. The web-like lash wraps around Belcorra with a grip that can trap a ghost. The morrigna pulls her in as she screams one last time.</p><p>They all vanish.</p></blockquote><p>At this point, move the Pharasma vortex toward the Nhimbaloth enamation.</p><blockquote><p>A rumble echoes down from the Gauntlight shaft as far above, Gauntlight begins to collapse.</p></blockquote><h2>If Your Player Does Not Break the Mask</h2><p>If your hero forgets to break the mask in the midst of all the action, you might want to consider a reminder. Hopefully, one of the other players will help.</p><p>If you decide to let them deal with the consequences, or if the player simply decides not to break the mask, then Belcorra will get her empty death as described in @UUID[JournalEntry.yn21bNM6kpV4xRol.JournalEntryPage.a9b40LjI7QwLgirk]{J20. Empty Vault} under \"Destroying Belcorra.\"</p><p>Pharasma will be disappointed in the hero, which might also provide some interesting game fodder. Her @UUID[Compendium.pf2e.boons-and-curses.Item.ParIWsb6B4fdhrHF]{Minor Curse} might be appropriate.</p><h2>Afterward</h2><p>Either way, it is no longer safe for the heroes to remain in the room. If necessary, Aesephna will reappear long enough to yell at the heroes to go.</p><p>If you wish, you can have the Roseguard appear one final time, once the heroes have reached a semi-safe place, such as the north Challenge room. This interaction should be brief, in which the Roseguard bows to the heroes in thanks, and then disappears forever.</p><p></p>",
+   "current": null
+  }
+ ]
+}

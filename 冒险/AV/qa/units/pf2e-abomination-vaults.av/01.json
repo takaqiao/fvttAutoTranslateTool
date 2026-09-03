@@ -1,0 +1,1955 @@
+{
+ "pack": "pf2e-abomination-vaults.av",
+ "unit": "01",
+ "leaves": 127,
+ "chars": 1984,
+ "styles": {
+  "bilingual": 127
+ },
+ "convention": {
+  "bilingual": "中文 English - one ASCII space, no parentheses",
+  "prose": "pure Chinese; keep every @X[...] / [[...]] bracket byte-identical, translate only the {label} tail; keep HTML tags and their order"
+ },
+ "items": [
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Barbazu Vanguard",
+    "items",
+    "DzJcNWKMqkWqtgAX",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Hellforged Glaive",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Dread Wraith",
+    "items",
+    "Wraith Touch",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Wraith Touch",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Dread Wraith",
+    "items",
+    "Grip of Fear",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Grip of Fear",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Dread Wraith",
+    "items",
+    "Robes of Welcome",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Robes of Welcome",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Galudu",
+    "items",
+    "Wand of Continuation (Mountain Resilience)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Wand of Continuation (Mountain Resilience)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Glashdrumdur",
+    "prototypeToken"
+   ],
+   "style": "bilingual",
+   "field": "prototypeToken",
+   "en": "Glashdrumdur",
+   "current": "Glashdrumdur Glashdrumdur"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Gorul Vetters",
+    "items",
+    "C7PdppuFM1J5AfZc",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Shiv",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Huglu",
+    "items",
+    "Gentle Landing (At Will, Self Only)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Gentle Landing (At Will, Self Only)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Irlgaunt",
+    "items",
+    "Shape Stone (At Will)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Shape Stone (At Will)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Irlgaunt",
+    "items",
+    "One with Stone (At Will)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "One with Stone (At Will)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Khurfel",
+    "items",
+    "Effect: Emerald Fulcrum Lens",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Effect: Emerald Fulcrum Lens",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Kragala",
+    "items",
+    "zSR3MB9KNpQPcxA0",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Drumstick",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Kragala",
+    "items",
+    "zyawAgjl2eHH085S",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Drumstick",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Lasda Venkervale",
+    "items",
+    "McH1gJqQMQRVSagF",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Pewter Mug",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Mimic",
+    "items",
+    "Jaws",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Jaws",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Mimic",
+    "items",
+    "Mobile Morph",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Mobile Morph",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Mimic",
+    "items",
+    "Dwelling Lore (applies only to the dungeon they live in)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Dwelling Lore (applies only to the dungeon they live in)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Owb",
+    "items",
+    "Interplanar Teleport (Self Only, To or From the Netherworld Only)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Interplanar Teleport (Self Only, To or From the Netherworld Only)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Seugathi Guard",
+    "items",
+    "MnAW3prtfTZxnv7T",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Magic Item Mastery",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Shad Nunder",
+    "items",
+    "C7PdppuFM1J5AfZc",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Shiv",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Slurk",
+    "items",
+    "+2 to Fortitude Saves vs. Grapple, Reposition, or Shove",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "+2 to Fortitude Saves vs. Grapple, Reposition, or Shove",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Spike Launcher",
+    "items",
+    "BFiMEADLB2Qw0lL1",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Spike",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Urdefhan Tormentor",
+    "items",
+    "Gentle Landing (Self Only)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Gentle Landing (Self Only)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Urdefhan Warrior",
+    "items",
+    "Gentle Landing (At Will, Self Only)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Gentle Landing (At Will, Self Only)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Vaulgrist",
+    "items",
+    "Grievous Wound",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Grievous Wound",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Vaulgrist",
+    "items",
+    "Unleash Weapon",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Unleash Weapon",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Wood Golem",
+    "items",
+    "CquGR1meZf8Szzmo",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Splinter",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Zebub",
+    "items",
+    "Translocate (At Will)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Translocate (At Will)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Zebub",
+    "items",
+    "Invisibility (at will, self only)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Invisibility (at will, self only)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Zebub",
+    "items",
+    "Summon Animal (swarm creatures only)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Summon Animal (swarm creatures only)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Ziskilly Theed",
+    "items",
+    "C7PdppuFM1J5AfZc",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Shiv",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Zozzlarin",
+    "items",
+    "Translocate (At Will)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Translocate (At Will)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Zozzlarin",
+    "items",
+    "Invisibility (at will, self only)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Invisibility (at will, self only)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Zozzlarin",
+    "items",
+    "Summon Animal (swarm creatures only)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Summon Animal (swarm creatures only)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "items",
+    "cdzzVnvc6BkPnGIO",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Gold Tooth",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "playlists",
+    "FX",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "FX",
+   "current": "FX FX"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "playlists",
+    "u5ONvj226dZMfVHU",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Lady's Whisper Combat",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "playlists",
+    "u5ONvj226dZMfVHU",
+    "sounds",
+    "Call Of The Void",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Call Of The Void",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "playlists",
+    "u5ONvj226dZMfVHU",
+    "sounds",
+    "Eldritch Mind",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Eldritch Mind",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "playlists",
+    "u5ONvj226dZMfVHU",
+    "sounds",
+    "Deep Magical Resonant Loop",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Deep Magical Resonant Loop",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "playlists",
+    "u5ONvj226dZMfVHU",
+    "sounds",
+    "Ghosts",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Ghosts",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "2dHU2g8WUOc4NZlq",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "A - Gauntlight Ruins",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "2dHU2g8WUOc4NZlq",
+    "notes",
+    "To B06"
+   ],
+   "style": "bilingual",
+   "field": "To B06",
+   "en": "To B06",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "2dHU2g8WUOc4NZlq",
+    "notes",
+    "To A25"
+   ],
+   "style": "bilingual",
+   "field": "To A25",
+   "en": "To A25",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "2dHU2g8WUOc4NZlq",
+    "notes",
+    "To B01"
+   ],
+   "style": "bilingual",
+   "field": "To B01",
+   "en": "To B01",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "2dHU2g8WUOc4NZlq",
+    "notes",
+    "To A11"
+   ],
+   "style": "bilingual",
+   "field": "To A11",
+   "en": "To A11",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "5yFFxnSZdYE1NWYM",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Otari",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Cupola",
+    "regions",
+    "A25 to A11",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "A25 to A11",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Cupola",
+    "regions",
+    "A25 to A11",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "Water (Shallow)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Water (Shallow)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "Water (Deep)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Water (Deep)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "Difficult Terrain (Indoors)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Difficult Terrain (Indoors)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "Roofed Areas",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Roofed Areas",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "Difficult Terrain (Outdoors)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Difficult Terrain (Outdoors)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "A8 to B8",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "A8 to B8",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "A11 to A25",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "A11 to A25",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "A12 to B6",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "A12 to B6",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "A17 to B19",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "A17 to B19",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "A21 to B1",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "A21 to B1",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "Water (Shallow)",
+    "behaviors",
+    "Difficult Terrain",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Difficult Terrain",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "Water (Deep)",
+    "behaviors",
+    "Modify Movement Cost",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Modify Movement Cost",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "Difficult Terrain (Indoors)",
+    "behaviors",
+    "Difficult Terrain",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Difficult Terrain",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "Difficult Terrain (Indoors)",
+    "behaviors",
+    "Suppress Weather",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Suppress Weather",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "Roofed Areas",
+    "behaviors",
+    "Suppress Weather",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Suppress Weather",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "Roofed Areas",
+    "behaviors",
+    "Adjust Darkness Level",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Adjust Darkness Level",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "Difficult Terrain (Outdoors)",
+    "behaviors",
+    "Difficult Terrain",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Difficult Terrain",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "A8 to B8",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "A11 to A25",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "A12 to B6",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "A17 to B19",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "A - Gauntlight Ruins",
+    "regions",
+    "A21 to B1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B1 to A21",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "B1 to A21",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B5 to C7",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "B5 to C7",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B2 to C10",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "B2 to C10",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B32 to C10",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "B32 to C10",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B19 to A17",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "B19 to A17",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B17: Level 2 Portal Chamber",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "B17: Level 2 Portal Chamber",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B8 to A8",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "B8 to A8",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B16 to C1",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "B16 to C1",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B6 to A21",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "B6 to A21",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B34: Elevator (Disabled)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "B34: Elevator (Disabled)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B10: Spike Launchers",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "B10: Spike Launchers",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B20: Brown Mold",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "B20: Brown Mold",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B29: Dooms of Tomorrow",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "B29: Dooms of Tomorrow",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B35: Ribbon of Light",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "B35: Ribbon of Light",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B1 to A21",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B5 to C7",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B2 to C10",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B32 to C10",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B19 to A17",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B8 to A8",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B16 to C1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B6 to A21",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "B - Servants' Quarters",
+    "regions",
+    "B34: Elevator (Disabled)",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C29 to D1",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "C29 to D1",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C10 to B2",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "C10 to B2",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C10 to B32",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "C10 to B32",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C7 to B5",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "C7 to B5",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C1 to B16",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "C1 to B16",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C22: Elevator (Disabled)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "C22: Elevator (Disabled)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C33 to D16",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "C33 to D16",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C39 to C5b (Inactive)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "C39 to C5b (Inactive)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C5b to D11 (Inactive)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "C5b to D11 (Inactive)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C40 to D14",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "C40 to D14",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C6: Fog",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "C6: Fog",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C15: Ribbon of Light",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "C15: Ribbon of Light",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C16: Floor 3 Portal Room",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "C16: Floor 3 Portal Room",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C32: Vengeful Furnace",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "C32: Vengeful Furnace",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C29 to D1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C10 to B2",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C10 to B32",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C7 to B5",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C1 to B16",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C22: Elevator (Disabled)",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C33 to D16",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C39 to C5b (Inactive)",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C - Library",
+    "regions",
+    "C40 to D14",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C1FHtLrwQGvYvHEj",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "E - Arena",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C1FHtLrwQGvYvHEj",
+    "notes",
+    "To D12"
+   ],
+   "style": "bilingual",
+   "field": "To D12",
+   "en": "To D12",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C1FHtLrwQGvYvHEj",
+    "notes",
+    "To F02"
+   ],
+   "style": "bilingual",
+   "field": "To F02",
+   "en": "To F02",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C1FHtLrwQGvYvHEj",
+    "notes",
+    "To F11"
+   ],
+   "style": "bilingual",
+   "field": "To F11",
+   "en": "To F11",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C1FHtLrwQGvYvHEj",
+    "notes",
+    "To F26"
+   ],
+   "style": "bilingual",
+   "field": "To F26",
+   "en": "To F26",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C1FHtLrwQGvYvHEj",
+    "notes",
+    "To F08"
+   ],
+   "style": "bilingual",
+   "field": "To F08",
+   "en": "To F08",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C1FHtLrwQGvYvHEj",
+    "notes",
+    "To F09"
+   ],
+   "style": "bilingual",
+   "field": "To F09",
+   "en": "To F09",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C1FHtLrwQGvYvHEj",
+    "notes",
+    "To F04"
+   ],
+   "style": "bilingual",
+   "field": "To F04",
+   "en": "To F04",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C1FHtLrwQGvYvHEj",
+    "notes",
+    "To F01"
+   ],
+   "style": "bilingual",
+   "field": "To F01",
+   "en": "To F01",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "C1FHtLrwQGvYvHEj",
+    "notes",
+    "To Smuggler's Refuge"
+   ],
+   "style": "bilingual",
+   "field": "To Smuggler's Refuge",
+   "en": "To Smuggler's Refuge",
+   "current": null
+  }
+ ]
+}

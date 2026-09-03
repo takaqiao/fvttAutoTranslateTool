@@ -1,0 +1,1797 @@
+{
+ "pack": "tianzes-otari-extras.tianzes-otari-extras",
+ "unit": "04",
+ "leaves": 122,
+ "chars": 2478,
+ "styles": {
+  "bilingual": 122
+ },
+ "convention": {
+  "bilingual": "中文 English - one ASCII space, no parentheses",
+  "prose": "pure Chinese; keep every @X[...] / [[...]] bracket byte-identical, translate only the {label} tail; keep HTML tags and their order"
+ },
+ "items": [
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Rowdy Rockfish Inn and Tavern",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Rowdy Rockfish Inn and Tavern",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Rowdy Rockfish Inn and Tavern",
+    "pages",
+    "Rowdy Rockfish Inn and Tavern",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Rowdy Rockfish Inn and Tavern",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Shop Journals (MEJ Required)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Shop Journals (MEJ Required)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Shop Journals (MEJ Required)",
+    "pages",
+    "Shop Journals",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Shop Journals",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Shop Rolltables (Item Piles required)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Shop Rolltables (Item Piles required)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Shop Rolltables (Item Piles required)",
+    "pages",
+    "Shop Rolltables",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Shop Rolltables",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Tianze's Otari Extras",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Tianze's Otari Extras",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Tianze's Otari Extras",
+    "pages",
+    "Introduction",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Introduction",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Tianze's Otari Extras",
+    "pages",
+    "Credits and Licenses",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Credits and Licenses",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "pdcH1S5TrPGVhbiG",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Crow's Casks",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "pdcH1S5TrPGVhbiG",
+    "pages",
+    "Crow's Casks",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Crow's Casks",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "macros",
+    "Toggle Dead Kobold Visibility",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Toggle Dead Kobold Visibility",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "macros",
+    "Toggle Left Hatch Visibility",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Toggle Left Hatch Visibility",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "macros",
+    "Toggle Middle Hatch Visibility",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Toggle Middle Hatch Visibility",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "macros",
+    "Toggle Right Hatch Visibility",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Toggle Right Hatch Visibility",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "scenes",
+    "Crooks-Bridge",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Crooks-Bridge",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "scenes",
+    "Crooks-Bridge",
+    "regions",
+    "Region",
+    "behaviors",
+    "Adjust Darkness Level",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Adjust Darkness Level",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "scenes",
+    "Crooks-Nook",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Crooks-Nook",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "scenes",
+    "Crooks-Nook",
+    "regions",
+    "Region",
+    "behaviors",
+    "Adjust Darkness Level",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Adjust Darkness Level",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "scenes",
+    "Crooks-Nook-2nd",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Crooks-Nook-2nd",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "scenes",
+    "Crow's Casks Tavern",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Crow's Casks Tavern",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "scenes",
+    "Crow's Casks Tavern",
+    "regions",
+    "Region",
+    "behaviors",
+    "Adjust Darkness Level",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Adjust Darkness Level",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "scenes",
+    "Fish Camp Base",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Fish Camp Base",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "scenes",
+    "Fish Camp Base",
+    "regions",
+    "Region",
+    "behaviors",
+    "Adjust Darkness Level",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Adjust Darkness Level",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "scenes",
+    "Otari Market Square",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Otari Market Square",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "scenes",
+    "Otari Market Square",
+    "regions",
+    "Region",
+    "behaviors",
+    "Adjust Darkness Level",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Adjust Darkness Level",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "scenes",
+    "Otari Ocean View",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Otari Ocean View",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "scenes",
+    "Thirsty Alpaca Ruin",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Thirsty Alpaca Ruin",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "scenes",
+    "Thirsty Alpaca Ruin",
+    "notes",
+    "The Lean-To"
+   ],
+   "style": "bilingual",
+   "field": "The Lean-To",
+   "en": "The Lean-To",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "scenes",
+    "Thirsty Alpaca Ruin",
+    "notes",
+    "The Dead Kobold"
+   ],
+   "style": "bilingual",
+   "field": "The Dead Kobold",
+   "en": "The Dead Kobold",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "scenes",
+    "Thirsty Alpaca Warren",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Thirsty Alpaca Warren",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Brelda's Bakery",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Brelda's Bakery",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Brelda's Bakery",
+    "results",
+    "xIF4DUH5ltsHnRLZ",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Bread",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Brelda's Bakery",
+    "results",
+    "HFO9I1qObtxs5OUo",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Beef Pockets",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Brelda's Bakery",
+    "results",
+    "JyrREDz64NTsXEGq",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Poultry Pockets",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Brelda's Bakery",
+    "results",
+    "qjtA8zsTJ2us4l5L",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Shellfish Pockets",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Brelda's Bakery",
+    "results",
+    "82LuSMEua5E8mUFA",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Cheese Wedge",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Brelda's Bakery",
+    "results",
+    "gsoX8VhBIZvONs93",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Beef Pockets",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Clodia's Clothery",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Clodia's Clothery",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Crook's Nook",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "FAjMiLijNOwiPe6G",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Drink - Mug of Agnar",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "9tYH19wObulis6Fo",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Drink - Mug of Ale",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "Sk2kNGfu59syc1d0",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Drink - Mug of Beer",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "6vgh5ouGLXUe35v1",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Drink - Mug of Mead",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "T4rQkX4EElAGbIut",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Drink - Shot of Whisky",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "ml0QBvVUSgnMFdQY",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Beef Skewer",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "W2rxMscCWNC7YhAc",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Beef Stew",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "bdsUKXxnNdoaYcvR",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Bread",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "nJfY3ZGCwlcz64sT",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Cheese Wedge",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "gE9w91Sh020joX1R",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Chicken Skewer",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "pDx3Tpbf2Y9wGvxA",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Chicken Soup",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "ceBdkJorprLLtsoH",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Egg",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "p1BNpnTPLnkE3Yd3",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fresh Fruit",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "d2lJt2LXBiazUMxl",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fresh Vegetables",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "OLX6yzkOa28xtUHM",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Beef Pockets",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "H3OZCiFDj6dDMRBg",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Chicken Pieces",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "HQUNhSxQAXXfWE0m",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Meat Pockets",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "g3ko2I9w3uIXqXrB",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Potato Slices",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "HJgCGq4tQwc5hCSA",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Poultry Pockets",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "a21vKzrMcqGQ4e4T",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Shellfish Pieces",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "UWqrosrdl0ZUjUIB",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Shellfish Pockets",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "k6o85PL9dmCkrRqT",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Full Meal",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "WhMJB95qjCZs0Q7f",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Shellfish Skewer",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "4VLuPSXSayXqac9T",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Shellfish Stew",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "results",
+    "lFSrbWBkbNsIHghT",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Vegetable Stew",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Casks",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Crow's Casks",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Casks",
+    "results",
+    "jOETvrcOtfsbcp62",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Lady's Blessing Oil",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Casks",
+    "results",
+    "9eKGk4MpoFRFSG0J",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Wasul Reed Mask",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Casks",
+    "results",
+    "4Ohv5OerJPn5nYjJ",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Artevil Suspension",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Casks",
+    "results",
+    "MvtMqbOqcpwjdAxZ",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Drowsy Sun Eye Drops",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Casks",
+    "results",
+    "4Vcj4LPxIUH5KENT",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Toothwort Extract",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Casks",
+    "results",
+    "KyxAKFggm4Yw2ePA",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Yarrow-Root Bandage",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Casks",
+    "results",
+    "dPCFLGLds0BctJz7",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Drink - Mug of Agnar",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Casks",
+    "results",
+    "TFQSKlF2lHULEZoF",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Drink - Mug of Ale",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Casks",
+    "results",
+    "euI3RZs4AKclsoP3",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Drink - Mug of Mead",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Casks",
+    "results",
+    "c33l066nSrxEzitG",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Bread",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Casks",
+    "results",
+    "xda8QExRlIzT1Ouf",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Cheese Wedge",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Casks",
+    "results",
+    "vvinMDLLpljqHyKa",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Beef Pockets",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Casks",
+    "results",
+    "dx0JhCl083jfY6oQ",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Potato Slices",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Casks",
+    "results",
+    "svRvUX9ZSGiGVyIP",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Shellfish Pieces",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Casks",
+    "results",
+    "68dIfsgC7HkKIvKV",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Shellfish Pockets",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Casks",
+    "results",
+    "l5U30wSZDGV6jSUs",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Beef Skewer",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Casks",
+    "results",
+    "zy6GNruoxG7DpB2i",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Shellfish Skewer",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Casks",
+    "results",
+    "ZW0Xlse23jpBdqUi",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Service - Mulling",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Elixirs",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Crow's Elixirs",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crow's Elixirs",
+    "results",
+    "2GsZiFjFU9Wv84hi",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Lady's Blessing Oil",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Dawnflower Library Store",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Dawnflower Library Store",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Fishery Sundries",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Fishery Sundries",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Fishery Sundries",
+    "results",
+    "ypJm9F9MDX0HIuL7",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Shark's Teeth Necklace",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Fishery Sundries",
+    "results",
+    "FhYyjWP7OdQbVGoj",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Shark's Tooth",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Fishery Sundries",
+    "results",
+    "c9QV5kPMmJZAd91N",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Shell Necklace",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Fishery Sundries",
+    "results",
+    "gnrZ40XdAWITHfTd",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Shellfish Pieces",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Fishery Sundries",
+    "results",
+    "eXDRGOMLbP9AHR5B",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Shellfish Pockets",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Fishery Sundries",
+    "results",
+    "cjWOnbkfzbiruuVV",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Shellfish Skewer",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Hunk's Hunks",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Hunk's Hunks",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Hunk's Hunks",
+    "results",
+    "wmeOWz3HQCM7DH4s",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Chicken Skewer",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Hunk's Hunks",
+    "results",
+    "MlRuzxkyAdU0zm0k",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Chicken Pieces",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Hunk's Hunks",
+    "results",
+    "RK45wWBmlV1faxPz",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Beef Skewer",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Hunk's Hunks",
+    "results",
+    "rYAQduYBme6diTAn",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Chicken Skewer",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Hunk's Hunks",
+    "results",
+    "WxYbjKkKslVhyrVT",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Beef Pockets",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Hunk's Hunks",
+    "results",
+    "OVEccA4PR4NLDRBs",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Meat Pockets",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Hunk's Hunks",
+    "results",
+    "iTcJx0HohcAguJ4m",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Food - Fried Poultry Pockets",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Lathenar's Shop",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Lathenar's Shop",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Lathenar's Shop",
+    "results",
+    "GYriwm8cw8JzbHM9",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Chain (10 feet)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Lathenar's Shop",
+    "results",
+    "AnYCWKrr09MoRAa1",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Earplugs (PFS Guide)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Lathenar's Shop",
+    "results",
+    "EAqGRYULoEeJnX2f",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Feed (Standard)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Lathenar's Shop",
+    "results",
+    "NLPFzzPyNvjww26c",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Ladder (10-foot)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Lathenar's Shop",
+    "results",
+    "HSgTKFhbJAkjLrVo",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Magazine with 6 Pellets",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Lathenar's Shop",
+    "results",
+    "Pc4lFbcS4FVx8EuN",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Magazine with 8 Pellets",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Lathenar's Shop",
+    "results",
+    "cWWjiT4Lgf2dtZDe",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Oil (1 pint)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Lathenar's Shop",
+    "results",
+    "wB6hxdcoAWLSialy",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Spellbook (Blank)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Lathenar's Shop",
+    "results",
+    "zCUeEYSjjcECa0uc",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Tank (Stationary)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Lathenar's Shop",
+    "results",
+    "7Wq7x0nLZdQVChPS",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Tank (Traveling)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Lathenar's Shop",
+    "results",
+    "g17RfOpCrIOuTlpz",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Treat (Standard)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Lathenar's Shop",
+    "results",
+    "bSiwsnD2IdWUCMs8",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Treat (Unique)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Lathenar's Shop",
+    "results",
+    "7SNT8GaSbEwJ8K7t",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Writing Set (Extra Ink and Paper)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Magical Sundries",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Magical Sundries",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Magical Sundries",
+    "results",
+    "4NfxcbFtO4FVzfgI",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Cantrip Deck (5-pack)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Magical Sundries",
+    "results",
+    "Irsn8PFAiLMYOR6a",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Cantrip Deck (Full Pack)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Magical Sundries",
+    "results",
+    "xR1ye145LNRGDxke",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Bewitching Bloom (Lilac)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Magical Sundries",
+    "results",
+    "w1EEufAXSHK4tZVM",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Feather Token (Holly Bush)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Magical Sundries",
+    "results",
+    "ugxEVG0LwaxDMud3",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Wondrous Figurine (Onyx Dog)",
+   "current": null
+  }
+ ]
+}

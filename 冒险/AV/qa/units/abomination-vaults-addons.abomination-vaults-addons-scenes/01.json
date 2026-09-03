@@ -1,0 +1,492 @@
+{
+ "pack": "abomination-vaults-addons.abomination-vaults-addons-scenes",
+ "unit": "01",
+ "leaves": 38,
+ "chars": 739,
+ "styles": {
+  "bilingual": 24,
+  "prose": 14
+ },
+ "convention": {
+  "bilingual": "中文 English - one ASCII space, no parentheses",
+  "prose": "pure Chinese; keep every @X[...] / [[...]] bracket byte-identical, translate only the {label} tail; keep HTML tags and their order"
+ },
+ "items": [
+  {
+   "path": [
+    "entries",
+    "Blades for Glades",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Blades for Glades",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Down Hill",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Log Flume | Down Hill",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Log Flume | Loading Tower",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "regions",
+    "Log 1 up to Log 2",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Log 1 up to Log 2",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "regions",
+    "Log 1 up to Log 2",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "regions",
+    "Log 2 down to Log 1",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Log 2 down to Log 1",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "regions",
+    "Log 2 down to Log 1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "regions",
+    "Log 2 up to Log 3",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Log 2 up to Log 3",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "regions",
+    "Log 2 up to Log 3",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "regions",
+    "Log 3 down to Log 2",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Log 3 down to Log 2",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "regions",
+    "Log 3 down to Log 2",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "regions",
+    "Log 3 up to Log 4",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Log 3 up to Log 4",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "regions",
+    "Log 4 down to Log 3",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Log 4 down to Log 3",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "regions",
+    "Log 4 down to Log 3",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "regions",
+    "Log 4 up to Log 5",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Log 4 up to Log 5",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "regions",
+    "Log 4 up to Log 5",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "regions",
+    "Log 5 down to Log 4",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Log 5 down to Log 4",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "regions",
+    "Log 5 down to Log 4",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Odd Stories",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Odd Stories",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Otari Fishery",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Otari Fishery",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Otari Market",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Otari Market",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Thirsty Alpaca (Restored) - F1",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Thirsty Alpaca (Restored) - F1",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Thirsty Alpaca (Restored) - F2",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Thirsty Alpaca (Restored) - F2",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Thirsty Alpaca Ruins",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Thirsty Alpaca Ruins",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Blades for Glades",
+    "drawings",
+    "Made by Chasarooni"
+   ],
+   "style": "prose",
+   "field": "Made by Chasarooni",
+   "en": "Made by Chasarooni",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Down Hill",
+    "drawings",
+    "Logs to Ride on"
+   ],
+   "style": "prose",
+   "field": "Logs to Ride on",
+   "en": "Logs to Ride on",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Down Hill",
+    "drawings",
+    "Note to have the animated Tiles this requires Monk's Active Tile Triggers & Tile Scroll modules"
+   ],
+   "style": "prose",
+   "field": "Note to have the animated Tiles this requires Monk's Active Tile Triggers & Tile Scroll modules",
+   "en": "Note to have the animated Tiles this requires Monk's Active Tile Triggers & Tile Scroll modules",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Down Hill",
+    "drawings",
+    "Toggle Top"
+   ],
+   "style": "prose",
+   "field": "Toggle Top",
+   "en": "Toggle Top",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "drawings",
+    "Floor 1"
+   ],
+   "style": "prose",
+   "field": "Floor 1",
+   "en": "Floor 1",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "drawings",
+    "Floor 2"
+   ],
+   "style": "prose",
+   "field": "Floor 2",
+   "en": "Floor 2",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "drawings",
+    "Floor 3"
+   ],
+   "style": "prose",
+   "field": "Floor 3",
+   "en": "Floor 3",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "drawings",
+    "Floor 4"
+   ],
+   "style": "prose",
+   "field": "Floor 4",
+   "en": "Floor 4",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "drawings",
+    "Floor 5"
+   ],
+   "style": "prose",
+   "field": "Floor 5",
+   "en": "Floor 5",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Log Flume | Loading Tower",
+    "drawings",
+    "Note, to have the water \"Flow\" by you'll need to have the Tile Scroll module enabled"
+   ],
+   "style": "prose",
+   "field": "Note, to have the water \"Flow\" by you'll need to have the Tile Scroll module enabled",
+   "en": "Note, to have the water \"Flow\" by you'll need to have the Tile Scroll module enabled",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Odd Stories",
+    "drawings",
+    "Made by Chasarooni"
+   ],
+   "style": "prose",
+   "field": "Made by Chasarooni",
+   "en": "Made by Chasarooni",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Otari Fishery",
+    "drawings",
+    "Made by Eternus"
+   ],
+   "style": "prose",
+   "field": "Made by Eternus",
+   "en": "Made by Eternus",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Thirsty Alpaca (Restored) - F1",
+    "drawings",
+    "Made by Icarus"
+   ],
+   "style": "prose",
+   "field": "Made by Icarus",
+   "en": "Made by Icarus",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Thirsty Alpaca (Restored) - F2",
+    "drawings",
+    "Made by Icarus"
+   ],
+   "style": "prose",
+   "field": "Made by Icarus",
+   "en": "Made by Icarus",
+   "current": null
+  }
+ ]
+}

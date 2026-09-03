@@ -1,0 +1,56 @@
+{
+ "pack": "tianzes-otari-extras.tianzes-otari-extras",
+ "unit": "10",
+ "leaves": 3,
+ "chars": 524,
+ "styles": {
+  "prose": 3
+ },
+ "convention": {
+  "bilingual": "中文 English - one ASCII space, no parentheses",
+  "prose": "pure Chinese; keep every @X[...] / [[...]] bracket byte-identical, translate only the {label} tail; keep HTML tags and their order"
+ },
+ "items": [
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "pdcH1S5TrPGVhbiG",
+    "pages",
+    "Crow's Casks",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Crow's Casks sells ale, mead, and medieval junk food. It never, under any circumstances, sells any poultry.</p>\n<p>It also has several tables devoted to card games.</p>\n<p>Magiloy will buy limited alchemical items, but only if it fits in with her current stock.</p>\n<p>Agnar is an alcohol-free, stimulating hot beverage.</p>\n<p>Mulling is a service to heat any drink.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Crook's Nook",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>A random table created from the contents of the Tavern Items Folder.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "tables",
+    "Rowdy Rockfish",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>A random table created from the contents of the Tavern Items Folder.</p>",
+   "current": null
+  }
+ ]
+}

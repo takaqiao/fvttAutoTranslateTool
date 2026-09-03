@@ -1,0 +1,587 @@
+{
+ "pack": "abomination-vaults-expanded.abomination-vaults-expanded",
+ "unit": "01",
+ "leaves": 39,
+ "chars": 4555,
+ "styles": {
+  "bilingual": 4,
+  "prose": 35
+ },
+ "convention": {
+  "bilingual": "中文 English - one ASCII space, no parentheses",
+  "prose": "pure Chinese; keep every @X[...] / [[...]] bracket byte-identical, translate only the {label} tail; keep HTML tags and their order"
+ },
+ "items": [
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Group Encounter (Lvl 6)",
+    "results",
+    "KSZsKrGNXIBt123v",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Helper 1 - Group Encounter (Lvl 6)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Group Encounter (Lvl 7)",
+    "results",
+    "JO3eNKh3Df2rT3pl",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Helper - Group Encounter (Lvl 7)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Helper 1 - Group Encounter (Lvl 6)",
+    "results",
+    "4UhBtXTCSN1bh4H7",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Helper 2 - Group Encounter (Lvl 6)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Solo Encounter (Lvl 8)",
+    "results",
+    "7Snfoe0SUixTKoJN",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Skeletal Knight",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "actors",
+    "Aesphena's Wrath (Lvl 6)",
+    "hp"
+   ],
+   "style": "prose",
+   "field": "hp",
+   "en": "void healing",
+   "current": "void healing"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "actors",
+    "Aesphena's Wrath (Lvl 7)",
+    "hp"
+   ],
+   "style": "prose",
+   "field": "hp",
+   "en": "void healing",
+   "current": "void healing"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "actors",
+    "Aesphena's Wrath (Lvl 8)",
+    "hp"
+   ],
+   "style": "prose",
+   "field": "hp",
+   "en": "void healing",
+   "current": "void healing"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "actors",
+    "Aesphena's Wrath (Lvl 8)",
+    "allSaves"
+   ],
+   "style": "prose",
+   "field": "allSaves",
+   "en": "+1 status to all saves vs. vitality",
+   "current": "+1 status to all saves vs. vitality"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "actors",
+    "Belcorra Haruvex (Upgraded)",
+    "hp"
+   ],
+   "style": "prose",
+   "field": "hp",
+   "en": "void healing, rejuvenation",
+   "current": "void healing, rejuvenation"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "actors",
+    "Belcorra Haruvex (Upgraded)",
+    "allSaves"
+   ],
+   "style": "prose",
+   "field": "allSaves",
+   "en": "+1 status to all saves vs. magic",
+   "current": "+1 status to all saves vs. magic"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "actors",
+    "Cheery Man",
+    "allSaves"
+   ],
+   "style": "prose",
+   "field": "allSaves",
+   "en": "+2 status to all saves vs. magic, +3 status to all saves vs. divine magic",
+   "current": "+2 status to all saves vs. magic, +3 status to all saves vs. divine magic"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "AV:E - Random Encounters",
+    "results",
+    "zFLHY2IixFPe3qJW",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "Elite @UUID[Compendium.pf2e.pathfinder-monster-core.2rMLYkUR47ZCQMUg]{Crocodile}",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "AV:E - Random Encounters",
+    "results",
+    "ntgGsHZ8gKid7bx5",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "An Elite Nhimbaloth Priest and 2 Nhimbaloth cultists (not elite)(see GM guide)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "AV:E - Random Encounters",
+    "results",
+    "Weo9Ufxn9DEmdtMg",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "Elite @UUID[Compendium.pf2e.npc-gallery.GoGNtiHuYycppLPk]{Bounty Hunter} (w/Silver Weapons) seeking Jaul Mezmin",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "AV:E - Random Encounters",
+    "results",
+    "lpRcSogG8L6FFGzY",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "3 Elite @Actor[Ghast]{Ghasts}",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "AV:E - Random Encounters",
+    "results",
+    "PdF3H5HkHrUD8FfY",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "2 Elite @Actor[Shadow]{Shadow}",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "AV:E - Random Encounters",
+    "results",
+    "oZIqq0v0PsA2ZsOC",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "Elite @Actor[Will-o'-Wisp] and 4 Nhimbaloth priests (not elite)(see GM guide)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "AV:E - Random Encounters",
+    "results",
+    "mmOFUW2uFdrBEYXg",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "Elite @UUID[Compendium.pf2e.npc-gallery.0Ex7rBuiJVu2NwCz]{Demonologist} and Elite @UUID[Compendium.pf2e.npc-gallery.K2STan8izudm9eEn]{Antipaladin}",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "AV:E - Random Encounters",
+    "results",
+    "Mbnu7WM7DhsCFu1h",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "Elite @UUID[Compendium.pf2e.pathfinder-bestiary-2.FERUCyMwvy4Nejou]{Hellcat} and 2 Elite @UUID[Compendium.pf2e.pathfinder-monster-core.6UrgCT8MwC8CeGbu]{Brimoraks}",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "AV:E - Random Encounters",
+    "results",
+    "9vcLja54i4d42YcF",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "Elite @UUID[Compendium.pf2e.lost-omens-monsters-of-myth-bestiary.10srqxC7QZy0dq2g]{Spectral Devil}",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "AV:E - Random Encounters",
+    "results",
+    "6POtzimf2fV0CLf2",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "2 Elite @Actor[Dread Wraith]{Dread Wraiths}",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "AV:E - Random Encounters",
+    "results",
+    "YK0SCdQmdY1I3Fmo",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "2 Elite Elite @Actor[Will-o'-Wisp]{Will-o'-Wisps} and 2 Elite Nhimbaloth High Priests  (see GM guide)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "AV:E - Random Encounters",
+    "results",
+    "HrKIBAu8wrGPdwtx",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "Elite @UUID[Compendium.pf2e.pathfinder-monster-core.vijBriZmbUJjbJNH]{Cave Worm}",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Group Encounter (Lvl 7)",
+    "results",
+    "qgXRtQlRnn5wiIqu",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "Elite @UUID[Compendium.pf2e.pathfinder-bestiary-3.Actor.cbduxhlI7JbONLXF]{Shambler Troop} +Weak @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.FJo8VkrM7kLkHa5D]{Zombie Hulk}",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Group Encounter (Lvl 8)",
+    "results",
+    "qdlWxdeDMcvcHpmR",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "Elite @UUID[Actor.mrxDc0fj5t5CvjJQ]{Shanrigol Behemoth}",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Helper 2 - Group Encounter (Lvl 6)",
+    "results",
+    "WdJ4wAXBhlUlKuve",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.RTUp97xNDutzYpuY]{Chimera (Primal)} Acid",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Helper 2 - Group Encounter (Lvl 6)",
+    "results",
+    "JRwuZlRGCWjbCRkQ",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.RTUp97xNDutzYpuY]{Chimera (Primal)} Cold",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Helper 2 - Group Encounter (Lvl 6)",
+    "results",
+    "m1LV1nnnhOlcBG4R",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.RTUp97xNDutzYpuY]{Chimera (Primal)} Electricity",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Helper 2 - Group Encounter (Lvl 6)",
+    "results",
+    "l8BYWm2v8LE0i6e3",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.RTUp97xNDutzYpuY]{Chimera (Primal)} Fire",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Helper 2 - Group Encounter (Lvl 6)",
+    "results",
+    "d2gf4DuqTeorcmzW",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.RTUp97xNDutzYpuY]{Chimera (Primal)} Sonic",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Helper 2 - Group Encounter (Lvl 6)",
+    "results",
+    "uu8JihrOsrmJMoIV",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.RTUp97xNDutzYpuY]{Chimera (Primal)} Poison",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Moriggna x Neolithid Battle",
+    "results",
+    "RE9NboLHLOjVrKKA",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "A stray blast of the neothelid’s acidic breath weapon sprays over the battlefield; everyone takes @Damage[8d6[acid]] damage with a @Check[dc:33|basic:true|type:reflex] save.",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Moriggna x Neolithid Battle",
+    "results",
+    "gph0PwDqhAaj6hou",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "The neothelid’s telepathy brushes the minds of the party with whispers of the unfathomable. The voidgluttons are immune, but the party makes @Check[dc:28|type:will] Save. The heroes become @UUID[Compendium.pf2e.conditionitems.dfCMdR4wnpbYNTix]{Stunned 1} on a <b>failure</b>, and @UUID[Compendium.pf2e.conditionitems.yblD8fOR1J8rDwEQ]{Confused} for 1 round on a <b>critical failure</b>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Moriggna x Neolithid Battle",
+    "results",
+    "DKnxrAaNzBKUroTQ",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "A wave of positive energy originating from the morrigna washes over the battlefield. The voidgluttons are immune, but the heroes are healed for @Damage[4d8[healing,vitality,magical]].",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Moriggna x Neolithid Battle",
+    "results",
+    "FaJbZE3MERY8CX9V",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "Skittering spirit spiders and strands of webbing from the morrigna’s wrappings have drifted over to clutter up the battlefield. Everyone must attempt a @Check[dc:28|type:reflex] save, take @UUID[Compendium.pf2e.spell-effects.I4PsUAaYSUJ8pwKC]{-10 penalty to all speeds} for 1 round on <b>failure</b>, being instead @UUID[Compendium.pf2e.conditionitems.eIcWbB5o3pP6OIMe]{Immobilized} for 1 round  on a <b>critical failure</b>.",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Moriggna x Neolithid Battle",
+    "results",
+    "D2lyBoH3pLAQHRux",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "The neothelid briefly loses control, spreading horrifying apocalyptic visions in psychic flashes through the battlefield. The voidgluttons are immune, but the party must roll a @Check[dc:33|type:will|traits:mental,illusion] save. This has the effect of the @UUID[Compendium.pf2e.spells-srd.0XP2XOxT9VSiXFDr]{Phantasmal Calamity} spell, except that it deals only @Damage[8d6[mental,illusion]] damage and cannot stun a target for more than one round.<hr />@Embed[Compendium.pf2e.spells-srd.0XP2XOxT9VSiXFDr]",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Moriggna x Neolithid Battle",
+    "results",
+    "nagxRAkFnpKdGAUv",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "The morrigna briefly gains the upper hand in a dramatic fashion, inspiring the heroes with the thought of this powerful extraplanar ally fighting at their side against the forces of evil. The party gains the effect of @UUID[Compendium.pf2e.spells-srd.Item.IAjvwqgiDr3qGYxY]{Courageous Anthem} for one round.<br />@UUID[Compendium.pf2e.spell-effects.Item.beReeFroAx24hj83]{Spell Effect: Courageous Anthem}",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Moriggna x Neolithid Battle",
+    "results",
+    "2gdGmkAI4Kec8E3v",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "The nosoi is out of its league, but still trying to be helpful. If any of the voidgluttons are invisible, the nosoi will take the @UUID[Compendium.pf2e.actionspf2e.sn2hIy1iIJX9Vpgj]{Point Out} action, rendering them hidden instead of undetected.",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Expanded",
+    "tables",
+    "Moriggna x Neolithid Battle",
+    "results",
+    "7f4EM1LG9gTt8sjs",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<span data-visibility=\"gm\">Nothing of note. (Though you should still describe the conflict in epic fashion.)</span>",
+   "current": null
+  }
+ ]
+}

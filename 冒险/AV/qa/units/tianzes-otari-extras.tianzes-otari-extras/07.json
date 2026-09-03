@@ -1,0 +1,986 @@
+{
+ "pack": "tianzes-otari-extras.tianzes-otari-extras",
+ "unit": "07",
+ "leaves": 71,
+ "chars": 24520,
+ "styles": {
+  "prose": 71
+ },
+ "convention": {
+  "bilingual": "中文 English - one ASCII space, no parentheses",
+  "prose": "pure Chinese; keep every @X[...] / [[...]] bracket byte-identical, translate only the {label} tail; keep HTML tags and their order"
+ },
+ "items": [
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Sea Boggard Warrior",
+    "publicNotes"
+   ],
+   "style": "prose",
+   "field": "publicNotes",
+   "en": "<p>This variant of Boggard dwells in sea caves and abandoned structures near the ocean shore. They have adapted their abilities to seawater and sandy shores rather than swamp water and swamp terrain.</p>\n<p>Otherwise, they remain identical to their swampy cousins.</p>\n<hr />\n<p>Boggard warriors exalt single combat and prefer to fight alone so that no one can contest their kills. They have been known to pursue enemies who flee combat with a single-mindedness that seems almost supernatural.</p>\n<hr />\n<p>Boggards are aggressive humanoid amphibians who thrive in swamps, marshes, and even some rain forests. Boggards hatch from eggs into tadpoles, fiercely competing for food and even consuming their siblings in that struggle. Over 3 years, the surviving boggards develop arms, legs, and lungs while learning the rudiments of hunting, crafts, and warfare—everything needed to survive in their might-makes-right society. At the top of most boggard hierarchies lords a hulking swampseer imbued with sinister divine magic.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Sea Boggard Warrior",
+    "privateNotes"
+   ],
+   "style": "prose",
+   "field": "privateNotes",
+   "en": "<p>This Bogggard Scout originally appeared in the Monster Core.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Sea Boggard Warrior",
+    "blurb"
+   ],
+   "style": "prose",
+   "field": "blurb",
+   "en": "Variant Boggard Warrior",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Sea Boggard Warrior",
+    "items",
+    "Sandy Passage",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>A boggard warrior ignores difficult terrain caused by sandy terrain features.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Sea Boggard Warrior",
+    "items",
+    "Terrifying Croak",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>The boggard scout unleashes a terrifying croak. Any non-boggard within @Template[type:emanation|distance:30]{30 feet} becomes @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 1} unless they succeed at a @Check[type:will|dc:18] save; those who critically succeed are temporarily immune for 1 minute.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Sea Boggard Warrior",
+    "items",
+    "Tongue Grab",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>If the boggard scout hits a creature with their tongue, that creature becomes @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed} by the boggard. Unlike with a normal Grab, the creature isn't @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized}, but it can't move beyond the reach of the boggard's tongue. A creature can sever the tongue by hitting AC 15 and dealing at least 3 slashing damage. Though this doesn't deal any damage to the boggard, it prevents them from using their tongue Strike until they regrow their tongue, which takes a week.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Sea Boggard Warrior",
+    "items",
+    "Turtleshell Leather Armor",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Boggard Armor is made from the shells of turtules. The armor consists of a breastplate made from the shells of small turtles sewn onto a leather jerkin, with pauldrons, braciers and greaves made from a single larger shell.</p>\n<p>It is equivalent to studded leather armor, but is worth more due to its unusual materials and construction.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Spike Launcher",
+    "disable"
+   ],
+   "style": "prose",
+   "field": "disable",
+   "en": "<p>@Check[type:thievery|dc:16|name:Disable Launcher|traits:mechanical,trap] to disable one of the four launchers or @Check[type:acrobatics|dc:12|name:Avoid Trip Line|traits:mechanical,trap] to step over a trip line (this doesn't disarm the trap, but avoids triggering it)</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Spike Launcher",
+    "hazarddescription"
+   ],
+   "style": "prose",
+   "field": "hazarddescription",
+   "en": "<p>A jagged spike of metal shoots from a hidden launcher.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Spike Launcher",
+    "items",
+    "BFiMEADLB2Qw0lL1",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p><strong>Trigger</strong> A creature crosses one of the trip lines</p>\n<hr />\n<p><strong>Effect</strong> A spike launches along the trip line's path against the triggering creature, making a ranged Strike.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Tami",
+    "hazarddescription"
+   ],
+   "style": "prose",
+   "field": "hazarddescription",
+   "en": "<h2>Fishery Sundries</h2>\n                <p>Tami is the niece of Tamily. She is only fourteen years old, but is a very competent merchant. </p>\n                <p>For serval hours every morning, Tamily joins her at the stall.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Tami",
+    "items",
+    "Shell Necklace",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>This shell necklace rests between the collarbones and consists of one palm-sized shell surrounded by a variety of smaller ones. </p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Tami",
+    "items",
+    "Shark's Teeth Necklace",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>This shell necklace rests between the collarbones and consists of one thumb-length shark tooth surrounded by a variety of smaller ones. </p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Tami",
+    "items",
+    "Food - Shellfish Skewer",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Bits and pieces of shellfish, potatoes and peppers on a skewer.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Tami",
+    "items",
+    "Food - Fried Shellfish Pockets",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Ground shellfish, potatoes and peppers, tucked into dough and fried till golden brown.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Tami",
+    "items",
+    "Food - Fried Shellfish Pieces",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>10 tenders of shellfish, breaded and fried.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Valeros (Level 2)",
+    "items",
+    "Skilled Human (Intimidation)",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Your ingenuity allows you to train in a wide variety of skills. You become trained in one skill of your choice. At 5th level, you become an expert in the chosen skill.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Valeros (Level 2)",
+    "items",
+    "Assurance (Athletics)",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Even in the worst circumstances, you can perform basic tasks. Choose a skill you're trained in. You can forgo rolling a skill check for that skill to instead receive a result of 10 + your proficiency bonus (do not apply any other bonuses, penalties, or modifiers).</p>\n<hr />\n<p><strong>Special</strong> You can select this feat multiple times. Each time, choose a different skill and gain the benefits for that skill.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Yinyasmira",
+    "blurb"
+   ],
+   "style": "prose",
+   "field": "blurb",
+   "en": "Human Female Smuggler",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Yinyasmira",
+    "items",
+    "Surprise Attack",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>You act before foes can react. On the first round of combat, if you roll Deception or Stealth for initiative, creatures that haven't acted are @Compendium[pf2e.conditionitems.AJh5ex99aV6VTggg]{Off-Guard} to you.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Zeek",
+    "hazarddescription"
+   ],
+   "style": "prose",
+   "field": "hazarddescription",
+   "en": "<h2>Crow's Elixirs</h2>\n                <p>Zeek is a good-looking young man who is assistant and apprentice to Magiloy the alchemist. He has an intriguing burn scar on his neck. </p>\n                <p>He enjoys selling their less-expensive wares at the market.</p>\n                <p>He is an indifferent alchemist, and is far more interested in the art of brewing, but Magaloy is insisting he learn alchemy as well as brewing. </p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Zeek",
+    "items",
+    "Lady's Blessing Oil",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p><strong>Activate</strong> @UUID[Compendium.pf2e.actionspf2e.Item.MHLuKy4nQO2Z4Am1]{Administer First Aid}</p>\n<hr />\n<p>Lady's blessing oil is favored by Pharasmin healers who ease the transitions of life. You can Activate the item as part of the same activity you use to Administer First Aid to stabilize a creature. If you use lady's blessing oil, the DC of the check to Administer First Aid is reduced to the creature's recovery roll DC, rather than 5 + the recovery roll DC. However, if you roll a failure on the check, you get a critical failure instead.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Drink - Glass of Bubbly Wine",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>An effervescent, clear wine, such as champaign. The beverage of choice for celebrations and major life events.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Drink - Glass of Wine",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>For those who prefer a finer drink, or for special occasions.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Drink - Mug of Agnar",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>A hot, non-alcoholic beverage that will perk you right up. For more kick, try adding a shot of your favorite brew, or even whisky.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Drink - Mug of Ale",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>The earliest type of beer, and a favorite of taverns, everywhere.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Drink - Mug of Beer",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>A lager, either light or dark, more expensive than ale.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Drink - Mug of Fresh Milk",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Milk, fresh from a local cow.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Drink - Mug of Fruit Cider",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Mug of a non-alcoholic fruit drink, safe for children and nondrinkers, or those who choose not to imbibe before noon.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Drink - Mug of Mead",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>An alcoholic beverage made from honey; more expensive than either mead or beer.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Drink - Shot of Whisky",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>The good stuff, served by the shot. Beware; shot glasses sizes vary.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Beef Skewer",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Bits and pieces of pork, potatoes and peppers on a skewer.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Beef Stew",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Hot and savory beef and veggie stew, from a pot that is always bubbling on the stove.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Bread",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Fresh and fragrant bread, from today's daily batch.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Cheese Wedge",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Wedge of cheese, sliced fresh from the round.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Chicken Skewer",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Bits and pieces of chicken, potatoes and peppers on a skewer.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Chicken Soup",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Hot and savory chicken and veggie soup, from a pot that is always bubbling on the stove.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Egg",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>One egg, prepared according to the house specialty.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Fresh Fruit",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>This is a single serving common fruit that is in-season for the area.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Fresh Vegetables",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>This is a single serving common fruit that is in-season for the area.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Fried Beef Pockets",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Ground meat, potatoes and peppers, tucked into dough and fried till golden brown.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Fried Chicken Pieces",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>10 tenders of dark or white chicken, breaded and fried.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Fried Meat Pockets",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Ground meat, potatoes and peppers, tucked into dough and fried till golden brown.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Fried Potato Slices",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Basket of crisps of fried potatoes, lightly salted.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Fried Poultry Pockets",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Ground poultry, potatoes and peppers, tucked into dough and fried till golden brown.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Fried Shellfish Pieces",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>10 tenders of shellfish, breaded and fried.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Fried Shellfish Pockets",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Ground shellfish, potatoes and peppers, tucked into dough and fried till golden brown.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Full Meal",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>This is a filling meal that include a meat portion, a vegetable or fruit, a cheese wedge, a hunk of bread, and a mug of agnar.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Shellfish Skewer",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Bits and pieces of shellfish, potatoes and peppers on a skewer.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Shellfish Stew",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Hot and savory shellfish and veggie stew, from a pot that is always bubbling on the stove.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Vegetable Stew",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Hot and savory veggie soup, from a pot that is always bubbling on the stove.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Service - Bathing",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Includes one private hot bath, with towels and soap, in a hip bath.</p>\n<p>Half price for used bathwater , or unheated water.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Service - Mulling",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>This additional service is simply to heat your drink of choice to the perfect temperature.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Service - Private Room - Double Bed",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>The is the rate for a room with a single double bed. Maximum two people and two small pets.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Service - Private Room - Single Bed",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>This is the rate per bed, for a room with two single beds. Maximum two people and two small pets.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Service - Shared Room Bed",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Most shared rooms - or flophouse rooms - have a four or more beds per room. This is the rate per bed per night. Pets extra.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Service - Stabling",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Includes harnessing and unharnessing, thorough combing, feeding, and stabling for one night.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Shark's Teeth Necklace",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>This shell necklace rests between the collarbones and consists of one thumb-length shark tooth surrounded by a variety of smaller ones. </p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Shell Necklace",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>This shell necklace rests between the collarbones and consists of one palm-sized shell surrounded by a variety of smaller ones. </p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Turtleshell Armor",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Boggard Armor is made from the shells of turtules. The armor consists of a breastplate made from the shells of small turtles lashed together, with pauldrons, braciers and greaves made from a single larger shell.</p>\n<p>It is equivalent to leather armor, but is worth more due to its unusual materials and construction.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Turtleshell Studded Armor",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p>Boggard Armor is made from the shells of turtules. The armor consists of a breastplate made from the shells of small turtles sewn onto a leather jerkin, with pauldrons, braciers and greaves made from a single larger shell.</p>\n<p>It is equivalent to studded leather armor, but is worth more due to its unusual materials and construction.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Also Crisp and Fresh",
+    "pages",
+    "Also Crisp and Fresh",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>This stall is owned by Jala Highstepper.</p>\n<p>Dori was sent by her father, the mayor, to apprentice with Jala Highstepper. She has been glum at the prospect, but reluctantly obeys.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "An Invitation to the Osprey Club",
+    "pages",
+    "Introduction",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<img src=\"modules/tianzes-otari-extras/Assets/Vignettes/Osprey-Club-Cover.jpg\" /><p><em>Image courtesy of Bing Image Creator.</em></p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "An Invitation to the Osprey Club",
+    "pages",
+    "Membership in the Osprey Club",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>At this point, the hero is a member of the Guild. What they do with this membership, and how the guild conducts its operation, is up to the individual gamemaster and player. The everyday running of the guild, and all its bylaws, is beyond the scope of this adventure.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "An Invitation to the Osprey Club",
+    "pages",
+    "Prescreening",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p><span style=\"font-family:Signika, sans-serif\">Before being offered a chance to join, members of the Osprey Club will conduct a number of clandestine checks to determine 1) if a suspected thief is actually a thief and 2) if they think the thief will be able to bring anything useful to the guild.They are alert for the following:</span></p><ol><li style=\"box-sizing:border-box;user-select:text\"><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px\"><span style=\"font-family:Signika, sans-serif\"><strong style=\"box-sizing:border-box;user-select:text\">Armor</strong> - is their armor quiet? If not, do they move quietly anyway?</span></p></li><li style=\"box-sizing:border-box;user-select:text\"><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px\"><span style=\"font-family:Signika, sans-serif\"><strong style=\"box-sizing:border-box;user-select:text\">Weapons</strong> - do most of them have the finesse or agile traits?</span></p></li><li style=\"box-sizing:border-box;user-select:text\"><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px\"><span style=\"font-family:Signika, sans-serif\"><strong style=\"box-sizing:border-box;user-select:text\">Movement</strong> - does the thief's dexterity appear to have at least a +2 bonus?</span></p></li><li style=\"box-sizing:border-box;user-select:text\"><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px\"><span style=\"font-family:Signika, sans-serif\"><strong style=\"box-sizing:border-box;user-select:text\">Demeanor</strong> - does the thief seem overly selfish, greedy or treacherous?</span></p><ul style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px;padding:0px 0px 0px 1.5em\"><li style=\"box-sizing:border-box;user-select:text\"><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px\"><span style=\"font-family:Signika, sans-serif\">Note: thieves are expected to have some of these qualities, but they will weed anyone who who seems so self-serving that they would not effectively work in a group.</span></p></li></ul></li><li><span style=\"font-family:Signika, sans-serif\">Once a prospective thief has passed all these tests, a member thief will attempt to engage them in conversation by asking innocuous questions about their goals in town and what they do for a living. While doing so, the member will attempt to pickpocket the prospective, going for either a consumable or a knife.Check: </span><span data-visibility=\"gm\" style=\"box-sizing:border-box;user-select:text;background:var(--visibility-gm-bg);border-radius:1px;display:inline-block;line-height:1em;outline:rgba(75, 74, 68, 0.5) dotted 1px;padding:var(--space-1)\"><span style=\"font-family:Signika, sans-serif\"><a class=\"inline-check with-repost\" data-pf2-repost-flavor=\"thievery\" data-pf2-show-dc=\"gm\" data-pf2-label=\"thievery DC\" data-pf2-check=\"thievery\" data-pf2-dc=\"20\" style=\"box-sizing:border-box;user-select:text;cursor:pointer;background:var(--inline-link-bg);border-radius:2px;border:1px solid var(--color-border-dark-tertiary);color:var(--color-text-dark-primary);line-height:1.6em;padding-top:;padding-right:0px;padding-bottom:;padding-left:;white-space:nowrap;word-break:break-all\">DC 20</a></span></span><span style=\"font-family:Signika, sans-serif\"><a class=\"inline-check with-repost\" data-pf2-repost-flavor=\"thievery\" data-pf2-show-dc=\"gm\" data-pf2-label=\"thievery DC\" data-pf2-check=\"thievery\" data-pf2-dc=\"20\" style=\"box-sizing:border-box;user-select:text;cursor:pointer;background:var(--inline-link-bg);border-radius:2px;border:1px solid var(--color-border-dark-tertiary);color:var(--color-text-dark-primary);line-height:1.6em;padding-top:;padding-right:0px;padding-bottom:;padding-left:;white-space:nowrap;word-break:break-all\"> Thievery</a> to catch onto the theft. If caught, the thief will say \"Very good,\" and hand the item back. Otherwise, the thief will say, \"You dropped something,\" and hand the item back. The real test, however, is in how the prospective reacts to this obvious theft.</span></li><li style=\"box-sizing:border-box;user-select:text\"><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px\"><span style=\"font-family:Signika, sans-serif\">If the prospective is outraged or indignant, or wanting to call a constable, the thief will offer a 5 gp bribe to forget about it. If they insist on calling the law, entry into the Osprey Club is closed for good.</span></p></li><li style=\"box-sizing:border-box;user-select:text\"><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px\"><span style=\"font-family:Signika, sans-serif\">If violent, the thief will back off and offer a 5 gp bribe to forget about it. If they persist in violence, the other thieves will make their presence known, and the prospective will be thrown out and told never to return.</span></p></li><li style=\"box-sizing:border-box;user-select:text\"><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px\"><span style=\"font-family:Signika, sans-serif\">If the prospective seems intrigued, or settles down after some initial outrage, then the thief will ask for a private conversation.</span></p></li><li><span style=\"font-family:Signika, sans-serif\">In the private conversation, the prospective will be offered a chance to join \"our little club\" where they can get jobs and special discounts, but only if they can be loyal and agree to a series of challenges.If the prospective agrees, they will need to wait for Yinyasmira to break away in order to conduct Challenge 1.</span></li></ol>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "An Invitation to the Osprey Club",
+    "pages",
+    "Challenge 1 - Yinyasmira",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>The first challenge is to talk to Yinyasmira. She conduct her interview while fishing at one of the open hatches, where the sound of the rushing waters below will mask the conversation.</p><p>She will ask if they understand why Yinyasmira selected this spot for their conversation.</p><p>She will ask probing questions about the prospective's Rogue's Racket, their purpose with their group, and the group's purpose in town.</p><p>There is no right or wrong answer to any of her questions. She is trying to determine if the prospective is likely to cause trouble for the group, and if the prospective is too evil or greedy to follow instructions and work well within a group.</p><h3>Yinyasmira</h3><p>CN female human smuggler 5<br />Perception DC 22, Will DC 20.<br />Skills: Avoid Notice, Balance, Conceal an Object, Create a Diversion - Trick, Create Forgery, Disable Device, Escape, Feint, Gather Information, Lie, Palm an Object, Sense Motive, Steal</p><p>@UUID[Actor.ui5mbNv2CuZxmkdO]{Yinyasmira}</p><h3>Challenge Passing Standard</h3><p>The prospective passed if Yinyasmira says they passed. And that is it. She has turned many skilled thieves away, including Carmen Rajani (who is nevertheless a frequent patron of the tavern).</p><p>The prospective can only progress onto challenge 2 or 3 if they pass this initial challenge.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "An Invitation to the Osprey Club",
+    "pages",
+    "Challenge 2 - Skills",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>The challenges begin at midnight, after Crook's Nook closes and all the patrons have left.</p><p>This is a test of thievery, dexterity and stealth in a time crunch. This test should be conducted in Encounter mode.</p><ul><li><p><strong>First Round</strong> - Open the Lock</p><ul><li><p>the prospective must open a poor lock on one of the hatches:</p><ul><li><p>Two successful @Check[type:thievery|dc:15] checks to open (1 action each). The members will keep track of the number of attempts the prospective must make.</p></li></ul></li></ul></li><li><p><strong>Next Two Rounds</strong> - Hide and Seek</p><ul><li><p> At the beginning of this round, two members (Acrobats, see below) will bolt for opposite sides of the Underbridge, where they will attempt to find where the prospective hides in the steps below.</p></li><li><p>The thieves will arrive from opposite ends of the underbridge at the end of round 3.</p></li><li><p>the prospective must open the hatch (1 action) and jump down the hatch while swinging over to land on the boardwalk below (1 action).</p><ul><li><p>One successful @Check[type:dexterity|dc:20] check</p></li><li><p>At least one successful @Check[type:hide|dc:20] checks before the thieves arrive.</p></li></ul></li></ul></li><li><p><strong>Last Round</strong>, the prospective must remain hidden from the acrobats until found by both acrobats or until a time limit is called.</p><ul><li><p>Three successful @Check[type:stealth|dc:20] checks against the DCs of each acrobat. They do not work together.</p></li></ul></li></ul><h3>Opponents</h3><p>2 @UUID[Compendium.pf2e.npc-gallery.Actor.Tj03FbN4SSr0o953]{Acrobats}</p><h3>Challenge Passing Standard</h3><p>The minimum acceptable standards are:</p><ul><li><p>In Step 1, the lock is opened in at least 3 actions.</p></li><li><p>In Step 2, the prospective makes it onto the boardwalk.</p></li><li><p>In Step 3, the prospective manages to stay hidden from at least one of the acrobats through at least one seek action.</p></li></ul>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "An Invitation to the Osprey Club",
+    "pages",
+    "Challenge 3 - Treachery Test",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>The last challenge is thiefly combat. While in the area under the bridge, the prospective will be partnered with one member against two other members, while being observed by Yinyasmira and the rest of the club members.</p><p>The point of this exercise is not to see if the thief excels in combat, although judging combat skill is certainly part of it. The point of the thiefly combat challenge is to assess how well the prospective works with another as a team, how well they respond to frustration, and to assess their capacity for treachery.</p><p>As Guildmaster, Yinyasmera has had to put up with all manner of treachery, and she would rather not accept anyone that she judges as treacherous.</p><p>Therefore, the prospective will deliberately be set against someone who is more powerful than they are, and who will harass and frustrate the prospective as much as possible to see how they respond to frustration.</p><h3>Ally</h3><p>2 @UUID[Compendium.pf2e.npc-gallery.Actor.Tj03FbN4SSr0o953]{Acrobats}</p><h3>Opponents</h3><p>2 @UUID[Compendium.pf2e.npc-gallery.Actor.Tj03FbN4SSr0o953]{Acrobats}</p><p>1 @UUID[Compendium.pf2e.npc-gallery.Actor.B09JfuBZHjcRXztU]{Burglar}</p><h3>Challenge Passing Standard</h3><p>Each of the members watching the battle will rate the prospective's overall performance on a simple 1 - 5 scale. A rating of 3 or greater by at least 5 out of 8 members is considered passing.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "An Invitation to the Osprey Club",
+    "pages",
+    "Conclusion",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>The prospective has already passed Yinyasmira's challenge, so anyone who shows minimal competence and was not judged as treacherous is accepted into the guild on these terms:</p><p><strong>Apprentice Member</strong> - the prospective fought honorably and passed Yinyasmira's challenge, but failed the other challenges. The prospective is paired up with a mentor and asked to improve their skills. They do not have access to the guildhall or the shop, and are forbidden to practice their skills within town without their mentor present.</p><p><strong>Journeyman Member</strong> - the prospective fought honorably and passed at least one additional challenge. The prospective is paired up with a mentor and asked to improve their skills. They have access to the guildhall, but not the shop, and may practice their skills in town, on outsiders only, without their mentor present.</p><p><strong>Member</strong> - the prospective fought honorably and passed all challenges. They have full access to the guildhall and shop. They may practice their skills in town, with extreme descretion. Outsiders are preferred targets.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Brelda's Bakery",
+    "pages",
+    "Brelda's Bakery",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>When Brelda's son disappeard, her good friend and fellow dwarven matron Drarda offered to run her market stall while Brelda runs her son's inn.</p>\n<p>Drarda is the widow of Trusk Hanely, the former Captain of the Guard. She fetches Brelda's baked goods every morning and is usually sold out in time for lunch. She is quite happy running the market stall, as helping Brelda has helped her reconcile herself with the loss of her husband.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Changelog",
+    "pages",
+    "Changelog",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<h2>Version 2.1.1</h2><ul><li><p>Fixed image path issue that re-introduced an old folder case issue that came back to haunt me. Fixed several actor images and one journal image.</p></li></ul><h2>Version 2.1</h2><ul><li><p>Cleaned up some of the merchant actors that were configured as Item Piles, and which may have resulted in zero pricing.</p></li><li><p>Added a roletable for Weapons and Armor.</p></li><li><p>Repopulated several of the merchant actor inventories.</p></li><li><p>Removed some actors that no longer had token art, and that should have been removed last time.</p></li></ul><h2>Version 2.0</h2><ul><li><p>Updated to version 13.</p></li><li><p>Added a scene region to most maps for light control.</p></li><li><p>Replaced all portrait art except for merchants. Used new portraits as both portrait and token images.</p></li><li><p>Activated token rings for all tokens except merchants.</p></li><li><p>Moved some out-of-place tiles and tokens.</p></li><li><p>Tested all macros and ensure token and item compatibility with version 13 and the latest Pathfinder system version.</p></li></ul><h2>Version 1.3</h2><ul><li><p>Added merchant actors for prominant Otari shops.</p></li><li><p>Updated macros to work with v12.</p></li><li><p>Replaced landing page.</p></li><li><p>Separated Shop Journals and Shop Rolltables into separate journals.</p></li></ul><h2>Version 1.2</h2><ul><li><p>Added this changelog journal.</p></li><li><p>Renamed all folders (too much Tianze before - sorry).</p></li><li><p>Added new versions of all shops using <strong>Monk's Enhanced Journal</strong>. I placed them in a separate compendium folder in case you do not use MEJ. Thanks to <a href=\"https://github.com/Issacar13\">Issacar13</a> for the suggestion.</p></li><li><p>Added rolltables to support most of the shops. This is useful for both MEJ and <strong>Item Piles</strong> merchants. The only ones I excluded had small inventories.</p></li><li><p>Tweaked some merchant actor inventories.</p></li><li><p>Fixed incorrect global illumination setting on several scenes.</p></li><li><p>Added a \"Merchant Items\" in the items folder for a few custom items.</p></li><li><p>Added Fish Camp Base:</p><ul><li><p>1 new scene</p></li><li><p>3 new creature actors, 1 new loot actor</p></li><li><p>2 new items</p></li><li><p>2 new journals, including a new encounter</p></li></ul></li><li><p>Replaced Leveled Iconics with remastered versions.</p></li><li><p>Replaced a survial check with a swimming check so it is in line with PF2E rules (Issue #9 - hat tip <a href=\"https://github.com/ChasarooniZ\">ChasarooniZ</a>).</p></li></ul>",
+   "current": null
+  }
+ ]
+}

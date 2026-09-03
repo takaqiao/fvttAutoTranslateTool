@@ -1,0 +1,571 @@
+{
+ "pack": "tianzes-otari-extras.tianzes-otari-shops",
+ "unit": "01",
+ "leaves": 45,
+ "chars": 6055,
+ "styles": {
+  "bilingual": 30,
+  "prose": 15
+ },
+ "convention": {
+  "bilingual": "中文 English - one ASCII space, no parentheses",
+  "prose": "pure Chinese; keep every @X[...] / [[...]] bracket byte-identical, translate only the {label} tail; keep HTML tags and their order"
+ },
+ "items": [
+  {
+   "path": [
+    "entries",
+    "Also Crisp and Fresh",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Also Crisp and Fresh",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Also Crisp and Fresh",
+    "pages",
+    "Also Crisp and Fresh",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Also Crisp and Fresh",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Brelda's Bakery",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Brelda's Bakery",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Brelda's Bakery",
+    "pages",
+    "Brelda's Bakery",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Brelda's Bakery",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Clodia's Clothery",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Clodia's Clothery",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Clodia's Clothery",
+    "pages",
+    "Clodia's Clothery",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Clodia's Clothery",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Crisp and Fresh",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Crisp and Fresh",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Crisp and Fresh",
+    "pages",
+    "Crisp and Fresh",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Crisp and Fresh",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Crook's Nook",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Crook's Nook",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Crook's Nook",
+    "pages",
+    "Crook's Nook",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Crook's Nook",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Crow's Casks",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Crow's Casks",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Crow's Casks",
+    "pages",
+    "Crow's Casks",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Crow's Casks",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Crow's Elixirs",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Crow's Elixirs",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Crow's Elixirs",
+    "pages",
+    "Crow's Elixirs",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Crow's Elixirs",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Dawnflower Library Store",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Dawnflower Library Store",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Dawnflower Library Store",
+    "pages",
+    "Dawnflower Library Store",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Dawnflower Library Store",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Fishery Sundries",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Fishery Sundries",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Fishery Sundries",
+    "pages",
+    "Fishery Sundries",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Fishery Sundries",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Hunk's Hunks of Meat",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Hunk's Hunks of Meat",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Hunk's Hunks of Meat",
+    "pages",
+    "Hunk's Hunks of Meat",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Hunk's Hunks of Meat",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Lathenar's Pots",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Lathenar's Pots",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Lathenar's Pots",
+    "pages",
+    "Lathenar's Pots",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Lathenar's Pots",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Lathenar's Shop",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Lathenar's Shop",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Lathenar's Shop",
+    "pages",
+    "Lathenar's Shop",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Lathenar's Shop",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Magical Sundries",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Magical Sundries",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Magical Sundries",
+    "pages",
+    "Magical Sundries",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Magical Sundries",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Osprey Club Store",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Osprey Club Store",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Osprey Club Store",
+    "pages",
+    "Osprey Club Store",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Osprey Club Store",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Rowdy Rockfish Inn and Tavern",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Rowdy Rockfish Inn and Tavern",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Rowdy Rockfish Inn and Tavern",
+    "pages",
+    "Rowdy Rockfish Inn and Tavern",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Rowdy Rockfish Inn and Tavern",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Also Crisp and Fresh",
+    "pages",
+    "Also Crisp and Fresh",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>This stall is owned by Jala Highstepper.</p>\n<p>Dori was sent by her father, the mayor, to apprentice with Jala Highstepper. She has been glum at the prospect, but reluctantly obeys.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Brelda's Bakery",
+    "pages",
+    "Brelda's Bakery",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>When Brelda's son disappeard, her good friend and fellow dwarven matron Drarda offered to run her market stall while Brelda runs her son's inn.</p>\n<p>Drarda is the widow of Trusk Hanely, the former Captain of the Guard. She fetches Brelda's baked goods every morning and is usually sold out in time for lunch. She is quite happy running the market stall, as helping Brelda has helped her reconcile herself with the loss of her husband.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Clodia's Clothery",
+    "pages",
+    "Clodia's Clothery",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Clodia is a clothier with a perpetual squint from a lifetime of up-close work. Her thick and expensive glasses no longer really help.</p>\n<p>She carries clothing in a variety of sizes for small and medium creatures, and can make alternations to fit.</p>\n<p>Clodia is a true artist, even if she has humble means. She loves nothing more to see someone beautifully clothed in her work.</p>\n<p>She opens her shop at noon, so she can take advantage of the morning light for her work.</p>\n<p><em><strong>Note</strong>: I added weights to the associated roll table to limit how often certain armors and clothing appears.</em></p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Crisp and Fresh",
+    "pages",
+    "Crisp and Fresh",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Jala Highstepper leads the Farmer's Guild, and always has a basket of things to sell. </p>\n<p>She does not open until late in the morning, and sells until midafternoon, before teatime.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Crook's Nook",
+    "pages",
+    "Crook's Nook",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Crooks Nook is a popular tavern offering brews, meals and fishing.</p>\n<p>Patrons can either bring their own fishing rods, or use one of the rods on the rack between the fireplaces.</p>\n<p>Yinyasmera will buy fresh fish, but only one bulk at a time, assuming each fish weighs one light. She will pay one silver piece per bulk.</p>\n<p>Agnar is an alcohol-free, stimulating hot beverage.</p>\n<p>Mulling is a service to heat any drink.</p>\n<p>The following are reflected in the list of items.</p>\n<ul>\n<li>2 rooms with double beds</li>\n<li>8 rooms with single beds</li>\n<li>floproom with 10 single beds</li>\n</ul>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Crow's Casks",
+    "pages",
+    "Crow's Casks",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Crow's Casks sells ale, mead, and medieval junk food. It never, under any circumstances, sells any poultry.</p>\n<p>It also has several tables devoted to card games.</p>\n<p>Magiloy will buy limited alchemical items, but only if it fits in with her current stock.</p>\n<p>Agnar is an alcohol-free, stimulating hot beverage.</p>\n<p>Mulling is a service to heat any drink.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Crow's Elixirs",
+    "pages",
+    "Crow's Elixirs",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Zeek is a good-looking young man who is assistant and apprentice to Magiloy the alchemist. He has an intriguing burn scar on his neck. </p>\n<p>He enjoys selling their less-expensive wares at the market.</p>\n<p>He is an indifferent alchemist, and is far more interested in the art of brewing, but Magaloy is insisting he learn alchemy as well as brewing. </p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Dawnflower Library Store",
+    "pages",
+    "Dawnflower Library Store",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>The Library sells items and weapons, but will only purchase items that would fit in with their usual stock.</p>\n<p>They absolutely will not purchase any item that they perceive as evil. They will urge the heroes to leave any such items with them for disposal.</p>\n<p>They will cast spells, such as for disease curing and curse removals, for the same cost it would be to make a scroll for the same spell.</p>\n<p>If, as part of a curse removal, a hero needs to be rid of a cursed item, they accept such items for disposal free of charge, but may ask for a quest to facilitate any difficult-to-destroy items.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Fishery Sundries",
+    "pages",
+    "Fishery Sundries",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Tami is the niece of Tamily. She is only fourteen years old, but is a very competent merchant. </p>\n<p>For serval hours every morning, Tamily joins her at the stall.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Hunk's Hunks of Meat",
+    "pages",
+    "Hunk's Hunks of Meat",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Hunk is Jala's younger brother. Together, they run their family farm and sell the output here on most days.</p>\n<p>Jala hates the name of his stall, but he gets a kick out of it. He loves it when patrons joke about it as well, and will give a discount for a good laugh.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Lathenar's Pots",
+    "pages",
+    "Lathenar's Pots",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Keeleno is the owner of the marketplace and the nearby general store, and also works as a potter. His is a widower who has never gotten over the loss of his late wife.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Lathenar's Shop",
+    "pages",
+    "Lathenar's Shop",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Leno is Keeleno's oldest child and heir, and he is in a partnership with is father for ownership of this shop.</p>\n<p>He has complete responsibility for and authority over the shop. He lives behind and above the shop with his wife, Debrann. The are expecting their first child.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Magical Sundries",
+    "pages",
+    "Magical Sundries",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Bethela is seventeen years old, and recently returned from magical studies in Absalom.</p>\n<p>Even though her family lives in town, she is accustomed to her independence and now rents a room from Alymora Inkleholtz.</p>\n<p>In the mornings, she sells magical items from Wrin's Wonders and Odd Stories, and in the afternoons she tutors the Inlkeholtz children.</p>\n<p>She is saving money to return to Absalom and open a magic item stall of her own.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Osprey Club Store",
+    "pages",
+    "Osprey Club Store",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>Yinyasmira's secret shop is only accessable to heroes who have earned her support, and who are also thieves.</p>\n<p>If such thieves join her Osprey Club, they enjoy a 10% discount.</p>\n<p>She will buy only items that interest her, and that seem of use to a thiefly type.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Rowdy Rockfish Inn and Tavern",
+    "pages",
+    "Rowdy Rockfish Inn and Tavern",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p>The Rowdy Rockfish is a quiet, full-serviced, comfortable inn.</p>\n<p>Brelda Venkervale runs this inn in the absense of her son, Lasda, who has been missing for many months.</p>\n<p>Agnar is an alcohol-free, stimulating hot beverage.</p>\n<p>Mulling is a service to heat any drink.</p>\n<p>The following are reflected in the list of items.</p>\n<ul>\n<li>2 rooms with double beds</li>\n<li>8 rooms with single beds</li>\n<li>8 horse stalls</li>\n<li>can accomodate 8 baths per night</li>\n</ul>\n<p> </p>",
+   "current": null
+  }
+ ]
+}

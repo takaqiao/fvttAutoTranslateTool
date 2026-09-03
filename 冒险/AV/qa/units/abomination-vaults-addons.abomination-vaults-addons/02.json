@@ -1,0 +1,121 @@
+{
+ "pack": "abomination-vaults-addons.abomination-vaults-addons",
+ "unit": "02",
+ "leaves": 8,
+ "chars": 11184,
+ "styles": {
+  "prose": 8
+ },
+ "convention": {
+  "bilingual": "中文 English - one ASCII space, no parentheses",
+  "prose": "pure Chinese; keep every @X[...] / [[...]] bracket byte-identical, translate only the {label} tail; keep HTML tags and their order"
+ },
+ "items": [
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Addons",
+    "items",
+    "Effect: Ysondkhelir's Control",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p><strong>One success</strong> Ysondkhelir's resistance to physical damage drops to 5. The south section of his window wall disappears.</p><p><strong>Two successes</strong> No more crawling hands can spawn. The north section of Ysondkhelir's window wall disappears.</p><p><strong>Three successes</strong> Ysondkhelir is no longer quickened. The remaining sections of his window wall disappear.</p><p><strong>Four successes</strong> Ysondkhelir loses his Attack of Opportunity and his resistance to physical damage. He also reverts to his normal size and loses 15 feet reach on melee strikes. Dorianna is temporarily free of his mental influence, though he will eventually reassert control if left alive.</p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Addons",
+    "items",
+    "Never Caught Unaware",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<p><strong>Trigger</strong> Belcorra roll initiative.</p><hr /><p>Belcorra has a contingency for everything. She casts a defensive spell, one that doesn't target or directly affect other non-willing creatures, on her spell list. </p>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Addons",
+    "items",
+    "Release Spirit",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<section><p>You call on one of the three deities below, exhorting that deity to allow the soul trapped in the implement to find a merciful release in death, permanently destroying the implement.</p><ul><li><p><strong>Pharasma</strong> To release this tortured soul from unnatural, life-prolonging torment and give them the dignity of death.</p></li><li><p><strong>Sarenrae</strong> To end the creature's suffering in this mortal life that it may find spiritual healing in the next one.</p></li><li><p><strong>Torag</strong> To give the tormented creature an honourable death, releasing them from the shame of being twisted to the will of another.</p></li></ul><p>If no attempt is made to Release Spirit within 1 minute of an attempted Send False Signal check, the harnessed spiritual energy dissipates and the Send False Signal check must be attempted again.</p><p><strong>Options</strong></p><ul><li><p>@Check[type:Religion|dc:31|showDC:all]{Occultism (Master)}</p></li><li><p>@Check[type:Religion|dc:30|showDC:all]{Religion (Master)}</p></li><li><p>@Check[type:Spirit-Lore|dc:28|showDC:all]{Spirit Lore (Master)}</p></li></ul></section>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Addons",
+    "items",
+    "Rouse Sentience",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<section><p>You must find a way to rouse the tattered shreds of sentience in this creature, providing a mild disruption in the implement that will allow you to discover how to disable it. Rousing the creature in this way lasts for 1 minute and causes the implement to become @UUID[Actor.8xX9yeGs7iCSoQ7m.Item.RpJ9AbFpL8ZWsJSX]{Slowed 1} for one round.</p><p><strong>Options</strong></p><ul><li><p>@Check[type:Medicine|dc:28|showDC:all]{Medicine (Expert)}</p></li><li><p>@Check[type:Society|dc:30|showDC:all]{Society (Master)}</p></li><li><p>@Check[type:Diplomacy|dc:31|showDC:all]{Diplomacy (Master)}</p></li></ul></section>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Addons",
+    "items",
+    "Send False Signal (Optional)",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<section><p><strong>Options</strong></p><ul><li><p>@Check[type:Arcana|dc:33|showDC:all]{Arcana (Master)}</p></li><li><p>@Check[type:Occultism|dc:30|showDC:all]{Occultism (Master)}</p></li><li><p>@Check[type:Spirit-Lore|dc:28|showDC:all]{Spirit Lore (Expert)}</p></li></ul><p><strong>Critical Success</strong> You harness residual spiritual energy in the area to create a false signal of operation in the implement for 2 hours.</p><p><strong>Success</strong> As critical success, except that the false signal lasts for 1 hour.</p><p><strong>Failure</strong> You fail to send the false signal. The implement's creator will become aware that it has been disabled within 10 minutes of the event, as normal.</p><p><strong>Critical Failure</strong> Your clumsiness in manipulating spiritual energy not only fails to send the false signal but produces an unwanted side effect. The implement's creator will become aware that it has been disabled within 1 minute of the event.</p></section>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Addons",
+    "items",
+    "Set Her Free",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<section class=\"statblock\"><p>Weaken Ysondkhelir's control on Dorianna with an appropriate skill check.</p><ul><li><p><strong>Range</strong> The PC attempting the check must be adjacent to either Dorianna or Ysondkhelir. Other characters may use the @UUID[Compendium.pf2e.actionspf2e.HCl3pzVefiv9ZKQW]{Aid} action to support a check but only if they are within 30 feet of Dorianna, Ysondkhelir, or the active PC (as appropriate for their action). A character cannot make a check or Aid if they are in a nightmare space.</p></li><li><p><strong>Critical success</strong> Two successes.</p></li><li><p><strong>Success</strong> One success.</p></li><li><p><strong>Failure</strong> No change.</p></li><li><p><strong>Critical failure</strong> The PC is @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{stupefied 1}.</p></li></ul><hr /><ul><li><p><strong>Arcana</strong> Use your knowledge of magic to weaken the spiritual link between Ysonkhelir and Dorianna.</p><ul><li><p>@Check[type:Arcana|dc:31|traits:arcane,mental,spirit]{Arcana (Very Hard)}</p></li></ul></li><li><p><strong>Diplomacy</strong> Give Dorianna the courage to fight her tormentor.</p><ul><li><p>@Check[type:Diplomacy|dc:28|traits:auditory,mental,spirit,visual|showDC:all]{Diplomacy (Hard)}</p></li></ul></li><li><p><strong>Intimidation</strong> Frighten the dream-catcher with threats of retribution.</p><ul><li><p>@Check[type:Intimidation|dc:31|traits:auditory,mental,spirit|showDC:all]{Intimidation (Very Hard)}</p></li></ul></li><li><p><strong>Medicine</strong> Tend to Dorianna's wounds to restore her strength.</p><ul><li><p>@Check[type:Medicine|dc:26|traits:manipulate,mental,spirit|showDC:all]{Medicine (Normal)}</p></li></ul></li><li><p><strong>Occultism</strong> Decipher the esoteric basis of Ysonkhelir's control over Dorianna.</p><ul><li><p>@Check[type:Occultism|dc:26|traits:mental,occult,spirit|showDC:all]{Occultism (Normal)}</p></li></ul></li><li><p><strong>Society</strong> Remind Dorianna of her family and friends and her connection to Otari.</p><ul><li><p>@Check[type:Society|dc:28|traits:auditory,mental,spirit|showDC:all]{Society (Hard)}</p></li></ul></li><li><p><strong>Spirit Lore</strong> Draw on your knowledge of the spiritual to bolster Dorianna in her fight against the dream-catcher.</p><ul><li><p>@Check[type:Spirit-Lore|dc:24|traits:mental,spirit|showDC:all]{Spirit Lore (Easy)}</p></li></ul></li></ul></section>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Addons",
+    "items",
+    "Study Implement",
+    "description"
+   ],
+   "style": "prose",
+   "field": "description",
+   "en": "<section><p>The design of this implement suggests that its creator will become aware if it is disabled within 10 minutes. To address that possibility, a PC can attempt the Send False Signal action before trying to disable the haunt.</p><p><strong>Options</strong></p><ul><li><p>@Check[type:Occultism|dc:30|showDC:all]{Occultism (Master)}</p></li><li><p>@Check[type:Spirit-Lore|dc:28|showDC:all]{Spirit Lore (Expert)}</p></li></ul></section>",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults: Addons",
+    "journals",
+    "Abomination Vaults: Addons",
+    "pages",
+    "H38. Murmur the Implement of Empty Death",
+    "text"
+   ],
+   "style": "prose",
+   "field": "text",
+   "en": "<p><em>This was created by user weepingminotaur</em></p><h2>Overview</h2><p>Murmur, the feebleminded Medusa, has been turned into an @UUID[Actor.aYaE9C8F2bjV7c2Q]{The Implement of Empty Death}. The implement currently resides in @UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.MFktSOxcOfKGkbb2]{H39} (replacing the nilith). Additionally Murmur herself is no longer stationed at @UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.pnTCbvQqpz0arkpz]{H38}.</p><p>Belcorra has taken some precautions to ensure that Murmur is neither found nor disabled. The sturdy stone door to @UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.MFktSOxcOfKGkbb2]{H39} is locked and trapped with the @UUID[Item.CyWfBIXA8CKVFMK4]{Nhimbaloth - Major Curse}. Spotting the curse requires a @Check[perception|dc:30|traits:secret] check. Disabling the curse requires either a [[/act disable-device dc=33]]{Disable a Device (expert)} check or a @Check[type:Occultism|dc:33|showDC:all]{Occultism (master)} check.</p><p>Opening the door requires either its key (which is carried by <strong>Caliddo</strong>), five successful [[/act pick-a-lock dc=35]]{Pick a Lock (expert)} checks, or a single @Check[type:Athletics|dc:40|showDC: all|traits:action:force-open]{Force Open (expert)} check.</p><p>While the Implement of the Empty Death hazard is active, a number of elements of the lower levels of the Gauntlight are more dangerous:</p><ul><li><p>Both the Eyes of the Ghost Queen (@UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.0EtecMBSYJDok7n7]{H02. Hall of Eyes}) and Grasp of the Ghost Queen (@UUID[JournalEntry.1vlzl3NJsftNB9Dc.JournalEntryPage.uWdCP78aS1lts5kr]{I64. Initiates' Chamber}) hazards reset after 1 minute if no creatures are in the area, even if they have been disabled.</p></li><li><p>The following creatures gain @UUID[Item.fPWpoxS7837pkegk]{regeneration 10 (vitality)}:</p><ul><li><p>Empty Death Bodaks (@UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.hD6CSfmfkrSopsaw]{H21. Ancients' Caves})</p></li><li><p>Dread Wisps (all locations)</p></li><li><p>Dread Wraith (@UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.Vwd8vMBerJCAoN4N]{H23. Shadowed Dock)}</p></li><li><p>Urthagul (@UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.f02YPQGkiBbZ0Ijt]{H12. Island Cavern})</p></li><li><p>Bright Walkers (@UUID[JournalEntry.1vlzl3NJsftNB9Dc.JournalEntryPage.iduGvMRKIN2B46hv]{I24. Strange Dead})</p></li></ul></li><li><p>Belcorra can project herself anywhere on floors H through J, not just in the Gauntlight footprint.</p></li></ul><h2>Design Considerations</h2><blockquote><p>I have no idea whether this modification will be to anyone's taste other than mine. I made it purely for the benefit of my own particular AV group. The emphasis on Spirit Lore, for example, allows my party's champion of Torag to play an important role in disabling the hazard, as is the option to call on Torag for the Release Spirit action. If no one in your group worships Torag, consider replacing him with Cayden Caelean, focusing on the freedom part of Cayden's portfolio to justify his involvement in the exhortation.</p><p>I was motivated to write this addition by my dissatisfaction with Murmur's use in AV. Some GMs may find Murmur (or the Ghost Queen hazards I have placed in H02 and I64) overpowered or overtuned, and fair play to you if you're in that group. Belcorra is the adventure's final boss, and I wanted to show evidence of her evil genius in the lower levels of the Gauntlight while also augmenting the Nhimbaloth horror vibe.</p><p>-weepingminotaur</p></blockquote><h2>Disabling the Haunt</h2><p>The party must perform three sequential checks to disable the haunt: Rouse Sentience, Study Implement, and Release Spirit. Reveal the Rouse Sentience description and options if the party succeeds on a Recall Knowledge (Occultism) check to find out the hazard's Disable conditions. On a <strong>success</strong> at Rouse Sentience, reveal the options for Study Implement. On a <strong>success</strong> at Study Implement, reveal its development, the Send False Signal block, and the full Release Spirit section.</p><p>If the PCs choose to leave the task unfinished and return to complete it later, they must perform the same three sequential checks, unless they already achieved success in Study Implement, in which case they only need to perform Rouse Sentience and Release Spirit.</p><hr /><p>@Embed[Item.Q5N7Px8ZVaocxC92]{Rouse Sentience}</p><hr /><p>@Embed[Item.aEZqJZBbCp3fJSV0]{Study Implement}</p><hr /><p>@Embed[Item.WFCyQ30Rj6DXwrxk]{Send False Signal (Optional)}</p><hr /><p>@Embed[Item.pkCt6MdQHmoPKHyV]{Release Spirit}</p><p></p>",
+   "current": null
+  }
+ ]
+}

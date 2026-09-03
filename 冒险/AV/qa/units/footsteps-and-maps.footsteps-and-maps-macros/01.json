@@ -1,0 +1,26 @@
+{
+ "pack": "footsteps-and-maps.footsteps-and-maps-macros",
+ "unit": "01",
+ "leaves": 1,
+ "chars": 22,
+ "styles": {
+  "bilingual": 1
+ },
+ "convention": {
+  "bilingual": "中文 English - one ASCII space, no parentheses",
+  "prose": "pure Chinese; keep every @X[...] / [[...]] bracket byte-identical, translate only the {label} tail; keep HTML tags and their order"
+ },
+ "items": [
+  {
+   "path": [
+    "entries",
+    "Open Footsteps Control",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Open Footsteps Control",
+   "current": null
+  }
+ ]
+}

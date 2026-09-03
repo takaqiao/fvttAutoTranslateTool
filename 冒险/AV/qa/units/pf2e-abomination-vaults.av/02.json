@@ -1,0 +1,1917 @@
+{
+ "pack": "pf2e-abomination-vaults.av",
+ "unit": "02",
+ "leaves": 121,
+ "chars": 1693,
+ "styles": {
+  "bilingual": 121
+ },
+ "convention": {
+  "bilingual": "中文 English - one ASCII space, no parentheses",
+  "prose": "pure Chinese; keep every @X[...] / [[...]] bracket byte-identical, translate only the {label} tail; keep HTML tags and their order"
+ },
+ "items": [
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D7 Chute",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "D7 Chute",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D17 Pipe",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "D17 Pipe",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D12 to E1",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "D12 to E1",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D16 to C33",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "D16 to C33",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D1 to C29",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "D1 to C29",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D5: Level 4 Portal Chamber",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "D5: Level 4 Portal Chamber",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D14 to C40",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "D14 to C40",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D14: Deep Water",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "D14: Deep Water",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D14: Set Elevation to 10",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "D14: Set Elevation to 10",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D14: Elevated Walkway",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "D14: Elevated Walkway",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D18: Shallow Water",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "D18: Shallow Water",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D9: Ribbon",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "D9: Ribbon",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D7 Chute",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D12 to E1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D16 to C33",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D1 to C29",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D14 to C40",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D14: Deep Water",
+    "behaviors",
+    "Modify Movement Cost",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Modify Movement Cost",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D14: Set Elevation to 10",
+    "behaviors",
+    "Execute Script",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Execute Script",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D14: Elevated Walkway",
+    "behaviors",
+    "Execute Script",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Execute Script",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D18: Shallow Water",
+    "behaviors",
+    "Difficult Terrain",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Difficult Terrain",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D3ZsHuxFbD9XJ8xm",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "D - Belcorra's Retreat",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D3ZsHuxFbD9XJ8xm",
+    "notes",
+    "To C33"
+   ],
+   "style": "bilingual",
+   "field": "To C33",
+   "en": "To C33",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D3ZsHuxFbD9XJ8xm",
+    "notes",
+    "To C40"
+   ],
+   "style": "bilingual",
+   "field": "To C40",
+   "en": "To C40",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D3ZsHuxFbD9XJ8xm",
+    "notes",
+    "To C29"
+   ],
+   "style": "bilingual",
+   "field": "To C29",
+   "en": "To C29",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D3ZsHuxFbD9XJ8xm",
+    "notes",
+    "To E01"
+   ],
+   "style": "bilingual",
+   "field": "To E01",
+   "en": "To E01",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E1 to F1",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "E1 to F1",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E2: Rusty Grate Pit (Fall to F2)",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "E2: Rusty Grate Pit (Fall to F2)",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E1 to D12",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "E1 to D12",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E12 to F4",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "E12 to F4",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E11 to F9",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "E11 to F9",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E7 to Smuggler's Refuge",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "E7 to Smuggler's Refuge",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E26 to F26",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "E26 to F26",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E8QblAL4osl0zyaE",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "E26 to F26",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E21 to F8",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "E21 to F8",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E25 to F9",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "E25 to F9",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E13 to F4",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "E13 to F4",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E19: Level 5 Portal Chamber",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "E19: Level 5 Portal Chamber",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E4: Shaft to F6",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "E4: Shaft to F6",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E9: Difficult Terrain",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "E9: Difficult Terrain",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E9 to F11",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "E9 to F11",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E15: Fungal Rot",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "E15: Fungal Rot",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E1 to F1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E2: Rusty Grate Pit (Fall to F2)",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E1 to D12",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E12 to F4",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E11 to F9",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E7 to Smuggler's Refuge",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E26 to F26",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E8QblAL4osl0zyaE",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E21 to F8",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E25 to F9",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E13 to F4",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E4: Shaft to F6",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E9: Difficult Terrain",
+    "behaviors",
+    "Difficult Terrain",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Difficult Terrain",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E9 to F11",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "notes",
+    "To E26"
+   ],
+   "style": "bilingual",
+   "field": "To E26",
+   "en": "To E26",
+   "current": "To E26"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F1 to G1",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "F1 to G1",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F1 to E1",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "F1 to E1",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F2: Collapsed Grate",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "F2: Collapsed Grate",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F10 to G12",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "F10 to G12",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F11 to E9",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "F11 to E9",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F9 to E25",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "F9 to E25",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F9 to E21",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "F9 to E21",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F26 to E26",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "F26 to E26",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "ZQEjQlzR4pIXeOaF",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "F26 to E26",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "roELNHXre97w44ni",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "F9 to E25",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "From E12",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "From E12",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "From E13",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "From E13",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F13: Level 6 Portal Chamber",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "F13: Level 6 Portal Chamber",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F6: Shaft from E4",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "F6: Shaft from E4",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F1 to G1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F1 to E1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F2: Collapsed Grate",
+    "behaviors",
+    "Difficult Terrain",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Difficult Terrain",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F10 to G12",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F11 to E9",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F9 to E21",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F26 to E26",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "ZQEjQlzR4pIXeOaF",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "roELNHXre97w44ni",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "notes",
+    "To H01"
+   ],
+   "style": "bilingual",
+   "field": "To H01",
+   "en": "To H01",
+   "current": "To H01"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "notes",
+    "To F01"
+   ],
+   "style": "bilingual",
+   "field": "To F01",
+   "en": "To F01",
+   "current": "To F01"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G12 to F10",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "G12 to F10",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G2: Level 7 Portal Chamber",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "G2: Level 7 Portal Chamber",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G3 to H17",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "G3 to H17",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G1 To F1",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "G1 To F1",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G1 to H1",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "G1 to H1",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G6: Zone of Truth",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "G6: Zone of Truth",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G7: Inhospitable Room",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "G7: Inhospitable Room",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G7: Pool of Magma",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "G7: Pool of Magma",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G11: Paralyzing Light Trap",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "G11: Paralyzing Light Trap",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G16: Painful Suggestion Trap",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "G16: Painful Suggestion Trap",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G17: Witchfire's Chamber",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "G17: Witchfire's Chamber",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G21: Tunnel to G17",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "G21: Tunnel to G17",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G17: Tunnel to G21",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "G17: Tunnel to G21",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G12 to F10",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G3 to H17",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G1 To F1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G1 to H1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G7: Pool of Magma",
+    "behaviors",
+    "Modify Movement Cost",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Modify Movement Cost",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G21: Tunnel to G17",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G17: Tunnel to G21",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H17 to G3",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "H17 to G3",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H33: Level 8 Portal Chamber",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "H33: Level 8 Portal Chamber",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H35 to I27",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "H35 to I27",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H41 to I1",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "H41 to I1",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H3 to I22",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "H3 to I22",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H1 to G1",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "H1 to G1",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "Obscure Weather",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Obscure Weather",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H20: Spike Growth",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "H20: Spike Growth",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H24: Deep Mud",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "H24: Deep Mud",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H37: Ribbon of Light",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "H37: Ribbon of Light",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H17 to G3",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H35 to I27",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H41 to I1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H3 to I22",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H1 to G1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Teleport Token",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "Obscure Weather",
+    "behaviors",
+    "Suppress Weather",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Suppress Weather",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H20: Spike Growth",
+    "behaviors",
+    "Difficult Terrain",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Difficult Terrain",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H20: Spike Growth",
+    "behaviors",
+    "Display Scrolling Text",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Display Scrolling Text",
+   "current": null
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H24: Deep Mud",
+    "behaviors",
+    "Difficult Terrain",
+    "name"
+   ],
+   "style": "bilingual",
+   "field": "name",
+   "en": "Difficult Terrain",
+   "current": null
+  }
+ ]
+}
