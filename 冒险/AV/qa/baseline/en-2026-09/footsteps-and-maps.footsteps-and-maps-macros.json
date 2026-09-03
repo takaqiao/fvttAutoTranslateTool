@@ -1,0 +1,9 @@
+{
+ "label": "Footsteps and Maps Macros",
+ "entries": {
+  "Open Footsteps Control": {
+   "name": "Open Footsteps Control",
+   "command": "game.modules.get('footsteps-and-maps')?.api?._openFootstepsController()"
+  }
+ }
+}

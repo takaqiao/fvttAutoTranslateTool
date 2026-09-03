@@ -1,0 +1,861 @@
+{
+ "label": "Abomination Vaults: Addons",
+ "entries": {
+  "Abomination Vaults: Addons": {
+   "name": "Abomination Vaults: Addons",
+   "description": "<img src=\"https://raw.githubusercontent.com/ChasarooniZ/chasarooniz.github.io/refs/heads/main/cats.png\" alt=\"Module Banner\" /><p>Welcome to the Abomination Vaults: Addons.</p><p></p><p>After importing this look at the <strong>Abomination Vaults: Addons</strong> document for more information on the module features.</p><p></p><p>You can support me (Chasarooni, the compile of most of these changes as well as the primary developer on the code/animations in this module) below</p><a href=\"https://ko-fi.com/X8X2YNZZR\" target=\"_blank\"><img src=\"https://storage.ko-fi.com/cdn/kofi6.png?v=6\" alt=\"Buy Me a Coffee at ko-fi.com\" height=\"36\" /></a>",
+   "caption": "Abomination Vaults - Addons Journals, Actors, etc.",
+   "journals": {
+    "Abomination Vaults: Addons": {
+     "name": "Abomination Vaults: Addons",
+     "pages": {
+      "Nhimbaloth Curses": {
+       "name": "Nhimbaloth Curses",
+       "text": "<p><em>Sourced from @weepingminotaur.</em></p><h2>Minor Curse - <em>The Wind, Her Voice</em></h2><p>@UUID[Item.ZCmQhpzHnxCmXylz]{Nhimbaloth - Minor Curse}<br /><em>Even the briefest of encounters with dread Nhimbaloth's presence is enough to affect the health of the unwary. This curse causes you to hear whispering voices, footsteps, and other odd noises during your next long rest. If left untreated, the loss of sleep starts to take a toll on your wellbeing.</em></p><ul><li><p><strong>Timeline</strong> Abomination Vaults floors A through C</p></li><li><p><strong>Suggested Triggers</strong> Contact with the shrine altar on floor A, or the first time a character moves into the ribbon of light in @JournalEntry[B: Servants' Quarters#B35. Gauntlight Basement]{B35} or @JournalEntry[C: Library#C15. Gauntlight Reading Room]{C15}</p></li></ul><h2>Moderate Curse - <em>The Wisp, Her Eye</em></h2><p>@UUID[Item.Xc13QNzVsZToAs7o]{Nhimbaloth - Moderate Curse}</p><p><em>The ongoing effect of investigating the machinations of Nhimbaloth and her servants moves from the realm of sleep to your waking moments. Ominous cracks in the fabric of reality appear before your eyes, fraying the edges of your sanity. You are no longer certain of who your friends are.</em></p><ul><li><p><strong>Timeline</strong> Abomination Vaults Book 2</p></li><li><p><strong>Trigger</strong> Any encounter with Belcorra, her most powerful servants, or areas consecrated to Nhimbaloth. In addition, the party and any other allies travelling with them are exposed to the curse at 7am and 7pm every day (to correspond with the 7 arms of Nhimbaloth).</p></li></ul><h2>Major Curse - <em>Your Lot, To Die</em></h2><p>@UUID[Item.CyWfBIXA8CKVFMK4]{Nhimbaloth - Major Curse}</p><p><em>So close to the unspeakable horror of Nhimbaloth's realm, you can no longer distinguish friend from foe, reason from madness, or even life from death.</em></p><ul><li><p><strong>Timeline</strong> Abomination Vaults Book 3</p></li><li><p><strong>Suggested Triggers</strong> Entering any area consecrated to Nhimbaloth, or during the initial @JournalEntry[Abomination Vaults#Belcorra Attacks]{Belcorra Attacks!} encounter. In addition, the party and any other allies travelling with them are exposed to the curse at 7am and 7pm every day (to correspond with the 7 arms of Nhimbaloth).</p></li></ul>"
+      },
+      "Table of Contents": {
+       "name": "Table of Contents",
+       "text": "<p>This module consists of misc changes and addons for <strong>Abomination Vaults</strong>. This in some ways is an amalgamation of advice and ideas created, as always pick and choose what to use in your games.</p><h2>Table of Contents</h2><ul><li><p><strong>Misc</strong></p><ul><li><p>@UUID[.IEochnYWMkLR8UNU]{Animations}</p></li><li><p>@UUID[.hOMUDNapQMRjV1kQ]{Nhimbaloth Curses}</p></li><li>@UUID[.YBMl3YcfpuQyWqea]{Craftable Items from Creatures}</li><li><p>@UUID[.r3dHY95N5ieG3U16]{Swarm of Will o' Wisp}</p></li><li><p>@UUID[.dJoTiJpOkVx9mJGD]{Helper Indicator Drawings}</p></li></ul></li><li><p><strong>Otari</strong></p><ul><li><p>@UUID[.jK0TK9fuzT5RDGFH]{Wrin's Wonders Exterior}</p></li><li><p>@UUID[.OrgJZPV2wlI3iX2g]{The Log Fume}</p></li></ul></li><li><p><strong>A. Gauntlight Ruins</strong></p><ul><li><p>@UUID[.yKJu9ptH7WHJZ8L1]{A7. Lore Through Tapestries}</p></li></ul></li><li><p><strong>E. Arena</strong></p><ul><li><p>@UUID[.WS5LyEaTKaiXxLvl]{E13. Belcorra's Reflection}</p></li></ul></li><li><p><strong>G. Prison</strong></p><ul><li><p>@UUID[JournalEntry.YNMkFijTGb36JbJi.JournalEntryPage.BHqj0KyG7qzPC5L2]{G. Prison Door Flame FX}</p></li><li><p>@UUID[.52X3NzrFQ7Kd0sX4]{G18. He Who Collects Hands}</p></li></ul></li><li><p><strong>I. Hunting Grounds</strong></p><ul><li><p>@UUID[.XSouJfqO8f0ptYya]{Yldaris Settlement Treatment}</p></li></ul></li><li><p><strong>J. Temple</strong></p><ul><li><p>@UUID[.gHUVbKpOvXV43UWQ]{J15. Lever Puzzle Implementation}</p></li><li>@UUID[.Hkl27s1LqzyTXdj0]{J20. Belcorra's Pet}</li><li><p>@UUID[JournalEntry.YNMkFijTGb36JbJi.JournalEntryPage.gZOh73c8ur7rq6gl]{Epilogue. Gauntlight's Revenge}</p><p></p></li></ul></li></ul>"
+      },
+      "Animations": {
+       "name": "Animations",
+       "text": "<h4>Misc</h4><ul><li><p>@UUID[Macro.iSNnAqaq5h73FSUN]{Title Card Animation} - Show the title card and plays a sound plus the legendary Ward E. Sexton reading the title aloud (of RE4 fame)</p></li></ul><ul><li><p>@UUID[Macro.l1nf3CAxWQpWtos6]{Belcorra Attacks} - Animation for @UUID[JournalEntry.3T1M395V6J75OsEp.JournalEntryPage.em5wJ44hCXP8mGGG]{Belcorra Attacks} that either makes Belcorra appear flying in from the side, or if you have Belcorra's token selected and hidden will run the animation on that Belcorra</p></li><li><p>@UUID[Macro.XoRI9jJBmsh26uQV]{Nhimbaloth's Presence} - Animation that covers the players' screens with tentacles to show Nhimbaloth's presence</p></li><li><p>@UUID[Macro.AA6MqMXNiSe1YgIr]{Nhimbaloth's Symbol} - Animation to display Nhimbaloth's symbol to indicate something Nhimbaloth Adjacent</p></li></ul><h4>Floor 4</h4><ul><li><p>@UUID[Macro.PkE3U7qHg7NBniJW]{Destroy the Barrier} - Animation of the Barrier being destroyed</p></li></ul><h4>Floor 10</h4><ul><li><p>@UUID[Macro.W1QOzaP485TKNJQi]{10 - Belcorra Death} - Animation of Nhimbaloth consuming Belcorra after the Party uses the Lenses on her</p></li><li><p>@UUID[Macro.3IWW7fvMRghHzikg]{10 - Gauntlight Collapses} - Animation for the Gauntlight Collapsing</p></li></ul>"
+      },
+      "J20. Belcorra's Pet": {
+       "name": "J20. Belcorra's Pet",
+       "text": "<p>Remember that giant dead cave worm in room @UUID[JournalEntry.uMZ0RiCcPSqsx1Nm.JournalEntryPage.8pbhSFgv71lvCz9M]{B35. Gauntlight Basement}.<br /><br />Well for the finale @UUID[Actor.wX2jNFncThTLvG9F]{Belcorra's Cave Worm} is back and ghostlier than ever, also rocking a cool new Fly Speed, and a cool animation see its <strong>Regurgitate</strong>.<br /><br />Use her pet cave worm to replace the <strong>Soul Feeders</strong> that originally accompany <strong>Belcorra</strong> in her final stand.</p>"
+      },
+      "The Log Fume": {
+       "name": "The Log Fume",
+       "text": "<p>Added the following maps to facilitate running perhaps a burning of the log fume. The intention is to be a tower further to the north where logs are loaded into the fume before they make it all the way down to <strong>The Giant's Wheel</strong>.<br /><br />The Down Hill scene provides a cool opportunity for you to have an encounter while riding on logs down the flume (I recommend looking at opportunities in <strong>AV:E's</strong> <strong>Consortium Conspiracy</strong> specifically @UUID[JournalEntry.2hfULzZn5NL03aDy.JournalEntryPage.EyBtkejRJ5WGQzxT]{The Loading Flume Fire}.</p><p></p><p>@UUID[Compendium.abomination-vaults-addons.abomination-vaults-addons-scenes.Scene.PPRhwtJVSjtgpGes]{Log Flume | Down Hill}</p><p>@UUID[Compendium.abomination-vaults-addons.abomination-vaults-addons-scenes.Scene.VSmG1Rmn9tARM2Xx]{Log Flume | Loading Tower}</p>"
+      },
+      "Swarm of Will o' Wisp": {
+       "name": "Swarm of Will o' Wisp",
+       "text": "<p>Added a @UUID[Actor.kNeQ2UqyyhrmyLp0]{Will-o'-Wisp Swarm}<br /></p><img src=\"modules/abomination-vaults-addons/assets/npc/will_o_wisp_swarm.avatar.webp\" width=\"250\" /><p><br /><em>(Statblock by @Blablablablitz)</em><br /><em>(art by @Chasarooni)</em></p>"
+      },
+      "J15. Lever Puzzle Implementation": {
+       "name": "J15. Lever Puzzle Implementation",
+       "text": "<p>Add a macro to add the Lever Puzzle mentioned in @UUID[JournalEntry.yn21bNM6kpV4xRol.JournalEntryPage.1Ov1191GpaTDBaAE]{J15. Deadly Swamp} <em>(credit to @darkim for much of the original implementation)</em></p><p></p><p>You'll need the <strong>Tagger</strong> and <strong>Monk's Active Tiles</strong> modules for this to function, but simply run the @UUID[Macro.btHyWcte8PX6Omgz]{J15. Add Lever Puzzle} macro, and Voila!<br /><br />To interact with the levers you'll need a selected token nearby, and then <strong>Right Click</strong> it.</p>"
+      },
+      "Helper Indicator Drawings": {
+       "name": "Helper Indicator Drawings",
+       "text": "<p>Add a macro to add little helper indicator drawings to parts of the maps that were unclear as well as adding in some height clarifications for certain height drop offs to see on the fly. These are all interface drawings only visible to the GM.<br />@UUID[Macro.sb4hhwJqMfJCjuAR]{Helper Drawing Setup Dialog}</p>"
+      },
+      "Epilogue. Gauntlight's Revenge": {
+       "name": "Epilogue. Gauntlight's Revenge",
+       "text": "<p>This is a pretty lengthy addition for the <strong>end</strong> of the Abomination Vaults adventure, involving one last set piece \"The Gauntlight\" rushing to attack the town one last time. The goal of this is to be one last set piece, and it takes place when the party is most likely drained of resource or at least low after the Belcorra fight.</p><p>(Setup macro to setup your @UUID[Scene.lQkXSdxvO9CRxohD]{Otari Map} for this Encounter @UUID[Macro.7g27xSMFTUSYiqHe]{Setup: Gauntlight's Revenge})</p><h2>The premise</h2><p>After the players have slain Belcorra banished her to be fed to her Ancient God and escaped the collapsing Gauntlight, there is left behind a large amount of latent necromantic energy from <strong>Nhimbaloth</strong>. As the party existed the Vaults, describe them seeing a ghostly glowing beam rise out of the hole where the tower was as 6 more rise to join it raising up the <strong>Gauntlight</strong>, support by 7 ghostly legs (think the Guardians from Zelda BoTW). The Gauntlight then begins (powered by this energy and vague desire to consume souls) rush its way towards the town of Otari.</p><h3>Handling Dead PCs</h3><p>After the party escapes the Gauntlight's collapse, and makes it back to the surface, you might have lost a PC or two along the way, if so, and you don't want to have those players sit out the following scene, I recommend giving those characters the @UUID[Compendium.pf2e.feats-srd.Item.52nzskpmUt9AjUf8]{Ghost Dedication}, and specifying that their spirit seems to have been temporary tied to this area due to where they were killed. (Similar to the Roseguard, also under similar implication that the servants of @UUID[Compendium.pf2e.deities.Item.QZD0u1jxwz0kj8uI]{Pharasma} will come to escort them beyond when their final task is done)</p><p></p><h2>The Chase</h2><p>The first element of this is a chase, IE the Gauntlight as it moves forward towards the town on its humungous Nhimbaloth empowered necromantic energy legs. While it is surprisingly more nimble than expected, it also lumbers slowly when it doesn't perceive a threat to conserve energy.</p><h3><strong>Chase Special Rules</strong></h3><p>The Chase will consist of 7 obstacles, each of which takes place over the long trek back to Otari.</p><p>In addition, the major element about this chase that is different from other chases, is that <em>failing to clear an objective does not mean the party falls behind</em>, they simply will not gain an opportunity to engage with and stop the tower (the <strong>Takedown phase</strong>) for that round. (If you wish for this to be a more difficult set piece, you can however I prefer to make sure the final set piece after along fight is something that my players can triumphantly engage with as a last Hurrah). But each round consists of a <strong>Chase</strong> <strong>phase</strong> and a <strong>Takedown</strong> <strong>phase</strong> (which will be explained below)</p><h3>All Your Friends are back</h3><p>This part generally relies on you having run the @UUID[JournalEntry.ZPTalN8eYZyKYfz0.JournalEntryPage.fKVTu0SPpNOMwRCJ]{Zarmavdian's Ritual} from <strong>Abomination Vaults: Expanded</strong>, if you chose not to run that for whatever reason and want this, perhaps have either Wrin have a premonition or see the Gauntlight's energy acting weird.</p><p>Either way, the @UUID[Compendium.pf2e.pathfinder-monster-core.Actor.5KstOkXabrOlZaKR]{nosoi} from the ritual has returned and brought friends. At the start of round 2, as a party member goes to either participate in the <strong>Chase</strong> phase or the <strong>Takedown</strong> phase, have a character whom the players have formed a bond or relationship with (or someone who would represent them if they say have people that serve them) show up to help!</p><p><strong>When do they show?</strong></p><ul><li><p>As a player starts their turn in the <strong>Chase phase</strong> make a @Check[flat|dc:11] on a success, any remaining NPC they have a bond with shows up during the <strong>Chase phase</strong>, on a failure they are delayed and show up in the <strong>Takedown</strong> <strong>phase</strong>.</p></li><li><p><em><strong>Note. </strong>Many NPCs may have a bond with multiple players, if that is the case they may show up for each player, however each NPC will only show once <strong>per player</strong>.</em></p></li></ul><p><strong>Helping Out</strong></p><ul><li><p><strong>Non Fighting NPCs</strong>. Some NPC clearly do not have combat prowess (such as say <strong>Brelda Venkervale</strong>), if she would come to assist your player instead narrate either some Sailor, Guard, or other Town NPC that was spurred to action by them insisting to help</p></li><li><p>@UUID[Item.E0OKIog3W01BhtAB]{Effect: The Bonds that Give us Strength}</p></li></ul><p><strong>Help Bonus.</strong> The NPC aids in your check giving you either an untyped bonus of:</p><ul><li><p><strong>+1</strong> - Something the NPC wouldn't really be proficient in (IE <strong>Carman</strong> in Religion)<br /><strong>+2</strong> - Something the NPC would be proficient in (IE <strong>Morliblint</strong> and Arcana)<br /><strong>+3</strong> - If you share an especially close bond with the NPC (their presence inspires you)</p></li></ul><h3>Chase Phase</h3><p>The Chase phase functions as a normal Chase, the party will have to clear an obstacle set before them. If the obstacle is cleared before other player's turns they may instead take their turn in the <strong>Chase Phase</strong> to participate in the <strong>Takedown phase</strong> (they still get their normal turn in the takedown phase so this effectively an extra turn).</p><h3>Chase Obstacles</h3><p>Each obstacle unless otherwise noted requires <span style=\"text-decoration:underline\"><strong><span style=\"text-decoration:underline\"># of players</span></strong><span style=\"text-decoration:underline\"> </span><strong><span style=\"text-decoration:underline\">- 1</span></strong></span> success to pass. (if you want to raise or lower the difficulty you can increase this count by 1 or lower by 1 respectively)</p><h4>Predator's Gaze</h4><p><em>Primal dread freezes your muscles as you feel an unseen horror watch over you</em></p><p>@Check[Occultism|dc:28] - Recognize the hunter's grip over your mind and deduct you way out of it</p><p>@Check[Will|dc:30] - Fight against the fear</p><p>@Check[Performance|dc:28] - Rally your allies</p><h4>Sucking Mire</h4><p><em>The bog below your feet impedes your progress, as you feel ghostly hands grasp to pull you under</em></p><p>@Check[Athletics|dc:30] - Fight against the pull</p><p>@Check[Acrobatics|dc:28] - Jump around over nearby debris</p><p>@Check[Arcana|dc:28] - Disrupt the ghostly pulling</p><p>@UUID[Compendium.pf2e.spells-srd.Item.b5sGjGlBf58f8jn0]{Air Walk} or equivalent expenditure results in an instant critical success (if it is a free ability count as an instant normal success)</p><h4>Swarm of Wisps</h4><p><em>Hundreds of glowing orbs descend upon you from the Gauntlight like a mass of angry hornets</em></p><p>@Check[Occultism|dc:30] - Identify weak points in the swarm's formation</p><p>@Check[Religion|dc:28] - Wards them off with holy power</p><p>@Check[Athletics|dc:28] - Force your way through the mass of wisps</p><h4>Mangled Forest</h4><p><em>A mangled array of twisted trees lay across the ground, with a glowing moss beginning to grow upon the wreckage</em></p><p>@Check[Nature|dc:30] - Use your knowledge of nature to find a way to traverse the trees avoiding the moss</p><p>@Check[survival|dc:28] - Forge a path across the trees using your canniness</p><p>@Check[Acrobatics|dc:28] - Move your way through the trees using your reflexes</p><h4>Haunted Fog</h4><p><em>The fog stirs with the spirits of dead warriors, reenacting their final moments of a long dead battlefield</em></p><p>@Check[Performance|dc:30] - Act or Dance your way through the battlefield in time to the fog warriors</p><p>@Check[Intimidation|dc:30] - Assert your presence causing your ghostly foes to avoid you</p><p>@Check[Deception|dc:29] - Trick your ghostly foes into believing you are on their side</p><p>@Check[Society|dc:28] - Recall knowledge of the battle that took place here and use it to navigate the battlefield</p><h4>Soul Trapping Puddles</h4><p><em>Pools of water begin to form each flowing with spirits, as the sight of them pulls you towards them as they attack at you</em></p><p>@Check[Religion|dc:30] - Exorcise spirits as you travel</p><p>@Check[Diplomacy|dc:30] - Calm the spirits as your travel</p><p>@Check[Occultism|dc:30] - Follow the flow of necromatic energy to weave through</p><p>@Check[tealthS|dc:28] - Skulk through the area avoiding being attacked</p><h4>Necrotic Bloom</h4><p><em>The moss has begun to spread over the trees, covering the area in a memory stealing mist</em></p><p>@Check[Survival|dc:30] - Locate the quickest path through</p><p>@Check[Medicine|dc:30] - Find a quick counteracting agent to prevent the effects</p><p>@Check[Crafting|dc:28] - Neutralize the mist using alchemical Catalysts<br /></p><h3>Takedown Phase</h3><p>During the takedown phase there are 2 two targets, <strong>the Legs</strong> and <strong>the Lenses</strong> (which float above the lighthouse). These both use the <strong>Victory Point</strong> system</p><h4>The Legs</h4><p>To take out the legs (and stop the tower from moving for a round, before it regrows its legs).</p><p><em><strong>Note:</strong> You can click on the effect on the <strong>Gauntlight's Revenge</strong> token to toggle down the amount of legs visually</em></p><p><strong>7 Victory Points </strong>(1 for each leg)</p><ul><li><p><strong>3</strong> <strong>VP Threshold</strong> (slowed down, lower the number of Chase Points needed by 1)</p></li></ul><p><span style=\"text-decoration:underline\"><span style=\"text-decoration:underline\">Relevant Checks</span></span></p><ul><li><p>Attack rolls <strong>DC 32</strong></p></li><li><p>@Check[athletics|dc:30] - To attack a leg</p></li><li><p>@Check[occultism|dc:28], @Check[arcana|dc:30], @Check[religion|dc:30], @Check[nature|dc:30] - Use knowledge of magic to disable it</p></li></ul><h4>The Lenses</h4><p>To remove a lens from the area they float at above the Gauntlight, When all the lenses are removed or destroyed the encounter ends with the Gauntlight falling over onto the ground.</p><p><em><strong>Note.</strong> A character can attempt to climb the tower as a part of their action @Check[athletics|dc:30]</em></p><p><em><br /><strong>8 Victory Points</strong> (2 for each lens)</em></p><ul><li><p><em><strong>6 VP Threshold</strong> </em>(Lower the DC of all <strong>Chase Phase</strong> checks by 1)</p></li><li><p><em><strong>4 VP Threshold</strong> </em>(Lower the DC of all <strong>Chase Phase</strong> checks by 2</p></li><li><p><em><strong>2 VP Threshold</strong> </em>(Lower the DC of all <strong>Chase Phase</strong> checks by 3)</p></li></ul><p><span style=\"text-decoration:underline\"><span style=\"text-decoration:underline\">Relevant Checks</span></span></p><ul><li><p>Ranged Attack rolls <strong>DC 32</strong></p></li><li><p>Melee Attack rolls <strong>DC 31</strong></p></li><li><p>@Check[athletics|dc:30], @Check[thievery|dc:30]</p></li><li><p>@Check[occultism|dc:28], @Check[arcana|dc:30], @Check[religion|dc:30], @Check[nature|dc:30] (within 5 ft)</p></li><li><p></p></li></ul><p></p>"
+      },
+      "E13. Belcorra's Reflection": {
+       "name": "E13. Belcorra's Reflection",
+       "text": "<p><strong>Modifies </strong>@UUID[JournalEntry.JT0zCcIwsSpKnbB5.JournalEntryPage.72MOBw46cojkIGrb]{E13. Gladiator Readiness Room}</p><p>Remove the mimic encounter from this room, and instead replace it with a mirror in the room (note not to read the part in the room description about the mimic). The mirror is the following haunt</p><p>@UUID[Actor.emEX7UJahRAIdKPv]{Ghost Queen's Reflection}</p>"
+      },
+      "A7. Lore Through Tapestries": {
+       "name": "A7. Lore Through Tapestries",
+       "text": "<p><em>This was created by user Tight-Branch8678</em></p><hr /><h2>Finding them</h2><p>In the dining room as described there are a number of tapestries that are described as rotten and moldy. This addon seeks to use the option to restore them as a way to pass on information about some of the keep lore, as such they tell the story of Belcorra's life up to the completion of the Gauntlight.<br /><br />There are 7 in total, corresponding to Nhimbaloth's favored number 7. Also of note this retcons <strong>Caliddo's</strong> connection to <strong>Belcorra</strong> from distant relative, to a first cousin.</p><h3>Restoration</h3><p>Inform players that these tapestries can be restored, either through someone who has specialization with canvas (<strong>Morliblint</strong>) or if a PC has a relevant skill (IE @UUID[Compendium.pf2e.feats-srd.Item.QLeMH5mQgh28sa5o]{Specialty Crafting}: Artistry etc.). Regardless of the chosen method only one tapestry can be restored per day (having Morliblint do it would give the party a reason to return to Otari often, he does not charge for it but perhaps consider requiring them to be in his good graces first)</p><h2>The Seven Tapestries</h2><h3><strong>1. Birth</strong></h3><p><span style=\"font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif\"><em>Trigger Warning: </em></span><span class=\"inner\" aria-hidden=\"false\" style=\"opacity:1;transition:opacity 1s ease-out;margin-right:-0.25rem\"><span style=\"font-family:inherit\"><em>Human Sacrifice and Cannibalism</em></span></span></p><p class=\" box-text narrative\">This tapestry depicts Belcorra as a babe in the arms of her mother. She does not weep, and instead looks into the stars through the ceiling. There is a prominent constellation of seven stars. The midwife and doctor lay dead on the ground, each with seven perfectly spaced incisions in the shape of a circle on their chests. Blood pools around the bed from other bodies in the periphery.</p><h3><strong>2. Human Sacrifice</strong></h3><p><span style=\"font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', sans-serif\"><em>Begin by saying that this tapestry depicts human sacrifice and cannibalism. Ask if they want more details below.</em></span></p><p class=\" box-text narrative\">The tapestry depicts Belcorra as a toddler in a damp, moss-covered cavern. Coils of light (flicker wisps) light the interior. She stands watching several unfortunate souls who are being sacrificed/devoured while still alive. The Haruvexs' each are tormenting an individual; one forced to read <em>The Whispering Reeds</em>. Their face becoming stretched beyond comprehension, with their spirit splitting from their body, another impaled by a rod with seven points, and the last consumed by wild-eyed men and women.</p><h3><strong>3. Exile</strong></h3><p class=\" box-text narrative\">The tapestry depicts a family sailing away from land. Their faces range from sorrow to anger and disdain. A young girl is the center of the tapestry— she is the only one making eye contact with the viewer. There appears to be a dark ring about her head.</p><p>This tapestry shows the Haruvexs' exile from their home in Absalom.</p><p>A @Check[religion|dc:12] check indicates that the dark ring is a halo and represents a strong connection to divine entities. A <strong>critical success</strong> reveals that this halo represents a connection to a dark and evil deity.</p><h3><strong>4. Death and Poverty</strong></h3><p class=\" box-text narrative\">The tapestry depicts Belcorra as a 17 year old. She is dressed in rags, but has a regal and defiant face. Surrounding Belcorra, her relatives lie in squalor and emaciated. She has her eyes on the horizon while everyone else has eyes only for the dirt beneath them. One other relative, wearing plate armor, looks to Belcorra with a look of loyalty. He appears as undead.</p><h3><strong>5. Visions from Nhimbaloth</strong></h3><p><em>Trigger Warning: Animal Sacrifice and Cruelty</em></p><p class=\" box-text narrative\">The tapestry depicts Belcorra at 17 in winter apparel standing above a wild-eyed grizzly bear in the snow. A salmon tail is seen protruding from his mouth. The bear's entrails have splilled out from a massive wound in his belly. Fog escapes from the beast nostrils, indicating that he still lives. Belcorra is consuming a bit of the bear's flesh and looking at the blood of the beast pooling on the snowy ground. Within the pool of blood, Belcorra sees a vision of serpentfolk in a deep cavern constructing a shrine. Carved at the front of the shrine is a massive skull with moss jutting from the jaw. Beside this is another pool of blood with a vision of Belcorra building Gauntlight.periphery.</p><h3><strong>6. Return to Kortos</strong></h3><p class=\" box-text narrative\">This tapestry depicts Belcorra at 17, sailing towards an island. The coastline is that of Otari before it had been settled. Cliffs and trees cover the island. Aboard the ship is an undead man clad in heavy armor.</p><h3><strong>7. Gauntlight Built</strong></h3><p class=\" box-text narrative\">This tapestry shows the completion of Gauntlight being built. It glows with baleful light. Belcorra stands beside a drow man with his back facing the viewer, he has long silver hair. Beside him is a whirling ball of light and energy with floating eyes and tendrils each ending in 7 fingers. Standing near Belcorra is an undead clad in heavy armor. An enormous worm-like creature on dozens of legs stands next to the undead. It has an alchemical toolbelt around its body. Last is a red bodied man with large horns.</p><p>Volluk, the Voidglutton, Caliddo Harruvex, Jafaki, and Urevian are the figures standing around Belcorra.</p>"
+      },
+      "G18. He Who Collects Hands": {
+       "name": "G18. He Who Collects Hands",
+       "text": "<p><em>This was created by user weepingminotaur</em></p><hr /><p>In this modification, Ysondkhelir fights the party in a dreamscape, allowing him more room to maneuver than in the tiny war room on floor G. Combat can trigger either when the party tries to open the door to G18, or after RP in Dorianna's chamber in town, as you prefer.</p><p>Ysondkhelir, in this dream sequence, is feeding on Dorianna's psychic energy, which makes him considerably more powerful than written in AV. The party will want to sever his link to Dorianna as soon as they can, using the Set Her Free activity below. Once his link is broken, he becomes far less powerful.</p><p>@UUID[Actor.sqaoZDUyrwFmj8to]{Ysondkhelir, Nightmare Addict}</p><h3><span class=\"action-glyph\">2</span> Set Her Free</h3><section class=\"traits\"><p>Mental</p><p>spirit</p></section><hr /><section class=\"statblock\"><p>Weaken Ysondkhelir's control on Dorianna with an appropriate skill check. A total of four successful checks are required to break control and set Dorianna free. Each skill can only be successfully used once. All checks are based on Ysondkhelir's level with the standard adjustments for difficulty.</p><ul><li><p><strong>Range</strong> The PC attempting the check must be adjacent to either Dorianna or Ysondkhelir. Other characters may use the @UUID[Compendium.pf2e.actionspf2e.HCl3pzVefiv9ZKQW]{Aid} action to support a check but only if they are within 30 feet of Dorianna, Ysondkhelir, or the active PC (as appropriate for their action). A character cannot make a check or Aid if they are in a nightmare space.</p></li><li><p><strong>Critical success</strong> Two successes.</p></li><li><p><strong>Success</strong> One success.</p></li><li><p><strong>Failure</strong> No change.</p></li><li><p><strong>Critical failure</strong> The PC is @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{stupefied 1}.</p></li></ul><hr /><ul><li><p><strong>Arcana</strong> Use your knowledge of magic to weaken the spiritual link between Ysonkhelir and Dorianna.</p><ul><li><p>@Check[type:Arcana|dc:31|traits:arcane,mental,spirit]{Arcana (Very Hard)}</p></li></ul></li><li><p><strong>Diplomacy</strong> Give Dorianna the courage to fight her tormentor.</p><ul><li><p>@Check[type:Diplomacy|dc:28|traits:auditory,mental,spirit,visual|showDC:all]{Diplomacy (Hard)}</p></li></ul></li><li><p><strong>Intimidation</strong> Frighten the dream-catcher with threats of retribution.</p><ul><li><p>@Check[type:Intimidation|dc:31|traits:auditory,mental,spirit|showDC:all]{Intimidation (Very Hard)}</p></li></ul></li><li><p><strong>Medicine</strong> Tend to Dorianna's wounds to restore her strength.</p><ul><li><p>@Check[type:Medicine|dc:26|traits:manipulate,mental,spirit|showDC:all]{Medicine (Normal)}</p></li></ul></li><li><p><strong>Occultism</strong> Decipher the esoteric basis of Ysonkhelir's control over Dorianna.</p><ul><li><p>@Check[type:Occultism|dc:26|traits:mental,occult,spirit|showDC:all]{Occultism (Normal)}</p></li></ul></li><li><p><strong>Society</strong> Remind Dorianna of her family and friends and her connection to Otari.</p><ul><li><p>@Check[type:Society|dc:28|traits:auditory,mental,spirit|showDC:all]{Society (Hard)}</p></li></ul></li><li><p><strong>Spirit Lore</strong> Draw on your knowledge of the spiritual to bolster Dorianna in her fight against the dream-catcher.</p><ul><li><p>@Check[type:Spirit-Lore|dc:24|traits:mental,spirit|showDC:all]{Spirit Lore (Easy)}</p></li></ul></li></ul><hr /><ul><li><p><strong>One success</strong> Ysondkhelir's resistance to physical damage drops to 5. The south section of his window wall disappears.</p></li><li><p><strong>Two successes</strong> No more crawling hands can spawn. The north section of Ysondkhelir's window wall disappears.</p></li><li><p><strong>Three successes</strong> Ysondkhelir is no longer quickened. The remaining sections of his window wall disappear.</p></li><li><p><strong>Four successes</strong> Ysondkhelir loses his Attack of Opportunity and his resistance to physical damage. He also reverts to his normal size and loses 15 feet reach on melee strikes. Dorianna is temporarily free of his mental influence, though he will eventually reassert control if left alive.</p></li></ul></section><h1>Exiting the Dreamspace</h1><p>Killing Ysondkhelir permanently sets Dorianna free and brings the party out of the dreamscape.</p><h2>Agony In Every Breath</h2><section class=\"statblock\"><p>A PC who attempts to exit the dreamscape by the southern stairs can do so, but only after making a @Check[type:will|dc:26|showDC:all]{basic Will save} and take @Damage[(2d10+9)[spirit,mental]], Ysondkhelir is healed for the same amount of damage.</p></section>"
+      },
+      "Craftable Items from Creatures": {
+       "name": "Craftable Items from Creatures",
+       "text": "<p></p><table><tbody><tr><td><p><strong>Creature</strong></p></td><td><p><strong>Level</strong></p></td><td><p><strong>Item</strong></p></td></tr><tr><td><p>@UUID[Actor.LHHgGSs0ELCR4CYK]{Ghoul}</p></td><td><p>3</p></td><td><p>@UUID[Compendium.pf2e.equipment-srd.VOmOhm3Rc3VUkIu0]{Ghoul Stiletto}</p></td></tr><tr><td><p>@UUID[Actor.irrXrWxJ0LYSUCQB]{Ravirex}</p></td><td><p>6</p></td><td><p>@UUID[Compendium.pf2e.equipment-srd.4jZqYIyouoK7xe8u]{Dragonscale Staff}</p></td></tr><tr><td><p></p></td><td><p>9</p></td><td><p>@UUID[Compendium.pf2e.equipment-srd.Q8BscHUFiM1a86PO]{Dragonslayer's Shield}</p></td></tr><tr><td><p></p></td><td><p>13</p></td><td><p>@UUID[Compendium.pf2e.equipment-srd.Blo642O1qsgsvYEB]{Dragontooth Leiomano}</p></td></tr><tr><td><p>@UUID[Actor.RiKjpztTt7tZbOeo]{Hydra}</p></td><td><p>7</p></td><td><p>@UUID[Compendium.pf2e.equipment-srd.oHVCB96LOYobSQ0I]{Splithead Bow}</p></td></tr><tr><td><p></p></td><td><p>9</p></td><td><p>@UUID[Compendium.pf2e.equipment-srd.ssS1yEAZwZun8yFw]{Growth Gun}</p></td></tr><tr><td><p>@UUID[Actor.nEOvW0LBt9vFETUp]{Goliath Spider}</p></td><td><p>6</p></td><td><p>@UUID[Compendium.pf2e.equipment-srd.70H54rIRjO9fJkdt]{Spider Gun}</p></td></tr><tr><td><p></p></td><td><p>9</p></td><td><p>@UUID[Compendium.pf2e.equipment-srd.NIyJqiW1Wci6gP9m]{Arachnid Harness (Greater)}</p></td></tr><tr><td><p>@UUID[Actor.fxYMucI5b2IUoBpw]{Shuln}</p></td><td><p>12</p></td><td><p>@UUID[Compendium.pf2e.equipment-srd.MBd6Fr0jk4XpUc4l]{Shuln Fang Katar}</p></td></tr><tr><td><p>@UUID[Actor.FHfrIJCdKTzy2rrR]{Cauthooj}</p></td><td><p>13</p></td><td><p>@UUID[Compendium.pf2e.equipment-srd.C7LDHqjqxpmhn8QY]{Cauthooj Bagpipes}</p></td></tr><tr><td><p>@UUID[Actor.mlifDVJJWwjFtUxv]{Murmur} (if you're evil)</p></td><td><p>13</p></td><td><p>@UUID[Compendium.pf2e.equipment-srd.nzQKwdUxzmmwWtzT]{Medusa's Scream}</p></td></tr></tbody></table>"
+      },
+      "Wrin's Wonders Exterior": {
+       "name": "Wrin's Wonders Exterior",
+       "caption": "Wrin's Wonders Exterior (@morlockhater) a round tower with elven wooden mechanical winches affixed to the side, allowing the canvas rooftop to open up to expose the night's sky as described in the book.",
+       "src": "modules/abomination-vaults-addons/assets/maps/morlockhater/wrins_wonders_exterior.webp"
+      },
+      "Misc": {
+       "name": "Misc",
+       "text": "<p>Misc Items without a Specific Floor</p>"
+      },
+      "J. Temple": {
+       "name": "J. Temple"
+      },
+      "Otari": {
+       "name": "Otari"
+      },
+      "E. Arena": {
+       "name": "E. Arena"
+      },
+      "A. Gauntlight Ruins": {
+       "name": "A. Gauntlight Ruins"
+      },
+      "G. Prison": {
+       "name": "G. Prison"
+      },
+      "G. Prison Door Flame FX": {
+       "name": "G. Prison Door Flame FX",
+       "text": "<p>In this module's settings there is a setting which when enabled (assuming you have <code>Sequencer</code> and <code>JB2a</code> installed will play a little flame effect when each door is opened/closed on the prison level as described in the floor description.</p><p>@UUID[JournalEntry.OyNcqrpRClyhr8BJ.JournalEntryPage.8V5lwumIxcPPnYMP]{Chapter 7: Soul Keepers}</p>"
+      },
+      "I. Hunting Grounds": {
+       "name": "I. Hunting Grounds",
+       "text": "<p></p>"
+      },
+      "Yldaris Settlement Treatment": {
+       "name": "Yldaris Settlement Treatment",
+       "text": "<p><em>It never sat right to me that in the Abomination Vaults book Yldaris is written as if it's a dungeon encounter, when it is far more likely the party will interact with them on friendly terms. This seeks to remedy that, as well as remedy access to some higher level items the party might have to wait longer to acquire if they only ship them from Absalom.</em></p><p>See @UUID[JournalEntry.67686KaEPc6XAlKJ.JournalEntryPage.4kOuPeKxK4TbdcuO] for explanations of certain tags</p><section class=\"location-head\"><header><h1>Yldaris</h1><h1>Settlement 9</h1></header><article><ul class=\"traits\"><li>Underground</li><li>Town</li></ul></article></section><ul class=\"features\"><li>Underground insulated settlement of Drow Shootists.</li><li>(<strong>Note:</strong> Increased settlement level to 9 to distiniguish it more from Otari)</li></ul><hr /><p></p><section class=\"location-head\"><header><h2>Lozardyn Caravan</h2><h2>Courier 9</h2></header><article><ul class=\"traits\"><li>Garrison</li></ul><p><strong>Yldaris Caravan</strong></p></article></section><ul class=\"features\"><li><strong>Delivieries</strong>: Deliveries of items <span style=\"text-decoration:underline\"><span style=\"text-decoration:underline\">level 9 and below</span></span> from the drow settlement of Lozardyn can be requested. Items can be purchased at their original price with an added fee of 1 GP per bulk for them to be delivered within 3 days, or at 20% extra for them to be delivered within a day.</li></ul><hr /><p>The drow of Yldaris run caravans to the nearby drow city of Lozardyn which has access to more items, but is limited to access due to the network of twisting Darklands caverns needed to be traversed to access it.</p><p></p><section class=\"location-head\"><header><h2>The Lone Ranger</h2><h2>Shootist 8</h2></header><article><ul class=\"traits\"><li>Workshop</li></ul><p><strong>Tanieth</strong></p></article></section><ul class=\"features\"><li><strong>Wares</strong>: @UUID[Compendium.pf2e.equipment-srd.zcrIuILnp6oh4dr9]{Repeating Hand Crossbow}, @UUID[Compendium.pf2e.equipment-srd.xk9bw9ccupAIx7xT]{Repeating Hand Crossbow Magazines}, @UUID[Compendium.pf2e.equipment-srd.oJZe5rRitvioUgRh]{Shootist Bandolier}, @UUID[Compendium.pf2e.equipment-srd.zo0ophqfKunJFxZN]{Lethargy Poison}, @UUID[Compendium.pf2e.equipment-srd.nn2HAN1XKkKHfVnM]{Stupor Poison}, Also repairs items</li></ul><hr /><p>Tanieth is a loner drow ranger with great expertise in the use and maintenance of repeating hand crossbows.</p><p></p><section class=\"location-head\"><header><h2>Master Warden's Quarter</h2><h2>Warden 9</h2></header><article><ul class=\"traits\"><li>Discount</li><li>Employer</li></ul><p><strong>Salaisa Malthus</strong></p></article></section><ul class=\"features\"><li><strong>Wares</strong>: Adventuring Gear, Weapons, Shields, Armor, Fundamental Runes, @UUID[Compendium.pf2e.equipment-srd.Item.Wm0X7Pfd1bfocPSv]{Corrosive} property Runes, A small selection of magical weapons and armor</li></ul><hr /><p>As the settlement leader, she also is in charge of also the quartermaster of all general equipment for the settlement.</p><p></p><section class=\"location-head\"><header><h2>Kitchen</h2><h2>Kitchen 5</h2></header><article><ul class=\"traits\"><li>Parlor</li></ul><p><strong>Kitchen Staff</strong></p></article></section><ul class=\"features\"><li><strong>Wares</strong>: Beverages, Meals, Rations (Sourced from local fauna/flora mushrooms etc. )</li></ul><hr /><p>The drow staffing the kitchen usually depends on who lost a card game last, so it is inconsistent.</p><p></p><section class=\"location-head\"><header><h2>Seer's Quarters</h2><h2>Spellcasting 9</h2></header><article><ul class=\"traits\"><li>Library</li><li>Church</li></ul><p><strong>Bhazrade &amp; Klathoreer</strong></p></article></section><ul class=\"features\"><li><strong>Wares</strong>: Occult scrolls, A few occult themed magic items (held items, staves, wands)</li><li><strong>Spellcasting</strong>: Their spellcasting services are available, but they are limited to the spells listed in their stat blocks.</li><li><strong>Meditation</strong>: Bhazrade &amp; Klathor can instruct the party in meditation in the meditation cave this acts as the spell @UUID[Compendium.pf2e.spells-srd.Vvxgn7saUPW2bJhb]{Read Fate}</li></ul><hr /><p>These drow seers can offer their spellcasting services and guidance in the darkland stone faith.</p>"
+      },
+      "H. Farm": {
+       "name": "H. Farm"
+      },
+      "H38. Murmur the Implement of Empty Death": {
+       "name": "H38. Murmur the Implement of Empty Death",
+       "text": "<p><em>This was created by user weepingminotaur</em></p><h2>Overview</h2><p>Murmur, the feebleminded Medusa, has been turned into an @UUID[Actor.aYaE9C8F2bjV7c2Q]{The Implement of Empty Death}. The implement currently resides in @UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.MFktSOxcOfKGkbb2]{H39} (replacing the nilith). Additionally Murmur herself is no longer stationed at @UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.pnTCbvQqpz0arkpz]{H38}.</p><p>Belcorra has taken some precautions to ensure that Murmur is neither found nor disabled. The sturdy stone door to @UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.MFktSOxcOfKGkbb2]{H39} is locked and trapped with the @UUID[Item.CyWfBIXA8CKVFMK4]{Nhimbaloth - Major Curse}. Spotting the curse requires a @Check[perception|dc:30|traits:secret] check. Disabling the curse requires either a [[/act disable-device dc=33]]{Disable a Device (expert)} check or a @Check[type:Occultism|dc:33|showDC:all]{Occultism (master)} check.</p><p>Opening the door requires either its key (which is carried by <strong>Caliddo</strong>), five successful [[/act pick-a-lock dc=35]]{Pick a Lock (expert)} checks, or a single @Check[type:Athletics|dc:40|showDC: all|traits:action:force-open]{Force Open (expert)} check.</p><p>While the Implement of the Empty Death hazard is active, a number of elements of the lower levels of the Gauntlight are more dangerous:</p><ul><li><p>Both the Eyes of the Ghost Queen (@UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.0EtecMBSYJDok7n7]{H02. Hall of Eyes}) and Grasp of the Ghost Queen (@UUID[JournalEntry.1vlzl3NJsftNB9Dc.JournalEntryPage.uWdCP78aS1lts5kr]{I64. Initiates' Chamber}) hazards reset after 1 minute if no creatures are in the area, even if they have been disabled.</p></li><li><p>The following creatures gain @UUID[Item.fPWpoxS7837pkegk]{regeneration 10 (vitality)}:</p><ul><li><p>Empty Death Bodaks (@UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.hD6CSfmfkrSopsaw]{H21. Ancients' Caves})</p></li><li><p>Dread Wisps (all locations)</p></li><li><p>Dread Wraith (@UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.Vwd8vMBerJCAoN4N]{H23. Shadowed Dock)}</p></li><li><p>Urthagul (@UUID[JournalEntry.FwWmtOBFHhvM2gtf.JournalEntryPage.f02YPQGkiBbZ0Ijt]{H12. Island Cavern})</p></li><li><p>Bright Walkers (@UUID[JournalEntry.1vlzl3NJsftNB9Dc.JournalEntryPage.iduGvMRKIN2B46hv]{I24. Strange Dead})</p></li></ul></li><li><p>Belcorra can project herself anywhere on floors H through J, not just in the Gauntlight footprint.</p></li></ul><h2>Design Considerations</h2><blockquote><p>I have no idea whether this modification will be to anyone's taste other than mine. I made it purely for the benefit of my own particular AV group. The emphasis on Spirit Lore, for example, allows my party's champion of Torag to play an important role in disabling the hazard, as is the option to call on Torag for the Release Spirit action. If no one in your group worships Torag, consider replacing him with Cayden Caelean, focusing on the freedom part of Cayden's portfolio to justify his involvement in the exhortation.</p><p>I was motivated to write this addition by my dissatisfaction with Murmur's use in AV. Some GMs may find Murmur (or the Ghost Queen hazards I have placed in H02 and I64) overpowered or overtuned, and fair play to you if you're in that group. Belcorra is the adventure's final boss, and I wanted to show evidence of her evil genius in the lower levels of the Gauntlight while also augmenting the Nhimbaloth horror vibe.</p><p>-weepingminotaur</p></blockquote><h2>Disabling the Haunt</h2><p>The party must perform three sequential checks to disable the haunt: Rouse Sentience, Study Implement, and Release Spirit. Reveal the Rouse Sentience description and options if the party succeeds on a Recall Knowledge (Occultism) check to find out the hazard's Disable conditions. On a <strong>success</strong> at Rouse Sentience, reveal the options for Study Implement. On a <strong>success</strong> at Study Implement, reveal its development, the Send False Signal block, and the full Release Spirit section.</p><p>If the PCs choose to leave the task unfinished and return to complete it later, they must perform the same three sequential checks, unless they already achieved success in Study Implement, in which case they only need to perform Rouse Sentience and Release Spirit.</p><hr /><p>@Embed[Item.Q5N7Px8ZVaocxC92]{Rouse Sentience}</p><hr /><p>@Embed[Item.aEZqJZBbCp3fJSV0]{Study Implement}</p><hr /><p>@Embed[Item.WFCyQ30Rj6DXwrxk]{Send False Signal (Optional)}</p><hr /><p>@Embed[Item.pkCt6MdQHmoPKHyV]{Release Spirit}</p><p></p>"
+      }
+     }
+    }
+   },
+   "macros": {
+    "Belcorra Attacks": {
+     "name": "Belcorra Attacks",
+     "command": "// Animates a Belcorra Attack\n// Can be used either by selecting a hidden Belcorra Token on screen\n// Or by simply running the macro on its own\n// Pans camera, plays her theme then\n// Causes her to fly in from offscreen to her token position\n// Requires Sequencer & can use JB2A Patreon\n\nconst volume = 1; //Volume Level 0 - 1 (1 = 100%)\nawait game.abomVaultAddons.animations.belcorraAttacks(volume)"
+    },
+    "10 - Gauntlight Collapses": {
+     "name": "10 - Gauntlight Collapses",
+     "command": "// Written originally by Maple\n// Animates collapsing stones, explosions in the Belcorra Room\n// Requires Sequencer & JB2A (Free or Patreon)\nawait game.abomVaultAddons.animations.gauntlightCollapse()"
+    },
+    "10 - Belcorra Death": {
+     "name": "10 - Belcorra Death",
+     "command": "// Written originally by Maple\n// Animates Belcorra's Death at the Hands of Nhimbaloth\n// Requires Sequencer & JB2A (Free or Patreon)\nawait game.abomVaultAddons.animations.belcorraDeath()"
+    },
+    "Nhimbaloth's Presence": {
+     "name": "Nhimbaloth's Presence",
+     "command": "// Animates Nhimbaloth Encounter/presenece\n// Adds tentacles and an overlay over the screen for the duration\n// Requires Sequencer & can use JB2A Patreon\nconst duration = 10; // In seconds\nconst fadeInDuration = 1; // In seconds\nconst fadeOutDuration = 1; // In seconds\nconst sfx = \"modules/pf2e-abomination-vaults/assets/audio/motifs/whispering-reeds/010H.ogg\"; // BG sound to play\nconst volume = 1; // Volume Level 0 - 1 (1 = 100%)\n\nawait game.abomVaultAddons.animations.nhimbalothPresence({duration, fadeInDuration, fadeOutDuration, sfx, volume});"
+    },
+    "Nhimbaloth's Symbol": {
+     "name": "Nhimbaloth's Symbol",
+     "command": "// Animates Nhimbaloth's Symbol\n// Displays her symbol as well as plays a relevant SFXfor it\n// Requires Sequencer\nconst duration = 1.5; // Duration of the animation in seconds\nconst volume = 0.5; // Volume of SFX\nconst scale = 1; // 100% size atm, 0.5 = 50% size etc,\nawait game.abomVaultAddons.animations.nhimbalothSymbol({ duration, volume, scale });"
+    },
+    "Regurgitate Animation": {
+     "name": "Regurgitate Animation",
+     "command": "/*\n* This gets any creatures that are grabbed within 5 ft of the worm and launches them at the c reature it is targetting\n*\n*\n*/\n\nfunction isGrabbed(tok) {\n    return !!tok.actor.conditions.bySlug('grabbed').length\n}\n\nfunction getTokensInRange(selectedToken = null, extraSquares = 1) {\n  // If no token is provided, use the currently selected token\n  if (!selectedToken) {\n    selectedToken = canvas.tokens.controlled[0];\n  }\n\n  if (!selectedToken) {\n    ui.notifications.warn(\"No token selected or provided.\");\n    return null;\n  }\n\n  // Get all tokens on the canvas\n  const allTokens = canvas.tokens.placeables;\n\n  // Calculate the range based on token size and extra squares\n  const tokenSize = selectedToken.document.width;\n  const range = (tokenSize / 2) + extraSquares;\n  console.log({tokenSize, range})\n\n  // Array to store tokens in range\n  let tokensInRange = [];\n\n  // Iterate through all tokens\n  for (let token of allTokens) {\n    // Skip the selected token itself\n    if (token === selectedToken) continue;\n    if (!isGrabbed(token)) continue;\n\n    // Calculate the distance between the selected token and the current token\n    const distance = canvas.grid.measurePath([selectedToken.center, token.center]).spaces;\n    console.log({distance, token})\n\n    // Add the token to the array if it's within range\n    if (distance <= range) {\n      tokensInRange.push({ token: token, distance: distance });\n    }\n  }\n\n  // Sort tokens by distance\n  tokensInRange.sort((a, b) => a.distance - b.distance);\n\n  return tokensInRange;\n}\n\n// Example usage:\nconst result = getTokensInRange();\nconsole.log({result})\nif (result.length > 0) {\n  const seq = new Sequence();\n  const target = game.user.targets.first();\n  for (const data of result) {\n    const token = data.token;\n    const tokenScale = { x: token.document.texture.scaleX, y: token.document.texture.scaleY };\n    const tokenWidth = token.document.width;\n\n    seq\n      .animation()\n        .on(token)\n        .moveTowards(target.center, { ease: \"easeInOutBack\", relativeToCenter: true, offset: {x:1, y:0}})\n        .duration(1500)\n        .snapToGrid()\n        .delay(300)\n      // .effect()\n      //     .delay(300)\n      //     .file(\"jb2a.explosion.orange\")\n      //     .atLocation(token)\n      //     .scale(tokenWidth)\n      //     .belowTokens()\n    // .sound()\n    // .file(\"modules/SoundBoard-BlitzFreePack/bundledAudio/Naval%20Warfare/light_cannon_blast.mp3\")\n    // .volume(0.25)\n    // .delay(100)\n      // .canvasPan()\n      //     .delay(125)\n      //     .shake({duration: 250, strength: 20, rotation: true})\n      .animation()\n          .delay(210)\n          .on(token)\n          .opacity(0)\n    .effect()\n        .syncGroup(\"regurgitate-1\")\n        .delay(200)\n        .attachTo(token, { bindAlpha: false })\n        .from(token)\n        .scale(tokenScale)\n        .scaleOut(1.5, 300, {ease: \"easeOutQuad\"})\n    .effect()\n        .syncGroup(\"regurgitate-2\")\n        .attachTo(token, { bindAlpha: false })\n        .from(token)\n        .scale(tokenScale)\n        .scaleIn(1.5, 300, {ease: \"easeInQuad\"})\n        .delay(200 + 300 - 50)\n          //.waitUntilFinished(-50)\n      // .effect()\n      //     .delay(200 + 300 - 50)\n      //     .attachTo(token, { bindAlpha: false })\n      //     .from(token)\n      //     .scale(tokenScale)\n      //     .scaleIn(1.5, 300, {ease: \"easeInQuad\"})\n      //     //.waitUntilFinished(-100)\n      .animation()\n        .delay(200 + 300 +  300 - 100)\n          .opacity(1)\n          .on(token)\n    // .sound()\n    // .file(\"modules/SoundBoard-BlitzFreePack/bundledAudio/Impacts/small-rockslide/smallrockslide-01.ogg\")\n    // .volume(0.5)\n  }\n  seq\n    .effect()\n      .delay(1500 - 715)\n      .file(\"jb2a.impact.boulder.01\")\n      .atLocation(target)\n      .belowTokens()\n      .scaleToObject(4)\n    .play();\n}\n\n// if (result && result.length > 0) {\n//   let message = \"Tokens in range:\\n\";\n//   result.forEach(t => {\n//     message += `${t.token.name} at ${t.distance.toFixed(2)} units\\n`;\n//   });\n//   ui.notifications.info(message);\n// } else {\n//   ui.notifications.warn(\"No tokens found within range.\");\n// }"
+    },
+    "J15. Add Lever Puzzle": {
+     "name": "J15. Add Lever Puzzle",
+     "command": "// Add the tiles to room J15 to add rotation puzzle\n// Note, to interact with levers you need to right click on them with a token selected within 1 grid square\n// IMPORTANT: Only run this once, otherwise you may need to delete the extra levers\n// NOTE: Requires `Tagger` and `Monk's Active Tiles`\n// Credit: Huge credit to @darkim for working out the idea originally, all this does is recreate their setup to the best off my ability\ngame.abomVaultAddons.setup.scenes.j.createRotateTilesPuzzle()"
+    },
+    "Helper Drawing Setup Dialog": {
+     "name": "Helper Drawing Setup Dialog",
+     "command": "// Adds Hidden Interface Journaals to indicate some areas that were a unclear\n// Also adds some labels for height differences in some areas\ngame.abomVaultAddons.setup.labels.dialog()"
+    },
+    "Break the Seal": {
+     "name": "Break the Seal",
+     "command": "// Animates the destroying of the Barrier on D12. The Ghostwalk\n// This also will run the script that removes the barrier\n// Requires Sequencer, JB2A Patreon, and GGG\n\nconst volume = 1; //Volume Level 0 - 1 (1 = 100%)\nconst useSFX = true; // Set to false to not us sfx\nawait game.abomVaultAddons.animations.breakingTheSeal({volume, useSFX})"
+    },
+    "Gauntlight's Revenge": {
+     "name": "Gauntlight's Revenge",
+     "command": "// Add the hole tile, Gauntlight Token, and Zone Drawings to the Otari Map\n// These allow for running the Gauntlight's revenge (each section representing a different part of the final chase)\ngame.abomVaultAddons.setup.scenes.otari.setupGauntlightRevenge();"
+    },
+    "Title Card Animation": {
+     "name": "Title Card Animation",
+     "command": "/**\n* Requires Sequencer and the Premium AV module\n* Show the title card and plays a sound plus the legendary Ward E. Sexton reading the title aloud (of RE4 fame)\n*\n*/\n\nawait game.abomVaultAddons.animations.titleCardDialog()"
+    }
+   },
+   "items": {
+    "Nhimbaloth - Major Curse": {
+     "name": "Nhimbaloth - Major Curse",
+     "description": "<section class=\"secret\" id=\"secret-pQnRODKmTYc6SY3Q\"><p><strong>Saving Throw</strong> @Check[type:will|dc:33|showDC:gml|traits:curse,auditory,illusion,magical,mental,visual]{Will save}</p><p><strong>Timeline</strong> Abomination Vaults Book 3</p><p><strong>Suggested Triggers</strong> Entering any area consecrated to Nhimbaloth, or during the initial @JournalEntry[Abomination Vaults#Belcorra Attacks]{Belcorra Attacks!} encounter</p><section class=\"statblock\"><p><strong>Stage 1 </strong>You are @UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{Fatigued}. At the start of your first turn in combat, you take @Damage[(4d6)[slashing]]{4d6 slashing damage} that cannot be prevented in any way. Also, whenever you take slashing damage, you must succeed at the curse save or become @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1}. (1 day)</p><p><strong>Stage 2 </strong>You are @UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{Fatigued}. At the start of your first turn in combat, you take @Damage[(6d6)[slashing]]{6d6 slashing damage} that cannot be prevented in any way. Also, whenever you take slashing damage, you must succeed at the curse save or become @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 2}. (1 day)</p><p><strong>Stage 3 </strong>You are @UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{Fatigued}. At the start of your first turn in combat, you take @Damage[(8d6)[slashing]]{8d6 slashing damage} that cannot be prevented in any way. Also, whenever you take slashing damage, you must succeed at the curse save or become @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 4}. (1 day)</p><p><strong>Stage 4 </strong>You die, and your spirit is consumed by the Empty Death.</p></section></section><section class=\"traits\"><p><strong>Curse | Auditory | Illusion | Magical | Mental | Visual</strong></p></section><p><strong>Your Lot, To Die</strong><br />So close to the unspeakable horror of Nhimbaloth's realm, you can no longer distinguish friend from foe, reason from madness, or even life from death.</p>"
+    },
+    "Nhimbaloth - Moderate Curse": {
+     "name": "Nhimbaloth - Moderate Curse",
+     "description": "<section class=\"secret\" id=\"secret-rUZLKwQG1AOOQhAY\"><p class=\"p1\"><strong>Saving Throw </strong>@Check[type:fortitude|dc:28|showDC:gm|]{Will save}</p><p class=\"p1\"><strong>Timeline</strong> Abomination Vaults Book 2</p><p class=\"p1\"><strong>Trigger</strong> Any encounter with Belcorra, her most powerful servants, or areas consecrated to Nhimbaloth</p><section class=\"statblock\"><p class=\"p1\"><strong>Stage 1</strong> At the start of any encounter, you become @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused}. You can attempt the standard @Check[flat|dc:11] check to remove the confused condition, but a success only disables the condition until the next encounter. (1 day)</p><p class=\"p1\"><strong>Stage 2</strong> At the start of any encounter, you become @UUID[Compendium.pf2e.conditionitems.Item.9qGBRpbX9NEwtAAr]{Controlled}. You can attempt a @Check[flat|dc:15] check to remove the controlled condition, but a success only disables the condition until the next encounter. (1 day)</p><p class=\"p1\"><strong>Stage 3</strong> You become a permanent servant of the Empty Death, leaving your adventuring group to seek out the deepest reaches of the Gauntlight Ruins and assist the denizens there in in their vile plans.</p></section></section><section class=\"traits\"><p>Curse | Illusion | Magical | Mental | Auditory | Visual</p></section><p><strong>The Wisp, Her Eye</strong></p>"
+    },
+    "Nhimbaloth - Minor Curse": {
+     "name": "Nhimbaloth - Minor Curse",
+     "description": "<section class=\"secret revealed\" id=\"secret-I2SMHdB1rEKPOF0C\"><section id=\"secret-I2SMHdB1rEKPOF0C\"><section class=\"statblock\"><p><strong>Saving Throw</strong> @Check[type:will|dc:20|showDC:gm|traits:curse,illusion,magical,mental,auditory]</p><p><strong>Timeline </strong>Abomination Vaults floors A through C</p><p><strong>Suggested Triggers</strong> Contact with the @UUID[JournalEntry.kDJSn9wbVvjnqYEj.JournalEntryPage.yk1knQyHc25ZSAfE]{shrine altar on floor A}, or the first time a character moves into the ribbon of light in @UUID[JournalEntry.uMZ0RiCcPSqsx1Nm.JournalEntryPage.8pbhSFgv71lvCz9M]{B35 }or @UUID[JournalEntry.KeWKr2yd8dbppeS5.JournalEntryPage.eOv6LI3wvIuKyyNJ]{C15}</p><hr /></section></section><section class=\"statblock\"><p><strong>Stage 1</strong> You must rest for 12 hours instead of 8 to avoid becoming @UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{Fatigued}. (1 day)</p><p><strong>Stage 2</strong> As stage 1, and you can't gain any benefit from resting or long-term rest. (1 day)</p><p><strong>Stage 3</strong> As stage 2, and you are @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1}. (1 day)</p></section></section><section class=\"traits\"><p class=\"p1\">Curse | Illusion | Magical | Mental | Auditory</p></section><p><strong>The Wind, Her Voice</strong></p><p class=\"p1\">Even the briefest of encounters with dread Nhimbaloth's presence is enough to affect the health of the unwary. This curse causes you to hear whispering voices, footsteps, and other odd noises during your next long rest. If left untreated, the loss of sleep starts to take a toll on your wellbeing.</p>"
+    },
+    "Effect: Swallowed Whole (Cave Worm)": {
+     "name": "Effect: Swallowed Whole (Cave Worm)",
+     "description": "<p>Huge, @Damage[(3d6+9)[bludgeoning]], Rupture 24</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
+    },
+    "Effect:  The Bonds that Give us Strength": {
+     "name": "Effect:  The Bonds that Give us Strength",
+     "description": "<p>The NPC aids in your check giving you either an untyped bonus of:</p><ul><li><p><strong>+1</strong> - Something the NPC wouldn't really be proficient in (IE Carman in Religion)</p></li><li><p><strong>+2</strong> - Something the NPC would be proficient in (IE Morliblint and Arcana)</p></li><li><p><strong>+3</strong> - If you share an especially close bond with the NPC (their presence inspires you)</p></li></ul>"
+    },
+    "Gauntlight Legs Count": {
+     "name": "Gauntlight Legs Count"
+    },
+    "Rouse Sentience": {
+     "name": "Rouse Sentience",
+     "description": "<section><p>You must find a way to rouse the tattered shreds of sentience in this creature, providing a mild disruption in the implement that will allow you to discover how to disable it. Rousing the creature in this way lasts for 1 minute and causes the implement to become @UUID[Actor.8xX9yeGs7iCSoQ7m.Item.RpJ9AbFpL8ZWsJSX]{Slowed 1} for one round.</p><p><strong>Options</strong></p><ul><li><p>@Check[type:Medicine|dc:28|showDC:all]{Medicine (Expert)}</p></li><li><p>@Check[type:Society|dc:30|showDC:all]{Society (Master)}</p></li><li><p>@Check[type:Diplomacy|dc:31|showDC:all]{Diplomacy (Master)}</p></li></ul></section>"
+    },
+    "Study Implement": {
+     "name": "Study Implement",
+     "description": "<section><p>The design of this implement suggests that its creator will become aware if it is disabled within 10 minutes. To address that possibility, a PC can attempt the Send False Signal action before trying to disable the haunt.</p><p><strong>Options</strong></p><ul><li><p>@Check[type:Occultism|dc:30|showDC:all]{Occultism (Master)}</p></li><li><p>@Check[type:Spirit-Lore|dc:28|showDC:all]{Spirit Lore (Expert)}</p></li></ul></section>"
+    },
+    "Send False Signal (Optional)": {
+     "name": "Send False Signal (Optional)",
+     "description": "<section><p><strong>Options</strong></p><ul><li><p>@Check[type:Arcana|dc:33|showDC:all]{Arcana (Master)}</p></li><li><p>@Check[type:Occultism|dc:30|showDC:all]{Occultism (Master)}</p></li><li><p>@Check[type:Spirit-Lore|dc:28|showDC:all]{Spirit Lore (Expert)}</p></li></ul><p><strong>Critical Success</strong> You harness residual spiritual energy in the area to create a false signal of operation in the implement for 2 hours.</p><p><strong>Success</strong> As critical success, except that the false signal lasts for 1 hour.</p><p><strong>Failure</strong> You fail to send the false signal. The implement's creator will become aware that it has been disabled within 10 minutes of the event, as normal.</p><p><strong>Critical Failure</strong> Your clumsiness in manipulating spiritual energy not only fails to send the false signal but produces an unwanted side effect. The implement's creator will become aware that it has been disabled within 1 minute of the event.</p></section>"
+    },
+    "Release Spirit": {
+     "name": "Release Spirit",
+     "description": "<section><p>You call on one of the three deities below, exhorting that deity to allow the soul trapped in the implement to find a merciful release in death, permanently destroying the implement.</p><ul><li><p><strong>Pharasma</strong> To release this tortured soul from unnatural, life-prolonging torment and give them the dignity of death.</p></li><li><p><strong>Sarenrae</strong> To end the creature's suffering in this mortal life that it may find spiritual healing in the next one.</p></li><li><p><strong>Torag</strong> To give the tormented creature an honourable death, releasing them from the shame of being twisted to the will of another.</p></li></ul><p>If no attempt is made to Release Spirit within 1 minute of an attempted Send False Signal check, the harnessed spiritual energy dissipates and the Send False Signal check must be attempted again.</p><p><strong>Options</strong></p><ul><li><p>@Check[type:Religion|dc:31|showDC:all]{Occultism (Master)}</p></li><li><p>@Check[type:Religion|dc:30|showDC:all]{Religion (Master)}</p></li><li><p>@Check[type:Spirit-Lore|dc:28|showDC:all]{Spirit Lore (Master)}</p></li></ul></section>"
+    },
+    "Effect: Regeneration 10 (Implement of Empty Death)": {
+     "name": "Effect: Regeneration 10 (Implement of Empty Death)",
+     "description": "<p>@Embed[Compendium.pf2e.bestiary-ability-glossary-srd.Item.lR9R5Vld8Eu2Dha5 inline]</p>"
+    },
+    "Never Caught Unaware": {
+     "name": "Never Caught Unaware",
+     "description": "<p><strong>Trigger</strong> Belcorra roll initiative.</p><hr /><p>Belcorra has a contingency for everything. She casts a defensive spell, one that doesn't target or directly affect other non-willing creatures, on her spell list. </p>"
+    },
+    "Set Her Free": {
+     "name": "Set Her Free",
+     "description": "<section class=\"statblock\"><p>Weaken Ysondkhelir's control on Dorianna with an appropriate skill check.</p><ul><li><p><strong>Range</strong> The PC attempting the check must be adjacent to either Dorianna or Ysondkhelir. Other characters may use the @UUID[Compendium.pf2e.actionspf2e.HCl3pzVefiv9ZKQW]{Aid} action to support a check but only if they are within 30 feet of Dorianna, Ysondkhelir, or the active PC (as appropriate for their action). A character cannot make a check or Aid if they are in a nightmare space.</p></li><li><p><strong>Critical success</strong> Two successes.</p></li><li><p><strong>Success</strong> One success.</p></li><li><p><strong>Failure</strong> No change.</p></li><li><p><strong>Critical failure</strong> The PC is @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{stupefied 1}.</p></li></ul><hr /><ul><li><p><strong>Arcana</strong> Use your knowledge of magic to weaken the spiritual link between Ysonkhelir and Dorianna.</p><ul><li><p>@Check[type:Arcana|dc:31|traits:arcane,mental,spirit]{Arcana (Very Hard)}</p></li></ul></li><li><p><strong>Diplomacy</strong> Give Dorianna the courage to fight her tormentor.</p><ul><li><p>@Check[type:Diplomacy|dc:28|traits:auditory,mental,spirit,visual|showDC:all]{Diplomacy (Hard)}</p></li></ul></li><li><p><strong>Intimidation</strong> Frighten the dream-catcher with threats of retribution.</p><ul><li><p>@Check[type:Intimidation|dc:31|traits:auditory,mental,spirit|showDC:all]{Intimidation (Very Hard)}</p></li></ul></li><li><p><strong>Medicine</strong> Tend to Dorianna's wounds to restore her strength.</p><ul><li><p>@Check[type:Medicine|dc:26|traits:manipulate,mental,spirit|showDC:all]{Medicine (Normal)}</p></li></ul></li><li><p><strong>Occultism</strong> Decipher the esoteric basis of Ysonkhelir's control over Dorianna.</p><ul><li><p>@Check[type:Occultism|dc:26|traits:mental,occult,spirit|showDC:all]{Occultism (Normal)}</p></li></ul></li><li><p><strong>Society</strong> Remind Dorianna of her family and friends and her connection to Otari.</p><ul><li><p>@Check[type:Society|dc:28|traits:auditory,mental,spirit|showDC:all]{Society (Hard)}</p></li></ul></li><li><p><strong>Spirit Lore</strong> Draw on your knowledge of the spiritual to bolster Dorianna in her fight against the dream-catcher.</p><ul><li><p>@Check[type:Spirit-Lore|dc:24|traits:mental,spirit|showDC:all]{Spirit Lore (Easy)}</p></li></ul></li></ul></section>"
+    },
+    "Effect: Ysondkhelir's Control": {
+     "name": "Effect: Ysondkhelir's Control",
+     "description": "<p><strong>One success</strong> Ysondkhelir's resistance to physical damage drops to 5. The south section of his window wall disappears.</p><p><strong>Two successes</strong> No more crawling hands can spawn. The north section of Ysondkhelir's window wall disappears.</p><p><strong>Three successes</strong> Ysondkhelir is no longer quickened. The remaining sections of his window wall disappear.</p><p><strong>Four successes</strong> Ysondkhelir loses his Attack of Opportunity and his resistance to physical damage. He also reverts to his normal size and loses 15 feet reach on melee strikes. Dorianna is temporarily free of his mental influence, though he will eventually reassert control if left alive.</p>"
+    }
+   },
+   "actors": {
+    "Crawling Hand Swarm": {
+     "name": "Crawling Hand Swarm",
+     "tokenName": "Crawling Hand Swarm",
+     "publicNotes": "<p>Note, requires <strong>Swarms</strong> module to actually swarm</p>",
+     "hp": "void healing",
+     "prototypeToken": "Crawling Hand Swarm",
+     "items": {
+      "Tremorsense (Imprecise) 30 feet": {
+       "name": "Tremorsense (Imprecise) 30 feet",
+       "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
+      },
+      "Lifesense 30 feet": {
+       "name": "Lifesense 30 feet",
+       "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Lifesense]</p>"
+      },
+      "Stifle": {
+       "name": "Stifle",
+       "description": "<p><strong>Trigger</strong> A creature in the swarm's space attempts to Cast a Spell with a verbal component or attempts an action with the linguistic or vocal traits</p><hr />\n<p><strong>Effect</strong> The swarming hands clamp over the triggering creature's mouth, preventing it from vocalizing. The affected creature must succeed at a @Check[type:reflex|dc:22] save or the triggering action is disrupted.</p>"
+      },
+      "Void Healing": {
+       "name": "Void Healing",
+       "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+      },
+      "Pummeling Grasp": {
+       "name": "Pummeling Grasp",
+       "description": "<p>Each enemy in the swarm's space takes @Damage[3d6[slashing]] damage (@Check[type:reflex|dc:20|basic:true]). A creature that fails its save against Pummeling Grasp is also knocked @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone}.</p>"
+      }
+     }
+    },
+    "Belcorra's Cave Worm": {
+     "name": "Belcorra's Cave Worm",
+     "tokenName": "Ghostly Cave Worm",
+     "publicNotes": "<p>This Cave worm was Belcorra's Pet Worm from @UUID[JournalEntry.uMZ0RiCcPSqsx1Nm.JournalEntryPage.8pbhSFgv71lvCz9M]{B35. Gauntlight Basement}.</p>",
+     "privateNotes": "<p><strong>Note:</strong> This assumes you own the <strong>Pathfinder Monster Core</strong> module to display the art</p>",
+     "prototypeToken": "Ghostly Cave Worm",
+     "items": {
+      "Ghostly Jaws": {
+       "name": "Ghostly Jaws"
+      },
+      "Stinger": {
+       "name": "Stinger"
+      },
+      "Body": {
+       "name": "Body"
+      },
+      "Regurgitate": {
+       "name": "Regurgitate"
+      },
+      "Tremorsense (Imprecise) 100 feet": {
+       "name": "Tremorsense (Imprecise) 100 feet",
+       "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Tremorsense]</p>"
+      },
+      "Inexorable": {
+       "name": "Inexorable",
+       "description": "<p>The cave worm recovers from the @UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{Paralyzed}, @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed}, and @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned} conditions at the end of its turn. It's also immune to penalties to its Speeds and the @UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{Immobilized} condition, and it ignores difficult terrain and greater difficult terrain.</p>"
+      },
+      "Slough Skin": {
+       "name": "Slough Skin",
+       "description": "<p><strong>Frequency</strong> once per day</p>\n<p><strong>Trigger</strong> The cave worm would be affected by a condition or adverse effect (such as @UUID[Compendium.pf2e.spells-srd.Item.dN8QBNuTiaBHCKUe]{Cursed Metamorphosis})</p>\n<hr />\n<p><strong>Effect</strong> The cave worm negates the triggering condition or effect by sloughing an outer layer of its skin. Effects from artifacts, deities, or a similarly powerful source can't be avoided in this way.</p>"
+      },
+      "Cave Worm Venom": {
+       "name": "Cave Worm Venom",
+       "description": "<p><strong>Saving Throw</strong> @Check[fortitude|dc:32]</p>\n<hr />\n<p><strong>Maximum Duration</strong> 6 rounds</p>\n<p><strong>Stage 1</strong> @Damage[5d6[poison]] damage and @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 2} (1 round)</p>\n<p><strong>Stage 2</strong> @Damage[6d6[poison]] damage, and enfeebled 2 (1 round)</p>\n<p><strong>Stage 3</strong> @Damage[8d6[poison]] damage and enfeebled 2 (1 round)</p>"
+      },
+      "Fast Swallow": {
+       "name": "Fast Swallow",
+       "description": "<p><strong>Trigger</strong> The cave worm @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabs} a creature.</p>\n<hr />\n<p><strong>Effect</strong> The worm uses Swallow Whole.</p>"
+      },
+      "crXV18abZr2DcEh8": {
+       "name": "Regurgitate",
+       "description": "<p>The purple worm can violently regurgitate a creature or boulder it has swallowed to make a ranged Strike. The Strike deals bludgeoning damage depending on the size of the projectile:</p><ul><li>Tiny @Damage[(2d6+13)[bludgeoning]]{2d6+13}</li><li>Small @Damage[(3d6+13)[bludgeoning]]{3d6+13}</li><li>Medium @Damage[(4d6+13)[bludgeoning]]{4d6+13}</li><li>Large @Damage[(5d6+13)[bludgeoning]]{5d6+13}</li><li>Huge @Damage[(6d6+13)[bludgeoning]]{6d6+13}</li></ul><p>A regurgitated creature takes falling damage from the height of the target or from 20 feet, whichever is greater.</p><p>Boulders occupy space in the worm's stomach as a creature of equivalent size, and purple worms often have several boulders swallowed. A purple worm can use a single action to swallow a new boulder.</p><p>@UUID[Macro.X28HKDQaNJxl4fci]{Regurgitate Animation}</p>"
+      },
+      "Rock Tunneler": {
+       "name": "Rock Tunneler",
+       "description": "<p>A cave worm can burrow through solid stone at a Speed of 20 feet. It can leave a tunnel if it desires, and it usually does.</p>"
+      },
+      "Swallow Whole": {
+       "name": "Swallow Whole",
+       "description": "<p>Huge, @Damage[(3d6+9)[bludgeoning]], Rupture 24</p><p>@UUID[Item.7xKOXwUKrcg8gD3y]{Effect: Swallowed Whole (Cave Worm)}</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
+      },
+      "Thrash": {
+       "name": "Thrash",
+       "description": "<p>The worm makes a Strike once against each creature in its reach. It can Strike up to once with its jaws, up to once with its stinger, and any number of times with its body. Each attack counts toward the worm's multiple attack penalty, but the multiple attack penalty doesn't increase until after it makes all the attacks.</p>"
+      },
+      "Improved Grab": {
+       "name": "Improved Grab",
+       "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ImprovedGrab]</p>"
+      },
+      "Void Healing": {
+       "name": "Void Healing",
+       "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.NegativeHealing]</p>"
+      },
+      "(Ghost) Site Bound": {
+       "name": "(Ghost) Site Bound",
+       "description": "<p>A typical ghost can stray only a short distance from where it was killed or the place it haunts. A typical limit is 120 feet. Some ghosts are instead bound to a room, building, item, or creature that was special to it rather than a location.</p>"
+      },
+      "(Ghost) Rejuvenation": {
+       "name": "(Ghost) Rejuvenation",
+       "description": "<p>When a ghost is destroyed, it re-forms after [[/br 2d4 #days]]{2d4 days} within the location it's bound to, fully healed. A ghost can be permanently destroyed only if someone determines the reason for its existence and sets right whatever prevents the spirit from resting.</p>"
+      }
+     }
+    },
+    "Gauntlight's Revenge": {
+     "name": "Gauntlight's Revenge",
+     "tokenName": "Gauntlight's Revenge",
+     "prototypeToken": "Gauntlight's Revenge",
+     "items": {
+      "Gauntlight Legs Count": {
+       "name": "Gauntlight Legs Count"
+      }
+     }
+    },
+    "Ghost Queen's Reflection": {
+     "name": "Ghost Queen's Reflection",
+     "tokenName": "Ghost Queen's Reflection",
+     "disable": "<p>The haunt can be disabled in one of three ways:</p><ul><li><p>Four @Check[religion|dc:21] (trained) checks to banish the spectral image of Belcorra.</p></li><li><p>Two @Check[deception|dc:26] (trained) checks to goad this shard, which is infused with a minute portion of Belcorra's essence, into a fury, shattering its focus.</p></li><li><p>One @Check[athletics|dc:31] (expert) check to smash the mirror's magical structure, permanently shattering it.</p></li></ul>",
+     "hazarddescription": "<p>The reflection in the mirror subtly twists and distorts, its expression taking on an unnerving sneer of malice. It is the image of a beautiful but cruel-looking woman with blood-flecked lips and hands that look closer to claws.</p>",
+     "reset": "<p>The haunt re-forms after 1 minute unless it has been disabled.</p>",
+     "routine": "<p>(2 actions)</p><p>The haunt uses the Become The Experiment action.</p>",
+     "stealthdetails": "<p>(expert)</p>",
+     "prototypeToken": "Ghost Queen's Reflection",
+     "items": {
+      "Spectral Impale": {
+       "name": "Spectral Impale",
+       "description": "<p><strong>Trigger</strong> A living creature steps into any square that is directly in line with the mirror or adjacent to it.</p><hr /><p><strong>Effect</strong> Shadowy tendrils impale the body of the creature as the haunt makes a blood sample Strike.</p>"
+      },
+      "Blood Sample": {
+       "name": "Blood Sample"
+      },
+      "Sap Vitality": {
+       "name": "Sap Vitality",
+       "description": "<p>A creature hit by the reflection's blood sample must attempt a @Check[fortitude|dc:22] save as the haunt tries to draw a portion of its vital essence into the mirror. The target is @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 1} on a failed saving throw, or @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 2} on a critical failure.</p>"
+      },
+      "Become The Experiment": {
+       "name": "Become The Experiment",
+       "description": "<p><strong>Effect</strong> The image of the Ghost Queen, Belcorra, whispers in your mind, compelling you to submit to the experiments of her servants. The haunt deals @Damage[(2d10+9)[mental]] damage to a single non-unholy creature in the room. The creature must attempt a @Check[will|dc:23|traits:damaging-effect] save.</p><hr /><p><strong>Critical Success</strong> The creature is unaffected.</p><p><strong>Success</strong> The creature takes half damage and becomes @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 1}.</p><p><strong>Failure</strong> The creature takes full damage, becomes @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1}, and gains the @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing} condition for 1 round, driven to take one of the ladders down the east hatch.</p><p><strong>Critical Failure</strong> The creature takes double damage. It also becomes @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 2} and gains the @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing} condition for 1 minute, driven to take one of the ladders down the east hatch.</p>"
+      }
+     }
+    },
+    "Will-o'-Wisp Swarm": {
+     "name": "Will-o'-Wisp Swarm",
+     "tokenName": "Will-o'-Wisp Swarm",
+     "prototypeToken": "Will-o'-Wisp Swarm",
+     "items": {
+      "Horrifying Visage": {
+       "name": "Horrifying Visage",
+       "description": "<p><strong>Requirements</strong> The will-o'-wisp swarm is @UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{invisible}</p><hr /><p><strong>Effect</strong> The will-o'-wisp swarm reveals itself, losing its invisibility for 1 round. Each creature within @Template[type:emanation|distance:60] must make a @Check[will|dc:26] save.</p><p>Regardless of their result, the targets become immune to Horrifying Visage for 24 hours.</p><hr /><p><strong>Critical Success</strong> The creature is unaffected.<br /><strong>Success</strong> The creature becomes @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 1}.<br /><strong>Failure</strong> The creature takes @Damage[5d8[mental]] damage, and becomes @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 2}.<br /><strong>Critical Failure</strong> The creature takes @Damage[8d8[mental]] damage, and becomes @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 3}.</p>"
+      },
+      "Shocking Swarm": {
+       "name": "Shocking Swarm",
+       "description": "<p>Each enemy in the swarm's space takes @Damage[5d6[electricity]] damage (@Check[reflex|dc:27|basic:true] save).</p>"
+      },
+      "Feed on Fear": {
+       "name": "Feed on Fear",
+       "description": "<p><strong>Frequency</strong> once per round</p><p><strong>Requirements</strong> An enemy within 30 feet is under a fear effect or dying</p><hr /><p><strong>Effect</strong> The will-o'-wisp feeds on the creature's terror. It regains @Damage[4d4[healing]]{4d4 Hit Points}, and if it has Gone Dark, its glow reignites.</p>"
+      },
+      "Go Dark": {
+       "name": "Go Dark",
+       "description": "<p>The will-o'-wisp extinguishes its glow, becoming @UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{Invisible}. It can end this effect with another use of this action. If it uses its <em>Shocking Swarm</em> while invisible, the arcs of electricity lets any observer determine its location, making the will-o'-wisp only @UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{Hidden} to all observers until it moves.</p>"
+      },
+      "All-Around Vision": {
+       "name": "All-Around Vision",
+       "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.AllAroundVision]</p>"
+      },
+      "Swarm Mind": {
+       "name": "Swarm Mind",
+       "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.SwarmMind]</p>"
+      },
+      "Glow": {
+       "name": "Glow",
+       "description": "<p>40 feet.</p><p>A will-o'-wisp is itself naturally invisible, but glows with a colored light, casting bright light in the aura and making it visible.</p>"
+      },
+      "Magic Immunity": {
+       "name": "Magic Immunity",
+       "description": "<p>A will-o'-wisp swarm is immune to all spells except @UUID[Compendium.pf2e.spells-srd.Item.gKKqvLohtrSJj3BM]{Force Barrage}, @UUID[Compendium.pf2e.spells-srd.Item.Oj1PJBMQD9vuwCv7]{Quandary}, and @UUID[Compendium.pf2e.spells-srd.Item.0qaqksrGGDj74HXE]{Revealing Light}.</p>"
+      }
+     }
+    },
+    "Nhimbaloth Cult Leader": {
+     "name": "Nhimbaloth Cult Leader",
+     "tokenName": "Cult Leader",
+     "publicNotes": "<p>A career of mystical accomplishments combined with a lifetime of subterfuge and intimidation has elevated this occultist to a powerful position.</p><hr /><p>Hidden secrets and occult powers have an irresistible lure for many. Since the majority of these NPCs are spellcasters, consider using alternative spell lists to adjust their themes.</p>",
+     "prototypeToken": "Cult Leader",
+     "items": {
+      "Occult Spontaneous Spells": {
+       "name": "Occult Spontaneous Spells"
+      },
+      "Honeyed Words": {
+       "name": "Honeyed Words",
+       "description": "<p>Falsehoods pass your lips as smoothly as silk. You gain a +4 status bonus to Deception checks to @UUID[Compendium.pf2e.actionspf2e.Item.ewwCglB7XOPLUz72]{Lie} and against Perception checks to discern if you are telling the truth, and you add your level even if untrained. If the implausibility of your lies prompts a circumstance penalty or a DC increase, reduce that penalty by half or increase it by half.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.6vodhSeI3ClMfOGd]{Spell Effect: Honeyed Words}</p>"
+      },
+      "Outcast's Curse": {
+       "name": "Outcast's Curse",
+       "description": "<p>You afflict the target with a curse that makes its presence abrasive and off-putting. The target must attempt a Will save.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> For 10 minutes, the target must roll twice and use the worse result whenever attempting a Deception, Diplomacy, Intimidation, or Performance check, and creatures they encounter have an initial attitude toward them of one step worse (for instance, @UUID[Compendium.pf2e.conditionitems.Item.I1ffBVISxLr2gC4u]{Unfriendly} instead of @UUID[Compendium.pf2e.conditionitems.Item.fuG8dgthlDWfWjIA]{Indifferent}).</p>\n<p><strong>Failure</strong> As success, but the effect is permanent.</p>\n<p><strong>Critical Failure</strong> As failure, and creatures that the target encounters have an initial attitude toward them of two steps worse.</p>"
+      },
+      "Suggestion": {
+       "name": "Suggestion",
+       "description": "<p>Your honeyed words are difficult for creatures to resist. You suggest a course of action to the target, which must be phrased in such a way as to seem like a logical course of action to the target and can't be self-destructive or obviously against the target's self-interest. The target must attempt a Will save.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected and knows you tried to control it.</p>\n<p><strong>Success</strong> The target is unaffected.</p>\n<p><strong>Failure</strong> The target immediately follows your suggestion. The spell has a duration of 1 minute, or until the target has completed a finite suggestion or the suggestion becomes self-destructive or has other obvious negative effects.</p>\n<p><strong>Critical Failure</strong> As failure, but the base duration is 1 hour.</p>\n<hr />\n<p><strong>Heightened (8th)</strong> You can target up to 10 creatures.</p>"
+      },
+      "Enthrall": {
+       "name": "Enthrall",
+       "description": "<p>Your words fascinate your targets. You speak or sing without interruption throughout the casting and duration. Targets who notice your speech or song might give their undivided attention; each target must attempt a Will save. The GM might grant a circumstance bonus (to a maximum of +4) if the target is of an opposing religion, ancestry, or political leaning, or is otherwise unlikely to agree with what you're saying.</p>\n<p>Each creature that comes within range has to attempt a save when you Sustain the spell. If you're speaking, enthrall gains the linguistic trait.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected and notices that you tried to use magic.</p>\n<p><strong>Success</strong> The target needn't pay attention but doesn't notice you tried to use magic (it might notice others are enthralled).</p>\n<p><strong>Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{Fascinated} with you. It can attempt another Will save if it witnesses actions or speech with which it disagrees. If it succeeds, it's no longer fascinated and is temporarily immune for 1 hour. If the target is subject to a hostile act, or if another creature succeeds at a Diplomacy or Intimidation check against it, the fascination ends immediately.</p>\n<p><strong>Critical Failure</strong> As failure, but the target can't attempt a save to end the fascination if it disagrees with you.</p>"
+      },
+      "Mind Reading": {
+       "name": "Mind Reading",
+       "description": "<p>With a cursory mental touch, you attempt to read the target's mind. It must attempt a Will save. The target then becomes temporarily immune to your mind reading for 1 hour.</p>\n<hr />\n<p><strong>Critical Success</strong> The target perceives vague surface thoughts from you when you Cast the Spell.</p>\n<p><strong>Success</strong> You find out whether the target's Intelligence modifier is higher than, equal to, or lower than yours.</p>\n<p><strong>Failure</strong> You perceive vague surface thoughts from the target when you Cast the Spell, and you find out whether its Intelligence is higher than, equal to, or lower than yours.</p>\n<p><strong>Critical Failure</strong> As failure, and for the duration of the spell, you can Sustain the spell to detect the target's surface thoughts again. The target doesn't receive any additional saves.</p>"
+      },
+      "Calm": {
+       "name": "Calm",
+       "description": "<p>You forcibly calm creatures in the area, soothing them into a nonviolent state; each creature must attempt a Will save.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> Calming urges impose a -1 status penalty to the creature's attack rolls.</p>\n<p><strong>Failure</strong> Any emotion effects that would affect the creature are suppressed and the creature can't use hostile actions. If the target is subject to hostility from any other creature, it ceases to be affected by <em>calm</em>.</p>\n<p><strong>Critical Failure</strong> As failure, but hostility doesn't end the effect.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Qr5rgoZvI4KmFY0N]{Spell Effect: Calm}</p>"
+      },
+      "Laughing Fit": {
+       "name": "Laughing Fit",
+       "description": "<p>The target is overtaken with uncontrollable laughter. It must attempt a Will save.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target is plagued with uncontrollable laughter. It can't use reactions.</p>\n<p><strong>Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} and can't use reactions.</p>\n<p><strong>Critical Failure</strong> The target falls @UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{Prone} and can't use actions or reactions for 1 round. It then takes the effects of a failure.</p>"
+      },
+      "Stupefy": {
+       "name": "Stupefy",
+       "description": "<p>You dull the target's mind, depending on its Will save.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1} until the start of your next turn.</p>\n<p><strong>Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 2} for 1 minute.</p>\n<p><strong>Critical Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 3} for 1 minute.</p>"
+      },
+      "Bless": {
+       "name": "Bless",
+       "description": "<p>Blessings from beyond help your companions strike true. You and your allies gain a +1 status bonus to attack rolls while within the emanation. Once per round on subsequent turns, you can Sustain the spell to increase the emanation's radius by 10 feet.</p>\n<p>Bless can counteract @UUID[Compendium.pf2e.spells-srd.Item.7ZinJNzxq0XF0oMx]{Bane}.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.RfCEHpMoEAZvB9IZ]{Aura: Bless}</p>"
+      },
+      "Daze": {
+       "name": "Daze",
+       "description": "<p>You push into the target's mind and daze it with a mental jolt. The jolt deals 1d6 mental damage, with a basic Will save. If the target critically fails the save, it is also @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1}.</p>\n<hr />\n<p><strong>Heightened (+2)</strong> The damage increases by 1d6.</p>"
+      },
+      "Detect Magic": {
+       "name": "Detect Magic",
+       "description": "<p>You send out a pulse that registers the presence of magic. You receive no information beyond the presence or absence of magic. You can choose to ignore magic you're fully aware of, such as the magic items and ongoing spells of you and your allies. You detect illusion magic only if that magic's effect has a lower rank than the rank of your <em>detect magic</em> spell. However, items that have an illusion aura but aren't deceptive in appearance (such as an @UUID[Compendium.pf2e.equipment-srd.Item.bikFUFRLwfdvX2x2]{Invisibility Potion}) typically are detected normally.</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> You learn the rank or level of the most powerful magical effect the spell detects, as determined by the GM.</p>\n<p><strong>Heightened (4th)</strong> As 3rd rank, but you also pinpoint the source of the highest-rank magic. Like for an imprecise sense, you don't learn the exact location, but can narrow down the source to within a 5-foot cube (or the nearest if larger than that).</p>"
+      },
+      "Grim Tendrils": {
+       "name": "Grim Tendrils",
+       "description": "<p>Tendrils of darkness curl out from your fingertips and race through the air. You deal 2d4 void damage and @Damage[(@item.level)[bleed]] damage to living creatures in the line. Each living creature in the line must attempt a Fortitude save.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature takes half the void damage and no persistent bleed damage.</p>\n<p><strong>Failure</strong> The creature takes full damage.</p>\n<p><strong>Critical Failure</strong> The creature takes double void damage and double persistent bleed damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The void damage increases by 2d4, and the persistent bleed damage increases by 1.</p>"
+      },
+      "Guidance": {
+       "name": "Guidance",
+       "description": "<p>You ask for the guidance of supernatural entities, granting the target a +1 status bonus to one attack roll, Perception check, saving throw, or skill check the target attempts before the duration ends. The target chooses which roll to use the bonus on before rolling. If the target uses the bonus, the spell ends. Either way, the target is then temporarily immune for 1 hour.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.3qHKBDF7lrHw8jFK]{Spell Effect: Guidance}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.3LyOkV25p7wA181H]{Effect: Guidance Immunity}</p>"
+      },
+      "Illusory Disguise": {
+       "name": "Illusory Disguise",
+       "description": "<p>You create an illusion that causes the target to appear as another creature of the same body shape, and with roughly similar height (within 6 inches) and weight (within 50 pounds). The disguise is typically good enough to hide their identity, but not to impersonate a specific individual. The spell changes their appearance and voice, but not mannerisms. You can change the appearance of its clothing and worn items, such as making its armor look like a dress. Held items are unaffected, and any worn item removed from the creature returns to its true appearance.</p>\n<p>Casting <em>illusory disguise</em> counts as setting up a disguise for the @UUID[Compendium.pf2e.actionspf2e.Item.AJstokjdG6iDjVjE]{Impersonate} use of Deception; it ignores any circumstance penalties the target might take for disguising itself as a dissimilar creature, gives a +4 status bonus to Deception checks to prevent others from seeing through the disguise, and lets the target add its level to such Deception checks even if untrained. You can Dismiss this spell.</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> The target can appear as any creature of the same size, even a specific individual. You must have seen an individual to replicate its appearance, and must have heard its voice to replicate its voice.</p>\n<p><strong>Heightened (4th)</strong> You can target up to 10 willing creatures. If you target multiple creatures, you can choose a different disguise for each target, but none can impersonate a specific individual. You can Dismiss each disguise individually or all collectively.</p>\n<p><strong>Heightened (7th)</strong> As 4th, but you can choose disguises that impersonate specific individuals. You must have seen an individual to replicate its appearance, and must have heard its voice to replicate its voice.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.3Ktyd5F9lOPo4myk]{Spell Effect: Illusory Disguise}</p>"
+      },
+      "Lock": {
+       "name": "Lock",
+       "description": "<p>The target's latch mechanism clinks shut, held fast by unseen magical wards. When you magically lock a target, you set an Athletics and Thievery DC to open it equal to your spell DC or the base lock DC with a +4 status bonus, whichever is higher. Any key or combination that once opened a lock affected by this spell does not do so for the duration of the spell, though the key or combination does grant a +4 circumstance bonus to checks to open the door. If the target is opened, the spell ends. Assuming the target is not barred or locked in some additional way, you can unlock and open it with an Interact action during which you touch the target. This does not end the spell. You can Dismiss this spell at any time and from any distance.</p>\n<hr />\n<p><strong>Heightened (2nd)</strong> The duration is unlimited, but you must expend 6 gp worth of precious metals as an additional cost.</p>"
+      },
+      "Phantasmal Minion": {
+       "name": "Phantasmal Minion",
+       "description": "<p>You summon a @UUID[Compendium.pf2e.pathfinder-bestiary.Actor.j7NNPfZwD19BwSEZ]{Phantasmal Minion}. The minion is roughly the shape of a humanoid. You can choose to have it be @UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{Invisible} or have an ephemeral appearance, but it's obviously a magical effect, not a real creature.</p>"
+      },
+      "Shield": {
+       "name": "Shield",
+       "description": "<p>You raise a magical shield of force. This counts as using the Raise a Shield action, giving you a +1 circumstance bonus to AC until the start of your next turn, but it doesn't require a hand to use.</p>\n<p>While the spell is in effect, you can use the @UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{Shield Block} reaction with your magic shield. The shield has Hardness 5. You can use the spell's reaction to reduce damage from any spell or magical effect, even if it doesn't deal physical damage. After you use Shield Block, the spell ends and you can't cast it again for 10 minutes.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{Effect: Shield Immunity}</p>\n<hr />\n<p><strong>Heightened (+2)</strong> The shield's Hardness increases by 5.</p>"
+      },
+      "Void Warp": {
+       "name": "Void Warp",
+       "description": "<p>You call upon the Void to harm life force. The target takes 2d4 void damage with a basic Fortitude save. On a critical failure, the target is also @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1} until the start of your next turn.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The damage increases by 1d4.</p>"
+      },
+      "Ceremonial Robes": {
+       "name": "Ceremonial Robes",
+       "description": "<p>Explorer's clothing is sturdy enough that it can be reinforced to protect you, even though it isn't a suit of armor. It comes in many forms, though the most common sorts look like clerical vestments, monk's garments, or wizard's robes, as members of all three classes are likely to avoid wearing armor.</p>"
+      },
+      "Indecipherable Book of Sigils (Spellbook)": {
+       "name": "Indecipherable Book of Sigils (Spellbook)",
+       "description": "<p>A spellbook holds the written knowledge necessary to learn and prepare various spells, a necessity for wizards (who typically get one for free) and a useful luxury for other spellcasters looking to learn additional spells. Each spellbook can hold up to 100 spells. The Price listed is for a blank spellbook.</p>"
+      },
+      "Fist": {
+       "name": "Fist"
+      },
+      "Protect the Master!": {
+       "name": "Protect the Master!",
+       "description": "<p><strong>Trigger</strong> The cult leader is targeted with an attack, and a lower-ranking cultist is adjacent to them</p><hr /><p><strong>Effect</strong> The cult leader orders their cultist to leap in front of the attack. The cultist and cult leader swap places, and the cultist becomes the target of the attack. If the cultist has Fanatical Frenzy or a similar ability, they can activate it as a reaction if they take damage from the triggering attack.</p>"
+      },
+      "Gather Converts": {
+       "name": "Gather Converts",
+       "description": "<p>With a short emotional phrase, the cult leader tries to sway the public to do their bidding. The cult leader tries to convince up to four bystanders in a crowd to cause a commotion, turn against a person or group, leave the area, protect the cult leader, or calm down. The cult leader attempts a single @Check[deception|against:perception] check against the highest Perception DC among the targets.</p><hr /><p><strong>Critical Success</strong> The targets believe the lie and act as directed for 1 minute. Additionally, one bystander remains by the cult leader's side, influenced enough to join the cult. All other targets become wise to the cult leader after 1 minute, at which point their attitude toward the leader worsens by one step.</p>\n<p><strong>Success</strong> As a critical success, but no bystander joins the cult permanently.</p>\n<p><strong>Critical Failure</strong> The crowd is unmoved and unamused, and their attitude toward the cult leader worsens by one step.</p>"
+      },
+      "Cult Lore (applies to the leader's own cult)": {
+       "name": "Cult Lore (applies to the leader's own cult)"
+      },
+      "Occult Focus Spells": {
+       "name": "Occult Focus Spells"
+      },
+      "Flail": {
+       "name": "Flail",
+       "description": "<p>This weapon consists of a wooden handle attached to a spiked ball or cylinder by a chain, rope, or strap of leather.</p>"
+      },
+      "iE598iMZ8KPClEM6": {
+       "name": "Flail"
+      },
+      "Fearful Feast": {
+       "name": "Fearful Feast",
+       "description": "<p><strong>Trigger</strong> A creature within range becomes @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened}</p><hr /><p>You open your mouth wide and inhale sharply; you draw in the bravery, self-confidence, and hope to which the frightened target clings and then strip away the target's false assumption that these fragile emotions can save them from the oblivion of terror. You deal 6d4 mental damage to the creature, which must attempt a Will saving throw.</p><hr /><p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature takes half damage.</p>\n<p><strong>Failure</strong> The creature takes full damage; you regain Hit Points equal to half the damage the target takes.</p>\n<p><strong>Critical Failure</strong> The creature's frightened condition increases by 1 (to a maximum of @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 4}) and it takes double damage; you regain Hit Points equal to half the damage the target takes.</p><hr /><p><strong>Heightened (+1)</strong> The damage increases by 1d4.</p>"
+      },
+      "Lift Nature's Caul": {
+       "name": "Lift Nature's Caul",
+       "description": "<p>With a wave of the hand, you cause all creatures in the area to see the world around them as if a gauzy film had been lifted away to expose the truth that lies below their perceived reality. Natural features they can see grow twisted and horrendous, structures appear distorted and ruined, and objects seem warped and alien. This alternate vision fades quickly, but the glimpse beyond the natural world lingers for the spell's duration.</p>\n<p>Aberrations or worshippers of Outer Gods or Great Old Ones are bolstered by this vision of warped reality and gain a +1 status bonus to Will saving throws and attack rolls for 1 minute, while all other creatures must attempt a Will saving throw.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.ihv1azg80N3kj7Vo]{Spell Effect: Lift Nature's Caul (Bonus)}</p><hr /><p><strong>Critical Success</strong> The creature is unaffected and temporarily immune for 1 hour.</p>\n<p><strong>Success</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1}.</p>\n<p><strong>Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1} for 1 minute and @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 1}.</p>\n<p><strong>Critical Failure</strong> The creature is stupefied 1 for 1 minute and @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 2}. It can't reduce the value of its frightened condition below 1 as long as it remains stupefied by this spell.</p><hr /><p><strong>Heightened (+2)</strong> The area increases by 5 feet.</p>"
+      },
+      "Blood Vendetta": {
+       "name": "Blood Vendetta",
+       "description": "<p><strong>Requirements</strong> You can bleed.</p>\n<p><strong>Trigger</strong> A creature deals piercing, slashing, or persistent bleed damage to you.</p>\n<hr />\n<p>You curse the target, punishing it for having the audacity to spill your blood. The target takes 2d6 persistent bleed damage and must attempt a Will save.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target takes half the persistent bleed damage.</p>\n<p><strong>Failure</strong> The target takes the full persistent bleed damage. Until the bleeding stops, the target has weakness 1 to piercing and slashing damage. @UUID[Compendium.pf2e.spell-effects.Item.buXx8Azr4BYWPtFg]{Spell Effect: Blood Vendetta (Failure)}</p>\n<p><strong>Critical Failure</strong> As failure, but the target takes double the persistent bleed damage.</p>\n<hr />\n<p><strong>Heightened (+2)</strong> The persistent bleed damage increases by 2d6.</p>"
+      },
+      "Fear": {
+       "name": "Fear",
+       "description": "<p>You plant fear in the target; it must attempt a Will save.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 1}.</p>\n<p><strong>Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 2}.</p>\n<p><strong>Critical Failure</strong> The target is @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 3} and @UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]{Fleeing} for 1 round.</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> You can target up to five creatures.</p>"
+      }
+     }
+    },
+    "Nhimbaloth Cultist": {
+     "name": "Nhimbaloth Cultist",
+     "tokenName": "Nhimbaloth Cultist",
+     "publicNotes": "<p>Hidden secrets and occult powers have an irresistible lure for many. Since the majority of these NPCs are spellcasters, consider using alternative spell lists to adjust their themes.</p>",
+     "allSaves": "(Will +2 vs. higher-ranking members of the cult)",
+     "prototypeToken": "Nhimbaloth Cultist",
+     "items": {
+      "Cultist Garb (Functions as Leather Armor)": {
+       "name": "Cultist Garb (Functions as Leather Armor)",
+       "description": "<p>A mix of flexible and molded boiled leather, a suit of this type of armor provides some protection with maximum flexibility.</p>"
+      },
+      "Fist": {
+       "name": "Fist"
+      },
+      "Will +2 vs. Higher Ranking Members of the Cult": {
+       "name": "Will +2 vs. Higher Ranking Members of the Cult"
+      },
+      "Fanatical Frenzy": {
+       "name": "Fanatical Frenzy",
+       "description": "<p><strong>Requirements</strong> The cultist has taken damage and is neither @UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{Fatigued} nor already in a frenzy</p><hr /><p><strong>Effect</strong> The cultist flies into a frenzy that lasts 1 minute. While frenzied, the cultist gains a +1 status bonus to attack rolls and a +2 status bonus to damage rolls, and they take a –2 penalty to AC. The cultist can't voluntarily stop their frenzy. After their frenzy, the cultist is fatigued.</p>"
+      },
+      "Cult Lore (for the cultist's own cult)": {
+       "name": "Cult Lore (for the cultist's own cult)"
+      },
+      "Improvised Flail": {
+       "name": "Improvised Flail",
+       "description": "<p>This weapon consists of a wooden handle attached to a spiked ball or cylinder by a chain, rope, or strap of leather and appears to be of shoddy make.</p>"
+      },
+      "QLxLCVJnKDia46xW": {
+       "name": "Improvised Flail"
+      },
+      "Occult Text": {
+       "name": "Occult Text"
+      }
+     }
+    },
+    "Nhimbaloth Hunter": {
+     "name": "Nhimbaloth Hunter",
+     "tokenName": "Nhimbaloth Hunter",
+     "publicNotes": "<p>These Nhimbaloth \"Hunters\" have grown past the minor pursuits of other hunters and they seek the most dangerous game, men. They hunt car nviores who have recently eaten a meat</p><hr /><p>Modified from the @UUID[Compendium.pf2e.pathfinder-npc-core.3qDYEHtyAobpCg5r]{Monster Hunter}</p>",
+     "prototypeToken": "Nhimbaloth Hunter",
+     "items": {
+      "Composite Longbow": {
+       "name": "Composite Longbow",
+       "description": "<p>This projectile weapon is made from horn, wood, and sinew laminated together to increase the power of its pull and the force of its projectile. Like all longbows, its great size also increases the bow's range and power. You must use two hands to fire it, and it cannot be used while mounted. Any time an ability is specifically restricted to a longbow, such as Erastil's favored weapon, it also applies to composite longbows unless otherwise stated.</p>"
+      },
+      "Hide Armor": {
+       "name": "Hide Armor",
+       "description": "<p>A mix of furs, sturdy hide, and sometimes molded boiled leather, this armor provides protection due to its layers of leather, though its bulkiness slows the wearer down and decreases mobility.</p>"
+      },
+      "Arrows": {
+       "name": "Arrows",
+       "description": "<p>These projectiles are the ammunition for bows. The shaft of an arrow is made of wood. It is stabilized in flight by fletching at one end and bears a metal head on the other.</p>"
+      },
+      "Vqjb5Zoa5sSTgnDg": {
+       "name": "Composite Longbow"
+      },
+      "Favored Game": {
+       "name": "Favored Game",
+       "description": "<p>A monster hunter specializes in bringing down certain creatures. These favored game are those that have recently eaten meat in the last few hours.</p>"
+      },
+      "Reactive Strike": {
+       "name": "Reactive Strike",
+       "description": "<p><strong>Trigger</strong> A creature within your reach uses a manipulate action or a move action, makes a ranged attack, or leaves a square during a move action it's using.</p>\n<hr />\n<p>You lash out at a foe that leaves an opening. Make a melee Strike against the triggering creature. If your attack is a critical hit and the trigger was a manipulate action, you disrupt that action. This Strike doesn't count toward your multiple attack penalty, and your multiple attack penalty doesn't apply to this Strike.</p>"
+      },
+      "Hunter's Onslaught": {
+       "name": "Hunter's Onslaught",
+       "description": "<p><strong>Frequency</strong> once per hour</p><p><strong>Requirements</strong> The monster hunter isn't @UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]{Fatigued}</p><hr /><p><strong>Effect</strong> The monster hunter leads an attack against their monstrous foe. The monster hunter chooses an enemy they can see that qualifies as their favored game. The monster hunter becomes @UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{Fascinated} by that creature and gains 10 temporary Hit Points that last as long as the onslaught does. During the onslaught, the hunter gains a +8 status bonus to damage rolls against the designated enemy, and allies in a 30-foot aura around the hunter gain half that bonus. The onslaught lasts for 1 minute or until either the nhimbaloth hunter or the designated creature falls @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{Unconscious}.</p>"
+      },
+      "Primal Fear": {
+       "name": "Primal Fear",
+       "description": "<p>When the monster hunter hits a creature that qualifies as their favored game, that creature is @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 1} (or @UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{Frightened 2} on a critical hit).</p>"
+      },
+      "Sudden Charge": {
+       "name": "Sudden Charge",
+       "description": "<p>The monster hunter Strides twice and makes a melee Strike.</p>"
+      },
+      "War Flail": {
+       "name": "War Flail",
+       "description": "<p>This large flail has a long shaft connected to a shorter piece of stout wood or metal that's sometimes inlaid with spikes.</p>"
+      },
+      "4htPvnrKZiOvL8Z0": {
+       "name": "War Flail"
+      },
+      "Nhimbaloth Lore": {
+       "name": "Nhimbaloth Lore"
+      },
+      "Carnivoresight": {
+       "name": "Carnivoresight",
+       "description": "<p>A Nhimbaloth Hunter automatically knows wheter a creature it sees qualifies as its Favored Game, and has a +4 status bonus to @UUID[Compendium.pf2e.actionspf2e.EA5vuSgJfiHH7plD]{Track} them.</p>"
+      },
+      "Religious Symbol (Wooden)": {
+       "name": "Religious Symbol (Wooden)",
+       "description": "<p>This piece of wood or silver is emblazoned with an image representing a deity. Some divine spellcasters, such as clerics, can use a religious symbol of their deity to use certain abilities and cast some spells. A religious symbol can be worn on the body on a chain or pin, or can be held.</p>"
+      }
+     }
+    },
+    "Eyes of the Ghost Queen": {
+     "name": "Eyes of the Ghost Queen",
+     "tokenName": "Eyes of the Ghost Queen",
+     "disable": "<p>@Check[type:deception|dc:30|name:Cheat Her Sight] (expert) twice to confound the wisp eyes with your own deceptions; two wisps are destroyed on each successful check. Alternatively, @Check[type:occultism|dc:28|name:Steel Your Mind] (expert) four times to create a ward against the haunt's mental influence; one wisp is destroyed on each successful check. </p>",
+     "hazarddescription": "<p class=\"p1\">The ongoing effect of investigating the machinations of Nhimbaloth and her servants moves from the realm of sleep to your waking moments. Ominous cracks in the fabric of reality appear before your eyes, fraying the edges of your sanity. You are no longer certain of who your friends are. Allies appear to shed their disguises and reveal themselves to be malevolent monsters.</p>",
+     "reset": "<p>The haunt deactivates 1 minute after all creatures leave the area but resets immediately thereafter.</p>",
+     "routine": "<p>(4 actions) For each action available, the haunt targets a creature with the Whispers of Betrayal ability. When a wisp is destroyed, reduce the number of actions for the routine by 1.</p>",
+     "stealthdetails": "<p>(master)</p>",
+     "prototypeToken": "Eyes of the Ghost Queen",
+     "items": {
+      "Unmask Evil": {
+       "name": "Unmask Evil",
+       "description": "<p><strong>Trigger</strong> Two or more creatures enter the haunt's area</p><hr /><p><strong>Effect</strong> Each creature sees the forms of nearby creatures shift and change, appearing to transform into fiendish or aberrant beings with a thirst for blood. Each creature in the area must attempt a @Check[type:will|dc:33] save. The haunt then rolls initiative.</p><hr /><p><strong>Critical Success</strong> The creature sees through the illusions entirely and is temporarily immune to the haunt's actions for 1 minute.</p><p><strong>Success</strong> The creature is unaffected by the strange images.</p><p><strong>Failure</strong> The creature believes the illusions to be true; when an action from the haunt inflicts @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused}, they do not attempt flat checks toe end the confused condition when they take damage.</p><p><strong>Critical Failure</strong> As failure, but the creature is left with a lingering suspicion of others and can't benefit from the @UUID[Compendium.pf2e.actionspf2e.Item.HCl3pzVefiv9ZKQW]{Aid} action for 24 hours.</p>"
+      },
+      "Whispers of Betrayal": {
+       "name": "Whispers of Betrayal",
+       "description": "<p>The haunt continues to confound victims' senses and inspire them to commit violence against each other.</p><p>Target a creature in the haunt's area dealing @Damage[(2d12+15)[void]] Damage on a @Check[type:will|dc:30|showDC:all]{basic Will save}.</p><hr /><p><strong>Critical Success</strong> The creature is unaffected and temporarily immune for 1 minute.</p><p><strong>Success</strong> The creature is unaffected.</p><p><strong>Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused} for 1 round and is targeted by the Your Lot, To Die curse.</p><p><strong>Critical Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{Confused} for 1 minute and is targeted by the Your Lot, To Die curse.</p>"
+      }
+     }
+    },
+    "Grasp of the Ghost Queen": {
+     "name": "Grasp of the Ghost Queen",
+     "tokenName": "Grasp of the Ghost Queen",
+     "disable": "<p>@Check[type:intimidation|dc:35|name:Return Her Gaze] (expert) twice to impose your will on the wisp eyes; two wisps are destroyed on each successful check. Alternatively, @Check[type:occultism|dc:32|name:Steel Your Mind] (master) four times to create a ward against the haunt's mental influence; one wisp is destroyed on each successful check. </p>",
+     "hazarddescription": "<p class=\"p1\">The ongoing effect of investigating the machinations of Nhimbaloth and her servants moves from the realm of sleep to your waking moments. Ominous cracks in the fabric of reality appear before your eyes, fraying the edges of your sanity. You are no longer certain of who your friends are. Allies appear to shed their disguises and reveal themselves to be malevolent monsters.</p>",
+     "reset": "<p>The haunt deactivates 1 minute after all creatures leave the area but resets immediately thereafter.</p>",
+     "routine": "<p>(4 actions) For each action available, the haunt targets a creature with the Betrayal's Grasp ability. When a wisp is destroyed, reduce the number of actions for the routine by 1.</p>",
+     "stealthdetails": "<p>(master)</p>",
+     "prototypeToken": "Grasp of the Ghost Queen",
+     "items": {
+      "Seize Control": {
+       "name": "Seize Control",
+       "description": "<p>The haunt is quick to react when creatures enter its range.</p><section class=\"statblock\"><p><strong>Trigger</strong> Two or more creatures enter the haunt's area</p></section><hr /><section class=\"statblock\"><p><strong>Effect</strong> Each creature sees the forms of nearby creatures shift and change, appearing to transform into fiendish or aberrant beings with a thirst for blood. Each creature in the area must attempt a @Check[type:will|dc:35] save. The haunt then rolls initiative.</p></section><hr /><section class=\"statblock\"><p><strong>Success</strong> The creature is unaffected by the strange images.</p><p><strong>Failure</strong> The creature feels that death is close at hand and becomes @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{Doomed 1}.</p><p><strong>Critical Failure</strong> As failure, and the creature is @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{Stupefied 1} for 24 hours.</p></section>"
+      },
+      "Betrayal's Grasp": {
+       "name": "Betrayal's Grasp",
+       "description": "<p>The haunt continues to confound victims’ senses and inspire them to commit violence against each other. </p><section class=\"statblock\"><p><strong>Target</strong> 1 creature in the haunt's area</p><p><strong>Save</strong> @Check[type:will|dc:32|showDC:all]{basic Will save}</p><p><strong>Damage</strong> @Damage[(3d10+14)[void]]{3d10+14 void damage}</p></section><hr /><section class=\"statblock\"><p><strong>Success</strong> The creature is unaffected.</p><p><strong>Failure</strong> The creature is @UUID[Compendium.pf2e.conditionitems.Item.9qGBRpbX9NEwtAAr]{Controlled} for 1 round and is exposed to the Your Lot, To Die curse.</p><p><strong>Critical Failure</strong> The creature is controlled for 1 minute and is exposed to the Your Lot, To Die curse.</p></section>"
+      }
+     }
+    },
+    "Murmur, The Implement of Empty Death": {
+     "name": "Murmur, The Implement of Empty Death",
+     "tokenName": "Murmur, Implement of the Empty Death",
+     "disable": "<p>This haunt can only be disabled by performing three sequential checks.</p>",
+     "hazarddescription": "<p>When an occult spellcaster of the Empty Death seeks to give any type of regenerative ability to a particularly powerful and resource-intensive void creation (an ongoing spell, a complex hazard, or even a creature), they sometimes elect to use a separate implement to achieve this end. This implement draws void energy from the River of Souls, where the Empty Death hunts, funneling and amplifying that energy to a specific place on the mortal plane. The void energy can then be used to power the spellcaster's creation (or creations). While an object imbued with occult power makes for an adequate implement, a living creature used in this way generates a purer form of void energy as well as more consistent output. However, most beings, even those with no conscience, will refuse to use a living creature for such experiments, knowing that to do so would be to condemn that creature to an eternal life of unimaginable pain.</p><p>Unfortunately, those who serve the Empty Death — an inscrutable, malevolent Elder God with neither edicts nor anathemas — have no such scruples. These spellcasters are perfectly willing to capture and enslave a sentient creature to achieve their macabre goals. Many even take obscene delight in the process, which, among other things, involves permanently inflicting the feeblemind condition on the creature to domesticate and control it, scraping every ounce of soul energy from its mortal shell, and cruelly reshaping that soul energy to withstand the continual agony of serving as a living void energy source. Through a final series of unspeakable experiments, the spellcaster then consigns part of the creature's soul essence to the River of Souls while imprisoning the other part of the soul to a specific location on the material plane. The resulting abomination is known as an implement of the Empty Death, a tortured soul used as a living conduit between the Empty Death's plane and the mortal realm.</p><p>Sometimes known as a pale thrall, an implement of the Empty Death lives a life of perpetual, horrendous torment, possessing barely a spark of intelligence beyond the level of an average, nonmagical animal. At times, the implement's former life returns to them in vague, fragmented flashes of memory, but they can do nothing with these images. Indeed, they are incapable of speech beyond the simplest of words, which frequently takes the form of a plea to be killed and thereby released from their eternal suffering.</p><p>Implements of the Empty Death typically retain most or all of the abilities they had before their enslavement, though their creators will sometimes modify, augment, or add abilities to help the implement defend itself.</p>",
+     "reset": "<p>If there are no creatures within its Petrifying Gaze aura at the start of its turn, the haunt spends 1 action to emit a shrill scream that alerts its creator to the presence of intruders. It then uses an action to shut and lock the door and resets.</p><p>Disabling this haunt permanently destroys it, and the imprisoned creature dies.</p>",
+     "routine": "<p>(4 actions; occult, spirit, void) The haunt uses its first two actions to make Snake Fangs melee Strikes against any creature in range. It uses its remaining two actions to Focus Gaze on any creatures within its Petrifying Gaze aura, prioritizing creatures who have already failed to save against Petrifying Gaze.</p>",
+     "stealthdetails": "<p>(master)</p>",
+     "prototypeToken": "Murmur, Implement of the Empty Death",
+     "items": {
+      "Snake Fangs": {
+       "name": "Snake Fangs"
+      },
+      "Serpent Venom": {
+       "name": "Serpent Venom",
+       "description": "<p><strong>Saving Throw</strong> @Check[fortitude|dc:30]</p><hr /><p><strong>Maximum Duration</strong> 6 rounds</p><p><strong>Stage 1</strong> @Damage[3d6[poison]] damage and @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1} (1 round)</p><p><strong>Stage 2</strong> @Damage[4d6[poison]] damage and @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 2} (1 round)</p>"
+      },
+      "Biting Snakes": {
+       "name": "Biting Snakes",
+       "description": "<p><strong>Trigger</strong> A creature ends its movement adjacent to the haunt.</p><hr /><p><strong>Effect</strong> The haunt makes a snake fangs Strike against the creature. The haunt then rolls initiative.</p>"
+      },
+      "Petrifying Gaze": {
+       "name": "Petrifying Gaze",
+       "description": "<p>30 feet. When a creature ends its turn in the aura, it must attempt a @Check[fortitude|dc:30] save. If the creature fails, it becomes @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{Slowed 1} for 1 minute. The haunt can deactivate or activate this aura by using a single action, which has the concentrate trait.</p>"
+      },
+      "Focus Gaze": {
+       "name": "Focus Gaze",
+       "description": "<p>The haunt fixes their glare at a creature they can see within 30 feet. The target must immediately attempt a @Check[fortitude|dc:30] save against the haunt's petrifying gaze. The haunt's gaze is unaffected by walls or other nonmagical barriers.</p><p>If the creature was already slowed by petrifying gaze before attempting its save, a failed save causes it to be petrified permanently. After attempting its save, the creature is then temporarily immune until the start of the haunt's next turn.</p>"
+      }
+     }
+    },
+    "Ysondkhelir, Nightmare Addict": {
+     "name": "Ysondkhelir, Nightmare Addict",
+     "tokenName": "Ysondkhelir, Nightmare Addict",
+     "publicNotes": "<p>Slavers and raiders from the cold, windswept dimension of Leng, these malevolent humanoids range across reality in ominous black ships capable of sailing beyond the borders of dimensions and planes. Although most denizens of Leng seek slaves and plunder like any pirate, others operate as self-styled ambassadors and merchants, sowing discord with far-ranging plots. While the inscrutable denizens dress themselves in flowing robes, veils, and broad turbans to appear human, their aberrant physiology, when glimpsed, is evident from their crown of stubby horns and tentacled jaws to their furry, goat-like legs.</p>\n<p>Above the fierce captains who command the infamous black ships are an even higher caste of denizens of Leng. These cultists and musicians serve as high priests, laboring to appease the frightening gods who look down upon the Nightmare Realm with cold malice.</p>",
+     "blurb": "Male denizen of leng",
+     "hp": "planar fast healing 10",
+     "prototypeToken": "Ysondkhelir, Nightmare Addict",
+     "items": {
+      "Occult Innate Spells": {
+       "name": "Occult Innate Spells"
+      },
+      "Outcast's Curse": {
+       "name": "Outcast's Curse",
+       "description": "<p>You afflict the target with a curse that makes its presence abrasive and off-putting. The target must attempt a Will save.</p>\n<hr />\n<p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> For 10 minutes, the target must roll twice and use the worse result whenever attempting a Deception, Diplomacy, Intimidation, or Performance check, and creatures they encounter have an initial attitude toward them of one step worse (for instance, @UUID[Compendium.pf2e.conditionitems.Item.I1ffBVISxLr2gC4u]{Unfriendly} instead of @UUID[Compendium.pf2e.conditionitems.Item.fuG8dgthlDWfWjIA]{Indifferent}).</p>\n<p><strong>Failure</strong> As success, but the effect is permanent.</p>\n<p><strong>Critical Failure</strong> As failure, and creatures that the target encounters have an initial attitude toward them of two steps worse.</p>"
+      },
+      "Truespeech (Constant)": {
+       "name": "Truespeech (Constant)",
+       "description": "<p>The target can understand all words regardless of language and also speak the languages of other creatures. When in a mixed group of creatures, each time the target speaks, it can choose a creature and speak in a language that creature understands, even if the target doesn't know what language that is.</p>\n<hr />\n<p><strong>Heightened (7th)</strong> The duration is 8 hours.</p>"
+      },
+      "Hypnotic Pattern": {
+       "name": "Hypnotic Pattern",
+       "description": "<p>You create a pattern of shifting colors that hovers in the air in a geometric cloud. Creatures are @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{Dazzled} while inside the pattern. In addition, a creature must attempt a Will saving throw if it is inside the pattern when you cast it, when it enters the pattern, when it ends its turn within the pattern, or if it uses a Seek or Interact action on the pattern. A creature currently @UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{Fascinated} by the pattern doesn't attempt new saves.</p>\n<hr />\n<p><strong>Success</strong> The target is unaffected.</p>\n<p><strong>Failure</strong> The target is Fascinated by the pattern.</p>\n<p><strong>Critical Failure</strong> The target is Fascinated by the pattern. While it remains Fascinated, it can't use reactions.</p>"
+      },
+      "Locate": {
+       "name": "Locate",
+       "description": "<p>You learn the direction to the target (if you picked a specific object, such as \"my mother's sword\") or the nearest target (if you picked a type of object, such as \"swords\"). If the target is a specific object, you must have observed it directly with your own senses. If it's a type of object, you still need to have an accurate mental image of the type of object. If there's lead or running water between you and the target, this spell can't locate the object. This means you might find a type of object farther away if the nearest one is behind lead or running water.</p>\n<hr />\n<p><strong>Heightened (5th)</strong> You can target a specific creature or ancestry instead of an object, but you must have met or seen up close the creature or ancestry you want to target.</p>"
+      },
+      "Mind Reading": {
+       "name": "Mind Reading",
+       "description": "<p>With a cursory mental touch, you attempt to read the target's mind. It must attempt a Will save. The target then becomes temporarily immune to your mind reading for 1 hour.</p>\n<hr /><strong>Critical Success</strong> The target perceives vague surface thoughts from you when you Cast the Spell.\n<p><strong>Success</strong> You find out whether the target's Intelligence modifier is higher than, equal to, or lower than yours.</p>\n<p><strong>Failure</strong> You perceive vague surface thoughts from the target when you Cast the Spell, and you find out whether its Intelligence modifier is higher than, equal to, or lower than yours.</p>\n<p><strong>Critical Failure</strong> As failure, and for the duration of the spell, you can Sustain the Spell to detect the target's surface thoughts again. The target doesn't receive any additional saves.</p>"
+      },
+      "Mirror Image": {
+       "name": "Mirror Image",
+       "description": "<p>Three illusory images of you swirl about your space, potentially causing those who attack you to hit one of the images instead of you. Any attack that would hit you has a random chance of hitting one of your images instead of you. If all three images remain, there is a 1 in 4 chance of hitting you (1 on [[/r 1d4]]). With two images remaining, there is a 1 in 3 chance of hitting you (1-2 on [[/r 1d6]]). With only one image, the chances are 1 in 2 (1-3 on [[/r 1d6]]).</p>\n<p>Once an image is hit, it is destroyed. If an attack roll fails to hit your AC but doesn't critically fail, it destroys an image but has no additional effect (even if the attack would normally have an effect on a failure). If an attack roll is a critical success and would hit one of the images, one of the images is destroyed and the attack roll becomes a success against you. Once all the images are destroyed, the spell ends.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.0PO5mFRhh9HxGAtv]{Spell Effect: Mirror Image}</p>"
+      },
+      "Void Warp": {
+       "name": "Void Warp",
+       "description": "<p>You call upon the Void to harm life force. The target takes 2d4 void damage with a basic Fortitude save. On a critical failure, the target is also @UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{Enfeebled 1} until the start of your next turn.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The damage increases by 1d4.</p>"
+      },
+      "Detect Magic": {
+       "name": "Detect Magic",
+       "description": "<p>You send out a pulse that registers the presence of magic. You receive no information beyond the presence or absence of magic. You can choose to ignore magic you're fully aware of, such as the magic items and ongoing spells of you and your allies.</p>\n<p>You detect illusion magic only if that magic's effect has a lower level than the level of your detect magic spell. However, items that have an illusion aura but aren't deceptive in appearance (such as an invisibility potion) typically are detected normally.</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> You learn the school of magic for the highest-level effect within range that the spell detects. If multiple effects are equally strong, the GM determines which you learn.</p>\n<p><strong>Heightened (4th)</strong> As 3rd level, but you also pinpoint the source of the highest-level magic. Like for an imprecise sense, you don't learn the exact location, but can narrow down the source to within a 5-foot cube (or the nearest if larger than that).</p>"
+      },
+      "Telekinetic Hand": {
+       "name": "Telekinetic Hand",
+       "description": "<p>You create a floating, magical hand, either invisible or ghostlike, that grasps the target object and levitates it slowly up to 20 feet in any direction. When you Sustain the spell, you can move the object an additional 20 feet. If the object is in the air when the spell ends, the object falls.</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> You can target an unattended object with a Bulk of 1 or less.</p>\n<p><strong>Heightened (5th)</strong> The range increases to 60 feet, and you can target an unattended object with a Bulk of 1 or less.</p>\n<p><strong>Heightened (7th)</strong> The range increases to 60 feet, and you can target an unattended object with a Bulk of 2 or less.</p>"
+      },
+      "Message": {
+       "name": "Message",
+       "description": "<p>You mouth words quietly, but instead of coming out of your mouth, they're transferred directly to the ears of the target. While others can't hear your words any better than if you normally mouthed them, the target can hear your words as if they were standing next to you.</p>\n<p>The target can give a brief response as a reaction, or as a free action on their next turn if they wish, but they must be able to see you and be within range to do so. If they respond, their response is delivered directly to your ear, just like the original message.</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> The spell's range increases to 500 feet.</p>"
+      },
+      "Phantom Pain": {
+       "name": "Phantom Pain",
+       "description": "<p>Illusory pain wracks the target, dealing 2d4 mental damage and @Damage[(@item.level)d4[persistent,mental]] damage. The target must attempt a Will save.</p><hr /><p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target takes full initial damage but no persistent damage, and the spell ends immediately.</p>\n<p><strong>Failure</strong> The target takes full initial and persistent damage, and the target is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 1}. If the target recovers from being Sickened, the persistent damage ends and the spell ends.</p>\n<p><strong>Critical Failure</strong> As failure, but the target is @UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{Sickened 2}.</p><hr /><p><strong>Heightened (+1)</strong> The damage increases by 2d4 and the persistent damage by 1d4.</p>"
+      },
+      "Read Aura": {
+       "name": "Read Aura",
+       "description": "<p>You focus on the target object, opening your mind to perceive magical auras. When the casting is complete, you know whether that item is magical, and if it is, you learn the school of magic.</p>\n<p>If the object is illusory, you detect this only if the effect's level is lower than the level of your read aura spell.</p>\n<hr />\n<p><strong>Heightened (3rd)</strong> You can target up to 10 objects.</p>\n<p><strong>Heightened (6th)</strong> You can target any number of objects.</p>"
+      },
+      "Kukri": {
+       "name": "Kukri"
+      },
+      "Jaws": {
+       "name": "Jaws"
+      },
+      "Darkvision": {
+       "name": "Darkvision",
+       "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>"
+      },
+      "Constant Spells": {
+       "name": "Constant Spells",
+       "description": "<p>@Localize[PF2E.NPC.Abilities.Glossary.ConstantSpells]</p>"
+      },
+      "Planar Fast Healing": {
+       "name": "Planar Fast Healing",
+       "description": "<p>A denizen of Leng maintains a connection to Leng at all times, and when away from Leng, they have fast healing 5. They lose this ability on Leng or in areas where planar connections do not function. If killed, their body dissolves into nothingness in [[/br 1d4 #Dissolve Body]]{1d4 rounds}, leaving behind their equipment. A slain denizen reforms in Leng; they can be permanently killed only when their planar fast healing doesn't function.</p>\n<hr />\n<p>@Localize[PF2E.NPC.Abilities.Glossary.FastHealing]</p>"
+      },
+      "No Breath": {
+       "name": "No Breath",
+       "description": "<p>Denizens of Leng don't need to breathe.</p>"
+      },
+      "Debilitating Bite": {
+       "name": "Debilitating Bite",
+       "description": "<p>A creature that takes damage from a denizen's bite must succeed at a @Check[type:fortitude|dc:27] save or become @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy 1}. Each time a target fails an additional save against this ability, the condition value increases by 1 (to a maximum of Clumsy 4). This condition value decreases by 1 every 24 hours.</p>"
+      },
+      "Leng Ruby": {
+       "name": "Leng Ruby",
+       "description": "<p>Many denizens of Leng carry strange rubies mined from quarries in Leng. As long as a creature holds a Leng ruby that it willingly accepted as a gift or payment from a denizen of Leng, any denizen of Leng can target that creature with <em>@UUID[Compendium.pf2e.spells-srd.Item.KSAEhNfZyXMO7Z7V]{Outcast's Curse}</em>, <em>@UUID[Compendium.pf2e.spells-srd.Item.R8bqnYiThB6MYTxD]{Phantom Pain}</em>, or <em>@UUID[Compendium.pf2e.spells-srd.Item.KHnhPHL4x1AQHfbC]{Mind Reading}</em> at a range of 1 mile, and the bearer uses an outcome one degree of success worse than the result of its saving throw against <em>Outcast's Curse</em>.</p>"
+      },
+      "Sailing Lore": {
+       "name": "Sailing Lore"
+      },
+      "Gravity Well": {
+       "name": "Gravity Well",
+       "description": "<p>You create a sphere of altered gravity. All creatures and unsecured objects in the area move towards the center, depending on their Reflex saving throws. This follows the rules for forced movement. If there's not enough space near the center of the sphere, creatures and objects nearer to the center move first, and others move as far as they can without being blocked, up to the amount set by their saving throw outcomes.</p>\n<hr />\n<p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature moves 5 feet toward the center.</p>\n<p><strong>Failure</strong> The creature moves 15 feet toward the center.</p>\n<p><strong>Critical Failure</strong> The creature moves 30 feet toward the center.</p>"
+      },
+      "Invisibility": {
+       "name": "Invisibility",
+       "description": "<p>Illusions bend light around the target, rendering it @UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{Invisible}. This makes it @UUID[Compendium.pf2e.conditionitems.Item.VRSef5y1LmL2Hkjf]{Undetected} to all creatures, though the creatures can attempt to find the target, making it @UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]{Hidden} to them instead. If the target uses a hostile action, the spell ends after that hostile action is completed.</p>\n<hr />\n<p><strong>Heightened (4th)</strong> The spell lasts 1 minute, but it doesn't end if the target uses a hostile action.</p>"
+      },
+      "Whispers of the Void": {
+       "name": "Whispers of the Void",
+       "description": "<p>You whisper baleful secrets that transcend language and carry magically to the ears of your foes. The words take physical form, weakening the life force of the targets, each of which must attempt a Fortitude save.</p><hr /><p><strong>Critical Success</strong> The creature is unaffected.</p>\n<p><strong>Success</strong> The creature takes @Damage[(floor(@item.rank/2))d8[persistent,void]] damage.</p>\n<p><strong>Failure</strong> The creature takes @Damage[(floor(@item.rank/2)*2)d8[persistent,void]] damage and becomes @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 1}.</p>\n<p><strong>Critical Failure</strong> The creature takes @Damage[(floor(@item.rank/2)*2)d8[persistent,void]] damage and becomes @UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{Drained 2} and @UUID[Compendium.pf2e.conditionitems.Item.3uh1r86TzbQvosxv]{Doomed 1}.</p><hr /><p><strong>Heightened (+2)</strong> The persistent void damage increases by 1d8 on a success, or by 2d8 on a failure or critical failure.</p>"
+      },
+      "Rouse Skeletons": {
+       "name": "Rouse Skeletons",
+       "description": "<p>Misshapen skeletal forms erupt from a solid surface, such as a stone floor, and fill the burst. The area they fill is difficult terrain. Their grasping claws deal 2d6 slashing damage to creatures on the ground in the area when the skeletons first appear with a basic Reflex save.</p>\n<p>On subsequent rounds, the first time you Sustain the Spell each round, you can move the area of skeletons up to 20 feet within the range of the spell and deal 2d6 slashing damage with a basic Reflex save to each creature in the new area.</p>\n<p>Damaging or destroying the skeletons is irrelevant, as new bones pull forth from the ground to repair and replace any that are obliterated.</p><hr /><p><strong>Heightened (+2)</strong> The damage increases by 1d6.</p>"
+      },
+      "Your Fear Gets Me High": {
+       "name": "Your Fear Gets Me High",
+       "description": "<p>As long as he exerts full control over Dorianna, Ysondkhelir gains the following abilities:</p><ul><li><p>He is Huge, instead of his normal size, with a reach of 15 feet on melee attacks.</p></li><li><p>He has damage resistance 10 (physical).</p></li><li><p>He gains the Spawn Hand action.</p></li><li><p>He is Quickened. He can only use the extra action granted by the Quickened condition to Cast a Spell or to Spawn Hand.</p></li></ul>"
+      },
+      "You're In My Nightmare": {
+       "name": "You're In My Nightmare",
+       "description": "<p>As long as Ysondkhelir is alive, any square of his dreamworld that lacks a solid floor is considered to be a nightmare space. A character who enters or ends their turn in a nightmare space triggers the effect below, as the dream-catcher's malevolent nightmares tear into their mind.</p><hr /><section class=\"statblock\"><p>@Check[type:will|dc:26|showDC:all]{basic Will save}</p><p>@Damage[(2d10+13)[spirit,mental]]{2d10+13 spirit and mental damage}</p><p><strong>Critical success</strong> No damage. The creature is @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 1}.</p><p><strong>Success</strong> Half damage. The creature is @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 2}.</p><p><strong>Failure</strong> Full damage. The creature is @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 3}.</p><p><strong>Critical failure</strong> Double damage. The creature is @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 4}.</p></section>"
+      },
+      "Spawn Hand": {
+       "name": "Spawn Hand",
+       "description": "<p>Ysondkhelir spawns a giant crawling hand in an unoccupied space within 30 feet.</p>"
+      },
+      "Shield": {
+       "name": "Shield",
+       "description": "<p>You raise a magical shield of force. This counts as using the Raise a Shield action, giving you a +1 circumstance bonus to AC until the start of your next turn, but it doesn't require a hand to use.</p>\n<p>While the spell is in effect, you can use the @UUID[Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8]{Shield Block} reaction with your magic shield. The shield has Hardness 5. You can use the spell's reaction to reduce damage from any spell or magical effect, even if it doesn't deal physical damage. After you use Shield Block, the spell ends and you can't cast it again for 10 minutes.</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.Jemq5UknGdMO7b73]{Spell Effect: Shield}</p>\n<p>@UUID[Compendium.pf2e.spell-effects.Item.QF6RDlCoTvkVHRo4]{Effect: Shield Immunity}</p>\n<hr />\n<p><strong>Heightened (+2)</strong> The shield's Hardness increases by 5.</p>"
+      },
+      "Telekinetic Projectile": {
+       "name": "Telekinetic Projectile",
+       "description": "<p>You hurl a loose, unattended object that is within range and that has 1 Bulk or less at the target. Make a spell attack roll against the target. If you hit, you deal 2d6 bludgeoning, piercing, or slashing damage—as appropriate for the object you hurled. No specific traits or magic properties of the hurled item affect the attack or the damage.</p>\n<hr />\n<p><strong>Critical Success</strong> You deal double damage.</p>\n<p><strong>Success</strong> You deal full damage.</p>\n<hr />\n<p><strong>Heightened (+1)</strong> The damage increases by 1d6.</p>"
+      },
+      "More HP": {
+       "name": "More HP"
+      },
+      "Slither": {
+       "name": "Slither",
+       "description": "<p>A mass of snakes made of shadow rise up to capture creatures in the area. Each creature in the area when you Cast the Spell takes @Damage[3d6[piercing]] damage and @Damage[1d6[persistent,poison]] damage from a biting snake, and it's @UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{Grabbed} or @UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{Restrained} depending on its Reflex save. A creature that ends its turn in the area must also attempt this save, even if it's already grabbed or restrained by the snakes. You can Dismiss the spell.</p>\n<hr />\n<p><strong>Success</strong> The creature is unaffected.</p>\n<p><strong>Failure</strong> The creature takes full damage and is grabbed by a snake. The snakes' @UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{Escape} DC is equal to your spell DC. A creature can attack a snake to release the creature. A snake's AC is equal to your spell DC, and it's destroyed if it takes 12 or more damage at once. New snakes continually regrow as long as the spell lasts, so destroying snakes doesn't prevent slither from capturing more creatures.</p>\n<p><strong>Critical Failure</strong> As failure, but the creature takes double damage and is restrained by a snake.</p>\n<hr />\n<p><strong>Heightened (+2)</strong> The persistent poison damage increases by 1d6 and snake HP increases by 6.</p>"
+      },
+      "Synesthesia": {
+       "name": "Synesthesia",
+       "description": "<p>The target's senses are suddenly rewired in unexpected ways, causing them to process noises as bursts of color, smells as sounds, and so on. This has three effects, and the target must attempt a Will save.</p><ul><li>Due to the distraction, the target must succeed at a @Check[flat|dc:5] each time it uses a concentrate action, or the action fails and is wasted.</li><li>The target's difficulty processing visual input makes all creatures and objects @UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]{Concealed} from it.</li><li><p>The creature has trouble moving, making it @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{Clumsy 3} and giving it a –10-foot status penalty to its Speeds.</p></li></ul><hr /><p><strong>Critical Success</strong> The target is unaffected.</p>\n<p><strong>Success</strong> The target is affected for 1 round.</p>\n<p><strong>Failure</strong> The target is affected for 1 minute.</p>\n<p><strong>Critical Failure</strong> As failure, and the target is @UUID[Compendium.pf2e.conditionitems.Item.dfCMdR4wnpbYNTix]{Stunned 2} as it attempts to process the sensory shifts.</p><hr /><p><strong>Heightened (9th)</strong> You can target up to five creatures.</p>"
+      },
+      "Attack of Opportunity (Special)": {
+       "name": "Attack of Opportunity (Special)",
+       "description": "<p>If Ysondkhelir hits a creature with his Attack of Opportunity, he can teleport that creature to a dreamspace of his choosing.</p><p>@Localize[PF2E.NPC.Abilities.Glossary.AttackOfOpportunity]</p>"
+      },
+      "Effect: Ysondkhelir's Control": {
+       "name": "Effect: Ysondkhelir's Control",
+       "description": "<p><strong>One success</strong> Ysondkhelir's resistance to physical damage drops to 5. The south section of his window wall disappears.</p><p><strong>Two successes</strong> No more crawling hands can spawn. The north section of Ysondkhelir's window wall disappears.</p><p><strong>Three successes</strong> Ysondkhelir is no longer quickened. The remaining sections of his window wall disappear.</p><p><strong>Four successes</strong> Ysondkhelir loses his Attack of Opportunity and his resistance to physical damage. He also reverts to his normal size and loses 15 feet reach on melee strikes. Dorianna is temporarily free of his mental influence, though he will eventually reassert control if left alive.</p>"
+      },
+      "Quickened": {
+       "name": "Quickened",
+       "description": "<p>You're able to act more quickly. You gain 1 additional action at the start of your turn each round. Many effects that make you quickened require you use this extra action only in certain ways. If you become quickened from multiple sources, you can use the extra action you've been granted for any single action allowed by any of the effects that made you quickened. Because quickened has its effect at the start of your turn, you don't immediately gain actions if you become quickened during your turn.</p>"
+      }
+     }
+    }
+   },
+   "folders": {
+    "Abomination Vaults: Addons": "Abomination Vaults: Addons",
+    "10: To Draw The Baleful Glare": "10: To Draw The Baleful Glare",
+    "Animations": "Animations",
+    "Nhimbaloth Curses": "Nhimbaloth Curses",
+    "05: Into The Training Grounds": "05: Into The Training Grounds",
+    "Setup": "Setup",
+    "04: Long Dream The Dead": "04: Long Dream The Dead",
+    "Otari": "Otari",
+    "07: Soul Keepers": "07: Soul Keepers",
+    "Nhim Cultists": "Nhim Cultists",
+    "08: Decaying Gardens": "08: Decaying Gardens",
+    "Implement of Empty Death": "Implement of Empty Death"
+   }
+  }
+ }
+}

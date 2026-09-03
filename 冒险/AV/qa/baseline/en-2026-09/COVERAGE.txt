@@ -1,0 +1,28 @@
+AV-family English baseline snapshot
+captured: 2026-09-04 (module versions below)
+source  : dump_pack_keys.mjs + build_babele_en.mjs, read straight from the installed
+          LevelDB packs with Foundry closed. 0 CJK leaves - verified.
+
+This is the `--baseline` input for the NEXT upgrade round: scan_en_drift compares a
+fresh extraction against it to bucket leaves as stale / changed / gone / new. Without
+it, an upgrade can only guess which Chinese has fallen behind its English.
+
+module versions:
+  pf2e-abomination-vaults          4.1.3
+  abomination-vaults-expanded      3.2.0
+  abomination-vaults-addons        2.1.0
+  tianzes-gauntlight-extras        2.0.0
+  tianzes-otari-extras             2.1.1
+  footsteps-and-maps               3.2.3
+
+packs: 10/10
+  abomination-vaults-addons.abomination-vaults-addons-scenes.json
+  abomination-vaults-addons.abomination-vaults-addons.json
+  abomination-vaults-expanded.abomination-vaults-expanded.json
+  footsteps-and-maps.footsteps-and-maps-journals.json
+  footsteps-and-maps.footsteps-and-maps-macros.json
+  footsteps-and-maps.footsteps-and-maps-scenes.json
+  pf2e-abomination-vaults.av.json
+  tianzes-gauntlight-extras.tianzes-gauntlight-extras.json
+  tianzes-otari-extras.tianzes-otari-extras.json
+  tianzes-otari-extras.tianzes-otari-shops.json
