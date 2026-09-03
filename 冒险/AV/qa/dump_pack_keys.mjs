@@ -16,13 +16,11 @@
  *   node dump_pack_keys.mjs --data-root <Data/modules> --modules a,b,c \
  *        --raw-out <dir> --keys-out <file.json>
  */
-import { createRequire } from 'node:module';
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 
-const require = createRequire('C:/Users/Taka/Desktop/fvtt/package.json');
-const { ClassicLevel } = require('classic-level');
+import { loadPack } from './pack_loader.mjs';
 
 // ---------------------------------------------------------------- mappings
 // Sub-collections only: {outputKey: {path, documentType}}. Mirrors defaultMappings.
@@ -198,25 +196,24 @@ for (const modId of modules) {
       continue;
     }
 
-    const db = new ClassicLevel(packDir, { valueEncoding: 'json' });
-    await db.open();
-    const all = [];
+    // loadPack reassembles embedded documents (!journal.pages!, !scenes.notes!, ...)
+    // onto their parents; reading raw keys would count them as top-level documents.
+    const loaded = await loadPack(packDir);
+    const primaryDocs = loaded.docs;
+    const packFolders = loaded.folders;
     const rawDir = path.join(rawOut, modId + '@' + version, pack.name);
     fs.mkdirSync(rawDir, { recursive: true });
     let n = 0;
-    for await (const [k, v] of db.iterator()) {
-      const doc = Object.assign({}, v, { _key: k });   // LevelDB stores the key outside the value
-      all.push(doc);
-      const seg = k.split('!')[1] || 'doc';
+    for (const doc of primaryDocs.concat(packFolders)) {
+      const seg = (String(doc._key).split('!')[1] || 'doc');
       const safe = String(doc.name || doc._id || ('doc' + n)).replace(/[^A-Za-z0-9._-]+/g, '_').slice(0, 80);
       fs.writeFileSync(path.join(rawDir, safe + '__' + seg + '__' + (doc._id || n) + '.json'),
         JSON.stringify(doc, null, 2), 'utf8');
       n += 1;
     }
-    await db.close();
-
-    const packFolders = all.filter(function (d) { return String(d._key).startsWith('!folders!'); });
-    const primaryDocs = all.filter(function (d) { return !String(d._key).startsWith('!folders!'); });
+    if (loaded.orphanEmbeds.length) {
+      console.error('[warn] ' + modId + '.' + pack.name + ': ' + loaded.orphanEmbeds.length + ' embedded docs with no parent');
+    }
 
     const sink = [];
     describe(primaryDocs, pack.type, 'entries', sink);
@@ -224,7 +221,8 @@ for (const modId of modules) {
     const collectionId = modId + '.' + pack.name;
     manifest.packs[collectionId] = {
       module: modId, version: version, pack: pack.name, type: pack.type, path: packDir,
-      docCount: n,
+      docCount: primaryDocs.length,
+      rawKeyCounts: loaded.counts,
       packFolders: packFolders.map(function (f) { return f.name; }),
       nodes: sink,
       sha256: crypto.createHash('sha256').update(JSON.stringify(sink)).digest('hex').slice(0, 16),
@@ -232,7 +230,7 @@ for (const modId of modules) {
     dumpedPacks += 1;
     const top = sink.find(function (s) { return s.path === 'entries'; });
     console.log('[ok] ' + collectionId.padEnd(58) + ' type=' + String(pack.type).padEnd(13)
-      + ' docs=' + String(n).padStart(4) + ' nodes=' + String(sink.length).padStart(4)
+      + ' docs=' + String(primaryDocs.length).padStart(4) + ' nodes=' + String(sink.length).padStart(4)
       + ' top=' + (top ? top.count : 0));
   }
 }
