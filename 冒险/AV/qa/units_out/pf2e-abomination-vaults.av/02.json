@@ -1,0 +1,1545 @@
+{
+ "pack": "pf2e-abomination-vaults.av",
+ "unit": "02",
+ "translations": [
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D7 Chute",
+    "name"
+   ],
+   "zh": "D7 滑道 D7 Chute"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D17 Pipe",
+    "name"
+   ],
+   "zh": "D17 管道 D17 Pipe"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D12 to E1",
+    "name"
+   ],
+   "zh": "D12 通往 E1 D12 to E1"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D16 to C33",
+    "name"
+   ],
+   "zh": "D16 通往 C33 D16 to C33"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D1 to C29",
+    "name"
+   ],
+   "zh": "D1 通往 C29 D1 to C29"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D5: Level 4 Portal Chamber",
+    "name"
+   ],
+   "zh": "D5：等级 4 传送门厅 D5: Level 4 Portal Chamber"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D14 to C40",
+    "name"
+   ],
+   "zh": "D14 通往 C40 D14 to C40"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D14: Deep Water",
+    "name"
+   ],
+   "zh": "D14：深水 D14: Deep Water"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D14: Set Elevation to 10",
+    "name"
+   ],
+   "zh": "D14：将高度设为 10 D14: Set Elevation to 10"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D14: Elevated Walkway",
+    "name"
+   ],
+   "zh": "D14：高架栈道 D14: Elevated Walkway"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D18: Shallow Water",
+    "name"
+   ],
+   "zh": "D18：浅水 D18: Shallow Water"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D9: Ribbon",
+    "name"
+   ],
+   "zh": "D9：光带 D9: Ribbon"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D7 Chute",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D12 to E1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D16 to C33",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D1 to C29",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D14 to C40",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D14: Deep Water",
+    "behaviors",
+    "Modify Movement Cost",
+    "name"
+   ],
+   "zh": "修改移动消耗 Modify Movement Cost"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D14: Set Elevation to 10",
+    "behaviors",
+    "Execute Script",
+    "name"
+   ],
+   "zh": "执行脚本 Execute Script"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D14: Elevated Walkway",
+    "behaviors",
+    "Execute Script",
+    "name"
+   ],
+   "zh": "执行脚本 Execute Script"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D - Belcorra's Retreat",
+    "regions",
+    "D18: Shallow Water",
+    "behaviors",
+    "Difficult Terrain",
+    "name"
+   ],
+   "zh": "困难地形 Difficult Terrain"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D3ZsHuxFbD9XJ8xm",
+    "name"
+   ],
+   "zh": "D - 贝科拉的避难所 D - Belcorra's Retreat"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D3ZsHuxFbD9XJ8xm",
+    "notes",
+    "To C33"
+   ],
+   "zh": "通往 C33 To C33"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D3ZsHuxFbD9XJ8xm",
+    "notes",
+    "To C40"
+   ],
+   "zh": "通往 C40 To C40"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D3ZsHuxFbD9XJ8xm",
+    "notes",
+    "To C29"
+   ],
+   "zh": "通往 C29 To C29"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "D3ZsHuxFbD9XJ8xm",
+    "notes",
+    "To E01"
+   ],
+   "zh": "通往 E01 To E01"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E1 to F1",
+    "name"
+   ],
+   "zh": "E1 通往 F1 E1 to F1"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E2: Rusty Grate Pit (Fall to F2)",
+    "name"
+   ],
+   "zh": "E2：生锈的坑栅栏（坠落至 F2） E2: Rusty Grate Pit (Fall to F2)"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E1 to D12",
+    "name"
+   ],
+   "zh": "E1 通往 D12 E1 to D12"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E12 to F4",
+    "name"
+   ],
+   "zh": "E12 通往 F4 E12 to F4"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E11 to F9",
+    "name"
+   ],
+   "zh": "E11 通往 F9 E11 to F9"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E7 to Smuggler's Refuge",
+    "name"
+   ],
+   "zh": "E7 通往走私者避难所 E7 to Smuggler's Refuge"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E26 to F26",
+    "name"
+   ],
+   "zh": "E26 通往 F26 E26 to F26"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E8QblAL4osl0zyaE",
+    "name"
+   ],
+   "zh": "E26 通往 F26 E26 to F26"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E21 to F8",
+    "name"
+   ],
+   "zh": "E21 通往 F8 E21 to F8"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E25 to F9",
+    "name"
+   ],
+   "zh": "E25 通往 F9 E25 to F9"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E13 to F4",
+    "name"
+   ],
+   "zh": "E13 通往 F4 E13 to F4"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E19: Level 5 Portal Chamber",
+    "name"
+   ],
+   "zh": "E19：等级 5 传送门厅 E19: Level 5 Portal Chamber"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E4: Shaft to F6",
+    "name"
+   ],
+   "zh": "E4：通往 F6 的竖井 E4: Shaft to F6"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E9: Difficult Terrain",
+    "name"
+   ],
+   "zh": "E9：困难地形 E9: Difficult Terrain"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E9 to F11",
+    "name"
+   ],
+   "zh": "E9 通往 F11 E9 to F11"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E15: Fungal Rot",
+    "name"
+   ],
+   "zh": "E15：真菌腐烂 E15: Fungal Rot"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E1 to F1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E2: Rusty Grate Pit (Fall to F2)",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E1 to D12",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E12 to F4",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E11 to F9",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E7 to Smuggler's Refuge",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E26 to F26",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E8QblAL4osl0zyaE",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E21 to F8",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E25 to F9",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E13 to F4",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E4: Shaft to F6",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E9: Difficult Terrain",
+    "behaviors",
+    "Difficult Terrain",
+    "name"
+   ],
+   "zh": "困难地形 Difficult Terrain"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "E - Arena",
+    "regions",
+    "E9 to F11",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "notes",
+    "To E26"
+   ],
+   "zh": "通往 E26 To E26"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F1 to G1",
+    "name"
+   ],
+   "zh": "F1 通往 G1 F1 to G1"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F1 to E1",
+    "name"
+   ],
+   "zh": "F1 通往 E1 F1 to E1"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F2: Collapsed Grate",
+    "name"
+   ],
+   "zh": "F2：坍塌的栅栏 F2: Collapsed Grate"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F10 to G12",
+    "name"
+   ],
+   "zh": "F10 通往 G12 F10 to G12"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F11 to E9",
+    "name"
+   ],
+   "zh": "F11 通往 E9 F11 to E9"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F9 to E25",
+    "name"
+   ],
+   "zh": "F9 通往 E25 F9 to E25"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F9 to E21",
+    "name"
+   ],
+   "zh": "F9 通往 E21 F9 to E21"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F26 to E26",
+    "name"
+   ],
+   "zh": "F26 通往 E26 F26 to E26"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "ZQEjQlzR4pIXeOaF",
+    "name"
+   ],
+   "zh": "F26 通往 E26 F26 to E26"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "roELNHXre97w44ni",
+    "name"
+   ],
+   "zh": "F9 通往 E25 F9 to E25"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "From E12",
+    "name"
+   ],
+   "zh": "来自 E12 From E12"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "From E13",
+    "name"
+   ],
+   "zh": "来自 E13 From E13"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F13: Level 6 Portal Chamber",
+    "name"
+   ],
+   "zh": "F13：等级 6 传送门厅 F13: Level 6 Portal Chamber"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F6: Shaft from E4",
+    "name"
+   ],
+   "zh": "F6：来自 E4 的竖井 F6: Shaft from E4"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F1 to G1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F1 to E1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F2: Collapsed Grate",
+    "behaviors",
+    "Difficult Terrain",
+    "name"
+   ],
+   "zh": "困难地形 Difficult Terrain"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F10 to G12",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F11 to E9",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F9 to E21",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "F26 to E26",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "ZQEjQlzR4pIXeOaF",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "F - Labs",
+    "regions",
+    "roELNHXre97w44ni",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "notes",
+    "To H01"
+   ],
+   "zh": "通往 H01 To H01"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "notes",
+    "To F01"
+   ],
+   "zh": "通往 F01 To F01"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G12 to F10",
+    "name"
+   ],
+   "zh": "G12 通往 F10 G12 to F10"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G2: Level 7 Portal Chamber",
+    "name"
+   ],
+   "zh": "G2：等级 7 传送门厅 G2: Level 7 Portal Chamber"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G3 to H17",
+    "name"
+   ],
+   "zh": "G3 通往 H17 G3 to H17"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G1 To F1",
+    "name"
+   ],
+   "zh": "G1 通往 F1 G1 To F1"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G1 to H1",
+    "name"
+   ],
+   "zh": "G1 通往 H1 G1 to H1"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G6: Zone of Truth",
+    "name"
+   ],
+   "zh": "G6：诚实之域 G6: Zone of Truth"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G7: Inhospitable Room",
+    "name"
+   ],
+   "zh": "G7：恶劣环境房间 G7: Inhospitable Room"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G7: Pool of Magma",
+    "name"
+   ],
+   "zh": "G7：熔岩池 G7: Pool of Magma"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G11: Paralyzing Light Trap",
+    "name"
+   ],
+   "zh": "G11：麻痹之光陷阱 G11: Paralyzing Light Trap"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G16: Painful Suggestion Trap",
+    "name"
+   ],
+   "zh": "G16：痛苦暗示陷阱 G16: Painful Suggestion Trap"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G17: Witchfire's Chamber",
+    "name"
+   ],
+   "zh": "G17：巫火的房间 G17: Witchfire's Chamber"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G21: Tunnel to G17",
+    "name"
+   ],
+   "zh": "G21：通往 G17 的隧道 G21: Tunnel to G17"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G17: Tunnel to G21",
+    "name"
+   ],
+   "zh": "G17：通往 G21 的隧道 G17: Tunnel to G21"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G12 to F10",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G3 to H17",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G1 To F1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G1 to H1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G7: Pool of Magma",
+    "behaviors",
+    "Modify Movement Cost",
+    "name"
+   ],
+   "zh": "修改移动消耗 Modify Movement Cost"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G21: Tunnel to G17",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "G - Prison",
+    "regions",
+    "G17: Tunnel to G21",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H17 to G3",
+    "name"
+   ],
+   "zh": "H17 通往 G3 H17 to G3"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H33: Level 8 Portal Chamber",
+    "name"
+   ],
+   "zh": "H33：等级 8 传送门厅 H33: Level 8 Portal Chamber"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H35 to I27",
+    "name"
+   ],
+   "zh": "H35 通往 I27 H35 to I27"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H41 to I1",
+    "name"
+   ],
+   "zh": "H41 通往 I1 H41 to I1"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H3 to I22",
+    "name"
+   ],
+   "zh": "H3 通往 I22 H3 to I22"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H1 to G1",
+    "name"
+   ],
+   "zh": "H1 通往 G1 H1 to G1"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "Obscure Weather",
+    "name"
+   ],
+   "zh": "遮蔽天气 Obscure Weather"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H20: Spike Growth",
+    "name"
+   ],
+   "zh": "H20：尖刺丛生 H20: Spike Growth"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H24: Deep Mud",
+    "name"
+   ],
+   "zh": "H24：深泥 H24: Deep Mud"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H37: Ribbon of Light",
+    "name"
+   ],
+   "zh": "H37：光带 H37: Ribbon of Light"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H17 to G3",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H35 to I27",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H41 to I1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H3 to I22",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H1 to G1",
+    "behaviors",
+    "Teleport Token",
+    "name"
+   ],
+   "zh": "传送指示物 Teleport Token"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "Obscure Weather",
+    "behaviors",
+    "Suppress Weather",
+    "name"
+   ],
+   "zh": "抑制天气 Suppress Weather"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H20: Spike Growth",
+    "behaviors",
+    "Difficult Terrain",
+    "name"
+   ],
+   "zh": "困难地形 Difficult Terrain"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H20: Spike Growth",
+    "behaviors",
+    "Display Scrolling Text",
+    "name"
+   ],
+   "zh": "显示滚动文字 Display Scrolling Text"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "scenes",
+    "H - Farm",
+    "regions",
+    "H24: Deep Mud",
+    "behaviors",
+    "Difficult Terrain",
+    "name"
+   ],
+   "zh": "困难地形 Difficult Terrain"
+  }
+ ]
+}

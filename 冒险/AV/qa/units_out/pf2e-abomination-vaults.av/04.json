@@ -1,0 +1,1254 @@
+{
+ "pack": "pf2e-abomination-vaults.av",
+ "unit": "04",
+ "translations": [
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "tables",
+    "Fetid Lake Encounters",
+    "results",
+    "iBV8sEzjpUGG6vwg",
+    "name"
+   ],
+   "zh": "湖中生物 Lake Creatures"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "tables",
+    "Hunting Grounds Encounters",
+    "results",
+    "iBV8sEzjpUGG6vwg",
+    "name"
+   ],
+   "zh": "狩猎场生物 Hunting Grounds Creatures"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "tables",
+    "Quiet Lake Encounters",
+    "results",
+    "sAfAwU80wyGXffIh",
+    "name"
+   ],
+   "zh": "湖中生物 Lake Creatures"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Aller Rosk",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Augrael",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Azvalvigander",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Barbazu",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Barbazu Drill Sergeant",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Barbazu Drill Sergeant",
+    "items",
+    "Vo6AHVWsAnxqkwLW",
+    "description"
+   ],
+   "zh": "<p><strong>启动</strong> 命令</p>\n<p><strong>频率</strong> 每日一次</p><hr><p><strong>效果</strong> 该胡须魔对30尺内一个无心智生物施加自己的意志。若目标是3级或更低的无心智生物，它必须进行一次@Check[will|dc:20|options:inflicts:controlled,inflicts:slowed]豁免，并按照比其豁免检定结果低一个等级的成功度结算。</p><hr><p><strong>大成功</strong> 目标生物不受影响。</p>\n<p><strong>成功</strong> 目标生物的反应被胡须魔的命令扰乱，@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢1}持续1轮。</p>\n<p><strong>失败</strong> 该生物被胡须魔@UUID[Compendium.pf2e.conditionitems.Item.9qGBRpbX9NEwtAAr]{控制}1小时，不过它不会执行明显自毁的命令。</p>\n<p><strong>大失败</strong> 同失败，但持续时间为1天。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Barbazu Vanguard",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Barbazu Vanguard",
+    "items",
+    "Hellforged Glaive",
+    "description"
+   ],
+   "zh": "<p>这件长兵由7尺长杆和顶端的单刃组成。它在一定距离外进行致命的切割时，非常有效。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Barcumbuk",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Belcorra Haruvex",
+    "hp"
+   ],
+   "zh": "虚能治疗，复生"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Belcorra Haruvex",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Beluthus",
+    "hp"
+   ],
+   "zh": "（虚能治疗）"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Beluthus",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Bhazrade",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值，对心灵豁免+2状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Bloodsiphon",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Bog-Rotted Froghemoth",
+    "ac"
+   ],
+   "zh": "全域视野"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Bone Gladiator",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Boss Skrawng",
+    "items",
+    "kbtVRkQHlP5ap1MJ",
+    "description"
+   ],
+   "zh": "<p>两枚淬毒的吹箭镖。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Bright Walker",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Cairn Wight",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Caliddo Haruvex",
+    "hp"
+   ],
+   "zh": "虚能治疗，复生"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Caligni Defender",
+    "hp"
+   ],
+   "zh": "死亡火焰"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Caligni Defender",
+    "items",
+    "LOeBCSVBauL8spor",
+    "description"
+   ],
+   "zh": "<p>许多卡利尼使用一种由地底真菌制成的削弱性毒素。</p>\n<hr>\n<p><strong>豁免检定</strong> @Check[fortitude|dc:16|traits:alchemical,injury,poison]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d6[poison]]伤害，并@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭1}（1轮）</p>\n<p><strong>阶段2</strong> 同阶段1</p>\n<p><strong>阶段3</strong> @Damage[1d6[poison]]伤害，并@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭2}（1轮）</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Caligni Stalker",
+    "hp"
+   ],
+   "zh": "最终命运"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Canker Cultist",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Chafkhem",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Chafkhem",
+    "allSaves"
+   ],
+   "zh": "对命能豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Chandriu Invisar",
+    "hp"
+   ],
+   "zh": "虚能治疗，复生"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Child of Belcorra",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Cratonys",
+    "hp"
+   ],
+   "zh": "再生10（被圣洁或银停用）"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Cratonys",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Crawling Hand",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Cultist Specter",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Cynemi",
+    "items",
+    "Posse's Edge",
+    "description"
+   ],
+   "zh": "<p>若敌对一方包含赏金猎人的猎杀目标，则该赏金猎人及其盟友的先攻骰获得+1环境加值。</p>\n<p>@UUID[Compendium.pf2e.bestiary-effects.Item.m1Vd997DEVoOeaJu]{效果：围猎优势}</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Deepwater Dhuthorex",
+    "ac"
+   ],
+   "zh": "全域视野"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Derghodaemon",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Destrachan",
+    "allSaves"
+   ],
+   "zh": "对音波豁免+4状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Dread Dhuthorex",
+    "ac"
+   ],
+   "zh": "全域视野"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Dread Wisp",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Dread Wraith",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Dread Wraith",
+    "items",
+    "Grip of Fear",
+    "description"
+   ],
+   "zh": "<p>缚灵将手探入相邻生物的胸膛，攫住其心脏。目标受到@Damage[9d6[mental]]伤害，并进行一次@Check[will|dc:28|basic]豁免。大失败时，该生物还会@UUID[Compendium.pf2e.conditionitems.Item.6uEgoh53GbXuHpTF]{麻痹}至缚灵的下一回合开始。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Dread Wraith",
+    "items",
+    "Robes of Welcome",
+    "description"
+   ],
+   "zh": "<p><strong>频率</strong> 每轮一次</p><hr><p><strong>效果</strong> 缚灵用长袍裹住一个相邻的活体生物，使其暴露于虚能之拥之下。若已有生物被该缚灵的虚能之拥所诅咒，则该缚灵无法对另一个生物施加虚能之拥。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Dread Wraith",
+    "items",
+    "Void's Embrace",
+    "description"
+   ],
+   "zh": "<p>若受害者在日光下成功通过对抗此诅咒的豁免检定，诅咒即结束。当生物带有此诅咒时，它会无视诅咒它的那只缚灵的抗力</p>\n<p><strong>豁免检定</strong> @Check[will|dc:28]</p>\n<p><strong>阶段1</strong> 受害者在任何光照下都@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩}（1小时）</p>\n<p><strong>阶段2</strong> 受害者获得30尺生命感知，但在任何光照下都@UUID[Compendium.pf2e.conditionitems.Item.XgEqL1kFApUbl5Z2]{目盲}（1小时）</p>\n<p><strong>阶段3</strong> 同阶段2，但该生物还获得虚能治疗（1小时）</p>\n<p><strong>阶段4</strong> 受害者陷入@UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识}且无法醒来（1天）</p>\n<p><strong>阶段5</strong> 该生物死亡，化为一只听从战争缚灵号令的缚灵，其躯体崩解为灰烬</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Dreshkan",
+    "allSaves"
+   ],
+   "zh": "对流血、死亡效果、疾病、毁灭、疲乏、麻痹、毒素和恶心豁免+2状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Drider",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Drow Hunter",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值，对心灵豁免+2状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Drow Rogue",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值，对心灵豁免+2状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Drow Shootist",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值，对心灵豁免+2状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Drow Shootist",
+    "items",
+    "cfM8s4VVlCf81rzl",
+    "description"
+   ],
+   "zh": "<p>使用弹匣装填时装填值为2（@UUID[Compendium.pf2e.equipment-srd.Item.oJZe5rRitvioUgRh]{射手弹带}）</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Drow Warden",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值，对心灵豁免+2状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Dulac",
+    "hp"
+   ],
+   "zh": "死亡阴影"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Elder Child of Belcorra",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Empty Death Bodak",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Erinys",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Falxi Orshendiel",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值，对心灵豁免+2状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Galudu",
+    "hp"
+   ],
+   "zh": "死亡微粒"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Galudu",
+    "items",
+    "Wand of Continuation (Mountain Resilience)",
+    "description"
+   ],
+   "zh": "<p>@UUID[Compendium.pf2e.spells-srd.Item.2BV2yYPfVJ5zirZt]{山肤术}</p><hr><p>这根魔杖能延长法术的持续时间。黄色的余烬会在其表面盘旋，直到法术结束。</p>\n<p><strong>启动</strong> 施放法术；若该法术通常的施法时间为<span class=\"action-glyph\">1</span>，则启动需要<span class=\"action-glyph\">2</span>；若通常为<span class=\"action-glyph\">2</span>，则启动需要<span class=\"action-glyph\">3</span></p>\n<p><strong>频率</strong> 每日一次，外加超载</p><hr><p><strong>效果</strong> 你施放该法术，其持续时间延长一半。</p><hr><p><strong>制造需求</strong> 提供一次相应环阶法术的施放。该法术的施法时间必须为<span class=\"action-glyph\">1</span>或<span class=\"action-glyph\">2</span>，且持续时间不短于10分钟、不长于1小时。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Ghast",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Ghoul",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Giant Crawling Hand",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Gibbering Mouther",
+    "ac"
+   ],
+   "zh": "全域视野"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Glashdrumdur",
+    "ac"
+   ],
+   "zh": "（举盾时20）"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Gogiteth",
+    "ac"
+   ],
+   "zh": "全域视野"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Gorsalthith",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Gorul Vetters",
+    "items",
+    "Shiv",
+    "description"
+   ],
+   "zh": "<p>这件小型带刃武器以单手持握，用于在近身战斗中刺击生物。它也可以投掷。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Graulgust",
+    "allSaves"
+   ],
+   "zh": "对疾病和毒素豁免+2状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Graveyard Skeleton",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Hellforge Barbazu",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Huglu",
+    "items",
+    "Gentle Landing (At Will, Self Only)",
+    "description"
+   ],
+   "zh": "<p><strong>触发</strong> 射程内的一个生物正在坠落</p>\n<hr>\n<p>你创造一股魔法上升气流来阻止坠落。目标的坠落减慢到每轮60尺，并且在法术持续时间内下坠的这段高度不计入坠落伤害的计算。如果目标在法术生效期间落地，它不会因坠落而承受伤害。该法术在目标落地时立即结束。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Hydra",
+    "hp"
+   ],
+   "zh": "九头蛇再生"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Hydra",
+    "ac"
+   ],
+   "zh": "全域视野"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Iribo",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值，对心灵豁免+2状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Iribo",
+    "items",
+    "cfM8s4VVlCf81rzl",
+    "description"
+   ],
+   "zh": "<p>使用弹匣装填时装填值为2（@UUID[Compendium.pf2e.equipment-srd.Item.oJZe5rRitvioUgRh]{射手弹带}）</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Irlgaunt",
+    "items",
+    "Shape Stone (At Will)",
+    "description"
+   ],
+   "zh": "<p>你将石块塑成你所选择的粗糙形状。该塑形过程十分粗陋，无法制造复杂的组件、精细的细节、可动的部件或类似的东西。当你重塑石块时，站在其上的每个生物都必须尝试一次反射豁免或特技检定。</p>\n<hr>\n<p><strong>成功</strong> 该生物不受影响。</p>\n<p><strong>失败</strong> 该生物在石块上@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地}。</p>\n<p><strong>大失败</strong> 该生物从石块上摔落（若适用），并倒地着地。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Irlgaunt",
+    "items",
+    "One with Stone (At Will)",
+    "description"
+   ],
+   "zh": "<p>你可以选择变化为一块石头，或者与石头融合。在变形之后，你不能移动，也不能影响石头之外的任何事物，但只要法术不需要越过石头的效果线，你就能够施法。你能解消该法术。</p>\n<ul>\n<li><strong>与石头融合</strong> 法术的持续时间为10分钟。施法时，你必须碰触一块体积足够容纳你与你随身物品的石头，否则法术会被打断。融入之后，你能听到、但看不到这块石头外侧发生的事情。当你身处石头之内时，若石头承受伤害，你会被驱逐至石头之外，并承受10d6点伤害。<em>通墙术</em>也会把你驱逐出来，但不会造成伤害。一旦你身处石头之外，法术便会结束。</li>\n<li><strong>变为石头</strong> 法术的持续时间为8小时。你变为一块大型石头。察觉检定无法揭示你的真实本质，但成功通过一次对抗你法术DC的自然或生存检定，能够揭示出你看上去是一块对该地区而言古怪地新出现的石头。处于该形态时，你能够使用自身正常的感官观察周遭的一切。作为一块石头，你的AC为23，且只有状态加值、状态减值、环境加值和环境减值能影响你。你在反射豁免中投出的任何成功和大成功都视同为失败\n</li>\n</ul>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Isqulug",
+    "hp"
+   ],
+   "zh": "再生10（被寒冷停用）"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Isqulug",
+    "ac"
+   ],
+   "zh": "全域视野"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Iyagian",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Jafaki",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Jarelle Kaldrian",
+    "hp"
+   ],
+   "zh": "虚能治疗，复生"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Jaul Mezmin",
+    "allSaves"
+   ],
+   "zh": "对毒素豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Khurfel",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Klathor",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值，对心灵豁免+2状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Korlok",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Kragala",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+2状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Kragala",
+    "items",
+    "Drumstick",
+    "description"
+   ],
+   "zh": "<p>这种小号的战锤的木质或金属柄顶端有个金属头，不像它沉重的表亲，足够轻巧到能够投掷。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Krooth",
+    "allSaves"
+   ],
+   "zh": "对恐惧豁免+4状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Lady's Whisper",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Lady's Whisper",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Lallizanx",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Majordomo",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Mimic",
+    "items",
+    "Mobile Morph",
+    "description"
+   ],
+   "zh": "<p>拟形怪将身体的一部分变形为攀爬利爪、翅膀或桨状肢。直到其回合结束，它获得40尺的攀爬、飞行或游泳速度。若拟形怪体内吞有生物，该速度减半。若其回合结束时它仍在空中，则会正常坠落。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Mimic",
+    "items",
+    "Swallow Whole",
+    "description"
+   ],
+   "zh": "<p>中型，@Damage[2d8[acid]]，破裂值13</p><hr><p>@Localize[PF2E.NPC.Abilities.Glossary.SwallowWhole]</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Morlock",
+    "allSaves"
+   ],
+   "zh": "对疾病和毒素豁免+2状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Morlock Engineer",
+    "allSaves"
+   ],
+   "zh": "对疾病和毒素豁免+2状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Morlock Scavenger",
+    "allSaves"
+   ],
+   "zh": "对疾病和毒素豁免+2状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Mulventok",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Mulventok",
+    "ac"
+   ],
+   "zh": "（举盾时26）"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Murmur",
+    "ac"
+   ],
+   "zh": "全域视野"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Nhakazarin",
+    "hp"
+   ],
+   "zh": "虚能治疗"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Nox",
+    "hp"
+   ],
+   "zh": "死亡火焰"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Nyzuros",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值，对心灵豁免+2状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Ofalth",
+    "hp"
+   ],
+   "zh": "污秽打滚"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Otari Ilvashti",
+    "hp"
+   ],
+   "zh": "虚能治疗，复生"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Owb",
+    "items",
+    "Interplanar Teleport (Self Only, To or From the Netherworld Only)",
+    "description"
+   ],
+   "zh": "<p><strong>需求</strong> 你持有目标位面的位面密钥，用于给法术定位</p>\n<hr>\n<p>你和你的盟友跨越诸位面之间的屏障进行旅行。目标移动至另一个位面，比如火元素位面、影界或者外层裂隙。你必须知晓目标位面的存在，而且需要使用由该位面的物质制成的魔法位面密钥来给法术定位。就如同<em>跨界传送</em>这个法术本身一样，大多数著名位面的位面密钥具有罕见稀有度，而鲜为人知的位面及半位面通常具有稀有、甚至有可能是独特稀有度的位面密钥。</p>\n<p>该法术极其不精准，你会出现在距目标之一（由你选择）上一次造访该位面时所处位置1d20×25英里之外的地方。若所有目标都是初次造访某个特定位面，你们就会出现在该位面上的随机位置。<em>跨界传送</em>不会提供返回的手段，不过除非存在特殊情况，否则再次施放<em>跨界传送</em>能让你返回自身之前身处的位面。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Padli",
+    "hp"
+   ],
+   "zh": "死亡火焰"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Poltergeist",
+    "hp"
+   ],
+   "zh": "虚能治疗，复生"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Quara Orshendiel",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值，对心灵豁免+2状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Ravirex",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Rikizlia",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值，对心灵豁免+2状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Roper",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+2状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Salaisa Malthulas",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值，对心灵豁免+2状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Salaisa Malthulas",
+    "items",
+    "4GEUTovCKhSoT0PD",
+    "description"
+   ],
+   "zh": "<p>迷梦毒是@UUID[Compendium.pf2e.equipment-srd.Item.zo0ophqfKunJFxZN]{昏睡毒}的一种更强效的蒸馏提纯物。进一步暴露于迷梦毒不需要目标进行额外的豁免检定；只有在对抗持续暴露的豁免检定中失败，才会推进其毒发阶段。</p>\n<hr>\n<p><strong>豁免检定</strong> @Check[fortitude|dc:20|traits:alchemical,incapacitation,injury,poison,sleep]</p>\n<p><strong>最大持续时间</strong> 6小时</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢1}和@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]{措手不及}（1轮）</p>\n<p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢2}和措手不及（1轮）</p>\n<p><strong>阶段3</strong> @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识}且无法通过察觉检定醒来（1轮）</p>\n<p><strong>阶段4</strong> 失去意识且无法通过察觉检定醒来（[[/r 1d6 #hours]]{1d6小时}）</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Sarglagon",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Seugathi Guard",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Seugathi Guard",
+    "items",
+    "MnAW3prtfTZxnv7T",
+    "description"
+   ],
+   "zh": "<p>双尾虫怪可以从魔法物品中施放法术，即使该法术不在其法术列表上也是如此。所有此类法术均为异能法术，并使用该双尾虫怪的内在法术DC与攻击调整值。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Abomination Vaults",
+    "actors",
+    "Seugathi Researcher",
+    "allSaves"
+   ],
+   "zh": "对魔法豁免+1状态加值"
+  }
+ ]
+}

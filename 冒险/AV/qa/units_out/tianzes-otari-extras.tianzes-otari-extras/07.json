@@ -1,0 +1,764 @@
+{
+ "pack": "tianzes-otari-extras.tianzes-otari-extras",
+ "unit": "07",
+ "translations": [
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Sea Boggard Warrior",
+    "publicNotes"
+   ],
+   "zh": "<p>这一沼蜍人变种栖息于海蚀洞与海岸附近的废弃建筑中。它们的能力已适应海水与沙岸，而非沼泽水域与沼泽地形。</p>\n<p>除此之外，它们与沼泽中的同族并无二致。</p>\n<hr />\n<p>沼蜍勇士推崇单打独斗，喜欢独自作战，好让无人能来争夺自己的战果。它们追击逃离战斗的敌人时那份近乎超自然的执著，早已声名在外。</p>\n<hr />\n<p>沼蜍人是好斗的类人两栖生物，繁衍于沼泽、湿地，乃至某些雨林之中。沼蜍人自卵中孵化为蝌蚪，为食物激烈争抢，甚至在这场厮杀中吞食自己的同胞。历经三年，幸存的沼蜍人长出手臂、双腿与肺，同时学会狩猎、工艺与作战的基本要领——一切在它们那弱肉强食的社会中活下去所需的本事。多数沼蜍人族群的顶端，盘踞着一位身形魁伟、身负邪恶神术的沼泽先知。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Sea Boggard Warrior",
+    "privateNotes"
+   ],
+   "zh": "<p>这只沼蜍斥候最初出自《怪物核心》。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Sea Boggard Warrior",
+    "blurb"
+   ],
+   "zh": "沼蜍勇士变种"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Sea Boggard Warrior",
+    "items",
+    "Sandy Passage",
+    "description"
+   ],
+   "zh": "<p>沼蜍勇士无视由沙地地貌造成的困难地形。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Sea Boggard Warrior",
+    "items",
+    "Terrifying Croak",
+    "description"
+   ],
+   "zh": "<p>沼蜍斥候发出一声瘆人的呱噪。@Template[type:emanation|distance:30]{30尺}散发范围内的任何非沼蜍人生物都会陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1}，除非其通过一次@Check[type:will|dc:18]豁免；大成功者可在 1 分钟内暂时免疫。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Sea Boggard Warrior",
+    "items",
+    "Tongue Grab",
+    "description"
+   ],
+   "zh": "<p>若沼蜍斥候以舌头命中一个生物，该生物便会被沼蜍人施加@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒}状态。与普通的擒抱不同，该生物不会陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]{禁足}，但它无法移动到沼蜍人舌头的触及范围之外。生物可以攻击 AC 15 并造成至少 3 点挥砍伤害来斩断这条舌头。此举不会对沼蜍人造成任何伤害，但会使其无法使用舌头打击，直到舌头重新长出为止，这需要一周时间。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Sea Boggard Warrior",
+    "items",
+    "Turtleshell Leather Armor",
+    "description"
+   ],
+   "zh": "<p>沼蜍人的护甲由龟壳制成。这套甲胄的胸甲由缝在皮质无袖上衣上的小龟壳构成，肩甲、臂甲与胫甲则由一整块较大的龟壳打造。</p>\n<p>它等同于镶嵌皮甲，但因其不寻常的材质与工艺而价值更高。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Spike Launcher",
+    "disable"
+   ],
+   "zh": "<p>@Check[type:thievery|dc:16|name:Disable Launcher|traits:mechanical,trap] 以解除四具发射器之一，或 @Check[type:acrobatics|dc:12|name:Avoid Trip Line|traits:mechanical,trap] 以跨过一根绊线（这不会解除陷阱，只是避免触发它）</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Spike Launcher",
+    "hazarddescription"
+   ],
+   "zh": "<p>一根锯齿状的金属尖刺自隐蔽的发射器中激射而出。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Spike Launcher",
+    "items",
+    "BFiMEADLB2Qw0lL1",
+    "description"
+   ],
+   "zh": "<p><strong>触发</strong> 一个生物越过其中一根绊线</p>\n<hr />\n<p><strong>效果</strong> 一根尖刺沿着绊线的走向射向触发陷阱的生物，进行一次远程打击。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Tami",
+    "hazarddescription"
+   ],
+   "zh": "<h2>渔场杂货</h2>\n                <p>塔米是塔米莉的侄女。她年仅十四岁，却已是一名十分能干的商人。</p>\n                <p>每天早晨会有好几个小时，塔米莉到摊位上陪着她。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Tami",
+    "items",
+    "Shell Necklace",
+    "description"
+   ],
+   "zh": "<p>这条贝壳项链垂在锁骨之间，由一枚巴掌大小的贝壳与环绕其周的各式小贝壳组成。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Tami",
+    "items",
+    "Shark's Teeth Necklace",
+    "description"
+   ],
+   "zh": "<p>这条贝壳项链垂在锁骨之间，由一枚拇指长的鲨鱼牙与环绕其周的各式小贝壳组成。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Tami",
+    "items",
+    "Food - Shellfish Skewer",
+    "description"
+   ],
+   "zh": "<p>贝肉、土豆与辣椒的碎块串在一根扦子上。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Tami",
+    "items",
+    "Food - Fried Shellfish Pockets",
+    "description"
+   ],
+   "zh": "<p>贝肉、土豆与辣椒剁碎后裹进面团，炸至金黄。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Tami",
+    "items",
+    "Food - Fried Shellfish Pieces",
+    "description"
+   ],
+   "zh": "<p>10 条贝柳，裹上面包糠后油炸。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Valeros (Level 2)",
+    "items",
+    "Skilled Human (Intimidation)",
+    "description"
+   ],
+   "zh": "<p>你的创造力让你能在诸多技能上磨砺自身。你在一项自选技能上获得受训。到 5 级时，你在该项选定技能上的熟练度提升至专家。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Valeros (Level 2)",
+    "items",
+    "Assurance (Athletics)",
+    "description"
+   ],
+   "zh": "<p>即使身处最糟糕的境况，你也能完成基本任务。选择一项你受训的技能。你可以放弃为该技能进行技能检定掷骰，转而直接得到 10 + 你的熟练加值的结果（不应用任何其他加值、罚值或调整值）。</p>\n<hr />\n<p><strong>特殊</strong> 你可以多次选取该专长。每次选择一项不同的技能，并在该技能上获得相应效果。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Yinyasmira",
+    "blurb"
+   ],
+   "zh": "人类女性走私者"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Yinyasmira",
+    "items",
+    "Surprise Attack",
+    "description"
+   ],
+   "zh": "<p>你在敌人反应过来之前就已出手。在战斗的第一轮，若你以欺瞒或隐秘投掷先攻，尚未行动的生物对你而言处于@Compendium[pf2e.conditionitems.AJh5ex99aV6VTggg]{措手不及}状态。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Zeek",
+    "hazarddescription"
+   ],
+   "zh": "<h2>乌鸦灵药</h2>\n                <p>齐克是个相貌俊朗的年轻人，是炼金术士玛吉洛的助手兼学徒。他脖子上有一道引人遐想的烧伤疤痕。</p>\n                <p>他喜欢在市场上兜售店里较为廉价的货品。</p>\n                <p>他对炼金术并不上心，兴趣更多在酿酒的技艺上，但玛吉洛坚持要他既学酿酒也学炼金。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "actors",
+    "Zeek",
+    "items",
+    "Lady's Blessing Oil",
+    "description"
+   ],
+   "zh": "<p><strong>激活</strong> @UUID[Compendium.pf2e.actionspf2e.Item.MHLuKy4nQO2Z4Am1]{进行急救}</p>\n<hr />\n<p>女士祝福油深受那些抚慰生死过渡的法莱斯玛信徒治疗者青睐。你可以在用于进行急救以稳定某个生物伤势的同一个活动中激活该物品。若你使用女士祝福油，进行急救检定的 DC 会降至该生物复原检定的 DC，而非 5 + 复原检定的 DC。然而，若你在该检定上掷出失败，则改判为大失败。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Drink - Glass of Bubbly Wine",
+    "description"
+   ],
+   "zh": "<p>一种气泡丰富、酒液清澈的葡萄酒，例如香槟。庆典与人生大事上的首选饮品。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Drink - Glass of Wine",
+    "description"
+   ],
+   "zh": "<p>供偏爱更精致酒水的客人，或用于特殊场合。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Drink - Mug of Agnar",
+    "description"
+   ],
+   "zh": "<p>一种能让你立刻精神起来的无酒精热饮。想要更够劲，不妨兑上一小杯你爱喝的酒，甚至威士忌。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Drink - Mug of Ale",
+    "description"
+   ],
+   "zh": "<p>最古老的一类啤酒，也是各地酒馆的心头好。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Drink - Mug of Beer",
+    "description"
+   ],
+   "zh": "<p>一种拉格啤酒，浅色深色皆有，比麦芽酒更贵。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Drink - Mug of Fresh Milk",
+    "description"
+   ],
+   "zh": "<p>牛奶，取自本地奶牛，新鲜现挤。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Drink - Mug of Fruit Cider",
+    "description"
+   ],
+   "zh": "<p>一大杯无酒精果饮，孩童、不饮酒者，以及不愿在正午前沾酒的人都可放心享用。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Drink - Mug of Mead",
+    "description"
+   ],
+   "zh": "<p>一种以蜂蜜酿制的含酒精饮品；比蜂蜜酒或啤酒都要贵。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Drink - Shot of Whisky",
+    "description"
+   ],
+   "zh": "<p>上等好酒，按小杯供应。当心：小酒杯的容量各不相同。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Beef Skewer",
+    "description"
+   ],
+   "zh": "<p>猪肉、土豆与辣椒的碎块串在一根扦子上。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Beef Stew",
+    "description"
+   ],
+   "zh": "<p>热腾腾、鲜香可口的牛肉蔬菜炖汤，出自炉上那口永远咕嘟作响的锅。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Bread",
+    "description"
+   ],
+   "zh": "<p>新鲜喷香的面包，取自今天现烤的那一炉。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Cheese Wedge",
+    "description"
+   ],
+   "zh": "<p>一角奶酪，现从整轮上切下。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Chicken Skewer",
+    "description"
+   ],
+   "zh": "<p>鸡肉、土豆与辣椒的碎块串在一根扦子上。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Chicken Soup",
+    "description"
+   ],
+   "zh": "<p>热腾腾、鲜香可口的鸡肉蔬菜汤，出自炉上那口永远咕嘟作响的锅。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Egg",
+    "description"
+   ],
+   "zh": "<p>一枚鸡蛋，按本店的拿手做法烹制。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Fresh Fruit",
+    "description"
+   ],
+   "zh": "<p>这是一份当地当季的普通水果，单人份。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Fresh Vegetables",
+    "description"
+   ],
+   "zh": "<p>这是一份当地当季的普通水果，单人份。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Fried Beef Pockets",
+    "description"
+   ],
+   "zh": "<p>肉糜、土豆与辣椒裹进面团，炸至金黄。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Fried Chicken Pieces",
+    "description"
+   ],
+   "zh": "<p>10 条鸡柳，红肉白肉皆可，裹上面包糠后油炸。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Fried Meat Pockets",
+    "description"
+   ],
+   "zh": "<p>肉糜、土豆与辣椒裹进面团，炸至金黄。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Fried Potato Slices",
+    "description"
+   ],
+   "zh": "<p>一篮炸得酥脆的土豆片，撒了少许盐。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Fried Poultry Pockets",
+    "description"
+   ],
+   "zh": "<p>禽肉糜、土豆与辣椒裹进面团，炸至金黄。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Fried Shellfish Pieces",
+    "description"
+   ],
+   "zh": "<p>10 条贝柳，裹上面包糠后油炸。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Fried Shellfish Pockets",
+    "description"
+   ],
+   "zh": "<p>贝肉、土豆与辣椒剁碎后裹进面团，炸至金黄。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Full Meal",
+    "description"
+   ],
+   "zh": "<p>这是一顿管饱的正餐，包含一份肉、一样蔬菜或水果、一角奶酪、一大块面包，外加一杯阿格纳热饮。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Shellfish Skewer",
+    "description"
+   ],
+   "zh": "<p>贝肉、土豆与辣椒的碎块串在一根扦子上。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Shellfish Stew",
+    "description"
+   ],
+   "zh": "<p>热腾腾、鲜香可口的贝类蔬菜炖汤，出自炉上那口永远咕嘟作响的锅。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Food - Vegetable Stew",
+    "description"
+   ],
+   "zh": "<p>热腾腾、鲜香可口的蔬菜汤，出自炉上那口永远咕嘟作响的锅。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Service - Bathing",
+    "description"
+   ],
+   "zh": "<p>包含一次私人热水浴，使用坐浴盆，附毛巾与肥皂。</p>\n<p>若用他人用过的洗澡水，或不加热的冷水，则半价。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Service - Mulling",
+    "description"
+   ],
+   "zh": "<p>这项附加服务只是把你点的酒水加热到恰到好处的温度。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Service - Private Room - Double Bed",
+    "description"
+   ],
+   "zh": "<p>这是配一张双人床的房间的价格。最多容纳两人与两只小型宠物。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Service - Private Room - Single Bed",
+    "description"
+   ],
+   "zh": "<p>这是配两张单人床的房间按床计的价格。最多容纳两人与两只小型宠物。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Service - Shared Room Bed",
+    "description"
+   ],
+   "zh": "<p>多数合住房间——也就是廉价通铺——每间有四张或更多床位。这是每张床每晚的价格。宠物另计。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Service - Stabling",
+    "description"
+   ],
+   "zh": "<p>包含套挽具与卸挽具、彻底梳理、喂食，以及一晚的马厩寄养。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Shark's Teeth Necklace",
+    "description"
+   ],
+   "zh": "<p>这条贝壳项链垂在锁骨之间，由一枚拇指长的鲨鱼牙与环绕其周的各式小贝壳组成。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Shell Necklace",
+    "description"
+   ],
+   "zh": "<p>这条贝壳项链垂在锁骨之间，由一枚巴掌大小的贝壳与环绕其周的各式小贝壳组成。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Turtleshell Armor",
+    "description"
+   ],
+   "zh": "<p>沼蜍人的护甲由龟壳制成。这套甲胄的胸甲由捆扎在一起的小龟壳构成，肩甲、臂甲与胫甲则由一整块较大的龟壳打造。</p>\n<p>它等同于皮甲，但因其不寻常的材质与工艺而价值更高。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "items",
+    "Turtleshell Studded Armor",
+    "description"
+   ],
+   "zh": "<p>沼蜍人的护甲由龟壳制成。这套甲胄的胸甲由缝在皮质无袖上衣上的小龟壳构成，肩甲、臂甲与胫甲则由一整块较大的龟壳打造。</p>\n<p>它等同于镶嵌皮甲，但因其不寻常的材质与工艺而价值更高。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Also Crisp and Fresh",
+    "pages",
+    "Also Crisp and Fresh",
+    "text"
+   ],
+   "zh": "<p>这个摊位归贾拉·海斯泰珀所有。</p>\n<p>多莉被她的父亲——市长——送来给贾拉·海斯泰珀当学徒。她一直对这前景闷闷不乐，却还是不情不愿地照办了。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "An Invitation to the Osprey Club",
+    "pages",
+    "Introduction",
+    "text"
+   ],
+   "zh": "<img src=\"modules/tianzes-otari-extras/Assets/Vignettes/Osprey-Club-Cover.jpg\" /><p><em>图片由 Bing Image Creator 提供。</em></p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "An Invitation to the Osprey Club",
+    "pages",
+    "Membership in the Osprey Club",
+    "text"
+   ],
+   "zh": "<p>到了这一步，该英雄便是公会的一员了。他要如何运用这重身份、公会又如何开展其营生，全凭各位游戏主持与玩家自行决定。公会的日常运作及其全部章程，均超出本冒险的范围。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "An Invitation to the Osprey Club",
+    "pages",
+    "Prescreening",
+    "text"
+   ],
+   "zh": "<p><span style=\"font-family:Signika, sans-serif\">在给出加入机会之前，鱼鹰俱乐部的成员会暗中进行若干次检验，以判断：1）被怀疑是盗贼的人是否真的是盗贼；2）他们是否认为此人能给公会带来什么有用的东西。他们会留意以下几点：</span></p><ol><li style=\"box-sizing:border-box;user-select:text\"><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px\"><span style=\"font-family:Signika, sans-serif\"><strong style=\"box-sizing:border-box;user-select:text\">护甲</strong> —— 他的护甲安静吗？若不安静，他移动时是否依然悄无声息？</span></p></li><li style=\"box-sizing:border-box;user-select:text\"><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px\"><span style=\"font-family:Signika, sans-serif\"><strong style=\"box-sizing:border-box;user-select:text\">武器</strong> —— 他的武器大多带有娴熟或灵巧特征吗？</span></p></li><li style=\"box-sizing:border-box;user-select:text\"><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px\"><span style=\"font-family:Signika, sans-serif\"><strong style=\"box-sizing:border-box;user-select:text\">身法</strong> —— 这名盗贼的敏捷看上去是否至少有 +2 加值？</span></p></li><li style=\"box-sizing:border-box;user-select:text\"><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px\"><span style=\"font-family:Signika, sans-serif\"><strong style=\"box-sizing:border-box;user-select:text\">举止</strong> —— 这名盗贼看上去是否过分自私、贪婪或奸诈？</span></p><ul style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px;padding:0px 0px 0px 1.5em\"><li style=\"box-sizing:border-box;user-select:text\"><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px\"><span style=\"font-family:Signika, sans-serif\">注意：盗贼本就该有几分这样的秉性，但凡是自私到无法在团体中有效共事的人，都会被淘汰掉。</span></p></li></ul></li><li><span style=\"font-family:Signika, sans-serif\">候选盗贼通过上述全部检验之后，会有一名会员上前搭话，问些无伤大雅的问题，比如他来镇上的目的、平日以何为生。与此同时，这名会员会试图扒窃候选人，目标是一件消耗品或一把小刀。检定：</span><span data-visibility=\"gm\" style=\"box-sizing:border-box;user-select:text;background:var(--visibility-gm-bg);border-radius:1px;display:inline-block;line-height:1em;outline:rgba(75, 74, 68, 0.5) dotted 1px;padding:var(--space-1)\"><span style=\"font-family:Signika, sans-serif\"><a class=\"inline-check with-repost\" data-pf2-repost-flavor=\"thievery\" data-pf2-show-dc=\"gm\" data-pf2-label=\"thievery DC\" data-pf2-check=\"thievery\" data-pf2-dc=\"20\" style=\"box-sizing:border-box;user-select:text;cursor:pointer;background:var(--inline-link-bg);border-radius:2px;border:1px solid var(--color-border-dark-tertiary);color:var(--color-text-dark-primary);line-height:1.6em;padding-top:;padding-right:0px;padding-bottom:;padding-left:;white-space:nowrap;word-break:break-all\">DC 20</a></span></span><span style=\"font-family:Signika, sans-serif\"><a class=\"inline-check with-repost\" data-pf2-repost-flavor=\"thievery\" data-pf2-show-dc=\"gm\" data-pf2-label=\"thievery DC\" data-pf2-check=\"thievery\" data-pf2-dc=\"20\" style=\"box-sizing:border-box;user-select:text;cursor:pointer;background:var(--inline-link-bg);border-radius:2px;border:1px solid var(--color-border-dark-tertiary);color:var(--color-text-dark-primary);line-height:1.6em;padding-top:;padding-right:0px;padding-bottom:;padding-left:;white-space:nowrap;word-break:break-all\"> 贼活</a>方能察觉这次扒窃。若被察觉，这名盗贼会说“很好”，然后把东西还回去。否则，他会说“你掉了个东西”，同样把东西还回去。然而真正的考验，在于候选人对这次明目张胆的偷窃作何反应。</span></li><li style=\"box-sizing:border-box;user-select:text\"><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px\"><span style=\"font-family:Signika, sans-serif\">若候选人勃然大怒、义愤填膺，或想要叫村巡官来，这名盗贼会拿出 5 gp 作为封口费。若他坚持要报官，鱼鹰俱乐部的大门就对他永远关闭了。</span></p></li><li style=\"box-sizing:border-box;user-select:text\"><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px\"><span style=\"font-family:Signika, sans-serif\">若候选人动起手来，这名盗贼会后退，并拿出 5 gp 作为封口费。若他继续动武，其余盗贼便会现身，候选人会被扔出去，并被告知永远别再回来。</span></p></li><li style=\"box-sizing:border-box;user-select:text\"><p style=\"box-sizing:border-box;user-select:text;margin:0.5em 0px\"><span style=\"font-family:Signika, sans-serif\">若候选人显得饶有兴致，或在最初的愤怒之后平静下来，这名盗贼便会邀他私下谈谈。</span></p></li><li><span style=\"font-family:Signika, sans-serif\">在这次私谈中，候选人会得到加入“我们这个小俱乐部”的机会——在那里他能接到活计、享受特别折扣，但前提是他足够忠诚，并愿意接受一连串考验。若候选人答应，他就得等伊娜斯梅拉抽出空来，才能进行第一项考验。</span></li></ol>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "An Invitation to the Osprey Club",
+    "pages",
+    "Challenge 1 - Yinyasmira",
+    "text"
+   ],
+   "zh": "<p>第一项考验是与伊娜斯梅拉交谈。她会一边在某个敞开的舱口边垂钓，一边进行这场面谈，下方湍急的水声正好掩住谈话内容。</p><p>她会问对方是否明白伊娜斯梅拉为何选在此处谈话。</p><p>她会就候选人的游荡者诡术、他在队伍中的目的，以及这支队伍来镇上的目的，提出试探性的问题。</p><p>她的任何问题都没有对错之分。她想弄清的是：这名候选人是否可能给团体惹麻烦，以及他是否邪恶或贪婪到无法听从指示、无法在团体中好好共事。</p><h3>伊娜斯梅拉</h3><p>混乱中立 女性 人类 走私者 5<br />察觉 DC 22，意志 DC 20。<br />技能：避人耳目、保持平衡、隐藏物件、分神——花招、伪造文书、解除装置、逃脱、虚招、搜集信息、说谎、手上功夫、察言观色、盗窃</p><p>@UUID[Actor.ui5mbNv2CuZxmkdO]{伊娜斯梅拉}</p><h3>考验通过标准</h3><p>只要伊娜斯梅拉说他通过了，他就算通过了。就这么简单。她拒之门外的身手了得的盗贼不在少数，其中就包括卡曼·拉贾尼（此人却仍是酒馆的常客）。</p><p>只有通过这项初步考验，候选人才能进入第二或第三项考验。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "An Invitation to the Osprey Club",
+    "pages",
+    "Challenge 2 - Skills",
+    "text"
+   ],
+   "zh": "<p>考验在午夜开始，那时骗子之角已经打烊，客人也都散尽。</p><p>这是一场在时间紧迫下对贼活、敏捷与隐秘的检验。本项测试应在遭遇模式下进行。</p><ul><li><p><strong>第一轮</strong> —— 开锁</p><ul><li><p>候选人必须打开某个舱口上的一把劣质锁：</p><ul><li><p>需要两次成功的@Check[type:thievery|dc:15]检定才能打开（每次 1 个动作）。会员们会记下候选人一共尝试了多少次。</p></li></ul></li></ul></li><li><p><strong>接下来两轮</strong> —— 捉迷藏</p><ul><li><p> 本轮开始时，两名会员（特技演员，见下文）会朝桥下区的两端飞奔而去，试图找出候选人在下述步骤中的藏身之处。</p></li><li><p>这两名盗贼会在第 3 轮结束时从桥下区的两端赶到。</p></li><li><p>候选人必须打开舱口（1 个动作），然后跳下舱口并借势荡出，落到下方的木板道上（1 个动作）。</p><ul><li><p>一次成功的@Check[type:dexterity|dc:20]检定</p></li><li><p>在盗贼赶到之前，至少一次成功的@Check[type:hide|dc:20]检定。</p></li></ul></li></ul></li><li><p><strong>最后一轮</strong>，候选人必须一直不被特技演员发现，直到两名特技演员都找到他，或直到宣布时限已到。</p><ul><li><p>针对每名特技演员的 DC 进行三次成功的@Check[type:stealth|dc:20]检定。他们并不协同行动。</p></li></ul></li></ul><h3>对手</h3><p>2 @UUID[Compendium.pf2e.npc-gallery.Actor.Tj03FbN4SSr0o953]{特技演员}</p><h3>考验通过标准</h3><p>可接受的最低标准如下：</p><ul><li><p>在第 1 步中，锁最多在 3 个动作之内被打开。</p></li><li><p>在第 2 步中，候选人成功落到木板道上。</p></li><li><p>在第 3 步中，候选人至少能在一名特技演员的一次搜索动作下继续保持躲藏。</p></li></ul>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "An Invitation to the Osprey Club",
+    "pages",
+    "Challenge 3 - Treachery Test",
+    "text"
+   ],
+   "zh": "<p>最后一项考验是盗贼式的格斗。在桥下区域中，候选人会与一名会员搭档，对抗另外两名会员，同时接受伊娜斯梅拉与其余俱乐部成员的观察。</p><p>这项演练的重点并不在于这名盗贼是否格斗出众，尽管评判战斗本领当然也是其中一环。盗贼格斗考验的重点，是评估候选人与他人组队配合得如何、面对挫败时反应如何，以及他有多大的背叛倾向。</p><p>身为行会会长，伊娜斯梅拉早已见识过形形色色的背叛，她宁可不接纳任何被她判定为奸诈之徒的人。</p><p>因此，候选人会被刻意安排去对付一个比他更强的对手，此人会尽可能地骚扰与刁难候选人，好看看他面对挫败时如何应对。</p><h3>盟友</h3><p>2 @UUID[Compendium.pf2e.npc-gallery.Actor.Tj03FbN4SSr0o953]{特技演员}</p><h3>对手</h3><p>2 @UUID[Compendium.pf2e.npc-gallery.Actor.Tj03FbN4SSr0o953]{特技演员}</p><p>1 @UUID[Compendium.pf2e.npc-gallery.Actor.B09JfuBZHjcRXztU]{窃贼}</p><h3>考验通过标准</h3><p>每一名观战的会员都会按 1 至 5 的简单等级为候选人的整体表现打分。8 名会员中至少有 5 人给出 3 分或更高，即视为通过。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "An Invitation to the Osprey Club",
+    "pages",
+    "Conclusion",
+    "text"
+   ],
+   "zh": "<p>候选人已经通过了伊娜斯梅拉的考验，因此只要展现出最起码的本事，且未被判定为奸诈之徒，就会按以下条件被公会接纳：</p><p><strong>学徒会员</strong> —— 候选人作战光明磊落，通过了伊娜斯梅拉的考验，但未能通过其余考验。他会被指派一位导师，并被要求精进技艺。他无权进入会馆或商店，且未经导师在场，不得在镇内施展本领。</p><p><strong>熟手会员</strong> —— 候选人作战光明磊落，并至少额外通过了一项考验。他会被指派一位导师，并被要求精进技艺。他可以进入会馆，但不得进入商店；即便导师不在场，也可在镇内施展本领，但只能以外来者为目标。</p><p><strong>正式会员</strong> —— 候选人作战光明磊落，且通过了全部考验。他可以完全自由地出入会馆与商店，也可在镇内施展本领，但必须极其谨慎。外来者是首选目标。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Brelda's Bakery",
+    "pages",
+    "Brelda's Bakery",
+    "text"
+   ],
+   "zh": "<p>布雷达的儿子失踪后，她的好友、同为矮人主妇的德拉尔达主动提出替她照看市场摊位，好让布雷达去经营儿子的旅店。</p>\n<p>德拉尔达是前警卫队长特拉斯克·哈内利的遗孀。她每天清晨去取布雷达烤好的点心，通常不到午饭时分就能卖光。她很乐意打理这个市场摊位，因为帮助布雷达也让她慢慢与失去丈夫的伤痛和解。</p>"
+  },
+  {
+   "path": [
+    "entries",
+    "Tianze's Otari Extras",
+    "journals",
+    "Changelog",
+    "pages",
+    "Changelog",
+    "text"
+   ],
+   "zh": "<h2>版本 2.1.1</h2><ul><li><p>修复了图片路径问题——它让一个早已解决的文件夹大小写问题又找上门来。修好了若干演员图片和一张日志图片。</p></li></ul><h2>版本 2.1</h2><ul><li><p>清理了部分被配置为 Item Piles 的商人演员，它们可能导致价格显示为零。</p></li><li><p>新增了一张武器与护甲的随机表。</p></li><li><p>重新填充了若干商人演员的库存。</p></li><li><p>移除了一些已无指示物美术资源、本该在上次就删掉的演员。</p></li></ul><h2>版本 2.0</h2><ul><li><p>更新至第 13 版。</p></li><li><p>为大多数地图添加了场景区域以控制光照。</p></li><li><p>替换了除商人之外的全部肖像美术资源。新肖像同时用作肖像图与指示物图。</p></li><li><p>为除商人外的所有指示物启用了指示物光环。</p></li><li><p>挪正了一些位置不对的图块与指示物。</p></li><li><p>测试了全部宏，并确保指示物与物品兼容第 13 版以及最新的 Pathfinder 系统版本。</p></li></ul><h2>版本 1.3</h2><ul><li><p>为奥塔里几家主要店铺添加了商人演员。</p></li><li><p>更新了宏以适配 v12。</p></li><li><p>替换了首页。</p></li><li><p>将店铺日志与店铺随机表拆分为各自独立的日志。</p></li></ul><h2>版本 1.2</h2><ul><li><p>新增了这份更新日志。</p></li><li><p>重命名了所有文件夹（此前“Tianze”出现得太多了，抱歉）。</p></li><li><p>使用 <strong>Monk's Enhanced Journal</strong> 新增了所有店铺的新版本。我把它们放在了单独的合集文件夹里，以防你不使用 MEJ。感谢 <a href=\"https://github.com/Issacar13\">Issacar13</a> 提出的建议。</p></li><li><p>新增了随机表以支持大多数店铺。这对 MEJ 与 <strong>Item Piles</strong> 两类商人都很有用。唯一排除在外的，是那些库存很少的店铺。</p></li><li><p>微调了部分商人演员的库存。</p></li><li><p>修正了若干场景中错误的全局光照设置。</p></li><li><p>在物品文件夹中新增了“商人物品”，用于存放少量自定义物品。</p></li><li><p>新增了渔营基地：</p><ul><li><p>1 个新场景</p></li><li><p>3 个新生物演员，1 个新战利品演员</p></li><li><p>2 件新物品</p></li><li><p>2 份新日志，其中包含一场新遭遇</p></li></ul></li><li><p>将等级化标志人物替换为重制版。</p></li><li><p>把一次生存检定改成了游泳检定，使其符合 PF2E 规则（问题 #9 —— 鸣谢 <a href=\"https://github.com/ChasarooniZ\">ChasarooniZ</a>）。</p></li></ul>"
+  }
+ ]
+}
