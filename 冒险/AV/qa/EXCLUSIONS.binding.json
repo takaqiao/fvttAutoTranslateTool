@@ -1,0 +1,59 @@
+{
+  "_comment": "Archived binding exemptions. The discipline is 'zero OR an archived exemption with evidence' - never a silent threshold. Each rule names the collection, the verdict it excuses, the document type, and why.",
+
+  "unbound": [
+    {
+      "type": "TableResult",
+      "reason": "Babele maps TableResult.name through the `referencedDocumentField` converter - the visible text comes from the document the result points at, so the result itself has nothing of its own to translate. Its export identity is `range` (which has no extractor) falling back to `_id`, so it also cannot bind by name. Affects abomination-vaults-expanded (27), tianzes-otari-extras (67), pf2e-abomination-vaults (9).",
+      "count": 103
+    },
+    {
+      "type": "JournalEntryPage",
+      "reason": "Untitled pages: the installed page has `name: null` (image-only map pages in footsteps-and-maps-journals and tianzes-otari-shops). No name, no text - nothing translatable exists.",
+      "count": 44
+    },
+    {
+      "type": "Region",
+      "reason": "Unnamed scene regions in abomination-vaults-addons-scenes; `name` is null so there is no leaf to translate.",
+      "count": 8
+    },
+    {
+      "type": "RegionBehavior",
+      "reason": "Behaviors of those same unnamed regions.",
+      "count": 7
+    },
+    {
+      "type": "drawings(valueCollection)",
+      "reason": "Single-letter map drawing labels (A, B, C, E) on the AV scenes - identifiers, not prose.",
+      "count": 5
+    },
+    {
+      "type": "notes(valueCollection)",
+      "reason": "Map-note texts on AV scenes that upstream reworded; the note itself is a room pointer such as `G04a`.",
+      "count": 13
+    }
+  ],
+
+  "orphan": [
+    {
+      "type": "Item",
+      "reason": "Item names present in our translation that no installed document carries any more - upstream removed or renamed them between the release this translation was first built against and pf2e-abomination-vaults 4.1.3 / tianzes-gauntlight-extras 2.0.0. There is no matching UNBOUND item to re-key them onto, so they are genuinely gone. Kept rather than pruned: Babele ignores an unmatched key, and keeping them preserves the wording should upstream restore the content.",
+      "count": 71
+    },
+    {
+      "type": "notes(valueCollection)",
+      "reason": "AV scene map-notes (`To C33`, `To E01` ...) whose text upstream changed; same reasoning as above.",
+      "count": 26
+    },
+    {
+      "type": "JournalEntryPage",
+      "reason": "Pages of `tianzes-gauntlight-extras` `Lv. 10 Temple` that upstream restructured in 2.0.0.",
+      "count": 7
+    },
+    {
+      "type": "JournalEntry",
+      "reason": "`Odd's Stories - Expanded` no longer exists in footsteps-and-maps 3.2.3.",
+      "count": 1
+    }
+  ]
+}

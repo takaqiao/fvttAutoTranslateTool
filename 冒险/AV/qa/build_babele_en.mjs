@@ -133,10 +133,21 @@ function getPath(obj, dotted) {
   return cur;
 }
 
+// A pack may declare mapping fields beyond the AV-family override: tianzes-gauntlight-extras
+// adds speed / di / languages / dr. Missing them means those leaves never reach the English
+// baseline, so the unit system cannot see they are untranslated.
+let PACK_MAPPING = {};
+
 function fieldsFor(type, usePf2eOverride) {
   const base = BASE_FIELDS[type] || {};
   const over = usePf2eOverride ? (PF2E_OVERRIDE[type] || {}) : {};
-  return Object.assign({}, base, over);
+  const key = type === 'Actor' ? 'actors' : (type === 'Item' ? 'items' : null);
+  const declared = key && PACK_MAPPING[key] ? PACK_MAPPING[key] : {};
+  const extra = {};
+  for (const field of Object.keys(declared)) {
+    if (typeof declared[field] === 'string') extra[field] = declared[field];
+  }
+  return Object.assign({}, base, over, extra);
 }
 
 const stats = { emitted: 0, skippedNonString: 0, skippedEmpty: 0 };
@@ -190,6 +201,7 @@ function arg(name, def) {
 const dataRoot = arg('data-root');
 const modules = (arg('modules') || '').split(',').map(function (s) { return s.trim(); }).filter(Boolean);
 const outDir = arg('out-dir');
+const mappingFrom = arg('mapping-from');
 const noOverride = process.argv.includes('--no-pf2e-override');
 if (!dataRoot || !modules.length || !outDir) {
   console.error('usage: --data-root <dir> --modules a,b,c --out-dir <dir> [--no-pf2e-override]');
@@ -216,6 +228,15 @@ for (const modId of modules) {
       console.error('[warn] ' + modId + '.' + pack.name + ': ' + loaded.orphanEmbeds.length + ' embedded docs with no parent');
     }
 
+    // Load the pack's own mapping (from the shipped translation) before building.
+    PACK_MAPPING = {};
+    if (mappingFrom) {
+      const shipped = path.join(mappingFrom, modId + '.' + pack.name + '.json');
+      if (fs.existsSync(shipped)) {
+        try { PACK_MAPPING = JSON.parse(fs.readFileSync(shipped, 'utf8')).mapping || {}; }
+        catch (e) { /* leave empty */ }
+      }
+    }
     const usePf2e = !noOverride;
     const keys = allocateKeys(docs, pack.type);
     const entries = {};

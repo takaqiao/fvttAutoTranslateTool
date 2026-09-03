@@ -1,0 +1,13 @@
+{
+ "_comment": "Actor mapping fields whose target path is null on every installed document. PF2e moved senses to system.perception.senses (array of {type}); the pack's mapping still declares system.traits.senses.value. Measured 0 live / 405 null. The mapping entry itself is left in place - harmless once no leaf uses it.",
+ "dead_actor_fields": [
+  "senses"
+ ],
+ "evidence": {
+  "senses": {
+   "live_string_values": 0,
+   "null": 405,
+   "cn_leaves_removed": 185
+  }
+ }
+}

@@ -31,6 +31,7 @@ CJK = re.compile(r"[㐀-鿿]")
 WORD = re.compile(r"[A-Za-z]{2,}")
 ENRICHER = re.compile(r"@[A-Za-z]+\[[^\]]*\](?:\{[^{}]*\})?|\[\[[^\]]*\]\](?:\{[^{}]*\})?")
 TAG = re.compile(r"<[^>]+>")
+ENGLISH_RUN = re.compile(r"(?:[A-Za-z][A-Za-z'’\-]*[ ,]+){4,}[A-Za-z][A-Za-z'’\-]*")
 
 
 def visible(text: str) -> str:
@@ -109,9 +110,15 @@ def main(argv=None):
                 stats["frozen"] += 1
                 continue
             current = get_at(cn_data.get("entries", {}), path[1:]) if cn_data else None
-            if isinstance(current, str) and CJK.search(current):
-                stats["done"] += 1
-                continue
+            style = style_for(path, key)
+            if isinstance(current, str) and CJK.search(visible(current)):
+                # For PROSE, CJK alone is not "translated": a leaf whose only Chinese sits
+                # inside an enricher label (`@UUID[...]{传送法阵}`) is still an English
+                # sentence. A BILINGUAL leaf legitimately ends with the whole English, so
+                # the English-run test must not be applied to it.
+                if style == "bilingual" or not ENGLISH_RUN.search(visible(current)):
+                    stats["done"] += 1
+                    continue
             # `<p>@Localize[PF2E.NPC.Abilities.Glossary.Darkvision]</p>` and image-only
             # leaves carry English *inside markup only*: the PF2e system resolves the
             # @Localize key through pf2_cn, so translating them would be wrong.
@@ -126,7 +133,6 @@ def main(argv=None):
                 oversize.append({"path": list(path), "chars": len(english),
                                  "head": english[:400]})
                 continue
-            style = style_for(path, key)
             todo.append({"path": list(path), "style": style, "field": key,
                          "en": english, "current": current})
             stats["todo"] += 1

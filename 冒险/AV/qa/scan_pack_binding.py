@@ -114,7 +114,17 @@ def main(argv=None):
     parser.add_argument("--min-bound", type=float, default=0.98)
     parser.add_argument("--max-orphan", type=int, default=0)
     parser.add_argument("--quiet-unbound", action="store_true")
+    parser.add_argument("--exclusions", type=Path,
+                        help="archived exemptions; excused rows are counted separately, "
+                             "never silently dropped")
     args = parser.parse_args(argv)
+
+    excused = {"unbound": set(), "orphan": set()}
+    if args.exclusions and args.exclusions.exists():
+        raw = load(args.exclusions)
+        for verdict in ("unbound", "orphan"):
+            for rule in raw.get(verdict, []):
+                excused[verdict].add(rule["type"])
 
     manifest = load(args.keys)
     jobs = []
@@ -140,6 +150,10 @@ def main(argv=None):
             print(f"[SKIP] {collection_id}: not in the key manifest")
             continue
         results = scan_one(pack, load(path), collection_id)
+        ex_unbound = [r for r in results["unbound"] if r["type"] in excused["unbound"]]
+        ex_orphan = [r for r in results["orphan"] if r["type"] in excused["orphan"]]
+        results["unbound"] = [r for r in results["unbound"] if r["type"] not in excused["unbound"]]
+        results["orphan"] = [r for r in results["orphan"] if r["type"] not in excused["orphan"]]
         n_bound, n_unbound, n_orphan = (len(results[k]) for k in ("bound", "unbound", "orphan"))
         total = n_bound + n_unbound
         rate = n_bound / total if total else 1.0
@@ -147,9 +161,12 @@ def main(argv=None):
         if n_orphan > args.max_orphan or rate < args.min_bound:
             verdict = "FAIL"
             failed = True
+        excused_note = ""
+        if ex_unbound or ex_orphan:
+            excused_note = f"  [excused u={len(ex_unbound)} o={len(ex_orphan)}]"
         print(
             f"[{verdict}] {collection_id:<58} bound={n_bound:>5} unbound={n_unbound:>5} "
-            f"orphan={n_orphan:>5} rate={rate:6.2%}  <- {path.name}"
+            f"orphan={n_orphan:>5} rate={rate:6.2%}{excused_note}"
         )
 
         stats = per_path_stats(results)
@@ -176,6 +193,8 @@ def main(argv=None):
             "rate": rate,
             "verdict": verdict,
             "by_path": rolled,
+            "excused_unbound": len(ex_unbound),
+            "excused_orphan": len(ex_orphan),
             "orphans": results["orphan"][:2000],
             "unbounds": results["unbound"][:2000],
         }
