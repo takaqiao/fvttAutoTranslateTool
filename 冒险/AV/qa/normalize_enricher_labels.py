@@ -24,6 +24,7 @@ Usage:
 from __future__ import annotations
 
 import argparse
+import difflib
 import json
 import re
 import shutil
@@ -191,10 +192,34 @@ def resolve(raw_label, target, ref_index, tm, overrides, stats):
     return None
 
 
-def process_text(text, ref_index, tm, overrides, stats, unresolved, where):
+# A Chinese label may legitimately differ from its target's name: prose shortens
+# (`区域 C13` for `C13. 图书管理员的工作室`) and annotates (`贝科拉之子（4）`). Only a
+# near-identical pair is an inconsistency rather than an intentional rewording.
+RESYNC_MIN_RATIO = 0.75
+RESYNC_MIN_LENGTH_RATIO = 0.75
+
+
+def _should_resync(label, target_name):
+    if label == target_name:
+        return False
+    shorter, longer = sorted((len(label), len(target_name)))
+    if not longer or shorter / longer < RESYNC_MIN_LENGTH_RATIO:
+        return False          # a deliberate abbreviation, not a variant spelling
+    return difflib.SequenceMatcher(None, label, target_name).ratio() >= RESYNC_MIN_RATIO
+
+
+def process_text(text, ref_index, tm, overrides, stats, unresolved, where, resync=False):
     def replace(match):
         target = match.group(1) or match.group(3)
         label = match.group(2) if match.group(2) is not None else match.group(4)
+        if label.strip() and CJK.search(label) and resync:
+            for candidate in reversed(FOUNDRY_ID.findall(target or "")):
+                current = ref_index.get(candidate)
+                if current and _should_resync(label.strip(), current):
+                    stats["resync"] += 1
+                    return f"{target}{{{current}}}"
+                if current:
+                    break
         if not label.strip() or CJK.search(label):
             stats["already-chinese" if label.strip() else "empty-label"] += 1
             return match.group(0)
@@ -208,14 +233,16 @@ def process_text(text, ref_index, tm, overrides, stats, unresolved, where):
     return ENRICHER_LABEL.sub(replace, text)
 
 
-def walk(node, ref_index, tm, overrides, stats, unresolved, path=()):
+def walk(node, ref_index, tm, overrides, stats, unresolved, path=(), resync=False):
     if isinstance(node, dict):
-        return {k: walk(v, ref_index, tm, overrides, stats, unresolved, path + (k,)) for k, v in node.items()}
+        return {k: walk(v, ref_index, tm, overrides, stats, unresolved, path + (k,), resync)
+                for k, v in node.items()}
     if isinstance(node, list):
-        return [walk(v, ref_index, tm, overrides, stats, unresolved, path + (str(i),)) for i, v in enumerate(node)]
+        return [walk(v, ref_index, tm, overrides, stats, unresolved, path + (str(i),), resync)
+                for i, v in enumerate(node)]
     if not isinstance(node, str) or "{" not in node:
         return node
-    return process_text(node, ref_index, tm, overrides, stats, unresolved, ".".join(path))
+    return process_text(node, ref_index, tm, overrides, stats, unresolved, ".".join(path), resync)
 
 
 def assert_machine_parts_intact(before, after, where):
@@ -246,6 +273,9 @@ def main(argv=None):
     parser.add_argument("--tm", required=True, type=Path)
     parser.add_argument("--overrides", type=Path)
     parser.add_argument("--write", action="store_true")
+    parser.add_argument("--resync", action="store_true",
+                        help="also rewrite an already-Chinese label when it is a near-identical "
+                             "variant of its target document's current name")
     parser.add_argument("--tree", type=Path,
                         help="also process an arbitrary JSON tree (e.g. a module's own "
                              "languages/cn.json), walking every leaf instead of `entries`")
@@ -284,7 +314,8 @@ def main(argv=None):
         unresolved = Counter()
         before_strings = collect_strings(cn_data.get("entries"))
         out = dict(cn_data)
-        out["entries"] = walk(cn_data.get("entries"), ref_index, tm, overrides, stats, unresolved, ("entries",))
+        out["entries"] = walk(cn_data.get("entries"), ref_index, tm, overrides, stats,
+                              unresolved, ("entries",), args.resync)
         after_strings = collect_strings(out.get("entries"))
         for key, before in before_strings.items():
             assert_machine_parts_intact(before, after_strings.get(key, before), f"{cn_path.name}:{key}")
