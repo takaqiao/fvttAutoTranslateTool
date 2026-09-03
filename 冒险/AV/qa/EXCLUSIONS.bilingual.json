@@ -1,0 +1,17 @@
+{
+  "_comment": "Leaves that legitimately contain a long English run. Each entry is a full `<file>:<dotted path>` and carries the reason it is not a defect. Read by gate.py; nothing is excused silently.",
+  "leaves": [
+    {
+      "path": "tianzes-gauntlight-extras.tianzes-gauntlight-extras.json:Tianze's Gauntlight Extras.description",
+      "why": "Tool and asset-pack credits - DungeonDraft, Forgotten Adventures, Bing Image Creator, Affinity Designer and Photo, Faststone Image Viewer. Product names are not translated."
+    },
+    {
+      "path": "tianzes-gauntlight-extras.tianzes-gauntlight-extras.json:Tianze's Gauntlight Extras.journals.Tianze's Gauntlight Extras.pages.Introduction.text",
+      "why": "Same credits block plus the pixabay attribution URLs, which the licence requires verbatim."
+    },
+    {
+      "path": "tianzes-gauntlight-extras.tianzes-gauntlight-extras.json:Tianze's Gauntlight Extras.journals.Tianze's Gauntlight Extras.pages.Credits and Licenses.text",
+      "why": "Carries the OPEN GAME LICENSE 1.0a in full. The licence text must be reproduced verbatim in English; only the surrounding credits are translated."
+    }
+  ]
+}

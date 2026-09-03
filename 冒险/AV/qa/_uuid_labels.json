@@ -1,0 +1,9 @@
+{
+  "_comment": "Explicit canonical labels for @UUID/@Compendium targets where the TM's answer is wrong for THIS target. Keyed by the exact bracket body. See normalize_uuid_labels.py.",
+  "Compendium.pf2e.spells-srd.Item.XXqE1eY3w3z6xJCB": "隐形术",
+  "_why_invisibility": "This target is the SPELL Invisibility. The wiki page titled Invisibility is the RUNE (隐形符文), so the TM resolves the homograph the wrong way; the corpus already used 隐形术.",
+  "JournalEntry.g4Rx11TDnvw14ICf.JournalEntryPage.vLb8cCM3Xz9OE5Ob": "杰尔·梅兹勄",
+  "_why_jaul": "pf2e_compendium spells it 杰尓 with U+5C13; the correct character is 尔 U+5C14, which is what the corpus uses.",
+  "Macro.PnsfXoBKhIqCjnl9": "贝科拉攻击 H02",
+  "_why_belcorra_h02": "The two existing labels tie 1-1 and one spells the room code with a letter O (`HO2`). The installed macro is named `Belcorra Attacks H02` - digit zero."
+}

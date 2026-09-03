@@ -1,0 +1,132 @@
+{
+  "_comment": "AV (Abomination Vaults) family project terms. Loaded by build_3source_tm.py as the `wiki_project` tier - it outranks pf2_cn/pf2e_compendium, so only put terms here that the general wiki layer cannot answer or answers wrongly for this adventure. Every entry records where the ruling came from; `note` explains anything a later reader would otherwise re-litigate.",
+  "_schema": "{english: {zh, source, confidence?, note?}}",
+  "_built": "2026-09-04, against wiki corpus captured 2026-09-04",
+
+  "Abomination Vaults": {
+    "zh": "憎恨魔窟",
+    "source": "https://pf2.huijiwiki.com/wiki/Data:Sources-Abomination Vaults.json",
+    "confidence": "high",
+    "note": "Variants seen in the wild and normalised away: 憎恶秘库 / 憎恶宝库 / 诅咒秘库 / 深渊宝库 / 憎恨地窟 / 憎恶魔窟 / 憎恶地窟. pf2e_compendium_chn itself still carries 憎恶魔窟 x12 against 憎恨魔窟 x64."
+  },
+  "Gauntlight": {
+    "zh": "凄凉灯塔",
+    "source": "https://pf2.huijiwiki.com/wiki/《凄凉灯塔废墟》",
+    "confidence": "high"
+  },
+  "Ruins of Gauntlight": {
+    "zh": "凄凉灯塔废墟",
+    "source": "https://pf2.huijiwiki.com/wiki/《凄凉灯塔废墟》",
+    "confidence": "high"
+  },
+  "Troubles in Otari": {
+    "zh": "奥塔里的麻烦",
+    "source": "https://pf2.huijiwiki.com/wiki/《奥塔里的麻烦》",
+    "confidence": "high"
+  },
+  "Menace Under Otari": {
+    "zh": "奥塔里地下的威胁",
+    "source": "pf2e_compendium_chn",
+    "confidence": "medium",
+    "note": "No wiki page. glossary.json had 奥塔利之危, which both mis-spells the town (奥塔利) and drops the 'under'."
+  },
+  "Otari": {
+    "zh": "奥塔里",
+    "source": "https://pf2.huijiwiki.com/wiki/《奥塔里的麻烦》",
+    "confidence": "high",
+    "note": "Both the town and the founder. Variants normalised away: 奥塔利 / 欧塔里."
+  },
+  "Otari Ilvashti": {
+    "zh": "奥塔里·伊尔瓦什提",
+    "source": "AV corpus + glossary.json",
+    "confidence": "medium"
+  },
+  "Belcorra Haruvex": {
+    "zh": "贝科拉·哈鲁维克斯",
+    "source": "AV corpus (main pack, consistent)",
+    "confidence": "high",
+    "note": "The old glossary regex had chopped this to a bare 哈鲁维克斯."
+  },
+  "Belcorra's Grasp": {
+    "zh": "贝科拉之握",
+    "source": "AV:E corpus, 5:1 over 贝科拉的掌控",
+    "confidence": "medium"
+  },
+  "Wrin Sivinxi": {
+    "zh": "瓦琳·希温尼斯",
+    "source": "AV corpus + glossary.json",
+    "confidence": "medium"
+  },
+  "Nhimbaloth": {
+    "zh": "宁布洛斯",
+    "source": "https://pf2.huijiwiki.com/wiki/宁布洛斯",
+    "confidence": "high"
+  },
+  "Nhimbaloth's Shrine": {
+    "zh": "宁布洛斯的圣坛",
+    "source": "AV corpus, 2:1 over 宁布洛斯的圣祠",
+    "confidence": "medium"
+  },
+  "Morlock": {
+    "zh": "摩洛克",
+    "source": "https://pf2.huijiwiki.com/wiki/摩洛克",
+    "confidence": "high",
+    "note": "Absent from the pre-refresh TM entirely."
+  },
+  "Cauthooj": {
+    "zh": "迷音鸟",
+    "source": "https://pf2.huijiwiki.com/wiki/迷音鸟",
+    "confidence": "high",
+    "note": "Beats pf2e_compendium_chn's 甲伏怪蛋."
+  },
+  "Flickerwisp": {
+    "zh": "闪火",
+    "source": "AV corpus (41 uses, consistent)",
+    "confidence": "medium"
+  },
+  "Roseguard": {
+    "zh": "玫瑰团",
+    "source": "AV corpus (181 uses, consistent)",
+    "confidence": "high"
+  },
+  "Ilvarandin": {
+    "zh": "伊尔瓦兰町",
+    "source": "glossary.json",
+    "confidence": "low",
+    "note": "Not used anywhere in the AV corpus; recorded so a later book does not invent a second rendering."
+  },
+  "Fogfen": {
+    "zh": "雾隐沼泽",
+    "source": "《凄凉灯塔废墟》 prose + glossary.json",
+    "confidence": "medium",
+    "note": "The wiki Data page says the shorter 雾沼, but the book prose and the AV corpus (27:1) say 雾隐沼泽. The one dissenting use was a playlist track title, now unified."
+  },
+  "Sanctuary": {
+    "zh": "庇护术",
+    "source": "https://pf2.huijiwiki.com/wiki/庇护术",
+    "confidence": "high",
+    "note": "The SPELL. AV area I43 is also called Sanctuary but is a hidden resting cave - rendered 避难所 there, not with the spell name. A term table cannot express that; it is pinned in 冒险/AV/qa/_terms.json instead."
+  },
+  "Drill Field": {
+    "zh": "操练场",
+    "source": "AV area G03",
+    "confidence": "high",
+    "note": "An earlier pass had the playlist entry as 钻研领域, reading 'drill' as study."
+  },
+  "Gauntlight Cupola": {
+    "zh": "凄凉灯塔穹顶",
+    "source": "AV area A25",
+    "confidence": "high"
+  },
+  "Coin Vault": {
+    "zh": "钱币宝库",
+    "source": "AV area I54",
+    "confidence": "medium"
+  },
+  "Tianze": {
+    "zh": "天泽",
+    "source": "the module's own adventure entry name (天泽的凄凉灯塔额外内容)",
+    "confidence": "high",
+    "note": "Beat 天则 3:2 in the workspace; the entry name settles it."
+  }
+}

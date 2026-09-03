@@ -1,0 +1,27 @@
+{
+  "_comment": "Leaves that only their path can disambiguate. See apply_path_patches.py.",
+  "patches": [
+    {
+      "file": "tianzes-gauntlight-extras.tianzes-gauntlight-extras.json",
+      "path": "Tianze's Gauntlight Extras.actors.Drex.items.Support.name",
+      "from": "支撑物 Support",
+      "to": "支援 Support",
+      "why": "Drex is a druid's animal companion; the item body describes the Support ACTION (Data:Actions-Support.json = 支援). 支撑物 is the equipment homograph from pf2e.equipment-srd."
+    },
+    {
+      "file": "tianzes-gauntlight-extras.tianzes-gauntlight-extras.json",
+      "path": "Tianze's Gauntlight Extras.actors.Worliwynn.items.Support.name",
+      "from": "支撑物 Support",
+      "to": "支援 Support",
+      "why": "Same as Drex - halfling druid's animal companion."
+    }
+  ],
+  "_not_patched": [
+    {
+      "file": "tianzes-otari-extras.tianzes-otari-extras.json",
+      "path": "Lathenar's Shop.results.k097KsyoR2Kzxvek.name",
+      "value": "支撑物 Support",
+      "why": "A general-store roll-table result: here Support really is the piece of equipment, so 支撑物 is correct. Recorded so a later sweep does not 'fix' it."
+    }
+  ]
+}
