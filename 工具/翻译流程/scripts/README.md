@@ -42,7 +42,8 @@ python qa_check.py <target_dir> [old_dir]
 
 | 脚本 | 用途 | 输入 | 输出 |
 |---|---|---|---|
-| `build_3source_tm.py` | 从 pf2_cn / pf2_compendium / wiki 构建优先级合并 TM | `system/pf2_cn/zh_Hans/`、`system/pf2e_compendium/zh-CN/pf2e.*.json`、`pf2wiki-scraper/out/glossary_wiki.json` | `翻译流程/tm_cache/tm_3source.json` |
+| `build_3source_tm.py` | 从 Wiki / pf2e_compendium / pf2_cn 构建优先级合并 TM | `模组/pf2_cn/zh_Hans/`、`模组/pf2e_compendium_chn/compendium/pf2e.*.json`、`pf2wiki-scraper/out/glossary_wiki.json` | `工具/翻译流程/tm_cache/tm_3source.json` |
+| `fotrp_update.py` | 以稳定 ID 迁移 FotRP Addon、按来源优先级校准并输出差异审计 | 旧译、旧/新上游 `_source`、Wiki 项目词表与更新配置 | 新 Babele JSON + JSON 报告 |
 | `apply_tm.py` | 多策略 TM 应用（直接 / 剥后缀 / 剥括号 / 反序 / 符文剥离 / Lore合成 / spell-trad合成 / natural-attack） | TM + 单 JSON 文件 | 原文件原地覆盖 |
 | `diff_structures.py` | 结构化 diff: added/removed/changed paths | NEW/ + OLD/ 两目录 | 控制台报告 |
 | `port_old_to_new.py` | 把 OLD 中文 port 进 NEW 公共路径 | OLD.json + NEW.json | merged.json |
@@ -56,19 +57,20 @@ python qa_check.py <target_dir> [old_dir]
 
 ## 优先级与裁决
 
-3 源优先级：**pf2_cn > pf2e_compendium(非 extra) > wiki**
+来源优先级：**经核对的 PF2 中文 Wiki > pf2e_compendium / pf2_cn > pf2e-compendium-extra-cn > 其他来源**
 
 冲突时：
-- pf2_cn 命中：直接用
-- pf2_cn miss、compendium 命中：用 compendium
-- 前两者都 miss：fallback 到 wiki（注意 wiki scraper 不稳定，作粗提示）
+- Wiki 项必须来自已核对页面或已审阅的离线词表；未经核验的 scraper 结果不得直接覆盖。
+- `pf2e_compendium` 精确条目与 `pf2_cn` 同层，精确条目优先于 i18n 键推导。
+- extra 旧译仅在稳定 ID 对应、或英文原文完全一致时复用。
+- 以上均未命中时，才采用其他经人工审阅的来源。
 
 `build_3source_tm.py` 输出的每条 TM 项会保留 `all_sources`，便于人工裁决：
 ```json
 {
   "Halberd": {
     "name": "戟 Halberd",
-    "source": "pf2_cn",
+    "source": "wiki",
     "all_sources": {
       "pf2_cn": "戟",
       "pf2e_compendium": "戟 Halberd",
@@ -88,8 +90,7 @@ python qa_check.py <target_dir> [old_dir]
 
 | 内容 | 路径 |
 |---|---|
-| pf2_cn UI 翻译 | `system/pf2_cn/zh_Hans/{action,kingmaker,re,zh_Hans}-zh_Hans.json` |
-| pf2e_compendium 中文 | `system/pf2e_compendium/zh-CN/pf2e.*.json`（21 文件，**仅 pf2e.* 前缀**） |
-| pf2e_compendium 英文 | `system/pf2e_compendium/en-US/pf2e.*.json`（73 文件） |
-| pf2e_compendium 第三方（**不要用**） | `system/pf2e_compendium/en-US/{battlezoo-*,botanical-bestiary,clerics,magus,impossible-lands,kctg-2e}.*` |
-| wiki 抓取（不稳定，仅作兜底） | `pf2wiki-scraper/out/glossary_wiki.json` 或 `_confident.json` |
+| pf2_cn UI 翻译 | `模组/pf2_cn/zh_Hans/*.json` |
+| pf2e_compendium 中文 | `模组/pf2e_compendium_chn/compendium/pf2e.*.json`（**仅 pf2e.* 前缀**） |
+| Wiki 离线词表 | `pf2wiki-scraper/out/glossary_wiki.json` 或项目级已核对词表 |
+| FotRP Wiki 已核对词表 | `工具/翻译流程/data/fotrp_wiki_terms.json` |

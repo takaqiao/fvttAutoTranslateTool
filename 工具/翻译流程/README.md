@@ -8,30 +8,29 @@
 - **目标**：原地把英文字段替换为中文，name 字段保留 `中文 English` 双语格式，HTML/UUID/Foundry enricher 全部不动
 - **不适用于**：纯散文 PDF 翻译（用单独的 PDF→docx 管线）；冒险路线的"完全汉化版"PDF（用 PyMuPDF 抽取 + 段落对齐管线）
 
-## 1. 翻译记忆（TM）三源优先级
+## 1. 翻译记忆（TM）来源优先级
 
-每次翻译开始前，**优先**从三个本地源构建 TM 查找表，再用 TM 命中 → 剩余进 in-session 翻译。
+每次翻译开始前，先从权威来源构建 TM 查找表，再用 TM 命中 → 旧项目记忆复用 → 剩余内容人工翻译。
 
 **优先级（冲突时高级别覆盖低级别，即"高级别先查、低级别兜底"）：**
 
 ```
-pf2_cn  >  pf2e_compendium (非 extra)  >  wiki
+PF2 中文 Wiki > pf2e_compendium / pf2_cn > pf2e-compendium-extra-cn > 其他来源
 ```
 
-即：**pf2_cn 命中就用 pf2_cn 的；pf2_cn 没有再查 pf2e_compendium；前两者都没有才退到 wiki**。
+其中 `pf2e_compendium` 的精确条目与 `pf2_cn` 属于同一层；两者冲突时，精确合集条目优先于从 i18n 键推导出的候选。`pf2e-compendium-extra-cn` 作为既有项目记忆，以稳定 Foundry ID 和完全一致的英文原文复用，不能按易变名称盲目覆盖新版内容。
 
 具体路径：
 
 | 优先级 | 源 | 路径 | 内容 | 条目量 |
 |---|---|---|---|---|
-| 高 | **pf2_cn** | `system/pf2_cn/zh_Hans/*.json`（4 文件） | 系统 i18n UI 字符串（`PF2E.xxx.yyy` → 中文）+ 部分核心术语 | ~10K |
-| 中 | **pf2e_compendium (非 extra)** | `system/pf2e_compendium/zh-CN/pf2e.*.json`（21 文件，**只取以 `pf2e.` 开头的**） | 官方 PF2e SRD entries（武器/法术/护甲/feats/ancestries 等） | ~20K |
-| 低 | **wiki**（仅作兜底） | `pf2wiki-scraper/out/glossary_wiki.json` 或 wiki 单页 WebFetch | 社区 wiki 抓的 EN→ZH 术语对照 | ~16K |
+| 最高 | **PF2 中文 Wiki** | `pf2wiki-scraper/out/glossary_wiki.json`、离线镜像或经核对的 Wiki 单页 | 社区现行规范译名；自动抓取结果必须先校验 | ~16K |
+| 核心 | **pf2e_compendium (非 extra)** | `模组/pf2e_compendium_chn/compendium/pf2e.*.json` | PF2e 核心合集条目（武器、法术、护甲、专长等） | ~28K |
+| 核心 | **pf2_cn** | `模组/pf2_cn/zh_Hans/*.json` | 系统 i18n UI 字符串与部分核心术语 | ~6K 可推导项 |
+| 项目 | **pf2e-compendium-extra-cn** | 当前汉化包和历史版本 | 第三方模组既有译文；按稳定 ID / 完全一致原文复用 | 依项目而定 |
+| 兜底 | **其他经审阅来源** | `术语表/glossary.json`、汉化 PDF、人工校对 | 仅在以上来源均无结果时使用 | 依来源而定 |
 
-**为什么是这个优先级**：
-- **pf2_cn**：FVTT 系统官方简中本地化，质量最高、最稳定，是最权威的术语源
-- **pf2e_compendium (非 extra)**：官方 Babele 模组的简中翻译，覆盖完整 SRD 条目（武器/法术/护甲全套），质量也高
-- **wiki**：`glossary_wiki.json` 是从 pf2 wiki 自动抓取的，**抓取过程不稳定，含噪音**——只作前两源未命中时的粗提示，不要直接信任
+**为什么是这个优先级**：Wiki 的经核对页面用于确定社区现行译名；核心系统与合集提供完整规则文本；extra 项目记忆用于保留模组专名和已校对自定义内容。自动抓取的 Wiki 词表仍可能含噪音，因此“Wiki 最高”指已经核对过的页面或离线数据，不代表无条件信任未经校验的抓取结果。
 
 **"非 extra" 是什么**：`pf2e_compendium/en-US/` 有 166 个文件，其中 73 个是 `pf2e.*` 核心 SRD（要用），93 个是第三方/同人模组（`battlezoo-*`、`botanical-bestiary.*`、`clerics.*`、`magus.*`、`impossible-lands.*`、`kctg-2e.*` 等，**不要用**——它们术语不规范、翻译质量参差）。
 
@@ -39,7 +38,7 @@ pf2_cn  >  pf2e_compendium (非 extra)  >  wiki
 
 `pf2wiki-scraper/out/glossary_wiki.json` 由本地 scraper 跑出，**已知不稳定**（HTML 解析有失败、ZH/EN 配对有误标）。两种处理路径：
 
-**路径 A（推荐，按需 WebFetch）**：仅在前两源 miss 且术语关键（人名/地名/模组独有能力）时，对单条术语 WebFetch wiki 单页验证（如 `https://pathfinder.fandom.com/wiki/<term>`）。覆盖 95%+ 命中只走 pf2_cn + compendium，剩下 ~5% 触发 WebFetch，单条 ~3-8K tokens 成本可控。
+**路径 A（推荐，按需核对）**：对重命名、专名和争议术语逐条核对 PF2 中文 Wiki（`https://pf2.huijiwiki.com`），把确认结果保存成小型、可审计的项目词表；其余规则文本由核心合集补全。
 
 **路径 B（Claude 手工校对，零外部调用）**：完全用 glossary.json 兜底，遇歧义术语在会话里向用户确认。零成本但可能与汉化组译名偏差。
 
@@ -87,7 +86,7 @@ python 翻译流程/scripts/build_3source_tm.py
 }
 ```
 
-冲突时 wiki 胜，但保留 `all_sources` 供人工裁决。
+冲突时经核对的 Wiki 结果胜出；所有候选仍保留在 `all_sources` 供人工复核。
 
 ### 阶段 2：应用 TM（多策略 lookup）
 
@@ -156,7 +155,7 @@ python 翻译流程/scripts/audit_translations.py <target_dir>  # HTML/UUID/双�
 python 翻译流程/scripts/term_consistency_check.py
 ```
 
-跨文件对照核心术语，找出 e.g. `Yai` 在 bestiary 译为「巨鬼」但在 addons 译为「夜叉」这类不一致。**修复时按 3 源优先级裁决**：wiki 有就用 wiki 的；wiki 没有就用 pf2e_compendium 的；都没有则用旧译多数派 + glossary。
+跨文件对照核心术语，找出 e.g. `Yai` 在 bestiary 译为「巨鬼」但在 addons 译为「夜叉」这类不一致。**修复时按已核准的完整层级裁决**：经核对的 PF2 中文 Wiki > pf2e_compendium / pf2_cn > extra 项目记忆 > 其他经审阅来源。
 
 ### 阶段 8：部署 / 终审
 

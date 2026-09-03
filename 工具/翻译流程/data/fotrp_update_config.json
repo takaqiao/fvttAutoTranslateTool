@@ -1,0 +1,147 @@
+{
+  "adventure_names": {
+    "Bonmu Hexcrawl Map": "盆武六角探索地图 Bonmu Hexcrawl Map",
+    "Book 1": "赤凰斗士：附加内容（第一本） Book 1",
+    "Book 2": "赤凰斗士：附加内容（第二本） Book 2",
+    "Fists of the Ruby Phoenix: Addons (Book 3)": "赤凰斗士：附加内容（第三本） Fists of the Ruby Phoenix: Addons (Book 3)"
+  },
+  "folder_names": {
+    "Level 17": "17级 Level 17"
+  },
+  "trusted_description_names": [
+    "Clinch Strike",
+    "Double Poison",
+    "Exploitive Bomb",
+    "Gang Up",
+    "Grab",
+    "Pernicious Poison",
+    "Quick Bomber",
+    "Reach Spell",
+    "Tactical Debilitations"
+  ],
+  "document_overrides": {
+    "Adventure": {
+      "z3GYI07psMjahmLe": {
+        "caption": "第三本 Book 3"
+      }
+    },
+    "Actor": {
+      "zZpbew6L78AGtpcZ": {
+        "tokenName": "烟火表演 Fireworks Display",
+        "prototypeToken": "烟火表演",
+        "publicNotes": "<p><strong>追逐点</strong> 5；<strong>克服</strong> @Check[crafting|dc:30]、@Check[perfomance|dc:30]、@Check[goka-lore|dc:30]、@Check[society|dc:32]、@Check[arcana|dc:34]、@Check[occultism|dc:34]</p><hr /><p>任何在克服此障碍的检定中<span style=\"text-decoration:underline\"><strong>大失败</strong></span>的角色将陷入@UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]，持续1轮。</p>"
+      },
+      "MTZSqszICQFx0QLs": {
+        "publicNotes": "<p><strong>追逐点</strong> 7；<strong>克服</strong> @Check[ocean-lore|dc:29]、@Check[survival|dc:29]、@Check[nature|dc:31]、@Check[intimidation|dc:36]</p>"
+      },
+      "2Jxj39Uv9Y4Uy4tK": {
+        "name": "蓝蝮蛇（17级） Blue Viper (Level 17)"
+      },
+      "D8uvQQpfC655k88O": {
+        "name": "捣达（17级） Ran-to (Level 17)"
+      },
+      "SdQDI0g5x05qYPbz": {
+        "name": "白谷真野（17级） Shino Hakusa (Level 17)"
+      },
+      "Ww4Qj9ADxPjCyTF3": {
+        "name": "苏塔奴（17级） Syu Tak-nwa (Level 17)"
+      },
+      "y0JAZ8E2eo5RnhYQ": {
+        "name": "桥上人群 Bridge Crowd",
+        "tokenName": "桥上人群 Bridge Crowd",
+        "prototypeToken": "桥上人群",
+        "publicNotes": "<p>注意：此 Token 需要 <strong>Swarms</strong> 模组才能正常运作。</p>"
+      },
+      "8jgprYkqkBzYsz8L": {
+        "name": "桥梁残骸 Bridge Debris",
+        "tokenName": "桥梁残骸 Bridge Debris",
+        "prototypeToken": "桥梁残骸"
+      },
+      "APn9B54hhRtr0oCQ": {
+        "name": "平民 Commoner",
+        "tokenName": "平民 Commoner",
+        "prototypeToken": "平民",
+        "publicNotes": "<p>许多平民终日辛劳，只为让家人衣食无忧，过上相对安稳的生活。</p><hr /><p>社会建立在劳动者的肩膀之上。</p>"
+      },
+      "LbSA6uGVafcosT0X": {
+        "name": "渔民 Fisher",
+        "tokenName": "渔民 Fisher",
+        "prototypeToken": "渔民",
+        "publicNotes": "<p>渔民不只是把捕鱼当作爱好的闲人；他们捕捞鱼类及其他海产，目的是出售大部分乃至全部渔获。</p><hr /><p>社会建立在劳动者的肩膀之上。</p>"
+      }
+    },
+    "Item": {
+      "ATuHWb9pil4pkYgX": {
+        "description": "<p>超大型或更小，脚踩，@Check[reflex|dc:34|basic]</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>"
+      },
+      "fYhKDFMqMpdjlBDT": {
+        "description": "<p>超大型或更小，脚踩，@Check[reflex|dc:36|basic]</p><hr /><p>@Localize[PF2E.NPC.Abilities.Glossary.Trample]</p>"
+      },
+      "naExmUwTL8vkSeQQ": {
+        "name": "飞行速度50尺 Speed Fly 50 feet"
+      },
+      "bg3KyoKWKOPLTmOy": {
+        "description": "<p>20尺</p>"
+      },
+      "8izdBXvvIjN4d56y": {
+        "name": "启动：反射法术 Activation: Reflect Spell",
+        "description": "<p>由 @UUID[Actor.Ol2xNe51H1fcDCbw.Item.eIDuu0jTFIZiUvnL]{反射盾 Reflecting Shield} 授予</p><p><strong>启动—反射法术</strong> <span class=\"action-glyph\">R</span>（专注）</p><p><strong>频率</strong> 每日一次</p><p><strong>触发</strong> 你成为一个法术的目标</p><p><strong>要求</strong> 你已举起<em>反射盾</em></p><hr /><p><strong>效果</strong> 你尝试将该法术反射回施法者。盾牌尝试反制该法术，反制环级为9环，反制修正为 [[/r 1d20+30 #反制]]{+30}。若成功反制，该法术将转而影响其施法者。</p><hr /><p><strong>制作要求</strong> 初始原材料中必须包含价值至少2,750 gp的白银。</p>"
+      },
+      "rbtSqixbTXvvcmJc": {
+        "description": "<p>蓝蝮蛇的灌注毒素DC为38。</p>"
+      },
+      "fkempowsMrEXyJXO": {
+        "description": "<p><strong>需求</strong> 捣达正@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}或@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚 Restrained}着一个生物。</p><hr /><p><strong>效果</strong> 捣达将敌人摔向地面。被擒生物受到@Damage[11d6[bludgeoning]]伤害（@Check[fortitude|dc:38|basic]豁免）并@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}。擒抱结束。</p>"
+      },
+      "9IuYBABfjiSu0kC2": {
+        "description": "<p><strong>频率</strong> 每轮一次</p><p><strong>需求</strong> 捣达正@UUID[Compendium.pf2e.conditionitems.Item.kWc1fhmv9LBiTuei]{受擒 Grabbed}或@UUID[Compendium.pf2e.conditionitems.Item.VcDeM8A5oI6VqhbM]{束缚 Restrained}着一个生物。</p><hr /><p><strong>效果</strong> 捣达旋转手中抓住的生物，用其撞击触及范围内的其他生物，随后将其扔开。捣达进行一次@Check[athletics|defense:fortitude]检定，对抗被擒生物的强韧DC。</p><hr /><p><strong>大成功</strong> 捣达将敌人远远甩出。擒抱结束。被擒生物被投掷到 [[10 + (5 * @actor.system.abilities.str.mod)]] 尺内的一处空间，受到@Damage[13d6[bludgeoning]]伤害并@UUID[Compendium.pf2e.conditionitems.Item.j91X7x0XSomq8d60]{倒地 Prone}。所有与捣达相邻的生物受到等量钝击伤害（@Check[reflex|dc:38|basic]豁免）。</p><p><strong>成功</strong> 如大成功，但被擒生物被投掷到 [[(10 + (5 * @actor.system.abilities.str.mod)) / 2]] 尺内的一处空间，且生物受到@Damage[9d6[bludgeoning]]伤害。</p><p><strong>失败</strong> 捣达将敌人扔到一旁。擒抱结束，被擒生物倒地。</p><p><strong>大失败</strong> 捣达没能抓稳敌人，擒抱结束。</p>"
+      },
+      "ZuNMXisyC427LytZ": {
+        "name": "双重衰弱打击（高等） Double Debilitating Strike (Greater)",
+        "description": "<p><strong>触发</strong> 你的打击命中一个措手不及的生物并造成伤害。</p><hr /><p>你施加下列两种衰弱效果，持续到你下一回合结束；移除其中一种时，另一种也会被移除：</p><ul><li><p><strong>衰弱</strong> 目标的速度受到–10尺状态减值。</p></li><li><p><strong>衰弱</strong> 目标陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}。</p></li><li><p><strong>衰弱</strong> 目标无法使用反应。</p></li><li><p><strong>衰弱</strong> 目标无法夹击，也无法为盟友提供夹击。@UUID[Compendium.pf2e.feat-effects.Item.JUgx48XHMz4QM4Ir]{效果：战略衰弱（无法夹击）}</p></li></ul><p>@UUID[Item.yyFDUEs71FUau5lO]{效果：双重衰弱偷袭（高等）}</p>"
+      },
+      "JclNqJ7Klrz4sRT1": {
+        "description": "<p>白谷发动精准攻击，击打穴道以削弱敌人的行动。白谷进行一次拳头打击。若命中，目标照常受到伤害，并且必须尝试一次@Check[fortitude|dc:39]豁免。无论豁免结果如何，目标随后对「压痛点攻击」暂时免疫1分钟。</p><hr /><p><strong>大成功</strong> 目标不受影响。</p><p><strong>成功</strong> 目标的肌肉暂时变弱。1轮内，目标陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 2}，且尝试使用带有操作特征的动作时必须成功通过一次@Check[flat|dc:5]检定，否则失去该动作。</p><p><strong>失败</strong> 如成功，但持续时间为1分钟。</p><p><strong>大失败</strong> 如成功，但持续时间为1分钟、纯骰检定DC为11，且目标的速度在持续时间内受到–10尺状态减值。</p><p>@UUID[Item.6NzhqF7DOCyc84OF]{效果：压痛点攻击（成功）}</p><p>@UUID[Item.fJkU0HTMFYahDKks]{效果：压痛点攻击（失败）}</p><p>@UUID[Item.1TnHKZy2DL5NcOEb]{效果：压痛点攻击（大失败）}</p>"
+      },
+      "T3ZpHsIT64RGyhT0": {
+        "name": "群众之力 Power of the Mob",
+        "description": "<p>当三名或更多平民彼此相邻时，每名平民在运动检定（用于[[/act shove]]）、攻击检定与伤害掷骰上获得+1环境加值。</p>"
+      },
+      "lqVfEZu6MeCHDuky": {
+        "name": "学识（任意一项与其职业相关的学识） Lore (any one related to their trade)"
+      },
+      "Wn14UA18uo1tTNpr": {
+        "name": "各式刀具 Assorted Knives"
+      },
+      "XxE8B5jfSvDTS7Sa": {
+        "name": "钓鱼线 Fishing Line"
+      },
+      "C4oejzlwD5v6aRbi": {
+        "name": "发现鱼类的察觉检定获得+2加值 +2 Bonus on Perception to Spot Fish"
+      },
+      "1XmYQ3VFWPVdhgLd": {
+        "name": "鱼钩入体 Fishhooked",
+        "description": "<p>只要一个生物仍在承受渔民的钓鱼线打击造成的持续流血伤害，它体内就嵌着一枚鱼钩。该生物无法向远离渔民的方向移动（但可以横向移动）。渔民可以用一个具有攻击和操作特征的单动作收线，对该生物的强韧DC尝试一次@Check[athletics|against:fortitude]检定。成功时，该生物受到@Damage[2d4[slashing]]伤害并被拉近渔民10尺（大成功时伤害与距离加倍）。</p>"
+      },
+      "hGiOF8yJK8VGjkTM": {
+        "name": "捕鱼学识 Fishing Lore"
+      },
+      "yyFDUEs71FUau5lO": {
+        "name": "效果：双重衰弱偷袭（高等） Effect: Double Debilitating Sneak Attack (Greater)",
+        "description": "<p>你受到下列两种效果：</p><ul><li><p><strong>衰弱</strong> 目标的速度受到–10尺状态减值。</p></li><li><p><strong>衰弱</strong> 目标陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 Enfeebled 1}。</p></li><li><p><strong>衰弱</strong> 目标无法使用反应。</p></li><li><p><strong>衰弱</strong> 目标无法夹击，也无法为盟友提供夹击。@UUID[Compendium.pf2e.feat-effects.Item.JUgx48XHMz4QM4Ir]{效果：战略衰弱（无法夹击）}</p></li></ul>"
+      },
+      "y2E8I1x1CRE5srys": {
+        "name": "效果：有利音响 Effect: Favourable Acoustics",
+        "description": "<p>位于场地平面、对源自舞台的听觉或音波效果进行豁免检定的生物，其成功度比实际掷骰结果低一级。</p>"
+      }
+    },
+    "Macro": {
+      "fzAKpwOW28Mo7TsT": {
+        "name": "硬头锤、盾牌、箭矢 Mace, Shield, Arrow"
+      },
+      "RASpj6h1wc93ANiS": {
+        "name": "切换观众支持度计量表 Toggle Crowd Favor Meter"
+      }
+    }
+  }
+}
