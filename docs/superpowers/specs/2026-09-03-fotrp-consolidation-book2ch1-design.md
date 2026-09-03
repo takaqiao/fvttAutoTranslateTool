@@ -83,7 +83,7 @@ Move `Fists_of_the_Ruby_Phoenix_GM指南.md.bak` into `归档/旧版指南`.
 
 ### Playlists
 
-Move the top-level master playlist JSON files `FotRP_通用.json`, `FotRP_章*.json`, and `FotRP_B*Ch*.json` into `播放列表/总表`.
+Move the top-level master playlist JSON files `FotRP_通用.json`, `FotRP_章*.json`, and `FotRP_B*Ch*.json` into `播放列表/总表`, except the legacy `FotRP_B2Ch1_寻找赞助人.json`, which goes directly into the Book2Ch1 dated backup so that only one current Book2Ch1 playlist remains active.
 
 Move the contents of `FotRP_Playlists` into `播放列表/分章`, preserving the existing book and chapter subtree, including every dated backup directory.
 
@@ -181,7 +181,7 @@ Every piece of non-RAW advice is labeled `社区经验` or `本指南建议`.
 
 ## Book2Ch1 Playlist JSON
 
-Create exactly one importable master soundboard at `播放列表/分章/第二本_比赛开始/Ch1_寻找赞助人/B2Ch1_音乐总控.json`.
+Create exactly one active importable master soundboard at `播放列表/分章/第二本_比赛开始/Ch1_寻找赞助人/B2Ch1_音乐总控.json`. Move the legacy master and both legacy chapter playlists into `_backup_2026-09-03`; do not leave a second active Book2Ch1 playlist elsewhere.
 
 It uses `mode: -1` and scene-first sound names so Foundry truncation preserves the cue. Sound groups are encoded in the names:
 
