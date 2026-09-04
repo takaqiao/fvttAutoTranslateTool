@@ -217,9 +217,18 @@ for (const modId of modules) {
 
   for (const pack of modJson.packs || []) {
     declared += 1;
-    const rel = (pack.path || ('packs/' + pack.name)).replace(/^\.\//, '');
-    const packDir = path.join(dataRoot, modId, rel);
-    if (!fs.existsSync(path.join(packDir, 'CURRENT'))) { console.error('[MISS] ' + modId + '.' + pack.name); continue; }
+    // Same stale-`path` tolerance as dump_pack_keys.mjs: a module.json may still declare
+    // the pre-v11 `packs/<name>.db` while the LevelDB directory is `packs/<name>`.
+    const rels = [];
+    if (pack.path) rels.push(pack.path.replace(/^\.\//, ''));
+    rels.push('packs/' + pack.name);
+    if (pack.path) rels.push(pack.path.replace(/^\.\//, '').replace(/\.db$/, ''));
+    let packDir = null;
+    for (const rel of rels) {
+      const dir = path.join(dataRoot, modId, rel);
+      if (fs.existsSync(path.join(dir, 'CURRENT'))) { packDir = dir; break; }
+    }
+    if (!packDir) { console.error('[MISS] ' + modId + '.' + pack.name + '; tried ' + rels.join(', ')); continue; }
 
     const loaded = await loadPack(packDir);
     const docs = loaded.docs;

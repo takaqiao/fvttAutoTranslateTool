@@ -1,0 +1,1862 @@
+{
+  "label": "Otari Shops",
+  "entries": {
+    "Dawnflower Library": {
+      "items": {
+        "Healing Potion (Lesser)": {
+          "name": "次等治疗药水 Healing Potion (Lesser)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p><hr /><p><em>治疗药水</em>是一瓶宝石红色的液体，饮用者的伤口会迅速康复，并带来一阵刺痛。当你喝下<em>治疗药水</em>后，你恢复@Damage[(2d8+5)[healing]]生命值。</p>"
+        },
+        "Holy Water": {
+          "name": "圣水 Holy Water",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 打击</p>\n<hr />\n<p>这个瓶子里装着受到善良神祗祝福的水。你可以将瓶子扔出去进行打击以启动<em>圣水</em>。这是一个简易投掷武器，射程增量是20尺。</p>\n<p><em>圣水</em>造成1d6点精魂伤害伤害以及1点精魂溅射伤害。<em>圣水</em>只能伤害具有邪秽特征的生物。</p>"
+        },
+        "Rapier": {
+          "name": "细剑 Rapier",
+          "description": "<p>细剑有着细长的剑刃和笼手，它被许多人视为决斗武器。</p>"
+        },
+        "Healing Potion (Minor)": {
+          "name": "下等治疗药水 Healing Potion (Minor)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p><hr /><p><em>治疗药水</em>是一瓶宝石红色的液体，饮用者的伤口会迅速康复，并带来一阵刺痛。当你喝下<em>治疗药水</em>后，你恢复@Damage[1d8[healing]]生命值。</p>"
+        },
+        "Scimitar": {
+          "name": "弯刀 Scimitar",
+          "description": "<p>这把单手弯刃只有一侧开锋。</p>"
+        },
+        "Healing Potion (Moderate)": {
+          "name": "中等治疗药水 Healing Potion (Moderate)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p><hr /><p><em>治疗药水</em>是一瓶宝石红色的液体，饮用者的伤口会迅速康复，并带来一阵刺痛。当你喝下<em>治疗药水</em>后，你恢复@Damage[(3d8+10)[healing]]生命值。</p>"
+        },
+        "Staff of Healing": {
+          "name": "治疗法杖 Staff of Healing",
+          "description": "<p>用光洁的白木制作，这根法杖两段各有一个金色十字架，上面装饰有许多红宝石。当你使用自己的法术位或法杖充能施放<em>治疗术</em>时，你将<em>治疗法杖</em>的+1物品加值添加到治疗术恢复的HP上。</p><hr /><p><strong>启动</strong> 施法</p>\n<p><strong>效果</strong> 你从法杖中花费一定数量的充能次数以从其列表中施展一个法术。</p><ul><li><strong>Cantrip</strong> @UUID[Compendium.pf2e.spells-srd.Item.SnjhtQYexDtNDdEg]</li><li><strong>1st</strong> @UUID[Compendium.pf2e.spells-srd.Item.rfZpqmj0AIIdkVIs]</li></ul><hr /><p><strong>制作需求</strong> 为所列的所有法术提供一次相应环级的施法。</p>"
+        },
+        "Gold Pieces": {
+          "name": "金币 Gold Pieces"
+        },
+        "Longbow": {
+          "name": "长弓 Longbow",
+          "description": "<p>这种5尺的长弓，通常由榆木、山胡桃木或紫杉木制成，具有很强的弹力能以巨大的力量和极远的距离发射箭支。长弓必须用双手射击，并且在骑乘时不能使用。</p>"
+        },
+        "Trident": {
+          "name": "三叉戟 Trident",
+          "description": "<p>这种三股矛状的武器，通常有4尺长的柄。像矛一样，它可以单手持用也可以用来投掷。</p>"
+        },
+        "Scroll of Alarm (Rank 1)": {
+          "name": "警报术卷轴（1环） Scroll of Alarm (Rank 1)",
+          "description": "<p>从卷轴施法要求你用一只手持握卷轴，并以一次施放法术活动启动它，花费该法术通常所需的动作数。</p>\n<p>该法术必须出现在你的法术列表上。因为施法的是你，使用你自己的法术攻击调整值与法术DC。该法术还会获得与你的魔法根源相对应的特征（奥术、神术、异能或原能）。</p>\n<p>所有实体花费都在卷轴制作时便已提供，因此你从卷轴施法时无需再行支付。若该法术需要一件法器，你必须持有该法器，才能从卷轴施放它。</p>\n<hr />\n<p><em>注意：要制作特定法术的卷轴或魔杖，把合集包或合集包浏览器中的该法术拖入某个PC、NPC或战利品角色的物品栏即可。</em></p>"
+        },
+        "Scroll of Bane (Rank 1)": {
+          "name": "绝望术卷轴（1环） Scroll of Bane (Rank 1)",
+          "description": "<p>从卷轴施法要求你用一只手持握卷轴，并以一次施放法术活动启动它，花费该法术通常所需的动作数。</p>\n<p>该法术必须出现在你的法术列表上。因为施法的是你，使用你自己的法术攻击调整值与法术DC。该法术还会获得与你的魔法根源相对应的特征（奥术、神术、异能或原能）。</p>\n<p>所有实体花费都在卷轴制作时便已提供，因此你从卷轴施法时无需再行支付。若该法术需要一件法器，你必须持有该法器，才能从卷轴施放它。</p>\n<hr />\n<p><em>注意：要制作特定法术的卷轴或魔杖，把合集包或合集包浏览器中的该法术拖入某个PC、NPC或战利品角色的物品栏即可。</em></p>"
+        },
+        "Scroll of Bless (Rank 1)": {
+          "name": "祝福术卷轴（1环） Scroll of Bless (Rank 1)",
+          "description": "<p>从卷轴施法要求你用一只手持握卷轴，并以一次施放法术活动启动它，花费该法术通常所需的动作数。</p>\n<p>该法术必须出现在你的法术列表上。因为施法的是你，使用你自己的法术攻击调整值与法术DC。该法术还会获得与你的魔法根源相对应的特征（奥术、神术、异能或原能）。</p>\n<p>所有实体花费都在卷轴制作时便已提供，因此你从卷轴施法时无需再行支付。若该法术需要一件法器，你必须持有该法器，才能从卷轴施放它。</p>\n<hr />\n<p><em>注意：要制作特定法术的卷轴或魔杖，把合集包或合集包浏览器中的该法术拖入某个PC、NPC或战利品角色的物品栏即可。</em></p>"
+        },
+        "Scroll of Cleanse Cuisine (Rank 1)": {
+          "name": "净化菜肴卷轴（1环） Scroll of Cleanse Cuisine (Rank 1)",
+          "description": "<p>从卷轴施法要求你用一只手持握卷轴，并以一次施放法术活动启动它，花费该法术通常所需的动作数。</p>\n<p>该法术必须出现在你的法术列表上。因为施法的是你，使用你自己的法术攻击调整值与法术DC。该法术还会获得与你的魔法根源相对应的特征（奥术、神术、异能或原能）。</p>\n<p>所有实体花费都在卷轴制作时便已提供，因此你从卷轴施法时无需再行支付。若该法术需要一件法器，你必须持有该法器，才能从卷轴施放它。</p>\n<hr />\n<p><em>注意：要制作特定法术的卷轴或魔杖，把合集包或合集包浏览器中的该法术拖入某个PC、NPC或战利品角色的物品栏即可。</em></p>"
+        },
+        "Scroll of Command (Rank 1)": {
+          "name": "命令术卷轴（1环） Scroll of Command (Rank 1)",
+          "description": "<p>从卷轴施法要求你用一只手持握卷轴，并以一次施放法术活动启动它，花费该法术通常所需的动作数。</p>\n<p>该法术必须出现在你的法术列表上。因为施法的是你，使用你自己的法术攻击调整值与法术DC。该法术还会获得与你的魔法根源相对应的特征（奥术、神术、异能或原能）。</p>\n<p>所有实体花费都在卷轴制作时便已提供，因此你从卷轴施法时无需再行支付。若该法术需要一件法器，你必须持有该法器，才能从卷轴施放它。</p>\n<hr />\n<p><em>注意：要制作特定法术的卷轴或魔杖，把合集包或合集包浏览器中的该法术拖入某个PC、NPC或战利品角色的物品栏即可。</em></p>"
+        },
+        "Scroll of Harm (Rank 1)": {
+          "name": "伤害术卷轴（1环） Scroll of Harm (Rank 1)",
+          "description": "<p>从卷轴施法要求你用一只手持握卷轴，并以一次施放法术活动启动它，花费该法术通常所需的动作数。</p>\n<p>该法术必须出现在你的法术列表上。因为施法的是你，使用你自己的法术攻击调整值与法术DC。该法术还会获得与你的魔法根源相对应的特征（奥术、神术、异能或原能）。</p>\n<p>所有实体花费都在卷轴制作时便已提供，因此你从卷轴施法时无需再行支付。若该法术需要一件法器，你必须持有该法器，才能从卷轴施放它。</p>\n<hr />\n<p><em>注意：要制作特定法术的卷轴或魔杖，把合集包或合集包浏览器中的该法术拖入某个PC、NPC或战利品角色的物品栏即可。</em></p>"
+        },
+        "Scroll of Heal (Rank 1)": {
+          "name": "治疗术卷轴（1环） Scroll of Heal (Rank 1)",
+          "description": "<p>从卷轴施法要求你用一只手持握卷轴，并以一次施放法术活动启动它，花费该法术通常所需的动作数。</p>\n<p>该法术必须出现在你的法术列表上。因为施法的是你，使用你自己的法术攻击调整值与法术DC。该法术还会获得与你的魔法根源相对应的特征（奥术、神术、异能或原能）。</p>\n<p>所有实体花费都在卷轴制作时便已提供，因此你从卷轴施法时无需再行支付。若该法术需要一件法器，你必须持有该法器，才能从卷轴施放它。</p>\n<hr />\n<p><em>注意：要制作特定法术的卷轴或魔杖，把合集包或合集包浏览器中的该法术拖入某个PC、NPC或战利品角色的物品栏即可。</em></p>"
+        },
+        "Scroll of Mending (Rank 1)": {
+          "name": "修复术卷轴（1环） Scroll of Mending (Rank 1)",
+          "description": "<p>从卷轴施法要求你用一只手持握卷轴，并以一次施放法术活动启动它，花费该法术通常所需的动作数。</p>\n<p>该法术必须出现在你的法术列表上。因为施法的是你，使用你自己的法术攻击调整值与法术DC。该法术还会获得与你的魔法根源相对应的特征（奥术、神术、异能或原能）。</p>\n<p>所有实体花费都在卷轴制作时便已提供，因此你从卷轴施法时无需再行支付。若该法术需要一件法器，你必须持有该法器，才能从卷轴施放它。</p>\n<hr />\n<p><em>注意：要制作特定法术的卷轴或魔杖，把合集包或合集包浏览器中的该法术拖入某个PC、NPC或战利品角色的物品栏即可。</em></p>"
+        },
+        "Scroll of Pet Cache (Rank 1)": {
+          "name": "宠伴存储卷轴（1环） Scroll of Pet Cache (Rank 1)",
+          "description": "<p>从卷轴施法要求你用一只手持握卷轴，并以一次施放法术活动启动它，花费该法术通常所需的动作数。</p>\n<p>该法术必须出现在你的法术列表上。因为施法的是你，使用你自己的法术攻击调整值与法术DC。该法术还会获得与你的魔法根源相对应的特征（奥术、神术、异能或原能）。</p>\n<p>所有实体花费都在卷轴制作时便已提供，因此你从卷轴施法时无需再行支付。若该法术需要一件法器，你必须持有该法器，才能从卷轴施放它。</p>\n<hr />\n<p><em>注意：要制作特定法术的卷轴或魔杖，把合集包或合集包浏览器中的该法术拖入某个PC、NPC或战利品角色的物品栏即可。</em></p>"
+        },
+        "Scroll of Protection (Rank 1)": {
+          "name": "防护术卷轴（1环） Scroll of Protection (Rank 1)",
+          "description": "<p>从卷轴施法要求你用一只手持握卷轴，并以一次施放法术活动启动它，花费该法术通常所需的动作数。</p>\n<p>该法术必须出现在你的法术列表上。因为施法的是你，使用你自己的法术攻击调整值与法术DC。该法术还会获得与你的魔法根源相对应的特征（奥术、神术、异能或原能）。</p>\n<p>所有实体花费都在卷轴制作时便已提供，因此你从卷轴施法时无需再行支付。若该法术需要一件法器，你必须持有该法器，才能从卷轴施放它。</p>\n<hr />\n<p><em>注意：要制作特定法术的卷轴或魔杖，把合集包或合集包浏览器中的该法术拖入某个PC、NPC或战利品角色的物品栏即可。</em></p>"
+        },
+        "Scroll of Runic Weapon (Rank 1)": {
+          "name": "符文武器卷轴（1环） Scroll of Runic Weapon (Rank 1)",
+          "description": "<p>从卷轴施法要求你用一只手持握卷轴，并以一次施放法术活动启动它，花费该法术通常所需的动作数。</p>\n<p>该法术必须出现在你的法术列表上。因为施法的是你，使用你自己的法术攻击调整值与法术DC。该法术还会获得与你的魔法根源相对应的特征（奥术、神术、异能或原能）。</p>\n<p>所有实体花费都在卷轴制作时便已提供，因此你从卷轴施法时无需再行支付。若该法术需要一件法器，你必须持有该法器，才能从卷轴施放它。</p>\n<hr />\n<p><em>注意：要制作特定法术的卷轴或魔杖，把合集包或合集包浏览器中的该法术拖入某个PC、NPC或战利品角色的物品栏即可。</em></p>"
+        },
+        "Scroll of Sanctuary (Rank 1)": {
+          "name": "庇护术卷轴（1环） Scroll of Sanctuary (Rank 1)",
+          "description": "<p>从卷轴施法要求你用一只手持握卷轴，并以一次施放法术活动来启动它，花费该法术正常所需的动作数。</p>\n<p>该法术必须出现在你的法术表中。因为是你在施法，使用你的法术攻击骰和法术DC。该法术还会获得与你的魔法根源相对应的特征（奥术、神术、异能或原能）。</p>\n<p>所有实体上的花费都在卷轴被创造时就已提供，因此你从卷轴施法时无需再次提供。如果该法术需要一件器材，你必须拥有该器材才能从卷轴施展它。</p>\n<hr />\n<p><em>备注：如需创造某个特定法术的卷轴或魔杖，将该法术从合集包或合集包浏览器中拖入某个PC、NPC或战利品角色的背包即可。</em></p>"
+        },
+        "Scroll of Spirit Link (Rank 1)": {
+          "name": "灵魂链接卷轴（1环） Scroll of Spirit Link (Rank 1)",
+          "description": "<p>从卷轴施法要求你用一只手持握卷轴，并以一次施放法术活动来启动它，花费该法术正常所需的动作数。</p>\n<p>该法术必须出现在你的法术表中。因为是你在施法，使用你的法术攻击骰和法术DC。该法术还会获得与你的魔法根源相对应的特征（奥术、神术、异能或原能）。</p>\n<p>所有实体上的花费都在卷轴被创造时就已提供，因此你从卷轴施法时无需再次提供。如果该法术需要一件器材，你必须拥有该器材才能从卷轴施展它。</p>\n<hr />\n<p><em>备注：如需创造某个特定法术的卷轴或魔杖，将该法术从合集包或合集包浏览器中拖入某个PC、NPC或战利品角色的背包即可。</em></p>"
+        },
+        "Scroll of Thoughtful Gift (Rank 1)": {
+          "name": "心念馈赠卷轴（1环） Scroll of Thoughtful Gift (Rank 1)",
+          "description": "<p>从卷轴施法要求你用一只手持握卷轴，并以一次施放法术活动来启动它，花费该法术正常所需的动作数。</p>\n<p>该法术必须出现在你的法术表中。因为是你在施法，使用你的法术攻击骰和法术DC。该法术还会获得与你的魔法根源相对应的特征（奥术、神术、异能或原能）。</p>\n<p>所有实体上的花费都在卷轴被创造时就已提供，因此你从卷轴施法时无需再次提供。如果该法术需要一件器材，你必须拥有该器材才能从卷轴施展它。</p>\n<hr />\n<p><em>备注：如需创造某个特定法术的卷轴或魔杖，将该法术从合集包或合集包浏览器中拖入某个PC、NPC或战利品角色的背包即可。</em></p>"
+        }
+      },
+      "name": "晨花图书馆 Dawnflower Library",
+      "tokenName": "晨花图书馆 Dawnflower Library",
+      "prototypeToken": "晨花图书馆 Dawnflower Library"
+    },
+    "Otari Market": {
+      "items": {
+        "Spyglass": {
+          "name": "望远镜 Spyglass",
+          "description": "<p>典型的望远镜让你可以看到比正常远八倍的物体。</p>"
+        },
+        "Manacles (Poor)": {
+          "name": "简陋镣铐 Manacles (Poor)",
+          "description": "<p>根据生物的大小和你应用的镣铐数量，你可以用一个花费约10-30秒时间的探索行动将一个自愿或无力反抗的生物铐起来。一个双腿被铐住的的两足生物在速度上受到-15尺环境减值，并且双手被铐住的两手生物必须在任何进行操作动作的时候进行@Check[type:flat|dc:5]检定，否则该动作将失败。根据镣铐约束手的紧密程度，该DC可能更高。被铐到到静止物体上的生物陷入禁足。对于具有更多或更少肢体的生物，由GM确定镣铐有什么效果。将一个生物从简陋镣铐中解放出来需要两次成功的@Check[type:thievery|dc:17|traits:action:pick-a-lock]检定。</p>"
+        },
+        "Candle": {
+          "name": "蜡烛 Candle",
+          "description": "<p>点燃的蜡烛在10尺半径范围内散发出昏暗的光芒，持续8小时。</p>"
+        },
+        "Flint and Steel": {
+          "name": "燧石和铁片 Flint and Steel",
+          "description": "<p>如果你有时间捕捉火花，燧石和铁片可以用来生火，尽管在遭遇过程中使用它们通常太费时间。即使在理想的条件下，使用燧石和铁片来生火也需要至少3次动作，并且通常要更长。</p>"
+        },
+        "Sack": {
+          "name": "袋子 Sack",
+          "description": "<p>一个袋子最多可容纳8B物品。一个容纳2B或更少物品的袋子可以带在身上，通常挂在腰带上。你可以单手携带袋子，但必须用两只手将物品放入和取出。</p>"
+        },
+        "Caltrops": {
+          "name": "铁蒺藜 Caltrops",
+          "description": "<p>这些四尖金属钉能刺伤生物的双脚。你可以用一个交互动作，把铁蒺藜撒在与你邻接的一个空方格中。第一个进入该方格的生物必须成功通过一次@Check[type:acrobatics|dc:14|name:Avoid Caltrops]检定，否则受到1d4点穿刺伤害以及@Damage[1[bleed]]伤害。因铁蒺藜而承受持续流血伤害的生物，其速度受到-5尺减值；花费一个交互动作把铁蒺藜拔出来，可以降低止血所需的DC。一旦有生物被铁蒺藜所伤，就有足够多的铁蒺藜被压毁，后续进入该方格的其他生物不会再受伤。若没有生物被这些铁蒺藜所伤，撒出去的铁蒺藜可以回收再用；否则损毁的数量太多，已无法回收。</p>"
+        },
+        "Disguise Kit": {
+          "name": "化装工具包 Disguise Kit",
+          "description": "<p>这个小木盒子包含化妆品，假面部毛发，快干胶水和一些简单的假发。你通常需要一个化装工具来进行化装，以便使用唬骗技能冒充某人。如果你进行了很多次数的化装，您可以使用适合化装工具包类型的替代化妆品来补充。你可以用同一动作来取出、使用和放回穿戴着的化装工具包。</p>"
+        },
+        "Magnifying Glass": {
+          "name": "放大镜 Magnifying Glass",
+          "description": "<p>这款手持式镜头为你寻找文档、织物及类似物体细节的察觉检定提供+1物品加值。</p>"
+        },
+        "Musical Instrument (Heavy)": {
+          "name": "大型乐器 Musical Instrument (Heavy)",
+          "description": "<p>手持乐器包括风笛、小套编钟、小鼓、小提琴和弦乐器、长笛和竖笛、小竖琴、琵琶、小号和类似大小的乐器。GM可能会裁定一个特别大的手持乐器（如大号）具有更大的负载。诸如大鼓、全套编钟和键盘乐器之类的大型乐器不太方便携带，并且通常在演奏时需要静止。</p>"
+        },
+        "Crowbar (Levered)": {
+          "name": "杠杆撬棍 Crowbar (Levered)",
+          "description": "<p>当需要强行打开一个没法轻易抓握的物体时，撬棍可以更容易地获得必要的杠杆作用。没有撬棍，强制撬开一些东西会让破拆的运动检定受到-2物品减值。</p>\n<p>一个杠杆撬棍会为破拆任何可以被撬开的东西的运动检定提供+1物品加值。</p>"
+        },
+        "Thieves' Toolkit (Infiltrator)": {
+          "name": "专家级盗贼工具包 Thieves' Toolkit (Infiltrator)",
+          "description": "<p>你需要盗贼工具包来使用贼活技能@UUID[Compendium.pf2e.actionspf2e.Item.2EE4aF4SZpYf0R6H]{开锁}或@UUID[Compendium.pf2e.actionspf2e.Item.cYdz2grcOcRt4jk6]{解除装置}（某些类型的）。专家级盗贼工具包为开锁和解除装置的检定增加了+1物品加值。</p>\n<p>如果你的盗贼工具破损，你可以用换上新的适合你工具的@UUID[Compendium.pf2e.equipment-srd.Item.BznmPaRjI4Orb0IH]{替换开锁器}的方式来修理它们。这不需要使用修理动作。若你穿戴着工具包，你可以作为使用它的动作的一部分来取出工具及替换开锁器。</p>"
+        },
+        "Climbing Kit": {
+          "name": "攀爬工具包 Climbing Kit",
+          "description": "<p>这个工具包包括50尺的麻绳，一些滑轮，一打岩钉，一把锤子，一个抓钩和一套冰爪。攀爬工具包可让你将自己固定在攀爬的墙上，以正常速度的一半移动（最小5尺），还可以让你在避免坠落的检定中大失败时进行一次@Check[type:flat|dc:5]检定。一个工具包只够一位攀爬者的使用的材料；每个攀爬者都需要有自己的工具包。若你穿戴着攀爬工具包，你可以作为攀爬动作的一部分来取出工具。</p>"
+        },
+        "Repair Toolkit": {
+          "name": "修理工具包 Repair Toolkit",
+          "description": "<p>修理工具包可让你在旅行时进行简单的维修。它包含便携式铁砧、钳子、木工工具、磨刀石和用于调理皮革和木材的油。你可以用修理工具包使用手艺技能修理物品。如果你穿戴着修理工具包，你可以抽出和替换一个穿戴在身上的修理工具包，作为使用动作的一部分。</p>"
+        },
+        "Artisan's Toolkit": {
+          "name": "工匠工具包 Artisan's Toolkit",
+          "description": "<p>你可以使用工匠工具包从原材料制作物品。 这涉及使用手艺技能来制作物品。根据GM的决定，不同类型的工作可能需要不同的工具；例如，铁匠的工具与木匠的工具不同。</p>"
+        },
+        "Clothing (Cold-Weather)": {
+          "name": "服装-严寒天气 Clothing (Cold-Weather)"
+        },
+        "Soap": {
+          "name": "肥皂 Soap",
+          "description": "<p>一根棒状肥皂。</p>"
+        },
+        "Ten-Foot Pole": {
+          "name": "十尺长杆 Ten-Foot Pole",
+          "description": "<p>挥动这个长杆时，你可以使用搜索动作来搜索10尺内的一个方格。长杆不够坚固，无法被用作武器。</p>"
+        },
+        "Healer's Toolkit": {
+          "name": "医疗工具包 Healer's Toolkit",
+          "description": "<p>这套绷带、草药和缝合工具是@UUID[Compendium.pf2e.actionspf2e.Item.MHLuKy4nQO2Z4Am1]、@UUID[Compendium.pf2e.actionspf2e.Item.TC7OcDa7JlWbqMaN]、@UUID[Compendium.pf2e.actionspf2e.Item.KjoCEEmPGTeFE4hh]或@UUID[Compendium.pf2e.actionspf2e.Item.1kGNdIIhuglAjIp9]的医疗检定所必需的。若你穿戴着工具包，你可以作为使用其的动作的一部分来取出工具。</p>"
+        },
+        "Religious Symbol (Wooden)": {
+          "name": "木制圣徽 Religious Symbol (Wooden)",
+          "description": "<p>这个木质的小片上印有代表神灵的图画。一些神术施法者，如牧师，可以使用信仰神祇的来使用某些能力并施放一些法术。圣徽可被穿戴在身上（当作胸针或挂在链子上）或手持使用。</p>"
+        },
+        "Grappling Hook": {
+          "name": "爪钩 Grappling Hook",
+          "description": "<p>你可以用绳子系上一个抓钩，来辅助攀爬。要锚定一个抓钩，需要使用简易武器熟练度对目标进行一次远程攻击检定，通常至少为DC20。该攻击具有秘密特征。一旦成功，爪钩就会牢牢抓住目标，但是如果发生大失败时，爪钩表面上抓的很牢，一旦使用者爬到一半就会突然脱开。</p>"
+        },
+        "Compass": {
+          "name": "罗盘 Compass",
+          "description": "<p>只要你身处磁场均匀的地方，罗盘就能帮你辨别方向或导航。没有罗盘时，你在这类检定上受到-2物品减值（相当于使用劣质物品）。</p>"
+        },
+        "Tool (Long)": {
+          "name": "长工具 Tool (Long)",
+          "description": "<p>不是为冒险而设计的一般工具。锄头、铲子或大锤属于长工具，手钻、冰钩或抹子属于短工具。工具通常可被用作临时武器，长工具造成1d6伤害。由GM来决定合适的伤害类型并在需要的时候调整伤害。</p>"
+        },
+        "Chest": {
+          "name": "箱子 Chest",
+          "description": "<p>一个木箱可容纳最多8B物品。</p>"
+        },
+        "Spyglass (Fine)": {
+          "name": "优质望远镜 Spyglass (Fine)",
+          "description": "<p>典型的望远镜让你可以看到比正常远八倍的物体。优质望远镜为看清远处细节的察觉检定提供+1物品加值。</p>"
+        },
+        "Cookware": {
+          "name": "炊具 Cookware"
+        },
+        "Mug": {
+          "name": "明抢暴行 Mug"
+        },
+        "Rope": {
+          "name": "绳索 Rope",
+          "description": "<p>50尺长的麻绳</p>"
+        },
+        "Tent (Pup)": {
+          "name": "小型帐篷 Tent (Pup)"
+        },
+        "Piton": {
+          "name": "岩钉 Piton",
+          "description": "<p>这些小钉子可当做锚使用，使攀爬更容易。要固定一个岩钉，你必须用一只手握住它并用另一只手用一把锤子将它砸入。你可以在岩钉上缠绕一根绳子，这样你就不会在攀爬时发生重大事故时直直的摔在地上。</p>"
+        },
+        "Compass (Lensatic)": {
+          "name": "透镜罗盘 Compass (Lensatic)",
+          "description": "<p>只要你身处磁场均匀的地方，罗盘就能帮你辨别方向或导航。没有罗盘时，你在这类检定上受到-2物品减值（相当于使用劣质物品）。</p>\n<p>透镜罗盘让你在这类检定上获得+1物品加值。</p>"
+        },
+        "Tool (Short)": {
+          "name": "短工具 Tool (Short)",
+          "description": "<p>不是为冒险而设计的一般工具。锄头、铲子或大锤属于长工具，手钻、冰钩或抹子属于短工具。工具通常可被用作临时武器，短工具造成1d4伤害。由GM来决定合适的伤害类型并在需要的时候调整伤害。</p>"
+        },
+        "Musical Instrument (Virtuoso handheld)": {
+          "name": "专家级手持乐器 Musical Instrument (Virtuoso handheld)",
+          "description": "<p>手持乐器包括风笛、小套编钟、小鼓、小提琴和弦乐器、长笛和竖笛、小竖琴、琵琶、小号和类似大小的乐器。GM可能会裁定一个特别大的手持乐器（如大号）具有更大的负载。诸如大鼓、全套编钟和键盘乐器之类的大型乐器不太方便携带，并且通常在演奏时需要静止。</p>\n<p>使用制作更精良的专家级乐器为表演检定提供+1物品加值。</p>"
+        },
+        "Climbing Kit (Extreme)": {
+          "name": "专家级攀爬工具包 Climbing Kit (Extreme)",
+          "description": "<p>这个工具包包括50尺的麻绳，一些滑轮，一打岩钉，一把锤子，一个抓钩和一套冰爪。攀爬工具包可让你将自己固定在攀爬的墙上，以正常速度的一半移动（最小5尺），还可以让你在避免坠落的检定中大失败时进行一次@Check[type:flat|dc:5]检定。</p>\n<p>在使用专家级攀爬工具包时，你可以在运动检定上获得+1物品加值。一个工具包只够一位攀爬者的使用的材料；每个攀爬者都需要有自己的工具包。若你穿戴着攀爬工具包，你可以作为攀爬动作的一部分来取出工具。</p>"
+        },
+        "Platinum Pieces": {
+          "name": "白金币 Platinum Pieces"
+        },
+        "Greatclub": {
+          "name": "巨棒 Greatclub",
+          "description": "<p>有些巨棒有复杂的雕刻，而另一些就是粗壮的树枝。这把巨大的棍棒太重了，单手无法使用。</p>"
+        },
+        "Healer's Toolkit (Expanded)": {
+          "name": "专家级医疗工具包 Healer's Toolkit (Expanded)",
+          "description": "<p>这套绷带、草药和缝合工具是@UUID[Compendium.pf2e.actionspf2e.Item.MHLuKy4nQO2Z4Am1]、@UUID[Compendium.pf2e.actionspf2e.Item.TC7OcDa7JlWbqMaN]、@UUID[Compendium.pf2e.actionspf2e.Item.KjoCEEmPGTeFE4hh]或@UUID[Compendium.pf2e.actionspf2e.Item.1kGNdIIhuglAjIp9]的医疗检定所必需的。专家级医疗工具包为此类检定提供+1物品加值。若你穿戴着工具包，你可以作为使用其的动作的一部分来取出工具。</p>"
+        },
+        "Signal Whistle": {
+          "name": "信号哨 Signal Whistle",
+          "description": "<p>当被吹响时，在开阔的乡田野可以清楚地听到半英里外的信号哨声。</p>"
+        },
+        "Musical Instrument (Handheld)": {
+          "name": "手持乐器 Musical Instrument (Handheld)",
+          "description": "<p>手持乐器包括风笛、小套编钟、小鼓、小提琴和弦乐器、长笛和竖笛、小竖琴、琵琶、小号和类似大小的乐器。GM可能会裁定一个特别大的手持乐器（如大号）具有更大的负载。诸如大鼓、全套编钟和键盘乐器之类的大型乐器不太方便携带，并且通常在演奏时需要静止。</p>"
+        },
+        "Manacles (Simple)": {
+          "name": "简单镣铐 Manacles (Simple)",
+          "description": "<p>根据生物的大小和你应用的镣铐数量，你可以用一个花费约10-30秒时间的探索行动将一个自愿或无力反抗的生物铐起来。一个双腿被铐住的的两足生物在速度上受到-15尺环境减值，并且双手被铐住的两手生物必须在任何进行操作动作的时候进行@Check[type:flat|dc:5]检定，否则该动作将失败。根据镣铐约束手的紧密程度，该DC可能更高。被铐到到静止物体上的生物陷入禁足。对于具有更多或更少肢体的生物，由GM确定镣铐有什么效果。将一个生物从简单镣铐中解放出来需要三次成功的@Check[type:thievery|dc:22|traits:action:pick-a-lock]检定。</p>"
+        },
+        "Mirror": {
+          "name": "镜子 Mirror"
+        },
+        "Clothing (Fine)": {
+          "name": "服装-精致 Clothing (Fine)",
+          "description": "<p>精致的服装适合贵族或皇室，由昂贵的面料、贵重金属和复杂的图案制成。</p>"
+        },
+        "Hourglass": {
+          "name": "沙漏 Hourglass"
+        },
+        "Thieves' Toolkit": {
+          "name": "盗贼工具包 Thieves' Toolkit",
+          "description": "<p>你需要一套盗贼工具包，才能用贼活技能@UUID[Compendium.pf2e.actionspf2e.Item.2EE4aF4SZpYf0R6H]{开锁}或@UUID[Compendium.pf2e.actionspf2e.Item.cYdz2grcOcRt4jk6]{解除装置}（限某些类型的装置）。</p>\n<p>如果你的盗贼工具包破损，可以换上与工具包相配的@UUID[Compendium.pf2e.equipment-srd.Item.Sw7MBLASN3xK4Y44]{替换开锁器}来修理它，这不需要使用修理动作。如果你把盗贼工具包穿戴在身上，就能在使用它的那个动作里一并取出和收回。</p>"
+        },
+        "Musical Instrument (Virtuoso heavy)": {
+          "name": "专家级大型乐器 Musical Instrument (Virtuoso heavy)",
+          "description": "<p>手持乐器包括风笛、小套编钟、小鼓、小提琴和弦乐器、长笛和竖笛、小竖琴、琵琶、小号和类似大小的乐器。GM可能会裁定一个特别大的手持乐器（如大号）具有更大的负载。诸如大鼓、全套编钟和键盘乐器之类的大型乐器不太方便携带，并且通常在演奏时需要静止。</p>\n<p>使用制作更精良的专家级乐器为表演检定提供+1物品加值。</p>"
+        },
+        "Snare Kit": {
+          "name": "陷阱工具包 Snare Kit",
+          "description": "<p>该工具包包含用于创建陷阱的工具和材料。陷阱工具包允许你使用手艺技能制作陷阱。</p>"
+        },
+        "Explorer's Clothing": {
+          "name": "探险者服装 Explorer's Clothing",
+          "description": "<p>不穿护甲的冒险家穿着耐用的衣服旅行。虽然它不是护甲并且应用你的无甲防御熟练，但它仍然有一个敏捷上限，而且如果蚀刻了潜能符文，也可以在AC上提供物品加值。</p>"
+        },
+        "Bolts": {
+          "name": "破阵弓矢 Bolts",
+          "description": "<p>比传统箭短，但结构相似，矢是弩使用的弹药。</p>"
+        },
+        "Staff": {
+          "name": "法杖 Staff",
+          "description": "<p>这根长木头能够帮助人行走，也能给予人沉重的打击。</p>"
+        },
+        "Saddlebags": {
+          "name": "鞍囊 Saddlebags",
+          "description": "<p>鞍囊成对出现。每个最多可以容纳3B物品，每个按囊的前1B物品不计入坐骑的负载。给出的负载值适用于被坐骑所携带的鞍囊。如果你携带或装载着鞍囊，它们将被视为1B而不是L。</p>"
+        },
+        "Lantern (Bull's Eye)": {
+          "name": "牛眼提灯 Lantern (Bull's Eye)",
+          "description": "<p>一盏提灯提供明亮光线并且需要1品脱油才能燃烧6小时。一个牛眼提灯在一个60尺的锥形内发出光芒（且为更远的60尺内提供昏暗光线）。</p>"
+        },
+        "Silver Pieces": {
+          "name": "银币 Silver Pieces"
+        },
+        "Dagger": {
+          "name": "匕首 Dagger",
+          "description": "<p>这种小型有刃的武器可以单手持握并在近战中刺伤生物。也可以用来投掷。</p>"
+        },
+        "Chalk": {
+          "name": "粉笔 Chalk"
+        },
+        "Thieves' Toolkit (Infiltrator Picks)": {
+          "name": "专家级盗贼工具包-替换开锁器 Thieves' Toolkit (Infiltrator Picks)",
+          "description": "<p>这些是@UUID[Compendium.pf2e.equipment-srd.Item.6nrCxNQFycUVFOV2]{专家级盗贼工具包 Thieves' Toolkit (Infiltrator)}的替换开锁器。</p>"
+        },
+        "Disguise Kit (Replacement Cosmetics)": {
+          "name": "化装工具包-替换化妆品 Disguise Kit (Replacement Cosmetics)",
+          "description": "<p>这个小木盒子包含化妆品，假面部毛发，快干胶水和一些简单的假发。你通常需要一个化装工具来进行化装，以便使用唬骗技能冒充某人。如果你进行了很多次数的化装，您可以使用适合化装工具包类型的替代化妆品来补充。你可以用同一动作来取出、使用和放回穿戴着的化装工具包。</p>"
+        },
+        "Thieves' Toolkit (Replacement Picks)": {
+          "name": "盗贼工具包-替换开锁器 Thieves' Toolkit (Replacement Picks)",
+          "description": "<p>这些是@UUID[Compendium.pf2e.equipment-srd.Item.zvLyCVD8g2PdHJAc]{盗贼工具包}的替换开锁器。</p>"
+        },
+        "Crowbar": {
+          "name": "撬棍 Crowbar",
+          "description": "<p>当需要强行打开一个没法轻易抓握的物体时，撬棍可以更容易地获得必要的杠杆作用。没有撬棍，强制撬开一些东西会让破拆的运动检定受到-2物品减值。</p>"
+        },
+        "Arrows": {
+          "name": "箭 Arrows",
+          "description": "<p>这些箭头是弓的弹药。箭杆是木制的。一端是羽毛保持飞行中的平稳，另一端是金属头。</p>"
+        },
+        "Religious Symbol (Silver)": {
+          "name": "银制圣徽 Religious Symbol (Silver)",
+          "description": "<p>这个银质的小片上印有代表神灵的图画。一些神术施法者，如牧师，可以使用信仰神祇的来使用某些能力并施放一些法术。圣徽可被穿戴在身上（当作胸针或挂在链子上）或手持使用。</p>"
+        },
+        "Lock (Average)": {
+          "name": "普通锁 Lock (Average)",
+          "description": "<p>打开普通锁需要四次成功的@Check[type:thievery|dc:25|traits:action:pick-a-lock|immutable:true]检定。</p>"
+        },
+        "Basic Crafter's Book": {
+          "name": "基本匠人书籍 Basic Crafter's Book",
+          "description": "<p>包含玩家核心第六章中所有0级常见物品的制造配方。</p>"
+        },
+        "Repair Toolkit (Superb)": {
+          "name": "专家级修理工具包 Repair Toolkit (Superb)",
+          "description": "<p>修理工具包可让你在旅行时进行简单的维修。它包含便携式铁砧、钳子、木工工具、磨刀石和用于调理皮革和木材的油。你可以用修理工具包使用手艺技能修理物品。专家级修理工具包为你提供+1物品加值。如果你穿戴着修理工具包，你可以抽出和替换一个穿戴在身上的修理工具包，作为使用动作的一部分。</p>"
+        },
+        "Backpack": {
+          "name": "背包 Backpack",
+          "description": "<p>一个背包最多可容纳4B物品。前2B不计入你的负载。 如果你抓着背包而不是背着背包，那么它将有L的负载而不是可以忽略不计。</p>"
+        },
+        "Club": {
+          "name": "棍棒 Club",
+          "description": "<p>这是一块结实的木头，打磨形状用来敲击敌人。棍棒可以是复杂雕刻的武术作品，也可以像树枝或木块一样简单。</p>"
+        },
+        "Tent (Four-Person)": {
+          "name": "四人帐篷 Tent (Four-Person)"
+        },
+        "Hammer": {
+          "name": "锤子 Hammer"
+        },
+        "Clothing (Ordinary)": {
+          "name": "服装-普通 Clothing (Ordinary)",
+          "description": "<p>普通的服装功能齐全并且剪裁合适，例如农民服装，僧侣长袍或工作服。</p>"
+        },
+        "Torch": {
+          "name": "火把 Torch",
+          "description": "<p>火把在20尺半径范围内散发出明亮的光芒（昏暗的光线照射到接下来的20尺）。它可以被用作临时武器，造成1d4钝击伤害加1点火焰伤害。</p>"
+        },
+        "Formula Book (Blank)": {
+          "name": "配方簿 Formula Book (Blank)",
+          "description": "<p>配方簿中包含制作除玩家核心中常见装备以外的物品所必需的配方配方，炼金术士玩家角色通常能够免费得到一本。每个配方簿可以容纳最多100个不同物品的配方。配方也可以出现在羊皮纸、泥板和几乎任何其他介质上，只要你可以参阅它们就不需要将它们抄写到特定的书中。</p>"
+        },
+        "Merchant's Scale": {
+          "name": "商人天平 Merchant's Scale"
+        },
+        "Clothing (High-Fashion Fine)": {
+          "name": "服装-高级时装 Clothing (High-Fashion Fine)",
+          "description": "<p>精致的服装适合贵族或皇室，由昂贵的面料、贵重金属和复杂的图案制成。当你穿着高级时装时，在贵族或其他上流社会的建立印象检定中获得+1物品加值。</p>"
+        },
+        "Tack": {
+          "name": "鞍子 Tack",
+          "description": "<p>鞍子包括配备骑乘动物所需的所有装备，包括座鞍、嚼头和缰绳，以及必要时的脚镫。特别大或奇形怪状的生物可能需要特殊的鞍子。根据GM的裁定，这些可能更昂贵或罕有。给出的负载值是佩戴在骑乘动物上时的负载。如果你要携带它，负载增加到2B。</p>"
+        },
+        "Fishing Tackle": {
+          "name": "渔具 Fishing Tackle",
+          "description": "<p>该套工具包括可折叠的钓鱼竿、鱼钩、钓线、鱼饵和渔网。</p>"
+        },
+        "Manacles (Average)": {
+          "name": "普通镣铐 Manacles (Average)",
+          "description": "<p>根据生物的大小和你应用的镣铐数量，你可以用一个花费约10-30秒时间的探索行动将一个自愿或无力反抗的生物铐起来。一个双腿被铐住的的两足生物在速度上受到-15尺环境减值，并且双手被铐住的两手生物必须在任何进行操作动作的时候进行@Check[type:flat|dc:5]检定，否则该动作将失败。根据镣铐约束手的紧密程度，该DC可能更高。被铐到到静止物体上的生物陷入禁足。对于具有更多或更少肢体的生物，由GM确定镣铐有什么效果。将一个生物从普通镣铐中解放出来需要四次成功的@Check[type:thievery|dc:27|traits:action:pick-a-lock]检定。</p>"
+        },
+        "Lock (Poor)": {
+          "name": "简陋锁 Lock (Poor)",
+          "description": "<p>打开简陋锁需要2次成功的@Check[type:thievery|dc:15|traits:action:pick-a-lock|immutable:true]检定</p>"
+        },
+        "Lock (Simple)": {
+          "name": "简单锁 Lock (Simple)",
+          "description": "<p>打开简单锁需要三次成功的@Check[type:thievery|dc:20|traits:action:pick-a-lock|immutable:true]检定。</p>"
+        },
+        "Rations": {
+          "name": "口粮 Rations"
+        },
+        "Religious Text": {
+          "name": "教典 Religious Text",
+          "description": "<p>这份小册子包含特定宗教的经文。一些神术施法者，如牧师，可以使用教典来使用某些能力。必须用一只手握住教典才能使用它。</p>"
+        },
+        "Lantern (Hooded)": {
+          "name": "附盖提灯 Lantern (Hooded)",
+          "description": "<p>一盏提灯提供明亮光线并且需要1品脱油才能燃烧6小时。一个附盖提灯在30尺半径范围内散发光线并配有百叶窗，你可以关闭它以阻挡光线。关闭或打开百叶窗需要一个交互动作。</p>"
+        },
+        "Waterskin": {
+          "name": "水袋 Waterskin",
+          "description": "<p>装满的水袋能够提供小体型或中体型生物大约1天所需的水。</p>"
+        },
+        "Writing Set": {
+          "name": "书写套件 Writing Set",
+          "description": "<p>用书写套件，你可以起草信件和抄写卷轴。一份套件包括文具、各种纸张和羊皮纸、墨水、羽毛笔或墨水笔、密封蜡以及简单的印章。如果你已经书写了很大的量，你可以用额外的墨水和纸张填充你的工具包。</p>"
+        },
+        "Bedroll": {
+          "name": "铺盖卷 Bedroll",
+          "description": "<p>一床卷起来的被子</p>"
+        },
+        "Tent (Pavilion)": {
+          "name": "行馆帐篷 Tent (Pavilion)"
+        },
+        "Gold Pieces": {
+          "name": "金币 Gold Pieces"
+        },
+        "Writing Set (Extra Ink and Paper)": {
+          "description": "<p>用来填充你的书写套装的额外墨水和纸张。</p>",
+          "name": "书写套装（额外的墨水和纸张） Writing Set (Extra Ink and Paper)"
+        },
+        "Spellbook (Blank)": {
+          "description": "<p>法术书包含学习和准备各种法术所必需的书面知识，这是法师的必需品（通常会免费获得一本）和寻求学习额外法术的其他施法者的有用奢侈品。每本法术书最多可以容纳100个法术。此处列出的是一本空白的法术书的价格。</p>",
+          "name": "法术书（空白） Spellbook (Blank)"
+        },
+        "Chain (10 feet)": {
+          "description": "<p>10尺长的铁链。</p>",
+          "name": "铁链（10尺） Chain (10 feet)"
+        },
+        "Snare Kit (Specialist)": {
+          "description": "<p>该工具包包含用于创建陷阱的工具和材料。陷阱工具包允许你使用手艺技能制作陷阱。专家级陷阱工具包为你提供+1物品加值。</p>",
+          "name": "陷阱工具包（专家） Snare Kit (Specialist)"
+        },
+        "Oil (1 pint)": {
+          "description": "<p>你可以用油来为提灯加油，但你也可以点燃一品脱油然后把它扔出去。你必须首先花费一个【交互动作】来准备油，然后用另一个动作进行远程接触攻击扔出它。如果你命中目标，它会溅在这个生物上或者你所瞄准的一个5尺方格。你必须成功进行@Check[type:flat|dc:10]检定才能使油在命中时成功点燃。如果油点燃，目标会受到@Damage[1d6[fire]]伤害。</p>",
+          "name": "油（1品脱） Oil (1 pint)"
+        },
+        "Ladder (10-foot)": {
+          "name": "梯子（10尺） Ladder (10-foot)"
+        }
+      },
+      "name": "奥塔里市场 Otari Market",
+      "tokenName": "奥塔里市场 Otari Market",
+      "prototypeToken": "奥塔里市场 Otari Market"
+    },
+    "Otari Garrison": {
+      "items": {
+        "Crossbow": {
+          "name": "弩 Crossbow",
+          "description": "<p>这种远程武器有一个类似弓形的组件，安装在一个被称为舵柄的框架上。舵柄有一个将弓弦锁定在适当位置的机件，并与一个释放张力并发射矢的扳机相连。</p>"
+        },
+        "Longbow": {
+          "name": "长弓 Longbow",
+          "description": "<p>这种5尺的长弓，通常由榆木、山胡桃木或紫杉木制成，具有很强的弹力能以巨大的力量和极远的距离发射箭支。长弓必须用双手射击，并且在骑乘时不能使用。</p>"
+        },
+        "Greatsword": {
+          "name": "巨剑 Greatsword",
+          "description": "<p>这把巨大的双手剑几乎和它的使用者一样高。它的下刃一般较钝，以便在近距离格斗中获得额外的杠杆作用力。</p>"
+        },
+        "Ranseur": {
+          "name": "刺叉 Ranseur",
+          "description": "<p>这种长兵是一种更长的三叉戟，中间的叉比两侧的叉更长。</p>"
+        },
+        "Mace": {
+          "name": "硬头锤 Mace",
+          "description": "<p>有着结实的柄和沉重的金属头，硬头锤坚固到可以让使用者造成强力打击给盔甲留下凹痕。</p>"
+        },
+        "Light Hammer": {
+          "name": "轻锤 Light Hammer",
+          "description": "<p>这种小号的战锤的木质或金属柄顶端有个金属头，不像它沉重的表亲，足够轻巧到能够投掷。</p>"
+        },
+        "Studded Leather Armor": {
+          "name": "镶嵌皮甲 Studded Leather Armor",
+          "description": "<p>这种皮甲用金属铆钉或小金属板加固，使皮甲保留大部分的柔韧性的同时得到更有力的保护。</p>"
+        },
+        "Steel Shield": {
+          "name": "钢盾 Steel Shield",
+          "description": "<p>如同木盾，钢盾也有多种形状和尺寸。虽然比木盾昂贵，但也更加耐用。</p><table class=\"pf2e remaster\"><thead><tr><th>硬度</th><th>HP</th><th>BT</th></tr></thead><tbody><tr><td>5</td><td>20</td><td>10</td></tr></tbody></table>"
+        },
+        "Sap": {
+          "name": "闷棍 Sap",
+          "description": "<p>闷棍用柔软的皮包裹着紧实的核心，通常是用皮革包裹铅块。它的头部比握把更宽，以分散打击的力量，因为武器的目的是击倒受害者，而不是放血。</p>"
+        },
+        "Potency Crystal": {
+          "name": "潜能水晶 Potency Crystal",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">F</span>（专注）</p>\n<p><strong>触发</strong> 你用附着的武器进行一次攻击，但尚未投掷攻击骰</p>\n<hr />\n<p>这颗萤石水晶闪烁着诡异的磷光。当你启动这颗水晶，武器在打击和这回合接下来的剩余的时间内变成一把<em>+1强击武器</em>，在攻击骰上获得+1物品加值，并将伤害骰提升至两个武器伤害骰。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.R5ugeFK3MPwkbv0s]{效果：潜能水晶}</p>"
+        },
+        "Chain Mail": {
+          "name": "链甲 Chain Mail",
+          "description": "<p>一套链甲由链接在一个防护网中的多个小金属环组成。它通常包括链甲衫，护腿，护臂和罩帽，组合起来保护大部分的躯体。</p>"
+        },
+        "Weapon Potency (+2)": {
+          "name": "+2武器潜能 Weapon Potency (+2)",
+          "description": "<p>魔法强化让武器攻击更有效。用该武器攻击的攻击骰获得+2物品加值，该武器可以被蚀刻上2枚性能符文。</p>\n<p>你可以将武器上已蚀刻的<em>武器潜能</em>符文升级为更强的版本，效果也会提升成新符文的数值。你必须有更强符文的配方才能如此做，且升级的价格是两枚符文之间价格的差额。</p>\n<p><strong>制作需求</strong> 手艺技能大师熟练度</p>"
+        },
+        "Chain Shirt": {
+          "name": "链甲衫 Chain Shirt",
+          "description": "<p>有时也被称为锁子甲，这是一件如同链甲一样，由相同的金属环构成的长衫。然而，它比链甲轻得多，且只能保护穿戴者的躯干、上臂和大腿。</p>"
+        },
+        "Striking": {
+          "name": "强击 Striking",
+          "description": "<p><em>强击</em>符文为武器提供破坏性魔力，将武器伤害骰增加为2个替代初始的一个。例如，<em>+1强击匕首</em>造成2d4点伤害而非1d4。</p>\n<p>你可以将武器上已蚀刻的<em>强击</em>符文升级为更强的版本，效果也会提升成新符文的数值。你必须有更强符文的配方才能如此做，且升级的价格是两枚符文之间价格的差额。</p>"
+        },
+        "Halberd": {
+          "name": "戟 Halberd",
+          "description": "<p>这种长兵相对较短，只有5尺长。使用的那头是带长钉的斧头。</p>"
+        },
+        "Light Pick": {
+          "name": "轻型镐 Light Pick",
+          "description": "<p>轻型镐是一种改良的采矿工具，其木柄顶端是一个镐头，设计目的是刺穿盔甲和肉身，而不是岩石碎片。</p>"
+        },
+        "Clan Dagger": {
+          "name": "氏族匕首 Clan Dagger",
+          "description": "<p>这把宽大的匕首由矮人携带，作为武器、工具和氏族标志。对于大多数矮人来说，丢失或不得不交出氏族匕首被认为是一种耻辱。</p>"
+        },
+        "Longspear": {
+          "name": "长矛 Longspear",
+          "description": "<p>这种很长的矛，有时被称为长矛（Pike），纯粹是用来刺戳而不是投掷的。许多士兵和城市守卫用来控制人群和防御冲锋的敌人，这种武器必须用双手挥舞。</p>"
+        },
+        "Morningstar": {
+          "name": "钉头锤 Morningstar",
+          "description": "<p>这种武器有短柄顶端是带着尖刺的金属球。</p>"
+        },
+        "Predator's Claw": {
+          "name": "掠食者之爪 Predator's Claw",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">F</span>（专注）</p>\n<p><strong>触发</strong> 你用附着的武器进行的攻击骰达成大成功</p>\n<hr />\n<p>这枚嵌在铁扣与铁链上的爪子，通常取自某种大型掠食动物。当你启动这枚爪子时，触发本次启动的那次攻击获得该武器的重击专精效果。</p>"
+        },
+        "Emergency Disguise": {
+          "name": "紧急伪装 Emergency Disguise",
+          "description": "<p><strong>用法</strong> 附着在护甲上</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 想象</p>\n<p><strong>需求</strong> 你在欺骗受训</p>\n<hr />\n<p>在林边小屋，这条通常戴在脖子上的细红丝带象征着伽尔特的灵魂诱捕断头台，也就是臭名昭著的终结之刃。这些护身符中的每一个都储存了一个特定的伪装，是在创造时选择的。当被启动时，护身符会给佩戴者带来一种伪装，让他们可以冒充，而不需要先花时间去组装一个令人信服的伪装。伪装所创造的部件看起来总价值不超过3gp。</p>\n<p>伪装的即时性给它的草率留下了一些痕迹，对使用伪装的检查施加了-2的环境减值。</p>\n<p>拥有@UUID[Compendium.pf2e.feats-srd.Item.e4KB4pSkx2lDBNw3]{快速伪装}技能的人不会受到这个惩罚。任何作为伪装一部分的物品在24小时后或在你移除它们后会消失。</p>"
+        },
+        "Dart": {
+          "name": "飞镖 Dart",
+          "description": "<p>这种投掷武器比箭大，但比标枪短。它通常有一根短的木头轴，末端是一个金属尖，有时被羽毛或毛皮固定。</p>"
+        },
+        "Guisarme": {
+          "name": "长勾刀 Guisarme",
+          "description": "<p>这种长兵通常有长长的单边曲刃，刀刃钝侧伸出一个钩子，可以让使用者在一定距离外摔绊对手。它的柄通常有8尺长。</p>"
+        },
+        "Battle Axe": {
+          "name": "战斧 Battle Axe",
+          "description": "<p>这些斧子被明确设计成武器，而不是工具。它们通常重量较轻，轴由金属带或螺栓加固，刀片更锋利，非常适合切碎四肢而不是木头。</p>"
+        },
+        "Greataxe": {
+          "name": "巨斧 Greataxe",
+          "description": "<p>这把巨大的战斧太重了，单手无法使用。许多巨斧都有两头 \"胡须\"般的刃，底部有一个钩子以增加它们的切割力。</p>"
+        },
+        "Shield Spikes": {
+          "name": "盾刺 Shield Spikes",
+          "description": "<p>这些金属刺战略性地安置在盾牌的防御侧，让盾击造成穿刺伤害。</p>"
+        },
+        "Whip": {
+          "name": "鞭子 Whip",
+          "description": "<p>这种长而粗的皮绳通常是编织而成，在一定距离上造成痛苦但非致命的挥砍伤害，通常伴随独特的噼里啪啦的声响。</p>"
+        },
+        "Dagger": {
+          "name": "匕首 Dagger",
+          "description": "<p>这种小型有刃的武器可以单手持握并在近战中刺伤生物。也可以用来投掷。</p>"
+        },
+        "Warhammer": {
+          "name": "战锤 Warhammer",
+          "description": "<p>这种武器有木柄，顶端是巨大沉重的金属头，锤头有单面的也有双面的，但总能造成强而有力的钝击伤害。</p>"
+        },
+        "Pick": {
+          "name": "镐 Pick",
+          "description": "<p>一种专门为战斗设计的镐，有着坚固的木柄和沉重而尖锐的头，可以提供毁灭性的打击。</p>"
+        },
+        "Trident": {
+          "name": "三叉戟 Trident",
+          "description": "<p>这种三股矛状的武器，通常有4尺长的柄。像矛一样，它可以单手持用也可以用来投掷。</p>"
+        },
+        "Spiked Gauntlet": {
+          "name": "带刺铁手套 Spiked Gauntlet",
+          "description": "<p>提供和标准铁手套一样的防御功能，但这种铁手套关节上还突出了一组尖刺。</p>"
+        },
+        "Spear": {
+          "name": "矛 Spear",
+          "description": "<p>长长的金属柄顶端有金属刺，矛可以作为近战武器单手使用或者用来投掷。</p>"
+        },
+        "Rapier": {
+          "name": "细剑 Rapier",
+          "description": "<p>细剑有着细长的剑刃和笼手，它被许多人视为决斗武器。</p>"
+        },
+        "Hatchet": {
+          "name": "短柄斧 Hatchet",
+          "description": "<p>这种小斧头可用于近战或投掷。</p>"
+        },
+        "Blowgun Darts": {
+          "name": "吹箭镖 Blowgun Darts",
+          "description": "<p>这些薄而轻的飞镖通常是用硬木制成的，用羽毛或毛皮固定。它们通常是空心的，所以可以用来喂毒。</p>"
+        },
+        "Bo Staff": {
+          "name": "长棒 Bo Staff",
+          "description": "<p>这根粗壮而纤细的棍子末端呈锥形，平衡良好。它被设计成一种攻守兼备的武器。</p>"
+        },
+        "Main-Gauche": {
+          "name": "格挡匕首 Main-Gauche",
+          "description": "<p>这种格挡匕首有坚固的刀镡保护使用者的手。</p>"
+        },
+        "Bastard Sword": {
+          "name": "变种剑 Bastard Sword",
+          "description": "<p>这种宽刃剑，有时被称为半手剑，有较长的握柄，因此可以一手握住或双手使用，以提供额外的切割力。</p>"
+        },
+        "Gauntlet": {
+          "name": "铁手套 Gauntlet",
+          "description": "<p>全身甲、半身甲和板条甲都配有一副这种金属手套，也可以单独购买并与其他类型的盔甲一起佩戴。他们不仅保护你的手，而且把你的手变成致命的武器。</p>"
+        },
+        "Weapon Potency (+1)": {
+          "name": "+1武器潜能 Weapon Potency (+1)",
+          "description": "<p>魔法强化让武器攻击更有效。用该武器攻击的攻击骰获得+1物品加值，该武器可以被蚀刻上1枚性能符文。</p>\n<p>你可以将武器上已蚀刻的<em>武器潜能</em>符文升级为更强的版本，效果也会提升成新符文的数值。你必须有更强符文的配方才能如此做，且升级的价格是两枚符文之间价格的差额。</p>\n<p><strong>制作需求</strong> 手艺技能专家熟练度</p>"
+        },
+        "Shield Boss": {
+          "name": "盾凸 Shield Boss",
+          "description": "<p>通常是一块圆形、凸形或圆锥形的厚金属片，附着在盾牌的中心，盾凸会增加盾击的钝击伤害。</p>"
+        },
+        "Armor Potency (+1)": {
+          "name": "+1护甲潜能 Armor Potency (+1)",
+          "description": "<p>可以偏斜攻击的魔法守护着你。护甲在AC上的物品加值提高1。这件护甲可以蚀刻一枚性能符文。</p>\n<p>你可以通过正常的升级物品与符文工序来升级已经蚀刻到一套护甲上的<em> 护甲潜能</em> 符文。</p>\n<p><strong>制作需求</strong> 手艺技能专家熟练度</p>"
+        },
+        "Wolf Fang": {
+          "name": "狼之牙 Wolf Fang",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">F</span>（专注）</p>\n<p><strong>触发</strong> 你成功地@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{摔绊}了一个敌人</p>\n<hr />\n<p>这颗狼的犬齿吊在一条皮带上，并且挂在盔甲的搭扣或束带上。</p>\n<p>当你启动这颗牙，你对你摔绊的目标造成等同于你的力量调整值的@Damage[(@actor.abilities.str.mod)[bludgeoning]]{钝击伤害}。</p>"
+        },
+        "Sling": {
+          "name": "投石索 Sling",
+          "description": "<p>仅仅是一块皮革附着在一根带子上，投石索可以在远程用来投掷光滑的石头或者投石索弹丸。</p>"
+        },
+        "Flail": {
+          "name": "连枷 Flail",
+          "description": "<p>这种武器是一个木柄通过链条、绳索或皮带链接着带刺铁球或铁柱。</p>"
+        },
+        "Glaive": {
+          "name": "大砍刀 Glaive",
+          "description": "<p>这件长兵由7尺长杆和顶端的单刃组成。它在一定距离外进行致命的切割时，非常有效。</p>"
+        },
+        "Half Plate": {
+          "name": "半身甲 Half Plate",
+          "description": "<p>半身甲由大部分全身甲的上半身板件组成，用较轻或较薄的钢板保护臂和腿。它既提供了一部分全身甲的保护，同时兼顾了更大的灵活性和速度。这种盔甲包含一套内衬的@UUID[Compendium.pf2e.equipment-srd.Item.zBYEU9E7034ENCmh]和一双@UUID[Compendium.pf2e.equipment-srd.Item.Ix2vicchE79d6Cl3]。</p>"
+        },
+        "Breastplate": {
+          "name": "胸甲 Breastplate",
+          "description": "<p>虽然被称为胸甲，但这类护甲其实是由几块保护躯干、胸部、颈部，有时还有臀部和小腿的板甲或@UUID[Compendium.pf2e.equipment-srd.Item.pRoikbRo5HFW6YUB]{半身甲}部件组成的。它既提供了一部分板甲的保护，同时兼顾了更大的灵活性和速度。</p>"
+        },
+        "Shortsword": {
+          "name": "短剑 Shortsword",
+          "description": "<p>这种利器有多种形状和风格，但通常2尺长。</p>"
+        },
+        "Full Plate": {
+          "name": "全身甲 Full Plate",
+          "description": "<p>全身甲由连锁的板件组成，几乎将整个身体包裹在一个钢壳中。它既昂贵又沉重，使用者通常需要帮助才能正确穿戴，但它是最好的防御盔甲之一。这种盔甲包含一套内衬的@UUID[Compendium.pf2e.equipment-srd.Item.zBYEU9E7034ENCmh]和一双@UUID[Compendium.pf2e.equipment-srd.Item.Ix2vicchE79d6Cl3]。</p>"
+        },
+        "Maul": {
+          "name": "大锤 Maul",
+          "description": "<p>大锤是大号的战锤，必须用双手挥舞。</p>"
+        },
+        "Sling Bullets": {
+          "name": "弹丸 Sling Bullets",
+          "description": "<p>这些小金属球，通常是铁球或铅球，设计作为投石索的弹药。</p>"
+        },
+        "Staff": {
+          "name": "法杖 Staff",
+          "description": "<p>这根长木头能够帮助人行走，也能给予人沉重的打击。</p>"
+        },
+        "Katar": {
+          "name": "拳刃 Katar",
+          "description": "<p>也被称为拳刃，其特定是Ｈ型的握把，允许刀刃从指关节外突出。</p>"
+        },
+        "Tower Shield": {
+          "name": "塔盾 Tower Shield",
+          "description": "<p>这种巨大的盾牌几乎可以覆盖整个身体。由于尺寸因素，通常用金属加固的木材制成。如果你使用@UUID[Compendium.pf2e.actionspf2e.Item.ust1jJSCZQUhBZIz]{寻找掩蔽}动作，AC加值增加为+4。</p>\n<table class=\"pf2e\">\n<thead>\n<tr>\n<th>硬度</th>\n<th>HP</th>\n<th>BT</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>5</td>\n<td>20</td>\n<td>10</td>\n</tr>\n</tbody>\n</table>"
+        },
+        "Greatpick": {
+          "name": "巨镐 Greatpick",
+          "description": "<p>这种镐比普通镐具有更长的手柄和更宽的头部。它太重了，单手无法使用。</p>"
+        },
+        "Sickle": {
+          "name": "镰刀 Sickle",
+          "description": "<p>最初是用来收割谷物的农具，这种单手武器有一个短木柄，顶端是弯曲的刀刃，有时两面都开封。</p>"
+        },
+        "Scimitar": {
+          "name": "弯刀 Scimitar",
+          "description": "<p>这把单手弯刃只有一侧开锋。</p>"
+        },
+        "Heavy Crossbow": {
+          "name": "重弩 Heavy Crossbow",
+          "description": "<p>这种大型弩比普通弩更难装填也更坚固，也有更强的冲击力。</p>"
+        },
+        "Buckler": {
+          "name": "小圆盾 Buckler",
+          "description": "<p>这面小盾牌是决斗者和快速的轻甲战斗者的最爱。它通常由刚制成，绑在你的前臂上。你可以用小圆盾@UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]，只要那只手没有被占用，或者拿着轻巧的非武器物品。</p><table class=\"pf2e remaster\"><thead><tr><th>硬度</th><th>HP</th><th>BT</th></tr></thead><tbody><tr><td>3</td><td>6</td><td>3</td></tr></tbody></table>"
+        },
+        "Greatclub": {
+          "name": "巨棒 Greatclub",
+          "description": "<p>有些巨棒有复杂的雕刻，而另一些就是粗壮的树枝。这把巨大的棍棒太重了，单手无法使用。</p>"
+        },
+        "Starknife": {
+          "name": "星刃 Starknife",
+          "description": "<p>中间是金属环，四片逐渐变细的刀刃像指南针上的指针一样延伸。当从中间抓住星刃时，使用者可以将它作为近战武器使用。它也可以在短距离内作为投掷武器使用。</p>"
+        },
+        "Shuriken": {
+          "name": "手里剑 Shuriken",
+          "description": "<p>这种 \"投掷的星星\" 是一块刀刃锋利的扁平金属，设计通过抖腕或弹指投掷出去。</p>"
+        },
+        "Bolts": {
+          "name": "破阵弓矢 Bolts",
+          "description": "<p>比传统箭短，但结构相似，矢是弩使用的弹药。</p>"
+        },
+        "Splint Mail": {
+          "name": "板条甲 Splint Mail",
+          "description": "<p>这种盔甲在链甲上灵活加固并连锁金属板件，通常位于穿戴者的躯干、上臂和腿上。这种盔甲包含一套内衬的@UUID[Compendium.pf2e.equipment-srd.Item.zBYEU9E7034ENCmh]一双@UUID[Compendium.pf2e.equipment-srd.Item.Ix2vicchE79d6Cl3]。</p>"
+        },
+        "Club": {
+          "name": "棍棒 Club",
+          "description": "<p>这是一块结实的木头，打磨形状用来敲击敌人。棍棒可以是复杂雕刻的武术作品，也可以像树枝或木块一样简单。</p>"
+        },
+        "Light Mace": {
+          "name": "轻型硬头锤 Light Mace",
+          "description": "<p>轻型硬头锤有根短短的木质或金属柄顶端有个厚重的金属头，使用它更像使用棍棒，它能造成沉重的钝击，头上的金属棱或刺还提供额外的力量。</p>"
+        },
+        "Hand Crossbow": {
+          "name": "手弩 Hand Crossbow",
+          "description": "<p>有时被游荡者和暴徒称为小巷弓，这种小型弩时常用来发射喂毒的小型矢。因为足够小，可以单手使用，但装填依然需要双手。</p>"
+        },
+        "Blowgun": {
+          "name": "吹箭 Blowgun",
+          "description": "<p>这条又长又窄的管子用来射击吹箭镖，仅仅需要强力呼气的力量。</p>"
+        },
+        "War Flail": {
+          "name": "战斗连枷 War Flail",
+          "description": "<p>这种大型连枷有长柄链接一块短粗的木质或金属块，有时镶嵌有尖刺。</p>"
+        },
+        "Shortbow": {
+          "name": "短弓 Shortbow",
+          "description": "<p>这种小型弓由单独一块木头做成，受到散兵和骑兵的青睐。</p>"
+        },
+        "Scythe": {
+          "name": "巨镰 Scythe",
+          "description": "<p>这种武器源自一种用来收割谷物的农具，它有一根长木柄和突出的手把，顶端是呈直角弯曲的刀刃。</p>"
+        },
+        "Scale Mail": {
+          "name": "鳞甲 Scale Mail",
+          "description": "<p>鳞甲由许多缝制在加固皮背衬上的金属鳞片组成，通常以长衫的形式保护你的躯干、臂和腿。</p>"
+        },
+        "Javelin": {
+          "name": "标枪 Javelin",
+          "description": "<p>这种细矛在投掷中能保持平衡，但并非设计用于近战。</p>"
+        },
+        "Falchion": {
+          "name": "弯刃大刀 Falchion",
+          "description": "<p>这种武器是一种较重的双手曲刃的弯刀。它的重量倾向刀刃的末端，使之成为一种强大的挥砍武器。</p>"
+        },
+        "Longsword": {
+          "name": "长剑 Longsword",
+          "description": "<p>长剑，也被称为武装剑，可以是单刃或双刃，其刀刃很重，长约3到4尺之间。</p>"
+        }
+      },
+      "name": "奥塔里卫队 Otari Garrison",
+      "tokenName": "奥塔里卫队 Otari Garrison",
+      "prototypeToken": "奥塔里卫队 Otari Garrison"
+    },
+    "Odd Stories": {
+      "items": {
+        "Writing Set": {
+          "name": "书写套件 Writing Set",
+          "description": "<p>用书写套件，你可以起草信件和抄写卷轴。一份套件包括文具、各种纸张和羊皮纸、墨水、羽毛笔或墨水笔、密封蜡以及简单的印章。如果你已经书写了很大的量，你可以用额外的墨水和纸张填充你的工具包。</p>"
+        },
+        "Mentalist's Staff": {
+          "name": "心灵师法杖 Mentalist's Staff",
+          "description": "<p>这根抛光的杖上带着旋涡状的图案，让人想起大脑的褶皱。持握该法杖时，你在辨识心灵法术的检定上获得+2环境加值。</p>\n<p><strong>启动</strong> 施法</p>\n<p><strong>效果</strong> 你从法杖中花费一定数量的充能次数以从其列表中施展一个法术。</p>\n<hr />\n<ul>\n<li><strong>Cantrip</strong> @UUID[Compendium.pf2e.spells-srd.Item.4gBIw4IDrSfFHik4]{晕眩术}</li>\n<li><strong>1st</strong> @UUID[Compendium.pf2e.spells-srd.Item.D442XMADp01qJ7Cs]{讯息传递} ，@UUID[Compendium.pf2e.spells-srd.Item.R8bqnYiThB6MYTxD]{幻痛术}</li>\n</ul>\n<hr />\n<p><strong>制作需求</strong> 为列表上所有法术提供一次对应环级的施法。</p>"
+        },
+        "Formula Book (Blank)": {
+          "name": "配方簿 Formula Book (Blank)",
+          "description": "<p>配方簿中包含制作除玩家核心中常见装备以外的物品所必需的配方配方，炼金术士玩家角色通常能够免费得到一本。每个配方簿可以容纳最多100个不同物品的配方。配方也可以出现在羊皮纸、泥板和几乎任何其他介质上，只要你可以参阅它们就不需要将它们抄写到特定的书中。</p>"
+        },
+        "Staff of Fire": {
+          "name": "火焰法杖 Staff of Fire",
+          "description": "<p>这根法杖就像底部烧黑的烧火棍，凑近点能闻到会像余烬一样淡淡的煤烟味。你可用交互动作使用法杖头接触火炬、火种或易燃物来点燃目标。</p>\n<p><strong>启动</strong> 施法</p>\n<p><strong>效果</strong> 你从法杖中花费一定数量的充能次数以从其列表中施展一个法术。</p>\n<hr />\n<ul>\n<li><strong>Cantrip</strong> @UUID[Compendium.pf2e.spells-srd.Item.6DfLZBl8wKIV03Iq]{引火术}</li>\n<li><strong>1st</strong> @UUID[Compendium.pf2e.spells-srd.Item.y6rAdMK6EFlV6U0t]{燃烧之息}</li>\n</ul>\n<hr />\n<p><strong>制作需求</strong> 为所列的所有法术提供一次相应环级的施法。</p>"
+        },
+        "Basic Crafter's Book": {
+          "name": "基本匠人书籍 Basic Crafter's Book",
+          "description": "<p>包含玩家核心第六章中所有0级常见物品的制造配方。</p>"
+        },
+        "Animal Staff": {
+          "name": "野兽法杖 Animal Staff",
+          "description": "<p>这根法杖的顶端被雕刻成各种动物和怪兽的头颅状。当持用这根法杖时，你在辨识动物的自然检定上获得+2环境加值。</p>\n<p><strong>启动</strong> 施放法术</p>\n<p><strong>效果</strong> 你从法杖中花费一定数量的充能次数以从其列表中施展一个法术。</p>\n<hr />\n<ul>\n<li><strong>Cantrip</strong> @UUID[Compendium.pf2e.spells-srd.Item.tXa5vOu5giBNCjdR]{指路术}</li>\n<li><strong>1st</strong> @UUID[Compendium.pf2e.spells-srd.Item.EE7Q5BHIrfWNCPtT]{魔躯术} @UUID[Compendium.pf2e.spells-srd.Item.4YnON9JHYqtLzccu]{召唤动物}</li>\n</ul>\n<hr />\n<p><strong>制作需求</strong> 为列表上所有法术提供一次对应环级的施法。</p>"
+        },
+        "Poisoner's Staff": {
+          "name": "投毒者法杖 Poisoner's Staff",
+          "description": "<p>这种多节的手杖上布满了刺，并涂上了一层闪闪发光的漆，让人有些轻微的刺痛感。当你持握法杖时，你不会受到它的刺或漆的影响，并且你在克服持续毒素伤害时的纯骰检定从15降低到13。</p>\n<hr />\n<p><strong>启动</strong> @UUID[Compendium.pf2e.actionspf2e.Item.aBQ8ajvEBByv45yz]{施放法术}</p>\n<hr />\n<p><strong>效果</strong> 你从法杖中花费一定数量的充能次数以从其列表中施展一个法术。</p>\n<hr />\n<ul>\n<li><strong>Cantrip</strong> @UUID[Compendium.pf2e.spells-srd.Item.izcxFQFwf3woCnFs]{神导术}</li>\n<li><strong>1st</strong> @UUID[Compendium.pf2e.spells-srd.Item.QqxwHeYEVylkYjsO]{侦测毒素}，@UUID[Compendium.pf2e.spells-srd.Item.DYdvMZ8G2LiSLVWw]{蛛咬术}</li>\n</ul>\n<hr />\n<p><strong>制作需求</strong> 为列表上所有法术提供一次对应环级的施法。</p>"
+        },
+        "Illustrated book": {
+          "name": "插画书 Illustrated book"
+        },
+        "Spellbook (Blank)": {
+          "description": "<p>法术书包含学习和准备各种法术所必需的书面知识，这是法师的必需品（通常会免费获得一本）和寻求学习额外法术的其他施法者的有用奢侈品。每本法术书最多可以容纳100个法术。此处列出的是一本空白的法术书的价格。</p>",
+          "name": "法术书（空白） Spellbook (Blank)"
+        },
+        "Writing Set (Extra Ink and Paper)": {
+          "description": "<p>用来填充你的书写套装的额外墨水和纸张。</p>",
+          "name": "书写套装（额外的墨水和纸张） Writing Set (Extra Ink and Paper)"
+        }
+      },
+      "name": "奇谭书屋 Odd Stories",
+      "tokenName": "奇谭书屋 Odd Stories",
+      "prototypeToken": "奇谭书屋 Odd Stories"
+    },
+    "Blades for Glades": {
+      "items": {
+        "Light Mace": {
+          "name": "轻型硬头锤 Light Mace",
+          "description": "<p>轻型硬头锤有根短短的木质或金属柄顶端有个厚重的金属头，使用它更像使用棍棒，它能造成沉重的钝击，头上的金属棱或刺还提供额外的力量。</p>"
+        },
+        "Scimitar": {
+          "name": "弯刀 Scimitar",
+          "description": "<p>这把单手弯刃只有一侧开锋。</p>"
+        },
+        "Gauntlet": {
+          "name": "铁手套 Gauntlet",
+          "description": "<p>全身甲、半身甲和板条甲都配有一副这种金属手套，也可以单独购买并与其他类型的盔甲一起佩戴。他们不仅保护你的手，而且把你的手变成致命的武器。</p>"
+        },
+        "Light Pick": {
+          "name": "轻型镐 Light Pick",
+          "description": "<p>轻型镐是一种改良的采矿工具，其木柄顶端是一个镐头，设计目的是刺穿盔甲和肉身，而不是岩石碎片。</p>"
+        },
+        "Armor Potency (+1)": {
+          "name": "+1护甲潜能 Armor Potency (+1)",
+          "description": "<p>可以偏斜攻击的魔法守护着你。护甲在AC上的物品加值提高1。这件护甲可以蚀刻一枚性能符文。</p>\n<p>你可以通过正常的升级物品与符文工序来升级已经蚀刻到一套护甲上的<em> 护甲潜能</em> 符文。</p>\n<p><strong>制作需求</strong> 手艺技能专家熟练度</p>"
+        },
+        "Greatpick": {
+          "name": "巨镐 Greatpick",
+          "description": "<p>这种镐比普通镐具有更长的手柄和更宽的头部。它太重了，单手无法使用。</p>"
+        },
+        "Weapon Potency (+1)": {
+          "name": "+1武器潜能 Weapon Potency (+1)",
+          "description": "<p>魔法强化让武器攻击更有效。用该武器攻击的攻击骰获得+1物品加值，该武器可以被蚀刻上1枚性能符文。</p>\n<p>你可以将武器上已蚀刻的<em>武器潜能</em>符文升级为更强的版本，效果也会提升成新符文的数值。你必须有更强符文的配方才能如此做，且升级的价格是两枚符文之间价格的差额。</p>\n<p><strong>制作需求</strong> 手艺技能专家熟练度</p>"
+        },
+        "Repair Toolkit": {
+          "name": "修理工具包 Repair Toolkit",
+          "description": "<p>修理工具包可让你在旅行时进行简单的维修。它包含便携式铁砧、钳子、木工工具、磨刀石和用于调理皮革和木材的油。你可以用修理工具包使用手艺技能修理物品。如果你穿戴着修理工具包，你可以抽出和替换一个穿戴在身上的修理工具包，作为使用动作的一部分。</p>"
+        },
+        "Staff": {
+          "name": "法杖 Staff",
+          "description": "<p>这根长木头能够帮助人行走，也能给予人沉重的打击。</p>"
+        },
+        "Bastard Sword": {
+          "name": "变种剑 Bastard Sword",
+          "description": "<p>这种宽刃剑，有时被称为半手剑，有较长的握柄，因此可以一手握住或双手使用，以提供额外的切割力。</p>"
+        },
+        "Sling Bullets": {
+          "name": "弹丸 Sling Bullets",
+          "description": "<p>这些小金属球，通常是铁球或铅球，设计作为投石索的弹药。</p>"
+        },
+        "Weapon Potency (+2)": {
+          "name": "+2武器潜能 Weapon Potency (+2)",
+          "description": "<p>魔法强化让武器攻击更有效。用该武器攻击的攻击骰获得+2物品加值，该武器可以被蚀刻上2枚性能符文。</p>\n<p>你可以将武器上已蚀刻的<em>武器潜能</em>符文升级为更强的版本，效果也会提升成新符文的数值。你必须有更强符文的配方才能如此做，且升级的价格是两枚符文之间价格的差额。</p>\n<p><strong>制作需求</strong> 手艺技能大师熟练度</p>"
+        },
+        "Striking": {
+          "name": "强击 Striking",
+          "description": "<p><em>强击</em>符文为武器提供破坏性魔力，将武器伤害骰增加为2个替代初始的一个。例如，<em>+1强击匕首</em>造成2d4点伤害而非1d4。</p>\n<p>你可以将武器上已蚀刻的<em>强击</em>符文升级为更强的版本，效果也会提升成新符文的数值。你必须有更强符文的配方才能如此做，且升级的价格是两枚符文之间价格的差额。</p>"
+        },
+        "Steel Shield": {
+          "name": "钢盾 Steel Shield",
+          "description": "<p>如同木盾，钢盾也有多种形状和尺寸。虽然比木盾昂贵，但也更加耐用。</p><table class=\"pf2e remaster\"><thead><tr><th>硬度</th><th>HP</th><th>BT</th></tr></thead><tbody><tr><td>5</td><td>20</td><td>10</td></tr></tbody></table>"
+        },
+        "Scythe": {
+          "name": "巨镰 Scythe",
+          "description": "<p>这种武器源自一种用来收割谷物的农具，它有一根长木柄和突出的手把，顶端是呈直角弯曲的刀刃。</p>"
+        },
+        "Bolts": {
+          "name": "破阵弓矢 Bolts",
+          "description": "<p>比传统箭短，但结构相似，矢是弩使用的弹药。</p>"
+        },
+        "Pick": {
+          "name": "镐 Pick",
+          "description": "<p>一种专门为战斗设计的镐，有着坚固的木柄和沉重而尖锐的头，可以提供毁灭性的打击。</p>"
+        },
+        "Buckler": {
+          "name": "小圆盾 Buckler",
+          "description": "<p>这面小盾牌是决斗者和快速的轻甲战斗者的最爱。它通常由刚制成，绑在你的前臂上。你可以用小圆盾@UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]，只要那只手没有被占用，或者拿着轻巧的非武器物品。</p><table class=\"pf2e remaster\"><thead><tr><th>硬度</th><th>HP</th><th>BT</th></tr></thead><tbody><tr><td>3</td><td>6</td><td>3</td></tr></tbody></table>"
+        },
+        "Light Hammer": {
+          "name": "轻锤 Light Hammer",
+          "description": "<p>这种小号的战锤的木质或金属柄顶端有个金属头，不像它沉重的表亲，足够轻巧到能够投掷。</p>"
+        },
+        "Chain Mail": {
+          "name": "链甲 Chain Mail",
+          "description": "<p>一套链甲由链接在一个防护网中的多个小金属环组成。它通常包括链甲衫，护腿，护臂和罩帽，组合起来保护大部分的躯体。</p>"
+        },
+        "Sturdy Shield (Minor)": {
+          "name": "下等百炼盾 Sturdy Shield (Minor)",
+          "description": "<p>通过特别的设计和精良的手艺，这种铁盾比非魔法版有着更高的硬度，让其更难被击破和摧毁。</p>\n<p>该盾牌拥有硬度8，HP64，BT32。</p>"
+        },
+        "Longsword": {
+          "name": "长剑 Longsword",
+          "description": "<p>长剑，也被称为武装剑，可以是单刃或双刃，其刀刃很重，长约3到4尺之间。</p>"
+        },
+        "Shield Spikes": {
+          "name": "盾刺 Shield Spikes",
+          "description": "<p>这些金属刺战略性地安置在盾牌的防御侧，让盾击造成穿刺伤害。</p>"
+        },
+        "Flail": {
+          "name": "连枷 Flail",
+          "description": "<p>这种武器是一个木柄通过链条、绳索或皮带链接着带刺铁球或铁柱。</p>"
+        },
+        "Splint Mail": {
+          "name": "板条甲 Splint Mail",
+          "description": "<p>这种盔甲在链甲上灵活加固并连锁金属板件，通常位于穿戴者的躯干、上臂和腿上。这种盔甲包含一套内衬的@UUID[Compendium.pf2e.equipment-srd.Item.zBYEU9E7034ENCmh]一双@UUID[Compendium.pf2e.equipment-srd.Item.Ix2vicchE79d6Cl3]。</p>"
+        },
+        "Clan Dagger": {
+          "name": "氏族匕首 Clan Dagger",
+          "description": "<p>这把宽大的匕首由矮人携带，作为武器、工具和氏族标志。对于大多数矮人来说，丢失或不得不交出氏族匕首被认为是一种耻辱。</p>"
+        },
+        "Glaive": {
+          "name": "大砍刀 Glaive",
+          "description": "<p>这件长兵由7尺长杆和顶端的单刃组成。它在一定距离外进行致命的切割时，非常有效。</p>"
+        },
+        "Halberd": {
+          "name": "戟 Halberd",
+          "description": "<p>这种长兵相对较短，只有5尺长。使用的那头是带长钉的斧头。</p>"
+        },
+        "Longspear": {
+          "name": "长矛 Longspear",
+          "description": "<p>这种很长的矛，有时被称为长矛（Pike），纯粹是用来刺戳而不是投掷的。许多士兵和城市守卫用来控制人群和防御冲锋的敌人，这种武器必须用双手挥舞。</p>"
+        },
+        "Greataxe": {
+          "name": "巨斧 Greataxe",
+          "description": "<p>这把巨大的战斧太重了，单手无法使用。许多巨斧都有两头 \"胡须\"般的刃，底部有一个钩子以增加它们的切割力。</p>"
+        },
+        "Trident": {
+          "name": "三叉戟 Trident",
+          "description": "<p>这种三股矛状的武器，通常有4尺长的柄。像矛一样，它可以单手持用也可以用来投掷。</p>"
+        },
+        "Half Plate": {
+          "name": "半身甲 Half Plate",
+          "description": "<p>半身甲由大部分全身甲的上半身板件组成，用较轻或较薄的钢板保护臂和腿。它既提供了一部分全身甲的保护，同时兼顾了更大的灵活性和速度。这种盔甲包含一套内衬的@UUID[Compendium.pf2e.equipment-srd.Item.zBYEU9E7034ENCmh]和一双@UUID[Compendium.pf2e.equipment-srd.Item.Ix2vicchE79d6Cl3]。</p>"
+        },
+        "Bo Staff": {
+          "name": "长棒 Bo Staff",
+          "description": "<p>这根粗壮而纤细的棍子末端呈锥形，平衡良好。它被设计成一种攻守兼备的武器。</p>"
+        },
+        "Shield Boss": {
+          "name": "盾凸 Shield Boss",
+          "description": "<p>通常是一块圆形、凸形或圆锥形的厚金属片，附着在盾牌的中心，盾凸会增加盾击的钝击伤害。</p>"
+        },
+        "Starknife": {
+          "name": "星刃 Starknife",
+          "description": "<p>中间是金属环，四片逐渐变细的刀刃像指南针上的指针一样延伸。当从中间抓住星刃时，使用者可以将它作为近战武器使用。它也可以在短距离内作为投掷武器使用。</p>"
+        },
+        "Mace": {
+          "name": "硬头锤 Mace",
+          "description": "<p>有着结实的柄和沉重的金属头，硬头锤坚固到可以让使用者造成强力打击给盔甲留下凹痕。</p>"
+        },
+        "Katar": {
+          "name": "拳刃 Katar",
+          "description": "<p>也被称为拳刃，其特定是Ｈ型的握把，允许刀刃从指关节外突出。</p>"
+        },
+        "Whip": {
+          "name": "鞭子 Whip",
+          "description": "<p>这种长而粗的皮绳通常是编织而成，在一定距离上造成痛苦但非致命的挥砍伤害，通常伴随独特的噼里啪啦的声响。</p>"
+        },
+        "Crossbow": {
+          "name": "弩 Crossbow",
+          "description": "<p>这种远程武器有一个类似弓形的组件，安装在一个被称为舵柄的框架上。舵柄有一个将弓弦锁定在适当位置的机件，并与一个释放张力并发射矢的扳机相连。</p>"
+        },
+        "War Flail": {
+          "name": "战斗连枷 War Flail",
+          "description": "<p>这种大型连枷有长柄链接一块短粗的木质或金属块，有时镶嵌有尖刺。</p>"
+        },
+        "Sturdy Shield (Lesser)": {
+          "name": "次等百炼盾 Sturdy Shield (Lesser)",
+          "description": "<p>通过特别的设计和精良的手艺，这种铁盾比非魔法版有着更高的硬度，让其更难被击破和摧毁。</p>\n<p>该盾牌拥有硬度10，HP80，BT40。</p>"
+        },
+        "Shuriken": {
+          "name": "手里剑 Shuriken",
+          "description": "<p>这种 \"投掷的星星\" 是一块刀刃锋利的扁平金属，设计通过抖腕或弹指投掷出去。</p>"
+        },
+        "Arrows": {
+          "name": "箭 Arrows",
+          "description": "<p>这些箭头是弓的弹药。箭杆是木制的。一端是羽毛保持飞行中的平稳，另一端是金属头。</p>"
+        },
+        "Shortsword": {
+          "name": "短剑 Shortsword",
+          "description": "<p>这种利器有多种形状和风格，但通常2尺长。</p>"
+        },
+        "Full Plate": {
+          "name": "全身甲 Full Plate",
+          "description": "<p>全身甲由连锁的板件组成，几乎将整个身体包裹在一个钢壳中。它既昂贵又沉重，使用者通常需要帮助才能正确穿戴，但它是最好的防御盔甲之一。这种盔甲包含一套内衬的@UUID[Compendium.pf2e.equipment-srd.Item.zBYEU9E7034ENCmh]和一双@UUID[Compendium.pf2e.equipment-srd.Item.Ix2vicchE79d6Cl3]。</p>"
+        },
+        "Sickle": {
+          "name": "镰刀 Sickle",
+          "description": "<p>最初是用来收割谷物的农具，这种单手武器有一个短木柄，顶端是弯曲的刀刃，有时两面都开封。</p>"
+        },
+        "Main-Gauche": {
+          "name": "格挡匕首 Main-Gauche",
+          "description": "<p>这种格挡匕首有坚固的刀镡保护使用者的手。</p>"
+        },
+        "Battle Axe": {
+          "name": "战斧 Battle Axe",
+          "description": "<p>这些斧子被明确设计成武器，而不是工具。它们通常重量较轻，轴由金属带或螺栓加固，刀片更锋利，非常适合切碎四肢而不是木头。</p>"
+        },
+        "Scale Mail": {
+          "name": "鳞甲 Scale Mail",
+          "description": "<p>鳞甲由许多缝制在加固皮背衬上的金属鳞片组成，通常以长衫的形式保护你的躯干、臂和腿。</p>"
+        },
+        "Guisarme": {
+          "name": "长勾刀 Guisarme",
+          "description": "<p>这种长兵通常有长长的单边曲刃，刀刃钝侧伸出一个钩子，可以让使用者在一定距离外摔绊对手。它的柄通常有8尺长。</p>"
+        },
+        "Tower Shield": {
+          "name": "塔盾 Tower Shield",
+          "description": "<p>这种巨大的盾牌几乎可以覆盖整个身体。由于尺寸因素，通常用金属加固的木材制成。如果你使用@UUID[Compendium.pf2e.actionspf2e.Item.ust1jJSCZQUhBZIz]{寻找掩蔽}动作，AC加值增加为+4。</p>\n<table class=\"pf2e\">\n<thead>\n<tr>\n<th>硬度</th>\n<th>HP</th>\n<th>BT</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>5</td>\n<td>20</td>\n<td>10</td>\n</tr>\n</tbody>\n</table>"
+        },
+        "Repair Toolkit (Superb)": {
+          "name": "专家级修理工具包 Repair Toolkit (Superb)",
+          "description": "<p>修理工具包可让你在旅行时进行简单的维修。它包含便携式铁砧、钳子、木工工具、磨刀石和用于调理皮革和木材的油。你可以用修理工具包使用手艺技能修理物品。专家级修理工具包为你提供+1物品加值。如果你穿戴着修理工具包，你可以抽出和替换一个穿戴在身上的修理工具包，作为使用动作的一部分。</p>"
+        },
+        "Hatchet": {
+          "name": "短柄斧 Hatchet",
+          "description": "<p>这种小斧头可用于近战或投掷。</p>"
+        },
+        "Spiked Gauntlet": {
+          "name": "带刺铁手套 Spiked Gauntlet",
+          "description": "<p>提供和标准铁手套一样的防御功能，但这种铁手套关节上还突出了一组尖刺。</p>"
+        },
+        "Rapier": {
+          "name": "细剑 Rapier",
+          "description": "<p>细剑有着细长的剑刃和笼手，它被许多人视为决斗武器。</p>"
+        },
+        "Ranseur": {
+          "name": "刺叉 Ranseur",
+          "description": "<p>这种长兵是一种更长的三叉戟，中间的叉比两侧的叉更长。</p>"
+        },
+        "Hand Crossbow": {
+          "name": "手弩 Hand Crossbow",
+          "description": "<p>有时被游荡者和暴徒称为小巷弓，这种小型弩时常用来发射喂毒的小型矢。因为足够小，可以单手使用，但装填依然需要双手。</p>"
+        },
+        "Falchion": {
+          "name": "弯刃大刀 Falchion",
+          "description": "<p>这种武器是一种较重的双手曲刃的弯刀。它的重量倾向刀刃的末端，使之成为一种强大的挥砍武器。</p>"
+        },
+        "Spear": {
+          "name": "矛 Spear",
+          "description": "<p>长长的金属柄顶端有金属刺，矛可以作为近战武器单手使用或者用来投掷。</p>"
+        },
+        "Morningstar": {
+          "name": "钉头锤 Morningstar",
+          "description": "<p>这种武器有短柄顶端是带着尖刺的金属球。</p>"
+        },
+        "Dagger": {
+          "name": "匕首 Dagger",
+          "description": "<p>这种小型有刃的武器可以单手持握并在近战中刺伤生物。也可以用来投掷。</p>"
+        },
+        "Greatsword": {
+          "name": "巨剑 Greatsword",
+          "description": "<p>这把巨大的双手剑几乎和它的使用者一样高。它的下刃一般较钝，以便在近距离格斗中获得额外的杠杆作用力。</p>"
+        },
+        "Breastplate": {
+          "name": "胸甲 Breastplate",
+          "description": "<p>虽然被称为胸甲，但这类护甲其实是由几块保护躯干、胸部、颈部，有时还有臀部和小腿的板甲或@UUID[Compendium.pf2e.equipment-srd.Item.pRoikbRo5HFW6YUB]{半身甲}部件组成的。它既提供了一部分板甲的保护，同时兼顾了更大的灵活性和速度。</p>"
+        },
+        "Heavy Crossbow": {
+          "name": "重弩 Heavy Crossbow",
+          "description": "<p>这种大型弩比普通弩更难装填也更坚固，也有更强的冲击力。</p>"
+        },
+        "Warhammer": {
+          "name": "战锤 Warhammer",
+          "description": "<p>这种武器有木柄，顶端是巨大沉重的金属头，锤头有单面的也有双面的，但总能造成强而有力的钝击伤害。</p>"
+        },
+        "Dart": {
+          "name": "飞镖 Dart",
+          "description": "<p>这种投掷武器比箭大，但比标枪短。它通常有一根短的木头轴，末端是一个金属尖，有时被羽毛或毛皮固定。</p>"
+        },
+        "Sling": {
+          "name": "投石索 Sling",
+          "description": "<p>仅仅是一块皮革附着在一根带子上，投石索可以在远程用来投掷光滑的石头或者投石索弹丸。</p>"
+        },
+        "Javelin": {
+          "name": "标枪 Javelin",
+          "description": "<p>这种细矛在投掷中能保持平衡，但并非设计用于近战。</p>"
+        },
+        "Studded Leather Armor": {
+          "name": "镶嵌皮甲 Studded Leather Armor",
+          "description": "<p>这种皮甲用金属铆钉或小金属板加固，使皮甲保留大部分的柔韧性的同时得到更有力的保护。</p>"
+        },
+        "Maul": {
+          "name": "大锤 Maul",
+          "description": "<p>大锤是大号的战锤，必须用双手挥舞。</p>"
+        },
+        "Chain Shirt": {
+          "name": "链甲衫 Chain Shirt",
+          "description": "<p>有时也被称为锁子甲，这是一件如同链甲一样，由相同的金属环构成的长衫。然而，它比链甲轻得多，且只能保护穿戴者的躯干、上臂和大腿。</p>"
+        }
+      },
+      "name": "伐木之刃 Blades for Glades",
+      "tokenName": "林地 Glades",
+      "prototypeToken": "林地 Glades"
+    },
+    "Wrin's Wonders": {
+      "items": {
+        "Potion of Electricity Retaliation (Minor)": {
+          "name": "下等电击报复药水 Potion of Electricity Retaliation (Minor)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（操作）</p><hr /><p>报复药水有四种类别：酸蚀、寒冷、电击和火焰。每种药水的内部都显现了对应能量的朦胧现象。喝下报复药水后的一分钟内，你散发出对应能量的微弱灵光，且接触到你的生物（例如对你进行了近战无武装攻击，或对你使用了射程为接触的法术）会承受对应能量的伤害。中等、高等和上等版本的报复药水也能伤害到使用近战武器打击你的邻接生物。</p>\n<p>灵光造成@Damage[1[electricity]]伤害。</p>"
+        },
+        "Mesmerizing Opal": {
+          "name": "迷心蛋白石 Mesmerizing Opal",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（专注）</p>\n<hr />\n<p>这枚吊在银链上的蛋白石垂饰洋溢着灿烂的光辉。当你启动它， 使用欺骗技能尝试一次@UUID[Compendium.pf2e.actionspf2e.Item.QNAVeNKtHA0EUw4X]{虚招}。如果结果是成功，则改成大成功；如果检定结果是大失败，则改成失败。</p>"
+        },
+        "Oil of Unlife (Lesser)": {
+          "name": "次等无命油 Oil of Unlife (Lesser)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（操作）</p><hr /><p>这种稀薄的黑色液体透露出刺入骨髓的冷彻，能够快速修复一个不死生物的物理或灵魂形态。当你将<em>无命油</em>泼在一个不死生物，或具有虚能治疗能力的活体生物身上时，油会快速吸收进该生物的身体内，且该生物恢复@Damage[(2d8+5)[healing]]生命值。你也可以将<em>无命油</em>泼到虚体不死生物上，此时该生物也能将无命油吸入其中。</p>"
+        },
+        "Oil of Unlife (Minor)": {
+          "name": "下等无命油 Oil of Unlife (Minor)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（操作）</p><hr /><p>这种稀薄的黑色液体透露出刺入骨髓的冷彻，能够快速修复一个不死生物的物理或灵魂形态。当你将<em>无命油</em>泼在一个不死生物，或具有虚能治疗能力的活体生物身上时，油会快速吸收进该生物的身体内，且该生物恢复@Damage[1d8[healing]]生命值。你也可以将<em>无命油</em>泼到虚体不死生物上，此时该生物也能将无命油吸入其中。</p>"
+        },
+        "Potion of Cold Retaliation (Lesser)": {
+          "name": "次等寒冷报复药水 Potion of Cold Retaliation (Lesser)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（操作）</p><hr /><p>报复药水有四种类别：酸蚀、寒冷、电击和火焰。每种药水的内部都显现了对应能量的朦胧现象。喝下报复药水后的一分钟内，你散发出对应能量的微弱灵光，且接触到你的生物（例如对你进行了近战无武装攻击，或对你使用了射程为接触的法术）会承受对应能量的伤害。中等、高等和上等版本的报复药水也能伤害到使用近战武器打击你的邻接生物。</p>\n<p>灵光造成@Damage[1d4[cold]]伤害。</p>"
+        },
+        "Viper Arrow": {
+          "name": "蝰蛇箭 Viper Arrow",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 命令</p>\n<p>这支箭的箭杆包裹着细密的绿色鳞片，铁质箭头分作两个尖端，几乎像一对毒牙。</p>\n<p>启动后的蝰蛇箭命中目标后，箭矢会变成一条@UUID[Compendium.pf2e.pathfinder-bestiary.Actor.lFlXmieuHTBIonhj]{蝰蛇}。目标如同被咬中一般受到蝰蛇毒液的影响。随后蝰蛇落在与目标邻接的一个空位上。</p>\n<p>这条蝰蛇带有被召唤特征，即使你没有使用维持法术动作，它也会在你回合结束时行动。它由GM控制，但通常会攻击被箭射中的那个生物。蝰蛇在1分钟后消失，被杀死时也会消失。</p>\n<p><strong>制作需求</strong> 提供一次@UUID[Compendium.pf2e.spells-srd.Item.4YnON9JHYqtLzccu]{召唤动物}的施法</p>"
+        },
+        "Salve of Slipperiness": {
+          "name": "滑溜软膏 Salve of Slipperiness",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 交互</p>\n<p>这种浅绿色的黏连油脂可以涂在盔甲上，让其在8小时内变得无比滑溜，这为穿戴者在用来@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{逃脱}和@UUID[Compendium.pf2e.actionspf2e.Item.kMcV8e5EZUxa6evt]{挤入}的特技检定中获得+2物品加值。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.MCny5ohCGf09a7Wl]{效果：滑溜软膏}</p>"
+        },
+        "Oak Potion": {
+          "name": "橡肤药水 Oak Potion",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p>\n<hr />\n<p>喝下这苦涩的药水之后，你的皮肤就像树皮一样变厚了。你获得二环@UUID[Compendium.pf2e.spells-srd.Item.YWrfKetOqDwVFut7]{橡肤术}的效果，持续10分钟。</p>"
+        },
+        "Antivenom Potion": {
+          "name": "抗毒药水 Antivenom Potion",
+          "description": "<p>这瓶浑浊的白色液体有助于抵挡毒素的侵袭。当你喝下抗毒药水时，你可以立即尝试一次@Check[type:flat|dc:10]检定来中止你目前所承受的任何持续毒素伤害。此外，在你喝下药水后的一分钟内，你在对抗持续毒素效果时，强韧豁免有+1加值。</p>"
+        },
+        "Effervescent Ampoule": {
+          "name": "泡沫安瓿 Effervescent Ampoule",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p>\n<p><strong>需求</strong> 你的特技受训</p>\n<hr />\n<p>这个玻璃球内装着不断冒泡的清澈泉水，启动时，泉水会洒在附着的盔甲上。</p>\n<p>直到你的回合结束，这件盔甲能够让你越过水面或其他液体表面，如同他们是固体表面一样。如果你使用行走或快步走上一块压力板，你不会触发压力板以及其连接的所有装置和陷阱。</p>\n<p>当安瓿的效果结束，你会如常下沉、跌落、踩破不结实的地面、或按下当前位置的压力板。</p>"
+        },
+        "Ghost Touch": {
+          "name": "幽冥 Ghost Touch",
+          "description": "<p>蚀刻了此符文的武器可以伤害到没有实体的生物。<em>幽冥</em>武器对虚体生物特别有效，且这些存在大多数都对<em>幽冥</em>武器有着弱点。</p>\n<p>虚体生物可以接触、持握或持用<em>幽冥</em>武器（这与和大多数实际物体不同）。</p>"
+        },
+        "Deteriorating Dust": {
+          "name": "恶化之尘 Deteriorating Dust",
+          "description": "<p>被装在一个专门施法的小皮袋里的<em>恶化之尘</em>，是一种有效的腐蚀剂，是洛瓦古格的那些更谨慎的追随者会珍视的物品。</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span> 交互</p>\n<hr />\n<p><strong>效果</strong> 你将<em>恶化之尘</em>撒在无人看管的中型或更小的物体上。恶化之尘迅速褪变为透明色，物体立即开始生锈、融化、或以其他方式分解。在列出的时间内，物体会持续受到伤害；如果物体有硬度，那么就改为逐渐降低物体的硬度。如果当物体的硬度降低到0后，<em>恶化之尘</em>仍然激活着，则如前所述地对物体的造成伤害。如果物体在持续时间结束后幸存，那么减少的硬度将会回复，但受到的任何伤害仍然存在。</p>\n<p>受影响的物体每3小时受到1点伤害（每天受到8点伤害），其硬度每小时降低1点。该效果持续3天。</p>"
+        },
+        "Striking": {
+          "name": "强击 Striking",
+          "description": "<p><em>强击</em>符文为武器提供破坏性魔力，将武器伤害骰增加为2个替代初始的一个。例如，<em>+1强击匕首</em>造成2d4点伤害而非1d4。</p>\n<p>你可以将武器上已蚀刻的<em>强击</em>符文升级为更强的版本，效果也会提升成新符文的数值。你必须有更强符文的配方才能如此做，且升级的价格是两枚符文之间价格的差额。</p>"
+        },
+        "Oil of Weightlessness": {
+          "name": "失重油 Oil of Weightlessness",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（操作）</p>\n<hr />\n<p>你可以将这种闪亮的油涂在负载不超过1的物品上，让它的重量消失。在接下来的1小时内，该物品没有负载。</p>"
+        },
+        "Gecko Potion": {
+          "name": "壁虎药水 Gecko Potion",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p>\n<hr />\n<p><em>壁虎药水</em>是一种粘稠的黄褐色药水，其中悬浮着一些沙粒。喝下这瓶药水后5分钟内，你的指尖会长出上千根极其微小的刚毛，使其能吸附在物体上。你在@UUID[Compendium.pf2e.actionspf2e.Item.pprgrYQ1QnIDGZiy]和@UUID[Compendium.pf2e.actionspf2e.Item.ijZ0DDFpMkWqaShd]{手上功夫 Palm an Object}检定和对抗@UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]{卸武}的反射豁免DC上获得+1物品加值。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.buJnkFBzL4e22ASp]{效果：壁虎药水}</p>"
+        },
+        "Fear Gem": {
+          "name": "恐惧宝石 Fear Gem",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">2</span>（专注）</p>\n<hr />\n<p>这颗黑曜石宝石内似乎翻涌着黑烟。当你启动宝石时，进行一次近战打击。若你命中并造成伤害，目标陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1}；若为重击，则陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 2}。</p>\n<p>若你拥有威慑打击专长，将该打击造成的惊惧状态数值提升至@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 2}；若为重击，则提升至@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 3}。</p>"
+        },
+        "Emergency Disguise": {
+          "name": "紧急伪装 Emergency Disguise",
+          "description": "<p><strong>用法</strong> 附着在护甲上</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 想象</p>\n<p><strong>需求</strong> 你在欺骗受训</p>\n<hr />\n<p>在林边小屋，这条通常戴在脖子上的细红丝带象征着伽尔特的灵魂诱捕断头台，也就是臭名昭著的终结之刃。这些护身符中的每一个都储存了一个特定的伪装，是在创造时选择的。当被启动时，护身符会给佩戴者带来一种伪装，让他们可以冒充，而不需要先花时间去组装一个令人信服的伪装。伪装所创造的部件看起来总价值不超过3gp。</p>\n<p>伪装的即时性给它的草率留下了一些痕迹，对使用伪装的检查施加了-2的环境减值。</p>\n<p>拥有@UUID[Compendium.pf2e.feats-srd.Item.e4KB4pSkx2lDBNw3]{快速伪装}技能的人不会受到这个惩罚。任何作为伪装一部分的物品在24小时后或在你移除它们后会消失。</p>"
+        },
+        "Potion of Disguise (Lesser)": {
+          "name": "次等伪装药水 Potion of Disguise (Lesser)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（操作）</p><hr /><p>喝下这瓶药水后，你在[[/br 2d12 #hours]]小时内获得一种特定生物类型的外貌。这种生物类型在药水创造时就已经确定。例如你可以拥有一瓶<em>精灵伪装药水</em>，或一瓶<em>青蛙伪装药水</em>。喝下药水后并不能知道效果会持续多久；GM需要对持续时间进行暗骰。</p>\n<p>这种伪装不会改变你的特征和属性，也不会让你获得你模仿的生物的任何特殊能力。这可能会影响你能够持握或穿戴的物品（例如，你的新形态可能缺少与其他指头相对的大拇指）。药水最多只能将你缩小到小体型；或者维持你现有的体型，如果目标生物类型的大小和你相同或更大。例如，如果你是中体型且喝下了一瓶<em>火巨人伪装药水</em>，你会有火巨人的外观，但依然是中体型。目标生物类型必须是一个特定的类型，例如“猎豹”或“狮子”而非“猫科动物”，或“火巨人”和“食人魔”而非只是“巨人”，但药水也无法让你模仿某一个特定个体。</p>\n<p>药水的效果使用和欺骗技能的@UUID[Compendium.pf2e.actionspf2e.Item.AJstokjdG6iDjVjE]行动一样的规则。旁观者永远会假定你是所选生物类型的一员，除非他们主动进行搜索。你在欺骗DC上获得+4状态加值以对抗这种情况下的察觉检定；如果你在欺骗上未受训，你也可以将你的等级加入熟练加值。</p><hr /><p><strong>制作需求</strong> 提供需模仿生物的一小撮血液、毛发、或肉片等作为制作原材料</p>"
+        },
+        "Gold Pieces": {
+          "name": "金币 Gold Pieces"
+        },
+        "Returning": {
+          "name": "回力 Returning",
+          "description": "<p>当你使用这把武器进行一次投掷打击后，它会在这次打击结算完成后飞回你的手中。若返回时你的手已经被占用，那么这把武器会掉落在你所在空间的地面上。</p>"
+        },
+        "Fortifying Pebble": {
+          "name": "加固卵石 Fortifying Pebble",
+          "description": "<p><strong>用法</strong> 附着到盔甲、盾牌或武器</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">F</span> 想像</p>\n<p><strong>触发</strong> 附着的物品受到伤害</p>\n<p>这颗小卵石意外的沉重且惊人地坚硬，附着时是以强固钢鍊绑上附着物。启动加固卵石时，附着物承受的伤害降低10点。</p>"
+        },
+        "Dagger of Eternal Sleep": {
+          "name": "永恒沉眠匕首 Dagger of Eternal Sleep",
+          "description": "<p>这把锯齿状的小匕首看起来像一个锯齿形佩剑的微缩模型。在激活前，它太过微小而仅有装饰功能，不能被用作武器，这可能使人们把它当作武器状的装饰品而忽视掉。</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 交互</p>\n<hr />\n<p><strong>效果</strong> 你把永恒沉眠匕首转变为+1@UUID[Compendium.pf2e.equipment-srd.Item.qUnDHEXteUQGE8yp]{深化}强击匕首，并用这把匕首打击一个失去意识的目标。</p>\n<p>如果你不在遭遇中或面临着其他威胁，且你的打击的攻击骰命中，则会造成重击。打击造成的伤害和由重击专攻效应造成的流血并不会唤醒目标，但目标在下次醒来前暂时对这种效应免疫，这意味着更多的永恒沉眠匕首会正常唤醒他。这个匕首在使用后立即粉碎。</p>"
+        },
+        "Snapleaf": {
+          "name": "水晶飘叶 Snapleaf",
+          "description": "<p><strong>用法</strong> 附着到盔甲</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">R</span> 交互</p>\n<p><strong>触发</strong> 你开始坠落</p>\n<p>这个雕成树叶模样的水晶片可以皮带简单绑到盔甲或衣服上。</p>\n<p>当你启动<em>水晶飘叶</em>时，你获得@UUID[Compendium.pf2e.spells-srd.Item.TTwOKGqmZeKSyNMH]{柔落术}与2环级@UUID[Compendium.pf2e.spells-srd.Item.XXqE1eY3w3z6xJCB]{隐形术}的效果，该些效果持续1分钟或到你停止坠落，两者取早。</p>"
+        },
+        "Cunning": {
+          "name": "诡诈 Cunning",
+          "description": "<p>武器用你敌人的鲜血施放预言魔法，让你洞察其能力和弱点。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">F</span> 想象</p>\n<p><strong>频率</strong> 每分钟一次</p>\n<p><strong>需求</strong> 你本回合上一个动作中，你使用该武器命中一个拥有血液或重要体液的生物，并造成伤害</p>\n<hr />\n<p><strong>效果</strong> 你了解了武器从生物血液中搜集到的秘密。尝试对需求中被攻击的目标@UUID[Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo]{回忆知识}，在回忆知识的技能检定上获得等同于武器从潜能符文中获得的攻击骰物品加值的物品加值。</p>\n<p>如果需求的攻击为重击，你在该检定上还会获得+2环境加值。</p>"
+        },
+        "Runestone": {
+          "name": "符文石 Runestone",
+          "description": "<p>这块平坦坚硬的石头能用来蚀刻魔法基础符文或性能符文的。你只能在上面蚀刻一个符文。当一个符文从<em>符文石</em>上转移到其他物品上，<em>符文石</em>碎裂并被摧毁。上面列出的价格是空白符文石的；保存了符文的符文石应该将符文的价格加上去。</p>"
+        },
+        "Freezing Ammunition": {
+          "name": "冰冻弹药 Freezing Ammunition",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（操作）</p><hr /><p>这种冰冷的弹药是深蓝色的，而且摸起来感觉很冷。当启动的<em>冰冻弹药</em>命中了一个目标，目标必须通过一个@Check[type:fortitude|dc:19]豁免，否则陷入@UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 1}，持续1轮（在大失败时则持续1分钟）。 </p>"
+        },
+        "Potion of Water Breathing": {
+          "name": "水下呼吸药水 Potion of Water Breathing",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p>\n<hr />\n<p>这瓶透明灰色的药水闻起来像腐烂的臭鱼，尝起来则感觉更糟。喝下之后，你获得2环级的@UUID[Compendium.pf2e.spells-srd.Item.MZGkMsPBztFN0pUO]{水下呼吸} 效果，持续1小时。</p>"
+        },
+        "Potion of Emergency Escape": {
+          "name": "紧急逃生药水 Potion of Emergency Escape",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p><hr /><p><em>紧急逃生药水</em>的塞子是精心制作的，在危急时刻下很容易打开。当你喝下此药水后，1分钟内你对所有认识到的敌对生物获得@UUID[Compendium.pf2e.conditionitems.Item.sDPxOjQ9kx2RZE8D]状态。逃跑状态持续时，你的所有速度获得+40尺的状态加值。你立即行走。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.EZsHuGGSLER67CiM]</p>"
+        },
+        "Sneaky Key": {
+          "name": "鬼祟钥匙 Sneaky Key",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p>\n<p><strong>需求</strong> 你在贼活中达到受训</p>\n<hr />\n<p>这把银色骷髅钥匙可以被贴在护甲或袖子上。你可以转动这把钥匙来启动它，你在1分钟内，用于开锁的贼活检定都有+1状态加值。在面对复杂的锁时，当你第一次在@UUID[Compendium.pf2e.actionspf2e.Item.2EE4aF4SZpYf0R6H]尝试中成功或大成功时，你视为获得一次额外的成功。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.ehcAvmjZVzyFJclB]</p>"
+        },
+        "Healing Potion (Lesser)": {
+          "name": "次等治疗药水 Healing Potion (Lesser)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p><hr /><p><em>治疗药水</em>是一瓶宝石红色的液体，饮用者的伤口会迅速康复，并带来一阵刺痛。当你喝下<em>治疗药水</em>后，你恢复@Damage[(2d8+5)[healing]]生命值。</p>"
+        },
+        "Oily Button": {
+          "name": "油亮纽扣 Oily Button",
+          "description": "<p><strong>用法</strong> 附着在护甲上</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">F</span> 想象</p>\n<p><strong>触发</strong> 你成功通过一次运动检定进行卸武</p>\n<p><strong>需求</strong> 你的运动技能达到专家</p>\n<hr />\n<p>这个华丽的纽扣上覆盖着一层薄薄的油光。当你启动油亮纽扣时，直到该敌人的下个回合开始前，你针对该敌人所持的某件物品的@UUID[Compendium.pf2e.actionspf2e.Item.Dt6B1slsBy8ipJu9]{卸武}检定有+4环境加值，而不是+2，而该敌人下一回合结束之前，他使用此物品进行的攻击检定或其他需要持握此物品的相关检定都有-2环境减值，除非他花费一个@UUID[Compendium.pf2e.actionspf2e.Item.pvQ5rY2zrtPI614F]{交互}动作来更换持握物品的手。</p>"
+        },
+        "Marvelous Miniature (Chest)": {
+          "name": "惊奇模型-箱 Marvelous Miniature (Chest)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（操作）</p>\n<hr />\n<p>每个<em>惊奇模型</em>都是对真实生物或物体的极小复制。这个微型雕像由木头、锡镴或其他简单的材料制成，底座的底部蚀刻着一个符文。<em>惊奇模型</em>有时被包装在一起；例如，露营套装包含船、篝火和马的微缩模型。启动一个<em>惊奇模型</em>会使它变成另一个生物或物体，然后可以作为该物体的正常形态使用。每个惊奇模型只能被启动一次，并且大多数会永久成为描述中的物品。</p>\n<hr />\n<p>当你使用这个模型时，一个小的木制箱子会出现并立即打开。这个箱子最多可以容纳10负载的物品。一旦箱子被关闭，它就会再次变形——这次变成一把钥匙——带着所有储存的物品。你可以通过一个互动动作来激活这把钥匙，把它变成一个想象中的锁，这样它就会变成一个箱子，里面仍然有所有的物品。</p>\n<p>一旦它第二次变成一个箱子，它就永远成为一个普通木箱了。</p>"
+        },
+        "Wolf Fang": {
+          "name": "狼之牙 Wolf Fang",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">F</span>（专注）</p>\n<p><strong>触发</strong> 你成功地@UUID[Compendium.pf2e.actionspf2e.Item.ge56Lu1xXVFYUnLP]{摔绊}了一个敌人</p>\n<hr />\n<p>这颗狼的犬齿吊在一条皮带上，并且挂在盔甲的搭扣或束带上。</p>\n<p>当你启动这颗牙，你对你摔绊的目标造成等同于你的力量调整值的@Damage[(@actor.abilities.str.mod)[bludgeoning]]{钝击伤害}。</p>"
+        },
+        "Dragon Turtle Scale": {
+          "name": "龙龟鳞 Dragon Turtle Scale",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（专注）</p>\n<p><strong>需求</strong> 你在运动的熟练度至少为受训</p>\n<hr />\n<p>这片闪烁着的绿色鳞片通常会挂在金色的扣环或吊链上。</p>\n<p>当你启动这片鳞片，在1分钟内你能获得等同于陆地速度一半的游泳速度。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.4tepFOJLhZSelPoa]{效果：龙龟鳞}</p>"
+        },
+        "Potion of Cold Retaliation (Minor)": {
+          "name": "下等寒冷报复药水 Potion of Cold Retaliation (Minor)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（操作）</p><hr /><p>报复药水有四种类别：酸蚀、寒冷、电击和火焰。每种药水的内部都显现了对应能量的朦胧现象。喝下报复药水后的一分钟内，你散发出对应能量的微弱灵光，且接触到你的生物（例如对你进行了近战无武装攻击，或对你使用了射程为接触的法术）会承受对应能量的伤害。中等、高等和上等版本的报复药水也能伤害到使用近战武器打击你的邻接生物。</p>\n<p>灵光造成@Damage[1[cold]]伤害。</p>"
+        },
+        "Healing Potion (Minor)": {
+          "name": "下等治疗药水 Healing Potion (Minor)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p><hr /><p><em>治疗药水</em>是一瓶宝石红色的液体，饮用者的伤口会迅速康复，并带来一阵刺痛。当你喝下<em>治疗药水</em>后，你恢复@Damage[1d8[healing]]生命值。</p>"
+        },
+        "Spellstrike Ammunition (Type I)": {
+          "name": "I型法袭弹药 Spellstrike Ammunition (Type I)",
+          "description": "<p><strong>弹药</strong> 任意</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span> 施法</p>\n<hr />\n<p>神秘的图纹让这发弹药成为了储存魔法的容器。你通过对<em>法袭弹药</em>进行施法来启动它。该法术的等级必须是弹药可以容纳的，施法动作必须为1个或2个，法术也必须能以施法者以外的一个生物为目标。被启动的<em>法袭弹药</em>命中的生物会成为法术的目标。如果该生物不能成为该法术的目标，则法术丢失。</p>\n<p>该弹药只能影响被命中的生物，即使法术正常情况下能够影响多个生物。如果法术需要一个法术攻击骰，使用发射该弹药的远程攻击骰结果来决定成功度。如果法术需要一个豁免骰，目标需要通过一个豁免，对抗你的法术DC。将打击和法术的伤害合计之后再应用抗力和弱点。</p>\n<p>该弹药能容纳的法术最高环级取决于其等级与价格。</p>\n<p>最高法术环级 1环级</p>"
+        },
+        "Shining Ammunition": {
+          "name": "闪光弹药 Shining Ammunition",
+          "description": "<p><em>闪光弹药</em>闪着暗淡的光。发射后，它会发出明亮的光芒，使半径20尺范围内成为明亮光照（并使更远的20尺范围内成为昏暗光照），持续10分钟。如果它命中了一个目标，它会固定在目标身上，使目标发出同样的光芒。一个生物可以用一个交互动作移除弹药，但弹药仍然会持续照明，直到持续时间结束或被摧毁。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Sf6UO6vgCeicggOK]{效果：闪光弹药}</p>"
+        },
+        "Vine Arrow": {
+          "name": "藤蔓箭 Vine Arrow",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（专注）</p>\n<hr />\n<p>这支质朴的箭的箭杆上长出了带叶的茎。当一支启动的<em>藤蔓箭</em>命中了一个目标，箭的杆部分散并开始生长，用藤蔓缠住目标。</p>\n<p>目标在他的速度上承受-10尺环境减值，持续[[/r 2d4]]轮，或直到目标成功通过了一个DC为19的@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]检定。在重击时，目标在逃脱之前也会陷入@UUID[Compendium.pf2e.conditionitems.Item.eIcWbB5o3pP6OIMe]。</p>"
+        },
+        "Emerald Grasshopper": {
+          "name": "绿宝石蝗虫 Emerald Grasshopper",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（专注）</p>\n<p><strong>需求</strong> 你的运动受训</p>\n<hr />\n<p>这只金属蝗虫上装饰着绿宝石，通常附着在盔甲的腿部。</p>\n<p>当你启动它时，尝试一次@UUID[Compendium.pf2e.actionspf2e.Item.d5I6018Mci2SWokk]{跳跃}，水平移动最多40尺或垂直移动最多10尺。</p>\n<p>如果你跳跃结束时没有处于固体地表，你在回合结束前都处于浮空状态，接着会以每轮60尺的速度无害地降落，直到落地。</p>"
+        },
+        "Holy Water": {
+          "name": "圣水 Holy Water",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 打击</p>\n<hr />\n<p>这个瓶子里装着受到善良神祗祝福的水。你可以将瓶子扔出去进行打击以启动<em>圣水</em>。这是一个简易投掷武器，射程增量是20尺。</p>\n<p><em>圣水</em>造成1d6点精魂伤害伤害以及1点精魂溅射伤害。<em>圣水</em>只能伤害具有邪秽特征的生物。</p>"
+        },
+        "Potion of Electricity Retaliation (Lesser)": {
+          "name": "次等电击报复药水 Potion of Electricity Retaliation (Lesser)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（操作）</p><hr /><p>报复药水有四种类别：酸蚀、寒冷、电击和火焰。每种药水的内部都显现了对应能量的朦胧现象。喝下报复药水后的一分钟内，你散发出对应能量的微弱灵光，且接触到你的生物（例如对你进行了近战无武装攻击，或对你使用了射程为接触的法术）会承受对应能量的伤害。中等、高等和上等版本的报复药水也能伤害到使用近战武器打击你的邻接生物。</p>\n<p>灵光造成@Damage[1d4[electricity]]伤害。</p>"
+        },
+        "Potion of Fire Retaliation (Minor)": {
+          "name": "下等火焰报复药水 Potion of Fire Retaliation (Minor)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（操作）</p><hr /><p>报复药水有四种类别：酸蚀、寒冷、电击和火焰。每种药水的内部都显现了对应能量的朦胧现象。喝下报复药水后的一分钟内，你散发出对应能量的微弱灵光，且接触到你的生物（例如对你进行了近战无武装攻击，或对你使用了射程为接触的法术）会承受对应能量的伤害。中等、高等和上等版本的报复药水也能伤害到使用近战武器打击你的邻接生物。</p>\n<p>灵光造成@Damage[1[fire]]伤害。</p>"
+        },
+        "Potion of Shared Memories": {
+          "name": "记忆共享药水 Potion of Shared Memories",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（操作）</p>\n<hr />\n<p><em>记忆共享药水</em>能够将一个生物的记忆传输给另一个生物。为了将记忆放置于药水中，你必须持握着药水瓶并在1分钟内将精神集中在一段特定的记忆上。记忆必须与某个单一事件、地点、人物、或其他事物相关，且整体大概持续1分钟。之后这瓶透明液体中便会显现出记忆的朦胧景象，并变得有些发甜。</p>\n<p>喝下药水后，饮用者能够鲜明地回忆起这段记忆，能够如同自己亲身经历一般轻易想起记忆的内容。不自愿的饮用者可以拒绝吸收这段记忆。</p>"
+        },
+        "Predator's Claw": {
+          "name": "掠食者之爪 Predator's Claw",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">F</span>（专注）</p>\n<p><strong>触发</strong> 你用附着的武器进行的攻击骰达成大成功</p>\n<hr />\n<p>这枚嵌在铁扣与铁链上的爪子，通常取自某种大型掠食动物。当你启动这枚爪子时，触发本次启动的那次攻击获得该武器的重击专精效果。</p>"
+        },
+        "Antler Arrow": {
+          "name": "鹿角箭 Antler Arrow",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p><hr /><p>曾有一位鹿角圣使想出了一个办法以和平地制止他的敌人。受此启发，鹿角箭被创造了出来。当一支启动的<em>鹿角箭</em>命中一名敌人，鹿角骨会展开并将其固定在原地。目标必须成功通过一次@Check[type:reflex|dc:16]豁免，否则会被定在原地，受到弓弩武器组的重击专精效果。</p>\n<p>如果通过<em>鹿角箭</em>达成的命中是一次重击，且你已经有能力发动弓弩的重击专精效果，其运动检定的DC提升至15。</p>"
+        },
+        "Potion of Acid Retaliation (Lesser)": {
+          "name": "次等酸蚀报复药水 Potion of Acid Retaliation (Lesser)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（操作）</p><hr /><p>报复药水有四种类别：酸蚀、寒冷、电击和火焰。每种药水的内部都显现了对应能量的朦胧现象。喝下报复药水后的一分钟内，你散发出对应能量的微弱灵光，且接触到你的生物（例如对你进行了近战无武装攻击，或对你使用了射程为接触的法术）会承受对应能量的伤害。中等、高等和上等版本的报复药水也能伤害到使用近战武器打击你的邻接生物。</p>\n<p>灵光造成@Damage[1d4[acid]]伤害。</p>"
+        },
+        "Climbing Bolt": {
+          "name": "攀爬矢 Climbing Bolt",
+          "description": "<p>这支矢的杆部卷着细绳，当这支矢击中了固体表面，细绳会解开成50尺长的绳子，稳固地系在弩矢撞击的表面上。通过一个交互动作和一个@Check[type:athletics|dc:20|name:Pull Free Rope]检定，可以将绳子取下来。</p>"
+        },
+        "Ration Tonic": {
+          "name": "营养液 Ration Tonic",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（操作）</p><hr /><p>纤细的瓶子中装着干净透明的水，并散发出迷人果香。喝下<em>营养液</em>能够魔幻般地为你提供一天份的食物和水带来的营养。营养液有着奇妙的，令人愉快的味道，可以在制造营养液的时候特别定制。</p>"
+        },
+        "Shrinking Potion": {
+          "name": "缩小药水 Shrinking Potion",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p>\n<hr />\n<p>这瓶霉味药水能提供@UUID[Compendium.pf2e.spells-srd.Item.PjhUmyKnq6K5uDby]{缩小术}的效果，让你和你身上的所有装备变小。在潜伏期过后，你在10分钟内都维持变化后的体型。</p>\n<p><strong>潜伏期</strong> 1分钟</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.o0baLY5VdjLhdsS7]{效果：缩小药水}</p>"
+        },
+        "Monkey Pin": {
+          "name": "猿猴徽章 Monkey Pin",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（专注）</p>\n<hr />\n<p>这枚黄铜小徽章做成猴子爬树的形状。当你启动这枚护符时，使用一个攀爬动作，该检定获得+1物品加值。在这次检定上、并直到你回合结束为止，若你的攀爬运动检定成功，你在攀爬中可以移动全速；若你投出大失败，则改为失败。</p>"
+        },
+        "Crying Angel Pendant": {
+          "name": "泪天使垂饰 Crying Angel Pendant",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">2</span>（专注）</p>\n<hr />\n<p>当你启动这枚雪花石膏垂饰时，使用医疗技能尝试一次急救，该检定获得+1物品加值。如果你成功，而你原本是想稳定伤势，目标恢复1点生命值，失去濒死状态并如常恢复意识；如果你成功，而你原本是想止血，流血随即停止。</p>"
+        },
+        "Jade Cat": {
+          "name": "翡翠猫 Jade Cat",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">F</span>（专注）</p>\n<p><strong>触发</strong> 你坠落，或进行一次用于保持平衡的特技检定</p>\n<p><strong>需求</strong> 你在特技上受训</p>\n<hr />\n<p>这只拇指大小的猫科动物由稀有石料雕成，<em>翡翠猫</em>通常作为垂饰挂在一套盔甲上。启动这只猫之后的1分钟内，你视所有坠落的高度减少20尺，你在保持平衡时不会措手不及，狭窄表面和不平地面对你而言也不算困难地形。</p>"
+        },
+        "Oil of Mending": {
+          "name": "修复油 Oil of Mending",
+          "description": "<p><strong>启动</strong> 1分钟（操作）</p>\n<hr />\n<p>一瓶修复油的外表看起来有无数半透明的螺纹在其中旋转。将这瓶油涂抹在物品上可以对该物品施展一次2环级的 @UUID[Compendium.pf2e.spells-srd.Item.dINQzhqGmIsqGMUY]{修复术} 以修理它。</p>"
+        },
+        "Oil of Potency": {
+          "name": "潜能油 Oil of Potency",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p>\n<hr />\n<p>当你把这种厚重黏稠的油涂到一件武器或一套盔甲上时，该物品立刻获得魔法潜能。如果物品是武器，它暂时变成<em>+1强击武器</em>；如果是盔甲，则暂时变成<em>+1韧性盔甲</em>。效果持续1分钟。</p>"
+        },
+        "Sleep Arrow": {
+          "name": "睡眠箭 Sleep Arrow",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 交互</p>\n<p><em>睡眠箭</em>常常有着深蓝色或黑色的箭杆，而且箭羽格外地蓬松柔软。一支启动的<em>睡眠箭</em>不会造成任何伤害，但被击中的活物需要承受一个 @UUID[Compendium.pf2e.spells-srd.Item.o4lRVTwSxnOOn5vl]{睡眠术} 的效果（DC 17）。</p>\n<p><strong>制作需求</strong> 提供一次<em>睡眠术Sleep</em>施法。</p>"
+        },
+        "Bloodseeker Beak": {
+          "name": "觅血者之针 Bloodseeker Beak",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">F</span>（专注）</p>\n<p><strong>触发</strong> 你用附着的武器命中一个措手不及的生物</p>\n<hr />\n<p>这根中空的长吻针取自声名狼藉的觅血者，针尖上还挂着一缕血。</p>\n<p>当你启动这根吻针时，你在伤害骰上额外造成1d4点精准伤害。如果你对该生物造成了偷袭伤害，你还会额外造成@Damage[1d4[bleed]]。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.5XdkHIUgc6psBxQq]{效果：觅血者之针}</p>"
+        },
+        "Healing Potion (Moderate)": {
+          "name": "中等治疗药水 Healing Potion (Moderate)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p><hr /><p><em>治疗药水</em>是一瓶宝石红色的液体，饮用者的伤口会迅速康复，并带来一阵刺痛。当你喝下<em>治疗药水</em>后，你恢复@Damage[(3d8+10)[healing]]生命值。</p>"
+        },
+        "Fearsome": {
+          "name": "畏怖 Fearsome",
+          "description": "<p>当你使用这把武器造成重击时，目标陷入@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1}。</p>"
+        },
+        "Beacon Shot": {
+          "name": "信标箭矢 Beacon Shot",
+          "description": "<p><strong>弹药</strong> 箭，矢 </p>\n<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p>\n<hr />\n<p><em>信标箭矢</em>的杆上装点着闪闪发亮的宝石微粒。当一支启动的<em>信标箭矢</em>命中了一个目标，它牢牢嵌入目标体内并喷出火星，持续1分钟。如果目标是 @UUID[Compendium.pf2e.conditionitems.Item.zJxUflt9np0q4yML]{隐形 Invisible}的，他在本来不能看到他的生物眼中变成了@UUID[Compendium.pf2e.conditionitems.Item.iU0fEDdBp3rXpTMC]。如果目标处于@UUID[Compendium.pf2e.conditionitems.Item.DmAIPqOBomZ7H95W]状态，火星也能抵消掉该状态。</p>\n<p>生物可以通过一个交互动作，并成功通过一个@Check[type:athletics|dc:20|name:Remove Beacon Shot]检定以移除嵌入体内的箭或矢。</p>"
+        },
+        "Potion of Leaping": {
+          "name": "跳跃药水 Potion of Leaping",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p>\n<hr />\n<p>你喝下这瓶起泡药水之后的1分钟内，只要你进行跳跃，你获得1环级 @UUID[Compendium.pf2e.spells-srd.Item.Q7QQ91vQtyi1Ux36]{跳跃术} 的效果。</p>"
+        },
+        "Recording Rod (Basic)": {
+          "name": "基本型记录棒 Recording Rod (Basic)",
+          "description": "<p>这是一条光滑的金属短棒，可以一只手持握。在它的一端有几个镶嵌的宝石按钮，另一端则有一个小透镜。记录棒很受执法部门和勒索者的欢迎，它允许用户记录并重放犯罪场景，通常设置在隐秘的地方，并且悄无声息地触发，以免引起当事人的怀疑。</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 交互</p>\n<hr />\n<p><strong>效果</strong> 当激活时，金属棒会在1分钟之内记录下它所看到和听到的一切。它的透镜兼具眼睛和耳朵的功能，具有精确的视觉和模糊的听觉。记录可以被多次播放，这些景象和声音通过心灵感应传递给金属棒的持有者。记录棒的记录功能可以由手持它的人手动启动，也可以设定成对特定的刺激做出反应，比如附近有东西运动，或者是特定的触发词，从而自动开始记录。</p>\n<p>对于基本型记录棒来说，已经激活，可以记录1分钟的内容，之后它就失去了记录的能力，但是可以反复播放记录下的场景。</p>"
+        },
+        "Savior Spike": {
+          "name": "救主之钉 Savior Spike",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">F</span>（专注）</p>\n<p><strong>触发</strong> 你尝试抓住边缘，但尚未掷骰</p>\n<hr />\n<p>这枚金字塔形的尖钉固定在盔甲的胸甲上。当你启动尖钉时，它射出一缕力场帮你抓牢，使该检定获得+1物品加值。若你在触发本次启动的检定中投出成功，则改为大成功；若投出大失败，则改为失败。</p>"
+        },
+        "Hunter's Bane": {
+          "name": "猎手之灾 Hunter's Bane",
+          "description": "<p><strong>用法</strong> 附着于盔甲</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">F</span> 想象</p>\n<p><strong>触发</strong> 一个无踪的敌人以一次攻击命中你</p>\n<p><strong>需求</strong> 你在生存上受训</p>\n<p>这枚护符是一圈干枯树叶编成的环。当你启动<em>猎手之灾</em>时，你感知到攻击者的确切位置，使其对你从无踪变为藏匿。如果攻击者躲在铅制物之后，<em>猎手之灾</em>启动失败，就此浪费。</p>"
+        },
+        "Unholy Water": {
+          "name": "邪水 Unholy Water",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 打击</p>\n<hr />\n<p>邪恶神祗的怨念封存在这个瓶子内的水中。你可以将瓶子扔出去进行打击以启动<em>邪水</em>。这是一个简易投掷武器，射程增量是20尺。</p>\n<p><em>邪水</em>造成1d6点邪秽伤害以及1点邪秽溅射伤害。<em>邪水</em>只会伤害具有圣洁特征的生物。</p>"
+        },
+        "Onyx Panther": {
+          "name": "缟玛瑙黑豹 Onyx Panther",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（专注）</p>\n<hr />\n<p>这个小石头是风格化的黑豹形状。当你启动它，尝试一次@UUID[Compendium.pf2e.actionspf2e.Item.VMozDqMMuK5kpoX4]{潜行}动作，并且本次检定有+1物品加值。在你这次潜行和你回合结束前的其他所有潜行中，你能以全速移动（而不是通常的半速）。</p>"
+        },
+        "Shark Tooth Charm": {
+          "name": "鲨齿咒符 Shark Tooth Charm",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（专注）</p>\n<hr />\n<p>这条干海草编成的手环上缀着一排小鲨鱼牙形状的坠饰。当你启动手环时，用特技技能尝试一次@UUID[Compendium.pf2e.actionspf2e.Item.SkZAQRkLLkmBQNB9]{逃脱}，该检定获得+1物品加值。若你投出成功，则改为大成功（若投出大失败，则改为失败）。如果你在对抗擒抱你的生物的特技检定中失败，鲨鱼的牙齿会从你皮肤上短暂钻出，该生物必须以一个自由动作放开你，否则承受@Damage[2d8[piercing]]伤害。</p>"
+        },
+        "Potency Crystal": {
+          "name": "潜能水晶 Potency Crystal",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">F</span>（专注）</p>\n<p><strong>触发</strong> 你用附着的武器进行一次攻击，但尚未投掷攻击骰</p>\n<hr />\n<p>这颗萤石水晶闪烁着诡异的磷光。当你启动这颗水晶，武器在打击和这回合接下来的剩余的时间内变成一把<em>+1强击武器</em>，在攻击骰上获得+1物品加值，并将伤害骰提升至两个武器伤害骰。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.R5ugeFK3MPwkbv0s]{效果：潜能水晶}</p>"
+        },
+        "Shielding Salve": {
+          "name": "护盾软膏 Shielding Salve",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 交互</p>\n<p>这种闪着微光的膏体具备<em>护盾术</em>的许多特性。当你把它涂抹在一个生物或物体上时，目标在AC上获得+1环境加值，持续1轮。</p>\n<p>在这一轮里，第一次有物理攻击或魔法飞弹命中目标时，药膏会为该次攻击或法术减免5点伤害，随后药膏的效果结束。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.16tOZk4qy329s2aK]{效果：护盾软膏}</p>"
+        },
+        "Vitalizing": {
+          "name": "命源 Vitalizing",
+          "description": "<p>一把<em>命源</em>武器能够产生命能冲击，对不死生物造成额外1d6持续命能伤害。若造成重击，直到你的下回合结束前，该不死生物还会陷入@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 1}。</p>"
+        },
+        "Potion of Fire Retaliation (Lesser)": {
+          "name": "次等火焰报复药水 Potion of Fire Retaliation (Lesser)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（操作）</p><hr /><p>报复药水有四种类别：酸蚀、寒冷、电击和火焰。每种药水的内部都显现了对应能量的朦胧现象。喝下报复药水后的一分钟内，你散发出对应能量的微弱灵光，且接触到你的生物（例如对你进行了近战无武装攻击，或对你使用了射程为接触的法术）会承受对应能量的伤害。中等、高等和上等版本的报复药水也能伤害到使用近战武器打击你的邻接生物。</p>\n<p>灵光造成@Damage[1d4[fire]]伤害。</p>"
+        },
+        "Oil of Revelation": {
+          "name": "显像油 Oil of Revelation",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 交互</p>\n<p>这种明亮的油最初由人类创制，用来帮他们在黑暗中作战。油里悬浮着细小的宝石碎屑，闻起来像刚划着的<em>火柴</em>。</p>\n<p>涂有此油的武器第一次伤到某个生物时，伤口会发光1分钟。如果该生物处于<em>隐形</em>状态，这点光暴露了它的位置，对那些原本看不见它的生物而言，它只是<em>藏匿</em>，而非<em>无踪</em>。这道光也能消除由光照条件造成的<em>隐蔽</em>状态。如果涂油的武器在1小时内没有伤到任何生物，油就会脱落并失去效力。</p>"
+        },
+        "Bronze Bull Pendant": {
+          "name": "青铜牛垂饰 Bronze Bull Pendant",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（专注）</p>\n<hr />\n<p>这条垂饰用粗糙的钢铁制成，上面描绘了一个愤怒公牛的脸。这条垂饰必须附着在胸甲或肩甲处。当你启动这条垂饰，尝试使用运动技能进行一次@UUID[Compendium.pf2e.actionspf2e.Item.7blmbDrQFNfdT731]{推撞}，并且这次检定有+1物品加值，如果你成功，你推撞目标的距离增加到10尺，大成功则增加到20尺。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.Cxa7MdgMCUoMqbKm]{效果：青铜牛垂饰}</p>"
+        },
+        "Potion of Acid Retaliation (Minor)": {
+          "name": "下等酸蚀报复药水 Potion of Acid Retaliation (Minor)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span>（操作）</p><hr /><p>报复药水有四种类别：酸蚀、寒冷、电击和火焰。每种药水的内部都显现了对应能量的朦胧现象。喝下报复药水后的一分钟内，你散发出对应能量的微弱灵光，且接触到你的生物（例如对你进行了近战无武装攻击，或对你使用了射程为接触的法术）会承受对应能量的伤害。中等、高等和上等版本的报复药水也能伤害到使用近战武器打击你的邻接生物。</p>\n<p>灵光造成@Damage[1[acid]]伤害。</p>"
+        },
+        "Feather Step Stone": {
+          "name": "轻羽步宝石 Feather Step Stone",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">F</span>（专注）</p>\n<p><strong>触发</strong> 你行走或快步</p>\n<p><strong>需求</strong> 你的特技受训</p>\n<hr />\n<p>这颗通常切割成凸圆形的宝石是一小块里面困着羽毛或飞虫的琥珀。当你启动这颗宝石后，在你的回合结束前可以无视任何你穿过的困难地形和高等困难地形的效果。</p>"
+        },
+        "Tiger Menuki": {
+          "name": "虎目贯 Tiger Menuki",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">F</span>（专注）</p>\n<p><strong>触发</strong> 你用附着的武器进行一次打击</p>\n<hr />\n<p>这只白锡铸成的老虎盘在你的武器握把上，龇牙咆哮。当你启动这只老虎时，该武器在触发本次启动的打击、以及此后1分钟内的所有打击上，都获得叠劲和横扫特征。</p>"
+        },
+        "Nectar of Purification": {
+          "name": "净化之蜜 Nectar of Purification",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p>\n<hr />\n<p><em>净化之蜜</em>是一种闪闪发光的液体，通常保存在像是用来装酒醋的瓶子里。这种油会对它撒上的任何食物和饮品施展一次1环级的@UUID[Compendium.pf2e.spells-srd.Item.qXTB7Ec9yYh5JPPV]{净化菜肴}。这种花蜜在生效之后就会挥发，食物和饮品的外貌和味道都不会发生改变。</p>"
+        },
+        "Weapon Potency (+1)": {
+          "name": "+1武器潜能 Weapon Potency (+1)",
+          "description": "<p>魔法强化让武器攻击更有效。用该武器攻击的攻击骰获得+1物品加值，该武器可以被蚀刻上1枚性能符文。</p>\n<p>你可以将武器上已蚀刻的<em>武器潜能</em>符文升级为更强的版本，效果也会提升成新符文的数值。你必须有更强符文的配方才能如此做，且升级的价格是两枚符文之间价格的差额。</p>\n<p><strong>制作需求</strong> 手艺技能专家熟练度</p>"
+        },
+        "Feather Token (Holly Bush)": {
+          "description": "<p>每根羽符都像是来自某种奇异禽鸟的一根羽毛。羽毛的杆部用金线刻画了一个简单的奥法符文。启动一根羽符可以让它转化成另一件物品，之后便可以正常使用那件物品。每根羽毛都只能被启动一次，大多数都会永久性地变成描述中的物品。</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 交互</p>\n<p>当这根羽毛被启动，它立刻变成一棵活着的冬青木，占据一个格子。灌木可以提供标准掩蔽。另外，灌木上有2d4颗亮红色的莓果。虽然冬青果通常有毒，但这些莓果里面灌注了有益的魔法。你可以用一个交互动作摘下并食用一颗莓果以恢复1点生命值。一旦从灌木上摘下，这些莓果会在几秒钟之后失去魔法效力，因此如果你在这个交互动作内不食用莓果，它就再也不能治疗你。</p>\n<p>如果在土壤上启动羽毛，这棵植物会继续生长并繁茂（虽然它不会继续提供更多治疗莓果）。如果它在其他地方启动，它会在 [[/r 1d4 #days]]{1d4 天}后枯死。</p>",
+          "name": "羽符（冬青木） Feather Token (Holly Bush)"
+        },
+        "Feather Token (Bird)": {
+          "description": "<p>每根羽符都像是来自某种奇异禽鸟的一根羽毛。羽毛的杆部用金线刻画了一个简单的奥法符文。启动一根羽符可以让它转化成另一件物品，之后便可以正常使用那件物品。每根羽毛都只能被启动一次，大多数都会永久性地变成描述中的物品。</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 交互</p>\n<p>启动后，这根羽符变成一只小麻雀，停留在你的指尖等着为你转发长度1分钟以内的信息，你也需要提供收件人的姓名和大概位置。收件人必须是你曾经见过的人，位置也必须是你曾经到访过的位置。收到信息后，这只鸟会飞走并转发信息，以每小时30英里的速度移动，然后在目标地点搜寻你指示的收件人。如果这只鸟找到了目标，它会移动到目标旁边，并展示你的话语；接着这只鸟就会飞走并消失。如果它在你指示的位置找了10个小时以上都无法找到你的目标，它也会消失。</p>",
+          "name": "羽符（鸟） Feather Token (Bird)"
+        },
+        "Feather Token (Fan)": {
+          "description": "<p>每根羽符都像是来自某种奇异禽鸟的一根羽毛。羽毛的杆部用金线刻画了一个简单的奥法符文。启动一根羽符可以让它转化成另一件物品，之后便可以正常使用那件物品。每根羽毛都只能被启动一次，大多数都会永久性地变成描述中的物品。</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 交互</p>\n<p>你需要朝着一个方向扇动这根羽毛以启动它。如果该方向面对着船帆，羽毛会飘到船帆上并开始持续扇风，这能让船的速度获得+10尺状态加值，持续8小时。如果朝其他方向扇动羽毛，它会施展一次 @UUID[Compendium.pf2e.spells-srd.Item.g8QqHpv2CWDwmIm1]{造风术} (DC 20).</p>",
+          "name": "羽符（扇） Feather Token (Fan)"
+        },
+        "Green Wyrmling Breath Potion": {
+          "name": "绿龙雏龙龙息药水 Green Wyrmling Breath Potion",
+          "description": "<p>这瓶液体中掺有一条绿龙雏龙的血。饮下之后的1小时内，你可以像喷吐武器那样喷出一团毒云。吐出龙息需要一个单动作。该喷吐武器造成@Damage[2d6[poison]|traits:area-damage]伤害，范围是一个@Template[type:cone|distance:15]，区域内的每个生物都必须进行一次@Check[type:fortitude|dc:23|basic:true]豁免。使用喷吐武器之后，你在[[/r 1d4 #rounds]]{1d4轮}内无法再次使用。</p>"
+        },
+        "Wand of Bane (Rank 1)": {
+          "name": "绝望术魔杖（1环） Wand of Bane (Rank 1)",
+          "description": "<p>这根一英尺长的木棒保有一个法术。其样子通常和该法术息息相关。</p>\n<p><strong>启动</strong> 施放法术</p>\n<p><strong>频率</strong> 每日一次，加上过载</p>\n<hr />\n<p><strong>效果</strong> 你以指定环级施放该法术。</p>\n<p><strong>制造需求</strong> 提供一次对应环级的该法术施法。</p>\n<hr />\n<p><em>注意：如需创造某个法术的卷轴或魔杖，将该法术从集合包或集合包浏览器中拖入某个 PC、NPC 或战利品角色的背包即可。</em></p>"
+        },
+        "Wand of Bless (Rank 1)": {
+          "name": "祝福术魔杖（1环） Wand of Bless (Rank 1)",
+          "description": "<p>这根一英尺长的木棒保有一个法术。其样子通常和该法术息息相关。</p>\n<p><strong>启动</strong> 施放法术</p>\n<p><strong>频率</strong> 每日一次，加上过载</p>\n<hr />\n<p><strong>效果</strong> 你以指定环级施放该法术。</p>\n<p><strong>制造需求</strong> 提供一次对应环级的该法术施法。</p>\n<hr />\n<p><em>注意：如需创造某个法术的卷轴或魔杖，将该法术从集合包或集合包浏览器中拖入某个 PC、NPC 或战利品角色的背包即可。</em></p>"
+        },
+        "Wand of Breathe Fire (Rank 1)": {
+          "name": "燃烧之息魔杖（1环） Wand of Breathe Fire (Rank 1)",
+          "description": "<p>这根一英尺长的木棒保有一个法术。其样子通常和该法术息息相关。</p>\n<p><strong>启动</strong> 施放法术</p>\n<p><strong>频率</strong> 每日一次，加上过载</p>\n<hr />\n<p><strong>效果</strong> 你以指定环级施放该法术。</p>\n<p><strong>制造需求</strong> 提供一次对应环级的该法术施法。</p>\n<hr />\n<p><em>注意：如需创造某个法术的卷轴或魔杖，将该法术从集合包或集合包浏览器中拖入某个 PC、NPC 或战利品角色的背包即可。</em></p>"
+        },
+        "Wand of Create Water (Rank 1)": {
+          "name": "造水术魔杖（1环） Wand of Create Water (Rank 1)",
+          "description": "<p>这根一英尺长的木棒保有一个法术。其样子通常和该法术息息相关。</p>\n<p><strong>启动</strong> 施放法术</p>\n<p><strong>频率</strong> 每日一次，加上过载</p>\n<hr />\n<p><strong>效果</strong> 你以指定环级施放该法术。</p>\n<p><strong>制造需求</strong> 提供一次对应环级的该法术施法。</p>\n<hr />\n<p><em>注意：如需创造某个法术的卷轴或魔杖，将该法术从集合包或集合包浏览器中拖入某个 PC、NPC 或战利品角色的背包即可。</em></p>"
+        },
+        "Wand of Detect Alignment (Rank 1)": {
+          "name": "侦测阵营魔杖（1环） Wand of Detect Alignment (Rank 1)",
+          "description": "<p>这根一英尺长的木棒保有一个法术。其样子通常和该法术息息相关。</p>\n<p><strong>启动</strong> 施放法术</p>\n<p><strong>频率</strong> 每日一次，加上过载</p>\n<hr />\n<p><strong>效果</strong> 你以指定环级施放该法术。</p>\n<p><strong>制造需求</strong> 提供一次对应环级的该法术施法。</p>\n<hr />\n<p><em>注意：如需创造某个法术的卷轴或魔杖，将该法术从集合包或集合包浏览器中拖入某个 PC、NPC 或战利品角色的背包即可。</em></p>"
+        },
+        "Wand of Floating Disk (Rank 1)": {
+          "name": "浮碟术魔杖（1环） Wand of Floating Disk (Rank 1)",
+          "description": "<p>这根一英尺长的木棒保有一个法术。其样子通常和该法术息息相关。</p>\n<p><strong>启动</strong> 施放法术</p>\n<p><strong>频率</strong> 每日一次，加上过载</p>\n<hr />\n<p><strong>效果</strong> 你以指定环级施放该法术。</p>\n<p><strong>制造需求</strong> 提供一次对应环级的该法术施法。</p>\n<hr />\n<p><em>注意：如需创造某个法术的卷轴或魔杖，将该法术从集合包或集合包浏览器中拖入某个 PC、NPC 或战利品角色的背包即可。</em></p>"
+        },
+        "Wand of Force Barrage (Rank 1)": {
+          "name": "力场飞弹魔杖（1环） Wand of Force Barrage (Rank 1)",
+          "description": "<p>这根一英尺长的木棒保有一个法术。其样子通常和该法术息息相关。</p>\n<p><strong>启动</strong> 施放法术</p>\n<p><strong>频率</strong> 每日一次，加上过载</p>\n<hr />\n<p><strong>效果</strong> 你以指定环级施放该法术。</p>\n<p><strong>制造需求</strong> 提供一次对应环级的该法术施法。</p>\n<hr />\n<p><em>注意：如需创造某个法术的卷轴或魔杖，将该法术从集合包或集合包浏览器中拖入某个 PC、NPC 或战利品角色的背包即可。</em></p>"
+        },
+        "Wand of Grease (Rank 1)": {
+          "name": "油腻术魔杖（1环） Wand of Grease (Rank 1)",
+          "description": "<p>这根一英尺长的木棒保有一个法术。其样子通常和该法术息息相关。</p>\n<p><strong>启动</strong> 施放法术</p>\n<p><strong>频率</strong> 每日一次，加上过载</p>\n<hr />\n<p><strong>效果</strong> 你以指定环级施放该法术。</p>\n<p><strong>制造需求</strong> 提供一次对应环级的该法术施法。</p>\n<hr />\n<p><em>注意：如需创造某个法术的卷轴或魔杖，将该法术从集合包或集合包浏览器中拖入某个 PC、NPC 或战利品角色的背包即可。</em></p>"
+        },
+        "Wand of Heal (Rank 1)": {
+          "name": "治疗术魔杖（1环） Wand of Heal (Rank 1)",
+          "description": "<p>这根一英尺长的木棒保有一个法术。其样子通常和该法术息息相关。</p>\n<p><strong>启动</strong> 施放法术</p>\n<p><strong>频率</strong> 每日一次，加上过载</p>\n<hr />\n<p><strong>效果</strong> 你以指定环级施放该法术。</p>\n<p><strong>制造需求</strong> 提供一次对应环级的该法术施法。</p>\n<hr />\n<p><em>注意：如需创造某个法术的卷轴或魔杖，将该法术从集合包或集合包浏览器中拖入某个 PC、NPC 或战利品角色的背包即可。</em></p>"
+        },
+        "Wand of Jump (Rank 1)": {
+          "name": "跳跃术魔杖（1环） Wand of Jump (Rank 1)",
+          "description": "<p>这根一英尺长的木棒保有一个法术。其样子通常和该法术息息相关。</p>\n<p><strong>启动</strong> 施放法术</p>\n<p><strong>频率</strong> 每日一次，加上过载</p>\n<hr />\n<p><strong>效果</strong> 你以指定环级施放该法术。</p>\n<p><strong>制造需求</strong> 提供一次对应环级的该法术施法。</p>\n<hr />\n<p><em>注意：如需创造某个法术的卷轴或魔杖，将该法术从集合包或集合包浏览器中拖入某个 PC、NPC 或战利品角色的背包即可。</em></p>"
+        },
+        "Wand of Mystic Armor (Rank 1)": {
+          "name": "法术护甲魔杖（1环） Wand of Mystic Armor (Rank 1)",
+          "description": "<p>这根一英尺长的木棒保有一个法术。其样子通常和该法术息息相关。</p>\n<p><strong>启动</strong> 施放法术</p>\n<p><strong>频率</strong> 每日一次，加上过载</p>\n<hr />\n<p><strong>效果</strong> 你以指定环级施放该法术。</p>\n<p><strong>制造需求</strong> 提供一次对应环级的该法术施法。</p>\n<hr />\n<p><em>注意：如需创造某个法术的卷轴或魔杖，将该法术从集合包或集合包浏览器中拖入某个 PC、NPC 或战利品角色的背包即可。</em></p>"
+        },
+        "Wand of Runic Weapon (Rank 1)": {
+          "name": "符文武器魔杖（1环） Wand of Runic Weapon (Rank 1)",
+          "description": "<p>这根一英尺长的木棒保有一个法术。其样子通常和该法术息息相关。</p>\n<p><strong>启动</strong> 施放法术</p>\n<p><strong>频率</strong> 每日一次，加上过载</p>\n<hr />\n<p><strong>效果</strong> 你以指定环级施放该法术。</p>\n<p><strong>制造需求</strong> 提供一次对应环级的该法术施法。</p>\n<hr />\n<p><em>注意：如需创造某个法术的卷轴或魔杖，将该法术从集合包或集合包浏览器中拖入某个 PC、NPC 或战利品角色的背包即可。</em></p>"
+        },
+        "Wand of Shillelagh (Rank 1)": {
+          "name": "橡棍术魔杖（1环） Wand of Shillelagh (Rank 1)",
+          "description": "<p>这根一英尺长的木棒保有一个法术。其样子通常和该法术息息相关。</p>\n<p><strong>启动</strong> 施放法术</p>\n<p><strong>频率</strong> 每日一次，加上过载</p>\n<hr />\n<p><strong>效果</strong> 你以指定环级施放该法术。</p>\n<p><strong>制造需求</strong> 提供一次对应环级的该法术施法。</p>\n<hr />\n<p><em>注意：如需创造某个法术的卷轴或魔杖，将该法术从集合包或集合包浏览器中拖入某个 PC、NPC 或战利品角色的背包即可。</em></p>"
+        },
+        "Wand of Summon Animal (Rank 1)": {
+          "name": "召唤动物魔杖（1环） Wand of Summon Animal (Rank 1)",
+          "description": "<p>这根一英尺长的木棒保有一个法术。其样子通常和该法术息息相关。</p>\n<p><strong>启动</strong> 施放法术</p>\n<p><strong>频率</strong> 每日一次，加上过载</p>\n<hr />\n<p><strong>效果</strong> 你以指定环级施放该法术。</p>\n<p><strong>制造需求</strong> 提供一次对应环级的该法术施法。</p>\n<hr />\n<p><em>注意：如需创造某个法术的卷轴或魔杖，将该法术从集合包或集合包浏览器中拖入某个 PC、NPC 或战利品角色的背包即可。</em></p>"
+        },
+        "Wand of Tailwind (Rank 1)": {
+          "name": "顺风奔行魔杖（1环） Wand of Tailwind (Rank 1)",
+          "description": "<p>这根一英尺长的木棒保有一个法术。其样子通常和该法术息息相关。</p>\n<p><strong>启动</strong> 施放法术</p>\n<p><strong>频率</strong> 每日一次，加上过载</p>\n<hr />\n<p><strong>效果</strong> 你以指定环级施放该法术。</p>\n<p><strong>制造需求</strong> 提供一次对应环级的该法术施法。</p>\n<hr />\n<p><em>注意：如需创造某个法术的卷轴或魔杖，将该法术从集合包或集合包浏览器中拖入某个 PC、NPC 或战利品角色的背包即可。</em></p>"
+        }
+      },
+      "name": "瓦琳的奇珍异宝 Wrin's Wonders",
+      "tokenName": "瓦琳的奇珍异宝 Wrin's Wonders",
+      "prototypeToken": "瓦琳的奇珍异宝 Wrin's Wonders"
+    },
+    "Crooks Nook": {
+      "items": {
+        "Looter's Lethargy": {
+          "name": "一碰就虚 Looter's Lethargy",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">3</span>（操作）</p><hr /><p>陷阱可能会把许多小偷困住，但是这种被称为“一碰就虚”的毒药能保证小偷无法带着宝藏离开。这种毒药通常被抹在锁、柜子甚至贵重的财物上，它会慢慢削弱触碰者的力量。附近的守卫可以轻松跟着失窃的贵重物品的踪迹来找到虚弱的入侵者。</p>\n<p><strong>豁免检定</strong> @Check[type:fortitude|dc:19]</p>\n<p><strong>潜伏期</strong> 1分钟</p>\n<p><strong>最大持续时间</strong> 1小时</p>\n<p><strong>阶段1</strong> 负载上限减少3（1分钟）</p>\n<p><strong>阶段2</strong>@UUID[Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg]，负载上限减少4（10分钟）</p>\n<p><strong>阶段3</strong> 措手不及，负载上限减少5（10分钟）</p>"
+        },
+        "Cytillesh Oil": {
+          "name": "碧幻油 Cytillesh Oil",
+          "description": "<p>这种粘稠的物质由能窃取心智的碧幻菌蒸馏而成，只是它并不具备篡改记忆的能力。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span> 交互（伤口）</p>\n<p><strong>豁免检定</strong> @Check[type:fortitude|dc:19]</p>\n<p><strong>最大持续时间</strong> 4轮</p>\n<p><strong>阶段1</strong> @Damage[1d10[poison]]伤害（1轮）</p>\n<p><strong>阶段2</strong> @Damage[1d12[poison]]伤害（1轮）</p>\n<p><strong>阶段3</strong> @Damage[2d10[poison]]伤害（1轮）</p>"
+        },
+        "Thieves' Toolkit (Replacement Picks)": {
+          "name": "盗贼工具包-替换开锁器 Thieves' Toolkit (Replacement Picks)",
+          "description": "<p>这些是@UUID[Compendium.pf2e.equipment-srd.Item.zvLyCVD8g2PdHJAc]{盗贼工具包}的替换开锁器。</p>"
+        },
+        "Poisonous Dagger": {
+          "name": "剧毒匕首 Poisonous Dagger",
+          "description": "<p>这把+1强击匕首的刃身上镌有一条蛇的图样。当你用这把匕首的攻击检定大成功时，魔法毒牙自刃上探出，毒害目标，造成@Damage[1d4[persistent,poison]]。</p>"
+        },
+        "Thieves' Toolkit": {
+          "name": "盗贼工具包 Thieves' Toolkit",
+          "description": "<p>你需要一套盗贼工具包，才能用贼活技能@UUID[Compendium.pf2e.actionspf2e.Item.2EE4aF4SZpYf0R6H]{开锁}或@UUID[Compendium.pf2e.actionspf2e.Item.cYdz2grcOcRt4jk6]{解除装置}（某些类型的装置）。</p>\n<p>如果你的盗贼工具包破损，你可以换上与该工具包相配的@UUID[Compendium.pf2e.equipment-srd.Item.Sw7MBLASN3xK4Y44]{替换开锁器}来修好它；这不需要使用修理动作。若你把盗贼工具包穿戴在身上，你可以在使用它的那个动作中一并取出和收回。</p>"
+        },
+        "Violet Venom": {
+          "name": "紫蕈毒液 Violet Venom",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">2</span>（操作）</p><hr /><p>从紫蕈中提取毒素的精细过程导致这种毒液的毒性被稀释了。炼金术士仍在寻找这种剧毒最纯净的版本。</p>\n<p><strong>豁免检定</strong> @Check[fortitude|dc:17]</p>\n<p><strong>潜伏期</strong> 1分钟</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> 1d6毒素伤害和@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 1}（1轮）</p>\n<p><strong>阶段2</strong> 1d6毒素伤害和@UUID[Compendium.pf2e.conditionitems.Item.4D2KBtexWXa6oUMR]{流失 1}（1轮）</p>\n<p><strong>阶段3</strong> 2d6毒素伤害和力竭1（1轮）</p>"
+        },
+        "Dagger of Eternal Sleep": {
+          "name": "永恒沉眠匕首 Dagger of Eternal Sleep",
+          "description": "<p>这把锯齿状的小匕首看起来像一个锯齿形佩剑的微缩模型。在激活前，它太过微小而仅有装饰功能，不能被用作武器，这可能使人们把它当作武器状的装饰品而忽视掉。</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 交互</p>\n<hr />\n<p><strong>效果</strong> 你把永恒沉眠匕首转变为+1@UUID[Compendium.pf2e.equipment-srd.Item.qUnDHEXteUQGE8yp]{深化}强击匕首，并用这把匕首打击一个失去意识的目标。</p>\n<p>如果你不在遭遇中或面临着其他威胁，且你的打击的攻击骰命中，则会造成重击。打击造成的伤害和由重击专攻效应造成的流血并不会唤醒目标，但目标在下次醒来前暂时对这种效应免疫，这意味着更多的永恒沉眠匕首会正常唤醒他。这个匕首在使用后立即粉碎。</p>"
+        },
+        "Spider Venom": {
+          "name": "蜘蛛毒 Spider Venom",
+          "description": "<p>这种毒素会削弱目标的防御能力，帮助蜘蛛捕猎。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span>（操作）</p>\n<p><strong>豁免检定</strong> @Check[type:fortitude|dc:22]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d10[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1}（1轮）</p>\n<p><strong>阶段2</strong> @Damage[1d12[poison]]伤害，@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}和@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 2}（1轮）</p>\n<p><strong>阶段3</strong> @Damage[2d6[poison]]伤害，@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}和@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 3}（1轮）</p>"
+        },
+        "Leadenleg": {
+          "name": "铅髀 Leadenleg",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">2</span>（操作）</p><hr /><p>铅髀一旦注入体内便会沉到四肢末端，使四肢陷入近乎瘫痪的麻痹。</p>\n<p><strong>豁免骰</strong> @Check[type:fortitude|dc:20]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d10[poison]]伤害及全速度-5尺状态减值（1轮）</p>\n<p><strong>阶段2</strong> @Damage[2d6[poison]]伤害及全速度-10尺状态减值（1轮）</p>\n<p><strong>阶段3</strong> @Damage[2d6[poison]]伤害及全速度-20尺状态减值（1轮）</p>"
+        },
+        "Flaying Knife": {
+          "name": "剥皮刀 Flaying Knife",
+          "description": "<p>这把细而长的+1强击@UUID[Compendium.pf2e.equipment-srd.Item.fo6Yhq5mbQXsnZs0]{血光}匕首，其一边的刀口平整而锋利，另一边则是锯齿状。</p>\n<p>它能在命中时切下敌人的一长条肉来，造成@Damage[1d8[bleed]]，而非1d6。只要目标遭受到了由这把刀造成的持续流血伤害，那么在持续流血期间，他对抗疾病的豁免检定有-2状态减值。</p>"
+        },
+        "Giant Centipede Venom": {
+          "name": "巨蜈蚣毒 Giant Centipede Venom",
+          "description": "<p>巨蜈蚣的毒液能够引发多重肌肉僵直。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span>（操作）</p>\n<p><strong>豁免检定</strong> @Check[type:fortitude|dc:17]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d4[poison]]伤害（1轮）</p>\n<p><strong>阶段2</strong> @Damage[1d4[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]（1轮）</p>\n<p><strong>阶段3</strong> @Damage[1d4[poison]]伤害，@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}和@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]（1轮）</p>"
+        },
+        "Black Smear Poison": {
+          "name": "黑涂毒 Black Smear Poison",
+          "description": "<p>许多卡利尼会使用这种用地下真菌制作的让人虚弱的毒素。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">3</span> 交互（伤口）</p>\n<p><strong>豁免检定</strong> @Check[type:fortitude|dc:16]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d6[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 1}（1轮）</p>\n<p><strong>阶段2</strong> 如阶段1</p>\n<p><strong>阶段3</strong> @Damage[1d6[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 2}（1轮）</p>"
+        },
+        "Belladonna": {
+          "name": "颠茄 Belladonna",
+          "description": "<p>颠茄有时候也被称作 \"死亡龙葵\"，它是一种被广泛使用的毒物，通常从类似番茄的植物中提取而出。</p><hr /><p><strong>启动</strong> <span class=\"action-glyph\">1</span> （操作）</p>\n<p><strong>豁免骰</strong> @Check[type:fortitude|dc:19]</p>\n<p><strong>潜伏期</strong> 10分钟</p>\n<p><strong>最大持续时间</strong> 30分钟</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]（10分钟）</p>\n<p><strong>阶段2</strong> @Damage[1d6[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1}（10分钟）</p>\n<p><strong>阶段3</strong> @Damage[1d6[poison]]伤害，@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]和恶心1（1分钟）</p>"
+        },
+        "Spear Frog Poison": {
+          "name": "矛蛙毒 Spear Frog Poison",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">2</span>（操作）</p><hr /><p>这种从有毒的矛蛙的皮肤上收集的毒药能造成你皮疹灼心、四肢无力。每只蛙都能产出足以制成一剂矛蛙毒的毒液。</p>\n<p><strong>豁免检定</strong> @Check[type:fortitude|dc:15]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d4[poison]]伤害（1轮）</p>\n<p><strong>阶段2</strong> @Damage[1d6[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 1}（1轮）</p>"
+        },
+        "Graveroot": {
+          "name": "墓根 Graveroot",
+          "description": "<p>这种从墓根中提取出的白色不透明汁液能让人意识模糊。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span>（操作）</p>\n<p><strong>豁免检定</strong> @Check[type:fortitude|dc:19]</p>\n<p><strong>最大持续时间</strong> 4轮</p>\n<p><strong>阶段1</strong> @Damage[1d8[poison]]伤害（1轮）</p>\n<p><strong>阶段2</strong> @Damage[1d10[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 1}（1轮）</p>\n<p><strong>阶段3</strong> @Damage[2d6[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 2}（1轮）</p>"
+        },
+        "Yellow Musk Poison": {
+          "name": "黄麝香毒 Yellow Musk Poison",
+          "description": "<p>源自于黄麝香匍匐者的花粉粉末能够搅乱心智。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 交互（吸入）</p>\n<p><strong>豁免检定</strong> @Check[type:will|dc:16]</p>\n<p><strong>最大持续时间</strong> 2轮</p>\n<p><strong>阶段1</strong> 被毒云@UUID[Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg]{迷魂}（1轮）</p>\n<p><strong>阶段2</strong> 被毒云迷魂，并且除了移动靠近毒云的源点外无法使用其他动作（1轮）</p>"
+        },
+        "Black Adder Venom": {
+          "name": "黑蝰毒 Black Adder Venom",
+          "description": "<p>蝰蛇毒液是强化武器的一种简单却有效的方式。</p><hr /><p><strong>启动</strong> <span class=\"action-glyph\">2</span>（操作）</p>\n<p><strong>豁免检定</strong> @Check[type:fortitude|dc:18]</p>\n<p><strong>最大持续时间</strong> 3轮</p>\n<p><strong>阶段1</strong> @Damage[1d4[poison]]伤害（1轮）</p>\n<p><strong>阶段2</strong> @Damage[1d6[poison]]伤害（1轮）</p>\n<p><strong>阶段3</strong> @Damage[1d8[poison]]伤害（1轮）</p>"
+        },
+        "Arsenic": {
+          "name": "砒霜 Arsenic",
+          "description": "<p>这种毒物由砷与其他物质混合而成。中毒期间，你无法减轻自身的恶心状态。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p>\n<p><strong>豁免检定</strong> @Check[type:fortitude|dc:18]</p>\n<p><strong>潜伏期</strong> 10分钟</p>\n<p><strong>最大持续时间</strong> 5分钟</p>\n<p><strong>阶段1</strong> @Damage[1d4[poison]]伤害，并陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1}（1分钟）</p>\n<p><strong>阶段2</strong> @Damage[1d6[poison]]伤害，并陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 2}（1分钟）</p>\n<p><strong>阶段3</strong> @Damage[1d8[poison]]伤害，并陷入@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 3}（1分钟）</p>"
+        },
+        "False Death": {
+          "name": "假死毒 False Death",
+          "description": "<p>这种毒药通常用来伪造死亡，能迅速让服下者失去意识，并抑制其生命体征。查看这名失去意识的目标的生物，必须通过一次医疗检定，对抗服毒者的欺骗DC+4，才能判断出目标仍然活着；大成功还能让查看者看出是某种毒素造成了这一效果。假死毒味道极苦（@Check[type:perception|dc:10|traits:action:seek]即可察觉），因此很难骗一个不情愿的生物把它喝下去。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 交互</p>\n<p><strong>豁免检定</strong> @Check[type:fortitude|dc:18]</p>\n<p><strong>潜伏期</strong> 10分钟</p>\n<p><strong>最大持续时间</strong> 5天</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}（1轮）</p>\n<p><strong>阶段2</strong> 失去意识（1小时）</p>\n<p><strong>阶段3</strong> 失去意识（1天）</p>"
+        },
+        "Serpent Dagger": {
+          "name": "毒蛇匕首 Serpent Dagger",
+          "description": "<p>这把锯齿刃的<em>+1强击匕首</em>刀身墨绿，刀柄雕成作势欲袭的蛇头一般。</p>\n<p>当用<em>毒蛇匕首</em>攻击造成重击时，目标需通过@Check[fortitude|dc:19]豁免，否则获得@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1}。</p>\n<p>此外，你也可以制作更有效的毒素提升启动匕首对生物下毒的效果。</p>\n<hr />\n<p><strong>启动—充注毒液</strong> <span class=\"action-glyph\">F</span>（操作）</p>\n<p><strong>频率</strong> 每日一次</p>\n<p><strong>触发</strong> 你使用<em>毒蛇匕首</em>对一名生物造成伤害</p>\n<p><strong>效果</strong> 你使命中的目标受到匕首剧毒的中毒效果。</p>\n<hr />\n<p><strong>匕首剧毒</strong>（毒素）</p>\n<p><strong>豁免检定</strong> @Check[fortitude|dc:21]</p>\n<p><strong>最大持续时间</strong> 4轮</p>\n<p><strong>阶段1</strong> @Damage[1d8[poison]]伤害以及@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 1}</p>"
+        },
+        "Thieves' Toolkit (Infiltrator Picks)": {
+          "name": "专家级盗贼工具包-替换开锁器 Thieves' Toolkit (Infiltrator Picks)",
+          "description": "<p>这些是@UUID[Compendium.pf2e.equipment-srd.Item.6nrCxNQFycUVFOV2]{专家级盗贼工具包 Thieves' Toolkit (Infiltrator)}的替换开锁器。</p>"
+        },
+        "Blue Dragonfly Poison": {
+          "name": "蓝蜻蜓毒 Blue Dragonfly Poison",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 交互</p>\n<p>沼蜍人用蓝蜻蜓酿出一种强效毒素。沼泽先知饮下这种混合物来唤醒自身的神术之力，但它对其他大多数生物只会引发使人衰弱的幻觉。</p>\n<p><strong>豁免检定</strong> @Check[type:fortitude|dc:17]</p>\n<p><strong>潜伏期</strong> 10分钟</p>\n<p><strong>最大持续时间</strong> 30分钟</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.TkIyaNPgTZFBCCuh]{目眩}（10分钟）</p>\n<p><strong>阶段2</strong> 目眩，且@UUID[Compendium.pf2e.conditionitems.Item.TBSHQspnbcqxsmjL]{惊惧 1}（10分钟）</p>\n<p><strong>阶段3</strong> 惊惧1，且@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑}1（1分钟）</p>"
+        },
+        "Lethargy Poison": {
+          "name": "昏睡毒 Lethargy Poison",
+          "description": "<p>昏睡毒常见于打了就跑的战术，用在袭击者想留下活口的时候；下毒的伏击者先行撤退，等毒性发作、受害者昏迷倒地后再返回。再次接触昏睡毒不会让目标进行额外的豁免检定；只有在对抗体内正生效的毒素的豁免检定上失败，才会推进毒发阶段。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span>（操作）</p>\n<p><strong>豁免检定</strong> @Check[type:fortitude|dc:18]</p>\n<p><strong>最大持续时间</strong> 4小时</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 1}（1轮）</p>\n<p><strong>阶段2</strong> @UUID[Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3]{缓慢 1}（1分钟）</p>\n<p><strong>阶段3</strong> @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识}，且无法通过察觉检定醒来（1轮）</p>\n<p><strong>阶段4</strong> @UUID[Compendium.pf2e.conditionitems.Item.fBnFDH2MTzgFijKf]{失去意识}，且无法通过察觉检定醒来（[[/br 1d4 #hours]]{1d4小时}）。</p>"
+        },
+        "Thieves' Toolkit (Infiltrator)": {
+          "name": "专家级盗贼工具包 Thieves' Toolkit (Infiltrator)",
+          "description": "<p>你需要盗贼工具包来使用贼活技能@UUID[Compendium.pf2e.actionspf2e.Item.2EE4aF4SZpYf0R6H]{开锁}或@UUID[Compendium.pf2e.actionspf2e.Item.cYdz2grcOcRt4jk6]{解除装置}（某些类型的）。专家级盗贼工具包为开锁和解除装置的检定增加了+1物品加值。</p>\n<p>如果你的盗贼工具破损，你可以用换上新的适合你工具的@UUID[Compendium.pf2e.equipment-srd.Item.BznmPaRjI4Orb0IH]{替换开锁器}的方式来修理它们。这不需要使用修理动作。若你穿戴着工具包，你可以作为使用它的动作的一部分来取出工具及替换开锁器。</p>"
+        },
+        "Toad Tears": {
+          "name": "蟾蜍泪 Toad Tears",
+          "description": "<p>巨蟾蜍的毒腺可以作为一种特殊的毒药原料被采集，诨名为“蟾蜍泪”（可能是由于采集过程需要从眼睛后面挖出毒腺）。一只巨蟾蜍的毒腺可以提供制造一剂毒药的材料。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">A</span> 交互（摄入）</p>\n<p><strong>豁免检定</strong> @Check[type:fortitude|dc:19]</p>\n<p><strong>潜伏期</strong> 5分钟</p>\n<p><strong>最大持续时间</strong> 30分钟</p>\n<p><strong>阶段1</strong> @UUID[Compendium.pf2e.conditionitems.Item.e1XGnhKNSQIm5IXg]{呆滞 1} (10分钟）</p>\n<p><strong>阶段2</strong> 呆滞1和@UUID[Compendium.pf2e.conditionitems.Item.yblD8fOR1J8rDwEQ]{困惑} (1分钟）</p>"
+        },
+        "Thieves' Tools (Concealable Picks)": {
+          "description": "<p>这是一些 @UUID[Compendium.pf2e.equipment-srd.Item.Ejmv9IHGp9Ad9dgu]{盗贼工具包（隐蔽）Thieves' Tools (Concealable)}的替换品。</p>",
+          "name": "盗贼工具包（隐蔽替换品） Thieves' Tools (Concealable Picks)"
+        },
+        "Thieves' Tools (Concealable)": {
+          "description": "<p>你需要盗贼工具包来使用贼活技能@UUID[Compendium.pf2e.actionspf2e.Item.2EE4aF4SZpYf0R6H]{开锁}或@UUID[Compendium.pf2e.actionspf2e.Item.cYdz2grcOcRt4jk6]{解除装置}。 专家级盗贼工具包提供你在开锁和解除装置的检定+1物品加值。</p>\n<p>小巧的结构和结实的材料使得这套盗贼工具包更容易贴身携带而不被发现。你使用@UUID[Compendium.pf2e.actionspf2e.Item.qVNVSmsgpKFGk9hV]{隐藏物件 Conceal a Object}隐藏这套盗贼工具包时获得+1物品加值</p>\n<p>如果你的盗贼工具损坏了，你可以用换上新的适合你工具的 @UUID[Compendium.pf2e.equipment-srd.Item.TxMFNfkoccirCitP]{开锁器}的方式来修理它们。这不需要使用修复操作。</p>",
+          "name": "盗贼工具包（隐蔽） Thieves' Tools (Concealable)"
+        }
+      },
+      "name": "骗子之角 Crooks Nook",
+      "tokenName": "骗子之角 Crooks Nook",
+      "prototypeToken": "骗子之角 Crooks Nook"
+    },
+    "Stone Ring Pond": {
+      "items": {
+        "Sack": {
+          "name": "袋子 Sack",
+          "description": "<p>一个袋子最多可容纳8B物品。一个容纳2B或更少物品的袋子可以带在身上，通常挂在腰带上。你可以单手携带袋子，但必须用两只手将物品放入和取出。</p>"
+        },
+        "Healing Potion (Greater)": {
+          "name": "高等治疗药水 Healing Potion (Greater)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p><hr /><p><em>治疗药水</em>是一瓶宝石红色的液体，饮用者的伤口会迅速康复，并带来一阵刺痛。当你喝下<em>治疗药水</em>后，你恢复@Damage[(6d8+20)[healing]]点生命值。</p>"
+        },
+        "Religious Symbol (Wooden)": {
+          "name": "木制圣徽 Religious Symbol (Wooden)",
+          "description": "<p>这个木质的小片上印有代表神灵的图画。一些神术施法者，如牧师，可以使用信仰神祇的来使用某些能力并施放一些法术。圣徽可被穿戴在身上（当作胸针或挂在链子上）或手持使用。</p>"
+        },
+        "Arrows": {
+          "name": "箭 Arrows",
+          "description": "<p>这些箭头是弓的弹药。箭杆是木制的。一端是羽毛保持飞行中的平稳，另一端是金属头。</p>"
+        },
+        "Healing Potion (Major)": {
+          "name": "上等治疗药水 Healing Potion (Major)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p><hr /><p><em>治疗药水</em>是一瓶宝石红色的液体，饮用者的伤口会迅速康复，并带来一阵刺痛。当你喝下<em>治疗药水</em>后，你恢复@Damage[(8d8+30)[healing]]点生命值。</p>"
+        },
+        "Studded Leather Armor": {
+          "name": "镶嵌皮甲 Studded Leather Armor",
+          "description": "<p>这种皮甲用金属铆钉或小金属板加固，使皮甲保留大部分的柔韧性的同时得到更有力的保护。</p>"
+        },
+        "Blowgun Darts": {
+          "name": "吹箭镖 Blowgun Darts",
+          "description": "<p>这些薄而轻的飞镖通常是用硬木制成的，用羽毛或毛皮固定。它们通常是空心的，所以可以用来喂毒。</p>"
+        },
+        "Healing Potion (Minor)": {
+          "name": "下等治疗药水 Healing Potion (Minor)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p><hr /><p><em>治疗药水</em>是一瓶宝石红色的液体，饮用者的伤口会迅速康复，并带来一阵刺痛。当你喝下<em>治疗药水</em>后，你恢复@Damage[1d8[healing]]生命值。</p>"
+        },
+        "Dragon Turtle Scale": {
+          "name": "龙龟鳞 Dragon Turtle Scale",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（专注）</p>\n<p><strong>需求</strong> 你在运动的熟练度至少为受训</p>\n<hr />\n<p>这片闪烁着的绿色鳞片通常会挂在金色的扣环或吊链上。</p>\n<p>当你启动这片鳞片，在1分钟内你能获得等同于陆地速度一半的游泳速度。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.4tepFOJLhZSelPoa]{效果：龙龟鳞}</p>"
+        },
+        "Hunter's Bane": {
+          "name": "猎手之灾 Hunter's Bane",
+          "description": "<p><strong>用法</strong> 附着于盔甲</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">F</span> 想象</p>\n<p><strong>触发</strong> 一个无踪的敌人以一次攻击命中你</p>\n<p><strong>需求</strong> 你在生存上受训</p>\n<p>这枚护符是一圈干枯树叶编成的环。当你启动<em>猎手之灾</em>时，你感知到攻击者的确切位置，使其对你从无踪变为藏匿。如果攻击者躲在铅制物之后，<em>猎手之灾</em>启动失败，就此浪费。</p>"
+        },
+        "Sling": {
+          "name": "投石索 Sling",
+          "description": "<p>仅仅是一块皮革附着在一根带子上，投石索可以在远程用来投掷光滑的石头或者投石索弹丸。</p>"
+        },
+        "Club": {
+          "name": "棍棒 Club",
+          "description": "<p>这是一块结实的木头，打磨形状用来敲击敌人。棍棒可以是复杂雕刻的武术作品，也可以像树枝或木块一样简单。</p>"
+        },
+        "Mace": {
+          "name": "硬头锤 Mace",
+          "description": "<p>有着结实的柄和沉重的金属头，硬头锤坚固到可以让使用者造成强力打击给盔甲留下凹痕。</p>"
+        },
+        "Fishing Tackle": {
+          "name": "渔具 Fishing Tackle",
+          "description": "<p>该套工具包括可折叠的钓鱼竿、鱼钩、钓线、鱼饵和渔网。</p>"
+        },
+        "Antivenom Potion": {
+          "name": "抗毒药水 Antivenom Potion",
+          "description": "<p>这瓶浑浊的白色液体有助于抵挡毒素的侵袭。当你喝下抗毒药水时，你可以立即尝试一次@Check[type:flat|dc:10]检定来中止你目前所承受的任何持续毒素伤害。此外，在你喝下药水后的一分钟内，你在对抗持续毒素效果时，强韧豁免有+1加值。</p>"
+        },
+        "Hide Armor": {
+          "name": "革甲 Hide Armor",
+          "description": "<p>这种护甲混合了毛皮、结实的皮革，有时还有成型的熟皮，它的多层皮革提供了保护，尽管它的笨重会降低穿戴者的速度和活动性。</p>"
+        },
+        "Spider Venom": {
+          "name": "蜘蛛毒 Spider Venom",
+          "description": "<p>这种毒素会削弱目标的防御能力，帮助蜘蛛捕猎。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span>（操作）</p>\n<p><strong>豁免检定</strong> @Check[type:fortitude|dc:22]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d10[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 1}（1轮）</p>\n<p><strong>阶段2</strong> @Damage[1d12[poison]]伤害，@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}和@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 2}（1轮）</p>\n<p><strong>阶段3</strong> @Damage[2d6[poison]]伤害，@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 2}和@UUID[Compendium.pf2e.conditionitems.Item.fesd1n5eVhpCSS18]{恶心 3}（1轮）</p>"
+        },
+        "Healing Potion (Lesser)": {
+          "name": "次等治疗药水 Healing Potion (Lesser)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p><hr /><p><em>治疗药水</em>是一瓶宝石红色的液体，饮用者的伤口会迅速康复，并带来一阵刺痛。当你喝下<em>治疗药水</em>后，你恢复@Damage[(2d8+5)[healing]]生命值。</p>"
+        },
+        "Musical Instrument (Virtuoso handheld)": {
+          "name": "专家级手持乐器 Musical Instrument (Virtuoso handheld)",
+          "description": "<p>手持乐器包括风笛、小套编钟、小鼓、小提琴和弦乐器、长笛和竖笛、小竖琴、琵琶、小号和类似大小的乐器。GM可能会裁定一个特别大的手持乐器（如大号）具有更大的负载。诸如大鼓、全套编钟和键盘乐器之类的大型乐器不太方便携带，并且通常在演奏时需要静止。</p>\n<p>使用制作更精良的专家级乐器为表演检定提供+1物品加值。</p>"
+        },
+        "Crossbow": {
+          "name": "弩 Crossbow",
+          "description": "<p>这种远程武器有一个类似弓形的组件，安装在一个被称为舵柄的框架上。舵柄有一个将弓弦锁定在适当位置的机件，并与一个释放张力并发射矢的扳机相连。</p>"
+        },
+        "Sling Bullets": {
+          "name": "弹丸 Sling Bullets",
+          "description": "<p>这些小金属球，通常是铁球或铅球，设计作为投石索的弹药。</p>"
+        },
+        "Healing Potion (Moderate)": {
+          "name": "中等治疗药水 Healing Potion (Moderate)",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">A</span>（操作）</p><hr /><p><em>治疗药水</em>是一瓶宝石红色的液体，饮用者的伤口会迅速康复，并带来一阵刺痛。当你喝下<em>治疗药水</em>后，你恢复@Damage[(3d8+10)[healing]]生命值。</p>"
+        },
+        "Repair Toolkit": {
+          "name": "修理工具包 Repair Toolkit",
+          "description": "<p>修理工具包可让你在旅行时进行简单的维修。它包含便携式铁砧、钳子、木工工具、磨刀石和用于调理皮革和木材的油。你可以用修理工具包使用手艺技能修理物品。如果你穿戴着修理工具包，你可以抽出和替换一个穿戴在身上的修理工具包，作为使用动作的一部分。</p>"
+        },
+        "Wooden Shield": {
+          "name": "木盾 Wooden Shield",
+          "description": "<p>虽然它们的形状和尺寸各不相同，但木盾提供的保护来自其材料的坚固性。虽然木盾比钢盾便宜，但它们更容易破损。</p><table class=\"pf2e remaster\"><thead><tr><th>硬度</th><th>HP</th><th>BT</th></tr></thead><tbody><tr><td>3</td><td>12</td><td>6</td></tr></tbody></table>"
+        },
+        "Longbow": {
+          "name": "长弓 Longbow",
+          "description": "<p>这种5尺的长弓，通常由榆木、山胡桃木或紫杉木制成，具有很强的弹力能以巨大的力量和极远的距离发射箭支。长弓必须用双手射击，并且在骑乘时不能使用。</p>"
+        },
+        "Bedroll": {
+          "name": "铺盖卷 Bedroll",
+          "description": "<p>一床卷起来的被子</p>"
+        },
+        "Alchemist's Toolkit": {
+          "name": "炼金工具包 Alchemist's Toolkit",
+          "description": "<p>这组方便携带的安瓿和化学物能用来进行简单的炼金工作。如果你穿戴着炼金工具包，你可以作为使用它的动作的一部分将它拿出来。</p>"
+        },
+        "Blowgun": {
+          "name": "吹箭 Blowgun",
+          "description": "<p>这条又长又窄的管子用来射击吹箭镖，仅仅需要强力呼气的力量。</p>"
+        },
+        "Shortbow": {
+          "name": "短弓 Shortbow",
+          "description": "<p>这种小型弓由单独一块木头做成，受到散兵和骑兵的青睐。</p>"
+        },
+        "Heavy Crossbow": {
+          "name": "重弩 Heavy Crossbow",
+          "description": "<p>这种大型弩比普通弩更难装填也更坚固，也有更强的冲击力。</p>"
+        },
+        "Spear": {
+          "name": "矛 Spear",
+          "description": "<p>长长的金属柄顶端有金属刺，矛可以作为近战武器单手使用或者用来投掷。</p>"
+        },
+        "Climbing Kit (Extreme)": {
+          "name": "专家级攀爬工具包 Climbing Kit (Extreme)",
+          "description": "<p>这个工具包包括50尺的麻绳，一些滑轮，一打岩钉，一把锤子，一个抓钩和一套冰爪。攀爬工具包可让你将自己固定在攀爬的墙上，以正常速度的一半移动（最小5尺），还可以让你在避免坠落的检定中大失败时进行一次@Check[type:flat|dc:5]检定。</p>\n<p>在使用专家级攀爬工具包时，你可以在运动检定上获得+1物品加值。一个工具包只够一位攀爬者的使用的材料；每个攀爬者都需要有自己的工具包。若你穿戴着攀爬工具包，你可以作为攀爬动作的一部分来取出工具。</p>"
+        },
+        "Chalk": {
+          "name": "粉笔 Chalk"
+        },
+        "Rhino Hide": {
+          "name": "犀牛革甲 Rhino Hide",
+          "description": "<p>这件<em>+1韧性</em>革甲用犀牛皮制成。它的护甲检定减值为-1而非-3。</p>\n<p>当你穿戴该护甲使用突袭冲锋（Sunden Charge）专长时，你该次打击额外造成1d8点伤害。</p>\n<p><strong>制作需求</strong> 原材料中必须包含320gp的犀牛皮革（一种常见材料）。</p>"
+        },
+        "Buckler": {
+          "name": "小圆盾 Buckler",
+          "description": "<p>这面小盾牌是决斗者和快速的轻甲战斗者的最爱。它通常由刚制成，绑在你的前臂上。你可以用小圆盾@UUID[Compendium.pf2e.actionspf2e.Item.xjGwis0uaC2305pm]，只要那只手没有被占用，或者拿着轻巧的非武器物品。</p><table class=\"pf2e remaster\"><thead><tr><th>硬度</th><th>HP</th><th>BT</th></tr></thead><tbody><tr><td>3</td><td>6</td><td>3</td></tr></tbody></table>"
+        },
+        "Candle": {
+          "name": "蜡烛 Candle",
+          "description": "<p>点燃的蜡烛在10尺半径范围内散发出昏暗的光芒，持续8小时。</p>"
+        },
+        "Leather Armor": {
+          "name": "皮甲 Leather Armor",
+          "description": "<p>这种护甲混合了柔韧的生皮和成型的熟皮，在最大限度的灵活下提供了保护。</p>"
+        },
+        "Rope of Climbing (Lesser)": {
+          "name": "次等攀爬绳 Rope of Climbing (Lesser)",
+          "description": "<p>这根丝绳长50尺，能够承载3,000磅的重量。如果绳子被切断，只有较长的那部分还能维持魔力。</p>\n<p><strong>启动</strong> <span class=\"action-glyph\">1</span> 交互</p>\n<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 你握着绳子的一端并指定一个目的地。绳子会在1分钟内活化，每轮移动10尺直到它到达目的地或长度耗尽。绳子可以穿过任何不造成伤害的水平表面或垂直表面，但无法在没有支撑表面的情况下竖直上升。在绳子活化期间的任意时点，你可以使用一个交互动作来扭动绳子，给它下达以下命令：停在原地、稳固地系在最近可用的物体上、从一个物体上解开、或自行打结或解开绳结。</p>"
+        },
+        "Hunter's Brooch": {
+          "name": "猎人胸针 Hunter's Brooch",
+          "description": "<p>当你穿戴这枚艾拉斯蒂尔的银色圣徽时，你可以将@UUID[Compendium.pf2e.spells-srd.Item.kcelf6IHl3L9VXXg]{命能袭}戏法作为内在神术法术施放。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">3</span> 命令，交互</p>\n<p><strong>频率</strong> 每日一次</p>\n<hr />\n<p><strong>效果</strong> 你将你所持握的武器触碰圣徽，恳求艾拉斯蒂尔的帮助。在对抗亡灵时，该武器获得夺命d12特征。该祝福持续1分钟，直到你以该武器造成重击，或直到你不再持握该武器为止。</p>\n<p>@UUID[Compendium.pf2e.equipment-effects.Item.COVEnItnyRmx42EY]{效果：猎人胸针}</p>"
+        },
+        "Hand Crossbow": {
+          "name": "手弩 Hand Crossbow",
+          "description": "<p>有时被游荡者和暴徒称为小巷弓，这种小型弩时常用来发射喂毒的小型矢。因为足够小，可以单手使用，但装填依然需要双手。</p>"
+        },
+        "Padded Armor": {
+          "name": "布甲 Padded Armor",
+          "description": "<p>这种护甲只是一件厚重的，有衬芯的衣服，但因为很便宜，也时常会被用到。布甲比其他类型的护甲更容易被损害和破坏。重型护甲的价格中包含了一件内衬布甲，但将它穿在重型护甲下时会失去舒适特征。如果你的重型护甲被破坏或者你不穿全套重型护甲时，你可以只穿那件内衬布甲睡觉。这种方法允许你保有任何附着在重型护甲上的符文的力量，没有人可以不用内衬布甲就穿着你的重甲。</p>"
+        },
+        "Religious Symbol (Silver)": {
+          "name": "银制圣徽 Religious Symbol (Silver)",
+          "description": "<p>这个银质的小片上印有代表神灵的图画。一些神术施法者，如牧师，可以使用信仰神祇的来使用某些能力并施放一些法术。圣徽可被穿戴在身上（当作胸针或挂在链子上）或手持使用。</p>"
+        },
+        "Climbing Kit": {
+          "name": "攀爬工具包 Climbing Kit",
+          "description": "<p>这个工具包包括50尺的麻绳，一些滑轮，一打岩钉，一把锤子，一个抓钩和一套冰爪。攀爬工具包可让你将自己固定在攀爬的墙上，以正常速度的一半移动（最小5尺），还可以让你在避免坠落的检定中大失败时进行一次@Check[type:flat|dc:5]检定。一个工具包只够一位攀爬者的使用的材料；每个攀爬者都需要有自己的工具包。若你穿戴着攀爬工具包，你可以作为攀爬动作的一部分来取出工具。</p>"
+        },
+        "Gold Pieces": {
+          "name": "金币 Gold Pieces"
+        },
+        "Musical Instrument (Handheld)": {
+          "name": "手持乐器 Musical Instrument (Handheld)",
+          "description": "<p>手持乐器包括风笛、小套编钟、小鼓、小提琴和弦乐器、长笛和竖笛、小竖琴、琵琶、小号和类似大小的乐器。GM可能会裁定一个特别大的手持乐器（如大号）具有更大的负载。诸如大鼓、全套编钟和键盘乐器之类的大型乐器不太方便携带，并且通常在演奏时需要静止。</p>"
+        },
+        "Rope": {
+          "name": "绳索 Rope",
+          "description": "<p>50尺长的麻绳</p>"
+        },
+        "Tent (Pup)": {
+          "name": "小型帐篷 Tent (Pup)"
+        },
+        "Tent (Four-Person)": {
+          "name": "四人帐篷 Tent (Four-Person)"
+        },
+        "Scale Mail": {
+          "name": "鳞甲 Scale Mail",
+          "description": "<p>鳞甲由许多缝制在加固皮背衬上的金属鳞片组成，通常以长衫的形式保护你的躯干、臂和腿。</p>"
+        },
+        "Greatclub": {
+          "name": "巨棒 Greatclub",
+          "description": "<p>有些巨棒有复杂的雕刻，而另一些就是粗壮的树枝。这把巨大的棍棒太重了，单手无法使用。</p>"
+        },
+        "Hunter's Bow": {
+          "name": "猎人短弓 Hunter's Bow",
+          "description": "<p>隐秘的猎人和游荡者可以使用这把+1魔法短弓从暗处发起攻击。如果你使用此弓攻击无法看到你的目标并造成重击，则该目标会受到额外的1d6伤害。</p>"
+        },
+        "Black Smear Poison": {
+          "name": "黑涂毒 Black Smear Poison",
+          "description": "<p>许多卡利尼会使用这种用地下真菌制作的让人虚弱的毒素。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">3</span> 交互（伤口）</p>\n<p><strong>豁免检定</strong> @Check[type:fortitude|dc:16]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d6[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 1}（1轮）</p>\n<p><strong>阶段2</strong> 如阶段1</p>\n<p><strong>阶段3</strong> @Damage[1d6[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 2}（1轮）</p>"
+        },
+        "Longspear": {
+          "name": "长矛 Longspear",
+          "description": "<p>这种很长的矛，有时被称为长矛（Pike），纯粹是用来刺戳而不是投掷的。许多士兵和城市守卫用来控制人群和防御冲锋的敌人，这种武器必须用双手挥舞。</p>"
+        },
+        "Sickle": {
+          "name": "镰刀 Sickle",
+          "description": "<p>最初是用来收割谷物的农具，这种单手武器有一个短木柄，顶端是弯曲的刀刃，有时两面都开封。</p>"
+        },
+        "Snare Kit": {
+          "name": "陷阱工具包 Snare Kit",
+          "description": "<p>该工具包包含用于创建陷阱的工具和材料。陷阱工具包允许你使用手艺技能制作陷阱。</p>"
+        },
+        "Giant Centipede Venom": {
+          "name": "巨蜈蚣毒 Giant Centipede Venom",
+          "description": "<p>巨蜈蚣的毒液能够引发多重肌肉僵直。</p>\n<hr />\n<p><strong>启动</strong> <span class=\"action-glyph\">2</span>（操作）</p>\n<p><strong>豁免检定</strong> @Check[type:fortitude|dc:17]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d4[poison]]伤害（1轮）</p>\n<p><strong>阶段2</strong> @Damage[1d4[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]（1轮）</p>\n<p><strong>阶段3</strong> @Damage[1d4[poison]]伤害，@UUID[Compendium.pf2e.conditionitems.Item.i3OJZU2nk64Df3xm]{笨拙 1}和@UUID[Compendium.pf2e.conditionitems.Item.HL2l2VRSaQHu9lUw]（1轮）</p>"
+        },
+        "Staff of Healing": {
+          "name": "治疗法杖 Staff of Healing",
+          "description": "<p>用光洁的白木制作，这根法杖两段各有一个金色十字架，上面装饰有许多红宝石。当你使用自己的法术位或法杖充能施放<em>治疗术</em>时，你将<em>治疗法杖</em>的+1物品加值添加到治疗术恢复的HP上。</p><hr /><p><strong>启动</strong> 施法</p>\n<p><strong>效果</strong> 你从法杖中花费一定数量的充能次数以从其列表中施展一个法术。</p><ul><li><strong>Cantrip</strong> @UUID[Compendium.pf2e.spells-srd.Item.SnjhtQYexDtNDdEg]</li><li><strong>1st</strong> @UUID[Compendium.pf2e.spells-srd.Item.rfZpqmj0AIIdkVIs]</li></ul><hr /><p><strong>制作需求</strong> 为所列的所有法术提供一次相应环级的施法。</p>"
+        },
+        "Spear Frog Poison": {
+          "name": "矛蛙毒 Spear Frog Poison",
+          "description": "<p><strong>启动</strong> <span class=\"action-glyph\">2</span>（操作）</p><hr /><p>这种从有毒的矛蛙的皮肤上收集的毒药能造成你皮疹灼心、四肢无力。每只蛙都能产出足以制成一剂矛蛙毒的毒液。</p>\n<p><strong>豁免检定</strong> @Check[type:fortitude|dc:15]</p>\n<p><strong>最大持续时间</strong> 6轮</p>\n<p><strong>阶段1</strong> @Damage[1d4[poison]]伤害（1轮）</p>\n<p><strong>阶段2</strong> @Damage[1d6[poison]]伤害和@UUID[Compendium.pf2e.conditionitems.Item.MIRkyAjyBeXivMa7]{力竭 1}（1轮）</p>"
+        },
+        "Oil (1 pint)": {
+          "description": "<p>你可以用油来为提灯加油，但你也可以点燃一品脱油然后把它扔出去。你必须首先花费一个【交互动作】来准备油，然后用另一个动作进行远程接触攻击扔出它。如果你命中目标，它会溅在这个生物上或者你所瞄准的一个5尺方格。你必须成功进行@Check[type:flat|dc:10]检定才能使油在命中时成功点燃。如果油点燃，目标会受到@Damage[1d6[fire]]伤害。</p>",
+          "name": "油（1品脱） Oil (1 pint)"
+        },
+        "Scroll of Sudden Bolt (Rank 2)": {
+          "name": "骤击雷矢卷轴（2环） Scroll of Sudden Bolt (Rank 2)",
+          "description": "<p>从卷轴施法要求你用一只手持握卷轴，并以一次施放法术活动来启动它，花费该法术正常所需的动作数。</p>\n<p>该法术必须出现在你的法术表中。因为是你在施法，使用你的法术攻击骰和法术DC。该法术还会获得与你的魔法根源相对应的特征（奥术、神术、异能或原能）。</p>\n<p>所有实体上的花费都在卷轴被创造时就已提供，因此你从卷轴施法时无需再次提供。如果该法术需要一件器材，你必须拥有该器材才能从卷轴施展它。</p>\n<hr />\n<p><em>备注：如需创造某个特定法术的卷轴或魔杖，将该法术从合集包或合集包浏览器中拖入某个PC、NPC或战利品角色的背包即可。</em></p>"
+        }
+      },
+      "name": "石环池塘 Stone Ring Pond",
+      "tokenName": "石环池塘 Stone Ring Pond",
+      "prototypeToken": "石环池塘 Stone Ring Pond"
+    }
+  }
+}

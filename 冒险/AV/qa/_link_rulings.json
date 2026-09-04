@@ -1,0 +1,5 @@
+{
+  "_comment": "Dead @UUID targets that cannot be recovered from the packs, decided by hand. Keyed by the exact broken target. See repair_dead_links.py.",
+  "Actor.8xX9yeGs7iCSoQ7m.Item.RpJ9AbFpL8ZWsJSX": "Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3",
+  "_why_slowed": "Both segments are gone from every pack and the link is dead in the English too. The label is 缓慢 1 / Slowed 1, and every other Slowed reference in this corpus points at the system's condition item xYTAsEpcJE1Ccni3 - which is also a more durable target than a world-scoped actor item."
+}

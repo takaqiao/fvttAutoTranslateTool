@@ -14,6 +14,8 @@ Checks, in the order a defect would be introduced:
   markup     enricher/UUID bracket bodies contain no CJK (a translated id = dead link)
   bilingual  prose carries no appended English block; name leaves keep `中文 English`
   names      one English name -> one Chinese rendering
+  coverage   no prose leaf is mostly English while holding a token bit of Chinese
+  links      every world-scoped @UUID target still exists in the packs
   terms      no known variant survives (the rules in _terms.json are idempotent)
   patches    every entry in _path_patches.json is satisfied
 
@@ -104,9 +106,23 @@ def machine_cjk(body):
     return False
 
 
-def homograph_exemptions():
+LATIN = re.compile(r"[A-Za-z]")
+# A leaf can hold thousands of English characters and two stray Chinese ones - a failed
+# automated pass leaves exactly that - and every presence-based test calls it translated.
+# Ratio is the honest measure. Credits and licence blocks are excused by name, not by luck.
+MIN_CJK_RATIO = 0.45
+MIN_LATIN_FOR_RATIO = 200
+
+
+def cjk_ratio(visible_text):
+    zh = len(CJK.findall(visible_text))
+    la = len(LATIN.findall(visible_text))
+    return (zh / (zh + la)) if (zh + la) else 1.0
+
+
+def homograph_exemptions(criteria_dir=None):
     """English names deliberately rendered two ways, each recorded with its reason."""
-    path = HERE / "_path_patches.json"
+    path = (criteria_dir or HERE) / "_path_patches.json"
     if not path.exists():
         return set()
     raw = json.loads(path.read_text(encoding="utf-8"))
@@ -161,6 +177,10 @@ def main(argv=None):
     parser.add_argument("--keys", type=Path, default=REPORTS / "pack-keys.json")
     parser.add_argument("--modules", type=Path,
                         default=Path(r"C:\Users\Taka\AppData\Local\FoundryVTT\Data\modules"))
+    parser.add_argument("--criteria-dir", type=Path, default=HERE,
+                        help="where this project keeps _terms.json / EXCLUSIONS.*.json / "
+                             "_path_patches.json. Defaults to the toolkit's own directory, "
+                             "which is right for the AV family and wrong for anything else.")
     parser.add_argument("--skip", action="append", default=[])
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args(argv)
@@ -183,7 +203,7 @@ def main(argv=None):
     # ---- binding -----------------------------------------------------------
     if "binding" not in args.skip:
         code, out = run([str(HERE / "scan_pack_binding.py"), "--keys", str(args.keys),
-                         "--dir", str(args.cn_dir), "--exclusions", str(HERE / "EXCLUSIONS.binding.json"),
+                         "--dir", str(args.cn_dir), "--exclusions", str(args.criteria_dir / "EXCLUSIONS.binding.json"),
                          "--quiet-unbound", "--report", str(REPORTS / "gate_binding.json")])
         fails = [ln for ln in out.splitlines() if ln.startswith("[FAIL]")]
         passes = [ln for ln in out.splitlines() if ln.startswith("[PASS]")]
@@ -193,9 +213,9 @@ def main(argv=None):
                 print("        " + ln)
 
     # ---- leaf-level checks (one pass over every file) -----------------------
-    html_bad, markup_bad, biling_bad = [], [], []
+    html_bad, markup_bad, biling_bad, thin = [], [], [], []
     renderings = {}
-    excused_path = HERE / "EXCLUSIONS.bilingual.json"
+    excused_path = args.criteria_dir / "EXCLUSIONS.bilingual.json"
     excused_leaves = set()
     if excused_path.exists():
         excused_leaves = {row["path"] for row in
@@ -215,6 +235,12 @@ def main(argv=None):
                     markup_bad.append(f"{cn_path.name}:{'.'.join(path[-3:])}: {body[:50]}")
             if is_prose(path, key) and CJK.search(value):
                 visible = TAG.sub(" ", BRACKET.sub(" ", value))
+                full = f"{cn_path.name}:{'.'.join(path[1:])}"
+                if (len(LATIN.findall(visible)) >= MIN_LATIN_FOR_RATIO
+                        and cjk_ratio(visible) < MIN_CJK_RATIO
+                        and full not in excused_leaves):
+                    thin.append(f"{cn_path.name}:{'.'.join(path[-3:])} "
+                                f"({cjk_ratio(visible):.0%} CJK)")
                 if ENGLISH_RUN.search(visible):
                     full = f"{cn_path.name}:{'.'.join(path[1:])}"
                     if full in excused_leaves:
@@ -232,8 +258,14 @@ def main(argv=None):
     record("bilingual", not biling_bad,
            f"{len(biling_bad)} prose leaves with an English run"
            + (f"  [excused {excused_count}: credits/OGL]" if excused_count else ""))
+    record("coverage", not thin,
+           f"{len(thin)} prose leaves are mostly English despite containing Chinese")
+    if thin and args.verbose:
+        for row in thin[:10]:
+            print(f"        {row}")
+
     conflicts = {en: c for en, c in renderings.items() if len(c) > 1
-                 and en not in homograph_exemptions()}
+                 and en not in homograph_exemptions(args.criteria_dir)}
     record("names", not conflicts, f"{len(conflicts)} English names with >1 Chinese rendering")
 
     for label, rows in (("html", html_bad), ("markup", markup_bad),
@@ -245,16 +277,28 @@ def main(argv=None):
         for en, c in list(conflicts.items())[:10]:
             print(f"        names: {en} -> {c}")
 
+    # ---- dead links --------------------------------------------------------
+    if "links" not in args.skip and args.keys.exists():
+        code, out = run([str(HERE / "repair_dead_links.py"), "--cn-dir", str(args.cn_dir),
+                         "--en-dir", str(AV / "工作区" / "en"), "--keys", str(args.keys),
+                         "--rulings", str(args.criteria_dir / "_link_rulings.json"),
+                         "--report", str(REPORTS / "gate_links.json")])
+        m = re.search(r"DEAD LINKS REMAINING:\s*(-?\d+)", out)
+        broken = int(m.group(1)) if m else -1
+        record("links", broken == 0,
+               f"{broken} world-scoped @UUID targets do not exist"
+               + ("  (run repair_dead_links.py --write)" if broken else ""))
+
     # ---- terms are idempotent ---------------------------------------------
     if "terms" not in args.skip:
-        code, out = run([str(HERE / "normalize_terms.py"), "--terms", str(HERE / "_terms.json"),
+        code, out = run([str(HERE / "normalize_terms.py"), "--terms", str(args.criteria_dir / "_terms.json"),
                          "--target", str(args.cn_dir)])
         m = re.search(r"total replacements:\s*(\d+)", out)
         n = int(m.group(1)) if m else -1
         record("terms", n == 0, f"{n} variants would still be replaced")
 
     # ---- path patches all satisfied ---------------------------------------
-    patches = HERE / "_path_patches.json"
+    patches = args.criteria_dir / "_path_patches.json"
     if patches.exists() and "patches" not in args.skip:
         code, out = run([str(HERE / "apply_path_patches.py"), "--cn-dir", str(args.cn_dir),
                          "--patches", str(patches)])

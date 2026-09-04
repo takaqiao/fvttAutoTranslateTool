@@ -147,6 +147,11 @@ def split_tagseq(cn: str, en: str, tail_ratio: float):
         return None, "no-room"
     if scn[k:] != sen:
         return None, "seq-mismatch"
+    if k >= len(scn):
+        # The English carries no tags at all, so `scn[k:] == sen` is the empty list matching
+        # the empty list - a vacuous pass. There is no k-th tag to cut at; the appended
+        # English is plain text and one of the other strategies has to find it.
+        return None, "no-tag-anchor"
     pos = tag_positions(cn)[k]
     head, tail = cn[:pos], cn[pos:]
     ok, why = _accept(cn, head, tail, en, tail_ratio)

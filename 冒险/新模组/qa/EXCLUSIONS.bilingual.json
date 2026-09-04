@@ -1,0 +1,25 @@
+{
+  "_comment": "Leaves that legitimately keep long English. Read by gate.py via --criteria-dir.",
+  "leaves": [
+    {
+      "path": "pf2e-beginner-box.adventures.json:Menace Under Otari.journals.Creating Your Hero.pages.Dwarf.text",
+      "why": "The English block is a list of sample dwarf given names. Example names a player picks from are not translated."
+    },
+    {
+      "path": "pf2e-beginner-box.adventures.json:Menace Under Otari.journals.Creating Your Hero.pages.Elf.text",
+      "why": "Same - a list of sample elf given names."
+    },
+    {
+      "path": "pf2e-beginner-box.adventures.json:Menace Under Otari.journals.Beginner Box Credits.pages.Foundry Credits.text",
+      "why": "A credits roll: Foundry staff names."
+    },
+    {
+      "path": "pf2e-beginner-box.adventures.json:Menace Under Otari.journals.Beginner Box Credits.pages.Paizo Credits.text",
+      "why": "A credits roll: the remaining English is Paizo staff names; every job title around them is translated."
+    },
+    {
+      "path": "pf2e-beginner-box.adventures.json:Menace Under Otari.journals.Beginner Box Credits.pages.License Information.text",
+      "why": "Carries the OPEN GAME LICENSE 1.0a, which must be reproduced verbatim in English."
+    }
+  ]
+}

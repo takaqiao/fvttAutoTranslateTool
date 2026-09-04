@@ -87,8 +87,30 @@ export async function loadPack(packDir) {
 
     const leafField = row.segments[row.segments.length - 1];
     if (!Array.isArray(cursor[leafField])) cursor[leafField] = [];
+    // An Actor document in a v11+ pack keeps `items` as an array of ID STRINGS while the
+    // item data lives under its own `!actors.items!` keys. Pushing the reassembled objects
+    // without removing the placeholder leaves every item present twice - once as a real
+    // document and once as a nameless string - which reads downstream as 50% of the pack
+    // being untranslatable.
+    const placeholder = cursor[leafField].indexOf(row.ids[row.ids.length - 1]);
+    if (placeholder !== -1) cursor[leafField].splice(placeholder, 1);
     cursor[leafField].push(row.doc);
   }
+
+  // Any ID string still sitting in an embedded array had no document of its own in the
+  // pack; keeping it would invent a nameless child, so drop it and say so.
+  let danglingIds = 0;
+  for (const byId of primaries.values()) {
+    for (const doc of byId.values()) {
+      for (const [field, value] of Object.entries(doc)) {
+        if (!Array.isArray(value) || !value.some((x) => typeof x === 'string')) continue;
+        const kept = value.filter((x) => typeof x !== 'string');
+        danglingIds += value.length - kept.length;
+        doc[field] = kept;
+      }
+    }
+  }
+  if (danglingIds) console.error('[pack_loader] dropped ' + danglingIds + ' dangling embedded ids');
 
   // An Adventure pack inlines everything already; nothing above touches it.
   const docs = [];

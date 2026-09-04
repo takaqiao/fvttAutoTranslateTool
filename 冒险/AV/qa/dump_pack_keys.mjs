@@ -189,10 +189,20 @@ for (const modId of modules) {
 
   for (const pack of modJson.packs || []) {
     declaredPacks += 1;
-    const rel = (pack.path || ('packs/' + pack.name)).replace(/^\.\//, '');
-    const packDir = path.join(modDir, rel);
-    if (!fs.existsSync(path.join(packDir, 'CURRENT'))) {
-      console.error('[MISS] ' + modId + '.' + pack.name + ': no LevelDB at ' + packDir);
+    // A module.json can carry a stale `path`: shopping-experience still declares the
+    // pre-v11 `packs/<name>.db` while the LevelDB directory on disk is `packs/<name>`.
+    // Foundry tolerates that, so trusting `path` alone silently skips real packs.
+    const candidates = [];
+    if (pack.path) candidates.push(pack.path.replace(/^\.\//, ''));
+    candidates.push('packs/' + pack.name);
+    if (pack.path) candidates.push(pack.path.replace(/^\.\//, '').replace(/\.db$/, ''));
+    let packDir = null;
+    for (const rel of candidates) {
+      const dir = path.join(modDir, rel);
+      if (fs.existsSync(path.join(dir, 'CURRENT'))) { packDir = dir; break; }
+    }
+    if (!packDir) {
+      console.error('[MISS] ' + modId + '.' + pack.name + ': no LevelDB; tried ' + candidates.join(', '));
       continue;
     }
 
