@@ -13,6 +13,12 @@ nothing is indistinguishable from one that worked.  Already-applied patches (val
 already equals `to`) are reported as satisfied and are not errors, so the file is
 re-runnable.
 
+A leaf can also be patched in PLACE with `find`/`replace` instead of `from`/`to`. That is
+for what a whole-value patch cannot express: a two-word label buried in six kilobytes of
+journal HTML, where quoting the entire leaf would make the patch file unreviewable. The
+same discipline applies - `find` must actually be present or the patch is an error - and
+`replace` already being there counts as satisfied.
+
 Usage:
   python apply_path_patches.py --cn-dir <dir> --patches _path_patches.json [--write]
 """
@@ -66,27 +72,35 @@ def main(argv=None):
         changed = 0
         for patch in items:
             parts = patch["path"].split(".") if isinstance(patch["path"], str) else patch["path"]
-            current, found = get_path(data.get("entries", {}), parts)
+            current, found = get_path(data.get("entries", data), parts)
             if not found:
                 errors.append(f"{filename}: path not found: {patch['path']}")
                 continue
-            if current == patch["to"]:
+            substring = "find" in patch
+            want = patch["replace"] if substring else patch["to"]
+            have = patch["find"] if substring else patch["from"]
+            # For an in-place patch "already done" means the thing to replace is GONE, not
+            # that the replacement appears somewhere: the leaf that half-translated
+            # `Encounter Budget` also uses the correct 遭遇预算 further down, and testing
+            # for the replacement alone declared that patch satisfied while the defect stood.
+            if (have not in current) if substring else (current == want):
                 satisfied += 1
-                print(f"  [ok  ] {filename[:34]:<34} {patch['path'][-46:]}  already {patch['to'][:20]}")
+                print(f"  [ok  ] {filename[:34]:<34} {patch['path'][-46:]}  already {want[:20]}")
                 continue
-            if current != patch["from"]:
+            if (have not in current) if substring else (current != have):
                 errors.append(f"{filename}: {patch['path']}\n"
-                              f"        expected {patch['from']!r}\n"
-                              f"        found    {current!r}")
+                              f"        expected {have!r}\n"
+                              f"        found    {current[:120]!r}")
                 continue
             if args.write:
-                set_path(data["entries"], parts, patch["to"])
+                set_path(data.get("entries", data), parts,
+                         current.replace(have, want) if substring else want)
             changed += 1
             applied += 1
             print(f"  [{'write' if args.write else 'dry  '}] {filename[:34]:<34} "
-                  f"{patch['path'][-46:]}  {patch['from'][:18]} -> {patch['to'][:18]}")
+                  f"{patch['path'][-46:]}  {have[:18]} -> {want[:18]}")
         if args.write and changed:
-            backup = path.parent.parent / "_backup" / f"pathpatch_{stamp}"
+            backup = path.parent / "_backup" / f"pathpatch_{stamp}"
             backup.mkdir(parents=True, exist_ok=True)
             shutil.copy2(path, backup / path.name)
             path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n",

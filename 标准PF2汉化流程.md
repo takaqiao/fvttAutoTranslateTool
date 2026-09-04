@@ -120,9 +120,9 @@ node build_babele_en.mjs  --data-root <Data>/modules --modules a,b --out-dir  <p
 
 ---
 
-## 4. 四种「看不见的不一致」
+## 4. 五种「看不见的不一致」
 
-覆盖率 100% 的语料里，这四类问题一条都不会报出来。
+覆盖率 100% 的语料里，这五类问题一条都不会报出来。
 
 **① 同一英文名，两个中文译名** — `scan_name_consistency.py`
 按双语 name 叶的英文半边分组。AV 家族一轮抓出 484 组、1,132 条叶子。
@@ -146,6 +146,26 @@ node build_babele_en.mjs  --data-root <Data>/modules --modules a,b --out-dir  <p
 - 窗口截断会制造假变体（`沙伊坦` 截出 `伊坦`）→ 要求变体与规范**互不包含**。
 - `伊德里尼莉` 其实是更长的 `伊德里尼莉丝`，**它本身也是文档名**——旧的名称门看不见它，
   因为英文半边不同（`Cynemi` vs `Cynemi's ...`）。
+
+**⑤ 译者把英文夹注写进了标题和标签** — `strip_baseline_gloss.py`
+
+社区旧译稿常写成 `<h2>遭遇 Encounter</h2>`、`@UUID[…]{延后 Delay}`。按本流程，
+只有 name 类叶子能带英文，标题和标签都是散文。
+
+**判据不能是「这段英文在原文里出现过」**——新手包里这么判会命中 198 处，其中
+`Pathfinder`/`Foundry`/`Paizo`/`NPC`/`PDF`/`DC 20`/`Ctrl` 全是中文句子正当使用的借词，
+错杀近半。夹注与借词的区别在**位置**：夹注是基线里同一位置那条标题（或标签）的全文。
+
+三条判据缺一不可：
+- 先按位置对齐，再要求中文以对应英文**结尾**；
+- 英文侧带数量词时全等匹配会失效（`6 狗头人战士 Kobold Warriors` vs `6 Kobold Warriors`），
+  所以允许**按词边界**的后缀匹配；
+- 但去掉那段尾巴后，**英文侧不能还剩下单词**。`Encounter Budget` 去掉 `Budget` 还剩
+  `Encounter`，说明 `Budget` 是没译完的半个词，删了就丢词义——`遭遇 Budget` 要改成
+  「遭遇预算」，不是删成「遭遇」。
+
+对不齐的叶子（SRD 回填过、enricher 数量与基线不同）改用**链接目标**跨叶子配对；
+再对不上的落 `_path_patches.json` 逐条处理。
 
 **④ 术语库把页面标题的消歧后缀带进了正文** — `strip_tm_disambiguators.py`
 
@@ -283,6 +303,8 @@ chn 独有的 `Beginner's Box Credits` 会原样保留——各取所长。
 | 豁免文件写了却不生效 | 路径手写猜错（日志名/页名对不上） | 从数据里生成豁免路径 |
 | **整个模组的正文一次都没被检查过，而所有检查都是绿的** | 正文在模组自带的 i18n 文件里，不在 Babele 包里；检查器只 glob 包目录 | `gate.py --also`（`<cn-dir>/lang/*.json` 自动纳入）。AV:E 是 292 条叶、647 条链接 |
 | 检查器扫了 0 个文件，输出和「干净」一模一样 | 没有任何一项报告扫了多少 | 让 gate 打印 `scanned N files, M leaves`——空集合通过和真通过必须长得不一样 |
+| gate 报出一堆早就修好的问题 | `rglob` 递归进了 `_backup/`，扫的是修复**之前**的副本 | 扫描路径一律排除 `_backup` 段；备份目录放在被扫树里就必须显式排除 |
+| 「补丁已满足」但缺陷还在 | in-place 补丁拿「替换文已出现」当判据，而同一片叶子别处正好也有那个词 | 判据应是「待替换文已不存在」 |
 | `--criteria-dir` 传了相对路径，三项检查莫名变红 | 子脚本的 CWD 被强制设成 `qa/reports`，相对路径解析到别处，豁免文件根本没加载 | 在 `gate.py` 里 `.resolve()` 一次；目录不存在直接报错，别静默降级 |
 
 ### 链接与结构
@@ -303,6 +325,11 @@ chn 独有的 `Beginner's Box Credits` 会原样保留——各取所长。
 | 「这个包没安装」，但它明明装着 | id 索引只 dump 了 `pf2e` 域，家族自己的包不在里面 | `pack_index.py` 把 `pack-keys.json` 合进来；两个检查器共用一份「什么叫已安装」 |
 | 目标 id 查不到，名字也查不到，但文档还在 | 换包没换 id（`Hellknight Armiger` 从 npc-gallery 挪到 lost-omens-bestiary） | 全局按 id 找一遍，只改包段 |
 | 名字对得上却报找不到 | 上游改了大小写（`Mage For Hire` → `Mage for Hire`） | 兜底做一次 casefold 匹配 |
+| **一整段遭遇链接全断，英文侧却是好的** | 上游给怪物类 actor 换了新 id 并改用 `@UUID[Actor.<新>]`，而译文沿用旧译稿的 `@Actor[<旧>]` | 英文基线**同一位置**就是答案：按文档种类序列对齐后逐位还原（`repair_named_links.py`）。种类序列必须相等才允许对齐，否则会把 Item 写到 Actor 的 id 上 |
+| 某几条对不齐，剩下的能修 | 那几片叶子的 enricher 数量与基线不同（SRD 回填过） | 「同一个退休 id 全库只指一个文档」——从对齐成功的位置学映射，出现矛盾就整条撤销 |
+| 上游自己那条也指着退休 id | 是的，会发生 | 所以「按位置还原」必须先检查基线那一头是活的，否则等于抄一条死链 |
+| `Effect: Major Fanged Rune Animal Form` 修不掉，同批的 `(Moderate)` 却能修 | Remaster 合并分级效果时，等级词有的在尾括号、有的**在中间** | 候选变体要同时去尾括号和去中缀等级词 |
+| 「这个包没安装」，但装着的是别的项目的包 | pack-ids 只 dump 了 `pf2e` 域 | `pack_index.py` 把 `pack-keys.json` 合进来 |
 
 ### 术语
 
@@ -344,9 +371,16 @@ house 工具箱在 `冒险/AV/qa/`（名字是历史原因，**它是通用的**
 `apply_path_patches.py`
 **术语**：`normalize_terms.py` · `normalize_enricher_labels.py` · `normalize_uuid_labels.py` ·
 `scan_name_consistency.py` · `scan_prose_terms.py` · `scan_latin_nouns.py` ·
-`strip_tm_disambiguators.py`（术语库带出的 `（特征）`/`（状态）` 后缀）
+`strip_tm_disambiguators.py`（术语库带出的 `（特征）`/`（状态）` 后缀）·
+`strip_baseline_gloss.py`（标题与标签里的英文夹注）
 **门禁**：`gate.py` · `scan_pack_binding.py` · `check_pack_targets.py` ·
 `scan_all_links.py`（六种链接形态）· `pack_index.py`（两个检查器共用的 id 索引）
+
+跨项目的**共享判据**在 `工具/翻译流程/data/`：`remaster_moves.json` 记录 PF2e
+系统自己把文档搬到了哪、改成了什么名（分级效果合并、bestiary→monster-core、
+Produce Flame→Ignition）。这是关于系统的事实、不是关于某个译本的决定，所以不放在任何
+项目的判据目录里，用 `repair_dead_links.py --moves` 传入；项目自己的 `_link_rulings.json`
+可以覆盖它。
 
 跨项目的通用件在 `工具/翻译流程/scripts/`：
 `build_3source_tm.py`（翻译记忆，`PRIORITY`/`TIE_BREAK` 冻结，有单测）·

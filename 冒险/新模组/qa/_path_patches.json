@@ -1,0 +1,124 @@
+{
+  "_comment": "Leaves that only their path can disambiguate, plus in-place fixes to text too long to quote whole (`find`/`replace`). See apply_path_patches.py.",
+  "patches": [
+    {
+      "file": "pf2e-beginner-box.adventures.json",
+      "path": "Menace Under Otari.journals.Menace Under Otari.pages.Xulgath Cave.text",
+      "find": "@Check[fortitude|dc:19]豁免}",
+      "replace": "@Check[type:fortitude|dc:19]{强韧豁免}",
+      "why": "Baseline is `@Check[type:fortitude|dc:19]{Fortitude save}`. The seeded translation lost both the `type:` key inside the brackets and the label's opening brace, so Foundry rendered the check followed by a literal `豁免}`."
+    },
+    {
+      "file": "pf2e-beginner-box.adventures.json",
+      "path": "Menace Under Otari.journals.Gamemastering.pages.Building Encounters.text",
+      "find": "遭遇 Budget",
+      "replace": "遭遇预算",
+      "why": "Baseline label is `Encounter Budget`; only the first word was translated. Not a gloss - dropping `Budget` would have deleted the meaning, which is why the gloss stripper refused it."
+    },
+    {
+      "file": "pf2e-beginner-box.adventures.json",
+      "path": "Menace Under Otari.journals.Game Mechanics.pages.Carrying and using Items.text",
+      "find": "Foundry中的手持 物品",
+      "replace": "Foundry 中的手持物品",
+      "why": "Stray space inside the term, and no space around the Latin product name."
+    },
+    {
+      "file": "pf2e-beginner-box.adventures.json",
+      "path": "Menace Under Otari.journals.Menace Under Otari.pages.The Barricade.text",
+      "find": "区域 04 - Barricade",
+      "replace": "区域 04 - 路障",
+      "why": "The macro label was half-translated; the sibling macro already reads `区域 12 - 路障`."
+    },
+    {
+      "file": "pf2e-beginner-box.adventures.json",
+      "path": "Menace Under Otari.actors.Merisiel.items.Whisper Elf.description",
+      "find": "{无踪 Undetected}",
+      "replace": "{无踪}",
+      "why": "Inline gloss. This leaf came from the SRD autofill, so it holds more enrichers than the pack's own English and could not be aligned position by position."
+    },
+    {
+      "file": "pf2e-beginner-box.adventures.json",
+      "path": "Menace Under Otari.actors.Merisiel.items.Whisper Elf.description",
+      "find": "{搜索 Seek}",
+      "replace": "{搜索}",
+      "why": "Same leaf, same reason."
+    },
+    {
+      "file": "pf2e-beginner-box.adventures.json",
+      "path": "Menace Under Otari.journals.Menace Under Otari.pages.Hungry Rats.text",
+      "find": "{巨鼠 (4)}",
+      "replace": "{4只巨鼠}",
+      "why": "Encounter labels are normalised to `N只/N名 + 名称`; the trailing `(4)` copied the English's shape, not Chinese usage."
+    },
+    {
+      "file": "pf2e-beginner-box.adventures.json",
+      "path": "Menace Under Otari.journals.Menace Under Otari.pages.Forgotten Crypt.text",
+      "find": "{4个骷髅守卫}",
+      "replace": "{4名骷髅守卫}",
+      "why": "Encounter-label measure word normalised to 名."
+    },
+    {
+      "file": "pf2e-beginner-box.adventures.json",
+      "path": "Menace Under Otari.journals.Menace Under Otari.pages.Abandoned Storeroom.text",
+      "find": "{4个狗头人战士}",
+      "replace": "{4名狗头人战士}",
+      "why": "Encounter-label measure word normalised to 名."
+    },
+    {
+      "file": "pf2e-beginner-box.adventures.json",
+      "path": "Menace Under Otari.journals.Menace Under Otari.pages.Kobolds and Traps.text",
+      "find": "{狗头人 战士 (2)}",
+      "replace": "{2名狗头人战士}",
+      "why": "Stray space inside 狗头人战士, and the count trailed in the English's shape."
+    },
+    {
+      "file": "pf2e-beginner-box.adventures.json",
+      "path": "Menace Under Otari.journals.Menace Under Otari.pages.Kobold Lookouts.text",
+      "find": "{2 狗头人斥候}",
+      "replace": "{2名狗头人斥候}",
+      "why": "Encounter-label measure word normalised to 名; `Dragonkeeper` already reads 2名狗头人斥候."
+    },
+    {
+      "file": "pf2e-beginner-box.adventures.json",
+      "path": "Menace Under Otari.journals.Menace Under Otari.pages.Xulgath Cave.text",
+      "find": "{3 地蜥人战士}",
+      "replace": "{3名地蜥人战士}",
+      "why": "Encounter-label measure word normalised to 名."
+    },
+    {
+      "file": "pf2e-beginner-box.adventures.json",
+      "path": "Menace Under Otari.journals.Menace Under Otari.pages.Kobold Warren.text",
+      "find": "{6 狗头人战士}",
+      "replace": "{6名狗头人战士}",
+      "why": "Encounter-label measure word normalised to 名."
+    },
+    {
+      "file": "shopping-experience.common-shops.json",
+      "path": "(Level 10 Weapons) Lodem Snowdraft.items.Sleeves of Storage (Greater).description",
+      "find": "{I型空间袋 Spacious Pouch(Type I)}",
+      "replace": "{I型空间袋}",
+      "why": "Inline gloss in an SRD-autofilled description; the item's own `name` leaf keeps `I型空间袋 Spacious Pouch (Type I)`, which is the bilingual name format and correct."
+    },
+    {
+      "file": "shopping-experience.common-shops.json",
+      "path": "(Level 06 Armor) Abula Afari.items.Sleeves of Storage.description",
+      "find": "{I型空间袋 Spacious Pouch(Type I)}",
+      "replace": "{I型空间袋}",
+      "why": "Same gloss, same reason."
+    },
+    {
+      "file": "shopping-experience.otari-shops.json",
+      "path": "Crooks Nook.items.Thieves' Tools (Concealable).description",
+      "find": "{隐藏物件 Conceal a Object}",
+      "replace": "{隐藏物件}",
+      "why": "Same gloss, same reason."
+    }
+  ],
+  "_not_patched": [
+    {
+      "file": "pf2e-beginner-box.adventures.json",
+      "value": "Foundry VTT 建议 / 在 Foundry 中升级 / Pathfinder第二版：效果 / ORC 声明 / 非玩家角色 (NPC)",
+      "why": "Latin here is a product name or an established abbreviation the Chinese sentence uses in its own right, not a gloss of the words beside it. Recorded so a later sweep does not strip them."
+    }
+  ]
+}

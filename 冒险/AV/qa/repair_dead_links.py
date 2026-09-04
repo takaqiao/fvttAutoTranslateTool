@@ -206,7 +206,11 @@ def resolve_by_name(pack_index, preferred_pack, name, doc_type=None, successor=N
                     or [h for h in hits if h[0] == (successor or "")])
             if len(same) == 1:
                 return same[0][0], same[0][1], f"renamed:{renamed!r}"
-    variants = [name, GRADE.sub("", name), PAREN.sub("", name).strip()]
+    # `Effect: Antidote (Moderate)` lost a trailing grade; `Effect: Major Fanged Rune
+    # Animal Form` lost an INFIXED one. Same merge upstream, two different shapes, and a
+    # suffix-only rule reaches exactly half of them.
+    variants = [name, GRADE.sub("", name), PAREN.sub("", name).strip(),
+                re.sub(r"\b(?:Lesser|Moderate|Greater|Major|True|Minor)\s+", "", name).strip()]
     for base in list(variants):
         if base.endswith("s") and not base.endswith("ss"):
             variants.append(base[:-1])
@@ -260,18 +264,27 @@ def main(argv=None):
                              "cross-pack Compendium links, which are the majority")
     parser.add_argument("--rulings", type=Path,
                         help="hand decisions for targets the packs cannot resolve")
+    parser.add_argument("--moves", type=Path,
+                        help="remaster_moves.json - where the SYSTEM moved and renamed its "
+                             "own documents. Shared across projects: a graded effect merging "
+                             "into its ungraded form breaks every translation at once, so "
+                             "the second project to hit it should not rediscover it")
     parser.add_argument("--write", action="store_true")
     parser.add_argument("--report", type=Path)
     args = parser.parse_args(argv)
 
     rulings, pack_moves, name_moves = {}, {}, {}
-    if args.rulings and args.rulings.exists():
-        raw = json.loads(args.rulings.read_text(encoding="utf-8"))
-        rulings = {k: v for k, v in raw.items() if not k.startswith("_")}
-        pack_moves = {k: v for k, v in (raw.get("_pack_moves") or {}).items()
-                      if not k.startswith("_")}
-        name_moves = {k: v for k, v in (raw.get("_name_moves") or {}).items()
-                      if not k.startswith("_")}
+    # Project rulings may override a shared move, so they are read second.
+    for source in (args.moves, args.rulings):
+        if not source or not source.exists():
+            continue
+        raw = json.loads(source.read_text(encoding="utf-8"))
+        rulings.update({k: v for k, v in raw.items()
+                        if not k.startswith("_") and isinstance(v, str)})
+        pack_moves.update({k: v for k, v in (raw.get("_pack_moves") or {}).items()
+                           if not k.startswith("_")})
+        name_moves.update({k: v for k, v in (raw.get("_name_moves") or {}).items()
+                           if not k.startswith("_")})
     pack_index = load_pack_ids(args.pack_ids, args.keys)
     if pack_index:
         print(f"pack ids: {len(pack_index)} packs, "
@@ -373,6 +386,22 @@ def main(argv=None):
                             if tail and any(i not in pids for i in tail):
                                 stats["broken"] += 1
                                 en_label = en_by_target.get(target)
+                                # A hand ruling is the most specific instrument there is,
+                                # so it wins over every heuristic below. It used to be
+                                # consulted only on the world-scoped path, which made a
+                                # perfectly correct ruling on a Compendium target look
+                                # like a no-op - the "判据文件写了却不生效" failure.
+                                if target in rulings:
+                                    changed += 1
+                                    stats["repaired-compendium-ruling"] += 1
+                                    rows.append({"file": cn_path.name,
+                                                 "path": ".".join(path[-3:]),
+                                                 "target": target,
+                                                 "new_target": rulings[target],
+                                                 "label": label, "en_label": en_label,
+                                                 "verdict": "repaired", "how": "ruling"})
+                                    tl = f"{{{label}}}" if m.group(2) is not None else ""
+                                    return f"@UUID[{rulings[target]}]{tl}"
                                 # A document can keep its id and change packs - the
                                 # system moved `Hellknight Armiger` out of npc-gallery
                                 # into lost-omens-bestiary without renumbering it.

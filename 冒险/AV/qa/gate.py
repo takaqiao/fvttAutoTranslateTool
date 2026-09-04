@@ -20,7 +20,6 @@ Checks, in the order a defect would be introduced:
   terms      no known variant survives (the rules in _terms.json are idempotent)
   patches    every entry in _path_patches.json is satisfied
 
-Usage:
 A module that ships its own i18n file keeps prose there rather than in a Babele pack, and
 that prose is checked by nothing unless it is named: AV:E holds 292 leaves and 647 links in
 `工作区/lang/abomination-vaults-expanded.json`, all of it outside every check until `--also`
@@ -203,8 +202,14 @@ def main(argv=None):
     args.criteria_dir = args.criteria_dir.resolve()
     if not args.criteria_dir.is_dir():
         parser.error(f"--criteria-dir does not exist: {args.criteria_dir}")
-    extra = sorted((args.cn_dir / "lang").glob("*.json")) + \
-        [Path(a).resolve() for a in args.also]
+    # rglob, not glob: a project that mirrors the publish repo's layout keeps its i18n
+    # overrides at `lang/external/<moduleId>.json`, one level deeper than AV's, and a
+    # top-level-only glob silently checked none of them. But every repair tool drops a
+    # timestamped copy under `_backup/`, and recursing into those checks the corpus as it
+    # was BEFORE the fixes - which is how this gate came to report 113 dead links against
+    # a workspace that had none.
+    extra = sorted(p for p in (args.cn_dir / "lang").rglob("*.json")
+                   if "_backup" not in p.parts) + [Path(a).resolve() for a in args.also]
     extra = [p for p in extra if p.exists()]
     REPORTS.mkdir(parents=True, exist_ok=True)
 

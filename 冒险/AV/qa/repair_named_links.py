@@ -52,6 +52,39 @@ LEVEL_CODE = re.compile(r"^([A-J])\d")
 LETTER_JOURNAL = re.compile(r"^([A-J]):\s")
 COLL_TYPE = {"actors": "Actor", "items": "Item", "journals": "JournalEntry",
              "scenes": "Scene", "tables": "RollTable", "macros": "Macro"}
+# Both link syntaxes at once, so the two sides of a leaf can be lined up position by
+# position. @Check / @Damage / @Localize share the shape and are not document links.
+ANY_LINK = re.compile(r"@(UUID|Compendium|Actor|Item|JournalEntry|JournalEntryPage|Scene|"
+                      r"RollTable|Macro|Playlist|PlaylistSound)\[([^\]]+)\](?:\{[^{}]*\})?")
+DOC_TYPES = {"Actor", "Item", "JournalEntry", "JournalEntryPage", "Scene", "RollTable",
+             "TableResult", "Macro", "Playlist", "PlaylistSound"}
+
+
+def link_kind(scheme, target):
+    """A coarse class that both syntaxes agree on.
+
+    `@Actor[x]` and `@UUID[Actor.y]` name the same kind of thing, so they compare equal
+    here; that is what lets a translation still on the v9 syntax be lined up against a
+    baseline that has moved to UUIDs. Anything finer would refuse the alignment, anything
+    coarser would let an Item be rewritten onto an Actor's id.
+    """
+    body = target.split("#")[0]
+    if scheme == "Compendium" or body.startswith("Compendium."):
+        return "compendium"
+    if body.startswith("."):
+        return "relative"
+    if scheme in DOC_TYPES:
+        return f"world:{scheme}"
+    segs = [s for s in body.split(".") if s in DOC_TYPES]
+    if segs:
+        return f"world:{segs[-1]}"
+    return "compendium" if body.count(".") >= 2 else "other"
+
+
+def link_seq(text):
+    """-> [(kind, target, start offset)] for every document link, in order."""
+    return [(link_kind(m.group(1), m.group(2).strip()), m.group(2).strip(), m.start())
+            for m in ANY_LINK.finditer(text or "")]
 
 
 def fold(name):
@@ -245,6 +278,50 @@ def main(argv=None):
     stats, rows = Counter(), []
     targets = sorted(args.cn_dir.glob("*.json")) + [Path(a) for a in args.also]
 
+    def english_for(cn_path):
+        if not args.en_dir or not (args.en_dir / cn_path.name).exists():
+            return {}
+        raw = json.loads((args.en_dir / cn_path.name).read_text(encoding="utf-8"))
+        return {".".join(p): v for p, v in walk(raw.get("entries", raw))}
+
+    def aligned(node, english):
+        """-> {offset in node: baseline target}, empty unless the two sides line up."""
+        cn_seq, en_seq = link_seq(node), link_seq(english)
+        if len(cn_seq) != len(en_seq):
+            return {}
+        if [k for k, _t, _o in cn_seq] != [k for k, _t, _o in en_seq]:
+            return {}
+        return {cn[2]: en[1] for cn, en in zip(cn_seq, en_seq)}
+
+    # A retired id names one document, so a mapping learned where the baseline DOES line up
+    # is valid everywhere that id appears. Four of the beginner box's five `Kobold Warrior`
+    # links sit in leaves that align; the fifth does not, and without this it would be the
+    # only one left broken. Contradicting evidence retracts the mapping rather than picking.
+    learned, rejected = {}, set()
+    for cn_path in targets:
+        if not cn_path.exists():
+            continue
+        en_flat = english_for(cn_path)
+        if not en_flat:
+            continue
+        data = json.loads(cn_path.read_text(encoding="utf-8"))
+        for path, value in walk(data.get("entries", data)):
+            english = en_flat.get(".".join(path), "")
+            for offset, baseline in aligned(value, english).items():
+                stale = next((t for _k, t, o in link_seq(value) if o == offset), "")
+                stale = stale.split("#")[0]
+                if not ID.match(stale) or stale in index.live:
+                    continue
+                if baseline.split("#")[0].split(".")[-1] not in index.live:
+                    continue
+                if learned.setdefault(stale, baseline) != baseline:
+                    rejected.add(stale)
+    for stale in rejected:
+        learned.pop(stale, None)
+    if learned:
+        print(f"learned {len(learned)} retired-id mappings from the baseline"
+              + (f" ({len(rejected)} rejected as contradictory)" if rejected else ""))
+
     for cn_path in targets:
         if not cn_path.exists():
             continue
@@ -271,6 +348,16 @@ def main(argv=None):
             english = en_flat.get(".".join(path), "")
             en_labels = {mm.group(2).strip(): (mm.group(5) or "").strip()
                          for mm in NAMED.finditer(english)}
+            # Position-for-position alignment with the baseline. Upstream renumbered the
+            # beginner box's creature actors and moved its own text to `@UUID[Actor.<new>]`,
+            # while the seeded translation kept `@Actor[<retired>]`. The baseline is holding
+            # the answer at the very same spot - no name lookup can beat that - but only
+            # when the two sides agree on what kind of link sits at each position.
+            cn_seq, en_seq = link_seq(node), link_seq(english)
+            by_offset = {}
+            if len(cn_seq) == len(en_seq) and \
+                    [k for k, _t, _o in cn_seq] == [k for k, _t, _o in en_seq]:
+                by_offset = {cn[2]: en[1] for cn, en in zip(cn_seq, en_seq)}
 
             def sub(m):
                 nonlocal changed
@@ -279,6 +366,21 @@ def main(argv=None):
                     if target in index.live:
                         stats["already-id"] += 1
                         return m.group(0)
+                    baseline = by_offset.get(m.start())
+                    how = "baseline-position"
+                    if not baseline or \
+                            baseline.split("#")[0].split(".")[-1] not in index.live:
+                        # The baseline can be broken at this very spot too - upstream's own
+                        # `Journals` page still links the retired Kobold Warrior id. What
+                        # the baseline got right elsewhere still settles it.
+                        baseline, how = learned.get(target), "retired-id-map"
+                    if baseline and baseline.split("#")[0].split(".")[-1] in index.live:
+                        changed += 1
+                        stats[f"fixed:{how}"] += 1
+                        new = f"@UUID[{baseline}]" + (braces or "")
+                        rows.append({"file": cn_path.name, "path": ".".join(path[-2:]),
+                                     "from": m.group(0)[:110], "to": new, "why": how})
+                        return new
                     # Upstream ships this one dead too: AV 4.1.3's `Valuable Books` still
                     # points at a page id retired several versions ago. The label is the
                     # only surviving description of the target, so resolve through it.

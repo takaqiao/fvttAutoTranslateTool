@@ -1,0 +1,25 @@
+{
+ "_comment": "Where the PF2e system moved and renamed its own documents. These are facts about the system, not decisions about any one translation, so they live outside every project's criteria directory and are passed to repair_dead_links.py with --moves. Verified against Archives of Nethys.",
+ "_pack_moves": {
+  "_why": "When a pack is retired its documents move, and a name like Bandit then exists in several Actor packs at once. The successor pack breaks that tie: a link that used to point into npc-gallery means the npc-core copy, not a PFS scenario's.",
+  "pf2e.npc-gallery": "pf2e.pathfinder-npc-core",
+  "pf2e.pathfinder-bestiary": "pf2e.pathfinder-monster-core",
+  "pf2e.pathfinder-bestiary-2": "pf2e.pathfinder-monster-core-2",
+  "pf2e.pathfinder-bestiary-3": "pf2e.pathfinder-monster-core-2"
+ },
+ "_name_moves": {
+  "_why": "Remaster renames, verified on Archives of Nethys. A legacy AoN id that redirects to a differently-named page IS the rename: 2e.aonprd.com/Monsters.aspx?ID=865 (Dread Wraith) serves War Wraith, and Spells.aspx?ID=1565 serves both Produce Flame and Ignition. These bypass the document-type filter because a rename can change the type - Changelings was a bestiary Actor and is now a heritage Item.",
+  "Produce Flame": "Ignition",
+  "Remove Disease": "Cleanse Affliction",
+  "Dread Wraith": "War Wraith",
+  "Aura: Bless": "Spell Effect: Bless",
+  "Spell Effect: Protection from Chaotic": "Spell Effect: Protection",
+  "Spell Effect: Protection from Evil": "Spell Effect: Protection",
+  "Spell Effect: Protection from Good": "Spell Effect: Protection",
+  "Spell Effect: Protection from Lawful": "Spell Effect: Protection",
+  "Changelings": "pf2e.heritages:Changeling",
+  "_why_changeling": "The bestiary group entry is gone. The link sits in hag flavour text - 'these children are changelings' - so the referent is the ancestry heritage, not the Changeling Exile NPC. `pack:Name` pins which pack when the name is ambiguous.",
+  "Manticore": "pf2e.pathfinder-monster-core:Manticore (Quill Tail)",
+  "_note.Manticore": "Monster Core split the creature in two. The Bestiary 1 manticore is Creature 6 and attacks with Spike Volley from its tail (pf2.d20pfsrd.com/monster/manticore), which is the quill-tailed one; Scorpion Tail is the venomous variant the split introduced."
+ }
+}
