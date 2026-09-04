@@ -1,0 +1,31 @@
+<div class="region-config standard-form">
+  <p style="font-size:1.2em"><strong>想让终端更醒目吗？</strong>从下方选择图片即可快速替换此图块的图像。<span style="text-shadow: 0 0 red">此图块当前的图像配置将会<strong>丢失</strong>！</span></p>
+  <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px">
+    <label>
+      <input type="radio" name="image" value="terminal" checked>
+      <img src="/modules/terminal/background/terminal.webp" style="width: 80%; height: auto; background: grey; cursor: pointer">
+    </label>
+    <label>
+      <input type="radio" name="image" value="terminal_icon_1">
+      <img src="/modules/terminal/background/terminal_icon_1.webp" style="width: 80%; height: auto; background: grey; cursor: pointer">
+    </label>
+  </div>
+  <div class="form-group">
+      <label>色调</label>
+      <div class="form-fields">
+          <color-picker name="color" value="#ffffff">
+              <input type="text" placeholder="#FFFFFF">
+              <input type="color">
+          </color-picker>
+      </div>
+      <p class="hint">为图块应用色调，使其与场景相匹配。</p>
+  </div>
+  <div class="form-group">
+      <label>创建灯光</label>
+      <div class="form-fields">
+          <input type="checkbox" name="addLight" checked/>
+      </div>
+      <p class="hint">在图块中央添加带色调的灯光，以增强效果。</p>
+  </div>
+  <button type="submit">应用</button>
+</div>

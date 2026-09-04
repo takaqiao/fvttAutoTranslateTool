@@ -1,0 +1,71 @@
+<div class="region-config standard-form">
+    <header class="region-element region-behavior flexrow">
+        <div class="region-element-name" style="padding: .25em; padding-bottom: 1em">
+        添加区域，以便从终端触发其行为
+        <span style="opacity: .8">— 可为任意区域模拟任意事件（如“指示物进入”）</span>
+        <button type="button" data-action="showTips" style="margin-top: 1em; width: 100%">如何使用？</button>
+        <div style="display: none; margin-top: 1em" class="terminal-region-tips">
+            <ul style="margin: 0">
+                <li>要触发宏行为，触发操作的玩家至少需要该宏的<b>观察者</b>权限。</li>
+                <li>需要技能检定时，行为会在 GM 端运行。</li>
+                <li>可以添加其他场景中的区域 😎</li>
+                <li>指示物事件（如“指示物移动”）要求触发玩家当前查看的场景中至少有一个指示物（任意指示物均可）。</li>
+                <li>要触发传送指示物行为，请使用“tokenMoveIn”事件。</li>
+                <ul>
+                    <li>场景中必须恰好存在一个由触发玩家<b>拥有</b>的指示物。</li>
+                    <li>该行为会强制在 GM 端运行。</li>
+                </ul>
+            </ul>
+        </div>
+        </div>
+    </header>
+    <div class="standard-form">
+
+      <button type="button" data-action="addRegion">
+        <i class="fa-regular fa-location-crosshairs"></i> 添加区域触发器
+      </button>
+
+      {{#unless noRegion}}
+        <fieldset style="margin-top: 1em">
+            <legend>区域触发器</legend>
+
+            {{#each regions}}
+              <div uuid="{{this.uuid}}" style="display: grid; gap: .4em">
+                {{#unless (eq @index 0)}}
+                  <hr/>
+                {{/unless}}
+
+                <div>
+                  <span class="hint" data-tooltip="{{this.uuid}}">{{this.prettyContext}}</span>
+                  <button style="width: 40px; float: right" type="button" class="icon fa-regular fa-trash-alt" data-tooltip="移除区域触发器" data-action="removeRegion" id="{{this.uuid}}" />
+                </div>
+
+                <div class="form-group">
+                  <label>模拟事件</label>
+                  <div class="form-fields">
+                    <select name="event">
+                      {{#each ../events}}
+
+                        {{#if (eq ../this.event this)}}
+                          <option value="{{this}}" selected>{{this}}</option>
+                        {{else}}
+                          <option value="{{this}}">{{this}}</option>
+                        {{/if}}
+
+                      {{/each}}
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>按钮名称</label>
+                  <div class="form-fields">
+                    <input type="text" name="btnName" value="{{this.btnName}}" />
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+        </fieldset>
+        {{/unless}}
+    <div>
+</div>

@@ -1,0 +1,31 @@
+<div class="region-config standard-form">
+  <p style="font-size:1.2em"><strong>Want to make your Terminal obvious?</strong> Select from an image below to quickly replace the image for this tile. <span style="text-shadow: 0 0 red">You will <strong>lose</strong> the current image config for this tile!</span></p>
+  <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px">
+    <label>
+      <input type="radio" name="image" value="terminal" checked>
+      <img src="/modules/terminal/background/terminal.webp" style="width: 80%; height: auto; background: grey; cursor: pointer">
+    </label>
+    <label>
+      <input type="radio" name="image" value="terminal_icon_1">
+      <img src="/modules/terminal/background/terminal_icon_1.webp" style="width: 80%; height: auto; background: grey; cursor: pointer">
+    </label>
+  </div>
+  <div class="form-group">
+      <label>Tint</label>
+      <div class="form-fields">
+          <color-picker name="color" value="#ffffff">
+              <input type="text" placeholder="#FFFFFF">
+              <input type="color">
+          </color-picker>
+      </div>
+      <p class="hint">Apply a tint to the tile to have it match your scene</p>
+  </div>
+  <div class="form-group">
+      <label>Create a light</label>
+      <div class="form-fields">
+          <input type="checkbox" name="addLight" checked/>
+      </div>
+      <p class="hint">For extra effect, add a tinted light at the center of the tile</p>
+  </div>
+  <button type="submit">Apply</button>
+</div>

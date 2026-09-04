@@ -1,0 +1,323 @@
+.terminal-ascii pre {
+  font-size: 12px;
+  font-family: monospace;
+}
+.terminal-ascii {
+  margin-top: 15%;
+  display: flex;
+  justify-content: center;
+}
+.terminal-window .window-header {
+  width: 100%;
+  z-index: 3;
+  position: relative;
+}
+.terminal-window button[data-action="toggleControls"] {
+  display: none;
+}
+.terminal-window {
+  background: black;
+}
+.terminal-window button {
+  color: #e7d1b1;
+}
+.terminal-shadow .terminal-button {
+  cursor: not-allowed;
+}
+.terminal-loading {
+  width: 50%;
+  height: 30px;
+  opacity: 0.5;
+  border: 4px solid white;
+  margin: 4em auto 0 auto;
+  background: black;
+}
+.terminal-bar {
+  width: 0;
+  height: 19px;
+  transition: width 0.1s;
+  top: 2px;
+  position: relative;
+  left: 2px;
+  display: block;
+}
+
+.terminal-full {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+.terminal-noise {
+  background-color: black;
+}
+
+.terminal-buttons p {
+  text-align: center;
+  text-decoration: underline;
+}
+.terminal-folders {
+  overflow: auto;
+  max-height: 65vh;
+}
+.terminal-container {
+  padding-right: 1em;
+  display: flex;
+}
+.terminal-buttons {
+  width: 30%;
+  margin-top: 10px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.terminal-button {
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  background-color: #000000;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+.terminal-selected {
+  background-color: black;
+  border: 2px solid white !important;
+  border-right: 10px solid white !important;
+  border-left: 10px solid white !important;
+}
+.terminal-title {
+  border: 2px solid rgba(255, 255, 255, 0.4);
+  height: 30px;
+  margin-bottom: 1em;
+  padding-bottom: 1.2em;
+  font-size: 1.5em;
+}
+.terminal-textbox {
+  padding: 20px;
+  text-align: left;
+  background-color: rgba(0, 0, 0, 0.8);
+  overflow: auto;
+  position: relative;
+}
+.terminal-textbox h1,
+.terminal-textbox h2,
+.terminal-textbox h3 {
+  text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.terminal-effects-scan {
+  pointer-events: none;
+  z-index: 4;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-image: none;
+  background-repeat: no-repeat;
+  animation: scan 80s linear 0s infinite;
+}
+@keyframes scan {
+  0% {
+    background-position: 0 -100vh;
+  }
+  48% {
+    background-position: 0 -80vh;
+  }
+  52% {
+    background-position: 0 80vh;
+  }
+  100% {
+    background-position: 0 100vh;
+  }
+}
+
+.terminal-effects-noise {
+  pointer-events: none;
+  z-index: 3;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+/* noise over text has horible performance */
+.terminal-effects-noise::after {
+  content: "";
+  position: absolute;
+  width: 140%;
+  height: 140%;
+  top: -20%;
+  left: -20%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='500' opacity='.4'%3E%3Cdefs%3E%3Cfilter id='turbulenceFilter'%3E%3CfeTurbulence type='turbulence' baseFrequency='.3' /%3E%3C/filter%3E%3C/defs%3E%3Crect width='100%25' height='100%25' filter='url(%23turbulenceFilter)' /%3E%3C/svg%3E");
+  animation: noise 0.4s steps(6) infinite;
+  /*     https://yoksel.github.io/url-encoder       */
+  /*     https://www.fffuel.co/nnnoise              */
+
+  /* <svg width="500" height="500" opacity=".4">
+        <defs>
+        <filter id="turbulenceFilter">
+            <feTurbulence type="turbulence" baseFrequency=".3" />
+        </filter>
+
+        </defs>
+        <rect width="100%" height="100%" filter="url(#turbulenceFilter)" />
+    </svg> */
+}
+@keyframes noise {
+  0% {
+    transform: rotate(60deg);
+  }
+  20% {
+    transform: rotate(-330deg);
+  }
+  40% {
+    transform: rotate(400deg);
+  }
+  60% {
+    transform: rotate(-130deg);
+  }
+  80% {
+    transform: rotate(130deg);
+  }
+  100% {
+    transform: rotate(-60deg);
+  }
+}
+
+.terminal-main {
+  display: none;
+  color: white;
+  z-index: 2;
+}
+.terminal-window ::-webkit-scrollbar-thumb {
+  background-color: grey;
+  border: none;
+}
+.terminal-window .window-content {
+  padding: 0;
+  font-family: inherit;
+}
+.terminal-content {
+  width: 70%;
+  padding: 20px 0 20px 20px;
+  text-align: center;
+}
+
+/* tooltip */
+.terminal-tooltip-icon:hover + .terminal-tooltip {
+  opacity: 1;
+  display: block;
+}
+.terminal-tooltip-icon {
+  cursor: help;
+  flex-grow: initial !important;
+  margin-right: 8px;
+}
+.terminal-tooltip {
+  position: absolute;
+  background-color: #bfbfbf;
+  color: #191813;
+  box-shadow: 0 0 10px black;
+  border-radius: 10px;
+  opacity: 0;
+  display: none;
+  padding: 0.5em;
+  margin-left: 2em;
+  top: 0;
+  z-index: 1;
+  font-size: 1.1em;
+  -webkit-transition: opacity 0.05s ease-in-out;
+  transition: opacity 0.05s ease-in-out;
+}
+
+.terminal-password {
+  height: 40px;
+  background: rgba(0, 0, 0, 0.6);
+  width: 350px;
+  margin-top: 5em;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.terminal-z {
+  position: relative;
+  z-index: 1;
+}
+
+.terminal-scroll .window-content {
+  max-height: 800px;
+  overflow: auto;
+}
+/* makes forms more vertically compact */
+.terminal-scroll fieldset {
+  gap: 0.2em;
+  padding: 0.6em;
+}
+.terminal-scroll .standard-form {
+  gap: 0.2em;
+}
+
+@media (max-height: 750px) {
+  .terminal-ascii pre {
+    font-size: 6px;
+  }
+}
+
+.terminal-distortion {
+  animation: terminal-distortion 8s infinite;
+}
+
+@keyframes terminal-distortion {
+  25% {
+    text-shadow: none;
+  }
+  26% {
+    text-shadow:
+      2px -1px #ff0000,
+      -2px 3px #00ffff;
+  }
+  27% {
+    text-shadow:
+      -2px -3px #ff0000,
+      2px 1px #00ffff;
+  }
+  28% {
+    text-shadow:
+      2px 1px #ff0000,
+      -4px 1px #00ffff;
+  }
+  29% {
+    text-shadow:
+      -4px 1px #ff0000,
+      -2px -1px #00ffff;
+  }
+  30% {
+    text-shadow: none;
+  }
+  75% {
+    text-shadow: none;
+  }
+  76% {
+    text-shadow:
+      -4px 1px #ff0000,
+      -2px -1px #00ffff;
+  }
+  77% {
+    text-shadow:
+      -2px -3px #ff0000,
+      2px 1px #00ffff;
+  }
+  78% {
+    text-shadow:
+      2px -1px #ff0000,
+      -2px 3px #00ffff;
+  }
+  79% {
+    text-shadow:
+      2px 1px #ff0000,
+      -4px 1px #00ffff;
+  }
+  80% {
+    text-shadow: none;
+  }
+}

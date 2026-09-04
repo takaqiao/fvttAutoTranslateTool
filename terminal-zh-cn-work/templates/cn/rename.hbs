@@ -1,0 +1,92 @@
+<div class="region-config standard-form">
+    <header class="region-element region-behavior flexrow">
+        <div class="region-element-name" style="padding: .25em; padding-bottom: 1em">
+        更改部分终端按钮的名称
+        <span style="opacity: .7; margin-bottom: 1em">— 按钮默认使用通用名称。你可以在此覆盖名称，向玩家提示按钮的用途。</span>
+        </div>
+    </header>
+    <div class="standard-form">
+
+        <div class="form-group">
+            <label>宏</label>
+            <div class="form-fields">
+                {{#if macroName}}
+                <input type="text" name="macroName" value="{{macroName}}">
+                {{else}}
+                <input type="text" disabled placeholder="尚未关联宏">
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>观察角色</label>
+            <div class="form-fields">
+                {{#if observeActor}}
+                <input type="text" name="observeActorName" value="{{observeActorName}}" placeholder="控制角色名称">
+                {{else}}
+                <input type="text" disabled placeholder="尚未关联角色">
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>标题栏</label>
+            <div class="form-fields">
+                <input type="text" name="titlebarName" value="{{titlebarName}}" placeholder="个人终端">
+            </div>
+        </div>
+
+        {{#if activeMonk}}
+        <div class="form-group">
+            <label>运行触发器</label>
+            <div class="form-fields">
+                {{#if monk}}
+                <input type="text" name="monkName" value="{{monkName}}">
+                {{else}}
+                <input type="text" disabled placeholder="尚未启用运行触发器">
+                {{/if}}
+            </div>
+        </div>
+        {{/if}}
+
+        <fieldset>
+            <legend>门</legend>
+
+            {{#if (eq doorsLength 0)}}
+            <span style="opacity: .9">尚未关联门</span>
+            {{else}}
+            <span style="opacity: .9">建议名称以“门”结尾，例如“牢房门”。</span>
+            {{/if}}
+
+            {{#each doors}}
+            <div class="form-group">
+                <label title="{{this.uuid}}">门 {{@index}}</label>
+                <div class="form-fields">
+                    <input type="text" name="{{this.uuid}}" value="{{this.name}}">
+                    <button data-tooltip="显示门" data-action="show" uuid="{{this.uuid}}"><i class="fa-solid fa-eye"></i></button>
+                </div>
+            </div>
+            {{/each}}
+        </fieldset>
+
+        <fieldset>
+            <legend>安全外壳</legend>
+
+            {{#if (eq sshLength 0)}}
+            <span style="opacity: .9">尚未关联安全外壳</span>
+            {{else}}
+            <span style="opacity: .9">建议名称以“终端”结尾，例如“主机终端”。</span>
+            {{/if}}
+
+            {{#each ssh}}
+            <div class="form-group">
+                <label title="{{this.uuid}}">外壳 {{@index}}</label>
+                <div class="form-fields">
+                    <input type="text" name="{{this.uuid}}" value="{{this.name}}">
+                    <button data-tooltip="显示图块" data-action="show" uuid="{{this.uuid}}"><i class="fa-solid fa-eye"></i></button>
+                </div>
+            </div>
+            {{/each}}
+        </fieldset>
+    <div>
+</div>

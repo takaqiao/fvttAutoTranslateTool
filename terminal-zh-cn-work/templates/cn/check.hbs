@@ -1,0 +1,97 @@
+<div class="region-config standard-form">
+    <header class="region-element region-behavior flexrow">
+        <div class="region-element-name" style="padding: .25em; padding-bottom: 1em">何时进行技能检定？<span style="opacity: .7; margin-bottom: 1em">— 在此启用后，玩家使用特定功能前会被拦截，必须先获得 GM 批准。等待期间可进行技能检定，随后由 GM 允许或拒绝访问。<br/><br/>GM 会跳过所有检定。</span></div>
+    </header>
+    <div class="standard-form">
+        <fieldset>
+            <legend>登录</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">玩家指示物进入已启用的终端图块后、终端界面显示前进行。安全外壳目前会绕过此检定。</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="skilled" {{#if skilled}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>观察角色</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">获得某个角色的观察者权限前进行。</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="observeCheck" {{#if observeCheck}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>揭示地图</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">点击终端界面中的“地图”按钮时进行。</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="exploreCheck" {{#if exploreCheck}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>锁定或解锁门</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">点击终端界面中的“锁定”或“解锁”按钮时进行。</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="doorCheck" {{#if doorCheck}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>切换灯光</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">点击终端界面中的“灯光/电源”按钮时进行。</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="lightCheck" {{#if lightCheck}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>侦测移动</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">点击终端界面中的“侦测移动”按钮时进行。</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="pingCheck" {{#if pingCheck}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>运行任意宏</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">点击终端界面中的任意宏按钮时进行。{{#if hasMonk}}<br/><br/>包括来自 Monk's Active Tiles 的宏按钮。{{/if}}</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="macroCheck" {{#if macroCheck}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>触发区域</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">点击用于触发区域的按钮时进行。</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="regionCheck" {{#if regionCheck}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>运行安全外壳</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">点击“安全外壳”按钮时进行。</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="sshCheck" {{#if sshCheck}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>添加加密</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">这会“加密”日志中的页面并将其显示为按钮，玩家必须通过技能检定才能“解密”。要把日志页面标记为加密，请将其所有权设为“无”。页面默认的“继承”所有权会被视为未加密的“纯文本”文件，无需检定即可查看。若只想让 GM 查看页面，可使用“受限”所有权，该页面将对玩家隐藏。</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="encryption" {{#if encryption}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+    <div>
+</div>

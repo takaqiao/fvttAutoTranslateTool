@@ -1,0 +1,60 @@
+<!-- region-config is a Foundry managed class, it aligns items right -->
+
+<div class="region-config standard-form">
+    <header class="region-element region-behavior flexrow">
+        <div class="region-element-name">Styles</div>
+        <div class="region-element-controls">
+            <a class="region-control" data-action="create" style="float: right">
+                New
+                <i class="fa-solid fa-plus fa-fw" style="position: relative; top: 2px"></i>
+            </a>
+        </div>
+
+    </header>
+
+    <p style="opacity: .7; margin-bottom: 1em">This is your collection of styles that can be applied to any Terminal</p>
+
+    <div class="standard-form">
+        {{#each custom}}
+        <fieldset class="flexrow {{#if this.readOnly}}inactive{{/if}}" style="background: rgba(4,45,107,.3); flex-direction: row">
+            <a class="region-element-name" data-action="view" uuid="{{this.uuid}}" {{#if this.readOnly}}readonly{{/if}} uuid="{{this.uuid}}">
+                <i class="a fa-fw"></i>
+                {{this.name}}
+            </a>
+            <div class="region-element-controls">
+                {{#if this.readOnly}}
+                <a class="control fa-solid fa-eye fa-fw" data-action="view" readonly uuid="{{this.uuid}}" style="float: right"></a>
+                {{else}}
+                <a class="control fa-solid fa-edit fa-fw" data-action="view" uuid="{{this.uuid}}" style="float: right"></a>
+                <a class="control fa-solid fa-trash fa-fw" data-action="delete" uuid="{{this.uuid}}" style="float: right; margin-right: 1.5em"></a>
+                {{/if}}
+            </div>
+        </fieldset>
+        {{/each}}
+    <div>
+
+    <hr />
+
+    <a data-action="togglePresets" style="display: block; text-align: center; margin-bottom: 1em">Show Presets</a>
+
+    <div class="standard-form terminal-style-presets" style="display: none">
+        {{#each preset}}
+        <fieldset class="flexrow {{#if this.readOnly}}inactive{{/if}}" style="background: rgba(47, 224, 44,.1); flex-direction: row">
+            <a class="region-element-name" data-action="view" uuid="{{this.uuid}}" {{#if this.readOnly}}readonly{{/if}} uuid="{{this.uuid}}">
+                <i class="a fa-fw"></i>
+                {{this.name}}
+            </a>
+            <div class="region-element-controls">
+                {{#if this.readOnly}}
+                <a class="control fa-solid fa-eye fa-fw" data-action="view" readonly uuid="{{this.uuid}}" style="float: right"></a>
+                {{else}}
+                <a class="control fa-solid fa-edit fa-fw" data-action="view" uuid="{{this.uuid}}" style="float: right"></a>
+                <a class="control fa-solid fa-trash fa-fw" data-action="delete" uuid="{{this.uuid}}" style="float: right; margin-right: 1.5em"></a>
+                {{/if}}
+            </div>
+        </fieldset>
+        {{/each}}
+    <div>
+
+    <button data-action="refresh" hidden id="terminal-refresh" style="display: none"></button>
+</div>

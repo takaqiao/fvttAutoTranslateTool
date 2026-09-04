@@ -1,0 +1,324 @@
+{{#if TileInit}}
+<div class="tab {{#if terminalActive}}active{{/if}}" data-tab="terminal" data-group="sheet">
+<p style="color: grey; text-align: center">You must <b>Create Tile</b> before editing Terminal settings</p>
+</div>
+{{else}}
+<div class="tab {{#if terminalActive}}active{{/if}}" data-tab="terminal" data-group="sheet" style="gap: .2em">
+  <nav class="sheet-tabs tabs" aria-roledescription="Form Tab Navigation">
+    <a class="terminal-submenu active" data-action="tab" data-group="sheet" data-tab="general">
+      <i class="fa-solid fa-gear"></i>
+      <label>General</label>
+    </a>
+    <a class="terminal-submenu" data-action="tab" data-group="sheet" data-tab="scripting">
+      <i class="fa-solid fa-code"></i>
+      <label>Scripting</label>
+    </a>
+    <a class="terminal-submenu" data-action="tab" data-group="sheet" data-tab="auth">
+      <i class="fa-solid fa-user"></i>
+      <label>Auth</label>
+    </a>
+    <a class="terminal-submenu" data-action="tab" data-group="sheet" data-tab="extra">
+      <i class="fa-solid fa-sliders-simple"></i>
+      <label>Extra</label>
+    </a>
+  </nav>
+  <div class="terminal-subtab tab active" data-group="terminal" data-tab="general" style="gap: .2em">
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">Link a journal to dynamically pull content from its pages<br/><br/>Each page in the journal will be displayed as a button in the Terminal<br/><br/>To have a page ignored, set that page's ownership to <strong>limited</strong></span>
+        <label>Journal</label>
+        <div class="form-fields">
+            <input disabled name="flags.terminal.journal" hidden value="{{journalPrettyName}}" />
+            <input type="text" disabled value="{{journalPrettyName}}" />
+            <button type="button" class="terminal-link icon fa-solid fa-book" link="journal" style="flex: .07"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">When enabled, any token which moves onto the tile will open the Terminal<br/><br/>When opening the Terminal with a macro or a Secure Shell, this is can be left unchecked, and it still allow the Terminal to be opened</span>
+        <label>Enabled</label>
+        <input type="checkbox" name="flags.terminal.enabled" class="terminal-auto-update-checkbox" {{#if enabled}}checked{{/if}}>
+      </div>
+      <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">Determines the look and feel of the Terminal. Select from a preset or make your own custom style.<br/><br/>The magic wand button will assist by setting the tile image for you</span>
+        <label>Style</label>
+        <select name="flags.terminal.style" style="flex:1.27">
+        <option {{#if styleExists}}{{else}}checked{{/if}}></option>
+        {{#each styles}}
+        {{#if (eq ../style uuid)}}
+        <option value="{{uuid}}" selected style="background: rgba({{styleSelect uuid}})">{{name}}</option>
+        {{else}}
+        <option value="{{uuid}}" style="background: rgba({{styleSelect uuid}})">{{name}}</option>
+        {{/if}}
+        {{/each}}
+        </select>
+        <button type="button" id="terminal-autostyle" class="icon fa-solid fa-wand-magic-sparkles" style="flex: 0; height: 29px" />
+        <button type="button" id="terminal-style" class="icon fa-solid fa-pencil" style="flex: 0; height: 29px" />
+      </div>
+      {{#if observeActor}}
+      <div class="form-group">
+      <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+      <span class="terminal-tooltip">An optional timer to use which will revert the <strong>Observer</strong> ownership back to <strong>None</strong> for the actor selected in the <strong>Observe Actor</strong> field. This will effectively remove the vision for tokens provided to users.<br/><br/>This value is in seconds.</span>
+      <label>Observe Timer</label>
+      <div class="form-fields">
+      <input name="flags.terminal.observeTimer" class="terminal-use-dialog" readable="Observe Timer" type="number" value="{{observeTimer}}" />
+      </div>
+      </div>
+      {{/if}}
+      {{#if ping}}
+      <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">The range for which motion can be detected. Uses the grid scale, which can be adjusted in the scene config.<br/><br/>Use the Measure Distance tool to select an appropriate number. If left blank it will detect at infinite range</span>
+        <label>Detection Range</label>
+        <div class="form-fields">
+          <input name="flags.terminal.pingRange" class="terminal-use-dialog" readable="Detection Range" type="number" value="{{pingRange}}" />
+        </div>
+      </div>
+      {{/if}}
+
+    <div class="form-group" style="justify-content: space-evenly">
+    {{#each doorIds}}
+    <div style="border: 1px dashed rgba(255,255,255,.2); padding: .3em; justify-content: space-around; max-width: 130px; min-width: 130px; display: flex">
+    <span data-tooltip="{{this}}" style="margin-top: .5em">Door {{@index}}</span>
+    <button type="button" class="icon fa-solid fa-eye terminal-view" data-tooltip="See Door" aria-label="See Door" style="display: inline; width: 34px" uuid={{this}}></button>
+    <button type="button" class="icon fa-solid fa-x terminal-rm-door-btn" data-tooltip="Remove Door" aria-label="Remove Door" style="width: 34px; display: inline" uuid={{this}}></button>
+    </div>
+    {{/each}}
+    </div>
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">Include a button to lock or unlock door(s). Can have multiple buttons (one per door). Use the helper target button to select the door.<br/><br/>The button for each door will be labled "Alter door X". It's action will depends on the state of that door. If the door is open or closed, the button will lock it. If the door is locked the button will open and unlock it. Each button can be used an unlimited amount of times.</span>
+        <label>Lock/Unlock Door</label>
+        <div class="form-fields">
+          <input type="text" disabled value="{{doorLength}} doors linked" />
+          <input disabled hidden name="flags.terminal.unlockIds" value="{{unlockIds}}" />
+          <button type="button" class="terminal-link icon fa-regular fa-location-crosshairs" pretty="DOOR" link="walls" style="flex: 0" />
+        </div>
+    </div>
+    <div class="form-group">
+    <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+    <span class="terminal-tooltip">Include a button which will provide <strong>Observer</strong> for any tokens of the selected actor in this scene.<br/><br/>To set this up, create a new actor. Give them a context appropriate name, like "camera" or "turret" (this actor name will be shown to the player in the button name). Then create one or more tokens using this new actor. Place them in the scene wherever you want to give vision to the player.<br/><br/>Next click the crosshairs button. This will minimize windows and wait for you to click on your new actor in the sidebar<br/><br/>It's recommended to use a different actor for each scene. Since ownership changes could bleed over into other scenes.<br/><br/>Alternatively, a timer could be used. So that the actor is reverted to <strong>None</strong> ownership before another scene is viewed.<br/><br/><span style="color: #b50202;">If a token is hidden it cannot offer vision</span></span>
+    <label>Observe Actor</label>
+    <div class="form-fields">
+    <button type="button" class="terminal-delete icon fa-solid fa-delete-right" id="flags.terminal.observeActor" style="flex:0"></button>
+    <input disabled name="flags.terminal.observeActor" hidden value="{{observeActor}}" />
+    <input type="text" disabled id="terminal-hidden-observe" value="{{actorPrettyName}}" />
+    <button type="button" class="terminal-link icon fa-regular fa-location-crosshairs" link="actors" pretty="ACTOR" style="flex:0" />
+    </div>
+    </div>
+    {{#if observeActor}}
+    <div class="form-group">
+    <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+    <span class="terminal-tooltip">Define a different scene to switch to when performing the above <b>Observe action</b>.<br/><br/>This is <b>optional</b> and by default, the scene will not change.<br/><br/><span style="color: #b50202;">It's recommended to set "Keep Terminal open when changing scenes" to prevent Terminal from closing.</span></span>
+    <label>Observe Scene</label>
+    <div class="form-fields">
+    <button type="button" class="terminal-delete icon fa-solid fa-delete-right" id="flags.terminal.observeScene" style="flex:0"></button>
+    <input disabled name="flags.terminal.observeScene" hidden value="{{observeScene}}" />
+    <input type="text" disabled id="terminal-hidden-observe-scene" value="{{observeScenePrettyName}}" />
+    <button type="button" class="terminal-link icon fa-regular fa-location-crosshairs" link="scenes" pretty="SCENE" style="flex:0" />
+    </div>
+    </div>
+    {{/if}}
+    <div class="form-group" style="justify-content: space-evenly">
+    {{#each ssh}}
+    <div style="border: 1px dashed rgba(255,255,255,.2); padding: .3em; justify-content: space-around; max-width: 130px; min-width: 130px; display: flex">
+    <span data-tooltip="{{this}}" style="margin-top: .5em; padding-right: .1em">Shell {{@index}} </span>
+    <button type="button" class="icon fa-solid fa-eye terminal-view" data-tooltip="See Tile" aria-label="See Tile" style="display: inline; width: 34px" uuid={{this}}></button>
+    <button type="button" class="icon fa-solid fa-x terminal-rm-tile-btn" data-tooltip="Remove Tile" aria-label="Remove Tile" style="width: 34px; display: inline" uuid={{this}}></button>
+    </div>
+    {{/each}}
+    </div>
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">Opens a different Terminal. This simulates the use of a secure shell (SSH).<br/><br/>To set this up create another Terminal (can be on any scene). Assign the tile a Journal, this is the only requirement (the new Terminal does not need to be Enabled!). Then click the crosshairs. Select the newly created Terminal tile. This will link this tile to the chosen Terminal.<br/><br/>I would recommend giving the new Terminal a distinct style. To avoid player confusion. If the current and new Terminal window look the same a player may assume they are opening the same Terminal window again.<br/><br/>Currently secure shell bypasses the need for required auth item and skilled login. It's recommended to instead (or additionally) use a password and/or a skill check requirement on secure shell itself.</span>
+        <label>Secure Shell</label>
+        <div class="form-fields">
+          <input type="text" disabled value="{{sshLength}} shells linked" />
+          <input disabled hidden name="flags.terminal.ssh" value="{{ssh}}" />
+          <button type="button" class="icon fa-regular fa-location-crosshairs terminal-link" data-tooltip="Add Secure Shell" link="tiles" pretty="TILE" style="flex:0"></button>
+        </div>
+    </div>
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">Include a button which will explore entire the scene. This will explore all Fog of War for the that <strong style="color:black;">one</strong> player.<br/><br/><span style="color: #b50202">A few Scene settings are required: token vision, fog exploration, and no global illumination</span></span>
+        <label>Map Button</label>
+        <input type="checkbox" name="flags.terminal.explore" {{#if explore}}checked{{/if}}>
+    </div>
+    {{#if explore}}
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">By default the Map Button will explore/reveal the fog of war for only the triggering user.<br/><br/>This changes the behavior of the Map Button so that it will share the map with <b>all other users</b>.<br/><br/><span style="color: #b50202">This does not do any checks to ensure all users are on the same scene! Meaning if another user is viewing a seperate scene than the triggering user. The other user <b>will have that scene revealed</b>.</span></span>
+        <label>Map Button explores for all users</label>
+        <input type="checkbox" name="flags.terminal.exploreAll" {{#if exploreAll}}checked{{/if}}>
+    </div>
+    {{/if}}
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">Include a button to ping locations of all tokens on the scene for the next minute.<br/><br/>This is to simulate a player interpretting data seen from sensors the terminal has access to.<br/><br/>This can be useful to give players a rough idea of how many tokens are in the scene and their location. Most helpful for large scenes players could get lost in or to hint dangerous rooms.<br/><br/>To have an actor's tokens ignored from pings. Add the <strong>dead</strong> status effect. Or toggle the token's visibility state to off.<br/><br/>You can limit the range that tokens will be detected with the Dection Range field</span>
+        <label>Detect Motion Button</label>
+        <input type="checkbox" name="flags.terminal.ping" {{#if ping}}checked{{/if}}>
+    </div>
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">Include a button to toggle the darkness level. This will either transition the scene to a darkness of 0 or 1 (whichever is further).<br/><br/>This pairs well with the activation setting on lights. When viewing a light's basic configuration, you can set an <strong>Activation Range</strong>.<br/><br/>For example, to simulate emergency lights. You can create red lights in the scene and set their <strong>Activation Range</strong> to between <strong>.9</strong> and <strong>1</strong>. Once the darkness level reaches beyond .9 these lights will automatically activate.</span>
+        <label>Toggle Darkness Button</label>
+        <input type="checkbox" name="flags.terminal.lights" {{#if lights}}checked{{/if}}>
+    </div>
+    {{#if (eq system "alienrpg")}}
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">Include a button which allows any player to charge all their items to full charge.<br/><br/>This is very simplistic in that it will charge all items in the inventory for <strong>all actors owned</strong>. Meaning it does not perform any checks for if a token is present on the tile or scene.<br/><br/><span style="color: #596D81;">Exclusive to Alien RPG 👽</span></span>
+        <label>Charge Button</label>
+        <input type="checkbox" name="flags.terminal.alienCharge" {{#if alienCharge}}checked{{/if}}>
+    </div>
+    {{/if}}
+
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">Overwrite the text in Terminal for certain buttons</span>
+        <label>Rename Buttons</label>
+        <button type="button" class="icon fa-solid fa-input-text" style="" id="terminal-rename-btn"></button>
+    </div>
+
+    <h1 style="font-size: 1.5em; margin:0; text-align: center"><i class="fa-solid fa-flask fa-bounce"></i> Beta Testing</h1>
+    <div class="form-group">
+      <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+      <span class="terminal-tooltip">Force the user to type out commands<br/><br/> <span style="color: #b50202;">Still a beta feature. Expect bugs.</span></span>
+      <label>CLI mode</label>
+      <div class="form-fields">
+        <input type="checkbox" name="flags.terminal.cliMode" class="terminal-auto-update-checkbox" {{#if cliMode}}checked{{/if}}>
+      </div>
+    </div>
+    <input name="flags.terminal.refreshConfig" hidden />
+  </div>
+  <div class="terminal-subtab tab" data-group="terminal" data-tab="scripting" style="gap: .2em">
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">Include a button to run a macro. This uses a "GM proxy", meaning players only signal to the GM which macro to run. The macro ultimately is ran on the GM's side.<br/><br/>The title of the button will be set to the title of the macro.<br/><br/>
+        {{#if hasMonk}}I see you have Monk's Active Tile Triggers. Integration with that module is supported. Just check the "Run Triggers Button" checkbox found below and follow the instructions.
+        {{else}}To have macros ran on the player's side, I recommend using Monk's Active Tile Triggers
+        {{/if}}</span>
+        <label>Macro Button</label>
+        <div class="form-fields">
+          <button type="button" class="terminal-delete icon fa-solid fa-delete-right" id="flags.terminal.macro" style="flex:0"></button>
+          <input disabled name="flags.terminal.macro" hidden value="{{macro}}" />
+          <input type="text" disabled id="terminal-hidden-macro" value="{{macroPrettyName}}" />
+          <button type="button" class="icon fa-regular fa-location-crosshairs terminal-link" link="macros" style="flex:0"></button>
+        </div>
+    </div>
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">Arguments to pass to the macro. Comma seperated and can be accessed within the macro using args[x]. Where x is the positional number for the argument, starting from 0.</span>
+        <label>Macro arguments</label>
+        <div class="form-fields">
+          <input type="text" name="flags.terminal.macroArgs" value="{{macroArgs}}" class="terminal-use-dialog" readable="Macro Arguments (comma separated)" />
+        </div>
+    </div>
+    {{#if macro}}
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">Only allow the macro button to be ran once.<br/><br/>This uses a lock mechanism, when this is enabled a new "Macro Locked" checkbox will appear. Initially it will be unchecked but once a macro is ran it will become locked. Preventing the macro from being ran again from within Terminal.<br/><br/>To reset the lock come back to this settings tab and uncheck the "Macro Locked" checkbox. Then the macro can be ran again.</span>
+        <label>Single Use Macro</label>
+        <input type="checkbox" name="flags.terminal.lockableMacro" {{#if lockableMacro}}checked{{/if}}>
+    </div>
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">Runs the macro as the triggering player<br/><br/><span style="color: #b50202;">The triggering player <b>must have Limited, Observer, or Owner</b> permission for the macro</span></span>
+        <label>Run macro as triggering player</label>
+        <input type="checkbox" name="flags.terminal.macroNoProxy" {{#if macroNoProxy}}checked{{/if}}>
+    </div>
+    {{/if}}
+    {{#if lockableMacro}}
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip"><span style="color: #b50202;">This determines if the macro can be ran again. You don't need to worry about checking this box! It will automatically be locked for you once a player runs the macro. However, you will need to manually uncheck this box to fully reset for a new round of players.</span><br/><br/>If this is checked, the macro button will not run the macro.<br/><br/>If unchecked, the macro can still be ran one time.<br/><br/>To disable single use macros uncheck the "Single Use Macro" checkbox</span>
+        <label>Macro Locked</label>
+        <input type="checkbox" name="flags.terminal.macroLocked" {{#if macroLocked}}checked{{/if}}>
+    </div>
+    {{/if}}
+    {{#if hasMonk}}
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">Include a button which will run the actions on the triggers panel of this tile.</span>
+        <label>Run Triggers Button</label>
+        <input type="checkbox" name="flags.terminal.monk" {{#if monk}}checked{{/if}}>
+    </div>
+    {{/if}}
+    <div class="form-group">
+      <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+      <span class="terminal-tooltip">Trigger any Region by simulating any event</span>
+      <label>Trigger Regions</label>
+      <button type="button" class="icon fa-solid fa-map" style="" id="terminal-regions-btn"></button>
+    </div>
+    <div class="form-group">
+      <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+      <span class="terminal-tooltip">Open this terminal for your players without the need for them to move a token over the tile.</span>
+      <label>Open for players</label>
+      <button type="button" class="icon fa-solid fa-users" style="" id="terminal-open-gui-btn"></button>
+    </div>
+    <div class="form-group">
+      <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+      <span class="terminal-tooltip">Learn how to interact with Terminal programmatically</span>
+      <label>Use Terminal API</label>
+      <button type="button" class="icon fa-solid fa-circle-info" id="terminal-learn-api-btn"></button>
+    </div>
+  </div>
+  <div class="terminal-subtab tab" data-group="terminal" data-tab="auth" style="gap: .2em">
+    <div class="form-group">
+      <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+      <span class="terminal-tooltip">Users must enter a password to access the terminal.<br/><br/>This is <strong>case sensitive</strong>, so capital letters used here, must also be entered for terminal access.<br/><br/>Clear all characters in this field to disable this requirement.</span>
+      <label>Password</label>
+      <div class="form-fields">
+          <input type="text" name="flags.terminal.password" value="{{password}}" readable="Password" class="terminal-use-dialog" />
+      </div>
+    </div>
+    <div class="form-group">
+      <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+      <span class="terminal-tooltip">Users must have the specified item to access the terminal. This simulates the use of a keycard or any other physical key for authentication.<br/><br/><span style="color: #b50202;">The <strong>Before Login</strong> skill check will take priority. Bypassing the requirement for an item. Please only choose one of the two ways to grant access (Note: the same is not true for the password setting. i.e. you can require both a password and an item).</span></span>
+      <label>Require Item</label>
+      <div class="form-fields">
+          <button type="button" class="terminal-delete icon fa-solid fa-delete-right" id="flags.terminal.keycard" style="flex:0"></button>
+          <input disabled name="flags.terminal.keycard" hidden value="{{keycard}}" />
+          <input type="text" disabled id="terminal-hidden-keycard" value="{{itemPrettyName}}" />
+          <button type="button" class="icon fa-regular fa-location-crosshairs terminal-link" pretty="ITEM" link="items" style="flex:0"></button>
+      </div>
+    </div>
+    <div class="form-group">
+      <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+      <span class="terminal-tooltip">Precisely determine when players should be blocked and asked to perform a skill check to access certain features.</span>
+      <label>Skill Checks</label>
+      <button type="button" class="icon fa-regular fa-dice-d20" style="" id="terminal-check-btn"></button>
+    </div>
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">By default players are prompted when closing Terminal if they want to share the attached journal. This disables that prompt, preventing sharing the journal.</span>
+        <label>Disable journal sharing</label>
+        <input type="checkbox" name="flags.terminal.disableJournalSharing" {{#if disableJournalSharing}}checked{{/if}}>
+    </div>
+    {{#if hasPuzzleLocks}}
+    <p style="text-align:center;" ><a href="https://github.com/CodaBool/terminal/wiki/Compatibility#puzzle-locks">Puzzle Locks Guide</a></p>
+    {{/if}}
+  </div>
+  <div class="terminal-subtab tab" data-group="terminal" data-tab="extra" style="gap: .2em">
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">By default Terminal will close itself when the scene is changed. If this is enabled the Terminal window will stay open.</span>
+        <label>Keep Terminal open when changing scenes</label>
+        <input type="checkbox" name="flags.terminal.keepOpenOnSceneChange" {{#if keepOpenOnSceneChange}}checked{{/if}}>
+    </div>
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">Ignore this Terminal, even when enabled, if a combat encounter exists. This prevents a Terminal window from showing and avoids unintentionally opening this Terminal during an encounter movement.<br/><br/>Encounters exist before combat! This checks for an encounter. So, be aware that this will apply even <b>before</b> a combat "begins"<br/><br/>This does not apply when opening this Terminal from a macro.</span>
+        <label>Ignore Terminal during encounters</label>
+        <input type="checkbox" name="flags.terminal.ignoreIfEncounter" {{#if ignoreIfEncounter}}checked{{/if}}>
+    </div>
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">Emails <strong>CodaBool</strong>, the developer. It's also fine to message me directly on Discord by searching for <strong>CodaBool</strong> from the Foundry Discord and sending a DM</span>
+        <label>Report a Bug</label>
+        <button type="button" class="icon fa-solid fa-comment" style="" id="terminal-feedback-btn"></button>
+    </div>
+  </div>
+</div>
+{{/if}}

@@ -1,0 +1,48 @@
+<div>
+  <input type="hidden" name="tileUuid" value="{{tileUuid}}">
+
+  <p style="margin-bottom: 0.5rem;">
+    Select which players you want to open this Terminal for.
+  </p>
+  <p style="text-align: center;opacity: .7;margin-bottom: 0.5rem;">
+    This skips over any Skilled or Item requirements
+  </p>
+
+  <div class="form-group" style="max-height: 400px; overflow-y: auto; padding-right: 4px;">
+    <table style="width: 100%; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th style="text-align:left; padding: 6px; width: 80px;">Open?</th>
+          <th style="text-align:left; padding: 6px;">Player</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each users as |user|}}
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); background: black; color: white">
+            <td style="padding: 6px; vertical-align: top;">
+              <input type="checkbox" name="users" value="{{user.id}}">
+            </td>
+            <td style="padding: 6px; display:flex; align-items:center; gap:10px;">
+              {{#if user.avatar}}
+                <img src="{{user.avatar}}"
+                     width="40" height="40"
+                     style="border-radius:50%; object-fit:cover;">
+              {{/if}}
+              <strong>
+                {{user.name}}
+                {{#if (eq user.id ../gmId)}} (that's you){{/if}}
+              </strong>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="form-group">
+    <button type="submit" style="width: 100%; padding: 1.3em;">
+      <i class="fas fa-share-square"></i>
+      Open Terminal
+    </button>
+  </div>
+</div>

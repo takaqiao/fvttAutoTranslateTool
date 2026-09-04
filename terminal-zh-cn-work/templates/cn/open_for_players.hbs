@@ -1,0 +1,48 @@
+<div>
+  <input type="hidden" name="tileUuid" value="{{tileUuid}}">
+
+  <p style="margin-bottom: 0.5rem;">
+    选择要为哪些玩家打开此终端。
+  </p>
+  <p style="text-align: center;opacity: .7;margin-bottom: 0.5rem;">
+    此操作会跳过技能检定或物品要求。
+  </p>
+
+  <div class="form-group" style="max-height: 400px; overflow-y: auto; padding-right: 4px;">
+    <table style="width: 100%; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th style="text-align:left; padding: 6px; width: 80px;">打开？</th>
+          <th style="text-align:left; padding: 6px;">玩家</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each users as |user|}}
+          <tr style="border-bottom: 1px solid rgba(255,255,255,0.1); background: black; color: white">
+            <td style="padding: 6px; vertical-align: top;">
+              <input type="checkbox" name="users" value="{{user.id}}">
+            </td>
+            <td style="padding: 6px; display:flex; align-items:center; gap:10px;">
+              {{#if user.avatar}}
+                <img src="{{user.avatar}}"
+                     width="40" height="40"
+                     style="border-radius:50%; object-fit:cover;">
+              {{/if}}
+              <strong>
+                {{user.name}}
+                {{#if (eq user.id ../gmId)}}（这是你）{{/if}}
+              </strong>
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+
+  <div class="form-group">
+    <button type="submit" style="width: 100%; padding: 1.3em;">
+      <i class="fas fa-share-square"></i>
+      打开终端
+    </button>
+  </div>
+</div>

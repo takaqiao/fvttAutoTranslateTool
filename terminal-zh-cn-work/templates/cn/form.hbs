@@ -1,0 +1,287 @@
+
+
+<div class="region-config standard-form">
+
+
+{{#if fontPath}}
+<style>
+@font-face {
+  font-family: "terminal-custom-font";
+  src: url("{{fontPath}}") format("woff2");
+  font-display: swap;
+}
+</style>
+{{/if}}
+
+    {{#if readOnly}}
+    <header class="region-element region-behavior flexrow">
+      <div class="region-element-name" style="text-align: center; padding-bottom: 1em">此样式为只读</div>
+    </header>
+    {{/if}}
+    <div class="standard-form">
+        <fieldset>
+            <legend><i class="fa-solid fa-gear"></i> 常规</legend>
+            <div class="form-group">
+                <label>名称</label>
+                <div class="form-fields">
+                    <input type="text" name="name" value="{{name}}" {{readonlyIf readOnly}}>
+                </div>
+                <p class="hint">此样式的标识名称。</p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend><i class="fa-solid fa-waveform"></i> 效果</legend>
+            <div class="form-group">
+                <label>噪点</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="effectNoise" {{#if effectNoise}}checked{{/if}} {{readonlyIf readOnly}}/>
+                </div>
+                <p class="hint">添加噪点/静电效果。此效果性能开销较大，不建议在老旧设备上使用。</p>
+            </div>
+            <div class="form-group">
+                <label>扫描线</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="effectScan" {{#if effectScan}}checked{{/if}} {{readonlyIf readOnly}}/>
+                </div>
+                <p class="hint">CRT 电视扫描线会定期从终端顶部滚动到底部，并使用基础颜色匹配设计。</p>
+            </div>
+            <div class="form-group">
+                <label>标题解码动画</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="effectScramble" {{#if effectScramble}}checked{{/if}} {{readonlyIf readOnly}}/>
+                </div>
+                <p class="hint">一级至三级标题会产生扰码效果，动画将逐字“解码”。标题中不能包含子元素（如 &lt;span&gt;）。编辑页面时可用源代码按钮检查。</p>
+            </div>
+            <div class="form-group">
+                <label>点击故障效果</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="effectGlitch" {{#if effectGlitch}}checked{{/if}} {{readonlyIf readOnly}}/>
+                </div>
+                <p class="hint">点击任意按钮时有 1/7 概率出现故障效果（仅适用于 Chromium 浏览器）。</p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend><i class="fa-solid fa-paintbrush"></i> 颜色</legend>
+            <div class="form-group">
+                <label>阴影色</label>
+                <div class="form-fields">
+                    <color-picker name="shadow" value="{{shadow}}" {{readonlyIf readOnly}}>
+                        <input type="text" placeholder="#FFFFFF" {{readonlyIf readOnly}}>
+                        <input type="color" {{readonlyIf readOnly}}>
+                    </color-picker>
+                </div>
+                <p class="hint">终端的深色，用于标题背景和模态窗口边框。</p>
+            </div>
+            <div class="form-group">
+                <label>基础色</label>
+                <div class="form-fields">
+                    <color-picker name="base" value="{{base}}" {{readonlyIf readOnly}}>
+                        <input type="text" placeholder="#FFFFFF" {{readonlyIf readOnly}}>
+                        <input type="color" {{readonlyIf readOnly}}>
+                    </color-picker>
+                </div>
+                <p class="hint">终端的中间色，用于标题背景、内容边框和文件夹边框。</p>
+            </div>
+            <div class="form-group">
+                <label>高亮色</label>
+                <div class="form-fields">
+                    <color-picker name="highlight" value="{{highlight}}" {{readonlyIf readOnly}}>
+                        <input type="text" placeholder="#FFFFFF" {{readonlyIf readOnly}}>
+                        <input type="color" {{readonlyIf readOnly}}>
+                    </color-picker>
+                </div>
+                <p class="hint">终端的浅色，用于标题、按钮、启动画面文字和加载条。</p>
+            </div>
+        </fieldset>
+        {{#if readOnly}}{{else}}
+        <p style="text-align: center; opacity: .8;">所有终端声音都会随界面音量缩放。可使用 <a href="https://audiomass.co" style="text-decoration: none;">audiomass</a> 编辑音频。</p>
+        {{/if}}
+        <fieldset>
+            <legend><i class="fa-solid fa-music"></i> 声音</legend>
+            <div class="form-group">
+                <label>环境音</label>
+                <div class="form-fields">
+                    <button type="button" data-action="playSound" audio="{{ambient}}" style="flex:0"><i class="fa-solid fa-volume"></i></button>
+                    <input type="text" name="ambient" value="{{ambient}}" data-action="pickFile" file="audio" {{readonlyIf readOnly}} />
+                </div>
+                <p class="hint">终端环境噪声的音频文件。</p>
+            </div>
+            <div class="form-group">
+                <label>启动</label>
+                <div class="form-fields">
+                    <button type="button" data-action="playSound" audio="{{startup}}" style="flex:0"><i class="fa-solid fa-volume"></i></button>
+                    <input type="text" name="startup" value="{{startup}}" data-action="pickFile" file="audio" {{readonlyIf readOnly}} />
+                </div>
+                <p class="hint">终端启动音的音频文件。</p>
+            </div>
+            <div class="form-group">
+                <label>关闭</label>
+                <div class="form-fields">
+                    <button type="button" data-action="playSound" audio="{{close}}" style="flex:0"><i class="fa-solid fa-volume"></i></button>
+                    <input type="text" name="close" value="{{close}}" data-action="pickFile" file="audio" {{readonlyIf readOnly}} />
+                </div>
+                <p class="hint">关闭终端时播放的音频文件。</p>
+            </div>
+            <div class="form-group">
+                <label>点击</label>
+                <div class="form-fields">
+                    <button type="button" data-action="playSound" audio="{{click}}" style="flex:0"><i class="fa-solid fa-volume"></i></button>
+                    <input type="text" name="click" value="{{click}}" data-action="pickFile" file="audio" {{readonlyIf readOnly}} />
+                </div>
+                <p class="hint">点击终端中的任意文件夹按钮时播放的音频文件。</p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend><i class="fa-solid fa-image"></i> 图像</legend>
+            <div class="form-group">
+                <label>背景</label>
+                <div class="form-fields">
+                    <button type="button" data-action="pickFile" file="imagevideo" field="background" style="flex:0">
+                        <i class="fa-solid fa-image"></i>
+                    </button>
+                    <input type="text" name="background" value="{{background}}"  {{readonlyIf readOnly}} />
+                </div>
+                <p class="hint">作为背景显示的图像或视频。留空时背景使用“基础色”填充。可以使用远程 URL。</p>
+            </div>
+
+            {{#if background}}
+            <div class="form-group">
+                <label>背景不透明度</label>
+                <div class="form-fields">
+
+                    {{#if video}}
+                    <video autoplay muted loop style="opacity: {{opacity}}; width: 40px; height: 40px; flex: 0">
+                      <source src="{{background}}" type="video/mp4" />
+                    </video>
+                    {{else}}
+                    <img src="{{background}}" style="opacity: {{opacity}}; width: 40px; height: 40px; flex: 0" />
+                    {{/if}}
+
+                    <input name="opacity" type="range" min="0" max="1" value="{{opacity}}" step="0.05" {{readonlyIf readOnly}}>
+                </div>
+                <p class="hint">背景图像或视频的不透明度。</p>
+
+            </div>
+            {{else}}
+              <input name="opacity" hidden value="{{opacity}}" {{readonlyIf readOnly}}>
+            {{/if}}
+
+
+            <div class="form-group">
+                <label>边框</label>
+                <div class="form-fields">
+                    <button type="button" data-action="pickFile" file="image" field="borderImage" style="flex:0">
+                        <i class="fa-solid fa-image"></i>
+                    </button>
+                    <input type="text" name="borderImage" value="{{borderImage}}" {{readonlyIf readOnly}} />
+                </div>
+                <p class="hint">环绕终端的图像边框。可以使用远程 URL。</p>
+            </div>
+
+            {{#if borderImage}}
+            <div class="form-group">
+                <label>边框切片</label>
+                <div class="form-fields">
+                  <input name="borderSlice" type="range" value="{{borderSlice}}" min="10" max="80" step="5" {{readonlyIf readOnly}}>
+                </div>
+                <p class="hint">边框图像的平铺尺寸。</p>
+            </div>
+            {{else}}
+              <input name="borderSlice" hidden value="{{borderSlice}}" {{readonlyIf readOnly}}>
+            {{/if}}
+
+            <div class="form-group">
+                <label>启动画面</label>
+                <div class="form-fields">
+                    <button type="button" data-action="pickFile" file="imagevideo" field="splashFile" style="flex:0">
+                        <i class="fa-solid fa-image"></i>
+                    </button>
+                    <input type="text" name="splashFile" value="{{splashFile}}" {{readonlyIf readOnly}} />
+                </div>
+                <p class="hint">仅在启动时使用的图像或视频。可以使用远程 URL。启动画面通常持续约 2.55 秒，密码登录时除外。</p>
+            </div>
+
+        </fieldset>
+
+        {{#unless readOnly}}
+        <fieldset>
+            <legend><i class="fa-solid fa-font"></i> 字体</legend>
+            <div class="form-group">
+                <label>字体</label>
+                <div class="form-fields">
+                    <select name="font" {{readonlyIf readOnly}}>
+                        {{#each fonts}}
+                        <option value="{{this.value}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>自定义字体</label>
+                <div class="form-fields">
+                    <input type="text" name="fontPath" value="{{fontPath}}" placeholder="font/custom.woff2" {{readonlyIf readOnly}}>
+                </div>
+                <p class="hint">从 Foundry Data 文件夹到已上传 woff2 字体的相对路径。设置后会覆盖上方下拉框的选择。</p>
+            </div>
+            <div class="form-group">
+                <label>预览</label>
+                <div class="form-fields">
+                    <div class="terminal-font-preview" style="font-family:
+
+                    {{#if fontPath}}
+                        terminal-custom-font
+                    {{else}}
+                      {{#if font}}
+                        {{font}}
+                      {{/if}}
+                    {{/if}}
+
+                    ">The quick brown fox jumps over the lazy GM</div>
+                </div>
+            </div>
+        </fieldset>
+        {{/unless}}
+
+        {{#if readOnly}}
+        <div class="terminal-ascii" style="margin: 0">
+          <pre style="font-size: 10px">{{ascii}}</pre>
+        </div>
+        {{else}}
+        <fieldset>
+
+            <div class="form-group">
+                <label>显示 ASCII 图案和加载条</label>
+                <div class="form-fields">
+                  <input type="checkbox" name="showASCIILoading" {{#if showASCIILoading}}checked{{/if}} {{readonlyIf readOnly}}/>
+                </div>
+                <p class="hint">控制启动画面中的 ASCII 图案和加载条是否可见。使用密码登录时，无论此设置如何，两者都会显示。</p>
+            </div>
+
+            <hr />
+
+            {{#if showASCIILoading}}
+              <legend><i class="fa-solid fa-right-to-bracket"></i> ASCII 图案</legend>
+              <p style="text-align: center; opacity: .7;">此 ASCII 图案会显示在加载画面中。</p>
+              <ol style="margin: 1em;">
+                <li>前往此 ASCII 生成器<a href="https://patorjk.com/software/taag" style="text-decoration: none;">网站</a>。</li>
+                <li>选择样式并输入文字。</li>
+                <li>点击网站左下角的“Select & Copy”按钮。</li>
+                <li>在下方文本区域中全选现有文字。</li>
+                <li>粘贴复制的内容以覆盖原 ASCII 图案；关闭窗口时会自动保存。</li>
+              </ol>
+            {{/if}}
+
+            <textarea rows="10" cols="30" name="ascii" style="font-size: .5em;" {{readonlyIf readOnly}} {{#unless showASCIILoading}}hidden{{/unless}}>{{ascii}}</textarea>
+
+            {{#if showASCIILoading}}
+              <h3 style="margin:.3em;">预览</h3>
+              <div class="terminal-ascii" style="margin: 0">
+                <pre style="font-size: 10px">{{ascii}}</pre>
+              </div>
+            {{/if}}
+
+        </fieldset>
+        {{/if}}
+    <div>
+    <button data-action="refresh" style="display: none" id="terminal-refresh-form"></button>
+</div>

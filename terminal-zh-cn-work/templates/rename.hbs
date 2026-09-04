@@ -1,0 +1,92 @@
+<div class="region-config standard-form">
+    <header class="region-element region-behavior flexrow">
+        <div class="region-element-name" style="padding: .25em; padding-bottom: 1em">
+        Change the name for certain Terminal buttons
+        <span style="opacity: .7; margin-bottom: 1em"> - By default buttons are named in a generic manner. You can provide your players with a hint as to what a button might do by overwriting its name here</span>
+        </div>
+    </header>
+    <div class="standard-form">
+
+        <div class="form-group">
+            <label>Macro</label>
+            <div class="form-fields">
+                {{#if macroName}}
+                <input type="text" name="macroName" value="{{macroName}}">
+                {{else}}
+                <input type="text" disabled placeholder="A macro has not yet been associated">
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Observe Actor</label>
+            <div class="form-fields">
+                {{#if observeActor}}
+                <input type="text" name="observeActorName" value="{{observeActorName}}" placeholder="Control Actor Name">
+                {{else}}
+                <input type="text" disabled placeholder="An actor has not yet been associated">
+                {{/if}}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Titlebar</label>
+            <div class="form-fields">
+                <input type="text" name="titlebarName" value="{{titlebarName}}" placeholder="PERSONAL TERMINAL">
+            </div>
+        </div>
+
+        {{#if activeMonk}}
+        <div class="form-group">
+            <label>Run Triggers</label>
+            <div class="form-fields">
+                {{#if monk}}
+                <input type="text" name="monkName" value="{{monkName}}">
+                {{else}}
+                <input type="text" disabled placeholder="Run Triggers is not enabled">
+                {{/if}}
+            </div>
+        </div>
+        {{/if}}
+
+        <fieldset>
+            <legend>Door(s)</legend>
+
+            {{#if (eq doorsLength 0)}}
+            <span style="opacity: .9">No Doors have been associated</span>
+            {{else}}
+            <span style="opacity: .9">It's recommended to end your name with the word "door" i.e. "Jail Door"</span>
+            {{/if}}
+
+            {{#each doors}}
+            <div class="form-group">
+                <label title="{{this.uuid}}">Door {{@index}}</label>
+                <div class="form-fields">
+                    <input type="text" name="{{this.uuid}}" value="{{this.name}}">
+                    <button data-tooltip="Show Door" data-action="show" uuid="{{this.uuid}}"><i class="fa-solid fa-eye"></i></button>
+                </div>
+            </div>
+            {{/each}}
+        </fieldset>
+
+        <fieldset>
+            <legend>Secure Shell(s)</legend>
+
+            {{#if (eq sshLength 0)}}
+            <span style="opacity: .9">No Secure Shells have been associated</span>
+            {{else}}
+            <span style="opacity: .9">It's recommended to end your name with the word "terminal" i.e. "Mainframe Terminal"</span>
+            {{/if}}
+
+            {{#each ssh}}
+            <div class="form-group">
+                <label title="{{this.uuid}}">Shell {{@index}}</label>
+                <div class="form-fields">
+                    <input type="text" name="{{this.uuid}}" value="{{this.name}}">
+                    <button data-tooltip="Show Tile" data-action="show" uuid="{{this.uuid}}"><i class="fa-solid fa-eye"></i></button>
+                </div>
+            </div>
+            {{/each}}
+        </fieldset>
+    <div>
+</div>

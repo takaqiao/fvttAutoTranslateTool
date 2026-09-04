@@ -137,3 +137,9 @@ desktop.ini
 冒险/新模组/qa/units/
 冒险/新模组/qa/units_out/
 冒险/新模组/工作区/en/
+
+# Terminal 模组汉化工作副本：只入库源文本与代码。
+# audio/ background/ 是未改动的上游素材（19MB，已被上述二进制规则排除）。
+# packs/ 是 LevelDB，其 *.ldb 数据已被排除，只留 CURRENT/MANIFEST 反而是半个损坏的库；
+# 种子包从原版备份 zip 取，再用 npm run pack:build 重建。
+terminal-zh-cn-work/packs/

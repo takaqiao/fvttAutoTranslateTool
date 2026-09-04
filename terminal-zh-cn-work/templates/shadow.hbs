@@ -1,0 +1,168 @@
+{{#if hasMinUsers}}
+<div class="region-config standard-form">
+    <header class="">
+    <p class="hint" style="text-shadow: 0 0 red; text-align: center">This is experimental and still under development. <strong>Expect bugs</strong>.</p>
+    <p class="hint" style="text-shadow: 0 0 red; text-align: center">For Terminals with skill checks, the shadow will <b>not see the skill check request</b>. This is a known issue and will be resolved in a later patch</p>
+
+        <div class="" style="padding: .25em; padding-bottom: 1em">
+        Share a Terminal view
+        <span style="opacity: .75; margin-bottom: .5em"> - Terminals are always controlled by one user, the source. Using shadows you can mirror the Terminal for multiple users (think of it like the shadow is looking over the source's shoulder)</span>
+        </div>
+        <button type="button" data-action="showLimits" style="margin-bottom: .2em"><i class="fa-solid fa-traffic-cone"></i> Limitations</button>
+        <div style="display: none; margin-top: .4em; margin-bottom: .4em" class="terminal-shadow-tips">
+            <ul style="margin: 0">
+                <li>Shadows cannot see the skilled / item required window</li>
+                <li>There is no pan feature. This applies to detect motion and observe actor</li>
+                <li>If the source user has already passed the password page. The shadow will need to enter the password manually</li>
+                <li>Shadow Terminal windows need to be closed manually. In a later update I'll have them close automatically when the Source closes them.</li>
+            </ul>
+        </div>
+
+    </header>
+    <style>
+        .spinner {
+            border-style: solid;
+            border-color: #312c85;
+            border-top-color: #0000;
+            border-width: 2px;
+            border-radius: 50%;
+            width: 15px;
+            height: 15px;
+            animation: spin .8s linear infinite;
+        }
+        .hover-grow {
+          transition: transform 0.1s ease-in-out;
+        }
+        .hover-grow:hover {
+          transform: scale(1.02);
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+    <div class="standard-form">
+        <fieldset>
+            <legend><i class="fa-solid fa-hand-pointer"></i> Manual</legend>
+
+<div class="players-container terminal-shadow-select">
+            <p class="hint">Select one or more users to become shadows</p>
+
+            <div  style="display: flex; flex-wrap: wrap;">
+
+                {{#each activePlayers}}
+                <div class="player-box hover-grow" data-action="shadowSelect" pid="{{this.id}}" style="width: 100px; height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; border: 2px dashed {{#if this.terminalSelected}}orange{{else}}dimgray{{/if}}; background: black; cursor: pointer; margin: .2em">
+                    {{#if this.content}}
+                        {{this.content}}
+                        <div class="loading" style="width: 15px; height: 15px;">
+                            <div class="spinner"></div>
+                        </div>
+                    {{else}}
+                        <img src="{{this.avatar}}" style="opacity: .15; position: absolute; width: 100%; height: 100%; pointer-events:none"/>
+                        <p style="font-size: .8em; font-weight: 700; padding: 4px; text-align:center; text-decoration: underline; text-decoration-color: {{this.color}}; text-decoration-thickness: 3px; pointer-events:none; color: white">{{this.name}}</p>
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
+            <div class="form-group">
+                <button type="button" data-action="shadowSubmit" style="font-family: 'Bruno Ace'"><i class="fa-solid fa-check"></i> Confirm Shadows</button>
+            </div>
+
+</div>
+
+<div class="players-container terminal-source-select" style="display: none;">
+            <p class="hint">Select a user to become the source</p>
+
+            <div  style="flex-wrap: wrap; display: flex">
+
+                {{#each activePlayers}}
+                <div class="player-box hover-grow" data-action="sourceSelect" pid="{{this.id}}" style="width: 100px; height: 100px; display: flex; flex-direction: column; justify-content: center; align-items: center; position: relative; border: 2px dashed dimgray; background: black; cursor: pointer; margin: .2em">
+                    {{#if (eq ../uid this.id)}}
+                      {{#if @root.inTerminal}}
+                        <i class="fa-solid fa-computer" style="color: white"></i>
+                      {{else}}
+                        <i class="fa-solid fa-person-walking" style="color: white"></i>
+                      {{/if}}
+                    {{else}}
+                    <div class="loading" style="width: 15px; height: 15px;" uid="{{this.id}}">
+                        <div class="spinner"></div>
+                    </div>
+                    <i class="fa-solid fa-computer terminal-shadow-{{this.id}}" style="display:none" uid="true.{{this.id}}"></i>
+                    <i class="fa-solid fa-person-walking terminal-shadow-{{this.id}}" style="display:none" uid="false.{{this.id}}"></i>
+                    {{/if}}
+
+
+
+                    <img src="{{this.avatar}}" style="opacity: .15; position: absolute; width: 100%; height: 100%; pointer-events:none"/>
+                    <p style="font-size: .8em; font-weight: 700; padding: 4px; text-align:center; text-decoration: underline; text-decoration-color: {{this.color}}; text-decoration-thickness: 3px; pointer-events:none; color: white">{{this.name}}</p>
+                </div>
+                {{/each}}
+            </div>
+            <div class="form-group">
+                <button type="button" style="font-family: 'Bruno Ace'" data-action="resetWindow"><i class="fa-solid fa-arrow-left-from-line"></i> Go Back</button>
+            </div>
+
+</div>
+
+
+
+        </fieldset>
+
+        <fieldset>
+            <legend><i class="fa-solid fa-wand-magic-sparkles"></i> Automatic</legend>
+
+
+            <div class="form-group">
+                <label style="flex:0">Enabled</label>
+                <div class="form-fields">
+                  <input type="checkbox" name="auto" {{#if auto}}checked{{/if}}>
+                </div>
+                <p class="hint">Have a user automatically shadow a source user</p>
+            </div>
+            {{#if auto}}
+            <div class="form-group">
+                <div class="form-fields">
+
+                    <select name="shadow" style="flex: 2" data-tooltip="Shadow">
+                      {{#each allPlayers}}
+
+                        {{#if (eq this.id ../shadow)}}
+                          <option value="{{this.id}}" selected>{{this.name}}</option>
+                        {{else}}
+                          <option value="{{this.id}}">{{this.name}}</option>
+                        {{/if}}
+
+                      {{/each}}
+                    </select>
+
+                    <i class="fa-solid fa-eye" style="flex:0"></i>
+                    <i class="fa-solid fa-arrow-right" style="flex:0"></i>
+
+                    <select name="source" style="flex: 2" data-tooltip="Source">
+                        {{#each allPlayers}}
+                          {{#if (eq this.id ../source)}}
+                            <option value="{{this.id}}" selected>{{this.name}}</option>
+                          {{else}}
+                            <option value="{{this.id}}">{{this.name}}</option>
+                          {{/if}}
+                        {{/each}}
+                    </select>
+
+                </div>
+
+            </div>
+                <button data-action="swap" style="margin-top: .5em;font-family: 'Bruno Ace'" data-tooltip="Swap the shadow and source users" ><i class="fa-solid fa-right-left"></i> Swap</button>
+
+
+            {{/if}}
+
+
+
+        </fieldset>
+    <div>
+    <button data-action="refresh" style="display: none" />
+</div>
+
+{{else}}
+<p class="hint">Minimum 2 users required for the shadow feature</p>
+{{/if}}

@@ -1,0 +1,13 @@
+{
+  "name": "terminal-zh-cn-work",
+  "private": true,
+  "type": "module",
+  "description": "Working copy for the Simplified Chinese localization of the FoundryVTT Terminal module. Development only — nothing here ships; tools/deploy.ps1 copies the runtime payload.",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "pack:build": "node tools/localize-pack.mjs",
+    "pack:verify": "node tools/verify-pack.mjs",
+    "pack:inspect": "node tools/inspect-pack.mjs",
+    "deploy": "powershell -ExecutionPolicy Bypass -File tools/deploy.ps1"
+  }
+}

@@ -1,0 +1,324 @@
+{{#if TileInit}}
+<div class="tab {{#if terminalActive}}active{{/if}}" data-tab="terminal" data-group="sheet">
+<p style="color: grey; text-align: center">必须先<b>创建图块</b>，才能编辑终端设置。</p>
+</div>
+{{else}}
+<div class="tab {{#if terminalActive}}active{{/if}}" data-tab="terminal" data-group="sheet" style="gap: .2em">
+  <nav class="sheet-tabs tabs" aria-roledescription="Form Tab Navigation">
+    <a class="terminal-submenu active" data-action="tab" data-group="sheet" data-tab="general">
+      <i class="fa-solid fa-gear"></i>
+      <label>常规</label>
+    </a>
+    <a class="terminal-submenu" data-action="tab" data-group="sheet" data-tab="scripting">
+      <i class="fa-solid fa-code"></i>
+      <label>脚本</label>
+    </a>
+    <a class="terminal-submenu" data-action="tab" data-group="sheet" data-tab="auth">
+      <i class="fa-solid fa-user"></i>
+      <label>认证</label>
+    </a>
+    <a class="terminal-submenu" data-action="tab" data-group="sheet" data-tab="extra">
+      <i class="fa-solid fa-sliders-simple"></i>
+      <label>其他</label>
+    </a>
+  </nav>
+  <div class="terminal-subtab tab active" data-group="terminal" data-tab="general" style="gap: .2em">
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">关联一份日志，以动态读取其中的页面内容。<br/><br/>日志中的每个页面都会在终端内显示为按钮。<br/><br/>若要忽略某个页面，请将其所有权设为<strong>受限</strong>。</span>
+        <label>日志</label>
+        <div class="form-fields">
+            <input disabled name="flags.terminal.journal" hidden value="{{journalPrettyName}}" />
+            <input type="text" disabled value="{{journalPrettyName}}" />
+            <button type="button" class="terminal-link icon fa-solid fa-book" link="journal" style="flex: .07"/>
+        </div>
+      </div>
+      <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">启用后，任何移动到此图块上的指示物都会打开终端。<br/><br/>通过宏或安全外壳打开终端时，无需勾选此项。</span>
+        <label>启用</label>
+        <input type="checkbox" name="flags.terminal.enabled" class="terminal-auto-update-checkbox" {{#if enabled}}checked{{/if}}>
+      </div>
+      <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">决定终端的外观与风格。可选择预设，也可创建自定义样式。<br/><br/>魔杖按钮可帮助你设置图块图像。</span>
+        <label>样式</label>
+        <select name="flags.terminal.style" style="flex:1.27">
+        <option {{#if styleExists}}{{else}}checked{{/if}}></option>
+        {{#each styles}}
+        {{#if (eq ../style uuid)}}
+        <option value="{{uuid}}" selected style="background: rgba({{styleSelect uuid}})">{{name}}</option>
+        {{else}}
+        <option value="{{uuid}}" style="background: rgba({{styleSelect uuid}})">{{name}}</option>
+        {{/if}}
+        {{/each}}
+        </select>
+        <button type="button" id="terminal-autostyle" class="icon fa-solid fa-wand-magic-sparkles" style="flex: 0; height: 29px" />
+        <button type="button" id="terminal-style" class="icon fa-solid fa-pencil" style="flex: 0; height: 29px" />
+      </div>
+      {{#if observeActor}}
+      <div class="form-group">
+      <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+      <span class="terminal-tooltip">可选计时器。计时结束后，<strong>观察角色</strong>字段中所选角色的<strong>观察者</strong>权限会恢复为<strong>无</strong>，从而移除向用户提供的指示物视野。<br/><br/>单位为秒。</span>
+      <label>观察计时器</label>
+      <div class="form-fields">
+      <input name="flags.terminal.observeTimer" class="terminal-use-dialog" readable="观察计时器" type="number" value="{{observeTimer}}" />
+      </div>
+      </div>
+      {{/if}}
+      {{#if ping}}
+      <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">可侦测移动的范围，使用场景配置中的网格比例。<br/><br/>可用“测量距离”工具确定合适数值。留空时侦测范围无限。</span>
+        <label>侦测范围</label>
+        <div class="form-fields">
+          <input name="flags.terminal.pingRange" class="terminal-use-dialog" readable="侦测范围" type="number" value="{{pingRange}}" />
+        </div>
+      </div>
+      {{/if}}
+
+    <div class="form-group" style="justify-content: space-evenly">
+    {{#each doorIds}}
+    <div style="border: 1px dashed rgba(255,255,255,.2); padding: .3em; justify-content: space-around; max-width: 130px; min-width: 130px; display: flex">
+    <span data-tooltip="{{this}}" style="margin-top: .5em">门 {{@index}}</span>
+    <button type="button" class="icon fa-solid fa-eye terminal-view" data-tooltip="查看门" aria-label="查看门" style="display: inline; width: 34px" uuid={{this}}></button>
+    <button type="button" class="icon fa-solid fa-x terminal-rm-door-btn" data-tooltip="移除门" aria-label="移除门" style="width: 34px; display: inline" uuid={{this}}></button>
+    </div>
+    {{/each}}
+    </div>
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">添加用于锁定或解锁门的按钮。可以添加多个按钮（每扇门一个），使用目标辅助按钮选择门。<br/><br/>每扇门的按钮会标为“操作门 X”。按钮行为取决于门的当前状态：门处于开启或关闭状态时会将其锁定；门已锁定时会将其解锁并打开。每个按钮均可无限次使用。</span>
+        <label>锁定/解锁门</label>
+        <div class="form-fields">
+          <input type="text" disabled value="已关联 {{doorLength}} 扇门" />
+          <input disabled hidden name="flags.terminal.unlockIds" value="{{unlockIds}}" />
+          <button type="button" class="terminal-link icon fa-regular fa-location-crosshairs" pretty="DOOR" link="walls" style="flex: 0" />
+        </div>
+    </div>
+    <div class="form-group">
+    <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+    <span class="terminal-tooltip">添加一个按钮，为此场景中所选角色的所有指示物授予<strong>观察者</strong>权限。<br/><br/>先新建角色并取一个符合情境的名称，例如“摄像头”或“炮塔”（角色名称会显示在玩家看到的按钮上）。然后用该角色创建一个或多个指示物，并把它们放在希望为玩家提供视野的位置。<br/><br/>接着点击准星按钮。窗口会最小化，等待你在侧边栏中点击新角色。<br/><br/>建议每个场景使用不同角色，以免所有权变更影响其他场景。<br/><br/>也可以使用计时器，在查看其他场景前将角色所有权恢复为<strong>无</strong>。<br/><br/><span style="color: #b50202;">隐藏的指示物无法提供视野。</span></span>
+    <label>观察角色</label>
+    <div class="form-fields">
+    <button type="button" class="terminal-delete icon fa-solid fa-delete-right" id="flags.terminal.observeActor" style="flex:0"></button>
+    <input disabled name="flags.terminal.observeActor" hidden value="{{observeActor}}" />
+    <input type="text" disabled id="terminal-hidden-observe" value="{{actorPrettyName}}" />
+    <button type="button" class="terminal-link icon fa-regular fa-location-crosshairs" link="actors" pretty="ACTOR" style="flex:0" />
+    </div>
+    </div>
+    {{#if observeActor}}
+    <div class="form-group">
+    <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+    <span class="terminal-tooltip">指定执行上述<b>观察操作</b>时切换到的另一场景。<br/><br/>此项为<b>可选</b>，默认不会切换场景。<br/><br/><span style="color: #b50202;">建议启用“切换场景时保持终端打开”，以免终端关闭。</span></span>
+    <label>观察场景</label>
+    <div class="form-fields">
+    <button type="button" class="terminal-delete icon fa-solid fa-delete-right" id="flags.terminal.observeScene" style="flex:0"></button>
+    <input disabled name="flags.terminal.observeScene" hidden value="{{observeScene}}" />
+    <input type="text" disabled id="terminal-hidden-observe-scene" value="{{observeScenePrettyName}}" />
+    <button type="button" class="terminal-link icon fa-regular fa-location-crosshairs" link="scenes" pretty="SCENE" style="flex:0" />
+    </div>
+    </div>
+    {{/if}}
+    <div class="form-group" style="justify-content: space-evenly">
+    {{#each ssh}}
+    <div style="border: 1px dashed rgba(255,255,255,.2); padding: .3em; justify-content: space-around; max-width: 130px; min-width: 130px; display: flex">
+    <span data-tooltip="{{this}}" style="margin-top: .5em; padding-right: .1em">外壳 {{@index}} </span>
+    <button type="button" class="icon fa-solid fa-eye terminal-view" data-tooltip="查看图块" aria-label="查看图块" style="display: inline; width: 34px" uuid={{this}}></button>
+    <button type="button" class="icon fa-solid fa-x terminal-rm-tile-btn" data-tooltip="移除图块" aria-label="移除图块" style="width: 34px; display: inline" uuid={{this}}></button>
+    </div>
+    {{/each}}
+    </div>
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">打开另一个终端，以模拟安全外壳（SSH）。<br/><br/>请先创建另一个终端（可位于任意场景），并为其图块关联日志；这是唯一要求，新终端无需启用。然后点击准星，选择新建的终端图块，即可将当前图块与目标终端关联。<br/><br/>建议为新终端设置明显不同的样式，以免玩家误以为再次打开了同一个终端。<br/><br/>安全外壳目前会绕过认证物品和登录技能检定。建议改为或额外给安全外壳本身设置密码及技能检定。</span>
+        <label>安全外壳</label>
+        <div class="form-fields">
+          <input type="text" disabled value="已关联 {{sshLength}} 个外壳" />
+          <input disabled hidden name="flags.terminal.ssh" value="{{ssh}}" />
+          <button type="button" class="icon fa-regular fa-location-crosshairs terminal-link" data-tooltip="添加安全外壳" link="tiles" pretty="TILE" style="flex:0"></button>
+        </div>
+    </div>
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">添加一个探索整个场景的按钮。它会为触发操作的<strong style="color:black;">单个</strong>玩家揭示全部战争迷雾。<br/><br/><span style="color: #b50202">需要启用以下场景设置：指示物视觉、迷雾探索，并关闭全局照明。</span></span>
+        <label>地图按钮</label>
+        <input type="checkbox" name="flags.terminal.explore" {{#if explore}}checked{{/if}}>
+    </div>
+    {{#if explore}}
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">默认情况下，地图按钮只会为触发操作的用户探索或揭示战争迷雾。<br/><br/>启用后，地图按钮会向<b>所有其他用户</b>共享地图。<br/><br/><span style="color: #b50202">系统不会检查所有用户是否在同一场景！如果其他用户正在查看不同场景，那个场景也会<b>被揭示</b>。</span></span>
+        <label>地图按钮为所有用户探索</label>
+        <input type="checkbox" name="flags.terminal.exploreAll" {{#if exploreAll}}checked{{/if}}>
+    </div>
+    {{/if}}
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">添加一个按钮，在接下来一分钟内标记场景中所有指示物的位置。<br/><br/>这用于模拟玩家解读终端所连接传感器的数据。<br/><br/>玩家可借此大致了解场景中指示物的数量和位置，特别适合容易迷路的大型场景或提示危险房间。<br/><br/>若要忽略某角色的指示物，请添加<strong>死亡</strong>状态效果，或关闭指示物可见性。<br/><br/>可通过“侦测范围”字段限制侦测距离。</span>
+        <label>侦测移动按钮</label>
+        <input type="checkbox" name="flags.terminal.ping" {{#if ping}}checked{{/if}}>
+    </div>
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">添加一个切换黑暗度的按钮。场景会过渡到黑暗度 0 或 1，以距离当前值较远者为目标。<br/><br/>该功能适合搭配灯光的激活设置使用。可在灯光的基础配置中设置<strong>激活范围</strong>。<br/><br/>例如，要模拟应急灯，可在场景中创建红色灯光并将<strong>激活范围</strong>设为 <strong>.9</strong> 到 <strong>1</strong>。黑暗度超过 .9 后，这些灯光会自动启用。</span>
+        <label>切换黑暗度按钮</label>
+        <input type="checkbox" name="flags.terminal.lights" {{#if lights}}checked{{/if}}>
+    </div>
+    {{#if (eq system "alienrpg")}}
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">添加一个按钮，允许任意玩家将所有物品充满电。<br/><br/>此功能很简单：它会为该玩家<strong>拥有的所有角色</strong>充满物品栏中的全部物品，不会检查图块或场景中是否存在对应指示物。<br/><br/><span style="color: #596D81;">Alien RPG 专属 👽</span></span>
+        <label>充电按钮</label>
+        <input type="checkbox" name="flags.terminal.alienCharge" {{#if alienCharge}}checked{{/if}}>
+    </div>
+    {{/if}}
+
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">覆盖终端中部分按钮显示的文字。</span>
+        <label>重命名按钮</label>
+        <button type="button" class="icon fa-solid fa-input-text" style="" id="terminal-rename-btn"></button>
+    </div>
+
+    <h1 style="font-size: 1.5em; margin:0; text-align: center"><i class="fa-solid fa-flask fa-bounce"></i> 测试功能</h1>
+    <div class="form-group">
+      <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+      <span class="terminal-tooltip">强制用户手动输入命令。<br/><br/><span style="color: #b50202;">此功能仍在测试中，可能存在错误。</span></span>
+      <label>命令行模式</label>
+      <div class="form-fields">
+        <input type="checkbox" name="flags.terminal.cliMode" class="terminal-auto-update-checkbox" {{#if cliMode}}checked{{/if}}>
+      </div>
+    </div>
+    <input name="flags.terminal.refreshConfig" hidden />
+  </div>
+  <div class="terminal-subtab tab" data-group="terminal" data-tab="scripting" style="gap: .2em">
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">添加一个用于运行宏的按钮。此功能使用“GM 代理”：玩家只会通知 GM 要运行哪个宏，宏最终在 GM 端执行。<br/><br/>按钮标题会使用宏的名称。<br/><br/>
+        {{#if hasMonk}}检测到 Monk's Active Tile Triggers，本模组支持与其集成。请勾选下方的“运行触发器按钮”并按说明操作。
+        {{else}}若想在玩家端运行宏，建议使用 Monk's Active Tile Triggers。
+        {{/if}}</span>
+        <label>宏按钮</label>
+        <div class="form-fields">
+          <button type="button" class="terminal-delete icon fa-solid fa-delete-right" id="flags.terminal.macro" style="flex:0"></button>
+          <input disabled name="flags.terminal.macro" hidden value="{{macro}}" />
+          <input type="text" disabled id="terminal-hidden-macro" value="{{macroPrettyName}}" />
+          <button type="button" class="icon fa-regular fa-location-crosshairs terminal-link" link="macros" style="flex:0"></button>
+        </div>
+    </div>
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">传递给宏的参数。参数用逗号分隔，可在宏中通过 args[x] 访问；x 为从 0 开始的位置编号。</span>
+        <label>宏参数</label>
+        <div class="form-fields">
+          <input type="text" name="flags.terminal.macroArgs" value="{{macroArgs}}" class="terminal-use-dialog" readable="宏参数（逗号分隔）" />
+        </div>
+    </div>
+    {{#if macro}}
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">宏按钮只能运行一次。<br/><br/>启用后会出现新的“宏已锁定”复选框。它最初未勾选，宏运行一次后会自动锁定，防止再次从终端运行。<br/><br/>要重置锁定，请返回此设置页并取消勾选“宏已锁定”，之后即可再次运行宏。</span>
+        <label>一次性宏</label>
+        <input type="checkbox" name="flags.terminal.lockableMacro" {{#if lockableMacro}}checked{{/if}}>
+    </div>
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">以触发操作的玩家身份运行宏。<br/><br/><span style="color: #b50202;">该玩家<b>必须拥有宏的受限、观察者或拥有者权限</b>。</span></span>
+        <label>以触发玩家身份运行宏</label>
+        <input type="checkbox" name="flags.terminal.macroNoProxy" {{#if macroNoProxy}}checked{{/if}}>
+    </div>
+    {{/if}}
+    {{#if lockableMacro}}
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip"><span style="color: #b50202;">此项决定宏能否再次运行。无需手动勾选；玩家运行宏后它会自动锁定。但在新一轮游戏前，需要手动取消勾选才能完全重置。</span><br/><br/>勾选时，宏按钮不会运行宏。<br/><br/>未勾选时，宏仍可运行一次。<br/><br/>若要禁用一次性宏，请取消勾选“一次性宏”。</span>
+        <label>宏已锁定</label>
+        <input type="checkbox" name="flags.terminal.macroLocked" {{#if macroLocked}}checked{{/if}}>
+    </div>
+    {{/if}}
+    {{#if hasMonk}}
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">添加一个按钮，用于运行此图块“触发器”面板中的动作。</span>
+        <label>运行触发器按钮</label>
+        <input type="checkbox" name="flags.terminal.monk" {{#if monk}}checked{{/if}}>
+    </div>
+    {{/if}}
+    <div class="form-group">
+      <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+      <span class="terminal-tooltip">通过模拟任意事件来触发任意区域。</span>
+      <label>触发区域</label>
+      <button type="button" class="icon fa-solid fa-map" style="" id="terminal-regions-btn"></button>
+    </div>
+    <div class="form-group">
+      <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+      <span class="terminal-tooltip">直接为玩家打开此终端，无需让他们把指示物移动到图块上。</span>
+      <label>为玩家打开</label>
+      <button type="button" class="icon fa-solid fa-users" style="" id="terminal-open-gui-btn"></button>
+    </div>
+    <div class="form-group">
+      <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+      <span class="terminal-tooltip">了解如何通过程序与终端交互。</span>
+      <label>使用终端 API</label>
+      <button type="button" class="icon fa-solid fa-circle-info" id="terminal-learn-api-btn"></button>
+    </div>
+  </div>
+  <div class="terminal-subtab tab" data-group="terminal" data-tab="auth" style="gap: .2em">
+    <div class="form-group">
+      <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+      <span class="terminal-tooltip">用户必须输入密码才能访问终端。<br/><br/>密码<strong>区分大小写</strong>，此处使用的大写字母在访问终端时也必须按原样输入。<br/><br/>清空此字段即可禁用密码要求。</span>
+      <label>密码</label>
+      <div class="form-fields">
+          <input type="text" name="flags.terminal.password" value="{{password}}" readable="密码" class="terminal-use-dialog" />
+      </div>
+    </div>
+    <div class="form-group">
+      <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+      <span class="terminal-tooltip">用户必须持有指定物品才能访问终端，用于模拟门禁卡或其他实体认证钥匙。<br/><br/><span style="color: #b50202;"><strong>登录前</strong>技能检定优先级更高，会绕过物品要求。请只选择其中一种访问方式。（密码设置不受此限制，例如可以同时要求密码和物品。）</span></span>
+      <label>需要物品</label>
+      <div class="form-fields">
+          <button type="button" class="terminal-delete icon fa-solid fa-delete-right" id="flags.terminal.keycard" style="flex:0"></button>
+          <input disabled name="flags.terminal.keycard" hidden value="{{keycard}}" />
+          <input type="text" disabled id="terminal-hidden-keycard" value="{{itemPrettyName}}" />
+          <button type="button" class="icon fa-regular fa-location-crosshairs terminal-link" pretty="ITEM" link="items" style="flex:0"></button>
+      </div>
+    </div>
+    <div class="form-group">
+      <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+      <span class="terminal-tooltip">精确指定玩家在访问哪些功能时会被拦截，并被要求进行技能检定。</span>
+      <label>技能检定</label>
+      <button type="button" class="icon fa-regular fa-dice-d20" style="" id="terminal-check-btn"></button>
+    </div>
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">默认情况下，玩家关闭终端时会被询问是否共享关联日志。启用此项会关闭该提示并禁止共享日志。</span>
+        <label>禁止共享日志</label>
+        <input type="checkbox" name="flags.terminal.disableJournalSharing" {{#if disableJournalSharing}}checked{{/if}}>
+    </div>
+    {{#if hasPuzzleLocks}}
+    <p style="text-align:center;" ><a href="https://github.com/CodaBool/terminal/wiki/Compatibility#puzzle-locks">Puzzle Locks 指南</a></p>
+    {{/if}}
+  </div>
+  <div class="terminal-subtab tab" data-group="terminal" data-tab="extra" style="gap: .2em">
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">默认情况下，切换场景时终端会自动关闭。启用后终端窗口将保持打开。</span>
+        <label>切换场景时保持终端打开</label>
+        <input type="checkbox" name="flags.terminal.keepOpenOnSceneChange" {{#if keepOpenOnSceneChange}}checked{{/if}}>
+    </div>
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">存在战斗遭遇时忽略此终端，即使它已启用也不会显示窗口，避免在遭遇移动中意外打开终端。<br/><br/>战斗开始前也可能已存在遭遇！此项检查的是遭遇，因此会在战斗<b>正式开始前</b>生效。<br/><br/>通过宏打开终端时不受此项影响。</span>
+        <label>遭遇期间忽略终端</label>
+        <input type="checkbox" name="flags.terminal.ignoreIfEncounter" {{#if ignoreIfEncounter}}checked{{/if}}>
+    </div>
+    <div class="form-group">
+        <i class="fa-thin fa-circle-info terminal-tooltip-icon"></i>
+        <span class="terminal-tooltip">向开发者 <strong>CodaBool</strong> 发送邮件。也可以在 Foundry Discord 中搜索 <strong>CodaBool</strong> 并发送私信。</span>
+        <label>报告错误</label>
+        <button type="button" class="icon fa-solid fa-comment" style="" id="terminal-feedback-btn"></button>
+    </div>
+  </div>
+</div>
+{{/if}}

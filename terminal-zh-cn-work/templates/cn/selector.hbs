@@ -1,0 +1,21 @@
+<!-- region-config is a Foundry managed class, it aligns items right -->
+<div class="region-config standard-form">
+    <header class="region-element region-behavior flexrow">
+        <div class="region-element-name" style="padding: .25em; padding-bottom: 1em">{{field}}<span style="opacity: .7; margin-bottom: 1em"> - {{details}}</span></div>
+    </header>
+    <div class="standard-form">
+        {{#each data}}
+        <fieldset class="region-element region-behavior flexrow" style="padding: 0">
+            <div class="form-group">
+                {{#if this.checked}}
+                <label style="margin-left: 2em; flex: 9">{{this.name}}</label>
+                <input type="radio" checked>
+                {{else}}
+                <label style="margin-left: 2em; cursor: pointer; flex: 9" data-action="select" uuid="{{this.id}}">{{this.name}}</label>
+                <input type="radio" data-action="select" uuid="{{this.id}}" style="cursor: pointer" >
+                {{/if}}
+            </div>
+        </fieldset>
+        {{/each}}
+    <div>
+</div>

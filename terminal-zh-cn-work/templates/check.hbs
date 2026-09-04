@@ -1,0 +1,97 @@
+<div class="region-config standard-form">
+    <header class="region-element region-behavior flexrow">
+        <div class="region-element-name" style="padding: .25em; padding-bottom: 1em">When should Skill Checks happen? <span style="opacity: .7; margin-bottom: 1em"> - Players will be halted from reaching certain features if enabled here. This will restrict access to the feature until the player has gotten GM approval. During this time a skill check can be performed. Then access can be granted or denied.<br/><br/>All checks are skipped for GMs.</span></div>
+    </header>
+    <div class="standard-form">
+        <fieldset>
+            <legend>Login</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">When the player token walks onto an enabled Terminal tile but before they see the Terminal UI. Secure shell currently bypasses this.</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="skilled" {{#if skilled}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Observing Actor</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">Before being given Observer for an actor.</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="observeCheck" {{#if observeCheck}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Revealing Map</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">When clicking on the Map button in the Terminal interface.</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="exploreCheck" {{#if exploreCheck}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Locking or Unlocking Doors</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">When clicking on the Lock or Unlock button in the Terminal interface.</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="doorCheck" {{#if doorCheck}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Toggling Lights</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">When clicking on the Lights/Power button in the Terminal interface.</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="lightCheck" {{#if lightCheck}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Detecting Motion</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">When clicking on the Detect Motion button in the Terminal interface.</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="pingCheck" {{#if pingCheck}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Running any Macro</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">When clicking on any Macro button in the Terminal interface.{{#if hasMonk}}<br/><br/>This includes macro buttons from Monk's Active Tiles{{/if}}</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="macroCheck" {{#if macroCheck}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Triggering Regions</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">When clicking on a button which triggers a region</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="regionCheck" {{#if regionCheck}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Running Secure Shell</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">When clicking on the Secure Shell button.</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="sshCheck" {{#if sshCheck}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Add Encryption</legend>
+            <div class="form-group">
+                <label class="hint" style="font-weight: 500; max-width: 480px; line-height: 1em">This will "encrypt" pages in the journal and add them as buttons. This will require a skill check to "decrypt". To mark a page in a journal as encrypted. Set its ownership to None. The default Inherit ownership for pages will be used as "plain text" files that are not encrypted. Which can be viewed without a skill check. If you still want pages only viewable by the GM, you can use the Limited ownership, and they will be hidden from players.</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="encryption" {{#if encryption}}checked{{/if}}/>
+                </div>
+            </div>
+        </fieldset>
+    <div>
+</div>

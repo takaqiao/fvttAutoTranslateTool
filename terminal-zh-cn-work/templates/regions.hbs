@@ -1,0 +1,71 @@
+<div class="region-config standard-form">
+    <header class="region-element region-behavior flexrow">
+        <div class="region-element-name" style="padding: .25em; padding-bottom: 1em">
+        Add Regions to trigger their behaviors from a Terminal
+        <span style="opacity: .8"> - Simulate any event (i.e. "Token Enters") for any Region</span>
+        <button type="button" data-action="showTips" style="margin-top: 1em; width: 100%">How does this work?</button>
+        <div style="display: none; margin-top: 1em" class="terminal-region-tips">
+            <ul style="margin: 0">
+                <li>To trigger a Macro behavior, the triggering player will need at least <b>Observer</b> permission on the macro</li>
+                <li>When requiring a skill check, behaviors get ran on the GM side</li>
+                <li>You can add Regions from other scenes 😎</li>
+                <li>Token events (i.e. "Token Move") require at least 1 token present on the scene viewed by the triggering player (it doesn't matter what token)</li>
+                <li>To trigger a teleport token behavior, use the "tokenMoveIn" event</li>
+                <ul>
+                    <li>This requires a <b>single owned</b> token from the triggering player present on the scene</li>
+                    <li>Forces the behaviors to be ran on the GM side</li>
+                </ul>
+            </ul>
+        </div>
+        </div>
+    </header>
+    <div class="standard-form">
+
+      <button type="button" data-action="addRegion">
+        <i class="fa-regular fa-location-crosshairs"></i> Add Region Trigger
+      </button>
+
+      {{#unless noRegion}}
+        <fieldset style="margin-top: 1em">
+            <legend>Region Triggers</legend>
+
+            {{#each regions}}
+              <div uuid="{{this.uuid}}" style="display: grid; gap: .4em">
+                {{#unless (eq @index 0)}}
+                  <hr/>
+                {{/unless}}
+
+                <div>
+                  <span class="hint" data-tooltip="{{this.uuid}}">{{this.prettyContext}}</span>
+                  <button style="width: 40px; float: right" type="button" class="icon fa-regular fa-trash-alt" data-tooltip="Remove Region Trigger" data-action="removeRegion" id="{{this.uuid}}" />
+                </div>
+
+                <div class="form-group">
+                  <label>Simulated Event</label>
+                  <div class="form-fields">
+                    <select name="event">
+                      {{#each ../events}}
+
+                        {{#if (eq ../this.event this)}}
+                          <option value="{{this}}" selected>{{this}}</option>
+                        {{else}}
+                          <option value="{{this}}">{{this}}</option>
+                        {{/if}}
+
+                      {{/each}}
+                    </select>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label>Button Name</label>
+                  <div class="form-fields">
+                    <input type="text" name="btnName" value="{{this.btnName}}" />
+                  </div>
+                </div>
+              </div>
+            {{/each}}
+        </fieldset>
+        {{/unless}}
+    <div>
+</div>

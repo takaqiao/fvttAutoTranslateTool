@@ -1,0 +1,287 @@
+
+
+<div class="region-config standard-form">
+
+
+{{#if fontPath}}
+<style>
+@font-face {
+  font-family: "terminal-custom-font";
+  src: url("{{fontPath}}") format("woff2");
+  font-display: swap;
+}
+</style>
+{{/if}}
+
+    {{#if readOnly}}
+    <header class="region-element region-behavior flexrow">
+      <div class="region-element-name" style="text-align: center; padding-bottom: 1em">This style is read only</div>
+    </header>
+    {{/if}}
+    <div class="standard-form">
+        <fieldset>
+            <legend><i class="fa-solid fa-gear"></i> General</legend>
+            <div class="form-group">
+                <label>Name</label>
+                <div class="form-fields">
+                    <input type="text" name="name" value="{{name}}" {{readonlyIf readOnly}}>
+                </div>
+                <p class="hint">An identifier for this style</p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend><i class="fa-solid fa-waveform"></i> Effects</legend>
+            <div class="form-group">
+                <label>Noise</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="effectNoise" {{#if effectNoise}}checked{{/if}} {{readonlyIf readOnly}}/>
+                </div>
+                <p class="hint">Adds a noise / static effect. This is a performance intensive effect, not recommended for older machines.</p>
+            </div>
+            <div class="form-group">
+                <label>Scan Line</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="effectScan" {{#if effectScan}}checked{{/if}} {{readonlyIf readOnly}}/>
+                </div>
+                <p class="hint">Periodically a CRT TV scan line will scroll down the Terminal. This uses the base color to match your design</p>
+            </div>
+            <div class="form-group">
+                <label>Decode Animation on Headers</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="effectScramble" {{#if effectScramble}}checked{{/if}} {{readonlyIf readOnly}}/>
+                </div>
+                <p class="hint">Headers level 1 - 3 will have a scramble effect. An animation will "decode" each character. Note that the header must not contain any child elements. i.e. &lt;span&gt;. You can use the source button while editing the page to verify this.</p>
+            </div>
+            <div class="form-group">
+                <label>Glitch Click</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="effectGlitch" {{#if effectGlitch}}checked{{/if}} {{readonlyIf readOnly}}/>
+                </div>
+                <p class="hint">Add a glitch effect that happens on a 1 in 7 chance when clicking on any button (only works on Chromium browsers).</p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend><i class="fa-solid fa-paintbrush"></i> Color</legend>
+            <div class="form-group">
+                <label>Shadow</label>
+                <div class="form-fields">
+                    <color-picker name="shadow" value="{{shadow}}" {{readonlyIf readOnly}}>
+                        <input type="text" placeholder="#FFFFFF" {{readonlyIf readOnly}}>
+                        <input type="color" {{readonlyIf readOnly}}>
+                    </color-picker>
+                </div>
+                <p class="hint">The darker color for the Terminal. (used in title background, modal border)</p>
+            </div>
+            <div class="form-group">
+                <label>Base</label>
+                <div class="form-fields">
+                    <color-picker name="base" value="{{base}}" {{readonlyIf readOnly}}>
+                        <input type="text" placeholder="#FFFFFF" {{readonlyIf readOnly}}>
+                        <input type="color" {{readonlyIf readOnly}}>
+                    </color-picker>
+                </div>
+                <p class="hint">The midtone color for the Terminal (used in title background, content border, folder border)</p>
+            </div>
+            <div class="form-group">
+                <label>Highlight</label>
+                <div class="form-fields">
+                    <color-picker name="highlight" value="{{highlight}}" {{readonlyIf readOnly}}>
+                        <input type="text" placeholder="#FFFFFF" {{readonlyIf readOnly}}>
+                        <input type="color" {{readonlyIf readOnly}}>
+                    </color-picker>
+                </div>
+                <p class="hint">The lighter color for the Terminal (used in title, button, splash text color. loading bar)</p>
+            </div>
+        </fieldset>
+        {{#if readOnly}}{{else}}
+        <p style="text-align: center; opacity: .8;">All Terminal sound scales with your Interface volume. Use <a href="https://audiomass.co" style="text-decoration: none;">audiomass</a> for audio editing</p>
+        {{/if}}
+        <fieldset>
+            <legend><i class="fa-solid fa-music"></i> Sound</legend>
+            <div class="form-group">
+                <label>Ambient</label>
+                <div class="form-fields">
+                    <button type="button" data-action="playSound" audio="{{ambient}}" style="flex:0"><i class="fa-solid fa-volume"></i></button>
+                    <input type="text" name="ambient" value="{{ambient}}" data-action="pickFile" file="audio" {{readonlyIf readOnly}} />
+                </div>
+                <p class="hint">audio file for the ambient noise of the Terminal</p>
+            </div>
+            <div class="form-group">
+                <label>Startup</label>
+                <div class="form-fields">
+                    <button type="button" data-action="playSound" audio="{{startup}}" style="flex:0"><i class="fa-solid fa-volume"></i></button>
+                    <input type="text" name="startup" value="{{startup}}" data-action="pickFile" file="audio" {{readonlyIf readOnly}} />
+                </div>
+                <p class="hint">audio file for the startup noise of the Terminal</p>
+            </div>
+            <div class="form-group">
+                <label>Close</label>
+                <div class="form-fields">
+                    <button type="button" data-action="playSound" audio="{{close}}" style="flex:0"><i class="fa-solid fa-volume"></i></button>
+                    <input type="text" name="close" value="{{close}}" data-action="pickFile" file="audio" {{readonlyIf readOnly}} />
+                </div>
+                <p class="hint">audio file for when closing out of the Terminal</p>
+            </div>
+            <div class="form-group">
+                <label>Click</label>
+                <div class="form-fields">
+                    <button type="button" data-action="playSound" audio="{{click}}" style="flex:0"><i class="fa-solid fa-volume"></i></button>
+                    <input type="text" name="click" value="{{click}}" data-action="pickFile" file="audio" {{readonlyIf readOnly}} />
+                </div>
+                <p class="hint">audio file for when clicking on any folder button in the Terminal</p>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend><i class="fa-solid fa-image"></i> Images</legend>
+            <div class="form-group">
+                <label>Background</label>
+                <div class="form-fields">
+                    <button type="button" data-action="pickFile" file="imagevideo" field="background" style="flex:0">
+                        <i class="fa-solid fa-image"></i>
+                    </button>
+                    <input type="text" name="background" value="{{background}}"  {{readonlyIf readOnly}} />
+                </div>
+                <p class="hint">An image or video to display as the background. If left empty the background will be filled based on your "Base" color. Can be a remote URL.</p>
+            </div>
+
+            {{#if background}}
+            <div class="form-group">
+                <label>Background Opacity</label>
+                <div class="form-fields">
+
+                    {{#if video}}
+                    <video autoplay muted loop style="opacity: {{opacity}}; width: 40px; height: 40px; flex: 0">
+                      <source src="{{background}}" type="video/mp4" />
+                    </video>
+                    {{else}}
+                    <img src="{{background}}" style="opacity: {{opacity}}; width: 40px; height: 40px; flex: 0" />
+                    {{/if}}
+
+                    <input name="opacity" type="range" min="0" max="1" value="{{opacity}}" step="0.05" {{readonlyIf readOnly}}>
+                </div>
+                <p class="hint">The opacity for the background image or video.</p>
+
+            </div>
+            {{else}}
+              <input name="opacity" hidden value="{{opacity}}" {{readonlyIf readOnly}}>
+            {{/if}}
+
+
+            <div class="form-group">
+                <label>Border</label>
+                <div class="form-fields">
+                    <button type="button" data-action="pickFile" file="image" field="borderImage" style="flex:0">
+                        <i class="fa-solid fa-image"></i>
+                    </button>
+                    <input type="text" name="borderImage" value="{{borderImage}}" {{readonlyIf readOnly}} />
+                </div>
+                <p class="hint">An image border around the Terminal. Can be a remote URL.</p>
+            </div>
+
+            {{#if borderImage}}
+            <div class="form-group">
+                <label>Border Slice</label>
+                <div class="form-fields">
+                  <input name="borderSlice" type="range" value="{{borderSlice}}" min="10" max="80" step="5" {{readonlyIf readOnly}}>
+                </div>
+                <p class="hint">Tiling size for the border image</p>
+            </div>
+            {{else}}
+              <input name="borderSlice" hidden value="{{borderSlice}}" {{readonlyIf readOnly}}>
+            {{/if}}
+
+            <div class="form-group">
+                <label>Splash Screen</label>
+                <div class="form-fields">
+                    <button type="button" data-action="pickFile" file="imagevideo" field="splashFile" style="flex:0">
+                        <i class="fa-solid fa-image"></i>
+                    </button>
+                    <input type="text" name="splashFile" value="{{splashFile}}" {{readonlyIf readOnly}} />
+                </div>
+                <p class="hint">An image or video that will be used only on startup. Can be a remote URL. Keep in mind the splash screen is timed (~2.55s), except on password logins.</p>
+            </div>
+
+        </fieldset>
+
+        {{#unless readOnly}}
+        <fieldset>
+            <legend><i class="fa-solid fa-font"></i> Font</legend>
+            <div class="form-group">
+                <label>Font</label>
+                <div class="form-fields">
+                    <select name="font" {{readonlyIf readOnly}}>
+                        {{#each fonts}}
+                        <option value="{{this.value}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Custom Font</label>
+                <div class="form-fields">
+                    <input type="text" name="fontPath" value="{{fontPath}}" placeholder="font/custom.woff2" {{readonlyIf readOnly}}>
+                </div>
+                <p class="hint">A relative path from your Foundry Data folder to a woff2 font you uploaded. If set, this overrides the above dropdown choice.</p>
+            </div>
+            <div class="form-group">
+                <label>Preview</label>
+                <div class="form-fields">
+                    <div class="terminal-font-preview" style="font-family:
+
+                    {{#if fontPath}}
+                        terminal-custom-font
+                    {{else}}
+                      {{#if font}}
+                        {{font}}
+                      {{/if}}
+                    {{/if}}
+
+                    ">The quick brown fox jumps over the lazy GM</div>
+                </div>
+            </div>
+        </fieldset>
+        {{/unless}}
+
+        {{#if readOnly}}
+        <div class="terminal-ascii" style="margin: 0">
+          <pre style="font-size: 10px">{{ascii}}</pre>
+        </div>
+        {{else}}
+        <fieldset>
+
+            <div class="form-group">
+                <label>Show ASCII and Loading bar</label>
+                <div class="form-fields">
+                  <input type="checkbox" name="showASCIILoading" {{#if showASCIILoading}}checked{{/if}} {{readonlyIf readOnly}}/>
+                </div>
+                <p class="hint">Toggle the visibility of the ASCII art and loading bar. These are used on the initial splash screen (ascii and loading bars are always shown for password logins regardless of this setting)</p>
+            </div>
+
+            <hr />
+
+            {{#if showASCIILoading}}
+              <legend><i class="fa-solid fa-right-to-bracket"></i> ASCII Art</legend>
+              <p style="text-align: center; opacity: .7;">This ASCII art will be on the Loading screen</p>
+              <ol style="margin: 1em;">
+                <li>go to this ASCII generator <a href="https://patorjk.com/software/taag" style="text-decoration: none;">site</a></li>
+                <li>pick your style and text</li>
+                <li>click the "Select & Copy" button at the very bottom left of the linked site</li>
+                <li>In the text area below, select all the text</li>
+                <li>Paste your copied text below to overwrite your previous ASCII art. The value will be saved on closing the window</li>
+              </ol>
+            {{/if}}
+
+            <textarea rows="10" cols="30" name="ascii" style="font-size: .5em;" {{readonlyIf readOnly}} {{#unless showASCIILoading}}hidden{{/unless}}>{{ascii}}</textarea>
+
+            {{#if showASCIILoading}}
+              <h3 style="margin:.3em;">Preview</h3>
+              <div class="terminal-ascii" style="margin: 0">
+                <pre style="font-size: 10px">{{ascii}}</pre>
+              </div>
+            {{/if}}
+
+        </fieldset>
+        {{/if}}
+    <div>
+    <button data-action="refresh" style="display: none" id="terminal-refresh-form"></button>
+</div>

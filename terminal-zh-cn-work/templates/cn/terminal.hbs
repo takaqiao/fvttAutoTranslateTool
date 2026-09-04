@@ -1,0 +1,104 @@
+{{#if cliMode}}
+  {{> "modules/terminal/templates/cn/terminal_cli.hbs"}}
+{{else}}
+  {{#if error}}
+  <h1 style="margin: 2em; text-align: center; margin-top: 20vh"><i class="fa-solid fa-message-exclamation fa-bounce" style="margin-right: 1em"></i>{{error}}</h1>
+  {{else}}
+  <div
+    {{#if fontPath}}
+      style="font-family: 'terminal-custom-font';"
+    {{else}}
+      {{#if font}}
+        style="font-family: {{font}};"
+      {{/if}}
+    {{/if}}
+  >
+
+      {{#if fontPath}}
+      <style>
+      @font-face {
+        font-family: "terminal-custom-font";
+        src: url("{{fontPath}}") format("woff2");
+        font-display: swap;
+      }
+      </style>
+      {{/if}}
+
+      <!-- used for noise background -->
+      <canvas class="terminal-noise terminal-full"></canvas>
+
+      <!-- background video -->
+      {{#if backgroundVideo}}
+        <video
+          class="terminal-full"
+          autoplay
+          muted
+          loop
+          style="opacity: {{opacity}}; object-fit: cover; pointer-events: none; z-index: 1"
+        >
+          <source src="{{background}}" type="video/mp4" />
+        </video>
+      {{/if}}
+
+      <div class="terminal-splash terminal-full" style="color: {{highlight}}; z-index: 1; background-position: center; background-size: cover; background-image: url('{{splashFile}}'); {{#if splashFile}}background: black{{/if}}">
+          <!-- splash file could be an image -->
+          {{#if splashFile}}
+            <video
+              class="terminal-video-splash terminal-full"
+              style="object-fit: cover; pointer-events: none"
+              autoplay
+              muted
+              loop
+            >
+              <source src="{{splashFile}}" />
+            </video>
+          {{/if}}
+
+          <div class="terminal-ascii terminal-z" style="display:{{#if showASCIILoading}}grid{{else}}none{{/if}}; font-weight: 1000">
+            <pre>{{ascii}}</pre>
+          </div>
+          {{#if password}}
+            <div class="terminal-password-container terminal-z" style="margin: auto; margin-top: 1em; text-align: center">
+                <input class="terminal-password" style="color: {{highlight}}; border: 2px solid {{base}}" />
+                <button type="button" data-action="password" style="margin: 1em auto 1em auto; width: 350px; height: 40px">登录</button
+                <p>需要密码</p>
+            </div>
+          {{/if}}
+          <div class="terminal-loading terminal-z" style="display:{{#if showASCIILoading}}block{{else}}none{{/if}}">
+            <div class="terminal-bar" style="background-color: {{highlight}}"></div>
+          </div>
+      </div>
+
+      {{#if effectNoise}}
+        <div class="terminal-effects-noise"></div>
+      {{/if}}
+
+      {{#if effectScan}}
+        <div class="terminal-effects-scan"></div>
+      {{/if}}
+
+      {{#if effectGlitch}}
+        <svg viewBox="0 0 1 1" width='0' height='0' style="display: none">
+          <filter id='noise' x='0%' y='0%' width='100%' height='100%'>
+              <feTurbulence type="fractalNoise" baseFrequency="0 0" />
+              <feDisplacementMap in="SourceGraphic" scale="35" />
+          </filter>
+        </svg>
+      {{/if}}
+
+
+      <div class="terminal-main terminal-full" style="background-size: cover; background-position: center; {{#if background}} {{#unless backgroundVideo}}background-image: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0, {{backgroundOpacity}})), url('{{background}}'){{/unless}} {{/if}}">
+          <div class="terminal-container terminal-full">
+              <div class="terminal-buttons">
+                  <p>文件目录</p>
+                  <div class="terminal-folders"></div>
+              </div>
+              <div class="terminal-content">
+                  <div class="terminal-title"></div>
+                  <div class="terminal-textbox" style="height: 90%;"></div>
+              </div>
+          </div>
+      </div>
+  </div>
+  {{/if}}
+{{/if}}
