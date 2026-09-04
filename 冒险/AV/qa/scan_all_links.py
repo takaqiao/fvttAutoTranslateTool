@@ -1,14 +1,22 @@
 """scan_all_links.py - verify EVERY link form, not just the world-scoped ones.
 
-A corpus links out four ways, and only one of them was ever being checked:
+A corpus links out six ways, and only one of them was ever being checked:
 
     @UUID[Compendium.<scope>.<pack>.<Type>.<id>]   cross-pack, the overwhelming majority
     @Compendium[<scope>.<pack>.<id>]               the older syntax, same thing
     @UUID[JournalEntry.<id>.JournalEntryPage.<id>] world-scoped, resolves after import
     @UUID[.<id>]                                   relative to the containing document
+    @Actor[<id>]                                   v9 form, world lookup by id
+    @Actor[Chafkhem]                               v9 form, world lookup BY NAME
 
 `repair_dead_links.py` only looked at the third form, so "24 broken links" answered a much
-smaller question than it sounded like. This checks all four:
+smaller question than it sounded like. The last two were worse than unchecked: `classify()`
+returned no ids for them and the caller skipped anything with no ids, so 71 links were
+counted as inspected and never looked at. A name-based link is dead by construction in a
+translated world - `collection.getName("Chafkhem")` cannot match an actor we renamed to
+`查夫肯姆 Chafkhem` - so it is reported as a defect, not merely resolved.
+
+This checks all six:
 
   * compendium ids against `pack-ids.json` (every id of every installed pack)
   * world ids against the family's own pack dump
@@ -16,9 +24,13 @@ smaller question than it sounded like. This checks all four:
   * a reference to a pack that is not installed is reported separately - that is a missing
     dependency, not a typo, and the fix is different
 
+A module's own i18n file is not a Babele pack and does not sit in the pack directory, but
+it holds prose and therefore links - AV:E keeps 647 of them there. `--also` brings those
+files into the same scan; leaving them out is how the AV:E prose went unchecked entirely.
+
 Usage:
   python scan_all_links.py --cn-dir <dir> --pack-ids <pack-ids.json> --keys <pack-keys.json>
-                           [--report out.json]
+                           [--also <file.json>] [--report out.json]
 """
 from __future__ import annotations
 
@@ -28,7 +40,9 @@ import re
 from collections import Counter, defaultdict
 from pathlib import Path
 
-LINK = re.compile(r"@(UUID|Compendium)\[([^\]]+)\](?:\{([^{}]*)\})?")
+from pack_index import load_pack_ids
+
+LINK = re.compile(r"@([A-Za-z]+)\[([^\]]+)\](?:\{([^{}]*)\})?")
 DOC_TYPES = {"Actor", "Item", "JournalEntry", "JournalEntryPage", "Scene", "RollTable",
              "TableResult", "Macro", "Playlist", "PlaylistSound", "Adventure", "Folder",
              "ActiveEffect", "Cards", "Card", "Region", "Note"}
@@ -43,8 +57,29 @@ def walk(node, path=()):
         yield path, node
 
 
-def classify(target):
-    """-> (kind, pack, [ids])"""
+def strip_anchor(target):
+    """A `#heading` anchor is not part of any id.
+
+    Without this the last id of an anchored link is compared as
+    `OmLsmbwPtNMw7csF#Aesephna-menhemes`, matches nothing, and ten perfectly live AV:E
+    links get reported dead - a false positive that costs more trust than a miss.
+    """
+    return target.partition("#")[0]
+
+
+def classify(scheme, target):
+    """-> (kind, pack, [ids])
+
+    `scheme` is the word before the bracket. Only UUID, Compendium and the document types
+    are links; @Check, @Damage, @Localize and friends share the syntax and are not.
+    """
+    if scheme in DOC_TYPES:
+        # v9 form: `@Actor[<id>]` looks the target up in the world by id,
+        # `@Actor[Chafkhem]` by name. Only the first can survive translation.
+        head = target.split("#")[0]
+        return ("legacy-id", None, [head]) if ID.match(head) else ("named", None, [])
+    if scheme not in {"UUID", "Compendium"}:
+        return "not-a-link", None, []
     if target.startswith("."):
         return "relative", None, [s for s in target.lstrip(".").split(".") if ID.match(s)]
     segs = target.split(".")
@@ -72,11 +107,13 @@ def main(argv=None):
     parser.add_argument("--cn-dir", required=True, type=Path)
     parser.add_argument("--pack-ids", required=True, type=Path)
     parser.add_argument("--keys", required=True, type=Path)
+    parser.add_argument("--also", action="append", default=[],
+                        help="a module's own i18n file - prose, therefore links")
     parser.add_argument("--report", type=Path)
     args = parser.parse_args(argv)
 
-    pack_ids = {k: set(v["ids"]) for k, v in
-                json.loads(args.pack_ids.read_text(encoding="utf-8")).items()}
+    pack_ids = {k: set(v["ids"])
+                for k, v in load_pack_ids(args.pack_ids, args.keys).items()}
     manifest = json.loads(args.keys.read_text(encoding="utf-8"))
     world_ids = {e["_id"] for p in manifest["packs"].values()
                  for n in p["nodes"] for e in n["entries"] if e.get("_id")}
@@ -91,17 +128,31 @@ def main(argv=None):
 
     stats = Counter()
     bad = []
-    for cn_path in sorted(args.cn_dir.glob("*.json")):
+    scanned = sorted(args.cn_dir.glob("*.json")) + [Path(a) for a in args.also]
+    for cn_path in scanned:
+        if not cn_path.exists():
+            continue
         coll = cn_path.stem
         data = json.loads(cn_path.read_text(encoding="utf-8"))
-        for path, value in walk(data.get("entries", {}), ("entries",)):
+        for path, value in walk(data.get("entries", data), ("entries",)):
             root = path[1] if len(path) > 1 else ""
             for m in LINK.finditer(value):
                 target, label = m.group(2).strip(), (m.group(3) or "").strip()
-                kind, pack, ids = classify(target)
+                kind, pack, ids = classify(m.group(1), strip_anchor(target))
+                if kind == "not-a-link":
+                    continue
                 stats[kind] += 1
+                if kind == "named":
+                    stats["named:dead-after-rename"] += 1
+                    bad.append({"file": cn_path.name, "path": ".".join(path[-3:]),
+                                "target": target, "label": label,
+                                "why": "name-based-link"})
+                    continue
                 if not ids:
                     stats[f"{kind}:no-id"] += 1
+                    bad.append({"file": cn_path.name, "path": ".".join(path[-3:]),
+                                "target": target, "label": label,
+                                "why": f"{kind}-no-id"})
                     continue
                 if kind == "compendium":
                     if pack not in pack_ids:
@@ -119,15 +170,15 @@ def main(argv=None):
                                     "missing": missing})
                     else:
                         stats["compendium:ok"] += 1
-                elif kind == "world":
+                elif kind in ("world", "legacy-id"):
                     missing = [i for i in ids if i not in world_ids]
                     if missing:
-                        stats["world:dead"] += 1
+                        stats[f"{kind}:dead"] += 1
                         bad.append({"file": cn_path.name, "path": ".".join(path[-3:]),
                                     "target": target, "label": label,
                                     "why": "world-id-gone", "missing": missing})
                     else:
-                        stats["world:ok"] += 1
+                        stats[f"{kind}:ok"] += 1
                 elif kind == "relative":
                     pool = by_root.get((coll, root), set())
                     missing = [i for i in ids if i not in pool and i not in world_ids]
@@ -142,9 +193,11 @@ def main(argv=None):
     print("=== 引用总览 ===")
     for k in sorted(stats):
         print(f"  {k:<34} {stats[k]}")
-    dead = stats["compendium:dead"] + stats["world:dead"] + stats["relative:dead"]
+    dead = (stats["compendium:dead"] + stats["world:dead"] + stats["relative:dead"]
+            + stats["legacy-id:dead"] + stats["named:dead-after-rename"])
     notinst = stats["compendium:pack-not-installed"]
-    print(f"\nDEAD LINKS: {dead}   PACK NOT INSTALLED: {notinst}")
+    print(f"\nscanned {len(scanned)} files")
+    print(f"DEAD LINKS: {dead}   PACK NOT INSTALLED: {notinst}")
 
     by_reason = Counter(b["why"] for b in bad)
     for why, n in by_reason.most_common():

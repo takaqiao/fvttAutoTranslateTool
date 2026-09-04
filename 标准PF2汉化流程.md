@@ -120,9 +120,9 @@ node build_babele_en.mjs  --data-root <Data>/modules --modules a,b --out-dir  <p
 
 ---
 
-## 4. 三种「看不见的不一致」
+## 4. 四种「看不见的不一致」
 
-覆盖率 100% 的语料里，这三类问题一条都不会报出来。
+覆盖率 100% 的语料里，这四类问题一条都不会报出来。
 
 **① 同一英文名，两个中文译名** — `scan_name_consistency.py`
 按双语 name 叶的英文半边分组。AV 家族一轮抓出 484 组、1,132 条叶子。
@@ -147,6 +147,25 @@ node build_babele_en.mjs  --data-root <Data>/modules --modules a,b --out-dir  <p
 - `伊德里尼莉` 其实是更长的 `伊德里尼莉丝`，**它本身也是文档名**——旧的名称门看不见它，
   因为英文半边不同（`Cynemi` vs `Cynemi's ...`）。
 
+**④ 术语库把页面标题的消歧后缀带进了正文** — `strip_tm_disambiguators.py`
+
+pf2wiki 给同名页加分类后缀区分：`幽灵（特征）` 是特征页，区别于生物页。那个后缀属于
+**标题**，不属于术语。但 `build_3source_tm.py` 抓的就是标题，于是每一次自动填充、
+每一个查过词的译者，都把它原样带进了正文：
+
+```
+中  典型的幽灵（特征）只能离开它被杀害之处…      英  A typical ghost can stray only…
+中  该生物的惊惧（状态）增加1                    英  the creature's frightened value increases by 1
+中  （幽灵（特征））束缚之地                      英  (Ghost) Site Bound
+```
+
+判据很干脆：**英文侧有没有对应的 `(trait)` / `(condition)`**。AV 家族 722 处，英文侧
+零处对应——纯属污染，可以见一个删一个。删完还要收拾它留下的空括号嵌套
+（`（幽灵（特征））` → `（幽灵）`，不是 `（幽灵））`）。
+
+这一类值得单独列出来的原因是：它不影响任何覆盖率指标、不影响链接、HTML 也平衡，
+`gate.py` 十项全绿——只有读的人会觉得别扭。
+
 ---
 
 ## 5. 验收：`gate.py`
@@ -167,7 +186,7 @@ python 冒险/AV/qa/gate.py --cn-dir <工作区>        --keys <proj>/qa/reports
 | `bilingual` | 散文无追加英文块 |
 | `coverage` | **没有「含中文但基本是英文」的叶子** |
 | `names` | 一个英文名一个中文译名 |
-| `links` | 每个世界域 `@UUID` 目标仍然存在 |
+| `links` | **六种链接形态全查**：跨包 `Compendium.…`、旧式 `@Compendium[…]`、世界域、相对 `.id`、v9 的 `@Actor[id]` 与 `@Actor[名字]`。指向未安装模组的单列一档 |
 | `terms` | `_terms.json` 已幂等 |
 | `patches` | `_path_patches.json` 全部满足 |
 
@@ -262,6 +281,9 @@ chn 独有的 `Beginner's Box Credits` 会原样保留——各取所长。
 | 译文后面挂着 `<hr><b>原文:</b>` 加一段英文 | 2026-01 那套 Gemini 脚本的调试残留，随译文发了出去 | `strip_original_marker.py`（新手包 133 条） |
 | `<figcaption></figcaption>` 空标签导致后面闭合失配 | 同上，旧工具插入的 | 按模式全局剥；`<img ... title />` 同源 |
 | 豁免文件写了却不生效 | 路径手写猜错（日志名/页名对不上） | 从数据里生成豁免路径 |
+| **整个模组的正文一次都没被检查过，而所有检查都是绿的** | 正文在模组自带的 i18n 文件里，不在 Babele 包里；检查器只 glob 包目录 | `gate.py --also`（`<cn-dir>/lang/*.json` 自动纳入）。AV:E 是 292 条叶、647 条链接 |
+| 检查器扫了 0 个文件，输出和「干净」一模一样 | 没有任何一项报告扫了多少 | 让 gate 打印 `scanned N files, M leaves`——空集合通过和真通过必须长得不一样 |
+| `--criteria-dir` 传了相对路径，三项检查莫名变红 | 子脚本的 CWD 被强制设成 `qa/reports`，相对路径解析到别处，豁免文件根本没加载 | 在 `gate.py` 里 `.resolve()` 一次；目录不存在直接报错，别静默降级 |
 
 ### 链接与结构
 
@@ -272,6 +294,15 @@ chn 独有的 `Beginner's Box Credits` 会原样保留——各取所长。
 | 某些注记/页永远英文 | 键被按点号切开（`02. Foo` → `02` > ` Foo`） | `repair_split_keys.py`；文档名含点是常态 |
 | 段落排版乱了 | 开标签被丢掉 | `repair_html_prefix.py` |
 | `<目标>` 之类假标签被浏览器吞掉 | 中文里写了尖括号 | `_markup_patches.json` |
+| **`@Actor[Chafkhem]{查夫肯姆}` 在汉化世界里必断，英文世界里却好的** | v9 旧写法**按名字**查世界文档（`foundry.mjs:35782` 的 `collection.getName`），而我们把角色改名成了 `查夫肯姆 Chafkhem` | `repair_named_links.py`：改写成 `@UUID[Actor.<id>]`。冒险导入保留 `_id`，所以语义不变而不再怕改名 |
+| 链接检查报「0 条断链」，但方括号里根本没有 id 的那些从没被看过 | `classify()` 对无 id 的写法返回空，调用方 `if not ids: continue` **静默跳过**——71 条被算作「已检查」 | 无 id 不是「没问题」，要当缺陷报出来。`scan_all_links.py` 现在分六种形态计数 |
+| `@JournalEntry[E: Arena]` 指向的日志压根不存在 | 上游把分层日志合并成了编号章节 | 别硬编码对照表：`E` 归属哪一章，由**页名房间号**投票决定（`E##` 页最多且几乎只有 `E##` 的那一章）。混编页的日志要排除，否则一章会认领所有字母 |
+| 带 `#锚点` 的链接全被判死 | 锚点被当成 id 的一部分去比对（`OmLsmbwPtNMw7csF#Aesephna-menhemes`） | 比对前先 `partition("#")`，重建时再接回去。**这条我自己踩过：十条活链接被误报成死链** |
+| 页 id 一个都没变，链接却死了 | 只有父日志 id 过期 | 优先级最高的策略：页 id 还在就查它**当前**的父 |
+| 同一个页 id 在多个日志下重复出现 | Adventure 包里子文档 id 只在父内唯一 | 用锚点对应的**标题**在英文基线里定位到底是哪一页 |
+| 「这个包没安装」，但它明明装着 | id 索引只 dump 了 `pf2e` 域，家族自己的包不在里面 | `pack_index.py` 把 `pack-keys.json` 合进来；两个检查器共用一份「什么叫已安装」 |
+| 目标 id 查不到，名字也查不到，但文档还在 | 换包没换 id（`Hellknight Armiger` 从 npc-gallery 挪到 lost-omens-bestiary） | 全局按 id 找一遍，只改包段 |
+| 名字对得上却报找不到 | 上游改了大小写（`Mage For Hire` → `Mage for Hire`） | 兜底做一次 casefold 匹配 |
 
 ### 术语
 
@@ -309,10 +340,13 @@ house 工具箱在 `冒险/AV/qa/`（名字是历史原因，**它是通用的**
 **翻译**：`emit_units.py` · `check_unit.py` · `apply_units.py`
 **修复**：`normalize_bilingual.py` · `strip_english_suffix.py` · `repair_html_prefix.py` ·
 `repair_bracket_bodies.py` · `repair_split_keys.py` · `repair_dead_links.py` ·
-`normalize_name_format.py` · `apply_path_patches.py`
+`repair_named_links.py`（v9 `@Type[名字]` 写法）· `normalize_name_format.py` ·
+`apply_path_patches.py`
 **术语**：`normalize_terms.py` · `normalize_enricher_labels.py` · `normalize_uuid_labels.py` ·
-`scan_name_consistency.py` · `scan_prose_terms.py` · `scan_latin_nouns.py`
-**门禁**：`gate.py` · `scan_pack_binding.py` · `check_pack_targets.py`
+`scan_name_consistency.py` · `scan_prose_terms.py` · `scan_latin_nouns.py` ·
+`strip_tm_disambiguators.py`（术语库带出的 `（特征）`/`（状态）` 后缀）
+**门禁**：`gate.py` · `scan_pack_binding.py` · `check_pack_targets.py` ·
+`scan_all_links.py`（六种链接形态）· `pack_index.py`（两个检查器共用的 id 索引）
 
 跨项目的通用件在 `工具/翻译流程/scripts/`：
 `build_3source_tm.py`（翻译记忆，`PRIORITY`/`TIE_BREAK` 冻结，有单测）·
@@ -344,6 +378,10 @@ python ../AV/qa/apply_units.py          --units-dir qa/units --results-dir qa/un
 #   -> 依次跑 §2 的 9–22 步
 python ../AV/qa/gate.py --cn-dir 工作区
 ```
+
+模组自带 i18n 文件的（AV:E 那种），正文放 `工作区/lang/<模组id>.json`，英文基线放
+`工作区/en/<模组id>.json`，`gate.py` 会自动纳入，`repair_*.py` 用 `--also` 指过去。
+发布时它去 `lang/external/`，并在 `inject-lang.js` 的 `EXTERNAL_LANG_SOURCES` 里登记。
 
 实测这条路径把 `pf2e-beginner-box` + `shopping-experience` 的 3,185 叶（104 万字符）
 压到 566 叶（20.8 万字符）需要人译，其余全部由播种与回填解决。

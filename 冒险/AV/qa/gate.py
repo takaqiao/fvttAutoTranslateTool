@@ -15,13 +15,21 @@ Checks, in the order a defect would be introduced:
   bilingual  prose carries no appended English block; name leaves keep `中文 English`
   names      one English name -> one Chinese rendering
   coverage   no prose leaf is mostly English while holding a token bit of Chinese
-  links      every world-scoped @UUID target still exists in the packs
+  links      every link of every form resolves - cross-pack, world, relative and the
+             v9 `@Actor[Name]` form, which is dead on arrival in a translated world
   terms      no known variant survives (the rules in _terms.json are idempotent)
   patches    every entry in _path_patches.json is satisfied
 
 Usage:
+A module that ships its own i18n file keeps prose there rather than in a Babele pack, and
+that prose is checked by nothing unless it is named: AV:E holds 292 leaves and 647 links in
+`工作区/lang/abomination-vaults-expanded.json`, all of it outside every check until `--also`
+existed. Anything under --cn-dir/lang is picked up automatically for that reason.
+
+Usage:
   python gate.py                       # workspace, installed modules
   python gate.py --cn-dir <dir>        # e.g. the publish repo's compendium/
+  python gate.py --also <file.json>    # an extra i18n file outside <cn-dir>/lang
   python gate.py --skip targets        # when the modules dir is not available
 """
 from __future__ import annotations
@@ -181,9 +189,23 @@ def main(argv=None):
                         help="where this project keeps _terms.json / EXCLUSIONS.*.json / "
                              "_path_patches.json. Defaults to the toolkit's own directory, "
                              "which is right for the AV family and wrong for anything else.")
+    parser.add_argument("--also", action="append", default=[],
+                        help="extra i18n files to check alongside the packs; <cn-dir>/lang/*.json is added automatically")
     parser.add_argument("--skip", action="append", default=[])
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args(argv)
+    # Every sub-script runs with CWD forced to qa/reports, so a relative --criteria-dir
+    # resolves somewhere else entirely and its exclusion files simply do not load. That
+    # turned three checks red here for no reason - and had the polarity been the other way
+    # round it would have turned them green. Resolve once, against the caller's CWD.
+    args.cn_dir = args.cn_dir.resolve()
+    args.keys = args.keys.resolve()
+    args.criteria_dir = args.criteria_dir.resolve()
+    if not args.criteria_dir.is_dir():
+        parser.error(f"--criteria-dir does not exist: {args.criteria_dir}")
+    extra = sorted((args.cn_dir / "lang").glob("*.json")) + \
+        [Path(a).resolve() for a in args.also]
+    extra = [p for p in extra if p.exists()]
     REPORTS.mkdir(parents=True, exist_ok=True)
 
     results = []
@@ -221,11 +243,16 @@ def main(argv=None):
         excused_leaves = {row["path"] for row in
                           json.loads(excused_path.read_text(encoding="utf-8")).get("leaves", [])}
     excused_count = 0
-    for cn_path in sorted(args.cn_dir.glob("*.json")):
+    # Printed even though it is not a check: a pass over an empty file list looks exactly
+    # like a clean pass, and that is how the AV:E prose stayed unexamined for two releases.
+    leaves_seen, files_seen = 0, 0
+    for cn_path in sorted(args.cn_dir.glob("*.json")) + extra:
         if cn_path.name in {"labels.json", "titles.json"}:
             continue
         data = json.loads(cn_path.read_text(encoding="utf-8"))
-        for path, value in walk(data.get("entries", {}), ("entries",)):
+        files_seen += 1
+        for path, value in walk(data.get("entries", data), ("entries",)):
+            leaves_seen += 1
             key = path[-1]
             if "<" in value and not balanced(value):
                 html_bad.append(f"{cn_path.name}:{'.'.join(path[-3:])}")
@@ -253,6 +280,8 @@ def main(argv=None):
                     renderings.setdefault(tail, {}).setdefault(head, 0)
                     renderings[tail][head] += 1
 
+    print(f"       scanned {files_seen} files, {leaves_seen} leaves"
+          + (f" (incl. {len(extra)} i18n file(s))" if extra else ""))
     record("html", not html_bad, f"{len(html_bad)} unbalanced leaves")
     record("markup", not markup_bad, f"{len(markup_bad)} enricher bodies containing CJK")
     record("bilingual", not biling_bad,
@@ -279,15 +308,24 @@ def main(argv=None):
 
     # ---- dead links --------------------------------------------------------
     if "links" not in args.skip and args.keys.exists():
-        code, out = run([str(HERE / "repair_dead_links.py"), "--cn-dir", str(args.cn_dir),
-                         "--en-dir", str(AV / "工作区" / "en"), "--keys", str(args.keys),
-                         "--rulings", str(args.criteria_dir / "_link_rulings.json"),
-                         "--report", str(REPORTS / "gate_links.json")])
-        m = re.search(r"DEAD LINKS REMAINING:\s*(-?\d+)", out)
+        # scan_all_links, not repair_dead_links: the repairer only walks the world-scoped
+        # form, which is one sixth of the corpus. Gating on it reported "24 broken" when
+        # five thousand references had never been looked at.
+        cmd = [str(HERE / "scan_all_links.py"), "--cn-dir", str(args.cn_dir),
+               "--keys", str(args.keys),
+               "--pack-ids", str(REPORTS / "pack-ids-all.json"),
+               "--report", str(REPORTS / "gate_links.json")]
+        for path in extra:
+            cmd += ["--also", str(path)]
+        code, out = run(cmd)
+        m = re.search(r"DEAD LINKS:\s*(-?\d+)", out)
         broken = int(m.group(1)) if m else -1
+        n = re.search(r"PACK NOT INSTALLED:\s*(\d+)", out)
         record("links", broken == 0,
-               f"{broken} world-scoped @UUID targets do not exist"
-               + ("  (run repair_dead_links.py --write)" if broken else ""))
+               f"{broken} targets do not resolve"
+               + (f"  [{n.group(1)} more point at modules that are not installed]" if n else "")
+               + ("  (run repair_dead_links.py / repair_named_links.py --write)"
+                  if broken else ""))
 
     # ---- terms are idempotent ---------------------------------------------
     if "terms" not in args.skip:
