@@ -139,6 +139,18 @@ node build_babele_en.mjs  --data-root <Data>/modules --modules a,b --out-dir  <p
 规范译名取自语料自己的双语 name 叶——**不要信 TM**，TM 里混着 statblock 垃圾
 （`Hit Points → 4生命值`）和整句（`Will → 当你意志豁免成功时…`），拿它当基准只会刷屏。
 
+**④ 剥掉 `Effect:` 前缀与分级后缀后才看得见的冲突** — `scan_name_variants.py`
+
+`scan_name_consistency.py` 按英文半边**完全相等**分组，所以 `Ledge Creeper` 与
+`Effect: Ledge Creeper` 永远不会被放到一起——哪怕一个译作「攀壁藤」、另一个译作「攀岩常春藤」，
+而且这两份文档正好互相链接，玩家一句话里就能同时看到两个名字。把两侧的文档类前缀
+（`Effect:` `Spell Effect:` `Aura:` `Stance:` 与 `效果：` `法术效果：` `灵光：` `架势：`）
+和分级后缀都剥掉再分组，PF2 Plus 十一模组一次抓出 **105 组**。
+
+分级后缀另有专门工具 `normalize_grade_suffix.py`：双语 name 叶的英文半边自带 `(Greater)`，
+所以这是**唯一不需要投票**的命名问题——直接按英文半边核对。实测抓到
+`Greater→中阶`、`Major→高阶`，整整错了一档，物品名在骗玩家。
+
 要收敛得跑几轮：AV 家族是 106 → 67 → 57 → 51，共归一 132 处。
 典型产出：`空无之死` vs `空寂之死`(25)、`幽影恶意` vs `暗影恶意`(13)、`加卢杜` vs `加鲁杜`(12)。
 
@@ -306,6 +318,20 @@ chn 独有的 `Beginner's Box Credits` 会原样保留——各取所长。
 | gate 报出一堆早就修好的问题 | `rglob` 递归进了 `_backup/`，扫的是修复**之前**的副本 | 扫描路径一律排除 `_backup` 段；备份目录放在被扫树里就必须显式排除 |
 | 「补丁已满足」但缺陷还在 | in-place 补丁拿「替换文已出现」当判据，而同一片叶子别处正好也有那个词 | 判据应是「待替换文已不存在」 |
 | `--criteria-dir` 传了相对路径，三项检查莫名变红 | 子脚本的 CWD 被强制设成 `qa/reports`，相对路径解析到别处，豁免文件根本没加载 | 在 `gate.py` 里 `.resolve()` 一次；目录不存在直接报错，别静默降级 |
+| **RollTable 的结果一直是英文**，可覆盖率与绑定率都满分 | 旧稿按掷骰区间存键（`"14-16"`）且值是裸字符串。babele 的 `range` 提取器固定输出 `${start}-${end}`（单点区间是 `1-1` 不是 `1`），而 `FieldMapping.map()` 取的是 `translations["description"]`——字符串没有这个字段，整条静默失效 | 改成 `_id` 键 + `{"description": …}`；`match` 顺序里 `_id` 排第一，且 id 不会随表改动而变 |
+
+### 链接与结构（本轮新增）
+
+| 症状 | 原因 | 修法 |
+|---|---|---|
+| 扫描说某类链接全死，但点开是好的 | **判据把类型词当成了 id**：`JournalEntryPage` 正好 16 位字母数字，与 Foundry 的 id 等长 | `scan_all_links.py` 已改成「像 id 且不是类型词」；一次误报 30 条 |
+| 死链修好了，下一轮又变回去 | `repair_brackets_by_identity.py` 按基线还原——而修好的死链**故意**不等于基线 | 它必须排在 `repair_dead_links.py` **之前**；或传 `--rulings` 保护已裁定的目标 |
+| 裁定文件写了却不生效 | `_link_rulings.json` 的目标映射过去只在世界域分支里查 | 现在任何链接形态都先查裁定；`<文件名>::<目标>` 可把裁定钉在单个文件（pf2e/sf2e 双胞胎包各指各的兄弟包） |
+| `@Item[...]` / `@Macro[...]` 扫得出、修不了 | 修复器的正则只认 `@UUID`/`@Compendium` | 已扩到全部文档类型形态 |
+| enricher 渲染成字面文本 | 上游漏了开头的 `@`（`Check[reflex\|dc:28]`）或标签的 `{` | `repair_orphan_enrichers.py`；英文基线里同样是坏的，中文这边是唯一能修的地方 |
+| 状态链接的档位没了（`力竭1级`→`力竭`） | `normalize_uuid_labels.py` 的 rank 正则只认结尾数字，认不出中文的 `N级` | 已修；这与「`Sickened 1/2/3` 全译成恶心」是同一类损失，只是由工具造成 |
+| 某个包覆盖率满分、绑定率满分，运行时全英文 | 导出键的**格式**或值的**形状**与 mapping 对不上 | 见 RollTable 那条：`range` 提取器固定输出 `1-1`，且值必须是字段对象不能是裸字符串 |
+| 模组自带的 i18n 一项检查都没过 | `gate.py` 过去只 glob `lang/*.json`，够不到 `lang/external/<moduleId>.json` | 已改 rglob；另加 `--pack-ids`，否则别的项目会满屏「模组未安装」 |
 
 ### 链接与结构
 
@@ -365,14 +391,21 @@ house 工具箱在 `冒险/AV/qa/`（名字是历史原因，**它是通用的**
 **取基线**：`dump_pack_keys.mjs` · `build_babele_en.mjs` · `pack_loader.mjs`
 **播种回填**：`seed_from_existing.py` · `autofill_from_tm.py` · `autofill_srd_by_name.py`
 **翻译**：`emit_units.py` · `check_unit.py` · `apply_units.py`
-**修复**：`normalize_bilingual.py` · `strip_english_suffix.py` · `repair_html_prefix.py` ·
-`repair_bracket_bodies.py` · `repair_split_keys.py` · `repair_dead_links.py` ·
-`repair_named_links.py`（v9 `@Type[名字]` 写法）· `normalize_name_format.py` ·
+**修复**：`normalize_bilingual.py` · `strip_english_suffix.py` ·
+`strip_label_translated_suffix.py`（附加英文块的 `{标签}` 也被译过时）· `repair_html_prefix.py` ·
+`repair_bracket_bodies.py` · `repair_brackets_by_identity.py`（语序移动了 enricher，按位合并被拒时）·
+`repair_orphan_enrichers.py`（上游丢了 `@` 的 enricher）· `repair_split_keys.py` ·
+`repair_dead_links.py` · `repair_named_links.py`（v9 `@Type[名字]` 写法）·
+`normalize_name_format.py` · `normalize_grade_suffix.py`（分级后缀，按英文半边核对）·
 `apply_path_patches.py`
 **术语**：`normalize_terms.py` · `normalize_enricher_labels.py` · `normalize_uuid_labels.py` ·
-`scan_name_consistency.py` · `scan_prose_terms.py` · `scan_latin_nouns.py` ·
+`scan_name_consistency.py` · `scan_name_variants.py`（剥前缀/分级后再分组，见 §4④）·
+`scan_prose_terms.py` · `scan_latin_nouns.py` ·
 `strip_tm_disambiguators.py`（术语库带出的 `（特征）`/`（状态）` 后缀）·
-`strip_baseline_gloss.py`（标题与标签里的英文夹注）
+`strip_baseline_gloss.py`（`中文 English` 形式的夹注）·
+`strip_prose_parentheticals.py`（`中文（English）` 形式的夹注，以及空 `（）`）
+**镜像与派工**：`mirror_pack.py`（pf2e→sf2e 逐 token 转写）· `clear_leaves.py`（判死的叶子清空重发）·
+`build_unit_glossary.py`（每单元一份术语表）
 **门禁**：`gate.py` · `scan_pack_binding.py` · `check_pack_targets.py` ·
 `scan_all_links.py`（六种链接形态）· `pack_index.py`（两个检查器共用的 id 索引）
 
