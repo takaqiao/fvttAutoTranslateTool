@@ -131,22 +131,103 @@ def resolve_old_parents(clusters, journal_pages, min_hits=2):
     return mapping, notes
 
 
+GRADE = re.compile(r"\s*\((?:Lesser|Moderate|Greater|Major|True|Minor)\)\s*$")
+PAREN = re.compile(r"\s*\([^()]*\)\s*$")
+
+
+def resolve_by_name(pack_index, preferred_pack, name, doc_type=None, successor=None,
+                    name_moves=None):
+    """Find `name` in the packs. Returns (pack, id, how) or None.
+
+    Upstream does three things to a linked document over time, and each needs a different
+    lookup: it renumbers it (same pack, same name), it MOVES it (Remaster shifted bestiary
+    content into pathfinder-monster-core), or it drops a grade suffix (`Effect: X (Moderate)`
+    became just `Effect: X` when graded effects were merged). Only an unambiguous single
+    match counts - a creature name that exists in three bestiaries is not resolvable this way.
+
+    `doc_type` is what makes most of the moved cases resolvable at all: `Bounty Hunter` is
+    an Actor in pathfinder-npc-core AND an Item in backgrounds, so without the type from the
+    link itself the name is ambiguous and nothing gets repaired.
+    """
+    if not name:
+        return None
+    # Upstream also drops qualifiers and singularises group entries: `Chimera (Primal)`
+    # became `Chimera`, `Lesser Deaths` became `Lesser Death`, `Acrobats` became `Acrobat`.
+    # An explicit Remaster ruling comes first and ignores the type filter: a rename can move
+    # a document across types (Changelings was a bestiary Actor, Changeling is a heritage Item).
+    renamed = (name_moves or {}).get(name)
+    if renamed:
+        # `pack:Name` pins the pack when the new name is ambiguous across packs. Only a
+        # prefix that actually looks like a pack id counts - `Spell Effect: Bless` is a
+        # NAME containing a colon, and splitting it would erase every effect rename.
+        want_pack = ""
+        head, sep, tail = renamed.partition(":")
+        if sep and "." in head and " " not in head:
+            want_pack, renamed = head, tail.strip()
+        hits = [(pk, cid) for pk, entry in pack_index.items()
+                if not want_pack or pk == want_pack
+                for cid in entry.get("byName", {}).get(renamed, [])]
+        if len(hits) == 1:
+            return hits[0][0], hits[0][1], f"renamed:{renamed!r}"
+        if hits:
+            same = [h for h in hits if h[0] == preferred_pack] or                    [h for h in hits if h[0] == (successor or "")]
+            if len(same) == 1:
+                return same[0][0], same[0][1], f"renamed:{renamed!r}"
+    variants = [name, GRADE.sub("", name), PAREN.sub("", name).strip()]
+    for base in list(variants):
+        if base.endswith("s") and not base.endswith("ss"):
+            variants.append(base[:-1])
+    seen_variants = set()
+    for candidate in [v for v in variants
+                      if v and not (v in seen_variants or seen_variants.add(v))]:
+        hits = []
+        for pk, entry in pack_index.items():
+            if doc_type and entry.get("type") and entry["type"] != doc_type:
+                continue
+            for cid in entry.get("byName", {}).get(candidate, []):
+                hits.append((pk, cid))
+        if not hits:
+            continue
+        # prefer the pack the link already named; otherwise require a unique hit
+        same = [h for h in hits if h[0] == preferred_pack]
+        if not same and successor:
+            same = [h for h in hits if h[0] == successor]
+        if len(same) == 1:
+            how = "same-pack" if candidate == name else f"same-pack:{candidate!r}"
+            return same[0][0], same[0][1], how
+        if len(hits) == 1:
+            how = "moved-pack" if candidate == name else f"moved:{candidate!r}"
+            return hits[0][0], hits[0][1], how
+    return None
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__,
                                      formatter_class=argparse.RawDescriptionHelpFormatter)
     parser.add_argument("--cn-dir", required=True, type=Path)
     parser.add_argument("--en-dir", required=True, type=Path)
     parser.add_argument("--keys", required=True, type=Path)
+    parser.add_argument("--pack-ids", type=Path,
+                        help="pack-ids.json from dump_pack_ids.mjs; enables repair of "
+                             "cross-pack Compendium links, which are the majority")
     parser.add_argument("--rulings", type=Path,
                         help="hand decisions for targets the packs cannot resolve")
     parser.add_argument("--write", action="store_true")
     parser.add_argument("--report", type=Path)
     args = parser.parse_args(argv)
 
-    rulings = {}
+    rulings, pack_moves, name_moves = {}, {}, {}
     if args.rulings and args.rulings.exists():
-        rulings = {k: v for k, v in json.loads(args.rulings.read_text(encoding="utf-8")).items()
-                   if not k.startswith("_")}
+        raw = json.loads(args.rulings.read_text(encoding="utf-8"))
+        rulings = {k: v for k, v in raw.items() if not k.startswith("_")}
+        pack_moves = {k: v for k, v in (raw.get("_pack_moves") or {}).items()
+                      if not k.startswith("_")}
+        name_moves = {k: v for k, v in (raw.get("_name_moves") or {}).items()
+                      if not k.startswith("_")}
+    pack_index = {}
+    if args.pack_ids and args.pack_ids.exists():
+        pack_index = json.loads(args.pack_ids.read_text(encoding="utf-8"))
+        print(f"pack ids: {len(pack_index)} packs, "
+              f"{sum(len(p['ids']) for p in pack_index.values())} ids")
     real, by_name, parent_of, journal_pages = build_index(args.keys)
     print(f"pack index: {len(real)} ids, {len(by_name)} (type,name) pairs, "
           f"{len(journal_pages)} journals")
@@ -213,6 +294,65 @@ def main(argv=None):
             def sub(m):
                 nonlocal changed
                 target, label = m.group(1).strip(), (m.group(2) or "").strip()
+                # Cross-pack links are checked FIRST: parse_pairs() deliberately returns []
+                # for them, so anything placed after the `if not pairs` guard below never
+                # runs on the form that makes up five sixths of the corpus.
+                # A cross-pack link: `Compendium.<scope>.<pack>.<Type>.<id>`. The system
+                # renumbers its own packs between releases, so these die exactly like
+                # world ids do - and they outnumber them five to one.
+                # Two syntaxes name the same thing: `Compendium.<scope>.<pack>.<Type>.<id>`
+                # and the legacy `<scope>.<pack>.<id>`. Matching only the first skipped the
+                # 549 legacy links entirely - and those are where most of the equipment and
+                # bestiary references live.
+                is_compendium = target.startswith("Compendium.")
+                is_legacy = (not is_compendium and not target.startswith(".")
+                             and target.split(".")[0] not in DOC_TYPES
+                             and len(target.split(".")) >= 3)
+                if pack_index and (is_compendium or is_legacy):
+                    segs = target.split(".")
+                    if True:
+                        pk = f"{segs[1]}.{segs[2]}" if is_compendium else f"{segs[0]}.{segs[1]}"
+                        entry = pack_index.get(pk)
+                        if entry:
+                            pids = set(entry["ids"])
+                            rest = segs[3:] if is_compendium else segs[2:]
+                            tail = [s for s in rest if len(s) == 16 and s.isalnum()
+                                    and s not in DOC_TYPES]
+                            if tail and any(i not in pids for i in tail):
+                                stats["broken"] += 1
+                                en_label = en_by_target.get(target)
+                                link_type = next((x for x in rest if x in DOC_TYPES), None)
+                                # The legacy @Compendium[scope.pack.id] form carries no Type
+                                # segment; the pack's own declared type supplies it.
+                                if not link_type:
+                                    link_type = entry.get("type")
+                                found = resolve_by_name(pack_index, pk, en_label, link_type,
+                                                        pack_moves.get(pk), name_moves)
+                                if found:
+                                    new_pack, new_id, how = found
+                                    new_target = (target.replace(tail[-1], new_id)
+                                                  if new_pack == pk
+                                                  else target.replace(pk, new_pack).replace(tail[-1], new_id))
+                                    changed += 1
+                                    stats[f"repaired-compendium-{how}"] += 1
+                                    rows.append({"file": cn_path.name,
+                                                 "path": ".".join(path[-3:]),
+                                                 "target": target, "new_target": new_target,
+                                                 "label": label, "en_label": en_label,
+                                                 "verdict": "repaired", "how": how})
+                                    tl = f"{{{label}}}" if m.group(2) is not None else ""
+                                    return f"@UUID[{new_target}]{tl}"
+                                stats["compendium-unresolved"] += 1
+                                rows.append({"file": cn_path.name, "path": ".".join(path[-3:]),
+                                             "target": target, "label": label,
+                                             "en_label": en_label, "pack": pk,
+                                             "verdict": "no-match"})
+                            else:
+                                stats["ok"] += 1
+                        else:
+                            stats["pack-not-installed"] += 1
+                    return m.group(0)
+
                 pairs = parse_pairs(target)
                 if not pairs:
                     return m.group(0)
@@ -220,6 +360,7 @@ def main(argv=None):
                 if not missing:
                     stats["ok"] += 1
                     return m.group(0)
+
                 stats["broken"] += 1
 
                 if target in rulings:
