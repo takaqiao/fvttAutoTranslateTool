@@ -1,0 +1,114 @@
+{
+ "batch": "names-07",
+ "rules": [
+  {
+   "from": "粘草嫩枝",
+   "to": "黏草嫩枝",
+   "why": "wiki 的 Sticky 系列一律用「黏」(Sticky Bomb 黏性炸弹 / Sticky Poison 黏着毒素)，物品本体文档及其正文「黏附」也已用黏；只改效果文档 6 处。",
+   "risk": "low"
+  },
+  {
+   "from": "恐怖体型",
+   "to": "可怖之巨",
+   "why": "wiki/官方合集均无此条；本体(items)文档名 + 正文链接文字共 3 处用「可怖之巨」，效果文档孤例，且 wiki 的 Terrible Transformation→凶恶变身 走形容词化路线而非直译体型。",
+   "risk": "medium"
+  },
+  {
+   "from": "终末将至",
+   "to": "末日将至",
+   "why": "「末日将至」已是本语料的既有译法(oracles/wizards 共 10 处)，官方 oracles 合集 Doomsaying→末日预言 同源；from 不带全角叹号以覆盖带与不带两种写法。",
+   "risk": "low"
+  },
+  {
+   "from": "虎之尾击",
+   "to": "猛虎尾击",
+   "why": "专长本体(player-options)与模组 journal 均作「猛虎尾击架势」(2 处)，只有 misc 的架势文档孤例作「虎之尾击」。",
+   "risk": "low"
+  },
+  {
+   "from": "准备诗篇",
+   "to": "备战诗篇",
+   "why": "专长本体与 journal 用「备战诗篇」；英文 Verse of Preparation 指为切磋备战之乐段，「备战」比泛泛的「准备」贴题。",
+   "risk": "low"
+  },
+  {
+   "from": "守护圣化者",
+   "to": "守护受祝者",
+   "why": "wiki 特征条目 Sanctified→受祝(另有 Sanctified Relic 受祝圣物 / Sanctified Soul 受祝神魂)；本语料 clerics-remaster 亦用受祝，而「圣化」在本语料对应的是 Sacred(圣化巢穴/圣化刺客)。",
+   "risk": "low"
+  },
+  {
+   "from": "战士嚼块",
+   "to": "战士肉干",
+   "why": "英文原文 this cube of tough monster jerky，jerky=肉干；物品本体文档名即「战士肉干」，效果文档跟随。",
+   "risk": "low"
+  },
+  {
+   "from": "勇士嚼块",
+   "to": "战士肉干",
+   "why": "同一实体的第三种写法，出现在物品本体正文里(pf2e/sf2e items 各 1 处)，一并归一到本体名。",
+   "risk": "low"
+  },
+  {
+   "from": "织流架势",
+   "to": "编织架势",
+   "why": "wiki Arcane Weaving→奥法编织、Specialty Crafting (Weaving)→编织，Weaving 的既定译法是编织；专长本体与 journal 也用「编织架势」。",
+   "risk": "low"
+  },
+  {
+   "from": "效果：暗网",
+   "to": "效果：黑暗之网",
+   "why": "wiki Web of Influence→影响之网，Web of X 走「X之网」；且「暗网」在现代汉语指 dark web，语感错位。前缀「效果：」是为避免 2 字短串误伤「黑暗网络」一类词。",
+   "risk": "low"
+  },
+  {
+   "from": "欢迎痛苦",
+   "to": "欢迎苦难",
+   "why": "专长本体(barbarians.items/misc)名为「欢迎苦难」；misery=苦难，而「痛苦」在同一段正文里已用于 pain，避免撞车。",
+   "risk": "low"
+  },
+  {
+   "from": "欢迎苦痛",
+   "to": "欢迎苦难",
+   "why": "同一实体的第三种写法，出现在专长正文的「」引用里(各文件 2 处)，一并归一。",
+   "risk": "low"
+  },
+  {
+   "from": "欢乐之井",
+   "to": "欢欣之井",
+   "why": "物品本体文档名 + 正文 + journal 共 6 处用「欢欣之井」，效果文档 2 处孤例。",
+   "risk": "low"
+  },
+  {
+   "from": "如愿之思",
+   "to": "一厢情愿",
+   "why": "官方 pf2e_compendium_chn 的 oracles.oracles-revelation-spells 中 Wishful Thinking 即译「一厢情愿」；oracles-remastered 是该模组的重铸版，同名同源，按合集权威压过语料票数。",
+   "risk": "low"
+  },
+  {
+   "from": "盛怒护卫",
+   "to": "愤怒护卫",
+   "why": "wiki 专长 Wrathful Presence→愤怒威势，Wrathful 作定语的既定译法是愤怒；语料中「愤怒护卫」10 处也多于「盛怒护卫」8 处。",
+   "risk": "low"
+  },
+  {
+   "from": "锻铁西冷排",
+   "to": "锻铁西冷牛排",
+   "why": "sirloin steak 的通行中文即「西冷牛排」，物品本体用全称；注意 from 与 to 高度重叠(仅差一个「牛」)，但 from 并非 to 的子串(冷后接牛)，已实测替换幂等、不会叠加。",
+   "risk": "medium"
+  },
+  {
+   "from": "伊梅莉亲制咖喱",
+   "to": "伊莫利亲制咖喱",
+   "why": "wiki 词条 Ymeri→伊莫利(火元素领主)，官方合集同；效果文档的「伊梅莉」是错译。",
+   "risk": "low"
+  },
+  {
+   "from": "伊梅莉之咖喱",
+   "to": "伊莫利亲制咖喱",
+   "why": "物品本体正文的 UUID 链接文字写作「效果：伊梅莉之咖喱」，与效果文档名两处都错；一并对齐到规范全名，链接文字才与目标文档同名。",
+   "risk": "low"
+  }
+ ],
+ "left_alone": []
+}

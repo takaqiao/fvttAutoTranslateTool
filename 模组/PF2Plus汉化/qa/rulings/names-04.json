@@ -1,0 +1,155 @@
+{
+ "batch": "names-04",
+ "rules": [
+  {
+   "from": "点金之触",
+   "to": "点石成金",
+   "why": "Golden Touch：物品本体(items)与 journal 引用均作「点石成金」(3 处)，仅 Effect 文档作「点金之触」(2 处)；成语「点石成金」正对法术「transmutes anything it touches to gold」。",
+   "risk": "low"
+  },
+  {
+   "from": "通往解锢术的向导",
+   "to": "通往自由的向导",
+   "why": "Guide to Freedom：wiki 的 Freedom→解锢术 是「仪式」(data_type=仪式)，此处 Freedom 指从 grabbed/immobilized 中脱身，属 wiki 假朋友；两个旧译都误用仪式名，统一改为不带仪式歧义的「通往自由的向导」。",
+   "risk": "medium"
+  },
+  {
+   "from": "解锢术向导",
+   "to": "通往自由的向导",
+   "why": "同上；「解锢术向导」不是「通往解锢术的向导」的子串（中间隔「的」），两条规则互不叠加。",
+   "risk": "medium"
+  },
+  {
+   "from": "解锢术意味着必须从头开始",
+   "to": "自由意味着必须从头开始",
+   "why": "同一个 Freedom 假朋友的第三处（南瓢女士描述，EN: \"sometimes freedom means starting from scratch\"）；串足够长且全语料唯一。",
+   "risk": "low"
+  },
+  {
+   "from": "主权者的诡计",
+   "to": "君主的诡计",
+   "why": "Guile of a Soverign：EN 指 sovereign dragon(wiki: Sovereign Dragon→君龙)；同文件内 Soverign Armor→君主护甲、Kneel Before the Soverign→向君主跪拜，语料自身已以「君主」为主，且 3 处 > 2 处。",
+   "risk": "low"
+  },
+  {
+   "from": "心硬如铁",
+   "to": "心如铁石",
+   "why": "Harden Heart：两译均无 wiki/合集依据，取可读性——「心如铁石」是成语，正对 EN「steel yourself against emotional turbulence / 抗情绪效果」；「心硬如铁」为生造搭配。",
+   "risk": "low"
+  },
+  {
+   "from": "磨砺射击精准",
+   "to": "精准射击",
+   "why": "Honed-Shot Precision：Effect 文档正文触发条件已写「你对『精准射击』所要求的敌人」，语料自身倒向此译；wiki 无「精准射击」同名条目，不会撞车（tian-xia 里那 1 处是散文而非名称）。",
+   "risk": "low"
+  },
+  {
+   "from": "洪阿里",
+   "to": "弘古",
+   "why": "Hongali：wiki 与 pf2e_compendium_chn 均作「弘古角弓 Hongali Hornbow」，且本语料 barbarians/tian-xia 散文已用「弘古」8 处；「洪阿里角弓」还直接链到官方合集里名为「弘古角弓」的物品。三字音译全语料唯一，不会误伤。",
+   "risk": "medium"
+  },
+  {
+   "from": "Hongali 支援增益",
+   "to": "弘古支援增益",
+   "why": "Effect: Hongali Support Benefit 整个名字漏译；补齐后与本体名（经上一条后为「弘古支援增益」）一致。全语料仅 1 处，且英文名 \"Hongali Support Benefit\" 不含中文，不会被误替。",
+   "risk": "low"
+  },
+  {
+   "from": "帝国灵气",
+   "to": "帝国灵光",
+   "why": "Imperial Aura：wiki 里 Aura 在能力名中一律作「灵光」(勇气灵光/生命灵光等 34 条)，「灵气」仅 1 条且对应 Nimbus；专长本体(player-options)与 journal 已用「帝国灵光」，misc 里也有 4 个 Effect 用了「帝国灵光」。",
+   "risk": "low"
+  },
+  {
+   "from": "联锁盾阵",
+   "to": "联锁盾墙",
+   "why": "Interlocked Shields：出现次数 4:4 打平，用 wiki 定盘——Shield Wall→盾墙（专长），「盾阵」在 wiki 零命中；且专长本体用的是「联锁盾墙」。",
+   "risk": "low"
+  },
+  {
+   "from": "振奋人心的演讲",
+   "to": "振奋演说",
+   "why": "Invigorating Speech：物品本体名为「振奋演说」，「振奋人心的演讲」是描述性长句、不像名称；替换后正文里「你花费1分钟发表一篇振奋演说」亦通顺。",
+   "risk": "low"
+  },
+  {
+   "from": "岩棱巨魁",
+   "to": "尖石巨像",
+   "why": "Juggernaut of Jagged Stone：wiki 里 Juggernaut 在能力名中作「巨像」(不灭巨像/巨像强韧)，法术描述是「你成为山岳化身、皮肤生出岩层」，「巨像」贴合；本体 items 已用「尖石巨像」(3 处 > 2 处)。",
+   "risk": "low"
+  },
+  {
+   "from": "窑炉硬化",
+   "to": "窑烧硬化",
+   "why": "Kiln-Hardened：EN 是黏土之躯被火「baked」的状态，「窑烧」是动作、「窑炉」是器物；专长本体与 journal 均用「窑烧硬化」(2 处 > 1 处)。",
+   "risk": "low"
+  },
+  {
+   "from": "攀岩常春藤",
+   "to": "攀壁藤",
+   "why": "Ledge Creeper：作为炼金物品名「攀壁藤」更简洁像植物名，且出现 6 处 > 4 处（含两个 Effect 本名）；「攀岩」在中文里更像运动项目。",
+   "risk": "low"
+  },
+  {
+   "from": "派对灵魂",
+   "to": "派对之魂",
+   "why": "Life of the Party：本体 items 用「派对之魂」(3 处 > 2 处)，作名称比「派对灵魂」自然；wiki 无该条目。",
+   "risk": "low"
+  },
+  {
+   "from": "礼仪表演",
+   "to": "礼拜表演",
+   "why": "Liturgical Performance：4:4 打平，取语义——EN 是「唱圣歌、跳仪式舞、讲神圣笑话」，liturgy=礼拜仪式；「礼仪表演」会被读成「礼节/仪态表演」，义偏。",
+   "risk": "low"
+  },
+  {
+   "from": "梁冯",
+   "to": "梁凤",
+   "why": "Luong Phung（海龙 NPC）：journal 通篇作「梁凤」(12 处)，越南语 Lương Phụng 的汉越对音正是「梁凤」。此条同时修掉「梁冯之罗盘 Compass of Luong Phung」（不在本批但同一人名）。",
+   "risk": "medium"
+  },
+  {
+   "from": "阮丰",
+   "to": "梁凤",
+   "why": "同上；「阮丰的三叉戟（高阶）」是同一 NPC 的另一种音译，全语料仅 1 处。",
+   "risk": "low"
+  },
+  {
+   "from": "阮凤",
+   "to": "梁凤",
+   "why": "同上；出现在 Trident (True) 描述正文「覆有阮凤多年来蜕下的鳞片」，全语料仅 1 处。",
+   "risk": "low"
+  },
+  {
+   "from": "禄凤",
+   "to": "梁凤",
+   "why": "同上；出现在 Trident 基础版描述正文「包覆着禄凤多年来蜕下的鳞片」，全语料仅 1 处。",
+   "risk": "low"
+  },
+  {
+   "from": "龙凤的三叉戟",
+   "to": "梁凤的三叉戟",
+   "why": "同上；「龙凤」是常用词（龙凤呈祥/龙凤胎），绝不能裸串替换，故把「的三叉戟」一起写进 from 限定上下文。",
+   "risk": "medium"
+  }
+ ],
+ "left_alone": [
+  {
+   "item": "Aura: 文档前缀「灵气：」",
+   "why": "全语料 9 个 Aura: 文档有 8 个用「灵气：」前缀（教师之灵/清明现实/精魂圣所等），只有 1 个用「灵光：」。这是前缀口径问题、且分组时前缀已被剥掉，应由前缀统一批处理；本批只改实体名，改后 tian-xia 会出现「灵气：帝国灵光」这一过渡态。"
+  },
+  {
+   "item": "帝国灵光（海） vs 帝国灵气（减值，海洋）",
+   "why": "括号内的元素名 海/海洋 也不一致，但那是分级/后缀内部的子变体，不在本批的实体分组里，留给后缀批。"
+  },
+  {
+   "item": "南瓢女士 vs 难病女士 (Lady Nanbyo)",
+   "why": "顺手发现：同一条目 name 用「南瓢女士」、正文全用「难病女士」。不同实体、不在 names-04 里，交给对应批次。"
+  },
+  {
+   "item": "锐石猛车（pf2e_compendium_chn 对 Juggernaut of Jagged Stone 的译法）",
+   "why": "官方合集 oracles.oracles-revelation-spells 直接命中此名作「锐石猛车」，权威度高于语料计数；但 wiki（更高一级）在能力名中一律把 Juggernaut 译作「巨像」，且「猛车」与「化身山岳」的描述完全对不上。故未采纳合集译法，保留在此备查。"
+  }
+ ]
+}

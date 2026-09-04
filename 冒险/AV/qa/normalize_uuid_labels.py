@@ -44,7 +44,11 @@ CJK = re.compile(r"[一-鿿]")
 LINK = re.compile(r"@(UUID|Compendium)\[([^\]]+)\]\{([^{}]*)\}")
 # Trailing rank digits. The digits must NOT follow a letter, or a room code is
 # taken for a rank and `区域 C15` becomes `区域 15` - a different, wrong area.
-RANK = re.compile(r"[\s ]*(?<![A-Za-z0-9])([0-9]+)\s*$")
+# `级` is captured too: the Chinese convention for a valued condition is `力竭1级`, not
+# `力竭 1`, and a regex that only sees trailing digits treats the whole thing as the
+# term. The canonical rendering for the target is then `力竭`, and the rewrite silently
+# drops the condition's VALUE - the same loss as translating `Sickened 1/2/3` all to `恶心`.
+RANK = re.compile(r"[\s ]*(?<![A-Za-z0-9])([0-9]+)\s*(级)?\s*$")
 # a bilingual tail inside a label - labels are prose and must be pure Chinese
 LATIN_TAIL = re.compile(r"[\s ]+[A-Za-z][A-Za-z''\- ]*$")
 # parenthesised part-of-speech marker the compendium sometimes carries
@@ -66,7 +70,8 @@ def base_of(label):
     rank = None
     m = RANK.search(label)
     if m:
-        rank = m.group(1)
+        # Keep the shape the leaf actually used, so `力竭1级` does not come back as `力竭 1`.
+        rank = f"{m.group(1)}级" if m.group(2) else m.group(1)
         label = label[: m.start()]
     if CJK.search(label):
         label = LATIN_TAIL.sub("", label).strip()
@@ -211,7 +216,12 @@ def main(argv=None):
                             canonical = canonical[: tail.start()].strip()
                     if not canonical or not CJK.search(canonical):
                         return m.group(0)
-                new_label = f"{canonical} {rank}" if rank else canonical
+                if rank is None:
+                    new_label = canonical
+                elif rank.endswith("级"):
+                    new_label = f"{canonical}{rank}"
+                else:
+                    new_label = f"{canonical} {rank}"
                 if new_label == label:
                     return m.group(0)
                 changed += 1

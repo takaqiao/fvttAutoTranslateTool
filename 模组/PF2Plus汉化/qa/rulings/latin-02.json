@@ -1,0 +1,40 @@
+{
+  "batch": "latin-02",
+  "rules": [
+    {"from": "<strong>Ardor</strong>", "to": "<strong>热忱</strong>", "why": "小门名，items.json 条目名已定为「热忱 Ardor」；同源列表 Through the Wicket 的 @UUID 标签用纯中文「热忱」，散文标签随之。全语料 6 处，均在门户列表内", "risk": "low"},
+    {"from": "<strong>Atmosphor</strong>", "to": "<strong>气氛者</strong>", "why": "条目名「气氛者 Atmosphor」；Through the Wicket 列表已作 {气氛者}。全语料 6 处", "risk": "low"},
+    {"from": "<strong>Desolator</strong>", "to": "<strong>毁灭者</strong>", "why": "条目名「毁灭者 Desolator」。全语料 4 处（门户领域表用的是旧名 Extingor，故比其它少 2）", "risk": "low"},
+    {"from": "<strong>Erosior</strong>", "to": "<strong>侵蚀术</strong>", "why": "沿用既有条目名「侵蚀术 Erosior」与 misc「效果：侵蚀术」，保持三处一致。全语料 6 处", "risk": "low"},
+    {"from": "<strong>Extingor</strong>", "to": "<strong>熄灭者</strong>", "why": "英文基线中 Extingor 无独立条目，其 UUID RmlKxZWHK4M0nSE5 与特征（冷冻、黑暗）都指向 Desolator，是上游遗留旧名；本语料 Through the Wicket 已把同一 UUID 标签译为「熄灭者」，此处随之以保持两张表平行。全语料 2 处", "risk": "medium"},
+    {"from": "<strong>Fabricator</strong>", "to": "<strong>造物者</strong>", "why": "条目名「造物者 Fabricator」、misc「效果：造物者警备」。全语料 6 处", "risk": "low"},
+    {"from": "<strong>Luminor</strong>", "to": "<strong>辉光者</strong>", "why": "条目名「辉光者 Luminor」；Through the Wicket 已作 {辉光者}。全语料 6 处", "risk": "low"},
+    {"from": "<strong>Magnetor</strong>", "to": "<strong>磁力者</strong>", "why": "条目名「磁力者 Magnetor」。全语料 6 处", "risk": "low"},
+    {"from": "<strong>Mortisor</strong>", "to": "<strong>死亡之触</strong>", "why": "条目名「死亡之触 Mortisor」、misc「效果：死亡之触免疫」。全语料 6 处", "risk": "low"},
+    {"from": "<strong>Propulsor</strong>", "to": "<strong>推进器</strong>", "why": "条目名「推进器 Propulsor」；Through the Wicket 已作 {推进器}。全语料 6 处", "risk": "low"},
+    {"from": "<strong>Savior</strong>", "to": "<strong>救主</strong>", "why": "条目名「救主 Savior」、misc「效果：救主恩典/救主宁静」。全语料 6 处", "risk": "low"},
+    {"from": "<strong>Verdor</strong>", "to": "<strong>苍翠者</strong>", "why": "条目名「苍翠者 Verdor」；Through the Wicket 已作 {苍翠者}。全语料 6 处", "risk": "low"},
+    {"from": "老法师杰泰姆贝", "to": "老法师贾特比", "why": "官方合集中文 pf2e.equipment-srd.json 作「老法师贾特比（Old-Mage Jatembe）」，tm_3source 亦作「老法师贾特比」；语料里的「杰泰姆贝」是本模组自造译名。只改中文注解，前面的拉丁 Old-Mage Jatembe 保留（与同段 Merlin（梅林）、Stardust（星尘）体例一致）。全语料 2 处，「贾特比」原本 0 处", "risk": "low"}
+  ],
+  "left_alone": [
+    {"item": "Starfinder Flip-Mat", "why": "Feats+ License 页的 Paizo 商标清单，商标名必须保持原文"},
+    {"item": "Starfinder Infinite", "why": "License 页「社群使用协议」名，Paizo 授权计划名，保持原文"},
+    {"item": "Starfinder Society", "why": "License 页明确列为 Paizo Inc. 注册商标"},
+    {"item": "Pathfinder Battles", "why": "License 页 Paizo 商标清单"},
+    {"item": "Pathfinder Society", "why": "License 页 Paizo Inc. 注册商标"},
+    {"item": "Pathfinder Legends", "why": "License 页 Paizo 商标清单"},
+    {"item": "Pathfinder Pawns", "why": "License 页 Paizo 商标清单"},
+    {"item": "Starfinder Pawns", "why": "License 页 Paizo 商标清单"},
+    {"item": "Pathfinder Tales", "why": "License 页 Paizo 商标清单"},
+    {"item": "Pathfinder P", "why": "「Pathfinder P 徽标」，指 Paizo 的 P 字标志，商标名不译"},
+    {"item": "Conner Berkheiser", "why": "版权行作者署名，署名不译"},
+    {"item": "Derry Luttrell", "why": "版权行作者署名，署名不译"},
+    {"item": "Tony Saunders", "why": "版权行作者署名，署名不译"},
+    {"item": "Daniel", "why": "版权行 Daniel \"Cerapter\" V. 的名，署名不译"},
+    {"item": "Cerapter", "why": "版权行作者网名，不译"},
+    {"item": "Feats", "why": "指 <strong>Feats+</strong> © 2024，模组/书名本身，且在版权声明内，不动"},
+    {"item": "Magic", "why": "3 处全是 Magic+ 这个补充册简称（「你获得 Magic+ 书中…」「（Magic+）」）。同类兄弟名 Team+ 在同一文件里同样保留拉丁（（Team+）共 5 处，未被本批标记），单独汉化 Magic+ 反而破坏局部一致；且各 journal 标题已是「魔法+ Magic+」双语，检索无碍。裸 from=\"Magic\" 更会误伤「精质魔法 Essence Magic」等数十条双语名"},
+    {"item": "Pathfinder Player Core", "why": "Paizo 书名，按规则保持拉丁；原文已用 <em> 斜体标注为书名"},
+    {"item": "Forbisens", "why": "散文里已是双语形态：条目名「魔宠禁忆 Familiar Forbisens」、正文小标题「禁忆 Forbisens」。没有裸拉丁残留，无须改"},
+    {"item": "Old-Mage Jatembe（拉丁部分）", "why": "原文作 <strong>Old-Mage Jatembe（老法师…）</strong>，与同段 Merlin（梅林）、Stardust（星尘）同为「英文（中文）」体例，改成中文在前会打乱这张名人表；只在 rules 里修正了括号内的中文译名"}
+  ]
+}

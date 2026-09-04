@@ -190,6 +190,11 @@ def main(argv=None):
                              "which is right for the AV family and wrong for anything else.")
     parser.add_argument("--also", action="append", default=[],
                         help="extra i18n files to check alongside the packs; <cn-dir>/lang/*.json is added automatically")
+    parser.add_argument("--pack-ids", type=Path, default=REPORTS / "pack-ids-all.json",
+                        help="dump_pack_ids.mjs output for the whole Data dir. The default "
+                             "is the toolkit's own copy, which is the AV family's; another "
+                             "project must pass its own or every link into a module the AV "
+                             "dump predates reads as 'pack not installed'.")
     parser.add_argument("--skip", action="append", default=[])
     parser.add_argument("--verbose", action="store_true")
     args = parser.parse_args(argv)
@@ -318,8 +323,11 @@ def main(argv=None):
         # five thousand references had never been looked at.
         cmd = [str(HERE / "scan_all_links.py"), "--cn-dir", str(args.cn_dir),
                "--keys", str(args.keys),
-               "--pack-ids", str(REPORTS / "pack-ids-all.json"),
+               "--pack-ids", str(args.pack_ids),
                "--report", str(REPORTS / "gate_links.json")]
+        rulings = args.criteria_dir / "_link_rulings.json"
+        if rulings.exists():
+            cmd += ["--rulings", str(rulings)]
         for path in extra:
             cmd += ["--also", str(path)]
         code, out = run(cmd)

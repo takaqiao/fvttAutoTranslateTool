@@ -1,0 +1,65 @@
+{
+  "_comment": "死链的人工裁定，键是断掉的目标原文。这批链接在英文里同样是死的——是上游缺陷，不是翻译缺陷；但 Babele 重写的是渲染后的文本，所以中文这边是唯一能修的地方。每条都写了证据。见 repair_dead_links.py。",
+  "Compendium.pf2e.deities.xxUGdZYUj5IW7E0L": "Compendium.pf2e.deities.Item.psUfw455soFiUNlF",
+  "_why_followers_of_fate": "标签是 Followers of Fate，出现在 clerics-journal「诅咒」域的神祇清单里。AoN Deities.aspx?ID=322 说 Followers of Fate 就是「奉诺恩三女神为神祇者」，pf2e.deities 现在收的是 Norns（psUfw455soFiUNlF），没有 Followers of Fate 这个名字了。",
+  "Compendium.pf2e.deities.6mgCX7lvKtaEYoa9": "Compendium.pf2e.deities.Item.3AMudaJBJkzd1DUt",
+  "_why_dwarven_pantheon": "Dwarven Pantheon 在包里已改名为 Dwarven Gods（3AMudaJBJkzd1DUt）；上游把万神殿条目统一成了 `<族群> Gods` 的命名。",
+  "Compendium.pf2e.deities.6nq25AjImkT5GxDT": "Compendium.pf2e.deities.Item.YyBJi4mpbu5ORkt8",
+  "_why_prismatic_ray": "The Prismatic Ray 是精灵万神殿（Findeladlara / Ketephys / Yuelral 等），同一批改名后为 Elven Gods（YyBJi4mpbu5ORkt8）。两者在 pf2e.deities 里不并存。",
+  "Compendium.pf2e.pathfinder-bestiary.waPgKbjhijeZ00Zm": "Compendium.pf2e.spells-srd.Item.Uqj344bezBq3ESdq",
+  "_why_nightmare": "链接写的是 bestiary 包，但它出现在 clerics-journal 的「4 环：Nightmare」法术清单里——指的是法术不是生物。pf2e.spells-srd 的 Nightmare 是 Uqj344bezBq3ESdq。原 id 在所有已装包里都不存在。",
+  "pf2e.pathfinder-bestiary-3.cKZtOsBlN3Qu8Kyq": "Compendium.pf2e.pathfinder-monster-core-2.Actor.9Uc7T3x3cxNo7lvY",
+  "_why_clockwork_spy": "Remaster 把 Bestiary 3 的内容并入 Monster Core 2，Clockwork Spy 现在是 9Uc7T3x3cxNo7lvY。原文用的是旧的 @Compendium[scope.pack.id] 写法，所以键里没有 Compendium. 前缀。",
+  "Compendium.pf2e-team-plus-inventors.inventors-actions.n3uh8Mbx3yfhWqkR": "Compendium.pf2e.actionspf2e.Item.3D9kGfwg4LUZBR9A",
+  "_why_overdrive": "标签 Overdrive，出现在 inventors-iconic 的 Overdrive+ 描述里。模组自己的 inventors-actions 包里没有 Overdrive；而模组现行的 Overdrive/Explode 特性自己就是链到 pf2e.actionspf2e.3D9kGfwg4LUZBR9A 的，跟随模组自身的现行写法。",
+  "_pack_moves": {
+    "_why": "包退役后文档搬家，同一个名字会同时存在于好几个包里。写明继任包才能断这个歧义。",
+    "pf2e.pathfinder-bestiary": "pf2e.pathfinder-monster-core",
+    "pf2e.pathfinder-bestiary-2": "pf2e.pathfinder-monster-core-2",
+    "pf2e.pathfinder-bestiary-3": "pf2e.pathfinder-monster-core-2"
+  },
+  "_name_moves": {
+    "_why": "上游改名。这里只列本语料实际撞上的。",
+    "Dwarven Pantheon": "pf2e.deities:Dwarven Gods",
+    "The Prismatic Ray": "pf2e.deities:Elven Gods",
+    "Followers of Fate": "pf2e.deities:Norns"
+  },
+  "_known_unresolvable": [
+    {
+      "target": "Item.NflEp2MZhDrakaNe",
+      "label": "Effect: Excommunication / 效果：革除信仰",
+      "why": "clerics-remaster 发布了 Exocommunication 这个特性，却没有把配套的效果物品放进 clerics-effects 包。这个 id 在 451 个已装包的 273,909 个 id 里一个都没有，任何名字（Excommunication / Effect: Excommunication）也搜不到。英文里同样是死的，上游不补就无从修。"
+    },
+    {
+      "target": "Compendium.pf2e-team-plus-inventors.inventors-effects.Item.k2T7Er8Xn8Iry5HA",
+      "label": "Effect: Offensive Boost+ / 效果：进攻增益+",
+      "why": "同类：inventors-effects 包里没有这个效果。只有 inventors-iconic 那个角色内嵌了一份 `Effect: Offensive Boost+ (+1 Striking Wish Knife)`，那是角色内的子文档，不能当 @UUID 目标。"
+    },
+    {
+      "target": "Compendium.pf2e-team-plus-inventors.inventors-features.pEaYSp9o22lE8SHf",
+      "label": "Explode+ / 爆炸",
+      "why": "这条引用写在 `Overdrive/Explode` 这个特性自己的描述里（「你获得 Overdrive 和 Explode+ 两项职业特性」）。模组把两项合并成了 Overdrive/Explode 一份文档，独立的 Explode+ 已经不存在——指回它自己没有意义，保持原样。"
+    },
+    {
+      "target": "Compendium.pf2e-team-plus-inventors.inventors-effects.Item.v2LMotNPl9JNVUOb",
+      "label": "Effect: Overdrive+ / 效果：超载+",
+      "why": "inventors-effects 包里没有这个效果（20 条已全部列出，无 Overdrive 相关项）；全库按名字也搜不到 `Effect: Overdrive+`。与 Effect: Offensive Boost+ 同一类，上游漏发了效果文档。"
+    }
+  ],
+  "Item.ANVNQls5VF7T51Y6": "Compendium.pf2e.equipment-srd.Item.yd3kEK21YknZLlcT",
+  "_why_alchemists_fire": "标签是 Alchemist's Fire (Lesser)，写成了世界域 `Item.<id>`——那个 id 在 451 个已装包里不存在，属于上游把自己世界里的 id 写进了模组。pf2e.equipment-srd 的同名物品是 yd3kEK21YknZLlcT。",
+  "Compendium.pf2e-team-plus-inventors.inventors-actions.Item.d4ymL9ToheCNUhXH": "Compendium.pf2e-team-plus-inventors.inventors-features.Item.MUAJnKpw0QBjxbSn",
+  "_why_explode_action": "标签 Explode，指向模组自己的 inventors-actions 包，但那个包里没有 Explode（12 条全部列出过）。模组把 Overdrive 与 Explode 合并成了 inventors-features 的 `Overdrive/Explode`（MUAJnKpw0QBjxbSn），这才是现存的那份文档。",
+  "FwFCFGSzaJzAdWCm": "Compendium.pf2e-team-plus-barbarians.items.Item.cl8TzbIe9JTyRFPH",
+  "_why_revitalizing_blood": "`@Item[FwFCFGSzaJzAdWCm]{Revitalizing Blood}` 是世界域 id，模组把自己开发世界里的 id 写了进来，在任何已装包里都不存在。同名物品在模组自己的 barbarians.items 包里是 cl8TzbIe9JTyRFPH。sf2e-misc 那份由 mirror_pack 自动跟随改写。",
+  "vEOQP29daerKAjRt": "Compendium.pf2e-team-plus-inventors.inventors-macros.Macro.nx6deXGvaBBnwVMQ",
+  "_why_unstable_flat_check": "`@Macro[vEOQP29daerKAjRt]{Unstable Flat Check}` 同为世界域 id。模组自己的 inventors-macros 包里就有这个宏，id 是 nx6deXGvaBBnwVMQ。",
+  "pf2e.actionspf2e.Recall Knowledge": "Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo",
+  "_why_recall_knowledge": "旧的 `@Compendium[scope.pack.<名字>]` 按名字查找的写法。Babele 会翻译合集索引，索引里的名字变成中文之后按英文名就查不到了——在汉化世界里这种写法是必然失效的（scan_all_links 的 named 判据同理）。改成按 id。",
+  "pf2e-team-plus-barbarians.sf2e-misc::FwFCFGSzaJzAdWCm": "Compendium.pf2e-team-plus-barbarians.sf2e-items.Item.cl8TzbIe9JTyRFPH",
+  "_why_revitalizing_blood_sf2e": "同一条死链在 sf2e 镜像包里应指向 sf2e-items（同一模组同时发这两个包）。`<文件名>::<目标>` 形式的键只对该文件生效，优先于不带文件名的通用裁定。",
+  "sf2e.actionssf2e.Recall Knowledge": "Compendium.sf2e.actionssf2e.Item.1OagaWtBpVXExToo",
+  "_why_recall_knowledge_sf2e": "与 pf2e 侧同一条按名字查找的旧写法。SF2E 系统本机没装，拿不到 id，但两侧英文基线证明 sf2e 包沿用了 pf2e 的文档 id（例如 pf2e.actionspf2e.Item.IE2nThCmoyhQA0Jn 与 sf2e.actionssf2e.Item.IE2nThCmoyhQA0Jn 是同一条），所以 Recall Knowledge 在 sf2e 侧同样是 1OagaWtBpVXExToo。",
+  "pf2e-team-plus-alchemists.sf2e-items::Item.ANVNQls5VF7T51Y6": "Compendium.pf2e-anachronism.equipment.Item.yd3kEK21YknZLlcT",
+  "_why_alchemists_fire_sf2e": "sf2e 侧同一条死链要指向 SF2E 那套包。该包的英文基线把 pf2e.equipment-srd 映到 pf2e-anachronism.equipment（14 次）与 sf2e.equipment（2 次）两处；Alchemist's Fire 是 PF2e 传统装备，且 pf2e-anachronism.equipment 里确实有同 id 的 yd3kEK21YknZLlcT（本机已装，已核对），所以取前者。"
+}

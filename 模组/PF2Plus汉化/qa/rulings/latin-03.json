@@ -1,0 +1,273 @@
+{
+ "batch": "latin-03",
+ "rules": [
+  {
+   "from": "<h2>Archmage Feats</h2>",
+   "to": "<h2>大法师专长</h2>",
+   "why": "英文基线同处是 <h2>Archmage Feats</h2> 章节标题；同页正文已通篇用「大法师」，散文体不留英文。2 处（pf2e/sf2e 双份日志），带 h2 标签唯一",
+   "risk": "low"
+  },
+  {
+   "from": "<h3>升阶法术 Heightening Spells</h3>",
+   "to": "<h3>升阶法术</h3>",
+   "why": "英文基线只有 Heightening Spells，中文侧自行加了双语；散文体必须纯中文，删掉英文半边。3 处，带 h3 标签唯一",
+   "risk": "low"
+  },
+  {
+   "from": "<strong>Merlin（梅林）</strong>",
+   "to": "<strong>梅林</strong>",
+   "why": "同段后文一律只用中文名；括号里已给出译名 梅林。带 strong 标签唯一，不会碰到别处的 Merlin",
+   "risk": "low"
+  },
+  {
+   "from": "<strong>Stardust（星尘）</strong>",
+   "to": "<strong>星尘</strong>",
+   "why": "同段后文「星尘在其所到访诸多星球上」已只用中文；与 Merlin 同一条目录格式",
+   "risk": "low"
+  },
+  {
+   "from": "<strong>金属位面 Plane of 金</strong>",
+   "to": "<strong>金属位面</strong>",
+   "why": "英文基线只有 <strong>Plane of Metal </strong>；中文侧的英文半边已被早前的术语替换打坏成 Plane of 金，只能整段删掉英文",
+   "risk": "low"
+  },
+  {
+   "from": "<strong>木属位面 Plane of 木</strong>",
+   "to": "<strong>木属位面</strong>",
+   "why": "同上，英文半边被打坏成 Plane of 木",
+   "risk": "low"
+  },
+  {
+   "from": "<strong>土元素位面 Plane of 土</strong>",
+   "to": "<strong>土元素位面</strong>",
+   "why": "同上，英文半边被打坏成 Plane of 土",
+   "risk": "low"
+  },
+  {
+   "from": "<strong>火元素位面 Plane of 火焰</strong>",
+   "to": "<strong>火元素位面</strong>",
+   "why": "同上，英文半边被打坏成 Plane of 火焰",
+   "risk": "low"
+  },
+  {
+   "from": "<strong>水元素位面 Plane of 水</strong>",
+   "to": "<strong>水元素位面</strong>",
+   "why": "同上，英文半边被打坏成 Plane of 水",
+   "risk": "low"
+  },
+  {
+   "from": "<strong>气元素位面 Plane of Air</strong>",
+   "to": "<strong>气元素位面</strong>",
+   "why": "英文半边侥幸没被打坏，但同样是散文里的双语标题，按同一口径删英文",
+   "risk": "low"
+  },
+  {
+   "from": "<strong>幽冥界 The Netherworld</strong>",
+   "to": "<strong>幽冥界</strong>",
+   "why": "英文基线只有 <strong>The Netherworld</strong>；name 字段已保留双语 幽冥界 The Netherworld，正文标题不必重复",
+   "risk": "low"
+  },
+  {
+   "from": "<strong>天界诸界 The Celestial Planes</strong>",
+   "to": "<strong>天界诸界</strong>",
+   "why": "同上，wizards-misc 位面词条 description 的首行标题一律纯中文",
+   "risk": "low"
+  },
+  {
+   "from": "<strong>魔界诸界 The Fiendish Planes</strong>",
+   "to": "<strong>魔界诸界</strong>",
+   "why": "同上",
+   "risk": "low"
+  },
+  {
+   "from": "<strong>造物熔炉 Creation's Forge</strong>",
+   "to": "<strong>造物熔炉</strong>",
+   "why": "同上；prose-terms 批次另有 造熔炉→造物熔炉 的变体规则，与本条不冲突（本条带 strong 标签，只命中 description 首行）",
+   "risk": "low"
+  },
+  {
+   "from": "“Kiln-Hardened”",
+   "to": "“窑烧硬化”",
+   "why": "player-options 的专长本体名就是 窑烧硬化 Kiln-Hardened；正文引用同一专长应写中文。names-04 另有 窑炉硬化/窑烧硬化 的归一裁决，无论它选哪个，本条插入的 窑烧硬化 都会被它的规则一起收敛",
+   "risk": "medium"
+  },
+  {
+   "from": "“Energize”效果",
+   "to": "“充能”效果",
+   "why": "英文基线 the Energize effect of Qi-Empowered Blows；语料里 Effect: Step on the Wind (Energize) 已译作 效果：踏风（充能），Energize=充能。带「效果」二字，不会命中 充能法术位 等双语 name",
+   "risk": "low"
+  },
+  {
+   "from": "“A Rising Tide, Raises All Ships”",
+   "to": "“水涨船高”",
+   "why": "同一专长的 name 字段是 水涨船高 A Rising Tide, Raises all Ships；正文自引应写中文。带弯引号，串够长唯一",
+   "risk": "low"
+  },
+  {
+   "from": "Horse Falconer 视为",
+   "to": "驯鹰骑手视为",
+   "why": "name 字段与本单元 glossary 都是 驯鹰骑手 Horse Falconer；只命中正文那一处「Horse Falconer 视为鹰猎人背景」",
+   "risk": "low"
+  },
+  {
+   "from": "“Lingering Anamnesis”",
+   "to": "“残留记忆”",
+   "why": "name 字段 残留记忆 Lingering Anamnesis；Reborn in Clay 正文自引该专长",
+   "risk": "low"
+  },
+  {
+   "from": "“Sparkling Glory”",
+   "to": "“辉耀荣光”",
+   "why": "name 字段 辉耀荣光 Sparkling Glory；正文写免疫条款时漏译",
+   "risk": "low"
+  },
+  {
+   "from": "“Karenza 架势”",
+   "to": "“卡伦扎架势”",
+   "why": "misc 里 Karenza Stance 两条都译作 卡伦扎架势，无歧义；正文只译了「架势」漏了人名",
+   "risk": "low"
+  },
+  {
+   "from": "“鸟 of a Feather”",
+   "to": "“鸟类一丘之貉”",
+   "why": "半截翻译的残骸：专长名是 鸟类一丘之貉 Birds of a Feather，正文被改成了「鸟 of a Feather」。串唯一",
+   "risk": "low"
+  },
+  {
+   "from": "用于 Chun Jo Do 的",
+   "to": "用于春祖都的",
+   "why": "专长本体 name 是 春祖都 Chun Jo Do，单元 glossary 也给 春祖都（from: corpus）。名字变体（春秋道/春祖都）归 names-02 裁决，本条插入的是它列出的两个候选之一，无论它选哪个都会被一并收敛",
+   "risk": "medium"
+  },
+  {
+   "from": "对 Xa Hoi 的直接威胁",
+   "to": "对夏回的直接威胁",
+   "why": "收紧空格用；必须排在泛规则 Xa Hoi→夏回 之前（项目 _terms.json 是有序的）",
+   "risk": "medium"
+  },
+  {
+   "from": "Xa Hoi 在世界各地",
+   "to": "夏回在世界各地",
+   "why": "同上，收紧空格，须排在泛规则前",
+   "risk": "medium"
+  },
+  {
+   "from": "若是 Xa Hoi 设有使馆",
+   "to": "若是夏回设有使馆",
+   "why": "同上，收紧空格，须排在泛规则前",
+   "risk": "medium"
+  },
+  {
+   "from": "Xa Hoi",
+   "to": "夏回",
+   "why": "天夏的越南风国家，wiki/TM/官方合集中文/离线百科全都查不到既有译名，按社群音译惯例定 夏回；同页其余龙类使节段落的地名槽位（汐岛的梁凤 / 幽暗地域的格奥吉博姆）也是纯中文。全部 16 处集中在 tian-xia.journal 的一个 text 叶，不存在双语 name 或 @UUID 里的同名串",
+   "risk": "medium"
+  },
+  {
+   "from": "的Pham Lê Ngọc</h1>",
+   "to": "的范黎玉</h1>",
+   "why": "同页正文已通篇写 范黎玉（范 Phạm / 黎 Lê / 玉 Ngọc 的汉越读法），只有标题漏了。带 </h1> 收尾，绝不会碰到 name 字段里的 Pham Lê Ngọc's ...",
+   "risk": "low"
+  },
+  {
+   "from": "Pham Lê Ngọc 的",
+   "to": "范黎玉的",
+   "why": "两处 h3 小标题（的赋礼 / 的专长）。双语 name 里是 Pham Lê Ngọc's（撇号，无空格+的），不会误伤",
+   "risk": "low"
+  },
+  {
+   "from": "Pham Lê Ngọc 可能会",
+   "to": "范黎玉可能会",
+   "why": "赋礼段首句；同样避开了 name 字段的 's 形式",
+   "risk": "low"
+  },
+  {
+   "from": "Geojibom向你许诺",
+   "to": "格奥吉博姆向你许诺",
+   "why": "同一日志的地底龙使节段落里 格奥吉博姆 出现 11 次，是压倒性的主用译名（<h1>地底龙<br />幽暗地域的格奥吉博姆</h1>）。装备名的变体归 names-03",
+   "risk": "low"
+  },
+  {
+   "from": "Geojibom 在幽暗地域",
+   "to": "格奥吉博姆在幽暗地域",
+   "why": "同上，石盆景的正文",
+   "risk": "low"
+  },
+  {
+   "from": "以再次找到Luong Phung。",
+   "to": "以再次找到梁凤。",
+   "why": "日志海龙段落 梁凤 出现 11 次（汐岛的梁凤），且 Lương=梁 / Phụng=凤 正是汉越读法；三叉戟名里的 梁冯/阮丰/龙凤 变体归 names-04",
+   "risk": "low"
+  },
+  {
+   "from": "月代山脉的 雪 Long</h1>",
+   "to": "月代山脉的佘龙</h1>",
+   "why": "天龙使节 Shei Long 在日志里被译了一半成「雪 Long」。佘龙 是语料主用（佘龙之刃 + Greater 版正文两处 佘龙之牙/佘龙之刃）",
+   "risk": "medium"
+  },
+  {
+   "from": "雪 Long的专长",
+   "to": "佘龙的专长",
+   "why": "同上，h3 小标题",
+   "risk": "medium"
+  },
+  {
+   "from": " 雪 Long ",
+   "to": "佘龙",
+   "why": "同上，正文句中三处（向…恳求 / 说…会赐予 / 从…那里）。两侧都带空格，不会命中上面两条带 </h1> 和 的专长 的串",
+   "risk": "medium"
+  },
+  {
+   "from": "<strong>Kyung Seong</strong>",
+   "to": "<strong>轻性</strong>",
+   "why": "春祖都的五种「성」选项，韩语汉字按各自效果描述反推：Kyung 경=輕（不受拘束的优雅、速度+10、飞行术）",
+   "risk": "medium"
+  },
+  {
+   "from": "<strong>Jung Seong</strong>",
+   "to": "<strong>定性</strong>",
+   "why": "Jung 정=定（牢牢扎根于此刻、擒拿与对抗强迫移动/倒地）",
+   "risk": "medium"
+  },
+  {
+   "from": "<strong>Chyel Seong</strong>",
+   "to": "<strong>铁性</strong>",
+   "why": "Chyel 철=鐵（四肢变得如钢铁般、拳击获得招架）",
+   "risk": "medium"
+  },
+  {
+   "from": "<strong>Ma Seong</strong>",
+   "to": "<strong>麻性</strong>",
+   "why": "Ma 마=痲/麻（对痛苦与喜悦感官麻木、精准伤害与重击抗力）",
+   "risk": "medium"
+  },
+  {
+   "from": "<strong>Shin Seong</strong>",
+   "to": "<strong>神性</strong>",
+   "why": "Shin 신=神（心智浸润于崇高的警觉、情绪效果与惊惧）。五条同属一组，Seong 성=性",
+   "risk": "medium"
+  }
+ ],
+ "left_alone": [
+  {
+   "item": "CraftingAbility RE",
+   "why": "PF2e 系统的规则元素（Rule Element）类名，GM 要拿它去系统源码/控制台里搜，属于机器件，保持拉丁"
+  },
+  {
+   "item": "Makhluk（Makhluk Wayang）",
+   "why": "《天夏角色指南》p.125 的魔宠种类。wiki 只有 Wayang=剪影人（特征页），查不到 Makhluk Wayang 整体的社群译名；自造一个（剪影人造物/玛赫鲁克·瓦扬）有和将来官方译名对撞的风险，留给有 TXCG 中文本的人定"
+  },
+  {
+   "item": "Flora Form",
+   "why": "witches-remaster 的「建议改动」表里写的是「更名为『植物形态』（Flora Form）」——这段的内容就是「把某能力改名叫 Flora Form」，英文原名是信息本身，中文已在前面给出，不动"
+  },
+  {
+   "item": "Shei Long / Luong Phung / Geojibom / Chun Jo Do / Kiln-Hardened 的 name 字段变体",
+   "why": "双语 name 的中文半边不一致（佘龙/谢龙/舍伊隆；梁冯/阮丰/龙凤/梁凤；格奥吉博姆/格约吉博姆/乔吉博姆/盖欧吉伯姆/吉奥吉博姆/地精巨喙；春秋道/春祖都；窑炉硬化/窑烧硬化），但这几条正是 names-02/03/04/06 的 name-variant 条目，归它们裁决，本批次只改散文里的英文残留，并且一律插入它们已列出的候选之一，好让它们的归一规则能顺带收敛"
+  },
+  {
+   "item": "Feather / Energize / Plane / The Netherworld / The Celestial Planes / The Fiendish Planes / Creation's Forge 在 name 字段里的英文",
+   "why": "这些出现在 `中文 English` 的双语 name 里（凤凰尾羽 Phoenix Tail Feather、充能 Energized、金属位面 Plane of Metal、幽冥界 The Netherworld…），是规定文体，本来就该留英文；本批次只动 description 里重复了一遍的那半行"
+  }
+ ]
+}

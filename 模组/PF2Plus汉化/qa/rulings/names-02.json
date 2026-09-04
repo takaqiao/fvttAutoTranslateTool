@@ -1,0 +1,21 @@
+{
+  "batch": "names-02",
+  "rules": [
+    {"from": "春祖都", "to": "春秋道", "why": "Chun Jo Do 是花国（Hwanggot）修道骑士的「道」，wiki/官方合集均无此条。两式各 2 处打平，但韩语 Do(도) 对应汉字「道」（跆拳道、合气道），「都」是音译误写；且「春秋道」已在 Rhythm of a Thousand Souls 正文「你正处于春秋道的效果影响下」中使用。全语料「春祖都」仅 2 处，均属本实体。", "risk": "medium"},
+    {"from": "遮蔽马勃菌", "to": "遮蔽尘菌", "why": "官方合集 pf2e_compendium_chn 中 Puffball 统一作「尘菌」（Dragon's Blood Puffball 龙血尘菌、Reaper Skull Puffball 割颅尘菌），权威度高于语料出现次数（马勃菌 12 处 vs 尘菌 6 处）。「遮蔽马勃菌」5 字唯一，12 处全在 pf2e-misc/sf2e-misc 的效果名。", "risk": "low"},
+    {"from": "栗果连枷", "to": "马栗连枷", "why": "英文原文明写 oversized horse chestnut，conker 就是马栗（七叶树果）；「马栗连枷」48 处（含物品名与全部正文）压倒「栗果连枷」12 处（仅效果名）。两串互不为子串。", "risk": "low"},
+    {"from": "感染欢宴", "to": "传染狂欢", "why": "wiki 中 Contagious 系列统一作「传染」（Contagious Spell 传染法术、Contagious Idea 传染思维），「感染」是 infect；且物品本体正文里引用的链接文本已是「传染狂欢」。「感染欢宴」全语料 2 处，均属本实体。", "risk": "low"},
+    {"from": "柔术挣脱", "to": "扭体逃脱", "why": "wiki 中 Escape 作为动作译「逃脱」（Data:Actions-Escape），Polymorphic Escape 变形逃脱亦同；「挣脱」与机制动作名对不上。「扭体逃脱」4 处（专长名 + 效果正文）vs「柔术挣脱」2 处（仅效果名），且正文「As you contort your body」正是扭动身体。", "risk": "low"},
+    {"from": "智谋反制", "to": "识破诡计", "why": "wiki/官方合集均无 Counterwit。专长本体（player-options）与 journal 链接文本均作「识破诡计」（2 处），效果名「智谋反制」仅 1 处；正文「Your wit is quick to thwart tricks of the mind」正合「识破诡计」。两串互不为子串。", "risk": "low"},
+    {"from": "库克主母", "to": "主母三明治", "why": "wiki/官方合集均无 Croque Matron。「主母三明治」4 处（两个效果名 + 两处物品正文）vs「库克主母」2 处（仅物品名）；原文 This scrumptious sandwich，「库克」作 Croque 音译在中文里易被读成 Cook/库克船长，可读性差。两串互不为子串。", "risk": "low"},
+    {"from": "寒霜临在之诅咒", "to": "冰封临在之咒", "why": "同模组 oracles-remastered.items 中 15 条神谕诅咒一律用「……之咒」（不可能光辉之咒／怪物变形之咒／永恒盛宴之咒等），「之诅咒」是孤例；且「冰封临在之咒」3 处（物品名 + Ice 神秘正文 + 效果正文）多于 2 处。7 字串唯一。", "risk": "low"},
+    {"from": "怪兽信使之舞蹈", "to": "怪兽信使之舞", "why": "wiki 中 Dance of X 一律作「……之舞／战舞」（迅雷战舞、死亡之舞），「之舞蹈」冗赘；「怪兽信使之舞」4 处（专长名 + Attract Wrath 与 Kaiju Caller Dedication 正文）vs「之舞蹈」1 处（仅 Stance 文档名）。注意 to 是 from 的子串，方向为长→短，替换结果不含 from，不会叠加。", "risk": "medium"},
+    {"from": "天命杀戮", "to": "命定杀戮", "why": "wiki 无 Destined Kill 本条。本项目全语料把 Destined 统一译作「命定」：Destined Strike 命定打击（clerics-remaster）、Destined Path 命定之路（summoners-plus）、正文 your destined kill 作「命定之杀」8 处。改向「命定杀戮」只动 2 处物品名即与全部正文自洽；反向则要连带改 8 处正文。「天命」另有 3 处，其中 tian-xia journal 的「天命」是天授之命，与本实体无关，4 字 from 不会误伤。", "risk": "low"},
+    {"from": "毁灭终局", "to": "毁灭终结", "why": "wiki 中 Finish/Finisher 系列一律作「终结」（溅血终结、贯通终结、稳妥终结、完美终结），Devastating 作「毁灭」（毁灭显现）；「终局」是 endgame，与「击倒敌人后的收尾一击」语义不合。虽然「毁灭终局」4 处多于「毁灭终结」2 处，但 wiki 术语族优先于计数。两串互不为子串。", "risk": "low"},
+    {"from": "效果：神圣蚀", "to": "效果：神圣食日", "why": "「神圣蚀」是残缺词（单字「蚀」不能作名词收尾），wiki 中 Eclipse 作「月食／日蚀」。「神圣食日」4 处（物品名 + Light 正文 + Ozeva 角色卡 + 效果正文）vs 2 处。from 带「效果：」前缀，防止 3 字串「神圣蚀」将来误伤「神圣蚀刻」一类词；当前语料两处命中均带此前缀。", "risk": "low"},
+    {"from": "神圣横扫", "to": "神圣狂暴", "why": "wiki 中 Rampage 作「狂暴」（Primal Rampage 原始狂暴）；正文 continue your rampage 描述的是失控暴走而非横扫。「神圣狂暴」2 处（物品名 + 效果正文）vs「神圣横扫」1 处（仅效果名）。", "risk": "low"},
+    {"from": "代言歌谣", "to": "广告小调", "why": "wiki/官方合集均无 Endorsing Jingle，两式各 4 处（专长名与效果名互相交叉引用）打平。原文自称 advertisement campaign、promoting their business with a few songs and slogans，jingle 的中文对应正是「广告小调／广告歌」；「歌谣」指民谣，与商业广告曲不符。属可读性裁断，两串互不为子串。", "risk": "medium"},
+    {"from": "活力太妃糖", "to": "提神太妃糖", "why": "wiki 中 Energizing Pill 作「提神丹」；原文 stimulating reagents and sugar、效果结束后 fatigued，正是提神后疲劳的兴奋剂逻辑。两式各 4 处，物品本体名作「提神太妃糖」。5 字串唯一。", "risk": "low"}
+  ],
+  "left_alone": []
+}

@@ -1,0 +1,231 @@
+{
+ "batch": "prose-terms",
+ "rules": [
+  {
+   "from": "神秘连结",
+   "to": "神秘链结",
+   "why": "Mystic Link 的所有 name 叶（神秘链结/高级神秘链结/效果：神秘链结）都写作「链结」，magic.items.json 里 46 处散文写成「连结」；无任何 name 叶用「连结」，4 字串唯一，不会命中钩剑那句的「连结」。",
+   "risk": "low"
+  },
+  {
+   "from": "「盾牌术」",
+   "to": "「护盾术」",
+   "why": "wiki：Shield=护盾术[法术]，本项目 name 叶亦为护盾术。全语料 盾牌术 共 13 处，其中 8 处属于另一条目名「动态盾牌术」，故必须带「」定界；带「」的 3 处（summoners Synthesist Manifestation、magic/sf2e Linked Target Spell）全是指 Shield 法术。",
+   "risk": "low"
+  },
+  {
+   "from": "{盾牌术}",
+   "to": "{护盾术}",
+   "why": "sf2e-items Linked Target Spell 里 @UUID[...sf2e.spells.TVKNbcgTee19PXZR]{盾牌术} 的链接标签指向核心 Shield 法术；带花括号可避开「{动态盾牌术}」。仅 1 处。",
+   "risk": "low"
+  },
+  {
+   "from": "获得盾牌术效果",
+   "to": "获得护盾术效果",
+   "why": "summoners Synthesist Manifestation 同一句里的第二处 Shield 引用，没有「」也没有花括号，只能带上下文单独改；全语料仅 1 处。",
+   "risk": "low"
+  },
+  {
+   "from": "破防重击",
+   "to": "破界重击",
+   "why": "反向裁决：Breach 家族的 name 叶是 破界本能 Breach Instinct、呼唤裂隙、了解裂隙，散文 12 处一律写 破界重击（含 Breach Blow 自己的描述「破界重击」）；破防重击 只出现在 misc 的 2 个 name 叶 + 2 个链接标签，是家族里的孤例，且「破防」丢掉了撕裂位面的原意。改 4 处比改 12 处更少破坏且家族一致。",
+   "risk": "medium"
+  },
+  {
+   "from": "精魂记忆",
+   "to": "灵魂记忆",
+   "why": "专长 name 叶为 灵魂记忆 Spiritual Memories，misc 的 3 个效果条目（受训/专家/大师）及其链接标签写作 精魂记忆；全语料 12 处全在这 3 组效果上。注意本项目「精魂」另作 spirit 伤害用，但 4 字串「精魂记忆」不与之重叠。",
+   "risk": "medium"
+  },
+  {
+   "from": "：首要威胁",
+   "to": "：主要威胁",
+   "why": "专长 name 叶 主要威胁 Primary Threat vs misc 的 效果：首要威胁；4 处全部形如「效果：首要威胁」，带全角冒号可避免将来命中散文里泛指的「首要威胁」。",
+   "risk": "low"
+  },
+  {
+   "from": "：好运者",
+   "to": "：幸运者",
+   "why": "专长 name 叶 幸运者 Fortunate One vs misc 的 效果：好运者；4 处全部形如「效果：好运者」。「好运者」只有 3 字、可能撞散文，故带全角冒号。",
+   "risk": "low"
+  },
+  {
+   "from": "启慧法术",
+   "to": "启明法术",
+   "why": "oracles-remastered items 的 name 叶为 启明法术 Enlightening Spell，misc 的 效果：启慧法术 及其链接标签是另一套译名；全语料 2 处。",
+   "risk": "medium"
+  },
+  {
+   "from": "联锁盾阵",
+   "to": "联锁盾墙",
+   "why": "专长 name 叶 联锁盾墙 Interlocked Shields vs misc 的 效果：联锁盾阵；4 处 = 2 name 叶 + 2 链接标签。",
+   "risk": "medium"
+  },
+  {
+   "from": "束缚草丛",
+   "to": "束缚草木",
+   "why": "专长 name 叶 束缚草木 Restricting Flora（Flora=草木）vs misc 的 效果：束缚草丛；4 处 = 2 name 叶 + 2 链接标签。",
+   "risk": "medium"
+  },
+  {
+   "from": "狂怒解剖结构",
+   "to": "狂怒解剖学",
+   "why": "name 叶为 狂怒解剖学 / 效果：狂怒解剖学 Furious Anatomy；4 处「狂怒解剖结构」= 2 个链接标签 + 2 处散文（对应英文 the damage type of your Furious Anatomy，是在指该能力本身）。6 字串唯一。",
+   "risk": "low"
+  },
+  {
+   "from": "欢迎苦痛",
+   "to": "欢迎苦难",
+   "why": "misc name 叶 欢迎苦难 Welcome Misery，而该条目自己的描述里 4 处写「欢迎苦痛」；4 字串唯一，只命中这 4 处。",
+   "risk": "low"
+  },
+  {
+   "from": "振奋演讲",
+   "to": "振奋演说",
+   "why": "items name 叶 振奋演说 Invigorating Speech，描述里「暂时免疫你的振奋演讲」对应英文 immune to your Invigorating Speech；2 处。同句另有普通名词「你的演讲」，本规则带「振奋」不会误伤。",
+   "risk": "low"
+  },
+  {
+   "from": "无羁层面变形",
+   "to": "未驯层面变形",
+   "why": "name 叶 未驯层面变形 / 法术效果：未驯层面变形 Untamed Aspect Shift（Remaster 的 Untamed=未驯）；全语料没有任何 name 叶含「无羁」，Monstrosity Shape+ 描述里的 2 处「无羁层面变形列表」是孤立漂移。",
+   "risk": "low"
+  },
+  {
+   "from": "创造熔炉",
+   "to": "造物熔炉",
+   "why": "wizards-misc name 叶 造物熔炉 Creation's Forge（位面名，语料共 9 处），inventors/magic/witches 里 4 处写「创造熔炉」；4 字串唯一。",
+   "risk": "low"
+  },
+  {
+   "from": "法律学识",
+   "to": "律法学识",
+   "why": "Legal Lore 在本项目有 6 个 name 叶（magic.actors 三个层面、wizards-iconic）都作 律法学识，共 14 处；wizards-iconic 的 Barrister 描述里 2 处写 法律学识。同段的「法律顾问」不含此 4 字串，不受影响。",
+   "risk": "low"
+  },
+  {
+   "from": "萨伦蕾",
+   "to": "萨润蕾",
+   "why": "wizards-iconic 的神祇 name 叶为 萨润蕾 Sarenrae；oracles-remastered 的 Light 描述里 2 处写 萨伦蕾。3 字但极其独特，全语料只这 2 处。",
+   "risk": "low"
+  },
+  {
+   "from": "魔法制造",
+   "to": "魔法制作",
+   "why": "inventors-iconic Rutaiba 的专长 name 叶为 魔法制作 Magical Crafting；feats 里 4 处 @UUID{魔法制造} 指向同一核心专长 xWY5omyIcILNR7y1。4 处全是该链接标签。",
+   "risk": "low"
+  },
+  {
+   "from": "快速修理",
+   "to": "快速修补",
+   "why": "inventors-iconic Rutaiba 的专长 name 叶为 快速修补 Quick Repair（5 处）；tian-xia Pragmatic Resources 里 {快速修理} 与「快速修理」指向同一核心专长 ASy9AKEIRxPYUi5o。全语料仅这 2 处。",
+   "risk": "low"
+  },
+  {
+   "from": "{心灵操作}",
+   "to": "{心灵操控}",
+   "why": "wizards-iconic 的法术 name 叶为 心灵操控 Telekinetic Maneuver；oracles-remastered Vision of the Glorious Victory 里 1 处链接标签写 心灵操作。带花括号限定为链接标签，零误伤。",
+   "risk": "low"
+  },
+  {
+   "from": "{时之感}",
+   "to": "{时间感}",
+   "why": "wiki：Time Sense=时间感[法术]，与本项目 name 叶（wizards-iconic Ruka 的 时间感 Time Sense）一致；3 处 @UUID{时之感} 均指向核心法术 BvNbDwFYaidKJG9j。带花括号避免撞散文里的「…之感」。",
+   "risk": "low"
+  },
+  {
+   "from": "复仇黑暗之诅咒",
+   "to": "复仇之暗之咒",
+   "why": "items name 叶 复仇之暗之咒 Curse of Vengeful Darkness（Gloom 与效果条目都用它引用）；misc 的 效果：复仇黑暗之诅咒（坐骑减值）及其链接标签是另一套译名，共 2 处。两串互不为子串，不会叠加。",
+   "risk": "medium"
+  },
+  {
+   "from": "寒霜临在之诅咒",
+   "to": "冰封临在之咒",
+   "why": "items name 叶 冰封临在之咒 Curse of Gelid Presence（Ice 与效果条目都用它引用）；misc 的 效果：寒霜临在之诅咒及其链接标签共 2 处。输入里的「临在之诅咒」是滑窗截断，真正的变体是这 7 字。",
+   "risk": "medium"
+  },
+  {
+   "from": "合唱蜂群攻击",
+   "to": "合唱集群攻击",
+   "why": "反向裁决：英文原文 Chorus Made Manifest 变身的是 a chiliad flock of birds（鸟群），swarm 特征的官方译法是 集群（TM pf2_cn: Trait Swarm Attacks=集群攻击）；「蜂群」只出现在 misc 的 1 个 name 叶上，而 2 处散文已写 合唱集群攻击。改这 1 处即可四处一致。",
+   "risk": "medium"
+  },
+  {
+   "from": "合唱虫群攻击",
+   "to": "合唱集群攻击",
+   "why": "Choral Swarm Attack 条目自己的描述里的第三套写法（1 处），与上一条一并归一到 合唱集群攻击。6 字串唯一，与上一条不重叠、不叠加。",
+   "risk": "low"
+  },
+  {
+   "from": "逆向工程+",
+   "to": "逆向工程师+",
+   "why": "wiki/TM：Reverse Engineer=逆向工程师，本项目 feats name 叶亦为 逆向工程师；inventors-journal「Suggested Changes」里英文标签是 {Reverse Engineer+}，中文却写成 {逆向工程+}。from 带 + 号，不会命中散文里作动词的「逆向工程」（如「对物品进行逆向工程」）。",
+   "risk": "low"
+  },
+  {
+   "from": "{迷人表演}",
+   "to": "{迷魂表演}",
+   "why": "wiki：Fascinating Performance=迷魂表演[专长]，与本项目 name 叶一致。必须带花括号：全语料另有 4 处「迷人表演者 Captivating Performer」是完全不同的条目，裸串会把它改成「迷魂表演者」。带花括号的 2 处（witches Melodious Provocateur / Beckoned by Beauty）是指向核心专长 7LB00jkh6JaJr3vS 的链接标签。",
+   "risk": "medium"
+  },
+  {
+   "from": "你的迷人表演成功",
+   "to": "你的迷魂表演成功",
+   "why": "witches Melodious Provocateur 描述里的散文引用（1 处）。同样为躲开「迷人表演者」而带足上下文。",
+   "risk": "medium"
+  },
+  {
+   "from": "获得迷人表演的效果",
+   "to": "获得迷魂表演的效果",
+   "why": "witches Beckoned by Beauty 描述里的散文引用（1 处）。同样为躲开「迷人表演者」而带足上下文。",
+   "risk": "medium"
+  }
+ ],
+ "left_alone": [
+  {
+   "item": "Command 命令术 — 「命令/的命令/来命令/体命令/达命令 等 11 个变体",
+   "why": "全是滑窗截断产生的碎片。「命令」在散文里是普通动词（命令你的魔宠/下达命令/操作命令），不是 Command 法术的译名漂移；无任何一处真的在指该法术。"
+  },
+  {
+   "item": "Fear 恐惧术 — 以恐惧 / 的恐惧",
+   "why": "同上，是普通名词「恐惧」的碎片（以恐惧驱使、龙的恐惧），与 Fear 法术无关。"
+  },
+  {
+   "item": "Swarm Attack 群体攻击 — 群攻击",
+   "why": "碎片。真实字串是 barbarians「Summon the Pack」里动物伙伴的 兽群攻击（6 处，另一个模组的另一项能力）和 summoners 幻灵的 群体攻击（12 处）。两者是不同能力、不同模组，不是同一译名的漂移，跨模组统一超出本批范围。"
+  },
+  {
+   "item": "Magnetor 磁力者 — 磁力排",
+   "why": "假阳性。4 处的完整字串是 磁力排斥（核心法术 Magnetic Repulsion，UUID 24U1b9K4Lj94cgaj），与 Magnetor 无关。"
+  },
+  {
+   "item": "Web of Darkness 黑暗之网 — 脱黑暗之",
+   "why": "假阳性。完整句是「生物可尝试逃脱黑暗之丝」，是描述性散文（escape the dark strands），不是法术名。"
+  },
+  {
+   "item": "Magical Crafting — 法术制作",
+   "why": "假阳性。完整句是「你可以用施法所属传统的法术制作法术卷轴」，「法术」+「制作」的普通动宾结构，不是专长名。"
+  },
+  {
+   "item": "Dynamic Shield 动态盾牌术 — 法术效果：动态盾牌1/2/3",
+   "why": "确有不一致（效果名少了「术」，12 处），但它与更大的问题绑在一起：条目名 动态盾牌术 本身与 Shield=护盾术 冲突，若 names 批次把 Dynamic Shield 改成 动态护盾术，这里的改法完全不同。留给 names 批次一并决定。"
+  },
+  {
+   "item": "Wrathful Protector 盛怒护卫 / 愤怒护卫",
+   "why": "撤回。names-07 已就同一对做出相反裁决（盛怒护卫→愤怒护卫），且证据更强：wiki 的 Wrathful Presence=愤怒威势 说明 Wrathful 作定语的既定译法是「愤怒」。两条规则同时进 _terms.json 会互相抵消、结果取决于执行顺序，故让位给 names-07。"
+  },
+  {
+   "item": "Liturgical Performance 礼仪表演 / 礼拜表演",
+   "why": "撤回。names-04 已裁决相反方向（礼仪表演→礼拜表演），理由更硬：liturgy=礼拜仪式，而「礼仪表演」易被读成礼节/仪态表演。让位给 names-04，避免顺序依赖的对撞。"
+  },
+  {
+   "item": "Shallows' Sallow Shadows 浅滩昏影 / 浅滩苍影",
+   "why": "撤回。names-06 已裁决相反方向（浅滩昏影→浅滩苍影），理由是 sallow=病黄/苍白，比只表「昏暗」的昏影贴切；两边各 4 处完全对称，无 wiki 可依。让位给 names-06。"
+  },
+  {
+   "item": "Become the Mask 成为面具 / 化为面具",
+   "why": "撤回。names-01 已裁决相反方向（成为面具→化为面具）。两译各 4 处打平，无外部权威，取其可读性判断；让位给 names-01，避免两条规则互相回滚。"
+  }
+ ]
+}

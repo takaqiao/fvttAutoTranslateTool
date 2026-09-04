@@ -1,0 +1,1866 @@
+{
+  "rules": [
+    {
+      "from": "<strong>天界诸界 The Celestial Planes</strong>",
+      "to": "<strong>天界诸界</strong>",
+      "why": "同上，wizards-misc 位面词条 description 的首行标题一律纯中文",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<strong>魔界诸界 The Fiendish Planes</strong>",
+      "to": "<strong>魔界诸界</strong>",
+      "why": "同上",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<strong>造物熔炉 Creation's Forge</strong>",
+      "to": "<strong>造物熔炉</strong>",
+      "why": "同上；prose-terms 批次另有 造熔炉→造物熔炉 的变体规则，与本条不冲突（本条带 strong 标签，只命中 description 首行）",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<strong>幽冥界 The Netherworld</strong>",
+      "to": "<strong>幽冥界</strong>",
+      "why": "英文基线只有 <strong>The Netherworld</strong>；name 字段已保留双语 幽冥界 The Netherworld，正文标题不必重复",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<strong>气元素位面 Plane of Air</strong>",
+      "to": "<strong>气元素位面</strong>",
+      "why": "英文半边侥幸没被打坏，但同样是散文里的双语标题，按同一口径删英文",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<strong>火元素位面 Plane of 火焰</strong>",
+      "to": "<strong>火元素位面</strong>",
+      "why": "同上，英文半边被打坏成 Plane of 火焰",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<strong>土元素位面 Plane of 土</strong>",
+      "to": "<strong>土元素位面</strong>",
+      "why": "同上，英文半边被打坏成 Plane of 土",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<strong>水元素位面 Plane of 水</strong>",
+      "to": "<strong>水元素位面</strong>",
+      "why": "同上，英文半边被打坏成 Plane of 水",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "“A Rising Tide, Raises All Ships”",
+      "to": "“水涨船高”",
+      "why": "同一专长的 name 字段是 水涨船高 A Rising Tide, Raises all Ships；正文自引应写中文。带弯引号，串够长唯一",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<h3>升阶法术 Heightening Spells</h3>",
+      "to": "<h3>升阶法术</h3>",
+      "why": "英文基线只有 Heightening Spells，中文侧自行加了双语；散文体必须纯中文，删掉英文半边。3 处，带 h3 标签唯一",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<strong>FoundryVTT Note</strong>",
+      "to": "<strong>FoundryVTT 注记</strong>",
+      "why": "同类小标题语料里已有 4 处译作「FoundryVTT 注记」，这 2 处漏译。必须带 <strong> 锚定：裸串 FoundryVTT Note 会命中日志页名「FoundryVTT 注释 FoundryVTT Notes」而伤到它",
+      "risk": "low",
+      "_batch": "latin-01"
+    },
+    {
+      "from": "<strong>木属位面 Plane of 木</strong>",
+      "to": "<strong>木属位面</strong>",
+      "why": "同上，英文半边被打坏成 Plane of 木",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<strong>金属位面 Plane of 金</strong>",
+      "to": "<strong>金属位面</strong>",
+      "why": "英文基线只有 <strong>Plane of Metal </strong>；中文侧的英文半边已被早前的术语替换打坏成 Plane of 金，只能整段删掉英文",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<strong>Foundry Note </strong>",
+      "to": "<strong>FoundryVTT 注记 </strong>",
+      "why": "同一小标题的第三种写法，归一到语料主流的「FoundryVTT 注记」；带 <strong> 与原有尾空格照抄，语料 2 处",
+      "risk": "low",
+      "_batch": "latin-01"
+    },
+    {
+      "from": "<strong>Stardust（星尘）</strong>",
+      "to": "<strong>星尘</strong>",
+      "why": "同段后文「星尘在其所到访诸多星球上」已只用中文；与 Merlin 同一条目录格式",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<strong>Chyel Seong</strong>",
+      "to": "<strong>铁性</strong>",
+      "why": "Chyel 철=鐵（四肢变得如钢铁般、拳击获得招架）",
+      "risk": "medium",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<strong>Kyung Seong</strong>",
+      "to": "<strong>轻性</strong>",
+      "why": "春祖都的五种「성」选项，韩语汉字按各自效果描述反推：Kyung 경=輕（不受拘束的优雅、速度+10、飞行术）",
+      "risk": "medium",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<strong>Fabricator</strong>",
+      "to": "<strong>造物者</strong>",
+      "why": "条目名「造物者 Fabricator」、misc「效果：造物者警备」。全语料 6 处",
+      "risk": "low",
+      "_batch": "latin-02"
+    },
+    {
+      "from": "<strong>Jung Seong</strong>",
+      "to": "<strong>定性</strong>",
+      "why": "Jung 정=定（牢牢扎根于此刻、擒拿与对抗强迫移动/倒地）",
+      "risk": "medium",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<strong>Merlin（梅林）</strong>",
+      "to": "<strong>梅林</strong>",
+      "why": "同段后文一律只用中文名；括号里已给出译名 梅林。带 strong 标签唯一，不会碰到别处的 Merlin",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<strong>Shin Seong</strong>",
+      "to": "<strong>神性</strong>",
+      "why": "Shin 신=神（心智浸润于崇高的警觉、情绪效果与惊惧）。五条同属一组，Seong 성=性",
+      "risk": "medium",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<strong>Atmosphor</strong>",
+      "to": "<strong>气氛者</strong>",
+      "why": "条目名「气氛者 Atmosphor」；Through the Wicket 列表已作 {气氛者}。全语料 6 处",
+      "risk": "low",
+      "_batch": "latin-02"
+    },
+    {
+      "from": "<strong>Desolator</strong>",
+      "to": "<strong>毁灭者</strong>",
+      "why": "条目名「毁灭者 Desolator」。全语料 4 处（门户领域表用的是旧名 Extingor，故比其它少 2）",
+      "risk": "low",
+      "_batch": "latin-02"
+    },
+    {
+      "from": "<strong>Propulsor</strong>",
+      "to": "<strong>推进器</strong>",
+      "why": "条目名「推进器 Propulsor」；Through the Wicket 已作 {推进器}。全语料 6 处",
+      "risk": "low",
+      "_batch": "latin-02"
+    },
+    {
+      "from": "<strong>Extingor</strong>",
+      "to": "<strong>熄灭者</strong>",
+      "why": "英文基线中 Extingor 无独立条目，其 UUID RmlKxZWHK4M0nSE5 与特征（冷冻、黑暗）都指向 Desolator，是上游遗留旧名；本语料 Through the Wicket 已把同一 UUID 标签译为「熄灭者」，此处随之以保持两张表平行。全语料 2 处",
+      "risk": "medium",
+      "_batch": "latin-02"
+    },
+    {
+      "from": "<strong>Ma Seong</strong>",
+      "to": "<strong>麻性</strong>",
+      "why": "Ma 마=痲/麻（对痛苦与喜悦感官麻木、精准伤害与重击抗力）",
+      "risk": "medium",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<strong>Magnetor</strong>",
+      "to": "<strong>磁力者</strong>",
+      "why": "条目名「磁力者 Magnetor」。全语料 6 处",
+      "risk": "low",
+      "_batch": "latin-02"
+    },
+    {
+      "from": "<strong>Mortisor</strong>",
+      "to": "<strong>死亡之触</strong>",
+      "why": "条目名「死亡之触 Mortisor」、misc「效果：死亡之触免疫」。全语料 6 处",
+      "risk": "low",
+      "_batch": "latin-02"
+    },
+    {
+      "from": "<strong>Erosior</strong>",
+      "to": "<strong>侵蚀术</strong>",
+      "why": "沿用既有条目名「侵蚀术 Erosior」与 misc「效果：侵蚀术」，保持三处一致。全语料 6 处",
+      "risk": "low",
+      "_batch": "latin-02"
+    },
+    {
+      "from": "<strong>Luminor</strong>",
+      "to": "<strong>辉光者</strong>",
+      "why": "条目名「辉光者 Luminor」；Through the Wicket 已作 {辉光者}。全语料 6 处",
+      "risk": "low",
+      "_batch": "latin-02"
+    },
+    {
+      "from": "<h2>Archmage Feats</h2>",
+      "to": "<h2>大法师专长</h2>",
+      "why": "英文基线同处是 <h2>Archmage Feats</h2> 章节标题；同页正文已通篇用「大法师」，散文体不留英文。2 处（pf2e/sf2e 双份日志），带 h2 标签唯一",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<strong>Savior</strong>",
+      "to": "<strong>救主</strong>",
+      "why": "条目名「救主 Savior」、misc「效果：救主恩典/救主宁静」。全语料 6 处",
+      "risk": "low",
+      "_batch": "latin-02"
+    },
+    {
+      "from": "<strong>Verdor</strong>",
+      "to": "<strong>苍翠者</strong>",
+      "why": "条目名「苍翠者 Verdor」；Through the Wicket 已作 {苍翠者}。全语料 6 处",
+      "risk": "low",
+      "_batch": "latin-02"
+    },
+    {
+      "from": "<h2>革命 Revolution</h2>",
+      "to": "<h2>革命</h2>",
+      "why": "同上，领域小标题",
+      "risk": "low",
+      "_batch": "latin-01"
+    },
+    {
+      "from": "<strong>Ardor</strong>",
+      "to": "<strong>热忱</strong>",
+      "why": "小门名，items.json 条目名已定为「热忱 Ardor」；同源列表 Through the Wicket 的 @UUID 标签用纯中文「热忱」，散文标签随之。全语料 6 处，均在门户列表内",
+      "risk": "low",
+      "_batch": "latin-02"
+    },
+    {
+      "from": "获得 Quick Tempered 自由动作",
+      "to": "获得暴脾气自由动作",
+      "why": "野蛮人核心自由动作，官方合集 pf2e.actionspf2e/classfeatures 与 wiki(data_type=动作) 都作「暴脾气」；原文漏了连字符所以没被自动匹配上。连上下文锚定，语料 2 处（pf2e/sf2e 镜像）",
+      "risk": "low",
+      "_batch": "latin-01"
+    },
+    {
+      "from": "<h2>裁决 Judgement</h2>",
+      "to": "<h2>裁决</h2>",
+      "why": "同上，领域小标题；wiki/官方合集均无该领域词条（Team+ 自制），沿用语料已有的「裁决」",
+      "risk": "low",
+      "_batch": "latin-01"
+    },
+    {
+      "from": "“Lingering Anamnesis”",
+      "to": "“残留记忆”",
+      "why": "name 字段 残留记忆 Lingering Anamnesis；Reborn in Clay 正文自引该专长",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<h2>工艺 Artifice</h2>",
+      "to": "<h2>工艺</h2>",
+      "why": "clerics-journal「新领域」正文里的领域小标题，prose 文体应纯中文；全语料仅 1 处，用整个 h2 标签锚定，不会碰到别处的「工艺」",
+      "risk": "low",
+      "_batch": "latin-01"
+    },
+    {
+      "from": "<h2>贵族 Nobility</h2>",
+      "to": "<h2>贵族</h2>",
+      "why": "同上，领域小标题",
+      "risk": "low",
+      "_batch": "latin-01"
+    },
+    {
+      "from": "<h2>阴谋 Intrigue</h2>",
+      "to": "<h2>阴谋</h2>",
+      "why": "同上；tm_3source 亦作「阴谋 Intrigue」，中文半确认无误",
+      "risk": "low",
+      "_batch": "latin-01"
+    },
+    {
+      "from": "的Pham Lê Ngọc</h1>",
+      "to": "的范黎玉</h1>",
+      "why": "同页正文已通篇写 范黎玉（范 Phạm / 黎 Lê / 玉 Ngọc 的汉越读法），只有标题漏了。带 </h1> 收尾，绝不会碰到 name 字段里的 Pham Lê Ngọc's ...",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<h2>荣誉 Honor</h2>",
+      "to": "<h2>荣誉</h2>",
+      "why": "同上，领域小标题；语料中「荣誉」另有 5 处普通用法，故用 h2 全串锚定",
+      "risk": "low",
+      "_batch": "latin-01"
+    },
+    {
+      "from": "<h2>遗迹 Ruins</h2>",
+      "to": "<h2>遗迹</h2>",
+      "why": "同上，领域小标题；TM 里 Ruins→「在废墟中」是别的语境（冒险标题），不适用于领域名，故沿用语料已有的「遗迹」",
+      "risk": "low",
+      "_batch": "latin-01"
+    },
+    {
+      "from": "Horse Falconer 视为",
+      "to": "驯鹰骑手视为",
+      "why": "name 字段与本单元 glossary 都是 驯鹰骑手 Horse Falconer；只命中正文那一处「Horse Falconer 视为鹰猎人背景」",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "“Sparkling Glory”",
+      "to": "“辉耀荣光”",
+      "why": "name 字段 辉耀荣光 Sparkling Glory；正文写免疫条款时漏译",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "以再次找到Luong Phung。",
+      "to": "以再次找到梁凤。",
+      "why": "日志海龙段落 梁凤 出现 11 次（汐岛的梁凤），且 Lương=梁 / Phụng=凤 正是汉越读法；三叉戟名里的 梁冯/阮丰/龙凤 变体归 names-04",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "月代山脉的 雪 Long</h1>",
+      "to": "月代山脉的佘龙</h1>",
+      "why": "天龙使节 Shei Long 在日志里被译了一半成「雪 Long」。佘龙 是语料主用（佘龙之刃 + Greater 版正文两处 佘龙之牙/佘龙之刃）",
+      "risk": "medium",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "Pham Lê Ngọc 可能会",
+      "to": "范黎玉可能会",
+      "why": "赋礼段首句；同样避开了 name 字段的 's 形式",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "“鸟 of a Feather”",
+      "to": "“鸟类一丘之貉”",
+      "why": "半截翻译的残骸：专长名是 鸟类一丘之貉 Birds of a Feather，正文被改成了「鸟 of a Feather」。串唯一",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "“Kiln-Hardened”",
+      "to": "“窑烧硬化”",
+      "why": "player-options 的专长本体名就是 窑烧硬化 Kiln-Hardened；正文引用同一专长应写中文。names-04 另有 窑炉硬化/窑烧硬化 的归一裁决，无论它选哪个，本条插入的 窑烧硬化 都会被它的规则一起收敛",
+      "risk": "medium",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "用于 Chun Jo Do 的",
+      "to": "用于春祖都的",
+      "why": "专长本体 name 是 春祖都 Chun Jo Do，单元 glossary 也给 春祖都（from: corpus）。名字变体（春秋道/春祖都）归 names-02 裁决，本条插入的是它列出的两个候选之一，无论它选哪个都会被一并收敛",
+      "risk": "medium",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "<h2>希望 霍普</h2>",
+      "to": "<h2>希望</h2>",
+      "why": "同一段的另一处既有损伤，且是 wiki 陷阱：wiki 的 Hope 条目 layer=page_lead 指专有名词「霍普」，不是希望领域。清掉误译后缀",
+      "risk": "low",
+      "_batch": "latin-01"
+    },
+    {
+      "from": "<h2>诅咒 诅咒</h2>",
+      "to": "<h2>诅咒</h2>",
+      "why": "同一段 9 个领域小标题里的一处既有损伤：自动轮把 Curse 换成「诅咒」后叠成了「诅咒 诅咒」。不修就带着重复词发版",
+      "risk": "low",
+      "_batch": "latin-01"
+    },
+    {
+      "from": "Geojibom 在幽暗地域",
+      "to": "格奥吉博姆在幽暗地域",
+      "why": "同上，石盆景的正文",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "Pham Lê Ngọc 的",
+      "to": "范黎玉的",
+      "why": "两处 h3 小标题（的赋礼 / 的专长）。双语 name 里是 Pham Lê Ngọc's（撇号，无空格+的），不会误伤",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "对 Xa Hoi 的直接威胁",
+      "to": "对夏回的直接威胁",
+      "why": "收紧空格用；必须排在泛规则 Xa Hoi→夏回 之前（项目 _terms.json 是有序的）",
+      "risk": "medium",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "若是 Xa Hoi 设有使馆",
+      "to": "若是夏回设有使馆",
+      "why": "同上，收紧空格，须排在泛规则前",
+      "risk": "medium",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "Geojibom向你许诺",
+      "to": "格奥吉博姆向你许诺",
+      "why": "同一日志的地底龙使节段落里 格奥吉博姆 出现 11 次，是压倒性的主用译名（<h1>地底龙<br />幽暗地域的格奥吉博姆</h1>）。装备名的变体归 names-03",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "Hongali 支援增益",
+      "to": "弘古支援增益",
+      "why": "Effect: Hongali Support Benefit 整个名字漏译；补齐后与本体名（经上一条后为「弘古支援增益」）一致。全语料仅 1 处，且英文名 \"Hongali Support Benefit\" 不含中文，不会被误替。",
+      "risk": "low",
+      "_batch": "names-04"
+    },
+    {
+      "from": "Xa Hoi 在世界各地",
+      "to": "夏回在世界各地",
+      "why": "同上，收紧空格，须排在泛规则前",
+      "risk": "medium",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "“Energize”效果",
+      "to": "“充能”效果",
+      "why": "英文基线 the Energize effect of Qi-Empowered Blows；语料里 Effect: Step on the Wind (Energize) 已译作 效果：踏风（充能），Energize=充能。带「效果」二字，不会命中 充能法术位 等双语 name",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "“Karenza 架势”",
+      "to": "“卡伦扎架势”",
+      "why": "misc 里 Karenza Stance 两条都译作 卡伦扎架势，无歧义；正文只译了「架势」漏了人名",
+      "risk": "low",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "解锢术意味着必须从头开始",
+      "to": "自由意味着必须从头开始",
+      "why": "同一个 Freedom 假朋友的第三处（南瓢女士描述，EN: \"sometimes freedom means starting from scratch\"）；串足够长且全语料唯一。",
+      "risk": "low",
+      "_batch": "names-04"
+    },
+    {
+      "from": "获得迷人表演的效果",
+      "to": "获得迷魂表演的效果",
+      "why": "witches Beckoned by Beauty 描述里的散文引用（1 处）。同样为躲开「迷人表演者」而带足上下文。",
+      "risk": "medium",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "雪 Long的专长",
+      "to": "佘龙的专长",
+      "why": "同上，h3 小标题",
+      "risk": "medium",
+      "_batch": "latin-03"
+    },
+    {
+      "from": " 雪 Long ",
+      "to": "佘龙",
+      "why": "同上，正文句中三处（向…恳求 / 说…会赐予 / 从…那里）。两侧都带空格，不会命中上面两条带 </h1> 和 的专长 的串",
+      "risk": "medium",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "你的迷人表演成功",
+      "to": "你的迷魂表演成功",
+      "why": "witches Melodious Provocateur 描述里的散文引用（1 处）。同样为躲开「迷人表演者」而带足上下文。",
+      "risk": "medium",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "通往解锢术的向导",
+      "to": "通往自由的向导",
+      "why": "Guide to Freedom：wiki 的 Freedom→解锢术 是「仪式」(data_type=仪式)，此处 Freedom 指从 grabbed/immobilized 中脱身，属 wiki 假朋友；两个旧译都误用仪式名，统一改为不带仪式歧义的「通往自由的向导」。",
+      "risk": "medium",
+      "_batch": "names-04"
+    },
+    {
+      "from": "伊梅莉亲制咖喱",
+      "to": "伊莫利亲制咖喱",
+      "why": "wiki 词条 Ymeri→伊莫利(火元素领主)，官方合集同；效果文档的「伊梅莉」是错译。",
+      "risk": "low",
+      "_batch": "names-07"
+    },
+    {
+      "from": "复仇黑暗之诅咒",
+      "to": "复仇之暗之咒",
+      "why": "items name 叶 复仇之暗之咒 Curse of Vengeful Darkness（Gloom 与效果条目都用它引用）；misc 的 效果：复仇黑暗之诅咒（坐骑减值）及其链接标签是另一套译名，共 2 处。两串互不为子串，不会叠加。",
+      "risk": "medium",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "寒霜临在之诅咒",
+      "to": "冰封临在之咒",
+      "why": "同模组 oracles-remastered.items 中 15 条神谕诅咒一律用「……之咒」（不可能光辉之咒／怪物变形之咒／永恒盛宴之咒等），「之诅咒」是孤例；且「冰封临在之咒」3 处（物品名 + Ice 神秘正文 + 效果正文）多于 2 处。7 字串唯一。",
+      "risk": "low",
+      "_batch": "names-02"
+    },
+    {
+      "from": "寒霜临在之诅咒",
+      "to": "冰封临在之咒",
+      "why": "items name 叶 冰封临在之咒 Curse of Gelid Presence（Ice 与效果条目都用它引用）；misc 的 效果：寒霜临在之诅咒及其链接标签共 2 处。输入里的「临在之诅咒」是滑窗截断，真正的变体是这 7 字。",
+      "risk": "medium",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "怪兽信使之舞蹈",
+      "to": "怪兽信使之舞",
+      "why": "wiki 中 Dance of X 一律作「……之舞／战舞」（迅雷战舞、死亡之舞），「之舞蹈」冗赘；「怪兽信使之舞」4 处（专长名 + Attract Wrath 与 Kaiju Caller Dedication 正文）vs「之舞蹈」1 处（仅 Stance 文档名）。注意 to 是 from 的子串，方向为长→短，替换结果不含 from，不会叠加。",
+      "risk": "medium",
+      "_batch": "names-02"
+    },
+    {
+      "from": "振奋人心的演讲",
+      "to": "振奋演说",
+      "why": "Invigorating Speech：物品本体名为「振奋演说」，「振奋人心的演讲」是描述性长句、不像名称；替换后正文里「你花费1分钟发表一篇振奋演说」亦通顺。",
+      "risk": "low",
+      "_batch": "names-04"
+    },
+    {
+      "from": "效果：吸引愤怒",
+      "to": "效果：引来愤怒",
+      "why": "动作本体与 player-options 均作「引来愤怒」；「吸引」在中文里偏「有吸引力」，「引来」才是把敌人怒火引到自己身上。2 处命中都带「效果：」前缀。",
+      "risk": "low",
+      "_batch": "names-01"
+    },
+    {
+      "from": "效果：屏息凝气",
+      "to": "效果：夺息",
+      "why": "语义纠错：专长是你吓得对方「喘不过气、松开屏住的气」并对吸入/嗅觉效果减值，主语是受害者被夺走呼吸；「屏息凝气」是自己凝神屏息，方向反了。专长本体已作「夺息」。「屏息凝气」是常用成语，故以「效果：」前缀限定（4 处命中均带此前缀）。",
+      "risk": "low",
+      "_batch": "names-01"
+    },
+    {
+      "from": "效果：未来一瞥",
+      "to": "效果：瞥见未来",
+      "why": "本体 items:Glimpse Future 作「瞥见未来」(5 处)。from 必须带「效果：」前缀：items 描述里有一句正文「得见尚未发生之未来一瞥」，裸串「未来一瞥」会被改成病句。加前缀后只命中 Effect 名与其链接 2 处。附：官方合集旧版 oracles 译「预知未来」，但 wiki 已把「预知未来」派给专长 Prescience，故不采用。",
+      "risk": "medium",
+      "_batch": "names-03"
+    },
+    {
+      "from": "效果：永不停步",
+      "to": "效果：不停不息",
+      "why": "专长本体作「不停不息」，与英文 Can't Stop, Won't Stop 的叠句结构对应；「永不停步」是常见短语，以「效果：」前缀限定，2 处命中均带前缀。",
+      "risk": "low",
+      "_batch": "names-01"
+    },
+    {
+      "from": "效果：超然物外",
+      "to": "效果：置身事外",
+      "why": "Above the Fray 专长本体作「置身事外」（player-options + journal 共 2 处），且正文「你实在太过重要，不该被拖入战斗中的琐碎事务」正是该成语义；「超然物外」指超脱世俗，语义偏。带「效果：」前缀限定，避免误伤成语本身。",
+      "risk": "low",
+      "_batch": "names-01"
+    },
+    {
+      "from": "曼德拉草口香糖",
+      "to": "曼德拉草胶",
+      "why": "英文 gum 指曼德拉草制成的胶质（口服给濒死者复生），本体名与描述正文已用「曼德拉草胶」，只有效果文档误作口香糖。",
+      "risk": "low",
+      "_batch": "names-05"
+    },
+    {
+      "from": "老法师杰泰姆贝",
+      "to": "老法师贾特比",
+      "why": "官方合集中文 pf2e.equipment-srd.json 作「老法师贾特比（Old-Mage Jatembe）」，tm_3source 亦作「老法师贾特比」；语料里的「杰泰姆贝」是本模组自造译名。只改中文注解，前面的拉丁 Old-Mage Jatembe 保留（与同段 Merlin（梅林）、Stardust（星尘）体例一致）。全语料 2 处，「贾特比」原本 0 处",
+      "risk": "low",
+      "_batch": "latin-02"
+    },
+    {
+      "from": "获得盾牌术效果",
+      "to": "获得护盾术效果",
+      "why": "summoners Synthesist Manifestation 同一句里的第二处 Shield 引用，没有「」也没有花括号，只能带上下文单独改；全语料仅 1 处。",
+      "risk": "low",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "阿林达姆的鞭子",
+      "to": "阿林达姆之鞭",
+      "why": "同一物品四个阶级里，(Major)/(True) 已作「阿林达姆之鞭」，基础级与 (Greater) 作「阿林达姆的鞭子」；统一到更像物品名的「之鞭」。5 处命中含 2 处正文（「阿林达姆之鞭覆满锋利尖刺」）读来通顺。",
+      "risk": "low",
+      "_batch": "names-01"
+    },
+    {
+      "from": "Xa Hoi",
+      "to": "夏回",
+      "why": "天夏的越南风国家，wiki/TM/官方合集中文/离线百科全都查不到既有译名，按社群音译惯例定 夏回；同页其余龙类使节段落的地名槽位（汐岛的梁凤 / 幽暗地域的格奥吉博姆）也是纯中文。全部 16 处集中在 tian-xia.journal 的一个 text 叶，不存在双语 name 或 @UUID 里的同名串",
+      "risk": "medium",
+      "_batch": "latin-03"
+    },
+    {
+      "from": "{心灵操作}",
+      "to": "{心灵操控}",
+      "why": "wizards-iconic 的法术 name 叶为 心灵操控 Telekinetic Maneuver；oracles-remastered Vision of the Glorious Victory 里 1 处链接标签写 心灵操作。带花括号限定为链接标签，零误伤。",
+      "risk": "low",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "{迷人表演}",
+      "to": "{迷魂表演}",
+      "why": "wiki：Fascinating Performance=迷魂表演[专长]，与本项目 name 叶一致。必须带花括号：全语料另有 4 处「迷人表演者 Captivating Performer」是完全不同的条目，裸串会把它改成「迷魂表演者」。带花括号的 2 处（witches Melodious Provocateur / Beckoned by Beauty）是指向核心专长 7LB00jkh6JaJr3vS 的链接标签。",
+      "risk": "medium",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "、Urgat",
+      "to": "、",
+      "why": "英文基线自身的笔误：Torag 之后残留半个 Urgat 直接粘在 @UUID[...]{Urgathoa (The Proscribed Proctor)} 前面，中文照抄成了「托拉格}、Urgat@UUID[...]{厄加苏雅（禁忌教士）}」。删掉悬空残词；只动方括号外的字符，方括号体一字未改。裸 Urgat 在 clerics-deities 里另有 2 处（双语名 Urgathoa），故用「、Urgat」锚定，全语料仅 1 处",
+      "risk": "medium",
+      "_batch": "latin-01"
+    },
+    {
+      "from": "主权者的诡计",
+      "to": "君主的诡计",
+      "why": "Guile of a Soverign：EN 指 sovereign dragon(wiki: Sovereign Dragon→君龙)；同文件内 Soverign Armor→君主护甲、Kneel Before the Soverign→向君主跪拜，语料自身已以「君主」为主，且 3 处 > 2 处。",
+      "risk": "low",
+      "_batch": "names-04"
+    },
+    {
+      "from": "伊梅莉之咖喱",
+      "to": "伊莫利亲制咖喱",
+      "why": "物品本体正文的 UUID 链接文字写作「效果：伊梅莉之咖喱」，与效果文档名两处都错；一并对齐到规范全名，链接文字才与目标文档同名。",
+      "risk": "low",
+      "_batch": "names-07"
+    },
+    {
+      "from": "凌驾纷争之上",
+      "to": "置身事外",
+      "why": "同一实体的 Aura 文档译名，统一到本体「置身事外」；替换后为「灵光：置身事外」，前缀不受影响。全语料仅 1 处命中。",
+      "risk": "low",
+      "_batch": "names-01"
+    },
+    {
+      "from": "合唱虫群攻击",
+      "to": "合唱集群攻击",
+      "why": "Choral Swarm Attack 条目自己的描述里的第三套写法（1 处），与上一条一并归一到 合唱集群攻击。6 字串唯一，与上一条不重叠、不叠加。",
+      "risk": "low",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "合唱蜂群攻击",
+      "to": "合唱集群攻击",
+      "why": "反向裁决：英文原文 Chorus Made Manifest 变身的是 a chiliad flock of birds（鸟群），swarm 特征的官方译法是 集群（TM pf2_cn: Trait Swarm Attacks=集群攻击）；「蜂群」只出现在 misc 的 1 个 name 叶上，而 2 处散文已写 合唱集群攻击。改这 1 处即可四处一致。",
+      "risk": "medium",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "哥布林酸黄瓜",
+      "to": "地精酸黄瓜",
+      "why": "wiki: Goblin 特征→地精，官方 PF2 中文一律用「地精」(地精学识/地精小调/地精疹)，本语料 clerics 文件引用官方法术时也已用「地精疹」；Effect 名已作「地精酸黄瓜」。注意本模组其余 Goblin 仍作「哥布林」，见 left_alone。",
+      "risk": "medium",
+      "_batch": "names-03"
+    },
+    {
+      "from": "奔流河流精魂",
+      "to": "奔涌河流之精魂",
+      "why": "专长本体名「奔涌河流之精魂」并被 journal 目录链接引用(2:1)，效果名「奔流河流精魂」丢了「之」且与本体不一致。",
+      "risk": "low",
+      "_batch": "names-06"
+    },
+    {
+      "from": "挑同等大小者",
+      "to": "欺负与你同大者",
+      "why": "英文是 pick on someone your own size 的欺凌俗语（威吓后把大体型敌人视作小一级），「挑」丢掉欺负义；两者各 4 处，取保留俗语的一方。",
+      "risk": "low",
+      "_batch": "names-05"
+    },
+    {
+      "from": "效果：神圣蚀",
+      "to": "效果：神圣食日",
+      "why": "「神圣蚀」是残缺词（单字「蚀」不能作名词收尾），wiki 中 Eclipse 作「月食／日蚀」。「神圣食日」4 处（物品名 + Light 正文 + Ozeva 角色卡 + 效果正文）vs 2 处。from 带「效果：」前缀，防止 3 字串「神圣蚀」将来误伤「神圣蚀刻」一类词；当前语料两处命中均带此前缀。",
+      "risk": "low",
+      "_batch": "names-02"
+    },
+    {
+      "from": "无羁层面变形",
+      "to": "未驯层面变形",
+      "why": "name 叶 未驯层面变形 / 法术效果：未驯层面变形 Untamed Aspect Shift（Remaster 的 Untamed=未驯）；全语料没有任何 name 叶含「无羁」，Monstrosity Shape+ 描述里的 2 处「无羁层面变形列表」是孤立漂移。",
+      "risk": "low",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "气劲强化击打",
+      "to": "气强化打击",
+      "why": "动作本体文档名为「气强化打击」(tian-xia.misc)，player-options 中 4 处 UUID 链接标签均用它；效果文档是唯一的「气劲强化击打」，且 击打/打击 与 PF2e 术语「打击 Strike」冲突。",
+      "risk": "low",
+      "_batch": "names-06"
+    },
+    {
+      "from": "气劲强化打击",
+      "to": "气强化打击",
+      "why": "同一动作在 player-options 正文里另有 4 处写作「气劲强化打击」(如「当你使用气劲强化打击并成功进行一次打击时」)，统一到本体文档名；from 不是 to 的子串，替换幂等。",
+      "risk": "low",
+      "_batch": "names-06"
+    },
+    {
+      "from": "狂怒解剖结构",
+      "to": "狂怒解剖学",
+      "why": "name 叶为 狂怒解剖学 / 效果：狂怒解剖学 Furious Anatomy；4 处「狂怒解剖结构」= 2 个链接标签 + 2 处散文（对应英文 the damage type of your Furious Anatomy，是在指该能力本身）。6 字串唯一。",
+      "risk": "low",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "玛格拉拉提克",
+      "to": "马格拉拉提克",
+      "why": "同一菲律宾椰壳舞音译，语料 4 处用「马」（含护甲与架势正文）对 1 处「玛」，取多数；「玛」通常留给女性名。",
+      "risk": "low",
+      "_batch": "names-05"
+    },
+    {
+      "from": "磨砺射击精准",
+      "to": "精准射击",
+      "why": "Honed-Shot Precision：Effect 文档正文触发条件已写「你对『精准射击』所要求的敌人」，语料自身倒向此译；wiki 无「精准射击」同名条目，不会撞车（tian-xia 里那 1 处是散文而非名称）。",
+      "risk": "low",
+      "_batch": "names-04"
+    },
+    {
+      "from": "谢龙与诗织留",
+      "to": "佘龙与诗织留",
+      "why": "护符描述里同一条龙写作「谢龙」(唯一 1 处散文引用)，随刀名一并归一；用 6 字长串避免误伤「感谢龙…」这类断词。",
+      "risk": "low",
+      "_batch": "names-06"
+    },
+    {
+      "from": "龙凤的三叉戟",
+      "to": "梁凤的三叉戟",
+      "why": "同上；「龙凤」是常用词（龙凤呈祥/龙凤胎），绝不能裸串替换，故把「的三叉戟」一起写进 from 限定上下文。",
+      "risk": "medium",
+      "_batch": "names-04"
+    },
+    {
+      "from": "{时之感}",
+      "to": "{时间感}",
+      "why": "wiki：Time Sense=时间感[法术]，与本项目 name 叶（wizards-iconic Ruka 的 时间感 Time Sense）一致；3 处 @UUID{时之感} 均指向核心法术 BvNbDwFYaidKJG9j。带花括号避免撞散文里的「…之感」。",
+      "risk": "low",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "{盾牌术}",
+      "to": "{护盾术}",
+      "why": "sf2e-items Linked Target Spell 里 @UUID[...sf2e.spells.TVKNbcgTee19PXZR]{盾牌术} 的链接标签指向核心 Shield 法术；带花括号可避开「{动态盾牌术}」。仅 1 处。",
+      "risk": "low",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "「盾牌术」",
+      "to": "「护盾术」",
+      "why": "wiki：Shield=护盾术[法术]，本项目 name 叶亦为护盾术。全语料 盾牌术 共 13 处，其中 8 处属于另一条目名「动态盾牌术」，故必须带「」定界；带「」的 3 处（summoners Synthesist Manifestation、magic/sf2e Linked Target Spell）全是指 Shield 法术。",
+      "risk": "low",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "与死亡言和",
+      "to": "与死和解",
+      "why": "专长本体名与其描述正文（「对『与死和解』暂时免疫」）都用「与死和解」，8 处 vs 4 处，仅效果文档偏离。",
+      "risk": "low",
+      "_batch": "names-05"
+    },
+    {
+      "from": "力量叙事曲",
+      "to": "力量歌谣",
+      "why": "同上统一 Ballad=歌谣；效果文档已作「力量歌谣」，此条修专长本体与 journal 链接。三条合起来使 Focus/Resilience/Strength 三兄弟同构。",
+      "risk": "low",
+      "_batch": "names-01"
+    },
+    {
+      "from": "压倒性狂欢",
+      "to": "席卷狂欢",
+      "why": "灵气与效果两份文档已用「席卷狂欢」（4 处 vs 3 处），且「压倒性」作名称生硬，「席卷」同样传达 overwhelming。",
+      "risk": "low",
+      "_batch": "names-05"
+    },
+    {
+      "from": "吉奥吉博姆",
+      "to": "格奥吉博姆",
+      "why": "同一条龙的第 5 种音译，用在 Geojibom's Guidance 名与 journal 链接 2 处；不在本批 renderings 内但属同一专名，一并归一。",
+      "risk": "low",
+      "_batch": "names-03"
+    },
+    {
+      "from": "坚韧叙事曲",
+      "to": "坚韧歌谣",
+      "why": "同上统一 Ballad=歌谣；专长本体与 journal 已作「坚韧歌谣」，此条修效果文档名与其链接文本。",
+      "risk": "low",
+      "_batch": "names-01"
+    },
+    {
+      "from": "守护圣化者",
+      "to": "守护受祝者",
+      "why": "wiki 特征条目 Sanctified→受祝(另有 Sanctified Relic 受祝圣物 / Sanctified Soul 受祝神魂)；本语料 clerics-remaster 亦用受祝，而「圣化」在本语料对应的是 Sacred(圣化巢穴/圣化刺客)。",
+      "risk": "low",
+      "_batch": "names-07"
+    },
+    {
+      "from": "惑乱迷根草",
+      "to": "昏乱迷途根",
+      "why": "物品本体作「昏乱迷途根」，且其正文已把 irrwurz / astray root 译成「迷途根…又被称作歧路根」，效果文档的「迷根草」与自家正文对不上。12 处命中全是效果名与其链接。",
+      "risk": "low",
+      "_batch": "names-01"
+    },
+    {
+      "from": "攀岩常春藤",
+      "to": "攀壁藤",
+      "why": "Ledge Creeper：作为炼金物品名「攀壁藤」更简洁像植物名，且出现 6 处 > 4 处（含两个 Effect 本名）；「攀岩」在中文里更像运动项目。",
+      "risk": "low",
+      "_batch": "names-04"
+    },
+    {
+      "from": "效果：暗网",
+      "to": "效果：黑暗之网",
+      "why": "wiki Web of Influence→影响之网，Web of X 走「X之网」；且「暗网」在现代汉语指 dark web，语感错位。前缀「效果：」是为避免 2 字短串误伤「黑暗网络」一类词。",
+      "risk": "low",
+      "_batch": "names-07"
+    },
+    {
+      "from": "效果：滑坡",
+      "to": "效果：斜坡滑行",
+      "why": "专长本体名与正文「使用「斜坡滑行」」共 4 处，效果名孤立作「滑坡」；因「滑坡」是通用词(山体滑坡)，from 特意加上「效果：」前缀限定，全语料仅命中这 2 处效果名。",
+      "risk": "low",
+      "_batch": "names-06"
+    },
+    {
+      "from": "效果：诈死",
+      "to": "效果：貌似死亡",
+      "why": "物品本体与 journal 均作「貌似死亡」（3 处 vs 1 处）。「诈死」仅两字、在中文里泛指假死桥段，做全语料子串替换过短，故以「效果：」前缀限定；该译名唯一一处正带此前缀。",
+      "risk": "low",
+      "_batch": "names-01"
+    },
+    {
+      "from": "显化之颂歌",
+      "to": "显现之合唱团",
+      "why": "法术本体作「显现之合唱团」（2 处 vs 1 处），且 Chorus 在此指化身的千鸟群「合唱团」这一复数意象，「颂歌」丢了群体义。仅 1 处命中（法术效果文档名）。「合唱团」措辞略现代，可留待整体润色，但先保证本体与法术效果同名。",
+      "risk": "low",
+      "_batch": "names-01"
+    },
+    {
+      "from": "格约吉博姆",
+      "to": "格奥吉博姆",
+      "why": "同一条龙的第 4 种音译，仅 Greatpick(Greater) 名 1 处；与目标串仅差「约/奥」，非子串关系，不会叠加。",
+      "risk": "low",
+      "_batch": "names-03"
+    },
+    {
+      "from": "活力太妃糖",
+      "to": "提神太妃糖",
+      "why": "wiki 中 Energizing Pill 作「提神丹」；原文 stimulating reagents and sugar、效果结束后 fatigued，正是提神后疲劳的兴奋剂逻辑。两式各 4 处，物品本体名作「提神太妃糖」。5 字串唯一。",
+      "risk": "low",
+      "_batch": "names-02"
+    },
+    {
+      "from": "盖欧吉伯姆",
+      "to": "格奥吉博姆",
+      "why": "同一条龙的第 3 种音译，仅 Greatpick(Major) 名 1 处。",
+      "risk": "low",
+      "_batch": "names-03"
+    },
+    {
+      "from": "舍伊隆之刃",
+      "to": "佘龙之刃",
+      "why": "Major 版本孤例用全音译「舍伊隆」，与同一武器其余版本及正文「佘龙之牙」不一致。",
+      "risk": "low",
+      "_batch": "names-06"
+    },
+    {
+      "from": "解锢术向导",
+      "to": "通往自由的向导",
+      "why": "同上；「解锢术向导」不是「通往解锢术的向导」的子串（中间隔「的」），两条规则互不叠加。",
+      "risk": "medium",
+      "_batch": "names-04"
+    },
+    {
+      "from": "逆向工程+",
+      "to": "逆向工程师+",
+      "why": "wiki/TM：Reverse Engineer=逆向工程师，本项目 feats name 叶亦为 逆向工程师；inventors-journal「Suggested Changes」里英文标签是 {Reverse Engineer+}，中文却写成 {逆向工程+}。from 带 + 号，不会命中散文里作动词的「逆向工程」（如「对物品进行逆向工程」）。",
+      "risk": "low",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "遮蔽马勃菌",
+      "to": "遮蔽尘菌",
+      "why": "官方合集 pf2e_compendium_chn 中 Puffball 统一作「尘菌」（Dragon's Blood Puffball 龙血尘菌、Reaper Skull Puffball 割颅尘菌），权威度高于语料出现次数（马勃菌 12 处 vs 尘菌 6 处）。「遮蔽马勃菌」5 字唯一，12 处全在 pf2e-misc/sf2e-misc 的效果名。",
+      "risk": "low",
+      "_batch": "names-02"
+    },
+    {
+      "from": "锻铁西冷排",
+      "to": "锻铁西冷牛排",
+      "why": "sirloin steak 的通行中文即「西冷牛排」，物品本体用全称；注意 from 与 to 高度重叠(仅差一个「牛」)，但 from 并非 to 的子串(冷后接牛)，已实测替换幂等、不会叠加。",
+      "risk": "medium",
+      "_batch": "names-07"
+    },
+    {
+      "from": "：首要威胁",
+      "to": "：主要威胁",
+      "why": "专长 name 叶 主要威胁 Primary Threat vs misc 的 效果：首要威胁；4 处全部形如「效果：首要威胁」，带全角冒号可避免将来命中散文里泛指的「首要威胁」。",
+      "risk": "low",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "专注之歌",
+      "to": "专注歌谣",
+      "why": "三首 Ballad of X 在语料里 歌谣/叙事曲/之歌 三词混用；统一取「歌谣」（原本已用于 Focus、Strength 两条的效果文档，出现最广）。此条把专长本体与 journal 链接对齐到效果文档名。",
+      "risk": "low",
+      "_batch": "names-01"
+    },
+    {
+      "from": "乔吉博姆",
+      "to": "格奥吉博姆",
+      "why": "同一条龙的第 2 种音译，只出现在 Greatpick(True) 名与一处描述；统一到 journal 正文的「格奥吉博姆」。两串互不为子串。",
+      "risk": "low",
+      "_batch": "names-03"
+    },
+    {
+      "from": "代言歌谣",
+      "to": "广告小调",
+      "why": "wiki/官方合集均无 Endorsing Jingle，两式各 4 处（专长名与效果名互相交叉引用）打平。原文自称 advertisement campaign、promoting their business with a few songs and slogans，jingle 的中文对应正是「广告小调／广告歌」；「歌谣」指民谣，与商业广告曲不符。属可读性裁断，两串互不为子串。",
+      "risk": "medium",
+      "_batch": "names-02"
+    },
+    {
+      "from": "余烬之肉",
+      "to": "灰烬之肉",
+      "why": "wiki: Cult of Cinders→灰烬教团、Cindersoul→灰烬之魂，Cinders 定译「灰烬」；本体 items 已作「灰烬之肉」(3 处)，「余烬之肉」仅 Effect 名 1 处。",
+      "risk": "low",
+      "_batch": "names-03"
+    },
+    {
+      "from": "先知反击",
+      "to": "预见反击",
+      "why": "Foreseen≠先知；wiki: Foreseen Failure→预观败局、Retaliation→反击。且「先知」在本模组是 Oracle 职业名，用在此处会撞车。本体已作「预见反击」。",
+      "risk": "low",
+      "_batch": "names-03"
+    },
+    {
+      "from": "先祖之教",
+      "to": "先祖之训",
+      "why": "本体 items:Forefathers' Lessons 作「先祖之训」(4 处)，「先祖之教」仅 Effect 名 1 处。",
+      "risk": "low",
+      "_batch": "names-03"
+    },
+    {
+      "from": "准备诗篇",
+      "to": "备战诗篇",
+      "why": "专长本体与 journal 用「备战诗篇」；英文 Verse of Preparation 指为切磋备战之乐段，「备战」比泛泛的「准备」贴题。",
+      "risk": "low",
+      "_batch": "names-07"
+    },
+    {
+      "from": "分形霜冻",
+      "to": "分形结霜",
+      "why": "官方合集 oracles.oracles-revelation-spells 把 Fractal Frosting 译作「分型结霜」，Frosting 取「结霜」而非「霜冻」；fractal 的标准中文是「分形」，故取二者之合。已核 7 处全指该能力。",
+      "risk": "low",
+      "_batch": "names-03"
+    },
+    {
+      "from": "创造熔炉",
+      "to": "造物熔炉",
+      "why": "wizards-misc name 叶 造物熔炉 Creation's Forge（位面名，语料共 9 处），inventors/magic/witches 里 4 处写「创造熔炉」；4 字串唯一。",
+      "risk": "low",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "勇士嚼块",
+      "to": "战士肉干",
+      "why": "同一实体的第三种写法，出现在物品本体正文里(pf2e/sf2e items 各 1 处)，一并归一到本体名。",
+      "risk": "low",
+      "_batch": "names-07"
+    },
+    {
+      "from": "千魂律动",
+      "to": "千魂之律",
+      "why": "专长本体名「千魂之律」并被 tian-xia.journal 的目录标题 UUID 链接引用；「千魂律动」仅效果文档名 1 处。",
+      "risk": "low",
+      "_batch": "names-06"
+    },
+    {
+      "from": "双刺台风",
+      "to": "尖叉台风",
+      "why": "英文 Prong 无「双」义（需求为持钗/十手），「尖叉台风架势」是专长本体名且被 journal 索引引用（2 处 vs 1 处）。",
+      "risk": "low",
+      "_batch": "names-05"
+    },
+    {
+      "from": "君权护甲",
+      "to": "君主护甲",
+      "why": "同模组 Soverign 一律译君主——「君主的诡计 Guile of a Soverign」「向君主跪拜 Kneel Before the Soverign」「效果：帝国灵气（君主）」，英文正文也是 sovereign dragon；「君权护甲」是唯一例外。",
+      "risk": "low",
+      "_batch": "names-06"
+    },
+    {
+      "from": "启慧法术",
+      "to": "启明法术",
+      "why": "本体 items:Enlightening Spell 与 journals 均作「启明法术」(3 处)，「启慧法术」只在 Effect 名与其链接文本 (2 处)；wiki 无该条目，从本体。",
+      "risk": "low",
+      "_batch": "names-03"
+    },
+    {
+      "from": "启慧法术",
+      "to": "启明法术",
+      "why": "oracles-remastered items 的 name 叶为 启明法术 Enlightening Spell，misc 的 效果：启慧法术 及其链接标签是另一套译名；全语料 2 处。",
+      "risk": "medium",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "吸血于水",
+      "to": "以水为食",
+      "why": "英文原文是吸收水系法术伤害转为临时 HP，与吸血无关；「吸血于水」是误译。仅 2 处(专长名+journal 链接)。",
+      "risk": "low",
+      "_batch": "names-03"
+    },
+    {
+      "from": "地精巨喙",
+      "to": "格奥吉博姆",
+      "why": "Geojibom 是幽暗地域龙的专名；「地精巨喙」把 Geojibom 拆成 goblin+beak 属误译。journal 正文全篇作「格奥吉博姆」(13 处)。仅 2 处，均为「地精巨喙的巨镐」。",
+      "risk": "low",
+      "_batch": "names-03"
+    },
+    {
+      "from": "复元之丛",
+      "to": "复苏林苑",
+      "why": "专长本体名是「复苏林苑」；同语料 magic 模组已把 Grove Aura 译作「林苑光环」，Revitalizing 也已定为复苏(复苏之血)，「复元之丛」仅存在于效果文档名及其正文。",
+      "risk": "low",
+      "_batch": "names-06"
+    },
+    {
+      "from": "天命杀戮",
+      "to": "命定杀戮",
+      "why": "wiki 无 Destined Kill 本条。本项目全语料把 Destined 统一译作「命定」：Destined Strike 命定打击（clerics-remaster）、Destined Path 命定之路（summoners-plus）、正文 your destined kill 作「命定之杀」8 处。改向「命定杀戮」只动 2 处物品名即与全部正文自洽；反向则要连带改 8 处正文。「天命」另有 3 处，其中 tian-xia journal 的「天命」是天授之命，与本实体无关，4 字 from 不会误伤。",
+      "risk": "low",
+      "_batch": "names-02"
+    },
+    {
+      "from": "如愿之思",
+      "to": "一厢情愿",
+      "why": "官方 pf2e_compendium_chn 的 oracles.oracles-revelation-spells 中 Wishful Thinking 即译「一厢情愿」；oracles-remastered 是该模组的重铸版，同名同源，按合集权威压过语料票数。",
+      "risk": "low",
+      "_batch": "names-07"
+    },
+    {
+      "from": "岩棱巨魁",
+      "to": "尖石巨像",
+      "why": "Juggernaut of Jagged Stone：wiki 里 Juggernaut 在能力名中作「巨像」(不灭巨像/巨像强韧)，法术描述是「你成为山岳化身、皮肤生出岩层」，「巨像」贴合；本体 items 已用「尖石巨像」(3 处 > 2 处)。",
+      "risk": "low",
+      "_batch": "names-04"
+    },
+    {
+      "from": "帝国灵气",
+      "to": "帝国灵光",
+      "why": "Imperial Aura：wiki 里 Aura 在能力名中一律作「灵光」(勇气灵光/生命灵光等 34 条)，「灵气」仅 1 条且对应 Nimbus；专长本体(player-options)与 journal 已用「帝国灵光」，misc 里也有 4 个 Effect 用了「帝国灵光」。",
+      "risk": "low",
+      "_batch": "names-04"
+    },
+    {
+      "from": "库克主母",
+      "to": "主母三明治",
+      "why": "wiki/官方合集均无 Croque Matron。「主母三明治」4 处（两个效果名 + 两处物品正文）vs「库克主母」2 处（仅物品名）；原文 This scrumptious sandwich，「库克」作 Croque 音译在中文里易被读成 Cook/库克船长，可读性差。两串互不为子串。",
+      "risk": "low",
+      "_batch": "names-02"
+    },
+    {
+      "from": "心硬如铁",
+      "to": "心如铁石",
+      "why": "Harden Heart：两译均无 wiki/合集依据，取可读性——「心如铁石」是成语，正对 EN「steel yourself against emotional turbulence / 抗情绪效果」；「心硬如铁」为生造搭配。",
+      "risk": "low",
+      "_batch": "names-04"
+    },
+    {
+      "from": "快手料理",
+      "to": "快速烹饪",
+      "why": "专长本体名与正文共 12 处用「快速烹饪」，「快手料理」只出现在 4 处效果文档名/链接标签上。",
+      "risk": "low",
+      "_batch": "names-06"
+    },
+    {
+      "from": "快速修理",
+      "to": "快速修补",
+      "why": "inventors-iconic Rutaiba 的专长 name 叶为 快速修补 Quick Repair（5 处）；tian-xia Pragmatic Resources 里 {快速修理} 与「快速修理」指向同一核心专长 ASy9AKEIRxPYUi5o。全语料仅这 2 处。",
+      "risk": "low",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "恐怖体型",
+      "to": "可怖之巨",
+      "why": "wiki/官方合集均无此条；本体(items)文档名 + 正文链接文字共 3 处用「可怖之巨」，效果文档孤例，且 wiki 的 Terrible Transformation→凶恶变身 走形容词化路线而非直译体型。",
+      "risk": "medium",
+      "_batch": "names-07"
+    },
+    {
+      "from": "感染欢宴",
+      "to": "传染狂欢",
+      "why": "wiki 中 Contagious 系列统一作「传染」（Contagious Spell 传染法术、Contagious Idea 传染思维），「感染」是 infect；且物品本体正文里引用的链接文本已是「传染狂欢」。「感染欢宴」全语料 2 处，均属本实体。",
+      "risk": "low",
+      "_batch": "names-02"
+    },
+    {
+      "from": "成为面具",
+      "to": "化为面具",
+      "why": "wiki/官方合集无此条，语料两译各 4 处完全打平；取可读性——专长是花一天时间彻底化身为所扮演的身份，「化为」比直译味的「成为」更像专长名。4 处命中为专长名与效果文档的「由…授予」链接。",
+      "risk": "low",
+      "_batch": "names-01"
+    },
+    {
+      "from": "战士嚼块",
+      "to": "战士肉干",
+      "why": "英文原文 this cube of tough monster jerky，jerky=肉干；物品本体文档名即「战士肉干」，效果文档跟随。",
+      "risk": "low",
+      "_batch": "names-07"
+    },
+    {
+      "from": "振奋演讲",
+      "to": "振奋演说",
+      "why": "items name 叶 振奋演说 Invigorating Speech，描述里「暂时免疫你的振奋演讲」对应英文 immune to your Invigorating Speech；2 处。同句另有普通名词「你的演讲」，本规则带「振奋」不会误伤。",
+      "risk": "low",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "放大伴奏",
+      "to": "扩声伴奏",
+      "why": "物品本体作「扩声伴奏」，正文讲的是把其他声音放大（增程 30 尺、赋予音波弱点），「扩声」是音响术语且更通顺；3 处命中全在 oracles misc 的效果/灵气名与链接。",
+      "risk": "low",
+      "_batch": "names-01"
+    },
+    {
+      "from": "智谋反制",
+      "to": "识破诡计",
+      "why": "wiki/官方合集均无 Counterwit。专长本体（player-options）与 journal 链接文本均作「识破诡计」（2 处），效果名「智谋反制」仅 1 处；正文「Your wit is quick to thwart tricks of the mind」正合「识破诡计」。两串互不为子串。",
+      "risk": "low",
+      "_batch": "names-02"
+    },
+    {
+      "from": "更新之诺",
+      "to": "许诺重生",
+      "why": "法术让尸体化作繁茂新生，中心词是 Renewal；「更新」在现代汉语偏软件更新义，「许诺重生」中心词正确且更可读。",
+      "risk": "low",
+      "_batch": "names-05"
+    },
+    {
+      "from": "月下狂言",
+      "to": "月光之愚",
+      "why": "Folly 是月相影响下的鲁莽（速度+意志减值），非言语；「月光之愚」是法术本体名且被 journals 索引引用（3 处 vs 2 处）。",
+      "risk": "low",
+      "_batch": "names-05"
+    },
+    {
+      "from": "束缚草丛",
+      "to": "束缚草木",
+      "why": "专长本体名「束缚草木」(player-options)，效果正文回指也写「由…{束缚草木} 授予」；Flora 取草木，草丛(thicket)偏窄。",
+      "risk": "low",
+      "_batch": "names-06"
+    },
+    {
+      "from": "束缚草丛",
+      "to": "束缚草木",
+      "why": "专长 name 叶 束缚草木 Restricting Flora（Flora=草木）vs misc 的 效果：束缚草丛；4 处 = 2 name 叶 + 2 链接标签。",
+      "risk": "medium",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "柔术挣脱",
+      "to": "扭体逃脱",
+      "why": "wiki 中 Escape 作为动作译「逃脱」（Data:Actions-Escape），Polymorphic Escape 变形逃脱亦同；「挣脱」与机制动作名对不上。「扭体逃脱」4 处（专长名 + 效果正文）vs「柔术挣脱」2 处（仅效果名），且正文「As you contort your body」正是扭动身体。",
+      "risk": "low",
+      "_batch": "names-02"
+    },
+    {
+      "from": "栗果连枷",
+      "to": "马栗连枷",
+      "why": "英文原文明写 oversized horse chestnut，conker 就是马栗（七叶树果）；「马栗连枷」48 处（含物品名与全部正文）压倒「栗果连枷」12 处（仅效果名）。两串互不为子串。",
+      "risk": "low",
+      "_batch": "names-02"
+    },
+    {
+      "from": "欢乐之井",
+      "to": "欢欣之井",
+      "why": "物品本体文档名 + 正文 + journal 共 6 处用「欢欣之井」，效果文档 2 处孤例。",
+      "risk": "low",
+      "_batch": "names-07"
+    },
+    {
+      "from": "欢迎痛苦",
+      "to": "欢迎苦难",
+      "why": "专长本体(barbarians.items/misc)名为「欢迎苦难」；misery=苦难，而「痛苦」在同一段正文里已用于 pain，避免撞车。",
+      "risk": "low",
+      "_batch": "names-07"
+    },
+    {
+      "from": "欢迎苦痛",
+      "to": "欢迎苦难",
+      "why": "同一实体的第三种写法，出现在专长正文的「」引用里(各文件 2 处)，一并归一。",
+      "risk": "low",
+      "_batch": "names-07"
+    },
+    {
+      "from": "欢迎苦痛",
+      "to": "欢迎苦难",
+      "why": "misc name 叶 欢迎苦难 Welcome Misery，而该条目自己的描述里 4 处写「欢迎苦痛」；4 字串唯一，只命中这 4 处。",
+      "risk": "low",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "毁灭终局",
+      "to": "毁灭终结",
+      "why": "wiki 中 Finish/Finisher 系列一律作「终结」（溅血终结、贯通终结、稳妥终结、完美终结），Devastating 作「毁灭」（毁灭显现）；「终局」是 endgame，与「击倒敌人后的收尾一击」语义不合。虽然「毁灭终局」4 处多于「毁灭终结」2 处，但 wiki 术语族优先于计数。两串互不为子串。",
+      "risk": "low",
+      "_batch": "names-02"
+    },
+    {
+      "from": "法律学识",
+      "to": "律法学识",
+      "why": "Legal Lore 在本项目有 6 个 name 叶（magic.actors 三个层面、wizards-iconic）都作 律法学识，共 14 处；wizards-iconic 的 Barrister 描述里 2 处写 法律学识。同段的「法律顾问」不含此 4 字串，不受影响。",
+      "risk": "low",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "活化血液",
+      "to": "复苏之血",
+      "why": "效果文档回指本体时写「来自 {复苏之血}」，物品自身描述又链接「效果：复苏之血」，语料里 3:1 压倒「活化血液」，且与本批 Revitalizing→复苏 一致。",
+      "risk": "low",
+      "_batch": "names-06"
+    },
+    {
+      "from": "派对灵魂",
+      "to": "派对之魂",
+      "why": "Life of the Party：本体 items 用「派对之魂」(3 处 > 2 处)，作名称比「派对灵魂」自然；wiki 无该条目。",
+      "risk": "low",
+      "_batch": "names-04"
+    },
+    {
+      "from": "浅滩昏影",
+      "to": "浅滩苍影",
+      "why": "两者出现次数完全对称(各 4，均为文档名+对向链接)，无 wiki/官方合集可依，取词义：sallow 指病黄/苍白，苍影比昏影(仅指昏暗)更贴。",
+      "risk": "low",
+      "_batch": "names-06"
+    },
+    {
+      "from": "浓香奶酪",
+      "to": "浓臭奶酪",
+      "why": "Odoriferous 指气味浓烈刺鼻（洗浸皮奶酪），描述译文作「气味浓烈得惊人」而非芳香；「浓臭」出现 8 次多于「浓香」4 次。",
+      "risk": "low",
+      "_batch": "names-05"
+    },
+    {
+      "from": "火化预备",
+      "to": "预备焚化",
+      "why": "中心词是 Cremation（焚化），Preparatory 作定语，「预备焚化」语序正确且覆盖效果与瞬时效果两份文档（4 处 vs 3 处）。",
+      "risk": "low",
+      "_batch": "names-05"
+    },
+    {
+      "from": "点金之触",
+      "to": "点石成金",
+      "why": "Golden Touch：物品本体(items)与 journal 引用均作「点石成金」(3 处)，仅 Effect 文档作「点金之触」(2 处)；成语「点石成金」正对法术「transmutes anything it touches to gold」。",
+      "risk": "low",
+      "_batch": "names-04"
+    },
+    {
+      "from": "熟悉之暗",
+      "to": "熟稔之暗",
+      "why": "本体 items:Familiar Dark 作「熟稔之暗」(3 处)，「熟悉之暗」仅 Effect 名 1 处；wiki 官方以「熟稔」译 Familiarity(地精武器熟稔)。",
+      "risk": "low",
+      "_batch": "names-03"
+    },
+    {
+      "from": "献上贡品",
+      "to": "献祭",
+      "why": "专长本体 player-options 作「献祭」，「献上贡品」4 处全是 Effect 名/链接。方向只能这样：反向 from=「献祭」会误伤「双向献祭 Diadic Sacrifice」与 journal 的「最终献祭」(已 grep 确认存在)。",
+      "risk": "low",
+      "_batch": "names-03"
+    },
+    {
+      "from": "盛怒护卫",
+      "to": "愤怒护卫",
+      "why": "wiki 专长 Wrathful Presence→愤怒威势，Wrathful 作定语的既定译法是愤怒；语料中「愤怒护卫」10 处也多于「盛怒护卫」8 处。",
+      "risk": "low",
+      "_batch": "names-07"
+    },
+    {
+      "from": "真菌护盾",
+      "to": "真菌守护",
+      "why": "专长本体作「真菌守护」；效果是抗负能量的护佑而非护盾，wiki 中 Ward 系多作防护/结界(Blood Ward→避族防护、Wood Ward→木结界)，不作「护盾」。「真菌护盾」4 处全是 Effect 名/链接。",
+      "risk": "low",
+      "_batch": "names-03"
+    },
+    {
+      "from": "破防重击",
+      "to": "破界重击",
+      "why": "反向裁决：Breach 家族的 name 叶是 破界本能 Breach Instinct、呼唤裂隙、了解裂隙，散文 12 处一律写 破界重击（含 Breach Blow 自己的描述「破界重击」）；破防重击 只出现在 misc 的 2 个 name 叶 + 2 个链接标签，是家族里的孤例，且「破防」丢掉了撕裂位面的原意。改 4 处比改 12 处更少破坏且家族一致。",
+      "risk": "medium",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "确立礼仪",
+      "to": "建立礼仪",
+      "why": "专长本体 player-options 作「建立礼仪」(14 处，含 pf2e/sf2e 两套)，「确立礼仪」只在 Effect 名/链接 (10 处)；已核 10 处全指该能力，正文「已确立的礼仪」带「的」不会误命中。",
+      "risk": "low",
+      "_batch": "names-03"
+    },
+    {
+      "from": "礼仪表演",
+      "to": "礼拜表演",
+      "why": "Liturgical Performance：4:4 打平，取语义——EN 是「唱圣歌、跳仪式舞、讲神圣笑话」，liturgy=礼拜仪式；「礼仪表演」会被读成「礼节/仪态表演」，义偏。",
+      "risk": "low",
+      "_batch": "names-04"
+    },
+    {
+      "from": "神圣横扫",
+      "to": "神圣狂暴",
+      "why": "wiki 中 Rampage 作「狂暴」（Primal Rampage 原始狂暴）；正文 continue your rampage 描述的是失控暴走而非横扫。「神圣狂暴」2 处（物品名 + 效果正文）vs「神圣横扫」1 处（仅效果名）。",
+      "risk": "low",
+      "_batch": "names-02"
+    },
+    {
+      "from": "神秘连结",
+      "to": "神秘链结",
+      "why": "Mystic Link 的所有 name 叶（神秘链结/高级神秘链结/效果：神秘链结）都写作「链结」，magic.items.json 里 46 处散文写成「连结」；无任何 name 叶用「连结」，4 字串唯一，不会命中钩剑那句的「连结」。",
+      "risk": "low",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "窑炉硬化",
+      "to": "窑烧硬化",
+      "why": "Kiln-Hardened：EN 是黏土之躯被火「baked」的状态，「窑烧」是动作、「窑炉」是器物；专长本体与 journal 均用「窑烧硬化」(2 处 > 1 处)。",
+      "risk": "low",
+      "_batch": "names-04"
+    },
+    {
+      "from": "粘草嫩枝",
+      "to": "黏草嫩枝",
+      "why": "wiki 的 Sticky 系列一律用「黏」(Sticky Bomb 黏性炸弹 / Sticky Poison 黏着毒素)，物品本体文档及其正文「黏附」也已用黏；只改效果文档 6 处。",
+      "risk": "low",
+      "_batch": "names-07"
+    },
+    {
+      "from": "精准锁定",
+      "to": "精准指出",
+      "why": "Pinpoint Out 是 Point Out 动作的双关，wiki 中 Point Out=指出位置，「精准指出」保住这层机制关联；两者各 4 处。",
+      "risk": "low",
+      "_batch": "names-05"
+    },
+    {
+      "from": "精魂记忆",
+      "to": "灵魂记忆",
+      "why": "专长 name 叶为 灵魂记忆 Spiritual Memories，misc 的 3 个效果条目（受训/专家/大师）及其链接标签写作 精魂记忆；全语料 12 处全在这 3 组效果上。注意本项目「精魂」另作 spirit 伤害用，但 4 字串「精魂记忆」不与之重叠。",
+      "risk": "medium",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "精魂随从",
+      "to": "精魂侍从",
+      "why": "wiki 对 Squire 给出侍从(背景 Squire→侍从、Reliable Squire→可靠侍从)，优先级高于语料计数；且本模组 随从 已被 PF2e 术语 minion 占用。",
+      "risk": "medium",
+      "_batch": "names-06"
+    },
+    {
+      "from": "织流架势",
+      "to": "编织架势",
+      "why": "wiki Arcane Weaving→奥法编织、Specialty Crafting (Weaving)→编织，Weaving 的既定译法是编织；专长本体与 journal 也用「编织架势」。",
+      "risk": "low",
+      "_batch": "names-07"
+    },
+    {
+      "from": "终末将至",
+      "to": "末日将至",
+      "why": "「末日将至」已是本语料的既有译法(oracles/wizards 共 10 处)，官方 oracles 合集 Doomsaying→末日预言 同源；from 不带全角叹号以覆盖带与不带两种写法。",
+      "risk": "low",
+      "_batch": "names-07"
+    },
+    {
+      "from": "联锁盾阵",
+      "to": "联锁盾墙",
+      "why": "Interlocked Shields：出现次数 4:4 打平，用 wiki 定盘——Shield Wall→盾墙（专长），「盾阵」在 wiki 零命中；且专长本体用的是「联锁盾墙」。",
+      "risk": "low",
+      "_batch": "names-04"
+    },
+    {
+      "from": "联锁盾阵",
+      "to": "联锁盾墙",
+      "why": "专长 name 叶 联锁盾墙 Interlocked Shields vs misc 的 效果：联锁盾阵；4 处 = 2 name 叶 + 2 链接标签。",
+      "risk": "medium",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "苦疫抗性",
+      "to": "病恙耐药",
+      "why": "wiki/官方合集均无此条（pf2e-feats-plus 合集整包未译）。专长本体作「病恙耐药」，且 mithridatism 正是「以微量接触建立耐受」，「耐药」贴切；「抗性」与 PF2 机制术语 Resistance=抗性 撞车易误读。4 处命中全在 feats 模组的效果名与链接文本。",
+      "risk": "low",
+      "_batch": "names-01"
+    },
+    {
+      "from": "荆棘绊结",
+      "to": "荆棘结",
+      "why": "物品本体三个阶级均作「荆棘结」，Knot=结 直译；「绊」是照搬绊摔（Trip）用途加的义，英文名里没有。取长→短方向。注意：「荆棘结」并非「荆棘绊结」的连续子串（荆棘|绊结），双向都不嵌套，替换幂等、不会叠加；18 处命中含 6 处效果正文「该荆棘绊结的运动调整值」，替换后仍通顺。",
+      "risk": "medium",
+      "_batch": "names-01"
+    },
+    {
+      "from": "虎之尾击",
+      "to": "猛虎尾击",
+      "why": "专长本体(player-options)与模组 journal 均作「猛虎尾击架势」(2 处)，只有 misc 的架势文档孤例作「虎之尾击」。",
+      "risk": "low",
+      "_batch": "names-07"
+    },
+    {
+      "from": "谢龙之刃",
+      "to": "佘龙之刃",
+      "why": "基础版本文档名与 journal 索引链接都用「佘龙之刃」(3 处)，「谢龙之刃」只出现在 True/Greater 两个分级名上；佘(Shé)也比谢(Xiè)更接近 Shei。",
+      "risk": "low",
+      "_batch": "names-06"
+    },
+    {
+      "from": "辉煌之球",
+      "to": "辉煌法球",
+      "why": "wiki 对法术类 Orb 统一用「法球」（Aqueous Orb=水牢法球、Floating Flame=浮焰法球），「之球」在本语料是 Sphere 的对应词（基础之球）。",
+      "risk": "low",
+      "_batch": "names-05"
+    },
+    {
+      "from": "速算方程",
+      "to": "快速演算",
+      "why": "本体（炼金物品）文档名是「快速演算」，「速算方程」只是效果文档名及其链接标签；正文「你飞快地算了一通，推演距离、重量、速度、角度」对应演算而非方程。",
+      "risk": "low",
+      "_batch": "names-06"
+    },
+    {
+      "from": "野性大胜",
+      "to": "野蛮成功",
+      "why": "专长本体名「野蛮成功」且效果正文回指用它(4:2)；同一专长授予的 Feral Lunge 已译「野性猛冲」，Savage 再用野性会与 Feral 撞车。",
+      "risk": "low",
+      "_batch": "names-06"
+    },
+    {
+      "from": "险中得脱",
+      "to": "千钧一发",
+      "why": "专长本体名「千钧一发」且效果正文回指用它(4:2)；成语更贴 Skin of my Teeth，「险中得脱」仅两处效果文档名。",
+      "risk": "low",
+      "_batch": "names-06"
+    },
+    {
+      "from": "随手羞辱",
+      "to": "旁敲讽语",
+      "why": "Off-handed 指随口的挖苦（触发于「当头棒喝」后的反唇），与手无关；「旁敲讽语」在 4 个文件均有且更贴讽刺义。",
+      "risk": "low",
+      "_batch": "names-05"
+    },
+    {
+      "from": "首要威胁",
+      "to": "主要威胁",
+      "why": "专长本体名是「主要威胁」，仅效果文档用「首要威胁」；方向必须由「首要」改向「主要」，因为天下卷 journal 另有两处泛用的「主要威胁」散文不可改动。",
+      "risk": "low",
+      "_batch": "names-05"
+    },
+    {
+      "from": "高处朋友",
+      "to": "高位之交",
+      "why": "专长本体作「高位之交」，符合 friends in high places 的中文习语；「高处朋友」是直译，4 处全是 Effect 名/链接。",
+      "risk": "low",
+      "_batch": "names-03"
+    },
+    {
+      "from": "魔法制造",
+      "to": "魔法制作",
+      "why": "inventors-iconic Rutaiba 的专长 name 叶为 魔法制作 Magical Crafting；feats 里 4 处 @UUID{魔法制造} 指向同一核心专长 xWY5omyIcILNR7y1。4 处全是该链接标签。",
+      "risk": "low",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "鼹鼠矿坑",
+      "to": "鼹鼠地雷",
+      "why": "英文描述为埋地后爆炸的炸弹（mine=地雷），四个等级里只有 Greater 及其索引链接误译成矿坑。",
+      "risk": "low",
+      "_batch": "names-05"
+    },
+    {
+      "from": "：好运者",
+      "to": "：幸运者",
+      "why": "专长 name 叶 幸运者 Fortunate One vs misc 的 效果：好运者；4 处全部形如「效果：好运者」。「好运者」只有 3 字、可能撞散文，故带全角冒号。",
+      "risk": "low",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "好运者",
+      "to": "幸运者",
+      "why": "wiki: Fortunate Relief→幸运慰藉、Fortunate Blow→幸运猛击、Fortune→幸运，Fortunate 定译「幸运」；专长本体已作「幸运者」，「好运者」4 处全是 Effect 名/链接。",
+      "risk": "low",
+      "_batch": "names-03"
+    },
+    {
+      "from": "春祖都",
+      "to": "春秋道",
+      "why": "Chun Jo Do 是花国（Hwanggot）修道骑士的「道」，wiki/官方合集均无此条。两式各 2 处打平，但韩语 Do(도) 对应汉字「道」（跆拳道、合气道），「都」是音译误写；且「春秋道」已在 Rhythm of a Thousand Souls 正文「你正处于春秋道的效果影响下」中使用。全语料「春祖都」仅 2 处，均属本实体。",
+      "risk": "medium",
+      "_batch": "names-02"
+    },
+    {
+      "from": "洪阿里",
+      "to": "弘古",
+      "why": "Hongali：wiki 与 pf2e_compendium_chn 均作「弘古角弓 Hongali Hornbow」，且本语料 barbarians/tian-xia 散文已用「弘古」8 处；「洪阿里角弓」还直接链到官方合集里名为「弘古角弓」的物品。三字音译全语料唯一，不会误伤。",
+      "risk": "medium",
+      "_batch": "names-04"
+    },
+    {
+      "from": "萨伦蕾",
+      "to": "萨润蕾",
+      "why": "wizards-iconic 的神祇 name 叶为 萨润蕾 Sarenrae；oracles-remastered 的 Light 描述里 2 处写 萨伦蕾。3 字但极其独特，全语料只这 2 处。",
+      "risk": "low",
+      "_batch": "prose-terms"
+    },
+    {
+      "from": "梁冯",
+      "to": "梁凤",
+      "why": "Luong Phung（海龙 NPC）：journal 通篇作「梁凤」(12 处)，越南语 Lương Phụng 的汉越对音正是「梁凤」。此条同时修掉「梁冯之罗盘 Compass of Luong Phung」（不在本批但同一人名）。",
+      "risk": "medium",
+      "_batch": "names-04"
+    },
+    {
+      "from": "禄凤",
+      "to": "梁凤",
+      "why": "同上；出现在 Trident 基础版描述正文「包覆着禄凤多年来蜕下的鳞片」，全语料仅 1 处。",
+      "risk": "low",
+      "_batch": "names-04"
+    },
+    {
+      "from": "阮丰",
+      "to": "梁凤",
+      "why": "同上；「阮丰的三叉戟（高阶）」是同一 NPC 的另一种音译，全语料仅 1 处。",
+      "risk": "low",
+      "_batch": "names-04"
+    },
+    {
+      "from": "阮凤",
+      "to": "梁凤",
+      "why": "同上；出现在 Trident (True) 描述正文「覆有阮凤多年来蜕下的鳞片」，全语料仅 1 处。",
+      "risk": "low",
+      "_batch": "names-04"
+    }
+  ],
+  "left_alone": [
+    {
+      "item": "Team",
+      "why": "Team+ 是发行方/模组家族品牌（「Team+ 推出的第三本书」「Team+ 官方 Discord」），与 Fam+ 同类，保持拉丁",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Check",
+      "why": "不是散文里的英文词，而是英文基线自身写坏的 enricher：Bottle-O-Ooze 五档的 `Check[reflex|dc:NN]` 漏了开头的 @（同一模组 Ymeri's Own Curry 里写对了 `@Check[...]`）。译成「检定」只会把坏件译坏；补 @ 的方向是 from⊂to，子串替换会反复叠成 @@Check，必须另写一个修复脚本处理",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Template",
+      "why": "同上，`Template[type:cone|distance:15]` 漏 @ 的坏 enricher，2 处为 pf2e/sf2e 镜像。另外 misc 里的 Protoplasmic Template / Template Aspect Shift 是 name 字段双语文体，本就该留英文",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "FoundryVTT",
+      "why": "软件品牌名，TRANSLATOR_BRIEF 明列保持拉丁",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Math",
+      "why": "barbarians.journals「FoundryVTT Notes」页 <code> 块里的 JS 宏代码 `Math.max(deception.dc, ...)`，是可执行代码不是散文",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Pathfinder Second Edition",
+      "why": "Foundry 里的系统设置项字面名（「在『Pathfinder Second Edition』设置中启用……」），译了玩家就在界面上找不到该项",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Pathfinder Adventure Card Society",
+      "why": "License 页 Paizo 商标清单，brief 规定署名/版权/商标名单保持英文",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Pathfinder Adventure Card Game",
+      "why": "同上，Paizo 注册商标清单",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Pathfinder Roleplaying Game",
+      "why": "同上，Paizo 注册商标清单",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Starfinder Roleplaying Game",
+      "why": "同上，Paizo 注册商标清单",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Starfinder Adventure Path",
+      "why": "同上，Paizo 注册商标清单",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Pathfinder Adventure Path",
+      "why": "同上，Paizo 注册商标清单",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Pathfinder Accessories",
+      "why": "同上，Paizo 注册商标清单",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Pathfinder Combat Pad",
+      "why": "同上，Paizo 注册商标清单",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Starfinder Combat Pad",
+      "why": "同上，Paizo 注册商标清单",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Pathfinder Flip-Tiles",
+      "why": "同上，Paizo 注册商标清单",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Starfinder Flip-Tiles",
+      "why": "同上，Paizo 注册商标清单",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Pathfinder Lost Omens",
+      "why": "同上，Paizo 注册商标清单",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Pathfinder Adventure",
+      "why": "同上，Paizo 注册商标清单",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Pathfinder Flip-Mat",
+      "why": "同上，Paizo 注册商标清单",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Pathfinder Infinite",
+      "why": "同上；且《Pathfinder Infinite 与 Starfinder Infinite 社群内容协议》是法律文件名，不可译",
+      "_batch": "latin-01"
+    },
+    {
+      "item": "Starfinder Flip-Mat",
+      "why": "Feats+ License 页的 Paizo 商标清单，商标名必须保持原文",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "Starfinder Infinite",
+      "why": "License 页「社群使用协议」名，Paizo 授权计划名，保持原文",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "Starfinder Society",
+      "why": "License 页明确列为 Paizo Inc. 注册商标",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "Pathfinder Battles",
+      "why": "License 页 Paizo 商标清单",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "Pathfinder Society",
+      "why": "License 页 Paizo Inc. 注册商标",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "Pathfinder Legends",
+      "why": "License 页 Paizo 商标清单",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "Pathfinder Pawns",
+      "why": "License 页 Paizo 商标清单",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "Starfinder Pawns",
+      "why": "License 页 Paizo 商标清单",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "Pathfinder Tales",
+      "why": "License 页 Paizo 商标清单",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "Pathfinder P",
+      "why": "「Pathfinder P 徽标」，指 Paizo 的 P 字标志，商标名不译",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "Conner Berkheiser",
+      "why": "版权行作者署名，署名不译",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "Derry Luttrell",
+      "why": "版权行作者署名，署名不译",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "Tony Saunders",
+      "why": "版权行作者署名，署名不译",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "Daniel",
+      "why": "版权行 Daniel \"Cerapter\" V. 的名，署名不译",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "Cerapter",
+      "why": "版权行作者网名，不译",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "Feats",
+      "why": "指 <strong>Feats+</strong> © 2024，模组/书名本身，且在版权声明内，不动",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "Magic",
+      "why": "3 处全是 Magic+ 这个补充册简称（「你获得 Magic+ 书中…」「（Magic+）」）。同类兄弟名 Team+ 在同一文件里同样保留拉丁（（Team+）共 5 处，未被本批标记），单独汉化 Magic+ 反而破坏局部一致；且各 journal 标题已是「魔法+ Magic+」双语，检索无碍。裸 from=\"Magic\" 更会误伤「精质魔法 Essence Magic」等数十条双语名",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "Pathfinder Player Core",
+      "why": "Paizo 书名，按规则保持拉丁；原文已用 <em> 斜体标注为书名",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "Forbisens",
+      "why": "散文里已是双语形态：条目名「魔宠禁忆 Familiar Forbisens」、正文小标题「禁忆 Forbisens」。没有裸拉丁残留，无须改",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "Old-Mage Jatembe（拉丁部分）",
+      "why": "原文作 <strong>Old-Mage Jatembe（老法师…）</strong>，与同段 Merlin（梅林）、Stardust（星尘）同为「英文（中文）」体例，改成中文在前会打乱这张名人表；只在 rules 里修正了括号内的中文译名",
+      "_batch": "latin-02"
+    },
+    {
+      "item": "CraftingAbility RE",
+      "why": "PF2e 系统的规则元素（Rule Element）类名，GM 要拿它去系统源码/控制台里搜，属于机器件，保持拉丁",
+      "_batch": "latin-03"
+    },
+    {
+      "item": "Makhluk（Makhluk Wayang）",
+      "why": "《天夏角色指南》p.125 的魔宠种类。wiki 只有 Wayang=剪影人（特征页），查不到 Makhluk Wayang 整体的社群译名；自造一个（剪影人造物/玛赫鲁克·瓦扬）有和将来官方译名对撞的风险，留给有 TXCG 中文本的人定",
+      "_batch": "latin-03"
+    },
+    {
+      "item": "Flora Form",
+      "why": "witches-remaster 的「建议改动」表里写的是「更名为『植物形态』（Flora Form）」——这段的内容就是「把某能力改名叫 Flora Form」，英文原名是信息本身，中文已在前面给出，不动",
+      "_batch": "latin-03"
+    },
+    {
+      "item": "Shei Long / Luong Phung / Geojibom / Chun Jo Do / Kiln-Hardened 的 name 字段变体",
+      "why": "双语 name 的中文半边不一致（佘龙/谢龙/舍伊隆；梁冯/阮丰/龙凤/梁凤；格奥吉博姆/格约吉博姆/乔吉博姆/盖欧吉伯姆/吉奥吉博姆/地精巨喙；春秋道/春祖都；窑炉硬化/窑烧硬化），但这几条正是 names-02/03/04/06 的 name-variant 条目，归它们裁决，本批次只改散文里的英文残留，并且一律插入它们已列出的候选之一，好让它们的归一规则能顺带收敛",
+      "_batch": "latin-03"
+    },
+    {
+      "item": "Feather / Energize / Plane / The Netherworld / The Celestial Planes / The Fiendish Planes / Creation's Forge 在 name 字段里的英文",
+      "why": "这些出现在 `中文 English` 的双语 name 里（凤凰尾羽 Phoenix Tail Feather、充能 Energized、金属位面 Plane of Metal、幽冥界 The Netherworld…），是规定文体，本来就该留英文；本批次只动 description 里重复了一遍的那半行",
+      "_batch": "latin-03"
+    },
+    {
+      "item": "哥布林 / 地精（Goblin 通用译名，超出本批实体范围）",
+      "why": "全语料「哥布林」32 处 vs「地精」11 处：alchemists 模组还有「哥布林三明治 Goblin Mixto」「哥布林炼金术士」等，clerics/magic 的正文也用「哥布林」。按 wiki 应整体扫成「地精」(from=哥布林 → to=地精，该串无歧义、无子串风险)，但这已是模组级术语决策而非本批的实体归一，交由上层统一下判；否则酸黄瓜改名后会出现「哥布林炼金术士……而地精酸黄瓜」的同句混用。",
+      "_batch": "names-03"
+    },
+    {
+      "item": "Aura: 文档前缀「灵气：」",
+      "why": "全语料 9 个 Aura: 文档有 8 个用「灵气：」前缀（教师之灵/清明现实/精魂圣所等），只有 1 个用「灵光：」。这是前缀口径问题、且分组时前缀已被剥掉，应由前缀统一批处理；本批只改实体名，改后 tian-xia 会出现「灵气：帝国灵光」这一过渡态。",
+      "_batch": "names-04"
+    },
+    {
+      "item": "帝国灵光（海） vs 帝国灵气（减值，海洋）",
+      "why": "括号内的元素名 海/海洋 也不一致，但那是分级/后缀内部的子变体，不在本批的实体分组里，留给后缀批。",
+      "_batch": "names-04"
+    },
+    {
+      "item": "南瓢女士 vs 难病女士 (Lady Nanbyo)",
+      "why": "顺手发现：同一条目 name 用「南瓢女士」、正文全用「难病女士」。不同实体、不在 names-04 里，交给对应批次。",
+      "_batch": "names-04"
+    },
+    {
+      "item": "锐石猛车（pf2e_compendium_chn 对 Juggernaut of Jagged Stone 的译法）",
+      "why": "官方合集 oracles.oracles-revelation-spells 直接命中此名作「锐石猛车」，权威度高于语料计数；但 wiki（更高一级）在能力名中一律把 Juggernaut 译作「巨像」，且「猛车」与「化身山岳」的描述完全对不上。故未采纳合集译法，保留在此备查。",
+      "_batch": "names-04"
+    },
+    {
+      "item": "Spirit Squire 正文里的「召唤随从/你的随从」",
+      "why": "本体描述把 squire 也写成随从，改成侍从需要动 召唤随从 这类散文串，而 随从 是 PF2e 的 minion 正式术语(inventors-iconic 等处 15 次)，子串替换必然误伤；只归一文档名，正文留待整句润色。",
+      "_batch": "names-06"
+    },
+    {
+      "item": "Shei Long's Blade 的分级后缀：(Major) 与 (Greater) 都译作「（高等）」",
+      "why": "属于分级后缀问题(本批已剥离后缀)，不在名称变体裁决范围；需要单独定 Greater/Major/True 的分级词表，否则两件不同物品会同名。",
+      "_batch": "names-06"
+    },
+    {
+      "item": "Command 命令术 — 「命令/的命令/来命令/体命令/达命令 等 11 个变体",
+      "why": "全是滑窗截断产生的碎片。「命令」在散文里是普通动词（命令你的魔宠/下达命令/操作命令），不是 Command 法术的译名漂移；无任何一处真的在指该法术。",
+      "_batch": "prose-terms"
+    },
+    {
+      "item": "Fear 恐惧术 — 以恐惧 / 的恐惧",
+      "why": "同上，是普通名词「恐惧」的碎片（以恐惧驱使、龙的恐惧），与 Fear 法术无关。",
+      "_batch": "prose-terms"
+    },
+    {
+      "item": "Swarm Attack 群体攻击 — 群攻击",
+      "why": "碎片。真实字串是 barbarians「Summon the Pack」里动物伙伴的 兽群攻击（6 处，另一个模组的另一项能力）和 summoners 幻灵的 群体攻击（12 处）。两者是不同能力、不同模组，不是同一译名的漂移，跨模组统一超出本批范围。",
+      "_batch": "prose-terms"
+    },
+    {
+      "item": "Magnetor 磁力者 — 磁力排",
+      "why": "假阳性。4 处的完整字串是 磁力排斥（核心法术 Magnetic Repulsion，UUID 24U1b9K4Lj94cgaj），与 Magnetor 无关。",
+      "_batch": "prose-terms"
+    },
+    {
+      "item": "Web of Darkness 黑暗之网 — 脱黑暗之",
+      "why": "假阳性。完整句是「生物可尝试逃脱黑暗之丝」，是描述性散文（escape the dark strands），不是法术名。",
+      "_batch": "prose-terms"
+    },
+    {
+      "item": "Magical Crafting — 法术制作",
+      "why": "假阳性。完整句是「你可以用施法所属传统的法术制作法术卷轴」，「法术」+「制作」的普通动宾结构，不是专长名。",
+      "_batch": "prose-terms"
+    },
+    {
+      "item": "Dynamic Shield 动态盾牌术 — 法术效果：动态盾牌1/2/3",
+      "why": "确有不一致（效果名少了「术」，12 处），但它与更大的问题绑在一起：条目名 动态盾牌术 本身与 Shield=护盾术 冲突，若 names 批次把 Dynamic Shield 改成 动态护盾术，这里的改法完全不同。留给 names 批次一并决定。",
+      "_batch": "prose-terms"
+    },
+    {
+      "item": "Wrathful Protector 盛怒护卫 / 愤怒护卫",
+      "why": "撤回。names-07 已就同一对做出相反裁决（盛怒护卫→愤怒护卫），且证据更强：wiki 的 Wrathful Presence=愤怒威势 说明 Wrathful 作定语的既定译法是「愤怒」。两条规则同时进 _terms.json 会互相抵消、结果取决于执行顺序，故让位给 names-07。",
+      "_batch": "prose-terms"
+    },
+    {
+      "item": "Liturgical Performance 礼仪表演 / 礼拜表演",
+      "why": "撤回。names-04 已裁决相反方向（礼仪表演→礼拜表演），理由更硬：liturgy=礼拜仪式，而「礼仪表演」易被读成礼节/仪态表演。让位给 names-04，避免顺序依赖的对撞。",
+      "_batch": "prose-terms"
+    },
+    {
+      "item": "Shallows' Sallow Shadows 浅滩昏影 / 浅滩苍影",
+      "why": "撤回。names-06 已裁决相反方向（浅滩昏影→浅滩苍影），理由是 sallow=病黄/苍白，比只表「昏暗」的昏影贴切；两边各 4 处完全对称，无 wiki 可依。让位给 names-06。",
+      "_batch": "prose-terms"
+    },
+    {
+      "item": "Become the Mask 成为面具 / 化为面具",
+      "why": "撤回。names-01 已裁决相反方向（成为面具→化为面具）。两译各 4 处打平，无外部权威，取其可读性判断；让位给 names-01，避免两条规则互相回滚。",
+      "_batch": "prose-terms"
+    }
+  ]
+}

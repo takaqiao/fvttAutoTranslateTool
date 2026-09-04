@@ -1,0 +1,13 @@
+{
+  "_note": "允许保留长段英文的叶子。每条必须写明理由；路径从数据生成，不要手写猜。",
+  "leaves": [
+    {
+      "path": "pf2e-team-plus-feats.journals.json:Feats+.pages.License.text",
+      "why": "Pathfinder Infinite 社群内容协议的版权与商标声明。© 行的作者名、Paizo 的注册商标名单按标准必须保持英文；正文（All rights reserved / This work is published under…）已译。"
+    },
+    {
+      "path": "pf2e-team-plus-barbarians.journals.json:Barbarians+.pages.FoundryVTT Notes.text",
+      "why": "整页九成是 <div class=\"barbarians-code\"> 里的 JavaScript 宏源码（game.pf2e.actions.seek / ui.notifications.warn …），必须逐字保持英文才能复制粘贴运行。页首两条说明性散文已译，覆盖率判据看的是整叶比例所以照样报红。"
+    }
+  ]
+}

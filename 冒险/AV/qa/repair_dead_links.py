@@ -30,7 +30,10 @@ from pathlib import Path
 
 from pack_index import load_pack_ids
 
-UUID = re.compile(r"@(?:UUID|Compendium)\[([^\]]+)\](?:\{([^{}]*)\})?")
+UUID = re.compile(
+    r"@(?:UUID|Compendium|Actor|Item|JournalEntry|JournalEntryPage|Scene|RollTable"
+    r"|TableResult|Macro|Playlist|PlaylistSound|Adventure|Folder)"
+    r"\[([^\]]+)\](?:\{([^{}]*)\})?")
 DOC_TYPES = {"Actor", "Item", "JournalEntry", "JournalEntryPage", "Scene", "RollTable",
              "TableResult", "Macro", "Playlist", "PlaylistSound", "Adventure", "Folder"}
 
@@ -147,6 +150,31 @@ def resolve_old_parents(clusters, journal_pages, min_hits=2):
     return mapping, notes
 
 
+# A pack declares the type of its TOP-LEVEL documents, but a link can name an embedded
+# one - `…journals.<journalId>.JournalEntryPage.<pageId>` lives in a pack of type
+# JournalEntry. Comparing the two directly rejects every such pack, so no journal-page
+# link could ever be resolved by name; they simply stayed dead.
+CONTAINS = {
+    "Adventure": {"JournalEntry", "JournalEntryPage", "Scene", "Macro", "Playlist",
+                  "PlaylistSound", "RollTable", "TableResult", "Item", "Actor",
+                  "ActiveEffect", "Cards", "Card", "Region", "RegionBehavior", "Folder"},
+    "JournalEntry": {"JournalEntryPage"},
+    "Actor": {"Item", "ActiveEffect"},
+    "Item": {"ActiveEffect"},
+    "RollTable": {"TableResult"},
+    "Playlist": {"PlaylistSound"},
+    "Cards": {"Card"},
+    "Scene": {"Region", "RegionBehavior"},
+}
+
+
+def type_ok(pack_type, doc_type):
+    """Can a pack of `pack_type` hold a document of `doc_type`?"""
+    if not doc_type or not pack_type:
+        return True
+    return doc_type == pack_type or doc_type in CONTAINS.get(pack_type, ())
+
+
 GRADE = re.compile(r"\s*\((?:Lesser|Moderate|Greater|Major|True|Minor)\)\s*$")
 PAREN = re.compile(r"\s*\([^()]*\)\s*$")
 
@@ -219,7 +247,7 @@ def resolve_by_name(pack_index, preferred_pack, name, doc_type=None, successor=N
                       if v and not (v in seen_variants or seen_variants.add(v))]:
         hits = []
         for pk, entry in pack_index.items():
-            if doc_type and entry.get("type") and entry["type"] != doc_type:
+            if not type_ok(entry.get("type"), doc_type):
                 continue
             for cid in entry.get("byName", {}).get(candidate, []):
                 hits.append((pk, cid))
@@ -241,7 +269,7 @@ def resolve_by_name(pack_index, preferred_pack, name, doc_type=None, successor=N
     folded = _folded_names(pack_index)
     for candidate in variants:
         hits = [(pk, cid) for pk, cid, ptype in folded.get(candidate.casefold(), [])
-                if not (doc_type and ptype and ptype != doc_type)]
+                if type_ok(ptype, doc_type)]
         same = [h for h in hits if h[0] in (preferred_pack, successor)]
         if len(same) == 1:
             return same[0][0], same[0][1], f"recased:{candidate!r}"
@@ -359,6 +387,23 @@ def main(argv=None):
             def sub(m):
                 nonlocal changed
                 target, label = m.group(1).strip(), (m.group(2) or "").strip()
+                # A hand ruling is the most specific instrument available, so it is
+                # consulted before any shape analysis. It used to live inside the
+                # world-scoped branch, where a ruling on a `@Item[<id>]` or a legacy
+                # `@Compendium[scope.pack.Name]` target silently did nothing.
+                # `<file stem>::<target>` pins a ruling to one file, and is checked
+                # before the plain form. The pf2e/sf2e twin packs of a module carry the
+                # same dead target and want different successors - the sf2e copy of an
+                # effect should link to sf2e-items, not to its pf2e sibling.
+                ruled = rulings.get(f"{cn_path.stem}::{target}", rulings.get(target))
+                if ruled:
+                    changed += 1
+                    stats["repaired-by-ruling"] += 1
+                    rows.append({"file": cn_path.name, "path": ".".join(path[-3:]),
+                                 "target": target, "new_target": ruled,
+                                 "label": label, "verdict": "repaired", "how": "ruling"})
+                    tail = f"{{{label}}}" if m.group(2) is not None else ""
+                    return f"@UUID[{ruled}]{tail}"
                 # Cross-pack links are checked FIRST: parse_pairs() deliberately returns []
                 # for them, so anything placed after the `if not pairs` guard below never
                 # runs on the form that makes up five sixths of the corpus.

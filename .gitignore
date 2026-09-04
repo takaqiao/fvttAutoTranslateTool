@@ -143,3 +143,14 @@ desktop.ini
 # packs/ 是 LevelDB，其 *.ldb 数据已被排除，只留 CURRENT/MANIFEST 反而是半个损坏的库；
 # 种子包从原版备份 zip 取，再用 npm run pack:build 重建。
 terminal-zh-cn-work/packs/
+
+# ── PF2 Plus 十一模组汉化工作区（派生产物，可重建；只入库脚本与判据）──
+# 工作区/ 的成品逐字节等于发布仓库 pf2e-compendium-extra/compendium/，那边才是它的版本控制。
+模组/PF2Plus汉化/_cache/
+模组/PF2Plus汉化/_源/
+模组/PF2Plus汉化/工作区/
+模组/PF2Plus汉化/qa/reports/
+模组/PF2Plus汉化/qa/units/
+模组/PF2Plus汉化/qa/units_out/
+模组/PF2Plus汉化/qa/units_gloss/
+模组/PF2Plus汉化/qa/adjudicate/

@@ -88,13 +88,16 @@ def classify(scheme, target):
             return "malformed", None, []
         pack = f"{segs[1]}.{segs[2]}"
         rest = segs[3:]
-        ids = [rest[i + 1] for i in range(0, len(rest) - 1, 2) if rest[i] in DOC_TYPES]
-        if not ids:
-            ids = [s for s in rest if ID.match(s)]
+        # Take every segment that looks like an id and is not a type word. Pairing off
+        # `Type.id` breaks on the common `…<pack>.<parentId>.JournalEntryPage.<pageId>`
+        # form, where the parent id comes first and the pairing lands on nothing; the old
+        # fallback then swept the literal word `JournalEntryPage` in as an id - and it is
+        # exactly 16 alphanumerics, so `ID` matched it and every journal-page link in the
+        # corpus was reported dead.
+        ids = [s for s in rest if ID.match(s) and s not in DOC_TYPES]
         return "compendium", pack, ids
     if segs[0] in DOC_TYPES:
-        ids = [segs[i + 1] for i in range(0, len(segs) - 1, 2) if segs[i] in DOC_TYPES]
-        return "world", None, ids
+        return "world", None, [s for s in segs if ID.match(s) and s not in DOC_TYPES]
     # legacy @Compendium[scope.pack.id]
     if len(segs) >= 3:
         return "compendium", f"{segs[0]}.{segs[1]}", [s for s in segs[2:] if ID.match(s)]
@@ -110,6 +113,9 @@ def main(argv=None):
     parser.add_argument("--also", action="append", default=[],
                         help="a module's own i18n file - prose, therefore links")
     parser.add_argument("--report", type=Path)
+    parser.add_argument("--rulings", type=Path,
+                        help="_link_rulings.json - its `_known_unresolvable` targets are "
+                             "counted separately instead of as defects")
     args = parser.parse_args(argv)
 
     pack_ids = {k: set(v["ids"])
@@ -125,6 +131,15 @@ def main(argv=None):
             for e in node["entries"]:
                 if e.get("_id"):
                     by_root[(coll, root)].add(e["_id"])
+
+    # Targets that are dead upstream and cannot be re-pointed to anything that exists.
+    # They are still reported, but under their own heading and outside the DEAD count -
+    # otherwise a corpus can never be clean and the number stops meaning anything.
+    accepted = set()
+    if args.rulings and args.rulings.exists():
+        raw = json.loads(args.rulings.read_text(encoding="utf-8"))
+        accepted = {row["target"] for row in raw.get("_known_unresolvable", [])
+                    if row.get("target")}
 
     stats = Counter()
     bad = []
@@ -193,11 +208,19 @@ def main(argv=None):
     print("=== 引用总览 ===")
     for k in sorted(stats):
         print(f"  {k:<34} {stats[k]}")
+    dead_rows = [b for b in bad if b["why"] not in
+                 {"pack-not-installed", "compendium-no-id", "accepted-upstream-defect"}]
+    for row in dead_rows:
+        if row["target"] in accepted:
+            row["why"] = "accepted-upstream-defect"
     dead = (stats["compendium:dead"] + stats["world:dead"] + stats["relative:dead"]
             + stats["legacy-id:dead"] + stats["named:dead-after-rename"])
+    excused = sum(1 for b in bad if b["why"] == "accepted-upstream-defect")
+    dead -= excused
     notinst = stats["compendium:pack-not-installed"]
     print(f"\nscanned {len(scanned)} files")
-    print(f"DEAD LINKS: {dead}   PACK NOT INSTALLED: {notinst}")
+    print(f"DEAD LINKS: {dead}   PACK NOT INSTALLED: {notinst}"
+          + (f"   ACCEPTED UPSTREAM DEFECTS: {excused}" if excused else ""))
 
     by_reason = Counter(b["why"] for b in bad)
     for why, n in by_reason.most_common():

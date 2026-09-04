@@ -40,8 +40,40 @@ def english_keysets(en_data):
     return out
 
 
+MAX_SEGMENTS = 8
+
+
+def find_chain(node, prefix, here, depth=1):
+    """Follow a split key down until the pieces rejoin into a key the English has.
+
+    One level is not enough. `Eto... Bleh!` splits on every dot, so the run of empty
+    segments makes a four-deep chain (`Eto` > `` > `` > ` Bleh!`) - the whole ability
+    renders in English and the file still looks complete. Returns (chain_of_keys,
+    joined_key, branch) for the first descendant that closes, or None."""
+    if depth > MAX_SEGMENTS or not isinstance(node, dict):
+        return None
+    for sub_key, sub_value in node.items():
+        joined = f"{prefix}.{sub_key}"
+        if joined in here and isinstance(sub_value, dict):
+            return [sub_key], joined, sub_value
+        deeper = find_chain(sub_value, joined, here, depth + 1)
+        if deeper:
+            chain, joined_key, branch = deeper
+            return [sub_key, *chain], joined_key, branch
+    return None
+
+
+def drop_chain(node, chain):
+    """Remove the moved branch and every now-empty link above it."""
+    key, rest = chain[0], chain[1:]
+    if rest and isinstance(node.get(key), dict):
+        drop_chain(node[key], rest)
+    if not rest or (isinstance(node.get(key), dict) and not node[key]):
+        node.pop(key, None)
+
+
 def repair(node, path, en_sets, fixes):
-    """Depth-first; rejoin `A` + `.` + `B` when the English has `A.B` at this level."""
+    """Depth-first; rejoin a split key when the English has the joined form here."""
     if not isinstance(node, dict):
         return node
     node = {k: repair(v, path + (k,), en_sets, fixes) for k, v in node.items()}
@@ -52,20 +84,22 @@ def repair(node, path, en_sets, fixes):
     for key, value in list(node.items()):
         if key in here or not isinstance(value, dict):
             continue
-        for sub_key, sub_value in list(value.items()):
-            joined = f"{key}.{sub_key}"
-            if joined not in here:
-                continue
-            # The dot belonged inside the name. Move the branch to the joined key,
+        while True:
+            found = find_chain(out[key], key, here)
+            if not found:
+                break
+            chain, joined, branch = found
+            # The dots belonged inside the name. Move the branch to the joined key,
             # without overwriting a correct key that already exists there.
             target = out.setdefault(joined, {})
-            if isinstance(target, dict) and isinstance(sub_value, dict):
-                for k2, v2 in sub_value.items():
+            if isinstance(target, dict) and isinstance(branch, dict):
+                for k2, v2 in branch.items():
                     target.setdefault(k2, v2)
             elif not target:
-                out[joined] = sub_value
-            del out[key][sub_key]
-            fixes.append({"path": ".".join(path), "from": f"{key} > {sub_key}", "to": joined})
+                out[joined] = branch
+            drop_chain(out[key], chain)
+            fixes.append({"path": ".".join(path),
+                          "from": " > ".join([key, *chain]), "to": joined})
         if isinstance(out.get(key), dict) and not out[key]:
             del out[key]
     return out

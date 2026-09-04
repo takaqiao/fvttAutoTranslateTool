@@ -1,0 +1,27 @@
+{
+  "batch": "names-03",
+  "rules": [
+    {"from": "启慧法术", "to": "启明法术", "why": "本体 items:Enlightening Spell 与 journals 均作「启明法术」(3 处)，「启慧法术」只在 Effect 名与其链接文本 (2 处)；wiki 无该条目，从本体。", "risk": "low"},
+    {"from": "确立礼仪", "to": "建立礼仪", "why": "专长本体 player-options 作「建立礼仪」(14 处，含 pf2e/sf2e 两套)，「确立礼仪」只在 Effect 名/链接 (10 处)；已核 10 处全指该能力，正文「已确立的礼仪」带「的」不会误命中。", "risk": "low"},
+    {"from": "熟悉之暗", "to": "熟稔之暗", "why": "本体 items:Familiar Dark 作「熟稔之暗」(3 处)，「熟悉之暗」仅 Effect 名 1 处；wiki 官方以「熟稔」译 Familiarity(地精武器熟稔)。", "risk": "low"},
+    {"from": "吸血于水", "to": "以水为食", "why": "英文原文是吸收水系法术伤害转为临时 HP，与吸血无关；「吸血于水」是误译。仅 2 处(专长名+journal 链接)。", "risk": "low"},
+    {"from": "余烬之肉", "to": "灰烬之肉", "why": "wiki: Cult of Cinders→灰烬教团、Cindersoul→灰烬之魂，Cinders 定译「灰烬」；本体 items 已作「灰烬之肉」(3 处)，「余烬之肉」仅 Effect 名 1 处。", "risk": "low"},
+    {"from": "先祖之教", "to": "先祖之训", "why": "本体 items:Forefathers' Lessons 作「先祖之训」(4 处)，「先祖之教」仅 Effect 名 1 处。", "risk": "low"},
+    {"from": "先知反击", "to": "预见反击", "why": "Foreseen≠先知；wiki: Foreseen Failure→预观败局、Retaliation→反击。且「先知」在本模组是 Oracle 职业名，用在此处会撞车。本体已作「预见反击」。", "risk": "low"},
+    {"from": "好运者", "to": "幸运者", "why": "wiki: Fortunate Relief→幸运慰藉、Fortunate Blow→幸运猛击、Fortune→幸运，Fortunate 定译「幸运」；专长本体已作「幸运者」，「好运者」4 处全是 Effect 名/链接。", "risk": "low"},
+    {"from": "分形霜冻", "to": "分形结霜", "why": "官方合集 oracles.oracles-revelation-spells 把 Fractal Frosting 译作「分型结霜」，Frosting 取「结霜」而非「霜冻」；fractal 的标准中文是「分形」，故取二者之合。已核 7 处全指该能力。", "risk": "low"},
+    {"from": "高处朋友", "to": "高位之交", "why": "专长本体作「高位之交」，符合 friends in high places 的中文习语；「高处朋友」是直译，4 处全是 Effect 名/链接。", "risk": "low"},
+    {"from": "真菌护盾", "to": "真菌守护", "why": "专长本体作「真菌守护」；效果是抗负能量的护佑而非护盾，wiki 中 Ward 系多作防护/结界(Blood Ward→避族防护、Wood Ward→木结界)，不作「护盾」。「真菌护盾」4 处全是 Effect 名/链接。", "risk": "low"},
+    {"from": "地精巨喙", "to": "格奥吉博姆", "why": "Geojibom 是幽暗地域龙的专名；「地精巨喙」把 Geojibom 拆成 goblin+beak 属误译。journal 正文全篇作「格奥吉博姆」(13 处)。仅 2 处，均为「地精巨喙的巨镐」。", "risk": "low"},
+    {"from": "乔吉博姆", "to": "格奥吉博姆", "why": "同一条龙的第 2 种音译，只出现在 Greatpick(True) 名与一处描述；统一到 journal 正文的「格奥吉博姆」。两串互不为子串。", "risk": "low"},
+    {"from": "盖欧吉伯姆", "to": "格奥吉博姆", "why": "同一条龙的第 3 种音译，仅 Greatpick(Major) 名 1 处。", "risk": "low"},
+    {"from": "格约吉博姆", "to": "格奥吉博姆", "why": "同一条龙的第 4 种音译，仅 Greatpick(Greater) 名 1 处；与目标串仅差「约/奥」，非子串关系，不会叠加。", "risk": "low"},
+    {"from": "吉奥吉博姆", "to": "格奥吉博姆", "why": "同一条龙的第 5 种音译，用在 Geojibom's Guidance 名与 journal 链接 2 处；不在本批 renderings 内但属同一专名，一并归一。", "risk": "low"},
+    {"from": "献上贡品", "to": "献祭", "why": "专长本体 player-options 作「献祭」，「献上贡品」4 处全是 Effect 名/链接。方向只能这样：反向 from=「献祭」会误伤「双向献祭 Diadic Sacrifice」与 journal 的「最终献祭」(已 grep 确认存在)。", "risk": "low"},
+    {"from": "效果：未来一瞥", "to": "效果：瞥见未来", "why": "本体 items:Glimpse Future 作「瞥见未来」(5 处)。from 必须带「效果：」前缀：items 描述里有一句正文「得见尚未发生之未来一瞥」，裸串「未来一瞥」会被改成病句。加前缀后只命中 Effect 名与其链接 2 处。附：官方合集旧版 oracles 译「预知未来」，但 wiki 已把「预知未来」派给专长 Prescience，故不采用。", "risk": "medium"},
+    {"from": "哥布林酸黄瓜", "to": "地精酸黄瓜", "why": "wiki: Goblin 特征→地精，官方 PF2 中文一律用「地精」(地精学识/地精小调/地精疹)，本语料 clerics 文件引用官方法术时也已用「地精疹」；Effect 名已作「地精酸黄瓜」。注意本模组其余 Goblin 仍作「哥布林」，见 left_alone。", "risk": "medium"}
+  ],
+  "left_alone": [
+    {"item": "哥布林 / 地精（Goblin 通用译名，超出本批实体范围）", "why": "全语料「哥布林」32 处 vs「地精」11 处：alchemists 模组还有「哥布林三明治 Goblin Mixto」「哥布林炼金术士」等，clerics/magic 的正文也用「哥布林」。按 wiki 应整体扫成「地精」(from=哥布林 → to=地精，该串无歧义、无子串风险)，但这已是模组级术语决策而非本批的实体归一，交由上层统一下判；否则酸黄瓜改名后会出现「哥布林炼金术士……而地精酸黄瓜」的同句混用。"}
+  ]
+}
