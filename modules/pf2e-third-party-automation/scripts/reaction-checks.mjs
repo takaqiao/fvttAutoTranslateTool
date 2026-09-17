@@ -20,11 +20,12 @@ export async function runCheckReactionPipeline({game,check,context,event=null,ca
  const originalReturn=await native(check,draftContext,event,collect);if(!captured)return originalReturn;
  const original=captured,originalRollData=captured.roll.toJSON(),decision=await decide({...original,check,context:draftContext}),reaction=typeof decision==='string'?decision:decision?.reaction??null;
  const disruption=reaction==='clock'?await beforeReroll?.({...original,check,context:draftContext,decision}):null;
- if(reaction==='clock'&&!disruption?.disrupted){
-  const bonus=new game.pf2e.Modifier({slug:'turn-back-the-clock',label:'倒转光阴',modifier:1,type:'circumstance'}),rerollCheck=new game.pf2e.CheckModifier(check.slug,{modifiers:check.modifiers},[bonus]);
+ const reroll=(reaction==='clock'||reaction==='halfling-luck')&&!disruption?.disrupted;
+ if(reroll){
+  const rerollCheck=reaction==='clock'?new game.pf2e.CheckModifier(check.slug,{modifiers:check.modifiers},[new game.pf2e.Modifier({slug:'turn-back-the-clock',label:'倒转光阴',modifier:1,type:'circumstance'})]):check;
   const options=new Set(draftContext.options);options.add('fortune');options.add('check:reroll');
   captured=null;await native(rerollCheck,{...draftContext,options,isReroll:true,skipDialog:true,rollTwice:false,substitutions:[],createMessage:false},null,collect);
-  if(!captured)throw Error('倒转光阴的原生重掷未完成；次数已使用，不会自动重试。');
+  if(!captured)throw Error(`${reaction==='clock'?'倒转光阴':'半身人幸运'}的原生重掷未完成；次数已使用，不会自动重试。`);
  }
  const data=captured.card.toObject();delete data._id;
  if(reaction==='squawk'){
@@ -33,7 +34,7 @@ export async function runCheckReactionPipeline({game,check,context,event=null,ca
   // The original context keeps the raw degree; only this committed result is changed.
   data.content=await captured.roll.render();
  }
- if(reaction==='clock'&&!disruption?.disrupted)data.content=`<div class="reroll-discard">${await game.pf2e.Check.renderReroll(original.roll,{isOld:true})}</div><div class="reroll-second">${await game.pf2e.Check.renderReroll(captured.roll,{isOld:false})}</div>`;
+ if(reroll)data.content=`<div class="reroll-discard">${await game.pf2e.Check.renderReroll(original.roll,{isOld:true})}</div><div class="reroll-second">${await game.pf2e.Check.renderReroll(captured.roll,{isOld:false})}</div>`;
  if(reaction){data.flags??={};data.flags[MODULE_ID]={...data.flags[MODULE_ID],reactionChecks:{kind:'check-reaction-result',reaction,nonce:decision?.nonce??null,actorUuid:decision?.actorUuid??context.actor?.uuid??null,previousRoll:originalRollData,...(disruption?.disrupted?{disrupted:true}:{})}};}
  if(disruption?.disrupted){const options=new Set(data.flags.pf2e.context.options??[]);for(const option of ['fortune','misfortune',`${MODULE_ID}:eat:${disruption.nonce}`])options.add(option);data.flags.pf2e.context.options=[...options];data.flags.pf2e.context.eatFortune=disruption;data.flavor=(data.flavor??'')+'<p>倒转光阴被吞噬福祸打断；保留原检定，双方反应和次数已使用。</p>';}
  const finalContext=data.flags.pf2e.context;for(const key of ['outcome','unadjustedOutcome','isReroll','rollTwice','substitutions'])if(key in finalContext)context[key]=finalContext[key];
