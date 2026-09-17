@@ -99,3 +99,8 @@ nativeTest('different non-finite metadata never merges by JSON null coercion',()
  const roll=makeRoll([{value:7,options:{limit:Infinity}},{value:3,options:{limit:null}}]);api.convertSiphonRoll(roll,{DamageRoll:native.DamageRoll});
  assert.equal(roll.instances.length,2);assert.equal(roll.instances[0].options.limit,Infinity);assert.equal(roll.instances[1].options.limit,null);
 });
+nativeTest('automatic conversion refuses mixed partitions before mutating the evaluated roll',()=>{
+ const roll=makeRoll([{value:7,flavor:'electricity,silver'},{value:3,flavor:'cold'}]),before=JSON.stringify(roll.toJSON());
+ assert.throws(()=>api.convertSiphonRoll(roll,{DamageRoll:native.DamageRoll,rejectMixedPartitions:true}),/manual|partition/i);
+ assert.equal(JSON.stringify(roll.toJSON()),before);
+});
