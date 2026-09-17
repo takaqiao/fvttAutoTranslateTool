@@ -118,7 +118,7 @@ Hooks.once('ready',async()=>{
  const defensiveAdvance=createDefensiveAdvance({game,fromUuid,choose,startupCompatibility:advanceStartup,onError:report});
  let glimpse;
  const reactionBudget=createReactionBudget({game,fromUuid,onError:report,handlesGlimpse:actor=>glimpse?.handlesActor(actor)??false});
- await glimpseCompat.initialize().catch(report);
+ await glimpseCompat.initialize({game}).catch(report);
  glimpse=createGlimpseProvider({game,fromUuid,compat:glimpseCompat,getRollContext:roll=>cycle?.getRollContext(roll),onError:report});
  const nativeCasts=getNativeCastEvents({game,fromUuid});
  const disruptDamage=createDisruptPreyDamageGuard({game,getRollContext:roll=>cycle?.getRollContext(roll)});
