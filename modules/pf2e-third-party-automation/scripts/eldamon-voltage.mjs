@@ -26,12 +26,14 @@ export function voltageAttackEligibility({outcome,melee,adjacent,unarmed,metal})
  return ['success','criticalSuccess'].includes(outcome)&&melee===true&&(adjacent===true||unarmed===true||metal===true);
 }
 function timing(game,actor,origin){
- const c=game.combat,index=c?.turns?.findIndex(t=>t.actor?.uuid===actor.uuid&&(!t.token||t.token.uuid===origin?.uuid))??-1;
+ const candidates=(game.combats?values(game.combats):[game.combat]).filter(c=>c?.started&&c.turns?.some(t=>t.actor?.uuid===actor.uuid&&(!t.token||t.token.uuid===origin?.uuid)));
+ if(candidates.length!==1)return null;
+ const c=candidates[0],index=c.turns.findIndex(t=>t.actor?.uuid===actor.uuid&&(!t.token||t.token.uuid===origin?.uuid));
  if(!c?.started||index<0||!Number.isInteger(c.round)||!Number.isInteger(c.turn))return null;
  return {combatId:c.id,combatantId:c.turns[index].id,round:c.round+(index<=c.turn?1:0)};
 }
 function expired(game,activation){
- const t=activation.expires,c=game.combat;if(!t||c?.id!==t.combatId||!c.started)return true;
+ const t=activation.expires,c=t&&(game.combats?.get?game.combats.get(t.combatId):game.combat);if(!t||c?.id!==t.combatId||!c.started)return true;
  const index=c.turns.findIndex(x=>x.id===t.combatantId);
  return index<0||c.round>t.round||(c.round===t.round&&c.turn>=index);
 }
