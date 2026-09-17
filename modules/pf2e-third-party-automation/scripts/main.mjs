@@ -30,6 +30,7 @@ import {createGlimpseCompat,glimpseWorld} from './glimpse-compat.mjs';
 import {createGlimpseProvider} from './glimpse-of-redemption.mjs';
 import {glimpseReactionSetting,canSuppressGlimpseReminder,GLIMPSE_REACTION_REASON} from './glimpse-reaction-setting.mjs';
 import {registerGlimpseConfigurationEvents} from './glimpse-configuration-events.mjs';
+import {createGlimpseReactionCache} from './glimpse-reaction-cache.mjs';
 import {getNativeCastEvents} from './amp-cast-events.mjs';
 import {createDisruptPrey} from './disrupt-prey.mjs';
 import {createDisruptPreyEvents} from './disrupt-prey-events.mjs';
@@ -166,8 +167,10 @@ Hooks.once('ready',async()=>{
  const configuration=createConfigurationMaintenance({game,repairs:[buildAvPatreonRepairs,buildPartyPatreonRepairs,buildKnowledgePatreonRepairs,...game.world?.id==='ujx5r8oipw7ercdr'?[buildDefensiveAdvancePatreonRepairs]:[]],settings:[{module:'pf2e-ranged-combat',key:'postActionToChat',value:2,when:g=>Array.from(g.actors.party?.members??[]).some(a=>[KNOWLEDGE_SOURCES.monster,KNOWLEDGE_SOURCES.hunt].every(source=>a.items.some(i=>i.sourceId===source))),reason:'猎物指定保留完整原生技能卡，供怪物猎手知识联动读取原始操作者与目标。'},{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:g=>['-','sog','pnvfcgjbf2cjp7gz','ujx5r8oipw7ercdr','team-automation-qa2'].includes(g.world?.id),transform:value=>Array.isArray(value)?value.filter(slug=>slug!=='disarming-block'):value,reason:'卸武格挡改由实际格挡回执接原生自由动作缴械，避免重复提示或再次收取反应。'}]});
  await configuration().catch(report);
  if(glimpseWorld(game)){
+  const cache=createGlimpseReactionCache({game});await cache.initialize().catch(report);
   const actors=()=>[...game.actors.contents,...game.scenes.contents.flatMap(scene=>scene.tokens.contents.map(token=>token.actor).filter(Boolean))];
-  const reconcile=createConfigurationMaintenance({game,settings:[{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:glimpseWorld,transform:(value,g)=>glimpseReactionSetting(value,g,canSuppressGlimpseReminder(actors(),glimpse)),reason:GLIMPSE_REACTION_REASON}]});
+  const reconcileSettings=createConfigurationMaintenance({game,settings:[{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:glimpseWorld,transform:(value,g)=>glimpseReactionSetting(value,g,cache.ready()&&canSuppressGlimpseReminder(actors(),glimpse)),reason:GLIMPSE_REACTION_REASON}]});
+  const reconcile=async()=>{await reconcileSettings();await cache.restore()};
   await registerGlimpseConfigurationEvents({game,Hooks,reconcile,onError:report}).reconcileNow();
  }
  providers.unshift(glimpse,voltage,electricity);

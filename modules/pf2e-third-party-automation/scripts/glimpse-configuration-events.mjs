@@ -15,6 +15,6 @@ export function registerGlimpseConfigurationEvents({game,Hooks,reconcile,onError
  const on=(name,fn=reconcileNow)=>subscriptions.push([name,Hooks.on(name,fn)]);
  const keys=new Set(['trigger-engine.pf2e-trigger-triggers','pf2e-reaction.builtinReactionsEnabled','core.moduleConfiguration']);
  on('updateSetting',setting=>keys.has(setting.key)?reconcileNow():undefined);
- for(const name of ['createActor','updateActor','deleteActor','createItem','updateItem','deleteItem','createToken','updateToken','deleteToken','createScene','deleteScene','updateUser','userConnected'])on(name);
+ for(const name of ['createActor','updateActor','deleteActor','createItem','updateItem','deleteItem','createToken','updateToken','deleteToken','createScene','deleteScene','combatStart','updateCombat','createCombatant','updateCombatant','deleteCombatant','updateUser','userConnected'])on(name);
  return {reconcileNow,dispose:()=>{disposed=true;for(const [name,id]of subscriptions)Hooks.off(name,id)}};
 }
