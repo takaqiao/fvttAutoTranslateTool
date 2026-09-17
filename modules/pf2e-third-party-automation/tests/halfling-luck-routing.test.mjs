@@ -27,6 +27,16 @@ test('existing outer native middleware runs once before Luck and preserves its p
  const f=fixture({middleware:true});await f.run();assert.deepEqual(f.order,['outer','luck','native']);assert.equal(f.calls[0][0].outerBonus,true);f.cleanup();
 });
 
+test('a native contextual actor clone routes using its exact live actor and preserves the original context',async()=>{
+ const f=fixture(),contextual={...f.actor,contextual:true};await f.run({actor:contextual,type:'saving-throw'});
+ assert.equal(f.calls.length,1);assert.equal(f.calls[0][1].actor,contextual);assert.equal(f.nativeCalls[0][1].actor,contextual);f.cleanup();
+});
+
+test('an actor with a live id but a different uuid cannot enter the Luck provider',async()=>{
+ const f=fixture();await f.run({actor:{...f.actor,uuid:'Scene.other.Token.synthetic.Actor.roller'}});
+ assert.equal(f.calls.length,0);assert.equal(f.nativeCalls.length,1);f.cleanup();
+});
+
 test('rerolls and other check types bypass the Luck branch',async()=>{
  const f=fixture();await f.run({isReroll:true});await f.run({type:'attack-roll'});await f.run({type:'initiative'});
  assert.equal(f.calls.length,0);assert.equal(f.nativeCalls.length,3);f.cleanup();

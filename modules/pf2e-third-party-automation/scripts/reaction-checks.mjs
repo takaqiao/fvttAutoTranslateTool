@@ -209,7 +209,10 @@ export function createReactionChecks({game,fromUuid=globalThis.fromUuid,choose,o
    const existingEntry=(check,context={},event=null,callback)=>{
    const native=(...args)=>eatFortune.interceptCheck(wrapped,...args);
    const actor=context.actor??(context.origin?.self?context.origin?.actor:context.target?.actor);
-   if(actor&&!reactors.has(actor.uuid)&&!context.isReroll&&['skill-check','saving-throw'].includes(context.type)&&halflingLuck?.handlesActor(actor))return halflingLuck.interceptCheck(native,check,context,event,callback);
+   // PF2e can supply a contextual clone for opposed checks. Resolve only its
+   // exact world actor for routing; keep the native context for full validation.
+   const luckActor=game.actors?.get(actor?.id);
+   if(actor&&luckActor?.uuid===actor.uuid&&!reactors.has(actor.uuid)&&!context.isReroll&&['skill-check','saving-throw'].includes(context.type)&&halflingLuck?.handlesActor(luckActor))return halflingLuck.interceptCheck(native,check,context,event,callback);
    if(!actor||!reactors.has(actor.uuid)||!['skill-check','saving-throw'].includes(context.type)||context.createMessage===false||context.isReroll)return native(check,context,event,callback);
    // Numeric DCs drop native targets. Only this invocation's random marker and
    // exact source actor/token can recover the verified GM-proxied Use target.
