@@ -388,7 +388,7 @@ export function createAvAutomation({game,fromUuid=globalThis.fromUuid,choose,onE
   socket=socketApi;const subscriptions=[];
   const unregisterCast=castEvents.register({libWrapper,socket:socketApi});
   const unregisterDamageSnapshot=registerAvDamageSnapshot({game,libWrapper});
-  const unregisterRefocus=registerAvRefocusEvents({game,Hooks,libWrapper,refocusPrivacy,onError:report,runExclusive:(actor,fn)=>queue.run(actor.uuid,fn),
+  const unregisterRefocus=registerAvRefocusEvents({game,Hooks,libWrapper,registerActorUpdate:fn=>castEvents.addActorUpdateMiddleware(fn),refocusPrivacy,onError:report,runExclusive:(actor,fn)=>queue.run(actor.uuid,fn),
    actorMatchers:refocusSubscribers.map(subscriber=>subscriber.matchesActor),
    onRefocus:refocusSubscribers.length?async event=>{for(const subscriber of refocusSubscribers)if(subscriber.matchesActor(event.actor))await subscriber.onRefocus(event)}:undefined});
   if(socket)for(const[method,fn]of [['av-shield-claim',claimShield],['av-shield-complete',completeShield]])socket.register(method,async function(payload){
