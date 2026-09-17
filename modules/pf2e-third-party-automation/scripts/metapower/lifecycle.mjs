@@ -37,9 +37,11 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
   // completed actions have no downstream card consumer; their client high-water
   // marks reject replay after the bounded detail archive has been pruned.
   const ordinary=Object.values(state.receipts).filter(r=>r.clientId&&!r.kind&&!r.powerId&&!r.snapshot&&r.nonce!==state.pending&&(!r.delivery||r.delivery.status==='done')&&['committed','cancelled'].includes(r.status)).sort((a,b)=>b.sequence-a.sequence);
-  for(const r of ordinary.slice(64))delete state.receipts[r.nonce];
+  const pruned=ordinary.slice(64);for(const r of pruned)delete state.receipts[r.nonce];
   if(game.user?.id!==game.users.activeGM?.id)throw Error('Active GM changed during admission; retry reconciliation.');
-  await actor.update({[`flags.${MODULE_ID}.metapower`]:state});return copy(result);
+  // Foundry merges nested flags: omission alone cannot remove an old receipt.
+  const update=copy(state);for(const r of pruned)update.receipts[`-=${r.nonce}`]=null;
+  await actor.update({[`flags.${MODULE_ID}.metapower`]:update});return copy(result);
  });
  const bound=(state,payload,user)=>{
   const r=state.receipts[payload.nonce];if(!r||r.userId!==user.id)throw Error('Invocation binding is invalid.');return r;

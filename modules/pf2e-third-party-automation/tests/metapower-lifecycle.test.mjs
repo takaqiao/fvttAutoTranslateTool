@@ -3,9 +3,19 @@ import assert from 'node:assert/strict';
 import {METAPOWER_SOURCES,POWER_PROFILES} from '../scripts/metapower/rules.mjs';
 let api={};try{api=await import('../scripts/metapower/lifecycle.mjs')}catch(e){if(e.code!=='ERR_MODULE_NOT_FOUND')throw e}
 const ID='pf2e-third-party-automation';
+// Native document updates recursively merge flag objects; omitted keys survive.
+// Explicit -= deletion entries are needed to prune the persisted history.
+function mergeFlags(before,changes){
+ const result=structuredClone(before??{});
+ for(const [key,value]of Object.entries(changes)){
+  if(key.startsWith('-=')){delete result[key.slice(2)];continue;}
+  result[key]=value&&typeof value==='object'&&!Array.isArray(value)?mergeFlags(result[key],value):structuredClone(value);
+ }
+ return result;
+}
 function fixture(){
  const user={id:'owner'},gm={id:'gm'},game={user:gm,users:{activeGM:gm},combat:{id:'combat',round:1,turn:0,combatant:{id:'turn',actor:{uuid:'Actor.a'}}}};
- const actor={uuid:'Actor.a',id:'a',type:'character',level:5,flags:{},items:new Map(),testUserPermission:u=>u===user||u===gm,getRollOptions:()=>['active-power-one:electric-surge'],async update(data){for(const[key,value]of Object.entries(data))if(key===`flags.${ID}.metapower`)this.flags[ID]={...this.flags[ID],metapower:structuredClone(value)}}};
+ const actor={uuid:'Actor.a',id:'a',type:'character',level:5,flags:{},items:new Map(),testUserPermission:u=>u===user||u===gm,getRollOptions:()=>['active-power-one:electric-surge'],async update(data){for(const[key,value]of Object.entries(data))if(key===`flags.${ID}.metapower`)this.flags[ID]={...this.flags[ID],metapower:mergeFlags(this.flags[ID]?.metapower,value)}}};
  const item=(id,source)=>{const i={id,uuid:`Actor.a.Item.${id}`,sourceId:source,type:'feat',actor,system:{traits:{value:[]},frequency:{value:1}}};actor.items.set(id,i);return i};
  const siphon=item('s',METAPOWER_SOURCES.siphoning),widen=item('w',METAPOWER_SOURCES.widen),power=item('p',Object.values(POWER_PROFILES).find(p=>p.id==='electric-surge').sourceUuid);
  const documents=new Map([[actor.uuid,actor],...[...actor.items.values()].map(i=>[i.uuid,i])]);
