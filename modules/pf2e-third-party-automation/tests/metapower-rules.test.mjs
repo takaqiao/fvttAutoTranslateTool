@@ -106,3 +106,20 @@ test('Reactive Chain has no new Charged effect to suppress and discharge still c
  assert.deepEqual(normal.suppressEffects,[]);assert.deepEqual(discharged.suppressEffects,[]);
  assert.equal(normal.dischargeCost,0);assert.equal(discharged.dischargeCost,1);assert.equal(discharged.damageBasis,'trigger-damage-halved');
 });
+
+test('table policy keeps discharge range and save downgrade independently of removed area and conditions',()=>{
+ const policy={dischargeNonDamage:'remove',dischargeRange:'retain',dischargeSaveDowngrade:'retain',highVoltage:'convert'};
+ const shot=snapshot('shot','siphoning',{level:7,selection:{discharge:true},policy});
+ assert.equal(shot.range,120);assert.equal(shot.dischargeCost,1);assert.deepEqual(shot.suppressEffects,['charged']);
+ const retributive=snapshot('retributive','siphoning',{selection:{discharge:true},policy});
+ assert.equal(retributive.saveDowngrade,1);assert.equal(retributive.dischargeCost,1);assert.deepEqual(retributive.suppressEffects,['shocked']);
+ assert.equal(snapshot('surge','siphoning',{selection:{discharge:true,baseDistance:60},policy}).area.distance,30);
+ assert.equal(snapshot('anvil','siphoning',{selection:{discharge:true,baseDistance:60},policy}).area.distance,30);
+ const voltage=snapshot('voltage','siphoning',{policy});assert.equal(voltage.siphon.applies,true);assert.deepEqual(voltage.suppressEffects,['refresh']);
+ assert.deepEqual(shot.policy,policy);assert.ok(Object.isFrozen(shot.policy));
+});
+
+test('specific discharge overrides reject unknown values and do not affect ordinary Widen',()=>{
+ for(const field of ['dischargeRange','dischargeSaveDowngrade'])assert.throws(()=>snapshot('shot','siphoning',{selection:{discharge:true},policy:{dischargeNonDamage:'remove',[field]:'guess'}}),/policy/i);
+ const widened=snapshot('shot','widen',{selection:{discharge:true},policy:{dischargeNonDamage:'remove',dischargeRange:'remove'}});assert.equal(widened.range,80);
+});
