@@ -4,7 +4,7 @@ import {FORCE_BARRAGE_SOURCE,assessForceBarrageCast,validateForceBarrageTargets,
 
 function fixture(){
  const user={id:'u',active:true},actor={id:'a',uuid:'Actor.a',type:'character',canAct:true,isDead:false,items:new Map(),testUserPermission:u=>u===user};
- const entry={id:'e',uuid:'Actor.a.Item.e',type:'spellcastingEntry',actor,isSpontaneous:true,system:{prepared:{value:'spontaneous'},slots:{slot1:{value:2,max:3},slot2:{value:2,max:3},slot3:{value:1,max:2}}}};
+ const entry={id:'e',uuid:'Actor.a.Item.e',type:'spellcastingEntry',actor,isSpontaneous:true,system:{prepared:{value:'spontaneous'},tradition:{value:'occult'},slots:{slot1:{value:2,max:3},slot2:{value:2,max:3},slot3:{value:1,max:2}}}};
  const item={id:'s',uuid:'Actor.a.Item.s',type:'spell',sourceId:FORCE_BARRAGE_SOURCE,actor,spellcasting:entry,flags:{},system:{location:{value:'e',signature:true},level:{value:1},rules:[],overlays:{},traits:{value:['concentrate','force','manipulate']},time:{value:'1 to 3'},range:{value:'120 feet'},area:null,duration:{value:'',sustained:false},damage:{0:{applyMod:false,category:null,formula:'1d4+1',kinds:['damage'],materials:[],type:'force'}}}};
  actor.items.set('s',item);actor.items.set('e',entry);
  const users=new Map([['u',user]]);users.activeGM={id:'gm',active:true};
@@ -17,7 +17,7 @@ function fixture(){
 }
 test('current spontaneous original Cast and actual native heightened variant admitted without English target name',()=>{
  const f=fixture();assert.equal(assessForceBarrageCast(f).eligible,true);
- const variant=Object.assign(Object.create(Object.getPrototypeOf(f.item)),f.item,{original:f.item,system:{...f.item.system,level:{value:3}}});
+ const variant=Object.assign(Object.create(Object.getPrototypeOf(f.item)),f.item,{original:f.item,system:{...f.item.system,location:{...f.item.system.location,heightenedLevel:3}}});
  assert.equal(assessForceBarrageCast({...f,item:variant}).eligible,true);
  assert.equal(validateForceBarrageTargets(f).length,1);
 });
@@ -45,4 +45,8 @@ test('allocation takes upstream missile count and refuses any unsafe numeric or 
 test('Core14 implicit private defaults and differing elevations stop before payment',()=>{
  for(const mode of ['gm','blind','self',undefined]){const f=fixture();f.game.settings.get=()=>mode;assert.equal(assessForceBarrageCast(f).eligible,false);}
  const f=fixture();f.targets[0].elevation=5;assert.throws(()=>validateForceBarrageTargets(f),/高度/);
+});
+test('NPC and synthetic-token Cast routes are not enrolled; current bridge requires the audited occult entry',()=>{
+ for(const change of [f=>f.actor.type='npc',f=>f.actor.isToken=true]){const f=fixture();change(f);assert.equal(assessForceBarrageCast(f).handled,false);}
+ const f=fixture();f.entry.system.tradition={value:'arcane'};assert.equal(assessForceBarrageCast(f).eligible,false);
 });
