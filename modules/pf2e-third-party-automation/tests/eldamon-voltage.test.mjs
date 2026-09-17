@@ -85,6 +85,14 @@ test('next source turn expires lazily across reload, while other creature turn d
  const f=fixture(),s=f.service();await s.channel(f.payload,f.user);f.game.combat.turn=1;await s.expire(f.payload,f.gm);assert.equal(f.actor.flags[ID].voltage.activations.channel.status,'armed');
  f.game.combat.round=2;f.game.combat.turn=0;assert.equal(await f.service().claim({...f.payload,targetUuid:f.target.uuid,kind:'touch',confirmed:true},f.user),null);assert.equal(f.actor.flags[ID].voltage.activations.channel.status,'expired');
 });
+test('High Voltage follows its actor encounter instead of the GM viewed encounter',async()=>{
+ const f=fixture(),bound=f.game.combat;
+ const other={id:'other',started:true,round:7,turn:0,turns:[]};
+ f.game.combats=new Map([[bound.id,bound],[other.id,other]]);f.game.combat=other;
+ const s=f.service(),a=await s.channel(f.payload,f.user);assert.equal(a.expires.combatId,bound.id);assert.equal(a.status,'armed');
+ await s.expire(f.payload,f.gm);assert.equal(f.actor.flags[ID].voltage.activations.channel.status,'armed');
+ bound.round=2;bound.turn=0;await s.expire(f.payload,f.gm);assert.equal(f.actor.flags[ID].voltage.activations.channel.status,'expired');
+});
 test('deleted original source closes a window without damage',async()=>{
  const f=fixture(),s=f.service();await s.channel(f.payload,f.user);f.actor.items.delete(f.item.id);
  assert.equal(await s.claim({...f.payload,targetUuid:f.target.uuid,kind:'touch',confirmed:true},f.user),null);assert.equal(f.actor.flags[ID].voltage.activations.channel.status,'expired');
