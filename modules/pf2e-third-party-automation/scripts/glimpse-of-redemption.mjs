@@ -50,7 +50,10 @@ export function createGlimpseProvider({game,fromUuid=globalThis.fromUuid,getRoll
  async function publishLocal({claim,token,ability}){
   if(!owner(ability.actor,game.user)||game.user.id!==claim.userId||glimpseSourceId(ability)!==S.glimpse)throw Error('原卡拥有者或能力来源不匹配。');
   const message=await ability.toMessage(null,{create:false,actualUse:false});if(!message)throw Error('原生救赎瞥视卡未生成。');
-  message.updateSource({speaker:{actor:ability.actor.id,scene:token.parent.id,token:token.id},[`flags.${M}.usageGenerated`]:true,[`flags.${M}.glimpseUse`]:{nonce:claim.nonce,claimKey:claim.claimKey}});
+  // The proof is first stamped after the claim has its messageId. Foundry
+  // suppresses no-change updates, so pre-stamping would hide the paid-card
+  // transition from updateChatMessage accounting.
+  message.updateSource({speaker:{actor:ability.actor.id,scene:token.parent.id,token:token.id},[`flags.${M}.usageGenerated`]:true});
   return globalThis.ChatMessage.create(message.toObject());
  }
  async function card(option,claim,existing){
