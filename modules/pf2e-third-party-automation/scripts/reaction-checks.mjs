@@ -10,10 +10,11 @@ const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>'
 const languages=a=>a?.system?.details?.languages?.value??[];
 const POINTED_TRAITS=['auditory','concentrate','investigator','linguistic','mental'];
 
-/** Keep the ordinary native modifier dialog, dice and DC calculation. Publish only
- * the final result, then invoke the original result callback exactly once.
+/** Keep the ordinary native modifier dialog, dice and DC calculation. Deliver only
+ * the final result with the caller's publication choice, then its callback once.
  */
 export async function runCheckReactionPipeline({game,check,context,event=null,callback,native,decide,beforeReroll,publish=data=>globalThis.ChatMessage.create(data)}){
+ const createMessage=context.createMessage!==false;
  let captured;const collect=async(roll,outcome,card,callbackEvent)=>{captured={roll,outcome,card,event:callbackEvent}};
  const options=context.options instanceof Set?context.options:new Set(context.options??[]),draftContext={...context,options,createMessage:false};
  const originalReturn=await native(check,draftContext,event,collect);if(!captured)return originalReturn;
@@ -37,7 +38,11 @@ export async function runCheckReactionPipeline({game,check,context,event=null,ca
  if(disruption?.disrupted){const options=new Set(data.flags.pf2e.context.options??[]);for(const option of ['fortune','misfortune',`${MODULE_ID}:eat:${disruption.nonce}`])options.add(option);data.flags.pf2e.context.options=[...options];data.flags.pf2e.context.eatFortune=disruption;data.flavor=(data.flavor??'')+'<p>倒转光阴被吞噬福祸打断；保留原检定，双方反应和次数已使用。</p>';}
  const finalContext=data.flags.pf2e.context;for(const key of ['outcome','unadjustedOutcome','isReroll','rollTwice','substitutions'])if(key in finalContext)context[key]=finalContext[key];
  for(const option of finalContext.options??[])options.add(option);context.options=options;
- data.rolls=[captured.roll.toJSON()];const message=await publish(data);if(!message)throw Error('原生检定结果未能发布；不会自动重掷。');
+ data.rolls=[captured.roll.toJSON()];let message=captured.card;
+ if(createMessage){message=await publish(data);if(!message)throw Error('原生检定结果未能发布；不会自动重掷。');}
+ // Native Check supplies a ChatMessage draft even when it is not published.
+ // Keep that document (and its privacy fields) for Toolbelt's original callback.
+ else message.updateSource(data);
  if(callback)await callback(captured.roll,captured.outcome,message,captured.event);return captured.roll;
 }
 
