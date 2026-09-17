@@ -2,6 +2,7 @@ import {MODULE_ID,hasSource} from './rules.mjs';
 import {SerialActions} from './runtime.mjs';
 import {isActiveGM,isUnappliedDamageError,markUnappliedDamageError} from './native-context.mjs';
 import {createShieldReactionResources} from './shield-reaction-resources.mjs';
+import {GLIMPSE_SOURCES,glimpseSourceId,glimpseClaims,provenGlimpseReactionCard} from './glimpse-source.mjs';
 
 const AAT='pf2e-auto-action-tracker',values=c=>Array.from(c?.values?.()??c??[]),own=d=>d?.flags?.[MODULE_ID]??{};
 const shieldPrefix=`${MODULE_ID}:native-shield:`,authorId=m=>m.author?.id??m.user?.id??m.user;
@@ -98,6 +99,7 @@ function reactionSlots(actor,game,{pending=[],current=reactionEpoch(actor,game),
  const checks=(own(actor).reactionChecks?.reactions??[]).filter(r=>['claimed','used'].includes(r.state)&&['clock','squawk','eat'].includes(r.kind)).map(r=>({...r,claimKey:r.nonce?`check:${r.nonce}`:null,slug:{clock:'turn-back-the-clock',squawk:'squawk',eat:'eat-fortune'}[r.kind]}));
  const paidDisrupt=paidDisruptClaims(actor),disrupt=paidDisrupt.filter(r=>r.epoch===current).map(r=>({...r,slug:'disrupt-prey',cost:1}));
  const casts=paidCastClaims(actor);
+ const glimpse=glimpseClaims(combatant).filter(r=>['paid','native','followup','done','uncertain'].includes(r.status)&&r.actorUuid===actor.uuid&&r.tokenUuid===combatant.token?.uuid&&r.combatId===c.id&&r.combatantId===combatant.id&&typeof r.nonce==='string'&&r.nonce&&r.claimKey===`glimpse:${r.nonce}`).map(r=>({...r,cost:1,slug:'glimpse-of-redemption',checkId:r.messageId}));
  // AAT only stores a message ID. Its create hook can finish before the provider
  // writes that ID back to the pending claim: derive identity from that exact
  // live native card, never from a recent-message or weapon-name search.
@@ -109,7 +111,7 @@ function reactionSlots(actor,game,{pending=[],current=reactionEpoch(actor,game),
  // AAT may label a reaction Strike by its weapon or generic action. The exact
  // paid claim identifies its slot eligibility without modifying AAT's log.
  for(const claim of disrupt)for(let i=0;i<entries.length;i++)if(sameClaim(entries[i],claim))entries[i]={...entries[i],slug:claim.slug,cost:1};
- for(const claim of [...fear,...checks,...disrupt,...casts,...paidDeflectionClaims(actor),...pending])if(claim.epoch===current&&!entries.some(e=>sameClaim(e,claim)))entries.push({type:'reaction',cost:claim.cost??1,slug:claim.slug??'demoralize',msgId:claim.checkId,claimKey:claim.claimKey});
+ for(const claim of [...fear,...checks,...disrupt,...casts,...glimpse,...paidDeflectionClaims(actor),...pending])if(claim.epoch===current&&!entries.some(e=>sameClaim(e,claim)))entries.push({type:'reaction',cost:claim.cost??1,slug:claim.slug??'demoralize',msgId:claim.checkId,claimKey:claim.claimKey});
  for(const entry of entries)for(let n=0;n<Math.max(1,Number(entry.cost)||0);n++){const slot=slots.find(s=>!s.spent&&(!entry.shield?.resourceSlot||s.kind===entry.shield.resourceSlot)&&(!s.allowed||entry.msgId==='System'||s.allowed.includes(entry.slug)));if(slot){slot.spent=true;slot.entry=entry;}}
  return slots;
 }
@@ -131,7 +133,7 @@ function reactionData(message,item,actor){
  return {type:'reaction',msgId:message.id,cost:1,slug:action??item?.slug??item?.system?.slug??'reaction',...(claimKey?{claimKey}:{})};
 }
 
-export function createReactionBudget({game,fromUuid=globalThis.fromUuid,onError=console.error,reactionResources=createShieldReactionResources({game})}={}){
+export function createReactionBudget({game,fromUuid=globalThis.fromUuid,onError=console.error,reactionResources=createShieldReactionResources({game}),handlesGlimpse=()=>false}={}){
  const scopes=new Map();let socket;
  const owner=(actor,user)=>{if(!isActiveGM(game)||!user||!actor?.testUserPermission?.(user,'OWNER'))throw Error('盾牌格挡回执需要当前主GM验证角色所有者。');};
  const persist=(combatant,data,changes={})=>{if(!isActiveGM(game))throw Error('主GM已改变，不能写入格挡回执。');return combatant.update({[`flags.${MODULE_ID}.reactionBudget`]:data,...changes});};
@@ -242,7 +244,7 @@ export function createReactionBudget({game,fromUuid=globalThis.fromUuid,onError=
   const combat=encounter();if(!combat)return false;
   const bounded={combat,modules:game.modules,messages:game.messages,users:game.users};
   const receipt=own(message).reactionBudget,epoch=reactionEpoch(actor,bounded),current=()=>encounter()===combat&&epoch===reactionEpoch(actor,bounded);
-  if(!epoch||receipt?.epoch&&receipt.epoch!==epoch&&!own(message).disruptPreyReaction&&!provenCastClaim(message,actor,game))return false;
+  if(!epoch||receipt?.epoch&&receipt.epoch!==epoch&&!own(message).disruptPreyReaction&&!provenCastClaim(message,actor,game)&&!provenGlimpseReactionCard(message,actor,game))return false;
   // Queue before resolving the item: a competing automatic reaction must wait
   // for this already-posted native reaction to be persisted first.
   return withReactionReservation(actor,game,async()=>{
@@ -250,8 +252,12 @@ export function createReactionBudget({game,fromUuid=globalThis.fromUuid,onError=
    const itemUuid=message.flags?.pf2e?.origin?.uuid,item=message.item??(typeof itemUuid==='string'?await fromUuid?.(itemUuid):null);
    if(!isActiveGM(game)||!current()||game.messages.get(message.id)!==message||!actor.testUserPermission?.(author,'OWNER'))return false;
    if(item?.actor&&item.actor.uuid!==actor.uuid)return false;
-   const cast=provenCastClaim(message,actor,game),entry=cast?{type:'reaction',cost:1,slug:cast.slug,msgId:message.id,claimKey:cast.claimKey}:reactionData(message,item,actor);if(!entry)return false;
-   const paid=cast??provenDisruptClaim(message,actor,game);
+   const glimpse=provenGlimpseReactionCard(message,actor,game);
+   // The native card can arrive before its paid claim has acquired messageId.
+   // Unsupported actors and unavailable providers retain manual accounting.
+   if(!glimpse&&glimpseSourceId(item)===GLIMPSE_SOURCES.glimpse&&handlesGlimpse(actor))return false;
+   const cast=provenCastClaim(message,actor,game),known=cast??glimpse,entry=known?{type:'reaction',cost:1,slug:known.slug,msgId:message.id,claimKey:known.claimKey}:reactionData(message,item,actor);if(!entry)return false;
+   const paid=known??provenDisruptClaim(message,actor,game);
    if(paid&&paid.epoch!==epoch){
     // Keep the current combatant ledger untouched, even when it already has a
     // different reaction. Stamp only this verified card for duplicate delivery.
@@ -260,7 +266,7 @@ export function createReactionBudget({game,fromUuid=globalThis.fromUuid,onError=
     await message.update({[`flags.${MODULE_ID}.reactionBudget`]:{epoch:paid.epoch,actorUuid:actor.uuid,combatantId:combatantFor(actor,bounded)?.id}});
     return true;
    }
-   const combatant=combatantFor(actor,bounded),previous=own(combatant).reactionBudget,entries=previous?.epoch===epoch?[...previous.entries??[]]:[],index=entries.findIndex(e=>e.msgId===entry.msgId);
+   const combatant=combatantFor(actor,bounded),previous=own(combatant).reactionBudget,entries=previous?.epoch===epoch?[...previous.entries??[]]:[],index=entries.findIndex(e=>e.msgId===entry.msgId||glimpse&&e.claimKey===glimpse.claimKey);
    if(index>=0){const updated={...entries[index],...entry};if(JSON.stringify(entries[index])===JSON.stringify(updated))return false;entries[index]=updated;}else entries.push(entry);
    if(!isActiveGM(game)||!current())return false;
    await combatant.update({[`flags.${MODULE_ID}.reactionBudget`]:{epoch,entries}});
@@ -272,7 +278,7 @@ export function createReactionBudget({game,fromUuid=globalThis.fromUuid,onError=
    socket=socketApi;
    if(socket)for(const method of ['begin','finish'])socket.register(`reaction-budget:shield-${method}`,async function(payload){try{return {ok:true,value:await (method==='begin'?beginShield:finishShield)(payload,game.users.get(this.socketdata.userId))}}catch(error){return {ok:false,error:error.message}}});
    const onCreate=(message,_options,userId)=>{captureShield(message,userId);record(message,userId).catch(onError);};
-  const onUpdate=(message,changes,_options,userId)=>{if(changes.flags?.[MODULE_ID]?.reactionChecks||Object.keys(changes).some(k=>k.startsWith(`flags.${MODULE_ID}.reactionChecks`)))record(message,userId).catch(onError);};
+  const onUpdate=(message,changes,_options,userId)=>{if(['reactionChecks','glimpseUse'].some(key=>changes.flags?.[MODULE_ID]?.[key]||Object.keys(changes).some(k=>k.startsWith(`flags.${MODULE_ID}.${key}`))))record(message,userId).catch(onError);};
   const ids=[['createChatMessage',Hooks.on('createChatMessage',onCreate)],['updateChatMessage',Hooks.on('updateChatMessage',onUpdate)]];
   return()=>{for(const[name,id]of ids)Hooks.off(name,id);};
  }
