@@ -110,9 +110,11 @@ export function createEldamonElectricityProvider({game,fromUuid,onError=console.
   const delta=already?0:Math.min(0,-2-current),options=new Set([...values(context.options),'target:condition:off-guard']);
   return native(check,{...context,options,dc:{...context.dc,value:context.dc.value+delta}},...args);
  }
- async function onCommittedChannel({receipt,message}){
+ async function onCommittedChannel({receipt,message,user=game.users.get(receipt?.userId)}){
   if(!receipt?.powerId)return;
-  await rpc('channel',{actorUuid:receipt.actorUuid,nonce:receipt.nonce,messageUuid:message.uuid});
+  const payload={actorUuid:receipt.actorUuid,nonce:receipt.nonce,messageUuid:message.uuid};
+  if(active())return ledger.channel(payload,user);
+  return rpc('channel',payload);
  }
  async function onRefresh({actor,nonce}){if(active())return ledger.refresh({actor,nonce});}
  async function encounterEnded(combat){

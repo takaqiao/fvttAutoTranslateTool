@@ -25,7 +25,14 @@ const liveToken=t=>t?.documentName==='Token'&&t.actor&&t.parent?.tokens?.get(t.i
 const ownCharge=i=>i?.flags?.[ID]?.electricityCharge?.ownPower===true;
 const shell=actor=>values(actor.items).some(i=>sourceUuid(i)===S.shell);
 const siphon=r=>r?.snapshot?.siphon?.applies===true;
-const frame=game=>game.combat?.started?`${game.combat.id}:${game.combat.round}:${game.combat.turn}`:null;
+const frame=combat=>combat?.started?`${combat.id}:${combat.round}:${combat.turn}`:null;
+/** Viewed combat is UI state. Only one actual started membership can provide
+ * initiative timing; absent or ambiguous membership has no automated clock. */
+export function electricityEncounter(game,actorUuid,tokenUuid=null){
+ const combats=game.combats?values(game.combats):game.combat?[game.combat]:[];
+ const candidates=combats.filter(c=>c.started&&values(c.combatants??c.turns).some(t=>t.actor?.uuid===actorUuid&&(!tokenUuid||t.token?.uuid===tokenUuid)));
+ return candidates.length===1?candidates[0]:null;
+}
 
 export function classifyElectricityDamage(roll){
  const instances=roll?.instances;if(!Array.isArray(instances))return 'none';
@@ -37,8 +44,8 @@ export function electricityRemovalPlan({charged=0,ownPowerCharge=false,shell=fal
  if(charged>0&&!(shell&&ownPowerCharge))return {charged:Math.max(0,charged-1),removeShocked:false};
  return {charged,removeShocked:true};
 }
-export function sourceTurnExpiry(combat,actorUuid,{rounds=1,phase='end'}={}){
- const index=combat?.turns?.findIndex(c=>c.actor?.uuid===actorUuid)??-1;
+export function sourceTurnExpiry(combat,actorUuid,{rounds=1,phase='end',tokenUuid=null}={}){
+ const index=combat?.turns?.findIndex(c=>c.actor?.uuid===actorUuid&&(!tokenUuid||c.token?.uuid===tokenUuid))??-1;
  if(!combat?.started||index<0)return null;
  return {combatId:combat.id,combatantId:combat.turns[index].id,round:combat.round+(index<=combat.turn?rounds:rounds-1),phase};
 }
@@ -135,8 +142,9 @@ export function createElectricityLedger({game,fromUuid,queue=new SerialActions()
  }
  async function chainFacts({actor,selection,kind},record){
   const evidence=selection.electricityEvidence,source=await fromUuid(record.tokenUuid),target=await fromUuid(evidence?.targetUuid),caster=await fromUuid(evidence?.sourceTokenUuid);
+  const sourceCombat=electricityEncounter(game,source?.actor?.uuid,source?.uuid),casterCombat=electricityEncounter(game,actor.uuid,caster?.uuid);
   if(!liveToken(source)||!liveToken(target)||!liveToken(caster)||caster.actor.uuid!==actor.uuid||source.parent!==target.parent||target.parent!==caster.parent||source.uuid===target.uuid||
-   selection.targetUuids?.length!==1||selection.targetUuids[0]!==target.uuid||record.frame!==frame(game)||record.status!=='confirmed'||record.receiptUuid!==evidence.receiptUuid||record.effectKey!==evidence.effectKey||!await verified(record))return false;
+   !sourceCombat||casterCombat?.id!==sourceCombat.id||selection.targetUuids?.length!==1||selection.targetUuids[0]!==target.uuid||record.frame!==frame(sourceCombat)||record.status!=='confirmed'||record.receiptUuid!==evidence.receiptUuid||record.effectKey!==evidence.effectKey||!await verified(record))return false;
   const all=values(source.parent.tokens).flatMap(t=>Object.values(electricityState(t.actor).damage));
   const sourceMessage=await fromUuid(record.sourceMessageUuid),manifest=sourceMessage.flags?.[ID]?.electricitySource?.targetUuids??[];
   // Conservatively reserve the source's entire original target set while an area
@@ -144,7 +152,7 @@ export function createElectricityLedger({game,fromUuid,queue=new SerialActions()
   const hit=manifest.includes(target.uuid)||all.some(r=>r.effectKey===record.effectKey&&r.tokenUuid===target.uuid&&(r.status==='pending'||r.electricityAmount>0));
   return chainEligibility({triggerDamage:record.electricityAmount,sourceDistance:caster.object?.distanceTo?.(source.object),targetDistance:source.object?.distanceTo?.(target.object),
    adjacentCaster:caster.object?.distanceTo?.(target.object)<=5,enemy:!!actor.alliance&&!!target.actor.alliance&&actor.alliance!==target.actor.alliance,
-   shocked:electricityEffects(target.actor,S.shocked).length>0,hitBySameEffect:hit,reactionAvailable:reactionAvailable(actor,game),discharge:selection.discharge,siphoning:kind==='siphoning'});
+   shocked:electricityEffects(target.actor,S.shocked).length>0,hitBySameEffect:hit,reactionAvailable:reactionAvailable(actor,{combat:casterCombat,modules:game.modules,messages:game.messages,users:game.users}),discharge:selection.discharge,siphoning:kind==='siphoning'});
  }
  return {
   async channel(payload,user){const {actor,receipt:r,message,item}=await original(payload,user);
@@ -156,7 +164,7 @@ export function createElectricityLedger({game,fromUuid,queue=new SerialActions()
    if(!liveToken(token)||token.actor.uuid!==actor.uuid||!/^[A-Za-z0-9_-]{8,100}$/.test(payload.nonce??'')||!['pure','mixed'].includes(payload.kind))throw Error('Invalid native electricity application.');
    const source=await validateSource(payload);
    return mutate(actor,async state=>{if(state.damage[payload.nonce])throw Error('Electricity application nonce was already used.');
-    const r={...copy(payload),sourceFingerprint:sourceFingerprint(source),userId:user.id,status:'pending',frame:frame(game)};state.damage[r.nonce]=r;await save(actor,state);return copy(r);});
+    const r={...copy(payload),sourceFingerprint:sourceFingerprint(source),userId:user.id,status:'pending',frame:frame(electricityEncounter(game,actor.uuid,token.uuid))};state.damage[r.nonce]=r;await save(actor,state);return copy(r);});
   },
   async finishDamage(payload,user){
    const actor=await fromUuid(payload.actorUuid);owner(actor,user);
@@ -198,7 +206,7 @@ export function createElectricityLedger({game,fromUuid,queue=new SerialActions()
    const effectKey=`channel:${sourceActor.uuid}:${nonce}`,key=`${effectKey}:${target.uuid}`;
    return mutate(target.actor,async state=>{
     if(!qualifies){delete state.pendingShocks[key];await save(target.actor,state);return;}
-    const expires=sourceTurnExpiry(game.combat,sourceActor.uuid,{rounds:staticShock&&outcome==='criticalSuccess'?2:1});
+    const combat=electricityEncounter(game,sourceActor.uuid,source.uuid),expires=sourceTurnExpiry(combat,sourceActor.uuid,{rounds:staticShock&&outcome==='criticalSuccess'?2:1,tokenUuid:source.uuid});
     if(!expires)return; // No invented initiative clock outside an encounter.
     const pending={key,effectKey,sourceActorUuid:sourceActor.uuid,checkUuid:message.uuid,expires,context:{origin:{actor:sourceActor.uuid,token:source.uuid,item:r.itemUuid,spellcasting:null,rollOptions:[]},target:{actor:target.actor.uuid,token:target.uuid},roll:{total:message.rolls[0].total,degreeOfSuccess:message.rolls[0].degreeOfSuccess}}};
     state.pendingShocks[key]=pending;await save(target.actor,state);
