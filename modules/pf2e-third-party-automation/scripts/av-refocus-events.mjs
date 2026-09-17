@@ -13,7 +13,7 @@ const focusPath='system.resources.focus.value',intentPath=`flags.${MODULE_ID}.av
 
 /** Observe the actual public Workbench Refocus call, not arbitrary resource
  * increases. The nonce rides on the one native update started by that call. */
-export function registerAvRefocusEvents({game,Hooks,libWrapper,canvas=globalThis.canvas,onError=console.error,runExclusive,actorMatchers=[],onRefocus,refocusPrivacy}={}){
+export function registerAvRefocusEvents({game,Hooks,libWrapper,registerActorUpdate,canvas=globalThis.canvas,onError=console.error,runExclusive,actorMatchers=[],onRefocus,refocusPrivacy}={}){
  const scopes=new Map(),queue=new SerialActions();
  const run=runExclusive??((actor,fn)=>queue.run(actor.uuid,fn));
  const activeGM=()=>!!game.user?.id&&game.user.id===game.users.activeGM?.id;
@@ -51,7 +51,7 @@ export function registerAvRefocusEvents({game,Hooks,libWrapper,canvas=globalThis
    catch(error){if(activeGM())await run(actor,()=>saveEvent(actor,proof,'uncertain'));throw error;}
   }).catch(onError);
  });
- const paths=[];
+ const paths=[];let unregisterActorUpdate;
  if(libWrapper&&typeof game.PF2eWorkbench?.refocus==='function'){
   const register=(path,fn)=>{libWrapper.register(MODULE_ID,path,fn,'WRAPPER');paths.push(path);};
   register('game.PF2eWorkbench.refocus',async function(wrapped,...args){
@@ -65,7 +65,7 @@ export function registerAvRefocusEvents({game,Hooks,libWrapper,canvas=globalThis
    catch(error){if(privacyHandle)refocusPrivacy.abortRefocus(privacyHandle,error);throw error;}
    finally{if(scopes.get(actor.uuid)===scope)scopes.delete(actor.uuid);}
   });
-  register('CONFIG.Actor.documentClass.prototype.update',function(wrapped,changes,options={}){
+  const observeActorUpdate=function(wrapped,changes,options={}){
    const scope=scopes.get(this.uuid);
    if(!scope||scope.used||scope.actor!==this||Object.keys(changes??{}).length!==1||!Object.hasOwn(changes,focusPath))return wrapped(changes,options);
    scope.used=true;if(!scope.privacyHandle)scopes.delete(this.uuid);
@@ -76,7 +76,9 @@ export function registerAvRefocusEvents({game,Hooks,libWrapper,canvas=globalThis
    // rather than an empty diff that Foundry may discard without updateActor.
    const task=wrapped({...changes,[intentPath]:proof},{...options,[MODULE_ID]:{...options?.[MODULE_ID],refocusReceipt:proof}});
    scope.updateTask=scope.privacyHandle?refocusPrivacy.bindRefocusUpdate(scope.privacyHandle,proof,task):Promise.resolve(task);return scope.updateTask;
-  });
+  };
+  if(registerActorUpdate)unregisterActorUpdate=registerActorUpdate(observeActorUpdate);
+  else register('CONFIG.Actor.documentClass.prototype.update',observeActorUpdate);
  }
- return()=>{Hooks.off('updateActor',hook);for(const path of paths)libWrapper.unregister(MODULE_ID,path);scopes.clear();};
+ return()=>{Hooks.off('updateActor',hook);unregisterActorUpdate?.();for(const path of paths)libWrapper.unregister(MODULE_ID,path);scopes.clear();};
 }
