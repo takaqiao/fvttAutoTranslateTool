@@ -242,3 +242,29 @@ test('loss of ability to act after proven payment records uncertainty without gr
 test('unhashable native context keeps original result without prompting or debiting',async()=>{
  const f=fixture();f.context.dc.circular=f.context.dc;assert.equal(await f.run(),f.rolls[0]);assert.equal(f.calls.length,0);assert.equal(f.prompts.length,0);assert.equal(f.callbacks.length,1);
 });
+
+test('GM handoff while rendering a paid reroll cannot publish its final card',async()=>{
+ const f=fixture({createMessage:true}),next={id:'next-gm',active:true,isGM:true};f.game.users.set(next.id,next);
+ f.game.pf2e.Check.renderReroll=async roll=>{f.game.users.activeGM=next;return String(roll.total);};
+ await assert.rejects(f.run(),/主GM/);assert.equal(f.nativeCalls.length,2);assert.equal(f.callbacks.length,0);assert.equal(f.published.length,0);assert.equal(f.record.status,'result-ready');
+});
+
+test('a returned final callback can make its actor unable to act without corrupting completed delivery',async()=>{
+ const f=fixture({createMessage:true});let delivered=0;
+ assert.equal(await f.provider.interceptCheck(f.native,f.check,f.context,null,async()=>{delivered++;f.actor.canAct=false;}),f.rolls[1]);
+ assert.equal(delivered,1);assert.equal(f.published.length,1);assert.equal(f.record.status,'callback-returned');assert.equal(f.calls.filter(c=>c[0]==='uncertain').length,0);
+});
+
+test('an evaluated rerolls result can still be recorded and delivered after its actor loses ability to act',async()=>{
+ const f=fixture({createMessage:true}),native=f.native;
+ f.native=async(c,ctx,event,callback)=>native(c,ctx,event,async(...args)=>{if(ctx.isReroll)f.actor.canAct=false;return callback(...args);});
+ assert.equal(await f.run(),f.rolls[1]);assert.equal(f.callbacks.length,1);assert.equal(f.record.status,'callback-returned');
+});
+
+test('unrelated item changes bypass automatic-payment preflight even when the actor becomes unable to act',async()=>{
+ const f=fixture();let prepared=0;f.ledger.preparePayment=()=>{prepared++;return undefined;};
+ f.options.originalUse=async item=>{f.actor.canAct=false;
+  for(const changes of [{name:'unrelated'}, {[`flags.${ID}.halflingLuck.operations.pending.status`]:'ready'},{system:{description:{value:'updated'}}}])assert.deepEqual(await f.emit('preUpdateItem',item,changes,{},f.user.id),[undefined]);
+  throw Error('end probe');
+ };f.make();await assert.rejects(f.run(),/end probe/);assert.equal(prepared,0);assert.equal(f.item.system.frequency.value,1);
+});

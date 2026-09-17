@@ -58,14 +58,15 @@ export function createHalflingLuckProvider({game,fromUuid=globalThis.fromUuid,ch
   return ledger[payload.operation](args);
  }
  async function call(s,operation,extra={}){
-  // Reporting a paid failure does not grant another action. Keep identity and
-  // ownership checks, but allow its actor to have become unable to act.
-  requireScope(s,operation!=='uncertain');const local=isActiveGM(game);
+  // Only starting an action/die requires current ability to act. Recording or
+  // delivering an already evaluated result retains all identity/GM checks.
+  const canAct=operation==='claim'||operation==='startRolling';
+  requireScope(s,canAct);const local=isActiveGM(game);
   const payload={operation,actorUuid:s.actor.uuid,itemUuid:s.item.uuid,nonce:s.nonce,invocationId:s.invocationId,fingerprint:s.fingerprint,...extra};
   const reply=local?await dispatch(payload,game.user.id):await socket?.executeAsUser(RPC,s.gmId,payload);
   const value=local?reply:reply?.ok?reply.value:null;
   if(!value)throw Error(reply?.error??'半身人幸运主GM回执未确认；不会重试。');
-  requireScope(s,operation!=='uncertain');return value;
+  requireScope(s,canAct);return value;
  }
  function beforeUse(item,user=game.user){
   const s=authorizations.get(item?.uuid);if(!s)return true;
@@ -112,11 +113,12 @@ export function createHalflingLuckProvider({game,fromUuid=globalThis.fromUuid,ch
   const s={invocationId,actor,item:feature(actor),user:game.user,gmId:game.users.activeGM.id,check,stage:'original',nonce:null,requestedCreateMessage:context.createMessage!==false};scopes.set(invocationId,s);
   let originalCallbacks=0,rerollCallbacks=0,nativeInvocations=0,delivered=false;
   try{
-   return await runCheckReactionPipeline({game,check,context,event,...(publish?{publish}:{}),
-    native:async(c,ctx,e,collect)=>{const reroll=++nativeInvocations>1;return native(c,ctx,e,async(roll,outcome,card,ce)=>{
+   return await runCheckReactionPipeline({game,check,context,event,
+    publish:data=>{if(s.nonce)requireScope(s,false);return publish?publish(data):globalThis.ChatMessage.create(data);},
+    native:async(c,ctx,e,collect)=>{const reroll=++nativeInvocations>1;if(reroll)requireScope(s);return native(c,ctx,e,async(roll,outcome,card,ce)=>{
      if(!reroll){if(++originalCallbacks!==1)throw Error('原生检定重复返回，未继续半身人幸运。');return collect(roll,outcome,card,ce);}
      if(s.stage!=='rolling'||++rerollCallbacks!==1||!ctx.options?.has?.(`${ID}:halfling-luck:${s.nonce}`))throw Error('半身人幸运重投不属于本次一次性许可。');
-     requireScope(s);roll.options.halflingLuckNonce=s.nonce;
+     requireScope(s,false);roll.options.halflingLuckNonce=s.nonce;
      const data=card.toObject();data.flags.pf2e.context.halflingLuckNonce=s.nonce;card.updateSource(data);
      await call(s,'recordResult',{rollJSON:roll.toJSON(),outcome});s.stage='result-ready';
      return collect(roll,outcome,card,ce);
@@ -153,6 +155,7 @@ export function createHalflingLuckProvider({game,fromUuid=globalThis.fromUuid,ch
   const on=(name,fn)=>hooks.push([name,Hooks.on(name,fn)]);
   on('preUpdateItem',(item,changes,options,userId)=>{
    if(!isHalflingLuckItem(item))return;
+   if(!Object.hasOwn(changes??{},'system.frequency.value')&&!Object.hasOwn(changes?.system?.frequency??{},'value'))return;
    try{beforeUse(item,game.users.get(userId));return ledger.preparePayment(item,changes,options,userId);}catch(error){onError(error);return false;}
   });
   on('updateItem',(item,changes,options,userId)=>{
