@@ -81,3 +81,10 @@ test('silent real cast closes the opportunity; consume:false preview does not',a
 });
 test('changed daily frequency schema cannot reuse a paid Prayer message',async()=>{const f=fixture();await f.start();f.feat.system.frequency.per='hour';await assert.rejects(f.provider.executeUsage(f.payment),/次数|每日/)});
 
+test('Foundry-expanded atomic Prayer receipt is not overwritten as an unexplained focus decrease',async()=>{
+ const f=fixture();await f.start();const credit=f.actor.flags[ID].desperatePrayer.credit;
+ const changes={system:{resources:{focus:{value:0}}},flags:{[ID]:{desperatePrayer:{credit:{...credit,state:'spent',remaining:0,totalObserved:0,payments:[{castNonce:'paid'}]}}}}};
+ f.emit('preUpdateActor',f.actor,changes,{},'gm');
+ assert.equal(changes[`flags.${ID}.desperatePrayer`],undefined);assert.equal(changes.flags[ID].desperatePrayer.credit.state,'spent');assert.equal(changes.flags[ID].desperatePrayer.credit.payments[0].castNonce,'paid');
+});
+
