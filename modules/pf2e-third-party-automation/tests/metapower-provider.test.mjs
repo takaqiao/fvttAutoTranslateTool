@@ -25,3 +25,9 @@ test('retained discharge degree downgrade augments native save arithmetic and pr
  assert.equal(result.dosAdjustments[0],context.dosAdjustments[0]);assert.deepEqual(result.dosAdjustments[1].adjustments.all,{label:'Retributive Shock · Discharge',amount:-1});
  assert.equal(context.dosAdjustments.length,1);assert.equal(api.adjustMetapowerCheckContext({saveDowngrade:1},{type:'attack-roll'}).dosAdjustments,undefined);
 });
+test('Electric Shot half-failure application is confined to its bound recipient through native alter',async()=>{
+ const snapshot={powerId:'electric-shot',itemUuid:'Actor.a.Item.i'},actor={uuid:'Actor.a',flags:{[ID]:{metapower:{receipts:{n:{status:'committed',messageUuid:'ChatMessage.c',snapshot}}}}}},card={uuid:'ChatMessage.c',flags:{[ID]:{metapowerUse:{nonce:'n'}},pf2e:{origin:{uuid:snapshot.itemUuid}}}};
+ const proof={actorUuid:actor.uuid,cardId:'c',nonce:'n',targetActorUuid:'Actor.target'},damage={options:{[ID]:{metapowerShotFailure:proof}}},p=api.createMetapowerProvider({game:{messages:new Map([['c',card]])},fromUuid:async()=>actor});
+ assert.equal(await p.beforeDamage({uuid:'Actor.target'},{damage}),null);await assert.rejects(p.beforeDamage({uuid:'Actor.other'},{damage}),/recipient/i);
+ const altered=api.preserveMetapowerOnAlter(damage,{options:{}});assert.deepEqual(altered.options[ID].metapowerShotFailure,proof);assert.notEqual(altered.options[ID].metapowerShotFailure,proof);
+});

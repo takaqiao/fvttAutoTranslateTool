@@ -13,7 +13,7 @@ export function cardLinkPlan(snapshot,links){
    if(snapshot.powerId==='high-voltage')result.disabled=true;
    if(dice&&n<2){result.disabled=n!==(snapshot.discharge?1:0);result.formula=`(${dice[0]}+${snapshot.level})${dice[snapshot.discharge?2:1]}[electricity]`;}
    if(snapshot.powerId==='static-shock'&&n===2)result.formula=`(2+${snapshot.level})[electricity]`;
-   if(snapshot.powerId==='electric-shot'&&n===2)result.formula=`${snapshot.level}[electricity]`;
+   if(snapshot.powerId==='electric-shot'&&n===2){result.formula=`${snapshot.level}[electricity]`;result.shockedFailureFormula=`(2+${snapshot.level})${snapshot.discharge?'d8':'d4'}[electricity]`;}
    if(snapshot.powerId==='reactive-chain'){
     if(!Number.isFinite(snapshot.triggerDamage)||snapshot.triggerDamage<=0)throw Error('Reactive Chain has no confirmed damage basis.');
     result.formula=`${Math.floor(snapshot.triggerDamage/2)}[electricity]`;
@@ -45,8 +45,9 @@ export function renderMetapowerCard(message,html,{receipt,onClear,onError=consol
   const a=anchors[i],p=plan[i];
   if(p.disabled){const span=document.createElement('span');span.textContent=a.textContent;span.title='本次已选分支／虹吸规则使此链接不可用';span.className='metapower-disabled';a.replaceWith(span);continue;}
   if(p.kind==='damage'){
-   if(p.formula){a.dataset.baseFormula=p.formula;a.dataset.formula=p.formula;}
+   if(p.formula){a.dataset.baseFormula=p.formula;a.dataset.formula=p.formula;a.textContent=p.formula.replace(/\((\d+)\+(\d+)\)/g,(_m,x,y)=>String(Number(x)+Number(y))).replace('[electricity]',snapshot.siphon?.applies?' 无类型基础伤害':' 电击伤害');a.setAttribute('aria-label',a.textContent);}
    a.dataset.rollOptions=[...new Set([...(a.dataset.rollOptions??'').split(',').filter(Boolean),`${MODULE_ID}:metapower:${message.id}:${receipt.nonce}`])].join(',');
+   if(p.shockedFailureFormula){const alternate=a.cloneNode(true);alternate.dataset.baseFormula=p.shockedFailureFormula;alternate.dataset.formula=p.shockedFailureFormula;alternate.dataset.rollOptions+=`,${MODULE_ID}:electric-shot-failure-half`;alternate.textContent='失败：已Shocked目标（基础半伤）';alternate.title='选定一个已Shocked目标；本伤害卡已计算失败半伤，按全额应用。';a.after(document.createTextNode(' / '),alternate);}
   }
   if(p.kind==='area'&&p.distance!==undefined){a.dataset.distance=String(p.distance);a.setAttribute('title',`${p.distance} ft`);a.textContent=`${p.distance} ft ${p.type}`;}
  }
