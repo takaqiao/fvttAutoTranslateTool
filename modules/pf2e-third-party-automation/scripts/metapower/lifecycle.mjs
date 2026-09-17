@@ -36,7 +36,7 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
   // Keep source/channel, uncertain and live proofs indefinitely. Ordinary
   // completed actions have no downstream card consumer; their client high-water
   // marks reject replay after the bounded detail archive has been pruned.
-  const ordinary=Object.values(state.receipts).filter(r=>r.clientId&&!r.kind&&!r.powerId&&!r.snapshot&&r.nonce!==state.pending&&['committed','cancelled'].includes(r.status)).sort((a,b)=>b.sequence-a.sequence);
+  const ordinary=Object.values(state.receipts).filter(r=>r.clientId&&!r.kind&&!r.powerId&&!r.snapshot&&r.nonce!==state.pending&&(!r.delivery||r.delivery.status==='done')&&['committed','cancelled'].includes(r.status)).sort((a,b)=>b.sequence-a.sequence);
   for(const r of ordinary.slice(64))delete state.receipts[r.nonce];
   if(game.user?.id!==game.users.activeGM?.id)throw Error('Active GM changed during admission; retry reconciliation.');
   await actor.update({[`flags.${MODULE_ID}.metapower`]:state});return copy(result);
@@ -56,6 +56,7 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
     if(payload.clientSequence<=(state.clients[clientKey]??0))throw Error('Archived invocation replay or out-of-order client sequence.');
    }
    if(state.pending)throw Error('Another native action is in progress; finish it before using the next action.');
+   if(Object.values(state.receipts).some(r=>r.delivery&&r.delivery.status!=='done'))throw Error('Committed native action follow-up is awaiting GM recovery before the next action.');
    const item=payload.itemUuid?await fromUuid(payload.itemUuid):null;
    if(payload.itemUuid&&(!item||item.actor!==actor||actor.items.get(item.id)!==item))throw Error('Owned embedded item identity is required.');
    const kind=metapowerKind(item),profile=validatePowerAdmission(item,{kind:state.armed?.kind,selection:payload.selection});
@@ -101,6 +102,7 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
     r.paymentPaid=true;
    }
    r.status=payload.status;r.messageUuid=payload.messageUuid??r.messageUuid??null;state.pending=null;
+   if(r.status==='committed'&&r.messageUuid)r.delivery={status:'pending',attempts:0};
    if(r.status!=='cancelled'){
     if(state.armed?.nonce===r.activationNonce)state.armed=null;
     if(r.status==='committed'&&r.kind&&r.turn===turnIdentity(game,actor))state.armed={nonce:r.nonce,kind:r.kind,itemUuid:r.itemUuid,sourceUuid:r.sourceUuid,sequence:r.sequence,turn:r.turn,messageUuid:r.messageUuid};
@@ -112,6 +114,13 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
    if(user.id!==game.users.activeGM?.id)throw Error('Only the active GM can reconcile an abandoned native invocation.');
    const r=state.receipts[payload.nonce];if(!r||state.pending!==r.nonce||!['reserved','started'].includes(r.status)||payload.confirmation!=='archive-uncertain')throw Error('The original pending invocation and explicit uncertain resolution are required.');
    r.status='uncertain';r.reconciledBy=user.id;state.pending=null;if(state.armed?.nonce===r.activationNonce)state.armed=null;return r;
+  }),
+  delivery:(payload,user)=>mutate(payload,user,(_actor,state)=>{
+   if(user.id!==game.users.activeGM?.id)throw Error('Only the active GM can deliver committed native follow-up.');
+   const r=state.receipts[payload.nonce];if(r?.status!=='committed'||!r.messageUuid||!r.delivery)throw Error('Original committed channel delivery is unavailable.');
+   if(r.delivery.status==='done')return r;
+   if(!['started','pending','done'].includes(payload.status))throw Error('Invalid channel delivery status.');
+   r.delivery={...r.delivery,status:payload.status,...(payload.status==='started'?{attempts:r.delivery.attempts+1}:{}),...(payload.confirmation==='gm-manual-effects-settled'?{manuallySettled:true,resolvedBy:user.id}:{}),error:payload.status==='pending'?String(payload.error??'Interrupted native follow-up').slice(0,500):null};return r;
   }),
   expire:(payload,user)=>mutate(payload,user,(_actor,state)=>state.armed),
  };

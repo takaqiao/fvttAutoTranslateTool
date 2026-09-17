@@ -26,8 +26,17 @@ test('retained discharge degree downgrade augments native save arithmetic and pr
  assert.equal(context.dosAdjustments.length,1);assert.equal(api.adjustMetapowerCheckContext({saveDowngrade:1},{type:'attack-roll'}).dosAdjustments,undefined);
 });
 test('Electric Shot half-failure application is confined to its bound recipient through native alter',async()=>{
- const snapshot={powerId:'electric-shot',itemUuid:'Actor.a.Item.i'},actor={uuid:'Actor.a',flags:{[ID]:{metapower:{receipts:{n:{status:'committed',messageUuid:'ChatMessage.c',snapshot}}}}}},card={uuid:'ChatMessage.c',flags:{[ID]:{metapowerUse:{nonce:'n'}},pf2e:{origin:{uuid:snapshot.itemUuid}}}};
- const proof={actorUuid:actor.uuid,cardId:'c',nonce:'n',targetActorUuid:'Actor.target'},damage={options:{[ID]:{metapowerShotFailure:proof}}},p=api.createMetapowerProvider({game:{messages:new Map([['c',card]])},fromUuid:async()=>actor});
- assert.equal(await p.beforeDamage({uuid:'Actor.target'},{damage}),null);await assert.rejects(p.beforeDamage({uuid:'Actor.other'},{damage}),/recipient/i);
+ const snapshot={powerId:'electric-shot',itemUuid:'Actor.a.Item.i'},actor={uuid:'Actor.a',flags:{[ID]:{metapower:{receipts:{n:{status:'committed',messageUuid:'ChatMessage.c',snapshot,selection:{targetUuids:['Scene.s.Token.t']}}}}}}},card={uuid:'ChatMessage.c',flags:{[ID]:{metapowerUse:{nonce:'n'}},pf2e:{origin:{uuid:snapshot.itemUuid}}}};
+ const proof={actorUuid:actor.uuid,cardId:'c',nonce:'n',targetActorUuid:'Actor.target',targetTokenUuid:'Scene.s.Token.t'},token={uuid:'Scene.s.Token.t',actor:{uuid:'Actor.target'}},damage={options:{[ID]:{metapowerShotFailure:proof}}},p=api.createMetapowerProvider({game:{messages:new Map([['c',card]])},fromUuid:async uuid=>uuid===token.uuid?token:actor});
+ assert.equal(await p.beforeDamage({uuid:'Actor.target'},{damage,token}),null);await assert.rejects(p.beforeDamage({uuid:'Actor.other'},{damage,token}),/recipient/i);
+ actor.flags[ID].metapower.receipts.n.selection.targetUuids=['Scene.s.Token.other'];await assert.rejects(p.beforeDamage({uuid:'Actor.target'},{damage,token}),/recipient/i);
  const altered=api.preserveMetapowerOnAlter(damage,{options:{}});assert.deepEqual(altered.options[ID].metapowerShotFailure,proof);assert.notEqual(altered.options[ID].metapowerShotFailure,proof);
+});
+test('GM resumes durable downstream delivery for an offline original owner without replaying settled effects',async()=>{
+ const gm={id:'gm'},owner={id:'owner',active:false},users=new Map([[gm.id,gm],[owner.id,owner]]);users.activeGM=gm;
+ const receipt={nonce:'n',actorUuid:'Actor.a',userId:owner.id,status:'committed',messageUuid:'ChatMessage.c',delivery:{status:'pending',attempts:0}},actor={uuid:'Actor.a',id:'a',flags:{[ID]:{metapower:{receipts:{n:receipt}}}},testUserPermission:u=>u===gm||u===owner,async update(data){this.flags[ID].metapower=structuredClone(data[`flags.${ID}.metapower`])}},message={uuid:'ChatMessage.c',speaker:{actor:'a'},flags:{[ID]:{metapowerUse:{nonce:'n'}}},async update(){}};
+ const errors=[],effects=new Set();let calls=0;
+ const p=api.createMetapowerProvider({game:{user:gm,users},fromUuid:async uuid=>uuid===actor.uuid?actor:message,onError:error=>errors.push(error.message),onCommittedChannel:async({receipt:r,user})=>{assert.equal(user,owner);calls++;effects.add(r.nonce);if(calls===1)throw Error('interrupted after native resource write')}});
+ const payload={actorUuid:actor.uuid,nonce:'n'};await Promise.all([p.deliverCommitted(payload),p.deliverCommitted(payload)]);assert.equal(calls,1);assert.equal(actor.flags[ID].metapower.receipts.n.delivery.status,'pending');
+ await p.deliverCommitted(payload);await p.deliverCommitted(payload);assert.equal(calls,2);assert.equal(effects.size,1);assert.equal(actor.flags[ID].metapower.receipts.n.delivery.status,'done');assert.equal(errors.length,1);
 });

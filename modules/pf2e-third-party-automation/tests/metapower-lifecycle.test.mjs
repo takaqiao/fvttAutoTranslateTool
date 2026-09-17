@@ -12,7 +12,7 @@ function fixture(){
  return {game,actor,user,siphon,widen,power,documents,service:()=>api.createMetapowerLedger({game,fromUuid:async uuid=>documents.get(uuid)})};
 }
 const begin=(service,f,item,nonce,extra={})=>service.begin({actorUuid:f.actor.uuid,itemUuid:item?.uuid??null,nonce,...extra},f.user);
-async function finish(service,f,receipt,item){const message={id:'m'+receipt.nonce,uuid:'ChatMessage.m'+receipt.nonce,speaker:{actor:f.actor.id},author:f.user,flags:{pf2e:{origin:{uuid:item.uuid}},[ID]:{metapowerUse:{nonce:receipt.nonce,actorUuid:f.actor.uuid,itemUuid:item.uuid}}}};f.documents.set(message.uuid,message);return service.finish({actorUuid:f.actor.uuid,nonce:receipt.nonce,messageUuid:message.uuid,status:'committed'},f.user)}
+async function finish(service,f,receipt,item){const message={id:'m'+receipt.nonce,uuid:'ChatMessage.m'+receipt.nonce,speaker:{actor:f.actor.id},author:f.user,flags:{pf2e:{origin:{uuid:item.uuid}},[ID]:{metapowerUse:{nonce:receipt.nonce,actorUuid:f.actor.uuid,itemUuid:item.uuid}}}};f.documents.set(message.uuid,message);const result=await service.finish({actorUuid:f.actor.uuid,nonce:receipt.nonce,messageUuid:message.uuid,status:'committed'},f.user);await service.delivery({actorUuid:f.actor.uuid,nonce:receipt.nonce,status:'done'},f.game.user);return result}
 test('durable original-card activation, replay binding and replacement',async()=>{
  assert.equal(typeof api.createMetapowerLedger,'function');const f=fixture(),s=f.service();const r=await begin(s,f,f.siphon,'one');await finish(s,f,r,f.siphon);
  assert.equal(f.actor.flags[ID].metapower.armed.nonce,'one');
@@ -97,4 +97,11 @@ test('actor encounter identity survives viewing another combat and ignores unrel
  f.game.combat={id:'viewed-other',started:true,round:8,turn:3,combatants:new Map()};
  const channel=await begin(s,f,f.power,'two',{selection:{discharge:false,baseDistance:30}});assert.equal(channel.snapshot.kind,'widen');assert.equal(channel.turn,'combat:1:0:turn');
  assert.equal(api.turnIdentity(f.game,{uuid:'Actor.not-participant'}),null);
+});
+test('committed card persists pending delivery before unlock and only GM can mark follow-up complete',async()=>{
+ const f=fixture(),s=f.service(),r=await begin(s,f,f.widen,'delivery'),m={uuid:'ChatMessage.delivery',speaker:{actor:f.actor.id},author:f.user,flags:{pf2e:{origin:{uuid:f.widen.uuid}},[ID]:{metapowerUse:{nonce:r.nonce,actorUuid:f.actor.uuid,itemUuid:f.widen.uuid}}}};f.documents.set(m.uuid,m);
+ const committed=await s.finish({actorUuid:f.actor.uuid,nonce:r.nonce,messageUuid:m.uuid,status:'committed'},f.user);assert.equal(committed.delivery.status,'pending');assert.equal(f.actor.flags[ID].metapower.pending,null);
+ await assert.rejects(begin(f.service(),f,null,'next'),/follow-up|recovery/i);await assert.rejects(s.delivery({actorUuid:f.actor.uuid,nonce:r.nonce,status:'done'},f.user),/GM/i);
+ await s.delivery({actorUuid:f.actor.uuid,nonce:r.nonce,status:'started'},f.game.user);await f.service().delivery({actorUuid:f.actor.uuid,nonce:r.nonce,status:'done'},f.game.user);
+ assert.equal((await begin(f.service(),f,null,'next')).status,'reserved');
 });
