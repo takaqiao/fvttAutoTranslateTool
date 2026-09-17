@@ -20,9 +20,10 @@ export function getNativeCastEvents(options={}){
 
 export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messageTimeoutMs=15000}={}){
  const castMiddlewares=new Set(),actorUpdateMiddlewares=new Set();
+ const invocationAdapters=new Map(),enrollments=new Map(),slotRequests=new Map();
  const queue=new SerialActions(),localCasts=new SerialActions(),matchers=new Set(),activityMatchers=new Set(),actorMatchers=new Set(),consumePolicies=new Set(),paidCastPolicies=new Set(),captures=new Map(),scopes=new Map(),messageInvocations=new WeakMap();
  // A local capability, never serialized or accepted from a socket payload.
- const nativeCapability=Object.freeze({});let socket,installed=false,focusCall=null;
+ const nativeCapability=Object.freeze({});let socket,installed=false,focusCall=null,slotCall=null,slotHookAvailable=false;
  const focusRequests=new Map();
  const matches=item=>[...matchers].some(match=>match(item));
  const managed=actor=>[...actorMatchers].some(match=>match(actor))||values(actor?.items).some(matches);
@@ -31,6 +32,25 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
  const ledger=actor=>actor.flags?.[MODULE_ID]?.nativeCasts??[];
  const save=(actor,receipts)=>{if(!gm(game))throw Error('主GM已切换，停止旧客户端的施法资源操作。');return actor.update({[`flags.${MODULE_ID}.nativeCasts`]:receipts});};
  const owner=(actor,user)=>{if(!gm(game)||!user||!actor?.testUserPermission?.(user,'OWNER'))throw Error('施法资源必须由主GM验证角色所有者后结算。');};
+ const equal=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+ function invocationGM(invocation){if(!invocation||!gm(game)||invocation.gmId!==game.user.id)throw Error('原生施法调用的主GM已改变。');}
+ function liveEnrollment(scope){
+  const item=scope.item,actor=item.actor,original=item.original??item;
+  if(enrollments.get(scope.castNonce)!==scope||scope.closed||scope.user!==game.user||scope.user.active!==true||game.users.activeGM?.id!==scope.invocation.gmId||game.actors?.get(actor.id)!==actor||actor.items.get(original.id)!==original||actor.items.get(scope.entry.id)!==scope.entry||!actor.testUserPermission(scope.user,'OWNER')||!sameInput(scope.input,input(item,scope.options))||scope.options.messageMode!=='public')throw Error('本次原生施法的调用能力已失效。');
+  const token=sourceToken(actor);if(token.tokenUuid!==scope.tokenContext.tokenUuid||token.token!==scope.tokenContext.token)throw Error('本次施法的准确来源Token已改变。');
+ }
+ function invocationProof(payload,sender){
+  const scope=enrollments.get(payload?.id);
+  if(!scope||sender!==game.users.activeGM?.id||sender!==scope.invocation.gmId||payload.userId!==scope.user.id||!sameInput(scope.input,payload)||payload.messageMode!==scope.input.messageMode||!equal(scope.invocation,payload.invocation)||payload.nativeCastScope?.castNonce!==scope.castNonce||payload.nativeCastScope?.tokenUuid!==scope.tokenContext.tokenUuid)return false;
+  try{liveEnrollment(scope);return true;}catch{return false;}
+ }
+ async function verifyInvocation(payload,user){
+  invocationGM(payload.invocation);
+  if(user?.active!==true||!invocationAdapters.has(payload.invocation.kind))throw Error('原生施法适配或操作者无效。');
+  const request={...copy(payload),userId:user.id};
+  const proof=user.id===game.user.id?invocationProof(request,game.user.id):await socket?.executeAsUser('native-cast-invocation-proof',user.id,request);
+  invocationGM(payload.invocation);if(proof!==true)throw Error('原操作者没有本次真实施法调用，未授权支付。');
+ }
  function input(item,{rank=item.rank,slotId}={}){
   return {actorUuid:item.actor.uuid,itemUuid:item.uuid,sourceId:source(item),entryUuid:item.spellcasting?.uuid??item.actor.items.get(item.system.location?.value)?.uuid,
    rank,slotId:slotId??null,focusPoints:item.system.cast?.focusPoints??0,overlayIds:values(item.appliedOverlays)};
@@ -39,8 +59,9 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
   const actor=await fromUuid(payload?.actorUuid);owner(actor,user);
   let item=await fromUuid(payload.itemUuid);const entry=await fromUuid(payload.entryUuid);
   if(item?.type!=='spell'||item.actor?.uuid!==actor.uuid||source(item)!==payload.sourceId||entry?.type!=='spellcastingEntry'||entry.actor?.uuid!==actor.uuid||item.system.location?.value!==entry.id)throw Error('施法者、法术来源或施法条目不匹配。');
-  if(!matches(item)&&!managed(actor))throw Error('此法术不属于已启用的施法资源适配。');
+  if(!matches(item)&&!managed(actor)&&!invocationAdapters.has(payload.invocation?.kind))throw Error('此法术不属于已启用的施法资源适配。');
   if(!Number.isInteger(payload.rank)||payload.rank<1||payload.rank>10||payload.slotId!==null&&(!Number.isInteger(payload.slotId)||payload.slotId<0))throw Error('实际施法环级或法术位编号无效。');
+  if(payload.invocation&&(payload.messageMode!=='public'||payload.invocation.data?.messageMode!=='public'))throw Error('本次施法调用没有明确的公开消息模式。');
   if(payload.overlayIds?.length||item.rank!==payload.rank)item=item.loadVariant?.({castRank:payload.rank,overlayIds:payload.overlayIds??[]})??item;
   if((item.system.cast?.focusPoints??0)!==payload.focusPoints)throw Error('施法增幅配置已改变，请按当前配置重新使用法术。');
   return {actor,item,entry};
@@ -49,11 +70,17 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
   const actor=await fromUuid(payload?.actorUuid);owner(actor,user);
   return queue.run(actor.uuid,async()=>{
    const {item,entry}=await resolve(payload,user);
+   if(payload.invocation)await verifyInvocation(payload,user);
    const existing=ledger(actor).find(r=>r.id===payload.id);
    if(existing){
-    if(existing.itemUuid!==item.uuid||existing.userId!==user.id||!sameInput(existing,payload)||JSON.stringify(existing.activity??null)!==JSON.stringify(activity)||JSON.stringify(existing.nativeCastScope??null)!==JSON.stringify(payload.nativeCastScope??null))throw Error('支付回执参数不匹配。');
+    if(existing.itemUuid!==item.uuid||existing.userId!==user.id||!sameInput(existing,payload)||JSON.stringify(existing.activity??null)!==JSON.stringify(activity)||JSON.stringify(existing.nativeCastScope??null)!==JSON.stringify(payload.nativeCastScope??null)||!equal(existing.invocation??null,payload.invocation??null))throw Error('支付回执参数不匹配。');
     if(!['paid','used'].includes(existing.state))throw Error('原生支付结果未能确认，不会重复扣款。');
     return copy(existing);
+   }
+   const adapter=payload.invocation?invocationAdapters.get(payload.invocation.kind):null;
+   if(adapter){
+    const context={actor,item,entry,user,payload:copy(payload),castNonce:payload.id,invocation:copy(payload.invocation)};
+    if(await adapter.validate(context)!==true)throw Error('本次施法适配未通过主GM验证。');invocationGM(payload.invocation);owner(actor,user);
    }
    if(payload.nativeCastScope){
     const scope=payload.nativeCastScope,token=scope.tokenUuid?await fromUuid(scope.tokenUuid):null;
@@ -65,24 +92,33 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
    // later casts. Used receipts can be bounded because their cards hold proof;
    // a missing old proof is rejected, never treated as a fresh payment.
    const rejectedNative=r=>r.state==='rejected'&&!/^(chat|activity):/.test(r.id);
-   await save(actor,[...ledger(actor).filter(r=>r.state!=='used'&&!rejectedNative(r)),...ledger(actor).filter(rejectedNative).slice(-99),...ledger(actor).filter(r=>r.state==='used').slice(-199),receipt]);
+   const claimed=await save(actor,[...ledger(actor).filter(r=>r.state!=='used'&&!rejectedNative(r)),...ledger(actor).filter(rejectedNative).slice(-99),...ledger(actor).filter(r=>r.state==='used').slice(-199),receipt]);
+   if(payload.invocation){invocationGM(payload.invocation);if(claimed!==actor||!equal(ledger(actor).find(r=>r.id===receipt.id),receipt))throw Error('本次原生施法认领未能持久保存，未开始消费。');}
    let enteredNative=false;
    try{
     // PF2e's own consume covers focus, prepared, spontaneous and innate usage.
     // Its cast method explicitly exempts at-will spells; preserve that contract.
-    let focusRequest;
-    const context={actor,item,entry,user,payload:copy(payload),expectFocusCommit:({before,cost,changes})=>{
+    let focusRequest,slotRequest;
+    const context={actor,item,entry,user,payload:copy(payload),castNonce:payload.id,invocation:copy(payload.invocation??null),expectFocusCommit:({before,cost,changes})=>{
      if(enteredNative||focusRequest||!Number.isInteger(before)||!Number.isInteger(cost)||cost<1||before<cost||cost!==payload.focusPoints||typeof changes!=='function')throw Error('原生聚能提交配置无效或重复。');
      focusRequest={actor,item,entry,before,cost,changes,castNonce:payload.id,captured:false};
+    },expectSlotCommit:({before,cost=1,changes})=>{
+     if(!payload.invocation||enteredNative||slotRequest||!slotHookAvailable||entry.isSpontaneous!==true||!Number.isInteger(payload.rank)||payload.rank<1||payload.rank>3||payload.slotId!==null||payload.focusPoints!==0||item.atWill||item.isCantrip||!Number.isInteger(before)||before<1||cost!==1||typeof changes!=='function')throw Error('原生法术位提交配置无效或重复。');
+     slotRequest={actor,item,entry,before,cost,rank:payload.rank,changes,castNonce:payload.id,userId:user.id,gmId:payload.invocation.gmId,captured:false,witness:false,returned:false};
     }};
-    const native=async()=>{owner(actor,user);if(enteredNative)throw Error('同一施法只能调用一次原生资源消费，拒绝重复支付。');enteredNative=true;return item.atWill||await entry.consume(item,payload.rank,payload.slotId??undefined,nativeCapability);};
-    const consume=[...consumePolicies].reduceRight((next,policy)=>()=>policy(context,next),native);
+    const native=async()=>{owner(actor,user);if(payload.invocation){invocationGM(payload.invocation);if(user.active!==true||actor.items.get((item.original??item).id)!==(item.original??item)||actor.items.get(entry.id)!==entry||source(item)!==payload.sourceId||!slotRequest)throw Error('本次原生施法的来源或法术位提交见证已失效。');}if(enteredNative)throw Error('同一施法只能调用一次原生资源消费，拒绝重复支付。');enteredNative=true;return item.atWill||await entry.consume(item,payload.rank,payload.slotId??undefined,nativeCapability);};
+    const consume=[...consumePolicies,...(adapter?[adapter.consumePolicy]:[])].reduceRight((next,policy)=>()=>policy(context,next),native);
     // The request is exposed only while this exact native entry is invoked.
     // A policy cannot forge the private capability used by its consume call.
-    const invoke=async()=>{focusRequests.set(actor.uuid,()=>focusRequest);try{return await consume();}finally{focusRequests.delete(actor.uuid);}};
+    const invoke=async()=>{focusRequests.set(actor.uuid,()=>focusRequest);slotRequests.set(actor.uuid,()=>slotRequest);try{return await consume();}finally{focusRequests.delete(actor.uuid);slotRequests.delete(actor.uuid);}};
     const paid=await invoke();
     if(paid&&!enteredNative)throw Error('施法支付策略未执行原生资源消费。');
     if(paid&&focusRequest&&!focusRequest.captured)throw Error('原生聚能写入未能绑定本次同步消费；支付不确定，不会推断或重试。');
+    if(payload.invocation)invocationGM(payload.invocation);
+    if(paid&&slotRequest){
+     if(!slotRequest.captured||!slotRequest.witness||!slotRequest.returned||!equal(entry.flags?.[MODULE_ID]?.nativeSlotCommit,slotRequest.proof)||entry.system.slots[`slot${slotRequest.rank}`].value!==slotRequest.before-slotRequest.cost)throw Error('原生法术位写入未获得同步调用、实际更新和持久回执的共同证明。');
+     receipt.slotCommit=copy(slotRequest.proof);
+    }
     receipt.state=paid?(matches(item)||activity||payload.nativeCastScope?'paid':'used'):'rejected';
     await save(actor,ledger(actor).map(r=>r.id===receipt.id?receipt:r));
     owner(actor,user);
@@ -112,6 +148,7 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
   return queue.run(actor.uuid,async()=>{
    owner(actor,user);
    const receipt=ledger(actor).find(r=>r.id===payload.id);
+   if(receipt?.invocation)invocationGM(receipt.invocation);
    if(!receipt||receipt.userId!==user.id||!sameInput(receipt,payload.input)||receipt.nativeCastScope?.castNonce!==receipt.id||receipt.activity||receipt.messageId||!['disrupted','uncertain','used'].includes(payload.state))throw Error('无法确认本次原生施法中断的支付来源。');
    if(receipt.state===payload.state)return copy(receipt);
    if(!['paid','used'].includes(receipt.state))throw Error('原生施法已结束或支付结果不确定，不会重复结算。');
@@ -128,6 +165,29 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
   if(!socket||!game.users.activeGM)throw Error('原生施法中断结算需要在线主GM。');
   const response=await socket.executeAsUser('native-cast-outcome',game.users.activeGM.id,payload);
   if(!response?.ok)throw Error(response?.error??'原生施法中断结算未能确认。');return response.value;
+ }
+ async function bindInvocation(payload,user){
+  const actor=await fromUuid(payload.input?.actorUuid);owner(actor,user);
+  return queue.run(actor.uuid,async()=>{
+   owner(actor,user);const prior=ledger(actor).find(r=>r.id===payload.id);
+   if(!prior?.invocation||!prior.slotCommit||prior.userId!==user.id||!sameInput(prior,payload.input)||!equal(prior.invocation,payload.invocation)||!['paid','used'].includes(prior.state))throw Error('本次调用没有已证实的法术位支付，不能绑定消息。');
+   await verifyInvocation({...prior},user);owner(actor,user);
+   const message=await fromUuid(`ChatMessage.${payload.messageId}`),proof=message?.flags?.[MODULE_ID]?.nativeCast;
+   invocationGM(prior.invocation);
+   if(!message?.id||game.messages.get(message.id)!==message||author(message)!==user.id||message.rolls?.length||message.isRoll||message.blind!==false||!Array.isArray(message.whisper)||message.whisper.length||proof?.id!==prior.id||proof.actorUuid!==actor.uuid||proof.itemUuid!==prior.itemUuid||proof.userId!==user.id||message.flags?.pf2e?.origin?.uuid!==prior.itemUuid||message.flags.pf2e.origin.actor!==actor.uuid||!sameInput(message.flags?.[MODULE_ID]?.nativeCastInput??{},prior)||message.flags[MODULE_ID].nativeCastInput.messageMode!==prior.messageMode||prior.messageId&&prior.messageId!==message.id)throw Error('原生施法消息与本次调用的支付来源不一致。');
+   const bound={...prior,state:'used',messageId:message.id};
+   await save(actor,ledger(actor).map(r=>r.id===prior.id?bound:r));invocationGM(prior.invocation);
+   const persisted=ledger(actor).find(r=>r.id===prior.id);
+   if(!equal(persisted,bound))throw Error('原生施法原卡绑定未持久保存。');return copy(persisted);
+  });
+ }
+ async function completeInvocation(scope,nativeResult){
+  liveEnrollment(scope);
+  if(!scope.receipt?.slotCommit||!scope.finalMessage||scope.error||scope.messageError)throw Error('本次施法没有完整的原生付款和原卡结果。');
+  const payload={id:scope.castNonce,input:copy(scope.input),invocation:copy(scope.invocation),messageId:scope.finalMessage.id};
+  const response=gm(game)?{ok:true,value:await bindInvocation(payload,scope.user)}:await socket?.executeAsUser('native-cast-invocation-bind',scope.invocation.gmId,payload);
+  liveEnrollment(scope);if(!response?.ok)throw Error(response?.error??'本次施法原卡绑定未获主GM确认。');scope.receipt=response.value;
+  return {status:'completed',castNonce:scope.castNonce,input:copy(scope.input),receipt:copy(scope.receipt),message:scope.finalMessage,nativeResult};
  }
  async function uncertainCast(scope,error){
   const failure=asError(error);scope.error=failure;
@@ -153,7 +213,7 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
      return false;
     }
    }
-   if(!matches(scope.item))scope.receipt=await remoteFinishPaidCast(scope,'used');
+   if(!matches(scope.item)&&!scope.invocation)scope.receipt=await remoteFinishPaidCast(scope,'used');
    return true;
   }catch(error){
    await uncertainCast(scope,error);
@@ -164,15 +224,17 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
  }
  async function consumeForCast(scope,request){
   try{
-   const receipt=await remotePay({...request,id:scope?.castNonce??id(),...(scope?.policies.length?{nativeCastScope:{castNonce:scope.castNonce,tokenUuid:scope.tokenContext.tokenUuid}}:{})});
+   const receipt=await remotePay({...request,id:scope?.castNonce??id(),...(scope?.policies.length||scope?.invocation?{nativeCastScope:{castNonce:scope.castNonce,tokenUuid:scope.tokenContext.tokenUuid}}:{}),...(scope?.invocation?{invocation:copy(scope.invocation)}:{})});
    if(scope)scope.receipt=receipt;
+   if(scope?.invocation)liveEnrollment(scope);
    if(scope?.error&&!scope.policies.length)return false;
    return scope?.policies.length?applyPaidCastPolicies(scope):true;
   }catch(error){if(error?.code==='NATIVE_CAST_REJECTED'||/资源不足|无法支付/.test(error?.message)){globalThis.ui?.notifications?.warn?.(error.message);return false;}if(scope){scope.error=asError(error);return false;}throw error;}
  }
  function captureUsage(item,{options={}}={}){
-  const current=options.actualCast&&scopes.get(item.uuid),scope=current&&!current.policyPending&&!current.terminal&&!current.error?current:null;
+  const current=options.actualCast&&scopes.get(item.uuid),scope=current&&(!current.invocation||current.item===item)&&!current.policyPending&&!current.terminal&&!current.error?current:null;
   if(!matches(item)&&!scope)return null;
+  if(scope?.invocation)liveEnrollment(scope);
   if(scope?.receipt&&options.actualCast===true)messageInvocations.set(options,{scope,item,actor:item.actor,nonce:scope.castNonce});
   const captured=scope?.captured??captureData(item);
   return {...copy(captured),nativeCastInput:copy(scope?.input??input(item,{rank:options.data?.castRank??item.rank})),
@@ -270,10 +332,26 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
    return copy({...receipt,state:'used',messageId:message.id});
   });
  }
- function register({libWrapper=globalThis.libWrapper,socket:socketApi}={}){
+ function register({libWrapper=globalThis.libWrapper,socket:socketApi,Hooks=globalThis.Hooks}={}){
   if(installed)return ()=>{};if(!libWrapper)throw Error('施法资源适配需要 libWrapper。');installed=true;socket=socketApi;
   socket?.register('native-cast-pay',async function(payload){try{return {ok:true,value:await pay(payload,game.users.get(this.socketdata.userId))};}catch(error){return {ok:false,error:error.message,code:error.code};}});
   socket?.register('native-cast-outcome',async function(payload){try{return {ok:true,value:await finishPaidCast(payload,game.users.get(this.socketdata.userId))};}catch(error){return {ok:false,error:error.message};}});
+  socket?.register('native-cast-invocation-proof',function(payload){return invocationProof(payload,this.socketdata.userId)});
+  socket?.register('native-cast-invocation-bind',async function(payload){try{return {ok:true,value:await bindInvocation(payload,game.users.get(this.socketdata.userId))};}catch(error){return {ok:false,error:error.message};}});
+  slotHookAvailable=typeof Hooks?.on==='function';
+  const slotHook=Hooks?.on?.('updateItem',(entry,changes,options,userId)=>{
+   const request=slotRequests.get(entry.actor?.uuid)?.();
+   if(!request?.captured||entry!==request.entry||userId!==request.gmId)return;
+   const marker=options?.[MODULE_ID]?.nativeSlotCommit,proof=changes[`flags.${MODULE_ID}.nativeSlotCommit`]??changes.flags?.[MODULE_ID]?.nativeSlotCommit;
+   const after=changes[`system.slots.slot${request.rank}.value`]??changes.system?.slots?.[`slot${request.rank}`]?.value;
+   if(equal(marker,request.proof)&&equal(proof,request.proof)&&after===request.proof.after)request.witness=true;
+  });
+  const publicationHook=Hooks?.on?.('preCreateChatMessage',message=>{
+   const own=message.flags?.[MODULE_ID],scope=enrollments.get(own?.nativeCast?.id);
+   if(!scope)return;
+   try{liveEnrollment(scope);if(!sameInput(own.nativeCastInput??{},scope.input)||message.flags?.pf2e?.origin?.uuid!==scope.item.uuid)throw Error('本次原生施法卡来源已改变。');}
+   catch(error){scope.messageError=asError(error);return false;}
+  });
   const paths=[];const wrap=(path,fn)=>{libWrapper.register(MODULE_ID,path,fn,'MIXED');paths.push(path);};
   wrap('CONFIG.Actor.documentClass.prototype.update',function(wrapped,changes={},options={}){
    const actor=this;
@@ -293,17 +371,31 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
    const invoke=(index,changes,options)=>index===chain.length?original(changes,options):chain[index].call(actor,(nextChanges,nextOptions)=>invoke(index+1,nextChanges,nextOptions),changes,options);
    return invoke(0,changes,options);
   });
+  wrap('CONFIG.PF2E.Item.documentClasses.spellcastingEntry.prototype.update',function(wrapped,changes={},options={}){
+   const request=slotCall,path=request?`system.slots.slot${request.rank}.value`:null;
+   const after=request?(changes[path]??changes.system?.slots?.[`slot${request.rank}`]?.value):undefined;
+   if(!request||this!==request.entry||after===undefined)return wrapped(changes,options);
+   if(request.captured||game.user.id!==request.gmId||game.users.activeGM?.id!==request.gmId||this.system.slots[`slot${request.rank}`].value!==request.before||after!==request.before-request.cost)throw Error('原生法术位写入的来源、次数或金额已改变。');
+   const proof={castNonce:request.castNonce,itemUuid:request.item.uuid,entryUuid:this.uuid,rank:request.rank,before:request.before,after,cost:request.cost,userId:request.userId,gmId:request.gmId};
+   const extra=request.changes(Object.freeze(proof)),markerPath=`flags.${MODULE_ID}.nativeSlotCommit`;
+   if(!extra||typeof extra!=='object'||Object.keys(extra).some(key=>!key.startsWith(`flags.${MODULE_ID}.`)||key===markerPath||Object.hasOwn(changes,key))||Object.hasOwn(changes,markerPath)||changes.flags?.[MODULE_ID]?.nativeSlotCommit)throw Error('原生法术位提交扩展只能附加自身回执。');
+   request.captured=true;request.proof=proof;
+   const result=wrapped({...changes,...extra,[markerPath]:proof},{...options,[MODULE_ID]:{...options[MODULE_ID],nativeSlotCommit:proof}});
+   return Promise.resolve(result).then(doc=>{request.returned=doc===request.entry;return doc;});
+  });
   wrap('CONFIG.PF2E.Item.documentClasses.spellcastingEntry.prototype.cast',async function(wrapped,item,options={}){
+   let enrollment=null,invocationOpen=true;
    const nativeEntry=async()=>{
-   if(!matches(item)&&!managed(item.actor))return wrapped(item,options);
+   if(!matches(item)&&!managed(item.actor)&&!enrollment)return wrapped(item,options);
    const policies=options.consume!==false&&options.message!==false?[...paidCastPolicies]:[];
-   const scope={item,entry:this,user:game.user,castNonce:id(),policies,tokenContext:policies.length?sourceToken(item.actor):{},input:input(item,options),targets:[...new Set(values(game.user.targets).map(t=>t.document?.uuid??t.uuid).filter(Boolean))],captured:captureData(item)};
+   const scope={item,entry:this,options,user:game.user,castNonce:id(),policies,tokenContext:policies.length||enrollment?sourceToken(item.actor):{},input:{...input(item,options),...(enrollment?{messageMode:options.messageMode}:{})},targets:[...new Set(values(game.user.targets).map(t=>t.document?.uuid??t.uuid).filter(Boolean))],captured:captureData(item),...(enrollment?{invocation:enrollment}:{})};
    scope.capturePromise=new Promise(resolve=>{scope.resolveCapture=resolve;});
    scope.consumeSignal=new Promise(resolve=>{scope.resolveConsume=resolve;});
    return localCasts.run(item.actor.uuid,async()=>{
     if(!sameInput(scope.input,input(item,options))||JSON.stringify(scope.captured)!==JSON.stringify(captureData(item)))throw Error('排队期间施法配置已改变，请重新使用法术。');
     scopes.set(item.uuid,scope);
     try{
+     if(enrollment){enrollments.set(scope.castNonce,scope);liveEnrollment(scope);if(scope.invocation.data.sourceTokenUuid!==scope.tokenContext.tokenUuid)throw Error('原生施法调用的来源Token与冻结分配不一致。');}
      // PF2e intentionally skips consume for at-will spells. Confirm that native
      // exemption through the same payment coordinator before running policies.
      if(policies.length&&item.atWill){
@@ -324,41 +416,66 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
      // Toolbelt 3.56's actionable cast wrapper starts native cast but omits its
      // return/await. Keep this exact scope until the already-started native
      // consume and its actualCast capture finish; no time/nearest-card guessing.
-     if(scope.consumeTask){const paid=await scope.consumeTask;if(scope.error)throw scope.error;if(scope.terminal)return scope.terminal;if(paid&&options.message!==false&&(matches(item)||scope.policies.length))return await finishMessage(scope,nativeTask);}
+     if(scope.consumeTask){const paid=await scope.consumeTask;if(scope.error)throw scope.error;if(scope.terminal)return enrollment?{status:'disrupted',castNonce:scope.castNonce,input:copy(scope.input),receipt:copy(scope.receipt),message:null,nativeResult:undefined}:scope.terminal;if(paid&&options.message!==false&&(matches(item)||scope.policies.length||enrollment)){const result=await finishMessage(scope,nativeTask);return enrollment?await completeInvocation(scope,result):result;}}
      if(scope.error)throw scope.error;
+     if(enrollment)throw Error('本次施法没有成功消费并生成准确原卡。');
      return await nativeTask;
     }catch(error){
-     if(scope.policies.length&&scope.receipt&&!scope.terminal&&!scope.error)throw await uncertainCast(scope,error);
+     if((scope.policies.length||enrollment)&&scope.receipt&&!scope.terminal&&!scope.error)throw await uncertainCast(scope,error);
      throw asError(error);
-    }finally{if(scopes.get(item.uuid)===scope)scopes.delete(item.uuid);}
+    }finally{if(scopes.get(item.uuid)===scope)scopes.delete(item.uuid);if(enrollment){scope.closed=true;enrollments.delete(scope.castNonce);}}
    });
    };
-   const chain=[...castMiddlewares],invoke=index=>index===chain.length?nativeEntry():chain[index]({item,options,entry:this},()=>invoke(index+1));
-   return invoke(0);
+   const chain=[...castMiddlewares],invoke=index=>{
+    if(index===chain.length)return nativeEntry();let continued=false;
+    const next=()=>{if(enrollment&&continued)throw Error('本次原生施法调用只能继续一次。');continued=true;return invoke(index+1)};
+    next.withOutcome=async({kind,data}={})=>{
+     if(!invocationOpen||continued||enrollment||!invocationAdapters.has(kind)||options.consume===false||options.message===false||!game.users?.activeGM?.id)throw Error('原生施法调用适配无效、重复或不是实际施法。');
+     const serialized=JSON.stringify(data);if(!serialized||serialized.length>16000||typeof data!=='object'||data===null||Array.isArray(data))throw Error('原生施法调用参数无效。');
+     if(data.messageMode!=='public'||(options.messageMode??game.settings?.get('core','messageMode'))!=='public')throw Error('本次施法调用只支持已选择的公开消息模式。');
+     options={...options,messageMode:'public'};
+     const original=item.original??item,Spell=globalThis.CONFIG?.PF2E?.Item?.documentClasses?.spell,rank=options.rank??item.rank;
+     if(typeof Spell!=='function'||!(item instanceof Spell)||!(original instanceof Spell)||original.actor.items.get(original.id)!==original||!Number.isInteger(rank)||rank<1||rank>3||values(item.appliedOverlays).length)throw Error('本次调用需要准确的原生法术或无覆盖升环实例。');
+     // PF8.5.1's native factory performs late preparation and binds .original.
+     // With no requested rank its same-rank path still creates a fresh instance.
+     const privateItem=original.loadVariant({castRank:rank})??original.loadVariant({});
+     if(!(privateItem instanceof Spell)||privateItem===original||privateItem===item||privateItem.original!==original||privateItem.actor!==item.actor||privateItem.uuid!==item.uuid||privateItem.rank!==rank||privateItem.spellcasting!==this||values(privateItem.appliedOverlays).length||source(privateItem)!==source(original))throw Error('原生法术未能提供独立的本次调用实例。');
+     item=privateItem;
+     enrollment={kind,data:JSON.parse(serialized),gmId:game.users.activeGM.id};
+     // A spontaneous button has no prepared-slot index; no other route changes.
+     if(this.isSpontaneous===true&&(options.slotId===undefined||Number.isNaN(options.slotId)))options={...options,slotId:null};
+     return next();
+    };
+    return chain[index]({item,options,entry:this},next);
+   };
+   try{return await invoke(0);}finally{invocationOpen=false;}
   });
   wrap('CONFIG.PF2E.Item.documentClasses.spellcastingEntry.prototype.consume',async function(wrapped,item,rank,slotId,capability){
    if(capability===nativeCapability){
-    const request=focusRequests.get(item.actor?.uuid)?.(),prior=focusCall;
+    const request=focusRequests.get(item.actor?.uuid)?.(),slotRequest=slotRequests.get(item.actor?.uuid)?.(),prior=focusCall,priorSlot=slotCall;
     if(request&&(request.actor!==item.actor||request.item!==item||request.entry!==this))throw Error('原生聚能消费对象已改变。');
     // PF2e 8.5.1 calls actor.update synchronously before its first await.
     // End the binding immediately when wrapped returns, never after its promise
     // settles: deferred/foreign updates cannot borrow a nearby payment scope.
     focusCall=request??null;
-    try{return wrapped(item,rank,slotId);}finally{focusCall=prior;}
+    if(slotRequest&&(slotRequest.item!==item||slotRequest.entry!==this||slotRequest.rank!==rank))throw Error('原生法术位消费对象已改变。');
+    slotCall=slotRequest??null;
+    try{return wrapped(item,rank,slotId);}finally{focusCall=prior;slotCall=priorSlot;}
    }
-   if(!matches(item)&&!managed(item.actor))return wrapped(item,rank,slotId);
    const current=scopes.get(item.uuid),scope=current?.item===item&&current.entry===this?current:null;
-   if(current?.policies.length&&(!scope||!sameInput(current.input,input(item,{rank,slotId})))){current.error=Error('原生施法对象、来源或参数在实际消费前发生变化，无法安全执行反应。');return false;}
+   if(!matches(item)&&!managed(item.actor)&&!scope?.invocation)return wrapped(item,rank,slotId);
+   if((current?.policies.length||current?.invocation)&&(!scope||!sameInput(current.input,input(item,{rank,slotId})))){current.error=Error('原生施法对象、来源或参数在实际消费前发生变化，无法安全执行反应。');return false;}
    if(scope?.consumeTask)return scope.consumeTask;
    const task=consumeForCast(scope,scope?.input??input(item,{rank,slotId}));
    if(scope)trackConsume(scope,task);return task;
   });
-  return ()=>{for(const path of paths)libWrapper.unregister(MODULE_ID,path);installed=false;};
+  return ()=>{for(const path of paths)libWrapper.unregister(MODULE_ID,path);if(slotHook!==undefined)Hooks?.off?.('updateItem',slotHook);if(publicationHook!==undefined)Hooks?.off?.('preCreateChatMessage',publicationHook);slotHookAvailable=false;installed=false;};
  }
  // Paid policies run on the initiating client outside the resource queue.
  // Return {disrupted:true,reason?,eventId?} to stop this live cast after payment;
  // undefined admits it. Explicit consume:false/message:false and activity/chat
  // payment flows are not native paid-cast events. Policies must validate any
  // unsupportedReason before using a source token for positional reactions.
- return {addActorUpdateMiddleware:middleware=>{actorUpdateMiddlewares.add(middleware);return()=>actorUpdateMiddlewares.delete(middleware)},withActorResourceLock:(actor,operation)=>queue.run(actor.uuid,operation),addCastMiddleware:middleware=>castMiddlewares.add(middleware),addMatcher:matcher=>matchers.add(matcher),addActivityMatcher:matcher=>activityMatchers.add(matcher),addActorMatcher:matcher=>actorMatchers.add(matcher),addConsumePolicy:policy=>consumePolicies.add(policy),addPaidCastPolicy:policy=>paidCastPolicies.add(policy),addCapture:(key,capture)=>captures.set(key,capture),captureUsage,captureMessageOutcome,ensurePaid,payForActivity,finishActivityWithoutSpell,register};
+ function addInvocationAdapter(kind,adapter){if(typeof kind!=='string'||!/^[-a-z0-9]{1,80}$/.test(kind)||invocationAdapters.has(kind)||typeof adapter?.validate!=='function'||typeof adapter?.consumePolicy!=='function')throw Error('原生施法调用适配注册无效或重复。');invocationAdapters.set(kind,Object.freeze({...adapter}));}
+ return {addInvocationAdapter,addActorUpdateMiddleware:middleware=>{actorUpdateMiddlewares.add(middleware);return()=>actorUpdateMiddlewares.delete(middleware)},withActorResourceLock:(actor,operation)=>queue.run(actor.uuid,operation),addCastMiddleware:middleware=>castMiddlewares.add(middleware),addMatcher:matcher=>matchers.add(matcher),addActivityMatcher:matcher=>activityMatchers.add(matcher),addActorMatcher:matcher=>actorMatchers.add(matcher),addConsumePolicy:policy=>consumePolicies.add(policy),addPaidCastPolicy:policy=>paidCastPolicies.add(policy),addCapture:(key,capture)=>captures.set(key,capture),captureUsage,captureMessageOutcome,ensurePaid,payForActivity,finishActivityWithoutSpell,register};
 }
