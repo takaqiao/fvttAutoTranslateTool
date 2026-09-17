@@ -45,8 +45,8 @@ test('copying a movement card cannot steal its original continuation',async()=>{
 test('default native Medicine clone preserves its check pipeline, pins target and avoids generic Counteract state',async()=>{const f=fixture({degree:3});const check=f.deps.rollCheck;f.actor.getStatistic=()=>({clone(data){assert.deepEqual(data.check.domains,['counteract-check']);return {check:{roll:async args=>{context=args;const receipt=await check({nonce:'use',dc:args.dc.value});await args.callback(receipt.roll,'criticalSuccess',receipt.message);}}};}});f.deps.rollCheck=undefined;let context;
  await createMedicActions(f.deps).executeUsage(f.context());assert.equal(context.token,f.healer);assert.deepEqual(context.target.getActiveTokens(true,true),[f.target]);assert.equal(context.target.uuid,f.patient.uuid);assert.equal(context.messageMode,'blind');assert.equal(context.dc.visible,false);assert.equal(context.dc.slug,'medicine');assert.equal(context.extraRollOptions.includes('counteract'),false);assert.equal(context.skipDialog,false);assert.equal(f.patient.items.has('condition'),false);
 });
-const nativePath=process.env.PF2E_NATIVE_BUNDLE??'C:/Users/Taka/Desktop/fvtt/output/bob-transfer-audit-20260917/resources/systems/pf2e/pf2e.mjs';
-const addonPath=process.env.FVTT_COUNTERACT_MAIN??'C:/Users/Taka/Desktop/fvtt/tmp/team-metapower-20260918/qa/runtime/Data/modules/pf2e-counteract/scripts/main.js';
+const nativePath=process.env.PF2E_NATIVE_BUNDLE??'';
+const addonPath=process.env.FVTT_COUNTERACT_MAIN??'';
 test('installed StatisticCheck applies Medicine-check modifiers, degree adjustment, fortune and hooks without Counteract addon contamination',{skip:!existsSync(nativePath)||!existsSync(addonPath)},async()=>{
  const source=readFileSync(nativePath,'utf8'),start=source.indexOf('StatisticCheck = class {'),end=source.indexOf(', StatisticDifficultyClass =',start),classCode=source.slice(start+'StatisticCheck = '.length,end);
  const f=fixture({degree:3}),nativeReceipt=f.deps.rollCheck;f.deps.rollCheck=undefined;const observed={before:0,after:0};

@@ -26,7 +26,7 @@ Activation, next-action ordering and channel finalization share the actor GM que
 
 Original-source cross-check on 2026-09-18 resolved Widen's cost: the Pathfinder 2e book, printed page 60 (PDF page 61), has a one-action glyph, and the Pathbuilder distribution's Widen feat has action: 1. Foundry's passive/missing cost is a data omission. Widen must use one action rather than an unresolved GM policy.
 
-The book's Charged definition (printed page 97) classifies discharge benefits as additional effects. A subsequent reply supplied by the user explicitly describes the range/save-degree interaction as ambiguous and personally favors retaining both as part of damage. The user adopts that ruling: retain discharge range increases and save downgrades under Siphoning. Preserve legal damage improvements and their discharge cost; remove added conditions. The reply does not explicitly resolve area enlargement or Reactive Chain's relaxed target eligibility; those retain the prior remove policy. Normal level-based range/area growth remains. Avoid automatically spending a charge for a branch whose only benefit has been removed. Immutable policy fields distinguish these effects instead of treating all non-damage benefits as one switch.
+The book's Charged definition (printed page 97) classifies discharge benefits as additional effects. Replies supplied by the user describe the range/save-degree interaction as ambiguous and favor retaining them as part of damage; a follow-up explicitly applies that reasoning to area enlargement. Following the user's adoption of that interpretation, retain discharge range increases, save downgrades and area enlargement under Siphoning. Preserve legal damage improvements and their discharge cost; remove added conditions. Reactive Chain's relaxed target eligibility remains unaddressed and retains the prior remove policy. Normal level-based range/area growth remains. Avoid automatically spending a charge for a branch whose only benefit has been removed. Immutable policy fields distinguish these effects instead of treating all non-damage benefits as one switch. Movement-dependent powers such as Ride the Lightning remain unaffected by Siphoning; this does not prevent their ordinary use.
 
 High Voltage policy is resolved by the user's explicit table ruling: allow Siphoning to transform its delayed damage and do not Refresh for that use. Normal High Voltage refreshes immediately on channel. Arm a durable, once-only window expiring at the user's next turn start; a legal hit/touch consumes it even if the subsequent save produces zero damage. Narrative touch requires an explicit confirmed event when no native event proves it. This policy is not presented as an unambiguous official RAW ruling. Relevant private source research is outside the release worktree.
 
@@ -35,11 +35,11 @@ Claudius additions: exact-source, idempotent repairs restore the existing handwr
 ## Execution
 
 - [x] Isolated worktree, authoritative baseline and 37 relevant baseline tests.
-- [ ] Task 1: Domain source profiles, native damage transformation and geometry policy; meaningful RED/GREEN tests and scoped review.
-- [ ] Task 2: Provider, entry/lifecycle integration, snapshot UI and side-effect integration; race/cancellation/ownership tests and scoped review.
-- [ ] Claudius additions: source-data repair, Treat Condition/Doctor's Visitation, High Voltage/Refresh; validate remaining electricity event gaps against real native receipts.
-- [ ] Task 3: Fresh local Foundry 14.368/PF2e 8.5.1 QA, normal use/real rolls/actual Regions/multiple clients and installed-module interaction checks.
-- [ ] Task 4: Whole-diff review, fixes, version/artifact validation, bounded commits, push and formal GitHub release.
+- [x] Task 1: Domain source profiles, native damage transformation and geometry policy; meaningful RED/GREEN tests and scoped review.
+- [x] Task 2: Provider, entry/lifecycle integration, snapshot UI and side-effect integration; race/cancellation/ownership tests and scoped review.
+- [x] Claudius additions: source-data repair, Treat Condition/Doctor's Visitation, High Voltage/Refresh; validate remaining electricity event gaps against real native receipts.
+- [x] Task 3: Fresh local Foundry 14.368/PF2e 8.5.1 QA, normal use/real rolls/actual Regions/multiple clients and installed-module interaction checks.
+- [x] Task 4 preparation: Whole-diff review, fixes, version/artifact validation and bounded commits. Publication uses the authorized branch push and formal module-specific GitHub release; the resulting tag/release records delivery.
 
 ## Validation and delivery
 
