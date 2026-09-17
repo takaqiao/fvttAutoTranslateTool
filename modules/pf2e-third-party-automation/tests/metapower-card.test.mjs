@@ -42,7 +42,7 @@ test('rendered saves preserve native PF2e check options and add one original-cha
  assert.equal(check.dataset.rollOptions,undefined,'check links must not use the damage-link option attribute');
 });
 
-const nativePath=process.env.PF2E_NATIVE_BUNDLE??'C:/Users/Taka/Desktop/fvtt/output/bob-transfer-audit-20260917/resources/systems/pf2e/pf2e.mjs';
+const nativePath=process.env.PF2E_NATIVE_BUNDLE??'';
 test('actual PF2e inline-save handler carries the rendered channel marker into the native check',{skip:!existsSync(nativePath)},async t=>{
  const {check,marker}=renderedSave(t),source=readFileSync(nativePath,'utf8');
  const start=source.indexOf('static async #onClickInlineCheck(e, t) {'),end=source.indexOf('\n\tstatic #onClickInlineTemplate',start);
@@ -58,4 +58,36 @@ test('actual PF2e inline-save handler carries the rendered channel marker into t
  assert.ok(rolled.extraRollOptions.includes(marker),'Actual native check lost the original channel marker');
  assert.ok(rolled.extraRollOptions.includes('damaging-effect'));assert.ok(rolled.extraRollOptions.includes('existing-option'));
  assert.equal(rolled.dc.slug,'eldamon');assert.equal(rolled.origin,origin);assert.equal(rolled.item,item);
+});
+
+function renderedChain(t,{existing=false,source='Compendium.battlezoo-eldamon-pf2e.powers.Item.fzV5Ly3a9nEsfcAJ'}={}){
+ const previous=globalThis.document;t.after(()=>{if(previous===undefined)delete globalThis.document;else globalThis.document=previous});
+ const element=()=>({dataset:{},className:'',setAttribute(){},classList:{contains:()=>false}});
+ globalThis.document={createElement:element};
+ const anchors=existing?[Object.assign(element(),{dataset:{damageRoll:'',formula:'1[electricity]',baseFormula:'1[electricity]'}})]:[];
+ const root={dataset:{},append(a){if('damageRoll'in a.dataset)anchors.push(a)},querySelector:selector=>selector==='a.inline-roll[data-damage-roll]'?anchors[0]:['.card-content','.message-content'].includes(selector)?root:null,querySelectorAll:selector=>selector==='[data-pf2-check]'?[]:anchors};
+ const receipt={nonce:'chain-use',sourceUuid:source,itemUuid:'Actor.caster.Item.chain',snapshot:snapshot({kind:'normal',powerId:'reactive-chain',powerSourceUuid:source,triggerDamage:8,discharge:false,siphon:{applies:false},traits:['concentrate','electricity','magical']})};
+ api.renderMetapowerCard({id:'chain-card'},root,{receipt});api.renderMetapowerCard({id:'chain-card'},root,{receipt});
+ return {anchors,receipt};
+}
+
+test('original Chain card without published damage gains one immutable native link from its confirmed amount',t=>{
+ const {anchors}=renderedChain(t);assert.equal(anchors.length,1);
+ const [a]=anchors;assert.equal(a.dataset.formula,'4[electricity]');assert.equal(a.dataset.baseFormula,'4[electricity]');assert.ok('damageRoll'in a.dataset);assert.ok('immutable'in a.dataset);
+ assert.equal(a.dataset.itemUuid,'Actor.caster.Item.chain');assert.equal(a.dataset.rollOptions,'pf2e-third-party-automation:metapower:chain-card:chain-use');
+ assert.equal(a.dataset.traits,'concentrate,electricity,magical');
+});
+test('Chain rendering never duplicates an existing damage link or invents one for a different source',t=>{
+ assert.equal(renderedChain(t,{existing:true}).anchors.length,1);
+ assert.equal(renderedChain(t,{source:'Compendium.other.powers.Item.unreviewed'}).anchors.length,0);
+});
+test('actual PF2e inline-damage handler sends the generated Chain link through native damage context',{skip:!existsSync(nativePath)},async t=>{
+ const {anchors}=renderedChain(t);assert.equal(anchors.length,1);const [anchor]=anchors,source=readFileSync(nativePath,'utf8');
+ const start=source.indexOf('static async _onClickInlineRoll(e) {'),end=source.indexOf('\n\tstatic processUserVisibility',start);assert.ok(start>=0&&end>start,'Native damage-link handler shape changed');
+ class Item{}const origin={uuid:'Actor.caster'},item=Object.assign(new Item(),{uuid:'Actor.caster.Item.chain',name:'Reactive Chain',isOfType:()=>true});
+ const message={speakerActor:origin,getRollData:()=>({actor:origin,item})};let augmented,nativeRoll;
+ const context={htmlClosest:(_el,selector)=>selector==='a'?anchor:selector==='li.chat-message'?{dataset:{messageId:'chain-card'}}:null,ui:{windows:{}},game:{messages:new Map([['chain-card',message]]),settings:{get:()=> 'public'}},Z:Item,CONFIG:{ChatMessage:{modes:{public:'public'}}},ChatMessagePF2e:{getSpeaker:()=>({actor:'caster'})},objectHasKey:(o,k)=>Object.hasOwn(o,k),splitListString:s=>s.split(',').filter(Boolean),M:a=>[...new Set(a)],o:Boolean,eventToRollParams:()=>({skipDialog:true}),augmentInlineDamageRoll:async(formula,params)=>{augmented={formula,params};return {template:{damage:{roll:{kinds:new Set(['damage'])}}},context:{native:true}}},_loc:s=>s,DamagePF2e:{roll:async(template,context)=>{nativeRoll={template,context}}}};
+ const Native=vm.runInNewContext('(class extends class {} {'+source.slice(start,end)+'})',context);await Native._onClickInlineRoll({target:anchor});
+ assert.equal(augmented.formula,'4[electricity]');assert.equal(augmented.params.item,item);assert.equal(augmented.params.actor,origin);assert.equal(augmented.params.immutable,true);
+ assert.ok(augmented.params.extraRollOptions.includes('pf2e-third-party-automation:metapower:chain-card:chain-use'));assert.ok(augmented.params.traits.includes('electricity'));assert.equal(nativeRoll.context.native,true);
 });

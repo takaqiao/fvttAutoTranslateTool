@@ -1,5 +1,6 @@
 import {MODULE_ID} from './lifecycle.mjs';
 const conditions=['Compendium.battlezoo-eldamon-pf2e.conditions.Bi2aHykg6CZrQCnR','Compendium.battlezoo-eldamon-pf2e.conditions.1fZbuJEbVmE3J4XL'];
+const chainSource='Compendium.battlezoo-eldamon-pf2e.powers.Item.fzV5Ly3a9nEsfcAJ';
 /** Pure native-link plan. Ordinals are confined to individually reviewed source
  * profiles; unknown powers never enter this renderer. Original descriptive text
  * remains readable, while the selected branch has the only live damage links. */
@@ -39,6 +40,15 @@ export function renderMetapowerCard(message,html,{receipt,onClear,onRetryDeliver
  if(!snapshot)return;
  if(root.dataset.metapowerRendered===receipt.nonce)return;
  root.dataset.metapowerRendered=receipt.nonce;
+ if(snapshot.powerId==='reactive-chain'&&snapshot.powerSourceUuid===chainSource&&receipt.sourceUuid===chainSource&&!root.querySelector('a.inline-roll[data-damage-roll]')){
+  // The published Chain card has a save but no fixed damage expression. These
+  // are PF2e's native @Damage attributes; its delegated inline-roll handler
+  // resolves the original card/item and publishes the one normal damage roll.
+  const [{formula}]=cardLinkPlan(snapshot,[{kind:'damage'}]),anchor=document.createElement('a');
+  anchor.className='inline-roll roll';
+  Object.assign(anchor.dataset,{damageRoll:formula,baseFormula:formula,formula,immutable:'',traits:(snapshot.traits??[]).join(','),itemUuid:receipt.itemUuid,itemId:receipt.itemUuid?.split('.').at(-1)});
+  (root.querySelector('.card-content')??root.querySelector('.message-content')??root).append(anchor);
+ }
  const anchors=[...root.querySelectorAll('a.inline-roll[data-damage-roll], a.effect-area, a.content-link[data-uuid]')];
  const links=anchors.map(a=>'damageRoll'in a.dataset?{kind:'damage',baseFormula:a.dataset.baseFormula}:a.classList.contains('effect-area')?{kind:'area',type:a.dataset.type,distance:Number(a.dataset.distance)}:{kind:'effect',uuid:a.dataset.uuid});
  const plan=cardLinkPlan(snapshot,links);
