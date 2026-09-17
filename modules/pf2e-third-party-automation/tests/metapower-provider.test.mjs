@@ -19,3 +19,9 @@ test('target coefficient uses bound immutable source card and creature traits on
  const half=await p.beforeDamage({traits:new Set(['humanoid']),system:{attributes:{immunities:[{type:'electricity'}]}}},{damage});assert.equal(half.params.damage.scaled,.5);assert.deepEqual(multipliers,[.5]);
  card.flags.pf2e.origin.uuid='forged';await assert.rejects(p.beforeDamage({traits:new Set()},{damage}),/source|binding/i);
 });
+test('retained discharge degree downgrade augments native save arithmetic and preserves other adjustments',()=>{
+ const context={type:'saving-throw',dosAdjustments:[{adjustments:{success:{label:'native',amount:1}}}]};
+ const result=api.adjustMetapowerCheckContext({saveDowngrade:1},context);
+ assert.equal(result.dosAdjustments[0],context.dosAdjustments[0]);assert.deepEqual(result.dosAdjustments[1].adjustments.all,{label:'Retributive Shock · Discharge',amount:-1});
+ assert.equal(context.dosAdjustments.length,1);assert.equal(api.adjustMetapowerCheckContext({saveDowngrade:1},{type:'attack-roll'}).dosAdjustments,undefined);
+});

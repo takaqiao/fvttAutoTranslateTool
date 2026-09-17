@@ -6,6 +6,11 @@ const ids={surge:'veFrnrxYjlqca13w',anvil:'hQOa1yaP9C6wajNn',static:'KWQgx7RMeY3
 const actor=()=>({uuid:'Actor.synthetic',level:5,flags:{pf2e:{eldamon:{element:{trait:'electricity',traitTwo:'electricity'}}}},items:[{sourceId:S+'feats.Item.kG0HSsDc6eHYjTU9'}]});
 const power=id=>({uuid:'Actor.synthetic.Item.power',type:'feat',_stats:{compendiumSource:P+ids[id]},system:{traits:{value:['electricity','magical']}}});
 const snapshot=(id,kind='siphoning',extra={})=>{assert.equal(typeof api.buildChannelSnapshot,'function');return api.buildChannelSnapshot({kind,item:power(id),actor:actor(),...extra})};
+test('normal channels bind their selected native branch without a metapower transformation',()=>{
+ const s=snapshot('surge','normal',{selection:{discharge:true,baseDistance:60}});
+ assert.equal(s.area.distance,60);assert.equal(s.kind,'normal');assert.equal(s.dischargeCost,1);assert.equal(s.siphon.applies,false);assert.deepEqual(s.suppressEffects,[]);
+ const v=snapshot('voltage','normal');assert.deepEqual(v.suppressEffects,[]);assert.equal(v.siphon.applies,false);
+});
 
 test('full source UUID identifies metapowers despite absent traits and renamed labels',()=>{
  assert.equal(typeof api.metapowerKind,'function');
@@ -122,4 +127,13 @@ test('table policy keeps discharge range and save downgrade independently of rem
 test('specific discharge overrides reject unknown values and do not affect ordinary Widen',()=>{
  for(const field of ['dischargeRange','dischargeSaveDowngrade'])assert.throws(()=>snapshot('shot','siphoning',{selection:{discharge:true},policy:{dischargeNonDamage:'remove',[field]:'guess'}}),/policy/i);
  const widened=snapshot('shot','widen',{selection:{discharge:true},policy:{dischargeNonDamage:'remove',dischargeRange:'remove'}});assert.equal(widened.range,80);
+});
+
+test('follow-up area ruling retains the selected discharged area without restoring added conditions',()=>{
+ const policy={dischargeNonDamage:'remove',dischargeArea:'retain',dischargeRange:'retain',dischargeSaveDowngrade:'retain',highVoltage:'convert'};
+ for(const id of ['surge','anvil']){
+  const channel=snapshot(id,'siphoning',{selection:{discharge:true,baseDistance:60},policy});
+  assert.equal(channel.area.distance,60);assert.equal(channel.dischargeCost,1);assert.ok(channel.suppressEffects.includes('charged'));assert.deepEqual(channel.policy,policy);
+ }
+ assert.throws(()=>snapshot('surge','siphoning',{selection:{discharge:true},policy:{...policy,dischargeArea:'guess'}}),/policy/i);
 });

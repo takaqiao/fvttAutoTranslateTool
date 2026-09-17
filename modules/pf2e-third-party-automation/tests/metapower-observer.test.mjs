@@ -27,3 +27,15 @@ test('verified native check dialog cancellation has an explicit no-execution res
  assert.equal(await observer.observe({actor:{uuid:'a'},entry:'native-check'},async()=>null),null);
  assert.deepEqual(events.at(-1),['finish','cancelled','native-check-no-result']);
 });
+test('native self-effect card bypassing item.toMessage binds the actual embedded item',async()=>{
+ const actor={uuid:'Actor.a',id:'a'},item={uuid:'Actor.a.Item.i',id:'i',actor};let completed;
+ const observer=api.createMetapowerObserver({request:async(method,p)=>{if(method==='finish')completed=p;return {nonce:p.nonce,status:'reserved'}},select:async()=>({}),id:()=> 'n'});
+ await observer.observe({actor,item},async()=>{const data=observer.decorate({speaker:{actor:'a'},flags:{pf2e:{context:{type:'self-effect',item:'i'}}}});assert.equal(data.flags['pf2e-third-party-automation'].metapowerUse.itemUuid,item.uuid);observer.record([{...data,id:'m',uuid:'ChatMessage.m'}]);});
+ assert.equal(completed.status,'committed');
+});
+test('actual entrance captures targets before asynchronous choices and persists them on original card',async()=>{
+ const actor={uuid:'Actor.a',id:'a'},item={uuid:'Actor.a.Item.i',id:'i',actor},targets=['Scene.s.Token.first'];let captured;
+ const observer=api.createMetapowerObserver({request:async(_m,p)=>({nonce:p.nonce,status:'reserved'}),captureInput:()=>({targetUuids:targets}),select:async()=>{targets[0]='Scene.s.Token.later';return {}},id:()=> 'n'});
+ await observer.observe({actor,item},async()=>{captured=observer.decorate({speaker:{actor:'a'},flags:{pf2e:{origin:{uuid:item.uuid}},'pf2e-third-party-automation':{usageInput:{targetUuids:['Scene.s.Token.later']}}}});observer.record([{...captured,id:'m',uuid:'ChatMessage.m'}]);});
+ assert.deepEqual(captured.flags['pf2e-third-party-automation'].usageInput.targetUuids,['Scene.s.Token.first']);
+});

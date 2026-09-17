@@ -19,6 +19,7 @@ export function getNativeCastEvents(options={}){
 }
 
 export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messageTimeoutMs=15000}={}){
+ const castMiddlewares=new Set();
  const queue=new SerialActions(),localCasts=new SerialActions(),matchers=new Set(),activityMatchers=new Set(),actorMatchers=new Set(),consumePolicies=new Set(),paidCastPolicies=new Set(),captures=new Map(),scopes=new Map(),messageInvocations=new WeakMap();
  // A local capability, never serialized or accepted from a socket payload.
  const nativeCapability=Object.freeze({});let socket,installed=false;
@@ -266,6 +267,7 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
   socket?.register('native-cast-outcome',async function(payload){try{return {ok:true,value:await finishPaidCast(payload,game.users.get(this.socketdata.userId))};}catch(error){return {ok:false,error:error.message};}});
   const paths=[];const wrap=(path,fn)=>{libWrapper.register(MODULE_ID,path,fn,'MIXED');paths.push(path);};
   wrap('CONFIG.PF2E.Item.documentClasses.spellcastingEntry.prototype.cast',async function(wrapped,item,options={}){
+   const nativeEntry=async()=>{
    if(!matches(item)&&!managed(item.actor))return wrapped(item,options);
    const policies=options.consume!==false&&options.message!==false?[...paidCastPolicies]:[];
    const scope={item,entry:this,user:game.user,castNonce:id(),policies,tokenContext:policies.length?sourceToken(item.actor):{},input:input(item,options),targets:[...new Set(values(game.user.targets).map(t=>t.document?.uuid??t.uuid).filter(Boolean))],captured:captureData(item)};
@@ -303,6 +305,9 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
      throw asError(error);
     }finally{if(scopes.get(item.uuid)===scope)scopes.delete(item.uuid);}
    });
+   };
+   const chain=[...castMiddlewares],invoke=index=>index===chain.length?nativeEntry():chain[index]({item,options,entry:this},()=>invoke(index+1));
+   return invoke(0);
   });
   wrap('CONFIG.PF2E.Item.documentClasses.spellcastingEntry.prototype.consume',async function(wrapped,item,rank,slotId,capability){
    if(capability===nativeCapability||!matches(item)&&!managed(item.actor))return wrapped(item,rank,slotId);
@@ -319,5 +324,5 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
  // undefined admits it. Explicit consume:false/message:false and activity/chat
  // payment flows are not native paid-cast events. Policies must validate any
  // unsupportedReason before using a source token for positional reactions.
- return {addMatcher:matcher=>matchers.add(matcher),addActivityMatcher:matcher=>activityMatchers.add(matcher),addActorMatcher:matcher=>actorMatchers.add(matcher),addConsumePolicy:policy=>consumePolicies.add(policy),addPaidCastPolicy:policy=>paidCastPolicies.add(policy),addCapture:(key,capture)=>captures.set(key,capture),captureUsage,captureMessageOutcome,ensurePaid,payForActivity,finishActivityWithoutSpell,register};
+ return {addCastMiddleware:middleware=>castMiddlewares.add(middleware),addMatcher:matcher=>matchers.add(matcher),addActivityMatcher:matcher=>activityMatchers.add(matcher),addActorMatcher:matcher=>actorMatchers.add(matcher),addConsumePolicy:policy=>consumePolicies.add(policy),addPaidCastPolicy:policy=>paidCastPolicies.add(policy),addCapture:(key,capture)=>captures.set(key,capture),captureUsage,captureMessageOutcome,ensurePaid,payForActivity,finishActivityWithoutSpell,register};
 }

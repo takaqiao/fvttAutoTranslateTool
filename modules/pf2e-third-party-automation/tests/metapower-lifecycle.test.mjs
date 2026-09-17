@@ -37,7 +37,7 @@ test('started uncertain actions cannot refund and explicit cancel clears only ca
 });
 test('turn admission rejects stale activation, ownership and inactive GM',async()=>{
  const f=fixture(),s=f.service();await finish(s,f,await begin(s,f,f.siphon,'one'),f.siphon);f.game.combat.turn=1;
- const r=await begin(s,f,f.power,'two',{selection:{discharge:false}});assert.equal(r.snapshot,null);
+ const r=await begin(s,f,f.power,'two',{selection:{discharge:false}});assert.equal(r.snapshot.kind,'normal');assert.equal(r.snapshot.siphon.applies,false);
  await assert.rejects(s.clear({actorUuid:f.actor.uuid}, {id:'stranger'}),/owner|permission/i);
  f.game.users.activeGM={id:'other'};await assert.rejects(s.clear({actorUuid:f.actor.uuid},f.user),/GM/i);
 });
@@ -60,4 +60,34 @@ test('immutable channel receipt binds activation, source, branch and original ca
  const selection={discharge:false,baseDistance:30};const r=await begin(s,f,f.power,'two',{selection});selection.baseDistance=20;
  assert.equal(r.snapshot.area.distance,40);await finish(s,f,r,f.power);assert.equal(f.actor.flags[ID].metapower.armed,null);
  assert.equal((await begin(f.service(),f,f.power,'two',{selection:{baseDistance:20}})).snapshot.area.distance,40);
+});
+test('completed ordinary actions have bounded history without allowing archived request replay',async()=>{
+ const f=fixture(),s=f.service();
+ await finish(s,f,await begin(s,f,f.widen,'activation'),f.widen);
+ for(let n=1;n<=70;n++){
+  await begin(s,f,null,`ordinary-${n}`,{clientId:'client',clientSequence:n});
+  await s.finish({actorUuid:f.actor.uuid,nonce:`ordinary-${n}`,status:'committed'},f.user);
+ }
+ const receipts=f.actor.flags[ID].metapower.receipts;assert.ok(Object.keys(receipts).length<=65);assert.equal(receipts.activation.kind,'widen');
+ await assert.rejects(begin(f.service(),f,null,'ordinary-1',{clientId:'client',clientSequence:1}),/sequence|archived|replay/i);
+});
+test('native start refuses an admission from a previous turn without executing it',async()=>{
+ const f=fixture(),s=f.service();await begin(s,f,f.widen,'stale');f.game.combat.turn++;
+ await assert.rejects(s.start({actorUuid:f.actor.uuid,nonce:'stale'},f.user),/turn/i);
+ await s.finish({actorUuid:f.actor.uuid,nonce:'stale',status:'cancelled'},f.user);assert.equal(f.actor.flags[ID].metapower.pending,null);
+});
+test('GM can archive an abandoned lease as uncertain without refunding or rearming',async()=>{
+ const f=fixture(),s=f.service();await finish(s,f,await begin(s,f,f.siphon,'one'),f.siphon);await begin(s,f,null,'abandoned');await s.start({actorUuid:f.actor.uuid,nonce:'abandoned'},f.user);
+ await assert.rejects(s.reconcile({actorUuid:f.actor.uuid,nonce:'abandoned',confirmation:'archive-uncertain'},f.user),/GM/i);
+ const result=await s.reconcile({actorUuid:f.actor.uuid,nonce:'abandoned',confirmation:'archive-uncertain'},f.game.user);
+ assert.equal(result.status,'uncertain');assert.equal(f.actor.flags[ID].metapower.pending,null);assert.equal(f.actor.flags[ID].metapower.armed,null);
+ await assert.rejects(s.start({actorUuid:f.actor.uuid,nonce:'abandoned'},f.user),/already/i);
+});
+test('lost zero-counter deletion response persists payment intent and cannot pay twice',async()=>{
+ const f=fixture(),s=f.service();let payments=0;
+ const charge={id:'charge',uuid:'Actor.a.Item.charge',sourceId:'Compendium.battlezoo-eldamon-pf2e.conditions.Item.Bi2aHykg6CZrQCnR',system:{badge:{value:1}},flags:{},async update(){payments++;f.actor.items.delete(this.id);f.documents.delete(this.uuid);throw Error('lost deletion response')}};f.actor.items.set(charge.id,charge);f.documents.set(charge.uuid,charge);
+ const r=await begin(s,f,f.power,'pay',{selection:{discharge:true,baseDistance:60}});
+ await assert.rejects(finish(s,f,r,f.power),/lost/);assert.equal(f.actor.flags[ID].metapower.receipts.pay.paymentStarted,true);
+ await assert.rejects(finish(f.service(),f,r,f.power),/uncertain|reconcile/i);assert.equal(payments,1);
+ await s.finish({actorUuid:f.actor.uuid,nonce:'pay',status:'uncertain'},f.user);assert.equal(f.actor.flags[ID].metapower.receipts.pay.messageUuid,'ChatMessage.mpay');
 });

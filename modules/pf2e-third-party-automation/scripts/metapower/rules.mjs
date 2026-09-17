@@ -63,25 +63,25 @@ const items=actor=>Array.isArray(actor?.items)?actor.items:actor?.items?.content
  * the caller's responsibility. `selection.baseDistance` means the chosen legal
  * native branch before Widen; selection.discharge never waives its normal cost.
  * Table policies are explicit: dischargeNonDamage='retain'|'remove' is the
- * fallback; dischargeRange and dischargeSaveDowngrade independently override it.
+ * fallback; dischargeArea, dischargeRange and dischargeSaveDowngrade override it.
  * highVoltage='unaffected'|'convert'. A convert decision still requires the caller
  * to bind High Voltage's delayed trigger to this channel, never immediate damage. */
 export function buildChannelSnapshot({kind,item,actor=item?.actor,level=actor?.level??1,selection={},policy={}}){
- if(!['siphoning','widen'].includes(kind))throw Error('Unsupported metapower kind.');
+ if(!['siphoning','widen','normal'].includes(kind))throw Error('Unsupported metapower kind.');
  const profile=powerProfile(item);
  if(!profile)throw Error('Unsupported power source: no reviewed profile.');
  if(!Number.isInteger(level)||level<1)throw Error('Power level must be a positive integer.');
  const discharge=selection.discharge===true;
  if(kind==='siphoning'&&profile.dependentEffect&&!['unaffected','convert'].includes(policy.highVoltage))throw Error('High Voltage requires an explicit dependent-effect policy.');
  if(kind==='siphoning'&&discharge&&profile.dischargeNonDamage&&!['retain','remove'].includes(policy.dischargeNonDamage))throw Error('Siphoning discharge non-damage benefits require an explicit policy.');
- for(const field of ['dischargeRange','dischargeSaveDowngrade'])if(Object.hasOwn(policy,field)&&!['retain','remove'].includes(policy[field]))throw Error(`Invalid ${field} policy.`);
+ for(const field of ['dischargeArea','dischargeRange','dischargeSaveDowngrade'])if(Object.hasOwn(policy,field)&&!['retain','remove'].includes(policy[field]))throw Error(`Invalid ${field} policy.`);
  const applies=kind==='siphoning'&&(!profile.dependentEffect||policy.highVoltage==='convert');
- const removeBenefits=applies&&discharge&&policy.dischargeNonDamage==='remove';
+ const removeArea=applies&&discharge&&(policy.dischargeArea??policy.dischargeNonDamage)==='remove';
  const removeRange=applies&&discharge&&(policy.dischargeRange??policy.dischargeNonDamage)==='remove';
  const removeSaveDowngrade=applies&&discharge&&(policy.dischargeSaveDowngrade??policy.dischargeNonDamage)==='remove';
  const area=selectedArea(profile,{level,discharge,baseDistance:selection.baseDistance});
  if(area){
-  if(removeBenefits)area.distance=profile.levelArea?area.baseDistance/2:profile.baseDistance;
+  if(removeArea)area.distance=profile.levelArea?area.baseDistance/2:profile.baseDistance;
   else if(kind==='widen')area.distance=widenDistance(area);
  }
  let range=profile.range??null;
@@ -102,7 +102,7 @@ export function buildChannelSnapshot({kind,item,actor=item?.actor,level=actor?.l
   saveDowngrade:profile.id==='retributive-shock'&&discharge&&!removeSaveDowngrade?1:0,
   outcomeMode:profile.outcomeMode,damageBasis:profile.damageBasis,
   suppressEffects:applies?[...profile.effects]:[],
-  policy:Object.fromEntries(['dischargeNonDamage','dischargeRange','dischargeSaveDowngrade','highVoltage'].filter(key=>Object.hasOwn(policy,key)).map(key=>[key,policy[key]]))
+  policy:Object.fromEntries(['dischargeNonDamage','dischargeArea','dischargeRange','dischargeSaveDowngrade','highVoltage'].filter(key=>Object.hasOwn(policy,key)).map(key=>[key,policy[key]]))
  });
 }
 

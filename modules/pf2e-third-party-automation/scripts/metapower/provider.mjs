@@ -2,19 +2,23 @@ import {METAPOWER_SOURCES,metapowerKind,powerProfile,sourceUuid,buildChannelSnap
 import {MODULE_ID,createMetapowerLedger,ledgerState,chargedEffect} from './lifecycle.mjs';
 import {createMetapowerObserver} from './observer.mjs';
 import {renderMetapowerCard} from './card.mjs';
-import {installActionEntrances,wrapSheetHandlers} from './entrances.mjs';
+import {installActionEntrances,wrapSheetHandlers,createToolbeltEntrance,patchHudController,installLegacyActionBoundary,ensureNativeUseControls} from './entrances.mjs';
 import {convertSiphonRoll} from './damage.mjs';
 import {showNativeChoice} from '../native-context.mjs';
 const values=c=>Array.from(c?.values?.()??c??[]);
 const prefix=`${MODULE_ID}:metapower:`;
+export function adjustMetapowerCheckContext(snapshot,context){
+ if(context.type!=='saving-throw'||snapshot.saveDowngrade!==1)return context;
+ return {...context,dosAdjustments:[...(context.dosAdjustments??[]),{adjustments:{all:{label:'Retributive Shock · Discharge',amount:-1}}}]};
+}
 export function preserveMetapowerOnAlter(original,result){
  const proof=original?.options?.[MODULE_ID]?.metapowerDamage;
  if(proof&&result?.options)result.options[MODULE_ID]={...result.options[MODULE_ID],metapowerDamage:structuredClone(proof)};
  return result;
 }
 
-export function createMetapowerProvider({game,fromUuid,onError=console.error,selectChoice=showNativeChoice,onCommittedChannel=async()=>{}}){
- const ledger=createMetapowerLedger({game,fromUuid});let socket;
+export function createMetapowerProvider({game,fromUuid,onError=console.error,selectChoice=showNativeChoice,onCommittedChannel=async()=>{},beforeChannel,validateSelection,supportsOriginalUse=()=>false,interceptDamageMessage=(_roll,data,options,native)=>native(data,options)}){
+ const ledger=createMetapowerLedger({game,fromUuid,validateSelection});let socket;
  const eligible=actor=>actor?.type==='character'&&values(actor.items).some(item=>metapowerKind(item));
  const request=async(method,payload)=>{
   if(!socket||!game.users.activeGM)throw Error('Metapower automation requires an active GM and socketlib.');
@@ -23,32 +27,33 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
   if(method==='finish'&&response.value?.messageUuid){const m=await fromUuid(response.value.messageUuid);await m?.update({[`flags.${MODULE_ID}.metapowerUse.status`]:response.value.status});if(response.value.status==='committed')await onCommittedChannel({receipt:response.value,message:m});}
   return response.value;
  };
- async function select(item){
+ async function select(item,input={}){
   const profile=powerProfile(item),armed=ledgerState(item.actor).armed;
-  if(!profile||!armed&&!profile.reaction)return {};
+  if(!profile)return {};
   let selection={discharge:false};
-  if(armed&&profile.id!=='high-voltage'){
+  if(profile.id!=='high-voltage'){
    const choices=[];
    for(const discharge of [false,true]){
     if(discharge&&!chargedEffect(item.actor))continue;
-    if(discharge&&armed.kind==='siphoning'&&profile.id==='reactive-chain')continue;
+    if(discharge&&armed?.kind==='siphoning'&&profile.id==='reactive-chain')continue;
     const distances=profile.areaType?Array.from({length:25},(_,i)=>5+i*5):[null];
     for(const baseDistance of distances){
      const candidate={discharge,...(baseDistance?{baseDistance}:{})};let snapshot;
-     try{snapshot=buildChannelSnapshot({kind:armed.kind,item,selection:candidate,policy:{dischargeNonDamage:'remove',dischargeRange:'retain',dischargeSaveDowngrade:'retain',highVoltage:'convert'}})}catch{continue}
-     choices.push({value:JSON.stringify(candidate),label:`${discharge?'放电：Charged −1':'普通分支'}${snapshot.area?` · ${snapshot.area.distance} 尺` : ''}${armed.kind==='siphoning'?' · 虹吸':''}`});
+     try{snapshot=buildChannelSnapshot({kind:armed?.kind??'normal',item,selection:candidate,policy:{dischargeNonDamage:'remove',dischargeArea:'retain',dischargeRange:'retain',dischargeSaveDowngrade:'retain',highVoltage:'convert'}})}catch{continue}
+     choices.push({value:JSON.stringify(candidate),label:`${discharge?'放电：Charged −1':'普通分支'}${snapshot.area?` · ${snapshot.area.distance} 尺` : ''}${armed?.kind==='siphoning'?' · 虹吸':''}`});
     }
    }
    const result=await selectChoice({title:item.name,choices});if(!result)return null;selection=JSON.parse(result);
   }
+  if(beforeChannel)return beforeChannel({item,selection:{...selection,...input},kind:armed?.kind??'normal'});
   if(profile.reaction){
    const chain=profile.id==='reactive-chain';
-   const result=await globalThis.foundry.applications.api.DialogV2.wait({window:{title:item.name},content:`<p>${chain?'确认：30尺内生物实际受到电击伤害；所选目标在该生物30尺内，未受同一效果电击伤害，且已Shocked。虹吸不允许用放电放宽此资格。':'确认本次真实反应触发符合原威能条件。'}</p>${chain?'<label>触发生物实际受到的电击伤害 <input name="triggerDamage" type="number" min="1" step="1" value="1"></label>':''}`,buttons:[{action:'confirm',label:'确认实际触发',callback:(_event,_button,dialog)=>({triggerConfirmed:true,eligibleTargetConfirmed:chain,triggerDamage:chain?Number(dialog.element.querySelector('[name="triggerDamage"]').value):null})},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});
+   const result=await globalThis.foundry.applications.api.DialogV2.wait({window:{title:item.name},content:`<p>${chain?'确认：30尺内生物实际受到电击伤害；所选目标在该生物30尺内，未受同一效果电击伤害，且已Shocked。虹吸不允许用放电放宽此资格。':'确认本次真实反应触发符合原威能条件。'}</p>${chain?'<label>触发生物实际受到的电击伤害 <input name="triggerDamage" type="number" min="1" step="1" required></label>':''}`,buttons:[{action:'confirm',label:'确认实际触发',callback:(_event,button)=>({triggerConfirmed:true,eligibleTargetConfirmed:chain,triggerDamage:chain?Number(new FormData(button.form).get('triggerDamage')):null})},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});
    if(!result)return null;Object.assign(selection,result);
   }
   return selection;
  }
- const observer=createMetapowerObserver({request,select,onError});
+ const observer=createMetapowerObserver({request,select,captureInput:()=>({targetUuids:values(game.user.targets).map(t=>t.document?.uuid??t.uuid).filter(Boolean)}),onError});
  const observe=(context,native)=>eligible(context.actor)?observer.observe(context,native):native();
  async function validateDamageProof(proof){
   const card=game.messages.get(proof?.cardId),actor=await fromUuid(proof?.actorUuid),receipt=actor?.flags?.[MODULE_ID]?.metapower?.receipts?.[proof?.nonce];
@@ -64,17 +69,24 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
   if(game.user?.id!==game.users.activeGM?.id||!actor?.testUserPermission(game.user,'OWNER'))return;
   for(const item of values(actor.items))if(sourceUuid(item)===METAPOWER_SOURCES.widen&&(item.system.actionType?.value!=='action'||item.system.actions?.value!==1))await item.update({'system.actionType.value':'action','system.actions.value':1});
  }
+ async function interceptCheck(wrapped,check,context={},...args){
+  const option=values(context.options).find(o=>o.startsWith(prefix));if(!option)return wrapped(check,context,...args);
+  const [cardId,nonce]=option.slice(prefix.length).split(':'),card=game.messages.get(cardId),proof={cardId,nonce,actorUuid:card?.flags?.[MODULE_ID]?.metapowerUse?.actorUuid};
+  const snapshot=await validateDamageProof(proof);
+  if(context.item?.uuid!==snapshot.itemUuid&&context.origin?.item?.uuid!==snapshot.itemUuid)throw Error('Native check origin differs from the bound power.');
+  return wrapped(check,adjustMetapowerCheckContext(snapshot,context),...args);
+ }
  function register({Hooks,libWrapper,socket:api}){
   socket=api;
-  for(const method of ['begin','start','finish','clear','expire'])socket.register(`metapower:${method}`,async function(payload){try{return {ok:true,value:await ledger[method](payload,game.users.get(this.socketdata.userId))}}catch(error){return {ok:false,error:error.message}}});
+  for(const method of ['begin','start','finish','clear','expire','reconcile'])socket.register(`metapower:${method}`,async function(payload){try{return {ok:true,value:await ledger[method](payload,game.users.get(this.socketdata.userId))}}catch(error){return {ok:false,error:error.message}}});
   const wrap=(path,fn,type='WRAPPER')=>libWrapper.register(MODULE_ID,path,fn,type);
+  for(const actor of values(game.actors))if(eligible(actor))maintain(actor).catch(onError);
+  Hooks.on('createActor',actor=>maintain(actor).catch(onError));
+  Hooks.on('createToken',token=>{if(token.actor)maintain(token.actor).catch(onError)});
+  Hooks.on('createItem',item=>{if(sourceUuid(item)===METAPOWER_SOURCES.widen&&item.actor)maintain(item.actor).catch(onError)});
   // Endpoint is synchronous admission evidence collection, not an async create
   // hook; original batch/options and the actual native document objects survive.
   wrap('CONFIG.ChatMessage.documentClass.createDocuments',async function(wrapped,data,options){const created=await wrapped(data.map(d=>observer.decorate(d)),options);observer.record(created);return created});
-  wrap('game.pf2e.rollItemMacro',async function(wrapped,uuid,event){
-   const item=typeof uuid==='string'&&uuid.includes('.')?await fromUuid(uuid):game.user.character?.items.get(uuid);
-   return item?.actor&&['feat','action'].includes(item.type)?observe({actor:item.actor,item},()=>wrapped(uuid,event)):wrapped(uuid,event);
-  });
   // Public sheet controllers return the same handler map their listener awaits.
   // Find each most-derived registered class; inherited implementations are
   // wrapped once per class and only modify its actual use-action handler.
@@ -83,33 +95,53 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
    if(!definition.cls?.prototype?.activateClickListener||seen.has(definition.cls))continue;seen.add(definition.cls);
    wrap(`CONFIG.Actor.sheetClasses.character[${JSON.stringify(key)}].cls.prototype.activateClickListener`,function(wrapped,...args){return wrapSheetHandlers(this,wrapped(...args),observe,eligible)});
   }
-  if(game.toolbelt?.api?.actionable?.useAction)wrap('game.toolbelt.api.actionable.useAction',async function(wrapped,event,item,virtual){
-   if(!eligible(item?.actor))return wrapped(event,item,virtual);
-   if(virtual||item.flags?.['pf2e-toolbelt']?.actionable?.linked)throw Error('Virtual/linked-macro action needs manual metapower resolution; use the owned original item.');
-   return observe({actor:item.actor,item},()=>wrapped(event,item,virtual));
-  });
+  // Toolbelt 3.56.2 freezes its API (non-configurable descriptor). Its owned DOM
+  // entrance calls the same captured helper; never try to replace that API.
+  const toolbeltNative=game.toolbelt?.api?.actionable?.useAction;
+  const useToolbelt=toolbeltNative?createToolbeltEntrance({native:toolbeltNative,eligible,observe}):null;
+  if(useToolbelt&&game.modules.get('pf2e-hud')?.version==='2.55.2'&&game.modules.get('pf2e-toolbelt')?.version==='3.56.2'){
+   const patchHUD=(app,kind)=>{for(const controller of values(kind==='sidebar'?app.sidebarItems:app.shortcuts))if(controller?.item)patchHudController(controller,{kind,eligible,useToolbelt}).catch(onError)};
+   Hooks.on('renderActionsSidebarPF2eHUD',app=>patchHUD(app,'sidebar'));
+   Hooks.on('renderPersistentShortcutsPF2eHUD',app=>patchHUD(app,'persistent'));
+  }
   const roots=new WeakSet();
   const renderSheet=(app,html)=>{
-   const root=html?.[0]??html;if(!root?.addEventListener||roots.has(root)||!eligible(app.actor))return;roots.add(root);
+   const root=html?.[0]??html;if(!root?.addEventListener||!app.actor?.isOwner||app.isEditable===false)return;
+   ensureNativeUseControls(root,app.actor,item=>!!metapowerKind(item)||!!powerProfile(item)||supportsOriginalUse(item));
+   root.querySelector('.metapower-reconcile')?.remove();
+   const pending=ledgerState(app.actor).pending;
+   if(pending&&game.user.id===game.users.activeGM?.id){
+    const button=root.ownerDocument.createElement('button');button.type='button';button.className='metapower-reconcile';button.textContent='处理未完成的威能动作';
+    button.addEventListener('click',async event=>{event.preventDefault();event.stopPropagation();try{
+     const yes=await globalThis.foundry.applications.api.DialogV2.confirm({window:{title:'处理未完成的原生动作'},content:'<p>仅在原操作客户端已停止或断线后使用。先核对原卡、频次和 Charged；此操作将回执保留为不确定并释放动作锁，不退款、不重试、不补发伤害或效果。需要的规则结算由GM核对后手动完成。</p>'});
+     if(yes)await request('reconcile',{actorUuid:app.actor.uuid,nonce:pending,confirmation:'archive-uncertain'});
+    }catch(error){onError(error)}});
+    (root.querySelector('.tab.actions, [data-tab="actions"].tab')??root).append(button);
+   }
+   if(roots.has(root)||!eligible(app.actor))return;roots.add(root);
    root.addEventListener('click',event=>{
     const button=event.target?.closest?.('button.use-action:not([data-action])'),item=app.actor.items.get(button?.closest?.('[data-item-id]')?.dataset.itemId);
-    if(!item||!game.toolbelt?.api?.actionable?.useAction||button.disabled)return;
-    event.preventDefault();event.stopImmediatePropagation();Promise.resolve(game.toolbelt.api.actionable.useAction(event,item)).catch(onError);
+    if(!item||!useToolbelt||button.disabled)return;
+    event.preventDefault();event.stopImmediatePropagation();Promise.resolve(useToolbelt(event,item)).catch(onError);
    },true);
   };
   for(const hook of ['renderActorSheetPF2e','renderCharacterSheetPF2e','renderActorSheetV2'])Hooks.on(hook,renderSheet);
-  installActionEntrances({game,eligible,observe});
-  // Native spell entrances expire a pending metapower before starting the cast.
-  // Consume/message-false calls are known continuations handled by cast owner.
-  wrap('CONFIG.PF2E.Item.documentClasses.spellcastingEntry.prototype.cast',function(wrapped,item,options={}){return options.consume===false||options.message===false?wrapped(item,options):observe({actor:item.actor,entry:'spell'},()=>wrapped(item,options))});
+  installActionEntrances({game,eligible,observe,continuation:(actor,proof)=>{
+   const card=game.messages.get(proof.cardId),state=card?.flags?.[MODULE_ID]?.medic;
+   return proof.actorUuid===actor.uuid&&state?.actorUuid===actor.uuid&&state.nonce===proof.nonce&&state.status==='treatment'&&card.flags?.pf2e?.origin?.uuid===state.itemUuid;
+  }});
+  installLegacyActionBoundary({game,blocked:actor=>eligible(actor)&&!!(ledgerState(actor).armed||ledgerState(actor).pending),onError});
   const index=globalThis.CONFIG.Dice.rolls.findIndex(C=>C.name==='DamageRoll');
   wrap(`CONFIG.Dice.rolls.${index}.prototype.toMessage`,async function(wrapped,data={},options={}){
+   const nativeMessage=async(data,options)=>{
    const option=data.flags?.pf2e?.context?.options?.find(o=>o.startsWith(prefix));if(!option)return wrapped(data,options);
    const [cardId,nonce]=option.slice(prefix.length).split(':'),card=game.messages.get(cardId),proof={cardId,nonce,actorUuid:card?.flags?.[MODULE_ID]?.metapowerUse?.actorUuid};
    const snapshot=await validateDamageProof(proof);
    if(data.flags?.pf2e?.origin?.uuid!==snapshot.itemUuid)throw Error('Native damage origin differs from the bound power.');
    if(snapshot.siphon?.applies){convertSiphonRoll(this,{rejectMixedPartitions:true});this.options[MODULE_ID]={...this.options[MODULE_ID],metapowerDamage:proof};}
    return wrapped(data,options);
+   };
+   return interceptDamageMessage(this,data,options,nativeMessage);
   });
   Hooks.on('renderChatMessageHTML',(message,html)=>{
    const proof=message.flags?.[MODULE_ID]?.metapowerUse;if(!proof)return;
@@ -123,7 +155,8 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
  function wrapStrike(strike,actor){
   if(!eligible(actor))return strike;
   for(const variant of strike?.variants??[]){const native=variant.roll;if(typeof native!=='function'||native.metapowerWrapped)continue;const wrapped=function(...args){return observe({actor,entry:'native-check'},()=>native.apply(this,args))};wrapped.metapowerWrapped=true;variant.roll=wrapped;}
+  if(strike?.variants?.[0])strike.roll=strike.attack=strike.variants[0].roll;
   return strike;
  }
- return {register,maintain,beforeDamage,wrapStrike,observe,validateDamageProof,diagnostic:{unsupported:['legacy callback-only actions','HUD cached closures','custom macros','automated reaction providers without actual-use entrance'],highVoltage:'snapshot-only; delayed executor required'}};
+ return {register,maintain,beforeDamage,wrapStrike,observe,interceptCheck,validateDamageProof,diagnostic:{unsupported:['legacy callback-only actions','direct frozen Toolbelt API macro calls','custom macros','automated reaction providers without actual-use entrance'],highVoltage:'snapshot-only; delayed executor required'}};
 }
