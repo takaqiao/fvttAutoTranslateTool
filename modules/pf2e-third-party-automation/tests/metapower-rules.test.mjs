@@ -81,3 +81,24 @@ test('Siphoning removes reviewed added effects while preserving discharge cost, 
  assert.equal(snapshot('retributive').outcomeMode,'special-save');assert.equal(snapshot('chain').damageBasis,'trigger-damage-halved');
  assert.throws(()=>api.buildChannelSnapshot({kind:'siphoning',actor:actor(),item:{sourceId:P+'unreviewed'}}),/unsupported|reviewed/i);
 });
+test('Electric Shot range advances at 7, 11, 15 and 19 with its level cap',()=>{
+ for(const [level,expected] of [[1,40],[6,40],[7,60],[10,60],[11,80],[14,80],[15,100],[18,100],[19,120],[20,120]]){
+  assert.equal(snapshot('shot','siphoning',{level}).range,expected,`normal range at level ${level}`);
+  const widened=snapshot('shot','widen',{level});assert.equal(widened.range,expected);assert.equal(widened.area,null,'Widen does not increase single-target range');
+ }
+});
+test('Electric Shot discharge policy scales the level-adjusted base without changing its cost',()=>{
+ for(const [level,normal,discharged] of [[6,40,80],[7,60,120],[11,80,160],[15,100,200],[19,120,240],[20,120,240]]){
+  const retain=snapshot('shot','siphoning',{level,selection:{discharge:true},policy:{dischargeNonDamage:'retain'}});
+  const remove=snapshot('shot','siphoning',{level,selection:{discharge:true},policy:{dischargeNonDamage:'remove'}});
+  assert.equal(retain.range,discharged,`retained discharge range at level ${level}`);assert.equal(remove.range,normal,`removed discharge range at level ${level}`);
+  assert.equal(retain.dischargeCost,1);assert.equal(remove.dischargeCost,1);
+  assert.equal(snapshot('shot','widen',{level,selection:{discharge:true}}).range,discharged);
+ }
+ assert.throws(()=>snapshot('shot','siphoning',{level:7,selection:{discharge:true}}),/policy|discharge/i);
+});
+test('Reactive Chain has no new Charged effect to suppress and discharge still costs one',()=>{
+ const normal=snapshot('chain'),discharged=snapshot('chain','siphoning',{selection:{discharge:true}});
+ assert.deepEqual(normal.suppressEffects,[]);assert.deepEqual(discharged.suppressEffects,[]);
+ assert.equal(normal.dischargeCost,0);assert.equal(discharged.dischargeCost,1);assert.equal(discharged.damageBasis,'trigger-damage-halved');
+});

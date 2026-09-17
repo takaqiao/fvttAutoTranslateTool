@@ -10,8 +10,8 @@ const entries=[
  ['veFrnrxYjlqca13w',{id:'electric-surge',areaType:'line',baseDistance:20,levelArea:true,outcomeMode:'basic-save',save:'reflex',effects:['charged'],dischargeNonDamage:true}],
  ['hQOa1yaP9C6wajNn',{id:'anvil-crawler-lightning',areaType:'cone',baseDistance:30,outcomeMode:'basic-save',save:'fortitude',effects:['charged','shocked'],dischargeNonDamage:true}],
  ['KWQgx7RMeY3RKW6J',{id:'static-shock',outcomeMode:'attack-with-fixed-failure',effects:['charged','shocked']}],
- ['QIYppaP0zcGvb5Bd',{id:'electric-shot',range:40,outcomeMode:'attack-with-target-dependent-failure',effects:['charged'],dischargeNonDamage:true}],
- ['fzV5Ly3a9nEsfcAJ',{id:'reactive-chain',reaction:true,outcomeMode:'basic-save',save:'reflex',damageBasis:'trigger-damage-halved',effects:['charged']}],
+ ['QIYppaP0zcGvb5Bd',{id:'electric-shot',range:40,rangeScaling:{firstLevel:7,interval:4,increment:20,maximum:120},outcomeMode:'attack-with-target-dependent-failure',effects:['charged'],dischargeNonDamage:true}],
+ ['fzV5Ly3a9nEsfcAJ',{id:'reactive-chain',reaction:true,outcomeMode:'basic-save',save:'reflex',damageBasis:'trigger-damage-halved',effects:[]}],
  ['geZCat82IOuShmmk',{id:'retributive-shock',reaction:true,outcomeMode:'special-save',save:'reflex',effects:['shocked'],dischargeNonDamage:true}],
  ['9bElF2uVf5FCJtb9',{id:'high-voltage',hasDuration:true,dependentEffect:true,outcomeMode:'delayed-basic-save',save:'reflex',effects:['refresh']}]
 ];
@@ -79,6 +79,12 @@ export function buildChannelSnapshot({kind,item,actor=item?.actor,level=actor?.l
   if(removeBenefits)area.distance=profile.levelArea?area.baseDistance/2:profile.baseDistance;
   else if(kind==='widen')area.distance=widenDistance(area);
  }
+ let range=profile.range??null;
+ if(profile.rangeScaling){
+  const {firstLevel,interval,increment,maximum}=profile.rangeScaling;
+  const increases=Math.max(0,Math.floor((level-firstLevel)/interval)+1);
+  range=Math.min(maximum,range+increment*increases);
+ }
  const element=actor?.flags?.pf2e?.eldamon?.element??{};
  return freeze({
   version:1,kind,powerId:profile.id,powerSourceUuid:profile.sourceUuid,actorUuid:actor?.uuid??null,itemUuid:item?.uuid??null,level,
@@ -86,7 +92,7 @@ export function buildChannelSnapshot({kind,item,actor=item?.actor,level=actor?.l
   associatedTraits:[...new Set([element.trait,element.traitTwo].filter(t=>typeof t==='string'&&t.length))],
   disruptive:items(actor).some(i=>sourceUuid(i)===METAPOWER_SOURCES.disruptiveSiphon),
   siphon:{applies,reason:kind!=='siphoning'?'different-metapower':applies?'direct-damage':'dependent-effect'},
-  area,range:profile.range?(discharge&&!removeBenefits?2:1)*profile.range:null,
+  area,range:range===null?null:(discharge&&!removeBenefits?2:1)*range,
   discharge,dischargeCost:discharge?1:0,
   saveDowngrade:profile.id==='retributive-shock'&&discharge&&!removeBenefits?1:0,
   outcomeMode:profile.outcomeMode,damageBasis:profile.damageBasis,
