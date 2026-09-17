@@ -1,8 +1,18 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {existsSync,readFileSync} from 'node:fs';
-import {createMedicNative} from '../scripts/medic-native.mjs';
+import {createMedicNative,pinnedMedicTarget} from '../scripts/medic-native.mjs';
 const M='pf2e-third-party-automation';
+test('pinned actor scope reads native private fields and overrides locked selections without changing the actor',()=>{
+ class Patient{#id='patient';get uuid(){return `Actor.${this.#id}`;}readId(){return this.#id;}}
+ const actor=new Patient(),wrong={id:'wrong'},target={id:'target',actor};
+ Object.defineProperty(actor,'getActiveTokens',{value:()=>[wrong],enumerable:true});
+ const pinned=pinnedMedicTarget(target);
+ assert.ok(pinned instanceof Patient);assert.equal(pinned.uuid,'Actor.patient');assert.equal(pinned.readId(),'patient');
+ assert.deepEqual(pinned.getActiveTokens(true,true),[target]);assert.deepEqual(actor.getActiveTokens(),[wrong]);
+ assert.equal('getActiveTokens'in pinned,true);assert.ok(Object.keys(pinned).includes('getActiveTokens'));
+ assert.deepEqual(Object.getOwnPropertyDescriptor(pinned,'getActiveTokens').value(),[target]);
+});
 test('native Poison and First Aid receive exact actor/target, continuation and player variant',async()=>{
  const calls=[],actor={uuid:'Actor.healer'},patient={uuid:'Actor.patient'},target={uuid:'Scene.s.Token.t',actor:patient},healer={object:{id:'h'}},user={id:'owner'},continuation={actorUuid:actor.uuid,cardId:'card',nonce:'nonce'};
  const game={pf2e:{actions:new Map(['treat-poison','administer-first-aid'].map(key=>[key,{use:async args=>{calls.push([key,args]);return [{actor}];}}]))}};
@@ -16,9 +26,10 @@ function detachedWorkbench({cancel=false,macroSource=null}={}){
  const Hooks={on(name,fn){hooks.set(fn,name);return fn;},off(_name,fn){hooks.delete(fn);},once(name,fn){const wrapped=(...args)=>{hooks.delete(wrapped);return fn(...args);};hooks.set(wrapped,name);return wrapped;},call(name,...args){for(const [fn,key]of [...hooks])if(key===name)fn(...args);}};
  const actor={id:'healer',uuid:'Actor.healer',skills:{}},patient={id:'patient',uuid:'Actor.patient'},healer={id:'h',uuid:'Scene.s.Token.h'},target={id:'t',uuid:'Scene.s.Token.t',actor:patient};healer.object={id:'h',actor};target.object={id:'t',actor:patient};
  const game={user:{id:'gm',targets:new Set([{id:'wrong'}]),getFlag:()=>true},system:{id:'pf2e'},settings:{get:()=>false},combats:{active:null},messages:new Map(),modules:new Map([['xdy-pf2e-workbench',{active:true}]]),packs:new Map()};
- const canvas={tokens:{controlled:[{id:'wrong'}]}};
+ // Foundry defines canvas.tokens as an immutable own layer property; a scope must not proxy over it directly.
+ const canvas=Object.defineProperty({},'tokens',{value:{controlled:[{id:'wrong'}]},enumerable:true});
  actor.skills.medicine={async roll(args){observed.check=args;const form={addEventListener(_event,handler){observed.submit=handler;},removeEventListener(){}};Hooks.call('renderCheckModifiersDialog',{context:{options:new Set(args.extraRollOptions)}},[form]);await gate;if(cancel)return null;const roll={total:25,options:{degreeOfSuccess:2}},message={id:'native-check',async update(changes){this.flags[M]={medicWorkbench:changes['flags.'+M+'.medicWorkbench']};},speaker:{actor:actor.id},rolls:[roll],flags:{pf2e:{context:{type:'skill-check',options:args.extraRollOptions,target:{actor:patient.uuid,token:target.uuid}}}}};game.messages.set(message.id,message);await args.callback(roll,'success',message);return roll;}};
- const ChatMessage={getSpeaker:()=>({actor:actor.id}),async create(data){const m={...data,id:`card${cards.length}`};cards.push(m);return m;}};
+ class ChatMessage{static #speaker={actor:actor.id};static getSpeaker(){return this.#speaker;}static async create(data){const m={...data,id:`card${cards.length}`};cards.push(m);return m;}}
  class DamageRoll{_total=8;async roll(){return this;}async toMessage(data){return ChatMessage.create(data);}}
  class CheckRoll{total=22;async roll(){return this;}}
  class Dialog{constructor(options){this.options=options;observed.dialog=this;}render(){return this;}}
@@ -38,7 +49,7 @@ function detachedWorkbench({cancel=false,macroSource=null}={}){
 const flush=()=>new Promise(resolve=>setImmediate(resolve));
 const html={find:()=>({val(){return this;},prop(){return this;},trigger(){return this;}})};
 const wbPath=process.env.FVTT_WORKBENCH_MACRO??'C:/Users/Taka/Desktop/fvtt/tmp/team-automation-20260917/coverage-evidence/live-Workbench-Treat-Wounds-and-Battle-Medicine.mjs';
-test('installed unchanged Workbench macro cannot finish before native roll or Dice So Nice result', {skip:!existsSync(wbPath)},async()=>{
+test('installed Workbench reads a locked native canvas layer and waits for its roll and Dice So Nice result', {skip:!existsSync(wbPath)},async()=>{
  const f=detachedWorkbench({macroSource:readFileSync(wbPath,'utf8')});let done=false;f.operation.then(()=>done=true);await flush();
  const nodes={useBattleMedicine:{value:'1'},'dc-type':{value:'1'},modifier:{value:'0'}};
  const form={find(selector){const node=nodes[selector.match(/name="([^"]+)"/)?.[1]];return {0:node,length:node?1:0,val(value){if(value===undefined)return node?.value;if(node)node.value=value;return this;},prop(){return this;},trigger(){return this;}};}};
