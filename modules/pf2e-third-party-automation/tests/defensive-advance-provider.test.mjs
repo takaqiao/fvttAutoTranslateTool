@@ -14,8 +14,8 @@ function fixture({startup='ready',cancel=false,breakMovement=false,choose=async(
  const hooks=new Map(),Hooks={on(n,fn){if(!hooks.has(n))hooks.set(n,new Set());hooks.get(n).add(fn);return fn},off(n,fn){hooks.get(n)?.delete(fn)},async emit(n,...args){for(const fn of hooks.get(n)??[])await fn(...args)}};
  let planned=0,started=0;const documents=new Map([[actor.uuid,actor],[item.uuid,item],[token.uuid,token]]);
  const provider=api.createDefensiveAdvance({game,fromUuid:async uuid=>documents.get(uuid),choose,startupCompatibility:{status:startup},onError:()=>{}});provider.register({Hooks});
- token.object={document:token,async planMovement(options){planned++;assert.deepEqual(options,{allowedActions:['walk'],maxCost:20,preventDrop:true});if(cancel)return null;token.movement={id:'plan',state:'planned',user,pending:{cost:10,waypoints:[{action:'walk'}]},origin:{x:0,y:0,elevation:0},finished:Promise.resolve(true)};return {id:'plan',origin:token.movement.origin,destination:{x:100,y:0,elevation:0}}}};
- token.startMovement=async id=>{assert.equal(id,'plan');started++;token.x=100;const movement={id:'plan',chain:[],origin:{x:0,y:0,elevation:0},destination:{x:100,y:0,elevation:0},passed:{cost:10,waypoints:[{action:'walk'}]},pending:{waypoints:[]},constrained:false,finished:Promise.resolve(true)};token.movement={...movement,state:'completed',user};if(!breakMovement)await Hooks.emit('moveToken',token,movement,{_movement:{t:movement}},user);return true};
+ token.object={document:token,async planMovement(options){planned++;assert.deepEqual(options,{allowedActions:['walk'],maxCost:20,preventDrop:true});if(cancel)return null;token.movement={id:'plan',state:'planned',user,pending:{cost:10,waypoints:[{action:'walk'}]},origin:{x:0,y:0,elevation:0},finished:Promise.resolve(true),animation:{ended:Promise.resolve()}};return {id:'plan',origin:token.movement.origin,destination:{x:100,y:0,elevation:0}}}};
+ token.startMovement=async id=>{assert.equal(id,'plan');started++;token.x=100;const movement={id:'plan',chain:[],origin:{x:0,y:0,elevation:0},destination:{x:100,y:0,elevation:0},passed:{cost:10,waypoints:[{action:'walk'}]},pending:{waypoints:[]},constrained:false,finished:Promise.resolve(true),animation:{ended:Promise.resolve()}};token.movement={...movement,state:'completed',user};if(!breakMovement)await Hooks.emit('moveToken',token,movement,{_movement:{t:movement}},user);return true};
  token.stopMovement=()=>{token.movement.state='stopped'};
  function message(id='original') {const m={id,uuid:`ChatMessage.${id}`,author:user,actor,item,speaker:{actor:'a',scene:'s',token:'t'},flags:{pf2e:{origin:{uuid:item.uuid,actor:actor.uuid,type:'feat',rollOptions:[USE_ACTION_OPTION,'origin:item:trait:flourish']}},[MODULE_ID]:{usageInput:{actualUse:true},...provider.captureUsage(item)}},update,updateSource(changes){return update.call(this,changes)}};game.messages.set(id,m);return m;}
  return {game,user,actor,item,token,combat,Hooks,provider,message,scene,documents,counts:()=>({planned,started})};
@@ -55,7 +55,7 @@ function armEnemy(f,{blocked=()=>false}={}){
  const enemy={id:'e',uuid:'Actor.e',alliance:'opposition'},target={id:'enemy',uuid:'Scene.s.Token.enemy',documentName:'Token',parent:f.scene,actor:enemy,x:200,y:0,elevation:0,getCenterPoint:()=>({x:250,y:50})};target.object={document:target};f.scene.tokens.set(target.id,target);
  f.token.object.checkCollision=blocked;f.token.object.distanceTo=()=>5;f.actor.getReach=()=>5;
  const weapon={id:'w',uuid:'Actor.a.Item.w',actor:f.actor,name:'Sword',isMelee:true,isRanged:false};let rolls=0;
- const strike={type:'strike',ready:true,item:weapon,variants:[0,1,2].map(map=>({async roll(params){rolls++;const card={id:'attack',author:f.user,speaker:{actor:'a',scene:'s',token:'t'},flavor:'<span class="action-glyph">A</span>',flags:{pf2e:{origin:{actor:f.actor.uuid,uuid:weapon.uuid},context:{type:'attack-roll',action:'strike',mapIncreases:map,origin:{actor:f.actor.uuid,token:f.token.uuid},target:{actor:enemy.uuid,token:target.uuid},outcome:'success',options:[...params.options]}}},rolls:[{total:21}],isCheckRoll:true,updateSource:changes=>update.call(card,changes)};await f.Hooks.emit('preCreateChatMessage',card);f.game.messages.set(card.id,card);await params.callback(card.rolls[0],'success',card);return card.rolls[0]}}))};f.actor.system.actions.push(strike);return {target,strike,rolls:()=>rolls};
+ const strike={type:'strike',ready:true,item:weapon,variants:[0,1,2].map(map=>({async roll(params){rolls++;const card={id:'attack',author:f.user,speaker:{actor:'a',scene:'s',token:'t'},flavor:'<h4 class="action"><span class="action-glyph">A</span>Strike</h4>',flags:{pf2e:{origin:{actor:f.actor.uuid,uuid:weapon.uuid},context:{type:'attack-roll',action:'strike',mapIncreases:map,origin:{actor:f.actor.uuid,token:f.token.uuid},target:{actor:enemy.uuid,token:target.uuid},outcome:'success',options:[...params.options]}}},rolls:[{total:21}],isCheckRoll:true,updateSource:changes=>update.call(card,changes)};await f.Hooks.emit('preCreateChatMessage',card);f.game.messages.set(card.id,card);await params.callback(card.rolls[0],'success',card);return card.rolls[0]}}))};f.actor.system.actions.push(strike);return {target,strike,rolls:()=>rolls};
 }
 
 test('complete movement then chosen native Strike preserves MAP and ends at one included attack',async()=>{
@@ -68,6 +68,14 @@ test('complete movement then chosen native Strike preserves MAP and ends at one 
 test('walls changing during MAP selection prevent the native Strike after completed movement',async()=>{
  let blocked=false;const f=fixture({choose:async({title,choices})=>{if(title.includes('MAP')){blocked=true;return '0'}return choices[0].value}}),enemy=armEnemy(f,{blocked:()=>blocked}),m=f.message();await f.Hooks.emit('preCreateChatMessage',m);
  await assert.rejects(f.provider.executeUsage({actor:f.actor,item:f.item,message:m,user:f.user,action:'defensive-advance'}),/近战Strike/);assert.equal(enemy.rolls(),0);assert.equal(m.flags[MODULE_ID].defensiveAdvance.status,'uncertain');assert.equal(f.counts().started,1);
+});
+
+test('a genuine movement receipt cannot grant Strike if finished coordinates differ from its server endpoint',async()=>{
+ const f=fixture(),enemy=armEnemy(f),m=f.message();await f.Hooks.emit('preCreateChatMessage',m);
+ const start=f.token.startMovement;f.token.startMovement=async id=>{const done=await start(id);f.token.x=50;return done};
+ await assert.rejects(f.provider.executeUsage({actor:f.actor,item:f.item,message:m,user:f.user,action:'defensive-advance'}),/完成后Token位置/);
+ assert.equal(enemy.rolls(),0);assert.equal(m.flags[MODULE_ID].defensiveAdvance.status,'uncertain');
+ assert.equal(m.flags[MODULE_ID].defensiveAdvance.lastPosition.x,100);
 });
 
 test('a turn change or authority migration during native path selection cannot start the committed movement',async()=>{
