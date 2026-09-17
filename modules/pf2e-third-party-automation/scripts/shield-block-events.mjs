@@ -4,7 +4,7 @@ import {isActiveGM} from './native-context.mjs';
 import {classifyNativeShieldBlock,reactionEpoch} from './reaction-budget.mjs';
 
 const SOURCE='Compendium.pf2e.feats-srd.Item.dSSwRyuhKTq1VubX';
-const worlds=new Set(['-','sog','pnvfcgjbf2cjp7gz','team-automation-qa2']);
+const worlds=new Set(['-','sog','pnvfcgjbf2cjp7gz','ujx5r8oipw7ercdr','team-automation-qa2']);
 const prefix=`${MODULE_ID}:shield-event:`,budgetPrefix=`${MODULE_ID}:native-shield:`;
 const fields=['actorUuid','tokenUuid','attackerActorUuid','attackerTokenUuid','attackItemUuid','weaponUuid','damageMessageId','rollIndex'];
 const values=c=>Array.from(c?.values?.()??c??[]),records=actor=>actor?.flags?.[MODULE_ID]?.shieldBlockEvents?.records??[];
