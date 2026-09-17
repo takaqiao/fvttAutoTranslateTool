@@ -19,7 +19,7 @@ export function getNativeCastEvents(options={}){
 }
 
 export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messageTimeoutMs=15000}={}){
- const castMiddlewares=new Set();
+ const castMiddlewares=new Set(),actorUpdateMiddlewares=new Set();
  const queue=new SerialActions(),localCasts=new SerialActions(),matchers=new Set(),activityMatchers=new Set(),actorMatchers=new Set(),consumePolicies=new Set(),paidCastPolicies=new Set(),captures=new Map(),scopes=new Map(),messageInvocations=new WeakMap();
  // A local capability, never serialized or accepted from a socket payload.
  const nativeCapability=Object.freeze({});let socket,installed=false,focusCall=null;
@@ -276,14 +276,22 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
   socket?.register('native-cast-outcome',async function(payload){try{return {ok:true,value:await finishPaidCast(payload,game.users.get(this.socketdata.userId))};}catch(error){return {ok:false,error:error.message};}});
   const paths=[];const wrap=(path,fn)=>{libWrapper.register(MODULE_ID,path,fn,'MIXED');paths.push(path);};
   wrap('CONFIG.Actor.documentClass.prototype.update',function(wrapped,changes={},options={}){
+   const actor=this;
+   const original=(changes,options)=>{
    const scope=focusCall,after=changes['system.resources.focus.value']??changes.system?.resources?.focus?.value;
-   if(!scope||this!==scope.actor||after===undefined)return wrapped(changes,options);
-   if(scope.captured||this.system.resources?.focus?.value!==scope.before||after!==scope.before-scope.cost)throw Error('原生聚能写入的来源、次数或金额已改变。');
+   if(!scope||actor!==scope.actor||after===undefined)return wrapped(changes,options);
+   if(scope.captured||actor.system.resources?.focus?.value!==scope.before||after!==scope.before-scope.cost)throw Error('原生聚能写入的来源、次数或金额已改变。');
    const proof={castNonce:scope.castNonce,itemUuid:scope.item.uuid,entryUuid:scope.entry.uuid,before:scope.before,after,cost:scope.cost};
    const extra=scope.changes(Object.freeze(proof));
    if(!extra||typeof extra!=='object'||Object.keys(extra).some(key=>!key.startsWith(`flags.${MODULE_ID}.`)||Object.hasOwn(changes,key)))throw Error('原生聚能提交扩展只能附加自身回执。');
    scope.captured=true;
    return wrapped({...changes,...extra},options);
+   };
+   // Share the one libWrapper registration with native Refocus observers.
+   // No async trampoline: an observer that defers loses the exact call binding.
+   const chain=[...actorUpdateMiddlewares];
+   const invoke=(index,changes,options)=>index===chain.length?original(changes,options):chain[index].call(actor,(nextChanges,nextOptions)=>invoke(index+1,nextChanges,nextOptions),changes,options);
+   return invoke(0,changes,options);
   });
   wrap('CONFIG.PF2E.Item.documentClasses.spellcastingEntry.prototype.cast',async function(wrapped,item,options={}){
    const nativeEntry=async()=>{
@@ -352,5 +360,5 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
  // undefined admits it. Explicit consume:false/message:false and activity/chat
  // payment flows are not native paid-cast events. Policies must validate any
  // unsupportedReason before using a source token for positional reactions.
- return {withActorResourceLock:(actor,operation)=>queue.run(actor.uuid,operation),addCastMiddleware:middleware=>castMiddlewares.add(middleware),addMatcher:matcher=>matchers.add(matcher),addActivityMatcher:matcher=>activityMatchers.add(matcher),addActorMatcher:matcher=>actorMatchers.add(matcher),addConsumePolicy:policy=>consumePolicies.add(policy),addPaidCastPolicy:policy=>paidCastPolicies.add(policy),addCapture:(key,capture)=>captures.set(key,capture),captureUsage,captureMessageOutcome,ensurePaid,payForActivity,finishActivityWithoutSpell,register};
+ return {addActorUpdateMiddleware:middleware=>{actorUpdateMiddlewares.add(middleware);return()=>actorUpdateMiddlewares.delete(middleware)},withActorResourceLock:(actor,operation)=>queue.run(actor.uuid,operation),addCastMiddleware:middleware=>castMiddlewares.add(middleware),addMatcher:matcher=>matchers.add(matcher),addActivityMatcher:matcher=>activityMatchers.add(matcher),addActorMatcher:matcher=>actorMatchers.add(matcher),addConsumePolicy:policy=>consumePolicies.add(policy),addPaidCastPolicy:policy=>paidCastPolicies.add(policy),addCapture:(key,capture)=>captures.set(key,capture),captureUsage,captureMessageOutcome,ensurePaid,payForActivity,finishActivityWithoutSpell,register};
 }
