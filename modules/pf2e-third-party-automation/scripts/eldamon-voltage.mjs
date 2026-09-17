@@ -100,6 +100,14 @@ export function createVoltageLedger({game,fromUuid,queue=new SerialActions()}){
   return target;
  }
  return {
+  refreshOutsideEncounter:(payload,user)=>mutate(payload,user,async(actor,state)=>{
+   if(user!==game.users.activeGM)throw Error('Automatic Refresh requires the active GM.');
+   if(!values(actor.items).some(item=>sourceUuid(item)===ELEMENTAL_POWERS_SOURCE))throw Error('Elemental Powers is required for automatic Refresh.');
+   const encounters=new Set([...values(game.combats),game.combat].filter(Boolean));
+   if([...encounters].some(combat=>combat.started&&values(combat.combatants??combat.turns).some(c=>c.actor?.uuid===actor.uuid)))throw Error('Automatic outside-encounter Refresh cannot run during an active encounter.');
+   if(typeof payload.nonce!=='string'||!payload.nonce||payload.nonce.length>160)throw Error('Automatic Refresh requires a bounded event nonce.');
+   return copy(await refresh(actor,state,`outside:${payload.nonce}`));
+  }),
   channel:(payload,user)=>mutate(payload,user,async(actor,state)=>{
    const {receipt,message,item}=await original(actor,payload,user),old=state.activations[receipt.nonce];
    if(old){if(old.messageUuid!==message.uuid)throw Error('Original activation binding mismatch.');if(!old.refreshSuppressed)await refresh(actor,state,receipt.nonce);return copy(old);}

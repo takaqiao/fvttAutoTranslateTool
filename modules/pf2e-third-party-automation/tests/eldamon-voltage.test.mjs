@@ -27,6 +27,18 @@ test('normal original High Voltage channel refreshes actual spent prepared power
  const result=await s.channel(f.payload,f.user);assert.equal(result.status,'armed');assert.equal(f.spent.system.frequency.value,1);assert.equal(f.reaction.system.frequency.value,1);assert.equal(unrelated.system.frequency.value,0);assert.equal(daily.system.frequency.value,0);assert.equal(unprepared.system.frequency.value,0);
  f.spent.system.frequency.value=0;await f.service().channel(f.payload,f.user);assert.equal(f.spent.system.frequency.value,0);assert.equal(f.actor.getRollOptions()[0],'active-power-refresh:high-voltage');
 });
+
+test('automatic outside-encounter Refresh uses the same idempotent resource writer and requires GM/source/no active encounter',async()=>{
+ const f=fixture(),s=f.service(),p={actorUuid:f.actor.uuid,nonce:'end:fight'};
+ assert.equal(typeof s.refreshOutsideEncounter,'function');
+ f.addItem('feature',api.ELEMENTAL_POWERS_SOURCE,'elemental-powers');
+ await assert.rejects(s.refreshOutsideEncounter(p,f.gm),/encounter/i);
+ f.game.combat=null;await assert.rejects(s.refreshOutsideEncounter(p,f.user),/GM/i);
+ await s.refreshOutsideEncounter(p,f.gm);assert.equal(f.spent.system.frequency.value,1);assert.equal(f.reaction.system.frequency.value,1);
+ f.spent.system.frequency.value=0;await f.service().refreshOutsideEncounter(p,f.gm);assert.equal(f.spent.system.frequency.value,0);
+ f.game.combats=new Map([['other',{started:true,combatants:[{actor:f.actor}]}]]);await assert.rejects(s.refreshOutsideEncounter({...p,nonce:'new'},f.gm),/encounter/i);
+ f.game.combats.clear();f.actor.items.delete('feature');await assert.rejects(s.refreshOutsideEncounter({...p,nonce:'new'},f.gm),/Elemental Powers/i);
+});
 test('Siphoning snapshot suppresses this channel Refresh without affecting the next normal channel',async()=>{
  const f=fixture();f.receipt.snapshot={kind:'siphoning',siphon:{applies:true},suppressEffects:['refresh'],level:5,itemUuid:f.item.uuid,actorUuid:f.actor.uuid,powerSourceUuid:HV};
  const r=await f.service().channel(f.payload,f.user);assert.equal(r.refreshSuppressed,true);assert.equal(f.spent.system.frequency.value,0);
