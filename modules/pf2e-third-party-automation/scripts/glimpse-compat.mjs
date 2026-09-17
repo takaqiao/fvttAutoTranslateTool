@@ -42,7 +42,10 @@ export function createGlimpseCompat({game,fromUuid=globalThis.fromUuid,api=()=>g
   Hooks.once('triggerEngine.ready',()=>{engineReady=true;wake()});
  }
  async function dispatch(scope){const key=random();scopes.set(key,scope);try{await query({_type:'execute-trigger',triggerPath:`${ENGINE}:pf2e-trigger:${GLIMPSE_TRIGGER_ID}`,eventName:GLIMPSE_EVENT,args:{key},userId:game.user.id});if(!scope.done)throw Error('救赎瞥视原生后续未得到可验证完成。')}finally{scopes.delete(key)}}
- async function initialize(){
+ async function initialize({game:runtimeGame}={}){
+  // Foundry replaces the bootstrap `game` after loading module scripts. Node
+  // registration must happen early; all world authorization uses the ready Game.
+  if(runtimeGame)game=runtimeGame;
   if(!glimpseWorld(game))return false;
   if(!versions()||!await verifyEngine())throw Error('救赎瞥视依赖版本或引擎源码不匹配。');
   if(!registered)throw Error('救赎瞥视节点须在 Trigger Engine init 前注册。');
