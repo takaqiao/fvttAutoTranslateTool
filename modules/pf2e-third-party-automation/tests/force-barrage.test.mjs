@@ -59,3 +59,9 @@ test('GM handoff during native damage-card rendering vetoes publication after th
  }}});
  await assert.rejects(f.run(),/消息|主GM/);assert.equal(f.counts.native,1);assert.equal(f.counts.rolling,1);assert.equal(f.game.messages.size,0);
 });
+test('Core14 DialogV2 cancel callback retains cancellation when null would fall back to action name',async t=>{
+ const prior=globalThis.foundry;t.after(()=>{globalThis.foundry=prior});let calls=0;
+ globalThis.foundry={applications:{api:{DialogV2:{wait:async config=>{if(++calls===1)return 3;const button=config.buttons.find(b=>b.action==='cancel');return await button.callback()??button.action;}}}}};
+ const f=fixture(),bridge=createForceBarrageBridge({...f.config,choose:undefined});
+ await bridge.interceptCast({item:f.item,entry:f.entry,options:{rank:3}},f.next);assert.equal(calls,2);assert.deepEqual(f.counts,{native:0,rolling:0,publishing:0});assert.equal(f.calls.length,0);
+});
