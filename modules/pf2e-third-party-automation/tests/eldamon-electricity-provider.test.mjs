@@ -55,3 +55,11 @@ test('suppressed native IWR reports zero; persistent and untyped applications ne
  let proof;hooks.preCreateChatMessage({updateSource:p=>{proof=p;}},{speaker:{actor:f.target.id,scene:'s',token:f.target.id},flags:{pf2e:{context:{type:'damage-taken',options:[...prepared.params.rollOptions]}}}},{},f.gm.id);
  assert.equal(proof[`flags.${ID}.electricityApplied`].amount,0);
 });
+test('active-GM channel delivery retains the original card author even after that player disconnects',async()=>{
+ const f=fixture();f.owner.active=false;
+ const provider=createEldamonElectricityProvider({game:f.game,fromUuid:async id=>f.docs.get(id)});
+ await provider.onCommittedChannel({receipt:f.receipt,message:f.card,user:f.owner});
+ assert.equal([...f.caster.items.values()].filter(i=>i.sourceId==='Compendium.battlezoo-eldamon-pf2e.conditions.Item.Bi2aHykg6CZrQCnR').length,1);
+ await provider.onCommittedChannel({receipt:f.receipt,message:f.card});
+ assert.equal([...f.caster.items.values()].filter(i=>i.sourceId==='Compendium.battlezoo-eldamon-pf2e.conditions.Item.Bi2aHykg6CZrQCnR').length,1);
+});

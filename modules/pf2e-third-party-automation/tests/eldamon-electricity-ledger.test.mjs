@@ -78,4 +78,28 @@ test('a post-damage lifecycle interruption is recoverable without applying damag
  const d=await f.damage();await assert.rejects(d.finish(),/disconnected/);assert.equal(item.system.badge.value,2);
  await d.finish();assert.equal(item.system.badge.value,1);await d.finish();assert.equal(item.system.badge.value,1);
 });
+test('damage evidence and chain eligibility follow the actual encounter when another encounter is viewed',async()=>{
+ const f=fixture();f.item(f.other,'shock',S.shocked);const unrelated={id:'unrelated',started:true,round:9,turn:0,turns:[{id:'outside-turn',actor:f.outsider,token:f.tokens[3]}]};unrelated.combatants=unrelated.turns;f.game.combats.set(unrelated.id,unrelated);f.game.combat=unrelated;
+ const d=await f.damage();await d.finish();assert.equal(electricityState(f.target).damage[d.payload.nonce].frame,'c:1:0');
+ const payload={actorUuid:f.caster.uuid,sourceTokenUuid:f.tokens[0].uuid,selection:{targetUuids:[f.tokens[2].uuid],discharge:false},kind:'normal'};
+ assert.equal((await f.ledger().candidates(payload,f.owner)).length,1);f.game.combat=f.combat;assert.equal((await f.ledger().candidates(payload,f.owner)).length,1);
+ f.combat.turn=1;assert.equal((await f.ledger().candidates(payload,f.owner)).length,0);
+});
+test('Anvil expiry binds the exact source encounter and does not borrow an unrelated viewed encounter',async()=>{
+ const f=fixture();f.power.sourceId=f.receipt.sourceUuid=S.anvil;const unrelated={id:'unrelated',started:true,round:9,turn:0,turns:[]};unrelated.combatants=[];f.game.combats.set(unrelated.id,unrelated);f.game.combat=unrelated;
+ const save={id:'save',uuid:'ChatMessage.save',isCheckRoll:true,rolls:[{_evaluated:true,total:10}],speaker:{actor:f.target.id,scene:'s',token:f.target.id},flags:{pf2e:{origin:{uuid:f.power.uuid},context:{type:'saving-throw',outcome:'failure',options:[`${ID}:metapower:channel:channel`]}}}};
+ f.game.messages.set(save.id,save);f.docs.set(save.uuid,save);await f.ledger().check(save);
+ const pending=Object.values(electricityState(f.target).pendingShocks);assert.equal(pending.length,1);assert.deepEqual(pending[0].expires,{combatId:'c',combatantId:'casterturn',round:2,phase:'end'});
+});
+test('outside or ambiguous encounter membership cannot borrow the viewed encounter for a chain trigger',async()=>{
+ const f=fixture();f.item(f.other,'shock',S.shocked);const d=await f.damage(f.outsider);await d.finish();assert.equal(electricityState(f.outsider).damage[d.payload.nonce].frame,null);
+ const payload={actorUuid:f.caster.uuid,sourceTokenUuid:f.tokens[0].uuid,selection:{targetUuids:[f.tokens[2].uuid],discharge:false},kind:'normal'};
+ assert.equal((await f.ledger().candidates(payload,f.owner)).length,0);
+ const duplicate={...f.combat,id:'duplicate'};f.game.combats.set(duplicate.id,duplicate);const e=await f.damage();await e.finish();assert.equal((await f.ledger().candidates(payload,f.owner)).length,0);
+});
+test('native reaction availability is queried against the actual source encounter facade',async()=>{
+ const f=fixture();f.item(f.other,'shock',S.shocked);const d=await f.damage();await d.finish();f.game.combat={id:'viewed-other',started:true,round:99,turn:0,turns:[]};let observed;
+ const ledger=createElectricityLedger({game:f.game,fromUuid:async id=>f.docs.get(id),reactionAvailable:(actor,bounded)=>{observed=bounded.combat;assert.equal(actor,f.caster);return false;}});
+ assert.deepEqual(await ledger.candidates({actorUuid:f.caster.uuid,sourceTokenUuid:f.tokens[0].uuid,selection:{targetUuids:[f.tokens[2].uuid],discharge:false},kind:'normal'},f.owner),[]);assert.equal(observed,f.combat);
+});
 export {fixture};
