@@ -3,7 +3,7 @@ const ID='pf2e-third-party-automation';
 function fixture(){
  const docs=new Map(),gm={id:'gm',isGM:true},owner={id:'owner'},users=new Map([['gm',gm],['owner',owner]]);users.activeGM=gm;
  const game={user:gm,users,messages:new Map(),actors:new Map(),combats:new Map()},scene={id:'s',tokens:new Map()};let sequence=0;
- const set=(o,k,v)=>{const p=k.split('.');for(const part of p.slice(0,-1))o=o[part]??={};o[p.at(-1)]=structuredClone(v);};
+ const set=(o,k,v)=>{const p=k.split('.');for(const part of p.slice(0,-1))o=o[part]??={};const key=p.at(-1);if(key.startsWith('-='))delete o[key.slice(2)];else o[key]=structuredClone(v);};
  function actor(id,alliance){const a={id,uuid:`Actor.${id}`,alliance,flags:{},items:new Map(),testUserPermission:u=>u===gm||u===owner,
   async update(d){for(const[k,v]of Object.entries(d))set(this,k,v);},
   async createEmbeddedDocuments(_type,entries){return entries.map(d=>item(a,`e${++sequence}`,d._stats.compendiumSource,d));},

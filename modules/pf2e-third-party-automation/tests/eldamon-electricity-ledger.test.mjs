@@ -5,6 +5,34 @@ const ID='pf2e-third-party-automation';
 import {fixture} from './eldamon-electricity-fixture.mjs';
 import {createReactionBudget,genericReactionAvailable} from '../scripts/reaction-budget.mjs';
 
+// Foundry recursively expands dot keys, then merges updates without deleting
+// omitted properties. Model that persistence boundary, including explicit -=.
+function useFoundryFlagUpdates(actor){
+ const plain=v=>v&&typeof v==='object'&&!Array.isArray(v);
+ const expand=v=>{if(Array.isArray(v))return v.map(expand);if(!plain(v))return v;const out={};for(const [key,value]of Object.entries(v)){const parts=key.split('.');let at=out;for(const part of parts.slice(0,-1))at=at[part]??={};at[parts.at(-1)]=expand(value);}return out;};
+ const merge=(target,change)=>{for(const [key,value]of Object.entries(change)){if(key.startsWith('-=')){delete target[key.slice(2)];continue;}if(plain(value)&&plain(target[key]))merge(target[key],value);else target[key]=structuredClone(value);}};
+ actor.update=async function(patch){merge(this,expand(patch));};
+}
+function anvilSave(f){
+ f.power.sourceId=f.receipt.sourceUuid=S.anvil;
+ const save={id:'save',uuid:'ChatMessage.save',isCheckRoll:true,rolls:[{_evaluated:true,total:10}],speaker:{actor:f.target.id,scene:'s',token:f.target.id},flags:{pf2e:{origin:{uuid:f.power.uuid},context:{type:'saving-throw',outcome:'failure',options:[`${ID}:metapower:channel:channel`]}}}};
+ f.game.messages.set(save.id,save);f.docs.set(save.uuid,save);return save;
+}
+test('pending Anvil survives Foundry dot expansion and is consumed once after native damage',async()=>{
+ const f=fixture();useFoundryFlagUpdates(f.target);f.target.flags.unrelated={keep:true};const save=anvilSave(f);
+ await f.ledger().check(save);
+ assert.equal(Object.values(electricityState(f.target).pendingShocks)[0]?.effectKey,'channel:Actor.caster:channel');
+ const damage=await f.damage();await damage.finish();await damage.finish();
+ assert.equal(electricityEffects(f.target,S.shocked).length,1);assert.deepEqual(electricityState(f.target).pendingShocks,{});
+ assert.deepEqual(f.target.flags.unrelated,{keep:true});
+});
+test('pending Anvil expiry persists deletion under Foundry recursive merge and cannot apply after expiry',async()=>{
+ const f=fixture();useFoundryFlagUpdates(f.target);const save=anvilSave(f);await f.ledger().check(save);
+ f.combat.round=2;await f.ledger().expire({combat:f.combat,combatant:f.combat.turns[0],phase:'end',actors:[f.target]});
+ assert.deepEqual(electricityState(f.target).pendingShocks,{});
+ await(await f.damage()).finish();assert.equal(electricityEffects(f.target,S.shocked).length,0);
+});
+
 test('authentic confirmed zero releases an original area target, while unresolved and changed receipts remain excluded',async()=>{
  const f=fixture();f.item(f.other,'shock',S.shocked);const m=f.source('pure',[f.tokens[1].uuid,f.tokens[2].uuid]);await (await f.damage(f.target,{m})).finish();
  const payload={actorUuid:f.caster.uuid,sourceTokenUuid:f.tokens[0].uuid,selection:{targetUuids:[f.tokens[2].uuid],discharge:false},kind:'siphoning'};
