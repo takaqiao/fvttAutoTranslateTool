@@ -1,5 +1,5 @@
 import {MODULE_ID as ID} from './rules.mjs';
-import {SerialActions} from './runtime.mjs';
+import {getNativeCastEvents} from './amp-cast-events.mjs';
 import {getSourceId,isActiveGM,showNativeChoice} from './native-context.mjs';
 import {isActualUseMessage} from './usage-events.mjs';
 
@@ -10,7 +10,7 @@ export const BARD_FAMILIAR_SOURCES=Object.freeze({
 const S=BARD_FAMILIAR_SOURCES,ACTION='bard-familiar:focus',BONUS=`${ID}-accompanist`;
 const values=collection=>Array.from(collection?.values?.()??collection??[]);
 const states=new WeakMap();
-const stateFor=game=>{if(!states.has(game))states.set(game,{queue:new SerialActions(),payments:new Map()});return states.get(game);};
+const stateFor=game=>{if(!states.has(game))states.set(game,{payments:new Map()});return states.get(game);};
 const ability=(item,source)=>item?.type==='action'&&item.actor?.type==='familiar'&&getSourceId(item)===source;
 const owner=(actor,user)=>!!user&&actor?.testUserPermission?.(user,'OWNER')===true;
 const authorId=message=>message?.author?.id??message?.user?.id??message?.user;
@@ -19,7 +19,7 @@ const recordMatches=(record,expected)=>record&&Object.entries(expected).every(([
 
 /** These two original abilities use native owned items, native Use and native Check.roll. */
 export function createBardFamiliarProvider({game,fromUuid=globalThis.fromUuid,confirm=showNativeChoice,onError=()=>{},randomId=()=>globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.randomUUID()}={}){
- const state=stateFor(game);
+ const state=stateFor(game),castEvents=getNativeCastEvents({game,fromUuid});
  const resolveAction=item=>ability(item,S.focus)?ACTION:undefined;
  function masterOf(familiar){
   const master=game.actors.get(familiar?.system?.master?.id);
@@ -61,7 +61,7 @@ export function createBardFamiliarProvider({game,fromUuid=globalThis.fromUuid,co
  }
  async function executeUsage(context){
   const initial=usageContext(context);
-  return state.queue.run(initial.master.uuid,async()=>{
+  return castEvents.withActorResourceLock(initial.master,async()=>{
    const ctx=usageContext(context),{item}=context,{master,familiar,r,expected}=ctx;
    if(master.uuid!==initial.master.uuid)throw Error('魔宠的主人已改变，请核对本次使用。');
    const prior=master.flags?.[ID]?.bardFamiliar?.focus?.[r.id]??item.flags?.[ID]?.bardFamiliar?.refunds?.[r.id];
