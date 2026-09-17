@@ -9,6 +9,10 @@ export function compileGlimpseResistance({actor,template,champion,ability,nonce,
  // Contextual clones embed their supplied source data immediately: unlike
  // createEmbeddedDocuments, this path does not assign new document IDs.
  do{effect._id=globalThis.foundry?.utils?.randomID?.(16)??crypto.randomUUID().replaceAll('-','').slice(0,16)}while(actor.items?.has?.(effect._id));
+ // No _preCreate runs here to initialize the compendium's start time. This
+ // private compilation carrier is never embedded in the live actor; the exact
+ // Resistance instance below lives only inside withGlimpseResistance's finally.
+ effect.system.duration={value:-1,unit:'unlimited',expiry:null,sustained:false};
  effect.system.context={origin:{actor:champion.uuid,item:ability.uuid},target:null,roll:null};
  const clone=actor.getContextualClone([...new Set([...options,glimpseMarker(nonce)])],[effect]);
  const resistance=clone.attributes?.resistances?.find(r=>r.type==='all-damage'&&!(r.exceptions?.length)&&!(r.doubleVs?.length)&&r.value>=champion.level+2&&typeof r.test==='function'&&typeof r.getDoubledValue==='function');
