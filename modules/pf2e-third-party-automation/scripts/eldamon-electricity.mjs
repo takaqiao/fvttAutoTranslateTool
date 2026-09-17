@@ -68,7 +68,7 @@ export function receiptElectricityAmount(message,record){
  const fact=message.flags?.[ID]?.electricityApplied;
  return fact?.nonce===record.nonce&&Number.isFinite(fact.amount)&&fact.amount>=0?fact.amount:null;
 }
-const fingerprint=m=>JSON.stringify({author:author(m),speaker:m.speaker,pf:m.flags?.pf2e,electricity:m.flags?.[ID]?.electricityApplied});
+const fingerprint=m=>JSON.stringify({author:author(m),speaker:m.speaker,pf:m.flags?.pf2e,electricity:m.flags?.[ID]?.electricityApplied,shieldBlock:m.flags?.[ID]?.shieldBlock});
 const sourceFingerprint=m=>JSON.stringify({pf:m.flags?.pf2e,source:m.flags?.[ID]?.electricitySource,rolls:m.rolls?.map(r=>r.toJSON?.()??{options:r.options,instances:r.instances})});
 
 /** Active-GM ledger. Document effects retain their published rules and GrantItem
@@ -124,6 +124,12 @@ export function createElectricityLedger({game,fromUuid,queue=new SerialActions()
   const key=`shock:${pending.key}`;if(state.operations[key]?.status==='done')return;
   if(!electricityEffects(actor,S.shocked).some(i=>i.flags?.[ID]?.electricityShock?.key===pending.key)){
    const data=await effectSource(S.shocked,{electricityShock:copy(pending)},pending.context);
+   // The published gate protects Shocked granted by one's own Charged parent.
+   // A separately inflicted hostile copy still penalizes electricity saves.
+   if(pending.sourceActorUuid!==actor.uuid)for(const rule of data.system.rules??[]){
+    if(rule.key==='FlatModifier'&&rule.value===-2&&rule.selector?.length===2&&rule.selector.includes('fortitude')&&rule.selector.includes('reflex')&&
+     JSON.stringify(rule.predicate)===JSON.stringify([{and:['electricity',{nor:['resistant-shell']}]}]))rule.predicate=['electricity'];
+   }
    // The original unlimited effect must not expire on the recipient's initiative.
    data.system.duration={value:-1,unit:'unlimited',expiry:null,sustained:false};
    gm();await actor.createEmbeddedDocuments('Item',[data]);
@@ -147,9 +153,11 @@ export function createElectricityLedger({game,fromUuid,queue=new SerialActions()
    !sourceCombat||casterCombat?.id!==sourceCombat.id||selection.targetUuids?.length!==1||selection.targetUuids[0]!==target.uuid||record.frame!==frame(sourceCombat)||record.status!=='confirmed'||record.receiptUuid!==evidence.receiptUuid||record.effectKey!==evidence.effectKey||!await verified(record))return false;
   const all=values(source.parent.tokens).flatMap(t=>Object.values(electricityState(t.actor).damage));
   const sourceMessage=await fromUuid(record.sourceMessageUuid),manifest=sourceMessage.flags?.[ID]?.electricitySource?.targetUuids??[];
-  // Conservatively reserve the source's entire original target set while an area
-  // application is in flight. A second target cannot sneak in between receipts.
-  const hit=manifest.includes(target.uuid)||all.some(r=>r.effectKey===record.effectKey&&r.tokenUuid===target.uuid&&(r.status==='pending'||r.electricityAmount>0));
+  // Reserve original targets until every observed application to that target
+  // has an unchanged authentic zero receipt. Pending/mixed/positive evidence
+  // never releases the reservation, including a later sibling application.
+  const applications=all.filter(r=>r.effectKey===record.effectKey&&r.tokenUuid===target.uuid);
+  const hit=applications.length?!(await Promise.all(applications.map(async r=>r.status==='confirmed'&&r.electricityAmount===0&&await verified(r)))).every(Boolean):manifest.includes(target.uuid);
   return chainEligibility({triggerDamage:record.electricityAmount,sourceDistance:caster.object?.distanceTo?.(source.object),targetDistance:source.object?.distanceTo?.(target.object),
    adjacentCaster:caster.object?.distanceTo?.(target.object)<=5,enemy:!!actor.alliance&&!!target.actor.alliance&&actor.alliance!==target.actor.alliance,
    shocked:electricityEffects(target.actor,S.shocked).length>0,hitBySameEffect:hit,reactionAvailable:reactionAvailable(actor,{combat:casterCombat,modules:game.modules,messages:game.messages,users:game.users}),discharge:selection.discharge,siphoning:kind==='siphoning'});

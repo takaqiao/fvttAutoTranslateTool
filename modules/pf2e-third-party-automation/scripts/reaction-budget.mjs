@@ -201,13 +201,23 @@ export function createReactionBudget({game,fromUuid=globalThis.fromUuid,onError=
   const author=message.author??game.users.get(message.user?.id??message.user);
   if(!author||creator&&creator!==author.id&&creator!==game.users.activeGM?.id)return false;
   const actorId=message.speaker?.actor,actor=message.actor??(typeof actorId==='string'?await fromUuid?.(`Actor.${actorId}`):null);if(!actor?.testUserPermission?.(author,'OWNER'))return false;
-  const receipt=own(message).reactionBudget,epoch=reactionEpoch(actor,game);if(!epoch||receipt?.epoch&&receipt.epoch!==epoch&&!own(message).disruptPreyReaction&&!provenCastClaim(message,actor,game))return false;
+  // The viewed encounter can differ on each client. Bind native card payment
+  // to its actor/token's unique actual encounter and recheck it after awaits.
+  const encounter=()=>{
+   const token=message.speaker?.scene&&message.speaker?.token?`Scene.${message.speaker.scene}.Token.${message.speaker.token}`:null;
+   const matches=values(game.combats??(game.combat?[game.combat]:[])).filter(c=>c.started&&c.turns?.some(t=>t.actor?.uuid===actor.uuid&&(!token||t.token?.uuid===token)));
+   return matches.length===1?matches[0]:null;
+  };
+  const combat=encounter();if(!combat)return false;
+  const bounded={combat,modules:game.modules,messages:game.messages,users:game.users};
+  const receipt=own(message).reactionBudget,epoch=reactionEpoch(actor,bounded),current=()=>encounter()===combat&&epoch===reactionEpoch(actor,bounded);
+  if(!epoch||receipt?.epoch&&receipt.epoch!==epoch&&!own(message).disruptPreyReaction&&!provenCastClaim(message,actor,game))return false;
   // Queue before resolving the item: a competing automatic reaction must wait
   // for this already-posted native reaction to be persisted first.
   return withReactionReservation(actor,game,async()=>{
-   if(!isActiveGM(game)||epoch!==reactionEpoch(actor,game))return false;
+   if(!isActiveGM(game)||!current())return false;
    const itemUuid=message.flags?.pf2e?.origin?.uuid,item=message.item??(typeof itemUuid==='string'?await fromUuid?.(itemUuid):null);
-   if(!isActiveGM(game)||epoch!==reactionEpoch(actor,game)||game.messages.get(message.id)!==message||!actor.testUserPermission?.(author,'OWNER'))return false;
+   if(!isActiveGM(game)||!current()||game.messages.get(message.id)!==message||!actor.testUserPermission?.(author,'OWNER'))return false;
    if(item?.actor&&item.actor.uuid!==actor.uuid)return false;
    const cast=provenCastClaim(message,actor,game),entry=cast?{type:'reaction',cost:1,slug:cast.slug,msgId:message.id,claimKey:cast.claimKey}:reactionData(message,item,actor);if(!entry)return false;
    const paid=cast??provenDisruptClaim(message,actor,game);
@@ -216,12 +226,12 @@ export function createReactionBudget({game,fromUuid=globalThis.fromUuid,onError=
     // different reaction. Stamp only this verified card for duplicate delivery.
     if(receipt?.epoch===paid.epoch)return false;
     if(!isActiveGM(game))return false;
-    await message.update({[`flags.${MODULE_ID}.reactionBudget`]:{epoch:paid.epoch,actorUuid:actor.uuid,combatantId:combatantFor(actor,game)?.id}});
+    await message.update({[`flags.${MODULE_ID}.reactionBudget`]:{epoch:paid.epoch,actorUuid:actor.uuid,combatantId:combatantFor(actor,bounded)?.id}});
     return true;
    }
-   const combatant=combatantFor(actor,game),previous=own(combatant).reactionBudget,entries=previous?.epoch===epoch?[...previous.entries??[]]:[],index=entries.findIndex(e=>e.msgId===entry.msgId);
+   const combatant=combatantFor(actor,bounded),previous=own(combatant).reactionBudget,entries=previous?.epoch===epoch?[...previous.entries??[]]:[],index=entries.findIndex(e=>e.msgId===entry.msgId);
    if(index>=0){const updated={...entries[index],...entry};if(JSON.stringify(entries[index])===JSON.stringify(updated))return false;entries[index]=updated;}else entries.push(entry);
-   if(!isActiveGM(game)||epoch!==reactionEpoch(actor,game))return false;
+   if(!isActiveGM(game)||!current())return false;
    await combatant.update({[`flags.${MODULE_ID}.reactionBudget`]:{epoch,entries}});
    if(!receipt&&isActiveGM(game))await message.update({[`flags.${MODULE_ID}.reactionBudget`]:{epoch,actorUuid:actor.uuid,combatantId:combatant.id}});
    return true;

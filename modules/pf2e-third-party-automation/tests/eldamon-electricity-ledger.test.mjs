@@ -3,6 +3,42 @@ import assert from 'node:assert/strict';
 import {createElectricityLedger,ELECTRICITY_SOURCES as S,electricityState,electricityEffects} from '../scripts/eldamon-electricity.mjs';
 const ID='pf2e-third-party-automation';
 import {fixture} from './eldamon-electricity-fixture.mjs';
+import {createReactionBudget,genericReactionAvailable} from '../scripts/reaction-budget.mjs';
+
+test('authentic confirmed zero releases an original area target, while unresolved and changed receipts remain excluded',async()=>{
+ const f=fixture();f.item(f.other,'shock',S.shocked);const m=f.source('pure',[f.tokens[1].uuid,f.tokens[2].uuid]);await (await f.damage(f.target,{m})).finish();
+ const payload={actorUuid:f.caster.uuid,sourceTokenUuid:f.tokens[0].uuid,selection:{targetUuids:[f.tokens[2].uuid],discharge:false},kind:'siphoning'};
+ const candidates=()=>f.ledger().candidates(payload,f.owner);assert.equal((await candidates()).length,0);
+ const zero=await f.damage(f.other,{m,amount:0});assert.equal((await candidates()).length,0);await zero.finish();assert.equal((await candidates()).length,1);
+ zero.receipt.flags[ID].electricityApplied.amount=1;assert.equal((await candidates()).length,0);zero.receipt.flags[ID].electricityApplied.amount=0;
+ assert.equal((await candidates()).length,1);const sibling=await f.damage(f.other,{m,amount:0});assert.equal((await candidates()).length,0);await sibling.finish();assert.equal((await candidates()).length,1);
+ const positive=await f.damage(f.other,{m,amount:1});await positive.finish();f.item(f.other,'restoredShock',S.shocked);assert.equal((await candidates()).length,0);
+});
+
+test('hostile independent Shocked retains its electricity save penalty through Resistant Shell without changing the original template',async()=>{
+ const f=fixture();f.power.sourceId=f.receipt.sourceUuid=S.anvil;f.item(f.target,'shell',S.shell);
+ const original={type:'effect',flags:{},system:{rules:[{key:'FlatModifier',selector:['fortitude','reflex'],value:-2,predicate:[{and:['electricity',{nor:['resistant-shell']}]}]},{key:'RollOption',domain:'all',option:'shocked'}]}};
+ f.docs.set(S.shocked,{type:'effect',toObject:()=>structuredClone(original)});
+ const save={id:'save',uuid:'ChatMessage.save',isCheckRoll:true,rolls:[{_evaluated:true,total:10}],speaker:{actor:f.target.id,scene:'s',token:f.target.id},flags:{pf2e:{origin:{uuid:f.power.uuid},context:{type:'saving-throw',outcome:'failure',options:[`${ID}:metapower:channel:channel`]}}}};
+ f.game.messages.set(save.id,save);f.docs.set(save.uuid,save);await f.ledger().check(save);await (await f.damage()).finish();
+ const [shock]=electricityEffects(f.target,S.shocked),predicate=shock.system.rules[0].predicate;
+ // Exercise the relevant PF2e predicate operators against real roll options.
+ const matches=(p,options)=>p.every(term=>typeof term==='string'?options.has(term):term.and?matches(term.and,options):term.nor?!term.nor.some(t=>matches([t],options)):false);
+ assert.equal(matches(predicate,new Set(['electricity','resistant-shell'])),true);assert.equal(matches(predicate,new Set(['fire','resistant-shell'])),false);
+ assert.deepEqual(shock.system.rules[1],original.system.rules[1]);assert.deepEqual(f.docs.get(S.shocked).toObject(),original);
+ await f.ledger().channel(f.channel,f.owner);assert.deepEqual(electricityEffects(f.caster,S.charged)[0].system.rules,[{key:'GrantItem',uuid:S.shocked}]);
+});
+
+test('native Chain reaction card pays its actual encounter once when another encounter is viewed',async()=>{
+ const f=fixture();f.game.modules=new Map();f.power.sourceId=S.chain;f.power.system.actionType={value:'reaction'};f.card.actor=f.caster;f.card.item=f.power;
+ const update=async function(changes){for(const [key,value]of Object.entries(changes)){const parts=key.split('.');let object=this;for(const part of parts.slice(0,-1))object=object[part]??={};object[parts.at(-1)]=structuredClone(value);}};
+ f.card.update=update;f.combat.turns[0].update=update;f.combat.turns[0].flags={};
+ f.game.combat={id:'unrelated',started:true,round:9,turn:0,turns:[]};f.game.combats.set(f.game.combat.id,f.game.combat);
+ const budget=createReactionBudget({game:f.game,fromUuid:async id=>f.docs.get(id)}),bounded={...f.game,combat:f.combat};
+ assert.equal(genericReactionAvailable(f.caster,bounded),true);assert.equal(await budget.record(f.card,f.owner.id),true);assert.equal(genericReactionAvailable(f.caster,bounded),false);
+ assert.equal(await budget.record(f.card,f.owner.id),false);assert.equal(f.combat.turns[0].flags[ID].reactionBudget.entries.length,1);assert.equal(f.card.flags[ID].reactionBudget.epoch,'c:1');
+ const duplicate={...f.combat,id:'duplicate'};f.game.combats.set(duplicate.id,duplicate);assert.equal(await budget.record(f.card,f.owner.id),false);
+});
 
 test('committed normal use grants native Charged once, preserving GrantItem; Siphon and discharge never gain',async()=>{
  const f=fixture();await f.ledger().channel(f.channel,f.owner);await f.ledger().channel(f.channel,f.owner);

@@ -2,7 +2,31 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {createEldamonElectricityProvider,preserveElectricityOnAlter} from '../scripts/eldamon-electricity-provider.mjs';
 import {fixture} from './eldamon-electricity-fixture.mjs';
+import {destructiveBlockAmounts} from '../scripts/shield-damage-adapter.mjs';
+import {ELECTRICITY_SOURCES as S,electricityEffects,electricityState} from '../scripts/eldamon-electricity.mjs';
 const ID='pf2e-third-party-automation';
+
+test('Destructive Block final native proof overrides earlier IWR amount; uncertain or mismatched proof cannot trigger lifecycle',async()=>{
+ for(const scenario of ['absorbed','partial','uncertain','wrong-nonce','missing-proof']){
+  const f=fixture();f.target.hitPoints={max:20,value:20};f.item(f.target,'charge',S.charged,{system:{badge:{value:2}}});f.item(f.other,'shock',S.shocked);
+  const hooks={},provider=createEldamonElectricityProvider({game:f.game,fromUuid:async id=>f.docs.get(id)});provider.register({Hooks:{on:(name,fn)=>{hooks[name]=fn;}}});
+  const source=f.source(),prepared=await provider.beforeDamage(f.target,{damage:source.rolls[0],token:f.tokens[1],item:f.power});
+  provider.observeNativeIWR(f.target,prepared.params,{},prepared.params.rollOptions,{actorDamage:10,shieldDamage:0},false);
+  const nonce='destructive123',calculation=destructiveBlockAmounts({incoming:10,shieldHardness:scenario==='partial'?4:5,shieldHP:100});
+  const block={kind:'destructive-block',nonce:scenario==='wrong-nonce'?'othernonce':nonce,shieldId:'shield',...calculation,blocked:true,...(scenario==='uncertain'?{uncertain:true}:{})};
+  const data={id:'blocked',uuid:'ChatMessage.blocked',author:f.gm,speaker:{actor:f.target.id,scene:'s',token:f.target.id},flags:{[ID]:scenario==='missing-proof'?{}:{shieldBlock:block},pf2e:{origin:{uuid:f.power.uuid},context:{type:'damage-taken',options:[...prepared.params.rollOptions,`${ID}:destructive-block:${nonce}`]},appliedDamage:{uuid:f.target.uuid,isHealing:false,shield:{id:'shield',damage:calculation.shieldDamage},updates:[]}}}};
+  const message={...data,updateSource(patch){this.flags[ID].electricityApplied=patch[`flags.${ID}.electricityApplied`];}};
+  hooks.preCreateChatMessage(message,data,{},f.gm.id);f.game.messages.set(message.id,message);f.docs.set(message.uuid,message);hooks.createChatMessage(message,{},f.gm.id);
+  await provider.afterDamage(prepared.receipt,{applied:true,uncertain:false});
+  const expected=scenario==='absorbed'?0:scenario==='partial'?2:null,record=electricityState(f.target).damage[prepared.receipt.nonce];
+  assert.equal(record.electricityAmount,expected,scenario);assert.equal(electricityEffects(f.target,S.charged)[0].system.badge.value,expected>0?1:2,scenario);
+  const candidates=await f.ledger().candidates({actorUuid:f.caster.uuid,sourceTokenUuid:f.tokens[0].uuid,selection:{targetUuids:[f.tokens[2].uuid],discharge:false},kind:'normal'},f.owner);
+  assert.equal(candidates.length,expected>0?1:0,scenario);if(expected>0){
+   assert.equal(candidates[0].amount,expected);message.flags[ID].shieldBlock.actorDamage=0;
+   assert.equal((await f.ledger().candidates({actorUuid:f.caster.uuid,sourceTokenUuid:f.tokens[0].uuid,selection:{targetUuids:[f.tokens[2].uuid],discharge:false},kind:'normal'},f.owner)).length,0,'changed final native proof');
+  }
+ }
+});
 
 test('native damage publication stamps durable source identity shared by altered target rolls',async()=>{
  const gm={id:'gm',targets:new Set([{document:{uuid:'Scene.s.Token.a'}}])},game={user:gm,users:{activeGM:gm},messages:new Map()};
