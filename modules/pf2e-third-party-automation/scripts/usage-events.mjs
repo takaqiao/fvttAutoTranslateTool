@@ -1,6 +1,7 @@
 import {MODULE_ID,SOURCES,hasSource} from './rules.mjs';
 
 export const USE_ACTION_OPTION='origin:action:slug:use-action';
+export const isActualUseMessage=message=>message?.flags?.[MODULE_ID]?.usageInput?.actualUse===true||message?.flags?.pf2e?.origin?.rollOptions?.includes(USE_ACTION_OPTION)===true;
 const entries=[['breath','breath'],['circadian','rest'],['cycle','cycle']];
 const values=collection=>Array.from(collection?.values?.()??collection??[]);
 const authorId=message=>message.author?.id??message.user?.id??message.user;
@@ -26,7 +27,7 @@ export function parseUsageMessage(message,item,{resolveAction=defaultUsageAction
  }else if(pf.context?.type!=='self-effect'||pf.context.item!==item.id)return null;
  if(message.speaker?.actor!==actor.id)return null;
  const action=resolveAction(item);if(!action)return null;
- return {action,itemUuid:item.uuid,actorUuid:actor.uuid,userId:authorId(message),actualUse:own.usageInput?.actualUse===true||origin?.rollOptions?.includes(USE_ACTION_OPTION)===true,frequencyReceiptId:own.usageInput?.frequencyReceiptId??null};
+ return {action,itemUuid:item.uuid,actorUuid:actor.uuid,userId:authorId(message),actualUse:isActualUseMessage(message),frequencyReceiptId:own.usageInput?.frequencyReceiptId??null};
 }
 
 /** Mirror committed frequency values so concurrent stale writes cannot pay for two usages. */
@@ -53,7 +54,7 @@ export function createFrequencyTracker({now=Date.now,ttl=5000,matches=defaultFre
 }
 
 /** Install on every client at ready; only activeGM calls executeUsage. Returns an unregister function. */
-export function registerUsageEvents({game,Hooks,executeUsage,resolveAction=defaultUsageAction,captureUsage=()=>null,onMessageOutcome=()=>false,observeItemUse=(_item,native)=>native(),tracksFrequency=defaultFrequencyMatch,fromUuid=globalThis.fromUuid,libWrapper=globalThis.libWrapper,canvas=globalThis.canvas,onError=error=>console.error(MODULE_ID,error),now=Date.now}){
+export function registerUsageEvents({game,Hooks,executeUsage,resolveAction=defaultUsageAction,requiresActualUse=()=>false,captureUsage=()=>null,onMessageOutcome=()=>false,observeItemUse=(_item,native)=>native(),tracksFrequency=defaultFrequencyMatch,fromUuid=globalThis.fromUuid,libWrapper=globalThis.libWrapper,canvas=globalThis.canvas,onError=error=>console.error(MODULE_ID,error),now=Date.now}){
  const tracker=createFrequencyTracker({now,matches:tracksFrequency}),pending=new Map(),scopes=new Map(),inFlight=new Set(),processing=new Set(),registrations=[],wrappers=[],listeners=[],capturedElements=new WeakSet();
  const on=(name,callback)=>registrations.push([name,Hooks.on(name,callback)]);
  const seedActor=actor=>{for(const item of values(actor?.items))tracker.seed(item);};
@@ -178,6 +179,8 @@ export function registerUsageEvents({game,Hooks,executeUsage,resolveAction=defau
    const pf=message.flags?.pf2e??{},itemUuid=pf.origin?.uuid;
    const item=itemUuid?await fromUuid(itemUuid):message.item??message.actor?.items?.get?.(pf.context?.item)??game.actors.get?.(message.speaker?.actor)?.items.get?.(pf.context?.item);
    event=parseUsageMessage(message,item,{resolveAction});if(!event)return;
+   // Opted-in activities ignore display cards before claiming a usage or resource.
+   if(requiresActualUse(item,event.action)&&!event.actualUse)return;
    const user=game.users.get(event.userId);
    if(!user||(creatingUserId&&event.userId!==creatingUserId)||!item.actor.testUserPermission(user,'OWNER'))return;
    if(game.user?.id!==game.users.activeGM?.id||message.flags?.[MODULE_ID]?.usage)return;
