@@ -1,7 +1,7 @@
 import {MODULE_ID,hasSource} from './rules.mjs';
 import {SerialActions} from './runtime.mjs';
 import {isActiveGM} from './native-context.mjs';
-import {reactionEpoch} from './reaction-budget.mjs';
+import {shieldEncounter} from './reaction-budget.mjs';
 
 export const DISARMING_BLOCK_SOURCE='Compendium.pf2e.feats-srd.Item.dSSwRyuhKTq1VubX';
 const TITAN='Compendium.pf2e.feats-srd.Item.KxaYlC50zzHysJj8',BONUS='Compendium.pf2e.other-effects.Item.EpvyTaklBQAOr1eT',OFF_GUARD='Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg';
@@ -15,8 +15,7 @@ const terminal=new Set(['done','declined','cancelled','ineligible']);
 export const disarmWeaponOption=weapon=>`${MODULE_ID}:disarm-weapon:${typeof weapon==='string'?weapon:weapon.uuid}`;
 export const getWeakenedGrasp=(actor,weaponUuid)=>values(actor?.items).find(i=>i.type==='effect'&&own(i).kind==='weakened-grasp'&&own(i).weaponUuid===weaponUuid&&i.isExpired!==true)??null;
 const attackIds=(actor,weapon)=>actor.type==='npc'?values(actor.items).filter(i=>i.type==='melee'&&i.flags?.pf2e?.linkedWeapon===weapon.id).map(i=>i.id).sort():[weapon.id];
-const ownTurn=(a,g)=>!!g.combat?.started&&g.combat.turns?.[g.combat.turn]?.actor?.uuid===a.uuid;
-const turnKey=(a,g)=>ownTurn(a,g)?`${g.combat.id}:${g.combat.round}:${g.combat.turn}`:null;
+const turnKey=(actor,tokenUuid,game)=>{const actual=shieldEncounter(actor,{uuid:tokenUuid},game),c=actual?.combat;return actual&&c.turn===actual.index?`${c.id}:${c.round}:${c.turn}`:null;};
 const size=a=>{const s=a?.size?.value??a?.size??a?.system?.traits?.size?.value;return ['tiny','sm','med','lg','huge','grg'].indexOf(s)};
 const rank=a=>a?.getStatistic?.('athletics')?.rank??a?.skills?.athletics?.rank??0;
 function performingWeapon(actor,game){
@@ -36,7 +35,7 @@ export function createDisarmingBlock({game,canvas=globalThis.canvas,fromUuid=glo
  const gm=()=>{if(!isActiveGM(game))throw Error('卸武格挡必须由当前主GM结算。')};
  const receipt=(actor,nonce)=>own(actor).uses?.find(r=>r.nonce===nonce);
  const save=async(actor,record)=>{gm();const records=[...(own(actor).uses??[]).filter(r=>r.nonce!==record.nonce),structuredClone(record)],recent=new Set(records.filter(r=>terminal.has(r.status)).slice(-64));await actor.update({[`flags.${MODULE_ID}.disarmingBlock.uses`]:records.filter(r=>!terminal.has(r.status)||recent.has(r))});tracked.set(actor.uuid,actor);};
- const currentTrigger=(actor,e)=>{if(e.epoch!=null&&e.epoch!==reactionEpoch(actor,game))throw Error('原盾牌格挡的回合已经结束，旧触发不能再次使用。')};
+ const currentTrigger=(actor,e)=>{if(e.epoch!==(shieldEncounter(actor,{uuid:e.tokenUuid},game)?.epoch??null))throw Error('原盾牌格挡的回合已经结束，旧触发不能再次使用。')};
  async function putEffect(actor,key,data){
   gm();const existing=values(actor.items).filter(i=>i.type==='effect'&&i.flags?.[MODULE_ID]?.nativeEffectKey===key),next=structuredClone(data);next.flags[MODULE_ID].nativeEffectKey=key;
   if(!existing.length)return (await actor.createEmbeddedDocuments('Item',[next]))[0];
@@ -75,8 +74,8 @@ export function createDisarmingBlock({game,canvas=globalThis.canvas,fromUuid=glo
   // weapon option still invalidates this exact-weapon timing proof.
   const exact=disarmWeaponOption(r.weaponUuid),parent=disarmWeaponOption(r.weaponUuid.split('.')[0]);
   if(options.some(o=>typeof o==='string'&&o.startsWith(`${MODULE_ID}:disarm-weapon:`)&&o!==exact&&o!==parent))return;
-  const c=game.combat,index=c?.started?c.turns?.findIndex(t=>t.actor?.uuid===actor.uuid&&t.token?.uuid===r.tokenUuid)??-1:-1,combatant=index>=0?c.turns[index]:null;
-  const timing={nonce:r.nonce,actorUuid:actor.uuid,tokenUuid:r.tokenUuid,worldTime:game.time?.worldTime??0,initiative:combatant?.initiative??actor.combatant?.initiative??null,rounds:index>=0&&index>c.turn?0:1,combat:combatant?{id:c.id,round:c.round,turn:c.turn,combatantId:combatant.id}:null};
+  const actual=shieldEncounter(actor,{uuid:r.tokenUuid},game),c=actual?.combat,combatant=actual?.combatant;
+  const timing={nonce:r.nonce,actorUuid:actor.uuid,tokenUuid:r.tokenUuid,worldTime:game.time?.worldTime??0,initiative:combatant?.initiative??null,rounds:actual&&actual.index>c.turn?0:1,combat:combatant?{id:c.id,round:c.round,turn:c.turn,combatantId:combatant.id}:null};
   card.updateSource({[`flags.${MODULE_ID}.disarmingBlock.timing`]:timing});
  }
  function failureTiming(card,r){
@@ -134,7 +133,7 @@ export function createDisarmingBlock({game,canvas=globalThis.canvas,fromUuid=glo
   if(rolling.has(nonce))throw Error('此卸武格挡检定已开始，不会重掷。');
   const d=await documents(r);requirements(d);
   if(sender.id!==game.users.activeGM?.id)throw Error('主GM已更换，旧检定请求失效。');
-  if(turnKey(actor,game)!==r.turnKey)throw Error('缴械检定前回合已改变，需要重新确认MAP。');
+  currentTrigger(actor,r);if(turnKey(actor,r.tokenUuid,game)!==r.turnKey)throw Error('缴械检定前回合已改变，需要重新确认MAP。');
   // PF2e 8.5 simpleRollActionCheck selects the first native origin, then
   // StatisticCheck reselects the target from its actor. Passing a Token alone
   // does not bind either choice, so reject mismatches before any native roll.
@@ -158,12 +157,12 @@ export function createDisarmingBlock({game,canvas=globalThis.canvas,fromUuid=glo
   });
   if(!record)return {status:receipt(actor,event.nonce)?.status??'ignored'};
   try{
-  const mapChoices=()=>[0,1,2].map(map=>({value:`use:${map}`,label:`卸武格挡（${map===0?'无MAP':map===1?'第二次攻击':'第三次攻击'}）`}));let choiceTurn=turnKey(actor,game);
+  const mapChoices=()=>[0,1,2].map(map=>({value:`use:${map}`,label:`卸武格挡（${map===0?'无MAP':map===1?'第二次攻击':'第三次攻击'}）`}));let choiceTurn=turnKey(actor,event.tokenUuid,game);
   let choices=choiceTurn?mapChoices():[{value:'use:0',label:'使用卸武格挡（自由动作）'}];choices.push({value:'decline',label:'不使用卸武格挡'});
   let selected=await choose({actor,user:game.users.get(record.ownerId),title:'卸武格挡：缴械本次攻击所用的武器？',choices});
-  if(selected?.startsWith('use:')&&turnKey(actor,game)&&turnKey(actor,game)!==choiceTurn){gm();choiceTurn=turnKey(actor,game);choices=[...mapChoices(),{value:'decline',label:'不使用卸武格挡'}];selected=await choose({actor,user:game.users.get(record.ownerId),title:'缴械现在发生于自己回合：请选择当前MAP',choices})}
+  if(selected?.startsWith('use:')&&turnKey(actor,event.tokenUuid,game)&&turnKey(actor,event.tokenUuid,game)!==choiceTurn){gm();choiceTurn=turnKey(actor,event.tokenUuid,game);choices=[...mapChoices(),{value:'decline',label:'不使用卸武格挡'}];selected=await choose({actor,user:game.users.get(record.ownerId),title:'缴械现在发生于自己回合：请选择当前MAP',choices})}
   await authentic(event);
-  record=await queue.run(actor.uuid,async()=>{gm();const current=receipt(actor,event.nonce);if(current?.status!=='offered')return null;if(selected==null||selected==='decline'){await save(actor,{...current,status:'declined'});return null}if(!choices.some(c=>c.value===selected))throw Error('卸武格挡选择无效。');try{currentTrigger(actor,event);requirements(await documents(event))}catch(error){gm();await save(actor,{...current,status:'ineligible',reason:error.message});return null}gm();const currentTurn=turnKey(actor,game);if(currentTurn&&currentTurn!==choiceTurn)throw Error('缴械确认期间回合已变化，未使用新的MAP。');const map=currentTurn?Number(selected.split(':')[1]):0;const r={...current,status:'claimed',map,turnKey:currentTurn};await save(actor,r);return r});
+  record=await queue.run(actor.uuid,async()=>{gm();const current=receipt(actor,event.nonce);if(current?.status!=='offered')return null;if(selected==null||selected==='decline'){await save(actor,{...current,status:'declined'});return null}if(!choices.some(c=>c.value===selected))throw Error('卸武格挡选择无效。');try{currentTrigger(actor,event);requirements(await documents(event))}catch(error){gm();await save(actor,{...current,status:'ineligible',reason:error.message});return null}gm();const currentTurn=turnKey(actor,event.tokenUuid,game);if(currentTurn&&currentTurn!==choiceTurn)throw Error('缴械确认期间回合已变化，未使用新的MAP。');const map=currentTurn?Number(selected.split(':')[1]):0;const r={...current,status:'claimed',map,turnKey:currentTurn};await save(actor,r);return r});
   if(!record)return {status:receipt(actor,event.nonce)?.status};
   gm();let result;
   try{

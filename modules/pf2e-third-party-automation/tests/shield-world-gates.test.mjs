@@ -24,8 +24,17 @@ function blockFixture(world=fortress){
   const message={id:'native-block',author:user,speaker:{actor:actor.id,scene:'scene',token:token.id},content:'native block',flags:{pf2e:{context:{type:'damage-taken',options:[...p.rollOptions]},appliedDamage:{shield:{id:'shield',damage:4}}}}};
   game.messages.set(message.id,message);hooks.get('createChatMessage')(message,{},user.id);return actor;
  };
- return {actor,observer,params,native,delivered};
+ return {actor,token,game,observer,params,native,delivered};
 }
+
+test('shield event epoch follows the exact actor and token encounter while another encounter is viewed',async()=>{
+ const f=blockFixture(),actual={id:'actual',started:true,round:3,turn:0,turns:[{id:'defender',actor:f.actor,token:f.token}]};
+ f.game.combat={id:'viewed-other',started:true,round:10,turn:0,turns:[]};f.game.combats=new Map([[actual.id,actual]]);
+ const prepared=await f.observer.beforeDamage(f.actor,f.params);
+ await f.observer.wrapNativeDamage(f.actor,prepared.params,f.native);
+ await f.observer.afterDamage(prepared.receipt,{applied:true,uncertain:false});
+ assert.equal(f.delivered[0].epoch,'actual:3');
+});
 
 test('fortress native block dispatches one exact-weapon event after its real result card',async()=>{
  const f=blockFixture(),prepared=await f.observer.beforeDamage(f.actor,f.params);
