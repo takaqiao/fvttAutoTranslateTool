@@ -28,13 +28,14 @@ export function sourceUuid(item){return item?.sourceId??item?._stats?.compendium
 export function metapowerKind(item){const source=sourceUuid(item);return ['siphoning','widen'].find(kind=>METAPOWER_SOURCES[kind]===source)??null}
 export function powerProfile(item){const source=sourceUuid(item);return Object.hasOwn(POWER_PROFILES,source)?POWER_PROFILES[source]:null}
 
-/** The package does not establish a Widen cost. Its actual-use entry must supply
- * the table's confirmed cost explicitly; reading a passive feat is not activation. */
+/** The original Eldamon PF2e book, printed p.60 (PDF p.61), establishes Widen
+ * as one action despite the package's passive metadata. Reading the feat is not
+ * activation. Retain the old argument only to reject conflicting cost overrides. */
 export function metapowerActionCost(kind,policy={}){
  if(kind==='siphoning')return 1;
  if(kind!=='widen')throw Error('Unsupported metapower kind.');
- if(![1,2,3,'free'].includes(policy.widenActionCost))throw Error('Widen action cost requires an explicit policy.');
- return policy.widenActionCost;
+ if(Object.hasOwn(policy,'widenActionCost')&&policy.widenActionCost!==1)throw Error('Widen costs one action; a conflicting cost override is not supported.');
+ return 1;
 }
 
 /** Pure base -> final geometry, never feed the previously widened distance back. */

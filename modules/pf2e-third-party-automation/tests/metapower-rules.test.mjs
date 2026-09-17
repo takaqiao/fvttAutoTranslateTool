@@ -66,7 +66,6 @@ test('Disruptive coefficient matches target creature traits only and preserves s
 });
 test('uncertain policies require explicit input only for dependent branches',()=>{
  assert.equal(typeof api.metapowerActionCost,'function');assert.equal(api.metapowerActionCost('siphoning'),1);
- assert.throws(()=>api.metapowerActionCost('widen'),/policy|cost/i);assert.equal(api.metapowerActionCost('widen',{widenActionCost:1}),1);assert.equal(api.metapowerActionCost('widen',{widenActionCost:'free'}),'free');
  assert.throws(()=>snapshot('voltage'),/policy|voltage/i);
  const unaffected=snapshot('voltage','siphoning',{policy:{highVoltage:'unaffected'}});assert.equal(unaffected.siphon.applies,false);assert.deepEqual(unaffected.suppressEffects,[]);assert.equal(api.siphonMultiplier(unaffected,[]),1);
  for(const id of ['surge','anvil','shot','retributive'])assert.throws(()=>snapshot(id,'siphoning',{selection:{discharge:true}}),/policy|discharge/i);
@@ -75,6 +74,11 @@ test('uncertain policies require explicit input only for dependent branches',()=
  assert.equal(snapshot('anvil','siphoning',{selection:{discharge:true,baseDistance:60},policy:{dischargeNonDamage:'remove'}}).area.distance,30);
  assert.equal(snapshot('shot','siphoning',{selection:{discharge:true},policy:{dischargeNonDamage:'remove'}}).range,40);
  assert.equal(snapshot('retributive','siphoning',{selection:{discharge:true},policy:{dischargeNonDamage:'retain'}}).saveDowngrade,1);
+});
+test('Widen costs one action and rejects policy overrides that conflict with its source',()=>{
+ assert.equal(api.metapowerActionCost('widen'),1);
+ assert.equal(api.metapowerActionCost('widen',{widenActionCost:1}),1);
+ for(const cost of [0,2,3,'free',null])assert.throws(()=>api.metapowerActionCost('widen',{widenActionCost:cost}),/cost|one action/i);
 });
 test('Siphoning removes reviewed added effects while preserving discharge cost, native outcome branches and unknown source boundary',()=>{
  const s=snapshot('static','siphoning',{selection:{discharge:true}});assert.equal(s.dischargeCost,1);assert.equal(s.siphon.applies,true);assert.deepEqual(s.suppressEffects,['charged','shocked']);assert.equal(s.outcomeMode,'attack-with-fixed-failure');
