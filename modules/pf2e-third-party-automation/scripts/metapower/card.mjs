@@ -52,5 +52,6 @@ export function renderMetapowerCard(message,html,{receipt,onClear,onRetryDeliver
   }
   if(p.kind==='area'&&p.distance!==undefined){a.dataset.distance=String(p.distance);a.setAttribute('title',`${p.distance} ft`);a.textContent=`${p.distance} ft ${p.type}`;}
  }
- for(const check of root.querySelectorAll('[data-pf2-check]'))check.dataset.rollOptions=[...new Set([...(check.dataset.rollOptions??'').split(',').filter(Boolean),`${MODULE_ID}:metapower:${message.id}:${receipt.nonce}`])].join(',');
+ // PF2e check anchors read pf2RollOptions; rollOptions belongs to damage links.
+ for(const check of root.querySelectorAll('[data-pf2-check]'))check.dataset.pf2RollOptions=[...new Set([...(check.dataset.pf2RollOptions??'').split(',').filter(Boolean),`${MODULE_ID}:metapower:${message.id}:${receipt.nonce}`])].join(',');
 }
