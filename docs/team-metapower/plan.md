@@ -1,6 +1,6 @@
 # Eldamon metapower implementation and release
 
-Date: 2026-09-18. Authorized scope: implement Siphoning Element and Widen Element in the existing module, test, commit, push, and publish a formal release. Five-world research is context, not a request to implement the other backlog. Production enablement and migration are separate from publication.
+Date: 2026-09-18. Authorized scope: implement Siphoning Element and Widen Element in the existing module, test, commit, push, and publish a formal release. The user subsequently asked to complete Claudius's other pending automation: confirmed source-data omissions, Treat Condition, Doctor's Visitation, and missing electricity lifecycle steps after checking installed providers. Five-world research is context, not a request to implement the other campaigns' backlog. Production enablement and migration are separate from publication.
 
 ## Baseline and constraints
 
@@ -14,7 +14,7 @@ Widen changes actual native Region geometry for instantaneous burst/cone/line: b
 
 Either metapower applies to the immediately following channel only. Any intervening action, free action, reaction, or end of the actor's turn expires it. A second metapower replaces the first. A qualifying reaction power can itself be that next channel. UI previews/cancellations are not actions. Committed channel card substeps use their immutable snapshot and cannot claim a later activation. Require actual use, actor ownership, active-GM serialization, durable nonce/card receipts and recoverable failure states. Include explicit cancellation for actions declared outside VTT, which software cannot observe.
 
-Current scope exercises all seven known electricity powers (five prepared) without bypassing preparation or reaction prerequisites. Precisely sourced profiles describe supplemental damage/effect behavior; unsupported profiles must not silently receive a guessed conversion or be advertised as fully automated. Full two-feature release requires resolving the rules and source coverage boundaries, not only changing labels.
+Current scope exercises the known electricity powers (five prepared) without bypassing preparation or reaction prerequisites. The latest user ruling explicitly allows Siphoning High Voltage's damage while suppressing that use's Refresh. Precisely sourced profiles describe supplemental damage/effect behavior; unsupported profiles must not silently receive a guessed conversion or be advertised as fully automated. Installed-provider audit confirmed no complete High Voltage/Refresh executor; this is an implementation gap, not a missing label alone.
 
 ## Design
 
@@ -26,15 +26,18 @@ Activation, next-action ordering and channel finalization share the actor GM que
 
 Original-source cross-check on 2026-09-18 resolved Widen's cost: the Pathfinder 2e book, printed page 60 (PDF page 61), has a one-action glyph, and the Pathbuilder distribution's Widen feat has action: 1. Foundry's passive/missing cost is a data omission. Widen must use one action rather than an unresolved GM policy.
 
-The book's Charged definition (printed page 97) classifies discharge benefits as additional effects. Read together with Siphoning (printed page 57), remove discharge's non-damage benefits, including extra area/range, save downgrade, and Reactive Chain's relaxed target eligibility; retain legal damage improvements and their discharge cost. This is a direct reading of the combined rules, not a separately published author clarification. Normal level-based range/area growth remains. Avoid automatically spending a charge for a branch whose only benefit has been removed.
+The book's Charged definition (printed page 97) classifies discharge benefits as additional effects. A subsequent reply supplied by the user explicitly describes the range/save-degree interaction as ambiguous and personally favors retaining both as part of damage. The user adopts that ruling: retain discharge range increases and save downgrades under Siphoning. Preserve legal damage improvements and their discharge cost; remove added conditions. The reply does not explicitly resolve area enlargement or Reactive Chain's relaxed target eligibility; those retain the prior remove policy. Normal level-based range/area growth remains. Avoid automatically spending a charge for a branch whose only benefit has been removed. Immutable policy fields distinguish these effects instead of treating all non-damage benefits as one switch.
 
-High Voltage remains unresolved: its future touch/hit damage may or may not fall under Siphoning's dependent-effect exclusion. Normal High Voltage refreshes immediately; if Siphoning is allowed to alter it, the treatment of its included Refresh activity still needs clarification. Do not infer that delayed damage alone establishes the exclusion, or silently decide the Refresh interaction. Relevant private source research is outside the release worktree.
+High Voltage policy is resolved by the user's explicit table ruling: allow Siphoning to transform its delayed damage and do not Refresh for that use. Normal High Voltage refreshes immediately on channel. Arm a durable, once-only window expiring at the user's next turn start; a legal hit/touch consumes it even if the subsequent save produces zero damage. Narrative touch requires an explicit confirmed event when no native event proves it. This policy is not presented as an unambiguous official RAW ruling. Relevant private source research is outside the release worktree.
+
+Claudius additions: exact-source, idempotent repairs restore the existing handwrap potency to power attacks, the electricity resistance rule, the known malformed Surge discharge formula and missing traits. Preserve custom rules and recovery values. Treat Condition uses native Medicine counteract and actual condition changes. Doctor's Visitation includes all four one/two-action branches with one activity/flourish, native movement and subsequent range/tool revalidation; reuse Workbench Battle Medicine and native poison/first-aid actions.
 
 ## Execution
 
 - [x] Isolated worktree, authoritative baseline and 37 relevant baseline tests.
 - [ ] Task 1: Domain source profiles, native damage transformation and geometry policy; meaningful RED/GREEN tests and scoped review.
 - [ ] Task 2: Provider, entry/lifecycle integration, snapshot UI and side-effect integration; race/cancellation/ownership tests and scoped review.
+- [ ] Claudius additions: source-data repair, Treat Condition/Doctor's Visitation, High Voltage/Refresh; validate remaining electricity event gaps against real native receipts.
 - [ ] Task 3: Fresh local Foundry 14.368/PF2e 8.5.1 QA, normal use/real rolls/actual Regions/multiple clients and installed-module interaction checks.
 - [ ] Task 4: Whole-diff review, fixes, version/artifact validation, bounded commits, push and formal GitHub release.
 

@@ -62,7 +62,8 @@ const items=actor=>Array.isArray(actor?.items)?actor.items:actor?.items?.content
 /** Immutable per-channel domain snapshot. Lifecycle/ownership/nonce validation is
  * the caller's responsibility. `selection.baseDistance` means the chosen legal
  * native branch before Widen; selection.discharge never waives its normal cost.
- * Unresolved policies are explicit: dischargeNonDamage='retain'|'remove',
+ * Table policies are explicit: dischargeNonDamage='retain'|'remove' is the
+ * fallback; dischargeRange and dischargeSaveDowngrade independently override it.
  * highVoltage='unaffected'|'convert'. A convert decision still requires the caller
  * to bind High Voltage's delayed trigger to this channel, never immediate damage. */
 export function buildChannelSnapshot({kind,item,actor=item?.actor,level=actor?.level??1,selection={},policy={}}){
@@ -73,8 +74,11 @@ export function buildChannelSnapshot({kind,item,actor=item?.actor,level=actor?.l
  const discharge=selection.discharge===true;
  if(kind==='siphoning'&&profile.dependentEffect&&!['unaffected','convert'].includes(policy.highVoltage))throw Error('High Voltage requires an explicit dependent-effect policy.');
  if(kind==='siphoning'&&discharge&&profile.dischargeNonDamage&&!['retain','remove'].includes(policy.dischargeNonDamage))throw Error('Siphoning discharge non-damage benefits require an explicit policy.');
+ for(const field of ['dischargeRange','dischargeSaveDowngrade'])if(Object.hasOwn(policy,field)&&!['retain','remove'].includes(policy[field]))throw Error(`Invalid ${field} policy.`);
  const applies=kind==='siphoning'&&(!profile.dependentEffect||policy.highVoltage==='convert');
  const removeBenefits=applies&&discharge&&policy.dischargeNonDamage==='remove';
+ const removeRange=applies&&discharge&&(policy.dischargeRange??policy.dischargeNonDamage)==='remove';
+ const removeSaveDowngrade=applies&&discharge&&(policy.dischargeSaveDowngrade??policy.dischargeNonDamage)==='remove';
  const area=selectedArea(profile,{level,discharge,baseDistance:selection.baseDistance});
  if(area){
   if(removeBenefits)area.distance=profile.levelArea?area.baseDistance/2:profile.baseDistance;
@@ -93,12 +97,12 @@ export function buildChannelSnapshot({kind,item,actor=item?.actor,level=actor?.l
   associatedTraits:[...new Set([element.trait,element.traitTwo].filter(t=>typeof t==='string'&&t.length))],
   disruptive:items(actor).some(i=>sourceUuid(i)===METAPOWER_SOURCES.disruptiveSiphon),
   siphon:{applies,reason:kind!=='siphoning'?'different-metapower':applies?'direct-damage':'dependent-effect'},
-  area,range:range===null?null:(discharge&&!removeBenefits?2:1)*range,
+  area,range:range===null?null:(discharge&&!removeRange?2:1)*range,
   discharge,dischargeCost:discharge?1:0,
-  saveDowngrade:profile.id==='retributive-shock'&&discharge&&!removeBenefits?1:0,
+  saveDowngrade:profile.id==='retributive-shock'&&discharge&&!removeSaveDowngrade?1:0,
   outcomeMode:profile.outcomeMode,damageBasis:profile.damageBasis,
   suppressEffects:applies?[...profile.effects]:[],
-  policy:{...(policy.dischargeNonDamage?{dischargeNonDamage:policy.dischargeNonDamage}:{}),...(policy.highVoltage?{highVoltage:policy.highVoltage}:{})}
+  policy:Object.fromEntries(['dischargeNonDamage','dischargeRange','dischargeSaveDowngrade','highVoltage'].filter(key=>Object.hasOwn(policy,key)).map(key=>[key,policy[key]]))
  });
 }
 
