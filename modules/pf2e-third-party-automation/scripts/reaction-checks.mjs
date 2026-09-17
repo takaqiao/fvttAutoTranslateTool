@@ -47,7 +47,7 @@ export async function runCheckReactionPipeline({game,check,context,event=null,ca
  if(callback)await callback(captured.roll,captured.outcome,message,captured.event);return captured.roll;
 }
 
-export function createReactionChecks({game,fromUuid=globalThis.fromUuid,choose,onError=()=>{},nativeCheckMiddleware}={}){
+export function createReactionChecks({game,fromUuid=globalThis.fromUuid,choose,onError=()=>{},nativeCheckMiddleware,halflingLuck}={}){
  const queue=new SerialActions(),tracked=new Map(),reactors=new Map(),nativeInvocations=new Map();let socket;
  const eatFortune=createEatFortune({game,fromUuid,choose,onError});
  const requireReactionGM=()=>{if(!isActiveGM(game))throw Error('主GM已交接，本次反应已停止；已有认领或费用不会自动回滚或重试。')};
@@ -209,6 +209,7 @@ export function createReactionChecks({game,fromUuid=globalThis.fromUuid,choose,o
    const existingEntry=(check,context={},event=null,callback)=>{
    const native=(...args)=>eatFortune.interceptCheck(wrapped,...args);
    const actor=context.actor??(context.origin?.self?context.origin?.actor:context.target?.actor);
+   if(actor&&!reactors.has(actor.uuid)&&!context.isReroll&&['skill-check','saving-throw'].includes(context.type)&&halflingLuck?.handlesActor(actor))return halflingLuck.interceptCheck(native,check,context,event,callback);
    if(!actor||!reactors.has(actor.uuid)||!['skill-check','saving-throw'].includes(context.type)||context.createMessage===false||context.isReroll)return native(check,context,event,callback);
    // Numeric DCs drop native targets. Only this invocation's random marker and
    // exact source actor/token can recover the verified GM-proxied Use target.
