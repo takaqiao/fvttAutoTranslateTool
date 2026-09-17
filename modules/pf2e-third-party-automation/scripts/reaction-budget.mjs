@@ -1,6 +1,7 @@
-import {MODULE_ID} from './rules.mjs';
+import {MODULE_ID,hasSource} from './rules.mjs';
 import {SerialActions} from './runtime.mjs';
-import {isActiveGM,isUnappliedDamageError} from './native-context.mjs';
+import {isActiveGM,isUnappliedDamageError,markUnappliedDamageError} from './native-context.mjs';
+import {createShieldReactionResources} from './shield-reaction-resources.mjs';
 
 const AAT='pf2e-auto-action-tracker',values=c=>Array.from(c?.values?.()??c??[]),own=d=>d?.flags?.[MODULE_ID]??{};
 const shieldPrefix=`${MODULE_ID}:native-shield:`,authorId=m=>m.author?.id??m.user?.id??m.user;
@@ -52,6 +53,14 @@ const queues=new WeakMap(),restricted={
 };
 export function reactionEpoch(actor,game){const c=game.combat,index=c?.turns?.findIndex(t=>t.actor?.uuid===actor.uuid)??-1;return c?.started&&index>=0?`${c.id}:${c.round-(index>c.turn?1:0)}`:null;}
 const combatantFor=(actor,game)=>game.combat?.turns?.find(t=>t.actor?.uuid===actor.uuid);
+function shieldEncounter(actor,token,game){
+ const matches=values(game.combats??(game.combat?[game.combat]:[])).flatMap(combat=>combat.started?values(combat.turns).flatMap((combatant,index)=>combatant.actor?.uuid===actor.uuid&&combatant.token?.uuid===token.uuid?[{combat,combatant,index}]:[]):[]);
+ if(matches.length>1)throw Error('角色与Token对应多个进行中遭遇；本次格挡未应用伤害，请先明确实际遭遇。');
+ if(!matches.length)return null;
+ const result=matches[0],{combat,index}=result;
+ if(!Number.isInteger(combat.round)||!Number.isInteger(combat.turn)||combat.turn<0)throw Error('实际遭遇的回合状态尚未确定，不能自动记录盾牌格挡。');
+ return {...result,epoch:`${combat.id}:${combat.round-(index>combat.turn?1:0)}`};
+}
 const disruptPaidStates=new Set(['claimed','attack-rolled','damage-rolled','applying','done','uncertain']);
 const disruptIdentity=(proof,actor)=>typeof proof?.nonce==='string'&&proof.nonce.length>0&&proof.claimKey===`disrupt:${proof.nonce}`&&proof.actorUuid===actor?.uuid;
 const paidDisruptClaims=actor=>(own(actor).disruptPrey?.reactions??[]).filter(r=>disruptPaidStates.has(r.state)&&disruptIdentity(r,actor));
@@ -77,13 +86,14 @@ const sameClaim=(entry,claim)=>!!(claim.checkId&&entry.msgId===claim.checkId||cl
 /** Only the availability recheck and durable claim write belong in this lock. */
 export function withReactionReservation(actor,game,fn){let queue=queues.get(game);if(!queue){queue=new SerialActions();queues.set(game,queue);}return queue.run(actor.uuid,fn);}
 
-export function genericReactionAvailable(actor,game,{pending=[]}={}){
- const current=reactionEpoch(actor,game);if(!current)return false;
- const combatant=combatantFor(actor,game),ledger=own(combatant).reactionBudget;
+function reactionSlots(actor,game,{pending=[],current=reactionEpoch(actor,game),combatant=combatantFor(actor,game),entriesOverride}={}){
+ if(!current)return [];
+ const ledger=own(combatant).reactionBudget;
  let entries=game.modules?.get(AAT)?.active?(combatant.getFlag?.(AAT,'log')??combatant.flags?.[AAT]?.log??[]).filter(e=>e.type==='reaction'):[...(ledger?.epoch===current?ledger.entries??[]:[])];
- const c=game.combat,index=c.turns.findIndex(t=>t.actor?.uuid===actor.uuid),hadOwnTurn=c.round>1||index<=c.turn;
- const slots=(hadOwnTurn?Object.entries(restricted):[]).filter(([slug])=>values(actor.items).some(i=>slug==='quick-shield-block'&&(i.sourceId??i._stats?.compendiumSource)?(i.sourceId??i._stats?.compendiumSource)==='Compendium.pf2e.feats-srd.Item.pRqcm5P2ZFihSpVI':(i.slug??i.system?.slug)===slug)).map(([,allowed])=>({allowed})).sort((a,b)=>a.allowed.length-b.allowed.length);
- for(let n=0;n<(actor.system?.resources?.reactions?.max||1);n++)slots.push({allowed:null});
+ if(entriesOverride)entries=[...entriesOverride];
+ const c=game.combat,index=c.turns.indexOf(combatant),hadOwnTurn=c.round>1||index<=c.turn;
+ const slots=(hadOwnTurn?Object.entries(restricted):[]).filter(([slug])=>values(actor.items).some(i=>slug==='quick-shield-block'&&(i.sourceId??i._stats?.compendiumSource)?(i.sourceId??i._stats?.compendiumSource)==='Compendium.pf2e.feats-srd.Item.pRqcm5P2ZFihSpVI':(i.slug??i.system?.slug)===slug)).map(([kind,allowed])=>({kind,allowed})).sort((a,b)=>a.allowed.length-b.allowed.length);
+ for(let n=0;n<(actor.system?.resources?.reactions?.max||1);n++)slots.push({kind:'generic',allowed:null});
  const fear=(own(actor).fear?.reactions??[]).map(r=>({...r,claimKey:r.id?`battle:${r.id}`:null,slug:'demoralize'}));
  const checks=(own(actor).reactionChecks?.reactions??[]).filter(r=>['claimed','used'].includes(r.state)&&['clock','squawk','eat'].includes(r.kind)).map(r=>({...r,claimKey:r.nonce?`check:${r.nonce}`:null,slug:{clock:'turn-back-the-clock',squawk:'squawk',eat:'eat-fortune'}[r.kind]}));
  const paidDisrupt=paidDisruptClaims(actor),disrupt=paidDisrupt.filter(r=>r.epoch===current).map(r=>({...r,slug:'disrupt-prey',cost:1}));
@@ -100,9 +110,10 @@ export function genericReactionAvailable(actor,game,{pending=[]}={}){
  // paid claim identifies its slot eligibility without modifying AAT's log.
  for(const claim of disrupt)for(let i=0;i<entries.length;i++)if(sameClaim(entries[i],claim))entries[i]={...entries[i],slug:claim.slug,cost:1};
  for(const claim of [...fear,...checks,...disrupt,...casts,...paidDeflectionClaims(actor),...pending])if(claim.epoch===current&&!entries.some(e=>sameClaim(e,claim)))entries.push({type:'reaction',cost:claim.cost??1,slug:claim.slug??'demoralize',msgId:claim.checkId,claimKey:claim.claimKey});
- for(const entry of entries)for(let n=0;n<Math.max(1,Number(entry.cost)||0);n++){const slot=slots.find(s=>!s.spent&&(!s.allowed||entry.msgId==='System'||s.allowed.includes(entry.slug)));if(slot)slot.spent=true;}
- return slots.some(s=>!s.spent&&!s.allowed);
+ for(const entry of entries)for(let n=0;n<Math.max(1,Number(entry.cost)||0);n++){const slot=slots.find(s=>!s.spent&&(!entry.shield?.resourceSlot||s.kind===entry.shield.resourceSlot)&&(!s.allowed||entry.msgId==='System'||s.allowed.includes(entry.slug)));if(slot){slot.spent=true;slot.entry=entry;}}
+ return slots;
 }
+export function genericReactionAvailable(actor,game,options={}){return reactionSlots(actor,game,{pending:options.pending??[]}).some(s=>!s.spent&&!s.allowed);}
 
 function reactionData(message,item,actor){
  const context=message.flags?.pf2e?.context??{},proof=own(message).reactionChecks;
@@ -120,32 +131,47 @@ function reactionData(message,item,actor){
  return {type:'reaction',msgId:message.id,cost:1,slug:action??item?.slug??item?.system?.slug??'reaction',...(claimKey?{claimKey}:{})};
 }
 
-export function createReactionBudget({game,fromUuid=globalThis.fromUuid,onError=console.error}={}){
+export function createReactionBudget({game,fromUuid=globalThis.fromUuid,onError=console.error,reactionResources=createShieldReactionResources({game})}={}){
  const scopes=new Map();let socket;
  const owner=(actor,user)=>{if(!isActiveGM(game)||!user||!actor?.testUserPermission?.(user,'OWNER'))throw Error('盾牌格挡回执需要当前主GM验证角色所有者。');};
- const persist=(combatant,data)=>{if(!isActiveGM(game))throw Error('主GM已改变，不能写入格挡回执。');return combatant.update({[`flags.${MODULE_ID}.reactionBudget`]:data});};
+ const persist=(combatant,data,changes={})=>{if(!isActiveGM(game))throw Error('主GM已改变，不能写入格挡回执。');return combatant.update({[`flags.${MODULE_ID}.reactionBudget`]:data,...changes});};
  const resolveShield=async(payload,user)=>{const actor=await fromUuid(payload.actorUuid),token=await fromUuid(payload.tokenUuid);owner(actor,user);if(token?.documentName!=='Token'||token.actor?.uuid!==actor.uuid)throw Error('盾牌格挡Token来源不匹配。');return {actor,token};};
+ const boundEncounter=(actor,token,payload)=>{const context=shieldEncounter(actor,token,game);if(!context||context.combat.id!==payload.combatId||context.combatant.id!==payload.combatantId||context.epoch!==payload.epoch)throw Error('盾牌格挡的实际遭遇或回合已经改变；本次未继续应用伤害。');return context;};
+ const slotsFor=(actor,context,entries)=>reactionSlots(actor,{combat:context.combat,modules:game.modules,messages:game.messages,users:game.users},{current:context.epoch,combatant:context.combatant,entriesOverride:entries});
+ async function isPrepaid(entry,actor,token,context,user){
+  if(entry.slug!=='shield-block'||entry.shield)return false;
+  const message=game.messages.get(entry.msgId),proof=own(message).reactionBudget,origin=message?.flags?.pf2e?.origin;
+  if(!message||message.rolls?.length||message.actor?.uuid!==actor.uuid||authorId(message)!==user.id||message.speaker?.actor!==actor.id||`Scene.${message.speaker?.scene}.Token.${message.speaker?.token}`!==token.uuid||proof?.epoch!==context.epoch||proof.actorUuid!==actor.uuid||proof.combatantId!==context.combatant.id||origin?.actor!==actor.uuid||origin.type!=='feat')return false;
+  const evidence=()=>JSON.stringify({author:authorId(message),speaker:message.speaker,pf:message.flags?.pf2e,payment:own(message).reactionBudget,rolls:message.rolls?.length??0}),before=evidence();
+  const item=message.item??await fromUuid(origin.uuid);
+  return game.messages.get(message.id)===message&&evidence()===before&&item?.actor?.uuid===actor.uuid&&item.uuid===origin.uuid&&item.system?.actionType?.value==='reaction'&&hasSource(item,'Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8');
+ }
  async function beginShield(payload,user){
   if(typeof payload?.nonce!=='string'||!/^[A-Za-z0-9-]{8,80}$/.test(payload.nonce))throw Error('盾牌格挡认领编号无效。');
-  const {actor}=await resolveShield(payload,user);
+  const {actor,token}=await resolveShield(payload,user);
   return withReactionReservation(actor,game,async()=>{
    owner(actor,user);if(game.modules?.get(AAT)?.active)return null;
-   if(reactionEpoch(actor,game)!==payload.epoch)throw Error('盾牌格挡请求期间回合已改变，尚未应用伤害；请按当前回合重新操作。');
+   const context=boundEncounter(actor,token,payload);
    if(!shieldReady(actor)||actor.attributes.shield.itemId!==payload.shieldId)return null;
-   const combatant=combatantFor(actor,game),previous=own(combatant).reactionBudget,entries=previous?.epoch===payload.epoch?[...previous.entries??[]]:[];
+   const {combatant}=context,previous=own(combatant).reactionBudget,entries=previous?.epoch===payload.epoch?[...previous.entries??[]]:[];
    if(entries.some(e=>e.shield?.nonce===payload.nonce))throw Error('本次盾牌格挡已认领，不会重复执行。');
-   const index=entries.findIndex(e=>e.slug==='shield-block'&&!e.shield),source=index<0?null:entries[index];
-   const receipt={...payload,userId:user.id,state:'pending',sourceCardId:source?.msgId??null};
+   let index=-1;for(let i=0;i<entries.length;i++)if(await isPrepaid(entries[i],actor,token,context,user)){index=i;break;}
+   const source=index<0?null:entries[index],resources=await reactionResources.snapshot(combatant);owner(actor,user);boundEncounter(actor,token,payload);
+   if(source&&!await isPrepaid(source,actor,token,context,user))throw Error('盾牌格挡预付款的原卡在验证期间已改变，本次未应用伤害。');
+   owner(actor,user);boundEncounter(actor,token,payload);
+   const slots=slotsFor(actor,context,entries),slot=source?slots.find(s=>s.entry?.msgId===source.msgId):slots.find(s=>!s.spent&&(!s.allowed||s.allowed.includes('shield-block'))&&reactionResources.available(resources,s.kind));
+   if(!slot)throw Error('盾牌格挡的反应已经使用；本次未应用伤害，请取消格挡或使用手工结算流程。');
+   const reservation=reactionResources.reserve(resources,slot.kind,{prepaid:!!source});
+   const receipt={...payload,userId:user.id,state:'pending',sourceCardId:source?.msgId??null,resourceSlot:slot.kind,reaction:reservation.proof};
    const entry={...source,type:'reaction',cost:1,slug:'shield-block',msgId:source?.msgId??`shield:${payload.nonce}`,shield:receipt};
    if(index<0)entries.push(entry);else entries[index]=entry;
-   await persist(combatant,{epoch:payload.epoch,entries});owner(actor,user);return receipt;
+   await persist(combatant,{epoch:payload.epoch,entries},reservation.changes);owner(actor,user);return receipt;
   });
  }
  async function finishShield(payload,user){
   const {actor,token}=await resolveShield(payload,user);
   return withReactionReservation(actor,game,async()=>{
-   owner(actor,user);if(reactionEpoch(actor,game)!==payload.epoch)return false;
-   const combatant=combatantFor(actor,game),ledger=own(combatant).reactionBudget,index=ledger?.entries?.findIndex(e=>e.shield?.nonce===payload.nonce)??-1;
+   owner(actor,user);const context=boundEncounter(actor,token,payload),{combatant}=context,ledger=own(combatant).reactionBudget,index=ledger?.entries?.findIndex(e=>e.shield?.nonce===payload.nonce)??-1;
    if(ledger?.epoch!==payload.epoch||index<0)throw Error('盾牌格挡认领回执不存在。');
    const entries=[...ledger.entries],entry=entries[index],claim=entry.shield;if(claim.userId!==user.id||claim.actorUuid!==actor.uuid||claim.tokenUuid!==token.uuid)throw Error('盾牌格挡认领所有者不匹配。');
    if(payload.messageId){
@@ -153,13 +179,16 @@ export function createReactionBudget({game,fromUuid=globalThis.fromUuid,onError=
     if(!message||authorId(message)!==user.id||message.speaker?.actor!==actor.id||`Scene.${message.speaker?.scene}.Token.${message.speaker?.token}`!==token.uuid||pf?.context?.type!=='damage-taken'||!pf.context.options?.includes(shieldPrefix+payload.nonce)||message.content!==payload.content||typeof payload.content!=='string'||payload.content.length>100000)throw Error('原生盾牌格挡回执已改变或不匹配。');
     if(claim.state==='used'){if(claim.messageId!==message.id)throw Error('同一格挡已绑定另一张伤害回执。');return true;}
    }
+   let changes={};
    if(payload.messageId&&payload.blocked===true){
     entries[index]={...entry,shield:{...claim,state:'used',messageId:payload.messageId}};
    }else if(payload.messageId&&payload.blocked===false||payload.enteredNative===false){
     if(claim.state!=='pending')return false;
     if(claim.sourceCardId){const restored={...entry};delete restored.shield;entries[index]=restored;}else entries.splice(index,1);
+    const stillSpent=slotsFor(actor,context,entries).some(s=>s.kind===claim.resourceSlot&&s.spent);
+    changes=await reactionResources.release(combatant,claim.reaction,{stillSpent});owner(actor,user);boundEncounter(actor,token,payload);
    }else throw Error('未获得明确原生格挡结果，保留认领，不会返还反应。');
-   await persist(combatant,{epoch:ledger.epoch,entries});return payload.blocked===true;
+   await persist(combatant,{epoch:ledger.epoch,entries},changes);return payload.blocked===true;
   });
  }
  async function shieldRpc(method,payload){
@@ -175,12 +204,14 @@ export function createReactionBudget({game,fromUuid=globalThis.fromUuid,onError=
  }
  async function applyDamage(actor,params,apply){
   const damage=typeof params.damage==='number'?params.damage:params.damage?.total,token=params.token?.document??params.token;
-  if(game.modules?.get(AAT)?.active||!params.shieldBlockRequest||params.final||!Number.isFinite(damage)||damage<=0||!shieldReady(actor)||!reactionEpoch(actor,game)||token?.actor?.uuid!==actor.uuid)return apply(params);
+  if(game.modules?.get(AAT)?.active||!params.shieldBlockRequest||params.final||!Number.isFinite(damage)||damage<=0||!shieldReady(actor)||token?.actor?.uuid!==actor.uuid)return apply(params);
+  let context;try{context=shieldEncounter(actor,token,game);}catch(error){throw markUnappliedDamageError(error);}if(!context)return apply(params);
   if(!actor.testUserPermission?.(game.user,'OWNER'))throw Error('无权使用这个角色的盾牌格挡。');
-  const payload={nonce:globalThis.foundry?.utils?.randomID?.(24)??globalThis.crypto.randomUUID(),actorUuid:actor.uuid,tokenUuid:token.uuid,shieldId:actor.attributes.shield.itemId,epoch:reactionEpoch(actor,game)},receipt=await shieldRpc('begin',payload);
+  const payload={nonce:globalThis.foundry?.utils?.randomID?.(24)??globalThis.crypto.randomUUID(),actorUuid:actor.uuid,tokenUuid:token.uuid,shieldId:actor.attributes.shield.itemId,combatId:context.combat.id,combatantId:context.combatant.id,epoch:context.epoch};
+  let receipt;try{receipt=await shieldRpc('begin',payload);}catch(error){throw markUnappliedDamageError(error);}
   if(!receipt)return apply(params);
   const scope={actor,token,receipt};scopes.set(payload.nonce,scope);let completed=false;
-  try{const result=await apply({...params,rollOptions:new Set([...params.rollOptions??[],shieldPrefix+payload.nonce])});completed=true;
+  try{try{boundEncounter(actor,token,payload);}catch(error){throw markUnappliedDamageError(error);}const result=await apply({...params,rollOptions:new Set([...params.rollOptions??[],shieldPrefix+payload.nonce])});completed=true;
    try{await shieldRpc('finish',{...payload,messageId:scope.messageId??null,content:scope.content??null,blocked:scope.blocked});}catch(error){try{onError(error)}catch{/* Native damage already completed; preserve its result. */}}
    return result;
   }
