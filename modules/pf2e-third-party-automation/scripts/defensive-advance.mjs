@@ -65,13 +65,15 @@ export function createDefensiveAdvance({game,fromUuid=globalThis.fromUuid,choose
    const ctx=await context(m,game.users.get(r.userId)),current=validate(ctx);
    const proof=defensiveAdvanceMovementProof({token,movement,operation,user,receipt:{...r,speed:Math.min(r.speed,current.speed)}});if(!proof)return;
    if(!movement.finished?.then)throw Error('缺少服务器原生移动完成承诺。');
-   finished.set(r.nonce,{id:movement.id,promise:movement.finished});await save(m,proof);
+   finished.set(r.nonce,{id:movement.id,promise:movement.finished,movement});await save(m,proof);
   }).catch(async error=>{if(isActiveGM(game)&&game.messages.get(id))await save(game.messages.get(id),{status:'uncertain',result:error.message});throw error;});
  }
  async function confirmMovement(payload,user){gm();return queue.run(payload.messageId,async()=>{
   const m=game.messages.get(payload.messageId),ctx=await context(m,user),r=own(m),proof=finished.get(r?.nonce);validate(ctx);
   if(r?.nonce!==payload.nonce||r.status!=='moving'||!r.movementIds?.length||!proof||proof.id!==r.movementIds.at(-1)||ctx.token.movement?.id!==proof.id||ctx.token.movement.state!=='completed'||await proof.promise!==true)throw Error('没有本计划实际完成的服务器移动回执；不会继续Strike。');
-  validate(ctx);if(!sameAdvancePosition(advancePosition(ctx.token),r.lastPosition))throw Error('完成后Token位置已改变。');await save(m,{status:'moved'});return true;
+  if(!proof.movement.animation?.ended?.then)throw Error('缺少服务器原生移动的动画完成回执。');
+  await proof.movement.animation.ended;
+  validate(ctx);if(ctx.token.movement?.id!==proof.id||!sameAdvancePosition(advancePosition(ctx.token),r.lastPosition))throw Error('完成后Token位置已改变。');await save(m,{status:'moved'});return true;
  });}
  async function ownerMove(payload,sender){
   const ctx=await ownerContext(payload,sender,'planning'),r=own(ctx.message);

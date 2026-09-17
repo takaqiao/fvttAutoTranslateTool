@@ -38,3 +38,12 @@ test('only the original server movement chain and user within Stride cost can be
  movement.passed.cost=25;assert.throws(()=>rules.defensiveAdvanceMovementProof(args),/步行/);
  movement.passed.cost=10;movement.passed.waypoints[0].action='teleport';assert.throws(()=>rules.defensiveAdvanceMovementProof(args),/步行/);
 });
+
+test('native moveToken precedes animated document coordinates; record its server endpoint for finished verification',()=>{
+ const f=fixture(),user={id:'owner'},receipt={planId:'plan',userId:'owner',lastPosition:{x:0,y:0,elevation:0},movementIds:[],movementCost:0,speed:20};
+ const movement={id:'plan',chain:[],origin:{x:0,y:0,elevation:0},destination:{x:100,y:0,elevation:0},passed:{cost:10,waypoints:[{action:'walk'}]},constrained:false},operation={_movement:{t:movement}};
+ assert.equal(f.token.x,0);
+ assert.deepEqual(rules.defensiveAdvanceMovementProof({...f,user,receipt,movement,operation}),{movementIds:['plan'],movementCost:10,lastPosition:{x:100,y:0,elevation:0}});
+ movement.destination.x=NaN;
+ assert.throws(()=>rules.defensiveAdvanceMovementProof({...f,user,receipt,movement,operation}),/步行/);
+});

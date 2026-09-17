@@ -15,6 +15,10 @@ export async function runDefensiveAdvanceMovement({game,token,receipt,validate,b
   const finished=token.movement.finished;
   if(!finished?.then||token.movement.id!==plan.id)throw Error('原生移动计划已被替换。');
   if(!await token.startMovement(plan.id)||await finished!==true)return null;
+  const movement=token.movement;
+  if(!movement.animation?.ended?.then)throw Error('缺少本次原生移动的动画完成回执。');
+  await movement.animation.ended;
+  if(token.movement!==movement)throw Error('原生移动结束前已被另一移动替换。');
   validate();return await confirm();
  }finally{
   // Do not cancel someone else's replacement or a completed movement.
@@ -39,7 +43,10 @@ export async function rollDefensiveAdvanceStrike({game,Hooks,actor,token,target,
   try{
    validate();const c=message.flags.pf2e.context;
    if(c.type!=='attack-roll'||c.action!=='strike'||c.mapIncreases!==receipt.map||message.flags.pf2e.origin?.uuid!==option.itemUuid||c.target?.token!==target.uuid)throw Error('内含Strike的原生草稿来源不符。');
-   const flavor=String(message.flavor??'').replace(/(<span\b[^>]*\bclass=["'][^"']*\baction-glyph\b[^"']*["'][^>]*>)[\s\S]*?(<\/span>)/,(_m,a,b)=>a+'F'+b);
+   const flavor=String(message.flavor??'').replace(/(<h4\b[^>]*\bclass=["'][^"']*\baction\b[^"']*["'][^>]*>)([\s\S]*?)(<\/h4>)/,(_m,start,content,end)=>{
+    const glyph=/(<span\b[^>]*\bclass=["'][^"']*\baction-glyph\b[^"']*["'][^>]*>)[\s\S]*?(<\/span>)/;
+    return start+(glyph.test(content)?content.replace(glyph,(_g,a,b)=>a+'F'+b):'<span class="action-glyph">F</span> '+content)+end;
+   });
    message.updateSource({flavor,[`flags.${MODULE_ID}.defensiveAdvanceStrike`]:{nonce:receipt.nonce,messageId:receipt.messageId,activityCost:2,included:true}});
   }catch(error){hookError=error;return false;}
  });
