@@ -2,7 +2,10 @@ import {SerialActions} from '../runtime.mjs';
 import {metapowerKind,powerProfile,sourceUuid,buildChannelSnapshot} from './rules.mjs';
 export const MODULE_ID='pf2e-third-party-automation';
 const copy=value=>structuredClone(value);
-export const turnIdentity=game=>{const c=game.combat;return c?`${c.id}:${c.round}:${c.turn}:${c.combatant?.id??''}`:null};
+export const turnIdentity=(game,actor)=>{
+ const encounters=game.combats&&actor?Array.from(game.combats.values()).filter(c=>c.started&&Array.from(c.combatants?.values?.()??c.turns??[]).some(t=>t.actor?.uuid===actor.uuid)):null;
+ if(encounters?.length>1)throw Error('Actor belongs to multiple started encounters; resolve the encounter before using a metapower.');
+ const c=encounters?encounters[0]:game.combat;return c?`${c.id}:${c.round}:${c.turn}:${c.combatant?.id??''}`:null};
 export const ledgerState=actor=>copy(actor.flags?.[MODULE_ID]?.metapower??{version:1,sequence:0,armed:null,pending:null,receipts:{}});
 export const chargedEffect=actor=>Array.from(actor?.items?.values?.()??actor?.items??[]).find(i=>['Compendium.battlezoo-eldamon-pf2e.conditions.Item.Bi2aHykg6CZrQCnR','Compendium.battlezoo-eldamon-pf2e.conditions.Bi2aHykg6CZrQCnR'].includes(sourceUuid(i))&&i.system.badge?.value>0);
 
@@ -28,7 +31,7 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
   const actor=await fromUuid(payload.actorUuid);
   if(!actor||!user||!actor.testUserPermission(user,'OWNER'))throw Error('Actor owner permission is required.');
   const state=ledgerState(actor);
-  if(state.armed?.turn!==turnIdentity(game))state.armed=null;
+  if(state.armed?.turn!==turnIdentity(game,actor))state.armed=null;
   const result=await fn(actor,state);
   // Keep source/channel, uncertain and live proofs indefinitely. Ordinary
   // completed actions have no downstream card consumer; their client high-water
@@ -61,14 +64,14 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
    const snapshot=built?{...built,...(profile.id==='reactive-chain'?{triggerDamage:payload.selection.triggerDamage}:{})}:null;
    const charge=snapshot?.dischargeCost?chargedEffect(actor):null;
    if(snapshot?.dischargeCost&&!charge)throw Error('The selected discharge branch requires Charged.');
-   const r={nonce:payload.nonce,sequence:++state.sequence,actorUuid:actor.uuid,itemUuid:item?.uuid??null,sourceUuid:sourceUuid(item),userId:user.id,turn:turnIdentity(game),activationNonce:state.armed?.nonce??null,kind,snapshot,selection:copy(payload.selection??{}),status:'reserved',messageUuid:null};
+   const r={nonce:payload.nonce,sequence:++state.sequence,actorUuid:actor.uuid,itemUuid:item?.uuid??null,sourceUuid:sourceUuid(item),userId:user.id,turn:turnIdentity(game,actor),activationNonce:state.armed?.nonce??null,kind,snapshot,selection:copy(payload.selection??{}),status:'reserved',messageUuid:null};
    r.entry=payload.entry??'item';
    r.powerId=profile?.id??null;
    if(clientKey){r.clientId=payload.clientId;r.clientSequence=payload.clientSequence;state.clients[clientKey]=payload.clientSequence;}
    if(charge)r.charge={itemUuid:charge.uuid,before:charge.system.badge.value,after:charge.system.badge.value-1};
    state.pending=r.nonce;state.receipts[r.nonce]=r;return r;
   }),
-  start:(payload,user)=>mutate(payload,user,(_actor,state)=>{const r=bound(state,payload,user);if(r.status!=='reserved')throw Error('Invocation has already started or finished.');if(r.turn!==turnIdentity(game))throw Error('Turn changed before native execution; repeat this action on the current turn.');r.status='started';return r}),
+  start:(payload,user)=>mutate(payload,user,(actor,state)=>{const r=bound(state,payload,user);if(r.status!=='reserved')throw Error('Invocation has already started or finished.');if(r.turn!==turnIdentity(game,actor))throw Error('Turn changed before native execution; repeat this action on the current turn.');r.status='started';return r}),
   finish:(payload,user)=>mutate(payload,user,async(actor,state)=>{
    const r=bound(state,payload,user);
    if(!['reserved','started'].includes(r.status)){
@@ -100,7 +103,7 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
    r.status=payload.status;r.messageUuid=payload.messageUuid??r.messageUuid??null;state.pending=null;
    if(r.status!=='cancelled'){
     if(state.armed?.nonce===r.activationNonce)state.armed=null;
-    if(r.status==='committed'&&r.kind&&r.turn===turnIdentity(game))state.armed={nonce:r.nonce,kind:r.kind,itemUuid:r.itemUuid,sourceUuid:r.sourceUuid,sequence:r.sequence,turn:r.turn,messageUuid:r.messageUuid};
+    if(r.status==='committed'&&r.kind&&r.turn===turnIdentity(game,actor))state.armed={nonce:r.nonce,kind:r.kind,itemUuid:r.itemUuid,sourceUuid:r.sourceUuid,sequence:r.sequence,turn:r.turn,messageUuid:r.messageUuid};
    }
    return r;
   }),
