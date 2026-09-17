@@ -173,6 +173,12 @@ test('registration binds active-GM socket calls to their real requester and refr
  const denied=await routes.get('voltage:trigger').call({socketdata:{userId:'stranger'}},{...f.payload,targetUuid:f.target.uuid,kind:'touch',confirmed:true});assert.equal(denied.ok,false);assert.equal(f.actor.flags[ID].voltage.activations.channel.status,'armed');
  assert.equal(typeof hooks.get('createChatMessage'),'function');assert.equal(typeof hooks.get('renderChatMessageHTML'),'function');assert.equal(typeof hooks.get('pf2e.startTurn'),'function');
 });
+test('durable GM channel delivery preserves original player identity without an initiating client',async()=>{
+ const f=executorFixture('success');
+ await f.provider.onCommittedChannel({receipt:f.receipt,message:f.message,user:f.user});
+ assert.equal(f.actor.flags[ID].voltage.activations.channel.userId,f.user.id);assert.equal(f.spent.system.frequency.value,1);
+ f.spent.system.frequency.value=0;await f.provider.onCommittedChannel({receipt:f.receipt,message:f.message,user:f.user});assert.equal(f.spent.system.frequency.value,0);
+});
 test('damage card replay with only native context option is blocked even after native roll alteration loses private metadata',async()=>{
  const f=executorFixture('failure');await assert.rejects(f.provider.beforeDamage(f.target.actor,{damage:{options:{}},rollOptions:new Set([ID+':voltage:channel'])}),/authorized|grant/i);
 });
