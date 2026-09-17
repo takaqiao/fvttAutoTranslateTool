@@ -1,52 +1,58 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-const module=await import('../scripts/glimpse-reaction-cache.mjs').catch(error=>{if(error.code==='ERR_MODULE_NOT_FOUND')return {};throw error;});
+import {createGlimpseReactionCache} from '../scripts/glimpse-reaction-cache.mjs';
 const SHA='4a81322796ce1c6ed545edc09e1aa3a96a9c8a96dfd034403bf657068ed7036c',SLUG='glimpse-of-redemption';
 function fixture({version='1.4.3',active=true,sha=SHA}={}){
- assert.equal(typeof module.createGlimpseReactionCache,'function','verified cache adapter must exist');
- const installed={active,version},writes=[],flags={'pf2e-reaction':{availableReactions:['shield-block'],unrelated:42}};
- const combat={id:'battle',started:true,turns:[{actor:{type:'npc',items:[{type:'action',slug:SLUG}]},flags:{'pf2e-reaction':{state:false}}}],flags,getFlag:(m,k)=>flags[m]?.[k],update:async changes=>{writes.push(structuredClone(changes));flags['pf2e-reaction'].availableReactions=changes['flags.pf2e-reaction.availableReactions'];}};
+ const installed={active,version},registrations=[],flags={'pf2e-reaction':{availableReactions:['shield-block'],unrelated:42}};
+ const combat={id:'battle',started:true,turns:[{actor:{type:'npc',items:[{type:'action',slug:SLUG}]},flags:{'pf2e-reaction':{state:false}}}],flags,update:()=>{throw Error('compat must never write a combat')}};
  const game={user:{id:'gm'},users:{activeGM:{id:'gm'}},modules:new Map([['pf2e-reaction',installed]]),combats:new Map([[combat.id,combat]]),settings:{get:()=>[SLUG,'shield-block']}};
- let reads=0;const adapter=module.createGlimpseReactionCache({game,fetchSource:async()=>{reads++;return 'verified installed source'},hashSource:async()=>sha});
- return{game,combat,flags,installed,writes,adapter,reads:()=>reads};
+ const libWrapper={register:(module,path,wrapper,type)=>registrations.push({module,path,wrapper,type}),unregister:(module,path)=>{registrations.splice(registrations.findIndex(r=>r.module===module&&r.path===path),1)}};
+ const adapter=createGlimpseReactionCache({game,fetchSource:async()=>'verified installed source',hashSource:async()=>sha});
+ const get=(ns='pf2e-reaction',key='availableReactions',...extra)=>{assert.equal(registrations.length,1,'one getFlag wrapper must be registered');return registrations[0].wrapper.call(combat,(...args)=>{assert.deepEqual(args,[ns,key,...extra]);return flags[ns]?.[key];},ns,key,...extra)};
+ return{game,combat,flags,installed,registrations,libWrapper,adapter,get};
 }
-test('only verified bundle identity becomes ready; disabled, changed version, replaced module fail closed',async()=>{
- for(const config of [{active:false},{version:'1.4.4'},{sha:'wrong'}]){const f=fixture(config);assert.equal(await f.adapter.initialize(),false);assert.equal(f.adapter.ready(),false);await f.adapter.restore();assert.equal(f.writes.length,0);}
- const f=fixture();assert.equal(f.adapter.ready(),false);assert.equal(await f.adapter.initialize(),true);assert.equal(f.adapter.ready(),true);
- f.game.modules.set('pf2e-reaction',{active:true,version:'1.4.3'});assert.equal(f.adapter.ready(),false);await f.adapter.restore();assert.equal(f.writes.length,0);
+test('verified initialization installs exactly one wrapper; repeated initialize and unregister are safe',async()=>{
+ const f=fixture();assert.equal(f.adapter.ready(),false);assert.equal(await f.adapter.initialize({libWrapper:f.libWrapper}),true);assert.equal(f.adapter.ready(),true);
+ await f.adapter.initialize({libWrapper:f.libWrapper});assert.equal(f.registrations.length,1);assert.equal(f.registrations[0].path,'CONFIG.Combat.documentClass.prototype.getFlag');assert.equal(f.registrations[0].type,'WRAPPER');
+ f.adapter.unregister();assert.equal(f.registrations.length,0);assert.equal(f.adapter.ready(),false);
 });
-test('restores one missing cached slug, preserving other cache and reaction resource flags',async()=>{
- const f=fixture();await f.adapter.initialize();await f.adapter.restore();await f.adapter.restore();
- assert.deepEqual(f.writes,[{'flags.pf2e-reaction.availableReactions':['shield-block',SLUG]}]);
- assert.equal(f.flags['pf2e-reaction'].unrelated,42);assert.equal(f.combat.turns[0].flags['pf2e-reaction'].state,false);
+test('unsupported or mismatched modules and absent wrapper never become ready or register',async()=>{
+ for(const config of [{active:false},{version:'1.4.4'},{sha:'wrong'}]){const f=fixture(config);assert.equal(await f.adapter.initialize({libWrapper:f.libWrapper}),false);assert.equal(f.adapter.ready(),false);assert.equal(f.registrations.length,0);}
+ const f=fixture();assert.equal(await f.adapter.initialize({libWrapper:null}),false);assert.equal(f.adapter.ready(),false);
 });
-test('inactive combats, non-holder combatants, unknown caches and disabled builtin remain untouched',async()=>{
- for(const configure of [f=>f.combat.started=false,f=>f.combat.turns=[],f=>f.combat.turns[0].actor.items=[{type:'feat',slug:SLUG}],f=>f.flags['pf2e-reaction'].availableReactions=undefined,f=>f.flags['pf2e-reaction'].availableReactions={},f=>f.game.settings.get=()=>[]]){
-  const f=fixture();await f.adapter.initialize();configure(f);await f.adapter.restore();assert.equal(f.writes.length,0);
+test('eligible reads add only a virtual member without mutating native cache or reaction resources',async()=>{
+ const f=fixture();await f.adapter.initialize({libWrapper:f.libWrapper});const native=f.flags['pf2e-reaction'].availableReactions,result=f.get();
+ assert.deepEqual(result,['shield-block',SLUG]);assert.notEqual(result,native);assert.deepEqual(native,['shield-block']);
+ result.push('caller-only');assert.deepEqual(f.get(),['shield-block',SLUG]);assert.equal(f.combat.turns[0].flags['pf2e-reaction'].state,false);
+});
+test('concurrent native cache additions survive every effective read; adapter writes nothing',async()=>{
+ const f=fixture();await f.adapter.initialize({libWrapper:f.libWrapper});
+ const old=f.get();f.flags['pf2e-reaction'].availableReactions.push('reactive-strike');
+ assert.deepEqual(old,['shield-block',SLUG]);assert.deepEqual(f.get(),['shield-block','reactive-strike',SLUG]);
+ const next=f.get();next.push('reactive-shield');f.flags['pf2e-reaction'].availableReactions=next;
+ assert.equal(f.get(),next);assert.deepEqual(next,['shield-block','reactive-strike',SLUG,'reactive-shield']);
+});
+test('unknown namespace, keys, extra arguments and unknown return values preserve the native contract',async()=>{
+ const f=fixture();await f.adapter.initialize({libWrapper:f.libWrapper});
+ f.flags.other={availableReactions:{untouched:true}};assert.equal(f.get('other','availableReactions','default'),f.flags.other.availableReactions);assert.equal(f.get('pf2e-reaction','unrelated'),42);
+ for(const native of [undefined,null,{},'unknown']){f.flags['pf2e-reaction'].availableReactions=native;assert.equal(f.get(),native);}
+});
+test('disabled setting, inactive combat, missing holder and changed module return native array unchanged',async()=>{
+ for(const configure of [f=>f.game.settings.get=()=>[],f=>f.combat.started=false,f=>f.combat.turns=[],f=>f.combat.turns[0].actor.items=[{type:'feat',slug:SLUG}],f=>f.game.combats.delete('battle'),f=>f.installed.active=false,f=>f.installed.version='1.4.4',f=>f.game.modules.set('pf2e-reaction',{active:true,version:'1.4.3'})]){
+  const f=fixture();await f.adapter.initialize({libWrapper:f.libWrapper});configure(f);assert.equal(f.get(),f.flags['pf2e-reaction'].availableReactions);
  }
 });
-test('all started combats are considered, including synthetic actor holders',async()=>{
- const f=fixture();const second={...f.combat,id:'second',turns:[{actor:{isToken:true,itemTypes:{action:[{type:'action',system:{slug:SLUG}}]}}}],getFlag:()=>[],update:async changes=>f.writes.push(changes)};
- f.game.combats.set(second.id,second);await f.adapter.initialize();await f.adapter.restore();assert.equal(f.writes.length,2);
+test('uses actual Combat this and supports player-client native reads and synthetic holders',async()=>{
+ const f=fixture();await f.adapter.initialize({libWrapper:f.libWrapper});f.game.user.id='player';
+ f.combat.turns=[{actor:{isToken:true,itemTypes:{action:[{type:'action',system:{slug:SLUG}}]}}}];assert.deepEqual(f.get(),['shield-block',SLUG]);
+ const foreign={...f.combat};const result=[];assert.equal(f.registrations[0].wrapper.call(foreign,()=>result,'pf2e-reaction','availableReactions'),result);
 });
-test('non-primary GM never repairs and handoff during source verification cannot authorize a write',async()=>{
- const f=fixture();f.game.user.id='player';await f.adapter.initialize();await f.adapter.restore();assert.equal(f.writes.length,0);
- f.game.users.activeGM.id='player';await f.adapter.restore();assert.equal(f.writes.length,1);
+test('source identity changing while hashing cannot install a wrapper',async()=>{
+ const f=fixture();const a=createGlimpseReactionCache({game:f.game,fetchSource:async()=>'',hashSource:async()=>{f.installed.version='1.4.4';return SHA;}});
+ assert.equal(await a.initialize({libWrapper:f.libWrapper}),false);assert.equal(a.ready(),false);assert.equal(f.registrations.length,0);
 });
-test('identity and cache changes detected immediately before update are not overwritten',async()=>{
- for(const mutate of [f=>f.flags['pf2e-reaction'].availableReactions.push('reactive-shield'),f=>f.game.users.activeGM.id='other',f=>f.game.settings.get=()=>[],f=>f.game.combats.delete('battle'),f=>f.installed.active=false]){
-  const f=fixture();await f.adapter.initialize();let calls=0;const native=f.combat.getFlag;
-  f.combat.getFlag=(...args)=>{const value=native(...args);if(++calls===2)mutate(f);return value;};
-  await f.adapter.restore();assert.equal(f.writes.length,0);
- }
-});
-test('source identity changed while hashing cannot become ready',async()=>{
- const f=fixture();const adapter=module.createGlimpseReactionCache({game:f.game,fetchSource:async()=>'',hashSource:async()=>{f.installed.version='1.4.4';return SHA;}});
- assert.equal(await adapter.initialize(),false);assert.equal(adapter.ready(),false);
-});
-test('simultaneous repairs serialize and retain native additions from an earlier write',async()=>{
- const f=fixture();await f.adapter.initialize();let release;
- f.combat.update=async changes=>{f.writes.push(changes);await new Promise(resolve=>release=resolve);f.flags['pf2e-reaction'].availableReactions=[...changes['flags.pf2e-reaction.availableReactions'],'reactive-shield'];};
- const first=f.adapter.restore(),second=f.adapter.restore();await new Promise(resolve=>setImmediate(resolve));release();await Promise.all([first,second]);
- assert.equal(f.writes.length,1);assert.deepEqual(f.flags['pf2e-reaction'].availableReactions,['shield-block',SLUG,'reactive-shield']);
+test('concurrent initialization installs once, while cancellation before verification prevents registration',async()=>{
+ const f=fixture();await Promise.all([f.adapter.initialize({libWrapper:f.libWrapper}),f.adapter.initialize({libWrapper:f.libWrapper})]);assert.equal(f.registrations.length,1);
+ const next=fixture();let release;const a=createGlimpseReactionCache({game:next.game,fetchSource:()=>new Promise(resolve=>release=resolve),hashSource:async()=>SHA});
+ const pending=a.initialize({libWrapper:next.libWrapper});a.unregister();release('source');assert.equal(await pending,false);assert.equal(next.registrations.length,0);
 });
