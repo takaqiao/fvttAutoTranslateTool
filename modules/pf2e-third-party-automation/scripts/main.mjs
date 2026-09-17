@@ -169,8 +169,7 @@ Hooks.once('ready',async()=>{
  if(glimpseWorld(game)){
   const cache=createGlimpseReactionCache({game});await cache.initialize().catch(report);
   const actors=()=>[...game.actors.contents,...game.scenes.contents.flatMap(scene=>scene.tokens.contents.map(token=>token.actor).filter(Boolean))];
-  const reconcileSettings=createConfigurationMaintenance({game,settings:[{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:glimpseWorld,transform:(value,g)=>glimpseReactionSetting(value,g,cache.ready()&&canSuppressGlimpseReminder(actors(),glimpse)),reason:GLIMPSE_REACTION_REASON}]});
-  const reconcile=async()=>{await reconcileSettings();await cache.restore()};
+  const reconcile=createConfigurationMaintenance({game,settings:[{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:glimpseWorld,transform:(value,g)=>glimpseReactionSetting(value,g,cache.ready()&&canSuppressGlimpseReminder(actors(),glimpse)),reason:GLIMPSE_REACTION_REASON}]});
   await registerGlimpseConfigurationEvents({game,Hooks,reconcile,onError:report}).reconcileNow();
  }
  providers.unshift(glimpse,voltage,electricity);
