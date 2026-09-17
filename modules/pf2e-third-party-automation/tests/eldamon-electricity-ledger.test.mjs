@@ -99,6 +99,56 @@ test('expiry removes only that source effect; ending an encounter never clears o
  f.item(f.outsider,'charge',S.charged,{system:{badge:{value:2}}});f.item(f.caster,'charge',S.charged,{system:{badge:{value:2}}});
  await f.ledger().expire({combat:f.combat,ended:true,actors:[f.caster,f.outsider]});assert.equal(electricityEffects(f.caster,S.charged).length,0);assert.equal(electricityEffects(f.outsider,S.charged)[0].system.badge.value,2);
 });
+
+test('start, end and deleted-encounter expiry never writes actors without electricity work',async()=>{
+ for(const event of [{phase:'start'},{phase:'end'},{ended:true}]){
+  const f=fixture(),actors=[f.caster,f.target,f.outsider],before=actors.map(a=>structuredClone(a.flags));let updates=0;
+  for(const actor of actors){const update=actor.update;actor.update=async function(...args){updates++;return update.apply(this,args)};}
+  await f.ledger().expire({combat:f.combat,combatant:f.combat.turns[0],actors,...event});
+  assert.equal(updates,0,JSON.stringify(event));assert.deepEqual(actors.map(a=>a.flags),before);
+ }
+});
+
+test('historical electricity records and another encounter pending Shock do not cause expiry writes',async()=>{
+ const f=fixture(),actor=f.target;actor.flags[ID]={electricity:{version:1,damage:{old:{status:'confirmed'}},operations:{'encounter:c:charge':{status:'done'},'encounter:other:charge':{status:'started',before:0,after:0,gain:false,itemId:null}},pendingShocks:{later:{expires:{combatId:'other',combatantId:'someone',round:2,phase:'end'}}}}};
+ const before=structuredClone(actor.flags);let updates=0;const update=actor.update;actor.update=async function(...args){updates++;return update.apply(this,args)};
+ for(const event of [{phase:'start'},{phase:'end'},{ended:true}])await f.ledger().expire({combat:f.combat,combatant:f.combat.turns[0],actors:[actor],...event});
+ assert.equal(updates,0);assert.deepEqual(actor.flags,before);
+});
+
+test('encounter expiry still removes non-Eldamon participant and outsider Shocks without empty charge operations',async()=>{
+ for(const participant of [true,false]){
+ const f=fixture(),actor=participant?f.target:f.outsider,expires={combatId:f.combat.id,combatantId:'casterturn',round:2,phase:'end'};
+ f.item(actor,'hostileShock',S.shocked,{flags:{[ID]:{electricityShock:{expires}}}});
+ actor.flags[ID]={electricity:{version:1,damage:{},operations:{},pendingShocks:{pending:{expires}}}};useFoundryFlagUpdates(actor);
+ await f.ledger().expire({combat:f.combat,ended:true,actors:[actor]});
+ assert.equal(actor.items.has('hostileShock'),false);assert.deepEqual(electricityState(actor).pendingShocks,{});
+ assert.equal(electricityState(actor).operations[`encounter:${f.combat.id}:charge`],undefined);
+ }
+});
+
+test('encounter charge cleanup resumes its exact unfinished operation without inventing work for others',async()=>{
+ const f=fixture(),actor=f.target,item=f.item(actor,'charge',S.charged,{system:{badge:{value:2}}}),update=item.update;let fail=true;
+ item.update=async function(...args){if(fail){fail=false;throw Error('interrupted cleanup');}return update.apply(this,args)};
+ const payload={combat:f.combat,ended:true,actors:[actor]},key=`encounter:${f.combat.id}:charge`;
+ await assert.rejects(f.ledger().expire(payload),/interrupted cleanup/);assert.equal(electricityState(actor).operations[key].status,'started');
+ await f.ledger().expire(payload);assert.equal(electricityEffects(actor,S.charged).length,0);assert.equal(electricityState(actor).operations[key].status,'done');
+ let writes=0;actor.update=async()=>{writes++};await f.ledger().expire(payload);assert.equal(writes,0);
+ // A historical empty cleanup interrupted before its final receipt still has
+ // exact, safe work to finish, even though no Charged item remains.
+ actor.flags[ID].electricity.operations[key]={status:'started',itemId:null,before:0,after:0,gain:false};useFoundryFlagUpdates(actor);
+ await f.ledger().expire(payload);assert.equal(electricityState(actor).operations[key].status,'done');
+ actor.flags[ID].electricity.operations[key]={status:'started',itemId:'charge',before:2,after:0,gain:false};
+ await assert.rejects(f.ledger().expire(payload),/Interrupted Charged mutation/);
+});
+
+test('expiry consuming the final charge does not start an empty encounter cleanup afterwards',async()=>{
+ const f=fixture(),actor=f.target;f.item(actor,'charge',S.charged,{system:{badge:{value:1}}});
+ f.item(actor,'shock',S.shocked,{flags:{[ID]:{electricityShock:{expires:{combatId:f.combat.id,combatantId:'casterturn',round:2,phase:'end'}}}}});
+ await f.ledger().expire({combat:f.combat,ended:true,actors:[actor]});
+ assert.equal(electricityEffects(actor,S.charged).length,0);assert.equal(electricityEffects(actor,S.shocked).length,0);
+ assert.equal(electricityState(actor).operations[`encounter:${f.combat.id}:charge`],undefined);
+});
 test('same effect two targets cannot chain to one another even between application receipts',async()=>{
  const f=fixture();f.item(f.other,'shock',S.shocked);const m=f.source('pure',[f.tokens[1].uuid,f.tokens[2].uuid]);const d=await f.damage(f.target,{m});await d.finish();
  const candidates=await f.ledger().candidates({actorUuid:f.caster.uuid,sourceTokenUuid:f.tokens[0].uuid,selection:{targetUuids:[f.tokens[2].uuid],discharge:false},kind:'normal'},f.owner);assert.deepEqual(candidates,[]);
