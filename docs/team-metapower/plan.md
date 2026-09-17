@@ -24,7 +24,11 @@ Prefer a source/card option passed through native inline damage. At the native R
 
 Activation, next-action ordering and channel finalization share the actor GM queue. Hook awaitable real-use entry points, not asynchronous chat hooks alone. Existing base action costs remain native. Ordinary description cards, drafts and reposts never activate. Snapshot transformations are idempotent on rerender and remain associated with the original channel.
 
-Unresolved rules were sent to the user: Widen action cost is passive/missing in the original package; whether Siphoning removes discharge range/save downgrade; whether High Voltage falls under the dependent-effect exclusion. Independent work can proceed; dependent policy must wait for the reply.
+Original-source cross-check on 2026-09-18 resolved Widen's cost: the Pathfinder 2e book, printed page 60 (PDF page 61), has a one-action glyph, and the Pathbuilder distribution's Widen feat has action: 1. Foundry's passive/missing cost is a data omission. Widen must use one action rather than an unresolved GM policy.
+
+The book's Charged definition (printed page 97) classifies discharge benefits as additional effects. Read together with Siphoning (printed page 57), remove discharge's non-damage benefits, including extra area/range, save downgrade, and Reactive Chain's relaxed target eligibility; retain legal damage improvements and their discharge cost. This is a direct reading of the combined rules, not a separately published author clarification. Normal level-based range/area growth remains. Avoid automatically spending a charge for a branch whose only benefit has been removed.
+
+High Voltage remains unresolved: its future touch/hit damage may or may not fall under Siphoning's dependent-effect exclusion. Normal High Voltage refreshes immediately; if Siphoning is allowed to alter it, the treatment of its included Refresh activity still needs clarification. Do not infer that delayed damage alone establishes the exclusion, or silently decide the Refresh interaction. Relevant private source research is outside the release worktree.
 
 ## Execution
 
