@@ -19,3 +19,7 @@ test('Widen never suppresses native effect links or expands a nonmatching shape'
 test('High Voltage has no immediate damage link on its activation card',()=>{
  const plan=api.cardLinkPlan(snapshot({powerId:'high-voltage'}),[{kind:'damage',baseFormula:'4d6[electricity]'}]);assert.equal(plan[0].disabled,true);
 });
+test('Electric Shot keeps fixed failure and offers the selected branch base for Shocked half-failure',()=>{
+ const plan=api.cardLinkPlan(snapshot({powerId:'electric-shot'}),[{kind:'damage'},{kind:'damage'},{kind:'damage'}]);
+ assert.equal(plan[2].formula,'5[electricity]');assert.equal(plan[2].shockedFailureFormula,'(2+5)d8[electricity]');
+});

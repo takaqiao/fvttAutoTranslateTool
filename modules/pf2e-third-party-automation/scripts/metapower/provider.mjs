@@ -3,7 +3,7 @@ import {MODULE_ID,createMetapowerLedger,ledgerState,chargedEffect} from './lifec
 import {createMetapowerObserver} from './observer.mjs';
 import {renderMetapowerCard} from './card.mjs';
 import {installActionEntrances,wrapSheetHandlers,createToolbeltEntrance,patchHudController,installLegacyActionBoundary,ensureNativeUseControls} from './entrances.mjs';
-import {convertSiphonRoll} from './damage.mjs';
+import {convertSiphonRoll,applyNativeOutcomeInPlace} from './damage.mjs';
 import {showNativeChoice} from '../native-context.mjs';
 const values=c=>Array.from(c?.values?.()??c??[]);
 const prefix=`${MODULE_ID}:metapower:`;
@@ -14,6 +14,8 @@ export function adjustMetapowerCheckContext(snapshot,context){
 export function preserveMetapowerOnAlter(original,result){
  const proof=original?.options?.[MODULE_ID]?.metapowerDamage;
  if(proof&&result?.options)result.options[MODULE_ID]={...result.options[MODULE_ID],metapowerDamage:structuredClone(proof)};
+ const failure=original?.options?.[MODULE_ID]?.metapowerShotFailure;
+ if(failure&&result?.options)result.options[MODULE_ID]={...result.options[MODULE_ID],metapowerShotFailure:structuredClone(failure)};
  return result;
 }
 
@@ -45,7 +47,7 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
    }
    const result=await selectChoice({title:item.name,choices});if(!result)return null;selection=JSON.parse(result);
   }
-  if(beforeChannel)return beforeChannel({item,selection:{...selection,...input},kind:armed?.kind??'normal'});
+  if(beforeChannel){selection=await beforeChannel({item,selection:{...selection,...input},kind:armed?.kind??'normal'});if(!selection||profile.id==='reactive-chain')return selection;}
   if(profile.reaction){
    const chain=profile.id==='reactive-chain';
    const result=await globalThis.foundry.applications.api.DialogV2.wait({window:{title:item.name},content:`<p>${chain?'确认：30尺内生物实际受到电击伤害；所选目标在该生物30尺内，未受同一效果电击伤害，且已Shocked。虹吸不允许用放电放宽此资格。':'确认本次真实反应触发符合原威能条件。'}</p>${chain?'<label>触发生物实际受到的电击伤害 <input name="triggerDamage" type="number" min="1" step="1" required></label>':''}`,buttons:[{action:'confirm',label:'确认实际触发',callback:(_event,button)=>({triggerConfirmed:true,eligibleTargetConfirmed:chain,triggerDamage:chain?Number(new FormData(button.form).get('triggerDamage')):null})},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});
@@ -61,6 +63,8 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
   return receipt.snapshot;
  }
  async function beforeDamage(actor,params){
+  const failure=params.damage?.options?.[MODULE_ID]?.metapowerShotFailure;
+  if(failure){const snapshot=await validateDamageProof(failure);if(snapshot.powerId!=='electric-shot'||failure.targetActorUuid!==actor.uuid)throw Error('Electric Shot Shocked failure damage is bound to its original recipient.');}
   const proof=params.damage?.options?.[MODULE_ID]?.metapowerDamage;if(!proof)return null;
   const snapshot=await validateDamageProof(proof),multiplier=siphonMultiplier(snapshot,actor.traits??actor.system?.traits?.value??[]);
   return {params:multiplier===1?params:{...params,damage:params.damage.alter(multiplier,0)}};
@@ -138,6 +142,14 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
    const [cardId,nonce]=option.slice(prefix.length).split(':'),card=game.messages.get(cardId),proof={cardId,nonce,actorUuid:card?.flags?.[MODULE_ID]?.metapowerUse?.actorUuid};
    const snapshot=await validateDamageProof(proof);
    if(data.flags?.pf2e?.origin?.uuid!==snapshot.itemUuid)throw Error('Native damage origin differs from the bound power.');
+   if(data.flags?.pf2e?.context?.options?.includes(`${MODULE_ID}:electric-shot-failure-half`)){
+    if(snapshot.powerId!=='electric-shot')throw Error('The half-base failure branch belongs only to Electric Shot.');
+    const targets=values(game.user.targets),target=targets.length===1?targets[0].actor:null;
+    if(!target||!values(target.items).some(i=>['Compendium.battlezoo-eldamon-pf2e.conditions.1fZbuJEbVmE3J4XL','Compendium.battlezoo-eldamon-pf2e.conditions.Item.1fZbuJEbVmE3J4XL'].includes(sourceUuid(i))))throw Error('Electric Shot half-base failure requires one selected already-Shocked recipient.');
+    const prior=this.options?.[MODULE_ID]?.metapowerShotFailure;
+    if(prior&&(prior.nonce!==proof.nonce||prior.targetActorUuid!==target.uuid))throw Error('Electric Shot failure roll is already bound to another source or recipient.');
+    if(!prior)applyNativeOutcomeInPlace(this,.5);this.options[MODULE_ID]={...this.options[MODULE_ID],metapowerShotFailure:{...proof,targetActorUuid:target.uuid}};
+   }
    if(snapshot.siphon?.applies){convertSiphonRoll(this,{rejectMixedPartitions:true});this.options[MODULE_ID]={...this.options[MODULE_ID],metapowerDamage:proof};}
    return wrapped(data,options);
    };

@@ -104,3 +104,8 @@ nativeTest('automatic conversion refuses mixed partitions before mutating the ev
  assert.throws(()=>api.convertSiphonRoll(roll,{DamageRoll:native.DamageRoll,rejectMixedPartitions:true}),/manual|partition/i);
  assert.equal(JSON.stringify(roll.toJSON()),before);
 });
+nativeTest('Electric Shot failure halves the evaluated native roll including modifiers in place before siphoning',()=>{
+ const roll=makeRoll([{value:5,die:4}]),same=roll;
+ assert.equal(api.applyNativeOutcomeInPlace(roll,.5),same);assert.equal(roll.total,4);assert.equal(roll.dice[0].results[0].result,4);
+ api.convertSiphonRoll(roll,{DamageRoll:native.DamageRoll});assert.equal(roll.total,4);assert.equal(roll.instances[0].type,'untyped');assert.equal(roll.alter(.5,0).total,2);
+});

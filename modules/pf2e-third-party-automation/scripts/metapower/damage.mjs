@@ -1,6 +1,14 @@
 const MODULE_ID='pf2e-third-party-automation';
 const MARKER='siphonDamage';
 const clone=value=>structuredClone(value);
+/** Preserve the native publication object while taking PF2e's evaluated outcome
+ * arithmetic. Dice and modifiers have already been evaluated exactly once. */
+export function applyNativeOutcomeInPlace(roll,multiplier){
+ if(!roll?._evaluated||typeof roll.alter!=='function')throw Error('An evaluated native damage roll is required.');
+ const replacement=roll.alter(multiplier,0);
+ for(const key of ['terms','_formula','_total','_dice','_evaluated','options'])roll[key]=replacement[key];
+ return roll;
+}
 // Stable comparison keeps distinct native instance metadata/materials partitioned.
 const comparable=value=>value===null?['null']:Array.isArray(value)?['array',value.map(comparable)]:typeof value==='object'?['object',Object.keys(value).sort().map(key=>[key,comparable(value[key])])]:[typeof value,String(value)];
 const stable=value=>JSON.stringify(comparable(value));
