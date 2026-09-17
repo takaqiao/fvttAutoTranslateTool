@@ -20,7 +20,7 @@ export async function withEatStrikeFrame({actor,strike,variant,params={}},native
  const framed={...params,options:new Set([...params.options??[],marker]),extraRollOptions:[...params.extraRollOptions??[],marker]};
  try{return await native(framed)}finally{strikeFrames.delete(marker)}
 }
-function occupiedTraits(context){
+export function occupiedTraits(context){
  const options=asSet(context.options),actor=actorOf(context),occupied=new Set(['fortune','misfortune'].filter(t=>options.has(t))),selected=selectedSubstitution(context);
  if(selected?.effectType)occupied.add(selected.effectType);
  if(context.rollTwice)occupied.add(context.rollTwice==='keep-higher'?'fortune':'misfortune');
