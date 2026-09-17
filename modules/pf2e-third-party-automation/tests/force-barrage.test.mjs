@@ -14,7 +14,7 @@ function fixture(){
  const Hooks={on:(n,f)=>{hooks.set(n,f);return f},off:()=>{}};
  let answer={actions:3,visibilityConfirmed:true,allocations:targets.map((t,i)=>({targetUuid:t.uuid,count:i?2:4}))};
  let rolling=0,publishing=0,native=0;const rolls=[];
- const adapter={getMissileCount:()=>6,run:async p=>{calls.push(['adapter',p]);await p.bridge.payAndBindOriginalCast();for(const a of p.allocations){if(!a.count)continue;const roll={async evaluate(){rolling++;this.total=a.count*2;return this},toJSON(){return {class:'DamageRoll',formula:`${a.count}d4+${a.count}`,total:this.total,terms:[]}},async toMessage(data,opts){publishing++;const m={id:`d${publishing}`,uuid:`ChatMessage.d${publishing}`,...data};game.messages.set(m.id,m);calls.push(['publish',opts]);return m;}};rolls.push(roll);await p.bridge.publishTarget({roll,messageData:{flags:{'pf2e-toolbelt.targetHelper.targets':[a.targetUuid]},flavor:'native',speaker:{actor:'a',token:'src',scene:'sc'}},targetUuid:a.targetUuid});}return {status:'completed'};}};
+ const adapter={getMissileCount:()=>6,run:async p=>{calls.push(['adapter',p]);await p.bridge.payAndBindOriginalCast();for(const a of p.allocations){if(!a.count)continue;const roll={async evaluate(){rolling++;this.total=a.count*2;return this},toJSON(){return {class:'DamageRoll',formula:`${a.count}d4+${a.count}`,total:this.total,terms:[]}},async toMessage(data,opts){if(hooks.get('preCreateChatMessage')?.(data)===false)return;publishing++;const m={id:`d${publishing}`,uuid:`ChatMessage.d${publishing}`,...data};game.messages.set(m.id,m);calls.push(['publish',opts]);return m;}};rolls.push(roll);await p.bridge.publishTarget({roll,messageData:{flags:{'pf2e-toolbelt.targetHelper.targets':[a.targetUuid]},flavor:'native',speaker:{actor:'a',token:'src',scene:'sc'}},targetUuid:a.targetUuid});}return {status:'completed'};}};
  const outcome={status:'completed',castNonce:'cast',message:{id:'c',uuid:'ChatMessage.c'},receipt:{state:'used'}};
  const next=async()=>{native++;return 'original'};next.withOutcome=async p=>{native++;calls.push(['cast',p]);return outcome};
  docs.set(outcome.message.uuid,outcome.message);
@@ -50,4 +50,12 @@ test('second target publication failure preserves first card and never retries r
 });
 test('GM handoff before confirmation rejects prior to claim and original payment',async()=>{
  const f=fixture();const bridge=createForceBarrageBridge({...f.config,choose:async()=>{f.game.users.activeGM={id:'other',active:true};return {actions:3,visibilityConfirmed:true,allocations:f.targets.map((t,i)=>({targetUuid:t.uuid,count:i?2:4}))}}});await assert.rejects(bridge.interceptCast({item:f.item,entry:f.entry,options:{rank:3}},f.next));assert.equal(f.counts.native,0);
+});
+test('GM handoff during native damage-card rendering vetoes publication after the roll without replay',async()=>{
+ const f=fixture(),nativeRun=f.adapter.run;
+ f.adapter.run=p=>nativeRun({...p,bridge:{...p.bridge,publishTarget:async data=>{
+  data.roll.toMessage=async message=>{f.game.users.activeGM={id:'replacement',active:true};const allowed=f.hooks.get('preCreateChatMessage')?.(message);assert.equal(allowed,false);return undefined;};
+  return p.bridge.publishTarget(data);
+ }}});
+ await assert.rejects(f.run(),/消息|主GM/);assert.equal(f.counts.native,1);assert.equal(f.counts.rolling,1);assert.equal(f.game.messages.size,0);
 });

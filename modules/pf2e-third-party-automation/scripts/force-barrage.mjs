@@ -111,7 +111,8 @@ export function createForceBarrageBridge({game,fromUuid=globalThis.fromUuid,nati
      flags.pf2e={...flags.pf2e,origin:{...flags.pf2e?.origin,uuid:item.uuid,actor:actor.uuid,type:'spell',castRank:s.rank}};
      flags[ID]={...flags[ID],forceBarrage:{bridgeNonce:s.nonce,castNonce:originalOutcome.castNonce,originalMessageUuid:originalOutcome.message.uuid,targetUuid,count:allocation.count,fingerprint:s.fingerprint}};
      await call(s,'beginPublication',{targetUuid});requireScope(s);
-     const message=await roll.toMessage({...messageData,flags,author:s.user.id,blind:false,whisper:[]},{messageMode:'public'});
+     s.publishing=flags[ID].forceBarrage;
+     let message;try{message=await roll.toMessage({...messageData,flags,author:s.user.id,blind:false,whisper:[]},{messageMode:'public'});}finally{s.publishing=null;}
      if(!message?.uuid)throw Error('本次目标伤害卡没有返回准确消息。');
      s.record=await call(s,'finishPublication',{targetUuid,messageUuid:message.uuid,rollJSON});return message;
     },
@@ -137,13 +138,23 @@ export function createForceBarrageBridge({game,fromUuid=globalThis.fromUuid,nati
   if(!bounded(proof?.bridgeNonce)||!native?.id||native.itemUuid!==message.flags?.pf2e?.origin?.uuid)return;
   for(const button of html.querySelectorAll?.('[data-action="spell-damage"]')??[]){button.disabled=true;button.removeAttribute('data-action');button.textContent='请按本次分弹卡结算';}
  }
+ function preCreateDamage(message){
+  const proof=message.flags?.[ID]?.forceBarrage;if(!proof)return;
+  const s=byItem.get(message.flags?.pf2e?.origin?.uuid);
+  try{
+   if(!s||s.stage!=='producing'||!equal(s.publishing,proof))throw Error('这张分弹卡没有本次准确发布许可。');
+   requireScope(s);const author=message.author?.id??message.user?.id??message.user??message.author;
+   if(author!==s.user.id||message.blind!==false||message.whisper?.length!==0||message.speaker?.actor!==s.actor.id||message.flags.pf2e.origin.castRank!==s.rank||!equal(message.flags['pf2e-toolbelt']?.targetHelper?.targets,[proof.targetUuid]))throw Error('分弹消息在发布前改变了来源或隐私。');
+  }catch(error){onError(error);return false;}
+ }
  function register({Hooks,socket:api}={}){
   if(installed)return()=>{};installed=true;socket=api;
   nativeCasts.addInvocationAdapter('force-barrage',{validate:validateInvocation,consumePolicy});
   const hook=Hooks?.on('renderChatMessageHTML',renderOriginal);
+  const publicationHook=Hooks?.on('preCreateChatMessage',preCreateDamage);
   socket?.register(PROOF,async function(payload){try{return {ok:true,value:await prove(payload,this.socketdata?.userId)}}catch(error){return {ok:false,error:String(error.message??error)}}});
   socket?.register(RPC,async function(payload){try{return {ok:true,value:await dispatch(payload,this.socketdata?.userId)}}catch(error){return {ok:false,error:String(error.message??error)}}});
-  return()=>{installed=false;if(hook!==undefined)Hooks.off('renderChatMessageHTML',hook);};
+  return()=>{installed=false;if(hook!==undefined)Hooks.off('renderChatMessageHTML',hook);if(publicationHook!==undefined)Hooks.off('preCreateChatMessage',publicationHook);};
  }
  return {interceptCast,captureUsage,register};
 }
