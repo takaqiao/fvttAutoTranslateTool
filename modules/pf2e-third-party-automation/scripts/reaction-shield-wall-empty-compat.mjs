@@ -1,7 +1,7 @@
-// Local draft. Only protects the empty Shield Wall candidate branch in the
-// three audited campaigns. It does not implement the Shield Wall reaction.
+// Only protects the empty Shield Wall candidate branch in the audited
+// campaigns. It does not implement the Shield Wall reaction.
 const MODULE='pf2e-reaction',EVENT='createItem';
-const TARGETS=new Set(['-','sog','pnvfcgjbf2cjp7gz','team-automation-qa2']);
+const TARGETS=new Set(['-','sog','pnvfcgjbf2cjp7gz','ujx5r8oipw7ercdr','team-automation-qa2']);
 const BUNDLE_SHA256='4a81322796ce1c6ed545edc09e1aa3a96a9c8a96dfd034403bf657068ed7036c';
 const CALLBACK_SHA256='6cb70e38abbdc59e441e56f085144eaa54f69763e8649e7ea942e32326ad4841';
 // The 8.5.1 NPC sheet calls the unchanged native Raise a Shield macro. Both
