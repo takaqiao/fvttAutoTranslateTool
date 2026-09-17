@@ -6,6 +6,7 @@ import {createShieldReactionResources} from './shield-reaction-resources.mjs';
 import {GLIMPSE_SOURCES as S,glimpseSourceId,glimpseEncounter,glimpseCandidates,glimpseClaims,findGlimpseClaim,resolveGlimpseSource,validateGlimpseSource} from './glimpse-source.mjs';
 import {compileGlimpseResistance,withGlimpseResistance,repentParams,glimpseMarker} from './glimpse-native.mjs';
 import {glimpseWorld} from './glimpse-compat.mjs';
+import {glimpseExpiryFor} from './glimpse-expiry.mjs';
 const values=c=>Array.from(c?.values?.()??c??[]),author=m=>m?.author?.id??m?.user?.id??m?.user,random=()=>globalThis.foundry?.utils?.randomID?.(24)??crypto.randomUUID(),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b),brand=Symbol('native-glimpse-scope');
 const keyOf=s=>`${s.damageMessageId}:${s.rollIndex}:${s.tokenUuid}`;
 /** Awaitable, source-bound reaction. All resource mutation is elected-GM work;
@@ -82,7 +83,7 @@ export function createGlimpseProvider({game,fromUuid=globalThis.fromUuid,getRoll
     context=await authenticate(payload,user);let option=currentOption(context,expected);
     const enemyUser=preferred(context.attacker.actor);if(!enemyUser)throw Error('敌方没有在线拥有者，不能决定忏悔或抗拒。');
     const mindless=new Set(context.attacker.actor.system?.traits?.value??[]).has('mindless');
-    const decision=mindless?'resist':await choice({actor:context.attacker.actor,user:enemyUser,title:'救赎瞥视：敌方选择本次结果',choices:[{value:'repent',label:'忏悔：盟友不受本次伤害'},{value:'resist',label:'抗拒：盟友获得抗力，之后自身力竭 2'}]});
+    const decision=mindless?'resist':await choice({actor:context.attacker.actor,user:enemyUser,title:'救赎瞥视：敌方选择本次结果',choices:[{value:'repent',label:'忏悔：盟友不受本次伤害'},{value:'resist',label:'抗拒：盟友获得抗力，之后自身衰弱 2'}]});
     if(!['repent','resist'].includes(decision))throw Error('敌方尚未完成忏悔／抗拒选择，伤害未应用。');
     context=await authenticate(payload,user);option=currentOption(context,expected);
     const nowMindless=new Set(context.attacker.actor.system?.traits?.value??[]).has('mindless');
@@ -91,7 +92,7 @@ export function createGlimpseProvider({game,fromUuid=globalThis.fromUuid,getRoll
     await withReactionReservation(option.actor,game,async()=>{
      gm();const current=await authenticate(payload,user);option=currentOption(current,expected);
      if(!genericReactionAvailable(option.actor,boundedGame(option.combat)))throw Error('本次通用反应已消耗。');
-     const snapshot=await reactionResources.snapshot(option.combatant);gm();currentOption(await authenticate(payload,user),expected);
+     const snapshot=await reactionResources.snapshot(option.combatant);gm();const actual=await authenticate(payload,user);currentOption(actual,expected);claim.expiry=glimpseExpiryFor(actual.attacker,game);
      if(!reactionResources.available(snapshot,'generic'))throw Error('Reaction Checker 通用反应已消耗。');
      const resource=reactionResources.reserve(snapshot,'generic');claim.resource=resource.proof;
      const previous=option.combatant.flags?.[M]?.reactionBudget,entries=previous?.epoch===claim.epoch?[...previous.entries??[]]:[];
@@ -146,7 +147,7 @@ export function createGlimpseProvider({game,fromUuid=globalThis.fromUuid,getRoll
   if(claim.decision==='resist'){
    await updateClaim(claim.nonce,{status:'followup',receiptId:message.id});
    try{
-    const result=await compat.apply({nonce:claim.nonce,enemy:context.attacker,authorize:async()=>{gm();const current=findGlimpseClaim(game,claim.nonce)?.claim;return current?.status==='followup'&&current.receiptId===message.id&&receiptMatches(message,context,current,user)}});
+    const result=await compat.apply({nonce:claim.nonce,enemy:context.attacker,expiry:claim.expiry,authorize:async()=>{gm();const current=findGlimpseClaim(game,claim.nonce)?.claim;return current?.status==='followup'&&current.receiptId===message.id&&receiptMatches(message,context,current,user)}});
     await updateClaim(claim.nonce,{status:'done',receiptId:message.id,...result});
    }catch(error){await updateClaim(claim.nonce,{status:'uncertain'}).catch(onError);throw error}
   }else await updateClaim(claim.nonce,{status:'done',receiptId:message.id});return true;
