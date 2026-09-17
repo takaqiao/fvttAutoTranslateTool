@@ -91,3 +91,10 @@ test('lost zero-counter deletion response persists payment intent and cannot pay
  await assert.rejects(finish(f.service(),f,r,f.power),/uncertain|reconcile/i);assert.equal(payments,1);
  await s.finish({actorUuid:f.actor.uuid,nonce:'pay',status:'uncertain'},f.user);assert.equal(f.actor.flags[ID].metapower.receipts.pay.messageUuid,'ChatMessage.mpay');
 });
+test('actor encounter identity survives viewing another combat and ignores unrelated encounters',async()=>{
+ const f=fixture(),bound=f.game.combat;bound.started=true;bound.combatants=new Map([['a',{actor:f.actor}]]);f.game.combats=new Map([[bound.id,bound]]);
+ const s=f.service();await finish(s,f,await begin(s,f,f.widen,'one'),f.widen);
+ f.game.combat={id:'viewed-other',started:true,round:8,turn:3,combatants:new Map()};
+ const channel=await begin(s,f,f.power,'two',{selection:{discharge:false,baseDistance:30}});assert.equal(channel.snapshot.kind,'widen');assert.equal(channel.turn,'combat:1:0:turn');
+ assert.equal(api.turnIdentity(f.game,{uuid:'Actor.not-participant'}),null);
+});
