@@ -37,7 +37,7 @@ function detachedWorkbench({cancel=false,macroSource=null}={}){
   void scope.token.actor.skills.medicine.roll({dc:{value:20},extraRollOptions:['action:treat-wounds'],callback:async()=>{observed.healReady=()=>new (scope.CONFIG??{Dice:{rolls:[DamageRoll]}}).Dice.rolls[0]().toMessage({speaker:scope.ChatMessage.getSpeaker(),flags:{treat_wounds_battle_medicine:{id:target.id,healerId:actor.id,dos:2,healing:8}}});}});
  }},no:{}},render(){}});}};
  if(macroSource){
-  actor.items=[{type:'feat',slug:'battle-medicine'}];actor.itemTypes={feat:actor.items,effect:[],equipment:[{slug:'healers-toolkit',handsHeld:0}]};actor.system={details:{level:{value:5}}};actor.getRollOptions=()=>[];Object.assign(actor.skills.medicine,{rank:1,label:'medicine',modifiers:[{type:'proficiency',modifier:7}]});patient.items=[];patient.itemTypes={effect:[]};
+  actor.items=[{type:'feat',slug:'battle-medicine'}];actor.itemTypes={feat:actor.items,effect:[],equipment:[{slug:'healers-toolkit',handsHeld:0}]};actor.system={details:{level:{value:5}}};actor.getRollOptions=()=>['self:type:character','self:trait:elf','self:effect:charged','feat:battle-medicine'];Object.assign(actor.skills.medicine,{rank:1,label:'medicine',modifiers:[{type:'proficiency',modifier:7}]});patient.items=[];patient.itemTypes={effect:[]};
   game.modules.set('dice-so-nice',{active:true});game.packs.set('xdy-pf2e-workbench.asymonous-benefactor-macros',{index:[]});
   const AsyncFunction=Object.getPrototypeOf(async function(){}).constructor;
   macro.execute=async scope=>{observed.scope=scope;const globals={...scope,Hooks,event:null,fromUuid:async()=>({toObject:()=>({name:'Immunity',system:{tokenIcon:{},duration:{value:1,unit:'days'}},flags:{}})}),ui:{notifications:{warn:message=>{throw Error(message);},info(){}}},console:{log(){}},CONST:{CHAT_MESSAGE_STYLES:{ROLL:5,OTHER:0}}};return new AsyncFunction(...Object.keys(globals),macroSource)(...Object.values(globals));};
@@ -54,6 +54,9 @@ test('installed Workbench reads a locked native canvas layer and waits for its r
  const nodes={useBattleMedicine:{value:'1'},'dc-type':{value:'1'},modifier:{value:'0'}};
  const form={find(selector){const node=nodes[selector.match(/name="([^"]+)"/)?.[1]];return {0:node,length:node?1:0,val(value){if(value===undefined)return node?.value;if(node)node.value=value;return this;},prop(){return this;},trigger(){return this;}};}};
  await f.observed.dialog.options.buttons.yes.callback(form);await flush();assert.equal(done,false);assert.ok(f.observed.check);
+ // PF2e CheckContext copies extra options into both contextual actors. The native statistic already
+ // supplies healer options; forwarding Workbench's self:* options would make the patient an elf too.
+ assert.deepEqual(f.observed.check.extraRollOptions,['action:treat-wounds',`${M}:medic-workbench:nonce`]);
  f.release();await flush();assert.equal(done,false);assert.equal(f.cards.length,0);f.Hooks.call('diceSoNiceRollComplete');const result=await f.operation;
  assert.equal(result.status,'delegated');assert.equal(f.cards.length,1);assert.equal(f.cards[0].flags.treat_wounds_battle_medicine.healing,8);assert.equal(f.cards[0].flags[M].medicWorkbench.nonce,'nonce');
 });

@@ -52,7 +52,11 @@ export function createMedicNative({game,choose,canvas=globalThis.canvas,Dialog=g
   const skillScope=Object.fromEntries(Object.entries(actor.skills??{}).map(([slug,stat])=>[slug,scoped(stat,{roll:async args=>{
    try{
     if(settled)return null;validate();if(!nonce||checkStarted)throw Error('Workbench医疗检定回执已开始或缺失。');checkStarted=true;
-    const rolled=await stat.roll({...args,token:healer,target:pinnedMedicTarget(target),dc:{...args.dc,slug:'medicine'},extraRollOptions:[...(args.extraRollOptions??[]),marker],callback:async(roll,outcome,message,...rest)=>{
+    // Workbench repeats the healer's prepared options; native Statistic supplies those itself.
+    // Passing self:* as extras would also inject healer traits into the patient's contextual clone.
+    const actorOptions=new Set(actor.getRollOptions?.(['all','skill-check','medicine'])??[]);
+    const extraRollOptions=(args.extraRollOptions??[]).filter(option=>!actorOptions.has(option));
+    const rolled=await stat.roll({...args,token:healer,target:pinnedMedicTarget(target),dc:{...args.dc,slug:'medicine'},extraRollOptions:[...extraRollOptions,marker],callback:async(roll,outcome,message,...rest)=>{
      if(settled)return;validate();const context=message?.flags?.pf2e?.context;
      if(!message?.id||game.messages.get(message.id)!==message||message.speaker?.actor!==actor.id||context?.isReroll||context?.type!=='skill-check'||!context.options?.includes(marker)||context.target?.actor!==target.actor.uuid||context.target?.token!==target.uuid)throw Error('Workbench原生检定回执不匹配。');
      checkMessage=message;await message.update({[`flags.${MODULE_ID}.medicWorkbench`]:proof()});
