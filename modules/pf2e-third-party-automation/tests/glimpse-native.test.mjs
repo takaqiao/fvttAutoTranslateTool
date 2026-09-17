@@ -6,7 +6,7 @@ test('native resistance keeps all-damage semantics and is restricted to its actu
  const native={type:'all-damage',value:7,exceptions:[],doubleVs:[],test:o=>!o.has('bypass'),getDoubledValue:()=>7};let compiled;
  const actor={attributes:{resistances:[]},getContextualClone(options,effects){compiled=effects[0];return {attributes:{resistances:[native]}}}};
  const r=compileGlimpseResistance({actor,template:template(),champion:{uuid:'Actor.champ',level:5},ability:{uuid:'Actor.champ.Item.g'},nonce:'one'});
- assert.equal(compiled.system.context.origin.actor,'Actor.champ');assert.equal(r.type,'all-damage');assert.equal(r.test(new Set([glimpseMarker('one')])),true);assert.equal(r.test(new Set([glimpseMarker('two')])),false);assert.equal(r.test(new Set([glimpseMarker('one'),'bypass'])),false);
+ assert.match(compiled._id,/^[A-Za-z0-9]{16}$/);assert.equal(compiled.system.context.origin.actor,'Actor.champ');assert.equal(r.type,'all-damage');assert.equal(r.test(new Set([glimpseMarker('one')])),true);assert.equal(r.test(new Set([glimpseMarker('two')])),false);assert.equal(r.test(new Set([glimpseMarker('one'),'bypass'])),false);
  await assert.rejects(withGlimpseResistance(actor,r,async()=>{assert.deepEqual(actor.attributes.resistances,[r]);throw Error('native failed')}),/native failed/);assert.deepEqual(actor.attributes.resistances,[]);
 });
 test('exact temporary object is removed from replaced arrays without removing existing resistance',async()=>{

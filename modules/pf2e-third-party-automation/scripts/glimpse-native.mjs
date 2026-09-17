@@ -5,7 +5,10 @@ export function validGlimpseTemplate(template){const r=template?.system?.rules;r
  * is not retained by the resulting Resistance, so guard the native instance. */
 export function compileGlimpseResistance({actor,template,champion,ability,nonce,options=[]}){
  if(!validGlimpseTemplate(template)||champion?.level!==5||typeof actor.getContextualClone!=='function')throw Error('救赎瞥视原生抗力模板或等级无法验证。');
- const effect=structuredClone(template);delete effect._id;
+ const effect=structuredClone(template);
+ // Contextual clones embed their supplied source data immediately: unlike
+ // createEmbeddedDocuments, this path does not assign new document IDs.
+ do{effect._id=globalThis.foundry?.utils?.randomID?.(16)??crypto.randomUUID().replaceAll('-','').slice(0,16)}while(actor.items?.has?.(effect._id));
  effect.system.context={origin:{actor:champion.uuid,item:ability.uuid},target:null,roll:null};
  const clone=actor.getContextualClone([...new Set([...options,glimpseMarker(nonce)])],[effect]);
  const resistance=clone.attributes?.resistances?.find(r=>r.type==='all-damage'&&!(r.exceptions?.length)&&!(r.doubleVs?.length)&&r.value>=champion.level+2&&typeof r.test==='function'&&typeof r.getDoubledValue==='function');
