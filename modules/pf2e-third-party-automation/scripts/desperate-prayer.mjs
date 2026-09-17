@@ -191,7 +191,7 @@ export function createDesperatePrayerProvider({game,fromUuid=globalThis.fromUuid
   });
   on('preUpdateActor',(actor,changes)=>{
    const c=data(actor).credit,after=changes['system.resources.focus.value']??changes.system?.resources?.focus?.value;
-   if(!c||c.remaining!==1||!['available','uncertain'].includes(c.state)||after===undefined||changes[PATH])return;
+   if(!c||c.remaining!==1||!['available','uncertain'].includes(c.state)||after===undefined||changes[PATH]||changes.flags?.[ID]?.desperatePrayer)return;
    const before=focus(actor)?.value;
    const knownIncrease=c.state==='available'&&before===c.totalObserved&&Number.isInteger(after)&&after>=before&&after<=focus(actor).max;
    changes[PATH]={...data(actor),credit:{...c,totalObserved:after,state:knownIncrease?'available':'uncertain'}};
