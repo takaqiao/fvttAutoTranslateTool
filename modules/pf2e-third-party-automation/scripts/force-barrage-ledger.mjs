@@ -6,7 +6,7 @@ const PATH=`flags.${ID}.forceBarrage`,terminal=new Set(['cancelled','rejected','
 const copy=value=>structuredClone(value),validId=value=>typeof value==='string'&&/^[A-Za-z0-9_-]{1,100}$/.test(value)&&!['__proto__','constructor','prototype'].includes(value);
 const ordered=value=>Array.isArray(value)?value.map(ordered):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().map(k=>[k,ordered(value[k])])):value;
 const equal=(a,b)=>JSON.stringify(ordered(a))===JSON.stringify(ordered(b));
-const requireTrue=value=>{if(!value)throw Error('力场飞弹的来源、原生付款或当前执行许可无法确认。');};
+const requireTrue=(value,reason)=>{if(!value)throw Error(reason?`力场飞弹：${reason}`:'力场飞弹的来源、原生付款或当前执行许可无法确认。');};
 const author=message=>message?.author?.id??message?.user?.id??message?.user;
 const stateOf=actor=>actor?.flags?.[ID]?.forceBarrage??{currentByItem:{},operations:{}};
 const nativeReceipts=actor=>actor.flags?.[ID]?.nativeCasts??[];
@@ -131,10 +131,12 @@ export function createForceBarrageLedger({game,fromUuid=globalThis.fromUuid,with
  const beginPublication=scope=>mutate(scope,async()=>{const {r,t}=targetFor(scope);requireTrue(t.status==='rolled');await liveTarget(scope,r);return replaceTarget(scope,r,t,{status:'publishing'});});
  const finishPublication=scope=>mutate(scope,async()=>{
   const {r,t}=targetFor(scope),m=scope.message;requireTrue(['publishing','published'].includes(t.status));
-  requireTrue(equal(t.rollWitness,forceBarrageRollWitness(scope.rollJSON))&&m?.id&&game.messages?.get(m.id)===m&&m.documentName==='ChatMessage'&&m.isDamageRoll===true&&author(m)===r.userId&&m.rolls?.length===1&&typeof m.rolls[0]?.toJSON==='function');
-  requireTrue(equal(t.rollWitness,forceBarrageRollWitness(m.rolls[0].toJSON())));
+  requireTrue(equal(t.rollWitness,forceBarrageRollWitness(scope.rollJSON)),'原掷骰回执已改变，未确认交付。');
+  requireTrue(m?.id&&game.messages?.get(m.id)===m,'准确伤害卡尚未同步到主GM，未确认交付。');
+  requireTrue(m.documentName==='ChatMessage'&&m.isDamageRoll===true&&author(m)===r.userId&&m.rolls?.length===1&&typeof m.rolls[0]?.toJSON==='function','伤害卡类型、作者或原生骰子无法确认。');
+  requireTrue(equal(t.rollWitness,forceBarrageRollWitness(m.rolls[0].toJSON())),'主GM伤害卡的原生骰子与已记录结果不同。');
   const expected={bridgeNonce:r.nonce,castNonce:r.castNonce,originalMessageUuid:r.originalMessageUuid,targetUuid:t.targetUuid,count:t.count,fingerprint:r.fingerprint},proof=m.flags?.[ID]?.forceBarrage;
-  requireTrue(equal(proof,expected));
+  requireTrue(equal(proof,expected),'伤害卡的本次分弹标记不匹配。');
   const pf=m.flags?.pf2e?.origin,parts=r.allocation.sourceTokenUuid.split('.');
   requireTrue(pf?.uuid===r.itemUuid&&pf.castRank===r.allocation.rank&&(!pf.actor||pf.actor===r.actorUuid)&&m.speaker?.actor===scope.actor.id&&m.speaker.scene===parts[1]&&m.speaker.token===parts[3]);
   requireTrue(equal(m.flags?.['pf2e-toolbelt']?.targetHelper?.targets,[t.targetUuid])&&m.blind===false&&Array.isArray(m.whisper)&&m.whisper.length===0);
