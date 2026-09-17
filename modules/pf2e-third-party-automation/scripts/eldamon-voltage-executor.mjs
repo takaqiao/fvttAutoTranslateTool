@@ -8,8 +8,8 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 const speakerToken=s=>`Scene.${s?.scene}.Token.${s?.token}`;
 
 /** Explicit registration; importing this module never changes game or Hooks. */
-export function createEldamonVoltageProvider({game,fromUuid,observe,DamageRoll=globalThis.CONFIG?.Dice?.rolls?.find(C=>C.name==='DamageRoll'),convertRoll=convertSiphonRoll,selectChoice=showNativeChoice,onError=console.error}={}){
- const ledger=createVoltageLedger({game,fromUuid}),grants=new WeakMap();let socket,registered=false;
+export function createEldamonVoltageProvider({game,fromUuid,observe,onRefresh,DamageRoll=globalThis.CONFIG?.Dice?.rolls?.find(C=>C.name==='DamageRoll'),convertRoll=convertSiphonRoll,selectChoice=showNativeChoice,onError=console.error}={}){
+ const ledger=createVoltageLedger({game,fromUuid,onRefresh}),grants=new WeakMap();let socket,registered=false;
  const activeGM=()=>{if(game.user?.id!==game.users.activeGM?.id)throw Error('High Voltage execution requires the active GM.');};
  async function notifyCard(actorUuid,nonce){
   const actor=await fromUuid(actorUuid),activation=voltageState(actor).activations[nonce];if(!activation)return;

@@ -39,7 +39,7 @@ const knownMetals=new Set(['adamantine','cold-iron','silver','dawnsilver','orich
 
 /** Short active-GM transactions only. Native saves/damage run AFTER claim resolves
  * so metapower settlement and native action observers cannot reenter this queue. */
-export function createVoltageLedger({game,fromUuid,queue=new SerialActions()}){
+export function createVoltageLedger({game,fromUuid,onRefresh=async()=>{},queue=new SerialActions()}){
  const gm=()=>{if(game.user?.id!==game.users.activeGM?.id)throw Error('Only the active GM may coordinate High Voltage.');};
  const owner=(actor,user)=>{if(!user||game.users.get(user.id)!==user||!actor?.testUserPermission(user,'OWNER'))throw Error('Actor owner permission is required.');};
  const save=async(actor,state)=>{gm();await actor.update({[`flags.${ID}.voltage`]:state});};
@@ -54,15 +54,20 @@ export function createVoltageLedger({game,fromUuid,queue=new SerialActions()}){
  }
  async function refresh(actor,state,nonce){
   let r=state.refreshes[nonce];
-  if(r?.status==='done')return r;
   if(!r){r=state.refreshes[nonce]={status:'started',updates:voltageRefreshUpdates(actor)};await save(actor,state);}
+  if(r.status!=='done'){
   for(const update of r.updates){
    const item=await fromUuid(update.itemUuid);if(!ownedItem(actor,item))throw Error('Refresh source item changed; reconcile the original activity.');
    if(item.flags?.[ID]?.voltageRefresh?.nonce===nonce)continue;
    if((item.frequency??item.system.frequency)?.value!==update.before)throw Error('Power frequency changed during Refresh; reconcile the original activity.');
    gm();await item.update({'system.frequency.value':update.after,[`flags.${ID}.voltageRefresh`]:{nonce,after:update.after}});
   }
-  r.status='done';await save(actor,state);return r;
+   r.status='done';await save(actor,state);
+  }
+  // Lifecycle cleanup is independently idempotent under this nonce. A failed
+  // cleanup may be retried, but already committed resource writes never repeat.
+  if(!r.effectsDone){await onRefresh({actor,nonce});r.effectsDone=true;await save(actor,state);}
+  return r;
  }
  async function closeIfStale(actor,state,activation){
   if(activation?.status!=='armed')return false;
