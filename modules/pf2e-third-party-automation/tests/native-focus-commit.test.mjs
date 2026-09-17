@@ -41,3 +41,17 @@ test('external resource operations share the native payment actor queue',async()
  const f=fixture();assert.equal(typeof f.casts.withActorResourceLock,'function');let release;const gate=new Promise(r=>release=r);const order=[];
  const lock=f.casts.withActorResourceLock(f.actor,async()=>{order.push('grant');await gate;});const pay=f.pay();await Promise.resolve();assert.equal(f.actor.system.resources.focus.value,2);release();await lock;assert.equal((await pay).ok,true);order.push('paid');assert.deepEqual(order,['grant','paid']);
 });
+
+test('shared actor update middleware composes synchronously with focus proof and unregisters independently',async()=>{
+ const f=fixture();let observed=0;
+ const off=f.casts.addActorUpdateMiddleware(function(next,changes,options){observed++;assert.equal(this,f.actor);return next(changes,options)});
+ f.casts.addConsumePolicy(async(c,next)=>{c.expectFocusCommit({before:2,cost:1,changes:p=>({[`flags.${ID}.focusProof`]:p})});return next()});
+ assert.equal((await f.pay()).ok,true);assert.equal(f.actor.flags[ID].focusProof.after,1);assert(observed>0);
+ off();const before=observed;await f.actor.update({'system.resources.focus.value':2});assert.equal(observed,before);
+});
+
+test('a middleware that defers actor.update cannot borrow the expired native focus scope',async()=>{
+ const f=fixture();f.casts.addActorUpdateMiddleware(async function(next,changes,options){await Promise.resolve();return next(changes,options)});
+ f.casts.addConsumePolicy(async(c,next)=>{c.expectFocusCommit({before:2,cost:1,changes:p=>({[`flags.${ID}.focusProof`]:p})});return next()});
+ assert.equal((await f.pay()).ok,false);assert.equal(f.actor.system.resources.focus.value,1);assert.equal(f.actor.flags[ID]?.focusProof,undefined);assert.equal(f.actor.flags[ID].nativeCasts[0].state,'uncertain');
+});

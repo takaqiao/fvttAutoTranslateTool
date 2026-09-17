@@ -57,6 +57,10 @@ export function createDesperatePrayerProvider({game,fromUuid=globalThis.fromUuid
   if(options.consume!==false)await beforeAction(item.actor);
   return native();
  }
+ async function interceptCheck(native,check,context={},...args){
+  await beforeAction(context.actor??context.origin?.actor);
+  return native(check,context,...args);
+ }
  function captureUsage(item){
   if(!resolveAction(item))return null;
   const payment=item.flags?.[ID]?.prayerPayment;
@@ -194,7 +198,6 @@ export function createDesperatePrayerProvider({game,fromUuid=globalThis.fromUuid
   });
   wrap('CONFIG.Combatant.documentClass.prototype.onStartTurn',async function(native,...args){const result=await native(...args);await onStartTurn(this);return result});
   wrap('CONFIG.Combatant.documentClass.prototype.onEndTurn',async function(native,...args){const result=await native(...args);await onEndTurn(this,args[0]?.round??this.encounter?.round);return result});
-  wrap('game.pf2e.Check.roll',async function(native,check,context={},...args){const actor=context.actor??context.origin?.actor;await beforeAction(actor);return native(check,context,...args)});
   wrap('CONFIG.Token.documentClass.prototype._preUpdateMovement',async function(native,...args){await beforeAction(this.actor);return native(...args)});
   // Native basic actions are not owned Item.toMessage calls (e.g. Raise a Shield).
   // Brand their actual variants, including future variants made by the original
@@ -231,5 +234,5 @@ export function createDesperatePrayerProvider({game,fromUuid=globalThis.fromUuid
   on('deleteCombat',c=>{if(isActiveGM(game))for(const a of values(game.actors))if(data(a).credit?.combatId===c.id)lock(a,()=>expire(a)).catch(onError);});
   return()=>{for(const[k,id]of hooks)Hooks.off(k,id);for(const p of paths)libWrapper?.unregister(ID,p);for(const[e,f]of listeners)e.removeEventListener('click',f,true);for(const restore of restores.reverse())restore();installed=false;};
  }
- return {resolveAction,requiresActualUse:item=>!!resolveAction(item),tracksFrequency:item=>!!resolveAction(item),beforeUse,beforeAction,interceptCast,captureUsage,executeUsage,consumePolicy,isManagedActor:a=>managed(a)||data(a).credit?.remaining===1,onStartTurn,onEndTurn,register};
+ return {resolveAction,requiresActualUse:item=>!!resolveAction(item),tracksFrequency:item=>!!resolveAction(item),beforeUse,beforeAction,interceptCast,interceptCheck,captureUsage,executeUsage,consumePolicy,isManagedActor:a=>managed(a)||data(a).credit?.remaining===1,onStartTurn,onEndTurn,register};
 }
