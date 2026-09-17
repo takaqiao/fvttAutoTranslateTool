@@ -157,7 +157,7 @@ Hooks.once('ready',async()=>{
  const fear=createFearAutomation({game,fromUuid,choose,onError:report});
  const familiar=createBardFamiliarProvider({game,fromUuid,onError:report});
  const prayer=game.world?.id==='ujx5r8oipw7ercdr'?createDesperatePrayerProvider({game,fromUuid,choose,onError:report,castEvents:nativeCasts}):null;
- const halflingLuck=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.version==='8.5.1'?createHalflingLuckProvider({game,fromUuid,choose,onError:report}):null;
+ const halflingLuck=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.version==='8.5.1'?createHalflingLuckProvider({game,fromUuid,choose:showNativeChoice,onError:report}):null;
  if(prayer){nativeCasts.addActorMatcher(prayer.isManagedActor);nativeCasts.addConsumePolicy(prayer.consumePolicy);nativeCasts.addCastMiddleware(prayer.interceptCast);}
  const prayerCheck=(native,...args)=>prayer?prayer.interceptCheck(native,...args):native(...args);
  let metapower,electricity;
