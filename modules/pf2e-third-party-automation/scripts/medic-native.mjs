@@ -1,5 +1,15 @@
 import {MODULE_ID} from './rules.mjs';
-const scoped=(original,overrides)=>new Proxy(original,{get(target,key){if(Object.hasOwn(overrides,key))return overrides[key];const value=Reflect.get(target,key,target);return typeof value==='function'?value.bind(target):value;}});
+// Use a fresh facade: native canvas layers can be non-configurable, non-writable own properties.
+// Getters and methods still receive the real object, including native private-field receivers.
+const scoped=(original,overrides)=>{
+ const read=key=>{if(Object.hasOwn(overrides,key))return overrides[key];const value=Reflect.get(original,key,original);return typeof value==='function'?value.bind(original):value;};
+ return new Proxy(Object.create(Object.getPrototypeOf(original)),{
+  get:(_target,key)=>read(key),
+  has:(_target,key)=>Object.hasOwn(overrides,key)||key in original,
+  ownKeys:()=>[...new Set([...Reflect.ownKeys(original),...Reflect.ownKeys(overrides)])],
+  getOwnPropertyDescriptor:(_target,key)=>{const descriptor=Reflect.getOwnPropertyDescriptor(original,key);return Object.hasOwn(overrides,key)||descriptor?{value:read(key),writable:false,enumerable:descriptor?.enumerable??true,configurable:true}:undefined;},
+ });
+};
 export const pinnedMedicTarget=token=>scoped(token.actor,{getActiveTokens:()=>[token]});
 /** Delegate rules to the installed provider while pinning all selection reads in the macro's lexical scope. */
 export function createMedicNative({game,choose,canvas=globalThis.canvas,Dialog=globalThis.Dialog,ChatMessage=globalThis.ChatMessage,Hooks=globalThis.Hooks,CONFIG=globalThis.CONFIG}={}){
