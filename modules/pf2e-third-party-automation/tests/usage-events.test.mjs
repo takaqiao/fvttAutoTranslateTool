@@ -58,12 +58,12 @@ test('a consumed receipt ID cannot be replayed after resetting frequency',()=>{
  assert.equal(t.observe(i,{[MODULE_ID]:{frequencyReceipt:proof}},'player'),null);
 });
 
-function harness({active=true,initialActors=true,canvas,scenes}={}){
+function harness({active=true,initialActors=true,canvas,scenes,requiresActualUse,resolveAction}={}){
  const callbacks=new Map(),Hooks={on:(n,cb)=>{callbacks.set(n,cb);return n},off:n=>callbacks.delete(n)};
  const gm={id:'gm',name:'GM'},player={id:'player'},i=item(),a=i.actor,m=message();a.items=[i];m.update=async changes=>{for(const[k,v]of Object.entries(changes)){if(k===`flags.${MODULE_ID}.usage`)m.flags[MODULE_ID]={...m.flags[MODULE_ID],usage:v}}};
  const game={user:active?gm:player,users:{activeGM:gm,get:id=>id==='player'?player:gm},actors:initialActors?[a]:[],scenes:typeof scenes==='function'?scenes(a):scenes};
- const calls=[];const unregister=fn('registerUsageEvents')({game,Hooks,canvas:typeof canvas==='function'?canvas(a):canvas,fromUuid:async uuid=>uuid===i.uuid?i:null,executeUsage:async e=>{calls.push(e);return 'ok'},onError:()=>{}});
- return {callbacks,game,i,m,calls,unregister};
+ const calls=[],errors=[];const unregister=fn('registerUsageEvents')({game,Hooks,requiresActualUse,resolveAction,canvas:typeof canvas==='function'?canvas(a):canvas,fromUuid:async uuid=>uuid===i.uuid?i:null,executeUsage:async e=>{calls.push(e);return 'ok'},onError:e=>errors.push(e)});
+ return {callbacks,game,i,m,calls,errors,unregister};
 }
 test('active GM handles once and writes a persistent completed marker',async()=>{
  const h=harness();await Promise.all([h.callbacks.get('createChatMessage')(h.m,{},'player'),h.callbacks.get('createChatMessage')(h.m,{},'player')]);
@@ -118,4 +118,23 @@ test('usage footer renders safe Chinese pending done and failure results',()=>{
  assert.match(render({status:'done',result:'恢复1点聚能'}),/恢复1点聚能/);
  assert.match(render({status:'error',error:'<script>x<\/script>'}),/&lt;script&gt;/);
  assert.equal(render(undefined),'');
+});
+
+test('opted-in display cards are quietly ignored before usage claim, receipt claim or executor',async()=>{
+ const h=harness({resolveAction:()=> 'spell-combination:combination',requiresActualUse:(i,action)=>i===h.i&&action==='spell-combination:combination'});
+ h.m.flags[MODULE_ID]={usageInput:{actualUse:false,frequencyReceiptId:'not-a-use'}};
+ const before=structuredClone(h.m.flags);
+ await h.callbacks.get('createChatMessage')(h.m,{},'player');
+ assert.equal(h.calls.length,0);assert.equal(h.errors.length,0);assert.deepEqual(h.m.flags,before);h.unregister();
+});
+for(const proof of ['local','native'])test(`opted-in ${proof} actual Use dispatches exactly once`,async()=>{
+ const h=harness({requiresActualUse:()=>true});
+ if(proof==='local')h.m.flags[MODULE_ID]={usageInput:{actualUse:true}};
+ else h.m.flags.pf2e.origin.rollOptions=['origin:action:slug:use-action'];
+ await Promise.all([h.callbacks.get('createChatMessage')(h.m,{},'player'),h.callbacks.get('createChatMessage')(h.m,{},'player')]);
+ assert.equal(h.calls.length,1);assert.equal(h.m.flags[MODULE_ID].usage.status,'done');assert.equal(h.errors.length,0);h.unregister();
+});
+test('a policy that does not select the activity preserves legacy display-card dispatch',async()=>{
+ const h=harness({requiresActualUse:(_item,action)=>action==='spell-combination:combination'});
+ await h.callbacks.get('createChatMessage')(h.m,{},'player');assert.equal(h.calls.length,1);assert.equal(h.m.flags[MODULE_ID].usage.status,'done');h.unregister();
 });

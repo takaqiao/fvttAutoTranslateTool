@@ -4,6 +4,7 @@ import {SerialActions} from './runtime.mjs';
 import {getNativeCastEvents} from './amp-cast-events.mjs';
 import {preserveDamagePartForMerge,preserveMergedDamageBypass} from './native-damage-components.mjs';
 import {isCuttingWeapon} from './rune-transfer.mjs';
+import {isActualUseMessage} from './usage-events.mjs';
 export {preserveDamagePartForMerge} from './native-damage-components.mjs';
 
 export const SPELL_COMBINATION_SOURCES=Object.freeze({
@@ -69,6 +70,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   if(item?.type==='action'&&own(item).spellstrikeRecharge===true&&hasSpellstrike(item.actor))return 'spell-combination:recharge';
   return isConflux(item)?'spell-combination:conflux':null;
  };
+ const requiresActualUse=(item,action)=>action==='spell-combination:combination'&&actionKind(item)==='combination';
  nativeCasts.addMatcher(isConflux);
  nativeCasts.addActorMatcher?.(hasSpellstrike);
  nativeCasts.addActivityMatcher?.(item=>['strike','swipe'].includes(actionKind(item)));
@@ -84,6 +86,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
  }
  function assertUse(actor,item,message,user,action){
   if(!isActiveGM(game)||!actor?.testUserPermission(user,'OWNER')||item?.actor?.uuid!==actor.uuid||resolveAction(item)!==action||game.messages.get(message?.id)!==message||(message.author?.id??message.user?.id??message.user)!==user.id||message.flags?.pf2e?.origin?.uuid!==item.uuid)throw Error('无权执行此组合活动。');
+  if(requiresActualUse(item,action)&&!isActualUseMessage(message))throw Error('神威连击需要从原技能的实际使用入口执行。');
  }
  async function sourceToken(actor,message,target){
   if(message.speaker?.scene&&message.speaker?.token){
@@ -326,5 +329,5 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   });
   return()=>{Hooks.off('pf2e.restForTheNight',id);unregister();};
  }
- return {resolveAction,captureUsage,executeUsage,maintain,register};
+ return {resolveAction,requiresActualUse,captureUsage,executeUsage,maintain,register};
 }
