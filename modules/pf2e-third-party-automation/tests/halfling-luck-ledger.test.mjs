@@ -6,7 +6,7 @@ const copy=value=>structuredClone(value);
 function apply(target,changes){for(const [key,value]of Object.entries(changes)){const parts=key.split('.');let at=target;for(const part of parts.slice(0,-1))at=at[part]??={};at[parts.at(-1)]=copy(value)}}
 function fixture(){
  const gm={id:'gm',isGM:true},user={id:'owner',isGM:false},other={id:'other'},users=new Map([[gm.id,gm],[user.id,user],[other.id,other]]);users.activeGM=gm;
- const actor={id:'actor',uuid:'Actor.actor',type:'character',flags:{'pf2e-reaction':{state:false,quickShieldBlock:2}},items:new Map(),testUserPermission:u=>u===gm||u===user};
+ const actor={id:'actor',uuid:'Actor.actor',type:'character',canAct:true,isDead:false,flags:{'pf2e-reaction':{state:false,quickShieldBlock:2}},items:new Map(),testUserPermission:u=>u===gm||u===user};
  const updates=[],item={id:'luck',uuid:'Actor.actor.Item.luck',type:'feat',sourceId:HALFLING_LUCK_SOURCE,actor,flags:{unrelated:{keep:true}},_source:{system:{frequency:{max:1,per:'day'}}},system:{actionType:{value:'free'},frequency:{value:1,max:1,per:'day'}},
   async update(changes,options={}){updates.push({changes:copy(changes),options:copy(options)});if(item.writeMode==='veto')return undefined;if(item.writeMode==='noop')return item;apply(item,changes);if(item.writeMode==='lost')throw Error('reply lost');return item;}};
  actor.items.set(item.id,item);const messages=new Map(),actors=new Map([[actor.id,actor]]),docs=new Map([[actor.uuid,actor],[item.uuid,item]]);
@@ -157,4 +157,27 @@ test('an intervening frequency reset while a permission write is pending cannot 
   const f=fixture(),ctx=await f.ready(),native=f.item.update;f.item.update=async function(...args){const result=await native(...args);f.item.system.frequency.value=1;f.ledger.observePayment(f.item,{'system.frequency.value':1},{},f.gm.id);if(laterManualDebit){f.item.system.frequency.value=0;f.ledger.observePayment(f.item,{'system.frequency.value':0},{},f.user.id);}return result;};
   await assert.rejects(f.ledger.startRolling(ctx));assert.equal(f.current().status,'rolling');
  }
+});
+
+test('local payment authorization does not veto unrelated native item updates',async()=>{
+ const f=fixture(),r=await f.claim();f.client.authorizePayment(f.item,r.nonce,f.user);
+ for(const changes of [{name:'Updated name'},{flags:{other:{value:1}}},{system:{description:{value:'New description'}}}]){
+  const before=copy(changes),options={};assert.equal(f.client.preparePayment(f.item,changes,options,f.user.id),undefined);assert.deepEqual(changes,before);assert.deepEqual(options,{});
+ }
+ assert.equal(f.client.preparePayment(f.item,{'system.frequency.value':0},{},f.user.id),true);
+ assert.equal(f.client.preparePayment(f.item,{name:'After preparation'},{},f.user.id),undefined);
+});
+
+for(const [name,disable]of [['cannot act',a=>{a.canAct=false}],['unknown ability to act',a=>{delete a.canAct}],['dead',a=>{a.isDead=true}]]){
+ test(`${name} cannot claim, authorize, or prepare payment`,async()=>{
+  const f=fixture();disable(f.actor);await assert.rejects(f.claim());assert.equal(f.updates.length,0);
+  const g=fixture(),r=await g.claim();disable(g.actor);assert.throws(()=>g.client.authorizePayment(g.item,r.nonce,g.user));assert.equal(g.item.system.frequency.value,1);
+  const h=fixture(),q=await h.claim();h.client.authorizePayment(h.item,q.nonce,h.user);disable(h.actor);assert.equal(h.client.preparePayment(h.item,{'system.frequency.value':0},{},h.user.id),false);assert.equal(h.item.system.frequency.value,1);
+ });
+}
+
+test('ability to act is an admission gate, not a veto on settling an already observed payment',async()=>{
+ const f=fixture(),r=await f.claim(),p=await f.pay(r.nonce),message=f.card(r.nonce,p.frequencyReceipt),ctx={...f.scope,nonce:r.nonce,message,frequencyReceipt:p.frequencyReceipt};
+ f.actor.canAct=false;f.actor.isDead=true;
+ assert.equal((await f.ledger.bindUsage(ctx)).status,'ready');await f.ledger.startRolling(ctx);await f.ledger.recordResult({...ctx,rollJSON:{total:8},outcome:'failure'});await f.ledger.beginDelivery(ctx);assert.equal((await f.ledger.finishDelivery(ctx)).status,'callback-returned');assert.equal(f.item.system.frequency.value,0);
 });

@@ -32,6 +32,7 @@ export function createHalflingLuckLedger({game,fromUuid=globalThis.fromUuid,queu
   requireTrue(game.users?.activeGM?.isGM===true);
  };
  const gm=()=>requireTrue(game.user?.isGM===true&&isActiveGM(game));
+ const canPay=actor=>requireTrue(actor.canAct===true&&actor.isDead!==true);
  const resolve=async({actor,item,user})=>{
   gm();source(actor,item,user);
   requireTrue(await fromUuid(actor.uuid)===actor);requireTrue(await fromUuid(item.uuid)===item);
@@ -63,6 +64,7 @@ export function createHalflingLuckLedger({game,fromUuid=globalThis.fromUuid,queu
  const replace=async(scope,record)=>{const state=copy(stateOf(scope.item));state.operations[record.nonce]=copy(record);return save(scope,state);};
  const claim=scope=>mutate(scope,async()=>{
   const {actor,item,user,invocationId,fingerprint}=scope;
+  canPay(actor);
   requireTrue(validId(invocationId)&&typeof fingerprint==='string'&&fingerprint.length>0&&fingerprint.length<=65536&&item.system.frequency.value===1);
   const state=copy(stateOf(item));requireTrue(state.operations&&typeof state.operations==='object'&&!Array.isArray(state.operations));
   const prior=Object.values(state.operations).find(record=>record.invocationId===invocationId);
@@ -78,6 +80,7 @@ export function createHalflingLuckLedger({game,fromUuid=globalThis.fromUuid,queu
  });
  const authorizePayment=(item,nonce,user=game.user)=>{
   requireTrue(game.user===user);const scope={actor:item?.actor,item,user,nonce},record=recordFor(scope,1);requireTrue(record.status==='claimed');
+  canPay(scope.actor);
   const existing=authorizations.get(item.uuid);
   requireTrue(!existing||existing.nonce!==nonce||existing.status==='authorized');
   authorizations.set(item.uuid,{...scope,gmId:record.gmId,status:'authorized'});return copy(record);
@@ -92,10 +95,12 @@ export function createHalflingLuckLedger({game,fromUuid=globalThis.fromUuid,queu
   authorizations.delete(item.uuid);
  };
  const preparePayment=(item,changes,options,userId)=>{
+  if(changed(changes,'system.frequency.value')===undefined)return undefined;
   const authorization=authorizations.get(item?.uuid);if(!authorization)return undefined;
   try{
    requireTrue(authorization.item===item&&authorization.user===game.user&&authorization.user.id===userId&&authorization.status==='authorized');
    const record=recordFor(authorization,1);requireTrue(record.status==='claimed'&&record.gmId===authorization.gmId&&changed(changes,'system.frequency.value')===0);
+   canPay(authorization.actor);
    const paymentNonce=randomId();requireTrue(validId(paymentNonce));
    const state=copy(stateOf(item));state.operations[record.nonce]={...record,status:'paid',paymentNonce};
    changes[PATH]=state;options[ID]={...options[ID],halflingLuckPayment:{nonce:record.nonce,paymentNonce}};
