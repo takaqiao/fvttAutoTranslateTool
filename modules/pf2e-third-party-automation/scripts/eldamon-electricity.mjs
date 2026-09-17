@@ -76,7 +76,13 @@ const sourceFingerprint=m=>JSON.stringify({pf:m.flags?.pf2e,source:m.flags?.[ID]
 export function createElectricityLedger({game,fromUuid,queue=new SerialActions(),reactionAvailable=genericReactionAvailable}={}){
  const gm=()=>{if(game.user?.id!==game.users.activeGM?.id)throw Error('Electricity lifecycle requires the active GM.');};
  const owner=(actor,user)=>{gm();if(!user||game.users.get(user.id)!==user||!actor?.testUserPermission?.(user,'OWNER'))throw Error('Current actor owner permission is required.');};
- const save=async(actor,state)=>{gm();await actor.update({[`flags.${ID}.electricity`]:state});};
+ const save=async(actor,state)=>{
+  gm();const path=`flags.${ID}.electricity`,update={[path]:state};
+  // Native updates recursively merge: omission alone cannot consume or expire
+  // a pending effect. Delete only removed entries inside this provider's map.
+  for(const key of Object.keys(actor.flags?.[ID]?.electricity?.pendingShocks??{}))if(!Object.hasOwn(state.pendingShocks,key))update[`${path}.pendingShocks.-=${key}`]=null;
+  await actor.update(update);
+ };
  const mutate=(actor,fn)=>queue.run(actor.uuid,async()=>{gm();return fn(electricityState(actor));});
  async function original(payload,user){
   const actor=await fromUuid(payload.actorUuid);owner(actor,user);
@@ -211,7 +217,10 @@ export function createElectricityLedger({game,fromUuid,queue=new SerialActions()
    if(!liveToken(target)||!liveToken(source)||target.parent!==source.parent||!r.selection?.targetUuids?.includes(target.uuid))return;
    if(anvil&&(!sourceActor.alliance||!target.actor.alliance||sourceActor.alliance===target.actor.alliance))return;
    const outcome=c.outcome,qualifies=anvil?['failure','criticalFailure'].includes(outcome):['criticalSuccess','success','failure'].includes(outcome);
-   const effectKey=`channel:${sourceActor.uuid}:${nonce}`,key=`${effectKey}:${target.uuid}`;
+   const effectKey=`channel:${sourceActor.uuid}:${nonce}`;
+   // Foundry expands dots in nested update keys. Keep UUIDs as values and use
+   // a reversible flat key for pending entries and their shock operations.
+   const key=encodeURIComponent(`${effectKey}:${target.uuid}`).replaceAll('.','%2E');
    return mutate(target.actor,async state=>{
     if(!qualifies){delete state.pendingShocks[key];await save(target.actor,state);return;}
     const combat=electricityEncounter(game,sourceActor.uuid,source.uuid),expires=sourceTurnExpiry(combat,sourceActor.uuid,{rounds:staticShock&&outcome==='criticalSuccess'?2:1,tokenUuid:source.uuid});
