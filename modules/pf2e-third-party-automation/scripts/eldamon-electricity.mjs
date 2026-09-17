@@ -245,9 +245,17 @@ export function createElectricityLedger({game,fromUuid,queue=new SerialActions()
   async expire({combat,combatant,phase,ended=false,actors=[]}){
    gm();for(const actor of actors)await mutate(actor,async state=>{
     const expired=electricityEffects(actor,S.shocked).filter(i=>{const e=i.flags?.[ID]?.electricityShock?.expires;return ended?e?.combatId===combat.id:expiryReached(e,combat,combatant,phase);});
+    const pending=Object.entries(state.pendingShocks).filter(([,p])=>ended?p.expires?.combatId===combat.id:expiryReached(p.expires,combat,combatant,phase));
+    const chargeKey=`encounter:${combat.id}:charge`,operation=state.operations[chargeKey];
+    const clearCharge=()=>ended&&values(combat.combatants).some(c=>c.actor?.uuid===actor.uuid)&&operation?.status!=='done'&&
+     (electricityEffects(actor,S.charged).some(i=>i.system.badge?.value>0)||operation?.status==='started'&&operation.after===0&&operation.gain===false);
+    // Turn hooks inspect all actors, including ordinary recipients of hostile
+    // Shocked. Only actual work may create state; retain exact interrupted
+    // encounter cleanup so its existing charge reconciliation still runs.
+    if(!expired.length&&!pending.length&&!clearCharge())return;
     for(const item of expired){const key=`expiry:${item.id}`;await remove(actor,state,key,{onlyIds:[item.id]});if(actor.items.get(item.id)&&!item.flags?.pf2e?.grantedBy?.id)await actor.deleteEmbeddedDocuments('Item',[item.id]);}
-    for(const [key,p]of Object.entries(state.pendingShocks))if(ended?p.expires?.combatId===combat.id:expiryReached(p.expires,combat,combatant,phase))delete state.pendingShocks[key];
-    if(ended&&values(combat.combatants).some(c=>c.actor?.uuid===actor.uuid))await charge(actor,state,`encounter:${combat.id}:charge`,{clear:true});await save(actor,state);
+    for(const [key]of pending)delete state.pendingShocks[key];
+    if(clearCharge())await charge(actor,state,chargeKey,{clear:true});await save(actor,state);
    });
   },
   async refresh({actor,nonce}){gm();if(values(game.combats).some(c=>c.started&&values(c.combatants).some(x=>x.actor?.uuid===actor.uuid)))return;
