@@ -22,7 +22,8 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
  const castMiddlewares=new Set();
  const queue=new SerialActions(),localCasts=new SerialActions(),matchers=new Set(),activityMatchers=new Set(),actorMatchers=new Set(),consumePolicies=new Set(),paidCastPolicies=new Set(),captures=new Map(),scopes=new Map(),messageInvocations=new WeakMap();
  // A local capability, never serialized or accepted from a socket payload.
- const nativeCapability=Object.freeze({});let socket,installed=false;
+ const nativeCapability=Object.freeze({});let socket,installed=false,focusCall=null;
+ const focusRequests=new Map();
  const matches=item=>[...matchers].some(match=>match(item));
  const managed=actor=>[...actorMatchers].some(match=>match(actor))||values(actor?.items).some(matches);
  const captureData=item=>Object.fromEntries([...captures].map(([key,capture])=>[key,capture(item)]).filter(([,value])=>value!==undefined));
@@ -69,11 +70,19 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
    try{
     // PF2e's own consume covers focus, prepared, spontaneous and innate usage.
     // Its cast method explicitly exempts at-will spells; preserve that contract.
-    const context={actor,item,entry,user,payload:copy(payload)};
+    let focusRequest;
+    const context={actor,item,entry,user,payload:copy(payload),expectFocusCommit:({before,cost,changes})=>{
+     if(enteredNative||focusRequest||!Number.isInteger(before)||!Number.isInteger(cost)||cost<1||before<cost||cost!==payload.focusPoints||typeof changes!=='function')throw Error('原生聚能提交配置无效或重复。');
+     focusRequest={actor,item,entry,before,cost,changes,castNonce:payload.id,captured:false};
+    }};
     const native=async()=>{owner(actor,user);if(enteredNative)throw Error('同一施法只能调用一次原生资源消费，拒绝重复支付。');enteredNative=true;return item.atWill||await entry.consume(item,payload.rank,payload.slotId??undefined,nativeCapability);};
     const consume=[...consumePolicies].reduceRight((next,policy)=>()=>policy(context,next),native);
-    const paid=await consume();
+    // The request is exposed only while this exact native entry is invoked.
+    // A policy cannot forge the private capability used by its consume call.
+    const invoke=async()=>{focusRequests.set(actor.uuid,()=>focusRequest);try{return await consume();}finally{focusRequests.delete(actor.uuid);}};
+    const paid=await invoke();
     if(paid&&!enteredNative)throw Error('施法支付策略未执行原生资源消费。');
+    if(paid&&focusRequest&&!focusRequest.captured)throw Error('原生聚能写入未能绑定本次同步消费；支付不确定，不会推断或重试。');
     receipt.state=paid?(matches(item)||activity||payload.nativeCastScope?'paid':'used'):'rejected';
     await save(actor,ledger(actor).map(r=>r.id===receipt.id?receipt:r));
     owner(actor,user);
@@ -266,6 +275,16 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
   socket?.register('native-cast-pay',async function(payload){try{return {ok:true,value:await pay(payload,game.users.get(this.socketdata.userId))};}catch(error){return {ok:false,error:error.message,code:error.code};}});
   socket?.register('native-cast-outcome',async function(payload){try{return {ok:true,value:await finishPaidCast(payload,game.users.get(this.socketdata.userId))};}catch(error){return {ok:false,error:error.message};}});
   const paths=[];const wrap=(path,fn)=>{libWrapper.register(MODULE_ID,path,fn,'MIXED');paths.push(path);};
+  wrap('CONFIG.Actor.documentClass.prototype.update',function(wrapped,changes={},options={}){
+   const scope=focusCall,after=changes['system.resources.focus.value']??changes.system?.resources?.focus?.value;
+   if(!scope||this!==scope.actor||after===undefined)return wrapped(changes,options);
+   if(scope.captured||this.system.resources?.focus?.value!==scope.before||after!==scope.before-scope.cost)throw Error('原生聚能写入的来源、次数或金额已改变。');
+   const proof={castNonce:scope.castNonce,itemUuid:scope.item.uuid,entryUuid:scope.entry.uuid,before:scope.before,after,cost:scope.cost};
+   const extra=scope.changes(Object.freeze(proof));
+   if(!extra||typeof extra!=='object'||Object.keys(extra).some(key=>!key.startsWith(`flags.${MODULE_ID}.`)||Object.hasOwn(changes,key)))throw Error('原生聚能提交扩展只能附加自身回执。');
+   scope.captured=true;
+   return wrapped({...changes,...extra},options);
+  });
   wrap('CONFIG.PF2E.Item.documentClasses.spellcastingEntry.prototype.cast',async function(wrapped,item,options={}){
    const nativeEntry=async()=>{
    if(!matches(item)&&!managed(item.actor))return wrapped(item,options);
@@ -310,7 +329,16 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
    return invoke(0);
   });
   wrap('CONFIG.PF2E.Item.documentClasses.spellcastingEntry.prototype.consume',async function(wrapped,item,rank,slotId,capability){
-   if(capability===nativeCapability||!matches(item)&&!managed(item.actor))return wrapped(item,rank,slotId);
+   if(capability===nativeCapability){
+    const request=focusRequests.get(item.actor?.uuid)?.(),prior=focusCall;
+    if(request&&(request.actor!==item.actor||request.item!==item||request.entry!==this))throw Error('原生聚能消费对象已改变。');
+    // PF2e 8.5.1 calls actor.update synchronously before its first await.
+    // End the binding immediately when wrapped returns, never after its promise
+    // settles: deferred/foreign updates cannot borrow a nearby payment scope.
+    focusCall=request??null;
+    try{return wrapped(item,rank,slotId);}finally{focusCall=prior;}
+   }
+   if(!matches(item)&&!managed(item.actor))return wrapped(item,rank,slotId);
    const current=scopes.get(item.uuid),scope=current?.item===item&&current.entry===this?current:null;
    if(current?.policies.length&&(!scope||!sameInput(current.input,input(item,{rank,slotId})))){current.error=Error('原生施法对象、来源或参数在实际消费前发生变化，无法安全执行反应。');return false;}
    if(scope?.consumeTask)return scope.consumeTask;
@@ -324,5 +352,5 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
  // undefined admits it. Explicit consume:false/message:false and activity/chat
  // payment flows are not native paid-cast events. Policies must validate any
  // unsupportedReason before using a source token for positional reactions.
- return {addCastMiddleware:middleware=>castMiddlewares.add(middleware),addMatcher:matcher=>matchers.add(matcher),addActivityMatcher:matcher=>activityMatchers.add(matcher),addActorMatcher:matcher=>actorMatchers.add(matcher),addConsumePolicy:policy=>consumePolicies.add(policy),addPaidCastPolicy:policy=>paidCastPolicies.add(policy),addCapture:(key,capture)=>captures.set(key,capture),captureUsage,captureMessageOutcome,ensurePaid,payForActivity,finishActivityWithoutSpell,register};
+ return {withActorResourceLock:(actor,operation)=>queue.run(actor.uuid,operation),addCastMiddleware:middleware=>castMiddlewares.add(middleware),addMatcher:matcher=>matchers.add(matcher),addActivityMatcher:matcher=>activityMatchers.add(matcher),addActorMatcher:matcher=>actorMatchers.add(matcher),addConsumePolicy:policy=>consumePolicies.add(policy),addPaidCastPolicy:policy=>paidCastPolicies.add(policy),addCapture:(key,capture)=>captures.set(key,capture),captureUsage,captureMessageOutcome,ensurePaid,payForActivity,finishActivityWithoutSpell,register};
 }

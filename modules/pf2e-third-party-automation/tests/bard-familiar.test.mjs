@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {MODULE_ID as ID} from '../scripts/rules.mjs';
 import {createBardFamiliarProvider,BARD_FAMILIAR_SOURCES as S} from '../scripts/bard-familiar.mjs';
 import {registerUsageEvents} from '../scripts/usage-events.mjs';
+import {getNativeCastEvents} from '../scripts/amp-cast-events.mjs';
 
 function assign(doc,changes){for(const[path,value]of Object.entries(changes)){const parts=path.split('.');let obj=doc;for(const part of parts.slice(0,-1))obj=obj[part]??={};obj[parts.at(-1)]=structuredClone(value);}}
 class Modifier {constructor(data){Object.assign(this,data);}clone(){return new Modifier({...this});}}
@@ -93,4 +94,10 @@ test('declined or closed condition confirmation keeps the native check intact',a
 test('ability removal while confirming cannot leave a bonus on this roll',async()=>{let f;f=fixture({confirm:async()=>{f.familiar.items.delete('accompanist');return 'yes';}});await f.provider.interceptCheck(c=>assert.equal(c,f.check),f.check,f.context);});
 test('native contextual clone resolves the current master and one repeated middleware adds only once',async()=>{
  const f=fixture();f.context.actor={...f.master};await f.provider.interceptCheck((check,context)=>f.provider.interceptCheck(c=>assert.equal(c.totalModifier,11),check,context),f.check,f.context);assert.equal(f.prompts.length,1);
+});
+test('Familiar Focus waits for the same native actor resource lock used by spell payment',async()=>{
+ const f=fixture(),ctx=f.pay(),casts=getNativeCastEvents({game:f.game});let release;const gate=new Promise(r=>release=r);
+ const held=casts.withActorResourceLock(f.master,()=>gate),grant=f.provider.executeUsage(ctx);
+ await new Promise(resolve=>setImmediate(resolve));assert.equal(f.master.system.resources.focus.value,1);
+ release();await held;await grant;assert.equal(f.master.system.resources.focus.value,2);
 });
