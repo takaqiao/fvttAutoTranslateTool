@@ -48,7 +48,7 @@ function detachedWorkbench({cancel=false,macroSource=null}={}){
 }
 const flush=()=>new Promise(resolve=>setImmediate(resolve));
 const html={find:()=>({val(){return this;},prop(){return this;},trigger(){return this;}})};
-const wbPath=process.env.FVTT_WORKBENCH_MACRO??'C:/Users/Taka/Desktop/fvtt/tmp/team-automation-20260917/coverage-evidence/live-Workbench-Treat-Wounds-and-Battle-Medicine.mjs';
+const wbPath=process.env.FVTT_WORKBENCH_MACRO??'';
 test('installed Workbench reads a locked native canvas layer and waits for its roll and Dice So Nice result', {skip:!existsSync(wbPath)},async()=>{
  const f=detachedWorkbench({macroSource:readFileSync(wbPath,'utf8')});let done=false;f.operation.then(()=>done=true);await flush();
  const nodes={useBattleMedicine:{value:'1'},'dc-type':{value:'1'},modifier:{value:'0'}};
