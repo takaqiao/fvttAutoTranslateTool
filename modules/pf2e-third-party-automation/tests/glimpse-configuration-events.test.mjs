@@ -24,11 +24,11 @@ test('dependency changes reconcile the setting through serialized real maintenan
 });
 test('actor/item/token lifecycle reevaluates coverage, while a non-primary client cannot write',async()=>{
  const f=fixture();let calls=0;const observer=events.registerGlimpseConfigurationEvents({game:f.game,Hooks:f.Hooks,reconcile:async()=>{calls++},onError:assert.fail});
- for(const hook of ['createActor','updateActor','deleteActor','createItem','updateItem','deleteItem','createToken','updateToken','deleteToken','createScene','deleteScene'])await f.emit(hook,{});
- assert.equal(calls,11);
- f.game.user.id='player';await f.emit('updateActor',{});await observer.reconcileNow();assert.equal(calls,11);
- f.game.users.activeGM.id='player';await f.emit('updateUser',{});assert.equal(calls,12);
- observer.dispose();await f.emit('updateActor',{});assert.equal(calls,12);
+ for(const hook of ['createActor','updateActor','deleteActor','createItem','updateItem','deleteItem','createToken','updateToken','deleteToken','createScene','deleteScene','combatStart','updateCombat','createCombatant','updateCombatant','deleteCombatant'])await f.emit(hook,{});
+ assert.equal(calls,16);
+ f.game.user.id='player';await f.emit('updateActor',{});await observer.reconcileNow();assert.equal(calls,16);
+ f.game.users.activeGM.id='player';await f.emit('updateUser',{});assert.equal(calls,17);
+ observer.dispose();await f.emit('updateActor',{});assert.equal(calls,17);
 });
 test('a qualification change during an in-flight write schedules a fresh pass and errors are reported',async()=>{
  const f=fixture();let release,passes=0;const errors=[];
