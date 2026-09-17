@@ -43,6 +43,8 @@ import {notifyNativeIWRStatus} from './native-iwr-status.mjs';
 import {verifyNativeIWRBridge} from './native-iwr-verification.mjs';
 import {createRuneTransfer,registerRuneTransferRuleElement} from './rune-transfer.mjs';
 import {preserveDamageBypassOnAlter} from './native-damage-components.mjs';
+import {createMetapowerProvider,preserveMetapowerOnAlter} from './metapower/provider.mjs';
+import {createEldamonDataRepair} from './eldamon-data-repair.mjs';
 import {createSpellCombination} from './spell-combination.mjs';
 import {createAvAutomation,buildAvPatreonRepairs} from './av-automation.mjs';
 import {createPartyAutomation,buildPartyPatreonRepairs,PARTY_SOURCES} from './party-automation.mjs';
@@ -133,9 +135,11 @@ Hooks.once('ready',async()=>{
  const runeTransfer=createRuneTransfer({game,fromUuid,choose,onError:report});
  const campaign=createCampaignFeats({game,fromUuid,choose,onError:report});
  const fear=createFearAutomation({game,fromUuid,choose,onError:report});
+ const metapower=createMetapowerProvider({game,fromUuid,onError:report});
  providers=[createCompanionAutomation({game,fromUuid,choose,onError:report,wrapStrike:(strike,actor)=>providers.reduce((s,p)=>p.wrapStrike?.(s,actor)??s,strike)}),createDualStrikeAutomation({game,fromUuid,choose,onError:report}),runeTransfer,campaign,createKnowledgeAutomation({game,fromUuid,choose,onError:report}),createAvAutomation({game,fromUuid,choose,onError:report,refocusSubscribers:[treatmentRefocus],refocusPrivacy:salubriousMessagePrivacy}),createPartyAutomation({game,fromUuid,choose,onError:report}),createSocialAutomation({game,fromUuid,choose,onError:report}),createThrallAutomation({game,fromUuid,choose,onError:report}),createReactionChecks({game,fromUuid,choose,onError:report,nativeCheckMiddleware:salubriousCheckScope.interceptCheck}),fear,createScareToDeath({game,fromUuid,choose,onError:report}),createSpellCombination({game,fromUuid,choose,onError:report,afterAttack:message=>campaign.processCheck(message)}),deflection,destructiveBlock,disarmingBlock,disarmRegrip,shieldEvents,salubriousKiss];
  const configuration=createConfigurationMaintenance({game,repairs:[buildAvPatreonRepairs,buildPartyPatreonRepairs,buildKnowledgePatreonRepairs],settings:[{module:'pf2e-ranged-combat',key:'postActionToChat',value:2,when:g=>Array.from(g.actors.party?.members??[]).some(a=>[KNOWLEDGE_SOURCES.monster,KNOWLEDGE_SOURCES.hunt].every(source=>a.items.some(i=>i.sourceId===source))),reason:'猎物指定保留完整原生技能卡，供怪物猎手知识联动读取原始操作者与目标。'},{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:g=>['-','sog','pnvfcgjbf2cjp7gz','team-automation-qa2'].includes(g.world?.id),transform:value=>Array.isArray(value)?value.filter(slug=>slug!=='disarming-block'):value,reason:'卸武格挡改由实际格挡回执接原生自由动作缴械，避免重复提示或再次收取反应。'}]});
  await configuration().catch(report);
+ providers.push(metapower,createEldamonDataRepair({game}));
  coordinator=createCycleCoordinator({game,
   chooseTrait:(actor,user,choices)=>socket.executeAsUser('cycle-trait',user.id,actor.uuid,choices),
   onEffect:(actor,claim,user)=>executeActorAction(actor,'cycle',{damageType:claim.damageType,triggerConfirmed:true},user,{cycleTiming:claim.timing}),
@@ -157,7 +161,7 @@ Hooks.once('ready',async()=>{
  },'WRAPPER');
  const rollIndex=CONFIG.Dice.rolls.findIndex(cls=>cls.name==='DamageRoll');
  if(rollIndex<0)throw Error('未找到PF2e DamageRoll，循环能量无法接入。');
- libWrapper.register(MODULE_ID,`CONFIG.Dice.rolls.${rollIndex}.prototype.alter`,function(wrapped,...args){return preserveDamageBypassOnAlter(this,cycle.alterDamageRoll(this,wrapped,...args),{multiplier:args[0]??1,addend:args[1]??0})},'WRAPPER');
+ libWrapper.register(MODULE_ID,`CONFIG.Dice.rolls.${rollIndex}.prototype.alter`,function(wrapped,...args){return preserveMetapowerOnAlter(this,preserveDamageBypassOnAlter(this,cycle.alterDamageRoll(this,wrapped,...args),{multiplier:args[0]??1,addend:args[1]??0}))},'WRAPPER');
  for(const message of game.messages)cycle.recordDamageMessage(message);
  const legacyUsage=createUsageExecutor({cycleUse:(actor,message,user)=>coordinator.use(actor,message,user)}),usageQueue=new SerialActions();
  const resolveAction=item=>defaultUsageAction(item)??providers.map(p=>p.resolveAction?.(item)).find(Boolean);

@@ -57,11 +57,12 @@ function mergeCompatible(instances){
  * Constructor discovery is public CONFIG.Dice.rolls, or pass {DamageRoll} for a
  * verified native adapter. No actor/item or previous instance object is mutated.
  */
-export function convertSiphonRoll(roll,{DamageRoll=globalThis.CONFIG?.Dice?.rolls?.find(C=>C.name==='DamageRoll')}={}){
+export function convertSiphonRoll(roll,{DamageRoll=globalThis.CONFIG?.Dice?.rolls?.find(C=>C.name==='DamageRoll'),rejectMixedPartitions=false}={}){
  if(typeof DamageRoll!=='function'||!(roll instanceof DamageRoll)||roll._evaluated!==true||!roll.pool||!Array.isArray(roll.instances)||!roll.instances.length)throw Error('Siphoning requires an evaluated native DamageRoll with instances.');
  if(roll.options?.[MODULE_ID]?.[MARKER]?.version===1)return roll;
  const original=roll.instances;
  const converted=mergeCompatible(original.filter(i=>!i.persistent&&i.kinds.has('damage')).map(convertedInstance));
+ if(rejectMixedPartitions&&converted.length>1)throw Error('Siphoning mixed material/metadata partitions require manual resolution; no roll was changed.');
  if(converted.length===0){
   converted.push(original[0].constructor.fromData({class:'DamageInstance',formula:'0',options:{flavor:'untyped,damage'},terms:[{class:'NumericTerm',number:0,evaluated:true}],total:0,evaluated:true}));
  }
