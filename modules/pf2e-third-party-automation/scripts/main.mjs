@@ -55,6 +55,7 @@ import {createMedicActions} from './medic-actions.mjs';
 import {createBardFamiliarProvider} from './bard-familiar.mjs';
 import {createDesperatePrayerProvider} from './desperate-prayer.mjs';
 import {createHalflingLuckProvider} from './halfling-luck.mjs';
+import {createForceBarrageBridge} from './force-barrage.mjs';
 import {createDefensiveAdvance} from './defensive-advance.mjs';
 import {buildDefensiveAdvancePatreonRepairs,defensiveAdvanceStartupCompatibility} from './defensive-advance-compat.mjs';
 import {createEldamonVoltageProvider} from './eldamon-voltage-executor.mjs';
@@ -158,6 +159,8 @@ Hooks.once('ready',async()=>{
  const familiar=createBardFamiliarProvider({game,fromUuid,onError:report});
  const prayer=game.world?.id==='ujx5r8oipw7ercdr'?createDesperatePrayerProvider({game,fromUuid,choose,onError:report,castEvents:nativeCasts}):null;
  const halflingLuck=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.version==='8.5.1'?createHalflingLuckProvider({game,fromUuid,choose:showNativeChoice,onError:report}):null;
+ const forceBarrage=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.version==='8.5.1'?createForceBarrageBridge({game,fromUuid,nativeCasts,onError:report}):null;
+ if(forceBarrage)nativeCasts.addCastMiddleware(forceBarrage.interceptCast);
  if(prayer){nativeCasts.addActorMatcher(prayer.isManagedActor);nativeCasts.addConsumePolicy(prayer.consumePolicy);nativeCasts.addCastMiddleware(prayer.interceptCast);}
  const prayerCheck=(native,...args)=>prayer?prayer.interceptCheck(native,...args):native(...args);
  let metapower,electricity;
@@ -177,6 +180,7 @@ Hooks.once('ready',async()=>{
  providers.unshift(glimpse,voltage,electricity);
  providers.push(metapower,createEldamonDataRepair({game}),createMedicActions({game,fromUuid,choose,onError:report}),familiar,defensiveAdvance,...prayer?[prayer]:[]);
  if(halflingLuck)providers.push(halflingLuck);
+ if(forceBarrage)providers.push(forceBarrage);
  coordinator=createCycleCoordinator({game,
   chooseTrait:(actor,user,choices)=>socket.executeAsUser('cycle-trait',user.id,actor.uuid,choices),
   onEffect:(actor,claim,user)=>executeActorAction(actor,'cycle',{damageType:claim.damageType,triggerConfirmed:true},user,{cycleTiming:claim.timing}),
