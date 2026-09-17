@@ -130,9 +130,10 @@ export function createEldamonVoltageProvider({game,fromUuid,observe,DamageRoll=g
   Hooks.on('renderChatMessageHTML',renderCard);
   for(const hook of ['renderActorSheetPF2e','renderCharacterSheetPF2e','renderActorSheetV2'])Hooks.on(hook,(app,html)=>{
    const root=html?.[0]??html,actor=app.actor;if(!root?.querySelector||!actor?.testUserPermission(game.user,'OWNER')||!values(actor.items).some(i=>sourceUuid(i)===ELEMENTAL_POWERS_SOURCE)||root.querySelector('[data-voltage-refresh]'))return;
-   const host=root.querySelector('[data-tab="actions"]')??root,button=root.ownerDocument.createElement('button');button.type='button';button.dataset.voltageRefresh='';button.textContent='刷新威能 Refresh · 2动作';button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();button.disabled=true;useRefresh(actor,event).catch(onError).finally(()=>{button.disabled=false})});host.append(button);
+   const host=root.querySelector('.tab.actions[data-tab="actions"],section[data-tab="actions"]')??root,button=root.ownerDocument.createElement('button');button.type='button';button.dataset.voltageRefresh='';button.textContent='刷新威能 Refresh · 2动作';button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();button.disabled=true;useRefresh(actor,event).catch(onError).finally(()=>{button.disabled=false})});host.append(button);
   });
   sweep();
  }
- return {register,onCommittedChannel,beforeDamage,useRefresh,trigger,ledger,renderCard};
+ const refreshOutsideEncounter=({actor,nonce})=>ledger.refreshOutsideEncounter({actorUuid:actor.uuid,nonce},game.user);
+ return {register,onCommittedChannel,beforeDamage,useRefresh,trigger,ledger,renderCard,refreshOutsideEncounter};
 }
