@@ -63,7 +63,20 @@ export function createEldamonElectricityProvider({game,fromUuid,onError=console.
   if(userId!==game.user.id||data.flags?.pf2e?.context?.type!=='damage-taken')return;
   const options=data.flags.pf2e.context.options??[],tags=options.filter(o=>o.startsWith(APPLY));if(tags.length!==1)return;
   const scope=scopes.get(tags[0].slice(APPLY.length));if(!scope||scope.amount===null||tokenUuid(data.speaker)!==scope.record.tokenUuid)return;
-  document.updateSource({[`flags.${ID}.electricityApplied`]:{nonce:scope.record.nonce,amount:scope.amount}});
+  let amount=scope.amount;
+  const prefix=`${ID}:destructive-block:`,blocks=options.filter(o=>typeof o==='string'&&o.startsWith(prefix)),proof=data.flags?.[ID]?.shieldBlock;
+  if(blocks.length||proof?.kind==='destructive-block'){
+   // Destructive Block's health-delta adapter runs after the ordinary IWR seam.
+   // Its exact native receipt is the final amount; an uncertain block cannot
+   // fall back to the earlier amount, even if that amount was positive.
+   const applied=data.flags.pf2e.appliedDamage;
+   if(blocks.length!==1||proof?.kind!=='destructive-block'||proof.uncertain||typeof proof.nonce!=='string'||!proof.nonce||blocks[0]!==prefix+proof.nonce||
+    data.speaker?.actor!==scope.actor.id||(data.flags.pf2e.origin?.uuid??null)!==scope.record.sourceItemUuid||applied&&(applied.uuid!==scope.record.actorUuid||applied.isHealing||applied.isReverted)||
+    typeof proof.shieldId!=='string'||!proof.shieldId||applied?.shield&&applied.shield.id!==proof.shieldId||!Number.isFinite(proof.incoming)||proof.incoming<0||
+    !Number.isFinite(proof.actorDamage)||proof.actorDamage<0||proof.actorDamage>proof.incoming||proof.actorDamage>scope.amount)return;
+   amount=proof.actorDamage;
+  }
+  document.updateSource({[`flags.${ID}.electricityApplied`]:{nonce:scope.record.nonce,amount}});
  }
  function capture(message,_options,creator){
   if(creator!==game.user.id)return;
