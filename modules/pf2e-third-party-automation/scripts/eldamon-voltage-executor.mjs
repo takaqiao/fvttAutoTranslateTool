@@ -77,10 +77,11 @@ export function createEldamonVoltageProvider({game,fromUuid,observe,onRefresh,Da
   if(!proof||!grant||grant.actorUuid!==actor.uuid||grant.nonce!==proof.nonce)throw Error('High Voltage damage is already consumed or lacks its authorized application grant.');
   grants.delete(params.damage);return null;
  }
- async function onCommittedChannel({receipt,message}){
+ async function onCommittedChannel({receipt,message,user=game.users.get(receipt.userId)}){
   const payload={actorUuid:receipt.actorUuid,nonce:receipt.nonce,messageUuid:message.uuid};
-  if(receipt.sourceUuid===HIGH_VOLTAGE_SOURCE){const result=await request('channel',payload);await notifyCard(payload.actorUuid,payload.nonce).catch(onError);return result;}
-  if(receipt.sourceUuid===ELEMENTAL_POWERS_SOURCE&&message.flags?.[ID]?.voltageRefreshActivity)return request('refreshActivity',payload);
+  const deliver=method=>game.user?.id===game.users.activeGM?.id?ledger[method](payload,user):request(method,payload);
+  if(receipt.sourceUuid===HIGH_VOLTAGE_SOURCE){const result=await deliver('channel');await notifyCard(payload.actorUuid,payload.nonce).catch(onError);return result;}
+  if(receipt.sourceUuid===ELEMENTAL_POWERS_SOURCE&&message.flags?.[ID]?.voltageRefreshActivity)return deliver('refreshActivity');
   return null;
  }
  async function useRefresh(actor,event){
