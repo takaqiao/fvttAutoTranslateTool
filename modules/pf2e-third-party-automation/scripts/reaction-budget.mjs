@@ -53,7 +53,7 @@ const queues=new WeakMap(),restricted={
 };
 export function reactionEpoch(actor,game){const c=game.combat,index=c?.turns?.findIndex(t=>t.actor?.uuid===actor.uuid)??-1;return c?.started&&index>=0?`${c.id}:${c.round-(index>c.turn?1:0)}`:null;}
 const combatantFor=(actor,game)=>game.combat?.turns?.find(t=>t.actor?.uuid===actor.uuid);
-function shieldEncounter(actor,token,game){
+export function shieldEncounter(actor,token,game){
  const matches=values(game.combats??(game.combat?[game.combat]:[])).flatMap(combat=>combat.started?values(combat.turns).flatMap((combatant,index)=>combatant.actor?.uuid===actor.uuid&&combatant.token?.uuid===token.uuid?[{combat,combatant,index}]:[]):[]);
  if(matches.length>1)throw Error('角色与Token对应多个进行中遭遇；本次格挡未应用伤害，请先明确实际遭遇。');
  if(!matches.length)return null;

@@ -1,7 +1,7 @@
 import {MODULE_ID,hasSource} from './rules.mjs';
 import {SerialActions} from './runtime.mjs';
 import {isActiveGM} from './native-context.mjs';
-import {classifyNativeShieldBlock,reactionEpoch} from './reaction-budget.mjs';
+import {classifyNativeShieldBlock,shieldEncounter} from './reaction-budget.mjs';
 
 const SOURCE='Compendium.pf2e.feats-srd.Item.dSSwRyuhKTq1VubX';
 const worlds=new Set(['-','sog','pnvfcgjbf2cjp7gz','ujx5r8oipw7ercdr','team-automation-qa2']);
@@ -48,7 +48,7 @@ export function createShieldBlockEvents({game,fromUuid=globalThis.fromUuid,resol
    const source=await validateSource({game,fromUuid,snapshot:payload.sourceSnapshot});owner(actor,user);
    if(!source?.verified||fields.some(field=>source[field]!==payload[field]))throw Error('格挡来源快照未通过主GM验证。');
    if(!ready(actor)||actor.attributes.shield.itemId!==payload.shieldId||token.actor?.uuid!==actor.uuid)throw Error('保存事件前盾牌状态已改变。');
-   const record={...Object.fromEntries(fields.map(field=>[field,source[field]])),sourceSnapshot:structuredClone(source.sourceSnapshot??payload.sourceSnapshot),nonce:payload.nonce,shieldId:payload.shieldId,userId:user.id,epoch:reactionEpoch(actor,game),status:'pending',createdAt:Date.now()};
+   const record={...Object.fromEntries(fields.map(field=>[field,source[field]])),sourceSnapshot:structuredClone(source.sourceSnapshot??payload.sourceSnapshot),nonce:payload.nonce,shieldId:payload.shieldId,userId:user.id,epoch:shieldEncounter(actor,token,game)?.epoch??null,status:'pending',createdAt:Date.now()};
    liveClaims.set(record.nonce,user.id);
    try{await persist(actor,record);owner(actor,user);return record}
    catch(error){liveClaims.delete(record.nonce);throw error}
