@@ -39,6 +39,22 @@ test('automatic outside-encounter Refresh uses the same idempotent resource writ
  f.game.combats=new Map([['other',{started:true,combatants:[{actor:f.actor}]}]]);await assert.rejects(s.refreshOutsideEncounter({...p,nonce:'new'},f.gm),/encounter/i);
  f.game.combats.clear();f.actor.items.delete('feature');await assert.rejects(s.refreshOutsideEncounter({...p,nonce:'new'},f.gm),/Elemental Powers/i);
 });
+test('committed Refresh notifies lifecycle once and retries failed cleanup without refilling powers',async()=>{
+ const f=fixture();let calls=0,fail=true;
+ const service=()=>api.createVoltageLedger({game:f.game,fromUuid:async uuid=>f.docs.get(uuid),onRefresh:async context=>{
+  assert.equal(context.actor,f.actor);assert.equal(context.nonce,'channel');assert.equal(f.spent.system.frequency.value,calls===0?1:0);calls++;
+  if(fail){fail=false;throw Error('cleanup interrupted');}
+ }});
+ await assert.rejects(service().channel(f.payload,f.user),/cleanup interrupted/);
+ assert.equal(f.actor.flags[ID].voltage.refreshes.channel.status,'done');
+ f.spent.system.frequency.value=0;await service().channel(f.payload,f.user);await service().channel(f.payload,f.user);
+ assert.equal(calls,2);assert.equal(f.spent.system.frequency.value,0);assert.equal(f.actor.flags[ID].voltage.refreshes.channel.effectsDone,true);
+});
+test('Siphoning High Voltage never emits a Refresh lifecycle callback',async()=>{
+ const f=fixture();let calls=0;f.receipt.snapshot={kind:'siphoning',siphon:{applies:true},level:5,itemUuid:f.item.uuid,actorUuid:f.actor.uuid,powerSourceUuid:HV};
+ const s=api.createVoltageLedger({game:f.game,fromUuid:async uuid=>f.docs.get(uuid),onRefresh:async()=>calls++});
+ await s.channel(f.payload,f.user);assert.equal(calls,0);assert.equal(f.spent.system.frequency.value,0);
+});
 test('Siphoning snapshot suppresses this channel Refresh without affecting the next normal channel',async()=>{
  const f=fixture();f.receipt.snapshot={kind:'siphoning',siphon:{applies:true},suppressEffects:['refresh'],level:5,itemUuid:f.item.uuid,actorUuid:f.actor.uuid,powerSourceUuid:HV};
  const r=await f.service().channel(f.payload,f.user);assert.equal(r.refreshSuppressed,true);assert.equal(f.spent.system.frequency.value,0);
