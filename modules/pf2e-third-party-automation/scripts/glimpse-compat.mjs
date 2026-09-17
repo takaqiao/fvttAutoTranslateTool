@@ -48,8 +48,11 @@ export function createGlimpseCompat({game,fromUuid=globalThis.fromUuid,api=()=>g
   // registration must happen early; all world authorization uses the ready Game.
   if(runtimeGame)game=runtimeGame;
   if(!glimpseWorld(game))return false;
-  if(!versions()||!await verifyEngine())throw Error('救赎瞥视依赖版本或引擎源码不匹配。');
   if(!registered)throw Error('救赎瞥视节点须在 Trigger Engine init 前注册。');
+  // Cleanup of previously verified owned effects must remain available even
+  // when a dependency upgrade prevents creating any new Glimpse automation.
+  lifecycle??=createGlimpseExpiry({game});lifecycle.register({Hooks:hooksApi});await lifecycle.reconcile();
+  if(!versions()||!await verifyEngine())throw Error('救赎瞥视依赖版本或引擎源码不匹配。');
   if(!engineReady){let timer;try{await Promise.race([readyPromise,new Promise((_,reject)=>timer=setTimeout(()=>reject(Error('Trigger Engine 尚未就绪。')),10000))])}finally{clearTimeout(timer)}}
   const doc=await fromUuid(GLIMPSE_SOURCES.resistance);template=doc?.toObject?.();if(!validGlimpseTemplate(template))throw Error('救赎瞥视原生抗力模板已改变。');
   const s=safeSetting();if(s.disabled?.includes(GLIMPSE_TRIGGER_ID))throw Error('救赎瞥视后续图已明确禁用。');
@@ -62,7 +65,7 @@ export function createGlimpseCompat({game,fromUuid=globalThis.fromUuid,api=()=>g
    }
    await dispatch({probe:true});probed=true;
   }
-  lifecycle??=createGlimpseExpiry({game});lifecycle.register({Hooks:hooksApi});await lifecycle.reconcile();initialized=true;return ready();
+  initialized=true;return ready();
  }
  function exactEffects(enemy,slug){const uuid=game.pf2e?.ConditionManager?.conditions?.get('enfeebled')?.uuid;return Array.from(enemy.actor.items.values()).filter(i=>i.type==='effect'&&i.system?.slug===slug&&i.system.context?.origin?.actor===enemy.actor.uuid&&i.system.context?.origin?.token===enemy.uuid&&i.system.duration?.unit==='rounds'&&i.system.duration.value===1&&i.system.duration.expiry==='turn-end'&&i.system.rules?.length===1&&i.system.rules[0].key==='GrantItem'&&i.system.rules[0].uuid===uuid&&i.system.rules[0].inMemoryOnly===true&&i.system.rules[0].alterations?.some(a=>a.mode==='override'&&a.property==='badge-value'&&a.value===2))}
  async function apply({nonce,enemy,expiry,authorize}){
