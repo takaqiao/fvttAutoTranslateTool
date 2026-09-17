@@ -44,7 +44,10 @@ import {verifyNativeIWRBridge} from './native-iwr-verification.mjs';
 import {createRuneTransfer,registerRuneTransferRuleElement} from './rune-transfer.mjs';
 import {preserveDamageBypassOnAlter} from './native-damage-components.mjs';
 import {createMetapowerProvider,preserveMetapowerOnAlter} from './metapower/provider.mjs';
+import {createEldamonElectricityProvider,preserveElectricityOnAlter} from './eldamon-electricity-provider.mjs';
 import {createEldamonDataRepair} from './eldamon-data-repair.mjs';
+import {createMedicActions} from './medic-actions.mjs';
+import {createEldamonVoltageProvider} from './eldamon-voltage-executor.mjs';
 import {createSpellCombination} from './spell-combination.mjs';
 import {createAvAutomation,buildAvPatreonRepairs} from './av-automation.mjs';
 import {createPartyAutomation,buildPartyPatreonRepairs,PARTY_SOURCES} from './party-automation.mjs';
@@ -135,11 +138,16 @@ Hooks.once('ready',async()=>{
  const runeTransfer=createRuneTransfer({game,fromUuid,choose,onError:report});
  const campaign=createCampaignFeats({game,fromUuid,choose,onError:report});
  const fear=createFearAutomation({game,fromUuid,choose,onError:report});
- const metapower=createMetapowerProvider({game,fromUuid,onError:report});
- providers=[createCompanionAutomation({game,fromUuid,choose,onError:report,wrapStrike:(strike,actor)=>providers.reduce((s,p)=>p.wrapStrike?.(s,actor)??s,strike)}),createDualStrikeAutomation({game,fromUuid,choose,onError:report}),runeTransfer,campaign,createKnowledgeAutomation({game,fromUuid,choose,onError:report}),createAvAutomation({game,fromUuid,choose,onError:report,refocusSubscribers:[treatmentRefocus],refocusPrivacy:salubriousMessagePrivacy}),createPartyAutomation({game,fromUuid,choose,onError:report}),createSocialAutomation({game,fromUuid,choose,onError:report}),createThrallAutomation({game,fromUuid,choose,onError:report}),createReactionChecks({game,fromUuid,choose,onError:report,nativeCheckMiddleware:salubriousCheckScope.interceptCheck}),fear,createScareToDeath({game,fromUuid,choose,onError:report}),createSpellCombination({game,fromUuid,choose,onError:report,afterAttack:message=>campaign.processCheck(message)}),deflection,destructiveBlock,disarmingBlock,disarmRegrip,shieldEvents,salubriousKiss];
+ let metapower,electricity;
+ const voltage=createEldamonVoltageProvider({game,fromUuid,onError:report,observe:(...args)=>metapower.observe(...args),onRefresh:context=>electricity.onRefresh(context)});
+ electricity=createEldamonElectricityProvider({game,fromUuid,onError:report,refreshOutsideEncounter:voltage.refreshOutsideEncounter});
+ metapower=createMetapowerProvider({game,fromUuid,onError:report,supportsOriginalUse:item=>providers.some(p=>p.resolveAction?.(item)?.startsWith('medic:')),beforeChannel:electricity.beforeChannel,validateSelection:electricity.validateSelection,interceptDamageMessage:electricity.interceptDamageMessage,onCommittedChannel:async context=>{await voltage.onCommittedChannel(context);await electricity.onCommittedChannel(context)}});
+ nativeCasts.addCastMiddleware(({item,options},native)=>options.consume===false||options.message===false?native():metapower.observe({actor:item.actor,entry:'spell'},native));
+ providers=[createCompanionAutomation({game,fromUuid,choose,onError:report,wrapStrike:(strike,actor)=>providers.reduce((s,p)=>p.wrapStrike?.(s,actor)??s,strike)}),createDualStrikeAutomation({game,fromUuid,choose,onError:report}),runeTransfer,campaign,createKnowledgeAutomation({game,fromUuid,choose,onError:report}),createAvAutomation({game,fromUuid,choose,onError:report,refocusSubscribers:[treatmentRefocus],refocusPrivacy:salubriousMessagePrivacy}),createPartyAutomation({game,fromUuid,choose,onError:report}),createSocialAutomation({game,fromUuid,choose,onError:report}),createThrallAutomation({game,fromUuid,choose,onError:report}),createReactionChecks({game,fromUuid,choose,onError:report,nativeCheckMiddleware:(wrapped,...args)=>electricity.interceptCheck((...electric)=>metapower.interceptCheck((...next)=>salubriousCheckScope.interceptCheck(wrapped,...next),...electric),...args)}),fear,createScareToDeath({game,fromUuid,choose,onError:report}),createSpellCombination({game,fromUuid,choose,onError:report,afterAttack:message=>campaign.processCheck(message)}),deflection,destructiveBlock,disarmingBlock,disarmRegrip,shieldEvents,salubriousKiss];
  const configuration=createConfigurationMaintenance({game,repairs:[buildAvPatreonRepairs,buildPartyPatreonRepairs,buildKnowledgePatreonRepairs],settings:[{module:'pf2e-ranged-combat',key:'postActionToChat',value:2,when:g=>Array.from(g.actors.party?.members??[]).some(a=>[KNOWLEDGE_SOURCES.monster,KNOWLEDGE_SOURCES.hunt].every(source=>a.items.some(i=>i.sourceId===source))),reason:'猎物指定保留完整原生技能卡，供怪物猎手知识联动读取原始操作者与目标。'},{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:g=>['-','sog','pnvfcgjbf2cjp7gz','team-automation-qa2'].includes(g.world?.id),transform:value=>Array.isArray(value)?value.filter(slug=>slug!=='disarming-block'):value,reason:'卸武格挡改由实际格挡回执接原生自由动作缴械，避免重复提示或再次收取反应。'}]});
  await configuration().catch(report);
- providers.push(metapower,createEldamonDataRepair({game}));
+ providers.unshift(voltage,electricity);
+ providers.push(metapower,createEldamonDataRepair({game}),createMedicActions({game,fromUuid,choose,onError:report}));
  coordinator=createCycleCoordinator({game,
   chooseTrait:(actor,user,choices)=>socket.executeAsUser('cycle-trait',user.id,actor.uuid,choices),
   onEffect:(actor,claim,user)=>executeActorAction(actor,'cycle',{damageType:claim.damageType,triggerConfirmed:true},user,{cycleTiming:claim.timing}),
@@ -161,7 +169,7 @@ Hooks.once('ready',async()=>{
  },'WRAPPER');
  const rollIndex=CONFIG.Dice.rolls.findIndex(cls=>cls.name==='DamageRoll');
  if(rollIndex<0)throw Error('未找到PF2e DamageRoll，循环能量无法接入。');
- libWrapper.register(MODULE_ID,`CONFIG.Dice.rolls.${rollIndex}.prototype.alter`,function(wrapped,...args){return preserveMetapowerOnAlter(this,preserveDamageBypassOnAlter(this,cycle.alterDamageRoll(this,wrapped,...args),{multiplier:args[0]??1,addend:args[1]??0}))},'WRAPPER');
+ libWrapper.register(MODULE_ID,`CONFIG.Dice.rolls.${rollIndex}.prototype.alter`,function(wrapped,...args){return preserveElectricityOnAlter(this,preserveMetapowerOnAlter(this,preserveDamageBypassOnAlter(this,cycle.alterDamageRoll(this,wrapped,...args),{multiplier:args[0]??1,addend:args[1]??0})))},'WRAPPER');
  for(const message of game.messages)cycle.recordDamageMessage(message);
  const legacyUsage=createUsageExecutor({cycleUse:(actor,message,user)=>coordinator.use(actor,message,user)}),usageQueue=new SerialActions();
  const resolveAction=item=>defaultUsageAction(item)??providers.map(p=>p.resolveAction?.(item)).find(Boolean);
@@ -178,7 +186,7 @@ Hooks.once('ready',async()=>{
  // Strike objects are prepared before ready. Rebuild them once so wrappers also
  // cover actors that needed no persistent data repair on this login.
  for(const actor of game.actors)if(actor.type==='character')actor.reset();
- registerUsageEvents({game,Hooks,resolveAction,captureUsage:(item,context)=>Object.assign({},nativeCasts.captureUsage(item,context),...providers.map(p=>p.captureUsage?.(item,context))),onMessageOutcome:(item,options,outcome)=>nativeCasts.captureMessageOutcome(item,options,outcome),tracksFrequency:item=>defaultUsageAction(item)==='breath'||item.sourceId===PARTY_SOURCES.clue||resolveAction(item)==='knowledge:devise'||providers.some(p=>p.tracksFrequency?.(item)),
+ registerUsageEvents({game,Hooks,resolveAction,observeItemUse:(item,native)=>["feat","action"].includes(item.type)?metapower.observe({actor:item.actor,item},native):native(),captureUsage:(item,context)=>Object.assign({},nativeCasts.captureUsage(item,context),...providers.map(p=>p.captureUsage?.(item,context))),onMessageOutcome:(item,options,outcome)=>nativeCasts.captureMessageOutcome(item,options,outcome),tracksFrequency:item=>defaultUsageAction(item)==='breath'||item.sourceId===PARTY_SOURCES.clue||resolveAction(item)==='knowledge:devise'||providers.some(p=>p.tracksFrequency?.(item)),
   executeUsage:ctx=>usageQueue.run(ctx.actor.uuid,async()=>{if(ctx.action!=='rune-transfer:select')await runeTransfer.ensureReady(ctx.actor,ctx.user);const provider=providers.find(p=>p.resolveAction?.(ctx.item)===ctx.action);return provider?provider.executeUsage(ctx):legacyUsage(ctx)}),onError:report});
  const legacyMaintenance=createMaintenance({game,repair:actor=>executeActorAction(actor,'repair',{},game.user)}),maintainQueue=new SerialActions();
  maintenance=async actor=>{
@@ -198,7 +206,7 @@ Hooks.once('ready',async()=>{
   const compatibility=await installPatreonTreatmentCompatibility({game,libWrapper,scope:salubriousCheckScope});
   treatmentDiagnostic=Object.freeze({ready:workbenchPrivacy.ready&&compatibility.installed===true,workbench:workbenchPrivacy.ready?workbenchPrivacy.profile:null,installed:compatibility.installed===true,reason:workbenchPrivacy.ready?compatibility.reason??null:workbenchPrivacy.reason,dependency:compatibility.dependency?Object.freeze({...compatibility.dependency}):null});
  }catch(error){treatmentDiagnostic=Object.freeze({ready:false,installed:false,reason:String(error.message??error),dependency:null});report(error);}
- game.modules.get(MODULE_ID).api={open,request,version:'0.9.1',repairActiveParty:()=>maintenance(),nativeDamageIWR:shieldAdapter.nativeDamageIWR,get nativeIWRCompatibility(){return shieldAdapter.nativeBridgeDiagnostic()},get patreonInitiativeCompatibility(){return patreonInitiativeCompatibility},registerPatreonInitiativeCompatibility:registerPatreonCompatibility,get salubriousKiss(){return treatmentDiagnostic},get reactionShieldWallCompatibility(){return reactionShieldWallDiagnostic}};
+ game.modules.get(MODULE_ID).api={open,request,version:'0.9.1',repairActiveParty:()=>maintenance(),nativeDamageIWR:async(...args)=>{const handled=await shieldAdapter.nativeDamageIWR(...args);electricity.observeNativeIWR(...args,handled);return handled},get nativeIWRCompatibility(){return shieldAdapter.nativeBridgeDiagnostic()},get patreonInitiativeCompatibility(){return patreonInitiativeCompatibility},registerPatreonInitiativeCompatibility:registerPatreonCompatibility,get salubriousKiss(){return treatmentDiagnostic},get reactionShieldWallCompatibility(){return reactionShieldWallDiagnostic}};
  notifyNativeIWRStatus({game,diagnostic:shieldAdapter.nativeBridgeDiagnostic(),warn:message=>ui.notifications.warn(message)});
  await maintenance().catch(report);
  await elementalMedicine.maintain().catch(report);

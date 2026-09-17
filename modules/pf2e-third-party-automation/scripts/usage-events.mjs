@@ -53,7 +53,7 @@ export function createFrequencyTracker({now=Date.now,ttl=5000,matches=defaultFre
 }
 
 /** Install on every client at ready; only activeGM calls executeUsage. Returns an unregister function. */
-export function registerUsageEvents({game,Hooks,executeUsage,resolveAction=defaultUsageAction,captureUsage=()=>null,onMessageOutcome=()=>false,tracksFrequency=defaultFrequencyMatch,fromUuid=globalThis.fromUuid,libWrapper=globalThis.libWrapper,canvas=globalThis.canvas,onError=error=>console.error(MODULE_ID,error),now=Date.now}){
+export function registerUsageEvents({game,Hooks,executeUsage,resolveAction=defaultUsageAction,captureUsage=()=>null,onMessageOutcome=()=>false,observeItemUse=(_item,native)=>native(),tracksFrequency=defaultFrequencyMatch,fromUuid=globalThis.fromUuid,libWrapper=globalThis.libWrapper,canvas=globalThis.canvas,onError=error=>console.error(MODULE_ID,error),now=Date.now}){
  const tracker=createFrequencyTracker({now,matches:tracksFrequency}),pending=new Map(),scopes=new Map(),inFlight=new Set(),processing=new Set(),registrations=[],wrappers=[],listeners=[],capturedElements=new WeakSet();
  const on=(name,callback)=>registrations.push([name,Hooks.on(name,callback)]);
  const seedActor=actor=>{for(const item of values(actor?.items))tracker.seed(item);};
@@ -135,9 +135,10 @@ export function registerUsageEvents({game,Hooks,executeUsage,resolveAction=defau
     const actor=globalThis.canvas?.tokens?.get?.(speaker.token)?.actor??game.actors.get?.(speaker.actor);
     item=actor?.items.get?.(uuid);
    }
-   if(!item||!resolveAction(item))return wrapped(uuid,event);
+   if(!item)return wrapped(uuid,event);
+   if(!resolveAction(item))return observeItemUse(item,()=>wrapped(uuid,event));
    const scope={running:true,expires:now()+5000,targetUuids:selectedTargets()};scopes.set(item.uuid,scope);
-   try{return await wrapped(uuid,event)}finally{if(scopes.get(item.uuid)===scope)scopes.delete(item.uuid)}
+   try{return await observeItemUse(item,()=>wrapped(uuid,event))}finally{if(scopes.get(item.uuid)===scope)scopes.delete(item.uuid)}
   });
   for(const type of ['feat','action','spell'])wrap(`CONFIG.PF2E.Item.documentClasses.${type}.prototype.toMessage`,async function(wrapped,event,options={}){
    const route=resolveAction(this),captured=captureUsage(this,{options,event});

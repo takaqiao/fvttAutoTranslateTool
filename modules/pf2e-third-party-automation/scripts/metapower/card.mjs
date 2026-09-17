@@ -32,7 +32,7 @@ export function renderMetapowerCard(message,html,{receipt,onClear,onError=consol
  root.querySelector('.metapower-controls')?.remove();
  const block=document.createElement('div');block.className='metapower-controls';block.setAttribute('role','status');
  const snapshot=receipt.snapshot;
- block.textContent=receipt.kind?`${receipt.kind==='widen'?'增广元素':'虹吸元素'}：仅限紧接的下一次引导威能。`:snapshot?`${snapshot.kind==='widen'?'增广元素':'虹吸元素'} · ${snapshot.discharge?'放电（Charged −1）':'普通分支'}${snapshot.area?` · ${snapshot.area.distance} 尺`:''}${snapshot.siphon?.applies?' · 无类型；逐目标半伤，关联生物特征匹配时全伤；附加效果不生效':''}`:'已记录实际使用。';
+ block.textContent=receipt.kind?`${receipt.kind==='widen'?'增广元素':'虹吸元素'}：仅限紧接的下一次引导威能。`:snapshot?`${snapshot.kind==='widen'?'增广元素':snapshot.kind==='siphoning'?'虹吸元素':'原生威能'} · ${snapshot.discharge?'放电（Charged −1）':'普通分支'}${snapshot.area?` · ${snapshot.area.distance} 尺`:''}${snapshot.siphon?.applies?' · 无类型；逐目标半伤，关联生物特征匹配时全伤；附加效果不生效':''}`:'已记录实际使用。';
  if(receipt.kind&&onClear){const button=document.createElement('button');button.type='button';button.textContent='已采取其他动作／清除待用威能';button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();Promise.resolve(onClear(receipt)).catch(onError)});block.append(button);}
  (root.querySelector('.message-content')??root).append(block);
  if(!snapshot)return;
