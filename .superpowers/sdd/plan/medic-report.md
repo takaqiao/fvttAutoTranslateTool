@@ -37,7 +37,7 @@ Observed RED then GREEN for rules, execution, replay hardening and scoped delega
 node --test modules/pf2e-third-party-automation/tests/medic-*.test.mjs
 ```
 
-Checkpoint: **46 passed, zero failed/skipped**. Assertions exercise native-result consequences, four degrees and removal floor, tool/source/adjacency/continuous boundaries, all four activity costs, movement/cancel/turn validation, owner/GM checks, double provider delivery, copied nonce/full-card/continuation rejection, stale/rerolled/inconsistent receipt rejection, same-turn flourish and exact native/Workbench actor/target scope. External Foundry effects are modeled by synthetic Documents; these are not a substitute for real browser/native multiple-client QA. Root owns that QA.
+Checkpoint: **47 passed, zero failed/skipped**. Assertions exercise native-result consequences, four degrees and removal floor, tool/source/adjacency/continuous boundaries, all four activity costs, movement/cancel/turn validation, owner/GM checks, double provider delivery, copied nonce/full-card/continuation rejection, stale/rerolled/inconsistent receipt rejection, same-turn flourish and exact native/Workbench actor/target scope. The final native-boundary regression explicitly binds the original healer token and verifies hidden source DC and native dialog. External Foundry effects are modeled by synthetic Documents; these are not a substitute for real browser/native multiple-client QA. Root owns that QA.
 
 ## Honest limits for runtime QA
 

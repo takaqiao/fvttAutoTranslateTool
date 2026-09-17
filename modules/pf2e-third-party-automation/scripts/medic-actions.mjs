@@ -56,11 +56,11 @@ export function createMedicActions({game,fromUuid=globalThis.fromUuid,choose,req
   // No system-wide action pool is invented. Integrations can account for this single activity here.
   await commitActivity?.({...ctx,cost,flourish,nonce:key});
  }
- async function nativeRoll({actor,item,target,nonce,dc}){
+ async function nativeRoll({actor,item,healer,target,nonce,dc}){
   const stat=actor.getStatistic?.('medicine')??actor.skills?.medicine;
   if(!stat||!game.pf2e?.Check?.roll||!game.pf2e?.CheckModifier)throw Error('缺少原生医疗反制检定接口。');
   let receipt=null;
-  await game.pf2e.Check.roll(new game.pf2e.CheckModifier('处理状态',stat),{actor,item,type:'counteract',domains:['check','counteract-check',...(stat.domains??[])],dc:{value:dc,visible:false},options:new Set([...(actor.getRollOptions?.(['all','medicine','skill-check','counteract-check'])??[]),'counteract','action:treat-condition',`${MODULE_ID}:medic:${nonce}`]),traits:['healing','manipulate'],target:{actor:target.actor,token:target},createMessage:true,skipDialog:false,messageMode:'blind'},null,(roll,_outcome,message)=>{receipt={roll,message};});
+  await game.pf2e.Check.roll(new game.pf2e.CheckModifier('处理状态',stat),{actor,item,token:healer,type:'counteract',domains:['check','counteract-check',...(stat.domains??[])],dc:{value:dc,visible:false},options:new Set([...(actor.getRollOptions?.(['all','medicine','skill-check','counteract-check'])??[]),'counteract','action:treat-condition',`${MODULE_ID}:medic:${nonce}`]),traits:['healing','manipulate'],target:{actor:target.actor,token:target},createMessage:true,skipDialog:false,messageMode:'blind'},null,(roll,_outcome,message)=>{receipt={roll,message};});
   return receipt;
  }
  async function treat(ctx,healer,target){
@@ -73,7 +73,7 @@ export function createMedicActions({game,fromUuid=globalThis.fromUuid,choose,req
    const {dc}=validateTreatment({actor,condition,distance:legal(actor,healer,target),facts});
    await save(message,{status:'rolling'});
    // Counteract's generic global dialog fields are not used; the native Check API receives exact local DC.
-   const receipt=await queues.checks.run('medicine',()=> (rollCheck??nativeRoll)({...ctx,item:medicFeat(actor,'treatCondition'),target,nonce:own(message).nonce,dc}));
+   const receipt=await queues.checks.run('medicine',()=> (rollCheck??nativeRoll)({...ctx,item:medicFeat(actor,'treatCondition'),healer,target,nonce:own(message).nonce,dc}));
    validate(ctx);legal(actor,healer,target);
    if(!receipt){await save(message,{status:'cancelled'});return '已取消原生检定；已承诺动作不回退。';}
    const check=receipt.message,pf=check?.flags?.pf2e?.context,degree=receipt.roll?.options?.degreeOfSuccess;
