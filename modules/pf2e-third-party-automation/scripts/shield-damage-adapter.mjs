@@ -10,6 +10,15 @@ const INDESTRUCTIBLE_SHIELD='Compendium.pf2e.equipment-srd.Item.SUbYk6B1iPoGyyjh
 const prefix=`${MODULE_ID}:destructive-block:`,nativePrefix=`${MODULE_ID}:native-shield:`;
 export {NATIVE_IWR_BRIDGE_PROTOCOL};
 const finite=value=>Number.isFinite(value)&&value>=0;
+function freezeObservation(value){
+ if(value&&typeof value==='object'){
+  const prototype=Object.getPrototypeOf(value);
+  if(!Array.isArray(value)&&prototype!==Object.prototype&&prototype!==null)throw Error('原生伤害观察含有无法冻结的数据。');
+  for(const child of Object.values(value))freezeObservation(child);
+  Object.freeze(value);
+ }
+ return value;
+}
 export function destructiveBlockAmounts({incoming,shieldHardness,shieldHP,actorHardness=0}){
  if(![incoming,shieldHardness,shieldHP,actorHardness].every(finite))throw Error('破坏性格挡的伤害、硬度或盾牌生命值无效。');
  const absorbedDamage=Math.min(incoming,shieldHardness*2),actorHardnessReduction=Math.min(incoming-absorbedDamage,actorHardness);
@@ -44,7 +53,7 @@ function renderBlockContent({data,calculation,canUndo,shieldState}){
 
 /** Keep native IWR, HP, persistent damage and undo; vary only this block's deltas. */
 export function createShieldDamageAdapter({game,createMessageMiddleware,nativeBridgeVerification,onError=console.error,renderContent=renderBlockContent,getNativeBridge=()=>globalThis.CONFIG?.Actor?.documentClass?.thirdPartyNativeIWRBridge}={}){
- const queue=new SerialActions(),actors=new WeakMap(),nonces=new Map(),frames=new WeakMap(),nativeFrames=new WeakMap(),preventions=new Map(),interceptors=new Map();let registered=false;
+ const queue=new SerialActions(),actors=new WeakMap(),nonces=new Map(),frames=new WeakMap(),nativeFrames=new WeakMap(),preventions=new Map(),interceptors=new Map(),observers=new Set();let registered=false;
  const report=error=>{try{onError(error)}catch{/* Preserve an already-applied native result. */}};
  function nativeBridgeAvailable(){
   try{return isVerifiedNativeIWRBridge(nativeBridgeVerification,game,getNativeBridge());}catch{return false;}
@@ -57,6 +66,27 @@ export function createShieldDamageAdapter({game,createMessageMiddleware,nativeBr
   return Object.freeze({ready,status:ready?'ready':'unsupported',reason,systemVersion:version,bridgeVersion:field('version'),protocol:field('protocol'),expectedSourceSHA256:profile?.originalSHA256??null,expectedPatchedSHA256:profile?.patchedSHA256??null,verifiedSystemSHA256:ready?nativeBridgeVerification.patchedSHA256:null,verifiedApplyDamageSHA256:ready?nativeBridgeVerification.applyDamageSHA256:null,requiresVerifiedSystemBridge:!ready,unavailableFeatures:Object.freeze(ready?[]:['transcendent-deflection'])});
  }
  const addNativeInterceptor=(callback,{matches=()=>true}={})=>{if(typeof callback!=='function'||typeof matches!=='function')throw Error('原生伤害拦截器及匹配器必须是函数。');interceptors.set(callback,matches);return()=>interceptors.delete(callback);};
+ /** Internal observation only: no live documents, mutable native result or
+  * prevention capability. Returns are ignored; promises never delay damage. */
+ function addNativeObserver(callback,{matches=()=>true}={}){
+  if(typeof callback!=='function'||typeof matches!=='function')throw Error('原生伤害观察器及匹配器必须是函数。');
+  const entry={callback,matches};observers.add(entry);return()=>observers.delete(entry);
+ }
+ function observeNative(frame,actor,params,result,rollOptions,nativeAmounts,persistent){
+  if(!frame.observers.length)return;
+  if(!nativeBridgeAvailable()){report(Error('原生伤害桥的验证已失效，未生成观察结果。'));return;}
+  let snapshot;
+  try{snapshot=freezeObservation(structuredClone({
+   actorUuid:actor.uuid,tokenUuid:(params.token?.document??params.token)?.uuid??null,itemUuid:params.item?.uuid??null,total:frame.total,
+   rollOptions:[...rollOptions],iwr:{finalDamage:result.finalDamage,applications:result.applications,persistent},
+   nativeAmounts:{actorDamage:nativeAmounts.actorDamage,shieldDamage:nativeAmounts.shieldDamage},
+  }));}catch(error){report(error);return;}
+  for(const entry of frame.observers){
+   if(!observers.has(entry))continue;
+   try{const returned=entry.callback(snapshot);if(returned&&typeof returned.then==='function')Promise.resolve(returned).catch(report);}
+   catch(error){report(error);}
+  }
+ }
  const healthState=actor=>{const hp=actor?.hitPoints,sp=actor?.attributes?.hp?.sp,shield=actor?.heldShield;return JSON.stringify([hp?.value,hp?.max,hp?.temp,sp?.value,sp?.max,shield?.id,shield?._source?.system?.hp?.value]);};
  function checkFrame(frame,actor,params){
   if(!frame.open||frames.get(frame.actor)!==frame||actor!==frame.actor||params!==frame.nativeParams||game.user!==frame.user||frame.user.isGM&&game.users?.activeGM?.id!==frame.user.id||!frame.actor.testUserPermission?.(frame.user,'OWNER'))throw Error('原生伤害角色、操作者或私有上下文已失效。');
@@ -99,6 +129,9 @@ export function createShieldDamageAdapter({game,createMessageMiddleware,nativeBr
     if(typeof instance?.type!=='string'||typeof instance.head?.expression!=='string')throw Error('原生持续伤害结果结构不匹配。');
     return Object.freeze({type:instance.type,formula:instance.head.expression});
    }));
+   // Native applications may already include hardness; finalDamage still holds
+   // the IWR result. Capture both before our prevention can overwrite either.
+   observeNative(frame,actor,params,result,rollOptions,nativeAmounts,persistent);
    if(incoming<=0&&!persistent.length)return;
    const view={...params,rollOptions:new Set(rollOptions)};let accepting=true;
    const prevent=({marker,flagKey,proof}={})=>{
@@ -158,10 +191,17 @@ export function createShieldDamageAdapter({game,createMessageMiddleware,nativeBr
    try{refreshCloneHealth(actor,params);if(plan){scope=validate(actor,params,plan);if(actors.has(actor)||nonces.has(plan.nonce))throw Error('破坏性格挡已经在结算。');}}
    catch(error){throw markUnappliedDamageError(error);}
    const actual=plan?{...params,shieldBlockRequest:false,rollOptions:new Set([...params.rollOptions??[],prefix+plan.nonce])}:params;
-   let matched=[];
+   let matched=[],matchedObservers=[];
    try{if(interceptors.size&&actor.hitPoints&&nativeBridgeAvailable())matched=[...interceptors].filter(([,matches])=>matches(actor,actual)===true).map(([callback])=>callback);}
    catch(error){throw markUnappliedDamageError(error);}
-   const frame=matched.length?{actor,params:actual,interceptors:matched,source:Object.fromEntries(['damage','token','item','final','skipIWR','shieldBlockRequest'].map(key=>[key,actual[key]])),user:game.user,total:typeof actual.damage==='number'?actual.damage:actual.damage?.total,open:true,entered:false,claimed:false}:null;
+   if(observers.size&&actor.hitPoints&&nativeBridgeAvailable())for(const entry of observers){
+    try{
+     const match=entry.matches(actor,actual);
+     if(match===true)matchedObservers.push(entry);
+     else if(match&&typeof match.then==='function')Promise.resolve(match).catch(report);
+    }catch(error){report(error);}
+   }
+   const frame=matched.length||matchedObservers.length?{actor,params:actual,interceptors:matched,observers:matchedObservers,source:Object.fromEntries(['damage','token','item','final','skipIWR','shieldBlockRequest'].map(key=>[key,actual[key]])),user:game.user,total:typeof actual.damage==='number'?actual.damage:actual.damage?.total,open:true,entered:false,claimed:false}:null;
    if(frame)frames.set(actor,frame);
    if(plan){actors.set(actor,scope);nonces.set(plan.nonce,scope);}
    try{return await native(actual);}
@@ -203,5 +243,5 @@ export function createShieldDamageAdapter({game,createMessageMiddleware,nativeBr
    return createMessageMiddleware?createMessageMiddleware(wrapped,actual,...args):wrapped(actual,...args);
   },'MIXED');
  }
- return {applyDamage,register,addNativeInterceptor,nativeBridgeAvailable,nativeBridgeDiagnostic,withNativeFrame,nativeDamageIWR};
+ return {applyDamage,register,addNativeInterceptor,addNativeObserver,nativeBridgeAvailable,nativeBridgeDiagnostic,withNativeFrame,nativeDamageIWR};
 }
