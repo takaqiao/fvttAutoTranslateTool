@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createNativeCastEvents} from '../scripts/amp-cast-events.mjs';
 import {MODULE_ID as ID} from '../scripts/rules.mjs';
 
-function fixture({detached=false,veto=false,noHook=false,lostReply=false,deferred=false}={}){
+function fixture({detached=false,veto=false,noHook=false,lostReply=false,deferred=false,differential=false,changeEvent,wrongReturn=false,noop=false}={}){
  const wrappers=new Map(),rpc=new Map(),hooks=new Map(),writes=[],docs=new Map(),gm={id:'gm',active:true},player={id:'player',active:true};
  const game={user:gm,users:new Map([['gm',gm],['player',player]]),actors:new Map(),messages:new Map(),time:{worldTime:1},scenes:{current:{id:'scene'}}};game.users.activeGM=gm;game.settings={get:()=>game.mode??'public'};gm.targets=new Set();
  const actor={id:'pc',uuid:'Actor.pc',type:'character',canAct:true,flags:{},items:new Map(),testUserPermission:u=>u===gm||u===player,getActiveTokens:()=>[]};game.actors.set(actor.id,actor);
@@ -16,11 +16,15 @@ function fixture({detached=false,veto=false,noHook=false,lostReply=false,deferre
  const other=new SpellFixture({...item,id:'other',uuid:'Actor.pc.Item.other',sourceId:'Compendium.test.other'});
  for(const d of [actor,entry,item,other]){docs.set(d.uuid,d);if(d!==actor)actor.items.set(d.id,d);}
  const Hooks={on:(name,fn)=>{const list=hooks.get(name)??[];list.push(fn);hooks.set(name,list);return fn},off:(name,fn)=>hooks.set(name,(hooks.get(name)??[]).filter(f=>f!==fn))};
+ const difference=(before,after)=>{if(JSON.stringify(before)===JSON.stringify(after))return undefined;if(after&&typeof after==='object'&&!Array.isArray(after))return Object.fromEntries(Object.entries(after).map(([k,v])=>[k,difference(before?.[k],v)]).filter(([,v])=>v!==undefined));return structuredClone(after)};
  const update=async(changes,options)=>{
   writes.push({doc:'entry',changes:structuredClone(changes),options:structuredClone(options)});
   if(veto)return undefined;
-  apply(entry,changes);if(!noHook)for(const fn of hooks.get('updateItem')??[])fn(entry,changes,options,game.user.id);
-  if(lostReply)throw Error('reply lost');return entry;
+  const event=differential?{}:structuredClone(changes),eventOptions=structuredClone(options);
+  if(differential)for(const [path,value]of Object.entries(changes)){const before=path.split('.').reduce((v,k)=>v?.[k],entry),delta=difference(before,value);if(delta!==undefined)apply(event,{[path]:delta})}
+  if(!noop)apply(entry,changes);changeEvent?.({entry,changes:event,options:eventOptions});
+  if(!noHook)for(const fn of hooks.get('updateItem')??[])fn(entry,event,eventOptions,game.user.id);
+  if(lostReply)throw Error('reply lost');return wrongReturn?{...entry}:entry;
  };
  entry.update=(changes,options={})=>{const fn=wrappers.get('CONFIG.PF2E.Item.documentClasses.spellcastingEntry.prototype.update');return fn?fn.call(entry,update,changes,options):update(changes,options)};
  let consumes=0,messages=0,castCalls=0;
@@ -69,4 +73,28 @@ test('a vetoed durable native claim never starts slot consumption',async()=>{
 test('an ambiguous claim update return never authorizes the next resource write',async()=>{
  const f=fixture(),update=f.actor.update;f.actor.update=async changes=>{const result=await update(changes);return changes[`flags.${ID}.nativeCasts`]?.some(r=>r.state==='claiming')?undefined:result};
  f.casts.addInvocationAdapter('force-barrage',f.adapter);f.enroll();await assert.rejects(f.cast());assert.equal(f.counters().consumes,0);assert.equal(f.entry.system.slots.slot1.value,3);
+});
+test('successive different-rank and same-rank payments accept native differential events with fresh nonces',async()=>{
+ const observed=[],f=fixture({differential:true,changeEvent:event=>observed.push(structuredClone(event.changes))});f.casts.addInvocationAdapter('force-barrage',f.adapter);f.enroll();
+ const outcomes=[];for(const rank of [3,2,2])outcomes.push(await f.cast(f.item,{rank,slotId:NaN}));
+ assert.equal(new Set(outcomes.map(o=>o.castNonce)).size,3);assert.equal(f.counters().consumes,3);assert.equal(f.counters().messages,3);
+ assert.deepEqual(outcomes.map(o=>[o.receipt.slotCommit.rank,o.receipt.slotCommit.before,o.receipt.slotCommit.after]),[[3,2,1],[2,3,2],[2,2,1]]);
+ assert.deepEqual(Object.keys(observed[1].flags[ID].nativeSlotCommit).sort(),['after','before','castNonce','rank']);
+ assert.deepEqual(Object.keys(observed[2].flags[ID].nativeSlotCommit).sort(),['after','before','castNonce']);
+ for(const o of outcomes){assert.equal(o.status,'completed');assert.equal(o.receipt.state,'used');assert.deepEqual(f.actor.flags[ID].nativeCasts.find(r=>r.id===o.castNonce).slotCommit,o.receipt.slotCommit)}
+});
+for(const mode of ['missing-nonce','stale-nonce','wrong-options','options-only','unrelated-update','unknown-field','deletion-field','wrong-delta-value','wrong-live-marker','wrong-slot','wrong-return','noop'])test(`slot witness rejects ${mode} without a completed card or retry`,async()=>{
+ const f=fixture({differential:true,wrongReturn:mode==='wrong-return',noop:mode==='noop',changeEvent:({entry,changes,options})=>{
+  const delta=changes.flags[ID].nativeSlotCommit;
+  if(mode==='missing-nonce')delete delta.castNonce;
+  if(mode==='stale-nonce')delta.castNonce='old-cast';
+  if(mode==='wrong-options')options[ID].nativeSlotCommit.castNonce='old-cast';
+  if(mode==='options-only')delete changes.flags[ID].nativeSlotCommit;
+  if(mode==='unrelated-update'){delete changes.flags;delete changes.system;changes.name='Unrelated update'}
+  if(mode==='unknown-field')delta.unverified=true;
+  if(mode==='deletion-field')delta['-=userId']=null;
+  if(mode==='wrong-delta-value')delta.cost=2;
+  if(mode==='wrong-live-marker')entry.flags[ID].nativeSlotCommit.castNonce='wrong-persisted';
+  if(mode==='wrong-slot')changes.system.slots.slot1.value=1;
+ }});f.casts.addInvocationAdapter('force-barrage',f.adapter);f.enroll();await assert.rejects(f.cast());assert.equal(f.counters().consumes,1);assert.equal(f.counters().messages,0);assert.equal(f.actor.flags[ID].nativeCasts[0].state,'uncertain');
 });
