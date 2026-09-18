@@ -2,6 +2,7 @@ import {MODULE_ID as ID} from './rules.mjs';
 import {getSourceId,isActiveGM} from './native-context.mjs';
 import {isActualUseMessage} from './usage-events.mjs';
 import {getNativeCastEvents} from './amp-cast-events.mjs';
+import {getNativeActionEvents} from './native-action-events.mjs';
 
 export const PRAYER_SOURCES=Object.freeze({
  prayer:'Compendium.pf2e.feats-srd.Item.WYaKRREZUSH0jel5',
@@ -21,7 +22,7 @@ const match=(a,b)=>!!a&&Object.entries(b).every(([k,v])=>a[k]===v);
 const author=m=>m.author?.id??m.user?.id??m.user;
 
 /** A one-turn restricted point, paid through PF2e's original focus update. */
-export function createDesperatePrayerProvider({game,fromUuid=globalThis.fromUuid,choose,useOriginal,onError=()=>{},randomId=()=>globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.randomUUID(),castEvents=getNativeCastEvents({game,fromUuid})}={}){
+export function createDesperatePrayerProvider({game,fromUuid=globalThis.fromUuid,choose,useOriginal,onError=()=>{},randomId=()=>globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.randomUUID(),castEvents=getNativeCastEvents({game,fromUuid}),actionEvents=getNativeActionEvents({game})}={}){
  const payments=new Map(),pendingUses=new Map();let socket,installed=false;
  const managed=a=>a?.type==='character'&&!!source(a,S.prayer);
  const lock=(a,fn)=>castEvents.withActorResourceLock(a,fn);
@@ -178,7 +179,7 @@ export function createDesperatePrayerProvider({game,fromUuid=globalThis.fromUuid
   }finally{clearTimeout(timer);pendingUses.delete(window.nonce);await closeWindow(a,window.nonce);}
  }
  function register({Hooks,libWrapper,socket:api}={}){
-  if(installed)return()=>{};installed=true;socket=api;const hooks=[],paths=[],listeners=[],restores=[],elements=new WeakSet();
+  if(installed)return()=>{};installed=true;socket=api;const hooks=[],paths=[],listeners=[],elements=new WeakSet();
   const on=(k,fn)=>hooks.push([k,Hooks.on(k,fn)]),wrap=(p,fn)=>{libWrapper?.register(ID,p,fn,'MIXED');paths.push(p)};
   on('preUpdateItem',(item,changes,options,userId)=>{
    if(!resolveAction(item)||item.system.frequency?.value!==1||(changes['system.frequency.value']??changes.system?.frequency?.value)!==0)return;
@@ -199,29 +200,10 @@ export function createDesperatePrayerProvider({game,fromUuid=globalThis.fromUuid
   wrap('CONFIG.Combatant.documentClass.prototype.onStartTurn',async function(native,...args){const result=await native(...args);await onStartTurn(this);return result});
   wrap('CONFIG.Combatant.documentClass.prototype.onEndTurn',async function(native,...args){const result=await native(...args);await onEndTurn(this,args[0]?.round??this.encounter?.round);return result});
   wrap('CONFIG.Token.documentClass.prototype._preUpdateMovement',async function(native,...args){await beforeAction(this.actor);return native(...args)});
-  // Native basic actions are not owned Item.toMessage calls (e.g. Raise a Shield).
-  // Brand their actual variants, including future variants made by the original
-  // factory, rather than guessing an action from a generic chat-card title.
-  const variants=new WeakSet(),prototypes=new Set();
-  for(const action of values(game.pf2e.actions)){
-   if(typeof action.toActionVariant!=='function')continue;
-   const original=action.toActionVariant,variant=original.call(action);if(!variant?.use)continue;
-   prototypes.add(Object.getPrototypeOf(variant));variants.add(variant);for(const v of values(action.variants))if(v&&typeof v==='object')variants.add(v);
-   const factory=function(...args){const v=original.apply(this,args);if(v&&typeof v==='object')variants.add(v);return v};action.toActionVariant=factory;
-   restores.push(()=>{if(action.toActionVariant===factory)action.toActionVariant=original;});
-  }
-  for(const prototype of prototypes){
-   const descriptor=Object.getOwnPropertyDescriptor(prototype,'use'),native=prototype.use;
-   const wrapper=async function(params={}){
-    if(installed&&variants.has(this)&&params.message?.create!==false){
-     const actors=params.actors?(Array.isArray(params.actors)?params.actors:[params.actors]):values(game.user.getActiveTokens?.()).map(t=>(t.document??t).actor);
-     if(!actors.length&&game.user.character)actors.push(game.user.character);
-     for(const a of new Set(actors))await beforeAction(a);
-    }
-    return native.call(this,params);
-   };
-   Object.defineProperty(prototype,'use',{configurable:true,writable:true,value:wrapper});restores.push(()=>{if(prototype.use===wrapper){if(descriptor)Object.defineProperty(prototype,'use',descriptor);else delete prototype.use;}});
-  }
+  // Share the actual native action brand and complete variant call with other
+  // observers; cached metapower variants retain their original wrapper chain.
+  const removeActionMiddleware=actionEvents.addMiddleware(async(scope,next)=>{for(const actor of scope.actors)await beforeAction(actor);return next()});
+  actionEvents.register();
   on('preUpdateToken',(token,changes)=>{if(['x','y','elevation'].some(k=>Object.hasOwn(changes,k))&&data(token.actor).window?.state==='open'){onError(Error('请先完成起回合选择，再直接调整Token位置。'));return false;}});
   const capture=(app,html)=>{const element=html?.[0]??html,a=app.actor??app.document;if(!a?.items||!element?.addEventListener||elements.has(element))return;elements.add(element);
    const fn=event=>{const button=event.target?.closest?.('[data-action="use-action"],button.use-action'),item=a.items.get(button?.closest?.('[data-item-id]')?.dataset.itemId);if(!item)return;
@@ -232,7 +214,7 @@ export function createDesperatePrayerProvider({game,fromUuid=globalThis.fromUuid
   socket?.register('desperate-prayer:close',async function(payload){try{const a=await fromUuid(payload.actorUuid);checkActor(a,game.users.get(this.socketdata.userId));await closeWindow(a,payload.nonce);return {ok:true}}catch(error){return {ok:false,error:error.message}}});
   on('updateCombat',c=>{if(isActiveGM(game))for(const a of values(game.actors)){const d=data(a);if(d.window?.state==='open'&&d.window.combatId===c.id&&!current(a,d.window))closeWindow(a,d.window.nonce).catch(onError);if(d.credit?.state==='available'&&d.credit.combatId===c.id&&!current(a,d.credit))lock(a,()=>expire(a)).catch(onError);}});
   on('deleteCombat',c=>{if(isActiveGM(game))for(const a of values(game.actors))if(data(a).credit?.combatId===c.id)lock(a,()=>expire(a)).catch(onError);});
-  return()=>{for(const[k,id]of hooks)Hooks.off(k,id);for(const p of paths)libWrapper?.unregister(ID,p);for(const[e,f]of listeners)e.removeEventListener('click',f,true);for(const restore of restores.reverse())restore();installed=false;};
+  return()=>{for(const[k,id]of hooks)Hooks.off(k,id);for(const p of paths)libWrapper?.unregister(ID,p);for(const[e,f]of listeners)e.removeEventListener('click',f,true);removeActionMiddleware();installed=false;};
  }
  return {resolveAction,requiresActualUse:item=>!!resolveAction(item),tracksFrequency:item=>!!resolveAction(item),beforeUse,beforeAction,interceptCast,interceptCheck,captureUsage,executeUsage,consumePolicy,isManagedActor:a=>managed(a)||data(a).credit?.remaining===1,onStartTurn,onEndTurn,register};
 }

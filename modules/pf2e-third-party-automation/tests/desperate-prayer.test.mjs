@@ -4,8 +4,10 @@ import {createDesperatePrayerProvider,PRAYER_SOURCES as S} from '../scripts/desp
 import {MODULE_ID as ID} from '../scripts/rules.mjs';
 import {SerialActions} from '../scripts/runtime.mjs';
 import {createNativeCastEvents} from '../scripts/amp-cast-events.mjs';
+import {getNativeActionEvents} from '../scripts/native-action-events.mjs';
+import {installActionEntrances} from '../scripts/metapower/entrances.mjs';
 
-function fixture({focus=0,decision='use'}={}){
+function fixture({focus=0,decision='use',actions,beforeRegister}={}){
  const gm={id:'gm',active:true,isGM:true},player={id:'player',active:true},users=new Map([[gm.id,gm],[player.id,player]]);users.activeGM=gm;
  const hooks=new Map(),wrappers=new Map(),rpc=new Map(),updates=[],errors=[],docs=new Map();
  const Hooks={on(k,fn){const rows=hooks.get(k)??[];rows.push(fn);hooks.set(k,rows);return fn},off(){}};
@@ -21,18 +23,19 @@ function fixture({focus=0,decision='use'}={}){
  const lay=spell('lay',S.lay),surge=spell('surge',S.surge),other=spell('other','Compendium.test.other');
  const combat={id:'combat',uuid:'Combat.combat',started:true,round:1,turn:0,turns:[]},token={uuid:'Scene.scene.Token.token',actor,parent:{id:'scene'}};
  const combatant={id:'combatant',uuid:'Combat.combat.Combatant.combatant',actor,token,encounter:combat,flags:{pf2e:{roundOfLastTurn:1}}};combat.combatant=combatant;combat.turns=[combatant];
- const game={user:gm,users,actors:new Map([[actor.id,actor]]),messages:new Map(),combats:new Map([[combat.id,combat]]),combat,modules:new Map(),pf2e:{}};for(const d of [actor,combat,combatant,token])docs.set(d.uuid,d);
+ const game={user:gm,users,actors:new Map([[actor.id,actor]]),messages:new Map(),combats:new Map([[combat.id,combat]]),combat,modules:new Map(),pf2e:{actions}};for(const d of [actor,combat,combatant,token])docs.set(d.uuid,d);
  const q=new SerialActions(),castEvents={withActorResourceLock:(a,fn)=>q.run(a.uuid,fn)};let provider,serial=0,payment,confirmImpl=async()=>decision;
  async function pay(){const win=actor.flags[ID].desperatePrayer.window,proof={id:`frequency${++serial}`,itemUuid:feat.uuid,userId:player.id,before:1,after:0};
   const options={[ID]:{frequencyReceipt:proof}};await feat.update({'system.frequency.value':0},options);
   const message={id:`message${serial}`,uuid:`ChatMessage.message${serial}`,author:player,speaker:{actor:actor.id},rolls:[],flags:{pf2e:{origin:{uuid:feat.uuid,actor:actor.uuid,type:'feat'}},[ID]:{usageInput:{actualUse:true,frequencyReceiptId:proof.id},...provider.captureUsage(feat)}}};game.messages.set(message.id,message);
   payment={actor,item:feat,message,user:player,action:'desperate-prayer:use',frequencyReceipt:proof};return provider.executeUsage(payment);
  }
- provider=createDesperatePrayerProvider({game,castEvents,fromUuid:async u=>docs.get(u),choose:c=>confirmImpl(c),useOriginal:pay,onError:e=>errors.push(e),randomId:()=>`nonce${++serial}`});provider.register({Hooks,libWrapper:{register:(_id,p,fn)=>wrappers.set(p,fn)},socket:{register:(k,fn)=>rpc.set(k,fn)}});
+ beforeRegister?.(game);
+ provider=createDesperatePrayerProvider({game,castEvents,fromUuid:async u=>docs.get(u),choose:c=>confirmImpl(c),useOriginal:pay,onError:e=>errors.push(e),randomId:()=>`nonce${++serial}`});const dispose=provider.register({Hooks,libWrapper:{register:(_id,p,fn)=>wrappers.set(p,fn),unregister:(_id,p)=>wrappers.delete(p)},socket:{register:(k,fn)=>rpc.set(k,fn)}});
  async function consume(which=lay,{cost=1,result=true,replyLost=false,deferred=false}={}){which.system.cast.focusPoints=cost;let commit;const context={actor,item:which,entry,user:player,payload:{id:`cast${++serial}`,focusPoints:cost},expectFocusCommit:spec=>{commit=spec}};
   const native=async()=>{if(!result)return false;const before=actor.system.resources.focus.value;if(before<cost)return false;const proof={castNonce:context.payload.id,itemUuid:which.uuid,entryUuid:entry.uuid,before,after:before-cost,cost};const extra=commit&&!deferred?commit.changes(proof):{};await actor.update({'system.resources.focus.value':before-cost,...extra});if(replyLost)throw Error('reply lost');return true};return provider.consumePolicy(context,native);
  }
- return {game,actor,feat,devotion,domain,lay,surge,other,entry,combat,combatant,provider,updates,errors,hooks,wrappers,rpc,pay,consume,emit,get payment(){return payment},confirm:fn=>confirmImpl=fn,start:()=>provider.onStartTurn(combatant),end:async()=>{combat.turn=1;combat.combatant=null;return provider.onEndTurn(combatant)}};
+ return {game,actor,feat,devotion,domain,lay,surge,other,entry,combat,combatant,provider,dispose,updates,errors,hooks,wrappers,rpc,pay,consume,emit,get payment(){return payment},confirm:fn=>confirmImpl=fn,start:()=>provider.onStartTurn(combatant),end:async()=>{combat.turn=1;combat.combatant=null;return provider.onEndTurn(combatant)}};
 }
 test('exact original source only; ordinary display and arbitrary own-turn Use cannot grant',()=>{const f=fixture();assert.equal(f.provider.resolveAction(f.feat),'desperate-prayer:use');assert.equal(f.provider.resolveAction({...f.feat,sourceId:'wrong'}),undefined);assert.throws(()=>f.provider.beforeUse(f.feat,f.game.users.get('player')),/起回合/);assert.equal(f.actor.system.resources.focus.value,0)});
 test('native start opportunity pays original frequency and atomically grants exactly one',async()=>{const f=fixture();await f.start();assert.equal(f.feat.system.frequency.value,0);assert.equal(f.actor.system.resources.focus.value,1);assert.equal(f.actor.flags[ID].desperatePrayer.credit.state,'available');const grant=f.updates.find(c=>c['system.resources.focus.value']===1);assert(grant[`flags.${ID}.desperatePrayer`]);await f.provider.executeUsage(f.payment);await f.start();assert.equal(f.actor.system.resources.focus.value,1)});
@@ -86,5 +89,22 @@ test('Foundry-expanded atomic Prayer receipt is not overwritten as an unexplaine
  const changes={system:{resources:{focus:{value:0}}},flags:{[ID]:{desperatePrayer:{credit:{...credit,state:'spent',remaining:0,totalObserved:0,payments:[{castNonce:'paid'}]}}}}};
  f.emit('preUpdateActor',f.actor,changes,{},'gm');
  assert.equal(changes[`flags.${ID}.desperatePrayer`],undefined);assert.equal(changes.flags[ID].desperatePrayer.credit.state,'spent');assert.equal(changes.flags[ID].desperatePrayer.credit.payments[0].castNonce,'paid');
+});
+
+test('an already cached metapower variant closes Prayer before the complete original native action',async t=>{
+ let f,removeMeta;const calls=[];
+ class Variant{async use(){calls.push('native');assert.equal(f.actor.flags[ID].desperatePrayer.window.state,'closed');return 'original'}}
+ const cached=new Variant(),action={slug:'sustain',variants:new Map([['cached',cached]]),toActionVariant:()=>new Variant()};
+ f=fixture({actions:new Map([['sustain',action]]),beforeRegister:game=>{removeMeta=installActionEntrances({game,eligible:()=>true,observe:async(_s,next)=>{calls.push('meta');return next()}})}});
+ t.after(()=>{f.dispose();removeMeta()});f.confirm(async()=>{assert.equal(await cached.use({actors:[f.actor]}),'original');return 'use'});
+ await f.start();assert.deepEqual(calls,['meta','native']);assert.equal(f.feat.system.frequency.value,1);assert.equal(f.actor.system.resources.focus.value,0);
+});
+
+test('Prayer and a second action observer share one scope; Prayer unsubscribe leaves that observer working',async t=>{
+ class Variant{async use(){return 'original'}}
+ const action={slug:'sustain',variants:[],toActionVariant:()=>new Variant(),use(params){return this.toActionVariant().use(params)}},f=fixture({actions:new Map([['sustain',action]])}),events=getNativeActionEvents({game:f.game}),seen=[];
+ const remove=events.addMiddleware((scope,next)=>{seen.push({scope,state:f.actor.flags[ID].desperatePrayer.window.state});return next()});events.register();t.after(()=>{remove();events.cleanup()});
+ f.confirm(async()=>{assert.equal(await action.use({actors:[f.actor]}),'original');return 'use'});await f.start();assert.equal(seen[0].state,'closed');assert.equal(seen[0].scope.action,action);assert.equal(f.feat.system.frequency.value,1);
+ f.dispose();f.actor.flags[ID].desperatePrayer.window.state='open';assert.equal(await action.use({actors:[f.actor]}),'original');assert.equal(seen.length,2);assert.equal(seen[1].state,'open');assert.equal(f.actor.flags[ID].desperatePrayer.window.state,'open');
 });
 
