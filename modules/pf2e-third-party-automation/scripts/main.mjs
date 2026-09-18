@@ -56,6 +56,9 @@ import {createBardFamiliarProvider} from './bard-familiar.mjs';
 import {createDesperatePrayerProvider} from './desperate-prayer.mjs';
 import {createHalflingLuckProvider} from './halfling-luck.mjs';
 import {createForceBarrageBridge} from './force-barrage.mjs';
+import {createRoaringEffects} from './roaring-effects.mjs';
+import {createRoaringApplause} from './roaring-applause.mjs';
+import {createRoaringSustain} from './roaring-sustain.mjs';
 import {createDefensiveAdvance} from './defensive-advance.mjs';
 import {buildDefensiveAdvancePatreonRepairs,defensiveAdvanceStartupCompatibility} from './defensive-advance-compat.mjs';
 import {createEldamonVoltageProvider} from './eldamon-voltage-executor.mjs';
@@ -160,7 +163,10 @@ Hooks.once('ready',async()=>{
  const prayer=game.world?.id==='ujx5r8oipw7ercdr'?createDesperatePrayerProvider({game,fromUuid,choose,onError:report,castEvents:nativeCasts}):null;
  const halflingLuck=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.version==='8.5.1'?createHalflingLuckProvider({game,fromUuid,choose:showNativeChoice,onError:report}):null;
  const forceBarrage=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.version==='8.5.1'?createForceBarrageBridge({game,fromUuid,nativeCasts,onError:report}):null;
+ const roaring=forceBarrage?createRoaringApplause({game,fromUuid,nativeCasts,effects:createRoaringEffects({game,fromUuid,onError:report}),onError:report,onManual:()=>ui.notifications.warn('本次轰然喝彩需要GM核对结果或时长，请查看原施法卡。')}):null;
+ const roaringSustain=roaring?createRoaringSustain({game,fromUuid,provider:roaring,onError:report}):null;
  if(forceBarrage)nativeCasts.addCastMiddleware(forceBarrage.interceptCast);
+ if(roaring)nativeCasts.addCastMiddleware(roaring.interceptCast);
  if(prayer){nativeCasts.addActorMatcher(prayer.isManagedActor);nativeCasts.addConsumePolicy(prayer.consumePolicy);nativeCasts.addCastMiddleware(prayer.interceptCast);}
  const prayerCheck=(native,...args)=>prayer?prayer.interceptCheck(native,...args):native(...args);
  let metapower,electricity;
@@ -181,6 +187,8 @@ Hooks.once('ready',async()=>{
  providers.push(metapower,createEldamonDataRepair({game}),createMedicActions({game,fromUuid,choose,onError:report}),familiar,defensiveAdvance,...prayer?[prayer]:[]);
  if(halflingLuck)providers.push(halflingLuck);
  if(forceBarrage)providers.push(forceBarrage);
+ // Prayer subscribes first so a genuine Sustain still closes its action window.
+ if(roaring)providers.push(roaring,roaringSustain);
  coordinator=createCycleCoordinator({game,
   chooseTrait:(actor,user,choices)=>socket.executeAsUser('cycle-trait',user.id,actor.uuid,choices),
   onEffect:(actor,claim,user)=>executeActorAction(actor,'cycle',{damageType:claim.damageType,triggerConfirmed:true},user,{cycleTiming:claim.timing}),
@@ -215,6 +223,7 @@ Hooks.once('ready',async()=>{
  elementalMedicine.register({Hooks,socket});
  elementalMedicine.registerDailies();
  for(const p of providers)p.register?.({Hooks,libWrapper,socket,onError:report});
+ if(roaring)await roaring.reconcile().catch(report);
  disarmContext.register();
  // Strike objects are prepared before ready. Rebuild them once so wrappers also
  // cover actors that needed no persistent data repair on this login.
