@@ -1,5 +1,6 @@
 import {isCurrentDisruptToken} from './disrupt-prey-rules.mjs';
 import {MODULE_ID} from './rules.mjs';
+import {hasNativeDamageStrike} from './native-damage-strike.mjs';
 export const GLIMPSE_SOURCES=Object.freeze({glimpse:'Compendium.pf2e.actionspf2e.Item.tuZnRWHixLArvaIf',aura:'Compendium.pf2e.classfeatures.Item.0x76o5OxgEmvqIDp',resistance:'Compendium.pf2e.feat-effects.Item.DawVHfoPKbPJsz4k',weight:'Compendium.pf2e.feats-srd.Item.2c9awqDem5OLK47S'});
 export const glimpseSourceId=item=>item?.sourceId??item?._stats?.compendiumSource??item?.flags?.core?.sourceId;
 export const glimpseClaims=combatant=>combatant?.flags?.[MODULE_ID]?.glimpseClaims??[];
@@ -72,7 +73,7 @@ async function inspect({game,fromUuid,actor,token,message,rollIndex}){
  // inventory. Accept only that exact actor-owned UUID, never a display name.
  if(!item){const candidates=values(attacker.actor.system?.actions).flatMap(strike=>[strike,...values(strike.altUsages)]).map(strike=>strike?.item).filter(i=>i?.uuid===o.uuid&&i.actor===attacker.actor);const unique=[...new Set(candidates)];if(unique.length===1)item=unique[0];}
  if(item?.actor?.uuid!==attacker.actor.uuid||item.uuid!==o.uuid||item.type!==o.type)return no('attack-item-mismatch');
- if(o.type!=='spell'&&(pf.strike?.damaging!==true||pf.strike.actor!==attacker.actor.uuid))return no('native-strike-unavailable');
+ if(o.type!=='spell'&&!hasNativeDamageStrike(attacker.actor,item,pf))return no('native-strike-unavailable');
  const digest=await hash(before);
  if(game.messages.get(message.id)!==message||before!==evidence(message,rollIndex))return no('source-evidence-changed');
  if(!authorized())return no('attacker-author-unauthorized');

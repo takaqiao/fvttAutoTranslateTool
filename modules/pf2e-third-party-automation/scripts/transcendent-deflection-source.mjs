@@ -1,4 +1,5 @@
 import {isCurrentDisruptToken} from './disrupt-prey-rules.mjs';
+import {hasNativeDamageStrike} from './native-damage-strike.mjs';
 const no=unsupportedReason=>({verified:false,unsupportedReason}),values=c=>Array.from(c?.values?.()??c??[]);
 const serial=value=>JSON.stringify(value,(_k,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.fromEntries(Object.entries(v).sort(([a],[b])=>a.localeCompare(b))):v);
 const hash=async value=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(value))),n=>n.toString(16).padStart(2,'0')).join('');
@@ -34,7 +35,7 @@ async function inspect({game,fromUuid,actor,token,message,rollIndex}){
  // inventory. Accept only that exact actor-owned UUID, never a display name.
  if(!item){const candidates=values(attacker.actor.system?.actions).flatMap(strike=>[strike,...values(strike.altUsages)]).map(strike=>strike?.item).filter(i=>i?.uuid===o.uuid&&i.actor===attacker.actor);const unique=[...new Set(candidates)];if(unique.length===1)item=unique[0];}
  if(item?.actor?.uuid!==attacker.actor.uuid||item.uuid!==o.uuid||item.type!==o.type)return no('attack-item-mismatch');
- if(o.type!=='spell'&&(pf.strike?.damaging!==true||pf.strike.actor!==attacker.actor.uuid))return no('native-strike-unavailable');
+ if(o.type!=='spell'&&!hasNativeDamageStrike(attacker.actor,item,pf))return no('native-strike-unavailable');
  const digest=await hash(before);
  if(game.messages.get(message.id)!==message||before!==evidence(message,rollIndex))return no('source-evidence-changed');
  if(!authorized())return no('attacker-author-unauthorized');
