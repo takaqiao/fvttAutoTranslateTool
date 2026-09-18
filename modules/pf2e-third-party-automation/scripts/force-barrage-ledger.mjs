@@ -11,9 +11,10 @@ const author=message=>message?.author?.id??message?.user?.id??message?.user;
 const stateOf=actor=>actor?.flags?.[ID]?.forceBarrage??{currentByItem:{},operations:{}};
 const nativeReceipts=actor=>actor.flags?.[ID]?.nativeCasts??[];
 
-/** The caller supplies the original evaluated native DamageRoll JSON. DSN adds
- * only these two confirmed presentation fields. In particular, damage-instance
- * type/flavor and Roll.options.type remain part of the mechanical witness. */
+/** Compare the original evaluated DamageRoll without confirmed DSN presentation
+ * fields: term options.type, result indexThrow, and Die-only role metadata.
+ * Damage-instance type/flavor and Roll.options.type remain mechanical evidence;
+ * the original rollJSON receipt is retained unchanged. */
 export function forceBarrageRollWitness(rollJSON){
  requireTrue(rollJSON?.class==='DamageRoll'&&rollJSON.evaluated===true&&typeof rollJSON.formula==='string'&&rollJSON.formula.length>0&&Number.isFinite(rollJSON.total)&&rollJSON.total>=0&&Array.isArray(rollJSON.terms)&&rollJSON.terms.length>0);
  requireTrue(JSON.stringify(rollJSON).length<=100000);
@@ -22,7 +23,7 @@ export function forceBarrageRollWitness(rollJSON){
   if(!value||typeof value!=='object')return value;
   const term=typeof value.class==='string'&&!value.class.endsWith('Roll')&&value.class!=='DamageInstance';
   return Object.fromEntries(Object.entries(value).filter(([k])=>!(result&&k==='indexThrow')).map(([k,v])=>{
-   if(k==='options'&&term&&v&&typeof v==='object')return[k,clean(Object.fromEntries(Object.entries(v).filter(([name])=>name!=='type')))];
+   if(k==='options'&&term&&v&&typeof v==='object')return[k,clean(Object.fromEntries(Object.entries(v).filter(([name])=>name!=='type'&&!(value.class==='Die'&&['dsnRole','dsnRoleManaged'].includes(name)))))];
    return[k,clean(v,k==='results')];
   }));
  };
