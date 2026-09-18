@@ -25,6 +25,14 @@ test('Toolbelt merged damage proceeds unchanged once with a manual Glimpse notic
  assert.equal(f.payments.length,0);assert.equal(f.choices.length,0);assert.equal(f.followups.length,0);assert.equal(f.unsupported.length,1);
  assert.equal(f.combat.turns[1].flags['pf2e-reaction'].state,true);assert.deepEqual(f.errors,[]);
 });
+test('native hazard Strike damage reaches application once without spending a champion reaction',async()=>{
+ const f=setup();f.enemy.type='hazard';f.enemy.alliance=null;f.item.system={action:'strike'};
+ f.enemy.system.actions=[{type:'strike',item:f.item,ready:true}];f.message.flags.pf2e.strike=null;
+ f.champion.isEnemyOf=a=>a.alliance!==null;f.roll.total=25;f.roll.instances[0].total=25;
+ assert.equal(await f.apply(),'native result');assert.equal(f.calls.length,1);assert.equal(f.calls[0],f.params);
+ assert.equal(f.payments.length,0);assert.equal(f.choices.length,0);assert.equal(f.followups.length,0);
+ assert.equal(f.combat.turns[1].flags['pf2e-reaction'].state,true);assert.deepEqual(f.errors,[]);
+});
 for(const status of ['restricted','manual'])test(`${status} Glimpse is not offered, including a different viewed encounter`,async()=>{
  const f=setup(undefined,{reactionRestriction:actor=>{assert.equal(actor,f.champion);return {status}}});f.game.combat={id:'viewed-other',started:true,turns:[]};
  await f.apply();assert.equal(f.choices.length,0);assert.equal(f.payments.length,0);assert.equal(f.calls[0].damage,f.roll);
