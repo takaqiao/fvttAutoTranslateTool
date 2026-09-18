@@ -14,7 +14,7 @@ export function spiritualScarExpiryFor(token,game){
 /** Player Core p426: round duration decreases at the creator's turn start.
  * Native duration compares world time, numeric initiative and viewed combat;
  * bind this source to its actual creator's persisted PF2e start-turn receipt. */
-export function createSpiritualScarExpiry({game,onError=console.error}={}){
+export function createSpiritualScarExpiry({game,onError=error=>{console.error(M,error);globalThis.ui?.notifications?.warn?.(error.message)}}={}){
  const queue=new SerialActions();let installation;
  const present=e=>e.actor?.items?.get(e.id)===e;
  function exact(e,r){

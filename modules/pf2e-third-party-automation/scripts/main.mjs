@@ -29,6 +29,8 @@ import {createDeflectionRepair} from './transcendent-deflection-repair.mjs';
 import {createReactionBudget} from './reaction-budget.mjs';
 import {createGlimpseCompat,glimpseWorld} from './glimpse-compat.mjs';
 import {createGlimpseProvider} from './glimpse-of-redemption.mjs';
+import {createSpiritualScarProvider} from './spiritual-scar.mjs';
+import {createSpiritualScarFollowup} from './spiritual-scar-followup.mjs';
 import {glimpseReactionSetting,canSuppressGlimpseReminder,GLIMPSE_REACTION_REASON} from './glimpse-reaction-setting.mjs';
 import {registerGlimpseConfigurationEvents} from './glimpse-configuration-events.mjs';
 import {createGlimpseReactionCache} from './glimpse-reaction-cache.mjs';
@@ -147,6 +149,7 @@ Hooks.once('ready',async()=>{
  let nativeBridgeVerification=Object.freeze({ready:false,reason:'system-source-unavailable'});
  try{const response=await fetch('systems/pf2e/pf2e.mjs',{cache:'no-store',signal:AbortSignal.timeout(10000)});if(response.ok)nativeBridgeVerification=await verifyNativeIWRBridge({game,source:new Uint8Array(await response.arrayBuffer())});}catch{/* Report via the feature diagnostic; other providers still initialize. */}
  const shieldAdapter=createShieldDamageAdapter({game,nativeBridgeVerification,onError:report,createMessageMiddleware:salubriousMessagePrivacy.createMessageMiddleware});
+ const scar=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.version==='8.5.1'?createSpiritualScarProvider({game,fromUuid,nativeAdapter:shieldAdapter,reactionRestriction,getRollContext:roll=>cycle?.getRollContext(roll),followup:createSpiritualScarFollowup({game,fromUuid,Hooks,onError:report}),onError:report}):null;
  const deflection=createTranscendentDeflection({game,fromUuid,choose,reactionRestriction,getRollContext:roll=>cycle?.getRollContext(roll),nativeBridgeAvailable:shieldAdapter.nativeBridgeAvailable,onError:report});
  shieldAdapter.addNativeInterceptor(deflection.interceptNative,{matches:deflection.hasNativePlan});
  const deflectionRepair=createDeflectionRepair({game,fromUuid,onError:report});
@@ -185,7 +188,7 @@ Hooks.once('ready',async()=>{
   const reconcile=createConfigurationMaintenance({game,settings:[{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:glimpseWorld,transform:(value,g)=>glimpseReactionSetting(value,g,cache.ready()&&canSuppressGlimpseReminder(actors(),glimpse)),reason:GLIMPSE_REACTION_REASON}]});
   await registerGlimpseConfigurationEvents({game,Hooks,reconcile,onError:report}).reconcileNow();
  }
- providers.unshift(glimpse,voltage,electricity);
+ providers.unshift(glimpse,...scar?[scar]:[],voltage,electricity);
  providers.push(metapower,createEldamonDataRepair({game}),createMedicActions({game,fromUuid,choose,onError:report}),familiar,defensiveAdvance,...prayer?[prayer]:[]);
  if(halflingLuck)providers.push(halflingLuck);
  if(forceBarrage)providers.push(forceBarrage);
@@ -207,7 +210,7 @@ Hooks.once('ready',async()=>{
   return salubriousDamage.applyDamage(this,params,(treatmentApproved,assertSalubrious)=>disruptDamage.applyDamage(this,treatmentApproved,(approved,assertNative)=>{
    const source=cycle.getRollContext(approved.damage);
    const actual=source?{...approved,rollOptions:[...new Set([...(approved.rollOptions??[]),`${MODULE_ID}:source:${source.messageId}:${source.rollIndex}`])]}:approved;
-   return runDamagePipeline({actor:this,params:actual,providers,apply:p=>reactionBudget.applyDamage(this,p,next=>shieldAdapter.applyDamage(this,next,final=>shieldEvents.wrapNativeDamage(this,final,native=>cycle.applyDamage(this,finalParams=>shieldAdapter.withNativeFrame(this,finalParams,checkedParams=>{assertNative();assertSalubrious(this,checkedParams);return glimpse.wrapNativeDamage(this,checkedParams,p=>wrapped(p))}),native)),destructiveBlock.planFor(next))),onError:report});
+   return runDamagePipeline({actor:this,params:actual,providers,apply:p=>reactionBudget.applyDamage(this,p,next=>shieldAdapter.applyDamage(this,next,final=>shieldEvents.wrapNativeDamage(this,final,native=>cycle.applyDamage(this,finalParams=>shieldAdapter.withNativeFrame(this,finalParams,checkedParams=>{assertNative();assertSalubrious(this,checkedParams);return glimpse.wrapNativeDamage(this,checkedParams,p=>scar?scar.wrapNativeDamage(this,p,next=>wrapped(next)):wrapped(p))}),native)),destructiveBlock.planFor(next))),onError:report});
   }));
  },'WRAPPER');
  const rollIndex=CONFIG.Dice.rolls.findIndex(cls=>cls.name==='DamageRoll');
@@ -230,7 +233,7 @@ Hooks.once('ready',async()=>{
  // Strike objects are prepared before ready. Rebuild them once so wrappers also
  // cover actors that needed no persistent data repair on this login.
  for(const actor of game.actors)if(actor.type==='character')actor.reset();
- registerUsageEvents({game,Hooks,resolveAction,requiresActualUse:(item,action)=>providers.some(p=>p.requiresActualUse?.(item,action)),observeItemUse:async(item,native)=>{if(prayer?.resolveAction(item))prayer.beforeUse(item);else await prayer?.beforeAction(item.actor);familiar.beforeUse(item);await halflingLuck?.beforeUse(item);return ["feat","action"].includes(item.type)?metapower.observe({actor:item.actor,item},native):native()},captureUsage:(item,context)=>Object.assign({},nativeCasts.captureUsage(item,context),...providers.map(p=>p.captureUsage?.(item,context))),onMessageOutcome:(item,options,outcome)=>nativeCasts.captureMessageOutcome(item,options,outcome),tracksFrequency:item=>defaultUsageAction(item)==='breath'||item.sourceId===PARTY_SOURCES.clue||resolveAction(item)==='knowledge:devise'||providers.some(p=>p.tracksFrequency?.(item)),
+ registerUsageEvents({game,Hooks,resolveAction,requiresActualUse:(item,action)=>providers.some(p=>p.requiresActualUse?.(item,action)),observeItemUse:async(item,native)=>{if(prayer?.resolveAction(item))prayer.beforeUse(item);else await prayer?.beforeAction(item.actor);familiar.beforeUse(item);await halflingLuck?.beforeUse(item);scar?.beforeUse(item);return ["feat","action"].includes(item.type)?metapower.observe({actor:item.actor,item},native):native()},captureUsage:(item,context)=>Object.assign({},nativeCasts.captureUsage(item,context),...providers.map(p=>p.captureUsage?.(item,context))),onMessageOutcome:(item,options,outcome)=>nativeCasts.captureMessageOutcome(item,options,outcome),tracksFrequency:item=>defaultUsageAction(item)==='breath'||item.sourceId===PARTY_SOURCES.clue||resolveAction(item)==='knowledge:devise'||providers.some(p=>p.tracksFrequency?.(item)),
   executeUsage:ctx=>usageQueue.run(ctx.actor.uuid,async()=>{if(ctx.action!=='rune-transfer:select')await runeTransfer.ensureReady(ctx.actor,ctx.user);const provider=providers.find(p=>p.resolveAction?.(ctx.item)===ctx.action);return provider?provider.executeUsage(ctx):legacyUsage(ctx)}),onError:report});
  const legacyMaintenance=createMaintenance({game,repair:actor=>executeActorAction(actor,'repair',{},game.user)}),maintainQueue=new SerialActions();
  maintenance=async actor=>{
