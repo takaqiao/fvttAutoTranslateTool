@@ -15,12 +15,94 @@ function verdict(s,nonce='use-one',terminal='completed',worldTime=106){return ru
 const kinds=result=>result.commands.map(c=>c.type);
 function frozen(value){if(value&&typeof value==='object'){Object.freeze(value);for(const child of Object.values(value))frozen(child)}return value}
 
+function targetStart(round=4){return {combatId:'combat',combatantId:'after',round,actorUuid:'Actor.target',tokenUuid:'Scene.scene.Token.target',lastTurnStart:round}}
+function clapEvent(round=4,worldTime=100){return event('target-start',{targetTurn:targetStart(round)},worldTime,turn(round,2,round))}
+
 test('own-turn cast survives this end and next start, then ends once at actual next caster end',()=>{
   let s=active();assert.equal(s.timing.deadline.endRound,5);
   s=run(s,event('turn-end',{},100,turn(4,2,4))).source;assert.equal(s.status,'active');
   s=run(s,event('reconcile',{},106,turn(5,1,4))).source;assert.equal(s.status,'active');
   const end=run(s,event('turn-end',{},106,turn(5,2,5)));assert.equal(end.source.status,'ended');assert.deepEqual(kinds(end),['source-end']);
   assert.deepEqual(run(end.source,event('turn-end',{},106,turn(5,2,5))).commands,[]);
+});
+
+for(const outcome of ['failure','criticalFailure'])test(`a real target start records one source-local clap prompt for ${outcome}`,()=>{
+  const s=frozen(active(outcome)),r=run(s,clapEvent());
+  assert.deepEqual(kinds(r),['clap-prompt']);assert.equal(r.decision,'applied');
+  assert.deepEqual(r.source.clapReceipts['combat/after/4'],targetStart());
+  assert.deepEqual(r.commands[0],{type:'clap-prompt',sourceNonce:s.sourceNonce,receiptKey:'combat/after/4',targetTurn:targetStart()});
+  assert.equal(r.source.revision,s.revision+1);assert.deepEqual(s.clapReceipts,{});
+  assert.equal(r.source.timing.deadline.endRound,5);assert.deepEqual(r.source.timing.finiteEnvelope,envelope());
+});
+
+test('duplicate target-start hooks and JSON reload do not repeat the clap prompt',()=>{
+  const once=run(active(),clapEvent()).source;
+  for(const saved of [once,JSON.parse(JSON.stringify(once))]){
+    const r=run(saved,clapEvent());assert.equal(r.decision,'duplicate');assert.deepEqual(r.commands,[]);assert.deepEqual(r.source,saved);
+  }
+});
+
+test('a later sustained round gets its own clap receipt while stale target events cannot consume it',()=>{
+  let s=run(active(),clapEvent()).source;s=verdict(use(s)).source;
+  const stale=run(s,event('target-start',{targetTurn:targetStart(4)},106,turn(5,2,5)));
+  assert.equal(stale.decision,'rejected');assert.equal(kinds(stale).includes('clap-prompt'),false);
+  const next=run(stale.source,clapEvent(5,106));assert.deepEqual(kinds(next),['clap-prompt']);
+  assert.equal(Object.keys(next.source.clapReceipts).length,2);
+});
+
+for(const [label,prepare]of [
+  ['successful save',()=>active('success')],
+  ['awaiting save',()=>createRoaringSource(input())],
+  ['manual save review',()=>run(active(),event('save-unverified',{receiptId:'manual',reason:'unverified'})).source],
+  ['finite fallback',()=>run(active(),event('reconcile',{},102,null)).source],
+  ['ended source',()=>run(active(),event('clock',{},700)).source],
+])test(`target-start cannot prompt for ${label}`,()=>{
+  const r=run(prepare(),clapEvent());assert.equal(kinds(r).includes('clap-prompt'),false);assert.deepEqual(r.source.clapReceipts,{});
+});
+
+for(const [label,mutate]of [
+  ['foreign actor',e=>{e.targetTurn.actorUuid='Actor.other'}],
+  ['foreign token',e=>{e.targetTurn.tokenUuid='Scene.scene.Token.other'}],
+  ['foreign encounter',e=>{e.targetTurn.combatId='other'}],
+  ['wrong combatant',e=>{e.targetTurn.combatantId='before'}],
+  ['stale native start flag',e=>{e.targetTurn.lastTurnStart=3}],
+  ['different round',e=>{e.targetTurn.round=5;e.targetTurn.lastTurnStart=5}],
+  ['target turn already passed',e=>{e.observation.turn=turn(5,0,4)}],
+])test(`target-start rejects ${label} without a receipt`,()=>{
+  const e=clapEvent();mutate(e);const r=run(active(),e);
+  assert.equal(r.decision,'rejected');assert.equal(kinds(r).includes('clap-prompt'),false);assert.deepEqual(r.source.clapReceipts,{});
+});
+
+test('target start after caster next end terminates before prompting, even with equal initiatives',()=>{
+  const r=run(active(),clapEvent(5,106));assert.equal(r.source.status,'ended');assert.deepEqual(kinds(r),['source-end']);
+  assert.deepEqual(r.source.clapReceipts,{});
+});
+
+test('legacy source missing clap map upgrades only for a validated target start',()=>{
+  const s=active();delete s.clapReceipts;const r=run(s,clapEvent());
+  assert.deepEqual(r.source.clapReceipts,{'combat/after/4':targetStart()});assert.deepEqual(kinds(r),['clap-prompt']);
+});
+
+test('viewed encounter metadata cannot redirect the authenticated actual target start',()=>{
+  const e=clapEvent();e.viewedCombatId='elsewhere';e.observation.turn.viewedCombatId='elsewhere';
+  const r=run(active(),e);assert.deepEqual(kinds(r),['clap-prompt']);assert.equal(r.commands[0].targetTurn.combatId,'combat');
+});
+
+test('unverified turn continuity falls back to the original finite interval and never rearms',()=>{
+  const r=run(active(),event('continuity-unverified',{},102));
+  assert.equal(r.source.timing.mode,'manual-finite');assert.equal(r.source.timing.reason,'turn-continuity-unverified');
+  assert.deepEqual(kinds(r),['restore-finite','manual-review']);assert.deepEqual(r.commands[0].finiteEnvelope,envelope());
+  assert.equal(r.source.hardStopAt,700);assert.equal(r.source.timing.finiteEnvelope.start.value,100);
+  assert.deepEqual(run(r.source,event('continuity-unverified',{},103)).commands,[]);
+});
+
+for(const [label,time,frame,reason]of [
+  ['true caster deadline',106,turn(5,2,5),'caster-next-turn-ended'],
+  ['600-second maximum',700,turn(),'maximum-duration'],
+  ['elapsed frozen finite interval',107,turn(),'finite-fallback-expired'],
+])test(`unverified continuity respects ${label} before any new fallback`,()=>{
+  const r=run(active(),event('continuity-unverified',{},time,frame));
+  assert.equal(r.source.status,'ended');assert.equal(r.source.termination.reason,reason);assert.deepEqual(kinds(r),['source-end']);
 });
 
 test('a pending native Sustain Use does not renew without a GM terminal fact',()=>{
