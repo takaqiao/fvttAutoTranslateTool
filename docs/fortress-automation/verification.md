@@ -50,4 +50,8 @@ Counter Performance, Primary Threat, Reflexive Cover, Goblin Scuttle, Fane Escap
 
 ## Release and installation
 
-At preparation, the last independently verified production installation was 0.9.7. Production has not been modified by this work. The user-selected default remains Setup ('options.world=null'). Final candidate startup, package/download hashes and any coordinated production installation have separate receipts; publication does not itself imply installation.
+The final candidate passed an owned QA restart: manifest and API reported 0.9.9, the existing reaction adapter was ready, and all **129 source, installed and fresh HTTP files matched**. Startup had zero page or module errors and two existing missing-image console errors. The native lock check became ready after approximately six seconds; no lock or database was removed.
+
+The ZIP was enumerated against the complete frozen runtime list and external manifest; all 129 entries matched. ZIP SHA-256: `29bafa1261077f0911a5539dc3305b5d0c8cfd94b749df854b124696f4240cee`. Manifest SHA-256: `8e9f069981ce83b2f1db33a16a177e9b9ca042e9be59664b3842aeda6ca3ecf8`. Downloaded release validation has a separate receipt.
+
+A fresh read-only production capture at 2026-09-18 10:06 UTC found **0.9.8, all 122 disk files identical to its published release**, with the fortress active and one user online. Production advanced outside this run; this work made no production changes. The user-selected default remains Setup (`options.world=null`). This 0.9.9 release has not been installed by this work. A fresh coordinated maintenance window is required before deployment; publication does not itself imply installation.
