@@ -42,6 +42,7 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
  function invocationProof(payload,sender){
   const scope=enrollments.get(payload?.id);
   if(!scope||sender!==game.users.activeGM?.id||sender!==scope.invocation.gmId||payload.userId!==scope.user.id||!sameInput(scope.input,payload)||payload.messageMode!==scope.input.messageMode||!equal(scope.invocation,payload.invocation)||payload.nativeCastScope?.castNonce!==scope.castNonce||payload.nativeCastScope?.tokenUuid!==scope.tokenContext.tokenUuid)return false;
+  if(Object.hasOwn(payload,'completedWorldTime')&&(scope.invocation.data.captureCompletionTime!==true||!Number.isFinite(scope.completedWorldTime)||payload.completedWorldTime!==scope.completedWorldTime))return false;
   try{liveEnrollment(scope);return true;}catch{return false;}
  }
  async function verifyInvocation(payload,user){
@@ -171,11 +172,15 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
   return queue.run(actor.uuid,async()=>{
    owner(actor,user);const prior=ledger(actor).find(r=>r.id===payload.id);
    if(!prior?.invocation||!prior.slotCommit||prior.userId!==user.id||!sameInput(prior,payload.input)||!equal(prior.invocation,payload.invocation)||!['paid','used'].includes(prior.state))throw Error('本次调用没有已证实的法术位支付，不能绑定消息。');
-   await verifyInvocation({...prior},user);owner(actor,user);
+   const timed=prior.invocation.data.captureCompletionTime===true;
+   const timeProof=timed?{completedWorldTime:payload.completedWorldTime}:{};
+   if(timed&&(!Number.isFinite(payload.completedWorldTime)||payload.completedWorldTime!==game.time?.worldTime||prior.state==='used'&&prior.completedWorldTime!==payload.completedWorldTime))throw Error('本次施法的完成时间未能确认。');
+   await verifyInvocation({...prior,...timeProof},user);owner(actor,user);
+   if(timed&&payload.completedWorldTime!==game.time?.worldTime)throw Error('确认施法完成时间期间游戏时钟已改变，请核对持续时长。');
    const message=await fromUuid(`ChatMessage.${payload.messageId}`),proof=message?.flags?.[MODULE_ID]?.nativeCast;
    invocationGM(prior.invocation);
    if(!message?.id||game.messages.get(message.id)!==message||author(message)!==user.id||message.rolls?.length||message.isRoll||message.blind!==false||!Array.isArray(message.whisper)||message.whisper.length||proof?.id!==prior.id||proof.actorUuid!==actor.uuid||proof.itemUuid!==prior.itemUuid||proof.userId!==user.id||message.flags?.pf2e?.origin?.uuid!==prior.itemUuid||message.flags.pf2e.origin.actor!==actor.uuid||!sameInput(message.flags?.[MODULE_ID]?.nativeCastInput??{},prior)||message.flags[MODULE_ID].nativeCastInput.messageMode!==prior.messageMode||prior.messageId&&prior.messageId!==message.id)throw Error('原生施法消息与本次调用的支付来源不一致。');
-   const bound={...prior,state:'used',messageId:message.id};
+   const bound={...prior,...timeProof,state:'used',messageId:message.id};
    await save(actor,ledger(actor).map(r=>r.id===prior.id?bound:r));invocationGM(prior.invocation);
    const persisted=ledger(actor).find(r=>r.id===prior.id);
    if(!equal(persisted,bound))throw Error('原生施法原卡绑定未持久保存。');return copy(persisted);
@@ -184,10 +189,16 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
  async function completeInvocation(scope,nativeResult){
   liveEnrollment(scope);
   if(!scope.receipt?.slotCommit||!scope.finalMessage||scope.error||scope.messageError)throw Error('本次施法没有完整的原生付款和原卡结果。');
-  const payload={id:scope.castNonce,input:copy(scope.input),invocation:copy(scope.invocation),messageId:scope.finalMessage.id};
+  const timeProof={};
+  if(scope.invocation.data.captureCompletionTime===true){
+   const value=game.time?.worldTime;
+   if(!Number.isFinite(value))throw Error('本次施法的原生完成时间不可用，请手工核对持续时长。');
+   scope.completedWorldTime=value;timeProof.completedWorldTime=value;
+  }
+  const payload={id:scope.castNonce,input:copy(scope.input),invocation:copy(scope.invocation),messageId:scope.finalMessage.id,...timeProof};
   const response=gm(game)?{ok:true,value:await bindInvocation(payload,scope.user)}:await socket?.executeAsUser('native-cast-invocation-bind',scope.invocation.gmId,payload);
   liveEnrollment(scope);if(!response?.ok)throw Error(response?.error??'本次施法原卡绑定未获主GM确认。');scope.receipt=response.value;
-  return {status:'completed',castNonce:scope.castNonce,input:copy(scope.input),receipt:copy(scope.receipt),message:scope.finalMessage,nativeResult};
+  return {status:'completed',castNonce:scope.castNonce,input:copy(scope.input),receipt:copy(scope.receipt),message:scope.finalMessage,nativeResult,...timeProof};
  }
  async function uncertainCast(scope,error){
   const failure=asError(error);scope.error=failure;
