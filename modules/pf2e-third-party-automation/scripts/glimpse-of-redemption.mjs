@@ -12,7 +12,7 @@ const values=c=>Array.from(c?.values?.()??c??[]),author=m=>m?.author?.id??m?.use
 const keyOf=s=>`${s.damageMessageId}:${s.rollIndex}:${s.tokenUuid}`;
 /** Awaitable, source-bound reaction. All resource mutation is elected-GM work;
  * only a private live source-client scope may enter the original native call. */
-export function createGlimpseProvider({game,reactionRestriction,fromUuid=globalThis.fromUuid,getRollContext,compat,choose,publishUse,reactionResources=createShieldReactionResources({game,reactionRestriction}),show=showNativeChoice,onError=console.error,onUnsupported=()=>globalThis.ui?.notifications?.warn?.('合并伤害按原生流程结算；本次救赎瞥视请手动处理，自动化未消耗反应。')}={}){
+export function createGlimpseProvider({game,reactionRestriction,fromUuid=globalThis.fromUuid,getRollContext,compat,choose,publishUse,reactionResources=createShieldReactionResources({game,reactionRestriction}),show=showNativeChoice,onError=console.error,onUnsupported=()=>globalThis.ui?.notifications?.warn?.('本次伤害按原生流程结算；救赎瞥视未自动触发，也未消耗反应。如适用，请手动处理。')}={}){
  const live=new Map(),plans=new WeakSet(),queue=new SerialActions(),pendingUses=new Map();let socket,installation;
  const ready=()=>glimpseWorld(game)&&compat?.ready()&&!game.modules?.get('pf2e-auto-action-tracker')?.active&&game.pf2e?.settings?.iwr!==false;
  const handlesActor=actor=>ready()&&actor?.type==='character'&&actor.level===5&&[S.glimpse,S.aura].every(source=>values(actor.items).some(i=>glimpseSourceId(i)===source))&&!values(actor.items).some(i=>glimpseSourceId(i)===S.weight);
@@ -163,12 +163,20 @@ export function createGlimpseProvider({game,reactionRestriction,fromUuid=globalT
  function potential(params){const token=params.token?.document??params.token;return values(token?.parent?.tokens).some(t=>t.actor?.uuid!==token.actor?.uuid&&handlesActor(t.actor)&&t.auras?.get('champions-aura')?.containsToken?.(token)===true)}
  async function beforeDamage(actor,params){
   if(!ready()||!potential(params)||params.final||params.skipIWR||typeof params.damage==='number'&&params.damage<=0||params.damage?.total<=0)return {params};
-  const binding=await resolveGlimpseSource({game,fromUuid,actor,params,source:getRollContext?.(params.damage)});
-  // A supported upstream damage operation can contain multiple attacks. Skip
-  // only our unbound automation before payment; never block its native damage
-  // or treat the combined roll as one authenticated reaction source.
-  if(!binding.verified&&binding.unsupportedReason==='combined-attacks-unsupported'){onUnsupported(binding);return {params};}
-  if(!binding.verified)throw markUnappliedDamageError(Error(`救赎瞥视无法证明原伤害来源：${binding.unsupportedReason}。请明确来源后结算。`));
+  const source=getRollContext?.(params.damage),binding=await resolveGlimpseSource({game,fromUuid,actor,params,source});
+  // Source proof authorizes this optional reaction, not ordinary damage.
+  // Unsupported inline/macro/combined rolls keep the untouched native path.
+  // A changed card must still not bypass an existing live or paid operation.
+  if(!binding.verified){
+   const token=params.token?.document??params.token;
+   const sourceKey=typeof source?.messageId==='string'&&Number.isInteger(source.rollIndex)&&token?.uuid
+    ?keyOf({damageMessageId:source.messageId,rollIndex:source.rollIndex,tokenUuid:token.uuid}):null;
+   if(sourceKey&&(allClaims().some(c=>c.sourceKey===sourceKey&&c.status!=='refunded')||[...live.values()].some(p=>keyOf(p.snapshot)===sourceKey)))
+    throw markUnappliedDamageError(Error('本次原伤害已有等待中、已处理或不确定的救赎瞥视记录，不能重复执行。'));
+   // A diagnostic failure must never become a second damage veto.
+   try{Promise.resolve(onUnsupported(binding)).catch(()=>{});}catch{}
+   return {params};
+  }
   const p={scopeId:random(),snapshot:structuredClone(binding.snapshot),actor,damage:params.damage,damageEvidence:JSON.stringify(params.damage.toJSON()),outcome:params.outcome,token:binding.token,item:binding.item,userId:game.user.id,leader:game.users.activeGM?.id,state:'waiting'};plans.add(p);live.set(p.scopeId,p);
   try{
    const result=await rpc('request',{scopeId:p.scopeId,snapshot:p.snapshot});

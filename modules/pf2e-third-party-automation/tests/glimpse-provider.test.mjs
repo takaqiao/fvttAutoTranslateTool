@@ -6,7 +6,7 @@ import {findGlimpseClaim,provenGlimpseReactionCard,resolveGlimpseSource} from '.
 import {MODULE_ID as M} from '../scripts/rules.mjs';
 import {runDamagePipeline} from '../scripts/native-context.mjs';
 function patch(doc,changes){for(const [path,value] of Object.entries(changes)){const keys=path.split('.');let at=doc;for(const k of keys.slice(0,-1))at=at[k]??={};at[keys.at(-1)]=structuredClone(value)}}
-function setup(decisions=['use','resist'],{nativePublisher=false,reactionRestriction}={}){
+function setup(decisions=['use','resist'],{nativePublisher=false,reactionRestriction,onUnsupported}={}){
  const f=fixture();f.game.modules=new Map();f.game.world={id:'ujx5r8oipw7ercdr'};f.game.system={id:'pf2e',version:'8.5.1'};f.ally.attributes={resistances:[]};f.ally.getContextualClone=()=>({attributes:{resistances:[{type:'all-damage',value:7,test:()=>true,getDoubledValue:()=>7}]}});
  const callbacks=new Map(),Hooks={on:(k,fn)=>{const a=callbacks.get(k)??[];a.push(fn);callbacks.set(k,a);return fn},off:()=>{}},emit=(k,...args)=>{for(const fn of callbacks.get(k)??[])fn(...args)};
  const payments=[],calls=[],followups=[],choices=[],unsupported=[];
@@ -14,7 +14,7 @@ function setup(decisions=['use','resist'],{nativePublisher=false,reactionRestric
  const compat={ready:()=>true,template:()=>({type:'effect',system:{rules:[{key:'Resistance',type:'all-damage',value:'@item.origin.level+2'}]}}),apply:async context=>{assert.equal(await context.authorize(),true);followups.push(context.nonce);return {effectId:'condition'}}};
  const resources={snapshot:async c=>({combatant:c}),available:s=>s.combatant.flags['pf2e-reaction'].state,reserve:()=>({changes:{'flags.pf2e-reaction.state':false},proof:{key:'state',before:true,after:false,consumed:true}}),release:async()=>({'flags.pf2e-reaction.state':true})};
  const publishUse=async({ability,token,claim})=>{const message={id:`use${claim.nonce}`,uuid:`ChatMessage.use${claim.nonce}`,author:f.user,speaker:{actor:ability.actor.id,scene:token.parent.id,token:token.id},rolls:[],flags:{pf2e:{origin:{uuid:ability.uuid,actor:ability.actor.uuid,type:'action'}}},async update(data){patch(this,data)}};f.game.messages.set(message.id,message);return message};
- const provider=createGlimpseProvider({game:f.game,reactionRestriction,fromUuid:f.fromUuid,getRollContext:roll=>roll===f.roll?f.source:null,compat,reactionResources:resources,onUnsupported:context=>unsupported.push(context),choose:async context=>{choices.push(context.actor.uuid);return typeof decisions==='function'?decisions(context):decisions.shift()},publishUse:nativePublisher?undefined:publishUse});provider.register({Hooks});
+ const provider=createGlimpseProvider({game:f.game,reactionRestriction,fromUuid:f.fromUuid,getRollContext:roll=>roll===f.roll?f.source:null,compat,reactionResources:resources,onUnsupported:onUnsupported??(context=>unsupported.push(context)),choose:async context=>{choices.push(context.actor.uuid);return typeof decisions==='function'?decisions(context):decisions.shift()},publishUse:nativePublisher?undefined:publishUse});provider.register({Hooks});
  async function apply({zero=false,fail=false,missing=false,foreign=false}={}){return runDamagePipeline({actor:f.ally,params:f.params,providers:[provider],apply:params=>provider.wrapNativeDamage(f.ally,params,async actual=>{
   calls.push(actual);if(!missing){const m={id:`receipt${calls.length}`,uuid:`ChatMessage.receipt${calls.length}`,author:f.user,speaker:{actor:f.ally.id,scene:f.scene.id,token:f.allyToken.id},flags:{pf2e:{origin:{actor:f.enemy.uuid,uuid:f.item.uuid,type:f.item.type},context:{type:'damage-taken',options:[...actual.rollOptions??[]]},appliedDamage:zero||actual.damage===0?null:{uuid:f.ally.uuid,isHealing:false,updates:[{path:'system.attributes.hp.value',value:1}],persistent:[]}}},updateSource(data){patch(this,data)}};if(foreign)m.flags.pf2e.origin.uuid='wrong';emit('preCreateChatMessage',m,{}, {},f.user.id);f.game.messages.set(m.id,m);emit('createChatMessage',m,{},f.user.id)}if(fail)throw Error('native reply lost');return 'native result';}),onError:e=>f.errors.push(e.message)})}
  f.errors=[];return {...f,provider,compat,resources,apply,payments,calls,followups,choices,unsupported};
@@ -55,7 +55,40 @@ test('decline keeps original native damage and spends nothing',async()=>{const f
 test('mindless enemy forces Resist without asking enemy; other immunities do not',async()=>{const f=setup(['use']);f.enemy.system.traits.value=['mindless'];await f.apply();assert.deepEqual(f.choices,[f.champion.uuid]);assert.equal(f.followups.length,1)});
 test('closed enemy choice stops before native with no payment',async()=>{const f=setup(['use',null]);await assert.rejects(f.apply(),/选择/);assert.equal(f.calls.length,0);assert.equal(f.payments.length,0)});
 for(const [name,options]of[['missing receipt',{missing:true}],['foreign origin',{foreign:true}],['native transport failed',{fail:true}]])test(`${name} stays uncertain and does not grant a condition`,async()=>{const f=setup();try{await f.apply(options)}catch{}assert.equal(f.calls.length,1);assert.equal(f.followups.length,0);assert.equal(f.combat.turns[1].flags['pf2e-reaction'].state,false);assert.ok(f.errors.length||options.fail);await assert.rejects(f.apply(),/已处理|重复/)});
-test('unknown source near eligible aura cannot proceed to native',async()=>{const f=setup();f.source.messageId='unknown';await assert.rejects(f.apply(),/来源/);assert.equal(f.calls.length,0)});
+test('unknown unbound source near an aura skips automation and leaves native damage intact',async()=>{const f=setup();f.source.messageId='unknown';assert.equal(await f.apply(),'native result');assert.equal(f.calls.length,1);assert.equal(f.calls[0],f.params);assert.equal(f.payments.length,0);assert.equal(f.choices.length,0);assert.equal(f.unsupported.length,1)});
+for(const format of ['inline','macro'])test(`Risky Surgery ${format} damage applies once without a reaction scope or payment`,async()=>{
+ const f=setup();f.message.speaker={actor:f.ally.id,scene:f.scene.id,token:f.allyToken.id};
+ f.message.flags.pf2e=format==='inline'?{context:{type:'damage-roll',sourceType:'save',actor:f.ally.id,token:null,target:null,domains:['damage','inline-damage']}}:{};
+ f.message.flags['pf2e-toolbelt']={targetHelper:{type:'damage',targets:[f.allyToken.uuid]}};
+ f.params.item=null;f.roll.total=8;f.roll.instances[0].total=8;
+ assert.equal(await f.apply(),'native result');assert.equal(f.calls.length,1);assert.equal(f.calls[0],f.params);
+ assert.equal(f.calls[0].damage,f.roll);assert.equal(f.payments.length,0);assert.equal(f.choices.length,0);assert.equal(f.followups.length,0);
+ assert.equal(f.unsupported[0].unsupportedReason,'not-native-attack-damage');assert.equal(f.combat.turns[1].flags['pf2e-reaction'].state,true);
+ assert.equal(f.combat.turns[1].flags[M]?.glimpseClaims,undefined);
+});
+for(const mode of ['throw','reject'])test(`an unsupported-source diagnostic that ${mode}s cannot stop native damage`,async()=>{
+ const f=setup(undefined,{onUnsupported:()=>{if(mode==='throw')throw Error('notification unavailable');return Promise.reject(Error('notification unavailable'));}});
+ f.message.flags.pf2e.origin=null;
+ assert.equal(await f.apply(),'native result');assert.equal(f.calls.length,1);assert.equal(f.payments.length,0);
+});
+for(const status of ['paid','native','followup','done','uncertain'])test(`an unsupported card cannot bypass an existing ${status} claim for the same source`,async()=>{
+ const f=setup();f.message.flags.pf2e.origin=null;
+ f.combat.turns[1].flags[M]={glimpseClaims:[{sourceKey:`${f.message.id}:0:${f.allyToken.uuid}`,status}]};
+ await assert.rejects(f.apply(),/已处理|重复|等待|不确定/);assert.equal(f.calls.length,0);assert.equal(f.payments.length,0);
+});
+test('a refunded or different-target claim does not block an unrelated unsupported application',async()=>{
+ const f=setup();f.message.flags.pf2e.origin=null;
+ f.combat.turns[1].flags[M]={glimpseClaims:[{sourceKey:`${f.message.id}:0:${f.allyToken.uuid}`,status:'refunded'},{sourceKey:`${f.message.id}:0:Scene.scene.other`,status:'done'}]};
+ await f.apply();assert.equal(f.calls.length,1);assert.equal(f.payments.length,0);
+});
+test('an altered source cannot bypass a pending live choice through unsupported fallback',async()=>{
+ let promptReady,close;const ready=new Promise(r=>promptReady=r);
+ const f=setup(()=>new Promise(resolve=>{close=resolve;promptReady();}));
+ const first=f.apply();await ready;
+ f.message.flags.pf2e.origin=null;
+ await assert.rejects(f.apply(),/已处理|重复|等待|不确定/);assert.equal(f.calls.length,0);
+ close('use');await assert.rejects(first,/来源|改变/);assert.equal(f.calls.length,0);assert.equal(f.payments.length,0);
+});
 test('aura or epoch changed during decision stops before native and payment',async()=>{const f=setup(context=>{if(context.actor===f.champion)return 'use';f.combat.turn=1;return 'resist'});await assert.rejects(f.apply(),/回合|改变/);assert.equal(f.calls.length,0);assert.equal(f.payments.length,0)});
 test('a spent Reaction Checker state cannot be spent again',async()=>{const f=setup();f.combat.turns[1].flags['pf2e-reaction'].state=false;await assert.rejects(f.apply(),/反应/);assert.equal(f.calls.length,0);assert.equal(f.payments.length,0)});
 test('failed native preparation refunds only this exact unentered claim and ledger entry',async()=>{const f=setup();f.ally.getContextualClone=()=>({attributes:{resistances:[]}});await assert.rejects(f.apply(),/抗力/);assert.equal(f.calls.length,0);assert.equal(f.combat.turns[1].flags['pf2e-reaction'].state,true);assert.equal(f.combat.turns[1].flags[M].reactionBudget.entries.length,0);assert.equal(f.combat.turns[1].flags[M].glimpseClaims[0].status,'refunded');assert.deepEqual(f.errors,[])});
