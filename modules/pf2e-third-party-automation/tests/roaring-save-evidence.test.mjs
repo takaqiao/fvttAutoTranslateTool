@@ -6,7 +6,7 @@ const M='pf2e-third-party-automation', SOURCE='Compendium.pf2e.spells-srd.Item.c
 class CheckRoll {constructor(){this._evaluated=true;this.total=17;this.options={type:'saving-throw',rollerId:'player',degreeOfSuccess:1};this.terms=[{class:'Die',total:7}];}toJSON(){return {class:'CheckRoll',total:this.total,options:{...this.options},terms:this.terms};}}
 class ChatMessage {constructor(data){Object.assign(this,data);}}
 globalThis.CONFIG={Dice:{rolls:[CheckRoll]},ChatMessage:{documentClass:ChatMessage}};
-function fixture({existingRow=false,throwVerified=false}={}){
+function fixture({existingRow=false,throwVerified=false,sparseHelper=false,helperOverrides={}}={}){
  const users=new Map([['gm',{id:'gm',active:true,isGM:true}],['player',{id:'player',active:true,isGM:false}],['stranger',{id:'stranger',active:true,isGM:false}]]);users.activeGM=users.get('gm');
  const targetActor={uuid:'Actor.target',id:'target',testUserPermission:u=>u.id!=='stranger'},caster={uuid:'Actor.caster',id:'caster'};
  const scene={id:'scene',tokens:new Map()},target={documentName:'Token',id:'targetToken',uuid:'Scene.scene.Token.targetToken',actor:targetActor,parent:scene};scene.tokens.set(target.id,target);
@@ -16,6 +16,9 @@ function fixture({existingRow=false,throwVerified=false}={}){
  const draft=new ChatMessage({isCheckRoll:true,blind:false,whisper:[],author:users.get('player'),speaker:{actor:'target',token:target.id,scene:scene.id},rolls:[roll],flags:{pf2e:{context,origin:{uuid:source.itemUuid,actor:caster.uuid},modifiers:[]}}});
  const row={die:7,dosAdjustments:{},modifiers:[],notes:[],private:false,roll:JSON.stringify(roll.toJSON()),significantModifiers:[],statistic:'will',success:'failure',unadjustedOutcome:'failure',value:17};
  if(existingRow)message.flags['pf2e-toolbelt'].targetHelper.saveVariants.null.saves[target.id]=structuredClone(row);
+ const targetHelper=message.flags['pf2e-toolbelt'].targetHelper;
+ if(sparseHelper){delete targetHelper.private;delete targetHelper.item;if(!existingRow)delete targetHelper.saveVariants.null.saves;}
+ Object.assign(targetHelper,helperOverrides);
  const verified=[],manual=[],errors=[],clients={},rpc=[];let serial=0;
  const docs=new Map([[message.uuid,message],[target.uuid,target]]);
  for(const id of ['gm','player']){
@@ -28,7 +31,7 @@ function fixture({existingRow=false,throwVerified=false}={}){
  }
  const payload={roll,message,rollMessage:draft,target,data:row};
  const fire=()=>clients.player.hooks.get('pf2e-toolbelt.rollSave')(payload);
- const persist=async(value=row)=>{message.flags['pf2e-toolbelt'].targetHelper.saveVariants.null.saves[target.id]=structuredClone(value);clients.gm.hooks.get('updateChatMessage')?.(message,{}, {},'gm');};
+ const persist=async(value=row)=>{const h=message.flags['pf2e-toolbelt'].targetHelper;h.saveVariants.null.saves??={};h.saveVariants.null.saves[target.id]=structuredClone(value);if(!Object.hasOwn(h,'private'))h.private=false;clients.gm.hooks.get('updateChatMessage')?.(message,{}, {},'gm');};
  const idle=async()=>{for(let i=0;i<4;i++)for(const c of Object.values(clients))await c.adapter.whenIdle();};
  return {clients,source,message,row,payload,target,roll,draft,verified,manual,errors,users,rpc,fire,persist,idle};
 }
@@ -36,6 +39,18 @@ for(const order of ['hook-first','row-first'])test(`authenticated first native W
  const f=fixture();if(order==='row-first')await f.persist();f.fire();await f.idle();if(order==='hook-first')await f.persist();await f.idle();
  assert.equal(f.verified.length,1);assert.equal(f.verified[0].adjustedOutcome,'failure');assert.equal(f.verified[0].proof.rollerUserId,'player');assert.match(f.verified[0].proof.rowFingerprint,/^[a-f0-9]{64}$/);assert.equal(f.errors.length,0);
  await f.persist();await f.idle();assert.equal(f.verified.length,1);assert.ok(f.rpc.some(r=>r.from==='gm'&&r.to==='player'&&r.n.endsWith(':proof')));
+});
+for(const order of ['hook-first','row-first'])test(`native sparse helper enrolls its empty row before schema defaults appear: ${order}`,async()=>{
+ const f=fixture({sparseHelper:true});assert.equal(Object.hasOwn(f.message.flags['pf2e-toolbelt'].targetHelper,'private'),false);
+ assert.equal(f.clients.gm.adapter.inspect(f.message.uuid)?.status,'awaiting');assert.equal(f.clients.player.adapter.inspect(f.message.uuid)?.status,'awaiting');
+ if(order==='row-first')await f.persist();f.fire();await f.idle();if(order==='hook-first')await f.persist();await f.idle();
+ assert.equal(f.verified.length,1);assert.equal(f.manual.length,0);assert.equal(f.errors.length,0);assert.equal(f.verified[0].proof.beforeRow,null);
+});
+for(const value of [true,null,0,'false',undefined])test(`an explicit invalid/private helper setting ${String(value)} cannot enroll`,async()=>{
+ const f=fixture({sparseHelper:true,helperOverrides:{private:value}});assert.equal(f.clients.gm.adapter.inspect(f.message.uuid),null);assert.equal(f.clients.player.adapter.inspect(f.message.uuid),null);f.fire();await f.persist();await f.idle();assert.equal(f.verified.length,0);
+});
+test('a sparse helper first observed with an existing row still remains manual',async()=>{
+ const f=fixture({sparseHelper:true,existingRow:true});f.fire();await f.idle();assert.equal(f.verified.length,0);assert.ok(f.manual.some(e=>e.reason==='unproven-existing-row'));
 });
 test('hook alone and row alone never settle',async()=>{const f=fixture();f.fire();await f.idle();assert.equal(f.verified.length,0);const g=fixture();await g.persist();await g.idle();assert.equal(g.verified.length,0);});
 test('no adopted result when track first sees an existing row',async()=>{const f=fixture({existingRow:true});f.fire();await f.idle();assert.equal(f.verified.length,0);assert.ok(f.manual.length);});
