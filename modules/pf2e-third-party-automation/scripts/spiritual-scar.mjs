@@ -19,7 +19,7 @@ const owned=(actor,user)=>user?.active===true&&actor?.testUserPermission?.(user,
  * no public resource grant. A verified follow-up implementation is required. */
 export function createSpiritualScarProvider({game,fromUuid=globalThis.fromUuid,getRollContext,nativeAdapter,followup,reactionRestriction,
  reactionResources=createShieldReactionResources({game,reactionRestriction}),useLedger=createSpiritualScarUseLedger({game,fromUuid}),choose,show=showNativeChoice,originalUse,
- compileResistance=compileSpiritualScarResistance,withResistance=withSpiritualScarResistance,onError=console.error,onManual=()=>globalThis.ui?.notifications?.warn?.('精神伤痕本次抗力来源无法区分，后续意志豁免请手动核对。')}={}){
+ compileResistance=compileSpiritualScarResistance,withResistance=withSpiritualScarResistance,onError=console.error,onManual=()=>globalThis.ui?.notifications?.warn?.('精神伤痕本次抗力来源无法区分，后续意志豁免请手动核对。'),onUnsupported=()=>globalThis.ui?.notifications?.warn?.('合并伤害按原生流程结算；本次精神伤痕请手动处理，自动化未消耗反应或每日次数。')}={}){
  const live=new Map(),plans=new WeakSet(),authorizations=new Map(),pendingWaits=new Set(),queue=new SerialActions();let socket,installation,disposeObserver,closed=false;
  const ready=()=>!closed&&game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'&&game.system.version==='8.5.1'&&nativeAdapter?.nativeBridgeDiagnostic?.().ready===true&&followup?.ready?.()===true&&game.pf2e?.settings?.iwr!==false&&!game.modules?.get('pf2e-auto-action-tracker')?.active;
  const handlesActor=actor=>ready()&&actor?.type==='character'&&!!action(actor);
@@ -209,6 +209,9 @@ export function createSpiritualScarProvider({game,fromUuid=globalThis.fromUuid,g
   const token=params.token?.document??params.token,actual=token?.actor;
   if(!handlesActor(actual)||!hasIncomingScarDamage(params)||actual.rollOptions?.all?.['spiritual-scar']||action(actual)?.system?.frequency?.value!==1||actual.canAct!==true||actual.isDead||!reactionPermitted(actual,reactionRestriction))return {params};
   const binding=await resolveSpiritualScarSource({game,fromUuid,actor,params,source:getRollContext?.(params.damage)});
+  // Match Glimpse's pre-payment boundary so the next provider cannot block the
+  // same Toolbelt merge after Glimpse correctly leaves it to the native flow.
+  if(!binding.verified&&binding.unsupportedReason==='merged-source-unproven'){onUnsupported(binding);return {params};}
   if(!binding.verified)throw markUnappliedDamageError(Error(`精神伤痕无法确认原伤害来源：${binding.unsupportedReason}。请手动确认来源后结算。`));
   // Validate the original rule before any choice or payment; the final native
   // call recompiles against its actual contextual actor and current rules.

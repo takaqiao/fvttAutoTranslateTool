@@ -9,16 +9,22 @@ function patch(doc,changes){for(const [path,value] of Object.entries(changes)){c
 function setup(decisions=['use','resist'],{nativePublisher=false,reactionRestriction}={}){
  const f=fixture();f.game.modules=new Map();f.game.world={id:'ujx5r8oipw7ercdr'};f.game.system={id:'pf2e',version:'8.5.1'};f.ally.attributes={resistances:[]};f.ally.getContextualClone=()=>({attributes:{resistances:[{type:'all-damage',value:7,test:()=>true,getDoubledValue:()=>7}]}});
  const callbacks=new Map(),Hooks={on:(k,fn)=>{const a=callbacks.get(k)??[];a.push(fn);callbacks.set(k,a);return fn},off:()=>{}},emit=(k,...args)=>{for(const fn of callbacks.get(k)??[])fn(...args)};
- const payments=[],calls=[],followups=[],choices=[];
+ const payments=[],calls=[],followups=[],choices=[],unsupported=[];
  for(const c of f.combat.turns){c.flags['pf2e-reaction']={state:true};c.update=async data=>{payments.push(data);patch(c,data)}}
  const compat={ready:()=>true,template:()=>({type:'effect',system:{rules:[{key:'Resistance',type:'all-damage',value:'@item.origin.level+2'}]}}),apply:async context=>{assert.equal(await context.authorize(),true);followups.push(context.nonce);return {effectId:'condition'}}};
  const resources={snapshot:async c=>({combatant:c}),available:s=>s.combatant.flags['pf2e-reaction'].state,reserve:()=>({changes:{'flags.pf2e-reaction.state':false},proof:{key:'state',before:true,after:false,consumed:true}}),release:async()=>({'flags.pf2e-reaction.state':true})};
  const publishUse=async({ability,token,claim})=>{const message={id:`use${claim.nonce}`,uuid:`ChatMessage.use${claim.nonce}`,author:f.user,speaker:{actor:ability.actor.id,scene:token.parent.id,token:token.id},rolls:[],flags:{pf2e:{origin:{uuid:ability.uuid,actor:ability.actor.uuid,type:'action'}}},async update(data){patch(this,data)}};f.game.messages.set(message.id,message);return message};
- const provider=createGlimpseProvider({game:f.game,reactionRestriction,fromUuid:f.fromUuid,getRollContext:roll=>roll===f.roll?f.source:null,compat,reactionResources:resources,choose:async context=>{choices.push(context.actor.uuid);return typeof decisions==='function'?decisions(context):decisions.shift()},publishUse:nativePublisher?undefined:publishUse});provider.register({Hooks});
+ const provider=createGlimpseProvider({game:f.game,reactionRestriction,fromUuid:f.fromUuid,getRollContext:roll=>roll===f.roll?f.source:null,compat,reactionResources:resources,onUnsupported:context=>unsupported.push(context),choose:async context=>{choices.push(context.actor.uuid);return typeof decisions==='function'?decisions(context):decisions.shift()},publishUse:nativePublisher?undefined:publishUse});provider.register({Hooks});
  async function apply({zero=false,fail=false,missing=false,foreign=false}={}){return runDamagePipeline({actor:f.ally,params:f.params,providers:[provider],apply:params=>provider.wrapNativeDamage(f.ally,params,async actual=>{
   calls.push(actual);if(!missing){const m={id:`receipt${calls.length}`,uuid:`ChatMessage.receipt${calls.length}`,author:f.user,speaker:{actor:f.ally.id,scene:f.scene.id,token:f.allyToken.id},flags:{pf2e:{origin:{actor:f.enemy.uuid,uuid:f.item.uuid,type:f.item.type},context:{type:'damage-taken',options:[...actual.rollOptions??[]]},appliedDamage:zero||actual.damage===0?null:{uuid:f.ally.uuid,isHealing:false,updates:[{path:'system.attributes.hp.value',value:1}],persistent:[]}}},updateSource(data){patch(this,data)}};if(foreign)m.flags.pf2e.origin.uuid='wrong';emit('preCreateChatMessage',m,{}, {},f.user.id);f.game.messages.set(m.id,m);emit('createChatMessage',m,{},f.user.id)}if(fail)throw Error('native reply lost');return 'native result';}),onError:e=>f.errors.push(e.message)})}
- f.errors=[];return {...f,provider,compat,resources,apply,payments,calls,followups,choices};
+ f.errors=[];return {...f,provider,compat,resources,apply,payments,calls,followups,choices,unsupported};
 }
+test('Toolbelt merged damage proceeds unchanged once with a manual Glimpse notice and no reaction payment',async()=>{
+ const f=setup();f.message.flags['pf2e-toolbelt']={betterChat:{mergeDamage:{merged:true,data:[{source:{_id:'strike-one'}},{source:{_id:'strike-two'}}]}}};
+ assert.equal(await f.apply(),'native result');assert.equal(f.calls.length,1);assert.equal(f.calls[0],f.params);
+ assert.equal(f.payments.length,0);assert.equal(f.choices.length,0);assert.equal(f.followups.length,0);assert.equal(f.unsupported.length,1);
+ assert.equal(f.combat.turns[1].flags['pf2e-reaction'].state,true);assert.deepEqual(f.errors,[]);
+});
 for(const status of ['restricted','manual'])test(`${status} Glimpse is not offered, including a different viewed encounter`,async()=>{
  const f=setup(undefined,{reactionRestriction:actor=>{assert.equal(actor,f.champion);return {status}}});f.game.combat={id:'viewed-other',started:true,turns:[]};
  await f.apply();assert.equal(f.choices.length,0);assert.equal(f.payments.length,0);assert.equal(f.calls[0].damage,f.roll);

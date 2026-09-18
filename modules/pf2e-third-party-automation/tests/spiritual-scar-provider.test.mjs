@@ -28,7 +28,7 @@ async function fixture(){
   await budget.record(m,f.user.id);await provider.executeUsage({actor,item:i,message:m,user:f.user,frequencyReceipt:options[M].frequencyReceipt});return m;
  }
  provider=api.createSpiritualScarProvider({game:f.game,fromUuid:f.fromUuid,getRollContext:()=>f.source,reactionResources:resources,reactionRestriction:()=>restriction,nativeAdapter,followup,
-  choose:async()=>decision,originalUse,compileResistance:()=>({value:14,applicationLabel:'Spirit from Fiends',test:()=>true}),withResistance:async(a,r,native)=>{a.attributes.resistances.push(r);try{return await native()}finally{a.attributes.resistances.splice(a.attributes.resistances.indexOf(r),1)}},onError:e=>calls.errors.push(e),onManual:context=>calls.manual.push(context)});
+  choose:async()=>decision,originalUse,compileResistance:()=>({value:14,applicationLabel:'Spirit from Fiends',test:()=>true}),withResistance:async(a,r,native)=>{a.attributes.resistances.push(r);try{return await native()}finally{a.attributes.resistances.splice(a.attributes.resistances.indexOf(r),1)}},onError:e=>calls.errors.push(e),onManual:context=>calls.manual.push(context),onUnsupported:context=>calls.manual.push(context)});
  provider.register({Hooks});
  async function run({damage=0,applications=[{category:'resistance',type:'Spirit from Fiends',adjustment:-10,ignored:false}],persistent=[],card=true,emit=true}={}){
   const prepared=await provider.beforeDamage(actor,f.params);let applied=false;
@@ -42,6 +42,12 @@ test('one private damage scope pays original daily Use and one reaction, then fo
  const f=await fixture();assert.equal(await f.run(),'native-return');assert.equal(f.calls.uses,1);assert.equal(f.calls.native,1);assert.equal(f.calls.followups.length,1);assert.equal(f.ability.system.frequency.value,0);assert.equal(f.combatant.flags['pf2e-reaction'].state,false);assert.equal(f.combatant.flags[M].reactionBudget.entries.length,1);assert.equal(f.actor.attributes.resistances.length,0);assert.equal(f.actor.rollOptions.all['spiritual-scar'],undefined);
 });
 test('declining the choice does not pay or change ordinary native damage',async()=>{const f=await fixture();f.decision('decline');await f.run();assert.equal(f.calls.uses,0);assert.equal(f.calls.native,1);assert.equal(f.calls.followups.length,0);assert.equal(f.ability.system.frequency.value,1);assert.equal(f.combatant.flags['pf2e-reaction'].state,true)});
+test('Toolbelt merged spirit damage leaves Scar daily use and reaction untouched while native damage proceeds',async()=>{
+ const f=await fixture();f.message.flags['pf2e-toolbelt']={betterChat:{mergeDamage:{merged:true,data:[{source:{_id:'strike-one'}},{source:{_id:'strike-two'}}]}}};
+ const prepared=await f.provider.beforeDamage(f.actor,f.params);assert.equal(prepared.params,f.params);assert.equal(prepared.receipt,undefined);
+ let nativeCalls=0;assert.equal(await f.provider.wrapNativeDamage(f.actor,prepared.params,async params=>{nativeCalls++;assert.equal(params,f.params);return 'native-return'}),'native-return');
+ assert.equal(nativeCalls,1);assert.equal(f.calls.uses,0);assert.equal(f.calls.followups.length,0);assert.equal(f.calls.manual.length,1);assert.equal(f.ability.system.frequency.value,1);assert.equal(f.combatant.flags['pf2e-reaction'].state,true);assert.deepEqual(f.calls.errors,[]);
+});
 test('the actual target encounter is used even while a different combat is viewed',async()=>{const f=await fixture();assert.notEqual(f.game.combat,f.combat);await f.run();assert.equal(f.combatant.flags[M].spiritualScarClaims[0].epoch,'combat:1')});
 test('existing spent reaction or active reaction restriction cannot spend another daily use',async()=>{
  for(const change of [f=>f.combatant.flags['pf2e-reaction'].state=false,f=>f.restriction({status:'restricted'}),f=>f.combatant.flags[M]={reactionBudget:{epoch:'combat:1',entries:[{type:'reaction',cost:1}]}}]){const f=await fixture();change(f);await f.run();assert.equal(f.calls.uses,0);assert.equal(f.ability.system.frequency.value,1);}
