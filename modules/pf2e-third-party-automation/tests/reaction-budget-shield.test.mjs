@@ -7,7 +7,7 @@ import {MODULE_ID as M} from '../scripts/rules.mjs';
 const resources=await import('../scripts/shield-reaction-resources.mjs').catch(()=>({}));
 const reactionHash='4a81322796ce1c6ed545edc09e1aa3a96a9c8a96dfd034403bf657068ed7036c';
 
-function fixture({prior=null,reaction=false,state=true,viewOther=false,ambiguous=false,version='1.4.3'}={}){
+function fixture({prior=null,reaction=false,state=true,viewOther=false,ambiguous=false,version='1.4.3',reactionRestriction}={}){
  const user={id:'gm',isGM:true},hooks=new Map(),errors=[];
  const actor={id:'defender',uuid:'Actor.defender',flags:{},items:[],system:{resources:{reactions:{max:1}}},hitPoints:{value:50},attributes:{shield:{itemId:'shield',raised:true,broken:false,destroyed:false}},testUserPermission:u=>u===user};
  const token={id:'defender',uuid:'Scene.scene.Token.defender',documentName:'Token',actor};
@@ -21,9 +21,9 @@ function fixture({prior=null,reaction=false,state=true,viewOther=false,ambiguous
  let reactionResources;
  if(reaction&&version==='1.4.3'){
   assert.equal(typeof resources.createShieldReactionResources,'function');
-  reactionResources=resources.createShieldReactionResources({game,fetchSource:async()=>'audited fixture',hashSource:async()=>reactionHash});
+  reactionResources=resources.createShieldReactionResources({game,reactionRestriction,fetchSource:async()=>'audited fixture',hashSource:async()=>reactionHash});
  }
- const budget=createReactionBudget({game,fromUuid:async uuid=>uuid===actor.uuid?actor:uuid===token.uuid?token:uuid===item.uuid?item:null,reactionResources,onError:e=>errors.push(e)});
+ const budget=createReactionBudget({game,reactionRestriction,fromUuid:async uuid=>uuid===actor.uuid?actor:uuid===token.uuid?token:uuid===item.uuid?item:null,reactionResources,onError:e=>errors.push(e)});
  budget.register({Hooks:{on:(name,fn)=>hooks.set(name,fn),off(){}},socket:{register(){}}});
  const params={damage:12,shieldBlockRequest:true,token,rollOptions:new Set()};let nativeCalls=0;
  const native=async(p,{blocked=true}={})=>{
@@ -115,6 +115,64 @@ test('unknown active Reaction bundle and uninitialized resources fail before nat
 test('no-block recovery preserves a newer manual Reaction resource value',async()=>{
  const f=fixture({reaction:true});await f.budget.applyDamage(f.actor,f.params,async p=>{f.combatant.flags['pf2e-reaction'].state=true;return f.native(p,{blocked:false})});
  assert.equal(f.combatant.flags['pf2e-reaction'].state,true);assert.equal(f.entries().length,0);
+});
+
+for(const status of ['restricted','manual'])for(const prepaid of [false,true])for(const reaction of [false,true])test(`${status} blocks ${prepaid?'prepaid':'new'} Shield Block with Reaction ${reaction?'active':'inactive'} even while another encounter is viewed`,async()=>{
+ const f=fixture({reaction,viewOther:true,state:!prepaid,prior:prepaid?'shield-block':null,reactionRestriction:actor=>{assert.equal(actor,f.actor);return {status,sources:[]}}});
+ const before=structuredClone(f.combatant.flags);
+ await assert.rejects(f.budget.applyDamage(f.actor,f.params,f.native),status==='manual'?/GM.*核对/:/禁止.*反应|不能.*反应/);
+ assert.equal(f.count(),0);assert.deepEqual(f.combatant.flags,before);assert.deepEqual(f.errors,[]);
+});
+
+test('prepaid Shield Block rechecks restriction after its last asynchronous original-item proof',async()=>{
+ let status='clear';const f=fixture({reaction:true,state:false,prior:'shield-block'});delete f.prepaid.item;let itemReads=0;
+ const budget=createReactionBudget({game:f.game,reactionRestriction:()=>({status}),fromUuid:async uuid=>{
+  if(uuid===f.actor.uuid)return f.actor;if(uuid===f.token.uuid)return f.token;
+  if(uuid===f.item.uuid){if(++itemReads===2)status='restricted';return f.item}return null;
+ },reactionResources:{snapshot:async()=>({}),reserve:()=>{throw Error('must not reserve')}}});
+ await assert.rejects(budget.applyDamage(f.actor,f.params,f.native),/禁止.*反应|不能.*反应/);
+ assert.equal(itemReads,2);assert.equal(f.count(),0);assert.equal(f.entries()[0].shield,undefined);assert.equal(f.combatant.flags['pf2e-reaction'].state,false);
+});
+
+test('shared resource reserve independently checks inactive and prepaid snapshots without falsifying raw resources',async()=>{
+ for(const active of [false,true])for(const prepaid of [false,true]){
+  let status='clear';const f=fixture({reaction:active,state:!prepaid}),adapter=resources.createShieldReactionResources({game:f.game,reactionRestriction:a=>{assert.equal(a,f.actor);return {status}},fetchSource:async()=>'bundle',hashSource:async()=>reactionHash});
+  const value=await adapter.snapshot(f.combatant),before=structuredClone(f.combatant.flags);status='manual';
+  assert.throws(()=>adapter.reserve(value,'generic',{prepaid}),/GM.*核对/);assert.deepEqual(f.combatant.flags,before);
+  status='clear';assert.doesNotThrow(()=>adapter.reserve(value,'generic',{prepaid}));
+ }
+});
+
+test('a new restriction after Shield reservation releases its exact unentered payment',async()=>{
+ let status='clear';const f=fixture({reaction:true,reactionRestriction:()=>({status})}),update=f.combatant.update;
+ f.combatant.update=async function(changes){await update.call(this,changes);if(changes['flags.pf2e-reaction.state']===false)status='restricted'};
+ await assert.rejects(f.budget.applyDamage(f.actor,f.params,f.native),/禁止.*反应|不能.*反应/);
+ assert.equal(f.count(),0);assert.equal(f.entries().length,0);assert.equal(f.combatant.flags['pf2e-reaction'].state,true);assert.deepEqual(f.errors,[]);
+});
+
+for(const blocked of [false,true])test(`restriction during native Shield result still permits ${blocked?'completion':'refund'}`,async()=>{
+ let status='clear';const f=fixture({reaction:true,reactionRestriction:()=>({status})});
+ await f.budget.applyDamage(f.actor,f.params,p=>{status='restricted';return f.native(p,{blocked})});
+ assert.equal(f.count(),1);assert.equal(f.combatant.flags['pf2e-reaction'].state,!blocked);assert.equal(f.entries().length,blocked?1:0);assert.deepEqual(f.errors,[]);
+ status='clear';assert.equal(f.budget.available(f.actor),!blocked);
+});
+
+test('generic restriction ends without resetting a truly spent reaction',()=>{
+ let status='manual';const f=fixture(),reactionRestriction=()=>({status});
+ assert.equal(genericReactionAvailable(f.actor,f.game,{reactionRestriction}),false);status='clear';assert.equal(genericReactionAvailable(f.actor,f.game,{reactionRestriction}),true);
+ f.entries().push({type:'reaction',cost:1,slug:'used'});status='restricted';assert.equal(genericReactionAvailable(f.actor,f.game,{reactionRestriction}),false);status='clear';assert.equal(genericReactionAvailable(f.actor,f.game,{reactionRestriction}),false);
+});
+
+for(const status of ['clear','restricted','manual'])test(`outside-encounter native Shield passthrough observes ${status} without inventing an epoch`,async()=>{
+ const f=fixture({reactionRestriction:()=>({status})});f.encounter.started=false;
+ if(status==='clear')await f.budget.applyDamage(f.actor,f.params,f.native);
+ else await assert.rejects(f.budget.applyDamage(f.actor,f.params,f.native),status==='manual'?/GM.*核对/:/禁止.*反应/);
+ assert.equal(f.count(),status==='clear'?1:0);assert.equal(f.entries().length,0);assert.equal(f.combatant.flags['pf2e-reaction'].state,true);
+});
+
+test('recording an already posted native reaction never consults the new-reaction restriction',async()=>{
+ let queries=0;const f=fixture({reactionRestriction:()=>{queries++;return {status:'restricted'}}});f.game.messages.set(f.prepaid.id,f.prepaid);
+ assert.equal(await f.budget.record(f.prepaid,f.game.user.id),true);assert.equal(f.entries().length,1);assert.equal(f.entries()[0].msgId,f.prepaid.id);assert.equal(queries,0);
 });
 
 const nativePath=process.env.FVTT_REACTION_BUNDLE??'';

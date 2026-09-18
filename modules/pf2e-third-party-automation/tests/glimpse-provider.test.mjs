@@ -6,7 +6,7 @@ import {findGlimpseClaim,provenGlimpseReactionCard,resolveGlimpseSource} from '.
 import {MODULE_ID as M} from '../scripts/rules.mjs';
 import {runDamagePipeline} from '../scripts/native-context.mjs';
 function patch(doc,changes){for(const [path,value] of Object.entries(changes)){const keys=path.split('.');let at=doc;for(const k of keys.slice(0,-1))at=at[k]??={};at[keys.at(-1)]=structuredClone(value)}}
-function setup(decisions=['use','resist'],{nativePublisher=false}={}){
+function setup(decisions=['use','resist'],{nativePublisher=false,reactionRestriction}={}){
  const f=fixture();f.game.modules=new Map();f.game.world={id:'ujx5r8oipw7ercdr'};f.game.system={id:'pf2e',version:'8.5.1'};f.ally.attributes={resistances:[]};f.ally.getContextualClone=()=>({attributes:{resistances:[{type:'all-damage',value:7,test:()=>true,getDoubledValue:()=>7}]}});
  const callbacks=new Map(),Hooks={on:(k,fn)=>{const a=callbacks.get(k)??[];a.push(fn);callbacks.set(k,a);return fn},off:()=>{}},emit=(k,...args)=>{for(const fn of callbacks.get(k)??[])fn(...args)};
  const payments=[],calls=[],followups=[],choices=[];
@@ -14,11 +14,27 @@ function setup(decisions=['use','resist'],{nativePublisher=false}={}){
  const compat={ready:()=>true,template:()=>({type:'effect',system:{rules:[{key:'Resistance',type:'all-damage',value:'@item.origin.level+2'}]}}),apply:async context=>{assert.equal(await context.authorize(),true);followups.push(context.nonce);return {effectId:'condition'}}};
  const resources={snapshot:async c=>({combatant:c}),available:s=>s.combatant.flags['pf2e-reaction'].state,reserve:()=>({changes:{'flags.pf2e-reaction.state':false},proof:{key:'state',before:true,after:false,consumed:true}}),release:async()=>({'flags.pf2e-reaction.state':true})};
  const publishUse=async({ability,token,claim})=>{const message={id:`use${claim.nonce}`,uuid:`ChatMessage.use${claim.nonce}`,author:f.user,speaker:{actor:ability.actor.id,scene:token.parent.id,token:token.id},rolls:[],flags:{pf2e:{origin:{uuid:ability.uuid,actor:ability.actor.uuid,type:'action'}}},async update(data){patch(this,data)}};f.game.messages.set(message.id,message);return message};
- const provider=createGlimpseProvider({game:f.game,fromUuid:f.fromUuid,getRollContext:roll=>roll===f.roll?f.source:null,compat,reactionResources:resources,choose:async context=>{choices.push(context.actor.uuid);return typeof decisions==='function'?decisions(context):decisions.shift()},publishUse:nativePublisher?undefined:publishUse});provider.register({Hooks});
+ const provider=createGlimpseProvider({game:f.game,reactionRestriction,fromUuid:f.fromUuid,getRollContext:roll=>roll===f.roll?f.source:null,compat,reactionResources:resources,choose:async context=>{choices.push(context.actor.uuid);return typeof decisions==='function'?decisions(context):decisions.shift()},publishUse:nativePublisher?undefined:publishUse});provider.register({Hooks});
  async function apply({zero=false,fail=false,missing=false,foreign=false}={}){return runDamagePipeline({actor:f.ally,params:f.params,providers:[provider],apply:params=>provider.wrapNativeDamage(f.ally,params,async actual=>{
   calls.push(actual);if(!missing){const m={id:`receipt${calls.length}`,uuid:`ChatMessage.receipt${calls.length}`,author:f.user,speaker:{actor:f.ally.id,scene:f.scene.id,token:f.allyToken.id},flags:{pf2e:{origin:{actor:f.enemy.uuid,uuid:f.item.uuid,type:f.item.type},context:{type:'damage-taken',options:[...actual.rollOptions??[]]},appliedDamage:zero||actual.damage===0?null:{uuid:f.ally.uuid,isHealing:false,updates:[{path:'system.attributes.hp.value',value:1}],persistent:[]}}},updateSource(data){patch(this,data)}};if(foreign)m.flags.pf2e.origin.uuid='wrong';emit('preCreateChatMessage',m,{}, {},f.user.id);f.game.messages.set(m.id,m);emit('createChatMessage',m,{},f.user.id)}if(fail)throw Error('native reply lost');return 'native result';}),onError:e=>f.errors.push(e.message)})}
  f.errors=[];return {...f,provider,compat,resources,apply,payments,calls,followups,choices};
 }
+for(const status of ['restricted','manual'])test(`${status} Glimpse is not offered, including a different viewed encounter`,async()=>{
+ const f=setup(undefined,{reactionRestriction:actor=>{assert.equal(actor,f.champion);return {status}}});f.game.combat={id:'viewed-other',started:true,turns:[]};
+ await f.apply();assert.equal(f.choices.length,0);assert.equal(f.payments.length,0);assert.equal(f.calls[0].damage,f.roll);
+});
+for(const status of ['restricted','manual'])test(`Glimpse rechecks ${status} after resource snapshot awaits and before an injected adapter can reserve`,async()=>{
+ let current='clear';const f=setup(undefined,{reactionRestriction:()=>({status:current})});
+ f.resources.snapshot=async c=>{current=status;return {combatant:c}};
+ await assert.rejects(f.apply(),status==='manual'?/GM.*核对/:/禁止.*反应|不能.*反应/);
+ assert.equal(f.payments.length,0);assert.equal(f.calls.length,0);assert.equal(f.combat.turns[1].flags['pf2e-reaction'].state,true);
+});
+for(const refund of [false,true])test(`restriction after Glimpse payment preserves ${refund?'exact pre-native refund':'native completion'}`,async()=>{
+ let status='clear';const f=setup(undefined,{reactionRestriction:()=>({status})}),clone=f.ally.getContextualClone;
+ f.ally.getContextualClone=()=>{status='restricted';return refund?{attributes:{resistances:[]}}:clone()};
+ if(refund)await assert.rejects(f.apply(),/抗力/);else await f.apply();
+ assert.equal(f.combat.turns[1].flags['pf2e-reaction'].state,refund);assert.equal(f.combat.turns[1].flags[M].glimpseClaims[0].status,refund?'refunded':'done');assert.deepEqual(f.errors,[]);
+});
 test('Resist pays real generic resource and ledger together; true zero receipt still grants exactly one condition',async()=>{const f=setup();assert.equal(await f.apply({zero:true}),'native result');assert.equal(f.calls.length,1);assert.equal(f.followups.length,1);const paid=f.payments.find(p=>p['flags.pf2e-reaction.state']===false);assert.equal(paid[`flags.${M}.reactionBudget`].entries.length,1);assert.equal(f.combat.turns[1].flags['pf2e-reaction'].state,false);assert.equal(f.ally.attributes.resistances.length,0);const claim=findGlimpseClaim(f.game,f.followups[0]).claim;assert.equal(claim.status,'done');assert.equal(provenGlimpseReactionCard(f.game.messages.get(claim.messageId),f.champion,f.game).claimKey,claim.claimKey);await assert.rejects(f.apply(),/已处理|重复/);assert.equal(f.calls.length,1)});
 test('Repent enters native exactly once as zero final and disables shield; no Enfeebled',async()=>{const f=setup(['use','repent']);f.params.shieldBlockRequest=true;await f.apply();assert.equal(f.calls.length,1);assert.equal(f.calls[0].damage,0);assert.equal(f.calls[0].final,true);assert.equal(f.calls[0].shieldBlockRequest,false);assert.deepEqual(f.followups,[])});
 test('decline keeps original native damage and spends nothing',async()=>{const f=setup(['decline']);await f.apply();assert.equal(f.calls[0].damage,f.roll);assert.equal(f.payments.length,0)});

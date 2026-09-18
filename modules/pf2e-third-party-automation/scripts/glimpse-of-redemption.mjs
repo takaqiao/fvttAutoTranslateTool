@@ -3,6 +3,7 @@ import {SerialActions} from './runtime.mjs';
 import {isActiveGM,showNativeChoice,validateNativeChoices,markUnappliedDamageError} from './native-context.mjs';
 import {withReactionReservation,genericReactionAvailable} from './reaction-budget.mjs';
 import {createShieldReactionResources} from './shield-reaction-resources.mjs';
+import {requireReactionPermitted} from './reaction-restriction.mjs';
 import {GLIMPSE_SOURCES as S,glimpseSourceId,glimpseEncounter,glimpseCandidates,glimpseClaims,findGlimpseClaim,resolveGlimpseSource,validateGlimpseSource} from './glimpse-source.mjs';
 import {compileGlimpseResistance,withGlimpseResistance,repentParams,glimpseMarker} from './glimpse-native.mjs';
 import {glimpseWorld} from './glimpse-compat.mjs';
@@ -11,7 +12,7 @@ const values=c=>Array.from(c?.values?.()??c??[]),author=m=>m?.author?.id??m?.use
 const keyOf=s=>`${s.damageMessageId}:${s.rollIndex}:${s.tokenUuid}`;
 /** Awaitable, source-bound reaction. All resource mutation is elected-GM work;
  * only a private live source-client scope may enter the original native call. */
-export function createGlimpseProvider({game,fromUuid=globalThis.fromUuid,getRollContext,compat,choose,publishUse,reactionResources=createShieldReactionResources({game}),show=showNativeChoice,onError=console.error}={}){
+export function createGlimpseProvider({game,reactionRestriction,fromUuid=globalThis.fromUuid,getRollContext,compat,choose,publishUse,reactionResources=createShieldReactionResources({game,reactionRestriction}),show=showNativeChoice,onError=console.error}={}){
  const live=new Map(),plans=new WeakSet(),queue=new SerialActions(),pendingUses=new Map();let socket,installation;
  const ready=()=>glimpseWorld(game)&&compat?.ready()&&!game.modules?.get('pf2e-auto-action-tracker')?.active&&game.pf2e?.settings?.iwr!==false;
  const handlesActor=actor=>ready()&&actor?.type==='character'&&actor.level===5&&[S.glimpse,S.aura].every(source=>values(actor.items).some(i=>glimpseSourceId(i)===source))&&!values(actor.items).some(i=>glimpseSourceId(i)===S.weight);
@@ -76,7 +77,7 @@ export function createGlimpseProvider({game,fromUuid=globalThis.fromUuid,getRoll
    for(const initialOption of glimpseCandidates(context,game)){
     const decisionUser=preferred(initialOption.actor);if(!decisionUser)throw Error('神卫没有在线拥有者。');
     const expected={actorUuid:initialOption.actor.uuid,tokenUuid:initialOption.token.uuid,itemUuid:initialOption.ability.uuid,userId:decisionUser.id,combatId:initialOption.combat.id,combatantId:initialOption.combatant.id,epoch:initialOption.epoch,round:initialOption.combat.round,turn:initialOption.combat.turn};
-    if(!genericReactionAvailable(initialOption.actor,boundedGame(initialOption.combat)))continue;
+    if(!genericReactionAvailable(initialOption.actor,boundedGame(initialOption.combat),{reactionRestriction}))continue;
     let resolveUse;const manual=new Promise(resolve=>resolveUse=resolve),pending={expected,payload,user,resolve:resolveUse};pendingUses.set(payload.scopeId,pending);
     let answer;try{answer=await Promise.race([choice({actor:initialOption.actor,user:decisionUser,title:'救赎瞥视：是否为本次盟友伤害使用反应？',choices:[{value:'use',label:'使用救赎瞥视'},{value:'decline',label:'不使用'}]}).then(value=>({value})),manual])}finally{pendingUses.delete(payload.scopeId)}
     if(answer.value==null||answer.value==='decline')continue;
@@ -91,8 +92,10 @@ export function createGlimpseProvider({game,fromUuid=globalThis.fromUuid,getRoll
     const nonce=random(),claim={...expected,nonce,claimKey:`glimpse:${nonce}`,decision,enemyUserId:enemyUser.id,mindless,sourceKey:key,source:context.snapshot,sourceUserId:user.id,scopeId:payload.scopeId,status:'paid'};
     await withReactionReservation(option.actor,game,async()=>{
      gm();const current=await authenticate(payload,user);option=currentOption(current,expected);
-     if(!genericReactionAvailable(option.actor,boundedGame(option.combat)))throw Error('本次通用反应已消耗。');
+     requireReactionPermitted(option.actor,reactionRestriction);
+     if(!genericReactionAvailable(option.actor,boundedGame(option.combat),{reactionRestriction}))throw Error('本次通用反应已消耗。');
      const snapshot=await reactionResources.snapshot(option.combatant);gm();const actual=await authenticate(payload,user);currentOption(actual,expected);claim.expiry=glimpseExpiryFor(actual.attacker,game);
+     requireReactionPermitted(option.actor,reactionRestriction);
      if(!reactionResources.available(snapshot,'generic'))throw Error('Reaction Checker 通用反应已消耗。');
      const resource=reactionResources.reserve(snapshot,'generic');claim.resource=resource.proof;
      const previous=option.combatant.flags?.[M]?.reactionBudget,entries=previous?.epoch===claim.epoch?[...previous.entries??[]]:[];

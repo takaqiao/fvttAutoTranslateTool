@@ -9,7 +9,7 @@ const create=module.createRoaringSustain,copy=structuredClone;
 const SOURCE='Compendium.pf2e.spells-srd.Item.czO0wbT1i320gcu9';
 class Message {constructor(data){Object.assign(this,data);this.documentName='ChatMessage'} }
 globalThis.CONFIG={ChatMessage:{documentClass:Message}};
-function fixture({mode,choice,onError}={}){
+function fixture({mode,choice,onError,reactionCompatibility}={}){
  assert.equal(typeof create,'function','Sustain consumer must exist');
  const users=new Map(['gm','player','stranger'].map(id=>[id,{id,active:true,isGM:id==='gm'}]));users.activeGM=users.get('gm');
  const caster={id:'caster',uuid:'Actor.caster',type:'character',canAct:true,isDead:false,testUserPermission:u=>['gm','player'].includes(u.id)},target={id:'target',uuid:'Actor.target',type:'npc'};
@@ -39,13 +39,33 @@ function fixture({mode,choice,onError}={}){
   actionEvents.addMiddleware((_s,next)=>{trace.push('prayer');return next()});
   const socket={register:(n,fn)=>handlers.set(n,fn),executeAsUser:async(n,to,p)=>{rpc.push({from:id,to,name:n});return clients[to].handlers.get(n).call({socketdata:{userId:id}},copy(p))}};
   const Hooks={on:(n,fn)=>{hooks.set(n,fn);return n},off:n=>hooks.delete(n)};
-  const consumer=create({game,provider,fromUuid:async u=>docs.get(u),actionEvents,choose:async p=>{trace.push('choose');return typeof choice==='function'?choice({game,action,...p}):choice===undefined?p.choices.find(c=>c.value==='source-one')?.value:choice},onError:onError??(e=>errors.push(e)),randomId:()=>`nonce-${++serial}`});
+  const consumer=create({game,provider,reactionCompatibility,fromUuid:async u=>docs.get(u),actionEvents,choose:async p=>{trace.push('choose');return typeof choice==='function'?choice({game,action,...p}):choice===undefined?p.choices.find(c=>c.value==='source-one')?.value:choice},onError:onError??(e=>errors.push(e)),randomId:()=>`nonce-${++serial}`});
   consumer.register({Hooks,socket});clients[id]={consumer,game,action,actionEvents,hooks,handlers,Hooks,socket};
  }
  return {clients,provider,record,users,caster,target,token,combat,combatant,original,messages,docs,events,errors,trace,rpc,frame,run:params=>clients.player.action.toActionVariant().use(params??{actors:[caster]}),calls:()=>calls,result:()=>lastResult,cleanup:()=>Object.values(clients).forEach(c=>{c.consumer.cleanup();c.actionEvents.cleanup()})};
 }
 const useOf=f=>Object.values(f.record.state.sustainUses)[0];
 const settle=(f,terminal='completed')=>f.clients.gm.consumer.adjudicate({sourceNonce:'source-one',useNonce:useOf(f)?.useNonce,terminal});
+
+test('original card reports only this source and the actual local reaction coverage',t=>{
+ let checker=false;const f=fixture({reactionCompatibility:()=>({owned:true,checker})});t.after(f.cleanup);
+ f.provider.reactionRestriction=()=>({status:'restricted',sources:[{sourceNonce:'source-one',status:'restricted'}]});
+ const root=html(),render=()=>{f.clients.gm.hooks.get('renderChatMessageHTML')(f.original,root);return root.children[0].children.map(e=>e.textContent).join('\n')};
+ assert.match(render(),/已拦截本模块的自动反应/);assert.match(render(),/Reaction Checker.*仍需GM核对/);
+ checker=true;assert.match(render(),/Reaction Checker.*旧卡按钮已接入/);
+ f.provider.reactionRestriction=()=>({status:'restricted',sources:[{sourceNonce:'source-one',status:'clear'},{sourceNonce:'other',status:'restricted'}]});
+ assert.match(render(),/本源当前不再限制反应/);assert.doesNotMatch(render(),/已拦截本模块/);
+});
+test('manual reaction result never claims a proven active restriction',t=>{
+ const f=fixture({reactionCompatibility:()=>({owned:true,checker:true})});t.after(f.cleanup);
+ f.provider.reactionRestriction=()=>({status:'manual',sources:[{sourceNonce:'source-one',status:'manual'}]});
+ const root=html();f.clients.gm.hooks.get('renderChatMessageHTML')(f.original,root);const text=root.children[0].children.map(e=>e.textContent).join('\n');
+ assert.match(text,/禁反应状态待GM核对/);assert.doesNotMatch(text,/已拦截本模块|旧卡按钮已接入/);
+});
+test('a missing or failed local reaction integration cannot claim mechanical coverage',t=>{
+ const f=fixture({reactionCompatibility:()=>{throw Error('not installed')}});t.after(f.cleanup);f.provider.reactionRestriction=()=>({status:'restricted',sources:[{sourceNonce:'source-one',status:'restricted'}]});
+ const root=html();f.clients.gm.hooks.get('renderChatMessageHTML')(f.original,root);assert.ok(root.children[0].children.some(e=>e.textContent.includes('反应入口尚未确认')));
+});
 
 test('branded player Use records one pending fact after Prayer and returns exact native rows',async t=>{const f=fixture();t.after(f.cleanup);const rows=await f.run();assert.equal(rows,f.result());assert.equal(f.calls(),1);assert.deepEqual(f.trace,['prayer','choose','native']);assert.equal(f.events.length,1);assert.equal(f.events[0].type,'sustain-use');assert.equal(useOf(f).status,'use-recorded');assert.equal(f.record.state.timing.deadline.endRound,5);assert.ok(f.rpc.some(r=>r.from==='gm'&&r.to==='player'&&r.name.endsWith(':proof')));});
 test('GM completion extends only frozen Use turn; same-turn second completion never adds a round',async t=>{const f=fixture();t.after(f.cleanup);await f.run();await settle(f);assert.equal(f.record.state.timing.deadline.endRound,6);await f.run();const use=Object.values(f.record.state.sustainUses).at(-1);await f.clients.gm.consumer.adjudicate({sourceNonce:'source-one',useNonce:use.useNonce,terminal:'completed'});assert.equal(f.record.state.timing.deadline.endRound,6);assert.equal(f.calls(),2);});

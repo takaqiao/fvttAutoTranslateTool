@@ -116,7 +116,7 @@ export function createRoaringEffects({game,fromUuid=globalThis.fromUuid,randomId
  }
  function effectData(r){
   const s=r.state,source=s.source;
-  return {name:'轰然喝彩',type:'effect',img:'systems/pf2e/icons/spells/roaring-applause.webp',flags:{[ID]:{roaringEffect:proofFor(r),roaringTiming:copy(s.timing),roaringRestriction:{noReactions:true,automaticConsumers:false},fascinationSubject:desired(r).projection.subject}},system:{slug:`tpa-roaring-${s.sourceNonce.toLowerCase()}`,level:{value:3},description:{value:'<p>本次轰然喝彩的来源效果。禁反应与鼓掌触发需按提示处理；维持是否完成由GM裁定。</p>'},traits:{value:['emotion','mental'],rarity:'common'},duration:{value:-1,unit:'unlimited',expiry:null,sustained:false},start:copy(s.timing.finiteEnvelope.start),context:{origin:{actor:source.casterActorUuid,token:source.casterTokenUuid,item:source.itemUuid}},rules:copy(r.effects.rules)}};
+  return {name:'轰然喝彩',type:'effect',img:'systems/pf2e/icons/spells/roaring-applause.webp',flags:{[ID]:{roaringEffect:proofFor(r),roaringTiming:copy(s.timing),roaringRestriction:{noReactions:true},fascinationSubject:desired(r).projection.subject}},system:{slug:`tpa-roaring-${s.sourceNonce.toLowerCase()}`,level:{value:3},description:{value:'<p>本次轰然喝彩的来源效果。禁反应以原施法卡当前提示为准；鼓掌触发与维持是否完成由GM核对。</p>'},traits:{value:['emotion','mental'],rarity:'common'},duration:{value:-1,unit:'unlimited',expiry:null,sustained:false},start:copy(s.timing.finiteEnvelope.start),context:{origin:{actor:source.casterActorUuid,token:source.casterTokenUuid,item:source.itemUuid}},rules:copy(r.effects.rules)}};
  }
  async function uncertain(actor,r,error){
   const latest=get(actor,r.state.sourceNonce);

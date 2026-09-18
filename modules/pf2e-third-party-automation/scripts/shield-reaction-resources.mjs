@@ -1,3 +1,4 @@
+import {requireReactionPermitted} from './reaction-restriction.mjs';
 const MODULE='pf2e-reaction',VERSION='1.4.3';
 const SHA256='4a81322796ce1c6ed545edc09e1aa3a96a9c8a96dfd034403bf657068ed7036c';
 const unavailable=()=>Error('当前 Reaction Checker 的格挡资源接口无法可靠核验；本次未应用伤害，请使用手工结算流程。');
@@ -9,12 +10,12 @@ const defaultFetch=async()=>{
 
 /** The audited module has no public resource API. Only return patches for the
  * exact native Shield Block claim: its ledger and resource share one update. */
-export function createShieldReactionResources({game,fetchSource=defaultFetch,hashSource=defaultHash}={}){
+export function createShieldReactionResources({game,reactionRestriction,fetchSource=defaultFetch,hashSource=defaultHash}={}){
  let verified,verification;const snapshots=new WeakSet();
  const current=module=>game.modules?.get(MODULE)===module&&module?.active===true&&module.version===VERSION;
  async function snapshot(combatant){
   const module=game.modules?.get(MODULE);
-  if(!module?.active){const result={active:false};snapshots.add(result);return result;}
+  if(!module?.active){const result={active:false,combatant};snapshots.add(result);return result;}
   if(!current(module))throw unavailable();
   if(verified!==module){
    verification??=Promise.resolve().then(async()=>{if(await hashSource(await fetchSource())!==SHA256)throw unavailable();return module;}).catch(error=>{verification=null;throw error});
@@ -31,6 +32,7 @@ export function createShieldReactionResources({game,fetchSource=defaultFetch,has
  }
  function reserve(value,slot,{prepaid=false}={}){
   if(!snapshots.has(value))throw unavailable();
+  requireReactionPermitted(value.combatant?.actor,reactionRestriction);
   if(!value.active)return {proof:null,changes:{}};
   const live=value.combatant.flags?.[MODULE]??{};
   if(live.state!==value.state||(live['quick-shield-block']??0)!==value.quick)throw Error('Reaction Checker 反应资源在验证期间已改变，本次未应用伤害。');
