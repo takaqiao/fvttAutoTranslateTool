@@ -1,60 +1,53 @@
-# 0.9.8 verification
+# 0.9.9 verification
 
-This release adds the current fortress bard's original rank-3, single-target Roaring Applause flow: one native Cast payment, the first original Toolbelt Will result, source-owned effects, actual caster-turn expiry, native Sustain with GM confirmation, and reaction restrictions. It targets Foundry 14.368 and PF2e 8.5.1. Publication and production installation are separate.
+This release adds the current fortress Spiritual Scar damage reaction. The original owner chooses and pays through the original action; the elected GM binds one native damage application, reaction expense and daily use. Original resistance rules, native IWR, a non-basic Will against the actual class DC and a source-local Slowed grant complete the supported flow. Foundry 14.368 / PF2e 8.5.1 are the tested versions. Publication and production installation are separate.
 
-## Automated checks
+## Automated checks and provenance
 
-The complete module suite passed **1280 tests, zero failures and zero skips** at mechanical commit `2167f81ddd5c3faa4d593f8fd61b3ac7cabfcb61`. Installed Foundry, PF2e, Counteract, Workbench and Reaction sources were supplied to tests requiring them. All 188 recorded source/test/runtime hashes were reverified before release-only documentation and manifest edits.
+The complete suite passed **1436 tests, zero failures and zero skips** at mechanical commit '4e6bdcdcc45d73ee8fe5132a189049c217178e8b'. All 200 recursive script/test inputs were recorded and reverified before release-only edits. Installed Foundry, PF2e, Counteract, Workbench and Reaction sources were supplied to source-dependent tests. No independent agent review was available in this batch; no such review is claimed.
 
-Coverage includes native invocation/payment binding; first-save authentication and both hook/row arrival orders; source expiry, native parent/grant identity and uncertain writes; manual deletion and independent stronger conditions; original-card Sustain; readonly reaction queries and actual commit gates; and the exact Reaction Checker bundle/callback adapter. Independent reviews covered the provider, effect/save adapters, consumers, original-card wiring and compatibility layer. Focused regressions prove confirmed parent deletion clears before a manual/GM barrier, and an older asynchronous write cannot consume a newer GM-continuity barrier.
+Checks include authenticated source and original private invocation; daily Use and original-card accounting; one reaction/Reaction Checker reservation; refund only before a provably unattempted Use; preservation of intervening turn refresh; exact native resistance preparation and cleanup; IWR contribution attribution; private native check entry; durable no-repeat save/effect receipts; source-local Slowed, undo, reload and creator-turn expiry. Saved flags alone do not authorize replay of uncertain payment or dice.
 
-## Native spell and Sustain flows
+The current production inventory has 125 enabled modules. Native acceptance used 23 relevant enabled modules, including Patreon 3.2.28, Toolbelt 3.56.2, Workbench 7.7.5, Dice So Nice 6.3.1 and Reaction Checker 1.4.3. This is not a full125-module compatibility claim. Current source review includes the newer inventory and coverage changes; source review alone does not replace native runtime acceptance.
 
-The isolated profile enabled 23 relevant modules, including Patreon 3.2.28, Toolbelt 3.56.2, Workbench 7.7.5, Dice So Nice 6.3.1 and Reaction Checker 1.4.3. Fixtures were owned clones of current actors. This is not a rerun of all 121 production modules.
+## Full native damage acceptance
 
-The accepted base run at core commit `0eb624a8` used the player's actual sheet Cast and original Toolbelt save buttons. Cancel-before-payment and four native adjusted Will outcomes passed. Each paid Cast consumed one rank-3 slot and retained its exact original spell card. Critical success created no effect; success established the source restriction; failure granted Slowed 1; critical failure additionally granted Fascinated. Existing independent Slowed 2 retained its value and ownership.
-
-Actual caster-turn progression ended the source at the correct next turn-end. A genuine reroll moved the source to manual review without another payment. Manual removal of its own Fascinated child did not cause recreation. Native Sustain Use followed by actual GM completion or disruption passed, with no additional spell cost. The provider does not infer undisrupted completion from the native Use return.
-
-The base run had zero page and cleanup errors. All original actors, scenes, combats, messages and settings were preserved after precise fixture cleanup and restoration of only observed native clock advances. Native core.time modification audit metadata was retained. Earlier Toolbelt sparse-default and native GrantItem alteration-default failures remain in evidence; both were narrowly corrected and verified against actual installed schemas.
-
-## Native reaction restrictions
-
-The integrated run at `2167f81d` checked all 122 source, installed and fresh HTTP files, then exercised two real Roaring success sources on a current champion clone.
+Owned clones of the latest character card and native fiend fixtures ran with real GM and player clients. Each run verified the entire 129-file candidate on source disk, installed disk and fresh HTTP. Provider, payment, original Use, damage resistance and IWR attribution were not replaced with fixture results.
 
 | Case | Observed result |
 | --- | --- |
-| Existing original Reaction reminder, GM and player | Trusted clicks were cancelled while the source was active. The exact original card, raw resources, expense records, frequency and HP remained unchanged. |
-| Eight native resource getters | General reaction and seven special keys were masked without modifying their raw fields or creating missing counters. The fixture does not claim positive spending of every special reaction. |
-| Actual source expiry | Getter values returned to current raw values. The same original reminder survived, its native click succeeded, and subsequent native Shield Block reused one expense. |
-| Direct Shield Block | Native damage application was refused before a new payment or HP/shield change. |
-| Original-card prepaid Shield Block | Refusal preserved the original paid card and entry; it neither paid again nor refunded that earlier expense. |
+| GM declines | Original damage applies; daily use and reaction remain available. |
+| GM and player accept | Exactly one original daily use and one generic/Reaction Checker expense; one native resistance application; no persistent toggle or resistance. |
+| Fully prevented spirit damage | One original native Will against class DC 21, then source-local Slowed 1 on failure. |
+| Spirit damage exceeds resistance | Remaining HP loss applies; no followup Will or Slowed. |
+| Spirit plus fire | Spirit resistance does not prevent the remaining fire damage; no followup Will or Slowed. |
+| Actual Toolbelt damage buttons, GM and player | Original source-to-target options, original Use and the complete provider finish through real UI controls. |
+| Blind GM-only and private GM/player sources | Original Use and final Will retain the exact blind/whisper scope. |
 
-This run had zero page and cleanup errors. The original document baselines were preserved except native clock audit metadata; observed time 282→312 was restored to 282 after actual cleanup callback completion.
+Public API, private UI and partial/mixed runs passed at 'dda53a22'. The only subsequent runtime change before the final commit passed source privacy into native check middleware before rolling. Private UI was then rerun at the final mechanical commit, with all three GM-decline, GM-use and player-use cases passing.
 
-Two further fresh-session native scheduling cases passed. These were controlled delays of genuine results, not forged outcomes or real network outages:
+## Native private check and duration
 
-- Shield Block awaited its first actual audited resource-bundle fetch. The harness retained the real unread Response, completed a real player Roaring Cast/save while it waited, then released that identical Response. The final payment gate rejected the native damage application; no reaction, HP, shield, claim or expense was changed.
-- Glimpse traversed the genuine player Use and GM Resist choices. The harness delegated six real source-authentication RPCs, held only the sixth successful response after the resource snapshot, completed real Roaring, then released the identical response. The final reserve boundary refused payment and damage application. The ally's HP, raw reaction, claims and expense records remained unchanged. An additional genuine Reactive Shield targeting reminder was retained and checked by its exact observed document and source identity.
+A separate native followup probe used a current bard clone with its original available Halfling Luck, a real Will modifier fixture, an actual class DC and an existing independent Slowed 3. The blind Will completed without a result-dependent Luck prompt, retained Luck's daily use, created one native in-memory Slowed 1 grant and kept Slowed 3 unchanged. The installed main lifecycle removed only its own grant on the actual creator's next turn start. Exact native context 'messageMode: blind' and final GM-only recipients were checked.
 
-Both scheduling runs had zero page and cleanup errors, restored their own wrappers, and preserved original documents/settings including unchanged world time. Each retained eight known missing-token-image console errors and one PF chevron-down image 404. The earlier base and integrated runs also retained missing-image and aborted Dice So Nice audio records. These are not zero console/network-error claims. Earlier harness failures—role order, inactive encounter, partial teardown, version spelling, hook argument shape and additional native reminder—remain recorded separately; none were relabeled as passing native cases.
+This targeted probe used controlled followup authorization and a controlled damage receipt. It verifies native privacy, condition preparation and lifecycle; full provider authority is evidenced separately by the integrated damage runs above.
+
+The duration follows the general numbered-round rule in [Player Core p426](https://2e.aonprd.com/Rules.aspx?ID=2378). Applying creator-turn start to this ability's one-round duration is an explicit rules inference; it does not invent a fiend-turn-end clause. Changed initiative, reordered/skipped turns or rollback use a finite duration from the original start and a visible warning rather than extending the effect indefinitely.
+
+All five accepted integrated/final probes preserved original actors, scenes, combats, messages, settings and world time after fixture cleanup. Each had zero page and cleanup errors and eight known missing-token-image console errors. No zero-console-error claim is made.
+
+Earlier evidence is retained: an initial API harness omitted native source-to-origin option mapping; another asserted the obsolete card user field rather than Core 14 author and did not await a fixture floaty. Earlier followup fixtures had an incomplete damage receipt and an unsupported substitution assumption. Finally, an old blind-save probe allowed a Luck prompt: that privacy behavior was diagnosed, covered by a failing regression, fixed before the die and superseded by the passing final private probe. None of those earlier failures is relabeled as passing final coverage.
 
 ## Scope and manual boundaries
 
-Only the current eligible original rank-3 single-target Cast is admitted. The player confirms that the target can see, hear or otherwise understand the caster. Unsupported geometry, private or unverified variants, missing source/payment proof and ambiguous target identity require manual handling. This does not declare those game options illegal.
+The actual original action, current daily charge, available general reaction, one actual encounter and authenticated original native damage are required. A prepared original rule supplies the resistance value; the module does not leave a permanent actor toggle or substitute its own damage formula. Confirmed consumption and original Use are merged into one expense. A manual unbound Use does not retrospectively attach itself to an old damage result.
 
-Only the first authenticated original Toolbelt save settles automatically. Reroll revisions remain manual in this delivery. Reload, GM/ownership changes, changed rows or uncertain effect writes require renewed proof; persisted raw flags alone do not justify automatic enforcement. Confirmed source termination or confirmed deletion of its own parent clears that source without restoring spent reaction resources. Current caster death does not itself invent an earlier spell expiry.
+No arbitrary range, enemy relation or attack-only rule was added to the source resolver. However, native end-to-end evidence here covers ordinary Strikes. Synthetic actor and non-attack source paths are unit-covered but have no complete native UI acceptance in this batch. Merged attacks, ambiguous same-label or competing resistance contributions, missing source proof, unsupported compatibility, active AAT and outside-encounter cases remain manual. These are automation limits, not declarations of game-rule illegality.
 
-Native Sustain still needs the GM's actual completion/disruption fact on the original card. The once-per-target-turn clap is a prompt; no automatic action-pool payment, reactive attack, undisrupted clap receipt or unsupported animation is claimed. Existing module/provider behavior remains responsible for other effects.
+Only an attributable full prevention triggers the followup. Uncertain GM handoff, payment, save or effect creation remains recorded and cannot automatically repeat. The final native save degree is respected; immunity and independent conditions remain native. Original damage undo/removal cleans only this source effect and does not guess a resource refund. Existing module behavior remains responsible for other abilities.
 
-The reaction query is readonly. Supported consumers check it before new payment/reservation, including prepaid and post-await paths, while already-paid bookkeeping and cleanup remain available. Reaction Checker compatibility requires the audited 1.4.3 bundle and live original callback. Unknown dependencies, external manual macros and previously selected external modifiers remain outside this claim. The original card displays confirmed, manual and compatibility states separately.
-
-Counter Performance, Spiritual Scar and other current-party gaps remain subsequent work. The deferred serrated-blade/Double Slice report remains record-only. Historical evidence is preserved in [0.9.7](verification-0.9.7.md), [0.9.6](verification-0.9.6.md), [0.9.5](verification-0.9.5.md) and [0.9.4](verification-0.9.4.md).
+Counter Performance, Primary Threat, Reflexive Cover, Goblin Scuttle, Fane Escape, Elemental Shield, Terrifying Resistance and other actual remaining gaps are subsequent work. The old serrated-blade/Double Slice report is record-only. Historical evidence is preserved in [0.9.8](verification-0.9.8.md), [0.9.7](verification-0.9.7.md), [0.9.6](verification-0.9.6.md), [0.9.5](verification-0.9.5.md) and [0.9.4](verification-0.9.4.md).
 
 ## Release and installation
 
-Release metadata, final startup smoke, downloaded asset verification and production installation receive separate evidence. At this preparation stage production retains the separately verified 0.9.7 module. The user-selected saved default remains Setup (`options.world=null`); an actively launched fortress world is compatible with that default. A coordinated fresh maintenance window is required before any production restart while players are online.
-
-The final 0.9.8 candidate passed an owned QA restart. Manifest and API both reported 0.9.8, the actual Roaring Reaction adapter was ready, and all **122 source, installed and fresh HTTP hashes matched**. Startup had zero page and module-console errors and two existing missing-image errors. Foundry's native lock check became ready after 8.4 seconds; no lock or database was removed.
-
-The release ZIP was enumerated against the complete frozen runtime file set and the external manifest. All 122 entries matched. ZIP SHA-256: `230dfa0ac479570271bb724c46c201af747d3a25eb16dd18ff2259fede5cd741`. Manifest SHA-256: `15c4cf98ac4c7cb2daf00622ff51173aefe80cfa463bd29d439c42cbffa35fbe`. Downloaded-release verification and production installation remain separate receipts.
+At preparation, the last independently verified production installation was 0.9.7. Production has not been modified by this work. The user-selected default remains Setup ('options.world=null'). Final candidate startup, package/download hashes and any coordinated production installation have separate receipts; publication does not itself imply installation.
