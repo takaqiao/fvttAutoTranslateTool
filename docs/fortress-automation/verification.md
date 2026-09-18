@@ -1,53 +1,56 @@
-# 0.9.7 verification
+# 0.9.8 verification
 
-This candidate adds the original Force Barrage Cast bridge for the current fortress character's rank 1–3 occult spontaneous signature spell. It reuses the verified Workbench 7.7.5 damage construction, with one native payment before target damage delivery. It does not add another damage formula or apply hit point changes automatically. Foundry 14.368 and PF2e 8.5.1 were tested; publication and production installation are separate.
+This release adds the current fortress bard's original rank-3, single-target Roaring Applause flow: one native Cast payment, the first original Toolbelt Will result, source-owned effects, actual caster-turn expiry, native Sustain with GM confirmation, and reaction restrictions. It targets Foundry 14.368 and PF2e 8.5.1. Publication and production installation are separate.
 
 ## Automated checks
 
-The complete module suite passed **885 tests, zero failures and zero skips** at mechanical commit `54a1de0d`. The installed Foundry, PF2e, Counteract, Workbench and Reaction sources were supplied to tests that require them. Tests cover exact invocation enrollment without adding an actor-wide spell matcher, private native variants, payment cancellation and uncertain replies, same-update slot witnesses, original-card binding, target allocation, source/owner/GM changes, and refusal to replay uncertain work.
+The complete module suite passed **1280 tests, zero failures and zero skips** at mechanical commit `2167f81ddd5c3faa4d593f8fd61b3ac7cabfcb61`. Installed Foundry, PF2e, Counteract, Workbench and Reaction sources were supplied to tests requiring them. All 188 recorded source/test/runtime hashes were reverified before release-only documentation and manifest edits.
 
-Two native findings have focused regression coverage. Foundry's later `updateItem` events contain only changed marker fields, so each payment requires its new nonce and exact changed fields together with the full options marker, full committed marker, actual slot update and returned document. Dice So Nice adds `dsnRole` and `dsnRoleManaged` to a native `Die`; comparisons omit only those two confirmed Die presentation fields in addition to the previously verified display annotations. Roll type, damage-instance flavor, formula, totals, dice and results remain checked, and the complete original roll JSON is retained.
+Coverage includes native invocation/payment binding; first-save authentication and both hook/row arrival orders; source expiry, native parent/grant identity and uncertain writes; manual deletion and independent stronger conditions; original-card Sustain; readonly reaction queries and actual commit gates; and the exact Reaction Checker bundle/callback adapter. Independent reviews covered the provider, effect/save adapters, consumers, original-card wiring and compatibility layer. Focused regressions prove confirmed parent deletion clears before a manual/GM barrier, and an older asynchronous write cannot consume a newer GM-continuity barrier.
 
-## Native normal flows
+## Native spell and Sustain flows
 
-The owned loopback QA world enabled 23 relevant modules, including Patreon 3.2.28, Toolbelt 3.56.2, Workbench 7.7.5 and Dice So Nice 6.3.1. It used linked clones of the current character and targets. This is not a rerun of all 121 production modules.
+The isolated profile enabled 23 relevant modules, including Patreon 3.2.28, Toolbelt 3.56.2, Workbench 7.7.5, Dice So Nice 6.3.1 and Reaction Checker 1.4.3. Fixtures were owned clones of current actors. This is not a rerun of all 121 production modules.
 
-The player's real sheet Cast button opened the action and allocation dialogs. The GM observed native slot writes, original spell cards, real target DamageRolls and persistent delivery receipts. All 113 runtime HTTP hashes matched the frozen mechanical candidate, whose manifest still reported 0.9.6 during this development run.
+The accepted base run at core commit `0eb624a8` used the player's actual sheet Cast and original Toolbelt save buttons. Cancel-before-payment and four native adjusted Will outcomes passed. Each paid Cast consumed one rank-3 slot and retained its exact original spell card. Critical success created no effect; success established the source restriction; failure granted Slowed 1; critical failure additionally granted Fascinated. Existing independent Slowed 2 retained its value and ownership.
+
+Actual caster-turn progression ended the source at the correct next turn-end. A genuine reroll moved the source to manual review without another payment. Manual removal of its own Fascinated child did not cause recreation. Native Sustain Use followed by actual GM completion or disruption passed, with no additional spell cost. The provider does not infer undisrupted completion from the native Use return.
+
+The base run had zero page and cleanup errors. All original actors, scenes, combats, messages and settings were preserved after precise fixture cleanup and restoration of only observed native clock advances. Native core.time modification audit metadata was retained. Earlier Toolbelt sparse-default and native GrantItem alteration-default failures remain in evidence; both were narrowly corrected and verified against actual installed schemas.
+
+## Native reaction restrictions
+
+The integrated run at `2167f81d` checked all 122 source, installed and fresh HTTP files, then exercised two real Roaring success sources on a current champion clone.
 
 | Case | Observed result |
 | --- | --- |
-| Cancel allocation | No slot change, payment receipt, spell card or damage card. |
-| Rank 3, three actions, allocation 4/2 | One slot payment, one original card and one combined damage card per target. Each target's resistance applied once through PF2e's original damage consumer. |
-| Rank 2, two actions, allocation 2/0 | One payment and one target damage card; the zero allocation produced none. |
-| Rank 2 again, one action, allocation 0/1 | A new payment nonce and one further slot payment, despite unchanged rank and marker fields. The second target alone received a damage card. |
-| Rank 1, one action | One missile against force resistance 6 produced zero actual damage through native IWR. |
+| Existing original Reaction reminder, GM and player | Trusted clicks were cancelled while the source was active. The exact original card, raw resources, expense records, frequency and HP remained unchanged. |
+| Eight native resource getters | General reaction and seven special keys were masked without modifying their raw fields or creating missing counters. The fixture does not claim positive spending of every special reaction. |
+| Actual source expiry | Getter values returned to current raw values. The same original reminder survived, its native click succeeded, and subsequent native Shield Block reused one expense. |
+| Direct Shield Block | Native damage application was refused before a new payment or HP/shield change. |
+| Original-card prepaid Shield Block | Refusal preserved the original paid card and entry; it neither paid again nor refunded that earlier expense. |
 
-The final five-case run passed with zero page errors and zero cleanup errors. Console output retained ten missing-private-image errors and one generic HTTP 404 without a recorded URL. Preexisting actors, messages, world settings and the active scene matched their baseline after cleanup. The bridge's exact original card disabled its separate generic damage button and pointed to the allocated cards; unrelated spell cards were not changed.
+This run had zero page and cleanup errors. The original document baselines were preserved except native clock audit metadata; observed time 282→312 was restored to 282 after actual cleanup callback completion.
 
-Earlier failed attempts remain in private evidence: DialogV2 converted a null cancel callback into its button action; DSN added live Die role metadata; and a second slot update omitted unchanged receipt fields. Each issue was reproduced, fixed narrowly and rechecked. Earlier fixture hover/shape errors are also retained; the final five-case run had none.
+Two further fresh-session native scheduling cases passed. These were controlled delays of genuine results, not forged outcomes or real network outages:
 
-## Native failure checks
+- Shield Block awaited its first actual audited resource-bundle fetch. The harness retained the real unread Response, completed a real player Roaring Cast/save while it waited, then released that identical Response. The final payment gate rejected the native damage application; no reaction, HP, shield, claim or expense was changed.
+- Glimpse traversed the genuine player Use and GM Resist choices. The harness delegated six real source-authentication RPCs, held only the sixth successful response after the resource snapshot, completed real Roaring, then released the identical response. The final reserve boundary refused payment and damage application. The ally's HP, raw reaction, claims and expense records remained unchanged. An additional genuine Reactive Shield targeting reminder was retained and checked by its exact observed document and source identity.
 
-Two additional native cases passed on the same frozen mechanical candidate. An exact QA-only `preUpdateItem` veto rejected the native slot write: slots stayed unchanged, no original or damage card was created, and the attempt was recorded uncertain without a retry. The second case used a scoped libWrapper wrapper that first awaited the real second target ChatMessage and then threw a simulated lost reply. The slot decreased once, the original card and both damage cards remained, the first target stayed published and the second stayed publishing under an uncertain bridge. The saved native rolls matched both real cards, and no fee, roll or card was repeated. This was controlled fault injection after native creation, not an actual network outage.
-
-Both injected hooks/wrappers were restored, and all preexisting actors, messages, settings and the active scene matched their baselines. The final run had zero page and cleanup errors. Its console retained ten missing-image errors, one generic HTTP 404 and the two expected injected-failure reports. A prior harness attempt could not install its second injection because an existing method descriptor was protected; that failed attempt was preserved, and the passing run used the supported libWrapper registration/unregistration API.
+Both scheduling runs had zero page and cleanup errors, restored their own wrappers, and preserved original documents/settings including unchanged world time. Each retained eight known missing-token-image console errors and one PF chevron-down image 404. The earlier base and integrated runs also retained missing-image and aborted Dice So Nice audio records. These are not zero console/network-error claims. Earlier harness failures—role order, inactive encounter, partial teardown, version spelling, hook argument shape and additional native reminder—remain recorded separately; none were relabeled as passing native cases.
 
 ## Scope and manual boundaries
 
-Only an eligible original Cast starts this bridge. The independent old Workbench macro remains available and is not globally rewritten. Only the audited internal macro UUID, version and full command hash are admitted; its original damage construction is retained. Unknown versions or changed macro contents require manual handling.
+Only the current eligible original rank-3 single-target Cast is admitted. The player confirms that the target can see, hear or otherwise understand the caster. Unsupported geometry, private or unverified variants, missing source/payment proof and ambiguous target identity require manual handling. This does not declare those game options illegal.
 
-The bridge requires public message mode, the current spell/entry/rank, a unique linked source token, a supported same-elevation scene, valid target range and sight, and the caster's explicit visibility confirmation. Hidden/invisible targets, unsupported geometry, private casts, consumables, other spell sources, overlays and unverified damage bonuses remain outside the automatic path. This does not declare those game options illegal.
+Only the first authenticated original Toolbelt save settles automatically. Reroll revisions remain manual in this delivery. Reload, GM/ownership changes, changed rows or uncertain effect writes require renewed proof; persisted raw flags alone do not justify automatic enforcement. Confirmed source termination or confirmed deletion of its own parent clears that source without restoring spent reaction resources. Current caster death does not itself invent an earlier spell expiry.
 
-The player chooses 1–3 actions and a nonnegative integer allocation before payment. Existing native cast policies can still disrupt the spell. Automatic action-pool consumption and Sequencer/JB2A animations are not newly implemented. Damage cards retain their exact native source and Toolbelt target; applying damage remains an explicit normal operation.
+Native Sustain still needs the GM's actual completion/disruption fact on the original card. The once-per-target-turn clap is a prompt; no automatic action-pool payment, reactive attack, undisrupted clap receipt or unsupported animation is claimed. Existing module/provider behavior remains responsible for other effects.
 
-An uncertain payment or delivery remains recorded and is not automatically retried, refunded or resumed after reload. An already created target card is not recreated to compensate for a missing reply. GM/ownership changes stop subsequent work when their next required proof cannot be established.
+The reaction query is readonly. Supported consumers check it before new payment/reservation, including prepaid and post-await paths, while already-paid bookkeeping and cleanup remain available. Reaction Checker compatibility requires the audited 1.4.3 bundle and live original callback. Unknown dependencies, external manual macros and previously selected external modifiers remain outside this claim. The original card displays confirmed, manual and compatibility states separately.
 
-The previous [0.9.6 verification](verification-0.9.6.md), [0.9.5 verification](verification-0.9.5.md) and [0.9.4 verification](verification-0.9.4.md) remain historical evidence. This batch does not implement Roaring Applause, Counter Performance, Spiritual Scar or the deferred serrated blade/Double Slice report.
+Counter Performance, Spiritual Scar and other current-party gaps remain subsequent work. The deferred serrated-blade/Double Slice report remains record-only. Historical evidence is preserved in [0.9.7](verification-0.9.7.md), [0.9.6](verification-0.9.6.md), [0.9.5](verification-0.9.5.md) and [0.9.4](verification-0.9.4.md).
 
 ## Release and installation
 
-The final 0.9.7 candidate passed an owned QA restart. Manifest and API both reported 0.9.7, and all **113 source, installed and fresh-HTTP file hashes matched**. Startup smoke had zero page and module-console errors, with two existing missing-image errors. The restart waited 8.4 seconds for Foundry's native lock check; no lock or database was removed.
-
-The release ZIP was independently enumerated locally against that full runtime manifest; every entry and the separately supplied module manifest matched. ZIP SHA-256: `59942efed9156197860a9ab5b37092ec6674f12ecaa8a39ba20b0f46752bc91c`. Manifest SHA-256: `731dffae1b158ad871aab43d82dcc442dfa22f6501fe465f38a25c4b26bdbdaa`. Downloaded-release verification and production installation are separate receipts.
-
-At release preparation on 2026-09-18, production had the separately verified 0.9.6 release and the user-selected Setup default. Its exact native administrator login gate was verified without logging in or launching a world. The first deployment checker had omitted this normal authentication branch; its original failure journal was retained alongside a successful independent supplemental installation verification, without another restart.
+Release metadata, final startup smoke, downloaded asset verification and production installation receive separate evidence. At this preparation stage production retains the separately verified 0.9.7 module. The user-selected saved default remains Setup (`options.world=null`); an actively launched fortress world is compatible with that default. A coordinated fresh maintenance window is required before any production restart while players are online.
