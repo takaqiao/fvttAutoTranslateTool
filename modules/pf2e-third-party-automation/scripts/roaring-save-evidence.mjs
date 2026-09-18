@@ -52,7 +52,10 @@ export function createRoaringSaveEvidence({game,fromUuid=globalThis.fromUuid,loo
   if(!compatible()||game.messages?.get(message?.id)!==message||!publicMessage(message))return null;
   const s=lookupSource(message);if(!s||typeof s.then==='function'||!['awaiting-save','active'].includes(s.status)||!bounded(s.sourceNonce)||!bounded(s.castNonce)||s.originalMessageUuid!==message.uuid||s.rank!==3||!Number.isFinite(s.dc)||s.gmId!==game.users.activeGM?.id||sourceKeys.some(k=>s[k]===undefined))return null;
   const h=helper(message),v=h?.saveVariants?.null,origin=message.flags?.pf2e?.origin;
-  if(h?.type!=='spell'||h.private!==false||h.item!=null&&h.item!==s.itemUuid||!equal(h.targets,[s.targetUuid])||!v||v.statistic!=='will'||v.basic!==false||v.dc!==s.dc||Object.keys(h.saveVariants).length!==1||origin?.uuid!==s.itemUuid||origin.actor!==s.casterActorUuid||origin.castRank!==3||message.flags?.[ID]?.nativeCast?.id!==s.castNonce)return null;
+  // Toolbelt 3.56.2 initially persists a sparse helper. Its zTargetsData schema
+  // defaults an absent private field to false; encoding the first save adds it.
+  // Admit only absence or literal false, never null/invalid explicit values.
+  if(h?.type!=='spell'||Object.hasOwn(h,'private')&&h.private!==false||h.item!=null&&h.item!==s.itemUuid||!equal(h.targets,[s.targetUuid])||!v||v.statistic!=='will'||v.basic!==false||v.dc!==s.dc||Object.keys(h.saveVariants).length!==1||origin?.uuid!==s.itemUuid||origin.actor!==s.casterActorUuid||origin.castRank!==3||message.flags?.[ID]?.nativeCast?.id!==s.castNonce)return null;
   return s;
  }
  function current(record){const s=sourceFor(record.message);return installed&&s&&equal(identity(s),record.source)&&record.gmId===game.users.activeGM?.id?s:null;}
