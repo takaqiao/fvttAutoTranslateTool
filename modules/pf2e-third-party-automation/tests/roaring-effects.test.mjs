@@ -13,7 +13,10 @@ function fixture({outcome='criticalFailure',immunity={},veto=false,lostReply=fal
  actor.createEmbeddedDocuments=async(_type,data)=>{
   calls.create++;if(veto)return [];
   const result=[];
-  for(const source of data){const parent=make(source,`parent${++sequence}`);parent.flags.pf2e??={};parent.flags.pf2e.itemGrants={};result.push(parent);
+  for(const source of data){const parent=make(source,`parent${++sequence}`);parent._source=structuredClone(source);parent.flags.pf2e??={};parent.flags.pf2e.itemGrants={};result.push(parent);
+   // PF2e 8.5.1 ItemAlteration's EmbeddedDataField adds this default to the
+   // prepared rule source; the persisted Item source remains unchanged.
+   for(const rule of parent.system.rules)for(const alteration of rule.alterations??[])if(alteration.fromEquipment===undefined)alteration.fromEquipment=true;
    for(const rule of parent.system.rules){const name=rule.uuid.endsWith('xYTAsEpcJE1Ccni3')?'slowed':'fascinated',id=`child${++sequence}`;
     const child=make({type:'condition',system:{slug:name},flags:{pf2e:{grantedBy:{id:parent.id,onDelete:'cascade'}}},_stats:{compendiumSource:rule.uuid}},id);
     parent.flags.pf2e.itemGrants[rule.flag]={id:child.id,onDelete:'detach'};result.push(child);
@@ -38,6 +41,30 @@ function fixture({outcome='criticalFailure',immunity={},veto=false,lostReply=fal
  const effects=createRoaringEffects({game,fromUuid:async uuid=>docs.get(uuid),randomId:()=>`op-${++sequence}`});
  return {game,gm,actor,docs,calls,make,state,turn,context,effects};
 }
+ for(const outcome of ['failure','criticalFailure'])test(`native alteration preparation preserves exact declared rules for ${outcome}`,async()=>{
+  const f=fixture({outcome});await f.effects.claim({actor:f.actor,state:f.state,context:f.context});
+  const r=await f.effects.materialize({actor:f.actor,nonce:f.state.sourceNonce});
+  const parent=f.actor.items.get(r.effects.parentId),rule=r.effects.rules.find(rule=>rule.alterations);
+  assert.equal(r.effects.status,'created');assert.equal(f.calls.create,1);
+  assert.deepEqual(rule.alterations,[{mode:'override',property:'badge-value',value:1,fromEquipment:true}]);
+  assert.deepEqual(parent.system.rules,parent._source.system.rules);
+  assert.deepEqual(parent.system.rules,r.effects.rules);
+  assert.ok(r.effects.children.slowed);assert.equal(!!r.effects.children.fascinated,outcome==='criticalFailure');
+ });
+ for(const [name,alter]of [
+  ['fromEquipment false',a=>a.fromEquipment=false],
+  ['changed badge value',a=>a.value=2],
+  ['changed mode',a=>a.mode='add'],
+  ['changed property',a=>a.property='description'],
+  ['extra alteration property',a=>a.unrecognized=true],
+ ])test(`exact alteration comparison still rejects ${name}`,async()=>{
+  const f=fixture({outcome:'failure',lostReply:true});await f.effects.claim({actor:f.actor,state:f.state,context:f.context});
+  await assert.rejects(f.effects.materialize({actor:f.actor,nonce:f.state.sourceNonce}));
+  const parent=[...f.actor.items.values()].find(item=>item.type==='effect');alter(parent.system.rules[0].alterations[0]);
+  await assert.rejects(f.effects.materialize({actor:f.actor,nonce:f.state.sourceNonce}),/来源效果授予规则已改变/);
+  assert.equal(f.calls.create,1);assert.equal(f.calls.delete.length,0);
+  assert.equal(f.effects.get(f.actor,f.state.sourceNonce).effects.status,'uncertain');
+ });
  test('native parent owns only its two grants and repeating materialize never creates twice',async()=>{
   const f=fixture();const other=f.make({type:'condition',system:{slug:'slowed',value:{value:2}},flags:{}},'other');
   await f.effects.claim({actor:f.actor,state:f.state,context:f.context});

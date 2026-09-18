@@ -54,7 +54,9 @@ export function createRoaringEffects({game,fromUuid=globalThis.fromUuid,randomId
  function proofFor(r){return {schema:1,sourceNonce:r.state.sourceNonce,castNonce:r.state.source.castNonce,operationId:r.effects.operationId,targetActorUuid:r.state.source.targetActorUuid,originalMessageUuid:r.state.source.originalMessageUuid}}
  function grantKey(r,role){return `roaring${role}${r.state.sourceNonce.replaceAll('-','')}`}
  function desired(r){const p=projectRoaringConditions(r.state),i=r.context.immunity;return {projection:p,roles:i.spell?[]:['slowed','fascinated'].filter(role=>!!p[role]&&!i[role])}}
- function expectedRules(r){return desired(r).roles.map(role=>({key:'GrantItem',uuid:CONDITIONS[role],flag:grantKey(r,role),allowDuplicate:true,inMemoryOnly:false,reevaluateOnUpdate:false,onDeleteActions:{granter:'cascade',grantee:'detach'},...(role==='slowed'?{alterations:[{mode:'override',property:'badge-value',value:1}]}:{})}))}
+ // PF2e's ItemAlteration preparation adds fromEquipment:true. Declare the
+ // native default so the complete alteration remains strictly comparable.
+ function expectedRules(r){return desired(r).roles.map(role=>({key:'GrantItem',uuid:CONDITIONS[role],flag:grantKey(r,role),allowDuplicate:true,inMemoryOnly:false,reevaluateOnUpdate:false,onDeleteActions:{granter:'cascade',grantee:'detach'},...(role==='slowed'?{alterations:[{mode:'override',property:'badge-value',value:1,fromEquipment:true}]}:{})}))}
  function ownParent(actor,r,item,{deleted=false}={}){
   return item?.type==='effect'&&item.actor===actor&&(deleted||actor.items.get(item.id)===item)&&item.id===r.effects.parentId&&equal(marker(item),proofFor(r))&&item.system?.slug===`tpa-roaring-${r.state.sourceNonce.toLowerCase()}`&&item.system.context?.origin?.actor===r.state.source.casterActorUuid&&item.system.context.origin.token===r.state.source.casterTokenUuid&&item.system.context.origin.item===r.state.source.itemUuid;
  }
