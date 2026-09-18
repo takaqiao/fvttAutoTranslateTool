@@ -14,8 +14,8 @@ export function preserveElectricityOnAlter(original,result){
 
 /** Small adapter around native publication and application. It never rolls or
  * applies replacement damage, and never treats a rolled total as damage taken. */
-export function createEldamonElectricityProvider({game,fromUuid,onError=console.error,selectChoice=showNativeChoice,refreshOutsideEncounter=async()=>{}}={}){
- const ledger=createElectricityLedger({game,fromUuid}),scopes=new Map();let socket;
+export function createEldamonElectricityProvider({game,reactionRestriction,fromUuid,onError=console.error,selectChoice=showNativeChoice,refreshOutsideEncounter=async()=>{}}={}){
+ const ledger=createElectricityLedger({game,reactionRestriction,fromUuid}),scopes=new Map();let socket;
  const active=()=>game.user?.id===game.users.activeGM?.id;
  async function rpc(method,payload){
   if(active())return ledger[method](payload,game.user);

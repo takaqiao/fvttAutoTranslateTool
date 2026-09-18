@@ -6,6 +6,15 @@ import {destructiveBlockAmounts} from '../scripts/shield-damage-adapter.mjs';
 import {ELECTRICITY_SOURCES as S,electricityEffects,electricityState} from '../scripts/eldamon-electricity.mjs';
 const ID='pf2e-third-party-automation';
 
+for(const status of ['restricted','manual'])test(`provider forwards ${status} restriction to its real Reactive Chain ledger`,async()=>{
+ const f=fixture();f.item(f.other,'shock',S.shocked);await(await f.damage()).finish();f.power.sourceId=S.chain;f.caster.getActiveTokens=()=>[f.tokens[0]];
+ let current=status;const provider=createEldamonElectricityProvider({game:f.game,fromUuid:async uuid=>f.docs.get(uuid),reactionRestriction:actor=>{assert.equal(actor,f.caster);return {status:current}}});
+ const context={item:f.power,selection:{targetUuids:[f.tokens[2].uuid],discharge:false},kind:'normal'};
+ await assert.rejects(provider.beforeChannel(context),/反应/);current='clear';
+ const result=await provider.beforeChannel(context);assert.equal(result.triggerDamage,13);assert.equal(result.electricityEvidence.targetUuid,f.tokens[2].uuid);
+ current=status;await assert.rejects(provider.validateSelection({actor:f.caster,item:f.power,selection:result,kind:'normal',user:f.owner}),/Reactive Chain/);
+});
+
 test('Destructive Block final native proof overrides earlier IWR amount; uncertain or mismatched proof cannot trigger lifecycle',async()=>{
  for(const scenario of ['absorbed','partial','uncertain','wrong-nonce','missing-proof']){
   const f=fixture();f.target.hitPoints={max:20,value:20};f.item(f.target,'charge',S.charged,{system:{badge:{value:2}}});f.item(f.other,'shock',S.shocked);

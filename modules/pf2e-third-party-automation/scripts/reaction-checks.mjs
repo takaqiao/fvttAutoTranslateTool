@@ -3,6 +3,7 @@ import {SerialActions} from './runtime.mjs';
 import {getSourceId,isActiveGM,resolveMessageTargets} from './native-context.mjs';
 import {genericReactionAvailable,withReactionReservation} from './fear-automation.mjs';
 import {createEatFortune} from './eat-fortune.mjs';
+import {reactionPermitted} from './reaction-restriction.mjs';
 
 export const REACTION_CHECK_SOURCES=Object.freeze({pointed:'Compendium.pf2e.actionspf2e.Item.xccOiNL2W1EtfUYl',pointedEffect:'Compendium.pf2e.feat-effects.Item.SScln8qRQgVC6Brz',clock:'Compendium.pf2e.feats-srd.Item.3aG0gkHulBIHqqGE',clockEffect:'Compendium.pf2e.feat-effects.Item.LbICHKe5jLMxhaOw',squawk:'Compendium.pf2e.feats-srd.Item.CCmiEmS7ZgyQUfhn',eat:'Compendium.pf2e.feats-srd.Item.rFmJVDdB313EibTs'});
 const values=c=>Array.from(c?.values?.()??c??[]),own=d=>d?.flags?.[MODULE_ID]?.reactionChecks??{},OUTCOMES=['criticalFailure','failure','success','criticalSuccess'];
@@ -47,15 +48,15 @@ export async function runCheckReactionPipeline({game,check,context,event=null,ca
  if(callback)await callback(captured.roll,captured.outcome,message,captured.event);return captured.roll;
 }
 
-export function createReactionChecks({game,fromUuid=globalThis.fromUuid,choose,onError=()=>{},nativeCheckMiddleware,halflingLuck}={}){
+export function createReactionChecks({game,reactionRestriction,fromUuid=globalThis.fromUuid,choose,onError=()=>{},nativeCheckMiddleware,halflingLuck}={}){
  const queue=new SerialActions(),tracked=new Map(),reactors=new Map(),nativeInvocations=new Map();let socket;
- const eatFortune=createEatFortune({game,fromUuid,choose,onError});
+ const eatFortune=createEatFortune({game,reactionRestriction,fromUuid,choose,onError});
  const requireReactionGM=()=>{if(!isActiveGM(game))throw Error('主GM已交接，本次反应已停止；已有认领或费用不会自动回滚或重试。')};
  // A request already sent may have committed. Stop on handoff without undoing it.
  const asReactionGM=async operation=>{requireReactionGM();const result=await operation();requireReactionGM();return result};
  const now=()=>game.time.worldTime??0;
  const epoch=actor=>{const c=game.combat,index=c?.turns?.findIndex(t=>t.actor?.uuid===actor.uuid)??-1;return c?.started&&index>=0?`${c.id}:${c.round-(index>c.turn?1:0)}`:null};
- const reactionAvailable=actor=>!epoch(actor)||genericReactionAvailable(actor,game);
+ const reactionAvailable=actor=>reactionPermitted(actor,reactionRestriction)&&(!epoch(actor)||genericReactionAvailable(actor,game));
  const canReact=actor=>!actor.isDead&&actor.canAct!==false&&!actor.hasCondition?.('unconscious')&&!actor.hasCondition?.('stunned');
  const resolveAction=item=>item?.type==='action'&&getSourceId(item)===REACTION_CHECK_SOURCES.pointed?'reaction-checks:pointed-question':null;
  const immune=(actor,kind)=>values(actor.items).some(i=>own(i).kind===kind&&(own(i).expiresAt??0)>now());

@@ -1,6 +1,7 @@
 import {SerialActions} from './runtime.mjs';
 import {sourceUuid} from './metapower/rules.mjs';
 import {genericReactionAvailable} from './reaction-budget.mjs';
+import {reactionPermitted} from './reaction-restriction.mjs';
 
 export const ELECTRICITY_MODULE_ID='pf2e-third-party-automation';
 export const ELECTRICITY_SOURCES=Object.freeze({
@@ -73,7 +74,7 @@ const sourceFingerprint=m=>JSON.stringify({pf:m.flags?.pf2e,source:m.flags?.[ID]
 
 /** Active-GM ledger. Document effects retain their published rules and GrantItem
  * links. An interrupted mutation is never inferred from unrelated HP changes. */
-export function createElectricityLedger({game,fromUuid,queue=new SerialActions(),reactionAvailable=genericReactionAvailable}={}){
+export function createElectricityLedger({game,reactionRestriction,fromUuid,queue=new SerialActions(),reactionAvailable=genericReactionAvailable}={}){
  const gm=()=>{if(game.user?.id!==game.users.activeGM?.id)throw Error('Electricity lifecycle requires the active GM.');};
  const owner=(actor,user)=>{gm();if(!user||game.users.get(user.id)!==user||!actor?.testUserPermission?.(user,'OWNER'))throw Error('Current actor owner permission is required.');};
  const save=async(actor,state)=>{
@@ -166,7 +167,7 @@ export function createElectricityLedger({game,fromUuid,queue=new SerialActions()
   const hit=applications.length?!(await Promise.all(applications.map(async r=>r.status==='confirmed'&&r.electricityAmount===0&&await verified(r)))).every(Boolean):manifest.includes(target.uuid);
   return chainEligibility({triggerDamage:record.electricityAmount,sourceDistance:caster.object?.distanceTo?.(source.object),targetDistance:source.object?.distanceTo?.(target.object),
    adjacentCaster:caster.object?.distanceTo?.(target.object)<=5,enemy:!!actor.alliance&&!!target.actor.alliance&&actor.alliance!==target.actor.alliance,
-   shocked:electricityEffects(target.actor,S.shocked).length>0,hitBySameEffect:hit,reactionAvailable:reactionAvailable(actor,{combat:casterCombat,modules:game.modules,messages:game.messages,users:game.users}),discharge:selection.discharge,siphoning:kind==='siphoning'});
+   shocked:electricityEffects(target.actor,S.shocked).length>0,hitBySameEffect:hit,reactionAvailable:reactionPermitted(actor,reactionRestriction)&&reactionAvailable(actor,{combat:casterCombat,modules:game.modules,messages:game.messages,users:game.users},{reactionRestriction}),discharge:selection.discharge,siphoning:kind==='siphoning'});
  }
  return {
   async channel(payload,user){const {actor,receipt:r,message,item}=await original(payload,user);

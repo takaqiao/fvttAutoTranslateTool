@@ -6,6 +6,7 @@ import {deflectionFeat,deflectionBroken,getTranscendentDeflectionOptions,getDefl
 import {isCurrentDisruptToken} from './disrupt-prey-rules.mjs';
 import {resolveDeflectionSource,validateDeflectionSource} from './transcendent-deflection-source.mjs';
 import {createDeflectionWeapons} from './transcendent-deflection-weapons.mjs';
+import {reactionPermitted} from './reaction-restriction.mjs';
 const values=c=>Array.from(c?.values?.()??c??[]),own=a=>a?.flags?.[MODULE_ID]?.transcendentDeflection??{},author=m=>m?.author?.id??m?.user?.id??m?.user;
 const random=()=>globalThis.foundry?.utils?.randomID?.(24)??crypto.randomUUID(),brand=Symbol('native-deflection-plan');
 const sourceKey=s=>`${s.damageMessageId}:${s.rollIndex}:${s.tokenUuid}`;
@@ -18,14 +19,14 @@ const sameShield=(a,b)=>validShield(a)&&validShield(b)&&(a===null?b===null:b!==n
 
 /** Provider for the one native damage pipeline. The source-client scope proves
  * a real waiting post-IWR invocation; a UUID, roll option or RPC alone cannot. */
-export function createTranscendentDeflection({game,fromUuid=globalThis.fromUuid,choose,getRollContext,nativeBridgeAvailable=()=>false,weapons=createDeflectionWeapons({game}),onError=console.error}={}){
+export function createTranscendentDeflection({game,reactionRestriction,fromUuid=globalThis.fromUuid,choose,getRollContext,nativeBridgeAvailable=()=>false,weapons=createDeflectionWeapons({game}),onError=console.error}={}){
  const plans=new WeakSet(),live=new Map(),queue=new SerialActions();let socket,installation;
  const gm=()=>{if(!isActiveGM(game))throw Error('靖涛定风剑主GM已改变。')};
  const owner=(actor,user)=>!!(user?.active&&actor?.testUserPermission?.(user,'OWNER'));
  const selectedOwner=actor=>{const users=values(game.users).filter(u=>owner(actor,u));return users.find(u=>!u.isGM&&(u.character?.uuid===actor.uuid||u.character?.id===actor.id))??users.find(u=>!u.isGM)??users.find(u=>u.id===game.users.activeGM?.id)};
  const now=()=>{const n=game.time?.worldTime;if(!Number.isFinite(n))throw Error('缺少原生世界时间，不能判定十分钟冷却。');return n};
  const encounter=()=>game.combat?.started?game.combat.id:null;
- const canPay=actor=>deflectionFeat(actor)&&(deflectionFeat(actor).system?.frequency?.value??1)>0&&now()>=(own(actor).availableAt??-Infinity)&&(!encounter()||genericReactionAvailable(actor,game));
+ const canPay=actor=>reactionPermitted(actor,reactionRestriction)&&deflectionFeat(actor)&&(deflectionFeat(actor).system?.frequency?.value??1)>0&&now()>=(own(actor).availableAt??-Infinity)&&(!encounter()||genericReactionAvailable(actor,game));
  async function save(actor,change){await withReactionReservation(actor,game,async()=>{gm();const state=structuredClone(own(actor));state.reactions??=[];state.applications??=[];change(state);await actor.update({[`flags.${MODULE_ID}.transcendentDeflection`]:state});gm()})}
  async function verified(snapshot){const result=await validateDeflectionSource({game,fromUuid,snapshot});gm();if(!result.verified)throw Error(`攻击伤害来源已改变：${result.unsupportedReason}`);return result}
  function scopeProof(payload,user){

@@ -20,7 +20,7 @@ async function chooseSource({choices}){
 
 /** Subscribe after Prayer. A branded native card is only a Use fact; only an
  * active-GM verdict renews/ends its exact source. No resource or Dismiss API. */
-export function createRoaringSustain({game,fromUuid=globalThis.fromUuid,provider,actionEvents=getNativeActionEvents({game}),choose=chooseSource,onError=()=>{},randomId=()=>globalThis.crypto.randomUUID()}={}){
+export function createRoaringSustain({game,fromUuid=globalThis.fromUuid,provider,reactionCompatibility=()=>({owned:false,checker:false}),actionEvents=getNativeActionEvents({game}),choose=chooseSource,onError=()=>{},randomId=()=>globalThis.crypto.randomUUID()}={}){
  demand(provider?.listSources&&provider?.lookupSource&&provider?.applyLifecycleEvent,'缺少来源查询和生命周期接口。');
  const scopes=new Map(),queue=new SerialActions(),hooks=[];let installed=false,socket,Hooks,unsubscribe;
  const sources=()=>provider.listSources();
@@ -120,7 +120,16 @@ export function createRoaringSustain({game,fromUuid=globalThis.fromUuid,provider
   const {actor,record:r}=found[0],s=r.state,doc=root.ownerDocument,box=doc.createElement('section');box.dataset.roaringControls='';
   const add=(tag,text)=>{const e=doc.createElement(tag);e.textContent=text;box.append(e);return e};
   add('p',`轰然喝彩：${s.status==='ended'?'已结束':s.status==='active'?'生效中':'等待首次豁免'}。${s.manualReview||s.timing.mode!=='exact'?'本源结果或时长需GM人工核对。':''}`);
-  if(r.context.immunity?.spell===false&&projectRoaringConditions(s).noReactions)add('p','禁反应为本源规则事实；此处尚未机械拦截其他反应入口。');
+  if(r.context.immunity?.spell===false&&projectRoaringConditions(s).noReactions){
+   let restriction,coverage;
+   try{restriction=provider.reactionRestriction?.(actor)?.sources?.find(x=>x.sourceNonce===s.sourceNonce);coverage=reactionCompatibility()}catch{/* An unavailable integration never attests coverage. */}
+   if(restriction?.status==='clear')add('p','本源当前不再限制反应。');
+   else if(restriction?.status==='manual')add('p',coverage?.owned===true?'禁反应状态待GM核对；相关自动反应暂不执行。':'禁反应状态待GM核对；本客户端的反应入口尚未确认。');
+   else if(restriction?.status==='restricted'&&coverage?.owned===true){
+    add('p','禁反应：已拦截本模块的自动反应。');
+    add('p',coverage.checker===true?'本客户端 Reaction Checker 的可用性检查与旧卡按钮已接入；其他手工宏由GM核对。':'本客户端 Reaction Checker 的反应入口仍需GM核对。');
+   }else add('p','禁反应为本源规则事实；本客户端的反应入口尚未确认，请GM核对。');
+  }
   if(r.context.immunity?.spell===true)add('p','目标对此法术免疫；此来源不施加条件或禁反应。');
   const stored=r.effects.children?.fascinated,remaining=stored&&actor.items?.get(stored.id);
   if(s.tombstones.fascinated&&remaining&&typeof stored.uuid==='string'&&remaining.uuid===stored.uuid)add('p','迷魂已标记结束，但条件尚未清除，请GM手工核对。');

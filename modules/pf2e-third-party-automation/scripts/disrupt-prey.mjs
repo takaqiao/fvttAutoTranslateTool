@@ -20,7 +20,7 @@ const resultOf=(event,claim)=>({status:event?.status??'ineligible',disrupted:eve
 const recordResult=(actor,id)=>{const event=eventRecord(actor,id);return resultOf(event,reactionRecord(actor,event?.nonce));};
 
 /** One proved triggering action and one normally chosen reaction. Native execution is injected. */
-export function createDisruptPrey({game,fromUuid=globalThis.fromUuid,choose,validateSource=()=>false,performStrike,onError=()=>{}}={}){
+export function createDisruptPrey({game,reactionRestriction,fromUuid=globalThis.fromUuid,choose,validateSource=()=>false,performStrike,onError=()=>{}}={}){
  const report=error=>{try{onError(error)}catch{/* Reporting cannot repeat a mechanical operation. */}};
  const gm=()=>{if(!isActiveGM(game))throw Error('扰乱狩猎主GM已经改变。');};
  const owner=(actor,user)=>!!(user?.active&&actor.testUserPermission?.(user,'OWNER'));
@@ -146,7 +146,7 @@ export function createDisruptPrey({game,fromUuid=globalThis.fromUuid,choose,vali
    let claimedChoice=false;
    await save(actor,state=>{
     if(state.events.some(e=>e.eventId===event.eventId||e.nonce===event.nonce)||state.reactions.some(r=>r.nonce===event.nonce))return false;
-    claimedChoice=!!(epoch&&turn&&user&&options.length&&reactionEpoch(actor,game)===epoch&&turnKey(game)===turn&&owner(actor,user)&&genericReactionAvailable(actor,game)&&getDisruptPreyMeleeOptions({...context,game}).length);
+    claimedChoice=!!(epoch&&turn&&user&&options.length&&reactionEpoch(actor,game)===epoch&&turnKey(game)===turn&&owner(actor,user)&&genericReactionAvailable(actor,game,{reactionRestriction})&&getDisruptPreyMeleeOptions({...context,game}).length);
     state.events.push({...event,status:claimedChoice?'choosing':'ineligible',epoch,turn,userId:user?.id??null});
    });
    if(!claimedChoice)return recordResult(actor,event.eventId);
@@ -160,9 +160,9 @@ export function createDisruptPrey({game,fromUuid=globalThis.fromUuid,choose,vali
    let claim;
    await withReactionReservation(actor,game,async()=>{
     gm();const state=structuredClone(own(actor)),saved=state.events.find(e=>e.eventId===event.eventId);
-    if(saved?.status!=='choosing'||reactionEpoch(actor,game)!==epoch||turnKey(game)!==turn||!owner(actor,user)||!genericReactionAvailable(actor,game)||!getDisruptPreyMeleeOptions({...context,game}).some(o=>o.key===choice.key))return;
+    if(saved?.status!=='choosing'||reactionEpoch(actor,game)!==epoch||turnKey(game)!==turn||!owner(actor,user)||!genericReactionAvailable(actor,game,{reactionRestriction})||!getDisruptPreyMeleeOptions({...context,game}).some(o=>o.key===choice.key))return;
     if(!await validSource(event,context,'claim',choice))return;
-    if(reactionEpoch(actor,game)!==epoch||turnKey(game)!==turn||!owner(actor,user)||!genericReactionAvailable(actor,game)||!getDisruptPreyMeleeOptions({...context,game}).some(o=>o.key===choice.key))return;
+    if(reactionEpoch(actor,game)!==epoch||turnKey(game)!==turn||!owner(actor,user)||!genericReactionAvailable(actor,game,{reactionRestriction})||!getDisruptPreyMeleeOptions({...context,game}).some(o=>o.key===choice.key))return;
     claim={nonce:event.nonce,eventId:event.eventId,actorUuid:actor.uuid,actorId:actor.id,tokenUuid:token.uuid,targetUuid:target.uuid,targetTokenUuid:target.uuid,targetActorUuid:target.actor.uuid,targetActorId:target.actor.id,weaponKey:current.key,itemUuid:current.itemUuid,userId:user.id,epoch,claimKey:`disrupt:${event.nonce}`,slug:'disrupt-prey',cost:1,state:'claimed',checkId:null,map:choice.map};
     state.reactions??=[];state.reactions.push(claim);saved.stage='claimed';saved.weaponKey=current.key;saved.map=choice.map;
     gm();await actor.update({[`flags.${MODULE_ID}.disruptPrey`]:state});gm();

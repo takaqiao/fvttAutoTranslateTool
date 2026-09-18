@@ -33,6 +33,14 @@ test('pending Anvil expiry persists deletion under Foundry recursive merge and c
  await(await f.damage()).finish();assert.equal(electricityEffects(f.target,S.shocked).length,0);
 });
 
+for(const status of ['restricted','manual'])test(`Reactive Chain ${status} survives a bounded encounter game and injected availability`,async()=>{
+ const f=fixture();f.item(f.other,'shock',S.shocked);await(await f.damage()).finish();
+ const payload={actorUuid:f.caster.uuid,sourceTokenUuid:f.tokens[0].uuid,selection:{targetUuids:[f.tokens[2].uuid],discharge:false},kind:'siphoning'};
+ let current=status;const ledger=createElectricityLedger({game:f.game,fromUuid:async uuid=>f.docs.get(uuid),reactionAvailable:()=>true,reactionRestriction:actor=>{assert.equal(actor,f.caster);return {status:current}}});
+ f.game.combat={id:'other-viewed',started:true,round:9,turn:0,turns:[]};
+ assert.equal((await ledger.candidates(payload,f.owner)).length,0);current='clear';assert.equal((await ledger.candidates(payload,f.owner)).length,1);
+});
+
 test('authentic confirmed zero releases an original area target, while unresolved and changed receipts remain excluded',async()=>{
  const f=fixture();f.item(f.other,'shock',S.shocked);const m=f.source('pure',[f.tokens[1].uuid,f.tokens[2].uuid]);await (await f.damage(f.target,{m})).finish();
  const payload={actorUuid:f.caster.uuid,sourceTokenUuid:f.tokens[0].uuid,selection:{targetUuids:[f.tokens[2].uuid],discharge:false},kind:'siphoning'};

@@ -3,6 +3,7 @@ import {SerialActions} from './runtime.mjs';
 import {isActiveGM,resolveMessageTargets,upsertOwnedEffect} from './native-context.mjs';
 import {degreeForSharedCheck} from './social-automation.mjs';
 import {genericReactionAvailable,withReactionReservation,reactionEpoch as epoch} from './reaction-budget.mjs';
+import {reactionPermitted} from './reaction-restriction.mjs';
 export {genericReactionAvailable,withReactionReservation} from './reaction-budget.mjs';
 
 export const FEAR_SOURCES=Object.freeze({battle:'Compendium.pf2e.feats-srd.Item.ePObIpaJDgDb9CQj',knowledge:'Compendium.pf2e.feats-srd.Item.hkSuxXOc9qBleJbd'});
@@ -11,7 +12,7 @@ const OUTCOMES=['criticalFailure','failure','success','criticalSuccess'],TRAITS=
 const values=c=>Array.from(c?.values?.()??c??[]),own=d=>d?.flags?.[MODULE_ID]?.fear??{},feature=(a,k)=>values(a?.items).find(i=>hasSource(i,FEAR_SOURCES[k]));
 const skill=(a,k)=>a.getStatistic?.(k)??a.skills?.[k],rank=(a,k)=>skill(a,k)?.rank??0;
 const conscious=a=>a&&a.isDead!==true&&!a.hasCondition?.('unconscious');
-export const battleCryReactionAvailable=(actor,game)=>!epoch(actor,game)||genericReactionAvailable(actor,game);
+export const battleCryReactionAvailable=(actor,game,{reactionRestriction}={})=>reactionPermitted(actor,reactionRestriction)&&(!epoch(actor,game)||genericReactionAvailable(actor,game));
 
 function inRange(origin,target){const n=origin?.object&&target?.object&&origin.parent?.id===target.parent?.id?origin.object.distanceTo?.(target.object):null;return Number.isFinite(n)&&n>=0&&n<=30;}
 function observedTargets(origin,targets){
@@ -38,7 +39,7 @@ function adjustments(game,raw,options){
 }
 const equivalent=(a,b)=>['all',...OUTCOMES].every(key=>a?.[key]?.amount===b?.[key]?.amount&&a?.[key]?.label===b?.[key]?.label);
 
-export function createFearAutomation({game,fromUuid=globalThis.fromUuid,choose,onError=console.error}={}){
+export function createFearAutomation({game,reactionRestriction,fromUuid=globalThis.fromUuid,choose,onError=console.error}={}){
  const queue=new SerialActions(),tracked=new Map();
  const gm=()=>{if(!isActiveGM(game))throw Error('恐惧能力必须由当前主GM结算。');};
  const now=()=>game.time?.worldTime??0;
@@ -104,7 +105,7 @@ export function createFearAutomation({game,fromUuid=globalThis.fromUuid,choose,o
   if(!author||creatingUserId&&creatingUserId!==author.id&&creatingUserId!==game.users.activeGM?.id||!actor.testUserPermission?.(author,'OWNER'))return;
   const user=author.isGM?values(game.users).find(u=>u.active&&!u.isGM&&actor.testUserPermission(u,'OWNER'))??author:author;
   return queue.run(`fear:battle:${actor.uuid}`,async()=>{
-   gm();if(own(message).battleCry||!conscious(actor)||reaction&&!battleCryReactionAvailable(actor,game))return;
+   gm();if(own(message).battleCry||!conscious(actor)||reaction&&!battleCryReactionAvailable(actor,game,{reactionRestriction}))return;
    const triggerEpoch=epoch(actor,game),origin=sourceFor(actor,message),raw=reaction?[await fromUuid(context.target?.token)]:values(origin.parent.tokens);
    const canTarget=t=>foe(actor,t)&&inRange(origin,t)&&!intimidateImmune(t.actor,actor);
    const eligible=raw.filter(canTarget),observed=reaction?null:observedTargets(origin,eligible),candidates=eligible.filter(t=>reaction||observed.has(t));if(!candidates.length)return;
@@ -113,11 +114,11 @@ export function createFearAutomation({game,fromUuid=globalThis.fromUuid,choose,o
    const selected=await choose({actor,user,title:reaction?'战吼：攻击大成功后的反应':'战吼：先攻后的自由动作',choices});
    if(selected==null||selected==='decline'){gm();await message.update({[`flags.${MODULE_ID}.fear.battleCry`]:{status:'declined',reaction}});return;}
    const target=candidates.find(t=>t.uuid===selected);if(!target)throw Error('战吼的目标选择无效。');
-   gm();if(!conscious(actor)||!feature(actor,'battle')||rank(actor,'intimidation')<(reaction?4:3)||!canTarget(target)||!reaction&&!observedTargets(origin,[target]).has(target)||reaction&&(epoch(actor,game)!==triggerEpoch||!battleCryReactionAvailable(actor,game)))throw Error('战吼选择期间角色、目标或反应资源已改变。');
+   gm();if(!conscious(actor)||!feature(actor,'battle')||rank(actor,'intimidation')<(reaction?4:3)||!canTarget(target)||!reaction&&!observedTargets(origin,[target]).has(target)||reaction&&(epoch(actor,game)!==triggerEpoch||!battleCryReactionAvailable(actor,game,{reactionRestriction})))throw Error('战吼选择期间角色、目标或反应资源已改变。');
    const native=game.pf2e.actions.get('demoralize');if(!native?.toActionVariant)throw Error('缺少原生Demoralize动作。');
    let claim;
    if(reaction)await withReactionReservation(actor,game,async()=>{
-    gm();if(!conscious(actor)||epoch(actor,game)!==triggerEpoch||!battleCryReactionAvailable(actor,game))throw Error('战吼确认期间角色或反应资源已改变。');
+    gm();if(!conscious(actor)||epoch(actor,game)!==triggerEpoch||!battleCryReactionAvailable(actor,game,{reactionRestriction}))throw Error('战吼确认期间角色或反应资源已改变。');
     claim={id:message.id,epoch:epoch(actor,game),checkId:null};await actor.update({[`flags.${MODULE_ID}.fear.reactions`]:[...(own(actor).reactions??[]).filter(r=>r.epoch===claim.epoch),claim]});
    });
    const result=await native.toActionVariant({cost:reaction?'reaction':'free'}).use({actors:[actor],target:target.object,rollOptions:[`${MODULE_ID}:battle-cry:${message.id}`,...reaction?['action:reaction']:[]],event:{ctrlKey:false,metaKey:false,shiftKey:!!game.user.settings?.showCheckDialogs}});

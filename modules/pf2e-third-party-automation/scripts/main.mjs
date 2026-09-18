@@ -14,6 +14,7 @@ import {createSocialAutomation} from './social-automation.mjs';
 import {createThrallAutomation} from './thrall-automation.mjs';
 import {createReactionChecks} from './reaction-checks.mjs';
 import {registerReactionShieldWallEmptyCompatibility} from './reaction-shield-wall-empty-compat.mjs';
+import {registerRoaringReactionCompatibility} from './roaring-reaction-compat.mjs';
 import {createFearAutomation} from './fear-automation.mjs';
 import {registerPatreonInitiativeCompatibility as installPatreonInitiativeCompatibility} from './patreon-initiative-compat.mjs';
 import {createScareToDeath} from './scare-to-death.mjs';
@@ -123,16 +124,17 @@ Hooks.once('ready',async()=>{
  const choose=createNativeChooser({game,send:(userId,payload)=>socket.executeAsUser('native-choice',userId,payload)});
  const advanceStartup=defensiveAdvanceStartupCompatibility({game,rules:game.modules.get('patreon-v3')?.active?game.settings.get('patreon-v3','rulesV3'):null});
  const defensiveAdvance=createDefensiveAdvance({game,fromUuid,choose,startupCompatibility:advanceStartup,onError:report});
- let glimpse;
- const reactionBudget=createReactionBudget({game,fromUuid,onError:report,handlesGlimpse:actor=>glimpse?.handlesActor(actor)??false});
+ let glimpse,roaring,roaringReactionCompatibility;
+ const reactionRestriction=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'&&game.system.version==='8.5.1'?actor=>roaring?.reactionRestriction(actor)??{status:'manual',sources:[{sourceNonce:null,status:'manual',reason:'provider-initializing'}]}:undefined;
+ const reactionBudget=createReactionBudget({game,fromUuid,reactionRestriction,onError:report,handlesGlimpse:actor=>glimpse?.handlesActor(actor)??false});
  await glimpseCompat.initialize({game}).catch(report);
- glimpse=createGlimpseProvider({game,fromUuid,compat:glimpseCompat,getRollContext:roll=>cycle?.getRollContext(roll),onError:report});
+ glimpse=createGlimpseProvider({game,fromUuid,reactionRestriction,compat:glimpseCompat,getRollContext:roll=>cycle?.getRollContext(roll),onError:report});
  const nativeCasts=getNativeCastEvents({game,fromUuid});
  const disruptDamage=createDisruptPreyDamageGuard({game,getRollContext:roll=>cycle?.getRollContext(roll)});
  const disruptExecutor=createDisruptPreyExecutor({game,fromUuid,Hooks,authorizeDamage:context=>disruptDamage.authorize(context)});
  const sourceCost=createDisruptPreySourceCost({game});let disrupt;
  const disruptEvents=createDisruptPreyEvents({game,fromUuid,handleConfirmed:event=>disrupt.handleConfirmed(event),onSourceStopped:(context,result)=>sourceCost.stopped(context,result),onError:report});
- disrupt=createDisruptPrey({game,fromUuid,choose,validateSource:(event,context)=>disruptEvents.validateSource(event,context),performStrike:context=>disruptExecutor.performStrike(context),onError:report});
+ disrupt=createDisruptPrey({game,fromUuid,choose,reactionRestriction,validateSource:(event,context)=>disruptEvents.validateSource(event,context),performStrike:context=>disruptExecutor.performStrike(context),onError:report});
  const destructiveBlock=createDestructiveBlock({game,fromUuid,choose});
  let shieldEvents;
  const disarmingBlock=createDisarmingBlock({game,fromUuid,choose,validateConfirmed:event=>shieldEvents.validateConfirmed(event),onError:report});
@@ -145,7 +147,7 @@ Hooks.once('ready',async()=>{
  let nativeBridgeVerification=Object.freeze({ready:false,reason:'system-source-unavailable'});
  try{const response=await fetch('systems/pf2e/pf2e.mjs',{cache:'no-store',signal:AbortSignal.timeout(10000)});if(response.ok)nativeBridgeVerification=await verifyNativeIWRBridge({game,source:new Uint8Array(await response.arrayBuffer())});}catch{/* Report via the feature diagnostic; other providers still initialize. */}
  const shieldAdapter=createShieldDamageAdapter({game,nativeBridgeVerification,onError:report,createMessageMiddleware:salubriousMessagePrivacy.createMessageMiddleware});
- const deflection=createTranscendentDeflection({game,fromUuid,choose,getRollContext:roll=>cycle?.getRollContext(roll),nativeBridgeAvailable:shieldAdapter.nativeBridgeAvailable,onError:report});
+ const deflection=createTranscendentDeflection({game,fromUuid,choose,reactionRestriction,getRollContext:roll=>cycle?.getRollContext(roll),nativeBridgeAvailable:shieldAdapter.nativeBridgeAvailable,onError:report});
  shieldAdapter.addNativeInterceptor(deflection.interceptNative,{matches:deflection.hasNativePlan});
  const deflectionRepair=createDeflectionRepair({game,fromUuid,onError:report});
  const elementalMedicine=createElementalMedicine({game,fromUuid,onError:report});
@@ -158,23 +160,23 @@ Hooks.once('ready',async()=>{
   onRefocus:async event=>{if(!treatmentDiagnostic.ready)throw Error('仙露三吻的原生检定兼容尚未就绪。');return salubriousKiss.onRefocus(event)}};
  const runeTransfer=createRuneTransfer({game,fromUuid,choose,onError:report});
  const campaign=createCampaignFeats({game,fromUuid,choose,onError:report});
- const fear=createFearAutomation({game,fromUuid,choose,onError:report});
+ const fear=createFearAutomation({game,fromUuid,choose,reactionRestriction,onError:report});
  const familiar=createBardFamiliarProvider({game,fromUuid,onError:report});
  const prayer=game.world?.id==='ujx5r8oipw7ercdr'?createDesperatePrayerProvider({game,fromUuid,choose,onError:report,castEvents:nativeCasts}):null;
  const halflingLuck=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.version==='8.5.1'?createHalflingLuckProvider({game,fromUuid,choose:showNativeChoice,onError:report}):null;
  const forceBarrage=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.version==='8.5.1'?createForceBarrageBridge({game,fromUuid,nativeCasts,onError:report}):null;
- const roaring=forceBarrage?createRoaringApplause({game,fromUuid,nativeCasts,effects:createRoaringEffects({game,fromUuid,onError:report}),onError:report,onManual:()=>ui.notifications.warn('本次轰然喝彩需要GM核对结果或时长，请查看原施法卡。')}):null;
- const roaringSustain=roaring?createRoaringSustain({game,fromUuid,provider:roaring,onError:report}):null;
+ roaring=forceBarrage?createRoaringApplause({game,fromUuid,nativeCasts,effects:createRoaringEffects({game,fromUuid,onError:report}),onError:report,onManual:()=>ui.notifications.warn('本次轰然喝彩需要GM核对结果或时长，请查看原施法卡。')}):null;
+ const roaringSustain=roaring?createRoaringSustain({game,fromUuid,provider:roaring,reactionCompatibility:()=>({owned:true,checker:roaringReactionCompatibility?.ready()===true}),onError:report}):null;
  if(forceBarrage)nativeCasts.addCastMiddleware(forceBarrage.interceptCast);
  if(roaring)nativeCasts.addCastMiddleware(roaring.interceptCast);
  if(prayer){nativeCasts.addActorMatcher(prayer.isManagedActor);nativeCasts.addConsumePolicy(prayer.consumePolicy);nativeCasts.addCastMiddleware(prayer.interceptCast);}
  const prayerCheck=(native,...args)=>prayer?prayer.interceptCheck(native,...args):native(...args);
  let metapower,electricity;
  const voltage=createEldamonVoltageProvider({game,fromUuid,onError:report,observe:(...args)=>metapower.observe(...args),onRefresh:context=>electricity.onRefresh(context)});
- electricity=createEldamonElectricityProvider({game,fromUuid,onError:report,refreshOutsideEncounter:voltage.refreshOutsideEncounter});
+ electricity=createEldamonElectricityProvider({game,fromUuid,reactionRestriction,onError:report,refreshOutsideEncounter:voltage.refreshOutsideEncounter});
  metapower=createMetapowerProvider({game,fromUuid,onError:report,supportsOriginalUse:item=>providers.some(p=>p.resolveAction?.(item)?.startsWith('medic:')||['glimpse:use','defensive-advance'].includes(p.resolveAction?.(item))),beforeChannel:electricity.beforeChannel,validateSelection:electricity.validateSelection,interceptDamageMessage:electricity.interceptDamageMessage,onCommittedChannel:async context=>{await voltage.onCommittedChannel(context);await electricity.onCommittedChannel(context)}});
  nativeCasts.addCastMiddleware(({item,options},native)=>options.consume===false||options.message===false?native():metapower.observe({actor:item.actor,entry:'spell'},native));
- providers=[createCompanionAutomation({game,fromUuid,choose,onError:report,wrapStrike:(strike,actor)=>providers.reduce((s,p)=>p.wrapStrike?.(s,actor)??s,strike)}),createDualStrikeAutomation({game,fromUuid,choose,onError:report}),runeTransfer,campaign,createKnowledgeAutomation({game,fromUuid,choose,onError:report}),createAvAutomation({game,fromUuid,choose,onError:report,refocusSubscribers:[treatmentRefocus],refocusPrivacy:salubriousMessagePrivacy}),createPartyAutomation({game,fromUuid,choose,onError:report}),createSocialAutomation({game,fromUuid,choose,onError:report}),createThrallAutomation({game,fromUuid,choose,onError:report}),createReactionChecks({game,fromUuid,choose,onError:report,halflingLuck,nativeCheckMiddleware:(wrapped,...args)=>prayerCheck((...checked)=>familiar.interceptCheck((...accompanied)=>electricity.interceptCheck((...electric)=>metapower.interceptCheck((...next)=>salubriousCheckScope.interceptCheck(wrapped,...next),...electric),...accompanied),...checked),...args)}),fear,createScareToDeath({game,fromUuid,choose,onError:report}),createSpellCombination({game,fromUuid,choose,onError:report,afterAttack:message=>campaign.processCheck(message)}),deflection,destructiveBlock,disarmingBlock,disarmRegrip,shieldEvents,salubriousKiss];
+ providers=[createCompanionAutomation({game,fromUuid,choose,onError:report,wrapStrike:(strike,actor)=>providers.reduce((s,p)=>p.wrapStrike?.(s,actor)??s,strike)}),createDualStrikeAutomation({game,fromUuid,choose,onError:report}),runeTransfer,campaign,createKnowledgeAutomation({game,fromUuid,choose,onError:report}),createAvAutomation({game,fromUuid,choose,onError:report,refocusSubscribers:[treatmentRefocus],refocusPrivacy:salubriousMessagePrivacy}),createPartyAutomation({game,fromUuid,choose,onError:report}),createSocialAutomation({game,fromUuid,choose,onError:report}),createThrallAutomation({game,fromUuid,choose,onError:report}),createReactionChecks({game,fromUuid,choose,reactionRestriction,onError:report,halflingLuck,nativeCheckMiddleware:(wrapped,...args)=>prayerCheck((...checked)=>familiar.interceptCheck((...accompanied)=>electricity.interceptCheck((...electric)=>metapower.interceptCheck((...next)=>salubriousCheckScope.interceptCheck(wrapped,...next),...electric),...accompanied),...checked),...args)}),fear,createScareToDeath({game,fromUuid,choose,onError:report}),createSpellCombination({game,fromUuid,choose,onError:report,afterAttack:message=>campaign.processCheck(message)}),deflection,destructiveBlock,disarmingBlock,disarmRegrip,shieldEvents,salubriousKiss];
  const configuration=createConfigurationMaintenance({game,repairs:[buildAvPatreonRepairs,buildPartyPatreonRepairs,buildKnowledgePatreonRepairs,...game.world?.id==='ujx5r8oipw7ercdr'?[buildDefensiveAdvancePatreonRepairs]:[]],settings:[{module:'pf2e-ranged-combat',key:'postActionToChat',value:2,when:g=>Array.from(g.actors.party?.members??[]).some(a=>[KNOWLEDGE_SOURCES.monster,KNOWLEDGE_SOURCES.hunt].every(source=>a.items.some(i=>i.sourceId===source))),reason:'猎物指定保留完整原生技能卡，供怪物猎手知识联动读取原始操作者与目标。'},{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:g=>['-','sog','pnvfcgjbf2cjp7gz','ujx5r8oipw7ercdr','team-automation-qa2'].includes(g.world?.id),transform:value=>Array.isArray(value)?value.filter(slug=>slug!=='disarming-block'):value,reason:'卸武格挡改由实际格挡回执接原生自由动作缴械，避免重复提示或再次收取反应。'}]});
  await configuration().catch(report);
  if(glimpseWorld(game)){
@@ -241,6 +243,7 @@ Hooks.once('ready',async()=>{
  const registerPatreonCompatibility=async()=>patreonInitiativeCompatibility=await installPatreonInitiativeCompatibility({game,Hooks,isProviderReady:()=>providers.includes(fear)});
  await registerPatreonCompatibility();
  const reactionShieldWall=await registerReactionShieldWallEmptyCompatibility({game,Hooks});
+ if(roaring)roaringReactionCompatibility=await registerRoaringReactionCompatibility({game,query:reactionRestriction});
  const reactionShieldWallDiagnostic=Object.freeze({status:reactionShieldWall.status,reason:reactionShieldWall.reason??null,scope:reactionShieldWall.scope??null,sourceSHA256:reactionShieldWall.sourceSHA256??null,callbackSHA256:reactionShieldWall.callbackSHA256??null,hook:reactionShieldWall.hook?Object.freeze({...reactionShieldWall.hook}):null});
  // All existing Check providers are registered first. This bridge changes only
  // the verified Patreon entry.fn; it does not reorder or register Check again.
@@ -248,7 +251,7 @@ Hooks.once('ready',async()=>{
   const compatibility=await installPatreonTreatmentCompatibility({game,libWrapper,scope:salubriousCheckScope});
   treatmentDiagnostic=Object.freeze({ready:workbenchPrivacy.ready&&compatibility.installed===true,workbench:workbenchPrivacy.ready?workbenchPrivacy.profile:null,installed:compatibility.installed===true,reason:workbenchPrivacy.ready?compatibility.reason??null:workbenchPrivacy.reason,dependency:compatibility.dependency?Object.freeze({...compatibility.dependency}):null});
  }catch(error){treatmentDiagnostic=Object.freeze({ready:false,installed:false,reason:String(error.message??error),dependency:null});report(error);}
- game.modules.get(MODULE_ID).api={open,request,version:game.modules.get(MODULE_ID).version,repairActiveParty:()=>maintenance(),nativeDamageIWR:async(...args)=>{const handled=await shieldAdapter.nativeDamageIWR(...args);electricity.observeNativeIWR(...args,handled);return handled},get nativeIWRCompatibility(){return shieldAdapter.nativeBridgeDiagnostic()},get patreonInitiativeCompatibility(){return patreonInitiativeCompatibility},registerPatreonInitiativeCompatibility:registerPatreonCompatibility,get salubriousKiss(){return treatmentDiagnostic},get defensiveAdvance(){return defensiveAdvance.diagnostic},get glimpseOfRedemption(){return {ready:glimpse.ready()}},get reactionShieldWallCompatibility(){return reactionShieldWallDiagnostic}};
+ game.modules.get(MODULE_ID).api={open,request,version:game.modules.get(MODULE_ID).version,repairActiveParty:()=>maintenance(),nativeDamageIWR:async(...args)=>{const handled=await shieldAdapter.nativeDamageIWR(...args);electricity.observeNativeIWR(...args,handled);return handled},get nativeIWRCompatibility(){return shieldAdapter.nativeBridgeDiagnostic()},get patreonInitiativeCompatibility(){return patreonInitiativeCompatibility},registerPatreonInitiativeCompatibility:registerPatreonCompatibility,get salubriousKiss(){return treatmentDiagnostic},get defensiveAdvance(){return defensiveAdvance.diagnostic},get glimpseOfRedemption(){return {ready:glimpse.ready()}},get roaringApplause(){return {enabled:!!roaring,...roaring?.diagnostic(),ownedReactionConsumers:!!roaring,reactionChecker:{status:roaringReactionCompatibility?.status??'unavailable',ready:roaringReactionCompatibility?.ready()===true,reason:roaringReactionCompatibility?.reason??null}}},get reactionShieldWallCompatibility(){return reactionShieldWallDiagnostic}};
  notifyNativeIWRStatus({game,diagnostic:shieldAdapter.nativeBridgeDiagnostic(),warn:message=>ui.notifications.warn(message)});
  await maintenance().catch(report);
  await elementalMedicine.maintain().catch(report);

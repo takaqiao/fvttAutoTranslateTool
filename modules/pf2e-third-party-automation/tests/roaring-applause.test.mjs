@@ -48,6 +48,20 @@ test('actual owned parent proof restricts despite condition immunity and deliber
  assert.equal(f.clients.gm.provider.reactionRestriction(f.targetActor).status,'restricted');
  f.targetActor.items.delete(r.effects.parentId);assert.equal(f.clients.gm.provider.reactionRestriction(f.targetActor).status,'clear');
 });
+for(const lost of ['result','GM'])test(`confirmed parent deletion clears before the ${lost} continuity barrier and delete hook`,async()=>{
+ const f=await activeReactionSource({realEffects:true}),r=f.effects.list(f.targetActor)[0],c=f.clients.player;
+ if(lost==='result')await f.clients.gm.provider.onManual({sourceNonce:r.state.sourceNonce,reason:'reroll'});
+ else {f.users.activeGM=null;await c.hookMap.get('userConnected')(f.users.get('gm'),false);}
+ assert.equal(c.provider.reactionRestriction(f.targetActor).status,'manual');f.targetActor.items.delete(r.effects.parentId);
+ const before=f.effects.get(f.targetActor,r.state.sourceNonce);assert.equal(c.provider.reactionRestriction(f.targetActor).status,'clear');assert.deepEqual(f.effects.get(f.targetActor,r.state.sourceNonce),before);
+});
+test('parent absence without confirmed operation stays manual; removed source cannot clear another restriction',async()=>{
+ const f=await activeReactionSource(),r=[...f.records.values()][0],other=copy(r);other.state.sourceNonce='other';other.state.manualReview={reason:'reroll'};f.records.set('other',other);
+ f.effects.inspectReactionParent=({nonce})=>nonce==='other'?{status:'removed'}:{status:'present'};
+ assert.equal(f.clients.gm.provider.reactionRestriction(f.targetActor).status,'restricted');
+ const g=await activeReactionSource({realEffects:true}),actual=g.effects.list(g.targetActor)[0];g.targetActor.items.delete(actual.effects.parentId);
+ g.targetActor.flags[ID].roaringApplause.sources[actual.state.sourceNonce].effects.status='uncertain';assert.equal(g.clients.gm.provider.reactionRestriction(g.targetActor).status,'manual');
+});
 for(const seam of ['parent','save'])test(`unproven ${seam} evidence is manual and cannot mutate a source`,async()=>{
  const f=await activeReactionSource(),before=copy([...f.records.values()]);
  if(seam==='parent')f.effects.inspectReactionParent=()=>({status:'unproven',reason:'parent-rules-changed'});
@@ -66,6 +80,17 @@ for(const hook of ['userConnected','updateUser'])test(`${hook} synchronously pre
  const f=await activeReactionSource(),c=f.clients.player;assert.equal(c.provider.reactionRestriction(f.targetActor).status,'restricted');
  f.users.activeGM=null;const gone=c.hookMap.get(hook)(f.users.get('gm'),false);assert.equal(c.provider.reactionRestriction(f.targetActor).status,'manual');
  f.users.activeGM=f.users.get('gm');const returned=c.hookMap.get(hook)(f.users.get('gm'),true);assert.equal(c.provider.reactionRestriction(f.targetActor).status,'manual');await Promise.all([gone,returned]);assert.equal(c.provider.reactionRestriction(f.targetActor).status,'manual');
+});
+test('an older awaited lifecycle write cannot consume a newly raised GM continuity barrier',async()=>{
+ const f=await activeReactionSource(),c=f.clients.gm,r=[...f.records.values()][0],save=f.effects.saveState;
+ let enterFirst,enterSecond,releaseFirst,releaseSecond,calls=0;
+ const first=new Promise(resolve=>enterFirst=resolve),second=new Promise(resolve=>enterSecond=resolve),firstReply=new Promise(resolve=>releaseFirst=resolve),secondWrite=new Promise(resolve=>releaseSecond=resolve);
+ f.effects.saveState=async args=>{if(++calls===1){const saved=await save(args);enterFirst();await firstReply;return saved}if(calls===2){enterSecond();await secondWrite}return save(args)};
+ f.game.time.worldTime=101;const older=c.provider.applyLifecycleEvent({actor:f.targetActor,nonce:r.state.sourceNonce,event:{type:'reconcile'}});await first;
+ f.users.activeGM=null;await c.hookMap.get('userConnected')(f.users.get('gm'),false);f.users.activeGM=f.users.get('gm');const newer=c.hookMap.get('userConnected')(f.users.get('gm'),true);
+ releaseFirst();await second;
+ try{assert.equal(c.provider.reactionRestriction(f.targetActor).status,'manual')}finally{releaseSecond();await Promise.all([older,newer])}
+ assert.equal(c.provider.reactionRestriction(f.targetActor).status,'manual');
 });
 test('reaction query aggregates restricted above manual above clear per independent source',async()=>{
  const f=await activeReactionSource(),r=[...f.records.values()][0],other=copy(r);other.state.sourceNonce='other';other.state.manualReview={reason:'unverified'};f.records.set('other',other);

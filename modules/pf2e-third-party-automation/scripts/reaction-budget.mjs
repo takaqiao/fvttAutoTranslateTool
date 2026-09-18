@@ -2,6 +2,7 @@ import {MODULE_ID,hasSource} from './rules.mjs';
 import {SerialActions} from './runtime.mjs';
 import {isActiveGM,isUnappliedDamageError,markUnappliedDamageError} from './native-context.mjs';
 import {createShieldReactionResources} from './shield-reaction-resources.mjs';
+import {reactionPermitted,requireReactionPermitted} from './reaction-restriction.mjs';
 import {GLIMPSE_SOURCES,glimpseSourceId,glimpseClaims,provenGlimpseReactionCard} from './glimpse-source.mjs';
 
 const AAT='pf2e-auto-action-tracker',values=c=>Array.from(c?.values?.()??c??[]),own=d=>d?.flags?.[MODULE_ID]??{};
@@ -115,7 +116,7 @@ function reactionSlots(actor,game,{pending=[],current=reactionEpoch(actor,game),
  for(const entry of entries)for(let n=0;n<Math.max(1,Number(entry.cost)||0);n++){const slot=slots.find(s=>!s.spent&&(!entry.shield?.resourceSlot||s.kind===entry.shield.resourceSlot)&&(!s.allowed||entry.msgId==='System'||s.allowed.includes(entry.slug)));if(slot){slot.spent=true;slot.entry=entry;}}
  return slots;
 }
-export function genericReactionAvailable(actor,game,options={}){return reactionSlots(actor,game,{pending:options.pending??[]}).some(s=>!s.spent&&!s.allowed);}
+export function genericReactionAvailable(actor,game,options={}){return reactionPermitted(actor,options.reactionRestriction)&&reactionSlots(actor,game,{pending:options.pending??[]}).some(s=>!s.spent&&!s.allowed);}
 
 function reactionData(message,item,actor){
  const context=message.flags?.pf2e?.context??{},proof=own(message).reactionChecks;
@@ -133,7 +134,7 @@ function reactionData(message,item,actor){
  return {type:'reaction',msgId:message.id,cost:1,slug:action??item?.slug??item?.system?.slug??'reaction',...(claimKey?{claimKey}:{})};
 }
 
-export function createReactionBudget({game,fromUuid=globalThis.fromUuid,onError=console.error,reactionResources=createShieldReactionResources({game}),handlesGlimpse=()=>false}={}){
+export function createReactionBudget({game,reactionRestriction,fromUuid=globalThis.fromUuid,onError=console.error,reactionResources=createShieldReactionResources({game,reactionRestriction}),handlesGlimpse=()=>false}={}){
  const scopes=new Map();let socket;
  const owner=(actor,user)=>{if(!isActiveGM(game)||!user||!actor?.testUserPermission?.(user,'OWNER'))throw Error('盾牌格挡回执需要当前主GM验证角色所有者。');};
  const persist=(combatant,data,changes={})=>{if(!isActiveGM(game))throw Error('主GM已改变，不能写入格挡回执。');return combatant.update({[`flags.${MODULE_ID}.reactionBudget`]:data,...changes});};
@@ -160,7 +161,7 @@ export function createReactionBudget({game,fromUuid=globalThis.fromUuid,onError=
    let index=-1;for(let i=0;i<entries.length;i++)if(await isPrepaid(entries[i],actor,token,context,user)){index=i;break;}
    const source=index<0?null:entries[index],resources=await reactionResources.snapshot(combatant);owner(actor,user);boundEncounter(actor,token,payload);
    if(source&&!await isPrepaid(source,actor,token,context,user))throw Error('盾牌格挡预付款的原卡在验证期间已改变，本次未应用伤害。');
-   owner(actor,user);boundEncounter(actor,token,payload);
+   owner(actor,user);boundEncounter(actor,token,payload);requireReactionPermitted(actor,reactionRestriction);
    const slots=slotsFor(actor,context,entries),slot=source?slots.find(s=>s.entry?.msgId===source.msgId):slots.find(s=>!s.spent&&(!s.allowed||s.allowed.includes('shield-block'))&&reactionResources.available(resources,s.kind));
    if(!slot)throw Error('盾牌格挡的反应已经使用；本次未应用伤害，请取消格挡或使用手工结算流程。');
    const reservation=reactionResources.reserve(resources,slot.kind,{prepaid:!!source});
@@ -207,13 +208,13 @@ export function createReactionBudget({game,fromUuid=globalThis.fromUuid,onError=
  async function applyDamage(actor,params,apply){
   const damage=typeof params.damage==='number'?params.damage:params.damage?.total,token=params.token?.document??params.token;
   if(game.modules?.get(AAT)?.active||!params.shieldBlockRequest||params.final||!Number.isFinite(damage)||damage<=0||!shieldReady(actor)||token?.actor?.uuid!==actor.uuid)return apply(params);
-  let context;try{context=shieldEncounter(actor,token,game);}catch(error){throw markUnappliedDamageError(error);}if(!context)return apply(params);
+  let context;try{requireReactionPermitted(actor,reactionRestriction);context=shieldEncounter(actor,token,game);}catch(error){throw markUnappliedDamageError(error);}if(!context)return apply(params);
   if(!actor.testUserPermission?.(game.user,'OWNER'))throw Error('无权使用这个角色的盾牌格挡。');
   const payload={nonce:globalThis.foundry?.utils?.randomID?.(24)??globalThis.crypto.randomUUID(),actorUuid:actor.uuid,tokenUuid:token.uuid,shieldId:actor.attributes.shield.itemId,combatId:context.combat.id,combatantId:context.combatant.id,epoch:context.epoch};
   let receipt;try{receipt=await shieldRpc('begin',payload);}catch(error){throw markUnappliedDamageError(error);}
   if(!receipt)return apply(params);
   const scope={actor,token,receipt};scopes.set(payload.nonce,scope);let completed=false;
-  try{try{boundEncounter(actor,token,payload);}catch(error){throw markUnappliedDamageError(error);}const result=await apply({...params,rollOptions:new Set([...params.rollOptions??[],shieldPrefix+payload.nonce])});completed=true;
+  try{try{boundEncounter(actor,token,payload);requireReactionPermitted(actor,reactionRestriction);}catch(error){throw markUnappliedDamageError(error);}const result=await apply({...params,rollOptions:new Set([...params.rollOptions??[],shieldPrefix+payload.nonce])});completed=true;
    try{await shieldRpc('finish',{...payload,messageId:scope.messageId??null,content:scope.content??null,blocked:scope.blocked});}catch(error){try{onError(error)}catch{/* Native damage already completed; preserve its result. */}}
    return result;
   }
@@ -282,6 +283,6 @@ export function createReactionBudget({game,fromUuid=globalThis.fromUuid,onError=
   const ids=[['createChatMessage',Hooks.on('createChatMessage',onCreate)],['updateChatMessage',Hooks.on('updateChatMessage',onUpdate)]];
   return()=>{for(const[name,id]of ids)Hooks.off(name,id);};
  }
-  return {record,register,applyDamage,available:actor=>genericReactionAvailable(actor,game)};
+  return {record,register,applyDamage,available:actor=>genericReactionAvailable(actor,game,{reactionRestriction})};
 }
 export function registerReactionBudget({Hooks,...options}){return createReactionBudget(options).register({Hooks});}

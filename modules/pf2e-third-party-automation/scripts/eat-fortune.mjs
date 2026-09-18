@@ -2,6 +2,7 @@ import {MODULE_ID} from './rules.mjs';
 import {SerialActions} from './runtime.mjs';
 import {getSourceId,isActiveGM} from './native-context.mjs';
 import {genericReactionAvailable,withReactionReservation,reactionEpoch} from './reaction-budget.mjs';
+import {reactionPermitted} from './reaction-restriction.mjs';
 
 export const EAT_FORTUNE_SOURCES=Object.freeze({eat:'Compendium.pf2e.feats-srd.Item.rFmJVDdB313EibTs',assurance:'Compendium.pf2e.feats-srd.Item.W6Gl9ePmItfDHji0',chrono:'Compendium.pf2e.feats-srd.Item.ygdbkfPPgSoWxaBa',devise:'Compendium.pf2e.feat-effects.Item.XQpTyjXFYYNexyOk',clock:'Compendium.pf2e.feats-srd.Item.3aG0gkHulBIHqqGE'});
 const values=c=>Array.from(c?.values?.()??c??[]),own=d=>d?.flags?.[MODULE_ID]?.reactionChecks??{};
@@ -49,14 +50,14 @@ export function selectedFortuneSources(context){
  return result;
 }
 
-export function createEatFortune({game,fromUuid=globalThis.fromUuid,choose,onError=()=>{}}={}){
+export function createEatFortune({game,reactionRestriction,fromUuid=globalThis.fromUuid,choose,onError=()=>{}}={}){
  const reactors=new Map(),queue=new SerialActions(),dialogs=new WeakMap(),wrappedDialogs=new WeakSet(),modifierInputs=new WeakSet(),probes=new Map();let socket;
  const requireGM=()=>{if(!isActiveGM(game))throw Error('主GM已交接，吞噬福祸停止；已认领或已付的资源不会自动回滚或重试。')};
  const guarded=async operation=>{requireGM();const result=await operation();requireGM();return result};
  const feature=actor=>values(actor?.items).find(i=>i.type==='feat'&&getSourceId(i)===EAT_FORTUNE_SOURCES.eat);
  const track=actor=>{if(feature(actor))reactors.set(actor.uuid,actor);else reactors.delete(actor?.uuid)};
  const canUse=actor=>!actor.isDead&&actor.canAct!==false&&!actor.hasCondition?.('unconscious')&&!actor.hasCondition?.('stunned');
- const available=actor=>!reactionEpoch(actor,game)||genericReactionAvailable(actor,game);
+ const available=actor=>reactionPermitted(actor,reactionRestriction)&&(!reactionEpoch(actor,game)||genericReactionAvailable(actor,game));
  const uses=item=>item.system.frequency?.value??item.system.frequency?.max??0;
  const range=(source,target)=>{const distance=source?.object&&target?.object&&source.parent?.id===target.parent?.id?target.object.distanceTo?.(source.object):null;return Number.isFinite(distance)&&distance>=0&&distance<=60};
  const chooser=actor=>values(game.users).find(u=>u.active&&!u.isGM&&u.character?.uuid===actor.uuid&&actor.testUserPermission(u,'OWNER'))??values(game.users).find(u=>u.active&&!u.isGM&&actor.testUserPermission(u,'OWNER'))??game.user;
