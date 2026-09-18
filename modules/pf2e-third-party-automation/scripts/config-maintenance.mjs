@@ -23,7 +23,7 @@ export function createConfigurationMaintenance({game,repairs=[],settings=[]}){
    if(JSON.stringify(before)===JSON.stringify(value))continue;
    await write(setting.module,setting.key,before,value,[{path:setting.key,before,after:value,reason:setting.reason}]);
   }
-  if(!game.modules.get('patreon-v3')?.active)return;
+  if(!repairs.length||!game.modules.get('patreon-v3')?.active)return;
   const original=game.settings.get('patreon-v3','rulesV3');
   if(!original||typeof original!=='object'||Array.isArray(original))return;
   let rules=structuredClone(original);const changes=[];
