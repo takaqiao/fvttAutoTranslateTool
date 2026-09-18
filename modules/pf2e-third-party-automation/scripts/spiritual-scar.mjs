@@ -258,7 +258,8 @@ export function createSpiritualScarProvider({game,fromUuid=globalThis.fromUuid,g
   for(const[name,fn]of [['request',request],['native',beginNative],['complete',complete],['pay',payLocal]])handle(name,fn);
   handle('scope',(payload,user)=>{if(user?.id!==game.users.activeGM?.id)throw Error('只有主GM可核验原生伤害范围。');return scopeProof(payload,game.user)});
   handle('choice',async(payload,user)=>{const actor=await fromUuid(payload.actorUuid);if(user?.id!==game.users.activeGM?.id||!owned(actor,game.user))throw Error('精神伤痕选择来源或拥有者无效。');return show({title:payload.title,choices:validateNativeChoices(payload.choices)})});
+  followup.register?.({Hooks});
  }
- function unregister(){closed=true;for(const cancel of [...pendingWaits])cancel();disposeObserver?.();if(installation)for(const[event,id]of installation.ids)installation.Hooks.off(event,id);installation=null;live.clear();authorizations.clear()}
+ function unregister(){closed=true;for(const cancel of [...pendingWaits])cancel();disposeObserver?.();followup.unregister?.();if(installation)for(const[event,id]of installation.ids)installation.Hooks.off(event,id);installation=null;live.clear();authorizations.clear()}
  return {ready,handlesActor,resolveAction,requiresActualUse:item=>!!resolveAction(item),tracksFrequency:item=>!!resolveAction(item),beforeUse,captureUsage,executeUsage,beforeDamage,wrapNativeDamage,afterDamage,register,unregister};
 }
