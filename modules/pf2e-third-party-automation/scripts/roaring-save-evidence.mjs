@@ -68,9 +68,32 @@ export function createRoaringSaveEvidence({game,fromUuid=globalThis.fromUuid,loo
   const s=sourceFor(message);if(!s)return false;
   if(records.has(message.uuid))return current(records.get(message.uuid))?true:false;
   if(records.size>=128)return false;
-  const record={message,source:clone(identity(s)),gmId:s.gmId,status:'awaiting',candidates:new Map(),announced:new Set(),proof:null,observedRow:null};records.set(message.uuid,record);
-  if(saveRow(message,s)!==null)defer(()=>manual(record,'unproven-existing-row'));
+  const record={message,source:clone(identity(s)),gmId:s.gmId,status:'awaiting',candidates:new Map(),announced:new Set(),proof:null,observedRow:null,emptyAtTrack:saveRow(message,s)===null};records.set(message.uuid,record);
+  if(!record.emptyAtTrack)defer(()=>manual(record,'unproven-existing-row'));
   return true;
+ }
+ /** Read-only continuity of a trusted provider's persisted first result. This
+  * is not save adoption: it never tracks/backfills a row or authenticates a new
+  * caller result. Non-GM observers can retain the empty-to-first-row history
+  * without holding the GM-only accepted proof. Reload has no such history.
+  */
+ function inspectResultContinuity({sourceNonce,originalMessageUuid,result}={}){
+  const unproven=reason=>({status:'unproven',reason});
+  try{
+   if(!bounded(sourceNonce)||result?.revision!==1||!bounded(result.receiptId)||!outcomes.includes(result.outcome))return unproven('invalid-first-result');
+   const record=records.get(originalMessageUuid);
+   if(!record||record.source.sourceNonce!==sourceNonce||!current(record))return unproven('source-observation-unavailable');
+   if(!record.emptyAtTrack||record.observedRow===null)return unproven('initial-empty-row-unproven');
+   if(!['awaiting','delivering','verified'].includes(record.status)||record.candidates.size>1||record.announced.size>1)return unproven('manual-or-ambiguous-save');
+   const scopes=[...local.values()].filter(s=>s.record===record);
+   if(scopes.length>1||scopes.some(s=>s.evidence.kind!=='first'))return unproven('manual-or-ambiguous-native-scope');
+   const row=saveRow(record.message,record.source);
+   if(!row||row.private!==false||row.rerolled||row.statistic!=='will'||row.success!==result.outcome)return unproven('current-row-not-first-result');
+   const normalized=normalizeRow(row);
+   if(canonical(normalized)!==record.observedRow)return unproven('current-row-changed');
+   if(record.proof&&(record.proof.invocationId!==result.receiptId||record.proof.row?.success!==result.outcome||!equal(record.proof.row,normalized)))return unproven('accepted-proof-mismatch');
+   return {status:'current',reason:null};
+  }catch{return unproven('unreadable-continuity-evidence');}
  }
  function nativeSnapshot(record,event,reroll=false){
   const s=current(record),{roll,rollMessage:card,target,data,message}=event,user=game.user;
@@ -97,7 +120,7 @@ export function createRoaringSaveEvidence({game,fromUuid=globalThis.fromUuid,loo
     const response=isActiveGM(game)?await accept(payload,game.user.id):await socket.executeAsUser(CLAIM,scope.gmId,payload);
     if(response?.ok===false)throw Error(response.error);
    });
-  }catch(error){defer(()=>manual(record,error.message));}
+  }catch(error){const task=manual(record,error.message);defer(()=>task);}
  }
  async function prove(payload,sender){
   if(!installed||sender!==game.users.activeGM?.id)throw Error('proof-active-GM-required');
@@ -175,5 +198,5 @@ export function createRoaringSaveEvidence({game,fromUuid=globalThis.fromUuid,loo
   return cleanup;
  }
  function cleanup(){for(const[name,id]of hooks.splice(0))Hooks.off(name,id);installed=false;generation++;local.clear();records.clear();}
- return {register,track,cleanup,inspect:uuid=>{const r=records.get(uuid);return r?{status:r.status,reason:r.reason??null,candidates:r.candidates.size,proof:r.proof?clone(r.proof):null}:null;},async whenIdle(){while(pending.size)await Promise.all([...pending]);}};
+ return {register,track,cleanup,inspectResultContinuity,inspect:uuid=>{const r=records.get(uuid);return r?{status:r.status,reason:r.reason??null,candidates:r.candidates.size,proof:r.proof?clone(r.proof):null}:null;},async whenIdle(){while(pending.size)await Promise.all([...pending]);}};
 }

@@ -84,6 +84,25 @@ export function createRoaringEffects({game,fromUuid=globalThis.fromUuid,randomId
    for(let n=0;n<wanted.length;n++)for(const [key,value]of Object.entries(wanted[n]))demand(equal(raw[n][key],value),'来源效果原始授予规则已改变。');
   }
  }
+ /** Read-only document proof, not a source-expiry or reaction-resource check.
+  * Children may be deliberately removed without ending the parent's separate
+  * no-reactions consequence. No recovery or expired-rule exception is used. */
+ function inspectReactionParent({actor,nonce}={}){
+  const unproven=reason=>({status:'unproven',reason});
+  try{
+   const token=actor?.token,scene=token?.parent;
+   const liveActor=actor?.uuid&&(game.actors?.get(actor.id)===actor||token&&game.scenes?.get(scene?.id)===scene&&scene?.tokens?.get(token.id)===token&&token.actor===actor);
+   if(!liveActor||typeof actor.items?.get!=='function')return unproven('actor-not-live');
+   const r=current(actor,nonce);
+   if(r.state.sourceNonce!==nonce)return unproven('source-unproven');
+   if(r.effects?.status!=='created'||!safe(r.effects.operationId)||!safe(r.effects.parentId)||!Array.isArray(r.effects.rules))return unproven('parent-operation-unconfirmed');
+   const parent=actor.items.get(r.effects.parentId);
+   if(!parent)return {status:'removed',reason:'parent-removed'};
+   if(!ownParent(actor,r,parent))return unproven('parent-identity-changed');
+   try{verifyParentRules(r,parent)}catch{return unproven('parent-rules-changed')}
+   return {status:'present',reason:'parent-confirmed'};
+  }catch{return unproven('source-unproven')}
+ }
  function grantReceipt(actor,r,parent,{observe=false,cleanup=false}={}){
   verifyParentRules(r,parent,{cleanup});
   const children={slowed:null,fascinated:null};
@@ -184,5 +203,5 @@ export function createRoaringEffects({game,fromUuid=globalThis.fromUuid,randomId
   if(finite)demand(equal(parent.system.start,r.state.timing.finiteEnvelope.start)&&equal(parent.system.duration,r.state.timing.finiteEnvelope.duration),'有限后备时长未确认。');
   return current(actor,nonce);
  })}
- return {claim,get,list,saveState,materialize,end,endFascination,renew:args=>timing(args,false),restoreFinite:args=>timing(args,true),identifyOwnedItem};
+ return {claim,get,list,saveState,materialize,end,endFascination,renew:args=>timing(args,false),restoreFinite:args=>timing(args,true),identifyOwnedItem,inspectReactionParent};
 }
