@@ -1,5 +1,5 @@
 import {assessRoaringCast,validateRoaringTarget,roaringOwnTurn,roaringTurnPriority,ROARING_APPLAUSE_SOURCE} from './roaring-applause-rules.mjs';
-import {createRoaringSource,reduceRoaringSource} from './roaring-lifecycle.mjs';
+import {createRoaringSource,reduceRoaringSource,projectRoaringConditions} from './roaring-lifecycle.mjs';
 import {createRoaringSaveEvidence} from './roaring-save-evidence.mjs';
 import {isActiveGM,getSourceId} from './native-context.mjs';
 import {SerialActions} from './runtime.mjs';
@@ -26,7 +26,7 @@ async function chooseFacts(){
  * save, Sustain completion, reaction-resource mutation or reconstructed roll. */
 export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeCasts,effects,choose=chooseFacts,saveEvidence,onError=()=>{},onManual:manualNotice=()=>{},onClap=()=>globalThis.ui?.notifications?.info?.('轰然喝彩：目标起回合需要鼓掌（操控）。请GM核对可触发的反应。'),randomId=()=>globalThis.crypto.randomUUID()}={}){
  demand(nativeCasts&&effects,'native Cast and owned effect store required');
- const scopes=new Map(),byItem=new Map(),queue=new SerialActions(),hooks=[],reported=new Set(),resume=new Set(),lastStarts=new Map();let socket,Hooks,installed=false;
+ const scopes=new Map(),byItem=new Map(),queue=new SerialActions(),hooks=[],reported=new Set(),resume=new Set(),lastStarts=new Map();let socket,Hooks,installed=false,electedGM=null;
  const evidence=saveEvidence??createRoaringSaveEvidence({game,fromUuid,lookupSource,onVerified,onManual,onError,randomId});
  const allActors=()=>[...new Map([...values(game.actors),...values(game.scenes).flatMap(s=>values(s.tokens).map(t=>t.actor))].filter(Boolean).map(a=>[a.uuid,a])).values()];
  const liveActor=uuid=>allActors().find(a=>a.uuid===uuid);
@@ -155,6 +155,45 @@ export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeC
   const ended=turns.map(c=>c.flags?.pf2e?.roundOfLastTurnEnd).filter(Number.isInteger);
   return {worldTime,turn:{combatId:combat.id,combatantId:c.id,actorUuid:actor.uuid,tokenUuid:token.uuid,started:true,round:combat.round,turn:combat.turn,order:turns.map(c=>({id:c.id,initiative:Number.isFinite(c.initiative)?c.initiative:null,overridePriority:roaringTurnPriority(c)})),lastTurnEnd:c.flags?.pf2e?.roundOfLastTurnEnd??null,latestTurnEndRound:ended.length?Math.max(...ended):null}};
  }
+ /** Synchronous read at a reaction's precommit boundary. The accepted source
+  * owns payment; this query neither reconstructs Cast nor changes resources. */
+ function reactionRestriction(actor){
+  const entry=(sourceNonce,status,reason)=>({sourceNonce,status,reason});
+  const unresolved=reason=>({status:'manual',sources:[entry(null,'manual',reason)]});
+  if(!installed||game.world?.id!=='ujx5r8oipw7ercdr'||game.system?.id!=='pf2e'||game.system.version!=='8.5.1')return unresolved('provider-unavailable');
+  if(!actor?.uuid||liveActor(actor.uuid)!==actor)return unresolved('actor-not-live');
+  const sources=[];
+  try{
+   const candidates=effects.list(actor)??[];
+   // The store intentionally filters unsafe/incomplete keys. A persisted but
+   // unreadable candidate must not disappear into an apparently clear result.
+   const raw=actor.flags?.[ID]?.roaringApplause?.sources;
+   if(raw!==undefined){
+    if(!raw||typeof raw!=='object'||Array.isArray(raw))sources.push(entry(null,'manual','source-unproven'));
+    else for(const nonce of Object.keys(raw))if(!candidates.some(r=>r?.state?.sourceNonce===nonce))sources.push(entry(nonce,'manual','source-unproven'));
+   }
+   for(const r of candidates){
+    const nonce=r?.state?.sourceNonce;
+    try{
+     const s=r?.state,i=r?.context?.immunity;
+     demand(r?.schema===1&&Number.isSafeInteger(r.revision)&&r.revision>=0&&bounded(nonce)&&!['constructor','prototype'].includes(nonce)&&s.source?.targetActorUuid===actor.uuid,'source-unproven');
+     projectRoaringConditions(s);
+     demand(r.context?.paymentId===s.source.castNonce&&typeof r.context.userId==='string'&&typeof r.context.gmId==='string'&&Number.isFinite(r.context.dc)&&i?.checked===true&&i.systemVersion==='8.5.1'&&['spell','slowed','fascinated'].every(k=>typeof i[k]==='boolean'),'source-unproven');
+     if(s.status==='ended'||i.spell){sources.push(entry(nonce,'clear',s.status==='ended'?'source-ended':'whole-spell-immune'));continue;}
+     const preview=reduceRoaringSource(s,{type:'reconcile',sourceNonce:nonce,observation:observation(s)}).source;
+     if(preview.status==='ended'){sources.push(entry(nonce,'clear',preview.termination?.reason??'source-ended'));continue;}
+     const projection=projectRoaringConditions(preview),gm=game.users?.activeGM;
+     if(resume.has(nonce)||!gm?.active||!gm.isGM||gm.id!==r.context.gmId||electedGM!==gm.id){sources.push(entry(nonce,'manual','continuity-unproven'));continue;}
+     if(preview.status!=='active'||projection.manualReview||!projection.noReactions||preview.result?.revision!==1||!bounded(preview.result.receiptId)){sources.push(entry(nonce,'manual','result-or-timing-unproven'));continue;}
+     const result=evidence.inspectResultContinuity?.({sourceNonce:nonce,originalMessageUuid:s.source.originalMessageUuid,result:copy(s.result)});
+     if(result?.status!=='current'){sources.push(entry(nonce,'manual',result?.reason??'result-continuity-unproven'));continue;}
+     const parent=effects.inspectReactionParent?.({actor,nonce});
+     sources.push(parent?.status==='present'?entry(nonce,'restricted','active-source'):parent?.status==='removed'?entry(nonce,'clear','parent-removed'):entry(nonce,'manual',parent?.reason??'parent-unproven'));
+    }catch{sources.push(entry(nonce??null,'manual','source-unproven'));}
+   }
+  }catch{return unresolved('source-unproven')}
+  return {status:sources.some(s=>s.status==='restricted')?'restricted':sources.some(s=>s.status==='manual')?'manual':'clear',sources};
+ }
  async function applyLifecycleEvent({actor,nonce,event}){
   demand(installed&&isActiveGM(game),'生命周期事实必须由当前主GM执行。');
   return queue.run(actor.uuid,async()=>{
@@ -246,9 +285,18 @@ export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeC
  }
  function register({Hooks:api,socket:rpc}){
   if(installed)return cleanup;installed=true;Hooks=api;socket=rpc;nativeCasts.addInvocationAdapter(KIND,{validate:validateInvocation,consumePolicy});evidence.register({Hooks,socket});
+  electedGM=game.users.activeGM?.id??null;
   for(const {record}of records())if(record.state.status!=='ended')resume.add(record.state.sourceNonce);seedStarts();
   const on=(name,fn)=>hooks.push([name,Hooks.on(name,fn)]),changed=()=>reconcile().catch(error=>{const key=String(error?.message??error);if(!reported.has(key)){reported.add(key);onError(error);}});
-  for(const name of ['pf2e.endTurn','pf2e.startTurn','updateCombat','deleteCombat','deleteCombatant','deleteToken','deleteScene','deleteActor','updateWorldTime','updateUser'])on(name,changed);
+  for(const name of ['pf2e.endTurn','pf2e.startTurn','updateCombat','deleteCombat','deleteCombatant','deleteToken','deleteScene','deleteActor','updateWorldTime'])on(name,changed);
+  // Core emits userConnected after changing user.active. Invalidate before
+  // any await, even when the same GM returns before reconciliation finishes.
+  const authorityChanged=()=>{
+   const current=game.users.activeGM?.id??null;
+   if(current!==electedGM){electedGM=current;for(const {record}of records())if(record.state.status!=='ended')resume.add(record.state.sourceNonce);}
+   return changed();
+  };
+  for(const name of ['userConnected','updateUser'])on(name,authorityChanged);
   for(const name of ['createCombat','createCombatant'])on(name,seedStarts);
   on('updateCombatant',async(c,changes,_options,userId)=>{const start=captureTargetStart(c,changes,userId);await changed();await targetStarted(start).catch(onError);});
   on('updateChatMessage',message=>{if(lookupSource(message))evidence.track(message);});
@@ -266,5 +314,5 @@ export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeC
   return cleanup;
  }
  function cleanup(){installed=false;for(const[n,id]of hooks.splice(0))Hooks.off(n,id);scopes.clear();byItem.clear();resume.clear();lastStarts.clear();evidence.cleanup();}
- return {interceptCast,lookupSource,onVerified,onManual,applyLifecycleEvent,reconcile,register,cleanup,listSources:()=>records().map(({actor,record})=>({actor,record:copy(record)})),diagnostic:()=>({installed,activeScopes:scopes.size,sourceCount:records().length,automaticReactions:false,automaticSustain:false})};
+ return {interceptCast,lookupSource,onVerified,onManual,applyLifecycleEvent,reconcile,reactionRestriction,register,cleanup,listSources:()=>records().map(({actor,record})=>({actor,record:copy(record)})),diagnostic:()=>({installed,activeScopes:scopes.size,sourceCount:records().length,automaticReactions:false,automaticSustain:false})};
 }

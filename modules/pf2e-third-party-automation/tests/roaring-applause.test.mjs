@@ -4,6 +4,80 @@ import {createRoaringEffects} from '../scripts/roaring-effects.mjs';
 import {createRoaringApplause} from '../scripts/roaring-applause.mjs';
 const ID='pf2e-third-party-automation',SOURCE='Compendium.pf2e.spells-srd.Item.czO0wbT1i320gcu9';
 const copy=x=>structuredClone(x);
+async function activeReactionSource(options={},outcome='failure'){
+ const f=fixture(options);await f.run();const r=f.effects.list(f.targetActor)[0];
+ await f.clients.gm.provider.onVerified({sourceNonce:r.state.sourceNonce,originalMessageUuid:r.state.source.originalMessageUuid,targetUuid:f.target.uuid,castNonce:r.state.source.castNonce,adjustedOutcome:outcome,revision:1,proof:{invocationId:'save1'}});
+ return f;
+}
+for(const outcome of ['success','failure','criticalFailure'])test(`reaction query restricts accepted ${outcome} on both clients without writes`,async()=>{
+ const f=await activeReactionSource({},outcome),before=copy([...f.records.values()]),operations=[...f.operations];
+ for(const c of Object.values(f.clients))for(let n=0;n<3;n++){const q=c.provider.reactionRestriction(f.targetActor);assert.equal(q.status,'restricted');assert.equal(q.sources.length,1);assert.equal(q.sources[0].status,'restricted');}
+ assert.deepEqual([...f.records.values()],before);assert.deepEqual(f.operations,operations);assert.equal(f.entry.system.slots.slot3.value,1);assert.equal(f.counts(),1);
+});
+test('reaction query clears absent, ended and whole-spell immune sources',async()=>{
+ const empty=fixture();assert.equal(empty.clients.gm.provider.reactionRestriction(empty.targetActor).status,'clear');
+ const ended=await activeReactionSource({},'criticalSuccess');assert.equal(ended.clients.gm.provider.reactionRestriction(ended.targetActor).status,'clear');
+ const immune=fixture({immunity:{spell:true,slowed:false,fascinated:false}});await immune.run();assert.equal(immune.clients.gm.provider.reactionRestriction(immune.targetActor).status,'clear');
+});
+test('awaiting save and inconsistent active result are manual',async()=>{
+ const f=fixture();await f.run();const q=()=>f.clients.gm.provider.reactionRestriction(f.targetActor);assert.equal(q().status,'manual');
+ const r=[...f.records.values()][0];r.state.status='active';r.state.result={revision:1,receiptId:'save1',outcome:'criticalSuccess'};assert.equal(q().status,'manual');
+ r.state.result={revision:2,receiptId:'save1',outcome:'failure'};assert.equal(q().status,'manual');
+});
+test('actual caster end and hard cap clear before asynchronous effect cleanup',async()=>{
+ const f=await activeReactionSource(),q=()=>f.clients.gm.provider.reactionRestriction(f.targetActor),before=[...f.operations];
+ f.game.combat={id:'viewed-other'};f.combat.turn=1;f.combatant.flags.pf2e.roundOfLastTurnEnd=4;assert.equal(q().status,'restricted');
+ f.combat.round=5;f.combatant.flags.pf2e.roundOfLastTurnEnd=5;assert.equal(q().status,'clear');assert.deepEqual(f.operations,before);
+ const capped=await activeReactionSource();capped.game.time.worldTime=700;assert.equal(capped.clients.gm.provider.reactionRestriction(capped.targetActor).status,'clear');
+});
+test('finite fallback preview retains strict six second boundary and never persists a new deadline',async()=>{
+ const f=await activeReactionSource(),before=copy([...f.records.values()]),q=()=>f.clients.gm.provider.reactionRestriction(f.targetActor);
+ f.game.combats.clear();f.game.time.worldTime=106;assert.equal(q().status,'manual');f.game.time.worldTime=107;assert.equal(q().status,'clear');assert.deepEqual([...f.records.values()],before);
+});
+test('reordered encounter and clock rewind are manual without query writes',async()=>{
+ const f=await activeReactionSource();f.combat.turns.reverse();assert.equal(f.clients.gm.provider.reactionRestriction(f.targetActor).status,'manual');
+ const g=await activeReactionSource();g.game.time.worldTime=99;assert.equal(g.clients.gm.provider.reactionRestriction(g.targetActor).status,'manual');
+});
+test('caster death, disconnected original caster and deleted spell do not repay or end an accepted source',async()=>{
+ const f=await activeReactionSource();f.caster.isDead=true;f.caster.canAct=false;f.users.get('player').active=false;f.caster.items.delete(f.item.id);f.caster.items.delete(f.entry.id);f.caster.flags[ID].nativeCasts=[];
+ assert.equal(f.clients.gm.provider.reactionRestriction(f.targetActor).status,'restricted');assert.equal(f.counts(),1);
+});
+test('actual owned parent proof restricts despite condition immunity and deliberate child removal',async()=>{
+ const f=await activeReactionSource({realEffects:true,immunity:{spell:false,slowed:true,fascinated:false}},'criticalFailure');
+ const r=f.effects.list(f.targetActor)[0];f.targetActor.items.delete(r.effects.children.fascinated.id);f.targetActor.items.set('other',{id:'other',type:'condition',system:{slug:'slowed',value:{value:2}}});
+ assert.equal(f.clients.gm.provider.reactionRestriction(f.targetActor).status,'restricted');
+ f.targetActor.items.delete(r.effects.parentId);assert.equal(f.clients.gm.provider.reactionRestriction(f.targetActor).status,'clear');
+});
+for(const seam of ['parent','save'])test(`unproven ${seam} evidence is manual and cannot mutate a source`,async()=>{
+ const f=await activeReactionSource(),before=copy([...f.records.values()]);
+ if(seam==='parent')f.effects.inspectReactionParent=()=>({status:'unproven',reason:'parent-rules-changed'});
+ else f.clients.gm.saveEvidence.inspectResultContinuity=()=>({status:'unproven',reason:'row-changed'});
+ assert.equal(f.clients.gm.provider.reactionRestriction(f.targetActor).status,'manual');assert.deepEqual([...f.records.values()],before);
+});
+test('missing or throwing read seams stay manual',async()=>{
+ const f=await activeReactionSource();delete f.clients.gm.saveEvidence.inspectResultContinuity;assert.equal(f.clients.gm.provider.reactionRestriction(f.targetActor).status,'manual');
+ f.clients.gm.saveEvidence.inspectResultContinuity=()=>{throw Error('missing source')};assert.equal(f.clients.gm.provider.reactionRestriction(f.targetActor).status,'manual');
+});
+test('sticky manual and reload continuity remain manual even with present parent and current row',async()=>{
+ const f=await activeReactionSource();[...f.records.values()][0].state.manualReview={reason:'reroll'};assert.equal(f.clients.gm.provider.reactionRestriction(f.targetActor).status,'manual');
+ const g=await activeReactionSource(),c=g.clients.player;c.provider.cleanup();c.provider.register({Hooks:c.Hooks,socket:c.socket});assert.equal(c.provider.reactionRestriction(g.targetActor).status,'manual');
+});
+for(const hook of ['userConnected','updateUser'])test(`${hook} synchronously preserves GM loss-and-return continuity barrier`,async()=>{
+ const f=await activeReactionSource(),c=f.clients.player;assert.equal(c.provider.reactionRestriction(f.targetActor).status,'restricted');
+ f.users.activeGM=null;const gone=c.hookMap.get(hook)(f.users.get('gm'),false);assert.equal(c.provider.reactionRestriction(f.targetActor).status,'manual');
+ f.users.activeGM=f.users.get('gm');const returned=c.hookMap.get(hook)(f.users.get('gm'),true);assert.equal(c.provider.reactionRestriction(f.targetActor).status,'manual');await Promise.all([gone,returned]);assert.equal(c.provider.reactionRestriction(f.targetActor).status,'manual');
+});
+test('reaction query aggregates restricted above manual above clear per independent source',async()=>{
+ const f=await activeReactionSource(),r=[...f.records.values()][0],other=copy(r);other.state.sourceNonce='other';other.state.manualReview={reason:'unverified'};f.records.set('other',other);
+ const q=()=>f.clients.gm.provider.reactionRestriction(f.targetActor);assert.equal(q().status,'restricted');assert.equal(q().sources.length,2);
+ r.state.status='ended';assert.equal(q().status,'manual');other.state.status='ended';assert.equal(q().status,'clear');
+});
+test('wrong live actor, unsupported provider and malformed candidate cannot imply clear',async()=>{
+ const f=await activeReactionSource(),q=a=>f.clients.gm.provider.reactionRestriction(a);assert.equal(q({...f.targetActor}).status,'manual');
+ const r=[...f.records.values()][0];r.context.immunity.checked=false;assert.equal(q(f.targetActor).status,'manual');r.context.immunity.checked=true;
+ f.targetActor.flags[ID]={roaringApplause:{sources:{broken:{schema:1}}}};assert.equal(q(f.targetActor).sources.find(s=>s.sourceNonce==='broken').status,'manual');
+ f.clients.gm.provider.cleanup();assert.equal(q(f.targetActor).status,'manual');
+});
 function fixture({choose=async()=>({perception:'sees',lineOfEffectConfirmed:true}),immunity={spell:false,slowed:false,fascinated:false},iwr=true,mode='normal',realEffects=false}={}){
  const users=new Map([['gm',{id:'gm',active:true,isGM:true}],['player',{id:'player',active:true,isGM:false,targets:new Set()}]]);users.activeGM=users.get('gm');
  const caster={id:'caster',uuid:'Actor.caster',type:'character',isToken:false,canAct:true,isDead:false,flags:{[ID]:{nativeCasts:[]}},items:new Map(),testUserPermission:u=>['gm','player'].includes(u?.id)};
@@ -21,7 +95,7 @@ function fixture({choose=async()=>({perception:'sees',lineOfEffectConfirmed:true
  const makeItem=(data,id)=>{const d={...copy(data),id,uuid:`Actor.target.Item.${id}`,actor:targetActor,sourceId:data._stats?.compendiumSource};d.update=async changes=>{merge(d,changes);return d};targetActor.items.set(id,d);docs.set(d.uuid,d);return d};
  targetActor.createEmbeddedDocuments=async(_type,data)=>{const result=[];for(const source of data){const parent=makeItem(source,`parent${++serial}`);parent.flags.pf2e={itemGrants:{}};result.push(parent);for(const rule of parent.system.rules){const child=makeItem({type:'condition',system:{slug:rule.uuid.endsWith('xYTAsEpcJE1Ccni3')?'slowed':'fascinated'},flags:{pf2e:{grantedBy:{id:parent.id,onDelete:'cascade'}}},_stats:{compendiumSource:rule.uuid}},`child${++serial}`);parent.flags.pf2e.itemGrants[rule.flag]={id:child.id,onDelete:'detach'};result.push(child);}}if(mode==='lost-materialization')throw Error('native creation reply lost');return result};
  targetActor.deleteEmbeddedDocuments=async(_type,ids)=>{const removed=[];for(const id of ids){const parent=targetActor.items.get(id);if(!parent)continue;for(const grant of Object.values(parent.flags?.pf2e?.itemGrants??{})){const child=targetActor.items.get(grant.id);if(child?.flags?.pf2e?.grantedBy?.id===id){targetActor.items.delete(child.id);docs.delete(child.uuid);removed.push(child);}}targetActor.items.delete(id);docs.delete(parent.uuid);removed.push(parent);}return removed};
- const effects={list:a=>[...records.values()].filter(r=>r.state.source.targetActorUuid===a.uuid).map(copy),get:(a,n)=>records.has(n)&&records.get(n).state.source.targetActorUuid===a.uuid?copy(records.get(n)):null,
+ const effects={inspectReactionParent:()=>({status:'present',reason:'parent-confirmed'}),list:a=>[...records.values()].filter(r=>r.state.source.targetActorUuid===a.uuid).map(copy),get:(a,n)=>records.has(n)&&records.get(n).state.source.targetActorUuid===a.uuid?copy(records.get(n)):null,
   claim:async({actor,state,context})=>{operations.push('claim');if(mode==='claim-veto')return null;const r={schema:1,revision:0,state:copy(state),context:copy(context),effects:{status:'not-started',parentId:null,children:{slowed:null,fascinated:null}}};records.set(state.sourceNonce,r);return copy(r)},
   saveState:async({actor,nonce,state,expectedRevision})=>{const r=records.get(nonce);assert.equal(r.revision,expectedRevision);r.state=copy(state);r.revision++;operations.push('save');return copy(r)},
   materialize:async({nonce})=>{operations.push('materialize');records.get(nonce).effects.status=records.get(nonce).context.immunity.spell?'immune':'created';},end:async({nonce})=>{operations.push('end');records.get(nonce).effects.status='ended';},endFascination:async()=>operations.push('end-fascination'),renew:async()=>operations.push('renew'),restoreFinite:async()=>operations.push('finite')};
@@ -32,8 +106,8 @@ function fixture({choose=async()=>({perception:'sees',lineOfEffectConfirmed:true
   const socket={register:(n,fn)=>handlers.set(n,fn),executeAsUser:async(n,to,p)=>clients[to].handlers.get(n).call({socketdata:{userId:uid}},copy(p)),executeForEveryone:async(n,p)=>Promise.all(Object.values(clients).map(c=>c.handlers.get(n).call({socketdata:{userId:uid}},copy(p))))};
   const Hooks={on:(n,fn)=>{hookMap.set(n,fn);return n},off:n=>hookMap.delete(n)};
   const nativeCasts={addInvocationAdapter:(k,v)=>adapters.set(k,v)};
-  const saveEvidence={register:()=>{},track:m=>{tracked.push([uid,m.uuid]);return true},cleanup:()=>{}};
-  const provider=createRoaringApplause({game,fromUuid:async u=>docs.get(u),nativeCasts,effects,choose,saveEvidence,onError:e=>errors.push(e),onManual:e=>manual.push(e),onClap:e=>claps.push(e),randomId:()=>`nonce${++serial}`});provider.register({Hooks,socket});clients[uid]={provider,game,handlers,hookMap,adapters,Hooks,socket};
+  const saveEvidence={inspectResultContinuity:()=>({status:'current',reason:null}),register:()=>{},track:m=>{tracked.push([uid,m.uuid]);return true},cleanup:()=>{}};
+  const provider=createRoaringApplause({game,fromUuid:async u=>docs.get(u),nativeCasts,effects,choose,saveEvidence,onError:e=>errors.push(e),onManual:e=>manual.push(e),onClap:e=>claps.push(e),randomId:()=>`nonce${++serial}`});provider.register({Hooks,socket});clients[uid]={provider,game,handlers,hookMap,adapters,Hooks,socket,saveEvidence};
  }
  const next=async()=>{castCount++;return 'passthrough'};
  next.withOutcome=async invocation=>{
