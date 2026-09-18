@@ -4,6 +4,7 @@ import {isActiveGM,isUnappliedDamageError,markUnappliedDamageError} from './nati
 import {createShieldReactionResources} from './shield-reaction-resources.mjs';
 import {reactionPermitted,requireReactionPermitted} from './reaction-restriction.mjs';
 import {GLIMPSE_SOURCES,glimpseSourceId,glimpseClaims,provenGlimpseReactionCard} from './glimpse-source.mjs';
+import {paidSpiritualScarClaims,provenSpiritualScarReactionCard} from './spiritual-scar-reaction-proof.mjs';
 
 const AAT='pf2e-auto-action-tracker',values=c=>Array.from(c?.values?.()??c??[]),own=d=>d?.flags?.[MODULE_ID]??{};
 const shieldPrefix=`${MODULE_ID}:native-shield:`,authorId=m=>m.author?.id??m.user?.id??m.user;
@@ -88,7 +89,7 @@ const sameClaim=(entry,claim)=>!!(claim.checkId&&entry.msgId===claim.checkId||cl
 /** Only the availability recheck and durable claim write belong in this lock. */
 export function withReactionReservation(actor,game,fn){let queue=queues.get(game);if(!queue){queue=new SerialActions();queues.set(game,queue);}return queue.run(actor.uuid,fn);}
 
-function reactionSlots(actor,game,{pending=[],current=reactionEpoch(actor,game),combatant=combatantFor(actor,game),entriesOverride}={}){
+function reactionSlots(actor,game,{pending=[],current=reactionEpoch(actor,game),combatant=combatantFor(actor,game),entriesOverride,excludeClaimKeys=[]}={}){
  if(!current)return [];
  const ledger=own(combatant).reactionBudget;
  let entries=game.modules?.get(AAT)?.active?(combatant.getFlag?.(AAT,'log')??combatant.flags?.[AAT]?.log??[]).filter(e=>e.type==='reaction'):[...(ledger?.epoch===current?ledger.entries??[]:[])];
@@ -101,6 +102,7 @@ function reactionSlots(actor,game,{pending=[],current=reactionEpoch(actor,game),
  const paidDisrupt=paidDisruptClaims(actor),disrupt=paidDisrupt.filter(r=>r.epoch===current).map(r=>({...r,slug:'disrupt-prey',cost:1}));
  const casts=paidCastClaims(actor);
  const glimpse=glimpseClaims(combatant).filter(r=>['paid','native','followup','done','uncertain'].includes(r.status)&&r.actorUuid===actor.uuid&&r.tokenUuid===combatant.token?.uuid&&r.combatId===c.id&&r.combatantId===combatant.id&&typeof r.nonce==='string'&&r.nonce&&r.claimKey===`glimpse:${r.nonce}`).map(r=>({...r,cost:1,slug:'glimpse-of-redemption',checkId:r.messageId}));
+ const scar=paidSpiritualScarClaims(actor,combatant,c);
  // AAT only stores a message ID. Its create hook can finish before the provider
  // writes that ID back to the pending claim: derive identity from that exact
  // live native card, never from a recent-message or weapon-name search.
@@ -109,14 +111,18 @@ function reactionSlots(actor,game,{pending=[],current=reactionEpoch(actor,game),
   return !claim?[entry]:claim.epoch!==current?[]:[{...entry,claimKey:claim.claimKey}];
  });
  if(casts.length)entries=entries.flatMap(entry=>{const claim=provenCastClaim(game.messages?.get?.(entry.msgId),actor,game);return !claim?[entry]:claim.epoch!==current?[]:[{...entry,claimKey:claim.claimKey,slug:claim.slug}];});
+ if(scar.length)entries=entries.flatMap(entry=>{const claim=provenSpiritualScarReactionCard(game.messages?.get?.(entry.msgId),actor,game);return !claim?[entry]:claim.epoch!==current?[]:[{...entry,claimKey:claim.claimKey,slug:claim.slug}];});
  // AAT may label a reaction Strike by its weapon or generic action. The exact
  // paid claim identifies its slot eligibility without modifying AAT's log.
  for(const claim of disrupt)for(let i=0;i<entries.length;i++)if(sameClaim(entries[i],claim))entries[i]={...entries[i],slug:claim.slug,cost:1};
- for(const claim of [...fear,...checks,...disrupt,...casts,...glimpse,...paidDeflectionClaims(actor),...pending])if(claim.epoch===current&&!entries.some(e=>sameClaim(e,claim)))entries.push({type:'reaction',cost:claim.cost??1,slug:claim.slug??'demoralize',msgId:claim.checkId,claimKey:claim.claimKey});
- for(const entry of entries)for(let n=0;n<Math.max(1,Number(entry.cost)||0);n++){const slot=slots.find(s=>!s.spent&&(!entry.shield?.resourceSlot||s.kind===entry.shield.resourceSlot)&&(!s.allowed||entry.msgId==='System'||s.allowed.includes(entry.slug)));if(slot){slot.spent=true;slot.entry=entry;}}
+ for(const claim of [...fear,...checks,...disrupt,...casts,...glimpse,...scar,...paidDeflectionClaims(actor),...pending])if(claim.epoch===current&&!entries.some(e=>sameClaim(e,claim)))entries.push({type:'reaction',cost:claim.cost??1,slug:claim.slug??'demoralize',msgId:claim.checkId,claimKey:claim.claimKey});
+ for(const entry of entries.filter(e=>!excludeClaimKeys.includes(e.claimKey)))for(let n=0;n<Math.max(1,Number(entry.cost)||0);n++){const slot=slots.find(s=>!s.spent&&(!entry.shield?.resourceSlot||s.kind===entry.shield.resourceSlot)&&(!s.allowed||entry.msgId==='System'||s.allowed.includes(entry.slug)));if(slot){slot.spent=true;slot.entry=entry;}}
  return slots;
 }
 export function genericReactionAvailable(actor,game,options={}){return reactionPermitted(actor,options.reactionRestriction)&&reactionSlots(actor,game,{pending:options.pending??[]}).some(s=>!s.spent&&!s.allowed);}
+/** Resource accounting for refunding one's own unattempted reservation. Being
+ * currently unable to react is separate from having spent the resource. */
+export function genericReactionSpent(actor,game,{excludeClaimKeys=[]}={}){return !reactionSlots(actor,game,{excludeClaimKeys}).some(s=>!s.spent&&!s.allowed);}
 
 function reactionData(message,item,actor){
  const context=message.flags?.pf2e?.context??{},proof=own(message).reactionChecks;
@@ -245,7 +251,7 @@ export function createReactionBudget({game,reactionRestriction,fromUuid=globalTh
   const combat=encounter();if(!combat)return false;
   const bounded={combat,modules:game.modules,messages:game.messages,users:game.users};
   const receipt=own(message).reactionBudget,epoch=reactionEpoch(actor,bounded),current=()=>encounter()===combat&&epoch===reactionEpoch(actor,bounded);
-  if(!epoch||receipt?.epoch&&receipt.epoch!==epoch&&!own(message).disruptPreyReaction&&!provenCastClaim(message,actor,game)&&!provenGlimpseReactionCard(message,actor,game))return false;
+  if(!epoch||receipt?.epoch&&receipt.epoch!==epoch&&!own(message).disruptPreyReaction&&!provenCastClaim(message,actor,game)&&!provenGlimpseReactionCard(message,actor,game)&&!provenSpiritualScarReactionCard(message,actor,game))return false;
   // Queue before resolving the item: a competing automatic reaction must wait
   // for this already-posted native reaction to be persisted first.
   return withReactionReservation(actor,game,async()=>{
@@ -257,7 +263,7 @@ export function createReactionBudget({game,reactionRestriction,fromUuid=globalTh
    // The native card can arrive before its paid claim has acquired messageId.
    // Unsupported actors and unavailable providers retain manual accounting.
    if(!glimpse&&glimpseSourceId(item)===GLIMPSE_SOURCES.glimpse&&handlesGlimpse(actor))return false;
-   const cast=provenCastClaim(message,actor,game),known=cast??glimpse,entry=known?{type:'reaction',cost:1,slug:known.slug,msgId:message.id,claimKey:known.claimKey}:reactionData(message,item,actor);if(!entry)return false;
+   const cast=provenCastClaim(message,actor,game),scar=provenSpiritualScarReactionCard(message,actor,game),known=cast??glimpse??scar,entry=known?{type:'reaction',cost:1,slug:known.slug,msgId:message.id,claimKey:known.claimKey}:reactionData(message,item,actor);if(!entry)return false;
    const paid=known??provenDisruptClaim(message,actor,game);
    if(paid&&paid.epoch!==epoch){
     // Keep the current combatant ledger untouched, even when it already has a
@@ -267,7 +273,7 @@ export function createReactionBudget({game,reactionRestriction,fromUuid=globalTh
     await message.update({[`flags.${MODULE_ID}.reactionBudget`]:{epoch:paid.epoch,actorUuid:actor.uuid,combatantId:combatantFor(actor,bounded)?.id}});
     return true;
    }
-   const combatant=combatantFor(actor,bounded),previous=own(combatant).reactionBudget,entries=previous?.epoch===epoch?[...previous.entries??[]]:[],index=entries.findIndex(e=>e.msgId===entry.msgId||glimpse&&e.claimKey===glimpse.claimKey);
+   const combatant=combatantFor(actor,bounded),previous=own(combatant).reactionBudget,entries=previous?.epoch===epoch?[...previous.entries??[]]:[],index=entries.findIndex(e=>e.msgId===entry.msgId||(glimpse??scar)&&e.claimKey===(glimpse??scar).claimKey);
    if(index>=0){const updated={...entries[index],...entry};if(JSON.stringify(entries[index])===JSON.stringify(updated))return false;entries[index]=updated;}else entries.push(entry);
    if(!isActiveGM(game)||!current())return false;
    await combatant.update({[`flags.${MODULE_ID}.reactionBudget`]:{epoch,entries}});
