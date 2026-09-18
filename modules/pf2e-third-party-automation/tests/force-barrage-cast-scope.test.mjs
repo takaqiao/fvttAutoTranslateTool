@@ -121,7 +121,7 @@ test('proof endpoint refuses foreign caller, altered source token and replay aft
  }});f.enroll();await f.cast();assert.equal(await f.rpc.get('native-cast-invocation-proof').call({socketdata:{userId:'gm'}},observed),false);
 });
 
-test('a real player-side enrollment is proved to GM and binds the same durable result',async()=>{
+for(const timing of ['untimed','verified','forged','clock-change'])test(`a real player-side enrollment proves its original completion (${timing})`,async()=>{
  const f=fixture(),clientWrappers=new Map(),clientRPC=new Map(),clientGame={...f.game,user:f.player};f.player.targets=new Set();
  const client=createNativeCastEvents({game:clientGame,fromUuid:async uuid=>f.docs.get(uuid),messageTimeoutMs:40});
  const invoke=(map,sender,name,payload)=>map.get(name).call({socketdata:{userId:sender}},payload);
@@ -129,19 +129,24 @@ test('a real player-side enrollment is proved to GM and binds the same durable r
  // Re-register socket transport through the object already captured by GM core.
  // Fixture exposes its original socket so this does not install another wrapper.
  Object.assign(f.socket,gmSocket);
- client.register({libWrapper:{register:(_id,p,fn)=>clientWrappers.set(p,fn)},socket:{register:(n,fn)=>clientRPC.set(n,fn),executeAsUser:(name,user,payload)=>{assert.equal(user,'gm');return invoke(f.rpc,'player',name,payload)}}});
+ client.register({libWrapper:{register:(_id,p,fn)=>clientWrappers.set(p,fn)},socket:{register:(n,fn)=>clientRPC.set(n,fn),executeAsUser:(name,user,payload)=>{assert.equal(user,'gm');if(name==='native-cast-invocation-bind'){if(timing==='forged')payload={...payload,completedWorldTime:payload.completedWorldTime+1};if(timing==='clock-change')f.game.time.worldTime++;}return invoke(f.rpc,'player',name,payload)}}});
  const originalConsume=f.entry.consume;
  f.entry.consume=(spell,rank,slot,cap)=>cap!==undefined?originalConsume(spell,rank,slot,cap):clientWrappers.get('CONFIG.PF2E.Item.documentClasses.spellcastingEntry.prototype.consume').call(f.entry,()=>{throw Error('Unexpected uncontrolled player native consume')},spell,rank,slot);
  f.casts.addInvocationAdapter('force-barrage',f.adapter);client.addInvocationAdapter('force-barrage',f.adapter);
- client.addCastMiddleware((_ctx,next)=>next.withOutcome({kind:'force-barrage',data:{sourceTokenUuid:null,messageMode:'public',bridgeNonce:'player-bridge'}}));
- const out=await clientWrappers.get('CONFIG.PF2E.Item.documentClasses.spellcastingEntry.prototype.cast').call(f.entry,async(spell,options)=>{
+ client.addCastMiddleware((_ctx,next)=>next.withOutcome({kind:'force-barrage',data:{sourceTokenUuid:null,messageMode:'public',bridgeNonce:'player-bridge',...(timing==='untimed'?{}:{captureCompletionTime:true})}}));
+ const task=clientWrappers.get('CONFIG.PF2E.Item.documentClasses.spellcastingEntry.prototype.cast').call(f.entry,async(spell,options)=>{
   if(await f.entry.consume(spell,1,options.slotId)){
    const messageOptions={actualCast:true,data:{castRank:1}},own=client.captureUsage(spell,{options:messageOptions});
    const message={id:'playerMessage',uuid:'ChatMessage.playerMessage',author:f.player,rolls:[],blind:false,whisper:[],flags:{[ID]:own,pf2e:{origin:{uuid:spell.uuid,actor:f.actor.uuid}}}};
    f.game.messages.set(message.id,message);f.docs.set(message.uuid,message);client.captureMessageOutcome(spell,messageOptions,{message,castNonce:own.nativeCast.id});
   }
  },f.item,{rank:1});
+ if(['forged','clock-change'].includes(timing)){
+  await assert.rejects(task,/时间/);assert.equal(f.entry.system.slots.slot1.value,2);assert.equal(f.counters().consumes,1);assert.notEqual(f.actor.flags[ID].nativeCasts[0].state,'used');return;
+ }
+ const out=await task;
  assert.equal(out.status,'completed');assert.equal(out.receipt.state,'used');assert.equal(out.receipt.userId,'player');assert.equal(out.receipt.slotCommit.userId,'player');assert.equal(out.receipt.slotCommit.gmId,'gm');assert.equal(f.entry.system.slots.slot1.value,2);
+ if(timing==='verified'){assert.equal(out.completedWorldTime,1);assert.equal(out.receipt.completedWorldTime,1);}
 });
 
 test('a cancelled middleware cannot retain an unused outcome capability for later',async()=>{
@@ -173,4 +178,35 @@ test('only the enrolled public invocation freezes explicit message mode across l
 });
 test('an invocation cannot reinterpret an initially private native mode as public',async()=>{
  const f=fixture();f.game.mode='gm';f.casts.addInvocationAdapter('force-barrage',f.adapter);f.enroll();await assert.rejects(f.cast());assert.equal(f.counters().consumes,0);
+});
+
+test('requested completion time belongs to the exact finished native invocation, not its earlier claim',async()=>{
+ const f=fixture();f.casts.addInvocationAdapter('force-barrage',f.adapter);
+ f.enroll({sourceTokenUuid:null,messageMode:'public',bridgeNonce:'timed',captureCompletionTime:true});
+ let nativeCalls=0;
+ const wrapper=f.wrappers.get('CONFIG.PF2E.Item.documentClasses.spellcastingEntry.prototype.cast');
+ const out=await wrapper.call(f.entry,async(spell,options)=>{
+  nativeCalls++;
+  if(await f.entry.consume(spell,1,options.slotId)){f.game.time.worldTime=33;await f.emit(spell,1);}
+ },f.item,{rank:1});
+ assert.equal(out.completedWorldTime,33);
+ assert.equal(out.receipt.completedWorldTime,33);
+ assert.equal(f.actor.flags[ID].nativeCasts[0].completedWorldTime,33);
+ assert.equal(nativeCalls,1);assert.equal(f.counters().consumes,1);assert.equal(f.counters().messages,1);
+});
+
+test('an invalid requested completion clock cannot certify a duration or replay payment',async()=>{
+ const f=fixture();f.casts.addInvocationAdapter('force-barrage',f.adapter);
+ f.enroll({sourceTokenUuid:null,messageMode:'public',bridgeNonce:'timed',captureCompletionTime:true});
+ f.game.time.worldTime=NaN;
+ await assert.rejects(f.cast(),/时间|time/i);
+ assert.equal(f.entry.system.slots.slot1.value,2);
+ assert.equal(f.counters().consumes,1);
+ assert.notEqual(f.actor.flags[ID].nativeCasts[0].state,'used');
+});
+
+test('ordinary enrolled casts retain their existing untimed receipt shape',async()=>{
+ const f=fixture();f.casts.addInvocationAdapter('force-barrage',f.adapter);f.enroll();
+ const out=await f.cast();assert.equal(Object.hasOwn(out,'completedWorldTime'),false);
+ assert.equal(Object.hasOwn(out.receipt,'completedWorldTime'),false);
 });
