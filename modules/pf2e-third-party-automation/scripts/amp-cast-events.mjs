@@ -342,9 +342,13 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
   const slotHook=Hooks?.on?.('updateItem',(entry,changes,options,userId)=>{
    const request=slotRequests.get(entry.actor?.uuid)?.();
    if(!request?.captured||entry!==request.entry||userId!==request.gmId)return;
-   const marker=options?.[MODULE_ID]?.nativeSlotCommit,proof=changes[`flags.${MODULE_ID}.nativeSlotCommit`]??changes.flags?.[MODULE_ID]?.nativeSlotCommit;
+   const marker=options?.[MODULE_ID]?.nativeSlotCommit,delta=changes[`flags.${MODULE_ID}.nativeSlotCommit`]??changes.flags?.[MODULE_ID]?.nativeSlotCommit;
    const after=changes[`system.slots.slot${request.rank}.value`]??changes.system?.slots?.[`slot${request.rank}`]?.value;
-   if(equal(marker,request.proof)&&equal(proof,request.proof)&&after===request.proof.after)request.witness=true;
+   // Foundry omits unchanged marker fields on later updates. Require this new
+   // nonce in the actual slot update, its exact proof subset, and the complete
+   // options and persisted marker; options alone never witness payment.
+   const exactDelta=delta&&typeof delta==='object'&&!Array.isArray(delta)&&Object.hasOwn(delta,'castNonce')&&delta.castNonce===request.proof.castNonce&&Object.entries(delta).every(([key,value])=>Object.hasOwn(request.proof,key)&&equal(value,request.proof[key]));
+   if(exactDelta&&equal(marker,request.proof)&&equal(entry.flags?.[MODULE_ID]?.nativeSlotCommit,request.proof)&&after===request.proof.after)request.witness=true;
   });
   const publicationHook=Hooks?.on?.('preCreateChatMessage',message=>{
    const own=message.flags?.[MODULE_ID],scope=enrollments.get(own?.nativeCast?.id);
