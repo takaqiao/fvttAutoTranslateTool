@@ -125,7 +125,15 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
   const toolbeltNative=game.toolbelt?.api?.actionable?.useAction;
   const useToolbelt=toolbeltNative?createToolbeltEntrance({native:toolbeltNative,eligible,observe}):null;
   if(useToolbelt&&game.modules.get('pf2e-hud')?.version==='2.55.2'&&game.modules.get('pf2e-toolbelt')?.version==='3.56.2'){
-   const patchHUD=(app,kind)=>{for(const controller of values(kind==='sidebar'?app.sidebarItems:app.shortcuts))if(controller?.item)patchHudController(controller,{kind,eligible,useToolbelt}).catch(onError)};
+   const patchHUD=(app,kind)=>{
+    // HUD 2.55.2 preserves these class names. Both collections also contain
+    // strikes, stances, spells and other controls with different use contracts.
+    const className=kind==='sidebar'?'ActionsSidebarAction':'ActionShortcut';
+    for(const controller of values(kind==='sidebar'?app.sidebarItems:app.shortcuts)){
+     if(!controller?.item||Object.getPrototypeOf(controller)?.constructor?.name!==className||kind==='persistent'&&controller.type!=='action')continue;
+     patchHudController(controller,{kind,eligible,useToolbelt}).catch(onError);
+    }
+   };
    Hooks.on('renderActionsSidebarPF2eHUD',app=>patchHUD(app,'sidebar'));
    Hooks.on('renderPersistentShortcutsPF2eHUD',app=>patchHUD(app,'persistent'));
   }
