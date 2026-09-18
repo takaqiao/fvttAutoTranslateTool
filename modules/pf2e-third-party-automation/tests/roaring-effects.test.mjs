@@ -4,12 +4,13 @@ import {MODULE_ID as ID} from '../scripts/rules.mjs';
 import {createRoaringSource,reduceRoaringSource} from '../scripts/roaring-lifecycle.mjs';
 import {createRoaringEffects} from '../scripts/roaring-effects.mjs';
 
-function fixture({outcome='criticalFailure',immunity={},veto=false,lostReply=false,deleteVeto=false,deleteLostReply=false}={}){
- const gm={id:'gm',isGM:true,active:true},game={user:gm,users:{activeGM:gm},time:{worldTime:10}},actor={id:'target',uuid:'Actor.target',type:'npc',flags:{},items:new Map()};
+function fixture({outcome='criticalFailure',immunity={},veto=false,lostReply=false,deleteVeto=false,deleteLostReply=false,synthetic=false}={}){
+ const gm={id:'gm',isGM:true,active:true},game={user:gm,users:{activeGM:gm},time:{worldTime:10},actors:new Map(),scenes:new Map()},actor={id:'target',uuid:synthetic?'Scene.scene.Token.target.Actor.target':'Actor.target',type:'npc',flags:{},items:new Map()};
+ if(synthetic){const scene={id:'scene',tokens:new Map()},token={id:'target',uuid:'Scene.scene.Token.target',parent:scene,actor};scene.tokens.set(token.id,token);game.scenes.set(scene.id,scene);actor.token=token;}else game.actors.set(actor.id,actor);
  const docs=new Map([[actor.uuid,actor]]),calls={create:0,delete:[],update:0};let sequence=0;
  const merge=(target,changes)=>{for(const[k,v]of Object.entries(changes)){const keys=k.split('.');let ptr=target;for(const name of keys.slice(0,-1))ptr=ptr[name]??={};const name=keys.at(-1);if(v&&typeof v==='object'&&!Array.isArray(v))merge(ptr[name]??={},v);else ptr[name]=structuredClone(v);}};
  actor.update=async changes=>{calls.update++;merge(actor,changes);return actor};
- const make=(data,id)=>{const doc={...structuredClone(data),id,uuid:`Actor.target.Item.${id}`,actor,sourceId:data._stats?.compendiumSource};doc.update=async changes=>{merge(doc,changes);return doc};actor.items.set(id,doc);docs.set(doc.uuid,doc);return doc};
+ const make=(data,id)=>{const doc={...structuredClone(data),id,uuid:`${actor.uuid}.Item.${id}`,actor,sourceId:data._stats?.compendiumSource};doc.update=async changes=>{merge(doc,changes);return doc};actor.items.set(id,doc);docs.set(doc.uuid,doc);return doc};
  actor.createEmbeddedDocuments=async(_type,data)=>{
   calls.create++;if(veto)return [];
   const result=[];
@@ -76,6 +77,54 @@ function fixture({outcome='criticalFailure',immunity={},veto=false,lostReply=fal
   assert.equal(f.actor.items.get(other.id),other);
   const parent=f.actor.items.get(first.effects.parentId);assert.equal(parent.system.context.origin.actor,'Actor.caster');
   for(const rule of parent.system.rules){assert.equal(rule.allowDuplicate,true);assert.equal(rule.reevaluateOnUpdate,false);assert.deepEqual(rule.onDeleteActions,{granter:'cascade',grantee:'detach'});}
+ });
+ for(const synthetic of [false,true])test(`reaction parent inspection is synchronous and read-only for non-GM ${synthetic?'synthetic':'world'} actor`,async()=>{
+  const f=fixture({synthetic});await f.effects.claim({actor:f.actor,state:f.state,context:f.context});const r=await f.effects.materialize({actor:f.actor,nonce:f.state.sourceNonce});
+  f.game.user={id:'player',isGM:false};f.docs.get=()=>{throw Error('asynchronous resolver must not be used')};
+  const snapshot=()=>JSON.stringify({flags:f.actor.flags,items:[...f.actor.items.values()].map(i=>({id:i.id,system:i.system,flags:i.flags,raw:i._source})),calls:f.calls});
+  const before=snapshot();
+  for(let i=0;i<3;i++){const result=f.effects.inspectReactionParent({actor:f.actor,nonce:r.state.sourceNonce});assert.equal(result?.then,undefined);assert.deepEqual(result,{status:'present',reason:'parent-confirmed'});}
+  assert.equal(snapshot(),before);
+ });
+ test('reaction parent inspection does not require removed children or inspect unrelated Slowed 2',async()=>{
+  const f=fixture();await f.effects.claim({actor:f.actor,state:f.state,context:f.context});const r=await f.effects.materialize({actor:f.actor,nonce:f.state.sourceNonce});
+  for(const child of Object.values(r.effects.children))f.actor.items.delete(child.id);
+  f.make({type:'condition',system:{slug:'slowed',value:{value:2}},flags:{}},'independent');
+  const counts=structuredClone(f.calls);assert.equal(f.effects.inspectReactionParent({actor:f.actor,nonce:f.state.sourceNonce}).status,'present');assert.deepEqual(f.calls,counts);
+ });
+ test('reaction parent inspection recognizes only an already confirmed parent removal',async()=>{
+  const f=fixture();await f.effects.claim({actor:f.actor,state:f.state,context:f.context});const r=await f.effects.materialize({actor:f.actor,nonce:f.state.sourceNonce});f.actor.items.delete(r.effects.parentId);
+  const counts=structuredClone(f.calls);assert.deepEqual(f.effects.inspectReactionParent({actor:f.actor,nonce:f.state.sourceNonce}),{status:'removed',reason:'parent-removed'});assert.deepEqual(f.calls,counts);
+ });
+ for(const status of ['not-started','creating','uncertain','deleting','ended','immune'])test(`reaction parent inspection does not infer a confirmed parent from phase ${status}`,async()=>{
+  const f=fixture();await f.effects.claim({actor:f.actor,state:f.state,context:f.context});const r=await f.effects.materialize({actor:f.actor,nonce:f.state.sourceNonce});
+  f.actor.flags[ID].roaringApplause.sources[r.state.sourceNonce].effects.status=status;
+  assert.equal(f.effects.inspectReactionParent({actor:f.actor,nonce:f.state.sourceNonce}).status,'unproven');f.actor.items.delete(r.effects.parentId);
+  assert.equal(f.effects.inspectReactionParent({actor:f.actor,nonce:f.state.sourceNonce}).status,'unproven');
+ });
+ for(const [name,mutate]of [
+  ['missing operation',(f,r,p)=>delete f.actor.flags[ID].roaringApplause.sources[r.state.sourceNonce].effects.operationId],
+  ['missing parent id',(f,r,p)=>delete f.actor.flags[ID].roaringApplause.sources[r.state.sourceNonce].effects.parentId],
+  ['missing stored rules',(f,r,p)=>delete f.actor.flags[ID].roaringApplause.sources[r.state.sourceNonce].effects.rules],
+  ['foreign target',(f,r,p)=>f.actor.flags[ID].roaringApplause.sources[r.state.sourceNonce].state.source.targetActorUuid='Actor.foreign'],
+  ['parent reparented',(f,r,p)=>p.actor={uuid:'Actor.foreign'}],
+  ['copied operation',(f,r,p)=>p.flags[ID].roaringEffect.operationId='other-operation'],
+  ['foreign origin',(f,r,p)=>p.system.context.origin.actor='Actor.foreign'],
+  ['changed prepared rule',(f,r,p)=>p.system.rules[0].alterations[0].value=2],
+  ['prepared ignored even with valid finite cleanup proof',(f,r,p)=>{f.actor.flags[ID].roaringApplause.sources[r.state.sourceNonce].state.timing.mode='manual-finite';p.system.duration=structuredClone(r.state.timing.finiteEnvelope.duration);p.system.start=structuredClone(r.state.timing.finiteEnvelope.start);p.system.rules[0].ignored=true;p.isExpired=true;}],
+ ])test(`reaction parent inspection rejects ${name} without side effects`,async()=>{
+  const f=fixture();await f.effects.claim({actor:f.actor,state:f.state,context:f.context});const r=await f.effects.materialize({actor:f.actor,nonce:f.state.sourceNonce}),parent=f.actor.items.get(r.effects.parentId);mutate(f,r,parent);
+  const counts=structuredClone(f.calls);assert.equal(f.effects.inspectReactionParent({actor:f.actor,nonce:f.state.sourceNonce}).status,'unproven');assert.deepEqual(f.calls,counts);
+ });
+ test('reaction parent inspection rejects a replaced world actor or detached synthetic token',async()=>{
+  for(const synthetic of [false,true]){const f=fixture({synthetic});await f.effects.claim({actor:f.actor,state:f.state,context:f.context});await f.effects.materialize({actor:f.actor,nonce:f.state.sourceNonce});
+   if(synthetic)f.actor.token.parent.tokens.delete(f.actor.token.id);else f.game.actors.set(f.actor.id,{id:f.actor.id,uuid:f.actor.uuid});
+   assert.deepEqual(f.effects.inspectReactionParent({actor:f.actor,nonce:f.state.sourceNonce}),{status:'unproven',reason:'actor-not-live'});
+  }
+ });
+ test('reaction parent inspection treats missing or unsafe sources as unproven',()=>{
+  const f=fixture();for(const nonce of ['absent','constructor','unsafe.path',null])assert.equal(f.effects.inspectReactionParent({actor:f.actor,nonce}).status,'unproven');
+  assert.deepEqual(f.calls,{create:0,delete:[],update:0});
  });
  for(const outcome of ['criticalSuccess','success','failure','criticalFailure'])test(`only exact own conditions are projected for ${outcome}`,async()=>{
   const f=fixture({outcome});await f.effects.claim({actor:f.actor,state:f.state,context:f.context});const r=await f.effects.materialize({actor:f.actor,nonce:f.state.sourceNonce});
