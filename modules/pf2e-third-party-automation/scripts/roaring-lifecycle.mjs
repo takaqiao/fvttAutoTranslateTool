@@ -5,8 +5,8 @@
  */
 const SOURCE='Compendium.pf2e.spells-srd.Item.czO0wbT1i320gcu9';
 const OUTCOMES=['criticalSuccess','success','failure','criticalFailure'];
-const EVENTS=['save-confirmed','save-unverified','sustain-use','sustain-settled','reconcile','turn-end','clock','own-child-deleted','end-fascination','own-parent-deleted'];
-const OBSERVED=['save-confirmed','save-unverified','sustain-use','sustain-settled','reconcile','turn-end'];
+const EVENTS=['save-confirmed','save-unverified','sustain-use','sustain-settled','reconcile','turn-end','target-start','continuity-unverified','clock','own-child-deleted','end-fascination','own-parent-deleted'];
+const OBSERVED=['save-confirmed','save-unverified','sustain-use','sustain-settled','reconcile','turn-end','target-start','continuity-unverified'];
 const clone=value=>structuredClone(value);
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 const own=(object,key)=>Object.hasOwn(object,key);
@@ -42,6 +42,7 @@ function validSource(s){
   demand(s.source?.sourceId===SOURCE&&s.source.rank===3&&s.hardStopAt===s.completedWorldTime+600&&Number.isFinite(s.completedWorldTime)&&Number.isFinite(s.clockHighWater),'invalid source scope/cap');
   demand(['exact','manual-finite'].includes(s.timing?.mode)&&s.timing.deadline?.endRound===s.timing.deadline?.anchorRound+1,'invalid source deadline');
   demand(s.timing.deadline.actorUuid===s.source.casterActorUuid&&s.timing.deadline.tokenUuid===s.source.casterTokenUuid,'source deadline identity changed');
+  demand(s.clapReceipts===undefined||s.clapReceipts&&typeof s.clapReceipts==='object'&&!Array.isArray(s.clapReceipts),'invalid clap receipts');
 }
 
 /** Call only after an exact paid original Cast has completed in this normal turn.
@@ -55,7 +56,7 @@ export function createRoaringSource(input){
   demand(Number.isFinite(completedWorldTime+600)&&completedWorldTime+600>completedWorldTime,'unrepresentable maximum duration');
   return {schema:1,revision:0,sourceNonce,source,status:'awaiting-save',completedWorldTime,hardStopAt:completedWorldTime+600,clockHighWater:completedWorldTime,
     timing:{mode:'exact',deadline:deadline(f),finiteEnvelope:finite(input.finiteEnvelope,completedWorldTime,f),lastFrame:f,reason:null},
-    result:null,manualReview:null,tombstones:{slowed:null,fascinated:null},sustainUses:{},termination:null};
+    result:null,manualReview:null,tombstones:{slowed:null,fascinated:null},sustainUses:{},clapReceipts:{},termination:null};
 }
 
 /** This is the source's desired rule state, not verified document presence or a
@@ -70,6 +71,9 @@ export function projectRoaringConditions(source){
 /** Every event carries sourceNonce and observation.worldTime. Events needing
  * current scope carry observation.turn (null means source structure is gone).
  * `sustain-use.turn` is the frozen invocation frame, distinct from current facts.
+ * `target-start.targetTurn.lastTurnStart` is the native roundOfLastTurn flag;
+ * its authentic new update is verified by the caller, never inferred here.
+ * Persist the resulting clap receipt before delivering its once-only prompt.
  * Callers must validate sender, live cards and bilateral grant ownership first. */
 export function reduceRoaringSource(source,event){
   validSource(source);demand(EVENTS.includes(event?.type),'unknown event');demand(event.sourceNonce===source.sourceNonce,'event source mismatch');
@@ -111,6 +115,19 @@ export function reduceRoaringSource(source,event){
   observe();
   if(s.status!=='ended'){
     switch(event.type){
+      case 'continuity-unverified':
+        degrade('turn-continuity-unverified');break;
+      case 'target-start': {
+        const p=projectRoaringConditions(s);
+        if(!p.clap||p.manualReview){reject('source cannot prompt clap');break}
+        const t=event.targetTurn,receipt={combatId:key(t?.combatId,'target combatId'),combatantId:key(t?.combatantId,'target combatantId'),round:integer(t?.round,'target round',1),actorUuid:text(t?.actorUuid,'target actorUuid'),tokenUuid:text(t?.tokenUuid,'target tokenUuid'),lastTurnStart:integer(t?.lastTurnStart,'target start receipt')};
+        const f=s.timing.lastFrame;
+        if(receipt.combatId!==s.timing.deadline.combatId||receipt.actorUuid!==s.source.targetActorUuid||receipt.tokenUuid!==s.source.targetTokenUuid||receipt.round!==f.round||receipt.lastTurnStart!==receipt.round||f.order[f.turn]?.id!==receipt.combatantId){reject('target start scope is not current');break}
+        const receiptKey=`${receipt.combatId}/${receipt.combatantId}/${receipt.round}`;
+        s.clapReceipts??={};
+        if(own(s.clapReceipts,receiptKey)){decision=same(s.clapReceipts[receiptKey],receipt)?'duplicate':'rejected';if(decision==='rejected')reason='target start receipt already bound';break}
+        s.clapReceipts[receiptKey]=receipt;decision='applied';command('clap-prompt',{receiptKey,targetTurn:receipt});break;
+      }
       case 'save-confirmed': {
         const result={revision:integer(event.revision,'result revision',1),receiptId:text(event.receiptId,'save receiptId'),outcome:event.outcome};
         demand(OUTCOMES.includes(result.outcome),'invalid native outcome');
