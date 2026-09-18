@@ -55,7 +55,9 @@ export function createSpiritualScarFollowup({game,fromUuid=globalThis.fromUuid,H
    });
    try{
     await check();
-    await statistic.roll({token:fiendToken??undefined,origin:actor,item:ability,action:'spiritual-scar',dc:{slug:'class'},traits:[...ability.system.traits.value],extraRollOptions:['action:spiritual-scar',marker(claim.nonce),'inflicts:slowed'],skipDialog:true,createMessage:true,callback:(_roll,_outcome,message)=>{demand(!card,'原生豁免回调重复');card=message}});
+    // Native check middleware must know the privacy before it rolls or offers
+    // reactions. The publication hook above preserves the exact recipients.
+    await statistic.roll({token:fiendToken??undefined,origin:actor,item:ability,action:'spiritual-scar',dc:{slug:'class'},traits:[...ability.system.traits.value],extraRollOptions:['action:spiritual-scar',marker(claim.nonce),'inflicts:slowed'],messageMode:privateCard.blind?'blind':privateCard.whisper.length?'gm':'public',skipDialog:true,createMessage:true,callback:(_roll,_outcome,message)=>{demand(!card,'原生豁免回调重复');card=message}});
    }finally{Hooks.off('preCreateChatMessage',hook)}
    await check();
    const pf=card?.flags?.pf2e,c=pf?.context,roll=card?.rolls?.[0],degree=OUTCOMES.indexOf(c?.outcome);
