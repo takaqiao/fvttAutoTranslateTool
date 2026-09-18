@@ -90,6 +90,25 @@ test('DSN term display fields are ignored but mechanical damage type is preserve
   const g=fixture(),s=await g.paid(),q=await publishing(g,s),wrong=copy(q.rollJSON);change(wrong);await assert.rejects(g.ledger.finishPublication({...q,message:damageCard(g,s,q.targetUuid,wrong)}));assert.equal(g.current().targets[0].status,'publishing');
  }
 });
+const nativeDie=roll=>roll.terms[0].rolls[0].terms[0].operands[0];
+function withDsnRole(roll){const result=copy(roll),die=nativeDie(result);die.options.dsnRoleManaged=true;die.options.dsnRole='force';for(const r of die.results)r.indexThrow=0;return result;}
+test('DSN 6 role decoration on the native Die permits publication without changing the original receipt',async()=>{
+ const f=fixture(),ctx=await f.paid(),p=await publishing(f,ctx),original=copy(p.rollJSON),display=withDsnRole(p.rollJSON),displayBefore=copy(display);
+ await f.ledger.finishPublication({...p,message:damageCard(f,ctx,p.targetUuid,display)});
+ const target=f.current().targets[0];assert.equal(target.status,'published');assert.deepEqual(target.rollJSON,original);assert.deepEqual(p.rollJSON,original);assert.deepEqual(display,displayBefore);
+ assert.equal(nativeDie(target.rollWitness).options.dsnRole,undefined);assert.equal(nativeDie(target.rollWitness).options.dsnRoleManaged,undefined);
+});
+test('recordRoll retains original DSN-decorated input while its comparison witness omits only Die presentation',async()=>{
+ const f=fixture(),ctx=await f.paid(),scope={...ctx,targetUuid:f.targets[0].uuid},rollJSON=withDsnRole(damageJSON()),original=copy(rollJSON);
+ await f.ledger.startTarget(scope);await f.ledger.recordRoll({...scope,rollJSON});const target=f.current().targets[0];
+ assert.deepEqual(target.rollJSON,original);assert.deepEqual(rollJSON,original);assert.equal(nativeDie(target.rollWitness).options.dsnRole,undefined);assert.equal(nativeDie(target.rollWitness).options.dsnRoleManaged,undefined);
+});
+for(const [name,change]of [
+ ['die faces',r=>{nativeDie(r).faces=6}],['die count',r=>{nativeDie(r).number=5}],['die result',r=>{nativeDie(r).results[0].result=1}],['die active state',r=>{nativeDie(r).results[0].active=false}],['die modifier',r=>{nativeDie(r).modifiers.push('kh3')}],['total',r=>{r.total++}],['formula',r=>{r.formula='{4d4 + 4[fire]}'}],['instance flavor',r=>{r.terms[0].rolls[0].options.flavor='fire'}],['die flavor',r=>{nativeDie(r).options.flavor='fire'}],['Roll type',r=>{r.options.type='healing'}],['Roll dsnRole',r=>{r.options.dsnRole='force'}],['Roll dsnRoleManaged',r=>{r.options.dsnRoleManaged=true}],['instance dsnRole',r=>{r.terms[0].rolls[0].options.dsnRole='force'}],['instance dsnRoleManaged',r=>{r.terms[0].rolls[0].options.dsnRoleManaged=true}],['non-Die term dsnRole',r=>{r.terms[0].rolls[0].terms[0].options.dsnRole='force'}],['unknown Die option',r=>{nativeDie(r).options.dsnUnverified=true}],
+])test(`DSN-decorated publication still rejects changed ${name}`,async()=>{
+ const f=fixture(),ctx=await f.paid(),p=await publishing(f,ctx),display=withDsnRole(p.rollJSON);change(display);const before=copy(f.current()),writes=f.writes.length;
+ await assert.rejects(f.ledger.finishPublication({...p,message:damageCard(f,ctx,p.targetUuid,display)}));assert.equal(f.writes.length,writes);assert.deepEqual(f.current(),before);
+});
 for(const [name,change]of [
  ['copied message',(f,m)=>{f.messages.set(m.id,{...m})}],['wrong author',(_f,m)=>{m.author={id:'other'}}],['wrong source',(_f,m)=>{m.flags.pf2e.origin.uuid='Other.item'}],['wrong rank',(_f,m)=>{m.flags.pf2e.origin.castRank=1}],['wrong speaker',(_f,m)=>{m.speaker.token='other'}],['wrong target',(_f,m)=>{m.flags['pf2e-toolbelt'].targetHelper.targets=['Scene.scene.Token.two']}],['extra target',(_f,m)=>{m.flags['pf2e-toolbelt'].targetHelper.targets.push('Scene.scene.Token.two')}],['wrong nonce',(_f,m)=>{m.flags[ID].forceBarrage.bridgeNonce='old'}],['wrong count',(_f,m)=>{m.flags[ID].forceBarrage.count=2}],['wrong fingerprint',(_f,m)=>{m.flags[ID].forceBarrage.fingerprint='b'.repeat(64)}],['blind',(_f,m)=>{m.blind=true}],['whisper',(_f,m)=>{m.whisper=['gm']}],['non damage card',(_f,m)=>{m.isDamageRoll=false}],
 ])test(`publication rejects ${name} without marking success`,async()=>{const f=fixture(),ctx=await f.paid(),p=await publishing(f,ctx),message=damageCard(f,ctx,p.targetUuid,p.rollJSON);change(f,message);const writes=f.writes.length;await assert.rejects(f.ledger.finishPublication({...p,message}));assert.equal(f.writes.length,writes)});
