@@ -4,6 +4,8 @@ export const ROARING_APPLAUSE_SOURCE='Compendium.pf2e.spells-srd.Item.czO0wbT1i3
 const values=c=>Array.from(c?.values?.()??c??[]);
 const isSource=item=>item?.type==='spell'&&getSourceId(item)===ROARING_APPLAUSE_SOURCE;
 const fail=reason=>({handled:true,eligible:false,reason});
+// PF2e stores overrides by initiative; the whole map is not a tie priority.
+export const roaringTurnPriority=combatant=>combatant.overridePriority?.(combatant.initiative??0)??combatant.flags?.pf2e?.overridePriority?.[combatant.initiative??0]??null;
 
 /** Admit this original invocation, without enrolling the owner's other spells. */
 export function assessRoaringCast({game,actor,item,entry,user=game?.user,options={}}={}){
@@ -46,7 +48,8 @@ export function roaringOwnTurn({game,actor,token}={}){
  if(matching.length!==1||combatant.actor!==actor||combatant.token!==token||!Number.isInteger(combat.round)||combat.round<1||!Number.isInteger(combat.turn)||turns[combat.turn]!==combatant||!Number.isFinite(combatant.initiative)||new Set(turns.map(c=>c.id)).size!==turns.length)throw Error('当前接入只处理施法者准确的本人回合。');
  const lastTurnEnd=combatant.flags?.pf2e?.roundOfLastTurnEnd??null;
  if(lastTurnEnd!==null&&(!Number.isInteger(lastTurnEnd)||lastTurnEnd<0||lastTurnEnd>=combat.round))throw Error('施法者本轮已结束或回合记录不明确，请手工核对时长。');
- const order=turns.map(c=>({id:c.id,initiative:Number.isFinite(c.initiative)?c.initiative:null,overridePriority:c.flags?.pf2e?.overridePriority??null}));
+ const order=turns.map(c=>({id:c.id,initiative:Number.isFinite(c.initiative)?c.initiative:null,overridePriority:roaringTurnPriority(c)}));
  if(order.some(c=>typeof c.id!=='string'||!c.id||c.overridePriority!==null&&!Number.isFinite(c.overridePriority)))throw Error('遭遇顺序记录不明确，请手工核对时长。');
- return {combatId:combat.id,combatantId:combatant.id,actorUuid:actor.uuid,tokenUuid:token.uuid,started:true,round:combat.round,turn:combat.turn,order,lastTurnEnd};
+ const ended=turns.map(c=>c.flags?.pf2e?.roundOfLastTurnEnd).filter(Number.isInteger);
+ return {combatId:combat.id,combatantId:combatant.id,actorUuid:actor.uuid,tokenUuid:token.uuid,started:true,round:combat.round,turn:combat.turn,order,lastTurnEnd,latestTurnEndRound:ended.length?Math.max(...ended):null};
 }

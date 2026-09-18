@@ -53,11 +53,18 @@ function fixture(){
  test('actual own turn is frozen from token encounter, never viewed combat or initiative equality',()=>{
   const f=fixture();Object.defineProperty(f.game,'combat',{get(){throw Error('viewed combat must not be read');}});
   const frame=roaringOwnTurn(f);
-  assert.deepEqual(frame,{combatId:'actual',combatantId:'source-turn',actorUuid:f.actor.uuid,tokenUuid:f.token.uuid,started:true,round:4,turn:0,order:[{id:'source-turn',initiative:20,overridePriority:null},{id:'enemy-turn',initiative:20,overridePriority:null}],lastTurnEnd:3});
+  assert.deepEqual(frame,{combatId:'actual',combatantId:'source-turn',actorUuid:f.actor.uuid,tokenUuid:f.token.uuid,started:true,round:4,turn:0,order:[{id:'source-turn',initiative:20,overridePriority:null},{id:'enemy-turn',initiative:20,overridePriority:null}],lastTurnEnd:3,latestTurnEndRound:3});
   f.combat.turn=1;assert.throws(()=>roaringOwnTurn(f));
  });
  test('ambiguous encounters and already-ended or malformed own turns require manual timing',()=>{
   for(const mutate of [f=>f.game.combats.set('other',{...f.combat,id:'other'}),f=>f.combat.started=false,f=>f.sourceCombatant.flags.pf2e.roundOfLastTurnEnd=4,f=>f.sourceCombatant.initiative=null,f=>f.combat.turn=1,f=>f.combat.round=0,f=>f.combat.turns.push({...f.sourceCombatant,id:'duplicate'})]){
    const f=fixture();mutate(f);assert.throws(()=>roaringOwnTurn(f));
   }
+ });
+ test('native initiative-keyed priority and actual last-end maximum survive the own-turn snapshot',()=>{
+  const f=fixture();f.sourceCombatant.flags.pf2e.overridePriority={20:1,15:9};
+  f.combat.turns[1].flags.pf2e={overridePriority:{20:0},roundOfLastTurnEnd:3};
+  const frame=roaringOwnTurn(f);
+  assert.equal(frame.order[0].overridePriority,1);assert.equal(frame.order[1].overridePriority,0);
+  assert.equal(frame.latestTurnEndRound,3);
  });
