@@ -54,3 +54,7 @@ Counter Performance, Spiritual Scar and other current-party gaps remain subseque
 ## Release and installation
 
 Release metadata, final startup smoke, downloaded asset verification and production installation receive separate evidence. At this preparation stage production retains the separately verified 0.9.7 module. The user-selected saved default remains Setup (`options.world=null`); an actively launched fortress world is compatible with that default. A coordinated fresh maintenance window is required before any production restart while players are online.
+
+The final 0.9.8 candidate passed an owned QA restart. Manifest and API both reported 0.9.8, the actual Roaring Reaction adapter was ready, and all **122 source, installed and fresh HTTP hashes matched**. Startup had zero page and module-console errors and two existing missing-image errors. Foundry's native lock check became ready after 8.4 seconds; no lock or database was removed.
+
+The release ZIP was enumerated against the complete frozen runtime file set and the external manifest. All 122 entries matched. ZIP SHA-256: `230dfa0ac479570271bb724c46c201af747d3a25eb16dd18ff2259fede5cd741`. Manifest SHA-256: `15c4cf98ac4c7cb2daf00622ff51173aefe80cfa463bd29d439c42cbffa35fbe`. Downloaded-release verification and production installation remain separate receipts.
