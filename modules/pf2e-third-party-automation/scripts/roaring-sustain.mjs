@@ -23,7 +23,7 @@ async function chooseSource({choices}){
 export function createRoaringSustain({game,fromUuid=globalThis.fromUuid,provider,reactionCompatibility=()=>({owned:false,checker:false}),actionEvents=getNativeActionEvents({game}),choose=chooseSource,onError=()=>{},randomId=()=>globalThis.crypto.randomUUID()}={}){
  demand(provider?.listSources&&provider?.lookupSource&&provider?.applyLifecycleEvent,'缺少来源查询和生命周期接口。');
  const scopes=new Map(),queue=new SerialActions(),hooks=[];let installed=false,socket,Hooks,unsubscribe;
- const sources=()=>provider.listSources();
+ const sources=scope=>provider.listSources(scope);
  const find=nonce=>{const rows=sources().filter(x=>x.record.state.sourceNonce===nonce);demand(rows.length===1,'来源不存在或不唯一。');return rows[0]};
  const original=record=>{const uuid=record.state.source.originalMessageUuid,m=game.messages?.get(uuid.split('.').at(-1));return m?.uuid===uuid?m:null};
  function sourceValid(found,{active=true,renew=true}={}){
@@ -116,7 +116,8 @@ export function createRoaringSustain({game,fromUuid=globalThis.fromUuid,provider
  }
  function render(message,html){
   const root=html?.[0]??html;root?.querySelector?.('[data-roaring-controls]')?.remove();if(!installed||!root?.ownerDocument)return;
-  const found=sources().filter(x=>original(x.record)===message);if(found.length!==1||message.blind!==false||message.whisper?.length)return;
+  if(message.blind!==false||message.whisper?.length)return;
+  const found=sources({message}).filter(x=>original(x.record)===message);if(found.length!==1)return;
   const {actor,record:r}=found[0],s=r.state,doc=root.ownerDocument,box=doc.createElement('section');box.dataset.roaringControls='';
   const add=(tag,text)=>{const e=doc.createElement(tag);e.textContent=text;box.append(e);return e};
   add('p',`轰然喝彩：${s.status==='ended'?'已结束':s.status==='active'?'生效中':'等待首次豁免'}。${s.manualReview||s.timing.mode!=='exact'?'本源结果或时长需GM人工核对。':''}`);
@@ -147,7 +148,8 @@ export function createRoaringSustain({game,fromUuid=globalThis.fromUuid,provider
  }
  function refresh(actor){
   if(!installed)return;
-  for(const f of sources().filter(x=>x.actor===actor)){const m=original(f.record);if(m)Promise.resolve().then(()=>installed&&globalThis.ui?.chat?.updateMessage?.(m,{notify:false})).catch(onError)}
+  if(!actor)return;
+  for(const f of sources({actor}).filter(x=>x.actor===actor)){const m=original(f.record);if(m)Promise.resolve().then(()=>installed&&globalThis.ui?.chat?.updateMessage?.(m,{notify:false})).catch(onError)}
  }
  function register({Hooks:api,socket:rpc}){
   if(installed)return cleanup;installed=true;Hooks=api;socket=rpc;

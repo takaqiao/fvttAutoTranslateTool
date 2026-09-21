@@ -8,6 +8,9 @@ export class SerialActions{
  #pending=new Map();
  run(key,fn){const next=(this.#pending.get(key)??Promise.resolve()).catch(()=>{}).then(fn);this.#pending.set(key,next);next.finally(()=>{if(this.#pending.get(key)===next)this.#pending.delete(key)}).catch(()=>{});return next}
 }
+export function resolveProviderAction(providers,item){
+ for(const provider of providers){const action=provider.resolveAction?.(item);if(action)return action;}
+}
 export function isLegendEligible(item){return ['weapon','armor','equipment','shield','backpack'].includes(item.type)&&item.isMagical===true&&(item.quantity??item.system?.quantity??0)>0}
 const queue=new SerialActions();
 const itemsOf=a=>Array.from(a.items??[]);

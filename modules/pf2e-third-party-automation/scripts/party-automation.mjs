@@ -141,19 +141,28 @@ export function createPartyAutomation({game,fromUuid=globalThis.fromUuid,choose,
    }
   });
  }
- async function maintain(actor){
+ async function maintain(actor,{movedToken}={}){
   if(!isActiveGM(game)||!actor?.items)return;
+  // Foundry maintains and invalidates documentsByType itself, including synthetic
+  // actors. Movement checks need no inventory repair scan or long-lived item cache.
+  const movementItems=()=>values(actor.itemTypes?.effect??values(actor.items).filter(i=>i.type==='effect')).filter(i=>{
+   const state=own(i);return state?.kind==='guardian'&&(!movedToken.uuid||state.sourceToken===movedToken.uuid||state.targetToken===movedToken.uuid);
+  });
+  if(movedToken&&!movementItems().length)return;
   return queue.run(actor.uuid,async()=>{
-   for(const item of values(actor.items)){
-    const repaired=buildKnownWeaknessRepair(item);if(repaired){await item.update({[`flags.${MODULE_ID}.knownWeaknessBefore`]:clone(item.system.rules),'system.rules':repaired});continue;}
+   if(!isActiveGM(game))return;
+   for(const item of movedToken?movementItems():values(actor.items)){
+    if(!isActiveGM(game))return;
+    const repaired=movedToken?null:buildKnownWeaknessRepair(item);if(repaired){await item.update({[`flags.${MODULE_ID}.knownWeaknessBefore`]:clone(item.system.rules),'system.rules':repaired});continue;}
     const state=own(item);if(!state)continue;
     let expired=state.expiresAt&&state.expiresAt<=now();
     if(state.kind==='guardian'){
      const s=await fromUuid(state.sourceToken),t=await fromUuid(state.targetToken);
      expired=!guardianActive(s,t)||s?.actor?.attributes?.shield?.itemId!==state.shieldId||!has(s?.actor,'guardian');
     }
-    if(expired)await item.delete();
+    if(expired&&isActiveGM(game))await item.delete();
    }
+   if(movedToken||!isActiveGM(game))return;
    const until=actor.flags?.[MODULE_ID]?.party?.clueUntil;if(until&&until<=now()){
     const clue=values(actor.items).find(i=>getSourceId(i)===PARTY_SOURCES.clue);
     if(clue?.system.frequency)await clue.update({'system.frequency.value':clue.system.frequency.max},{[MODULE_ID]:{usageInternal:true}});
@@ -176,7 +185,18 @@ export function createPartyAutomation({game,fromUuid=globalThis.fromUuid,choose,
    if(source===PARTY_SOURCES.guardian)return;
    if(['attack-roll','skill-check'].includes(context?.type)||m.item?.type==='spell'||['feat','action'].includes(m.item?.type))lastActions.set(actor.uuid,{kind:'other'});
   });
-  on('updateToken',(token,changes)=>{if(['x','y','elevation'].some(k=>Object.hasOwn(changes,k))) {if(token.actor)lastActions.set(token.actor.uuid,{kind:'move'});all();}});
+  const movementFields=new Set(['x','y','elevation','rotation','level','movementAction','_movementHistory','_regions','_id','_stats']);
+  on('updateToken',(token,changes={})=>{
+   const moved=['x','y','elevation','level'].some(k=>Object.hasOwn(changes,k));
+   if(moved&&token.actor)lastActions.set(token.actor.uuid,{kind:'move'});
+   if(!isActiveGM(game))return;
+   // Mixed/unknown changes can replace a linked actor or its effects.
+   if(!Object.keys(changes).every(k=>movementFields.has(k)))return all();
+   if(moved)for(const actor of actors())maintain(actor,{movedToken:token}).catch(onError);
+  });
+  let electedGM=game.users.activeGM?.id;
+  const authorityChanged=()=>{const current=game.users.activeGM?.id;if(current!==electedGM){lastActions.clear();electedGM=current;}all();};
+  on('userConnected',authorityChanged);on('updateUser',authorityChanged);on('canvasReady',all);
   on('deleteToken',all);on('deleteItem',all);on('updateItem',(item,changes)=>{if(item.type==='shield'||getSourceId(item)===PARTY_SOURCES.raiseShieldEffect)all();});on('updateWorldTime',all);on('updateCombat',(_combat,changes={})=>{if('round'in changes||'turn'in changes)lastActions.clear();all();});on('deleteCombat',()=>{lastActions.clear();all();});
   return()=>{for(const[n,id]of registrations)Hooks.off(n,id);};
  }

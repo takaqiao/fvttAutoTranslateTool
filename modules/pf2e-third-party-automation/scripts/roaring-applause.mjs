@@ -31,6 +31,37 @@ export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeC
  const allActors=()=>[...new Map([...values(game.actors),...values(game.scenes).flatMap(s=>values(s.tokens).map(t=>t.actor))].filter(Boolean).map(a=>[a.uuid,a])).values()];
  const liveActor=uuid=>allActors().find(a=>a.uuid===uuid);
  const records=()=>allActors().flatMap(actor=>(effects.list(actor)??[]).map(record=>({actor,record})));
+ // UI membership only: every result is read again from the current actor.
+ // This index never grants save, reaction or Sustain authority.
+ const messageActors=new Map(),actorMessages=new Map();let sourceIndexReady=false;
+ const invalidateSources=()=>{sourceIndexReady=false;messageActors.clear();actorMessages.clear();};
+ const indexedActor=uuid=>{
+  const p=uuid?.split('.')??[];
+  const actor=p.length===2&&p[0]==='Actor'?game.actors.get(p[1]):p.length===6&&p[0]==='Scene'&&p[2]==='Token'&&p[4]==='Actor'?game.scenes.get(p[1])?.tokens.get(p[3])?.actor:null;
+  return actor?.uuid===uuid?actor:null;
+ };
+ function indexActor(actor){
+  if(!sourceIndexReady||!actor?.uuid)return;
+  for(const uuid of actorMessages.get(actor.uuid)??[]){const owners=messageActors.get(uuid);owners?.delete(actor.uuid);if(!owners?.size)messageActors.delete(uuid);}
+  const messages=new Set((effects.list(actor)??[]).map(r=>r.state.source.originalMessageUuid));
+  if(messages.size)actorMessages.set(actor.uuid,messages);else actorMessages.delete(actor.uuid);
+  for(const uuid of messages){const owners=messageActors.get(uuid)??new Set();owners.add(actor.uuid);messageActors.set(uuid,owners);}
+ }
+ function indexActorUpdate(actor){
+  if(!sourceIndexReady)return;
+  indexActor(actor);
+  // Core rebuilds inherited synthetic data on a base Actor update without an
+  // additional updateActor hook for each dependent Token.
+  if(!actor?.isToken)for(const token of actor?.getDependentTokens?.({concreteOnly:true})??[])if(token.actor&&token.actor!==actor)indexActor(token.actor);
+ }
+ function listSources({message,actor}={}){
+  if(actor)return (effects.list(actor)??[]).map(record=>({actor,record:copy(record)}));
+  if(!message)return records().map(({actor,record})=>({actor,record:copy(record)}));
+  if(!sourceIndexReady){sourceIndexReady=true;try{for(const a of allActors())indexActor(a);}catch(error){invalidateSources();throw error;}}
+  return [...(messageActors.get(message.uuid)??[])].flatMap(uuid=>{
+   const current=indexedActor(uuid);return current?(effects.list(current)??[]).filter(r=>r.state.source.originalMessageUuid===message.uuid).map(record=>({actor:current,record:copy(record)})):[];
+  });
+ }
  const find=nonce=>{const found=records().filter(x=>x.record.state.sourceNonce===nonce);return found.length===1?found[0]:null;};
  function ownContext(actor){
   const tokens=values(actor.getActiveTokens?.(false,true)).map(t=>t.document??t),token=tokens[0],sceneId=game.scenes?.current?.id??globalThis.canvas?.scene?.id;
@@ -107,6 +138,7 @@ export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeC
    const prior=effects.get(resolved.target.actor,i.sourceNonce);
    demand(!prior||same(prior.state,state)&&same(prior.context,context),'已存在不同来源状态，不能重建。');
    const record=prior??await effects.claim({actor:resolved.target.actor,state,context});
+   indexActorUpdate(resolved.target.actor);
    demand(isActiveGM(game)&&game.user.id===i.gmId&&record&&same(record.state,state)&&same(record.context,context)&&same(effects.get(resolved.target.actor,i.sourceNonce),record),'来源认领未持久保存。');
    const marker={schema:1,sourceNonce:i.sourceNonce,castNonce:p.id,targetUuid:i.targetUuid,actorUuid:i.targetActorUuid};
    demand(!message.flags?.[ID]?.roaringSource||same(message.flags[ID].roaringSource,marker),'原卡已有冲突来源标记。');
@@ -309,7 +341,10 @@ export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeC
   // Actor source flags and the original-card marker are separate broadcasts.
   // Whichever arrives second can enroll the still-empty row on this client;
   // a late already-populated row remains manual in the evidence adapter.
-  on('updateActor',actor=>{for(const r of effects.list(actor)??[]){const message=game.messages.get(r.state.source.originalMessageUuid.split('.').at(-1));if(message&&lookupSource(message))evidence.track(message);}});
+  on('updateActor',actor=>{indexActorUpdate(actor);for(const r of effects.list(actor)??[]){const message=game.messages.get(r.state.source.originalMessageUuid.split('.').at(-1));if(message&&lookupSource(message))evidence.track(message);}});
+  for(const name of ['createActor','deleteActor','createToken','deleteToken','createScene','updateScene','deleteScene','canvasReady'])on(name,invalidateSources);
+  const movementFields=new Set(['x','y','elevation','rotation','level','movementAction','_movementHistory','_regions','_id','_stats']);
+  on('updateToken',(_token,changes={})=>{if(!Object.keys(changes).every(k=>movementFields.has(k)))invalidateSources();});
   on('deleteItem',(item,_options,userId)=>{
    if(!isActiveGM(game)||!game.users.get(userId))return;const own=effects.identifyOwnedItem?.(item,{deleted:true});if(!own)return;
    applyLifecycleEvent({actor:own.actor,nonce:own.nonce,event:{type:own.isParent?'own-parent-deleted':'own-child-deleted',condition:own.condition,itemUuid:own.itemUuid,receiptId:randomId()}}).catch(onError);
@@ -319,6 +354,6 @@ export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeC
   socket.register(NOTICE,async function(p){try{demand(this.socketdata?.userId===game.users.activeGM?.id,'来源广播必须来自当前主GM。');const message=await fromUuid(p?.messageUuid);demand(lookupSource(message),'广播来源尚未持久生效。');return {ok:evidence.track(message)};}catch(e){return {ok:false,error:e.message}}});
   return cleanup;
  }
- function cleanup(){installed=false;for(const[n,id]of hooks.splice(0))Hooks.off(n,id);scopes.clear();byItem.clear();resume.clear();lastStarts.clear();evidence.cleanup();}
- return {interceptCast,lookupSource,onVerified,onManual,applyLifecycleEvent,reconcile,reactionRestriction,register,cleanup,listSources:()=>records().map(({actor,record})=>({actor,record:copy(record)})),diagnostic:()=>({installed,activeScopes:scopes.size,sourceCount:records().length,reactionRestrictionQuery:installed,automaticSustain:false})};
+ function cleanup(){installed=false;for(const[n,id]of hooks.splice(0))Hooks.off(n,id);scopes.clear();byItem.clear();resume.clear();lastStarts.clear();invalidateSources();evidence.cleanup();}
+ return {interceptCast,lookupSource,onVerified,onManual,applyLifecycleEvent,reconcile,reactionRestriction,register,cleanup,listSources,diagnostic:()=>({installed,activeScopes:scopes.size,sourceCount:records().length,reactionRestrictionQuery:installed,automaticSustain:false})};
 }

@@ -153,6 +153,43 @@ function fixture({choose=async()=>({perception:'sees',lineOfEffectConfirmed:true
  const run=()=>clients.player.provider.interceptCast({item,entry,options:{rank:3,slotId:NaN}},next);
  return {run,next,clients,game:clients.gm.game,users,caster,targetActor,item,entry,token,target,combat,combatant,enemy,records,effects,operations,tracked,errors,manual,claps,messages,counts:()=>castCount};
 }
+test('message source queries skip unrelated actors after indexing and retain ended records',async()=>{
+ const f=await activeReactionSource(),p=f.clients.gm.provider,m=[...f.messages.values()][0];
+ assert.equal(p.listSources({message:m}).length,1);let reads=0;const list=f.effects.list;f.effects.list=a=>{reads++;return list(a)};
+ for(let n=0;n<1000;n++)assert.deepEqual(p.listSources({message:{uuid:`ChatMessage.other${n}`}}),[]);
+ assert.equal(reads,0);[...f.records.values()][0].state.status='ended';assert.equal(p.listSources({message:m})[0].record.state.status,'ended');assert.equal(reads,1);
+});
+test('actor source queries do not inspect other world or scene actors',async()=>{
+ const f=await activeReactionSource(),p=f.clients.gm.provider;const seen=[],list=f.effects.list;f.effects.list=a=>{seen.push(a.uuid);return list(a)};
+ assert.deepEqual(p.listSources({actor:f.caster}),[]);assert.deepEqual(seen,[f.caster.uuid]);
+});
+test('actor updates remove old message index entries and enroll new ones, including unmarked original cards',async()=>{
+ const f=await activeReactionSource(),c=f.clients.gm,m=[...f.messages.values()][0];c.provider.listSources({message:m});
+ const row=[...f.records.values()][0];row.state.source.originalMessageUuid='ChatMessage.rebound';await c.hookMap.get('updateActor')(f.targetActor);
+ assert.deepEqual(c.provider.listSources({message:m}),[]);assert.equal(c.provider.listSources({message:{uuid:'ChatMessage.rebound'}}).length,1);
+});
+test('message index preserves duplicate-source ambiguity and revalidates current actor identity',async()=>{
+ const f=await activeReactionSource(),p=f.clients.gm.provider,m=[...f.messages.values()][0];p.listSources({message:m});
+ const second=copy([...f.records.values()][0]);second.state.sourceNonce='second';f.records.set('second',second);assert.equal(p.listSources({message:m}).length,2);
+ const replacement={...f.targetActor};f.game.actors.set(replacement.id,replacement);f.target.actor=replacement;
+ assert.equal(p.listSources({message:m})[0].actor,replacement);f.game.actors.delete(replacement.id);f.target.actor=null;assert.deepEqual(p.listSources({message:m}),[]);
+});
+test('structural token changes invalidate message membership, pure movement does not scan sources',async()=>{
+ const f=await activeReactionSource(),c=f.clients.gm,m=[...f.messages.values()][0];c.provider.listSources({message:m});let reads=0;const list=f.effects.list;f.effects.list=a=>{reads++;return list(a)};
+ await c.hookMap.get('updateToken')(f.target,{x:5,_movementHistory:[]});assert.deepEqual(c.provider.listSources({message:{uuid:'ChatMessage.other'}}),[]);assert.equal(reads,0);
+ const r=[...f.records.values()][0];r.state.source.originalMessageUuid='ChatMessage.new';await c.hookMap.get('updateToken')(f.target,{actorLink:false});assert.equal(c.provider.listSources({message:{uuid:'ChatMessage.new'}}).length,1);
+});
+test('base actor source updates also refresh inherited unlinked synthetic memberships',async()=>{
+ const f=fixture(),c=f.clients.gm,m={uuid:'ChatMessage.inherited'};assert.deepEqual(c.provider.listSources({message:m}),[]);
+ const synthetic={...f.targetActor,uuid:'Scene.scene.Token.unlinked.Actor.target',isToken:true},token={id:'unlinked',actor:synthetic},preview={...synthetic};f.target.parent.tokens.set(token.id,token);
+ // Core registers unpersisted TokenConfig previews as dependents too. A stale
+ // preview can have the same UUID as the real actor but different source rows.
+ f.targetActor.getDependentTokens=({concreteOnly}={})=>concreteOnly?[token]:[token,{id:token.id,actor:preview}];
+ const list=f.effects.list;f.effects.list=a=>a===preview?[]:list(a===synthetic?f.targetActor:a);
+ await f.run();[...f.records.values()][0].state.source.originalMessageUuid=m.uuid;await c.hookMap.get('updateActor')(f.targetActor);
+ assert.deepEqual(c.provider.listSources({message:m}).map(x=>x.actor.uuid).sort(),[f.targetActor.uuid,synthetic.uuid].sort());
+ f.records.clear();await c.hookMap.get('updateActor')(f.targetActor);assert.deepEqual(c.provider.listSources({message:m}),[]);
+});
 test('one real enrollment creates paid source and tracks card on both clients',async()=>{const f=fixture();await f.run();assert.equal(f.counts(),1);assert.equal(f.entry.system.slots.slot3.value,1);assert.equal(f.records.size,1);assert.equal(f.tracked.length,2);const r=[...f.records.values()][0];assert.equal(r.state.completedWorldTime,100);assert.equal(r.state.hardStopAt,700);assert.equal(r.context.userId,'player');assert.equal(f.clients.gm.provider.lookupSource([...f.messages.values()][0]).castNonce,r.state.source.castNonce);});
 test('cancel performs no native cast or claim',async()=>{const f=fixture({choose:async()=>null});await f.run();assert.equal(f.counts(),0);assert.equal(f.records.size,0);});
 test('unrelated spell keeps original continuation and no enrollment',async()=>{const f=fixture();f.item.sourceId='other';assert.equal(await f.run(),'passthrough');assert.equal(f.records.size,0);});

@@ -20,6 +20,24 @@ export async function verifySalubriousWorkbench({game,source,hash=hashText}){
  if(!current()||hashes[0]!==p.sourceSHA256||hashes[1]!==p.refocusSHA256)return Object.freeze({ready:false,reason:'unknown-or-changed-workbench-source'});
  const result=Object.freeze({ready:true,profile:p});verifiedProfiles.add(result);return result;
 }
+/** Optional startup verification must not download an absent dependency or
+ * indefinitely hold up every unrelated provider while waiting for its body. */
+export async function loadSalubriousWorkbench({game,fetch=globalThis.fetch,timeoutMs=10000}){
+ const profile=SALUBRIOUS_WORKBENCH_PROFILES[game.system?.version],dependency=game.modules.get('xdy-pf2e-workbench');
+ if(!dependency?.active)return {ready:false,reason:'workbench-inactive'};
+ if(!profile||dependency.version!==profile.workbench||game.release?.generation!==profile.coreGeneration||typeof game.PF2eWorkbench?.refocus!=='function')return {ready:false,reason:'unknown-workbench-profile'};
+ const controller=new AbortController();let timer;
+ try{
+  const timeout=new Promise((_,reject)=>{timer=setTimeout(()=>{controller.abort();reject(Error('workbench-verification-timeout'));},timeoutMs)});
+  const source=await Promise.race([Promise.resolve().then(async()=>{
+   const response=await fetch('modules/xdy-pf2e-workbench/xdy-pf2e-workbench.js',{signal:controller.signal});
+   if(!response.ok)throw Error('workbench-source-unavailable');return response.text();
+  }),timeout]);
+  if(game.modules.get('xdy-pf2e-workbench')!==dependency)return {ready:false,reason:'workbench-dependency-changed'};
+  return await verifySalubriousWorkbench({game,source});
+ }catch(error){return {ready:false,reason:controller.signal.aborted?'workbench-verification-timeout':String(error.message??error)};}
+ finally{clearTimeout(timer);}
+}
 const author=m=>m?.author?.id??m?.author??m?.user?.id??m?.user;
 const sourceToken=m=>`Scene.${m?.speaker?.scene}.Token.${m?.speaker?.token}`;
 const receiptKeys=['nonce','actorUuid','itemUuid','userId','before','after','tokenUuid','startedAt'];

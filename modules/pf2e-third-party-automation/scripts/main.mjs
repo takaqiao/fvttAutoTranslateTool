@@ -1,4 +1,5 @@
-import {createSalubriousMessagePrivacy,verifySalubriousWorkbench} from './salubrious-message-privacy.mjs';
+import {createSalubriousMessagePrivacy,loadSalubriousWorkbench} from './salubrious-message-privacy.mjs';
+import {resolveProviderAction} from './runtime.mjs';
 import {renderSalubriousCard,filterSalubriousDamageContext} from './salubrious-kiss-chat.mjs';
 import {MODULE_ID,findFeature} from './rules.mjs';
 import {installDailiesCompatibility} from './dailies-compat.mjs';
@@ -144,8 +145,8 @@ Hooks.once('ready',async()=>{
  const disarmContext=createDisarmContext({game,processor:disarmingBlock});
  const disarmRegrip=createDisarmRegrip({game,fromUuid,processor:disarmingBlock,chooseOwner:choose,onError:report});
  const salubriousMessagePrivacy=createSalubriousMessagePrivacy({game,Hooks});
- let workbenchPrivacy={ready:false,reason:'workbench-verification-unavailable'};
- try{const response=await fetch('modules/xdy-pf2e-workbench/xdy-pf2e-workbench.js');if(response.ok)workbenchPrivacy=await verifySalubriousWorkbench({game,source:await response.text()});if(workbenchPrivacy.ready)salubriousMessagePrivacy.enableWorkbench(workbenchPrivacy);}catch(error){workbenchPrivacy={ready:false,reason:String(error.message??error)};}
+ const workbenchPrivacy=await loadSalubriousWorkbench({game});
+ if(workbenchPrivacy.ready)salubriousMessagePrivacy.enableWorkbench(workbenchPrivacy);
  let nativeBridgeVerification=Object.freeze({ready:false,reason:'system-source-unavailable'});
  try{const response=await fetch('systems/pf2e/pf2e.mjs',{cache:'no-store',signal:AbortSignal.timeout(10000)});if(response.ok)nativeBridgeVerification=await verifyNativeIWRBridge({game,source:new Uint8Array(await response.arrayBuffer())});}catch{/* Report via the feature diagnostic; other providers still initialize. */}
  const shieldAdapter=createShieldDamageAdapter({game,nativeBridgeVerification,onError:report,createMessageMiddleware:salubriousMessagePrivacy.createMessageMiddleware});
@@ -218,7 +219,7 @@ Hooks.once('ready',async()=>{
  libWrapper.register(MODULE_ID,`CONFIG.Dice.rolls.${rollIndex}.prototype.alter`,function(wrapped,...args){return preserveElectricityOnAlter(this,preserveMetapowerOnAlter(this,preserveDamageBypassOnAlter(this,cycle.alterDamageRoll(this,wrapped,...args),{multiplier:args[0]??1,addend:args[1]??0})))},'WRAPPER');
  for(const message of game.messages)cycle.recordDamageMessage(message);
  const legacyUsage=createUsageExecutor({cycleUse:(actor,message,user)=>coordinator.use(actor,message,user)}),usageQueue=new SerialActions();
- const resolveAction=item=>defaultUsageAction(item)??providers.map(p=>p.resolveAction?.(item)).find(Boolean);
+ const resolveAction=item=>defaultUsageAction(item)??resolveProviderAction(providers,item);
  reactionBudget.register({Hooks,socket});
  disruptExecutor.register({socket});
  salubriousExecutor.register({socket});
