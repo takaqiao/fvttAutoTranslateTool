@@ -24,11 +24,11 @@ export function assessForceBarrageCast({game,actor,item,entry,user=game.user,opt
  return {handled:true,eligible:true,rank,base};
 }
 
-/** Explicit sight confirmation supplements geometry; it never turns GM visibility
- * into character sight, admits hidden tokens, or bypasses a blocked ray. */
+/** Caster sight is declared explicitly: actor.canSee omits local lights and uses
+ * each client's viewed scene. Still refuse blindness, hidden tokens or blocked rays. */
 export function validateForceBarrageTargets({game,actor,token,targets,visibilityConfirmed=false}={}){
  const scene=token?.parent;
- if(!scene||game.scenes?.get(scene.id)!==scene||scene.tokens?.get(token.id)!==token||token.documentName!=='Token'||token.actor!==actor||token.hidden||!token.object||scene.grid?.type!==1||!['ft','feet','foot'].includes(String(scene.grid.units).toLowerCase())||actor.canSee===false||actor.hasCondition?.('blinded')||!visibilityConfirmed)throw Error('需要唯一公开来源Token、方格尺制场景及施法者能看见目标的确认。');
+ if(!scene||game.scenes?.get(scene.id)!==scene||scene.tokens?.get(token.id)!==token||token.documentName!=='Token'||token.actor!==actor||token.hidden||!token.object||scene.grid?.type!==1||!['ft','feet','foot'].includes(String(scene.grid.units).toLowerCase())||actor.hasCondition?.('blinded')||!visibilityConfirmed)throw Error('需要唯一公开来源Token、方格尺制场景及施法者能看见目标的确认。');
  if(!Array.isArray(targets)||targets.length<1||targets.length>6||new Set(targets.map(t=>t?.uuid)).size!==targets.length)throw Error('需要1至6个不同的实际目标Token。');
  for(const target of targets){
   if(target?.documentName!=='Token'||target.parent!==scene||scene.tokens.get(target.id)!==target||!target.object||target.hidden||!['character','npc','familiar'].includes(target.actor?.type)||target.actor.isDead===true||['invisible','hidden','undetected','unnoticed'].some(c=>target.actor.hasCondition?.(c)))throw Error('目标已改变，或需要GM人工判断其可见性及生物身份。');

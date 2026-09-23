@@ -31,9 +31,16 @@ test('owned/source/slot/custom/overlay/private uncertainty rejects before paymen
  for(const mutate of changes){const f=fixture();mutate(f);assert.equal(assessForceBarrageCast(f).eligible,false);}
 });
 test('range/scene/creature/vision and original visible source are checked independently of GM sight',()=>{
- for(const mutate of [f=>f.token.object.distanceTo=()=>121,f=>f.token.object.distanceTo=()=>NaN,f=>f.token.object.checkCollision=()=>true,f=>f.targets[0].hidden=true,f=>f.targets[0].actor.type='loot',f=>f.targets[0].actor.isDead=true,f=>f.targets[0].actor.hasCondition=()=>true,f=>f.targets[0].parent={...f.token.parent},f=>f.token.parent.grid.type=2,f=>f.token.parent.grid.units='m',f=>f.token.parent.tokens.delete('tar'),f=>f.visibilityConfirmed=false,f=>f.actor.canSee=false]){
+ for(const mutate of [f=>f.token.object.distanceTo=()=>121,f=>f.token.object.distanceTo=()=>NaN,f=>f.token.object.checkCollision=()=>true,f=>f.targets[0].hidden=true,f=>f.targets[0].actor.type='loot',f=>f.targets[0].actor.isDead=true,f=>f.targets[0].actor.hasCondition=()=>true,f=>f.targets[0].parent={...f.token.parent},f=>f.token.parent.grid.type=2,f=>f.token.parent.grid.units='m',f=>f.token.parent.tokens.delete('tar'),f=>f.visibilityConfirmed=false,f=>f.actor.hasCondition=condition=>condition==='blinded']){
   const f=fixture();mutate(f);assert.throws(()=>validateForceBarrageTargets(f));
  }
+});
+
+test('confirmed sight of a locally lit target is not vetoed by scene-wide canSee',()=>{
+ const f=fixture();f.actor.canSee=false;f.actor.hasCondition=()=>false;
+ assert.deepEqual(validateForceBarrageTargets(f),f.targets);
+ f.visibilityConfirmed=false;assert.throws(()=>validateForceBarrageTargets(f));
+ f.visibilityConfirmed=true;f.actor.hasCondition=condition=>condition==='blinded';assert.throws(()=>validateForceBarrageTargets(f));
 });
 test('allocation takes upstream missile count and refuses any unsafe numeric or target input',()=>{
  const targets=[{uuid:'Scene.s.Token.a'},{uuid:'Scene.s.Token.b'}];
