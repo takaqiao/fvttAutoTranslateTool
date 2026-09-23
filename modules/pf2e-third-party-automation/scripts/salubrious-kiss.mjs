@@ -28,7 +28,7 @@ export function createSalubriousKiss({game,fromUuid=globalThis.fromUuid,choose,e
    let claim={nonce:proof.nonce,actorUuid:actor.uuid,itemUuid:item.uuid,tokenUuid:token.uuid,userId:user.id,startedAt:proof.startedAt,state:'choosing',...proof.privacy?{privacy:structuredClone(proof.privacy),refocusNoteId:proof.noteId}:{},skill:'occultism',activityMinutes:10},target,executionStarted=false;
    await run(actor.uuid,async()=>{gm();if((kissState(actor).claims??[]).some(c=>!['done','declined'].includes(c.state)))throw fail('该角色仍有未确认的医疗');await write(()=>actor.update({[`flags.${MODULE_ID}.salubriousKiss.claims`]:[...(kissState(actor).claims??[]),structuredClone(claim)]}));});
    try{
-    const candidates=values(token.parent.tokens).filter(t=>{try{assertPatient({game,actor,token,target:t,user});return true}catch{return false}});
+    const candidates=values(token.parent.tokens).filter(t=>{if(t.hidden&&!user.isGM)return false;try{assertPatient({game,actor,token,target:t,user});return true}catch{return false}});
     if(!candidates.length)throw fail('没有可确认的合格患者');
     const selected=await choose({kind:'patient',actor,user,title:'仙露三吻：重新聚能时同时医疗',choices:[{value:'only-refocus',label:'仅重新聚能'},...candidates.map(t=>({value:t.uuid,label:t.name??t.actor.name??t.actor.id}))]});
     if(selected==null||selected==='only-refocus'){claim.state='declined';await save(actor,claim);return claim}

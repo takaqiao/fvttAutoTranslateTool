@@ -17,7 +17,7 @@ function fixture(){
  const enemyCombatant={id:'enemy-turn',actor:target.actor,token:target,initiative:20,flags:{}};
  const combat={id:'actual',started:true,scene,round:4,turn:0,turns:[sourceCombatant,enemyCombatant]};
  const game={world:{id:'ujx5r8oipw7ercdr'},system:{version:'8.5.1'},user,users,actors:new Map([[actor.id,actor]]),scenes:new Map([[scene.id,scene]]),combats:new Map([[combat.id,combat]]),settings:{get:()=> 'public'}};
- return {game,user,actor,item,entry,options:{rank:3},token,targets:[target],perception:'sees',lineOfEffectConfirmed:true,combat,sourceCombatant};
+ return {game,user,actor,item,entry,options:{rank:3},token,targets:[target],combat,sourceCombatant};
 }
 
  test('current original and native same-rank variant pass without English duration/target labels',()=>{
@@ -36,17 +36,21 @@ function fixture(){
    const f=fixture();mutate(f);assert.equal(assessRoaringCast(f).eligible,false);
   }
  });
- test('understanding is see OR hear OR otherwise understand, independent of caster blindness',()=>{
-  for(const perception of ['sees','hears','understands']){
-   const f=fixture();f.perception=perception;f.actor.canSee=false;f.actor.hasCondition=()=>true;
-   assert.equal(validateRoaringTarget(f),f.targets[0]);
-  }
-  const f=fixture();f.perception='hears';f.targets[0].actor.hasCondition=c=>c==='blinded';assert.equal(validateRoaringTarget(f),f.targets[0]);
-  f.perception='sees';assert.throws(()=>validateRoaringTarget(f));
-  f.perception='understands';assert.equal(validateRoaringTarget(f),f.targets[0]);
+ test('table adjudication binds the target without a sensory or line-of-effect attestation',()=>{
+  const f=fixture();f.targets[0].actor.canSee=false;f.targets[0].actor.canHear=false;
+  f.targets[0].actor.hasCondition=()=>{throw Error('target binding must not inspect conditions')};
+  assert.equal(validateRoaringTarget(f),f.targets[0]);
+  assert.equal(validateRoaringTarget({...f,perception:'sees',lineOfEffectConfirmed:false}),f.targets[0]);
  });
- test('target validation preserves single live creature, range, geometry and explicit line-of-effect boundaries',()=>{
-  for(const mutate of [f=>f.targets=[],f=>f.targets.push(f.targets[0]),f=>f.token.object.distanceTo=()=>61,f=>f.token.object.distanceTo=()=>NaN,f=>f.targets[0].hidden=true,f=>f.targets[0].actor.type='loot',f=>f.targets[0].elevation=5,f=>f.targets[0].parent={...f.token.parent},f=>f.token.parent.tokens.delete('target'),f=>f.token.parent.grid.type=2,f=>f.lineOfEffectConfirmed=false,f=>f.perception=null,f=>{f.perception='hears';f.targets[0].actor.hasCondition=c=>c==='deafened';}]){
+ test('table adjudication does not read range elevation levels grid or units',()=>{
+  const f=fixture(),unused=()=>{throw Error('target binding must not measure spatial legality')};
+  f.token.object.distanceTo=unused;
+  for(const doc of [f.token,f.targets[0]])for(const key of ['elevation','level'])Object.defineProperty(doc,key,{get:unused});
+  Object.defineProperty(f.token.parent,'grid',{get:unused});
+  assert.equal(validateRoaringTarget(f),f.targets[0]);
+ });
+ test('target binding preserves one current public creature in the original live scene',()=>{
+  for(const mutate of [f=>f.targets=[],f=>f.targets.push(f.targets[0]),f=>f.targets[0].hidden=true,f=>f.targets[0].actor.type='loot',f=>f.targets[0].actor.isDead=true,f=>f.targets[0].parent={...f.token.parent},f=>f.token.parent.tokens.delete('target'),f=>f.token.parent.tokens.set('target',{...f.targets[0]}),f=>f.game.scenes.delete(f.token.parent.id),f=>f.token.parent.tokens.delete(f.token.id),f=>f.token.hidden=true,f=>f.token.actor={},f=>f.token.object=null,f=>f.targets[0].object=null]){
    const f=fixture();mutate(f);assert.throws(()=>validateRoaringTarget(f));
   }
  });

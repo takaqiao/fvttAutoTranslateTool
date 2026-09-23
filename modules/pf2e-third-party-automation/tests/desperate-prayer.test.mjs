@@ -42,6 +42,22 @@ test('native start opportunity pays original frequency and atomically grants exa
 test('declining and starting with normal Focus do not leave a later opportunity',async()=>{for(const options of [{decision:'skip'},{focus:1}]){const f=fixture(options);await f.start();f.actor.system.resources.focus.value=0;assert.throws(()=>f.provider.beforeUse(f.feat),/起回合/);assert.equal(f.feat.system.frequency.value,1)}});
 test('changing turn while owner answers cannot grant or consume daily use',async()=>{const f=fixture();f.confirm(async()=>{f.combat.turn=1;f.combat.combatant=null;return 'use'});await f.start();assert.equal(f.actor.system.resources.focus.value,0);assert.equal(f.feat.system.frequency.value,1)});
 test('ordinary action attempted before choice closes the start opportunity',async()=>{const f=fixture();f.confirm(async()=>{await f.provider.beforeAction(f.actor);return 'use'});await f.start();assert.equal(f.feat.system.frequency.value,1);assert.equal(f.actor.system.resources.focus.value,0)});
+test('a pending Prayer choice does not block coordinate corrections',async()=>{
+ const f=fixture();f.confirm(async()=>{for(const changes of [{x:100},{y:200},{elevation:10}])assert.notEqual(f.emit('preUpdateToken',{actor:f.actor},changes),false);return 'skip'});
+ await f.start();assert.equal(f.errors.length,0);assert.equal(f.feat.system.frequency.value,1);
+});
+test('native movement proceeds while the Prayer choice stays open for GM timing adjudication',async()=>{
+ const f=fixture();let moved=0;f.confirm(async()=>{const token={actor:f.actor},native=async()=>++moved,wrapper=f.wrappers.get('CONFIG.Token.documentClass.prototype._preUpdateMovement');
+  assert.equal(await (wrapper?wrapper.call(token,native,{},{}):native()),1);assert.equal(f.actor.flags[ID].desperatePrayer.window.state,'open');return 'skip';});
+ await f.start();assert.equal(moved,1);assert.equal(f.feat.system.frequency.value,1);
+});
+test('an unrelated sheet Use reaches its native action instead of requiring the Prayer prompt first',async()=>{
+ const f=fixture();let click,prevented=0,acted=0;const element={addEventListener:(_name,fn)=>{click=fn},removeEventListener(){}};
+ f.emit('renderCharacterSheetPF2e',{actor:f.actor},element);
+ f.confirm(async()=>{const button={closest:()=>({dataset:{itemId:'other'}})},event={target:{closest:()=>button},preventDefault:()=>prevented++,stopImmediatePropagation:()=>prevented++};
+  click(event);assert.equal(prevented,0);await f.provider.beforeAction(f.actor);acted++;return 'use';});
+ await f.start();assert.equal(acted,1);assert.equal(f.feat.system.frequency.value,1);assert.equal(f.actor.system.resources.focus.value,0);
+});
 for(const key of ['lay','surge'])test(`native ${key} payment consumes temporary credit and never consumes twice`,async()=>{const f=fixture();await f.start();assert.equal(await f.consume(f[key]),true);assert.equal(f.actor.system.resources.focus.value,0);assert.equal(f.actor.flags[ID].desperatePrayer.credit.state,'spent');await f.end();assert.equal(f.actor.system.resources.focus.value,0)});
 test('Weapon Surge requires the exact current zeal grant, not a cleric or champion trait guess',async()=>{const f=fixture();await f.start();f.domain.system.rules[0].selection='fire';await assert.rejects(f.consume(f.surge),/虔诚|普通/);assert.equal(f.actor.system.resources.focus.value,1)});
 test('unrelated focus spell cannot spend temporary-only credit',async()=>{const f=fixture();await f.start();await assert.rejects(f.consume(f.other),/虔诚|普通/);assert.equal(f.actor.system.resources.focus.value,1)});

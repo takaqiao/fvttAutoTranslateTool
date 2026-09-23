@@ -16,15 +16,9 @@ async function hash(v){const b=await crypto.subtle.digest('SHA-256',new TextEnco
 const shape=item=>canonical({source:getSourceId(item),system:item.system});
 const transport=o=>({status:o.status,castNonce:o.castNonce,input:copy(o.input),receipt:copy(o.receipt),messageUuid:o.message?.uuid??null,completedWorldTime:o.completedWorldTime});
 
-async function chooseFacts(){
- return globalThis.foundry.applications.api.DialogV2.wait({window:{title:'轰然喝彩：确认本次目标'},content:'<p>确认具有法术效线，并选择目标理解施法者的方式。不同高度、私密结果或不确定规则请取消并手工处理。</p>',buttons:[
-  ...[['sees','目标能看见施法者，且有法术效线'],['hears','目标能听见施法者，且有法术效线'],['understands','目标能以其他方式理解施法者，且有法术效线']].map(([perception,label])=>({action:perception,label,callback:()=>({perception,lineOfEffectConfirmed:true})})),
-  {action:'cancel',label:'取消',type:'button',callback:()=>false}],rejectClose:false});
-}
-
 /** Current public rank-3 source coordinator. No matcher, extra payment, native
  * save, Sustain completion, reaction-resource mutation or reconstructed roll. */
-export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeCasts,effects,choose=chooseFacts,saveEvidence,onError=()=>{},onManual:manualNotice=()=>{},onClap=()=>globalThis.ui?.notifications?.info?.('轰然喝彩：目标起回合需要鼓掌（操控）。请GM核对可触发的反应。'),randomId=()=>globalThis.crypto.randomUUID()}={}){
+export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeCasts,effects,saveEvidence,onError=()=>{},onManual:manualNotice=()=>{},onClap=()=>globalThis.ui?.notifications?.info?.('轰然喝彩：目标起回合需要鼓掌（操控）。请GM核对可触发的反应。'),randomId=()=>globalThis.crypto.randomUUID()}={}){
  demand(nativeCasts&&effects,'native Cast and owned effect store required');
  const scopes=new Map(),byItem=new Map(),queue=new SerialActions(),hooks=[],reported=new Set(),resume=new Set(),lastStarts=new Map();let socket,Hooks,installed=false,electedGM=null,authorityGeneration=0;
  const evidence=saveEvidence??createRoaringSaveEvidence({game,fromUuid,lookupSource,onVerified,onManual,onError,randomId});
@@ -81,7 +75,7 @@ export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeC
   if(beforePayment){const a=assessRoaringCast({...s,item:s.castItem,user:s.user});demand(a.eligible,a.reason??'施法入口已改变。');}
   const c=ownContext(s.actor);demand(c.token===s.token,'原施法者Token已改变。');
   if(beforePayment)demand(same(c.targets.map(t=>t.uuid),s.targets.map(t=>t.uuid)),'付款前原单目标选择已改变。');
-  validateRoaringTarget({...s,...s.facts});demand(same(roaringOwnTurn(s),s.turn),'准确施法回合已改变。');
+  validateRoaringTarget(s);demand(same(roaringOwnTurn(s),s.turn),'准确施法回合已改变。');
  }
  const identity=s=>({sourceNonce:s.sourceNonce,actorUuid:s.actor.uuid,itemUuid:s.item.uuid,entryUuid:s.entry.uuid,sourceTokenUuid:s.token.uuid,targetUuid:s.targets[0].uuid,targetActorUuid:s.targets[0].actor.uuid,userId:s.user.id,gmId:s.gmId,rank:3,dc:s.dc,turn:s.turn,facts:s.facts,itemShape:s.itemShape});
  async function localProof(payload,sender){
@@ -100,7 +94,7 @@ export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeC
   const actor=await fromUuid(i.actorUuid),item=await fromUuid(i.itemUuid),entry=await fromUuid(i.entryUuid),token=await fromUuid(i.sourceTokenUuid),target=await fromUuid(i.targetUuid),user=game.users.get(i.userId);
   demand(isActiveGM(game)&&game.user.id===i.gmId&&user?.active&&actor?.items?.get(item?.id)===item&&actor.items.get(entry?.id)===entry&&actor.testUserPermission(user,'OWNER')===true&&item.actor===actor&&entry.actor===actor&&getSourceId(item)===ROARING_APPLAUSE_SOURCE&&shape(item)===i.itemShape,'原生来源或权限不再匹配。');
   if(beforePayment){const a=assessRoaringCast({game,actor,item,entry,user,options:{rank:3,messageMode:'public'}});demand(a.eligible,a.reason??'原生施法参数无效。');}
-  validateRoaringTarget({game,actor,token,targets:[target],...i.facts});demand(target.actor.uuid===i.targetActorUuid&&same(roaringOwnTurn({game,actor,token}),i.turn),'原目标或准确施法回合不再匹配。');
+  validateRoaringTarget({game,actor,token,targets:[target]});demand(target.actor.uuid===i.targetActorUuid&&same(roaringOwnTurn({game,actor,token}),i.turn),'原目标或准确施法回合不再匹配。');
   const dc=entry.statistic?.withRollOptions?.({item})?.dc?.value??entry.statistic?.dc?.value;demand(dc===i.dc,'原施法DC已经改变。');
   return {actor,item,entry,token,target,user};
  }
@@ -157,11 +151,12 @@ export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeC
  async function interceptCast({item:castItem,entry,options={}},next){
   const actor=castItem.actor,user=game.user,a=assessRoaringCast({game,actor,item:castItem,entry,user,options});if(!a.handled)return next();demand(a.eligible,a.reason);
   const item=a.base;demand(!byItem.has(item.uuid),'这个法术已有正在进行的施法。');
-  const s={game,actor,item,castItem,entry,options,user,gmId:game.users.activeGM.id,sourceNonce:randomId(),stage:'choosing',itemShape:shape(item),...ownContext(actor)};
+  // This scope records the table's adjudication boundary, not sensory or
+  // line-of-effect evidence. Only the native source and target are authenticated.
+  const s={game,actor,item,castItem,entry,options,user,gmId:game.users.activeGM.id,sourceNonce:randomId(),stage:'preparing',facts:{status:'table-adjudicated'},itemShape:shape(item),...ownContext(actor)};
   demand(bounded(s.sourceNonce),'来源nonce无效。');s.turn=roaringOwnTurn(s);s.dc=entry.statistic?.withRollOptions?.({item:castItem})?.dc?.value??entry.statistic?.dc?.value;demand(Number.isFinite(s.dc),'原生施法DC未知。');
   scopes.set(s.sourceNonce,s);byItem.set(item.uuid,s);
   try{
-   const facts=await choose(s);if(!facts)return; s.facts={perception:facts.perception,lineOfEffectConfirmed:facts.lineOfEffectConfirmed};
    liveScope(s,{beforePayment:true});s.fingerprint=await hash(identity(s));s.stage='casting';
    demand(typeof next.withOutcome==='function','准确原生施法接口不可用。');
    s.outcome=await next.withOutcome({kind:KIND,data:{sourceNonce:s.sourceNonce,fingerprint:s.fingerprint,sourceTokenUuid:s.token.uuid,messageMode:'public',captureCompletionTime:true}});

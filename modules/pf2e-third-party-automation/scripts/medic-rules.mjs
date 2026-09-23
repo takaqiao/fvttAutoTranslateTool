@@ -7,11 +7,10 @@ export function visitationBranches(actor){return [{value:'battle-medicine',label
 export const conditionValue=c=>c?.value??c?.system?.value?.value;
 export const conditionBound=c=>Boolean(c?.isLocked||c?.inMemoryOnly||c?.system?.references?.parent?.id||c?.flags?.pf2e?.grantedBy);
 export function usableToolkit(actor){return values(actor?.items).some(i=>i.type==='equipment'&&[MEDIC_SOURCES.toolkit,'Compendium.pf2e.equipment-srd.Item.SGkOHFyBbzWdBk8D'].includes(getSourceId(i))&&(i.system?.quantity??0)>0&&!i.system?.containerId&&(i.system?.equipped?.carryType==='held'||i.system?.equipped?.carryType==='worn'&&(actor.handsFree??actor.system?.attributes?.handsFree??0)>0));}
-export function validateTreatment({actor,condition,distance,facts}){
+export function validateTreatment({actor,condition,facts}){
  if(!condition||condition.type!=='condition'||!['clumsy','enfeebled','sickened'].includes(condition.slug)||!Number.isInteger(conditionValue(condition))||conditionValue(condition)<1)throw Error('没有所选的可处理状态。');
  if(conditionBound(condition))throw Error('此状态由父效果授予或锁定；当前不能安全单独修改，未删除父效果。');
  if(!usableToolkit(actor))throw Error('需要持握医疗工具包，或穿戴工具包且有空手。');
- if(!Number.isFinite(distance)||distance<0||distance>5)throw Error('需要相邻的目标。');
  if(!Number.isInteger(facts?.dc)||facts.dc<1||typeof facts.restricted!=='boolean'||typeof facts.continuous!=='boolean')throw Error('需要GM补齐真实来源DC、神器/20级以上及持续情境事实。');
  if(facts.continuous)throw Error('该状态持续来源的情境仍存在：处理状态无效。');
  if(facts.restricted&&!medicFeat(actor,'legendaryMedic'))throw Error('神器或20级以上来源需要传奇医师专长。');

@@ -12,7 +12,7 @@ function fixture(){
  for(const method of ['claim','startCast','bindCast','startTarget','recordRoll','beginPublication','finishPublication','uncertain','finishWithoutDamage'])ledger[method]=async p=>{calls.push([method,p]);if(method==='claim')record={...p,nonce:'bridge',status:'claimed'};if(method==='bindCast')record={...record,castNonce:p.outcome.castNonce,originalMessageUuid:p.outcome.message.uuid};if(method==='finishPublication'){record.targets??=[];record.targets.push({targetUuid:p.targetUuid,status:'published',messageUuid:p.message.uuid});record.status=record.targets.length===2?'delivered':'producing';}return record;};
  const nativeCasts={addInvocationAdapter:(k,a)=>adapters.set(k,a),withActorResourceLock:(_a,fn)=>fn()};
  const Hooks={on:(n,f)=>{hooks.set(n,f);return f},off:()=>{}};
- let answer={actions:3,visibilityConfirmed:true,allocations:targets.map((t,i)=>({targetUuid:t.uuid,count:i?2:4}))};
+ let answer={actions:3,allocations:targets.map((t,i)=>({targetUuid:t.uuid,count:i?2:4}))};
  let rolling=0,publishing=0,native=0;const rolls=[];
  const adapter={getMissileCount:()=>6,run:async p=>{calls.push(['adapter',p]);await p.bridge.payAndBindOriginalCast();for(const a of p.allocations){if(!a.count)continue;const roll={async evaluate(){rolling++;this.total=a.count*2;return this},toJSON(){return {class:'DamageRoll',formula:`${a.count}d4+${a.count}`,total:this.total,terms:[]}},async toMessage(data,opts){if(hooks.get('preCreateChatMessage')?.(data)===false)return;publishing++;const m={id:`d${publishing}`,uuid:`ChatMessage.d${publishing}`,...data};game.messages.set(m.id,m);calls.push(['publish',opts]);return m;}};rolls.push(roll);await p.bridge.publishTarget({roll,messageData:{flags:{'pf2e-toolbelt.targetHelper.targets':[a.targetUuid]},flavor:'native',speaker:{actor:'a',token:'src',scene:'sc'}},targetUuid:a.targetUuid});}return {status:'completed'};}};
  const outcome={status:'completed',castNonce:'cast',message:{id:'c',uuid:'ChatMessage.c'},receipt:{state:'used'}};
@@ -22,7 +22,7 @@ function fixture(){
  const bridge=createForceBarrageBridge(config);bridge.register({Hooks,socket:{register:(k,f)=>rpcs.set(k,f)}});
  return {game,user,actor,item,entry,token,targets,calls,ledger,adapter,adapters,rpcs,hooks,bridge,config,next,outcome,rolls,set answer(v){answer=v},get counts(){return {rolling,publishing,native}},run:()=>bridge.interceptCast({item,entry,options:{rank:3}},next)};
 }
-test('original Cast pays once then evaluates and publishes each positive target once with exact provenance',async()=>{
+test('allocation without a visibility checkbox pays once and publishes each positive target once with exact provenance',async()=>{
  const f=fixture();await f.run();assert.deepEqual(f.counts,{native:1,rolling:2,publishing:2});
  const steps=f.calls.map(c=>c[0]);assert.ok(steps.indexOf('cast')<steps.indexOf('startTarget'));assert.equal(steps.at(-1),'finishPublication');
  for(const [i,m]of [...f.game.messages.values()].entries()){

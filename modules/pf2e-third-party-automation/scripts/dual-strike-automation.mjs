@@ -59,11 +59,10 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
   const candidates=values(actor.getActiveTokens?.(true,true)).map(t=>t.document??t).filter(t=>t.actor?.uuid===actor.uuid&&t.parent?.id===target.parent?.id);
   if(candidates.length!==1)throw Error('无法唯一确定双武器活动的来源token；请从场景角色使用。');return candidates[0];
  }
- function requireReach(actor,origin,target,weapon){
-  const reach=actor.getReach?.({action:'attack',weapon}),a=origin.object,b=target.object;
-  if(!Number.isFinite(reach)||reach<=0||!a||!b||typeof a.distanceTo!=='function')throw Error('无法确定该武器的原生触及与目标距离。');
-  const distance=a.distanceTo(b,{reach});if(!Number.isFinite(distance)||distance<0||distance>reach)throw Error('目标不在两把所选近战武器的触及范围内。');
-  if(a.checkCollision?.(b.center,{origin:a.center,type:'move',mode:'any'}))throw Error('目标与近战打击之间存在阻挡。');
+ function requireSceneTarget(actor,origin,target){
+  // Keep native Strike identity; reach and intervening walls belong to GM adjudication.
+  const scene=origin.parent;
+  if(origin.actor?.uuid!==actor.uuid||!scene||game.scenes?.get(scene.id)!==scene||scene.tokens?.get(origin.id)!==origin||target.parent!==scene||scene.tokens.get(target.id)!==target||!target.object||!target.actor)throw Error('双武器活动的来源或场景目标已改变。');
  }
  async function maintain(actor){
   if(!isActiveGM(game))return {status:'not-authority'};
@@ -108,12 +107,12 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
    await maintain(actor);
    const selected=[first,second].map(id=>wielded().find(s=>s.item.id===id));
    if(selected.some(s=>!s))throw Error('武器持用状态已改变，尚未进行攻击。');
-   const origin=await sourceToken(actor,message,target);for(const strike of selected)requireReach(actor,origin,target,strike.item);
+   const origin=await sourceToken(actor,message,target);requireSceneTarget(actor,origin,target);
    if(!twin&&!item.system.rules?.some(r=>r.key==='FlatModifier'&&r.predicate?.some(p=>p?.or?.includes(SECOND_ATTACK))))throw Error('双重切割的原生第二击修正规则缺失，尚未攻击。');
    await actor.update({[`flags.${MODULE_ID}.dualStrikeUses`]:[...(own(actor).dualStrikeUses??[]).slice(-127),message.id]});
    const hits=[];
    for(const[index,strike]of selected.entries()){
-    requireReach(actor,origin,target,strike.item);
+    requireSceneTarget(actor,origin,target);
     const options=new Set([`${MODULE_ID}:dual-strike:${message.id}`,`action:${twin?'twin-takedown':'double-slice'}`]);
     if(twin)options.add('hunted-prey');else if(index===1){options.add('double-slice-second');options.add(SECOND_ATTACK);}
     const tier=twin?Math.min(map+index,2):map;

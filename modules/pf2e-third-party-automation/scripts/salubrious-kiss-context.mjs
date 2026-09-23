@@ -13,13 +13,13 @@ export function assertSource({game,actor,item,token,user,privacy}){
  if(game.users.get(user?.id)!==user||!user.active||!actor.testUserPermission(user,'OWNER')||actor.isDead||actor.hasCondition?.('unconscious'))throw fail('原拥有者离线、失去权限或无法行动');
  validateSalubriousPrivacy({game,user,token,item,privacy});
 }
-export function assertPatient({game,actor,token,target,allowImmune=false,user=game.user}){
- if(!currentToken(target,game)||target.hidden&&!user?.isGM||target.parent!==token.parent||target.actor.modeOfBeing!=='living'||target.actor.isDead||target.actor!==actor&&!target.actor.isAllyOf?.(actor))throw fail('需要当前场景中的可见受伤活体自身或盟友');
+export function assertPatient({game,actor,token,target,allowImmune=false}){
+ if(!currentToken(target,game)||target.parent!==token.parent||target.actor.modeOfBeing!=='living'||target.actor.isDead||target.actor!==actor&&!target.actor.isAllyOf?.(actor))throw fail('需要当前场景中的受伤活体自身或盟友');
  const hp=target.actor.hitPoints,negative=hp?.negativeHealing??target.actor.system?.attributes?.hp?.negativeHealing;
  if(!hp||!Number.isFinite(hp.value)||!Number.isFinite(hp.max)||hp.max<=0||negative!==false)throw fail('原生命能治疗资格未知或具有虚能治疗');
  if(hp.value>=hp.max&&!target.actor.hasCondition?.('wounded'))throw fail('患者未受伤');
  if((target.actor.attributes?.immunities??[]).some(i=>['healing','vitality','object-immunities','custom'].includes(i.type)||i.definition||i.exceptions?.length))throw fail('此患者的命能或自定义免疫尚不能由原生负数治疗可靠处理');
- const distance=token===target?0:token.object?.distanceTo?.(target.object);if(!Number.isFinite(distance)||distance>5||distance<0)throw fail('本次患者不在接触距离内');
+ // The GM adjudicates contact range; settlement keeps the original patient identity.
  if(!allowImmune&&treatmentImmune(target.actor,game.time.worldTime))throw fail('患者仍有医疗暂时免疫');
 }
 export function assertClaimPrivacy({game,claim,token,item,target,user}){

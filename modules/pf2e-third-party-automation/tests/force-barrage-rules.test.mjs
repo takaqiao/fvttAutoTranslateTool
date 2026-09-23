@@ -30,17 +30,22 @@ test('owned/source/slot/custom/overlay/private uncertainty rejects before paymen
  const changes=[f=>f.actor.items.set('s',{...f.item}),f=>f.actor.canAct=false,f=>f.user.active=false,f=>f.game.users.activeGM=null,f=>f.entry.isSpontaneous=false,f=>f.entry.system.slots.slot3.value=0,f=>f.options.rank=4,f=>f.item.system.location.signature=false,f=>f.item.system.damage[0].formula='2d4+1',f=>f.item.system.rules.push({key:'DamageDice'}),f=>f.item.appliedOverlays=new Set(['x']),f=>f.item.flags['pf2e-toolbelt']={actionable:{linked:'Macro.x'}},f=>f.options.messageMode='gm'];
  for(const mutate of changes){const f=fixture();mutate(f);assert.equal(assessForceBarrageCast(f).eligible,false);}
 });
-test('range/scene/creature/vision and original visible source are checked independently of GM sight',()=>{
- for(const mutate of [f=>f.token.object.distanceTo=()=>121,f=>f.token.object.distanceTo=()=>NaN,f=>f.token.object.checkCollision=()=>true,f=>f.targets[0].hidden=true,f=>f.targets[0].actor.type='loot',f=>f.targets[0].actor.isDead=true,f=>f.targets[0].actor.hasCondition=()=>true,f=>f.targets[0].parent={...f.token.parent},f=>f.token.parent.grid.type=2,f=>f.token.parent.grid.units='m',f=>f.token.parent.tokens.delete('tar'),f=>f.visibilityConfirmed=false,f=>f.actor.hasCondition=condition=>condition==='blinded']){
+test('original scene, source and creature identity still bind each allocation',()=>{
+ for(const mutate of [f=>f.token.actor={},f=>f.token.documentName='Actor',f=>f.targets[0].actor.type='loot',f=>f.targets[0].parent={...f.token.parent},f=>f.token.parent.tokens.delete('tar'),f=>f.token.parent.tokens.delete('src'),f=>f.game.scenes.clear(),f=>f.targets.push(f.targets[0])]){
   const f=fixture();mutate(f);assert.throws(()=>validateForceBarrageTargets(f));
  }
 });
 
-test('confirmed sight of a locally lit target is not vetoed by scene-wide canSee',()=>{
- const f=fixture();f.actor.canSee=false;f.actor.hasCondition=()=>false;
+test('target settlement leaves visibility, range, elevation and grid adjudication to the table',()=>{
+ const f=fixture();delete f.visibilityConfirmed;
+ f.actor.canSee=false;f.token.hidden=true;f.targets[0].hidden=true;f.targets[0].actor.isDead=true;
+ f.token.parent.grid={type:2,units:'m'};f.targets[0].elevation=30;f.targets[0].level='upstairs';
+ const forbidden=()=>{throw Error('spatial or condition probe must not run')};
+ f.actor.hasCondition=forbidden;f.targets[0].actor.hasCondition=forbidden;
+ f.token.object.distanceTo=forbidden;f.token.object.checkCollision=forbidden;
  assert.deepEqual(validateForceBarrageTargets(f),f.targets);
- f.visibilityConfirmed=false;assert.throws(()=>validateForceBarrageTargets(f));
- f.visibilityConfirmed=true;f.actor.hasCondition=condition=>condition==='blinded';assert.throws(()=>validateForceBarrageTargets(f));
+ f.token.object=null;f.targets[0].object=null;
+ assert.deepEqual(validateForceBarrageTargets(f),f.targets,'Document-bound allocation works without either client rendering the token');
 });
 test('allocation takes upstream missile count and refuses any unsafe numeric or target input',()=>{
  const targets=[{uuid:'Scene.s.Token.a'},{uuid:'Scene.s.Token.b'}];
@@ -49,9 +54,8 @@ test('allocation takes upstream missile count and refuses any unsafe numeric or 
  for(const count of [NaN,Infinity,-1,1.5,'6',Number.MAX_SAFE_INTEGER+1])assert.throws(()=>validateForceBarrageAllocation({targets,allocations:[good[0],{...good[1],count}],missiles:6}));
  for(const allocations of [[good[1]],[good[0],good[0]],[good[0],{targetUuid:'Scene.s.Token.c',count:6}],[{...good[0],count:0},{...good[1],count:0}]])assert.throws(()=>validateForceBarrageAllocation({targets,allocations,missiles:6}));
 });
-test('Core14 implicit private defaults and differing elevations stop before payment',()=>{
+test('Core14 implicit private defaults still stop before payment',()=>{
  for(const mode of ['gm','blind','self',undefined]){const f=fixture();f.game.settings.get=()=>mode;assert.equal(assessForceBarrageCast(f).eligible,false);}
- const f=fixture();f.targets[0].elevation=5;assert.throws(()=>validateForceBarrageTargets(f),/高度/);
 });
 test('NPC and synthetic-token Cast routes are not enrolled; current bridge requires the audited occult entry',()=>{
  for(const change of [f=>f.actor.type='npc',f=>f.actor.isToken=true]){const f=fixture();change(f);assert.equal(assessForceBarrageCast(f).handled,false);}

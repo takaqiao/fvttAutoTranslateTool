@@ -19,11 +19,11 @@ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&
 async function nativeFacts({condition}){
  const Dialog=globalThis.foundry?.applications?.api?.DialogV2;
  if(!Dialog)throw Error('缺少GM来源事实对话框。');
- return Dialog.wait({window:{title:'处理状态 · GM来源事实'},content:`<p>状态：${esc(condition.name??condition.slug)}。请输入真实来源事实；原生检定自动决定成功度。</p><label>来源DC <input name="dc" type="number" min="1" required></label><label><input name="restricted" type="checkbox">神器或20级以上效果</label><label><input name="continuous" type="checkbox">产生状态的持续情境仍存在（处理无效）</label>`,buttons:[{action:'confirm',label:'确认事实',callback:(_event,button)=>{const f=new FormData(button.form);return {dc:Number(f.get('dc')),restricted:f.has('restricted'),continuous:f.has('continuous')};}},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});
+ return Dialog.wait({window:{title:'处理状态 · GM来源事实'},content:`<p>状态：${esc(condition.name??condition.slug)}。请输入真实来源事实；原生检定自动决定成功度。接触距离由GM裁定。</p><label>来源DC <input name="dc" type="number" min="1" required></label><label><input name="restricted" type="checkbox">神器或20级以上效果</label><label><input name="continuous" type="checkbox">产生状态的持续情境仍存在（处理无效）</label>`,buttons:[{action:'confirm',label:'确认事实',callback:(_event,button)=>{const f=new FormData(button.form);return {dc:Number(f.get('dc')),restricted:f.has('restricted'),continuous:f.has('continuous')};}},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});
 }
 
 /** Original Use is the sole entry. Authority and durable nonce checks also apply to card continuation. */
-export function createMedicActions({game,fromUuid=globalThis.fromUuid,choose,requestFacts=nativeFacts,rollCheck,delegateTreatment,commitActivity,distance,onError=console.error}={}){
+export function createMedicActions({game,fromUuid=globalThis.fromUuid,choose,requestFacts=nativeFacts,rollCheck,delegateTreatment,commitActivity,onError=console.error}={}){
  delegateTreatment??=createMedicNative({game,choose:args=>game.user.id===args.user.id?showNativeChoice(args):choose?.(args)});
  if(!sessions.has(game))sessions.set(game,{actors:new SerialActions(),targets:new SerialActions()});
  const queues=sessions.get(game),hooks=[],movementCards=new Map();let hookApi,socket,movementsIndexed=false;
@@ -42,8 +42,11 @@ export function createMedicActions({game,fromUuid=globalThis.fromUuid,choose,req
  const pick=async(actor,user,title,choices)=>{if(!choices.length)throw Error('没有合法医疗选项。');const selected=choices.length===1?choices[0].value:await choose?.({actor,user,title,choices});if(selected==null||selected===false)return null;if(!choices.some(c=>c.value===selected))throw Error('无效的医疗选择。');return selected;};
  function requireTurn(actor){if(game.combat?.started&&game.combat.combatant?.actor?.uuid!==actor.uuid)throw Error('医师探访需要角色自己的回合。');return turn(game);}
  async function healerToken(actor,message){const uuid=message.speaker?.scene&&message.speaker?.token?`Scene.${message.speaker.scene}.Token.${message.speaker.token}`:null;const token=uuid?await fromUuid(uuid):null;if(token?.actor?.uuid!==actor.uuid)throw Error('需要原卡所指的场景施术者Token。');return token;}
- function separation(healer,target){if(healer.parent?.id!==target.parent?.id)return null;return distance?distance(healer,target):healer.object?.distanceTo?.(target.object)??null;}
- function legal(actor,healer,target){if(!usableToolkit(actor))throw Error('需要持握医疗工具包，或穿戴工具包且有空手。');const d=separation(healer,target);if(!Number.isFinite(d)||d<0||d>5)throw Error('医疗目标需要相邻。');return d;}
+ function validatePatientContext(actor,healer,target){
+  if(!usableToolkit(actor))throw Error('需要持握医疗工具包，或穿戴工具包且有空手。');
+  const scene=healer.parent;
+  if(healer.actor?.uuid!==actor.uuid||!scene||game.scenes?.get(scene.id)!==scene||scene.tokens?.get(healer.id)!==healer||target.parent!==scene||scene.tokens.get(target.id)!==target)throw Error('需要原卡所指场景中仍存在的施术者和医疗目标 Token。');
+ }
  async function targetFor(ctx){const targets=await resolveMessageTargets(ctx.message,{fromUuid});if(targets.length!==1)throw Error('请在原始Use时选定一个医疗目标。');return targets[0];}
  async function commit(ctx,cost,flourish){
   validate(ctx);const {actor,message}=ctx,key=input(message).nonce,ledger=actor.flags?.[MODULE_ID]?.medicUses??{};
@@ -102,17 +105,17 @@ export function createMedicActions({game,fromUuid=globalThis.fromUuid,choose,req
   return queues.targets.run(target.actor.uuid,async()=>{
    validate(ctx);const condition=target.actor.items.get(selected);const before=condition&&conditionSnapshot(condition);
    const facts=await requestFacts({actor,target,condition,user,message});if(!facts){await save(message,{status:'cancelled'});return '已取消处理状态。';}
-   const {dc}=validateTreatment({actor,condition,distance:legal(actor,healer,target),facts});
+   validatePatientContext(actor,healer,target);const {dc}=validateTreatment({actor,condition,facts});
    await save(message,{status:'rolling',nativeKind:'treat-condition',healerUuid:healer.uuid,targetUuid:target.uuid});
    // Counteract's generic global dialog fields are not used; the native Check API receives exact local DC.
    const receipt=await owner.run(ctx,{dc});
-   validate(ctx);legal(actor,healer,target);
+   validate(ctx);validatePatientContext(actor,healer,target);
    if(receipt.status==='cancelled'){await save(message,{status:'cancelled'});return '已取消原生检定；已承诺动作不回退。';}
    const check=receipt.check,roll=check?.rolls?.[0],pf=check?.flags?.pf2e?.context,degree=roll?.options?.degreeOfSuccess;
    if(!check?.id||game.messages.get(check.id)!==check||author(check)!==user.id||check.speaker?.actor!==actor.id||pf?.type!=='skill-check'||pf.isReroll||!pf.options?.includes(`${MODULE_ID}:medic:${own(message).nonce}`)||pf.dc?.value!==dc||pf.target?.actor!==target.actor.uuid||pf.target?.token!==target.uuid||check.rolls.length!==1||!Number.isFinite(roll?.total)||!Number.isInteger(degree)||degree<0||degree>3||pf.outcome!==['criticalFailure','failure','success','criticalSuccess'][degree]||check.flags?.[MODULE_ID]?.medicReceipt)throw Error('原生医疗检定回执不匹配或已经使用。');
    const current=target.actor.items.get(selected);
    if(current!==condition||conditionSnapshot(current)!==before)throw Error('目标状态或来源在检定期间已变化，未覆盖新状态。');
-   validateTreatment({actor,condition:current,distance:legal(actor,healer,target),facts});
+   validateTreatment({actor,condition:current,facts});
    const after=treatmentValue(conditionValue(current),degree);
    await check.update({[`flags.${MODULE_ID}.medicReceipt`]:{messageId:message.id,nonce:own(message).nonce}});
    await save(message,{status:'applying',checkId:check.id});
@@ -125,12 +128,12 @@ export function createMedicActions({game,fromUuid=globalThis.fromUuid,choose,req
   validate(ctx);if(own(ctx.message)){if(own(ctx.message).actorUuid!==ctx.actor.uuid||own(ctx.message).nonce!==input(ctx.message).nonce||ctx.actor.flags?.[MODULE_ID]?.medicUses?.[input(ctx.message).nonce]!==ctx.message.id)throw Error('无效原卡回执。');return own(ctx.message).result??'此医疗动作已开始。';}
   const {actor,message,user}=ctx,target=await targetFor(ctx),healer=await healerToken(actor,message);
   if(ctx.action==='medic:treat-condition'){
-   legal(actor,healer,target);await commit(ctx,2,false);
+   validatePatientContext(actor,healer,target);await commit(ctx,2,false);
    try{return await treat(ctx,healer,target);}catch(error){await save(message,{status:own(message).nativeKind?'uncertain':'failed',result:error.message});throw error;}
   }
   const branch=await pick(actor,user,'医师探访：选择本次医疗动作',visitationBranches(actor));if(!branch)return '已取消医师探访。';
   const cost=visitationBranches(actor).find(b=>b.value===branch).cost;
-  await commit(ctx,cost,true);await save(message,{status:'movement',branch,healerUuid:healer.uuid,targetUuid:target.uuid,result:'请自行完成本次原生行走，再在本卡确认“移动完成”。确认时核对原患者的距离与工具；取消治疗不会退还华丽动作。'});
+  await commit(ctx,cost,true);await save(message,{status:'movement',branch,healerUuid:healer.uuid,targetUuid:target.uuid,result:'请自行完成本次原生行走，再在本卡确认“移动完成”。行走与接触距离由GM裁定；取消治疗不会退还华丽动作。'});
   return '医师探访已承诺；请完成行走后在本卡确认。';
  });}
  async function continuationContext(message,user){const state=own(message);if(!state||state.userId!==user?.id)throw Error('只能由原使用者继续医疗。');const item=await fromUuid(state.itemUuid);return validate({actor:item?.actor,item,message,user,action:medicAction(item)});}
@@ -143,7 +146,7 @@ export function createMedicActions({game,fromUuid=globalThis.fromUuid,choose,req
    if(cancel){await save(message,{status:'cancelled',result:'已取消后续医疗；已承诺动作与华丽不回退。'});return;}
    requireTurn(ctx.actor);if(movementConfirmed!==true)throw Error('请由原使用者在本卡确认已完成本次行走。');
    const healer=await fromUuid(state.healerUuid),target=await fromUuid(state.targetUuid);if(healer?.actor!==ctx.actor||!target?.actor)throw Error('原始医疗Token不存在。');
-   legal(ctx.actor,healer,target);if(!visitationBranches(ctx.actor).some(b=>b.value===state.branch))throw Error('医疗分支资格已变化。');
+   validatePatientContext(ctx.actor,healer,target);if(!visitationBranches(ctx.actor).some(b=>b.value===state.branch))throw Error('医疗分支资格已变化。');
    await save(message,{status:'treatment',nativeKind:state.branch,movementConfirmation:{userId:user.id,turn:state.turn,healerUuid:healer.uuid,targetUuid:target.uuid}});
    try{
     if(state.branch==='treat-condition')return await treat(ctx,healer,target);

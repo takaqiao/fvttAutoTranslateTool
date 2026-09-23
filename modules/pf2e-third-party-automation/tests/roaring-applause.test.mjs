@@ -103,7 +103,7 @@ test('wrong live actor, unsupported provider and malformed candidate cannot impl
  f.targetActor.flags[ID]={roaringApplause:{sources:{broken:{schema:1}}}};assert.equal(q(f.targetActor).sources.find(s=>s.sourceNonce==='broken').status,'manual');
  f.clients.gm.provider.cleanup();assert.equal(q(f.targetActor).status,'manual');
 });
-function fixture({choose=async()=>({perception:'sees',lineOfEffectConfirmed:true}),immunity={spell:false,slowed:false,fascinated:false},iwr=true,mode='normal',realEffects=false}={}){
+function fixture({immunity={spell:false,slowed:false,fascinated:false},iwr=true,mode='normal',realEffects=false}={}){
  const users=new Map([['gm',{id:'gm',active:true,isGM:true}],['player',{id:'player',active:true,isGM:false,targets:new Set()}]]);users.activeGM=users.get('gm');
  const caster={id:'caster',uuid:'Actor.caster',type:'character',isToken:false,canAct:true,isDead:false,flags:{[ID]:{nativeCasts:[]}},items:new Map(),testUserPermission:u=>['gm','player'].includes(u?.id)};
  const targetActor={id:'target',uuid:'Actor.target',type:'npc',isDead:false,flags:{},items:new Map(),isImmuneTo:item=>immunity[item.type==='spell'?'spell':item.system.slug],testUserPermission:u=>u?.id==='gm'};
@@ -132,7 +132,7 @@ function fixture({choose=async()=>({perception:'sees',lineOfEffectConfirmed:true
   const Hooks={on:(n,fn)=>{hookMap.set(n,fn);return n},off:n=>hookMap.delete(n)};
   const nativeCasts={addInvocationAdapter:(k,v)=>adapters.set(k,v)};
   const saveEvidence={inspectResultContinuity:()=>({status:'current',reason:null}),register:()=>{},track:m=>{tracked.push([uid,m.uuid]);return true},cleanup:()=>{}};
-  const provider=createRoaringApplause({game,fromUuid:async u=>docs.get(u),nativeCasts,effects,choose,saveEvidence,onError:e=>errors.push(e),onManual:e=>manual.push(e),onClap:e=>claps.push(e),randomId:()=>`nonce${++serial}`});provider.register({Hooks,socket});clients[uid]={provider,game,handlers,hookMap,adapters,Hooks,socket,saveEvidence};
+  const provider=createRoaringApplause({game,fromUuid:async u=>docs.get(u),nativeCasts,effects,saveEvidence,onError:e=>errors.push(e),onManual:e=>manual.push(e),onClap:e=>claps.push(e),randomId:()=>`nonce${++serial}`});provider.register({Hooks,socket});clients[uid]={provider,game,handlers,hookMap,adapters,Hooks,socket,saveEvidence};
  }
  const next=async()=>{castCount++;return 'passthrough'};
  next.withOutcome=async invocation=>{
@@ -191,7 +191,52 @@ test('base actor source updates also refresh inherited unlinked synthetic member
  f.records.clear();await c.hookMap.get('updateActor')(f.targetActor);assert.deepEqual(c.provider.listSources({message:m}),[]);
 });
 test('one real enrollment creates paid source and tracks card on both clients',async()=>{const f=fixture();await f.run();assert.equal(f.counts(),1);assert.equal(f.entry.system.slots.slot3.value,1);assert.equal(f.records.size,1);assert.equal(f.tracked.length,2);const r=[...f.records.values()][0];assert.equal(r.state.completedWorldTime,100);assert.equal(r.state.hardStopAt,700);assert.equal(r.context.userId,'player');assert.equal(f.clients.gm.provider.lookupSource([...f.messages.values()][0]).castNonce,r.state.source.castNonce);});
-test('cancel performs no native cast or claim',async()=>{const f=fixture({choose:async()=>null});await f.run();assert.equal(f.counts(),0);assert.equal(f.records.size,0);});
+test('ordinary native casting binds once and spends one slot without a confirmation dialog',async t=>{
+ const prior=globalThis.foundry;let confirmations=0;
+ globalThis.foundry={applications:{api:{DialogV2:{wait:async()=>{confirmations++;return {perception:'sees',lineOfEffectConfirmed:true}}}}}};
+ t.after(()=>{if(prior===undefined)delete globalThis.foundry;else globalThis.foundry=prior});
+ const f=fixture();await f.run();
+ assert.equal(confirmations,0);assert.equal(f.counts(),1);assert.equal(f.entry.system.slots.slot3.value,1);assert.equal(f.records.size,1);
+ assert.equal(f.caster.flags[ID].nativeCasts.length,1);assert.equal(f.messages.size,1);
+});
+test('source proofs record table adjudication without fabricating sensory or line-of-effect evidence',async()=>{
+ const f=fixture(),handler=f.clients.player.handlers.get('roaring-applause:proof'),facts=[];
+ f.clients.player.handlers.set('roaring-applause:proof',async function(...args){const result=await handler.apply(this,args);if(result.ok)facts.push(result.value.identity.facts);return result});
+ await f.run();assert.ok(facts.length>0);for(const value of facts)assert.deepEqual(value,{status:'table-adjudicated'});
+});
+for(const phase of ['before-payment','after-payment'])test(`${phase} spatial changes cannot cut off the original native cast or its save result`,async()=>{
+ const f=fixture(),original=f.next.withOutcome;
+ const move=()=>{f.token.object.distanceTo=()=>{throw Error('spatial legality belongs to the table')};f.token.parent.grid={type:0,units:'m'};f.token.elevation=NaN;f.target.elevation=25;f.token.level='ground';f.target.level='balcony';f.targetActor.canSee=false;f.targetActor.canHear=false;f.targetActor.hasCondition=()=>true};
+ f.next.withOutcome=async invocation=>{if(phase==='before-payment')move();const result=await original(invocation);if(phase==='after-payment')move();return result};
+ await f.run();const r=[...f.records.values()][0],p=f.clients.gm.provider;
+ assert.equal(r.state.source.targetTokenUuid,f.target.uuid);assert.equal(r.context.dc,22);
+ const save={sourceNonce:r.state.sourceNonce,originalMessageUuid:r.state.source.originalMessageUuid,targetUuid:f.target.uuid,castNonce:r.state.source.castNonce,adjustedOutcome:'failure',revision:1,proof:{invocationId:'spatial-save'}};
+ await p.onVerified(save);await p.onVerified(save);await p.reconcile();
+ const current=[...f.records.values()][0];assert.equal(current.state.status,'active');assert.equal(current.state.manualReview,null);assert.equal(current.state.timing.deadline.endRound,5);
+ assert.equal(f.operations.filter(o=>o==='materialize').length,1);assert.equal(f.counts(),1);assert.equal(f.entry.system.slots.slot3.value,1);
+});
+for(const boundary of ['target-selection','target-document','OWNER','resource'])test(`table adjudication still rejects a changed ${boundary} before native payment`,async()=>{
+ const f=fixture(),original=f.next.withOutcome;
+ f.next.withOutcome=async invocation=>{
+  if(boundary==='target-selection')f.users.get('player').targets.clear();
+  if(boundary==='target-document')f.target.parent.tokens.set(f.target.id,{...f.target});
+  if(boundary==='OWNER')f.caster.testUserPermission=()=>false;
+  if(boundary==='resource')f.entry.system.slots.slot3.value=0;
+  return original(invocation);
+ };
+ await assert.rejects(f.run());assert.equal(f.records.size,0);assert.equal(f.caster.flags[ID].nativeCasts.length,0);assert.equal(f.entry.system.slots.slot3.value,boundary==='resource'?0:2);
+});
+for(const boundary of ['target-actor','card-target','duplicate-payment'])test(`table adjudication still rejects a changed ${boundary} after native payment without retry`,async()=>{
+ const f=fixture(),original=f.next.withOutcome;
+ f.next.withOutcome=async invocation=>{
+  const result=await original(invocation);
+  if(boundary==='target-actor')f.target.actor={...f.targetActor,uuid:'Actor.different'};
+  if(boundary==='card-target')result.message.flags['pf2e-toolbelt'].targetHelper.targets=['Scene.scene.Token.different'];
+  if(boundary==='duplicate-payment')f.caster.flags[ID].nativeCasts.push(copy(result.receipt));
+  return result;
+ };
+ await assert.rejects(f.run());assert.equal(f.records.size,0);assert.equal(f.counts(),1);assert.equal(f.entry.system.slots.slot3.value,1);
+});
 test('unrelated spell keeps original continuation and no enrollment',async()=>{const f=fixture();f.item.sourceId='other';assert.equal(await f.run(),'passthrough');assert.equal(f.records.size,0);});
 for(const mode of ['veto','missing-time','wrong-payment','turn-changed','gm-changed'])test(`${mode} never creates a managed source or retries`,async()=>{const f=fixture({mode});await assert.rejects(f.run());assert.equal(f.counts(),1);assert.equal(f.records.size,0);});
 test('disrupted native cast creates no source',async()=>{const f=fixture({mode:'disrupted'});await f.run();assert.equal(f.counts(),1);assert.equal(f.records.size,0);});

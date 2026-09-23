@@ -24,7 +24,7 @@ async function chooseAllocation({rank,targets,adapter}){
  const actions=await Dialog.wait({window:{title:`力场飞弹 · ${rank}环 · 动作数`},content:'<p>选择本次原始施法使用的动作数。</p>',buttons:[1,2,3].map(n=>({action:String(n),label:`${n}动作`,callback:()=>n})),rejectClose:false});
  if(![1,2,3].includes(actions))return null;
  const missiles=adapter.getMissileCount({rank,actions});
- const answer=await Dialog.wait({window:{title:`力场飞弹 · 分配${missiles}枚飞弹`},content:`<p>目标按本次选择顺序列出；确认后再支付法术位。</p>${targets.map((_t,i)=>`<label>目标 ${i+1} <input name="target${i}" type="number" min="0" max="${missiles}" step="1" value="${i?0:missiles}" required></label>`).join('')}<label><input name="visible" type="checkbox" required>施法者能看见所有所选目标（不以GM视角为准）</label>`,buttons:[{action:'cast',label:'确认分弹并施法',callback:(_event,button)=>{const data=new FormData(button.form);return {actions,visibilityConfirmed:data.has('visible'),allocations:targets.map((t,i)=>({targetUuid:t.uuid,count:data.get(`target${i}`)===''?NaN:Number(data.get(`target${i}`))}))};}},{action:'cancel',label:'取消施法',type:'button',callback:()=>false}],rejectClose:false});
+ const answer=await Dialog.wait({window:{title:`力场飞弹 · 分配${missiles}枚飞弹`},content:`<p>目标按本次选择顺序列出；确认后再支付法术位。射程与可见性由玩家和 GM 按场上情况判断。</p>${targets.map((_t,i)=>`<label>目标 ${i+1} <input name="target${i}" type="number" min="0" max="${missiles}" step="1" value="${i?0:missiles}" required></label>`).join('')}`,buttons:[{action:'cast',label:'确认分弹并施法',callback:(_event,button)=>{const data=new FormData(button.form);return {actions,allocations:targets.map((t,i)=>({targetUuid:t.uuid,count:data.get(`target${i}`)===''?NaN:Number(data.get(`target${i}`))}))};}},{action:'cancel',label:'取消施法',type:'button',callback:()=>false}],rejectClose:false});
  return answer||null;
 }
 
@@ -45,7 +45,7 @@ export function createForceBarrageBridge({game,fromUuid=globalThis.fromUuid,nati
  async function prove(payload,sender){
   const s=scopes.get(payload?.invocationId);
   if(!s||s.stage!=='claiming'||sender!==s.gmId||payload.fingerprint!==s.fingerprint||!equal(payload.identity,identity(s)))throw Error('缺少原客户端当前Cast的准确分弹证明。');
-  requireScope(s,true);validateTargets({...s,visibilityConfirmed:true});
+  requireScope(s,true);validateTargets(s);
   if(await fingerprint(identity(s))!==s.fingerprint)throw Error('分弹选择已改变。');
   return {fingerprint:s.fingerprint,identity:identity(s)};
  }
@@ -61,7 +61,7 @@ export function createForceBarrageBridge({game,fromUuid=globalThis.fromUuid,nati
    if(!proof||!equal(proof,{fingerprint:payload.fingerprint,identity:proofInput.identity})||await fingerprint(proofInput.identity)!==payload.fingerprint)throw Error('原客户端的实际Cast未确认。');
    const token=await fromUuid(allocation.sourceTokenUuid),targets=await Promise.all(allocation.targets.map(t=>fromUuid(t.targetUuid)));
    const check=assess({game,actor,item,entry,user,options:{rank:allocation.rank,messageMode:'public'}});if(!check.eligible)throw Error(check.reason??'法术条件已改变。');
-   validateTargets({game,actor,token,targets,visibilityConfirmed:true});
+   validateTargets({game,actor,token,targets});
    const adapter=await loadWorkbench({game,fromUuid});validateForceBarrageAllocation({targets,allocations:allocation.targets,missiles:adapter.getMissileCount(allocation)});
    return ledger.claim({...args,invocationId:payload.invocationId,fingerprint:payload.fingerprint,allocation});
   }
@@ -92,15 +92,15 @@ export function createForceBarrageBridge({game,fromUuid=globalThis.fromUuid,nati
    if(!isActiveGM(game)&&!socket)throw Error('无法连接当前主GM。');
    Object.assign(s,getContext(actor));
    const adapter=await loadWorkbench({game,fromUuid}),answer=await choose({...s,adapter});if(!answer)return;
-   requireScope(s,true);if(![1,2,3].includes(answer.actions)||answer.visibilityConfirmed!==true)throw Error('动作数或施法者可见性未确认。');
-   validateTargets({...s,visibilityConfirmed:true});
+   requireScope(s,true);if(![1,2,3].includes(answer.actions))throw Error('本次施法的动作数无效。');
+   validateTargets(s);
    const allocations=validateForceBarrageAllocation({targets:s.targets,allocations:answer.allocations,missiles:adapter.getMissileCount({rank:s.rank,actions:answer.actions})});
    s.allocation={rank:s.rank,actions:answer.actions,sourceTokenUuid:s.token.uuid,targets:allocations};s.fingerprint=await fingerprint(identity(s));s.stage='claiming';
    const claimed=await call(s,'claim',{allocation:s.allocation});if(!bounded(claimed.nonce))throw Error('分弹认领回执无效。');s.nonce=claimed.nonce;
    let originalOutcome;
    await adapter.run({actor,token:s.token,item:castItem,entry,rank:s.rank,actions:answer.actions,allocations:allocations.map(a=>({...a,targetToken:s.targets.find(t=>t.uuid===a.targetUuid)})),bridge:{
     payAndBindOriginalCast:async()=>{
-     requireScope(s,true);validateTargets({...s,visibilityConfirmed:true});await call(s,'startCast');s.stage='casting';
+     requireScope(s,true);validateTargets(s);await call(s,'startCast');s.stage='casting';
      if(typeof next.withOutcome!=='function')throw Error('原生Cast准确回执接口尚未就绪。');
      const outcome=originalOutcome=await next.withOutcome({kind:'force-barrage',data:{bridgeNonce:s.nonce,fingerprint:s.fingerprint,sourceTokenUuid:s.token.uuid,messageMode:'public'}});
      if(outcome?.status==='disrupted'){await call(s,'finishWithoutDamage',{outcome:transportOutcome(outcome)});s.stage='disrupted';throw Error('本次原生施法已被打断，未生成分弹伤害。');}
@@ -139,7 +139,7 @@ export function createForceBarrageBridge({game,fromUuid=globalThis.fromUuid,nati
   const r=ledger.current(actor,item);if(r.nonce!==data.bridgeNonce||r.allocation.rank!==payload.rank||r.allocation.sourceTokenUuid!==data.sourceTokenUuid)return false;
   const assessment=assess({game,actor,item:variant,entry,user,options:{rank:payload.rank,messageMode:'public'}});if(!assessment.eligible)return false;
   const token=await fromUuid(r.allocation.sourceTokenUuid),targets=await Promise.all(r.allocation.targets.map(t=>fromUuid(t.targetUuid)));
-  validateTargets({game,actor,token,targets,visibilityConfirmed:true});const adapter=await loadWorkbench({game,fromUuid});validateForceBarrageAllocation({targets,allocations:r.allocation.targets,missiles:adapter.getMissileCount(r.allocation)});return true;
+  validateTargets({game,actor,token,targets});const adapter=await loadWorkbench({game,fromUuid});validateForceBarrageAllocation({targets,allocations:r.allocation.targets,missiles:adapter.getMissileCount(r.allocation)});return true;
  }
  async function consumePolicy(context,next){context.expectSlotCommit({before:context.entry.system.slots[`slot${context.payload.rank}`].value,cost:1,changes:()=>({})});return next();}
  function renderOriginal(message,html){

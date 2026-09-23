@@ -24,18 +24,14 @@ export function assessForceBarrageCast({game,actor,item,entry,user=game.user,opt
  return {handled:true,eligible:true,rank,base};
 }
 
-/** Caster sight is declared explicitly: actor.canSee omits local lights and uses
- * each client's viewed scene. Still refuse blindness, hidden tokens or blocked rays. */
-export function validateForceBarrageTargets({game,actor,token,targets,visibilityConfirmed=false}={}){
+/** Bind the allocation to live documents. The table adjudicates range and sight;
+ * GM and player canvases need not render the same lighting, floor or token. */
+export function validateForceBarrageTargets({game,actor,token,targets}={}){
  const scene=token?.parent;
- if(!scene||game.scenes?.get(scene.id)!==scene||scene.tokens?.get(token.id)!==token||token.documentName!=='Token'||token.actor!==actor||token.hidden||!token.object||scene.grid?.type!==1||!['ft','feet','foot'].includes(String(scene.grid.units).toLowerCase())||actor.hasCondition?.('blinded')||!visibilityConfirmed)throw Error('需要唯一公开来源Token、方格尺制场景及施法者能看见目标的确认。');
+ if(!scene||game.scenes?.get(scene.id)!==scene||scene.tokens?.get(token.id)!==token||token.documentName!=='Token'||token.actor!==actor)throw Error('需要当前场景中本角色的原始来源 Token。');
  if(!Array.isArray(targets)||targets.length<1||targets.length>6||new Set(targets.map(t=>t?.uuid)).size!==targets.length)throw Error('需要1至6个不同的实际目标Token。');
  for(const target of targets){
-  if(target?.documentName!=='Token'||target.parent!==scene||scene.tokens.get(target.id)!==target||!target.object||target.hidden||!['character','npc','familiar'].includes(target.actor?.type)||target.actor.isDead===true||['invisible','hidden','undetected','unnoticed'].some(c=>target.actor.hasCondition?.(c)))throw Error('目标已改变，或需要GM人工判断其可见性及生物身份。');
-  if(!Number.isFinite(token.elevation)||target.elevation!==token.elevation||target.level!==token.level)throw Error('不同高度或楼层的目标需要人工确认三维射线。');
-  const distance=token.object.distanceTo?.(target.object);
-  if(!Number.isFinite(distance)||distance<0||distance>120)throw Error('目标不在本次原生测得的120尺射程内。');
-  if(!target.object.center||token.object.checkCollision?.(target.object.center,{origin:token.object.center,type:'sight',mode:'any'})!==false)throw Error('无法确认施法者至目标的视线。');
+  if(target?.documentName!=='Token'||target.parent!==scene||scene.tokens.get(target.id)!==target||!['character','npc','familiar'].includes(target.actor?.type))throw Error('分弹目标需要是同一场景中仍存在的生物 Token。');
  }
  return targets;
 }

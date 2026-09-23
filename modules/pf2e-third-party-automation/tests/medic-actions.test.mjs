@@ -12,10 +12,12 @@ function fixture({degree=2,branch='treat-condition',rollMutation=()=>{},facts={d
  for(const item of [treat,visit,bm,{id:'kit',type:'equipment',_stats:{compendiumSource:'Compendium.pf2e.equipment-srd.Item.s1vB3HdXjMigYAnY'},system:{quantity:1,equipped:{carryType:'worn'}}}]){item.actor=actor;actor.items.set(item.id,item);}
  const patient=doc({id:'patient',uuid:'Actor.patient',type:'character',items:new Map(),flags:{}});
  const condition=doc({id:'condition',uuid:'Actor.patient.Item.condition',actor:patient,type:'condition',slug:'clumsy',system:{value:{value:2}},async delete(){patient.items.delete(this.id);}});patient.items.set(condition.id,condition);
- const healer={id:'h',uuid:'Scene.scene.Token.h',documentName:'Token',actor,parent:{id:'scene'},x:0,y:0};
+ const scene={id:'scene',tokens:new Map()};
+ const healer={id:'h',uuid:'Scene.scene.Token.h',documentName:'Token',actor,parent:scene,x:0,y:0};
  const target={id:'t',uuid:'Scene.scene.Token.t',documentName:'Token',actor:patient,parent:healer.parent,x:100,y:0};
+ scene.tokens.set(healer.id,healer);scene.tokens.set(target.id,target);
  actor.getActiveTokens=()=>[{document:healer}];
- const game={user:gm,users,messages:new Map(),combat:{id:'fight',started:true,round:1,turn:0,combatant:{actor}},modules:new Map()};
+ const game={user:gm,users,scenes:new Map([[scene.id,scene]]),messages:new Map(),combat:{id:'fight',started:true,round:1,turn:0,combatant:{actor}},modules:new Map()};
  const records={rolls:0,delegated:[],commits:[],nativeClients:[],requests:[]};
  const entities=new Map([actor,patient,healer,target,treat,visit,condition].map(x=>[x.uuid,x]));
  const deps={game,fromUuid:async uuid=>entities.get(uuid),choose:async({choices})=>choices.find(c=>c.value===branch)?.value??choices[0]?.value,requestFacts:async()=>facts,distance:()=>5,commitActivity:async x=>records.commits.push(x.cost),delegateTreatment:async x=>{
@@ -45,12 +47,41 @@ function fixture({degree=2,branch='treat-condition',rollMutation=()=>{},facts={d
 for(const [degree,want] of [[0,3],[1,2],[2,1],[3,null]])test(`applies native degree ${degree} to the selected embedded condition only`,async()=>{const f=fixture({degree});await f.api.executeUsage(f.context());assert.equal(f.patient.items.get('condition')?.system.value.value??null,want);assert.equal(f.records.rolls,1);});
 test('two clients/recreated provider cannot replay one original card or cloned nonce',async()=>{const f=fixture();const ctx=f.context();await Promise.all([f.api.executeUsage(ctx),f.create().executeUsage(ctx)]);assert.equal(f.condition.system.value.value,1);assert.equal(f.records.rolls,1);await assert.rejects(()=>f.api.executeUsage(f.context(f.message(f.treat,'copy','use'))));assert.equal(f.records.rolls,1);});
 test('condition changed during native dialog is not overwritten',async()=>{const f=fixture({rollMutation:({condition})=>condition.system.value.value=4});await assert.rejects(()=>f.api.executeUsage(f.context()));assert.equal(f.condition.system.value.value,4);});
+test('a condition granted by a source during the native roll is not detached or reduced',async()=>{const f=fixture({rollMutation:({condition})=>{condition.flags={pf2e:{grantedBy:{id:'source-effect'}}};}});await assert.rejects(()=>f.api.executeUsage(f.context()));assert.equal(f.condition.system.value.value,2);assert.deepEqual(f.condition.flags.pf2e.grantedBy,{id:'source-effect'});assert.equal(f.patient.items.get('condition'),f.condition);});
 test('rerolled native receipt is rejected',async()=>{const f=fixture();const original=f.deps.rollCheck;f.deps.rollCheck=async a=>{const r=await original(a);r.message.flags.pf2e.context.isReroll=true;return r;};await assert.rejects(()=>f.create().executeUsage(f.context()));assert.equal(f.condition.system.value.value,2);});
 for(const [name,change]of [['non-owner',f=>f.owner.active=false],['draft/send',f=>f.ctx.message.flags[M].usageInput.actualUse=false],['foreign actor',f=>f.ctx.message.speaker.actor='other'],['inactive GM',f=>f.game.users.activeGM={id:'elsewhere'}]])test(`rejects ${name} before rolling`,async()=>{const f=fixture();f.ctx=f.context();change(f);await assert.rejects(()=>f.api.executeUsage(f.ctx));assert.equal(f.records.rolls,0);});
 for(const [branch,cost]of [['battle-medicine',1],['treat-poison',1],['administer-first-aid',2],['treat-condition',2]])test(`Visitation ${branch} commits ${cost} actions once and waits for the owner's movement confirmation`,async()=>{const f=fixture({branch});const m=f.message(f.visit);await f.api.executeUsage(f.context(m,f.visit));assert.deepEqual(f.records.commits,[cost]);assert.equal(f.records.rolls,0);await assert.rejects(()=>f.api.continueUsage(m,f.owner));await f.api.continueUsage(m,f.owner,{movementConfirmed:true});await f.api.continueUsage(m,f.owner,{movementConfirmed:true});assert.equal(f.records.rolls,branch==='treat-condition'?1:0);assert.equal(f.records.delegated.length,branch==='treat-condition'?0:1);if(branch!=='treat-condition')assert.deepEqual(f.records.delegated[0],[branch,'Actor.healer','Scene.scene.Token.t','owner']);});
 test('cancel after movement keeps flourish committed and rejects a second Visitation in the turn',async()=>{const f=fixture();const m=f.message(f.visit);await f.api.executeUsage(f.context(m,f.visit));await f.api.continueUsage(m,f.owner,{cancel:true});await assert.rejects(()=>f.api.executeUsage(f.context(f.message(f.visit,'second'),f.visit)));assert.equal(f.records.rolls,0);assert.deepEqual(f.records.commits,[2]);});
-test('movement confirmation validates current tools, distance and turn without poisoning a retry',async()=>{const f=fixture();let distance=5;f.deps.distance=()=>distance;const api=f.create(),m=f.message(f.visit);await api.executeUsage(f.context(m,f.visit));f.actor.handsFree=0;await assert.rejects(()=>api.continueUsage(m,f.owner,{movementConfirmed:true}));assert.equal(f.records.rolls,0);f.actor.handsFree=1;distance=15;await assert.rejects(()=>api.continueUsage(m,f.owner,{movementConfirmed:true}));assert.equal(m.flags[M].medic.status,'movement');distance=5;await api.continueUsage(m,f.owner,{movementConfirmed:true});assert.equal(f.records.rolls,1);});
+test('movement confirmation validates current tools without poisoning a retry',async()=>{const f=fixture(),m=f.message(f.visit);await f.api.executeUsage(f.context(m,f.visit));f.actor.handsFree=0;await assert.rejects(()=>f.api.continueUsage(m,f.owner,{movementConfirmed:true}));assert.equal(f.records.rolls,0);assert.equal(m.flags[M].medic.status,'movement');f.actor.handsFree=1;await f.api.continueUsage(m,f.owner,{movementConfirmed:true});assert.equal(f.records.rolls,1);});
+for(const branch of ['battle-medicine','treat-poison','administer-first-aid','treat-condition'])test(`Visitation ${branch} settles for its original patient without measuring the GM-adjudicated movement`,async()=>{
+ const f=fixture({branch}),m=f.message(f.visit);let measurements=0;delete f.deps.distance;
+ f.healer.object={distanceTo(){measurements++;return 60;}};f.target.object={document:f.target};
+ const api=f.create();await api.executeUsage(f.context(m,f.visit));await api.continueUsage(m,f.owner,{movementConfirmed:true});
+ assert.equal(m.flags[M].medic.status,'done');assert.equal(measurements,0);
+ assert.equal(m.flags[M].medic.targetUuid,'Scene.scene.Token.t');assert.equal(m.flags[M].medicExecution.targetUuid,'Scene.scene.Token.t');
+ assert.equal(f.records.rolls,branch==='treat-condition'?1:0);assert.equal(f.records.delegated.length,branch==='treat-condition'?0:1);
+});
+for(const distance of [60,undefined])test(`Treat Condition settles when native geometry reports ${distance} without measuring adjacency`,async()=>{
+ const f=fixture(),m=f.message();let measurements=0;delete f.deps.distance;
+ f.healer.object={distanceTo(){measurements++;return distance;}};f.target.object={document:f.target};
+ await f.create().executeUsage(f.context(m));assert.equal(m.flags[M].medic.status,'done');assert.equal(f.condition.system.value.value,1);assert.equal(measurements,0);
+ assert.equal(f.game.messages.get('check1').flags.pf2e.context.dc.value,21);assert.deepEqual(f.records.commits,[2]);
+});
+test('Treat Condition applies its native result when the original patient moves during the roll',async()=>{
+ let distance=5;const f=fixture({rollMutation:()=>{distance=60;}}),m=f.message();delete f.deps.distance;
+ f.healer.object={distanceTo:()=>distance};f.target.object={document:f.target};
+ const api=f.create();await api.executeUsage(f.context(m));assert.equal(m.flags[M].medic.status,'done');assert.equal(f.condition.system.value.value,1);
+ await api.executeUsage(f.context(m));assert.equal(f.records.rolls,1);assert.deepEqual(f.records.commits,[2]);
+});
 test('movement confirmation still expires with its committed turn',async()=>{const f=fixture(),m=f.message(f.visit);await f.api.executeUsage(f.context(m,f.visit));f.game.combat.round=2;await assert.rejects(()=>f.api.continueUsage(m,f.owner,{movementConfirmed:true}));assert.equal(f.records.rolls,0);});
+test('medical settlement still requires the original patient in the source scene',async()=>{const f=fixture(),m=f.message();f.target.parent={id:'other-scene'};await assert.rejects(()=>f.api.executeUsage(f.context(m)));assert.equal(f.records.rolls,0);assert.equal(f.condition.system.value.value,2);});
+
+for(const deleted of ['healer','target','scene'])test(`Treat Condition cannot apply after its ${deleted} is deleted during the native check`,async()=>{
+ const f=fixture(),m=f.message(),original=f.deps.rollCheck;
+ f.deps.rollCheck=async args=>{const result=await original(args);if(deleted==='scene')f.game.scenes.clear();else{const token=f[deleted];token.parent.tokens.delete(token.id);token.object=null;}return result};
+ const api=f.create();await assert.rejects(()=>api.executeUsage(f.context(m)),/场景|Token|目标/);await api.executeUsage(f.context(m));
+ assert.equal(f.condition.system.value.value,2);assert.equal(f.records.rolls,1);assert.deepEqual(f.records.commits,[2]);assert.equal(m.flags[M].medic.status,'uncertain');
+});
 test('an old invalid movement marker does not block the original owner confirming a legal final position',async()=>{const f=fixture(),m=f.message(f.visit);await f.api.executeUsage(f.context(m,f.visit));Object.assign(m.flags[M].medic,{movementIds:[],movementCost:50,invalidMovement:true});await f.api.continueUsage(m,f.owner,{movementConfirmed:true});assert.equal(f.records.rolls,1);assert.equal(m.flags[M].medic.status,'done');});
 test('moving tokens causes no medical message writes or movement listener registration',async()=>{const f=fixture(),api=createMedicActions(f.deps),registered=new Map(),m=f.message(f.visit);api.register({Hooks:{on(name,fn){registered.set(name,fn);return name;},off(){}}});await api.executeUsage(f.context(m,f.visit));const before=structuredClone(m.flags[M].medic);await registered.get('moveToken')?.(f.healer,{id:'move',passed:{cost:500,waypoints:[{action:'teleport'}]}},{},f.owner);assert.deepEqual(m.flags[M].medic,before);assert.equal(registered.has('moveToken'),false);});
 test('repeated combat maintenance expires locally saved movement cards without reading chat history again',async()=>{const f=fixture(),m=f.message(f.visit);await f.api.executeUsage(f.context(m,f.visit));await f.api.maintain();const values=f.game.messages.values.bind(f.game.messages);let reads=0;f.game.messages.values=()=>{reads++;return values();};f.game.combat.round=2;await f.api.maintain();await f.api.maintain();await f.api.maintain();assert.equal(m.flags[M].medic.status,'cancelled');assert.equal(reads,0);});

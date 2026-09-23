@@ -199,15 +199,13 @@ export function createDesperatePrayerProvider({game,fromUuid=globalThis.fromUuid
   });
   wrap('CONFIG.Combatant.documentClass.prototype.onStartTurn',async function(native,...args){const result=await native(...args);await onStartTurn(this);return result});
   wrap('CONFIG.Combatant.documentClass.prototype.onEndTurn',async function(native,...args){const result=await native(...args);await onEndTurn(this,args[0]?.round??this.encounter?.round);return result});
-  wrap('CONFIG.Token.documentClass.prototype._preUpdateMovement',async function(native,...args){await beforeAction(this.actor);return native(...args)});
   // Share the actual native action brand and complete variant call with other
   // observers; cached metapower variants retain their original wrapper chain.
   const removeActionMiddleware=actionEvents.addMiddleware(async(scope,next)=>{for(const actor of scope.actors)await beforeAction(actor);return next()});
   actionEvents.register();
-  on('preUpdateToken',(token,changes)=>{if(['x','y','elevation'].some(k=>Object.hasOwn(changes,k))&&data(token.actor).window?.state==='open'){onError(Error('请先完成起回合选择，再直接调整Token位置。'));return false;}});
   const capture=(app,html)=>{const element=html?.[0]??html,a=app.actor??app.document;if(!a?.items||!element?.addEventListener||elements.has(element))return;elements.add(element);
    const fn=event=>{const button=event.target?.closest?.('[data-action="use-action"],button.use-action'),item=a.items.get(button?.closest?.('[data-item-id]')?.dataset.itemId);if(!item)return;
-    try{if(resolveAction(item))beforeUse(item);else if(data(a).window?.state==='open')throw Error('请先完成起回合的绝境祷告选择。');}catch(e){event.preventDefault();event.stopImmediatePropagation();onError(e);}};
+    try{if(resolveAction(item))beforeUse(item);}catch(e){event.preventDefault();event.stopImmediatePropagation();onError(e);}};
    element.addEventListener('click',fn,true);listeners.push([element,fn]);};
   for(const k of ['renderCharacterSheetPF2e','renderActorSheetPF2e','renderActorSheetV2'])on(k,capture);
   socket?.register('desperate-prayer:use',async function(payload){try{if(this.socketdata.userId!==game.users.activeGM?.id)throw Error('只有主GM可请求原始起回合使用。');await localUse(payload);return {ok:true}}catch(error){return {ok:false,error:error.message}}});

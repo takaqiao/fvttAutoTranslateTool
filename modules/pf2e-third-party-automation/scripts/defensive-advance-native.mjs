@@ -1,30 +1,6 @@
 import {MODULE_ID} from './rules.mjs';
-import {advancePosition,sameAdvancePosition} from './defensive-advance-rules.mjs';
 
 export const defensiveAdvanceStrikeMarker=nonce=>`${MODULE_ID}:defensive-advance:${nonce}`;
-
-/** This runs on the original operator, without creating another Stride action. */
-export async function runDefensiveAdvanceMovement({game,token,receipt,validate,bindPlan,confirm}){
- let plan;
- try{
-  validate();
-  plan=await token.object.planMovement({allowedActions:['walk'],maxCost:receipt.speed,preventDrop:true});
-  if(!plan)return null;
-  validate();if(!sameAdvancePosition(advancePosition(token),receipt.origin))throw Error('选路时原Token已经移动；未启动此计划。');
-  await bindPlan(plan.id);validate();
-  const finished=token.movement.finished;
-  if(!finished?.then||token.movement.id!==plan.id)throw Error('原生移动计划已被替换。');
-  if(!await token.startMovement(plan.id)||await finished!==true)return null;
-  const movement=token.movement;
-  if(!movement.animation?.ended?.then)throw Error('缺少本次原生移动的动画完成回执。');
-  await movement.animation.ended;
-  if(token.movement!==movement)throw Error('原生移动结束前已被另一移动替换。');
-  validate();return await confirm();
- }finally{
-  // Do not cancel someone else's replacement or a completed movement.
-  if(plan?.id&&token.movement?.id===plan.id&&token.movement.state==='planned'&&token.movement.user?.id===game.user.id&&token.parent?.tokens?.get(token.id)===token)token.stopMovement();
- }
-}
 
 export function defensiveAdvanceStrikeProof(message,{game,actor,token,target,receipt,option}){
  const pf=message?.flags?.pf2e,c=pf?.context,mark=message?.flags?.[MODULE_ID]?.defensiveAdvanceStrike;

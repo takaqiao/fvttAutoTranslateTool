@@ -98,11 +98,10 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   const docs=values(actor.getActiveTokens?.(true,true)).map(t=>t.document??t).filter(t=>t.actor?.uuid===actor.uuid&&t.parent?.id===target.parent?.id);
   if(docs.length!==1)throw Error('无法唯一确定组合活动来源 Token；请从场景角色使用。');return docs[0];
  }
- function requireReach(actor,origin,target,weapon){
-  const reach=actor.getReach?.({action:'attack',weapon});
-  if(!Number.isFinite(reach)||!origin.object?.distanceTo||!target.object||origin.parent?.id!==target.parent?.id)throw Error('无法确定组合活动的原生触及。');
-  const distance=origin.object.distanceTo(target.object,{reach});
-  if(!Number.isFinite(distance)||distance>reach||distance<0||origin.object.checkCollision?.(target.object.center,{origin:origin.object.center,type:'move',mode:'any'}))throw Error('所选目标不在攻击的合法触及范围内。');
+ function requireSceneTarget(actor,origin,target){
+  // Preserve the original native Strike recipient without policing spatial legality.
+  const scene=origin.parent;
+  if(origin.actor?.uuid!==actor.uuid||!scene||game.scenes?.get(scene.id)!==scene||scene.tokens?.get(origin.id)!==origin||target.parent!==scene||scene.tokens.get(target.id)!==target||!target.object||!target.actor)throw Error('组合活动的来源或场景目标已改变。');
  }
  const strikes=actor=>values(actor.system.actions).flatMap(s=>[s,...s.altUsages??[]]).filter(melee);
  async function spellChoices(actor){
@@ -258,17 +257,13 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
    if(kind!=='combination'&&own(actor).spellstrike?.charged===false)throw Error('法术打击尚未充能；请使用充能动作或施放汇聚法术。');
    const targets=await resolveMessageTargets(message,{game,fromUuid});
    if(targets.length!==(kind==='swipe'?2:1)||targets.some(t=>!t.object||!t.actor))throw Error(`请选定${kind==='swipe'?'两个相邻的':'一个'}场景目标。`);
-   if(kind==='swipe'){
-    const distance=targets[0].object.distanceTo?.(targets[1].object,{reach:5});
-    if(targets[0].parent?.id!==targets[1].parent?.id||!Number.isFinite(distance)||distance>5||distance<0)throw Error('法术横扫的两个目标必须相邻。');
-   }
    const origin=await sourceToken(actor,message,targets[0]),available=strikes(actor).filter(kind==='combination'?allowedCombinationWeapon:s=>held(s)||unarmed(s.item));
    const key=await select(actor,user,'选择近战武器或无武装攻击',available.map(s=>({value:strikeKey(s),label:s.item.name})));if(key===null)return '已取消。';
    const selected=available.find(s=>strikeKey(s)===key);let second=null;
    if(kind==='combination'){
     const fists=strikes(actor).filter(fist),fistKey=await select(actor,user,'选择拳头攻击',fists.map(s=>({value:strikeKey(s),label:s.item.name})));if(fistKey===null)return '已取消。';second=fists.find(s=>strikeKey(s)===fistKey);
    }
-   for(const target of targets)requireReach(actor,origin,target,selected.item);if(second)requireReach(actor,origin,targets[0],second.item);
+   for(const target of targets)requireSceneTarget(actor,origin,target);
    const choice=kind==='combination'?null:await chooseSpell(actor,user);if(kind!=='combination'&&!choice)return '已取消。';
    let spellTarget=null;
    if(kind==='swipe'&&!canAffectSeveral(choice.spell)){spellTarget=await select(actor,user,'选择承受法术的目标',targets.map(t=>({value:t.uuid,label:t.name??t.actor.name??t.id})));if(spellTarget===null)return '已取消。';}
@@ -277,10 +272,10 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
    if(kind==='combination'&&order===null)return '已取消。';
    const map=Number(tier);let payment;
    assertUse(actor,item,message,user,action);
-   // Recheck positions and equipped state after all normal player choices.
+   // Recheck equipped state and recipient identity after normal player choices.
    const current=strikes(actor).find(s=>strikeKey(s)===key);
    if(!current||!(kind==='combination'?allowedCombinationWeapon(current):held(current)||unarmed(current.item)))throw Error('所选武器的持用状态已改变，尚未攻击。');
-   for(const target of targets)requireReach(actor,origin,target,current.item);
+   for(const target of targets)requireSceneTarget(actor,origin,target);
    if(choice){payment=await nativeCasts.payForActivity({actor,item:choice.spell,message,user,rank:choice.rank,slotId:choice.slotId});}
    requireGM();
    await record(message,'started',{kind,weaponUuid:current.item.uuid,spellUuid:choice?.spell.uuid??null});
@@ -292,9 +287,9 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
       requireGM();
       const strike=strikes(actor).find(s=>strikeKey(s)===strikeKey(selected));
       if(!strike||!(fist(strike)||allowedCombinationWeapon(strike)))throw Error('连击的下一把武器已不可用。');
-      requireReach(actor,origin,targets[0],strike.item);attacks.push(await attack(actor,strike,targets[0],Math.min(map+index,2),message,index,kind));
+      requireSceneTarget(actor,origin,targets[0]);attacks.push(await attack(actor,strike,targets[0],Math.min(map+index,2),message,index,kind));
      }
-    }else for(const [index,target]of targets.entries()){requireGM();requireReach(actor,origin,target,current.item);attacks.push(await attack(actor,current,target,map,message,index,kind));}
+    }else for(const [index,target]of targets.entries()){requireGM();requireSceneTarget(actor,origin,target);attacks.push(await attack(actor,current,target,map,message,index,kind));}
     const receivesSpell=attack=>choice&&(!spellTarget||attack.target.uuid===spellTarget)&&(kind==='swipe'&&!spellTarget?hit(attack.outcome):choice.spell.isAttack||choice.spell.system.traits.value.includes('attack')?hit(attack.outcome):attack.outcome!=='criticalFailure');
     const eligible=attacks.filter(receivesSpell),spellCard=eligible.length?await publishSpell({actor,user,message,choice,payment,targets:eligible.map(a=>a.target),kind}):null;
     const sharedSpellDamage=choice?.spell.system.defense?.save&&!choice.spell.isAttack&&!choice.spell.system.traits.value.includes('attack')?{}:null;

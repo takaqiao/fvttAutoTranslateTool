@@ -24,19 +24,13 @@ export function assessRoaringCast({game,actor,item,entry,user=game?.user,options
  return {handled:true,eligible:true,rank,base};
 }
 
-/** Senses are alternatives. A GM's visible canvas does not prove target understanding. */
-export function validateRoaringTarget({game,actor,token,targets,perception,lineOfEffectConfirmed=false}={}){
+/** Bind the original public target; spatial and sensory legality belongs to the table. */
+export function validateRoaringTarget({game,actor,token,targets}={}){
  const scene=token?.parent;
- if(!scene||game.scenes?.get(scene.id)!==scene||scene.tokens?.get(token.id)!==token||token.documentName!=='Token'||token.actor!==actor||token.hidden||!token.object||scene.grid?.type!==1||!['ft','feet','foot'].includes(String(scene.grid.units).toLowerCase()))throw Error('需要当前尺制方格场景中准确的公开施法者Token。');
+ if(!scene||game.scenes?.get(scene.id)!==scene||scene.tokens?.get(token.id)!==token||token.documentName!=='Token'||token.actor!==actor||token.hidden||!token.object)throw Error('需要当前场景中准确的公开施法者Token。');
  if(!Array.isArray(targets)||targets.length!==1)throw Error('当前接入需要一个实际目标Token。');
  const target=targets[0];
  if(target?.documentName!=='Token'||target.parent!==scene||scene.tokens.get(target.id)!==target||!target.object||target.hidden||!['character','npc','familiar'].includes(target.actor?.type)||target.actor.isDead===true)throw Error('目标已改变或不是可确认的公开生物目标。');
- if(!Number.isFinite(token.elevation)||target.elevation!==token.elevation||target.level!==token.level)throw Error('不同高度或楼层的目标需要人工核对空间关系。');
- const distance=token.object.distanceTo?.(target.object);
- if(!Number.isFinite(distance)||distance<0||distance>60)throw Error('目标不在本次原生测得的60尺射程内。');
- if(lineOfEffectConfirmed!==true)throw Error('请确认施法者与目标之间具有法术效线。');
- if(!['sees','hears','understands'].includes(perception))throw Error('需要确认目标能够看见、听见或以其他方式理解施法者。');
- if(perception==='sees'&&(target.actor.canSee===false||target.actor.hasCondition?.('blinded'))||perception==='hears'&&(target.actor.canHear===false||target.actor.hasCondition?.('deafened')))throw Error('所选理解方式与目标当前感官状态不符，请核对其他方式。');
  return target;
 }
 
