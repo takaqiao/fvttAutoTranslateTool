@@ -33,13 +33,47 @@ function fixture({kind='strike',map=0,outcomes=['success','success'],save='failu
 async function setup(options,fn){const previous=globalThis.CONFIG;try{const f=fixture(options);globalThis.CONFIG={ChatMessage:{documentClass:f.Message},Dice:{rolls:[]},PF2E:{}};await fn(f)}finally{globalThis.CONFIG=previous}}
 function runWith(f,options={}){const p=api.createSpellCombination({game:f.game,choose:async({choices})=>choices[0].value,fromUuid:async uuid=>[f.actor,f.origin,...f.targetDocs,...f.actor.items].find(d=>d.uuid===uuid),nativeCasts:f.casts,...options});return()=>p.executeUsage({actor:f.actor,item:f.feat,message:f.message,user:{id:'player'},action:p.resolveAction(f.feat)});}
 const handoff=f=>{f.game.users.activeGM={id:'new-gm'}};
-function dualUse(f){
- f.feat.type='feat';f.feat.sourceId='Compendium.pf2e.feats-srd.Item.onde0SxLoxLBTnvm';
+function dualUse(f,{takedown=false}={}){
+ f.feat.type='feat';f.feat.sourceId=takedown?'Compendium.pf2e.feats-srd.Item.Gw0wGXikhAhiGoud':'Compendium.pf2e.feats-srd.Item.onde0SxLoxLBTnvm';
  f.feat.system.rules=[{key:'FlatModifier',predicate:[{or:['double-slice-second',NS+':double-slice-second']}]}];
  f.weapons[1].system.equipped={carryType:'held',handsHeld:1};
  const provider=createDualStrikeAutomation({game:f.game,fromUuid:async uuid=>[f.origin,...f.targetDocs].find(d=>d.uuid===uuid),choose:async({choices})=>choices[0].value});
- return ()=>provider.executeUsage({actor:f.actor,item:f.feat,message:f.message,user:{id:'player'},action:'dual:double-slice'});
+ return ()=>provider.executeUsage({actor:f.actor,item:f.feat,message:f.message,user:{id:'player'},action:takedown?'dual:twin-takedown':'dual:double-slice'});
 }
+function twinPair(f){
+ for(const item of f.weapons){item.system.traits.value=['twin'];item.system.baseItem='sawtooth-saber';}
+ // The native contextual Strike owns all damage arithmetic. This boundary stub
+ // distinguishes its result from the original Strike; real PF2e QA covers dice,
+ // circumstance stacking and critical multiplication.
+ f.actor.clone=changes=>{f.calls.push({kind:'twin-clone',changes});return {system:{actions:f.actor.system.actions.map(s=>({...s,damage:async opts=>{f.calls.push({kind:'twin-damage',opts,item:s.item});return roll(11)},critical:async opts=>{f.calls.push({kind:'twin-damage',opts,item:s.item});return roll(22)}}))}}};
+}
+for(const takedown of [false,true])for(const outcomes of [['success','success'],['failure','success'],['success','criticalSuccess']])test(`paired twin weapons use native bonus on the second Strike only (${takedown?'Takedown':'Double Slice'}, ${outcomes})`,()=>setup({outcomes},async f=>{
+ twinPair(f);f.actor.signature='hunter';f.targetDocs[0].actor.getRollOptions=()=>['self:prey:hunter'];
+ const use=dualUse(f,{takedown});await use();await use();
+ assert.equal(f.calls.filter(c=>c.kind==='twin-clone').length,1);
+ const rule=f.calls.find(c=>c.kind==='twin-clone').changes.items.at(-1).system.rules[0];
+ assert.equal(rule.key,'FlatModifier');assert.equal(rule.type,'circumstance');assert.equal(rule.value,'@weapon.system.damage.dice');assert.equal(rule.selector,`${f.weapons[1].id}-damage`);
+ const damage=f.calls.filter(c=>c.kind==='twin-damage');assert.equal(damage.length,1);assert.equal(damage[0].item.id,f.weapons[1].id);
+ assert(rule.predicate.includes(`item:id:${f.weapons[1].id}`));assert(rule.predicate.includes('item:trait:twin'));assert(rule.predicate.some(p=>damage[0].opts.options.has(p)));
+ assert.equal(damage[0].opts.target.document.uuid,f.targetDocs[0].uuid);assert.equal(damage[0].opts.checkContext.outcome,outcomes[1]);
+ assert.equal(f.calls.filter(c=>c.kind==='weapon-damage').length,outcomes[0]==='success'?1:0);
+ assert.equal(f.messages.at(-1).rolls[0].total,(outcomes[0]==='success'?10:0)+(outcomes[1]==='criticalSuccess'?22:11));
+ assert.deepEqual(f.actor._source.items,[],'no persistent effect or turn history is written');
+}));
+for(const mismatch of ['different-type','first-not-twin','second-not-twin','unknown-type'])test(`unconfirmed twin pairing leaves native manual damage unchanged (${mismatch})`,()=>setup({},async f=>{
+ twinPair(f);
+ if(mismatch==='different-type')f.weapons[1].system.baseItem='khopesh';
+ if(mismatch==='first-not-twin')f.weapons[0].system.traits.value=[];
+ if(mismatch==='second-not-twin')f.weapons[1].system.traits.value=[];
+ if(mismatch==='unknown-type')for(const w of f.weapons)delete w.system.baseItem;
+ await dualUse(f)();assert.equal(f.calls.filter(c=>c.kind==='twin-clone').length,0);assert.equal(f.messages.at(-1).rolls[0].total,20);
+}));
+test('a missed second Strike does not prepare any twin damage clone',()=>setup({outcomes:['success','failure']},async f=>{twinPair(f);await dualUse(f)();assert.equal(f.calls.filter(c=>c.kind==='twin-clone').length,0);assert.equal(f.messages.at(-1).rolls[0].total,10)}));
+for(const same of [false,true])test(`unknown weapon base uses exact source identity (${same?'matching':'different'})`,()=>setup({},async f=>{
+ twinPair(f);for(const w of f.weapons)delete w.system.baseItem;
+ f.weapons[0].sourceId='Compendium.pf2e.equipment-srd.Item.nativeTwin';f.weapons[1].sourceId=same?f.weapons[0].sourceId:'Compendium.other.Item.nativeTwin';
+ await dualUse(f)();assert.equal(f.calls.filter(c=>c.kind==='twin-clone').length,same?1:0);assert.equal(f.messages.at(-1).rolls[0].total,same?21:20);
+}));
 for(const kind of ['dual','swipe','combination'])for(const deleted of ['source','target','scene'])test(`${kind} cannot continue after its ${deleted} is deleted between Strikes`,()=>setup({kind:kind==='dual'?'strike':kind},async f=>{
  const use=kind==='dual'?dualUse(f):f.use;
  const strike=f.actor.system.actions[0].variants[0],original=strike.roll;
