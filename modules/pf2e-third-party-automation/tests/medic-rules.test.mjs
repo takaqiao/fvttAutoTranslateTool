@@ -9,6 +9,7 @@ test('routes exact feat sources despite rename and missing traits, not a same-na
  assert.equal(medicAction(feat('1fBHZpM3Z3MQtzvi')),'medic:doctors-visitation');
  assert.equal(medicAction({...feat('other'),name:'Treat Condition',system:{slug:'treat-condition'}}),null);
 });
+test('ordinary Treat Wounds and standalone Battle Medicine remain native instead of entering the Visitation settlement',()=>{assert.equal(medicAction({type:'action',system:{slug:'treat-wounds'}}),null);assert.equal(medicAction(feat('wYerMk6F1RZb0Fwt')),null);});
 test('four legal Visitation branches carry activity total costs; Treat Condition requires its exact feat',()=>{
  assert.deepEqual(visitationBranches(actor()).map(b=>[b.value,b.cost]),[['battle-medicine',1],['treat-poison',1],['administer-first-aid',2],['treat-condition',2]]);
  assert.equal(visitationBranches({items:[]}).some(b=>b.value==='treat-condition'),false);

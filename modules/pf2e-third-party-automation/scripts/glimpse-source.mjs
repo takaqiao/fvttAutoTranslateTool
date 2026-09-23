@@ -29,7 +29,7 @@ export function glimpseCandidates(context,game){
  try{
   const encounter=glimpseEncounter(victim,game).combat;
   if(glimpseEncounter(enemy,game).combat!==encounter)return [];
-  return Array.from(victim.parent.tokens.values()).flatMap(token=>{
+  return [...new Set(encounter.turns.map(combatant=>combatant.token).filter(token=>token?.parent===victim.parent))].flatMap(token=>{
    const actor=token.actor,items=Array.from(actor?.items?.values?.()??[]),ability=items.find(i=>glimpseSourceId(i)===GLIMPSE_SOURCES.glimpse&&i.system?.actionType?.value==='reaction');
    if(!isCurrentDisruptToken(token,game)||actor?.type!=='character'||actor.level!==5||actor.uuid===ally.uuid||actor.canAct!==true||actor.isDead||actor.hasCondition?.('unconscious')||!ability||!items.some(i=>glimpseSourceId(i)===GLIMPSE_SOURCES.aura)||items.some(i=>glimpseSourceId(i)===GLIMPSE_SOURCES.weight)||actor.isEnemyOf?.(enemy.actor)!==true||actor.isAllyOf?.(ally)!==true)return [];
    const aura=token.auras?.get?.('champions-aura');if(!aura||aura.containsToken?.(enemy)!==true||aura.containsToken?.(victim)!==true)return [];

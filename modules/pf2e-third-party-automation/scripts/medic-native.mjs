@@ -1,4 +1,6 @@
 import {MODULE_ID} from './rules.mjs';
+import {withDamageMessageTarget} from './damage-message-targets.mjs';
+const author=message=>message?.author?.id??message?.user?.id??message?.user;
 // Use a fresh facade: native canvas layers can be non-configurable, non-writable own properties.
 // Getters and methods still receive the real object, including native private-field receivers.
 const scoped=(original,overrides)=>{
@@ -15,6 +17,8 @@ export const pinnedMedicTarget=token=>scoped(token.actor,{getActiveTokens:()=>[t
 export function createMedicNative({game,choose,canvas=globalThis.canvas,Dialog=globalThis.Dialog,ChatMessage=globalThis.ChatMessage,Hooks=globalThis.Hooks,CONFIG=globalThis.CONFIG}={}){
  return async function delegate({actor,healer,target,user,branch,continuation,validate}){
   validate();
+  if(!user?.id||game.user?.id!==user.id)throw Error('原生医疗必须在原操作者客户端执行。');
+  if(!['battle-medicine','treat-poison','administer-first-aid'].includes(branch))throw Error('无效的医师探访原生分支。');
   if(branch!=='battle-medicine'){
    const action=game.pf2e?.actions?.get?.(branch);if(!action?.use)throw Error('缺少原生医疗动作接口。');
    let variant;
@@ -22,28 +26,34 @@ export function createMedicNative({game,choose,canvas=globalThis.canvas,Dialog=g
     variant=await choose?.({actor,user,title:'急救：选择方式',choices:[{value:'stabilize',label:'稳定濒死'},{value:'stop-bleeding',label:'止血'}]});
     if(!variant)return {status:'cancelled'};if(!['stabilize','stop-bleeding'].includes(variant))throw Error('无效急救方式。');
    }
-   validate();const results=await action.use({actors:[actor],target:target.actor,variant,[MODULE_ID]:{metapowerContinuation:continuation}});
-   return {status:results?.length?'delegated':'cancelled',text:'已调用原生医疗检定；后续效果由原生/已安装医疗提供者处理。'};
+   const marker=`${MODULE_ID}:medic-native:${continuation.nonce}`;
+   validate();const results=await action.use({actors:[pinnedMedicTarget(healer)],target:pinnedMedicTarget(target),variant,rollOptions:[marker],[MODULE_ID]:{metapowerContinuation:continuation}});
+   if(!results?.length)return {status:'cancelled'};
+   if(results.length!==1)throw Error('原生医疗返回了多个不明确的检定。');
+   const check=results[0].message,pf=check?.flags?.pf2e?.context;
+   if(!check?.id||game.messages.get(check.id)!==check||author(check)!==user.id||check.speaker?.actor!==actor.id||pf?.type!=='skill-check'||pf.isReroll||!pf.options?.includes(marker)||pf.target?.actor!==target.actor.uuid||pf.target?.token!==target.uuid)throw Error('原生医疗检定回执不匹配。');
+   validate();await check.update({[`flags.${MODULE_ID}.medicNative`]:{nonce:continuation.nonce,cardId:continuation.cardId,actorUuid:actor.uuid,targetUuid:target.uuid,branch}});
+   return {status:'delegated',checkId:check.id,text:'已完成原生医疗检定；后续效果由原生/已安装医疗提供者处理。'};
   }
   if(!game.modules.get('xdy-pf2e-workbench')?.active)throw Error('医师探访的战地医疗分支需要启用Workbench。');
   const pack=game.packs.get('xdy-pf2e-workbench.asymonous-benefactor-macros-internal');
   const macros=await pack?.getDocuments({name:'XDY DO_NOT_IMPORT Treat Wounds and Battle Medicine'});
   if(macros?.length!==1||!Dialog||!healer.object||!target.object)throw Error('缺少Workbench原生战地医疗宏或场景Token。');
-  const nativeMacro=macros[0];let resolve,reject,opened=false,submitting=false,settled=false,checkStarted=false,checkFinished=false,checkMessage=null,resultMessage=null,pendingAssuranceMessage=null;
+  const nativeMacro=macros[0];let resolve,reject,opened=false,submitting=false,settled=false,checkStarted=false,checkFinished=false,checkMessage=null,resultMessage=null,pendingAssuranceMessage=null,checkKind='statistic';
   const nonce=continuation?.nonce,marker=`${MODULE_ID}:medic-workbench:${nonce}`,listeners=[],hookIds=[],assuranceRolls=new Set();
   const completed=new Promise((yes,no)=>{resolve=yes;reject=no;});
   const clean=()=>{for(const [event,id]of hookIds)Hooks.off(event,id);for(const [element,fn]of listeners)element.removeEventListener('submit',fn,true);};
   const settle=value=>{if(!settled){settled=true;clean();resolve(value);}};
   const fail=error=>{if(!settled){settled=true;clean();reject(error);}};
-  const finish=()=>{if(checkFinished&&checkMessage&&resultMessage)settle({status:'delegated',text:'Workbench战地医疗检定及结果卡已完成；按其原生卡应用治疗与免疫。'});};
-  const proof=()=>({nonce,cardId:continuation.cardId,actorUuid:actor.uuid,targetUuid:target.uuid,checkId:checkMessage?.id});
+  const finish=()=>{if(checkFinished&&checkMessage&&resultMessage)settle({status:'delegated',checkId:checkMessage.id,resultId:resultMessage.id,text:'Workbench战地医疗检定及结果卡已完成；按其原生卡应用治疗与免疫。'});};
+  const proof=()=>({nonce,cardId:continuation.cardId,actorUuid:actor.uuid,targetUuid:target.uuid,branch,checkKind,checkId:checkMessage?.id});
   const bindResult=async(data,create)=>{
    const result=data?.flags?.treat_wounds_battle_medicine;
    if(!result)return create(data);
    try{
     if(settled)return null;validate();if(pendingAssuranceMessage)await pendingAssuranceMessage;if(settled)return null;
     if(!checkMessage||result.id!==target.id||result.healerId!==actor.id)throw Error('Workbench医疗结果不属于原医疗检定。');
-    const message=await create({...data,flags:{...data.flags,[MODULE_ID]:{...data.flags?.[MODULE_ID],medicWorkbench:proof()}}});
+    const message=await create(withDamageMessageTarget({...data,flags:{...data.flags,[MODULE_ID]:{...data.flags?.[MODULE_ID],medicWorkbench:proof()}}},target.uuid));
     if(!message?.id)throw Error('Workbench医疗结果消息未保存。');
     resultMessage=message;finish();return message;
    }catch(error){fail(error);return null;}
@@ -58,7 +68,7 @@ export function createMedicNative({game,choose,canvas=globalThis.canvas,Dialog=g
     const extraRollOptions=(args.extraRollOptions??[]).filter(option=>!actorOptions.has(option));
     const rolled=await stat.roll({...args,token:healer,target:pinnedMedicTarget(target),dc:{...args.dc,slug:'medicine'},extraRollOptions:[...extraRollOptions,marker],callback:async(roll,outcome,message,...rest)=>{
      if(settled)return;validate();const context=message?.flags?.pf2e?.context;
-     if(!message?.id||game.messages.get(message.id)!==message||message.speaker?.actor!==actor.id||context?.isReroll||context?.type!=='skill-check'||!context.options?.includes(marker)||context.target?.actor!==target.actor.uuid||context.target?.token!==target.uuid)throw Error('Workbench原生检定回执不匹配。');
+     if(!message?.id||game.messages.get(message.id)!==message||author(message)!==user.id||message.speaker?.actor!==actor.id||context?.isReroll||context?.type!=='skill-check'||!context.options?.includes(marker)||context.target?.actor!==target.actor.uuid||context.target?.token!==target.uuid)throw Error('Workbench原生检定回执不匹配。');
      checkMessage=message;await message.update({[`flags.${MODULE_ID}.medicWorkbench`]:proof()});
      await args.callback?.(roll,outcome,message,...rest);
     }});
@@ -82,7 +92,7 @@ export function createMedicNative({game,choose,canvas=globalThis.canvas,Dialog=g
   }}):ChatMessage;
   const rollClasses=(CONFIG?.Dice?.rolls??[]).map(Base=>{
    if(Base.name==='DamageRoll')return class DamageRoll extends Base{async toMessage(data,...args){return bindResult(data,actual=>super.toMessage(actual,...args));}};
-   if(Base.name==='CheckRoll')return class CheckRoll extends Base{async roll(...args){try{validate();if(settled||checkStarted||!nonce)throw Error('Workbench Assurance回执无效。');checkStarted=true;const roll=await super.roll(...args);assuranceRolls.add(roll);return roll;}catch(error){fail(error);return null;}}};
+   if(Base.name==='CheckRoll')return class CheckRoll extends Base{async roll(...args){try{validate();if(settled||checkStarted||!nonce)throw Error('Workbench Assurance回执无效。');checkStarted=true;checkKind='assurance';const roll=await super.roll(...args);assuranceRolls.add(roll);return roll;}catch(error){fail(error);return null;}}};
    return Base;
   });
   const scopedConfig=CONFIG?scoped(CONFIG,{Dice:scoped(CONFIG.Dice,{rolls:rollClasses})}):CONFIG;

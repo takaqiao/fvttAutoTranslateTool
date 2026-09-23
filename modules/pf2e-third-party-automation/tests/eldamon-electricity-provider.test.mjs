@@ -5,6 +5,63 @@ import {fixture} from './eldamon-electricity-fixture.mjs';
 import {destructiveBlockAmounts} from '../scripts/shield-damage-adapter.mjs';
 import {ELECTRICITY_SOURCES as S,electricityEffects,electricityState} from '../scripts/eldamon-electricity.mjs';
 const ID='pf2e-third-party-automation';
+test('electricity application indexes source cards once and releases deleted chat references',async()=>{
+ const f=fixture(),hooks=new Map(),provider=createEldamonElectricityProvider({game:f.game,fromUuid:async uuid=>f.docs.get(uuid)});
+ provider.register({Hooks:{on:(name,fn)=>hooks.set(name,fn)}});const first=f.source();
+ assert.ok((await provider.beforeDamage(f.target,{damage:first.rolls[0],token:f.tokens[1],item:f.power})).receipt);
+ f.game.messages.values=()=>{throw Error('chat history copied again')};
+ const second=f.source();hooks.get('createChatMessage')(second,{},f.gm.id);
+ assert.ok((await provider.beforeDamage(f.target,{damage:second.rolls[0],token:f.tokens[1],item:f.power})).receipt);
+ f.game.messages.delete(first.id);hooks.get('deleteChatMessage')?.(first);
+ assert.equal(await provider.beforeDamage(f.target,{damage:first.rolls[0],token:f.tokens[1],item:f.power}),null);
+});
+test('area damage binds native targets after template placement instead of the pre-use selection',async()=>{
+ for(const explicit of [false,true]){
+  const f=fixture();f.receipt.snapshot.area={type:'cone',distance:60};f.game.user.targets=new Set([{document:f.tokens[0]}]);f.owner.active=true;f.owner.targets=new Set([{document:f.tokens[2]}]);
+  const provider=createEldamonElectricityProvider({game:f.game,fromUuid:async uuid=>f.docs.get(uuid)});
+  const data={flags:{pf2e:{origin:{uuid:f.power.uuid},context:{type:'damage-roll',options:[`${ID}:metapower:channel:channel`]}},...(explicit?{'pf2e-toolbelt':{targetHelper:{targets:[f.tokens[3].uuid]}}}:{})}};
+  let result;await provider.interceptDamageMessage({instances:[{type:'electricity',total:13}],options:{}},data,{},async d=>{result=d});
+  const expected=[f.tokens[explicit?3:2].uuid];assert.deepEqual(result.flags[ID].electricitySource.targetUuids,expected);
+  assert.deepEqual(result.flags['pf2e-toolbelt'].targetHelper.targets,expected);
+  assert.deepEqual(f.receipt.selection.targetUuids,[f.tokens[1].uuid],'original admission is unchanged');
+ }
+});
+test('a GM area damage click never substitutes GM targets when the source owner is offline',async()=>{
+ const f=fixture();f.receipt.snapshot.area={type:'cone',distance:60};f.game.user.targets=new Set([{document:f.tokens[0]}]);f.owner.active=false;
+ const provider=createEldamonElectricityProvider({game:f.game,fromUuid:async uuid=>f.docs.get(uuid)});let result;
+ await provider.interceptDamageMessage({instances:[{type:'electricity',total:13}],options:{}},{flags:{pf2e:{origin:{uuid:f.power.uuid},context:{options:[`${ID}:metapower:channel:channel`]}}}},{},async d=>{result=d});
+ assert.deepEqual(result.flags['pf2e-toolbelt'].targetHelper.targets,[]);
+});
+test('native damage draft survives delayed creation and keeps template recipients or fills the original empty manifest',async()=>{
+ for(const keepNative of [false,true])for(const draftFirst of [false,true]){
+  const f=fixture();f.owner.active=true;f.owner.targets=new Set([{document:f.tokens[2]}]);f.receipt.snapshot.area={type:'cone'};
+  const hooks=new Map();let sequence=0;const Hooks={on(name,fn){const id=++sequence;const list=hooks.get(name)??new Map();list.set(id,fn);hooks.set(name,list);return id},off(name,id){hooks.get(name)?.delete(id)}};
+  const provider=createEldamonElectricityProvider({game:f.game,fromUuid:async uuid=>f.docs.get(uuid)});provider.register({Hooks});
+  // Toolbelt registers its one-shot source-card handoff before opening native damage.
+  Hooks.on('preCreateChatMessage',doc=>{doc.flags['pf2e-toolbelt']={targetHelper:{targets:keepNative?[f.tokens[1].uuid,f.tokens[3].uuid]:[]}}});
+  // Toolbelt's registerUpstreamHook moves its original-card handoff to the front.
+  const listeners=hooks.get('preCreateChatMessage'),last=[...listeners].at(-1);listeners.delete(last[0]);hooks.set('preCreateChatMessage',new Map([last,...listeners]));
+  const baseline=hooks.get('preCreateChatMessage').size;let saved;
+  function create(data){
+   const document={...structuredClone(data),updateSource(changes){for(const [key,value]of Object.entries(changes)){const parts=key.split('.');let at=this;for(const part of parts.slice(0,-1))at=at[part]??={};at[parts.at(-1)]=structuredClone(value)}}};
+   for(const fn of hooks.get('preCreateChatMessage').values())fn(document,data,{},f.gm.id);return document;
+  }
+  const result=await provider.interceptDamageMessage({instances:[{type:'electricity',total:13}],options:{}},{flags:{pf2e:{origin:{uuid:f.power.uuid},context:{type:'damage-roll',options:[`${ID}:metapower:channel:channel`]}}}},{create:!draftFirst},async data=>{
+   return draftFirst?structuredClone(data):create(data);
+  });
+  // PF2e DamagePF2e.roll uses toMessage({create:false}) then ChatMessage.create.
+  saved=draftFirst?create(result):result;
+  const expected=keepNative?[f.tokens[1].uuid,f.tokens[3].uuid]:[f.tokens[2].uuid];
+  assert.deepEqual(saved.flags['pf2e-toolbelt'].targetHelper.targets,expected);assert.deepEqual(saved.flags[ID].electricitySource.targetUuids,expected);
+  assert.equal(hooks.get('preCreateChatMessage').size,baseline,'temporary publication observer is removed');
+ }
+});
+test('single-target channel damage retains the admitted target after the caster retargets',async()=>{
+ const f=fixture();f.game.user.targets=new Set([{document:f.tokens[0]}]);
+ const provider=createEldamonElectricityProvider({game:f.game,fromUuid:async uuid=>f.docs.get(uuid)});let result;
+ await provider.interceptDamageMessage({instances:[{type:'electricity',total:13}],options:{}},{flags:{pf2e:{origin:{uuid:f.power.uuid},context:{options:[`${ID}:metapower:channel:channel`]}}}},{},async d=>{result=d});
+ assert.deepEqual(result.flags['pf2e-toolbelt'].targetHelper.targets,[f.tokens[1].uuid]);
+});
 
 for(const status of ['restricted','manual'])test(`provider forwards ${status} restriction to its real Reactive Chain ledger`,async()=>{
  const f=fixture();f.item(f.other,'shock',S.shocked);await(await f.damage()).finish();f.power.sourceId=S.chain;f.caster.getActiveTokens=()=>[f.tokens[0]];

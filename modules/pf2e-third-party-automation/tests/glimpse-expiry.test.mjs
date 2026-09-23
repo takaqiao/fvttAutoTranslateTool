@@ -5,6 +5,29 @@ import {fixture} from './glimpse-fixture.mjs';
 import {MODULE_ID as M} from '../scripts/rules.mjs';
 function patch(doc,data){for(const [path,value] of Object.entries(data)){const ks=path.split('.');let at=doc;for(const k of ks.slice(0,-1))at=at[k]??={};at[ks.at(-1)]=structuredClone(value)}}
 function setup(){const f=fixture(),warnings=[],deleted=[];f.game.time={worldTime:100};f.game.pf2e={ConditionManager:{conditions:new Map([['enfeebled',{uuid:'Condition.enfeebled'}]])}};f.combat.turns.forEach(c=>c.parent=f.combat);const expiry=glimpseExpiryFor(f.enemyToken,f.game),nonce='receipt';const effect={id:'effect',uuid:f.enemy.uuid+'.Item.effect',type:'effect',actor:f.enemy,flags:{},system:{slug:'tpa-glimpse-receipt',context:{origin:{actor:f.enemy.uuid,token:f.enemyToken.uuid}},duration:{unit:'rounds',value:1,expiry:'turn-end'},rules:[{key:'GrantItem',uuid:'Condition.enfeebled',inMemoryOnly:true,alterations:[{mode:'override',property:'badge-value',value:2}]}]},async update(data){patch(this,data)}};f.enemy.items.set(effect.id,effect);f.enemy.deleteEmbeddedDocuments=async(_kind,ids)=>{for(const id of ids){deleted.push(id);f.enemy.items.delete(id)}};const lifecycle=createGlimpseExpiry({game:f.game,onError:e=>warnings.push(e.message)});return {...f,lifecycle,effect,expiry,nonce,warnings,deleted}}
+test('end-turn reconciliation uses tracked effects and direct token lookup after one recovery scan',async()=>{
+ const f=setup();await f.lifecycle.arm(f);await f.lifecycle.reconcile();
+ f.game.actors.values=()=>{throw Error('unrelated actors were scanned')};f.game.scenes.values=()=>{throw Error('all scene tokens were scanned')};
+ f.combat.round=3;f.combat.turns[0].flags.pf2e={roundOfLastTurnEnd:3};
+ await f.lifecycle.reconcile();await f.lifecycle.reconcile();assert.deepEqual(f.deleted,['effect']);
+});
+for(const event of ['updateItem','updateActor'])test(`imported armed effects join the expiry index through ${event}`,async()=>{
+ const f=setup(),callbacks=new Map(),lifecycle=createGlimpseExpiry({game:f.game});
+ lifecycle.register({Hooks:{on:(name,fn)=>callbacks.set(name,fn)}});await lifecycle.reconcile();
+ await f.lifecycle.arm(f);callbacks.get(event)?.(event==='updateItem'?f.effect:f.enemy,event==='updateItem'?{}:{items:[]});
+ f.game.actors.values=()=>{throw Error('unrelated actors were scanned')};f.game.scenes.values=()=>{throw Error('all scene tokens were scanned')};
+ f.combat.round=3;f.combat.turns[0].flags.pf2e={roundOfLastTurnEnd:3};await lifecycle.reconcile();assert.deepEqual(f.deleted,['effect']);
+});
+test('actor link changes discover owned expiry, while deleted synthetic actors are released',async()=>{
+ const f=setup(),callbacks=new Map(),lifecycle=createGlimpseExpiry({game:f.game});lifecycle.register({Hooks:{on:(name,fn)=>callbacks.set(name,fn)}});
+ await f.lifecycle.arm(f);callbacks.get('updateToken')?.(f.enemyToken,{actorLink:true});
+ f.game.actors.values=()=>{throw Error('world scan')};f.game.scenes.values=()=>{throw Error('scene scan')};
+ f.combat.round=3;f.combat.turns[0].flags.pf2e={roundOfLastTurnEnd:3};await lifecycle.reconcile();assert.deepEqual(f.deleted,['effect']);
+ const g=setup(),events=new Map();g.game.actors.delete(g.enemy.id);g.enemy.uuid='Scene.scene.Token.enemy.Actor.enemy';g.effect.uuid=g.enemy.uuid+'.Item.effect';g.effect.system.context.origin.actor=g.enemy.uuid;g.expiry.actorUuid=g.enemy.uuid;
+ const manager=createGlimpseExpiry({game:g.game});await manager.arm(g);manager.register({Hooks:{on:(name,fn)=>events.set(name,fn)}});g.scene.tokens.delete(g.enemyToken.id);
+ await events.get('deleteToken')(g.enemyToken);
+ Object.defineProperty(g.effect,'flags',{get(){throw Error('deleted synthetic effect retained')}});await manager.reconcile();
+});
 test('next end is this round before enemy turn, otherwise next round, regardless of viewed combat or initiative ties',()=>{const f=setup();assert.equal(f.expiry.endRound,3);f.combat.turn=2;assert.equal(glimpseExpiryFor(f.enemyToken,f.game).endRound,3);f.combat.turns.push(f.combat.turns.shift());f.combat.turn=0;f.combat.turns.forEach(c=>c.initiative=20);assert.equal(glimpseExpiryFor(f.enemyToken,f.game).endRound,2)});
 test('arming preserves native GrantItem and exact token origin, then waits for actual end receipt',async()=>{const f=setup();await f.lifecycle.arm(f);assert.equal(f.effect.system.duration.unit,'unlimited');assert.equal(f.effect.system.rules[0].key,'GrantItem');f.combat.round=3;f.combat.turns[0].flags.pf2e={roundOfLastTurnEnd:2};await f.lifecycle.reconcile();assert.deepEqual(f.deleted,[]);f.combat.turns[0].flags.pf2e.roundOfLastTurnEnd=3;await f.lifecycle.reconcile();assert.deepEqual(f.deleted,['effect'])});
 test('late creation after exact target end removes immediately and duplicate hooks do not delete twice',async()=>{const f=setup();f.combat.round=3;f.combat.turns[0].flags.pf2e={roundOfLastTurnEnd:3};await f.lifecycle.arm(f);await Promise.all([f.lifecycle.reconcile(),f.lifecycle.reconcile()]);assert.deepEqual(f.deleted,['effect'])});

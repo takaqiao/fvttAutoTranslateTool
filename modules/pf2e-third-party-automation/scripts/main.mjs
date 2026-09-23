@@ -176,7 +176,7 @@ Hooks.once('ready',async()=>{
  if(prayer){nativeCasts.addActorMatcher(prayer.isManagedActor);nativeCasts.addConsumePolicy(prayer.consumePolicy);nativeCasts.addCastMiddleware(prayer.interceptCast);}
  const prayerCheck=(native,...args)=>prayer?prayer.interceptCheck(native,...args):native(...args);
  let metapower,electricity;
- const voltage=createEldamonVoltageProvider({game,fromUuid,onError:report,observe:(...args)=>metapower.observe(...args),onRefresh:context=>electricity.onRefresh(context)});
+ const voltage=createEldamonVoltageProvider({game,fromUuid,onError:report,getRollContext:roll=>cycle?.getRollContext(roll),observe:(...args)=>metapower.observe(...args),onRefresh:context=>electricity.onRefresh(context)});
  electricity=createEldamonElectricityProvider({game,fromUuid,reactionRestriction,onError:report,refreshOutsideEncounter:voltage.refreshOutsideEncounter});
  metapower=createMetapowerProvider({game,fromUuid,onError:report,supportsOriginalUse:item=>providers.some(p=>p.resolveAction?.(item)?.startsWith('medic:')||['glimpse:use','defensive-advance'].includes(p.resolveAction?.(item))),beforeChannel:electricity.beforeChannel,validateSelection:electricity.validateSelection,interceptDamageMessage:electricity.interceptDamageMessage,onCommittedChannel:async context=>{await voltage.onCommittedChannel(context);await electricity.onCommittedChannel(context)}});
  nativeCasts.addCastMiddleware(({item,options},native)=>options.consume===false||options.message===false?native():metapower.observe({actor:item.actor,entry:'spell'},native));

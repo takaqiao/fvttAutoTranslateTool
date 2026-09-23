@@ -38,10 +38,11 @@ function setup(t,native=async()=>null){
  }};
 }
 
-for(const kind of ['sidebar','persistent'])test(`mixed ${kind} HUD controllers preserve unrelated controls and await one original action use`,async t=>{
+for(const armed of [false,true])for(const kind of ['sidebar','persistent'])test(`mixed ${kind} HUD controllers preserve unrelated controls and await one original action use (${armed?'armed':'idle'})`,async t=>{
  let finishNative,nativeCalls=0,seenEvent,seenItem;
  const nativeResult=new Promise(resolve=>{finishNative=resolve});
  const f=setup(t,(event,item)=>{nativeCalls++;seenEvent=event;seenItem=item;return nativeResult});
+ if(armed)f.actor.flags={'pf2e-third-party-automation':{metapower:{armed:{kind:'widen'},receipts:{}}}};
  const action=actionControllers(f.item)[kind];
  class ActionsStance{toggle(){return 'stance'}}
  class ActionsSidebarStrike{attack(){return 'strike'}}
@@ -57,12 +58,12 @@ for(const kind of ['sidebar','persistent'])test(`mixed ${kind} HUD controllers p
  assert.deepEqual(f.errors,[],'normal mixed HUD contents must not trigger action-compatibility warnings');
  unrelated.forEach((controller,i)=>assert.deepEqual(Object.getOwnPropertyDescriptors(Object.getPrototypeOf(controller)),originals[i]));
  const event={type:'click'},pending=action.use(event);let settled=false;pending.then(()=>{settled=true});
- // begin/start are awaited before the captured Toolbelt helper is entered.
+ // Only an armed next-action window admits ordinary actions to the ledger.
  for(let i=0;i<10&&nativeCalls===0;i++)await Promise.resolve();
  assert.equal(nativeCalls,1);assert.equal(seenEvent,event);assert.equal(seenItem,f.item);assert.equal(settled,false);
- assert.deepEqual(f.requests.map(r=>r.name),['metapower:begin','metapower:start']);
+ assert.deepEqual(f.requests.map(r=>r.name),armed?['metapower:begin','metapower:start']:[]);
  const result={id:'native-card'};finishNative(result);assert.equal(await pending,result);
- assert.equal(nativeCalls,1);assert.deepEqual(f.requests.map(r=>r.name),['metapower:begin','metapower:start','metapower:finish']);
+ assert.equal(nativeCalls,1);assert.deepEqual(f.requests.map(r=>r.name),armed?['metapower:begin','metapower:start','metapower:finish']:[]);
 });
 
 for(const kind of ['sidebar','persistent'])test(`changed reviewed ${kind} action method still fails its exact fingerprint gate`,async t=>{

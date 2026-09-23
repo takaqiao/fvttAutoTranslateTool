@@ -1,15 +1,16 @@
 import {MODULE_ID} from './rules.mjs';
 import {SerialActions} from './runtime.mjs';
-import {isActiveGM,resolveMessageTargets} from './native-context.mjs';
+import {isActiveGM,resolveMessageTargets,showNativeChoice} from './native-context.mjs';
 import {medicAction,medicFeat,visitationBranches,values,usableToolkit,validateTreatment,conditionValue,conditionBound,conditionSnapshot,treatmentValue} from './medic-rules.mjs';
 import {createMedicNative,pinnedMedicTarget} from './medic-native.mjs';
+import {createMedicOwner} from './medic-owner.mjs';
 
 const sessions=new WeakMap();
 const own=m=>m?.flags?.[MODULE_ID]?.medic;
 const input=m=>m?.flags?.[MODULE_ID]?.medicInput;
 const uid=()=>globalThis.foundry?.utils?.randomID?.(16)??globalThis.crypto.randomUUID();
 const author=m=>m.author?.id??m.user?.id??m.user;
-const terminal=s=>['done','cancelled','failed'].includes(s);
+const terminal=s=>['done','cancelled','failed','uncertain'].includes(s);
 const rollData=roll=>JSON.stringify(roll?.toJSON?.()??roll);
 const turn=game=>game.combat?.started?`${game.combat.id}:${game.combat.round}:${game.combat.turn}`:null;
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -23,13 +24,15 @@ async function nativeFacts({condition}){
 
 /** Original Use is the sole entry. Authority and durable nonce checks also apply to card continuation. */
 export function createMedicActions({game,fromUuid=globalThis.fromUuid,choose,requestFacts=nativeFacts,rollCheck,delegateTreatment,commitActivity,distance,onError=console.error}={}){
- delegateTreatment??=createMedicNative({game,choose});
- if(!sessions.has(game))sessions.set(game,{actors:new SerialActions(),targets:new SerialActions(),checks:new SerialActions()});
- const queues=sessions.get(game),hooks=[];let hookApi,socket;
+ delegateTreatment??=createMedicNative({game,choose:args=>game.user.id===args.user.id?showNativeChoice(args):choose?.(args)});
+ if(!sessions.has(game))sessions.set(game,{actors:new SerialActions(),targets:new SerialActions()});
+ const queues=sessions.get(game),hooks=[],movementCards=new Map();let hookApi,socket,movementsIndexed=false;
+ const indexMovement=message=>{if(message?.id&&game.messages.get(message.id)===message&&own(message)?.status==='movement')movementCards.set(message.id,message);else if(message?.id)movementCards.delete(message.id);};
+ const restoreMovements=()=>{if(movementsIndexed)return;movementsIndexed=true;for(const message of values(game.messages))indexMovement(message);};
  const gm=()=>{if(!isActiveGM(game)||!game.user?.isGM)throw Error('医疗结算需要当前主GM。');};
- const save=async(m,changes)=>{gm();if(game.messages.get(m.id)!==m)throw Error('原始动作消息不存在。');await m.update({[`flags.${MODULE_ID}.medic`]:{...own(m),...changes}});gm();};
- function validate(ctx){
-  gm();const {actor,item,message,user,action}=ctx;
+ const save=async(m,changes)=>{gm();if(game.messages.get(m.id)!==m)throw Error('原始动作消息不存在。');await m.update({[`flags.${MODULE_ID}.medic`]:{...own(m),...changes}});indexMovement(m);gm();};
+ function validate(ctx,{authority=true}={}){
+  if(authority)gm();const {actor,item,message,user,action}=ctx;
   if(!user?.active||game.users.get(user.id)!==user||!actor?.testUserPermission?.(user,'OWNER'))throw Error('需要原使用者的角色所有权。');
   if(actor.items.get(item?.id)!==item||item.actor!==actor||medicAction(item)!==action)throw Error('医疗专长来源已变化。');
   if(!message?.id||game.messages.get(message.id)!==message||author(message)!==user.id||message.speaker?.actor!==actor.id||message.flags?.pf2e?.origin?.uuid!==item.uuid||message.flags?.[MODULE_ID]?.usageInput?.actualUse!==true||typeof input(message)?.nonce!=='string')throw Error('需要原始专长的真实Use回执。');
@@ -63,6 +66,35 @@ export function createMedicActions({game,fromUuid=globalThis.fromUuid,choose,req
   await stat.clone({check:{domains:['counteract-check']}}).check.roll({item,token:healer,dc:{value:dc,visible:false,slug:'medicine'},extraRollOptions:['action:treat-condition',`${MODULE_ID}:medic:${nonce}`],action:'treat-condition',traits:['healing','manipulate'],target:pinnedMedicTarget(target),createMessage:true,skipDialog:false,messageMode:'blind',callback:(roll,_outcome,message)=>{receipt={roll,message};}});
   return receipt;
  }
+ const owner=createMedicOwner({game,fromUuid,context:async message=>{
+  const state=own(message),item=await fromUuid(state.itemUuid);
+  return validate({actor:item?.actor,item,message,user:game.users.get(state.userId),action:medicAction(item)},{authority:false});
+ },execute:async ctx=>{
+  const {actor,message,healer,target,state}=ctx;
+  if(state.nativeKind==='treat-condition'){
+   if(!Number.isInteger(ctx.dc)||ctx.dc<1)throw Error('缺少GM提供的医疗来源DC。');
+   const receipt=await (rollCheck??nativeRoll)({...ctx,item:medicFeat(actor,'treatCondition'),nonce:state.nonce});
+   if(receipt&&rollData(receipt.roll)!==rollData(receipt.message?.rolls?.[0]))throw Error('原生医疗回调与保存的骰子不一致。');
+   return receipt?{status:'delegated',checkId:receipt.message?.id}:{status:'cancelled'};
+  }
+  return delegateTreatment({...ctx,branch:state.branch,continuation:{actorUuid:actor.uuid,cardId:message.id,nonce:state.nonce}});
+ }});
+ function validateDelegated(ctx,target,result){
+  const state=own(ctx.message),check=result.check,branch=state.branch,workbench=branch==='battle-medicine',key=workbench?'medicWorkbench':'medicNative',proof=check?.flags?.[MODULE_ID]?.[key];
+  const matches=p=>p?.nonce===state.nonce&&p.cardId===ctx.message.id&&p.actorUuid===ctx.actor.uuid&&p.targetUuid===target.uuid&&p.branch===branch;
+  if(!check?.id||game.messages.get(check.id)!==check||author(check)!==ctx.user.id||check.speaker?.actor!==ctx.actor.id||!matches(proof)||check.flags?.[MODULE_ID]?.medicReceipt)throw Error('医疗原生结果不属于本次操作者和患者。');
+  const pf=check.flags?.pf2e?.context,roll=check.rolls?.[0],degree=roll?.options?.degreeOfSuccess;
+  if(!Number.isFinite(roll?.total)||check.rolls.length!==1)throw Error('医疗原生骰子尚未完成。');
+  if(!workbench||proof.checkKind!=='assurance'){
+   const marker=`${MODULE_ID}:medic-${workbench?'workbench':'native'}:${state.nonce}`;
+   const hasOutcome=workbench||pf?.dc!=null||degree!=null||pf?.outcome!=null;
+   if(pf?.type!=='skill-check'||pf.isReroll||!pf.options?.includes(marker)||pf.target?.actor!==target.actor.uuid||pf.target?.token!==target.uuid||hasOutcome&&(!Number.isInteger(degree)||degree<0||degree>3||pf.outcome!==['criticalFailure','failure','success','criticalSuccess'][degree]))throw Error('医疗检定来源、目标或成功度不匹配。');
+  }
+  if(workbench){
+   const card=result.resultMessage,receipt=card?.flags?.treat_wounds_battle_medicine;
+   if(!card?.id||game.messages.get(card.id)!==card||author(card)!==ctx.user.id||card.speaker?.actor!==ctx.actor.id||!matches(card.flags?.[MODULE_ID]?.medicWorkbench)||card.flags[MODULE_ID].medicWorkbench.checkId!==check.id||receipt?.id!==target.id||receipt.healerId!==ctx.actor.id||!Number.isInteger(receipt.dos)||receipt.dos<0||receipt.dos>3||proof.checkKind!=='assurance'&&receipt.dos!==degree)throw Error('Workbench结果卡与原生医疗检定不匹配。');
+  }
+ }
  async function treat(ctx,healer,target){
   const {actor,message,user}=ctx;
   const options=values(target.actor.items).filter(c=>c.type==='condition'&&['clumsy','enfeebled','sickened'].includes(c.slug)&&conditionValue(c)>0&&!conditionBound(c)).map(c=>({value:c.id,label:`${c.name??c.slug} ${conditionValue(c)}`}));
@@ -71,13 +103,13 @@ export function createMedicActions({game,fromUuid=globalThis.fromUuid,choose,req
    validate(ctx);const condition=target.actor.items.get(selected);const before=condition&&conditionSnapshot(condition);
    const facts=await requestFacts({actor,target,condition,user,message});if(!facts){await save(message,{status:'cancelled'});return '已取消处理状态。';}
    const {dc}=validateTreatment({actor,condition,distance:legal(actor,healer,target),facts});
-   await save(message,{status:'rolling'});
+   await save(message,{status:'rolling',nativeKind:'treat-condition',healerUuid:healer.uuid,targetUuid:target.uuid});
    // Counteract's generic global dialog fields are not used; the native Check API receives exact local DC.
-   const receipt=await queues.checks.run('medicine',()=> (rollCheck??nativeRoll)({...ctx,item:medicFeat(actor,'treatCondition'),healer,target,nonce:own(message).nonce,dc}));
+   const receipt=await owner.run(ctx,{dc});
    validate(ctx);legal(actor,healer,target);
-   if(!receipt){await save(message,{status:'cancelled'});return '已取消原生检定；已承诺动作不回退。';}
-   const check=receipt.message,pf=check?.flags?.pf2e?.context,degree=receipt.roll?.options?.degreeOfSuccess;
-   if(!check?.id||game.messages.get(check.id)!==check||check.speaker?.actor!==actor.id||pf?.type!=='skill-check'||pf.isReroll||!pf.options?.includes(`${MODULE_ID}:medic:${own(message).nonce}`)||pf.dc?.value!==dc||pf.target?.actor!==target.actor.uuid||pf.target?.token!==target.uuid||rollData(check.rolls?.[0])!==rollData(receipt.roll)||!Number.isFinite(receipt.roll.total)||!Number.isInteger(degree)||degree<0||degree>3||pf.outcome!==['criticalFailure','failure','success','criticalSuccess'][degree]||check.flags?.[MODULE_ID]?.medicReceipt)throw Error('原生医疗检定回执不匹配或已经使用。');
+   if(receipt.status==='cancelled'){await save(message,{status:'cancelled'});return '已取消原生检定；已承诺动作不回退。';}
+   const check=receipt.check,roll=check?.rolls?.[0],pf=check?.flags?.pf2e?.context,degree=roll?.options?.degreeOfSuccess;
+   if(!check?.id||game.messages.get(check.id)!==check||author(check)!==user.id||check.speaker?.actor!==actor.id||pf?.type!=='skill-check'||pf.isReroll||!pf.options?.includes(`${MODULE_ID}:medic:${own(message).nonce}`)||pf.dc?.value!==dc||pf.target?.actor!==target.actor.uuid||pf.target?.token!==target.uuid||check.rolls.length!==1||!Number.isFinite(roll?.total)||!Number.isInteger(degree)||degree<0||degree>3||pf.outcome!==['criticalFailure','failure','success','criticalSuccess'][degree]||check.flags?.[MODULE_ID]?.medicReceipt)throw Error('原生医疗检定回执不匹配或已经使用。');
    const current=target.actor.items.get(selected);
    if(current!==condition||conditionSnapshot(current)!==before)throw Error('目标状态或来源在检定期间已变化，未覆盖新状态。');
    validateTreatment({actor,condition:current,distance:legal(actor,healer,target),facts});
@@ -94,53 +126,44 @@ export function createMedicActions({game,fromUuid=globalThis.fromUuid,choose,req
   const {actor,message,user}=ctx,target=await targetFor(ctx),healer=await healerToken(actor,message);
   if(ctx.action==='medic:treat-condition'){
    legal(actor,healer,target);await commit(ctx,2,false);
-   try{return await treat(ctx,healer,target);}catch(error){await save(message,{status:'failed',result:error.message});throw error;}
+   try{return await treat(ctx,healer,target);}catch(error){await save(message,{status:own(message).nativeKind?'uncertain':'failed',result:error.message});throw error;}
   }
   const branch=await pick(actor,user,'医师探访：选择本次医疗动作',visitationBranches(actor));if(!branch)return '已取消医师探访。';
   const cost=visitationBranches(actor).find(b=>b.value===branch).cost;
-  await commit(ctx,cost,true);await save(message,{status:'movement',branch,healerUuid:healer.uuid,targetUuid:target.uuid,movementIds:[],movementCost:0,result:'请用原生地面行走移动，再点击本卡继续。取消治疗不会退还华丽动作。'});
-  return '医师探访已承诺；请行走后在本卡继续。';
+  await commit(ctx,cost,true);await save(message,{status:'movement',branch,healerUuid:healer.uuid,targetUuid:target.uuid,result:'请自行完成本次原生行走，再在本卡确认“移动完成”。确认时核对原患者的距离与工具；取消治疗不会退还华丽动作。'});
+  return '医师探访已承诺；请完成行走后在本卡确认。';
  });}
  async function continuationContext(message,user){const state=own(message);if(!state||state.userId!==user?.id)throw Error('只能由原使用者继续医疗。');const item=await fromUuid(state.itemUuid);return validate({actor:item?.actor,item,message,user,action:medicAction(item)});}
- async function continueUsage(message,user,{cancel=false}={}){
+ async function continueUsage(message,user,{cancel=false,movementConfirmed=false}={}){
   const ctx=await continuationContext(message,user);
   return queues.actors.run(ctx.actor.uuid,async()=>{
    validate(ctx);const state=own(message);if(terminal(state.status))return state.result;
    if(state.status!=='movement')throw Error('此活动正在处理或不可继续。');
    if(turn(game)!==state.turn){await save(message,{status:'cancelled',result:'回合已改变，后续医疗已过期。'});throw Error('医疗延续已过期。');}
    if(cancel){await save(message,{status:'cancelled',result:'已取消后续医疗；已承诺动作与华丽不回退。'});return;}
-   requireTurn(ctx.actor);if(!state.movementIds?.length||state.invalidMovement)throw Error('需要本活动原使用者的有效原生Stride移动回执。');
+   requireTurn(ctx.actor);if(movementConfirmed!==true)throw Error('请由原使用者在本卡确认已完成本次行走。');
    const healer=await fromUuid(state.healerUuid),target=await fromUuid(state.targetUuid);if(healer?.actor!==ctx.actor||!target?.actor)throw Error('原始医疗Token不存在。');
    legal(ctx.actor,healer,target);if(!visitationBranches(ctx.actor).some(b=>b.value===state.branch))throw Error('医疗分支资格已变化。');
-   await save(message,{status:'treatment'});
+   await save(message,{status:'treatment',nativeKind:state.branch,movementConfirmation:{userId:user.id,turn:state.turn,healerUuid:healer.uuid,targetUuid:target.uuid}});
    try{
     if(state.branch==='treat-condition')return await treat(ctx,healer,target);
-    if(!delegateTreatment)throw Error('缺少原生医疗分支适配器。');
-    const result=await delegateTreatment({...ctx,healer,target,branch:state.branch,continuation:{actorUuid:ctx.actor.uuid,cardId:message.id,nonce:state.nonce},validate:()=>{validate(ctx);if(turn(game)!==state.turn)throw Error('医疗延续已过期。');legal(ctx.actor,healer,target);}});
+    const result=await owner.run(ctx);validate(ctx);
+    if(result.status!=='cancelled'){validateDelegated(ctx,target,result);await result.check.update({[`flags.${MODULE_ID}.medicReceipt`]:{messageId:message.id,nonce:state.nonce}});}
     await save(message,{status:result?.status==='cancelled'?'cancelled':'done',result:result?.text??'已调用原生医疗；其结果与免疫由原医疗提供者处理。'});return own(message).result;
-   }catch(error){await save(message,{status:'failed',result:error.message});throw error;}
-  });
- }
- async function recordMovement(token,movement,_operation,user){
-  if(!isActiveGM(game))return;
-  return queues.actors.run(token.actor?.uuid,async()=>{
-   for(const message of values(game.messages)){
-    const state=own(message);if(state?.status!=='movement'||state.healerUuid!==token.uuid||state.userId!==user?.id||state.turn!==turn(game)||state.movementIds.includes(movement.id))continue;
-    const cost=movement.passed?.cost,waypoints=movement.passed?.waypoints??[],speed=token.actor.system?.movement?.speeds?.land?.value;
-    const valid=typeof movement.id==='string'&&waypoints.length>0&&waypoints.every(p=>p.action==='walk')&&Number.isFinite(cost)&&cost>0&&Number.isFinite(speed)&&state.movementCost+cost<=speed;
-    await save(message,{movementIds:valid?[...state.movementIds,movement.id]:state.movementIds,movementCost:valid?state.movementCost+cost:state.movementCost,invalidMovement:state.invalidMovement||!valid});
-   }
+   }catch(error){await save(message,{status:own(message).nativeKind?'uncertain':'failed',result:error.message});throw error;}
   });
  }
  function captureUsage(item){return medicAction(item)?{medicInput:{nonce:uid()}}:null;}
- function renderChatMessage(message,html){const state=own(message),el=html?.[0]??html;if(!state||!el?.querySelector)return;el.querySelector('.medic-activity')?.remove();const glyph=el.querySelector('.action-glyph');if(glyph)glyph.textContent=state.cost===2?'D':'A';const can=game.user.id===state.userId&&state.status==='movement';const panel=document.createElement('div');panel.className='medic-activity';panel.innerHTML=`<p>${esc(state.result??state.status)} · ${state.cost}动作</p>${can?'<button type="button" data-medic="continue">行走后继续医疗</button><button type="button" data-medic="cancel">取消后续医疗</button>':''}`;panel.addEventListener('click',event=>{const action=event.target?.closest?.('[data-medic]')?.dataset.medic;if(!action)return;const args={messageId:message.id,nonce:state.nonce,userId:game.user.id,cancel:action==='cancel'};(isActiveGM(game)?continueUsage(message,game.user,args):socket?.executeAsGM?.('continueMedic',args))?.catch(onError);});(el.querySelector('.message-content')??el).append(panel);}
- async function maintain(){if(!isActiveGM(game))return;for(const m of values(game.messages)){const s=own(m);if(s?.status==='movement'&&s.turn!==turn(game))await save(m,{status:'cancelled',result:'回合已改变，后续医疗已过期。'});}}
+ function renderChatMessage(message,html){const state=own(message),el=html?.[0]??html;if(!state||!el?.querySelector)return;el.querySelector('.medic-activity')?.remove();const glyph=el.querySelector('.action-glyph');if(glyph)glyph.textContent=state.cost===2?'D':'A';const can=game.user.id===state.userId&&state.status==='movement';const panel=document.createElement('div');panel.className='medic-activity';panel.innerHTML=`<p>${esc(state.result??state.status)} · ${state.cost}动作</p>${can?'<button type="button" data-medic="continue">移动完成，继续医疗</button><button type="button" data-medic="cancel">取消后续医疗</button>':''}`;panel.addEventListener('click',event=>{const action=event.target?.closest?.('[data-medic]')?.dataset.medic;if(!action)return;const args={messageId:message.id,nonce:state.nonce,userId:game.user.id,cancel:action==='cancel',movementConfirmed:action==='continue'};(isActiveGM(game)?continueUsage(message,game.user,args):socket?.executeAsGM?.('continueMedic',args))?.catch(onError);});(el.querySelector('.message-content')??el).append(panel);}
+ async function maintain(){if(!isActiveGM(game))return;restoreMovements();for(const m of [...movementCards.values()]){if(game.messages.get(m.id)!==m||own(m)?.status!=='movement'){movementCards.delete(m.id);continue;}if(own(m).turn!==turn(game))await save(m,{status:'cancelled',result:'回合已改变，后续医疗已过期。'});}}
  function register({Hooks=globalThis.Hooks,socket:providedSocket}={}){
   if(hookApi)return;hookApi=Hooks;socket=providedSocket??globalThis.socketlib?.registerModule?.(MODULE_ID);
+  owner.register({Hooks,socket});
   socket?.register?.('continueMedic',async function(args){gm();const message=game.messages.get(args.messageId),user=game.users.get(this.socketdata?.userId);if(own(message)?.nonce!==args.nonce)throw Error('原卡医疗回执不匹配。');return continueUsage(message,user,args);});
   const observeFlourish=message=>{const opts=message.flags?.pf2e?.origin?.rollOptions??[];if(turn(game)&&opts.includes('origin:action:slug:use-action')&&opts.includes('origin:item:trait:flourish'))message.updateSource({[`flags.${MODULE_ID}.medicObservedFlourishTurn`]:turn(game)});};
-  for(const [event,fn]of [['preCreateChatMessage',observeFlourish],['moveToken',(...args)=>recordMovement(...args).catch(onError)],['renderChatMessageHTML',renderChatMessage],['updateCombat',()=>maintain().catch(onError)]])hooks.push([event,Hooks.on(event,fn)]);
+  for(const [event,fn]of [['preCreateChatMessage',observeFlourish],['createChatMessage',indexMovement],['updateChatMessage',indexMovement],['deleteChatMessage',message=>movementCards.delete(message.id)],['renderChatMessageHTML',renderChatMessage],['updateCombat',()=>maintain().catch(onError)]])hooks.push([event,Hooks.on(event,fn)]);
+  if(isActiveGM(game))restoreMovements();
   return ()=>{for(const [event,id]of hooks)Hooks.off(event,id);};
  }
- return {resolveAction:medicAction,captureUsage,executeUsage,continueUsage,recordMovement,register,renderChatMessage,maintain};
+ return {resolveAction:medicAction,captureUsage,executeUsage,continueUsage,register,renderChatMessage,maintain};
 }

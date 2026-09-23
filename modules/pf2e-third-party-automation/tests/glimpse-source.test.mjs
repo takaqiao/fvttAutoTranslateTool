@@ -1,5 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+test('reaction candidates inspect actual combatants without walking unrelated scene actors',async()=>{
+ const f=fixture();
+ f.scene.tokens.set('unrelated',{id:'unrelated',uuid:'Scene.scene.Token.unrelated',get actor(){throw Error('unrelated scene actor inspected')}});
+ const context=await resolveGlimpseSource({game:f.game,fromUuid:f.fromUuid,actor:f.ally,params:f.params,source:f.source});
+ assert.equal(context.verified,true);assert.equal(glimpseCandidates(context,f.game).length,1);
+});
 import {GLIMPSE_SOURCES as S,resolveGlimpseSource,validateGlimpseSource,glimpseCandidates,glimpseEncounter} from '../scripts/glimpse-source.mjs';
 
 import {fixture} from './glimpse-fixture.mjs';

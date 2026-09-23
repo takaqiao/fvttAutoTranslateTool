@@ -5,8 +5,17 @@ import {renderMetapowerCard} from './card.mjs';
 import {installActionEntrances,wrapSheetHandlers,createToolbeltEntrance,patchHudController,installLegacyActionBoundary,ensureNativeUseControls} from './entrances.mjs';
 import {convertSiphonRoll,applyNativeOutcomeInPlace} from './damage.mjs';
 import {showNativeChoice} from '../native-context.mjs';
+import {createActorStateIndex} from '../actor-state-index.mjs';
+import {ELEMENTAL_POWERS_SOURCE} from '../eldamon-voltage.mjs';
 const values=c=>Array.from(c?.values?.()??c??[]);
 const prefix=`${MODULE_ID}:metapower:`;
+/** Ordinary native actions need no transaction while the metapower window is idle.
+ * Read live flags: cloning the growing receipt ledger is itself unnecessary here. */
+export function needsMetapowerObservation({actor,item},supportsOriginalUse=()=>false){
+ const state=actor?.flags?.[MODULE_ID]?.metapower;
+ return !!(metapowerKind(item)||powerProfile(item)||sourceUuid(item)===ELEMENTAL_POWERS_SOURCE||item&&supportsOriginalUse(item)||state?.armed||state?.pending||
+  Object.values(state?.receipts??{}).some(receipt=>receipt.delivery&&receipt.delivery.status!=='done'));
+}
 export function adjustMetapowerCheckContext(snapshot,context){
  if(context.type!=='saving-throw'||snapshot.saveDowngrade!==1)return context;
  return {...context,dosAdjustments:[...(context.dosAdjustments??[]),{adjustments:{all:{label:'Retributive Shock · Discharge',amount:-1}}}]};
@@ -21,6 +30,7 @@ export function preserveMetapowerOnAlter(original,result){
 
 export function createMetapowerProvider({game,fromUuid,onError=console.error,selectChoice=showNativeChoice,onCommittedChannel=async()=>{},beforeChannel,validateSelection,supportsOriginalUse=()=>false,interceptDamageMessage=(_roll,data,options,native)=>native(data,options)}){
  const ledger=createMetapowerLedger({game,fromUuid,validateSelection}),deliveries=new Map();let socket;
+ const activeActors=createActorStateIndex({game,matches:actor=>{const state=actor.flags?.[MODULE_ID]?.metapower;return !!(state?.armed||state?.pending||Object.values(state?.receipts??{}).some(r=>r.delivery&&r.delivery.status!=='done'))}});
  const eligible=actor=>actor?.type==='character'&&values(actor.items).some(item=>metapowerKind(item));
  const request=async(method,payload)=>{
   if(!socket||!game.users.activeGM)throw Error('Metapower automation requires an active GM and socketlib.');
@@ -73,7 +83,7 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
   return selection;
  }
  const observer=createMetapowerObserver({request,select,captureInput:()=>({targetUuids:values(game.user.targets).map(t=>t.document?.uuid??t.uuid).filter(Boolean)}),onError});
- const observe=(context,native)=>eligible(context.actor)?observer.observe(context,native):native();
+ const observe=(context,native)=>eligible(context.actor)&&needsMetapowerObservation(context,supportsOriginalUse)?observer.observe(context,native):native();
  async function validateDamageProof(proof){
   const card=game.messages.get(proof?.cardId),actor=await fromUuid(proof?.actorUuid),receipt=actor?.flags?.[MODULE_ID]?.metapower?.receipts?.[proof?.nonce];
   if(!card||!receipt||receipt.status!=='committed'||receipt.messageUuid!==card.uuid||card.flags?.[MODULE_ID]?.metapowerUse?.nonce!==proof.nonce||receipt.snapshot?.itemUuid!==card.flags?.pf2e?.origin?.uuid)throw Error('Metapower damage source/card binding is invalid.');
@@ -98,11 +108,11 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
   return wrapped(check,adjustMetapowerCheckContext(snapshot,context),...args);
  }
  function register({Hooks,libWrapper,socket:api}){
-  socket=api;
+  socket=api;activeActors.register(Hooks);
   for(const method of ['begin','start','finish','clear','expire','reconcile'])socket.register(`metapower:${method}`,async function(payload){try{const result=await ledger[method](payload,game.users.get(this.socketdata.userId));return {ok:true,value:method==='finish'&&result?.delivery?await deliverCommitted({actorUuid:payload.actorUuid,nonce:result.nonce}):result}}catch(error){return {ok:false,error:error.message}}});
   socket.register('metapower:deliver',async function(payload){try{const actor=await fromUuid(payload.actorUuid),user=game.users.get(this.socketdata.userId);if(!actor?.testUserPermission(user,'OWNER'))throw Error('Actor owner permission is required.');return {ok:true,value:await deliverCommitted(payload)}}catch(error){return {ok:false,error:error.message}}});
   socket.register('metapower:ack-delivery',async function(payload){try{const user=game.users.get(this.socketdata.userId);if(user!==game.users.activeGM||payload.confirmation!=='gm-manual-effects-settled'||deliveries.has(`${payload.actorUuid}:${payload.nonce}`))throw Error('Only the active GM may acknowledge manually settled follow-up after automatic delivery stops.');return {ok:true,value:await ledger.delivery({...payload,status:'done'},user)}}catch(error){return {ok:false,error:error.message}}});
-  const recoverDeliveries=()=>{if(game.user?.id!==game.users.activeGM?.id)return;const actors=[...new Map([...values(game.actors),...values(game.scenes).flatMap(s=>values(s.tokens).map(t=>t.actor))].filter(Boolean).map(a=>[a.uuid,a])).values()];for(const actor of actors)for(const r of Object.values(ledgerState(actor).receipts))if(r.delivery&&r.delivery.status!=='done')deliverCommitted({actorUuid:actor.uuid,nonce:r.nonce}).catch(onError)};
+  const recoverDeliveries=()=>{if(game.user?.id!==game.users.activeGM?.id)return;for(const actor of activeActors.values())for(const r of Object.values(actor.flags?.[MODULE_ID]?.metapower?.receipts??{}))if(r.delivery&&r.delivery.status!=='done')deliverCommitted({actorUuid:actor.uuid,nonce:r.nonce}).catch(onError)};
   Hooks.on('userConnected',recoverDeliveries);Hooks.on('updateUser',recoverDeliveries);Promise.resolve().then(recoverDeliveries);
   const wrap=(path,fn,type='WRAPPER')=>libWrapper.register(MODULE_ID,path,fn,type);
   for(const actor of values(game.actors))if(eligible(actor))maintain(actor).catch(onError);
@@ -200,7 +210,7 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
    if(receipt?.messageUuid!==message.uuid||receipt.status!=='committed')return;
    renderMetapowerCard(message,html,{receipt,onClear:r=>request('clear',{actorUuid:r.actorUuid,activationNonce:r.nonce}),onRetryDelivery:r=>request('deliver',{actorUuid:r.actorUuid,nonce:r.nonce}),onError});
   });
-  const expire=()=>{if(game.user?.id===game.users.activeGM?.id)for(const actor of values(game.actors))if(eligible(actor)&&ledgerState(actor).armed)ledger.expire({actorUuid:actor.uuid},game.user).catch(onError)};
+  const expire=()=>{if(game.user?.id===game.users.activeGM?.id)for(const actor of activeActors.values())if(actor.flags?.[MODULE_ID]?.metapower?.armed)ledger.expire({actorUuid:actor.uuid},game.user).catch(onError)};
   Hooks.on('updateCombat',expire);Hooks.on('deleteCombat',expire);
  }
  function wrapStrike(strike,actor){

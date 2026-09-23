@@ -160,7 +160,7 @@ export function createGlimpseProvider({game,reactionRestriction,fromUuid=globalT
   const leader=game.users.activeGM?.id;if(!socket||!leader)throw Error('救赎瞥视需要在线主GM。');const r=await socket.executeAsUser(`glimpse:${method}`,leader,payload);
   if(game.users.activeGM?.id!==leader||!r?.ok)throw Error(r?.error??'救赎瞥视结算不确定。');return r.value;
  }
- function potential(params){const token=params.token?.document??params.token;return values(token?.parent?.tokens).some(t=>t.actor?.uuid!==token.actor?.uuid&&handlesActor(t.actor)&&t.auras?.get('champions-aura')?.containsToken?.(token)===true)}
+ function potential(params){const token=params.token?.document??params.token;let combat;try{combat=glimpseEncounter(token,game).combat}catch{return false}return combat.turns.some(c=>{const t=c.token;return t?.parent===token.parent&&t.actor?.uuid!==token.actor?.uuid&&handlesActor(t.actor)&&t.auras?.get('champions-aura')?.containsToken?.(token)===true})}
  async function beforeDamage(actor,params){
   if(!ready()||!potential(params)||params.final||params.skipIWR||typeof params.damage==='number'&&params.damage<=0||params.damage?.total<=0)return {params};
   const source=getRollContext?.(params.damage),binding=await resolveGlimpseSource({game,fromUuid,actor,params,source});

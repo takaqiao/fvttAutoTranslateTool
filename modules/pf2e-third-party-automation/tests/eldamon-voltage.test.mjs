@@ -1,5 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {existsSync,readFileSync} from 'node:fs';
+import vm from 'node:vm';
+import {runDamagePipeline} from '../scripts/native-context.mjs';
 let api={};try{api=await import('../scripts/eldamon-voltage.mjs')}catch(e){if(e.code!=='ERR_MODULE_NOT_FOUND')throw e}
 const ID='pf2e-third-party-automation',HV='Compendium.battlezoo-eldamon-pf2e.powers.Item.9bElF2uVf5FCJtb9';
 function fixture(){
@@ -130,69 +133,211 @@ test('interrupted Refresh resumes original per-item writes without refilling a s
 });
 
 let executorApi={};try{executorApi=await import('../scripts/eldamon-voltage-executor.mjs')}catch(e){if(e.code!=='ERR_MODULE_NOT_FOUND')throw e}
-function executorFixture(outcome,{siphon=false,disruptive=false,traits=[]}={}){
- const f=fixture(),applications=[],messages=[];f.actor.getStatistic=()=>({dc:{value:22}});
+function executorFixture(outcome='failure',{siphon=false,traits=[]}={}){
+ const f=fixture(),messages=[],saves=[],applications=[],hooks=new Map(),routes=new Map(),rollContexts=new WeakMap();
+ const targetUser={id:'target-owner',active:true};f.game.users.set(targetUser.id,targetUser);f.actor.getStatistic=()=>({dc:{value:22}});
+ f.target.actor.testUserPermission=u=>u===f.gm||u===targetUser;f.target.actor.traits=new Set(traits);
+ f.target.actor.getSelfRollOptions=()=>['self:level:5'];f.target.actor.getContextualClone=()=>({...f.target.actor,async applyDamage(params){applications.push(params);await provider.beforeDamage(this,params);return this}});
  f.item.getOriginData=()=>({actor:f.actor.uuid,uuid:f.item.uuid,type:'feat',rollOptions:[]});
- f.target.actor.getSelfRollOptions=()=>['self:level:5'];f.target.actor.traits=new Set(traits);
- f.target.actor.getContextualClone=(options,effects)=>({...f.target.actor,async applyDamage(params){applications.push({params,options,effects,claimed:f.actor.flags[ID].voltage.activations.channel.status});await provider.beforeDamage(this,params);return this}});
- f.target.actor.getStatistic=()=>({check:{async roll(params){if(outcome===null)return null;const card={id:'save',uuid:'ChatMessage.save',speaker:{actor:'b',scene:'scene',token:'target'},flags:{pf2e:{origin:{actor:f.actor.uuid,uuid:f.item.uuid},context:{type:'saving-throw',outcome,options:params.extraRollOptions}}}};f.game.messages.set(card.id,card);f.docs.set(card.uuid,card);params.callback({_evaluated:true},outcome,card);return {};}}});
+ const fire=(name,...args)=>Promise.all((hooks.get(name)??[]).map(fn=>fn(...args)));
+ const publish=async data=>{const m={...data,author:f.game.user,timestamp:300,isCheckRoll:data.flags?.pf2e?.context?.type==='saving-throw',isDamageRoll:data.flags?.pf2e?.context?.type==='damage-roll',item:f.item,actor:f.actor};f.game.messages.set(m.id,m);f.docs.set(m.uuid,m);await fire('createChatMessage',m,{},f.game.user.id);return m};
+ f.message.update=async data=>{for(const[k,v]of Object.entries(data)){if(k.startsWith('flags.' ))f.message.flags[ID][k.slice(('flags.'+ID+'.').length)]=v}};
+ f.target.actor.getStatistic=()=>({check:{async roll(params){saves.push({user:f.game.user,params});if(outcome===null)return null;const card=await publish({id:'save',uuid:'ChatMessage.save',speaker:{actor:'b',scene:'scene',token:'target'},rolls:[{_evaluated:true,total:18}],flags:{pf2e:{origin:{actor:f.actor.uuid,uuid:f.item.uuid},context:{type:'saving-throw',outcome,dc:params.dc,options:params.extraRollOptions}}}});params.callback(card.rolls[0],outcome,card);return card.rolls[0]}}});
  class DamageRoll {
   constructor(formula,_data={},options={}){this.formula=formula;this.options=options;this.total=21;this._evaluated=false;this.type='electricity'}
   async evaluate(){this._evaluated=true;return this}
-  alter(n){const r=new DamageRoll(this.formula,{},structuredClone(this.options));r.total=Math.floor(this.total*n);r._evaluated=true;r.type=this.type;return r}
-  async toMessage(data){const m={...data,id:'damage',uuid:'ChatMessage.damage',rolls:[this]};messages.push(m);f.game.messages.set(m.id,m);f.docs.set(m.uuid,m);return m}
+  alter(n,addend=0){const r=new DamageRoll(this.formula,{},{});r.total=Math.floor(this.total*n)+addend;r._evaluated=true;r.type=this.type;if(rollContexts.has(this))rollContexts.set(r,rollContexts.get(this));return r}
+  async toMessage(data){const m=await publish({...data,id:'damage',uuid:'ChatMessage.damage',rolls:[this]});messages.push(m);rollContexts.set(this,{messageId:m.id,rollIndex:0});return m}
  }
- if(siphon)f.receipt.snapshot={kind:'siphoning',siphon:{applies:true},level:5,itemUuid:f.item.uuid,actorUuid:f.actor.uuid,powerSourceUuid:HV,disruptive,associatedTraits:['electricity']};
- const provider=executorApi.createEldamonVoltageProvider({game:f.game,fromUuid:async uuid=>f.docs.get(uuid),DamageRoll,convertRoll:(roll,options)=>{assert.equal(options.rejectMixedPartitions,true);roll.type='untyped';return roll}});
- return {...f,provider,applications,messages};
+ if(siphon)f.receipt.snapshot={kind:'siphoning',siphon:{applies:true},level:5,itemUuid:f.item.uuid,actorUuid:f.actor.uuid,powerSourceUuid:HV,disruptive:true,associatedTraits:['electricity']};
+ const provider=executorApi.createEldamonVoltageProvider({game:f.game,fromUuid:async uuid=>f.docs.get(uuid),DamageRoll,getRollContext:roll=>rollContexts.get(roll),convertRoll:(roll,options)=>{assert.equal(options.rejectMixedPartitions,true);roll.type='untyped';return roll}});
+ const socket={register:(name,fn)=>routes.set(name,fn),async executeAsUser(name,_gm,payload){const caller=f.game.user;f.game.user=f.gm;try{return await routes.get(name).call({socketdata:{userId:caller.id}},payload)}finally{f.game.user=caller}}};
+ provider.register({socket,Hooks:{on:(name,fn)=>hooks.set(name,[...hooks.get(name)??[],fn])}});
+ const activation=()=>f.actor.flags[ID].voltage.activations.channel;
+ const channel=()=>provider.onCommittedChannel({receipt:f.receipt,message:f.message,user:f.user});
+ const trigger=()=>provider.trigger({...f.payload,targetUuid:f.target.uuid,kind:'touch',confirmed:true},f.user);
+ const save=async()=>{f.game.user=targetUser;return provider.rollSave(activation())};
+ const damage=async()=>{f.game.user=f.user;return provider.rollDamage(activation())};
+ const apply=async({token=f.target,multiplier=1,nativeReceipt=true,nativeError=false}={})=>{
+  f.game.user=targetUser;const card=messages[0],params={damage:card.rolls[0].alter(multiplier,0),item:f.item,token,skipIWR:false,rollOptions:new Set(card.flags.pf2e.context.options),outcome:card.flags.pf2e.context.outcome};
+  const prepared=await provider.beforeDamage(token.actor,params),actual=prepared?.params??params;applications.push(actual);
+  if(nativeReceipt)await publish({id:'taken',uuid:'ChatMessage.taken',speaker:{actor:token.actor.id,scene:'scene',token:token.id},flags:{pf2e:{origin:f.item.getOriginData(),context:{type:'damage-taken',options:[...actual.rollOptions]},appliedDamage:actual.damage.total?{uuid:token.actor.uuid,isHealing:false,isReverted:false}:null}}});
+  await provider.afterDamage(prepared.receipt,{applied:!nativeError,uncertain:nativeError});return actual;
+ };
+ return {...f,provider,messages,saves,applications,hooks,routes,fire,activation,channel,trigger,save,damage,apply,targetUser,publish,DamageRoll};
 }
-test('basic Reflex executor preserves native damage API source, target and contextual options for every outcome',async()=>{
- assert.equal(typeof executorApi.createEldamonVoltageProvider,'function');
- for(const [outcome,total]of [['criticalSuccess',0],['success',10],['failure',21],['criticalFailure',42]]){
-  const f=executorFixture(outcome);await f.provider.ledger.channel(f.payload,f.user);
-  await f.provider.trigger({...f.payload,targetUuid:f.target.uuid,kind:'touch',confirmed:true},f.user);
-  assert.equal(f.applications.length,1);const {params,claimed}=f.applications[0];assert.equal(claimed,'claimed');assert.equal(params.damage.total,total);assert.equal(params.item,f.item);assert.equal(params.token,f.target);assert.equal(params.skipIWR,false);assert.equal(params.outcome,outcome);assert.equal(f.messages[0].speaker.actor,'a');assert.equal(f.messages[0].flags.pf2e.origin.uuid,f.item.uuid);assert.equal(f.actor.flags[ID].voltage.activations.channel.status,'done');
-  await assert.rejects(f.provider.beforeDamage(f.target.actor,params),/already|authorized|grant/i);
+
+test('an explicit owner trigger claims a response without opening saves, rolling damage or applying HP',async()=>{
+ const f=executorFixture();await f.channel();await f.trigger();
+ assert.equal(f.saves.length,0);assert.equal(f.messages.length,0);assert.equal(f.applications.length,0);
+ assert.equal(f.activation().status,'claimed');assert.equal(f.activation().native.phase,'awaiting-save');
+});
+
+test('ordinary native attack cards and token movement never trigger Voltage or rescan actor collections',async()=>{
+ const f=executorFixture();await f.channel();let reads=0;f.game.actors.values=()=>{reads++;throw Error('unexpected actor scan')};
+ await f.fire('createChatMessage',{flags:{pf2e:{context:{type:'attack-roll',outcome:'success',target:{actor:f.actor.uuid,token:f.origin.uuid}}}}});
+ await f.fire('updateToken',f.origin,{x:10,y:20});await f.fire('updateCombat',f.game.combat);
+ assert.equal(reads,0);assert.equal(f.activation().status,'armed');assert.equal(f.saves.length,0);
+});
+
+test('target owner rolls the native save; source owner separately publishes bound native damage before manual application',async()=>{
+ for(const[outcome,total]of [['criticalSuccess',0],['success',10],['failure',21],['criticalFailure',42]]){
+  const f=executorFixture(outcome);await f.channel();await f.trigger();await f.save();
+  assert.equal(f.saves[0].user,f.targetUser);assert.equal(f.messages.length,0);assert.equal(f.activation().native.phase,'awaiting-damage');
+  await f.damage();assert.equal(f.applications.length,0);assert.equal(f.activation().status,'claimed');assert.equal(f.activation().native.phase,'awaiting-application');
+  const card=f.messages[0];assert.equal(card.rolls[0].total,total);assert.equal(card.speaker.actor,'a');assert.equal(card.flags.pf2e.origin.uuid,f.item.uuid);
+  assert.deepEqual(card.flags['pf2e-toolbelt'].targetHelper.targets,[f.target.uuid]);assert.equal(card.flags['pf2e-toolbelt'].targetHelper.saveVariants,undefined);
+  assert.match(card.flavor,/全额/);const params=await f.apply();assert.equal(params.damage.total,total);assert.equal(params.skipIWR,false);
+  assert.equal(f.activation().status,'done');assert.equal(f.activation().result.receiptUuid,'ChatMessage.taken');
+  await assert.rejects(f.apply(),/consumed|settled|awaiting|claim/i);
  }
 });
-test('GM High Voltage card records the same explicit recipient as its HP application',async()=>{
- const f=executorFixture('failure');f.game.user.targets=new Set([{document:{uuid:'Scene.scene.Token.gm-current'}}]);
- await f.provider.ledger.channel(f.payload,f.user);
- await f.provider.trigger({...f.payload,targetUuid:f.target.uuid,kind:'touch',confirmed:true},f.user);
- assert.deepEqual(f.messages[0].flags['pf2e-toolbelt']?.targetHelper?.targets,['Scene.scene.Token.target']);
- assert.equal(f.applications[0].params.token,f.target);
-});
-test('Siphon delayed damage uses target traits for full versus half without duplicate metapower marker',async()=>{
- for(const [traits,want]of [[[],10],[['electricity'],21]]){
-  const f=executorFixture('failure',{siphon:true,disruptive:true,traits});await f.provider.ledger.channel(f.payload,f.user);await f.provider.trigger({...f.payload,targetUuid:f.target.uuid,kind:'touch',confirmed:true},f.user);
-  assert.equal(f.applications[0].params.damage.total,want);assert.equal(f.applications[0].params.damage.type,'untyped');assert.equal(f.applications[0].params.damage.options[ID].metapowerDamage,undefined);assert.equal(f.spent.system.frequency.value,0);
+
+test('Siphon converts native Voltage damage and applies its target multiplier once without refreshing',async()=>{
+ for(const[traits,total]of [[[],10],[['electricity'],21]]){
+  const f=executorFixture('failure',{siphon:true,traits});await f.channel();await f.trigger();await f.save();await f.damage();
+  assert.equal(f.messages[0].rolls[0].type,'untyped');assert.equal(f.messages[0].rolls[0].total,21);assert.equal(f.spent.system.frequency.value,0);
+  const params=await f.apply();assert.equal(params.damage.total,total);assert.equal(params.damage.options[ID]?.metapowerDamage,undefined);assert.equal(f.activation().status,'done');
  }
 });
-test('cancelled native child save consumes the claim without damage or a second trigger',async()=>{
- const f=executorFixture(null);await f.provider.ledger.channel(f.payload,f.user);await f.provider.trigger({...f.payload,targetUuid:f.target.uuid,kind:'touch',confirmed:true},f.user);
- assert.equal(f.applications.length,0);assert.equal(f.actor.flags[ID].voltage.activations.channel.status,'cancelled');assert.equal(await f.provider.trigger({...f.payload,targetUuid:f.target.uuid,kind:'touch',confirmed:true},f.user),null);
+
+test('owner and fixed target checks run before native actions or application claims',async()=>{
+ const f=executorFixture();await f.channel();await f.trigger();f.game.user=f.user;
+ await assert.rejects(f.provider.rollSave(f.activation()),/owner|permission/i);assert.equal(f.saves.length,0);
+ await f.save();f.game.user=f.targetUser;await assert.rejects(f.provider.rollDamage(f.activation()),/owner|permission/i);
+ await f.damage();await assert.rejects(f.apply({token:f.origin}),/target|bound|recipient/i);assert.equal(f.activation().native.phase,'awaiting-application');
+ await f.apply();
 });
-test('registration binds active-GM socket calls to their real requester and refreshes the original card after arming',async()=>{
- const f=executorFixture('success'),routes=new Map(),hooks=new Map(),updates=[];f.message.update=async data=>updates.push(data);
- const socket={register:(name,fn)=>routes.set(name,fn),async executeAsUser(name,_gm,payload){return routes.get(name).call({socketdata:{userId:f.user.id}},payload)}};
- f.provider.register({socket,Hooks:{on:(name,fn)=>hooks.set(name,fn)}});
- await f.provider.onCommittedChannel({receipt:f.receipt,message:f.message});assert.equal(f.actor.flags[ID].voltage.activations.channel.status,'armed');assert.ok(updates.some(u=>u[`flags.${ID}.voltageStatus`]==='armed'));
- const denied=await routes.get('voltage:trigger').call({socketdata:{userId:'stranger'}},{...f.payload,targetUuid:f.target.uuid,kind:'touch',confirmed:true});assert.equal(denied.ok,false);assert.equal(f.actor.flags[ID].voltage.activations.channel.status,'armed');
- assert.equal(typeof hooks.get('createChatMessage'),'function');assert.equal(typeof hooks.get('renderChatMessageHTML'),'function');assert.equal(typeof hooks.get('pf2e.startTurn'),'function');
+
+test('cancelled native save consumes the trigger and cannot be retried',async()=>{
+ const f=executorFixture(null);await f.channel();await f.trigger();await f.save();
+ assert.equal(f.activation().status,'cancelled');assert.equal(f.messages.length,0);f.game.user=f.gm;assert.equal(await f.trigger(),null);
+ await assert.rejects(f.save(),/consumed|claim|awaiting/i);
 });
-test('durable GM channel delivery preserves original player identity without an initiating client',async()=>{
- const f=executorFixture('success');
- await f.provider.onCommittedChannel({receipt:f.receipt,message:f.message,user:f.user});
- assert.equal(f.actor.flags[ID].voltage.activations.channel.userId,f.user.id);assert.equal(f.spent.system.frequency.value,1);
- f.spent.system.frequency.value=0;await f.provider.onCommittedChannel({receipt:f.receipt,message:f.message,user:f.user});assert.equal(f.spent.system.frequency.value,0);
+
+test('application without its native receipt stays uncertain and never replays HP',async()=>{
+ const f=executorFixture();await f.channel();await f.trigger();await f.save();await f.damage();await f.apply({nativeReceipt:false,nativeError:true});
+ assert.equal(f.activation().status,'uncertain');await assert.rejects(f.apply(),/consumed|claim|awaiting/i);assert.equal(f.applications.length,1);
 });
-test('damage card replay with only native context option is blocked even after native roll alteration loses private metadata',async()=>{
- const f=executorFixture('failure');await assert.rejects(f.provider.beforeDamage(f.target.actor,{damage:{options:{}},rollOptions:new Set([ID+':voltage:channel'])}),/authorized|grant/i);
+
+test('changed original save or damage source cannot authorize a native application',async()=>{
+ for(const mutate of [f=>f.docs.get('ChatMessage.save').flags.pf2e.context.outcome='criticalFailure',f=>f.messages[0].rolls[0].total=999,f=>f.actor.items.delete(f.item.id)]){
+  const f=executorFixture();await f.channel();await f.trigger();await f.save();await f.damage();mutate(f);
+  await assert.rejects(f.apply(),/changed|invalid|source|binding/i);assert.equal(f.applications.length,0);
+ }
 });
-test('source deletion during the native save consumes the trigger without applying damage',async()=>{
- const f=executorFixture('failure'),stat=f.target.actor.getStatistic();f.target.actor.getStatistic=()=>({check:{async roll(params){await stat.check.roll(params);f.actor.items.delete(f.item.id)}}});
- await f.provider.ledger.channel(f.payload,f.user);await assert.rejects(f.provider.trigger({...f.payload,targetUuid:f.target.uuid,kind:'touch',confirmed:true},f.user),/changed/i);assert.equal(f.applications.length,0);assert.equal(f.actor.flags[ID].voltage.activations.channel.status,'uncertain');
+
+test('legacy claimed and consumed Voltage records never acquire resumable native actions',async()=>{
+ for(const status of ['claimed','done','uncertain','cancelled']){
+  const f=executorFixture();await f.channel();await f.provider.ledger.claim({...f.payload,targetUuid:f.target.uuid,kind:'touch',confirmed:true},f.user);
+  f.actor.flags[ID].voltage.activations.channel.status=status;await assert.rejects(f.save(),/legacy|reconcil|consumed|claim/i);
+  assert.equal(f.saves.length,0);assert.equal(f.activation().status,status);
+ }
 });
+
+test('foreign rolls and voltage options without a real tracked damage card are rejected',async()=>{
+ const f=executorFixture();await f.channel();await f.trigger();await f.save();await f.damage();f.game.user=f.targetUser;
+ await assert.rejects(f.provider.beforeDamage(f.target.actor,{damage:{options:{},total:21},item:f.item,token:f.target,rollOptions:new Set(f.messages[0].flags.pf2e.context.options)}),/native|tracked|source|authorized/i);
+ assert.equal(f.activation().native.phase,'awaiting-application');
+});
+
+test('registration authenticates the socket requester while committed channel preserves original author and refresh once',async()=>{
+ const f=executorFixture();await f.channel();assert.equal(f.activation().userId,f.user.id);assert.equal(f.spent.system.frequency.value,1);
+ f.spent.system.frequency.value=0;await f.channel();assert.equal(f.spent.system.frequency.value,0);
+ const denied=await f.routes.get('voltage:trigger').call({socketdata:{userId:'stranger'}},{...f.payload,targetUuid:f.target.uuid,kind:'touch',confirmed:true});
+ assert.equal(denied.ok,false);assert.equal(f.activation().status,'armed');
+});
+
+test('the source owner can explicitly confirm an authentic native unarmed hit on the original card',async()=>{
+ const f=executorFixture();await f.channel();
+ const attack=await f.publish({id:'attack',uuid:'ChatMessage.attack',isCheckRoll:true,rolls:[{_evaluated:true}],timestamp:200,speaker:{scene:'scene',token:'target',actor:'b'},flags:{pf2e:{context:{type:'attack-roll',outcome:'success',target:{actor:f.actor.uuid,token:f.origin.uuid},options:['item:melee']}}}});
+ attack.isCheckRoll=true;attack.item={actor:f.target.actor,isMelee:true,system:{category:'unarmed'}};
+ await assert.rejects(f.provider.trigger({...f.payload,kind:'attack',attackUuid:attack.uuid},f.user),/confirm/i);
+ await f.provider.trigger({...f.payload,kind:'attack',attackUuid:attack.uuid,confirmed:true},f.user);
+ assert.equal(f.activation().native.phase,'awaiting-save');assert.equal(f.saves.length,0);
+});
+
+test('a changed original High Voltage card cannot claim a new native response',async()=>{
+ const f=executorFixture();await f.channel();f.message.flags[ID].metapowerUse.itemUuid='Actor.other.Item.copy';
+ await assert.rejects(f.trigger(),/original|binding|card/i);assert.equal(f.activation().status,'armed');
+});
+
+test('only the bound target owner sees the native save control on the original card',async()=>{
+ const f=executorFixture();await f.channel();await f.trigger();f.game.scenes=new Map([[f.origin.parent.id,f.origin.parent]]);
+ const render=user=>{f.game.user=user;const buttons=[],root={querySelector:()=>null,querySelectorAll:()=>[],append(){},ownerDocument:{createElement:tag=>({dataset:{},set textContent(text){this.text=text},append(node){if(tag==='div')buttons.push(node.text)},addEventListener(){}})}};f.provider.renderCard(f.message,root);return buttons};
+ assert.deepEqual(render(f.user),[]);assert.deepEqual(render(f.targetUser),['绑定目标：原生反射豁免']);assert.deepEqual(render(f.gm),['绑定目标：原生反射豁免']);
+});
+
+const nativePath=process.env.PF2E_NATIVE_BUNDLE??'';
+test('actual PF2e damage-card application keeps baked save scaling and settles the bound native receipt',{skip:!existsSync(nativePath)},async()=>{
+ const source=readFileSync(nativePath,'utf8'),start=source.indexOf('async function applyDamageFromMessage('),end=source.indexOf('\nasync function shiftAdjustDamage',start);
+ assert.ok(start>=0&&end>start,'Native damage-card boundary changed');
+ for(const[siphon,total]of [[false,10],[true,5]]){
+  const f=executorFixture('success',{siphon});await f.channel();await f.trigger();await f.save();await f.damage();f.game.user=f.targetUser;
+  f.game.user.getActiveTokens=()=>[f.target];f.item.isOfType=()=>false;
+  f.target.actor.getContextualClone=()=>({...f.target.actor,applyDamage:params=>runDamagePipeline({actor:f.target.actor,params,providers:[f.provider],apply:async actual=>{
+   f.applications.push(actual);await f.publish({id:'taken',uuid:'ChatMessage.taken',speaker:{actor:'b',scene:'scene',token:'target'},flags:{pf2e:{origin:f.item.getOriginData(),context:{type:'damage-taken',options:[...actual.rollOptions]},appliedDamage:{uuid:f.target.actor.uuid,isHealing:false,isReverted:false}}}});return f.target.actor;
+  }})});
+  const native=vm.runInNewContext('('+source.slice(start,end)+')',{game:f.game,ui:{chat:{element:{}}},htmlQuery:()=>null,cn:f.DamageRoll,CONFIG:{PF2E:{chatDamageButtonShieldToggle:false}},gt:tokens=>tokens,extractEphemeralEffects:async()=>[],toggleOffShieldBlock(){},ErrorPF2e:Error});
+  await native({message:f.messages[0],multiplier:1});
+  assert.equal(f.applications.length,1);assert.equal(f.applications[0].damage.total,total);assert.equal(f.applications[0].skipIWR,false);assert.equal(f.applications[0].item,f.item);assert.equal(f.activation().status,'done');
+  await assert.rejects(native({message:f.messages[0],multiplier:1}),/consumed|claim|awaiting/i);assert.equal(f.applications.length,1);
+ }
+});
+
+test('an error after the authentic native receipt settles once without replaying damage',async()=>{
+ const f=executorFixture();await f.channel();await f.trigger();await f.save();await f.damage();await f.apply({nativeError:true});
+ assert.equal(f.activation().status,'done');await assert.rejects(f.apply(),/consumed|claim|awaiting/i);assert.equal(f.applications.length,1);
+});
+
+test('a native application with a wrong-user or reverted receipt cannot settle the Voltage claim',async()=>{
+ for(const mutate of [m=>m.author={id:'stranger'},m=>m.flags.pf2e.appliedDamage.isReverted=true,m=>m.speaker.token='other']){
+  const f=executorFixture();await f.channel();await f.trigger();await f.save();await f.damage();f.game.user=f.gm;
+  const application=await f.provider.ledger.beginDamage({...f.payload,operationId:'native',damageUuid:'ChatMessage.damage',targetUuid:f.target.uuid,targetActorUuid:f.target.actor.uuid,rollIndex:0},f.targetUser);
+  const receipt={id:'taken',uuid:'ChatMessage.taken',author:f.targetUser,speaker:{actor:'b',scene:'scene',token:'target'},flags:{pf2e:{origin:f.item.getOriginData(),context:{type:'damage-taken',options:[api.voltageRollOption(application),api.VOLTAGE_APPLY_PREFIX+'native']},appliedDamage:{uuid:f.target.actor.uuid,isHealing:false,isReverted:false}}}};
+  mutate(receipt);f.game.messages.set(receipt.id,receipt);f.docs.set(receipt.uuid,receipt);
+  await assert.rejects(f.provider.ledger.finishDamage({...f.payload,operationId:'native',receiptUuid:receipt.uuid},f.targetUser),/authentic|receipt/i);assert.equal(f.activation().native.phase,'applying');
+  await assert.rejects(f.provider.ledger.beginDamage({...f.payload,operationId:'again',damageUuid:'ChatMessage.damage',targetUuid:f.target.uuid,targetActorUuid:f.target.actor.uuid,rollIndex:0},f.targetUser),/consumed|awaiting/i);
+ }
+});
+
+test('an owner can confirm the current kept native attack reroll without an automatic attack observer',async()=>{
+ const f=executorFixture();await f.channel();
+ const attack=await f.publish({id:'kept',uuid:'ChatMessage.kept',rolls:[{_evaluated:true}],speaker:{scene:'scene',token:'target',actor:'b'},flags:{pf2e:{context:{type:'attack-roll',isReroll:true,outcome:'success',target:{actor:f.actor.uuid,token:f.origin.uuid},options:['item:melee','check:reroll']}}}});
+ attack.isCheckRoll=true;attack.item={uuid:'Actor.b.Item.fist',actor:f.target.actor,isMelee:true,system:{category:'unarmed'}};
+ const claimed=await f.provider.trigger({...f.payload,kind:'attack',attackUuid:attack.uuid,confirmed:true},f.user);
+ assert.equal(claimed?.native.phase,'awaiting-save');assert.equal(f.saves.length,0);
+});
+
+test('the damage click binds the unique kept native save reroll after PF2e deletes the original save',async()=>{
+ const f=executorFixture();await f.channel();await f.trigger();await f.save();const prior=f.docs.get('ChatMessage.save');
+ f.game.messages.delete(prior.id);f.docs.delete(prior.uuid);
+ const kept=await f.publish({...prior,id:'save-kept',uuid:'ChatMessage.save-kept',flags:structuredClone(prior.flags),rolls:[{_evaluated:true,total:24}]});
+ kept.flags.pf2e.context.isReroll=true;kept.flags.pf2e.context.outcome='success';kept.flags.pf2e.context.options.push('check:reroll');
+ await f.damage();assert.equal(f.messages[0].rolls[0].total,10);assert.equal(f.activation().native.save.messageUuid,kept.uuid);
+ await f.apply();assert.equal(f.activation().result.saveUuid,kept.uuid);
+});
+
+test('the legacy manual settlement endpoint cannot mark new native claims done without a damage receipt',async()=>{
+ const f=executorFixture();await f.channel();await f.trigger();
+ await assert.rejects(f.provider.ledger.settle({...f.payload,status:'done'},f.gm),/native|receipt/i);assert.equal(f.activation().status,'claimed');
+});
+
+test('concurrent native save requests reserve only one owner interaction',async()=>{
+ const f=executorFixture();await f.channel();await f.trigger();
+ const results=await Promise.allSettled(['first','second'].map(operationId=>f.provider.ledger.beginSave({...f.payload,operationId},f.targetUser)));
+ assert.equal(results.filter(r=>r.status==='fulfilled').length,1);assert.equal(f.activation().native.phase,'rolling-save');
+ assert.equal(f.activation().native.save.id,'first');assert.equal(f.saves.length,0);
+});
+
+test('ambiguous copied save rerolls cannot determine a new damage amount',async()=>{
+ const f=executorFixture();await f.channel();await f.trigger();await f.save();const original=f.docs.get('ChatMessage.save');f.game.messages.delete(original.id);f.docs.delete(original.uuid);
+ for(const id of ['kept-one','kept-two']){
+  const message=await f.publish({...original,id,uuid:'ChatMessage.'+id,flags:structuredClone(original.flags)});message.flags.pf2e.context.isReroll=true;message.flags.pf2e.context.options.push('check:reroll');
+ }
+ await assert.rejects(f.damage(),/changed|reconcile/i);assert.equal(f.messages.length,0);assert.equal(f.activation().native.phase,'awaiting-damage');
+});
+
 test('a native failed attack rerolled to a hit keeps its original activation provenance and triggers once',async()=>{
  const f=fixture(),s=f.service();await s.channel(f.payload,f.user);
  const attack={isCheckRoll:true,rolls:[{_evaluated:true}],id:'miss',uuid:'ChatMessage.miss',timestamp:200,author:f.gm,speaker:{scene:'scene',token:'target',actor:'b'},item:{uuid:'Actor.b.Item.weapon',actor:f.target.actor,isMelee:true,type:'weapon',system:{}},flags:{pf2e:{context:{type:'attack-roll',outcome:'failure',target:{actor:f.actor.uuid,token:f.origin.uuid},options:[]}}},async update(data){this.flags.pf2e.context.options=data['flags.pf2e.context.options']}};

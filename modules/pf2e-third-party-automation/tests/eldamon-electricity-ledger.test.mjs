@@ -18,6 +18,12 @@ function anvilSave(f){
  const save={id:'save',uuid:'ChatMessage.save',isCheckRoll:true,rolls:[{_evaluated:true,total:10}],speaker:{actor:f.target.id,scene:'s',token:f.target.id},flags:{pf2e:{origin:{uuid:f.power.uuid},context:{type:'saving-throw',outcome:'failure',options:[`${ID}:metapower:channel:channel`]}}}};
  f.game.messages.set(save.id,save);f.docs.set(save.uuid,save);return save;
 }
+test('Anvil settles a bound native save target chosen after the original power card',async()=>{
+ const f=fixture(),save=anvilSave(f);f.receipt.selection.targetUuids=[];
+ await f.ledger().check(save);
+ assert.equal(Object.values(electricityState(f.target).pendingShocks).length,1);
+ await (await f.damage()).finish();assert.equal(electricityEffects(f.target,S.shocked).length,1);
+});
 test('pending Anvil survives Foundry dot expansion and is consumed once after native damage',async()=>{
  const f=fixture();useFoundryFlagUpdates(f.target);f.target.flags.unrelated={keep:true};const save=anvilSave(f);
  await f.ledger().check(save);
@@ -49,6 +55,22 @@ test('authentic confirmed zero releases an original area target, while unresolve
  zero.receipt.flags[ID].electricityApplied.amount=1;assert.equal((await candidates()).length,0);zero.receipt.flags[ID].electricityApplied.amount=0;
  assert.equal((await candidates()).length,1);const sibling=await f.damage(f.other,{m,amount:0});assert.equal((await candidates()).length,0);await sibling.finish();assert.equal((await candidates()).length,1);
  const positive=await f.damage(f.other,{m,amount:1});await positive.finish();f.item(f.other,'restoredShock',S.shocked);assert.equal((await candidates()).length,0);
+});
+test('Reactive Chain reserves final native Toolbelt area recipients, even when pre-create fallback targets differ',async()=>{
+ const f=fixture();f.item(f.other,'shock',S.shocked);const m=f.source('pure',[f.tokens[0].uuid]);
+ m.flags['pf2e-toolbelt']={targetHelper:{targets:[f.tokens[1].uuid,f.tokens[2].uuid]}};
+ await (await f.damage(f.target,{m})).finish();
+ const payload={actorUuid:f.caster.uuid,sourceTokenUuid:f.tokens[0].uuid,selection:{targetUuids:[f.tokens[2].uuid],discharge:false},kind:'siphoning'};
+ assert.equal((await f.ledger().candidates(payload,f.owner)).length,0,'unapplied actual AOE recipient is reserved');
+ await (await f.damage(f.other,{m,amount:0})).finish();assert.equal((await f.ledger().candidates(payload,f.owner)).length,1);
+ m.flags['pf2e-toolbelt'].targetHelper.targets=[f.tokens[1].uuid];
+ assert.equal((await f.ledger().candidates(payload,f.owner)).length,0,'changed saved target manifest invalidates the source proof');
+});
+test('legacy damage source fingerprints can finish their existing receipt after target proof is added',async()=>{
+ const f=fixture(),m=f.source();m.flags['pf2e-toolbelt']={targetHelper:{targets:[f.tokens[1].uuid]}};const applied=await f.damage(f.target,{m});
+ const record=f.target.flags[ID].electricity.damage[applied.payload.nonce];delete record.sourceTargets;
+ record.sourceFingerprint=JSON.stringify({pf:m.flags.pf2e,source:m.flags[ID].electricitySource,rolls:m.rolls.map(r=>({options:r.options,instances:r.instances}))});
+ await applied.finish();assert.equal(electricityState(f.target).damage[applied.payload.nonce].status,'confirmed');
 });
 
 test('hostile independent Shocked retains its electricity save penalty through Resistant Shell without changing the original template',async()=>{

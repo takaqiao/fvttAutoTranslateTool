@@ -3,6 +3,23 @@ import assert from 'node:assert/strict';
 import {METAPOWER_SOURCES} from '../scripts/metapower/rules.mjs';
 let api={};try{api=await import('../scripts/metapower/provider.mjs')}catch(e){if(e.code!=='ERR_MODULE_NOT_FOUND')throw e}
 const ID='pf2e-third-party-automation';
+test('idle metapower owners use ordinary native actions without a coordinator or state clone',async()=>{
+ const actor={type:'character',items:new Map([['w',{sourceId:METAPOWER_SOURCES.widen}]]),flags:{[ID]:{metapower:{receipts:{old:{status:'committed',delivery:{status:'done'}}}}}}};
+ const p=api.createMetapowerProvider({game:{user:{targets:new Set()},users:{}},fromUuid:async()=>null});let called=0;
+ const result=await p.observe({actor,item:{sourceId:'Compendium.pf2e.actionspf2e.Item.ordinary'}},async()=>{called++;return 'native-result'});
+ assert.equal(result,'native-result');assert.equal(called,1);
+});
+test('managed powers, armed next actions and unresolved delivery retain metapower admission',()=>{
+ const actor={flags:{[ID]:{metapower:{receipts:{}}}}};
+ assert.equal(api.needsMetapowerObservation({actor}),false);
+ assert.equal(api.needsMetapowerObservation({actor,item:{sourceId:METAPOWER_SOURCES.widen}}),true);
+ assert.equal(api.needsMetapowerObservation({actor,item:{sourceId:'Compendium.battlezoo-eldamon-pf2e.powers.Item.hQOa1yaP9C6wajNn'}}),true);
+ assert.equal(api.needsMetapowerObservation({actor,item:{sourceId:'Compendium.battlezoo-eldamon-pf2e.eldamon-features.Item.naawsnBug9EOpzfN'}}),true,'native Refresh must retain its committed result delivery');
+ assert.equal(api.needsMetapowerObservation({actor,item:{sourceId:'custom'}},()=>true),true);
+ for(const state of [{armed:{nonce:'armed'}},{pending:'unfinished'},{receipts:{n:{delivery:{status:'pending'}}}}]){
+  actor.flags[ID].metapower=state;assert.equal(api.needsMetapowerObservation({actor}),true);
+ }
+});
 test('Widen metadata repair is exact-source, owned and idempotent',async()=>{
  assert.equal(typeof api.createMetapowerProvider,'function');const gm={id:'gm'},game={user:gm,users:{activeGM:gm}},changes=[];
  const item={id:'w',sourceId:METAPOWER_SOURCES.widen,system:{actionType:{value:'passive'},actions:{value:null}},async update(data){changes.push(data);this.system.actionType.value=data['system.actionType.value'];this.system.actions.value=data['system.actions.value']}};

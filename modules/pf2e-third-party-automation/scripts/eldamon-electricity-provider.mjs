@@ -2,9 +2,9 @@ import {ELECTRICITY_MODULE_ID as ID,ELECTRICITY_SOURCES as S,ELECTRICITY_APPLY_P
  classifyElectricityDamage,createElectricityLedger,electricityState,electricityEffects,receiptMatches} from './eldamon-electricity.mjs';
 import {sourceUuid} from './metapower/rules.mjs';
 import {showNativeChoice} from './native-context.mjs';
+import {createActorStateIndex} from './actor-state-index.mjs';
 const values=c=>Array.from(c?.values?.()??c??[]),random=()=>globalThis.foundry?.utils?.randomID?.(24)??globalThis.crypto.randomUUID();
 const tokenUuid=s=>s?.scene&&s?.token?`Scene.${s.scene}.Token.${s.token}`:null;
-const actors=game=>[...new Map([...values(game.actors),...values(game.scenes).flatMap(s=>values(s.tokens).map(t=>t.actor))].filter(Boolean).map(a=>[a.uuid,a])).values()];
 const currentToken=t=>t?.actor&&t.parent?.tokens?.get(t.id)===t;
 export function preserveElectricityOnAlter(original,result){
  const proof=original?.options?.[ID]?.electricitySource;
@@ -15,7 +15,24 @@ export function preserveElectricityOnAlter(original,result){
 /** Small adapter around native publication and application. It never rolls or
  * applies replacement damage, and never treats a rolled total as damage taken. */
 export function createEldamonElectricityProvider({game,reactionRestriction,fromUuid,onError=console.error,selectChoice=showNativeChoice,refreshOutsideEncounter=async()=>{}}={}){
- const ledger=createElectricityLedger({game,reactionRestriction,fromUuid}),scopes=new Map();let socket;
+ const ledger=createElectricityLedger({game,reactionRestriction,fromUuid}),scopes=new Map(),sourceKeys=new WeakMap();let socket,sourceCards;
+ function forgetSource(message){
+  const key=sourceKeys.get(message),bucket=sourceCards?.get(key);if(!bucket)return;
+  bucket.delete(message);if(!bucket.size)sourceCards.delete(key);sourceKeys.delete(message);
+ }
+ function rememberSource(message){
+  if(!sourceCards)return;forgetSource(message);const nonce=message.flags?.[ID]?.electricitySource?.nonce;
+  if(typeof nonce!=='string'||!nonce)return;const bucket=sourceCards.get(nonce)??new Set();bucket.add(message);sourceCards.set(nonce,bucket);sourceKeys.set(message,nonce);
+ }
+ function sourceMessages(nonce){
+  if(!sourceCards){sourceCards=new Map();for(const message of values(game.messages))rememberSource(message)}
+  return [...sourceCards.get(nonce)??[]].filter(message=>game.messages.get(message.id)===message&&message.flags?.[ID]?.electricitySource?.nonce===nonce);
+ }
+ const activeActors=createActorStateIndex({game,matches:actor=>{
+  const state=actor.flags?.[ID]?.electricity;
+  return Object.keys(state?.pendingShocks??{}).length>0||Object.values(state?.operations??{}).some(r=>r.status==='started')||
+   electricityEffects(actor,S.charged).length>0||electricityEffects(actor,S.shocked).some(item=>item.flags?.[ID]?.electricityShock?.expires);
+ }});
  const active=()=>game.user?.id===game.users.activeGM?.id;
  async function rpc(method,payload){
   if(active())return ledger[method](payload,game.user);
@@ -26,22 +43,33 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
  async function interceptDamageMessage(roll,data={},options={},native){
   if(classifyElectricityDamage(roll)==='none')return native(data,options);
   const opts=data.flags?.pf2e?.context?.options??[],markers=opts.filter(o=>o.startsWith(`${ID}:metapower:`));
-  const nonce=random();let effectKey=`damage:${nonce}`,targetUuids=values(game.user.targets).map(t=>(t.document??t).uuid);
+  const nonce=random(),nativeTargets=data.flags?.['pf2e-toolbelt']?.targetHelper?.targets;
+  let effectKey=`damage:${nonce}`,targetUuids=Array.isArray(nativeTargets)?nativeTargets:values(game.user.targets).map(t=>(t.document??t).uuid),channel=false,area=false;
   if(markers.length===1){
    const [cardId,channelNonce]=markers[0].slice(`${ID}:metapower:`.length).split(':'),card=game.messages.get(cardId),actor=await fromUuid(card?.flags?.[ID]?.metapowerUse?.actorUuid);
    const receipt=actor?.flags?.[ID]?.metapower?.receipts?.[channelNonce];
-   if(receipt?.status==='committed'&&receipt.messageUuid===card?.uuid&&receipt.itemUuid===data.flags?.pf2e?.origin?.uuid){effectKey=`channel:${actor.uuid}:${channelNonce}`;targetUuids=receipt.selection?.targetUuids??targetUuids;}
+   if(receipt?.status==='committed'&&receipt.messageUuid===card?.uuid&&receipt.itemUuid===data.flags?.pf2e?.origin?.uuid){
+    effectKey=`channel:${actor.uuid}:${channelNonce}`;channel=true;area=!!receipt.snapshot?.area;
+    // Area recipients are selected by the native template after Use. Single
+    // target powers retain their admitted recipient across the damage click.
+    if(!receipt.snapshot?.area)targetUuids=receipt.selection?.targetUuids??targetUuids;
+    else if(!Array.isArray(nativeTargets)){
+     const owner=game.users.get(receipt.userId);
+     targetUuids=owner?.active&&actor.testUserPermission?.(owner,'OWNER')?values(owner.targets).map(t=>(t.document??t).uuid).filter(uuid=>uuid?.startsWith(`Scene.${card.speaker?.scene}.Token.`)):[];
+    }
+   }
   }
-  const source={nonce,effectKey,targetUuids:[...new Set(targetUuids)]};
+  const source={nonce,effectKey,targetUuids:[...new Set(targetUuids)],...(channel?{targetMode:area?'area':'single'}:{})};
   roll.options??={};roll.options[ID]={...roll.options[ID],electricitySource:{nonce}};
   const next={...data,flags:{...data.flags,[ID]:{...data.flags?.[ID],electricitySource:source},pf2e:{...data.flags?.pf2e,context:{...data.flags?.pf2e?.context,options:[...opts.filter(o=>!o.startsWith(SOURCE)),SOURCE+nonce]}}}};
+  if(channel)next.flags['pf2e-toolbelt']={...data.flags?.['pf2e-toolbelt'],targetHelper:{...data.flags?.['pf2e-toolbelt']?.targetHelper,targets:source.targetUuids}};
   return native(next,options);
  }
  async function beforeDamage(actor,params){
   const kind=classifyElectricityDamage(params.damage);if(kind==='none'||params.final)return null;
   const target=params.token?.document??params.token;if(!currentToken(target)||target.actor.uuid!==actor.uuid||!target.actor.testUserPermission?.(game.user,'OWNER'))return null;
   const sourceNonce=params.damage?.options?.[ID]?.electricitySource?.nonce;if(!sourceNonce)return null;
-  const matches=values(game.messages).filter(m=>m.flags?.[ID]?.electricitySource?.nonce===sourceNonce);if(matches.length!==1)return null;
+  const matches=sourceMessages(sourceNonce);if(matches.length!==1)return null;
   const message=matches[0],rollIndex=message.rolls?.findIndex(r=>r.options?.[ID]?.electricitySource?.nonce===sourceNonce)??-1;
   if(rollIndex<0||classifyElectricityDamage(message.rolls[rollIndex])!==kind)return null;
   const source=message.flags[ID].electricitySource,record=await rpc('beginDamage',{nonce:random(),actorUuid:actor.uuid,tokenUuid:target.uuid,sourceMessageUuid:message.uuid,sourceNonce,rollIndex,
@@ -60,7 +88,18 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
   if(Number.isFinite(amount)&&amount>=0&&actor.hitPoints?.max>0)scope.amount=amount;
  }
  function decorateReceipt(document,data,_options,userId){
-  if(userId!==game.user.id||data.flags?.pf2e?.context?.type!=='damage-taken')return;
+  if(userId!==game.user.id)return;
+  const source=document.flags?.[ID]?.electricitySource;
+  // PF2e returns a toMessage(create:false) draft before its later native create.
+  // Toolbelt's upstream preCreate handoff runs first. Finalize the two target
+  // manifests here, in that same creation, with no draft-lifetime listener.
+  if(data.flags?.pf2e?.context?.type==='damage-roll'&&['area','single'].includes(source?.targetMode)&&Array.isArray(source.targetUuids)){
+   const current=document.flags?.['pf2e-toolbelt']?.targetHelper?.targets;
+   const targets=source.targetMode==='area'&&Array.isArray(current)&&current.length?current:source.targetUuids;
+   document.updateSource({[`flags.${ID}.electricitySource.targetUuids`]:targets,'flags.pf2e-toolbelt.targetHelper.targets':targets});
+   return;
+  }
+  if(data.flags?.pf2e?.context?.type!=='damage-taken')return;
   const options=data.flags.pf2e.context.options??[],tags=options.filter(o=>o.startsWith(APPLY));if(tags.length!==1)return;
   const scope=scopes.get(tags[0].slice(APPLY.length));if(!scope||scope.amount===null||tokenUuid(data.speaker)!==scope.record.tokenUuid)return;
   let amount=scope.amount;
@@ -133,7 +172,7 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
  async function encounterEnded(combat){
   if(!active())return;
   const participants=[...new Map(values(combat.combatants).map(c=>c.actor).filter(Boolean).map(a=>[a.uuid,a])).values()];
-  await ledger.expire({combat,ended:true,actors:actors(game)});
+  await ledger.expire({combat,ended:true,actors:activeActors.values()});
   for(const actor of participants){
    if(!values(actor.items).some(i=>sourceUuid(i)==='Compendium.battlezoo-eldamon-pf2e.eldamon-features.Item.naawsnBug9EOpzfN'))continue;
    await refreshOutsideEncounter({actor,nonce:`encounter:${combat.id}`});
@@ -156,12 +195,13 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
   (root.querySelector('.message-content')??root).append(block);
  }
  function register({Hooks,socket:api}={}){
-  socket=api;
+  socket=api;activeActors.register(Hooks);
   for(const method of ['channel','beginDamage','finishDamage','confirmMixed','candidates','interact'])socket?.register(`electricity:${method}`,async function(payload){try{return {ok:true,value:await ledger[method](payload,game.users.get(this.socketdata.userId))}}catch(error){return {ok:false,error:error.message}}});
   Hooks.on('preCreateChatMessage',decorateReceipt);
-  Hooks.on('createChatMessage',(message,options,userId)=>{capture(message,options,userId);if(active())ledger.check(message).catch(onError)});
+  Hooks.on('createChatMessage',(message,options,userId)=>{rememberSource(message);capture(message,options,userId);if(active())ledger.check(message).catch(onError)});
+  Hooks.on('updateChatMessage',rememberSource);Hooks.on('deleteChatMessage',forgetSource);
   Hooks.on('renderChatMessageHTML',renderReceipt);
-  for(const phase of ['start','end'])Hooks.on(`pf2e.${phase}Turn`,(combatant,combat)=>{if(active())ledger.expire({combat,combatant,phase,actors:actors(game)}).catch(onError)});
+  for(const phase of ['start','end'])Hooks.on(`pf2e.${phase}Turn`,(combatant,combat)=>{if(active())return ledger.expire({combat,combatant,phase,actors:activeActors.values()}).catch(onError)});
   Hooks.on('deleteCombat',combat=>encounterEnded(combat).catch(onError));
   Hooks.on('updateCombat',(combat,changes)=>{if((changes.round===0||changes.round===null)&&!combat.started)encounterEnded(combat).catch(onError)});
  }

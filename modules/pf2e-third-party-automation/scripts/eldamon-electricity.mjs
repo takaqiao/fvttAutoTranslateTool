@@ -70,6 +70,9 @@ export function receiptElectricityAmount(message,record){
  return fact?.nonce===record.nonce&&Number.isFinite(fact.amount)&&fact.amount>=0?fact.amount:null;
 }
 const fingerprint=m=>JSON.stringify({author:author(m),speaker:m.speaker,pf:m.flags?.pf2e,electricity:m.flags?.[ID]?.electricityApplied,shieldBlock:m.flags?.[ID]?.shieldBlock});
+// Toolbelt may attach the original template's targets in preCreate, after the
+// DamageRoll publisher ran. The persisted native card is the final authority.
+const sourceTargets=m=>m.flags?.['pf2e-toolbelt']?.targetHelper?.targets??m.flags?.[ID]?.electricitySource?.targetUuids??[];
 const sourceFingerprint=m=>JSON.stringify({pf:m.flags?.pf2e,source:m.flags?.[ID]?.electricitySource,rolls:m.rolls?.map(r=>r.toJSON?.()??{options:r.options,instances:r.instances})});
 
 /** Active-GM ledger. Document effects retain their published rules and GrantItem
@@ -146,7 +149,7 @@ export function createElectricityLedger({game,reactionRestriction,fromUuid,queue
  async function validateSource(record){
   const message=await fromUuid(record.sourceMessageUuid),roll=message?.rolls?.[record.rollIndex];
   if(game.messages.get(message?.id)!==message||message.flags?.pf2e?.context?.type!=='damage-roll'||roll?.options?.[ID]?.electricitySource?.nonce!==record.sourceNonce||
-   classifyElectricityDamage(roll)!==record.kind||message.flags?.[ID]?.electricitySource?.effectKey!==record.effectKey||record.sourceFingerprint&&sourceFingerprint(message)!==record.sourceFingerprint)throw Error('Electricity damage source changed or is not current.');
+   classifyElectricityDamage(roll)!==record.kind||message.flags?.[ID]?.electricitySource?.effectKey!==record.effectKey||record.sourceFingerprint&&sourceFingerprint(message)!==record.sourceFingerprint||Object.hasOwn(record,'sourceTargets')&&JSON.stringify(sourceTargets(message))!==JSON.stringify(record.sourceTargets))throw Error('Electricity damage source changed or is not current.');
   return message;
  }
  async function verified(record){
@@ -159,7 +162,7 @@ export function createElectricityLedger({game,reactionRestriction,fromUuid,queue
   if(!liveToken(source)||!liveToken(target)||!liveToken(caster)||caster.actor.uuid!==actor.uuid||source.parent!==target.parent||target.parent!==caster.parent||source.uuid===target.uuid||
    !sourceCombat||casterCombat?.id!==sourceCombat.id||selection.targetUuids?.length!==1||selection.targetUuids[0]!==target.uuid||record.frame!==frame(sourceCombat)||record.status!=='confirmed'||record.receiptUuid!==evidence.receiptUuid||record.effectKey!==evidence.effectKey||!await verified(record))return false;
   const all=values(source.parent.tokens).flatMap(t=>Object.values(electricityState(t.actor).damage));
-  const sourceMessage=await fromUuid(record.sourceMessageUuid),manifest=sourceMessage.flags?.[ID]?.electricitySource?.targetUuids??[];
+  const sourceMessage=await fromUuid(record.sourceMessageUuid),manifest=Object.hasOwn(record,'sourceTargets')?sourceTargets(sourceMessage):sourceMessage.flags?.[ID]?.electricitySource?.targetUuids??[];
   // Reserve original targets until every observed application to that target
   // has an unchanged authentic zero receipt. Pending/mixed/positive evidence
   // never releases the reservation, including a later sibling application.
@@ -179,7 +182,7 @@ export function createElectricityLedger({game,reactionRestriction,fromUuid,queue
    if(!liveToken(token)||token.actor.uuid!==actor.uuid||!/^[A-Za-z0-9_-]{8,100}$/.test(payload.nonce??'')||!['pure','mixed'].includes(payload.kind))throw Error('Invalid native electricity application.');
    const source=await validateSource(payload);
    return mutate(actor,async state=>{if(state.damage[payload.nonce])throw Error('Electricity application nonce was already used.');
-    const r={...copy(payload),sourceFingerprint:sourceFingerprint(source),userId:user.id,status:'pending',frame:frame(electricityEncounter(game,actor.uuid,token.uuid))};state.damage[r.nonce]=r;await save(actor,state);return copy(r);});
+    const r={...copy(payload),sourceFingerprint:sourceFingerprint(source),sourceTargets:copy(sourceTargets(source)),userId:user.id,status:'pending',frame:frame(electricityEncounter(game,actor.uuid,token.uuid))};state.damage[r.nonce]=r;await save(actor,state);return copy(r);});
   },
   async finishDamage(payload,user){
    const actor=await fromUuid(payload.actorUuid);owner(actor,user);
@@ -215,7 +218,7 @@ export function createElectricityLedger({game,reactionRestriction,fromUuid,queue
    if(!r||r.status!=='committed'||r.messageUuid!==card?.uuid||message.flags?.pf2e?.origin?.uuid!==r.itemUuid||siphon(r))return;
    const anvil=r.sourceUuid===S.anvil&&c.type==='saving-throw',staticShock=r.sourceUuid===S.static&&c.type==='attack-roll';if(!anvil&&!staticShock)return;
    const target=await fromUuid(anvil?tokenUuid(message.speaker):c.target?.token),source=await fromUuid(tokenUuid(card.speaker));
-   if(!liveToken(target)||!liveToken(source)||target.parent!==source.parent||!r.selection?.targetUuids?.includes(target.uuid))return;
+   if(!liveToken(target)||!liveToken(source)||target.parent!==source.parent||staticShock&&!r.selection?.targetUuids?.includes(target.uuid))return;
    if(anvil&&(!sourceActor.alliance||!target.actor.alliance||sourceActor.alliance===target.actor.alliance))return;
    const outcome=c.outcome,qualifies=anvil?['failure','criticalFailure'].includes(outcome):['criticalSuccess','success','failure'].includes(outcome);
    const effectKey=`channel:${sourceActor.uuid}:${nonce}`;
