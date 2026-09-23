@@ -3,6 +3,7 @@ import {withDamageMessageTarget} from './damage-message-targets.mjs';
 import {getSourceId,isActiveGM,resolveMessageTargets} from './native-context.mjs';
 import {SerialActions} from './runtime.mjs';
 import {preserveDamagePartForMerge,preserveMergedDamageBypass} from './native-damage-components.mjs';
+import {createAttackSequence} from './activity-attack-sequence.mjs';
 
 const SOURCES={
  twin:'Compendium.pf2e.feats-srd.Item.Gw0wGXikhAhiGoud',
@@ -11,34 +12,9 @@ const SOURCES={
 const values=c=>Array.from(c?.values?.()??c??[]);
 const own=d=>d?.flags?.[MODULE_ID]??{};
 const SECOND_ATTACK=MODULE_ID+':double-slice-second';
-const TWIN_DAMAGE=MODULE_ID+':dual-twin-damage';
 const messageClass=()=>globalThis.CONFIG?.ChatMessage?.documentClass??globalThis.ChatMessage;
 const precisionTotal=roll=>roll.instances.reduce((total,instance)=>total+instance.componentTotal('precision'),0);
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-
-function pairedTwinWeapons(first,second){
- if(first.id===second.id||![first,second].every(w=>w.system.traits?.value.includes('twin')))return false;
- const base=first.system.baseItem;
- if(base&&second.system.baseItem)return base===second.system.baseItem;
- const source=getSourceId(first);
- return !!source&&source===getSourceId(second);
-}
-
-/** This activity proves the preceding attack even when it missed. Keep the
- * bonus local to the second damage roll; no persistent effect or turn watcher.
- * PF2e resolves the weapon dice after striking/ABP and handles typed stacking. */
-function twinDamageStrike(actor,strike){
- const clone=actor.clone({items:[...structuredClone(actor._source.items),{
-  _id:globalThis.foundry?.utils?.randomID?.()??'DualTwinDamage01',
-  name:'双生武器：本次第二击',type:'effect',
-  system:{duration:{value:-1,unit:'unlimited'},rules:[{
-   key:'FlatModifier',selector:`${strike.item.id}-damage`,slug:'dual-twin-second',
-   label:'双生武器：本次第二击',type:'circumstance',value:'@weapon.system.damage.dice',
-   predicate:[TWIN_DAMAGE,`item:id:${strike.item.id}`,'item:trait:twin'],
-  }]},
- }]},{keepId:true});
- return values(clone.system.actions).find(s=>s.item?.id===strike.item.id&&s.item.isMelee===true)??strike;
-}
 
 /** Remove only precision subterms, retaining native crit/splash/die-result structure. */
 export function removePrecisionDamage(roll){
@@ -135,10 +111,11 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
    const origin=await sourceToken(actor,message,target);requireSceneTarget(actor,origin,target);
    if(!twin&&!item.system.rules?.some(r=>r.key==='FlatModifier'&&r.predicate?.some(p=>p?.or?.includes(SECOND_ATTACK))))throw Error('双重切割的原生第二击修正规则缺失，尚未攻击。');
    await actor.update({[`flags.${MODULE_ID}.dualStrikeUses`]:[...(own(actor).dualStrikeUses??[]).slice(-127),message.id]});
-   const hits=[];
+   const hits=[],sequence=createAttackSequence({actor});
    for(const[index,strike]of selected.entries()){
     requireSceneTarget(actor,origin,target);
-    const options=new Set([`${MODULE_ID}:dual-strike:${message.id}`,`action:${twin?'twin-takedown':'double-slice'}`]);
+    const frame=sequence.begin(strike,target);
+    const options=new Set([`${MODULE_ID}:dual-strike:${message.id}`,`action:${twin?'twin-takedown':'double-slice'}`,...frame.attackOptions]);
     if(twin)options.add('hunted-prey');else if(index===1){options.add('double-slice-second');options.add(SECOND_ATTACK);}
     const tier=twin?Math.min(map+index,2):map;
     let attackMessage=null;
@@ -149,12 +126,12 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
     }});
     if(!check||!attackMessage)throw Error('双武器活动已中止；已发生的攻击不会自动重试。');
     const outcome=attackMessage.flags.pf2e.context.outcome;
+    sequence.record(frame,outcome);
     if(!['success','criticalSuccess'].includes(outcome))continue;
     const damageOptions=new Set([`${MODULE_ID}:bear-attack:${attackMessage.id}`]);
     if(twin)damageOptions.add('hunted-prey');
-    const paired=index===1&&pairedTwinWeapons(selected[0].item,strike.item);
-    const damageStrike=paired?twinDamageStrike(actor,strike):strike;
-    if(paired)damageOptions.add(TWIN_DAMAGE);
+    const {strike:damageStrike,options:sequenceOptions}=frame.damage(strike);
+    for(const option of sequenceOptions)damageOptions.add(option);
     const roll=await damageStrike[outcome==='criticalSuccess'?'critical':'damage']({target:target.object,checkContext:attackMessage.flags.pf2e.context,mapIncreases:tier,options:damageOptions,event:{ctrlKey:false,metaKey:false,shiftKey:game.user.settings?.showDamageDialogs??true},createMessage:false});
     if(!roll)throw Error('攻击已发生，但原生伤害尚未完成。');
     hits.push({roll,strike,attackMessage,outcome});

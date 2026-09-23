@@ -165,6 +165,35 @@ test('Spellstrike critical failure spends the spell but disrupts saves and spell
 test('a successful basic save halves only the spell component before merging weapon damage',()=>setup({spellSave:true,save:'success'},async f=>{await f.use();assert.equal(f.messages.at(-1).rolls[0].total,18)}));
 test('save failure on a critical Strike does not double the save spell',()=>setup({spellSave:true,outcomes:['criticalSuccess']},async f=>{await f.use();assert.equal(f.messages.at(-1).rolls[0].total,36)}));
 test('Spell Swipe rolls the same weapon against adjacent targets at the same MAP and pays once',()=>setup({kind:'swipe',map:1,multi:true},async f=>{await f.use();assert.deepEqual(f.calls.filter(c=>c.kind==='attack').map(c=>[c.index,c.tier]),[[0,1],[0,1]]);assert.equal(f.calls.filter(c=>c.kind==='payment').length,1);assert.equal(f.calls.filter(c=>c.kind==='spell-damage').length,2);assert.equal(f.merges.length,2)}));
+for(const first of ['failure','criticalFailure','success','criticalSuccess'])test(`Spell Swipe derives Backswing only from its own preceding miss (${first})`,()=>setup({kind:'swipe',outcomes:[first,'success']},async f=>{
+ f.weapons[0].system.traits.value=['sweep','backswing'];await f.use();
+ const attacks=f.calls.filter(c=>c.kind==='attack');
+ assert(attacks.every(c=>c.opts.options.has('sweep-bonus')),'Spell Swipe explicitly grants Sweep on both Strikes');
+ assert.equal(attacks[0].opts.options.has('backswing-bonus'),false);
+ assert.equal(attacks[1].opts.options.has('backswing-bonus'),['failure','criticalFailure'].includes(first));
+}));
+for(const first of ['success','failure'])test(`deferred Spell Swipe damage grants Forceful only to its second Strike (${first})`,()=>setup({kind:'swipe',map:2,outcomes:[first,'criticalSuccess']},async f=>{
+ f.weapons[0].system.traits.value=['forceful'];
+ const nativeClone=f.actor.clone;
+ f.actor.clone=changes=>{
+  const rules=changes.items.at(-1).system.rules;
+  if(!rules.some(r=>r.key==='FlatModifier'))return nativeClone(changes);
+  f.calls.push({kind:'sequence-damage-clone',rules});
+  return {system:{actions:f.actor.system.actions.map(s=>({...s,critical:async opts=>{f.calls.push({kind:'sequence-critical',opts});return roll(22)}}))}};
+ };
+ await f.use();
+ assert.equal(f.calls.filter(c=>c.kind==='sequence-damage-clone').length,1,'only a completed prior attack proves the bonus, independently of MAP');
+ const damage=f.calls.filter(c=>c.kind==='sequence-critical');assert.equal(damage.length,1);
+ assert.equal(damage[0].opts.target.document.uuid,f.targetDocs[1].uuid);
+ assert.equal(f.calls.filter(c=>c.kind==='weapon-damage').length,first==='success'?1:0);
+ assert.deepEqual(f.actor._source.items,[]);
+}));
+test('Overwhelming Combination does not transfer same-weapon history from sword to fist',()=>setup({kind:'combination',outcomes:['failure','success']},async f=>{
+ for(const w of f.weapons)w.system.traits.value.push('forceful','backswing','sweep');
+ await f.use();const attacks=f.calls.filter(c=>c.kind==='attack');
+ assert(attacks.every(c=>!c.opts.options.has('backswing-bonus')&&!c.opts.options.has('sweep-bonus')));
+ assert.equal(f.calls.filter(c=>c.kind==='infusion-clone').length,0);
+}));
 test('single-target Spell Swipe affects only the selected target with the spell',()=>setup({kind:'swipe'},async f=>{await f.use();assert.equal(f.calls.filter(c=>c.kind==='spell-damage').length,1);assert.equal(f.calls.filter(c=>c.kind==='weapon-damage').length,2);assert.equal(f.merges.length,1)}));
 test('discharged Spellstrike rejects use before payment or attack',()=>setup({charged:false},async f=>{await assert.rejects(f.use,/充能/);assert.equal(f.calls.length,0)}));
 test('unavailable spell resources cause no attack or discharge',()=>setup({consumeFails:true},async f=>{await assert.rejects(f.use,/资源/);assert.equal(f.calls.filter(c=>c.kind==='attack').length,0);assert.equal(f.actor.flags[NS].spellstrike.charged,true)}));

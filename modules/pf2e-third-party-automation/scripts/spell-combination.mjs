@@ -6,6 +6,7 @@ import {getNativeCastEvents} from './amp-cast-events.mjs';
 import {preserveDamagePartForMerge,preserveMergedDamageBypass} from './native-damage-components.mjs';
 import {isCuttingWeapon} from './rune-transfer.mjs';
 import {isActualUseMessage} from './usage-events.mjs';
+import {createAttackSequence} from './activity-attack-sequence.mjs';
 export {preserveDamagePartForMerge} from './native-damage-components.mjs';
 
 export const SPELL_COMBINATION_SOURCES=Object.freeze({
@@ -137,14 +138,15 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   return {...choice,spell:selected};
  }
  async function record(message,state,extra={}){requireGM();await message.update({[`flags.${MODULE_ID}.spellCombinationUse`]:{...own(message).spellCombinationUse,state,...extra}});requireGM();}
- async function attack(actor,strike,target,map,message,index,kind){
+ async function attack(actor,strike,target,map,message,index,kind,sequence){
   requireGM();
   let created;
   if(kind!=='combination'){
    const infused=actor.clone({items:[...clone(actor._source.items),{_id:globalThis.foundry?.utils?.randomID?.()??'ComboArcane00001',name:'Spellstrike infusion',type:'effect',system:{duration:{value:-1,unit:'unlimited'},rules:[{key:'AdjustStrike',mode:'add',property:'traits',value:'arcane',definition:[`item:id:${strike.item.id}`]},{key:'AdjustStrike',mode:'add',property:'weapon-traits',value:'magical',definition:[`item:id:${strike.item.id}`]}]}}]},{keepId:true});
    strike=strikes(infused).find(s=>strikeKey(s)===strikeKey(strike));if(!strike)throw Error('无法构建灌注奥术能量的原生打击。');
   }
-  const options=new Set([`action:${kind==='combination'?'overwhelming-combination':kind==='swipe'?'spell-swipe':'spellstrike'}`,`${MODULE_ID}:spell-combination:${message.id}`]);
+  const frame=sequence.begin(strike,target);
+  const options=new Set([`action:${kind==='combination'?'overwhelming-combination':kind==='swipe'?'spell-swipe':'spellstrike'}`,`${MODULE_ID}:spell-combination:${message.id}`,...frame.attackOptions]);
   if(kind==='combination')options.add('overwhelming-combination');else{options.add('arcane');options.add('magical');options.add('item:trait:magical');}
   if(kind==='swipe'&&strike.item.system.traits.value.includes('sweep'))options.add('sweep-bonus');
   const check=await strike.variants[map].roll({target:target.object,options,event:skipEvent(game,'attack'),createMessage:false,callback:async(_roll,_outcome,raw)=>{
@@ -159,13 +161,16 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   if(!check||!created)throw Error('组合活动的原生攻击未完成，已发生的攻击不会重试。');
   await afterAttack(created);
   requireGM();
-  return {strike,target,map,message:created,outcome:created.flags.pf2e.context.outcome};
+  const outcome=created.flags.pf2e.context.outcome;
+  sequence.record(frame,outcome);
+  return {strike,target,map,message:created,outcome,frame};
  }
  async function weaponDamage(attack){
   requireGM();
   const {strike,target,map,message,outcome}=attack;if(!hit(outcome))return null;
-  const options=new Set([`${MODULE_ID}:bear-attack:${message.id}`]);
-  const result=await strike[outcome==='criticalSuccess'?'critical':'damage']({target:target.object,checkContext:message.flags.pf2e.context,mapIncreases:map,options,event:skipEvent(game,'damage'),createMessage:false});
+  const {strike:damageStrike,options:sequenceOptions}=attack.frame.damage(strike);
+  const options=new Set([`${MODULE_ID}:bear-attack:${message.id}`,...sequenceOptions]);
+  const result=await damageStrike[outcome==='criticalSuccess'?'critical':'damage']({target:target.object,checkContext:message.flags.pf2e.context,mapIncreases:map,options,event:skipEvent(game,'damage'),createMessage:false});
   requireGM();
   if(!result)throw Error('攻击已发生，但原生武器伤害尚未完成。');
   damageContexts.set(result,{...clone(message.flags.pf2e.context),sourceType:'attack',domains:['damage','strike-damage'],options:[...new Set([...(message.flags.pf2e.context.options??[]),...strike.item.getRollOptions?.('item')??[],...strike.item.actor.getRollOptions?.(['damage','strike-damage'])??[],...options])]});
@@ -281,15 +286,15 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
    await record(message,'started',{kind,weaponUuid:current.item.uuid,spellUuid:choice?.spell.uuid??null});
    try{
     requireGM();if(choice)await actor.update({[`flags.${MODULE_ID}.spellstrike`]:{charged:false,messageId:message.id}});requireGM();
-    const attacks=[];
+    const attacks=[],sequence=createAttackSequence({actor});
     if(kind==='combination'){
      for(const [index,selected]of (order==='fist'?[second,current]:[current,second]).entries()){
       requireGM();
       const strike=strikes(actor).find(s=>strikeKey(s)===strikeKey(selected));
       if(!strike||!(fist(strike)||allowedCombinationWeapon(strike)))throw Error('连击的下一把武器已不可用。');
-      requireSceneTarget(actor,origin,targets[0]);attacks.push(await attack(actor,strike,targets[0],Math.min(map+index,2),message,index,kind));
+      requireSceneTarget(actor,origin,targets[0]);attacks.push(await attack(actor,strike,targets[0],Math.min(map+index,2),message,index,kind,sequence));
      }
-    }else for(const [index,target]of targets.entries()){requireGM();requireSceneTarget(actor,origin,target);attacks.push(await attack(actor,current,target,map,message,index,kind));}
+    }else for(const [index,target]of targets.entries()){requireGM();requireSceneTarget(actor,origin,target);attacks.push(await attack(actor,current,target,map,message,index,kind,sequence));}
     const receivesSpell=attack=>choice&&(!spellTarget||attack.target.uuid===spellTarget)&&(kind==='swipe'&&!spellTarget?hit(attack.outcome):choice.spell.isAttack||choice.spell.system.traits.value.includes('attack')?hit(attack.outcome):attack.outcome!=='criticalFailure');
     const eligible=attacks.filter(receivesSpell),spellCard=eligible.length?await publishSpell({actor,user,message,choice,payment,targets:eligible.map(a=>a.target),kind}):null;
     const sharedSpellDamage=choice?.spell.system.defense?.save&&!choice.spell.isAttack&&!choice.spell.system.traits.value.includes('attack')?{}:null;
