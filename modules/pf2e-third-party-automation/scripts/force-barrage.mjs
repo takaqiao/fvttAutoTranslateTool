@@ -32,6 +32,11 @@ async function chooseAllocation({rank,targets,adapter}){
  * separate awaited capabilities; neither is inferred from a slot delta/card. */
 export function createForceBarrageBridge({game,fromUuid=globalThis.fromUuid,nativeCasts,choose=chooseAllocation,loadWorkbench=loadForceBarrageWorkbench,assess=assessForceBarrageCast,validateTargets=validateForceBarrageTargets,getContext=originalContext,randomId=()=>globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.randomUUID(),onError=()=>{},ledger=createForceBarrageLedger({game,fromUuid,withActorResourceLock:nativeCasts.withActorResourceLock})}={}){
  const scopes=new Map(),byItem=new Map();let socket,installed=false;
+ function reportFailure(s,error){
+  if(s?.errorReported)return;if(s)s.errorReported=true;
+  // Preserve the first useful reason without letting notifications replace the failure.
+  try{onError(error);}catch{}
+ }
  function requireScope(s,beforePayment=false){
   if(scopes.get(s.invocationId)!==s||byItem.get(s.item.uuid)!==s||game.user!==s.user||!s.user.active||game.users.get(s.user.id)!==s.user||game.users.activeGM?.id!==s.gmId||game.actors.get(s.actor.id)!==s.actor||s.actor.items.get(s.item.id)!==s.item||s.actor.items.get(s.entry.id)!==s.entry||s.actor.testUserPermission(s.user,'OWNER')!==true)throw Error('本次力场飞弹的原操作者、物品或主GM已经改变；不会重试。');
   if(beforePayment){const result=assess({...s,item:s.castItem});if(!result.eligible)throw Error(result.reason??'本次力场飞弹已经不能施放。');}
@@ -119,7 +124,11 @@ export function createForceBarrageBridge({game,fromUuid=globalThis.fromUuid,nati
    }});
    if(s.record?.status!=='delivered'||s.record.targets?.length!==allocations.filter(a=>a.count>0).length||s.record.targets.some(t=>t.status!=='published'||!t.messageUuid))throw Error('仍有分弹目标未确认交付；不会重发。');
    s.stage='delivered';return originalOutcome?.nativeResult;
-  }catch(error){if(s.nonce&&!['delivered','disrupted'].includes(s.stage)){try{await call(s,'uncertain',{reason:String(error?.message??error)});}catch(recordError){onError(recordError);}}throw error;}
+  }catch(error){
+   reportFailure(s,error);
+   if(s.nonce&&!['delivered','disrupted'].includes(s.stage)){try{await call(s,'uncertain',{reason:String(error?.message??error)});}catch(recordError){reportFailure(s,recordError);}}
+   throw error;
+  }
   finally{scopes.delete(s.invocationId);if(byItem.get(item.uuid)===s)byItem.delete(item.uuid);}
  }
  function captureUsage(item){const s=byItem.get(item?.uuid);return s?.stage==='casting'&&s.nonce?{forceBarrageCast:{bridgeNonce:s.nonce,fingerprint:s.fingerprint}}:null;}
@@ -145,7 +154,7 @@ export function createForceBarrageBridge({game,fromUuid=globalThis.fromUuid,nati
    if(!s||s.stage!=='producing'||!equal(s.publishing,proof))throw Error('这张分弹卡没有本次准确发布许可。');
    requireScope(s);const author=message.author?.id??message.user?.id??message.user??message.author;
    if(author!==s.user.id||message.blind!==false||message.whisper?.length!==0||message.speaker?.actor!==s.actor.id||message.flags.pf2e.origin.castRank!==s.rank||!equal(message.flags['pf2e-toolbelt']?.targetHelper?.targets,[proof.targetUuid]))throw Error('分弹消息在发布前改变了来源或隐私。');
-  }catch(error){onError(error);return false;}
+  }catch(error){reportFailure(s,error);return false;}
  }
  function register({Hooks,socket:api}={}){
   if(installed)return()=>{};installed=true;socket=api;

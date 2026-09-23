@@ -52,16 +52,48 @@ test('GM handoff before confirmation rejects prior to claim and original payment
  const f=fixture();const bridge=createForceBarrageBridge({...f.config,choose:async()=>{f.game.users.activeGM={id:'other',active:true};return {actions:3,visibilityConfirmed:true,allocations:f.targets.map((t,i)=>({targetUuid:t.uuid,count:i?2:4}))}}});await assert.rejects(bridge.interceptCast({item:f.item,entry:f.entry,options:{rank:3}},f.next));assert.equal(f.counts.native,0);
 });
 test('GM handoff during native damage-card rendering vetoes publication after the roll without replay',async()=>{
- const f=fixture(),nativeRun=f.adapter.run;
+ const f=fixture(),nativeRun=f.adapter.run,reported=[];
+ const bridge=createForceBarrageBridge({...f.config,onError:error=>reported.push(error)});
+ bridge.register({Hooks:{on:(name,fn)=>f.hooks.set(name,fn),off(){}},socket:{register(){}}});
  f.adapter.run=p=>nativeRun({...p,bridge:{...p.bridge,publishTarget:async data=>{
   data.roll.toMessage=async message=>{f.game.users.activeGM={id:'replacement',active:true};const allowed=f.hooks.get('preCreateChatMessage')?.(message);assert.equal(allowed,false);return undefined;};
   return p.bridge.publishTarget(data);
  }}});
- await assert.rejects(f.run(),/消息|主GM/);assert.equal(f.counts.native,1);assert.equal(f.counts.rolling,1);assert.equal(f.game.messages.size,0);
+ await assert.rejects(bridge.interceptCast({item:f.item,entry:f.entry,options:{rank:3}},f.next),/消息|主GM/);assert.equal(f.counts.native,1);assert.equal(f.counts.rolling,1);assert.equal(f.game.messages.size,0);
+ assert.equal(reported.length,1,'One invocation reports its first useful failure once');assert.match(reported[0].message,/主GM/);
 });
 test('Core14 DialogV2 cancel callback retains cancellation when null would fall back to action name',async t=>{
  const prior=globalThis.foundry;t.after(()=>{globalThis.foundry=prior});let calls=0;
  globalThis.foundry={applications:{api:{DialogV2:{wait:async config=>{if(++calls===1)return 3;const button=config.buttons.find(b=>b.action==='cancel');return await button.callback()??button.action;}}}}};
  const f=fixture(),bridge=createForceBarrageBridge({...f.config,choose:undefined});
  await bridge.interceptCast({item:f.item,entry:f.entry,options:{rank:3}},f.next);assert.equal(calls,2);assert.deepEqual(f.counts,{native:0,rolling:0,publishing:0});assert.equal(f.calls.length,0);
+});
+
+for(const brokenReporter of [false,true])test('confirmation failure reaches the invoking-client reporter and preserves the original error'+(brokenReporter?' even when reporting throws':''),async()=>{
+ const f=fixture(),failure=Error('角色所有者权限已改变'),reported=[];
+ const bridge=createForceBarrageBridge({...f.config,validateTargets:()=>{throw failure},onError:error=>{reported.push(error);if(brokenReporter)throw Error('notification unavailable')}});
+ await assert.rejects(bridge.interceptCast({item:f.item,entry:f.entry,options:{rank:3}},f.next),error=>error===failure);
+ assert.deepEqual(reported,[failure]);
+ assert.deepEqual(f.counts,{native:0,rolling:0,publishing:0});assert.equal(f.calls.length,0);
+});
+
+test('delivery failure reports its original reason once and keeps the no-replay receipt',async()=>{
+ const f=fixture(),failure=Error('准确伤害卡未能确认'),reported=[];
+ f.ledger.finishPublication=async()=>{throw failure};
+ const bridge=createForceBarrageBridge({...f.config,onError:error=>reported.push(error)});
+ bridge.register({Hooks:{on:(name,fn)=>f.hooks.set(name,fn),off(){}},socket:{register(){}}});
+ await assert.rejects(bridge.interceptCast({item:f.item,entry:f.entry,options:{rank:3}},f.next),error=>error===failure);
+ assert.deepEqual(reported,[failure]);assert.deepEqual(f.counts,{native:1,rolling:1,publishing:1});
+ assert.equal(f.calls.filter(call=>call[0]==='uncertain').length,1);
+});
+
+test('failed uncertainty recording and a broken reporter cannot hide the original delivery error',async()=>{
+ const f=fixture(),failure=Error('准确伤害卡未能确认'),recordFailure=Error('分弹回执未确认'),reported=[];
+ f.ledger.finishPublication=async()=>{throw failure};
+ f.ledger.uncertain=async p=>{f.calls.push(['uncertain',p]);throw recordFailure};
+ const bridge=createForceBarrageBridge({...f.config,onError:error=>{reported.push(error);throw Error('notification unavailable')}});
+ bridge.register({Hooks:{on:(name,fn)=>f.hooks.set(name,fn),off(){}},socket:{register(){}}});
+ await assert.rejects(bridge.interceptCast({item:f.item,entry:f.entry,options:{rank:3}},f.next),error=>error===failure);
+ assert.deepEqual(reported,[failure]);assert.deepEqual(f.counts,{native:1,rolling:1,publishing:1});
+ assert.equal(f.calls.filter(call=>call[0]==='uncertain').length,1);
 });
