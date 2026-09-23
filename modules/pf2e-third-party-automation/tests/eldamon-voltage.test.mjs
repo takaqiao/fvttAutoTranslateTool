@@ -155,6 +155,13 @@ test('basic Reflex executor preserves native damage API source, target and conte
   await assert.rejects(f.provider.beforeDamage(f.target.actor,params),/already|authorized|grant/i);
  }
 });
+test('GM High Voltage card records the same explicit recipient as its HP application',async()=>{
+ const f=executorFixture('failure');f.game.user.targets=new Set([{document:{uuid:'Scene.scene.Token.gm-current'}}]);
+ await f.provider.ledger.channel(f.payload,f.user);
+ await f.provider.trigger({...f.payload,targetUuid:f.target.uuid,kind:'touch',confirmed:true},f.user);
+ assert.deepEqual(f.messages[0].flags['pf2e-toolbelt']?.targetHelper?.targets,['Scene.scene.Token.target']);
+ assert.equal(f.applications[0].params.token,f.target);
+});
 test('Siphon delayed damage uses target traits for full versus half without duplicate metapower marker',async()=>{
  for(const [traits,want]of [[[],10],[['electricity'],21]]){
   const f=executorFixture('failure',{siphon:true,disruptive:true,traits});await f.provider.ledger.channel(f.payload,f.user);await f.provider.trigger({...f.payload,targetUuid:f.target.uuid,kind:'touch',confirmed:true},f.user);

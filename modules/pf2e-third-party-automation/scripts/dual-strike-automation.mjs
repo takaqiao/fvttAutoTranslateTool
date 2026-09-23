@@ -1,4 +1,5 @@
 import {MODULE_ID} from './rules.mjs';
+import {withDamageMessageTarget} from './damage-message-targets.mjs';
 import {getSourceId,isActiveGM,resolveMessageTargets} from './native-context.mjs';
 import {SerialActions} from './runtime.mjs';
 import {preserveDamagePartForMerge,preserveMergedDamageBypass} from './native-damage-components.mjs';
@@ -163,7 +164,7 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
    data.flags.pf2e.context={...data.flags.pf2e.context,type:'damage-roll',sourceType:'attack',domains:['damage','strike-damage'],options:[...new Set([...(data.flags.pf2e.context?.options??[]),...hits.some(h=>h.outcome==='criticalSuccess')?['check:outcome:critical-success']:[],...hits.map(h=>`${MODULE_ID}:bear-attack:${h.attackMessage.id}`)])],target:{actor:target.actor.uuid,token:target.uuid}};
    data.flags[MODULE_ID]={...data.flags[MODULE_ID],usageGenerated:true,dualStrike:{usageMessageId:message.id,kind:action,map,attacks:hits.map(h=>({messageId:h.attackMessage.id,weaponUuid:h.strike.item.uuid,actorUuid:actor.uuid}))}};
    data.flavor=`<h4 class="action">${twin?'双重攻击':'双重切割'}：合并伤害</h4>${data.flavor??''}`;
-   await messageClass().create(data);
+   await messageClass().create(withDamageMessageTarget(data,target.uuid));
    return `已完成两次攻击，${hits.length}次命中；合并伤害只需应用一次，熊支援会随之自动结算。`;
   });
  }

@@ -2,6 +2,7 @@ import {createVoltageLedger,voltageState,currentVoltageToken,HIGH_VOLTAGE_SOURCE
 import {sourceUuid,siphonMultiplier} from './metapower/rules.mjs';
 import {convertSiphonRoll} from './metapower/damage.mjs';
 import {showNativeChoice} from './native-context.mjs';
+import {withDamageMessageTarget} from './damage-message-targets.mjs';
 
 const values=c=>Array.from(c?.values?.()??c??[]),prefix=`${ID}:voltage:`,outcomes={criticalSuccess:0,success:0.5,failure:1,criticalFailure:2};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -52,7 +53,7 @@ export function createEldamonVoltageProvider({game,fromUuid,observe,onRefresh,Da
    const proof={actorUuid:actor.uuid,nonce:activation.nonce,messageUuid:activation.messageUuid,targetUuid:target.uuid};
    damage.options[ID]={...damage.options[ID],voltageDamage:proof};
    const origin=item.getOriginData(),originRollOptions=origin.rollOptions??[],allOptions=[...options,...originRollOptions];
-   const message=await damage.toMessage({speaker:activation.speaker,flavor:`${esc(item.name)} · 反射基础豁免`,flags:{pf2e:{origin,context:{type:'damage-roll',sourceType:'save',outcome:c.outcome,target:{actor:target.actor.uuid,token:target.uuid},options:allOptions}},[ID]:{voltageDamage:proof}}});
+   const message=await damage.toMessage(withDamageMessageTarget({speaker:activation.speaker,flavor:`${esc(item.name)} · 反射基础豁免`,flags:{pf2e:{origin,context:{type:'damage-roll',sourceType:'save',outcome:c.outcome,target:{actor:target.actor.uuid,token:target.uuid},options:allOptions}},[ID]:{voltageDamage:proof}}},target.uuid));
    if(game.messages.get(message?.id)!==message)throw Error('Native High Voltage damage card was not persisted.');
    const multiplier=siphonMultiplier(activation.snapshot,target.actor.traits??target.actor.system?.traits?.value??[]);
    damage=damage.alter(outcomes[c.outcome],0);if(multiplier!==1)damage=damage.alter(multiplier,0);

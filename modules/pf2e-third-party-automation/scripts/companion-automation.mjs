@@ -1,4 +1,5 @@
 import {MODULE_ID} from './rules.mjs';
+import {withDamageMessageTarget} from './damage-message-targets.mjs';
 
 const RANGED='pf2e-ranged-combat';
 const SOURCE=Object.freeze({
@@ -141,7 +142,7 @@ export function createCompanionAutomation({game,fromUuid=globalThis.fromUuid,wra
    // Claim before emitting: failures after message creation must never replay damage.
    await effect.update({[`flags.${MODULE_ID}.processed`]:[...(flags.processed??[]),message.id]});
    const roll=await new DamageRoll(`${dice}d8[slashing]`).evaluate();
-   return roll.toMessage({speaker:globalThis.ChatMessage.getSpeaker({actor:companion,token:bearToken}),flavor:'熊支援',whisper:message.whisper??[],blind:message.blind??false,flags:{[MODULE_ID]:{usageGenerated:true,kind:'bear-support-damage',supportMessageId:flags.sourceMessageId,attackMessageId:message.id},pf2e:{origin:{uuid:supportItem.uuid,type:'action',actor:companion.uuid},context:{type:'damage-roll',domains:['damage'],options:['origin:action:slug:bear-support-benefit'],target:{actor:target.actor.uuid,token:target.uuid}}}}});
+   return roll.toMessage(withDamageMessageTarget({speaker:globalThis.ChatMessage.getSpeaker({actor:companion,token:bearToken}),flavor:'熊支援',whisper:message.whisper??[],blind:message.blind??false,flags:{[MODULE_ID]:{usageGenerated:true,kind:'bear-support-damage',supportMessageId:flags.sourceMessageId,attackMessageId:message.id},pf2e:{origin:{uuid:supportItem.uuid,type:'action',actor:companion.uuid},context:{type:'damage-roll',domains:['damage'],options:['origin:action:slug:bear-support-benefit'],target:{actor:target.actor.uuid,token:target.uuid}}}}},target.uuid));
   });
  }
 

@@ -1,4 +1,5 @@
 import {MODULE_ID} from './rules.mjs';
+import {withDamageMessageTarget} from './damage-message-targets.mjs';
 import {getSourceId,isActiveGM,resolveMessageTargets} from './native-context.mjs';
 import {SerialActions} from './runtime.mjs';
 import {getNativeCastEvents} from './amp-cast-events.mjs';
@@ -237,7 +238,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   data.flags.pf2e.context={...data.flags.pf2e.context,type:'damage-roll',sourceType:'attack',outcome:'success',options:[...new Set([...(data.flags.pf2e.context?.options??[]),...parts.flatMap(p=>damageContexts.get(p.roll)?.options??p.item.getRollOptions?.('item')??[]),...markers])],target:{actor:target.actor.uuid,token:target.uuid}};
   data.flags[MODULE_ID]={...data.flags[MODULE_ID],usageGenerated:true,spellCombinationDamage:{activityMessageId:message.id,kind,targetUuid:target.uuid,attacks:attacks.map(a=>({messageId:a.message.id,weaponUuid:a.strike.item.uuid,outcome:a.outcome})),parts:parts.map(p=>({itemUuid:p.item.uuid,total:p.roll.total}))}};
   data.flavor=`<h4>${escape(kind==='combination'?'神威连击':kind==='swipe'?'法术横扫':'法术打击')}：${escape(target.name??target.actor.name??'目标')} · 合并伤害</h4>${data.flavor??''}`;
-  await Message().create(data);
+  await Message().create(withDamageMessageTarget(data,target.uuid));
   requireGM();
  }
  async function executeUsage({actor,item,message,user,action}){

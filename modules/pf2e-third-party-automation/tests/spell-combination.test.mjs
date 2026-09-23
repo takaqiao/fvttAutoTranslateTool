@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {createDualStrikeAutomation} from '../scripts/dual-strike-automation.mjs';
 let api={};try{api=await import('../scripts/spell-combination.mjs')}catch(e){if(e.code!=='ERR_MODULE_NOT_FOUND')throw e}
 const NS='pf2e-third-party-automation',S={strike:'Compendium.pf2e.actionspf2e.Item.QDW9H8XLIjuW2fE4',swipe:'Compendium.pf2e.feats-srd.Item.Fs88vjez9px2mmrC',combination:'Compendium.pf2e.actionspf2e.Item.zUWj4zmBNWOTzeFJ'};
 const set=(o,p,v)=>{const bits=p.split('.');let at=o;for(const k of bits.slice(0,-1))at=at[k]??={};at[bits.at(-1)]=v;};
@@ -29,6 +30,24 @@ function fixture({kind='strike',map=0,outcomes=['success','success'],save='failu
 async function setup(options,fn){const previous=globalThis.CONFIG;try{const f=fixture(options);globalThis.CONFIG={ChatMessage:{documentClass:f.Message},Dice:{rolls:[]},PF2E:{}};await fn(f)}finally{globalThis.CONFIG=previous}}
 function runWith(f,options={}){const p=api.createSpellCombination({game:f.game,choose:async({choices})=>choices[0].value,fromUuid:async uuid=>[f.actor,f.origin,...f.targetDocs,...f.actor.items].find(d=>d.uuid===uuid),nativeCasts:f.casts,...options});return()=>p.executeUsage({actor:f.actor,item:f.feat,message:f.message,user:{id:'player'},action:p.resolveAction(f.feat)});}
 const handoff=f=>{f.game.users.activeGM={id:'new-gm'}};
+for(const outcomes of [['success','success'],['failure','success']])test('Dual Strike publishes the fixed recipient after one or two hits',()=>setup({outcomes},async f=>{
+ f.game.user.targets=new Set([{document:{uuid:'Scene.s.Token.gm-current'}}]);
+ f.feat.type='feat';f.feat.sourceId='Compendium.pf2e.feats-srd.Item.onde0SxLoxLBTnvm';
+ f.feat.system.rules=[{key:'FlatModifier',predicate:[{or:['double-slice-second',NS+':double-slice-second']}]}];
+ f.weapons[1].system.equipped={carryType:'held',handsHeld:1};
+ const provider=createDualStrikeAutomation({game:f.game,fromUuid:async uuid=>[f.origin,...f.targetDocs].find(d=>d.uuid===uuid),choose:async({choices})=>choices[0].value});
+ await provider.executeUsage({actor:f.actor,item:f.feat,message:f.message,user:{id:'player'},action:'dual:double-slice'});
+ const cards=f.messages.filter(m=>m.flags[NS]?.dualStrike);
+ assert.equal(cards.length,1);
+ assert.deepEqual(cards[0].flags['pf2e-toolbelt']?.targetHelper?.targets,['Scene.s.Token.target0']);
+ assert.equal(cards[0].flags.pf2e.context.target.token,'Scene.s.Token.target0');
+}));
+for(const kind of ['strike','combination','swipe'])test(`${kind} GM damage cards retain each recipient for Toolbelt instead of the GMs current target`,()=>setup({kind},async f=>{
+ f.game.user.targets=new Set([{document:{uuid:'Scene.s.Token.gm-current'}}]);
+ await f.use();
+ const cards=f.messages.filter(m=>m.flags[NS]?.spellCombinationDamage);
+ assert.deepEqual(cards.map(m=>m.flags['pf2e-toolbelt']?.targetHelper?.targets),kind==='swipe'?[['Scene.s.Token.target0'],['Scene.s.Token.target1']]:[['Scene.s.Token.target0']]);
+}));
 test('queued GM rest stops on handoff instead of overwriting the new GMs discharged state',()=>setup({},async f=>{
  let enter,release,onRest;const entered=new Promise(resolve=>{enter=resolve}),pending=new Promise(resolve=>{release=resolve}),errors=[];
  const provider=api.createSpellCombination({game:f.game,nativeCasts:f.casts,fromUuid:async uuid=>[f.actor,f.origin,...f.targetDocs,...f.actor.items].find(d=>d.uuid===uuid),choose:async({choices})=>{enter();await pending;return choices[0].value},onError:error=>errors.push(error)});

@@ -1,4 +1,5 @@
 import { MODULE_ID, hasSource } from './rules.mjs';
+import {withDamageMessageTarget} from './damage-message-targets.mjs';
 import {selectedRuneWeaponId,isCuttingWeapon} from './rune-transfer.mjs';
 
 export const CAMPAIGN_SOURCES=Object.freeze({
@@ -119,10 +120,10 @@ export function createCampaignFeats({game,fromUuid=globalThis.fromUuid,choose,on
  async function postDamage({actor,item,target,formula,options=[],checkId=null,usageId=null,outcome='success'}){
   const Roll=damageRollClass();if(!Roll)throw Error('当前系统缺少原生DamageRoll。');
   const roll=await new Roll(formula).evaluate();
-  const message=await roll.toMessage({speaker:globalThis.ChatMessage?.getSpeaker?.({actor,token:actorTokens(actor)[0]})??{actor:actor.id},flags:{
+  const message=await roll.toMessage(withDamageMessageTarget({speaker:globalThis.ChatMessage?.getSpeaker?.({actor,token:actorTokens(actor)[0]})??{actor:actor.id},flags:{
    pf2e:{origin:item.getOriginData?.()??{uuid:item.uuid,type:item.type,actor:actor.uuid},context:{type:'damage-roll',sourceType:'attack',domains:['damage','strike-damage'],options:[...options],outcome,target:{actor:target.actor.uuid,token:target.uuid}}},
    [MODULE_ID]:{usageGenerated:true,campaignAttackMessageId:checkId,campaignUsageId:usageId,usageInput:{targetUuids:[target.uuid]}}
-  }});
+  }},target.uuid));
   return {roll,message};
  }
 
@@ -410,7 +411,10 @@ export function createCampaignFeats({game,fromUuid=globalThis.fromUuid,choose,on
    if(message.flags?.pf2e?.context?.type!=='damage-roll'||markers.length!==1)return;
    const[usageId,checkId,...extra]=markers[0].slice(prefix.length).split(':'),usage=game.messages.get(usageId),state=own(usage).campaignStrike;
    if(extra.length||state?.checkId!==checkId||state.itemUuid!==message.flags?.pf2e?.origin?.uuid||state.actorUuid!==message.actor?.uuid)return;
-   message.updateSource({[`flags.${MODULE_ID}.usageGenerated`]:true,[`flags.${MODULE_ID}.campaignAttackMessageId`]:checkId,[`flags.${MODULE_ID}.campaignUsageId`]:usageId});
+   const target=message.flags.pf2e.context.target;
+   if(!state.targetTokenUuid||target?.token!==state.targetTokenUuid||target?.actor!==state.targetUuid)return;
+   const bound=withDamageMessageTarget({flags:message.flags},state.targetTokenUuid);
+   message.updateSource({[`flags.${MODULE_ID}.usageGenerated`]:true,[`flags.${MODULE_ID}.campaignAttackMessageId`]:checkId,[`flags.${MODULE_ID}.campaignUsageId`]:usageId,'flags.pf2e-toolbelt.targetHelper.targets':bound.flags['pf2e-toolbelt'].targetHelper.targets});
   });
   const maintenance=safe(async item=>{if(!activeGM(game)||!item?.actor)return;await maintain(item.actor);await cleanEffects(item.actor)});
   on('createItem',maintenance);on('updateItem',maintenance);on('deleteItem',maintenance);
