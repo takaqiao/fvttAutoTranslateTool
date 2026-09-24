@@ -54,4 +54,4 @@ Ordinary persistent off-guard worked before this fix. The reproduced defect is s
 - Independent review found no actionable issues in either fix. The local QA copy exposes the existing campaign provider solely to reuse the exact registered callback and avoid creating a duplicate provider during tests.
 - Local evidence is under `C:/Users/Taka/Desktop/fvtt/tmp/magus-spellstrike-20260925`: pre-fix reproduction `magus-combo-1790267505846.json`; final verification `magus-combo-1790267860026.json` and `magus-verify-1790267957179.json`. Source snapshots and raw actor records remain local and are not included in this repository.
 
-This change has not been released or deployed.
+Released and deployed as [0.9.17](deployment-0.9.17.md) after public-package and production-file verification.
