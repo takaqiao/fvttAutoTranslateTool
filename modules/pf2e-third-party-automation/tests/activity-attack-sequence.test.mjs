@@ -77,3 +77,11 @@ test('damage retains alternate usage and the infused actors item data',()=>{
  assert.equal(frame.damage(alternate).strike,alternate);assert.equal(f.clones[0].items[0].name,'existing magical infusion');
  const wrong={item:{...f.b.item,actor:infused}};assert.equal(frame.damage(wrong).strike,wrong);assert.equal(f.clones.length,1);
 });
+test('captured off-guard cannot leak into a different weapon or actor through the damage frame',()=>{
+ const f=fixture(),frame=f.sequence.begin(f.a,f.target('Scene.s.Token.one'));
+ frame.capture({flags:{pf2e:{origin:{uuid:f.a.item.uuid},context:{type:'attack-roll',outcome:'success',target:{token:'Scene.s.Token.one'},options:['target:condition:off-guard']}}}});
+ f.sequence.record(frame,'success');
+ assert(frame.damage(f.a).options.has('target:condition:off-guard'));
+ assert.deepEqual([...frame.damage(f.b).options],[]);
+ assert.deepEqual([...frame.damage({item:{...f.a.item,actor:{uuid:'Actor.other'}}}).options],[]);
+});

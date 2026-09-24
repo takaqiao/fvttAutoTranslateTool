@@ -3,7 +3,7 @@ import {isActiveGM} from './native-context.mjs';
 import {SerialActions} from './runtime.mjs';
 
 /** One serialized settings write; every changed predicate retains its original value. */
-export function createConfigurationMaintenance({game,repairs=[],settings=[]}){
+export function createConfigurationMaintenance({game,repairs=[],settings=[],onRulesChanged=()=>{}}){
  const queue=new SerialActions();
  const write=async(module,key,original,value,changes)=>{
   const requireGM=()=>{if(!isActiveGM(game))throw Error('主GM已改变，配置修复将由当前主GM重试。')};
@@ -13,6 +13,9 @@ export function createConfigurationMaintenance({game,repairs=[],settings=[]}){
   requireGM();
   if(JSON.stringify(game.settings.get(module,key))!==JSON.stringify(original))throw Error('自动化配置在修复期间发生变化，已保留备份，稍后重试。');
   await game.settings.set(module,key,value);
+  // Patreon caches active rules until reload. This signals a saved repair only;
+  // the caller can tell connected clients that they still need to refresh.
+  if(module==='patreon-v3'&&key==='rulesV3')await onRulesChanged(structuredClone(changes));
  };
  return ()=>queue.run('configuration',async()=>{
   if(!isActiveGM(game))return;

@@ -161,26 +161,24 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   }});
   requireGM();
   if(!check||!created)throw Error('组合活动的原生攻击未完成，已发生的攻击不会重试。');
-  const context=created.flags.pf2e.context;
-  const offGuard=context.target?.token===target.uuid&&context.options?.includes('target:condition:off-guard')===true;
+  frame.capture(created);
   await afterAttack(created);
   requireGM();
   const outcome=created.flags.pf2e.context.outcome;
   sequence.record(frame,outcome);
-  return {strike,target,map,message:created,outcome,frame,offGuard};
+  await frame.consume();
+  requireGM();
+  return {strike,target,map,message:created,outcome,frame};
  }
  async function weaponDamage(attack){
   requireGM();
   const {strike,target,map,message,outcome}=attack;if(!hit(outcome))return null;
   const {strike:damageStrike,options:sequenceOptions}=attack.frame.damage(strike);
   const options=new Set([`${MODULE_ID}:bear-attack:${message.id}`,...sequenceOptions]);
-  // One-attack effects can be consumed before deferred damage. Keep only this
-  // attack's witnessed target condition; native rules still calculate bonuses.
-  if(attack.offGuard)options.add('target:condition:off-guard');
   const result=await damageStrike[outcome==='criticalSuccess'?'critical':'damage']({target:target.object,checkContext:message.flags.pf2e.context,mapIncreases:map,options,event:skipEvent(game,'damage'),createMessage:false});
   requireGM();
   if(!result)throw Error('攻击已发生，但原生武器伤害尚未完成。');
-  damageContexts.set(result,{...clone(message.flags.pf2e.context),sourceType:'attack',domains:['damage','strike-damage'],options:[...new Set([...(message.flags.pf2e.context.options??[]),...strike.item.getRollOptions?.('item')??[],...strike.item.actor.getRollOptions?.(['damage','strike-damage'])??[],...options])]});
+  damageContexts.set(result,{...clone(message.flags.pf2e.context),sourceType:'attack',domains:['damage','strike-damage'],options:[...attack.frame.damageOptions([...(message.flags.pf2e.context.options??[]),...strike.item.getRollOptions?.('item')??[],...strike.item.actor.getRollOptions?.(['damage','strike-damage'])??[],...options])]});
   return result;
  }
  async function publishSpell({actor,user,message,choice,payment,targets,kind}){

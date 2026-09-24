@@ -178,6 +178,60 @@ for(const target of [null,{token:'Scene.s.Token.someone-else'}])test(`off-guard 
  const variant=f.actor.system.actions[0].variants[0],native=variant.roll;variant.roll=opts=>native({...opts,callback:async(roll,outcome,raw)=>{raw.flags.pf2e.context.target=target;raw.flags.pf2e.context.options.push('target:condition:off-guard');return opts.callback(roll,outcome,raw)}});
  await f.use();assert.equal(f.calls.find(c=>c.kind==='weapon-damage').opts.options.has('target:condition:off-guard'),false);
 }));
+
+function tumbleBehind(f,{genuineOffGuard=false}={}){
+ const effect={id:'tumble',type:'effect',sourceId:'Compendium.patreon-v3.effects.Item.Vh5E1Qgp34sTKfVs',actor:f.actor,system:{rules:[{key:'EphemeralEffect',selectors:['attack-roll','damage'],predicate:['self:mark:enemy-tumble-behind'],uuid:'Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg'},{key:'TokenMark',slug:'enemy-tumble-behind',uuid:f.targetDocs[0].uuid}],start:{value:100,initiative:15}}};
+ f.actor.items.push(effect);
+ const condition={id:'real-offguard',type:'condition',slug:'off-guard'};
+ f.targetDocs[0].actor.items=genuineOffGuard?[condition]:[];
+ f.actor.deleteEmbeddedDocuments=async(type,ids)=>{assert.equal(type,'Item');f.calls.push({kind:'consume-tumble',ids});for(const id of ids){const index=f.actor.items.findIndex(i=>i.id===id);if(index>=0)f.actor.items.splice(index,1)}};
+ for(const strike of f.actor.system.actions)for(const variant of strike.variants){const native=variant.roll;variant.roll=opts=>{
+  const active=f.actor.items.includes(effect),offGuard=genuineOffGuard||active&&opts.target.document.uuid===effect.system.rules[1].uuid;
+  f.calls.push({kind:'tumble-at-attack',active,offGuard});
+  return native({...opts,callback:async(result,outcome,raw)=>{if(active)raw.flags.pf2e.context.options.push('self:effect:off-guard-tumble-behind');if(offGuard)raw.flags.pf2e.context.options.push('target:condition:off-guard');return opts.callback(result,outcome,raw)}});
+ }}
+ return {effect,condition};
+}
+for(const kind of ['combination','swipe','dual'])for(const first of ['success','criticalSuccess','failure'])test(`${kind} consumes Tumble Behind before its next attack while preserving the first delayed damage (${first})`,()=>setup({kind:kind==='dual'?'strike':kind,outcomes:[first,'success']},async f=>{
+ const {effect}=tumbleBehind(f);
+ await (kind==='dual'?dualUse(f):f.use)();
+ assert.deepEqual(f.calls.filter(c=>c.kind==='tumble-at-attack').map(c=>c.active),[true,false]);
+ const damage=f.calls.filter(c=>c.kind==='weapon-damage');
+ assert.deepEqual(damage.map(c=>c.opts.options.has('target:condition:off-guard')),first==='failure'?[false]:[true,false]);
+ assert.equal(f.actor.items.includes(effect),false);
+ assert.equal(f.calls.filter(c=>c.kind==='consume-tumble').length,1);
+ assert.equal(f.messages.filter(m=>m.flags[NS]?.spellCombinationDamage||m.flags[NS]?.dualStrike).length,kind==='swipe'&&first!=='failure'?2:1);
+ assert(f.messages.filter(m=>m.flags.pf2e?.context?.type==='damage-roll').every(m=>!m.flags.pf2e.context.options.includes('self:effect:off-guard-tumble-behind')),'delayed cards cannot delete a newly gained use through the Patreon marker');
+}));
+test('the next Combination attack waits for effect consumption to complete',()=>setup({kind:'combination'},async f=>{
+ tumbleBehind(f);let enter,release;const entered=new Promise(resolve=>{enter=resolve}),pending=new Promise(resolve=>{release=resolve});
+ const nativeDelete=f.actor.deleteEmbeddedDocuments;f.actor.deleteEmbeddedDocuments=async(...args)=>{enter();await pending;return nativeDelete(...args)};
+ const use=f.use();await entered;
+ assert.equal(f.calls.filter(c=>c.kind==='attack').length,1);
+ assert.equal(f.calls.filter(c=>c.kind==='weapon-damage').length,0);
+ release();await use;assert.deepEqual(f.calls.filter(c=>c.kind==='tumble-at-attack').map(c=>c.active),[true,false]);
+}));
+for(const kind of ['combination','dual'])test(`${kind} stops before its second Strike when effect settlement fails and cannot replay the first Strike`,()=>setup({kind:kind==='dual'?'strike':kind},async f=>{
+ tumbleBehind(f);f.actor.deleteEmbeddedDocuments=async()=>{throw Error('database unavailable')};const use=kind==='dual'?dualUse(f):f.use;
+ await assert.rejects(use,/database unavailable/);
+ if(kind==='dual')await use();else await assert.rejects(use,/未完成|重试|确认/);
+ assert.equal(f.calls.filter(c=>c.kind==='attack').length,1);
+ assert.equal(f.calls.filter(c=>c.kind==='weapon-damage').length,0);
+}));
+test('consuming Tumble Behind does not remove genuine target off-guard or limit Combination precision to one hit',()=>setup({kind:'combination'},async f=>{
+ const {condition}=tumbleBehind(f,{genuineOffGuard:true});
+ for(const strike of f.actor.system.actions)strike.damage=async opts=>{
+  f.calls.push({kind:'weapon-damage',opts});
+  // A native result with precision on each independently off-guard hit. The
+  // activity must preserve both; only Double Slice has a once-only restriction.
+  const result=roll(13);result.instances=[{total:13,componentTotal:type=>type==='precision'?3:0,head:{options:{}}}];return result;
+ };
+ await f.use();
+ assert.deepEqual(f.calls.filter(c=>c.kind==='tumble-at-attack').map(c=>c.active),[true,false]);
+ assert.deepEqual(f.calls.filter(c=>c.kind==='weapon-damage').map(c=>c.opts.options.has('target:condition:off-guard')),[true,true]);
+ assert.deepEqual(f.targetDocs[0].actor.items,[condition]);
+ assert.equal(f.messages.at(-1).rolls[0].total,26);
+}));
 test('Spellstrike with save spell still rolls save and damage when the Strike misses',()=>setup({spellSave:true,outcomes:['failure']},async f=>{await f.use();assert.equal(f.calls.filter(c=>c.kind==='save').length,1);assert.equal(f.messages.at(-1).rolls[0].total,16);assert.equal(f.calls.filter(c=>c.kind==='weapon-damage').length,0)}));
 test('Spellstrike critical failure spends the spell but disrupts saves and spell damage',()=>setup({spellSave:true,outcomes:['criticalFailure']},async f=>{await f.use();assert.equal(f.calls.filter(c=>c.kind==='payment').length,1);assert.equal(f.calls.filter(c=>c.kind==='save'||c.kind==='spell-damage').length,0);assert.equal(f.actor.flags[NS].spellstrike.charged,false)}));
 test('a successful basic save halves only the spell component before merging weapon damage',()=>setup({spellSave:true,save:'success'},async f=>{await f.use();assert.equal(f.messages.at(-1).rolls[0].total,18)}));

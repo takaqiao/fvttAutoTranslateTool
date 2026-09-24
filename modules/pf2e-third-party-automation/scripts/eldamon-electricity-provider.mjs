@@ -38,7 +38,7 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
   if(active())return ledger[method](payload,game.user);
   if(!socket||!game.users.activeGM)throw Error('Electricity lifecycle requires an online active GM.');
   const result=await socket.executeAsUser(`electricity:${method}`,game.users.activeGM.id,payload);
-  if(!result?.ok)throw Error(result?.error??'Electricity coordinator did not respond.');return result.value;
+  if(!result?.ok){const error=Error(result?.error??'Electricity coordinator did not respond.');if(method==='confirmedAction'&&result?.electricityNotApplied===true)error.electricityNotApplied=true;throw error}return result.value;
  }
  async function interceptDamageMessage(roll,data={},options={},native){
   if(classifyElectricityDamage(roll)==='none')return native(data,options);
@@ -196,7 +196,7 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
  }
  function register({Hooks,socket:api}={}){
   socket=api;activeActors.register(Hooks);
-  for(const method of ['channel','beginDamage','finishDamage','confirmMixed','candidates','interact'])socket?.register(`electricity:${method}`,async function(payload){try{return {ok:true,value:await ledger[method](payload,game.users.get(this.socketdata.userId))}}catch(error){return {ok:false,error:error.message}}});
+  for(const method of ['channel','beginDamage','finishDamage','confirmMixed','candidates','interact','confirmedAction'])socket?.register(`electricity:${method}`,async function(payload){try{return {ok:true,value:await ledger[method](payload,game.users.get(this.socketdata.userId))}}catch(error){return {ok:false,error:error.message,...(method==='confirmedAction'&&error.electricityNotApplied===true?{electricityNotApplied:true}:{})}}});
   Hooks.on('preCreateChatMessage',decorateReceipt);
   Hooks.on('createChatMessage',(message,options,userId)=>{rememberSource(message);capture(message,options,userId);if(active())ledger.check(message).catch(onError)});
   Hooks.on('updateChatMessage',rememberSource);Hooks.on('deleteChatMessage',forgetSource);
@@ -215,6 +215,6 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
   }
  }
  return {register,maintain,beforeDamage,afterDamage,observeNativeIWR,interceptDamageMessage,interceptCheck,beforeChannel,onCommittedChannel,onRefresh,
-  validateSelection:context=>ledger.validateSelection(context),confirmMixed:payload=>rpc('confirmMixed',payload),interact:payload=>rpc('interact',payload),
+  validateSelection:context=>ledger.validateSelection(context),confirmMixed:payload=>rpc('confirmMixed',payload),interact:payload=>rpc('interact',payload),confirmedAction:payload=>rpc('confirmedAction',payload),
   diagnostic:{nativeElectricity:'source-bound native IWR and damage-taken receipt',mixedDamage:'active-GM exact attribution',unsupported:['preexisting untagged damage cards','arbitrary custom attack damage components','unrecorded touches/actions']}};
 }

@@ -125,8 +125,12 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
      attackMessage=await messageClass().create(data);
     }});
     if(!check||!attackMessage)throw Error('双武器活动已中止；已发生的攻击不会自动重试。');
+    frame.capture(attackMessage);
     const outcome=attackMessage.flags.pf2e.context.outcome;
     sequence.record(frame,outcome);
+    if(!isActiveGM(game))throw Error('主 GM 已交接；旧客户端停止双武器活动。');
+    await frame.consume();
+    if(!isActiveGM(game))throw Error('主 GM 已交接；旧客户端停止双武器活动。');
     if(!['success','criticalSuccess'].includes(outcome))continue;
     const damageOptions=new Set([`${MODULE_ID}:bear-attack:${attackMessage.id}`]);
     if(twin)damageOptions.add('hunted-prey');

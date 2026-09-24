@@ -14,7 +14,20 @@ export const ELECTRICITY_SOURCES=Object.freeze({
  shot:'Compendium.battlezoo-eldamon-pf2e.powers.Item.QIYppaP0zcGvb5Bd',
  chain:'Compendium.battlezoo-eldamon-pf2e.powers.Item.fzV5Ly3a9nEsfcAJ',
 });
+export const ELECTRICITY_BASIC_SOURCES=Object.freeze({
+ element:'Compendium.battlezoo-eldamon-pf2e.eldamon-features.Item.9KtNlRXeuxZSoVaI',
+ shield:'Compendium.battlezoo-eldamon-pf2e.actions.Item.g8lH9enxTY6Cpx9V',
+ manipulation:'Compendium.battlezoo-eldamon-pf2e.eldamon-features.Item.h4D0hXhSHqmyBEQN',
+});
 const ID=ELECTRICITY_MODULE_ID,S=ELECTRICITY_SOURCES,copy=x=>structuredClone(x),values=c=>Array.from(c?.values?.()??c??[]);
+export const electricityBasicSettlementEnabled=game=>game?.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'&&game.system.version==='8.5.1'&&game.modules?.get('battlezoo-eldamon-pf2e')?.active===true;
+export const electricityBasicCardType=message=>!!message&&!message.isRoll&&!message.isCheckRoll&&!message.isDamageRoll&&!['attack-roll','damage-roll','saving-throw','skill-check','damage-taken'].includes(message.flags?.pf2e?.context?.type);
+export function electricityBasicAction(item){
+ const kind=['shield','manipulation'].find(key=>sourceUuid(item)===ELECTRICITY_BASIC_SOURCES[key]);
+ if(!kind)return null;
+ if(!values(item?.actor?.items).some(i=>sourceUuid(i)===ELECTRICITY_BASIC_SOURCES.element))return null;
+ return kind;
+}
 export const ELECTRICITY_APPLY_PREFIX=`${ID}:electricity-apply:`;
 export const ELECTRICITY_SOURCE_PREFIX=`${ID}:electricity-source:`;
 const author=m=>m?.author?.id??m?.user?.id??m?.user;
@@ -132,7 +145,9 @@ export function createElectricityLedger({game,reactionRestriction,fromUuid,queue
  }
  async function applyShock(actor,state,pending){
   const key=`shock:${pending.key}`;if(state.operations[key]?.status==='done')return;
-  if(!electricityEffects(actor,S.shocked).some(i=>i.flags?.[ID]?.electricityShock?.key===pending.key)){
+  const existing=electricityEffects(actor,S.shocked).find(i=>pending.identity?i.flags?.[ID]?.electricityShock?.identity===pending.identity:i.flags?.[ID]?.electricityShock?.key===pending.key);
+  const duration=pending.nativeDuration??{value:-1,unit:'unlimited',expiry:null,sustained:false};
+  if(!existing){
    const data=await effectSource(S.shocked,{electricityShock:copy(pending)},pending.context);
    // The published gate protects Shocked granted by one's own Charged parent.
    // A separately inflicted hostile copy still penalizes electricity saves.
@@ -141,8 +156,11 @@ export function createElectricityLedger({game,reactionRestriction,fromUuid,queue
      JSON.stringify(rule.predicate)===JSON.stringify([{and:['electricity',{nor:['resistant-shell']}]}]))rule.predicate=['electricity'];
    }
    // The original unlimited effect must not expire on the recipient's initiative.
-   data.system.duration={value:-1,unit:'unlimited',expiry:null,sustained:false};
+   data.system.duration=copy(duration);
+   if(pending.identity)data.system.start={value:game.time?.worldTime??0,initiative:null};
    gm();await actor.createEmbeddedDocuments('Item',[data]);
+  }else if(pending.identity&&existing.flags[ID].electricityShock.key!==pending.key){
+   gm();await existing.update({[`flags.${ID}.electricityShock`]:copy(pending),'system.context':pending.context,'system.duration':copy(duration),'system.start':{value:game.time?.worldTime??0,initiative:null}});
   }
   state.operations[key]={status:'done'};delete state.pendingShocks[pending.key];await save(actor,state);
  }
@@ -173,6 +191,31 @@ export function createElectricityLedger({game,reactionRestriction,fromUuid,queue
    shocked:electricityEffects(target.actor,S.shocked).length>0,hitBySameEffect:hit,reactionAvailable:reactionPermitted(actor,reactionRestriction)&&reactionAvailable(actor,{combat:casterCombat,modules:game.modules,messages:game.messages,users:game.users},{reactionRestriction}),discharge:selection.discharge,siphoning:kind==='siphoning'});
  }
  return {
+  /** Explicit native-card settlement. Position and the shield trigger are player/
+   * GM facts; only the selected card, owner and recipient are resolved here. */
+  async confirmedAction(payload,user){
+   let target,kind,pending;
+   try{
+    if(!electricityBasicSettlementEnabled(game))throw Error('当前世界、系统或 Eldamon 模组不支持此结算入口。');
+    const actor=await fromUuid(payload.actorUuid);owner(actor,user);
+    const item=await fromUuid(payload.itemUuid),message=await fromUuid(payload.messageUuid);target=await fromUuid(payload.targetUuid);
+    kind=electricityBasicAction(item);const pf=message?.flags?.pf2e;
+    const originMatches=pf?.origin?.uuid===item?.uuid||pf?.context?.type==='self-effect'&&pf.context.item===item?.id;
+    if(!kind||item.actor!==actor||actor.items.get(item.id)!==item||game.messages.get(message?.id)!==message||!electricityBasicCardType(message)||!originMatches||message.speaker?.actor!==actor.id||
+     !liveToken(target)||payload.confirmed!==true||!/^[A-Za-z0-9_-]{8,100}$/.test(payload.nonce??''))throw Error('请确认原生元素动作、角色与本次目标。');
+    const sourceToken=tokenUuid(message.speaker),combat=electricityEncounter(game,actor.uuid,sourceToken),rounds=kind==='manipulation'?2:1;
+    const expires=sourceTurnExpiry(combat,actor.uuid,{rounds,phase:kind==='manipulation'?'start':'end',tokenUuid:sourceToken});
+    pending={key:`basic-${message.id}-${payload.nonce}`,identity:`basic:${actor.uuid}:${kind}`,sourceActorUuid:actor.uuid,sourceMessageUuid:message.uuid,expires,
+     ...!expires&&kind==='manipulation'?{nativeDuration:{value:2,unit:'rounds',expiry:'turn-start',sustained:false}}:{},
+     context:{origin:{actor:actor.uuid,token:sourceToken,item:item.uuid,spellcasting:null,rollOptions:[]},target:{actor:target.actor.uuid,token:target.uuid},roll:null}};
+   }catch(error){
+    // Only validation is inside this boundary. A mutation/transport failure
+    // below must keep its original nonce because an effect may already exist.
+    error.electricityNotApplied=true;throw error;
+   }
+   await mutate(target.actor,state=>applyShock(target.actor,state,pending));
+   return {targetUuid:target.uuid,kind,manualExpiry:!pending.expires&&kind==='shield'};
+  },
   async channel(payload,user){const {actor,receipt:r,message,item}=await original(payload,user);
    if(siphon(r)||r.selection?.discharge||![S.surge,S.anvil,S.static,S.shot].includes(r.sourceUuid))return;
    return mutate(actor,state=>charge(actor,state,`channel:${r.nonce}`,{gain:true,context:{origin:{actor:actor.uuid,token:tokenUuid(message.speaker),item:item.uuid,spellcasting:null,rollOptions:[]},target:null,roll:null}}));

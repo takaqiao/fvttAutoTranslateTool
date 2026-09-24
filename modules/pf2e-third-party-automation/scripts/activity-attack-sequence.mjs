@@ -1,5 +1,6 @@
 import {MODULE_ID} from './rules.mjs';
 import {getSourceId} from './native-context.mjs';
+import {createNextStrikeEffectFrame} from './next-strike-effects.mjs';
 
 const DAMAGE_OPTION=`${MODULE_ID}:activity-damage`;
 const outcomes=new Set(['criticalFailure','failure','success','criticalSuccess']);
@@ -15,7 +16,8 @@ function twinPair(first,second){
 
 /** Facts belong only to this invocation, not to MAP or an inferred turn history.
  * Each frame freezes its predecessors before rolling, so deferred damage cannot
- * accidentally use later attacks. No documents, listeners or timers are created. */
+ * accidentally use later attacks. Only a captured, recognized next-attack effect
+ * can be consumed; no documents, listeners or timers are created. */
 export function createAttackSequence({actor}){
  const history=[],frames=new WeakMap();
  function begin(strike,target){
@@ -26,10 +28,11 @@ export function createAttackSequence({actor}){
   if(fact.traits.has('sweep')&&fact.target&&prior.some(entry=>entry.fact.target&&entry.fact.target!==fact.target))attackOptions.add('sweep-bonus');
   if(valid&&history.some(entry=>twinPair(entry.fact,fact)))bonuses.push({trait:'twin',slug:'activity-twin',label:'PF2E.Item.Weapon.Twin.SecondPlus',value:'@weapon.system.damage.dice'});
   if(fact.traits.has('forceful')&&prior.length)bonuses.push({trait:'forceful',slug:`activity-forceful-${prior.length===1?'second':'third'}`,label:`PF2E.Item.Weapon.Forceful.${prior.length===1?'Second':'Third'}`,value:prior.length===1?'@weapon.system.damage.dice':'2 * @weapon.system.damage.dice'});
-  const state={fact,valid,recorded:false};
-  const frame={attackOptions,damage(current){
-   const unchanged={strike:current,options:new Set()};
-   if(!state.recorded||!bonuses.length||current.item.actor?.uuid!==actor.uuid||usageKey(current)!==fact.usage)return unchanged;
+  const state={fact,valid,recorded:false},effects=createNextStrikeEffectFrame({actor,strike,target});
+  const frame={attackOptions,capture:effects.capture,consume:effects.consume,damageOptions:effects.damageOptions,damage(current){
+   if(current.item.actor?.uuid!==actor.uuid||usageKey(current)!==fact.usage)return {strike:current,options:new Set()};
+   const unchanged={strike:current,options:effects.damageOptions()};
+   if(!state.recorded||!bonuses.length)return unchanged;
    // Use the Strike's actor so a Spellstrike infusion and alternate usage survive.
    // Distinct slugs avoid native manual (ignored) modifiers shadowing these rules;
    // native circumstance stacking also preserves any larger manual bonus.
@@ -41,7 +44,7 @@ export function createAttackSequence({actor}){
     }))},
    }]},{keepId:true});
    const prepared=values(copy.system.actions).flatMap(action=>[action,...action.altUsages??[]]).find(action=>action.item&&usageKey(action)===fact.usage);
-   return prepared?{strike:prepared,options:new Set([DAMAGE_OPTION])}:unchanged;
+   return prepared?{strike:prepared,options:effects.damageOptions([DAMAGE_OPTION])}:unchanged;
   }};
   frames.set(frame,state);return frame;
  }
