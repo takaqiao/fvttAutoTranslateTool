@@ -130,8 +130,10 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   const choice=available.find(s=>s.key===key),overlays=values(choice.spell.overlays).filter(o=>o.overlayType==='override');
   let selected=choice.spell.loadVariant?.({castRank:choice.rank})??choice.spell;
   if(overlays.length){
-   const variants=overlays.map(o=>{const id=o._id??[...choice.spell.overlays.entries()].find(([,v])=>v===o)[0];return {id,item:choice.spell.loadVariant({castRank:choice.rank,overlayIds:[id]})}}).filter(v=>eligibleSpell(v.item));
-   const id=await select(actor,user,'选择法术变体',variants.map(v=>({value:v.id,label:v.item.name})));
+   const variants=overlays.map(o=>{const id=o._id??[...choice.spell.overlays.entries()].find(([,v])=>v===o)[0];return {id,sort:o.sort??0,item:choice.spell.loadVariant({castRank:choice.rank,overlayIds:[id]})}}).filter(v=>eligibleSpell(v.item)).sort((a,b)=>a.sort-b.sort);
+   // Native variants may share their spell's name; action time distinguishes
+   // one-action damage from the two-action version without rewriting formulas.
+   const id=await select(actor,user,'选择法术变体',variants.map(v=>({value:v.id,label:`${v.item.name} · ${String(v.item.system.time.value).replace(/\bor\b/g,'或').replace(/\bto\b/g,'至')} 动作`})));
    if(id===null)return null;selected=variants.find(v=>v.id===id).item;
   }
   if(!eligibleSpell(selected))throw Error('所选法术不满足一或二动作及攻击或豁免要求。');
@@ -159,17 +161,22 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   }});
   requireGM();
   if(!check||!created)throw Error('组合活动的原生攻击未完成，已发生的攻击不会重试。');
+  const context=created.flags.pf2e.context;
+  const offGuard=context.target?.token===target.uuid&&context.options?.includes('target:condition:off-guard')===true;
   await afterAttack(created);
   requireGM();
   const outcome=created.flags.pf2e.context.outcome;
   sequence.record(frame,outcome);
-  return {strike,target,map,message:created,outcome,frame};
+  return {strike,target,map,message:created,outcome,frame,offGuard};
  }
  async function weaponDamage(attack){
   requireGM();
   const {strike,target,map,message,outcome}=attack;if(!hit(outcome))return null;
   const {strike:damageStrike,options:sequenceOptions}=attack.frame.damage(strike);
   const options=new Set([`${MODULE_ID}:bear-attack:${message.id}`,...sequenceOptions]);
+  // One-attack effects can be consumed before deferred damage. Keep only this
+  // attack's witnessed target condition; native rules still calculate bonuses.
+  if(attack.offGuard)options.add('target:condition:off-guard');
   const result=await damageStrike[outcome==='criticalSuccess'?'critical':'damage']({target:target.object,checkContext:message.flags.pf2e.context,mapIncreases:map,options,event:skipEvent(game,'damage'),createMessage:false});
   requireGM();
   if(!result)throw Error('攻击已发生，但原生武器伤害尚未完成。');

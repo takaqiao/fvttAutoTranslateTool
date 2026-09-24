@@ -160,6 +160,24 @@ test('a two-handed weapon held in only one hand is not a wielded Combination wea
  const weapon=f.weapons[0];weapon.hands='2';weapon.system.equipped.handsHeld=1;weapon.system.traits.value=['finesse'];await assert.rejects(f.use());assert.equal(f.calls.filter(c=>c.kind==='attack').length,0);
 }));
 test('Spellstrike consumes once before attacking and combines attack spell damage at its Strike degree',()=>setup({outcomes:['criticalSuccess']},async f=>{await f.use();assert.deepEqual(f.calls.filter(c=>['payment','attack','spell-damage'].includes(c.kind)).map(c=>c.kind),['payment','attack','spell-damage']);assert.equal(f.messages.at(-1).rolls[0].total,52);assert.equal(f.actor.flags[NS].spellstrike.charged,false);assert.equal(f.calls.filter(c=>c.kind==='attack').length,1)}));
+for(const kind of ['strike','swipe','combination'])test(`${kind} carries only each attack's witnessed off-guard into deferred native weapon damage`,()=>setup({kind},async f=>{
+ const affected=kind==='strike'?0:1;
+ for(const strike of f.actor.system.actions)for(const variant of strike.variants){const native=variant.roll;variant.roll=opts=>native({...opts,callback:async(roll,outcome,raw)=>{
+  if(f.calls.filter(c=>c.kind==='attack').length-1===affected)raw.flags.pf2e.context.options.push('target:condition:off-guard','attack-only:must-not-carry');
+  return opts.callback(roll,outcome,raw);
+ }})}
+ await runWith(f,{afterAttack:async message=>{message.flags.pf2e.context.options=message.flags.pf2e.context.options.filter(o=>o!=='target:condition:off-guard')}})();
+ const damage=f.calls.filter(c=>c.kind==='weapon-damage');assert.equal(damage.length,kind==='strike'?1:2);
+ for(const [index,call]of damage.entries()){
+  assert.equal(call.opts.options.has('target:condition:off-guard'),index===affected,'later checks and consumed temporary effects must not change the original attack fact');
+  assert.equal(call.opts.options.has('attack-only:must-not-carry'),false);
+  assert.equal(call.opts.target.document.uuid,f.targetDocs[kind==='swipe'?index:0].uuid);
+ }
+}));
+for(const target of [null,{token:'Scene.s.Token.someone-else'}])test(`off-guard from a missing or different attack target is not copied (${target?.token??'missing'})`,()=>setup({},async f=>{
+ const variant=f.actor.system.actions[0].variants[0],native=variant.roll;variant.roll=opts=>native({...opts,callback:async(roll,outcome,raw)=>{raw.flags.pf2e.context.target=target;raw.flags.pf2e.context.options.push('target:condition:off-guard');return opts.callback(roll,outcome,raw)}});
+ await f.use();assert.equal(f.calls.find(c=>c.kind==='weapon-damage').opts.options.has('target:condition:off-guard'),false);
+}));
 test('Spellstrike with save spell still rolls save and damage when the Strike misses',()=>setup({spellSave:true,outcomes:['failure']},async f=>{await f.use();assert.equal(f.calls.filter(c=>c.kind==='save').length,1);assert.equal(f.messages.at(-1).rolls[0].total,16);assert.equal(f.calls.filter(c=>c.kind==='weapon-damage').length,0)}));
 test('Spellstrike critical failure spends the spell but disrupts saves and spell damage',()=>setup({spellSave:true,outcomes:['criticalFailure']},async f=>{await f.use();assert.equal(f.calls.filter(c=>c.kind==='payment').length,1);assert.equal(f.calls.filter(c=>c.kind==='save'||c.kind==='spell-damage').length,0);assert.equal(f.actor.flags[NS].spellstrike.charged,false)}));
 test('a successful basic save halves only the spell component before merging weapon damage',()=>setup({spellSave:true,save:'success'},async f=>{await f.use();assert.equal(f.messages.at(-1).rolls[0].total,18)}));
@@ -202,6 +220,20 @@ test('a partial native attack failure cannot replay an already paid activity',()
 test('Spell Swipe leaves adjacency to the table and keeps both original targets with one payment',()=>setup({kind:'swipe'},async f=>{f.targetDocs[0].object.distanceTo=()=>{throw Error('adjacency probe must not run')};await f.use();assert.equal(f.calls.filter(c=>c.kind==='payment').length,1);assert.deepEqual(f.calls.filter(c=>c.kind==='attack').map(c=>c.opts.target.document.uuid),f.targetDocs.map(t=>t.uuid))}));
 test('Spell Swipe cannot substitute a token from another scene',()=>setup({kind:'swipe'},async f=>{f.targetDocs[1].parent={id:'other'};await assert.rejects(f.use,/场景|目标/);assert.equal(f.calls.filter(c=>c.kind==='payment'||c.kind==='attack').length,0)}));
 test('normal player variant selection is carried into payment and damage',()=>setup({overlays:true},async f=>{await f.use();assert.deepEqual(f.calls.find(c=>c.kind==='payment').ctx.item.appliedOverlays,new Map([['override','variant1']]));assert.deepEqual(f.calls.find(c=>c.kind==='spell-damage').overlays,['variant1'])}));
+test('same-name action variants remain distinguishable and retain the selected heightened slot',()=>setup({},async f=>{
+ f.spell.name='Blazing Bolt';f.spell.rank=3;f.spell.isCantrip=false;
+ f.spell.system.time.value='1 to 3';
+ f.spell.overlays=new Map([['two-actions',{overlayType:'override',sort:2,time:'2 or 3'}],['one-action',{overlayType:'override',sort:1,time:'1'}]]);
+ const load=f.spell.loadVariant;f.spell.loadVariant=function(options={}){const variant=load.call(this,options),overlay=this.overlays.get(options.overlayIds?.[0]);return {...variant,system:{...variant.system,time:{value:overlay?.time??this.system.time.value}}}};
+ f.entry.getSheetData=async()=>({groups:[{id:7,active:[null,{spell:f.spell,castRank:7,expended:false}]}]});
+ let shown;
+ await runWith(f,{choose:async({title,choices})=>{if(title==='选择法术变体'){shown=choices;assert.notEqual(choices[0].label,choices[1].label,'action count is necessary to choose the right native damage');assert.deepEqual(choices.map(c=>c.value),['one-action','two-actions']);assert.match(choices[0].label,/1.*动作/);assert.match(choices[1].label,/2.*动作/);return choices[1].value}return choices[0].value}})();
+ assert(shown);const payment=f.calls.find(c=>c.kind==='payment').ctx;
+ assert.equal(payment.rank,7);assert.equal(payment.slotId,1);assert.equal(payment.item.rank,7);
+ assert.deepEqual([...payment.item.appliedOverlays.values()],['two-actions']);
+ assert.deepEqual(f.calls.find(c=>c.kind==='spell-damage').overlays,['two-actions']);
+ assert.equal(f.messages.find(m=>m.flags[NS]?.spellCombination)?.flags.pf2e.origin.castRank,7);
+}));
 for(const kind of ['strike','combination','swipe'])test(`${kind} settles native attacks without measuring range or collision`,()=>setup({kind},async f=>{const forbidden=()=>{throw Error('spatial probe must not run')};f.actor.getReach=forbidden;f.origin.object.distanceTo=forbidden;f.origin.object.checkCollision=forbidden;await f.use();assert.equal(f.calls.filter(c=>c.kind==='attack').length,kind==='strike'?1:2);assert.equal(f.message.flags[NS].spellCombinationUse.state,'done')}));
 test('native generated attack cards suppress duplicate Workbench auto damage',()=>setup({},async f=>{await f.use();const attacks=f.messages.filter(m=>m.flags[NS]?.spellCombinationAttack);assert.equal(attacks.length,1);assert.equal(attacks[0].flags['xdy-pf2e-workbench'].noAutoDamageRoll,true)}));
 test('unprepared and expended spells are never choices even if in the spellbook',()=>setup({},async f=>{f.entry.getSheetData=async()=>({groups:[{id:8,active:[{spell:f.spell,castRank:8,expended:true}]}]});await assert.rejects(f.use,/法术/);assert.equal(f.calls.length,0)}));
