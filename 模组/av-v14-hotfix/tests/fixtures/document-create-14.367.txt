@@ -1,0 +1,6 @@
+  static async create(data={}, operation={}) {
+    const isArray = Array.isArray(data);
+    const createData = isArray ? data : [data];
+    const created = await this.implementation.createDocuments(createData, operation);
+    return isArray ? created : created.shift();
+  }

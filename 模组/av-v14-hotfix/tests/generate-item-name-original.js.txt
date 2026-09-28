@@ -1,0 +1,58 @@
+function generateItemName(e) {
+	if (!e.isOfType(`armor`, `shield`, `weapon`)) return e.name;
+	let [t, n, r] = e.isOfType(`armor`) ? [
+		CONFIG.PF2E.baseArmorTypes,
+		Kn.armor.property,
+		Kn.armor.resilient
+	] : e.isOfType(`shield`) ? [
+		CONFIG.PF2E.baseShieldTypes,
+		null,
+		null
+	] : [
+		{
+			...CONFIG.PF2E.baseWeaponTypes,
+			...CONFIG.PF2E.baseShieldTypes
+		},
+		Kn.weapon.property,
+		Kn.weapon.striking
+	], i = e._source.name, a = e.baseType ?? ``;
+	if (!a || !(a in t) || e.isSpecific || i !== _loc(t[a] ?? ``)) return e.name;
+	let { runes: s, material: c, grade: l } = e.system, u = a ? c.type && [
+		`hide-armor`,
+		`steel-shield`,
+		`wooden-shield`
+	].includes(a) ? _loc(`TYPES.Item.${e.type}`) : _loc(t[a] ?? ``) : e.name, d = c.type && _loc(CONFIG.PF2E.preciousMaterials[c.type]);
+	if (l && !AutomaticBonusProgression.isEnabled(e.actor)) {
+		let e = {
+			base: u,
+			material: d,
+			grade: _loc(CONFIG.PF2E.grades[l])
+		}, t = [`Grade`, e.material && `Material`].filter(o).join(``);
+		return _loc(`PF2E.Item.Physical.GeneratedName.${t}`, e);
+	} else {
+		let t = `potency` in s ? s.potency : null, i = `resilient` in s ? s.resilient : `striking` in s ? s.striking : null, a = {
+			base: u,
+			material: d,
+			potency: t,
+			reinforcing: `reinforcing` in s && _loc(_s[Number(s.reinforcing)] ?? ``) || null,
+			fundamental2: i && r && _loc(r[i]?.name ?? ``) || null
+		};
+		if (`property` in s && n) for (let e of [
+			0,
+			1,
+			2,
+			3
+		]) a[`property${e + 1}`] = _loc(n[s.property[e]]?.name ?? ``) || null;
+		let c = (() => {
+			let e = [
+				a.potency ? `Potency` : null,
+				a.reinforcing ? `Reinforcing` : null,
+				a.fundamental2 && `Fundamental2`,
+				a.property4 ? `FourProperties` : a.property3 ? `ThreeProperties` : a.property2 ? `TwoProperties` : a.property1 ? `OneProperty` : null,
+				a.material && `Material`
+			].filter(o).join(``) || null;
+			return e && _loc(e);
+		})();
+		return c ? _loc(`PF2E.Item.Physical.GeneratedName.${c}`, a) : e.name;
+	}
+}

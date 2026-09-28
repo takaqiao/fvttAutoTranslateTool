@@ -1,0 +1,16 @@
+{
+  "version": "2.9.1",
+  "source": "/root/fvtt14-data/Data/modules/babele/script/foundry/wrapper.js",
+  "sourceSha256": "81b815d224ba5ddf8a9d3bfd6622ef882bace867935f86dbf1d06934ee5293d4",
+  "helper": "function preserveIndexFlags(collection, wrapped, args = []) {\n    const [document] = args;\n    const id = document?.id;\n    const idx = id ? collection.index.get(id) : null;\n    const flag = document?.flags?.babele ?? {};\n\n    const result = wrapped(...args);\n\n    if (id) {\n        collection.index.set(id, foundry.utils.mergeObject(\n            collection.index.get(id),\n            {\n                ...idx,\n                ...flag\n            }\n        ));\n    }\n\n    return result;\n}",
+  "helperSha256": "58200755d2859322d9ccb880a4d9495c8d498048f0e98b18df764cbe9cd1a878",
+  "helperSignature": "2f7f5cccb742870f",
+  "callback": "function (wrapped, ...args) {\n        return preserveIndexFlags(this, wrapped, args);\n    }",
+  "callbackSha256": "d4be22441ba7691088f2fa4bcd46b1c76a8fce8e2257009726d558c26819c96e",
+  "titleReset": {
+    "source": "/root/fvtt14-data/Data/modules/pf2e_compendium_chn/babele-ondemand-patch.js",
+    "version": "3.1.2",
+    "sourceSha256": "21b1b6453a5c6c09dc99da330eb70a17ff80e7ff3790eae12f42be4d16336848",
+    "code": "function restorePackIndexCompat(pack) {\n\tpack?.index?.forEach?.((entry) => {\n\t\tif (!entry) return;\n\t\tif (entry.originalName) {\n\t\t\tentry.name = entry.originalName;\n\t\t}\n\t\tif (entry.flags?.babele) {\n\t\t\tdelete entry.flags.babele;\n\t\t}\n\t\tdelete entry.originalName;\n\t\tdelete entry.translated;\n\t\tdelete entry.hasTranslation;\n\t});\n}"
+  }
+}

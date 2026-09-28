@@ -1,0 +1,146 @@
+{
+  "format": 1,
+  "generator": "scripts/build-babele-test-fixtures.mjs",
+  "sources": [
+    {
+      "name": "foundry.mjs",
+      "sha256": "02248043922e265f368a07922543acb54a7c6402b848ac77e9783093be66545e"
+    },
+    {
+      "name": "baseline.js",
+      "sha256": "21b1b6453a5c6c09dc99da330eb70a17ff80e7ff3790eae12f42be4d16336848"
+    },
+    {
+      "name": "lib-wrapper.js",
+      "sha256": "26a498294dfe5e303d58f22b9f5ed14dea0e6dd215f24e50b948e091096f8b73"
+    }
+  ],
+  "extraction": "Verbatim source excerpts; CRLF normalized to LF and outer whitespace trimmed. No function bodies rewritten.",
+  "ranges": [
+    {
+      "name": "StringTree",
+      "source": "foundry.mjs",
+      "sourceSha256": "02248043922e265f368a07922543acb54a7c6402b848ac77e9783093be66545e",
+      "startLine": 7954,
+      "endLine": 8070,
+      "bytes": 4215,
+      "sha256": "e409df2488b9fbeec5e903107b3c5f9428d8ad85cf7a75398d085d814953315d"
+    },
+    {
+      "name": "WordTree",
+      "source": "foundry.mjs",
+      "sourceSha256": "02248043922e265f368a07922543acb54a7c6402b848ac77e9783093be66545e",
+      "startLine": 8082,
+      "endLine": 8116,
+      "bytes": 1375,
+      "sha256": "87a7c3f58424a7656d1f04f6cd5b7818d429a62a0ac0ae1f75446ccd1e9bbb89"
+    },
+    {
+      "name": "DocumentIndex",
+      "source": "foundry.mjs",
+      "sourceSha256": "02248043922e265f368a07922543acb54a7c6402b848ac77e9783093be66545e",
+      "startLine": 204113,
+      "endLine": 204405,
+      "bytes": 10763,
+      "sha256": "070d51bcdee14fdaa56bb0051a958880b5d0c3dd64ac2c50020d90390ab88bbf"
+    },
+    {
+      "name": "CompendiumCollection.indexDocument",
+      "source": "foundry.mjs",
+      "sourceSha256": "02248043922e265f368a07922543acb54a7c6402b848ac77e9783093be66545e",
+      "startLine": 28278,
+      "endLine": 28289,
+      "bytes": 409,
+      "sha256": "f41754b778c2052dfff0540cd963816fef87da0f9665126171638bcb381ad088"
+    },
+    {
+      "name": "scheduleDocumentIndexRebuild",
+      "source": "baseline.js",
+      "sourceSha256": "21b1b6453a5c6c09dc99da330eb70a17ff80e7ff3790eae12f42be4d16336848",
+      "startLine": 1635,
+      "endLine": 1649,
+      "bytes": 565,
+      "sha256": "6f44176eac18dc36d61b5c8c4e302257de39f2daba60e99bf067147bcd6e1493"
+    },
+    {
+      "name": "rebuildDocumentIndexCompat",
+      "source": "baseline.js",
+      "sourceSha256": "21b1b6453a5c6c09dc99da330eb70a17ff80e7ff3790eae12f42be4d16336848",
+      "startLine": 1651,
+      "endLine": 1673,
+      "bytes": 847,
+      "sha256": "3ca975a1b3f0bf6c10ea5cf66cd8a096488f045b34b7674216dafea8fc560027"
+    },
+    {
+      "name": "normalizePackId",
+      "source": "baseline.js",
+      "sourceSha256": "21b1b6453a5c6c09dc99da330eb70a17ff80e7ff3790eae12f42be4d16336848",
+      "startLine": 1675,
+      "endLine": 1681,
+      "bytes": 254,
+      "sha256": "e449e2ea838f0c88a2ff2f3ae36036137db8c6cc973471e5d92a4a35c507095d"
+    },
+    {
+      "name": "translateIndexTitles",
+      "source": "baseline.js",
+      "sourceSha256": "21b1b6453a5c6c09dc99da330eb70a17ff80e7ff3790eae12f42be4d16336848",
+      "startLine": 2181,
+      "endLine": 2217,
+      "bytes": 1131,
+      "sha256": "8d24bd676aa79d0380a925b2eae5c292bd3c0648810d4d2ca69dd552897f19d0"
+    },
+    {
+      "name": "applyLightRuntimeTranslations",
+      "source": "baseline.js",
+      "sourceSha256": "21b1b6453a5c6c09dc99da330eb70a17ff80e7ff3790eae12f42be4d16336848",
+      "startLine": 1523,
+      "endLine": 1608,
+      "bytes": 3034,
+      "sha256": "5c2e3330dfb2c575cf3be0b73599765d22d06b6015715b41b357011acf2eed30"
+    },
+    {
+      "name": "CompendiumCollection.indexDocument wrapper registration",
+      "source": "baseline.js",
+      "sourceSha256": "21b1b6453a5c6c09dc99da330eb70a17ff80e7ff3790eae12f42be4d16336848",
+      "startLine": 2680,
+      "endLine": 2722,
+      "bytes": 1210,
+      "sha256": "7e92e91d7f646f730b27761b3b08bebcd739211bb0cc6113a6d51fce61b11160"
+    },
+    {
+      "name": "package identity check",
+      "source": "lib-wrapper.js",
+      "sourceSha256": "26a498294dfe5e303d58f22b9f5ed14dea0e6dd215f24e50b948e091096f8b73",
+      "startLine": 1,
+      "endLine": 1,
+      "bytes": 532,
+      "sha256": "56cf47488f6043b7b4d400596f23617b6a967690716936e66e2b0c505884498c"
+    },
+    {
+      "name": "enum factory",
+      "source": "lib-wrapper.js",
+      "sourceSha256": "26a498294dfe5e303d58f22b9f5ed14dea0e6dd215f24e50b948e091096f8b73",
+      "startLine": 1,
+      "endLine": 1,
+      "bytes": 2285,
+      "sha256": "757820c87e0168178b2fb916eaafcd156a14d0b8d16c786dc5fd8fc165399818"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "babele-core-14.367.json",
+      "bytes": 17372,
+      "sha256": "1c8aba6f02489fecfb4fcc9e917892d622eb6b07c7f99c8ccb3635b70059612f"
+    },
+    {
+      "name": "babele-upstream-3.1.2.json",
+      "bytes": 7997,
+      "sha256": "cac2c70dfab290a3cf2081ded8e58ebf94069f727661b6d385f8ed7065371653"
+    },
+    {
+      "name": "babele-lib-wrapper-1.13.5.1.json",
+      "bytes": 2906,
+      "sha256": "6394d7328b7ffeb30e23e19ecc663bc1768088ae7a005b2b4a7e39b2322500a0"
+    }
+  ]
+}
