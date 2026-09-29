@@ -1,7 +1,6 @@
 import {adaptNativeHooks} from '../native-hook-adapter.mjs';
 
-// Sundry 1.10.2 and 1.10.3 have byte-identical tokenEffectHider.js (MIT).
-// Strict callback equality deliberately rejects changed upstream code.
+// These versions share the same hook callbacks; the visibility loop changed in 1.11.0.
 const CALLBACKS = {
   refreshToken: `(token) => {
     const surfaceMode = getSetting("hide.effects.token.surface");
@@ -37,7 +36,7 @@ export function installSundryPatch({g = globalThis, report} = {}) {
   const finish = result => {report?.({feature: 'sundry', ...result}); return result;};
   const module = g.game?.modules?.get('sundry');
   if (!module?.active) return finish({status: 'skipped', reason: 'module-inactive'});
-  if (!['1.10.2','1.10.3'].includes(module.version)) return finish({status: 'skipped', reason: 'version-mismatch'});
+  if (!['1.10.2', '1.10.3', '1.11.0'].includes(module.version)) return finish({status: 'skipped', reason: 'version-mismatch'});
   if ((g.game.release?.generation??Number.parseInt(g.game.version,10)) !== 14) return finish({status: 'skipped', reason: 'core-version-mismatch'});
   const Hooks = g.Hooks;
   if (!Hooks || typeof g.game?.settings?.get !== 'function') return finish({status: 'skipped', reason: 'hook-api-unavailable'});

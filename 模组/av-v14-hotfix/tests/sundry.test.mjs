@@ -13,6 +13,10 @@ const currentOriginal=await readFile(new URL('./fixtures/sundry-1.10.3-tokenEffe
 const currentConstants=await readFile(new URL('./fixtures/sundry-1.10.3-const.js.txt',import.meta.url),'utf8');
 const currentCode=currentConstants.replaceAll('export const ','const ')+'\n'
   +currentOriginal.replace(/^import[\s\S]*?;\r?\n/gm,'').replaceAll('export ','')+'\nsetupHideTokenEffects';
+const updatedOriginal = await readFile(new URL('./fixtures/sundry-1.11.0-tokenEffectHider.js.txt', import.meta.url), 'utf8');
+const updatedConstants = await readFile(new URL('./fixtures/sundry-1.11.0-const.js.txt', import.meta.url), 'utf8');
+const updatedCode = updatedConstants.replaceAll('export const ', 'const ') + '\n'
+  + updatedOriginal.replace(/^import[\s\S]*?;\r?\n/gm, '').replaceAll('export ', '') + '\nsetupHideTokenEffects';
 
 function hookAPI() {
   return vm.runInNewContext(`${coreHooks.findSplice};
@@ -26,7 +30,8 @@ async function environment({version = '1.10.2', active = true, mode = 'relevant'
     game: {version:'14.368', system:{id:'pf2e',version:systemVersion}, modules: new Map([['sundry', {version, active}], ...modules.map(id => [id, {active: true}])]),
       settings: {get(namespace, key) {assert.equal(namespace, 'sundry'); return settings.get(key);}}}};
   beforeHooks?.(g.Hooks);
-  await vm.runInNewContext(version==='1.10.3'?currentCode:originalCode, {...g, MODULE_ID: 'sundry', getSetting: key => g.game.settings.get('sundry', key)})(true);
+  const code = version === '1.11.0' ? updatedCode : version === '1.10.3' ? currentCode : originalCode;
+  await vm.runInNewContext(code, {...g, MODULE_ID: 'sundry', getSetting: key => g.game.settings.get('sundry', key)})(true);
   return {g, settings};
 }
 
@@ -67,6 +72,30 @@ test('installed Sundry 1.10.3 avoids unchanged effects and preserves a subsequen
  assert.equal(f.reads(),0);assert.deepEqual(f.view().icons,[false]);
  f.token.hover=true;g.Hooks.callAll('refreshToken',f.token);
  assert.equal(f.reads(),1);assert.deepEqual(f.view().icons,[true]);
+});
+
+test('Sundry 1.11.0 skips unchanged effects and still responds to hover and highlight', async () => {
+  const {g} = await environment({version: '1.11.0', systemVersion: '8.5.1'});
+  const item = nativeFixture(g, [false, false]);
+  g.canvas.tokens.placeables = [item.token];
+
+  assert.equal(installSundryPatch({g}).status, 'installed');
+  for (let i = 0; i < 1000; i++) g.Hooks.callAll('refreshToken', item.token);
+  assert.equal(item.reads(), 0);
+  assert.deepEqual(item.view(), {background: false, icons: [false, false]});
+
+  item.token.hover = true;
+  g.Hooks.callAll('refreshToken', item.token);
+  assert.equal(item.reads(), 1);
+  assert.deepEqual(item.view(), {background: true, icons: [true, true]});
+
+  item.token.hover = false;
+  g.Hooks.callAll('refreshToken', item.token);
+  assert.deepEqual(item.view().icons, [false, false]);
+  g.canvas.tokens.highlightObjects = true;
+  g.Hooks.callAll('highlightObjects', true);
+  assert.equal(item.reads(), 3);
+  assert.deepEqual(item.view(), {background: true, icons: [true, true]});
 });
 
 test('native shortcut matches upstream across current values, modes, hover and background owners',async()=>{
