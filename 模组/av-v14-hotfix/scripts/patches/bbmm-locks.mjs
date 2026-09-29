@@ -46,12 +46,13 @@ export function installBbmmHardLocks({runtime=globalThis,report=()=>{}}={}){
     try{
       if(typeof id!=='string'||pending.has(id)||!target(id))return;
       pending.set(id,runtime.setTimeout(async()=>{
+        pending.delete(id);
         try{
           // The GM can change/unlock the rule while this repair is queued.
           const next=target(id);if(!next)return;
           await settings.set(next.namespace,next.key,runtime.foundry.utils.duplicate(next.value));
           runtime.ui?.notifications?.warn?.('此设置已由 GM 通过 BBMM 锁定');
-        }catch(err){error(err);}finally{pending.delete(id);}
+        }catch(err){error(err);}
       },0));
     }catch(err){error(err);}
   };
