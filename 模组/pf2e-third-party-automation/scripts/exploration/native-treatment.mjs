@@ -35,12 +35,25 @@ export function createNativeTreatment({game,Hooks,fromUuid,ownerOperations,check
     const source=`${MODULE_ID}:source:${message.id}:0`;
     const foundToken=patient.getActiveTokens?.(false,true)?.[0];
     if(!apply&&!foundToken&&!patient.token)throw Error('native-application-token-required');
+    const healer=await fromUuid(activity.actorUUID);valid(activity,ctx);if(!healer)throw Error('native-origin-actor-unavailable');
+    // Match PF2e applyDamageFromMessage: card self belongs to the healer;
+    // the native receiver must evaluate its own self predicates. Rebuild the
+    // patient target context before extracting damage-received effects too.
+    const options=[...(message.flags.pf2e.context?.options??[])].filter(o=>o!=='skip-handling-message'&&!/^target(?::|$)/.test(o));
+    const originOptions=options.filter(o=>o.startsWith('self:')).map(o=>o.replace(/^self\b/,'origin'));
+    if(patient.alliance)options.push(`origin:${patient.alliance===healer.alliance?'ally':'enemy'}`);
+    options.push(...patient.getSelfRollOptions('target'));
+    const resolvables=result.item?(result.item.isOfType('spell')?{spell:result.item}:{weapon:result.item}):{};
+    const ephemeral=stage==='healing'?[]:await Promise.all((healer.synthetics?.ephemeralEffects?.['damage-received']?.target??[]).map(fn=>fn({test:[...options,...healer.getRollOptions(['damage-received']),...patient.getSelfRollOptions('target')],resolvables})));
+    valid(activity,ctx);
+    const effects=ephemeral.filter(Boolean).map(effect=>{const data=structuredClone(effect);if(data.type==='effect'){data.system.context={origin:{actor:healer.uuid,token:null,item:null,spellcasting:null,rollOptions:[]},target:{actor:patient.uuid,token:null},roll:null};data.system.duration={value:-1,unit:'unlimited',expiry:null,sustained:false}}return data});
+    if(stage==='healing'&&result.medicBonus){const effect=medicStackingEffect({medicBonus:result.medicBonus,sourceActorUUID:activity.actorUUID});if(effect)effects.push(effect)}
+    const recipient=patient.getContextualClone?.(originOptions,effects);
+    if(!recipient)throw Error('native-patient-context-unavailable');
+    const itemOptions=result.item?.isOfType('affliction','condition','effect')?result.item.getRollOptions('item'):[];
     const params={damage:stage==='healing'?-roll.total:roll,token:foundToken?.document??foundToken??patient.token??null,...result.item?{item:result.item}:{},
       skipIWR:stage==='healing',final:false,shieldBlockRequest:false,outcome:result.outcome,
-      rollOptions:new Set([...(message.flags.pf2e.context?.options??[]).filter(o=>o!=='skip-handling-message'),source,application])};
-    const effects=[];if(stage==='healing'&&result.medicBonus){const effect=medicStackingEffect({medicBonus:result.medicBonus,sourceActorUUID:activity.actorUUID});if(effect)effects.push(effect)}
-    const recipient=effects.length?patient.getContextualClone?.([],effects):patient;
-    if(!recipient)throw Error('native-medic-stacking-context-unavailable');
+      rollOptions:new Set([...options.filter(o=>!/^(?:self|target)(?::|$)/.test(o)),...itemOptions,...originOptions,...recipient.getSelfRollOptions(),source,application])};
     const request={activity,ctx,message,patient,recipient,stage,source,application,params};
     const revoke=await damageGuard.authorizeExploration(request);valid(activity,ctx);applications.add(application);
     let receipt;const privacyHook=Hooks.on('preCreateChatMessage',(m,data)=>{

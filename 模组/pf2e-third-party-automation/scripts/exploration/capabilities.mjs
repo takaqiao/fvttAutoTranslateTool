@@ -3,6 +3,14 @@ import {canonicalItemSource} from './source-ids.mjs';
 export const improvedRefocusSlugs=new Set(['bloodline','bonded','conflux','devoted','domain','hex','inspirational','link','meditative','primal','wardens'].flatMap(name=>[`${name}-focus`,`${name}-wellspring`]));
 export function refocusUnsupported(items){return values(items).filter(i=>!i.isSuppressed&&!i.system?.suppressed&&i.type==='feat'&&improvedRefocusSlugs.has(i.slug??i.system?.slug)).map(i=>i.slug??i.system?.slug)}
 export function treatablePatient(patient,healer){return patient.modeOfBeing==='living'||patient.modeOfBeing==='undead'&&healer.slugs.includes('stitch-flesh')}
+// Numeric native healing bypasses vitality/IWR qualification. Match the
+// existing Salubrious Kiss gate, using this patient's prepared data, not its
+// shared HP master's physiology. Mundane Treat Wounds does not use this gate.
+export function canReceiveVitalityHealing(actor){
+  const hp=actor?.hitPoints??actor?.system?.attributes?.hp;
+  return actor?.modeOfBeing==='living'&&!actor.isDead&&hp?.negativeHealing===false&&Number.isFinite(hp.value)&&Number.isFinite(hp.max)&&hp.max>0&&
+    !values(actor.attributes?.immunities).some(i=>['healing','vitality','object-immunities','custom'].includes(i.type)||i.definition||i.exceptions?.length);
+}
 export function wardCapacity({wardMedic,medicineRank}) {return wardMedic&&medicineRank>=2?2**(Math.min(4,medicineRank)-1):1}
 export function cooldown({startedAt,finishedAt,continualRecovery}) {const expiresAt=startedAt+(continualRecovery?600:3600);return {expiresAt,remainingSeconds:Math.max(0,expiresAt-finishedAt)}}
 export function earliestTreatmentStart({now,existingExpiresAt}) {return Math.max(now,existingExpiresAt??now)}
@@ -34,7 +42,7 @@ export function createCapabilities({game,fromUuid,hpPools}) {
     return {actorUUID:uuid,name:actor.name,level:actor.level,isDead:!!actor.isDead,unconscious:!!actor.hasCondition?.('unconscious'),wounded:!!actor.hasCondition?.('wounded'),modeOfBeing:actor.modeOfBeing,...statistics,treatmentEstimate,healingExpectationReady:!actor.synthetics?.statisticsModifiers?.['healing-received']?.length&&!actor.synthetics?.damageDice?.['healing-received']?.length,slugs,assuranceSkills,items:items.map(i=>({uuid:i.uuid,sourceId:sourceId(i),slug:i.slug??i.system?.slug,type:i.type})),
       wardCapacity:wardCapacity({wardMedic:slugs.includes('ward-medic'),medicineRank:statistics.medicine.rank}),
       continualRecovery:slugs.includes('continual-recovery'),riskySurgery:slugs.includes('risky-surgery'),threePecks:feats.some(i=>sourceId(i)==='Compendium.pf2e.feats-srd.Item.Qg5M34t95rtT0sOp'),
-      hasActiveToken:typeof actor.getActiveTokens==='function'?actor.getActiveTokens(false,true).length>0:undefined,hp:{value:master?.system?.attributes?.hp?.value??0,max:master?.system?.attributes?.hp?.max??0,temp:master?.system?.attributes?.hp?.temp??0},focus:structuredClone(actor.system?.resources?.focus??{value:0,max:0}),pool,immunities,
+      vitalityHealingReady:canReceiveVitalityHealing(actor),hasActiveToken:typeof actor.getActiveTokens==='function'?actor.getActiveTokens(false,true).length>0:undefined,hp:{value:master?.system?.attributes?.hp?.value??0,max:master?.system?.attributes?.hp?.max??0,temp:master?.system?.attributes?.hp?.temp??0},focus:structuredClone(actor.system?.resources?.focus??{value:0,max:0}),pool,immunities,
       cooldownExpiresAt:immunities.length?Math.max(...immunities.map(i=>i.expiresAt)):null,refocusUnsupported:refocusUnsupported(items),unsupported:slugs.filter(s=>['mortal-healing'].includes(s))};
   }
   return {discover,snapshot:async uuids=>Promise.all(uuids.map(discover)),activePassiveRules:async()=>{

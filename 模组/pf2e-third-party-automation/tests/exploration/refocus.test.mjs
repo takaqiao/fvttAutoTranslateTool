@@ -1,12 +1,12 @@
 import {test} from 'node:test';import assert from 'node:assert/strict';
 import {createRefocusProvider,createRefocusAdapter,focusFinishSatisfied,createFocusHealingProvider} from '../../scripts/exploration/refocus.mjs';
 test('focus healing consumes native focus once and requires explicit healing overlay',async()=>{
-  const actor={uuid:'Actor.H',flags:{},system:{resources:{focus:{value:1,max:1}}}},patient={uuid:'Actor.P',modeOfBeing:'living'};const ctx={validate(){}};const messages=new Map(),hooks=new Map();let consume,capture,seq=0,applies=0;
+  const actor={uuid:'Actor.H',flags:{},system:{resources:{focus:{value:1,max:1}}}},patient={uuid:'Actor.P',modeOfBeing:'living',system:{attributes:{hp:{value:1,max:30,negativeHealing:false}}},attributes:{immunities:[]}};const ctx={validate(){}};const messages=new Map(),hooks=new Map();let consume,capture,seq=0,applies=0;
   const Hooks={on:(n,f)=>{hooks.set(++seq,{n,f});return seq},off:(n,id)=>hooks.delete(id)};const fire=(n,m)=>{for(const h of hooks.values())if(h.n===n)h.f(m,m)};
   const card={id:'CAST',flags:{pf2e:{origin:{uuid:'Actor.H.Item.L'}},'pf2e-third-party-automation':{}},rolls:[]};
   const roll={total:18,_evaluated:true,toJSON:()=>({total:18,formula:'{18[healing]}',evaluated:true})};
   const variant={uuid:'Actor.H.Item.L',actor,sourceId:'Compendium.pf2e.spells-srd.Item.zNN9212H2FGfM7VS',rank:3,system:{cast:{focusPoints:1}},damageKinds:new Set(['healing']),rollDamage:async()=>{const m={id:'D',flags:{pf2e:{origin:{uuid:variant.uuid},context:{options:[]}}},rolls:[roll]};fire('preCreateChatMessage',m);messages.set('D',m);fire('createChatMessage',m);return roll}};
-  const item={uuid:variant.uuid,sourceId:variant.sourceId,type:'spell',actor,system:{overlays:{HEAL:{}}},loadVariant:({overlayIds})=>{assert.deepEqual(overlayIds,['HEAL']);return variant}};actor.items=new Map([['L',item]]);
+  const item={id:'L',uuid:variant.uuid,sourceId:variant.sourceId,type:'spell',actor,system:{overlays:{HEAL:{}}},loadVariant:({overlayIds})=>{assert.deepEqual(overlayIds,['HEAL']);return variant}};actor.items=new Map([['L',item]]);
   const entry={cast:async spell=>{const c={actor,item:spell,castNonce:'N',payload:{focusPoints:1},expectFocusCommit:({changes})=>{actor.flags['pf2e-third-party-automation']={explorationFocusCommits:{A:changes({castNonce:'N',before:1,after:0,cost:1})['flags.pf2e-third-party-automation.explorationFocusCommits.A']}}}};await consume(c,async()=>{actor.system.resources.focus.value=0;return true});card.flags['pf2e-third-party-automation']={...card.flags['pf2e-third-party-automation'],explorationFocus:capture(spell),nativeCast:{id:'N'}};messages.set(card.id,card)}};variant.spellcasting=entry;
   const game={user:{id:'G',settings:{showCheckDialogs:false}},time:{worldTime:6},messages};
   const poolReceipt={activityId:'A',actorUUID:'Actor.Master',before:{value:1},after:{value:19}};

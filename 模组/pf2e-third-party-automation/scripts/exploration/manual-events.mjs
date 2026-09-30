@@ -69,7 +69,7 @@ export function workbenchFacts(message){
 /** Read-only recorder. No dice, damage application, or immunity writer is injected. */
 export function createManualEvents({game,Hooks,ledger,nativeActions,hpPools,fromUuid,isAuthority=()=>game.user?.isGM&&game.users?.activeGM?.id===game.user.id,sessionId=()=>null,onChange=()=>{}}){
  const seen=new Set(),orders=new Map(),records=new Map(),sourceToActivity=new Map();let evidenceTail=Promise.resolve(),hydratedSession;let unsubscribe,hook,preHook,itemHook;const scopes=new Map();
- async function hydrate(sid){if(!sid||hydratedSession===sid||!isAuthority())return;const saved=await ledger.snapshot?.(sid);seen.clear();orders.clear();records.clear();sourceToActivity.clear();for(const a of saved?.activities??[]){if(!a.source?.manual)continue;seen.add(a.source.messageId??a.id.replace(/^manual:/,''));records.set(a.id,a);orders.set(a.actorUUID,Math.max(orders.get(a.actorUUID)??0,(a.order??0)+1));for(const id of a.proof.resultIds??[])sourceToActivity.set(id,a.id)}hydratedSession=sid}
+ async function hydrate(sid){if(!sid||hydratedSession===sid||!isAuthority())return;const saved=await ledger.snapshot?.(sid);seen.clear();orders.clear();records.clear();sourceToActivity.clear();for(const a of saved?.activities??[]){if(!a.source?.manual)continue;seen.add(a.source.messageId??a.id.replace(/^manual:/,''));records.set(a.id,a);orders.set(a.actorUUID,Math.max(orders.get(a.actorUUID)??0,(a.order??0)+1));for(const id of a.proof.resultIds??[])sourceToActivity.set(id,a.id)}hydratedSession=sid;await restoreImmunities()}
  async function trustedEnrollment(e,session){
   if(Array.isArray(session?.actorUUIDs)&&(!session.actorUUIDs.includes(e.actorUUID)||(e.patientUUIDs??[]).some(uuid=>!session.actorUUIDs.includes(uuid))))return false;
   if(!game.users||!['treatment','battle-medicine'].includes(e.kind))return true;
@@ -95,11 +95,42 @@ export function createManualEvents({game,Hooks,ledger,nativeActions,hpPools,from
    options:{label:e.label??null,sourceDegree:e.sourceDegree??null,effectiveOutcome:e.effectiveOutcome??null,rolledHealing:e.rolledHealing??null,missing:e.missing??[]},proof:{useId:e.useId??null,checkIds:e.checkIds??[],resultIds:e.resultIds??[e.id],receiptIds:e.receiptIds??[],immunityIds:e.immunityIds??[]}};await ledger.insertActivity(input);records.set(input.id,input);for(const id of input.proof.resultIds)sourceToActivity.set(id,input.id);onChange(input);return input}catch(error){seen.delete(e.id);throw error}
  }
 
- function appendEvidence(identity,edit){const task=evidenceTail.then(async()=>{if(!isAuthority())return;await hydrate(sessionId());const id=typeof identity==='function'?identity():identity;if(!id)return;const old=records.get(id)??await ledger.getActivity?.(id);if(!old||old.state!=='awaiting-evidence')return;const patch=edit(structuredClone(old));if(!patch)return;const updated={...old,...patch};await ledger.transitionActivity?.(id,{expected:['awaiting-evidence'],patch});records.set(id,updated);onChange(updated);return updated});evidenceTail=task.catch(()=>{});return task}
+ async function applyEvidence(identity,edit){if(!isAuthority())return;const id=typeof identity==='function'?identity():identity;if(!id)return;const old=records.get(id)??await ledger.getActivity?.(id);if(!old||old.state!=='awaiting-evidence')return;const patch=await edit(structuredClone(old));if(!patch)return;
+  // Persisted proof IDs are history; completion must use the currently authorized native receipts.
+  const candidate={...old,...patch};if(['treatment','battle-medicine'].includes(candidate.kind)){
+   const receipts=[];for(const receiptId of candidate.proof.receiptIds)receipts.push(await resolveReceipt(game.messages.get(receiptId)));
+   patch.options=currentApplicationEvidence(candidate,old.options.missing.includes('native-application-receipt'),receipts);
+   if(!patch.options.missing.length)patch.state='confirmed';else if(patch.state==='confirmed')delete patch.state;
+  }
+  const updated={...old,...patch};await ledger.transitionActivity?.(id,{expected:['awaiting-evidence'],patch});records.set(id,updated);onChange(updated);return updated}
+ function appendEvidence(identity,edit){const task=evidenceTail.then(async()=>{if(!isAuthority())return;await hydrate(sessionId());return applyEvidence(identity,edit)});evidenceTail=task.catch(()=>{});return task}
  async function markResult(message){const options=[...(message.flags?.pf2e?.context?.options??[])].filter(o=>!o.startsWith(`${MODULE_ID}:source:`));options.push(`${MODULE_ID}:source:${message.id}:0`);if(message.update)await message.update({'flags.pf2e.context.options':options});return options}
- function captureReceipt(message){const c=message.flags?.pf2e?.context;if(c?.type!=='damage-taken'||message.flags.pf2e.appliedDamage?.isReverted)return;
+ async function resolveReceipt(message){
+  if(!message?.id||game.messages?.get(message.id)!==message)return null;
+  const patientUUID=`Actor.${message?.speaker?.actor}`,uid=message?.author?.id??message?.author??message?.user?.id??message?.user;
+  return {message,patientUUID,uid,patient:await fromUuid?.(patientUUID)};
+ }
+ function receiptIsTrusted(resolved,activity){
+  if(!resolved)return false;const {message,patientUUID,uid,patient}=resolved,user=game.users?.get(uid);
+  const currentAuthor=message.author?.id??message.author??message.user?.id??message.user;
+  if(game.messages?.get(message.id)!==message||`Actor.${message.speaker?.actor}`!==patientUUID||currentAuthor!==uid||!user||patient?.uuid!==patientUUID||!user.isGM&&!patient.testUserPermission?.(user,'OWNER'))return false;
+  const c=message.flags?.pf2e?.context,applied=message.flags?.pf2e?.appliedDamage,sources=c?.options?.filter(o=>o.startsWith(`${MODULE_ID}:source:`))??[];
+  if(c?.type!=='damage-taken'||applied?.isReverted||sources.length!==1||!activity.patientUUIDs.includes(patientUUID)||applied&&applied.uuid!==patientUUID)return false;
+  const sourceId=sources[0].slice(`${MODULE_ID}:source:`.length).replace(/:0$/,'');
+  return sources[0]===`${MODULE_ID}:source:${sourceId}:0`&&activity.proof.resultIds.includes(sourceId)&&game.messages.get(sourceId)?.rolls?.[0]?._evaluated===true;
+ }
+ async function trustedReceipt(message,activity){return receiptIsTrusted(await resolveReceipt(message),activity)}
+ function currentApplicationEvidence(activity,previouslyMissing,receipts){
+  const applied=new Set();for(const resolved of receipts)if(receiptIsTrusted(resolved,activity))for(const option of resolved.message.flags.pf2e.context.options)applied.add(option);
+  // A retained non-roll failure card needs no HP application. A deleted/unevaluated result is unknown, not an empty requirement.
+  const required=activity.proof.resultIds.filter(id=>{const result=game.messages.get(id);return !result||result.rolls?.length>0});
+  const expected=previouslyMissing||required.length>0||activity.proof.receiptIds.length>0,missing=activity.options.missing.filter(m=>m!=='native-application-receipt');
+  if(expected&&(!required.length||required.some(id=>!applied.has(`${MODULE_ID}:source:${id}:0`))))missing.push('native-application-receipt');
+  return {...activity.options,missing};
+ }
+ function captureReceipt(message){const c=message.flags?.pf2e?.context;if(game.messages?.get(message?.id)!==message||c?.type!=='damage-taken'||message.flags.pf2e.appliedDamage?.isReverted)return;
   const sources=c.options?.filter(o=>o.startsWith(`${MODULE_ID}:source:`))??[];if(sources.length!==1)return;const sourceId=sources[0].slice(`${MODULE_ID}:source:`.length).replace(/:0$/,'');if(game.messages.get(sourceId)?.rolls?.[0]?._evaluated!==true)return;
-  void appendEvidence(()=>sourceToActivity.get(sourceId),old=>{const patientUUID=`Actor.${message.speaker?.actor}`;if(!old.patientUUIDs.includes(patientUUID)||message.flags.pf2e.appliedDamage&&message.flags.pf2e.appliedDamage.uuid!==patientUUID)return;const proof={...old.proof,receiptIds:[...new Set([...old.proof.receiptIds,message.id])]},applied=new Set(proof.receiptIds.flatMap(r=>game.messages.get(r)?.flags?.pf2e?.context?.options??[]));const required=proof.resultIds.filter(r=>game.messages.get(r)?.rolls?.[0]?._evaluated);const missing=old.options.missing.filter(m=>m!=='native-application-receipt');if(required.some(r=>!applied.has(`${MODULE_ID}:source:${r}:0`)))missing.push('native-application-receipt');return {proof,options:{...old.options,missing},...missing.length===0?{state:'confirmed'}:{}}}).catch(error=>onChange({error:error.message}));
+  void appendEvidence(()=>sourceToActivity.get(sourceId),async old=>{if(!await trustedReceipt(message,old))return;return {proof:{...old.proof,receiptIds:[...new Set([...old.proof.receiptIds,message.id])]}}}).catch(error=>onChange({error:error.message}));
  }
 
  function bindImmunity({message,token,kind,sourceSHA}){
@@ -113,13 +144,24 @@ export function createManualEvents({game,Hooks,ledger,nativeActions,hpPools,from
   }};
  }
 
- function captureImmunity(item,options,userId){
+ function immunityEvidence(item,userId){
   const f=item.flags?.[MODULE_ID]?.explorationManualImmunity,actor=item.actor??item.parent,source=(item.sourceId??item.flags?.core?.sourceId??'').replace('.Item.','.');
   if(!f||f.creatorId!==userId||actor?.uuid!==f.patientUUID||item.type!=='effect'||source!==(f.kind==='treatment'?'Compendium.pf2e.feat-effects.Lb4q2bBAgxamtix5':'Compendium.pf2e.feat-effects.2XEYQNZTCGpdkyR6'))return;
-  if(game.users&&!actor.testUserPermission?.(game.users.get(userId),'OWNER'))return;
+  const creator=game.users?.get(userId);if(!creator||!creator.isGM&&!actor.testUserPermission?.(creator,'OWNER'))return;
   const message=game.messages.get(f.messageId),meta=message?.flags?.[MODULE_ID]?.explorationManual;
   if(!meta?.lexicalSource||meta.sourceSHA!==WORKBENCH_SOURCE_SHA||meta.useId!==f.useId||meta.patientUUID!==f.patientUUID||meta.kind!==f.kind||Object.values(IMMUNITY_SOURCES).find(s=>s.kind===f.kind)?.sha!==f.sourceSHA)return;
-  void appendEvidence(`manual:${message.id}`,old=>{if(old.proof.useId!==f.useId||!old.patientUUIDs.includes(f.patientUUID))return;const missing=old.options.missing.filter(m=>m!=='native-immunity-receipt');return {proof:{...old.proof,immunityIds:[...new Set([...old.proof.immunityIds,item.uuid])]},options:{...old.options,missing},...missing.length===0?{state:'confirmed'}:{}}}).catch(error=>onChange({error:error.message}));
+  return {id:`manual:${message.id}`,edit:old=>{
+   if(old.kind!==f.kind||old.proof.useId!==f.useId||!old.patientUUIDs.includes(f.patientUUID))return;
+   const missing=old.options.missing.filter(m=>m!=='native-immunity-receipt');
+   return {proof:{...old.proof,immunityIds:[...new Set([...old.proof.immunityIds,item.uuid])]},options:{...old.options,missing},...missing.length===0?{state:'confirmed'}:{}};
+  }};
+ }
+ function captureImmunity(item,options,userId){const evidence=immunityEvidence(item,userId);if(evidence)void appendEvidence(evidence.id,evidence.edit).catch(error=>onChange({error:error.message}))}
+ async function restoreImmunities(){
+  const patients=new Set([...records.values()].filter(a=>a.state==='awaiting-evidence'&&a.options.missing.includes('native-immunity-receipt')).flatMap(a=>a.patientUUIDs));
+  for(const uuid of patients){if(!isAuthority())return;const actor=await fromUuid?.(uuid);if(actor?.uuid!==uuid)continue;
+   for(const item of actor.items?.values?.()??actor.items??[]){const evidence=immunityEvidence(item,item.flags?.[MODULE_ID]?.explorationManualImmunity?.creatorId);if(evidence)await applyEvidence(evidence.id,evidence.edit)}
+  }
  }
  function start(){if(unsubscribe)return;
   const restored=evidenceTail.then(async()=>{await hydrate(sessionId());for(const message of game.messages?.contents??game.messages?.values?.()??[])if(message.flags?.pf2e?.context?.type==='damage-taken')captureReceipt(message)});evidenceTail=restored.catch(error=>onChange({error:error.message}));

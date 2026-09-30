@@ -1,6 +1,6 @@
 import {MODULE_ID} from './schema.mjs';
-import {sourceId,values} from '../salubrious-kiss-rules.mjs';
-import {refocusUnsupported} from './capabilities.mjs';
+import {sourceId,values,salubriousFeat} from '../salubrious-kiss-rules.mjs';
+import {refocusUnsupported,canReceiveVitalityHealing} from './capabilities.mjs';
 export const LAY_ON_HANDS='Compendium.pf2e.spells-srd.Item.zNN9212H2FGfM7VS';
 export function refocusCommitValue({before,max,requested,recovery=1}){if(!Number.isFinite(before)||!Number.isFinite(max)||(requested!==max&&requested!==Math.min(max,before+1))||!Number.isInteger(recovery)||recovery<1)throw Error('native-refocus-source-changed');return Math.min(max,before+recovery)}
 export function healingVariant(item){
@@ -10,6 +10,11 @@ export function healingVariant(item){
   return variants.length===1?variants[0]:null;
 }
 export function focusFinishSatisfied(goal,actor) {return !goal.requireFullFocus||actor.focus.value>=actor.focus.max}
+function assertRefocusEligible(activity,actor){
+  if(!actor||actor.isDead||actor.hasCondition?.('unconscious')||actor.canAct===false)throw Error('actor-cannot-refocus');
+  if(refocusUnsupported(actor.items).length)throw Error('refocus-recovery-unadapted');
+  if(activity.options?.threePecks&&!salubriousFeat(actor))throw Error('three-pecks-unavailable');
+}
 export function createRefocusAdapter({game,canvas=globalThis.canvas,fromUuid,ownerOperations,timeoutMs=15000}) {
   const scopes=new Map();
   function getCurrent(actor) {const scope=scopes.get(actor.uuid);if(!scope)return null;scope.ctx.validate?.();return ownerOperations.isActivityContext(scope.ctx,scope.activity.id)?scope.activity:null}
@@ -20,7 +25,7 @@ export function createRefocusAdapter({game,canvas=globalThis.canvas,fromUuid,own
   }
   async function complete(activity,ctx) {
     if(!ownerOperations.isActivityContext(ctx,activity.id)||game.time.worldTime<activity.endsAt)throw Error('private-refocus-context-required');ctx.validate?.();
-    const actor=await fromUuid(activity.actorUUID),controlled=canvas.tokens?.controlled??[];ctx.validate?.();if(refocusUnsupported(actor.items).length)throw Error('refocus-recovery-unadapted');
+    const actor=await fromUuid(activity.actorUUID),controlled=canvas.tokens?.controlled??[];ctx.validate?.();assertRefocusEligible(activity,actor);
     let restore=null;
     if(controlled.length!==1||controlled[0].actor!==actor){
       const token=actor.getActiveTokens?.().find(t=>t.scene?.id===canvas.scene?.id||t.document?.parent?.id===canvas.scene?.id);
@@ -31,11 +36,18 @@ export function createRefocusAdapter({game,canvas=globalThis.canvas,fromUuid,own
     if(typeof game.PF2eWorkbench?.refocus!=='function')throw Error('native-refocus-unavailable');
     if(scopes.has(actor.uuid))throw Error('refocus-already-running');
     let resolve,reject,timer;const signal=new Promise((r,j)=>{resolve=r;reject=j});signal.catch(()=>{});
-    const scope={activity,ctx,resolve,reject};scopes.set(actor.uuid,scope);
+    const scope={activity,ctx,actor,resolve,reject};scopes.set(actor.uuid,scope);
     try{timer=setTimeout(()=>reject(Error('refocus-evidence-uncertain-no-retry')),timeoutMs);await game.PF2eWorkbench.refocus([actor]);const receipt=await signal;ctx.validate?.();return receipt}
     finally{clearTimeout(timer);scopes.delete(actor.uuid);restore?.()}
   }
-  return {complete,getCurrent,capture,commitValue:(activity,actor,requested)=>{const scope=scopes.get(actor.uuid);if(scope?.activity.id!==activity.id)throw Error('private-refocus-scope-required');scope.ctx.validate?.();return refocusCommitValue({before:actor.system.resources.focus.value,max:actor.system.resources.focus.max,requested,recovery:1})}};
+  return {complete,getCurrent,capture,commitValue:(activity,actor,requested)=>{
+    const scope=scopes.get(actor.uuid);if(scope?.activity.id!==activity.id||scope.actor!==actor||!ownerOperations.isActivityContext(scope.ctx,activity.id))throw Error('private-refocus-scope-required');
+    scope.ctx.validate?.();assertRefocusEligible(activity,actor);
+    // Workbench selects controlled[0]; recheck at the existing synchronous
+    // actor.update boundary, after any native/observer async work.
+    const controlled=canvas.tokens?.controlled??[];if(controlled.length!==1||controlled[0].actor!==actor)throw Error('refocus-controlled-actor-mismatch');
+    return refocusCommitValue({before:actor.system.resources.focus.value,max:actor.system.resources.focus.max,requested,recovery:1});
+  }};
 }
 export function createRefocusProvider({game,ledger,capabilities,refocusEvents,salubriousKiss,ownerOperations}) {
   const completed=new Map(),running=new Map();
@@ -65,29 +77,38 @@ export function createRefocusProvider({game,ledger,capabilities,refocusEvents,sa
 export function createFocusHealingProvider({game,Hooks,fromUuid,ownerOperations,castEvents,nativeTreatment}) {
   const scopes=new Map(),attempted=new Set();let registered=false;
   const valid=(activity,ctx)=>{if(!ownerOperations.isActivityContext(ctx,activity.id)||game.time.worldTime<activity.endsAt)throw Error('private-focus-healing-context-required');ctx.validate?.()};
+  function validateSource(scope){
+    const {activity,ctx,original,patient}=scope,actor=original.actor;valid(activity,ctx);
+    if(actor?.uuid!==activity.actorUUID||actor.isDead||actor.hasCondition?.('unconscious')||actor.canAct===false||actor.items?.get(original.id)!==original||!healingVariant(original))throw Error('focus-healing-source-unqualified');
+    if(!canReceiveVitalityHealing(patient))throw Error('vitality-healing-patient-unqualified');
+  }
   function register(){
     if(registered)return;registered=true;
     castEvents.addMatcher(item=>sourceId(item)===LAY_ON_HANDS);
     castEvents.addCapture('explorationFocus',item=>{const scope=scopes.get(item.uuid);return scope?{activityId:scope.activity.id}:undefined});
     castEvents.addConsumePolicy(async(context,next)=>{
-      const scope=scopes.get(context.item.uuid);if(!scope)return next();valid(scope.activity,scope.ctx);
+      const scope=scopes.get(context.item.uuid);if(!scope)return next();validateSource(scope);
       if(context.actor.uuid!==scope.activity.actorUUID||sourceId(context.item)!==LAY_ON_HANDS||context.payload.focusPoints!==1||!healingVariant(scope.original))throw Error('native-focus-payment-source-changed');
-      context.expectFocusCommit({before:context.actor.system.resources.focus.value,cost:1,changes:proof=>({[`flags.${MODULE_ID}.explorationFocusCommits.${scope.activity.id}`]:{...proof,activityId:scope.activity.id}})});
-      const paid=await next();valid(scope.activity,scope.ctx);return paid;
+      context.expectFocusCommit({before:context.actor.system.resources.focus.value,cost:1,changes:proof=>{
+        // Called synchronously by the existing actor.update resource boundary,
+        // after all async consume policies and before the one native debit.
+        validateSource(scope);return {[`flags.${MODULE_ID}.explorationFocusCommits.${scope.activity.id}`]:{...proof,activityId:scope.activity.id}};
+      }});
+      const paid=await next();validateSource(scope);return paid;
     });
   }
   async function begin(activity){
     const actor=await fromUuid(activity.actorUUID),item=await fromUuid(activity.options.itemUUID);
     const patients=await Promise.all(activity.patientUUIDs.map(fromUuid));
-    if(actor?.isDead||actor?.hasCondition?.('unconscious')||actor?.system?.resources?.focus?.value<1||item?.actor!==actor||!healingVariant(item)||patients.length!==1||patients[0]?.modeOfBeing!=='living')return {status:'blocked',reason:'focus-healing-unqualified'};
+    if(actor?.isDead||actor?.hasCondition?.('unconscious')||actor?.canAct===false||actor?.system?.resources?.focus?.value<1||item?.actor!==actor||!healingVariant(item)||patients.length!==1||!canReceiveVitalityHealing(patients[0]))return {status:'blocked',reason:'focus-healing-unqualified'};
     return {status:'started'};
   }
   async function complete(activity,ctx){
     valid(activity,ctx);if(attempted.has(activity.id))throw Error('focus-healing-already-started');
     const original=await fromUuid(activity.options.itemUUID),variant=healingVariant(original);valid(activity,ctx);
     if(!variant||variant.actor.uuid!==activity.actorUUID||variant.system.cast.focusPoints!==1)throw Error('healing-overlay-unavailable');
-    const patient=await fromUuid(activity.patientUUIDs[0]);if(patient.modeOfBeing!=='living')throw Error('living-patient-required');
-    const actor=variant.actor;let card,damage,phase='cast';const scope={activity,ctx,original};
+    const patient=await fromUuid(activity.patientUUIDs[0]);
+    const actor=variant.actor;let card,damage,phase='cast';const scope={activity,ctx,original,patient},live=()=>validateSource(scope);live();
     const pre=Hooks.on('preCreateChatMessage',(message,data)=>{
       if(phase!=='roll'||(data.flags??message.flags)?.pf2e?.origin?.uuid!==variant.uuid)return;
       const flags=data.flags??=message.flags;flags.pf2e.context??={};flags.pf2e.context.options=[...(flags.pf2e.context.options??[]),'skip-handling-message',`exploration-activity:${activity.id}`];flags.pf2e.suppressDamageButtons=true;flags.pf2e.origin.messageId=card.id;
@@ -99,26 +120,26 @@ export function createFocusHealingProvider({game,Hooks,fromUuid,ownerOperations,
     });
     scopes.set(original.uuid,scope);attempted.add(activity.id);
     try{
-      await variant.spellcasting.cast(variant,{consume:true,message:true,rank:variant.rank});valid(activity,ctx);
+      await variant.spellcasting.cast(variant,{consume:true,message:true,rank:variant.rank});live();
       // The cast may return void; resolve only the current atomic nonce's card.
       const commit=actor.flags?.[MODULE_ID]?.explorationFocusCommits?.[activity.id];
       card??=values(game.messages).find(m=>m.flags?.[MODULE_ID]?.explorationFocus?.activityId===activity.id&&m.flags?.[MODULE_ID]?.nativeCast?.id===commit?.castNonce);
       if(!commit||commit.cost!==1||commit.after!==commit.before-1||!card||game.messages.get(card.id)!==card||card.flags[MODULE_ID].nativeCast?.id!==commit.castNonce)throw Error('native-focus-cast-unconfirmed');
-      const resourceReceipt=await castEvents.ensurePaid({actor,item:variant,message:card,user:game.user});valid(activity,ctx);
+      const resourceReceipt=await castEvents.ensurePaid({actor,item:variant,message:card,user:game.user});live();
       if(resourceReceipt.state!=='used'||resourceReceipt.id!==commit.castNonce||resourceReceipt.messageId!==card.id)throw Error('native-focus-payment-unconfirmed');
       phase='roll';
       const originalGetDamage=variant.getDamage;
       if(originalGetDamage)variant.getDamage=async function(options){
-        if(this!==variant)throw Error('private-healing-variant-changed');valid(activity,ctx);
-        const data=await originalGetDamage.call(this,{...options,skipDialog:true});valid(activity,ctx);
+        if(this!==variant)throw Error('private-healing-variant-changed');live();
+        const data=await originalGetDamage.call(this,{...options,skipDialog:true});live();
         if(!data?.context?.options?.add)throw Error('native-healing-context-unavailable');
         data.context.options.add(`exploration-activity:${activity.id}`);data.context.options.add('skip-handling-message');data.context.skipDialog=true;
         data.context.messageMode=card.blind?'blind':card.whisper?.length?'gm':'public';return data;
       };
       const event=globalThis.MouseEvent?new MouseEvent('click',{shiftKey:!!game.user.settings.showCheckDialogs}):{target:null,shiftKey:false};
-      const roll=await variant.rollDamage(event);valid(activity,ctx);
+      const roll=await variant.rollDamage(event);live();
       if(!damage||game.messages.get(damage.id)!==damage||!roll?._evaluated||JSON.stringify(roll.toJSON())!==JSON.stringify(damage.rolls[0].toJSON()))throw Error('native-focus-roll-unconfirmed');
-      const receipt=await nativeTreatment.applySavedResult(activity,{message:damage,patient,stage:'healing',outcome:null,item:variant},ctx);valid(activity,ctx);
+      const receipt=await nativeTreatment.applySavedResult(activity,{message:damage,patient,stage:'healing',outcome:null,item:variant},ctx);live();
       return {status:'confirmed',proof:{useId:activity.id,checkIds:[],resultIds:[card.id,damage.id],receiptIds:[receipt.receiptId],immunityIds:[],poolReceipts:receipt.poolReceipt?[receipt.poolReceipt]:[]},resourceReceiptIds:[resourceReceipt.id],rolledHealing:roll.total};
     }finally{scopes.delete(original.uuid);Hooks.off('preCreateChatMessage',pre);Hooks.off('createChatMessage',post)}
   }

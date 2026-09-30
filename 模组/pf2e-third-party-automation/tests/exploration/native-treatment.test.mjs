@@ -25,6 +25,7 @@ function fixture(outcome='criticalSuccess',risky=true,privateRoll=false,template
   const hooks=new Map();let seq=0;const Hooks={on:(name,fn)=>{const id=++seq;hooks.set(id,{name,fn});return id},off:(name,id)=>hooks.delete(id)};
   const fire=(name,...args)=>{for(const h of hooks.values())if(h.name===name)h.fn(...args)};
   const messages=new Map(),healer={uuid:'Actor.H',id:'H',items:[{type:'feat',slug:'risky-surgery'}]},patient={uuid:'Actor.P',id:'P',isOwner:true,createEmbeddedDocuments:async(type,list)=>{assert.equal(list[0].system.duration.value,50);return [{uuid:'Actor.P.Item.Immunity'}]}};
+  patient.getSelfRollOptions=()=>[];patient.getContextualClone=()=>({...patient});
   let release;const deferred=new Promise(r=>release=r);let called=0;const stages=[];
   const game={user:{id:'G'},time:{worldTime:600},messages,pf2e:{actions:{get:()=>({use:async options=>{
     called++;const marker=options.rollOptions[0];const check={id:'C',actor:healer,author:{id:'G'},blind:privateRoll,whisper:privateRoll?['G']:[],flags:{pf2e:{context:{action:'treat-wounds',options:[marker],outcome},modifiers:risky?[{slug:'risky-surgery',enabled:true}]:[]}},rolls:[{total:20}]};messages.set('C',check);

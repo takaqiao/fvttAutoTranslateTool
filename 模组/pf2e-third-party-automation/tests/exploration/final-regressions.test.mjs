@@ -8,6 +8,7 @@ import {createRefocusProvider} from '../../scripts/exploration/refocus.mjs';
 import {createManualEvents} from '../../scripts/exploration/manual-events.mjs';
 import {createClock} from '../../scripts/exploration/clock.mjs';
 import {createExplorationOwnerOperations} from '../../scripts/exploration/owner-operations.mjs';
+import {manualEvidenceFixture,flush} from './manual-evidence-fixture.mjs';
 const M='pf2e-third-party-automation';
 const healer={actorUUID:'Actor.H',slugs:[],items:[],assuranceSkills:[],medicine:{rank:2,mod:12},wardCapacity:2,focus:{value:0,max:0},pool:{poolUUID:'Actor.H',ready:true},hp:{value:20,max:20}};
 const patient=(uuid='Actor.P',modeOfBeing='living')=>({...healer,actorUUID:uuid,medicine:{rank:0},pool:{poolUUID:uuid,ready:true},hp:{value:1,max:20},modeOfBeing});
@@ -25,10 +26,9 @@ test('saved owner completion reconciles an interrupted activity; explicit review
 });
 test('a stale GM preference cannot hide a newer interrupted world session',async()=>{const ledger=storage();await ledger.createSession({id:'OLD',actorUUIDs:['Actor.H'],startedAt:-600,cursorAt:-600,budgetEndsAt:600,status:'paused'});const f=coordinator(ledger);await f.api.start({id:'NEW',actorUUIDs:['Actor.H','Actor.P'],autoRun:false});await f.api.addActivity('NEW',input);await ledger.updateSession('NEW',{status:'paused'});const fresh=coordinator(ledger);assert.equal((await fresh.api.restore('OLD')).id,'NEW');});
 test('manual receipt, duplicate enrollment and source order survive recorder reconstruction',async()=>{
- const ledger=storage({sessions:{S:{id:'S',status:'recording',actorUUIDs:['Actor.H','Actor.P'],activityIds:[]}},activities:{},clocks:{}}),messages=new Map(),handlers=new Map();const game={time:{worldTime:0},messages},Hooks={on:(n,f)=>{handlers.set(n,f);return n},off(){}};const opts={game,Hooks,ledger,isAuthority:()=>true,sessionId:()=> 'S'};
- const old=createManualEvents(opts);old.start();await old.observe({id:'W',actorUUID:'Actor.H',patientUUIDs:['Actor.P'],kind:'treatment',resultIds:['D'],missing:['native-application-receipt']});old.stop();
- const source={id:'D',rolls:[{_evaluated:true}]};messages.set('D',source);const fresh=createManualEvents(opts);fresh.start();const receipt={id:'R',speaker:{actor:'P'},flags:{pf2e:{context:{type:'damage-taken',options:[`${M}:source:D:0`]},appliedDamage:null}}};messages.set('R',receipt);handlers.get('createChatMessage')(receipt);for(let i=0;i<8;i++)await new Promise(r=>setImmediate(r));
- assert.deepEqual((await ledger.getActivity('manual:W')).proof.receiptIds,['R']);await fresh.observe({id:'W',actorUUID:'Actor.H',kind:'treatment'});await fresh.observe({id:'NEXT',actorUUID:'Actor.H',patientUUIDs:['Actor.P'],kind:'activity',durationSeconds:6});assert.equal((await ledger.getActivity('manual:NEXT')).order,1);assert.equal((await ledger.snapshot('S')).activities.length,2);
+ const f=manualEvidenceFixture(),event={...f.event,missing:['native-application-receipt']},old=f.createRecorder();old.start();await old.observe(event);old.stop();
+ const fresh=f.createRecorder();fresh.start();const receipt=f.receipt();receipt.flags.pf2e.appliedDamage=null;await f.fire(receipt);await flush();
+ assert.deepEqual((await f.ledger.getActivity('manual:W')).proof.receiptIds,['R']);await fresh.observe(event);await fresh.observe({id:'NEXT',actorUUID:'Actor.H',patientUUIDs:['Actor.P'],kind:'activity',durationSeconds:6});assert.equal((await f.ledger.getActivity('manual:NEXT')).order,1);assert.equal((await f.ledger.snapshot('S')).activities.length,2);fresh.stop();
 });
 test('unselected treatments and messages authored without ownership cannot enroll in a party recording',async()=>{
  const ledger=storage({sessions:{S:{id:'S',status:'recording',actorUUIDs:['Actor.H','Actor.P'],activityIds:[]}},activities:{},clocks:{}}),messages=new Map(),author={id:'USER'},actor={id:'H',uuid:'Actor.H',testUserPermission:()=>false};const game={time:{worldTime:0},messages,users:new Map([['USER',author]])};const r=createManualEvents({game,ledger,fromUuid:async()=>actor,isAuthority:()=>true,sessionId:()=> 'S'});
