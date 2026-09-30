@@ -119,6 +119,19 @@ test('HUD render capture takes the real earliest RK click and releases detached 
  let stopped=0;next.handlers.get('click')({target:{closest:()=>({dataset:{action:'roll-statistic-action',key:'recall-knowledge'}})},preventDefault(){},stopImmediatePropagation(){stopped++;}});await new Promise(r=>setImmediate(r));assert.equal(stopped,1);assert.equal(f.die.count,1);
  callbacks.get('closeApplicationV2')(app);assert.equal(next.handlers.size,0);cleanup();
 });
+test('installed HUD frozen actions API registers safely and real RK click still uses one Workbench die',async()=>{
+ const f=fixture();f.user.active=true;f.gm.active=true;f.actor.getActiveTokens=()=>[f.token];f.game.user.character=f.actor;
+ // PF2e HUD CustomModule.apiExpose freezes the exposed object and defines its
+ // parent property as non-writable/non-configurable. Public actions cannot be patched.
+ let nativeCalls=0;const actions=Object.freeze({rollRecallKnowledge:()=>{nativeCalls++;}}),hudApi={};
+ Object.defineProperty(hudApi,'actions',{value:actions,configurable:false,enumerable:false,writable:false});f.game.modules.set('pf2e-hud',{active:true,api:hudApi});
+ const callbacks=new Map(),Hooks={on(name,fn){callbacks.set(name,fn);return fn;},off(name){callbacks.delete(name);}};
+ const controller=createWorkbenchRecallController({...f}),cleanup=controller.register({Hooks,socket:{register(){},executeAsUser:async()=>({ok:true,value:{messageId:'rk1'}})}});
+ const root={handlers:new Map(),contains:()=>true,addEventListener(type,fn){this.handlers.set(type,fn);},removeEventListener(type,fn){if(this.handlers.get(type)===fn)this.handlers.delete(type);}};
+ callbacks.get('renderApplicationV2')({actor:f.actor},root);let stopped=0;
+ root.handlers.get('click')({target:{closest:()=>({dataset:{action:'roll-statistic-action',key:'recall-knowledge'}})},preventDefault(){},stopImmediatePropagation(){stopped++;}});
+ await new Promise(resolve=>setImmediate(resolve));assert.equal(stopped,1);assert.equal(nativeCalls,0);assert.equal(f.die.count,1);assert.equal(hudApi.actions,actions);cleanup();assert.equal(root.handlers.size,0);assert.equal(hudApi.actions,actions);
+});
 test('a no-GM result still saves one secret die and an owner request rejects a forged original card',async()=>{
  const f=controllerFixture();f.gm.active=false;await assert.rejects(()=>f.owner.run({actor:f.actor,token:f.token,targetUuids:[f.target.uuid],requestId:'offlineGM'}),/秘骰已保存/);assert.equal(f.die.count,1);assert.equal(f.game.messages.get('rk1').blind,true);
  const reply=await f.handlers.get('player:knowledge-rk-run').call({socketdata:{userId:'player'}},{requestId:'fake',origin:{messageId:'other'}});assert.equal(reply.ok,false);assert.match(reply.error,/主 GM/);assert.equal(f.die.count,1);f.cleanup();

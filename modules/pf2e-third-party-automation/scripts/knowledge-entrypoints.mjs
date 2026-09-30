@@ -77,7 +77,9 @@ export function createWorkbenchRecallController({game,fromUuid=globalThis.fromUu
   if(native?.use){const original=native.use,wrapped=input=>action(input);native.use=wrapped;cleanup.push(()=>{if(native.use===wrapped)native.use=original;});
    // Explicit native variants otherwise bypass the action instance's use().
    const variant=native.getDefaultVariant?.(),prototype=variant&&Object.getPrototypeOf(variant),use=prototype?.use;if(use){const bridge=function(input){return this.slug==='recall-knowledge'?action(input):use.call(this,input);};prototype.use=bridge;cleanup.push(()=>{if(prototype.use===bridge)prototype.use=use;});}}
-  const hud=game.modules.get('pf2e-hud')?.api?.actions;if(hud?.rollRecallKnowledge){const original=hud.rollRecallKnowledge,wrapped=actor=>action({actor});hud.rollRecallKnowledge=wrapped;cleanup.push(()=>{if(hud.rollRecallKnowledge===wrapped)hud.rollRecallKnowledge=original;});}
+   // Installed HUD apiExpose freezes actions and locks the parent property.
+   // Its real statistic-action DOM boundary is captured below before the HUD
+   // handler opens a skill chooser; writing to its public API would abort ready.
   const macroPath='CONFIG.Macro.documentClass.prototype.execute';
   if(libWrapper){libWrapper.register('pf2e-third-party-automation',macroPath,function(wrapped,scope={}){
     if(![WORKBENCH_RECALL_UUID,publicUUID].includes(this.uuid)&&![WORKBENCH_RECALL_UUID,publicUUID].includes(source(this)))return wrapped(scope);
