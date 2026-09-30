@@ -117,6 +117,11 @@ test('scoped macro supports native private fields and locked actor skills withou
  Object.defineProperty(f.actor,'skills',{value:f.actor.skills,writable:false,configurable:false,enumerable:true});
  const capture=await api.captureWorkbenchRecall({...f,requestId:'private',targetUuids:[f.target.uuid]});assert.equal(capture.candidates[0].statistic,'society');assert.equal(f.die.count,1);
 });
+test('Core 14 read-only Set.first uses the installed method without assigning over its prototype property',async()=>{
+ const f=fixture(),prior=Object.getOwnPropertyDescriptor(Set.prototype,'first');
+ Object.defineProperty(Set.prototype,'first',{value:function(){return this.values().next().value;},writable:false,configurable:true});
+ try{const capture=await api.captureWorkbenchRecall({...f,requestId:'native-set-first',targetUuids:[f.target.uuid]});assert.equal(f.die.count,1);assert.equal(capture.candidates[0].statistic,'society');}finally{if(prior)Object.defineProperty(Set.prototype,'first',prior);else delete Set.prototype.first;}
+});
 import {createWorkbenchRecallController} from '../scripts/knowledge-entrypoints.mjs';
 import {automaticKnowledgeChoices,automaticKnowledgeRound,AUTOMATIC_KNOWLEDGE_SOURCE,ASSURANCE_SOURCE} from '../scripts/knowledge-automatic.mjs';
 import {registerUsageEvents} from '../scripts/usage-events.mjs';
