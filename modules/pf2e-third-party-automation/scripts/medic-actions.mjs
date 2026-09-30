@@ -120,44 +120,49 @@ export function createMedicActions({game,fromUuid=globalThis.fromUuid,choose,req
    await check.update({[`flags.${MODULE_ID}.medicReceipt`]:{messageId:message.id,nonce:own(message).nonce}});
    await save(message,{status:'applying',checkId:check.id});
    gm();if(after===0)await current.delete();else if(after!==conditionValue(current))await current.update({'system.value.value':after});
-   const result=['大失败：状态值增加1。','失败：状态未改变。','成功：状态值降低1。','大成功：状态值降低2。'][degree];
+   const result='本次处理状态已结算。';
    await save(message,{status:'done',result});return result;
   });
  }
- async function executeUsage(ctx){return queues.actors.run(ctx.actor?.uuid,async()=>{
+ async function executeUsage(ctx){const result=await queues.actors.run(ctx.actor?.uuid,async()=>{
   validate(ctx);if(own(ctx.message)){if(own(ctx.message).actorUuid!==ctx.actor.uuid||own(ctx.message).nonce!==input(ctx.message).nonce||ctx.actor.flags?.[MODULE_ID]?.medicUses?.[input(ctx.message).nonce]!==ctx.message.id)throw Error('无效原卡回执。');return own(ctx.message).result??'此医疗动作已开始。';}
   const {actor,message,user}=ctx,target=await targetFor(ctx),healer=await healerToken(actor,message);
   if(ctx.action==='medic:treat-condition'){
    validatePatientContext(actor,healer,target);await commit(ctx,2,false);
-   try{return await treat(ctx,healer,target);}catch(error){await save(message,{status:own(message).nativeKind?'uncertain':'failed',result:error.message});throw error;}
+   try{return await treat(ctx,healer,target);}catch(error){await save(message,{status:own(message).nativeKind?'uncertain':'failed',result:'本次医疗尚需 GM 核对。'});throw error;}
   }
-  const branch=await pick(actor,user,'医师探访：选择本次医疗动作',visitationBranches(actor));if(!branch)return '已取消医师探访。';
+  const branch=await pick(actor,user,'医师探访：选择本次医疗动作',visitationBranches(actor));if(!branch)return {status:'cancelled',result:'已取消医师探访。'};
   const cost=visitationBranches(actor).find(b=>b.value===branch).cost;
-  await commit(ctx,cost,true);await save(message,{status:'movement',branch,healerUuid:healer.uuid,targetUuid:target.uuid,result:'请自行完成本次原生行走，再在本卡确认“移动完成”。行走与接触距离由GM裁定；取消治疗不会退还华丽动作。'});
-  return '医师探访已承诺；请完成行走后在本卡确认。';
- });}
+  validatePatientContext(actor,healer,target);await commit(ctx,cost,true);
+  await save(message,{status:'treatment',branch,nativeKind:branch,healerUuid:healer.uuid,targetUuid:target.uuid});
+  return finishTreatment(ctx,healer,target);
+ });const status=own(ctx.message)?.status;return status==='cancelled'?{status:'cancelled',result}:status&&status!=='done'?{status:'waiting',result}:result;}
+ async function finishTreatment(ctx,healer,target){
+  const {message}=ctx,state=own(message);
+  try{
+   if(state.branch==='treat-condition')return await treat(ctx,healer,target);
+   const result=await owner.run(ctx);validate(ctx);
+   if(result.status!=='cancelled'){validateDelegated(ctx,target,result);await result.check.update({[`flags.${MODULE_ID}.medicReceipt`]:{messageId:message.id,nonce:state.nonce}});}
+   await save(message,{status:result?.status==='cancelled'?'cancelled':'done',result:result?.text??(result.status==='cancelled'?'已取消本次医疗。':'本次原生医疗已完成。')});return own(message).result;
+  }catch(error){await save(message,{status:own(message).nativeKind?'uncertain':'failed',result:'本次医疗尚需 GM 核对。'});throw error;}
+ }
  async function continuationContext(message,user){const state=own(message);if(!state||state.userId!==user?.id)throw Error('只能由原使用者继续医疗。');const item=await fromUuid(state.itemUuid);return validate({actor:item?.actor,item,message,user,action:medicAction(item)});}
- async function continueUsage(message,user,{cancel=false,movementConfirmed=false}={}){
+ async function continueUsage(message,user,{cancel=false}={}){
   const ctx=await continuationContext(message,user);
   return queues.actors.run(ctx.actor.uuid,async()=>{
    validate(ctx);const state=own(message);if(terminal(state.status))return state.result;
    if(state.status!=='movement')throw Error('此活动正在处理或不可继续。');
    if(turn(game)!==state.turn){await save(message,{status:'cancelled',result:'回合已改变，后续医疗已过期。'});throw Error('医疗延续已过期。');}
    if(cancel){await save(message,{status:'cancelled',result:'已取消后续医疗；已承诺动作与华丽不回退。'});return;}
-   requireTurn(ctx.actor);if(movementConfirmed!==true)throw Error('请由原使用者在本卡确认已完成本次行走。');
+   requireTurn(ctx.actor);
    const healer=await fromUuid(state.healerUuid),target=await fromUuid(state.targetUuid);if(healer?.actor!==ctx.actor||!target?.actor)throw Error('原始医疗Token不存在。');
    validatePatientContext(ctx.actor,healer,target);if(!visitationBranches(ctx.actor).some(b=>b.value===state.branch))throw Error('医疗分支资格已变化。');
-   await save(message,{status:'treatment',nativeKind:state.branch,movementConfirmation:{userId:user.id,turn:state.turn,healerUuid:healer.uuid,targetUuid:target.uuid}});
-   try{
-    if(state.branch==='treat-condition')return await treat(ctx,healer,target);
-    const result=await owner.run(ctx);validate(ctx);
-    if(result.status!=='cancelled'){validateDelegated(ctx,target,result);await result.check.update({[`flags.${MODULE_ID}.medicReceipt`]:{messageId:message.id,nonce:state.nonce}});}
-    await save(message,{status:result?.status==='cancelled'?'cancelled':'done',result:result?.text??'已调用原生医疗；其结果与免疫由原医疗提供者处理。'});return own(message).result;
-   }catch(error){await save(message,{status:own(message).nativeKind?'uncertain':'failed',result:error.message});throw error;}
+   await save(message,{status:'treatment',nativeKind:state.branch});
+   return finishTreatment(ctx,healer,target);
   });
  }
  function captureUsage(item){return medicAction(item)?{medicInput:{nonce:uid()}}:null;}
- function renderChatMessage(message,html){const state=own(message),el=html?.[0]??html;if(!state||!el?.querySelector)return;el.querySelector('.medic-activity')?.remove();const glyph=el.querySelector('.action-glyph');if(glyph)glyph.textContent=state.cost===2?'D':'A';const can=game.user.id===state.userId&&state.status==='movement';const panel=document.createElement('div');panel.className='medic-activity';panel.innerHTML=`<p>${esc(state.result??state.status)} · ${state.cost}动作</p>${can?'<button type="button" data-medic="continue">移动完成，继续医疗</button><button type="button" data-medic="cancel">取消后续医疗</button>':''}`;panel.addEventListener('click',event=>{const action=event.target?.closest?.('[data-medic]')?.dataset.medic;if(!action)return;const args={messageId:message.id,nonce:state.nonce,userId:game.user.id,cancel:action==='cancel',movementConfirmed:action==='continue'};(isActiveGM(game)?continueUsage(message,game.user,args):socket?.executeAsGM?.('continueMedic',args))?.catch(onError);});(el.querySelector('.message-content')??el).append(panel);}
+ function renderChatMessage(message,html){const state=own(message),el=html?.[0]??html;if(!state||!el?.querySelector)return;el.querySelector('.medic-activity')?.remove();const glyph=el.querySelector('.action-glyph');if(glyph)glyph.textContent=state.cost===2?'D':'A';}
  async function maintain(){if(!isActiveGM(game))return;restoreMovements();for(const m of [...movementCards.values()]){if(game.messages.get(m.id)!==m||own(m)?.status!=='movement'){movementCards.delete(m.id);continue;}if(own(m).turn!==turn(game))await save(m,{status:'cancelled',result:'回合已改变，后续医疗已过期。'});}}
  function register({Hooks=globalThis.Hooks,socket:providedSocket}={}){
   if(hookApi)return;hookApi=Hooks;socket=providedSocket??globalThis.socketlib?.registerModule?.(MODULE_ID);

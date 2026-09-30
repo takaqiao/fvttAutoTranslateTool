@@ -1,6 +1,7 @@
 import {sameSalubriousPrivacy,treatmentPrivacyForPatient} from './salubrious-privacy.mjs';
 import {MODULE_ID} from './rules.mjs';
 import {SerialActions} from './runtime.mjs';
+import {publicTargetName} from './native-context.mjs';
 import {salubriousFeat,treatmentTiers,treatmentOutcome,treatmentImmunityData,TREAT_WOUNDS_IMMUNITY,kissState,values} from './salubrious-kiss-rules.mjs';
 import {assertSource,assertPatient,currentToken,contextFor,claimOf,fail} from './salubrious-kiss-context.mjs';
 
@@ -30,7 +31,7 @@ export function createSalubriousKiss({game,fromUuid=globalThis.fromUuid,choose,e
    try{
     const candidates=values(token.parent.tokens).filter(t=>{if(t.hidden&&!user.isGM)return false;try{assertPatient({game,actor,token,target:t,user});return true}catch{return false}});
     if(!candidates.length)throw fail('没有可确认的合格患者');
-    const selected=await choose({kind:'patient',actor,user,title:'仙露三吻：重新聚能时同时医疗',choices:[{value:'only-refocus',label:'仅重新聚能'},...candidates.map(t=>({value:t.uuid,label:t.name??t.actor.name??t.actor.id}))]});
+    const selected=await choose({kind:'patient',actor,user,title:'仙露三吻：重新聚能时同时医疗',choices:[{value:'only-refocus',label:'仅重新聚能'},...candidates.map(t=>({value:t.uuid,label:publicTargetName(t,{game,user})}))]});
     if(selected==null||selected==='only-refocus'){claim.state='declined';await save(actor,claim);return claim}
     target=candidates.find(t=>t.uuid===selected);if(!target)throw fail('患者选择不属于本次真实候选');
     await verifyEvent(actor,user,proof);assertPatient({game,actor,token,target,user});

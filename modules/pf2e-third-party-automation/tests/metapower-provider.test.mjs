@@ -20,6 +20,23 @@ test('managed powers, armed next actions and unresolved delivery retain metapowe
   actor.flags[ID].metapower=state;assert.equal(api.needsMetapowerObservation({actor}),true);
  }
 });
+
+test('actual reaction Use does not ask again to confirm range or target eligibility',async t=>{
+ const priorConfig=globalThis.CONFIG,priorFoundry=globalThis.foundry;t.after(()=>{globalThis.CONFIG=priorConfig;globalThis.foundry=priorFoundry});
+ globalThis.CONFIG={Actor:{sheetClasses:{character:{}}},Dice:{rolls:[class DamageRoll{}]}};
+ const questions=[];globalThis.foundry={applications:{api:{DialogV2:{wait:async question=>{questions.push(question);return {triggerDamage:18}}}}}};
+ for(const [id,chain]of [['geZCat82IOuShmmk',false],['fzV5Ly3a9nEsfcAJ',true]]){
+  const gm={id:'gm'},user={id:'player',targets:new Set()},users=new Map([[gm.id,gm],[user.id,user]]);users.activeGM=gm;
+  const actor={id:'a',uuid:'Actor.a',type:'character',level:1,items:new Map([['w',{sourceId:METAPOWER_SOURCES.widen}]]),flags:{}};
+  const item={id:'reaction',uuid:'Actor.a.Item.reaction',name:'Reaction',actor,type:'action',sourceId:`Compendium.battlezoo-eldamon-pf2e.powers.Item.${id}`,system:{traits:{value:['electricity']}}};actor.items.set(item.id,item);
+  const game={user,users,actors:new Map([[actor.id,actor]]),scenes:new Map(),messages:new Map(),modules:new Map(),pf2e:{actions:new Map()}},requests=[];
+  const p=api.createMetapowerProvider({game,fromUuid:async()=>null,selectChoice:async({choices})=>choices[0].value});
+  p.register({Hooks:{on:()=>1,off(){}},libWrapper:{register(){}},socket:{register(){},executeAsUser:async(name,_id,payload)=>{requests.push({name,payload});return {ok:true,value:{...payload,status:'started',nativeStartAuthorized:true}}}}});
+  const before=questions.length;assert.equal(await p.observe({actor,item},async()=> 'native'),'native');
+  assert.equal(questions.length-before,chain?1:0);assert.equal(requests[0].payload.selection.triggerConfirmed,true);
+  if(chain){assert.equal(requests[0].payload.selection.triggerDamage,18);assert.equal(requests[0].payload.selection.eligibleTargetConfirmed,true);assert.doesNotMatch(questions.at(-1).content,/30尺|符合|资格|确认/);}
+ }
+});
 test('Widen metadata repair is exact-source, owned and idempotent',async()=>{
  assert.equal(typeof api.createMetapowerProvider,'function');const gm={id:'gm'},game={user:gm,users:{activeGM:gm}},changes=[];
  const item={id:'w',sourceId:METAPOWER_SOURCES.widen,system:{actionType:{value:'passive'},actions:{value:null}},async update(data){changes.push(data);this.system.actionType.value=data['system.actionType.value'];this.system.actions.value=data['system.actions.value']}};

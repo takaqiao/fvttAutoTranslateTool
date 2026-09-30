@@ -3,6 +3,12 @@ import {requireOwner} from './runtime.mjs';
 
 export const getSourceId=item=>item?.sourceId??item?._stats?.compendiumSource??item?.flags?.core?.sourceId??null;
 export const isActiveGM=game=>!!game?.users?.activeGM?.id&&game.user?.id===game.users.activeGM.id;
+/** Choice text is delivered to this recipient, which can differ from the GM. */
+export function publicTargetName(token,{game,user=game?.user}={}){
+ const target=token?.document??token;
+ const visible=!game?.pf2e?.settings?.tokens?.nameVisibility||target?.playersCanSeeName===true||user?.isGM===true||!!user&&target?.actor?.testUserPermission?.(user,'OWNER')===true;
+ return visible?target?.name??target?.actor?.name??'目标':'目标';
+}
 const values=collection=>Array.from(collection?.values?.()??collection??[]);
 const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const unappliedDamageErrors=new WeakSet();

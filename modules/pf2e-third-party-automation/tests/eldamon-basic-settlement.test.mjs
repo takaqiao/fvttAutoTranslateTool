@@ -91,7 +91,7 @@ test('a lost GM reply retries the original confirmation even after Shocked is co
  f.game.user=f.gm;await f.ledger().interact({actorUuid:f.target.uuid,nonce:'release-first',confirmed:true},f.gm);f.game.user=f.owner;
  f.owner.targets=new Set([{document:f.tokens[2]}]);await provider.settleFromCard(f.card);
  assert.equal(electricityEffects(f.target,E.shocked).length,0);assert.equal(electricityEffects(f.other,E.shocked).length,0);
- assert.deepEqual(deliveries[1],deliveries[0]);assert.equal(prompts[1].retry,true);
+ assert.deepEqual(deliveries[1],deliveries[0]);assert.equal(prompts.length,0);
  // After acknowledged completion, a deliberate new shield trigger is a new use.
  f.owner.targets=new Set([{document:f.tokens[1]}]);await provider.settleFromCard(f.card);
  assert.notEqual(deliveries[2].nonce,deliveries[0].nonce);assert.equal(electricityEffects(f.target,E.shocked).length,1);
@@ -105,11 +105,18 @@ test('a definite pre-mutation GM rejection releases the card for a later valid t
  const client=createEldamonElectricityProvider({game:playerGame,fromUuid:async uuid=>f.docs.get(uuid)});
  client.register({Hooks,socket:{register:()=>{},executeAsUser:async(name,gmId,payload)=>{assert.equal(gmId,f.gm.id);return handlers.get(name).call({socketdata:{userId:f.owner.id}},payload)}}});
  let clicks=0;
- const provider=createEldamonBasicSettlement({game:playerGame,random:()=>`rejected-attempt-${clicks+1}`,notify:()=>{},confirm:async()=>{if(++clicks===1)f.scene.tokens.delete(f.tokens[1].id);return true},apply:payload=>client.confirmedAction(payload)});
+ const provider=createEldamonBasicSettlement({game:playerGame,random:()=>`rejected-attempt-${clicks+1}`,notify:()=>{},apply:payload=>{if(++clicks===1)f.scene.tokens.delete(f.tokens[1].id);return client.confirmedAction(payload)}});
  await assert.rejects(provider.settleFromCard(f.card),error=>error.electricityNotApplied===true);
  assert.equal(electricityEffects(f.target,E.shocked).length,0);
  f.owner.targets=new Set([{document:f.tokens[2]}]);await provider.settleFromCard(f.card);
  assert.equal(electricityEffects(f.other,E.shocked).length,1);
+});
+
+test('a declared card settlement applies once without confirming adjacency or exposing its target name',async()=>{
+ const f=setup();f.game.user=f.owner;f.owner.targets=new Set([{document:f.tokens[1]}]);f.tokens[1].name='Secret monster';
+ const deliveries=[];
+ const provider=createEldamonBasicSettlement({game:f.game,random:()=> 'declaration-1',notify:()=>{},confirm:()=>assert.fail('a card click already declares this settlement'),apply:async payload=>{deliveries.push(payload);return {};}});
+ await provider.settleFromCard(f.card);assert.equal(deliveries.length,1);assert.equal(deliveries[0].targetUuid,f.tokens[1].uuid);assert.doesNotMatch(JSON.stringify(deliveries),/Secret/);
 });
 
 test('a failure after native effect creation is never described as safely unapplied',async()=>{

@@ -35,6 +35,11 @@ test('Salubrious Kiss keeps the selected patient when tokens move during the nor
  assert.equal((await p.invoke()).state,'done');assert.equal(p.checks.length,1);assert.equal(p.applications[0].claim.targetUuid,'Scene.s.Token.patient');
 });
 
+test('the patient choice conceals names hidden from the original owner',async()=>{
+ const f=fixture();f.game.pf2e={settings:{tokens:{nameVisibility:true}}};f.target.playersCanSeeName=false;f.target.name='Secret patient';f.patient.testUserPermission=user=>user.isGM;
+ const p=provider(f);assert.equal((await p.invoke()).state,'done');const choice=p.choices[0].choices.find(c=>c.value===f.target.uuid);assert.equal(choice.label,'目标');
+});
+
 test('Salubrious Kiss settles the saved native result after the patient moves during the check',async()=>{
  const f=fixture(),p=provider(f,{afterRoll:()=>{f.token.object.distanceTo=()=>60;}});
  assert.equal((await p.invoke()).state,'done');assert.equal(p.applications.length,1);assert.equal(f.effects.length,1);

@@ -1,6 +1,6 @@
 import {MODULE_ID as ID} from './rules.mjs';
 import {getNativeCastEvents} from './amp-cast-events.mjs';
-import {getSourceId,isActiveGM,showNativeChoice} from './native-context.mjs';
+import {getSourceId,isActiveGM} from './native-context.mjs';
 import {isActualUseMessage} from './usage-events.mjs';
 
 export const BARD_FAMILIAR_SOURCES=Object.freeze({
@@ -18,7 +18,7 @@ const boundedId=id=>typeof id==='string'&&/^[A-Za-z0-9_-]{1,100}$/.test(id);
 const recordMatches=(record,expected)=>record&&Object.entries(expected).every(([key,value])=>record[key]===value);
 
 /** These two original abilities use native owned items, native Use and native Check.roll. */
-export function createBardFamiliarProvider({game,fromUuid=globalThis.fromUuid,confirm=showNativeChoice,onError=()=>{},randomId=()=>globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.randomUUID()}={}){
+export function createBardFamiliarProvider({game,fromUuid=globalThis.fromUuid,onError=()=>{},randomId=()=>globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.randomUUID()}={}){
  const state=stateFor(game),castEvents=getNativeCastEvents({game,fromUuid});
  const resolveAction=item=>ability(item,S.focus)?ACTION:undefined;
  function masterOf(familiar){
@@ -92,9 +92,8 @@ export function createBardFamiliarProvider({game,fromUuid=globalThis.fromUuid,co
   const actor=context.actor??(context.origin?.self?context.origin?.actor:context.target?.actor);
   const master=actor?.uuid?await fromUuid(actor.uuid):null,match=master&&accompanistFor(master);
   if(!match||master.type!=='character'||!owner(master,game.user))return native(check,context,...args);
-  const answer=await confirm({actor:master,user:game.user,title:'伴奏者：确认本次表演检定',choices:[{value:'yes',label:'魔宠在身边，并且能够行动'},{value:'no',label:'不满足本次条件／不使用'}]});
   const current=accompanistFor(master);
-  if(answer!=='yes'||!owner(master,game.user)||game.actors.get(master.id)!==master||current?.item!==match.item||current?.familiar!==match.familiar)return native(check,context,...args);
+  if(!owner(master,game.user)||game.actors.get(master.id)!==master||current?.item!==match.item||current?.familiar!==match.familiar)return native(check,context,...args);
   const rank=master.getStatistic?.('performance')?.rank??master.skills?.performance?.rank;
   if(!Number.isInteger(rank)||rank<0||rank>4)return native(check,context,...args);
   const bonus=new game.pf2e.Modifier({slug:BONUS,label:'伴奏者',modifier:rank>=3?2:1,type:'circumstance'});
@@ -102,7 +101,8 @@ export function createBardFamiliarProvider({game,fromUuid=globalThis.fromUuid,co
   return native(next,context,...args);
  }
  function register({Hooks}={}){
-  const hooks=[],listeners=[],elements=new WeakSet(),on=(event,fn)=>hooks.push([event,Hooks.on(event,fn)]);
+  const hooks=[],sheets=new Map(),on=(event,fn)=>hooks.push([event,Hooks.on(event,fn)]);
+  const release=app=>{const prior=sheets.get(app);if(!prior)return;prior.element.removeEventListener('click',prior.listener,true);sheets.delete(app);};
   on('preUpdateItem',(item,changes,options,userId)=>{
    if(!resolveAction(item)||item.system.frequency?.value!==1||(changes['system.frequency.value']??changes.system?.frequency?.value)!==0)return;
    const nonce=randomId(),master=masterOf(item.actor);if(!boundedId(nonce)||!master)return;
@@ -119,15 +119,18 @@ export function createBardFamiliarProvider({game,fromUuid=globalThis.fromUuid,co
    state.payments.set(proof.id,{nonce,itemUuid:item.uuid,userId});
   });
   const capture=(app,html)=>{
-   const element=html?.[0]??html,actor=app.actor??app.document;if(actor?.type!=='familiar'||!element?.addEventListener||elements.has(element))return;elements.add(element);
+   const element=html?.[0]??html,actor=app.actor??app.document;
+   if(sheets.get(app)?.element===element)return;
+   release(app);if(actor?.type!=='familiar'||!element?.addEventListener)return;
    const listener=event=>{
     const button=event.target?.closest?.('[data-action="use-action"],button.use-action'),id=button?.closest?.('[data-item-id]')?.dataset.itemId,item=actor.items.get(id);if(!resolveAction(item))return;
     try{beforeUse(item);}catch(error){event.preventDefault();event.stopImmediatePropagation();onError(error);}
    };
-   element.addEventListener('click',listener,true);listeners.push([element,listener]);
+   element.addEventListener('click',listener,true);sheets.set(app,{element,listener});
   };
   for(const event of ['renderFamiliarSheetPF2e','renderActorSheetPF2e','renderActorSheetV2'])on(event,capture);
-  return()=>{for(const[name,id]of hooks)Hooks.off(name,id);for(const[element,listener]of listeners)element.removeEventListener('click',listener,true);};
+  for(const event of ['closeFamiliarSheetPF2e','closeActorSheetPF2e','closeActorSheetV2','closeApplication'])on(event,release);
+  return()=>{for(const[name,id]of hooks)Hooks.off(name,id);for(const app of sheets.keys())release(app);};
  }
  return {resolveAction,requiresActualUse:item=>!!resolveAction(item),tracksFrequency:item=>!!resolveAction(item),beforeUse,executeUsage,interceptCheck,register};
 }

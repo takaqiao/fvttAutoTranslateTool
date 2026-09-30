@@ -80,8 +80,8 @@ test('source master reassignment to another owned character cannot redirect an a
  const f=fixture(),ctx=f.pay(),other={...f.master,id:'other',uuid:'Actor.other'};f.game.actors.set(other.id,other);f.familiar.system.master.id=other.id;await assert.rejects(f.provider.executeUsage(ctx),/付款/);assert.equal(f.master.updates.length,0);
 });
 
-test('any native Performance check gets conditional +1 circumstance without mutating original check',async()=>{
- const f=fixture();f.game.user=f.user;let received;const result=await f.provider.interceptCheck((...args)=>{received=args;return 'native';},f.check,f.context,'event','callback');assert.equal(result,'native');assert.equal(received[0].totalModifier,11);assert.equal(f.check.modifiers.length,1);assert.equal(received[1],f.context);assert.deepEqual(received.slice(2),['event','callback']);assert.equal(f.prompts.length,1);assert.match(JSON.stringify(f.prompts),/身边/);assert.match(JSON.stringify(f.prompts),/行动/);assert.doesNotMatch(JSON.stringify(f.prompts),/听见|auditory|Perform动作/);assert.equal(received[0].modifiers.at(-1).type,'circumstance');
+test('native Performance gets Accompanist without a separate proximity confirmation',async()=>{
+ const f=fixture();f.game.user=f.user;let received;const result=await f.provider.interceptCheck((...args)=>{received=args;return 'native';},f.check,f.context,'event','callback');assert.equal(result,'native');assert.equal(received[0].totalModifier,11);assert.equal(f.check.modifiers.length,1);assert.equal(received[1],f.context);assert.deepEqual(received.slice(2),['event','callback']);assert.equal(f.prompts.length,0);assert.equal(received[0].modifiers.at(-1).type,'circumstance');
 });
 test('native master Performance proficiency raises Accompanist to +2',async()=>{const f=fixture({rank:3});await f.provider.interceptCheck(c=>assert.equal(c.totalModifier,12),f.check,f.context);});
 test('native stacking retains a stronger circumstance bonus and other status modifiers',async()=>{
@@ -90,10 +90,23 @@ test('native stacking retains a stronger circumstance bonus and other status mod
 for(const[reason,mutate]of[
  ['another skill',f=>{f.check.slug='diplomacy';f.context.domains=['diplomacy'];}],['attack roll',f=>f.context.type='attack-roll'],['wrong ability source',f=>f.accompanist.sourceId='fake'],['familiar cannot act',f=>f.familiar.canAct=false],['dead familiar',f=>f.familiar.isDead=true],['wrong native master',f=>f.familiar.system.master.id='other'],['unowned master',f=>f.master.testUserPermission=()=>false],['native reroll',f=>f.context.isReroll=true],
 ])test(`Accompanist bypasses ${reason}`,async()=>{const f=fixture();mutate(f);await f.provider.interceptCheck(c=>assert.equal(c,f.check),f.check,f.context);assert.equal(f.prompts.length,0);});
-test('declined or closed condition confirmation keeps the native check intact',async()=>{for(const value of ['no',null]){const f=fixture({confirm:async()=>value});await f.provider.interceptCheck(c=>assert.equal(c,f.check),f.check,f.context);assert.equal(f.prompts.length,1);}});
-test('ability removal while confirming cannot leave a bonus on this roll',async()=>{let f;f=fixture({confirm:async()=>{f.familiar.items.delete('accompanist');return 'yes';}});await f.provider.interceptCheck(c=>assert.equal(c,f.check),f.check,f.context);});
+test('removing Accompanist before the native check leaves that check intact',async()=>{const f=fixture();f.familiar.items.delete('accompanist');await f.provider.interceptCheck(c=>assert.equal(c,f.check),f.check,f.context);assert.equal(f.prompts.length,0);});
 test('native contextual clone resolves the current master and one repeated middleware adds only once',async()=>{
- const f=fixture();f.context.actor={...f.master};await f.provider.interceptCheck((check,context)=>f.provider.interceptCheck(c=>assert.equal(c.totalModifier,11),check,context),f.check,f.context);assert.equal(f.prompts.length,1);
+ const f=fixture();f.context.actor={...f.master};await f.provider.interceptCheck((check,context)=>f.provider.interceptCheck(c=>assert.equal(c.totalModifier,11),check,context),f.check,f.context);assert.equal(f.prompts.length,0);
+});
+
+test('sheet rerender replaces its old capture listener and close releases the current root',()=>{
+ const f=fixture(),app={actor:f.familiar},calls=[];
+ const element=name=>({addEventListener(event,listener,capture){calls.push(['add',name,event,listener,capture]);},removeEventListener(event,listener,capture){calls.push(['remove',name,event,listener,capture]);}});
+ const first=element('first'),second=element('second');
+ f.emit('renderFamiliarSheetPF2e',app,first);f.emit('renderActorSheetPF2e',app,first);
+ assert.equal(calls.filter(c=>c[0]==='add').length,1);
+ f.emit('renderFamiliarSheetPF2e',app,second);
+ assert.equal(calls.filter(c=>c[0]==='remove'&&c[1]==='first').length,1);
+ f.emit('closeFamiliarSheetPF2e',app);
+ assert.equal(calls.filter(c=>c[0]==='remove'&&c[1]==='second').length,1);
+ f.emit('closeActorSheetPF2e',app);
+ assert.equal(calls.filter(c=>c[0]==='remove').length,2);
 });
 test('Familiar Focus waits for the same native actor resource lock used by spell payment',async()=>{
  const f=fixture(),ctx=f.pay(),casts=getNativeCastEvents({game:f.game});let release;const gate=new Promise(r=>release=r);

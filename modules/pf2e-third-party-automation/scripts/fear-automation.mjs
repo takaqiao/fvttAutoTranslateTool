@@ -1,9 +1,11 @@
 import {MODULE_ID,hasSource} from './rules.mjs';
 import {SerialActions} from './runtime.mjs';
-import {isActiveGM,resolveMessageTargets,upsertOwnedEffect} from './native-context.mjs';
+import {isActiveGM,publicTargetName,resolveMessageTargets,upsertOwnedEffect} from './native-context.mjs';
 import {degreeForSharedCheck} from './social-automation.mjs';
 import {genericReactionAvailable,withReactionReservation,reactionEpoch as epoch} from './reaction-budget.mjs';
 import {reactionPermitted} from './reaction-restriction.mjs';
+import {createFearOwner} from './fear-owner.mjs';
+import {pinnedMedicTarget} from './medic-native.mjs';
 export {genericReactionAvailable,withReactionReservation} from './reaction-budget.mjs';
 
 export const FEAR_SOURCES=Object.freeze({battle:'Compendium.pf2e.feats-srd.Item.ePObIpaJDgDb9CQj',knowledge:'Compendium.pf2e.feats-srd.Item.hkSuxXOc9qBleJbd'});
@@ -14,24 +16,6 @@ const skill=(a,k)=>a.getStatistic?.(k)??a.skills?.[k],rank=(a,k)=>skill(a,k)?.ra
 const conscious=a=>a&&a.isDead!==true&&!a.hasCondition?.('unconscious');
 export const battleCryReactionAvailable=(actor,game,{reactionRestriction}={})=>reactionPermitted(actor,reactionRestriction)&&(!epoch(actor,game)||genericReactionAvailable(actor,game));
 
-function inRange(origin,target){const n=origin?.object&&target?.object&&origin.parent?.id===target.parent?.id?origin.object.distanceTo?.(target.object):null;return Number.isFinite(n)&&n>=0&&n<=30;}
-function observedTargets(origin,targets){
- const candidates=targets.filter(target=>inRange(origin,target)&&origin.actor?.canSee!==false&&!target.hidden&&!['hidden','undetected','unnoticed'].some(c=>target.actor?.hasCondition?.(c)));
- if(!candidates.length)return new Set();
- if(origin.parent.tokenVision===false)return new Set(candidates.filter(target=>!target.actor?.hasCondition?.('invisible')&&typeof origin.object.checkCollision==='function'&&!origin.object.checkCollision(target.object.center,{origin:origin.object.center,type:'sight',mode:'any'})));
- const token=origin.object,visibility=globalThis.canvas?.visibility,modes=globalThis.CONFIG?.Canvas?.detectionModes;
- if(!visibility?._createVisibilityTestConfig||!modes)return new Set();
- // Core's shared-fog path provides an unattached source for a token the GM is
- // not controlling. Never use the GM's combined visibility or imprecise hearing.
- const temporary=!token.vision,source=token.vision??token._createSharedFogVisionSource?.();if(!source)return new Set();
- try{
-  if(temporary){Object.assign(source.blinded,token._getVisionBlindedStates());source.initialize(token._getVisionSourceData());}
-  return new Set(candidates.filter(target=>{
-   const config=visibility._createVisibilityTestConfig([target.object.center],{object:target.object,tolerance:2});
-   return ['basicSight','lightPerception','seeInvisibility'].some(id=>origin.detectionModes?.[id]?.enabled&&modes[id]?.testVisibility(source,origin.detectionModes[id],config)===true);
-  }));
- }finally{if(temporary)source.destroy();}
-}
 const foe=(actor,target)=>target?.actor&&target.actor.uuid!==actor.uuid&&conscious(target.actor)&&!(actor.isAllyOf?.(target.actor)??false);
 const intimidateImmune=(target,actor)=>values(target.items).some(i=>hasSource(i,DEMORALIZE_IMMUNITY)&&i.isExpired!==true&&i.system?.context?.origin?.actor===actor.uuid);
 function adjustments(game,raw,options){
@@ -55,10 +39,35 @@ export function createFearAutomation({game,reactionRestriction,fromUuid=globalTh
  const fallbackExpired=item=>own(item).kind==='knowledge-immunity'&&own(item).expiresAt<=now()&&!nativeExpiry(item);
  const track=actor=>{if(!liveActor(actor)){forget(actor);return;}if(values(actor.items).some(i=>own(i).kind==='knowledge-immunity'))tracked.set(actor.uuid,actor);else forget(actor);};
  const resolveAction=item=>hasSource(item,FEAR_SOURCES.knowledge)?'fear:disturbing-knowledge':undefined;
- const sourceFor=(actor,message)=>{const t=game.scenes.get(message.speaker?.scene)?.tokens.get(message.speaker?.token);if(!t?.object||t.actor?.uuid!==actor.uuid)throw Error('请从场景中的角色Token使用此能力。');return t;};
+ const sourceFor=(actor,message)=>{const t=game.scenes.get(message.speaker?.scene)?.tokens.get(message.speaker?.token);if(!t||t.actor?.uuid!==actor.uuid)throw Error('请从场景中的角色Token使用此能力。');return t;};
  const mark=async(actor,key,data)=>{gm();const result=await upsertOwnedEffect(actor,key,data);track(actor);return result;};
  const frightened=async actor=>{gm();if((actor.getCondition?.('frightened')?.value??0)<1)await actor.increaseCondition('frightened',{value:1});};
  const immunity=actor=>values(actor.items).some(i=>own(i).kind==='knowledge-immunity'&&own(i).expiresAt>now());
+ const owner=createFearOwner({game,context:async(message,user,kind)=>{
+  const actor=message.actor??await fromUuid(`Actor.${message.speaker?.actor}`),item=feature(actor,kind==='knowledge'?'knowledge':'battle'),origin=sourceFor(actor,message);
+  if(!item||game.messages.get(message.id)!==message||!actor.testUserPermission?.(user,'OWNER')||(message.author?.id??message.user?.id??message.user)!==user.id||!conscious(actor))throw Error('原恐惧能力来源或操作者已改变。');
+  let target;
+  if(kind==='knowledge'){
+   if(message.flags?.pf2e?.origin?.uuid!==item.uuid||rank(actor,'occultism')<3||!own(actor).knowledgeUses?.includes(message.id))throw Error('原惊世胡言使用回执已改变。');
+   target=(await resolveMessageTargets(message,{fromUuid})).find(t=>t.uuid===message.flags?.[MODULE_ID]?.fearNative?.knowledge?.targetUuid);
+  }else{
+   const state=own(message).battleCry;if(state?.status!=='rolling')throw Error('战吼原生阶段已改变。');target=await fromUuid(state.targetUuid);
+   if(rank(actor,'intimidation')<(state.reaction?4:3))throw Error('战吼资格已改变。');
+  }
+  if(!foe(actor,target)||target.parent!==origin.parent)throw Error('原恐惧能力目标已改变。');
+  return {actor,item,message,user,origin,target};
+ },execute:async({actor,item,message,origin,target,payload,marker,validate})=>{
+  if(payload.kind==='knowledge'){
+   if(!Number.isFinite(payload.dc)||payload.dc<1)throw Error('缺少真实目标意志DC。');
+   let check;
+   await skill(actor,'occultism').roll({token:origin,item,target:pinnedMedicTarget(target),action:'disturbing-knowledge',dc:{value:payload.dc,visible:false},traits:TRAITS,extraRollOptions:['action:disturbing-knowledge',marker,...TRAITS.map(t=>`item:trait:${t}`)],skipDialog:!(game.user.settings?.showCheckDialogs??true),createMessage:true,callback:(_roll,_outcome,card)=>{validate();check=card;}});
+   return check??null;
+  }
+  const native=game.pf2e.actions.get('demoralize');if(!native?.toActionVariant)throw Error('缺少原生Demoralize动作。');
+  if(!target.object)throw Error('原目标Token尚未在原操作者客户端就绪。');
+  const reaction=own(message).battleCry.reaction,result=await native.toActionVariant({cost:reaction?'reaction':'free'}).use({actors:[pinnedMedicTarget(origin)],target:target.object,rollOptions:[`${MODULE_ID}:battle-cry:${message.id}`,marker,...reaction?['action:reaction']:[]],event:{ctrlKey:false,metaKey:false,shiftKey:game.user.settings?.showCheckDialogs??true}});
+  validate();return result?.[0]?.message??null;
+ }});
 
  async function executeUsage({actor,item,message,user,action}){
   gm();if(!actor?.testUserPermission?.(user,'OWNER')||item.actor?.uuid!==actor.uuid||resolveAction(item)!==action||game.messages.get(message?.id)!==message)throw Error('惊世胡言使用来源或权限无效。');
@@ -67,17 +76,18 @@ export function createFearAutomation({game,reactionRestriction,fromUuid=globalTh
    if(!conscious(actor)||rank(actor,'occultism')<3)throw Error('惊世胡言需要神秘大师且能行动。');
    const origin=sourceFor(actor,message),targets=await resolveMessageTargets(message,{fromUuid});
    if(!targets.length||rank(actor,'occultism')<4&&targets.length!==1)throw Error('惊世胡言需要一个敌人目标；神秘传奇时可以选中多个。');
-   if(targets.some(t=>!foe(actor,t)||!inRange(origin,t)))throw Error('惊世胡言目标必须是30尺内的敌人。');
+   if(targets.some(t=>!foe(actor,t)||t.parent!==origin.parent))throw Error('惊世胡言需要同场景中的敌人目标。');
    const skipped=targets.filter(t=>immunity(t.actor)),eligible=targets.filter(t=>!skipped.includes(t));
    if(!eligible.length)throw Error('目标仍在24小时惊世胡言暂时免疫中。');
    const unique=[...new Map(eligible.map(t=>[t.actor.uuid,t])).values()],dcs=unique.map(t=>skill(t.actor,'will')?.dc?.value),statistic=skill(actor,'occultism');
+   const bindings=unique.map(target=>({target,actorUuid:target.actor.uuid}));
    if(dcs.some(d=>!Number.isFinite(d))||!statistic?.roll)throw Error('缺少原生神秘检定或目标意志DC。');
    const domains=statistic.check?.domains??statistic.domains??['occultism','skill-check'],raw=domains.flatMap(d=>actor.synthetics?.degreeOfSuccessAdjustments?.[d]??[]).map(r=>({...r,adjustments:structuredClone(r.adjustments)}));
    gm();await actor.update({[`flags.${MODULE_ID}.fear.knowledgeUses`]:[...(own(actor).knowledgeUses??[]).slice(-127),message.id]});
-   let checked;
-   await statistic.roll({token:origin,item,action:'disturbing-knowledge',dc:{value:dcs[0],visible:false},traits:TRAITS,extraRollOptions:['action:disturbing-knowledge',...TRAITS.map(t=>`item:trait:${t}`)],skipDialog:true,createMessage:true,callback:async(roll,outcome,card)=>{checked={roll,outcome,card};}});
-   if(!checked)throw Error('惊世胡言原生检定未完成，不会自动重掷。');
-   const {roll,card}=checked,context=card.flags?.pf2e?.context??{},natural=roll.isDeterministic?roll.terms?.find(t=>t.constructor?.name==='NumericTerm')?.total:roll.dice?.find(d=>d.faces===20)?.total;
+   const checked=await owner.run({actor,item,message,user,target:unique[0]},'knowledge',{dc:dcs[0]});
+   if(checked.status==='cancelled'){await message.update({[`flags.${MODULE_ID}.fear.knowledge`]:{status:'cancelled'}});return {status:'cancelled',result:'已取消惊世胡言检定。'};}
+   if(bindings.some(({target,actorUuid})=>target.actor?.uuid!==actorUuid||target.parent!==origin.parent||origin.parent.tokens.get(target.id)!==target))throw Error('惊世胡言的原目标在检定期间已改变。');
+   const card=checked.check,roll=card.rolls[0],context=card.flags?.pf2e?.context??{},natural=roll.isDeterministic?roll.terms?.find(t=>t.constructor?.name==='NumericTerm')?.total:roll.dice?.find(d=>d.faces===20)?.total;
    const dice={total:roll.total,natural},base=[...(context.options??[]),...(context.contextualOptions?.postRoll??[])].filter(o=>!o.startsWith('check:total:delta:'));
    const adjustmentFor=dc=>adjustments(game,raw,new Set([...base,`check:total:delta:${roll.total-dc}`])),degree=dc=>degreeForSharedCheck(dice,dc,adjustmentFor(dc)).value;
    const reference=adjustmentFor(dcs[0]),nativeDegree=degreeForSharedCheck(dice,dcs[0],reference);
@@ -103,26 +113,31 @@ export function createFearAutomation({game,reactionRestriction,fromUuid=globalTh
   if(type!=='initiative'&&!reaction||context.isReroll)return;
   const author=message.author??game.users.get(message.user?.id??message.user);
   if(!author||creatingUserId&&creatingUserId!==author.id&&creatingUserId!==game.users.activeGM?.id||!actor.testUserPermission?.(author,'OWNER'))return;
-  const user=author.isGM?values(game.users).find(u=>u.active&&!u.isGM&&actor.testUserPermission(u,'OWNER'))??author:author;
+  const user=author;
   return queue.run(`fear:battle:${actor.uuid}`,async()=>{
    gm();if(own(message).battleCry||!conscious(actor)||reaction&&!battleCryReactionAvailable(actor,game,{reactionRestriction}))return;
    const triggerEpoch=epoch(actor,game),origin=sourceFor(actor,message),raw=reaction?[await fromUuid(context.target?.token)]:values(origin.parent.tokens);
-   const canTarget=t=>foe(actor,t)&&inRange(origin,t)&&!intimidateImmune(t.actor,actor);
-   const eligible=raw.filter(canTarget),observed=reaction?null:observedTargets(origin,eligible),candidates=eligible.filter(t=>reaction||observed.has(t));if(!candidates.length)return;
+   // Hidden documents are a recipient permission boundary, not a sight test.
+   const canTarget=t=>foe(actor,t)&&t.parent===origin.parent&&!intimidateImmune(t.actor,actor)&&(!t.hidden||user.isGM||t.actor.testUserPermission?.(user,'OWNER'));
+   const candidates=raw.filter(canTarget);if(!candidates.length)return;
    gm();await message.update({[`flags.${MODULE_ID}.fear.battleCry`]:{status:'offered',reaction}});
-   const choices=[...candidates.map(t=>({value:t.uuid,label:`${reaction?'使用反应':'自由动作'}：挫败${t.name??t.actor.name}的士气`})),{value:'decline',label:'不使用战吼'}];
+   const choices=[...candidates.map(t=>({value:t.uuid,label:`${reaction?'使用反应':'自由动作'}：挫败${publicTargetName(t,{game,user})}的士气`})),{value:'decline',label:'不使用战吼'}];
    const selected=await choose({actor,user,title:reaction?'战吼：攻击大成功后的反应':'战吼：先攻后的自由动作',choices});
    if(selected==null||selected==='decline'){gm();await message.update({[`flags.${MODULE_ID}.fear.battleCry`]:{status:'declined',reaction}});return;}
    const target=candidates.find(t=>t.uuid===selected);if(!target)throw Error('战吼的目标选择无效。');
-   gm();if(!conscious(actor)||!feature(actor,'battle')||rank(actor,'intimidation')<(reaction?4:3)||!canTarget(target)||!reaction&&!observedTargets(origin,[target]).has(target)||reaction&&(epoch(actor,game)!==triggerEpoch||!battleCryReactionAvailable(actor,game,{reactionRestriction})))throw Error('战吼选择期间角色、目标或反应资源已改变。');
-   const native=game.pf2e.actions.get('demoralize');if(!native?.toActionVariant)throw Error('缺少原生Demoralize动作。');
+   gm();if(!conscious(actor)||!feature(actor,'battle')||rank(actor,'intimidation')<(reaction?4:3)||!canTarget(target)||reaction&&(epoch(actor,game)!==triggerEpoch||!battleCryReactionAvailable(actor,game,{reactionRestriction})))throw Error('战吼选择期间角色、目标或反应资源已改变。');
    let claim;
    if(reaction)await withReactionReservation(actor,game,async()=>{
     gm();if(!conscious(actor)||epoch(actor,game)!==triggerEpoch||!battleCryReactionAvailable(actor,game,{reactionRestriction}))throw Error('战吼确认期间角色或反应资源已改变。');
     claim={id:message.id,epoch:epoch(actor,game),checkId:null};await actor.update({[`flags.${MODULE_ID}.fear.reactions`]:[...(own(actor).reactions??[]).filter(r=>r.epoch===claim.epoch),claim]});
    });
-   const result=await native.toActionVariant({cost:reaction?'reaction':'free'}).use({actors:[actor],target:target.object,rollOptions:[`${MODULE_ID}:battle-cry:${message.id}`,...reaction?['action:reaction']:[]],event:{ctrlKey:false,metaKey:false,shiftKey:!!game.user.settings?.showCheckDialogs}});
-   const checkId=result?.[0]?.message?.id;if(!checkId)throw Error('战吼挫败士气检定没有完成，不会自动重掷。');
+   await message.update({[`flags.${MODULE_ID}.fear.battleCry`]:{status:'rolling',reaction,targetUuid:target.uuid}});
+   const result=await owner.run({actor,item,message,user,target},'battleCry');
+   if(result.status==='cancelled'){
+    gm();if(claim)await actor.update({[`flags.${MODULE_ID}.fear.reactions`]:(own(actor).reactions??[]).filter(r=>r.id!==claim.id)});
+    await message.update({[`flags.${MODULE_ID}.fear.battleCry`]:{status:'cancelled',reaction,targetUuid:target.uuid}});return;
+   }
+   const checkId=result.check.id;
    gm();if(claim)await actor.update({[`flags.${MODULE_ID}.fear.reactions`]:(own(actor).reactions??[]).map(r=>r.id===claim.id?{...r,checkId}:r)});
    await message.update({[`flags.${MODULE_ID}.fear.battleCry`]:{status:'done',reaction,checkId,targetUuid:target.uuid}});
   });
@@ -136,11 +151,12 @@ export function createFearAutomation({game,reactionRestriction,fromUuid=globalTh
    track(actor);
   });
  }
- function register({Hooks}={}){
+ function register({Hooks,socket}={}){
+  owner.register({Hooks,socket});
   const registrations=[],on=(name,fn)=>registrations.push([name,Hooks.on(name,(...args)=>Promise.resolve().then(()=>fn(...args)).catch(onError))]);
   on('createChatMessage',async(m,_options,userId)=>{
    try{await battleCry(m,userId);}catch(error){
-    if(isActiveGM(game)&&own(m).battleCry?.status==='offered')await m.update({[`flags.${MODULE_ID}.fear.battleCry`]:{...own(m).battleCry,status:'error',error:String(error.message??error)}});
+    if(isActiveGM(game)&&['offered','rolling'].includes(own(m).battleCry?.status))await m.update({[`flags.${MODULE_ID}.fear.battleCry`]:{...own(m).battleCry,status:'uncertain',result:'本次战吼尚需 GM 核对。'}});
     throw error;
    }
   });

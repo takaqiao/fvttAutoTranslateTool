@@ -7,7 +7,7 @@ import {createDefensiveAdvance} from '../scripts/defensive-advance.mjs';
 
 const update=function(changes){for(const[path,value]of Object.entries(changes)){const parts=path.split('.');let at=this;for(const key of parts.slice(0,-1))at=at[key]??={};at[parts.at(-1)]=structuredClone(value);}return Promise.resolve(this)};
 const firstChoice=async({choices})=>choices[0].value;
-function fixture({startup='ready',choose=firstChoice}={}){
+function fixture({startup='ready',choose=firstChoice,shieldSyncTimeoutMs=1}={}){
  const user={id:'gm',active:true,isGM:true,settings:{showCheckDialogs:false}},game={user,users:new Map([['gm',user]]),world:{id:'ujx5r8oipw7ercdr'},modules:new Map([['patreon-v3',{active:true,version:'3.2.28'}]]),messages:new Map(),actors:new Map(),scenes:new Map(),combats:new Map()};game.users.activeGM=user;
  const actor={id:'a',uuid:'Actor.a',type:'character',flags:{},items:new Map(),canAct:true,alliance:'party',attributes:{shield:{itemId:'shield',raised:true,broken:false,destroyed:false}},system:{movement:{speeds:{land:{value:20}}},actions:[]},testUserPermission:u=>u===user,update};game.actors.set('a',actor);
  const item={id:'feat',uuid:'Actor.a.Item.feat',actor,type:'feat',sourceId:DEFENSIVE_ADVANCE_SOURCE,system:{actionType:{value:'action'},actions:{value:2},traits:{value:['flourish']}}};actor.items.set('feat',item);
@@ -18,7 +18,7 @@ function fixture({startup='ready',choose=firstChoice}={}){
  token.object={document:token,planMovement:async()=>{movementCalls.push('plan');throw Error('Native map movement belongs to the operator.')}};
  token.startMovement=async()=>{movementCalls.push('start');throw Error('No automated movement may start.')};
  token.update=async()=>{movementCalls.push('coordinates');throw Error('No automatic coordinate changes.')};
- const provider=createDefensiveAdvance({game,fromUuid:async uuid=>documents.get(uuid),choose:async request=>{requests.push(request);return choose(request)},startupCompatibility:{status:startup},onError:()=>{}});
+ const provider=createDefensiveAdvance({game,fromUuid:async uuid=>documents.get(uuid),choose:async request=>{requests.push(request);return choose(request)},startupCompatibility:{status:startup},shieldSyncTimeoutMs,onError:()=>{}});
  const socket={register:(name,fn)=>rpc.set(name,fn)},dispose=provider.register({Hooks,socket});
  function message(id='original'){const m={id,uuid:`ChatMessage.${id}`,author:user,actor,item,speaker:{actor:'a',scene:'s',token:'t'},flags:{pf2e:{origin:{uuid:item.uuid,actor:actor.uuid,type:'feat',rollOptions:[USE_ACTION_OPTION,'origin:item:trait:flourish']}},[MODULE_ID]:{usageInput:{actualUse:true,targetUuids:Array.from(user.targets??[]).map(t=>t.document.uuid)},...provider.captureUsage(item)}},update,updateSource(changes){return update.call(this,changes)}};game.messages.set(id,m);return m;}
  const run=message=>provider.executeUsage({actor,item,message,user,action:'defensive-advance'});
@@ -40,12 +40,12 @@ test('only this provider exact original feature requires actual Use',()=>{
  const f=fixture();assert.equal(f.provider.requiresActualUse(f.item),true);assert.equal(f.provider.requiresActualUse({type:'feat',sourceId:'Compendium.other.Item.feature'}),false);
 });
 
-test('one explicit continuation produces one native included Strike without planning or observing movement',async()=>{
+test('original Use opens one native included Strike without a movement confirmation',async()=>{
  const f=fixture({choose:async request=>request.title.includes('MAP')?'1':request.choices[0].value}),enemy=armEnemy(f),m=await original(f);
  await f.run(m);
  assert.equal(f.hooks.has('moveToken'),false);assert.equal(f.hooks.has('preUpdateToken'),false);assert.deepEqual(f.movementCalls,[]);
  assert.deepEqual([...f.rpc.keys()],['defensive-advance:strike']);
- assert.deepEqual(f.requests[0].choices,[{value:'continue',label:'地图移动后继续内含打击'},{value:'decline',label:'结束此活动'}]);
+ assert.equal(f.requests[0].title,'选择原生近战Strike');assert.equal(f.requests.length,2);
  assert.equal(receipt(m).status,'done');assert.equal(receipt(m).cost,2);assert.equal(receipt(m).map,1);assert.equal(receipt(m).checkId,'attack');
  assert.equal(enemy.calls.length,1);assert.equal(enemy.calls[0].target,enemy.target.object);assert.equal(enemy.calls[0].map,1);
  const card=f.game.messages.get('attack');assert.ok(card.flags.pf2e.context.options.includes('action:free'));assert.equal(card.flags.pf2e.context.target.token,'Scene.s.Token.enemy');assert.match(card.flavor,/>F</);
@@ -53,37 +53,44 @@ test('one explicit continuation produces one native included Strike without plan
  const second=f.message('second');await f.Hooks.emit('preCreateChatMessage',second);await assert.rejects(f.run(second),/华丽/);assert.equal(enemy.calls.length,1);
 });
 
-test('native map movement during the pending continuation writes no activity receipt and only its explicit answer permits Strike',async()=>{
+test('native map movement during the real weapon choice writes no activity receipt',async()=>{
  const answer=Promise.withResolvers(),offered=Promise.withResolvers();let f;
- f=fixture({choose:async request=>{if(request.choices.some(c=>c.value==='continue')){offered.resolve();return answer.promise}return request.choices[0].value}});
+ f=fixture({choose:async request=>{if(request.title==='选择原生近战Strike'){offered.resolve();return answer.promise}return request.choices[0].value}});
  const enemy=armEnemy(f),m=await original(f),flow=f.run(m);await Promise.race([offered.promise,flow.then(()=>assert.fail('activity ended before continuation'),error=>{throw error})]);
- assert.equal(enemy.calls.length,0);assert.equal(receipt(m).status,'awaiting-movement');const before=structuredClone(receipt(m));
+ assert.equal(enemy.calls.length,0);assert.equal(receipt(m).status,'ready-to-strike');const before=structuredClone(receipt(m));
  f.token.x=10000;f.token.elevation=20;await f.Hooks.emit('moveToken',f.token,{passed:{cost:1000,waypoints:[{action:'teleport'}]}},{},f.user);
- assert.deepEqual(receipt(m),before);await f.run(m);assert.equal(f.requests.length,1);answer.resolve('continue');await flow;assert.equal(enemy.calls.length,1);
+ assert.deepEqual(receipt(m),before);await f.run(m);assert.equal(f.requests.length,1);answer.resolve(enemy.strike.item.uuid+'#base');await flow;assert.equal(enemy.calls.length,1);
 });
 
-for(const choice of ['decline',null])test(`ending continuation with ${choice} preserves original cost and never starts a Strike or charges again`,async()=>{
+for(const choice of [null])test(`closing the weapon choice preserves original cost and never starts a Strike or charges again`,async()=>{
  const f=fixture({choose:async()=>choice}),enemy=armEnemy(f),m=await original(f);
- await f.run(m);assert.equal(receipt(m).status,'cancelled');assert.equal(receipt(m).cost,2);assert.equal(enemy.calls.length,0);
+ const result=await f.run(m);assert.equal(result.status,'cancelled');assert.equal(receipt(m).status,'cancelled');assert.equal(receipt(m).cost,2);assert.equal(enemy.calls.length,0);
  await f.run(m);assert.equal(f.requests.length,1);assert.equal(enemy.calls.length,0);assert.equal(f.actor.flags[MODULE_ID].defensiveAdvanceUses.length,1);assert.deepEqual(f.movementCalls,[]);
 });
 
-test('the continuation gives the native shield executor time to finish without polling',async t=>{
- let f;f=fixture({choose:async request=>{if(request.choices.some(c=>c.value==='continue'))f.actor.attributes.shield.raised=true;return request.choices[0].value}});
- f.actor.attributes.shield.raised=false;const enemy=armEnemy(f),m=await original(f);t.mock.method(globalThis,'setTimeout',()=>assert.fail('shield readiness must not poll'));
+test('the real weapon choice gives the native shield executor time to finish without another confirmation',async()=>{
+ let f;f=fixture({choose:async request=>{if(request.title==='选择原生近战Strike')f.actor.attributes.shield.raised=true;return request.choices[0].value}});
+ f.actor.attributes.shield.raised=false;const enemy=armEnemy(f),m=await original(f);
  await f.run(m);assert.equal(enemy.calls.length,1);
 });
 
-test('missing native raised-shield result stops after continuation without replacement effect or replay',async t=>{
+test('missing native raised-shield result stops without replacement effect or replay',async()=>{
  const f=fixture(),enemy=armEnemy(f),m=await original(f);f.actor.attributes.shield.raised=false;
- t.mock.method(globalThis,'setTimeout',()=>assert.fail('shield readiness must not poll'));f.actor.createEmbeddedDocuments=()=>assert.fail('native shield effect must not be replaced');
- await assert.rejects(f.run(m),/原生举盾/);assert.equal(receipt(m).status,'uncertain');assert.equal(f.requests.length,1);assert.equal(enemy.calls.length,0);
- await f.run(m);assert.equal(f.requests.length,1);assert.equal(enemy.calls.length,0);
+ f.actor.createEmbeddedDocuments=()=>assert.fail('native shield effect must not be replaced');
+ await assert.rejects(f.run(m),/原生举盾/);assert.equal(receipt(m).status,'uncertain');assert.equal(f.requests.length,2);assert.equal(enemy.calls.length,0);
+ await f.run(m);assert.equal(f.requests.length,2);assert.equal(enemy.calls.length,0);
+});
+
+test('native shield synchronization resumes from its actor update and releases all temporary listeners',async()=>{
+ const f=fixture({shieldSyncTimeoutMs:1000}),enemy=armEnemy(f),m=await original(f);f.actor.attributes.shield.raised=false;
+ const run=f.run(m);await new Promise(resolve=>setImmediate(resolve));assert.equal(enemy.calls.length,0);assert.equal(f.requests.length,2);
+ assert.equal(f.hooks.get('updateActor')?.size,1);f.actor.attributes.shield.raised=true;await f.Hooks.emit('updateActor',f.actor,{});await run;
+ assert.equal(enemy.calls.length,1);for(const name of ['updateActor','createItem','updateItem'])assert.equal(f.hooks.get(name)?.size,0);
 });
 
 test('distance, walls, missing land speed and movement after Use do not change the chosen native target or MAP',async()=>{
  let f,enemy;f=fixture({choose:async request=>{
-  if(request.choices.some(c=>c.value==='continue')){f.actor.system.movement.speeds.land.value=0;f.token.x=10000;f.token.elevation=40}
+  if(request.title==='选择原生近战Strike'){f.actor.system.movement.speeds.land.value=0;f.token.x=10000;f.token.elevation=40}
   if(request.title.includes('MAP')){enemy.target.x=90000;f.game.user.targets=new Set([{document:{uuid:'Scene.s.Token.other'}}]);return '2'}
   return request.choices[0].value;
  }});
@@ -143,7 +150,7 @@ test('saved repair without startup cache, display and previous flourish cannot e
 
 test('source, owner, original Use, turn or GM changes during continuation cannot start the committed Strike',async()=>{
  for(const mode of ['source','owner','message','turn','gm']){let f;f=fixture({choose:async request=>{
-  if(request.choices.some(c=>c.value==='continue')){
+  if(request.title==='选择原生近战Strike'){
    if(mode==='source')f.item.sourceId='Compendium.other.Item.changed';
    if(mode==='owner')f.actor.testUserPermission=()=>false;
    if(mode==='message')f.game.messages.set('original',{id:'original'});
