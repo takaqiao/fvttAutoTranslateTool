@@ -10,6 +10,8 @@
 
 **Spec:** `docs/superpowers/specs/2026-09-30-automation-native-followups.md`
 
+**Progress (2026-09-30):** Task 1–7 的实现和回归已完成，证据见 [执行记录](../../fortress-automation/native-followups-2026-09-30.md)。首个完整真实依赖运行 1907/1907、0 fail、0 skip；最终新增回归重跑以外部 `output/automation-native-20260930/final-tests.log` 为准。Task 8 最终集成与现场结果确认、发布包和正式部署仍待完成，RK 实机验收尚在继续。
+
 ## Global Constraints
 
 - 不检测移动、路线、距离、视线或触碰事实，不增加重复确认。
@@ -35,8 +37,8 @@ Files: module runtime files, this spec/plan, `docs/fortress-automation/native-fo
 - [x] 从 CN 只读捕获 137 个运行文件并校验版本 0.9.18.6。
 - [x] 创建隔离工作区，覆盖运行代码为生产捕获，保留 canonical 回归测试。
 - [x] 运行 `node --test modules/pf2e-third-party-automation/tests/*.test.mjs`，保存完整基线结果。
-- [ ] 更新因取消版本锁而过时的测试，补齐热修新增契约；真实失败不能改断言掩盖。
-- [ ] Commit verified baseline and test reconciliation.
+- [x] 更新因取消版本锁而过时的测试，补齐热修新增契约；真实失败不能改断言掩盖。
+- [x] Commit verified baseline and test reconciliation (`0f03b2bc`, `aca21ea0`).
 
 ### Task 2: Target privacy and remove redundant spatial workflow (native_flow_audit)
 
@@ -44,11 +46,11 @@ Files: `native-context.mjs`, `eldamon-basic-settlement.mjs`, `fear-automation.mj
 
 Interfaces: shared `publicTargetName(token,{game,user})` returns recipient-visible text; existing provider interfaces remain unchanged; provider usage result may return `{status,result}` for waiting/cancelled/done.
 
-- [ ] Add tests proving hidden names never reach player choices/titles and ordinary native action requires no movement confirmation.
-- [ ] Run focused tests RED, implement recipient-aware labels and remove spatial gates/confirmation without moving Tokens or inventing rule results.
-- [ ] Keep reaction choices/true branching; hide technical lifecycle diagnostics from players.
-- [ ] Release familiar sheet listener on re-render/close, with detached-root regression test.
-- [ ] Run all affected provider tests GREEN and report exact files/evidence.
+- [x] Add tests proving hidden names never reach player choices/titles and ordinary native action requires no movement confirmation.
+- [x] Run focused tests RED, implement recipient-aware labels and remove spatial gates/confirmation without moving Tokens or inventing rule results.
+- [x] Keep reaction choices/true branching; hide technical lifecycle diagnostics from players.
+- [x] Release familiar sheet listener on re-render/close, with detached-root regression test.
+- [x] Run all affected provider tests GREEN and report exact files/evidence (`c4059ce6`; focused 244 pass, 0 fail; complete dependency suite 0 skip).
 
 ### Task 3: Indexed maintenance and coalescing (performance_audit)
 
@@ -56,9 +58,9 @@ Files: `spiritual-scar-expiry.mjs`, `party-automation.mjs`, `av-automation.mjs`,
 
 Interfaces: retain provider `register({Hooks})` and cleanup signatures; indexes recognize world and synthetic actors and rebuild on relevant scene lifecycle.
 
-- [ ] Add tests: zero related effects reads no inventories on unrelated chat; one relevant effect still expires from correct source; bursts coalesce without dropping dirty work.
-- [ ] Observe RED, add relevant-effect/source indexes and field filters; remove movement-dependent automation per spec.
-- [ ] Run scar/party/configuration/load tests GREEN; provide operation counts and exact scope.
+- [x] Add tests: zero related effects reads no inventories on unrelated chat; one relevant effect still expires from correct source; bursts coalesce without dropping dirty work.
+- [x] Observe RED, add relevant-effect/source indexes and field filters; remove movement-dependent automation per spec.
+- [x] Run scar/party/configuration/load tests GREEN; provide operation counts and exact scope (`737ec67a`; 53/53, 0 skip).
 
 ### Task 4: One-roll Recall Knowledge and Automatic Knowledge (history_gaps)
 
@@ -66,11 +68,11 @@ Files: `knowledge-automation.mjs`, new `knowledge-workbench.mjs`/focused helper(
 
 Interfaces: `createKnowledgeAutomation` retains provider contract; new RK bridge exposes wrapper/register functions through provider, authorizes original owner and GM result, uses actual native same-roll data rather than trusting remote totals.
 
-- [ ] Read installed Workbench macro UUID `Compendium.xdy-pf2e-workbench.asymonous-benefactor-macros.Macro.xcFr7PWwG5OVALNJ`; inspect exact roll contexts and target skill/DC selection.
-- [ ] Add tests for one shared d20, target-based applicable skills, secret results, no duplicate incidental RK, fixed skill, Assurance and validated GM result driving benefits.
-- [ ] Observe RED, implement bridge using runtime interfaces rather than version/source lock; route all normal RK actions and existing incidental requests.
-- [ ] Add Automatic Knowledge entry and preserve fixed choice/frequency; GM adjudication of lore/information remains.
-- [ ] Run focused tests GREEN and provide integration instructions for main.
+- [x] Read installed Workbench macro UUID `Compendium.xdy-pf2e-workbench.asymonous-benefactor-macros-internal.Macro.xcFr7PWwG5OVALNJ`; inspect exact roll contexts and target skill/DC selection.
+- [x] Add tests for one shared d20, target-based applicable skills, secret results, no duplicate incidental RK, fixed skill, Assurance and validated GM result driving benefits.
+- [x] Observe RED, implement bridge using runtime interfaces rather than version/source lock; route all normal RK actions and existing incidental requests.
+- [x] Add Automatic Knowledge entry and preserve fixed choice/frequency; GM adjudication of lore/information remains.
+- [x] Run focused tests GREEN and integrate main's outermost local probe boundary (`c504414f`; independent real-source 40/40, 0 skip). Final live RK acceptance belongs to Task 8 and remains pending.
 
 ### Task 5: Usage lifecycle and operation receipts (root)
 
@@ -78,11 +80,11 @@ Files: `usage-events.mjs`, focused DOM/receipt helper(s), `main.mjs`, usage and 
 
 Interfaces: normalized `{status:'done'|'waiting'|'cancelled',result?:string}`; legacy provider string means completed only when no persisted waiting provider state. Frequency `claim(id,{itemUuid,userId,messageId})` binds observed receipt to one real message; single claim remains enforced.
 
-- [ ] Write RED tests for normal delay beyond 5s, receipt replay/different item/user, pending chat latency, waiting/cancelled render and detached sheet roots.
-- [ ] Claim validated receipt before waiting on pending chat write; bind proof, prune completed receipt bookkeeping without allowing an old observed decrement to replay.
-- [ ] Track application listeners by application identity; remove previous root on render and all on close/unregister.
-- [ ] Filter non-damage chat before enumerating cycle actors.
-- [ ] Run usage/bard/main/load tests GREEN.
+- [x] Write RED tests for normal delay beyond 5s, receipt replay/different item/user, pending chat latency, waiting/cancelled render and detached sheet roots.
+- [x] Claim validated receipt before waiting on pending chat write; bind proof, prune completed receipt bookkeeping without allowing an old observed decrement to replay.
+- [x] Track application listeners by application identity; remove previous root on render and all on close/unregister.
+- [x] Filter non-damage chat before enumerating cycle actors.
+- [x] Run usage/bard/main/load tests GREEN; shared native-sheet factories plus main callback use one awaited native action and one ledger lease (`25aa0183`).
 
 ### Task 6: Original-owner combination operations and final-result lifecycle (root)
 
@@ -90,24 +92,25 @@ Files: `spell-combination.mjs`, `dual-strike-automation.mjs`, focused owner/atta
 
 Interfaces: GM sends bounded original-card operation nonce; original actor owner invokes native roll APIs; GM validates persisted native message identity/context before extra settlement. Definite cancellation is distinct from uncertain execution; payment is not repeated.
 
-- [ ] Add RED tests for original owner UI settings, cancelled attack before native result, lost reply, duplicate request and hero-point replacement.
-- [ ] Move native attack/damage interaction to original owner RPC; preserve original PF2e check flags/targets and source linkage.
-- [ ] Make definite cancellation recoverable without duplicated payment; preserve uncertain state for maintenance.
-- [ ] Invalidate stale unapplied combined results on a kept reroll; subsequent damage uses latest native outcome and same paid operation. Already applied damage uses native undo rather than compensating HP.
-- [ ] Run combination/activity/payment tests GREEN.
+- [x] Add RED tests for original owner UI settings, cancelled attack before native result, lost reply, duplicate request and hero-point replacement.
+- [x] Move native attack/damage interaction to original owner RPC; preserve original PF2e check flags/targets and source linkage.
+- [x] Make definite cancellation recoverable without duplicated payment; preserve uncertain state for maintenance. Owner disconnect releases unresolved GM wait; a saved completed result remains authoritative.
+- [x] Invalidate stale combined results synchronously on every client after a kept reroll, then recheck at the final native damage boundary. Keep paid native spell cards available; GM verifies and merges the retained result once. Already applied damage uses native undo rather than compensating HP.
+- [x] Run combination/activity/payment tests GREEN (owner/lifecycle/shared-sheet/usage independent latest 57/57, 0 skip); record actual owner cancel/accept/no-dialog and player hero reroll coverage precisely.
 
 ### Task 7: Weapon Surge and bounded followup evaluation
 
-Files: `next-strike-effects.mjs`, related rule-compat provider and tests, release notes.
+Files: `weapon-surge.mjs`, `weapon-surge-snapshot.mjs`, `next-strike-effects.mjs`, `activity-attack-sequence.mjs`, focused tests and verification/scope records. Root owns main and owner RPC integration.
 
-- [ ] Add RED test: next attack with bound weapon consumes Surge on hit or miss, another weapon does not; delayed damage from that attack retains original extra die.
-- [ ] Implement using existing next-strike snapshot mechanism; verify native consumption and no duplicate added dice.
-- [ ] Evaluate external merged IWR, one-result reactions and summoner ownership boundaries against installed source; record reproducible limits and avoid unsupported broad hooks.
-- [ ] Run next-strike and fortress tests GREEN.
+- [x] Add RED test: next attack with bound weapon consumes Surge on hit or miss, another weapon does not; delayed damage from that attack retains original extra die.
+- [x] Implement using existing next-strike snapshot mechanism; verify native consumption and no duplicate added dice. Preserve old/empty/reroll snapshots and prevent nested gates after payment reprepare.
+- [x] Evaluate external merged IWR, one-result reactions, ammo and summoner ownership boundaries against installed source; record reproducible limits and avoid unsupported broad hooks.
+- [x] Run next-strike and fortress tests GREEN (Surge/frame/sequence 68/68, 0 skip; complete suite 0 fail). Record real MISS consumption and original rank-1 delayed damage with new rank-9 effect preserved.
 
 ### Task 8: Integration, review and release artifact
 
-- [ ] Run full suite, syntax checks, source-file integrity and focused load probes; reconcile all baseline failures with evidence.
-- [ ] Fresh independent whole-change review covers Review Focus above; fix important findings with tests.
+- [ ] Confirm the final post-fix full suite, syntax checks, source-file integrity and focused load probes. First complete dependency run was 1907/1907, 0 fail, 0 skip; new regressions and later knowledge fixes require the latest complete `final-tests.log` footer.
+- [ ] Confirm the final independent whole-change review and remaining live QA. Important findings have RED→GREEN fixes; owner/Surge/player hero cases have actual dual-client evidence, while final RK live acceptance remains pending.
 - [ ] Create versioned release artifact preserving 0.9.18.6 hotfixes; inspect manifest/package contents and rollback instructions.
-- [ ] Document verified versus actual multi-client UI coverage precisely; only deploy a verified candidate, retaining remote module backup and checking hashes afterwards.
+- [x] Document verified versus actual multi-client UI coverage precisely in the execution record, including failed attempts and unsupported coverage.
+- [ ] Deploy only the finally verified candidate, retaining remote module backup and checking hashes afterwards. No release/deployment success is claimed by current tests or isolated QA.
