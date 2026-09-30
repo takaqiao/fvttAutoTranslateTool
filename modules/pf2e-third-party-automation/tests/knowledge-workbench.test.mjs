@@ -19,8 +19,8 @@ function fixture(){
  const token={id:'hero',uuid:'Scene.s.Token.hero',documentName:'Token',actor,parent:target.parent};token.object={document:token,actor};
  const messages=new Map();
  class Messages {constructor(data){Object.assign(this,data);this.id=null;}getFlag(ns,key){return key.split('.').reduce((o,k)=>o?.[k],this.flags[ns]);}static getSpeaker(){return {actor:actor.id,token:token.id,scene:'s'};}static getWhisperRecipients(){return [gm];}static async create(data){const message={id:'rk1',uuid:'ChatMessage.rk1',actor,...data,author:user,async update(changes){for(const[k,v]of Object.entries(changes)){let o=this;const ps=k.split('.');for(const p of ps.slice(0,-1))o=o[p]??={};o[ps.at(-1)]=v;}return this;}};messages.set(message.id,message);return message;}}
- const macro={type:'script',command,async execute(scope){return new AsyncFunction(...Object.keys(scope),this.command)(...Object.values(scope));}};
- const game={user,userId:user.id,users:{get:id=>id===user.id?user:id===gm.id?gm:null,activeGM:gm},system:{id:'pf2e'},messages,settings:{get:()=> 'none'},modules:new Map([['xdy-pf2e-workbench',{active:true}]]),packs:new Map(),time:{worldTime:0}};
+ const macro={uuid:'Compendium.xdy-pf2e-workbench.asymonous-benefactor-macros-internal.Macro.xcFr7PWwG5OVALNJ',type:'script',command,async execute(scope){return new AsyncFunction(...Object.keys(scope),this.command)(...Object.values(scope));}};
+ const game={user,userId:user.id,users:{get:id=>id===user.id?user:id===gm.id?gm:null,activeGM:gm},system:{id:'pf2e'},i18n:{lang:'cn'},messages,settings:{get:()=> 'none'},modules:new Map([['xdy-pf2e-workbench',{active:true,version:'7.7.5'}]]),packs:new Map(),time:{worldTime:0}};
  game.user.targets=new Set([target.object]);game.user.targets.first=()=>target.object;
  const fromUuid=async uuid=>uuid.endsWith('xcFr7PWwG5OVALNJ')?macro:uuid===actor.uuid?actor:uuid===token.uuid?token:uuid===target.uuid?target:null;
  const globals={Roll:NativeRoll,ChatMessage:Messages,CONST:{DICE_ROLL_MODES:{BLIND:'blindroll'},CHAT_MESSAGE_STYLES:{OTHER:0}},CONFIG:{PF2E:{abilities:{}}},ui:{notifications:{info(){}}},document:{createElement(){throw Error('none breakdown must not create DOM');}}};
@@ -105,7 +105,7 @@ test('Assurance preserves the prepared proficiency without level and rejects mid
  const f=fixture();f.actor.skills.occultism.modifiers=[{type:'proficiency',modifier:4},{type:'ability',modifier:7}];f.actor.items=[{_stats:{compendiumSource:'Compendium.pf2e.feats-srd.Item.W6Gl9ePmItfDHji0'},system:{rules:[{key:'ChoiceSet',flag:'assurance',selection:'occultism'}]}}];
  const input={...f,requestId:'assurance-pwl',targetUuids:[f.target.uuid],statistic:'occultism',assurance:true,dc:20},capture=await api.captureWorkbenchRecall(input);assert.equal(capture.candidates[0].total,14);assert.equal(capture.candidates[0].modifier,4);assert.equal(f.die.count,0);
  const native=f.game.pf2e.Check.roll;f.game.pf2e.Check.roll=(check,context,...args)=>{if(context.substitutions?.[0]?.slug==='assurance')check.modifiers.push({type:'status',modifier:5});return native(check,context,...args);};
- await assert.rejects(()=>api.captureWorkbenchRecall({...input,requestId:'assurance-bonus-rejected'}),/Assurance.*熟练/);assert.equal(f.die.count,0);
+ await assert.rejects(()=>api.captureWorkbenchRecall({...input,requestId:'assurance-bonus-rejected'}),/驾轻就熟.*熟练/);assert.equal(f.die.count,0);
 });
 test('final result can only be selected by an actual GM from the captured native candidate',async()=>{
  assert.ok(api?.finalizeWorkbenchRecall,'Workbench bridge is missing');const f=fixture();const capture=await api.captureWorkbenchRecall({...f,requestId:'selection1',targetUuids:[f.target.uuid]});
@@ -233,15 +233,17 @@ test('a target relink after native result publication cannot enter knowledge ben
 });
 test('HUD render capture takes the real earliest RK click and releases detached application roots',async()=>{
  const f=fixture();f.user.active=true;f.gm.active=true;f.actor.getActiveTokens=()=>[f.token];f.game.user.character=f.actor;
+ const completed=new Promise(resolve=>{f.globals.ui.notifications.info=resolve;});
  const callbacks=new Map();const Hooks={on(name,fn){callbacks.set(name,fn);return fn;},off(name){callbacks.delete(name);}};
  const controller=createWorkbenchRecallController({...f});const cleanup=controller.register({Hooks,socket:{register(){},executeAsUser:async()=>({ok:true,value:{messageId:'rk1'}})}});
  const makeRoot=()=>({handlers:new Map(),contains:()=>true,addEventListener(type,fn){this.handlers.set(type,fn);},removeEventListener(type,fn){if(this.handlers.get(type)===fn)this.handlers.delete(type);}});
  const app={actor:f.actor},old=makeRoot(),next=makeRoot();callbacks.get('renderApplicationV2')(app,old);assert.ok(old.handlers.has('click'));callbacks.get('renderApplicationV2')(app,next);assert.equal(old.handlers.size,0);
- let stopped=0;next.handlers.get('click')({target:{closest:()=>({dataset:{action:'roll-statistic-action',key:'recall-knowledge'}})},preventDefault(){},stopImmediatePropagation(){stopped++;}});await new Promise(r=>setImmediate(r));assert.equal(stopped,1);assert.equal(f.die.count,1);
+ let stopped=0;next.handlers.get('click')({target:{closest:()=>({dataset:{action:'roll-statistic-action',key:'recall-knowledge'}})},preventDefault(){},stopImmediatePropagation(){stopped++;}});await completed;assert.equal(stopped,1);assert.equal(f.die.count,1);
  callbacks.get('closeApplicationV2')(app);assert.equal(next.handlers.size,0);cleanup();
 });
 test('installed HUD frozen actions API registers safely and real RK click still uses one Workbench die',async()=>{
  const f=fixture();f.user.active=true;f.gm.active=true;f.actor.getActiveTokens=()=>[f.token];f.game.user.character=f.actor;
+ const completed=new Promise(resolve=>{f.globals.ui.notifications.info=resolve;});
  // PF2e HUD CustomModule.apiExpose freezes the exposed object and defines its
  // parent property as non-writable/non-configurable. Public actions cannot be patched.
  let nativeCalls=0;const actions=Object.freeze({rollRecallKnowledge:()=>{nativeCalls++;}}),hudApi={};
@@ -251,7 +253,7 @@ test('installed HUD frozen actions API registers safely and real RK click still 
  const root={handlers:new Map(),contains:()=>true,addEventListener(type,fn){this.handlers.set(type,fn);},removeEventListener(type,fn){if(this.handlers.get(type)===fn)this.handlers.delete(type);}};
  callbacks.get('renderApplicationV2')({actor:f.actor},root);let stopped=0;
  root.handlers.get('click')({target:{closest:()=>({dataset:{action:'roll-statistic-action',key:'recall-knowledge'}})},preventDefault(){},stopImmediatePropagation(){stopped++;}});
- await new Promise(resolve=>setImmediate(resolve));assert.equal(stopped,1);assert.equal(nativeCalls,0);assert.equal(f.die.count,1);assert.equal(hudApi.actions,actions);cleanup();assert.equal(root.handlers.size,0);assert.equal(hudApi.actions,actions);
+ await completed;assert.equal(stopped,1);assert.equal(nativeCalls,0);assert.equal(f.die.count,1);assert.equal(hudApi.actions,actions);cleanup();assert.equal(root.handlers.size,0);assert.equal(hudApi.actions,actions);
 });
 test('a no-GM result still saves one secret die and an owner request rejects a forged original card',async()=>{
  const f=controllerFixture();f.gm.active=false;await assert.rejects(()=>f.owner.run({actor:f.actor,token:f.token,targetUuids:[f.target.uuid],requestId:'offlineGM'}),/秘骰已保存/);assert.equal(f.die.count,1);assert.equal(f.game.messages.get('rk1').blind,true);
@@ -325,4 +327,21 @@ test('a fixed Lore ability preserves its statistic and DC instead of being exclu
 test('a player cannot impersonate the GM by supplying the actual GM User object to finalization',async()=>{
  const f=fixture();const capture=await api.captureWorkbenchRecall({...f,requestId:'gm-spoof',targetUuids:[f.target.uuid]});
  await assert.rejects(()=>api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:f.game,message:capture.message,user:f.gm}),/GM/);
+});
+test('unchanged actual macro localizes target and no-target cards and notices without changing its secret check or native state',async()=>{
+ for(const targetUuids of [[],['Scene.s.Token.enemy']]){
+  const f=fixture(),notices=[];f.globals.ui.notifications.info=value=>notices.push(value);const macro=await f.fromUuid('xcFr7PWwG5OVALNJ'),source=macro.command;
+  const capture=await api.captureWorkbenchRecall({...f,requestId:`localized-${targetUuids.length}`,targetUuids});assert.match(capture.message.content,/<strong>回忆知识<\/strong>/);assert.doesNotMatch(capture.message.content,/Recall Knowledge|Prof<|Mod<|Result<|EXPERT|CrSuc|CrFail/);assert.equal(notices[0],'Hero尝试回忆相关知识。');assert.equal(macro.command,source);assert.equal(capture.message.blind,true);assert.deepEqual(capture.message.whisper,[f.gm.id]);assert.equal(capture.message.author,f.user);assert.equal(f.die.count,1);assert.equal(capture.die,12);assert.equal(capture.message.flags.pf2e.context.outcome,null);assert.equal(capture.message.flags.pf2e.context.dc,null);assert.equal(capture.message.flags[MODULE_ID].workbenchRecall.probeUse.status,'done');
+  if(targetUuids.length){assert.match(capture.message.content,/对抗 Hidden enemy/);assert.match(capture.message.content,/学识技能难度/);assert.match(capture.message.content,/专家/);assert.equal(capture.candidates[0].total,25);assert.equal(capture.candidates[0].dc,20);}else assert.match(capture.message.content,/熟练/);
+  const control=fixture();control.game.i18n.lang='en';const original=await api.captureWorkbenchRecall({...control,requestId:`original-${targetUuids.length}`,targetUuids});
+  assert.deepEqual(capture.message.content.match(/<[^>]*>/g),original.message.content.match(/<[^>]*>/g));assert.deepEqual(capture.message.content.match(/[+-]?\d+(?:\.\d+)?/g),original.message.content.match(/[+-]?\d+(?:\.\d+)?/g));
+  const rollState=roll=>({total:roll.total,options:roll.options,dice:roll.dice}),nativeState=message=>({...message.flags.pf2e,context:{...message.flags.pf2e.context,token:message.flags.pf2e.context.token?.uuid}});assert.deepEqual(capture.candidates,original.candidates);assert.deepEqual(capture.message.rolls.map(rollState),original.message.rolls.map(rollState));assert.deepEqual(nativeState(capture.message),nativeState(original.message));assert.equal(control.die.count,1);
+ }
+});
+test('actual macro retains native tooltip and UUID labels while translating conditional and feat sentences',async()=>{
+ const f=fixture();f.actor.itemTypes.feat=[{slug:'dubious-knowledge'},{slug:'unmistakable-lore'}];
+ const predicate=['action:recall-knowledge'];predicate.test=()=>false;f.actor.skills.society.modifiers=[{slug:'optional',label:'原生已译调整项',signedValue:'+2',source:'Compendium.example.rules.Item.native',modifier:2,enabled:false,predicate}];
+ f.actor.synthetics.degreeOfSuccessAdjustments.society=[{predicate:{test:()=>true},adjustments:{all:{amount:1,label:'原生已译规则提示'}}}];
+ const capture=await api.captureWorkbenchRecall({...f,requestId:'localized-dynamic',targetUuids:[f.target.uuid]});
+ assert.ok(capture.message.content.includes('data-tooltip="原生已译规则提示"'));assert.ok(capture.message.content.includes('@UUID[Compendium.example.rules.Item.native]{原生已译调整项}</a>'));assert.match(capture.message.content,/潜在调整值/);assert.ok(capture.message.content.includes('Hero拥有@UUID[Compendium.pf2e.feats-srd.Item.1Bt7uCW2WI4sM84P]'));assert.ok(capture.message.content.includes('Hero拥有@UUID[Compendium.pf2e.feats-srd.Item.XvX1EyxWbbBF32NV]'));assert.equal(f.die.count,1);
 });

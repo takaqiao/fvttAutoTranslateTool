@@ -16,7 +16,7 @@ export function cardLinkPlan(snapshot,links){
    if(snapshot.powerId==='static-shock'&&n===2)result.formula=`(2+${snapshot.level})[electricity]`;
    if(snapshot.powerId==='electric-shot'&&n===2){result.formula=`${snapshot.level}[electricity]`;result.shockedFailureFormula=`(2+${snapshot.level})${snapshot.discharge?'d8':'d4'}[electricity]`;}
    if(snapshot.powerId==='reactive-chain'){
-    if(!Number.isFinite(snapshot.triggerDamage)||snapshot.triggerDamage<=0)throw Error('Reactive Chain has no confirmed damage basis.');
+    if(!Number.isFinite(snapshot.triggerDamage)||snapshot.triggerDamage<=0)throw Error('反应电链缺少已确认的伤害依据。');
     result.formula=`${Math.floor(snapshot.triggerDamage/2)}[electricity]`;
    }
   }
@@ -33,7 +33,7 @@ export function renderMetapowerCard(message,html,{receipt,onClear,onRetryDeliver
  root.querySelector('.metapower-controls')?.remove();
  const block=document.createElement('div');block.className='metapower-controls';block.setAttribute('role','status');
  const snapshot=receipt.snapshot;
- block.textContent=receipt.kind?`${receipt.kind==='widen'?'增广元素':'虹吸元素'}：仅限紧接的下一次引导威能。`:snapshot?`${snapshot.kind==='widen'?'增广元素':snapshot.kind==='siphoning'?'虹吸元素':'原生威能'} · ${snapshot.discharge?'放电（Charged −1）':'普通分支'}${snapshot.area?` · ${snapshot.area.distance} 尺`:''}${snapshot.siphon?.applies?' · 无类型；逐目标半伤，关联生物特征匹配时全伤；附加效果不生效':''}`:'已记录实际使用。';
+ block.textContent=receipt.kind?`${receipt.kind==='widen'?'增广元素':'虹吸元素'}：仅限紧接的下一次引导威能。`:snapshot?`${snapshot.kind==='widen'?'增广元素':snapshot.kind==='siphoning'?'虹吸元素':'原生威能'} · ${snapshot.discharge?'放电（蓄电 −1）':'普通分支'}${snapshot.area?` · ${snapshot.area.distance} 尺`:''}${snapshot.siphon?.applies?' · 无类型；逐目标半伤，关联生物特征匹配时全伤；附加效果不生效':''}`:'已记录实际使用。';
  if(receipt.kind&&onClear){const button=document.createElement('button');button.type='button';button.textContent='已采取其他动作／清除待用威能';button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();Promise.resolve(onClear(receipt)).catch(onError)});block.append(button);}
  if(receipt.delivery&&receipt.delivery.status!=='done'&&onRetryDelivery){const button=document.createElement('button');button.type='button';button.textContent='后续结算待完成／重试';button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();Promise.resolve(onRetryDelivery(receipt)).catch(onError)});block.append(button);}
  (root.querySelector('.message-content')??root).append(block);
@@ -58,9 +58,9 @@ export function renderMetapowerCard(message,html,{receipt,onClear,onRetryDeliver
   if(p.kind==='damage'){
    if(p.formula){a.dataset.baseFormula=p.formula;a.dataset.formula=p.formula;a.textContent=p.formula.replace(/\((\d+)\+(\d+)\)/g,(_m,x,y)=>String(Number(x)+Number(y))).replace('[electricity]',snapshot.siphon?.applies?' 无类型基础伤害':' 电击伤害');a.setAttribute('aria-label',a.textContent);}
    a.dataset.rollOptions=[...new Set([...(a.dataset.rollOptions??'').split(',').filter(Boolean),`${MODULE_ID}:metapower:${message.id}:${receipt.nonce}`])].join(',');
-   if(p.shockedFailureFormula){const alternate=a.cloneNode(true);alternate.dataset.baseFormula=p.shockedFailureFormula;alternate.dataset.formula=p.shockedFailureFormula;alternate.dataset.rollOptions+=`,${MODULE_ID}:electric-shot-failure-half`;alternate.textContent='失败：已Shocked目标（基础半伤）';alternate.title='选定一个已Shocked目标；本伤害卡已计算失败半伤，按全额应用。';a.after(document.createTextNode(' / '),alternate);}
+   if(p.shockedFailureFormula){const alternate=a.cloneNode(true);alternate.dataset.baseFormula=p.shockedFailureFormula;alternate.dataset.formula=p.shockedFailureFormula;alternate.dataset.rollOptions+=`,${MODULE_ID}:electric-shot-failure-half`;alternate.textContent='失败：已带电目标（基础半伤）';alternate.title='选定一个已带电目标；本伤害卡已计算失败半伤，按全额应用。';a.after(document.createTextNode(' / '),alternate);}
   }
-  if(p.kind==='area'&&p.distance!==undefined){a.dataset.distance=String(p.distance);a.setAttribute('title',`${p.distance} ft`);a.textContent=`${p.distance} ft ${p.type}`;}
+  if(p.kind==='area'&&p.distance!==undefined){a.dataset.distance=String(p.distance);a.setAttribute('title',`${p.distance} 尺`);a.textContent=`${p.distance} 尺 ${({burst:'爆发',cone:'锥形',line:'线形',emanation:'弥漫'})[p.type]??p.type}`;}
  }
  // PF2e check anchors read pf2RollOptions; rollOptions belongs to damage links.
  for(const check of root.querySelectorAll('[data-pf2-check]'))check.dataset.pf2RollOptions=[...new Set([...(check.dataset.pf2RollOptions??'').split(',').filter(Boolean),`${MODULE_ID}:metapower:${message.id}:${receipt.nonce}`])].join(',');

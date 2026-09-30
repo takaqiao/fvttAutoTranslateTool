@@ -4,6 +4,7 @@ import {isActiveGM,resolveMessageTargets,upsertOwnedEffect,publicTargetName} fro
 import {withEatStrikeFrame,isEatFortuneProbe} from './eat-fortune.mjs';
 import {createWorkbenchRecallController} from './knowledge-entrypoints.mjs';
 import {AUTOMATIC_KNOWLEDGE_SOURCE,automaticKnowledgeChoices,automaticKnowledgeRound} from './knowledge-automatic.mjs';
+import {knowledgeNativeLabel} from './knowledge-display.mjs';
 
 export const KNOWLEDGE_SOURCES=Object.freeze({
  recall:'Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo',automatic:AUTOMATIC_KNOWLEDGE_SOURCE,
@@ -254,7 +255,7 @@ export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,cho
     let constraint={};
     if(action==='knowledge:automatic'){
      const round=automaticKnowledgeRound(game);if(own(actor).automaticRound?.epoch===round)throw Error('耳熟能详本轮次数已用尽。');
-     const fixed=automaticKnowledgeChoices(actor,item);if(!fixed.choices.length)throw Error('耳熟能详需要专家以上、已拥有相应 Assurance 的固定技能。');
+     const fixed=automaticKnowledgeChoices(actor,item);if(!fixed.choices.length)throw Error('耳熟能详需要专家以上、已拥有相应驾轻就熟的固定技能。');
      const statistic=fixed.statistic??await pick(actor,user,'耳熟能详 · 绑定专长的固定技能',fixed.choices);if(!statistic)return {status:'cancelled',result:'未设置耳熟能详的固定技能。'};
      if(item.flags?.[MODULE_ID]?.knowledge?.automaticSkill!==statistic)await item.update({[`flags.${MODULE_ID}.knowledge.automaticSkill`]:statistic});
      constraint={statistic,assurance:true};
@@ -262,11 +263,11 @@ export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,cho
      // an uncertain reply cannot be used to gain another free action.
      await save(actor,'automaticRound',{epoch:round,messageId:message.id,userId:user.id});
     }
-    await recall(ctx,targets.length===1?targets[0]:null,{...constraint,targetUuids:targets.map(t=>t.uuid)});return action==='knowledge:automatic'?'已用固定技能的 Assurance 进行耳熟能详。':'本次回忆知识已处理。';
+    await recall(ctx,targets.length===1?targets[0]:null,{...constraint,targetUuids:targets.map(t=>t.uuid)});return action==='knowledge:automatic'?'已用固定技能的驾轻就熟进行耳熟能详。':'本次回忆知识已处理。';
    }
    if(action==='knowledge:stance'){
     if(!game.combat?.started)throw Error('军师架势只能在遭遇中使用。');const cooldown=own(actor).stanceCooldown;if(Number.isFinite(cooldown)&&cooldown>now())throw Error('军师架势仍处于1分钟冷却。');
-    const choices=[{value:'society',label:'社会 Society'},...values(actor.itemTypes?.lore).filter(i=>i.slug==='warfare-lore').map(i=>({value:i.slug,label:i.name}))];
+    const choices=[{value:'society',label:knowledgeNativeLabel(game,'society',actor.skills?.society?.label)},...values(actor.itemTypes?.lore).filter(i=>i.slug==='warfare-lore').map(i=>({value:i.slug,label:i.name}))];
     const selected=await pick(actor,user,'军师架势 · 选择检定',choices);if(!selected)return '已取消进入架势。';
     const stat=actor.getStatistic?.(selected)??actor.skills?.[selected];if(!stat?.check?.roll)throw Error('找不到所选技能的原生检定。');
     let result='未进入军师架势。';await stat.check.roll({dc:{value:levelDC(actor.level),visible:true},skipDialog:true,extraRollOptions:['action:strategist-stance'],callback:async(roll,outcome)=>{

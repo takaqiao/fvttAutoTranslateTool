@@ -4,7 +4,7 @@ export const MODULE_ID='pf2e-third-party-automation';
 const copy=value=>structuredClone(value);
 export const turnIdentity=(game,actor)=>{
  const encounters=game.combats&&actor?Array.from(game.combats.values()).filter(c=>c.started&&Array.from(c.combatants?.values?.()??c.turns??[]).some(t=>t.actor?.uuid===actor.uuid)):null;
- if(encounters?.length>1)throw Error('Actor belongs to multiple started encounters; resolve the encounter before using a metapower.');
+ if(encounters?.length>1)throw Error('角色属于多个已开始的遭遇；请先确定当前遭遇，再使用威能调整。');
  const c=encounters?encounters[0]:game.combat;return c?`${c.id}:${c.round}:${c.turn}:${c.combatant?.id??''}`:null};
 export const ledgerState=actor=>copy(actor.flags?.[MODULE_ID]?.metapower??{version:1,sequence:0,armed:null,pending:null,receipts:{}});
 export const chargedEffect=actor=>Array.from(actor?.items?.values?.()??actor?.items??[]).find(i=>['Compendium.battlezoo-eldamon-pf2e.conditions.Item.Bi2aHykg6CZrQCnR','Compendium.battlezoo-eldamon-pf2e.conditions.Bi2aHykg6CZrQCnR'].includes(sourceUuid(i))&&i.system.badge?.value>0);
@@ -14,11 +14,11 @@ export const chargedEffect=actor=>Array.from(actor?.items?.values?.()??actor?.it
 export function validatePowerAdmission(item,{kind,selection={}}={}){
  const profile=powerProfile(item);if(!profile)return null;
  const options=item.actor.getRollOptions?.(['all'])??[];
- if(!options.some(o=>/^active-power-(one|two|three|four|reactive(?:-two)?|refresh(?:-two)?):/.test(o)&&o.endsWith(`:${profile.id}`)))throw Error('Power is not currently prepared.');
- if(item.system.frequency&&!(item.system.frequency.value>0))throw Error('Native power frequency is depleted.');
- if(profile.reaction&&selection.triggerConfirmed!==true)throw Error('The actual reaction trigger must be confirmed before using this power.');
- if(profile.id==='reactive-chain'&&(!Number.isFinite(selection.triggerDamage)||selection.triggerDamage<=0||selection.eligibleTargetConfirmed!==true))throw Error('Reactive Chain requires actual triggering electricity damage and confirmed legal target eligibility.');
- if(kind==='siphoning'&&selection.discharge&&profile.id==='reactive-chain')throw Error('Siphoning removes this discharge branch’s only benefit; choose the ordinary branch.');
+ if(!options.some(o=>/^active-power-(one|two|three|four|reactive(?:-two)?|refresh(?:-two)?):/.test(o)&&o.endsWith(`:${profile.id}`)))throw Error('此威能当前未准备。');
+ if(item.system.frequency&&!(item.system.frequency.value>0))throw Error('此威能的原生使用次数已耗尽。');
+ if(profile.reaction&&selection.triggerConfirmed!==true)throw Error('使用此威能前须声明实际发生的反应触发。');
+ if(profile.id==='reactive-chain'&&(!Number.isFinite(selection.triggerDamage)||selection.triggerDamage<=0||selection.eligibleTargetConfirmed!==true))throw Error('反应电链需要真实触发的电击伤害及符合条件的目标。');
+ if(kind==='siphoning'&&selection.discharge&&profile.id==='reactive-chain')throw Error('虹吸会移除此放电分支的唯一收益；请选择普通分支。');
  return profile;
 }
 
@@ -27,9 +27,9 @@ export function validatePowerAdmission(item,{kind,selection={}}={}){
  * ambiguous native completion is archived, never refunded or automatically retried. */
 export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),validateSelection=async()=>{}}){
  const mutate=(payload,user,fn,{render=true}={})=>queue.run(payload.actorUuid,async()=>{
-  if(game.user?.id!==game.users.activeGM?.id)throw Error('Only the active GM may mutate metapower state.');
+  if(game.user?.id!==game.users.activeGM?.id)throw Error('只有主GM可以修改威能调整状态。');
   const actor=await fromUuid(payload.actorUuid);
-  if(!actor||!user||!actor.testUserPermission(user,'OWNER'))throw Error('Actor owner permission is required.');
+  if(!actor||!user||!actor.testUserPermission(user,'OWNER'))throw Error('需要拥有此角色的权限。');
   const state=ledgerState(actor);
   if(state.armed?.turn!==turnIdentity(game,actor))state.armed=null;
   const result=await fn(actor,state);
@@ -38,35 +38,35 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
   // marks reject replay after the bounded detail archive has been pruned.
   const ordinary=Object.values(state.receipts).filter(r=>r.clientId&&!r.kind&&!r.powerId&&!r.snapshot&&r.nonce!==state.pending&&(!r.delivery||r.delivery.status==='done')&&['committed','cancelled'].includes(r.status)).sort((a,b)=>b.sequence-a.sequence);
   const pruned=ordinary.slice(64);for(const r of pruned)delete state.receipts[r.nonce];
-  if(game.user?.id!==game.users.activeGM?.id)throw Error('Active GM changed during admission; retry reconciliation.');
+  if(game.user?.id!==game.users.activeGM?.id)throw Error('受理期间主GM已改变；请核对原操作记录。');
   // Foundry merges nested flags: omission alone cannot remove an old receipt.
   const update=copy(state);for(const r of pruned)update.receipts[`-=${r.nonce}`]=null;
   await actor.update({[`flags.${MODULE_ID}.metapower`]:update},{render});return copy(result);
  });
  const bound=(state,payload,user)=>{
-  const r=state.receipts[payload.nonce];if(!r||r.userId!==user.id)throw Error('Invocation binding is invalid.');return r;
+  const r=state.receipts[payload.nonce];if(!r||r.userId!==user.id)throw Error('操作绑定无效。');return r;
  };
  return {
   begin:(payload,user)=>mutate(payload,user,async(actor,state)=>{
-   if(typeof payload.nonce!=='string'||!payload.nonce||payload.nonce.length>100)throw Error('Invalid invocation nonce.');
+   if(typeof payload.nonce!=='string'||!payload.nonce||payload.nonce.length>100)throw Error('操作标识无效。');
    const old=state.receipts[payload.nonce];
-   if(old){if(old.userId!==user.id||old.itemUuid!==(payload.itemUuid??null))throw Error('Invocation source binding mismatch.');if(payload.startNative===true)throw Error('This invocation already ran; native execution will not be replayed.');return old;}
+   if(old){if(old.userId!==user.id||old.itemUuid!==(payload.itemUuid??null))throw Error('操作来源绑定不匹配。');if(payload.startNative===true)throw Error('此操作已执行；不会重复执行原生操作。');return old;}
    let clientKey;
    if(payload.clientId){
-    if(typeof payload.clientId!=='string'||payload.clientId.length>100||!Number.isSafeInteger(payload.clientSequence)||payload.clientSequence<1)throw Error('Invalid client sequence.');
+    if(typeof payload.clientId!=='string'||payload.clientId.length>100||!Number.isSafeInteger(payload.clientSequence)||payload.clientSequence<1)throw Error('客户端操作序号无效。');
     clientKey=`${user.id}:${payload.clientId}`;state.clients??={};
-    if(payload.clientSequence<=(state.clients[clientKey]??0))throw Error('Archived invocation replay or out-of-order client sequence.');
+    if(payload.clientSequence<=(state.clients[clientKey]??0))throw Error('拒绝重放已归档操作或乱序的客户端操作。');
    }
-   if(state.pending)throw Error('Another native action is in progress; finish it before using the next action.');
-   if(Object.values(state.receipts).some(r=>r.delivery&&r.delivery.status!=='done'))throw Error('Committed native action follow-up is awaiting GM recovery before the next action.');
+   if(state.pending)throw Error('另一项原生动作正在处理；请先完成它，再使用下一项动作。');
+   if(Object.values(state.receipts).some(r=>r.delivery&&r.delivery.status!=='done'))throw Error('已提交动作的后续结算等待GM恢复；完成后才能使用下一项动作。');
    const item=payload.itemUuid?await fromUuid(payload.itemUuid):null;
-   if(payload.itemUuid&&(!item||item.actor!==actor||actor.items.get(item.id)!==item))throw Error('Owned embedded item identity is required.');
+   if(payload.itemUuid&&(!item||item.actor!==actor||actor.items.get(item.id)!==item))throw Error('需要此角色拥有的原始嵌入条目。');
    const kind=metapowerKind(item),profile=validatePowerAdmission(item,{kind:state.armed?.kind,selection:payload.selection});
    if(profile)await validateSelection({actor,item,selection:payload.selection??{},kind:state.armed?.kind??'normal',user});
    const built=profile?buildChannelSnapshot({kind:state.armed?.kind??'normal',item,selection:payload.selection,policy:{dischargeNonDamage:'remove',dischargeArea:'retain',dischargeRange:'retain',dischargeSaveDowngrade:'retain',highVoltage:'convert'}}):null;
    const snapshot=built?{...built,...(profile.id==='reactive-chain'?{triggerDamage:payload.selection.triggerDamage}:{})}:null;
    const charge=snapshot?.dischargeCost?chargedEffect(actor):null;
-   if(snapshot?.dischargeCost&&!charge)throw Error('The selected discharge branch requires Charged.');
+   if(snapshot?.dischargeCost&&!charge)throw Error('所选放电分支需要蓄电。');
    const r={nonce:payload.nonce,sequence:++state.sequence,actorUuid:actor.uuid,itemUuid:item?.uuid??null,sourceUuid:sourceUuid(item),userId:user.id,turn:turnIdentity(game,actor),activationNonce:state.armed?.nonce??null,kind,snapshot,selection:copy(payload.selection??{}),status:'reserved',messageUuid:null};
    r.entry=payload.entry??'item';
    r.powerId=profile?.id??null;
@@ -77,24 +77,24 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
    if(payload.startNative===true)r.status='started';
    state.pending=r.nonce;state.receipts[r.nonce]=r;return payload.startNative===true?{...r,nativeStartAuthorized:true}:r;
   }),
-  start:(payload,user)=>mutate(payload,user,(actor,state)=>{const r=bound(state,payload,user);if(r.status!=='reserved')throw Error('Invocation has already started or finished.');if(r.turn!==turnIdentity(game,actor))throw Error('Turn changed before native execution; repeat this action on the current turn.');r.status='started';return r},{render:false}),
+  start:(payload,user)=>mutate(payload,user,(actor,state)=>{const r=bound(state,payload,user);if(r.status!=='reserved')throw Error('此操作已开始或已完成。');if(r.turn!==turnIdentity(game,actor))throw Error('原生执行前回合已改变；请在当前回合重新使用此动作。');r.status='started';return r},{render:false}),
   finish:(payload,user)=>mutate(payload,user,async(actor,state)=>{
    const r=bound(state,payload,user);
    if(!['reserved','started'].includes(r.status)){
-    if(r.status!==payload.status||r.messageUuid!==(payload.messageUuid??null))throw Error('Original card binding does not match the completed invocation.');return r;
+    if(r.status!==payload.status||r.messageUuid!==(payload.messageUuid??null))throw Error('原始聊天卡绑定与已完成操作不匹配。');return r;
    }
-   if(!['committed','cancelled','uncertain'].includes(payload.status))throw Error('Invalid native completion status.');
-   if(payload.status==='cancelled'&&r.status==='started'&&!(r.entry==='native-check'&&payload.confirmation==='native-check-no-result'))throw Error('Started native actions need verified cancellation evidence; no refund is assumed.');
+   if(!['committed','cancelled','uncertain'].includes(payload.status))throw Error('原生操作完成状态无效。');
+   if(payload.status==='cancelled'&&r.status==='started'&&!(r.entry==='native-check'&&payload.confirmation==='native-check-no-result'))throw Error('已开始的原生动作需要可核验的取消凭据；不会自动退款。');
    if(payload.messageUuid){
     const m=await fromUuid(payload.messageUuid),proof=m?.flags?.[MODULE_ID]?.metapowerUse;
     const originMatches=m?.flags?.pf2e?.origin?.uuid===r.itemUuid||m?.flags?.pf2e?.context?.type==='self-effect'&&actor.items.get(m.flags.pf2e.context.item)?.uuid===r.itemUuid;
-    if(!m||proof?.nonce!==r.nonce||proof.actorUuid!==actor.uuid||proof.itemUuid!==r.itemUuid||m.speaker?.actor!==actor.id||(m.author?.id??m.user?.id??m.user)!==user.id||!originMatches)throw Error('Original native card binding is invalid.');
-   }else if(payload.status==='committed'&&r.itemUuid)throw Error('Original native card is required to commit item use.');
+    if(!m||proof?.nonce!==r.nonce||proof.actorUuid!==actor.uuid||proof.itemUuid!==r.itemUuid||m.speaker?.actor!==actor.id||(m.author?.id??m.user?.id??m.user)!==user.id||!originMatches)throw Error('原始原生聊天卡绑定无效。');
+   }else if(payload.status==='committed'&&r.itemUuid)throw Error('提交条目使用需要原始原生聊天卡。');
    if(payload.status==='committed'&&r.charge){
     const charge=await fromUuid(r.charge.itemUuid);
     if(charge?.flags?.[MODULE_ID]?.payment?.nonce!==r.nonce){
-     if(r.paymentStarted)throw Error('Discharge payment completion is uncertain; the GM must reconcile the original card without retrying payment.');
-     if(!charge||charge.system.badge.value!==r.charge.before)throw Error('Charged changed during native use; reconcile this original card before continuing.');
+     if(r.paymentStarted)throw Error('放电付款结果不确定；须由GM核对原卡，不得再次付款。');
+     if(!charge||charge.system.badge.value!==r.charge.before)throw Error('原生使用期间蓄电已改变；请先核对原卡，再继续。');
      // Native PF2e deletes a counter effect at zero, including its GrantItem
      // children. Persist intent before that deletion so a lost response never
      // permits a second payment or silently assumes an unrelated deletion paid.
@@ -114,17 +114,17 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
    }
    return r;
   },{render:payload.status!=='committed'||!payload.messageUuid}),
-  clear:(payload,user)=>mutate(payload,user,(_actor,state)=>{if(!payload.activationNonce||state.armed?.nonce===payload.activationNonce)state.armed=null;return state.armed}),
+  clear:(payload,user)=>mutate(payload,user,(_actor,state)=>{if(state.pending)throw Error('原生动作正在处理，暂时不能清除待用的威能调整。');if(!payload.activationNonce||state.armed?.nonce===payload.activationNonce)state.armed=null;return state.armed}),
   reconcile:(payload,user)=>mutate(payload,user,(_actor,state)=>{
-   if(user.id!==game.users.activeGM?.id)throw Error('Only the active GM can reconcile an abandoned native invocation.');
-   const r=state.receipts[payload.nonce];if(!r||state.pending!==r.nonce||!['reserved','started'].includes(r.status)||payload.confirmation!=='archive-uncertain')throw Error('The original pending invocation and explicit uncertain resolution are required.');
+   if(user.id!==game.users.activeGM?.id)throw Error('只有主GM可以核对已中断的原生操作。');
+   const r=state.receipts[payload.nonce];if(!r||state.pending!==r.nonce||!['reserved','started'].includes(r.status)||payload.confirmation!=='archive-uncertain')throw Error('需要原始待处理操作，以及明确保留结果不确定的处理选择。');
    r.status='uncertain';r.reconciledBy=user.id;state.pending=null;if(state.armed?.nonce===r.activationNonce)state.armed=null;return r;
   }),
   delivery:(payload,user)=>mutate(payload,user,(_actor,state)=>{
-   if(user.id!==game.users.activeGM?.id)throw Error('Only the active GM can deliver committed native follow-up.');
-   const r=state.receipts[payload.nonce];if(r?.status!=='committed'||!r.messageUuid||!r.delivery)throw Error('Original committed channel delivery is unavailable.');
+   if(user.id!==game.users.activeGM?.id)throw Error('只有主GM可以执行已提交原生动作的后续结算。');
+   const r=state.receipts[payload.nonce];if(r?.status!=='committed'||!r.messageUuid||!r.delivery)throw Error('无法取得原始已提交威能的后续结算记录。');
    if(r.delivery.status==='done')return r;
-   if(!['started','pending','done'].includes(payload.status))throw Error('Invalid channel delivery status.');
+   if(!['started','pending','done'].includes(payload.status))throw Error('威能后续结算状态无效。');
    r.delivery={...r.delivery,status:payload.status,...(payload.status==='started'?{attempts:r.delivery.attempts+1}:{}),...(payload.confirmation==='gm-manual-effects-settled'?{manuallySettled:true,resolvedBy:user.id}:{}),error:payload.status==='pending'?String(payload.error??'Interrupted native follow-up').slice(0,500):null};return r;
   },{render:payload.status!=='started'}),
   expire:(payload,user)=>mutate(payload,user,(_actor,state)=>state.armed),

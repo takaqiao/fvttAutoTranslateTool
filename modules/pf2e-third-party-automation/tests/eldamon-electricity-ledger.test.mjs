@@ -73,6 +73,40 @@ test('legacy damage source fingerprints can finish their existing receipt after 
  await applied.finish();assert.equal(electricityState(f.target).damage[applied.payload.nonce].status,'confirmed');
 });
 
+// Actual PF2e 8.5.1 native damage shape from QA command
+// electricity-cn-native-die-shape (2026-09-30). Only the operation options use
+// this fixture's IDs. DSN 6.3.1 stamps the actual Die during its animation.
+const nestedElectricityRoll=options=>({class:'DamageRoll',options:{showBreakdown:true,...structuredClone(options)},dice:[],formula:'{2 * 6d6[electricity]}',terms:[{class:'InstancePool',options:{},evaluated:true,terms:['2 * 6d6[electricity]'],modifiers:[],rolls:[{class:'DamageInstance',options:{flavor:'electricity'},dice:[],formula:'2 * 6d6[electricity]',terms:[{class:'ArithmeticExpression',options:{crit:2},evaluated:true,operator:'*',operands:[{class:'NumericTerm',options:{},evaluated:true,number:2},{class:'Die',options:{flavor:'electricity'},evaluated:true,number:6,faces:6,modifiers:[],results:[5,5,6,2,5,4].map(result=>({result,active:true}))}]}],total:54,evaluated:true}],results:[{result:54,active:true}]}],total:54,evaluated:true});
+const nestedDie=roll=>roll.terms[0].rolls[0].terms[0].operands[1];
+function dsnPresentation(roll,enabled){const die=nestedDie(roll);if(enabled){die.options.dsnRoleManaged=true;die.options.dsnRole='electricity';for(const result of die.results)result.indexThrow=0;}else{delete die.options.dsnRoleManaged;delete die.options.dsnRole;for(const result of die.results)delete result.indexThrow;}}
+function nativeElectricitySource(f){const message=f.source(),roll=message.rolls[0],json=nestedElectricityRoll(roll.options);roll.instances[0].total=54;roll.toJSON=()=>structuredClone(json);return {message,json};}
+const chainPayload=f=>({actorUuid:f.caster.uuid,sourceTokenUuid:f.tokens[0].uuid,selection:{targetUuids:[f.tokens[2].uuid],discharge:false},kind:'siphoning'});
+for(const legacy of [false,true])test(`Dice So Nice presentation changes preserve ${legacy?'legacy raw':'new'} nested native source and Chain eligibility`,async()=>{
+ const f=fixture();f.item(f.other,'shock',S.shocked);const {message,json}=nativeElectricitySource(f);dsnPresentation(json,true);
+ const applied=await f.damage(f.target,{m:message,amount:54}),record=f.target.flags[ID].electricity.damage[applied.payload.nonce];
+ if(legacy)record.sourceFingerprint=JSON.stringify({pf:message.flags.pf2e,source:message.flags[ID].electricitySource,rolls:[structuredClone(json)]});
+ const saved=record.sourceFingerprint;dsnPresentation(json,false);const clean=structuredClone(json);
+ await applied.finish();assert.equal(electricityState(f.target).damage[applied.payload.nonce].status,'confirmed');
+ let candidates=await f.ledger().candidates(chainPayload(f),f.owner);assert.equal(candidates.length,1);assert.equal(candidates[0].amount,54);assert.equal(record.sourceFingerprint,saved,'comparison does not rewrite the persisted proof');assert.deepEqual(json,clean,'comparison does not mutate native dice');
+ dsnPresentation(json,true);candidates=await f.ledger().candidates(chainPayload(f),f.owner);assert.equal(candidates.length,1,'a later animation can add its display metadata again');
+ f.power.sourceId=S.chain;await f.ledger().validateSelection({actor:f.caster,item:f.power,selection:{...chainPayload(f).selection,electricityEvidence:candidates[0].evidence,triggerDamage:54},kind:'siphoning',user:f.owner});
+});
+for(const [name,change]of [
+ ['die result',r=>{nestedDie(r).results[0].result=2}],['die active state',r=>{nestedDie(r).results[0].active=false}],['die faces',r=>{nestedDie(r).faces=8}],['die count',r=>{nestedDie(r).number=7}],['die modifier',r=>{nestedDie(r).modifiers.push('kh5')}],['formula',r=>{r.formula='{2 * 6d6[fire]}'}],['total',r=>{r.total=55}],['instance type',r=>{r.terms[0].rolls[0].options.flavor='fire'}],['die flavor',r=>{nestedDie(r).options.flavor='fire'}],['roll type',r=>{r.options.type='healing'}],['unknown Die option',r=>{nestedDie(r).options.dsnUnverified=true}],['Die type',r=>{nestedDie(r).options.type='d8'}],
+ ['Roll role',r=>{r.options.dsnRole='electricity'}],['Roll role-managed',r=>{r.options.dsnRoleManaged=true}],['instance role',r=>{r.terms[0].rolls[0].options.dsnRole='electricity'}],['non-Die role',r=>{r.terms[0].rolls[0].terms[0].options.dsnRole='electricity'}],['pool result throw',r=>{r.terms[0].results[0].indexThrow=0}],['unrelated nested metadata',r=>{r.options.audit={class:'Die',options:{dsnRole:'electricity'},results:[{result:1,indexThrow:0}]}}],
+])test(`Dice So Nice source witness still rejects changed ${name}`,async()=>{
+ const f=fixture();f.item(f.other,'shock',S.shocked);const {message,json}=nativeElectricitySource(f),applied=await f.damage(f.target,{m:message,amount:54});await applied.finish();
+ const payload=chainPayload(f),[candidate]=await f.ledger().candidates(payload,f.owner);assert.ok(candidate);dsnPresentation(json,true);assert.equal((await f.ledger().candidates(payload,f.owner)).length,1);change(json);
+ assert.deepEqual(await f.ledger().candidates(payload,f.owner),[]);f.power.sourceId=S.chain;
+ await assert.rejects(f.ledger().validateSelection({actor:f.caster,item:f.power,selection:{...payload.selection,electricityEvidence:candidate.evidence,triggerDamage:54},kind:'siphoning',user:f.owner}),/核验/);
+});
+for(const [name,change]of [
+ ['PF2e source traits',(m)=>{m.flags.pf2e.context.options=['item:trait:fire']}],['source binding',m=>{m.flags[ID].electricitySource.effectKey='changed'}],['target manifest',m=>{m.flags[ID].electricitySource.targetUuids.push('Scene.s.Token.other')}],['receipt amount',(_m,r)=>{r.flags[ID].electricityApplied.amount=53}],
+])test(`Dice So Nice tolerance keeps ${name} binding`,async()=>{
+ const f=fixture();f.item(f.other,'shock',S.shocked);const {message,json}=nativeElectricitySource(f),applied=await f.damage(f.target,{m:message,amount:54});await applied.finish();assert.equal((await f.ledger().candidates(chainPayload(f),f.owner)).length,1);
+ dsnPresentation(json,true);assert.equal((await f.ledger().candidates(chainPayload(f),f.owner)).length,1);change(message,applied.receipt);assert.deepEqual(await f.ledger().candidates(chainPayload(f),f.owner),[]);
+});
+
 test('hostile independent Shocked retains its electricity save penalty through Resistant Shell without changing the original template',async()=>{
  const f=fixture();f.power.sourceId=f.receipt.sourceUuid=S.anvil;f.item(f.target,'shell',S.shell);
  const original={type:'effect',flags:{},system:{rules:[{key:'FlatModifier',selector:['fortitude','reflex'],value:-2,predicate:[{and:['electricity',{nor:['resistant-shell']}]}]},{key:'RollOption',domain:'all',option:'shocked'}]}};
@@ -103,7 +137,7 @@ test('committed normal use grants native Charged once, preserving GrantItem; Sip
  const [charged]=electricityEffects(f.caster,S.charged);assert.equal(charged.system.badge.value,1);assert.equal(charged.system.rules[0].key,'GrantItem');
  assert.equal(charged.flags[ID].electricityCharge.ownPower,true);
  for(const variant of ['siphon','discharge']){const g=fixture();if(variant==='siphon')g.receipt.snapshot={siphon:{applies:true}};else g.receipt.selection.discharge=true;await g.ledger().channel(g.channel,g.owner);assert.equal(electricityEffects(g.caster,S.charged).length,0);}
- await assert.rejects(f.ledger().channel(f.channel,{id:'impostor'}),/owner/i);
+ await assert.rejects(f.ledger().channel(f.channel,{id:'impostor'}),/拥有者/);
 });
 test('charge cap stays three and actual electricity reduces once across ledger reload, except own-power shell',async()=>{
  const f=fixture();f.item(f.caster,'charged',S.charged,{flags:{[ID]:{electricityCharge:{ownPower:true}}},system:{badge:{value:3}}});
@@ -113,13 +147,13 @@ test('charge cap stays three and actual electricity reduces once across ledger r
 });
 test('immunity zero leaves Shocked; real positive receipt clears it; copied or wrong-author receipts are rejected',async()=>{
  const f=fixture();f.item(f.target,'shock',S.shocked);const zero=await f.damage(f.target,{amount:0});await zero.finish();assert.equal(electricityEffects(f.target,S.shocked).length,1);
- const d=await f.damage();d.receipt.author=f.owner;await assert.rejects(d.finish(),/authentic/i);assert.equal(electricityEffects(f.target,S.shocked).length,1);
+ const d=await f.damage();d.receipt.author=f.owner;await assert.rejects(d.finish(),/可核验/);assert.equal(electricityEffects(f.target,S.shocked).length,1);
  d.receipt.author=f.gm;await d.finish();assert.equal(electricityEffects(f.target,S.shocked).length,0);
 });
 test('mixed receipt remains unproven until GM attributes exact electric amount on that same receipt',async()=>{
  const f=fixture();f.item(f.target,'shock',S.shocked);const d=await f.damage(f.target,{kind:'mixed',amount:21});const first=await d.finish();assert.equal(first.status,'needs-attribution');assert.equal(first.electricityAmount,null);assert.equal(electricityEffects(f.target,S.shocked).length,1);
  await assert.rejects(f.ledger().confirmMixed({actorUuid:f.target.uuid,nonce:d.payload.nonce,receiptUuid:d.receipt.uuid,amount:8,confirmed:true},f.owner),/GM/);
- await assert.rejects(f.ledger().confirmMixed({actorUuid:f.target.uuid,nonce:d.payload.nonce,receiptUuid:d.receipt.uuid,amount:22,confirmed:true},f.gm),/amount|total/i);
+ await assert.rejects(f.ledger().confirmMixed({actorUuid:f.target.uuid,nonce:d.payload.nonce,receiptUuid:d.receipt.uuid,amount:22,confirmed:true},f.gm),/分量|总量/);
  await f.ledger().confirmMixed({actorUuid:f.target.uuid,nonce:d.payload.nonce,receiptUuid:d.receipt.uuid,amount:0,confirmed:true},f.gm);assert.equal(electricityEffects(f.target,S.shocked).length,1);
 });
 test('expiry removes only that source effect; ending an encounter never clears outsiders charge',async()=>{
@@ -169,7 +203,7 @@ test('encounter charge cleanup resumes its exact unfinished operation without in
  actor.flags[ID].electricity.operations[key]={status:'started',itemId:null,before:0,after:0,gain:false};useFoundryFlagUpdates(actor);
  await f.ledger().expire(payload);assert.equal(electricityState(actor).operations[key].status,'done');
  actor.flags[ID].electricity.operations[key]={status:'started',itemId:'charge',before:2,after:0,gain:false};
- await assert.rejects(f.ledger().expire(payload),/Interrupted Charged mutation/);
+ await assert.rejects(f.ledger().expire(payload),/蓄电变更被中断/);
 });
 
 test('expiry consuming the final charge does not start an empty encounter cleanup afterwards',async()=>{
@@ -209,8 +243,8 @@ test('legal chain selection uses exact actual receipt amount and rejects stale f
  const [candidate]=await f.ledger().candidates({actorUuid:f.caster.uuid,sourceTokenUuid:f.tokens[0].uuid,selection:{targetUuids:[f.tokens[2].uuid],discharge:false},kind:'normal'},f.owner);assert.equal(candidate.amount,13);
  const context={actor:f.caster,item:chain,kind:'normal',user:f.owner,selection:{discharge:false,targetUuids:[f.tokens[2].uuid],triggerDamage:13,electricityEvidence:candidate.evidence}};
  await f.ledger().validateSelection(context);
- await assert.rejects(f.ledger().validateSelection({...context,selection:{...context.selection,triggerDamage:21}}),/source-bound/i);
- f.combat.turn=1;await assert.rejects(f.ledger().validateSelection(context),/source-bound/i);
+ await assert.rejects(f.ledger().validateSelection({...context,selection:{...context.selection,triggerDamage:21}}),/可核验/);
+ f.combat.turn=1;await assert.rejects(f.ledger().validateSelection(context),/可核验/);
 });
 test('out-of-encounter Refresh removes charge but in-encounter Refresh preserves it',async()=>{
  const f=fixture();f.item(f.caster,'charge',S.charged,{system:{badge:{value:2}}});await f.ledger().refresh({actor:f.caster,nonce:'refresh1'});assert.equal(electricityEffects(f.caster,S.charged)[0].system.badge.value,2);

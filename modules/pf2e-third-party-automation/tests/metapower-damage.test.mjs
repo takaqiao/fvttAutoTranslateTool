@@ -43,7 +43,7 @@ function makeRoll(specs,options={}){
 test('damage API rejects an unevaluated or non-native roll before changing it',()=>{
  assert.equal(typeof api.convertSiphonRoll,'function');
  const roll={terms:[],_evaluated:false,options:{original:true}};
- assert.throws(()=>api.convertSiphonRoll(roll),/native|evaluated|DamageRoll/i);assert.deepEqual(roll,{terms:[],_evaluated:false,options:{original:true}});
+ assert.throws(()=>api.convertSiphonRoll(roll),/原生|投掷|伤害骰/);assert.deepEqual(roll,{terms:[],_evaluated:false,options:{original:true}});
 });
 nativeTest('native fixture reconstructs evaluated dice and demonstrates the per-instance rounding boundary',()=>{
  const roll=makeRoll([{die:4,value:3},{value:3,flavor:'cold'}]);
@@ -101,7 +101,7 @@ nativeTest('different non-finite metadata never merges by JSON null coercion',()
 });
 nativeTest('automatic conversion refuses mixed partitions before mutating the evaluated roll',()=>{
  const roll=makeRoll([{value:7,flavor:'electricity,silver'},{value:3,flavor:'cold'}]),before=JSON.stringify(roll.toJSON());
- assert.throws(()=>api.convertSiphonRoll(roll,{DamageRoll:native.DamageRoll,rejectMixedPartitions:true}),/manual|partition/i);
+ assert.throws(()=>api.convertSiphonRoll(roll,{DamageRoll:native.DamageRoll,rejectMixedPartitions:true}),/手动|分组/);
  assert.equal(JSON.stringify(roll.toJSON()),before);
 });
 nativeTest('Electric Shot failure halves the evaluated native roll including modifiers in place before siphoning',()=>{

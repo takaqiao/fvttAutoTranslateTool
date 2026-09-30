@@ -1,0 +1,704 @@
+{
+  "schema": 1,
+  "date": "2026-09-30",
+  "reviewer": "history_gaps independent integrated code review",
+  "scope": "只读root main接线+三agent运行差异；不改runtime/tests、不操作原生harness",
+  "baseline": "f45338970afec79e956f3685175758c784f9e098",
+  "plan": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\docs\\superpowers\\plans\\2026-09-30-eldamon-continuations-localization.md",
+  "status": "independent integrated review complete; no remaining P1/P2 blocker in reviewed diff",
+  "files": [
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\main.mjs",
+      "rawSha256": "01f28cc6926abeb7b302d4adceed7dddf4d29347c98710882f46df0098302c95",
+      "lfSha256": "01f28cc6926abeb7b302d4adceed7dddf4d29347c98710882f46df0098302c95"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\activity-result-lifecycle.mjs",
+      "rawSha256": "e86317c81d58c4718c8ab35a4746d66cbfee891c21aecee2e603e7bb7c6045ac",
+      "lfSha256": "e86317c81d58c4718c8ab35a4746d66cbfee891c21aecee2e603e7bb7c6045ac"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\eldamon-basic-settlement.mjs",
+      "rawSha256": "5cc19a14382819177730b4f9cabb2a0c06c02e18affb88b7c3b8e647a2978599",
+      "lfSha256": "5cc19a14382819177730b4f9cabb2a0c06c02e18affb88b7c3b8e647a2978599"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\eldamon-electricity.mjs",
+      "rawSha256": "1d3a5a42270835319f42829848431224c8ef0bc183a7bc81a1026d88ea4ede9f",
+      "lfSha256": "1d3a5a42270835319f42829848431224c8ef0bc183a7bc81a1026d88ea4ede9f"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\eldamon-electricity-provider.mjs",
+      "rawSha256": "0b113af6d29ce02e57eba2f17423642bd22d8192920311d908ff793094f39ab4",
+      "lfSha256": "0b113af6d29ce02e57eba2f17423642bd22d8192920311d908ff793094f39ab4"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\eldamon-voltage.mjs",
+      "rawSha256": "41f424d5e3d35fe2b4db61f6d342acfc6e332b0852458fd2b2eb7033641983df",
+      "lfSha256": "41f424d5e3d35fe2b4db61f6d342acfc6e332b0852458fd2b2eb7033641983df"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\eldamon-voltage-executor.mjs",
+      "rawSha256": "b9652bc474b8357c2fc96cc7b39bcf633d1fe0734d7214fec1ef3e4b0d0ea887",
+      "lfSha256": "b9652bc474b8357c2fc96cc7b39bcf633d1fe0734d7214fec1ef3e4b0d0ea887"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\eldamon-voltage-continuations.mjs",
+      "rawSha256": "5f067a48ae05c701b697ebf2a5bac6bf3b19ad617204b1a4508083eadf43b7dc",
+      "lfSha256": "5f067a48ae05c701b697ebf2a5bac6bf3b19ad617204b1a4508083eadf43b7dc"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\knowledge-automatic.mjs",
+      "rawSha256": "f8c28712650524b19b8cb6680d62668abc8ea1dd81f9981e939474bd6b0a7da8",
+      "lfSha256": "69066e2fc3c0548986162d66365bc4d356003f344fc6d33a24bc4cf942be4327"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\knowledge-automation.mjs",
+      "rawSha256": "5160c138ffbb4e7449c8132ef28a81aca4f465f3cdf9f1e9b5ed00f1388edb35",
+      "lfSha256": "633d68e9aa1410f9574467ae2c0ceee70d9d23b1c496fe34c80d3e90b73e62f5"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\knowledge-workbench.mjs",
+      "rawSha256": "56705ab8cfa25e4445d7c32c4b0a0043491be98b16e77b840b43f3732ab4683e",
+      "lfSha256": "958cb2fde842db98b2ad0bda655ad440e16e33039c8618cd008ace97c359c2de"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\knowledge-display.mjs",
+      "rawSha256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a",
+      "lfSha256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\metapower\\provider.mjs",
+      "rawSha256": "4bc80b4ad811cbe0de3a6b640b815325202c0ef9f6fada0ec939c3410cabf005",
+      "lfSha256": "4bc80b4ad811cbe0de3a6b640b815325202c0ef9f6fada0ec939c3410cabf005"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\metapower\\lifecycle.mjs",
+      "rawSha256": "1381915425d9aca7d894565234ec401519f9c88fb182dac7fe862460670c8c9c",
+      "lfSha256": "1381915425d9aca7d894565234ec401519f9c88fb182dac7fe862460670c8c9c"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\metapower\\observer.mjs",
+      "rawSha256": "5744f16854cb50999f594cf838bd1abc1b739618ea6879f83e2090e5a1409942",
+      "lfSha256": "5744f16854cb50999f594cf838bd1abc1b739618ea6879f83e2090e5a1409942"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\metapower\\entrances.mjs",
+      "rawSha256": "74a9f58d9f0ed51fe2a4c4c49bbbecf430cfdb12938530980e55bf121227d1d3",
+      "lfSha256": "74a9f58d9f0ed51fe2a4c4c49bbbecf430cfdb12938530980e55bf121227d1d3"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\metapower\\card.mjs",
+      "rawSha256": "686eb701295a4bb9f617fce2deee6878aa239cf18747cb1ab678dbb6b3157c40",
+      "lfSha256": "686eb701295a4bb9f617fce2deee6878aa239cf18747cb1ab678dbb6b3157c40"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\metapower\\damage.mjs",
+      "rawSha256": "ffd6b1cd3b27c61b9d34778e9d57aad6768f2b6910589cc37886f00e104de641",
+      "lfSha256": "ffd6b1cd3b27c61b9d34778e9d57aad6768f2b6910589cc37886f00e104de641"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\metapower\\rules.mjs",
+      "rawSha256": "b871a0f3680e52e4cc11048981bab964e731a5264391cac85d385aa040e8279c",
+      "lfSha256": "b871a0f3680e52e4cc11048981bab964e731a5264391cac85d385aa040e8279c"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\eldamon-electricity-receipts.mjs",
+      "relationship": "new narrow performance fix",
+      "rawSha256": "fac9777b6c5788e312dc1fc25ef631ed2ec0eebbfc5da37b4c33bc9d9e48c904",
+      "lfSha256": "fac9777b6c5788e312dc1fc25ef631ed2ec0eebbfc5da37b4c33bc9d9e48c904"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\knowledge-entrypoints.mjs",
+      "relationship": "unchanged integration dependency read for review",
+      "rawSha256": "500ee39852eb201d49c246f4d0f5187dbb195cc4fa8200b6e51ca35c91977d07",
+      "lfSha256": "59bc5ba066c3df3203e7e46f7dba54e07cfb4f77c3e6add190298d47825583af"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\usage-events.mjs",
+      "relationship": "unchanged integration dependency read for review",
+      "rawSha256": "4d95d7c23ff958c4a185ffb8e3e4bc03c76801759f479e1fd9ab0f42749efb71",
+      "lfSha256": "4d95d7c23ff958c4a185ffb8e3e4bc03c76801759f479e1fd9ab0f42749efb71"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\actor-state-index.mjs",
+      "relationship": "unchanged integration dependency read for review",
+      "rawSha256": "fbe19b147e06289e64decac50d4b9b7bc29a281b26f402158f01cf20c9c684e3",
+      "lfSha256": "fbe19b147e06289e64decac50d4b9b7bc29a281b26f402158f01cf20c9c684e3"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\native-sheet-handlers.mjs",
+      "relationship": "unchanged integration dependency read for review",
+      "rawSha256": "1b6e8aa4192ac8d450fd4320b769ae1759b5cf1862efd9996f2b1b7f55d253d5",
+      "lfSha256": "1b6e8aa4192ac8d450fd4320b769ae1759b5cf1862efd9996f2b1b7f55d253d5"
+    },
+    {
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\native-context.mjs",
+      "relationship": "unchanged integration dependency read for review",
+      "rawSha256": "0ed43518071b3261c9fa6681262926fabe607c8e77f282ce2d01bf1082a8b84c",
+      "lfSha256": "0ed43518071b3261c9fa6681262926fabe607c8e77f282ce2d01bf1082a8b84c"
+    }
+  ],
+  "findings": [
+    {
+      "id": "PERF-01",
+      "priority": 2,
+      "status": "resolved; independently read and tested nonce receipt projection",
+      "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\eldamon-electricity.mjs",
+      "line": 342,
+      "issue": "finishDamage每次values(game.messages).filter(receiptMatches)进行完整聊天历史扫描",
+      "impact": "大型历史下每次apply为O(chat)，违反批准计划不重复全chat扫描；唯一回执正确性校验必要",
+      "recommended": "APPLY nonce按create/update/delete增量投影，ready/首次一次seed；每次仅在nonce bucket中保留当前live对象、完整author/speaker/token/origin/unreverted匹配；同nonce duplicate拒绝",
+      "necessaryCases": [
+        "首次seed一次；替换game.messages.values为throw后正常finishDamage仍成功",
+        "同nonce重复有效回执拒绝；无关nonce/错误actor来源不污染唯一计数",
+        "updateChatMessage改变options/origin/appliedDamage.isReverted使回执退出旧bucket",
+        "deleteChatMessage移除当前reference；重新创建/恢复仅唯一current live结果可接受"
+      ],
+      "note": "不建议删除唯一判定或时间丢弃有效凭据",
+      "resolvedEvidence": [
+        {
+          "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\eldamon-electricity-receipts.mjs",
+          "lines": [
+            6,
+            8,
+            9,
+            11,
+            16,
+            17,
+            18,
+            22,
+            23,
+            24
+          ]
+        },
+        {
+          "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\eldamon-electricity-provider.mjs",
+          "lines": [
+            19,
+            215,
+            216,
+            219,
+            220,
+            231,
+            232
+          ]
+        },
+        {
+          "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\eldamon-electricity.mjs",
+          "lines": [
+            140,
+            141,
+            142,
+            343,
+            344,
+            345
+          ]
+        }
+      ],
+      "resolution": "APPLY nonce index注册一次seed；create/update/delete更新当前bucket。finishDamage仅查对应nonce并完整receiptMatches+live object+matches[0]===fromUuid原receipt；默认空投影failclosed，无wholechat回退。maintain也复用该投影。",
+      "verifiedCases": 12
+    }
+  ],
+  "passedReview": [
+    {
+      "topic": "ordinary basicUse without metapower feat",
+      "evidence": [
+        {
+          "file": "main.mjs",
+          "lines": [
+            203,
+            204,
+            249,
+            250
+          ]
+        },
+        {
+          "file": "eldamon-basic-settlement.mjs",
+          "lines": [
+            35,
+            36,
+            38,
+            85,
+            86
+          ]
+        },
+        {
+          "file": "eldamon-electricity.mjs",
+          "lines": [
+            28,
+            31,
+            249,
+            256,
+            257,
+            269,
+            271,
+            278,
+            286,
+            287
+          ]
+        }
+      ],
+      "conclusion": "元素操控/护盾独立usage provider进入真实Use；不要求Widen/Siphon。exact Electricity Element来源9KtNlRXeuxZSoVaI为专有Electricity Element，非泛用Element。GM队列核原owner、原item、原card、captured targets；显示卡不能结算，固定original message key阻止再次nonce刷新/换目标。self-target mutate在外层actor admission之后完成，不持队列等待同队列。"
+    },
+    {
+      "topic": "chain current receipt entrance and no double observation",
+      "evidence": [
+        {
+          "file": "main.mjs",
+          "lines": [
+            188,
+            189
+          ]
+        },
+        {
+          "file": "metapower/provider.mjs",
+          "lines": [
+            15,
+            17,
+            35,
+            102,
+            147,
+            151,
+            152
+          ]
+        },
+        {
+          "file": "eldamon-electricity-provider.mjs",
+          "lines": [
+            132,
+            138,
+            139,
+            147,
+            151,
+            152,
+            153,
+            155,
+            156,
+            178,
+            179
+          ]
+        },
+        {
+          "file": "eldamon-electricity.mjs",
+          "lines": [
+            232,
+            236,
+            239,
+            245,
+            247,
+            388,
+            391,
+            393,
+            397
+          ]
+        }
+      ],
+      "conclusion": "public chain先核OWNER与当前可见damage-taken并绑定receiptUuid，显式observe调用原冻结Toolbelt helper一次；同item本地chainScopes防双击，GM exact原伤/IWR/frame/target/reaction/准备频次再验证。basicUse没有powerId，onCommittedChannel立即return；不经usage和channel双施加。真正nativeChain QA已一次freq1→0、receipt1→2，triggerDamage54，无自动豁免或伤害。"
+    },
+    {
+      "topic": "continuation authority and replay guards",
+      "evidence": [
+        {
+          "file": "main.mjs",
+          "lines": [
+            271
+          ]
+        },
+        {
+          "file": "eldamon-voltage-executor.mjs",
+          "lines": [
+            140,
+            141,
+            143,
+            154,
+            155,
+            159,
+            160,
+            161,
+            167,
+            199,
+            201
+          ]
+        },
+        {
+          "file": "eldamon-voltage.mjs",
+          "lines": [
+            57,
+            60,
+            63,
+            65,
+            66,
+            132,
+            137,
+            145,
+            147,
+            199,
+            218,
+            219,
+            228,
+            229,
+            240,
+            241,
+            245,
+            248
+          ]
+        }
+      ],
+      "conclusion": "getContinuations/continueActivity只展示源OWNER或绑定目标OWNER可执行的阶段；public入口及socket侧都核真实源card、item、nonce、原operator、target token/actor。claimed仍可从角色恢复；phase claim先持久写入后本机原生roll，重复/uncertain不再次Use/pay/roll。删除源card或token relink让当前actor按钮禁用，同时GM再拒绝；不存在用UI状态当authority。"
+    },
+    {
+      "topic": "clear armed stale/pending authority",
+      "evidence": [
+        {
+          "file": "main.mjs",
+          "lines": [
+            271
+          ]
+        },
+        {
+          "file": "metapower/provider.mjs",
+          "lines": [
+            246,
+            247,
+            249,
+            250,
+            251
+          ]
+        },
+        {
+          "file": "metapower/lifecycle.mjs",
+          "lines": [
+            29,
+            30,
+            32,
+            117
+          ]
+        }
+      ],
+      "conclusion": "public clear先OWNER与pending验证并使用当前/captured activationNonce，GM排队再查pending与armed nonce；旧client不能清掉新激活；没有再次native使用或付款。"
+    },
+    {
+      "topic": "RK scoped display and cross-client privacy",
+      "evidence": [
+        {
+          "file": "knowledge-workbench.mjs",
+          "lines": [
+            13,
+            31,
+            35,
+            37,
+            38,
+            53,
+            56,
+            59,
+            90,
+            117,
+            140,
+            142,
+            147,
+            148,
+            156,
+            160
+          ]
+        },
+        {
+          "file": "knowledge-display.mjs",
+          "lines": [
+            1,
+            3,
+            20,
+            23,
+            24,
+            27
+          ]
+        },
+        {
+          "file": "knowledge-entrypoints.mjs",
+          "lines": [
+            17,
+            21,
+            26,
+            31,
+            32,
+            37,
+            39,
+            57,
+            62,
+            67,
+            90,
+            104
+          ]
+        }
+      ],
+      "conclusion": "本轮RK只scoped display，exact locale/producer/version/UUID/SHA/current header，未知producer与英文locale回退；native actor/token/user/targets、message类、ui局部facade，无全局replace。RPC返回仅messageId；persisted blind GM-only卡作为结果authority，lost reply/GMhandoff不重骰，observer finally释放。finalize核targetActor relink，机械结果锁定；标题相同不代验reservation分支。"
+    },
+    {
+      "topic": "incremental projections and no geometry/polling",
+      "evidence": [
+        {
+          "file": "eldamon-voltage-continuations.mjs",
+          "lines": [
+            46,
+            47,
+            48,
+            49,
+            50,
+            62,
+            64,
+            68,
+            70,
+            72,
+            73
+          ]
+        },
+        {
+          "file": "eldamon-basic-settlement.mjs",
+          "lines": [
+            14,
+            15,
+            17,
+            19,
+            92
+          ]
+        },
+        {
+          "file": "eldamon-electricity-provider.mjs",
+          "lines": [
+            24,
+            29,
+            30,
+            219,
+            220
+          ]
+        },
+        {
+          "file": "eldamon-voltage-executor.mjs",
+          "lines": [
+            114,
+            196,
+            200,
+            201,
+            203
+          ]
+        },
+        {
+          "file": "metapower/provider.mjs",
+          "lines": [
+            15,
+            18,
+            102
+          ]
+        },
+        {
+          "file": "eldamon-electricity-receipts.mjs",
+          "lines": [
+            16,
+            17,
+            18,
+            22,
+            23,
+            24
+          ]
+        }
+      ],
+      "conclusion": "新增voltage索引startup一次恢复actors/scenes/tokens/chat，后续Hooks更新相应entries；shield与electric source首次一次lazy chat seed，其后按target/nonce检索。无新增timer/polling、token坐标/距离/视线/移动检测；updateToken仅actorId/actorLink身份变化。当前actor.items检查与明确操作的当前scene目标列表仍存在，不是每帧全world库存扫描。PERF-01已经用nonce增量投影解决；不再每次finishDamage/maintain扫描完整chat。"
+    }
+  ],
+  "verification": {
+    "independentFocused": {
+      "files": [
+        "eldamon-basic-cards.test.mjs",
+        "eldamon-basic-settlement.test.mjs",
+        "eldamon-continuations.test.mjs",
+        "eldamon-electricity-provider.test.mjs",
+        "metapower-provider.test.mjs",
+        "metapower-continuation.test.mjs",
+        "knowledge-display.test.mjs"
+      ],
+      "tests": 74,
+      "pass": 74,
+      "fail": 0,
+      "skipped": 0
+    },
+    "knowledgeNativeSource": {
+      "files": [
+        "knowledge-workbench.test.mjs",
+        "knowledge-probes.test.mjs"
+      ],
+      "tests": 54,
+      "pass": 54,
+      "fail": 0,
+      "skipped": 0,
+      "source": "FVTT_PF2E_BUNDLE actual PF2e 8.5.1; FVTT_WORKBENCH_RECALL_MACRO untouched actual423-line command"
+    },
+    "voltageNativeSource": {
+      "file": "eldamon-voltage.test.mjs",
+      "tests": 61,
+      "pass": 61,
+      "fail": 0,
+      "skipped": 0,
+      "source": "PF2E_NATIVE_BUNDLE actual PF2e 8.5.1",
+      "history": "初次combined只设置FVTT_PF2E_BUNDLE，Voltage native case skip1；随后正确PF2E_NATIVE_BUNDLE补跑61/61零skip，不隐瞒早期缺环境。"
+    },
+    "uniqueIndependentCases": 260,
+    "rootFullSuiteReported": {
+      "tests": 1996,
+      "pass": 1996,
+      "skip": 0,
+      "notIndependentlyRerun": true
+    },
+    "nativeEvidenceDocs": [
+      "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\docs\\superpowers\\verification\\2026-09-30-eldamon-native-integration.md",
+      "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\docs\\fortress-automation\\rk-localization-2026-09-30.json"
+    ],
+    "nativeLimits": "测试不代替真实UI；root own30426 native sources读取报告，harness夹具失败保留分类；RK25槽native通过其余未验。",
+    "scopeStatement": "189为独立相关behavior cases去重计数，不是字段覆盖率或全产品性能数据；没有改运行脚本/测试/生产世界/QA harness。",
+    "finalIndependentMatrix": {
+      "files": [
+        "eldamon-basic-cards.test.mjs",
+        "eldamon-basic-settlement.test.mjs",
+        "eldamon-continuations.test.mjs",
+        "eldamon-electricity-provider.test.mjs",
+        "eldamon-electricity-ledger.test.mjs",
+        "eldamon-electricity.test.mjs",
+        "eldamon-electricity-receipts.test.mjs",
+        "metapower-provider.test.mjs",
+        "metapower-continuation.test.mjs",
+        "knowledge-display.test.mjs",
+        "knowledge-workbench.test.mjs",
+        "knowledge-probes.test.mjs",
+        "eldamon-voltage.test.mjs"
+      ],
+      "tests": 260,
+      "pass": 260,
+      "fail": 0,
+      "cancelled": 0,
+      "skipped": 0,
+      "todo": 0,
+      "sourceEnvironment": {
+        "FVTT_PF2E_BUNDLE": "C:/Users/Taka/Desktop/fvtt/tmp/team-metapower-20260918/qa/runtime/Data/systems/pf2e/pf2e.mjs",
+        "PF2E_NATIVE_BUNDLE": "C:/Users/Taka/Desktop/fvtt/tmp/team-metapower-20260918/qa/runtime/Data/systems/pf2e/pf2e.mjs",
+        "FVTT_WORKBENCH_RECALL_MACRO": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt"
+      },
+      "result": "actual native sources supplied; final combined run no skip. 260 is behavior tests, not localization coverage."
+    },
+    "receiptIndexReadOnlyReview": "新helper、provider接线、ledger唯一current结果和12case均独立读取；无runtime/tests写入。新index实机双客户端尚未另执行，root全量与最终候选原生验收另记；原有UI/native流程证据仅复用未改机械部分。",
+    "nativeCommands": [
+      {
+        "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+        "reportSHA256AtReview": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+        "reportClosed": true,
+        "commandId": "rk-cn-normal-no-target",
+        "commandValueSHA256": "4a6192b5721083a88b0210c92e0b26ecf5abc130f2963a4077ae65fa5c77d8c0",
+        "client": "player",
+        "note": "fixed historical report"
+      },
+      {
+        "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+        "reportSHA256AtReview": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+        "reportClosed": true,
+        "commandId": "rk-cn-normal-target",
+        "commandValueSHA256": "c966598e2c180bf7955a9e3c29c109a254a39c5de3d382ab83e80d82d78aeac4",
+        "client": "player",
+        "note": "fixed historical report"
+      },
+      {
+        "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+        "reportSHA256AtReview": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+        "reportClosed": true,
+        "commandId": "rk-cn-no-target",
+        "commandValueSHA256": "ad8d3044580736ff2091828978ed4d5047b0cc1f7e50b0597021ffc75123ae5b",
+        "client": "player",
+        "note": "fixed historical report"
+      },
+      {
+        "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+        "reportSHA256AtReview": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+        "reportClosed": true,
+        "commandId": "rk-cn-player-privacy",
+        "commandValueSHA256": "cce1fcd9ed3cc58527e32514b8099b78fa964bf6450840b8b95f6dbb71afccf6",
+        "client": "player",
+        "note": "fixed historical report"
+      },
+      {
+        "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790745149151.json",
+        "reportSHA256AtReview": "66d19706ebcbdb4cfad1e5322fc0bf926a4beb361319772932e5d36707704094",
+        "reportClosed": true,
+        "commandId": "voltage-cn-current-kept-save-damage",
+        "commandValueSHA256": "5632a0209f2c6cd66c371539c76e4422176207f766fb248012656203bd5d13ea",
+        "client": "gm",
+        "note": "fixed historical report"
+      },
+      {
+        "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790745149151.json",
+        "reportSHA256AtReview": "66d19706ebcbdb4cfad1e5322fc0bf926a4beb361319772932e5d36707704094",
+        "reportClosed": true,
+        "commandId": "voltage-cn-native-full-apply",
+        "commandValueSHA256": "e2f1d901bad3950fabd2caea76d0008c6750b1316f8158272e4a75ae26d3e0d9",
+        "client": "player",
+        "note": "fixed historical report"
+      },
+      {
+        "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790745149151.json",
+        "reportSHA256AtReview": "66d19706ebcbdb4cfad1e5322fc0bf926a4beb361319772932e5d36707704094",
+        "reportClosed": true,
+        "commandId": "electricity-cn-manipulation-assert-display",
+        "commandValueSHA256": "2a2ceafb5ac6bb203e6b40984a912ae7d5f4abc40f149967d247d151a95d6303",
+        "client": "gm",
+        "note": "fixed historical report"
+      },
+      {
+        "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790745149151.json",
+        "reportSHA256AtReview": "66d19706ebcbdb4cfad1e5322fc0bf926a4beb361319772932e5d36707704094",
+        "reportClosed": true,
+        "commandId": "electricity-cn-real-shield-only-miss-raw-plus-one",
+        "commandValueSHA256": "f404297d44aab00ad2cee76dec8f52461f218c8a2e92a6473350e8218fb99d24",
+        "client": "player",
+        "note": "fixed historical report"
+      },
+      {
+        "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790745149151.json",
+        "reportSHA256AtReview": "66d19706ebcbdb4cfad1e5322fc0bf926a4beb361319772932e5d36707704094",
+        "reportClosed": true,
+        "commandId": "electricity-cn-current-native-miss-declaration",
+        "commandValueSHA256": "38cf99c3e6d80ce84b76dae71d97f56da3f819504e9ad594fc4fcff9453df0f3",
+        "client": "gm",
+        "note": "fixed historical report"
+      },
+      {
+        "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790746880258.json",
+        "reportSHA256AtReview": "d733fc6f3160736b90870aed3fa1fa6fdeb63bbb5fd0c76b7196aa11aefdb614",
+        "reportClosed": true,
+        "commandId": "electricity-cn-dsn-old-proof-native-receipt-continue-reviewed-source",
+        "commandValueSHA256": "89c1ff09881f8cbb29c771a42c46304037672a373a9737c0c7d7b77b10e5d544",
+        "client": "gm",
+        "note": "fixed historical report"
+      },
+      {
+        "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790746880258.json",
+        "reportSHA256AtReview": "d733fc6f3160736b90870aed3fa1fa6fdeb63bbb5fd0c76b7196aa11aefdb614",
+        "reportClosed": true,
+        "commandId": "electricity-cn-native-chain-assertions",
+        "commandValueSHA256": "a76c9dce05a623dd4792673ebb3480424c9b6a29cb7978c94c7558f243310c37",
+        "client": "gm",
+        "note": "fixed historical report"
+      },
+      {
+        "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790746880258.json",
+        "reportSHA256AtReview": "d733fc6f3160736b90870aed3fa1fa6fdeb63bbb5fd0c76b7196aa11aefdb614",
+        "reportClosed": true,
+        "commandId": "voltage-cn-player-source-deleted-ui-recovery",
+        "commandValueSHA256": "05a0525dfdd4164c2f4c53f3b0bcb5a10afc886703ab57a1314f66d52ae794e7",
+        "client": "player",
+        "note": "fixed historical report"
+      }
+    ]
+  },
+  "remainingLimits": [
+    "本轮basic settlement仅既有ujx5r8oipw7ercdr+PF2e8.5.1+active Eldamon guard；不宣称其他世界适用。",
+    "长期多人负载与巨大journal/FPS/网络延迟未基准；durable anti-replay证据不能按TTL随意删。",
+    "recorded trigger要求操作者声明真实Shield AC贡献或触碰；不再自动测距离/视线，符合明确用户边界。",
+    "本记录绑定当前源码raw/LF SHA；最终commit/package需root固化后的Gitblob/候选清单，未宣称已部署。"
+  ]
+}

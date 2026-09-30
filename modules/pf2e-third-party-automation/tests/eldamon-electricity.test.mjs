@@ -23,10 +23,11 @@ test('next-turn expiry belongs to source combatant, never target initiative',()=
  assert.equal(expiryReached(expiry,{...combat,round:4},combat.turns[1],'start'),false);
  assert.equal(expiryReached(expiry,{...combat,round:4},combat.turns[1],'end'),true);
 });
-test('chain validates both ranges, same effect victims, enemy, and normal discharge adjacency to caster',()=>{
+test('chain validates same effect victims, enemy, reaction and normal discharge without geometry',()=>{
  const base={triggerDamage:13,sourceDistance:30,targetDistance:30,adjacentCaster:false,enemy:true,shocked:true,hitBySameEffect:false,reactionAvailable:true};
  assert.equal(chainEligibility(base),true);
- for(const patch of [{sourceDistance:35},{targetDistance:35},{hitBySameEffect:true},{enemy:false},{shocked:false},{reactionAvailable:false}])assert.equal(chainEligibility({...base,...patch}),false);
+ for(const patch of [{hitBySameEffect:true},{enemy:false},{shocked:false},{reactionAvailable:false}])assert.equal(chainEligibility({...base,...patch}),false);
+ assert.equal(chainEligibility({...base,sourceDistance:Infinity,targetDistance:undefined}),true);
  assert.equal(chainEligibility({...base,shocked:false,discharge:true,adjacentCaster:true}),true);
  assert.equal(chainEligibility({...base,shocked:false,discharge:true,adjacentCaster:true,siphoning:true}),false);
 });

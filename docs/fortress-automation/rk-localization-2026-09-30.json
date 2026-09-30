@@ -1,0 +1,2272 @@
+{
+  "schema": 1,
+  "date": "2026-09-30",
+  "scope": "Workbench 7.7.5及本模块RK新增可见字段局部汉化；不是PF2e/WB/Eldamon全pack汉化",
+  "baseline": "f45338970afec79e956f3685175758c784f9e098",
+  "workflow": {
+    "path": "C:/Users/Taka/Desktop/fvtt/标准PF2汉化流程-v3.md",
+    "sha256": "269ef67c24fe4b038ad98b31b117375cb845beac3cc38b947c9fa95884afe891"
+  },
+  "inputs": {
+    "nativeMacro": {
+      "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+      "uuid": "Compendium.xdy-pf2e-workbench.asymonous-benefactor-macros-internal.Macro.xcFr7PWwG5OVALNJ",
+      "version": "7.7.5",
+      "rawSha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+      "lfSha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+      "lines": 423
+    },
+    "untouchedFixture": {
+      "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/fixtures/workbench-7.7.5-recall.txt",
+      "rawSha256": "8aff0fec799e9320c5419e4e59c9ba1007e27af6f0f0d12d414d35a00f367f48"
+    },
+    "carriers": [
+      {
+        "path": "C:/Users/Taka/Desktop/fvtt/tmp/team-metapower-20260918/qa/full/runtime/Data/modules/pf2_cn/module.json",
+        "sha256": "033e2b6adb5e734ea4e99d75db375b648870329f019b51bf4b9336b0e2921b25"
+      },
+      {
+        "path": "C:/Users/Taka/Desktop/fvtt/tmp/team-metapower-20260918/qa/full/runtime/Data/modules/pf2_cn/zh_Hans/zh_Hans.json",
+        "sha256": "6864279e1f3c34df9cde7f477c13afda3e2dde54dda162934f0c2f2372d5b068"
+      },
+      {
+        "path": "C:/Users/Taka/Desktop/fvtt/tmp/team-metapower-20260918/qa/full/runtime/Data/modules/pf2e_compendium_chn/module.json",
+        "sha256": "dd3a79a3e293db0fe6f75bc02a7804470946d11d6c1c60d7d5ff972b1ad6ce38"
+      },
+      {
+        "path": "C:/Users/Taka/Desktop/fvtt/tmp/team-metapower-20260918/qa/full/runtime/Data/modules/pf2e_compendium_chn/compendium/pf2e.actionspf2e.json",
+        "sha256": "743abdab6dd594d703adce44a91625995d68e741397d0fd15bed60f1fbf0f924"
+      },
+      {
+        "path": "C:/Users/Taka/Desktop/fvtt/tmp/team-metapower-20260918/qa/full/runtime/Data/modules/pf2e_compendium_chn/compendium/pf2e.feats-srd.json",
+        "sha256": "f5fd4ce3c8b2d969a6b8029f955734b9c21c584882d6e60519b2567279f51b78"
+      },
+      {
+        "path": "C:/Users/Taka/Desktop/fvtt/tmp/team-metapower-20260918/qa/full/runtime/Data/modules/pf2e-compendium-extra-cn/module.json",
+        "sha256": "cbd1737df15dec52a4246f83fa8042e8ff238b8480a23453f3a4fbb0d31672a8"
+      }
+    ],
+    "carrierVersions": {
+      "pf2_cn": "2.5.2.1",
+      "pf2e_compendium_chn": "3.1.2",
+      "pf2e-compendium-extra-cn": "1.0.53"
+    },
+    "termEvidence": [
+      {
+        "term": "回忆知识",
+        "path": "C:/Users/Taka/Desktop/fvtt/tmp/team-metapower-20260918/qa/full/runtime/Data/modules/pf2e_compendium_chn/compendium/pf2e.actionspf2e.json",
+        "line": 1337,
+        "field": "entries.Recall Knowledge.name",
+        "value": "回忆知识 Recall Knowledge"
+      },
+      {
+        "term": "驾轻就熟",
+        "path": "C:/Users/Taka/Desktop/fvtt/tmp/team-metapower-20260918/qa/full/runtime/Data/modules/pf2e_compendium_chn/compendium/pf2e.feats-srd.json",
+        "line": 28845,
+        "field": "entries.Assurance.name",
+        "value": "驾轻就熟 Assurance"
+      },
+      {
+        "term": "社群/熟练/ranks/degrees",
+        "path": "C:/Users/Taka/Desktop/fvtt/tmp/team-metapower-20260918/qa/full/runtime/Data/modules/pf2_cn/zh_Hans/zh_Hans.json",
+        "fields": [
+          "PF2E.SkillSociety",
+          "PF2E.ProficiencyLabel",
+          "PF2E.ProficiencyLevel0..4",
+          "PF2E.Check.Result.Degree.Check.*"
+        ],
+        "lines": [
+          5487,
+          4694,
+          4695,
+          3444
+        ]
+      }
+    ]
+  },
+  "candidateFiles": [
+    {
+      "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-display.mjs",
+      "sha256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a"
+    },
+    {
+      "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-workbench.mjs",
+      "sha256": "56705ab8cfa25e4445d7c32c4b0a0043491be98b16e77b840b43f3732ab4683e"
+    },
+    {
+      "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-automatic.mjs",
+      "sha256": "f8c28712650524b19b8cb6680d62668abc8ea1dd81f9981e939474bd6b0a7da8"
+    },
+    {
+      "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-automation.mjs",
+      "sha256": "5160c138ffbb4e7449c8132ef28a81aca4f465f3cdf9f1e9b5ed00f1388edb35"
+    }
+  ],
+  "countConvention": "57独立值/明确动态生产槽记录（WB42+自有15）；重复consumer合并入同一记录，未声称57个pack字段。7标准技能标签及用户文档名称分别作为动态生产槽族记录，不冒充固定可穷举的世界文档覆盖。",
+  "counts": {
+    "expected": 57,
+    "inspected": 57,
+    "missing": 0,
+    "staticClassification": {
+      "通过": 50,
+      "复用": 5,
+      "不适用": 1,
+      "未验证": 1
+    },
+    "nativePassed": 25,
+    "nativePending": 30,
+    "unverifiedLegacyName": 1,
+    "nativePartialWithinPending": 1,
+    "nativeNotApplicable": 1,
+    "nativeUnverifiedLegacy": 1
+  },
+  "verification": {
+    "red": "新adapter行为首次5个测试因模块不存在失败；真实宏接入后原生坏引号HTML暴露解析失败，定位后保留原tag并修文本tokenizer。",
+    "controlledGreen": {
+      "tests": 59,
+      "failed": 0,
+      "skipped": 0,
+      "command": "FVTT_PF2E_BUNDLE=实际8.5.1源; FVTT_WORKBENCH_RECALL_MACRO=实际423行命令; node --test knowledge-display.test.mjs knowledge-workbench.test.mjs knowledge-probes.test.mjs",
+      "coverage": "有/无目标真实宏；英文/未知producer回退；原生通知/feat UUID/条件mod/tooltip复用；骰点/候选/flags/秘骰GM权限/原HTML标签与数字对照。59是测试结果而非字段覆盖率。"
+    },
+    "native": {
+      "status": "有限范围显示槽已验收；未命中分支继续未验证",
+      "scope": "25/57记录完整命中；30个可验槽待触发（含1个部分命中），1个译文不适用，1个遗留名称英文源未核。不是全量原生UI通过。",
+      "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+      "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+      "attemptId": 1790743642388,
+      "runtime": {
+        "core": "14.368",
+        "pf2e": "8.5.1",
+        "world": "ujx5r8oipw7ercdr",
+        "module": "0.9.19",
+        "activeGM": "FortressQAGM0001",
+        "users": [
+          {
+            "id": "FortressQAGM0001",
+            "name": "Fortress QA GM",
+            "isGM": true
+          },
+          {
+            "id": "IobjIOBGOEnjxXyE",
+            "name": "Native followups QA Player",
+            "isGM": false
+          }
+        ],
+        "dependencies": [
+          {
+            "id": "xdy-pf2e-workbench",
+            "active": true,
+            "version": "7.7.5"
+          },
+          {
+            "id": "pf2e-hud",
+            "active": true,
+            "version": "2.55.2"
+          },
+          {
+            "id": "pf2e-toolbelt",
+            "active": true,
+            "version": "3.56.5"
+          },
+          {
+            "id": "patreon-v3",
+            "active": true,
+            "version": "3.2.29"
+          },
+          {
+            "id": "trigger-engine",
+            "active": true,
+            "version": "1.35.1"
+          },
+          {
+            "id": "lib-wrapper",
+            "active": true,
+            "version": "1.13.5.1"
+          },
+          {
+            "id": "socketlib",
+            "active": true,
+            "version": "v1.1.4"
+          }
+        ]
+      },
+      "translationEnvironment": {
+        "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743559931.json",
+        "reportSha256": "d61559d6414e79fe458d32ccaa4e3d3b0b9efebbb4b10149eac611dc8c886a9b",
+        "commandId": "cn-runtime",
+        "translationModules": [
+          {
+            "id": "babele",
+            "active": true,
+            "version": "2.9.1"
+          },
+          {
+            "id": "pf2_cn",
+            "active": true,
+            "version": "2.5.2.1"
+          },
+          {
+            "id": "pf2e_compendium_chn",
+            "active": true,
+            "version": "3.1.2"
+          },
+          {
+            "id": "pf2e-compendium-extra-cn",
+            "active": true,
+            "version": "1.0.53"
+          }
+        ],
+        "language": "cn"
+      },
+      "successfulCommands": [
+        "rk-cn-normal-no-target",
+        "rk-cn-normal-target",
+        "rk-cn-no-target",
+        "rk-cn-player-privacy"
+      ],
+      "modeAssertions": [
+        {
+          "commandId": "rk-cn-normal-no-target",
+          "assurance": false,
+          "target": false,
+          "die": 11,
+          "candidates": 7,
+          "rollFormula": "1d20",
+          "diceCount": 1
+        },
+        {
+          "commandId": "rk-cn-normal-target",
+          "assurance": false,
+          "target": true,
+          "die": 12,
+          "candidates": 1,
+          "rollFormula": "1d20",
+          "diceCount": 1,
+          "primarySkill": "社群",
+          "primaryTotal": 25,
+          "dcColumns": [
+            20,
+            22,
+            25,
+            30
+          ],
+          "degrees": [
+            "成功",
+            "成功",
+            "成功",
+            "失败"
+          ]
+        },
+        {
+          "commandId": "rk-cn-no-target",
+          "assurance": true,
+          "target": false,
+          "die": null,
+          "candidates": 1,
+          "rollFormula": "10",
+          "diceCount": 0,
+          "total": 19,
+          "nativeProficiency": 9,
+          "note": "rk-cn-no-target实际为固定驾轻就熟，不能按名字归入普通检定"
+        }
+      ],
+      "privacy": {
+        "commandId": "rk-cn-player-privacy",
+        "evidenceType": "native ChatMessage.renderHTML actual rendered player text",
+        "userId": "IobjIOBGOEnjxXyE",
+        "isGM": false,
+        "cards": [
+          {
+            "id": "24Oo3zJXUHm6STVX",
+            "isContentVisible": false,
+            "text": "\n    \n        Native followups QA Player\n        \n            7分钟 ago\n        \n\n\n        Native followups QA Player privately rolled some dice\n    \n    \n        \n    \n        ???\n        \n        ?\n    \n\n\n    \n"
+          },
+          {
+            "id": "uptXTyJMG31sVwcG",
+            "isContentVisible": false,
+            "text": "\n    \n        Native followups QA Player\n        \n            34秒 ago\n        \n\n\n        Native followups QA Player privately rolled some dice\n    \n    \n        \n    \n        ???\n        \n        ?\n    \n\n\n    \n"
+          },
+          {
+            "id": "fLUlmthDjtL7UrnL",
+            "isContentVisible": false,
+            "text": "\n    \n        Native followups QA Player\n        \n            8分钟 ago\n        \n\n\n        Native followups QA Player privately rolled some dice\n    \n    \n        \n    \n        ???\n        \n        ?\n    \n\n\n    \n"
+          }
+        ],
+        "result": "三卡isContentVisible=false；实际文本只有privately rolled some dice/???/?，没有目标真名/DC/degree/结果/候选技能",
+        "outsideOwnedTranslationScope": "privately rolled some dice、ago是Core秘骰占位UI，非RK adapter生产槽；证明隐私，不声称外部英文已汉化"
+      },
+      "harnessFailures": [
+        {
+          "commandId": "rk-cn-setup",
+          "ok": false,
+          "category": "QA harness fixture identity mismatch",
+          "error": "page.evaluate: Error: Missing cloned prior QA fixtures\n    at eval (eval at <anonymous> (eval at evaluate (:311:30)), <anonymous>:5:37)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:135)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-harness.mjs:23:199",
+          "resolution": "rk-clone-identities + rk-cn-setup-corrected后才执行RK，不计产品成功或回归",
+          "productRollAttempt": false
+        }
+      ],
+      "pageErrors": [],
+      "byteBinding": {
+        "sourceManifestPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\test-sources.json",
+        "sourceManifestSha256": "89764226a2fe8bafa08c47611d73e44c5a74cc037b96fe7eed753e89519f70e7",
+        "nativeMacroFingerprint": {
+          "uuid": "Compendium.xdy-pf2e-workbench.asymonous-benefactor-macros-internal.Macro.xcFr7PWwG5OVALNJ",
+          "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+          "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3"
+        },
+        "originalMacroAndFixtureUnchanged": true,
+        "runtimeMatch": [
+          {
+            "candidatePath": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-display.mjs",
+            "qaPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\runtime\\Data\\modules\\pf2e-third-party-automation\\scripts\\knowledge-display.mjs",
+            "candidateSha256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a",
+            "qaSha256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a",
+            "lfSha256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a",
+            "identicalRawBytes": true
+          },
+          {
+            "candidatePath": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-workbench.mjs",
+            "qaPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\runtime\\Data\\modules\\pf2e-third-party-automation\\scripts\\knowledge-workbench.mjs",
+            "candidateSha256": "56705ab8cfa25e4445d7c32c4b0a0043491be98b16e77b840b43f3732ab4683e",
+            "qaSha256": "56705ab8cfa25e4445d7c32c4b0a0043491be98b16e77b840b43f3732ab4683e",
+            "lfSha256": "958cb2fde842db98b2ad0bda655ad440e16e33039c8618cd008ace97c359c2de",
+            "identicalRawBytes": true
+          },
+          {
+            "candidatePath": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-automatic.mjs",
+            "qaPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\runtime\\Data\\modules\\pf2e-third-party-automation\\scripts\\knowledge-automatic.mjs",
+            "candidateSha256": "f8c28712650524b19b8cb6680d62668abc8ea1dd81f9981e939474bd6b0a7da8",
+            "qaSha256": "f8c28712650524b19b8cb6680d62668abc8ea1dd81f9981e939474bd6b0a7da8",
+            "lfSha256": "69066e2fc3c0548986162d66365bc4d356003f344fc6d33a24bc4cf942be4327",
+            "identicalRawBytes": true
+          },
+          {
+            "candidatePath": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-automation.mjs",
+            "qaPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\runtime\\Data\\modules\\pf2e-third-party-automation\\scripts\\knowledge-automation.mjs",
+            "candidateSha256": "5160c138ffbb4e7449c8132ef28a81aca4f465f3cdf9f1e9b5ed00f1388edb35",
+            "qaSha256": "5160c138ffbb4e7449c8132ef28a81aca4f465f3cdf9f1e9b5ed00f1388edb35",
+            "lfSha256": "633d68e9aa1410f9574467ae2c0ceee70d9d23b1c496fe34c80d3e90b73e62f5",
+            "identicalRawBytes": true
+          }
+        ],
+        "reportContainsRuntimeFileSourceSHA": false,
+        "limitation": "历史报告只记runtime版本，未存浏览器加载4脚本的sourceSHA。当前QA物理副本与候选rawSHA逐字相同；父代理确认QA后RK字节未改。保留时间绑定证据边界，最终发布需Gitblob/候选manifest覆盖，不能冒称当时浏览器抓取源字节。"
+      }
+    },
+    "nativeCoverageConvention": "每条nativeEvidence逐字匹配成功命令rawHTML槽；相同词不同producer不跨槽代验；空Lore表只验标题不验Lore行为；WB39 breakdown只记partial，不加25通过。"
+  },
+  "sourceIssues": [
+    {
+      "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+      "line": 204,
+      "before": "rank div未闭合即关闭td",
+      "decision": "保留原源标签，未修宏，适配只编辑已验证文本槽",
+      "nativeDecision": "原macro/fixture保持原SHA；报告content是ChatMessage保存后HTML，tbody/空白/坏标签可能经Core规范化；本次只验可见槽，不把原源问题当汉化修复或新增产品失败。"
+    },
+    {
+      "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+      "line": 325,
+      "before": "<td ${tdCStyle}\">",
+      "decision": "原多余引号逐字保留；tokenizer只把=后的引号认作属性起始",
+      "nativeDecision": "原macro/fixture保持原SHA；报告content是ChatMessage保存后HTML，tbody/空白/坏标签可能经Core规范化；本次只验可见槽，不把原源问题当汉化修复或新增产品失败。"
+    },
+    {
+      "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+      "line": 222,
+      "before": "allUnappliedModifiers.length",
+      "decision": "原Map.length导致空条件表，保留源行为；未借汉化修宏",
+      "nativeDecision": "原macro/fixture保持原SHA；报告content是ChatMessage保存后HTML，tbody/空白/坏标签可能经Core规范化；本次只验可见槽，不把原源问题当汉化修复或新增产品失败。"
+    },
+    {
+      "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+      "line": 224,
+      "before": "@UUID[${source}]{${label}}</a>",
+      "decision": "原多余</a>保留；native sanitizer结果另与禁用adapter控制裁决",
+      "nativeDecision": "原macro/fixture保持原SHA；报告content是ChatMessage保存后HTML，tbody/空白/坏标签可能经Core规范化；本次只验可见槽，不把原源问题当汉化修复或新增产品失败。"
+    }
+  ],
+  "constraints": [
+    "不改macro命令/fixture/HTML属性/UUID/文档ID/slug/rules/predicate/options/DC值/dice/权限。",
+    "中文locale cn/zh-*且精确producer/version/hash/当前原文匹配才显示汉化；未知版本/身份/命令或英文locale保留原宏与原生技能标签。",
+    "tooltip值及用户自定义rule/actor/Lore名称原样。已有Babele与i18n缺失的自定义文字不猜译。",
+    "不覆盖世界文档，不改未分配范围pack。"
+  ],
+  "fields": [
+    {
+      "id": "WB01",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 19,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "160aeed134d28e84a21a2fdfdd632c0bcb63b525136cfed18538594e726aa7ed",
+        "producerLineOriginal": "    return ui.notifications.error(\"No selected token or assigned character\");",
+        "producerLineSha256": "5a026444a1416dda6d9bec367e1715458a762c40955d6754219903ca93cc1a03"
+      },
+      "before": "No selected token or assigned character",
+      "after": "未选中棋子或指定角色。",
+      "consumer": "原宏ui.notifications.error",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "未验证：未触发无Actor错误",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "WB02",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 237,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "be340fa9f22ab858e964832d28e434c2fcac52aebfd499709b372b18345f4df1",
+        "producerLineOriginal": "let output = `<strong>Recall Knowledge</strong> (Roll: <span style=\"color: ${rollColor}\">${globalRoll}</span>)`;",
+        "producerLineSha256": "2a7656c4d650d47a00562cd019a78b91e9a4755aabcaacc862171511d6878abf"
+      },
+      "before": "Recall Knowledge",
+      "after": "回忆知识",
+      "consumer": "原宏GM秘骰结果卡strong标题",
+      "terminologyBasis": "pf2e.actionspf2e Recall Knowledge 同源动作旧译：回忆知识 Recall Knowledge",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "24Oo3zJXUHm6STVX",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": "<strong>回忆知识</strong>",
+          "observedValue": "回忆知识",
+          "scope": "普通无目标七技能表当前生产槽",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "1ef048859b8ec76307e53aa61011d0459cb92d9cc48f6539f46bb5ece8717d40"
+        },
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "uptXTyJMG31sVwcG",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": "<strong>回忆知识</strong>",
+          "observedValue": "回忆知识",
+          "scope": "有目标标题",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "46b2d70b91607e9d8296c307a7c02adf983746aa2d0dd71eb1518505bc304717"
+        }
+      ]
+    },
+    {
+      "id": "WB03",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 237,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "75ec78c3fe3968f56a668c72f50081c8a02bb2c99d604278b2cb952ee9e9c947",
+        "producerLineOriginal": "let output = `<strong>Recall Knowledge</strong> (Roll: <span style=\"color: ${rollColor}\">${globalRoll}</span>)`;",
+        "producerLineSha256": "2a7656c4d650d47a00562cd019a78b91e9a4755aabcaacc862171511d6878abf"
+      },
+      "before": " (Roll: ${globalRoll})",
+      "after": "（骰点：${globalRoll}）",
+      "consumer": "原宏结果卡标题中的骰点标签；实际span原样保留",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "24Oo3zJXUHm6STVX",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": "（骰点：",
+          "observedValue": "骰点：",
+          "scope": "普通无目标七技能表当前生产槽",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "1ef048859b8ec76307e53aa61011d0459cb92d9cc48f6539f46bb5ece8717d40"
+        },
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "uptXTyJMG31sVwcG",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": "（骰点：",
+          "observedValue": "骰点：",
+          "scope": "有目标共享骰点标题",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "46b2d70b91607e9d8296c307a7c02adf983746aa2d0dd71eb1518505bc304717"
+        }
+      ]
+    },
+    {
+      "id": "WB04",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 197,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "a761aecca8680ee158790f64507fc67a4747a572f013055a130b9937c767a784",
+        "producerLineOriginal": "    let output = `<table style=\"${tBorder}\"><tr><th ${tdStyle}>${title}</th><th ${tdStyle}>Prof</th><th ${tdStyle}>Mod</th><th ${tdStyle}>Result</th></tr>`;",
+        "producerLineSha256": "4f2e23fdc50c0d9d1973d3fd3dc12f4bbfe109a4e0eb393197c50acaa04ed513"
+      },
+      "before": "Prof",
+      "after": "当前PF2E.ProficiencyLabel（本次实机为熟练度）；缺失中文键回退熟练",
+      "consumer": "Skill/Lore Skill列表列标题",
+      "terminologyBasis": "PF2E.ProficiencyLabel=熟练；优先当前i18n；本轮有效i18n rawHTML为熟练度，不据静态载体强制改成熟练。",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "24Oo3zJXUHm6STVX",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": ">熟练度</th>",
+          "observedValue": "熟练度",
+          "scope": "普通无目标七技能表当前生产槽",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "1ef048859b8ec76307e53aa61011d0459cb92d9cc48f6539f46bb5ece8717d40"
+        }
+      ]
+    },
+    {
+      "id": "WB05",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 197,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "2fe83d132e3db2437dca1f096abb3a137485f3765af60d975b69642afea93480",
+        "producerLineOriginal": "    let output = `<table style=\"${tBorder}\"><tr><th ${tdStyle}>${title}</th><th ${tdStyle}>Prof</th><th ${tdStyle}>Mod</th><th ${tdStyle}>Result</th></tr>`;",
+        "producerLineSha256": "4f2e23fdc50c0d9d1973d3fd3dc12f4bbfe109a4e0eb393197c50acaa04ed513"
+      },
+      "before": "Mod",
+      "after": "调整值",
+      "consumer": "Skill/Lore/Potential Modifiers表列标题，重复consumer共197/227行",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "24Oo3zJXUHm6STVX",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": ">调整值</th>",
+          "observedValue": "调整值",
+          "scope": "普通无目标七技能表当前生产槽",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "1ef048859b8ec76307e53aa61011d0459cb92d9cc48f6539f46bb5ece8717d40"
+        }
+      ]
+    },
+    {
+      "id": "WB06",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 197,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "6e7d50e84f4731ef74187cf8cfa2672184eed8866b0b0074a772f4a64e0f4ba2",
+        "producerLineOriginal": "    let output = `<table style=\"${tBorder}\"><tr><th ${tdStyle}>${title}</th><th ${tdStyle}>Prof</th><th ${tdStyle}>Mod</th><th ${tdStyle}>Result</th></tr>`;",
+        "producerLineSha256": "4f2e23fdc50c0d9d1973d3fd3dc12f4bbfe109a4e0eb393197c50acaa04ed513"
+      },
+      "before": "Result",
+      "after": "结果",
+      "consumer": "Skill/Lore列表列标题",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "24Oo3zJXUHm6STVX",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": ">结果</th>",
+          "observedValue": "结果",
+          "scope": "普通无目标七技能表当前生产槽",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "1ef048859b8ec76307e53aa61011d0459cb92d9cc48f6539f46bb5ece8717d40"
+        }
+      ]
+    },
+    {
+      "id": "WB07",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 227,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "8021121642e126161bc80c5a71ff135fbb3668527164270a9ddaf2bf3df544a5",
+        "producerLineOriginal": "        <th ${tdStyle}>Potential Modifiers</th>",
+        "producerLineSha256": "6aa713f879bb722a7b4f90eeab9ba952ac82063ca76e3e45e269faf8564204ef"
+      },
+      "before": "Potential Modifiers",
+      "after": "潜在调整值",
+      "consumer": "条件调整项表第一行",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "24Oo3zJXUHm6STVX",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": ">潜在调整值</th>",
+          "observedValue": "潜在调整值",
+          "scope": "普通无目标七技能表当前生产槽",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "1ef048859b8ec76307e53aa61011d0459cb92d9cc48f6539f46bb5ece8717d40"
+        }
+      ]
+    },
+    {
+      "id": "WB08",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 244,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "6df1bb18a59ab97df82e307b93fe4f3bbda34d531bcbb79ec573dda23ba64918",
+        "producerLineOriginal": "    output += skillListOutput(\"Skill\", skillResults);",
+        "producerLineSha256": "07fc396f3209e10af0036f10055184ea55c6df7f750b06ad37473f1b85ba98a2"
+      },
+      "before": "Skill",
+      "after": "技能",
+      "consumer": "无目标技能表/主技能表第二行标题；197/243/277行",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "24Oo3zJXUHm6STVX",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": ">技能</th>",
+          "observedValue": "技能",
+          "scope": "普通无目标七技能表当前生产槽",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "1ef048859b8ec76307e53aa61011d0459cb92d9cc48f6539f46bb5ece8717d40"
+        }
+      ]
+    },
+    {
+      "id": "WB09",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 264,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "407c89bf76340d54b5b6fd25e5451cc5292c4130adb1f6c760725d91252e7669",
+        "producerLineOriginal": "        output += `<br/><strong>vs. ${targetActor.name}</strong>`;",
+        "producerLineSha256": "f362bf47ee9935a4ca90321679394c5cc1848fb24197da891bef8f22c69484ca"
+      },
+      "before": "vs. ${targetActor.name}",
+      "after": "对抗 ${targetActor.name}",
+      "consumer": "目标段落；只认此次绑定的目标Actor名称，保留自定义名称",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "uptXTyJMG31sVwcG",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": "<strong>对抗 隐藏生物真实名 Hidden Creature True Name</strong>",
+          "observedValue": "对抗 ${targetActor.name}",
+          "scope": "GM秘密内容保留自定义目标名；玩家实际不可见",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "46b2d70b91607e9d8296c307a7c02adf983746aa2d0dd71eb1518505bc304717"
+        }
+      ]
+    },
+    {
+      "id": "WB10",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 274,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "e01ddf6594a4387bbf520e7d678578151b8824849cc02783c66e9da6c07f953e",
+        "producerLineOriginal": "            <th ${tdCStyle}>1st</th><th ${tdCStyle}>2nd</th><th ${tdCStyle}>3rd</th><th ${tdCStyle}>4th</th>",
+        "producerLineSha256": "26dcf2aaed9b0c14ce9973d4d35962ed950866f7bf132757b3897bb05d78ffd3"
+      },
+      "before": "1st",
+      "after": "第1次",
+      "consumer": "主技能/学识DC尝试次序表头；274/342行重复consumer",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "uptXTyJMG31sVwcG",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": ">第1次</th>",
+          "observedValue": "第1次",
+          "scope": "primary/学识难度表标题",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "46b2d70b91607e9d8296c307a7c02adf983746aa2d0dd71eb1518505bc304717"
+        }
+      ]
+    },
+    {
+      "id": "WB11",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 274,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "c21365c7ea5b3c9d9326726c52d1ba5f14961d6767619fb1aa14255d4c42e759",
+        "producerLineOriginal": "            <th ${tdCStyle}>1st</th><th ${tdCStyle}>2nd</th><th ${tdCStyle}>3rd</th><th ${tdCStyle}>4th</th>",
+        "producerLineSha256": "26dcf2aaed9b0c14ce9973d4d35962ed950866f7bf132757b3897bb05d78ffd3"
+      },
+      "before": "2nd",
+      "after": "第2次",
+      "consumer": "主技能/学识DC尝试次序表头；274/342行重复consumer",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "uptXTyJMG31sVwcG",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": ">第2次</th>",
+          "observedValue": "第2次",
+          "scope": "primary/学识难度表标题",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "46b2d70b91607e9d8296c307a7c02adf983746aa2d0dd71eb1518505bc304717"
+        }
+      ]
+    },
+    {
+      "id": "WB12",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 274,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "c0d751710cfbad24e24253b4d0c0a8f8080450e0ace66c5b3014b15190a80f2c",
+        "producerLineOriginal": "            <th ${tdCStyle}>1st</th><th ${tdCStyle}>2nd</th><th ${tdCStyle}>3rd</th><th ${tdCStyle}>4th</th>",
+        "producerLineSha256": "26dcf2aaed9b0c14ce9973d4d35962ed950866f7bf132757b3897bb05d78ffd3"
+      },
+      "before": "3rd",
+      "after": "第3次",
+      "consumer": "主技能/学识DC尝试次序表头；274/342行重复consumer",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "uptXTyJMG31sVwcG",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": ">第3次</th>",
+          "observedValue": "第3次",
+          "scope": "primary/学识难度表标题",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "46b2d70b91607e9d8296c307a7c02adf983746aa2d0dd71eb1518505bc304717"
+        }
+      ]
+    },
+    {
+      "id": "WB13",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 274,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "136ef4431c42aa1bc554e274e04396ee317a1e94ebb91116a697d90e60d103d4",
+        "producerLineOriginal": "            <th ${tdCStyle}>1st</th><th ${tdCStyle}>2nd</th><th ${tdCStyle}>3rd</th><th ${tdCStyle}>4th</th>",
+        "producerLineSha256": "26dcf2aaed9b0c14ce9973d4d35962ed950866f7bf132757b3897bb05d78ffd3"
+      },
+      "before": "4th",
+      "after": "第4次",
+      "consumer": "主技能/学识DC尝试次序表头；274/342行重复consumer",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "uptXTyJMG31sVwcG",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": ">第4次</th>",
+          "observedValue": "第4次",
+          "scope": "primary/学识难度表标题",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "46b2d70b91607e9d8296c307a7c02adf983746aa2d0dd71eb1518505bc304717"
+        }
+      ]
+    },
+    {
+      "id": "WB14",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 343,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "a2dc69ccc8c948b19c70b1ef6de69fef23b442897560fed83e73387f30922acb",
+        "producerLineOriginal": "            ${[\"1st\", \"2nd\", \"3rd\", \"4th\", \"5th\", \"6th\"].map(i => `<th ${tdStyle}>${i}</th>`).join(\"\")}",
+        "producerLineSha256": "3c437f228d04339ebce07baba3d500f77a2fbf300605e5bd524549b63ebc533b"
+      },
+      "before": "5th",
+      "after": "第5次",
+      "consumer": "主技能/学识DC尝试次序表头；274/342行重复consumer",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "uptXTyJMG31sVwcG",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": ">第5次</th>",
+          "observedValue": "第5次",
+          "scope": "只命中学识难度提示标题，不证明第5/6次真实检定",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "46b2d70b91607e9d8296c307a7c02adf983746aa2d0dd71eb1518505bc304717"
+        }
+      ]
+    },
+    {
+      "id": "WB15",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 343,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "6c45feb3363998f9371b25105a16880ebee5da8c8a5c5dddffde628f5f7ba120",
+        "producerLineOriginal": "            ${[\"1st\", \"2nd\", \"3rd\", \"4th\", \"5th\", \"6th\"].map(i => `<th ${tdStyle}>${i}</th>`).join(\"\")}",
+        "producerLineSha256": "3c437f228d04339ebce07baba3d500f77a2fbf300605e5bd524549b63ebc533b"
+      },
+      "before": "6th",
+      "after": "第6次",
+      "consumer": "主技能/学识DC尝试次序表头；274/342行重复consumer",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "uptXTyJMG31sVwcG",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": ">第6次</th>",
+          "observedValue": "第6次",
+          "scope": "只命中学识难度提示标题，不证明第5/6次真实检定",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "46b2d70b91607e9d8296c307a7c02adf983746aa2d0dd71eb1518505bc304717"
+        }
+      ]
+    },
+    {
+      "id": "WB16",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 342,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "b61c07dc7dea9804aedce1427117faf98108fbc1145a1af99ab3af462a4c8982",
+        "producerLineOriginal": "            <th ${tdStyle}>Lore Skill DCs</th>",
+        "producerLineSha256": "46855a3b9ae6cdfaf800809bbd8d58639ec4e629c7a5bc0020e6ec0aba0f6d3f"
+      },
+      "before": "Lore Skill DCs",
+      "after": "学识技能难度",
+      "consumer": "目标学识DC表标题；DC数值不变",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "uptXTyJMG31sVwcG",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": ">学识技能难度</th>",
+          "observedValue": "学识技能难度",
+          "scope": "学识DC提示；未测试Lore执行检定或收益",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "46b2d70b91607e9d8296c307a7c02adf983746aa2d0dd71eb1518505bc304717"
+        }
+      ]
+    },
+    {
+      "id": "WB17",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 346,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "4d9c0a9da6dd67faffe820b6012bb093f808c1794ffaf4eaf73b1c870bc176fc",
+        "producerLineOriginal": "            <th ${tdStyle}>Unspecific</th>",
+        "producerLineSha256": "5db92347ada1594eec8ad329398b47a990192b96e58d4f7b7789a932c7b0eb48"
+      },
+      "before": "Unspecific",
+      "after": "非专门学识",
+      "consumer": "目标学识DC表非专门学识行",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "uptXTyJMG31sVwcG",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": ">非专门学识</th>",
+          "observedValue": "非专门学识",
+          "scope": "学识DC提示；未测试Lore执行检定或收益",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "46b2d70b91607e9d8296c307a7c02adf983746aa2d0dd71eb1518505bc304717"
+        }
+      ]
+    },
+    {
+      "id": "WB18",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 351,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "0b85c4d8a4bac636c5e8f131ae39049132d237fce96defe8403896886db04a14",
+        "producerLineOriginal": "            <th ${tdStyle}>Specific</th>",
+        "producerLineSha256": "1fe57c564160a37013a006b25082020c4280f2cd6fea5606b6c0db4b5099b55c"
+      },
+      "before": "Specific",
+      "after": "专门学识",
+      "consumer": "目标学识DC表专门学识行",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "uptXTyJMG31sVwcG",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": ">专门学识</th>",
+          "observedValue": "专门学识",
+          "scope": "学识DC提示；未测试Lore执行检定或收益",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "46b2d70b91607e9d8296c307a7c02adf983746aa2d0dd71eb1518505bc304717"
+        }
+      ]
+    },
+    {
+      "id": "WB19",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 360,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "d773d854013e0f6697725f60d1cc84d1e2942f867bd90d6b56b7cc7587de02de",
+        "producerLineOriginal": "        output += skillListOutput(\"Lore Skill\", loreSkills);",
+        "producerLineSha256": "f601610a687f4ec076c859ec33d03d39174a862614fb90bf1a591a6c449e72c0"
+      },
+      "before": "Lore Skill",
+      "after": "学识技能",
+      "consumer": "目标学识技能列表标题",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "uptXTyJMG31sVwcG",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": ">学识技能</th>",
+          "observedValue": "学识技能",
+          "scope": "空Lore技能表标题；未测试真实Lore条目",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "46b2d70b91607e9d8296c307a7c02adf983746aa2d0dd71eb1518505bc304717"
+        }
+      ]
+    },
+    {
+      "id": "WB20",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 68,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "9365c956285b248b10b915c887fcb5fbc65012fc61a26469d45a34b9e94e3eac",
+        "producerLineOriginal": "const RANK_NAMES = [\"UNTRAINED\", \"TRAINED\", \"EXPERT\", \"MASTER\", \"LEGENDARY\"];",
+        "producerLineSha256": "57a6d02ffd08f49a39c957b86fd3b23c2b75b8869ec71040f1af1804870e4249"
+      },
+      "before": "UNTRAINED",
+      "after": "未受训",
+      "consumer": "Skill/Lore列表完整rank；仅原宏已知颜色tag文本",
+      "terminologyBasis": "PF2E.ProficiencyLevel0；优先当前i18n；68/203行",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "24Oo3zJXUHm6STVX",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": "\n                未受训\n",
+          "observedValue": "未受训",
+          "scope": "完整rank六行",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "1ef048859b8ec76307e53aa61011d0459cb92d9cc48f6539f46bb5ece8717d40"
+        }
+      ]
+    },
+    {
+      "id": "WB21",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 68,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "3c94b426bb3a998dec318a04a8390de14deff16df8a583ce81a374d9f8fba875",
+        "producerLineOriginal": "const RANK_NAMES = [\"UNTRAINED\", \"TRAINED\", \"EXPERT\", \"MASTER\", \"LEGENDARY\"];",
+        "producerLineSha256": "57a6d02ffd08f49a39c957b86fd3b23c2b75b8869ec71040f1af1804870e4249"
+      },
+      "before": "TRAINED",
+      "after": "受训",
+      "consumer": "Skill/Lore列表完整rank；仅原宏已知颜色tag文本",
+      "terminologyBasis": "PF2E.ProficiencyLevel1；优先当前i18n；68/203行",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "未验证：没有受训完整rank行",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "WB22",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 68,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "884981556c798a16a236836b26b23faa255b32e793b2d820a1e8f9cfb3d201d2",
+        "producerLineOriginal": "const RANK_NAMES = [\"UNTRAINED\", \"TRAINED\", \"EXPERT\", \"MASTER\", \"LEGENDARY\"];",
+        "producerLineSha256": "57a6d02ffd08f49a39c957b86fd3b23c2b75b8869ec71040f1af1804870e4249"
+      },
+      "before": "EXPERT",
+      "after": "专家",
+      "consumer": "Skill/Lore列表完整rank；仅原宏已知颜色tag文本",
+      "terminologyBasis": "PF2E.ProficiencyLevel2；优先当前i18n；68/203行",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "24Oo3zJXUHm6STVX",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": "\n                专家\n",
+          "observedValue": "专家",
+          "scope": "无目标社群完整rank",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "1ef048859b8ec76307e53aa61011d0459cb92d9cc48f6539f46bb5ece8717d40"
+        }
+      ]
+    },
+    {
+      "id": "WB23",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 68,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "30e7724015a1f378871306cc61d597224206a1233f1cc6eadf42b7ae4b0a2cc8",
+        "producerLineOriginal": "const RANK_NAMES = [\"UNTRAINED\", \"TRAINED\", \"EXPERT\", \"MASTER\", \"LEGENDARY\"];",
+        "producerLineSha256": "57a6d02ffd08f49a39c957b86fd3b23c2b75b8869ec71040f1af1804870e4249"
+      },
+      "before": "MASTER",
+      "after": "大师",
+      "consumer": "Skill/Lore列表完整rank；仅原宏已知颜色tag文本",
+      "terminologyBasis": "PF2E.ProficiencyLevel3；优先当前i18n；68/203行",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "未验证：没有大师完整rank行",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "WB24",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 68,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "385d52d20b3e63e9a2d2b883b8c07b2851e5b0a29374b3e697121d88c38a0528",
+        "producerLineOriginal": "const RANK_NAMES = [\"UNTRAINED\", \"TRAINED\", \"EXPERT\", \"MASTER\", \"LEGENDARY\"];",
+        "producerLineSha256": "57a6d02ffd08f49a39c957b86fd3b23c2b75b8869ec71040f1af1804870e4249"
+      },
+      "before": "LEGENDARY",
+      "after": "传奇",
+      "consumer": "Skill/Lore列表完整rank；仅原宏已知颜色tag文本",
+      "terminologyBasis": "PF2E.ProficiencyLevel4；优先当前i18n；68/203行",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "未验证：没有传奇完整rank行",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "WB25",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 303,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "a25513c7e0f6eaa80a3337ee18081b9e2ed09e00af8531c8f7bb2542764027e7",
+        "producerLineOriginal": "                    <div class=\"tag\" style=\"background-color: ${RANK_COLORS[rank]}; white-space:nowrap\">${RANK_NAMES[rank]?.[0]}</div>",
+        "producerLineSha256": "b037edc4b774ed0f4e5bc642d7c1b75fe4883073b91dda2a5f8c5e7f903d9f1d"
+      },
+      "before": "U",
+      "after": "未受训",
+      "consumer": "目标primary列表rank首字母；仅原宏已知颜色tag文本",
+      "terminologyBasis": "PF2E.ProficiencyLevel0；优先当前i18n；不改其他tag",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "未验证：目标primary不是未受训，U槽未触发",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "WB26",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 303,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "e632b7095b0bf32c260fa4c539e9fd7b852d0de454e9be26f24d0d6f91d069d3",
+        "producerLineOriginal": "                    <div class=\"tag\" style=\"background-color: ${RANK_COLORS[rank]}; white-space:nowrap\">${RANK_NAMES[rank]?.[0]}</div>",
+        "producerLineSha256": "b037edc4b774ed0f4e5bc642d7c1b75fe4883073b91dda2a5f8c5e7f903d9f1d"
+      },
+      "before": "T",
+      "after": "受训",
+      "consumer": "目标primary列表rank首字母；仅原宏已知颜色tag文本",
+      "terminologyBasis": "PF2E.ProficiencyLevel1；优先当前i18n；不改其他tag",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "未验证：目标primary不是受训，T槽未触发",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "WB27",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 303,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "a9f51566bd6705f7ea6ad54bb9deb449f795582d6529a0e22207b8981233ec58",
+        "producerLineOriginal": "                    <div class=\"tag\" style=\"background-color: ${RANK_COLORS[rank]}; white-space:nowrap\">${RANK_NAMES[rank]?.[0]}</div>",
+        "producerLineSha256": "b037edc4b774ed0f4e5bc642d7c1b75fe4883073b91dda2a5f8c5e7f903d9f1d"
+      },
+      "before": "E",
+      "after": "专家",
+      "consumer": "目标primary列表rank首字母；仅原宏已知颜色tag文本",
+      "terminologyBasis": "PF2E.ProficiencyLevel2；优先当前i18n；不改其他tag",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "uptXTyJMG31sVwcG",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": "white-space:nowrap\">专家</div>",
+          "observedValue": "专家",
+          "scope": "有目标primary E首字母生产槽",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "46b2d70b91607e9d8296c307a7c02adf983746aa2d0dd71eb1518505bc304717"
+        }
+      ]
+    },
+    {
+      "id": "WB28",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 303,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "08f271887ce94707da822d5263bae19d5519cb3614e0daedc4c7ce5dab7473f1",
+        "producerLineOriginal": "                    <div class=\"tag\" style=\"background-color: ${RANK_COLORS[rank]}; white-space:nowrap\">${RANK_NAMES[rank]?.[0]}</div>",
+        "producerLineSha256": "b037edc4b774ed0f4e5bc642d7c1b75fe4883073b91dda2a5f8c5e7f903d9f1d"
+      },
+      "before": "M",
+      "after": "大师",
+      "consumer": "目标primary列表rank首字母；仅原宏已知颜色tag文本",
+      "terminologyBasis": "PF2E.ProficiencyLevel3；优先当前i18n；不改其他tag",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "未验证：目标primary不是大师，M槽未触发",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "WB29",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 303,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "72dfcfb0c470ac255cde83fb8fe38de8a128188e03ea5ba5b2a93adbea1062fa",
+        "producerLineOriginal": "                    <div class=\"tag\" style=\"background-color: ${RANK_COLORS[rank]}; white-space:nowrap\">${RANK_NAMES[rank]?.[0]}</div>",
+        "producerLineSha256": "b037edc4b774ed0f4e5bc642d7c1b75fe4883073b91dda2a5f8c5e7f903d9f1d"
+      },
+      "before": "L",
+      "after": "传奇",
+      "consumer": "目标primary列表rank首字母；仅原宏已知颜色tag文本",
+      "terminologyBasis": "PF2E.ProficiencyLevel4；优先当前i18n；不改其他tag",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "未验证：目标primary不是传奇，L槽未触发",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "WB30",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 69,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "e82471f31a648886145e0ec7f476556abcd978ff0be14785bf1e1ee67f318ea3",
+        "producerLineOriginal": "const DOS_LABELS = [\"CrFail\", \"Fail\", \"Suc\", \"CrSuc\"];",
+        "producerLineSha256": "b662e84b9f3a095f8c59f24896efa2121fd6f024af70e3763d08abef3672d0ce"
+      },
+      "before": "CrFail",
+      "after": "大失败",
+      "consumer": "目标primary结果span；含划掉的原结果和调整后结果",
+      "terminologyBasis": "PF2E.Check.Result.Degree.Check.criticalFailure；优先当前i18n；69/322/324行",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "未验证：没有大失败degree分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "WB31",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 69,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "09230b3dbc35635f04595dc627c267a62174ba6435078ab5083dce4252c999a1",
+        "producerLineOriginal": "const DOS_LABELS = [\"CrFail\", \"Fail\", \"Suc\", \"CrSuc\"];",
+        "producerLineSha256": "b662e84b9f3a095f8c59f24896efa2121fd6f024af70e3763d08abef3672d0ce"
+      },
+      "before": "Fail",
+      "after": "失败",
+      "consumer": "目标primary结果span；含划掉的原结果和调整后结果",
+      "terminologyBasis": "PF2E.Check.Result.Degree.Check.failure；优先当前i18n；69/322/324行",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "uptXTyJMG31sVwcG",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": "style=\"color:orange\">失败</span>",
+          "observedValue": "失败",
+          "scope": "DC30列",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "46b2d70b91607e9d8296c307a7c02adf983746aa2d0dd71eb1518505bc304717"
+        }
+      ]
+    },
+    {
+      "id": "WB32",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 69,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "6254577b0c9fc38e36493084301b76a0e325a850ebd0af5cbdf445d9c7c85d3c",
+        "producerLineOriginal": "const DOS_LABELS = [\"CrFail\", \"Fail\", \"Suc\", \"CrSuc\"];",
+        "producerLineSha256": "b662e84b9f3a095f8c59f24896efa2121fd6f024af70e3763d08abef3672d0ce"
+      },
+      "before": "Suc",
+      "after": "成功",
+      "consumer": "目标primary结果span；含划掉的原结果和调整后结果",
+      "terminologyBasis": "PF2E.Check.Result.Degree.Check.success；优先当前i18n；69/322/324行",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "uptXTyJMG31sVwcG",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": "style=\"color:royalblue\">成功</span>",
+          "observedValue": "成功",
+          "scope": "DC20/22/25列，不外推critical分支",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "46b2d70b91607e9d8296c307a7c02adf983746aa2d0dd71eb1518505bc304717"
+        }
+      ]
+    },
+    {
+      "id": "WB33",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 69,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "1cb9d62e4fce2e6246745e7c39a92159559ae727e5448ad8f9fb24a5fdebc1de",
+        "producerLineOriginal": "const DOS_LABELS = [\"CrFail\", \"Fail\", \"Suc\", \"CrSuc\"];",
+        "producerLineSha256": "b662e84b9f3a095f8c59f24896efa2121fd6f024af70e3763d08abef3672d0ce"
+      },
+      "before": "CrSuc",
+      "after": "大成功",
+      "consumer": "目标primary结果span；含划掉的原结果和调整后结果",
+      "terminologyBasis": "PF2E.Check.Result.Degree.Check.criticalSuccess；优先当前i18n；69/322/324行",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "未验证：没有大成功degree分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "WB34",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 363,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "d8fb60cba19cb031366ee885ac65930da9ce719e59167162c0c612f47de1f545",
+        "producerLineOriginal": "            output += `<p>${token?.name ?? actor.name} has @UUID[Compendium.${system === \"sf2e\" ? \"sf2e.feats\": \"pf2e.feats-srd\"}.Item.1Bt7uCW2WI4sM84P]</p>`;",
+        "producerLineSha256": "a308eedc7586f98490cbc650ee265476aef62405b9c269f9cffda5f53a222504"
+      },
+      "before": "${token?.name ?? actor.name} has @UUID[Compendium.pf2e.feats-srd.Item.1Bt7uCW2WI4sM84P]",
+      "after": "${token?.name ?? actor.name}拥有@UUID[Compendium.pf2e.feats-srd.Item.1Bt7uCW2WI4sM84P]",
+      "consumer": "Dubious Knowledge动态能力提示；原UUID及名称原样",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "未验证：未触发Dubious Knowledge提示",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "WB35",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 366,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "325d192e16ce7834513a74efe143e43b645338e8903316457c153984e047c983",
+        "producerLineOriginal": "            output += `<p>${token?.name ?? actor.name} has @UUID[Compendium.${system === \"sf2e\" ? \"sf2e.feats\": \"pf2e.feats-srd\"}.Item.XvX1EyxWbbBF32NV]</p>`;",
+        "producerLineSha256": "b76bb9f23d0b19aa17beb4c27ad991655033492f07f72c2ae99b211ec2520b9d"
+      },
+      "before": "${token?.name ?? actor.name} has @UUID[Compendium.pf2e.feats-srd.Item.XvX1EyxWbbBF32NV]",
+      "after": "${token?.name ?? actor.name}拥有@UUID[Compendium.pf2e.feats-srd.Item.XvX1EyxWbbBF32NV]",
+      "consumer": "Unmistakable Lore动态能力提示；原UUID及名称原样",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "未验证：未触发Unmistakable Lore提示",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "WB36",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 397,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "c86ad29f70e72a70e46aefabc574bbfcd04ff92f8a328253c3b73ffccbd2bfe1",
+        "producerLineOriginal": "ui.notifications.info(`${token?.name ?? actor.name} tries to remember if they've heard something related to this.`);",
+        "producerLineSha256": "201ee1b7f04b098da409f0b014caa19a2b2ca0eb13f4c0cfda7f0347129c36e2"
+      },
+      "before": "${name} tries to remember if they've heard something related to this.",
+      "after": "${name}尝试回忆相关知识。",
+      "consumer": "原宏ui.notifications.info；只认此次actor/token确切名称",
+      "terminologyBasis": "局部标签翻译；规则数值及条件没有改写",
+      "classification": "通过",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "未验证：报告没有记录ui.notifications.info内容",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "WB37",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 324,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "a06dc9bf5f061ddbb75a17654ae96e205fc7b54a8b83a234f34c8c8bba0a2d55",
+        "producerLineOriginal": "                     <span style=\"color:${DOS_COLORS[successAdj]}\" data-tooltip=\"${labelAdj}\">${DOS_LABELS[successAdj]}</span>`;",
+        "producerLineSha256": "5fecd32644818fbd7038417c7547d0504cc1310ab655ac38f48441cd7c2fa256"
+      },
+      "before": "${labelAdj}",
+      "after": "当前原生已汉化规则名称；自定义未知文本原样",
+      "consumer": "data-tooltip属性",
+      "terminologyBasis": "复用Native DoS调整项label；原HTML属性逐字冻结，不把未知规则英文猜译",
+      "classification": "复用",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "未验证：实际HTML没有data-tooltip调整结果分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "WB38",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 137,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "484543e62b6fcb4d0a93f436e6a30b3400e90a6793aaa0b5e2ffc392c8bfffc4",
+        "producerLineOriginal": "        label: skill.label,",
+        "producerLineSha256": "10591469c51fb49ac0fb9b25986f54d221a1b472db494102c4055e983446c24b"
+      },
+      "before": "${skill.label}",
+      "after": "当前原生技能标签；标准七技能未译时按已证实pf2_cn键补显示，Lore自定义名原样",
+      "consumer": "原宏技能行名称/固定驾轻就熟结果技能名称",
+      "terminologyBasis": "PF2E.SkillArcana/Crafting/Medicine/Nature/Occultism/Religion/Society，社群依据PF2E.SkillSociety",
+      "classification": "复用",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "24Oo3zJXUHm6STVX",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": ">社群</th>",
+          "observedValue": [
+            "奥法",
+            "手艺",
+            "医疗",
+            "自然",
+            "神秘",
+            "宗教",
+            "社群"
+          ],
+          "scope": "标准七技能标签；Lore自定义名未测试",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "1ef048859b8ec76307e53aa61011d0459cb92d9cc48f6539f46bb5ece8717d40"
+        },
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-no-target",
+          "commandClient": "player",
+          "cardId": "fLUlmthDjtL7UrnL",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": "<p>社群: 19</p>",
+          "observedValue": "社群",
+          "scope": "固定驾轻就熟技能名",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "c9331c0bc04a3d3f040e97475e1d4c0759e457d037e05ea16271f2f0469f3331"
+        }
+      ]
+    },
+    {
+      "id": "WB39",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 224,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "22b71d0c7b0edd3a61144e1a85c17b8d99da5c6259ec4a5c3ac5630c88ce7058",
+        "producerLineOriginal": "    const modHtml = ({label, signedValue, source}) => `<tr><td ${tdStyle}>@UUID[${source}]{${label}}</a></td><td ${tdStyle}>${signedValue}</td></tr>`;",
+        "producerLineSha256": "986cfb53edc78cef752d51d435a119877033081223dbe212fc6f70bca8b369a1"
+      },
+      "before": "${modifier.label}",
+      "after": "原生规则及效果已有译名原样",
+      "consumer": "Potential Modifiers/原生breakdown显示项名称",
+      "terminologyBasis": "Native Modifier.label由已汉化原生文档提供；不改未知自定义名或规则",
+      "classification": "复用",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "未验证：只见原生breakdown标签；Potential Modifiers表为空，规则/效果label与链接未命中",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [],
+      "nativePartialEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "24Oo3zJXUHm6STVX",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": "data-slug=\"int\">智力 +4</span>",
+          "observedValue": [
+            "智力 +4",
+            "感知 +0",
+            "未受训 +0",
+            "专家 +9"
+          ],
+          "scope": "只有breakdown通用原生标签；潜在规则/效果/UUID仍未验证",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "1ef048859b8ec76307e53aa61011d0459cb92d9cc48f6539f46bb5ece8717d40"
+        }
+      ]
+    },
+    {
+      "id": "WB40",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 300,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "192f7767690c659d23cf3451ebe15154afdb9340ebe64ca998703085047c173d",
+        "producerLineOriginal": "            if (skill === \"arcana\" && uT) label = actor.itemTypes.feat.find(i => i.slug === 'unified-theory').name;",
+        "producerLineSha256": "d9fc1a6222c2aa2e570c57a42385543a51aaa18ad465f1e4d92032fe2b97a126"
+      },
+      "before": "actor.itemTypes.feat.find(i => i.slug === 'unified-theory').name",
+      "after": "同原生专长文档现有名称原样",
+      "consumer": "Unified Theory替代奥法技能行名称",
+      "terminologyBasis": "复用Babele实际名称；英文尾部完整性须在原生载体验收，局部adapter不猜译",
+      "classification": "复用",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "未验证：未触发Unified Theory名称",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "WB41",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 264,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "2a070a7be035347513b2f1a52332b21d98ffac46b12d7e8f4d00dc31df3480a3",
+        "producerLineOriginal": "        output += `<br/><strong>vs. ${targetActor.name}</strong>`;",
+        "producerLineSha256": "f362bf47ee9935a4ca90321679394c5cc1848fb24197da891bef8f22c69484ca"
+      },
+      "before": "actor.name / token.name / targetActor.name",
+      "after": "保留用户及世界自定义名称",
+      "consumer": "标题/目标/提示中的名字动态生产槽",
+      "terminologyBasis": "v3已有世界覆盖授权外；用户自定义名称默认保护",
+      "classification": "不适用",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "不适用（译文）；actual Player renderHTML另核秘密结果不可见",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "WB42",
+      "producer": "Workbench 7.7.5 exact native macro",
+      "source": {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+        "line": 224,
+        "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3",
+        "valueSha256": "f1539a3be0f4c45574ecf3c5b02a0810338d9ede51dc85d87fe608e773737ab8",
+        "producerLineOriginal": "    const modHtml = ({label, signedValue, source}) => `<tr><td ${tdStyle}>@UUID[${source}]{${label}}</a></td><td ${tdStyle}>${signedValue}</td></tr>`;",
+        "producerLineSha256": "986cfb53edc78cef752d51d435a119877033081223dbe212fc6f70bca8b369a1"
+      },
+      "before": "@UUID[${source}]{${label}}",
+      "after": "原UUID目标和已译Native Modifier.label原样",
+      "consumer": "Potential Modifiers富文本UUID显示标签",
+      "terminologyBasis": "只改周边标题；不改UUID/属性/链接目标",
+      "classification": "复用",
+      "static": "已逐项读源及译文",
+      "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
+      "native": "未验证：Potential Modifiers表为空，没有modifier UUID链接",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "K01",
+      "producer": "pf2e-third-party-automation scoped RK UI",
+      "source": {
+        "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-workbench.mjs",
+        "baseline": "f45338970afec79e956f3685175758c784f9e098",
+        "baselineFileSha256": "47cd82a24fed60734f9f5dc9d704721fbde7b53e69256256d1aa91a129bc532a",
+        "baselineLine": 98,
+        "currentLine": 102,
+        "valueSha256": "118e1a975c03c26749b15dec1b3c3c78784c0cd3036d44a5e08db49879b191b1",
+        "producerLineOriginal": "  created=await BaseMessages.create({content:'<strong>Recall Knowledge</strong>',rolls:[],user:user.id,author:user.id,speaker:Messages.getSpeaker(),blind:true,whisper:BaseMessages.getWhisperRecipients('GM').map(u=>u.id),flags:{pf2e:{context:{type:'skill-check',options:['action:recall-knowledge','secret'],traits:['concentrate','secret']}},[MODULE_ID]:{workbenchRecall:reservation}}});",
+        "producerLineSha256": "745820412e8107f9a1ed1f42b3b6b84a6944a87c12ab29ea002a704683e38c6c"
+      },
+      "before": "<strong>Recall Knowledge</strong>",
+      "after": "<strong>回忆知识</strong>",
+      "consumer": "普通RK投骰前reservation标题",
+      "terminologyBasis": "自有通知/标签纯中文；Assurance用pf2e.feats-srd同源旧译驾轻就熟",
+      "classification": "通过",
+      "static": "已逐项读before/after，数据键及分支未改",
+      "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
+      "native": "未验证：只有最终普通卡，未捕获rolling reservation标题",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "K02",
+      "producer": "pf2e-third-party-automation scoped RK UI",
+      "source": {
+        "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-workbench.mjs",
+        "baseline": "f45338970afec79e956f3685175758c784f9e098",
+        "baselineFileSha256": "47cd82a24fed60734f9f5dc9d704721fbde7b53e69256256d1aa91a129bc532a",
+        "baselineLine": 69,
+        "currentLine": 72,
+        "valueSha256": "686d4305adc12f8a773222dc698fd1a7398403abfc3a3d2fdd502f5bec1c1a97",
+        "producerLineOriginal": "  created=await BaseMessages.create({content:'<strong>Recall Knowledge — Assurance</strong>',rolls:[],user:user.id,author:user.id,speaker:Messages.getSpeaker(),blind:true,whisper:BaseMessages.getWhisperRecipients('GM').map(u=>u.id),flags:{pf2e:{context:{type:'skill-check',options:extraRollOptions,traits:['concentrate','secret']}},[MODULE_ID]:{workbenchRecall:{schema:1,requestId,actorUuid:actor.uuid,tokenUuid:tokenDocument.uuid,userId:user.id,targetUuids:targets.map(t=>t.uuid),targetActors,origin,statistic,assurance:assuranceApplied,assuranceRequested:true,die:null,candidates:[],status:'rolling'}}}});",
+        "producerLineSha256": "784162d0721f91d8b2e22d55f7899c4e0b8e8a12842497c07f446c3892bcbb2b"
+      },
+      "before": "<strong>Recall Knowledge — Assurance</strong>",
+      "after": "<strong>回忆知识 — 驾轻就熟</strong>",
+      "consumer": "驾轻就熟投骰前reservation标题",
+      "terminologyBasis": "自有通知/标签纯中文；Assurance用pf2e.feats-srd同源旧译驾轻就熟",
+      "classification": "通过",
+      "static": "已逐项读before/after，数据键及分支未改",
+      "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
+      "native": "未验证：只有最终固定卡，未捕获rolling reservation标题",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "K03",
+      "producer": "pf2e-third-party-automation scoped RK UI",
+      "source": {
+        "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-workbench.mjs",
+        "baseline": "f45338970afec79e956f3685175758c784f9e098",
+        "baselineFileSha256": "47cd82a24fed60734f9f5dc9d704721fbde7b53e69256256d1aa91a129bc532a",
+        "baselineLine": 80,
+        "currentLine": 83,
+        "valueSha256": "11bb19259d8858e82ef53102cee798874d8d07fcc96fa6868024f3df21a49716",
+        "producerLineOriginal": "  await Messages.create({content:`<strong>Recall Knowledge — ${conflict?'Assurance 与厄运抵消：原生普通检定':'Assurance'}</strong><p>${escape(skill.label??statistic)}: ${primaryRoll.total}</p>`,rolls:[rawRoll],flags:{pf2e:{context:{type:'skill-check',options:['action:recall-knowledge','secret',...(assuranceApplied?['assurance']:[])],traits:['concentrate','secret'],rollMode:'blindroll',target:targets.length===1?{token:targets[0].uuid,actor:targets[0].actor.uuid}:undefined}}}});",
+        "producerLineSha256": "7d9b0db4666015916d7db6845a81c742b82cc044e380421aac8683f538db81aa"
+      },
+      "before": "Recall Knowledge — ${conflict?",
+      "after": "回忆知识 — 驾轻就熟",
+      "consumer": "驾轻就熟固定10最终标题；技能名复用WB38",
+      "terminologyBasis": "自有通知/标签纯中文；Assurance用pf2e.feats-srd同源旧译驾轻就熟",
+      "classification": "通过",
+      "static": "已逐项读before/after，数据键及分支未改",
+      "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
+      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+          "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+          "attemptId": 1790743642388,
+          "commandId": "rk-cn-no-target",
+          "commandClient": "player",
+          "cardId": "fLUlmthDjtL7UrnL",
+          "evidenceType": "persisted native ChatMessage.content rawHTML",
+          "slot": "<strong>回忆知识 — 驾轻就熟</strong>",
+          "observedValue": "回忆知识 — 驾轻就熟",
+          "scope": "最终固定10结果标题；未捕获reservation中间标题",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "c9331c0bc04a3d3f040e97475e1d4c0759e457d037e05ea16271f2f0469f3331"
+        }
+      ]
+    },
+    {
+      "id": "K04",
+      "producer": "pf2e-third-party-automation scoped RK UI",
+      "source": {
+        "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-workbench.mjs",
+        "baseline": "f45338970afec79e956f3685175758c784f9e098",
+        "baselineFileSha256": "47cd82a24fed60734f9f5dc9d704721fbde7b53e69256256d1aa91a129bc532a",
+        "baselineLine": 80,
+        "currentLine": 83,
+        "valueSha256": "d4a9831ec717841f020a6fb8b76d7a3e28a8ed4fe57160ab0f8658fd67e5f1b7",
+        "producerLineOriginal": "  await Messages.create({content:`<strong>Recall Knowledge — ${conflict?'Assurance 与厄运抵消：原生普通检定':'Assurance'}</strong><p>${escape(skill.label??statistic)}: ${primaryRoll.total}</p>`,rolls:[rawRoll],flags:{pf2e:{context:{type:'skill-check',options:['action:recall-knowledge','secret',...(assuranceApplied?['assurance']:[])],traits:['concentrate','secret'],rollMode:'blindroll',target:targets.length===1?{token:targets[0].uuid,actor:targets[0].actor.uuid}:undefined}}}});",
+        "producerLineSha256": "7d9b0db4666015916d7db6845a81c742b82cc044e380421aac8683f538db81aa"
+      },
+      "before": "Assurance 与厄运抵消：原生普通检定",
+      "after": "驾轻就熟与厄运抵消：原生普通检定",
+      "consumer": "fortune/misfortune抵消后的最终标题；未声称固定10",
+      "terminologyBasis": "自有通知/标签纯中文；Assurance用pf2e.feats-srd同源旧译驾轻就熟",
+      "classification": "通过",
+      "static": "已逐项读before/after，数据键及分支未改",
+      "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
+      "native": "未验证：未触发本轮中文厄运抵消分支",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "K05",
+      "producer": "pf2e-third-party-automation scoped RK UI",
+      "source": {
+        "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-workbench.mjs",
+        "baseline": "f45338970afec79e956f3685175758c784f9e098",
+        "baselineFileSha256": "47cd82a24fed60734f9f5dc9d704721fbde7b53e69256256d1aa91a129bc532a",
+        "baselineLine": 33,
+        "currentLine": 34,
+        "valueSha256": "c37a3c308eb460a51f0694499e9037c623e424aacb2338f309a008e202a165db",
+        "producerLineOriginal": " authorization(game,actor,user);if(!requestId||typeof requestId!=='string')throw Error('回忆知识缺少操作来源。');if(assurance&&(!statistic||actor.skills?.[statistic]?.rank<1||!hasSkillAssurance(actor,statistic)))throw Error('Assurance 必须具有对应专长并保留指定技能。');",
+        "producerLineSha256": "e7724aa4420c0646656399591d29934110e678514ed1e46653cdc852f16c1cc3"
+      },
+      "before": "Assurance 必须具有对应专长并保留指定技能。",
+      "after": "驾轻就熟必须具有对应专长并保留指定技能。",
+      "consumer": "约束错误经controller/onError/main.report显示",
+      "terminologyBasis": "自有通知/标签纯中文；Assurance用pf2e.feats-srd同源旧译驾轻就熟",
+      "classification": "通过",
+      "static": "已逐项读before/after，数据键及分支未改",
+      "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
+      "native": "未验证：未触发缺少对应驾轻就熟专长错误",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "K06",
+      "producer": "pf2e-third-party-automation scoped RK UI",
+      "source": {
+        "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-workbench.mjs",
+        "baseline": "f45338970afec79e956f3685175758c784f9e098",
+        "baselineFileSha256": "47cd82a24fed60734f9f5dc9d704721fbde7b53e69256256d1aa91a129bc532a",
+        "baselineLine": 67,
+        "currentLine": 70,
+        "valueSha256": "81c3f4c180c9745185913814b16f50db23986480452a5bcd767c7d22c6124a68",
+        "producerLineOriginal": "  const assuranceCheck=new game.pf2e.CheckModifier(statistic,{modifiers:proficiencyModifiers}),proficiency=assuranceCheck.totalModifier;if(!Number.isFinite(proficiency))throw Error('Assurance 熟练加值不可用。');if(!conflict)receipt.check=assuranceCheck;",
+        "producerLineSha256": "9546e73ac3d3d612240b1b8267e77a372a947f966cd104bd6657fef6c4d9c979"
+      },
+      "before": "Assurance 熟练加值不可用。",
+      "after": "驾轻就熟的熟练加值不可用。",
+      "consumer": "原生熟练值错误通知",
+      "terminologyBasis": "自有通知/标签纯中文；Assurance用pf2e.feats-srd同源旧译驾轻就熟",
+      "classification": "通过",
+      "static": "已逐项读before/after，数据键及分支未改",
+      "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
+      "native": "未验证：未触发熟练值不可用错误",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "K07",
+      "producer": "pf2e-third-party-automation scoped RK UI",
+      "source": {
+        "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-workbench.mjs",
+        "baseline": "f45338970afec79e956f3685175758c784f9e098",
+        "baselineFileSha256": "47cd82a24fed60734f9f5dc9d704721fbde7b53e69256256d1aa91a129bc532a",
+        "baselineLine": 76,
+        "currentLine": 79,
+        "valueSha256": "de4acf06dc762d6d2a8865fc19667b3dfae7520658b6712452f15c4b0fbffaee",
+        "producerLineOriginal": "   if(!conflict&&(roll.dice.length||roll.total!==10+proficiency||roll.options.totalModifier!==proficiency))throw Error('原生 Assurance 未保留 10 加熟练值规则。');",
+        "producerLineSha256": "87213d8b2f89b54e69c3eb4a902548d2a5d9350bde5f6fe6c1cf14e036138cda"
+      },
+      "before": "原生 Assurance 未保留 10 加熟练值规则。",
+      "after": "原生驾轻就熟未保留 10 加熟练值规则。",
+      "consumer": "实际native fixed-result校验错误",
+      "terminologyBasis": "自有通知/标签纯中文；Assurance用pf2e.feats-srd同源旧译驾轻就熟",
+      "classification": "通过",
+      "static": "已逐项读before/after，数据键及分支未改",
+      "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
+      "native": "未验证：未触发固定规则guard错误",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "K08",
+      "producer": "pf2e-third-party-automation scoped RK UI",
+      "source": {
+        "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-workbench.mjs",
+        "baseline": "f45338970afec79e956f3685175758c784f9e098",
+        "baselineFileSha256": "47cd82a24fed60734f9f5dc9d704721fbde7b53e69256256d1aa91a129bc532a",
+        "baselineLine": 79,
+        "currentLine": 82,
+        "valueSha256": "c50911c66b75e2ef851c5ab291cde625ca179a379989c2f0a7f3d94971c3f53f",
+        "producerLineOriginal": "  if(!primaryRoll||!rawRoll)throw Error('原生 Assurance 检定未完成；已保存操作不会重复执行。');",
+        "producerLineSha256": "dda50376992819890531a67b5a41bc8f40b1b66c409dc34b688c2d15528c4c0b"
+      },
+      "before": "原生 Assurance 检定未完成；已保存操作不会重复执行。",
+      "after": "原生驾轻就熟检定未完成；已保存操作不会重复执行。",
+      "consumer": "原生操作未完成通知",
+      "terminologyBasis": "自有通知/标签纯中文；Assurance用pf2e.feats-srd同源旧译驾轻就熟",
+      "classification": "通过",
+      "static": "已逐项读before/after，数据键及分支未改",
+      "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
+      "native": "未验证：未触发原生检定未完成错误",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "K09",
+      "producer": "pf2e-third-party-automation scoped RK UI",
+      "source": {
+        "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-workbench.mjs",
+        "baseline": "f45338970afec79e956f3685175758c784f9e098",
+        "baselineFileSha256": "47cd82a24fed60734f9f5dc9d704721fbde7b53e69256256d1aa91a129bc532a",
+        "baselineLine": 71,
+        "currentLine": 74,
+        "valueSha256": "ad64abd18aaa0aecc9a5b5fdbf75688552ff331f8e227401774b20037b0a88ef",
+        "producerLineOriginal": "  receipt.primaryContext={...receipt.context,options:primaryOptions,createMessage:false,skipDialog:true,messageMode:'blind',traits:['concentrate','secret'],dc:Number.isFinite(primaryDC)?{value:primaryDC,visible:false}:null,rollTwice:false,substitutions:[{slug:'assurance',label:'Assurance',value:10,required:true,selected:true,effectType:'fortune'}]};",
+        "producerLineSha256": "ec40163c72b9713f01ebedc7e7e1b54cd205b0272b1814370bf938210aaa9a63"
+      },
+      "before": "label:'Assurance'",
+      "after": "label:'驾轻就熟'",
+      "consumer": "真实native substitution显示label；slug/value/effectType/selected/required全部冻结",
+      "terminologyBasis": "自有通知/标签纯中文；Assurance用pf2e.feats-srd同源旧译驾轻就熟",
+      "classification": "通过",
+      "static": "已逐项读before/after，数据键及分支未改",
+      "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
+      "native": "未验证：报告未记native substitution.label；最终标题不能代验",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "K10",
+      "producer": "pf2e-third-party-automation scoped RK UI",
+      "source": {
+        "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-workbench.mjs",
+        "baseline": "f45338970afec79e956f3685175758c784f9e098",
+        "baselineFileSha256": "47cd82a24fed60734f9f5dc9d704721fbde7b53e69256256d1aa91a129bc532a",
+        "baselineLine": 66,
+        "currentLine": 69,
+        "valueSha256": "22a9d429885c0524b301727f448f0db7785f421568224570ff67b99acce791b9",
+        "producerLineOriginal": "  const proficiencyModifiers=(skill.modifiers??[]).filter(modifier=>modifier.type==='proficiency'&&!modifier.ignored).map(modifier=>new game.pf2e.Modifier({slug:modifier.slug??'proficiency',label:modifier.label??'Proficiency',modifier:modifier.modifier,type:'proficiency',rule:modifier.rule,predicate:[],adjustments:[]}));",
+        "producerLineSha256": "8f2bcd3f33a655e6ef4aa705e50df8a128c0b5c2116e0e3208e5b7d220ae70ae"
+      },
+      "before": "modifier.label??'Proficiency'",
+      "after": "modifier.label??knowledgeProficiencyLabel(game)",
+      "consumer": "熟练modifier缺label时的局部默认显示",
+      "terminologyBasis": "PF2E.ProficiencyLabel=熟练，英文locale保留原生英文",
+      "classification": "通过",
+      "static": "已逐项读before/after，数据键及分支未改",
+      "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
+      "native": "未验证：未触发modifier.label缺失时的默认熟练标签",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "K11",
+      "producer": "pf2e-third-party-automation scoped RK UI",
+      "source": {
+        "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-automatic.mjs",
+        "baseline": "f45338970afec79e956f3685175758c784f9e098",
+        "baselineFileSha256": "fbf10b8b298fc44f28bb7f3445a5c9a589d87010a2c7181c4369fb6e83c2b3c5",
+        "baselineLine": 15,
+        "currentLine": 15,
+        "valueSha256": "0b2ca8a33dad06c9db877bbb1ca93b036ce3b6f5bebb1d3e6ea7c8acd78e6b7f",
+        "producerLineOriginal": " if(selected&&!choices.some(c=>c.value===selected))throw Error('耳熟能详的固定技能必须为专家以上且具有相应 Assurance。');",
+        "producerLineSha256": "f9dbe3ba9d76cfd9c04cc57c169de8ab0a0b28618a6d07d2242eeff5f34d5856"
+      },
+      "before": "耳熟能详的固定技能必须为专家以上且具有相应 Assurance。",
+      "after": "耳熟能详的固定技能必须为专家以上且具有相应驾轻就熟。",
+      "consumer": "自动技能配置错误",
+      "terminologyBasis": "自有通知/标签纯中文；Assurance用pf2e.feats-srd同源旧译驾轻就熟",
+      "classification": "通过",
+      "static": "已逐项读before/after，数据键及分支未改",
+      "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
+      "native": "未验证：未触发Automatic Knowledge选项约束错误",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "K12",
+      "producer": "pf2e-third-party-automation scoped RK UI",
+      "source": {
+        "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-automation.mjs",
+        "baseline": "f45338970afec79e956f3685175758c784f9e098",
+        "baselineFileSha256": "9e24c7c4be049f1e2d838f63750a003f2c6f33048820bbff782f2739c7fbadff",
+        "baselineLine": 257,
+        "currentLine": 258,
+        "valueSha256": "3c3f6f42227af850cd200df281caa4140966e7c3dbcd3fa47aaeae6031080ed0",
+        "producerLineOriginal": "     const fixed=automaticKnowledgeChoices(actor,item);if(!fixed.choices.length)throw Error('耳熟能详需要专家以上、已拥有相应 Assurance 的固定技能。');",
+        "producerLineSha256": "7387565112c65ab190a0e3315539bab82b8aaa173699eb315e8a69ab04c8472c"
+      },
+      "before": "耳熟能详需要专家以上、已拥有相应 Assurance 的固定技能。",
+      "after": "耳熟能详需要专家以上、已拥有相应驾轻就熟的固定技能。",
+      "consumer": "Automatic Knowledge actual-use资格通知",
+      "terminologyBasis": "自有通知/标签纯中文；Assurance用pf2e.feats-srd同源旧译驾轻就熟",
+      "classification": "通过",
+      "static": "已逐项读before/after，数据键及分支未改",
+      "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
+      "native": "未验证：未触发Automatic Knowledge固定技能约束错误",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "K13",
+      "producer": "pf2e-third-party-automation scoped RK UI",
+      "source": {
+        "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-automation.mjs",
+        "baseline": "f45338970afec79e956f3685175758c784f9e098",
+        "baselineFileSha256": "9e24c7c4be049f1e2d838f63750a003f2c6f33048820bbff782f2739c7fbadff",
+        "baselineLine": 265,
+        "currentLine": 266,
+        "valueSha256": "41d98904c903e704e5c9565126e2ecf19fe657df213f94477b23ec27c8033e18",
+        "producerLineOriginal": "    await recall(ctx,targets.length===1?targets[0]:null,{...constraint,targetUuids:targets.map(t=>t.uuid)});return action==='knowledge:automatic'?'已用固定技能的 Assurance 进行耳熟能详。':'本次回忆知识已处理。';",
+        "producerLineSha256": "bce89c9535e85cd8c6b72b73ea4b723271cb260a3ad31af39e04d4a689c1add5"
+      },
+      "before": "已用固定技能的 Assurance 进行耳熟能详。",
+      "after": "已用固定技能的驾轻就熟进行耳熟能详。",
+      "consumer": "Automatic Knowledge actual-use完成通知",
+      "terminologyBasis": "自有通知/标签纯中文；Assurance用pf2e.feats-srd同源旧译驾轻就熟",
+      "classification": "通过",
+      "static": "已逐项读before/after，数据键及分支未改",
+      "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
+      "native": "未验证：本次为native action.use固定Assurance参数，不是Automatic Knowledge专用能力结果",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "K14",
+      "producer": "pf2e-third-party-automation scoped RK UI",
+      "source": {
+        "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-automation.mjs",
+        "baseline": "f45338970afec79e956f3685175758c784f9e098",
+        "baselineFileSha256": "9e24c7c4be049f1e2d838f63750a003f2c6f33048820bbff782f2739c7fbadff",
+        "baselineLine": 269,
+        "currentLine": 270,
+        "valueSha256": "caa3648666409400c0d4d269aa5210fa86250a8227a71a244cdb01b5062ad3f4",
+        "producerLineOriginal": "    const choices=[{value:'society',label:'社会 Society'},...values(actor.itemTypes?.lore).filter(i=>i.slug==='warfare-lore').map(i=>({value:i.slug,label:i.name}))];",
+        "producerLineSha256": "48d95f1cd66e2ee8d981df934dbcb8b71a2ce28a7fa320f759b05787319845dc"
+      },
+      "before": "label:'社会 Society'",
+      "after": "label:当前原生社群标签",
+      "consumer": "军师架势固定选择社群技能label",
+      "terminologyBasis": "PF2E.SkillSociety=社群；不改society选择值及Lore自定义名",
+      "classification": "通过",
+      "static": "已逐项读before/after，数据键及分支未改",
+      "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
+      "native": "未验证：未打开社群选择UI；宏技能行不能代验",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    },
+    {
+      "id": "K15",
+      "producer": "pf2e-third-party-automation scoped RK UI",
+      "source": {
+        "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-automation.mjs",
+        "baseline": "f45338970afec79e956f3685175758c784f9e098",
+        "baselineFileSha256": "9e24c7c4be049f1e2d838f63750a003f2c6f33048820bbff782f2739c7fbadff",
+        "baselineLine": 43,
+        "currentLine": 44,
+        "valueSha256": "4930e1239c07245363caa71f2619eb6036588bbee980653df95b2e0bbd1e7772",
+        "producerLineOriginal": " return {type:'effect',name:'军师架势：下一次攻击',img:'icons/sundries/gaming/chess-knight-white-glass.webp',system:{description:{value:''},level:{value:1},traits:{value:[]},duration:{unit:'unlimited',value:-1,expiry:null,sustained:false},tokenIcon:{show:false},rules:[",
+        "producerLineSha256": "0901fce534a6ee5a2f5de42d0c0070ab2abbf5ee02bbb4de5501b8eefcd6ece2"
+      },
+      "before": "name:'军师架势：下一次攻击'",
+      "after": "name:'军师架势：下一次攻击'",
+      "originalEnglish": null,
+      "consumer": "自建效果文档名称",
+      "terminologyBasis": "已有实现遗留；没有该自建文档自身完整英文原名，不能从Strategist Stance猜造英文尾部",
+      "classification": "未验证",
+      "static": "当前中文名称已读；自身完整英文原名没有证据",
+      "controlled": "无翻译改动",
+      "native": "未验证：缺少自身完整英文原名，本轮保持旧名；未触发该效果",
+      "independentReview": "待root逐项复核",
+      "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
+      "nativeEvidence": []
+    }
+  ]
+}

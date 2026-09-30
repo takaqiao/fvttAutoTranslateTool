@@ -4,7 +4,7 @@ const clone=value=>structuredClone(value);
 /** Preserve the native publication object while taking PF2e's evaluated outcome
  * arithmetic. Dice and modifiers have already been evaluated exactly once. */
 export function applyNativeOutcomeInPlace(roll,multiplier){
- if(!roll?._evaluated||typeof roll.alter!=='function')throw Error('An evaluated native damage roll is required.');
+ if(!roll?._evaluated||typeof roll.alter!=='function')throw Error('需要已经投掷的原生伤害骰。');
  const replacement=roll.alter(multiplier,0);
  for(const key of ['terms','_formula','_total','_dice','_evaluated','options'])roll[key]=replacement[key];
  return roll;
@@ -66,11 +66,11 @@ function mergeCompatible(instances){
  * verified native adapter. No actor/item or previous instance object is mutated.
  */
 export function convertSiphonRoll(roll,{DamageRoll=globalThis.CONFIG?.Dice?.rolls?.find(C=>C.name==='DamageRoll'),rejectMixedPartitions=false}={}){
- if(typeof DamageRoll!=='function'||!(roll instanceof DamageRoll)||roll._evaluated!==true||!roll.pool||!Array.isArray(roll.instances)||!roll.instances.length)throw Error('Siphoning requires an evaluated native DamageRoll with instances.');
+ if(typeof DamageRoll!=='function'||!(roll instanceof DamageRoll)||roll._evaluated!==true||!roll.pool||!Array.isArray(roll.instances)||!roll.instances.length)throw Error('虹吸需要已经投掷且包含伤害分组的原生伤害骰。');
  if(roll.options?.[MODULE_ID]?.[MARKER]?.version===1)return roll;
  const original=roll.instances;
  const converted=mergeCompatible(original.filter(i=>!i.persistent&&i.kinds.has('damage')).map(convertedInstance));
- if(rejectMixedPartitions&&converted.length>1)throw Error('Siphoning mixed material/metadata partitions require manual resolution; no roll was changed.');
+ if(rejectMixedPartitions&&converted.length>1)throw Error('虹吸遇到不同材质或元数据的混合伤害分组时须手动结算；未修改伤害骰。');
  if(converted.length===0){
   converted.push(original[0].constructor.fromData({class:'DamageInstance',formula:'0',options:{flavor:'untyped,damage'},terms:[{class:'NumericTerm',number:0,evaluated:true}],total:0,evaluated:true}));
  }
@@ -78,7 +78,7 @@ export function convertSiphonRoll(roll,{DamageRoll=globalThis.CONFIG?.Dice?.roll
  options[MODULE_ID]={...options[MODULE_ID],[MARKER]:{version:1}};
  const pool=roll.pool.constructor.fromRolls(converted);
  const replacement=DamageRoll.fromTerms([pool],options);
- if(!replacement._evaluated||replacement.instances.some(i=>i.type!=='untyped'||i.persistent||i.kinds.has('healing')))throw Error('Native Siphoning conversion produced an invalid damage roll.');
+ if(!replacement._evaluated||replacement.instances.some(i=>i.type!=='untyped'||i.persistent||i.kinds.has('healing')))throw Error('原生虹吸转换生成了无效的伤害骰。');
  // Foundry 14 Roll holds evaluated state in these public/protected properties;
  // PF2e's pool/instances/dice/formula getters derive from terms. Rebuild first so
  // constructor failures cannot leave a partially transformed original object.

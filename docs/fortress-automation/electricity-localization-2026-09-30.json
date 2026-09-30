@@ -1,0 +1,1211 @@
+{
+  "schema": 1,
+  "date": "2026-09-30",
+  "scope": "Task 2 electricity visible text and native continuation behavior; original Eldamon package/world untouched",
+  "base": "f45338970afec79e956f3685175758c784f9e098",
+  "inventoryCounts": {
+    "localizedBeforeAfter": 20,
+    "changedExistingChinese": 5,
+    "newChineseFields": 35,
+    "changedRuntimeFiles": 3,
+    "addedRuntimeFiles": 1
+  },
+  "sources": [
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-basic-settlement.mjs",
+      "rawGitSHA256": "d84a173cbe37529d82a182990f0281f6b56819535ee35954a716fd2404847547",
+      "beforeSHA256": "d84a173cbe37529d82a182990f0281f6b56819535ee35954a716fd2404847547",
+      "afterSHA256": "5cc19a14382819177730b4f9cabb2a0c06c02e18affb88b7c3b8e647a2978599"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "rawGitSHA256": "ec5d91511f4273eeb457bd3f447ec32045b6e29450e6faa3e2f02c5f3a1fca8e",
+      "beforeSHA256": "ec5d91511f4273eeb457bd3f447ec32045b6e29450e6faa3e2f02c5f3a1fca8e",
+      "afterSHA256": "1d3a5a42270835319f42829848431224c8ef0bc183a7bc81a1026d88ea4ede9f"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity-provider.mjs",
+      "rawGitSHA256": "0ef8c6e226c25066004426e2db5533fd7be751f89ce569d3ed2e92f108830c48",
+      "beforeSHA256": "0ef8c6e226c25066004426e2db5533fd7be751f89ce569d3ed2e92f108830c48",
+      "afterSHA256": "0b113af6d29ce02e57eba2f17423642bd22d8192920311d908ff793094f39ab4"
+    }
+  ],
+  "fields": [
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "consumer": "notification/error",
+      "before": "Electricity lifecycle requires the active GM.",
+      "after": "电元素结算需要当前主 GM。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        94
+      ],
+      "candidateLines": [
+        143
+      ],
+      "beforeSHA256": "cbc887dba007fd8297502030bb411cd17b2ba34281679885546e32904374b3fd",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "consumer": "notification/error",
+      "before": "Current actor owner permission is required.",
+      "after": "需要当前角色的拥有者权限。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        95
+      ],
+      "candidateLines": [
+        144
+      ],
+      "beforeSHA256": "ef40aa4ea9d381934eda59e794c7068e71d6f82ecee17c286196c544592834a8",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "consumer": "notification/error",
+      "before": "Original committed electricity channel is required.",
+      "after": "需要原本已完成支付的电元素威能使用记录。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        108
+      ],
+      "candidateLines": [
+        157
+      ],
+      "beforeSHA256": "c68aa35d86583410d954ea8200fd415306d5f7d6f869efa6a272c266582bb5a1",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "consumer": "notification/error",
+      "before": "Published electricity effect is unavailable.",
+      "after": "无法取得原始电元素效果，请检查爱达梦规则包。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        112
+      ],
+      "candidateLines": [
+        161
+      ],
+      "beforeSHA256": "f2e5aef79c40fae097df626e567c1fe53ee91f2f15b3378f5b1506b6b1fe0816",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "consumer": "notification/error",
+      "before": "Multiple Charged parents require GM reconciliation.",
+      "after": "存在多个蓄电效果，请由 GM 核对。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        118
+      ],
+      "candidateLines": [
+        167
+      ],
+      "beforeSHA256": "3eec606dcf29841917262f13bfae102409331b3babb6028c9a0904cb2a2dcc04",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "consumer": "notification/error",
+      "before": "Interrupted Charged mutation requires GM reconciliation.",
+      "after": "蓄电变更被中断，请由 GM 核对原操作。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        127
+      ],
+      "candidateLines": [
+        176
+      ],
+      "beforeSHA256": "cfa55e639038f0c640587bcda38e128285e4d8fba5724ed4ccaba070acdccb4a",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "consumer": "notification/error",
+      "before": "Charged changed while its gain was being committed.",
+      "after": "记录蓄电增加时，原蓄电效果发生了变化。请由 GM 核对。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        128
+      ],
+      "candidateLines": [
+        177
+      ],
+      "beforeSHA256": "298b8e0a16c1702cd93933d35f68872f25df5af119ebc880d5dfbaf1226caa6d",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "consumer": "notification/error",
+      "before": "Electricity damage source changed or is not current.",
+      "after": "原电击伤害来源已改变或已失效。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        171
+      ],
+      "candidateLines": [
+        225
+      ],
+      "beforeSHA256": "80ce40e5204bb98d9a5c907175af17ef981fec3db4baaf2b492ef6f7a4bae9f2",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "consumer": "notification/error",
+      "before": "Invalid native electricity application.",
+      "after": "本次原生电击伤害应用记录无效。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        226
+      ],
+      "candidateLines": [
+        333
+      ],
+      "beforeSHA256": "44528d994d73ff897dd6ae77e53feaef59356248fe67df985f8cd328fb3b4e04",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "consumer": "notification/error",
+      "before": "Electricity application nonce was already used.",
+      "after": "本次电击伤害应用已记录，不能重复提交。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        228
+      ],
+      "candidateLines": [
+        335
+      ],
+      "beforeSHA256": "a148f611c52dd5bf9c063d92c97b93d6994c1bca066d62b76c6e86eefb08d1c3",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "consumer": "notification/error",
+      "before": "Electricity application ownership mismatch.",
+      "after": "本次电击伤害应用与原操作者不符。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        234
+      ],
+      "candidateLines": [
+        341
+      ],
+      "beforeSHA256": "501e78d26a1074bfd4edfe0584c84337dae890e2ac630882ae56e0d178fa7557",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "consumer": "notification/error",
+      "before": "Exactly one authentic native electricity receipt is required.",
+      "after": "需要唯一且可核验的原生电击伤害应用回执。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        237
+      ],
+      "candidateLines": [
+        345
+      ],
+      "beforeSHA256": "66c277362d768f00710cc6a16301e16958de19006e6b62ba4671459a09a016fe",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "consumer": "notification/error",
+      "before": "Only the active GM can attribute mixed electricity damage.",
+      "after": "混合伤害的电击分量只能由当前主 GM 确认。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        247
+      ],
+      "candidateLines": [
+        355
+      ],
+      "beforeSHA256": "51ba41af428ab3ee435c90706e52860b076ac91d1654d05a6ab759935cff1bbc",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "consumer": "notification/error",
+      "before": "Confirm an exact electricity amount for this recorded mixed receipt.",
+      "after": "请为这张原混合伤害回执确认实际电击分量。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        250
+      ],
+      "candidateLines": [
+        358
+      ],
+      "beforeSHA256": "b84a09932992bf5737fd05b29e8985be4e6fab4f836cb693e2ec8c88cc76f61c",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "consumer": "notification/error",
+      "before": "Electricity amount cannot exceed the actual native total.",
+      "after": "电击分量不能超过本次原生实际伤害总量。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        252
+      ],
+      "candidateLines": [
+        360
+      ],
+      "beforeSHA256": "7e99f9a321542cae96b4a4ff128b6298b93a7765454651c9e4c392100fa568a7",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "consumer": "notification/error",
+      "before": "Reactive Chain requires a current source-bound electricity receipt and eligible target.",
+      "after": "反应电链需要当前可核验的原电击回执和符合条件的目标。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        284
+      ],
+      "candidateLines": [
+        392
+      ],
+      "beforeSHA256": "dc31b2c13dd307e57b3138122bf7cfb2021ecf418d6f485801f1db8df5045431",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "consumer": "notification/error",
+      "before": "Confirm the completed Interact action.",
+      "after": "请声明已经完成本次交互动作。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        312
+      ],
+      "candidateLines": [
+        423
+      ],
+      "beforeSHA256": "e8c2e258f69ce20fca4ab6b83f77eb4a14034d4e53419d49312014a11c7969fd",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity-provider.mjs",
+      "consumer": "notification/error",
+      "before": "Electricity lifecycle requires an online active GM.",
+      "after": "电元素结算需要当前主 GM 在线。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        39
+      ],
+      "candidateLines": [
+        40
+      ],
+      "beforeSHA256": "b61c6e76ff5a29cde09f2234ece0c9a507ae0e99fd936d99088ae8f4be23efbf",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity-provider.mjs",
+      "consumer": "notification/error",
+      "before": "Electricity coordinator did not respond.",
+      "after": "主 GM 尚未返回电元素结算结果，请核对原操作，勿重复使用。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        41
+      ],
+      "candidateLines": [
+        42
+      ],
+      "beforeSHA256": "1ebe69d69342bd658c886b85636694a8bd9095844d4b27426289eb42bab3d363",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity-provider.mjs",
+      "consumer": "notification/error",
+      "before": "反应电链需要场景中的施法者Token。",
+      "after": "反应电链需要场景中的施法者图标。",
+      "producer": "owned automation runtime f45338970afec79e956f3685175758c784f9e098",
+      "beforeLines": [
+        136
+      ],
+      "candidateLines": [
+        137
+      ],
+      "beforeSHA256": "6977cd996db1c06fcf128dad7bce62d17b27e18a7ea981c50c6f0628cf62d585",
+      "count": 1,
+      "displayUse": "main reportError / ui notification",
+      "staticStatus": "verified-exact-before-after",
+      "nativeStatus": "unverified-individual-error-field"
+    }
+  ],
+  "existingChineseChanges": [
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity-provider.mjs",
+      "before": "没有当前、可核验的电伤来源满足这两个30尺距离、目标与反应条件。混合伤害需GM先在原伤害回执确认电击分量。",
+      "after": "没有当前、可核验的电伤来源满足目标与反应条件。混合伤害需 GM 先在原伤害回执确认电击分量。",
+      "beforeLines": [
+        138
+      ],
+      "candidateLines": [
+        140
+      ],
+      "reason": "existing Chinese text follows the approved continuation behavior and geometry removal",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity-provider.mjs",
+      "before": "已记录原生伤害应用；反应电链将核验电击分量、两段距离与目标。",
+      "after": "已记录原生伤害应用；反应电链将核验实际电击分量与目标。",
+      "beforeLines": [
+        185
+      ],
+      "candidateLines": [
+        199
+      ],
+      "reason": "existing Chinese text follows the approved continuation behavior and geometry removal",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity-provider.mjs",
+      "before": "缺少原生IWR应用回执；不会用掷骰总数触发电链。",
+      "after": "缺少原生免疫、抗力、弱点应用回执；不会用掷骰总数触发电链。",
+      "beforeLines": [
+        185
+      ],
+      "candidateLines": [
+        199
+      ],
+      "reason": "existing Chinese text follows the approved continuation behavior and geometry removal",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-basic-settlement.mjs",
+      "before": "请先用 T 锁定一个带电目标，再点击结算。",
+      "after": "请先用 T 锁定一个实际触发护盾的敌人，再结算。",
+      "beforeLines": [
+        27
+      ],
+      "candidateLines": [
+        56
+      ],
+      "reason": "existing Chinese text follows the approved continuation behavior and geometry removal",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-basic-settlement.mjs",
+      "before": "确认护盾触发：施加带电",
+      "after": "护盾令敌方近战攻击未命中：施加带电",
+      "beforeLines": [
+        44
+      ],
+      "candidateLines": [
+        73
+      ],
+      "reason": "existing Chinese text follows the approved continuation behavior and geometry removal",
+      "nativeStatus": "unverified-individual-field"
+    }
+  ],
+  "newChineseFields": [
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-basic-settlement.mjs",
+      "candidateLine": 22,
+      "before": null,
+      "after": "选择本次实际触发护盾的近战攻击",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-basic-settlement.mjs",
+      "candidateLine": 22,
+      "before": null,
+      "after": "近战未命中 · ${new Date(message.timestamp).toLocaleString()}",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-basic-settlement.mjs",
+      "candidateLine": 37,
+      "before": null,
+      "after": "需要实际使用元素动作后生成的原生卡。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-basic-settlement.mjs",
+      "candidateLine": 41,
+      "before": null,
+      "after": "需要当前角色的拥有者权限。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-basic-settlement.mjs",
+      "candidateLine": 43,
+      "before": null,
+      "after": "没有当前可触发的原元素护盾。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-basic-settlement.mjs",
+      "candidateLine": 44,
+      "before": null,
+      "after": "需要以本角色为目标的实际近战未命中卡。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-basic-settlement.mjs",
+      "candidateLine": 81,
+      "before": null,
+      "after": "护盾令此次攻击未命中：施加带电",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-basic-settlement.mjs",
+      "candidateLine": 88,
+      "before": null,
+      "after": "结算实际护盾未命中触发",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-basic-settlement.mjs",
+      "candidateLine": 89,
+      "before": null,
+      "after": "仅当敌方近战攻击因元素护盾的 AC 加值而未命中时使用；请用 T 锁定该敌人。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 201,
+      "before": null,
+      "after": "原带电效果的结算结果不确定或已被后续活动替代，请由 GM 核对；不会重新施加。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 257,
+      "before": null,
+      "after": "需要原操作者实际使用的元素动作卡。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 274,
+      "before": null,
+      "after": "原生元素护盾效果尚未启用；请使用角色拥有的元素护盾动作。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 276,
+      "before": null,
+      "after": "元素操控施加带电时，请只锁定一个目标。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 277,
+      "before": null,
+      "after": "本次元素操控捕获的目标已失效。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 284,
+      "before": null,
+      "after": "元素护盾已启用；实际触发时可从攻击卡或角色动作结算。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 285,
+      "before": null,
+      "after": "本次元素操控已结算。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 285,
+      "before": null,
+      "after": "已使用元素操控；没有锁定带电目标，其余操控效果由 GM 裁定。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 286,
+      "before": null,
+      "after": "已记录的元素操控目标已失效，请由 GM 核对本次活动。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 288,
+      "before": null,
+      "after": "已对本次锁定目标施加两轮带电。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 296,
+      "before": null,
+      "after": "请声明本次实际元素触发。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 298,
+      "before": null,
+      "after": "原元素护盾已到期或已被新的护盾替代。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 301,
+      "before": null,
+      "after": "需要此护盾启用后、以本角色为目标的实际近战未命中卡。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 303,
+      "before": null,
+      "after": "原近战攻击的操作者、武器或场景来源已改变。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 304,
+      "before": null,
+      "after": "此原近战检定对当前操作者不可见，请由 GM 结算。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 306,
+      "before": null,
+      "after": "原护盾攻击的重掷来源不明确，请由 GM 核对。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 308,
+      "before": null,
+      "after": "需要原攻击删除后保存的同一原生重掷卡。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 310,
+      "before": null,
+      "after": "原生攻击卡不能保存护盾来源，请由 GM 核对。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 312,
+      "before": null,
+      "after": "请选择实际因元素护盾而未命中的敌人。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity.mjs",
+      "candidateLine": 323,
+      "before": null,
+      "after": "原护盾触发目标已失效，请由 GM 核对。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity-provider.mjs",
+      "candidateLine": 148,
+      "before": null,
+      "after": "需要当前反应电链角色的拥有者权限。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity-provider.mjs",
+      "candidateLine": 150,
+      "before": null,
+      "after": "需要角色拥有的原反应电链威能。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity-provider.mjs",
+      "candidateLine": 153,
+      "before": null,
+      "after": "需要当前可查看的实际伤害应用回执。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity-provider.mjs",
+      "candidateLine": 154,
+      "before": null,
+      "after": "原生威能使用入口尚未就绪，请从角色动作使用反应电链。",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity-provider.mjs",
+      "candidateLine": 202,
+      "before": null,
+      "after": "以此伤害来源使用反应电链",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    },
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity-provider.mjs",
+      "candidateLine": 202,
+      "before": null,
+      "after": "${actor.name??'当前角色'}：使用反应电链",
+      "producer": "new owned automation UI; no English original exists",
+      "consumer": "native card / actor action / selection dialog / notification",
+      "staticStatus": "Chinese visible text recorded; identifiers/interpolations retained",
+      "nativeStatus": "unverified-individual-field"
+    }
+  ],
+  "retiredControls": [
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-basic-settlement.mjs",
+      "before": "对 T 目标施加两轮带电",
+      "reason": "real manipulation Use now settles its captured T once; the display card has no settlement control"
+    }
+  ],
+  "rawSource": {
+    "package": "battlezoo-eldamon-pf2e",
+    "version": "1.5.1",
+    "path": "C:/Users/Taka/Desktop/fvtt/output/bob-battlezoo-recheck-20260917/resources/modules/battlezoo-eldamon-pf2e",
+    "extractionEvidence": "C:/Users/Taka/Desktop/fvtt/output/eldamon-continuations-20260930/raw-electricity-definitions.json",
+    "extractionSHA256": "53af51494cffdc2ecad34ec75e7f4aabd5014cd705f85720e39028367e51b58a",
+    "summaryEvidence": "C:/Users/Taka/Desktop/fvtt/output/eldamon-continuations-20260930/raw-source-summary.json",
+    "summarySHA256": "c1c434cd0622ba8fbcccf244c48e6f1a24779cc3da7f6358d7ca21a1560e3f3a",
+    "method": "original cold pack copied and SHA checked before ClassicLevel readOnly:true, createIfMissing:false on isolated copy; translated packs were not treated as original English",
+    "packFiles": [
+      {
+        "pack": "actions",
+        "name": "000005.ldb",
+        "sha256": "2764c171d6c93943bdf9b95ae5a87e0853d092218893845c111f76c404a40f1a"
+      },
+      {
+        "pack": "actions",
+        "name": "000039.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "pack": "actions",
+        "name": "CURRENT",
+        "sha256": "96bdef013fb79e7d36f54609242be99a151ee07d1506ff9e20f6ee3f8a5176c6"
+      },
+      {
+        "pack": "actions",
+        "name": "LOCK",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "pack": "actions",
+        "name": "LOG",
+        "sha256": "767f0cef100c317eb4164549180f7c337410e682f14a76803a03d38ed42a0a10"
+      },
+      {
+        "pack": "actions",
+        "name": "MANIFEST-000038",
+        "sha256": "7b5269e8aa856acde022ffc4652c5e898cdcc949841d3f4a8a120e76e75199b0"
+      },
+      {
+        "pack": "eldamon-features",
+        "name": "000005.ldb",
+        "sha256": "f2a80de8fc2b8b90cdbaa8e46cb6f381b7791eb9aff7629b79ca46b1dbafd68c"
+      },
+      {
+        "pack": "eldamon-features",
+        "name": "000043.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "pack": "eldamon-features",
+        "name": "CURRENT",
+        "sha256": "06bbfaf793b9061ba299146242120e0397a3c1d765c559bb6b80d0196883b125"
+      },
+      {
+        "pack": "eldamon-features",
+        "name": "LOCK",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "pack": "eldamon-features",
+        "name": "LOG",
+        "sha256": "80f414dda241d515d9ea19d9aa9bc3b4f3ffcc8778b9fb21937e1472e9639366"
+      },
+      {
+        "pack": "eldamon-features",
+        "name": "LOG.old",
+        "sha256": "cd56df045d73ec5f921c8532c835e1fc77825447c97cd82bb1364aebcf144145"
+      },
+      {
+        "pack": "eldamon-features",
+        "name": "MANIFEST-000042",
+        "sha256": "70a4f40c8407c02b80e49ffcb2c9f54e3e4c5b249cc95adc63eaedb0ed5d0b65"
+      },
+      {
+        "pack": "effects",
+        "name": "000005.ldb",
+        "sha256": "5c6295970ff9fb5503834c2b616d9e83edeb814243eba88a5f099bc504b721eb"
+      },
+      {
+        "pack": "effects",
+        "name": "000037.log",
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "pack": "effects",
+        "name": "CURRENT",
+        "sha256": "7aa2c6f4da8ee456f65b8594b2ecda649d2f8a0aa921953c3391b4e19417b3ea"
+      },
+      {
+        "pack": "effects",
+        "name": "MANIFEST-000036",
+        "sha256": "678fd962d6be4dc294bde2fbfb72bae7721ca0809086c6611146010cd9ef4240"
+      }
+    ],
+    "definitions": [
+      {
+        "id": "g8lH9enxTY6Cpx9V",
+        "englishName": "Elemental Shield",
+        "actionType": "action",
+        "actions": 1
+      },
+      {
+        "id": "9KtNlRXeuxZSoVaI",
+        "englishName": "Electricity Element",
+        "actionType": "passive",
+        "actions": null
+      },
+      {
+        "id": "h4D0hXhSHqmyBEQN",
+        "englishName": "Elemental Manipulation",
+        "actionType": "action",
+        "actions": 2
+      },
+      {
+        "id": "OJMStIdZzBU4L4N6",
+        "englishName": "Effect: Elemental Shield"
+      }
+    ],
+    "rulesConfirmed": {
+      "manipulationActions": 2,
+      "shieldActions": 1,
+      "shieldACBonus": 1,
+      "shieldTrigger": "a foe misses its melee attack solely because of the Elemental Shield circumstance AC bonus",
+      "shieldExpiry": "beginning of next source turn",
+      "electricityShockExpiry": "end of next source turn",
+      "geometryPolicy": "user-approved geometry detection removal; actual target/outcome/source/permission retained"
+    }
+  },
+  "dsnWitness": {
+    "package": "dice-so-nice",
+    "version": "6.3.1",
+    "moduleSHA256": "3be217733a879d90d37e017f491e3e27162c3d1730df4d5fb50c48a53e39bd22",
+    "sourceMap": "C:/Users/Taka/Desktop/fvtt/output/exploration-recovery-20260930/qa/runtime/Data/modules/dice-so-nice/main.js.map",
+    "sourceMapSHA256": "a45fec22a857f7594bc997faf39f3abce4660be559c41e8fc51a5a8971cee5f3",
+    "embeddedSources": [
+      {
+        "embeddedSource": "../module/throw/ThrowPipeline.js",
+        "sha256": "cc1cd4c9a2292e8ab5787932acdb80a6765eb83073b697f7fede77101e3935c5",
+        "fields": {
+          "dsnRoleManaged": 111,
+          "dsnRole": 112
+        }
+      },
+      {
+        "embeddedSource": "../module/DiceNotation.js",
+        "sha256": "d8600543ef11ec8ee6fa59984969f4d710736ea4a333c43bead4cf68df0a077e",
+        "fields": {
+          "indexThrowWrite": 59,
+          "indexThrowAnimationQueue": 202
+        }
+      },
+      {
+        "embeddedSource": "../module/engine/DiceRoleRegistry.js",
+        "sha256": "d6d5407012dc1c881285bfa12ce68f768085f4cdc0b03a6eb1d1d5d17cdb851b",
+        "fields": {
+          "dsnRoleDetection": 261,
+          "dsnRoleManagedDetection": 264
+        }
+      }
+    ],
+    "change": "only native term-tree class Die options.dsnRole/ dsnRoleManaged and its direct results[].indexThrow; no type/flavor/other option or mechanical-value omission",
+    "legacyCompatibility": "parse existing sourceFingerprint JSON and apply the same roll witness only for comparison; no record rewrite or action replay",
+    "actualFailureEvidence": {
+      "path": "C:/Users/Taka/Desktop/fvtt/output/automation-eldamon-ux-20260930/qa/dual-client-report-1790745149151.json",
+      "command": "electricity-cn-native-roll-fingerprint-diff",
+      "status": "confirmed pre-fix native false rejection caused solely by the three DSN display fields"
+    },
+    "nativeRetestStatus": "passed root fresh native Chain continuation with existing raw proof; independently read exact fixed report",
+    "actualSchemaEvidence": {
+      "path": "C:/Users/Taka/Desktop/fvtt/output/automation-eldamon-ux-20260930/qa/dual-client-report-1790745149151.json",
+      "readSHA256": "66d19706ebcbdb4cfad1e5322fc0bf926a4beb361319772932e5d36707704094",
+      "command": "electricity-cn-native-die-shape",
+      "nativeClass": "Die",
+      "number": 6,
+      "faces": 6,
+      "flavor": "electricity",
+      "rootFormula": "{2 * 6d6[electricity]}",
+      "total": 54,
+      "status": "independently-read actual PF2e native serialized schema; the regression fixture uses this mechanical shape"
+    },
+    "nativeRetestEvidence": {
+      "path": "C:/Users/Taka/Desktop/fvtt/output/automation-eldamon-ux-20260930/qa/dual-client-report-1790746880258.json",
+      "readSHA256": "1ca01d95efe682e6454b26b87d36fd4816d9c9ac551a8cb10d891197dc00cf5a",
+      "attemptId": 1790746880258,
+      "command": "electricity-cn-dsn-old-proof-native-receipt-continue-reviewed-source",
+      "client": "gm",
+      "status": "passed exact native continuation case",
+      "before": {
+        "frequency": 1,
+        "receipts": 1
+      },
+      "after": {
+        "frequency": 0,
+        "receipts": 2
+      },
+      "useCardId": "XyfTtm2FnEUiTomo",
+      "useCardOrigin": "Actor.SGmRnhCU2J7MsUBL.Item.m9TV4sw89TAc4EEg",
+      "receiptStatus": "committed",
+      "deliveryStatus": "done",
+      "triggerDamage": 54,
+      "kind": "normal",
+      "damageBasis": "trigger-damage-halved",
+      "dialogs": [],
+      "scope": "current native damage-taken shortcut enters one genuine owned native Use with existing pre-fix raw source proof; no automatic save/damage; not blanket proof of all branches"
+    }
+  },
+  "verification": {
+    "behavioralTDD": {
+      "dsnRed": "C:/Users/Taka/Desktop/fvtt/output/eldamon-continuations-20260930/electricity-dsn-red.log",
+      "red": {
+        "tests": 24,
+        "pass": 22,
+        "fail": 2,
+        "skip": 0
+      },
+      "dsnGreen": "C:/Users/Taka/Desktop/fvtt/output/eldamon-continuations-20260930/electricity-dsn-green.log",
+      "green": {
+        "tests": 24,
+        "pass": 24,
+        "fail": 0,
+        "skip": 0
+      },
+      "affected": "C:/Users/Taka/Desktop/fvtt/output/eldamon-continuations-20260930/electricity-dsn-affected-green.log",
+      "affectedResult": {
+        "tests": 116,
+        "pass": 116,
+        "fail": 0,
+        "skip": 0
+      },
+      "syntax": "owned electricity runtime node --check passed"
+    },
+    "independentReview": [
+      {
+        "reviewer": "native_flow_audit",
+        "scope": "lineage/privacy repairs and original Task 2 business flow",
+        "result": "84/84 affected tests passed; no new blocker found; old basic-card fixture was separately updated and passed"
+      },
+      {
+        "reviewer": "native_flow_audit",
+        "scope": "DSN witness and new positive/negative business cases",
+        "result": "54/54 ledger tests passed, zero skip; no new blocker found; no real 30426 browser operated by reviewer"
+      }
+    ],
+    "nativeSnapshot": {
+      "path": "C:/Users/Taka/Desktop/fvtt/output/automation-eldamon-ux-20260930/qa/dual-client-report-1790745149151.json",
+      "attemptId": 1790745149151,
+      "commands": [
+        {
+          "id": "electricity-cn-manipulation-use",
+          "recorded": true,
+          "harnessOK": true
+        },
+        {
+          "id": "electricity-cn-manipulation-assert-display",
+          "recorded": true,
+          "harnessOK": true
+        },
+        {
+          "id": "electricity-cn-native-shield-effect-debug",
+          "recorded": true,
+          "harnessOK": true
+        },
+        {
+          "id": "electricity-cn-real-shield-only-miss-raw-plus-one",
+          "recorded": true,
+          "harnessOK": true
+        },
+        {
+          "id": "electricity-cn-native-roll-fingerprint-diff",
+          "recorded": true,
+          "harnessOK": true
+        },
+        {
+          "id": "electricity-cn-native-die-shape",
+          "recorded": true,
+          "harnessOK": true
+        }
+      ],
+      "notes": [
+        "command harnessOK is not a blanket mechanical/UI pass; inspect the exact command result",
+        "shield original native effect is +1 AC: observed 22 baseline to 23; earlier +2 harness expectation was corrected without runtime alteration",
+        "fresh old-raw-proof native Chain continuation passed in fixed report1790746880258; individual translated error fields remain unverified",
+        "no server was started, stopped or modified by the Task 2 implementation agent"
+      ],
+      "historicalHarnessFailures": [
+        {
+          "id": "electricity-cn-shield-native-use",
+          "note": "initial action document-class fixture mismatch; subsequent native class-control Use and original effect were independently inspected; do not count failed command as candidate pass"
+        },
+        {
+          "id": "electricity-cn-real-shield-only-miss",
+          "note": "harness initially expected +2 rather than original +1 shield; corrected raw-plus-one command confirmed native AC22→23 with actual failure total22, no runtime fix for this expectation"
+        },
+        {
+          "note": "first fresh Chain QA command supplied a wrong UUID; retained by root as a harness failure; only reviewed-source exact command above proves repair"
+        }
+      ]
+    },
+    "unverified": [
+      "each translated error branch rendered in native browser",
+      "all new labels individually observed on both GM and player clients",
+      "direct HUD/hotbar entry runtime UI where dependencies expose a different controller; existing observer contract is covered by unit/integration tests",
+      "post-index real native application/recovery smoke on the final candidate"
+    ],
+    "nativeCases": [
+      {
+        "path": "C:/Users/Taka/Desktop/fvtt/output/automation-eldamon-ux-20260930/qa/dual-client-report-1790746880258.json",
+        "readSHA256": "1ca01d95efe682e6454b26b87d36fd4816d9c9ac551a8cb10d891197dc00cf5a",
+        "attemptId": 1790746880258,
+        "command": "electricity-cn-dsn-old-proof-native-receipt-continue-reviewed-source",
+        "client": "gm",
+        "status": "passed exact native continuation case",
+        "before": {
+          "frequency": 1,
+          "receipts": 1
+        },
+        "after": {
+          "frequency": 0,
+          "receipts": 2
+        },
+        "useCardId": "XyfTtm2FnEUiTomo",
+        "useCardOrigin": "Actor.SGmRnhCU2J7MsUBL.Item.m9TV4sw89TAc4EEg",
+        "receiptStatus": "committed",
+        "deliveryStatus": "done",
+        "triggerDamage": 54,
+        "kind": "normal",
+        "damageBasis": "trigger-damage-halved",
+        "dialogs": [],
+        "scope": "current native damage-taken shortcut enters one genuine owned native Use with existing pre-fix raw source proof; no automatic save/damage; not blanket proof of all branches"
+      }
+    ],
+    "receiptIndex": {
+      "scope": "PERF-01 incremental native receipt uniqueness check and provider startup recovery",
+      "helper": "modules/pf2e-third-party-automation/scripts/eldamon-electricity-receipts.mjs",
+      "contract": "provider passes receiptMessages(nonce) to pure ledger; no main API change; missing projection fails native receipt settlement closed without scanning chat",
+      "seed": "one collection pass at provider registration or first standalone projection query; all subsequent finishDamage/maintain queries are bounded by APPLY nonce",
+      "events": "existing create/update/delete ChatMessage handlers maintain live document references; no new polling/coordinate hooks",
+      "authority": "index is only projection; ledger rechecks current game.messages object, author/speaker/token/origin/non-reverted appliedDamage and exact unique candidate===fromUuid original receipt",
+      "redEvidence": "C:/Users/Taka/Desktop/fvtt/output/eldamon-continuations-20260930/electricity-receipt-index-red.log",
+      "red": {
+        "tests": 11,
+        "pass": 7,
+        "fail": 4,
+        "skip": 0
+      },
+      "greenEvidence": "C:/Users/Taka/Desktop/fvtt/output/eldamon-continuations-20260930/electricity-receipt-index-green.log",
+      "green": {
+        "tests": 12,
+        "pass": 12,
+        "fail": 0,
+        "skip": 0
+      },
+      "affectedEvidence": "C:/Users/Taka/Desktop/fvtt/output/eldamon-continuations-20260930/electricity-index-affected-green.log",
+      "affected": {
+        "tests": 128,
+        "pass": 128,
+        "fail": 0,
+        "skip": 0
+      },
+      "coverage": [
+        "500 ordinary messages: seeded once, finishDamage and maintain work with values() forbidden",
+        "new duplicate rejects; delete/update nonce removes stale candidate",
+        "reverted/wrong author/actor/token/origin/multiple APPLY options reject",
+        "deleted/stale replaced document identity rejects",
+        "absent/incomplete receipt projection does not authorize original receipt",
+        "fresh provider startup recovers existing pending receipts once",
+        "active-GM handoff reuses live index without history scan",
+        "existing DSN raw-proof tolerance, shield duplicate and privacy tests remain green"
+      ],
+      "independentReview": {
+        "reviewer": "history_gaps",
+        "status": "passed; PERF-01 closed",
+        "result": "new 12/12 and independent 13-file union 260/260 actual-source tests, zero skip; read current source and event/current-document/unique behavior; no new risk found",
+        "scope": "once seed; nonce create/update/delete; current object + receiptMatches + exact sole original; absent projection failclosed; no hot fallback scan"
+      },
+      "nativeStatus": "pending root post-index native smoke; the prior fixed DSN native continuation remains exact evidence of that unchanged dice witness, not proof of the new index path"
+    }
+  },
+  "addedSources": [
+    {
+      "file": "modules/pf2e-third-party-automation/scripts/eldamon-electricity-receipts.mjs",
+      "rawGitSHA256": null,
+      "beforeSHA256": null,
+      "afterSHA256": "fac9777b6c5788e312dc1fc25ef631ed2ec0eebbfc5da37b4c33bc9d9e48c904",
+      "kind": "new pure APPLY-nonce native receipt projection",
+      "visibleFields": 0
+    }
+  ]
+}

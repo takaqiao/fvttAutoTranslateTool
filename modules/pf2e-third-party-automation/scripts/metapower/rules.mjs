@@ -33,14 +33,14 @@ export function powerProfile(item){const source=sourceUuid(item);return Object.h
  * activation. Retain the old argument only to reject conflicting cost overrides. */
 export function metapowerActionCost(kind,policy={}){
  if(kind==='siphoning')return 1;
- if(kind!=='widen')throw Error('Unsupported metapower kind.');
- if(Object.hasOwn(policy,'widenActionCost')&&policy.widenActionCost!==1)throw Error('Widen costs one action; a conflicting cost override is not supported.');
+ if(kind!=='widen')throw Error('不支持此类威能调整。');
+ if(Object.hasOwn(policy,'widenActionCost')&&policy.widenActionCost!==1)throw Error('增广元素消耗一个动作；不支持与此冲突的动作消耗配置。');
  return 1;
 }
 
 /** Pure base -> final geometry, never feed the previously widened distance back. */
 export function widenDistance({type,distance,hasDuration=false}){
- if(!Number.isFinite(distance)||distance<0)throw Error('Area distance must be finite and non-negative.');
+ if(!Number.isFinite(distance)||distance<0)throw Error('范围大小必须是有限的非负数。');
  if(hasDuration||distance===0)return distance;
  if(type==='burst')return distance>=10?distance+5:distance;
  if(type==='cone'||type==='line')return distance+(distance<=15?5:10);
@@ -53,7 +53,7 @@ function selectedArea(profile,{level,discharge,baseDistance}){
  const max=profile.levelArea?(20+10*Math.min(4,Math.max(0,Math.floor((level-1)/4))))*(discharge?2:1):discharge?60:30;
  const step=profile.levelArea?(discharge?20:10):5;
  const distance=baseDistance??min;
- if(!Number.isFinite(distance)||distance<min||distance>max||(distance-min)%step!==0)throw Error('Selected base distance is not legal for this power, level and branch.');
+ if(!Number.isFinite(distance)||distance<min||distance>max||(distance-min)%step!==0)throw Error('所选基础范围不符合本威能、等级与分支。');
  return {type:profile.areaType,baseDistance:distance,distance,hasDuration:profile.hasDuration};
 }
 const strings=value=>Array.isArray(value)||value instanceof Set?[...value].filter(v=>typeof v==='string'):[];
@@ -67,14 +67,14 @@ const items=actor=>Array.isArray(actor?.items)?actor.items:actor?.items?.content
  * highVoltage='unaffected'|'convert'. A convert decision still requires the caller
  * to bind High Voltage's delayed trigger to this channel, never immediate damage. */
 export function buildChannelSnapshot({kind,item,actor=item?.actor,level=actor?.level??1,selection={},policy={}}){
- if(!['siphoning','widen','normal'].includes(kind))throw Error('Unsupported metapower kind.');
+ if(!['siphoning','widen','normal'].includes(kind))throw Error('不支持此类威能调整。');
  const profile=powerProfile(item);
- if(!profile)throw Error('Unsupported power source: no reviewed profile.');
- if(!Number.isInteger(level)||level<1)throw Error('Power level must be a positive integer.');
+ if(!profile)throw Error('不支持此威能来源：尚无已核验的规则配置。');
+ if(!Number.isInteger(level)||level<1)throw Error('威能等级必须是正整数。');
  const discharge=selection.discharge===true;
- if(kind==='siphoning'&&profile.dependentEffect&&!['unaffected','convert'].includes(policy.highVoltage))throw Error('High Voltage requires an explicit dependent-effect policy.');
- if(kind==='siphoning'&&discharge&&profile.dischargeNonDamage&&!['retain','remove'].includes(policy.dischargeNonDamage))throw Error('Siphoning discharge non-damage benefits require an explicit policy.');
- for(const field of ['dischargeArea','dischargeRange','dischargeSaveDowngrade'])if(Object.hasOwn(policy,field)&&!['retain','remove'].includes(policy[field]))throw Error(`Invalid ${field} policy.`);
+ if(kind==='siphoning'&&profile.dependentEffect&&!['unaffected','convert'].includes(policy.highVoltage))throw Error('高电压需要明确配置延迟效果的处理策略。');
+ if(kind==='siphoning'&&discharge&&profile.dischargeNonDamage&&!['retain','remove'].includes(policy.dischargeNonDamage))throw Error('虹吸配合放电时，需要明确配置非伤害收益的处理策略。');
+ for(const field of ['dischargeArea','dischargeRange','dischargeSaveDowngrade'])if(Object.hasOwn(policy,field)&&!['retain','remove'].includes(policy[field]))throw Error(`威能规则策略无效：${{dischargeArea:'放电范围',dischargeRange:'放电射程',dischargeSaveDowngrade:'放电豁免降级'}[field]}。`);
  const applies=kind==='siphoning'&&(!profile.dependentEffect||policy.highVoltage==='convert');
  const removeArea=applies&&discharge&&(policy.dischargeArea??policy.dischargeNonDamage)==='remove';
  const removeRange=applies&&discharge&&(policy.dischargeRange??policy.dischargeNonDamage)==='remove';
