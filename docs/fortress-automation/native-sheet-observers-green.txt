@@ -1,0 +1,41 @@
+✔ native sheet observers share one libWrapper registration and retain the awaited native action (0.7905ms)
+✔ main shared native sheet observers make one real ledger lease and await one original Use (3.4582ms)
+✔ routes exact original feature cards, including ordinary send to chat (0.7551ms)
+✔ Toolbelt actual use is the origin roll option, not an invented flag (0.0994ms)
+✔ rejects rolls, generated messages and previously consumed messages (0.1219ms)
+✔ rejects mismatched actor/item origins and accepts native self effect cards (0.4054ms)
+✔ frequency receipt is based on actual observed decrement and can be claimed once (0.6608ms)
+✔ concurrent stale 1-to-0 updates do not create a second receipt (0.1093ms)
+✔ rejects cross-user cross-item and expired receipts without losing rightful claim (0.1068ms)
+✔ unknown metadata or non-decrement never creates a receipt (0.0742ms)
+✔ a consumed receipt ID cannot be replayed after resetting frequency (0.1155ms)
+✔ active GM handles once and writes a persistent completed marker (0.7226ms)
+✔ first native use without a prior frequency snapshot is rejected (0.1832ms)
+✔ createActor seeds embedded items before the imported actor first native use (0.1312ms)
+✔ ready seeds existing synthetic actors on a scene the active GM is not viewing (0.1274ms)
+✔ current-canvas seeds synthetic actor items before first native use (0.1438ms)
+✔ canvasReady seeds synthetic actor items before first native use (0.0874ms)
+✔ createToken seeds synthetic actor items before first native use (0.0717ms)
+✔ non-active-GM client never executes the same message (0.0631ms)
+✔ invalid claimed receipt rejects usage instead of silently charging again (0.0945ms)
+✔ ignores unauthorized speaker and generated survival rolls (0.0784ms)
+✔ usage footer renders safe Chinese pending done and failure results (0.1595ms)
+✔ opted-in display cards are quietly ignored before usage claim, receipt claim or executor (0.1382ms)
+✔ opted-in local actual Use dispatches exactly once (0.1008ms)
+✔ opted-in native actual Use dispatches exactly once (0.0699ms)
+✔ a policy that does not select the activity preserves legacy display-card dispatch (0.0723ms)
+✔ an observed native payment survives normal network delay and remains single-use (0.0832ms)
+✔ pending chat update latency cannot expire an already observed payment (0.1003ms)
+✔ provider waiting is not reported as completed (0.0871ms)
+✔ provider cancelled is not reported as completed (0.073ms)
+✔ native Use listeners release replaced roots and closed applications (0.1464ms)
+✔ native sheet Use scope survives a slow handler and ends when that real call is cancelled (0.384ms)
+✔ durable consumed receipts restore replay protection and release with their exact source document (0.1047ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 33
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 125.844
