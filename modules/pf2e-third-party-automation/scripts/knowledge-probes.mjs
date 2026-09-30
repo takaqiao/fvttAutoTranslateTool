@@ -25,7 +25,7 @@ export async function interceptKnowledgeProbe(native,check,context,event,callbac
  const data={content:'',speaker:{actor:context.actor.id,token:context.token?.id,scene:context.token?.parent?.id},flags:{pf2e:{context:{type:context.type,actor:context.actor.id,token:context.token?.id??null,origin:serializeParticipant(context.origin),target:serializeParticipant(context.target),domains:context.domains??[],options:[...options].sort(),traits:context.traits??[],title:context.title,dc:null,createMessage:false,messageMode:'blind',rollTwice:context.rollTwice??false,substitutions:context.substitutions??[]},modifierName:check.slug,modifiers:check.modifiers.map(modifier=>modifier.toObject?.()??{slug:modifier.slug,label:modifier.label,modifier:modifier.modifier,enabled:modifier.enabled})}},flavor:`<div class="tags modifiers">${check.modifiers.filter(modifier=>modifier.enabled).map(modifier=>`<span class="tag" data-slug="${escape(modifier.slug)}">${escape(modifier.label)} ${modifier.modifier<0?'':'+'}${modifier.modifier}</span>`).join('')}</div>`};
  const Messages=entry.globals.CONFIG?.ChatMessage?.documentClass??entry.globals.ChatMessage;
  const message=new Messages(data),roll={total:10+check.totalModifier,options:{totalModifier:check.totalModifier}};
- Object.assign(entry.receipt,{captured:true,native,check,context:{...context,options},actor:context.actor,domains:context.domains??[],rollOptions:options,message,roll});
+ Object.assign(entry.receipt,{captured:true,check,context:{...context,options},actor:context.actor,domains:context.domains??[],rollOptions:options,message,roll});
  await callback?.(roll,undefined,message);
  // Native StatisticCheck skips its afterRoll loop on null. No extra die, document
  // creation, consumable use or downstream provider middleware is invoked.
@@ -39,7 +39,7 @@ export async function consumeKnowledgePrimary({message,candidate,receipt,roll}){
  const claim={status:'claimed',statistic:candidate.statistic,targetUuid:candidate.targetUuid};
  await message.update({[`flags.${MODULE_ID}.workbenchRecall.probeUse`]:claim});
  // This is the actual primary CheckRoll, with native fortune/substitution dice
- // and methods intact. Its Check continuation mutates the same native context.
+ // and methods intact. Its fresh Check call mutates the same native context.
  for(const rule of receipt.actor.rules?.filter(rule=>!rule.ignored)??[])await rule.afterRoll?.({roll,check:receipt.check,context:receipt.primaryContext,domains:receipt.domains,rollOptions:receipt.primaryContext.options});
  await message.update({[`flags.${MODULE_ID}.workbenchRecall.probeUse`]:{...claim,status:'done'}});
 }

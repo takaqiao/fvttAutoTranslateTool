@@ -28,11 +28,15 @@ function fixture(){
 }
 function nativeProbeFixture(f){
  f.actor.rules=[];
+ f.game.pf2e={...f.game.pf2e,Check:{roll:(check,context,event,callback)=>interceptKnowledgeProbe(check.native,check,context,event,callback)}};
  for(const skill of Object.values(f.actor.skills))skill.roll=async options=>{
   const check={slug:skill.slug,modifiers:skill.modifiers,calculateTotal(){this.totalModifier=skill.totalModifier;}};
   const context={actor:f.actor,origin:{actor:f.actor,token:f.token},token:f.token,type:'skill-check',domains:['skill-check',skill.slug],options:new Set(options.extraRollOptions),rollTwice:skill.rollTwice??false,substitutions:skill.substitutions??[],dosAdjustments:options.dc?Object.values(f.actor.synthetics.degreeOfSuccessAdjustments).flat():[],createMessage:false,skipDialog:true};
   const native=async(check,context,_event,callback)=>{const roll=await new f.globals.Roll('1d20').roll();roll.dice[0].total=roll.total;roll.dice[0].results=[{result:roll.total,active:true}];if(context.rollTwice){roll.dice[0]={total:18,faces:20,modifiers:['kh'],results:[{result:12,discarded:true},{result:18,active:true}]};roll.total=18;}if(context.substitutions?.some(s=>s.selected)){roll.dice=[];roll.terms=[];roll.total=context.substitutions.find(s=>s.selected).value;}check.calculateTotal(context.options);roll.total+=check.totalModifier;roll.options.totalModifier=check.totalModifier;roll.options.degreeOfSuccess=api.recallDegree({total:roll.total,die:roll.total-check.totalModifier,dc:context.dc?.value,actor:f.actor,domains:context.domains,rollOptions:[...context.options]});context.outcome=['criticalFailure','failure','success','criticalSuccess'][roll.options.degreeOfSuccess];await callback?.(roll,context.outcome,new f.globals.ChatMessage({flags:{pf2e:{context:{...context,actor:f.actor.id,options:[...context.options],domains:context.domains},modifiers:[]}},flavor:''}));return roll;};
-  const result=await interceptKnowledgeProbe(native,check,context,null,options.callback);
+  check.native=native;let active=true;
+  // libWrapper invalidates a wrapped continuation when this frame returns.
+  const wrapped=(...args)=>{if(!active)throw Error('LibWrapperInvalidWrapperChainError');return native(...args);};
+  let result;try{result=await interceptKnowledgeProbe(wrapped,check,context,null,options.callback);}finally{active=false;}
   if(result)for(const rule of f.actor.rules)await rule.afterRoll?.({roll:result,check,context,domains:context.domains,rollOptions:context.options});return result;
  };
  return f;
@@ -130,7 +134,7 @@ function controllerFixture(){
  const gmGame={...f.game,user:f.gm};const handlers=new Map(),wrappers=new Map(),resolved=[];
  const socketFor=user=>({register(name,fn){handlers.set(`${user.id}:${name}`,fn);},executeAsUser(name,id,payload){return handlers.get(`${id}:${name}`).call({socketdata:{userId:user.id}},payload);}});
  const native={slug:'recall-knowledge',async use(){throw Error('unwrapped native skill chooser');}};class Variant{get slug(){return 'recall-knowledge';}async use(){throw Error('unwrapped native variant');}};native.getDefaultVariant=()=>new Variant();
- f.game.pf2e={actions:new Map([['recall-knowledge',native]])};gmGame.pf2e={actions:new Map()};
+ f.game.pf2e={...f.game.pf2e,actions:new Map([['recall-knowledge',native]])};gmGame.pf2e={...gmGame.pf2e,actions:new Map()};
   const subscriptions=new Map(),hooks={on(name,fn){const set=subscriptions.get(name)??new Set();set.add(fn);subscriptions.set(name,set);return fn;},off(name,fn){const set=subscriptions.get(name);set?.delete(fn);if(!set?.size)subscriptions.delete(name);},callAll(name,...args){for(const fn of [...subscriptions.get(name)??[]])fn(...args);},count(){return [...subscriptions.values()].reduce((total,set)=>total+set.size,0);}};
  const owner=createWorkbenchRecallController({...f,onError:e=>{throw e;}}),gmController=createWorkbenchRecallController({...f,game:gmGame,onResolved:message=>resolved.push(message.id)});
  gmController.register({Hooks:hooks,socket:socketFor(f.gm)});const cleanup=owner.register({Hooks:hooks,socket:socketFor(f.user),libWrapper:{register(_id,path,fn){wrappers.set(path,fn);},unregister(_id,path){wrappers.delete(path);}}});
@@ -229,7 +233,7 @@ const nativeBundle=process.env.FVTT_PF2E_BUNDLE??process.env.FVTT_PF2E_RUNTIME??
 test('installed PF2e RecallKnowledgeActionVariant bypasses its native player-skill prerequisite through the real prototype', {skip:!fs.existsSync(nativeBundle)},async()=>{
  const bundle=fs.readFileSync(nativeBundle,'utf8'),begin=bundle.indexOf('RecallKnowledgeActionVariant = class extends SingleCheckActionVariant {'),end=bundle.indexOf('}, RecallKnowledgeAction =',begin);assert.ok(begin>=0&&end>begin,'installed RK variant source unavailable');
  const source=bundle.slice(begin+'RecallKnowledgeActionVariant = '.length,end+1);class BaseVariant{get slug(){return 'recall-knowledge';}}
- const Variant=new Function('SingleCheckActionVariant',`return (${source});`)(BaseVariant);const f=fixture();f.user.active=true;f.gm.active=true;f.actor.getActiveTokens=()=>[f.token];f.game.user.character=f.actor;const native={use:()=>{throw Error('native should not require selected skill');},getDefaultVariant:()=>new Variant()};f.game.pf2e={actions:new Map([['recall-knowledge',native]])};
+ const Variant=new Function('SingleCheckActionVariant',`return (${source});`)(BaseVariant);const f=fixture();f.user.active=true;f.gm.active=true;f.actor.getActiveTokens=()=>[f.token];f.game.user.character=f.actor;const native={use:()=>{throw Error('native should not require selected skill');},getDefaultVariant:()=>new Variant()};f.game.pf2e={...f.game.pf2e,actions:new Map([['recall-knowledge',native]])};
  const controller=createWorkbenchRecallController({...f}),cleanup=controller.register({Hooks:{on(){return 1;},off(){}},socket:{register(){},executeAsUser:async()=>({ok:true,value:{messageId:'rk1'}})}});
  await native.getDefaultVariant().use({actors:[f.actor]});assert.equal(f.die.count,1);assert.equal(f.game.messages.get('rk1').flags[MODULE_ID].workbenchRecall.candidates[0].statistic,'society');cleanup();
 });

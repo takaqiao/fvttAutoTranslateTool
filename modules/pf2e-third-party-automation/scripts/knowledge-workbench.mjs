@@ -73,7 +73,9 @@ export async function captureWorkbenchRecall({game,actor,token,user=game.user,ta
   primaryReceipt.primaryContext={...primaryReceipt.context,options:new Set(primaryReceipt.rollOptions),createMessage:false,skipDialog:true,messageMode:'blind',traits:['concentrate','secret'],dc:Number.isFinite(primaryDC)?{value:primaryDC,visible:false}:null};
   // Restore the chosen rule's own beforeRoll state after comparing other skills.
   for(const rule of primaryReceipt.actor.rules?.filter(rule=>!rule.ignored)??[])rule.beforeRoll?.(primaryReceipt.domains,primaryReceipt.primaryContext.options);
-  primaryRoll=await primaryReceipt.native(primaryReceipt.check,primaryReceipt.primaryContext,null,async(roll,_outcome,nativeMessage)=>{
+  // libWrapper wrapped continuations expire when their frame returns. Re-enter
+  // the installed public Check boundary with a fresh live wrapper chain.
+  primaryRoll=await game.pf2e.Check.roll(primaryReceipt.check,primaryReceipt.primaryContext,null,async(roll,_outcome,nativeMessage)=>{
    primaryNativeContext=nativeMessage.flags.pf2e.context;primary.rollOptions=primaryNativeContext.options;
    primary.modifier=roll.options.totalModifier;primaryReceipt.roll.options.totalModifier=roll.options.totalModifier;primary.nativeDegree=roll.options.degreeOfSuccess;primary.nativeDC=primaryDC;
    rawRoll=roll.dice.length?globals.Roll.fromTerms(roll.dice):await new globals.Roll(String(roll.total-roll.options.totalModifier)).evaluate({allowInteractive:false});
