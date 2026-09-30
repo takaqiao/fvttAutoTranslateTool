@@ -98,7 +98,13 @@ export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,cho
   await save(source,'recall',{...state,usedBy:message.id});return state;
  }
  async function recallTargets(message,actor){
-  const native=await resolveMessageTargets(message,{fromUuid});if(native.length)return native;
+    const native=await resolveMessageTargets(message,{fromUuid}),workbenchState=message.flags?.[MODULE_ID]?.workbenchRecall;
+    if(workbenchState?.schema===1){
+     const bindings=workbenchState.targetActors;
+     if(!Array.isArray(bindings)||native.length!==1||bindings.length!==1||bindings[0].tokenUuid!==native[0].uuid||bindings[0].actorUuid!==native[0].actor.uuid)return [];
+     return native;
+    }
+    if(native.length)return native;
   const prefix=`${option}:recall:`,markers=options(message).filter(o=>typeof o==='string'&&o.startsWith(prefix));
   const state=markers.length===1?own(game.messages.get(markers[0].slice(prefix.length))).recall:null;
   const uuids=state?.actorUuid===actor.uuid?[state.targetUuid]:own(message).targetUuids??[];

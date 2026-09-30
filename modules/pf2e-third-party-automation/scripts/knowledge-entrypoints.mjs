@@ -19,7 +19,7 @@ export function createWorkbenchRecallController({game,fromUuid=globalThis.fromUu
    activeGM();const message=game.messages.get(messageId);if(!message||message.author?.id!==requester.id||game.users.get(requester.id)!==requester)throw Error('回忆知识原生卡与原操作者不匹配。');
    const state=message.flags?.[MODULE_ID]?.workbenchRecall,token=await fromUuid(state?.tokenUuid);
    if(token?.documentName!=='Token'||token.actor?.uuid!==message.actor?.uuid||message.speaker?.token!==token.id||message.speaker?.scene!==token.parent?.id)throw Error('回忆知识原生 Token 不匹配。');
-   await finalizeWorkbenchRecall({game,message});if(!message.flags?.[MODULE_ID]?.workbenchRecall?.resolved){await onResolved(message);await message.update({[`flags.${MODULE_ID}.workbenchRecall.resolved`]:true});}return {messageId:message.id};
+    await finalizeWorkbenchRecall({game,message,fromUuid});if(!message.flags?.[MODULE_ID]?.workbenchRecall?.resolved){await onResolved(message);await message.update({[`flags.${MODULE_ID}.workbenchRecall.resolved`]:true});}return {messageId:message.id};
   });
  }
  async function local(input){

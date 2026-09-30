@@ -30,7 +30,9 @@ function authorization(game,actor,user){if(game.user!==user||game.users.get(user
 export async function captureWorkbenchRecall({game,actor,token,user=game.user,targetUuids=[],requestId,origin=null,statistic=null,assurance=false,dc=null,fromUuid=globalThis.fromUuid,globals=globalThis}){
  authorization(game,actor,user);if(!requestId||typeof requestId!=='string')throw Error('回忆知识缺少操作来源。');if(assurance&&(!statistic||actor.skills?.[statistic]?.rank<1||!hasSkillAssurance(actor,statistic)))throw Error('Assurance 必须具有对应专长并保留指定技能。');
  const tokenDocument=doc(token);if(tokenDocument?.actor!==actor)throw Error('回忆知识的原始 Token 与角色不匹配。');
- const targets=[];for(const uuid of [...new Set(targetUuids)]){const target=doc(await fromUuid(uuid));if(target?.documentName!=='Token'||!target.actor)throw Error('回忆知识目标已不存在。');targets.push(target);}
+  const targets=[];for(const uuid of [...new Set(targetUuids)]){const target=doc(await fromUuid(uuid));if(target?.documentName!=='Token'||!target.actor)throw Error('回忆知识目标已不存在。');targets.push(target);}
+  const targetActors=targets.map(target=>({tokenUuid:target.uuid,actorUuid:target.actor.uuid}));
+  const assertTargets=()=>{if(targets.some((target,index)=>target.actor?.uuid!==targetActors[index].actorUuid))throw Error('回忆知识目标关联角色已改变；原始秘骰保留，不会再次投骰。');};
  const probes=new Map();let currentTarget=null,created=null,fail;const failed=new Promise((_,reject)=>{fail=reject;});failed.catch(()=>{});
  const preparedSkills={};
  for(const [slug,skill]of Object.entries(actor.skills??{}))preparedSkills[slug]=scoped(skill,{roll:async options=>{
@@ -51,16 +53,23 @@ export async function captureWorkbenchRecall({game,actor,token,user=game.user,ta
   if(!created)throw Error('Workbench 未生成本次回忆知识卡；不会再次投骰。');
   if(statistic&&!probes.has(`${targets.length===1?targets[0].uuid:''}:${statistic}`)){const skill=preparedSkills[statistic];if(!skill)throw Error('指定技能不存在。');currentTarget=targets.length===1?targets[0].uuid:null;const options=['action:recall-knowledge',`action:recall-knowledge:${statistic}`,...(targets.length===1?targets[0].actor.getSelfRollOptions('target'):[])];await Promise.race([failed,skill.roll({createMessage:false,rollMode:'blindroll',skipDialog:true,extraRollOptions:options,callback(){}})]);}
  }
- const die=assurance?null:created.rolls?.[0]?.total;if(!assurance&&(!Number.isInteger(die)||die<1||die>20))throw Error('Workbench 原始 d20 不可验证。');
+  assertTargets();
+  const die=assurance?null:created.rolls?.[0]?.total;if(!assurance&&(!Number.isInteger(die)||die<1||die>20))throw Error('Workbench 原始 d20 不可验证。');
  const candidates=[];const scopeTargets=targets.length?targets:[null];
  for(const target of scopeTargets){const allowed=statistic?[statistic]:target?primarySkills(actor,target.actor):skills;for(const probe of probes.values()){if(probe.targetUuid!==(target?.uuid??null)||!allowed.includes(probe.statistic)&&!probe.lore)continue;if(statistic&&probe.statistic!==statistic)continue;const total=(assurance?10:die)+probe.modifier,effectiveDC=Number.isFinite(dc)?dc:target?targetDC(target.actor):null;candidates.push({...probe,total,dc:probe.lore&&!statistic?null:effectiveDC,degree:recallDegree({total,die,dc:probe.lore&&!statistic?null:effectiveDC,domains:probe.domains,rollOptions:probe.rollOptions,actor})});}}
- const state={schema:1,requestId,actorUuid:actor.uuid,tokenUuid:tokenDocument.uuid,userId:user.id,targetUuids:targets.map(t=>t.uuid),origin,statistic,assurance,die,candidates,status:'pending'};
+  const state={schema:1,requestId,actorUuid:actor.uuid,tokenUuid:tokenDocument.uuid,userId:user.id,targetUuids:targets.map(t=>t.uuid),targetActors,origin,statistic,assurance,die,candidates,status:'pending'};
  await created.update({[`flags.${MODULE_ID}.workbenchRecall`]:state});return {message:created,die,candidates};
 }
-export async function finalizeWorkbenchRecall({game,message,user=game.user,statistic=null,dc=null}){
+export async function finalizeWorkbenchRecall({game,message,user=game.user,statistic=null,dc=null,fromUuid=globalThis.fromUuid}){
  if(!user?.isGM||game.user!==user||game.users.get(user.id)!==user)throw Error('只有 GM 可裁定回忆知识结果。');
  const state=own(message);if(game.messages.get(message?.id)!==message||state?.schema!==1||state.actorUuid!==message.actor?.uuid||message.flags?.pf2e?.context?.type!=='skill-check'||!message.flags?.pf2e?.context?.options?.includes('action:recall-knowledge')||message.author?.id!==state.userId||!message.actor?.testUserPermission?.(message.author,'OWNER')||!message.blind)throw Error('回忆知识原卡或原操作者不可验证。');
  if((state.assurance?null:message.rolls?.[0]?.total)!==state.die||state.candidates.some(c=>!Number.isFinite(c.modifier)||c.total!==(state.assurance?10:state.die)+c.modifier))throw Error('回忆知识原始骰点或候选结果不可验证。');
+  if(!Array.isArray(state.targetActors)||state.targetActors.length!==state.targetUuids.length)throw Error('回忆知识目标角色来源不可验证。');
+  for(const [index,binding]of state.targetActors.entries()){
+   const target=typeof fromUuid==='function'?doc(await fromUuid(binding.tokenUuid)):null;
+   if(binding.tokenUuid!==state.targetUuids[index]||!binding.actorUuid||target?.documentName!=='Token'||target.actor?.uuid!==binding.actorUuid)throw Error('回忆知识目标关联角色已改变；原始秘骰保留，不会再次投骰。');
+  }
+  if(state.targetActors.length===1){const native=message.flags.pf2e.context.target,binding=state.targetActors[0];if(native?.token!==binding.tokenUuid||native.actor!==binding.actorUuid)throw Error('回忆知识原生目标角色与保存来源不匹配。');}
  const available=state.candidates.filter(c=>state.targetUuids.length===1?c.targetUuid===state.targetUuids[0]:state.targetUuids.length===0&&!c.targetUuid);
  const selection=statistic??state.statistic;
  const candidate=selection?available.find(c=>c.statistic===selection):available.filter(c=>!c.lore&&Number.isFinite(c.dc)).sort((a,b)=>b.modifier-a.modifier)[0];

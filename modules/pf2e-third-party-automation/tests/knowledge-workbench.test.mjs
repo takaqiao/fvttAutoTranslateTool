@@ -43,9 +43,9 @@ test('Assurance uses 10 plus proficiency without rolling or adding ability/item 
 });
 test('final result can only be selected by an actual GM from the captured native candidate',async()=>{
  assert.ok(api?.finalizeWorkbenchRecall,'Workbench bridge is missing');const f=fixture();const capture=await api.captureWorkbenchRecall({...f,requestId:'selection1',targetUuids:[f.target.uuid]});
- await assert.rejects(()=>api.finalizeWorkbenchRecall({game:f.game,message:capture.message,user:f.user,statistic:'society'}),/GM/);
- const result=await api.finalizeWorkbenchRecall({game:{...f.game,user:f.gm},message:capture.message,user:f.gm,statistic:'society'});assert.equal(result.degree,2);assert.equal(capture.message.flags.pf2e.context.outcome,'success');assert.equal(capture.message.flags.pf2e.context.type,'skill-check');
- await assert.rejects(()=>api.finalizeWorkbenchRecall({game:{...f.game,user:f.gm},message:capture.message,user:f.gm,statistic:'religion',total:99}),/候选|candidate/);
+ await assert.rejects(()=>api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:f.game,message:capture.message,user:f.user,statistic:'society'}),/GM/);
+ const result=await api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:{...f.game,user:f.gm},message:capture.message,user:f.gm,statistic:'society'});assert.equal(result.degree,2);assert.equal(capture.message.flags.pf2e.context.outcome,'success');assert.equal(capture.message.flags.pf2e.context.type,'skill-check');
+ await assert.rejects(()=>api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:{...f.game,user:f.gm},message:capture.message,user:f.gm,statistic:'religion',total:99}),/候选|candidate/);
 });
 test('native natural 20/1 and the most favorable adjustment apply once, never stack domains',()=>{
  assert.ok(api?.recallDegree);assert.equal(api.recallDegree({total:19,die:20,dc:20}),2);assert.equal(api.recallDegree({total:20,die:1,dc:20}),1);
@@ -56,17 +56,17 @@ test('native natural 20/1 and the most favorable adjustment apply once, never st
 test('automatic primary is highest applicable captured modifier and later GM changes cannot replay it',async()=>{
  const f=fixture();f.target.actor.traits=new Set(['construct']);f.actor.skills.arcana.totalModifier=7;f.actor.skills.crafting.totalModifier=8;
  const capture=await api.captureWorkbenchRecall({...f,requestId:'primary',targetUuids:[f.target.uuid]});
- const result=await api.finalizeWorkbenchRecall({game:{...f.game,user:f.gm},message:capture.message,user:f.gm});assert.equal(result.statistic,'crafting');assert.equal(result.degree,2);
- await assert.rejects(()=>api.finalizeWorkbenchRecall({game:{...f.game,user:f.gm},message:capture.message,user:f.gm,statistic:'arcana',dc:18}),/锁定/);assert.equal(f.die.count,1);
- assert.deepEqual(await api.finalizeWorkbenchRecall({game:{...f.game,user:f.gm},message:capture.message,user:f.gm}),result);
+ const result=await api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:{...f.game,user:f.gm},message:capture.message,user:f.gm});assert.equal(result.statistic,'crafting');assert.equal(result.degree,2);
+ await assert.rejects(()=>api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:{...f.game,user:f.gm},message:capture.message,user:f.gm,statistic:'arcana',dc:18}),/锁定/);assert.equal(f.die.count,1);
+ assert.deepEqual(await api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:{...f.game,user:f.gm},message:capture.message,user:f.gm}),result);
 });
 test('no target keeps a blind comparison without inventing a creature result',async()=>{
  const f=fixture();const capture=await api.captureWorkbenchRecall({...f,requestId:'none',targetUuids:[]});
- assert.equal(capture.candidates.length,7);assert.equal(await api.finalizeWorkbenchRecall({game:{...f.game,user:f.gm},message:capture.message,user:f.gm}),null);assert.equal(f.die.count,1);
+ assert.equal(capture.candidates.length,7);assert.equal(await api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:{...f.game,user:f.gm},message:capture.message,user:f.gm}),null);assert.equal(f.die.count,1);
 });
 test('a persisted die or candidate total mismatch rejects external result substitution',async()=>{
  const f=fixture();const capture=await api.captureWorkbenchRecall({...f,requestId:'integrity',targetUuids:[f.target.uuid]});capture.message.flags[MODULE_ID].workbenchRecall.candidates[0].total=99;
- await assert.rejects(()=>api.finalizeWorkbenchRecall({game:{...f.game,user:f.gm},message:capture.message,user:f.gm}),/不可验证|原始/);
+ await assert.rejects(()=>api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:{...f.game,user:f.gm},message:capture.message,user:f.gm}),/不可验证|原始/);
 });
 test('scoped macro supports native private fields and locked actor skills without mutating native objects',async()=>{
  const f=fixture();class NativeTarget{#kind='creature';isOfType(){return this.#kind==='creature';}getSelfRollOptions(){return ['target:trait:humanoid'];}}
@@ -100,6 +100,12 @@ test('GM dispatches incidental RK to its original owner and repeated request nev
  const input={actor:f.actor,token:f.token,user:f.user,targetUuids:[f.target.uuid],requestId:'incidental',origin:{messageId:original.id,rollOptions:[`${MODULE_ID}:knowledge:recall:source`]}};
  await f.gmController.run(input);await f.gmController.run(input);assert.equal(f.die.count,1);assert.deepEqual(f.resolved,['rk1']);f.cleanup();
 });
+test('a target Token relinked while GM settlement is delayed cannot grant the old actor result to its replacement',async()=>{
+ const f=controllerFixture(),capture=await api.captureWorkbenchRecall({...f,requestId:'target-relink',targetUuids:[f.target.uuid]});
+ f.target.actor={...f.target.actor,uuid:'Actor.replacement'};f.target.object.actor=f.target.actor;
+ await assert.rejects(()=>f.gmController.settle(capture.message.id,f.user),/目标.*角色|目标.*改变/);
+ assert.equal(f.die.count,1);assert.deepEqual(f.resolved,[]);assert.equal(capture.message.flags[MODULE_ID].workbenchRecall.status,'pending');f.cleanup();
+});
 test('Automatic Knowledge uses the fixed eligible Assurance skill and only actual combat rounds',()=>{
  const f=fixture();const feat={actor:f.actor,_stats:{compendiumSource:AUTOMATIC_KNOWLEDGE_SOURCE},flags:{},system:{rules:[]}},assurance={_stats:{compendiumSource:ASSURANCE_SOURCE},system:{rules:[{key:'ChoiceSet',flag:'assurance',selection:'occultism'}]}};f.actor.items=[feat,assurance];
  assert.equal(automaticKnowledgeChoices(f.actor,feat).statistic,'occultism');assert.throws(()=>automaticKnowledgeRound(f.game),/遭遇/);f.game.combat={id:'c',round:2,started:true};assert.equal(automaticKnowledgeRound(f.game),'c:2');f.actor.skills.occultism.rank=1;assert.deepEqual(automaticKnowledgeChoices(f.actor,feat).choices,[]);
@@ -109,6 +115,13 @@ test('knowledge provider exposes normal and Automatic Knowledge entry points wit
  const f=fixture(),provider=createKnowledgeAutomation({...f,choose:async()=>{throw Error('ordinary RK must not ask skill');}});
  const rk={actor:f.actor,type:'action',_stats:{compendiumSource:'Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo'}};const automatic={actor:f.actor,type:'feat',_stats:{compendiumSource:AUTOMATIC_KNOWLEDGE_SOURCE}};
  assert.equal(provider.resolveAction(rk),'knowledge:recall');assert.equal(provider.resolveAction(automatic),'knowledge:automatic');assert.equal(provider.requiresActualUse(rk,'knowledge:recall'),true);assert.equal(provider.requiresActualUse(automatic,'knowledge:automatic'),true);
+});
+test('a target relink after native result publication cannot enter knowledge benefit processing',async()=>{
+ const f=fixture(),monster={id:'monster',_stats:{compendiumSource:KNOWLEDGE_SOURCES.monster},type:'feat'};f.actor.items=new Map([[monster.id,monster]]);
+ const capture=await api.captureWorkbenchRecall({...f,requestId:'published-relink',targetUuids:[f.target.uuid]}),gmGame={...f.game,user:f.gm};
+ await api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:gmGame,message:capture.message});f.target.actor={...f.target.actor,uuid:'Actor.replacement'};f.target.object.actor=f.target.actor;
+ const provider=createKnowledgeAutomation({...f,game:gmGame});await provider.processRecall(capture.message);
+ assert.equal(capture.message.flags[MODULE_ID].knowledge?.processed,undefined);assert.equal(f.die.count,1);
 });
 test('HUD render capture takes the real earliest RK click and releases detached application roots',async()=>{
  const f=fixture();f.user.active=true;f.gm.active=true;f.actor.getActiveTokens=()=>[f.token];f.game.user.character=f.actor;
@@ -162,8 +175,8 @@ test('only the persisted automatic GM result settles Monster Hunter once; replay
  const OriginalRoll=f.globals.Roll;f.globals.Roll=class extends OriginalRoll{constructor(...args){super(...args);this.total=20;}};
  const capture=await api.captureWorkbenchRecall({...f,requestId:'benefit',targetUuids:[f.target.uuid]});assert.equal(effects,0);
  const gmGame={...f.game,user:f.gm},provider=createKnowledgeAutomation({...f,game:gmGame,choose:async()=>{throw Error('no redundant information recipient choice');}});
- await api.finalizeWorkbenchRecall({game:gmGame,message:capture.message});await provider.processRecall(capture.message);assert.equal(effects,1);
- await provider.processRecall(capture.message);assert.equal(effects,1);await assert.rejects(()=>api.finalizeWorkbenchRecall({game:gmGame,message:capture.message,dc:15}),/锁定/);assert.equal(effects,1);assert.equal(f.die.count,1);
+ await api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:gmGame,message:capture.message});await provider.processRecall(capture.message);assert.equal(effects,1);
+ await provider.processRecall(capture.message);assert.equal(effects,1);await assert.rejects(()=>api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:gmGame,message:capture.message,dc:15}),/锁定/);assert.equal(effects,1);assert.equal(f.die.count,1);
 });
 test('Automatic Knowledge executes fixed Assurance on original owner and shares one per-round pool across feat copies',async()=>{
  const f=controllerFixture();f.actor.type='character';f.actor.flags={};f.gmGame.combat={id:'c',round:1,started:true};f.actor.skills.occultism.modifiers=[{type:'proficiency',modifier:9},{type:'ability',modifier:4}];
@@ -179,9 +192,9 @@ test('Automatic Knowledge executes fixed Assurance on original owner and shares 
 test('a fixed Lore ability preserves its statistic and DC instead of being excluded by ordinary primary policy',async()=>{
  const f=fixture();f.actor.skills['warfare-lore']={...f.actor.skills.occultism,slug:'warfare-lore',label:'Warfare Lore',lore:true};
  const capture=await api.captureWorkbenchRecall({...f,requestId:'fixed-lore',targetUuids:[f.target.uuid],statistic:'warfare-lore',dc:18});
- const result=await api.finalizeWorkbenchRecall({game:{...f.game,user:f.gm},message:capture.message,user:f.gm});assert.equal(result?.statistic,'warfare-lore');assert.equal(result.dc,18);
+ const result=await api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:{...f.game,user:f.gm},message:capture.message,user:f.gm});assert.equal(result?.statistic,'warfare-lore');assert.equal(result.dc,18);
 });
 test('a player cannot impersonate the GM by supplying the actual GM User object to finalization',async()=>{
  const f=fixture();const capture=await api.captureWorkbenchRecall({...f,requestId:'gm-spoof',targetUuids:[f.target.uuid]});
- await assert.rejects(()=>api.finalizeWorkbenchRecall({game:f.game,message:capture.message,user:f.gm}),/GM/);
+ await assert.rejects(()=>api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:f.game,message:capture.message,user:f.gm}),/GM/);
 });
