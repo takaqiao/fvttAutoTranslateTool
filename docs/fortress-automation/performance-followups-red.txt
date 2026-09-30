@@ -1,0 +1,251 @@
+✔ dependency changes reconcile the setting through serialized real maintenance, without recursive writes (2.4306ms)
+✔ actor/item/token lifecycle reevaluates coverage, while a non-primary client cannot write (0.8576ms)
+✔ a qualification change during an in-flight write schedules a fresh pass and errors are reported (0.2269ms)
+✔ ordinary token movement never scans actor coverage or reads Patreon rules (0.5417ms)
+✔ actor association, synthetic data, flags and unknown token changes still reevaluate coverage (0.4395ms)
+✖ HP, focus and cosmetic actor writes do not rebuild reminder coverage (0.5672ms)
+✖ item frequency and description writes leave coverage alone while source changes reconcile (0.1801ms)
+✖ party maintenance coalesces a synchronous burst (3.0727ms)
+✖ party maintenance repeats once for changes arriving during a document write (1.2791ms)
+✖ party cosmetic combat updates skip inventory maintenance (0.5936ms)
+✖ party queued maintenance stops on authority loss or disposal (1.1688ms)
+✖ av maintenance coalesces a synchronous burst (1.0936ms)
+✖ av maintenance repeats once for changes arriving during a document write (0.5166ms)
+✖ av cosmetic combat updates skip inventory maintenance (0.3976ms)
+✖ av queued maintenance stops on authority loss or disposal (0.612ms)
+✔ one round ends at the creator next start, even before the next numerical round (1.1937ms)
+✔ only the creator actual start receipt expires this source; fiend turn/end and time do not (0.7936ms)
+✔ reload or GM handoff can expire the persisted source exactly once (0.2084ms)
+✔ reverting or removing the exact damage receipt removes only this source (0.2663ms)
+✔ ending or deleting the encounter removes its one-round source (0.2183ms)
+✔ creator removed leaves a finite original-time fallback and warns once (0.3548ms)
+✔ round rollback leaves a finite original-time fallback and warns once (0.2119ms)
+✔ turn reorder leaves a finite original-time fallback and warns once (0.1869ms)
+✔ initiative change leaves a finite original-time fallback and warns once (0.1419ms)
+✔ skipped creator leaves a finite original-time fallback and warns once (0.1536ms)
+✔ a re-ordered creator that already started cannot reuse an old start as a new turn (0.1682ms)
+✔ foreign rules or changed effect origins do not authorize source deletion (0.1592ms)
+✔ non-GM clients do not alter duration or conditions (0.0576ms)
+✔ scene-only synthetic fiend sources are included in reload recovery (0.0677ms)
+✖ unrelated chat does not revisit inventories after scar recovery (3.2952ms)
+✖ the indexed damage receipt still removes its exact scar without scanning scenes (0.878ms)
+✔ newly created scar effects join the receipt index after initial empty recovery (0.3977ms)
+✔ actor imports replace stale indexed effect documents (0.2526ms)
+ℹ tests 33
+ℹ suites 0
+ℹ pass 21
+ℹ fail 12
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 127.8332
+
+✖ failing tests:
+
+test at modules\pf2e-third-party-automation\tests\glimpse-configuration-events.test.mjs:70:1
+✖ HP, focus and cosmetic actor writes do not rebuild reminder coverage (0.5672ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  3 !== 0
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/glimpse-configuration-events.test.mjs:73:9)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 3,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\glimpse-configuration-events.test.mjs:75:1
+✖ item frequency and description writes leave coverage alone while source changes reconcile (0.1801ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  3 !== 0
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/glimpse-configuration-events.test.mjs:78:9)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 3,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\maintenance-scheduling.test.mjs:21:2
+✖ party maintenance coalesces a synchronous burst (3.0727ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  8 !== 1
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/maintenance-scheduling.test.mjs:22:120)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 8,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\maintenance-scheduling.test.mjs:24:2
+✖ party maintenance repeats once for changes arriving during a document write (1.2791ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  6 !== 2
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/maintenance-scheduling.test.mjs:29:185)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 6,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\maintenance-scheduling.test.mjs:31:2
+✖ party cosmetic combat updates skip inventory maintenance (0.5936ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/maintenance-scheduling.test.mjs:32:122)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\maintenance-scheduling.test.mjs:35:2
+✖ party queued maintenance stops on authority loss or disposal (1.1688ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/maintenance-scheduling.test.mjs:37:126)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\maintenance-scheduling.test.mjs:21:2
+✖ av maintenance coalesces a synchronous burst (1.0936ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  8 !== 1
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/maintenance-scheduling.test.mjs:22:120)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 8,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\maintenance-scheduling.test.mjs:24:2
+✖ av maintenance repeats once for changes arriving during a document write (0.5166ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  6 !== 2
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/maintenance-scheduling.test.mjs:29:185)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 6,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\maintenance-scheduling.test.mjs:31:2
+✖ av cosmetic combat updates skip inventory maintenance (0.3976ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/maintenance-scheduling.test.mjs:32:122)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\maintenance-scheduling.test.mjs:35:2
+✖ av queued maintenance stops on authority loss or disposal (0.612ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/maintenance-scheduling.test.mjs:36:131)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\spiritual-scar-expiry.test.mjs:29:1
+✖ unrelated chat does not revisit inventories after scar recovery (3.2952ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/spiritual-scar-expiry.test.mjs:31:138)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\spiritual-scar-expiry.test.mjs:33:1
+✖ the indexed damage receipt still removes its exact scar without scanning scenes (0.878ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + []
+  - [
+  -   'effect'
+  - ]
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/spiritual-scar-expiry.test.mjs:35:124)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [],
+    expected: [ 'effect' ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

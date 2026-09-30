@@ -1,0 +1,32 @@
+✖ unregister cancels queued receipt settlement (3.1157ms)
+ℹ tests 1
+ℹ suites 0
+ℹ pass 0
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 75.2959
+
+✖ failing tests:
+
+test at modules\pf2e-third-party-automation\tests\spiritual-scar-expiry.test.mjs:60:1
+✖ unregister cancels queued receipt settlement (3.1157ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + [
+  +   'effect'
+  + ]
+  - []
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/spiritual-scar-expiry.test.mjs:61:231)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [ 'effect' ],
+    expected: [],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }

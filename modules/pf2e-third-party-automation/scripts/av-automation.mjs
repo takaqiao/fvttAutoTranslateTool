@@ -4,6 +4,8 @@ import {getNativeCastEvents} from './amp-cast-events.mjs';
 import {registerAvDamageSnapshot} from './av-damage-snapshot.mjs';
 import {registerAvRefocusEvents} from './av-refocus-events.mjs';
 import {buildAvWaveRepair,WAVE_SPELL_SLUGS,WAVE_SPELL_SOURCES,isAvWaveSpell,getAvWaveFeature,hasAvWaveEnergy} from './av-wave-repair.mjs';
+import {publicTargetName} from './native-context.mjs';
+import {createDirtyMaintenance,isUnrelatedMaintenanceUpdate,COSMETIC_UPDATE_FIELDS} from './maintenance-events.mjs';
 
 export const AV_SOURCES=Object.freeze({
  shield:'Compendium.pf2e-team-plus-magic.items.Item.u8BuGKcF9VYk9TZi',
@@ -131,10 +133,6 @@ export function createAvAutomation({game,fromUuid=globalThis.fromUuid,choose,onE
   if(ids.length!==1)throw Error('请在使用能力时指定一个目标。');
   const token=await fromUuid(ids[0]),target=token?.actor;
   if(!target||target.uuid===actor.uuid||!actor.isAllyOf?.(target))throw Error('此能力需要一个其他盟友目标。');
-  const origin=(actor.getActiveTokens?.(true,true)??[]).find(t=>(t.document??t).parent?.id===token.parent?.id);const originToken=origin?.document??origin;
-  const distance=originToken?.object?.distanceTo?.(token.object);
-  if(!Number.isFinite(distance)||distance>30)throw Error('盟友必须在30尺内，并有可测量的同场景Token。');
-  if(actor.canSee===false||originToken.object?.checkCollision?.(token.object.center,{type:'sight',mode:'any'}))throw Error('必须能看见目标盟友。');
   return token;
  }
  async function choice(actor,user,title,choices){
@@ -163,9 +161,6 @@ export function createAvAutomation({game,fromUuid=globalThis.fromUuid,choose,onE
  async function prepareBalm(actor,item,message,user){
   const cast=castState(item,message);
   if(!hasBalm(actor)||!cast.psiCantrip||!cast.amped||cast.alternateAmp!=='mental-balm')return null;
-  // A selected Token is not proof that no enemy is inside an arbitrary area.
-  // Current self-only Wheel and explicit non-area ally casts have complete data.
-  if(item.system.area)throw Error('心灵疗愈需要确认法术区域实际未影响敌人；当前区域缺少完整受影响目标，未附加效果。');
   const uuids=message.flags?.[MODULE_ID]?.usageInput?.targetUuids??[];
   const targets=await Promise.all(uuids.map(uuid=>fromUuid(uuid)));
   if(source(item)!==AV_SOURCES.wheel){
@@ -174,14 +169,14 @@ export function createAvAutomation({game,fromUuid=globalThis.fromUuid,choose,onE
   }
   const active=values(actor.getActiveTokens?.(true,true)).map(t=>t.document??t);
   const origin=active.find(t=>t.id===message.speaker?.token&&t.parent?.id===message.speaker?.scene)??(active.length===1?active[0]:null);
-  const available=new Map([[actor.uuid,actor]]);
+  const available=new Map([[actor.uuid,actor]]),availableTokens=new Map();
   for(const token of values(origin?.parent?.tokens)){
    const target=token.actor;if(!target||token.hidden&&!user.isGM||target.uuid===actor.uuid||!actor.isAllyOf?.(target))continue;
-   const distance=origin?.object?.distanceTo?.(token.object);if(Number.isFinite(distance)&&distance<=30)available.set(target.uuid,target);
+   available.set(target.uuid,target);availableTokens.set(target.uuid,token);
   }
-  const selected=await choice(actor,user,'心灵疗愈：选择自己或30尺内盟友',[...available.values()].map(a=>({value:a.uuid,label:a.name})));
+  const selected=await choice(actor,user,'心灵疗愈：选择自己或盟友',[...available.values()].map(a=>({value:a.uuid,label:a.uuid===actor.uuid?actor.name:publicTargetName(availableTokens.get(a.uuid),{game,user})})));
   const target=available.get(selected);
-  if(target.uuid!==actor.uuid&&!values(origin?.parent?.tokens).some(t=>t.actor?.uuid===target.uuid&&(!t.hidden||user.isGM)&&actor.isAllyOf?.(t.actor)&&Number.isFinite(origin?.object?.distanceTo?.(t.object))&&origin.object.distanceTo(t.object)<=30))throw Error('所选盟友已离开30尺范围，未支付聊天施法资源。');
+  if(target.uuid!==actor.uuid&&!values(origin?.parent?.tokens).some(t=>t.actor?.uuid===target.uuid&&(!t.hidden||user.isGM)&&actor.isAllyOf?.(t.actor)))throw Error('所选盟友已不在可用目标列表，未支付聊天施法资源。');
   if(targets.some(t=>!t?.actor||t.actor.uuid!==actor.uuid&&!actor.isAllyOf?.(t.actor)))throw Error('心灵疗愈原法术目标已不符合盟友条件。');
   const data=await loadEffect(AV_SOURCES.balmEffect);
   return ()=>targetQueue.run(target.uuid,async()=>{
@@ -329,15 +324,17 @@ export function createAvAutomation({game,fromUuid=globalThis.fromUuid,choose,onE
  async function maintain(actor){
   if(!isGM(game)||!actor)return;
   return queue.run(actor.uuid,async()=>{
+   if(!isGM(game))return;
    const remove=[];
    for(const item of values(actor.items)){
+    if(!isGM(game))return;
     const waveRepair=buildAvWaveRepair(item);if(waveRepair)await item.update(waveRepair);
     const data=own(item);if(!data)continue;
     let expired=Number.isFinite(data.expiresAt)&&data.expiresAt<=now()||timingExpired(game,data.timing);
     if(data.kind==='restore-save'){const caster=await fromUuid(data.casterUuid);expired||=!caster||!hasEffect(caster,'unleash-psyche');}
     if(expired)remove.push(item.id);
    }
-   if(remove.length)await actor.deleteEmbeddedDocuments('Item',remove);
+   if(remove.length&&isGM(game))await actor.deleteEmbeddedDocuments('Item',remove);
   });
  }
  async function claimShield(payload,user){
@@ -415,14 +412,14 @@ export function createAvAutomation({game,fromUuid=globalThis.fromUuid,choose,onE
   },'WRAPPER');
   on('createChatMessage',message=>processMessage(message).catch(report));
   on('updateChatMessage',message=>processMessage(message).catch(report));
-  const all=()=>{if(isGM(game)){
+  const maintenance=createDirtyMaintenance({enabled:()=>isGM(game),run:async()=>{
    const actors=new Map(values(game.actors).map(a=>[a.uuid,a]));
    for(const scene of values(game.scenes))for(const token of values(scene.tokens))if(token.actor)actors.set(token.actor.uuid,token.actor);
    for(const combatant of values(game.combat?.combatants))if(combatant.actor)actors.set(combatant.actor.uuid,combatant.actor);
-   for(const actor of actors.values())maintain(actor).catch(report);
-  }};
-  on('updateCombat',all);on('deleteCombat',all);on('updateWorldTime',all);on('deleteItem',item=>{if(effectSlug(item)==='unleash-psyche')all();});
-  return ()=>{for(const[name,id]of subscriptions)Hooks.off(name,id);unregisterCast();unregisterDamageSnapshot();unregisterRefocus();if(libWrapper)libWrapper.unregister(MODULE_ID,rerollPath);};
+   await Promise.all([...actors.values()].map(maintain));
+  },onError:report}),all=()=>maintenance.request();
+  on('updateCombat',(_combat,changes={})=>{if(!isUnrelatedMaintenanceUpdate(changes,COSMETIC_UPDATE_FIELDS))return all()});on('deleteCombat',all);on('updateWorldTime',all);on('deleteItem',item=>{if(effectSlug(item)==='unleash-psyche')return all()});
+  return ()=>{maintenance.dispose();for(const[name,id]of subscriptions)Hooks.off(name,id);unregisterCast();unregisterDamageSnapshot();unregisterRefocus();if(libWrapper)libWrapper.unregister(MODULE_ID,rerollPath);};
  }
  return {resolveAction,captureUsage,executeUsage,processMessage,maintain,register,beforeDamage,afterDamage};
 }

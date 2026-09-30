@@ -1,0 +1,205 @@
+✖ party never registers movement monitoring (1.4035ms)
+✖ guardian validity uses live shield state without canvas geometry (0.1407ms)
+✖ AV restore settles a recorded ally without canvas geometry (1.3231ms)
+✖ party maintenance coalesces a synchronous burst (2.8479ms)
+✖ party maintenance repeats once for changes arriving during a document write (1.1229ms)
+✖ party cosmetic combat updates skip inventory maintenance (0.4802ms)
+✖ party queued maintenance stops on authority loss or disposal (0.4245ms)
+✖ av maintenance coalesces a synchronous burst (0.6876ms)
+✖ av maintenance repeats once for changes arriving during a document write (0.4776ms)
+✖ av cosmetic combat updates skip inventory maintenance (0.3988ms)
+✖ av queued maintenance stops on authority loss or disposal (0.3583ms)
+ℹ tests 11
+ℹ suites 0
+ℹ pass 0
+ℹ fail 11
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 93.3144
+
+✖ failing tests:
+
+test at modules\pf2e-third-party-automation\tests\maintenance-scheduling.test.mjs:20:1
+✖ party never registers movement monitoring (1.4035ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  true !== false
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/maintenance-scheduling.test.mjs:21:36)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.start (node:internal/test_runner/test:1257:17)
+      at startSubtestAfterBootstrap (node:internal/test_runner/harness:387:17) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: true,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\maintenance-scheduling.test.mjs:23:1
+✖ guardian validity uses live shield state without canvas geometry (0.1407ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  false !== true
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/maintenance-scheduling.test.mjs:25:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: false,
+    expected: true,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\maintenance-scheduling.test.mjs:28:1
+✖ AV restore settles a recorded ally without canvas geometry (1.3231ms)
+  Error: 盟友必须在30尺内，并有可测量的同场景Token。
+      at targetFor (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/av-automation.mjs:136:52)
+      at async file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/av-automation.mjs:231:17
+      at async file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/av-automation.mjs:219:17
+      at async once (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/av-automation.mjs:150:16)
+
+test at modules\pf2e-third-party-automation\tests\maintenance-scheduling.test.mjs:39:2
+✖ party maintenance coalesces a synchronous burst (2.8479ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  8 !== 1
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/maintenance-scheduling.test.mjs:40:120)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 8,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\maintenance-scheduling.test.mjs:42:2
+✖ party maintenance repeats once for changes arriving during a document write (1.1229ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  6 !== 2
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/maintenance-scheduling.test.mjs:47:185)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 6,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\maintenance-scheduling.test.mjs:49:2
+✖ party cosmetic combat updates skip inventory maintenance (0.4802ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/maintenance-scheduling.test.mjs:50:122)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\maintenance-scheduling.test.mjs:53:2
+✖ party queued maintenance stops on authority loss or disposal (0.4245ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/maintenance-scheduling.test.mjs:55:126)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\maintenance-scheduling.test.mjs:39:2
+✖ av maintenance coalesces a synchronous burst (0.6876ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  8 !== 1
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/maintenance-scheduling.test.mjs:40:120)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 8,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\maintenance-scheduling.test.mjs:42:2
+✖ av maintenance repeats once for changes arriving during a document write (0.4776ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  6 !== 2
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/maintenance-scheduling.test.mjs:47:185)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 6,
+    expected: 2,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\maintenance-scheduling.test.mjs:49:2
+✖ av cosmetic combat updates skip inventory maintenance (0.3988ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/maintenance-scheduling.test.mjs:50:122)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\maintenance-scheduling.test.mjs:53:2
+✖ av queued maintenance stops on authority loss or disposal (0.3583ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/maintenance-scheduling.test.mjs:54:131)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

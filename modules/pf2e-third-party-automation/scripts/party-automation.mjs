@@ -2,6 +2,7 @@ import {MODULE_ID} from './rules.mjs';
 import {SerialActions,requireOwner} from './runtime.mjs';
 import {getSourceId,isActiveGM,resolveMessageTargets,upsertOwnedEffect} from './native-context.mjs';
 import {getNativeCastEvents} from './amp-cast-events.mjs';
+import {createDirtyMaintenance,isUnrelatedMaintenanceUpdate,COSMETIC_UPDATE_FIELDS} from './maintenance-events.mjs';
 
 export const PARTY_SOURCES=Object.freeze({
  clue:'Compendium.pf2e.actionspf2e.Item.25WDi1cVUrW92sUj',clueEffect:'Compendium.pf2e.feat-effects.Item.vhSYlQiAQMLuXqoc',
@@ -45,13 +46,9 @@ export function isImperialBloodMagic(item){
  const options=values(item.actor.getRollOptions?.());
  return options.includes('blood-magic:imperial')&&!options.some(o=>o.startsWith('second-blood-magic:'));
 }
-function distance(source,target){
- if(!source?.object||!target?.object||source.parent?.id!==target.parent?.id)return null;
- const d=source.object.distanceTo?.(target.object);return Number.isFinite(d)?d:null;
-}
 export function guardianActive(source,target){
- const shield=source?.actor?.attributes?.shield,d=distance(source,target);
- return !!shield?.raised&&!shield.broken&&!shield.destroyed&&d!==null&&d<=5;
+ const shield=source?.actor?.attributes?.shield;
+ return !!target?.actor&&!!shield?.raised&&!shield.broken&&!shield.destroyed;
 }
 export function createPartyAutomation({game,fromUuid=globalThis.fromUuid,choose,onError=console.error,castEvents=getNativeCastEvents({game,fromUuid})}={}){
  castEvents.addMatcher(isImperialBloodMagic);
@@ -76,10 +73,9 @@ export function createPartyAutomation({game,fromUuid=globalThis.fromUuid,choose,
   if(scene&&token){const t=await fromUuid(`Scene.${scene}.Token.${token}`);if(t?.actor?.uuid===actor.uuid)return t;}
   const active=values(actor.getActiveTokens?.(true,true)).map(tokenDoc);return active.length===1?active[0]:null;
  };
- async function targetFor(context,maxDistance){
+ async function targetFor(context){
   const targets=await resolveMessageTargets(context.message,{fromUuid}),source=await sourceToken(context.actor,context.message);
   if(targets.length!==1||targets[0].actor.uuid===context.actor.uuid)throw Error('使用此能力时请选中一个其他生物作为目标。');
-  const d=distance(source,targets[0]);if(maxDistance!==null&&(d===null||d>maxDistance))throw Error(`目标必须在${maxDistance}尺范围内，且双方Token位于同一场景。`);
   return {source,target:targets[0]};
  }
  function origin(data,actor,item,token){
@@ -95,7 +91,7 @@ export function createPartyAutomation({game,fromUuid=globalThis.fromUuid,choose,
    let delivered=false;
    try{
    if(action==='party:clue'){
-    const {source,target}=await targetFor(context,null),cooldown=actor.flags?.[MODULE_ID]?.party?.clueUntil??0;
+    const {source,target}=await targetFor(context),cooldown=actor.flags?.[MODULE_ID]?.party?.clueUntil??0;
     if(cooldown>now())throw Error('线索指引尚未结束10分钟冷却。');
     const uses=item.system.frequency?.value??item.system.frequency?.max??0;
     if(!frequencyReceipt&&uses<1)throw Error('线索指引没有可用次数。');
@@ -106,18 +102,18 @@ export function createPartyAutomation({game,fromUuid=globalThis.fromUuid,choose,
     await actor.update({[`flags.${MODULE_ID}.party.clueUntil`]:now()+600});return `已向${target.actor.name}提供下一次检定加值。`;
    }
    if(action==='party:anoint'){
-    const {source,target}=await targetFor(context,5);if(target.actor.isAllyOf&&!target.actor.isAllyOf(actor))throw Error('符血点化的目标必须是盟友。');
+    const {source,target}=await targetFor(context);if(target.actor.isAllyOf&&!target.actor.isAllyOf(actor))throw Error('符血点化的目标必须是盟友。');
     const data=origin(await load(PARTY_SOURCES.anointEffect),actor,item,source);
-    data.flags??={};data.flags[MODULE_ID]={party:{kind:'anoint',sourceActor:actor.uuid,sourceToken:source.uuid,targetToken:target.uuid,expiresAt:now()+60}};
+    data.flags??={};data.flags[MODULE_ID]={party:{kind:'anoint',sourceActor:actor.uuid,sourceToken:source?.uuid??null,targetToken:target.uuid,expiresAt:now()+60}};
     await removeForSource('anoint',actor.uuid);await upsertOwnedEffect(target.actor,'anoint:'+actor.uuid,data);return `已点化${target.actor.name}，持续1分钟。`;
    }
    if(action==='party:guardian'){
-    const {source,target}=await targetFor(context,5);
-    if(!guardianActive(source,target))throw Error('需要举起可用的盾牌并与目标相邻。');
+    const {source,target}=await targetFor(context);
+    if(!guardianActive(source,target))throw Error('需要举起可用的盾牌。');
     const last=lastActions.get(actor.uuid);if(last?.kind!=='raise-shield')throw Error('忠诚卫士要求上一个动作是举盾；请通过角色卡或HUD举盾后使用。');
     const shield=actor.items.get(actor.attributes.shield.itemId),tower=shield?.baseType==='tower-shield'||shield?.system?.baseItem==='tower-shield';
     const data=origin({name:'忠诚卫士',type:'effect',img:item.img,system:{description:{value:''},rules:[{key:'FlatModifier',selector:'ac',type:'circumstance',value:tower?2:1,predicate:['parent:origin:shield:raised']}],duration:{value:-1,unit:'unlimited',expiry:null,sustained:false},level:{value:actor.level},traits:{value:[]},tokenIcon:{show:true}},flags:{[MODULE_ID]:{party:{kind:'guardian',sourceActor:actor.uuid,sourceToken:source.uuid,targetToken:target.uuid,shieldId:shield.id}}}},actor,item,source);
-    await removeForSource('guardian',actor.uuid);await upsertOwnedEffect(target.actor,'guardian:'+actor.uuid,data);lastActions.set(actor.uuid,{kind:'guardian'});return `已守护${target.actor.name}；盾牌放下或不再相邻时自动结束。`;
+    await removeForSource('guardian',actor.uuid);await upsertOwnedEffect(target.actor,'guardian:'+actor.uuid,data);lastActions.set(actor.uuid,{kind:'guardian'});return `已守护${target.actor.name}；盾牌放下或不再可用时自动结束。`;
    }
    if(action==='party:imperial'){
     const marks=actors().flatMap(a=>values(a.items).filter(i=>own(i)?.kind==='anoint'&&own(i).sourceActor===actor.uuid&&!i.isExpired&&own(i).expiresAt>now()).map(i=>({actor:a,item:i})));
@@ -141,19 +137,13 @@ export function createPartyAutomation({game,fromUuid=globalThis.fromUuid,choose,
    }
   });
  }
- async function maintain(actor,{movedToken}={}){
+ async function maintain(actor){
   if(!isActiveGM(game)||!actor?.items)return;
-  // Foundry maintains and invalidates documentsByType itself, including synthetic
-  // actors. Movement checks need no inventory repair scan or long-lived item cache.
-  const movementItems=()=>values(actor.itemTypes?.effect??values(actor.items).filter(i=>i.type==='effect')).filter(i=>{
-   const state=own(i);return state?.kind==='guardian'&&(!movedToken.uuid||state.sourceToken===movedToken.uuid||state.targetToken===movedToken.uuid);
-  });
-  if(movedToken&&!movementItems().length)return;
   return queue.run(actor.uuid,async()=>{
    if(!isActiveGM(game))return;
-   for(const item of movedToken?movementItems():values(actor.items)){
+   for(const item of values(actor.items)){
     if(!isActiveGM(game))return;
-    const repaired=movedToken?null:buildKnownWeaknessRepair(item);if(repaired){await item.update({[`flags.${MODULE_ID}.knownWeaknessBefore`]:clone(item.system.rules),'system.rules':repaired});continue;}
+    const repaired=buildKnownWeaknessRepair(item);if(repaired){await item.update({[`flags.${MODULE_ID}.knownWeaknessBefore`]:clone(item.system.rules),'system.rules':repaired});continue;}
     const state=own(item);if(!state)continue;
     let expired=state.expiresAt&&state.expiresAt<=now();
     if(state.kind==='guardian'){
@@ -162,7 +152,7 @@ export function createPartyAutomation({game,fromUuid=globalThis.fromUuid,choose,
     }
     if(expired&&isActiveGM(game))await item.delete();
    }
-   if(movedToken||!isActiveGM(game))return;
+   if(!isActiveGM(game))return;
    const until=actor.flags?.[MODULE_ID]?.party?.clueUntil;if(until&&until<=now()){
     const clue=values(actor.items).find(i=>getSourceId(i)===PARTY_SOURCES.clue);
     if(clue?.system.frequency)await clue.update({'system.frequency.value':clue.system.frequency.max},{[MODULE_ID]:{usageInternal:true}});
@@ -172,10 +162,10 @@ export function createPartyAutomation({game,fromUuid=globalThis.fromUuid,choose,
  }
  function register({Hooks}={}){
   const registrations=[],on=(name,fn)=>registrations.push([name,Hooks.on(name,fn)]);
-  const all=()=>{if(isActiveGM(game))for(const a of actors())maintain(a).catch(onError);};
+  const maintenance=createDirtyMaintenance({enabled:()=>isActiveGM(game),run:scope=>Promise.all((scope===null?actors():[...new Map([...scope].map(a=>[a.uuid,a])).values()]).map(maintain)),onError}),all=()=>maintenance.request();
   on('createItem',item=>{
    if(isActiveGM(game)&&item.actor&&getSourceId(item)===PARTY_SOURCES.raiseShieldEffect)lastActions.set(item.actor.uuid,{kind:'raise-shield'});
-   if(item.type==='effect')maintain(item.actor).catch(onError);
+   if(item.type==='effect'&&item.actor)return maintenance.request(item.actor);
   });
   on('createChatMessage',m=>{
    if(!isActiveGM(game)||m.flags?.[MODULE_ID]?.usageGenerated)return;
@@ -185,20 +175,11 @@ export function createPartyAutomation({game,fromUuid=globalThis.fromUuid,choose,
    if(source===PARTY_SOURCES.guardian)return;
    if(['attack-roll','skill-check'].includes(context?.type)||m.item?.type==='spell'||['feat','action'].includes(m.item?.type))lastActions.set(actor.uuid,{kind:'other'});
   });
-  const movementFields=new Set(['x','y','elevation','rotation','level','movementAction','_movementHistory','_regions','_id','_stats']);
-  on('updateToken',(token,changes={})=>{
-   const moved=['x','y','elevation','level'].some(k=>Object.hasOwn(changes,k));
-   if(moved&&token.actor)lastActions.set(token.actor.uuid,{kind:'move'});
-   if(!isActiveGM(game))return;
-   // Mixed/unknown changes can replace a linked actor or its effects.
-   if(!Object.keys(changes).every(k=>movementFields.has(k)))return all();
-   if(moved)for(const actor of actors())maintain(actor,{movedToken:token}).catch(onError);
-  });
   let electedGM=game.users.activeGM?.id;
-  const authorityChanged=()=>{const current=game.users.activeGM?.id;if(current!==electedGM){lastActions.clear();electedGM=current;}all();};
+  const authorityChanged=()=>{const current=game.users.activeGM?.id;if(current!==electedGM){lastActions.clear();electedGM=current;}return all();};
   on('userConnected',authorityChanged);on('updateUser',authorityChanged);on('canvasReady',all);
-  on('deleteToken',all);on('deleteItem',all);on('updateItem',(item,changes)=>{if(item.type==='shield'||getSourceId(item)===PARTY_SOURCES.raiseShieldEffect)all();});on('updateWorldTime',all);on('updateCombat',(_combat,changes={})=>{if('round'in changes||'turn'in changes)lastActions.clear();all();});on('deleteCombat',()=>{lastActions.clear();all();});
-  return()=>{for(const[n,id]of registrations)Hooks.off(n,id);};
+  on('deleteToken',all);on('deleteItem',all);on('updateItem',(item,changes={})=>{if(!isUnrelatedMaintenanceUpdate(changes,COSMETIC_UPDATE_FIELDS)&&(item.type==='shield'||getSourceId(item)===PARTY_SOURCES.raiseShieldEffect))return all()});on('updateWorldTime',all);on('updateCombat',(_combat,changes={})=>{if(isUnrelatedMaintenanceUpdate(changes,COSMETIC_UPDATE_FIELDS))return;if('round'in changes||'turn'in changes)lastActions.clear();return all()});on('deleteCombat',()=>{lastActions.clear();return all()});
+  return()=>{maintenance.dispose();for(const[n,id]of registrations)Hooks.off(n,id);};
  }
  return {resolveAction,executeUsage,maintain,register,captureUsage:(item,context)=>isImperialBloodMagic(item)?castEvents.captureUsage(item,context):null};
 }

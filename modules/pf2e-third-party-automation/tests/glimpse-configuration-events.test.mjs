@@ -25,7 +25,7 @@ test('dependency changes reconcile the setting through serialized real maintenan
 });
 test('actor/item/token lifecycle reevaluates coverage, while a non-primary client cannot write',async()=>{
  const f=fixture();let calls=0;const observer=events.registerGlimpseConfigurationEvents({game:f.game,Hooks:f.Hooks,reconcile:async()=>{calls++},onError:assert.fail});
- for(const hook of ['createActor','updateActor','deleteActor','createItem','updateItem','deleteItem','createToken','updateToken','deleteToken','createScene','deleteScene','combatStart','updateCombat','createCombatant','updateCombatant','deleteCombatant'])await f.emit(hook,{});
+ for(const hook of ['createActor','updateActor','deleteActor','createItem','updateItem','deleteItem','createToken','updateToken','deleteToken','createScene','deleteScene','combatStart','updateCombat','createCombatant','updateCombatant','deleteCombatant'])await f.emit(hook,{},hook==='updateToken'?{delta:{items:[]}}:undefined);
  assert.equal(calls,16);
  f.game.user.id='player';await f.emit('updateActor',{});await observer.reconcileNow();assert.equal(calls,16);
  f.game.users.activeGM.id='player';await f.emit('updateUser',{});assert.equal(calls,17);
@@ -60,9 +60,20 @@ test('ordinary token movement never scans actor coverage or reads Patreon rules'
  observer.dispose();
 });
 
-test('actor association, synthetic data, flags and unknown token changes still reevaluate coverage',async()=>{
+test('only Token actor association and synthetic data reevaluate coverage',async()=>{
  const f=fixture();let calls=0;
  const observer=events.registerGlimpseConfigurationEvents({game:f.game,Hooks:f.Hooks,reconcile:async()=>{calls++},onError:assert.fail});
  for(const change of [{actorId:'other'},{actorLink:false},{delta:{items:[]}},{'delta.items':[]},{flags:{'pf2e-third-party-automation':{enabled:false}}},{'flags.pf2e-third-party-automation.enabled':true},{x:100,actorLink:true},{futureField:'unknown'},{},undefined])await f.emit('updateToken',{},change);
- assert.equal(calls,10);observer.dispose();
+ assert.equal(calls,5);observer.dispose();
+});
+
+test('HP, focus and cosmetic actor writes do not rebuild reminder coverage',async()=>{
+ const f=fixture();let calls=0;const observer=events.registerGlimpseConfigurationEvents({game:f.game,Hooks:f.Hooks,reconcile:async()=>{calls++},onError:assert.fail});
+ for(const changes of [{'system.attributes.hp.value':5},{system:{resources:{focus:{value:1}}}},{name:'name',img:'portrait',_stats:{modifiedTime:4}}])await f.emit('updateActor',{},changes);
+ assert.equal(calls,0);await f.emit('updateActor',{}, {'system.details.level.value':6});await f.emit('updateActor',{}, {items:[]});await f.emit('updateActor',{}, {futureField:true});assert.equal(calls,3);observer.dispose();
+});
+test('item frequency and description writes leave coverage alone while source changes reconcile',async()=>{
+ const f=fixture();let calls=0;const observer=events.registerGlimpseConfigurationEvents({game:f.game,Hooks:f.Hooks,reconcile:async()=>{calls++},onError:assert.fail});
+ for(const changes of [{'system.frequency.value':0},{system:{description:{value:'description'}}},{name:'name',img:'icon'}])await f.emit('updateItem',{},changes);
+ assert.equal(calls,0);await f.emit('updateItem',{}, {'_stats.compendiumSource':'other'});await f.emit('updateItem',{}, {'system.slug':'other'});assert.equal(calls,2);observer.dispose();
 });
