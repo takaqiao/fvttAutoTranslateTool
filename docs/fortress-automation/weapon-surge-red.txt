@@ -1,0 +1,242 @@
+✖ the next bound weapon success consumes exactly its original Weapon Surge (1.5004ms)
+✖ the next bound weapon criticalSuccess consumes exactly its original Weapon Surge (0.2299ms)
+✖ the next bound weapon failure consumes exactly its original Weapon Surge (0.2038ms)
+✖ the next bound weapon criticalFailure consumes exactly its original Weapon Surge (0.1486ms)
+✔ a different weapon and an unresolved attack leave Weapon Surge for its bound weapon (0.258ms)
+✖ delayed damage uses only the old Surge and does not consume or borrow the new one (0.234ms)
+✖ an attack without Surge cannot borrow an effect granted before its delayed damage (0.1594ms)
+✔ same-ID refreshed Surge survives the old frame (0.1543ms)
+✖ native reroll pf2e context carries the original snapshot rather than the next Surge (0.1735ms)
+✖ attack sequence combines the original Surge snapshot with its own Forceful modifier once (0.5888ms)
+✖ owner RPC snapshot expansion excludes the current Surge and preserves other transient effects (0.1629ms)
+✖ native Strike callbacks are awaited once and persist the snapshot before consuming the exact effect (0.1327ms)
+✖ real PF2e DamageDice body prepares the frozen native spirit d6 at ranks 1, 5 and 9 (0.1676ms)
+ℹ tests 13
+ℹ suites 0
+ℹ pass 2
+ℹ fail 11
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 84.3679
+
+✖ failing tests:
+
+test at modules\pf2e-third-party-automation\tests\weapon-surge.test.mjs:21:80
+✖ the next bound weapon success consumes exactly its original Weapon Surge (1.5004ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + []
+  - [
+  -   [
+  -     'surge'
+  -   ]
+  - ]
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/weapon-surge.test.mjs:22:154)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [],
+    expected: [ [ 'surge' ] ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\weapon-surge.test.mjs:21:80
+✖ the next bound weapon criticalSuccess consumes exactly its original Weapon Surge (0.2299ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + []
+  - [
+  -   [
+  -     'surge'
+  -   ]
+  - ]
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/weapon-surge.test.mjs:22:154)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [],
+    expected: [ [ 'surge' ] ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\weapon-surge.test.mjs:21:80
+✖ the next bound weapon failure consumes exactly its original Weapon Surge (0.2038ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + []
+  - [
+  -   [
+  -     'surge'
+  -   ]
+  - ]
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/weapon-surge.test.mjs:22:154)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [],
+    expected: [ [ 'surge' ] ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\weapon-surge.test.mjs:21:80
+✖ the next bound weapon criticalFailure consumes exactly its original Weapon Surge (0.1486ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + []
+  - [
+  -   [
+  -     'surge'
+  -   ]
+  - ]
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/weapon-surge.test.mjs:22:154)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [],
+    expected: [ [ 'surge' ] ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\weapon-surge.test.mjs:28:1
+✖ delayed damage uses only the old Surge and does not consume or borrow the new one (0.234ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/weapon-surge.test.mjs:30:9)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\weapon-surge.test.mjs:33:1
+✖ an attack without Surge cannot borrow an effect granted before its delayed damage (0.1594ms)
+  TypeError: frame.damage is not a function
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/weapon-surge.test.mjs:35:21)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+
+test at modules\pf2e-third-party-automation\tests\weapon-surge.test.mjs:40:1
+✖ native reroll pf2e context carries the original snapshot rather than the next Surge (0.1735ms)
+  TypeError: first.snapshot is not a function
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/weapon-surge.test.mjs:41:79)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7)
+
+test at modules\pf2e-third-party-automation\tests\weapon-surge.test.mjs:44:1
+✖ attack sequence combines the original Surge snapshot with its own Forceful modifier once (0.5888ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  2 !== 1
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/weapon-surge.test.mjs:47:9)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 2,
+    expected: 1,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\weapon-surge.test.mjs:49:1
+✖ owner RPC snapshot expansion excludes the current Surge and preserves other transient effects (0.1629ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/weapon-surge.test.mjs:50:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\weapon-surge.test.mjs:53:1
+✖ native Strike callbacks are awaited once and persist the snapshot before consuming the exact effect (0.1327ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/weapon-surge.test.mjs:54:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\weapon-surge.test.mjs:59:1
+✖ real PF2e DamageDice body prepares the frozen native spirit d6 at ranks 1, 5 and 9 (0.1676ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + 'undefined'
+  - 'function'
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/weapon-surge.test.mjs:60:9)
+      at Test.runInAsyncScope (node:async_hooks:226:14)
+      at Test.run (node:internal/test_runner/test:1397:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:969:18)
+      at Test.postRun (node:internal/test_runner/test:1537:19)
+      at Test.run (node:internal/test_runner/test:1462:12)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 'undefined',
+    expected: 'function',
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -29,8 +29,9 @@ export function createAttackSequence({actor}){
   if(valid&&history.some(entry=>twinPair(entry.fact,fact)))bonuses.push({trait:'twin',slug:'activity-twin',label:'PF2E.Item.Weapon.Twin.SecondPlus',value:'@weapon.system.damage.dice'});
   if(fact.traits.has('forceful')&&prior.length)bonuses.push({trait:'forceful',slug:`activity-forceful-${prior.length===1?'second':'third'}`,label:`PF2E.Item.Weapon.Forceful.${prior.length===1?'Second':'Third'}`,value:prior.length===1?'@weapon.system.damage.dice':'2 * @weapon.system.damage.dice'});
   const state={fact,valid,recorded:false},effects=createNextStrikeEffectFrame({actor,strike,target});
-  const frame={attackOptions,capture:effects.capture,consume:effects.consume,damageOptions:effects.damageOptions,damage(current){
+  const frame={attackOptions,capture:effects.capture,consume:effects.consume,damageOptions:effects.damageOptions,snapshot:effects.snapshot,transientItems:effects.transientItems,damage(current){
    if(current.item.actor?.uuid!==actor.uuid||usageKey(current)!==fact.usage)return {strike:current,options:new Set()};
+   current=effects.damage(current);
    const unchanged={strike:current,options:effects.damageOptions()};
    if(!state.recorded||!bonuses.length)return unchanged;
    // Use the Strike's actor so a Spellstrike infusion and alternate usage survive.
