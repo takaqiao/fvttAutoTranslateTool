@@ -28,11 +28,14 @@ function fixture(){
 }
 function nativeProbeFixture(f){
  f.actor.rules=[];
- f.game.pf2e={...f.game.pf2e,Check:{roll:(check,context,event,callback)=>interceptKnowledgeProbe(check.native,check,context,event,callback)}};
+ class Modifier{constructor(data){Object.assign(this,data);this.enabled=true;}clone(){return new Modifier(this);}}
+ class CheckModifier{constructor(slug,{modifiers}){this.slug=slug;this.modifiers=modifiers;this.calculateTotal();}calculateTotal(){this.totalModifier=this.modifiers.reduce((sum,modifier)=>sum+modifier.modifier,0);}}
+ f.game.pf2e={...f.game.pf2e,Modifier,CheckModifier,Check:{roll:(check,context,event,callback)=>interceptKnowledgeProbe(check.native??f.checkNative,check,context,event,callback)}};
  for(const skill of Object.values(f.actor.skills))skill.roll=async options=>{
   const check={slug:skill.slug,modifiers:skill.modifiers,calculateTotal(){this.totalModifier=skill.totalModifier;}};
   const context={actor:f.actor,origin:{actor:f.actor,token:f.token},token:f.token,type:'skill-check',domains:['skill-check',skill.slug],options:new Set(options.extraRollOptions),rollTwice:skill.rollTwice??false,substitutions:skill.substitutions??[],dosAdjustments:options.dc?Object.values(f.actor.synthetics.degreeOfSuccessAdjustments).flat():[],createMessage:false,skipDialog:true};
-  const native=async(check,context,_event,callback)=>{const roll=await new f.globals.Roll('1d20').roll();roll.dice[0].total=roll.total;roll.dice[0].results=[{result:roll.total,active:true}];if(context.rollTwice){roll.dice[0]={total:18,faces:20,modifiers:['kh'],results:[{result:12,discarded:true},{result:18,active:true}]};roll.total=18;}if(context.substitutions?.some(s=>s.selected)){roll.dice=[];roll.terms=[];roll.total=context.substitutions.find(s=>s.selected).value;}check.calculateTotal(context.options);roll.total+=check.totalModifier;roll.options.totalModifier=check.totalModifier;roll.options.degreeOfSuccess=api.recallDegree({total:roll.total,die:roll.total-check.totalModifier,dc:context.dc?.value,actor:f.actor,domains:context.domains,rollOptions:[...context.options]});context.outcome=['criticalFailure','failure','success','criticalSuccess'][roll.options.degreeOfSuccess];await callback?.(roll,context.outcome,new f.globals.ChatMessage({flags:{pf2e:{context:{...context,actor:f.actor.id,options:[...context.options],domains:context.domains},modifiers:[]}},flavor:''}));return roll;};
+  const native=async(check,context,_event,callback)=>{const cancelled=context.options.has('fortune')&&context.options.has('misfortune'),substitution=cancelled?null:context.substitutions?.find(s=>s.selected),roll=substitution?await new f.globals.Roll(String(substitution.value)).evaluate():await new f.globals.Roll('1d20').roll();if(roll.dice.length){roll.dice[0].total=roll.total;roll.dice[0].results=[{result:roll.total,active:true}];}if(context.rollTwice&&!substitution&&!cancelled){roll.dice[0]={total:18,faces:20,modifiers:['kh'],results:[{result:12,discarded:true},{result:18,active:true}]};roll.total=18;}check.calculateTotal(context.options);roll.total+=check.totalModifier;roll.options.totalModifier=check.totalModifier;roll.options.degreeOfSuccess=api.recallDegree({total:roll.total,die:roll.total-check.totalModifier,dc:context.dc?.value,actor:f.actor,domains:context.domains,rollOptions:[...context.options]});context.outcome=['criticalFailure','failure','success','criticalSuccess'][roll.options.degreeOfSuccess];await callback?.(roll,context.outcome,new f.globals.ChatMessage({flags:{pf2e:{context:{...context,actor:f.actor.id,options:[...context.options],domains:context.domains},modifiers:[]}},flavor:''}));return roll;};
+  f.checkNative=native;
   check.native=native;let active=true;
   // libWrapper invalidates a wrapped continuation when this frame returns.
   const wrapped=(...args)=>{if(!active)throw Error('LibWrapperInvalidWrapperChainError');return native(...args);};
@@ -82,11 +85,27 @@ test('fixed skill is retained instead of being replaced by the target highest sk
  const capture=await api.captureWorkbenchRecall({...f,requestId:'request2',targetUuids:[f.target.uuid],statistic:'occultism',dc:20});
  assert.equal(capture.candidates.length,1);assert.equal(capture.candidates[0].statistic,'occultism');assert.equal(capture.candidates[0].total,16);assert.equal(f.die.count,1);
 });
+test('fixed non-applicable Assurance keeps its statistic and number without inventing a target DC',async()=>{
+ const f=fixture();f.target.actor.traits=new Set(['undead']);f.actor.skills.society.modifiers=[{type:'proficiency',modifier:9}];f.actor.items=[{_stats:{compendiumSource:'Compendium.pf2e.feats-srd.Item.W6Gl9ePmItfDHji0'},system:{rules:[{key:'ChoiceSet',flag:'assurance',selection:'society'}]}}];
+ const capture=await api.captureWorkbenchRecall({...f,requestId:'fixed-inapplicable',targetUuids:[f.target.uuid],statistic:'society',assurance:true});assert.equal(capture.candidates[0].statistic,'society');assert.equal(capture.candidates[0].total,19);assert.equal(capture.candidates[0].dc,null);assert.equal(capture.candidates[0].degree,null);
+ assert.equal(await api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:{...f.game,user:f.gm},message:capture.message}),null);assert.equal(f.die.count,0);assert.equal(capture.message.flags[MODULE_ID].workbenchRecall.probeUse.status,'done');
+});
 test('Assurance uses 10 plus proficiency without rolling or adding ability/item bonuses',async()=>{
  assert.ok(api?.captureWorkbenchRecall,'Workbench bridge is missing');const f=fixture();f.actor.skills.occultism.modifiers=[{type:'proficiency',modifier:9},{type:'ability',modifier:4},{type:'item',modifier:1}];
  f.actor.items=[{_stats:{compendiumSource:'Compendium.pf2e.feats-srd.Item.W6Gl9ePmItfDHji0'},system:{rules:[{key:'ChoiceSet',flag:'assurance',selection:'occultism'}]}}];
  const capture=await api.captureWorkbenchRecall({...f,requestId:'assurance1',targetUuids:[f.target.uuid],statistic:'occultism',assurance:true,dc:20});
  assert.equal(f.die.count,0);assert.equal(capture.die,null);assert.equal(capture.candidates[0].total,19);assert.equal(capture.candidates[0].degree,1);assert.deepEqual(capture.message.whisper,['gm']);
+});
+test('fixed Assurance consumes unconditional next-check effects and retains unused if-enabled modifiers',async()=>{
+ const f=fixture();f.actor.skills.occultism.modifiers=[{type:'proficiency',modifier:9},{type:'ability',modifier:4},{type:'status',modifier:2}];f.actor.items=[{_stats:{compendiumSource:'Compendium.pf2e.feats-srd.Item.W6Gl9ePmItfDHji0'},system:{rules:[{key:'ChoiceSet',flag:'assurance',selection:'occultism'}]}}];let unconditional=0,unused=0;
+ f.actor.rules=[{afterRoll({roll,check,context}){assert.equal(f.game.messages.get('rk1').flags[MODULE_ID].workbenchRecall.probeUse.status,'claimed');assert.equal(roll.dice.length,0);assert.ok(check.modifiers.every(m=>m.type==='proficiency'));assert.equal(context.rollTwice,false);assert.equal(context.substitutions.length,1);assert.equal(context.substitutions[0].slug,'assurance');unconditional++;}},{afterRoll({check}){if(check.modifiers.some(m=>m.type==='status'))unused++;}}];
+ const capture=await api.captureWorkbenchRecall({...f,requestId:'assurance-after-roll',targetUuids:[f.target.uuid],statistic:'occultism',assurance:true,dc:20});assert.equal(unconditional,1);assert.equal(unused,0);assert.equal(f.die.count,0);assert.equal(capture.candidates[0].total,19);assert.equal(capture.die,null);
+});
+test('Assurance preserves the prepared proficiency without level and rejects middleware adding any ordinary bonus',async()=>{
+ const f=fixture();f.actor.skills.occultism.modifiers=[{type:'proficiency',modifier:4},{type:'ability',modifier:7}];f.actor.items=[{_stats:{compendiumSource:'Compendium.pf2e.feats-srd.Item.W6Gl9ePmItfDHji0'},system:{rules:[{key:'ChoiceSet',flag:'assurance',selection:'occultism'}]}}];
+ const input={...f,requestId:'assurance-pwl',targetUuids:[f.target.uuid],statistic:'occultism',assurance:true,dc:20},capture=await api.captureWorkbenchRecall(input);assert.equal(capture.candidates[0].total,14);assert.equal(capture.candidates[0].modifier,4);assert.equal(f.die.count,0);
+ const native=f.game.pf2e.Check.roll;f.game.pf2e.Check.roll=(check,context,...args)=>{if(context.substitutions?.[0]?.slug==='assurance')check.modifiers.push({type:'status',modifier:5});return native(check,context,...args);};
+ await assert.rejects(()=>api.captureWorkbenchRecall({...input,requestId:'assurance-bonus-rejected'}),/Assurance.*熟练/);assert.equal(f.die.count,0);
 });
 test('final result can only be selected by an actual GM from the captured native candidate',async()=>{
  assert.ok(api?.finalizeWorkbenchRecall,'Workbench bridge is missing');const f=fixture();const capture=await api.captureWorkbenchRecall({...f,requestId:'selection1',targetUuids:[f.target.uuid]});
@@ -268,7 +287,7 @@ test('only the persisted automatic GM result settles Monster Hunter once; replay
  await provider.processRecall(capture.message);assert.equal(effects,1);await assert.rejects(()=>api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:gmGame,message:capture.message,dc:15}),/锁定/);assert.equal(effects,1);assert.equal(f.die.count,1);
 });
 test('Automatic Knowledge executes fixed Assurance on original owner and shares one per-round pool across feat copies',async()=>{
- const f=controllerFixture();f.actor.type='character';f.actor.flags={};f.gmGame.combat={id:'c',round:1,started:true};f.actor.skills.occultism.modifiers=[{type:'proficiency',modifier:9},{type:'ability',modifier:4}];
+ const f=controllerFixture();f.actor.type='character';f.actor.flags={};f.target.actor.traits=new Set(['aberration']);f.target.actor.getSelfRollOptions=()=>['target:trait:aberration'];f.gmGame.combat={id:'c',round:1,started:true};f.actor.skills.occultism.modifiers=[{type:'proficiency',modifier:9},{type:'ability',modifier:4}];
  const update=function(changes){for(const[k,v]of Object.entries(changes)){let o=this;const ps=k.split('.');for(const p of ps.slice(0,-1))o=o[p]??={};o[ps.at(-1)]=v;}return Promise.resolve(this);};f.actor.update=update;
  const assurance={id:'assurance',_stats:{compendiumSource:ASSURANCE_SOURCE},system:{rules:[{key:'ChoiceSet',flag:'assurance',selection:'occultism'}]}};
  const automatic=id=>({id,uuid:`Actor.a.Item.${id}`,actor:f.actor,type:'feat',_stats:{compendiumSource:AUTOMATIC_KNOWLEDGE_SOURCE},system:{rules:[]},flags:{},update});const first=automatic('auto'),second=automatic('auto2');f.actor.items=new Map([[assurance.id,assurance],[first.id,first],[second.id,second]]);
@@ -277,6 +296,10 @@ test('Automatic Knowledge executes fixed Assurance on original owner and shares 
  await provider.executeUsage({actor:f.actor,item:first,message:source,user:f.user,action:'knowledge:automatic'});assert.equal(f.die.count,0);assert.equal(f.game.messages.get('rk1').flags[MODULE_ID].workbenchRecall.result.total,19);assert.equal(first.flags[MODULE_ID].knowledge.automaticSkill,'occultism');
  await assert.rejects(()=>provider.executeUsage({actor:f.actor,item:second,message:source2,user:f.user,action:'knowledge:automatic'}),/本轮/);assert.equal(f.die.count,0);
  f.gmGame.combat.round=2;await provider.executeUsage({actor:f.actor,item:second,message:source2,user:f.user,action:'knowledge:automatic'});assert.equal(f.actor.flags[MODULE_ID].knowledge.automaticRound.epoch,'c:2');assert.equal(f.die.count,0);cleanup();f.cleanup();
+});
+test('misfortune cancels requested Assurance through one normal native roll with full skill modifiers',async()=>{
+ const f=fixture();f.actor.skills.society.modifiers=[{type:'proficiency',modifier:9},{type:'ability',modifier:4},{type:'status',modifier:2}];f.actor.skills.society.totalModifier=15;f.actor.skills.society.rollTwice='keep-lower';f.actor.items=[{_stats:{compendiumSource:'Compendium.pf2e.feats-srd.Item.W6Gl9ePmItfDHji0'},system:{rules:[{key:'ChoiceSet',flag:'assurance',selection:'society'}]}}];nativeProbeFixture(f);let after=0;f.actor.rules=[{afterRoll({roll,check,context}){after++;assert.equal(roll.dice.length,1);assert.equal(check.modifiers.length,3);assert.ok(context.options.has('misfortune'));}}];
+ const capture=await api.captureWorkbenchRecall({...f,requestId:'assurance-conflict',targetUuids:[f.target.uuid],statistic:'society',assurance:true});assert.equal(f.die.count,1);assert.equal(capture.die,12);assert.equal(capture.candidates[0].total,27);assert.equal(capture.message.flags[MODULE_ID].workbenchRecall.assurance,false);assert.equal(capture.message.flags[MODULE_ID].workbenchRecall.assuranceRequested,true);assert.equal(after,1);
 });
 test('a fixed Lore ability preserves its statistic and DC instead of being excluded by ordinary primary policy',async()=>{
  const f=fixture();f.actor.skills['warfare-lore']={...f.actor.skills.occultism,slug:'warfare-lore',label:'Warfare Lore',lore:true};

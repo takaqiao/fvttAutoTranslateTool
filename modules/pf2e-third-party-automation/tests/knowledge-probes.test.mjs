@@ -51,3 +51,10 @@ test('actual native RollTwice and SubstituteRoll afterRoll receive their used di
  rule.removeAfterRoll='if-enabled';await substitute.call(rule,{roll:{dice:[]},context:{substitutions:[{slug:rule.slug,selected:true}]}});assert.equal(deletes,2);
  await substitute.call(rule,{roll:{dice:[{modifiers:[]}]},context:{substitutions:[{slug:rule.slug,selected:false}]}});assert.equal(deletes,2);
 });
+test('actual native Check parser keeps Assurance deterministic and cancels opposed misfortune to one normal die',{skip:!fs.existsSync(nativeBundle)},()=>{
+ const bundle=fs.readFileSync(nativeBundle,'utf8'),start=bundle.indexOf('let s = [], c = t.isReroll'),end=bundle.indexOf('\n\t\ts.push(...d);',start);assert.ok(start>0&&end>start);
+ const parser=new Function('t','i','e','_loc','reduceItemName','me',`${bundle.slice(start,end)};return u;`),context=()=>({rollTwice:false,substitutions:[{slug:'assurance',label:'Assurance',value:10,required:true,selected:true,effectType:'fortune'}]});let calculate=0;
+ const check={calculateTotal(){calculate++;}},localize=text=>text;
+ assert.equal(parser(context(),new Set(['fortune','substitute:assurance']),check,localize,localize,x=>x!=null),'10');assert.equal(calculate,0);
+ const options=new Set(['fortune','misfortune','substitute:assurance']);assert.equal(parser(context(),options,check,localize,localize,x=>x!=null),'1d20');assert.equal(calculate,1);assert.equal(options.has('substitute:assurance'),false);
+});
