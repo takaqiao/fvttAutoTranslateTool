@@ -1,0 +1,67 @@
+import {MODULE_ID} from './lifecycle.mjs';
+const conditions=['Compendium.battlezoo-eldamon-pf2e.conditions.Bi2aHykg6CZrQCnR','Compendium.battlezoo-eldamon-pf2e.conditions.1fZbuJEbVmE3J4XL'];
+const chainSource='Compendium.battlezoo-eldamon-pf2e.powers.Item.fzV5Ly3a9nEsfcAJ';
+/** Pure native-link plan. Ordinals are confined to individually reviewed source
+ * profiles; unknown powers never enter this renderer. Original descriptive text
+ * remains readable, while the selected branch has the only live damage links. */
+export function cardLinkPlan(snapshot,links){
+ let damageIndex=0;
+ const dice={ 'electric-surge':['1','d4','d8'],'anvil-crawler-lightning':['1','d4','d8'],'static-shock':['2','d6','d12'],'electric-shot':['2','d4','d8'] }[snapshot.powerId];
+ return links.map(link=>{
+  const result={...link};
+  if(link.kind==='damage'){
+   const n=damageIndex++;
+   if(snapshot.powerId==='high-voltage')result.disabled=true;
+   if(dice&&n<2){result.disabled=n!==(snapshot.discharge?1:0);result.formula=`(${dice[0]}+${snapshot.level})${dice[snapshot.discharge?2:1]}[electricity]`;}
+   if(snapshot.powerId==='static-shock'&&n===2)result.formula=`(2+${snapshot.level})[electricity]`;
+   if(snapshot.powerId==='electric-shot'&&n===2){result.formula=`${snapshot.level}[electricity]`;result.shockedFailureFormula=`(2+${snapshot.level})${snapshot.discharge?'d8':'d4'}[electricity]`;}
+   if(snapshot.powerId==='reactive-chain'){
+    if(!Number.isFinite(snapshot.triggerDamage)||snapshot.triggerDamage<=0)throw Error('Reactive Chain has no confirmed damage basis.');
+    result.formula=`${Math.floor(snapshot.triggerDamage/2)}[electricity]`;
+   }
+  }
+  if(link.kind==='area'&&snapshot.area?.type===link.type)result.distance=snapshot.area.distance;
+  if(link.kind==='effect'&&snapshot.siphon?.applies&&conditions.some(uuid=>link.uuid===uuid||link.uuid===uuid.replace('.conditions.','.conditions.Item.')))result.disabled=true;
+  return result;
+ });
+}
+
+/** The native Region click handler consumes data-distance and retains its own
+ * shape builder, origin, message ID, preview and canvas.regions.placeRegion. */
+export function renderMetapowerCard(message,html,{receipt,onClear,onRetryDelivery,onError=console.error}={}){
+ const root=html?.[0]??html;if(!root?.querySelectorAll||!receipt)return;
+ root.querySelector('.metapower-controls')?.remove();
+ const block=document.createElement('div');block.className='metapower-controls';block.setAttribute('role','status');
+ const snapshot=receipt.snapshot;
+ block.textContent=receipt.kind?`${receipt.kind==='widen'?'增广元素':'虹吸元素'}：仅限紧接的下一次引导威能。`:snapshot?`${snapshot.kind==='widen'?'增广元素':snapshot.kind==='siphoning'?'虹吸元素':'原生威能'} · ${snapshot.discharge?'放电（Charged −1）':'普通分支'}${snapshot.area?` · ${snapshot.area.distance} 尺`:''}${snapshot.siphon?.applies?' · 无类型；逐目标半伤，关联生物特征匹配时全伤；附加效果不生效':''}`:'已记录实际使用。';
+ if(receipt.kind&&onClear){const button=document.createElement('button');button.type='button';button.textContent='已采取其他动作／清除待用威能';button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();Promise.resolve(onClear(receipt)).catch(onError)});block.append(button);}
+ if(receipt.delivery&&receipt.delivery.status!=='done'&&onRetryDelivery){const button=document.createElement('button');button.type='button';button.textContent='后续结算待完成／重试';button.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();Promise.resolve(onRetryDelivery(receipt)).catch(onError)});block.append(button);}
+ (root.querySelector('.message-content')??root).append(block);
+ if(!snapshot)return;
+ if(root.dataset.metapowerRendered===receipt.nonce)return;
+ root.dataset.metapowerRendered=receipt.nonce;
+ if(snapshot.powerId==='reactive-chain'&&snapshot.powerSourceUuid===chainSource&&receipt.sourceUuid===chainSource&&!root.querySelector('a.inline-roll[data-damage-roll]')){
+  // The published Chain card has a save but no fixed damage expression. These
+  // are PF2e's native @Damage attributes; its delegated inline-roll handler
+  // resolves the original card/item and publishes the one normal damage roll.
+  const [{formula}]=cardLinkPlan(snapshot,[{kind:'damage'}]),anchor=document.createElement('a');
+  anchor.className='inline-roll roll';
+  Object.assign(anchor.dataset,{damageRoll:formula,baseFormula:formula,formula,immutable:'',traits:(snapshot.traits??[]).join(','),itemUuid:receipt.itemUuid,itemId:receipt.itemUuid?.split('.').at(-1)});
+  (root.querySelector('.card-content')??root.querySelector('.message-content')??root).append(anchor);
+ }
+ const anchors=[...root.querySelectorAll('a.inline-roll[data-damage-roll], a.effect-area, a.content-link[data-uuid]')];
+ const links=anchors.map(a=>'damageRoll'in a.dataset?{kind:'damage',baseFormula:a.dataset.baseFormula}:a.classList.contains('effect-area')?{kind:'area',type:a.dataset.type,distance:Number(a.dataset.distance)}:{kind:'effect',uuid:a.dataset.uuid});
+ const plan=cardLinkPlan(snapshot,links);
+ for(let i=0;i<anchors.length;i++){
+  const a=anchors[i],p=plan[i];
+  if(p.disabled){const span=document.createElement('span');span.textContent=a.textContent;span.title='本次已选分支／虹吸规则使此链接不可用';span.className='metapower-disabled';a.replaceWith(span);continue;}
+  if(p.kind==='damage'){
+   if(p.formula){a.dataset.baseFormula=p.formula;a.dataset.formula=p.formula;a.textContent=p.formula.replace(/\((\d+)\+(\d+)\)/g,(_m,x,y)=>String(Number(x)+Number(y))).replace('[electricity]',snapshot.siphon?.applies?' 无类型基础伤害':' 电击伤害');a.setAttribute('aria-label',a.textContent);}
+   a.dataset.rollOptions=[...new Set([...(a.dataset.rollOptions??'').split(',').filter(Boolean),`${MODULE_ID}:metapower:${message.id}:${receipt.nonce}`])].join(',');
+   if(p.shockedFailureFormula){const alternate=a.cloneNode(true);alternate.dataset.baseFormula=p.shockedFailureFormula;alternate.dataset.formula=p.shockedFailureFormula;alternate.dataset.rollOptions+=`,${MODULE_ID}:electric-shot-failure-half`;alternate.textContent='失败：已Shocked目标（基础半伤）';alternate.title='选定一个已Shocked目标；本伤害卡已计算失败半伤，按全额应用。';a.after(document.createTextNode(' / '),alternate);}
+  }
+  if(p.kind==='area'&&p.distance!==undefined){a.dataset.distance=String(p.distance);a.setAttribute('title',`${p.distance} ft`);a.textContent=`${p.distance} ft ${p.type}`;}
+ }
+ // PF2e check anchors read pf2RollOptions; rollOptions belongs to damage links.
+ for(const check of root.querySelectorAll('[data-pf2-check]'))check.dataset.pf2RollOptions=[...new Set([...(check.dataset.pf2RollOptions??'').split(',').filter(Boolean),`${MODULE_ID}:metapower:${message.id}:${receipt.nonce}`])].join(',');
+}

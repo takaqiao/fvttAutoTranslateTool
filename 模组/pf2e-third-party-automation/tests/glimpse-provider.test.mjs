@@ -1,0 +1,111 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {fixture} from './glimpse-fixture.mjs';
+import {createGlimpseProvider} from '../scripts/glimpse-of-redemption.mjs';
+import {findGlimpseClaim,provenGlimpseReactionCard,resolveGlimpseSource} from '../scripts/glimpse-source.mjs';
+import {MODULE_ID as M} from '../scripts/rules.mjs';
+import {runDamagePipeline} from '../scripts/native-context.mjs';
+function patch(doc,changes){for(const [path,value] of Object.entries(changes)){const keys=path.split('.');let at=doc;for(const k of keys.slice(0,-1))at=at[k]??={};at[keys.at(-1)]=structuredClone(value)}}
+function setup(decisions=['use','resist'],{nativePublisher=false,reactionRestriction,onUnsupported}={}){
+ const f=fixture();f.game.modules=new Map();f.game.world={id:'ujx5r8oipw7ercdr'};f.game.system={id:'pf2e',version:'8.5.1'};f.ally.attributes={resistances:[]};f.ally.getContextualClone=()=>({attributes:{resistances:[{type:'all-damage',value:7,test:()=>true,getDoubledValue:()=>7}]}});
+ const callbacks=new Map(),Hooks={on:(k,fn)=>{const a=callbacks.get(k)??[];a.push(fn);callbacks.set(k,a);return fn},off:()=>{}},emit=(k,...args)=>{for(const fn of callbacks.get(k)??[])fn(...args)};
+ const payments=[],calls=[],followups=[],choices=[],unsupported=[];
+ for(const c of f.combat.turns){c.flags['pf2e-reaction']={state:true};c.update=async data=>{payments.push(data);patch(c,data)}}
+ const compat={ready:()=>true,template:()=>({type:'effect',system:{rules:[{key:'Resistance',type:'all-damage',value:'@item.origin.level+2'}]}}),apply:async context=>{assert.equal(await context.authorize(),true);followups.push(context.nonce);return {effectId:'condition'}}};
+ const resources={snapshot:async c=>({combatant:c}),available:s=>s.combatant.flags['pf2e-reaction'].state,reserve:()=>({changes:{'flags.pf2e-reaction.state':false},proof:{key:'state',before:true,after:false,consumed:true}}),release:async()=>({'flags.pf2e-reaction.state':true})};
+ const publishUse=async({ability,token,claim})=>{const message={id:`use${claim.nonce}`,uuid:`ChatMessage.use${claim.nonce}`,author:f.user,speaker:{actor:ability.actor.id,scene:token.parent.id,token:token.id},rolls:[],flags:{pf2e:{origin:{uuid:ability.uuid,actor:ability.actor.uuid,type:'action'}}},async update(data){patch(this,data)}};f.game.messages.set(message.id,message);return message};
+ const provider=createGlimpseProvider({game:f.game,reactionRestriction,fromUuid:f.fromUuid,getRollContext:roll=>roll===f.roll?f.source:null,compat,reactionResources:resources,onUnsupported:onUnsupported??(context=>unsupported.push(context)),choose:async context=>{choices.push(context.actor.uuid);return typeof decisions==='function'?decisions(context):decisions.shift()},publishUse:nativePublisher?undefined:publishUse});provider.register({Hooks});
+ async function apply({zero=false,fail=false,missing=false,foreign=false}={}){return runDamagePipeline({actor:f.ally,params:f.params,providers:[provider],apply:params=>provider.wrapNativeDamage(f.ally,params,async actual=>{
+  calls.push(actual);if(!missing){const m={id:`receipt${calls.length}`,uuid:`ChatMessage.receipt${calls.length}`,author:f.user,speaker:{actor:f.ally.id,scene:f.scene.id,token:f.allyToken.id},flags:{pf2e:{origin:{actor:f.enemy.uuid,uuid:f.item.uuid,type:f.item.type},context:{type:'damage-taken',options:[...actual.rollOptions??[]]},appliedDamage:zero||actual.damage===0?null:{uuid:f.ally.uuid,isHealing:false,updates:[{path:'system.attributes.hp.value',value:1}],persistent:[]}}},updateSource(data){patch(this,data)}};if(foreign)m.flags.pf2e.origin.uuid='wrong';emit('preCreateChatMessage',m,{}, {},f.user.id);f.game.messages.set(m.id,m);emit('createChatMessage',m,{},f.user.id)}if(fail)throw Error('native reply lost');return 'native result';}),onError:e=>f.errors.push(e.message)})}
+ f.errors=[];return {...f,provider,compat,resources,apply,payments,calls,followups,choices,unsupported};
+}
+test('Toolbelt merged damage proceeds unchanged once with a manual Glimpse notice and no reaction payment',async()=>{
+ const f=setup();f.message.flags['pf2e-toolbelt']={betterChat:{mergeDamage:{merged:true,data:[{source:{_id:'strike-one'}},{source:{_id:'strike-two'}}]}}};
+ assert.equal(await f.apply(),'native result');assert.equal(f.calls.length,1);assert.equal(f.calls[0],f.params);
+ assert.equal(f.payments.length,0);assert.equal(f.choices.length,0);assert.equal(f.followups.length,0);assert.equal(f.unsupported.length,1);
+ assert.equal(f.combat.turns[1].flags['pf2e-reaction'].state,true);assert.deepEqual(f.errors,[]);
+});
+test('native hazard Strike damage reaches application once without spending a champion reaction',async()=>{
+ const f=setup();f.enemy.type='hazard';f.enemy.alliance=null;f.item.system={action:'strike'};
+ f.enemy.system.actions=[{type:'strike',item:f.item,ready:true}];f.message.flags.pf2e.strike=null;
+ f.champion.isEnemyOf=a=>a.alliance!==null;f.roll.total=25;f.roll.instances[0].total=25;
+ assert.equal(await f.apply(),'native result');assert.equal(f.calls.length,1);assert.equal(f.calls[0],f.params);
+ assert.equal(f.payments.length,0);assert.equal(f.choices.length,0);assert.equal(f.followups.length,0);
+ assert.equal(f.combat.turns[1].flags['pf2e-reaction'].state,true);assert.deepEqual(f.errors,[]);
+});
+for(const status of ['restricted','manual'])test(`${status} Glimpse is not offered, including a different viewed encounter`,async()=>{
+ const f=setup(undefined,{reactionRestriction:actor=>{assert.equal(actor,f.champion);return {status}}});f.game.combat={id:'viewed-other',started:true,turns:[]};
+ await f.apply();assert.equal(f.choices.length,0);assert.equal(f.payments.length,0);assert.equal(f.calls[0].damage,f.roll);
+});
+for(const status of ['restricted','manual'])test(`Glimpse rechecks ${status} after resource snapshot awaits and before an injected adapter can reserve`,async()=>{
+ let current='clear';const f=setup(undefined,{reactionRestriction:()=>({status:current})});
+ f.resources.snapshot=async c=>{current=status;return {combatant:c}};
+ await assert.rejects(f.apply(),status==='manual'?/GM.*核对/:/禁止.*反应|不能.*反应/);
+ assert.equal(f.payments.length,0);assert.equal(f.calls.length,0);assert.equal(f.combat.turns[1].flags['pf2e-reaction'].state,true);
+});
+for(const refund of [false,true])test(`restriction after Glimpse payment preserves ${refund?'exact pre-native refund':'native completion'}`,async()=>{
+ let status='clear';const f=setup(undefined,{reactionRestriction:()=>({status})}),clone=f.ally.getContextualClone;
+ f.ally.getContextualClone=()=>{status='restricted';return refund?{attributes:{resistances:[]}}:clone()};
+ if(refund)await assert.rejects(f.apply(),/抗力/);else await f.apply();
+ assert.equal(f.combat.turns[1].flags['pf2e-reaction'].state,refund);assert.equal(f.combat.turns[1].flags[M].glimpseClaims[0].status,refund?'refunded':'done');assert.deepEqual(f.errors,[]);
+});
+test('Resist pays real generic resource and ledger together; true zero receipt still grants exactly one condition',async()=>{const f=setup();assert.equal(await f.apply({zero:true}),'native result');assert.equal(f.calls.length,1);assert.equal(f.followups.length,1);const paid=f.payments.find(p=>p['flags.pf2e-reaction.state']===false);assert.equal(paid[`flags.${M}.reactionBudget`].entries.length,1);assert.equal(f.combat.turns[1].flags['pf2e-reaction'].state,false);assert.equal(f.ally.attributes.resistances.length,0);const claim=findGlimpseClaim(f.game,f.followups[0]).claim;assert.equal(claim.status,'done');assert.equal(provenGlimpseReactionCard(f.game.messages.get(claim.messageId),f.champion,f.game).claimKey,claim.claimKey);await assert.rejects(f.apply(),/已处理|重复/);assert.equal(f.calls.length,1)});
+test('Repent enters native exactly once as zero final and disables shield; no Enfeebled',async()=>{const f=setup(['use','repent']);f.params.shieldBlockRequest=true;await f.apply();assert.equal(f.calls.length,1);assert.equal(f.calls[0].damage,0);assert.equal(f.calls[0].final,true);assert.equal(f.calls[0].shieldBlockRequest,false);assert.deepEqual(f.followups,[])});
+test('decline keeps original native damage and spends nothing',async()=>{const f=setup(['decline']);await f.apply();assert.equal(f.calls[0].damage,f.roll);assert.equal(f.payments.length,0)});
+test('mindless enemy forces Resist without asking enemy; other immunities do not',async()=>{const f=setup(['use']);f.enemy.system.traits.value=['mindless'];await f.apply();assert.deepEqual(f.choices,[f.champion.uuid]);assert.equal(f.followups.length,1)});
+test('closed enemy choice stops before native with no payment',async()=>{const f=setup(['use',null]);await assert.rejects(f.apply(),/选择/);assert.equal(f.calls.length,0);assert.equal(f.payments.length,0)});
+for(const [name,options]of[['missing receipt',{missing:true}],['foreign origin',{foreign:true}],['native transport failed',{fail:true}]])test(`${name} stays uncertain and does not grant a condition`,async()=>{const f=setup();try{await f.apply(options)}catch{}assert.equal(f.calls.length,1);assert.equal(f.followups.length,0);assert.equal(f.combat.turns[1].flags['pf2e-reaction'].state,false);assert.ok(f.errors.length||options.fail);await assert.rejects(f.apply(),/已处理|重复/)});
+test('unknown unbound source near an aura skips automation and leaves native damage intact',async()=>{const f=setup();f.source.messageId='unknown';assert.equal(await f.apply(),'native result');assert.equal(f.calls.length,1);assert.equal(f.calls[0],f.params);assert.equal(f.payments.length,0);assert.equal(f.choices.length,0);assert.equal(f.unsupported.length,1)});
+for(const format of ['inline','macro'])test(`Risky Surgery ${format} damage applies once without a reaction scope or payment`,async()=>{
+ const f=setup();f.message.speaker={actor:f.ally.id,scene:f.scene.id,token:f.allyToken.id};
+ f.message.flags.pf2e=format==='inline'?{context:{type:'damage-roll',sourceType:'save',actor:f.ally.id,token:null,target:null,domains:['damage','inline-damage']}}:{};
+ f.message.flags['pf2e-toolbelt']={targetHelper:{type:'damage',targets:[f.allyToken.uuid]}};
+ f.params.item=null;f.roll.total=8;f.roll.instances[0].total=8;
+ assert.equal(await f.apply(),'native result');assert.equal(f.calls.length,1);assert.equal(f.calls[0],f.params);
+ assert.equal(f.calls[0].damage,f.roll);assert.equal(f.payments.length,0);assert.equal(f.choices.length,0);assert.equal(f.followups.length,0);
+ assert.equal(f.unsupported[0].unsupportedReason,'not-native-attack-damage');assert.equal(f.combat.turns[1].flags['pf2e-reaction'].state,true);
+ assert.equal(f.combat.turns[1].flags[M]?.glimpseClaims,undefined);
+});
+for(const mode of ['throw','reject'])test(`an unsupported-source diagnostic that ${mode}s cannot stop native damage`,async()=>{
+ const f=setup(undefined,{onUnsupported:()=>{if(mode==='throw')throw Error('notification unavailable');return Promise.reject(Error('notification unavailable'));}});
+ f.message.flags.pf2e.origin=null;
+ assert.equal(await f.apply(),'native result');assert.equal(f.calls.length,1);assert.equal(f.payments.length,0);
+});
+for(const status of ['paid','native','followup','done','uncertain'])test(`an unsupported card cannot bypass an existing ${status} claim for the same source`,async()=>{
+ const f=setup();f.message.flags.pf2e.origin=null;
+ f.combat.turns[1].flags[M]={glimpseClaims:[{sourceKey:`${f.message.id}:0:${f.allyToken.uuid}`,status}]};
+ await assert.rejects(f.apply(),/已处理|重复|等待|不确定/);assert.equal(f.calls.length,0);assert.equal(f.payments.length,0);
+});
+test('a refunded or different-target claim does not block an unrelated unsupported application',async()=>{
+ const f=setup();f.message.flags.pf2e.origin=null;
+ f.combat.turns[1].flags[M]={glimpseClaims:[{sourceKey:`${f.message.id}:0:${f.allyToken.uuid}`,status:'refunded'},{sourceKey:`${f.message.id}:0:Scene.scene.other`,status:'done'}]};
+ await f.apply();assert.equal(f.calls.length,1);assert.equal(f.payments.length,0);
+});
+test('an altered source cannot bypass a pending live choice through unsupported fallback',async()=>{
+ let promptReady,close;const ready=new Promise(r=>promptReady=r);
+ const f=setup(()=>new Promise(resolve=>{close=resolve;promptReady();}));
+ const first=f.apply();await ready;
+ f.message.flags.pf2e.origin=null;
+ await assert.rejects(f.apply(),/已处理|重复|等待|不确定/);assert.equal(f.calls.length,0);
+ close('use');await assert.rejects(first,/来源|改变/);assert.equal(f.calls.length,0);assert.equal(f.payments.length,0);
+});
+test('aura or epoch changed during decision stops before native and payment',async()=>{const f=setup(context=>{if(context.actor===f.champion)return 'use';f.combat.turn=1;return 'resist'});await assert.rejects(f.apply(),/回合|改变/);assert.equal(f.calls.length,0);assert.equal(f.payments.length,0)});
+test('a spent Reaction Checker state cannot be spent again',async()=>{const f=setup();f.combat.turns[1].flags['pf2e-reaction'].state=false;await assert.rejects(f.apply(),/反应/);assert.equal(f.calls.length,0);assert.equal(f.payments.length,0)});
+test('failed native preparation refunds only this exact unentered claim and ledger entry',async()=>{const f=setup();f.ally.getContextualClone=()=>({attributes:{resistances:[]}});await assert.rejects(f.apply(),/抗力/);assert.equal(f.calls.length,0);assert.equal(f.combat.turns[1].flags['pf2e-reaction'].state,true);assert.equal(f.combat.turns[1].flags[M].reactionBudget.entries.length,0);assert.equal(f.combat.turns[1].flags[M].glimpseClaims[0].status,'refunded');assert.deepEqual(f.errors,[])});
+test('two simultaneous applications of the same original source cannot both pay or enter native',async()=>{const f=setup();const result=await Promise.allSettled([f.apply(),f.apply()]);assert.equal(result.filter(r=>r.status==='fulfilled').length,1);assert.equal(f.calls.length,1);assert.equal(f.followups.length,1);assert.equal(f.payments.filter(p=>p['flags.pf2e-reaction.state']===false).length,1)});
+test('original Use card joins only the unique waiting source and becomes that paid card',async()=>{
+ let promptReady;const ready=new Promise(r=>promptReady=r);let closePrompt;
+ const f=setup(context=>context.actor===f.champion?new Promise(r=>{closePrompt=r;promptReady()}):'resist');
+ const work=f.apply();await ready;
+ const message={id:'manual-use',author:f.user,speaker:{actor:f.champion.id,scene:f.scene.id,token:f.championToken.id},rolls:[],flags:{pf2e:{origin:{actor:f.champion.uuid,uuid:f.ability.uuid}},[M]:{usageInput:{actualUse:true}}},async update(data){patch(this,data)}};f.game.messages.set(message.id,message);
+ await f.provider.executeUsage({actor:f.champion,item:f.ability,message,user:f.user});await work;closePrompt('decline');assert.equal(f.calls.length,1);assert.equal(f.combat.turns[1].flags[M].glimpseClaims[0].messageId,message.id);assert.ok(provenGlimpseReactionCard(message,f.champion,f.game));await assert.rejects(f.provider.executeUsage({actor:f.champion,item:f.ability,message,user:f.user}),/等待/);
+});
+test('paid card proof persists across epoch but rejects unrelated card, author and source',async()=>{const f=setup();await f.apply();const claim=f.combat.turns[1].flags[M].glimpseClaims[0],message=f.game.messages.get(claim.messageId);f.combat.turn=1;f.combat.turns[1].flags[M].reactionBudget={epoch:'combat:2',entries:[]};assert.equal(provenGlimpseReactionCard(message,f.champion,f.game).epoch,'combat:1');message.flags[M].glimpseUse.claimKey='wrong';assert.equal(provenGlimpseReactionCard(message,f.champion,f.game),null)});
+test('enemy choice goes to its online non-GM owner, independently of champion owner',async()=>{let routed;const f=setup(c=>{if(c.actor===f.champion)return 'use';routed=c.user.id;return 'resist'});const enemyOwner={id:'enemy-player',active:true,isGM:false};f.game.users.set(enemyOwner.id,enemyOwner);f.enemy.testUserPermission=u=>u===f.user||u===enemyOwner;await f.apply();assert.equal(routed,enemyOwner.id);assert.equal(f.combat.turns[1].flags[M].glimpseClaims[0].enemyUserId,enemyOwner.id)});
+test('unready or other-world provider leaves the old native/manual accounting flow intact',async()=>{const f=setup();assert.equal(f.provider.handlesActor(f.champion),true);f.game.world.id='other';assert.equal(f.provider.handlesActor(f.champion),false);await f.apply();assert.equal(f.calls[0].damage,f.roll);assert.equal(f.payments.length,0);f.game.world.id='ujx5r8oipw7ercdr';f.compat.ready=()=>false;assert.equal(f.provider.resolveAction(f.ability),undefined)});
+test('same-reaction-epoch turn changes still invalidate the bound original frame',async()=>{const f=setup(c=>{if(c.actor===f.champion)return 'use';f.combat.turn=2;return 'resist'});f.combat.turn=1;await assert.rejects(f.apply(),/回合/);assert.equal(f.payments.length,0);assert.equal(f.calls.length,0)});
+test('refund cannot release a later epoch after the same resource reset and new payment',async()=>{const f=setup();f.ally.getContextualClone=()=>{f.combat.turn=1;f.combat.turns[1].flags[M].reactionBudget={epoch:'combat:2',entries:[{type:'reaction',cost:1,claimKey:'later'}]};f.combat.turns[1].flags['pf2e-reaction'].state=false;throw Error('prepare failed')};await assert.rejects(f.apply(),/prepare failed/);assert.equal(f.calls.length,0);assert.equal(f.combat.turns[1].flags['pf2e-reaction'].state,false);assert.equal(f.combat.turns[1].flags[M].reactionBudget.entries[0].claimKey,'later');assert.ok(f.errors.some(e=>/付款回合/.test(e)))});
+test('foreign socket RPC cannot manufacture a pending local native scope or spend',async()=>{const f=setup(),registered=new Map();f.provider.unregister();f.provider.register({Hooks:{on:()=>1,off:()=>{}},socket:{register:(name,fn)=>registered.set(name,fn)}});const source=await resolveGlimpseSource({...f,actor:f.ally}),result=await registered.get('glimpse:request').call({socketdata:{userId:f.user.id}},{scopeId:'forged',snapshot:source.snapshot});assert.equal(result.ok,false);assert.match(result.error,/原生/);assert.equal(f.payments.length,0)});
+test('an altered native variant cannot change while the choice is awaiting',async()=>{const f=setup(c=>{if(c.actor===f.champion)return 'use';f.params.damage.total=11;return 'resist'});await assert.rejects(f.apply(),/来源|改变/);assert.equal(f.calls.length,0);assert.equal(f.payments.length,0)});
+test('published card first gains its proof after claim binding so a real changed update reaches accounting',async t=>{const f=setup(['use','resist'],{nativePublisher:true}),old=globalThis.ChatMessage,updates=[];let postedProof;t.after(()=>globalThis.ChatMessage=old);f.ability.toMessage=async()=>{const data={flags:{pf2e:{origin:{uuid:f.ability.uuid,actor:f.champion.uuid}}},rolls:[]};return {updateSource:changes=>patch(data,changes),toObject:()=>structuredClone(data)}};globalThis.ChatMessage={create:async data=>{postedProof=data.flags[M]?.glimpseUse;const message={...data,id:'native-published',author:f.user,async update(changes){const before=JSON.stringify(this.flags);patch(this,changes);if(before!==JSON.stringify(this.flags))updates.push(provenGlimpseReactionCard(this,f.champion,f.game))}};f.game.messages.set(message.id,message);return message}};await f.apply();assert.equal(postedProof,undefined);assert.equal(updates.length,1);assert.equal(updates[0]?.messageId,'native-published')});
+test('out-of-turn source freezes the upcoming enemy end in its paid claim and forwards it to the native condition',async()=>{const f=setup();f.combat.turns=[f.combat.turns[1],f.combat.turns[0],f.combat.turns[2]];let received;f.compat.apply=async context=>{received=structuredClone(context.expiry);assert.equal(await context.authorize(),true);return {effectId:'condition'}};await f.apply({zero:true});const claim=f.combat.turns[0].flags[M].glimpseClaims[0];assert.deepEqual(received,claim.expiry);assert.equal(received.endRound,2);assert.equal(received.combatantId,f.enemy.id);assert.equal(received.tokenUuid,f.enemyToken.uuid)});

@@ -1,0 +1,7 @@
+/* Only cards classified from the executor's exact Salubrious damage proof.
+ * The root survives Toolbelt's asynchronous append/hidden-class removal.
+ * Keep roll totals/formula/tooltip/target information available for inspection. */
+.message.pf2e-third-party-salubrious-readonly .damage-application,
+.message.pf2e-third-party-salubrious-readonly .pf2e-toolbelt-target-buttons {
+  display: none !important;
+}

@@ -1,0 +1,20 @@
+import {MODULE_ID as M} from '../scripts/rules.mjs';
+import {SALUBRIOUS_SOURCE,TREAT_WOUNDS_IMMUNITY} from '../scripts/salubrious-kiss-rules.mjs';
+export function patch(doc,changes){for(const [path,value] of Object.entries(changes)){const keys=path.split('.');let p=doc;for(const k of keys.slice(0,-1))p=p[k]??={};p[keys.at(-1)]=structuredClone(value);}}
+export function fixture(){
+ const gm={id:'gm',isGM:true,active:true},user={id:'owner',active:true,settings:{showCheckDialogs:true}},users=Object.assign(new Map([[gm.id,gm],[user.id,user]]),{activeGM:gm}),messages=new Map(),actors=new Map(),scenes=new Map();
+ const game={user:gm,users,messages,actors,scenes,time:{worldTime:100},pf2e:{settings:{iwr:true}},modules:new Map([['patreon-v3',{active:true,version:'3.2.28'}]])};
+ const writes=[],effects=[],applications=[];let itemCounter=0;
+ const creature=id=>({id,uuid:'Actor.'+id,type:'character',modeOfBeing:'living',isDead:false,flags:{},items:new Map(),skills:{occultism:{rank:3,proficient:true},medicine:{rank:0}},system:{resources:{focus:{value:3,max:3}},attributes:{hp:{value:10,max:60,negativeHealing:false}}},attributes:{immunities:[]},hitPoints:{value:10,max:60,negativeHealing:false},testUserPermission:u=>u===gm||u===user,isAllyOf:()=>true,hasCondition:()=>false,getCondition:()=>null,getRollOptions:()=>[],getSelfRollOptions:p=>[(p??'self')+':type:character'],getContextualClone(){return this},async update(changes){writes.push({id:this.id,changes});patch(this,changes);return this},async createEmbeddedDocuments(type,data){return data.map(d=>{const i={...structuredClone(d),id:'i'+(++itemCounter),uuid:this.uuid+'.Item.i'+itemCounter,actor:this,sourceId:d._stats?.compendiumSource};this.items.set(i.id,i);effects.push(i);return i})},async decreaseCondition(slug,options){this.removed={slug,options}},async applyDamage(params){applications.push(params);return this}});
+ const actor=creature('healer'),patient=creature('patient');actors.set(actor.id,actor);actors.set(patient.id,patient);
+ const item={id:'feat',uuid:actor.uuid+'.Item.feat',type:'feat',sourceId:SALUBRIOUS_SOURCE,actor,system:{traits:{value:['archetype']}},getOriginData:()=>({actor:actor.uuid,uuid:item.uuid,type:'feat'}),isOfType:type=>type==='feat'};actor.items.set(item.id,item);
+ const scene={id:'s',uuid:'Scene.s',tokens:new Map()};scenes.set(scene.id,scene);
+ const tokenOf=a=>{const t={id:a.id,uuid:scene.uuid+'.Token.'+a.id,documentName:'Token',parent:scene,actor:a,actorId:a.id,actorLink:true};t.object={document:t,distanceTo:()=>5};scene.tokens.set(t.id,t);return t};
+ const token=tokenOf(actor),target=tokenOf(patient),proof={nonce:'nonce1',actorUuid:actor.uuid,itemUuid:null,userId:user.id,before:2,after:3,tokenUuid:token.uuid,startedAt:100};
+ actor.flags[M]={avRefocusIntent:{...proof},refocusEvents:[{...proof,state:'claimed'}]};
+ const pack={type:'effect',name:'Treat Wounds Immunity',uuid:TREAT_WOUNDS_IMMUNITY,system:{slug:'treat-wounds-immunity',duration:{value:1,unit:'hours'},rules:[]},toObject(){const {toObject,...d}=this;return structuredClone(d)}};
+ const fromUuid=async uuid=>uuid===pack.uuid?pack:[actor,patient,item,scene,token,target].find(d=>d.uuid===uuid)??null;
+ const claim={nonce:proof.nonce,actorUuid:actor.uuid,itemUuid:item.uuid,tokenUuid:token.uuid,targetUuid:target.uuid,targetActorUuid:patient.uuid,userId:user.id,startedAt:100,dc:30,tier:3,state:'rolling',skill:'occultism'};
+ const setClaim=c=>{if(c.privacy){c.refocusNoteId??='refocus-note-'+c.nonce;if(!messages.has(c.refocusNoteId))messages.set(c.refocusNoteId,{id:c.refocusNoteId,author:users.get(c.userId),speaker:{actor:actor.id,scene:scene.id,token:token.id},blind:c.privacy.blind,whisper:[...c.privacy.whisper],flags:{[M]:{avRefocusNote:{...proof,userId:c.userId,nonce:c.nonce,kind:'completion',privacy:structuredClone(c.privacy)}}}})}actor.flags[M].salubriousKiss??={};actor.flags[M].salubriousKiss.claims=[structuredClone(c)]};
+ return {M,game,gm,user,actor,patient,item,scene,token,target,proof,claim,setClaim,fromUuid,writes,effects,applications,pack};
+}

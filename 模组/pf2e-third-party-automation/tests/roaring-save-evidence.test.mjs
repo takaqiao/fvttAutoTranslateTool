@@ -1,0 +1,105 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {createRoaringSaveEvidence} from '../scripts/roaring-save-evidence.mjs';
+
+const M='pf2e-third-party-automation', SOURCE='Compendium.pf2e.spells-srd.Item.czO0wbT1i320gcu9';
+class CheckRoll {constructor(){this._evaluated=true;this.total=17;this.options={type:'saving-throw',rollerId:'player',degreeOfSuccess:1};this.terms=[{class:'Die',total:7}];}toJSON(){return {class:'CheckRoll',total:this.total,options:{...this.options},terms:this.terms};}}
+class ChatMessage {constructor(data){Object.assign(this,data);}}
+globalThis.CONFIG={Dice:{rolls:[CheckRoll]},ChatMessage:{documentClass:ChatMessage}};
+function fixture({existingRow=false,throwVerified=false,sparseHelper=false,helperOverrides={}}={}){
+ const users=new Map([['gm',{id:'gm',active:true,isGM:true}],['player',{id:'player',active:true,isGM:false}],['stranger',{id:'stranger',active:true,isGM:false}]]);users.activeGM=users.get('gm');
+ const targetActor={uuid:'Actor.target',id:'target',testUserPermission:u=>u.id!=='stranger'},caster={uuid:'Actor.caster',id:'caster'};
+ const scene={id:'scene',tokens:new Map()},target={documentName:'Token',id:'targetToken',uuid:'Scene.scene.Token.targetToken',actor:targetActor,parent:scene};scene.tokens.set(target.id,target);
+ const source={sourceNonce:'source1',castNonce:'cast1',originalMessageUuid:'ChatMessage.card',casterActorUuid:caster.uuid,casterTokenUuid:'Scene.scene.Token.casterToken',entryUuid:'Actor.caster.Item.entry',itemUuid:'Actor.caster.Item.spell',targetUuid:target.uuid,targetActorUuid:targetActor.uuid,dc:22,rank:3,status:'awaiting-save',gmId:'gm'};
+ const message=new ChatMessage({id:'card',uuid:source.originalMessageUuid,blind:false,whisper:[],flags:{pf2e:{origin:{uuid:source.itemUuid,actor:caster.uuid,castRank:3}},[M]:{nativeCast:{id:'cast1'}},'pf2e-toolbelt':{targetHelper:{type:'spell',private:false,item:source.itemUuid,targets:[target.uuid],saveVariants:{null:{statistic:'will',basic:false,dc:22,saves:{}}}}}}});
+ const roll=new CheckRoll(),context={type:'saving-throw',actor:'target',token:target.id,origin:{actor:caster.uuid,token:source.casterTokenUuid},target:{actor:targetActor.uuid,token:target.uuid},dc:{value:22},outcome:'failure',unadjustedOutcome:'failure',messageMode:'public',isReroll:false,options:[],traits:[]};
+ const draft=new ChatMessage({isCheckRoll:true,blind:false,whisper:[],author:users.get('player'),speaker:{actor:'target',token:target.id,scene:scene.id},rolls:[roll],flags:{pf2e:{context,origin:{uuid:source.itemUuid,actor:caster.uuid},modifiers:[]}}});
+ const row={die:7,dosAdjustments:{},modifiers:[],notes:[],private:false,roll:JSON.stringify(roll.toJSON()),significantModifiers:[],statistic:'will',success:'failure',unadjustedOutcome:'failure',value:17};
+ if(existingRow)message.flags['pf2e-toolbelt'].targetHelper.saveVariants.null.saves[target.id]=structuredClone(row);
+ const targetHelper=message.flags['pf2e-toolbelt'].targetHelper;
+ if(sparseHelper){delete targetHelper.private;delete targetHelper.item;if(!existingRow)delete targetHelper.saveVariants.null.saves;}
+ Object.assign(targetHelper,helperOverrides);
+ const verified=[],manual=[],errors=[],clients={},rpc=[];let serial=0;
+ const docs=new Map([[message.uuid,message],[target.uuid,target]]);
+ for(const id of ['gm','player']){
+  const handlers=new Map(),hooks=new Map();
+  const game={system:{id:'pf2e',version:'8.5.1'},modules:new Map([['pf2e-toolbelt',{active:true,version:'3.56.2'}]]),user:users.get(id),users,messages:new Map([[message.id,message]]),scenes:new Map([[scene.id,scene]]),pf2e:{settings:{metagame:{results:true}}}};
+  const socket={register:(n,fn)=>handlers.set(n,fn),executeAsUser:async(n,to,payload)=>{rpc.push({from:id,to,n});return clients[to].handlers.get(n).call({socketdata:{userId:id}},structuredClone(payload));}};
+  const Hooks={on:(name,fn)=>{hooks.set(name,fn);return name},off:name=>hooks.delete(name)};
+  const adapter=createRoaringSaveEvidence({game,fromUuid:async uuid=>docs.get(uuid),lookupSource:m=>m===message?source:null,onVerified:async e=>{verified.push(e);if(throwVerified)throw Error('delivery failure');},onManual:async e=>manual.push(e),onError:e=>errors.push(e),randomId:()=>`inv${++serial}`});
+  adapter.register({Hooks,socket});clients[id]={adapter,game,hooks,handlers};adapter.track(message);
+ }
+ const payload={roll,message,rollMessage:draft,target,data:row};
+ const fire=()=>clients.player.hooks.get('pf2e-toolbelt.rollSave')(payload);
+ const persist=async(value=row)=>{const h=message.flags['pf2e-toolbelt'].targetHelper;h.saveVariants.null.saves??={};h.saveVariants.null.saves[target.id]=structuredClone(value);if(!Object.hasOwn(h,'private'))h.private=false;clients.gm.hooks.get('updateChatMessage')?.(message,{}, {},'gm');};
+ const idle=async()=>{for(let i=0;i<4;i++)for(const c of Object.values(clients))await c.adapter.whenIdle();};
+ return {clients,source,message,row,payload,target,roll,draft,verified,manual,errors,users,rpc,fire,persist,idle};
+}
+for(const order of ['hook-first','row-first'])test(`authenticated first native Will joins ${order} exactly once`,async()=>{
+ const f=fixture();if(order==='row-first')await f.persist();f.fire();await f.idle();if(order==='hook-first')await f.persist();await f.idle();
+ assert.equal(f.verified.length,1);assert.equal(f.verified[0].adjustedOutcome,'failure');assert.equal(f.verified[0].proof.rollerUserId,'player');assert.match(f.verified[0].proof.rowFingerprint,/^[a-f0-9]{64}$/);assert.equal(f.errors.length,0);
+ await f.persist();await f.idle();assert.equal(f.verified.length,1);assert.ok(f.rpc.some(r=>r.from==='gm'&&r.to==='player'&&r.n.endsWith(':proof')));
+});
+for(const order of ['hook-first','row-first'])test(`native sparse helper enrolls its empty row before schema defaults appear: ${order}`,async()=>{
+ const f=fixture({sparseHelper:true});assert.equal(Object.hasOwn(f.message.flags['pf2e-toolbelt'].targetHelper,'private'),false);
+ assert.equal(f.clients.gm.adapter.inspect(f.message.uuid)?.status,'awaiting');assert.equal(f.clients.player.adapter.inspect(f.message.uuid)?.status,'awaiting');
+ if(order==='row-first')await f.persist();f.fire();await f.idle();if(order==='hook-first')await f.persist();await f.idle();
+ assert.equal(f.verified.length,1);assert.equal(f.manual.length,0);assert.equal(f.errors.length,0);assert.equal(f.verified[0].proof.beforeRow,null);
+});
+for(const value of [true,null,0,'false',undefined])test(`an explicit invalid/private helper setting ${String(value)} cannot enroll`,async()=>{
+ const f=fixture({sparseHelper:true,helperOverrides:{private:value}});assert.equal(f.clients.gm.adapter.inspect(f.message.uuid),null);assert.equal(f.clients.player.adapter.inspect(f.message.uuid),null);f.fire();await f.persist();await f.idle();assert.equal(f.verified.length,0);
+});
+test('a sparse helper first observed with an existing row still remains manual',async()=>{
+ const f=fixture({sparseHelper:true,existingRow:true});f.fire();await f.idle();assert.equal(f.verified.length,0);assert.ok(f.manual.some(e=>e.reason==='unproven-existing-row'));
+});
+test('hook alone and row alone never settle',async()=>{const f=fixture();f.fire();await f.idle();assert.equal(f.verified.length,0);const g=fixture();await g.persist();await g.idle();assert.equal(g.verified.length,0);});
+test('no adopted result when track first sees an existing row',async()=>{const f=fixture({existingRow:true});f.fire();await f.idle();assert.equal(f.verified.length,0);assert.ok(f.manual.length);});
+for(const [name,mutate] of Object.entries({private:f=>{f.row.private=true},wrongDC:f=>{f.draft.flags.pf2e.context.dc.value=23},wrongOrigin:f=>{f.draft.flags.pf2e.origin.uuid='Actor.other.Item.spell'},wrongActor:f=>{f.draft.flags.pf2e.context.actor='other'},wrongOutcome:f=>{f.row.success='success'},notNative:f=>{f.payload.roll={...f.roll}},notOwner:f=>{f.target.actor.testUserPermission=()=>false},wrongToken:f=>{f.payload.target={...f.target,uuid:'Scene.other.Token.targetToken'}},reroll:f=>{f.roll.options.isReroll=true},blind:f=>{f.draft.blind=true}}))test(`${name} cannot become verified`,async()=>{const f=fixture();mutate(f);f.fire();await f.persist();await f.idle();assert.equal(f.verified.length,0);});
+test('changed persisted mechanics do not match actual native candidate',async()=>{const f=fixture();f.fire();await f.persist({...f.row,value:99});await f.idle();assert.equal(f.verified.length,0);assert.ok(f.manual.length);});
+test('two native invocations cannot settle an ambiguous same row',async()=>{const f=fixture();f.fire();f.fire();await f.persist();await f.idle();assert.equal(f.verified.length,0);assert.ok(f.manual.length);});
+test('all rerolls invalidate final-status claim without replaying onVerified',async()=>{const f=fixture();f.fire();await f.persist();await f.idle();f.clients.player.hooks.get('pf2e-toolbelt.rerollSave')({...f.payload,data:{...f.row,rerolled:'hero'}});await f.idle();assert.equal(f.verified.length,1);assert.ok(f.manual.some(e=>e.reason.includes('reroll')));});
+test('post-verification manual row change marks review, not a new result',async()=>{const f=fixture();f.fire();await f.persist();await f.idle();await f.persist({...f.row,value:18});await f.idle();assert.equal(f.verified.length,1);assert.ok(f.manual.length);});
+test('GM handoff discards outstanding old proof',async()=>{const f=fixture();f.fire();f.users.activeGM=f.users.get('stranger');await f.persist();await f.idle();assert.equal(f.verified.length,0);});
+test('proof RPC refuses caller who is not active GM',async()=>{const f=fixture();f.fire();await f.idle();const proof=[...f.clients.player.handlers].find(([k])=>k.endsWith(':proof'))[1];const response=await proof.call({socketdata:{userId:'stranger'}},{invocationId:'inv1',originalMessageUuid:f.message.uuid});assert.equal(response.ok,false);});
+test('callback failure is uncertain and never redelivered',async()=>{const f=fixture({throwVerified:true});f.fire();await f.persist();await f.idle();await f.persist();await f.idle();assert.equal(f.verified.length,1);assert.ok(f.manual.some(e=>e.reason==='verified-delivery-uncertain'));});
+test('cleanup removes hooks and rejects stored proof',async()=>{const f=fixture();f.clients.gm.adapter.cleanup();assert.equal(f.clients.gm.hooks.size,0);});
+
+test('row changed and restored before proof stays manual',async()=>{const f=fixture();await f.persist();await f.persist({...f.row,value:99});await f.persist();f.fire();await f.idle();assert.equal(f.verified.length,0);assert.ok(f.manual.length);});
+test('GM-local roller follows the same proof path',async()=>{const f=fixture();f.roll.options.rollerId='gm';f.draft.author=f.users.get('gm');f.row.roll=JSON.stringify(f.roll.toJSON());f.clients.gm.hooks.get('pf2e-toolbelt.rollSave')(f.payload);await f.persist();await f.idle();assert.equal(f.verified.length,1);assert.equal(f.verified[0].proof.rollerUserId,'gm');});
+test('duplicate authenticated RPC does not replay',async()=>{const f=fixture();f.fire();await f.persist();await f.idle();const [name,fn]=[...f.clients.gm.handlers].find(([n])=>n.endsWith(':candidate'));const response=await fn.call({socketdata:{userId:'player'}},{invocationId:'inv1',sourceNonce:'source1',originalMessageUuid:f.message.uuid});assert.equal(response.ok,true);assert.equal(f.verified.length,1);});
+test('payload userId cannot impersonate actual roller',async()=>{const f=fixture();f.fire();await f.idle();const fn=[...f.clients.gm.handlers].find(([n])=>n.endsWith(':candidate'))[1];const response=await fn.call({socketdata:{userId:'stranger'}},{invocationId:'inv1',sourceNonce:'source1',originalMessageUuid:f.message.uuid,userId:'player'});assert.equal(response.ok,false);assert.equal(f.verified.length,0);});
+test('Toolbelt null item fallback retains exact original card source',async()=>{const f=fixture();f.message.flags['pf2e-toolbelt'].targetHelper.item=null;f.fire();await f.persist();await f.idle();assert.equal(f.verified.length,1);});
+for(const [name,mutate] of Object.entries({wrongVariant:f=>{f.message.flags['pf2e-toolbelt'].targetHelper.saveVariants.other={}},wrongCard:f=>{f.payload.message=new ChatMessage({...f.message})},changedSource:f=>{f.source.castNonce='changed'},changedTargets:f=>{f.message.flags['pf2e-toolbelt'].targetHelper.targets=['Scene.other.Token.targetToken']},changedDependency:f=>{f.clients.player.game.modules.get('pf2e-toolbelt').version='future'}}))test(`${name} remains unverified`,async()=>{const f=fixture();mutate(f);f.fire();await f.persist();await f.idle();assert.equal(f.verified.length,0);});
+
+for(const outcome of ['criticalFailure','success','criticalSuccess'])test(`preserves native adjusted ${outcome} without DC recomputation`,async()=>{const f=fixture();const degree=['criticalFailure','failure','success','criticalSuccess'].indexOf(outcome);f.roll.options.degreeOfSuccess=degree;f.row.success=outcome;f.draft.flags.pf2e.context.outcome=outcome;f.row.roll=JSON.stringify(f.roll.toJSON());f.fire();await f.persist();await f.idle();assert.equal(f.verified[0]?.adjustedOutcome,outcome);});
+test('private persisted row is manual even before candidate arrives',async()=>{const f=fixture();await f.persist({...f.row,private:true});await f.idle();assert.equal(f.verified.length,0);assert.ok(f.manual.length);});
+
+test('independent native draft rolls tolerate only confirmed DSN display metadata',async()=>{const f=fixture();f.roll.terms[0].options={};f.roll.terms[0].results=[{result:7,active:true}];const other=new CheckRoll();Object.assign(other,structuredClone(f.roll));f.draft.rolls=[other];f.roll.terms[0].options={type:'saving-throw',dsnRole:'check',dsnRoleManaged:true};f.roll.terms[0].results[0].indexThrow=0;f.row.roll=JSON.stringify(f.roll.toJSON());f.fire();await f.persist();await f.idle();assert.equal(f.verified.length,1);assert.equal(f.verified[0].proof.rollJSON.terms[0].options.dsnRole,'check');});
+for(const [name,mutate] of Object.entries({rollType:r=>{r.options.type='attack-roll'},dieResult:r=>{r.terms[0].results[0].result=8},roleWrongLevel:r=>{r.options.dsnRole='check'},unknownTermOption:r=>{r.terms[0].options.customMechanical=true}}))test(`DSN witness still rejects ${name}`,async()=>{const f=fixture();f.roll.terms[0].options={};f.roll.terms[0].results=[{result:7,active:true}];const other=new CheckRoll();Object.assign(other,structuredClone(f.roll));mutate(other);f.draft.rolls=[other];f.row.roll=JSON.stringify(f.roll.toJSON());f.fire();await f.persist();await f.idle();assert.equal(f.verified.length,0);});
+test('unowned stranger candidate cannot poison later legitimate evidence',async()=>{const f=fixture();f.clients.stranger={handlers:new Map([['roaring-save:proof',async()=>({ok:false,error:'proof-scope-unavailable'})]])};const fn=[...f.clients.gm.handlers].find(([n])=>n.endsWith(':candidate'))[1];const bad=await fn.call({socketdata:{userId:'stranger'}},{invocationId:'forged',sourceNonce:'source1',originalMessageUuid:f.message.uuid});delete f.clients.stranger;assert.equal(bad.ok,false);f.fire();await f.persist();await f.idle();assert.equal(f.verified.length,1);assert.equal(f.manual.length,0);});
+test('even an owner without a live native scope cannot poison later evidence',async()=>{const f=fixture();const fn=[...f.clients.gm.handlers].find(([n])=>n.endsWith(':candidate'))[1];const bad=await fn.call({socketdata:{userId:'player'}},{invocationId:'forged',sourceNonce:'source1',originalMessageUuid:f.message.uuid});assert.equal(bad.ok,false);f.fire();await f.persist();await f.idle();assert.equal(f.verified.length,1);assert.equal(f.manual.length,0);});
+
+async function continuityFixture(){const f=fixture();f.fire();await f.persist();f.clients.player.hooks.get('updateChatMessage')(f.message);await f.idle();f.source.status='active';f.result={revision:1,receiptId:f.verified[0].proof.invocationId,outcome:'failure'};f.query=(id='gm',result=f.result)=>f.clients[id].adapter.inspectResultContinuity({sourceNonce:f.source.sourceNonce,originalMessageUuid:f.message.uuid,result});return f;}
+test('continuity is synchronous and read-only for GM and nonGM awaiting observer',async()=>{
+ const f=await continuityFixture(),before=JSON.stringify({message:f.message,source:f.source,result:f.result,inspect:Object.values(f.clients).map(c=>c.adapter.inspect(f.message.uuid)),rpc:f.rpc,verified:f.verified,manual:f.manual,errors:f.errors});
+ assert.equal(f.clients.player.adapter.inspect(f.message.uuid).status,'awaiting');
+ for(const id of ['gm','player']){const result=f.query(id);assert.deepEqual(result,{status:'current',reason:null});assert.equal(result?.then,undefined)}
+ await f.idle();assert.equal(JSON.stringify({message:f.message,source:f.source,result:f.result,inspect:Object.values(f.clients).map(c=>c.adapter.inspect(f.message.uuid)),rpc:f.rpc,verified:f.verified,manual:f.manual,errors:f.errors}),before);
+});
+test('same outcome with changed full row is immediately unproven before update hook',async()=>{const f=await continuityFixture();const row=f.message.flags['pf2e-toolbelt'].targetHelper.saveVariants.null.saves[f.target.id];row.value++;for(const id of ['gm','player'])assert.equal(f.query(id).status,'unproven');assert.equal(f.manual.length,0)});
+test('observed changed then restored row remains unproven on both clients',async()=>{const f=await continuityFixture();await f.persist({...f.row,value:99});f.clients.player.hooks.get('updateChatMessage')(f.message);await f.persist();f.clients.player.hooks.get('updateChatMessage')(f.message);for(const id of ['gm','player'])assert.equal(f.query(id).status,'unproven');await f.idle()});
+for(const [label,change]of Object.entries({revision:r=>r.revision=2,receipt:r=>r.receiptId='',outcome:r=>r.outcome='success',invalidOutcome:r=>r.outcome='unknown'}))test(`continuity rejects invalid or mismatched trusted result: ${label}`,async()=>{const f=await continuityFixture();const result=structuredClone(f.result);change(result);for(const id of ['gm','player'])assert.equal(f.query(id,result).status,'unproven')});
+test('GM proof binds the exact accepted receipt in addition to row and outcome',async()=>{const f=await continuityFixture();assert.equal(f.query('gm',{...f.result,receiptId:'another-receipt'}).status,'unproven')});
+for(const [label,change]of Object.entries({private:f=>{f.message.flags['pf2e-toolbelt'].targetHelper.private=true},rerolled:f=>{f.message.flags['pf2e-toolbelt'].targetHelper.saveVariants.null.saves[f.target.id].rerolled='new'},gmChanged:f=>{f.users.activeGM=f.users.get('stranger')},cardIdentity:f=>{for(const c of Object.values(f.clients))c.game.messages.set(f.message.id,new ChatMessage({...f.message}))},sourceIdentity:f=>{f.source.castNonce='new-cast'}}))test(`continuity immediately rejects ${label}`,async()=>{const f=await continuityFixture();change(f);for(const id of ['gm','player'])assert.equal(f.query(id).status,'unproven')});
+test('late tracking cannot prove initial empty row even before deferred manual processing',async()=>{const f=fixture({existingRow:true});for(const c of Object.values(f.clients)){c.hooks.get('updateChatMessage')(f.message);assert.equal(c.adapter.inspectResultContinuity({sourceNonce:f.source.sourceNonce,originalMessageUuid:f.message.uuid,result:{revision:1,receiptId:'inv1',outcome:'failure'}}).status,'unproven')}await f.idle()});
+test('reload/cleanup and bare row without observed transition remain unproven',async()=>{const f=await continuityFixture();f.clients.player.adapter.cleanup();assert.equal(f.query('player').status,'unproven');const g=fixture();g.message.flags['pf2e-toolbelt'].targetHelper.saveVariants.null.saves[g.target.id]=structuredClone(g.row);assert.equal(g.clients.player.adapter.inspectResultContinuity({sourceNonce:g.source.sourceNonce,originalMessageUuid:g.message.uuid,result:{revision:1,receiptId:'inv1',outcome:'failure'}}).status,'unproven')});
+test('ambiguous genuine candidates remain unproven even if persisted outcome agrees',async()=>{const f=fixture();f.fire();f.fire();await f.persist();await f.idle();assert.equal(f.clients.gm.adapter.inspectResultContinuity({sourceNonce:f.source.sourceNonce,originalMessageUuid:f.message.uuid,result:{revision:1,receiptId:'inv1',outcome:'failure'}}).status,'unproven')});
+test('local second invocation and reroll reject immediately before asynchronous GM handling',async()=>{for(const reroll of [false,true]){const f=await continuityFixture();if(reroll)f.clients.player.hooks.get('pf2e-toolbelt.rerollSave')({...f.payload,data:{...f.row,rerolled:'new'}});else f.fire();assert.equal(f.query('player').status,'unproven');await f.idle()}});
+test('rejected second native capture invalidates continuity in the same tick',async()=>{
+ const f=await continuityFixture();assert.equal(f.query('player').status,'current');
+ f.draft.blind=true;f.fire();
+ assert.equal(f.query('player').status,'unproven');
+ assert.equal(f.clients.player.adapter.inspect(f.message.uuid).reason,'unproven-native-or-private');
+ f.draft.blind=false;assert.equal(f.query('player').status,'unproven');
+ await f.idle();assert.equal(f.verified.length,1);assert.equal(f.query('player').status,'unproven');
+});
