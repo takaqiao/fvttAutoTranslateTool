@@ -75,7 +75,7 @@ test('fifty minute extension applies original rolled amount once without new che
   const f=fixture();const p=f.native.run(f.activity,{id:'A'});f.release();const original={...f.activity,...await p,state:'confirmed'};
   f.game.time.worldTime=3600;
   const extension={...f.activity,id:'E',startedAt:600,endsAt:3600};const result=await f.native.extend(extension,original,{id:'E'});
-  assert.equal(result.status,'confirmed');assert.equal(f.called,1);assert.deepEqual(f.stages,['surgery','healing','healing']);
+  assert.equal(result.status,'confirmed');assert.equal(f.called,1);assert.deepEqual(f.stages,['surgery','healing','healing']);assert.equal(structuredClone(result).proof.poolReceipts.length,1);
   await assert.rejects(f.native.extend(extension,original,{id:'E'}),/already/);
 });
 test('actual PF2e stacking function prevents Medic and Robust Health duplicate circumstance bonus',async()=>{

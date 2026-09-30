@@ -64,7 +64,7 @@ export function createSalubriousKiss({game,fromUuid=globalThis.fromUuid,choose,e
    }
   })();
   if(binding)promise.then(claim=>{
-   const result={status:claim.state==='done'?'confirmed':'blocked',proof:{useId:claim.nonce,checkIds:claim.result?.checkId?[claim.result.checkId]:[],resultIds:claim.result?.damageId?[claim.result.damageId]:[],receiptIds:claim.receipt?.messageId?[claim.receipt.messageId]:[],immunityIds:claim.immunityIds??[]},sourceDegree:claim.result?.degree,effectiveOutcome:['criticalFailure','failure','success','criticalSuccess'][claim.result?.degree],rolledHealing:claim.result?.degree>=2?game.messages.get(claim.result.damageId)?.rolls?.[0]?.total??null:null};
+   const result={status:claim.state==='done'?'confirmed':'blocked',proof:{useId:claim.nonce,checkIds:claim.result?.checkId?[claim.result.checkId]:[],resultIds:claim.result?.damageId?[claim.result.damageId]:[],receiptIds:claim.receipt?.messageId?[claim.receipt.messageId]:[],immunityIds:claim.immunityIds??[],poolReceipts:claim.receipt?.poolReceipt?[claim.receipt.poolReceipt]:[]},sourceDegree:claim.result?.degree,effectiveOutcome:['criticalFailure','failure','success','criticalSuccess'][claim.result?.degree],rolledHealing:claim.result?.degree>=2?game.messages.get(claim.result.damageId)?.rolls?.[0]?.total??null:null};
    activityResults.set(binding.activity.id,result);binding.resolve(result);activities.delete(actor.uuid);
   },error=>{binding.reject(error);activities.delete(actor.uuid)});
   live.set(key,promise);promise.finally(()=>{if(live.get(key)===promise)live.delete(key)}).catch(()=>{});return promise;

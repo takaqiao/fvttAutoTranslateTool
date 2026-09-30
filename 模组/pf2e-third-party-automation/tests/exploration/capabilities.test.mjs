@@ -26,7 +26,7 @@ test('prepared Medic grant and Assurance belonging to another skill',async()=>{
   const c=createCapabilities({game:{time:{worldTime:600},actors:{party:{members:[actor]}},modules:new Map([['patreon-v3',{active:true}]]),settings:{get:()=>true}},fromUuid:async()=>actor,hpPools:{discover:a=>({poolUUID:a.uuid,ready:true})}});
   const result=await c.discover(actor.uuid);assert.equal(result.medicine.rank,2);assert.equal(result.wardCapacity,2);assert.equal(result.assuranceSkills.includes('medicine'),false);assert.deepEqual(result.assuranceSkills,['occultism']);
   actor.rules=[{key:'FastHealing',test:()=>true}];assert.equal((await c.activePassiveRules())[0].passing,true);
-  assert.equal(result.cooldownExpiresAt,0,'current world time is not a real patient immunity');
+  assert.equal(result.cooldownExpiresAt,null,'absence of immunity is not an epoch-zero deadline');
 });
 test('passive time readiness follows enabled Patreon and all parties, including an unselected member',async()=>{
  const actor={uuid:'Actor.A',rules:[{key:'FastHealing',test:()=>true}]};let enabled=false;

@@ -2,7 +2,7 @@ import {clone,emptyLedger,createActivity,validateSession,validateClock} from './
 const transitions={
   planned:['started','blocked','cancelled'],started:['completing','awaiting-evidence','blocked','uncertain','cancelled'],
   completing:['awaiting-evidence','confirmed','blocked','uncertain'],
-  'awaiting-evidence':['confirmed','uncertain'],confirmed:[],blocked:[],uncertain:[],cancelled:[]
+  'awaiting-evidence':['confirmed','uncertain'],confirmed:[],blocked:[],uncertain:['confirmed'],cancelled:[]
 };
 export function createLedger({read,write,isAuthority}) {
   let tail=Promise.resolve();
@@ -15,7 +15,7 @@ export function createLedger({read,write,isAuthority}) {
   function transition(collection,key,{expected,patch}) {
     return mutate(s=>{
       const old=s[collection][key];if(!old||!expected.includes(old.state))throw Error('state-conflict');
-      const legal=collection==='clocks'?{started:['confirmed','uncertain'],confirmed:[],uncertain:[]}:transitions;
+      const legal=collection==='clocks'?{started:['confirmed','uncertain'],confirmed:[],uncertain:['confirmed']}:transitions;
       if(patch.state&&!legal[old.state]?.includes(patch.state))throw Error('illegal-transition');
       const immutable=collection==='clocks'?['id','sessionId','from','to','gmId']:['id','sessionId','providerId','actorUUID','patientUUIDs','hpPoolUUIDs','startedAt','endsAt','source','groupId'];
       if(immutable.some(k=>k in patch&&JSON.stringify(patch[k])!==JSON.stringify(old[k])))throw Error('immutable-provenance');

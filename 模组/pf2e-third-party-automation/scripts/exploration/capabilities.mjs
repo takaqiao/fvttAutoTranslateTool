@@ -1,5 +1,8 @@
 import {TREAT_WOUNDS_IMMUNITY,sourceId,values} from '../salubrious-kiss-rules.mjs';
 import {canonicalItemSource} from './source-ids.mjs';
+export const improvedRefocusSlugs=new Set(['bloodline','bonded','conflux','devoted','domain','hex','inspirational','link','meditative','primal','wardens'].flatMap(name=>[`${name}-focus`,`${name}-wellspring`]));
+export function refocusUnsupported(items){return values(items).filter(i=>!i.isSuppressed&&!i.system?.suppressed&&i.type==='feat'&&improvedRefocusSlugs.has(i.slug??i.system?.slug)).map(i=>i.slug??i.system?.slug)}
+export function treatablePatient(patient,healer){return patient.modeOfBeing==='living'||patient.modeOfBeing==='undead'&&healer.slugs.includes('stitch-flesh')}
 export function wardCapacity({wardMedic,medicineRank}) {return wardMedic&&medicineRank>=2?2**(Math.min(4,medicineRank)-1):1}
 export function cooldown({startedAt,finishedAt,continualRecovery}) {const expiresAt=startedAt+(continualRecovery?600:3600);return {expiresAt,remainingSeconds:Math.max(0,expiresAt-finishedAt)}}
 export function earliestTreatmentStart({now,existingExpiresAt}) {return Math.max(now,existingExpiresAt??now)}
@@ -32,7 +35,7 @@ export function createCapabilities({game,fromUuid,hpPools}) {
       wardCapacity:wardCapacity({wardMedic:slugs.includes('ward-medic'),medicineRank:statistics.medicine.rank}),
       continualRecovery:slugs.includes('continual-recovery'),riskySurgery:slugs.includes('risky-surgery'),threePecks:feats.some(i=>sourceId(i)==='Compendium.pf2e.feats-srd.Item.Qg5M34t95rtT0sOp'),
       hasActiveToken:typeof actor.getActiveTokens==='function'?actor.getActiveTokens(false,true).length>0:undefined,hp:{value:master?.system?.attributes?.hp?.value??0,max:master?.system?.attributes?.hp?.max??0,temp:master?.system?.attributes?.hp?.temp??0},focus:structuredClone(actor.system?.resources?.focus??{value:0,max:0}),pool,immunities,
-      cooldownExpiresAt:Math.max(0,...immunities.map(i=>i.expiresAt)),unsupported:slugs.filter(s=>['mortal-healing'].includes(s))};
+      cooldownExpiresAt:immunities.length?Math.max(...immunities.map(i=>i.expiresAt)):null,refocusUnsupported:refocusUnsupported(items),unsupported:slugs.filter(s=>['mortal-healing'].includes(s))};
   }
   return {discover,snapshot:async uuids=>Promise.all(uuids.map(discover)),activePassiveRules:async()=>{
     let enabled=false;try{enabled=game.modules?.get('patreon-v3')?.active===true&&game.settings.get('patreon-v3','fastHealingTime')===true}catch{}if(!enabled)return [];

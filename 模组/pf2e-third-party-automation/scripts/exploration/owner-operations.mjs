@@ -44,7 +44,15 @@ export function createExplorationOwnerOperations({game,fromUuid,ledger,sharedOwn
       if(!isActiveGM(game))throw Error('gm-changed');if(!response?.ok)throw Error(response?.error??'owner-response-uncertain-no-retry');return response.value;
     }finally{clearTimeout(timer)}
   }
-  return {ownerExecute,runActivityWithOwner,cancelActivity:activity=>cancelled.add(activity.id),isActivityContext:(ctx,id)=>contexts.get(ctx)===id&&!cancelled.has(id),
+  async function reconcile(activity){
+    if(!isActiveGM(game))throw Error('active-gm-required');const actor=await fromUuid(activity.actorUUID),record=actor?.flags?.[MODULE_ID]?.explorationExecutions?.[activity.id],operation=activity.options?.extensionOf?'treatment-extension':activity.providerId;
+    if(record?.state!=='done'||record.activityId!==activity.id||record.actorUUID!==activity.actorUUID||record.operationId!==operation||record.result?.status!=='confirmed')return {status:'uncertain',reason:'saved-owner-completion-unavailable'};
+    const result=clone(record.result),proof=result.proof;if(!proof||proof.useId!==(activity.options?.extensionOf??activity.id))return {status:'uncertain',reason:'saved-owner-proof-mismatch'};
+    for(const key of ['checkIds','resultIds'])if(!Array.isArray(proof[key])||proof[key].some(id=>!game.messages.get(id)))return {status:'uncertain',reason:'saved-native-message-unavailable'};
+    if((proof.poolReceipts??[]).some(p=>!activity.hpPoolUUIDs.includes(p.actorUUID)||p.activityId&&p.activityId!==activity.id))return {status:'uncertain',reason:'saved-pool-proof-mismatch'};
+    if(!isActiveGM(game))throw Error('active-gm-required');return result;
+  }
+  return {ownerExecute,runActivityWithOwner,reconcile,cancelActivity:activity=>cancelled.add(activity.id),isActivityContext:(ctx,id)=>contexts.get(ctx)===id&&!cancelled.has(id),
     createActivityContext:async activity=>{
       if(!isActiveGM(game))throw Error('active-gm-required');const stored=await ledger.getActivity(activity.id);
       if(stored?.state!=='planned'||JSON.stringify(stored)!==JSON.stringify(activity)||game.time.worldTime!==activity.startedAt)throw Error('activity-begin-claim-required');

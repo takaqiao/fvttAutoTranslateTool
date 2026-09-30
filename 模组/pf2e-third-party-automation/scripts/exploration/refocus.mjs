@@ -1,5 +1,6 @@
 import {MODULE_ID} from './schema.mjs';
 import {sourceId,values} from '../salubrious-kiss-rules.mjs';
+import {refocusUnsupported} from './capabilities.mjs';
 export const LAY_ON_HANDS='Compendium.pf2e.spells-srd.Item.zNN9212H2FGfM7VS';
 export function refocusCommitValue({before,max,requested,recovery=1}){if(!Number.isFinite(before)||!Number.isFinite(max)||(requested!==max&&requested!==Math.min(max,before+1))||!Number.isInteger(recovery)||recovery<1)throw Error('native-refocus-source-changed');return Math.min(max,before+recovery)}
 export function healingVariant(item){
@@ -19,7 +20,7 @@ export function createRefocusAdapter({game,canvas=globalThis.canvas,fromUuid,own
   }
   async function complete(activity,ctx) {
     if(!ownerOperations.isActivityContext(ctx,activity.id)||game.time.worldTime<activity.endsAt)throw Error('private-refocus-context-required');ctx.validate?.();
-    const actor=await fromUuid(activity.actorUUID),controlled=canvas.tokens?.controlled??[];ctx.validate?.();
+    const actor=await fromUuid(activity.actorUUID),controlled=canvas.tokens?.controlled??[];ctx.validate?.();if(refocusUnsupported(actor.items).length)throw Error('refocus-recovery-unadapted');
     let restore=null;
     if(controlled.length!==1||controlled[0].actor!==actor){
       const token=actor.getActiveTokens?.().find(t=>t.scene?.id===canvas.scene?.id||t.document?.parent?.id===canvas.scene?.id);
@@ -40,6 +41,7 @@ export function createRefocusProvider({game,ledger,capabilities,refocusEvents,sa
   const completed=new Map(),running=new Map();
   async function begin(activity,ctx) {
     const actor=await capabilities.discover(activity.actorUUID);
+    if(actor.refocusUnsupported?.length)return {status:'blocked',reason:'refocus-recovery-unadapted'};
     if(actor.isDead||actor.unconscious)return {status:'blocked',reason:'actor-cannot-refocus'};
     if(activity.options.threePecks){if(!actor.threePecks)return {status:'blocked',reason:'three-pecks-unavailable'};return salubriousKiss.claimActivity(activity,ctx)}
     if(actor.focus.value>=actor.focus.max)return {status:'blocked',reason:'focus-already-full'};
@@ -52,7 +54,7 @@ export function createRefocusProvider({game,ledger,capabilities,refocusEvents,sa
       const stored=await ledger.getActivity(activity.id);if(!['started','completing'].includes(stored?.state))return {status:'uncertain',reason:'refocus-activity-in-flight'};
       const receipt=await refocusEvents.complete(activity,ctx);ctx.validate?.();
       const healing=activity.options.threePecks?await salubriousKiss.completeActivity(activity,ctx):null;
-      const result={status:healing?.status??'confirmed',proof:{useId:activity.id,checkIds:healing?.proof?.checkIds??[],resultIds:healing?.proof?.resultIds??[],receiptIds:[receipt.id,...healing?.proof?.receiptIds??[]],immunityIds:healing?.proof?.immunityIds??[]},focusBefore:receipt.focusBefore,focusAfter:receipt.focusAfter,...healing?{treatment:healing}:{}};
+      const result={status:healing?.status??'confirmed',proof:{useId:activity.id,checkIds:healing?.proof?.checkIds??[],resultIds:healing?.proof?.resultIds??[],receiptIds:[receipt.id,...healing?.proof?.receiptIds??[]],immunityIds:healing?.proof?.immunityIds??[],poolReceipts:healing?.proof?.poolReceipts??[]},focusBefore:receipt.focusBefore,focusAfter:receipt.focusAfter,...healing?{treatment:healing}:{}};
       completed.set(activity.id,result);return result;
     })();running.set(activity.id,task);try{return await task}finally{running.delete(activity.id)}
   }
@@ -117,7 +119,7 @@ export function createFocusHealingProvider({game,Hooks,fromUuid,ownerOperations,
       const roll=await variant.rollDamage(event);valid(activity,ctx);
       if(!damage||game.messages.get(damage.id)!==damage||!roll?._evaluated||JSON.stringify(roll.toJSON())!==JSON.stringify(damage.rolls[0].toJSON()))throw Error('native-focus-roll-unconfirmed');
       const receipt=await nativeTreatment.applySavedResult(activity,{message:damage,patient,stage:'healing',outcome:null,item:variant},ctx);valid(activity,ctx);
-      return {status:'confirmed',proof:{useId:activity.id,checkIds:[],resultIds:[card.id,damage.id],receiptIds:[receipt],immunityIds:[]},resourceReceiptIds:[resourceReceipt.id],rolledHealing:roll.total};
+      return {status:'confirmed',proof:{useId:activity.id,checkIds:[],resultIds:[card.id,damage.id],receiptIds:[receipt.receiptId],immunityIds:[],poolReceipts:receipt.poolReceipt?[receipt.poolReceipt]:[]},resourceReceiptIds:[resourceReceipt.id],rolledHealing:roll.total};
     }finally{scopes.delete(original.uuid);Hooks.off('preCreateChatMessage',pre);Hooks.off('createChatMessage',post)}
   }
   return {id:'focus-healing',begin,complete,register,describe:async()=>[],propose:async()=>[],observe:async()=>null,reconcile:async a=>({status:'uncertain',reason:'native-focus-context-lost',proof:a.proof})};

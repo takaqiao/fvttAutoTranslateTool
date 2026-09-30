@@ -1,6 +1,7 @@
 import {MODULE_ID} from './schema.mjs';
 import {TREAT_WOUNDS_IMMUNITY} from '../salubrious-kiss-rules.mjs';
 import {cooldown} from './capabilities.mjs';
+import {extensionPatients} from './treatment.mjs';
 const outcomes=['criticalFailure','failure','success','criticalSuccess'];
 const marker=id=>`exploration-activity:${id}`;
 const author=m=>m.author?.id??m.author??m.user?.id??m.user;
@@ -55,8 +56,8 @@ export function createNativeTreatment({game,Hooks,fromUuid,ownerOperations,check
       if(!c.options.includes(source)||author(m)!==game.user.id||m.speaker?.actor!==patient.id||m.flags.pf2e.appliedDamage&&m.flags.pf2e.appliedDamage.uuid!==patient.uuid)throw Error('invalid-application-receipt');receipt=m;
     });
     try{
-      const applicationResult=await hpPools.withNativeApplication(activity,patient,async()=>({nativeResult:await (apply?apply(request):recipient.applyDamage(params)),receipt}));result.poolReceipt=applicationResult.poolReceipt;valid(activity,ctx);
-      const confirmed=await waitFor(()=>receipt&&game.messages.get(receipt.id)===receipt?receipt:null,'createChatMessage');valid(activity,ctx);return confirmed.id;
+      const applicationResult=await hpPools.withNativeApplication(activity,patient,async()=>({nativeResult:await (apply?apply(request):recipient.applyDamage(params)),receipt}));valid(activity,ctx);
+      const confirmed=await waitFor(()=>receipt&&game.messages.get(receipt.id)===receipt?receipt:null,'createChatMessage');valid(activity,ctx);return {receiptId:confirmed.id,poolReceipt:applicationResult.poolReceipt};
     }finally{Hooks.off('createChatMessage',hook);Hooks.off('preCreateChatMessage',privacyHook);revoke()}
   }
   async function single(activity,patient,ctx) {
@@ -101,7 +102,7 @@ export function createNativeTreatment({game,Hooks,fromUuid,ownerOperations,check
       const stages=results.map(message=>({message,patient,outcome:check.outcome,medicBonus,stage:classifyResult(message.rolls[0],check.outcome)}));
       if(stages.filter(r=>r.stage==='surgery').length!==((actualRisky||activity.options.riskySurgery)?1:0)||new Set(stages.map(r=>r.stage)).size!==stages.length)throw Error('native-stages-mismatch');
       stages.sort((a,b)=>(a.stage==='surgery'?-1:1)-(b.stage==='surgery'?-1:1));const receiptIds=[];
-      for(const stage of stages){if(patient.isDead)throw Error('patient-died-during-treatment');receiptIds.push(await applySavedResult(activity,stage,ctx));if(stage.poolReceipt)proof.poolReceipts.push(stage.poolReceipt)}
+      for(const stage of stages){if(patient.isDead)throw Error('patient-died-during-treatment');const saved=await applySavedResult(activity,stage,ctx);receiptIds.push(saved.receiptId);if(saved.poolReceipt)proof.poolReceipts.push(saved.poolReceipt)}
       Object.assign(proof,{checkIds:[check.message.id],resultIds:results.map(m=>m.id),receiptIds});
       const expiresAt=cooldown({startedAt:activity.startedAt,finishedAt:activity.endsAt,continualRecovery:activity.options.continualRecovery}).expiresAt;
       if(expiresAt>game.time.worldTime){
@@ -125,16 +126,15 @@ export function createNativeTreatment({game,Hooks,fromUuid,ownerOperations,check
   }
   async function extend(activity,original,ctx){
     valid(activity,ctx);if(original.state!=='confirmed'||activity.startedAt!==original.endsAt||activity.endsAt!==original.startedAt+3600)throw Error('extension-origin-unconfirmed');
-    const receipts=[];
-    for(const result of original.results??[original]){
-      if(!['success','criticalSuccess'].includes(result.effectiveOutcome))continue;
+    const receipts=[],poolReceipts=[];
+    for(const result of extensionPatients(original,activity.patientUUIDs)){
       const message=result.proof.resultIds.map(id=>game.messages.get(id)).find(m=>m&&classifyResult(m.rolls[0],result.effectiveOutcome)==='healing');
       if(!message||message.rolls[0].total!==result.rolledHealing)throw Error('original-healing-roll-unconfirmed');
       const patient=await fromUuid(result.patientUUID??activity.patientUUIDs[0]);
-      receipts.push(await applySavedResult(activity,{message,patient,stage:'healing',outcome:result.effectiveOutcome,medicBonus:result.medicBonus},ctx));
+      const saved=await applySavedResult(activity,{message,patient,stage:'healing',outcome:result.effectiveOutcome,medicBonus:result.medicBonus},ctx);receipts.push(saved.receiptId);if(saved.poolReceipt)poolReceipts.push(saved.poolReceipt);
     }
     if(!receipts.length)throw Error('extension-without-success');
-    return {status:'confirmed',proof:{useId:original.proof.useId,checkIds:original.proof.checkIds,resultIds:original.proof.resultIds,receiptIds:receipts,immunityIds:[]},effectiveOutcome:original.effectiveOutcome,rolledHealing:original.rolledHealing};
+    return {status:'confirmed',proof:{useId:original.proof.useId,checkIds:original.proof.checkIds,resultIds:original.proof.resultIds,receiptIds:receipts,immunityIds:[],poolReceipts},effectiveOutcome:original.effectiveOutcome,rolledHealing:original.rolledHealing};
   }
   return {run,extend,applySavedResult,reconcile:async a=>({status:'uncertain',reason:'persisted-native-evidence-requires-review',proof:a.proof})};
 }

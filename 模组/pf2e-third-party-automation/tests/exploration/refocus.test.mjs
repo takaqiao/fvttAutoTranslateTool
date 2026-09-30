@@ -9,21 +9,22 @@ test('focus healing consumes native focus once and requires explicit healing ove
   const item={uuid:variant.uuid,sourceId:variant.sourceId,type:'spell',actor,system:{overlays:{HEAL:{}}},loadVariant:({overlayIds})=>{assert.deepEqual(overlayIds,['HEAL']);return variant}};actor.items=new Map([['L',item]]);
   const entry={cast:async spell=>{const c={actor,item:spell,castNonce:'N',payload:{focusPoints:1},expectFocusCommit:({changes})=>{actor.flags['pf2e-third-party-automation']={explorationFocusCommits:{A:changes({castNonce:'N',before:1,after:0,cost:1})['flags.pf2e-third-party-automation.explorationFocusCommits.A']}}}};await consume(c,async()=>{actor.system.resources.focus.value=0;return true});card.flags['pf2e-third-party-automation']={...card.flags['pf2e-third-party-automation'],explorationFocus:capture(spell),nativeCast:{id:'N'}};messages.set(card.id,card)}};variant.spellcasting=entry;
   const game={user:{id:'G',settings:{showCheckDialogs:false}},time:{worldTime:6},messages};
-  const provider=createFocusHealingProvider({game,Hooks,fromUuid:async uuid=>uuid===item.uuid?item:uuid===actor.uuid?actor:patient,ownerOperations:{isActivityContext:c=>c===ctx},castEvents:{addMatcher(){},addConsumePolicy:f=>{consume=f},addCapture:(id,f)=>{capture=f},ensurePaid:async()=>({id:'N',state:'used',messageId:'CAST'})},nativeTreatment:{applySavedResult:async()=>{applies++;return 'R'}}});provider.register();
+  const poolReceipt={activityId:'A',actorUUID:'Actor.Master',before:{value:1},after:{value:19}};
+  const provider=createFocusHealingProvider({game,Hooks,fromUuid:async uuid=>uuid===item.uuid?item:uuid===actor.uuid?actor:patient,ownerOperations:{isActivityContext:c=>c===ctx},castEvents:{addMatcher(){},addConsumePolicy:f=>{consume=f},addCapture:(id,f)=>{capture=f},ensurePaid:async()=>({id:'N',state:'used',messageId:'CAST'})},nativeTreatment:{applySavedResult:async()=>{applies++;return {receiptId:'R',poolReceipt}}}});provider.register();
   const activity={id:'A',actorUUID:actor.uuid,patientUUIDs:[patient.uuid],startedAt:0,endsAt:6,options:{itemUUID:item.uuid}};
-  assert.equal((await provider.complete(activity,ctx)).status,'confirmed');assert.equal(actor.system.resources.focus.value,0);assert.equal(applies,1);
+  const saved=structuredClone(await provider.complete(activity,ctx));assert.equal(saved.status,'confirmed');assert.deepEqual(saved.proof.receiptIds,['R']);assert.deepEqual(saved.proof.poolReceipts,[poolReceipt]);assert.equal(actor.system.resources.focus.value,0);assert.equal(applies,1);
   await assert.rejects(provider.complete(activity,ctx),/already/);
 });
 import {fixture} from '../salubrious-kiss-fixture.mjs';
 import {createSalubriousKiss} from '../../scripts/salubrious-kiss.mjs';
 test('real Kiss subscriber settles bound original start once without reopening patient chooser',async()=>{
   const f=fixture();const ctx={validate:()=>{}};f.game.scenes.active=f.scene;let rolls=0;
-  const kiss=createSalubriousKiss({...f,game:f.game,fromUuid:f.fromUuid,validateRefocusNote:()=>true,isExplorationContext:c=>c===ctx,choose:async()=>{throw Error('unexpected chooser')},executor:{roll:async()=>{rolls++;return {checkId:'C',damageId:'D',degree:2}},apply:async()=>({messageId:'R'})}});
+  const kiss=createSalubriousKiss({...f,game:f.game,fromUuid:f.fromUuid,validateRefocusNote:()=>true,isExplorationContext:c=>c===ctx,choose:async()=>{throw Error('unexpected chooser')},executor:{roll:async()=>{rolls++;return {checkId:'C',damageId:'D',degree:2}},apply:async()=>({messageId:'R',poolReceipt:{actorUUID:'Actor.Master',noChange:true,receiptId:'R'}})}});
   const a={id:'A1',actorUUID:f.actor.uuid,patientUUIDs:[f.patient.uuid],startedAt:100,endsAt:700,options:{rank:'trained'}};
   assert.equal((await kiss.claimActivity(a,ctx)).status,'started');
   f.game.time.worldTime=700;f.proof.nonce='A1';f.proof.userId=f.gm.id;f.proof.privacy={schema:1,userId:f.gm.id,mode:'public',whisper:[],blind:false};f.proof.noteId='F';f.actor.flags[f.M].avRefocusIntent={...f.proof};f.actor.flags[f.M].refocusEvents=[{...f.proof,state:'claimed'}];
   f.game.messages.set('F',{id:'F',author:f.gm,speaker:{actor:f.actor.id,scene:f.scene.id,token:f.token.id},blind:false,whisper:[],flags:{[f.M]:{avRefocusNote:{...f.proof,kind:'completion'}}}});
-  await kiss.onRefocus({actor:f.actor,user:f.gm,proof:f.proof});assert.equal((await kiss.completeActivity(a,ctx)).status,'confirmed');
+  await kiss.onRefocus({actor:f.actor,user:f.gm,proof:f.proof});const restored=structuredClone(await kiss.completeActivity(a,ctx));assert.equal(restored.status,'confirmed');assert.deepEqual(restored.proof.poolReceipts,[{actorUUID:'Actor.Master',noChange:true,receiptId:'R'}]);
   await kiss.onRefocus({actor:f.actor,user:f.gm,proof:f.proof});assert.equal(rolls,1);assert.equal(f.effects[0].flags[f.M].salubriousKiss.expiresAt,3700);
 });
 test('completion and subscriber reuse one composite result, including full focus',async()=>{
