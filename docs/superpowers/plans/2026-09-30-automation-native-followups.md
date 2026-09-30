@@ -10,7 +10,7 @@
 
 **Spec:** `docs/superpowers/specs/2026-09-30-automation-native-followups.md`
 
-**Progress (2026-09-30):** Task 1–7 的实现和回归已完成，证据见 [执行记录](../../fortress-automation/native-followups-2026-09-30.md)。最后 `4e293522` 的全量真实依赖运行 **1921/1921、0 fail、0 skip**，runtime syntax 和 diff 检查均 exit 0；完整记录为 [final-tests.log](C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/final-tests.log)。正常、无目标、隐藏目标、fortune/substitution 及最后 Assurance 固定/相抵两分支的 RK 实机验收均通过，最后源测试独立 52/52、0 skip。Task 8 最终候选、发布包及正式部署仍待确认。
+**Progress (2026-09-30):** Task 1–8 已完成，证据见 [执行记录](../../fortress-automation/native-followups-2026-09-30.md)。最后全量真实依赖运行 **1921/1921、0 fail、0 skip**，runtime syntax 和 diff 检查均 exit 0；完整记录为 [final-tests.log](C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/final-tests.log)。正常、无目标、隐藏目标、fortune/substitution 及最后 Assurance 固定/相抵两分支的 RK 实机验收均通过，最后源测试独立 52/52、0 skip。0.9.19 最终包/tag 提交 `f22980350ec176a7b6df69bb68d5062733b7d484` 已完成 148/148 SHA 校验、fresh 双客户端 smoke、公开 latest 下载验证和 CN 原生备份/部署后检查；正式服务未重启。
 
 ## Global Constraints
 
@@ -110,7 +110,7 @@ Files: `weapon-surge.mjs`, `weapon-surge-snapshot.mjs`, `next-strike-effects.mjs
 ### Task 8: Integration, review and release artifact
 
 - [x] Confirm the final post-fix full suite, syntax checks, source-file integrity and focused load probes. Final `4e293522`: 1921/1921, 0 fail/skip; `verify-final.ps1` runtime syntax/diff checks exit 0, with the complete external `final-tests.log` footer independently checked.
-- [x] Confirm the final independent whole-change review and remaining live QA. Important findings have RED→GREEN fixes; owner/Surge/player hero, normal RK and final Assurance fixed/cancelled branches have actual dual-client evidence. Final source review and actual-source focus 52/52 found no remaining same-scope blockers; root independently confirmed the final QA JSON. Packaged candidate confirmation remains pending.
-- [ ] Create versioned release artifact preserving 0.9.18.6 hotfixes; inspect manifest/package contents and rollback instructions.
+- [x] Confirm the final independent whole-change review and remaining live QA. Important findings have RED→GREEN fixes; owner/Surge/player hero, normal RK and final Assurance fixed/cancelled branches have actual dual-client evidence. Final source review and actual-source focus 52/52 found no remaining same-scope blockers; root independently confirmed the final QA JSON. Final exact `f2298035` payload passed fresh normal RK/privacy smoke, four commands GREEN and zero page errors.
+- [x] Create versioned release artifact preserving 0.9.18.6 hotfixes; inspect manifest/package contents and rollback instructions. 0.9.19 contains 148 runtime files, 23 changed/11 added/0 removed. Public GitHub release/latest manifest downloads match the verified ZIP/module SHA and all 148 file hashes.
 - [x] Document verified versus actual multi-client UI coverage precisely in the execution record, including failed attempts and unsupported coverage.
-- [ ] Deploy only the finally verified candidate, retaining remote module backup and checking hashes afterwards. No release/deployment success is claimed by current tests or isolated QA.
+- [x] Deploy the finally verified candidate through the native transaction, retaining the verified remote 0.9.18.6 backup. CN cache now 0.9.19 and HTTP 148/148 hashes match; world, eight protected modules, services/options/core/system/startup preserved without shutdown/restart. Stop only the owned isolated QA PID 58624 / port 30425; preserve its data/logs and the other listener. Deployment receipt/postcheck and QA cleanup proof are linked in the execution record.

@@ -1,6 +1,6 @@
 # 原生自动化补全执行记录
 
-本轮 Task 1–7 的实现和回归已完成，Task 8 的全量测试及最终独立审核已确认。最后发布候选、版本化发版包和正式部署仍待完成；下述测试与隔离 QA 结果不代表已部署。
+本轮 Task 1–8 已完成。0.9.19 已公开发布并部署到 CN，运行包来自提交 `f22980350ec176a7b6df69bb68d5062733b7d484`；发布包、公开下载和部署后文件均校验一致。实机覆盖范围与历史失败证据仍按下述记录保留。
 
 计划：[2026-09-30-automation-native-followups.md](../superpowers/plans/2026-09-30-automation-native-followups.md)。工作区为 `C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt`，分支 `codex/automation-native-20260930`。用户最新明确不要移动、路线、距离、视线、触碰检测或重复确认；必要的真实反应选择、规则分支和 GM 知识裁定保留。已授权实施，不再重复请求方案批准。
 
@@ -29,11 +29,11 @@
 
 最后 Assurance 实机对照发现：提前发送 `substitute:assurance` 让原生 AdjustModifier 抑制能力值，而空 predicate 的 Modifier 在 fortune/misfortune 抵消后仍保留 ignored 状态。实际旧分支为 `1d20 + 12`，同角色普通原生对照为 `2d20kl + 16`。提交 `c1fd032a`、`4e293522` 改先捕获完整普通原生 check，仅未抵消的主检定加入 Assurance 标记；没有显式 DC 的固定 Lore 保留数值给 GM，不编造识别 DC。直接执行真实 Modifier 整 class 的回归涵盖这个持久抑制状态。
 
-上述最终源码独立复测为 ROOT 接线 57/57 和 RK/Assurance 源测试 **52/52**，均无 skip；后者在 `4e293522` 上重新执行，含真实 Check parser、Modifier 和规则 afterRoll。无冲突检定严格验证零骰 `10 + prepared proficiency`、排除其他加值；原生 unconditional 效果经持久 claim 消费一次，未启用的非熟练 if-enabled 效果保留，DoS/DC 在消费前冻结。misfortune 抵消保留完整 check，由原生 parser 投一个普通骰，状态保存 `assurance=false / assuranceRequested=true`。最新双客户端两分支均通过，独立审查未发现当前同范围未处理阻断；最后发布候选确认仍由 Task 8 收口。
+上述最终源码独立复测为 ROOT 接线 57/57 和 RK/Assurance 源测试 **52/52**，均无 skip；后者在 `4e293522` 上重新执行，含真实 Check parser、Modifier 和规则 afterRoll。无冲突检定严格验证零骰 `10 + prepared proficiency`、排除其他加值；原生 unconditional 效果经持久 claim 消费一次，未启用的非熟练 if-enabled 效果保留，DoS/DC 在消费前冻结。misfortune 抵消保留完整 check，由原生 parser 投一个普通骰，状态保存 `assurance=false / assuranceRequested=true`。最新双客户端两分支均通过，独立审查未发现当前同范围未处理阻断；最后发布包确认及部署证据见末节。
 
 ## 隔离双客户端 QA 已证明的边界
 
-现场为 loopback 的独立 Foundry 14.368 / PF2e 8.5.1，克隆 world 与实际玩家、GM 两客户端；依赖包括 Workbench 7.7.5、HUD 2.55.2、Toolbelt 3.56.5、Patreon 3.2.29、Trigger Engine 1.35.1、libWrapper 1.13.5.1 和 socketlib。最后候选 smoke 启用 Dailies 4.20.0；生产为 4.20.1，两个版本有差别。以下均为隔离验证，无正式服务器部署结论。
+现场为 loopback 的独立 Foundry 14.368 / PF2e 8.5.1，克隆 world 与实际玩家、GM 两客户端；依赖包括 Workbench 7.7.5、HUD 2.55.2、Toolbelt 3.56.5、Patreon 3.2.29、Trigger Engine 1.35.1、libWrapper 1.13.5.1 和 socketlib。最后候选 smoke 启用 Dailies 4.20.0；生产为 4.20.1，两个版本有差别。本节证明隔离环境中的流程；正式部署证据见末节。
 
 报告目录：`C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/qa/`。`dual-client-report.json` 会被新的 attempt 更新；固定历史报告用于保留以下证据。
 
@@ -48,15 +48,22 @@
 | RK fortune 与原生替代值 | 同一报告 `rk-fortune-native-correct-expiry` 仅一次真实 `2d20kh + 6`，8 discarded、12 active，七候选共享 12，FlatModifier/RollTwice 各 afterRoll/delete 一次；`rk-native-substitution` 仅一次 `17 + 6`、零骰，原卡 constant 17，Society 23/DC20/degree2，FlatModifier/SubstituteRoll 各 afterRoll/delete 一次。 | 使用真实选中 dice/substitution；正常对照不是强行固定一次裸 d20。Assurance 另有后续报告，不能把此 17 替代值案例说成 Assurance。 |
 | Assurance 固定值与真实规则消费 | [固定报告 1790739052554](C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/qa/dual-client-report-1790739052554.json) `assurance-clean-probe-fixed-native`：真实 `10 + 9`、零骰、total19/DC20/degree1、原卡 raw constant10，die:null；unconditional FlatModifier 删除一次，未启用 if-enabled 保留，probeUse done。 | 真实 Society expert/proficiency9 专长与两 FlatModifier 效果，使用 `4e293522` 后的运行文件；PWL 的 prepared 值与其他技能另由回归覆盖。 |
 | Assurance 与 misfortune 抵消 | 同一报告 `assurance-clean-probe-misfortune-native`：真实 `1d20 + 16`（INT4+prof9+circ3），die10/total26/DC20/degree2，固定 Society、assurance:false/requested:true，各 rule afterRoll 一次、两 FlatModifier 各删除一次；原卡保留真实一个骰。`assurance-clean-probe-source-and-privacy`：GM 原卡说明相抵普通检定，context 无 Assurance/substitute 标记，玩家 DOM 为私骰占位、isContentVisible:false、HP200。 | 证明最新源码的该冲突分支及玩家隐私。misfortune RollTwice 未用于最终单骰，效果保留；不声称所有其他 fortune/misfortune 组合已逐例现场测试。 |
+| 最后精确发布包双客户端 smoke | [固定报告 1790739641161](C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/qa/dual-client-report-1790739641161.json) 四项 command 全 GREEN、零 page errors：`final-f2298035-normal-rk-once` 为隐藏 humanoid 的 Society 真 Check 一次 `1d20 + 15`，FlatModifier afterRoll/delete 各一次；玩家 DOM 无真名/DC、HP200；两端 native/module API 0.9.19 ready。[SHA 凭据](C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/qa/release-candidate-sha256-f2298035.json) 证明最终包 148/148 文件匹配、无额外文件。 | 这是提交 `f2298035` 的 fresh 精确 payload smoke；完整分支证据来自前述开发期间有效独立 operation。最后 smoke 未逐项重跑完整 SpellStrike、全部 HP/IWR、英雄点+Surge 组合或长期负载。 |
 
 随后固定报告 `dual-client-report-1790736893638.json` 再次证明 owner no-dialog payment 一次、持久 operation done/committed 和玩家作者；新的真实 hero reroll 后，GM/player 均从 main 最终接线阻止旧 damage，标记 unapplied、HP 200→200。`dual-client-report-1790737083525.json` 对 **Assurance 补丁前的 `ebdeb2c7`** 精确 payload 做 normal RK 与 privacy smoke：单次 Society `1d20 + 6`、FlatModifier 删除一次、保留骰 15/total21/DC20/success，玩家 DOM 无隐藏真名/DC、HP仍200。这是旧候选的隔离 smoke，不是最后补丁后的发布确认。
 
-历史 attempt `1790736016698` 的只读 `Set.first` 赋值、过期 libWrapper continuation 以及 harness 接口/`findLast` 问题保留为失败证据；后续 fresh normal RK 报告已通过。`1790738093248` 保留已关闭的 Assurance 相抵缺 INT4 问题及普通原生 +16 对照；其中首个 instrumentation command 给无 afterRoll 的规则包了错误 wrapper，不作为检定结论，后续独立 operation 的固定值 GREEN 有效。最新 `1790739052554` 证明两分支修复，不重试旧 claimed 卡。新发布候选仍须独立证据，不能从旧 smoke 推定最后结果。
+历史 attempt `1790736016698` 的只读 `Set.first` 赋值、过期 libWrapper continuation 以及 harness 接口/`findLast` 问题保留为失败证据；后续 fresh normal RK 报告已通过。`1790738093248` 保留已关闭的 Assurance 相抵缺 INT4 问题及普通原生 +16 对照；其中首个 instrumentation command 给无 afterRoll 的规则包了错误 wrapper，不作为检定结论，后续独立 operation 的固定值 GREEN 有效。最新 `1790739052554` 证明两分支修复，不重试旧 claimed 卡。最后 `f2298035` 发布包有独立 fresh smoke，不从旧 `ebdeb2c7` smoke 推定最后结果。
 
-## 全量测试与待收口事项
+## 全量测试与发布部署
 
 首个完整真实依赖绿色运行记录：**1907 tests、1907 pass、0 fail、0 skip**。命令为 `node --test modules/pf2e-third-party-automation/tests/*.test.mjs`，使用实际 PF2e bundle、Foundry 原生源及已安装依赖所需的测试环境。完整外部日志为 `C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/final-tests.log`。
 
 1907 和普通 RK 后的 1914 均为历史绿色计数。最后 `4e293522` 的完整日志 footer 已核对为 **1921 tests、1921 pass、0 fail、0 skip**，耗时 2822.6118 ms；root 确认 [verify-final.ps1](C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/verify-final.ps1) 的全部 runtime syntax 检查与 `git diff --check` 同样 exit 0。后续若有运行代码改动，仍以 [final-tests.log](C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/final-tests.log) 最新完整 footer 为准。
 
-Task 8 的最后全量测试、syntax 检查、源完整性和独立审核已确认；fresh Assurance 现场两分支也已独立核对。版本化发布包、manifest、回滚说明和最后精确 payload smoke 仍 pending。正式发版/部署、远端备份和部署后文件 hash 检查仍 pending；此记录不声称已执行这些动作。浏览器性能 profile 和未列出的复杂模块流程没有新增成功声明。
+Task 8 的最后全量测试、syntax 检查、源完整性、独立审核和 fresh 现场结论已确认。最后发布包含 **148 文件**，相对 0.9.18.6 为 **23 changed、11 added、0 removed**。ZIP SHA256 为 `50b6bfd1b9ee842d973e7c838a5156d848eb6fd481338ba8fb1f8ed02f533b80`，module.json 为 `034ecf7d11184b75934ab542da43164b555be252bd232e66905d1250e98d72a3`；独立读取 ZIP 并逐文件对照 release manifest，148/148 匹配、无额外测试或 Git 文件。
+
+[GitHub 0.9.19 release](https://github.com/takaqiao/fvttAutoTranslateTool/releases/tag/pf2e-third-party-automation-v0.9.19) 已公开、非 draft 且为 latest。[公开下载验证](C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/release-tools/release/public-download-verification.json) 重新下载完整 ZIP 并校验全部 148 文件；[latest manifest 验证](C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/release-tools/release/latest-manifest-verification.json) 验证实际 latest 下载的 module.json SHA。[证据校验](C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/release-tools/release/evidence-verification.json) 绑定相同 source/package/tag 提交 `f22980350ec176a7b6df69bb68d5062733b7d484` 和 1921 测试结果。发布说明及回滚方法见 [0.9.19 发布记录](release-0.9.19.md)。
+
+CN 在 Setup、零 world users 时，通过原生事务从 `backup-verified` 到 `installed`，缓存版本由 0.9.18.6 更新为 0.9.19。[部署回执](C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/release-tools/deployment-evidence/deployment-receipt.json) 绑定 plan SHA256 `da54434cab3f429a3379216dbece6ca9c8a9e36db4f271e694d19758e6ce0ca4`；[部署后检查](C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/release-tools/deployment-evidence/postcheck.json) 证明 HTTP 全部 148 文件 hash 一致、world/protected modules/services/options 保留。原有 170 个 world 文件及八个受保护模块保持，core/system/startup 不变，本轮未关闭或重启正式服务。远端备份保留在 `/root/fvtt-patch-backups/automation-release-0919-20260930/backup-pf2e-third-party-automation-0.9.18.6`。
+
+隔离 QA 的 [22 条有效边界证据汇总](C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/qa/native-qa-evidence.json) 保留全部数据和日志。[服务清理凭据](C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/qa/own-qa-stop-verification.json) 证明只停止本轮自有 PID 58624 / port 30425，其他 port 30343 / PID 17584 保持。浏览器性能 profile 和未列出的复杂模块流程没有新增成功声明。
