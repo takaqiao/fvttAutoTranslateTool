@@ -99,13 +99,13 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
    const strikes=wielded();
    if(new Set(strikes.map(s=>s.item.id)).size<2)throw Error('此活动需要两把分别单手持用的近战武器。');
    const choices=Array.from(new Map(strikes.map(s=>[s.item.id,{value:s.item.id,label:s.item.name}])).values());
-   const first=await select({actor,user},'选择首先攻击的武器',choices);if(first===null)return '已取消。';
-   const second=await select({actor,user},'选择第二把武器',choices.filter(c=>c.value!==first));if(second===null)return '已取消。';
+   const first=await select({actor,user},'选择首先攻击的武器',choices);if(first===null)return {status:'cancelled',result:'已取消。'};
+   const second=await select({actor,user},'选择第二把武器',choices.filter(c=>c.value!==first));if(second===null)return {status:'cancelled',result:'已取消。'};
    const selectedMap=await select({actor,user},'当前多重攻击惩罚档位',[
     {value:'0',label:'本回合尚未攻击（MAP 0）'},
     {value:'1',label:'已攻击一次（MAP 1）'},
     {value:'2',label:'已攻击两次或更多（MAP 2）'},
-   ]);if(selectedMap===null)return '已取消。';
+   ]);if(selectedMap===null)return {status:'cancelled',result:'已取消。'};
    const map=Number(selectedMap);
    await maintain(actor);
    const selected=[first,second].map(id=>wielded().find(s=>s.item.id===id));
@@ -122,7 +122,7 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
     const tier=twin?Math.min(map+index,2):map;
     let attackMessage=null;
     const nativeResult=await ownerOperations.run({actor,message,user},{type:'attack',weaponId:strike.item.id,altUsageType:strike.item.altUsageType??'',map:tier,targetUuid:target.uuid,options:[...options],flags:{dualStrikeAttack:{usageMessageId:message.id,index}}},async()=>{
-    const check=await strike.variants[tier].roll({target:target.object,options,event:{ctrlKey:false,metaKey:false,shiftKey:game.user.settings?.showCheckDialogs??true},createMessage:false,callback:async(_roll,_outcome,raw)=>{
+    const check=await strike.variants[tier].roll({target:target.object,options,event:{ctrlKey:false,metaKey:false,shiftKey:false},createMessage:false,callback:async(_roll,_outcome,raw)=>{
      const data=raw.toObject();delete data._id;
      data.flags={...data.flags,'xdy-pf2e-workbench':{...data.flags?.['xdy-pf2e-workbench'],noAutoDamageRoll:true},[MODULE_ID]:{...data.flags?.[MODULE_ID],dualStrikeAttack:{usageMessageId:message.id,index}}};
      attackMessage=await messageClass().create(data);
@@ -144,7 +144,7 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
     const {strike:damageStrike,options:sequenceOptions}=frame.damage(strike);
     for(const option of sequenceOptions)damageOptions.add(option);
     const nativeDamage=await ownerOperations.run({actor,message,user},{type:'damage',weaponId:damageStrike.item.id,altUsageType:damageStrike.item.altUsageType??'',map:tier,targetUuid:target.uuid,critical:outcome==='criticalSuccess',checkContext:structuredClone(attackMessage.flags.pf2e.context),options:[...damageOptions],transientItems:nativeTransientItems(damageStrike,actor)},async()=>{
-     const roll=await damageStrike[outcome==='criticalSuccess'?'critical':'damage']({target:target.object,checkContext:attackMessage.flags.pf2e.context,mapIncreases:tier,options:damageOptions,event:{ctrlKey:false,metaKey:false,shiftKey:game.user.settings?.showDamageDialogs??true},createMessage:false});return roll?{status:'rolled',nativeRoll:roll}:{status:'cancelled'};
+     const roll=await damageStrike[outcome==='criticalSuccess'?'critical':'damage']({target:target.object,checkContext:attackMessage.flags.pf2e.context,mapIncreases:tier,options:damageOptions,event:{ctrlKey:false,metaKey:false,shiftKey:false},createMessage:false});return roll?{status:'rolled',nativeRoll:roll}:{status:'cancelled'};
     });
     if(nativeDamage.status!=='rolled')throw Error('攻击已发生，但原生伤害尚未完成。');
     const roll=nativeDamage.nativeRoll??globalThis.CONFIG.Dice.rolls.find(c=>c.name==='DamageRoll').fromData(nativeDamage.roll);

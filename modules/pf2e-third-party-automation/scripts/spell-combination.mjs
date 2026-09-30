@@ -40,7 +40,7 @@ const fist=strike=>melee(strike)&&unarmed(strike.item)&&['fist','basic-unarmed']
 const held=strike=>melee(strike)&&!unarmed(strike.item)&&strike.item.system.equipped?.carryType==='held'&&strike.item.system.equipped.handsHeld>0;
 const allowedCombinationWeapon=strike=>held(strike)&&isCuttingWeapon(strike.item);
 const strikeKey=strike=>`${strike.item.id}:${strike.item.altUsageType??''}`;
-const skipEvent=(game,kind)=>({ctrlKey:false,metaKey:false,shiftKey:game.user.settings?.[kind==='attack'?'showCheckDialogs':'showDamageDialogs']??true});
+const skipEvent=()=>({ctrlKey:false,metaKey:false,shiftKey:false});
 
 const publicTargetName=(game,target)=>!game.pf2e?.settings?.tokens?.nameVisibility||target.playersCanSeeName===true;
 /** Shared damage cards are created by the GM: use PF2e's per-viewer visibility,
@@ -207,7 +207,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   requireGM();
   const raw=await choice.spell.toMessage(null,{create:false,data:{castRank:choice.rank}}),data=raw.toObject();delete data._id;
   requireGM();
-  data.author=user.id;data.flags??={};data.flags[MODULE_ID]={...data.flags[MODULE_ID],...payment.flags,usageInput:{...data.flags[MODULE_ID]?.usageInput,targetUuids:targets.map(t=>t.uuid)},spellCombination:{activityMessageId:message.id,kind}};
+  data.author=user.id;data.flags??={};data.flags[MODULE_ID]={...data.flags[MODULE_ID],...payment.flags,usageGenerated:true,usageInput:{...data.flags[MODULE_ID]?.usageInput,targetUuids:targets.map(t=>t.uuid)},spellCombination:{activityMessageId:message.id,kind}};
   data.flags.pf2e??={};data.flags.pf2e.origin={...data.flags.pf2e.origin,uuid:choice.spell.uuid,type:'spell',actor:actor.uuid,castRank:choice.rank};
   const card=await Message().create(data);
   requireGM();
@@ -293,18 +293,18 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
    const targets=await resolveMessageTargets(message,{game,fromUuid});
    if(targets.length!==(kind==='swipe'?2:1)||targets.some(t=>!t.object||!t.actor))throw Error(`请选定${kind==='swipe'?'两个相邻的':'一个'}场景目标。`);
    const origin=await sourceToken(actor,message,targets[0]),available=strikes(actor).filter(kind==='combination'?allowedCombinationWeapon:s=>held(s)||unarmed(s.item));
-   const key=await select(actor,user,'选择近战武器或无武装攻击',available.map(s=>({value:strikeKey(s),label:s.item.name})));if(key===null)return '已取消。';
+   const key=await select(actor,user,'选择近战武器或无武装攻击',available.map(s=>({value:strikeKey(s),label:s.item.name})));if(key===null)return {status:'cancelled',result:'已取消。'};
    const selected=available.find(s=>strikeKey(s)===key);let second=null;
    if(kind==='combination'){
-    const fists=strikes(actor).filter(fist),fistKey=await select(actor,user,'选择拳头攻击',fists.map(s=>({value:strikeKey(s),label:s.item.name})));if(fistKey===null)return '已取消。';second=fists.find(s=>strikeKey(s)===fistKey);
+    const fists=strikes(actor).filter(fist),fistKey=await select(actor,user,'选择拳头攻击',fists.map(s=>({value:strikeKey(s),label:s.item.name})));if(fistKey===null)return {status:'cancelled',result:'已取消。'};second=fists.find(s=>strikeKey(s)===fistKey);
    }
    for(const target of targets)requireSceneTarget(actor,origin,target);
-   const choice=kind==='combination'?null:await chooseSpell(actor,user);if(kind!=='combination'&&!choice)return '已取消。';
+   const choice=kind==='combination'?null:await chooseSpell(actor,user);if(kind!=='combination'&&!choice)return {status:'cancelled',result:'已取消。'};
    let spellTarget=null;
-   if(kind==='swipe'&&!canAffectSeveral(choice.spell)){spellTarget=await select(actor,user,'选择承受法术的目标',spellCombinationTargetChoices({game,targets,user}));if(spellTarget===null)return '已取消。';}
-   const tier=await select(actor,user,'当前多重攻击惩罚档位',[{value:'0',label:'本回合尚未攻击（MAP 0）'},{value:'1',label:'已攻击一次（MAP 1）'},{value:'2',label:'已攻击两次或更多（MAP 2）'}]);if(tier===null)return '已取消。';
+   if(kind==='swipe'&&!canAffectSeveral(choice.spell)){spellTarget=await select(actor,user,'选择承受法术的目标',spellCombinationTargetChoices({game,targets,user}));if(spellTarget===null)return {status:'cancelled',result:'已取消。'};}
+   const tier=await select(actor,user,'当前多重攻击惩罚档位',[{value:'0',label:'本回合尚未攻击（MAP 0）'},{value:'1',label:'已攻击一次（MAP 1）'},{value:'2',label:'已攻击两次或更多（MAP 2）'}]);if(tier===null)return {status:'cancelled',result:'已取消。'};
    const order=kind==='combination'?await select(actor,user,'神威连击：攻击顺序',[{value:'weapon',label:'先武器，后拳头'},{value:'fist',label:'先拳头，后武器'}]):null;
-   if(kind==='combination'&&order===null)return '已取消。';
+   if(kind==='combination'&&order===null)return {status:'cancelled',result:'已取消。'};
    const map=Number(tier);let payment;
    assertUse(actor,item,message,user,action);
    // Recheck equipped state and recipient identity after normal player choices.
@@ -329,7 +329,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
      }
     }else for(const [index,target]of targets.entries()){requireGM();requireSceneTarget(actor,origin,target);attacks.push(await attack(actor,current,target,map,message,index,kind,sequence,user,index===0?commitAttack:undefined));}
     const receivesSpell=attack=>choice&&(!spellTarget||attack.target.uuid===spellTarget)&&(kind==='swipe'&&!spellTarget?hit(attack.outcome):choice.spell.isAttack||choice.spell.system.traits.value.includes('attack')?hit(attack.outcome):attack.outcome!=='criticalFailure');
-    const eligible=attacks.filter(receivesSpell),spellCard=eligible.length?await publishSpell({actor,user,message,choice,payment,targets:eligible.map(a=>a.target),kind}):null;
+    const eligible=attacks.filter(receivesSpell),spellCard=choice?await publishSpell({actor,user,message,choice,payment,targets:spellTarget?targets.filter(target=>target.uuid===spellTarget):targets,kind}):null;
     const sharedSpellDamage=choice?.spell.system.defense?.save&&!choice.spell.isAttack&&!choice.spell.system.traits.value.includes('attack')?{}:null;
     for(const target of targets){
      requireGM();
@@ -345,10 +345,11 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
      }
      await damageCard({actor,message,target,parts,attacks:forTarget,kind});
     }
-    requireGM();if(choice&&!eligible.length)await nativeCasts.finishActivityWithoutSpell({actor,message,user});
+    requireGM();
     await record(message,'done');return '已完成攻击、法术支付与合并伤害；每个目标按原生伤害卡应用一次。';
    }catch(error){
     if(error.nativeCancelled&&isActiveGM(game)){
+     if(payment&&!values(game.messages).some(card=>own(card).spellCombination?.activityMessageId===message.id))await publishSpell({actor,user,message,choice,payment,targets:spellTarget?targets.filter(target=>target.uuid===spellTarget):targets,kind});
      await record(message,'cancelled',{error:undefined});
      const rolled=values(game.messages).some(card=>own(card).spellCombinationAttack?.activityMessageId===message.id);
      return {status:'cancelled',result:rolled?'后续攻击已取消；已经投出的攻击和本次支付保留，可沿原生攻击卡处理。':'本次攻击已取消，未支付法术或消耗充能。'};

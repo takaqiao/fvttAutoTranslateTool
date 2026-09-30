@@ -1,4 +1,5 @@
 import {MODULE_ID,SOURCES,hasSource} from './rules.mjs';
+import {registerNativeSheetHandlers} from './native-sheet-handlers.mjs';
 
 export const USE_ACTION_OPTION='origin:action:slug:use-action';
 export const isActualUseMessage=message=>message?.flags?.[MODULE_ID]?.usageInput?.actualUse===true||message?.flags?.pf2e?.origin?.rollOptions?.includes(USE_ACTION_OPTION)===true;
@@ -45,12 +46,14 @@ export function createFrequencyTracker({now=Date.now,ttl=Infinity,matches=defaul
    const receipt={id:proof.id,itemUuid:item.uuid,userId,before,after,createdAt:proof.createdAt};
    receipts.set(proof.id,{receipt,observedAt:now()});return receipt;
   },
-  claim(id,{itemUuid,userId}){
+  claim(id,{itemUuid,userId,messageId=null}){
    const entry=receipts.get(id);
    if(!entry||entry.receipt.itemUuid!==itemUuid||entry.receipt.userId!==userId||now()-entry.observedAt>ttl)throw Error('技能使用次数回执无效或已经结算。');
-   receipts.delete(id);consumed.set(id,itemUuid);return entry.receipt;
+   receipts.delete(id);consumed.set(id,{itemUuid,messageId});return entry.receipt;
   },
-  forget(itemUuid){observed.delete(itemUuid);for(const[id,entry]of receipts)if(entry.receipt.itemUuid===itemUuid)receipts.delete(id);for(const[id,uuid]of consumed)if(uuid===itemUuid)consumed.delete(id);},
+  remember(receipt,messageId){if(receipt?.id&&receipt.itemUuid&&messageId){receipts.delete(receipt.id);consumed.set(receipt.id,{itemUuid:receipt.itemUuid,messageId});}},
+  forgetMessage(messageId){for(const[id,entry]of consumed)if(entry.messageId===messageId)consumed.delete(id);},
+  forget(itemUuid){observed.delete(itemUuid);for(const[id,entry]of receipts)if(entry.receipt.itemUuid===itemUuid)receipts.delete(id);for(const[id,entry]of consumed)if(entry.itemUuid===itemUuid)consumed.delete(id);},
   clear(){observed.clear();receipts.clear();consumed.clear();},
   diagnostic(){return {observed:observed.size,unclaimed:receipts.size,consumed:consumed.size};},
  };
@@ -58,14 +61,15 @@ export function createFrequencyTracker({now=Date.now,ttl=Infinity,matches=defaul
 
 /** Install on every client at ready; only activeGM calls executeUsage. Returns an unregister function. */
 export function registerUsageEvents({game,Hooks,executeUsage,resolveAction=defaultUsageAction,requiresActualUse=()=>false,captureUsage=()=>null,onMessageOutcome=()=>false,observeItemUse=(_item,native)=>native(),tracksFrequency=defaultFrequencyMatch,fromUuid=globalThis.fromUuid,libWrapper=globalThis.libWrapper,canvas=globalThis.canvas,onError=error=>console.error(MODULE_ID,error),now=Date.now}){
- const tracker=createFrequencyTracker({now,matches:tracksFrequency}),pending=new Map(),scopes=new Map(),inFlight=new Set(),processing=new Set(),registrations=[],wrappers=[],listeners=new Map();
+ const tracker=createFrequencyTracker({now,matches:tracksFrequency}),pending=new Map(),scopes=new Map(),inFlight=new Set(),processing=new Set(),registrations=[],wrappers=[],sheetWrappers=[],listeners=new Map();
  const on=(name,callback)=>registrations.push([name,Hooks.on(name,callback)]);
  const seedActor=actor=>{for(const item of values(actor?.items))tracker.seed(item);};
  const seedScene=scene=>{for(const token of values(scene?.tokens))seedActor(token.actor);};
  for(const actor of values(game.actors))seedActor(actor);
  for(const scene of values(game.scenes))seedScene(scene);
  seedScene(canvas?.scene);
- const scopeActive=item=>{const scope=scopes.get(item.uuid);return scope&&(scope.running||scope.expires>now());};
+ for(const message of values(game.messages))tracker.remember(message.flags?.[MODULE_ID]?.usage?.frequencyReceipt,message.id);
+ const scopeActive=item=>scopes.has(item.uuid);
  const selectedTargets=()=>[...new Set(values(game.user.targets).map(t=>t.document?.uuid??t.uuid).filter(uuid=>typeof uuid==='string'))];
  const takeReceipt=(item,actualUse)=>{
   const key=item.uuid+':'+game.user.id,receipts=pending.get(key)??[];
@@ -76,6 +80,7 @@ export function registerUsageEvents({game,Hooks,executeUsage,resolveAction=defau
  const randomId=()=>globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.randomUUID();
  on('createItem',item=>tracker.seed(item));
  on('deleteItem',item=>{tracker.forget(item.uuid);scopes.delete(item.uuid);for(const key of pending.keys())if(key.startsWith(item.uuid+':'))pending.delete(key);});
+ on('deleteChatMessage',message=>tracker.forgetMessage(message.id));
  // Actor imports and token actors arrive with embedded items already present.
  on('createActor',seedActor);
  on('createToken',token=>seedActor(token.actor));
@@ -105,7 +110,8 @@ export function registerUsageEvents({game,Hooks,executeUsage,resolveAction=defau
  });
 
  // Original native sheet Use buttons call a private PF2e function; capture its actual DOM boundary.
- const releaseNativeUse=app=>{const previous=listeners.get(app);if(previous){previous.element.removeEventListener('click',previous.listener,true);listeners.delete(app);}};
+ const nativeSheetClasses=new Set();
+ const releaseNativeUse=app=>{const previous=listeners.get(app);if(previous){previous.element.removeEventListener('click',previous.listener,true);listeners.delete(app);}for(const[uuid,scope]of scopes)if(scope.app===app&&!scope.running)scopes.delete(uuid);};
  const captureNativeUse=(app,html)=>{
   const element=html?.[0]??html,actor=app.actor??app.document;
   if(!element?.addEventListener||!actor?.items||listeners.get(app)?.element===element)return;
@@ -114,7 +120,9 @@ export function registerUsageEvents({game,Hooks,executeUsage,resolveAction=defau
    const button=event.target?.closest?.('[data-action="use-action"],button.use-action');
    const id=button?.closest?.('[data-item-id]')?.dataset.itemId;
    const item=actor.items.get?.(id);if(!item||!resolveAction(item))return;
-   scopes.set(item.uuid,{expires:now()+5000,running:false,targetUuids:selectedTargets()});
+   // Supported native sheets have a Promise boundary below; this capture is
+   // only for external sheets. Their one-use scope ends at the card or close.
+   if(![...nativeSheetClasses].some(cls=>app instanceof cls))scopes.set(item.uuid,{app,running:false,targetUuids:selectedTargets()});
   };
   element.addEventListener('click',listener,true);listeners.set(app,{element,listener});
  };
@@ -125,6 +133,18 @@ export function registerUsageEvents({game,Hooks,executeUsage,resolveAction=defau
 
  if(libWrapper){
   const wrap=(path,callback,type='WRAPPER')=>{libWrapper.register(MODULE_ID,path,callback,type);wrappers.push(path)};
+  for(const[type,definitions]of Object.entries(globalThis.CONFIG?.Actor?.sheetClasses??{}))for(const[key,definition]of Object.entries(definitions??{})){
+   const cls=definition.cls;if(!cls?.prototype?.activateClickListener||nativeSheetClasses.has(cls))continue;nativeSheetClasses.add(cls);
+   sheetWrappers.push(registerNativeSheetHandlers(libWrapper,`CONFIG.Actor.sheetClasses.${type}[${JSON.stringify(key)}].cls.prototype.activateClickListener`,(app,handlers)=>{
+    const native=handlers?.['use-action'];if(typeof native!=='function')return handlers;
+    handlers['use-action']=async function(event,button){
+     const id=button?.closest?.('[data-item-id]')?.dataset.itemId,item=app.actor?.items?.get?.(id);
+     if(!item||!resolveAction(item))return native.call(this,event,button);
+     const scope={app,running:true,targetUuids:selectedTargets()};scopes.set(item.uuid,scope);
+     try{return await observeItemUse(item,()=>native.call(this,event,button),{entry:'native-sheet'});}finally{if(scopes.get(item.uuid)===scope)scopes.delete(item.uuid);}
+    };return handlers;
+   }));
+  }
   // Auto Action Tracker 0.19.1 calls setFlag even when toMessage(create:false)
   // returned an unsaved draft. Keep its exact item-usage annotation in the draft.
   wrap('CONFIG.ChatMessage.documentClass.prototype.setFlag',async function(wrapped,namespace,key,value){
@@ -144,7 +164,7 @@ export function registerUsageEvents({game,Hooks,executeUsage,resolveAction=defau
    }
    if(!item)return wrapped(uuid,event);
    if(!resolveAction(item))return observeItemUse(item,()=>wrapped(uuid,event));
-   const scope={running:true,expires:now()+5000,targetUuids:selectedTargets()};scopes.set(item.uuid,scope);
+   const scope={running:true,targetUuids:selectedTargets()};scopes.set(item.uuid,scope);
    try{return await observeItemUse(item,()=>wrapped(uuid,event))}finally{if(scopes.get(item.uuid)===scope)scopes.delete(item.uuid)}
   });
   for(const type of ['feat','action','spell'])wrap(`CONFIG.PF2E.Item.documentClasses.${type}.prototype.toMessage`,async function(wrapped,event,options={}){
@@ -207,6 +227,7 @@ export function registerUsageEvents({game,Hooks,executeUsage,resolveAction=defau
  return ()=>{
   for(const[name,id]of registrations)Hooks.off(name,id);
   for(const path of wrappers)libWrapper.unregister(MODULE_ID,path);
+  for(const release of sheetWrappers)release();
   for(const app of listeners.keys())releaseNativeUse(app);
   tracker.clear();pending.clear();scopes.clear();
  };

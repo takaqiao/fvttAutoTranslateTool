@@ -3,6 +3,7 @@ import {MODULE_ID,createMetapowerLedger,ledgerState,chargedEffect} from './lifec
 import {createMetapowerObserver} from './observer.mjs';
 import {renderMetapowerCard} from './card.mjs';
 import {installActionEntrances,wrapSheetHandlers,createToolbeltEntrance,patchHudController,installLegacyActionBoundary,ensureNativeUseControls} from './entrances.mjs';
+import {registerNativeSheetHandlers} from '../native-sheet-handlers.mjs';
 import {convertSiphonRoll,applyNativeOutcomeInPlace} from './damage.mjs';
 import {showNativeChoice} from '../native-context.mjs';
 import {createActorStateIndex} from '../actor-state-index.mjs';
@@ -143,7 +144,7 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
   const seen=new Set();
   for(const [key,definition]of Object.entries(globalThis.CONFIG.Actor.sheetClasses.character??{})){
    if(!definition.cls?.prototype?.activateClickListener||seen.has(definition.cls))continue;seen.add(definition.cls);
-   wrap(`CONFIG.Actor.sheetClasses.character[${JSON.stringify(key)}].cls.prototype.activateClickListener`,function(wrapped,...args){return wrapSheetHandlers(this,wrapped(...args),observe,eligible)});
+   registerNativeSheetHandlers(libWrapper,`CONFIG.Actor.sheetClasses.character[${JSON.stringify(key)}].cls.prototype.activateClickListener`,(sheet,handlers)=>wrapSheetHandlers(sheet,handlers,observe,eligible));
   }
   // Toolbelt 3.56.2 freezes its API (non-configurable descriptor). Its owned DOM
   // entrance calls the same captured helper; never try to replace that API.

@@ -1,5 +1,6 @@
 import {MODULE_ID as ID} from './rules.mjs';
 import {isActiveGM} from './native-context.mjs';
+import {prepareWeaponSurgeDamageSnapshotItems} from './weapon-surge.mjs';
 
 const values=collection=>Array.from(collection?.values?.()??collection??[]);
 const clone=data=>structuredClone(data);
@@ -39,25 +40,42 @@ export function createNativeOwnerOperations({game,fromUuid=globalThis.fromUuid,s
    for(const event of ['createChatMessage','updateChatMessage'])ids.push([event,Hooks.on(event,check)]);check();
   });
  };
+ async function operationReply(message,nonce,invoke,{readDone=state=>state?.status==='done',assertLive=()=>authority(game.user)}={}){
+  const registrations=[];let complete;
+  const saved=new Promise(resolve=>{complete=resolve;});
+  const inspect=()=>{
+   try{assertLive();}catch(error){complete({error});return;}
+   const state=operations(message)[nonce];
+   if(readDone(state))complete({persisted:true});
+   else if(state?.status==='uncertain')complete({error:Error('原生执行结果尚未确认；不能重复投骰。')});
+  };
+  if(Hooks?.on)for(const event of ['updateChatMessage','updateUser','userConnected'])registrations.push([event,Hooks.on(event,inspect)]);
+  const reply=Promise.resolve().then(invoke).then(response=>({response}),error=>({error}));
+  // A saved native result is authoritative even if socketlib's pending reply
+  // never settles. Native dialog time is not constrained by a timeout here.
+  inspect();
+  try{return await Promise.race(Hooks?.on?[saved,reply]:[reply]);}finally{for(const[event,id]of registrations)Hooks.off(event,id);}
+ }
  function live(message,operation,requester,actor){
   authority(requester);
   if(game.messages.get(message.id)!==message||operations(message)[operation.nonce]?.nonce!==operation.nonce||operation.scope!==scope||operation.requesterId!==requester.id||operation.userId!==game.user.id||!actor?.testUserPermission(game.user,'OWNER')||actor.uuid!==operation.actorUuid||game.user.active===false)throw Error('原操作者、角色或本次执行身份已改变。');
  }
  async function executeNative({message,operation,actor,guard}){
   const request=operation.request,target=await fromUuid(request.targetUuid);guard();
-  if(!target?.actor||!target.object||target.uuid!==request.targetUuid)throw Error('原生操作的原目标已改变。');
-  const options=new Set(request.options??[]),event={ctrlKey:false,metaKey:false,shiftKey:game.user.settings?.[request.type==='attack'?'showCheckDialogs':'showDamageDialogs']??true};
+  const originalGuard=guard;
+  guard=()=>{originalGuard();if(!target?.actor||!target.object||target.uuid!==request.targetUuid||target.actor.uuid!==request.targetActorUuid)throw Error('原生操作的原目标已改变。');};guard();
+  const showDialog=game.user.settings?.[request.type==='attack'?'showCheckDialogs':'showDamageDialogs']??true;
+  const options=new Set(request.options??[]),event={ctrlKey:false,metaKey:false,shiftKey:false};
   const marker=`${ID}:native-operation:${operation.nonce}`;options.add(marker);
   let roller=actor;
   if(request.transientItems?.length){
    if(request.transientItems.length>20||request.transientItems.some(item=>item.type!=='effect'))throw Error('本次原生效果快照无效。');
-   const ids=new Set(values(actor.items).map(item=>item.id));
-   roller=actor.clone({items:[...clone(actor._source.items),...clone(request.transientItems).filter(item=>!ids.has(item._id))]},{keepId:true});
+   roller=actor.clone({items:prepareWeaponSurgeDamageSnapshotItems(actor,request.transientItems)},{keepId:true});
   }
   if(request.type==='spell-damage'){
    const original=actor.items.get(request.spellId);if(original?.type!=='spell')throw Error('原法术不存在。');
    const spell=original.loadVariant?.({castRank:request.rank,overlayIds:request.overlayIds??[]})??original;
-   const native=await spell.getDamage({target,skipDialog:!event.shiftKey});guard();
+   const native=await spell.getDamage({target,skipDialog:!showDialog});guard();
    if(!native)return {status:'cancelled'};
    const roll=await native.template.damage.roll.evaluate();guard();
    return {status:'rolled',roll:roll.toJSON(),context:{options:[...native.context.options??[]],domains:[...native.context.domains??[]],traits:[...native.context.traits??[]]}};
@@ -83,11 +101,12 @@ export function createNativeOwnerOperations({game,fromUuid=globalThis.fromUuid,s
    if(isActiveGM(game))await commitOperation({messageId:message.id,nonce:operation.nonce},game.user);
    else{
     if(!socket?.executeAsUser)throw Error('原生支付缺少主GM连接。');
-    await socket.executeAsUser(`native-owner:${scope}:commit`,operation.requesterId,{messageId:message.id,nonce:operation.nonce});
+    const {error}=await operationReply(message,operation.nonce,()=>socket.executeAsUser(`native-owner:${scope}:commit`,operation.requesterId,{messageId:message.id,nonce:operation.nonce}),{readDone:state=>state?.committed===true,assertLive:guard});
+    if(error&&!operations(message)[operation.nonce]?.committed)throw error;
    }
    await waitFor(()=>operations(message)[operation.nonce]?.committed===true);guard();
   };
-  const roll=operation.requiresCommit?await beforeNativeRoll({Hooks,marker,showDialog:event.shiftKey,commit,native:rollNative}):await rollNative();guard();
+  const roll=operation.requiresCommit?await beforeNativeRoll({Hooks,marker,showDialog,commit,native:rollNative}):await rollNative();guard();
   if(!roll&&!created)return {status:'cancelled'};
   if(!created)throw Error('原生攻击结果未确认；不能重复投骰。');
   return {status:'rolled',messageId:created.id};
@@ -119,13 +138,21 @@ export function createNativeOwnerOperations({game,fromUuid=globalThis.fromUuid,s
   authority(game.user);
   if(!user||user.active===false||!actor.testUserPermission(user,'OWNER')||game.messages.get(message.id)!==message||author(message)!==user.id)throw Error('原操作者离线、连接或权限无效；尚未代投。');
   if(user.id!==game.user.id&&!socket?.executeAsUser)throw Error('缺少原操作者连接；尚未在GM端代投。');
+  const target=await fromUuid(request.targetUuid);authority(game.user);
+  if(!target?.actor?.uuid)throw Error('原生操作的原目标不存在。');
+  request={...request,targetActorUuid:target.actor.uuid};
   const nonce=globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.randomUUID();
   const operation={nonce,scope,actorUuid:actor.uuid,userId:user.id,requesterId:game.user.id,status:'requested',requiresCommit:typeof beforeRoll==='function',request:clone(request)};
   if(operation.requiresCommit)committers.set(nonce,{actor,message,commit:beforeRoll});
   try{
   await message.update({[`flags.${ID}.nativeOwnerOperations.${nonce}`]:operation});authority(game.user);
-  let response,error;
-  try{response=user.id===game.user.id?await ownerExecute({messageId:message.id,nonce},game.user):await socket.executeAsUser(`native-owner:${scope}`,user.id,{messageId:message.id,nonce});}catch(caught){error=caught;}
+  const {response,error}=await operationReply(message,nonce,()=>user.id===game.user.id?ownerExecute({messageId:message.id,nonce},game.user):socket.executeAsUser(`native-owner:${scope}`,user.id,{messageId:message.id,nonce}),{assertLive:()=>{
+   authority(game.user);
+   if(game.messages.get(message.id)!==message||author(message)!==user.id||target.actor?.uuid!==request.targetActorUuid)throw Error('本次原生操作来源或目标已改变；不能重复执行。');
+   // A completed saved operation remains valid after its owner goes offline.
+   // An unresolved request must release the GM queue when that owner leaves.
+   if(operations(message)[nonce]?.status!=='done'&&(user.active===false||!actor.testUserPermission(user,'OWNER')))throw Error('原操作者已离线或失去角色权限；本次结果尚未确认，请GM查看原卡，不能重复执行。');
+  }});
   authority(game.user);
   let saved=operations(message)[nonce];
   if(saved?.status!=='done'&&response&&!error)saved=await waitFor(()=>operations(message)[nonce]?.status==='done'&&operations(message)[nonce]);
@@ -134,7 +161,7 @@ export function createNativeOwnerOperations({game,fromUuid=globalThis.fromUuid,s
    const result=clone(saved.result);
    if(request.type==='attack'&&result.status==='rolled'){
     const check=await waitFor(()=>game.messages.get(result.messageId)),proof=check.flags?.[ID]?.nativeOwnerOperation,context=check.flags?.pf2e?.context;
-    if(author(check)!==user.id||proof?.nonce!==nonce||proof.activityMessageId!==message.id||context?.type!=='attack-roll'||context.target?.token!==request.targetUuid||check.flags?.pf2e?.origin?.actor!==actor.uuid)throw Error('原生攻击消息与本次操作者或目标不符。');
+    if(author(check)!==user.id||proof?.nonce!==nonce||proof.activityMessageId!==message.id||context?.type!=='attack-roll'||context.target?.token!==request.targetUuid||context.target?.actor!==request.targetActorUuid||target.actor?.uuid!==request.targetActorUuid||check.flags?.pf2e?.origin?.actor!==actor.uuid)throw Error('原生攻击消息与本次操作者或目标不符。');
    }
    return result;
   }

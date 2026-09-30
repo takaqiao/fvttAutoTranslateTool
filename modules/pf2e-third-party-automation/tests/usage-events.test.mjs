@@ -172,3 +172,27 @@ test('native Use listeners release replaced roots and closed applications',()=>{
  h.callbacks.get('closeApplication')?.(app);assert.equal(counts.removes,2);
  h.unregister();assert.equal(counts.removes,2,'closed roots are no longer retained for unregister');
 });
+
+test('native sheet Use scope survives a slow handler and ends when that real call is cancelled',async()=>{
+ const previous=globalThis.CONFIG,callbacks=new Map(),wrappers=new Map();let time=1000;
+ class Sheet{};const i=item();i.actor.items=new Map([[i.id,i]]);const app=new Sheet();app.actor=i.actor;
+ const game={user:{id:'player',targets:[]},users:{activeGM:{id:'gm'}},actors:new Map([[i.actor.id,i.actor]]),messages:new Map()};
+ globalThis.CONFIG={Actor:{sheetClasses:{character:{'pf2e.Native':{cls:Sheet}}}}};Sheet.prototype.activateClickListener=()=>{};
+ const un=fn('registerUsageEvents')({game,Hooks:{on(name,fn){callbacks.set(name,fn);return name;},off(name){callbacks.delete(name);}},libWrapper:{register(_id,path,fn){wrappers.set(path,fn);},unregister(){}},now:()=>time,executeUsage:async()=>{}});
+ try{
+  const wrap=wrappers.get('CONFIG.Actor.sheetClasses.character["pf2e.Native"].cls.prototype.activateClickListener');assert.equal(typeof wrap,'function');
+  const create=()=>({speaker:{actor:i.actor.id},flags:{pf2e:{context:{type:'self-effect',item:i.id}}},updateSource(data){this.input=data[`flags.${MODULE_ID}.usageInput`];}});
+  const handlers=wrap.call(app,()=>({'use-action':async()=>{time+=60000;const card=create();callbacks.get('preCreateChatMessage')(card);assert.equal(card.input.actualUse,true);return null;}}));
+  await handlers['use-action']({}, {closest:()=>({dataset:{itemId:i.id}})});
+  const after=create();callbacks.get('preCreateChatMessage')(after);assert.equal(after.input.actualUse,false,'a finished or cancelled native call leaves no later actual-use scope');
+ }finally{un();globalThis.CONFIG=previous;}
+});
+
+test('durable consumed receipts restore replay protection and release with their exact source document',()=>{
+ const tracker=fn('createFrequencyTracker')(),i=item(),proof={id:'durable',itemUuid:i.uuid,userId:'player',before:1,after:0};
+ tracker.seed(i);tracker.remember(proof,'original');i.system.frequency.value=0;
+ assert.equal(tracker.observe(i,{[MODULE_ID]:{frequencyReceipt:proof}},'player'),null);
+ assert.deepEqual(tracker.diagnostic(),{observed:1,unclaimed:0,consumed:1});
+ tracker.forgetMessage('copy');assert.equal(tracker.diagnostic().consumed,1);
+ tracker.forgetMessage('original');assert.equal(tracker.diagnostic().consumed,0);
+});

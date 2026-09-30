@@ -63,6 +63,21 @@ test('cancelled first Spellstrike native window preserves its spell resource and
  assert.equal(result.status,'cancelled');assert.equal(f.calls.filter(call=>call.kind==='payment').length,0);
  assert.equal(f.actor.flags[NS].spellstrike.charged,true);assert.equal(f.message.flags[NS].spellCombinationUse.state,'cancelled');
 }));
+test('a missed paid Spellstrike keeps one native spell card for a later kept reroll',()=>setup({outcomes:['failure']},async f=>{
+ await f.use();
+ const cards=f.messages.filter(message=>message.flags?.[NS]?.spellCombination);
+ assert.equal(cards.length,1);assert.equal(cards[0].flags[NS].usageGenerated,true);
+ assert.equal(f.calls.filter(call=>call.kind==='payment').length,1);
+ assert.equal(f.calls.filter(call=>call.kind==='finish-payment').length,0);
+ assert.equal(f.calls.filter(call=>call.kind==='spell-damage').length,0);
+}));
+test('a cancelled second Spell Swipe keeps the first paid spell available on its native card',()=>setup({kind:'swipe'},async f=>{
+ let attacks=0;const original=f.nativeOperations.run;
+ f.nativeOperations.run=async(ctx,request,...args)=>request.type==='attack'&&++attacks===2?{status:'cancelled'}:original(ctx,request,...args);
+ const result=await f.use();assert.equal(result.status,'cancelled');
+ assert.equal(f.messages.filter(message=>message.flags?.[NS]?.spellCombination).length,1);
+ assert.equal(f.calls.filter(call=>call.kind==='payment').length,1);
+}));
 for(const takedown of [false,true])for(const outcomes of [['success','success'],['failure','success'],['success','criticalSuccess']])test(`paired twin weapons use native bonus on the second Strike only (${takedown?'Takedown':'Double Slice'}, ${outcomes})`,()=>setup({outcomes},async f=>{
  twinPair(f);f.actor.signature='hunter';f.targetDocs[0].actor.getRollOptions=()=>['self:prey:hunter'];
  const use=dualUse(f,{takedown});await use();await use();
@@ -328,7 +343,7 @@ test('Ignition and Needle Darts critical persistent components use actual height
 });
 test('multi-target Spell Swipe save spell extends only to enemies hit, per its specific legacy wording',()=>setup({kind:'swipe',multi:true,spellSave:true,outcomes:['failure','success']},async f=>{await f.use();assert.equal(f.calls.filter(c=>c.kind==='save').length,1);assert.equal(f.calls.find(c=>c.kind==='save').target.uuid,f.targetDocs[1].uuid)}));
 test('single-target Spell Swipe save keeps normal Spellstrike miss semantics for the chosen target',()=>setup({kind:'swipe',spellSave:true,outcomes:['failure','success']},async f=>{await f.use();assert.equal(f.calls.filter(c=>c.kind==='save').length,1);assert.equal(f.calls.find(c=>c.kind==='save').target.uuid,f.targetDocs[0].uuid)}));
-test('fully disrupted Spellstrike closes its paid receipt without publishing a second payable spell card',()=>setup({spellSave:true,outcomes:['criticalFailure']},async f=>{await f.use();assert.equal(f.calls.filter(c=>c.kind==='finish-payment').length,1);assert.equal(f.calls.filter(c=>c.kind==='spell-card').length,0)}));
+test('critical failure keeps one paid native spell card without rolling its save or damage',()=>setup({spellSave:true,outcomes:['criticalFailure']},async f=>{await f.use();assert.equal(f.calls.filter(c=>c.kind==='finish-payment').length,0);assert.equal(f.calls.filter(c=>c.kind==='spell-card').length,1);assert.equal(f.calls.filter(c=>c.kind==='save'||c.kind==='spell-damage').length,0)}));
 test('merged damage preserves native spell and weapon roll options needed by IWR',()=>setup({},async f=>{
  f.spell.getDamage=async()=>({template:{damage:{roll:roll(16)}},context:{options:new Set(['item:trait:arcane','item:type:spell','self:trait:elf']),domains:['damage','spell-damage']}});
  f.weapons[0].getRollOptions=()=>['item:type:weapon','item:trait:magical'];await f.use();const options=f.messages.at(-1).flags.pf2e.context.options;
