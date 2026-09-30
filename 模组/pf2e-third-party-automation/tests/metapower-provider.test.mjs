@@ -25,9 +25,10 @@ test('actual reaction Use does not ask again to confirm range or target eligibil
  const priorConfig=globalThis.CONFIG,priorFoundry=globalThis.foundry;t.after(()=>{globalThis.CONFIG=priorConfig;globalThis.foundry=priorFoundry});
  globalThis.CONFIG={Actor:{sheetClasses:{character:{}}},Dice:{rolls:[class DamageRoll{}]}};
  const questions=[];globalThis.foundry={applications:{api:{DialogV2:{wait:async question=>{questions.push(question);return {triggerDamage:18}}}}}};
- for(const [id,chain]of [['geZCat82IOuShmmk',false],['fzV5Ly3a9nEsfcAJ',true]]){
+ for(const withMetapower of [true,false])for(const [id,chain]of [['geZCat82IOuShmmk',false],['fzV5Ly3a9nEsfcAJ',true]]){
   const gm={id:'gm'},user={id:'player',targets:new Set()},users=new Map([[gm.id,gm],[user.id,user]]);users.activeGM=gm;
   const actor={id:'a',uuid:'Actor.a',type:'character',level:1,items:new Map([['w',{sourceId:METAPOWER_SOURCES.widen}]]),flags:{}};
+  if(!withMetapower)actor.items.delete('w');
   const item={id:'reaction',uuid:'Actor.a.Item.reaction',name:'Reaction',actor,type:'action',sourceId:`Compendium.battlezoo-eldamon-pf2e.powers.Item.${id}`,system:{traits:{value:['electricity']}}};actor.items.set(item.id,item);
   const game={user,users,actors:new Map([[actor.id,actor]]),scenes:new Map(),messages:new Map(),modules:new Map(),pf2e:{actions:new Map()}},requests=[];
   const p=api.createMetapowerProvider({game,fromUuid:async()=>null,selectChoice:async({choices})=>choices[0].value});
@@ -51,19 +52,19 @@ test('target coefficient uses bound immutable source card and creature traits on
  const multipliers=[],proof={actorUuid:actor.uuid,cardId:'c',nonce:'n'},damage={options:{[ID]:{metapowerDamage:proof}},alter(m){multipliers.push(m);return {scaled:m}}};
  const full=await p.beforeDamage({traits:new Set(['electricity'])},{damage});assert.equal(full.params.damage,damage);
  const half=await p.beforeDamage({traits:new Set(['humanoid']),system:{attributes:{immunities:[{type:'electricity'}]}}},{damage});assert.equal(half.params.damage.scaled,.5);assert.deepEqual(multipliers,[.5]);
- card.flags.pf2e.origin.uuid='forged';await assert.rejects(p.beforeDamage({traits:new Set()},{damage}),/source|binding/i);
+ card.flags.pf2e.origin.uuid='forged';await assert.rejects(p.beforeDamage({traits:new Set()},{damage}),/来源|绑定/);
 });
 test('retained discharge degree downgrade augments native save arithmetic and preserves other adjustments',()=>{
  const context={type:'saving-throw',dosAdjustments:[{adjustments:{success:{label:'native',amount:1}}}]};
  const result=api.adjustMetapowerCheckContext({saveDowngrade:1},context);
- assert.equal(result.dosAdjustments[0],context.dosAdjustments[0]);assert.deepEqual(result.dosAdjustments[1].adjustments.all,{label:'Retributive Shock · Discharge',amount:-1});
+ assert.equal(result.dosAdjustments[0],context.dosAdjustments[0]);assert.deepEqual(result.dosAdjustments[1].adjustments.all,{label:'报复电击 · 放电',amount:-1});
  assert.equal(context.dosAdjustments.length,1);assert.equal(api.adjustMetapowerCheckContext({saveDowngrade:1},{type:'attack-roll'}).dosAdjustments,undefined);
 });
 test('Electric Shot half-failure application is confined to its bound recipient through native alter',async()=>{
  const snapshot={powerId:'electric-shot',itemUuid:'Actor.a.Item.i'},actor={uuid:'Actor.a',flags:{[ID]:{metapower:{receipts:{n:{status:'committed',messageUuid:'ChatMessage.c',snapshot,selection:{targetUuids:['Scene.s.Token.t']}}}}}}},card={uuid:'ChatMessage.c',flags:{[ID]:{metapowerUse:{nonce:'n'}},pf2e:{origin:{uuid:snapshot.itemUuid}}}};
  const proof={actorUuid:actor.uuid,cardId:'c',nonce:'n',targetActorUuid:'Actor.target',targetTokenUuid:'Scene.s.Token.t'},token={uuid:'Scene.s.Token.t',actor:{uuid:'Actor.target'}},damage={options:{[ID]:{metapowerShotFailure:proof}}},p=api.createMetapowerProvider({game:{messages:new Map([['c',card]])},fromUuid:async uuid=>uuid===token.uuid?token:actor});
- assert.equal(await p.beforeDamage({uuid:'Actor.target'},{damage,token}),null);await assert.rejects(p.beforeDamage({uuid:'Actor.other'},{damage,token}),/recipient/i);
- actor.flags[ID].metapower.receipts.n.selection.targetUuids=['Scene.s.Token.other'];await assert.rejects(p.beforeDamage({uuid:'Actor.target'},{damage,token}),/recipient/i);
+ assert.equal(await p.beforeDamage({uuid:'Actor.target'},{damage,token}),null);await assert.rejects(p.beforeDamage({uuid:'Actor.other'},{damage,token}),/目标/);
+ actor.flags[ID].metapower.receipts.n.selection.targetUuids=['Scene.s.Token.other'];await assert.rejects(p.beforeDamage({uuid:'Actor.target'},{damage,token}),/目标/);
  const altered=api.preserveMetapowerOnAlter(damage,{options:{}});assert.deepEqual(altered.options[ID].metapowerShotFailure,proof);assert.notEqual(altered.options[ID].metapowerShotFailure,proof);
 });
 test('GM resumes durable downstream delivery for an offline original owner without replaying settled effects',async()=>{

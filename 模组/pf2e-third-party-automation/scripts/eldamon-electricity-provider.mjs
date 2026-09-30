@@ -1,8 +1,9 @@
 import {ELECTRICITY_MODULE_ID as ID,ELECTRICITY_SOURCES as S,ELECTRICITY_APPLY_PREFIX as APPLY,ELECTRICITY_SOURCE_PREFIX as SOURCE,
  classifyElectricityDamage,createElectricityLedger,electricityState,electricityEffects,receiptMatches} from './eldamon-electricity.mjs';
 import {sourceUuid} from './metapower/rules.mjs';
-import {showNativeChoice} from './native-context.mjs';
+import {showNativeChoice,publicTargetName} from './native-context.mjs';
 import {createActorStateIndex} from './actor-state-index.mjs';
+import {createElectricityReceiptIndex} from './eldamon-electricity-receipts.mjs';
 const values=c=>Array.from(c?.values?.()??c??[]),random=()=>globalThis.foundry?.utils?.randomID?.(24)??globalThis.crypto.randomUUID();
 const tokenUuid=s=>s?.scene&&s?.token?`Scene.${s.scene}.Token.${s.token}`:null;
 const currentToken=t=>t?.actor&&t.parent?.tokens?.get(t.id)===t;
@@ -14,8 +15,8 @@ export function preserveElectricityOnAlter(original,result){
 
 /** Small adapter around native publication and application. It never rolls or
  * applies replacement damage, and never treats a rolled total as damage taken. */
-export function createEldamonElectricityProvider({game,reactionRestriction,fromUuid,onError=console.error,selectChoice=showNativeChoice,refreshOutsideEncounter=async()=>{}}={}){
- const ledger=createElectricityLedger({game,reactionRestriction,fromUuid}),scopes=new Map(),sourceKeys=new WeakMap();let socket,sourceCards;
+export function createEldamonElectricityProvider({game,reactionRestriction,fromUuid,onError=console.error,selectChoice=showNativeChoice,useOwnedAction,refreshOutsideEncounter=async()=>{}}={}){
+ const receipts=createElectricityReceiptIndex({game,prefix:APPLY}),ledger=createElectricityLedger({game,reactionRestriction,fromUuid,receiptMessages:receipts.values}),scopes=new Map(),sourceKeys=new WeakMap(),chainScopes=new Map();let socket,sourceCards;
  function forgetSource(message){
   const key=sourceKeys.get(message),bucket=sourceCards?.get(key);if(!bucket)return;
   bucket.delete(message);if(!bucket.size)sourceCards.delete(key);sourceKeys.delete(message);
@@ -36,9 +37,9 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
  const active=()=>game.user?.id===game.users.activeGM?.id;
  async function rpc(method,payload){
   if(active())return ledger[method](payload,game.user);
-  if(!socket||!game.users.activeGM)throw Error('Electricity lifecycle requires an online active GM.');
+  if(!socket||!game.users.activeGM)throw Error('电元素结算需要当前主 GM 在线。');
   const result=await socket.executeAsUser(`electricity:${method}`,game.users.activeGM.id,payload);
-  if(!result?.ok){const error=Error(result?.error??'Electricity coordinator did not respond.');if(method==='confirmedAction'&&result?.electricityNotApplied===true)error.electricityNotApplied=true;throw error}return result.value;
+  if(!result?.ok){const error=Error(result?.error??'主 GM 尚未返回电元素结算结果，请核对原操作，勿重复使用。');if(method==='confirmedAction'&&result?.electricityNotApplied===true)error.electricityNotApplied=true;throw error}return result.value;
  }
  async function interceptDamageMessage(roll,data={},options={},native){
   if(classifyElectricityDamage(roll)==='none')return native(data,options);
@@ -133,14 +134,26 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
   if(selection.targetUuids?.length!==1)throw Error('先选定一个反应电链目标，再使用威能。');
   const tokens=values(globalThis.canvas?.tokens?.controlled).map(t=>t.document).filter(t=>t.actor?.uuid===item.actor.uuid);
   const source=tokens.length===1?tokens[0]:item.actor.getActiveTokens?.(true,true)?.[0];
-  if(!currentToken(source))throw Error('反应电链需要场景中的施法者Token。');
-  const candidates=await rpc('candidates',{actorUuid:item.actor.uuid,sourceTokenUuid:source.uuid,selection,kind});
-  if(!candidates.length)throw Error('没有当前、可核验的电伤来源满足这两个30尺距离、目标与反应条件。混合伤害需GM先在原伤害回执确认电击分量。');
+  if(!currentToken(source))throw Error('反应电链需要场景中的施法者图标。');
+  const receiptUuid=chainScopes.get(item.uuid)?.receiptUuid;
+  const candidates=await rpc('candidates',{actorUuid:item.actor.uuid,sourceTokenUuid:source.uuid,selection,kind,...(receiptUuid?{receiptUuid}:{})});
+  if(!candidates.length)throw Error('没有当前、可核验的电伤来源满足目标与反应条件。混合伤害需 GM 先在原伤害回执确认电击分量。');
   const choice=candidates.length===1?'0':await selectChoice({title:'选择反应电链的实际电伤来源',choices:candidates.map((c,i)=>({value:String(i),label:c.label}))});
   if(choice===null||choice===undefined)return null;
   const chosen=candidates[Number(choice)];
   if(!chosen)return null;
   return {...selection,triggerConfirmed:true,eligibleTargetConfirmed:true,triggerDamage:chosen.amount,electricityEvidence:chosen.evidence};
+ }
+ async function continueChain({message,actor,event}={}){
+  if(!actor?.testUserPermission(game.user,'OWNER'))throw Error('需要当前反应电链角色的拥有者权限。');
+  const item=values(actor.items).find(i=>sourceUuid(i)===S.chain);
+  if(!item||item.flags?.['pf2e-toolbelt']?.actionable?.linked)throw Error('需要角色拥有的原反应电链威能。');
+  if(chainScopes.has(item.uuid))return null;
+  const tags=(message?.flags?.pf2e?.context?.options??[]).filter(o=>typeof o==='string'&&o.startsWith(APPLY));
+  if(game.messages.get(message?.id)!==message||message.isContentVisible===false||message.flags?.pf2e?.context?.type!=='damage-taken'||tags.length!==1)throw Error('需要当前可查看的实际伤害应用回执。');
+  if(typeof useOwnedAction!=='function')throw Error('原生威能使用入口尚未就绪，请从角色动作使用反应电链。');
+  const scope={receiptUuid:message.uuid};chainScopes.set(item.uuid,scope);
+  try{return await useOwnedAction(item,event)}finally{if(chainScopes.get(item.uuid)===scope)chainScopes.delete(item.uuid)}
  }
  async function interceptCheck(native,check,context={},...args){
   if(context.type!=='attack-roll'||!Number.isFinite(context.dc?.value))return native(check,context,...args);
@@ -179,10 +192,15 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
   }
  }
  function renderReceipt(message,html){
+  if(message.isContentVisible===false||message.flags?.pf2e?.context?.type!=='damage-taken')return;
   const root=html?.[0]??html;if(!root?.querySelector||root.querySelector('[data-electricity-receipt]'))return;
   const proof=message.flags?.[ID]?.electricityApplied,tags=(message.flags?.pf2e?.context?.options??[]).filter(o=>o.startsWith(APPLY));if(tags.length!==1)return;
   const block=document.createElement('div');block.dataset.electricityReceipt=tags[0].slice(APPLY.length);
-  block.textContent=proof?'已记录原生伤害应用；反应电链将核验电击分量、两段距离与目标。':'缺少原生IWR应用回执；不会用掷骰总数触发电链。';
+  block.textContent=proof?'已记录原生伤害应用；反应电链将核验实际电击分量与目标。':'缺少原生免疫、抗力、弱点应用回执；不会用掷骰总数触发电链。';
+  const controlled=values(globalThis.canvas?.tokens?.controlled).map(t=>t.actor??t.document?.actor),assigned=game.user.character;
+  const actors=[...new Map([...controlled,assigned].filter(a=>a?.testUserPermission(game.user,'OWNER')&&values(a.items).some(i=>sourceUuid(i)===S.chain)).map(a=>[a.uuid,a])).values()];
+  if(proof)for(const actor of actors){const button=root.ownerDocument.createElement('button');button.type='button';button.textContent=actors.length===1?'以此伤害来源使用反应电链':`${actor.name??'当前角色'}：使用反应电链`;
+   button.addEventListener('click',event=>{event.preventDefault();button.disabled=true;continueChain({message,actor,event}).catch(onError).finally(()=>{button.disabled=false})});block.append(button);}
   if(game.user.isGM){
    const button=document.createElement('button');button.type='button';button.textContent='确认混合伤害中的实际电击分量';
    button.addEventListener('click',async()=>{try{
@@ -195,11 +213,11 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
   (root.querySelector('.message-content')??root).append(block);
  }
  function register({Hooks,socket:api}={}){
-  socket=api;activeActors.register(Hooks);
-  for(const method of ['channel','beginDamage','finishDamage','confirmMixed','candidates','interact','confirmedAction'])socket?.register(`electricity:${method}`,async function(payload){try{return {ok:true,value:await ledger[method](payload,game.users.get(this.socketdata.userId))}}catch(error){return {ok:false,error:error.message,...(method==='confirmedAction'&&error.electricityNotApplied===true?{electricityNotApplied:true}:{})}}});
+  socket=api;activeActors.register(Hooks);receipts.seed();
+  for(const method of ['channel','beginDamage','finishDamage','confirmMixed','candidates','interact','confirmedAction','basicUse'])socket?.register(`electricity:${method}`,async function(payload){try{return {ok:true,value:await ledger[method](payload,game.users.get(this.socketdata.userId))}}catch(error){return {ok:false,error:error.message,...(method==='confirmedAction'&&error.electricityNotApplied===true?{electricityNotApplied:true}:{})}}});
   Hooks.on('preCreateChatMessage',decorateReceipt);
-  Hooks.on('createChatMessage',(message,options,userId)=>{rememberSource(message);capture(message,options,userId);if(active())ledger.check(message).catch(onError)});
-  Hooks.on('updateChatMessage',rememberSource);Hooks.on('deleteChatMessage',forgetSource);
+  Hooks.on('createChatMessage',(message,options,userId)=>{receipts.remember(message);rememberSource(message);capture(message,options,userId);if(active())ledger.check(message).catch(onError)});
+  Hooks.on('updateChatMessage',message=>{receipts.remember(message);rememberSource(message)});Hooks.on('deleteChatMessage',message=>{receipts.forget(message);forgetSource(message)});
   Hooks.on('renderChatMessageHTML',renderReceipt);
   for(const phase of ['start','end'])Hooks.on(`pf2e.${phase}Turn`,(combatant,combat)=>{if(active())return ledger.expire({combat,combatant,phase,actors:activeActors.values()}).catch(onError)});
   Hooks.on('deleteCombat',combat=>encounterEnded(combat).catch(onError));
@@ -210,11 +228,11 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
  async function maintain(actor){
   if(!active()||!actor)return;
   for(const record of Object.values(electricityState(actor).damage).filter(r=>r.status==='pending'||r.status==='confirmed'&&!r.lifecycleDone)){
-   const matches=values(game.messages).filter(m=>receiptMatches(m,record));if(matches.length!==1)continue;
+   const matches=receipts.values(record.nonce).filter(m=>receiptMatches(m,record));if(matches.length!==1)continue;
    const user=game.users.get(record.userId);if(user&&actor.testUserPermission?.(user,'OWNER'))await ledger.finishDamage({actorUuid:actor.uuid,nonce:record.nonce,receiptUuid:matches[0].uuid},user);
   }
  }
- return {register,maintain,beforeDamage,afterDamage,observeNativeIWR,interceptDamageMessage,interceptCheck,beforeChannel,onCommittedChannel,onRefresh,
+ return {register,maintain,beforeDamage,afterDamage,observeNativeIWR,interceptDamageMessage,interceptCheck,beforeChannel,continueChain,onCommittedChannel,onRefresh,basicUse:(payload,user)=>active()?ledger.basicUse(payload,user??game.user):rpc('basicUse',payload),
   validateSelection:context=>ledger.validateSelection(context),confirmMixed:payload=>rpc('confirmMixed',payload),interact:payload=>rpc('interact',payload),confirmedAction:payload=>rpc('confirmedAction',payload),
   diagnostic:{nativeElectricity:'source-bound native IWR and damage-taken receipt',mixedDamage:'active-GM exact attribution',unsupported:['preexisting untagged damage cards','arbitrary custom attack damage components','unrecorded touches/actions']}};
 }

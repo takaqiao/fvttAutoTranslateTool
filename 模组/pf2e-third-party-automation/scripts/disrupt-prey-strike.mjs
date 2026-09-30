@@ -1,11 +1,13 @@
 import {MODULE_ID} from './rules.mjs';
 import {getDisruptPreyMeleeOptions,isCurrentDisruptToken} from './disrupt-prey-rules.mjs';
+import {nativeRollEvent} from './manual-native-roll.mjs';
+import {beforeNativeRoll} from './native-owner-operations.mjs';
 
 const outcomes=['criticalFailure','failure','success','criticalSuccess'];
 const optionsOf=message=>new Set(message?.flags?.pf2e?.context?.options??[]);
 const author=message=>message?.author?.id??message?.author??message?.user?.id??message?.user;
 const marker=(kind,claim)=>`${MODULE_ID}:disrupt-${kind}:${claim.nonce}`;
-const event=(game,kind)=>({ctrlKey:false,metaKey:false,shiftKey:game.user.settings?.[kind==='attack'?'showCheckDialogs':'showDamageDialogs']??true});
+const event=(game,kind)=>nativeRollEvent(game,kind==='attack'?'check':'damage');
 const proof=claim=>({nonce:claim.nonce,claimKey:claim.claimKey,actorUuid:claim.actorUuid,weaponKey:claim.weaponKey});
 const sameProof=(value,claim)=>!!value&&Object.entries(proof(claim)).every(([key,expected])=>value[key]===expected);
 const failure=text=>Error(`扰乱狩猎：${text}；不会自动重掷。`);
@@ -59,11 +61,12 @@ function reactionFlavor(flavor){
 /** Publish inside the one final native callback so Knowledge's completion can
  * observe the card. Identical repeats share its promise; conflicting callbacks
  * are uncertain, never a reason to select the latest card or roll again. */
-export async function rollDisruptPreyAttack({game,actor,token,target,option,claim,createMessage=data=>globalThis.ChatMessage.create(data)}){
+export async function rollDisruptPreyAttack({game,actor,token,target,option,claim,Hooks=globalThis.Hooks,assertLive=()=>{},createMessage=data=>globalThis.ChatMessage.create(data)}){
  const context={game,actor,token,target,option,claim:{...claim}},current=currentOption(context);
  let fingerprint,publication,callbackError;
  const callback=async(_roll,_outcome,raw)=>{
   try{
+   assertLive();
    currentOption(context);
    if(typeof raw?.toObject!=='function'||raw.id&&game.messages.get(raw.id)===raw)throw failure('检定回调没有提供未发布的原生草稿');
    const data=raw.toObject();checkCardSource(data,context,current);delete data._id;
@@ -71,7 +74,7 @@ export async function rollDisruptPreyAttack({game,actor,token,target,option,clai
    if(fingerprint!==undefined){if(key!==fingerprint)throw failure('同一次调用出现多个不一致草稿，结果不确定');return publication;}
    fingerprint=key;
    publication=Promise.resolve().then(async()=>{
-    if(callbackError)throw callbackError;currentOption(context);
+    if(callbackError)throw callbackError;assertLive();currentOption(context);
     data.author=context.claim.userId;data.flavor=reactionFlavor(data.flavor);
     data.flags={...data.flags,'xdy-pf2e-workbench':{...data.flags?.['xdy-pf2e-workbench'],noAutoDamageRoll:true},[MODULE_ID]:{...data.flags?.[MODULE_ID],disruptPreyReaction:proof(context.claim)}};
     const message=await createMessage(data);checkOwner(context);checkCardSource(message,context,current,{stored:true});
@@ -82,7 +85,7 @@ export async function rollDisruptPreyAttack({game,actor,token,target,option,clai
   }catch(error){callbackError=error;throw error;}
  };
  let rolled;
- try{rolled=await current.strike.variants[context.claim.map].roll({target:target.object,altUsage:current.usage??undefined,options:new Set(['action:reaction','action:disrupt-prey','hunted-prey',marker('attack',context.claim)]),event:event(game,'attack'),createMessage:false,callback});}
+ try{rolled=await beforeNativeRoll({Hooks,marker:marker('attack',context.claim),showDialog:true,commit:async()=>{},assertLive,native:()=>current.strike.variants[context.claim.map].roll({target:target.object,altUsage:current.usage??undefined,options:new Set(['action:reaction','action:disrupt-prey','hunted-prey',marker('attack',context.claim)]),event:event(game,'attack'),createMessage:false,callback})});}
  catch(error){if(publication)await publication.catch(()=>{});throw error;}
  if(callbackError)throw callbackError;
  if(!rolled||!publication)throw failure('原生攻击取消或没有可确认的结果');
@@ -91,7 +94,7 @@ export async function rollDisruptPreyAttack({game,actor,token,target,option,clai
 
 /** Native damage creates its own card and full context. Capture only this
  * invocation's nonce while its native promise is running, and always detach. */
-export async function rollDisruptPreyDamage({game,actor,token,target,option,claim,attack,Hooks=globalThis.Hooks}){
+export async function rollDisruptPreyDamage({game,actor,token,target,option,claim,attack,Hooks=globalThis.Hooks,assertLive=()=>{}}){
  const context={game,actor,token,target,option,claim:{...claim},attack},current=currentOption(context);
  const degree=checkCardSource(attack,context,current,{stored:true});
  if(!sameProof(attack.flags?.[MODULE_ID]?.disruptPreyReaction,context.claim)||context.claim.checkId&&context.claim.checkId!==attack.id||![2,3].includes(degree))throw failure('没有属于本认领的已命中原生攻击');
@@ -103,7 +106,8 @@ export async function rollDisruptPreyDamage({game,actor,token,target,option,clai
   try{checkCardSource(message,context,current,{damage:true,stored:true});}catch(error){captureError=error;}
  });
  try{
-  const roll=await current.strike[method]({target:target.object,checkContext:attack.flags.pf2e.context,mapIncreases:context.claim.map,options:new Set(['hunted-prey',marker('damage',context.claim),`${MODULE_ID}:bear-attack:${attack.id}`]),createMessage:true,event:event(game,'damage')});
+  const roll=await beforeNativeRoll({Hooks,marker:marker('damage',context.claim),dialogKind:'damage',showDialog:true,commit:async()=>{},assertLive,native:()=>current.strike[method]({target:target.object,checkContext:attack.flags.pf2e.context,mapIncreases:context.claim.map,options:new Set(['hunted-prey',marker('damage',context.claim),`${MODULE_ID}:bear-attack:${attack.id}`]),createMessage:true,event:event(game,'damage')})});
+  assertLive();
   checkOwner(context);
   if(captureError)throw captureError;
   if(!roll||cards.size!==1)throw failure('伤害取消或出现多个结果，无法确认唯一原生伤害卡');

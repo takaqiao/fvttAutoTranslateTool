@@ -1,6 +1,7 @@
 import {MODULE_ID as ID} from './rules.mjs';
 import {isActiveGM} from './native-context.mjs';
 import {prepareWeaponSurgeDamageSnapshotItems} from './weapon-surge.mjs';
+import {nativeRollEvent} from './manual-native-roll.mjs';
 
 const values=collection=>Array.from(collection?.values?.()??collection??[]);
 const clone=data=>structuredClone(data);
@@ -11,17 +12,26 @@ const sessions=new WeakMap();
 
 /** Check.roll awaits this resolver. Payment follows the user's final native
  * acceptance, and a closed dialog leaves resources intact. */
-export async function beforeNativeRoll({Hooks,marker,showDialog,commit,native}){
- let committed=false,error;const wrapped=new WeakSet();
- const once=async()=>{if(!committed){await commit();committed=true;}};
+export async function beforeNativeRoll({Hooks,marker,showDialog,commit,native,assertLive,dialogKind='check'}){
+ let committed=false,error;const wrapped=new WeakSet(),dialogs=new Set(),listeners=[];
+ const once=async()=>{assertLive?.();if(!committed){await commit();committed=true;}assertLive?.();};
  if(!showDialog){await once();return native(once);}
  if(!Hooks?.on)throw Error('缺少原生检定窗口接口，尚未支付。');
- const id=Hooks.on('renderCheckModifiersDialog',app=>{
+ let abort;const aborted=new Promise((_resolve,reject)=>{abort=reject;});
+ const checkLive=()=>{try{if(error)throw error;assertLive?.();}catch(caught){error=caught;for(const dialog of dialogs){dialog.resolve(false);void Promise.resolve(dialog.close?.()).catch(()=>{});}abort(caught);}};
+ if(assertLive)for(const event of ['updateUser','userConnected','updateChatMessage','deleteChatMessage','updateActor','deleteActor'])listeners.push([event,Hooks.on(event,checkLive)]);
+ const dialogHook=dialogKind==='damage'?'renderDamageModifierDialog':'renderCheckModifiersDialog';
+ const id=Hooks.on(dialogHook,app=>{
   if(!values(app.context?.options).includes(marker)||wrapped.has(app)||typeof app.resolve!=='function')return;
-  wrapped.add(app);const resolve=app.resolve.bind(app);let submitted=false;
+  wrapped.add(app);dialogs.add(app);const resolve=app.resolve.bind(app);let submitted=false;
   app.resolve=accepted=>{if(submitted)return;submitted=true;if(!accepted)return resolve(false);return once().then(()=>resolve(true),caught=>{error=caught;return resolve(false);});};
+  checkLive();
  });
- try{const result=await native(once);if(error)throw error;return result;}finally{Hooks.off('renderCheckModifiersDialog',id);}
+ checkLive();const nativeTask=Promise.resolve().then(()=>{if(error)throw error;return native(once);});
+ // Preparation can finish after the caller aborts. Keep only this exact-marker
+ // render guard until the native promise settles, so a late window also closes.
+ nativeTask.then(()=>Hooks.off(dialogHook,id),()=>Hooks.off(dialogHook,id));
+ try{const result=await Promise.race([nativeTask,aborted]);if(error)throw error;return result;}finally{for(const[event,id]of listeners)Hooks.off(event,id);}
 }
 
 /** Native UI belongs to the original owner. Only IDs and evaluated native data
@@ -64,9 +74,14 @@ export function createNativeOwnerOperations({game,fromUuid=globalThis.fromUuid,s
   const request=operation.request,target=await fromUuid(request.targetUuid);guard();
   const originalGuard=guard;
   guard=()=>{originalGuard();if(!target?.actor||!target.object||target.uuid!==request.targetUuid||target.actor.uuid!==request.targetActorUuid)throw Error('原生操作的原目标已改变。');};guard();
-  const showDialog=game.user.settings?.[request.type==='attack'?'showCheckDialogs':'showDamageDialogs']??true;
-  const options=new Set(request.options??[]),event={ctrlKey:false,metaKey:false,shiftKey:false};
+  const showDialog=true;
+  const options=new Set(request.options??[]),event=nativeRollEvent(game,request.type==='attack'?'check':'damage');
   const marker=`${ID}:native-operation:${operation.nonce}`;options.add(marker);
+  const selectedPrivacy=context=>{
+   const messageMode=context?.messageMode??game.settings?.get?.('core','messageMode')??'public',Class=Message();
+   if(typeof Class?.applyMode!=='function'){if(messageMode!=='public')throw Error('缺少原生秘骰可见性接口，不能公开伤害。');return {messageMode,blind:false,whisper:[]};}
+   const data=Class.applyMode({author:game.user.id},messageMode);return {messageMode,blind:data.blind===true,whisper:[...data.whisper??[]]};
+  };
   let roller=actor;
   if(request.transientItems?.length){
    if(request.transientItems.length>20||request.transientItems.some(item=>item.type!=='effect'))throw Error('本次原生效果快照无效。');
@@ -78,13 +93,15 @@ export function createNativeOwnerOperations({game,fromUuid=globalThis.fromUuid,s
    const native=await spell.getDamage({target,skipDialog:!showDialog});guard();
    if(!native)return {status:'cancelled'};
    const roll=await native.template.damage.roll.evaluate();guard();
-   return {status:'rolled',roll:roll.toJSON(),context:{options:[...native.context.options??[]],domains:[...native.context.domains??[]],traits:[...native.context.traits??[]]}};
+   return {status:'rolled',roll:roll.toJSON(),privacy:selectedPrivacy(native.context),context:{options:[...native.context.options??[]],domains:[...native.context.domains??[]],traits:[...native.context.traits??[]],messageMode:native.context.messageMode}};
   }
   const strike=values(roller.system.actions).flatMap(strike=>[strike,...strike.altUsages??[]]).find(strike=>strike.type==='strike'&&strike.item?.id===request.weaponId&&(strike.item.altUsageType??'')===(request.altUsageType??''));
   if(!strike||strike.ready===false||!Number.isInteger(request.map)||request.map<0||request.map>2)throw Error('原生武器或多重攻击档位已失效。');
   if(request.type==='damage'){
-   const roll=await strike[request.critical?'critical':'damage']({target:target.object,checkContext:request.checkContext,mapIncreases:request.map,options,event,createMessage:false});guard();
-   return roll?{status:'rolled',roll:roll.toJSON()}:{status:'cancelled'};
+   let context;const hook=Hooks?.on?.('renderDamageModifierDialog',app=>{if(values(app.context?.options).includes(marker))context=app.context;});
+   try{const roll=await beforeNativeRoll({Hooks,marker,showDialog,dialogKind:'damage',commit:async()=>{},assertLive:guard,native:()=>strike[request.critical?'critical':'damage']({target:target.object,checkContext:request.checkContext,mapIncreases:request.map,options,event,createMessage:false})});guard();
+    return roll?{status:'rolled',roll:roll.toJSON(),privacy:selectedPrivacy(context)}:{status:'cancelled'};
+   }finally{if(hook!==undefined)Hooks.off('renderDamageModifierDialog',hook);}
   }
   if(request.type!=='attack')throw Error('不支持的原生执行类型。');
   let created;
@@ -106,7 +123,7 @@ export function createNativeOwnerOperations({game,fromUuid=globalThis.fromUuid,s
    }
    await waitFor(()=>operations(message)[operation.nonce]?.committed===true);guard();
   };
-  const roll=operation.requiresCommit?await beforeNativeRoll({Hooks,marker,showDialog,commit,native:rollNative}):await rollNative();guard();
+  const roll=await beforeNativeRoll({Hooks,marker,showDialog,commit:operation.requiresCommit?commit:async()=>{},native:operation.requiresCommit?rollNative:()=>rollNative(),assertLive:guard});guard();
   if(!roll&&!created)return {status:'cancelled'};
   if(!created)throw Error('原生攻击结果未确认；不能重复投骰。');
   return {status:'rolled',messageId:created.id};

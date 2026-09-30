@@ -73,7 +73,7 @@ for(const kind of ['sidebar','persistent'])test(`functional changed ${kind} acti
  assert.equal(f.errors.length,0);assert.notEqual(action.use,modified);assert.equal(await action.use({type:'click'}),null);assert.deepEqual(f.requests,[]);
 });
 for(const kind of ['sidebar','persistent'])test(`unavailable ${kind} use descriptors retain the original control and report the interface failure`,async t=>{
- const f=setup(t),action=actionControllers(f.item)[kind],prototype=Object.getPrototypeOf(action),original=action.use;Object.defineProperty(prototype,'use',{configurable:false,writable:true,value:original});await f.render(kind,[action]);assert.equal(f.errors.length,1);assert.match(f.errors[0].message,/HUD use interface is unavailable/);assert.equal(action.use,original);assert.deepEqual(f.requests,[]);
+ const f=setup(t),action=actionControllers(f.item)[kind],prototype=Object.getPrototypeOf(action),original=action.use;Object.defineProperty(prototype,'use',{configurable:false,writable:true,value:original});await f.render(kind,[action]);assert.equal(f.errors.length,1);assert.match(f.errors[0].message,/HUD使用入口不可用/);assert.equal(action.use,original);assert.deepEqual(f.requests,[]);
 });
 
 test('reviewed persistent exploration and ineligible actor uses retain their native routes',async t=>{

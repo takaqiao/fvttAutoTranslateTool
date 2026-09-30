@@ -4,6 +4,7 @@ import {isActiveGM,resolveMessageTargets,upsertOwnedEffect,publicTargetName} fro
 import {withEatStrikeFrame,isEatFortuneProbe} from './eat-fortune.mjs';
 import {createWorkbenchRecallController} from './knowledge-entrypoints.mjs';
 import {AUTOMATIC_KNOWLEDGE_SOURCE,automaticKnowledgeChoices,automaticKnowledgeRound} from './knowledge-automatic.mjs';
+import {knowledgeNativeLabel} from './knowledge-display.mjs';
 
 export const KNOWLEDGE_SOURCES=Object.freeze({
  recall:'Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo',automatic:AUTOMATIC_KNOWLEDGE_SOURCE,
@@ -45,6 +46,17 @@ export function buildStrategistAttackEffect({targetUuid,claim,sourceActor}){
   // PF2e evaluates effects on the target clone with that token's marks as self:mark.
   {key:'EphemeralEffect',selectors:['strike-attack-roll','spell-attack-roll'],uuid:'Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg',predicate:[`self:mark:strategist-${claim.toLowerCase()}`,`${option}:claim:${claim}`]},
  ]},flags:{[MODULE_ID]:{knowledge:{kind:'strategist-claim',claim,sourceActor,targetUuid}}}};
+}
+
+/** Confirm through PF2e's native window, then retain Devise's unmodified d20. */
+export async function rollKnowledgeD20({game,actor,token,item,globals=globalThis}){
+ const Check=game.pf2e?.Check,CheckModifier=game.pf2e?.CheckModifier;
+ if(!Check?.roll||!CheckModifier||!globals.Roll?.fromTerms)throw Error('原生掷骰API不可用。');
+ const rolled=await Check.roll(new CheckModifier('devise-a-stratagem',{modifiers:[]}),{actor,token,item,type:'check',title:item?.name??'出谋划策',domains:['check'],options:new Set(['action:devise-a-stratagem']),skipDialog:false,createMessage:false,rollTwice:false,substitutions:[]},null);
+ if(!rolled)return null;
+ const roll=globals.Roll.fromTerms(rolled.dice);
+ if(!Number.isInteger(roll.total)||roll.total<1||roll.total>20)throw Error('出谋划策未保留可验证的原生d20点数；不会再次投骰。');
+ return roll;
 }
 
 export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,choose,strikeMiddleware=null,spellAttackMiddleware=null,globals=globalThis,onError=console.error}={}){
@@ -254,7 +266,7 @@ export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,cho
     let constraint={};
     if(action==='knowledge:automatic'){
      const round=automaticKnowledgeRound(game);if(own(actor).automaticRound?.epoch===round)throw Error('耳熟能详本轮次数已用尽。');
-     const fixed=automaticKnowledgeChoices(actor,item);if(!fixed.choices.length)throw Error('耳熟能详需要专家以上、已拥有相应 Assurance 的固定技能。');
+     const fixed=automaticKnowledgeChoices(actor,item);if(!fixed.choices.length)throw Error('耳熟能详需要专家以上、已拥有相应驾轻就熟的固定技能。');
      const statistic=fixed.statistic??await pick(actor,user,'耳熟能详 · 绑定专长的固定技能',fixed.choices);if(!statistic)return {status:'cancelled',result:'未设置耳熟能详的固定技能。'};
      if(item.flags?.[MODULE_ID]?.knowledge?.automaticSkill!==statistic)await item.update({[`flags.${MODULE_ID}.knowledge.automaticSkill`]:statistic});
      constraint={statistic,assurance:true};
@@ -262,14 +274,14 @@ export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,cho
      // an uncertain reply cannot be used to gain another free action.
      await save(actor,'automaticRound',{epoch:round,messageId:message.id,userId:user.id});
     }
-    await recall(ctx,targets.length===1?targets[0]:null,{...constraint,targetUuids:targets.map(t=>t.uuid)});return action==='knowledge:automatic'?'已用固定技能的 Assurance 进行耳熟能详。':'本次回忆知识已处理。';
+    await recall(ctx,targets.length===1?targets[0]:null,{...constraint,targetUuids:targets.map(t=>t.uuid)});return action==='knowledge:automatic'?'已用固定技能的驾轻就熟进行耳熟能详。':'本次回忆知识已处理。';
    }
    if(action==='knowledge:stance'){
     if(!game.combat?.started)throw Error('军师架势只能在遭遇中使用。');const cooldown=own(actor).stanceCooldown;if(Number.isFinite(cooldown)&&cooldown>now())throw Error('军师架势仍处于1分钟冷却。');
-    const choices=[{value:'society',label:'社会 Society'},...values(actor.itemTypes?.lore).filter(i=>i.slug==='warfare-lore').map(i=>({value:i.slug,label:i.name}))];
+    const choices=[{value:'society',label:knowledgeNativeLabel(game,'society',actor.skills?.society?.label)},...values(actor.itemTypes?.lore).filter(i=>i.slug==='warfare-lore').map(i=>({value:i.slug,label:i.name}))];
     const selected=await pick(actor,user,'军师架势 · 选择检定',choices);if(!selected)return '已取消进入架势。';
     const stat=actor.getStatistic?.(selected)??actor.skills?.[selected];if(!stat?.check?.roll)throw Error('找不到所选技能的原生检定。');
-    let result='未进入军师架势。';await stat.check.roll({dc:{value:levelDC(actor.level),visible:true},skipDialog:true,extraRollOptions:['action:strategist-stance'],callback:async(roll,outcome)=>{
+    let result='未进入军师架势。';await stat.check.roll({dc:{value:levelDC(actor.level),visible:true},skipDialog:false,event:null,extraRollOptions:['action:strategist-stance'],callback:async(roll,outcome)=>{
      const dos=roll.options?.degreeOfSuccess??({criticalFailure:0,failure:1,success:2,criticalSuccess:3}[outcome]);
      if(dos===0){await save(actor,'stanceCooldown',now()+60);result='未进入架势，1分钟后可再次尝试。';}
      if(dos>=2){const data=await load(KNOWLEDGE_SOURCES.stanceEffect),r=dos===3?20:15;for(const rule of data.system.rules)if(rule.key==='ChoiceSet'&&rule.flag==='auraRadius')rule.selection=r;
@@ -291,7 +303,7 @@ export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,cho
    if(!game.combat?.started||!timing(actor))throw Error('出谋划策需要角色已加入遭遇。');
     const uses=item.system.frequency?.value??item.system.frequency?.max??1;if(!frequencyReceipt&&uses<1)throw Error('出谋划策本轮次数已用尽。');
     await recall(ctx,target);
-    const Roll=globalThis.Roll;if(!Roll)throw Error('原生掷骰API不可用。');const roll=await new Roll('1d20').evaluate();
+    const roll=await rollKnowledgeD20({game,actor,item,token:sourceToken(actor,message),globals});if(!roll)throw Error('出谋划策原生掷骰已取消。');
     await roll.toMessage({speaker:globalThis.ChatMessage.getSpeaker({actor,token:sourceToken(actor,message)}),flavor:'出谋划策',flags:{[MODULE_ID]:{usageGenerated:true}}});
     spent=true;if(!frequencyReceipt&&item.system.frequency)await item.update({'system.frequency.value':uses-1},{[MODULE_ID]:{usageInternal:true}});
     const branch=await pick(actor,user,`出谋划策 · d20=${roll.total}`,[{value:'attack',label:'攻击策略'},{value:'skill',label:'技能策略'}]);if(!branch)return '本次出谋划策已掷骰；未选择策略。';

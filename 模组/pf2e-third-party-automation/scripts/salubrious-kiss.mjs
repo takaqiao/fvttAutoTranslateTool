@@ -11,8 +11,8 @@ import {assertSource,assertPatient,currentToken,contextFor,claimOf,fail} from '.
 export function createSalubriousKiss({game,fromUuid=globalThis.fromUuid,choose,executor,validateRefocusNote,runExclusive,isExplorationContext=()=>false}={}){
  const queue=new SerialActions(),live=new Map(),activities=new Map(),activityResults=new Map(),run=runExclusive??((key,fn)=>queue.run(key,fn));
  const gm=()=>{if(game.user!==game.users.activeGM||!game.user?.isGM)throw fail('只有当前主GM能结算');};
- const write=async fn=>{gm();const result=await fn();gm();return result};
- const save=(actor,claim)=>run(actor.uuid,()=>write(()=>actor.update({[`flags.${MODULE_ID}.salubriousKiss.claims`]:[...(kissState(actor).claims??[]).filter(c=>c.nonce!==claim.nonce),{...structuredClone(claimOf(actor,claim.nonce)??{}),...structuredClone(claim)}]})));
+ const write=async(fn,validate)=>{gm();validate?.();const result=await fn();gm();validate?.();return result};
+ const save=(actor,claim,validate)=>run(actor.uuid,()=>write(()=>actor.update({[`flags.${MODULE_ID}.salubriousKiss.claims`]:[...(kissState(actor).claims??[]).filter(c=>c.nonce!==claim.nonce),{...structuredClone(claimOf(actor,claim.nonce)??{}),...structuredClone(claim)}]}),validate));
  async function verifyEvent(actor,user,proof){
   gm();const token=await fromUuid(proof?.tokenUuid),item=salubriousFeat(actor);assertSource({game,actor,item,token,user,privacy:proof?.privacy});
   const keys=['nonce','actorUuid','itemUuid','userId','before','after','tokenUuid','startedAt'],intent=actor.flags?.[MODULE_ID]?.avRefocusIntent,receipt=actor.flags?.[MODULE_ID]?.refocusEvents?.find(r=>r.nonce===proof?.nonce);
@@ -23,36 +23,39 @@ export function createSalubriousKiss({game,fromUuid=globalThis.fromUuid,choose,e
  function onRefocus({actor,user,proof}){
   const activityBinding=activities.get(actor?.uuid);
   const binding=activityBinding?.activity.id===proof?.nonce?activityBinding:null;
-  if(binding){if(!isExplorationContext(binding.ctx,binding.activity.id)||proof.startedAt!==binding.activity.startedAt||game.time.worldTime<binding.activity.endsAt)throw fail('仙露活动没有本次开始／完成上下文');binding.ctx.validate();}
+  const explorationScope=binding?{activity:binding.activity,ctx:binding.ctx}:undefined;
+  const validateBinding=()=>{gm();if(binding){const activity=binding.activity;if(!isExplorationContext(binding.ctx,activity.id)||proof.nonce!==activity.id||proof.actorUuid!==activity.actorUUID||proof.userId!==game.user.id||proof.startedAt!==activity.startedAt||game.time.worldTime!==activity.endsAt||game.combat?.started)throw fail('仙露活动没有本次开始／完成上下文');binding.ctx.validate();}};
+  if(binding)validateBinding();
   const key=actor?.uuid+':'+proof?.nonce;if(live.has(key))return live.get(key);
   const promise=(async()=>{
    gm();const previous=claimOf(actor,proof?.nonce);
    if(previous){if(['done','declined'].includes(previous.state))return structuredClone(previous);throw fail('本次重新聚能已有未确认医疗记录，不能重复');}
-   const {token,item}=await verifyEvent(actor,user,proof);
+   const {token,item}=await verifyEvent(actor,user,proof);validateBinding();
    let claim={nonce:proof.nonce,actorUuid:actor.uuid,itemUuid:item.uuid,tokenUuid:token.uuid,userId:user.id,startedAt:proof.startedAt,state:'choosing',...proof.privacy?{privacy:structuredClone(proof.privacy),refocusNoteId:proof.noteId}:{},skill:'occultism',activityMinutes:10},target,executionStarted=false;
-   await run(actor.uuid,async()=>{gm();if((kissState(actor).claims??[]).some(c=>!['done','declined'].includes(c.state)))throw fail('该角色仍有未确认的医疗');await write(()=>actor.update({[`flags.${MODULE_ID}.salubriousKiss.claims`]:[...(kissState(actor).claims??[]),structuredClone(claim)]}));});
    try{
+    await run(actor.uuid,async()=>{validateBinding();if((kissState(actor).claims??[]).some(c=>!['done','declined'].includes(c.state)))throw fail('该角色仍有未确认的医疗');await write(()=>actor.update({[`flags.${MODULE_ID}.salubriousKiss.claims`]:[...(kissState(actor).claims??[]),structuredClone(claim)]}),validateBinding);});
     const candidates=values(token.parent.tokens).filter(t=>{if(t.hidden&&!user.isGM)return false;try{assertPatient({game,actor,token,target:t,user});return true}catch{return false}});
     if(!candidates.length)throw fail('没有可确认的合格患者');
     const selected=binding?binding.patientTokenUuid:await choose({kind:'patient',actor,user,title:'仙露三吻：重新聚能时同时医疗',choices:[{value:'only-refocus',label:'仅重新聚能'},...candidates.map(t=>({value:t.uuid,label:publicTargetName(t,{game,user})}))]});
     if(selected==null||selected==='only-refocus'){claim.state='declined';await save(actor,claim);return claim}
     target=candidates.find(t=>t.uuid===selected);if(!target)throw fail('患者选择不属于本次真实候选');
-    await verifyEvent(actor,user,proof);assertPatient({game,actor,token,target,user});
+    await verifyEvent(actor,user,proof);validateBinding();assertPatient({game,actor,token,target,user});
     const tiers=treatmentTiers(actor),tier=binding?String(binding.tier):tiers.length===1?String(tiers[0].tier):await choose({kind:'tier',actor,user,title:'仙露三吻：医疗DC',choices:tiers.map(t=>({value:String(t.tier),label:`DC ${t.dc}`}))});
     if(tier==null){claim.state='declined';await save(actor,claim);return claim}
     const selectedTier=tiers.find(t=>String(t.tier)===tier);if(!selectedTier)throw fail('非法神秘医疗DC');
     claim={...claim,targetUuid:target.uuid,targetActorUuid:target.actor.uuid,...selectedTier,...claim.privacy?{privacy:treatmentPrivacyForPatient({game,user,token,item,target,privacy:proof.privacy})}:{}};
-    await run(target.actor.uuid,async()=>{await verifyEvent(actor,user,proof);assertPatient({game,actor,token,target,user});if(kissState(target.actor).pending)throw fail('该患者已有进行中或未确认的医疗');await write(()=>target.actor.update({[`flags.${MODULE_ID}.salubriousKiss.pending`]:{actorUuid:actor.uuid,nonce:claim.nonce}}));});
-    claim.state='rolling';await save(actor,claim);
+    await run(target.actor.uuid,async()=>{await verifyEvent(actor,user,proof);validateBinding();assertPatient({game,actor,token,target,user});if(kissState(target.actor).pending)throw fail('该患者已有进行中或未确认的医疗');await write(()=>target.actor.update({[`flags.${MODULE_ID}.salubriousKiss.pending`]:{actorUuid:actor.uuid,nonce:claim.nonce}}),validateBinding);});
+    claim.state='rolling';await save(actor,claim,validateBinding);
     executionStarted=true;
-    const result=await executor.roll(claim);gm();await contextFor({game,fromUuid,claim});
+    const result=await executor.roll(claim,explorationScope);
     if(![0,1,2,3].includes(result?.degree)||!result.checkId||result.degree!==1&&!result.damageId||result.degree===1&&result.damageId)throw fail('原生医疗结果不完整');
-    claim={...claim,result:{checkId:result.checkId,damageId:result.damageId,degree:result.degree},state:'applying'};await save(actor,claim);
+    claim={...claim,result:{checkId:result.checkId,damageId:result.damageId,degree:result.degree},state:'applying'};validateBinding();await contextFor({game,fromUuid,claim});validateBinding();await save(actor,claim,validateBinding);
     const reservation=kissState(target.actor).pending;if(reservation?.nonce!==claim.nonce||reservation.actorUuid!==actor.uuid)throw fail('患者保留记录已改变');
-    const source=await fromUuid(TREAT_WOUNDS_IMMUNITY);const immunities=await write(()=>target.actor.createEmbeddedDocuments('Item',[treatmentImmunityData(source.toObject(),claim,game.time.worldTime)]));claim.immunityIds=immunities.map(i=>i.uuid);
-    if(result.degree!==1)claim.receipt=await executor.apply(claim,result);
-    gm();if(treatmentOutcome({degree:result.degree,tier:claim.tier}).removeWounded)await write(()=>target.actor.decreaseCondition('wounded',{forceRemove:true}));
-    claim.state='done';await save(actor,claim);await write(()=>target.actor.update({[`flags.${MODULE_ID}.salubriousKiss.pending`]:null}));return claim;
+    const source=await fromUuid(TREAT_WOUNDS_IMMUNITY);validateBinding();const immunity=treatmentImmunityData(source.toObject(),claim,game.time.worldTime);validateBinding();
+    const immunities=await target.actor.createEmbeddedDocuments('Item',[immunity]);claim.immunityIds=immunities.map(i=>i.uuid);validateBinding();
+    if(result.degree!==1){validateBinding();claim.receipt=await executor.apply(claim,result,explorationScope);validateBinding();}
+    validateBinding();if(treatmentOutcome({degree:result.degree,tier:claim.tier}).removeWounded)await write(()=>target.actor.decreaseCondition('wounded',{forceRemove:true}),validateBinding);
+    claim.state='done';await save(actor,claim,validateBinding);await write(()=>target.actor.update({[`flags.${MODULE_ID}.salubriousKiss.pending`]:null}),validateBinding);return claim;
    }catch(error){
     // No remote/native call was started: a vanished candidate or canceled choice
     // is a known refusal. It must not strand this actor or a reserved patient.
@@ -60,6 +63,7 @@ export function createSalubriousKiss({game,fromUuid=globalThis.fromUuid,choose,e
      if(target&&currentToken(target,game))await run(target.actor.uuid,async()=>{const pending=kissState(target.actor).pending;if(pending?.actorUuid===actor.uuid&&pending.nonce===claim.nonce)await write(()=>target.actor.update({[`flags.${MODULE_ID}.salubriousKiss.pending`]:null}));});
      claim.state='declined';claim.reason=claim.privacy?'known-pre-roll-refusal':String(error.message??error);await save(actor,claim);return claim;
     }
+    if(error.salubriousReceipt)claim.receipt=error.salubriousReceipt;
     claim.state='uncertain';claim.error=claim.privacy?'execution-uncertain':String(error.message??error);if(game.user===game.users.activeGM)await save(actor,claim);throw error;
    }
   })();

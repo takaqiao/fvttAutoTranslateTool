@@ -1,6 +1,7 @@
 import {MODULE_ID} from './rules.mjs';
 import {SerialActions} from './runtime.mjs';
 import {getSourceId,isActiveGM} from './native-context.mjs';
+import {beforeNativeRoll} from './native-owner-operations.mjs';
 import {SCARE_SOURCE,SCARE_TRAITS,SCARE_OUTCOMES,scareState,assertScareTokens} from './scare-to-death-rules.mjs';
 
 const identity=['usageId','actorUuid','originUuid','targetUuid','targetActorUuid','itemUuid','userId','saveUserId','penalty','nonce'];
@@ -36,7 +37,6 @@ export function createScareExecutor({game,fromUuid=globalThis.fromUuid,Hooks=glo
    id=Hooks.on(hook,(...args)=>{if(match(...args))check();});timer=setTimeout(()=>finish(fail(label+'同步超时')),timeoutMs);check();
   });
  }
- async function deadline(promise){let timer;try{return await Promise.race([promise,new Promise((_resolve,reject)=>{timer=setTimeout(()=>reject(fail('拥有者通讯超时，原检定可能仍在完成')),timeoutMs);})]);}finally{clearTimeout(timer);}}
  const findMessage=id=>{if(!validId(id))throw fail('没有准确消息ID');return waitFor(()=>game.messages.get(id),'createChatMessage',m=>m?.id===id,'原生消息');};
  function claimFrom(message,payload){
   const claim=scareState(message).claim;if(!claim)return null;
@@ -54,6 +54,47 @@ export function createScareExecutor({game,fromUuid=globalThis.fromUuid,Hooks=glo
  function stageReady(claim,stage){
   if(claim.state!==stage+'-ready')throw fail('检定已经开始或不处于可执行阶段');
   if(stage==='fortitude'&&!validId(claim.checkId))throw fail('没有确切大成功威吓卡');
+ }
+ function assertContextLive(context,claim,stage,{completed=false}={}){
+  const {actor,origin,target,item,roller,user}=context;
+  if(origin.actor!==actor||target.actor?.uuid!==claim.targetActorUuid||roller!==(stage==='fortitude'?target.actor:actor)||item.actor!==actor||actor.items.get(item.id)!==item||getSourceId(item)!==SCARE_SOURCE||game.scenes.get(origin.parent?.id)!==origin.parent||[actor,target.actor].some(a=>!a.isToken&&game.actors.get(a.id)!==a))throw fail('来源角色、Token或真实专长已改变');
+  assertScareTokens(origin,target);
+  if(game.users.get(user.id)!==user||!completed&&(!user.active||!roller.testUserPermission?.(user,'OWNER')))throw fail('原拥有者已离线或失去权限');
+ }
+ async function ownerReply(context,usage,claim,stage,invoke){
+  if(!Hooks?.on||!Hooks.off)throw fail('无法观察原拥有者的准确执行记录');
+  const requester=game.user,fingerprint=JSON.stringify(identity.map(k=>claim[k])),registrations=[];
+  let finished=false,timer,replyId,resolveResult,rejectResult;
+  const result=new Promise((resolve,reject)=>{resolveResult=resolve;rejectResult=reject;});
+  const finish=(error,value)=>{if(finished)return;finished=true;clearTimeout(timer);for(const [event,id]of registrations)Hooks.off(event,id);error?rejectResult(error):resolveResult(value);};
+  const read=()=>{
+   if(game.user!==requester)throw fail('原请求客户端已改变');requesterGM(requester);
+   if(game.messages.get(usage.id)!==usage||!same(claimFrom(usage,{nonce:claim.nonce}),claim))throw fail('原使用消息或持久认领已改变');
+   stageReady(claimFrom(usage,{nonce:claim.nonce}),stage);
+   const records=ownExecutions(context.roller).filter(record=>record.usageId===usage.id&&record.stage===stage),record=records[0];
+   if(records.length>1||record&&record.fingerprint!==fingerprint)throw fail('原拥有者执行记录身份不一致');
+   if(record?.status==='uncertain')throw fail('原拥有者执行结果未确认，不能重掷');
+   const done=record?.status==='done';assertContextLive(context,claim,stage,{completed:done});
+   if(!done)return null;
+   if(!validId(record.messageId)||replyId&&replyId!==record.messageId)throw fail('原拥有者完成记录与准确消息ID不一致');
+   return {messageId:record.messageId};
+  };
+  const inspect=()=>{if(finished)return;try{const saved=read();if(saved)finish(null,saved);}catch(error){finish(error);}};
+  for(const event of ['updateActor','updateChatMessage','createChatMessage','deleteChatMessage','updateUser','userConnected','deleteActor','deleteItem','updateToken','deleteToken'])registrations.push([event,Hooks.on(event,inspect)]);
+  inspect();
+  if(!finished)Promise.resolve().then(invoke).then(response=>{
+   if(finished)return;
+   try{
+    const saved=read();if(saved){finish(null,saved);return;}
+    if(!response?.ok)throw fail(response?.error??'拥有者没有确认结果');
+    if(!validId(response.value?.messageId))throw fail('拥有者没有准确原生消息ID');
+    replyId=response.value.messageId;
+    // Only a completed RPC starts the bounded document-sync wait. The human's
+    // native modifier window has no deadline, and saved completion wins a lost reply.
+    timer=setTimeout(()=>finish(fail('原拥有者执行记录同步超时')),timeoutMs);inspect();
+   }catch(error){finish(error);}
+  },error=>{if(finished)return;try{const saved=read();if(saved)finish(null,saved);else finish(error);}catch(caught){finish(caught);}});
+  return result;
  }
  async function ownerRoll(payload,requester){
   requesterGM(requester);
@@ -91,9 +132,14 @@ export function createScareExecutor({game,fromUuid=globalThis.fromUuid,Hooks=glo
     const save=payload.stage==='fortitude',statistic=roller.getStatistic?.(save?'fortitude':'intimidation');if(!statistic?.roll)throw fail('缺少原生Statistic');
     const traits=[...new Set([...context.item.system.traits.value,...SCARE_TRAITS])],modifiers=[];
     if(!save&&claim.penalty){if(!game.pf2e.Modifier)throw fail('缺少原生情境修正');modifiers.push(new game.pf2e.Modifier({slug:'scare-to-death-language',label:'肝胆俱裂：无法听见或理解本次语言',modifier:claim.penalty,type:'circumstance'}));}
+    const assertLive=()=>{
+     requesterGM(requester);if(game.user!==context.user||!same(read(),claim)||game.messages.get(usage.id)!==usage)throw fail('原拥有者或本次持久认领已改变');
+     stageReady(read(),payload.stage);assertContextLive(context,claim,payload.stage);
+     const record=ownExecutions(roller).find(r=>r.usageId===usage.id&&r.stage===payload.stage);if(record?.fingerprint!==fingerprint||record.status!=='started')throw fail('原拥有者执行记录已改变');
+    };
     let card;
-    await statistic.roll({token:save?context.target:context.origin,...save?{origin:context.actor}:{target:context.target.actor},item:context.item,action:'scare-to-death',dc:{slug:save?'intimidation':'will'},traits,modifiers,
-     extraRollOptions:['action:scare-to-death',marker(claim,payload.stage),...SCARE_TRAITS.map(t=>`item:trait:${t}`)],skipDialog:true,createMessage:true,callback:(_roll,_outcome,message)=>{card=message;}});
+    await beforeNativeRoll({Hooks,marker:marker(claim,payload.stage),showDialog:true,commit:async()=>{},assertLive,native:()=>statistic.roll({token:save?context.target:context.origin,...save?{origin:context.actor}:{target:context.target.actor},item:context.item,action:'scare-to-death',dc:{slug:save?'intimidation':'will'},traits,modifiers,
+     extraRollOptions:['action:scare-to-death',marker(claim,payload.stage),...SCARE_TRAITS.map(t=>`item:trait:${t}`)],skipDialog:false,event:null,createMessage:true,callback:(_roll,_outcome,message)=>{card=message;}})});
     requesterGM(requester);if(!same(read(),claim))throw fail('原生结果返回时认领已变');
     validateScareCard({game,message:card,claim,stage:payload.stage});await write('done',card.id);return {messageId:card.id};
    }catch(error){await write('uncertain').catch(()=>{});throw error;}
@@ -103,7 +149,7 @@ export function createScareExecutor({game,fromUuid=globalThis.fromUuid,Hooks=glo
   requireGM();const usage=await findMessage(claim.usageId),persisted=claimFrom(usage,{nonce:claim.nonce});if(!same(persisted,claim))throw fail('GM认领未持久保存');stageReady(persisted,stage);
   const context=await contextFor(claim,stage),payload={usageId:claim.usageId,nonce:claim.nonce,stage};let result;
   if(context.user===game.user)result=await ownerRoll(payload,game.user);
-  else{if(!socket?.executeAsUser)throw fail('缺少原拥有者通讯');const response=await deadline(socket.executeAsUser('scare-to-death:roll',context.user.id,payload));requireGM();if(!response?.ok)throw fail(response?.error??'拥有者没有确认结果');result=response.value;}
+  else{if(!socket?.executeAsUser)throw fail('缺少原拥有者通讯');result=await ownerReply(context,usage,claim,stage,()=>socket.executeAsUser('scare-to-death:roll',context.user.id,payload));}
   const card=await findMessage(result?.messageId);requireGM();if(!same(claimFrom(usage,{nonce:claim.nonce}),claim))throw fail('GM收到结果时认领已变');validateScareCard({game,message:card,claim,stage});return card;
  }
  function register({socket:api}={}){

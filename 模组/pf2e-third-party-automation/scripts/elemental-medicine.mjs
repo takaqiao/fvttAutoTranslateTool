@@ -103,7 +103,7 @@ export function createElementalMedicine({game,fromUuid=globalThis.fromUuid,reque
   const statistic=elementalMedicineSkills(args.actor).find(s=>s.slug===args.skill)?.statistic;
   if(typeof statistic?.check?.roll!=='function'||!hookApi)throw Error('缺少原生秘密技能检定接口。');
   pendingChecks.set(args.nonce,args);
-  try{return await statistic.check.roll({item:elementalMedicineFeat(args.actor),dc:{value:args.dc,visible:false},skipDialog:true,messageMode:'blind',extraRollOptions:[`action:prepare-elemental-medicine`,`${MODULE_ID}:elemental-medicine:${args.nonce}`],traits:['exploration','manipulate','secret'],label:'五气养生',action:'prepare-elemental-medicine'});}
+  try{return await statistic.check.roll({item:elementalMedicineFeat(args.actor),dc:{value:args.dc,visible:false},skipDialog:false,event:null,messageMode:'blind',extraRollOptions:[`action:prepare-elemental-medicine`,`${MODULE_ID}:elemental-medicine:${args.nonce}`],traits:['exploration','manipulate','secret'],label:'五气养生',action:'prepare-elemental-medicine'});}
   finally{pendingChecks.delete(args.nonce);}
  }
  async function tell(request,p,fact,degree){

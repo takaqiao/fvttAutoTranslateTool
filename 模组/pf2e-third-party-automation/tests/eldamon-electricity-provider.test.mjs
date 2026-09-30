@@ -69,7 +69,7 @@ for(const status of ['restricted','manual'])test(`provider forwards ${status} re
  const context={item:f.power,selection:{targetUuids:[f.tokens[2].uuid],discharge:false},kind:'normal'};
  await assert.rejects(provider.beforeChannel(context),/反应/);current='clear';
  const result=await provider.beforeChannel(context);assert.equal(result.triggerDamage,13);assert.equal(result.electricityEvidence.targetUuid,f.tokens[2].uuid);
- current=status;await assert.rejects(provider.validateSelection({actor:f.caster,item:f.power,selection:result,kind:'normal',user:f.owner}),/Reactive Chain/);
+ current=status;await assert.rejects(provider.validateSelection({actor:f.caster,item:f.power,selection:result,kind:'normal',user:f.owner}),/反应电链/);
 });
 
 test('Destructive Block final native proof overrides earlier IWR amount; uncertain or mismatched proof cannot trigger lifecycle',async()=>{

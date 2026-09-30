@@ -105,7 +105,7 @@ export function createDisruptPreyExecutor({game,fromUuid=globalThis.fromUuid,Hoo
   let record=await waitFor(read,'updateActor',updated=>updated?.uuid===actor.uuid,'拥有者认领');
   const key=actor.uuid+':'+payload.nonce+':'+payload.stage,fingerprint=JSON.stringify({identity:Object.fromEntries(identity.map(k=>[k,record.claim[k]])),checkId:payload.checkId??null}),existing=ownerStages.get(key);
   if(existing){if(existing.fingerprint!==fingerprint)throw fail('重复请求改变了阶段身份');return existing.promise;}
-  const promise=deadline((async()=>{
+  const promise=(async()=>{
    // A GM's update can arrive just after its damage RPC. Wait for that exact
    // persisted attack ID; other terminal/stale states never authorize a roll.
    if(payload.stage==='damage'&&record.claim.state==='claimed')record=await waitFor(()=>{
@@ -121,14 +121,23 @@ export function createDisruptPreyExecutor({game,fromUuid=globalThis.fromUuid,Hoo
     const fresh=basicClaim(actor,payload.nonce,payload.claimKey);
     if(!fresh||!same(fresh.claim,context.claim)||game.user!==context.user||game.users.get(game.user.id)!==game.user||!game.user.active||!actor.testUserPermission?.(game.user,'OWNER'))throw fail('开始原生投骰前拥有者或认领已变');
     stageReady(fresh,payload.stage,payload.checkId);
-    const message=payload.stage==='attack'?await rollAttack({...context,game}):await rollDamage({...context,game,attack,Hooks});
+    const assertLive=()=>{
+     requesterGM(requester);const live=basicClaim(actor,payload.nonce,payload.claimKey);
+     if(!live||!same(live.claim,context.claim)||game.user!==context.user||game.users.get(context.user.id)!==context.user||!context.user.active||!actor.testUserPermission?.(context.user,'OWNER')||!isCurrentDisruptToken(context.token,game)||context.token.actor!==actor||!isCurrentDisruptToken(context.target,game)||context.target.actor.uuid!==context.claim.targetActorUuid||context.target.actor.id!==context.claim.targetActorId)throw fail('原生确认期间拥有者、来源或认领已变');
+     stageReady(live,payload.stage,payload.checkId);
+     if(!getDisruptPreyMeleeOptions({...context,game}).some(option=>option.key===context.claim.weaponKey&&option.itemUuid===context.claim.itemUuid))throw fail('原生确认期间准确武器来源已变');
+     if(attack)cardProof(attack,context.claim,'attack');
+    };
+    assertLive();
+    const message=payload.stage==='attack'?await rollAttack({...context,game,Hooks,assertLive}):await rollDamage({...context,game,attack,Hooks,assertLive});
+    assertLive();
     cardProof(message,context.claim,payload.stage);await writeAttempt(context,payload.stage,'done',message.id);requesterGM(requester);
     if(!same(recorded(actor,payload.nonce),context.claim))throw fail('原生卡完成时认领身份已变');return {messageId:message.id};
    }catch(error){
     const attempt=actor.flags?.[MODULE_ID]?.disruptPreyExecutions?.records?.find(r=>r.nonce===payload.nonce&&r.stage===payload.stage);
     if(attempt?.status==='started')await writeAttempt(context,payload.stage,'uncertain').catch(()=>{});throw error;
    }
-  })(),'拥有者'+payload.stage);ownerStages.set(key,{fingerprint,promise});return promise;
+  })();ownerStages.set(key,{fingerprint,promise});promise.finally(()=>{if(ownerStages.get(key)?.promise===promise)ownerStages.delete(key);}).catch(()=>{});return promise;
  }
  function persistent(context,state){
   gm();const record=basicClaim(context.actor,context.claim.nonce,context.claim.claimKey);
@@ -141,8 +150,24 @@ export function createDisruptPreyExecutor({game,fromUuid=globalThis.fromUuid,Hoo
   let value;if(context.user===game.user)value=await ownerRoll(payload,gmUser);
   else{
    if(!socket?.executeAsUser)throw fail('缺少拥有者原生投骰通讯');
-   const response=await deadline(socket.executeAsUser('disrupt-prey:roll',context.user.id,payload),'拥有者RPC');gm();
-   if(!response?.ok)throw fail(response?.error??'拥有者没有确认原生卡');value=response.value;
+   const registrations=[],requester=game.user;
+   const read=()=>{
+    gm();if(game.user!==requester)throw fail('原GM请求客户端已改变');
+    const record=basicClaim(context.actor,context.claim.nonce,context.claim.claimKey);
+    if(!record||!same(record.claim,context.claim))throw fail('拥有者执行期间持久认领已变');stageReady(record,stage,payload.checkId);
+    const attempts=(context.actor.flags?.[MODULE_ID]?.disruptPreyExecutions?.records??[]).filter(r=>r.nonce===context.claim.nonce&&r.stage===stage);
+    if(attempts.length>1||attempts[0]&&(!same(attempts[0],context.claim)||!['started','done'].includes(attempts[0].status)))throw fail('原拥有者阶段记录不唯一或未确认');
+    if(!isCurrentDisruptToken(context.token,game)||context.token.actor!==context.actor||!isCurrentDisruptToken(context.target,game)||context.target.actor.uuid!==context.claim.targetActorUuid||context.target.actor.id!==context.claim.targetActorId)throw fail('原生结果等待期间来源或目标已变');
+    if(attempts[0]?.status==='done'){if(!bounded(attempts[0].messageId))throw fail('原拥有者完成记录没有准确卡ID');return {messageId:attempts[0].messageId};}
+    if(!context.user.active||game.users.get(context.user.id)!==context.user||!context.actor.testUserPermission(context.user,'OWNER'))throw fail('拥有者已离线或原来源已变');
+    return null;
+   };
+   if(!Hooks?.on||!Hooks.off)throw fail('缺少准确拥有者阶段观察接口');
+   let resolveSaved,rejectSaved;const saved=new Promise((resolve,reject)=>{resolveSaved=resolve;rejectSaved=reject}),inspect=()=>{try{const done=read();if(done)resolveSaved(done)}catch(error){rejectSaved(error)}};
+   for(const event of ['updateActor','updateUser','userConnected','deleteActor','deleteItem','deleteToken','updateChatMessage','deleteChatMessage'])registrations.push([event,Hooks.on(event,inspect)]);
+   const reply=Promise.resolve().then(()=>socket.executeAsUser('disrupt-prey:roll',context.user.id,payload)).then(response=>{if(!response?.ok)throw fail(response?.error??'拥有者没有确认原生卡');return waitFor(read,'updateActor',actor=>actor===context.actor,'准确拥有者完成阶段');});
+   inspect();
+   try{value=await Promise.race([saved,reply]);}finally{for(const [event,id]of registrations)Hooks.off(event,id);}
   }
   gm();const message=await messageById(value?.messageId);gm();cardProof(message,context.claim,stage);return message;
  }

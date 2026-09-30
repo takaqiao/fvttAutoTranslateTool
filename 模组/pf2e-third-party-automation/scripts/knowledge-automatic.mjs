@@ -12,7 +12,7 @@ export function automaticKnowledgeChoices(actor,item){
  if(item?.actor?.uuid!==actor?.uuid||!hasSource(item,AUTOMATIC_KNOWLEDGE_SOURCE))throw Error('耳熟能详专长来源不匹配。');
  const choices=[...new Set(values(actor.items).filter(i=>hasSource(i,ASSURANCE_SOURCE)).map(assuranceSkill))].filter(slug=>{const stat=actor.skills?.[slug];return stat?.rank>=2&&(recallSkills.has(slug)||stat.lore);}).map(slug=>({value:slug,label:actor.skills[slug].label??slug}));
  const selected=item.flags?.[MODULE_ID]?.knowledge?.automaticSkill??item.flags?.system?.rulesSelections?.automaticKnowledge??item.flags?.pf2e?.rulesSelections?.automaticKnowledge;
- if(selected&&!choices.some(c=>c.value===selected))throw Error('耳熟能详的固定技能必须为专家以上且具有相应 Assurance。');
+ if(selected&&!choices.some(c=>c.value===selected))throw Error('耳熟能详的固定技能必须为专家以上且具有相应驾轻就熟。');
  return {choices,statistic:selected??(choices.length===1?choices[0].value:null)};
 }
 export function automaticKnowledgeRound(game){const combat=game.combat;if(!combat?.started||!Number.isInteger(combat.round))throw Error('耳熟能详需要已开始的遭遇以记录每轮一次。');return `${combat.uuid??combat.id}:${combat.round}`;}

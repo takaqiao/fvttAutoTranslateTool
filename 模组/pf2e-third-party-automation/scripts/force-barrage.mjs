@@ -3,6 +3,7 @@ import {isActiveGM} from './native-context.mjs';
 import {assessForceBarrageCast,validateForceBarrageTargets,validateForceBarrageAllocation} from './force-barrage-rules.mjs';
 import {loadForceBarrageWorkbench} from './force-barrage-workbench-compat.mjs';
 import {createForceBarrageLedger} from './force-barrage-ledger.mjs';
+import {manualDamageRoll as rollManualDamage,manualDamagePrivacy} from './manual-native-roll.mjs';
 
 const RPC='force-barrage:ledger',PROOF='force-barrage:proof';
 const operations=new Set(['claim','startCast','bindCast','startTarget','recordRoll','beginPublication','finishPublication','uncertain','finishWithoutDamage']);
@@ -30,7 +31,7 @@ async function chooseAllocation({rank,targets,adapter}){
 
 /** Call-local original Cast bridge. Native payment and Workbench arithmetic are
  * separate awaited capabilities; neither is inferred from a slot delta/card. */
-export function createForceBarrageBridge({game,fromUuid=globalThis.fromUuid,nativeCasts,choose=chooseAllocation,loadWorkbench=loadForceBarrageWorkbench,assess=assessForceBarrageCast,validateTargets=validateForceBarrageTargets,getContext=originalContext,randomId=()=>globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.randomUUID(),onError=()=>{},ledger=createForceBarrageLedger({game,fromUuid,withActorResourceLock:nativeCasts.withActorResourceLock})}={}){
+export function createForceBarrageBridge({game,fromUuid=globalThis.fromUuid,nativeCasts,manualDamageRoll=rollManualDamage,choose=chooseAllocation,loadWorkbench=loadForceBarrageWorkbench,assess=assessForceBarrageCast,validateTargets=validateForceBarrageTargets,getContext=originalContext,randomId=()=>globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.randomUUID(),onError=()=>{},ledger=createForceBarrageLedger({game,fromUuid,withActorResourceLock:nativeCasts.withActorResourceLock})}={}){
  const scopes=new Map(),byItem=new Map();let socket,installed=false;
  function reportFailure(s,error){
   if(s?.errorReported)return;if(s)s.errorReported=true;
@@ -110,7 +111,10 @@ export function createForceBarrageBridge({game,fromUuid=globalThis.fromUuid,nati
     publishTarget:async({roll,messageData,targetUuid})=>{
      requireScope(s);if(!s.record||!['paid','producing'].includes(s.stage))throw Error('分弹付款尚未绑定。');s.stage='producing';
      const allocation=allocations.find(a=>a.targetUuid===targetUuid);if(!allocation||allocation.count<1)throw Error('无效的分弹目标。');
-     await call(s,'startTarget',{targetUuid});requireScope(s);await roll.evaluate();const rollJSON=roll.toJSON();await call(s,'recordRoll',{targetUuid,rollJSON});
+     await call(s,'startTarget',{targetUuid});requireScope(s);roll=await manualDamageRoll({game,roll,messageMode:'public'});requireScope(s);
+     if(!roll)throw Error('已取消本次目标的伤害投骰；原施法已支付，不会自动重新施法。');
+     const privacy=manualDamagePrivacy(roll);if(privacy&&(privacy.messageMode!=='public'||privacy.blind||privacy.whisper.length))throw Error('本次分弹固定为公开模式，未发布伤害；原施法已支付，不会自动重试。');
+     const rollJSON=roll.toJSON();await call(s,'recordRoll',{targetUuid,rollJSON});
      const flags={...messageData.flags};delete flags['pf2e-toolbelt.targetHelper.targets'];
      flags['pf2e-toolbelt']={...flags['pf2e-toolbelt'],targetHelper:{...flags['pf2e-toolbelt']?.targetHelper,targets:[targetUuid]}};
      flags.pf2e={...flags.pf2e,origin:{...flags.pf2e?.origin,uuid:item.uuid,actor:actor.uuid,type:'spell',castRank:s.rank}};

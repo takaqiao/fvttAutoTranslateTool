@@ -13,7 +13,7 @@ export function createMetapowerObserver({request,select=async()=>({}),captureInp
    const payload={actorUuid:actor.uuid,itemUuid:item?.uuid??null,nonce:id(),selection,entry,clientId,clientSequence:++clientSequence};
    const receipt=await request('begin',{...payload,startNative:true});
    const authorized=receipt.status==='started'&&receipt.nativeStartAuthorized===true;
-   if(!authorized&&receipt.status!=='reserved')throw Error('This invocation already ran; native execution will not be replayed.');
+   if(!authorized&&receipt.status!=='reserved')throw Error('此操作已执行；不会重复执行原生操作。');
    const scope={receipt,messages:[],item,actor,input};
    let started=authorized,finished=false;
    try{
@@ -35,7 +35,7 @@ export function createMetapowerObserver({request,select=async()=>({}),captureInp
    const scope=scopes.get(pf?.origin?.uuid)??(pf?.context?.type==='self-effect'?[...scopes.values()].find(s=>s.actor.id===data.speaker?.actor&&s.item.id===pf.context.item):null),itemUuid=scope?.item?.uuid;
    if(!scope||data.speaker?.actor!==scope.actor.id||data.rolls?.length||data.flags?.pf2e?.context?.type==='damage-roll')return data;
    const prior=data.flags?.[MODULE_ID]?.metapowerUse;
-   if(prior&&prior.nonce!==scope.receipt.nonce)throw Error('A copied card cannot become a new native metapower use.');
+   if(prior&&prior.nonce!==scope.receipt.nonce)throw Error('复制的聊天卡不能作为新的原生威能调整使用。');
    data.flags??={};data.flags[MODULE_ID]={...data.flags[MODULE_ID],metapowerUse:{nonce:scope.receipt.nonce,actorUuid:scope.actor.uuid,itemUuid, snapshot:scope.receipt.snapshot??null,kind:scope.receipt.kind??null}};
    if(Array.isArray(scope.input.targetUuids))data.flags[MODULE_ID].usageInput={...data.flags[MODULE_ID].usageInput,targetUuids:structuredClone(scope.input.targetUuids)};
    return data;

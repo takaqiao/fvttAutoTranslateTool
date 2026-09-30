@@ -56,7 +56,7 @@ function fixture({answer='use',eligible=true,createMessage=false,callback=true}=
 test('eligible original failure uses original feat once, keeps worse new native roll, no bonus/reaction and delivers once',async()=>{
  const f=fixture(),reaction=copy(f.actor.flags);const result=await f.run();
  assert.equal(result,f.rolls[1]);assert.equal(f.nativeCalls.length,2);assert.equal(f.prompts.length,1);assert.equal(f.callbacks.length,1);assert.equal(f.callbacks[0][0],result);assert.equal(f.callbacks[0][1],'criticalFailure');
- assert.equal(f.nativeCalls[1].check,f.check);assert.equal(f.nativeCalls[1].context.isReroll,true);assert.equal(f.nativeCalls[1].context.skipDialog,true);assert.deepEqual(f.check.modifiers,[{slug:'native',modifier:5}]);
+ assert.equal(f.nativeCalls[1].check,f.check);assert.equal(f.nativeCalls[1].context.isReroll,true);assert.equal(f.nativeCalls[1].context.skipDialog,false);assert.deepEqual(f.check.modifiers,[{slug:'native',modifier:5}]);
  assert.deepEqual(f.actor.flags,reaction);assert.equal(f.item.system.frequency.value,0);assert.equal(f.calls.filter(c=>c[0]==='originalUse').length,1);assert.equal(f.record.status,'callback-returned');assert.equal(f.authorized,null);
  assert.deepEqual(f.calls.filter(c=>['startRolling','recordResult','beginDelivery','finishDelivery'].includes(c[0])).map(c=>c[0]),['startRolling','recordResult','beginDelivery','finishDelivery']);
  assert.equal(f.published.length,0);assert.ok(f.callbacks[0][2] instanceof Draft);assert.equal(f.rolls[1].options.halflingLuckNonce,f.record.nonce);assert.equal(f.callbacks[0][2].flags.pf2e.context.halflingLuckNonce,f.record.nonce);

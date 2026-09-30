@@ -1,5 +1,6 @@
 import {MODULE_ID} from './rules.mjs';
 import {withDamageMessageTarget} from './damage-message-targets.mjs';
+import {manualDamageRoll as rollManualDamage,manualDamagePrivacy} from './manual-native-roll.mjs';
 
 const RANGED='pf2e-ranged-combat';
 const SOURCE=Object.freeze({
@@ -57,7 +58,7 @@ function inReach(companion,bearToken,target){
  return !origin.checkCollision(other.center,{origin:origin.center,type:'move',mode:'any'});
 }
 
-export function createCompanionAutomation({game,fromUuid=globalThis.fromUuid,wrapStrike,onError=()=>{}}={}){
+export function createCompanionAutomation({game,fromUuid=globalThis.fromUuid,wrapStrike,manualDamageRoll=rollManualDamage,onError=()=>{}}={}){
  const queues=new Map();let registered=false,socket=null;
  const serial=(key,fn)=>{const task=(queues.get(key)??Promise.resolve()).catch(()=>{}).then(fn);queues.set(key,task);task.finally(()=>{if(queues.get(key)===task)queues.delete(key)}).catch(()=>{});return task};
  const resolveAction=item=>['action','feat'].includes(item?.type)&&sourceOf(item)===SOURCE.support?'companion:bear-support':null;
@@ -118,6 +119,7 @@ export function createCompanionAutomation({game,fromUuid=globalThis.fromUuid,wra
 
  async function handleAttack(message){
   if(!authority(game)||!message?.id||ownFlags(message).usageGenerated||!message.isCheckRoll)return;
+  const requester=game.user;
   const context=message.flags?.pf2e?.context,origin=message.flags?.pf2e?.origin;
   if(context?.type!=='attack-roll'||!['success','criticalSuccess'].includes(context.outcome)||!['weapon','melee'].includes(origin?.type??message.item?.type))return;
   // Weapon skill manoeuvres and spell attacks do not trigger a Strike benefit.
@@ -141,8 +143,12 @@ export function createCompanionAutomation({game,fromUuid=globalThis.fromUuid,wra
    const dice=supportItem.system.traits?.otherTags?.includes('support-benefit:bear')?2:1;
    // Claim before emitting: failures after message creation must never replay damage.
    await effect.update({[`flags.${MODULE_ID}.processed`]:[...(flags.processed??[]),message.id]});
-   const roll=await new DamageRoll(`${dice}d8[slashing]`).evaluate();
-   return roll.toMessage(withDamageMessageTarget({speaker:globalThis.ChatMessage.getSpeaker({actor:companion,token:bearToken}),flavor:'熊支援',whisper:message.whisper??[],blind:message.blind??false,flags:{[MODULE_ID]:{usageGenerated:true,kind:'bear-support-damage',supportMessageId:flags.sourceMessageId,attackMessageId:message.id},pf2e:{origin:{uuid:supportItem.uuid,type:'action',actor:companion.uuid},context:{type:'damage-roll',domains:['damage'],options:['origin:action:slug:bear-support-benefit'],target:{actor:target.actor.uuid,token:target.uuid}}}}},target.uuid));
+   const targetActor=target.actor;
+   const roll=await manualDamageRoll({game,roll:new DamageRoll(`${dice}d8[slashing]`)});if(!roll)return;
+   const [currentTarget,currentBear]=await Promise.all([fromUuid(target.uuid),fromUuid(bearToken.uuid)]);
+   if(!authority(game)||game.user!==requester||requester?.active===false||game.messages?.get(message.id)!==message||game.actors.get(message.speaker.actor)!==master||game.actors.get(master.flags?.[RANGED]?.animalCompanionId)!==companion||!master.testUserPermission(user,'OWNER')||!supports(companion).includes(effect)||isExpired(ownFlags(effect),game)||!ownFlags(effect).processed?.includes(message.id)||currentTarget!==target||target.actor!==targetActor||currentBear!==bearToken||bearToken.actor!==companion||!values(companion.items).includes(supportItem))throw Error('熊支援投骰窗口期间主GM或原来源已改变，尚未发布支援伤害。');
+   const privacy=manualDamagePrivacy(roll,message);
+   return roll.toMessage(withDamageMessageTarget({speaker:globalThis.ChatMessage.getSpeaker({actor:companion,token:bearToken}),flavor:'熊支援',whisper:privacy?.whisper??message.whisper??[],blind:privacy?.blind??message.blind??false,flags:{[MODULE_ID]:{usageGenerated:true,kind:'bear-support-damage',supportMessageId:flags.sourceMessageId,attackMessageId:message.id},pf2e:{origin:{uuid:supportItem.uuid,type:'action',actor:companion.uuid},context:{type:'damage-roll',domains:['damage'],options:['origin:action:slug:bear-support-benefit'],target:{actor:target.actor.uuid,token:target.uuid}}}}},target.uuid),privacy?{messageMode:privacy.messageMode}:{});
   });
  }
 

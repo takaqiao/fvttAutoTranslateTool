@@ -2,6 +2,7 @@ import {MODULE_ID,hasSource} from './rules.mjs';
 import {SerialActions} from './runtime.mjs';
 import {isActiveGM} from './native-context.mjs';
 import {shieldEncounter} from './reaction-budget.mjs';
+import {nativeRollEvent} from './manual-native-roll.mjs';
 
 export const DISARMING_BLOCK_SOURCE='Compendium.pf2e.feats-srd.Item.dSSwRyuhKTq1VubX';
 const TITAN='Compendium.pf2e.feats-srd.Item.KxaYlC50zzHysJj8',BONUS='Compendium.pf2e.other-effects.Item.EpvyTaklBQAOr1eT',OFF_GUARD='Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg';
@@ -141,7 +142,7 @@ export function createDisarmingBlock({game,canvas=globalThis.canvas,fromUuid=glo
   if(origin?.uuid!==r.tokenUuid||origin?.actor?.uuid!==actor.uuid||target?.uuid!==r.attackerTokenUuid||target?.actor?.uuid!==d.target.uuid)throw Error('原生缴械将使用其他Token，本次准确格挡目标无法绑定，未掷骰。');
   const native=game.pf2e.actions.get('disarm');if(!native?.toActionVariant)throw Error('缺少可等待的原生Disarm动作。');
   rolling.add(nonce);
-  const result=await native.toActionVariant({cost:'free'}).use({actors:[actor],target:d.targetToken.object,multipleAttackPenalty:r.map,rollOptions:[marker(nonce),disarmWeaponOption(r.weaponUuid),'skip-handling-message'],event:{ctrlKey:false,metaKey:false,shiftKey:game.user.settings?.showCheckDialogs??true}});
+  const result=await native.toActionVariant({cost:'free'}).use({actors:[actor],target:d.targetToken.object,multipleAttackPenalty:r.map,rollOptions:[marker(nonce),disarmWeaponOption(r.weaponUuid),'skip-handling-message'],event:nativeRollEvent(game,'check')});
   const card=result?.[0]?.message;if(!card)return {cancelled:true};
   if(!checkProof(card,r))throw Error('原生缴械返回卡无法与本次武器认领核对。');return {checkId:card.id};
  }

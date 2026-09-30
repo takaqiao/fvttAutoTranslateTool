@@ -1,4 +1,5 @@
 import {createElectricityLedger,ELECTRICITY_SOURCES as S} from '../scripts/eldamon-electricity.mjs';
+import {createElectricityReceiptIndex} from '../scripts/eldamon-electricity-receipts.mjs';
 const ID='pf2e-third-party-automation';
 function fixture(){
  const docs=new Map(),gm={id:'gm',isGM:true},owner={id:'owner'},users=new Map([['gm',gm],['owner',owner]]);users.activeGM=gm;
@@ -19,7 +20,8 @@ function fixture(){
  const power=item(caster,'power',S.surge,{type:'feat'}),receipt={nonce:'channel',status:'committed',sourceUuid:S.surge,actorUuid:caster.uuid,userId:owner.id,itemUuid:power.uuid,messageUuid:'ChatMessage.channel',powerId:'electric-surge',selection:{discharge:false,targetUuids:[tokens[1].uuid]},snapshot:{kind:'normal'}};
  const card={id:'channel',uuid:receipt.messageUuid,author:owner,speaker:{actor:caster.id,scene:'s',token:caster.id},flags:{pf2e:{origin:{uuid:power.uuid}},[ID]:{metapowerUse:{nonce:receipt.nonce,actorUuid:caster.uuid,itemUuid:power.uuid}}}};
  caster.flags[ID]={metapower:{receipts:{channel:receipt}}};game.messages.set(card.id,card);docs.set(card.uuid,card);
- const ledger=()=>createElectricityLedger({game,fromUuid:async id=>docs.get(id),reactionAvailable:()=>true});
+ const receipts=createElectricityReceiptIndex({game,prefix:`${ID}:electricity-apply:`});receipts.seed();
+ const ledger=()=>createElectricityLedger({game,fromUuid:async id=>docs.get(id),receiptMessages:receipts.values,reactionAvailable:()=>true});
  function source(kind='pure',targetUuids=[tokens[1].uuid]){
   const nonce=`source${++sequence}`,m={id:nonce,uuid:`ChatMessage.${nonce}`,rolls:[{options:{[ID]:{electricitySource:{nonce}}},instances:[{type:'electricity',total:13},...(kind==='mixed'?[{type:'slashing',total:8}]:[])]}],flags:{pf2e:{context:{type:'damage-roll'}},[ID]:{electricitySource:{nonce,effectKey:`channel:${caster.uuid}:channel`,targetUuids}}}};
   game.messages.set(m.id,m);docs.set(m.uuid,m);return m;
@@ -28,7 +30,7 @@ function fixture(){
   const payload={nonce,actorUuid:a.uuid,tokenUuid:`Scene.s.Token.${a.id}`,sourceMessageUuid:m.uuid,sourceNonce:m.id,sourceItemUuid:power.uuid,rollIndex:0,kind,effectKey:m.flags[ID].electricitySource.effectKey};
   await ledger().beginDamage(payload,gm);
   const r={id:`receipt${++sequence}`,uuid:`ChatMessage.receipt${sequence}`,author:gm,speaker:{actor:a.id,scene:'s',token:a.id},flags:{pf2e:{context:{type:'damage-taken',options:[`${ID}:electricity-apply:${nonce}`]},origin:{uuid:power.uuid},appliedDamage:amount?{uuid:a.uuid,isHealing:false,updates:[{path:'system.attributes.hp.value',value:Math.min(4,amount)}]}:null},[ID]:{electricityApplied:{nonce,amount}}}};
-  game.messages.set(r.id,r);docs.set(r.uuid,r);return {payload,receipt:r,finish:()=>ledger().finishDamage({actorUuid:a.uuid,nonce,receiptUuid:r.uuid},gm)};
+  game.messages.set(r.id,r);docs.set(r.uuid,r);receipts.remember(r);return {payload,receipt:r,finish:()=>ledger().finishDamage({actorUuid:a.uuid,nonce,receiptUuid:r.uuid},gm)};
  }
  return {docs,game,gm,owner,scene,combat,caster,target,other,outsider,tokens,power,receipt,card,ledger,item,source,damage,channel:{actorUuid:caster.uuid,nonce:receipt.nonce,messageUuid:card.uuid}};
 }

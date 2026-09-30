@@ -35,21 +35,21 @@ test('widen geometry handles thresholds and rejects duration and nonarea',()=>{
  assert.equal(typeof api.widenDistance,'function');
  for(const [type,distance,expected] of [['burst',5,5],['burst',10,15],['burst',15,20],['cone',15,20],['cone',20,30],['line',15,20],['line',20,30],['emanation',20,20],['range',40,40]])assert.equal(api.widenDistance({type,distance,hasDuration:false}),expected);
  assert.equal(api.widenDistance({type:'line',distance:20,hasDuration:true}),20);
- assert.throws(()=>api.widenDistance({type:'line',distance:-5}),/distance/i);
+ assert.throws(()=>api.widenDistance({type:'line',distance:-5}),/范围/);
 });
 test('surge uses selected level-legal base before Widen exactly once',()=>{
  assert.deepEqual(snapshot('surge','widen',{selection:{baseDistance:30}}).area,{type:'line',baseDistance:30,distance:40,hasDuration:false});
  assert.equal(snapshot('surge','widen',{selection:{discharge:true,baseDistance:60}}).area.distance,70);
  assert.equal(snapshot('surge','widen',{level:1,selection:{discharge:true}}).area.distance,50);
  assert.equal(snapshot('surge','widen',{level:17,selection:{baseDistance:60}}).area.distance,70);
- assert.throws(()=>snapshot('surge','widen',{level:5,selection:{baseDistance:40}}),/legal|distance/i);
- assert.throws(()=>snapshot('surge','widen',{level:17,selection:{baseDistance:70}}),/legal|distance/i);
+ assert.throws(()=>snapshot('surge','widen',{level:5,selection:{baseDistance:40}}),/范围|不符合/);
+ assert.throws(()=>snapshot('surge','widen',{level:17,selection:{baseDistance:70}}),/范围|不符合/);
 });
 test('anvil optional discharge cone is selected independently of secondary condition duration',()=>{
  assert.equal(snapshot('anvil','widen').area.distance,40);
  assert.equal(snapshot('anvil','widen',{selection:{discharge:true,baseDistance:50}}).area.distance,60);
  assert.equal(snapshot('anvil','widen',{selection:{discharge:true,baseDistance:60}}).area.distance,70);
- assert.throws(()=>snapshot('anvil','widen',{selection:{discharge:true,baseDistance:65}}),/legal|distance/i);
+ assert.throws(()=>snapshot('anvil','widen',{selection:{discharge:true,baseDistance:65}}),/范围|不符合/);
  for(const id of ['static','shot','chain','retributive','voltage'])assert.equal(snapshot(id,'widen').area,null);
 });
 test('snapshot freezes source traits, associated traits and exact Disruptive ownership without mutating actors/items',()=>{
@@ -71,9 +71,9 @@ test('Disruptive coefficient matches target creature traits only and preserves s
 });
 test('uncertain policies require explicit input only for dependent branches',()=>{
  assert.equal(typeof api.metapowerActionCost,'function');assert.equal(api.metapowerActionCost('siphoning'),1);
- assert.throws(()=>snapshot('voltage'),/policy|voltage/i);
+ assert.throws(()=>snapshot('voltage'),/策略|高电压/);
  const unaffected=snapshot('voltage','siphoning',{policy:{highVoltage:'unaffected'}});assert.equal(unaffected.siphon.applies,false);assert.deepEqual(unaffected.suppressEffects,[]);assert.equal(api.siphonMultiplier(unaffected,[]),1);
- for(const id of ['surge','anvil','shot','retributive'])assert.throws(()=>snapshot(id,'siphoning',{selection:{discharge:true}}),/policy|discharge/i);
+ for(const id of ['surge','anvil','shot','retributive'])assert.throws(()=>snapshot(id,'siphoning',{selection:{discharge:true}}),/策略|放电/);
  assert.equal(snapshot('surge','siphoning',{selection:{discharge:true,baseDistance:60},policy:{dischargeNonDamage:'remove'}}).area.distance,30);
  assert.equal(snapshot('surge','siphoning',{selection:{discharge:true,baseDistance:60},policy:{dischargeNonDamage:'retain'}}).area.distance,60);
  assert.equal(snapshot('anvil','siphoning',{selection:{discharge:true,baseDistance:60},policy:{dischargeNonDamage:'remove'}}).area.distance,30);
@@ -83,12 +83,12 @@ test('uncertain policies require explicit input only for dependent branches',()=
 test('Widen costs one action and rejects policy overrides that conflict with its source',()=>{
  assert.equal(api.metapowerActionCost('widen'),1);
  assert.equal(api.metapowerActionCost('widen',{widenActionCost:1}),1);
- for(const cost of [0,2,3,'free',null])assert.throws(()=>api.metapowerActionCost('widen',{widenActionCost:cost}),/cost|one action/i);
+ for(const cost of [0,2,3,'free',null])assert.throws(()=>api.metapowerActionCost('widen',{widenActionCost:cost}),/消耗|一个动作/);
 });
 test('Siphoning removes reviewed added effects while preserving discharge cost, native outcome branches and unknown source boundary',()=>{
  const s=snapshot('static','siphoning',{selection:{discharge:true}});assert.equal(s.dischargeCost,1);assert.equal(s.siphon.applies,true);assert.deepEqual(s.suppressEffects,['charged','shocked']);assert.equal(s.outcomeMode,'attack-with-fixed-failure');
  assert.equal(snapshot('retributive').outcomeMode,'special-save');assert.equal(snapshot('chain').damageBasis,'trigger-damage-halved');
- assert.throws(()=>api.buildChannelSnapshot({kind:'siphoning',actor:actor(),item:{sourceId:P+'unreviewed'}}),/unsupported|reviewed/i);
+ assert.throws(()=>api.buildChannelSnapshot({kind:'siphoning',actor:actor(),item:{sourceId:P+'unreviewed'}}),/不支持|核验/);
 });
 test('Electric Shot range advances at 7, 11, 15 and 19 with its level cap',()=>{
  for(const [level,expected] of [[1,40],[6,40],[7,60],[10,60],[11,80],[14,80],[15,100],[18,100],[19,120],[20,120]]){
@@ -104,7 +104,7 @@ test('Electric Shot discharge policy scales the level-adjusted base without chan
   assert.equal(retain.dischargeCost,1);assert.equal(remove.dischargeCost,1);
   assert.equal(snapshot('shot','widen',{level,selection:{discharge:true}}).range,discharged);
  }
- assert.throws(()=>snapshot('shot','siphoning',{level:7,selection:{discharge:true}}),/policy|discharge/i);
+ assert.throws(()=>snapshot('shot','siphoning',{level:7,selection:{discharge:true}}),/策略|放电/);
 });
 test('Reactive Chain has no new Charged effect to suppress and discharge still costs one',()=>{
  const normal=snapshot('chain'),discharged=snapshot('chain','siphoning',{selection:{discharge:true}});
@@ -125,7 +125,7 @@ test('table policy keeps discharge range and save downgrade independently of rem
 });
 
 test('specific discharge overrides reject unknown values and do not affect ordinary Widen',()=>{
- for(const field of ['dischargeRange','dischargeSaveDowngrade'])assert.throws(()=>snapshot('shot','siphoning',{selection:{discharge:true},policy:{dischargeNonDamage:'remove',[field]:'guess'}}),/policy/i);
+ for(const field of ['dischargeRange','dischargeSaveDowngrade'])assert.throws(()=>snapshot('shot','siphoning',{selection:{discharge:true},policy:{dischargeNonDamage:'remove',[field]:'guess'}}),/策略/);
  const widened=snapshot('shot','widen',{selection:{discharge:true},policy:{dischargeNonDamage:'remove',dischargeRange:'remove'}});assert.equal(widened.range,80);
 });
 
@@ -135,5 +135,5 @@ test('follow-up area ruling retains the selected discharged area without restori
   const channel=snapshot(id,'siphoning',{selection:{discharge:true,baseDistance:60},policy});
   assert.equal(channel.area.distance,60);assert.equal(channel.dischargeCost,1);assert.ok(channel.suppressEffects.includes('charged'));assert.deepEqual(channel.policy,policy);
  }
- assert.throws(()=>snapshot('surge','siphoning',{selection:{discharge:true},policy:{...policy,dischargeArea:'guess'}}),/policy/i);
+ assert.throws(()=>snapshot('surge','siphoning',{selection:{discharge:true},policy:{...policy,dischargeArea:'guess'}}),/策略/);
 });

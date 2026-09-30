@@ -23,7 +23,7 @@ test('paid Halfling Luck keeps a worse native roll with the original check and n
  for(const createMessage of [false,true]){
   const f=fixture(createMessage),result=await f.run();
   assert.equal(result,f.replacement);assert.equal(f.calls.length,2);assert.equal(f.calls[1].check,f.check);
-  assert.equal(f.calls[1].context.isReroll,true);assert.equal(f.calls[1].context.skipDialog,true);
+  assert.equal(f.calls[1].context.isReroll,true);assert.equal(f.calls[1].context.skipDialog,false);
   assert.equal(f.calls[1].context.options.has('fortune'),true);assert.equal(f.calls[1].context.options.has('check:reroll'),true);
   assert.equal(f.publications.length,createMessage?1:0);assert.equal(f.callbacks.length,1);assert.equal(f.callbacks[0][0],f.replacement);assert.equal(f.callbacks[0][1],'criticalFailure');
   assert.equal(f.args.context.outcome,'criticalFailure');assert.equal(f.args.context.isReroll,true);

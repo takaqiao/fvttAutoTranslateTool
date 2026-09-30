@@ -1,4 +1,5 @@
 import {MODULE_ID} from './rules.mjs';
+import {confirmManualFlatCheck} from './manual-native-roll.mjs';
 import {SerialActions} from './runtime.mjs';
 import {getSourceId,isActiveGM,upsertOwnedEffect} from './native-context.mjs';
 
@@ -90,9 +91,10 @@ export function createSocialAutomation({game,fromUuid=globalThis.fromUuid,choose
     const pf=message.flags?.pf2e??{},postInfo=Object.keys(pf).length===1&&pf.origin&&!pf.origin.sourceId;
     const patreonGate=game.modules?.get('patreon-v3')?.active&&postInfo&&['all','attack'].includes(game.settings?.get('patreon-v3','flatCheck'));
     if(!patreonGate){
+     if(!await confirmManualFlatCheck({label:'无需惊慌 · 耳聋听觉动作平检',dc:5}))return '已取消投骰，本次无需惊慌不产生效果。';
      if(!game.pf2e.Check?.roll||!game.pf2e.CheckModifier)throw Error('无法执行耳聋的原生DC 5听觉动作平检。');
      let total;
-     await game.pf2e.Check.roll(new game.pf2e.CheckModifier('no-cause-for-alarm-deafened',{modifiers:[]},[]),{actor,token:origin,type:'flat-check',domains:['flat-check'],dc:{value:5},options:new Set(['check:type:flat','action:no-cause-for-alarm']),skipDialog:true,createMessage:true},null,async roll=>{total=roll.total});
+     await game.pf2e.Check.roll(new game.pf2e.CheckModifier('no-cause-for-alarm-deafened',{modifiers:[]},[]),{actor,token:origin,type:'flat-check',domains:['flat-check'],dc:{value:5},options:new Set(['check:type:flat','action:no-cause-for-alarm']),skipDialog:false,event:null,createMessage:true},null,async roll=>{total=roll.total});
      if(!Number.isFinite(total))throw Error('耳聋的听觉动作平检未完成；本条使用不会自动重掷。');
      if(total<5)return '耳聋的DC 5听觉动作平检失败，本次无需惊慌不产生效果。';
     }
@@ -100,7 +102,7 @@ export function createSocialAutomation({game,fromUuid=globalThis.fromUuid,choose
    let checked;
    // No dc.slug/statistic and no target argument: the shared check cannot inherit
    // whichever creature the executing GM happened to select.
-   await statistic.roll({token:origin,item,action:'no-cause-for-alarm',dc:{value:targets[0].dc,visible:false},traits:TRAITS,extraRollOptions:['action:no-cause-for-alarm',...TRAITS.map(t=>`item:trait:${t}`)],skipDialog:true,createMessage:true,callback:async(roll,_outcome,card)=>{checked={roll,card}}});
+   await statistic.roll({token:origin,item,action:'no-cause-for-alarm',dc:{value:targets[0].dc,visible:false},traits:TRAITS,extraRollOptions:['action:no-cause-for-alarm',...TRAITS.map(t=>`item:trait:${t}`)],skipDialog:false,event:null,createMessage:true,callback:async(roll,_outcome,card)=>{checked={roll,card}}});
    if(!checked)throw Error('交涉检定未完成；本条使用不会自动重掷。');
    const {roll,card}=checked,context=card.flags?.pf2e?.context;
    const natural=roll.isDeterministic?roll.terms?.find(t=>t.constructor?.name==='NumericTerm')?.total:roll.dice?.find(d=>d.faces===20)?.total;

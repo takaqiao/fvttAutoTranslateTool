@@ -21,16 +21,16 @@ test('native Poison and First Aid receive exact actor/target, continuation and p
  assert.equal(calls.length,2);for(const [,args]of calls){assert.equal(args.actors[0].uuid,actor.uuid);assert.deepEqual(args.actors[0].getActiveTokens(),[healer]);assert.equal(args.target.uuid,patient.uuid);assert.deepEqual(args.target.getActiveTokens(),[target]);assert.deepEqual(args[M].metapowerContinuation,continuation);}
  assert.equal(calls[1][1].variant,'stabilize');
 });
-function detachedWorkbench({cancel=false,macroSource=null,clientId='owner'}={}){
+function detachedWorkbench({cancel=false,macroSource=null,clientId='owner',healingDialog,degree=2,earlyCheckAnimation=false}={}){
  let release;const gate=new Promise(resolve=>release=resolve),hooks=new Map(),cards=[],observed={};
  const Hooks={on(name,fn){hooks.set(fn,name);return fn;},off(_name,fn){hooks.delete(fn);},once(name,fn){const wrapped=(...args)=>{hooks.delete(wrapped);return fn(...args);};hooks.set(wrapped,name);return wrapped;},call(name,...args){for(const [fn,key]of [...hooks])if(key===name)fn(...args);}};
  const actor={id:'healer',uuid:'Actor.healer',skills:{}},patient={id:'patient',uuid:'Actor.patient'},healer={id:'h',uuid:'Scene.s.Token.h'},target={id:'t',uuid:'Scene.s.Token.t',actor:patient};healer.object={id:'h',actor};target.object={id:'t',actor:patient};
  const game={user:{id:clientId,targets:new Set([{id:'wrong'}]),getFlag:()=>true},system:{id:'pf2e'},settings:{get:()=>false},combats:{active:null},messages:new Map(),modules:new Map([['xdy-pf2e-workbench',{active:true}]]),packs:new Map()};
  // Foundry defines canvas.tokens as an immutable own layer property; a scope must not proxy over it directly.
  const canvas=Object.defineProperty({},'tokens',{value:{controlled:[{id:'wrong'}]},enumerable:true});
- actor.skills.medicine={async roll(args){observed.check=args;const form={addEventListener(_event,handler){observed.submit=handler;},removeEventListener(){}};Hooks.call('renderCheckModifiersDialog',{context:{options:new Set(args.extraRollOptions)}},[form]);await gate;if(cancel)return null;const roll={total:25,options:{degreeOfSuccess:2}},message={id:'native-check',author:game.user,async update(changes){this.flags[M]={medicWorkbench:changes['flags.'+M+'.medicWorkbench']};},speaker:{actor:actor.id},rolls:[roll],flags:{pf2e:{context:{type:'skill-check',outcome:'success',options:args.extraRollOptions,target:{actor:patient.uuid,token:target.uuid}}}}};game.messages.set(message.id,message);await args.callback(roll,'success',message);return roll;}};
+ actor.skills.medicine={async roll(args){observed.check=args;const form={addEventListener(_event,handler){observed.submit=handler;},removeEventListener(){}};Hooks.call('renderCheckModifiersDialog',{context:{options:new Set(args.extraRollOptions)}},[form]);await gate;if(cancel)return null;const outcome=['criticalFailure','failure','success','criticalSuccess'][degree],roll={total:25,options:{degreeOfSuccess:degree}},message={id:'native-check',author:game.user,async update(changes){this.flags[M]={medicWorkbench:changes['flags.'+M+'.medicWorkbench']};},speaker:{actor:actor.id},rolls:[roll],flags:{pf2e:{context:{type:'skill-check',outcome,options:args.extraRollOptions,target:{actor:patient.uuid,token:target.uuid}}}}};game.messages.set(message.id,message);if(earlyCheckAnimation)Hooks.call('diceSoNiceRollComplete',message.id);await args.callback(roll,outcome,message);return roll;}};
  class ChatMessage{static #speaker={actor:actor.id};static getSpeaker(){return this.#speaker;}static async create(data){const m={...data,id:`card${cards.length}`,author:game.user,rolls:data.rolls??data.roll??[],async update(changes){this.flags[M]={medicWorkbench:changes['flags.'+M+'.medicWorkbench']};}};cards.push(m);game.messages.set(m.id,m);return m;}}
- class DamageRoll{_total=8;async roll(){return this;}async toMessage(data){return ChatMessage.create(data);}}
+ class DamageRoll{_total=8;_evaluated=false;constructor(formula='(2d8)[healing]',data={},options={}){this.data=data;this.options=options;this._formula=formula;}toJSON(){return {formula:this._formula};}async roll(){this._evaluated=true;return this;}async toMessage(data){return ChatMessage.create(data);}}
  class CheckRoll{total=22;async roll(){return this;}}
  class Dialog{constructor(options){this.options=options;observed.dialog=this;}render(){return this;}}
  const macro={async execute(scope){observed.scope=scope;new scope.Dialog({buttons:{yes:{async callback(){// Workbench's actual outer callback intentionally does not await rollTreatWounds.
@@ -40,16 +40,16 @@ function detachedWorkbench({cancel=false,macroSource=null,clientId='owner'}={}){
   actor.items=[{type:'feat',slug:'battle-medicine'}];actor.itemTypes={feat:actor.items,effect:[],equipment:[{slug:'healers-toolkit',handsHeld:0}]};actor.system={details:{level:{value:5}}};actor.getRollOptions=()=>['self:type:character','self:trait:elf','self:effect:charged','feat:battle-medicine'];Object.assign(actor.skills.medicine,{rank:1,label:'medicine',modifiers:[{type:'proficiency',modifier:7}]});patient.items=[];patient.itemTypes={effect:[]};
   game.modules.set('dice-so-nice',{active:true});game.packs.set('xdy-pf2e-workbench.asymonous-benefactor-macros',{index:[]});
   const AsyncFunction=Object.getPrototypeOf(async function(){}).constructor;
-  macro.execute=async scope=>{observed.scope=scope;const globals={...scope,Hooks,event:null,fromUuid:async()=>({toObject:()=>({name:'Immunity',system:{tokenIcon:{},duration:{value:1,unit:'days'}},flags:{}})}),ui:{notifications:{warn:message=>{throw Error(message);},info(){}}},console:{log(){}},CONST:{CHAT_MESSAGE_STYLES:{ROLL:5,OTHER:0}}};return new AsyncFunction(...Object.keys(globals),macroSource)(...Object.values(globals));};
+  macro.execute=async scope=>{observed.scope=scope;const globals={Hooks,...scope,event:null,fromUuid:async()=>({toObject:()=>({name:'Immunity',system:{tokenIcon:{},duration:{value:1,unit:'days'}},flags:{}})}),ui:{notifications:{warn:message=>{throw Error(message);},info(){}}},console:{log(){}},CONST:{CHAT_MESSAGE_STYLES:{ROLL:5,OTHER:0}}};return new AsyncFunction(...Object.keys(globals),macroSource)(...Object.values(globals));};
  }
  game.packs.set('xdy-pf2e-workbench.asymonous-benefactor-macros-internal',{getDocuments:async()=>[macro]});
- let valid=true;const operation=createMedicNative({game,canvas,Dialog,ChatMessage,Hooks,CONFIG:{Dice:{rolls:[DamageRoll,CheckRoll]}}})({actor,healer,target,user:{id:'owner'},branch:'battle-medicine',continuation:{actorUuid:actor.uuid,cardId:'original',nonce:'nonce'},validate(){if(!valid)throw Error('expired');}});
+ let valid=true;const operation=createMedicNative({game,canvas,Dialog,ChatMessage,Hooks,CONFIG:{Dice:{rolls:[DamageRoll,CheckRoll]}},manualDamageRoll:async({roll})=>{observed.healingWindows=(observed.healingWindows??0)+1;const accepted=healingDialog?await healingDialog(roll):true;return accepted?roll.roll():null;}})({actor,healer,target,user:{id:'owner'},branch:'battle-medicine',continuation:{actorUuid:actor.uuid,cardId:'original',nonce:'nonce'},validate(){if(!valid)throw Error('expired');}});
  return {operation,observed,cards,game,canvas,Hooks,hooks,release,invalidate:()=>valid=false};
 }
 const flush=()=>new Promise(resolve=>setImmediate(resolve));
 const html={find:()=>({val(){return this;},prop(){return this;},trigger(){return this;}})};
 const wbPath=process.env.FVTT_WORKBENCH_MACRO??'';
-test('installed Workbench reads a locked native canvas layer and waits for its roll and Dice So Nice result', {skip:!existsSync(wbPath)},async()=>{
+test('installed Workbench reads a locked native canvas layer and publishes confirmed healing for its own DSN animation', {skip:!existsSync(wbPath)},async()=>{
  const f=detachedWorkbench({macroSource:readFileSync(wbPath,'utf8')});let done=false;f.operation.then(()=>done=true);await flush();
  const nodes={useBattleMedicine:{value:'1'},'dc-type':{value:'1'},modifier:{value:'0'}};
  const form={find(selector){const node=nodes[selector.match(/name="([^"]+)"/)?.[1]];return {0:node,length:node?1:0,val(value){if(value===undefined)return node?.value;if(node)node.value=value;return this;},prop(){return this;},trigger(){return this;}};}};
@@ -57,7 +57,7 @@ test('installed Workbench reads a locked native canvas layer and waits for its r
  // PF2e CheckContext copies extra options into both contextual actors. The native statistic already
  // supplies healer options; forwarding Workbench's self:* options would make the patient an elf too.
  assert.deepEqual(f.observed.check.extraRollOptions,['action:treat-wounds',`${M}:medic-workbench:nonce`]);
- f.release();await flush();assert.equal(done,false);assert.equal(f.cards.length,0);f.Hooks.call('diceSoNiceRollComplete');const result=await f.operation;
+ f.release();const result=await f.operation;assert.equal(done,true);assert.equal(f.cards.length,1);f.Hooks.call('diceSoNiceRollComplete','native-check');assert.equal(f.cards.length,1);
  assert.equal(result.status,'delegated');assert.equal(result.checkId,'native-check');assert.equal(result.resultId,f.cards[0].id);assert.equal(f.cards.length,1);assert.equal(f.cards[0].flags.treat_wounds_battle_medicine.healing,8);assert.equal(f.cards[0].flags[M].medicWorkbench.nonce,'nonce');assert.equal(f.cards[0].flags[M].medicWorkbench.branch,'battle-medicine');
 });
 test('installed unchanged Workbench Assurance binds its actual roll card before the treatment result',{skip:!existsSync(wbPath)},async()=>{
@@ -81,3 +81,48 @@ test('Workbench validates immediately before native submission and propagates ca
  assert.equal(result.status,'cancelled');assert.deepEqual(calls,[]);
 });
 test('Workbench refuses to open a player treatment on the GM client',async()=>{const f=detachedWorkbench({clientId:'gm'});const rejected=assert.rejects(f.operation,/操作者/);await flush();await f.observed.dialog?.options.buttons.no.callback();await rejected;assert.equal(f.observed.scope,undefined);});
+test('Workbench healing waits for manual dice confirmation and cancellation keeps its actual medical check',async()=>{
+ let confirm;const waiting=new Promise(resolve=>confirm=resolve),f=detachedWorkbench({healingDialog:()=>waiting});
+ await flush();await f.observed.dialog.options.buttons.yes.callback(html);f.release();await flush();
+ assert.equal(f.observed.check.skipDialog,false,'the medical check also uses its native modifier window');
+ const healing=f.observed.healReady();await flush();assert.equal(f.observed.healingWindows,1);assert.equal(f.cards.length,0);
+ confirm(false);await healing;const result=await f.operation;assert.equal(result.status,'cancelled');assert.equal(f.cards.length,0);assert.equal(f.game.messages.has('native-check'),true);assert.equal(f.hooks.size,0);
+});
+
+function actualWorkbenchForm(){
+ const nodes={useBattleMedicine:{value:'1'},'dc-type':{value:'1'},modifier:{value:'0'}};
+ return {find(selector){const node=nodes[selector.match(/name="([^"]+)"/)?.[1]];return {0:node,length:node?1:0,val(value){if(value===undefined)return node?.value;if(node)node.value=value;return this;},prop(){return this;},trigger(){return this;}}}};
+}
+
+for(const checkAnimation of ['early','late'])test(`actual Workbench ${checkAnimation} DSN cannot delay a manually confirmed healing card or duplicate it`,{skip:!existsSync(wbPath)},async()=>{
+ let confirm;const window=new Promise(resolve=>{confirm=resolve}),f=detachedWorkbench({macroSource:readFileSync(wbPath,'utf8'),healingDialog:()=>window});let result;
+ f.operation.then(value=>{result=value});await flush();await f.observed.dialog.options.buttons.yes.callback(actualWorkbenchForm());f.release();await flush();
+ assert.equal(f.observed.healingWindows,1);assert.equal(f.cards.length,0);assert.equal(result,undefined);
+ if(checkAnimation==='early')f.Hooks.call('diceSoNiceRollComplete','native-check');
+ confirm(true);await flush();await flush();
+ assert.equal(f.cards.length,1,'confirmed treatment publishes its own native card instead of waiting for another roll');assert.equal(result?.status,'delegated');
+ const message=f.cards[0];assert.equal(message.flags.treat_wounds_battle_medicine.healing,8);assert.equal(message.flags[M].medicWorkbench.checkId,'native-check');assert.equal(f.hooks.size,0);
+ f.Hooks.call('diceSoNiceRollComplete','native-check');f.Hooks.call('diceSoNiceRollComplete','unrelated');assert.equal(f.cards.length,1);
+});
+
+test('actual Workbench healing cancellation cannot leave a late DSN callback or publish from another roll',{skip:!existsSync(wbPath)},async()=>{
+ let confirm;const window=new Promise(resolve=>{confirm=resolve}),f=detachedWorkbench({macroSource:readFileSync(wbPath,'utf8'),healingDialog:()=>window});
+ await flush();await f.observed.dialog.options.buttons.yes.callback(actualWorkbenchForm());f.release();await flush();confirm(false);
+ assert.equal((await f.operation).status,'cancelled');await flush();assert.equal(f.game.messages.has('native-check'),true);assert.equal(f.cards.length,0);assert.equal(f.hooks.size,0);
+ assert.doesNotThrow(()=>f.Hooks.call('diceSoNiceRollComplete','unrelated'));assert.equal(f.cards.length,0);
+});
+
+test('actual Workbench zero-healing result only follows its own check animation and cleans its listener',{skip:!existsSync(wbPath)},async()=>{
+ const f=detachedWorkbench({macroSource:readFileSync(wbPath,'utf8'),degree:1});let result;f.operation.then(value=>{result=value});
+ await flush();await f.observed.dialog.options.buttons.yes.callback(actualWorkbenchForm());f.release();await flush();
+ assert.equal(f.observed.healingWindows,undefined);assert.equal(result,undefined);f.Hooks.call('diceSoNiceRollComplete','unrelated');await flush();assert.equal(result,undefined);assert.equal(f.cards.length,0);
+ f.Hooks.call('diceSoNiceRollComplete','native-check');assert.equal((await f.operation).status,'delegated');assert.equal(f.cards.length,1);assert.equal(f.cards[0].flags.treat_wounds_battle_medicine.dos,1);assert.equal(f.hooks.size,0);
+ f.Hooks.call('diceSoNiceRollComplete','native-check');assert.equal(f.cards.length,1);
+});
+
+test('actual Workbench zero-healing caches its exact animation before the native check callback',{skip:!existsSync(wbPath)},async()=>{
+ const f=detachedWorkbench({macroSource:readFileSync(wbPath,'utf8'),degree:1,earlyCheckAnimation:true});let result;f.operation.then(value=>{result=value});
+ await flush();await f.observed.dialog.options.buttons.yes.callback(actualWorkbenchForm());f.release();await flush();await flush();
+ assert.equal(result?.status,'delegated');assert.equal(f.cards.length,1);assert.equal(f.cards[0].flags[M].medicWorkbench.checkId,'native-check');assert.equal(f.hooks.size,0);
+ f.Hooks.call('diceSoNiceRollComplete','native-check');assert.equal(f.cards.length,1);
+});

@@ -47,7 +47,7 @@ test('draft Clock keeps its native +1 and the worse new roll, delivering only th
  assert.equal(f.published.length,0);assert.equal(f.calls.length,2);assert.equal(f.callbacks.length,1);assert.equal(result,f.replacement);
  const [roll,outcome,draft,event]=f.callbacks[0];assert.equal(roll,f.replacement);assert.equal(outcome,'criticalFailure');assert.equal(draft,f.drafts[1]);assert.equal(event,f.rerollEvent);assert.equal(draft.id,null);
  assert.deepEqual(draft.rolls,[f.replacement.toJSON()]);assert.match(draft.data.content,/old:8/);assert.match(draft.data.content,/new:5/);assert.equal(draft.flags[ID].reactionChecks.reaction,'clock');assert.deepEqual(draft.flags[ID].reactionChecks.previousRoll,f.original.toJSON());assert.equal(f.context.isReroll,true);
- assert.deepEqual(f.calls[1].check.modifiers.map(m=>[m.slug,m.modifier]),[['native',6],['turn-back-the-clock',1]]);assert.equal(f.calls[1].context.skipDialog,true);assert.equal(f.calls[1].context.isReroll,true);assert.equal(f.calls[1].context.rollTwice,false);assert.deepEqual(f.calls[1].context.substitutions,[]);assert.equal(f.calls[1].context.options.has('fortune'),true);
+ assert.deepEqual(f.calls[1].check.modifiers.map(m=>[m.slug,m.modifier]),[['native',6],['turn-back-the-clock',1]]);assert.equal(f.calls[1].context.skipDialog,false);assert.equal(f.calls[1].context.isReroll,true);assert.equal(f.calls[1].context.rollTwice,false);assert.deepEqual(f.calls[1].context.substitutions,[]);assert.equal(f.calls[1].context.options.has('fortune'),true);
 });
 
 test('draft Squawk updates the native draft roll and adjusted outcome before callback',async()=>{

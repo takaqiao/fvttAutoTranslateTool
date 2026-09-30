@@ -1,4 +1,5 @@
 import {MODULE_ID} from './rules.mjs';
+import {nativeRollEvent} from './manual-native-roll.mjs';
 
 export const defensiveAdvanceStrikeMarker=nonce=>`${MODULE_ID}:defensive-advance:${nonce}`;
 
@@ -27,7 +28,7 @@ export async function rollDefensiveAdvanceStrike({game,Hooks,actor,token,target,
   }catch(error){hookError=error;return false;}
  });
  try{
-  const roll=await current.strike.variants[receipt.map].roll({target:target.object,altUsage:current.usage??undefined,options:new Set(['action:defensive-advance','action:free',marker]),createMessage:true,callback:async(_roll,_outcome,message)=>{if(card&&card!==message)throw Error('同一列盾突进出现多个Strike结果。');card=message;},event:{ctrlKey:false,metaKey:false,shiftKey:false}});
+  const roll=await current.strike.variants[receipt.map].roll({target:target.object,altUsage:current.usage??undefined,options:new Set(['action:defensive-advance','action:free',marker]),createMessage:true,callback:async(_roll,_outcome,message)=>{if(card&&card!==message)throw Error('同一列盾突进出现多个Strike结果。');card=message;},event:nativeRollEvent(game,'check')});
   if(hookError)throw hookError;
   if(!roll&&!card)return null;
   return defensiveAdvanceStrikeProof(card,{game,actor,token,target,receipt,option:current});

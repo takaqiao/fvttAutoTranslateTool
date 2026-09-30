@@ -49,6 +49,11 @@ export function createSalubriousDamageGuard({game,messagePrivacy,getRollContext=
  function inspect(request,params=request.params){
   const user=gm(),{reactor,actor,item,token,target,check,message}=request,claim=claimOf(reactor,request.nonce);
   if(!claim||claim.state!=='applying'||claim.actorUuid!==reactor?.uuid||claim.tokenUuid!==token?.uuid||claim.itemUuid!==item?.uuid||claim.targetUuid!==target?.uuid||claim.targetActorUuid!==target?.actor?.uuid||!/^[A-Za-z0-9_-]{1,80}$/.test(claim.nonce??'')||claim.skill!=='occultism'||!Number.isFinite(claim.startedAt)||game.time.worldTime<claim.startedAt||game.time.worldTime>=claim.startedAt+3600)fail('没有准确且仍有效的应用认领');
+  if(request.explorationScope!==undefined){
+   const {activity,ctx}=request.explorationScope??{};
+   if(!activity||!isExplorationContext(ctx,activity.id)||activity.id!==claim.nonce||activity.actorUUID!==claim.actorUuid||activity.patientUUIDs?.length!==1||activity.patientUUIDs[0]!==claim.targetActorUuid||activity.startedAt!==claim.startedAt||activity.providerId!=='refocus'||activity.options?.threePecks!==true||activity.source?.type!=='coordinator'||activity.source.manual||user.id!==claim.userId||game.time.worldTime!==activity.endsAt||game.combat?.started)fail('缺少本次已确认的私有探索恢复上下文');
+   ctx.validate();
+  }
   assertSource({game,actor:reactor,item,token,user:game.users.get(claim.userId),privacy:claim.privacy});assertPatient({game,actor:reactor,token,target,allowImmune:true,user:game.users.get(claim.userId)});assertClaimPrivacy({game,claim,token,item,target,user:game.users.get(claim.userId)});
   if(actor?.uuid!==target.actor.uuid||actor.id!==target.actor.id||!treatmentTiers(reactor).some(t=>t.tier===claim.tier&&t.dc===claim.dc))fail('接收上下文或原神秘档位不符');
   const application=claim.application,execution=reactor.flags?.[MODULE_ID]?.salubriousKissExecutions?.find(entry=>entry.nonce===claim.nonce),pending=kissState(target.actor).pending;

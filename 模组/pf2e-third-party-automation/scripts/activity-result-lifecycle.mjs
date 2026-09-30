@@ -65,7 +65,7 @@ export function createActivityResultLifecycle({game,getRollContext=()=>null,onEr
     const used=hasApplication(card)||[...receipts.get(card.id)??[]].some(receipt=>hasApplication(game.messages.get(receipt)??{}));applied||=used;
     await card.update({[`flags.${ID}.activityResult`]:{status:used?'undo-required':'superseded',activityMessageId:activityId,previousCheckId:previous.messageId,keptCheckId:message.id}});
    }
-   const continuation=previous.type==='spell'?'已付款的法术可沿原法术卡继续；大成功时请核对法术倍伤和附加持续伤害。':'双重切割的精确伤害保留一次。';
+   const continuation=previous.type==='spell'?'已付款的法术可沿原法术卡继续；大成功时请核对法术倍伤和附加持续伤害。':'双重切割的精准伤害保留一次。';
    await activity.update({[`flags.${ID}.usage`]:{...own(activity).usage,status:'waiting',result:`检定已重掷；旧组合伤害已失效。${applied?'请先沿原生流程撤销旧伤害。':'如旧伤害已应用，请先沿原生流程撤销。'}${continuation}请GM按保留结果核对并合并伤害，对每个目标应用一次。`}});
    track(message);await onReroll({activity,previous,message,applied});
   });

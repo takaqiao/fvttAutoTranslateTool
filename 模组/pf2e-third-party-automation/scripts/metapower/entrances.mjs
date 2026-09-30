@@ -5,7 +5,7 @@ export function ensureNativeUseControls(root,actor,supported){
  for(const row of root.querySelectorAll?.('[data-item-id]')??[]){
   const item=actor.items.get(row.dataset.itemId);if(!item||!supported(item)||row.querySelector('[data-action="use-action"],button.use-action'))continue;
   const host=row.querySelector('.item-controls, .button-group');if(!host)continue;
-  const button=root.ownerDocument.createElement('button');button.type='button';button.dataset.action='use-action';button.className='metapower-native-use';button.textContent='使用';button.title=item.name??'Use';host.append(button);
+  const button=root.ownerDocument.createElement('button');button.type='button';button.dataset.action='use-action';button.className='metapower-native-use';button.textContent='使用';button.title=item.name??'使用';host.append(button);
  }
 }
 const patchedHud=new WeakMap();
@@ -13,12 +13,12 @@ const patchedHud=new WeakMap();
 export async function patchHudController(controller,{kind,eligible,useToolbelt}){
  const prototype=Object.getPrototypeOf(controller);if(patchedHud.has(prototype))return patchedHud.get(prototype);
  const descriptor=Object.getOwnPropertyDescriptor(prototype,'use');
- if(!descriptor?.configurable||typeof descriptor.value!=='function')throw Error('HUD use interface is unavailable; metapower use requires the original actor sheet.');
+ if(!descriptor?.configurable||typeof descriptor.value!=='function')throw Error('HUD使用入口不可用；请从原生角色卡使用威能调整。');
  if(patchedHud.has(prototype))return patchedHud.get(prototype);
  const native=descriptor.value;
  const use=function(event,...args){
   if(!this.item||!eligible(this.item.actor)||this.isExploration)return native.call(this,event,...args);
-  if(this.virtualData)throw Error('Virtual HUD actions need manual metapower resolution.');
+  if(this.virtualData)throw Error('虚拟HUD动作的威能调整需要手动结算。');
   return useToolbelt(event,this.item);
  };
  Object.defineProperty(prototype,'use',{...descriptor,value:use});patchedHud.set(prototype,use);return use;
@@ -26,7 +26,7 @@ export async function patchHudController(controller,{kind,eligible,useToolbelt})
 export function createToolbeltEntrance({native,eligible,observe}){
  return (event,item,virtual)=>{
   if(!eligible(item?.actor))return native(event,item,virtual);
-  if(virtual||item.flags?.['pf2e-toolbelt']?.actionable?.linked)throw Error('Virtual/linked-macro action needs manual metapower resolution; use the owned original item.');
+  if(virtual||item.flags?.['pf2e-toolbelt']?.actionable?.linked)throw Error('虚拟动作或关联宏需要手动结算威能调整；请使用角色拥有的原始条目。');
   return observe({actor:item.actor,item},()=>native(event,item,virtual));
  };
 }
@@ -41,7 +41,7 @@ export function installLegacyActionBoundary({game,blocked,onError}){
   Object.defineProperty(game.pf2e.actions,key,{...descriptor,value:function(options={},...args){
    const selected=options.actors??game.user.getActiveTokens?.().map(t=>t.actor)??[];
    if(values(Array.isArray(selected)?selected:[selected]).some(blocked)){
-    const error=Error('此 legacy 动作宏无法验证执行／取消；请用原生动作列表入口，或先在超威能原卡明确清除待用状态。');onError(error);throw error;
+    const error=Error('此旧式动作宏无法验证执行／取消；请用原生动作列表入口，或先在角色动作区或超威能原卡明确清除待用状态。');onError(error);throw error;
    }
    return native.call(this,options,...args);
   }});
@@ -67,7 +67,7 @@ export function installActionEntrances({game,eligible,observe,continuation=()=>f
    const selected=options.actors??game.user.getActiveTokens?.().map(t=>t.actor)??[];
    const actors=values(Array.isArray(selected)?selected:[selected]).filter(a=>a&&eligible(a)).sort((a,b)=>a.uuid.localeCompare(b.uuid));
    const parent=options['pf2e-third-party-automation']?.metapowerContinuation;
-   if(parent){if(!actors.every(actor=>continuation(actor,parent)))throw Error('Original action continuation binding is invalid.');return native.call(this,options)}
+   if(parent){if(!actors.every(actor=>continuation(actor,parent)))throw Error('原始动作的续接绑定无效。');return native.call(this,options)}
    const invoke=index=>index===actors.length?native.call(this,options):observe({actor:actors[index],entry:'statistic'in variant?'native-check':'native-action'},()=>invoke(index+1));
    return invoke(0);
   };
