@@ -26,7 +26,7 @@ export function recallDegree({total,die,dc,domains=[],rollOptions=[],actor}){
  return degree;
 }
 function primarySkills(actor,target){const relevant=new Set();for(const [trait,list]of Object.entries(identify))if(target?.traits?.has?.(trait)||values(target?.traits).includes(trait))for(const skill of list)relevant.add(skill);if(actor.itemTypes?.feat?.some(f=>(f.slug??f.system?.slug)==='unified-theory')&&['religion','occultism','nature'].some(s=>relevant.has(s)))relevant.add('arcana');return [...relevant];}
-function recallDC(actor,target,statistic,dc){if(Number.isFinite(dc))return dc;if(!target)return null;if(statistic&&!actor.skills[statistic]?.lore&&!primarySkills(actor,target).includes(statistic))return null;return targetDC(target);}
+function recallDC(actor,target,statistic,dc){if(Number.isFinite(dc))return dc;if(!target)return null;if(statistic&&(actor.skills[statistic]?.lore||!primarySkills(actor,target).includes(statistic)))return null;return targetDC(target);}
 function authorization(game,actor,user){if(game.user!==user||game.users.get(user.id)!==user||!actor?.testUserPermission?.(user,'OWNER'))throw Error('回忆知识需要原操作者及角色所有权。');}
 /** Execute the installed macro unchanged. Scoped native probes supply structured results; no HTML parsing or global latest-message lookup. */
 export async function captureWorkbenchRecall({game,actor,token,user=game.user,targetUuids=[],requestId,origin=null,statistic=null,assurance=false,dc=null,fromUuid=globalThis.fromUuid,globals=globalThis}){
@@ -54,7 +54,10 @@ export async function captureWorkbenchRecall({game,actor,token,user=game.user,ta
  try{
  if(assurance){
   const skill=actor.skills[statistic];currentTarget=targets.length===1?targets[0].uuid:null;
-  const extraRollOptions=['action:recall-knowledge',`action:recall-knowledge:${statistic}`,`skill:rank:${skill.rank}`,'assurance','substitute:assurance','fortune',...(targets.length===1?targets[0].actor.getSelfRollOptions('target'):[])];
+  // Capture the ordinary native check first. Assurance's AdjustModifier can
+  // suppress an empty-predicate ability modifier on the contextual clone; its
+  // ignored flag survives later fortune/misfortune cancellation recalculation.
+  const extraRollOptions=['action:recall-knowledge',`action:recall-knowledge:${statistic}`,`skill:rank:${skill.rank}`,...(targets.length===1?targets[0].actor.getSelfRollOptions('target'):[])];
   await Promise.race([failed,preparedSkills[statistic].roll({createMessage:false,skipDialog:true,extraRollOptions,callback(){}})]);
   primary=probes.get(`${currentTarget??''}:${statistic}`);const receipt=receipts.get(`${currentTarget??''}:${statistic}`);
   const conflict=receipt.context.rollTwice==='keep-lower'||receipt.rollOptions.has('misfortune')||receipt.context.substitutions?.some(substitution=>substitution.selected&&substitution.effectType==='misfortune');assuranceApplied=!conflict;
@@ -64,7 +67,8 @@ export async function captureWorkbenchRecall({game,actor,token,user=game.user,ta
   const assuranceCheck=new game.pf2e.CheckModifier(statistic,{modifiers:proficiencyModifiers}),proficiency=assuranceCheck.totalModifier;if(!Number.isFinite(proficiency))throw Error('Assurance 熟练加值不可用。');if(!conflict)receipt.check=assuranceCheck;
   const primaryDC=recallDC(actor,targets.length===1?targets[0].actor:null,statistic,dc);
   created=await BaseMessages.create({content:'<strong>Recall Knowledge — Assurance</strong>',rolls:[],user:user.id,author:user.id,speaker:Messages.getSpeaker(),blind:true,whisper:BaseMessages.getWhisperRecipients('GM').map(u=>u.id),flags:{pf2e:{context:{type:'skill-check',options:extraRollOptions,traits:['concentrate','secret']}},[MODULE_ID]:{workbenchRecall:{schema:1,requestId,actorUuid:actor.uuid,tokenUuid:tokenDocument.uuid,userId:user.id,targetUuids:targets.map(t=>t.uuid),targetActors,origin,statistic,assurance:assuranceApplied,assuranceRequested:true,die:null,candidates:[],status:'rolling'}}}});
-  receipt.primaryContext={...receipt.context,options:new Set(receipt.rollOptions),createMessage:false,skipDialog:true,messageMode:'blind',traits:['concentrate','secret'],dc:Number.isFinite(primaryDC)?{value:primaryDC,visible:false}:null,rollTwice:false,substitutions:[{slug:'assurance',label:'Assurance',value:10,required:true,selected:true,effectType:'fortune'}]};
+  const primaryOptions=new Set([...receipt.rollOptions,'assurance','fortune']);if(!conflict)primaryOptions.add('substitute:assurance');
+  receipt.primaryContext={...receipt.context,options:primaryOptions,createMessage:false,skipDialog:true,messageMode:'blind',traits:['concentrate','secret'],dc:Number.isFinite(primaryDC)?{value:primaryDC,visible:false}:null,rollTwice:false,substitutions:[{slug:'assurance',label:'Assurance',value:10,required:true,selected:true,effectType:'fortune'}]};
   for(const rule of receipt.actor.rules?.filter(rule=>!rule.ignored)??[])rule.beforeRoll?.(receipt.domains,receipt.primaryContext.options);
   if(conflict)receipt.primaryContext.options.add('misfortune');
   primaryRoll=await game.pf2e.Check.roll(receipt.check,receipt.primaryContext,null,async(roll,_outcome,nativeMessage)=>{
@@ -73,7 +77,7 @@ export async function captureWorkbenchRecall({game,actor,token,user=game.user,ta
    rawRoll=conflict?globals.Roll.fromTerms(roll.dice):await new globals.Roll('10').evaluate({allowInteractive:false});await created.update({rolls:[rawRoll],[`flags.${MODULE_ID}.workbenchRecall.die`]:conflict?rawRoll.total:null});
   });
   if(!primaryRoll||!rawRoll)throw Error('原生 Assurance 检定未完成；已保存操作不会重复执行。');
-  await Messages.create({content:`<strong>Recall Knowledge — Assurance</strong><p>${escape(skill.label??statistic)}: ${primaryRoll.total}</p>`,rolls:[rawRoll],flags:{pf2e:{context:{type:'skill-check',options:['action:recall-knowledge','secret','assurance'],traits:['concentrate','secret'],rollMode:'blindroll',target:targets.length===1?{token:targets[0].uuid,actor:targets[0].actor.uuid}:undefined}}}});
+  await Messages.create({content:`<strong>Recall Knowledge — ${conflict?'Assurance 与厄运抵消：原生普通检定':'Assurance'}</strong><p>${escape(skill.label??statistic)}: ${primaryRoll.total}</p>`,rolls:[rawRoll],flags:{pf2e:{context:{type:'skill-check',options:['action:recall-knowledge','secret','assurance'],traits:['concentrate','secret'],rollMode:'blindroll',target:targets.length===1?{token:targets[0].uuid,actor:targets[0].actor.uuid}:undefined}}}});
  }else{
   if(!game.modules.get('xdy-pf2e-workbench')?.active)throw Error('回忆知识需要启用 Workbench。');let macro=await fromUuid(WORKBENCH_RECALL_UUID);if(!macro?.execute||macro.type!=='script')throw Error('Workbench 回忆知识宏接口不可用。');
   if(macro.canExecute===false){const data=macro.toObject();delete data._id;data.ownership={...data.ownership,default:globals.CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER};macro=new macro.constructor(data);}
