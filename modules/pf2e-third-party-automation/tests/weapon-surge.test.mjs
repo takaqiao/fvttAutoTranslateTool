@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createNextStrikeEffectFrame} from '../scripts/next-strike-effects.mjs';
 import {createAttackSequence} from '../scripts/activity-attack-sequence.mjs';
+import {createKnowledgeAutomation} from '../scripts/knowledge-automation.mjs';
+import {beforeNativeRoll} from '../scripts/native-owner-operations.mjs';
 let api={};try{api=await import('../scripts/weapon-surge.mjs')}catch(error){if(error.code!=='ERR_MODULE_NOT_FOUND')throw error}
 const ID='pf2e-third-party-automation',SOURCE='Compendium.pf2e.spell-effects.Item.qlz0sJIvqc0FdUdr';
 const clone=structuredClone;
@@ -111,6 +113,22 @@ for(const startsWithSurge of [true,false])test(`an actual evaluated native Strik
 });
 for(const roll of [{_evaluated:false,total:24},{_evaluated:true,total:NaN},{total:24},'attack-roll'])test(`an unresolved callback without evaluated native evidence cannot spend Surge (${JSON.stringify(roll)})`,async()=>{
  const f=fixture(),provider=api.createWeaponSurgeAutomation({game:{user:{targets:new Set()}}});f.message.flags.pf2e.context.outcome=null;f.strike.variants[0].roll=async params=>{await params.callback(roll,null,f.message);return roll};provider.wrapStrike(f.strike,f.actor);await f.strike.variants[0].roll();assert.deepEqual(f.writes,[]);
+});
+test('no-dialog payment reset cannot rewrap a Knowledge outer handler into a self-waiting Surge gate',async()=>{
+ const f=fixture(),game={user:{targets:new Set()},actors:new Map(),scenes:new Map(),modules:new Map()},provider=api.createWeaponSurgeAutomation({game}),knowledge=createKnowledgeAutomation({game});let payments=0,nativeCalls=0,timer;
+ const prepare=()=>{
+  const current={...f.strike,item:{...f.strike.item},variants:[{roll:async params=>{nativeCalls++;return provider.interceptCheck(async(_check,context,_event,callback)=>{f.message.flags.pf2e.context={...f.message.flags.pf2e.context,...context,options:[...context.options]};const roll={_evaluated:true,total:24};await callback(roll,'success',f.message);return roll}, {},{type:'attack-roll',origin:{actor:f.actor,item:f.strike.item},options:params.options},null,params.callback)}}]};
+  provider.wrapStrike(current,f.actor);knowledge.wrapStrike(current,f.actor);f.actor.system.actions=[current];return current;
+ };
+ const captured=prepare();
+ try{
+  const result=await Promise.race([beforeNativeRoll({showDialog:false,commit:async()=>{payments++;prepare()},native:commit=>captured.variants[0].roll({callback:commit})}),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('Surge gate waited on its own rewrapped Knowledge handler')),100)})]);
+  assert.equal(result.total,24);assert.equal(payments,1);assert.equal(nativeCalls,1);assert.deepEqual(f.writes,[['surge']]);
+ }finally{clearTimeout(timer)}
+});
+test('outer damage handlers do not cause the same prepared Strike to receive a second Surge wrapper',()=>{
+ const f=fixture(),provider=api.createWeaponSurgeAutomation({game:{user:{targets:new Set()}}});provider.wrapStrike(f.strike,f.actor);const native=f.strike.damage,outer=async params=>native(params);f.strike.damage=outer;
+ provider.wrapStrike(f.strike,f.actor);assert.equal(f.strike.damage,outer);
 });
 const nativePath=process.env.PF2E_NATIVE_BUNDLE??'';
 test('real PF2e DamageDice body prepares the frozen native spirit d6 at ranks 1, 5 and 9',{skip:!nativePath},()=>{

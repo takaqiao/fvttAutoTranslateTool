@@ -10,7 +10,7 @@ const serialKey=Symbol('weaponSurgeNativeGate');
 /** Observe the actual native Strike and awaited Check.roll callback. No chat
  * hook, inferred latest attack, geometry or second confirmation is involved. */
 export function createWeaponSurgeAutomation({game}={}){
- const open=new Map(),gates=new Map(),wrappedVariants=new WeakSet(),wrappedDamage=new WeakSet();
+ const open=new Map(),gates=new Map(),wrappedVariants=new WeakSet(),wrappedDamage=new WeakMap();
  function acquire(actor){
   const wait=gates.get(actor.uuid)??Promise.resolve();let finish,released=false;
   const pending=new Promise(resolve=>{finish=resolve});gates.set(actor.uuid,pending);
@@ -19,7 +19,7 @@ export function createWeaponSurgeAutomation({game}={}){
  function wrapStrike(strike,actor){
   if(strike?.item?.type!=='weapon'||strike.item.actor?.uuid!==actor?.uuid||marked(actor))return strike;
   for(const [index,variant]of (strike.variants??[]).entries()){
-   const native=variant.roll;if(typeof native!=='function'||wrappedVariants.has(native))continue;
+   const native=variant.roll;if(typeof native!=='function'||wrappedVariants.has(variant))continue;
    const wrapped=async function(params={}){
     if(isEatFortuneProbe(params))return native.call(this,params);
     const carried=params[serialKey],gate=carried??acquire(actor);
@@ -48,10 +48,13 @@ export function createWeaponSurgeAutomation({game}={}){
      })()});}finally{open.delete(marker)}
     }finally{gate.release()}
    };
-   wrappedVariants.add(wrapped);variant.roll=wrapped;
+   // Later providers can add their own outer handler. Function identity then
+   // changes, but this prepared variant already contains our gate exactly once.
+   wrappedVariants.add(variant);variant.roll=wrapped;
   }
+  const damageMethods=wrappedDamage.get(strike)??new Set();wrappedDamage.set(strike,damageMethods);
   for(const method of ['damage','critical']){
-   const native=strike[method];if(typeof native!=='function'||wrappedDamage.has(native))continue;
+   const native=strike[method];if(typeof native!=='function'||damageMethods.has(method))continue;
    const wrapped=async function(params={}){
     const context=params.checkContext,record=context?.weaponSurgeSnapshot;
     if(record==null)return native.call(this,params);
@@ -62,7 +65,7 @@ export function createWeaponSurgeAutomation({game}={}){
     const prepared=frame.damage(strike),options=frame.damageOptions(params.options??[]);
     return prepared===strike?native.call(this,{...params,options}):prepared[method]({...params,options});
    };
-   wrappedDamage.add(wrapped);strike[method]=wrapped;
+   damageMethods.add(method);strike[method]=wrapped;
   }
   return strike;
  }
