@@ -46,8 +46,8 @@ test('actual native FlatModifier removeAfterRoll uses the captured modifier rule
 });
 test('actual native RollTwice and SubstituteRoll afterRoll receive their used dice and substitutions',{skip:!fs.existsSync(nativeBundle)},async()=>{
  const bundle=fs.readFileSync(nativeBundle,'utf8'),game={pf2e:{settings:{automation:{removeEffects:true}}}},twice=new Function('game',`return ({${nativeAfterRoll(bundle,'RollTwiceRuleElement')}}).afterRoll;`)(game),substitute=new Function(`return ({${nativeAfterRoll(bundle,'SubstituteRollRuleElement')}}).afterRoll;`)();let deletes=0;
- const actor={items:new Map([['effect',{}]])},item={id:'effect',rules:[],isOfType:()=>true,async delete(){deletes++;}},rule={actor,item,selector:['skill-check'],test:()=>true,removeAfterRoll:'if-enabled',slug:'native-substitution'};
+ const actor={items:new Map([['effect',{}]])},item={id:'effect',rules:[],isOfType:()=>true,async delete(){deletes++;}},rule={actor,item,selector:['skill-check'],test:()=>true,removeAfterRoll:true,slug:'native-substitution'};
  await twice.call(rule,{domains:['skill-check'],roll:{dice:[{modifiers:['kh']}]},rollOptions:new Set()});assert.equal(deletes,1);
- await substitute.call(rule,{roll:{dice:[]},context:{substitutions:[{slug:rule.slug,selected:true}]}});assert.equal(deletes,2);
+ rule.removeAfterRoll='if-enabled';await substitute.call(rule,{roll:{dice:[]},context:{substitutions:[{slug:rule.slug,selected:true}]}});assert.equal(deletes,2);
  await substitute.call(rule,{roll:{dice:[{modifiers:[]}]},context:{substitutions:[{slug:rule.slug,selected:false}]}});assert.equal(deletes,2);
 });
