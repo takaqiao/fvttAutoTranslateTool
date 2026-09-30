@@ -21,7 +21,7 @@ export function createCapabilities({game,fromUuid,hpPools}) {
     const assuranceSkills=feats.filter(i=>(i.slug??i.system?.slug)==='assurance').map(i=>i.flags?.pf2e?.rulesSelections?.assurance??i.flags?.system?.rulesSelections?.assurance).filter(Boolean);
     const now=game.time?.worldTime??0,immunities=items.filter(i=>sourceId(i)===TREAT_WOUNDS_IMMUNITY).map(i=>({id:i.uuid,expiresAt:immunityExpiry(i,now),originActorUUID:i.system?.context?.origin?.actor}));
     const pool=hpPools.discover(actor);const master=pool.poolUUID===uuid?actor:await fromUuid(pool.poolUUID);
-    return {actorUUID:uuid,name:actor.name,isDead:!!actor.isDead,unconscious:!!actor.hasCondition?.('unconscious'),wounded:!!actor.hasCondition?.('wounded'),modeOfBeing:actor.modeOfBeing,...statistics,slugs,assuranceSkills,items:items.map(i=>({uuid:i.uuid,sourceId:sourceId(i),slug:i.slug??i.system?.slug,type:i.type})),
+    return {actorUUID:uuid,name:actor.name,level:actor.level,isDead:!!actor.isDead,unconscious:!!actor.hasCondition?.('unconscious'),wounded:!!actor.hasCondition?.('wounded'),modeOfBeing:actor.modeOfBeing,...statistics,slugs,assuranceSkills,items:items.map(i=>({uuid:i.uuid,sourceId:sourceId(i),slug:i.slug??i.system?.slug,type:i.type})),
       wardCapacity:wardCapacity({wardMedic:slugs.includes('ward-medic'),medicineRank:statistics.medicine.rank}),
       continualRecovery:slugs.includes('continual-recovery'),riskySurgery:slugs.includes('risky-surgery'),threePecks:feats.some(i=>sourceId(i)==='Compendium.pf2e.feats-srd.Item.Qg5M34t95rtT0sOp'),
       hp:structuredClone(master?.system?.attributes?.hp??{}),focus:structuredClone(actor.system?.resources?.focus??{value:0,max:0}),pool,immunities,
