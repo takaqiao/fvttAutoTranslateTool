@@ -40,6 +40,11 @@ export function createExplorationOwnerOperations({game,fromUuid,ledger,sharedOwn
     }finally{clearTimeout(timer)}
   }
   return {ownerExecute,runActivityWithOwner,isActivityContext:(ctx,id)=>contexts.get(ctx)===id,
+    createActivityContext:async activity=>{
+      if(!isActiveGM(game))throw Error('active-gm-required');const stored=await ledger.getActivity(activity.id);
+      if(stored?.state!=='planned'||JSON.stringify(stored)!==JSON.stringify(activity)||game.time.worldTime!==activity.startedAt)throw Error('activity-begin-claim-required');
+      const ctx=Object.freeze({validate:()=>{if(!isActiveGM(game))throw Error('gm-changed')}});contexts.set(ctx,activity.id);return ctx;
+    },
     registerOperation:(id,handler)=>{if(!/^[-a-z0-9]+$/.test(id)||operations.has(id)||typeof handler!=='function')throw Error('invalid-operation');operations.set(id,handler)},
     register:({socket:api})=>{if(socket)throw Error('duplicate-exploration-socket');socket=api;socket?.register('exploration:execute',async function(payload){try{return {ok:true,value:await ownerExecute(payload,this.socketdata?.userId)}}catch(e){return {ok:false,error:String(e.message)}}})}
   };

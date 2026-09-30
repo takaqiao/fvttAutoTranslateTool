@@ -56,7 +56,7 @@ export async function rollSalubriousTreatment({game,actor,item,token,target,clai
  validateSalubriousCard({game,message:damage,claim,damage:true});return {check,damage,degree};
 }
 
-export function createSalubriousExecutor({game,fromUuid=globalThis.fromUuid,Hooks=globalThis.Hooks,checkScope,createMessage,DamageRoll,authorizeDamage,timeoutMs=60000}={}){
+export function createSalubriousExecutor({game,fromUuid=globalThis.fromUuid,Hooks=globalThis.Hooks,checkScope,createMessage,DamageRoll,authorizeDamage,hpPools,timeoutMs=60000}={}){
  let socket;const tasks=new Map(),writes=new SerialActions();
  const requireGM=user=>{if(!user?.active||!user.isGM||game.users.get(user.id)!==user||game.users.activeGM!==user)throw fail('请求者不是当前主GM');};
  function waitFor(read,event,match){const first=read();if(first)return Promise.resolve(first);if(!Hooks?.on)throw fail('来源文档尚未同步');return new Promise((resolve,reject)=>{let id,timer,done=false;const finish=(error,value)=>{if(done)return;done=true;clearTimeout(timer);Hooks.off(event,id);error?reject(error):resolve(value)};const check=()=>{try{const v=read();if(v)finish(null,v)}catch(e){finish(e)}};id=Hooks.on(event,(...args)=>{if(match(...args))check()});timer=setTimeout(()=>finish(fail('准确文档同步超时')),timeoutMs);check()})}
@@ -116,7 +116,9 @@ export function createSalubriousExecutor({game,fromUuid=globalThis.fromUuid,Hook
    if(claim.privacy){try{assertSalubriousReceiptPrivacy({message,claim});const p=message.flags?.[MODULE_ID]?.salubriousKiss;if(p?.kind!=='receipt'||p.nonce!==claim.nonce||p.damageId!==damage.id||p.targetUuid!==target.uuid)throw fail('原生私密回执的标记不符')}catch(e){error=e}}
    if(c.type!=='damage-taken'||!c.options.includes(source)||c.options.includes(skip)||author(message)!==game.user.id||message.speaker?.actor!==target.actor.id||`Scene.${message.speaker?.scene}.Token.${message.speaker?.token}`!==target.uuid||message.flags.pf2e.appliedDamage&&message.flags.pf2e.appliedDamage.uuid!==target.actor.uuid)error=fail('原生医疗应用回执来源不符');
   });
-  requireGM(game.user);await recipient.applyDamage(params);requireGM(game.user);if(error)throw error;if(captured.size!==1)throw fail('原生应用回执不唯一或未出现');const [receipt]=captured;if(game.messages.get(receipt.id)!==receipt)throw fail('原生回执未持久保存');return {messageId:receipt.id,targetUuid:target.uuid,kind:expected.kind};}
+  requireGM(game.user);
+  if(hpPools)await hpPools.withNativeApplication({id:claim.nonce},target.actor,async()=>{const nativeResult=await recipient.applyDamage(params);return {nativeResult,receipt:[...captured][0]}});else await recipient.applyDamage(params);
+  requireGM(game.user);if(error)throw error;if(captured.size!==1)throw fail('原生应用回执不唯一或未出现');const [receipt]=captured;if(game.messages.get(receipt.id)!==receipt)throw fail('原生回执未持久保存');return {messageId:receipt.id,targetUuid:target.uuid,kind:expected.kind};}
   finally{if(hook!==undefined)Hooks.off('createChatMessage',hook);revoke();}
  }
  function register({socket:api}={}){if(socket&&socket!==api)throw fail('通讯重复注册');socket=api;socket?.register('salubrious-kiss:roll',async function(payload){try{return {ok:true,value:await ownerRoll(payload,game.users.get(this.socketdata?.userId))}}catch(error){return {ok:false,error:String(error.message??error)}}})}

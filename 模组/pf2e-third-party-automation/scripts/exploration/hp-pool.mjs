@@ -42,7 +42,7 @@ export function createHpPools({game,actorUpdateEvents}) {
       const result=await operation(scope);
       if(!scope.masterPromise){
         const receipt=result?.receipt,c=receipt?.flags?.pf2e?.context;
-        if(receipt&&game.messages?.get(receipt.id)===receipt&&c?.type==='damage-taken'&&receipt.flags.pf2e.appliedDamage===null&&receipt.speaker?.actor===patient.id&&c.options?.some(o=>o.startsWith(`pf2e-third-party-automation:exploration-apply:${activity.id}:`)))return {result,poolReceipt:{activityId:activity.id,actorUUID:pool.poolUUID,noChange:true,receiptId:receipt.id}};
+        if(receipt&&game.messages?.get(receipt.id)===receipt&&c?.type==='damage-taken'&&receipt.flags.pf2e.appliedDamage===null&&receipt.speaker?.actor===patient.id&&c.options?.some(o=>o.startsWith(`pf2e-third-party-automation:exploration-apply:${activity.id}:`)||o===`pf2e-third-party-automation:salubrious-apply:${activity.id}`))return {result,poolReceipt:{activityId:activity.id,actorUUID:pool.poolUUID,noChange:true,receiptId:receipt.id}};
         throw Error('native-hp-forward-unconfirmed');
       }
       const saved=await scope.masterPromise;

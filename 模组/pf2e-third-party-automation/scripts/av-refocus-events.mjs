@@ -13,7 +13,7 @@ const focusPath='system.resources.focus.value',intentPath=`flags.${MODULE_ID}.av
 
 /** Observe the actual public Workbench Refocus call, not arbitrary resource
  * increases. The nonce rides on the one native update started by that call. */
-export function registerAvRefocusEvents({game,Hooks,libWrapper,registerActorUpdate,canvas=globalThis.canvas,onError=console.error,runExclusive,actorMatchers=[],onRefocus,refocusPrivacy}={}){
+export function registerAvRefocusEvents({game,Hooks,libWrapper,registerActorUpdate,canvas=globalThis.canvas,onError=console.error,runExclusive,actorMatchers=[],onRefocus,refocusPrivacy,explorationRefocus}={}){
  const scopes=new Map(),queue=new SerialActions();
  const run=runExclusive??((actor,fn)=>queue.run(actor.uuid,fn));
  const activeGM=()=>!!game.user?.id&&game.user.id===game.users.activeGM?.id;
@@ -60,7 +60,8 @@ export function registerAvRefocusEvents({game,Hooks,libWrapper,registerActorUpda
    if(controlled.length!==1||actors?.length!==1||!wave&&!matched(actor)||!owner(actor,game.user))return wrapped(...args);
    if(scopes.has(actor.uuid))throw Error('该角色有尚未确认的原生再聚能。');
    const privacyHandle=refocusPrivacy&&matched(actor)?refocusPrivacy.beginRefocus({actor,token:controlled[0].document,user:game.user}):null;
-   const scope={actor,wave,privacyHandle,userId:game.user.id,tokenUuid:controlled[0].document?.uuid??null,startedAt:game.time?.worldTime};scopes.set(actor.uuid,scope);
+   const activity=explorationRefocus?.getCurrent(actor);
+   const scope={actor,wave,privacyHandle,activity,userId:game.user.id,tokenUuid:controlled[0].document?.uuid??null,startedAt:activity?.startedAt??game.time?.worldTime};scopes.set(actor.uuid,scope);
    try{const result=await wrapped(...args);if(scope.updateTask)await scope.updateTask;if(privacyHandle)await refocusPrivacy.finishRefocus(privacyHandle);return result;}
    catch(error){if(privacyHandle)refocusPrivacy.abortRefocus(privacyHandle,error);throw error;}
    finally{if(scopes.get(actor.uuid)===scope)scopes.delete(actor.uuid);}
@@ -71,7 +72,7 @@ export function registerAvRefocusEvents({game,Hooks,libWrapper,registerActorUpda
    scope.used=true;if(!scope.privacyHandle)scopes.delete(this.uuid);
    const before=this.system?.resources?.focus?.value,after=changes[focusPath],max=this.system?.resources?.focus?.max;
    if(!Number.isFinite(before)||!Number.isFinite(after)||after<before||after>max)return wrapped(changes,options);
-   const proof={nonce:globalThis.foundry?.utils?.randomID?.(32)??globalThis.crypto.randomUUID(),actorUuid:this.uuid,itemUuid:scope.wave?.uuid??null,userId:scope.userId,before,after,tokenUuid:scope.tokenUuid,startedAt:scope.startedAt,...scope.privacyHandle?{privacy:structuredClone(scope.privacyHandle.privacy)}:{}};
+   const proof={nonce:scope.activity?.id??globalThis.foundry?.utils?.randomID?.(32)??globalThis.crypto.randomUUID(),actorUuid:this.uuid,itemUuid:scope.wave?.uuid??null,userId:scope.userId,before,after,tokenUuid:scope.tokenUuid,startedAt:scope.startedAt,...scope.privacyHandle?{privacy:structuredClone(scope.privacyHandle.privacy)}:{}};
    // A changed intent also makes a full-focus Refocus an acknowledged update,
    // rather than an empty diff that Foundry may discard without updateActor.
    const task=wrapped({...changes,[intentPath]:proof},{...options,[MODULE_ID]:{...options?.[MODULE_ID],refocusReceipt:proof}});

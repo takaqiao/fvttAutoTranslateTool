@@ -32,7 +32,8 @@ export function createNativeTreatment({game,Hooks,fromUuid,ownerOperations,check
     const roll=message.rolls[0],application=`${MODULE_ID}:exploration-apply:${activity.id}:${message.id}:${patient.uuid}`;
     if(applications.has(application))throw Error('application-already-started');
     const source=`${MODULE_ID}:source:${message.id}:0`;
-    const params={damage:stage==='healing'?-roll.total:roll,token:patient.getActiveTokens?.(false,true)?.[0]?.document??patient.token??null,
+    const foundToken=patient.getActiveTokens?.(false,true)?.[0];
+    const params={damage:stage==='healing'?-roll.total:roll,token:foundToken?.document??foundToken??patient.token??null,...result.item?{item:result.item}:{},
       skipIWR:stage==='healing',final:false,shieldBlockRequest:false,outcome:result.outcome,
       rollOptions:new Set([...(message.flags.pf2e.context?.options??[]).filter(o=>o!=='skip-handling-message'),source,application])};
     const effects=[];if(stage==='healing'&&result.medicBonus){const effect=medicStackingEffect({medicBonus:result.medicBonus,sourceActorUUID:activity.actorUUID});if(effect)effects.push(effect)}
