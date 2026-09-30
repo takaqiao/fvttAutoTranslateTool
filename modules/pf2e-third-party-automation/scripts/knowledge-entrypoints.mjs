@@ -18,17 +18,17 @@ export function createWorkbenchRecallController({game,fromUuid=globalThis.fromUu
   }
   /** Socketlib has no online request timeout. A saved GM result is sufficient
    * even if its RPC reply is lost; never run the macro again to recover it. */
-  async function receiveSaved(rpc,read){
+  async function receiveSaved(rpc,read,assertLive=()=>{}){
    const prior=read();if(prior)return prior;
    const hooks=events,subscriptions=[];let rejectSaved;
    const cancel=()=>rejectSaved?.(Error('回忆知识入口已关闭；已保存秘骰保留，不会再次投骰。'));
-   const saved=new Promise((resolve,reject)=>{rejectSaved=reject;const check=()=>{const result=read();if(result)resolve(result);};
-    for(const event of ['createChatMessage','updateChatMessage'])if(hooks?.on)subscriptions.push([event,hooks.on(event,check)]);check();});
+   const saved=new Promise((resolve,reject)=>{rejectSaved=reject;const check=()=>{try{const result=read();if(result)resolve(result);else assertLive();}catch(error){reject(error);}};
+    for(const event of ['createChatMessage','updateChatMessage','updateUser','userConnected'])if(hooks?.on)subscriptions.push([event,hooks.on(event,check)]);check();});
    observers.add(cancel);
    try{
     const outcome=await Promise.race([saved.then(value=>({value})),Promise.resolve().then(rpc).then(reply=>({reply}),error=>({error}))]);
     const persisted=read();if(persisted)return persisted;if(outcome.value)return outcome.value;
-    if(outcome.error)throw outcome.error;if(!outcome.reply?.ok)throw Error(outcome.reply?.error??'回忆知识回复不明确；不会重新投骰。');return outcome.reply.value;
+    if(outcome.error)throw outcome.error;assertLive();if(!outcome.reply?.ok)throw Error(outcome.reply?.error??'回忆知识回复不明确；不会重新投骰。');return outcome.reply.value;
    }finally{for(const[event,id]of subscriptions)hooks.off(event,id);observers.delete(cancel);}
   }
  async function settle(messageId,requester){
@@ -54,7 +54,7 @@ export function createWorkbenchRecallController({game,fromUuid=globalThis.fromUu
    if(sourceCard)await sourceCard.update({[`flags.${MODULE_ID}.knowledge.recall`]:{...sourceCard.flags[MODULE_ID].knowledge.recall,workbenchOperation:{requestId:input.requestId,status:'done',messageId}}});
   }
   if(isActiveGM(game))await settle(messageId,user);
-    else {const gm=game.users.activeGM;if(!socket||!gm?.active)throw Error('原生秘骰已保存，需要在线 GM 处理知识联动；不会再次投骰。');await receiveSaved(()=>socket.executeAsUser('knowledge-rk-finalize',gm.id,{messageId}),()=>savedResult(input,messageId,user));}
+    else {const gm=game.users.activeGM;if(!socket||!gm?.active)throw Error('原生秘骰已保存，需要在线 GM 处理知识联动；不会再次投骰。');await receiveSaved(()=>socket.executeAsUser('knowledge-rk-finalize',gm.id,{messageId}),()=>savedResult(input,messageId,user),()=>{if(game.users.activeGM?.id!==gm.id||gm.active===false)throw Error('回忆知识的原主 GM 已离线或交接；原始秘骰保留，不会再次投骰。');if(game.users.get(user.id)!==user||user.active===false||!input.actor.testUserPermission(user,'OWNER'))throw Error('回忆知识原操作者已离线或失去权限；原始秘骰保留，不会再次投骰。');});}
   return {messageId};
  }
  async function run({actor,token,user=game.user,targetUuids=null,origin=null,requestId=random(),statistic=null,assurance=false,dc=null}={}){
@@ -64,7 +64,7 @@ export function createWorkbenchRecallController({game,fromUuid=globalThis.fromUu
   activeGM();if(!user.active||!socket)throw Error('原操作者不在线，未代为进行回忆知识。');
   if(!origin?.messageId)throw Error('附带回忆知识缺少原生动作卡。');
   const payload={actorUuid:actor.uuid,tokenUuid:doc(token)?.uuid,targetUuids:input.targetUuids,requestId,origin,statistic,assurance,dc};
-    const result=await receiveSaved(()=>socket.executeAsUser('knowledge-rk-run',user.id,payload),()=>{const operation=game.messages.get(origin.messageId)?.flags?.[MODULE_ID]?.knowledge?.recall?.workbenchOperation;return operation?.requestId===requestId&&operation.status==='done'?savedResult(input,operation.messageId,user):null;});activeGM();
+    const result=await receiveSaved(()=>socket.executeAsUser('knowledge-rk-run',user.id,payload),()=>{const operation=game.messages.get(origin.messageId)?.flags?.[MODULE_ID]?.knowledge?.recall?.workbenchOperation;return operation?.requestId===requestId&&operation.status==='done'?savedResult(input,operation.messageId,user):null;},()=>{activeGM();if(game.users.get(user.id)!==user||user.active===false||!actor.testUserPermission(user,'OWNER'))throw Error('回忆知识原操作者已离线或失去权限；已保存结果保留，不会再次投骰。');});if(!savedResult(input,result?.messageId,user))activeGM();
   // Slow native document synchronization may make the card temporarily absent.
   // The owner also sent the finalize RPC. Never poll/replay the macro here.
     return result;

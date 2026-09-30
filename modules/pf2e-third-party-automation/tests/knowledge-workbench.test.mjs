@@ -164,6 +164,24 @@ test('owner finishes from the GM resolved native card when the finalize RPC repl
  let timer;try{const result=await Promise.race([f.owner.run({actor:f.actor,token:f.token,targetUuids:[f.target.uuid],requestId:'lost-finalize'}),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('lost reply stalled original RK')),100);})]);assert.deepEqual(result,{messageId:'rk1'});assert.equal(f.hooks.count(),baseline);}finally{clearTimeout(timer);f.cleanup();}
  assert.equal(f.die.count,1);assert.deepEqual(f.resolved,['rk1']);
 });
+test('lost finalize RPC releases owner observers on unresolved GM handoff without another die',async()=>{
+ const f=controllerFixture(),baseline=f.hooks.count();let started;const entered=new Promise(resolve=>started=resolve);
+ f.handlers.set('gm:knowledge-rk-finalize',()=>{started();return new Promise(()=>{});});const running=f.owner.run({actor:f.actor,token:f.token,targetUuids:[f.target.uuid],requestId:'handoff-lost-rpc'});await entered;
+ f.game.users.activeGM={id:'new-gm',active:true,isGM:true};f.hooks.callAll('updateUser',f.gm,{active:false});let timer;
+ try{await assert.rejects(Promise.race([running,new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('handoff stalled')),100);})]),/主 GM|交接|连接|离线/);assert.equal(f.hooks.count(),baseline);assert.equal(f.die.count,1);}finally{clearTimeout(timer);f.cleanup();}
+});
+test('a resolved saved result wins even when its GM disconnect event arrives before a lost RPC reply',async()=>{
+ const f=controllerFixture(),finalize=f.handlers.get('gm:knowledge-rk-finalize'),baseline=f.hooks.count();
+ f.handlers.set('gm:knowledge-rk-finalize',async function(payload){await finalize.call(this,payload);f.gm.active=false;f.game.users.activeGM=null;f.hooks.callAll('userConnected',f.gm,false);return new Promise(()=>{});});let timer;
+ try{const result=await Promise.race([f.owner.run({actor:f.actor,token:f.token,targetUuids:[f.target.uuid],requestId:'saved-before-disconnect'}),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('saved disconnect stalled')),100);})]);assert.deepEqual(result,{messageId:'rk1'});assert.equal(f.hooks.count(),baseline);assert.equal(f.die.count,1);}finally{clearTimeout(timer);f.cleanup();}
+});
+test('lost incidental owner RPC releases GM observers when that unresolved owner disconnects',async()=>{
+ const f=controllerFixture(),baseline=f.hooks.count();let started;const entered=new Promise(resolve=>started=resolve);
+ const source={id:'source',author:f.user,actor:f.actor,flags:{[MODULE_ID]:{knowledge:{recall:{actorUuid:f.actor.uuid,userId:f.user.id,targetUuid:f.target.uuid}}}}};f.game.messages.set(source.id,source);
+ f.handlers.set('player:knowledge-rk-run',()=>{started();return new Promise(()=>{});});const running=f.gmController.run({actor:f.actor,token:f.token,user:f.user,targetUuids:[f.target.uuid],requestId:'owner-disconnect-lost-rpc',origin:{messageId:source.id}});await entered;
+ f.user.active=false;f.hooks.callAll('userConnected',f.user,false);let timer;
+ try{await assert.rejects(Promise.race([running,new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('owner disconnect stalled')),100);})]),/原操作者.*离线|失去权限/);assert.equal(f.hooks.count(),baseline);assert.equal(f.die.count,0);}finally{clearTimeout(timer);f.cleanup();}
+});
 test('GM finishes an incidental RK from its exact saved source and resolved result when the owner reply never arrives',async()=>{
  const f=controllerFixture(),dispatch=f.handlers.get('player:knowledge-rk-run'),baseline=f.hooks.count();
  const original={id:'source',actor:f.actor,author:f.user,speaker:{actor:f.actor.id,scene:'s',token:f.token.id},flags:{[MODULE_ID]:{knowledge:{recall:{actorUuid:f.actor.uuid,targetUuid:f.target.uuid,userId:f.user.id}}}},async update(changes){for(const[k,v]of Object.entries(changes)){let o=this;const ps=k.split('.');for(const p of ps.slice(0,-1))o=o[p]??={};o[ps.at(-1)]=v;}}};f.game.messages.set(original.id,original);
