@@ -2,13 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {MODULE_ID} from '../scripts/rules.mjs';
+import {interceptKnowledgeProbe} from '../scripts/knowledge-probes.mjs';
 let api;
 try { api = await import('../scripts/knowledge-workbench.mjs'); } catch {}
 const command=fs.readFileSync(process.env.FVTT_WORKBENCH_RECALL_MACRO??new URL('./fixtures/workbench-7.7.5-recall.txt',import.meta.url),'utf8');
 const AsyncFunction=Object.getPrototypeOf(async function(){}).constructor;
+Math.clamp??=(value,min,max)=>Math.min(max,Math.max(min,value));
 function fixture(){
  const die={count:0};
- class NativeRoll {constructor(formula){assert.equal(formula,'1d20');this.total=12;this.options={};}async roll(){die.count++;return this;}}
+ class NativeRoll {constructor(formula){assert.ok(formula==='1d20'||/^\d+$/.test(formula));this.total=formula==='1d20'?12:Number(formula);this.options={};this.dice=formula==='1d20'?[{total:12,faces:20,modifiers:[],results:[{result:12,active:true}]}]:[];this.terms=this.dice;}async roll(){die.count++;return this;}async evaluate(){return this;}static fromTerms(terms){const roll=new this('1d20');roll.dice=terms;roll.terms=terms;roll.total=terms.reduce((sum,term)=>sum+term.total,0);return roll;}}
  const skills=Object.fromEntries(['arcana','crafting','medicine','nature','occultism','religion','society'].map((slug,index)=>[slug,{slug,label:slug,rank:2,totalModifier:slug==='society'?13:index,modifiers:[],async roll(options){assert.equal(options.createMessage,false);const roll={total:7+this.totalModifier,options:{totalModifier:this.totalModifier}},message={flags:{pf2e:{context:{options:options.extraRollOptions,domains:['skill-check',slug],type:'skill-check'},modifiers:[]}},getFlag(ns,key){return key.split('.').reduce((a,k)=>a?.[k],this.flags[ns]);},flavor:''};options.callback(roll,undefined,message);return roll;}}]));
  const user={id:'player',isGM:false}; const gm={id:'gm',isGM:true};
  const actor={id:'a',uuid:'Actor.a',name:'Hero',skills,itemTypes:{feat:[],lore:[]},synthetics:{degreeOfSuccessAdjustments:{}},testUserPermission:u=>u===user||u===gm};
@@ -16,14 +18,51 @@ function fixture(){
  const target={id:'enemy',uuid:'Scene.s.Token.enemy',documentName:'Token',actor:targetActor,name:'Hidden enemy',parent:{id:'s'}};target.object={document:target,actor:targetActor};
  const token={id:'hero',uuid:'Scene.s.Token.hero',documentName:'Token',actor,parent:target.parent};token.object={document:token,actor};
  const messages=new Map();
- class Messages {static getSpeaker(){return {actor:actor.id,token:token.id,scene:'s'};}static getWhisperRecipients(){return [gm];}static async create(data){const message={id:'rk1',uuid:'ChatMessage.rk1',actor,...data,author:user,async update(changes){for(const[k,v]of Object.entries(changes)){let o=this;const ps=k.split('.');for(const p of ps.slice(0,-1))o=o[p]??={};o[ps.at(-1)]=v;}return this;}};messages.set(message.id,message);return message;}}
+ class Messages {constructor(data){Object.assign(this,data);this.id=null;}getFlag(ns,key){return key.split('.').reduce((o,k)=>o?.[k],this.flags[ns]);}static getSpeaker(){return {actor:actor.id,token:token.id,scene:'s'};}static getWhisperRecipients(){return [gm];}static async create(data){const message={id:'rk1',uuid:'ChatMessage.rk1',actor,...data,author:user,async update(changes){for(const[k,v]of Object.entries(changes)){let o=this;const ps=k.split('.');for(const p of ps.slice(0,-1))o=o[p]??={};o[ps.at(-1)]=v;}return this;}};messages.set(message.id,message);return message;}}
  const macro={type:'script',command,async execute(scope){return new AsyncFunction(...Object.keys(scope),this.command)(...Object.values(scope));}};
  const game={user,userId:user.id,users:{get:id=>id===user.id?user:id===gm.id?gm:null,activeGM:gm},system:{id:'pf2e'},messages,settings:{get:()=> 'none'},modules:new Map([['xdy-pf2e-workbench',{active:true}]]),packs:new Map(),time:{worldTime:0}};
  game.user.targets=new Set([target.object]);game.user.targets.first=()=>target.object;
  const fromUuid=async uuid=>uuid.endsWith('xcFr7PWwG5OVALNJ')?macro:uuid===actor.uuid?actor:uuid===token.uuid?token:uuid===target.uuid?target:null;
  const globals={Roll:NativeRoll,ChatMessage:Messages,CONST:{DICE_ROLL_MODES:{BLIND:'blindroll'},CHAT_MESSAGE_STYLES:{OTHER:0}},CONFIG:{PF2E:{abilities:{}}},ui:{notifications:{info(){}}},document:{createElement(){throw Error('none breakdown must not create DOM');}}};
- return {game,actor,user,gm,target,token,fromUuid,globals,die};
+ return nativeProbeFixture({game,actor,user,gm,target,token,fromUuid,globals,die});
 }
+function nativeProbeFixture(f){
+ f.actor.rules=[];
+ for(const skill of Object.values(f.actor.skills))skill.roll=async options=>{
+  const check={slug:skill.slug,modifiers:skill.modifiers,calculateTotal(){this.totalModifier=skill.totalModifier;}};
+  const context={actor:f.actor,origin:{actor:f.actor,token:f.token},token:f.token,type:'skill-check',domains:['skill-check',skill.slug],options:new Set(options.extraRollOptions),rollTwice:skill.rollTwice??false,substitutions:skill.substitutions??[],dosAdjustments:options.dc?Object.values(f.actor.synthetics.degreeOfSuccessAdjustments).flat():[],createMessage:false,skipDialog:true};
+  const native=async(check,context,_event,callback)=>{const roll=await new f.globals.Roll('1d20').roll();roll.dice[0].total=roll.total;roll.dice[0].results=[{result:roll.total,active:true}];if(context.rollTwice){roll.dice[0]={total:18,faces:20,modifiers:['kh'],results:[{result:12,discarded:true},{result:18,active:true}]};roll.total=18;}if(context.substitutions?.some(s=>s.selected)){roll.dice=[];roll.terms=[];roll.total=context.substitutions.find(s=>s.selected).value;}check.calculateTotal(context.options);roll.total+=check.totalModifier;roll.options.totalModifier=check.totalModifier;roll.options.degreeOfSuccess=api.recallDegree({total:roll.total,die:roll.total-check.totalModifier,dc:context.dc?.value,actor:f.actor,domains:context.domains,rollOptions:[...context.options]});context.outcome=['criticalFailure','failure','success','criticalSuccess'][roll.options.degreeOfSuccess];await callback?.(roll,context.outcome,new f.globals.ChatMessage({flags:{pf2e:{context:{...context,actor:f.actor.id,options:[...context.options],domains:context.domains},modifiers:[]}},flavor:''}));return roll;};
+  const result=await interceptKnowledgeProbe(native,check,context,null,options.callback);
+  if(result)for(const rule of f.actor.rules)await rule.afterRoll?.({roll:result,check,context,domains:context.domains,rollOptions:context.options});return result;
+ };
+ return f;
+}
+test('safe probes run one real primary native check and consume its one-use rule only after a persistent card claim',async()=>{
+ const f=nativeProbeFixture(fixture());f.target.actor.traits=new Set(['construct']);f.actor.skills.arcana.totalModifier=7;f.actor.skills.crafting.totalModifier=8;let after=0;
+ f.actor.rules=[{async afterRoll({check,roll}){after++;assert.equal(check.slug,'crafting');assert.equal(roll.total,20);assert.equal(f.game.messages.get('rk1').flags[MODULE_ID].workbenchRecall.probeUse.status,'claimed');}}];
+ const capture=await api.captureWorkbenchRecall({...f,requestId:'safe-probes',targetUuids:[f.target.uuid]});assert.equal(f.die.count,1);assert.equal(after,1);assert.equal(capture.message.flags[MODULE_ID].workbenchRecall.probeUse.status,'done');assert.equal(capture.candidates.find(c=>c.statistic==='crafting').total,20);
+});
+test('the same native kept fortune die supplies every Workbench candidate and real afterRoll dice',async()=>{
+ const f=nativeProbeFixture(fixture());f.target.actor.traits=new Set(['construct']);f.actor.skills.crafting.totalModifier=8;f.actor.skills.crafting.rollTwice='keep-higher';let after=0;
+ f.actor.rules=[{afterRoll({roll}){after++;assert.deepEqual(roll.dice[0].modifiers,['kh']);}}];
+ const capture=await api.captureWorkbenchRecall({...f,requestId:'fortune-probes',targetUuids:[f.target.uuid]});assert.equal(f.die.count,1);assert.equal(capture.die,18);assert.equal(after,1);assert.equal(capture.message.rolls[0].dice[0].results[0].discarded,true);assert.ok(capture.candidates.every(c=>c.total===18+c.modifier));
+});
+test('a failed primary afterRoll keeps the claimed native result and cannot repeat that request dice',async()=>{
+ const f=nativeProbeFixture(fixture());let after=0;f.actor.rules=[{afterRoll(){after++;throw Error('native effect write failed');}}];
+ const input={...f,requestId:'failed-consumption',targetUuids:[f.target.uuid]};await assert.rejects(()=>api.captureWorkbenchRecall(input),/native effect write failed/);assert.equal(f.die.count,1);assert.equal(f.game.messages.get('rk1').flags[MODULE_ID].workbenchRecall.probeUse.status,'claimed');
+ await assert.rejects(()=>api.captureWorkbenchRecall(input),/已开始|保存|重复/);assert.equal(f.die.count,1);assert.equal(after,1);
+});
+test('native selected substitution stays deterministic and afterRoll sees the actual selected substitution',async()=>{
+ const f=fixture();f.actor.skills.society.substitutions=[{slug:'native-substitute',selected:true,required:true,value:15,effectType:'fortune'}];nativeProbeFixture(f);let after=0;
+ f.actor.rules=[{afterRoll({roll,context}){after++;assert.equal(roll.dice.length,0);assert.equal(context.substitutions[0].selected,true);}}];
+ const capture=await api.captureWorkbenchRecall({...f,requestId:'native-substitution',targetUuids:[f.target.uuid]});assert.equal(capture.die,15);assert.equal(capture.message.rolls[0].dice.length,0);assert.equal(after,1);assert.equal(capture.candidates[0].total,28);assert.equal(capture.message.flags.pf2e.context.substitutions[0].value,15);
+});
+test('one-use native degree adjustment is captured with the primary DC and survives its effect deletion',async()=>{
+ const f=fixture(),adjustment={predicate:{test:()=>true},adjustments:{all:[{amount:1}]}};f.actor.synthetics.degreeOfSuccessAdjustments.society=[adjustment];let after=0;
+ f.actor.rules=[{afterRoll({context}){assert.equal(context.dosAdjustments.length,1,'native StatisticCheck only captures adjustments if supplied a DC');after++;f.actor.synthetics.degreeOfSuccessAdjustments={};}}];
+ const capture=await api.captureWorkbenchRecall({...f,requestId:'native-degree-consumption',targetUuids:[f.target.uuid]});assert.equal(after,1);assert.equal(capture.candidates[0].degree,3);
+ const result=await api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:{...f.game,user:f.gm},message:capture.message});assert.equal(result.degree,3);
+});
 test('installed Workbench macro produces one secret same-die target comparison with native captured modifiers',async()=>{
  assert.ok(api?.captureWorkbenchRecall,'Workbench bridge is missing');const f=fixture();
  const capture=await api.captureWorkbenchRecall({...f,requestId:'request1',targetUuids:[f.target.uuid]});
@@ -171,7 +210,7 @@ test('a no-GM result still saves one secret die and an owner request rejects a f
 test('invalid native probe receipt fails instead of hanging Workbench callback or silently replaying a die',async()=>{
  const f=fixture();f.actor.skills.society.roll=async options=>{options.callback({options:{totalModifier:13}},null,{flags:{pf2e:{context:{type:'other'}}}});};
  const timeout=new Promise((_,reject)=>setTimeout(()=>reject(Error('native callback hung')),30));
- await assert.rejects(Promise.race([api.captureWorkbenchRecall({...f,requestId:'bad-probe',targetUuids:[f.target.uuid]}),timeout]),/回执/);assert.equal(f.die.count,1);
+ await assert.rejects(Promise.race([api.captureWorkbenchRecall({...f,requestId:'bad-probe',targetUuids:[f.target.uuid]}),timeout]),/回执/);assert.equal(f.die.count,0);
 });
 test('incidental native roll options affect captured modifiers before primary selection',async()=>{
  const f=fixture();const original=f.actor.skills.society.roll;f.actor.skills.society.roll=async function(options){this.totalModifier=options.extraRollOptions.includes('origin:item:known-weaknesses')?17:13;return original.call(this,options);};
@@ -210,6 +249,7 @@ test('Automatic Knowledge executes fixed Assurance on original owner and shares 
 });
 test('a fixed Lore ability preserves its statistic and DC instead of being excluded by ordinary primary policy',async()=>{
  const f=fixture();f.actor.skills['warfare-lore']={...f.actor.skills.occultism,slug:'warfare-lore',label:'Warfare Lore',lore:true};
+ nativeProbeFixture(f);
  const capture=await api.captureWorkbenchRecall({...f,requestId:'fixed-lore',targetUuids:[f.target.uuid],statistic:'warfare-lore',dc:18});
  const result=await api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:{...f.game,user:f.gm},message:capture.message,user:f.gm});assert.equal(result?.statistic,'warfare-lore');assert.equal(result.dc,18);
 });

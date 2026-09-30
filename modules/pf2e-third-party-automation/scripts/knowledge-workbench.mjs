@@ -1,5 +1,6 @@
 import {MODULE_ID} from './rules.mjs';
 import {hasSkillAssurance} from './knowledge-automatic.mjs';
+import {withKnowledgeProbe,consumeKnowledgePrimary} from './knowledge-probes.mjs';
 export const WORKBENCH_RECALL_UUID='Compendium.xdy-pf2e-workbench.asymonous-benefactor-macros-internal.Macro.xcFr7PWwG5OVALNJ';
 const skills=['arcana','crafting','medicine','nature','occultism','religion','society'];
 const identify={aberration:['occultism'],astral:['occultism'],animal:['nature'],beast:['arcana','nature'],celestial:['religion'],construct:['arcana','crafting'],dragon:['arcana'],elemental:['arcana','nature'],ethereal:['occultism'],fey:['nature'],fiend:['religion'],fungus:['nature'],giant:['society'],humanoid:['society'],monitor:['religion'],ooze:['occultism'],plant:['nature'],spirit:['occultism'],undead:['religion']};
@@ -33,36 +34,71 @@ export async function captureWorkbenchRecall({game,actor,token,user=game.user,ta
   const targets=[];for(const uuid of [...new Set(targetUuids)]){const target=doc(await fromUuid(uuid));if(target?.documentName!=='Token'||!target.actor)throw Error('回忆知识目标已不存在。');targets.push(target);}
   const targetActors=targets.map(target=>({tokenUuid:target.uuid,actorUuid:target.actor.uuid}));
   const assertTargets=()=>{if(targets.some((target,index)=>target.actor?.uuid!==targetActors[index].actorUuid))throw Error('回忆知识目标关联角色已改变；原始秘骰保留，不会再次投骰。');};
- const probes=new Map();let currentTarget=null,created=null,fail;const failed=new Promise((_,reject)=>{fail=reject;});failed.catch(()=>{});
+ const previous=values(game.messages).find(message=>own(message)?.requestId===requestId&&own(message).actorUuid===actor.uuid&&own(message).userId===user.id);
+ if(previous)throw Error('本次回忆知识已开始或已保存；不会重复投骰。');
+ const probes=new Map(),receipts=new Map();let currentTarget=null,created=null,macroPublished=false,primary=null,primaryRoll=null,primaryNativeContext=null,rawRoll=null,fail;const failed=new Promise((_,reject)=>{fail=reject;});failed.catch(()=>{});
  const preparedSkills={};
  for(const [slug,skill]of Object.entries(actor.skills??{}))preparedSkills[slug]=scoped(skill,{roll:async options=>{
   authorization(game,actor,user);const targetUuid=currentTarget;
-  try{const result=await skill.roll({...options,extraRollOptions:[...new Set([...(options.extraRollOptions??[]),...(origin?.rollOptions??[])])],callback:(roll,outcome,message)=>{const context=message?.flags?.pf2e?.context??{};if(!Number.isFinite(roll?.options?.totalModifier)||context.type!=='skill-check'||!context.options?.includes('action:recall-knowledge'))throw Error('Workbench 原生技能回执不完整。');probes.set(`${targetUuid??''}:${slug}`,{statistic:slug,label:skill.label??slug,modifier:roll.options.totalModifier,domains:context.domains??[],rollOptions:context.options??[],targetUuid,lore:!!skill.lore});return options.callback?.(roll,outcome,message);}});if(!result)fail(Error('原生回忆知识技能检定已取消；不会再次投骰。'));return result;}catch(error){fail(error);return null;}
+  const key=`${targetUuid??''}:${slug}`,cached=receipts.get(key);if(cached){await options.callback?.(cached.roll,undefined,cached.message);return cached.roll;}
+  const probeTarget=targets.find(target=>target.uuid===targetUuid),probeDC=Number.isFinite(dc)?dc:probeTarget?targetDC(probeTarget.actor):null;
+  try{const captured=await withKnowledgeProbe({actor,statistic:slug,globals},marker=>skill.roll({...options,dc:Number.isFinite(probeDC)?{value:probeDC,visible:false}:null,extraRollOptions:[...new Set([...(options.extraRollOptions??[]),...(origin?.rollOptions??[]),'secret',marker])],callback:(roll,outcome,message)=>{const context=message?.flags?.pf2e?.context??{};if(!Number.isFinite(roll?.options?.totalModifier)||context.type!=='skill-check'||!context.options?.includes('action:recall-knowledge'))throw Error('Workbench 原生技能回执不完整。');probes.set(key,{statistic:slug,label:skill.label??slug,modifier:roll.options.totalModifier,domains:context.domains??[],rollOptions:context.options??[],targetUuid,lore:!!skill.lore});return options.callback?.(roll,outcome,message);}}));if(!captured.receipt.captured)throw Error('原生回忆知识探测接口未接入或已取消；不会再次投骰。');receipts.set(key,captured.receipt);return captured.receipt.roll;}catch(error){fail(error);return null;}
  }});
  const scopedActor=scoped(actor,{skills:preparedSkills});
  const scopedToken=scoped(tokenDocument.object??tokenDocument,{actor:scopedActor,document:tokenDocument});
  const scopedTargets=new Set(targets.map(target=>scoped(target.object??target,{document:target,actor:scoped(target.actor,{getSelfRollOptions:(...args)=>{currentTarget=target.uuid;return target.actor.getSelfRollOptions(...args);}})})));scopedTargets.first=()=>scopedTargets.values().next().value;
  const scopedUser=scoped(user,{targets:scopedTargets}),scopedGame=scoped(game,{user:scopedUser,userId:user.id});
  const BaseMessages=globals.ChatMessage;
- class Messages extends BaseMessages {static getSpeaker(){return {actor:actor.id,token:tokenDocument.id,scene:tokenDocument.parent?.id};}static async create(data){if(created)throw Error('Workbench 同次回忆知识生成了重复结果卡。');authorization(game,actor,user);const context=data.flags?.pf2e?.context;if(context?.type!=='skill-check'||!context.options?.includes('action:recall-knowledge'))throw Error('Workbench 结果来源不匹配。');created=await BaseMessages.create({...data,user:user.id,author:user.id,speaker:Messages.getSpeaker(),blind:true,whisper:BaseMessages.getWhisperRecipients('GM').map(u=>u.id)});return created;}}
+ class Messages extends BaseMessages {static getSpeaker(){return {actor:actor.id,token:tokenDocument.id,scene:tokenDocument.parent?.id};}static async create(data){if(macroPublished)throw Error('Workbench 同次回忆知识生成了重复结果卡。');authorization(game,actor,user);const context=data.flags?.pf2e?.context;if(context?.type!=='skill-check'||!context.options?.includes('action:recall-knowledge'))throw Error('Workbench 结果来源不匹配。');const content={...data,user:user.id,author:user.id,speaker:Messages.getSpeaker(),blind:true,whisper:BaseMessages.getWhisperRecipients('GM').map(u=>u.id)};if(created){const flags={...created.flags,...data.flags,[MODULE_ID]:created.flags?.[MODULE_ID]};if(primaryNativeContext)flags.pf2e={...data.flags.pf2e,context:{...primaryNativeContext,...context,domains:primaryNativeContext.domains,options:[...new Set([...primaryNativeContext.options,...context.options])],outcome:null,unadjustedOutcome:null,dc:null}};delete content.user;delete content.author;await created.update({...content,flags});}else created=await BaseMessages.create(content);macroPublished=true;return created;}}
  if(assurance){const skill=actor.skills?.[statistic];if(!skill)throw Error('指定技能不存在。');const proficiency=(skill.modifiers??[]).filter(m=>m.type==='proficiency'&&!m.ignored).reduce((n,m)=>n+(m.modifier??0),0);if(!Number.isFinite(proficiency))throw Error('Assurance 熟练加值不可用。');currentTarget=targets.length===1?targets[0].uuid:null;probes.set(`${currentTarget??''}:${statistic}`,{statistic,label:skill.label??statistic,modifier:proficiency,domains:[statistic,'skill-check'],rollOptions:[...(origin?.rollOptions??[]),...(actor.getRollOptions?.([statistic,'skill-check'])??[]),'action:recall-knowledge',`action:recall-knowledge:${statistic}`,`skill:rank:${skill.rank}`,'assurance','substitute:assurance','fortune',...(targets.length===1?targets[0].actor.getSelfRollOptions('target'):[])],targetUuid:currentTarget,lore:!!skill.lore});await Messages.create({content:`<strong>Recall Knowledge — Assurance</strong><p>${escape(skill.label??statistic)}: ${10+proficiency}</p>`,rolls:[],flags:{pf2e:{context:{type:'skill-check',options:['action:recall-knowledge','secret','assurance'],traits:['concentrate','secret'],rollMode:'blindroll',target:targets.length===1?{token:targets[0].uuid,actor:targets[0].actor.uuid}:undefined}}}});
  }else{
   if(!game.modules.get('xdy-pf2e-workbench')?.active)throw Error('回忆知识需要启用 Workbench。');let macro=await fromUuid(WORKBENCH_RECALL_UUID);if(!macro?.execute||macro.type!=='script')throw Error('Workbench 回忆知识宏接口不可用。');
   if(macro.canExecute===false){const data=macro.toObject();delete data._id;data.ownership={...data.ownership,default:globals.CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER};macro=new macro.constructor(data);}
-  await Promise.race([failed,macro.execute({actor:scopedActor,token:scopedToken,game:scopedGame,ChatMessage:Messages,Roll:globals.Roll,CONST:globals.CONST,CONFIG:globals.CONFIG,ui:globals.ui,document:globals.document})]);
-  if(!created)throw Error('Workbench 未生成本次回忆知识卡；不会再次投骰。');
-  if(statistic&&!probes.has(`${targets.length===1?targets[0].uuid:''}:${statistic}`)){const skill=preparedSkills[statistic];if(!skill)throw Error('指定技能不存在。');currentTarget=targets.length===1?targets[0].uuid:null;const options=['action:recall-knowledge',`action:recall-knowledge:${statistic}`,...(targets.length===1?targets[0].actor.getSelfRollOptions('target'):[])];await Promise.race([failed,skill.roll({createMessage:false,rollMode:'blindroll',skipDialog:true,extraRollOptions:options,callback(){}})]);}
+  for(const target of targets.length?targets:[null]){
+   currentTarget=target?.uuid??null;
+   const allowed=statistic?[statistic]:target?primarySkills(actor,target.actor):skills;
+   const slugs=[...new Set([...allowed,...Object.entries(actor.skills).filter(([,skill])=>skill.lore).map(([slug])=>slug)])];
+   // Unknown traits still need one real check to consume generic next-check
+   // effects. Its highest ordinary skill is not a creature identification DC.
+   if(!slugs.some(slug=>!actor.skills[slug]?.lore))slugs.push(...skills);
+   for(const slug of slugs){const skill=preparedSkills[slug];if(!skill)throw Error('指定技能不存在。');const extraRollOptions=['action:recall-knowledge',`action:recall-knowledge:${slug}`,`skill:rank:${actor.skills[slug].rank}`,...(target?target.actor.getSelfRollOptions('target'):[])];await Promise.race([failed,skill.roll({createMessage:false,skipDialog:true,extraRollOptions,callback(){}})]);}
+  }
+  primary=[...probes.values()].filter(probe=>statistic?probe.statistic===statistic:!probe.lore).sort((a,b)=>b.modifier-a.modifier)[0];if(!primary)throw Error('原生回忆知识主技能不可用。');
+  const primaryReceipt=receipts.get(`${primary.targetUuid??''}:${primary.statistic}`),primaryTarget=targets.find(target=>target.uuid===primary.targetUuid),primaryDC=Number.isFinite(dc)?dc:targets.length===1&&primaryTarget&&(statistic||primarySkills(actor,primaryTarget.actor).includes(primary.statistic))?targetDC(primaryTarget.actor):null;
+  const reservation={schema:1,requestId,actorUuid:actor.uuid,tokenUuid:tokenDocument.uuid,userId:user.id,targetUuids:targets.map(t=>t.uuid),targetActors,origin,statistic,assurance:false,die:null,candidates:[],status:'rolling'};
+  // Save the operation before its sole real roll, so an interrupted rendering
+  // or rule write cannot cause a retry to throw another secret die.
+  created=await BaseMessages.create({content:'<strong>Recall Knowledge</strong>',rolls:[],user:user.id,author:user.id,speaker:Messages.getSpeaker(),blind:true,whisper:BaseMessages.getWhisperRecipients('GM').map(u=>u.id),flags:{pf2e:{context:{type:'skill-check',options:['action:recall-knowledge','secret'],traits:['concentrate','secret']}},[MODULE_ID]:{workbenchRecall:reservation}}});
+  primaryReceipt.primaryContext={...primaryReceipt.context,options:new Set(primaryReceipt.rollOptions),createMessage:false,skipDialog:true,messageMode:'blind',traits:['concentrate','secret'],dc:Number.isFinite(primaryDC)?{value:primaryDC,visible:false}:null};
+  // Restore the chosen rule's own beforeRoll state after comparing other skills.
+  for(const rule of primaryReceipt.actor.rules?.filter(rule=>!rule.ignored)??[])rule.beforeRoll?.(primaryReceipt.domains,primaryReceipt.primaryContext.options);
+  primaryRoll=await primaryReceipt.native(primaryReceipt.check,primaryReceipt.primaryContext,null,async(roll,_outcome,nativeMessage)=>{
+   primaryNativeContext=nativeMessage.flags.pf2e.context;primary.rollOptions=primaryNativeContext.options;
+   primary.modifier=roll.options.totalModifier;primaryReceipt.roll.options.totalModifier=roll.options.totalModifier;primary.nativeDegree=roll.options.degreeOfSuccess;primary.nativeDC=primaryDC;
+   rawRoll=roll.dice.length?globals.Roll.fromTerms(roll.dice):await new globals.Roll(String(roll.total-roll.options.totalModifier)).evaluate({allowInteractive:false});
+   if(!Number.isInteger(rawRoll.total)||rawRoll.total<1||rawRoll.total>20)throw Error('原生回忆知识选中骰点不可验证。');
+   await created.update({rolls:[rawRoll],[`flags.${MODULE_ID}.workbenchRecall.die`]:rawRoll.total});
+  });
+  if(!primaryRoll||!rawRoll)throw Error('原生回忆知识技能检定已取消；已保存操作不会再次投骰。');
+  assertTargets();
+  class SharedRoll {constructor(formula){if(formula!=='1d20')throw Error('Workbench 原始骰子接口改变。');return scoped(rawRoll,{roll:async()=>rawRoll});}}
+  await Promise.race([failed,macro.execute({actor:scopedActor,token:scopedToken,game:scopedGame,ChatMessage:Messages,Roll:SharedRoll,CONST:globals.CONST,CONFIG:globals.CONFIG,ui:globals.ui,document:globals.document})]);
+  if(!macroPublished)throw Error('Workbench 未生成本次回忆知识卡；原生秘骰已保存，不会再次投骰。');
  }
   assertTargets();
   const die=assurance?null:created.rolls?.[0]?.total;if(!assurance&&(!Number.isInteger(die)||die<1||die>20))throw Error('Workbench 原始 d20 不可验证。');
  const candidates=[];const scopeTargets=targets.length?targets:[null];
- for(const target of scopeTargets){const allowed=statistic?[statistic]:target?primarySkills(actor,target.actor):skills;for(const probe of probes.values()){if(probe.targetUuid!==(target?.uuid??null)||!allowed.includes(probe.statistic)&&!probe.lore)continue;if(statistic&&probe.statistic!==statistic)continue;const total=(assurance?10:die)+probe.modifier,effectiveDC=Number.isFinite(dc)?dc:target?targetDC(target.actor):null;candidates.push({...probe,total,dc:probe.lore&&!statistic?null:effectiveDC,degree:recallDegree({total,die,dc:probe.lore&&!statistic?null:effectiveDC,domains:probe.domains,rollOptions:probe.rollOptions,actor})});}}
-  const state={schema:1,requestId,actorUuid:actor.uuid,tokenUuid:tokenDocument.uuid,userId:user.id,targetUuids:targets.map(t=>t.uuid),targetActors,origin,statistic,assurance,die,candidates,status:'pending'};
- await created.update({[`flags.${MODULE_ID}.workbenchRecall`]:state});return {message:created,die,candidates};
+ for(const target of scopeTargets){const allowed=statistic?[statistic]:target?primarySkills(actor,target.actor):skills;for(const probe of probes.values()){if(probe.targetUuid!==(target?.uuid??null)||!allowed.includes(probe.statistic)&&!probe.lore)continue;if(statistic&&probe.statistic!==statistic)continue;const total=(assurance?10:die)+probe.modifier,effectiveDC=Number.isFinite(dc)?dc:target?targetDC(target.actor):null;candidates.push({...probe,total,dc:probe.lore&&!statistic?null:effectiveDC,degree:Number.isInteger(probe.nativeDegree)&&probe.nativeDC===effectiveDC?probe.nativeDegree:recallDegree({total,die,dc:probe.lore&&!statistic?null:effectiveDC,domains:probe.domains,rollOptions:probe.rollOptions,actor})});}}
+  const state={schema:1,requestId,actorUuid:actor.uuid,tokenUuid:tokenDocument.uuid,userId:user.id,targetUuids:targets.map(t=>t.uuid),targetActors,origin,statistic,assurance,die,candidates,primary:primary?{statistic:primary.statistic,targetUuid:primary.targetUuid}:null,status:primaryRoll?'consuming':'pending'};
+ await created.update({[`flags.${MODULE_ID}.workbenchRecall`]:state});
+ if(primaryRoll)await consumeKnowledgePrimary({message:created,candidate:candidates.find(candidate=>candidate.statistic===primary.statistic&&candidate.targetUuid===primary.targetUuid)??primary,receipt:receipts.get(`${primary.targetUuid??''}:${primary.statistic}`),roll:primaryRoll});
+ if(primaryRoll)await created.update({[`flags.${MODULE_ID}.workbenchRecall.status`]:'pending'});
+ return {message:created,die,candidates};
 }
 export async function finalizeWorkbenchRecall({game,message,user=game.user,statistic=null,dc=null,fromUuid=globalThis.fromUuid}){
  if(!user?.isGM||game.user!==user||game.users.get(user.id)!==user)throw Error('只有 GM 可裁定回忆知识结果。');
  const state=own(message);if(game.messages.get(message?.id)!==message||state?.schema!==1||state.actorUuid!==message.actor?.uuid||message.flags?.pf2e?.context?.type!=='skill-check'||!message.flags?.pf2e?.context?.options?.includes('action:recall-knowledge')||message.author?.id!==state.userId||!message.actor?.testUserPermission?.(message.author,'OWNER')||!message.blind)throw Error('回忆知识原卡或原操作者不可验证。');
+ if(!['pending','done'].includes(state.status)||state.probeUse?.status==='claimed')throw Error('原生回忆知识已保存，原生规则处理尚未完成；不会再次投骰。');
  if((state.assurance?null:message.rolls?.[0]?.total)!==state.die||state.candidates.some(c=>!Number.isFinite(c.modifier)||c.total!==(state.assurance?10:state.die)+c.modifier))throw Error('回忆知识原始骰点或候选结果不可验证。');
   if(!Array.isArray(state.targetActors)||state.targetActors.length!==state.targetUuids.length)throw Error('回忆知识目标角色来源不可验证。');
   for(const [index,binding]of state.targetActors.entries()){
@@ -72,12 +108,12 @@ export async function finalizeWorkbenchRecall({game,message,user=game.user,stati
   if(state.targetActors.length===1){const native=message.flags.pf2e.context.target,binding=state.targetActors[0];if(native?.token!==binding.tokenUuid||native.actor!==binding.actorUuid)throw Error('回忆知识原生目标角色与保存来源不匹配。');}
  const available=state.candidates.filter(c=>state.targetUuids.length===1?c.targetUuid===state.targetUuids[0]:state.targetUuids.length===0&&!c.targetUuid);
  const selection=statistic??state.statistic;
- const candidate=selection?available.find(c=>c.statistic===selection):available.filter(c=>!c.lore&&Number.isFinite(c.dc)).sort((a,b)=>b.modifier-a.modifier)[0];
+ const candidate=selection?available.find(c=>c.statistic===selection):available.find(c=>c.statistic===state.primary?.statistic&&c.targetUuid===state.primary.targetUuid)??available.filter(c=>!c.lore&&Number.isFinite(c.dc)).sort((a,b)=>b.modifier-a.modifier)[0];
  if(!candidate&&!selection)return null;
  if(!candidate)throw Error('请选择本次已保存的候选技能；不能接收外部检定总值。');
  if(state.result){if(state.result.statistic!==candidate.statistic||Number.isFinite(dc)&&dc!==state.result.dc)throw Error('该次机械结果已锁定；其他技能与 DC 供 GM 信息裁定，不会再次触发收益。');return state.result;}
  const effectiveDC=Number.isFinite(dc)?dc:candidate.dc;if(!Number.isFinite(effectiveDC))return null;
- const result={statistic:candidate.statistic,dc:effectiveDC,total:candidate.total,die:state.die,degree:recallDegree({...candidate,dc:effectiveDC,die:state.die,actor:message.actor}),targetUuid:candidate.targetUuid,assurance:state.assurance};
+ const result={statistic:candidate.statistic,dc:effectiveDC,total:candidate.total,die:state.die,degree:effectiveDC===candidate.dc?candidate.degree:recallDegree({...candidate,dc:effectiveDC,die:state.die,actor:message.actor}),targetUuid:candidate.targetUuid,assurance:state.assurance};
  const options=[...new Set([...message.flags.pf2e.context.options,...candidate.rollOptions,...(state.origin?.rollOptions??[])])];
  await message.update({[`flags.${MODULE_ID}.workbenchRecall`]:{...state,status:'done',result},'flags.pf2e.context.outcome':outcomes[result.degree],'flags.pf2e.context.dc':{value:effectiveDC,visible:false},'flags.pf2e.context.options':options,'flags.pf2e.context.domains':candidate.domains,'flags.pf2e.context.statistic':candidate.statistic});return result;
 }
