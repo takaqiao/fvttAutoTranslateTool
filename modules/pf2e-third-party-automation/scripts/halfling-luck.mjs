@@ -14,7 +14,7 @@ async function sha256(value){return [...new Uint8Array(await globalThis.crypto.s
 /** One live failed Check invocation, one original daily Use, one final delivery.
  * No reaction reservation and no retrospective lookup of a previous check card.
  */
-export function createHalflingLuckProvider({game,fromUuid=globalThis.fromUuid,choose,originalUse,ledger=createHalflingLuckLedger({game,fromUuid}),assess=assessHalflingLuck,randomId=()=>globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.randomUUID(),onError=()=>{},publish}={}){
+export function createHalflingLuckProvider({game,fromUuid=globalThis.fromUuid,choose,originalUse,ledger=createHalflingLuckLedger({game,fromUuid}),assess=assessHalflingLuck,randomId=()=>globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.randomUUID(),onError=()=>{},publish,referencePublisher}={}){
  const scopes=new Map(),authorizations=new Map(),waiters=new Map();let socket,installed=false;
  const feature=a=>values(a?.items).find(isHalflingLuckItem);
  const handlesActor=a=>a?.type==='character'&&!a.isToken&&game.actors?.get(a.id)===a&&!!feature(a);
@@ -113,7 +113,7 @@ export function createHalflingLuckProvider({game,fromUuid=globalThis.fromUuid,ch
   const s={invocationId,actor,item:feature(actor),user:game.user,gmId:game.users.activeGM.id,check,stage:'original',nonce:null,requestedCreateMessage:context.createMessage!==false};scopes.set(invocationId,s);
   let originalCallbacks=0,rerollCallbacks=0,nativeInvocations=0,delivered=false;
   try{
-   return await runCheckReactionPipeline({game,check,context,event,
+   return await runCheckReactionPipeline({game,check,context,event,referencePublisher,
     publish:data=>{if(s.nonce)requireScope(s,false);return publish?publish(data):globalThis.ChatMessage.create(data);},
     native:async(c,ctx,e,collect)=>{const reroll=++nativeInvocations>1;if(reroll)requireScope(s);return native(c,ctx,e,async(roll,outcome,card,ce)=>{
      if(!reroll){if(++originalCallbacks!==1)throw Error('原生检定重复返回，未继续半身人幸运。');return collect(roll,outcome,card,ce);}

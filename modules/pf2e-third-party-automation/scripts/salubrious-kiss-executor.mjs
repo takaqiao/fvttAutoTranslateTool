@@ -3,6 +3,8 @@ import {MODULE_ID} from './rules.mjs';
 import {SerialActions} from './runtime.mjs';
 import {treatmentOutcome,kissState} from './salubrious-kiss-rules.mjs';
 import {identityKeys,sameClaim,claimOf,marker,outcomes,contextFor,assertSource,assertPatient,assertClaimPrivacy,fail} from './salubrious-kiss-context.mjs';
+import {manualDamageRoll as rollManualDamage,manualDamagePrivacy} from './manual-native-roll.mjs';
+import {beforeNativeRoll} from './native-owner-operations.mjs';
 const proof=(claim,kind)=>({kind,...Object.fromEntries(identityKeys.map(k=>[k,claim[k]])),...claim.privacy?{privacy:structuredClone(claim.privacy)}:{}});
 const author=m=>m.author?.id??m.author??m.user?.id??m.user;
 const dataRoll=r=>typeof r==='string'?JSON.parse(r):r;
@@ -25,7 +27,10 @@ export function validateSalubriousCard({game,message,claim,damage=false,stored=t
 /** Use the prepared Occultism Statistic and native DamageRoll. Numeric-DC
  * Statistic legitimately keeps context.target null; exact patient is separately
  * persisted in this module's proof, never invented as a native target context. */
-export async function rollSalubriousTreatment({game,actor,item,token,target,claim,checkScope,createMessage=data=>globalThis.ChatMessage.create(data),DamageRoll}={}){
+export async function rollSalubriousTreatment({game,actor,item,token,target,claim,Hooks=globalThis.Hooks,checkScope,createMessage=data=>globalThis.ChatMessage.create(data),DamageRoll,manualDamageRoll=rollManualDamage,assertLive=()=>{}}={}){
+ const targetActor=target.actor,owner=game.user;
+ const live=()=>{assertLive();assertSource({game,actor,item,token,user:owner,privacy:claim.privacy});assertPatient({game,actor,token,target,user:owner});assertClaimPrivacy({game,claim,token,item,target,user:owner});if(game.user!==owner||target.actor!==targetActor)throw fail('原拥有者或患者绑定已改变');};
+ assertLive();
  assertSource({game,actor,item,token,user:game.user,privacy:claim.privacy});assertPatient({game,actor,token,target,user:game.users.get(claim.userId)});
  assertClaimPrivacy({game,claim,token,item,target,user:game.user});
  if(game.user.id!==claim.userId||actor.uuid!==claim.actorUuid||item.uuid!==claim.itemUuid||token.uuid!==claim.tokenUuid||target.uuid!==claim.targetUuid||target.actor.uuid!==claim.targetActorUuid)throw fail('本客户端不是原医疗来源和拥有者');
@@ -33,35 +38,65 @@ export async function rollSalubriousTreatment({game,actor,item,token,target,clai
  let draft,fingerprint,callbackError;
  const callback=async(roll,outcome,message)=>{
   try{
+   assertLive();
    if(typeof message?.toObject!=='function'||message.id&&game.messages.get(message.id)===message)throw fail('回调不是未发布的原生草稿');
    const data=message.toObject();delete data._id;const degree=validateSalubriousCard({game,message:data,claim,stored:false,decorated:false});
    if(outcomes[degree]!==outcome||roll.total!==dataRoll(data.rolls[0]).total)throw fail('原生回调结果不一致');
    const key=JSON.stringify(data);if(fingerprint&&fingerprint!==key)throw fail('同一次检定出现多个不同最终草稿');fingerprint=key;draft=data;
   }catch(error){callbackError=error;throw error}
  };
- const roll=await checkScope.run({actor,item,token,claim},()=>native.roll({token,item,action:'treat-wounds',dc:{value:claim.dc,visible:true},traits:['exploration','healing','manipulate','vitality'],skipDialog:true,messageMode:claim.privacy?.mode??'public',createMessage:false,
-  extraRollOptions:['action:treat-wounds',checkMarker(claim),'item:trait:healing','item:trait:vitality'],callback}));
+  const roll=await beforeNativeRoll({Hooks,marker:checkMarker(claim),showDialog:true,commit:async()=>{},assertLive:live,native:()=>checkScope.run({actor,item,token,claim},()=>native.roll({token,item,action:'treat-wounds',dc:{value:claim.dc,visible:true},traits:['exploration','healing','manipulate','vitality'],skipDialog:false,event:null,messageMode:claim.privacy?.mode??'public',createMessage:false,
+  extraRollOptions:['action:treat-wounds',checkMarker(claim),'item:trait:healing','item:trait:vitality'],callback}))});
  if(callbackError)throw callbackError;if(!roll||!draft)throw fail('原生医疗取消或没有最终草稿');
  assertSource({game,actor,item,token,user:game.user,privacy:claim.privacy});assertPatient({game,actor,token,target,user:game.users.get(claim.userId)});
  assertClaimPrivacy({game,claim,token,item,target,user:game.user});
+ assertLive();
  draft.flags.pf2e.context.options=[...new Set([...draft.flags.pf2e.context.options,skip])];draft.flags.pf2e.suppressDamageButtons=true;
  draft.flags[MODULE_ID]={...draft.flags[MODULE_ID],salubriousKiss:proof(claim,'check')};
  const check=await createMessage(draft),degree=validateSalubriousCard({game,message:check,claim});
  const outcome=treatmentOutcome({degree,tier:claim.tier});if(!outcome.formula)return {check,damage:null,degree};
  DamageRoll??=game.pf2e?.DamageRoll??globalThis.CONFIG?.Dice?.rolls?.find(cls=>cls.name==='DamageRoll');if(typeof DamageRoll!=='function')throw fail('原生DamageRoll类不可用');
- const damageRoll=await new DamageRoll(outcome.formula).evaluate({allowInteractive:(claim.privacy?.mode??'public')!=='blind'});assertSource({game,actor,item,token,user:game.user,privacy:claim.privacy});
+ assertLive();
+ const mode=claim.privacy?.mode??'public',damageRoll=await manualDamageRoll({game,roll:new DamageRoll(outcome.formula),messageMode:mode,assertLive:live});
+ assertLive();
+ if(!damageRoll)throw fail('已取消本次医疗伤害投骰');
+ const selected=manualDamagePrivacy(damageRoll);if(selected?.messageMode!==undefined&&selected.messageMode!==mode)throw fail('原生窗口改变了本次固定医疗受众，尚未发布伤害');
+ assertSource({game,actor,item,token,user:game.user,privacy:claim.privacy});
  assertClaimPrivacy({game,claim,token,item,target,user:game.user});
  const flags=structuredClone(check.flags);flags.pf2e.origin={...flags.pf2e.origin,messageId:check.id};flags.pf2e.context.options.push(marker('damage',claim));flags[MODULE_ID].salubriousKiss=proof(claim,'damage');
  const damage=await createMessage({author:claim.userId,speaker:structuredClone(check.speaker),flavor:outcome.kind==='healing'?'仙露三吻：医疗恢复':'仙露三吻：医疗大失败',...salubriousPrivacyData(claim),flags,rolls:[damageRoll.toJSON()]});
  validateSalubriousCard({game,message:damage,claim,damage:true});return {check,damage,degree};
 }
 
-export function createSalubriousExecutor({game,fromUuid=globalThis.fromUuid,Hooks=globalThis.Hooks,checkScope,createMessage,DamageRoll,authorizeDamage,timeoutMs=60000}={}){
+export function createSalubriousExecutor({game,fromUuid=globalThis.fromUuid,Hooks=globalThis.Hooks,checkScope,createMessage,DamageRoll,manualDamageRoll=rollManualDamage,authorizeDamage,timeoutMs=60000}={}){
  let socket;const tasks=new Map(),writes=new SerialActions();
  const requireGM=user=>{if(!user?.active||!user.isGM||game.users.get(user.id)!==user||game.users.activeGM!==user)throw fail('请求者不是当前主GM');};
  function waitFor(read,event,match){const first=read();if(first)return Promise.resolve(first);if(!Hooks?.on)throw fail('来源文档尚未同步');return new Promise((resolve,reject)=>{let id,timer,done=false;const finish=(error,value)=>{if(done)return;done=true;clearTimeout(timer);Hooks.off(event,id);error?reject(error):resolve(value)};const check=()=>{try{const v=read();if(v)finish(null,v)}catch(e){finish(e)}};id=Hooks.on(event,(...args)=>{if(match(...args))check()});timer=setTimeout(()=>finish(fail('准确文档同步超时')),timeoutMs);check()})}
  const card=id=>{if(typeof id!=='string'||!id)throw fail('没有准确原生卡ID');return waitFor(()=>game.messages.get(id),'createChatMessage',m=>m.id===id)};
- async function deadline(promise){let timer;try{return await Promise.race([promise,new Promise((_,reject)=>{timer=setTimeout(()=>reject(fail('原拥有者执行结果超时，不能重掷')),timeoutMs)})])}finally{clearTimeout(timer)}}
+ async function ownerReply(context,claim,invoke){
+  if(!Hooks?.on||!Hooks.off)throw fail('无法观察原拥有者的准确执行记录');
+  const requester=game.user,{actor,item,token,target,user}=context,registrations=[];
+  const read=()=>{
+   if(game.user!==requester)throw fail('原请求客户端已改变');requireGM(requester);
+   assertSource({game,actor,item,token,user,privacy:claim.privacy});assertPatient({game,actor,token,target,user});assertClaimPrivacy({game,claim,token,item,target,user});
+   const current=claimOf(actor,claim.nonce);if(!sameClaim(current,claim)||current.state!=='rolling')throw fail('原医疗认领已改变');
+   const records=(actor.flags?.[MODULE_ID]?.salubriousKissExecutions??[]).filter(record=>record.nonce===claim.nonce);
+   if(records.length>1||records[0]?.state==='uncertain')throw fail('原拥有者执行结果未确认，不能重掷');
+   return records[0]?.state==='done'?structuredClone(records[0].result):null;
+  };
+  let resolveSaved,rejectSaved;
+  const saved=new Promise((resolve,reject)=>{resolveSaved=resolve;rejectSaved=reject});
+  const inspect=()=>{try{const result=read();if(result)resolveSaved(result)}catch(error){rejectSaved(error)}};
+  for(const event of ['updateActor','updateUser','userConnected','deleteActor','deleteItem','deleteChatMessage'])registrations.push([event,Hooks.on(event,inspect)]);
+  const reply=Promise.resolve().then(invoke).then(async response=>{
+   if(!response?.ok)throw fail(response?.error??'原拥有者未确认');
+   // Only completed native work starts the document-sync deadline. Time spent
+   // choosing modifiers in the original owner's window has no UI deadline.
+   return waitFor(read,'updateActor',changed=>changed===actor);
+  });
+  inspect();
+  try{return await Promise.race([saved,reply])}finally{for(const [event,id]of registrations)Hooks.off(event,id)}
+ }
  async function ownerRoll(payload,requester){
   requireGM(requester);const actor=await fromUuid(payload?.actorUuid);if(!actor)throw fail('原角色不存在');
   const read=()=>{requireGM(requester);return claimOf(actor,payload.nonce)},claim=await waitFor(()=>{const c=read();return c&&c.state!=='choosing'?c:null},'updateActor',a=>a===actor);
@@ -75,16 +110,17 @@ export function createSalubriousExecutor({game,fromUuid=globalThis.fromUuid,Hook
     if(JSON.stringify(actor.flags?.[MODULE_ID]?.salubriousKissExecutions?.find(r=>r.nonce===claim.nonce))!==JSON.stringify(next))throw fail('原拥有者执行记录没有持久保存');
    });
    await write('started');
-   try{requireGM(requester);if(!sameClaim(read(),claim)||read().state!=='rolling')throw fail('投骰前认领已改变');
-    const output=await rollSalubriousTreatment({game,...context,claim,checkScope,createMessage,DamageRoll});requireGM(requester);if(!sameClaim(read(),claim)||read().state!=='rolling')throw fail('投骰后认领已改变');
+   const assertLive=()=>{requireGM(requester);if(game.user!==context.user||!sameClaim(read(),claim)||read().state!=='rolling')throw fail('投骰期间拥有者或认领已改变');};
+   try{assertLive();
+    const output=await rollSalubriousTreatment({game,...context,claim,Hooks,checkScope,createMessage,DamageRoll,manualDamageRoll,assertLive});assertLive();
     const result={checkId:output.check.id,damageId:output.damage?.id??null};await write('done',result);return result;
    }catch(error){await write('uncertain').catch(()=>{});throw error}
   })();tasks.set(key,promise);promise.finally(()=>{if(tasks.get(key)===promise)tasks.delete(key)}).catch(()=>{});return promise;
  }
  async function roll(claim){
-  requireGM(game.user);const {actor,user}=await contextFor({game,fromUuid,claim});if(!sameClaim(claimOf(actor,claim.nonce),claim)||claimOf(actor,claim.nonce).state!=='rolling')throw fail('GM医疗认领未持久保存');
+  requireGM(game.user);const context=await contextFor({game,fromUuid,claim}),{actor,user}=context;if(!sameClaim(claimOf(actor,claim.nonce),claim)||claimOf(actor,claim.nonce).state!=='rolling')throw fail('GM医疗认领未持久保存');
   const payload={actorUuid:actor.uuid,nonce:claim.nonce};let result;
-  if(game.user===user)result=await ownerRoll(payload,game.user);else{if(!socket?.executeAsUser)throw fail('缺少原拥有者通讯');const response=await deadline(socket.executeAsUser('salubrious-kiss:roll',user.id,payload));if(!response?.ok)throw fail(response?.error??'原拥有者未确认');result=response.value;}
+  if(game.user===user)result=await ownerRoll(payload,game.user);else{if(!socket?.executeAsUser)throw fail('缺少原拥有者通讯');result=await ownerReply(context,claim,()=>socket.executeAsUser('salubrious-kiss:roll',user.id,payload));}
   requireGM(game.user);const check=await card(result.checkId),degree=validateSalubriousCard({game,message:check,claim});
   if(result.degree!==undefined&&degree!==result.degree)throw fail('GM收到的成功度不一致');if(degree!==1){const damage=await card(result.damageId);validateSalubriousCard({game,message:damage,claim,damage:true});if(damage.flags.pf2e.origin.messageId!==check.id)throw fail('医疗伤害未关联原检定')}else if(result.damageId)throw fail('医疗失败不应有伤害卡');
   requireGM(game.user);await contextFor({game,fromUuid,claim});if(!sameClaim(claimOf(actor,claim.nonce),claim)||claimOf(actor,claim.nonce).state!=='rolling')throw fail('拥有者执行期间GM医疗认领已改变');return {...result,degree};

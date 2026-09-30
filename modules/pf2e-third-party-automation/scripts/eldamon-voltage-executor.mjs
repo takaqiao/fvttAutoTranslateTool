@@ -4,6 +4,8 @@ import {convertSiphonRoll} from './metapower/damage.mjs';
 import {showNativeChoice,publicTargetName} from './native-context.mjs';
 import {withDamageMessageTarget} from './damage-message-targets.mjs';
 import {createVoltageContinuationIndex,canReadVoltageMessage} from './eldamon-voltage-continuations.mjs';
+import {manualDamageRoll as rollNativeDamageManually,manualDamagePrivacy as nativeDamagePrivacy} from './manual-native-roll.mjs';
+import {beforeNativeRoll} from './native-owner-operations.mjs';
 
 const values=c=>Array.from(c?.values?.()??c??[]),prefix=`${ID}:voltage:`,outcomes={criticalSuccess:0,success:0.5,failure:1,criticalFailure:2};
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -12,8 +14,8 @@ const binding=a=>({actorUuid:a.actorUuid,nonce:a.nonce,messageUuid:a.messageUuid
 
 /** Native interactions belong to the clicking owner. The GM only claims and
  * settles durable phases; observing an attack never rolls or applies damage. */
-export function createEldamonVoltageProvider({game,fromUuid,observe,onRefresh,getRollContext,DamageRoll=globalThis.CONFIG?.Dice?.rolls?.find(C=>C.name==='DamageRoll'),convertRoll=convertSiphonRoll,selectChoice=showNativeChoice,onError=console.error}={}){
- const index=createVoltageContinuationIndex({game}),ledger=createVoltageLedger({game,fromUuid,onRefresh,getSaveCandidates:index.saves}),applications=new Map(),views=new Map(),continuing=new Set();let socket,registered=false;
+export function createEldamonVoltageProvider({game,fromUuid,observe,onRefresh,getRollContext,DamageRoll=globalThis.CONFIG?.Dice?.rolls?.find(C=>C.name==='DamageRoll'),manualDamageRoll=rollNativeDamageManually,manualDamagePrivacy=nativeDamagePrivacy,convertRoll=convertSiphonRoll,selectChoice=showNativeChoice,onError=console.error}={}){
+ const index=createVoltageContinuationIndex({game}),ledger=createVoltageLedger({game,fromUuid,onRefresh,getSaveCandidates:index.saves}),applications=new Map(),views=new Map(),continuing=new Set();let socket,registered=false,rollHooks=globalThis.Hooks;
  const activeActors={refresh:index.refresh,register:index.register,values:index.actors};
  const active=()=>game.user?.id===game.users.activeGM?.id;
  async function notifyCard(actorUuid,nonce){
@@ -37,33 +39,60 @@ export function createEldamonVoltageProvider({game,fromUuid,observe,onRefresh,ge
   const result=await ledger.claim({...payload,nativeInteraction:true},user);await notifyCard(payload.actorUuid,payload.nonce).catch(onError);return result;
  }
  async function abort(payload,status){await request('abortNative',{...payload,status}).catch(onError)}
+ async function nativeScope(a,payload,phase,{user,gm}){
+  const [actor,item,origin,target,message,save]=await Promise.all([a.actorUuid,a.itemUuid,a.originUuid,a.trigger.targetUuid,a.messageUuid,...phase==='rolling-damage'?[a.native.save.messageUuid]:[]].map(fromUuid));
+  const targetActor=target?.actor,roller=phase==='rolling-save'?targetActor:actor,kind=phase==='rolling-save'?'save':'damage';
+  const input=current=>JSON.stringify(current&&{actorUuid:current.actorUuid,nonce:current.nonce,messageUuid:current.messageUuid,itemUuid:current.itemUuid,originUuid:current.originUuid,userId:current.userId,status:current.status,level:current.level,dc:current.dc,traits:current.traits,snapshot:current.snapshot,trigger:current.trigger,native:{version:current.native?.version,phase:current.native?.phase,operation:current.native?.[kind],...kind==='damage'?{save:current.native?.save}:{}}});
+  const expected=input(a),saveEvidence=save&&JSON.stringify({pf:save.flags?.pf2e,rolls:save.rolls?.map(r=>r.toJSON?.()??{total:r.total,evaluated:r._evaluated})});
+  const assertLive=()=>{
+   if(game.user!==user||game.users.get(user?.id)!==user||!user.active||game.users.activeGM!==gm||game.users.get(gm?.id)!==gm||!gm.active||!gm.isGM)throw Error('高电压原操作者或主GM已交接；结果未确认，不会自动重投。');
+   const current=actor?.flags?.[ID]?.voltage?.activations?.[a.nonce],receipt=actor?.flags?.[ID]?.metapower?.receipts?.[a.nonce],proof=message?.flags?.[ID]?.metapowerUse;
+   if(!actor||!item||item.actor!==actor||actor.items.get(item.id)!==item||sourceUuid(item)!==HIGH_VOLTAGE_SOURCE||[actor,targetActor].some(doc=>!doc||!doc.isToken&&game.actors.get(doc.id)!==doc)||!currentVoltageToken(origin)||origin.actor!==actor||game.scenes.get(origin.parent?.id)!==origin.parent||!currentVoltageToken(target)||target.parent!==origin.parent||target.actor!==targetActor||targetActor.uuid!==a.trigger.targetActorUuid)throw Error('高电压原角色、能力或绑定Token已改变；结果未确认，不会自动重投。');
+   if(roller?.testUserPermission(user,'OWNER')!==true||game.messages.get(message?.id)!==message||message.uuid!==a.messageUuid||proof?.nonce!==a.nonce||proof.actorUuid!==actor.uuid||proof.itemUuid!==item.uuid||message.flags?.pf2e?.origin?.uuid!==item.uuid||message.flags.pf2e.origin.actor!==actor.uuid||message.speaker?.actor!==actor.id||`Scene.${message.speaker?.scene}.Token.${message.speaker?.token}`!==origin.uuid||(message.author?.id??message.user?.id??message.user)!==a.userId||receipt?.status!=='committed'||receipt.nonce!==a.nonce||receipt.userId!==a.userId||receipt.actorUuid!==actor.uuid||receipt.itemUuid!==item.uuid||receipt.messageUuid!==message.uuid||receipt.sourceUuid!==HIGH_VOLTAGE_SOURCE)throw Error('高电压原活动、费用或拥有者权限已改变；结果未确认，不会自动重投。');
+   if(current?.status!=='claimed'||current.native?.phase!==phase||current.native?.[kind]?.id!==payload.operationId||current.native[kind].userId!==user.id||input(current)!==expected)throw Error('高电压本次操作认领已改变；结果未确认，不会自动重投。');
+   if(kind==='damage'&&(!save||game.messages.get(save.id)!==save||save.uuid!==a.native.save.messageUuid||JSON.stringify({pf:save.flags?.pf2e,rolls:save.rolls?.map(r=>r.toJSON?.()??{total:r.total,evaluated:r._evaluated})})!==saveEvidence))throw Error('高电压绑定原生豁免已改变；结果未确认，不会自动重投。');
+  };
+  assertLive();return {actor,item,origin,target,assertLive};
+ }
  async function rollSave(activation){
-  const payload={...binding(activation),operationId:random()},a=await request('beginSave',payload);
+  const started={user:game.user,gm:game.users.activeGM},payload={...binding(activation),operationId:random()},a=await request('beginSave',payload);
   try{
-   const [actor,item,target]=await Promise.all([a.actorUuid,a.itemUuid,a.trigger.targetUuid].map(fromUuid)),statistic=target.actor.getStatistic('reflex'),roller=statistic?.check??statistic;
+   const {actor,item,target,assertLive}=await nativeScope(a,payload,'rolling-save',started),statistic=target.actor.getStatistic('reflex'),roller=statistic?.check??statistic;
    if(typeof roller?.roll!=='function')throw Error('原生反射豁免统计不可用。');
-   let save;await roller.roll({token:target,origin:actor,item,action:'high-voltage',dc:{slug:'eldamon',value:a.dc},traits:a.traits,
+   let save;await beforeNativeRoll({Hooks:rollHooks,marker:voltageRollOption(a),showDialog:true,commit:async()=>{},assertLive,native:()=>roller.roll({token:target,origin:actor,item,action:'high-voltage',dc:{slug:'eldamon',value:a.dc},traits:a.traits,skipDialog:false,event:null,
     extraRollOptions:[voltageRollOption(a),'action:high-voltage','damaging-effect',...a.traits.map(t=>'item:trait:'+t)],createMessage:true,
-    callback:(_roll,_outcome,message)=>{save=message}});
+    callback:(_roll,_outcome,message)=>{save=message}})});assertLive();
    if(!save){await abort(payload,'cancelled');return null}
    return await request('finishSave',{...payload,saveUuid:save.uuid});
   }catch(error){await abort(payload,'uncertain');throw error}
  }
  async function rollDamage(activation){
-  const payload={...binding(activation),operationId:random()},a=await request('beginRoll',payload);
+  const started={user:game.user,gm:game.users.activeGM},payload={...binding(activation),operationId:random()},a=await request('beginRoll',payload);
   try{
-   const item=await fromUuid(a.itemUuid);if(typeof DamageRoll!=='function')throw Error('原生伤害掷骰不可用。');
-   let damage=await new DamageRoll(`${a.level+1}d6[electricity]`,{},{rollerId:game.user.id}).evaluate();
+   const {item,assertLive}=await nativeScope(a,payload,'rolling-damage',started);if(typeof DamageRoll!=='function')throw Error('原生伤害掷骰不可用。');
+   let damage=await manualDamageRoll({game,roll:new DamageRoll(`${a.level+1}d6[electricity]`,{},{rollerId:game.user.id}),assertLive});assertLive();
+   if(!damage){await abort(payload,'cancelled');return null}
+   const privacy=manualDamagePrivacy(damage),messageOptions=privacy?{messageMode:privacy.messageMode}:{};
    if(a.snapshot?.siphon?.applies)damage=convertRoll(damage,{DamageRoll,rejectMixedPartitions:true});
    damage=damage.alter(outcomes[a.native.save.outcome],0);
    const proof={...binding(a),targetUuid:a.trigger.targetUuid,operationId:payload.operationId};damage.options[ID]={...damage.options[ID],voltageDamage:proof};
    const origin=item.getOriginData(),options=[voltageRollOption(a),'action:high-voltage',...a.traits.map(t=>'item:trait:'+t),...origin.rollOptions??[]];
    // This is already the kept basic-save amount. No Toolbelt saveVariants are
    // copied from the action card, so its target row offers ordinary full apply.
-   const message=await damage.toMessage(withDamageMessageTarget({speaker:a.speaker,
-    flavor:`${esc(item.name)} · 反射基础豁免已计入；对绑定目标按全额应用${a.snapshot?.siphon?.applies?'（虹吸按目标特征调整）':''}`,
-    flags:{pf2e:{origin,context:{type:'damage-roll',sourceType:'save',outcome:a.native.save.outcome,target:{actor:a.trigger.targetActorUuid,token:a.trigger.targetUuid},options}},[ID]:{voltageDamage:proof}}},a.trigger.targetUuid));
-   return await request('finishRoll',{...payload,damageUuid:message?.uuid});
+   assertLive();let publicationError;
+   const publicationHook=rollHooks.on('preCreateChatMessage',message=>{
+    const tagged=message.flags?.[ID]?.voltageDamage;
+    if(tagged?.actorUuid!==proof.actorUuid||tagged.nonce!==proof.nonce||tagged.messageUuid!==proof.messageUuid||tagged.operationId!==proof.operationId)return;
+    try{assertLive();}catch(error){publicationError=error;return false;}
+   });
+   try{
+    const message=await damage.toMessage(withDamageMessageTarget({...(privacy?{blind:privacy.blind,whisper:privacy.whisper}:{}),speaker:a.speaker,
+     flavor:`${esc(item.name)} · 反射基础豁免已计入；对绑定目标按全额应用${a.snapshot?.siphon?.applies?'（虹吸按目标特征调整）':''}`,
+     flags:{pf2e:{origin,context:{type:'damage-roll',sourceType:'save',outcome:a.native.save.outcome,target:{actor:a.trigger.targetActorUuid,token:a.trigger.targetUuid},options,...(privacy?{messageMode:privacy.messageMode}:{})}},[ID]:{voltageDamage:proof}}},a.trigger.targetUuid),messageOptions);
+    if(publicationError)throw publicationError;
+    if(!message?.uuid)throw Error('高电压原生伤害卡未保存；结果未确认，不会自动重投。');
+    return await request('finishRoll',{...payload,damageUuid:message.uuid});
+   }finally{rollHooks.off('preCreateChatMessage',publicationHook);}
   }catch(error){await abort(payload,'uncertain');throw error}
  }
  async function beforeDamage(actor,params){
@@ -191,7 +220,7 @@ export function createEldamonVoltageProvider({game,fromUuid,observe,onRefresh,ge
  function refreshViews(actorUuid){for(const [root,view]of [...views]){if(root.isConnected===true)view.connected=true;if(view.connected&&root.isConnected===false){views.delete(root);continue}if(actorUuid&&view.message&&!view.sourceUuids.has(actorUuid)||actorUuid&&view.actor&&view.actor.uuid!==actorUuid&&!index.forActor(view.actor.uuid).some(e=>e.actor.uuid===actorUuid))continue;if(view.message)renderCard(view.message,root);else renderActorContinuations(view.actor,root,{app:view.app})}}
  function closeSheet(app){for(const [root,view]of views)if(view.app===app||!view.app&&view.actor===(app.actor??app.document))views.delete(root)}
  function register({Hooks,socket:api}={}){
-  if(registered)return;registered=true;socket=api;activeActors.register(Hooks);
+  if(registered)return;registered=true;socket=api;rollHooks=Hooks;activeActors.register(Hooks);
   for(const method of ['channel','refreshActivity','trigger','beginSave','finishSave','beginRoll','finishRoll','beginDamage','finishDamage','abortNative'])socket.register(`voltage:${method}`,async function(payload){try{return {ok:true,value:await coordinate(method,payload,game.users.get(this.socketdata.userId))}}catch(error){return {ok:false,error:error.message}}});
   const sweep=()=>{if(!active())return;return Promise.all(activeActors.values().map(actor=>{const nonce=actor.flags?.[ID]?.voltage?.activeNonce;return nonce?ledger.expire({actorUuid:actor.uuid},game.user).then(()=>notifyCard(actor.uuid,nonce)).catch(onError):null}))};
   Hooks.on('createChatMessage',capture);

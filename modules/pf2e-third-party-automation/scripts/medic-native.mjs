@@ -1,5 +1,6 @@
 import {MODULE_ID} from './rules.mjs';
 import {withDamageMessageTarget} from './damage-message-targets.mjs';
+import {nativeRollEvent,manualDamageRoll as nativeManualDamageRoll,manualDamagePrivacy} from './manual-native-roll.mjs';
 const author=message=>message?.author?.id??message?.user?.id??message?.user;
 // Use a fresh facade: native canvas layers can be non-configurable, non-writable own properties.
 // Getters and methods still receive the real object, including native private-field receivers.
@@ -14,7 +15,7 @@ const scoped=(original,overrides)=>{
 };
 export const pinnedMedicTarget=token=>scoped(token.actor,{getActiveTokens:()=>[token]});
 /** Delegate rules to the installed provider while pinning all selection reads in the macro's lexical scope. */
-export function createMedicNative({game,choose,canvas=globalThis.canvas,Dialog=globalThis.Dialog,ChatMessage=globalThis.ChatMessage,Hooks=globalThis.Hooks,CONFIG=globalThis.CONFIG}={}){
+export function createMedicNative({game,choose,canvas=globalThis.canvas,Dialog=globalThis.Dialog,ChatMessage=globalThis.ChatMessage,Hooks=globalThis.Hooks,CONFIG=globalThis.CONFIG,manualDamageRoll=nativeManualDamageRoll}={}){
  return async function delegate({actor,healer,target,user,branch,continuation,validate}){
   validate();
   if(!user?.id||game.user?.id!==user.id)throw Error('原生医疗必须在原操作者客户端执行。');
@@ -27,7 +28,7 @@ export function createMedicNative({game,choose,canvas=globalThis.canvas,Dialog=g
     if(!variant)return {status:'cancelled'};if(!['stabilize','stop-bleeding'].includes(variant))throw Error('无效急救方式。');
    }
    const marker=`${MODULE_ID}:medic-native:${continuation.nonce}`;
-   validate();const results=await action.use({actors:[pinnedMedicTarget(healer)],target:pinnedMedicTarget(target),variant,rollOptions:[marker],[MODULE_ID]:{metapowerContinuation:continuation}});
+   validate();const results=await action.use({actors:[pinnedMedicTarget(healer)],target:pinnedMedicTarget(target),variant,rollOptions:[marker],event:nativeRollEvent(game,'check'),[MODULE_ID]:{metapowerContinuation:continuation}});
    if(!results?.length)return {status:'cancelled'};
    if(results.length!==1)throw Error('原生医疗返回了多个不明确的检定。');
    const check=results[0].message,pf=check?.flags?.pf2e?.context;
@@ -41,10 +42,31 @@ export function createMedicNative({game,choose,canvas=globalThis.canvas,Dialog=g
   if(macros?.length!==1||!Dialog||!healer.object||!target.object)throw Error('缺少Workbench原生战地医疗宏或场景Token。');
   const nativeMacro=macros[0];let resolve,reject,opened=false,submitting=false,settled=false,checkStarted=false,checkFinished=false,checkMessage=null,resultMessage=null,pendingAssuranceMessage=null,checkKind='statistic';
   const nonce=continuation?.nonce,marker=`${MODULE_ID}:medic-workbench:${nonce}`,listeners=[],hookIds=[],assuranceRolls=new Set();
+  let treatmentRolled=false,checkAnimationDone=false,dsnContinuation=null;
   const completed=new Promise((yes,no)=>{resolve=yes;reject=no;});
-  const clean=()=>{for(const [event,id]of hookIds)Hooks.off(event,id);for(const [element,fn]of listeners)element.removeEventListener('submit',fn,true);};
+  const clean=()=>{dsnContinuation=null;for(const [event,id]of hookIds)Hooks.off(event,id);for(const [element,fn]of listeners)element.removeEventListener('submit',fn,true);};
   const settle=value=>{if(!settled){settled=true;clean();resolve(value);}};
   const fail=error=>{if(!settled){settled=true;clean();reject(error);}};
+  const continueDsn=()=>{
+   const callback=dsnContinuation;if(!callback||settled)return;dsnContinuation=null;
+   try{Promise.resolve(callback()).catch(fail);}catch(error){fail(error);}
+  };
+  // Workbench registers its animation wait after the manual healing window.
+  // The native check may have finished animating long before that registration.
+  // A confirmed healing roll publishes its own card and uses that card's DSN
+  // animation. A no-healing result waits only for this exact medical check.
+  const scopedHooks=Hooks?scoped(Hooks,{once:(event,callback)=>{
+   if(event!=='diceSoNiceRollComplete')return Hooks.once(event,callback);
+   if(settled)return;
+   if(dsnContinuation)throw Error('本次Workbench医疗动画续接已登记。');
+   dsnContinuation=callback;if(treatmentRolled||checkAnimationDone)continueDsn();
+   return marker;
+  }}):Hooks;
+  if(Hooks?.on)hookIds.push(['diceSoNiceRollComplete',Hooks.on('diceSoNiceRollComplete',messageId=>{
+   const message=game.messages.get(messageId),context=message?.flags?.pf2e?.context;
+   if(messageId!==checkMessage?.id&&!(author(message)===user.id&&message?.speaker?.actor===actor.id&&context?.options?.includes(marker)))return;
+   checkAnimationDone=true;continueDsn();
+  })]);
   const finish=()=>{if(checkFinished&&checkMessage&&resultMessage)settle({status:'delegated',checkId:checkMessage.id,resultId:resultMessage.id,text:'Workbench战地医疗检定及结果卡已完成；按其原生卡应用治疗与免疫。'});};
   const proof=()=>({nonce,cardId:continuation.cardId,actorUuid:actor.uuid,targetUuid:target.uuid,branch,checkKind,checkId:checkMessage?.id});
   const bindResult=async(data,create)=>{
@@ -66,7 +88,7 @@ export function createMedicNative({game,choose,canvas=globalThis.canvas,Dialog=g
     // Passing self:* as extras would also inject healer traits into the patient's contextual clone.
     const actorOptions=new Set(actor.getRollOptions?.(['all','skill-check','medicine'])??[]);
     const extraRollOptions=(args.extraRollOptions??[]).filter(option=>!actorOptions.has(option));
-    const rolled=await stat.roll({...args,token:healer,target:pinnedMedicTarget(target),dc:{...args.dc,slug:'medicine'},extraRollOptions:[...extraRollOptions,marker],callback:async(roll,outcome,message,...rest)=>{
+    const rolled=await stat.roll({...args,skipDialog:false,event:null,token:healer,target:pinnedMedicTarget(target),dc:{...args.dc,slug:'medicine'},extraRollOptions:[...extraRollOptions,marker],callback:async(roll,outcome,message,...rest)=>{
      if(settled)return;validate();const context=message?.flags?.pf2e?.context;
      if(!message?.id||game.messages.get(message.id)!==message||author(message)!==user.id||message.speaker?.actor!==actor.id||context?.isReroll||context?.type!=='skill-check'||!context.options?.includes(marker)||context.target?.actor!==target.actor.uuid||context.target?.token!==target.uuid)throw Error('Workbench原生检定回执不匹配。');
      checkMessage=message;await message.update({[`flags.${MODULE_ID}.medicWorkbench`]:proof()});
@@ -90,8 +112,23 @@ export function createMedicNative({game,choose,canvas=globalThis.canvas,Dialog=g
    }
    return bindResult(data,actual=>ChatMessage.create(actual,...args));
   }}):ChatMessage;
+  const treatmentRolls=new WeakMap();
+  const requestTreatmentRoll=(original,Base)=>{
+   if(treatmentRolls.has(original))return treatmentRolls.get(original);
+   const pending=(async()=>{if(settled)return null;validate();const raw=new Base(original.toJSON().formula,original.data,original.options),result=await manualDamageRoll({game,roll:raw,Hooks});validate();if(!result){settle({status:'cancelled'});return null;}treatmentRolled=true;return result;})();
+   treatmentRolls.set(original,pending);return pending;
+  };
+  const publishTreatmentRoll=(roll,Base,data,args)=>{
+   const privacy=manualDamagePrivacy(roll),next=privacy?{...data,blind:privacy.blind,whisper:[...privacy.whisper]}:data;
+   const options=privacy?[{...args[0],messageMode:privacy.messageMode},...args.slice(1)]:args;
+   return bindResult(next,actual=>Base.prototype.toMessage.call(roll,actual,...options));
+  };
   const rollClasses=(CONFIG?.Dice?.rolls??[]).map(Base=>{
-   if(Base.name==='DamageRoll')return class DamageRoll extends Base{async toMessage(data,...args){return bindResult(data,actual=>super.toMessage(actual,...args));}};
+   if(Base.name==='DamageRoll')return class DamageRoll extends Base{
+    async roll(){const result=await requestTreatmentRoll(this,Base);return result?scoped(result,{toMessage:(data,...args)=>publishTreatmentRoll(result,Base,data,args)}):null;}
+    async evaluate(){return this.roll();}
+    async toMessage(data,...args){const result=await requestTreatmentRoll(this,Base);return result?publishTreatmentRoll(result,Base,data,args):null;}
+   };
    if(Base.name==='CheckRoll')return class CheckRoll extends Base{async roll(...args){try{validate();if(settled||checkStarted||!nonce)throw Error('Workbench Assurance回执无效。');checkStarted=true;checkKind='assurance';const roll=await super.roll(...args);assuranceRolls.add(roll);return roll;}catch(error){fail(error);return null;}}};
    return Base;
   });
@@ -109,7 +146,7 @@ export function createMedicNative({game,choose,canvas=globalThis.canvas,Dialog=g
   const scopedUser=scoped(game.user,{targets:new Set([target.object])});
   const scopedGame=scoped(game,{user:scopedUser});
   const scopedCanvas=scoped(canvas,{tokens:scoped(canvas.tokens,{controlled:[scopedHealer]})});
-  try{await nativeMacro.execute({actor:scopedActor,token:scopedHealer,game:scopedGame,canvas:scopedCanvas,Dialog:TreatmentDialog,ChatMessage:scopedMessages,CONFIG:scopedConfig});if(!opened)throw Error('Workbench未打开医疗对话框，未自动重复调用。');}catch(error){fail(error);}
+  try{await nativeMacro.execute({actor:scopedActor,token:scopedHealer,game:scopedGame,canvas:scopedCanvas,Dialog:TreatmentDialog,ChatMessage:scopedMessages,CONFIG:scopedConfig,Hooks:scopedHooks});if(!opened)throw Error('Workbench未打开医疗对话框，未自动重复调用。');}catch(error){fail(error);}
   return completed;
  };
 }

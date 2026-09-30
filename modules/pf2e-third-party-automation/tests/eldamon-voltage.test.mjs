@@ -137,26 +137,30 @@ test('interrupted native Refresh batch resumes only uncommitted items without re
 });
 
 let executorApi={};try{executorApi=await import('../scripts/eldamon-voltage-executor.mjs')}catch(e){if(e.code!=='ERR_MODULE_NOT_FOUND')throw e}
-function executorFixture(outcome='failure',{siphon=false,traits=[],selectChoice}={}){
- const f=fixture(),messages=[],saves=[],applications=[],hooks=new Map(),routes=new Map(),rollContexts=new WeakMap();
+function executorFixture(outcome='failure',{siphon=false,traits=[],selectChoice,damageDialog,damagePrivacy,saveDialog}={}){
+ const f=fixture(),messages=[],saves=[],applications=[],damageWindows=[],evaluations=[],publications=[],hooks=new Map(),routes=new Map(),rollContexts=new WeakMap(),dialogs=[];let hookSequence=0;
  const targetUser={id:'target-owner',active:true};f.game.users.set(targetUser.id,targetUser);f.actor.getStatistic=()=>({dc:{value:22}});
  f.target.actor.testUserPermission=u=>u===f.gm||u===targetUser;f.target.actor.traits=new Set(traits);
  f.target.actor.getSelfRollOptions=()=>['self:level:5'];f.target.actor.getContextualClone=()=>({...f.target.actor,async applyDamage(params){applications.push(params);await provider.beforeDamage(this,params);return this}});
  f.item.getOriginData=()=>({actor:f.actor.uuid,uuid:f.item.uuid,type:'feat',rollOptions:[]});
- const fire=(name,...args)=>Promise.all((hooks.get(name)??[]).map(fn=>fn(...args)));
- const publish=async data=>{const m={...data,author:f.game.user,timestamp:300,isCheckRoll:data.flags?.pf2e?.context?.type==='saving-throw',isDamageRoll:data.flags?.pf2e?.context?.type==='damage-roll',item:f.item,actor:f.actor};f.game.messages.set(m.id,m);f.docs.set(m.uuid,m);await fire('createChatMessage',m,{},f.game.user.id);return m};
+ const fire=(name,...args)=>Promise.all([...(hooks.get(name)??[])].map(fn=>fn(...args)));
+ const Hooks={on(name,fn){const wrapped=(...args)=>fn(...args);wrapped.hookId=++hookSequence;hooks.set(name,[...hooks.get(name)??[],wrapped]);return wrapped.hookId},off(name,id){hooks.set(name,(hooks.get(name)??[]).filter(fn=>fn.hookId!==id))}};
+ const publish=async data=>{const m={...data,author:f.game.user,timestamp:300,isCheckRoll:data.flags?.pf2e?.context?.type==='saving-throw',isDamageRoll:data.flags?.pf2e?.context?.type==='damage-roll',item:f.item,actor:f.actor};for(const fn of [...hooks.get('preCreateChatMessage')??[]])if(fn(m)===false)return null;f.game.messages.set(m.id,m);f.docs.set(m.uuid,m);await fire('createChatMessage',m,{},f.game.user.id);return m};
  f.message.update=async data=>{for(const[k,v]of Object.entries(data)){if(k.startsWith('flags.' ))f.message.flags[ID][k.slice(('flags.'+ID+'.').length)]=v}};
- f.target.actor.getStatistic=()=>({check:{async roll(params){saves.push({user:f.game.user,params});if(outcome===null)return null;const card=await publish({id:'save',uuid:'ChatMessage.save',speaker:{actor:'b',scene:'scene',token:'target'},rolls:[{_evaluated:true,total:18}],flags:{pf2e:{origin:{actor:f.actor.uuid,uuid:f.item.uuid},context:{type:'saving-throw',outcome,dc:params.dc,options:params.extraRollOptions}}}});params.callback(card.rolls[0],outcome,card);return card.rolls[0]}}});
+ f.target.actor.getStatistic=()=>({check:{async roll(params){saves.push({user:f.game.user,params});if(outcome===null)return null;if(saveDialog){let resolve;const accepted=new Promise(r=>resolve=r),app={context:{options:new Set(params.extraRollOptions)},resolve,close:async()=>{}};dialogs.push(app);await fire('renderCheckModifiersDialog',app);saveDialog(app);if(!await accepted)return null}const card=await publish({id:'save',uuid:'ChatMessage.save',speaker:{actor:'b',scene:'scene',token:'target'},rolls:[{_evaluated:true,total:18}],flags:{pf2e:{origin:{actor:f.actor.uuid,uuid:f.item.uuid},context:{type:'saving-throw',outcome,dc:params.dc,options:params.extraRollOptions}}}});params.callback(card.rolls[0],outcome,card);return card.rolls[0]}}});
  class DamageRoll {
   constructor(formula,_data={},options={}){this.formula=formula;this.options=options;this.total=21;this._evaluated=false;this.type='electricity'}
-  async evaluate(){this._evaluated=true;return this}
+  async evaluate(){evaluations.push(this);this._evaluated=true;return this}
   alter(n,addend=0){const r=new DamageRoll(this.formula,{},{});r.total=Math.floor(this.total*n)+addend;r._evaluated=true;r.type=this.type;if(rollContexts.has(this))rollContexts.set(r,rollContexts.get(this));return r}
-  async toMessage(data){const m=await publish({...data,id:'damage',uuid:'ChatMessage.damage',rolls:[this]});messages.push(m);rollContexts.set(this,{messageId:m.id,rollIndex:0});return m}
+  async toMessage(data,options={}){publications.push({data,options});const m=await publish({...data,id:'damage',uuid:'ChatMessage.damage',rolls:[this]});messages.push(m);rollContexts.set(this,{messageId:m.id,rollIndex:0});return m}
  }
  if(siphon)f.receipt.snapshot={kind:'siphoning',siphon:{applies:true},level:5,itemUuid:f.item.uuid,actorUuid:f.actor.uuid,powerSourceUuid:HV,disruptive:true,associatedTraits:['electricity']};
- const provider=executorApi.createEldamonVoltageProvider({game:f.game,fromUuid:async uuid=>f.docs.get(uuid),DamageRoll,getRollContext:roll=>rollContexts.get(roll),selectChoice,convertRoll:(roll,options)=>{assert.equal(options.rejectMixedPartitions,true);roll.type='untyped';return roll}});
+ const provider=executorApi.createEldamonVoltageProvider({game:f.game,fromUuid:async uuid=>f.docs.get(uuid),DamageRoll,getRollContext:roll=>rollContexts.get(roll),selectChoice,
+  manualDamageRoll:async({game,roll,assertLive})=>{damageWindows.push({user:game.user,roll});const accepted=typeof damageDialog==='function'?await damageDialog(roll):damageDialog!==false;if(!accepted)return null;assertLive?.();return roll.evaluate()},
+  manualDamagePrivacy:roll=>{assert.ok(damageWindows.some(w=>w.roll===roll),'read the native audience before conversion replaces its Roll');return damagePrivacy??null},
+  convertRoll:(roll,options)=>{assert.equal(options.rejectMixedPartitions,true);roll.type='untyped';return roll},onError:()=>{}});
  const socket={register:(name,fn)=>routes.set(name,fn),async executeAsUser(name,_gm,payload){const caller=f.game.user;f.game.user=f.gm;try{return await routes.get(name).call({socketdata:{userId:caller.id}},payload)}finally{f.game.user=caller}}};
- provider.register({socket,Hooks:{on:(name,fn)=>hooks.set(name,[...hooks.get(name)??[],fn])}});
+ provider.register({socket,Hooks});
  const activation=()=>f.actor.flags[ID].voltage.activations.channel;
  const channel=()=>provider.onCommittedChannel({receipt:f.receipt,message:f.message,user:f.user});
  const trigger=()=>provider.trigger({...f.payload,targetUuid:f.target.uuid,kind:'touch',confirmed:true},f.user);
@@ -168,7 +172,7 @@ function executorFixture(outcome='failure',{siphon=false,traits=[],selectChoice}
   if(nativeReceipt)await publish({id:'taken',uuid:'ChatMessage.taken',speaker:{actor:token.actor.id,scene:'scene',token:token.id},flags:{pf2e:{origin:f.item.getOriginData(),context:{type:'damage-taken',options:[...actual.rollOptions]},appliedDamage:actual.damage.total?{uuid:token.actor.uuid,isHealing:false,isReverted:false}:null}}});
   await provider.afterDamage(prepared.receipt,{applied:!nativeError,uncertain:nativeError});return actual;
  };
- return {...f,provider,messages,saves,applications,hooks,routes,fire,activation,channel,trigger,save,damage,apply,targetUser,publish,DamageRoll};
+ return {...f,provider,messages,saves,applications,damageWindows,evaluations,publications,hooks,routes,fire,activation,channel,trigger,save,damage,apply,targetUser,publish,DamageRoll,dialogs};
 }
 
 test('an explicit owner trigger claims a response without opening saves, rolling damage or applying HP',async()=>{
@@ -217,6 +221,95 @@ test('cancelled native save consumes the trigger and cannot be retried',async()=
  const f=executorFixture(null);await f.channel();await f.trigger();await f.save();
  assert.equal(f.activation().status,'cancelled');assert.equal(f.messages.length,0);f.game.user=f.gm;assert.equal(await f.trigger(),null);
  await assert.rejects(f.save(),/消耗|认领|等待/i);
+});
+
+test('Voltage save always requests its owner native confirmation even when the owner disables check dialogs',async()=>{
+ const f=executorFixture(null);await f.channel();await f.trigger();
+ f.targetUser.settings={showCheckDialogs:false};await f.save();
+ assert.equal(f.saves[0].user,f.targetUser);
+ assert.equal(f.saves[0].params.skipDialog,false,'the explicit continuation must wait for the native check window');
+ assert.equal(f.saves[0].params.event,null,'a triggering click must not toggle the native dialog with shift');
+ assert.equal(f.activation().nonce,'channel');assert.equal(f.activation().messageUuid,f.message.uuid);
+ assert.equal(f.activation().status,'cancelled');assert.equal(f.messages.length,0);assert.equal(f.applications.length,0);
+ assert.equal(f.actor.flags[ID].voltage.activeNonce,null);assert.equal(f.spent.system.frequency.value,1);
+ assert.equal(f.receipt.status,'committed','closing a child check does not repeat or refund original Use');
+});
+
+test('Voltage damage waits for source owner native confirmation before rolling or publishing the bound kept-save result',async()=>{
+ let release;const accepted=new Promise(resolve=>{release=resolve});
+ const f=executorFixture('success',{damageDialog:()=>accepted});await f.channel();await f.trigger();await f.save();
+ f.user.settings={showDamageDialogs:false};const pending=f.damage();
+ try{
+  await new Promise(setImmediate);
+  assert.equal(f.damageWindows.length,1,'damage must enter the native window before evaluation');
+  assert.equal(f.damageWindows[0].user,f.user);assert.equal(f.damageWindows[0].roll.formula,'6d6[electricity]');
+  assert.equal(f.damageWindows[0].roll._evaluated,false);assert.equal(f.evaluations.length,0);
+  assert.equal(f.messages.length,0);assert.equal(f.applications.length,0);assert.equal(f.activation().native.phase,'rolling-damage');
+  await assert.rejects(f.provider.continueActivity({...f.payload,action:'damage'}),/结束|处理中|核对/);
+  assert.equal(f.damageWindows.length,1,'another entrance cannot open another roll while the owner is choosing');
+ }finally{release(true);await pending;}
+ assert.equal(f.evaluations.length,1);assert.equal(f.messages.length,1);assert.equal(f.messages[0].rolls[0].total,10);
+ assert.equal(f.messages[0].flags[ID].voltageDamage.nonce,'channel');
+ assert.equal(f.messages[0].flags[ID].voltageDamage.targetUuid,f.target.uuid);
+ assert.equal(f.activation().native.phase,'awaiting-application');assert.equal(f.applications.length,0);
+});
+
+test('closing the native Voltage damage window consumes only this same trigger without dice, output or new Use',async()=>{
+ const f=executorFixture('failure',{damageDialog:false});await f.channel();await f.trigger();await f.save();
+ const originalSave=f.activation().native.save.messageUuid;assert.equal(await f.damage(),null);
+ assert.equal(f.damageWindows.length,1);assert.equal(f.evaluations.length,0);assert.equal(f.messages.length,0);assert.equal(f.applications.length,0);
+ assert.equal(f.activation().nonce,'channel');assert.equal(f.activation().messageUuid,f.message.uuid);
+ assert.equal(f.activation().native.save.messageUuid,originalSave);assert.equal(f.activation().status,'cancelled');assert.equal(f.activation().native.phase,'cancelled');
+ assert.equal(f.actor.flags[ID].voltage.activeNonce,null);assert.equal(f.spent.system.frequency.value,1);assert.equal(f.receipt.status,'committed');
+ await assert.rejects(f.damage(),/消耗|等待|认领/);assert.equal(f.damageWindows.length,1);
+});
+
+test('an uncertain native Voltage damage window never publishes or refunds the original activity',async()=>{
+ const f=executorFixture('failure',{damageDialog:()=>{throw Error('native window failed')}});await f.channel();await f.trigger();await f.save();
+ await assert.rejects(f.damage(),/native window failed/);
+ assert.equal(f.evaluations.length,0);assert.equal(f.messages.length,0);assert.equal(f.applications.length,0);
+ assert.equal(f.activation().native.phase,'uncertain');assert.equal(f.receipt.status,'committed');assert.equal(f.spent.system.frequency.value,1);
+ await assert.rejects(f.damage(),/消耗|等待|认领/);assert.equal(f.damageWindows.length,1);
+});
+
+for(const mutation of ['original-card','source-item','source-actor','origin-token','target-relink','owner-permission','gm-handoff','operation','original-save'])test(`a Voltage damage window cannot publish a stale ${mutation} after waiting for its owner`,async()=>{
+ let accept;const gate=new Promise(resolve=>accept=resolve),f=executorFixture('failure',{damageDialog:()=>gate});await f.channel();await f.trigger();await f.save();
+ const pending=f.damage();pending.catch(()=>{});await new Promise(setImmediate);assert.equal(f.damageWindows.length,1);assert.equal(f.messages.length,0);
+ if(mutation==='original-card'){f.game.messages.delete(f.message.id);f.docs.delete(f.message.uuid)}
+ if(mutation==='source-item')f.actor.items.delete(f.item.id);
+ if(mutation==='source-actor')f.game.actors.delete(f.actor.id);
+ if(mutation==='origin-token')f.origin.parent.tokens.delete(f.origin.id);
+ if(mutation==='target-relink')f.target.actor={...f.target.actor,uuid:'Actor.replacement',id:'replacement'};
+ if(mutation==='owner-permission')f.actor.testUserPermission=()=>false;
+ if(mutation==='gm-handoff'){const gm={id:'new-gm',isGM:true,active:true};f.game.users.set(gm.id,gm);f.game.users.activeGM=gm}
+ if(mutation==='operation')f.activation().native.damage.id='another-operation';
+ if(mutation==='original-save')f.game.messages.delete('save');
+ accept(true);await assert.rejects(pending);assert.equal(f.evaluations.length,0,'the same submit guard reaches the native damage window before dice');assert.equal(f.messages.length,0,'an invalidated native window must not publish an orphan damage card');assert.equal(f.publications.length,0);assert.equal(f.applications.length,0);assert.equal(f.receipt.status,'committed');assert.equal(f.spent.system.frequency.value,1);
+});
+
+for(const mutation of ['owner-permission','gm-handoff','original-card','target-relink'])test(`the exact native Voltage save rejects ${mutation} at acceptance without publishing a stale check`,async()=>{
+ const f=executorFixture('failure',{saveDialog:()=>{}});await f.channel();await f.trigger();const before=[...f.hooks.values()].reduce((n,list)=>n+list.length,0),pending=f.save();pending.catch(()=>{});await new Promise(setImmediate);assert.equal(f.dialogs.length,1);
+ if(mutation==='owner-permission')f.target.actor.testUserPermission=()=>false;
+ if(mutation==='gm-handoff'){const gm={id:'new-gm',isGM:true,active:true};f.game.users.set(gm.id,gm);f.game.users.activeGM=gm}
+ if(mutation==='original-card')f.game.messages.delete(f.message.id);
+ if(mutation==='target-relink')f.target.actor={...f.target.actor,uuid:'Actor.replacement',id:'replacement'};
+ f.dialogs[0].resolve(true);await assert.rejects(pending);assert.equal(f.game.messages.has('save'),false,'native submit guard must reject before any check card is published');assert.equal(f.messages.length,0);assert.equal(f.applications.length,0);assert.equal([...f.hooks.values()].reduce((n,list)=>n+list.length,0),before);
+});
+
+test('Voltage rechecks its exact scope after asynchronous final rendering and does not block unrelated native cards',async()=>{
+ const f=executorFixture();await f.channel();await f.trigger();await f.save();let entered,release;const entry=new Promise(resolve=>entered=resolve),gate=new Promise(resolve=>release=resolve),native=f.DamageRoll.prototype.toMessage;
+ f.DamageRoll.prototype.toMessage=async function(...args){entered();await gate;return native.apply(this,args)};
+ const before=[...f.hooks.values()].reduce((n,list)=>n+list.length,0),pending=f.damage();pending.catch(()=>{});await entry;
+ const unrelated=await f.publish({id:'ordinary',uuid:'ChatMessage.ordinary',rolls:[],flags:{pf2e:{context:{type:'damage-roll',options:['ordinary-native']}}}});assert.equal(f.game.messages.get('ordinary'),unrelated);
+ f.game.messages.delete(f.message.id);release();await assert.rejects(pending);assert.equal(f.game.messages.has('damage'),false);assert.equal(f.messages.filter(Boolean).length,0);assert.equal(f.applications.length,0);assert.equal([...f.hooks.values()].reduce((n,list)=>n+list.length,0),before);
+});
+
+for(const [messageMode,blind,whisper]of [['blind',true,['gm']],['gm',false,['gm']],['self',false,['owner']],['public',false,[]]])test(`Voltage preserves the native ${messageMode} damage audience through Siphon and kept-save scaling`,async()=>{
+ const f=executorFixture('success',{siphon:true,damagePrivacy:{messageMode,blind,whisper}});await f.channel();await f.trigger();await f.save();await f.damage();
+ assert.equal(f.messages.length,1);assert.equal(f.messages[0].blind,blind);assert.deepEqual(f.messages[0].whisper,whisper);
+ assert.equal(f.publications[0].options.messageMode,messageMode,'Foundry toMessage must receive the native mode, not default public');
+ assert.equal(f.messages[0].flags.pf2e.context.messageMode,messageMode);assert.equal(f.messages[0].rolls[0].type,'untyped');assert.equal(f.messages[0].rolls[0].total,10);
+ assert.equal(f.messages[0].flags[ID].voltageDamage.nonce,'channel');assert.equal(f.activation().native.phase,'awaiting-application');assert.equal(f.applications.length,0);
 });
 
 test('application without its native receipt stays uncertain and never replays HP',async()=>{

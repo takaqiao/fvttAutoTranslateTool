@@ -167,7 +167,7 @@ export function createUsageExecutor({cycleUse}={}){
    if(Number.isFinite(night)&&now-night>86400)throw Error('已超过1日未整夜休息，昼夜规律师本次自动失败。');
    let result='生存检定未完成。';
    await actor.skills.survival.roll({
-    dc:{value:levelDC(actor.level)},skipDialog:true,
+    dc:{value:levelDC(actor.level)},skipDialog:false,event:null,
     extraRollOptions:['action:third-party-circadian'],
     callback:async(_roll,_outcome,rollMessage)=>{result=await executeActorAction(actor,'rest',{eligible:true,messageId:rollMessage.id},user);},
    });
@@ -207,7 +207,7 @@ export function createPanel(request){
   if(present.includes('circadian'))add('circadian','检定部分休息',async(_e,b)=>{
    if(!form(b).elements.eligible.checked)throw Error('请先确认休息资格。');
    const last=actor.flags?.[MODULE_ID]?.restAt;if(Number.isFinite(last)&&game.time.worldTime-last<86400)throw Error('24小时内已有休息效果。');
-   return actor.skills.survival.roll({dc:{value:levelDC(actor.level)},extraRollOptions:['action:third-party-circadian'],callback:async(_roll,_outcome,message)=>run('rest',{eligible:true,messageId:message.id})});
+   return actor.skills.survival.roll({dc:{value:levelDC(actor.level)},skipDialog:false,event:null,extraRollOptions:['action:third-party-circadian'],callback:async(_roll,_outcome,message)=>run('rest',{eligible:true,messageId:message.id})});
   });
   if(plan.updates.length||plan.missingSpells.some(s=>s.spellcastingEntryId))add('repair','备份并修复所列缺口',()=>run('repair',{}));
   if(itemsOf(actor).some(i=>i.flags?.[MODULE_ID]?.repairBackup))add('undo','回滚数据修复',()=>run('undo-repairs',{}));

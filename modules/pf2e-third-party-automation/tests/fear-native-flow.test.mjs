@@ -1,10 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import {createFearAutomation,FEAR_SOURCES} from '../scripts/fear-automation.mjs';
 const M='pf2e-third-party-automation';
 const update=async function(changes){for(const[path,value]of Object.entries(changes)){let at=this;const keys=path.split('.');for(const k of keys.slice(0,-1))at=at[k]??={};at[keys.at(-1)]=value;}return this;};
 function fixture(type='attack-roll'){
- const gm={id:'gm',isGM:true,active:true},player={id:'player',active:true},users=new Map([[gm.id,gm],[player.id,player]]);users.activeGM=gm;
+ const gm={id:'gm',isGM:true,active:true},player={id:'player',active:true,settings:{showCheckDialogs:false}},users=new Map([[gm.id,gm],[player.id,player]]);users.activeGM=gm;
  const actor={id:'pc',uuid:'Actor.pc',type:'character',items:new Map(),flags:{},skills:{intimidation:{rank:4}},testUserPermission:u=>u===gm||u===player,isAllyOf:()=>false,update};
  const feat={id:'feat',actor,type:'feat',sourceId:FEAR_SOURCES.battle};actor.items.set(feat.id,feat);
  const enemy={id:'enemy',uuid:'Actor.enemy',name:'Secret actor',items:new Map(),testUserPermission:u=>u===gm};
@@ -29,6 +30,9 @@ for(const type of ['attack-roll','initiative'])test(`Battle Cry ${type} keeps it
  assert.match(f.requests[0].choices[0].label,/目标/);
  assert.equal(f.requests[0].choices.at(-1).value,'decline');
  assert.equal(f.calls.length,1);assert.equal(f.calls[0].client,'player');assert.equal(f.calls[0].args.target,f.target.object);
+ const source=fs.readFileSync(process.env.PF2E_NATIVE_BUNDLE,'utf8'),start=source.indexOf('function isRelevantEvent('),end=source.indexOf('function eventToMessageMode(',start);
+ assert.ok(start>=0&&end>start);const eventParams=new Function('game',`${source.slice(start,end)};return eventToRollParams;`)(f.ownerGame);
+ assert.equal(eventParams(f.calls[0].args.event,{type:'check'}).skipDialog,false,'the chosen reaction must await the author native check window');
  assert.equal(f.message.flags[M].fear.battleCry.status,'done');
 });
 

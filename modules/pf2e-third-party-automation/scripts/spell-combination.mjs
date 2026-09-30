@@ -8,6 +8,8 @@ import {isCuttingWeapon} from './rune-transfer.mjs';
 import {isActualUseMessage} from './usage-events.mjs';
 import {createAttackSequence} from './activity-attack-sequence.mjs';
 import {createNativeOwnerOperations,nativeTransientItems} from './native-owner-operations.mjs';
+import {nativeRollEvent,manualDamageRoll,manualDamagePrivacy} from './manual-native-roll.mjs';
+import {mergeDamageMessagePrivacy} from './damage-message-privacy.mjs';
 export {preserveDamagePartForMerge} from './native-damage-components.mjs';
 
 export const SPELL_COMBINATION_SOURCES=Object.freeze({
@@ -40,7 +42,7 @@ const fist=strike=>melee(strike)&&unarmed(strike.item)&&['fist','basic-unarmed']
 const held=strike=>melee(strike)&&!unarmed(strike.item)&&strike.item.system.equipped?.carryType==='held'&&strike.item.system.equipped.handsHeld>0;
 const allowedCombinationWeapon=strike=>held(strike)&&isCuttingWeapon(strike.item);
 const strikeKey=strike=>`${strike.item.id}:${strike.item.altUsageType??''}`;
-const skipEvent=()=>({ctrlKey:false,metaKey:false,shiftKey:false});
+const skipEvent=(game,kind)=>nativeRollEvent(game,kind==='damage'?'damage':'check');
 
 const publicTargetName=(game,target)=>!game.pf2e?.settings?.tokens?.nameVisibility||target.playersCanSeeName===true;
 /** Shared damage cards are created by the GM: use PF2e's per-viewer visibility,
@@ -200,7 +202,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   requireGM();
   if(nativeResult.status!=='rolled')throw Error('攻击已发生，但原生武器伤害尚未完成。');
   const result=damageFromResult(nativeResult);
-  damageContexts.set(result,{...clone(message.flags.pf2e.context),sourceType:'attack',domains:['damage','strike-damage'],options:[...attack.frame.damageOptions([...(message.flags.pf2e.context.options??[]),...strike.item.getRollOptions?.('item')??[],...strike.item.actor.getRollOptions?.(['damage','strike-damage'])??[],...options])]});
+  damageContexts.set(result,{...clone(message.flags.pf2e.context),manualPrivacy:nativeResult.privacy,sourceType:'attack',domains:['damage','strike-damage'],options:[...attack.frame.damageOptions([...(message.flags.pf2e.context.options??[]),...strike.item.getRollOptions?.('item')??[],...strike.item.actor.getRollOptions?.(['damage','strike-damage'])??[],...options])]});
   return result;
  }
  async function publishSpell({actor,user,message,choice,payment,targets,kind}){
@@ -223,7 +225,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   const roller=adjust?target.actor.clone({items:[...clone(target.actor._source.items),{_id:globalThis.foundry?.utils?.randomID?.()??'ComboSave0000001',name:spell.name,type:'effect',system:{duration:{value:-1,unit:'unlimited'},rules:[{key:'AdjustDegreeOfSuccess',selector:'saving-throw',predicate:[marker],adjustment:{all:'one-degree-worse'}}]}}]},{keepId:true}):target.actor;
   const statistic=roller.getStatistic(defense.statistic);if(!statistic?.check||!Number.isFinite(dc))throw Error('无法确定该法术的原生豁免与 DC。');
   let outcome;
-  const result=await statistic.check.roll({origin:spell.actor,item:spell,token:target,dc:{value:dc},extraRollOptions:[...spell.getRollOptions?.('item')??[],...(defense.basic?['damaging-effect']:[]),marker],skipDialog:true,createMessage:false,callback:async(_roll,result,raw)=>{
+  const result=await statistic.check.roll({origin:spell.actor,item:spell,token:target,dc:{value:dc},extraRollOptions:[...spell.getRollOptions?.('item')??[],...(defense.basic?['damaging-effect']:[]),marker],skipDialog:false,event:null,createMessage:false,callback:async(_roll,result,raw)=>{
     requireGM();
     outcome=result;const data=raw.toObject();delete data._id;
     data.flags??={};data.flags[MODULE_ID]={...data.flags[MODULE_ID],usageGenerated:true,spellCombinationSave:{spellMessageId:card.id,targetUuid:target.uuid,activityMessageId:own(card).spellCombination.activityMessageId}};
@@ -237,7 +239,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
  async function spellDamage(spell,target,outcome,{saveOutcome,shared,activityMessage,user}={}){
   requireGM();
   const native=shared?.native??await ownerOperations.run({actor:spell.actor,message:activityMessage,user},{type:'spell-damage',spellId:spell.id,rank:spell.rank,overlayIds:[...spell.appliedOverlays?.values?.()??[]],targetUuid:target.uuid},async()=>{
-   const data=await spell.getDamage({target,skipDialog:true});if(!data)return {status:'cancelled'};
+   const data=await spell.getDamage({target,skipDialog:false,event:null});if(!data)return {status:'cancelled'};
    const roll=data.template.damage.roll;if(!roll)throw Error('该法术没有可识别的原生伤害骰。');
    return {status:'rolled',nativeRoll:await roll.evaluate(),context:data.context};
   });if(native.status==='cancelled')return null;
@@ -247,7 +249,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   const multiplier=saveOutcome?{criticalSuccess:0,success:0.5,failure:1,criticalFailure:2}[saveOutcome]:outcome==='criticalSuccess'?2:1;
   if(multiplier===0)return null;
   if(multiplier!==1)damage=scaleSpellDamage(damage,multiplier,{critical:!saveOutcome&&outcome==='criticalSuccess'});
-  damageContexts.set(damage,{...native.context,options:[...native.context.options??[]],outcome:saveOutcome??outcome});
+  damageContexts.set(damage,{...native.context,manualPrivacy:native.privacy,options:[...native.context.options??[]],outcome:saveOutcome??outcome});
   return damage;
  }
  async function damageCard({actor,message,target,parts,attacks,kind}){
@@ -264,7 +266,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   let combined=docs[0];for(const next of docs.slice(1)){requireGM();combined=await game.toolbelt.api.betterChat.mergeDamageMessages(combined,next,{updateMessages:false});requireGM();if(!combined)throw Error('原生伤害合并未完成。');}
   if(docs.length>1)preserveMergedDamageBypass(combined.rolls[0],parts.map(part=>part.roll));
   if(attacks.some(a=>a.outcome==='criticalSuccess'))combined.rolls[0].options.degreeOfSuccess=3;
-  const data=combined.toObject();delete data._id;data.flags??={};data.flags.pf2e??={};
+  const data=combined.toObject();delete data._id;Object.assign(data,mergeDamageMessagePrivacy(parts.map(part=>damageContexts.get(part.roll)?.manualPrivacy)));data.flags??={};data.flags.pf2e??={};
   // Persist corrections to derived rolls: Foundry toObject() reads _source.
   data.rolls=combined.rolls.map(roll=>roll.toJSON());
   const markers=attacks.filter(a=>hit(a.outcome)).map(a=>`${MODULE_ID}:bear-attack:${a.message.id}`);
@@ -341,7 +343,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
       const outcome=defense?await save(spell,target,spellAttack,spellCard):null;
       const damage=await spellDamage(spell,target,spellAttack.outcome,{saveOutcome:defense?.basic?outcome:null,shared:sharedSpellDamage,activityMessage:message,user});if(damage)parts.push({roll:damage,item:spell});
       const extra=spellAttack.outcome==='criticalSuccess'&&!defense?criticalSpellPersistentFormula(spell):null;
-      if(extra){requireGM();const D=globalThis.CONFIG.Dice.rolls.find(c=>c.name==='DamageRoll'),roll=await new D(extra).evaluate();requireGM();damageContexts.set(roll,damageContexts.get(damage));parts.push({roll,item:spell});}
+      if(extra&&damage){requireGM();const D=globalThis.CONFIG.Dice.rolls.find(c=>c.name==='DamageRoll'),roll=await manualDamageRoll({game,roll:new D(extra)});requireGM();if(!roll)throw Error('法术的额外持续伤害投骰已取消；既有攻击、伤害与支付保留，不能自动重投。');damageContexts.set(roll,{...damageContexts.get(damage),manualPrivacy:manualDamagePrivacy(roll)});parts.push({roll,item:spell});}
      }
      await damageCard({actor,message,target,parts,attacks:forTarget,kind});
     }

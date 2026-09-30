@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {createForceBarrageBridge} from '../scripts/force-barrage.mjs';
 const ID='pf2e-third-party-automation';
-function fixture(){
+function fixture(overrides={}){
  const user={id:'gm',active:true,isGM:true},actor={id:'a',uuid:'Actor.a',type:'character',canAct:true,isDead:false,items:new Map(),testUserPermission:u=>u===user};
  const entry={id:'e',uuid:'Actor.a.Item.e',actor,system:{slots:{slot3:{value:2}}}},item={id:'s',uuid:'Actor.a.Item.s',actor,system:{},flags:{}};actor.items.set('s',item);actor.items.set('e',entry);
  const users=new Map([['gm',user]]);users.activeGM=user;const game={user,users,actors:new Map([['a',actor]]),messages:new Map(),settings:{get:()=> 'public'}};
@@ -18,8 +18,8 @@ function fixture(){
  const outcome={status:'completed',castNonce:'cast',message:{id:'c',uuid:'ChatMessage.c'},receipt:{state:'used'}};
  const next=async()=>{native++;return 'original'};next.withOutcome=async p=>{native++;calls.push(['cast',p]);return outcome};
  docs.set(outcome.message.uuid,outcome.message);
- const config={game,nativeCasts,ledger,fromUuid:async u=>docs.get(u)??[...game.messages.values()].find(m=>m.uuid===u),choose:async()=>answer,loadWorkbench:async()=>adapter,assess:()=>({handled:true,eligible:true,rank:3,base:item}),validateTargets:()=>targets,getContext:()=>({token,targets}),randomId:()=>`inv-${++seq}`,onError:()=>{}};
- const bridge=createForceBarrageBridge(config);bridge.register({Hooks,socket:{register:(k,f)=>rpcs.set(k,f)}});
+ const config={game,nativeCasts,ledger,manualDamageRoll:async({roll})=>roll.evaluate(),fromUuid:async u=>docs.get(u)??[...game.messages.values()].find(m=>m.uuid===u),choose:async()=>answer,loadWorkbench:async()=>adapter,assess:()=>({handled:true,eligible:true,rank:3,base:item}),validateTargets:()=>targets,getContext:()=>({token,targets}),randomId:()=>`inv-${++seq}`,onError:()=>{}};
+ Object.assign(config,overrides);const bridge=createForceBarrageBridge(config);bridge.register({Hooks,socket:{register:(k,f)=>rpcs.set(k,f)}});
  return {game,user,actor,item,entry,token,targets,calls,ledger,adapter,adapters,rpcs,hooks,bridge,config,next,outcome,rolls,set answer(v){answer=v},get counts(){return {rolling,publishing,native}},run:()=>bridge.interceptCast({item,entry,options:{rank:3}},next)};
 }
 test('allocation without a visibility checkbox pays once and publishes each positive target once with exact provenance',async()=>{
@@ -30,6 +30,12 @@ test('allocation without a visibility checkbox pays once and publishes each posi
   assert.equal(m.flags[ID].forceBarrage.castNonce,'cast');assert.equal(m.flags.pf2e.origin.uuid,f.item.uuid);assert.equal(m.flags.pf2e.origin.castRank,3);assert.deepEqual(m.whisper,[]);assert.equal(m.blind,false);
  }
  assert.ok(f.calls.filter(c=>c[0]==='publish').every(c=>c[1].messageMode==='public'));
+});
+test('each paid Force Barrage target waits for native damage acceptance before rolling or publishing',async()=>{
+ let accept;const pending=new Promise(resolve=>accept=resolve),f=fixture({manualDamageRoll:async({roll})=>{await pending;return roll.evaluate()}}),run=f.run();await new Promise(resolve=>setTimeout(resolve,15));try{assert.deepEqual(f.counts,{native:1,rolling:0,publishing:0});assert.equal(f.calls.some(c=>c[0]==='recordRoll'),false)}finally{accept();await run}assert.deepEqual(f.counts,{native:1,rolling:2,publishing:2});
+});
+test('closing paid Force Barrage damage creates no die or target card and never recasts automatically',async()=>{
+ const f=fixture({manualDamageRoll:async()=>null});await assert.rejects(f.run(),/取消/);assert.deepEqual(f.counts,{native:1,rolling:0,publishing:0});assert.equal(f.calls.some(c=>c[0]==='recordRoll'||c[0]==='beginPublication'),false);assert.equal(f.calls.filter(c=>c[0]==='uncertain').length,1);
 });
 test('cancel and malformed allocation create no claim, native Cast, die, or card',async()=>{
  const f=fixture();f.answer=null;await f.run();assert.deepEqual(f.counts,{native:0,rolling:0,publishing:0});assert.equal(f.calls.length,0);

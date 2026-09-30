@@ -5,6 +5,8 @@ import {SerialActions} from './runtime.mjs';
 import {preserveDamagePartForMerge,preserveMergedDamageBypass} from './native-damage-components.mjs';
 import {createAttackSequence} from './activity-attack-sequence.mjs';
 import {createNativeOwnerOperations,nativeTransientItems} from './native-owner-operations.mjs';
+import {nativeRollEvent} from './manual-native-roll.mjs';
+import {mergeDamageMessagePrivacy} from './damage-message-privacy.mjs';
 
 const SOURCES={
  twin:'Compendium.pf2e.feats-srd.Item.Gw0wGXikhAhiGoud',
@@ -122,7 +124,7 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
     const tier=twin?Math.min(map+index,2):map;
     let attackMessage=null;
     const nativeResult=await ownerOperations.run({actor,message,user},{type:'attack',weaponId:strike.item.id,altUsageType:strike.item.altUsageType??'',map:tier,targetUuid:target.uuid,options:[...options],flags:{dualStrikeAttack:{usageMessageId:message.id,index}}},async()=>{
-    const check=await strike.variants[tier].roll({target:target.object,options,event:{ctrlKey:false,metaKey:false,shiftKey:false},createMessage:false,callback:async(_roll,_outcome,raw)=>{
+    const check=await strike.variants[tier].roll({target:target.object,options,event:nativeRollEvent(game,'check'),createMessage:false,callback:async(_roll,_outcome,raw)=>{
      const data=raw.toObject();delete data._id;
      data.flags={...data.flags,'xdy-pf2e-workbench':{...data.flags?.['xdy-pf2e-workbench'],noAutoDamageRoll:true},[MODULE_ID]:{...data.flags?.[MODULE_ID],dualStrikeAttack:{usageMessageId:message.id,index}}};
      attackMessage=await messageClass().create(data);
@@ -144,11 +146,11 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
     const {strike:damageStrike,options:sequenceOptions}=frame.damage(strike);
     for(const option of sequenceOptions)damageOptions.add(option);
     const nativeDamage=await ownerOperations.run({actor,message,user},{type:'damage',weaponId:damageStrike.item.id,altUsageType:damageStrike.item.altUsageType??'',map:tier,targetUuid:target.uuid,critical:outcome==='criticalSuccess',checkContext:structuredClone(attackMessage.flags.pf2e.context),options:[...damageOptions],transientItems:nativeTransientItems(damageStrike,actor)},async()=>{
-     const roll=await damageStrike[outcome==='criticalSuccess'?'critical':'damage']({target:target.object,checkContext:attackMessage.flags.pf2e.context,mapIncreases:tier,options:damageOptions,event:{ctrlKey:false,metaKey:false,shiftKey:false},createMessage:false});return roll?{status:'rolled',nativeRoll:roll}:{status:'cancelled'};
+     const roll=await damageStrike[outcome==='criticalSuccess'?'critical':'damage']({target:target.object,checkContext:attackMessage.flags.pf2e.context,mapIncreases:tier,options:damageOptions,event:nativeRollEvent(game,'damage'),createMessage:false});return roll?{status:'rolled',nativeRoll:roll}:{status:'cancelled'};
     });
     if(nativeDamage.status!=='rolled')throw Error('攻击已发生，但原生伤害尚未完成。');
     const roll=nativeDamage.nativeRoll??globalThis.CONFIG.Dice.rolls.find(c=>c.name==='DamageRoll').fromData(nativeDamage.roll);
-    hits.push({roll,strike,attackMessage,outcome});
+    hits.push({roll,strike,attackMessage,outcome,privacy:nativeDamage.privacy});
    }
    if(!hits.length)return cancelled?{status:'cancelled',result:'第二次攻击已取消；第一次攻击未命中。'}:'两次攻击均未命中。';
    if(!twin){
@@ -175,6 +177,7 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
     combined.rolls[0].options??={};combined.rolls[0].options.degreeOfSuccess=3;
    }
    const data=combined.toObject();delete data._id;
+   Object.assign(data,mergeDamageMessagePrivacy(hits.map(hit=>hit.privacy)));
    // toObject() reads _source, not the derived rolls just corrected above.
    data.rolls=combined.rolls.map(roll=>roll.toJSON());
    data.flags??={};data.flags.pf2e??={};

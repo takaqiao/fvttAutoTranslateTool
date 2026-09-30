@@ -5,6 +5,7 @@ import {degreeForSharedCheck} from './social-automation.mjs';
 import {genericReactionAvailable,withReactionReservation,reactionEpoch as epoch} from './reaction-budget.mjs';
 import {reactionPermitted} from './reaction-restriction.mjs';
 import {createFearOwner} from './fear-owner.mjs';
+import {nativeRollEvent} from './manual-native-roll.mjs';
 import {pinnedMedicTarget} from './medic-native.mjs';
 export {genericReactionAvailable,withReactionReservation} from './reaction-budget.mjs';
 
@@ -60,12 +61,12 @@ export function createFearAutomation({game,reactionRestriction,fromUuid=globalTh
   if(payload.kind==='knowledge'){
    if(!Number.isFinite(payload.dc)||payload.dc<1)throw Error('缺少真实目标意志DC。');
    let check;
-   await skill(actor,'occultism').roll({token:origin,item,target:pinnedMedicTarget(target),action:'disturbing-knowledge',dc:{value:payload.dc,visible:false},traits:TRAITS,extraRollOptions:['action:disturbing-knowledge',marker,...TRAITS.map(t=>`item:trait:${t}`)],skipDialog:!(game.user.settings?.showCheckDialogs??true),createMessage:true,callback:(_roll,_outcome,card)=>{validate();check=card;}});
+   await skill(actor,'occultism').roll({token:origin,item,target:pinnedMedicTarget(target),action:'disturbing-knowledge',dc:{value:payload.dc,visible:false},traits:TRAITS,extraRollOptions:['action:disturbing-knowledge',marker,...TRAITS.map(t=>`item:trait:${t}`)],skipDialog:false,event:null,createMessage:true,callback:(_roll,_outcome,card)=>{validate();check=card;}});
    return check??null;
   }
   const native=game.pf2e.actions.get('demoralize');if(!native?.toActionVariant)throw Error('缺少原生Demoralize动作。');
   if(!target.object)throw Error('原目标Token尚未在原操作者客户端就绪。');
-  const reaction=own(message).battleCry.reaction,result=await native.toActionVariant({cost:reaction?'reaction':'free'}).use({actors:[pinnedMedicTarget(origin)],target:target.object,rollOptions:[`${MODULE_ID}:battle-cry:${message.id}`,marker,...reaction?['action:reaction']:[]],event:{ctrlKey:false,metaKey:false,shiftKey:game.user.settings?.showCheckDialogs??true}});
+  const reaction=own(message).battleCry.reaction,result=await native.toActionVariant({cost:reaction?'reaction':'free'}).use({actors:[pinnedMedicTarget(origin)],target:target.object,rollOptions:[`${MODULE_ID}:battle-cry:${message.id}`,marker,...reaction?['action:reaction']:[]],event:nativeRollEvent(game,'check')});
   validate();return result?.[0]?.message??null;
  }});
 

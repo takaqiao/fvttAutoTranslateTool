@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import {MODULE_ID} from '../scripts/rules.mjs';
 const native=await import('../scripts/defensive-advance-native.mjs').catch(()=>({}));
 
@@ -13,5 +14,8 @@ test('included native Strike keeps exact MAP and target, publishes natively, and
  const option={key:receipt.weaponKey,itemUuid:'Actor.a.Item.w',usage:null,strike:{variants:[{}, {async roll(params){options=params;card.flags.pf2e.context.options=[...params.options];handlers.get('preCreateChatMessage')(card);game.messages.set('check',card);await params.callback(card.rolls[0],'success',card);return card.rolls[0]}}]}};
  actor.getActiveTokens=()=>[token];
  const result=await native.rollDefensiveAdvanceStrike({game,Hooks,actor,token,target,receipt,option,validate:()=>option});
+ const source=fs.readFileSync(process.env.PF2E_NATIVE_BUNDLE,'utf8'),start=source.indexOf('function isRelevantEvent('),end=source.indexOf('function eventToMessageMode(',start);
+ assert.ok(start>=0&&end>start);const eventParams=new Function('game',`${source.slice(start,end)};return eventToRollParams;`)(game);
+ assert.equal(eventParams(options.event,{type:'check'}).skipDialog,false,'the included Strike must await its native window even with quick-roll preferences');
  assert.equal(result,'check');assert.equal(options.target,target.object);assert.equal(options.createMessage,true);assert.ok(options.options.has('action:free'));assert.equal(card.flags.pf2e.context.action,'strike');assert.equal(card.flags.pf2e.context.mapIncreases,1);assert.match(card.flavor,/<h4 class="action">.*>F<.*<\/h4>/);assert.match(card.flavor,/<p>Other note <span class="action-glyph">A<\/span><\/p>/);assert.equal(card.flags[MODULE_ID].defensiveAdvanceStrike.messageId,'original');assert.equal(handlers.size,0);
 });

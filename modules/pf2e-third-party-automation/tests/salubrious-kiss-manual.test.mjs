@@ -1,0 +1,39 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {fixture} from './salubrious-kiss-fixture.mjs';
+import {rollSalubriousTreatment,createSalubriousExecutor} from '../scripts/salubrious-kiss-executor.mjs';
+const clone=x=>structuredClone(x);
+function treatment(){
+ const f=fixture();f.game.user=f.user;f.game.settings={get:()=> 'public'};f.setClaim(f.claim);const cards=[],checks=[];let evaluations=0;
+ class DamageRoll {constructor(formula){this.formula=formula;this._evaluated=false;this.options={}}async evaluate(){evaluations++;this._evaluated=true;this.total=38;return this}toJSON(){return {class:'DamageRoll',formula:this.formula,evaluated:this._evaluated,total:this.total,options:this.options}}}
+ const check={_evaluated:true,total:26,options:{degreeOfSuccess:2},toJSON(){return {class:'CheckRoll',evaluated:true,total:this.total,options:this.options}}};
+ const nativeData=options=>({author:f.user.id,speaker:{actor:f.actor.id,scene:f.scene.id,token:f.token.id},blind:false,whisper:[],rolls:[check.toJSON()],flags:{pf2e:{origin:{actor:f.actor.uuid,uuid:f.item.uuid,type:'feat'},context:{origin:{actor:f.actor.uuid,token:f.token.uuid},type:'skill-check',action:'treat-wounds',dc:{value:30},domains:['occultism'],options:options.extraRollOptions,outcome:'success',messageMode:'public'}}}});
+ f.actor.skills.occultism.check={async roll(options){checks.push(options);await options.callback(check,'success',{toObject:()=>clone(nativeData(options))});return check}};
+ const createMessage=async data=>{const rollJSON=data.rolls[0],roll=rollJSON.class==='DamageRoll'?Object.assign(new DamageRoll(rollJSON.formula),{_evaluated:rollJSON.evaluated,total:rollJSON.total,options:rollJSON.options}):check,message={...clone({...data,rolls:[]}),id:'card'+(cards.length+1),rolls:[roll],isCheckRoll:rollJSON.class==='CheckRoll',isDamageRoll:rollJSON.class==='DamageRoll'};cards.push(message);f.game.messages.set(message.id,message);return message};
+ const config={...f,Hooks:{on:()=>1,off(){}},claim:f.claim,checkScope:{run:(_context,fn)=>fn()},createMessage,DamageRoll,manualDamageRoll:async({roll})=>roll.evaluate()};return {...f,config,cards,checks,get evaluations(){return evaluations},run:overrides=>rollSalubriousTreatment({...config,...overrides})};
+}
+test('Salubrious native Occultism requires its own real acceptance with no pointer event override',async()=>{const f=treatment();await f.run();assert.equal(f.checks[0].skipDialog,false);assert.equal(f.checks[0].event,null)});
+test('Salubrious damage waits for native acceptance after its one saved check',async()=>{
+ const f=treatment();let accept;const pending=new Promise(resolve=>accept=resolve),run=f.run({manualDamageRoll:async({roll,messageMode})=>{assert.equal(messageMode,'public');await pending;return roll.evaluate()}});await new Promise(resolve=>setImmediate(resolve));try{assert.equal(f.cards.length,1);assert.equal(f.evaluations,0)}finally{accept();await run}assert.equal(f.cards.length,2);assert.equal(f.evaluations,1);assert.equal(f.cards[1].flags.pf2e.origin.messageId,f.cards[0].id);
+});
+test('closing Salubrious damage preserves the check and produces no treatment dice or application',async()=>{const f=treatment();await assert.rejects(f.run({manualDamageRoll:async()=>null}),/取消/);assert.equal(f.cards.length,1);assert.equal(f.evaluations,0);assert.equal(f.applications.length,0)});
+function ownerPair({lostReply=false}={}){
+ const f=treatment(),hooks=new Map();let sequence=0,requests=0,ownerTask;
+ const Hooks={on(event,fn){const id=++sequence;hooks.set(id,{event,fn});return id},off(_event,id){hooks.delete(id)},call(event,...args){for(const h of hooks.values())if(h.event===event)h.fn(...args)}};
+ const update=f.actor.update.bind(f.actor);f.actor.update=async changes=>{const value=await update(changes);Hooks.call('updateActor',f.actor,changes);return value};
+ const owner=createSalubriousExecutor({...f.config,Hooks,timeoutMs:10}),game={...f.game,user:f.gm},gm=createSalubriousExecutor({...f.config,game,Hooks,timeoutMs:10});
+ gm.register({socket:{register(){},executeAsUser(_name,_id,payload){requests++;ownerTask=owner.ownerRoll(payload,f.gm);ownerTask.catch(()=>{});return lostReply?new Promise(()=>{}):ownerTask.then(value=>({ok:true,value}),error=>({ok:false,error:error.message}))}}});
+ return {...f,Hooks,hooks,owner,gm,gmGame:game,get ownerTask(){return ownerTask},get requests(){return requests}};
+}
+test('the original owner may leave the native check open beyond the old RPC deadline and then complete once',async()=>{
+ const f=ownerPair();let accept;const gate=new Promise(resolve=>accept=resolve),native=f.actor.skills.occultism.check.roll;f.actor.skills.occultism.check.roll=async options=>{await gate;return native(options)};let settled=false;const pending=f.gm.roll(f.claim).then(value=>{settled=true;return {value}},error=>{settled=true;return {error}});await new Promise(resolve=>setTimeout(resolve,30));try{assert.equal(settled,false);assert.equal(f.cards.length,0);assert.equal(f.requests,1)}finally{accept();await f.ownerTask}const result=await pending;if(result.error)throw result.error;assert.equal(result.value.degree,2);assert.equal(f.cards.length,2);assert.equal(f.hooks.size,0);
+});
+test('the exact persisted native result completes even when its socket reply is permanently lost',async()=>{
+ const f=ownerPair({lostReply:true}),pending=f.gm.roll(f.claim).then(value=>({value}),error=>({error}));await new Promise(resolve=>setImmediate(resolve));await f.ownerTask;const result=await pending;if(result.error)throw result.error;assert.equal(result.value.checkId,'card1');assert.equal(result.value.damageId,'card2');assert.equal(f.requests,1);assert.equal(f.cards.length,2);assert.equal(f.hooks.size,0);
+});
+test('owner disconnection releases the pending native operation and leaves no dice cards or replay permission',async()=>{
+ const f=ownerPair();let accept;const gate=new Promise(resolve=>accept=resolve),native=f.actor.skills.occultism.check.roll;f.actor.skills.occultism.check.roll=async options=>{await gate;return native(options)};let result;const pending=f.gm.roll(f.claim).then(value=>result={value},error=>result={error});await new Promise(resolve=>setImmediate(resolve));f.user.active=false;f.Hooks.call('userConnected',f.user,false);await new Promise(resolve=>setImmediate(resolve));try{assert.match(result?.error?.message??'',/离线|无法行动/);assert.deepEqual([...f.hooks.values()].map(h=>h.event),['renderCheckModifiersDialog'])}finally{accept();await f.ownerTask.catch(()=>{});await pending;await new Promise(resolve=>setImmediate(resolve))}assert.equal(f.hooks.size,0);assert.equal(f.cards.length,0);assert.equal(f.actor.flags[f.M].salubriousKissExecutions[0].state,'uncertain');await assert.rejects(f.owner.ownerRoll({actorUuid:f.actor.uuid,nonce:f.claim.nonce},f.gm));assert.equal(f.cards.length,0);
+});
+test('GM handoff releases a pending owner window and later acceptance cannot publish its stale treatment',async()=>{
+ const f=ownerPair();let accept;const gate=new Promise(resolve=>accept=resolve),native=f.actor.skills.occultism.check.roll;f.actor.skills.occultism.check.roll=async options=>{await gate;return native(options)};let result;const pending=f.gm.roll(f.claim).then(value=>result={value},error=>result={error});await new Promise(resolve=>setImmediate(resolve));f.game.users.activeGM={id:'new-gm',isGM:true,active:true};f.Hooks.call('userConnected',f.gm,true);await new Promise(resolve=>setImmediate(resolve));try{assert.match(result?.error?.message??'',/主GM/);assert.deepEqual([...f.hooks.values()].map(h=>h.event),['renderCheckModifiersDialog'])}finally{accept();await f.ownerTask.catch(()=>{});await pending;await new Promise(resolve=>setImmediate(resolve))}assert.equal(f.hooks.size,0);assert.equal(f.cards.length,0);assert.equal(f.evaluations,0);
+});

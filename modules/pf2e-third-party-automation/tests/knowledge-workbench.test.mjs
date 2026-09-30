@@ -44,6 +44,29 @@ function nativeProbeFixture(f){
  };
  return f;
 }
+test('ordinary RK waits for its sole native confirmation even when the owner disabled roll dialogs',async()=>{
+ const f=fixture(),native=f.game.pf2e.Check.roll;f.user.settings={showCheckDialogs:false};let confirm,entered;
+ const atDialog=new Promise(resolve=>entered=resolve),approval=new Promise(resolve=>confirm=resolve);let after=0;
+ f.actor.rules=[{afterRoll(){after++;}}];f.game.pf2e.Check.roll=async(check,context,event,callback)=>{entered(context);if(!context.skipDialog)await approval;return native(check,context,event,callback);};
+ const pending=api.captureWorkbenchRecall({...f,requestId:'owner-confirmation',targetUuids:[f.target.uuid]});const context=await atDialog;
+ assert.equal(context.skipDialog,false);assert.equal(context.messageMode,'blind');assert.equal(context.dc.visible,false);assert.equal(f.die.count,0);assert.equal(after,0);
+ confirm();const capture=await pending;assert.equal(f.die.count,1);assert.equal(after,1);assert.equal(capture.candidates[0].total,25);assert.deepEqual(capture.message.whisper,['gm']);
+});
+test('cancelled ordinary RK deletes only its empty reservation and produces no dice or afterRoll effects',async()=>{
+ const f=fixture(),create=f.globals.ChatMessage.create;f.globals.ChatMessage.create=async data=>{const message=await create(data);message.delete=async()=>f.game.messages.delete(message.id);return message;};let after=0;
+ f.actor.rules=[{afterRoll(){after++;}}];f.game.pf2e.Check.roll=async(_check,context)=>context.skipDialog?{unexpectedFastRoll:true}:null;
+ await assert.rejects(()=>api.captureWorkbenchRecall({...f,requestId:'cancel-confirmation',targetUuids:[f.target.uuid]}),/取消/);assert.equal(f.die.count,0);assert.equal(after,0);assert.equal(f.game.messages.size,0);
+});
+test('fixed Assurance keeps its zero-dice path without requesting a redundant native dialog',async()=>{
+ const f=fixture(),native=f.game.pf2e.Check.roll;f.actor.skills.society.modifiers=[{type:'proficiency',modifier:9}];f.actor.items=[{_stats:{compendiumSource:'Compendium.pf2e.feats-srd.Item.W6Gl9ePmItfDHji0'},system:{rules:[{key:'ChoiceSet',flag:'assurance',selection:'society'}]}}];let primaryCalls=0;
+ f.game.pf2e.Check.roll=(check,context,...args)=>{primaryCalls++;assert.equal(context.skipDialog,true);return native(check,context,...args);};
+ const capture=await api.captureWorkbenchRecall({...f,requestId:'fixed-assurance-confirmation',targetUuids:[f.target.uuid],statistic:'society',assurance:true});assert.equal(primaryCalls,1);assert.equal(f.die.count,0);assert.equal(capture.candidates[0].total,19);
+});
+test('Assurance cancelled by misfortune must confirm its actual random check and can cancel without consuming effects',async()=>{
+ const f=fixture(),create=f.globals.ChatMessage.create;f.globals.ChatMessage.create=async data=>{const message=await create(data);message.delete=async()=>f.game.messages.delete(message.id);return message;};f.actor.skills.society.rollTwice='keep-lower';f.actor.skills.society.modifiers=[{type:'proficiency',modifier:9}];f.actor.items=[{_stats:{compendiumSource:'Compendium.pf2e.feats-srd.Item.W6Gl9ePmItfDHji0'},system:{rules:[{key:'ChoiceSet',flag:'assurance',selection:'society'}]}}];let after=0;
+ f.actor.rules=[{afterRoll(){after++;}}];f.game.pf2e.Check.roll=async(_check,context)=>{assert.equal(context.skipDialog,false);return null;};
+ await assert.rejects(()=>api.captureWorkbenchRecall({...f,requestId:'cancel-conflicted-assurance',targetUuids:[f.target.uuid],statistic:'society',assurance:true}),/取消/);assert.equal(f.die.count,0);assert.equal(after,0);assert.equal(f.game.messages.size,0);
+});
 test('safe probes run one real primary native check and consume its one-use rule only after a persistent card claim',async()=>{
  const f=nativeProbeFixture(fixture());f.target.actor.traits=new Set(['construct']);f.actor.skills.arcana.totalModifier=7;f.actor.skills.crafting.totalModifier=8;let after=0;
  f.actor.rules=[{async afterRoll({check,roll}){after++;assert.equal(check.slug,'crafting');assert.equal(roll.total,20);assert.equal(f.game.messages.get('rk1').flags[MODULE_ID].workbenchRecall.probeUse.status,'claimed');}}];

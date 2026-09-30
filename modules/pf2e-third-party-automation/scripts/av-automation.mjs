@@ -239,7 +239,7 @@ export function createAvAutomation({game,fromUuid=globalThis.fromUuid,choose,onE
     const sickened=actor.getCondition('sickened');if(!sickened)return '惊惧已降低1；没有恶心状态。';
     const dc=sickened.flags?.['patreon-v3']?.dc??sickened.system?.context?.roll?.dc?.value;
     if(!Number.isFinite(dc)||dc<=0)return '惊惧已降低1；恶心未记录来源DC，请在现有状态DC字段补入后正常干呕，未擅自减少恶心。';
-    let reduction=null;await actor.saves.fortitude.roll({dc:{value:dc},skipDialog:true,item,extraRollOptions:['action:shake-it-off'],callback:async(_roll,outcome,rollMessage)=>{
+    let reduction=null;await actor.saves.fortitude.roll({dc:{value:dc},skipDialog:false,event:null,item,extraRollOptions:['action:shake-it-off'],callback:async(_roll,outcome,rollMessage)=>{
      const degree=OUTCOMES.indexOf(outcome)>=0?OUTCOMES.indexOf(outcome):degreeOf(rollMessage);
      if(degree<0||degree>3)return;reduction=degree;
      // Operate on the same source condition, never walk down unrelated independent sources.

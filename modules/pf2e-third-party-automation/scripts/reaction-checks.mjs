@@ -4,6 +4,7 @@ import {getSourceId,isActiveGM,resolveMessageTargets} from './native-context.mjs
 import {genericReactionAvailable,withReactionReservation} from './fear-automation.mjs';
 import {createEatFortune} from './eat-fortune.mjs';
 import {reactionPermitted} from './reaction-restriction.mjs';
+import {confirmManualFlatCheck} from './manual-native-roll.mjs';
 
 export const REACTION_CHECK_SOURCES=Object.freeze({pointed:'Compendium.pf2e.actionspf2e.Item.xccOiNL2W1EtfUYl',pointedEffect:'Compendium.pf2e.feat-effects.Item.SScln8qRQgVC6Brz',clock:'Compendium.pf2e.feats-srd.Item.3aG0gkHulBIHqqGE',clockEffect:'Compendium.pf2e.feat-effects.Item.LbICHKe5jLMxhaOw',squawk:'Compendium.pf2e.feats-srd.Item.CCmiEmS7ZgyQUfhn',eat:'Compendium.pf2e.feats-srd.Item.rFmJVDdB313EibTs'});
 const values=c=>Array.from(c?.values?.()??c??[]),own=d=>d?.flags?.[MODULE_ID]?.reactionChecks??{},OUTCOMES=['criticalFailure','failure','success','criticalSuccess'];
@@ -11,10 +12,50 @@ const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>'
 const languages=a=>a?.system?.details?.languages?.value??[];
 const POINTED_TRAITS=['auditory','concentrate','investigator','linguistic','mental'];
 
+function paidReferenceActor(game,context,decision,nativeCardData){
+ const candidate=context.actor??(context.origin?.self?context.origin.actor:context.target?.actor),nonce=decision?.nonce;
+ if(typeof nonce!=='string'||!/^[A-Za-z0-9_-]{1,100}$/.test(nonce)||decision.actorUuid!==candidate?.uuid)throw Error('已付款反应与原角色无法关联。');
+ const token=context.token??(context.origin?.self?context.origin.token:context.target?.token),document=token?.document??token;
+ const actor=candidate.isToken?document?.actor:game.actors?.get(candidate.id);
+ if(actor?.uuid!==candidate.uuid||nativeCardData.speaker?.actor!==actor.id)throw Error('原检定角色来源无法确认。');
+ const authorId=nativeCardData.user?.id??nativeCardData.user??nativeCardData.author?.id??nativeCardData.author;
+ const user=game.users?.get(authorId);
+ if(user?.id!==game.user?.id||actor.testUserPermission?.(user,'OWNER')!==true)throw Error('原检定操作者无法确认。');
+ if(decision.reaction==='halfling-luck'){
+  const item=values(actor.items).find(item=>{
+   const record=item.flags?.[MODULE_ID]?.halflingLuck?.operations?.[nonce];
+   return record?.nonce===nonce&&record.actorUuid===actor.uuid&&record.itemUuid===item.uuid&&record.userId===user.id&&typeof record.paymentNonce==='string'&&['paid','ready','rolling','result-ready','delivering','callback-returned','uncertain'].includes(record.status);
+  });
+  const record=item?.flags?.[MODULE_ID]?.halflingLuck?.operations?.[nonce],card=game.messages?.get(record?.messageId),proof=card?.flags?.[MODULE_ID]?.halflingLuckInput;
+  if(!record||!card||proof?.nonce!==nonce||proof.paymentNonce!==record.paymentNonce||card.flags?.pf2e?.origin?.uuid!==item.uuid||card.flags.pf2e.origin.actor!==actor.uuid)throw Error('半身人幸运的已付款凭据无法确认。');
+ }else if(decision.reaction==='clock'){
+  const record=own(actor).reactions?.find(record=>record.nonce===nonce&&record.kind==='clock'&&['claimed','used'].includes(record.state)),card=game.messages?.get(record?.checkId),proof=own(card);
+  if(!record||!card||card.speaker?.actor!==actor.id||proof.kind!=='reaction-use'||proof.reaction!=='clock'||proof.nonce!==nonce||actor.testUserPermission?.(game.users?.get(record.userId),'OWNER')!==true)throw Error('倒转光阴的已付款凭据无法确认。');
+ }else throw Error('未知的已付款重掷来源。');
+ return actor;
+}
+
+async function savePaidRerollReference({game,context,decision,original,rollJSON,nativeCardData,referencePublisher,error}){
+ try{
+  const actor=paidReferenceActor(game,context,decision,nativeCardData),whisper=values(game.users).filter(user=>user.isGM&&typeof user.id==='string'&&user.id.length>0).map(user=>user.id);
+  if(!whisper.length||typeof referencePublisher!=='function')throw Error('缺少GM接收者或参考凭据发布接口。');
+  let rendered='';try{rendered=await original.roll.render?.()??'';}catch{/* The full evaluated roll remains in the reference flags. */}
+  // This is deliberately a non-roll message. PF2e and the reaction listeners
+  // must never interpret a discarded original die as the final check result.
+  const message=await referencePublisher({user:game.user.id,speaker:{...nativeCardData.speaker},blind:true,whisper,rolls:[],content:`<p><strong>原检定参考，非最终结果</strong></p><p>已付款重掷取消或未确认；次数已使用，不会自动重试。此记录仅供GM查阅，不结算原检定效果。</p>${rendered}`,flags:{[MODULE_ID]:{reference:{kind:'paid-reroll-original',reaction:decision.reaction,nonce:decision.nonce,actorUuid:actor.uuid,rollJSON,nativeCardData,outcome:original.outcome}}}});
+  if(!message?.id)throw Error('参考凭据未能保存。');
+ }catch(referenceError){
+  // Keep the original native failure, including its identity, while exposing
+  // that the already evaluated original die has no durable GM reference.
+  if(error instanceof Error)error.message+=`；原检定参考未保存：${referenceError.message??referenceError}`;
+  else throw Error(`${error}；原检定参考未保存：${referenceError.message??referenceError}`,{cause:error});
+ }
+}
+
 /** Keep the ordinary native modifier dialog, dice and DC calculation. Deliver only
  * the final result with the caller's publication choice, then its callback once.
  */
-export async function runCheckReactionPipeline({game,check,context,event=null,callback,native,decide,beforeReroll,publish=data=>globalThis.ChatMessage.create(data)}){
+export async function runCheckReactionPipeline({game,check,context,event=null,callback,native,decide,beforeReroll,publish=data=>globalThis.ChatMessage.create(data),referencePublisher=data=>globalThis.ChatMessage.create(data)}){
  const createMessage=context.createMessage!==false;
  let captured;const collect=async(roll,outcome,card,callbackEvent)=>{captured={roll,outcome,card,event:callbackEvent}};
  const options=context.options instanceof Set?context.options:new Set(context.options??[]),draftContext={...context,options,createMessage:false};
@@ -25,8 +66,13 @@ export async function runCheckReactionPipeline({game,check,context,event=null,ca
  if(reroll){
   const rerollCheck=reaction==='clock'?new game.pf2e.CheckModifier(check.slug,{modifiers:check.modifiers},[new game.pf2e.Modifier({slug:'turn-back-the-clock',label:'倒转光阴',modifier:1,type:'circumstance'})]):check;
   const options=new Set(draftContext.options);options.add('fortune');options.add('check:reroll');
-  captured=null;await native(rerollCheck,{...draftContext,options,isReroll:true,skipDialog:true,rollTwice:false,substitutions:[],createMessage:false},null,collect);
-  if(!captured)throw Error(`${reaction==='clock'?'倒转光阴':'半身人幸运'}的原生重掷未完成；次数已使用，不会自动重试。`);
+  const nativeCardData=original.card.toObject();captured=null;
+  try{
+   await native(rerollCheck,{...draftContext,options,isReroll:true,skipDialog:false,event:null,rollTwice:false,substitutions:[],createMessage:false},null,collect);
+   if(!captured)throw Error(`${reaction==='clock'?'倒转光阴':'半身人幸运'}的原生重掷未完成；次数已使用，不会自动重试。`);
+  }catch(error){
+   await savePaidRerollReference({game,context:draftContext,decision,original,rollJSON:originalRollData,nativeCardData,referencePublisher,error});throw error;
+  }
  }
  const data=captured.card.toObject();delete data._id;
  if(reaction==='squawk'){
@@ -160,10 +206,10 @@ export function createReactionChecks({game,reactionRestriction,fromUuid=globalTh
   if(message.flags?.pf2e?.flatCheck?.result==='fail')return '原生听觉动作平检失败，针对讯问未生效。';
   if(actor.hasCondition?.('deafened')){
    const pf=message.flags?.pf2e??{},alreadyGated=game.modules?.get('patreon-v3')?.active&&Object.keys(pf).length===1&&pf.origin&&!pf.origin.sourceId&&['all','attack'].includes(game.settings?.get('patreon-v3','flatCheck'));
-   if(!alreadyGated){let total;if(!game.pf2e.Check?.roll||!game.pf2e.CheckModifier)throw Error('无法进行耳聋的原生听觉动作平检。');await asReactionGM(()=>game.pf2e.Check.roll(new game.pf2e.CheckModifier('pointed-question-deafened',{modifiers:[]},[]),{actor,token:origin,type:'flat-check',dc:{value:5},domains:['flat-check'],options:new Set(['action:pointed-question']),skipDialog:true},null,async r=>{total=r.total}));if(!Number.isFinite(total))throw Error('听觉动作平检未完成，不能重试本条使用。');if(total<5)return '耳聋的DC 5听觉动作平检失败。';}
+   if(!alreadyGated){if(!await confirmManualFlatCheck({label:'针对讯问 · 耳聋听觉动作平检',dc:5}))return '已取消投骰，本次针对讯问不产生效果。';let total;if(!game.pf2e.Check?.roll||!game.pf2e.CheckModifier)throw Error('无法进行耳聋的原生听觉动作平检。');await asReactionGM(()=>game.pf2e.Check.roll(new game.pf2e.CheckModifier('pointed-question-deafened',{modifiers:[]},[]),{actor,token:origin,type:'flat-check',dc:{value:5},domains:['flat-check'],options:new Set(['action:pointed-question']),skipDialog:false,event:null},null,async r=>{total=r.total}));if(!Number.isFinite(total))throw Error('听觉动作平检未完成，不能重试本条使用。');if(total<5)return '耳聋的DC 5听觉动作平检失败。';}
   }
   const marker=`${MODULE_ID}:pointed-question:${globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.randomUUID()}`;
-  let result;nativeInvocations.set(marker,{actorUuid:actor.uuid,tokenUuid:origin.uuid,targetUuid:target.uuid,user,usageId:message.id});try{await asReactionGM(()=>stat.check.roll({token:origin,target:recipient,item,action:'pointed-question',dc:{value:dc,visible:false},traits:POINTED_TRAITS,extraRollOptions:['action:pointed-question',marker,...POINTED_TRAITS.map(t=>`item:trait:${t}`)],skipDialog:true,createMessage:true,callback:async(roll,outcome,card)=>{result={roll,card,degree:roll.options?.degreeOfSuccess??OUTCOMES.indexOf(outcome)}}}))}finally{nativeInvocations.delete(marker)};
+  let result;nativeInvocations.set(marker,{actorUuid:actor.uuid,tokenUuid:origin.uuid,targetUuid:target.uuid,user,usageId:message.id});try{await asReactionGM(()=>stat.check.roll({token:origin,target:recipient,item,action:'pointed-question',dc:{value:dc,visible:false},traits:POINTED_TRAITS,extraRollOptions:['action:pointed-question',marker,...POINTED_TRAITS.map(t=>`item:trait:${t}`)],skipDialog:false,event:null,createMessage:true,callback:async(roll,outcome,card)=>{result={roll,card,degree:roll.options?.degreeOfSuccess??OUTCOMES.indexOf(outcome)}}}))}finally{nativeInvocations.delete(marker)};
   if(!result||!Number.isInteger(result.degree)||result.degree<0||result.degree>3)throw Error('交涉检定结果无法确认；本次使用不会自动重掷。');
   const start=now(),{degree,card}=result;
   await mark(recipient,'reaction-checks:pointed-immunity',{type:'effect',name:'针对讯问：暂时免疫',img:item.img??'icons/magic/symbols/question-stone-yellow.webp',system:{slug:'pointed-question-immunity',duration:{value:1,unit:'hours',expiry:'turn-start',sustained:false},start:{value:start,initiative:null},rules:[],tokenIcon:{show:false}},flags:{[MODULE_ID]:{reactionChecks:{kind:'pointed-immunity',sourceId:REACTION_CHECK_SOURCES.pointed,usageId:message.id,checkId:card.id,expiresAt:start+3600}}}});
