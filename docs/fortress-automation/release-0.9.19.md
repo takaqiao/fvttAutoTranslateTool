@@ -26,3 +26,9 @@ Assurance 的固定结果和 Fortune／Misfortune 抵消依据[现行专长规�
 ## 更新与恢复
 
 所有 GM 与玩家整页刷新后加载新脚本。发行包只含模块运行文件；已有世界数据不随包覆盖。部署前保存完整旧模块备份并校验所有文件，失败时恢复旧目录及原生包缓存；不自动关闭世界、不重启正式服务。
+
+2026-09-30 11:46（Asia/Shanghai）已在 CN Setup 状态部署，原生缓存为 0.9.19，服务器 HTTP 提供的 148 个文件全部匹配发行清单；170 个世界文件、八个受保护模块、服务进程与启动配置保持一致。完整旧模块备份位于 CN 的 `/root/fvtt-patch-backups/automation-release-0919-20260930/backup-pf2e-third-party-automation-0.9.18.6`。
+
+[正式发行](https://github.com/takaqiao/fvttAutoTranslateTool/releases/tag/pf2e-third-party-automation-v0.9.19)的源提交为 `f22980350ec176a7b6df69bb68d5062733b7d484`。ZIP SHA256 为 `50b6bfd1b9ee842d973e7c838a5156d848eb6fd481338ba8fb1f8ed02f533b80`；公开下载包和 latest manifest 已重新下载并验证。最终隔离双客户端与发行包 148/148 文件 SHA 相符，随后只停止本轮自有测试服务。
+
+本地证据：[公开下载校验](C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/release-tools/release/public-download-verification.json)、[发行包实机报告](C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/qa/dual-client-report-1790739641161.json)、[部署回执](C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/release-tools/deployment-evidence/deployment-receipt.json)、[部署后核对](C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/release-tools/deployment-evidence/postcheck.json)。这些只证明本轮列出的范围；测试世界已保留以便后续复查。
