@@ -43,9 +43,9 @@ test('startup snapshot cannot become ready merely because maintenance saved repa
  assert.equal(compatibility.defensiveAdvanceStartupCompatibility({game,rules:repaired}).status,'unavailable');
 });
 
-test('unknown Patreon version and duplicate or modified shield executors do not grant continuation',()=>{
+test('functional Patreon shield executors support any module version while duplicates stay unavailable',()=>{
  const rules=buildDefensiveAdvancePatreonRepairs(original()).rules;
- for(const version of ['3.2.27','custom'])assert.notEqual(compatibility.defensiveAdvanceStartupCompatibility?.({game:{modules:new Map([['patreon-v3',{active:true,version}]])},rules})?.status,'ready');
+ for(const version of ['3.2.27','custom'])assert.equal(compatibility.defensiveAdvanceStartupCompatibility?.({game:{modules:new Map([['patreon-v3',{active:true,version}]])},rules})?.status,'ready');
  rules[id].baseRules.push(structuredClone(rules[id].baseRules[0]));
  assert.notEqual(compatibility.defensiveAdvanceStartupCompatibility?.({game:{modules:new Map([['patreon-v3',{active:true,version:'3.2.28'}]])},rules})?.status,'ready');
 });

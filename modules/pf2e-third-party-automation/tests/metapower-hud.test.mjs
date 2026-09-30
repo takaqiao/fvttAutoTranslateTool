@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import {createMetapowerProvider} from '../scripts/metapower/provider.mjs';
 import {METAPOWER_SOURCES} from '../scripts/metapower/rules.mjs';
 
-// The reviewed HUD 2.55.2 bundle preserves these class names and method bytes.
-// Keep the real digest gate in these tests; a permissive fake would hide drift.
+// The installed HUD exposes these controller interfaces. Exercise the actual
+// frozen Toolbelt helper and keep unsupported descriptor checks independent.
 function actionControllers(item,{native=()=>{throw Error('unexpected unobserved action')},explore=()=>{}}={}){
  const al=native,hb=explore;
  class ActionsSidebarAction{use(e){let n=this.item;return n?.isOfType("feat","action")&&al(e,n,this.virtualData)}}
@@ -23,7 +23,7 @@ function setup(t,native=async()=>null){
  globalThis.CONFIG={Actor:{sheetClasses:{character:{}}},Dice:{rolls:[]}};
  t.after(()=>{if(priorConfig===undefined)delete globalThis.CONFIG;else globalThis.CONFIG=priorConfig});
  const gm={id:'gm'},game={user:gm,users:{activeGM:gm},actors:new Map(),scenes:new Map(),pf2e:{actions:new Map()},
-  modules:new Map([['pf2e-hud',{version:'2.55.2'}],['pf2e-toolbelt',{version:'3.56.2'}]]),
+  modules:new Map([['pf2e-hud',{active:true,version:'future'}],['pf2e-toolbelt',{active:true,version:'future'}]]),
   toolbelt:{api:{actionable:Object.freeze({useAction:native})}}};
  const actor={uuid:'Actor.a',type:'character',items:new Map([['w',{sourceId:METAPOWER_SOURCES.widen}]])};
  const item={id:'i',uuid:'Actor.a.Item.i',actor,isOfType:(...types)=>types.includes('action')};
@@ -66,12 +66,14 @@ for(const armed of [false,true])for(const kind of ['sidebar','persistent'])test(
  assert.equal(nativeCalls,1);assert.deepEqual(f.requests.map(r=>r.name),armed?['metapower:begin','metapower:start','metapower:finish']:[]);
 });
 
-for(const kind of ['sidebar','persistent'])test(`changed reviewed ${kind} action method still fails its exact fingerprint gate`,async t=>{
+for(const kind of ['sidebar','persistent'])test(`functional changed ${kind} action methods route once through the installed Toolbelt API`,async t=>{
  const f=setup(t),action=actionControllers(f.item)[kind],prototype=Object.getPrototypeOf(action);
  const modified=function(){return 'changed native action'};prototype.use=modified;
  await f.render(kind,[action]);
- assert.equal(f.errors.length,1);assert.match(f.errors[0].message,/HUD use entry differs from the reviewed version/);
- assert.equal(action.use,modified);assert.deepEqual(f.requests,[]);
+ assert.equal(f.errors.length,0);assert.notEqual(action.use,modified);assert.equal(await action.use({type:'click'}),null);assert.deepEqual(f.requests,[]);
+});
+for(const kind of ['sidebar','persistent'])test(`unavailable ${kind} use descriptors retain the original control and report the interface failure`,async t=>{
+ const f=setup(t),action=actionControllers(f.item)[kind],prototype=Object.getPrototypeOf(action),original=action.use;Object.defineProperty(prototype,'use',{configurable:false,writable:true,value:original});await f.render(kind,[action]);assert.equal(f.errors.length,1);assert.match(f.errors[0].message,/HUD use interface is unavailable/);assert.equal(action.use,original);assert.deepEqual(f.requests,[]);
 });
 
 test('reviewed persistent exploration and ineligible actor uses retain their native routes',async t=>{

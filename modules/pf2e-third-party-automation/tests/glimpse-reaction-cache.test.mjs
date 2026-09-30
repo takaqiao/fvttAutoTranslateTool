@@ -16,8 +16,8 @@ test('verified initialization installs exactly one wrapper; repeated initialize 
  await f.adapter.initialize({libWrapper:f.libWrapper});assert.equal(f.registrations.length,1);assert.equal(f.registrations[0].path,'CONFIG.Combat.documentClass.prototype.getFlag');assert.equal(f.registrations[0].type,'WRAPPER');
  f.adapter.unregister();assert.equal(f.registrations.length,0);assert.equal(f.adapter.ready(),false);
 });
-test('unsupported or mismatched modules and absent wrapper never become ready or register',async()=>{
- for(const config of [{active:false},{version:'1.4.4'},{sha:'wrong'}]){const f=fixture(config);assert.equal(await f.adapter.initialize({libWrapper:f.libWrapper}),false);assert.equal(f.adapter.ready(),false);assert.equal(f.registrations.length,0);}
+test('inactive dependencies and absent wrapper interfaces never become ready or register',async()=>{
+ for(const config of [{active:false}]){const f=fixture(config);assert.equal(await f.adapter.initialize({libWrapper:f.libWrapper}),false);assert.equal(f.adapter.ready(),false);assert.equal(f.registrations.length,0);}
  const f=fixture();assert.equal(await f.adapter.initialize({libWrapper:null}),false);assert.equal(f.adapter.ready(),false);
 });
 test('eligible reads add only a virtual member without mutating native cache or reaction resources',async()=>{
@@ -38,7 +38,7 @@ test('unknown namespace, keys, extra arguments and unknown return values preserv
  for(const native of [undefined,null,{},'unknown']){f.flags['pf2e-reaction'].availableReactions=native;assert.equal(f.get(),native);}
 });
 test('disabled setting, inactive combat, missing holder and changed module return native array unchanged',async()=>{
- for(const configure of [f=>f.game.settings.get=()=>[],f=>f.combat.started=false,f=>f.combat.turns=[],f=>f.combat.turns[0].actor.items=[{type:'feat',slug:SLUG}],f=>f.game.combats.delete('battle'),f=>f.installed.active=false,f=>f.installed.version='1.4.4',f=>f.game.modules.set('pf2e-reaction',{active:true,version:'1.4.3'})]){
+ for(const configure of [f=>f.game.settings.get=()=>[],f=>f.combat.started=false,f=>f.combat.turns=[],f=>f.combat.turns[0].actor.items=[{type:'feat',slug:SLUG}],f=>f.game.combats.delete('battle'),f=>f.installed.active=false,f=>f.game.modules.set('pf2e-reaction',{active:true,version:'1.4.3'})]){
   const f=fixture();await f.adapter.initialize({libWrapper:f.libWrapper});configure(f);assert.equal(f.get(),f.flags['pf2e-reaction'].availableReactions);
  }
 });
@@ -47,12 +47,11 @@ test('uses actual Combat this and supports player-client native reads and synthe
  f.combat.turns=[{actor:{isToken:true,itemTypes:{action:[{type:'action',system:{slug:SLUG}}]}}}];assert.deepEqual(f.get(),['shield-block',SLUG]);
  const foreign={...f.combat};const result=[];assert.equal(f.registrations[0].wrapper.call(foreign,()=>result,'pf2e-reaction','availableReactions'),result);
 });
-test('source identity changing while hashing cannot install a wrapper',async()=>{
- const f=fixture();const a=createGlimpseReactionCache({game:f.game,fetchSource:async()=>'',hashSource:async()=>{f.installed.version='1.4.4';return SHA;}});
- assert.equal(await a.initialize({libWrapper:f.libWrapper}),false);assert.equal(a.ready(),false);assert.equal(f.registrations.length,0);
+test('functional dependency versions require no source downloads or hashing',async()=>{
+ const f=fixture({version:'future'});let sourceReads=0;const a=createGlimpseReactionCache({game:f.game,fetchSource:async()=>{sourceReads++;throw Error('unnecessary source read')},hashSource:async()=>{throw Error('unnecessary hash')}});
+ assert.equal(await a.initialize({libWrapper:f.libWrapper}),true);assert.equal(a.ready(),true);assert.deepEqual(f.get(),['shield-block',SLUG]);assert.equal(sourceReads,0);f.installed.version='next';assert.equal(a.ready(),true);a.unregister();
 });
-test('concurrent initialization installs once, while cancellation before verification prevents registration',async()=>{
+test('concurrent initialization installs once and unregister removes its own wrapper',async()=>{
  const f=fixture();await Promise.all([f.adapter.initialize({libWrapper:f.libWrapper}),f.adapter.initialize({libWrapper:f.libWrapper})]);assert.equal(f.registrations.length,1);
- const next=fixture();let release;const a=createGlimpseReactionCache({game:next.game,fetchSource:()=>new Promise(resolve=>release=resolve),hashSource:async()=>SHA});
- const pending=a.initialize({libWrapper:next.libWrapper});a.unregister();release('source');assert.equal(await pending,false);assert.equal(next.registrations.length,0);
+ const next=fixture(),a=createGlimpseReactionCache({game:next.game});await a.initialize({libWrapper:next.libWrapper});a.unregister();assert.equal(a.ready(),false);assert.equal(next.registrations.length,0);
 });

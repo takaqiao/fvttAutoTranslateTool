@@ -73,12 +73,11 @@ test('fortress protects only empty Shield Wall candidates and preserves upstream
  result.dispose();assert.equal(f.entry.fn,f.original);
 });
 
-test('fortress compatibility still rejects unknown worlds, dependency versions and source hashes',async()=>{
- for(const mutate of [f=>{f.game.world.id='unreviewed-world';},f=>{f.game.modules.get('pf2e-reaction').version='unknown';},f=>{f.game.system.version='unknown';}]){
+test('fortress compatibility still rejects unknown worlds, system interfaces and inactive dependencies',async()=>{
+ for(const mutate of [f=>{f.game.world.id='unreviewed-world';},f=>{f.game.modules.get('pf2e-reaction').active=false;},f=>{f.game.system.version='unknown';}]){
   const f=compatibilityFixture();mutate(f);const result=await f.install();assert.equal(result.status,'unsupported');assert.equal(f.entry.fn,f.original);
  }
- const f=compatibilityFixture(),result=await f.install({hashSource:async()=> 'not-the-audited-source'});
- assert.equal(result.reason,'unknown-reaction-bundle');assert.equal(f.entry.fn,f.original);
+ const f=compatibilityFixture();f.game.modules.get('pf2e-reaction').version='future';let reads=0;const result=await f.install({fetchSource:async()=>{reads++;throw Error('unnecessary source read')},hashSource:async()=>{throw Error('unnecessary hash')}});assert.equal(result.status,'installed');assert.equal(reads,0);assert.equal(await f.entry.fn(f.item,{},'gm'),undefined);assert.equal(f.calls.length,0);result.dispose();assert.equal(f.entry.fn,f.original);
 });
 
 // Optional local integration: execute the installed upstream callback, never a
@@ -92,7 +91,7 @@ test('audited Reaction callback no longer throws for fortress empty candidates b
  f.entry.fn=original;
  await assert.rejects(original(f.item,{},'gm'),/a is not defined/);
  const result=await registerReactionShieldWallEmptyCompatibility({game:f.game,Hooks:f.Hooks,fetchSource:async()=>source});
- assert.equal(result.status,'installed');assert.equal(result.sourceSHA256,bundleHash);assert.equal(result.callbackSHA256,callbackHash);
+ assert.equal(result.status,'installed');assert.equal(result.sourceSHA256,null);assert.equal(result.callbackSHA256,null);
  await assert.doesNotReject(f.entry.fn(f.item,{},'gm'));
  f.ally.itemTypes.feat.push({slug:'shield-wall'});
  await assert.rejects(f.entry.fn(f.item,{},'gm'),/a is not defined/);
