@@ -1,6 +1,7 @@
 import {sameSalubriousPrivacy,treatmentPrivacyForPatient,captureSalubriousPrivacy} from './salubrious-privacy.mjs';
 import {MODULE_ID} from './rules.mjs';
 import {SerialActions} from './runtime.mjs';
+import {publicTargetName} from './native-context.mjs';
 import {salubriousFeat,treatmentTiers,treatmentOutcome,treatmentImmunityData,TREAT_WOUNDS_IMMUNITY,kissState,values} from './salubrious-kiss-rules.mjs';
 import {assertSource,assertPatient,currentToken,contextFor,claimOf,fail} from './salubrious-kiss-context.mjs';
 
@@ -33,7 +34,7 @@ export function createSalubriousKiss({game,fromUuid=globalThis.fromUuid,choose,e
    try{
     const candidates=values(token.parent.tokens).filter(t=>{if(t.hidden&&!user.isGM)return false;try{assertPatient({game,actor,token,target:t,user});return true}catch{return false}});
     if(!candidates.length)throw fail('没有可确认的合格患者');
-    const selected=binding?binding.patientTokenUuid:await choose({kind:'patient',actor,user,title:'仙露三吻：重新聚能时同时医疗',choices:[{value:'only-refocus',label:'仅重新聚能'},...candidates.map(t=>({value:t.uuid,label:t.name??t.actor.name??t.actor.id}))]});
+    const selected=binding?binding.patientTokenUuid:await choose({kind:'patient',actor,user,title:'仙露三吻：重新聚能时同时医疗',choices:[{value:'only-refocus',label:'仅重新聚能'},...candidates.map(t=>({value:t.uuid,label:publicTargetName(t,{game,user})}))]});
     if(selected==null||selected==='only-refocus'){claim.state='declined';await save(actor,claim);return claim}
     target=candidates.find(t=>t.uuid===selected);if(!target)throw fail('患者选择不属于本次真实候选');
     await verifyEvent(actor,user,proof);assertPatient({game,actor,token,target,user});
@@ -87,5 +88,6 @@ export function createSalubriousKiss({game,fromUuid=globalThis.fromUuid,choose,e
   const result=activityResults.get(activity.id);if(result)return structuredClone(result);
   const binding=activities.get(activity.actorUUID);if(binding?.activity.id!==activity.id)throw fail('没有此仙露预留');return binding.promise;
  }
- return {matchesActor:actor=>!!salubriousFeat(actor),onRefocus,claimActivity,completeActivity,getActivityResult:id=>structuredClone(activityResults.get(id)??null)};
+ function cancelActivity(activity){const binding=activities.get(activity.actorUUID);if(binding?.activity.id!==activity.id)return;activities.delete(activity.actorUUID);binding.reject(fail('探索活动已停止，尚未执行仙露治疗'));}
+ return {matchesActor:actor=>!!salubriousFeat(actor),onRefocus,claimActivity,completeActivity,cancelActivity,getActivityResult:id=>structuredClone(activityResults.get(id)??null)};
 }

@@ -122,5 +122,5 @@ export function createSalubriousMessagePrivacy({game,Hooks=globalThis.Hooks,cons
   try{const result=await operation();if(!scope.entered)fail('native private application receipt was not observed');return result;}
   finally{if(applications.get(key)===scope)applications.delete(key)}
  }
- return {enableWorkbench,beginRefocus,bindRefocusUpdate,finishRefocus,abortRefocus,waitRefocusNote,validateRefocusNote,createMessageMiddleware,withNativeApplication,dispose(){Hooks?.off?.('createChatMessage',hook);}};
+ return {supportsActor:actor=>!!salubriousFeat(actor),enableWorkbench,beginRefocus,bindRefocusUpdate,finishRefocus,abortRefocus,waitRefocusNote,validateRefocusNote,createMessageMiddleware,withNativeApplication,dispose(){Hooks?.off?.('createChatMessage',hook);}};
 }

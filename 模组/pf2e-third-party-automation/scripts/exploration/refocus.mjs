@@ -1,6 +1,7 @@
 import {MODULE_ID} from './schema.mjs';
 import {sourceId,values} from '../salubrious-kiss-rules.mjs';
 export const LAY_ON_HANDS='Compendium.pf2e.spells-srd.Item.zNN9212H2FGfM7VS';
+export function refocusCommitValue({before,max,requested,recovery=1}){if(!Number.isFinite(before)||!Number.isFinite(max)||(requested!==max&&requested!==Math.min(max,before+1))||!Number.isInteger(recovery)||recovery<1)throw Error('native-refocus-source-changed');return Math.min(max,before+recovery)}
 export function healingVariant(item){
   if(sourceId(item)!==LAY_ON_HANDS)return null;
   const ids=Object.keys(item.system?.overlays??{});
@@ -8,7 +9,7 @@ export function healingVariant(item){
   return variants.length===1?variants[0]:null;
 }
 export function focusFinishSatisfied(goal,actor) {return !goal.requireFullFocus||actor.focus.value>=actor.focus.max}
-export function createRefocusAdapter({game,canvas,fromUuid,ownerOperations,timeoutMs=15000}) {
+export function createRefocusAdapter({game,canvas=globalThis.canvas,fromUuid,ownerOperations,timeoutMs=15000}) {
   const scopes=new Map();
   function getCurrent(actor) {const scope=scopes.get(actor.uuid);if(!scope)return null;scope.ctx.validate?.();return ownerOperations.isActivityContext(scope.ctx,scope.activity.id)?scope.activity:null}
   function capture(event) {
@@ -33,7 +34,7 @@ export function createRefocusAdapter({game,canvas,fromUuid,ownerOperations,timeo
     try{timer=setTimeout(()=>reject(Error('refocus-evidence-uncertain-no-retry')),timeoutMs);await game.PF2eWorkbench.refocus([actor]);const receipt=await signal;ctx.validate?.();return receipt}
     finally{clearTimeout(timer);scopes.delete(actor.uuid);restore?.()}
   }
-  return {complete,getCurrent,capture};
+  return {complete,getCurrent,capture,commitValue:(activity,actor,requested)=>{const scope=scopes.get(actor.uuid);if(scope?.activity.id!==activity.id)throw Error('private-refocus-scope-required');scope.ctx.validate?.();return refocusCommitValue({before:actor.system.resources.focus.value,max:actor.system.resources.focus.max,requested,recovery:1})}};
 }
 export function createRefocusProvider({game,ledger,capabilities,refocusEvents,salubriousKiss,ownerOperations}) {
   const completed=new Map(),running=new Map();
@@ -55,7 +56,7 @@ export function createRefocusProvider({game,ledger,capabilities,refocusEvents,sa
       completed.set(activity.id,result);return result;
     })();running.set(activity.id,task);try{return await task}finally{running.delete(activity.id)}
   }
-  return {id:'refocus',describe:capabilities.discover,begin,complete,propose:async()=>[],observe:async()=>null,reconcile:async activity=>completed.get(activity.id)??{status:'uncertain',reason:'refocus-context-lost'}};
+  return {id:'refocus',describe:capabilities.discover,begin,complete,cancel:activity=>salubriousKiss.cancelActivity?.(activity),propose:async()=>[],observe:async()=>null,reconcile:async activity=>completed.get(activity.id)??{status:'uncertain',reason:'refocus-context-lost'}};
 }
 /** Only a verified healing overlay is enrolled. Native consume remains the
  * single payer, including its exact atomic focus commit and cast-card binding. */

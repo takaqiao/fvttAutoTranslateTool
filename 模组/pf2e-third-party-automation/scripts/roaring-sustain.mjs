@@ -1,6 +1,6 @@
 import {getNativeActionEvents} from './native-action-events.mjs';
 import {roaringOwnTurn,ROARING_APPLAUSE_SOURCE} from './roaring-applause-rules.mjs';
-import {isActiveGM} from './native-context.mjs';
+import {isActiveGM,publicTargetName} from './native-context.mjs';
 import {projectRoaringConditions} from './roaring-lifecycle.mjs';
 import {SerialActions} from './runtime.mjs';
 
@@ -12,14 +12,14 @@ const author=m=>m?.author?.id??m?.user?.id??m?.user;
 const demand=(v,m)=>{if(!v)throw Error(`轰然喝彩维持：${m}`)};
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 async function chooseSource({choices}){
- return globalThis.foundry.applications.api.DialogV2.wait({window:{title:'维持哪个持续效果？'},content:'<p>本次仍使用原生维持动作。轰然喝彩须由主GM另行确认这次维持已完成或被打断。</p>',buttons:[
+ return globalThis.foundry.applications.api.DialogV2.wait({window:{title:'维持哪个持续效果？'},content:'<p>请选择本次原生维持动作的持续效果。</p>',buttons:[
   ...choices.map((c,i)=>({action:`source-${i}`,label:escape(c.label),callback:()=>c.value})),
   {action:'manual',label:'其他持续效果（手工处理）',callback:()=>'manual'},
   {action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});
 }
 
-/** Subscribe after Prayer. A branded native card is only a Use fact; only an
- * active-GM verdict renews/ends its exact source. No resource or Dismiss API. */
+/** Subscribe after Prayer. A proven successful native Use renews its own source;
+ * later disputed disruption is GM maintenance, without a second settlement. */
 export function createRoaringSustain({game,fromUuid=globalThis.fromUuid,provider,reactionCompatibility=()=>({owned:false,checker:false}),actionEvents=getNativeActionEvents({game}),choose=chooseSource,onError=()=>{},randomId=()=>globalThis.crypto.randomUUID()}={}){
  demand(provider?.listSources&&provider?.lookupSource&&provider?.applyLifecycleEvent,'缺少来源查询和生命周期接口。');
  const scopes=new Map(),queue=new SerialActions(),hooks=[];let installed=false,socket,Hooks,unsubscribe;
@@ -69,17 +69,22 @@ export function createRoaringSustain({game,fromUuid=globalThis.fromUuid,provider
    demand(installed&&isActiveGM(game)&&game.user.id===i.gmId&&same(turnOf(actor,token),i.turn)&&game.time.worldTime===i.finiteEnvelope?.start?.value,'登记前主GM、回合或时间已改变。');
    const ready=find(p.sourceNonce);sourceValid(ready);demand(same(ready.record.state,latest.record.state),'登记前来源修订已改变。');
    const out=await provider.applyLifecycleEvent({actor:latest.actor,nonce:p.sourceNonce,event:{type:'sustain-use',useNonce:i.useNonce,invocationId:i.useNonce,userId:sender,messageUuid:i.messageUuid,turn:copy(i.turn),finiteEnvelope:copy(i.finiteEnvelope)}});
-   demand(out?.source?.sustainUses?.[i.useNonce]?.messageUuid===i.messageUuid,'本次Use未保存，不能声称已维持。');return {useNonce:i.useNonce};
+   demand(out?.source?.sustainUses?.[i.useNonce]?.messageUuid===i.messageUuid,'本次Use未保存，不能声称已维持。');
+   demand(installed&&isActiveGM(game),'主GM已改变。');
+   const saved=find(p.sourceNonce);sourceValid(saved);
+   await provider.applyLifecycleEvent({actor:saved.actor,nonce:p.sourceNonce,event:{type:'sustain-settled',useNonce:i.useNonce,terminal:'completed',verdictId:randomId(),gmId:game.user.id}});
+   return {useNonce:i.useNonce};
   });
  }
  async function observe(scope,next){
   if(!installed||scope.action!==game.pf2e?.actions?.get('sustain')||scope.slug!=='sustain'||scope.params.message?.create===false)return next();
-  if(game.world?.id!=='ujx5r8oipw7ercdr'||game.system?.version!=='8.5.1')return next();
+  if(game.world?.id!=='ujx5r8oipw7ercdr'||game.system?.id!=='pf2e')return next();
   const candidates=sources().filter(({record:r})=>scope.actors.some(a=>a.uuid===r.state.source.casterActorUuid)&&r.state.status==='active');
   if(!candidates.length)return next();
   demand(scope.actors.length===1&&scope.user===game.user,'多个角色或不明操作者的维持请手工处理。');
   actionValid(scope);
-  const selected=await choose({choices:candidates.map(({actor,record:r})=>({value:r.state.sourceNonce,label:`轰然喝彩 · ${actor.name??'本次目标'}`}))});
+  const choices=await Promise.all(candidates.map(async({record:r})=>({value:r.state.sourceNonce,label:`轰然喝彩 · ${publicTargetName(await fromUuid(r.state.source.targetTokenUuid),{game,user:scope.user})}`})));
+  const selected=await choose({choices});
   if(selected===null||selected===undefined||selected===false)return undefined;if(selected==='manual')return next();
   demand(candidates.some(x=>x.record.state.sourceNonce===selected),'所选来源不在本次列表。');
   const found=find(selected);sourceValid(found);const actor=scope.actors[0],token=await fromUuid(found.record.state.source.casterTokenUuid),user=game.user;
@@ -100,7 +105,11 @@ export function createRoaringSustain({game,fromUuid=globalThis.fromUuid,provider
   return queue.run(sourceNonce,async()=>{
    demand(installed&&isActiveGM(game),'主GM已改变。');const f=find(sourceNonce);sourceValid(f,{renew:terminal==='completed'});const use=f.record.state.sustainUses[useNonce];demand(use,'缺少已保存原生Use。');
    if(expectedUse!==undefined)demand(same(use,expectedUse),'这张原卡控件对应的Use已改变，请重新核对。');
-   if(use.verdict){demand(use.verdict.terminal===terminal&&use.verdict.gmId===game.user.id,'该Use已有不同终态，需人工核对。');return null;}
+   if(use.verdict){
+    if(use.verdict.terminal===terminal&&use.verdict.gmId===game.user.id)return null;
+    demand(use.verdict.terminal==='completed'&&terminal==='disrupted','该Use已有不同终态，需人工核对。');
+    return provider.applyLifecycleEvent({actor:f.actor,nonce:sourceNonce,event:{type:'save-unverified',receiptId:randomId(),reason:'sustain-disruption-after-completion'}});
+   }
    const actor=await fromUuid(f.record.state.source.casterActorUuid),token=await fromUuid(f.record.state.source.casterTokenUuid),message=await fromUuid(use.messageUuid);
    demand(actor&&token,'原始施法者结构已丢失。');nativeCard(message,actor,token,use.userId);
    demand(installed&&isActiveGM(game)&&f.record.context.gmId===game.user.id,'主GM已改变。');
@@ -116,6 +125,7 @@ export function createRoaringSustain({game,fromUuid=globalThis.fromUuid,provider
  }
  function render(message,html){
   const root=html?.[0]??html;root?.querySelector?.('[data-roaring-controls]')?.remove();if(!installed||!root?.ownerDocument)return;
+  if(!isActiveGM(game))return;
   if(message.blind!==false||message.whisper?.length)return;
   const found=sources({message}).filter(x=>original(x.record)===message);if(found.length!==1)return;
   const {actor,record:r}=found[0],s=r.state,doc=root.ownerDocument,box=doc.createElement('section');box.dataset.roaringControls='';
@@ -139,10 +149,9 @@ export function createRoaringSustain({game,fromUuid=globalThis.fromUuid,provider
   const button=(label,fn)=>{const b=add('button',label);b.type='button';b.addEventListener('click',event=>{event.preventDefault();event.stopPropagation();b.disabled=true;Promise.resolve().then(fn).catch(onError).finally(()=>{b.disabled=false})});};
   for(const use of Object.values(s.sustainUses)){
    const a=add('a',`维持使用：第${use.turn.round}轮（${use.status==='use-recorded'?'待GM裁定':use.status==='completed'?'已完成':'已打断'}）`);a.className='content-link';a.dataset.uuid=use.messageUuid;
-   if(gm&&r.context.immunity?.spell===false&&s.status==='active'&&!use.verdict){
-    for(const [terminal,label]of [['completed','确认这次维持已完成'],['disrupted','确认这次维持已打断'],['unknown','暂不裁定']])if(terminal!=='completed'||s.timing.mode==='exact'&&!s.manualReview)button(label,()=>adjudicate({sourceNonce:s.sourceNonce,useNonce:use.useNonce,terminal,expectedUse:copy(use)}));
-   }
+   if(gm&&r.context.immunity?.spell===false&&s.status==='active'&&!s.manualReview)button(use.verdict?'这次维持被打断：转 GM 维护':'这次维持被打断',()=>adjudicate({sourceNonce:s.sourceNonce,useNonce:use.useNonce,terminal:'disrupted',expectedUse:copy(use)}));
   }
+  if(s.manualReview?.reason==='sustain-disruption-after-completion')add('p','这次维持已产生结果；请核对原生效果并撤销或手工修正，系统不会重复结算。');
   if(gm&&s.status==='active'&&r.context.immunity?.spell===false&&r.context.immunity?.fascinated===false&&projectRoaringConditions(s).fascinated)button('结束本源迷魂',()=>endFascination(s.sourceNonce));
   (root.querySelector('.message-content')??root).append(box);
  }
@@ -160,5 +169,5 @@ export function createRoaringSustain({game,fromUuid=globalThis.fromUuid,provider
   return cleanup;
  }
  function cleanup(){installed=false;unsubscribe?.();unsubscribe=null;for(const[n,id]of hooks.splice(0))Hooks.off(n,id);scopes.clear();}
- return {register,cleanup,adjudicate,endFascination,diagnostic:()=>({installed,activeScopes:scopes.size,automaticCompletion:false})};
+ return {register,cleanup,adjudicate,endFascination,diagnostic:()=>({installed,activeScopes:scopes.size,automaticCompletion:true})};
 }

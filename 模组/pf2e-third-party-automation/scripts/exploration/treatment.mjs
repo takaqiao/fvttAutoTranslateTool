@@ -20,15 +20,16 @@ export function createTreatmentProvider({capabilities,nativeTreatment,ledger,own
     if(activity.options.riskySurgery&&!healer.riskySurgery)return {status:'blocked',reason:'risky-surgery-unqualified'};
     if(activity.patientUUIDs.length>healer.wardCapacity)return {status:'blocked',reason:'ward-capacity'};
     const patients=await capabilities.snapshot(activity.patientUUIDs);
-    if(healer.isDead||healer.unconscious||patients.some(p=>p.isDead||!p.pool.ready||p.cooldownExpiresAt>activity.startedAt||p.modeOfBeing!=='living'&&!healer.slugs.includes('stitch-flesh')))return {status:'blocked',reason:'patient-immune-or-pool-unavailable'};
+    if(healer.isDead||healer.unconscious||patients.some(p=>p.isDead||p.hasActiveToken===false||!p.pool.ready||p.cooldownExpiresAt>activity.startedAt||p.modeOfBeing!=='living'&&!healer.slugs.includes('stitch-flesh')))return {status:'blocked',reason:'patient-immune-or-token-or-pool-unavailable'};
     reserved.set(activity.id,{healer,patients});return {status:'started'};
   }
   async function complete(activity,ctx) {
     if(!reserved.has(activity.id))return {status:'uncertain',reason:'activity-begin-context-lost'};
     if(activity.options.extensionOf)return ownerOperations.runActivityWithOwner(activity,'treatment-extension');
-    const result=await ownerOperations.runActivityWithOwner(activity,'treat-wounds');reserved.delete(activity.id);return result;
+    const qualified=await begin(activity);if(qualified.status!=='started')return {status:'blocked',reason:qualified.reason};
+    try{return await ownerOperations.runActivityWithOwner(activity,'treat-wounds')}finally{reserved.delete(activity.id)}
   }
   return {id:'treat-wounds',describe:capabilities.discover,begin,complete,
-    propose:async()=>[],observe:async()=>null,reconcile:nativeTreatment.reconcile,
+    cancel:async activity=>{reserved.delete(activity.id)},propose:async()=>[],observe:async()=>null,reconcile:nativeTreatment.reconcile,
     immunityDeadline:(activity)=>cooldown({startedAt:activity.startedAt,finishedAt:activity.endsAt,continualRecovery:activity.options.continualRecovery}).expiresAt};
 }

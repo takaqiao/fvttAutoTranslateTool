@@ -17,11 +17,11 @@ function fixture(kind='manipulation'){
  return {game,actor,item,token,other,user,message,calls,prompts,hooks,build};
 }
 
-test('basic settlement captures the explicit player T target before confirmation, never controlled tokens',async()=>{
+test('basic settlement captures the explicit player T target before its GM request completes',async()=>{
  const f=fixture();let resolve;
- const provider=f.build({confirm:()=>new Promise(r=>{resolve=r})});
+ const provider=f.build({apply:payload=>{f.calls.push(payload);return new Promise(r=>{resolve=r})}});
  const pending=provider.settleFromCard(f.message);
- f.user.targets=new Set([{document:f.other}]);resolve(true);await pending;
+ f.user.targets=new Set([{document:f.other}]);resolve({});await pending;
  assert.equal(f.calls.length,1);assert.equal(f.calls[0].targetUuid,f.token.uuid);
  assert.equal(f.calls[0].actorUuid,f.actor.uuid);assert.equal(f.calls[0].confirmed,true);
 });
@@ -34,15 +34,15 @@ test('zero or multiple T targets requires a selection without guessing from acto
  assert.equal(f.prompts.length,0);assert.equal(f.calls.length,0);
 });
 
-test('cancelled local confirmation makes no GM mutation',async()=>{
- const f=fixture();await f.build({confirm:async()=>false}).settleFromCard(f.message);
- assert.equal(f.calls.length,0);
+test('the declared card action needs no extra local trigger or adjacency confirmation',async()=>{
+ const f=fixture();await f.build({confirm:()=>assert.fail('native card click is the declaration')}).settleFromCard(f.message);
+ assert.equal(f.calls.length,1);assert.equal(f.prompts.length,0);
 });
 
-test('one pending card confirmation cannot be double-clicked into two applications',async()=>{
- const f=fixture();let resolve;const provider=f.build({confirm:()=>new Promise(r=>{resolve=r})});
+test('one pending GM application cannot be double-clicked into two applications',async()=>{
+ const f=fixture();let resolve;const provider=f.build({apply:payload=>{f.calls.push(payload);return new Promise(r=>{resolve=r})}});
  const first=provider.settleFromCard(f.message);await provider.settleFromCard(f.message);
- resolve(true);await first;assert.equal(f.calls.length,1);
+ resolve({});await first;assert.equal(f.calls.length,1);
 });
 
 test('only owned native item cards qualify, including native self-effect shield cards',()=>{

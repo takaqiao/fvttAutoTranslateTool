@@ -22,3 +22,4 @@ test('cycles and observed cooldown contradictions remain explicit',()=>{
  const cycle=solve([{...treatment('A','H1',['P1'],0),dependsOn:['B']},{...treatment('B','H2',['P2'],0),dependsOn:['A']}]);assert.equal(cycle.certainty,'incomplete');assert.ok(cycle.missing.some(x=>x.reason==='dependency-cycle'));
  const bad=solve([{...treatment('A','H',['P'],0),observedStart:0,observedEnd:600},{...treatment('B','H',['P'],1),observedStart:600,observedEnd:1200}]);assert.equal(bad.certainty,'contradictory');assert.ok(bad.missing.some(x=>x.reason==='observed-before-ready'));
 });
+test('missing manual application evidence remains incomplete even with a known duration',()=>{const result=solve([{...treatment('A','H',['P'],0),state:'awaiting-evidence',options:{missing:['native-application-receipt']}}]);assert.equal(result.durationSeconds,600);assert.equal(result.certainty,'incomplete');assert.ok(result.missing.some(m=>m.reason==='native-application-receipt'))});

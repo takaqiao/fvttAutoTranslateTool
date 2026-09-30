@@ -30,6 +30,7 @@ export function createLedger({read,write,isAuthority}) {
     transitionActivity:(key,options)=>transition('activities',key,options),
     upsertClockCommit:input=>mutate(s=>{const c=validateClock(input);if(s.clocks[c.id])throw Error('duplicate-clock');if(!s.sessions[c.sessionId])throw Error('missing-session');s.clocks[c.id]=c;return c}),
     transitionClockCommit:(key,options)=>transition('clocks',key,options),
+    all:async()=>clone(await read()),
     snapshot:async key=>{const s=await read();return clone({session:s.sessions[key]??null,activities:Object.values(s.activities).filter(a=>a.sessionId===key),clocks:Object.values(s.clocks).filter(c=>c.sessionId===key)})}
   };
 }

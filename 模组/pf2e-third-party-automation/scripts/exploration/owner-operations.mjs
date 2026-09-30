@@ -1,9 +1,14 @@
 import {MODULE_ID,clone} from './schema.mjs';
 import {isActiveGM} from './document-store.mjs';
 export function createExplorationOwnerOperations({game,fromUuid,ledger,sharedOwnerOperations,timeoutMs=60000}) {
-  const contexts=new WeakMap(),operations=new Map();let socket;
-  const authority=caller=>{if(caller!==game.users.activeGM?.id||!game.users.get(caller)?.isGM||!game.users.get(caller)?.active)throw Error('active-gm-required')};
-  async function ownerExecute(payload,callerId) {
+  const contexts=new WeakMap(),operations=new Map(),inflightActors=new Set(),cancelled=new Set();let socket;
+  const authority=caller=>{if(caller!==game.users.activeGM?.id||!game.users.get(caller)?.isGM||!game.users.get(caller)?.active)throw Error('active-gm-required');if(game.combat?.started)throw Error('encounter-started')};
+  async function ownerExecute(payload,callerId){
+    authority(callerId);const key=payload?.activity?.actorUUID;if(typeof key!=='string')throw Error('actor-required');
+    if(inflightActors.has(key))throw Error('owner-activity-already-in-flight');inflightActors.add(key);
+    try{return await executeClaim(payload,callerId)}finally{inflightActors.delete(key)}
+  }
+  async function executeClaim(payload,callerId) {
     authority(callerId);const handler=operations.get(payload?.operationId);if(!handler)throw Error('unknown-native-operation');
     const activity=clone(payload.activity),actor=await fromUuid(activity?.actorUUID);authority(callerId);
     if(!actor?.testUserPermission(game.user,'OWNER'))throw Error('original-owner-required');
@@ -13,14 +18,14 @@ export function createExplorationOwnerOperations({game,fromUuid,ledger,sharedOwn
     const identity={activityId:activity.id,operationId:payload.operationId,gmId:callerId,userId:game.user.id,actorUUID:actor.uuid};
     records[activity.id]={...identity,state:'started'};
     await actor.update({[`flags.${MODULE_ID}.explorationExecutions`]:records});authority(callerId);
-    const ctx=Object.freeze({actor,validate:()=>{authority(callerId);if(!actor.testUserPermission(game.user,'OWNER'))throw Error('owner-changed')}});contexts.set(ctx,activity.id);
+    const ctx=Object.freeze({actor,validate:()=>{authority(callerId);if(cancelled.has(activity.id))throw Error('activity-stopped');if(game.time.worldTime!==activity.endsAt)throw Error('external-world-time-change');if(!actor.testUserPermission(game.user,'OWNER'))throw Error('owner-changed')}});contexts.set(ctx,activity.id);
     try{
       ctx.validate();const result=await handler(activity,ctx);ctx.validate();
       const current=clone(actor.flags?.[MODULE_ID]?.explorationExecutions??{});
       if(current[activity.id]?.state!=='started')throw Error('owner-claim-changed');current[activity.id]={...identity,state:'done',result:clone(result)};
       await actor.update({[`flags.${MODULE_ID}.explorationExecutions`]:current});authority(callerId);return result;
     }catch(error){
-      const current=clone(actor.flags?.[MODULE_ID]?.explorationExecutions??{});current[activity.id]={...identity,state:'uncertain',reason:String(error.message)};
+      const current=clone(actor.flags?.[MODULE_ID]?.explorationExecutions??{});current[activity.id]={...identity,state:'uncertain',reason:String(error.message),...error.proof?{proof:clone(error.proof)}:{}};
       if(game.user.id===identity.userId)await actor.update({[`flags.${MODULE_ID}.explorationExecutions`]:current}).catch(()=>{});throw error;
     }finally{contexts.delete(ctx)}
   }
@@ -39,7 +44,7 @@ export function createExplorationOwnerOperations({game,fromUuid,ledger,sharedOwn
       if(!isActiveGM(game))throw Error('gm-changed');if(!response?.ok)throw Error(response?.error??'owner-response-uncertain-no-retry');return response.value;
     }finally{clearTimeout(timer)}
   }
-  return {ownerExecute,runActivityWithOwner,isActivityContext:(ctx,id)=>contexts.get(ctx)===id,
+  return {ownerExecute,runActivityWithOwner,cancelActivity:activity=>cancelled.add(activity.id),isActivityContext:(ctx,id)=>contexts.get(ctx)===id&&!cancelled.has(id),
     createActivityContext:async activity=>{
       if(!isActiveGM(game))throw Error('active-gm-required');const stored=await ledger.getActivity(activity.id);
       if(stored?.state!=='planned'||JSON.stringify(stored)!==JSON.stringify(activity)||game.time.worldTime!==activity.startedAt)throw Error('activity-begin-claim-required');

@@ -1,0 +1,27 @@
+/** This compendium link macro will always call the most recent version from the compendium included with this module meaning you do not need to reimport newer versions. The source of the macros that get called is https://gitlab.com/symonsch/my-foundryvtt-macros/-/tree/main/PF2e */
+/* Start of documentation from the original macro: */
+/* eslint-disable no-undef */
+/* End of original macro documentation. */
+
+    async function _executeMacroByName(
+        macroName,
+        compendiumName = "xdy-pf2e-workbench.asymonous-benefactor-macros-internal"
+    ) {
+        const pack = game.packs.get(compendiumName);
+        if (pack) {
+            let macro = (await pack.getDocuments({name: macroName}))?.[0];
+            if (macro) {
+                if (!macro.canExecute)
+                    macro = new macro.constructor(foundry.utils.mergeObject(macro.toObject(), {"-=_id": null, "ownership.default": CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER}, {performDeletions: true, inplace: true}));
+                macro.execute();
+            } else {
+                ui.notifications.error(`Macro ${macroName} not found`);
+            }
+        } else {
+            ui.notifications.error(`Compendium ${compendiumName} not found`);
+        }
+    }
+    _executeMacroByName('XDY DO_NOT_IMPORT Treat Wounds and Battle Medicine');
+
+    /* This compendium link macro is based on one originally posted by DrentalBot: https://discord.com/channels/880968862240239708/880975811279204402/910490804554973274; and modified by Mark Pearce https://discord.com/channels/880968862240239708/880969174661353484/972962446098702376 */
+    

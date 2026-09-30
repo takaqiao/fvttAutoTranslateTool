@@ -1,4 +1,5 @@
 import {createSalubriousMessagePrivacy,loadSalubriousWorkbench} from './salubrious-message-privacy.mjs';
+import {createExplorationRuntime} from './exploration/runtime.mjs';
 import {resolveProviderAction} from './runtime.mjs';
 import {renderSalubriousCard,filterSalubriousDamageContext} from './salubrious-kiss-chat.mjs';
 import {MODULE_ID,findFeature} from './rules.mjs';
@@ -11,6 +12,7 @@ import {createCompanionAutomation} from './companion-automation.mjs';
 import {createDualStrikeAutomation} from './dual-strike-automation.mjs';
 import {createCampaignFeats} from './campaign-feats.mjs';
 import {createKnowledgeAutomation,buildKnowledgePatreonRepairs,KNOWLEDGE_SOURCES} from './knowledge-automation.mjs';
+import {interceptKnowledgeProbe} from './knowledge-probes.mjs';
 import {createSocialAutomation} from './social-automation.mjs';
 import {createThrallAutomation} from './thrall-automation.mjs';
 import {createReactionChecks} from './reaction-checks.mjs';
@@ -73,6 +75,9 @@ import {createAvAutomation,buildAvPatreonRepairs} from './av-automation.mjs';
 import {createPartyAutomation,buildPartyPatreonRepairs,PARTY_SOURCES} from './party-automation.mjs';
 import {createConfigurationMaintenance} from './config-maintenance.mjs';
 import {createMaintenance} from './maintenance.mjs';
+import {createDirtyMaintenance,isUnrelatedMaintenanceUpdate,COSMETIC_UPDATE_FIELDS} from './maintenance-events.mjs';
+import {createActivityResultLifecycle} from './activity-result-lifecycle.mjs';
+import {createWeaponSurgeAutomation} from './weapon-surge.mjs';
 import {createCycleCoordinator} from './cycle-coordinator.mjs';
 import {createCycleAutomation,addCycleReactionButtons} from './cycle-automation.mjs';
 import {createPanel,createUsageExecutor,executeActorAction,onFullRest,expireCycles,requireOwner,SerialActions} from './runtime.mjs';
@@ -81,6 +86,7 @@ const report=e=>{console.error(MODULE_ID,e);ui.notifications.error(e.message);};
 const glimpseCompat=createGlimpseCompat({game,fromUuid});
 glimpseCompat.register({Hooks});
 Hooks.once('init',()=>game.settings.register(MODULE_ID,'configurationBackups',{scope:'world',config:false,type:Array,default:[]}));
+Hooks.once('init',()=>game.settings.register(MODULE_ID,'explorationLedgerUUID',{scope:'world',config:false,type:String,default:''}));
 Hooks.once('setup',()=>{installDailiesCompatibility(game);registerThirdPartyDailies(game);registerCampaignDailies(game);registerRuneTransferRuleElement(game);});
 Hooks.once('socketlib.ready',()=>{
  socket=socketlib.registerModule(MODULE_ID);
@@ -127,6 +133,8 @@ async function useCycleFromCard(actor,source){
 }
 Hooks.once('ready',async()=>{
  const choose=createNativeChooser({game,send:(userId,payload)=>socket.executeAsUser('native-choice',userId,payload)});
+ const activityResults=createActivityResultLifecycle({game,getRollContext:roll=>cycle?.getRollContext(roll),onError:report});
+ const weaponSurge=createWeaponSurgeAutomation({game});
  const advanceStartup=defensiveAdvanceStartupCompatibility({game,rules:game.modules.get('patreon-v3')?.active?game.settings.get('patreon-v3','rulesV3'):null});
  const defensiveAdvance=createDefensiveAdvance({game,fromUuid,choose,startupCompatibility:advanceStartup,onError:report});
  let glimpse,roaring,roaringReactionCompatibility;
@@ -157,10 +165,12 @@ Hooks.once('ready',async()=>{
  shieldAdapter.addNativeInterceptor(deflection.interceptNative,{matches:deflection.hasNativePlan});
  const deflectionRepair=createDeflectionRepair({game,fromUuid,onError:report});
  const elementalMedicine=createElementalMedicine({game,fromUuid,onError:report});
- const salubriousCheckScope=createSalubriousCheckScope({game});
- const salubriousDamage=createSalubriousDamageGuard({game,messagePrivacy:salubriousMessagePrivacy,getRollContext:roll=>cycle?.getRollContext(roll)});
- const salubriousExecutor=createSalubriousExecutor({game,fromUuid,Hooks,checkScope:salubriousCheckScope,authorizeDamage:salubriousDamage.authorize});
- const salubriousKiss=createSalubriousKiss({game,fromUuid,choose,executor:salubriousExecutor,validateRefocusNote:salubriousMessagePrivacy.validateRefocusNote});
+ const exploration=createExplorationRuntime({game,Hooks,fromUuid,nativeCasts,onError:report});
+ const salubriousCheckScope=createSalubriousCheckScope({game,isExplorationContext:exploration.ownerOperations.isActivityContext});
+ const salubriousDamage=createSalubriousDamageGuard({game,messagePrivacy:salubriousMessagePrivacy,getRollContext:roll=>cycle?.getRollContext(roll),isExplorationContext:exploration.ownerOperations.isActivityContext});
+ const salubriousExecutor=createSalubriousExecutor({game,fromUuid,Hooks,checkScope:salubriousCheckScope,authorizeDamage:salubriousDamage.authorize,hpPools:exploration.hpPools});
+ const salubriousKiss=createSalubriousKiss({game,fromUuid,choose,executor:salubriousExecutor,validateRefocusNote:salubriousMessagePrivacy.validateRefocusNote,isExplorationContext:exploration.ownerOperations.isActivityContext});
+ await exploration.bind({checkScope:salubriousCheckScope,damageGuard:salubriousDamage,salubriousKiss});
  let treatmentDiagnostic=Object.freeze({ready:false,installed:false,reason:'initializing',dependency:null});
  const treatmentRefocus={matchesActor:actor=>treatmentDiagnostic.ready&&salubriousKiss.matchesActor(actor),
   onRefocus:async event=>{if(!treatmentDiagnostic.ready)throw Error('仙露三吻的原生检定兼容尚未就绪。');return salubriousKiss.onRefocus(event)}};
@@ -176,13 +186,13 @@ Hooks.once('ready',async()=>{
  if(forceBarrage)nativeCasts.addCastMiddleware(forceBarrage.interceptCast);
  if(roaring)nativeCasts.addCastMiddleware(roaring.interceptCast);
  if(prayer){nativeCasts.addActorMatcher(prayer.isManagedActor);nativeCasts.addConsumePolicy(prayer.consumePolicy);nativeCasts.addCastMiddleware(prayer.interceptCast);}
- const prayerCheck=(native,...args)=>prayer?prayer.interceptCheck(native,...args):native(...args);
+ const prayerCheck=(native,...args)=>interceptKnowledgeProbe((...checked)=>prayer?prayer.interceptCheck(native,...checked):native(...checked),...args);
  let metapower,electricity;
  const voltage=createEldamonVoltageProvider({game,fromUuid,onError:report,getRollContext:roll=>cycle?.getRollContext(roll),observe:(...args)=>metapower.observe(...args),onRefresh:context=>electricity.onRefresh(context)});
  electricity=createEldamonElectricityProvider({game,fromUuid,reactionRestriction,onError:report,refreshOutsideEncounter:voltage.refreshOutsideEncounter});
  metapower=createMetapowerProvider({game,fromUuid,onError:report,supportsOriginalUse:item=>providers.some(p=>p.resolveAction?.(item)?.startsWith('medic:')||['glimpse:use','defensive-advance'].includes(p.resolveAction?.(item))),beforeChannel:electricity.beforeChannel,validateSelection:electricity.validateSelection,interceptDamageMessage:electricity.interceptDamageMessage,onCommittedChannel:async context=>{await voltage.onCommittedChannel(context);await electricity.onCommittedChannel(context)}});
  nativeCasts.addCastMiddleware(({item,options},native)=>options.consume===false||options.message===false?native():metapower.observe({actor:item.actor,entry:'spell'},native));
- providers=[createCompanionAutomation({game,fromUuid,choose,onError:report,wrapStrike:(strike,actor)=>providers.reduce((s,p)=>p.wrapStrike?.(s,actor)??s,strike)}),createDualStrikeAutomation({game,fromUuid,choose,onError:report}),runeTransfer,campaign,createKnowledgeAutomation({game,fromUuid,choose,onError:report}),createAvAutomation({game,fromUuid,choose,onError:report,refocusSubscribers:[treatmentRefocus],refocusPrivacy:salubriousMessagePrivacy}),createPartyAutomation({game,fromUuid,choose,onError:report}),createSocialAutomation({game,fromUuid,choose,onError:report}),createThrallAutomation({game,fromUuid,choose,onError:report}),createReactionChecks({game,fromUuid,choose,reactionRestriction,onError:report,halflingLuck,nativeCheckMiddleware:(wrapped,...args)=>prayerCheck((...checked)=>familiar.interceptCheck((...accompanied)=>electricity.interceptCheck((...electric)=>metapower.interceptCheck((...next)=>salubriousCheckScope.interceptCheck(wrapped,...next),...electric),...accompanied),...checked),...args)}),fear,createScareToDeath({game,fromUuid,choose,onError:report}),createSpellCombination({game,fromUuid,choose,onError:report,afterAttack:message=>campaign.processCheck(message)}),deflection,destructiveBlock,disarmingBlock,disarmRegrip,shieldEvents,salubriousKiss];
+ providers=[createCompanionAutomation({game,fromUuid,choose,onError:report,wrapStrike:(strike,actor)=>providers.reduce((s,p)=>p.wrapStrike?.(s,actor)??s,strike)}),createDualStrikeAutomation({game,fromUuid,choose,onError:report}),runeTransfer,campaign,createKnowledgeAutomation({game,fromUuid,choose,onError:report}),createAvAutomation({game,fromUuid,choose,onError:report,refocusSubscribers:[treatmentRefocus,exploration.refocusSubscriber],refocusPrivacy:salubriousMessagePrivacy,explorationRefocus:exploration.refocusAdapter}),createPartyAutomation({game,fromUuid,choose,onError:report}),createSocialAutomation({game,fromUuid,choose,onError:report}),createThrallAutomation({game,fromUuid,choose,onError:report}),createReactionChecks({game,fromUuid,choose,reactionRestriction,onError:report,halflingLuck,nativeCheckMiddleware:(wrapped,...args)=>prayerCheck((...checked)=>familiar.interceptCheck((...accompanied)=>electricity.interceptCheck((...electric)=>metapower.interceptCheck((...next)=>weaponSurge.interceptCheck((...surged)=>salubriousCheckScope.interceptCheck(wrapped,...surged),...next),...electric),...accompanied),...checked),...args)}),fear,createScareToDeath({game,fromUuid,choose,onError:report}),createSpellCombination({game,fromUuid,choose,onError:report,afterAttack:message=>campaign.processCheck(message)}),deflection,destructiveBlock,disarmingBlock,disarmRegrip,shieldEvents,salubriousKiss];
  const onRulesChanged=()=>{if(fortressRuleCompatibilityEnabled(game)&&game.modules.get('patreon-v3')?.active)ui.notifications.warn('Patreon 规则已修复；请所有已在线客户端刷新一次，使规则修复生效。',{permanent:true})};
  const configuration=createConfigurationMaintenance({game,onRulesChanged,repairs:[buildAvPatreonRepairs,buildPartyPatreonRepairs,buildKnowledgePatreonRepairs,rules=>buildFortressPatreonRepairs(rules,{game}),...game.world?.id==='ujx5r8oipw7ercdr'?[buildDefensiveAdvancePatreonRepairs]:[]],settings:[{module:'pf2e-ranged-combat',key:'postActionToChat',value:2,when:g=>Array.from(g.actors.party?.members??[]).some(a=>[KNOWLEDGE_SOURCES.monster,KNOWLEDGE_SOURCES.hunt].every(source=>a.items.some(i=>i.sourceId===source))),reason:'猎物指定保留完整原生技能卡，供怪物猎手知识联动读取原始操作者与目标。'},{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:g=>['-','sog','pnvfcgjbf2cjp7gz','ujx5r8oipw7ercdr','team-automation-qa2'].includes(g.world?.id),transform:value=>Array.isArray(value)?value.filter(slug=>slug!=='disarming-block'):value,reason:'卸武格挡改由实际格挡回执接原生自由动作缴械，避免重复提示或再次收取反应。'}]});
  await configuration().catch(report);
@@ -192,7 +202,7 @@ Hooks.once('ready',async()=>{
   const reconcile=createConfigurationMaintenance({game,settings:[{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:glimpseWorld,transform:(value,g)=>glimpseReactionSetting(value,g,cache.ready()&&canSuppressGlimpseReminder(actors(),glimpse)),reason:GLIMPSE_REACTION_REASON}]});
   await registerGlimpseConfigurationEvents({game,Hooks,reconcile,onError:report}).reconcileNow();
  }
- providers.unshift(glimpse,...scar?[scar]:[],voltage,electricity);
+ providers.unshift(activityResults,weaponSurge,glimpse,...scar?[scar]:[],voltage,electricity);
  providers.push(metapower,createEldamonDataRepair({game}),createMedicActions({game,fromUuid,choose,onError:report}),familiar,defensiveAdvance,...prayer?[prayer]:[]);
  providers.push(createFortressRuleCompatibility({game}),createEldamonBasicSettlement({game,apply:payload=>electricity.confirmedAction(payload),onError:report}));
  if(halflingLuck)providers.push(halflingLuck);
@@ -211,11 +221,12 @@ Hooks.once('ready',async()=>{
   },onError:report,
  });
  libWrapper.register(MODULE_ID,'CONFIG.Actor.documentClass.prototype.applyDamage',function(wrapped,params){
+  const applyNative=next=>activityResults.applyNativeDamage(this,next,wrapped);
   // Consume the exact private params grant before any normalization or spread.
   return salubriousDamage.applyDamage(this,params,(treatmentApproved,assertSalubrious)=>disruptDamage.applyDamage(this,treatmentApproved,(approved,assertNative)=>{
    const source=cycle.getRollContext(approved.damage);
    const actual=source?{...approved,rollOptions:[...new Set([...(approved.rollOptions??[]),`${MODULE_ID}:source:${source.messageId}:${source.rollIndex}`])]}:approved;
-   return runDamagePipeline({actor:this,params:actual,providers,apply:p=>reactionBudget.applyDamage(this,p,next=>shieldAdapter.applyDamage(this,next,final=>shieldEvents.wrapNativeDamage(this,final,native=>cycle.applyDamage(this,finalParams=>shieldAdapter.withNativeFrame(this,finalParams,checkedParams=>{assertNative();assertSalubrious(this,checkedParams);return glimpse.wrapNativeDamage(this,checkedParams,p=>scar?scar.wrapNativeDamage(this,p,next=>wrapped(next)):wrapped(p))}),native)),destructiveBlock.planFor(next))),onError:report});
+   return runDamagePipeline({actor:this,params:actual,providers,apply:p=>reactionBudget.applyDamage(this,p,next=>shieldAdapter.applyDamage(this,next,final=>shieldEvents.wrapNativeDamage(this,final,native=>cycle.applyDamage(this,finalParams=>shieldAdapter.withNativeFrame(this,finalParams,checkedParams=>{assertNative();assertSalubrious(this,checkedParams);return glimpse.wrapNativeDamage(this,checkedParams,p=>scar?scar.wrapNativeDamage(this,p,applyNative):applyNative(p))}),native)),destructiveBlock.planFor(next))),onError:report});
   }));
  },'WRAPPER');
  const rollIndex=CONFIG.Dice.rolls.findIndex(cls=>cls.name==='DamageRoll');
@@ -238,15 +249,16 @@ Hooks.once('ready',async()=>{
  // Strike objects are prepared before ready. Rebuild them once so wrappers also
  // cover actors that needed no persistent data repair on this login.
  for(const actor of game.actors)if(actor.type==='character')actor.reset();
- registerUsageEvents({game,Hooks,resolveAction,requiresActualUse:(item,action)=>providers.some(p=>p.requiresActualUse?.(item,action)),observeItemUse:async(item,native)=>{if(prayer?.resolveAction(item))prayer.beforeUse(item);else await prayer?.beforeAction(item.actor);familiar.beforeUse(item);await halflingLuck?.beforeUse(item);scar?.beforeUse(item);return ["feat","action"].includes(item.type)?metapower.observe({actor:item.actor,item},native):native()},captureUsage:(item,context)=>Object.assign({},nativeCasts.captureUsage(item,context),...providers.map(p=>p.captureUsage?.(item,context))),onMessageOutcome:(item,options,outcome)=>nativeCasts.captureMessageOutcome(item,options,outcome),tracksFrequency:item=>defaultUsageAction(item)==='breath'||item.sourceId===PARTY_SOURCES.clue||resolveAction(item)==='knowledge:devise'||providers.some(p=>p.tracksFrequency?.(item)),
+ registerUsageEvents({game,Hooks,resolveAction,requiresActualUse:(item,action)=>providers.some(p=>p.requiresActualUse?.(item,action)),observeItemUse:async(item,native,{entry}={})=>{if(prayer?.resolveAction(item))prayer.beforeUse(item);else await prayer?.beforeAction(item.actor);familiar.beforeUse(item);await halflingLuck?.beforeUse(item);scar?.beforeUse(item);return entry!=='native-sheet'&&["feat","action"].includes(item.type)?metapower.observe({actor:item.actor,item},native):native()},captureUsage:(item,context)=>Object.assign({},nativeCasts.captureUsage(item,context),...providers.map(p=>p.captureUsage?.(item,context))),onMessageOutcome:(item,options,outcome)=>nativeCasts.captureMessageOutcome(item,options,outcome),tracksFrequency:item=>defaultUsageAction(item)==='breath'||item.sourceId===PARTY_SOURCES.clue||resolveAction(item)==='knowledge:devise'||providers.some(p=>p.tracksFrequency?.(item)),
   executeUsage:ctx=>usageQueue.run(ctx.actor.uuid,async()=>{if(ctx.action!=='rune-transfer:select')await runeTransfer.ensureReady(ctx.actor,ctx.user);const provider=providers.find(p=>p.resolveAction?.(ctx.item)===ctx.action);return provider?provider.executeUsage(ctx):legacyUsage(ctx)}),onError:report});
  const legacyMaintenance=createMaintenance({game,repair:actor=>executeActorAction(actor,'repair',{},game.user)}),maintainQueue=new SerialActions();
- maintenance=async actor=>{
+ const maintenanceEvents=createDirtyMaintenance({enabled:()=>game.user?.id===game.users.activeGM?.id,onError:report,run:async scope=>{
   if(game.user?.id!==game.users.activeGM?.id)return;
   const party=Array.from(game.actors.party?.members??[]).filter(a=>a.type==='character'&&!a.flags?.[MODULE_ID]?.autoRepairDisabled);
-  const targets=actor?party.filter(a=>a.uuid===actor.uuid):party;
+  const targets=scope?party.filter(a=>scope.has(a.uuid)):party;
   for(const target of targets)await maintainQueue.run(target.uuid,async()=>{await legacyMaintenance(target);for(const p of providers)await p.maintain?.(target)});
- };
+ }});
+ maintenance=actor=>maintenanceEvents.request(actor?.uuid??null);
  let patreonInitiativeCompatibility;
  const registerPatreonCompatibility=async()=>patreonInitiativeCompatibility=await installPatreonInitiativeCompatibility({game,Hooks,isProviderReady:()=>providers.includes(fear)});
  await registerPatreonCompatibility();
@@ -260,12 +272,15 @@ Hooks.once('ready',async()=>{
   treatmentDiagnostic=Object.freeze({ready:workbenchPrivacy.ready&&compatibility.installed===true,workbench:workbenchPrivacy.ready?workbenchPrivacy.profile:null,installed:compatibility.installed===true,reason:workbenchPrivacy.ready?compatibility.reason??null:workbenchPrivacy.reason,dependency:compatibility.dependency?Object.freeze({...compatibility.dependency}):null});
  }catch(error){treatmentDiagnostic=Object.freeze({ready:false,installed:false,reason:String(error.message??error),dependency:null});report(error);}
  game.modules.get(MODULE_ID).api={open,request,version:game.modules.get(MODULE_ID).version,repairActiveParty:()=>maintenance(),nativeDamageIWR:async(...args)=>{const handled=await shieldAdapter.nativeDamageIWR(...args);electricity.observeNativeIWR(...args,handled);return handled},get nativeIWRCompatibility(){return shieldAdapter.nativeBridgeDiagnostic()},get patreonInitiativeCompatibility(){return patreonInitiativeCompatibility},registerPatreonInitiativeCompatibility:registerPatreonCompatibility,get salubriousKiss(){return treatmentDiagnostic},get defensiveAdvance(){return defensiveAdvance.diagnostic},get glimpseOfRedemption(){return {ready:glimpse.ready()}},get roaringApplause(){return {enabled:!!roaring,...roaring?.diagnostic(),ownedReactionConsumers:!!roaring,reactionChecker:{status:roaringReactionCompatibility?.status??'unavailable',ready:roaringReactionCompatibility?.ready()===true,reason:roaringReactionCompatibility?.reason??null}}},get reactionShieldWallCompatibility(){return reactionShieldWallDiagnostic}};
+ game.modules.get(MODULE_ID).api.exploration=exploration.api;
+ await exploration.register({socket});
  notifyNativeIWRStatus({game,diagnostic:shieldAdapter.nativeBridgeDiagnostic(),warn:message=>ui.notifications.warn(message)});
  await maintenance().catch(report);
  await elementalMedicine.maintain().catch(report);
 });
 Hooks.on('getHeaderControlsApplicationV2',(app,controls)=>{
  const actor=app.actor??app.document;
+ if(game.user.isGM&&actor?.documentName==='Actor'&&actor.type==='character')controls.push({action:'explorationRecovery',label:'探索恢复',icon:'fa-solid fa-clock',onClick:()=>game.modules.get(MODULE_ID).api.exploration.open()});
  if(game.user.isGM&&actor?.documentName==='Actor'&&actor.type==='character')controls.push({action:'thirdPartyAutomation',label:'第三方维护',icon:'fa-solid fa-wand-magic-sparkles',onClick:()=>open(actor)});
 });
 Hooks.on('getActorSheetHeaderButtons',(app,buttons)=>{
@@ -277,7 +292,7 @@ Hooks.on('deleteCombat',combat=>expireCycles(combat,true).catch(e=>ui.notificati
 Hooks.on('createItem',item=>maintenance?.(item.actor).catch(report));
 Hooks.on('updateActor',actor=>{if(actor.type==='party')maintenance?.().catch(report);});
 Hooks.on('updateSetting',setting=>{if(setting.key==='pf2e.activeParty')maintenance?.().catch(report);});
-Hooks.on('updateUser',()=>maintenance?.().catch(report));
+Hooks.on('updateUser',(_user,changes={})=>{if(!isUnrelatedMaintenanceUpdate(changes,[...COSMETIC_UPDATE_FIELDS,'color','avatar']))maintenance?.().catch(report);});
 Hooks.on('createChatMessage',message=>cycle?.recordDamageMessage(message));
 Hooks.on('updateChatMessage',message=>{
  cycle?.recordDamageMessage(message);
@@ -287,6 +302,7 @@ Hooks.on('getChatMessageContextOptions',(_app,entries)=>filterSalubriousDamageCo
 Hooks.on('renderChatMessageHTML',(message,html)=>{
  renderSalubriousCard(message,html);
  cycle?.recordDamageMessage(message);
+ if(!message.isDamageRoll)return;
  const targets=canvas.tokens?.placeables?.filter(token=>token.actor?.type==='character').map(token=>({actor:token.actor,token:token.document}))??[];
  addCycleReactionButtons(message,html,{targets,onUse:useCycleFromCard,onError:report});
 });

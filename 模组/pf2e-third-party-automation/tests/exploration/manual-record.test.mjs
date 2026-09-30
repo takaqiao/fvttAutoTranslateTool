@@ -1,0 +1,6 @@
+import {test} from 'node:test';import assert from 'node:assert/strict';import {createManualRecordBridge} from '../../scripts/exploration/manual-record.mjs';
+test('player generic records use authenticated caller, selected owned actor and fixed manual provenance',async()=>{
+ const users=new Map([['G',{id:'G',isGM:true,active:true}],['P',{id:'P',active:true}]]);users.activeGM=users.get('G');const game={user:users.get('G'),users};let handler,saved;const socket={register:(n,f)=>handler=f};const actor={uuid:'Actor.A',testUserPermission:u=>u?.id==='P'};const bridge=createManualRecordBridge({game,fromUuid:async()=>actor,getSession:async()=>({status:'recording',actorUUIDs:['Actor.A']}),observe:async e=>{saved=e;return e}});bridge.register(socket);
+ const result=await handler.call({socketdata:{userId:'P'}},{actorUUID:'Actor.A',label:'辨识魔法',durationSeconds:37,id:'fake',source:{type:'native'},receiptIds:['forged']});assert.equal(result.ok,true);assert.equal(saved.durationSeconds,37);assert.equal(saved.source.type,'user-record');assert.deepEqual(saved.receiptIds,undefined);assert.equal(saved.kind,'activity');assert.notEqual(saved.id,'fake');
+ actor.testUserPermission=()=>false;assert.equal((await handler.call({socketdata:{userId:'P'}},{actorUUID:'Actor.A',label:'搜索',durationSeconds:600})).ok,false);
+});

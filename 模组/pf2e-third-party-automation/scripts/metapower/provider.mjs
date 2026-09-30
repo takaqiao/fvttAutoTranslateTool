@@ -3,6 +3,7 @@ import {MODULE_ID,createMetapowerLedger,ledgerState,chargedEffect} from './lifec
 import {createMetapowerObserver} from './observer.mjs';
 import {renderMetapowerCard} from './card.mjs';
 import {installActionEntrances,wrapSheetHandlers,createToolbeltEntrance,patchHudController,installLegacyActionBoundary,ensureNativeUseControls} from './entrances.mjs';
+import {registerNativeSheetHandlers} from '../native-sheet-handlers.mjs';
 import {convertSiphonRoll,applyNativeOutcomeInPlace} from './damage.mjs';
 import {showNativeChoice} from '../native-context.mjs';
 import {createActorStateIndex} from '../actor-state-index.mjs';
@@ -82,8 +83,18 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
   if(beforeChannel){selection=await beforeChannel({item,selection:{...selection,...input},kind:armed?.kind??'normal'});if(!selection||profile.id==='reactive-chain')return selection;}
   if(profile.reaction){
    const chain=profile.id==='reactive-chain';
-   const result=await globalThis.foundry.applications.api.DialogV2.wait({window:{title:item.name},content:`<p>${chain?'确认：30尺内生物实际受到电击伤害；所选目标在该生物30尺内，未受同一效果电击伤害，且已Shocked。虹吸不允许用放电放宽此资格。':'确认本次真实反应触发符合原威能条件。'}</p>${chain?'<label>触发生物实际受到的电击伤害 <input name="triggerDamage" type="number" min="1" step="1" required></label>':''}`,buttons:[{action:'confirm',label:'确认实际触发',callback:(_event,button)=>({triggerConfirmed:true,eligibleTargetConfirmed:chain,triggerDamage:chain?Number(new FormData(button.form).get('triggerDamage')):null})},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});
-   if(!result)return null;Object.assign(selection,result);
+   // The actual native reaction Use is already the operator's declaration.
+   // Only Reactive Chain's damage basis can require an additional real input.
+   selection.triggerConfirmed=true;
+   if(chain){
+    selection.eligibleTargetConfirmed=true;
+    const supplied=selection.triggerDamage??input.triggerDamage;
+    if(Number.isFinite(supplied)&&supplied>0)selection.triggerDamage=supplied;
+    else{
+     const result=await globalThis.foundry.applications.api.DialogV2.wait({window:{title:item.name},content:'<label>本次触发已结算的电击伤害 <input name="triggerDamage" type="number" min="1" step="1" required></label>',buttons:[{action:'use',label:'使用此伤害值',callback:(_event,button)=>({triggerDamage:Number(new FormData(button.form).get('triggerDamage'))})},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});
+     if(!result)return null;selection.triggerDamage=result.triggerDamage;
+    }
+   }
   }
   return selection;
  }
@@ -133,7 +144,7 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
   const seen=new Set();
   for(const [key,definition]of Object.entries(globalThis.CONFIG.Actor.sheetClasses.character??{})){
    if(!definition.cls?.prototype?.activateClickListener||seen.has(definition.cls))continue;seen.add(definition.cls);
-   wrap(`CONFIG.Actor.sheetClasses.character[${JSON.stringify(key)}].cls.prototype.activateClickListener`,function(wrapped,...args){return wrapSheetHandlers(this,wrapped(...args),observe,eligible)});
+   registerNativeSheetHandlers(libWrapper,`CONFIG.Actor.sheetClasses.character[${JSON.stringify(key)}].cls.prototype.activateClickListener`,(sheet,handlers)=>wrapSheetHandlers(sheet,handlers,observe,eligible));
   }
   // Toolbelt 3.56.2 freezes its API (non-configurable descriptor). Its owned DOM
   // entrance calls the same captured helper; never try to replace that API.

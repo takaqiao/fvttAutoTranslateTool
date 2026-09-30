@@ -19,7 +19,7 @@ function fixture({prior=null,reaction=false,state=true,viewOther=false,ambiguous
  const item={id:'block',uuid:'Actor.defender.Item.block',actor,type:'feat',sourceId:'Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8',system:{actionType:{value:'reaction'},slug:'shield-block'}};
  const prepaid={id:'prepaid',actor,item,author:user,speaker:{actor:actor.id,scene:'scene',token:token.id},rolls:[],flags:{pf2e:{origin:{uuid:item.uuid,actor:actor.uuid,type:'feat'}},[M]:{reactionBudget:{epoch:'encounter:2',actorUuid:actor.uuid,combatantId:combatant.id}}}};if(prior==='shield-block')game.messages.set(prepaid.id,prepaid);
  let reactionResources;
- if(reaction&&version==='1.4.3'){
+ if(reaction){
   assert.equal(typeof resources.createShieldReactionResources,'function');
   reactionResources=resources.createShieldReactionResources({game,reactionRestriction,fetchSource:async()=>'audited fixture',hashSource:async()=>reactionHash});
  }
@@ -70,9 +70,9 @@ test('a same-name foreign card is not treated as Shield Block prepayment',async(
  await assert.rejects(f.budget.applyDamage(f.actor,f.params,f.native),/反应|格挡/);assert.equal(f.count(),0);
 });
 
-test('Reaction disabled uses the existing ledger; an active unknown version fails explicitly',async()=>{
+test('Reaction disabled uses the existing ledger and functional future versions still pay the native resource',async()=>{
  const off=fixture();await off.budget.applyDamage(off.actor,off.params,off.native);assert.equal(off.entries()[0].shield.state,'used');assert.equal(off.combatant.flags['pf2e-reaction'].state,true);
- const unknown=fixture({reaction:true,version:'future'});await assert.rejects(unknown.budget.applyDamage(unknown.actor,unknown.params,unknown.native),/Reaction|版本|手工/);assert.equal(unknown.count(),0);assert.equal(unknown.entries().length,0);
+ const unknown=fixture({reaction:true,version:'future'});await unknown.budget.applyDamage(unknown.actor,unknown.params,unknown.native);assert.equal(unknown.count(),1);assert.equal(unknown.entries().length,1);assert.equal(unknown.combatant.flags['pf2e-reaction'].state,false);
 });
 
 test('a proven non-block or pre-native failure returns only its own Reaction reservation',async()=>{
@@ -96,17 +96,17 @@ test('Quick Shield Block uses its dedicated slot after the ordinary reaction is 
  await assert.rejects(f.budget.applyDamage(f.actor,f.params,f.native),/反应/);assert.equal(f.count(),1);
 });
 
-test('a changed prepaid card is revalidated after asynchronous Reaction source verification',async()=>{
+test('a changed prepaid card is revalidated after its asynchronous resource snapshot',async()=>{
  const f=fixture({prior:'shield-block',reaction:true,state:false});
- const adapter=resources.createShieldReactionResources({game:f.game,fetchSource:async()=>{f.prepaid.flags[M].reactionBudget.epoch='old:1';return 'bundle'},hashSource:async()=>reactionHash});
+ const adapter=resources.createShieldReactionResources({game:f.game}),snapshot=adapter.snapshot;adapter.snapshot=async(...args)=>{const value=await snapshot(...args);f.prepaid.flags[M].reactionBudget.epoch='old:1';return value};
  const budget=createReactionBudget({game:f.game,fromUuid:async uuid=>uuid===f.actor.uuid?f.actor:uuid===f.token.uuid?f.token:null,reactionResources:adapter});
  await assert.rejects(budget.applyDamage(f.actor,f.params,f.native),/预付|格挡|反应/);assert.equal(f.count(),0);
 });
 
-test('unknown active Reaction bundle and uninitialized resources fail before native damage',async()=>{
- for(const kind of ['hash','state']){
-  const f=fixture({reaction:true});if(kind==='state')delete f.combatant.flags['pf2e-reaction'].state;
-  const adapter=resources.createShieldReactionResources({game:f.game,fetchSource:async()=> 'bundle',hashSource:async()=>kind==='hash'?'unknown':reactionHash});
+test('malformed or uninitialized native Reaction resources fail before native damage',async()=>{
+ for(const kind of ['quick','state']){
+  const f=fixture({reaction:true});if(kind==='state')delete f.combatant.flags['pf2e-reaction'].state;else f.combatant.flags['pf2e-reaction']['quick-shield-block']='one';
+  const adapter=resources.createShieldReactionResources({game:f.game});
   const budget=createReactionBudget({game:f.game,fromUuid:async uuid=>uuid===f.actor.uuid?f.actor:uuid===f.token.uuid?f.token:null,reactionResources:adapter});
   await assert.rejects(budget.applyDamage(f.actor,f.params,f.native),/Reaction Checker/);assert.equal(f.count(),0);assert.equal(f.entries().length,0);
  }

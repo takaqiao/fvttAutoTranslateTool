@@ -1,0 +1,7 @@
+.exploration-recovery .recovery-content{display:grid;gap:12px;padding:4px;max-height:80vh;overflow:auto}
+.exploration-recovery .recovery-time{font-size:1.15em;border-inline-start:4px solid var(--color-warm-2,#bc5a34);padding:8px 12px;margin:0;background:var(--color-bg-option,#ffffff0d)}
+.exploration-recovery table{margin:0}.exploration-recovery th{text-align:left}.exploration-recovery td:last-child{width:90px}
+.exploration-recovery fieldset{display:grid;gap:6px}.exploration-recovery label{display:flex;align-items:center;gap:6px}.exploration-recovery fieldset p{font-size:.9em;margin:3px 0}
+.exploration-recovery .recovery-actions{display:flex;gap:6px;flex-wrap:wrap}.exploration-recovery button{flex:1;min-width:110px}
+.exploration-recovery .recovery-history{margin:0;padding-inline-start:20px}.exploration-recovery .recovery-history li{padding:6px 0;border-bottom:1px solid var(--color-border-light-primary,#8885)}
+.exploration-recovery .recovery-history span{font-weight:600}.exploration-recovery .recovery-history p{margin:3px 0}.exploration-recovery input:focus-visible,.exploration-recovery button:focus-visible{outline:2px solid var(--color-warm-2,#bc5a34);outline-offset:2px}

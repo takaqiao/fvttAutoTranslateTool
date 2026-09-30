@@ -1,6 +1,6 @@
 import {MODULE_ID} from './rules.mjs';
 import {SerialActions} from './runtime.mjs';
-import {getSourceId,isActiveGM} from './native-context.mjs';
+import {getSourceId,isActiveGM,publicTargetName} from './native-context.mjs';
 import {genericReactionAvailable,withReactionReservation,reactionEpoch} from './reaction-budget.mjs';
 import {reactionPermitted} from './reaction-restriction.mjs';
 
@@ -59,7 +59,6 @@ export function createEatFortune({game,reactionRestriction,fromUuid=globalThis.f
  const canUse=actor=>!actor.isDead&&actor.canAct!==false&&!actor.hasCondition?.('unconscious')&&!actor.hasCondition?.('stunned');
  const available=actor=>reactionPermitted(actor,reactionRestriction)&&(!reactionEpoch(actor,game)||genericReactionAvailable(actor,game));
  const uses=item=>item.system.frequency?.value??item.system.frequency?.max??0;
- const range=(source,target)=>{const distance=source?.object&&target?.object&&source.parent?.id===target.parent?.id?target.object.distanceTo?.(source.object):null;return Number.isFinite(distance)&&distance>=0&&distance<=60};
  const chooser=actor=>values(game.users).find(u=>u.active&&!u.isGM&&u.character?.uuid===actor.uuid&&actor.testUserPermission(u,'OWNER'))??values(game.users).find(u=>u.active&&!u.isGM&&actor.testUserPermission(u,'OWNER'))??game.user;
  const writeRecord=(actor,nonce,change)=>guarded(()=>actor.update({[`flags.${MODULE_ID}.reactionChecks.reactions`]:(own(actor).reactions??[]).map(r=>r.nonce===nonce?{...r,...change}:r)}));
  async function resolveTrigger(payload,user){
@@ -82,16 +81,16 @@ export function createEatFortune({game,reactionRestriction,fromUuid=globalThis.f
    requireGM();
    const existing=values(reactors.values()).flatMap(a=>(own(a).reactions??[]).filter(r=>r.kind==='eat'&&(r.nonce===payload.nonce||payload.clockNonce&&r.clockNonce===payload.clockNonce&&r.sourceActorUuid===payload.sourceActorUuid)));
    if(existing.length)throw Error('吞噬福祸已认领本次检定，不能重放或再次收费。');
-   const candidates=values(game.scenes.get(initial.source.parent.id)?.tokens).filter(t=>reactors.has(t.actor?.uuid)&&range(initial.source,t));
+   const candidates=values(game.scenes.get(initial.source.parent.id)?.tokens).filter(t=>reactors.has(t.actor?.uuid));
    const seen=new Set();
    for(const reactorToken of candidates){
     const actor=reactorToken.actor,item=feature(actor);if(seen.has(actor.uuid))continue;seen.add(actor.uuid);
     if(!item||uses(item)<1||!canUse(actor)||!available(actor))continue;
-    const triggerEpoch=reactionEpoch(actor,game),owner=chooser(actor),answer=await guarded(()=>choose({actor,user:owner,title:`吞噬福祸：${initial.source.actor.name??'生物'}使用${payload.effectType==='fortune'?'幸运':'厄运'}效果`,choices:[{value:'eat',label:'使用吞噬福祸（反应；每日一次）'},{value:'decline',label:'不使用'}]}));
+    const triggerEpoch=reactionEpoch(actor,game),owner=chooser(actor),answer=await guarded(()=>choose({actor,user:owner,title:`吞噬福祸：${publicTargetName(initial.source,{game,user:owner})}使用${payload.effectType==='fortune'?'幸运':'厄运'}效果`,choices:[{value:'eat',label:'使用吞噬福祸（反应；每日一次）'},{value:'decline',label:'不使用'}]}));
     if(answer==null||answer==='decline')continue;if(answer!=='eat')throw Error('无效的吞噬福祸选择。');
     const proof=await withReactionReservation(actor,game,async()=>{
      requireGM();const current=await resolveTrigger(payload,user);requireGM();
-     if(!current||reactionEpoch(actor,game)!==triggerEpoch||!range(current.source,reactorToken)||!canUse(actor)||feature(actor)?.id!==item.id||uses(item)<1||!available(actor))return null;
+     if(!current||reactionEpoch(actor,game)!==triggerEpoch||reactorToken.parent!==current.source.parent||game.scenes.get(reactorToken.parent?.id)?.tokens.get(reactorToken.id)!==reactorToken||!canUse(actor)||feature(actor)?.id!==item.id||uses(item)<1||!available(actor))return null;
      const proof={nonce:payload.nonce,kind:'eat',state:'claimed',epoch:triggerEpoch,time:game.time.worldTime??0,userId:user.id,reactorUserId:owner.id,reactorActorUuid:actor.uuid,reactorTokenUuid:reactorToken.uuid,sourceItemUuid:payload.sourceItemUuid,sourceActorUuid:payload.sourceActorUuid,sourceTokenUuid:payload.sourceTokenUuid,rollerActorUuid:payload.rollerActorUuid,rollerTokenUuid:payload.rollerTokenUuid,sourceKind:payload.kind,effectType:payload.effectType,oppositeTrait:opposite(payload.effectType),disrupted:true,...(payload.clockNonce?{clockNonce:payload.clockNonce}:{})};
      await guarded(()=>actor.update({[`flags.${MODULE_ID}.reactionChecks.reactions`]:[...(own(actor).reactions??[]),proof]}));
      await guarded(()=>item.update({'system.frequency.value':uses(item)-1},{[MODULE_ID]:{usageInternal:true}}));

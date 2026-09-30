@@ -46,3 +46,8 @@ test('Workbench invocation requires the actual controlled actor and exact focus 
   await assert.rejects(adapter.complete(activity,ctx),/controlled/);assert.equal(calls,0);
   canvas.tokens.controlled=[{actor,document:{uuid:'Scene.S.Token.H'}}];assert.equal((await adapter.complete(activity,ctx)).focusAfter,1);assert.equal(calls,1);
 });
+test('Refocus adapter uses current global canvas when runtime does not inject one',async()=>{
+ const ctx={},actor={uuid:'A',system:{resources:{focus:{value:0,max:1}}}};const old=globalThis.canvas;globalThis.canvas={tokens:{controlled:[{actor}]}};let adapter;
+ const game={time:{worldTime:600},PF2eWorkbench:{refocus:async()=>adapter.capture({actor,proof:{nonce:'N',startedAt:0,before:0,after:1}})}};
+ try{adapter=createRefocusAdapter({game,fromUuid:async()=>actor,ownerOperations:{isActivityContext:c=>c===ctx}});assert.equal((await adapter.complete({id:'N',actorUUID:'A',startedAt:0,endsAt:600},ctx)).focusAfter,1)}finally{globalThis.canvas=old}
+});

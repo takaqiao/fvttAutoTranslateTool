@@ -33,6 +33,7 @@ export function createNativeTreatment({game,Hooks,fromUuid,ownerOperations,check
     if(applications.has(application))throw Error('application-already-started');
     const source=`${MODULE_ID}:source:${message.id}:0`;
     const foundToken=patient.getActiveTokens?.(false,true)?.[0];
+    if(!apply&&!foundToken&&!patient.token)throw Error('native-application-token-required');
     const params={damage:stage==='healing'?-roll.total:roll,token:foundToken?.document??foundToken??patient.token??null,...result.item?{item:result.item}:{},
       skipIWR:stage==='healing',final:false,shieldBlockRequest:false,outcome:result.outcome,
       rollOptions:new Set([...(message.flags.pf2e.context?.options??[]).filter(o=>o!=='skip-handling-message'),source,application])};
@@ -41,18 +42,26 @@ export function createNativeTreatment({game,Hooks,fromUuid,ownerOperations,check
     if(!recipient)throw Error('native-medic-stacking-context-unavailable');
     const request={activity,ctx,message,patient,recipient,stage,source,application,params};
     const revoke=await damageGuard.authorizeExploration(request);valid(activity,ctx);applications.add(application);
-    let receipt;const hook=Hooks.on('createChatMessage',m=>{
+    let receipt;const privacyHook=Hooks.on('preCreateChatMessage',(m,data)=>{
+      const c=(data.flags??m.flags)?.pf2e?.context;if(c?.type!=='damage-taken'||!c.options?.includes(application))return;
+      const sourceAudience=[...(message.whisper??[])],nativeAudience=[...(data.whisper??m.whisper??[])];
+      const audience=sourceAudience.length&&nativeAudience.length?sourceAudience.filter(id=>nativeAudience.includes(id)):sourceAudience.length?sourceAudience:nativeAudience;
+      if(sourceAudience.length&&nativeAudience.length&&!audience.length)return false;
+      data.whisper=audience;data.blind=!!message.blind||!!data.blind||!!m.blind;m.updateSource?.({whisper:audience,blind:data.blind});
+    });
+    const hook=Hooks.on('createChatMessage',m=>{
       const c=m.flags?.pf2e?.context;if(c?.type!=='damage-taken'||!c.options?.includes(application))return;
       if(receipt)throw Error('duplicate-application-receipt');
       if(!c.options.includes(source)||author(m)!==game.user.id||m.speaker?.actor!==patient.id||m.flags.pf2e.appliedDamage&&m.flags.pf2e.appliedDamage.uuid!==patient.uuid)throw Error('invalid-application-receipt');receipt=m;
     });
     try{
-      await hpPools.withNativeApplication(activity,patient,async()=>({nativeResult:await (apply?apply(request):recipient.applyDamage(params)),receipt}));valid(activity,ctx);
+      const applicationResult=await hpPools.withNativeApplication(activity,patient,async()=>({nativeResult:await (apply?apply(request):recipient.applyDamage(params)),receipt}));result.poolReceipt=applicationResult.poolReceipt;valid(activity,ctx);
       const confirmed=await waitFor(()=>receipt&&game.messages.get(receipt.id)===receipt?receipt:null,'createChatMessage');valid(activity,ctx);return confirmed.id;
-    }finally{Hooks.off('createChatMessage',hook);revoke()}
+    }finally{Hooks.off('createChatMessage',hook);Hooks.off('preCreateChatMessage',privacyHook);revoke()}
   }
   async function single(activity,patient,ctx) {
     valid(activity,ctx);const healer=await fromUuid(activity.actorUUID);valid(activity,ctx);let check;
+    const proof={useId:activity.id,checkIds:[],resultIds:[],receiptIds:[],immunityIds:[],poolReceipts:[]};
     const captured=new Map(),live=marker(activity.id);
     const belongs=m=>m.flags?.pf2e?.context?.options?.includes(live)&&author(m)===game.user.id&&(m.actor===healer||m.speaker?.actor===healer.id);
     const pre=Hooks.on('preCreateChatMessage',(message,data)=>{
@@ -82,7 +91,7 @@ export function createNativeTreatment({game,Hooks,fromUuid,ownerOperations,check
         // 8.5.1 keys the callback cut on an enabled circumstance modifier.
         // Suppression does not cancel the surgery declared at begin. Generate
         // its one missing native DamageRoll, linked to this saved check.
-        const DamageRoll=game.pf2e.DamageRoll;if(!DamageRoll)throw Error('native-damage-roll-unavailable');
+        const DamageRoll=game.pf2e.DamageRoll??globalThis.CONFIG?.Dice?.rolls?.find(cls=>cls.name==='DamageRoll');if(!DamageRoll)throw Error('native-damage-roll-unavailable');
         const cut=await new DamageRoll('{1d8[slashing]}').evaluate();valid(activity,ctx);
         const flags=structuredClone(check.message.flags);flags.pf2e.origin={...flags.pf2e.origin,messageId:check.message.id};
         const surgery=await createMessage({author:game.user.id,speaker:structuredClone(check.message.speaker??{actor:healer.id}),blind:!!check.message.blind,whisper:[...(check.message.whisper??[])],flags,rolls:[cut.toJSON()],flavor:'激进手术：割伤（原生加值被抑制时的兼容阶段）'});
@@ -92,8 +101,8 @@ export function createNativeTreatment({game,Hooks,fromUuid,ownerOperations,check
       const stages=results.map(message=>({message,patient,outcome:check.outcome,medicBonus,stage:classifyResult(message.rolls[0],check.outcome)}));
       if(stages.filter(r=>r.stage==='surgery').length!==((actualRisky||activity.options.riskySurgery)?1:0)||new Set(stages.map(r=>r.stage)).size!==stages.length)throw Error('native-stages-mismatch');
       stages.sort((a,b)=>(a.stage==='surgery'?-1:1)-(b.stage==='surgery'?-1:1));const receiptIds=[];
-      for(const stage of stages){if(patient.isDead)throw Error('patient-died-during-treatment');receiptIds.push(await applySavedResult(activity,stage,ctx))}
-      const proof={useId:activity.id,checkIds:[check.message.id],resultIds:results.map(m=>m.id),receiptIds,immunityIds:[]};
+      for(const stage of stages){if(patient.isDead)throw Error('patient-died-during-treatment');receiptIds.push(await applySavedResult(activity,stage,ctx));if(stage.poolReceipt)proof.poolReceipts.push(stage.poolReceipt)}
+      Object.assign(proof,{checkIds:[check.message.id],resultIds:results.map(m=>m.id),receiptIds});
       const expiresAt=cooldown({startedAt:activity.startedAt,finishedAt:activity.endsAt,continualRecovery:activity.options.continualRecovery}).expiresAt;
       if(expiresAt>game.time.worldTime){
         const template=await fromUuid(TREAT_WOUNDS_IMMUNITY);valid(activity,ctx);if(!template?.toObject)throw Error('native-immunity-template-unavailable');
@@ -103,13 +112,16 @@ export function createNativeTreatment({game,Hooks,fromUuid,ownerOperations,check
       }
       if(['success','criticalSuccess'].includes(check.outcome)&&patient.hasCondition?.('wounded')){await patient.decreaseCondition('wounded',{forceRemove:true});valid(activity,ctx);if(patient.hasCondition('wounded'))throw Error('wounded-removal-unconfirmed')}
       return {status:'confirmed',proof,sourceDegree:outcomes.indexOf(check.message.flags.pf2e.context.unadjustedOutcome??check.outcome),effectiveOutcome:check.outcome,rolledHealing:stages.find(r=>r.stage==='healing')?.message.rolls[0].total??null,medicBonus,expiresAt,resourceReceiptIds:[],patientUUID:patient.uuid};
+    }catch(error){
+      const checkId=check?.message?.id;error.proof={...proof,checkIds:checkId?[checkId]:[],resultIds:[...new Set([...proof.resultIds,...[...captured.values()].filter(m=>m.flags?.pf2e?.origin?.messageId===checkId).map(m=>m.id)])],receiptIds:[...game.messages.values()].filter(m=>m.flags?.pf2e?.context?.type==='damage-taken'&&m.flags.pf2e.context.options?.some(o=>o.startsWith(`${MODULE_ID}:exploration-apply:${activity.id}:`))).map(m=>m.id)};throw error;
     }finally{Hooks.off('preCreateChatMessage',pre);Hooks.off('createChatMessage',post)}
   }
   async function run(activity,ctx) {
     valid(activity,ctx);const completions=[];
-    for(const uuid of activity.patientUUIDs){const patient=await fromUuid(uuid);valid(activity,ctx);completions.push(await single(activity,patient,ctx))}
+    try{for(const uuid of activity.patientUUIDs){const patient=await fromUuid(uuid);valid(activity,ctx);completions.push(await single(activity,patient,ctx))}}
+    catch(error){error.proof={useId:activity.id,...Object.fromEntries(['checkIds','resultIds','receiptIds','immunityIds','poolReceipts'].map(k=>[k,[...new Set([...completions.flatMap(c=>c.proof[k]??[]),...error.proof?.[k]??[]])]]))};error.results=completions;throw error}
     const first=completions[0];if(!first)throw Error('missing-patient');
-    return {...first,results:completions,proof:{useId:activity.id,...Object.fromEntries(['checkIds','resultIds','receiptIds','immunityIds'].map(k=>[k,completions.flatMap(c=>c.proof[k])]))}};
+    return {...first,results:completions,proof:{useId:activity.id,...Object.fromEntries(['checkIds','resultIds','receiptIds','immunityIds','poolReceipts'].map(k=>[k,completions.flatMap(c=>c.proof[k]??[])]))}};
   }
   async function extend(activity,original,ctx){
     valid(activity,ctx);if(original.state!=='confirmed'||activity.startedAt!==original.endsAt||activity.endsAt!==original.startedAt+3600)throw Error('extension-origin-unconfirmed');

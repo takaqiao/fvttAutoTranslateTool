@@ -3,6 +3,8 @@ export function reconstructEarliest({startedAt,activities,assumptions=[]}) {
  if(!Number.isFinite(startedAt))throw Error('invalid-session-start');
  const missing=[],nodes=[],groups=new Map(),aliases=new Map();
  for(const [index,a]of activities.entries()){
+  for(const reason of a.options?.missing??[])missing.push({id:a.id,reason});
+  if(['uncertain','blocked','cancelled'].includes(a.state))missing.push({id:a.id,reason:`activity-${a.state}`});
   if(!a.id||!a.actorUUID||!Number.isFinite(a.durationSeconds??a.endsAt-a.startedAt)){missing.push({id:a.id,reason:'missing-activity-source'});continue}
   const key=a.groupProof&&a.groupId?`${a.groupId}:${a.groupProof}`:a.id;
   if(a.groupId&&a.groupId!==a.id&&!a.groupProof)missing.push({id:a.id,reason:'unproven-group'});

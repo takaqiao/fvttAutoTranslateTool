@@ -59,7 +59,7 @@ export function registerAvRefocusEvents({game,Hooks,libWrapper,registerActorUpda
    // Workbench Ec checks its argument count but operates controlled[0].actor.
    if(controlled.length!==1||actors?.length!==1||!wave&&!matched(actor)||!owner(actor,game.user))return wrapped(...args);
    if(scopes.has(actor.uuid))throw Error('该角色有尚未确认的原生再聚能。');
-   const privacyHandle=refocusPrivacy&&matched(actor)?refocusPrivacy.beginRefocus({actor,token:controlled[0].document,user:game.user}):null;
+   const privacyHandle=refocusPrivacy&&matched(actor)&&(!refocusPrivacy.supportsActor||refocusPrivacy.supportsActor(actor))?refocusPrivacy.beginRefocus({actor,token:controlled[0].document,user:game.user}):null;
    const activity=explorationRefocus?.getCurrent(actor);
    const scope={actor,wave,privacyHandle,activity,userId:game.user.id,tokenUuid:controlled[0].document?.uuid??null,startedAt:activity?.startedAt??game.time?.worldTime};scopes.set(actor.uuid,scope);
    try{const result=await wrapped(...args);if(scope.updateTask)await scope.updateTask;if(privacyHandle)await refocusPrivacy.finishRefocus(privacyHandle);return result;}
@@ -70,12 +70,13 @@ export function registerAvRefocusEvents({game,Hooks,libWrapper,registerActorUpda
    const scope=scopes.get(this.uuid);
    if(!scope||scope.used||scope.actor!==this||Object.keys(changes??{}).length!==1||!Object.hasOwn(changes,focusPath))return wrapped(changes,options);
    scope.used=true;if(!scope.privacyHandle)scopes.delete(this.uuid);
-   const before=this.system?.resources?.focus?.value,after=changes[focusPath],max=this.system?.resources?.focus?.max;
+   const before=this.system?.resources?.focus?.value,max=this.system?.resources?.focus?.max;
+   const after=scope.activity&&explorationRefocus?.commitValue?explorationRefocus.commitValue(scope.activity,this,changes[focusPath]):changes[focusPath];
    if(!Number.isFinite(before)||!Number.isFinite(after)||after<before||after>max)return wrapped(changes,options);
    const proof={nonce:scope.activity?.id??globalThis.foundry?.utils?.randomID?.(32)??globalThis.crypto.randomUUID(),actorUuid:this.uuid,itemUuid:scope.wave?.uuid??null,userId:scope.userId,before,after,tokenUuid:scope.tokenUuid,startedAt:scope.startedAt,...scope.privacyHandle?{privacy:structuredClone(scope.privacyHandle.privacy)}:{}};
    // A changed intent also makes a full-focus Refocus an acknowledged update,
    // rather than an empty diff that Foundry may discard without updateActor.
-   const task=wrapped({...changes,[intentPath]:proof},{...options,[MODULE_ID]:{...options?.[MODULE_ID],refocusReceipt:proof}});
+   const task=wrapped({...changes,[focusPath]:after,[intentPath]:proof},{...options,[MODULE_ID]:{...options?.[MODULE_ID],refocusReceipt:proof}});
    scope.updateTask=scope.privacyHandle?refocusPrivacy.bindRefocusUpdate(scope.privacyHandle,proof,task):Promise.resolve(task);return scope.updateTask;
   };
   if(registerActorUpdate)unregisterActorUpdate=registerActorUpdate(observeActorUpdate);

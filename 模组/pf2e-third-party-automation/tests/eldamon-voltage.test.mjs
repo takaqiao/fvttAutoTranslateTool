@@ -10,6 +10,7 @@ function fixture(){
  const game={user:gm,users,actors:new Map(),messages:new Map(),combat:{id:'fight',round:1,turn:0,started:true,turns:[]}};
  const docs=new Map(),set=(obj,key,value)=>{const parts=key.split('.');let cursor=obj;for(const part of parts.slice(0,-1))cursor=cursor[part]??={};cursor[parts.at(-1)]=structuredClone(value)};
  const actor={id:'a',uuid:'Actor.a',level:5,type:'character',flags:{},items:new Map(),getRollOptions:()=>['active-power-refresh:high-voltage','active-power-one:electric-surge','active-power-reactive:reactive-chain'],testUserPermission:u=>u===gm||u===user,async update(data){for(const [k,v]of Object.entries(data))set(this,k,v)}};docs.set(actor.uuid,actor);game.actors.set(actor.id,actor);
+ const batches=[];actor.updateEmbeddedDocuments=async(type,updates)=>{assert.equal(type,'Item');batches.push(structuredClone(updates));const changed=[];for(const {_id,...patch}of updates){const item=actor.items.get(_id);assert.ok(item);await item.update(patch);changed.push(item)}return changed};
  const addItem=(id,source,slug,frequency)=>{const item={id,uuid:actor.uuid+'.Item.'+id,sourceId:source,actor,type:'feat',name:slug,flags:{},system:{slug,frequency,traits:{value:['electricity'],otherTags:['eldamon-power']}},async update(data){for(const[k,v]of Object.entries(data))set(this,k,v)}};actor.items.set(id,item);docs.set(item.uuid,item);return item};
  const item=addItem('h',HV,'high-voltage'),spent=addItem('s','Compendium.battlezoo-eldamon-pf2e.powers.Item.veFrnrxYjlqca13w','electric-surge',{max:1,per:'PT10M',value:0}),reaction=addItem('r','Compendium.battlezoo-eldamon-pf2e.powers.Item.fzV5Ly3a9nEsfcAJ','reactive-chain',{max:1,per:'PT10M',value:0});
  const scene={id:'scene',tokens:new Map()},token=(id,a)=>{const t={id,uuid:'Scene.scene.Token.'+id,parent:scene,actor:a,object:{distanceTo:()=>5}};scene.tokens.set(id,t);docs.set(t.uuid,t);return t};
@@ -20,7 +21,7 @@ function fixture(){
  actor.flags[ID]={metapower:{receipts:{channel:receipt}}};docs.set(message.uuid,message);game.messages.set(message.id,message);
  const payload={actorUuid:actor.uuid,nonce:'channel',messageUuid:message.uuid};
  const service=()=>api.createVoltageLedger({game,fromUuid:async uuid=>docs.get(uuid)});
- return{game,gm,user,actor,item,spent,reaction,addItem,origin,target,docs,message,receipt,payload,service};
+ return{game,gm,user,actor,item,spent,reaction,addItem,origin,target,docs,message,receipt,payload,service,batches};
 }
 test('normal original High Voltage channel refreshes actual spent prepared powers immediately and only once',async()=>{
  assert.equal(typeof api.createVoltageLedger,'function');const f=fixture(),s=f.service();
@@ -28,6 +29,7 @@ test('normal original High Voltage channel refreshes actual spent prepared power
  const daily=f.addItem('daily','Compendium.battlezoo-eldamon-pf2e.powers.Item.daily','electric-surge',{max:1,per:'day',value:0});
  const unprepared=f.addItem('u','Compendium.battlezoo-eldamon-pf2e.powers.Item.unprepared','electric-shot',{max:1,per:'PT10M',value:0});
  const result=await s.channel(f.payload,f.user);assert.equal(result.status,'armed');assert.equal(f.spent.system.frequency.value,1);assert.equal(f.reaction.system.frequency.value,1);assert.equal(unrelated.system.frequency.value,0);assert.equal(daily.system.frequency.value,0);assert.equal(unprepared.system.frequency.value,0);
+ assert.equal(f.batches.length,1);assert.deepEqual(f.batches[0].map(update=>update._id),[f.spent.id,f.reaction.id]);
  f.spent.system.frequency.value=0;await f.service().channel(f.payload,f.user);assert.equal(f.spent.system.frequency.value,0);assert.equal(f.actor.getRollOptions()[0],'active-power-refresh:high-voltage');
 });
 
@@ -126,10 +128,11 @@ test('standalone two-action Refresh requires its own original committed activity
  f.message.flags[ID].voltageRefreshActivity={actions:2};await f.service().refreshActivity(f.payload,f.user);assert.equal(f.spent.system.frequency.value,1);
  f.spent.system.frequency.value=0;await f.service().refreshActivity(f.payload,f.user);assert.equal(f.spent.system.frequency.value,0);assert.equal(f.actor.flags[ID].voltage.activeNonce,null);
 });
-test('interrupted Refresh resumes original per-item writes without refilling a subsequently used power',async()=>{
- const f=fixture(),native=f.reaction.update.bind(f.reaction);let fail=true;f.reaction.update=async data=>{if(fail){fail=false;throw Error('network failure')}return native(data)};
+test('interrupted native Refresh batch resumes only uncommitted items without refilling a subsequently used power',async()=>{
+ const f=fixture(),native=f.actor.updateEmbeddedDocuments.bind(f.actor);let fail=true;f.actor.updateEmbeddedDocuments=async(type,updates)=>{if(fail){fail=false;await native(type,updates.slice(0,1));throw Error('network failure')}return native(type,updates)};
  await assert.rejects(f.service().channel(f.payload,f.user),/network/);assert.equal(f.spent.system.frequency.value,1);
  f.spent.system.frequency.value=0;await f.service().channel(f.payload,f.user);assert.equal(f.spent.system.frequency.value,0);assert.equal(f.reaction.system.frequency.value,1);
+ assert.deepEqual(f.batches.map(updates=>updates.map(update=>update._id)),[[f.spent.id],[f.reaction.id]]);
 });
 
 let executorApi={};try{executorApi=await import('../scripts/eldamon-voltage-executor.mjs')}catch(e){if(e.code!=='ERR_MODULE_NOT_FOUND')throw e}

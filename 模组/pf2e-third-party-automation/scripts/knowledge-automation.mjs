@@ -1,9 +1,12 @@
 import {MODULE_ID,hasSource,levelDC} from './rules.mjs';
 import {SerialActions,requireOwner} from './runtime.mjs';
-import {isActiveGM,resolveMessageTargets,upsertOwnedEffect} from './native-context.mjs';
+import {isActiveGM,resolveMessageTargets,upsertOwnedEffect,publicTargetName} from './native-context.mjs';
 import {withEatStrikeFrame,isEatFortuneProbe} from './eat-fortune.mjs';
+import {createWorkbenchRecallController} from './knowledge-entrypoints.mjs';
+import {AUTOMATIC_KNOWLEDGE_SOURCE,automaticKnowledgeChoices,automaticKnowledgeRound} from './knowledge-automatic.mjs';
 
 export const KNOWLEDGE_SOURCES=Object.freeze({
+ recall:'Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo',automatic:AUTOMATIC_KNOWLEDGE_SOURCE,
  monster:'Compendium.pf2e.feats-srd.Item.YTTJqRKH8QZl6al2',known:'Compendium.pf2e.feats-srd.Item.iWvpq3uDZcXvBJj8',stance:'Compendium.pf2e.feats-srd.Item.fJwsZM6WXwP8EStV',
  hunt:'Compendium.pf2e.actionspf2e.Item.JYi4MnsdFu618hPm',devise:'Compendium.pf2e.actionspf2e.Item.m0f2B7G9eaaTmhFL',
  prey:'Compendium.pf2e-ranged-combat.effects.Item.rdLADYwOByj8AZ7r',monsterEffect:'Compendium.pf2e.feat-effects.Item.W2tWq0gdAcnoz2MO',knownEffect:'Compendium.pf2e.feat-effects.Item.DvyyA11a63FBwV7x',
@@ -44,8 +47,9 @@ export function buildStrategistAttackEffect({targetUuid,claim,sourceActor}){
  ]},flags:{[MODULE_ID]:{knowledge:{kind:'strategist-claim',claim,sourceActor,targetUuid}}}};
 }
 
-export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,choose,strikeMiddleware=null,spellAttackMiddleware=null,onError=console.error}={}){
+export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,choose,strikeMiddleware=null,spellAttackMiddleware=null,globals=globalThis,onError=console.error}={}){
  const queue=new SerialActions();let socket,registered=false;
+ const workbench=createWorkbenchRecallController({game,fromUuid,globals,onError,onResolved:message=>processRecall(message)});
  const gm=()=>{if(!isActiveGM(game))throw Error('知识联动必须由当前主GM结算。')};
  const actors=()=>[...new Map([...values(game.actors),...values(game.scenes).flatMap(s=>values(s.tokens).map(t=>t.actor))].filter(Boolean).map(a=>[a.uuid,a])).values()];
  const save=(doc,key,data)=>doc.update({[`flags.${MODULE_ID}.knowledge.${key}`]:data});
@@ -60,7 +64,7 @@ export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,cho
   return ts.find(t=>t.id===id&&t.parent?.id===scene)??(ts.length===1?ts[0]:null);
  };
  const load=async uuid=>{const item=await fromUuid(uuid);if(!item?.toObject)throw Error('知识联动的原生效果不可用。');const data=item.toObject();delete data._id;return data};
- const resolveAction=item=>hasSource(item,KNOWLEDGE_SOURCES.stance)?'knowledge:stance':hasSource(item,KNOWLEDGE_SOURCES.hunt)&&has(item.actor,'monster')?'knowledge:hunt':hasSource(item,KNOWLEDGE_SOURCES.devise)&&has(item.actor,'known')?'knowledge:devise':null;
+ const resolveAction=item=>hasSource(item,KNOWLEDGE_SOURCES.recall)?'knowledge:recall':hasSource(item,KNOWLEDGE_SOURCES.automatic)?'knowledge:automatic':hasSource(item,KNOWLEDGE_SOURCES.stance)?'knowledge:stance':hasSource(item,KNOWLEDGE_SOURCES.hunt)&&has(item.actor,'monster')?'knowledge:hunt':hasSource(item,KNOWLEDGE_SOURCES.devise)&&has(item.actor,'known')?'knowledge:devise':null;
  const prey=(actor,target)=>values(actor.items).some(i=>hasSource(i,KNOWLEDGE_SOURCES.prey)&&!i.isExpired&&i.system?.rules?.some(r=>r.key==='TokenMark'&&r.slug==='hunted-prey'&&r.uuid===target.uuid))
   ||target.actor.getRollOptions?.(['all'])?.includes(`self:prey:${actor.signature}`);
  function timing(actor){const c=game.combat,index=c?.turns?.findIndex(t=>t.actor?.uuid===actor.uuid)??-1;if(!c?.started||index<0)return null;return {combatId:c.id,combatantId:c.turns[index].id,round:c.round+(index<=c.turn?1:0),initiative:c.turns[index].initiative,rounds:index<=c.turn?1:0};}
@@ -73,7 +77,7 @@ export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,cho
   const source=sourceToken(actor,message),result=[actor];if(!source)return result;
   const candidates=values(source.parent?.tokens).filter(t=>t.actor&&t.actor.uuid!==actor.uuid&&t.actor.isAllyOf?.(actor)&&(!t.hidden||user.isGM));
   const available=[...new Map(candidates.map(t=>[t.actor.uuid,t])).values()];
-  while(available.length){const selected=await pick(actor,user,'选择已告知信息的盟友',[...available.map(t=>({value:t.uuid,label:t.name??t.actor.name})),{value:'done',label:'完成，不再添加'}]);if(!selected||selected==='done')break;const index=available.findIndex(t=>t.uuid===selected);result.push(available.splice(index,1)[0].actor);}
+  while(available.length){const selected=await pick(actor,user,'选择已告知信息的盟友',[...available.map(t=>({value:t.uuid,label:publicTargetName(t,{game,user})})),{value:'done',label:'完成，不再添加'}]);if(!selected||selected==='done')break;const index=available.findIndex(t=>t.uuid===selected);result.push(available.splice(index,1)[0].actor);}
   return result;
  }
  async function benefit(kind,actor,recipient,target,message){
@@ -94,7 +98,13 @@ export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,cho
   await save(source,'recall',{...state,usedBy:message.id});return state;
  }
  async function recallTargets(message,actor){
-  const native=await resolveMessageTargets(message,{fromUuid});if(native.length)return native;
+    const native=await resolveMessageTargets(message,{fromUuid}),workbenchState=message.flags?.[MODULE_ID]?.workbenchRecall;
+    if(workbenchState?.schema===1){
+     const bindings=workbenchState.targetActors;
+     if(!Array.isArray(bindings)||native.length!==1||bindings.length!==1||bindings[0].tokenUuid!==native[0].uuid||bindings[0].actorUuid!==native[0].actor.uuid)return [];
+     return native;
+    }
+    if(native.length)return native;
   const prefix=`${option}:recall:`,markers=options(message).filter(o=>typeof o==='string'&&o.startsWith(prefix));
   const state=markers.length===1?own(game.messages.get(markers[0].slice(prefix.length))).recall:null;
   const uuids=state?.actorUuid===actor.uuid?[state.targetUuid]:own(message).targetUuids??[];
@@ -226,19 +236,34 @@ export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,cho
    const invoke=next=>withAttack(actor,next,claimed=>withEatStrikeFrame({actor,strike,variant,params:claimed},framed=>native.call(variant,framed)));
    return strikeMiddleware?strikeMiddleware({actor,strike,variant,params,probe:isEatFortuneProbe(params)},invoke):invoke(params);
   };wrapped.knowledgeWrapped=true;variant.roll=wrapped;}return strike;}
- async function recall({actor,item,message,user,action},target){
-  const answer=await pick(actor,user,'作为本次动作的一部分回忆知识',[{value:'roll',label:'进行回忆知识检定'},{value:'skip',label:'跳过'}]);if(answer!=='roll')return;
-  const skillSlugs=new Set(['arcana','crafting','medicine','nature','occultism','religion','society',...values(actor.itemTypes?.lore).map(i=>i.slug)]);
-  const choices=[...skillSlugs].map(k=>actor.getStatistic?.(k)??actor.skills?.[k]).filter(Boolean).map(s=>({value:s.slug,label:s.label??s.slug}));
-  const skill=await pick(actor,user,'回忆知识 · 选择使用的技能',choices);if(!skill)return;
-  const native=game.pf2e?.actions?.get?.('recall-knowledge');if(!native?.use)throw Error('当前系统缺少原生回忆知识动作。');
-  await save(message,'recall',{actorUuid:actor.uuid,targetUuid:target.uuid,itemId:item.id,action,userId:user.id});
-  const results=await native.use({actors:[actor],statistic:skill,target:target.object,rollOptions:[`${option}:recall:${message.id}`],event:{ctrlKey:false,metaKey:false,shiftKey:!!game.user.settings?.showCheckDialogs}});
-  for(const r of results??[])if(r.message)await processRecall(r.message);
+ async function recall({actor,item,message,user,action},target,{statistic=null,assurance=false,dc=null,targetUuids=target?[target.uuid]:[]}={}){
+  const token=sourceToken(actor,message);if(!token)throw Error('本次回忆知识缺少原始角色 Token。');
+  const existing=own(message).recall;
+  if(existing?.workbenchMessageId){const card=game.messages.get(existing.workbenchMessageId);if(card)await processRecall(card);return {messageId:existing.workbenchMessageId};}
+  const requestId=`knowledge:recall:${message.id}`;
+  await save(message,'recall',{...existing,actorUuid:actor.uuid,targetUuid:targetUuids.length===1?targetUuids[0]:null,targetUuids,itemId:item.id,action,userId:user.id,requestId,statistic,assurance,dc});
+  const result=await workbench.run({actor,token,user,targetUuids,requestId,statistic,assurance,dc,origin:{messageId:message.id,itemUuid:item.uuid,rollOptions:[...(item.getOriginData?.().rollOptions??[]),`${option}:recall:${message.id}`]}});
+  const state=own(message).recall;await save(message,'recall',{...state,workbenchMessageId:result.messageId});return result;
  }
  async function executeUsage(ctx){
   gm();const {actor,item,message,user,action,frequencyReceipt}=ctx;requireOwner(actor,user);if(item.actor?.uuid!==actor.uuid||resolveAction(item)!==action)throw Error('知识能力来源不匹配。');
   return queue.run(`usage:${actor.uuid}`,async()=>{
+   if(['knowledge:recall','knowledge:automatic'].includes(action)){
+    const targets=await resolveMessageTargets(message,{fromUuid});
+    if(user.id!==game.user.id&&!user.active)throw Error('原操作者不在线，未代为进行回忆知识。');
+    let constraint={};
+    if(action==='knowledge:automatic'){
+     const round=automaticKnowledgeRound(game);if(own(actor).automaticRound?.epoch===round)throw Error('耳熟能详本轮次数已用尽。');
+     const fixed=automaticKnowledgeChoices(actor,item);if(!fixed.choices.length)throw Error('耳熟能详需要专家以上、已拥有相应 Assurance 的固定技能。');
+     const statistic=fixed.statistic??await pick(actor,user,'耳熟能详 · 绑定专长的固定技能',fixed.choices);if(!statistic)return {status:'cancelled',result:'未设置耳熟能详的固定技能。'};
+     if(item.flags?.[MODULE_ID]?.knowledge?.automaticSkill!==statistic)await item.update({[`flags.${MODULE_ID}.knowledge.automaticSkill`]:statistic});
+     constraint={statistic,assurance:true};
+     // One pool across all copies of the feat. Commit before native execution;
+     // an uncertain reply cannot be used to gain another free action.
+     await save(actor,'automaticRound',{epoch:round,messageId:message.id,userId:user.id});
+    }
+    await recall(ctx,targets.length===1?targets[0]:null,{...constraint,targetUuids:targets.map(t=>t.uuid)});return action==='knowledge:automatic'?'已用固定技能的 Assurance 进行耳熟能详。':'本次回忆知识已处理。';
+   }
    if(action==='knowledge:stance'){
     if(!game.combat?.started)throw Error('军师架势只能在遭遇中使用。');const cooldown=own(actor).stanceCooldown;if(Number.isFinite(cooldown)&&cooldown>now())throw Error('军师架势仍处于1分钟冷却。');
     const choices=[{value:'society',label:'社会 Society'},...values(actor.itemTypes?.lore).filter(i=>i.slug==='warfare-lore').map(i=>({value:i.slug,label:i.name}))];
@@ -293,7 +318,7 @@ export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,cho
   const existing=states(actor),keep=existing.filter(s=>has(actor,'stance')&&stance(actor)&&game.combat?.started&&s.combatId===game.combat.id);if(keep.length!==existing.length)await saveStates(actor,keep);
  });}
  function register({Hooks,libWrapper,socket:socketApi,onError:report=onError}={}){
-  if(registered)return()=>{};registered=true;socket=socketApi;const registrations=[],on=(name,fn)=>registrations.push([name,Hooks.on(name,(...args)=>Promise.resolve().then(()=>fn(...args)).catch(report))]);
+  if(registered)return()=>{};registered=true;socket=socketApi;const unregisterWorkbench=workbench.register({Hooks,libWrapper,socket:socketApi});const registrations=[],on=(name,fn)=>registrations.push([name,Hooks.on(name,(...args)=>Promise.resolve().then(()=>fn(...args)).catch(report))]);
   if(socket)for(const method of ['claim','complete'])socket.register(`knowledge-${method}`,async function(payload){try{const user=game.users.get(this.socketdata.userId);return {ok:true,value:method==='claim'?await claimAttack(payload,user):await completeAttack(payload.receipt,payload.result,user)}}catch(e){return {ok:false,error:e.message}}});
   // Numeric-DC skill checks omit context.target in PF2e. Snapshot on the creator,
   // never from the executing GM's selection, and never replace native context.
@@ -319,7 +344,7 @@ export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,cho
    if(own(this).kind!=='devise'&&hasSource(this,KNOWLEDGE_SOURCES.deviseEffect)&&source&&resolveAction(source)==='knowledge:devise')return false;
    return wrapped(...args);
   },'MIXED');
-  return()=>{for(const[name,id]of registrations)Hooks.off(name,id);if(libWrapper){libWrapper.unregister(MODULE_ID,path);libWrapper.unregister(MODULE_ID,effectPath);}registered=false;};
+  return()=>{unregisterWorkbench();for(const[name,id]of registrations)Hooks.off(name,id);if(libWrapper){libWrapper.unregister(MODULE_ID,path);libWrapper.unregister(MODULE_ID,effectPath);}registered=false;};
  }
- return {resolveAction,executeUsage,register,maintain,processRecall,claimAttack,completeAttack,processClaimCheck,wrapStrike};
+ return {resolveAction,requiresActualUse:(_item,action)=>['knowledge:recall','knowledge:automatic'].includes(action),executeUsage,register,maintain,processRecall,claimAttack,completeAttack,processClaimCheck,wrapStrike,recallKnowledge:workbench.action,runRecallKnowledge:workbench.run};
 }

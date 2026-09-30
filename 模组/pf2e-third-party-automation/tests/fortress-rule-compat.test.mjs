@@ -89,10 +89,13 @@ test('configuration maintenance backs up the exact changes, preserves disabled/c
  }
 });
 
-test('unknown worlds, systems and Patreon builds leave settings unchanged',()=>{
- for(const change of [g=>g.world.id='another-world',g=>g.system.version='8.6.0',g=>g.system.id='sf2e',g=>g.modules.get('patreon-v3').version='3.2.29',g=>g.modules.get('patreon-v3').active=false]){
+test('unknown worlds, systems and inactive Patreon leave settings unchanged',()=>{
+ for(const change of [g=>g.world.id='another-world',g=>g.system.version='8.6.0',g=>g.system.id='sf2e',g=>g.modules.get('patreon-v3').active=false]){
   const game=world();change(game);const before=original(),result=repair(before,game);assert.deepEqual(result.rules,before);assert.deepEqual(result.changes,[]);
  }
+});
+test('known native rule shapes remain repairable across Patreon module versions',()=>{
+ const game=world();game.modules.get('patreon-v3').version='future';assert.equal(repair(original(),game).changes.length,4);
 });
 
 test('edited rule identity, outcome, target, effect and duration are not overwritten',()=>{

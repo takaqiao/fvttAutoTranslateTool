@@ -31,3 +31,12 @@ test('zero effective HP change is confirmed by exact saved native no-change rece
   s.game.messages=new Map([['R',receipt]]);
   const result=await s.pools.withNativeApplication({id:'A1'},s.slave,async()=>({receipt}));assert.equal(result.poolReceipt.noChange,true);
 });
+test('actual asynchronous preUpdate boundary keeps the precise Toolbelt forwarding call',async()=>{
+ const s=setup();let finish;const gate=new Promise(r=>finish=r);s.slave._preUpdate=async changes=>{s.call(s.master,()=>gate,{'system.attributes.hp.value':changes.system.attributes.hp.value},{});return true};
+ const p=s.pools.withNativeApplication({id:'A'},s.slave,async()=>{await s.call(s.slave,async()=>{await Promise.resolve();await s.slave._preUpdate({system:{attributes:{hp:{value:20}}}},{},'G');return s.slave},{system:{attributes:{hp:{value:20}}}},{});return s.slave});p.catch(()=>{});await new Promise(r=>setImmediate(r));finish(s.master);assert.equal((await p).poolReceipt.actorUUID,'Actor.M');assert.deepEqual((await p).poolReceipt.fields,{'system.attributes.hp.value':20});
+});
+test('pool receipt retains prepared master before and requested after, separate from slave raw undo delta',async()=>{
+ const s=setup();s.master.system={attributes:{hp:{value:50,max:73,temp:0,_modifiers:[{unneeded:true}]}}};
+ const result=await s.pools.withNativeApplication({id:'A'},s.slave,async()=>{await s.call(s.slave,async()=>{await s.call(s.master,async()=>s.master,{'system.attributes.hp.value':73},{});return s.slave},{'system.attributes.hp.value':73},{});return s.slave});
+ assert.deepEqual(result.poolReceipt.before,{value:50,max:73,temp:0});assert.equal(result.poolReceipt.after.value,73);assert.equal(result.poolReceipt.patientUUID,'Actor.S');
+});
