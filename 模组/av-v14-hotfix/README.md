@@ -1,10 +1,17 @@
-# FVTT v14 Local Hotfix 0.6.20
+# FVTT v14 Local Hotfix 0.6.21
 
 适配基线为 Foundry **14.368**、PF2e **8.5.1**。本模组在运行时安装有版本及源码校验的适配；每项可在世界设置中关闭，刷新后生效。未知版本、源码改变或检测到冲突时跳过，对应状态见：
 
 ```js
 game.modules.get('av-v14-hotfix').api.status()
 ```
+
+## 0.6.21 的 DsN 收尾补修
+
+- 特效或物理 worker 收尾失败后，释放当前批次的等待，恢复聊天显示并继续后续投骰。
+- 保留成功动画的等待、私密投骰和爆炸骰的顺序；只适配已核验的 DsN 6.4.1。
+
+本次 Sequencer 4.2.3 的内部 await 取消补修单独部署，不包含在 Hotfix ZIP 中。
 
 ## 0.6.20 的 BBMM 并发补修
 
@@ -74,6 +81,6 @@ Sundry 与共享回合/奴仆清理使用已验证的原生 Hooks 记录适配�
 
 运行 `node --test tests/*.test.mjs` 验证隔离回归。原生函数及源码哈希记录在 `tests/fixtures`；音频、设置操作符等测试需本地 Foundry 安装，可用 `FVTT_NATIVE_APP` 指定 `resources/app`。具体运行命令、数量、跳过项和部署哈希以本次修复回执为准。
 
-本安装包只包含 Hotfix 自己的文件。本次另有第三方自动化的 GM 举盾结算修复、Sequencer 动画取消修复和 Trigger Engine 来源类型检查，单独记录与部署，不由此安装包代替。Narrator、Party Automation、Prime 及世界地图资源不属于本包。
+本安装包只包含 Hotfix 自己的文件。另有第三方自动化的 GM 举盾结算修复、Sequencer 动画取消修复和 Trigger Engine 来源类型检查，单独记录与部署，不由此安装包代替。Narrator、Party Automation、Prime 及世界地图资源不属于本包。
 
 本版没有通过删灯、删声音、改区域或改变画质目标来处理卡顿。实际一层地图右键拖动仍需使用修复后的客户端采样确认。

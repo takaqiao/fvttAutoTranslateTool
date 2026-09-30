@@ -16,7 +16,7 @@ import {installDsnChatRecovery} from './scripts/patches/dsn-chat.mjs';
 
 const ID='av-v14-hotfix';
 const nativeGrid=captureGridNative();
-const state={version:'0.6.20',patches:{patreon:{status:'retired',detail:'Upstream 3.2.29 includes the relationship refresh guards.'},wayfinderFog:{status:'retired',detail:'Wayfinder 14.1.1 replaced the old fog implementation; the 14.0.1 adapter is retired.'}}};
+const state={version:'0.6.21',patches:{patreon:{status:'retired',detail:'Upstream 3.2.29 includes the relationship refresh guards.'},wayfinderFog:{status:'retired',detail:'Wayfinder 14.1.1 replaced the old fog implementation; the 14.0.1 adapter is retired.'}}};
 let babele;
 const report=(feature,status,detail)=>{
   if(typeof feature==='object'){const {restore,...data}=feature;state.patches[feature.feature]=data;return;}
