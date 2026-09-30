@@ -76,6 +76,7 @@ test('scoped macro supports native private fields and locked actor skills withou
 });
 import {createWorkbenchRecallController} from '../scripts/knowledge-entrypoints.mjs';
 import {automaticKnowledgeChoices,automaticKnowledgeRound,AUTOMATIC_KNOWLEDGE_SOURCE,ASSURANCE_SOURCE} from '../scripts/knowledge-automatic.mjs';
+import {registerUsageEvents} from '../scripts/usage-events.mjs';
 function controllerFixture(){
  const f=fixture();f.user.active=true;f.gm.active=true;f.actor.getActiveTokens=()=>[f.token.object];f.game.user.character=f.actor;
  const gmGame={...f.game,user:f.gm};const handlers=new Map(),wrappers=new Map(),resolved=[];
@@ -94,6 +95,11 @@ test('ordinary native RK and explicit variants automatically choose primary on o
 test('public Workbench macro hotbar interception routes before its detached native wrapper starts another macro',async()=>{
  const f=controllerFixture();let oldCalls=0;const wrapper=f.wrappers.get('CONFIG.Macro.documentClass.prototype.execute');
  await wrapper.call({uuid:'Compendium.xdy-pf2e-workbench.asymonous-benefactor-macros.Macro.es70r3Bq0bxZSCuk'},()=>{oldCalls++;},{});assert.equal(oldCalls,0);assert.equal(f.die.count,1);f.cleanup();
+});
+test('knowledge and usage install one shared native item hotbar wrapper without libWrapper duplicate registration',()=>{
+ const f=controllerFixture(),libWrapper={register(_id,path,fn){if(f.wrappers.has(path))throw Error(`duplicate libWrapper path: ${path}`);f.wrappers.set(path,fn);},unregister(_id,path){f.wrappers.delete(path);}};
+ const cleanupUsage=registerUsageEvents({...f,libWrapper,Hooks:{on(){return 1;},off(){}},executeUsage:async()=>{},resolveAction:()=>null});
+ assert.ok(f.wrappers.has('game.pf2e.rollItemMacro'));f.cleanup();assert.ok(f.wrappers.has('game.pf2e.rollItemMacro'));cleanupUsage();assert.equal(f.wrappers.size,0);
 });
 test('GM dispatches incidental RK to its original owner and repeated request never rolls twice',async()=>{
  const f=controllerFixture();const original={id:'source',actor:f.actor,author:f.user,speaker:{actor:f.actor.id,scene:'s',token:f.token.id},flags:{[MODULE_ID]:{knowledge:{recall:{actorUuid:f.actor.uuid,targetUuid:f.target.uuid,userId:f.user.id}}}},async update(changes){for(const[k,v]of Object.entries(changes)){let o=this;const ps=k.split('.');for(const p of ps.slice(0,-1))o=o[p]??={};o[ps.at(-1)]=v;}}};f.game.messages.set(original.id,original);

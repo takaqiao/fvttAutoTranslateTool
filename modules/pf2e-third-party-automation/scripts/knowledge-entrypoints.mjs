@@ -4,7 +4,6 @@ import {isActiveGM} from './native-context.mjs';
 import {captureWorkbenchRecall,finalizeWorkbenchRecall,WORKBENCH_RECALL_UUID} from './knowledge-workbench.mjs';
 const values=x=>Array.from(x?.values?.()??x??[]),doc=t=>t?.document??t;
 const publicUUID='Compendium.xdy-pf2e-workbench.asymonous-benefactor-macros.Macro.es70r3Bq0bxZSCuk';
-const RK_ITEM='Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo';
 const source=i=>i?.sourceId??i?._stats?.compendiumSource??i?.flags?.core?.sourceId;
 const random=()=>globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.randomUUID();
 /** Original owner runs the installed macro. GM only receives a persisted card id,
@@ -86,7 +85,10 @@ export function createWorkbenchRecallController({game,fromUuid=globalThis.fromUu
     if(scope.ChatMessage&&scope.ChatMessage!==globals.ChatMessage)return wrapped(scope); // Adapter passes scoped native capture classes.
     return action(scope);
    },'MIXED');cleanup.push(()=>libWrapper.unregister('pf2e-third-party-automation',macroPath));
-   const itemPath='game.pf2e.rollItemMacro';libWrapper.register('pf2e-third-party-automation',itemPath,async function(wrapped,uuid,event){const item=await fromUuid(uuid);if(source(item)===RK_ITEM)return action({actor:item.actor,event});return wrapped(uuid,event);},'MIXED');cleanup.push(()=>libWrapper.unregister('pf2e-third-party-automation',itemPath));}
+   // Embedded native RK items use the shared usage-events hotbar wrapper. Their
+   // actual-use source card then dispatches knowledge:recall to this controller.
+   // libWrapper permits only one registration per module/path.
+   }
   function release(app){const entry=listeners.get(app);if(entry){for(const type of ['click','contextmenu'])entry.root.removeEventListener(type,entry.listener,true);listeners.delete(app);}}
   function render(app,html){release(app);const root=html?.addEventListener?html:html?.[0]??app.element,actor=app.actor??app.document?.actor??app.parent?.actor;if(!root?.addEventListener||!actor)return;
    const listener=event=>{const button=event.target?.closest?.('[data-action="roll-statistic-action"][data-key="recall-knowledge"],[data-action="recall-knowledge"],[data-pf2-action="recall-knowledge"]');if(!button||!root.contains(button))return;event.preventDefault();event.stopImmediatePropagation();Promise.resolve(action({actor,event})).catch(onError);};for(const type of ['click','contextmenu'])root.addEventListener(type,listener,true);listeners.set(app,{root,listener});}
