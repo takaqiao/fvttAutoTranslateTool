@@ -101,6 +101,17 @@ test('a queued Strike rebinds the current alternate usage and the exact native M
  const result=f.strike.variants[1].roll(),alternate={...f.strike,item:{...f.strike.item},variants:[{roll:async()=>calls.push('new-0')},{roll:async()=>calls.push('new-1')}]};
  f.actor.system.actions=[{...f.strike,item:{...f.strike.item,altUsageType:null},altUsages:[alternate]}];await result;assert.deepEqual(calls,['new-1']);assert.deepEqual(f.writes,[]);
 });
+for(const startsWithSurge of [true,false])test(`an actual evaluated native Strike without AC stores its original ${startsWithSurge?'Surge':'empty'} snapshot`,async()=>{
+ const f=fixture(),provider=api.createWeaponSurgeAutomation({game:{user:{targets:new Set()}}});if(!startsWithSurge){f.actor.items.delete('surge');f.actor._source.items=f.actor._source.items.filter(item=>item._id!=='surge')}
+ f.message.flags.pf2e.context.outcome=null;
+ f.strike.variants[0].roll=async params=>provider.interceptCheck(async(_check,context,_event,callback)=>{f.message.flags.pf2e.context={...f.message.flags.pf2e.context,...context,options:[...context.options]};const roll={_evaluated:true,total:24};await callback(roll,null,f.message);return roll}, {},{type:'attack-roll',origin:{actor:f.actor,item:f.strike.item},options:params.options},null,params.callback);
+ provider.wrapStrike(f.strike,f.actor);const rolled=await f.strike.variants[0].roll();assert.equal(rolled.total,24);assert.deepEqual(f.writes,startsWithSurge?[['surge']]:[]);assert.equal(f.message.flags.pf2e.context.weaponSurgeSnapshot.effects.length,startsWithSurge?1:0);
+ f.add(surge('new',9));const result=await f.strike.damage({checkContext:f.message.flags.pf2e.context}),dice=result.items.filter(item=>item.system?.rules?.some(rule=>rule.key==='DamageDice'));
+ assert.equal(dice.length,startsWithSurge?1:0);if(startsWithSurge)assert.equal(dice[0].system.level.value,1);assert.ok(f.actor.items.has('new'));
+});
+for(const roll of [{_evaluated:false,total:24},{_evaluated:true,total:NaN},{total:24},'attack-roll'])test(`an unresolved callback without evaluated native evidence cannot spend Surge (${JSON.stringify(roll)})`,async()=>{
+ const f=fixture(),provider=api.createWeaponSurgeAutomation({game:{user:{targets:new Set()}}});f.message.flags.pf2e.context.outcome=null;f.strike.variants[0].roll=async params=>{await params.callback(roll,null,f.message);return roll};provider.wrapStrike(f.strike,f.actor);await f.strike.variants[0].roll();assert.deepEqual(f.writes,[]);
+});
 const nativePath=process.env.PF2E_NATIVE_BUNDLE??'';
 test('real PF2e DamageDice body prepares the frozen native spirit d6 at ranks 1, 5 and 9',{skip:!nativePath},()=>{
  assert.equal(typeof api.prepareWeaponSurgeDamageSnapshotItems,'function');const source=readFileSync(nativePath,'utf8'),classStart=source.indexOf('DamageDiceRuleElement = class'),start=source.indexOf('\tbeforePrepareData() {',classStart),end=source.indexOf('\n\t}\n',start)+4;assert.ok(classStart>=0&&start>classStart&&end>start);

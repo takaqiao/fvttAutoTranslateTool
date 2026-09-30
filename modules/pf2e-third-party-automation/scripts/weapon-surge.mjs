@@ -40,7 +40,7 @@ export function createWeaponSurgeAutomation({game}={}){
       // The Check middleware normally puts this in the card before publication.
       // createMessage:false also provides an unsaved native document here.
       if(message&&!message.flags?.pf2e?.context?.weaponSurgeSnapshot&&message.updateSource)message.updateSource({'flags.pf2e.context.weaponSurgeSnapshot':record});
-      frame.capture(message);
+      frame.capture(message,{confirmedNativeStrike:roll?._evaluated===true&&Number.isFinite(roll.total)});
       // Release once the actual check has settled, before calling activity code:
       // a callback may await another Strike by this same actor.
       try{await frame.consume()}finally{gate.release()}
@@ -57,7 +57,8 @@ export function createWeaponSurgeAutomation({game}={}){
     if(record==null)return native.call(this,params);
     if(!validWeaponSurgeSnapshot(record,actor,strike.item))throw Error('本次激发武器快照无效。');
     const targetUuid=context.target?.token,target=targetUuid?{uuid:targetUuid}:null,frame=createNextStrikeEffectFrame({actor,strike,target,consumeTumble:false});
-    frame.capture({flags:{pf2e:{origin:{uuid:strike.item.uuid},context}}});
+    const ownCard=context.options?.includes(WEAPON_SURGE_OPTION+record.nonce)===true;
+    if(!frame.capture({flags:{pf2e:{origin:{uuid:strike.item.uuid},context}}},{confirmedNativeStrike:ownCard}))throw Error('本次激发武器攻击快照尚未确认。');
     const prepared=frame.damage(strike),options=frame.damageOptions(params.options??[]);
     return prepared===strike?native.call(this,{...params,options}):prepared[method]({...params,options});
    };

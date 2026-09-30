@@ -17,10 +17,10 @@ export function createNextStrikeEffectFrame({actor,strike,target,consumeTumble=t
  const effects=valid?values(actor.items).filter(effect=>effect.type==='effect'&&effect.id&&!effect.isExpired&&(consumeTumble&&getSourceId(effect)===TUMBLE_BEHIND||isWeaponSurgeFor(effect,item.id))).map(effect=>({effect,revision:revision(effect)})):[];
  const surge=effects.filter(entry=>isWeaponSurgeFor(entry.effect,item.id));
  let record=valid?createWeaponSurgeSnapshot(actor,item,surge.map(entry=>entry.effect)):null,captured=false,offGuard=false,consumption,reroll=false;
- function capture(message){
+ function capture(message,{confirmedNativeStrike=false}={}){
   if(captured||!valid)return false;
   const flags=message?.flags?.pf2e,context=flags?.context;
-  if(flags?.origin?.uuid!==weaponUuid||context?.type!=='attack-roll'||!outcomes.has(context.outcome))return false;
+  if(flags?.origin?.uuid!==weaponUuid||context?.type!=='attack-roll'||!outcomes.has(context.outcome)&&!(confirmedNativeStrike&&context.outcome==null))return false;
   const saved=context.weaponSurgeSnapshot;
   if(saved!=null&&!validWeaponSurgeSnapshot(saved,actor,item))return false;
   captured=true;

@@ -4,6 +4,8 @@
 
 指定武器的实际命中、暴击、未命中、严重未命中均消费原效果；取消、其他武器、同 ID 替换或刷新均保留。逐 actor 的 gate 防止并发 native Strike 捕获同一效果。等待后重新选取当前 preparedStrike 的相同武器、alternate usage 和 MAP variant；已确认攻击先消费旧效果、释放 gate，再 await 业务 callback，避免 callback 内再攻击死锁。重复 callback 只结算一次。
 
+无 AC / target 的原生 Strike 可能实际投骰而 `context.outcome===null`。provider 仅在真实 variant callback 提供 `_evaluated===true` 且 finite `roll.total` 时，给 frame 额外本地完成证明；这类实际攻击也消费原效果。原 frame 未证明的 unresolved / cancelled 仍不消费。其已发表 context 保留 nonce option 与原（包括空的）snapshot，普通 Damage 只恢复它，不能借用后来新增的 Surge。
+
 原生 Check middleware 在发布攻击卡前写入 `flags.pf2e.context.weaponSurgeSnapshot`：
 
 ```js
@@ -36,6 +38,8 @@ prepareWeaponSurgeDamageSnapshotItems(actor, transientItems) // => source items[
 - `weapon-surge-malformed-red.txt`：外来 saved context 被接受，20 项中 1 失败。
 - `weapon-surge-concurrent-red.txt`：并发捕获同一效果及 callback 内再 Strike 借用旧效果，22 项中 2 失败。
 - `weapon-surge-green.txt`：Weapon Surge、existing next-strike effects、activity sequence **60 项全部通过、0 失败、0 skip**。真实 PF2e 8.5.1 bundle 的 `DamageDiceRuleElement.beforePrepareData` 被提取执行，1/5/9 环分别准备 1/2/3 spirit d6。syntax check 两个新模块通过。
+- `weapon-surge-no-ac-red.txt`：真实 evaluated native callback、null outcome 时，原 Surge 未消费及原空 snapshot 借入后来新效果，2 项失败。
+- `weapon-surge-no-ac-green.txt`：最终 **66 项全部通过、0 失败、0 skip**，同时覆盖原次有/无 Surge、无 AC 的延后伤害，以及未 evaluated / 非 finite total / 纯 context 字串不能证明一次 Strike。
 
 ```powershell
 $env:PF2E_NATIVE_BUNDLE='C:\Users\Taka\Desktop\fvtt\tmp\fortress-gap-audit-20260925\code\systems\pf2e\pf2e.mjs'

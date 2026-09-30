@@ -1,0 +1,79 @@
+✔ the next bound weapon success consumes exactly its original Weapon Surge (2.8071ms)
+✔ the next bound weapon criticalSuccess consumes exactly its original Weapon Surge (0.2341ms)
+✔ the next bound weapon failure consumes exactly its original Weapon Surge (0.2215ms)
+✔ the next bound weapon criticalFailure consumes exactly its original Weapon Surge (0.2103ms)
+✔ a different weapon and an unresolved attack leave Weapon Surge for its bound weapon (0.2626ms)
+✔ delayed damage uses only the old Surge and does not consume or borrow the new one (0.7133ms)
+✔ an attack without Surge cannot borrow an effect granted before its delayed damage (0.3086ms)
+✔ same-ID refreshed Surge survives the old frame (0.1969ms)
+✔ native reroll pf2e context carries the original snapshot rather than the next Surge (0.7456ms)
+✔ attack sequence combines the original Surge snapshot with its own Forceful modifier once (0.8314ms)
+✔ owner RPC snapshot expansion excludes the current Surge and preserves other transient effects (0.3078ms)
+✔ native Strike callbacks are awaited once and persist the snapshot before consuming the exact effect (0.6114ms)
+✔ a completed native attack still consumes its old Surge if the caller callback fails (0.4856ms)
+✔ repeated native callback delivery settles and calls the activity callback once (0.2543ms)
+✔ ordinary native damage uses its exact old card context and leaves a later Surge untouched (0.4864ms)
+✔ ordinary native critical uses its exact old card context and leaves a later Surge untouched (0.3983ms)
+✔ a cancelled native roll does not spend Surge or leak its open check context into another call (0.222ms)
+✔ owner RPC expansion is idempotent and rejects a foreign actor or weapon record (0.3819ms)
+✔ a malformed saved card cannot spend or borrow the current weapon Surge (0.4707ms)
+✔ concurrent native attacks are distinct calls and only the first captures the same Surge (0.3768ms)
+✔ the confirmed Strike releases its gate before an awaited callback starts another Strike (0.3117ms)
+✔ a queued Strike rebinds the current alternate usage and the exact native MAP variant (0.2231ms)
+✖ an actual evaluated native Strike without AC stores its original Surge snapshot (0.8673ms)
+✖ an actual evaluated native Strike without AC stores its original empty snapshot (0.3595ms)
+✔ an unresolved callback without evaluated native evidence cannot spend Surge ({"_evaluated":false,"total":24}) (0.1914ms)
+✔ an unresolved callback without evaluated native evidence cannot spend Surge ({"_evaluated":true,"total":null}) (0.1133ms)
+✔ an unresolved callback without evaluated native evidence cannot spend Surge ({"total":24}) (0.0969ms)
+✔ an unresolved callback without evaluated native evidence cannot spend Surge ("attack-roll") (0.09ms)
+✔ real PF2e DamageDice body prepares the frozen native spirit d6 at ranks 1, 5 and 9 (14.4236ms)
+ℹ tests 29
+ℹ suites 0
+ℹ pass 27
+ℹ fail 2
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 118.3919
+
+✖ failing tests:
+
+test at modules\pf2e-third-party-automation\tests\weapon-surge.test.mjs:104:43
+✖ an actual evaluated native Strike without AC stores its original Surge snapshot (0.8673ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly deep-equal:
+  + actual - expected
+  
+  + []
+  - [
+  -   [
+  -     'surge'
+  -   ]
+  - ]
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/weapon-surge.test.mjs:108:124)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: [],
+    expected: [ [ 'surge' ] ],
+    operator: 'deepStrictEqual',
+    diff: 'simple'
+  }
+
+test at modules\pf2e-third-party-automation\tests\weapon-surge.test.mjs:104:43
+✖ an actual evaluated native Strike without AC stores its original empty snapshot (0.3595ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  
+  1 !== 0
+  
+      at TestContext.<anonymous> (file:///C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/tests/weapon-surge.test.mjs:110:9)
+      at async Test.run (node:internal/test_runner/test:1404:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:969:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: 1,
+    expected: 0,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }
