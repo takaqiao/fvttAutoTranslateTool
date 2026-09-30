@@ -25,19 +25,20 @@ function fixture({kind='strike',map=0,outcomes=['success','success'],save='failu
  game.scenes=new Map([[scene.id,scene]]);
  const casts={addMatcher(){},captureUsage(){},register(){return()=>{}},async payForActivity(ctx){calls.push({kind:'payment',ctx});if(consumeFails)throw Error('法术资源不足');return {id:'paid'}},async ensurePaid(ctx){calls.push({kind:'bind-payment',ctx});return{id:'paid'}},async finishActivityWithoutSpell(ctx){calls.push({kind:'finish-payment',ctx})}};
  const chooser=async({title,choices})=>title.includes('多重')?String(map):choices[0].value;
- assert.equal(typeof api.createSpellCombination,'function');const provider=api.createSpellCombination({game,choose:chooser,fromUuid:async uuid=>[actor,origin,...targetDocs,...actor.items].find(d=>d.uuid===uuid),nativeCasts:casts});
+ const nativeOperations={run:async(_ctx,_request,execute,beforeRoll)=>{await beforeRoll?.();return execute();},register(){}};
+ assert.equal(typeof api.createSpellCombination,'function');const provider=api.createSpellCombination({game,choose:chooser,fromUuid:async uuid=>[actor,origin,...targetDocs,...actor.items].find(d=>d.uuid===uuid),nativeCasts:casts,nativeOperations});
  const message=new Message({id:'use1',author:{id:'player'},speaker:{actor:'pc'},flags:{pf2e:{origin:{uuid:feat.uuid,type:feat.type,actor:actor.uuid}},[NS]:{usageInput:{actualUse:true,targetUuids:targetDocs.map(t=>t.uuid)}}}});game.messages.set(message.id,message);
  const use=()=>provider.executeUsage({actor,item:feat,message,user:{id:'player'},action:provider.resolveAction(feat)});
- return {provider,actor,feat,spell,entry,origin,targetDocs,calls,messages,merges,game,casts,use,message,Message,weapons};
+ return {provider,actor,feat,spell,entry,origin,targetDocs,calls,messages,merges,game,casts,use,message,Message,weapons,nativeOperations};
 }
 async function setup(options,fn){const previous=globalThis.CONFIG;try{const f=fixture(options);globalThis.CONFIG={ChatMessage:{documentClass:f.Message},Dice:{rolls:[]},PF2E:{}};await fn(f)}finally{globalThis.CONFIG=previous}}
-function runWith(f,options={}){const p=api.createSpellCombination({game:f.game,choose:async({choices})=>choices[0].value,fromUuid:async uuid=>[f.actor,f.origin,...f.targetDocs,...f.actor.items].find(d=>d.uuid===uuid),nativeCasts:f.casts,...options});return()=>p.executeUsage({actor:f.actor,item:f.feat,message:f.message,user:{id:'player'},action:p.resolveAction(f.feat)});}
+function runWith(f,options={}){const p=api.createSpellCombination({game:f.game,choose:async({choices})=>choices[0].value,fromUuid:async uuid=>[f.actor,f.origin,...f.targetDocs,...f.actor.items].find(d=>d.uuid===uuid),nativeCasts:f.casts,nativeOperations:f.nativeOperations,...options});return()=>p.executeUsage({actor:f.actor,item:f.feat,message:f.message,user:{id:'player'},action:p.resolveAction(f.feat)});}
 const handoff=f=>{f.game.users.activeGM={id:'new-gm'}};
 function dualUse(f,{takedown=false}={}){
  f.feat.type='feat';f.feat.sourceId=takedown?'Compendium.pf2e.feats-srd.Item.Gw0wGXikhAhiGoud':'Compendium.pf2e.feats-srd.Item.onde0SxLoxLBTnvm';
  f.feat.system.rules=[{key:'FlatModifier',predicate:[{or:['double-slice-second',NS+':double-slice-second']}]}];
  f.weapons[1].system.equipped={carryType:'held',handsHeld:1};
- const provider=createDualStrikeAutomation({game:f.game,fromUuid:async uuid=>[f.origin,...f.targetDocs].find(d=>d.uuid===uuid),choose:async({choices})=>choices[0].value});
+ const provider=createDualStrikeAutomation({game:f.game,nativeOperations:f.nativeOperations,fromUuid:async uuid=>[f.origin,...f.targetDocs].find(d=>d.uuid===uuid),choose:async({choices})=>choices[0].value});
  return ()=>provider.executeUsage({actor:f.actor,item:f.feat,message:f.message,user:{id:'player'},action:takedown?'dual:twin-takedown':'dual:double-slice'});
 }
 function twinPair(f){
@@ -47,6 +48,21 @@ function twinPair(f){
  // circumstance stacking and critical multiplication.
  f.actor.clone=changes=>{f.calls.push({kind:'twin-clone',changes});return {system:{actions:f.actor.system.actions.map(s=>({...s,damage:async opts=>{f.calls.push({kind:'twin-damage',opts,item:s.item});return roll(11)},critical:async opts=>{f.calls.push({kind:'twin-damage',opts,item:s.item});return roll(22)}}))}}};
 }
+test('combination native attack and damage are dispatched to the original owner',()=>setup({kind:'combination'},async f=>{
+ const requests=[];
+ await runWith(f,{nativeOperations:{async run(ctx,request,execute){assert.equal(ctx.user.id,'player');assert.equal(ctx.message,f.message);requests.push(request);return execute();},register(){}}})();
+ assert.deepEqual(requests.map(request=>request.type),['attack','attack','damage','damage']);
+ assert(requests.every(request=>request.targetUuid===f.targetDocs[0].uuid));
+}));
+test('dual Strikes and damage are dispatched to the original owner',()=>setup({},async f=>{
+ const requests=[];f.nativeOperations.run=async(ctx,request,execute)=>{assert.equal(ctx.user.id,'player');requests.push(request);return execute();};
+ await dualUse(f)();assert.deepEqual(requests.map(request=>request.type),['attack','damage','attack','damage']);
+}));
+test('cancelled first Spellstrike native window preserves its spell resource and charge',()=>setup({},async f=>{
+ const result=await runWith(f,{nativeOperations:{run:async()=>({status:'cancelled'}),register(){}}})();
+ assert.equal(result.status,'cancelled');assert.equal(f.calls.filter(call=>call.kind==='payment').length,0);
+ assert.equal(f.actor.flags[NS].spellstrike.charged,true);assert.equal(f.message.flags[NS].spellCombinationUse.state,'cancelled');
+}));
 for(const takedown of [false,true])for(const outcomes of [['success','success'],['failure','success'],['success','criticalSuccess']])test(`paired twin weapons use native bonus on the second Strike only (${takedown?'Takedown':'Double Slice'}, ${outcomes})`,()=>setup({outcomes},async f=>{
  twinPair(f);f.actor.signature='hunter';f.targetDocs[0].actor.getRollOptions=()=>['self:prey:hunter'];
  const use=dualUse(f,{takedown});await use();await use();
@@ -91,7 +107,7 @@ for(const outcomes of [['success','success'],['failure','success']])test('Dual S
  f.weapons[1].system.equipped={carryType:'held',handsHeld:1};
  const forbidden=()=>{throw Error('spatial probe must not run')};
  f.actor.getReach=forbidden;f.origin.object.distanceTo=forbidden;f.origin.object.checkCollision=forbidden;
- const provider=createDualStrikeAutomation({game:f.game,fromUuid:async uuid=>[f.origin,...f.targetDocs].find(d=>d.uuid===uuid),choose:async({choices})=>choices[0].value});
+ const provider=createDualStrikeAutomation({game:f.game,nativeOperations:f.nativeOperations,fromUuid:async uuid=>[f.origin,...f.targetDocs].find(d=>d.uuid===uuid),choose:async({choices})=>choices[0].value});
  await provider.executeUsage({actor:f.actor,item:f.feat,message:f.message,user:{id:'player'},action:'dual:double-slice'});
  await provider.executeUsage({actor:f.actor,item:f.feat,message:f.message,user:{id:'player'},action:'dual:double-slice'});
  assert.equal(f.calls.filter(c=>c.kind==='attack').length,2,'The original activity still cannot repeat either Strike');
@@ -138,9 +154,9 @@ test('native attack callback cannot publish a card after GM handoff during the r
  const variant=f.actor.system.actions[0].variants[0],native=variant.roll;variant.roll=async opts=>{handoff(f);return native(opts)};
  await assert.rejects(f.use,/GM/);assert.equal(f.calls.filter(c=>c.kind==='attack').length,1);assert.equal(f.messages.length,0);assert.equal(f.message.flags[NS].spellCombinationUse.state,'started');
 }));
-test('GM handoff after an already-paid spell keeps payment and blocks subsequent receipt and discharge writes',()=>setup({},async f=>{
+test('GM handoff after an already-paid spell keeps the started receipt and blocks discharge writes',()=>setup({},async f=>{
  const pay=f.casts.payForActivity;f.casts.payForActivity=async ctx=>{const result=await pay(ctx);handoff(f);return result};
- await assert.rejects(f.use,/GM/);assert.equal(f.calls.filter(c=>c.kind==='payment').length,1);assert.equal(f.calls.filter(c=>c.kind==='attack').length,0);assert.equal(f.message.flags[NS].spellCombinationUse,undefined);assert.equal(f.actor.flags[NS].spellstrike.charged,true);
+ await assert.rejects(f.use,/GM/);assert.equal(f.calls.filter(c=>c.kind==='payment').length,1);assert.equal(f.calls.filter(c=>c.kind==='attack').length,0);assert.equal(f.message.flags[NS].spellCombinationUse.state,'started');assert.equal(f.actor.flags[NS].spellstrike.charged,true);
 }));
 test('a spell-card draft returning after GM handoff cannot publish or bind the canonical card',()=>setup({},async f=>{
  const toMessage=f.spell.toMessage;f.spell.toMessage=async(...args)=>{const result=await toMessage.apply(f.spell,args);handoff(f);return result};
@@ -294,7 +310,7 @@ test('unprepared and expended spells are never choices even if in the spellbook'
 test('Spell Swipe enables the native sweep-bonus predicate against both targets',()=>setup({kind:'swipe'},async f=>{f.weapons[0].system.traits.value=['sweep'];await f.use();assert(f.calls.filter(c=>c.kind==='attack').every(c=>c.opts.options.has('sweep-bonus')))}));
 test('Overwhelming Combination allows fist first and waits for first-hit providers before the next strike',async()=>{
  const prior=globalThis.CONFIG;try{const f=fixture({kind:'combination'});globalThis.CONFIG={ChatMessage:{documentClass:f.Message}};let after=0;
- const provider=api.createSpellCombination({game:f.game,nativeCasts:f.casts,fromUuid:async id=>f.targetDocs.find(t=>t.uuid===id),choose:async({title,choices})=>title.includes('攻击顺序')?'fist':title.includes('多重')?'0':choices[0].value,afterAttack:async()=>{after++;f.calls.push({kind:'after-attack'})}});
+ const provider=api.createSpellCombination({game:f.game,nativeCasts:f.casts,nativeOperations:f.nativeOperations,fromUuid:async id=>f.targetDocs.find(t=>t.uuid===id),choose:async({title,choices})=>title.includes('攻击顺序')?'fist':title.includes('多重')?'0':choices[0].value,afterAttack:async()=>{after++;f.calls.push({kind:'after-attack'})}});
  await provider.executeUsage({actor:f.actor,item:f.feat,message:f.message,user:{id:'player'},action:provider.resolveAction(f.feat)});
  assert.deepEqual(f.calls.filter(c=>['attack','after-attack'].includes(c.kind)).map(c=>c.kind),['attack','after-attack','attack','after-attack']);assert.deepEqual(f.calls.filter(c=>c.kind==='attack').map(c=>c.index),[1,0]);assert.equal(after,2);
  }finally{globalThis.CONFIG=prior}

@@ -58,11 +58,11 @@ test('a consumed receipt ID cannot be replayed after resetting frequency',()=>{
  assert.equal(t.observe(i,{[MODULE_ID]:{frequencyReceipt:proof}},'player'),null);
 });
 
-function harness({active=true,initialActors=true,canvas,scenes,requiresActualUse,resolveAction}={}){
+function harness({active=true,initialActors=true,canvas,scenes,requiresActualUse,resolveAction,executeUsage,now}={}){
  const callbacks=new Map(),Hooks={on:(n,cb)=>{callbacks.set(n,cb);return n},off:n=>callbacks.delete(n)};
  const gm={id:'gm',name:'GM'},player={id:'player'},i=item(),a=i.actor,m=message();a.items=[i];m.update=async changes=>{for(const[k,v]of Object.entries(changes)){if(k===`flags.${MODULE_ID}.usage`)m.flags[MODULE_ID]={...m.flags[MODULE_ID],usage:v}}};
  const game={user:active?gm:player,users:{activeGM:gm,get:id=>id==='player'?player:gm},actors:initialActors?[a]:[],scenes:typeof scenes==='function'?scenes(a):scenes};
- const calls=[],errors=[];const unregister=fn('registerUsageEvents')({game,Hooks,requiresActualUse,resolveAction,canvas:typeof canvas==='function'?canvas(a):canvas,fromUuid:async uuid=>uuid===i.uuid?i:null,executeUsage:async e=>{calls.push(e);return 'ok'},onError:e=>errors.push(e)});
+ const calls=[],errors=[];const unregister=fn('registerUsageEvents')({game,Hooks,requiresActualUse,resolveAction,now,canvas:typeof canvas==='function'?canvas(a):canvas,fromUuid:async uuid=>uuid===i.uuid?i:null,executeUsage:async e=>{calls.push(e);return executeUsage?executeUsage(e):'ok'},onError:e=>errors.push(e)});
  return {callbacks,game,i,m,calls,errors,unregister};
 }
 test('active GM handles once and writes a persistent completed marker',async()=>{
@@ -137,4 +137,38 @@ for(const proof of ['local','native'])test(`opted-in ${proof} actual Use dispatc
 test('a policy that does not select the activity preserves legacy display-card dispatch',async()=>{
  const h=harness({requiresActualUse:(_item,action)=>action==='spell-combination:combination'});
  await h.callbacks.get('createChatMessage')(h.m,{},'player');assert.equal(h.calls.length,1);assert.equal(h.m.flags[MODULE_ID].usage.status,'done');h.unregister();
+});
+
+test('an observed native payment survives normal network delay and remains single-use',()=>{
+ let time=1000;const tracker=fn('createFrequencyTracker')({now:()=>time}),i=item();tracker.seed(i);i.system.frequency.value=0;
+ const proof={id:'slow',itemUuid:i.uuid,userId:'player',before:1,after:0,createdAt:time};tracker.observe(i,{[MODULE_ID]:{frequencyReceipt:proof}},'player');
+ time+=60000;assert.deepEqual(tracker.claim('slow',{itemUuid:i.uuid,userId:'player',messageId:'original'}),proof);
+ assert.throws(()=>tracker.claim('slow',{itemUuid:i.uuid,userId:'player',messageId:'copy'}),/回执/);
+});
+
+test('pending chat update latency cannot expire an already observed payment',async()=>{
+ let time=1000;const h=harness({now:()=>time}),update=h.m.update;
+ h.m.update=async changes=>{await update(changes);time+=60000;};
+ const proof={id:'slow-pending',itemUuid:h.i.uuid,userId:'player',before:1,after:0,createdAt:time};h.i.system.frequency.value=0;
+ h.callbacks.get('updateItem')(h.i,{}, {[MODULE_ID]:{frequencyReceipt:proof}},'player');
+ h.m.flags[MODULE_ID]={usageInput:{actualUse:true,frequencyReceiptId:proof.id}};
+ await h.callbacks.get('createChatMessage')(h.m,{},'player');
+ assert.equal(h.calls.length,1);assert.equal(h.m.flags[MODULE_ID].usage.status,'done');h.unregister();
+});
+
+for(const status of ['waiting','cancelled'])test(`provider ${status} is not reported as completed`,async()=>{
+ const h=harness({executeUsage:async()=>({status,result:'等待原生检定'})});
+ await h.callbacks.get('createChatMessage')(h.m,{},'player');
+ assert.equal(h.m.flags[MODULE_ID].usage.status,status);assert.equal(h.m.flags[MODULE_ID].usage.result,'等待原生检定');
+ assert.doesNotMatch(fn('usageStatusHTML')(h.m.flags[MODULE_ID].usage),/已自动结算/);h.unregister();
+});
+
+test('native Use listeners release replaced roots and closed applications',()=>{
+ const h=harness(),app={actor:h.i.actor},counts={adds:0,removes:0};
+ const root=()=>({addEventListener(){counts.adds++;},removeEventListener(){counts.removes++;}});
+ const first=root(),second=root();h.callbacks.get('renderActorSheetPF2e')(app,first);
+ h.callbacks.get('renderCharacterSheetPF2e')(app,first);assert.equal(counts.adds,1);
+ h.callbacks.get('renderActorSheetPF2e')(app,second);assert.equal(counts.removes,1);
+ h.callbacks.get('closeApplication')?.(app);assert.equal(counts.removes,2);
+ h.unregister();assert.equal(counts.removes,2,'closed roots are no longer retained for unregister');
 });

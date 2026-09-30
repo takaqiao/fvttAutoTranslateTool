@@ -4,6 +4,7 @@ import {getSourceId,isActiveGM,resolveMessageTargets} from './native-context.mjs
 import {SerialActions} from './runtime.mjs';
 import {preserveDamagePartForMerge,preserveMergedDamageBypass} from './native-damage-components.mjs';
 import {createAttackSequence} from './activity-attack-sequence.mjs';
+import {createNativeOwnerOperations,nativeTransientItems} from './native-owner-operations.mjs';
 
 const SOURCES={
  twin:'Compendium.pf2e.feats-srd.Item.Gw0wGXikhAhiGoud',
@@ -44,8 +45,9 @@ export function removePrecisionDamage(roll){
  return DamageRoll.fromData(data);
 }
 
-export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,choose,onError=()=>{}}={}){
+export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,choose,onError=()=>{},nativeOperations}={}){
  const queue=new SerialActions();
+ const ownerOperations=nativeOperations??createNativeOwnerOperations({game,fromUuid,scope:'dual-strike'});
  const resolveAction=item=>item?.type==='feat'?getSourceId(item)===SOURCES.twin?'dual:twin-takedown':getSourceId(item)===SOURCES.double?'dual:double-slice':null:null;
  async function select(ctx,title,choices){
   if(choices.length===1)return choices[0].value;
@@ -111,7 +113,7 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
    const origin=await sourceToken(actor,message,target);requireSceneTarget(actor,origin,target);
    if(!twin&&!item.system.rules?.some(r=>r.key==='FlatModifier'&&r.predicate?.some(p=>p?.or?.includes(SECOND_ATTACK))))throw Error('双重切割的原生第二击修正规则缺失，尚未攻击。');
    await actor.update({[`flags.${MODULE_ID}.dualStrikeUses`]:[...(own(actor).dualStrikeUses??[]).slice(-127),message.id]},{render:false});
-   const hits=[],sequence=createAttackSequence({actor});
+   const hits=[],sequence=createAttackSequence({actor});let cancelled=false;
    for(const[index,strike]of selected.entries()){
     requireSceneTarget(actor,origin,target);
     const frame=sequence.begin(strike,target);
@@ -119,12 +121,17 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
     if(twin)options.add('hunted-prey');else if(index===1){options.add('double-slice-second');options.add(SECOND_ATTACK);}
     const tier=twin?Math.min(map+index,2):map;
     let attackMessage=null;
+    const nativeResult=await ownerOperations.run({actor,message,user},{type:'attack',weaponId:strike.item.id,altUsageType:strike.item.altUsageType??'',map:tier,targetUuid:target.uuid,options:[...options],flags:{dualStrikeAttack:{usageMessageId:message.id,index}}},async()=>{
     const check=await strike.variants[tier].roll({target:target.object,options,event:{ctrlKey:false,metaKey:false,shiftKey:game.user.settings?.showCheckDialogs??true},createMessage:false,callback:async(_roll,_outcome,raw)=>{
      const data=raw.toObject();delete data._id;
      data.flags={...data.flags,'xdy-pf2e-workbench':{...data.flags?.['xdy-pf2e-workbench'],noAutoDamageRoll:true},[MODULE_ID]:{...data.flags?.[MODULE_ID],dualStrikeAttack:{usageMessageId:message.id,index}}};
      attackMessage=await messageClass().create(data);
     }});
-    if(!check||!attackMessage)throw Error('双武器活动已中止；已发生的攻击不会自动重试。');
+    return !check&&!attackMessage?{status:'cancelled'}:attackMessage?{status:'rolled',messageId:attackMessage.id}:{status:'uncertain'};
+    });
+    attackMessage=game.messages.get(nativeResult.messageId);
+    if(nativeResult.status==='cancelled'){if(!index)return {status:'cancelled',result:'本次攻击已取消。'};cancelled=true;break;}
+    if(!attackMessage)throw Error('双武器活动已中止；已发生的攻击不会自动重试。');
     frame.capture(attackMessage);
     const outcome=attackMessage.flags.pf2e.context.outcome;
     sequence.record(frame,outcome);
@@ -136,11 +143,14 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
     if(twin)damageOptions.add('hunted-prey');
     const {strike:damageStrike,options:sequenceOptions}=frame.damage(strike);
     for(const option of sequenceOptions)damageOptions.add(option);
-    const roll=await damageStrike[outcome==='criticalSuccess'?'critical':'damage']({target:target.object,checkContext:attackMessage.flags.pf2e.context,mapIncreases:tier,options:damageOptions,event:{ctrlKey:false,metaKey:false,shiftKey:game.user.settings?.showDamageDialogs??true},createMessage:false});
-    if(!roll)throw Error('攻击已发生，但原生伤害尚未完成。');
+    const nativeDamage=await ownerOperations.run({actor,message,user},{type:'damage',weaponId:damageStrike.item.id,altUsageType:damageStrike.item.altUsageType??'',map:tier,targetUuid:target.uuid,critical:outcome==='criticalSuccess',checkContext:structuredClone(attackMessage.flags.pf2e.context),options:[...damageOptions],transientItems:nativeTransientItems(damageStrike,actor)},async()=>{
+     const roll=await damageStrike[outcome==='criticalSuccess'?'critical':'damage']({target:target.object,checkContext:attackMessage.flags.pf2e.context,mapIncreases:tier,options:damageOptions,event:{ctrlKey:false,metaKey:false,shiftKey:game.user.settings?.showDamageDialogs??true},createMessage:false});return roll?{status:'rolled',nativeRoll:roll}:{status:'cancelled'};
+    });
+    if(nativeDamage.status!=='rolled')throw Error('攻击已发生，但原生伤害尚未完成。');
+    const roll=nativeDamage.nativeRoll??globalThis.CONFIG.Dice.rolls.find(c=>c.name==='DamageRoll').fromData(nativeDamage.roll);
     hits.push({roll,strike,attackMessage,outcome});
    }
-   if(!hits.length)return '两次攻击均未命中。';
+   if(!hits.length)return cancelled?{status:'cancelled',result:'第二次攻击已取消；第一次攻击未命中。'}:'两次攻击均未命中。';
    if(!twin){
     const precise=hits.filter(h=>precisionTotal(h.roll)>0);
     if(precise.length>1){
@@ -173,8 +183,8 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
    data.flags[MODULE_ID]={...data.flags[MODULE_ID],usageGenerated:true,dualStrike:{usageMessageId:message.id,kind:action,map,attacks:hits.map(h=>({messageId:h.attackMessage.id,weaponUuid:h.strike.item.uuid,actorUuid:actor.uuid}))}};
    data.flavor=`<h4 class="action">${twin?'双重攻击':'双重切割'}：合并伤害</h4>${data.flavor??''}`;
    await messageClass().create(withDamageMessageTarget(data,target.uuid));
-   return `已完成两次攻击，${hits.length}次命中；合并伤害只需应用一次，熊支援会随之自动结算。`;
+   return cancelled?{status:'cancelled',result:'第二次攻击已取消；第一次攻击的伤害卡已生成，按原生流程应用。'}:`已完成两次攻击，${hits.length}次命中；合并伤害只需应用一次，熊支援会随之自动结算。`;
   });
  }
- return {resolveAction,executeUsage,maintain,register:()=>()=>{}};
+ return {resolveAction,executeUsage,maintain,register:({Hooks,socket}={})=>{ownerOperations.register({Hooks,socket});return()=>{};}};
 }

@@ -10,7 +10,7 @@ const defaultFrequencyMatch=item=>hasSource(item,SOURCES.breath);
 const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
 export function usageStatusHTML(usage){
- const label={pending:'正在自动结算…',done:'已自动结算',error:'自动结算未完成'}[usage?.status];
+ const label={pending:'正在自动结算…',waiting:'等待后续原生操作',cancelled:'本次操作已取消',done:'已自动结算',error:'自动结算未完成'}[usage?.status];
  if(!label)return '';
  const detail=usage.status==='error'?usage.error:usage.result;
  return `<div class="third-party-usage-result" role="status" style="border-top:1px solid var(--color-border-light-primary);margin-top:8px;padding-top:6px"><strong>${label}</strong>${detail?`：${escapeHTML(detail)}`:''}</div>`;
@@ -31,8 +31,8 @@ export function parseUsageMessage(message,item,{resolveAction=defaultUsageAction
 }
 
 /** Mirror committed frequency values so concurrent stale writes cannot pay for two usages. */
-export function createFrequencyTracker({now=Date.now,ttl=5000,matches=defaultFrequencyMatch}={}){
- const observed=new Map(),receipts=new Map(),consumed=new Set();
+export function createFrequencyTracker({now=Date.now,ttl=Infinity,matches=defaultFrequencyMatch}={}){
+ const observed=new Map(),receipts=new Map(),consumed=new Map();
  return {
   seed(item){if(matches(item))observed.set(item.uuid,item.system.frequency?.value??item.system.frequency?.max);},
   observe(item,options,userId){
@@ -48,14 +48,17 @@ export function createFrequencyTracker({now=Date.now,ttl=5000,matches=defaultFre
   claim(id,{itemUuid,userId}){
    const entry=receipts.get(id);
    if(!entry||entry.receipt.itemUuid!==itemUuid||entry.receipt.userId!==userId||now()-entry.observedAt>ttl)throw Error('技能使用次数回执无效或已经结算。');
-   receipts.delete(id);consumed.add(id);return entry.receipt;
+   receipts.delete(id);consumed.set(id,itemUuid);return entry.receipt;
   },
+  forget(itemUuid){observed.delete(itemUuid);for(const[id,entry]of receipts)if(entry.receipt.itemUuid===itemUuid)receipts.delete(id);for(const[id,uuid]of consumed)if(uuid===itemUuid)consumed.delete(id);},
+  clear(){observed.clear();receipts.clear();consumed.clear();},
+  diagnostic(){return {observed:observed.size,unclaimed:receipts.size,consumed:consumed.size};},
  };
 }
 
 /** Install on every client at ready; only activeGM calls executeUsage. Returns an unregister function. */
 export function registerUsageEvents({game,Hooks,executeUsage,resolveAction=defaultUsageAction,requiresActualUse=()=>false,captureUsage=()=>null,onMessageOutcome=()=>false,observeItemUse=(_item,native)=>native(),tracksFrequency=defaultFrequencyMatch,fromUuid=globalThis.fromUuid,libWrapper=globalThis.libWrapper,canvas=globalThis.canvas,onError=error=>console.error(MODULE_ID,error),now=Date.now}){
- const tracker=createFrequencyTracker({now,matches:tracksFrequency}),pending=new Map(),scopes=new Map(),inFlight=new Set(),processing=new Set(),registrations=[],wrappers=[],listeners=[],capturedElements=new WeakSet();
+ const tracker=createFrequencyTracker({now,matches:tracksFrequency}),pending=new Map(),scopes=new Map(),inFlight=new Set(),processing=new Set(),registrations=[],wrappers=[],listeners=new Map();
  const on=(name,callback)=>registrations.push([name,Hooks.on(name,callback)]);
  const seedActor=actor=>{for(const item of values(actor?.items))tracker.seed(item);};
  const seedScene=scene=>{for(const token of values(scene?.tokens))seedActor(token.actor);};
@@ -65,13 +68,14 @@ export function registerUsageEvents({game,Hooks,executeUsage,resolveAction=defau
  const scopeActive=item=>{const scope=scopes.get(item.uuid);return scope&&(scope.running||scope.expires>now());};
  const selectedTargets=()=>[...new Set(values(game.user.targets).map(t=>t.document?.uuid??t.uuid).filter(uuid=>typeof uuid==='string'))];
  const takeReceipt=(item,actualUse)=>{
-  const key=item.uuid+':'+game.user.id,receipts=(pending.get(key)??[]).filter(r=>now()-r.createdAt<=5000);
+  const key=item.uuid+':'+game.user.id,receipts=pending.get(key)??[];
   const receipt=actualUse?receipts.shift()??null:null;
   if(receipts.length)pending.set(key,receipts);else pending.delete(key);
   return receipt;
  };
  const randomId=()=>globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.randomUUID();
  on('createItem',item=>tracker.seed(item));
+ on('deleteItem',item=>{tracker.forget(item.uuid);scopes.delete(item.uuid);for(const key of pending.keys())if(key.startsWith(item.uuid+':'))pending.delete(key);});
  // Actor imports and token actors arrive with embedded items already present.
  on('createActor',seedActor);
  on('createToken',token=>seedActor(token.actor));
@@ -101,21 +105,23 @@ export function registerUsageEvents({game,Hooks,executeUsage,resolveAction=defau
  });
 
  // Original native sheet Use buttons call a private PF2e function; capture its actual DOM boundary.
+ const releaseNativeUse=app=>{const previous=listeners.get(app);if(previous){previous.element.removeEventListener('click',previous.listener,true);listeners.delete(app);}};
  const captureNativeUse=(app,html)=>{
   const element=html?.[0]??html,actor=app.actor??app.document;
-  if(!element?.addEventListener||!actor?.items||capturedElements.has(element))return;
-  capturedElements.add(element);
+  if(!element?.addEventListener||!actor?.items||listeners.get(app)?.element===element)return;
+  releaseNativeUse(app);
   const listener=event=>{
    const button=event.target?.closest?.('[data-action="use-action"],button.use-action');
    const id=button?.closest?.('[data-item-id]')?.dataset.itemId;
    const item=actor.items.get?.(id);if(!item||!resolveAction(item))return;
    scopes.set(item.uuid,{expires:now()+5000,running:false,targetUuids:selectedTargets()});
   };
-  element.addEventListener('click',listener,true);listeners.push([element,listener]);
+  element.addEventListener('click',listener,true);listeners.set(app,{element,listener});
  };
  on('renderActorSheetPF2e',captureNativeUse);
  on('renderCharacterSheetPF2e',captureNativeUse);
  on('renderActorSheetV2',captureNativeUse);
+ for(const hook of ['closeApplication','closeApplicationV2','closeActorSheetPF2e','closeCharacterSheetPF2e','closeActorSheetV2'])on(hook,releaseNativeUse);
 
  if(libWrapper){
   const wrap=(path,callback,type='WRAPPER')=>{libWrapper.register(MODULE_ID,path,callback,type);wrappers.push(path)};
@@ -184,21 +190,24 @@ export function registerUsageEvents({game,Hooks,executeUsage,resolveAction=defau
    const user=game.users.get(event.userId);
    if(!user||(creatingUserId&&event.userId!==creatingUserId)||!item.actor.testUserPermission(user,'OWNER'))return;
    if(game.user?.id!==game.users.activeGM?.id||message.flags?.[MODULE_ID]?.usage)return;
-   await message.update({[`flags.${MODULE_ID}.usage`]:{status:'pending',action:event.action,userId:user.id,processedBy:game.user.id}});
-   const frequencyReceipt=event.frequencyReceiptId?tracker.claim(event.frequencyReceiptId,{itemUuid:item.uuid,userId:user.id}):null;
+   const frequencyReceipt=event.frequencyReceiptId?tracker.claim(event.frequencyReceiptId,{itemUuid:item.uuid,userId:user.id,messageId:message.id}):null;
+   await message.update({[`flags.${MODULE_ID}.usage`]:{status:'pending',action:event.action,userId:user.id,processedBy:game.user.id,frequencyReceipt}});
+   if(game.user?.id!==game.users.activeGM?.id)throw Error('主GM已改变；本次付款已记录，请由GM继续处理。');
    processing.add(item.uuid);
    try{
     const result=await executeUsage({actor:item.actor,item,message,user,action:event.action,frequencyReceipt});
-    await message.update({[`flags.${MODULE_ID}.usage`]:{status:'done',action:event.action,userId:user.id,processedBy:game.user.id,result:typeof result==='string'?result:undefined}});
+    const status=['waiting','cancelled','done'].includes(result?.status)?result.status:'done',detail=typeof result==='string'?result:typeof result?.result==='string'?result.result:undefined;
+    await message.update({[`flags.${MODULE_ID}.usage`]:{status,action:event.action,userId:user.id,processedBy:game.user.id,frequencyReceipt,result:detail}});
    }finally{processing.delete(item.uuid)}
   }catch(error){
-   if(event)await message.update({[`flags.${MODULE_ID}.usage`]:{status:'error',action:event.action,error:error.message,processedBy:game.user.id}}).catch(onError);
+   if(event)await message.update({[`flags.${MODULE_ID}.usage`]:{...message.flags?.[MODULE_ID]?.usage,status:'error',action:event.action,error:error.message,processedBy:game.user.id}}).catch(onError);
    onError(error);
   }finally{inFlight.delete(message.id)}
  });
  return ()=>{
   for(const[name,id]of registrations)Hooks.off(name,id);
   for(const path of wrappers)libWrapper.unregister(MODULE_ID,path);
-  for(const[element,listener]of listeners)element.removeEventListener('click',listener,true);
+  for(const app of listeners.keys())releaseNativeUse(app);
+  tracker.clear();pending.clear();scopes.clear();
  };
 }

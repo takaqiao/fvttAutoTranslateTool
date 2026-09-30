@@ -7,6 +7,7 @@ import {preserveDamagePartForMerge,preserveMergedDamageBypass} from './native-da
 import {isCuttingWeapon} from './rune-transfer.mjs';
 import {isActualUseMessage} from './usage-events.mjs';
 import {createAttackSequence} from './activity-attack-sequence.mjs';
+import {createNativeOwnerOperations,nativeTransientItems} from './native-owner-operations.mjs';
 export {preserveDamagePartForMerge} from './native-damage-components.mjs';
 
 export const SPELL_COMBINATION_SOURCES=Object.freeze({
@@ -75,8 +76,10 @@ export function scaleSpellDamage(roll,multiplier,{critical=false}={}){
 }
 
 /** Source based activities; normal player choices finish before any resource or die is spent. */
-export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose,onError=()=>{},afterAttack=async()=>{},nativeCasts=getNativeCastEvents({game,fromUuid})}={}){
+export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose,onError=()=>{},afterAttack=async()=>{},nativeCasts=getNativeCastEvents({game,fromUuid}),nativeOperations}={}){
  const queue=new SerialActions(),damageContexts=new WeakMap();
+ const ownerOperations=nativeOperations??createNativeOwnerOperations({game,fromUuid,scope:'spell-combination'});
+ const damageFromResult=result=>result.nativeRoll??globalThis.CONFIG.Dice.rolls.find(c=>c.name==='DamageRoll').fromData(result.roll);
  const requireGM=()=>{if(!isActiveGM(game))throw Error('主 GM 已交接；旧客户端停止组合活动，已发生的消耗与攻击不会重试。');};
  const resolveAction=item=>{
   const kind=actionKind(item);if(kind)return `spell-combination:${kind}`;
@@ -151,7 +154,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   return {...choice,spell:selected};
  }
  async function record(message,state,extra={}){requireGM();await message.update({[`flags.${MODULE_ID}.spellCombinationUse`]:{...own(message).spellCombinationUse,state,...extra}});requireGM();}
- async function attack(actor,strike,target,map,message,index,kind,sequence){
+ async function attack(actor,strike,target,map,message,index,kind,sequence,user,beforeRoll){
   requireGM();
   let created;
   if(kind!=='combination'){
@@ -162,6 +165,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   const options=new Set([`action:${kind==='combination'?'overwhelming-combination':kind==='swipe'?'spell-swipe':'spellstrike'}`,`${MODULE_ID}:spell-combination:${message.id}`,...frame.attackOptions]);
   if(kind==='combination')options.add('overwhelming-combination');else{options.add('arcane');options.add('magical');options.add('item:trait:magical');}
   if(kind==='swipe'&&strike.item.system.traits.value.includes('sweep'))options.add('sweep-bonus');
+  const nativeResult=await ownerOperations.run({actor,message,user},{type:'attack',weaponId:strike.item.id,altUsageType:strike.item.altUsageType??'',map,targetUuid:target.uuid,options:[...options],transientItems:nativeTransientItems(strike,actor),flags:{spellCombinationAttack:{activityMessageId:message.id,index,kind}}},async()=>{
   const check=await strike.variants[map].roll({target:target.object,options,event:skipEvent(game,'attack'),createMessage:false,callback:async(_roll,_outcome,raw)=>{
    requireGM();
    const data=raw.toObject();delete data._id;
@@ -170,8 +174,12 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
    created=await Message().create(data);
    requireGM();
   }});
+  return !check&&!created?{status:'cancelled'}:created?{status:'rolled',messageId:created.id}:{status:'uncertain'};
+  },beforeRoll);
   requireGM();
-  if(!check||!created)throw Error('组合活动的原生攻击未完成，已发生的攻击不会重试。');
+  if(nativeResult.status==='cancelled')throw Object.assign(Error('本次原生攻击已取消。'),{nativeCancelled:true});
+  created=game.messages.get(nativeResult.messageId);
+  if(!created)throw Error('组合活动的原生攻击未完成，已发生的攻击不会重试。');
   frame.capture(created);
   await afterAttack(created);
   requireGM();
@@ -179,16 +187,19 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   sequence.record(frame,outcome);
   await frame.consume();
   requireGM();
-  return {strike,target,map,message:created,outcome,frame};
+  return {strike,target,map,message:created,outcome,frame,activityMessage:message,user};
  }
  async function weaponDamage(attack){
   requireGM();
   const {strike,target,map,message,outcome}=attack;if(!hit(outcome))return null;
   const {strike:damageStrike,options:sequenceOptions}=attack.frame.damage(strike);
   const options=new Set([`${MODULE_ID}:bear-attack:${message.id}`,...sequenceOptions]);
-  const result=await damageStrike[outcome==='criticalSuccess'?'critical':'damage']({target:target.object,checkContext:message.flags.pf2e.context,mapIncreases:map,options,event:skipEvent(game,'damage'),createMessage:false});
+  const nativeResult=await ownerOperations.run({actor:strike.item.actor,message:attack.activityMessage,user:attack.user},{type:'damage',weaponId:damageStrike.item.id,altUsageType:damageStrike.item.altUsageType??'',map,targetUuid:target.uuid,critical:outcome==='criticalSuccess',checkContext:clone(message.flags.pf2e.context),options:[...options],transientItems:nativeTransientItems(damageStrike,strike.item.actor)},async()=>{
+   const roll=await damageStrike[outcome==='criticalSuccess'?'critical':'damage']({target:target.object,checkContext:message.flags.pf2e.context,mapIncreases:map,options,event:skipEvent(game,'damage'),createMessage:false});return roll?{status:'rolled',nativeRoll:roll}:{status:'cancelled'};
+  });
   requireGM();
-  if(!result)throw Error('攻击已发生，但原生武器伤害尚未完成。');
+  if(nativeResult.status!=='rolled')throw Error('攻击已发生，但原生武器伤害尚未完成。');
+  const result=damageFromResult(nativeResult);
   damageContexts.set(result,{...clone(message.flags.pf2e.context),sourceType:'attack',domains:['damage','strike-damage'],options:[...attack.frame.damageOptions([...(message.flags.pf2e.context.options??[]),...strike.item.getRollOptions?.('item')??[],...strike.item.actor.getRollOptions?.(['damage','strike-damage'])??[],...options])]});
   return result;
  }
@@ -223,12 +234,15 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   if(!result||!['criticalFailure','failure','success','criticalSuccess'].includes(outcome))throw Error('原生豁免尚未完成，不会重复投骰。');
   return outcome;
  }
- async function spellDamage(spell,target,outcome,{saveOutcome,shared}={}){
+ async function spellDamage(spell,target,outcome,{saveOutcome,shared,activityMessage,user}={}){
   requireGM();
-  const native=shared?.native??await spell.getDamage({target,skipDialog:true});if(!native)return null;
+  const native=shared?.native??await ownerOperations.run({actor:spell.actor,message:activityMessage,user},{type:'spell-damage',spellId:spell.id,rank:spell.rank,overlayIds:[...spell.appliedOverlays?.values?.()??[]],targetUuid:target.uuid},async()=>{
+   const data=await spell.getDamage({target,skipDialog:true});if(!data)return {status:'cancelled'};
+   const roll=data.template.damage.roll;if(!roll)throw Error('该法术没有可识别的原生伤害骰。');
+   return {status:'rolled',nativeRoll:await roll.evaluate(),context:data.context};
+  });if(native.status==='cancelled')return null;
   requireGM();
-  let damage=native.template.damage.roll;if(!damage)throw Error('该法术没有可识别的原生伤害骰。');
-  damage=shared?.roll??await damage.evaluate();if(shared){shared.native=native;shared.roll=damage;}
+  let damage=shared?.roll??damageFromResult(native);if(shared){shared.native=native;shared.roll=damage;}
   requireGM();
   const multiplier=saveOutcome?{criticalSuccess:0,success:0.5,failure:1,criticalFailure:2}[saveOutcome]:outcome==='criticalSuccess'?2:1;
   if(multiplier===0)return null;
@@ -297,20 +311,23 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
    const current=strikes(actor).find(s=>strikeKey(s)===key);
    if(!current||!(kind==='combination'?allowedCombinationWeapon(current):held(current)||unarmed(current.item)))throw Error('所选武器的持用状态已改变，尚未攻击。');
    for(const target of targets)requireSceneTarget(actor,origin,target);
-   if(choice){payment=await nativeCasts.payForActivity({actor,item:choice.spell,message,user,rank:choice.rank,slotId:choice.slotId});}
-   requireGM();
    await record(message,'started',{kind,weaponUuid:current.item.uuid,spellUuid:choice?.spell.uuid??null});
+   const commitAttack=choice?async()=>{
+    assertUse(actor,item,message,user,action);for(const target of targets)requireSceneTarget(actor,origin,target);
+    payment=await nativeCasts.payForActivity({actor,item:choice.spell,message,user,rank:choice.rank,slotId:choice.slotId});requireGM();
+    await actor.update({[`flags.${MODULE_ID}.spellstrike`]:{charged:false,messageId:message.id}},{render:false});requireGM();
+   }:undefined;
    try{
-    requireGM();if(choice)await actor.update({[`flags.${MODULE_ID}.spellstrike`]:{charged:false,messageId:message.id}});requireGM();
+    requireGM();
     const attacks=[],sequence=createAttackSequence({actor});
     if(kind==='combination'){
      for(const [index,selected]of (order==='fist'?[second,current]:[current,second]).entries()){
       requireGM();
       const strike=strikes(actor).find(s=>strikeKey(s)===strikeKey(selected));
       if(!strike||!(fist(strike)||allowedCombinationWeapon(strike)))throw Error('连击的下一把武器已不可用。');
-      requireSceneTarget(actor,origin,targets[0]);attacks.push(await attack(actor,strike,targets[0],Math.min(map+index,2),message,index,kind,sequence));
+      requireSceneTarget(actor,origin,targets[0]);attacks.push(await attack(actor,strike,targets[0],Math.min(map+index,2),message,index,kind,sequence,user));
      }
-    }else for(const [index,target]of targets.entries()){requireGM();requireSceneTarget(actor,origin,target);attacks.push(await attack(actor,current,target,map,message,index,kind,sequence));}
+    }else for(const [index,target]of targets.entries()){requireGM();requireSceneTarget(actor,origin,target);attacks.push(await attack(actor,current,target,map,message,index,kind,sequence,user,index===0?commitAttack:undefined));}
     const receivesSpell=attack=>choice&&(!spellTarget||attack.target.uuid===spellTarget)&&(kind==='swipe'&&!spellTarget?hit(attack.outcome):choice.spell.isAttack||choice.spell.system.traits.value.includes('attack')?hit(attack.outcome):attack.outcome!=='criticalFailure');
     const eligible=attacks.filter(receivesSpell),spellCard=eligible.length?await publishSpell({actor,user,message,choice,payment,targets:eligible.map(a=>a.target),kind}):null;
     const sharedSpellDamage=choice?.spell.system.defense?.save&&!choice.spell.isAttack&&!choice.spell.system.traits.value.includes('attack')?{}:null;
@@ -322,7 +339,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
      if(spellAttack){
       const spell=choice.spell,defense=spell.system.defense?.save;
       const outcome=defense?await save(spell,target,spellAttack,spellCard):null;
-      const damage=await spellDamage(spell,target,spellAttack.outcome,{saveOutcome:defense?.basic?outcome:null,shared:sharedSpellDamage});if(damage)parts.push({roll:damage,item:spell});
+      const damage=await spellDamage(spell,target,spellAttack.outcome,{saveOutcome:defense?.basic?outcome:null,shared:sharedSpellDamage,activityMessage:message,user});if(damage)parts.push({roll:damage,item:spell});
       const extra=spellAttack.outcome==='criticalSuccess'&&!defense?criticalSpellPersistentFormula(spell):null;
       if(extra){requireGM();const D=globalThis.CONFIG.Dice.rolls.find(c=>c.name==='DamageRoll'),roll=await new D(extra).evaluate();requireGM();damageContexts.set(roll,damageContexts.get(damage));parts.push({roll,item:spell});}
      }
@@ -330,7 +347,14 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
     }
     requireGM();if(choice&&!eligible.length)await nativeCasts.finishActivityWithoutSpell({actor,message,user});
     await record(message,'done');return '已完成攻击、法术支付与合并伤害；每个目标按原生伤害卡应用一次。';
-   }catch(error){if(isActiveGM(game))await record(message,'error',{error:String(error.message??error)});throw error;}
+   }catch(error){
+    if(error.nativeCancelled&&isActiveGM(game)){
+     await record(message,'cancelled',{error:undefined});
+     const rolled=values(game.messages).some(card=>own(card).spellCombinationAttack?.activityMessageId===message.id);
+     return {status:'cancelled',result:rolled?'后续攻击已取消；已经投出的攻击和本次支付保留，可沿原生攻击卡处理。':'本次攻击已取消，未支付法术或消耗充能。'};
+    }
+    if(isActiveGM(game))await record(message,'error',{error:String(error.message??error)});throw error;
+   }
   });
  }
  async function maintain(actor){
@@ -338,6 +362,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   await actor.createEmbeddedDocuments('Item',[{type:'action',name:'法术打击充能 Recharge Spellstrike',img:'systems/pf2e/icons/actions/OneAction.webp',system:{actionType:{value:'action'},actions:{value:1},category:'interaction',description:{value:'<p>以一个具有专注特征的动作，为你的法术打击充能。</p>'},traits:{value:['concentrate']},rules:[]},flags:{[MODULE_ID]:{spellstrikeRecharge:true}}}]);
  }
  function register({Hooks,libWrapper,socket}){
+  ownerOperations.register({Hooks,socket});
   const unregister=nativeCasts.register({libWrapper,socket});
   const id=Hooks.on('pf2e.restForTheNight',actor=>{
    if(!actor?.testUserPermission(game.user,'OWNER')||!hasSpellstrike(actor))return;
