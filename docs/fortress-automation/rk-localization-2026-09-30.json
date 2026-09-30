@@ -87,19 +87,47 @@
   "candidateFiles": [
     {
       "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-display.mjs",
-      "sha256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a"
+      "sha256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a",
+      "sha256Meaning": "working raw bytes; not claimed equal to ZIP for CRLF files",
+      "workingSha256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a",
+      "gitBlobAndZipSha256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a",
+      "actualServedSha256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a",
+      "byteRelation": "exact-bytes",
+      "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+      "version": "0.9.20"
     },
     {
       "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-workbench.mjs",
-      "sha256": "56705ab8cfa25e4445d7c32c4b0a0043491be98b16e77b840b43f3732ab4683e"
+      "sha256": "56705ab8cfa25e4445d7c32c4b0a0043491be98b16e77b840b43f3732ab4683e",
+      "sha256Meaning": "working raw bytes; not claimed equal to ZIP for CRLF files",
+      "workingSha256": "56705ab8cfa25e4445d7c32c4b0a0043491be98b16e77b840b43f3732ab4683e",
+      "gitBlobAndZipSha256": "958cb2fde842db98b2ad0bda655ad440e16e33039c8618cd008ace97c359c2de",
+      "actualServedSha256": "958cb2fde842db98b2ad0bda655ad440e16e33039c8618cd008ace97c359c2de",
+      "byteRelation": "CRLF-to-LF-only",
+      "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+      "version": "0.9.20"
     },
     {
       "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-automatic.mjs",
-      "sha256": "f8c28712650524b19b8cb6680d62668abc8ea1dd81f9981e939474bd6b0a7da8"
+      "sha256": "f8c28712650524b19b8cb6680d62668abc8ea1dd81f9981e939474bd6b0a7da8",
+      "sha256Meaning": "working raw bytes; not claimed equal to ZIP for CRLF files",
+      "workingSha256": "f8c28712650524b19b8cb6680d62668abc8ea1dd81f9981e939474bd6b0a7da8",
+      "gitBlobAndZipSha256": "69066e2fc3c0548986162d66365bc4d356003f344fc6d33a24bc4cf942be4327",
+      "actualServedSha256": "69066e2fc3c0548986162d66365bc4d356003f344fc6d33a24bc4cf942be4327",
+      "byteRelation": "CRLF-to-LF-only",
+      "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+      "version": "0.9.20"
     },
     {
       "path": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-automation.mjs",
-      "sha256": "5160c138ffbb4e7449c8132ef28a81aca4f465f3cdf9f1e9b5ed00f1388edb35"
+      "sha256": "5160c138ffbb4e7449c8132ef28a81aca4f465f3cdf9f1e9b5ed00f1388edb35",
+      "sha256Meaning": "working raw bytes; not claimed equal to ZIP for CRLF files",
+      "workingSha256": "5160c138ffbb4e7449c8132ef28a81aca4f465f3cdf9f1e9b5ed00f1388edb35",
+      "gitBlobAndZipSha256": "633d68e9aa1410f9574467ae2c0ceee70d9d23b1c496fe34c80d3e90b73e62f5",
+      "actualServedSha256": "633d68e9aa1410f9574467ae2c0ceee70d9d23b1c496fe34c80d3e90b73e62f5",
+      "byteRelation": "CRLF-to-LF-only",
+      "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+      "version": "0.9.20"
     }
   ],
   "countConvention": "57独立值/明确动态生产槽记录（WB42+自有15）；重复consumer合并入同一记录，未声称57个pack字段。7标准技能标签及用户文档名称分别作为动态生产槽族记录，不冒充固定可穷举的世界文档覆盖。",
@@ -118,7 +146,17 @@
     "unverifiedLegacyName": 1,
     "nativePartialWithinPending": 1,
     "nativeNotApplicable": 1,
-    "nativeUnverifiedLegacy": 1
+    "nativeUnverifiedLegacy": 1,
+    "nativeHistoricalAdditional": 1,
+    "nativeHistoricalAndPublicUnion": 26,
+    "nativePublicBranchChange": {
+      "added": [
+        "WB30"
+      ],
+      "notHitInPublicButHistorical": [
+        "WB32"
+      ]
+    }
   },
   "verification": {
     "red": "新adapter行为首次5个测试因模块不存在失败；真实宏接入后原生坏引号HTML暴露解析失败，定位后保留原tag并修文本tokenizer。",
@@ -130,16 +168,17 @@
       "coverage": "有/无目标真实宏；英文/未知producer回退；原生通知/feat UUID/条件mod/tooltip复用；骰点/候选/flags/秘骰GM权限/原HTML标签与数字对照。59是测试结果而非字段覆盖率。"
     },
     "native": {
-      "status": "有限范围显示槽已验收；未命中分支继续未验证",
-      "scope": "25/57记录完整命中；30个可验槽待触发（含1个部分命中），1个译文不适用，1个遗留名称英文源未核。不是全量原生UI通过。",
-      "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
-      "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
-      "attemptId": 1790743642388,
+      "status": "本次真实公开ZIP clean有限范围原生显示槽验收完成",
+      "scope": "公开ZIP25/57当前槽实命中；30个待触发（含1个breakdown部分证据），1个译文N/A，1个遗留英文源未核。历史成功WB32与本次大失败WB30分开，历史+本次union26不冒充本次26。",
+      "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+      "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+      "attemptId": 1790748695576,
+      "closedAt": "2026-09-30T06:23:44.640Z",
       "runtime": {
         "core": "14.368",
         "pf2e": "8.5.1",
         "world": "ujx5r8oipw7ercdr",
-        "module": "0.9.19",
+        "module": "0.9.20",
         "activeGM": "FortressQAGM0001",
         "users": [
           {
@@ -191,60 +230,44 @@
           }
         ]
       },
-      "translationEnvironment": {
-        "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743559931.json",
-        "reportSha256": "d61559d6414e79fe458d32ccaa4e3d3b0b9efebbb4b10149eac611dc8c886a9b",
-        "commandId": "cn-runtime",
-        "translationModules": [
-          {
-            "id": "babele",
-            "active": true,
-            "version": "2.9.1"
-          },
-          {
-            "id": "pf2_cn",
-            "active": true,
-            "version": "2.5.2.1"
-          },
-          {
-            "id": "pf2e_compendium_chn",
-            "active": true,
-            "version": "3.1.2"
-          },
-          {
-            "id": "pf2e-compendium-extra-cn",
-            "active": true,
-            "version": "1.0.53"
-          }
-        ],
-        "language": "cn"
+      "releaseVersion": "0.9.20",
+      "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+      "cleanReport": {
+        "commands": 13,
+        "allOk": true,
+        "pageErrors": 0
       },
       "successfulCommands": [
-        "rk-cn-normal-no-target",
-        "rk-cn-normal-target",
-        "rk-cn-no-target",
-        "rk-cn-player-privacy"
+        "package-rk-cn-normal-no-target",
+        "package-rk-cn-normal-target",
+        "package-rk-cn-assurance-no-target",
+        "package-rk-player-actual-secret-privacy"
       ],
+      "translationEnvironment": {
+        "language": "cn",
+        "nativeTableHeading": "熟练",
+        "scope": "actual language from each four successful macro commands; dictionary branch not separately captured"
+      },
       "modeAssertions": [
         {
-          "commandId": "rk-cn-normal-no-target",
+          "commandId": "package-rk-cn-normal-no-target",
           "assurance": false,
           "target": false,
-          "die": 11,
+          "die": 15,
           "candidates": 7,
           "rollFormula": "1d20",
           "diceCount": 1
         },
         {
-          "commandId": "rk-cn-normal-target",
+          "commandId": "package-rk-cn-normal-target",
           "assurance": false,
           "target": true,
-          "die": 12,
+          "die": 2,
           "candidates": 1,
           "rollFormula": "1d20",
           "diceCount": 1,
           "primarySkill": "社群",
-          "primaryTotal": 25,
+          "primaryTotal": 15,
           "dcColumns": [
             20,
             22,
@@ -252,14 +275,14 @@
             30
           ],
           "degrees": [
-            "成功",
-            "成功",
-            "成功",
-            "失败"
+            "失败",
+            "失败",
+            "大失败",
+            "大失败"
           ]
         },
         {
-          "commandId": "rk-cn-no-target",
+          "commandId": "package-rk-cn-assurance-no-target",
           "assurance": true,
           "target": false,
           "die": null,
@@ -267,94 +290,370 @@
           "rollFormula": "10",
           "diceCount": 0,
           "total": 19,
-          "nativeProficiency": 9,
-          "note": "rk-cn-no-target实际为固定驾轻就熟，不能按名字归入普通检定"
+          "nativeProficiency": 9
         }
       ],
       "privacy": {
-        "commandId": "rk-cn-player-privacy",
-        "evidenceType": "native ChatMessage.renderHTML actual rendered player text",
+        "commandId": "package-rk-player-actual-secret-privacy",
+        "evidenceType": "public ZIP native ChatMessage.renderHTML actual player text",
         "userId": "IobjIOBGOEnjxXyE",
         "isGM": false,
         "cards": [
           {
-            "id": "24Oo3zJXUHm6STVX",
+            "id": "UuH0J3xkBCaCBJEu",
             "isContentVisible": false,
-            "text": "\n    \n        Native followups QA Player\n        \n            7分钟 ago\n        \n\n\n        Native followups QA Player privately rolled some dice\n    \n    \n        \n    \n        ???\n        \n        ?\n    \n\n\n    \n"
+            "text": "\n    \n        Native followups QA Player\n        \n            1分钟 ago\n        \n\n\n        Native followups QA Player privately rolled some dice\n    \n    \n        \n    \n        ???\n        \n        ?\n    \n\n\n    \n"
           },
           {
-            "id": "uptXTyJMG31sVwcG",
+            "id": "gBLJ8xOrrkjiMN1r",
             "isContentVisible": false,
-            "text": "\n    \n        Native followups QA Player\n        \n            34秒 ago\n        \n\n\n        Native followups QA Player privately rolled some dice\n    \n    \n        \n    \n        ???\n        \n        ?\n    \n\n\n    \n"
+            "text": "\n    \n        Native followups QA Player\n        \n            1分钟 ago\n        \n\n\n        Native followups QA Player privately rolled some dice\n    \n    \n        \n    \n        ???\n        \n        ?\n    \n\n\n    \n"
           },
           {
-            "id": "fLUlmthDjtL7UrnL",
+            "id": "zUYC6rxmpbjsPmuO",
             "isContentVisible": false,
-            "text": "\n    \n        Native followups QA Player\n        \n            8分钟 ago\n        \n\n\n        Native followups QA Player privately rolled some dice\n    \n    \n        \n    \n        ???\n        \n        ?\n    \n\n\n    \n"
+            "text": "\n    \n        Native followups QA Player\n        \n            1分钟 ago\n        \n\n\n        Native followups QA Player privately rolled some dice\n    \n    \n        \n    \n        ???\n        \n        ?\n    \n\n\n    \n"
           }
         ],
         "result": "三卡isContentVisible=false；实际文本只有privately rolled some dice/???/?，没有目标真名/DC/degree/结果/候选技能",
-        "outsideOwnedTranslationScope": "privately rolled some dice、ago是Core秘骰占位UI，非RK adapter生产槽；证明隐私，不声称外部英文已汉化"
+        "outsideOwnedTranslationScope": "privately rolled some dice、ago为Core秘骰占位生产槽，未声称外部英文已汉化"
       },
-      "harnessFailures": [
-        {
-          "commandId": "rk-cn-setup",
-          "ok": false,
-          "category": "QA harness fixture identity mismatch",
-          "error": "page.evaluate: Error: Missing cloned prior QA fixtures\n    at eval (eval at <anonymous> (eval at evaluate (:311:30)), <anonymous>:5:37)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:135)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-harness.mjs:23:199",
-          "resolution": "rk-clone-identities + rk-cn-setup-corrected后才执行RK，不计产品成功或回归",
-          "productRollAttempt": false
-        }
-      ],
+      "harnessFailures": [],
       "pageErrors": [],
       "byteBinding": {
-        "sourceManifestPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\test-sources.json",
-        "sourceManifestSha256": "89764226a2fe8bafa08c47611d73e44c5a74cc037b96fe7eed753e89519f70e7",
+        "manifestPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\release-tools\\release\\release-manifest.json",
+        "manifestSha256": "ad6581c1974b459c22adc4b6ea3258cefa425b9f77779874ec8ebfc992c0abd1",
+        "evidenceVerificationPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\release-tools\\release\\evidence-verification.json",
+        "evidenceVerificationSha256": "b152c8f0c02db42d79952259650300debbc852f537bfb03726511dba03404659",
+        "publicVerificationPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\release-tools\\release\\public-download-verification.json",
+        "publicVerificationSha256": "45d22ecfc2f3e61de414937044af38422583c9b7de93ac69f8dec118dac8958a",
+        "publicZipSHA256": "14a7029fe75849471336835d681d1202a073e3ce326f7a81b844a787570f79d7",
+        "servedEvidence": [
+          {
+            "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+            "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+            "commandId": "package-gm-actual-served-151-bytes",
+            "client": "gm",
+            "version": "0.9.20",
+            "commit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+            "runtimeFiles": 151,
+            "verifiedAll151GitBlobAndZipSha256": true,
+            "actualFilesMapSha256": "c2d8277522133aec3dd273c38d2503b9b190b74fcce636439057b8333a825526"
+          },
+          {
+            "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+            "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+            "commandId": "public-release-actual-served-151-bytes-after-zip-install",
+            "client": "gm",
+            "version": "0.9.20",
+            "commit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+            "runtimeFiles": 151,
+            "verifiedAll151GitBlobAndZipSha256": true,
+            "actualFilesMapSha256": "560d86cee548b750fe577ec049b0ac07e357851e7383ff649dff61d867497603"
+          }
+        ],
+        "verified151ServedFilesEqualGitBlobAndZip": true,
+        "rkFourWorkingVersusPackagedRelations": [
+          {
+            "name": "scripts/knowledge-display.mjs",
+            "workingSHA256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a",
+            "gitBlobAndZipSHA256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a",
+            "actualServedSHA256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a",
+            "relation": "exact-bytes"
+          },
+          {
+            "name": "scripts/knowledge-workbench.mjs",
+            "workingSHA256": "56705ab8cfa25e4445d7c32c4b0a0043491be98b16e77b840b43f3732ab4683e",
+            "gitBlobAndZipSHA256": "958cb2fde842db98b2ad0bda655ad440e16e33039c8618cd008ace97c359c2de",
+            "actualServedSHA256": "958cb2fde842db98b2ad0bda655ad440e16e33039c8618cd008ace97c359c2de",
+            "relation": "CRLF-to-LF-only"
+          },
+          {
+            "name": "scripts/knowledge-automatic.mjs",
+            "workingSHA256": "f8c28712650524b19b8cb6680d62668abc8ea1dd81f9981e939474bd6b0a7da8",
+            "gitBlobAndZipSHA256": "69066e2fc3c0548986162d66365bc4d356003f344fc6d33a24bc4cf942be4327",
+            "actualServedSHA256": "69066e2fc3c0548986162d66365bc4d356003f344fc6d33a24bc4cf942be4327",
+            "relation": "CRLF-to-LF-only"
+          },
+          {
+            "name": "scripts/knowledge-automation.mjs",
+            "workingSHA256": "5160c138ffbb4e7449c8132ef28a81aca4f465f3cdf9f1e9b5ed00f1388edb35",
+            "gitBlobAndZipSHA256": "633d68e9aa1410f9574467ae2c0ceee70d9d23b1c496fe34c80d3e90b73e62f5",
+            "actualServedSHA256": "633d68e9aa1410f9574467ae2c0ceee70d9d23b1c496fe34c80d3e90b73e62f5",
+            "relation": "CRLF-to-LF-only"
+          }
+        ],
+        "unchangedEntryPointsRelation": {
+          "name": "scripts/knowledge-entrypoints.mjs",
+          "workingSHA256": "500ee39852eb201d49c246f4d0f5187dbb195cc4fa8200b6e51ca35c91977d07",
+          "gitBlobAndZipSHA256": "59bc5ba066c3df3203e7e46f7dba54e07cfb4f77c3e6add190298d47825583af",
+          "relation": "CRLF-to-LF-only"
+        },
+        "originalMacroAndFixtureUnchanged": true,
         "nativeMacroFingerprint": {
           "uuid": "Compendium.xdy-pf2e-workbench.asymonous-benefactor-macros-internal.Macro.xcFr7PWwG5OVALNJ",
           "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
           "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3"
         },
-        "originalMacroAndFixtureUnchanged": true,
-        "runtimeMatch": [
-          {
-            "candidatePath": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-display.mjs",
-            "qaPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\runtime\\Data\\modules\\pf2e-third-party-automation\\scripts\\knowledge-display.mjs",
-            "candidateSha256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a",
-            "qaSha256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a",
-            "lfSha256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a",
-            "identicalRawBytes": true
-          },
-          {
-            "candidatePath": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-workbench.mjs",
-            "qaPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\runtime\\Data\\modules\\pf2e-third-party-automation\\scripts\\knowledge-workbench.mjs",
-            "candidateSha256": "56705ab8cfa25e4445d7c32c4b0a0043491be98b16e77b840b43f3732ab4683e",
-            "qaSha256": "56705ab8cfa25e4445d7c32c4b0a0043491be98b16e77b840b43f3732ab4683e",
-            "lfSha256": "958cb2fde842db98b2ad0bda655ad440e16e33039c8618cd008ace97c359c2de",
-            "identicalRawBytes": true
-          },
-          {
-            "candidatePath": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-automatic.mjs",
-            "qaPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\runtime\\Data\\modules\\pf2e-third-party-automation\\scripts\\knowledge-automatic.mjs",
-            "candidateSha256": "f8c28712650524b19b8cb6680d62668abc8ea1dd81f9981e939474bd6b0a7da8",
-            "qaSha256": "f8c28712650524b19b8cb6680d62668abc8ea1dd81f9981e939474bd6b0a7da8",
-            "lfSha256": "69066e2fc3c0548986162d66365bc4d356003f344fc6d33a24bc4cf942be4327",
-            "identicalRawBytes": true
-          },
-          {
-            "candidatePath": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-automation.mjs",
-            "qaPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\runtime\\Data\\modules\\pf2e-third-party-automation\\scripts\\knowledge-automation.mjs",
-            "candidateSha256": "5160c138ffbb4e7449c8132ef28a81aca4f465f3cdf9f1e9b5ed00f1388edb35",
-            "qaSha256": "5160c138ffbb4e7449c8132ef28a81aca4f465f3cdf9f1e9b5ed00f1388edb35",
-            "lfSha256": "633d68e9aa1410f9574467ae2c0ceee70d9d23b1c496fe34c80d3e90b73e62f5",
-            "identicalRawBytes": true
-          }
-        ],
-        "reportContainsRuntimeFileSourceSHA": false,
-        "limitation": "历史报告只记runtime版本，未存浏览器加载4脚本的sourceSHA。当前QA物理副本与候选rawSHA逐字相同；父代理确认QA后RK字节未改。保留时间绑定证据边界，最终发布需Gitblob/候选manifest覆盖，不能冒称当时浏览器抓取源字节。"
+        "reportContainsActualServedRuntimeFileSHA": true,
+        "limitation": "发布命令已实际fetch并核151 served字节等Gitblob/ZIP；工作区3个本轮RK脚本加既有entrypoints为CRLF→LF-only，display为exact-bytes，不能说所有working raw与public相同。此文档后续变化不改已发布运行包。"
       }
     },
-    "nativeCoverageConvention": "每条nativeEvidence逐字匹配成功命令rawHTML槽；相同词不同producer不跨槽代验；空Lore表只验标题不验Lore行为；WB39 breakdown只记partial，不加25通过。"
+    "nativeCoverageConvention": "本次nativeEvidence全部逐字匹配公开ZIP固定clean报告；旧native证据移入nativeHistoricalEvidence及verification.nativeHistory，不拿旧熟练度/成功冒充本次值。current25含大失败，不含成功；跨producer不可代验。历史union26独立计数，空Lore表只验标题，WB39 partial不入当前25。",
+    "nativeHistory": [
+      {
+        "status": "历史开发候选验收，保留来源与时间绑定边界，不作为本次公开ZIP当前显示值",
+        "scope": "25/57记录完整命中；30个可验槽待触发（含1个部分命中），1个译文不适用，1个遗留名称英文源未核。不是全量原生UI通过。",
+        "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
+        "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
+        "attemptId": 1790743642388,
+        "runtime": {
+          "core": "14.368",
+          "pf2e": "8.5.1",
+          "world": "ujx5r8oipw7ercdr",
+          "module": "0.9.19",
+          "activeGM": "FortressQAGM0001",
+          "users": [
+            {
+              "id": "FortressQAGM0001",
+              "name": "Fortress QA GM",
+              "isGM": true
+            },
+            {
+              "id": "IobjIOBGOEnjxXyE",
+              "name": "Native followups QA Player",
+              "isGM": false
+            }
+          ],
+          "dependencies": [
+            {
+              "id": "xdy-pf2e-workbench",
+              "active": true,
+              "version": "7.7.5"
+            },
+            {
+              "id": "pf2e-hud",
+              "active": true,
+              "version": "2.55.2"
+            },
+            {
+              "id": "pf2e-toolbelt",
+              "active": true,
+              "version": "3.56.5"
+            },
+            {
+              "id": "patreon-v3",
+              "active": true,
+              "version": "3.2.29"
+            },
+            {
+              "id": "trigger-engine",
+              "active": true,
+              "version": "1.35.1"
+            },
+            {
+              "id": "lib-wrapper",
+              "active": true,
+              "version": "1.13.5.1"
+            },
+            {
+              "id": "socketlib",
+              "active": true,
+              "version": "v1.1.4"
+            }
+          ]
+        },
+        "translationEnvironment": {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743559931.json",
+          "reportSha256": "d61559d6414e79fe458d32ccaa4e3d3b0b9efebbb4b10149eac611dc8c886a9b",
+          "commandId": "cn-runtime",
+          "translationModules": [
+            {
+              "id": "babele",
+              "active": true,
+              "version": "2.9.1"
+            },
+            {
+              "id": "pf2_cn",
+              "active": true,
+              "version": "2.5.2.1"
+            },
+            {
+              "id": "pf2e_compendium_chn",
+              "active": true,
+              "version": "3.1.2"
+            },
+            {
+              "id": "pf2e-compendium-extra-cn",
+              "active": true,
+              "version": "1.0.53"
+            }
+          ],
+          "language": "cn"
+        },
+        "successfulCommands": [
+          "rk-cn-normal-no-target",
+          "rk-cn-normal-target",
+          "rk-cn-no-target",
+          "rk-cn-player-privacy"
+        ],
+        "modeAssertions": [
+          {
+            "commandId": "rk-cn-normal-no-target",
+            "assurance": false,
+            "target": false,
+            "die": 11,
+            "candidates": 7,
+            "rollFormula": "1d20",
+            "diceCount": 1
+          },
+          {
+            "commandId": "rk-cn-normal-target",
+            "assurance": false,
+            "target": true,
+            "die": 12,
+            "candidates": 1,
+            "rollFormula": "1d20",
+            "diceCount": 1,
+            "primarySkill": "社群",
+            "primaryTotal": 25,
+            "dcColumns": [
+              20,
+              22,
+              25,
+              30
+            ],
+            "degrees": [
+              "成功",
+              "成功",
+              "成功",
+              "失败"
+            ]
+          },
+          {
+            "commandId": "rk-cn-no-target",
+            "assurance": true,
+            "target": false,
+            "die": null,
+            "candidates": 1,
+            "rollFormula": "10",
+            "diceCount": 0,
+            "total": 19,
+            "nativeProficiency": 9,
+            "note": "rk-cn-no-target实际为固定驾轻就熟，不能按名字归入普通检定"
+          }
+        ],
+        "privacy": {
+          "commandId": "rk-cn-player-privacy",
+          "evidenceType": "native ChatMessage.renderHTML actual rendered player text",
+          "userId": "IobjIOBGOEnjxXyE",
+          "isGM": false,
+          "cards": [
+            {
+              "id": "24Oo3zJXUHm6STVX",
+              "isContentVisible": false,
+              "text": "\n    \n        Native followups QA Player\n        \n            7分钟 ago\n        \n\n\n        Native followups QA Player privately rolled some dice\n    \n    \n        \n    \n        ???\n        \n        ?\n    \n\n\n    \n"
+            },
+            {
+              "id": "uptXTyJMG31sVwcG",
+              "isContentVisible": false,
+              "text": "\n    \n        Native followups QA Player\n        \n            34秒 ago\n        \n\n\n        Native followups QA Player privately rolled some dice\n    \n    \n        \n    \n        ???\n        \n        ?\n    \n\n\n    \n"
+            },
+            {
+              "id": "fLUlmthDjtL7UrnL",
+              "isContentVisible": false,
+              "text": "\n    \n        Native followups QA Player\n        \n            8分钟 ago\n        \n\n\n        Native followups QA Player privately rolled some dice\n    \n    \n        \n    \n        ???\n        \n        ?\n    \n\n\n    \n"
+            }
+          ],
+          "result": "三卡isContentVisible=false；实际文本只有privately rolled some dice/???/?，没有目标真名/DC/degree/结果/候选技能",
+          "outsideOwnedTranslationScope": "privately rolled some dice、ago是Core秘骰占位UI，非RK adapter生产槽；证明隐私，不声称外部英文已汉化"
+        },
+        "harnessFailures": [
+          {
+            "commandId": "rk-cn-setup",
+            "ok": false,
+            "category": "QA harness fixture identity mismatch",
+            "error": "page.evaluate: Error: Missing cloned prior QA fixtures\n    at eval (eval at <anonymous> (eval at evaluate (:311:30)), <anonymous>:5:37)\n    at eval (eval at evaluate (:311:30), <anonymous>:1:135)\n    at UtilityScript.evaluate (<anonymous>:313:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)\n    at C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-harness.mjs:23:199",
+            "resolution": "rk-clone-identities + rk-cn-setup-corrected后才执行RK，不计产品成功或回归",
+            "productRollAttempt": false
+          }
+        ],
+        "pageErrors": [],
+        "byteBinding": {
+          "sourceManifestPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\test-sources.json",
+          "sourceManifestSha256": "89764226a2fe8bafa08c47611d73e44c5a74cc037b96fe7eed753e89519f70e7",
+          "nativeMacroFingerprint": {
+            "uuid": "Compendium.xdy-pf2e-workbench.asymonous-benefactor-macros-internal.Macro.xcFr7PWwG5OVALNJ",
+            "path": "C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/recall-actual-command.txt",
+            "sha256": "f61ae3184e46613792d16e7152ba535eaba47c81992e93493558ee8108741eb3"
+          },
+          "originalMacroAndFixtureUnchanged": true,
+          "runtimeMatch": [
+            {
+              "candidatePath": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-display.mjs",
+              "qaPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\runtime\\Data\\modules\\pf2e-third-party-automation\\scripts\\knowledge-display.mjs",
+              "candidateSha256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a",
+              "qaSha256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a",
+              "lfSha256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a",
+              "identicalRawBytes": true
+            },
+            {
+              "candidatePath": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-workbench.mjs",
+              "qaPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\runtime\\Data\\modules\\pf2e-third-party-automation\\scripts\\knowledge-workbench.mjs",
+              "candidateSha256": "56705ab8cfa25e4445d7c32c4b0a0043491be98b16e77b840b43f3732ab4683e",
+              "qaSha256": "56705ab8cfa25e4445d7c32c4b0a0043491be98b16e77b840b43f3732ab4683e",
+              "lfSha256": "958cb2fde842db98b2ad0bda655ad440e16e33039c8618cd008ace97c359c2de",
+              "identicalRawBytes": true
+            },
+            {
+              "candidatePath": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-automatic.mjs",
+              "qaPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\runtime\\Data\\modules\\pf2e-third-party-automation\\scripts\\knowledge-automatic.mjs",
+              "candidateSha256": "f8c28712650524b19b8cb6680d62668abc8ea1dd81f9981e939474bd6b0a7da8",
+              "qaSha256": "f8c28712650524b19b8cb6680d62668abc8ea1dd81f9981e939474bd6b0a7da8",
+              "lfSha256": "69066e2fc3c0548986162d66365bc4d356003f344fc6d33a24bc4cf942be4327",
+              "identicalRawBytes": true
+            },
+            {
+              "candidatePath": "C:/Users/Taka/.codex/worktrees/automation-native-20260930/fvtt/modules/pf2e-third-party-automation/scripts/knowledge-automation.mjs",
+              "qaPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\runtime\\Data\\modules\\pf2e-third-party-automation\\scripts\\knowledge-automation.mjs",
+              "candidateSha256": "5160c138ffbb4e7449c8132ef28a81aca4f465f3cdf9f1e9b5ed00f1388edb35",
+              "qaSha256": "5160c138ffbb4e7449c8132ef28a81aca4f465f3cdf9f1e9b5ed00f1388edb35",
+              "lfSha256": "633d68e9aa1410f9574467ae2c0ceee70d9d23b1c496fe34c80d3e90b73e62f5",
+              "identicalRawBytes": true
+            }
+          ],
+          "reportContainsRuntimeFileSourceSHA": false,
+          "limitation": "历史报告只记runtime版本，未存浏览器加载4脚本的sourceSHA。当前QA物理副本与候选rawSHA逐字相同；父代理确认QA后RK字节未改。保留时间绑定证据边界，最终发布需Gitblob/候选manifest覆盖，不能冒称当时浏览器抓取源字节。"
+        },
+        "nativePassedRows": [
+          "WB02",
+          "WB03",
+          "WB04",
+          "WB05",
+          "WB06",
+          "WB07",
+          "WB08",
+          "WB09",
+          "WB10",
+          "WB11",
+          "WB12",
+          "WB13",
+          "WB14",
+          "WB15",
+          "WB16",
+          "WB17",
+          "WB18",
+          "WB19",
+          "WB20",
+          "WB22",
+          "WB27",
+          "WB31",
+          "WB32",
+          "WB38",
+          "K03"
+        ]
+      }
+    ]
   },
   "sourceIssues": [
     {
@@ -411,7 +710,7 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "未验证：未触发无Actor错误",
+      "native": "未验证（本次公开ZIP）：未触发无Actor错误",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -434,10 +733,50 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "UuH0J3xkBCaCBJEu",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": "<strong>回忆知识</strong>",
+          "observedValue": "回忆知识",
+          "scope": "公开ZIP普通无目标七技能表的当前生产槽",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "579d4b5cf35d5e827cd19a5630861621d994bee36409f5102ee27725bd3b3f8a"
+        },
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "gBLJ8xOrrkjiMN1r",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": "<strong>回忆知识</strong>",
+          "observedValue": "回忆知识",
+          "scope": "公开ZIP目标卡标题",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "4c03cc4ec3aa3a487fe0dc4c88875281b863fc48f5eedc896d34092df4165fda"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -492,10 +831,50 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "UuH0J3xkBCaCBJEu",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": "（骰点：",
+          "observedValue": "骰点：",
+          "scope": "公开ZIP普通无目标七技能表的当前生产槽",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "579d4b5cf35d5e827cd19a5630861621d994bee36409f5102ee27725bd3b3f8a"
+        },
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "gBLJ8xOrrkjiMN1r",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": "（骰点：",
+          "observedValue": "骰点：",
+          "scope": "公开ZIP共享骰点标题",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "4c03cc4ec3aa3a487fe0dc4c88875281b863fc48f5eedc896d34092df4165fda"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -544,16 +923,37 @@
         "producerLineSha256": "4f2e23fdc50c0d9d1973d3fd3dc12f4bbfe109a4e0eb393197c50acaa04ed513"
       },
       "before": "Prof",
-      "after": "当前PF2E.ProficiencyLabel（本次实机为熟练度）；缺失中文键回退熟练",
+      "after": "当前PF2E.ProficiencyLabel（本次公开ZIP为熟练）；缺失中文键回退熟练",
       "consumer": "Skill/Lore Skill列表列标题",
-      "terminologyBasis": "PF2E.ProficiencyLabel=熟练；优先当前i18n；本轮有效i18n rawHTML为熟练度，不据静态载体强制改成熟练。",
+      "terminologyBasis": "PF2E.ProficiencyLabel静态载体为熟练；精确Workbench Prof表头调用knowledgeProficiencyLabel，优先当前中文i18n、缺失中文键回退熟练。本次public ZIP rawHTML明确熟练，旧熟练度只在历史证据；报告未单独捕获函数返回来源，不从相同文字推断i18n/fallback分支。",
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "UuH0J3xkBCaCBJEu",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": ">熟练</th>",
+          "observedValue": "熟练",
+          "scope": "公开ZIP普通无目标七技能表的当前生产槽",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "579d4b5cf35d5e827cd19a5630861621d994bee36409f5102ee27725bd3b3f8a"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -571,7 +971,20 @@
           ],
           "rawHTMLSha256": "1ef048859b8ec76307e53aa61011d0459cb92d9cc48f6539f46bb5ece8717d40"
         }
-      ]
+      ],
+      "currentProducer": {
+        "path": "C:\\Users\\Taka\\.codex\\worktrees\\automation-native-20260930\\fvtt\\modules\\pf2e-third-party-automation\\scripts\\knowledge-display.mjs",
+        "lines": [
+          2,
+          6,
+          37
+        ],
+        "gitBlobAndZipSha256": "824207d727ddf005b0221e2e74f6e3b3627dacd7a4e55011f7988a5409add21a",
+        "logic": "本macro准确row0 Prof文本槽→knowledgeProficiencyLabel(game)；Chinese locale nativeLabel(PF2E.ProficiencyLabel,熟练)。",
+        "observedPublicValue": "熟练",
+        "priorObservedDevelopmentValue": "熟练度",
+        "actualI18nVersusFallbackBranch": "not separately captured; current visible producer result verified"
+      }
     },
     {
       "id": "WB05",
@@ -591,10 +1004,31 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "UuH0J3xkBCaCBJEu",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": ">调整值</th>",
+          "observedValue": "调整值",
+          "scope": "公开ZIP普通无目标七技能表的当前生产槽",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "579d4b5cf35d5e827cd19a5630861621d994bee36409f5102ee27725bd3b3f8a"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -632,10 +1066,31 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "UuH0J3xkBCaCBJEu",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": ">结果</th>",
+          "observedValue": "结果",
+          "scope": "公开ZIP普通无目标七技能表的当前生产槽",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "579d4b5cf35d5e827cd19a5630861621d994bee36409f5102ee27725bd3b3f8a"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -673,10 +1128,31 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "UuH0J3xkBCaCBJEu",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": ">潜在调整值</th>",
+          "observedValue": "潜在调整值",
+          "scope": "公开ZIP普通无目标七技能表的当前生产槽",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "579d4b5cf35d5e827cd19a5630861621d994bee36409f5102ee27725bd3b3f8a"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -714,10 +1190,31 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "UuH0J3xkBCaCBJEu",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": ">技能</th>",
+          "observedValue": "技能",
+          "scope": "公开ZIP普通无目标七技能表的当前生产槽",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "579d4b5cf35d5e827cd19a5630861621d994bee36409f5102ee27725bd3b3f8a"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -755,10 +1252,31 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "gBLJ8xOrrkjiMN1r",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": "<strong>对抗 隐藏生物真实名 Hidden Creature True Name</strong>",
+          "observedValue": "对抗 ${targetActor.name}",
+          "scope": "GM秘密卡保留自定义目标名；actual Player DOM不可见",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "4c03cc4ec3aa3a487fe0dc4c88875281b863fc48f5eedc896d34092df4165fda"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -796,10 +1314,31 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "gBLJ8xOrrkjiMN1r",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": ">第1次</th>",
+          "observedValue": "第1次",
+          "scope": "primary及学识难度标题",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "4c03cc4ec3aa3a487fe0dc4c88875281b863fc48f5eedc896d34092df4165fda"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -837,10 +1376,31 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "gBLJ8xOrrkjiMN1r",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": ">第2次</th>",
+          "observedValue": "第2次",
+          "scope": "primary及学识难度标题",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "4c03cc4ec3aa3a487fe0dc4c88875281b863fc48f5eedc896d34092df4165fda"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -878,10 +1438,31 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "gBLJ8xOrrkjiMN1r",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": ">第3次</th>",
+          "observedValue": "第3次",
+          "scope": "primary及学识难度标题",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "4c03cc4ec3aa3a487fe0dc4c88875281b863fc48f5eedc896d34092df4165fda"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -919,10 +1500,31 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "gBLJ8xOrrkjiMN1r",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": ">第4次</th>",
+          "observedValue": "第4次",
+          "scope": "primary及学识难度标题",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "4c03cc4ec3aa3a487fe0dc4c88875281b863fc48f5eedc896d34092df4165fda"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -960,10 +1562,31 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "gBLJ8xOrrkjiMN1r",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": ">第5次</th>",
+          "observedValue": "第5次",
+          "scope": "只命中学识难度提示标题，不证明第5/6次实际检定",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "4c03cc4ec3aa3a487fe0dc4c88875281b863fc48f5eedc896d34092df4165fda"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -1001,10 +1624,31 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "gBLJ8xOrrkjiMN1r",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": ">第6次</th>",
+          "observedValue": "第6次",
+          "scope": "只命中学识难度提示标题，不证明第5/6次实际检定",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "4c03cc4ec3aa3a487fe0dc4c88875281b863fc48f5eedc896d34092df4165fda"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -1042,10 +1686,31 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "gBLJ8xOrrkjiMN1r",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": ">学识技能难度</th>",
+          "observedValue": "学识技能难度",
+          "scope": "学识DC提示，未测试Lore执行与自动收益",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "4c03cc4ec3aa3a487fe0dc4c88875281b863fc48f5eedc896d34092df4165fda"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -1083,10 +1748,31 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "gBLJ8xOrrkjiMN1r",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": ">非专门学识</th>",
+          "observedValue": "非专门学识",
+          "scope": "学识DC提示，未测试Lore执行与自动收益",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "4c03cc4ec3aa3a487fe0dc4c88875281b863fc48f5eedc896d34092df4165fda"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -1124,10 +1810,31 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "gBLJ8xOrrkjiMN1r",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": ">专门学识</th>",
+          "observedValue": "专门学识",
+          "scope": "学识DC提示，未测试Lore执行与自动收益",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "4c03cc4ec3aa3a487fe0dc4c88875281b863fc48f5eedc896d34092df4165fda"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -1165,10 +1872,31 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "gBLJ8xOrrkjiMN1r",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": ">学识技能</th>",
+          "observedValue": "学识技能",
+          "scope": "空Lore技能表标题；未测试真实Lore条目",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "4c03cc4ec3aa3a487fe0dc4c88875281b863fc48f5eedc896d34092df4165fda"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -1206,10 +1934,31 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "UuH0J3xkBCaCBJEu",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": "\n                未受训\n",
+          "observedValue": "未受训",
+          "scope": "公开ZIP六个未受训完整rank行",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "579d4b5cf35d5e827cd19a5630861621d994bee36409f5102ee27725bd3b3f8a"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -1247,7 +1996,7 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "未验证：没有受训完整rank行",
+      "native": "未验证（本次公开ZIP）：没有受训完整rank行",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -1270,10 +2019,31 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "UuH0J3xkBCaCBJEu",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": "\n                专家\n",
+          "observedValue": "专家",
+          "scope": "公开ZIP社群完整rank",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "579d4b5cf35d5e827cd19a5630861621d994bee36409f5102ee27725bd3b3f8a"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -1311,7 +2081,7 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "未验证：没有大师完整rank行",
+      "native": "未验证（本次公开ZIP）：没有大师完整rank行",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -1334,7 +2104,7 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "未验证：没有传奇完整rank行",
+      "native": "未验证（本次公开ZIP）：没有传奇完整rank行",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -1357,7 +2127,7 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "未验证：目标primary不是未受训，U槽未触发",
+      "native": "未验证（本次公开ZIP）：目标primary不是未受训，U槽未触发",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -1380,7 +2150,7 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "未验证：目标primary不是受训，T槽未触发",
+      "native": "未验证（本次公开ZIP）：目标primary不是受训，T槽未触发",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -1403,10 +2173,31 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "gBLJ8xOrrkjiMN1r",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": "white-space:nowrap\">专家</div>",
+          "observedValue": "专家",
+          "scope": "公开ZIP目标primary E缩写生产槽",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "4c03cc4ec3aa3a487fe0dc4c88875281b863fc48f5eedc896d34092df4165fda"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -1444,7 +2235,7 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "未验证：目标primary不是大师，M槽未触发",
+      "native": "未验证（本次公开ZIP）：目标primary不是大师，M槽未触发",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -1467,7 +2258,7 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "未验证：目标primary不是传奇，L槽未触发",
+      "native": "未验证（本次公开ZIP）：目标primary不是传奇，L槽未触发",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -1490,10 +2281,30 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "未验证：没有大失败degree分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
-      "nativeEvidence": []
+      "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "gBLJ8xOrrkjiMN1r",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": "style=\"color:red\">大失败</span>",
+          "observedValue": "大失败",
+          "scope": "DC25/30列；本次新增实际criticalFailure分支，不能套用历史success",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "4c03cc4ec3aa3a487fe0dc4c88875281b863fc48f5eedc896d34092df4165fda"
+        }
+      ]
     },
     {
       "id": "WB31",
@@ -1513,10 +2324,31 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-target",
+          "commandClient": "player",
+          "cardId": "gBLJ8xOrrkjiMN1r",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": "style=\"color:orange\">失败</span>",
+          "observedValue": "失败",
+          "scope": "DC20/22列；die2+13=15",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "4c03cc4ec3aa3a487fe0dc4c88875281b863fc48f5eedc896d34092df4165fda"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -1554,10 +2386,11 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "未验证（本次公开ZIP）：die2目标卡没有成功分支；历史开发候选成功显示仅保留为历史证据",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
-      "nativeEvidence": [
+      "nativeEvidence": [],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -1595,7 +2428,7 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "未验证：没有大成功degree分支",
+      "native": "未验证（本次公开ZIP）：没有大成功degree分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -1618,7 +2451,7 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "未验证：未触发Dubious Knowledge提示",
+      "native": "未验证（本次公开ZIP）：未触发Dubious Knowledge提示",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -1641,7 +2474,7 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "未验证：未触发Unmistakable Lore提示",
+      "native": "未验证（本次公开ZIP）：未触发Unmistakable Lore提示",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -1664,7 +2497,7 @@
       "classification": "通过",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "未验证：报告没有记录ui.notifications.info内容",
+      "native": "未验证（本次公开ZIP）：报告没有记录ui.notifications.info内容",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -1687,7 +2520,7 @@
       "classification": "复用",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "未验证：实际HTML没有data-tooltip调整结果分支",
+      "native": "未验证（本次公开ZIP）：实际HTML没有data-tooltip调整结果分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -1710,10 +2543,58 @@
       "classification": "复用",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "UuH0J3xkBCaCBJEu",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": ">社群</th>",
+          "observedValue": [
+            "奥法",
+            "手艺",
+            "医疗",
+            "自然",
+            "神秘",
+            "宗教",
+            "社群"
+          ],
+          "scope": "公开ZIP七标准技能标签，Lore自定义名未测试",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "579d4b5cf35d5e827cd19a5630861621d994bee36409f5102ee27725bd3b3f8a"
+        },
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-assurance-no-target",
+          "commandClient": "player",
+          "cardId": "zUYC6rxmpbjsPmuO",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": "<p>社群: 19</p>",
+          "observedValue": "社群",
+          "scope": "公开ZIP固定驾轻就熟技能名",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "c9331c0bc04a3d3f040e97475e1d4c0759e457d037e05ea16271f2f0469f3331"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -1776,11 +2657,11 @@
       "classification": "复用",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "未验证：只见原生breakdown标签；Potential Modifiers表为空，规则/效果label与链接未命中",
+      "native": "未验证（本次公开ZIP）：只见原生breakdown标签；Potential Modifiers表为空，规则/效果label与链接未命中",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [],
-      "nativePartialEvidence": [
+      "nativeHistoricalPartialEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -1803,6 +2684,32 @@
           ],
           "rawHTMLSha256": "1ef048859b8ec76307e53aa61011d0459cb92d9cc48f6539f46bb5ece8717d40"
         }
+      ],
+      "nativePartialEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-normal-no-target",
+          "commandClient": "player",
+          "cardId": "UuH0J3xkBCaCBJEu",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": "data-slug=\"int\">智力 +4</span>",
+          "observedValue": [
+            "智力 +4",
+            "感知 +0",
+            "未受训 +0",
+            "专家 +9"
+          ],
+          "scope": "只命中通用breakdown标签；潜在规则/效果/UUID分支未验",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "579d4b5cf35d5e827cd19a5630861621d994bee36409f5102ee27725bd3b3f8a"
+        }
       ]
     },
     {
@@ -1823,7 +2730,7 @@
       "classification": "复用",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "未验证：未触发Unified Theory名称",
+      "native": "未验证（本次公开ZIP）：未触发Unified Theory名称",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -1846,7 +2753,7 @@
       "classification": "不适用",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "不适用（译文）；actual Player renderHTML另核秘密结果不可见",
+      "native": "不适用（译文）；本次public ZIP actual Player renderHTML另核秘密结果不可见",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -1869,7 +2776,7 @@
       "classification": "复用",
       "static": "已逐项读源及译文",
       "controlled": "真实423行宏及文本节点适配受控回放；不等同原生UI验收",
-      "native": "未验证：Potential Modifiers表为空，没有modifier UUID链接",
+      "native": "未验证（本次公开ZIP）：Potential Modifiers表为空，没有modifier UUID链接",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -1894,7 +2801,7 @@
       "classification": "通过",
       "static": "已逐项读before/after，数据键及分支未改",
       "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
-      "native": "未验证：只有最终普通卡，未捕获rolling reservation标题",
+      "native": "未验证（本次公开ZIP）：只有最终普通卡，未捕获rolling reservation标题",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -1919,7 +2826,7 @@
       "classification": "通过",
       "static": "已逐项读before/after，数据键及分支未改",
       "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
-      "native": "未验证：只有最终固定卡，未捕获rolling reservation标题",
+      "native": "未验证（本次公开ZIP）：只有最终固定卡，未捕获rolling reservation标题",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -1944,10 +2851,31 @@
       "classification": "通过",
       "static": "已逐项读before/after，数据键及分支未改",
       "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
-      "native": "通过（已实命中显示槽）：30426 native rawHTML；仅涵盖所列分支",
+      "native": "通过（本次公开ZIP实命中）：0.9.20 clean native rawHTML；仅涵盖所列分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": [
+        {
+          "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790748695576.json",
+          "reportSha256": "a04193d8e6f74f1215e7f2a39adba66fc6000c506e098a634fae55a0a36970fa",
+          "attemptId": 1790748695576,
+          "releaseVersion": "0.9.20",
+          "releaseCommit": "a2dc695bcb8cd6bdda630587c0f3990147b5bf34",
+          "commandId": "package-rk-cn-assurance-no-target",
+          "commandClient": "player",
+          "cardId": "zUYC6rxmpbjsPmuO",
+          "evidenceType": "public ZIP installed native ChatMessage.content rawHTML",
+          "slot": "<strong>回忆知识 — 驾轻就熟</strong>",
+          "observedValue": "回忆知识 — 驾轻就熟",
+          "scope": "公开ZIP固定19最终标题；不代验reservation中间标题",
+          "blind": true,
+          "whisper": [
+            "FortressQAGM0001"
+          ],
+          "rawHTMLSha256": "c9331c0bc04a3d3f040e97475e1d4c0759e457d037e05ea16271f2f0469f3331"
+        }
+      ],
+      "nativeHistoricalEvidence": [
         {
           "reportPath": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\automation-eldamon-ux-20260930\\qa\\dual-client-report-1790743642388.json",
           "reportSha256": "79f75911836506d4187f5c036cf627d633bb551f96198a8d0c61c566688e116b",
@@ -1987,7 +2915,7 @@
       "classification": "通过",
       "static": "已逐项读before/after，数据键及分支未改",
       "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
-      "native": "未验证：未触发本轮中文厄运抵消分支",
+      "native": "未验证（本次公开ZIP）：未触发本轮中文厄运抵消分支",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -2012,7 +2940,7 @@
       "classification": "通过",
       "static": "已逐项读before/after，数据键及分支未改",
       "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
-      "native": "未验证：未触发缺少对应驾轻就熟专长错误",
+      "native": "未验证（本次公开ZIP）：未触发缺少对应驾轻就熟专长错误",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -2037,7 +2965,7 @@
       "classification": "通过",
       "static": "已逐项读before/after，数据键及分支未改",
       "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
-      "native": "未验证：未触发熟练值不可用错误",
+      "native": "未验证（本次公开ZIP）：未触发熟练值不可用错误",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -2062,7 +2990,7 @@
       "classification": "通过",
       "static": "已逐项读before/after，数据键及分支未改",
       "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
-      "native": "未验证：未触发固定规则guard错误",
+      "native": "未验证（本次公开ZIP）：未触发固定规则guard错误",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -2087,7 +3015,7 @@
       "classification": "通过",
       "static": "已逐项读before/after，数据键及分支未改",
       "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
-      "native": "未验证：未触发原生检定未完成错误",
+      "native": "未验证（本次公开ZIP）：未触发原生检定未完成错误",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -2112,7 +3040,7 @@
       "classification": "通过",
       "static": "已逐项读before/after，数据键及分支未改",
       "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
-      "native": "未验证：报告未记native substitution.label；最终标题不能代验",
+      "native": "未验证（本次公开ZIP）：报告未记native substitution.label；最终标题不能代验",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -2137,7 +3065,7 @@
       "classification": "通过",
       "static": "已逐项读before/after，数据键及分支未改",
       "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
-      "native": "未验证：未触发modifier.label缺失时的默认熟练标签",
+      "native": "未验证（本次公开ZIP）：未触发modifier.label缺失时的默认熟练标签",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -2162,7 +3090,7 @@
       "classification": "通过",
       "static": "已逐项读before/after，数据键及分支未改",
       "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
-      "native": "未验证：未触发Automatic Knowledge选项约束错误",
+      "native": "未验证（本次公开ZIP）：未触发Automatic Knowledge选项约束错误",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -2187,7 +3115,7 @@
       "classification": "通过",
       "static": "已逐项读before/after，数据键及分支未改",
       "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
-      "native": "未验证：未触发Automatic Knowledge固定技能约束错误",
+      "native": "未验证（本次公开ZIP）：未触发Automatic Knowledge固定技能约束错误",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -2212,7 +3140,7 @@
       "classification": "通过",
       "static": "已逐项读before/after，数据键及分支未改",
       "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
-      "native": "未验证：本次为native action.use固定Assurance参数，不是Automatic Knowledge专用能力结果",
+      "native": "未验证（本次公开ZIP）：本次为native action.use固定Assurance参数，不是Automatic Knowledge专用能力结果",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -2237,7 +3165,7 @@
       "classification": "通过",
       "static": "已逐项读before/after，数据键及分支未改",
       "controlled": "真实宏桥及固定规则受控回归；纯通知错误分支未用测试计数冒充字段覆盖",
-      "native": "未验证：未打开社群选择UI；宏技能行不能代验",
+      "native": "未验证（本次公开ZIP）：未打开社群选择UI；宏技能行不能代验",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []
@@ -2263,7 +3191,7 @@
       "classification": "未验证",
       "static": "当前中文名称已读；自身完整英文原名没有证据",
       "controlled": "无翻译改动",
-      "native": "未验证：缺少自身完整英文原名，本轮保持旧名；未触发该效果",
+      "native": "未验证（本次公开ZIP）：缺少自身完整英文原名，本轮保持旧名；未触发该效果",
       "independentReview": "待root逐项复核",
       "valueNotation": "before/after为独立显示值或动态显示模式；producerLineOriginal保留该槽所在完整原始代码，不能将模式指纹冒称原始pack字段字节。",
       "nativeEvidence": []

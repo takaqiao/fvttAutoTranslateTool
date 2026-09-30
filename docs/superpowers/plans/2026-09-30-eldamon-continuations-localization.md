@@ -62,7 +62,7 @@ Owner: root. Files: main wiring/API, remaining metapower visible strings/activit
 - [x] Wire direct-use provider and continuation API only after exact public interfaces are known. Translate remaining scoped visible strings with field record and native labels.
 - [x] Run actual-source full Node suite, syntax and diff checks. Start only this task's own own 30426 QA instance after checking exact paths/port; validate changed real sheet/chat/GM/player flows and Chinese target/no-target RK.
 - [x] Complete v3 field/coverage and input/candidate hashes. Reuse unchanged dependency evidence; explicitly record any unresolved coverage rather than pass by test count.
-- [ ] Produce verified candidate/release under existing release workflow and installation authorization from this ongoing task. Never cover world documents. Validate actual ZIP/manifest/runtime inventory and only deploy when existing production guard proves safe.
+- [x] Produce verified candidate/release under existing release workflow and installation authorization from this ongoing task. Never cover world documents. Validate actual ZIP/manifest/runtime inventory and only deploy when existing production guard proves safe.
 
 ## Review focus
 
