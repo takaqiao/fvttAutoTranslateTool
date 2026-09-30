@@ -10,7 +10,7 @@
 
 **Spec:** `docs/superpowers/specs/2026-09-30-automation-native-followups.md`
 
-**Progress (2026-09-30):** Task 1–7 的实现和回归已完成，证据见 [执行记录](../../fortress-automation/native-followups-2026-09-30.md)。首个完整真实依赖运行 1907/1907、0 fail、0 skip；最终新增回归重跑以外部 `output/automation-native-20260930/final-tests.log` 为准。Task 8 最终集成与现场结果确认、发布包和正式部署仍待完成，RK 实机验收尚在继续。
+**Progress (2026-09-30):** Task 1–7 的实现和回归已完成，证据见 [执行记录](../../fortress-automation/native-followups-2026-09-30.md)。最后 `4e293522` 的全量真实依赖运行 **1921/1921、0 fail、0 skip**，runtime syntax 和 diff 检查均 exit 0；完整记录为 [final-tests.log](C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/final-tests.log)。正常、无目标、隐藏目标、fortune/substitution 及最后 Assurance 固定/相抵两分支的 RK 实机验收均通过，最后源测试独立 52/52、0 skip。Task 8 最终候选、发布包及正式部署仍待确认。
 
 ## Global Constraints
 
@@ -72,7 +72,7 @@ Interfaces: `createKnowledgeAutomation` retains provider contract; new RK bridge
 - [x] Add tests for one shared d20, target-based applicable skills, secret results, no duplicate incidental RK, fixed skill, Assurance and validated GM result driving benefits.
 - [x] Observe RED, implement bridge using runtime interfaces rather than version/source lock; route all normal RK actions and existing incidental requests.
 - [x] Add Automatic Knowledge entry and preserve fixed choice/frequency; GM adjudication of lore/information remains.
-- [x] Run focused tests GREEN and integrate main's outermost local probe boundary (`c504414f`; independent real-source 40/40, 0 skip). Final live RK acceptance belongs to Task 8 and remains pending.
+- [x] Run focused tests GREEN and integrate main's outermost local probe boundary (`c504414f` through `4e293522`; final independent real-source 52/52, 0 skip). Normal/no-target/hidden-target/fortune/substitution and final Assurance fixed/cancelled branches have actual dual-client GREEN evidence; final packaged candidate confirmation belongs to Task 8.
 
 ### Task 5: Usage lifecycle and operation receipts (root)
 
@@ -109,8 +109,8 @@ Files: `weapon-surge.mjs`, `weapon-surge-snapshot.mjs`, `next-strike-effects.mjs
 
 ### Task 8: Integration, review and release artifact
 
-- [ ] Confirm the final post-fix full suite, syntax checks, source-file integrity and focused load probes. First complete dependency run was 1907/1907, 0 fail, 0 skip; new regressions and later knowledge fixes require the latest complete `final-tests.log` footer.
-- [ ] Confirm the final independent whole-change review and remaining live QA. Important findings have RED→GREEN fixes; owner/Surge/player hero cases have actual dual-client evidence, while final RK live acceptance remains pending.
+- [x] Confirm the final post-fix full suite, syntax checks, source-file integrity and focused load probes. Final `4e293522`: 1921/1921, 0 fail/skip; `verify-final.ps1` runtime syntax/diff checks exit 0, with the complete external `final-tests.log` footer independently checked.
+- [x] Confirm the final independent whole-change review and remaining live QA. Important findings have RED→GREEN fixes; owner/Surge/player hero, normal RK and final Assurance fixed/cancelled branches have actual dual-client evidence. Final source review and actual-source focus 52/52 found no remaining same-scope blockers; root independently confirmed the final QA JSON. Packaged candidate confirmation remains pending.
 - [ ] Create versioned release artifact preserving 0.9.18.6 hotfixes; inspect manifest/package contents and rollback instructions.
 - [x] Document verified versus actual multi-client UI coverage precisely in the execution record, including failed attempts and unsupported coverage.
 - [ ] Deploy only the finally verified candidate, retaining remote module backup and checking hashes afterwards. No release/deployment success is claimed by current tests or isolated QA.
