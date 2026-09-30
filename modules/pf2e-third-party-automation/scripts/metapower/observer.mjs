@@ -11,12 +11,14 @@ export function createMetapowerObserver({request,select=async()=>({}),captureInp
    const selected=item?await select(item,input):{};if(selected===null)return null;
    const selection={...selected,...input};
    const payload={actorUuid:actor.uuid,itemUuid:item?.uuid??null,nonce:id(),selection,entry,clientId,clientSequence:++clientSequence};
-   const receipt=await request('begin',payload);
-   if(receipt.status!=='reserved')throw Error('This invocation already ran; native execution will not be replayed.');
+   const receipt=await request('begin',{...payload,startNative:true});
+   const authorized=receipt.status==='started'&&receipt.nativeStartAuthorized===true;
+   if(!authorized&&receipt.status!=='reserved')throw Error('This invocation already ran; native execution will not be replayed.');
    const scope={receipt,messages:[],item,actor,input};
-   let started=false,finished=false;
+   let started=authorized,finished=false;
    try{
-    await request('start',payload);started=true;if(item)scopes.set(item.uuid,scope);
+    // An older GM client still returns a reservation and needs the legacy start.
+    if(!started){await request('start',payload);started=true;}if(item)scopes.set(item.uuid,scope);
     const result=await native();
     const message=scope.messages.length===1?scope.messages[0]:null;
     const noCheck=entry==='native-check'&&(result===null||Array.isArray(result)&&result.length===0);

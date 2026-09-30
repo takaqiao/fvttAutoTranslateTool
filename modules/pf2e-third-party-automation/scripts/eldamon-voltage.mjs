@@ -55,7 +55,7 @@ const knownMetals=new Set(['adamantine','cold-iron','silver','dawnsilver','orich
 export function createVoltageLedger({game,fromUuid,onRefresh=async()=>{},queue=new SerialActions()}){
  const gm=()=>{if(game.user?.id!==game.users.activeGM?.id)throw Error('Only the active GM may coordinate High Voltage.');};
  const owner=(actor,user)=>{if(!user||game.users.get(user.id)!==user||!actor?.testUserPermission(user,'OWNER'))throw Error('Actor owner permission is required.');};
- const save=async(actor,state)=>{gm();await actor.update({[`flags.${ID}.voltage`]:state});};
+ const save=async(actor,state)=>{gm();await actor.update({[`flags.${ID}.voltage`]:state},{render:false});};
  const mutate=(payload,user,fn)=>queue.run(payload.actorUuid,async()=>{gm();const actor=await fromUuid(payload.actorUuid);owner(actor,user);return fn(actor,voltageState(actor));});
  async function original(actor,payload,user,source=HIGH_VOLTAGE_SOURCE){
   if(!user||game.users.get(user.id)!==user)throw Error('Original High Voltage card author is unavailable.');
@@ -70,12 +70,22 @@ export function createVoltageLedger({game,fromUuid,onRefresh=async()=>{},queue=n
   let r=state.refreshes[nonce];
   if(!r){r=state.refreshes[nonce]={status:'started',updates:voltageRefreshUpdates(actor)};await save(actor,state);}
   if(r.status!=='done'){
-  for(const update of r.updates){
-   const item=await fromUuid(update.itemUuid);if(!ownedItem(actor,item))throw Error('Refresh source item changed; reconcile the original activity.');
-   if(item.flags?.[ID]?.voltageRefresh?.nonce===nonce)continue;
-   if((item.frequency??item.system.frequency)?.value!==update.before)throw Error('Power frequency changed during Refresh; reconcile the original activity.');
-   gm();await item.update({'system.frequency.value':update.after,[`flags.${ID}.voltageRefresh`]:{nonce,after:update.after}});
-  }
+   const updates=[];
+   for(const update of r.updates){
+    const item=await fromUuid(update.itemUuid);if(!ownedItem(actor,item))throw Error('Refresh source item changed; reconcile the original activity.');
+    if(item.flags?.[ID]?.voltageRefresh?.nonce===nonce)continue;
+    if((item.frequency??item.system.frequency)?.value!==update.before)throw Error('Power frequency changed during Refresh; reconcile the original activity.');
+    updates.push({_id:item.id,'system.frequency.value':update.after,[`flags.${ID}.voltageRefresh`]:{nonce,after:update.after}});
+   }
+   // One native batch keeps per-item recovery proofs and avoids a round trip
+   // plus actor-sheet refresh for every prepared power. Real resources still render.
+   if(updates.length){
+    gm();await actor.updateEmbeddedDocuments('Item',updates);gm();
+    for(const update of updates){
+     const item=actor.items.get(update._id),proof=item?.flags?.[ID]?.voltageRefresh;
+     if(!ownedItem(actor,item)||proof?.nonce!==nonce||proof.after!==update['system.frequency.value']||(item.frequency??item.system.frequency)?.value!==update['system.frequency.value'])throw Error('Refresh resource update was not confirmed; recover the original activity.');
+    }
+   }
    r.status='done';await save(actor,state);
   }
   // Lifecycle cleanup is independently idempotent under this nonce. A failed

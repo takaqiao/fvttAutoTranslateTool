@@ -36,7 +36,7 @@ export function validateForceBarrageTargets({game,actor,token,targets}={}){
  return targets;
 }
 
-/** Missile arithmetic belongs to the hash-verified Workbench adapter. */
+/** Missile arithmetic belongs to the installed Workbench adapter. */
 export function validateForceBarrageAllocation({targets,allocations,missiles}={}){
  if(!Number.isSafeInteger(missiles)||missiles<1||missiles>6||!Array.isArray(targets)||!Array.isArray(allocations)||allocations.length!==targets.length||new Set(targets.map(t=>t?.uuid)).size!==targets.length)throw Error('分弹目标或总弹数无效。');
  const wanted=new Set(targets.map(t=>t.uuid));let total=0;

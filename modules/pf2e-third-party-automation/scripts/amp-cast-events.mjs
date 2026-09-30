@@ -30,7 +30,7 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
  const captureData=item=>Object.fromEntries([...captures].map(([key,capture])=>[key,capture(item)]).filter(([,value])=>value!==undefined));
  const sameInput=(a,b)=>['actorUuid','itemUuid','sourceId','entryUuid','rank','slotId','focusPoints','overlayIds'].every(key=>JSON.stringify(a[key]??null)===JSON.stringify(b[key]??null));
  const ledger=actor=>actor.flags?.[MODULE_ID]?.nativeCasts??[];
- const save=(actor,receipts)=>{if(!gm(game))throw Error('主GM已切换，停止旧客户端的施法资源操作。');return actor.update({[`flags.${MODULE_ID}.nativeCasts`]:receipts});};
+ const save=(actor,receipts)=>{if(!gm(game))throw Error('主GM已切换，停止旧客户端的施法资源操作。');return actor.update({[`flags.${MODULE_ID}.nativeCasts`]:receipts},{render:false});};
  const owner=(actor,user)=>{if(!gm(game)||!user||!actor?.testUserPermission?.(user,'OWNER'))throw Error('施法资源必须由主GM验证角色所有者后结算。');};
  const equal=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
  function invocationGM(invocation){if(!invocation||!gm(game)||invocation.gmId!==game.user.id)throw Error('原生施法调用的主GM已改变。');}

@@ -15,7 +15,7 @@ export const fortressRuleCompatibilityEnabled=game=>game?.world?.id==='ujx5r8oip
  * upstream branches; custom predicates and enabled/disabled state survive. */
 export function buildFortressPatreonRepairs(original,{game}={}){
  const rules=copy(original),changes=[],patreon=game?.modules?.get('patreon-v3');
- if(!fortressRuleCompatibilityEnabled(game)||patreon?.active!==true||patreon.version!=='3.2.28')return {rules,changes};
+ if(!fortressRuleCompatibilityEnabled(game)||patreon?.active!==true)return {rules,changes};
  const change=(object,key,after,path,reason)=>{const before=copy(object[key]);object[key]=copy(after);changes.push({path,before,after:copy(after),reason})};
  const albatross=rules?.[ALBATROSS];
  if(sourceGroup(albatross,ALBATROSS,'Compendium.pf2e.spells-srd.Item.93SjFTGJUTTmAt6j')&&Array.isArray(albatross.complexRules)){

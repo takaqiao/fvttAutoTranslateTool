@@ -57,7 +57,7 @@ export function createMedicActions({game,fromUuid=globalThis.fromUuid,choose,req
    const other=values(game.messages).some(m=>m.id!==message.id&&m.speaker?.actor===actor.id&&m.flags?.[MODULE_ID]?.medicObservedFlourishTurn===currentTurn&&m.flags?.pf2e?.origin?.rollOptions?.includes('origin:action:slug:use-action')&&m.flags?.pf2e?.origin?.rollOptions?.includes('origin:item:trait:flourish'));
    if(existing?.turn===currentTurn||other)throw Error('本回合已使用华丽动作。');
   }
-  await actor.update({[`flags.${MODULE_ID}.medicUses`]:{...ledger,[key]:message.id},...(flourish?{[`flags.${MODULE_ID}.medicFlourish`]:{turn:currentTurn,messageId:message.id}}:{})});
+  await actor.update({[`flags.${MODULE_ID}.medicUses`]:{...ledger,[key]:message.id},...(flourish?{[`flags.${MODULE_ID}.medicFlourish`]:{turn:currentTurn,messageId:message.id}}:{})},{render:false});
   await save(message,{status:'committed',nonce:key,userId:ctx.user.id,actorUuid:actor.uuid,itemUuid:ctx.item.uuid,cost,turn:currentTurn,flourish});
   // No system-wide action pool is invented. Integrations can account for this single activity here.
   await commitActivity?.({...ctx,cost,flourish,nonce:key});

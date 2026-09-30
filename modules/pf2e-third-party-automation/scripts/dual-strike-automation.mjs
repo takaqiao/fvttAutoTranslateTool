@@ -110,7 +110,7 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
    if(selected.some(s=>!s))throw Error('武器持用状态已改变，尚未进行攻击。');
    const origin=await sourceToken(actor,message,target);requireSceneTarget(actor,origin,target);
    if(!twin&&!item.system.rules?.some(r=>r.key==='FlatModifier'&&r.predicate?.some(p=>p?.or?.includes(SECOND_ATTACK))))throw Error('双重切割的原生第二击修正规则缺失，尚未攻击。');
-   await actor.update({[`flags.${MODULE_ID}.dualStrikeUses`]:[...(own(actor).dualStrikeUses??[]).slice(-127),message.id]});
+   await actor.update({[`flags.${MODULE_ID}.dualStrikeUses`]:[...(own(actor).dualStrikeUses??[]).slice(-127),message.id]},{render:false});
    const hits=[],sequence=createAttackSequence({actor});
    for(const[index,strike]of selected.entries()){
     requireSceneTarget(actor,origin,target);

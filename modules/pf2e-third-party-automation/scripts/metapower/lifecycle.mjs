@@ -26,7 +26,7 @@ export function validatePowerAdmission(item,{kind,selection={}}={}){
  * A durable lease prevents another client from overtaking an unfinished use;
  * ambiguous native completion is archived, never refunded or automatically retried. */
 export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),validateSelection=async()=>{}}){
- const mutate=(payload,user,fn)=>queue.run(payload.actorUuid,async()=>{
+ const mutate=(payload,user,fn,{render=true}={})=>queue.run(payload.actorUuid,async()=>{
   if(game.user?.id!==game.users.activeGM?.id)throw Error('Only the active GM may mutate metapower state.');
   const actor=await fromUuid(payload.actorUuid);
   if(!actor||!user||!actor.testUserPermission(user,'OWNER'))throw Error('Actor owner permission is required.');
@@ -41,7 +41,7 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
   if(game.user?.id!==game.users.activeGM?.id)throw Error('Active GM changed during admission; retry reconciliation.');
   // Foundry merges nested flags: omission alone cannot remove an old receipt.
   const update=copy(state);for(const r of pruned)update.receipts[`-=${r.nonce}`]=null;
-  await actor.update({[`flags.${MODULE_ID}.metapower`]:update});return copy(result);
+  await actor.update({[`flags.${MODULE_ID}.metapower`]:update},{render});return copy(result);
  });
  const bound=(state,payload,user)=>{
   const r=state.receipts[payload.nonce];if(!r||r.userId!==user.id)throw Error('Invocation binding is invalid.');return r;
@@ -50,7 +50,7 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
   begin:(payload,user)=>mutate(payload,user,async(actor,state)=>{
    if(typeof payload.nonce!=='string'||!payload.nonce||payload.nonce.length>100)throw Error('Invalid invocation nonce.');
    const old=state.receipts[payload.nonce];
-   if(old){if(old.userId!==user.id||old.itemUuid!==(payload.itemUuid??null))throw Error('Invocation source binding mismatch.');return old;}
+   if(old){if(old.userId!==user.id||old.itemUuid!==(payload.itemUuid??null))throw Error('Invocation source binding mismatch.');if(payload.startNative===true)throw Error('This invocation already ran; native execution will not be replayed.');return old;}
    let clientKey;
    if(payload.clientId){
     if(typeof payload.clientId!=='string'||payload.clientId.length>100||!Number.isSafeInteger(payload.clientSequence)||payload.clientSequence<1)throw Error('Invalid client sequence.');
@@ -72,9 +72,12 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
    r.powerId=profile?.id??null;
    if(clientKey){r.clientId=payload.clientId;r.clientSequence=payload.clientSequence;state.clients[clientKey]=payload.clientSequence;}
    if(charge)r.charge={itemUuid:charge.uuid,before:charge.system.badge.value,after:charge.system.badge.value-1};
-   state.pending=r.nonce;state.receipts[r.nonce]=r;return r;
+   // Persist admission and native-start intent together. A lost response keeps
+   // the durable lease; the same nonce can never authorize native execution twice.
+   if(payload.startNative===true)r.status='started';
+   state.pending=r.nonce;state.receipts[r.nonce]=r;return payload.startNative===true?{...r,nativeStartAuthorized:true}:r;
   }),
-  start:(payload,user)=>mutate(payload,user,(actor,state)=>{const r=bound(state,payload,user);if(r.status!=='reserved')throw Error('Invocation has already started or finished.');if(r.turn!==turnIdentity(game,actor))throw Error('Turn changed before native execution; repeat this action on the current turn.');r.status='started';return r}),
+  start:(payload,user)=>mutate(payload,user,(actor,state)=>{const r=bound(state,payload,user);if(r.status!=='reserved')throw Error('Invocation has already started or finished.');if(r.turn!==turnIdentity(game,actor))throw Error('Turn changed before native execution; repeat this action on the current turn.');r.status='started';return r},{render:false}),
   finish:(payload,user)=>mutate(payload,user,async(actor,state)=>{
    const r=bound(state,payload,user);
    if(!['reserved','started'].includes(r.status)){
@@ -96,7 +99,7 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
      // children. Persist intent before that deletion so a lost response never
      // permits a second payment or silently assumes an unrelated deletion paid.
      r.paymentStarted=true;r.messageUuid=payload.messageUuid;
-     await actor.update({[`flags.${MODULE_ID}.metapower`]:state});
+     await actor.update({[`flags.${MODULE_ID}.metapower`]:state},{render:false});
      // Counter and payment proof share one embedded document update. A retry or
      // GM handover sees the proof and cannot charge a second time.
      await charge.update({'system.badge.value':r.charge.after,[`flags.${MODULE_ID}.payment`]:{nonce:r.nonce,after:r.charge.after}});
@@ -110,7 +113,7 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
     if(r.status==='committed'&&r.kind&&r.turn===turnIdentity(game,actor))state.armed={nonce:r.nonce,kind:r.kind,itemUuid:r.itemUuid,sourceUuid:r.sourceUuid,sequence:r.sequence,turn:r.turn,messageUuid:r.messageUuid};
    }
    return r;
-  }),
+  },{render:payload.status!=='committed'||!payload.messageUuid}),
   clear:(payload,user)=>mutate(payload,user,(_actor,state)=>{if(!payload.activationNonce||state.armed?.nonce===payload.activationNonce)state.armed=null;return state.armed}),
   reconcile:(payload,user)=>mutate(payload,user,(_actor,state)=>{
    if(user.id!==game.users.activeGM?.id)throw Error('Only the active GM can reconcile an abandoned native invocation.');
@@ -123,7 +126,7 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
    if(r.delivery.status==='done')return r;
    if(!['started','pending','done'].includes(payload.status))throw Error('Invalid channel delivery status.');
    r.delivery={...r.delivery,status:payload.status,...(payload.status==='started'?{attempts:r.delivery.attempts+1}:{}),...(payload.confirmation==='gm-manual-effects-settled'?{manuallySettled:true,resolvedBy:user.id}:{}),error:payload.status==='pending'?String(payload.error??'Interrupted native follow-up').slice(0,500):null};return r;
-  }),
+  },{render:payload.status!=='started'}),
   expire:(payload,user)=>mutate(payload,user,(_actor,state)=>state.armed),
  };
 }

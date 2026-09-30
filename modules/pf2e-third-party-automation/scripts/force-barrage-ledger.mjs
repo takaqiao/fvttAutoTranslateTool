@@ -67,7 +67,7 @@ export function createForceBarrageLedger({game,fromUuid=globalThis.fromUuid,with
  }
  const slots=(entry,rank)=>entry.system.slots?.[`slot${rank}`]?.value;
  async function save(scope,state){
-  source(scope);const expected=copy(state),result=await scope.actor.update({[PATH]:expected});
+  source(scope);const expected=copy(state),result=await scope.actor.update({[PATH]:expected},{render:false});
   requireTrue(result===scope.actor);await resolve(scope);requireTrue(equal(stateOf(scope.actor),expected));
   const nonce=expected.currentByItem[scope.item.id];recordFor({...scope,nonce});return read(scope.actor,nonce);
  }

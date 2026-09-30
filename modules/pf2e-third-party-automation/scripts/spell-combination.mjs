@@ -41,6 +41,17 @@ const allowedCombinationWeapon=strike=>held(strike)&&isCuttingWeapon(strike.item
 const strikeKey=strike=>`${strike.item.id}:${strike.item.altUsageType??''}`;
 const skipEvent=(game,kind)=>({ctrlKey:false,metaKey:false,shiftKey:game.user.settings?.[kind==='attack'?'showCheckDialogs':'showDamageDialogs']??true});
 
+const publicTargetName=(game,target)=>!game.pf2e?.settings?.tokens?.nameVisibility||target.playersCanSeeName===true;
+/** Shared damage cards are created by the GM: use PF2e's per-viewer visibility,
+ * never the creating client's isOwner/isGM result for the target name. */
+export function spellCombinationDamageHeading({game,target,kind}){
+ const visibility=publicTargetName(game,target)?'':' data-visibility="gm"';
+ return `<h4>${escape(kind==='combination'?'神威连击':kind==='swipe'?'法术横扫':'法术打击')}<span${visibility}>：${escape(target.name??target.actor?.name??'目标')}</span> · 合并伤害</h4>`;
+}
+export function spellCombinationTargetChoices({game,targets,user}){
+ return targets.map((target,index)=>({value:target.uuid,label:publicTargetName(game,target)||user?.isGM===true||!!user&&target.actor?.testUserPermission?.(user,'OWNER')===true?target.name??target.actor?.name??`目标 ${index+1}`:`目标 ${index+1}`}));
+}
+
 export function criticalSpellPersistentFormula(spell){
  if(getSourceId(spell)===S.ignition)return `${spell.rank}d${spell.system.range?.value==='touch'?6:4}[persistent,fire]`;
  if(getSourceId(spell)===S.needleDarts)return `${spell.rank}[persistent,bleed]`;
@@ -246,7 +257,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   if(attacks.some(a=>a.outcome==='criticalSuccess'))markers.push('check:outcome:critical-success');
   data.flags.pf2e.context={...data.flags.pf2e.context,type:'damage-roll',sourceType:'attack',outcome:'success',options:[...new Set([...(data.flags.pf2e.context?.options??[]),...parts.flatMap(p=>damageContexts.get(p.roll)?.options??p.item.getRollOptions?.('item')??[]),...markers])],target:{actor:target.actor.uuid,token:target.uuid}};
   data.flags[MODULE_ID]={...data.flags[MODULE_ID],usageGenerated:true,spellCombinationDamage:{activityMessageId:message.id,kind,targetUuid:target.uuid,attacks:attacks.map(a=>({messageId:a.message.id,weaponUuid:a.strike.item.uuid,outcome:a.outcome})),parts:parts.map(p=>({itemUuid:p.item.uuid,total:p.roll.total}))}};
-  data.flavor=`<h4>${escape(kind==='combination'?'神威连击':kind==='swipe'?'法术横扫':'法术打击')}：${escape(target.name??target.actor.name??'目标')} · 合并伤害</h4>${data.flavor??''}`;
+  data.flavor=spellCombinationDamageHeading({game,target,kind})+(data.flavor??'');
   await Message().create(withDamageMessageTarget(data,target.uuid));
   requireGM();
  }
@@ -276,7 +287,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
    for(const target of targets)requireSceneTarget(actor,origin,target);
    const choice=kind==='combination'?null:await chooseSpell(actor,user);if(kind!=='combination'&&!choice)return '已取消。';
    let spellTarget=null;
-   if(kind==='swipe'&&!canAffectSeveral(choice.spell)){spellTarget=await select(actor,user,'选择承受法术的目标',targets.map(t=>({value:t.uuid,label:t.name??t.actor.name??t.id})));if(spellTarget===null)return '已取消。';}
+   if(kind==='swipe'&&!canAffectSeveral(choice.spell)){spellTarget=await select(actor,user,'选择承受法术的目标',spellCombinationTargetChoices({game,targets,user}));if(spellTarget===null)return '已取消。';}
    const tier=await select(actor,user,'当前多重攻击惩罚档位',[{value:'0',label:'本回合尚未攻击（MAP 0）'},{value:'1',label:'已攻击一次（MAP 1）'},{value:'2',label:'已攻击两次或更多（MAP 2）'}]);if(tier===null)return '已取消。';
    const order=kind==='combination'?await select(actor,user,'神威连击：攻击顺序',[{value:'weapon',label:'先武器，后拳头'},{value:'fist',label:'先拳头，后武器'}]):null;
    if(kind==='combination'&&order===null)return '已取消。';

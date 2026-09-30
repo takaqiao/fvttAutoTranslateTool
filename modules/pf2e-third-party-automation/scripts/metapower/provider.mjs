@@ -47,8 +47,13 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
    try{
     const receipt=await ledger.delivery({actorUuid,nonce,status:'started'},game.user),message=await fromUuid(receipt.messageUuid),user=game.users.get(receipt.userId);
     if(!user||!message||message.flags?.[MODULE_ID]?.metapowerUse?.nonce!==nonce||message.speaker?.actor!==actor.id)throw Error('Committed original card or author is unavailable; GM reconciliation is required.');
-    await message.update({[`flags.${MODULE_ID}.metapowerUse.status`]:'committed'});
-    await onCommittedChannel({receipt,message,user});
+    // Both consume the already-persisted receipt. Publish the card without
+    // making its acknowledgement block effects; settle both before recovery.
+    const outcomes=await Promise.allSettled([
+     Promise.resolve().then(()=>message.update({[`flags.${MODULE_ID}.metapowerUse.status`]:'committed'})),
+     Promise.resolve().then(()=>onCommittedChannel({receipt,message,user})),
+    ]);
+    const failure=outcomes.find(result=>result.status==='rejected');if(failure)throw failure.reason;
     const result=await ledger.delivery({actorUuid,nonce,status:'done'},game.user);
     await message.update({[`flags.${MODULE_ID}.metapowerUse.deliveryStatus`]:'done'});return result;
    }catch(error){
@@ -134,7 +139,7 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
   // entrance calls the same captured helper; never try to replace that API.
   const toolbeltNative=game.toolbelt?.api?.actionable?.useAction;
   const useToolbelt=toolbeltNative?createToolbeltEntrance({native:toolbeltNative,eligible,observe}):null;
-  if(useToolbelt&&game.modules.get('pf2e-hud')?.version==='2.55.2'&&game.modules.get('pf2e-toolbelt')?.version==='3.56.2'){
+  if(useToolbelt&&game.modules.get('pf2e-hud')?.active&&game.modules.get('pf2e-toolbelt')?.active){
    const patchHUD=(app,kind)=>{
     // HUD 2.55.2 preserves these class names. Both collections also contain
     // strikes, stances, spells and other controls with different use contracts.

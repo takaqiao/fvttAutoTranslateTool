@@ -93,12 +93,12 @@ const sourceFingerprint=m=>JSON.stringify({pf:m.flags?.pf2e,source:m.flags?.[ID]
 export function createElectricityLedger({game,reactionRestriction,fromUuid,queue=new SerialActions(),reactionAvailable=genericReactionAvailable}={}){
  const gm=()=>{if(game.user?.id!==game.users.activeGM?.id)throw Error('Electricity lifecycle requires the active GM.');};
  const owner=(actor,user)=>{gm();if(!user||game.users.get(user.id)!==user||!actor?.testUserPermission?.(user,'OWNER'))throw Error('Current actor owner permission is required.');};
- const save=async(actor,state)=>{
+ const save=async(actor,state,options={})=>{
   gm();const path=`flags.${ID}.electricity`,update={[path]:state};
   // Native updates recursively merge: omission alone cannot consume or expire
   // a pending effect. Delete only removed entries inside this provider's map.
   for(const key of Object.keys(actor.flags?.[ID]?.electricity?.pendingShocks??{}))if(!Object.hasOwn(state.pendingShocks,key))update[`${path}.pendingShocks.-=${key}`]=null;
-  await actor.update(update);
+  await actor.update(update,options);
  };
  const mutate=(actor,fn)=>queue.run(actor.uuid,async()=>{gm();return fn(electricityState(actor));});
  async function original(payload,user){
@@ -117,9 +117,10 @@ export function createElectricityLedger({game,reactionRestriction,fromUuid,queue
   let op=state.operations[key];if(op?.status==='done')return;
   const effects=electricityEffects(actor,S.charged).filter(i=>i.system.badge?.value>0);if(effects.length>1)throw Error('Multiple Charged parents require GM reconciliation.');
   let item=effects[0];
+  // The embedded effect mutation refreshes its UI; these two writes only journal it.
   if(!op){
    const before=item?.system.badge?.value??0,after=clear?0:gain?Math.min(3,before+1):Math.max(0,before-1);
-   op=state.operations[key]={status:'started',itemId:item?.id??null,before,after,gain};await save(actor,state);
+   op=state.operations[key]={status:'started',itemId:item?.id??null,before,after,gain};await save(actor,state,{render:false});
   }
   const proof=item?.flags?.[ID]?.electricityCharge;
   if(proof?.operation!==key){
@@ -132,7 +133,7 @@ export function createElectricityLedger({game,reactionRestriction,fromUuid,queue
     gm();await item.update({'system.badge.value':op.after,[`flags.${ID}.electricityCharge`]:{operation:key,ownPower:gain?(op.before===0||ownCharge(item)):ownCharge(item)}});
    }
   }
-  op.status='done';await save(actor,state);
+  op.status='done';await save(actor,state,{render:false});
  }
  async function remove(actor,state,key,{onlyIds=null}={}){
   if(state.operations[key]?.status==='done')return;

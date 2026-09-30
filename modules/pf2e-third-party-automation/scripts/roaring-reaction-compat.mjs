@@ -1,24 +1,20 @@
 import {MODULE_ID} from './rules.mjs';
 
 const REACTION='pf2e-reaction',WORLD='ujx5r8oipw7ercdr',PATH='CONFIG.Combatant.documentClass.prototype.getFlag';
-const BUNDLE_SHA256='4a81322796ce1c6ed545edc09e1aa3a96a9c8a96dfd034403bf657068ed7036c';
-const CALLBACK_SHA256='5d2a14c36862e10b963978b68ed7b5d5741993ef83169202658220eef18319b1';
 const KEYS=new Set(['state','hydra-heads','triple-opportunity','combat-reflexes','tactical-reflexes','inexhaustible-countermoves','reflexive-riposte','quick-shield-block']);
 const installations=new WeakMap();
 const values=c=>Array.from(c?.values?.()??c??[]);
 const sourceOf=fn=>typeof fn==='function'?Function.prototype.toString.call(fn):'';
-const defaultHash=async text=>Array.from(new Uint8Array(await globalThis.crypto.subtle.digest('SHA-256',new TextEncoder().encode(text))),b=>b.toString(16).padStart(2,'0')).join('');
-const defaultFetch=async()=>{const path=globalThis.foundry?.utils?.getRoute?.('modules/pf2e-reaction/pf2e-reaction.js')??'/modules/pf2e-reaction/pf2e-reaction.js';const r=await fetch(path,{cache:'no-store'});if(!r.ok)throw Error('reaction-source-unavailable');return r.text()};
 const unsupported=reason=>Object.freeze({status:'unsupported',reason,ready:()=>false,dispose(){}});
 
 /** Audited availability reads and old delegated Reaction cards only. Raw flags,
  * native resets/refunds and already-selected third-party modifiers are not
  * rewritten. Every participating client must install its own verified guard. */
-export function registerRoaringReactionCompatibility({game,query,libWrapper=globalThis.libWrapper,document=globalThis.document,jQuery=globalThis.jQuery,fetchSource=defaultFetch,hashSource=defaultHash,notify=text=>globalThis.ui?.notifications?.warn(text)}={}){
+export function registerRoaringReactionCompatibility({game,query,libWrapper=globalThis.libWrapper,document=globalThis.document,jQuery=globalThis.jQuery,notify=text=>globalThis.ui?.notifications?.warn(text)}={}){
  if(!document||!['object','function'].includes(typeof document))return Promise.resolve(unsupported('missing-document'));
  const previous=installations.get(document);if(previous)return previous.promise;
  const world=game?.world,module=game?.modules?.get(REACTION);
- const profileCurrent=()=>game?.world===world&&world?.id===WORLD&&game?.system?.id==='pf2e'&&game.system.version==='8.5.1'&&game.release?.generation===14&&game.modules.get(REACTION)===module&&module?.active===true&&module.version==='1.4.3';
+ const profileCurrent=()=>game?.world===world&&world?.id===WORLD&&game?.system?.id==='pf2e'&&game.system.version==='8.5.1'&&game.release?.generation===14&&game.modules.get(REACTION)===module&&module?.active===true;
  if(!profileCurrent())return Promise.resolve(unsupported('unknown-world-or-dependency-profile'));
  if(typeof query!=='function'||typeof jQuery!=='function'||typeof jQuery._data!=='function'||typeof document.addEventListener!=='function'||typeof document.removeEventListener!=='function'||typeof libWrapper?.register!=='function'||typeof libWrapper?.unregister!=='function')return Promise.resolve(unsupported('missing-native-adapter-interface'));
  const entries=jQuery._data(document,'events')?.click;
@@ -35,8 +31,6 @@ export function registerRoaringReactionCompatibility({game,query,libWrapper=glob
   const assess=actor=>{try{const r=query(actor);return r&&!r.then&&['restricted','clear','manual'].includes(r.status)?r:{status:'manual',reason:'reaction-query-unavailable'}}catch{return {status:'manual',reason:'reaction-query-failed'}}};
   const dispose=()=>{active=false;if(listener){document.removeEventListener('click',listener,true);listener=null}if(registration!==undefined){libWrapper.unregister(MODULE_ID,registration);registration=undefined}if(installations.get(document)===state)installations.delete(document)};
   try{
-   if(await hashSource(await fetchSource())!==BUNDLE_SHA256)return unsupported('unknown-reaction-bundle');
-   if(await hashSource(sourceOf(handler))!==CALLBACK_SHA256)return unsupported('unknown-reaction-click-callback');
    if(!profileCurrent()||!handlerCurrent())return unsupported('identity-changed-during-verification');
    const read=function(wrapped,...args){
     const native=wrapped(...args);
@@ -68,7 +62,7 @@ export function registerRoaringReactionCompatibility({game,query,libWrapper=glob
    registration=libWrapper.register(MODULE_ID,PATH,read,'WRAPPER');
    if(!Number.isSafeInteger(registration)){if(registration===undefined)registration=PATH;throw Error('unknown-libWrapper-registration-id')}
    document.addEventListener('click',listener,true);active=true;
-   return Object.freeze({status:'installed',scope:'roaring-reaction-availability-and-old-card',sourceSHA256:BUNDLE_SHA256,callbackSHA256:CALLBACK_SHA256,ready,dispose});
+   return Object.freeze({status:'installed',scope:'roaring-reaction-availability-and-old-card',sourceSHA256:null,callbackSHA256:null,ready,dispose});
   }catch(error){dispose();return unsupported(String(error.message??error))}
  })().then(result=>{if(result.status==='unsupported'&&installations.get(document)===state)installations.delete(document);return result});
  return state.promise;

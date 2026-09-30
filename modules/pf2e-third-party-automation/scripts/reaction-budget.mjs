@@ -150,10 +150,13 @@ export function createReactionBudget({game,reactionRestriction,fromUuid=globalTh
  async function isPrepaid(entry,actor,token,context,user){
   if(entry.slug!=='shield-block'||entry.shield)return false;
   const message=game.messages.get(entry.msgId),proof=own(message).reactionBudget,origin=message?.flags?.pf2e?.origin;
-  if(!message||message.rolls?.length||message.actor?.uuid!==actor.uuid||authorId(message)!==user.id||message.speaker?.actor!==actor.id||`Scene.${message.speaker?.scene}.Token.${message.speaker?.token}`!==token.uuid||proof?.epoch!==context.epoch||proof.actorUuid!==actor.uuid||proof.combatantId!==context.combatant.id||origin?.actor!==actor.uuid||origin.type!=='feat')return false;
+  // The authorized GM may settle a player's payment; other players must still
+  // be the payer. Recheck payer ownership after resolving the original item.
+  const payerPermitted=()=>{const author=message?.author??game.users?.get?.(authorId(message??{}));return !!author&&(author.id===user.id||user.isGM===true)&&actor.testUserPermission?.(author,'OWNER');};
+  if(!message||!payerPermitted()||message.rolls?.length||message.actor?.uuid!==actor.uuid||message.speaker?.actor!==actor.id||`Scene.${message.speaker?.scene}.Token.${message.speaker?.token}`!==token.uuid||proof?.epoch!==context.epoch||proof.actorUuid!==actor.uuid||proof.combatantId!==context.combatant.id||origin?.actor!==actor.uuid||origin.type!=='feat')return false;
   const evidence=()=>JSON.stringify({author:authorId(message),speaker:message.speaker,pf:message.flags?.pf2e,payment:own(message).reactionBudget,rolls:message.rolls?.length??0}),before=evidence();
   const item=message.item??await fromUuid(origin.uuid);
-  return game.messages.get(message.id)===message&&evidence()===before&&item?.actor?.uuid===actor.uuid&&item.uuid===origin.uuid&&item.system?.actionType?.value==='reaction'&&hasSource(item,'Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8');
+  return game.messages.get(message.id)===message&&evidence()===before&&payerPermitted()&&item?.actor?.uuid===actor.uuid&&item.uuid===origin.uuid&&item.system?.actionType?.value==='reaction'&&hasSource(item,'Compendium.pf2e.feats-srd.Item.jM72TjJ965jocBV8');
  }
  async function beginShield(payload,user){
   if(typeof payload?.nonce!=='string'||!/^[A-Za-z0-9-]{8,80}$/.test(payload.nonce))throw Error('盾牌格挡认领编号无效。');

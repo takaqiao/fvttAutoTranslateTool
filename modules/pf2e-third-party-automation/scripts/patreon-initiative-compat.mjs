@@ -1,12 +1,6 @@
 const PATREON='patreon-v3',BATTLE_CRY='Compendium.pf2e.feats-srd.Item.ePObIpaJDgDb9CQj';
-const SOURCE_SHA256='dc85cbea3a111b832e66dea58bdbfe1a591ef34c9975b4730eae9ecffd13970d';
-const HANDLER_SOURCE='async function hn(a){R.createChatMessage.forEach(e=>{e.listen(a)})}';
-const FA_FILTER_SOURCE='o=>En.includes(o.sourceId)',EVENTS=['createChatMessage','patreon-v3.processMessage'];
+const EVENTS=['createChatMessage','patreon-v3.processMessage'];
 const installedByHooks=new WeakMap();
-const functionSource=fn=>typeof fn==='function'?Function.prototype.toString.call(fn):null;
-const defaultFetch=async()=>{const path=globalThis.foundry?.utils?.getRoute?.('modules/patreon-v3/src/index.js')??'/modules/patreon-v3/src/index.js';const response=await fetch(path,{cache:'no-store'});if(!response.ok)throw Error('Patreon source fetch failed');return response.text();};
-const defaultHash=async source=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(source))),b=>b.toString(16).padStart(2,'0')).join('');
-
 // A separate target is required: Foundry defines actor.items as a non-configurable,
 // readonly own property, whose value a Proxy over the actual Actor cannot replace.
 function readonlyView(real,overrides){
@@ -29,7 +23,7 @@ function nativePair(Hooks){
  const original=custom[0];if(!original||typeof original!=='object')return null;
  const descriptor=Object.getOwnPropertyDescriptor(original,'fn');if(descriptor?.writable!==true)return null;
  const fn=descriptor.value;
- if(original.once||fn?.name!=='processMessage'||functionSource(fn)!==HANDLER_SOURCE)return null;
+ if(original.once||fn?.name!=='processMessage')return null;
  const chatEvents=Hooks.events?.createChatMessage;if(!Array.isArray(chatEvents))return null;
  const chat=chatEvents.filter(entry=>entry?.fn===fn);
  if(chat?.length!==1||chat[0].once)return null;
@@ -40,16 +34,11 @@ function nativePair(Hooks){
 }
 
 /** Decorate the exact paired public hook entry; never replace a private Patreon handler. */
-export async function registerPatreonInitiativeCompatibility({game,Hooks,isProviderReady,fetchSource=defaultFetch,hashSource=defaultHash}={}){
+export async function registerPatreonInitiativeCompatibility({game,Hooks,isProviderReady}={}){
  if(installedByHooks.has(Hooks))return installedByHooks.get(Hooks);
  const unsupported=reason=>({status:'unsupported',reason,dispose(){}});
  if(!game?.modules?.get(PATREON)?.active)return unsupported('Patreon is inactive');
- if(game.modules.get(PATREON).version!=='3.2.28')return unsupported('Unknown Patreon version');
  if(game.release?.generation!==14)return unsupported('Unknown Foundry hook profile');
- let sourceHash;try{sourceHash=await hashSource(await fetchSource());}catch(error){return unsupported(String(error.message??error));}
- if(sourceHash!==SOURCE_SHA256)return unsupported('Unknown Patreon source SHA256');
- // Another concurrent registration may have finished while the source was read.
- if(installedByHooks.has(Hooks))return installedByHooks.get(Hooks);
  const pair=nativePair(Hooks);if(!pair)return unsupported('Unknown or ambiguous Patreon hook signature');
  let active=true;
  const canHandle=(message,actor,gm,token)=>{
@@ -68,7 +57,7 @@ export async function registerPatreonInitiativeCompatibility({game,Hooks,isProvi
   if(!canHandle(message,actor,gm,token))return pair.fn.call(this,message,...args);
   const items=actor.items,filter=items.filter;
   const itemsView=readonlyView(items,{filter:function(predicate,...rest){
-   if(!canHandle(message,actor,gm,token)||functionSource(predicate)!==FA_FILTER_SOURCE)return filter.call(items,predicate,...rest);
+   if(!canHandle(message,actor,gm,token)||typeof predicate!=='function')return filter.call(items,predicate,...rest);
    return filter.call(items,(item,...tail)=>item.sourceId!==BATTLE_CRY&&predicate(item,...tail),...rest);
   }});
   const actorView=readonlyView(actor,{items:itemsView}),messageView=readonlyView(message,{actor:actorView});
@@ -81,7 +70,7 @@ export async function registerPatreonInitiativeCompatibility({game,Hooks,isProvi
  // map. Change only that entry's writable callback, preserving IDs and order.
  if(registrations.some(({event,entry,index})=>Hooks.events[event]?.[index]!==entry||entry.fn!==pair.fn||Object.getOwnPropertyDescriptor(entry,'fn')?.writable!==true))return unsupported('Patreon hook changed before registration');
  for(const {entry}of registrations)entry.fn=wrapper;
- const result={status:'installed',sourceSHA256:sourceHash,version:'3.2.28',foundryVersion:game.version,hookEntries:registrations.map(({event,entry,index})=>({event,id:entry.id,index})),dispose(){
+ const result={status:'installed',sourceSHA256:null,version:game.modules.get(PATREON).version,foundryVersion:game.version,hookEntries:registrations.map(({event,entry,index})=>({event,id:entry.id,index})),dispose(){
   active=false;
   for(const {event,entry,id}of registrations){
    // A later wrapper may retain ours. Deactivate the closed-over view, but do

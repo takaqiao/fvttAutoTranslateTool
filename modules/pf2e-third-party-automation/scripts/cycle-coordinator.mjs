@@ -15,7 +15,7 @@ export function createCycleCoordinator({game,fromUuid=globalThis.fromUuid,getCon
   if(token?.actor?.uuid!==context.actorUuid)throw Error('触发伤害的Token与角色不符。');
   return token;
  };
- const save=(actor,pending)=>actor.update({[`flags.${MODULE_ID}.cyclePending`]:pending});
+ const save=(actor,pending)=>actor.update({[`flags.${MODULE_ID}.cyclePending`]:pending},{render:false});
  const expired=pending=>{
   const combat=game.combat,timing=pending?.timing;
   if(!timing||timing.combatId!==combat?.id||!combat.started)return true;

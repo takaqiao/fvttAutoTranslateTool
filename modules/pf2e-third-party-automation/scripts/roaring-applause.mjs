@@ -177,7 +177,7 @@ export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeC
   const d=state.timing.deadline,combat=game.combats?.get(d.combatId),turns=values(combat?.turns),c=turns.find(c=>c.id===d.combatantId),actor=liveActor(d.actorUuid),token=values(game.scenes).flatMap(s=>values(s.tokens)).find(t=>t.uuid===d.tokenUuid);
   const worldTime=game.time.worldTime;
   if(!combat?.started||!c||!actor||c.actor!==actor||c.token!==token||token?.actor!==actor||!Number.isInteger(combat.round)||combat.round<1||!Number.isInteger(combat.turn)||!turns[combat.turn])return {worldTime,turn:null};
-  const matching=values(game.combats).filter(c=>c.started&&c.scene?.id===token.parent?.id).flatMap(c=>values(c.turns).filter(t=>t.token?.uuid===token.uuid));
+  const matching=values(game.combats).filter(c=>c.started).flatMap(c=>values(c.turns).filter(t=>t.token?.uuid===token.uuid));
   if(matching.length!==1||matching[0]!==c)return {worldTime,turn:null};
   const ended=turns.map(c=>c.flags?.pf2e?.roundOfLastTurnEnd).filter(Number.isInteger);
   return {worldTime,turn:{combatId:combat.id,combatantId:c.id,actorUuid:actor.uuid,tokenUuid:token.uuid,started:true,round:combat.round,turn:combat.turn,order:turns.map(c=>({id:c.id,initiative:Number.isFinite(c.initiative)?c.initiative:null,overridePriority:roaringTurnPriority(c)})),lastTurnEnd:c.flags?.pf2e?.roundOfLastTurnEnd??null,latestTurnEndRound:ended.length?Math.max(...ended):null}};

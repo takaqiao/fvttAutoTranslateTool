@@ -9,13 +9,11 @@ export function ensureNativeUseControls(root,actor,supported){
  }
 }
 const patchedHud=new WeakMap();
-const digestMethod=async source=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(source))),b=>b.toString(16).padStart(2,'0')).join('');
-/** These method hashes were checked against installed HUD 2.55.2. Its helper
- * has the same frequency/self-effect/toMessage contract as Toolbelt 3.56.2. */
-export async function patchHudController(controller,{kind,eligible,useToolbelt,digest=digestMethod,expectedHash=kind==='sidebar'?'6298be15832cd498563798053f88d93de41746ac0b3220c9224b341f858d7cae':'f35c7a798a03b2590f9113d30fc8c10a23a54da8274138af4ff8f1858211d1dd'}){
+/** Use the installed HUD interface without pinning its source or version. */
+export async function patchHudController(controller,{kind,eligible,useToolbelt}){
  const prototype=Object.getPrototypeOf(controller);if(patchedHud.has(prototype))return patchedHud.get(prototype);
  const descriptor=Object.getOwnPropertyDescriptor(prototype,'use');
- if(!descriptor?.configurable||typeof descriptor.value!=='function'||await digest(Function.prototype.toString.call(descriptor.value))!==expectedHash)throw Error('HUD use entry differs from the reviewed version; metapower use requires the original actor sheet.');
+ if(!descriptor?.configurable||typeof descriptor.value!=='function')throw Error('HUD use interface is unavailable; metapower use requires the original actor sheet.');
  if(patchedHud.has(prototype))return patchedHud.get(prototype);
  const native=descriptor.value;
  const use=function(event,...args){

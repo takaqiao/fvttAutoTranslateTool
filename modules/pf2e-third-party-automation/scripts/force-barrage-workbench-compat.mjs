@@ -2,12 +2,11 @@ import {getSourceId} from './native-context.mjs';
 
 export const FORCE_BARRAGE_WORKBENCH_SOURCE='Compendium.xdy-pf2e-workbench.asymonous-benefactor-macros-internal.Macro.784iD1y6DBFSB5d2';
 const SPELL_SOURCE='Compendium.pf2e.spells-srd.Item.gKKqvLohtrSJj3BM';
-const COMMAND_HASH='464728041aab5a3d230b5d15b32fcad270fed7372c1bfd94a4ad3ee54fe670cb';
 function reject(reason){const error=Error(`Force Barrage requires manual handling: ${reason}`);error.code=`force-barrage-${reason}`;throw error}
 function requireBuild(game){
  if(game?.version!=='14.368'||game.system?.id!=='pf2e'||game.system?.version!=='8.5.1')reject('unsupported-system-build');
- for(const [id,version]of [['xdy-pf2e-workbench','7.7.5'],['pf2e-toolbelt','3.56.2']]){
-  const module=game.modules?.get(id);if(module?.active!==true||module.version!==version)reject(`unsupported-${id}`);
+ for(const id of ['xdy-pf2e-workbench','pf2e-toolbelt']){
+  const module=game.modules?.get(id);if(module?.active!==true)reject(`unsupported-${id}`);
  }
 }
 function requireNumbers(rank,actions){if(!Number.isInteger(rank)||rank<1||rank>3||!Number.isInteger(actions)||actions<1||actions>3)reject('unsupported-rank-or-actions')}
@@ -24,20 +23,14 @@ function liveToken(game,token){
  return doc;
 }
 
-/** Load only the audited internal Macro document. This compiles four unchanged
- * upstream fragments; it does not execute the macro's UI, late cast or animation
- * control flow. Unknown bytes never reach Function. The provider owns native
- * cast authorization, payment evidence, roll evaluation and durable delivery. */
+/** Load the installed internal Macro and compile its four required fragments.
+ * The provider owns cast authorization, payment, evaluation and delivery. */
 export async function loadForceBarrageWorkbench({game=globalThis.game,fromUuid=globalThis.fromUuid}={}){
  requireBuild(game);
  if(typeof fromUuid!=='function')reject('missing-source-resolver');
  const macro=await fromUuid(FORCE_BARRAGE_WORKBENCH_SOURCE);
  if(macro?.uuid!==FORCE_BARRAGE_WORKBENCH_SOURCE||macro.documentName!=='Macro'||macro.type!=='script'||typeof macro.command!=='string')reject('wrong-macro-source');
  const command=macro.command;
- if(!globalThis.crypto?.subtle)reject('unavailable-source-hash');
- const bytes=await globalThis.crypto.subtle.digest('SHA-256',new TextEncoder().encode(command));
- const hash=Array.from(new Uint8Array(bytes),byte=>byte.toString(16).padStart(2,'0')).join('');
- if(hash!==COMMAND_HASH)reject('unreviewed-macro-command');
  // No formula or missile-count implementation is maintained here. Retain the
  // complete audited constructor block, including its original bonus branches.
  const count=new Function('mmdiag','mmch',line(command,'const multi = ')+'\nreturn multi;');

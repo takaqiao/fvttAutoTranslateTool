@@ -3,40 +3,22 @@ import {salubriousFeat} from './salubrious-kiss-rules.mjs';
 import {assertSource,currentToken,marker} from './salubrious-kiss-context.mjs';
 import {captureSalubriousPrivacy,validateSalubriousPrivacy,sameSalubriousPrivacy,salubriousPrivacyData,mergeSalubriousAudience,treatmentPrivacyForPatient} from './salubrious-privacy.mjs';
 const verifiedProfiles=new WeakSet();
-const hashText=async text=>Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text))),n=>n.toString(16).padStart(2,'0')).join('');
-export const SALUBRIOUS_WORKBENCH_PROFILE=Object.freeze({coreGeneration:14,system:'8.5.0',workbench:'7.7.5',sourceSHA256:'8ba67f06ed216b024a866861dcdd64da1bec3f4210367994156bcb2c9b2092cb',refocusSHA256:'9ee3738b87618ffba2ecb47b5e787d76b06bd018f34710a626c4e4392f7e2080'});
-// 8.5.1's native treatment callback is unchanged; its numeric-DC Check path
-// retains the exact boundary used here. Both profiles still hash Workbench's
-// complete bundle and actual Ec function before granting a private capability.
+// Module versions are unrestricted; retain the native system interface checks.
+export const SALUBRIOUS_WORKBENCH_PROFILE=Object.freeze({coreGeneration:14,system:'8.5.0'});
 export const SALUBRIOUS_WORKBENCH_PROFILES=Object.freeze({
  '8.5.0':SALUBRIOUS_WORKBENCH_PROFILE,
  '8.5.1':Object.freeze({...SALUBRIOUS_WORKBENCH_PROFILE,system:'8.5.1'}),
 });
-export async function verifySalubriousWorkbench({game,source,hash=hashText}){
+export async function verifySalubriousWorkbench({game}){
  const p=SALUBRIOUS_WORKBENCH_PROFILES[game.system?.version],dependency=game.modules.get('xdy-pf2e-workbench'),fn=game.PF2eWorkbench?.refocus;
- const current=()=>game.modules.get('xdy-pf2e-workbench')===dependency&&dependency?.active&&dependency.version===p.workbench&&game.release?.generation===p.coreGeneration&&game.system?.version===p.system&&game.PF2eWorkbench?.refocus===fn;
- if(!p||!current()||typeof fn!=='function'||typeof source!=='string')return Object.freeze({ready:false,reason:'unknown-workbench-profile'});
- const hashes=await Promise.all([hash(source),hash(Function.prototype.toString.call(fn))]);
- if(!current()||hashes[0]!==p.sourceSHA256||hashes[1]!==p.refocusSHA256)return Object.freeze({ready:false,reason:'unknown-or-changed-workbench-source'});
- const result=Object.freeze({ready:true,profile:p});verifiedProfiles.add(result);return result;
+ const current=()=>game.modules.get('xdy-pf2e-workbench')===dependency&&dependency?.active&&game.release?.generation===p.coreGeneration&&game.system?.version===p.system&&game.PF2eWorkbench?.refocus===fn;
+ if(!p||!current()||typeof fn!=='function')return Object.freeze({ready:false,reason:'unknown-workbench-profile'});
+ const result=Object.freeze({ready:true,profile:Object.freeze({...p,workbench:dependency.version})});verifiedProfiles.add(result);return result;
 }
-/** Optional startup verification must not download an absent dependency or
- * indefinitely hold up every unrelated provider while waiting for its body. */
-export async function loadSalubriousWorkbench({game,fetch=globalThis.fetch,timeoutMs=10000}){
- const profile=SALUBRIOUS_WORKBENCH_PROFILES[game.system?.version],dependency=game.modules.get('xdy-pf2e-workbench');
- if(!dependency?.active)return {ready:false,reason:'workbench-inactive'};
- if(!profile||dependency.version!==profile.workbench||game.release?.generation!==profile.coreGeneration||typeof game.PF2eWorkbench?.refocus!=='function')return {ready:false,reason:'unknown-workbench-profile'};
- const controller=new AbortController();let timer;
- try{
-  const timeout=new Promise((_,reject)=>{timer=setTimeout(()=>{controller.abort();reject(Error('workbench-verification-timeout'));},timeoutMs)});
-  const source=await Promise.race([Promise.resolve().then(async()=>{
-   const response=await fetch('modules/xdy-pf2e-workbench/xdy-pf2e-workbench.js',{signal:controller.signal});
-   if(!response.ok)throw Error('workbench-source-unavailable');return response.text();
-  }),timeout]);
-  if(game.modules.get('xdy-pf2e-workbench')!==dependency)return {ready:false,reason:'workbench-dependency-changed'};
-  return await verifySalubriousWorkbench({game,source});
- }catch(error){return {ready:false,reason:controller.signal.aborted?'workbench-verification-timeout':String(error.message??error)};}
- finally{clearTimeout(timer);}
+// No source download is needed to enable an installed Workbench interface.
+export async function loadSalubriousWorkbench({game}){
+ if(!game.modules.get('xdy-pf2e-workbench')?.active)return {ready:false,reason:'workbench-inactive'};
+ return verifySalubriousWorkbench({game});
 }
 const author=m=>m?.author?.id??m?.author??m?.user?.id??m?.user;
 const sourceToken=m=>`Scene.${m?.speaker?.scene}.Token.${m?.speaker?.token}`;

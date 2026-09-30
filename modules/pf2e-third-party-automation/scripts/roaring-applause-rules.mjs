@@ -34,9 +34,10 @@ export function validateRoaringTarget({game,actor,token,targets}={}){
  return target;
 }
 
-/** Freeze a unique real own turn. The viewed encounter and initiative ties are irrelevant. */
+/** Bind the actual combatant token. Global encounters have no combat.scene;
+ * each combatant can instead identify its scene via sceneId. */
 export function roaringOwnTurn({game,actor,token}={}){
- const candidates=values(game?.combats).filter(combat=>combat.started===true&&combat.scene?.id===token?.parent?.id&&values(combat.turns).some(c=>c.token?.uuid===token?.uuid));
+ const candidates=values(game?.combats).filter(combat=>combat.started===true&&values(combat.turns).some(c=>c.token?.uuid===token?.uuid));
  if(candidates.length!==1)throw Error('需要施法者所在的唯一进行中遭遇；当前时间关系请手工处理。');
  const combat=candidates[0],turns=values(combat.turns),matching=turns.filter(c=>c.token?.uuid===token.uuid),combatant=matching[0];
  if(matching.length!==1||combatant.actor!==actor||combatant.token!==token||!Number.isInteger(combat.round)||combat.round<1||!Number.isInteger(combat.turn)||turns[combat.turn]!==combatant||!Number.isFinite(combatant.initiative)||new Set(turns.map(c=>c.id)).size!==turns.length)throw Error('当前接入只处理施法者准确的本人回合。');

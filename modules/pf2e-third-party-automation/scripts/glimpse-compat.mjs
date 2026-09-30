@@ -5,7 +5,7 @@ import {validGlimpseTemplate} from './glimpse-native.mjs';
 import {createGlimpseExpiry} from './glimpse-expiry.mjs';
 export const GLIMPSE_TRIGGER_ID='TPAGlimpseFlow01',GLIMPSE_EVENT='tpa-glimpse-resist-event';
 export const glimpseWorld=game=>['ujx5r8oipw7ercdr','team-automation-qa2'].includes(game.world?.id);
-const ENGINE='trigger-engine',SETTING='pf2e-trigger-triggers',HASH='4f62f4c45a1a36d19a39f6b0da17ef5c311ced57af92265e38fd0930f3ae53de';
+const ENGINE='trigger-engine',SETTING='pf2e-trigger-triggers';
 const random=()=>globalThis.foundry?.utils?.randomID?.(24)??crypto.randomUUID();
 const slugFor=nonce=>`tpa-glimpse-${nonce.toLowerCase()}`;
 /** Rule facts only: the installed engine remains the sole condition writer. */
@@ -13,12 +13,11 @@ export function glimpseGraph(){return {id:GLIMPSE_TRIGGER_ID,name:'救赎瞥视�
  {id:'TPAGlimpseEvnt01',type:GLIMPSE_EVENT,position:{x:0,y:0},outs:{out:{connection:'TPAGlimpseCond01:ins:in'}}},
  {id:'TPAGlimpseCond01',type:'create-condition',position:{x:300,y:0},state:'timed',inputs:{condition:{value:'enfeebled'},value:{value:2},duration:{value:1},unit:{value:'rounds'},expiry:{value:'turn-end'},name:{value:'救赎瞥视：衰弱 2'},target:{connection:'TPAGlimpseEvnt01:outputs:target'},origin:{connection:'TPAGlimpseEvnt01:outputs:target'},slug:{connection:'TPAGlimpseEvnt01:outputs:slug'}}},
  ]}}
-async function verifyInstalledEngine(){const url=globalThis.foundry?.utils?.getRoute?.('modules/trigger-engine/scripts/main.js')??'/modules/trigger-engine/scripts/main.js',response=await fetch(url,{cache:'no-store'});if(!response.ok)return false;const bytes=await response.arrayBuffer(),actual=Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',bytes)),v=>v.toString(16).padStart(2,'0')).join('');return actual===HASH}
-export function createGlimpseCompat({game,fromUuid=globalThis.fromUuid,api=()=>globalThis.triggerEngine,verifyEngine=verifyInstalledEngine,query=data=>globalThis.CONFIG?.queries?.['trigger-engine.user-query']?.(data)}={}){
+export function createGlimpseCompat({game,fromUuid=globalThis.fromUuid,api=()=>globalThis.triggerEngine,query=data=>globalThis.CONFIG?.queries?.['trigger-engine.user-query']?.(data)}={}){
  const scopes=new Map();let registered=false,engineReady=false,initialized=false,template,probed=false,wake,lifecycle,hooksApi;
  const readyPromise=new Promise(resolve=>wake=resolve);
  const setting=()=>game.settings.get(ENGINE,SETTING)??{};
- const versions=()=>game.system?.id==='pf2e'&&game.system.version==='8.5.1'&&game.modules.get(ENGINE)?.active&&game.modules.get(ENGINE).version==='1.35.0'&&game.modules.get('pf2e-trigger-trove')?.active&&game.modules.get('pf2e-trigger-trove').version==='2.3.5';
+ const versions=()=>game.system?.id==='pf2e'&&game.system.version==='8.5.1'&&game.modules.get(ENGINE)?.active&&game.modules.get('pf2e-trigger-trove')?.active;
  const safeSetting=()=>{const s=setting();if(s.sources?.some(g=>g.id===GLIMPSE_TRIGGER_ID))throw Error('救赎瞥视模块图已被世界配置覆盖。');return s};
  const ready=()=>glimpseWorld(game)&&initialized&&versions()&&setting().enabled?.includes(GLIMPSE_TRIGGER_ID)&&!setting().disabled?.includes(GLIMPSE_TRIGGER_ID)&&!setting().sources?.some(g=>g.id===GLIMPSE_TRIGGER_ID)&&(!isActiveGM(game)||probed);
  function register({Hooks}){
@@ -52,7 +51,7 @@ export function createGlimpseCompat({game,fromUuid=globalThis.fromUuid,api=()=>g
   // Cleanup of previously verified owned effects must remain available even
   // when a dependency upgrade prevents creating any new Glimpse automation.
   lifecycle??=createGlimpseExpiry({game});lifecycle.register({Hooks:hooksApi});await lifecycle.reconcile();
-  if(!versions()||!await verifyEngine())throw Error('救赎瞥视依赖版本或引擎源码不匹配。');
+  if(!versions())throw Error('救赎瞥视依赖未启用或系统不匹配。');
   if(!engineReady){let timer;try{await Promise.race([readyPromise,new Promise((_,reject)=>timer=setTimeout(()=>reject(Error('Trigger Engine 尚未就绪。')),10000))])}finally{clearTimeout(timer)}}
   const doc=await fromUuid(GLIMPSE_SOURCES.resistance);template=doc?.toObject?.();if(!validGlimpseTemplate(template))throw Error('救赎瞥视原生抗力模板已改变。');
   const s=safeSetting();if(s.disabled?.includes(GLIMPSE_TRIGGER_ID))throw Error('救赎瞥视后续图已明确禁用。');

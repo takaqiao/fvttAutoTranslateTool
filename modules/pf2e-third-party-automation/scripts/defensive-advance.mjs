@@ -18,7 +18,7 @@ export function createDefensiveAdvance({game,fromUuid=globalThis.fromUuid,choose
  const resolveAction=item=>game.world?.id==='ujx5r8oipw7ercdr'&&item?.type==='feat'&&getSourceId(item)===DEFENSIVE_ADVANCE_SOURCE?'defensive-advance':null;
  function compatibility(){
   if(startup.status!=='ready')throw Error(startup.reason??'列盾突进启动配置尚未就绪；请修复配置后整页刷新，再使用手工后续流程。');
-  const p=game.modules?.get('patreon-v3');if(!p?.active||p.version!=='3.2.28')throw Error('列盾突进的 Patreon 执行器已变化。');
+  const p=game.modules?.get('patreon-v3');if(!p?.active)throw Error('列盾突进的 Patreon 执行器已变化。');
   if(game.modules?.get('pf2e-auto-action-tracker')?.active)throw Error('当前列盾突进尚未核验 Auto Action Tracker 的内含动作计费；请手工继续。');
  }
  function gm(){if(!isActiveGM(game)||!game.user.isGM)throw Error('列盾突进需要当前主GM。');compatibility();}
@@ -76,7 +76,7 @@ export function createDefensiveAdvance({game,fromUuid=globalThis.fromUuid,choose
    if(current.turn&&(uses.some(r=>r.turn===current.turn)||values(game.messages).some(m=>m.id!==message.id&&m.speaker?.actor===actor.id&&m.flags?.[MODULE_ID]?.defensiveAdvanceObservedTurn===current.turn&&isActualUseMessage(m)&&m.flags?.pf2e?.origin?.rollOptions?.includes('origin:item:trait:flourish'))))throw Error('实际本回合已承诺华丽动作。');
    const target=await originalTarget(ctx);gm();validate(ctx);
    const r={nonce:input(message).nonce,messageId:message.id,actorUuid:actor.uuid,itemUuid:item.uuid,tokenUuid:ctx.token.uuid,userId:user.id,gmId:game.user.id,turn:current.turn,cost:2,flourish:true,status:'awaiting-movement',targetId:target?.id??null,targetUuid:target?.uuid??null,targetActorUuid:target?.actor?.uuid??null};
-   await actor.update({[`flags.${MODULE_ID}.defensiveAdvanceUses`]:[...uses.slice(-63),{nonce:r.nonce,messageId:message.id,turn:r.turn,cost:2}]});await save(message,r);return true;
+   await actor.update({[`flags.${MODULE_ID}.defensiveAdvanceUses`]:[...uses.slice(-63),{nonce:r.nonce,messageId:message.id,turn:r.turn,cost:2}]},{render:false});await save(message,r);return true;
   });
   if(!entered)return own(message)?.result??'本次列盾突进已开始或完成；不会重放。';
   try{
