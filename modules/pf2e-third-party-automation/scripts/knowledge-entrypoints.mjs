@@ -10,8 +10,27 @@ const random=()=>globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.rand
  * verifies that card, and settles its automatic primary result. No roll totals/DC
  * cross the public RPC response. */
 export function createWorkbenchRecallController({game,fromUuid=globalThis.fromUuid,globals=globalThis,onResolved=()=>{},onError=console.error}={}){
- const queue=new SerialActions(),requests=new Map();let socket,registered=false;
+  const queue=new SerialActions(),requests=new Map(),observers=new Set();let socket,registered=false,events;
  function activeGM(){if(!isActiveGM(game))throw Error('回忆知识的主 GM 已交接。');}
+  function savedResult(input,messageId,user){
+   const message=game.messages.get(messageId),state=message?.flags?.[MODULE_ID]?.workbenchRecall;
+   return message?.author?.id===user.id&&message.actor?.uuid===input.actor.uuid&&state?.requestId===input.requestId&&state.userId===user.id&&state.actorUuid===input.actor.uuid&&state.tokenUuid===input.token.uuid&&state.resolved===true?{messageId:message.id}:null;
+  }
+  /** Socketlib has no online request timeout. A saved GM result is sufficient
+   * even if its RPC reply is lost; never run the macro again to recover it. */
+  async function receiveSaved(rpc,read){
+   const prior=read();if(prior)return prior;
+   const hooks=events,subscriptions=[];let rejectSaved;
+   const cancel=()=>rejectSaved?.(Error('回忆知识入口已关闭；已保存秘骰保留，不会再次投骰。'));
+   const saved=new Promise((resolve,reject)=>{rejectSaved=reject;const check=()=>{const result=read();if(result)resolve(result);};
+    for(const event of ['createChatMessage','updateChatMessage'])if(hooks?.on)subscriptions.push([event,hooks.on(event,check)]);check();});
+   observers.add(cancel);
+   try{
+    const outcome=await Promise.race([saved.then(value=>({value})),Promise.resolve().then(rpc).then(reply=>({reply}),error=>({error}))]);
+    const persisted=read();if(persisted)return persisted;if(outcome.value)return outcome.value;
+    if(outcome.error)throw outcome.error;if(!outcome.reply?.ok)throw Error(outcome.reply?.error??'回忆知识回复不明确；不会重新投骰。');return outcome.reply.value;
+   }finally{for(const[event,id]of subscriptions)hooks.off(event,id);observers.delete(cancel);}
+  }
  async function settle(messageId,requester){
   if(!requester||game.users.get(requester.id)!==requester)throw Error('回忆知识原操作者不可验证。');
   activeGM();return queue.run(`settle:${messageId}`,async()=>{
@@ -35,7 +54,7 @@ export function createWorkbenchRecallController({game,fromUuid=globalThis.fromUu
    if(sourceCard)await sourceCard.update({[`flags.${MODULE_ID}.knowledge.recall`]:{...sourceCard.flags[MODULE_ID].knowledge.recall,workbenchOperation:{requestId:input.requestId,status:'done',messageId}}});
   }
   if(isActiveGM(game))await settle(messageId,user);
-  else {const gm=game.users.activeGM;if(!socket||!gm?.active)throw Error('原生秘骰已保存，需要在线 GM 处理知识联动；不会再次投骰。');const response=await socket.executeAsUser('knowledge-rk-finalize',gm.id,{messageId});if(!response?.ok)throw Error(response?.error??'回忆知识结果尚未结算；不会再次投骰。');}
+    else {const gm=game.users.activeGM;if(!socket||!gm?.active)throw Error('原生秘骰已保存，需要在线 GM 处理知识联动；不会再次投骰。');await receiveSaved(()=>socket.executeAsUser('knowledge-rk-finalize',gm.id,{messageId}),()=>savedResult(input,messageId,user));}
   return {messageId};
  }
  async function run({actor,token,user=game.user,targetUuids=null,origin=null,requestId=random(),statistic=null,assurance=false,dc=null}={}){
@@ -45,10 +64,10 @@ export function createWorkbenchRecallController({game,fromUuid=globalThis.fromUu
   activeGM();if(!user.active||!socket)throw Error('原操作者不在线，未代为进行回忆知识。');
   if(!origin?.messageId)throw Error('附带回忆知识缺少原生动作卡。');
   const payload={actorUuid:actor.uuid,tokenUuid:doc(token)?.uuid,targetUuids:input.targetUuids,requestId,origin,statistic,assurance,dc};
-  const reply=await socket.executeAsUser('knowledge-rk-run',user.id,payload);activeGM();if(!reply?.ok)throw Error(reply?.error??'回忆知识回复不明确；不会重新投骰。');
+    const result=await receiveSaved(()=>socket.executeAsUser('knowledge-rk-run',user.id,payload),()=>{const operation=game.messages.get(origin.messageId)?.flags?.[MODULE_ID]?.knowledge?.recall?.workbenchOperation;return operation?.requestId===requestId&&operation.status==='done'?savedResult(input,operation.messageId,user):null;});activeGM();
   // Slow native document synchronization may make the card temporarily absent.
   // The owner also sent the finalize RPC. Never poll/replay the macro here.
-  return reply.value;
+    return result;
  }
  function actorFor(input={}){return input.actor??values(input.actors)[0]??globals.canvas?.tokens?.controlled?.[0]?.actor??game.user.character;}
  function tokenFor(actor,input={}){const supplied=doc(input.token);if(supplied?.actor?.uuid===actor?.uuid)return supplied;const controlled=values(globals.canvas?.tokens?.controlled).map(doc).filter(t=>t.actor?.uuid===actor?.uuid),active=values(actor?.getActiveTokens?.(true,true)).map(doc);return controlled[0]??(active.length===1?active[0]:null);}
@@ -60,7 +79,7 @@ export function createWorkbenchRecallController({game,fromUuid=globalThis.fromUu
   const message=game.messages.get(result.messageId);return [{message}];
  }
  function register({Hooks,libWrapper,socket:socketApi}={}){
-  if(registered)return()=>{};registered=true;socket=socketApi;const cleanup=[],listeners=new Map(),hooks=[];
+    if(registered)return()=>{};registered=true;socket=socketApi;events=Hooks;const cleanup=[],listeners=new Map(),hooks=[];
   const on=(name,fn)=>{if(Hooks)hooks.push([name,Hooks.on(name,fn)]);};
   if(socket){socket.register('knowledge-rk-finalize',async function(payload){try{if(!registered)throw Error('回忆知识入口已关闭。');return {ok:true,value:await settle(payload?.messageId,game.users.get(this.socketdata.userId))};}catch(e){return {ok:false,error:e.message};}});
    socket.register('knowledge-rk-run',async function(payload){try{if(!registered)throw Error('回忆知识入口已关闭。');
@@ -97,7 +116,7 @@ export function createWorkbenchRecallController({game,fromUuid=globalThis.fromUu
   const recover=message=>{const state=message?.flags?.[MODULE_ID]?.workbenchRecall;if(isActiveGM(game)&&state?.schema===1&&!state.resolved&&['pending','done'].includes(state.status))Promise.resolve(settle(message.id,message.author)).catch(onError);};
   on('createChatMessage',recover);on('updateChatMessage',recover);on('updateUser',()=>{if(isActiveGM(game))for(const message of values(game.messages))recover(message);});
   if(isActiveGM(game))for(const message of values(game.messages))recover(message);
-  return()=>{for(const [name,id]of hooks)Hooks.off(name,id);for(const app of listeners.keys())release(app);for(const fn of cleanup.reverse())fn();registered=false;};
+    return()=>{for(const cancel of observers)cancel();for(const [name,id]of hooks)Hooks.off(name,id);for(const app of listeners.keys())release(app);for(const fn of cleanup.reverse())fn();events=null;registered=false;};
  }
  return {run,action,register,settle};
 }

@@ -83,10 +83,10 @@ function controllerFixture(){
  const socketFor=user=>({register(name,fn){handlers.set(`${user.id}:${name}`,fn);},executeAsUser(name,id,payload){return handlers.get(`${id}:${name}`).call({socketdata:{userId:user.id}},payload);}});
  const native={slug:'recall-knowledge',async use(){throw Error('unwrapped native skill chooser');}};class Variant{get slug(){return 'recall-knowledge';}async use(){throw Error('unwrapped native variant');}};native.getDefaultVariant=()=>new Variant();
  f.game.pf2e={actions:new Map([['recall-knowledge',native]])};gmGame.pf2e={actions:new Map()};
- const hooks={on(){return 1;},off(){}};
+  const subscriptions=new Map(),hooks={on(name,fn){const set=subscriptions.get(name)??new Set();set.add(fn);subscriptions.set(name,set);return fn;},off(name,fn){const set=subscriptions.get(name);set?.delete(fn);if(!set?.size)subscriptions.delete(name);},callAll(name,...args){for(const fn of [...subscriptions.get(name)??[]])fn(...args);},count(){return [...subscriptions.values()].reduce((total,set)=>total+set.size,0);}};
  const owner=createWorkbenchRecallController({...f,onError:e=>{throw e;}}),gmController=createWorkbenchRecallController({...f,game:gmGame,onResolved:message=>resolved.push(message.id)});
  gmController.register({Hooks:hooks,socket:socketFor(f.gm)});const cleanup=owner.register({Hooks:hooks,socket:socketFor(f.user),libWrapper:{register(_id,path,fn){wrappers.set(path,fn);},unregister(_id,path){wrappers.delete(path);}}});
- return {...f,gmGame,owner,gmController,handlers,wrappers,resolved,cleanup,native,socketFor};
+  return {...f,gmGame,owner,gmController,handlers,wrappers,resolved,cleanup,native,socketFor,hooks};
 }
 test('ordinary native RK and explicit variants automatically choose primary on owner and expose no secret RPC totals',async()=>{
  const f=controllerFixture();const result=await f.native.getDefaultVariant().use({actors:[f.actor],statistic:'arcana'});assert.equal(result[0].message.flags[MODULE_ID].workbenchRecall.result.statistic,'society');assert.equal(f.die.count,1);assert.deepEqual(f.resolved,['rk1']);
@@ -105,6 +105,19 @@ test('GM dispatches incidental RK to its original owner and repeated request nev
  const f=controllerFixture();const original={id:'source',actor:f.actor,author:f.user,speaker:{actor:f.actor.id,scene:'s',token:f.token.id},flags:{[MODULE_ID]:{knowledge:{recall:{actorUuid:f.actor.uuid,targetUuid:f.target.uuid,userId:f.user.id}}}},async update(changes){for(const[k,v]of Object.entries(changes)){let o=this;const ps=k.split('.');for(const p of ps.slice(0,-1))o=o[p]??={};o[ps.at(-1)]=v;}}};f.game.messages.set(original.id,original);
  const input={actor:f.actor,token:f.token,user:f.user,targetUuids:[f.target.uuid],requestId:'incidental',origin:{messageId:original.id,rollOptions:[`${MODULE_ID}:knowledge:recall:source`]}};
  await f.gmController.run(input);await f.gmController.run(input);assert.equal(f.die.count,1);assert.deepEqual(f.resolved,['rk1']);f.cleanup();
+});
+test('owner finishes from the GM resolved native card when the finalize RPC reply never arrives',async()=>{
+ const f=controllerFixture(),finalize=f.handlers.get('gm:knowledge-rk-finalize'),baseline=f.hooks.count();
+ f.handlers.set('gm:knowledge-rk-finalize',async function(payload){await finalize.call(this,payload);f.hooks.callAll('updateChatMessage',f.game.messages.get(payload.messageId));return new Promise(()=>{});});
+ let timer;try{const result=await Promise.race([f.owner.run({actor:f.actor,token:f.token,targetUuids:[f.target.uuid],requestId:'lost-finalize'}),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('lost reply stalled original RK')),100);})]);assert.deepEqual(result,{messageId:'rk1'});assert.equal(f.hooks.count(),baseline);}finally{clearTimeout(timer);f.cleanup();}
+ assert.equal(f.die.count,1);assert.deepEqual(f.resolved,['rk1']);
+});
+test('GM finishes an incidental RK from its exact saved source and resolved result when the owner reply never arrives',async()=>{
+ const f=controllerFixture(),dispatch=f.handlers.get('player:knowledge-rk-run'),baseline=f.hooks.count();
+ const original={id:'source',actor:f.actor,author:f.user,speaker:{actor:f.actor.id,scene:'s',token:f.token.id},flags:{[MODULE_ID]:{knowledge:{recall:{actorUuid:f.actor.uuid,targetUuid:f.target.uuid,userId:f.user.id}}}},async update(changes){for(const[k,v]of Object.entries(changes)){let o=this;const ps=k.split('.');for(const p of ps.slice(0,-1))o=o[p]??={};o[ps.at(-1)]=v;}}};f.game.messages.set(original.id,original);
+ f.handlers.set('player:knowledge-rk-run',async function(payload){await dispatch.call(this,payload);f.hooks.callAll('updateChatMessage',original);f.hooks.callAll('updateChatMessage',f.game.messages.get('rk1'));return new Promise(()=>{});});
+ let timer;try{const result=await Promise.race([f.gmController.run({actor:f.actor,token:f.token,user:f.user,targetUuids:[f.target.uuid],requestId:'lost-owner',origin:{messageId:original.id}}),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('lost reply stalled incidental RK')),100);})]);assert.deepEqual(result,{messageId:'rk1'});assert.equal(f.hooks.count(),baseline);}finally{clearTimeout(timer);f.cleanup();}
+ assert.equal(f.die.count,1);assert.deepEqual(f.resolved,['rk1']);
 });
 test('a target Token relinked while GM settlement is delayed cannot grant the old actor result to its replacement',async()=>{
  const f=controllerFixture(),capture=await api.captureWorkbenchRecall({...f,requestId:'target-relink',targetUuids:[f.target.uuid]});
