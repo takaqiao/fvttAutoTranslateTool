@@ -52,6 +52,10 @@ test('a failed primary afterRoll keeps the claimed native result and cannot repe
  const input={...f,requestId:'failed-consumption',targetUuids:[f.target.uuid]};await assert.rejects(()=>api.captureWorkbenchRecall(input),/native effect write failed/);assert.equal(f.die.count,1);assert.equal(f.game.messages.get('rk1').flags[MODULE_ID].workbenchRecall.probeUse.status,'claimed');
  await assert.rejects(()=>api.captureWorkbenchRecall(input),/已开始|保存|重复/);assert.equal(f.die.count,1);assert.equal(after,1);
 });
+test('Workbench rendering failure after the saved native check still consumes its native next-check rules once',async()=>{
+ const f=fixture(),macro=await f.fromUuid(api.WORKBENCH_RECALL_UUID);macro.command="throw Error('Workbench output failed');";let after=0;f.actor.rules=[{afterRoll(){after++;}}];
+ await assert.rejects(()=>api.captureWorkbenchRecall({...f,requestId:'failed-wb-render',targetUuids:[f.target.uuid]}),/Workbench output failed/);assert.equal(f.die.count,1);assert.equal(after,1);assert.equal(f.game.messages.get('rk1').flags[MODULE_ID].workbenchRecall.probeUse.status,'done');assert.equal(f.game.messages.get('rk1').flags[MODULE_ID].workbenchRecall.status,'rolling');
+});
 test('native selected substitution stays deterministic and afterRoll sees the actual selected substitution',async()=>{
  const f=fixture();f.actor.skills.society.substitutions=[{slug:'native-substitute',selected:true,required:true,value:15,effectType:'fortune'}];nativeProbeFixture(f);let after=0;
  f.actor.rules=[{afterRoll({roll,context}){after++;assert.equal(roll.dice.length,0);assert.equal(context.substitutions[0].selected,true);}}];

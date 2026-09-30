@@ -50,6 +50,7 @@ export async function captureWorkbenchRecall({game,actor,token,user=game.user,ta
  const scopedUser=scoped(user,{targets:scopedTargets}),scopedGame=scoped(game,{user:scopedUser,userId:user.id});
  const BaseMessages=globals.ChatMessage;
  class Messages extends BaseMessages {static getSpeaker(){return {actor:actor.id,token:tokenDocument.id,scene:tokenDocument.parent?.id};}static async create(data){if(macroPublished)throw Error('Workbench 同次回忆知识生成了重复结果卡。');authorization(game,actor,user);const context=data.flags?.pf2e?.context;if(context?.type!=='skill-check'||!context.options?.includes('action:recall-knowledge'))throw Error('Workbench 结果来源不匹配。');const content={...data,user:user.id,author:user.id,speaker:Messages.getSpeaker(),blind:true,whisper:BaseMessages.getWhisperRecipients('GM').map(u=>u.id)};if(created){const flags={...created.flags,...data.flags,[MODULE_ID]:created.flags?.[MODULE_ID]};if(primaryNativeContext)flags.pf2e={...data.flags.pf2e,context:{...primaryNativeContext,...context,domains:primaryNativeContext.domains,options:[...new Set([...primaryNativeContext.options,...context.options])],outcome:null,unadjustedOutcome:null,dc:null}};delete content.user;delete content.author;await created.update({...content,flags});}else created=await BaseMessages.create(content);macroPublished=true;return created;}}
+ try{
  if(assurance){const skill=actor.skills?.[statistic];if(!skill)throw Error('指定技能不存在。');const proficiency=(skill.modifiers??[]).filter(m=>m.type==='proficiency'&&!m.ignored).reduce((n,m)=>n+(m.modifier??0),0);if(!Number.isFinite(proficiency))throw Error('Assurance 熟练加值不可用。');currentTarget=targets.length===1?targets[0].uuid:null;probes.set(`${currentTarget??''}:${statistic}`,{statistic,label:skill.label??statistic,modifier:proficiency,domains:[statistic,'skill-check'],rollOptions:[...(origin?.rollOptions??[]),...(actor.getRollOptions?.([statistic,'skill-check'])??[]),'action:recall-knowledge',`action:recall-knowledge:${statistic}`,`skill:rank:${skill.rank}`,'assurance','substitute:assurance','fortune',...(targets.length===1?targets[0].actor.getSelfRollOptions('target'):[])],targetUuid:currentTarget,lore:!!skill.lore});await Messages.create({content:`<strong>Recall Knowledge — Assurance</strong><p>${escape(skill.label??statistic)}: ${10+proficiency}</p>`,rolls:[],flags:{pf2e:{context:{type:'skill-check',options:['action:recall-knowledge','secret','assurance'],traits:['concentrate','secret'],rollMode:'blindroll',target:targets.length===1?{token:targets[0].uuid,actor:targets[0].actor.uuid}:undefined}}}});
  }else{
   if(!game.modules.get('xdy-pf2e-workbench')?.active)throw Error('回忆知识需要启用 Workbench。');let macro=await fromUuid(WORKBENCH_RECALL_UUID);if(!macro?.execute||macro.type!=='script')throw Error('Workbench 回忆知识宏接口不可用。');
@@ -94,6 +95,15 @@ export async function captureWorkbenchRecall({game,actor,token,user=game.user,ta
  if(primaryRoll)await consumeKnowledgePrimary({message:created,candidate:candidates.find(candidate=>candidate.statistic===primary.statistic&&candidate.targetUuid===primary.targetUuid)??primary,receipt:receipts.get(`${primary.targetUuid??''}:${primary.statistic}`),roll:primaryRoll});
  if(primaryRoll)await created.update({[`flags.${MODULE_ID}.workbenchRecall.status`]:'pending'});
  return {message:created,die,candidates};
+ }catch(error){
+  // Rendering/target validation can fail after a completed native check. Its
+  // saved die still spent the next-check effects; output failure is no replay.
+  if(primaryRoll&&rawRoll&&created?.rolls?.[0]?.total===rawRoll.total&&own(created)?.die===rawRoll.total){
+   try{await consumeKnowledgePrimary({message:created,candidate:primary,receipt:receipts.get(`${primary.targetUuid??''}:${primary.statistic}`),roll:primaryRoll});}
+   catch(cleanupError){throw Error(`${error.message}；原生一次性效果处理未确认：${cleanupError.message}`,{cause:error});}
+  }
+  throw error;
+ }
 }
 export async function finalizeWorkbenchRecall({game,message,user=game.user,statistic=null,dc=null,fromUuid=globalThis.fromUuid}){
  if(!user?.isGM||game.user!==user||game.users.get(user.id)!==user)throw Error('只有 GM 可裁定回忆知识结果。');
