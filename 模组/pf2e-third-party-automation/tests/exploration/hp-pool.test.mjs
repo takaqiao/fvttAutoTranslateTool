@@ -5,7 +5,7 @@ function setup(){
   let middleware;const master={uuid:'Actor.M',isOwner:true},slave={uuid:'Actor.S',modules:{'pf2e-toolbelt':{shareData:{data:{health:true}}}}},armor={uuid:'Actor.A',modules:{'pf2e-toolbelt':{shareData:{data:{health:false}}}}};
   const game={settings:{get:()=>true},modules:new Map([['pf2e-toolbelt',{active:true}]]),toolbelt:{api:{shareData:{getMasterInMemory:a=>a===slave?master:null,getSlavesInMemory:()=>[slave,armor]}}}};
   const pools=createHpPools({game,actorUpdateEvents:{addActorUpdateMiddleware:f=>{middleware=f}}});
-  return {pools,master,slave,armor,call:(actor,wrapped,changes,options)=>middleware.call(actor,wrapped,changes,options)};
+  return {pools,master,slave,armor,game,call:(actor,wrapped,changes,options)=>middleware.call(actor,wrapped,changes,options)};
 }
 test('runtime health gate, not armor sharing, owns pool identity',()=>{
   const s=setup();assert.deepEqual(s.pools.discover(s.slave).memberUUIDs,['Actor.M','Actor.S']);assert.equal(s.pools.discover(s.armor).poolUUID,'Actor.A');
@@ -25,4 +25,9 @@ test('unrelated master write and socket-only ownership never prove application',
 });
 test('same effect selects larger healing once; different effects remain additive',()=>{
   const results=deduplicatePoolEffects([{poolUUID:'M',effectId:'one',amount:5},{poolUUID:'M',effectId:'one',amount:10},{poolUUID:'M',effectId:'two',amount:7}]);assert.equal(results.reduce((s,x)=>s+x.amount,0),17);
+});
+test('zero effective HP change is confirmed by exact saved native no-change receipt',async()=>{
+  const s=setup();s.slave.id='S';const receipt={id:'R',speaker:{actor:'S'},flags:{pf2e:{appliedDamage:null,context:{type:'damage-taken',options:['pf2e-third-party-automation:exploration-apply:A1:D1:Actor.S']}}}};
+  s.game.messages=new Map([['R',receipt]]);
+  const result=await s.pools.withNativeApplication({id:'A1'},s.slave,async()=>({receipt}));assert.equal(result.poolReceipt.noChange,true);
 });

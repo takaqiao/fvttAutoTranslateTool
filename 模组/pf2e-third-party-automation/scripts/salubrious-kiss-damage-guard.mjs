@@ -23,8 +23,8 @@ const stampEqual=(a,b)=>!!a&&!!b&&['schema','nonce','userId','actorUuid','checkI
  * No wrapper registration, additional HP writes, healing computation or IWR.
  * The input capability is private to the exact params and contextual receiver;
  * its final assertion validates the actual native params after provider awaits. */
-export function createSalubriousDamageGuard({game,messagePrivacy,getRollContext=()=>null,DamageRoll,runExclusive=(key,operation)=>queue.run(key,operation)}={}){
- const grants=new WeakMap(),issued=new Set(),protectedIds=new Set();
+export function createSalubriousDamageGuard({game,messagePrivacy,getRollContext=()=>null,DamageRoll,isExplorationContext=()=>false,runExclusive=(key,operation)=>queue.run(key,operation)}={}){
+ const grants=new WeakMap(),issued=new Set(),protectedIds=new Set(),explorationGrants=new WeakMap();
  const gm=()=>{if(!game.user?.isGM||!game.user.active||game.users.activeGM!==game.user||game.users.get(game.user.id)!==game.user)fail('当前客户端不是本次主 GM');return game.user;};
  const nativeRoll=()=>DamageRoll??game.pf2e?.DamageRoll??globalThis.CONFIG?.Dice?.rolls?.find(cls=>cls.name==='DamageRoll');
  function sourceIds(params){
@@ -33,11 +33,12 @@ export function createSalubriousDamageGuard({game,messagePrivacy,getRollContext=
   return ids;
  }
  function protectedApplication(params){
+  if(strings(params?.rollOptions).some(o=>o.startsWith(`${MODULE_ID}:exploration-apply:`)))return true;
   if(strings(params?.rollOptions).some(automatic))return true;
   for(const id of sourceIds(params)){
    if(protectedIds.has(id))return true;
    const card=game.messages.get(id),cardProof=card?.flags?.[MODULE_ID]?.salubriousKiss;
-   if(cardProof?.kind==='damage'||strings(card?.flags?.pf2e?.context?.options).some(automatic)){protectedIds.add(id);return true;}
+   if(card?.flags?.[MODULE_ID]?.exploration||cardProof?.kind==='damage'||strings(card?.flags?.pf2e?.context?.options).some(automatic)){protectedIds.add(id);return true;}
    // Exact one source actor only. An already deleted card still cannot be
    // replayed using its persisted claim; do not search actors or recent cards.
    const supplied=params?.item?.actor??card?.actor,actor=game.actors.get(supplied?.id);
@@ -98,6 +99,11 @@ export function createSalubriousDamageGuard({game,messagePrivacy,getRollContext=
   });
  }
  async function applyDamage(actor,params,continuation){
+  const explorationGrant=explorationGrants.get(params);
+  if(explorationGrant){
+   explorationGrants.delete(params);explorationGrant.validate(actor,params);let entered=false;
+   return continuation(params,(nativeActor,finalParams)=>{if(entered)fail('探索治疗原生应用已进入一次');entered=true;explorationGrant.validate(nativeActor,finalParams)});
+  }
   const grant=params&&typeof params==='object'?grants.get(params):null;
   if(!grant){if(protectedApplication(params))fail('这张自动医疗卡只能由本次内部结算使用');return continuation(params,()=>{});}
   grants.delete(params); // consume synchronously before any provider/async wait
@@ -113,5 +119,17 @@ export function createSalubriousDamageGuard({game,messagePrivacy,getRollContext=
   }catch(error){if(!entered)throw markUnappliedDamageError(error);throw error;}
   finally{open=false;}
  }
- return {authorize,applyDamage};
+ async function authorizeExploration(request){
+  const {ctx,activity,message,patient,params,stage,source,application}=request;
+  const savedRoll=message.rolls[0],before=JSON.stringify(savedRoll.toJSON());
+  const actualActor=request.recipient??patient;
+  const expected=params.damage,baseline=strings(params.rollOptions);
+  function validate(actor,current){
+   gm();if(!isExplorationContext(ctx,activity.id))fail('没有私有探索完成上下文');ctx.validate();
+   if(actor!==actualActor||game.time.worldTime<activity.endsAt||game.messages.get(message.id)!==message||message.rolls[0]!==savedRoll||JSON.stringify(savedRoll.toJSON())!==before||current.damage!==expected||current.token!==params.token||current.skipIWR!==(stage==='healing')||current.final!==false||current.outcome!==params.outcome||!strings(current.rollOptions).includes(source)||!strings(current.rollOptions).includes(application)||baseline.some(o=>!strings(current.rollOptions).includes(o)))fail('探索治疗实际原生来源已改变');
+  }
+  validate(actualActor,params);if(issued.has(application))fail('探索治疗应用已签发');issued.add(application);protectedIds.add(message.id);
+  explorationGrants.set(params,{validate});return()=>explorationGrants.delete(params);
+ }
+ return {authorize,authorizeExploration,applyDamage};
 }

@@ -8,8 +8,13 @@ const options=c=>new Set(c.options??[]);
  * The verified Patreon callback may temporarily force gm/blind. Restore only
  * this source's captured native mode, after rechecking hidden/secret floors.
  * The legacy public-named methods remain aliases for old integration callers. */
-export function createSalubriousCheckScope({game}){
- const scopes=new Map(),contexts=new WeakMap();
+export function createSalubriousCheckScope({game,isExplorationContext=()=>false}){
+ const scopes=new Map(),contexts=new WeakMap(),exploration=new Map();
+ async function runExploration(input,operation){
+  if(!isExplorationContext(input.ctx,input.activity.id)||exploration.has(input.activity.id))throw Error('Invalid exploration check context');
+  const scope={...input,entered:false};exploration.set(input.activity.id,scope);
+  try{const result=await operation();input.ctx.validate();if(!scope.entered)throw Error('Native exploration check not observed');return result}finally{exploration.delete(input.activity.id)}
+ }
  function valid(scope,c,{provenBlind=false}={}){
   const {actor,item,token,claim}=scope;
   assertSource({game,actor,item,token,user:game.user,privacy:claim.privacy});
@@ -48,6 +53,18 @@ export function createSalubriousCheckScope({game}){
   }catch{return null}
  }
  async function interceptCheck(wrapped,check,context={},event,callback){
+  const explorationMarkers=[...options(context)].filter(o=>o.startsWith('exploration-activity:'));
+  if(explorationMarkers.length){
+   const scope=exploration.get(explorationMarkers[0].slice('exploration-activity:'.length));
+   if(scope){
+    const expectedDC={trained:15,expert:20,master:30,legendary:40}[scope.activity.options.rank??'trained'];
+    if(explorationMarkers.length!==1||scope.entered||context.actor!==scope.healer||context.type!=='skill-check'||context.dc?.value!==expectedDC||!options(context).has('action:treat-wounds')||!context.domains?.includes(scope.activity.options.skill??'medicine')||!isExplorationContext(scope.ctx,scope.activity.id))throw Error('Exploration native context mismatch');
+    scope.ctx.validate();scope.entered=true;context.skipDialog=true;
+    // Assurance is a native substitution, never a roll option that claims a roll.
+    if(scope.activity.options.assurance){const substitution=context.substitutions?.find(s=>s.slug==='assurance'&&!s.ignored);if(!substitution||context.substitutions.some(s=>s!==substitution&&s.required))throw Error('Native Assurance substitution unavailable');for(const sub of context.substitutions)sub.selected=sub===substitution;context.options.add('substitute:assurance');check.calculateTotal(context.options)}
+    return wrapped(check,context,event,callback);
+   }
+  }
   const scope=matching(context);if(!scope)return wrapped(check,context,event,callback);
   if(scope.entered)throw Error('A treatment scope may enter native dice only once');
   bind(scope,check,context);
@@ -55,5 +72,5 @@ export function createSalubriousCheckScope({game}){
   try{const result=await wrapped(check,context,event,callback);valid(scope,context);return result}
   finally{contexts.delete(context)}
  }
- return {run,interceptCheck,allowPatreonBlanketBlind,acquirePatreonPublicScope,acquirePatreonModeScope:acquirePatreonPublicScope};
+ return {run,runExploration,interceptCheck,allowPatreonBlanketBlind,acquirePatreonPublicScope,acquirePatreonModeScope:acquirePatreonPublicScope};
 }

@@ -1,0 +1,7 @@
+{
+  "system":"8.5.1",
+  "sourceSHA256":"d63da8312831b84905e6866b1dd3f9d93e95c1012955b0177ad2ce8ccf246157",
+  "source":"PF2e SingleCheckActionVariant.use / simpleRollActionCheck / treatWoundsMacroCallback",
+  "checkContext":{"type":"skill-check","domains":["all","skill-check","medicine"],"dc":{"value":15},"options":["action:treat-wounds"]},
+  "note":"Native action is absent; numeric DC does not prove patient target; children link flags.pf2e.origin.messageId. Original callback does not await child create."
+}

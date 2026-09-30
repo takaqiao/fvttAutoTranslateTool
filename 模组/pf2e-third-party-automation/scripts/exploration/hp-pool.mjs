@@ -24,7 +24,7 @@ export function createHpPools({game,actorUpdateEvents}) {
       if(JSON.stringify(fields)!==JSON.stringify(forwarding.fields)||forwarding.masterPromise)throw Error('ambiguous-share-data-forward');
       const promise=wrapped(changes,options);forwarding.masterPromise=Promise.resolve(promise);forwarding.masterPromise.catch(()=>{});return promise;
     }
-    if(!scope||this!==scope.patient||!Object.keys(fields).length)return wrapped(changes,options);
+    if(!scope||this.uuid!==scope.patient.uuid||!Object.keys(fields).length)return wrapped(changes,options);
     if(scope.patientCall)throw Error('duplicate-patient-hp-write');scope.patientCall=true;
     scope.fields=structuredClone(fields);
     if(scope.pool.poolUUID===this.uuid){const p=wrapped(changes,options);scope.masterPromise=Promise.resolve(p);return p}
@@ -40,7 +40,11 @@ export function createHpPools({game,actorUpdateEvents}) {
     const scope={activityId:activity.id,patient,pool,patientCall:false,masterPromise:null};active=scope;
     try{
       const result=await operation(scope);
-      if(!scope.masterPromise)throw Error('native-hp-forward-unconfirmed');
+      if(!scope.masterPromise){
+        const receipt=result?.receipt,c=receipt?.flags?.pf2e?.context;
+        if(receipt&&game.messages?.get(receipt.id)===receipt&&c?.type==='damage-taken'&&receipt.flags.pf2e.appliedDamage===null&&receipt.speaker?.actor===patient.id&&c.options?.some(o=>o.startsWith(`pf2e-third-party-automation:exploration-apply:${activity.id}:`)))return {result,poolReceipt:{activityId:activity.id,actorUUID:pool.poolUUID,noChange:true,receiptId:receipt.id}};
+        throw Error('native-hp-forward-unconfirmed');
+      }
       const saved=await scope.masterPromise;
       if(saved?.uuid!==pool.poolUUID)throw Error('native-hp-forward-unconfirmed');
       return {result,poolReceipt:{activityId:activity.id,actorUUID:pool.poolUUID,fields:scope.fields,provider:pool.provider}};
