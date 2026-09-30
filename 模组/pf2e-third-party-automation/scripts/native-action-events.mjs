@@ -36,7 +36,10 @@ function createNativeActionEvents(game){
     const input={...params};
     if(Array.isArray(params.actors))input.actors=Object.freeze([...params.actors]);
     if(params.message&&typeof params.message==='object')input.message=Object.freeze({...params.message});
-    const scope=Object.freeze({action,variant,slug:action.slug,actors:Object.freeze(actors),params:Object.freeze(input),user:game.user});
+    const scope=Object.freeze({action,variant,slug:action.slug,actors:Object.freeze(actors),params:Object.freeze(input),user:game.user,tagRollOption(tag){
+     if(typeof tag!=='string'||!tag.startsWith('exploration-manual:'))throw Error('Invalid manual observation tag.');
+     params.rollOptions=[...new Set([...(params.rollOptions??[]),tag])];
+    }});
     const handlers=[...middlewares];let closed=false;
     const invoke=async index=>{
      if(closed)throw Error('Native action continuation is closed.');
