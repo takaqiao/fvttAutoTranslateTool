@@ -6,13 +6,19 @@
 
 ## 三层验证
 
-### 首轮手动治疗检查点候选（未发布）
+### 首轮手动治疗检查点（0.9.29）
 
 本批只接固定600秒首轮、单患者非共享池的 Workbench 治疗及另一角色的普通再聚能。[真实GM＋玩家报告](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/qa/manual-checkpoint-native-2026-10-01T10-42-18-168Z-fc1b427c.json) SHA `71ad7614229575e0ba4a0354b37ce2214ee34fbb52b1bbb7c206fb847d9bf27a`：开启后时间0，玩家原生检定大成功、真实治疗26，原按钮应用后HP从1到27；同源一小时免疫保存start=0、expiresAt=3600。点击“继续本轮”只提交一次0→600时钟，手动活动确认、普通Refocus恢复一聚能，两项活动共用本轮。检定／结果／HP回执／免疫均各一项，manual不再次调用治疗执行器；十二个旧世界及187份候选运行文件保持。
 
 [新鲜完整源码检查](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/manual-checkpoint-source-check-1790851403559.json)为3074／3074、166测试文件、180运行脚本与2工具语法通过，零失败／跳过。一次独立产品复核发现封口可能覆盖晚到第二HP回执；[修复证据](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/manual-checkpoint-review-fix.json)保留旧源码两项失败及修复后208项定向回归。通过报告和完整13类原生来源已在新GM客户端只读复核并正常保存关闭：[停止库存](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/qa/patreon-current-preserve-2026-10-01T10-44-45-290Z-a6439f61.json)，SHA `9459fe5ab3b81ce980bdcf4e7fcfa5059b9c8ce48a5f297221665b68fec1f13d`，全部LOCK释放、源码和旧世界保持。此前两个UI操作失败的世界与已投骰结果原样保留，没有重放旧尝试。
 
-候选的版本字段仍为私有0.9.28，不代表已发布或已部署本功能。原生action缺免疫、共享主人回执、群体／延长及其他时长检查点仍待适配；本批不改变十二场景整体状态。
+原验收候选的版本字段为私有0.9.28。这批首轮检查点代码已于0.9.29发布部署，源码 `f77177f8b2c255a93f6ab44df7d27374770ff966`；[发行证据](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/release-0929/release/evidence-verification.json)绑定上述八个检查点运行文件与真实验收源码，最终集成测试3098／3098、零跳过。[部署交接](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/release-0929/handoff.json)核对187个服务文件，保留3857个世界文件、Patreon时间补丁及其他模组／服务／配置。原生action缺免疫、共享主人回执、群体／延长及其他时长检查点仍待适配；本批不改变十二场景整体状态。
+
+### Patreon时间效果完成回执（0.9.28）
+
+[真实GM双标签页报告](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/qa/patreon-v2-workbench-continuation-2026-10-01T08-50-13-127Z-8391b34b.json)，SHA `e5a6f31859bb740315f779b74997547ac0c39ab247f697d9da5b67f084d466e1`，保存两个已结算活动。A轮一次真实快速治疗骰、原生HP写入和效果倒计数完成后普通再聚能恢复一点；B轮没有符合治疗规则的成员，零治疗骰／HP应用，仍等待原生效果倒计数完成。每轮只调用一次提供者并计600秒，另一标签页零调用，累计1200秒。
+
+这批以源码 `faa7e9157a550ca5fb648c530899459ca985d461` 发布部署，3067／3067、零跳过；[发行证据](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/release-0928-handoff/release-final/evidence-verification.json)绑定实际运行文件及Patreon 3.2.29准确源码补丁，[部署交接](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/release-0928-handoff/handoff.json)核对187个服务文件与独立Patreon补丁。付费源码未加入发行包。原生／Patreon手动治疗免疫的来源关联是后续独立适配，不由这项时间验收证明。
 
 ### 手动时间声明小批（0.9.25）
 
