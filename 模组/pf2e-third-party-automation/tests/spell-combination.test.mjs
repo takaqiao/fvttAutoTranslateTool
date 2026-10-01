@@ -34,6 +34,20 @@ function fixture({kind='strike',map=0,outcomes=['success','success'],save='failu
 async function setup(options,fn){const previous=globalThis.CONFIG;try{const f=fixture(options);globalThis.CONFIG={ChatMessage:{documentClass:f.Message},Dice:{rolls:[]},PF2E:{}};await fn(f)}finally{globalThis.CONFIG=previous}}
 function runWith(f,options={}){const p=api.createSpellCombination({game:f.game,choose:async({choices})=>choices[0].value,fromUuid:async uuid=>[f.actor,f.origin,...f.targetDocs,...f.actor.items].find(d=>d.uuid===uuid),nativeCasts:f.casts,nativeOperations:f.nativeOperations,...options});return()=>p.executeUsage({actor:f.actor,item:f.feat,message:f.message,user:{id:'player'},action:p.resolveAction(f.feat)});}
 const handoff=f=>{f.game.users.activeGM={id:'new-gm'}};
+test('a PC target save is dispatched to its owner and closing it never rolls on GM',()=>setup({spellSave:true},async f=>{
+ f.targetDocs[0].actor.type='character';let requested=0;
+ const use=runWith(f,{runTargetSave:async(context,request)=>{requested++;assert.equal(context.sourceItem.uuid,f.spell.uuid);assert.equal(context.target,f.targetDocs[0]);assert.equal(request.statistic,'reflex');return {status:'cancelled'};}});
+ await assert.rejects(use(),/豁免|取消/);assert.equal(requested,1);assert.equal(f.calls.filter(c=>c.kind==='save').length,0);assert.equal(f.calls.filter(c=>c.kind==='payment').length,1);
+}));
+test('a PC target native degree continues the already paid spell with its selected overlay and no GM save',()=>setup({spellSave:true,overlays:true},async f=>{
+ f.targetDocs[0].actor.type='character';let requested=0;
+ await runWith(f,{runTargetSave:async(context,request)=>{
+  requested++;assert.equal(context.sourceMessage.flags[NS].usageGenerated,true);assert.equal(context.sourceItem.actor,f.actor);assert.equal(request.rank,8);assert.deepEqual(request.overlayIds,['variant1']);assert.deepEqual(request.dc,{value:35});
+  const check=await f.Message.create({author:{id:'target-player'},speaker:{actor:'target0'},flags:{pf2e:{context:{type:'saving-throw',outcome:'failure'}},[NS]:{nativeTargetSave:{saveUserId:'target-player'}}},rolls:[roll(15)]});return {status:'rolled',messageId:check.id,check};
+ }})();
+ assert.equal(requested,1);assert.equal(f.calls.filter(c=>c.kind==='save').length,0);assert.equal(f.calls.filter(c=>c.kind==='payment').length,1);assert.equal(f.calls.filter(c=>c.kind==='spell-damage').length,1);assert.equal(f.merges.length,1);
+ const card=f.messages.find(m=>m.flags?.[NS]?.spellCombinationSave);assert.equal(card.author.id,'target-player');assert.equal(card.flags[NS].usageGenerated,true);
+}));
 function dualUse(f,{takedown=false}={}){
  f.feat.type='feat';f.feat.sourceId=takedown?'Compendium.pf2e.feats-srd.Item.Gw0wGXikhAhiGoud':'Compendium.pf2e.feats-srd.Item.onde0SxLoxLBTnvm';
  f.feat.system.rules=[{key:'FlatModifier',predicate:[{or:['double-slice-second',NS+':double-slice-second']}]}];

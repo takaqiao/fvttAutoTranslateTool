@@ -21,7 +21,7 @@ function fixture({cancel=false,offline=false}={}){
  owner.register({Hooks:hooks,socket:ownerSocket});
  const socket={register(name,handler){gmHandlers.set(name,handler);},async executeAsUser(name,userId,payload){assert.equal(userId,'player');const prior=current;current=ownerGame;try{return await handlers.get(name).call({socketdata:{userId:'gm'}},payload);}finally{current=prior;}}};
  root.register({Hooks:hooks,socket});
- return {root,owner,gmGame,ownerGame,actor,target,card,item,calls,socket,ownerSocket,handlers,Message,gm,player,hookEntries,hooks};
+ return {root,owner,gmGame,ownerGame,actor,target,card,item,calls,socket,ownerSocket,handlers,Message,gm,player,hookEntries,hooks,getCurrent:()=>current};
 }
 async function setup(options,fn){const old=globalThis.CONFIG;try{const f=fixture(options);globalThis.CONFIG={ChatMessage:{documentClass:f.Message}};await fn(f);}finally{globalThis.CONFIG=old;}}
 test('native attack runs on original owner awaiting the manual window and canonical check',()=>setup({},async f=>{
@@ -150,7 +150,10 @@ for(const mode of ['blind','self'])test(`owner weapon damage retains the ${mode}
   return {toJSON:()=>({formula:'1d6',total:3})};
  };
  const result=await f.root.run({actor:f.actor,message:f.card,user:f.player},{type:'damage',weaponId:'weapon',map:0,targetUuid:f.target.uuid,options:[]});
- assert.deepEqual(result.privacy,{messageMode:mode,blind:mode==='blind',whisper:mode==='self'?['player']:['gm']});
+ assert.deepEqual(result.privacy,{messageMode:mode==='self'?'gm':mode,blind:mode==='blind',whisper:mode==='self'?['player']:['gm']});
+ const stored=Object.values(f.card.flags[ID].nativeOwnerOperations)[0].result;
+ assert.deepEqual(stored,{status:'rolled',messageId:result.messageId});
+ assert.equal(f.gmGame.messages.get(result.messageId).flags[ID].nativeOwnerDamageResult.privacy.messageMode,mode,'the private native selection remains unchanged');
  assert.equal(f.hookEntries.size,0);
 }));
 test('owner weapon damage closes on lost ownership before any actual damage evaluation',()=>setup({},async f=>{
@@ -159,3 +162,65 @@ test('owner weapon damage closes on lost ownership before any actual damage eval
  const operation=f.root.run({actor:f.actor,message:f.card,user:f.player},{type:'damage',weaponId:'weapon',map:0,targetUuid:f.target.uuid,options:[]});await opened;
  f.player.active=false;f.hooks.call('userConnected',f.player,false);await assert.rejects(operation,/离线|权限|身份/);await new Promise(resolve=>setImmediate(resolve));assert.equal(dice,0);assert.equal(f.hookEntries.size,0);
 }));
+test('owner damage retains its native modifier context and cannot widen the blind source audience',()=>setup({},async f=>{
+ f.Message.applyMode=(data,value)=>({...data,blind:value==='blind',whisper:value==='public'?[]:['gm']});
+ f.actor.system.actions[0].damage=async options=>{f.hooks.call('renderDamageModifierDialog',{context:{options:new Set([...options.options,'item:trait:magical']),domains:['damage','strike-damage'],traits:['magical'],messageMode:'public'}});return {toJSON:()=>({formula:'1d6',total:3})};};
+ const result=await f.root.run({actor:f.actor,message:f.card,user:f.player},{type:'damage',weaponId:'weapon',map:0,targetUuid:f.target.uuid,options:[],minimumPrivacy:{blind:true,whisper:['gm']}});
+ assert.deepEqual(result.privacy,{messageMode:'blind',blind:true,whisper:['gm']});assert.ok(result.context,'native damage context must survive the owner boundary');assert.ok(result.context.options.includes('item:trait:magical'));assert.deepEqual(result.context.domains,['damage','strike-damage']);assert.deepEqual(result.context.traits,['magical']);assert.equal(f.hookEntries.size,0);
+}));
+
+function privateDamageFixture(f,type,{cancel=false}={}){
+ const rollJSON={class:'DamageRoll',formula:'1d6[fire]',total:3,evaluated:true,options:{secret:'hidden-result'},terms:[]},context={options:new Set(['hidden-damage-option']),domains:['damage'],traits:['fire'],messageMode:'blind'};
+ f.Message.applyMode=(data,mode)=>({...data,blind:mode==='blind',whisper:mode==='public'?[]:['gm']});
+ const checkContext={dc:{value:51,visible:false},roll:{total:37},options:['hidden-check-option']},request={type,targetUuid:f.target.uuid,options:['hidden-request-option'],minimumPrivacy:{blind:true,whisper:['gm']}};
+ let rolls=0;
+ if(type==='damage'){
+  Object.assign(request,{weaponId:'weapon',map:0,checkContext});
+  f.actor.system.actions[0].damage=async options=>{assert.equal(f.getCurrent().user.id,'player');assert.deepEqual(options.checkContext,checkContext);f.hooks.call('renderDamageModifierDialog',{context:{...context,options:new Set([...options.options,...context.options])}});if(cancel)return null;rolls++;return {toJSON:()=>rollJSON};};
+ }else{
+  Object.assign(request,{spellId:'spell',rank:2,overlayIds:['overlay'],checkContext});
+  f.actor.items.set('spell',{id:'spell',type:'spell',loadVariant:({castRank,overlayIds})=>{assert.equal(castRank,2);assert.deepEqual(overlayIds,['overlay']);return {getDamage:async parameters=>{assert.equal(f.getCurrent().user.id,'player');assert.equal(parameters.skipDialog,false);assert.equal(parameters.target,f.target);if(cancel)return null;return {context,template:{damage:{roll:{evaluate:async()=>{rolls++;return {toJSON:()=>rollJSON}}}}}};}}}});
+ }
+ return {request,rollJSON,context,rolls:()=>rolls};
+}
+for(const type of ['damage','spell-damage']){
+ test(`${type} keeps its secret request and result out of public activity flags`,()=>setup({},async f=>{
+  const native=privateDamageFixture(f,type),send=f.socket.executeAsUser;let payload,reply;
+  f.socket.executeAsUser=async(...args)=>{payload=args[2];return reply=await send(...args)};
+  const result=await f.root.run({actor:f.actor,message:f.card,user:f.player},native.request);
+  const operation=Object.values(f.card.flags[ID].nativeOwnerOperations)[0];
+  assert.equal(Object.hasOwn(operation.request,'checkContext'),false,'hidden check DC and total must not be on the public activity');
+  assert.equal(Object.hasOwn(operation.request,'options'),false);assert.equal(Object.hasOwn(operation.request,'minimumPrivacy'),false);
+  assert.deepEqual(operation.result,{status:'rolled',messageId:result.messageId});assert.deepEqual(reply,operation.result);
+  assert.deepEqual(payload.privateRequest.checkContext,native.request.checkContext);assert.deepEqual(payload.privateRequest.options,native.request.options);
+  assert.equal(JSON.stringify(operation).includes('hidden-'),false);assert.equal(JSON.stringify(operation).includes('"total"'),false);
+  const receipt=f.gmGame.messages.get(result.messageId),proof=receipt.flags[ID].nativeOwnerDamageResult;
+  assert.equal(receipt.author,'player');assert.equal(receipt.blind,true);assert.deepEqual(receipt.whisper,['gm']);assert.deepEqual(receipt.rolls,[]);assert.equal(receipt.flags.pf2e,undefined);
+  assert.equal(proof.type,type);assert.equal(proof.actorUuid,f.actor.uuid);assert.equal(proof.nonce,operation.nonce);
+  assert.deepEqual(proof.roll,native.rollJSON);assert.deepEqual(result.roll,native.rollJSON,'legacy consumers still receive roll JSON, not an evaluated instance');
+  assert.deepEqual(result.privacy,{messageMode:'blind',blind:true,whisper:['gm']});assert.deepEqual(result.context.domains,['damage']);assert.deepEqual(result.context.traits,['fire']);assert.ok(result.context.options.includes('hidden-damage-option'));
+  assert.equal(native.rolls(),1);assert.equal(f.hookEntries.size,0);
+ }));
+ test(`${type} recovers its private saved result after a lost owner RPC reply`,()=>setup({},async f=>{
+  const native=privateDamageFixture(f,type),send=f.socket.executeAsUser;f.socket.executeAsUser=async(...args)=>{await send(...args);return new Promise(()=>{})};let timer;
+  try{const result=await Promise.race([f.root.run({actor:f.actor,message:f.card,user:f.player},native.request),new Promise((_,reject)=>{timer=setTimeout(()=>reject(Error('private damage result blocked by lost reply')),100)})]);
+   assert.ok(result.messageId,'recovery must use a persisted private receipt');assert.deepEqual(result.roll,native.rollJSON);assert.equal(native.rolls(),1);assert.equal(f.hookEntries.size,0);
+  }finally{clearTimeout(timer)}
+ }));
+ test(`${type} cancellation saves no receipt and does not copy the private request into flags`,()=>setup({},async f=>{
+  const native=privateDamageFixture(f,type,{cancel:true}),result=await f.root.run({actor:f.actor,message:f.card,user:f.player},native.request);
+  assert.deepEqual(result,{status:'cancelled'});assert.equal(f.gmGame.messages.size,1);assert.equal(native.rolls(),0);
+  const operation=Object.values(f.card.flags[ID].nativeOwnerOperations)[0];assert.equal(Object.hasOwn(operation.request,'checkContext'),false);assert.equal(f.hookEntries.size,0);
+ }));
+ test(`${type} rejects a private request whose source identity differs from the public operation`,()=>setup({},async f=>{
+  const native=privateDamageFixture(f,type),send=f.socket.executeAsUser;
+  f.socket.executeAsUser=(name,userId,payload)=>send(name,userId,{...payload,privateRequest:{...payload.privateRequest,...type==='damage'?{weaponId:'another-weapon'}:{spellId:'another-spell'}}});
+  await assert.rejects(f.root.run({actor:f.actor,message:f.card,user:f.player},native.request),/认证请求/);assert.equal(native.rolls(),0);assert.equal(f.gmGame.messages.size,1);assert.equal(f.hookEntries.size,0);
+ }));
+ for(const changed of ['audience','nonce','type'])test(`${type} rejects a private receipt with changed ${changed} without repeating native dice`,()=>setup({},async f=>{
+  const native=privateDamageFixture(f,type),create=f.Message.create;
+  f.Message.create=async data=>{const receipt=await create(data);if(changed==='audience')receipt.whisper.push('player');else receipt.flags[ID].nativeOwnerDamageResult[changed]=changed==='nonce'?'another-operation':type==='damage'?'spell-damage':'damage';return receipt;};
+  await assert.rejects(f.root.run({actor:f.actor,message:f.card,user:f.player},native.request),/伤害凭据/);assert.equal(native.rolls(),1,'a rejected saved proof cannot replay its original native dice');assert.equal(f.hookEntries.size,0);
+  const result=Object.values(f.card.flags[ID].nativeOwnerOperations)[0].result;assert.deepEqual(Object.keys(result).sort(),['messageId','status']);
+ }));
+}

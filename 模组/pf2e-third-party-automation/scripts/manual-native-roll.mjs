@@ -5,7 +5,11 @@ const damageOwners=new WeakMap();
 /** Read immediately after the manual roll, before conversions create a new
  * Roll. toMessage must receive messageMode as its options argument too. */
 export function manualDamagePrivacy(roll,minimum){
- const privacy=damageAudiences.get(roll);
+ return restrictNativePrivacy(damageAudiences.get(roll),minimum,damageOwners.get(roll));
+}
+
+/** Keep explicit recipients when a different client publishes the final card. */
+export function restrictNativePrivacy(privacy,minimum,ownerId){
  if(!minimum)return privacy?{...privacy,whisper:[...privacy.whisper]}:null;
  const selected=privacy??{blind:false,whisper:[],messageMode:'public'},before=[...minimum.whisper??[]];
  const whisper=before.length?(selected.whisper.length?before.filter(id=>selected.whisper.includes(id)):before):[...selected.whisper];
@@ -13,7 +17,7 @@ export function manualDamagePrivacy(roll,minimum){
  if(before.length&&selected.whisper.length&&!whisper.length||blind&&!whisper.length)throw Error('本次原生伤害窗口与原来源受众不相容，未发布伤害。');
  // Foundry's self mode rewrites whisper to the current executing user. A GM
  // continuing another owner's self roll must use explicit recipients instead.
- const messageMode=blind?'blind':!whisper.length?'public':whisper.length===1&&whisper[0]===damageOwners.get(roll)?'self':'gm';
+ const messageMode=blind?'blind':!whisper.length?'public':whisper.length===1&&whisper[0]===ownerId?'self':'gm';
  return {messageMode,blind,whisper};
 }
 

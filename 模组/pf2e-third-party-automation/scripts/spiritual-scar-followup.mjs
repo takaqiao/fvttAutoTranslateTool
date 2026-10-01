@@ -12,7 +12,7 @@ const marker=nonce=>`${M}:spiritual-scar-save:${nonce}`;
 
 /** One native non-basic Will, including native degree adjustments and the
  * installed check/reaction middleware. Persist the attempt before the die. */
-export function createSpiritualScarFollowup({game,fromUuid=globalThis.fromUuid,Hooks=globalThis.Hooks,expiry=createSpiritualScarExpiry({game}),onError=console.error}={}){
+export function createSpiritualScarFollowup({game,fromUuid=globalThis.fromUuid,Hooks=globalThis.Hooks,runTargetSave,expiry=createSpiritualScarExpiry({game}),onError=console.error}={}){
  const queue=new SerialActions();
  const ready=()=>game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'&&game.system.version==='8.5.1'&&typeof Hooks?.on==='function'&&typeof Hooks?.off==='function';
  const read=message=>message.flags?.[M]?.spiritualScarFollowup??null;
@@ -45,7 +45,8 @@ export function createSpiritualScarFollowup({game,fromUuid=globalThis.fromUuid,H
    let card,creations=0;
    // Hook the final published native card, preserving check middleware that
    // stages drafts or modifies degrees before its original callback runs.
-   const hook=Hooks.on('preCreateChatMessage',(message,_data,_options,userId)=>{
+   const pc=fiend.type==='character';
+   const hook=pc?null:Hooks.on('preCreateChatMessage',(message,_data,_options,userId)=>{
     const pf=message.flags?.pf2e,c=pf?.context,opts=c?.options??[];
     if(!opts.includes(marker(claim.nonce))&&!(c?.action==='spiritual-scar'&&pf?.origin?.uuid===ability.uuid))return;
     try{
@@ -57,12 +58,17 @@ export function createSpiritualScarFollowup({game,fromUuid=globalThis.fromUuid,H
     await check();
     // Native check middleware must know the privacy before it rolls or offers
     // reactions. The publication hook above preserves the exact recipients.
-    await statistic.roll({token:fiendToken??undefined,origin:actor,item:ability,action:'spiritual-scar',dc:{slug:'class'},traits:[...ability.system.traits.value],extraRollOptions:['action:spiritual-scar',marker(claim.nonce),'inflicts:slowed'],messageMode:privateCard.blind?'blind':privateCard.whisper.length?'gm':'public',skipDialog:false,event:null,createMessage:true,callback:(_roll,_outcome,message)=>{demand(!card,'原生豁免回调重复');card=message}});
-   }finally{Hooks.off('preCreateChatMessage',hook)}
+    if(pc){
+     demand(typeof runTargetSave==='function'&&fiendToken,'缺少目标角色的玩家豁免连接');
+     const dc=typeof actor.classDC.dc==='number'?actor.classDC.dc:actor.classDC.dc.value;
+     const result=await runTargetSave({sourceActor:actor,sourceItem:ability,sourceMessage:damageMessage,target:fiendToken},{statistic:'will',action:'spiritual-scar',dc:{slug:'class',value:dc},traits:[...ability.system.traits.value],options:['action:spiritual-scar',marker(claim.nonce),'inflicts:slowed'],messageMode:privateCard.blind?'blind':privateCard.whisper.length?'gm':'public',minimumPrivacy:privateCard});
+     demand(result.status==='rolled','目标玩家的原生豁免已取消');card=result.check;await card.update({[`flags.${M}.spiritualScarSave`]:{nonce:claim.nonce,damageMessageId:damageMessage.id}});creations=1;
+    }else await statistic.roll({token:fiendToken??undefined,origin:actor,item:ability,action:'spiritual-scar',dc:{slug:'class'},traits:[...ability.system.traits.value],extraRollOptions:['action:spiritual-scar',marker(claim.nonce),'inflicts:slowed'],messageMode:privateCard.blind?'blind':privateCard.whisper.length?'gm':'public',skipDialog:false,event:null,createMessage:true,callback:(_roll,_outcome,message)=>{demand(!card,'原生豁免回调重复');card=message}});
+   }finally{if(hook!==null)Hooks.off('preCreateChatMessage',hook)}
    await check();
    const pf=card?.flags?.pf2e,c=pf?.context,roll=card?.rolls?.[0],degree=OUTCOMES.indexOf(c?.outcome);
-   demand(creations===1&&game.messages.get(card?.id)===card&&card?.isCheckRoll===true&&author(card)===game.user.id&&card.actor?.uuid===fiend.uuid&&card.speaker?.actor===fiend.id&&card.rolls.length===1&&c?.type==='saving-throw'&&c.action==='spiritual-scar'&&c.origin?.actor===actor.uuid&&c.target?.actor===fiend.uuid&&(!fiendToken||c.target.token===fiendToken.uuid&&`Scene.${card.speaker.scene}.Token.${card.speaker.token}`===fiendToken.uuid)&&pf.origin?.actor===actor.uuid&&pf.origin.uuid===ability.uuid&&c.dc?.slug==='class'&&Number.isFinite(c.dc.value)&&c.dc.value>0&&c.options?.includes(marker(claim.nonce))&&roll._evaluated===true&&roll.toJSON?.()?.evaluated===true&&Number.isFinite(roll.total)&&degree>=0&&roll.options?.degreeOfSuccess===degree&&same(privacy(card),privateCard)&&card.flags?.[M]?.spiritualScarSave?.nonce===claim.nonce,'最终原生意志结果不一致');
-   record=await save(record,{...record,status:'rolled',messageId:card.id,degree,dc:c.dc.value});
+   demand(creations===1&&game.messages.get(card?.id)===card&&card?.isCheckRoll===true&&author(card)===(pc?card.flags?.[M]?.nativeTargetSave?.saveUserId:game.user.id)&&card.actor?.uuid===fiend.uuid&&card.speaker?.actor===fiend.id&&card.rolls.length===1&&c?.type==='saving-throw'&&c.action==='spiritual-scar'&&c.origin?.actor===actor.uuid&&c.target?.actor===fiend.uuid&&(!fiendToken||c.target.token===fiendToken.uuid&&`Scene.${card.speaker.scene}.Token.${card.speaker.token}`===fiendToken.uuid)&&pf.origin?.actor===actor.uuid&&pf.origin.uuid===ability.uuid&&c.dc?.slug==='class'&&Number.isFinite(c.dc.value)&&c.dc.value>0&&c.options?.includes(marker(claim.nonce))&&roll._evaluated===true&&roll.toJSON?.()?.evaluated===true&&Number.isFinite(roll.total)&&degree>=0&&roll.options?.degreeOfSuccess===degree&&same(privacy(card),privateCard)&&card.flags?.[M]?.spiritualScarSave?.nonce===claim.nonce,'最终原生意志结果不一致');
+   record=await save(record,{...record,status:'rolled',messageId:card.id,...pc?{}:{degree,dc:c.dc.value}});
    if(degree<2){
     const timing={...structuredClone(claim.expiry),nonce:claim.nonce,targetActorUuid:fiend.uuid,itemUuid:ability.uuid,damageMessageId:damageMessage.id,status:'armed'};
     const data={name:'精神伤痕：缓慢 1',type:'effect',img:ability.img,system:{slug:`tpa-spiritual-scar-${claim.nonce.toLowerCase()}`,duration:{value:-1,unit:'unlimited',expiry:null,sustained:false},context:{origin:{actor:actor.uuid,token:claim.tokenUuid,item:ability.uuid}},rules:[{key:'GrantItem',uuid:SCAR_SLOWED,allowDuplicate:true,inMemoryOnly:true,alterations:[{mode:'override',property:'badge-value',value:1}]}]},flags:{[M]:{spiritualScarExpiry:timing}}};

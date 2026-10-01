@@ -48,7 +48,7 @@ test('Shake It Off native cancellation preserves the source sickened condition w
  const item={id:'shake',uuid:'Actor.hero.Item.shake',type:'feat',sourceId:AV_SOURCES.shake,actor,system:{}};const castEvents={addMatcher(){},addCapture(){}};
  const provider=createAvAutomation({game,castEvents});const result=await provider.executeUsage({actor,item,message:{id:'shake-card',flags:{}},user:player,action:'av:shake'});assert.match(result,/未完成/);assert.deepEqual(decreases,['frightened']);
 });
-test('Elemental Medicine requires a hidden-DC native window and cancellation neither diagnoses nor applies medicine',async()=>{
+test('Elemental Medicine does not open a GM window when the original player connection is missing',async()=>{
  const {game,gm,player}=context();let diagnoses=0,medicines=0,checks=0;
  const patient={uuid:'Actor.patient',type:'character',level:1,items:new Map(),testUserPermission:()=>true};
  const doctor={id:'doctor',uuid:'Actor.doctor',type:'character',items:new Map(),flags:{},testUserPermission:()=>true,async update(changes){return updateFlags(this,changes);},getStatistic:slug=>slug==='medicine'?{check:{async roll(parameters){checks++;assert.equal(parameters.skipDialog,false);assert.equal(parameters.event,null);assert.equal(parameters.dc.visible,false);assert.equal(parameters.messageMode,'blind');return null;}}}:null};
@@ -56,5 +56,5 @@ test('Elemental Medicine requires a hidden-DC native window and cancellation nei
  const request={id:'request',uuid:'Actor.doctor.Item.request',actor:doctor,flags:{'pf2e-dailies':{daily:`module.${ELEMENTAL_MEDICINE_DAILY}`},[MODULE_ID]:{elementalMedicine:{kind:'preparation',actorUuid:doctor.uuid,userId:player.id,status:'diagnosing',factsId:'facts',patients:[{patientUuid:patient.uuid,skill:'medicine',state:'pending'}]}}},async update(changes){return updateFlags(this,changes);}};doctor.items.set(request.id,request);
  const facts={id:'facts',author:gm,blind:true,whisper:[gm.id],flags:{[MODULE_ID]:{elementalMedicineFacts:{requestUuid:request.uuid,facts:[{patientUuid:patient.uuid,skill:'medicine',dc:15,binding:{itemUuid:'Actor.patient.Item.affliction'},correctElement:'wood',wrongElement:'earth'}]}}}};game.messages.set(facts.id,facts);game.actors.set(doctor.id,doctor);
  patient.createEmbeddedDocuments=async()=>{medicines++;};const provider=createElementalMedicine({game,fromUuid:async uuid=>uuid===request.uuid?request:uuid===patient.uuid?patient:null,publishDiagnosis:async()=>{diagnoses++;}});provider.register({Hooks:{on(){return 1;},off(){}}});
- await assert.rejects(()=>provider.prepare(request.uuid,player),/回执/);assert.equal(checks,1);assert.equal(diagnoses,0);assert.equal(medicines,0);assert.equal(request.flags[MODULE_ID].elementalMedicine.status,'uncertain');
+ await assert.rejects(()=>provider.prepare(request.uuid,player),/原日备操作者连接/);assert.equal(checks,0);assert.equal(diagnoses,0);assert.equal(medicines,0);assert.equal(request.flags[MODULE_ID].elementalMedicine.status,'uncertain');
 });

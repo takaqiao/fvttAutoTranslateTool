@@ -39,3 +39,17 @@ test('an existing higher Slowed remains untouched by this independent grant',asy
 test('native check middleware receives source privacy before any die, choice or publication',async()=>{
  for(const [privacy,messageMode]of [[{blind:true,whisper:['u']},'blind'],[{blind:false,whisper:['u','recipient']},'gm'],[{blind:false,whisper:[]},'public']]){const f=fixture();f.context.privacy=privacy;await f.executor.apply(f.context);assert.equal(f.calls.rolls[0].messageMode,messageMode)}
 });
+test('a PC fiend save belongs to its player and cancellation leaves the existing paid followup uncertain',async()=>{
+ const f=fixture();f.enemy.type='character';let requested=0;
+ const executor=api.createSpiritualScarFollowup({game:f.game,fromUuid:f.fromUuid,Hooks:f.Hooks,runTargetSave:async(context,request)=>{requested++;assert.equal(context.sourceActor,f.ally);assert.equal(context.sourceItem,f.ability);assert.equal(context.sourceMessage,f.damageMessage);assert.equal(context.target,f.enemyToken);assert.equal(request.statistic,'will');return {status:'cancelled'};}});
+ await assert.rejects(executor.apply(f.context),/豁免|取消/);assert.equal(requested,1);assert.equal(f.calls.rolls.length,0);assert.equal(f.calls.created.length,0);assert.equal(f.damageMessage.flags[M].spiritualScarFollowup.status,'uncertain');
+});
+test('a PC native Will card drives Slowed without exposing its degree or class DC on the source damage card',async()=>{
+ const f=fixture();f.enemy.type='character';let requested=0;
+ const executor=api.createSpiritualScarFollowup({game:f.game,fromUuid:f.fromUuid,Hooks:f.Hooks,expiry:{settle:async()=>{}},runTargetSave:async(context,request)=>{
+  requested++;assert.equal(context.sourceMessage,f.damageMessage);assert.deepEqual(request.dc,{slug:'class',value:21});assert.deepEqual(request.minimumPrivacy,{blind:true,whisper:['u']});
+  const card={id:'player-save',author:{id:'target-player'},actor:f.enemy,isCheckRoll:true,speaker:{actor:f.enemy.id,scene:f.scene.id,token:f.enemyToken.id},rolls:[{total:12,_evaluated:true,options:{degreeOfSuccess:1},toJSON:()=>({evaluated:true})}],blind:true,whisper:['u'],flags:{pf2e:{origin:{actor:f.ally.uuid,uuid:f.ability.uuid},context:{type:'saving-throw',action:request.action,options:request.options,origin:{actor:f.ally.uuid,token:f.allyToken.uuid},target:{actor:f.enemy.uuid,token:f.enemyToken.uuid},dc:request.dc,outcome:'failure'}},[M]:{nativeTargetSave:{saveUserId:'target-player'}}},async update(changes){patch(this,changes);return this}};
+  f.game.messages.set(card.id,card);return {status:'rolled',messageId:card.id,check:card};
+ }});
+ const result=await executor.apply(f.context);assert.equal(result.status,'done');assert.equal(requested,1);assert.equal(f.calls.rolls.length,0);assert.equal(f.calls.created.length,1);const publicReceipt=f.damageMessage.flags[M].spiritualScarFollowup;assert.equal(publicReceipt.messageId,'player-save');assert.equal('dc' in publicReceipt,false);assert.equal('degree' in publicReceipt,false);assert.equal(publicReceipt.status,'done');assert.equal(f.events.size,0);
+});

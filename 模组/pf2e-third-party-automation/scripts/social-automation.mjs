@@ -2,8 +2,10 @@ import {MODULE_ID} from './rules.mjs';
 import {confirmManualFlatCheck} from './manual-native-roll.mjs';
 import {SerialActions} from './runtime.mjs';
 import {getSourceId,isActiveGM,upsertOwnedEffect} from './native-context.mjs';
+import {electricityRollWitness} from './eldamon-electricity.mjs';
 
 const SOURCE='Compendium.pf2e.feats-srd.Item.6ON8DjFXSMITZleX';
+const SQUAWK='Compendium.pf2e.feats-srd.Item.CCmiEmS7ZgyQUfhn';
 const OUTCOMES=['criticalFailure','failure','success','criticalSuccess'];
 const TRAITS=['auditory','concentrate','emotion','linguistic','mental'];
 const IMMUNITY='social:no-cause-for-alarm:immunity';
@@ -41,6 +43,16 @@ function adjustmentMap(game,raw,options){
 const equivalent=(a,b)=>['all',...OUTCOMES].every(key=>a?.[key]?.amount===b?.[key]?.amount&&a?.[key]?.label===b?.[key]?.label);
 const languages=a=>Array.from(new Set(a?.system?.details?.languages?.value??[]));
 const immune=(actor,time)=>values(actor.items).some(i=>own(i).kind==='social-alarm-immunity'&&own(i).expiresAt>time);
+const author=message=>message?.author?.id??message?.author??message?.user?.id??message?.user;
+const ordered=value=>Array.isArray(value)?value.map(ordered):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().map(key=>[key,ordered(value[key])])):value;
+function paidSquawk(game,actor,user,card,roll,nativeDegree){
+ const proof=own(card).reactionChecks;if(proof?.reaction!=='squawk')return false;
+ const records=own(actor).reactionChecks?.reactions??[],record=records.find(r=>r.nonce===proof.nonce&&r.kind==='squawk'),payment=game.messages.get(record?.checkId),feature=values(actor.items).find(i=>i.type==='feat'&&getSourceId(i)===SQUAWK),paid=own(payment).reactionChecks,previous=proof.previousRoll,current=structuredClone(roll.toJSON()),context=card.flags?.pf2e?.context;
+ if(current.options)current.options.degreeOfSuccess=0;
+ const sameRoll=previous?.evaluated===true&&previous.options?.degreeOfSuccess===0&&JSON.stringify(ordered(electricityRollWitness(previous)))===JSON.stringify(ordered(electricityRollWitness(current)));
+ if(proof.kind!=='check-reaction-result'||proof.actorUuid!==actor.uuid||!proof.nonce||!record||!['claimed','used'].includes(record.state)||record.userId!==user.id||record.state==='used'&&record.resultMessageId!==card.id||game.messages.get(card.id)!==card||author(card)!==user.id||card.speaker?.actor!==actor.id||!actor.testUserPermission(user,'OWNER')||!game.users.get(author(payment))?.isGM||payment?.speaker?.actor!==actor.id||paid?.kind!=='reaction-use'||paid.reaction!=='squawk'||paid.nonce!==proof.nonce||!feature||payment.flags?.pf2e?.origin?.uuid!==feature.uuid||payment.flags.pf2e.origin.actor!==actor.uuid||context?.type!=='skill-check'||!context.options?.includes('action:no-cause-for-alarm')||nativeDegree.value!==0||context.outcome!=='failure'||roll.options?.degreeOfSuccess!==1||!sameRoll)throw Error('喀咯！的已付款反应或原检定回执不匹配，尚未更改目标状态。');
+ return true;
+}
 function soundBlocked(origin,target){
  const backend=globalThis.CONFIG?.Canvas?.polygonBackends?.sound,level=origin.parent?.levels?.get(origin._source?.level??origin.level);
  if(!backend?.testCollision||!level)throw Error('无法确认场景层级的原生声音传播。');
@@ -49,7 +61,7 @@ function soundBlocked(origin,target){
  return backend.testCollision({...origin.object.center,elevation:origin.elevation??0},{...target.object.center,elevation:target.elevation??0},{type:'sound',mode:'any',level});
 }
 
-export function createSocialAutomation({game,fromUuid=globalThis.fromUuid,choose,onError=()=>{}}={}){
+export function createSocialAutomation({game,fromUuid=globalThis.fromUuid,choose,runNative,onError=()=>{}}={}){
  const queue=new SerialActions();
  const resolveAction=item=>item?.type==='feat'&&getSourceId(item)===SOURCE?'social:no-cause-for-alarm':null;
  async function choice(actor,user,title,choices){if(choices.length===1)return choices[0].value;const result=await choose({actor,user,title,choices});if(result==null)return null;if(!choices.some(c=>c.value===result))throw Error('无效的无需惊慌规则选择。');return result;}
@@ -91,10 +103,15 @@ export function createSocialAutomation({game,fromUuid=globalThis.fromUuid,choose
     const pf=message.flags?.pf2e??{},postInfo=Object.keys(pf).length===1&&pf.origin&&!pf.origin.sourceId;
     const patreonGate=game.modules?.get('patreon-v3')?.active&&postInfo&&['all','attack'].includes(game.settings?.get('patreon-v3','flatCheck'));
     if(!patreonGate){
-     if(!await confirmManualFlatCheck({label:'无需惊慌 · 耳聋听觉动作平检',dc:5}))return '已取消投骰，本次无需惊慌不产生效果。';
-     if(!game.pf2e.Check?.roll||!game.pf2e.CheckModifier)throw Error('无法执行耳聋的原生DC 5听觉动作平检。');
      let total;
-     await game.pf2e.Check.roll(new game.pf2e.CheckModifier('no-cause-for-alarm-deafened',{modifiers:[]},[]),{actor,token:origin,type:'flat-check',domains:['flat-check'],dc:{value:5},options:new Set(['check:type:flat','action:no-cause-for-alarm']),skipDialog:false,event:null,createMessage:true},null,async roll=>{total=roll.total});
+     if(runNative){
+      const native=await runNative({actor,item,message,user},{type:'flat',itemUuid:item.uuid,tokenUuid:origin.uuid,dc:{value:5},label:'无需惊慌 · 耳聋听觉动作平检',action:'no-cause-for-alarm',options:['check:type:flat','action:no-cause-for-alarm']});
+      if(native.status!=='rolled')return '已取消投骰，本次无需惊慌不产生效果。';total=native.check.rolls[0].total;
+     }else{
+      if(!await confirmManualFlatCheck({label:'无需惊慌 · 耳聋听觉动作平检',dc:5}))return '已取消投骰，本次无需惊慌不产生效果。';
+      if(!game.pf2e.Check?.roll||!game.pf2e.CheckModifier)throw Error('无法执行耳聋的原生DC 5听觉动作平检。');
+      await game.pf2e.Check.roll(new game.pf2e.CheckModifier('no-cause-for-alarm-deafened',{modifiers:[]},[]),{actor,token:origin,type:'flat-check',domains:['flat-check'],dc:{value:5},options:new Set(['check:type:flat','action:no-cause-for-alarm']),skipDialog:false,event:null,createMessage:true},null,async roll=>{total=roll.total});
+     }
      if(!Number.isFinite(total))throw Error('耳聋的听觉动作平检未完成；本条使用不会自动重掷。');
      if(total<5)return '耳聋的DC 5听觉动作平检失败，本次无需惊慌不产生效果。';
     }
@@ -102,17 +119,20 @@ export function createSocialAutomation({game,fromUuid=globalThis.fromUuid,choose
    let checked;
    // No dc.slug/statistic and no target argument: the shared check cannot inherit
    // whichever creature the executing GM happened to select.
-   await statistic.roll({token:origin,item,action:'no-cause-for-alarm',dc:{value:targets[0].dc,visible:false},traits:TRAITS,extraRollOptions:['action:no-cause-for-alarm',...TRAITS.map(t=>`item:trait:${t}`)],skipDialog:false,event:null,createMessage:true,callback:async(roll,_outcome,card)=>{checked={roll,card}}});
+   if(runNative){
+    const native=await runNative({actor,item,message,user},{type:'check',statistic:'diplomacy',itemUuid:item.uuid,tokenUuid:origin.uuid,action:'no-cause-for-alarm',dc:{value:targets[0].dc,visible:false},traits:TRAITS,options:['action:no-cause-for-alarm',...TRAITS.map(t=>`item:trait:${t}`)]});
+    if(native.status!=='rolled')return '已取消交涉投骰，本次无需惊慌不产生效果。';checked={roll:native.check.rolls[0],card:native.check};
+   }else await statistic.roll({token:origin,item,action:'no-cause-for-alarm',dc:{value:targets[0].dc,visible:false},traits:TRAITS,extraRollOptions:['action:no-cause-for-alarm',...TRAITS.map(t=>`item:trait:${t}`)],skipDialog:false,event:null,createMessage:true,callback:async(roll,_outcome,card)=>{checked={roll,card}}});
    if(!checked)throw Error('交涉检定未完成；本条使用不会自动重掷。');
    const {roll,card}=checked,context=card.flags?.pf2e?.context;
    const natural=roll.isDeterministic?roll.terms?.find(t=>t.constructor?.name==='NumericTerm')?.total:roll.dice?.find(d=>d.faces===20)?.total;
    const result={total:roll.total,natural},baseOptions=[...(context?.options??[]),...(context?.contextualOptions?.postRoll??[])].filter(o=>!o.startsWith('check:total:delta:'));
    const optionsFor=dc=>new Set([...baseOptions,`check:total:delta:${result.total-dc}`]);
-   const reference=adjustmentMap(game,raw,optionsFor(targets[0].dc)),nativeDegree=degreeForSharedCheck(result,targets[0].dc,reference);
-   if(!equivalent(reference,context?.dosAdjustments)||OUTCOMES[nativeDegree.value]!==context?.outcome||OUTCOMES[nativeDegree.unadjusted]!==context?.unadjustedOutcome)throw Error('此检定的原生成功度修正无法完整对照，尚未更改目标状态；请GM查看原检定。');
+   const reference=adjustmentMap(game,raw,optionsFor(targets[0].dc)),nativeDegree=degreeForSharedCheck(result,targets[0].dc,reference),squawk=paidSquawk(game,actor,user,card,roll,nativeDegree);
+   if(!equivalent(reference,context?.dosAdjustments)||OUTCOMES[squawk?1:nativeDegree.value]!==context?.outcome||OUTCOMES[nativeDegree.unadjusted]!==context?.unadjustedOutcome)throw Error('此检定的原生成功度修正无法完整对照，尚未更改目标状态；请GM查看原检定。');
    const outcomes=[];
    for(const target of targets){
-    const degree=degreeForSharedCheck(result,target.dc,adjustmentMap(game,raw,optionsFor(target.dc))),reduction=degree.value===3?2:degree.value===2?1:0;
+    const degree=degreeForSharedCheck(result,target.dc,adjustmentMap(game,raw,optionsFor(target.dc)));if(squawk&&degree.value===0)degree.value=1;const reduction=degree.value===3?2:degree.value===2?1:0;
     await upsertOwnedEffect(target.actor,IMMUNITY,{name:'无需惊慌：暂时免疫',type:'effect',img:item.img??'icons/svg/aura.svg',system:{slug:'no-cause-for-alarm-immunity',duration:{value:1,unit:'hours',expiry:'turn-start',sustained:false},start:{value:now,initiative:null},rules:[],tokenIcon:{show:false}},flags:{[MODULE_ID]:{kind:'social-alarm-immunity',sourceId:SOURCE,usageMessageId:message.id,checkMessageId:card.id,expiresAt:now+3600}}});
     for(let i=0;i<reduction&&target.actor.getCondition('frightened')?.value>0;i++)await target.actor.decreaseCondition('frightened');
     outcomes.push({actorUuid:target.actor.uuid,tokenUuid:target.token.uuid,dc:target.dc,degree:OUTCOMES[degree.value],before:target.fear,after:target.actor.getCondition('frightened')?.value??0});

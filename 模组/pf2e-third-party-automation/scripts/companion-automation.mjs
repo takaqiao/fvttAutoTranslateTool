@@ -58,7 +58,7 @@ function inReach(companion,bearToken,target){
  return !origin.checkCollision(other.center,{origin:origin.center,type:'move',mode:'any'});
 }
 
-export function createCompanionAutomation({game,fromUuid=globalThis.fromUuid,wrapStrike,manualDamageRoll=rollManualDamage,onError=()=>{}}={}){
+export function createCompanionAutomation({game,fromUuid=globalThis.fromUuid,wrapStrike,runNative,manualDamageRoll=rollManualDamage,onError=()=>{}}={}){
  const queues=new Map();let registered=false,socket=null;
  const serial=(key,fn)=>{const task=(queues.get(key)??Promise.resolve()).catch(()=>{}).then(fn);queues.set(key,task);task.finally(()=>{if(queues.get(key)===task)queues.delete(key)}).catch(()=>{});return task};
  const resolveAction=item=>['action','feat'].includes(item?.type)&&sourceOf(item)===SOURCE.support?'companion:bear-support':null;
@@ -141,13 +141,23 @@ export function createCompanionAutomation({game,fromUuid=globalThis.fromUuid,wra
    const DamageRoll=globalThis.CONFIG?.Dice?.rolls?.find(c=>c.name==='DamageRoll');
    if(!DamageRoll)throw Error('未找到PF2e原生DamageRoll，熊支援伤害尚未掷出。');
    const dice=supportItem.system.traits?.otherTags?.includes('support-benefit:bear')?2:1;
+   const supportUse=typeof runNative==='function'?game.messages.get(flags.sourceMessageId):null;
+   const supportUser=supportUse?.author??game.users.get(supportUse?.user?.id??supportUse?.user);
+   if(typeof runNative==='function'&&(!supportUse||!supportUser||!companion.testUserPermission(supportUser,'OWNER')))throw Error('熊支援的原使用者或活动卡已失效，尚未掷出支援伤害。');
    // Claim before emitting: failures after message creation must never replay damage.
    await effect.update({[`flags.${MODULE_ID}.processed`]:[...(flags.processed??[]),message.id]});
    const targetActor=target.actor;
-   const roll=await manualDamageRoll({game,roll:new DamageRoll(`${dice}d8[slashing]`)});if(!roll)return;
+   let roll,privacy;
+   if(typeof runNative==='function'){
+    const result=await runNative({actor:companion,message:supportUse,user:supportUser},{type:'formula-damage',itemUuid:supportItem.uuid,targetUuid:target.uuid,formula:`${dice}d8[slashing]`,options:['origin:action:slug:bear-support-benefit'],minimumPrivacy:{blind:message.blind===true,whisper:[...message.whisper??[]]}});
+    if(result?.status==='rolled'){roll=result.roll;privacy=result.privacy;}
+   }else{
+    roll=await manualDamageRoll({game,roll:new DamageRoll(`${dice}d8[slashing]`)});privacy=roll?manualDamagePrivacy(roll,message):null;
+   }
+   if(!roll)return;
    const [currentTarget,currentBear]=await Promise.all([fromUuid(target.uuid),fromUuid(bearToken.uuid)]);
    if(!authority(game)||game.user!==requester||requester?.active===false||game.messages?.get(message.id)!==message||game.actors.get(message.speaker.actor)!==master||game.actors.get(master.flags?.[RANGED]?.animalCompanionId)!==companion||!master.testUserPermission(user,'OWNER')||!supports(companion).includes(effect)||isExpired(ownFlags(effect),game)||!ownFlags(effect).processed?.includes(message.id)||currentTarget!==target||target.actor!==targetActor||currentBear!==bearToken||bearToken.actor!==companion||!values(companion.items).includes(supportItem))throw Error('熊支援投骰窗口期间主GM或原来源已改变，尚未发布支援伤害。');
-   const privacy=manualDamagePrivacy(roll,message);
+   if(typeof runNative==='function'&&(game.messages.get(flags.sourceMessageId)!==supportUse||supportUse.author?.id!==supportUser.id||!companion.testUserPermission(supportUser,'OWNER')))throw Error('熊支援的原使用者或活动卡已改变，尚未发布支援伤害。');
    return roll.toMessage(withDamageMessageTarget({speaker:globalThis.ChatMessage.getSpeaker({actor:companion,token:bearToken}),flavor:'熊支援',whisper:privacy?.whisper??message.whisper??[],blind:privacy?.blind??message.blind??false,flags:{[MODULE_ID]:{usageGenerated:true,kind:'bear-support-damage',supportMessageId:flags.sourceMessageId,attackMessageId:message.id},pf2e:{origin:{uuid:supportItem.uuid,type:'action',actor:companion.uuid},context:{type:'damage-roll',domains:['damage'],options:['origin:action:slug:bear-support-benefit'],target:{actor:target.actor.uuid,token:target.uuid}}}}},target.uuid),privacy?{messageMode:privacy.messageMode}:{});
   });
  }

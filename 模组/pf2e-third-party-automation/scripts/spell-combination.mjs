@@ -8,7 +8,7 @@ import {isCuttingWeapon} from './rune-transfer.mjs';
 import {isActualUseMessage} from './usage-events.mjs';
 import {createAttackSequence} from './activity-attack-sequence.mjs';
 import {createNativeOwnerOperations,nativeTransientItems} from './native-owner-operations.mjs';
-import {nativeRollEvent,manualDamageRoll,manualDamagePrivacy} from './manual-native-roll.mjs';
+import {nativeRollEvent} from './manual-native-roll.mjs';
 import {mergeDamageMessagePrivacy} from './damage-message-privacy.mjs';
 export {preserveDamagePartForMerge} from './native-damage-components.mjs';
 
@@ -78,7 +78,7 @@ export function scaleSpellDamage(roll,multiplier,{critical=false}={}){
 }
 
 /** Source based activities; normal player choices finish before any resource or die is spent. */
-export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose,onError=()=>{},afterAttack=async()=>{},nativeCasts=getNativeCastEvents({game,fromUuid}),nativeOperations}={}){
+export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose,runTargetSave,onError=()=>{},afterAttack=async()=>{},nativeCasts=getNativeCastEvents({game,fromUuid}),nativeOperations}={}){
  const queue=new SerialActions(),damageContexts=new WeakMap();
  const ownerOperations=nativeOperations??createNativeOwnerOperations({game,fromUuid,scope:'spell-combination'});
  const damageFromResult=result=>result.nativeRoll??globalThis.CONFIG.Dice.rolls.find(c=>c.name==='DamageRoll').fromData(result.roll);
@@ -222,6 +222,13 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   const defense=spell.system.defense.save,dc=spell.spellcasting?.statistic?.getChatData({item:spell})?.dc?.value;
   const adjust=getSourceId(spell)===S.disintegrate&&attack.outcome==='criticalSuccess';
   const marker=`${MODULE_ID}:spell-combination-save:${card.id}`;
+  if(target.actor.type==='character'){
+   if(typeof runTargetSave!=='function')throw Error('缺少目标角色的玩家豁免连接，尚未由GM代投。');
+   const result=await runTargetSave({sourceActor:spell.actor,sourceItem:spell,sourceMessage:card,target},{statistic:defense.statistic,action:'spell-combination-save',dc:{value:dc},traits:[...spell.system.traits.value],options:[...spell.getRollOptions?.('item')??[],...(defense.basic?['damaging-effect']:[]),marker],rank:spell.rank,overlayIds:[...spell.appliedOverlays?.values?.()??[]],minimumPrivacy:{blind:card.blind===true,whisper:[...card.whisper??[]]},...adjust?{adjustment:'one-degree-worse'}:{}});
+   requireGM();if(result.status!=='rolled')throw Error('目标玩家的原生豁免已取消；既有攻击与支付保留。');
+   const check=result.check;await check.update({[`flags.${MODULE_ID}.usageGenerated`]:true,[`flags.${MODULE_ID}.spellCombinationSave`]:{spellMessageId:card.id,targetUuid:target.uuid,activityMessageId:own(card).spellCombination.activityMessageId}});requireGM();
+   const outcome=check.flags?.pf2e?.context?.outcome;if(!['criticalFailure','failure','success','criticalSuccess'].includes(outcome))throw Error('原生豁免尚未完成，不会重复投骰。');return outcome;
+  }
   const roller=adjust?target.actor.clone({items:[...clone(target.actor._source.items),{_id:globalThis.foundry?.utils?.randomID?.()??'ComboSave0000001',name:spell.name,type:'effect',system:{duration:{value:-1,unit:'unlimited'},rules:[{key:'AdjustDegreeOfSuccess',selector:'saving-throw',predicate:[marker],adjustment:{all:'one-degree-worse'}}]}}]},{keepId:true}):target.actor;
   const statistic=roller.getStatistic(defense.statistic);if(!statistic?.check||!Number.isFinite(dc))throw Error('无法确定该法术的原生豁免与 DC。');
   let outcome;
@@ -343,7 +350,11 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
       const outcome=defense?await save(spell,target,spellAttack,spellCard):null;
       const damage=await spellDamage(spell,target,spellAttack.outcome,{saveOutcome:defense?.basic?outcome:null,shared:sharedSpellDamage,activityMessage:message,user});if(damage)parts.push({roll:damage,item:spell});
       const extra=spellAttack.outcome==='criticalSuccess'&&!defense?criticalSpellPersistentFormula(spell):null;
-      if(extra&&damage){requireGM();const D=globalThis.CONFIG.Dice.rolls.find(c=>c.name==='DamageRoll'),roll=await manualDamageRoll({game,roll:new D(extra)});requireGM();if(!roll)throw Error('法术的额外持续伤害投骰已取消；既有攻击、伤害与支付保留，不能自动重投。');damageContexts.set(roll,{...damageContexts.get(damage),manualPrivacy:manualDamagePrivacy(roll)});parts.push({roll,item:spell});}
+      if(extra&&damage){
+       requireGM();const result=await ownerOperations.run({actor,message,user},{type:'formula-damage',itemUuid:item.uuid,tokenUuid:origin.uuid,formula:extra});requireGM();
+       if(result.status!=='rolled')throw Error('法术的额外持续伤害投骰已取消；既有攻击、伤害与支付保留，不能自动重投。');
+       const roll=result.roll;damageContexts.set(roll,{...damageContexts.get(damage),manualPrivacy:result.privacy});parts.push({roll,item:spell});
+      }
      }
      await damageCard({actor,message,target,parts,attacks:forTarget,kind});
     }

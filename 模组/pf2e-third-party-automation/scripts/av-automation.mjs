@@ -114,7 +114,7 @@ function timingExpired(game,timing){
 }
 const turnKey=game=>game.combat?.started?`${game.combat.id}:${game.combat.round}:${game.combat.turn}`:null;
 
-export function createAvAutomation({game,fromUuid=globalThis.fromUuid,choose,onError=console.error,castEvents=getNativeCastEvents({game,fromUuid}),refocusSubscribers=[],refocusPrivacy,explorationRefocus}={}){
+export function createAvAutomation({game,fromUuid=globalThis.fromUuid,choose,runNative,onError=console.error,castEvents=getNativeCastEvents({game,fromUuid}),refocusSubscribers=[],refocusPrivacy,explorationRefocus}={}){
  const queue=new SerialActions(),targetQueue=new SerialActions();let socket;
  const now=()=>game.time.worldTime;
  const gm=()=>{if(!isGM(game))throw Error('AV能力必须由当前主GM统一结算。');};
@@ -239,12 +239,21 @@ export function createAvAutomation({game,fromUuid=globalThis.fromUuid,choose,onE
     const sickened=actor.getCondition('sickened');if(!sickened)return '惊惧已降低1；没有恶心状态。';
     const dc=sickened.flags?.['patreon-v3']?.dc??sickened.system?.context?.roll?.dc?.value;
     if(!Number.isFinite(dc)||dc<=0)return '惊惧已降低1；恶心未记录来源DC，请在现有状态DC字段补入后正常干呕，未擅自减少恶心。';
-    let reduction=null;await actor.saves.fortitude.roll({dc:{value:dc},skipDialog:false,event:null,item,extraRollOptions:['action:shake-it-off'],callback:async(_roll,outcome,rollMessage)=>{
+    let reduction=null;const settle=async(_roll,outcome,rollMessage)=>{
+     requireOwner(actor,user);
      const degree=OUTCOMES.indexOf(outcome)>=0?OUTCOMES.indexOf(outcome):degreeOf(rollMessage);
      if(degree<0||degree>3)return;reduction=degree;
      // Operate on the same source condition, never walk down unrelated independent sources.
      for(let k=0;k<degree&&actor.items.has(sickened.id);k++)await actor.decreaseCondition(sickened);
-    }});
+    };
+    if(typeof runNative==='function'){
+     const result=await runNative({actor,message,user},{type:'check',statistic:'fortitude',checkMethod:'roll',itemUuid:item.uuid,dc:{value:dc},action:'shake-it-off',options:['action:shake-it-off']});
+     if(result?.status==='rolled'){
+      const check=result.check??game.messages.get(result.messageId);
+      if(!check?.rolls?.[0])throw Error('摆脱困境的原生豁免卡尚未同步，不能重复投骰。');
+      await settle(check.rolls[0],check.flags?.pf2e?.context?.outcome,check);
+     }
+    }else await actor.saves.fortitude.roll({dc:{value:dc},skipDialog:false,event:null,item,extraRollOptions:['action:shake-it-off'],callback:settle});
     return reduction==null?'惊惧已降低1；恶心豁免尚未完成。':`惊惧已降低1；恶心降低${reduction}。`;
    }
    if(action==='av:wheel'){

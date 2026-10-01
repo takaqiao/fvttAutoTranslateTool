@@ -1,6 +1,7 @@
 import {MODULE_ID} from './rules.mjs';
 import {getSourceId,isActiveGM} from './native-context.mjs';
 import {SerialActions} from './runtime.mjs';
+import {beforeNativeRoll} from './native-owner-operations.mjs';
 import {ELEMENTAL_MEDICINE_DAILY,ELEMENTAL_MEDICINE_EFFECT,ELEMENTAL_MEDICINE_ELEMENTS,elementalMedicineFeat,hasElementalMedicine,elementalMedicineSkills,validateElementalMedicinePatients,elementalMedicineBinding,elementalMedicineDC,buildElementalMedicineEffect} from './elemental-medicine-rules.mjs';
 
 const DAILIES='pf2e-dailies',values=c=>Array.from(c?.values?.()??c??[]),own=d=>d?.flags?.[MODULE_ID]?.elementalMedicine;
@@ -41,7 +42,7 @@ async function nativeFacts({actor,patients}){
 /** Uses Dailies' own item batch, then routes cross-actor outcomes to the active GM. */
 export function createElementalMedicine({game,fromUuid=globalThis.fromUuid,requestFacts=nativeFacts,createMessage=(data,options)=>globalThis.ChatMessage.create(data,options),rollCheck,publishDiagnosis,onError=console.error}={}){
  if(!sessions.has(game))sessions.set(game,{doctors:new SerialActions(),patients:new SerialActions(),running:new Map()});
- const session=sessions.get(game),pendingChecks=new Map(),hooks=[],tracked=new Map();let socket,hookApi,installed=false,indexed=false;
+ const session=sessions.get(game),pendingChecks=new Map(),ownerPending=new Map(),hooks=[],tracked=new Map();let socket,hookApi,installed=false,indexed=false;
  const gm=()=>{if(!isActiveGM(game)||game.users.get(game.user.id)!==game.user||!game.user.isGM)throw Error('五气养生主GM已改变，未继续处理。');};
  const allowed=(actor,user)=>!!(user?.active&&game.users.get(user.id)===user&&actor.testUserPermission?.(user,'OWNER'));
  const gmIds=()=>values(game.users).filter(u=>u.isGM).map(u=>u.id);
@@ -56,7 +57,8 @@ export function createElementalMedicine({game,fromUuid=globalThis.fromUuid,reque
   const state=live(request,user,{closed}),patients=[];
   for(const p of state.patients){const actor=await fromUuid(p.patientUuid);gm();if(actor?.uuid!==p.patientUuid||!['character','npc','familiar'].includes(actor.type)||!actor.testUserPermission?.(user,'LIMITED')||!elementalMedicineSkills(request.actor).some(s=>s.slug===p.skill))throw Error('本次患者或技能已不可用。');patients.push({...p,actor});}return patients;
  }
- function secret(message){return message&&game.messages.get(message.id)===message&&game.users.get(author(message))?.isGM&&message.blind===true&&Array.isArray(message.whisper)&&message.whisper.length>0&&message.whisper.every(id=>game.users.get(id)?.isGM);}
+ function blindReceipt(message){return message&&game.messages.get(message.id)===message&&message.blind===true&&Array.isArray(message.whisper)&&message.whisper.length>0&&message.whisper.every(id=>game.users.get(id)?.isGM);}
+ function secret(message){return blindReceipt(message)&&game.users.get(author(message))?.isGM;}
  async function collectFacts(request,user,patients){
   await save(request,s=>{s.status='choosing';});const proposed=await requestFacts({actor:request.actor,patients,user});gm();live(request,user);
   if(proposed==null){await save(request,s=>{s.status='cancelled';});return null;}
@@ -96,15 +98,62 @@ export function createElementalMedicine({game,fromUuid=globalThis.fromUuid,reque
  }
  const checkProof=(request,p,message,fact)=>{
   const context=message?.flags?.pf2e?.context,proof=message?.flags?.[MODULE_ID]?.elementalMedicineCheck,options=context?.options??[],roll=message?.rolls?.[0],degree=['criticalFailure','failure','success','criticalSuccess'].indexOf(context?.outcome);
-  if(!secret(message)||author(message)!==p.rollUserId||message.actor?.uuid!==request.actor.uuid||message.speaker?.actor!==request.actor.id||context?.type!=='skill-check'||context.dc?.value!==fact.dc||!options.includes(`${MODULE_ID}:elemental-medicine:${p.nonce}`)||!options.includes(`check:statistic:${p.skill}`)||proof?.requestUuid!==request.uuid||proof.patientUuid!==p.patientUuid||proof.nonce!==p.nonce||proof.skill!==p.skill||!roll?._evaluated||!Number.isFinite(roll.total)||degree<0||roll.options?.degreeOfSuccess!==degree)throw Error('缺少准确的原生秘密诊断检定回执。');return {degree,message};
+  if(!blindReceipt(message)||author(message)!==p.rollUserId||message.actor?.uuid!==request.actor.uuid||message.speaker?.actor!==request.actor.id||context?.type!=='skill-check'||context.dc?.value!==fact.dc||!options.includes(`${MODULE_ID}:elemental-medicine:${p.nonce}`)||!options.includes(`check:statistic:${p.skill}`)||proof?.requestUuid!==request.uuid||proof.patientUuid!==p.patientUuid||proof.nonce!==p.nonce||proof.skill!==p.skill||!roll?._evaluated||!Number.isFinite(roll.total)||degree<0||roll.options?.degreeOfSuccess!==degree)throw Error('缺少准确的原生秘密诊断检定回执。');return {degree,message};
  };
  function findCheck(request,p,fact){const matches=values(game.messages).filter(m=>{try{checkProof(request,p,m,fact);return true;}catch{return false;}});return matches.length===1?matches[0]:null;}
  async function nativeRoll(args){
   const statistic=elementalMedicineSkills(args.actor).find(s=>s.slug===args.skill)?.statistic;
   if(typeof statistic?.check?.roll!=='function'||!hookApi)throw Error('缺少原生秘密技能检定接口。');
   pendingChecks.set(args.nonce,args);
-  try{return await statistic.check.roll({item:elementalMedicineFeat(args.actor),dc:{value:args.dc,visible:false},skipDialog:false,event:null,messageMode:'blind',extraRollOptions:[`action:prepare-elemental-medicine`,`${MODULE_ID}:elemental-medicine:${args.nonce}`],traits:['exploration','manipulate','secret'],label:'五气养生',action:'prepare-elemental-medicine'});}
+  try{return await beforeNativeRoll({Hooks:hookApi,marker:`${MODULE_ID}:elemental-medicine:${args.nonce}`,showDialog:true,commit:async()=>{},assertLive:args.validate,native:()=>statistic.check.roll({item:elementalMedicineFeat(args.actor),dc:{value:args.dc,visible:false},skipDialog:false,event:null,messageMode:'blind',extraRollOptions:[`action:prepare-elemental-medicine`,`${MODULE_ID}:elemental-medicine:${args.nonce}`],traits:['exploration','manipulate','secret'],label:'五气养生',action:'prepare-elemental-medicine'})});}
   finally{pendingChecks.delete(args.nonce);}
+ }
+ async function ownerDiagnosis(payload,requester){
+  if(!requester?.isGM||requester.active===false||game.users.get(requester.id)!==requester||game.users.activeGM?.id!==requester.id)throw Error('诊断检定只能由当前主GM请求。');
+  const request=await fromUuid(payload?.requestUuid),actor=request?.actor;
+  const row=()=>own(request)?.patients?.find(p=>p.nonce===payload?.nonce);
+  if(request&&!row())await new Promise((resolve,reject)=>{
+   let hook,timer;const finish=error=>{clearTimeout(timer);hookApi.off('updateItem',hook);error?reject(error):resolve();};
+   hook=hookApi.on('updateItem',()=>{if(row())finish();});timer=setTimeout(()=>finish(Error('原日备诊断凭据尚未同步，未开始投骰。')),15000);if(row())finish();
+  });
+  const validate=()=>{
+   const state=own(request),p=row();
+   if(game.users.activeGM?.id!==requester.id||requester.active===false||actor?.items.get(request?.id)!==request||state?.kind!=='preparation'||state.actorUuid!==actor.uuid||state.userId!==game.user.id||p?.rollUserId!==game.user.id||p.state!=='rolling'||state.closed||!allowed(actor,game.user)||!hasElementalMedicine(actor)||request.flags?.[DAILIES]?.daily!==`module.${ELEMENTAL_MEDICINE_DAILY}`)throw Error('原日备、诊断操作者或主GM已改变，不能重复投骰。');
+  };
+  validate();const key=`${request.uuid}:${payload.nonce}`;
+  if(ownerPending.has(key))return ownerPending.get(key);
+  if(row().nativeResult)return copy(row().nativeResult);
+  if(row().nativeStarted)throw Error('诊断检定已经开始，不能重复投骰。');
+  if(!Number.isFinite(payload.dc)||payload.dc<1||!elementalMedicineSkills(actor).some(s=>s.slug===row().skill))throw Error('原生诊断检定参数无效。');
+  const task=(async()=>{
+   const write=async changes=>{validate();const patients=copy(own(request).patients);Object.assign(patients.find(p=>p.nonce===payload.nonce),changes);await request.update({[`flags.${MODULE_ID}.elementalMedicine.patients`]:patients});validate();};
+   await write({nativeStarted:true});
+   const p=row(),proof={requestUuid:request.uuid,patientUuid:p.patientUuid,nonce:p.nonce,skill:p.skill};
+   await (rollCheck??nativeRoll)({actor,skill:p.skill,dc:payload.dc,nonce:p.nonce,proof,validate});validate();
+   const checks=values(game.messages).filter(m=>m.flags?.[MODULE_ID]?.elementalMedicineCheck?.nonce===p.nonce&&author(m)===game.user.id);
+   if(checks.length>1)throw Error('本次秘密诊断回执不唯一，不能重复投骰。');
+   const result=checks.length?{status:'rolled',messageId:checks[0].id}:{status:'cancelled'};
+   await write({nativeResult:result});return result;
+  })();ownerPending.set(key,task);task.finally(()=>{if(ownerPending.get(key)===task)ownerPending.delete(key);}).catch(()=>{});return task;
+ }
+ async function requestDiagnosis(request,user,p,dc){
+  const leader=game.user.id,registrations=[];let complete;
+  const saved=new Promise(resolve=>complete=resolve),inspect=()=>{
+   try{gm();if(game.user.id!==leader)throw Error('原诊断主GM已改变。');const current=own(request).patients.find(r=>r.nonce===p.nonce);if(current?.nativeResult){complete({result:current.nativeResult});return;}live(request,user);}
+   catch(error){complete({error});}
+  };
+  for(const event of ['updateItem','updateUser','userConnected','deleteItem','deleteActor'])registrations.push([event,hookApi.on(event,inspect)]);
+  const payload={requestUuid:request.uuid,nonce:p.nonce,dc};
+  const reply=Promise.resolve().then(()=>user.id===game.user.id?ownerDiagnosis(payload,game.user):socket.executeAsUser('elemental-medicine:diagnose',user.id,payload)).then(result=>({result}),error=>({error}));
+  inspect();try{
+   const outcome=await Promise.race([saved,reply]);gm();if(outcome.error)throw outcome.error;
+   if(outcome.result?.status==='rolled'&&!game.messages.get(outcome.result.messageId))await new Promise((resolve,reject)=>{
+    let hook,timer;const finish=error=>{clearTimeout(timer);hookApi.off('createChatMessage',hook);error?reject(error):resolve();};
+    hook=hookApi.on('createChatMessage',()=>{if(game.messages.get(outcome.result.messageId))finish();});timer=setTimeout(()=>finish(Error('原生秘密诊断回执尚未同步，不能重掷。')),15000);if(game.messages.get(outcome.result.messageId))finish();
+   });
+   return outcome.result;
+  }
+  finally{for(const[event,id]of registrations)hookApi.off(event,id);}
  }
  async function tell(request,p,fact,degree){
   if(p.noticeId||p.noticeStarted)return;
@@ -117,9 +166,9 @@ export function createElementalMedicine({game,fromUuid=globalThis.fromUuid,reque
  }
  async function processPatient(request,user,patient,fact,{recoverOnly=false}={}){
   let p=own(request).patients.find(p=>p.patientUuid===patient.uuid);if(p.state==='done')return;
-  if(!p.nonce){if(own(request).closed)return;await save(request,s=>{Object.assign(s.patients.find(r=>r.patientUuid===patient.uuid),{nonce:uid(),rollUserId:game.user.id,state:'rolling'});});p=own(request).patients.find(p=>p.patientUuid===patient.uuid);
-   const proof={requestUuid:request.uuid,patientUuid:p.patientUuid,nonce:p.nonce,skill:p.skill};gm();live(request,user);
-   await (rollCheck??nativeRoll)({actor:request.actor,patient,skill:p.skill,dc:fact.dc,nonce:p.nonce,proof});gm();
+  if(!p.nonce){if(own(request).closed)return;if(user.id!==game.user.id&&!socket?.executeAsUser)throw Error('缺少原日备操作者连接，尚未在GM端代投。');await save(request,s=>{Object.assign(s.patients.find(r=>r.patientUuid===patient.uuid),{nonce:uid(),rollUserId:user.id,state:'rolling'});});p=own(request).patients.find(p=>p.patientUuid===patient.uuid);
+   gm();live(request,user);
+   await requestDiagnosis(request,user,p,fact.dc);gm();
   }
   let check=p.checkId?game.messages.get(p.checkId):findCheck(request,p,fact);if(!check)throw Error('诊断已开始但没有可核实回执，保留不确定状态，不重掷。');
   const {degree}=checkProof(request,p,check,fact);
@@ -184,9 +233,10 @@ export function createElementalMedicine({game,fromUuid=globalThis.fromUuid,reque
  function register({Hooks=globalThis.Hooks,socket:api}={}){
   if(installed)return;installed=true;socket=api;hookApi=Hooks;index();
   socket?.register('elemental-medicine:prepare',async function(payload){try{const user=game.users.get(this.socketdata?.userId);return {ok:true,value:await prepare(payload?.requestUuid,user)};}catch(error){report(error);return {ok:false,error:'五气养生未取得完整诊疗回执，请由GM查看秘密诊疗记录。'};}});
+  socket?.register('elemental-medicine:diagnose',function(payload){return ownerDiagnosis(payload,game.users.get(this.socketdata?.userId));});
   // Synchronous preCreate: attach proof before native publication, not afterward.
   hooks.push(['preCreateChatMessage',Hooks.on('preCreateChatMessage',(message,_data,_options,userId)=>{
-   if(!isActiveGM(game)||userId!==game.user.id||author(message)!==game.user.id)return;const c=message.flags?.pf2e?.context;if(c?.type!=='skill-check'||message.actor?.uuid==null)return;
+   if(userId!==game.user.id||author(message)!==game.user.id)return;const c=message.flags?.pf2e?.context;if(c?.type!=='skill-check'||message.actor?.uuid==null)return;
    // PF2e 8.5 converts a GM's secret check to "gm" mode. Preserve the strict
    // blind receipt contract on this exact pending check before it is published.
    for(const [nonce,args]of pendingChecks)if(message.actor.uuid===args.actor.uuid&&c.options?.includes(`${MODULE_ID}:elemental-medicine:${nonce}`)&&c.options.includes(`check:statistic:${args.skill}`)&&c.dc?.value===args.dc)message.updateSource({blind:true,whisper:gmIds(),'flags.pf2e.context.messageMode':'blind',[`flags.${MODULE_ID}.elementalMedicineCheck`]:args.proof});

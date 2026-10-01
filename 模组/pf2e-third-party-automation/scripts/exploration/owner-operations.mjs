@@ -73,7 +73,8 @@ function createAtomicOwnerOperations({game,fromUuid,ledger,getHpPool,getDriverSc
  if(typeof runtimeIdentity!=='function')throw Error('runtime-identity-required');
  const contexts=new WeakMap(),beginnings=new Map(),activeScopes=new Set(),operations=new Map(),offers=new Map(),ownerAttempts=new Map(),cancelled=new Set();let identity=clone(runtimeIdentity()),transport,disposed=false,generation=0,registered=false;
  const nonce=()=>crypto.randomUUID();
- const live=(expected=generation)=>{if(disposed||expected!==generation||JSON.stringify(runtimeIdentity())!==JSON.stringify(identity)||game.user.id!==identity.userId)throw Error('owner-runtime-invalidated');if(game.combat?.started)throw Error('encounter-started')};
+ const liveRuntime=(expected=generation)=>{if(disposed||expected!==generation||JSON.stringify(runtimeIdentity())!==JSON.stringify(identity)||game.user.id!==identity.userId)throw Error('owner-runtime-invalidated')};
+ const live=(expected=generation)=>{liveRuntime(expected);if(game.combat?.started)throw Error('encounter-started')};
  const gm=id=>id===game.users.activeGM?.id&&game.users.get(id)?.isGM&&game.users.get(id)?.active;
  function driver(sessionId,leaseNonce){live();const scope=getDriverScope(sessionId);if(!gm(identity.userId)||!scope||scope.leaseNonce!==leaseNonce)throw Error('session-driver-required')}
  const route=packet=>({protocol:OWNER_TRANSPORT_PROTOCOL,rootUUID:packet.rootUUID,epoch:packet.epoch,sessionId:packet.sessionId,activityId:packet.activityId,operationId:packet.operationId,actorUUID:packet.actorUUID,driverUserId:packet.driverUserId,ownerUserId:packet.ownerUserId,offerId:packet.offerId});
@@ -284,7 +285,7 @@ function createAtomicOwnerOperations({game,fromUuid,ledger,getHpPool,getDriverSc
   isExecutionContext:(ctx,id)=>{const scope=contexts.get(ctx);if(!scope?.permit||scope.activity.id!==id)return false;try{validateScope(scope);return true}catch{return false}},
   createActivityContext:async activity=>{const captured=generation,leaseNonce=getDriverScope(activity.sessionId)?.leaseNonce;driver(activity.sessionId,leaseNonce);const saved=await ledger.getActivity(activity.id);live(captured);driver(activity.sessionId,leaseNonce);if(saved?.state!=='planned'||canonicalJSON(saved)!==canonicalJSON(activity)||game.time.worldTime!==activity.startedAt)throw Error('activity-begin-claim-required');abortScope(beginnings.get(activity.id),'activity-context-replaced');const scope=createScope({activity:clone(activity),leaseNonce,generation:captured});beginnings.set(activity.id,scope);return scope.ctx},
   registerOperation:(id,handler)=>{if(!/^[-a-z0-9]+$/.test(id)||operations.has(id)||typeof handler!=='function')throw Error('invalid-operation');operations.set(id,handler)},
-  register:()=>{live();if(registered)throw Error('duplicate-exploration-socket');registered=true;connect()},invalidate,
+  register:()=>{liveRuntime();if(registered)throw Error('duplicate-exploration-socket');registered=true;connect()},invalidate,
   dispose:()=>{if(disposed)return;disposed=true;invalidate('owner-operations-disposed')}
  };
 }

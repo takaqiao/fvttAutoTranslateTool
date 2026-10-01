@@ -71,6 +71,7 @@ import {createDefensiveAdvance} from './defensive-advance.mjs';
 import {buildDefensiveAdvancePatreonRepairs,defensiveAdvanceStartupCompatibility} from './defensive-advance-compat.mjs';
 import {createEldamonVoltageProvider} from './eldamon-voltage-executor.mjs';
 import {createSpellCombination} from './spell-combination.mjs';
+import {createNativeTargetSaves} from './native-target-saves.mjs';
 import {createAvAutomation,buildAvPatreonRepairs} from './av-automation.mjs';
 import {createPartyAutomation,buildPartyPatreonRepairs,PARTY_SOURCES} from './party-automation.mjs';
 import {createConfigurationMaintenance} from './config-maintenance.mjs';
@@ -78,6 +79,7 @@ import {createMaintenance} from './maintenance.mjs';
 import {createDirtyMaintenance,isUnrelatedMaintenanceUpdate,COSMETIC_UPDATE_FIELDS} from './maintenance-events.mjs';
 import {createActivityResultLifecycle} from './activity-result-lifecycle.mjs';
 import {createWeaponSurgeAutomation} from './weapon-surge.mjs';
+import {createNativeOwnerOperations} from './native-owner-operations.mjs';
 import {createCycleCoordinator} from './cycle-coordinator.mjs';
 import {createCycleAutomation,addCycleReactionButtons} from './cycle-automation.mjs';
 import {createPanel,createUsageExecutor,executeActorAction,onFullRest,expireCycles,requireOwner,SerialActions} from './runtime.mjs';
@@ -133,6 +135,8 @@ async function useCycleFromCard(actor,source){
 }
 Hooks.once('ready',async()=>{
  const choose=createNativeChooser({game,send:(userId,payload)=>socket.executeAsUser('native-choice',userId,payload)});
+ const ownerRolls=Object.fromEntries(['campaign','av','companion','knowledge','social','reaction','rest'].map(scope=>[scope,createNativeOwnerOperations({game,fromUuid,scope})]));
+ const targetSaves=Object.fromEntries(['spell-combination','spiritual-scar'].map(scope=>[scope,createNativeTargetSaves({game,fromUuid,choose,scope})]));
  const activityResults=createActivityResultLifecycle({game,getRollContext:roll=>cycle?.getRollContext(roll),onError:report});
  const weaponSurge=createWeaponSurgeAutomation({game});
  const advanceStartup=defensiveAdvanceStartupCompatibility({game,rules:game.modules.get('patreon-v3')?.active?game.settings.get('patreon-v3','rulesV3'):null});
@@ -160,7 +164,7 @@ Hooks.once('ready',async()=>{
  let nativeBridgeVerification=Object.freeze({ready:false,reason:'system-source-unavailable'});
  try{const response=await fetch('systems/pf2e/pf2e.mjs',{cache:'no-store',signal:AbortSignal.timeout(10000)});if(response.ok)nativeBridgeVerification=await verifyNativeIWRBridge({game,source:new Uint8Array(await response.arrayBuffer())});}catch{/* Report via the feature diagnostic; other providers still initialize. */}
  const shieldAdapter=createShieldDamageAdapter({game,nativeBridgeVerification,onError:report,createMessageMiddleware:salubriousMessagePrivacy.createMessageMiddleware});
- const scar=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.version==='8.5.1'?createSpiritualScarProvider({game,fromUuid,nativeAdapter:shieldAdapter,reactionRestriction,getRollContext:roll=>cycle?.getRollContext(roll),followup:createSpiritualScarFollowup({game,fromUuid,Hooks,onError:report}),onError:report}):null;
+ const scar=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.version==='8.5.1'?createSpiritualScarProvider({game,fromUuid,nativeAdapter:shieldAdapter,reactionRestriction,getRollContext:roll=>cycle?.getRollContext(roll),followup:createSpiritualScarFollowup({game,fromUuid,Hooks,runTargetSave:targetSaves['spiritual-scar'].run,onError:report}),onError:report}):null;
  const deflection=createTranscendentDeflection({game,fromUuid,choose,reactionRestriction,getRollContext:roll=>cycle?.getRollContext(roll),nativeBridgeAvailable:shieldAdapter.nativeBridgeAvailable,onError:report});
  shieldAdapter.addNativeInterceptor(deflection.interceptNative,{matches:deflection.hasNativePlan});
  const deflectionRepair=createDeflectionRepair({game,fromUuid,onError:report});
@@ -175,7 +179,7 @@ Hooks.once('ready',async()=>{
  const treatmentRefocus={matchesActor:actor=>treatmentDiagnostic.ready&&salubriousKiss.matchesActor(actor),
   onRefocus:async event=>{if(!treatmentDiagnostic.ready)throw Error('仙露三吻的原生检定兼容尚未就绪。');return salubriousKiss.onRefocus(event)}};
  const runeTransfer=createRuneTransfer({game,fromUuid,choose,onError:report});
- const campaign=createCampaignFeats({game,fromUuid,choose,onError:report});
+ const campaign=createCampaignFeats({game,fromUuid,choose,runNative:ownerRolls.campaign.run,onError:report});
  const fear=createFearAutomation({game,fromUuid,choose,reactionRestriction,onError:report});
  const familiar=createBardFamiliarProvider({game,fromUuid,onError:report});
  const prayer=game.world?.id==='ujx5r8oipw7ercdr'?createDesperatePrayerProvider({game,fromUuid,choose,onError:report,castEvents:nativeCasts}):null;
@@ -192,7 +196,7 @@ Hooks.once('ready',async()=>{
  electricity=createEldamonElectricityProvider({game,fromUuid,reactionRestriction,onError:report,refreshOutsideEncounter:voltage.refreshOutsideEncounter,useOwnedAction:(item,event)=>metapower.observe({actor:item.actor,item},()=>game.toolbelt.api.actionable.useAction(event,item))});
  metapower=createMetapowerProvider({game,fromUuid,onError:report,supportsOriginalUse:item=>providers.some(p=>p.resolveAction?.(item)?.startsWith('medic:')||['glimpse:use','defensive-advance'].includes(p.resolveAction?.(item))),beforeChannel:electricity.beforeChannel,validateSelection:electricity.validateSelection,interceptDamageMessage:electricity.interceptDamageMessage,onCommittedChannel:async context=>{await voltage.onCommittedChannel(context);await electricity.onCommittedChannel(context)}});
  nativeCasts.addCastMiddleware(({item,options},native)=>options.consume===false||options.message===false?native():metapower.observe({actor:item.actor,entry:'spell'},native));
- providers=[createCompanionAutomation({game,fromUuid,choose,onError:report,wrapStrike:(strike,actor)=>providers.reduce((s,p)=>p.wrapStrike?.(s,actor)??s,strike)}),createDualStrikeAutomation({game,fromUuid,choose,onError:report}),runeTransfer,campaign,createKnowledgeAutomation({game,fromUuid,choose,onError:report}),createAvAutomation({game,fromUuid,choose,onError:report,refocusSubscribers:[treatmentRefocus,exploration.refocusSubscriber],refocusPrivacy:salubriousMessagePrivacy,explorationRefocus:exploration.refocusAdapter}),createPartyAutomation({game,fromUuid,choose,onError:report}),createSocialAutomation({game,fromUuid,choose,onError:report}),createThrallAutomation({game,fromUuid,choose,onError:report}),createReactionChecks({game,fromUuid,choose,reactionRestriction,onError:report,halflingLuck,nativeCheckMiddleware:(wrapped,...args)=>prayerCheck((...checked)=>familiar.interceptCheck((...accompanied)=>electricity.interceptCheck((...electric)=>metapower.interceptCheck((...next)=>weaponSurge.interceptCheck((...surged)=>salubriousCheckScope.interceptCheck(wrapped,...surged),...next),...electric),...accompanied),...checked),...args)}),fear,createScareToDeath({game,fromUuid,choose,onError:report}),createSpellCombination({game,fromUuid,choose,onError:report,afterAttack:message=>campaign.processCheck(message)}),deflection,destructiveBlock,disarmingBlock,disarmRegrip,shieldEvents,salubriousKiss];
+ providers=[createCompanionAutomation({game,fromUuid,choose,runNative:ownerRolls.companion.run,onError:report,wrapStrike:(strike,actor)=>providers.reduce((s,p)=>p.wrapStrike?.(s,actor)??s,strike)}),createDualStrikeAutomation({game,fromUuid,choose,onError:report}),runeTransfer,campaign,createKnowledgeAutomation({game,fromUuid,choose,runNative:ownerRolls.knowledge.run,onError:report}),createAvAutomation({game,fromUuid,choose,runNative:ownerRolls.av.run,onError:report,refocusSubscribers:[treatmentRefocus,exploration.refocusSubscriber],refocusPrivacy:salubriousMessagePrivacy,explorationRefocus:exploration.refocusAdapter}),createPartyAutomation({game,fromUuid,choose,onError:report}),createSocialAutomation({game,fromUuid,choose,runNative:ownerRolls.social.run,onError:report}),createThrallAutomation({game,fromUuid,choose,onError:report}),createReactionChecks({game,fromUuid,choose,runNative:ownerRolls.reaction.run,nativeInvocation:ownerRolls.reaction.getInvocation,reactionRestriction,onError:report,halflingLuck,nativeCheckMiddleware:(wrapped,...args)=>prayerCheck((...checked)=>familiar.interceptCheck((...accompanied)=>electricity.interceptCheck((...electric)=>metapower.interceptCheck((...next)=>weaponSurge.interceptCheck((...surged)=>salubriousCheckScope.interceptCheck(wrapped,...surged),...next),...electric),...accompanied),...checked),...args)}),fear,createScareToDeath({game,fromUuid,choose,onError:report}),createSpellCombination({game,fromUuid,choose,runTargetSave:targetSaves['spell-combination'].run,onError:report,afterAttack:message=>campaign.processCheck(message)}),deflection,destructiveBlock,disarmingBlock,disarmRegrip,shieldEvents,salubriousKiss];
  const onRulesChanged=()=>{if(fortressRuleCompatibilityEnabled(game)&&game.modules.get('patreon-v3')?.active)ui.notifications.warn('Patreon 规则已修复；请所有已在线客户端刷新一次，使规则修复生效。',{permanent:true})};
  const configuration=createConfigurationMaintenance({game,onRulesChanged,repairs:[buildAvPatreonRepairs,buildPartyPatreonRepairs,buildKnowledgePatreonRepairs,rules=>buildFortressPatreonRepairs(rules,{game}),...game.world?.id==='ujx5r8oipw7ercdr'?[buildDefensiveAdvancePatreonRepairs]:[]],settings:[{module:'pf2e-ranged-combat',key:'postActionToChat',value:2,when:g=>Array.from(g.actors.party?.members??[]).some(a=>[KNOWLEDGE_SOURCES.monster,KNOWLEDGE_SOURCES.hunt].every(source=>a.items.some(i=>i.sourceId===source))),reason:'猎物指定保留完整原生技能卡，供怪物猎手知识联动读取原始操作者与目标。'},{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:g=>['-','sog','pnvfcgjbf2cjp7gz','ujx5r8oipw7ercdr','team-automation-qa2'].includes(g.world?.id),transform:value=>Array.isArray(value)?value.filter(slug=>slug!=='disarming-block'):value,reason:'卸武格挡改由实际格挡回执接原生自由动作缴械，避免重复提示或再次收取反应。'}]});
  await configuration().catch(report);
@@ -234,7 +238,7 @@ Hooks.once('ready',async()=>{
  if(rollIndex<0)throw Error('未找到PF2e DamageRoll，循环能量无法接入。');
  libWrapper.register(MODULE_ID,`CONFIG.Dice.rolls.${rollIndex}.prototype.alter`,function(wrapped,...args){return preserveElectricityOnAlter(this,preserveMetapowerOnAlter(this,preserveDamageBypassOnAlter(this,cycle.alterDamageRoll(this,wrapped,...args),{multiplier:args[0]??1,addend:args[1]??0})))},'WRAPPER');
  for(const message of game.messages)cycle.recordDamageMessage(message);
- const legacyUsage=createUsageExecutor({cycleUse:(actor,message,user)=>coordinator.use(actor,message,user)}),usageQueue=new SerialActions();
+ const legacyUsage=createUsageExecutor({cycleUse:(actor,message,user)=>coordinator.use(actor,message,user),runNative:ownerRolls.rest.run}),usageQueue=new SerialActions();
  const resolveAction=item=>defaultUsageAction(item)??resolveProviderAction(providers,item);
  reactionBudget.register({Hooks,socket});
  disruptExecutor.register({socket});
@@ -243,6 +247,8 @@ Hooks.once('ready',async()=>{
  shieldAdapter.register({libWrapper});
  deflectionRepair.register({Hooks,socket});
  elementalMedicine.register({Hooks,socket});
+ for(const owner of Object.values(ownerRolls))owner.register({Hooks,socket});
+ for(const owner of Object.values(targetSaves))owner.register({Hooks,socket});
  elementalMedicine.registerDailies();
  for(const p of providers)p.register?.({Hooks,libWrapper,socket,onError:report});
  if(roaring)await roaring.reconcile().catch(report);

@@ -150,7 +150,7 @@ export async function executeActorAction(actor,action,payload={},user=game.user,
 }
 
 /** Invoked by the authenticated, idempotent native/chat usage adapter on the active GM. */
-export function createUsageExecutor({cycleUse}={}){
+export function createUsageExecutor({cycleUse,runNative}={}){
  const usageQueue=new SerialActions();
  return context=>usageQueue.run(context.actor?.uuid,async()=>{
   const {actor,item,message,user,action,frequencyReceipt}=context;
@@ -166,7 +166,10 @@ export function createUsageExecutor({cycleUse}={}){
    if(Number.isFinite(last)&&now-last<86400)throw Error('24小时内已经获得休息效果。');
    if(Number.isFinite(night)&&now-night>86400)throw Error('已超过1日未整夜休息，昼夜规律师本次自动失败。');
    let result='生存检定未完成。';
-   await actor.skills.survival.roll({
+   if(runNative){
+    const native=await runNative(context,{type:'check',statistic:'survival',itemUuid:item.uuid,tokenUuid:message.speaker?.scene&&message.speaker?.token?`Scene.${message.speaker.scene}.Token.${message.speaker.token}`:undefined,dc:{value:levelDC(actor.level)},action:'third-party-circadian',options:['action:third-party-circadian']});
+    if(native.status==='rolled')result=await executeActorAction(actor,'rest',{eligible:true,messageId:native.check.id},user);
+   }else await actor.skills.survival.roll({
     dc:{value:levelDC(actor.level)},skipDialog:false,event:null,
     extraRollOptions:['action:third-party-circadian'],
     callback:async(_roll,_outcome,rollMessage)=>{result=await executeActorAction(actor,'rest',{eligible:true,messageId:rollMessage.id},user);},

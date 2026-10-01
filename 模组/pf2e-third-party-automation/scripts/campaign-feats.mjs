@@ -82,7 +82,7 @@ export function appliedDamageAmount(receipt){
 }
 
 /** Normal-use provider. All document mutations run on the elected GM. */
-export function createCampaignFeats({game,fromUuid=globalThis.fromUuid,choose,manualDamageRoll=rollManualDamage,onError=error=>console.error(MODULE_ID,error)}={}){
+export function createCampaignFeats({game,fromUuid=globalThis.fromUuid,choose,runNative,manualDamageRoll=rollManualDamage,onError=error=>console.error(MODULE_ID,error)}={}){
  const queues=new Map(),hooks=[];
  const serial=(key,callback)=>{const pending=(queues.get(key)??Promise.resolve()).catch(()=>{}).then(callback);queues.set(key,pending);pending.finally(()=>{if(queues.get(key)===pending)queues.delete(key)}).catch(()=>{});return pending};
  const gm=()=>{if(!activeGM(game))throw Error('此能力必须由当前主GM统一结算。')};
@@ -127,9 +127,19 @@ export function createCampaignFeats({game,fromUuid=globalThis.fromUuid,choose,ma
   };
   await assertLive();
   const Roll=damageRollClass();if(!Roll)throw Error('当前系统缺少原生DamageRoll。');
-  const roll=await manualDamageRoll({game,roll:new Roll(formula)});if(!roll)throw Error('已取消本次伤害投骰，尚未发布或应用伤害。');
+  let roll,privacy;
+  if(typeof runNative==='function'){
+   const usage=game.messages.get(usageId),user=userFor(usage);
+   if(!usage||!user)throw Error('本次伤害的原使用者或活动卡已失效。');
+   const activityItem=await messageItem(usage)??item;
+   if(activityItem.actor?.uuid!==actor.uuid)throw Error('本次伤害的原活动能力已失效。');
+   const result=await runNative({actor,message:usage,user},{type:'formula-damage',itemUuid:activityItem.uuid,targetUuid:target.uuid,formula,options,minimumPrivacy:{blind:minimumPrivacy?.blind===true,whisper:[...minimumPrivacy?.whisper??[]]}});
+   if(result?.status==='rolled'){roll=result.roll;privacy=result.privacy;}
+  }else{
+   roll=await manualDamageRoll({game,roll:new Roll(formula)});privacy=roll?manualDamagePrivacy(roll,minimumPrivacy):null;
+  }
+  if(!roll)throw Error('已取消本次伤害投骰，尚未发布或应用伤害。');
   await assertLive();
-  const privacy=manualDamagePrivacy(roll,minimumPrivacy);
   const message=await roll.toMessage(withDamageMessageTarget({speaker:globalThis.ChatMessage?.getSpeaker?.({actor,token:actorTokens(actor)[0]})??{actor:actor.id},...privacy?{blind:privacy.blind,whisper:privacy.whisper}:{},flags:{
    pf2e:{origin:item.getOriginData?.()??{uuid:item.uuid,type:item.type,actor:actor.uuid},context:{type:'damage-roll',sourceType:'attack',domains:['damage','strike-damage'],options:[...options],outcome,target:{actor:target.actor.uuid,token:target.uuid}}},
    [MODULE_ID]:{usageGenerated:true,campaignAttackMessageId:checkId,campaignUsageId:usageId,usageInput:{targetUuids:[target.uuid]}}
@@ -180,9 +190,7 @@ export function createCampaignFeats({game,fromUuid=globalThis.fromUuid,choose,ma
   const medic=values(actor.items).some(i=>hasSource(i,'Compendium.pf2e.feats-srd.Item.MJg24e9fJd7OASvF'));
   const bonus=[0,10,30,50][rank-1]+(medic?(rank-1)*5:0);
   let resultText='';
-  const checkRoll=await stat.check.roll({dc:{value:[15,20,30,40][rank-1],visible:true},target:target.actor,skipDialog:false,event:null,
-   extraRollOptions:['action:battle-medicine',`${MODULE_ID}:battle-medicine:${message.id}`],
-   callback:async(roll,outcome,check)=>{
+  const settle=async(roll,outcome,check)=>{
     owner(actor,user);
     const dos=roll.options?.degreeOfSuccess??({criticalFailure:0,failure:1,success:2,criticalSuccess:3}[outcome]);
     const immunity=await nativeEffect(BM_IMMUNITY);
@@ -200,8 +208,16 @@ export function createCampaignFeats({game,fromUuid=globalThis.fromUuid,choose,ma
     await assertLive();await target.actor.applyDamage({damage:dos>=2?-damage.total:damage,token:target,item,rollOptions:new Set(['action:battle-medicine'])});
     const paragon=dos>=2?await applyParagon(actor,target.actor,user,check):'';
     resultText=dos>=2?`战地医疗已恢复生命值并记录免疫。${paragon}`:'战地医疗大失败，已结算1d8伤害并记录免疫。';
+  };
+  let checkRoll;
+  if(typeof runNative==='function'){
+   const result=await runNative({actor,message,user},{type:'check',statistic:'medicine',itemUuid:item.uuid,targetUuid:target.uuid,dc:{value:[15,20,30,40][rank-1],visible:true},action:'battle-medicine',options:['action:battle-medicine',`${MODULE_ID}:battle-medicine:${message.id}`]});
+   if(result?.status==='rolled'){
+    const check=result.check??game.messages.get(result.messageId);checkRoll=check?.rolls?.[0];
+    if(!checkRoll)throw Error('战地医疗的原生检定卡尚未同步，不能重复投骰。');
+    await settle(checkRoll,check.flags?.pf2e?.context?.outcome,check);
    }
-  });
+  }else checkRoll=await stat.check.roll({dc:{value:[15,20,30,40][rank-1],visible:true},target:target.actor,skipDialog:false,event:null,extraRollOptions:['action:battle-medicine',`${MODULE_ID}:battle-medicine:${message.id}`],callback:settle});
   if(!checkRoll)throw Error('已取消战地医疗。');return resultText;
  }
 
@@ -259,21 +275,50 @@ export function createCampaignFeats({game,fromUuid=globalThis.fromUuid,choose,ma
   const choices=strikes.flatMap((strike,index)=>strike.variants.map((variant,map)=>({value:`${index}:${map}`,label:`${strike.label??strike.item.name} · ${map===0?'无MAP':map===1?'第二次攻击':'第三次攻击'} ${variant.label??''}`})));
   const selection=await pick(actor,user,action==='shatter'?'粉碎防御：选择武器及当前MAP':'摔击：选择武器及当前MAP',choices);
   const [index,map]=selection.split(':').map(Number),strike=strikes[index];requireMeleeTarget(actor,target,strike.item);
+  const requester=game.user,targetActor=target.actor,originalWeapon=actor.items?.get?.(strike.item.id);
+  const assertLive=async check=>{
+   owner(actor,user);
+   const [currentActor,currentTarget]=await Promise.all([fromUuid(actor.uuid),fromUuid(target.uuid)]);
+   owner(actor,user);
+   if(game.user!==requester||requester.active===false||currentActor!==actor||currentTarget!==target||target.actor!==targetActor||actor.items.get(strike.item.id)!==originalWeapon||actor.items.get(item.id)!==item||game.messages.get(message.id)!==message||check&&game.messages.get(check.id)!==check)throw Error('本次打击的原来源、目标或主GM已改变，尚未继续伤害。');
+  };
   const timing=nextOwnTurnTiming(actor,game.combat,'turn-start');
   if(action==='shatter'&&!timing)throw Error('粉碎防御需要当前遭遇先攻，以追踪惊惧下限到期。');
   const marker=`${MODULE_ID}:campaign:${action}:${message.id}`;
   let state={action,actorUuid:actor.uuid,itemUuid:strike.item.uuid,targetUuid:target.actor.uuid,targetTokenUuid:target.uuid,map,checkId:null,degree:null,offGuardBefore:target.actor.hasCondition?.('off-guard')??false,timing,status:'rolling'};
   await saveFlag(message,'campaignStrike',state);
-  const roll=await strike.variants[map].roll({target:target.object,options:[marker],event:nativeRollEvent(game),callback:async(result,outcome,check)=>{
+  const settle=async(result,outcome,check)=>{
+   owner(actor,user);
    const degreeValue=result.options?.degreeOfSuccess??({criticalFailure:0,failure:1,success:2,criticalSuccess:3}[outcome]);
    state={...state,checkId:check.id,degree:degreeValue,offGuardBefore:state.offGuardBefore||opts(check).includes('target:condition:off-guard'),status:degreeValue>=2?'awaiting-damage':'miss'};
    await saveFlag(message,'campaignStrike',state);
    await saveFlag(check,'campaignUsageId',message.id);
    if(degreeValue<2)return;
    const method=degreeValue===3?'critical':'damage';
-   const damage=await strike[method]({target:target.object,options:[marker,`${MODULE_ID}:campaign-damage:${message.id}:${check.id}`],checkContext:check.flags?.pf2e?.context,mapIncreases:map,createMessage:true,event:nativeRollEvent(game,'damage')});
+   let damage;
+   const options=[marker,`${MODULE_ID}:campaign-damage:${message.id}:${check.id}`];
+   if(typeof runNative==='function'){
+    const result=await runNative({actor,message,user},{type:'damage',weaponId:strike.item.id,altUsageType:strike.item.altUsageType,map,critical:degreeValue===3,targetUuid:target.uuid,options,checkContext:check.flags?.pf2e?.context,minimumPrivacy:{blind:check.blind===true,whisper:[...check.whisper??[]]}});
+    owner(actor,user);
+    if(result?.status==='rolled'){
+     await assertLive(check);
+     const Roll=damageRollClass();damage=result.roll instanceof Roll?result.roll:Roll.fromJSON(typeof result.roll==='string'?result.roll:JSON.stringify(result.roll));
+     const privacy=result.privacy?{...result.privacy,messageMode:result.privacy.messageMode==='self'&&user.id!==game.user.id?'gm':result.privacy.messageMode}:null,nativeContext=result.context??{},damageOptions=[...new Set([...opts(check),...strike.item.getRollOptions?.('item')??[],...actor.getRollOptions?.(['damage','strike-damage'])??[],...nativeContext.options??[],...options])];
+     await damage.toMessage(withDamageMessageTarget({speaker:globalThis.ChatMessage?.getSpeaker?.({actor,token:actorTokens(actor)[0]})??{actor:actor.id},...privacy?{blind:privacy.blind,whisper:privacy.whisper}:{},flags:{pf2e:{origin:strike.item.getOriginData?.()??{uuid:strike.item.uuid,type:strike.item.type,actor:actor.uuid},context:{type:'damage-roll',sourceType:'attack',domains:nativeContext.domains??['damage','strike-damage'],options:damageOptions,traits:nativeContext.traits??[],outcome,mapIncreases:map,target:{actor:target.actor.uuid,token:target.uuid}}},[MODULE_ID]:{usageGenerated:true,campaignAttackMessageId:check.id,campaignUsageId:message.id,usageInput:{targetUuids:[target.uuid]}}}},target.uuid),privacy?{messageMode:privacy.messageMode}:{});
+    }
+   }else damage=await strike[method]({target:target.object,options,checkContext:check.flags?.pf2e?.context,mapIncreases:map,createMessage:true,event:nativeRollEvent(game,'damage')});
    if(!damage)throw Error('原生伤害掷骰未完成。');
-  }});
+  };
+  let roll;
+  if(typeof runNative==='function'){
+   const result=await runNative({actor,message,user},{type:'attack',weaponId:strike.item.id,altUsageType:strike.item.altUsageType,map,targetUuid:target.uuid,options:[marker]});
+   if(result?.status==='rolled'){
+    const check=result.check??game.messages.get(result.messageId);roll=check?.rolls?.[0];
+    if(!roll)throw Error('本次打击的原生检定卡尚未同步，不能重复投骰。');
+    await assertLive(check);
+    await settle(roll,check.flags?.pf2e?.context?.outcome,check);
+   }
+  }else roll=await strike.variants[map].roll({target:target.object,options:[marker],event:nativeRollEvent(game),callback:settle});
   if(!roll)throw Error('已取消本次打击。');
   return state.degree>=2?`${action==='shatter'?'粉碎防御':'猛烈摔击'}已命中；应用原生伤害卡时自动结算附加效果。${action==='slam'?'打击和摔绊均计入后续MAP。':''}`:'本次打击未命中，没有附加效果。';
  }

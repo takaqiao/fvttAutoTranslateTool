@@ -94,7 +94,7 @@ export async function runCheckReactionPipeline({game,check,context,event=null,ca
  if(callback)await callback(captured.roll,captured.outcome,message,captured.event);return captured.roll;
 }
 
-export function createReactionChecks({game,reactionRestriction,fromUuid=globalThis.fromUuid,choose,onError=()=>{},nativeCheckMiddleware,halflingLuck}={}){
+export function createReactionChecks({game,reactionRestriction,fromUuid=globalThis.fromUuid,choose,runNative,nativeInvocation,onError=()=>{},nativeCheckMiddleware,halflingLuck}={}){
  const queue=new SerialActions(),tracked=new Map(),reactors=new Map(),nativeInvocations=new Map();let socket;
  const eatFortune=createEatFortune({game,reactionRestriction,fromUuid,choose,onError});
  const requireReactionGM=()=>{if(!isActiveGM(game))throw Error('主GM已交接，本次反应已停止；已有认领或费用不会自动回滚或重试。')};
@@ -206,10 +206,29 @@ export function createReactionChecks({game,reactionRestriction,fromUuid=globalTh
   if(message.flags?.pf2e?.flatCheck?.result==='fail')return '原生听觉动作平检失败，针对讯问未生效。';
   if(actor.hasCondition?.('deafened')){
    const pf=message.flags?.pf2e??{},alreadyGated=game.modules?.get('patreon-v3')?.active&&Object.keys(pf).length===1&&pf.origin&&!pf.origin.sourceId&&['all','attack'].includes(game.settings?.get('patreon-v3','flatCheck'));
-   if(!alreadyGated){if(!await confirmManualFlatCheck({label:'针对讯问 · 耳聋听觉动作平检',dc:5}))return '已取消投骰，本次针对讯问不产生效果。';let total;if(!game.pf2e.Check?.roll||!game.pf2e.CheckModifier)throw Error('无法进行耳聋的原生听觉动作平检。');await asReactionGM(()=>game.pf2e.Check.roll(new game.pf2e.CheckModifier('pointed-question-deafened',{modifiers:[]},[]),{actor,token:origin,type:'flat-check',dc:{value:5},domains:['flat-check'],options:new Set(['action:pointed-question']),skipDialog:false,event:null},null,async r=>{total=r.total}));if(!Number.isFinite(total))throw Error('听觉动作平检未完成，不能重试本条使用。');if(total<5)return '耳聋的DC 5听觉动作平检失败。';}
+   if(!alreadyGated){
+    let total;
+    if(runNative){
+     const native=await asReactionGM(()=>runNative({actor,item,message,user},{type:'flat',itemUuid:item.uuid,tokenUuid:origin.uuid,dc:{value:5},label:'针对讯问 · 耳聋听觉动作平检',action:'pointed-question',options:['action:pointed-question']}));
+     if(native.status!=='rolled')return '已取消投骰，本次针对讯问不产生效果。';total=native.check.rolls[0].total;
+    }else{
+     if(!await confirmManualFlatCheck({label:'针对讯问 · 耳聋听觉动作平检',dc:5}))return '已取消投骰，本次针对讯问不产生效果。';
+     if(!game.pf2e.Check?.roll||!game.pf2e.CheckModifier)throw Error('无法进行耳聋的原生听觉动作平检。');
+     await asReactionGM(()=>game.pf2e.Check.roll(new game.pf2e.CheckModifier('pointed-question-deafened',{modifiers:[]},[]),{actor,token:origin,type:'flat-check',dc:{value:5},domains:['flat-check'],options:new Set(['action:pointed-question']),skipDialog:false,event:null},null,async r=>{total=r.total}));
+    }
+    if(!Number.isFinite(total))throw Error('听觉动作平检未完成，不能重试本条使用。');if(total<5)return '耳聋的DC 5听觉动作平检失败。';
+   }
   }
   const marker=`${MODULE_ID}:pointed-question:${globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.randomUUID()}`;
-  let result;nativeInvocations.set(marker,{actorUuid:actor.uuid,tokenUuid:origin.uuid,targetUuid:target.uuid,user,usageId:message.id});try{await asReactionGM(()=>stat.check.roll({token:origin,target:recipient,item,action:'pointed-question',dc:{value:dc,visible:false},traits:POINTED_TRAITS,extraRollOptions:['action:pointed-question',marker,...POINTED_TRAITS.map(t=>`item:trait:${t}`)],skipDialog:false,event:null,createMessage:true,callback:async(roll,outcome,card)=>{result={roll,card,degree:roll.options?.degreeOfSuccess??OUTCOMES.indexOf(outcome)}}}))}finally{nativeInvocations.delete(marker)};
+  let result;
+  if(runNative){
+   const native=await asReactionGM(()=>runNative({actor,item,message,user},{type:'check',statistic:'diplomacy',itemUuid:item.uuid,tokenUuid:origin.uuid,targetUuid:target.uuid,action:'pointed-question',dc:{value:dc,visible:false},traits:POINTED_TRAITS,options:['action:pointed-question',marker,...POINTED_TRAITS.map(t=>`item:trait:${t}`)]}));
+   if(native.status!=='rolled')return '已取消交涉投骰，本次针对讯问不产生效果。';
+   const card=native.check,roll=card.rolls[0];result={roll,card,degree:roll.options?.degreeOfSuccess??OUTCOMES.indexOf(card.flags.pf2e.context.outcome)};
+  }else{
+   nativeInvocations.set(marker,{actorUuid:actor.uuid,tokenUuid:origin.uuid,targetUuid:target.uuid,user,usageId:message.id});
+   try{await asReactionGM(()=>stat.check.roll({token:origin,target:recipient,item,action:'pointed-question',dc:{value:dc,visible:false},traits:POINTED_TRAITS,extraRollOptions:['action:pointed-question',marker,...POINTED_TRAITS.map(t=>`item:trait:${t}`)],skipDialog:false,event:null,createMessage:true,callback:async(roll,outcome,card)=>{result={roll,card,degree:roll.options?.degreeOfSuccess??OUTCOMES.indexOf(outcome)}}}))}finally{nativeInvocations.delete(marker)};
+  }
   if(!result||!Number.isInteger(result.degree)||result.degree<0||result.degree>3)throw Error('交涉检定结果无法确认；本次使用不会自动重掷。');
   const start=now(),{degree,card}=result;
   await mark(recipient,'reaction-checks:pointed-immunity',{type:'effect',name:'针对讯问：暂时免疫',img:item.img??'icons/magic/symbols/question-stone-yellow.webp',system:{slug:'pointed-question-immunity',duration:{value:1,unit:'hours',expiry:'turn-start',sustained:false},start:{value:start,initiative:null},rules:[],tokenIcon:{show:false}},flags:{[MODULE_ID]:{reactionChecks:{kind:'pointed-immunity',sourceId:REACTION_CHECK_SOURCES.pointed,usageId:message.id,checkId:card.id,expiresAt:start+3600}}}});
@@ -260,10 +279,12 @@ export function createReactionChecks({game,reactionRestriction,fromUuid=globalTh
    // exact world actor for routing; keep the native context for full validation.
    const luckActor=game.actors?.get(actor?.id);
    if(actor&&luckActor?.uuid===actor.uuid&&!reactors.has(actor.uuid)&&!context.isReroll&&['skill-check','saving-throw'].includes(context.type)&&halflingLuck?.handlesActor(luckActor))return halflingLuck.interceptCheck(native,check,context,event,callback);
-   if(!actor||!reactors.has(actor.uuid)||!['skill-check','saving-throw'].includes(context.type)||context.createMessage===false||context.isReroll)return native(check,context,event,callback);
+   const tokenUuid=context.token?.uuid??(context.origin?.self?context.origin?.token?.uuid:context.target?.token?.uuid),ownerInvocation=nativeInvocation?.(context.options);
+   const owner=ownerInvocation?.actorUuid===actor?.uuid&&ownerInvocation.user?.id===game.user.id&&(!ownerInvocation.tokenUuid||ownerInvocation.tokenUuid===tokenUuid)?ownerInvocation:null;
+   if(!actor||!reactors.has(actor.uuid)||!['skill-check','saving-throw'].includes(context.type)||context.createMessage===false&&!owner||context.isReroll)return native(check,context,event,callback);
    // Numeric DCs drop native targets. Only this invocation's random marker and
    // exact source actor/token can recover the verified GM-proxied Use target.
-   const tokenUuid=context.token?.uuid??(context.origin?.self?context.origin?.token?.uuid:context.target?.token?.uuid),invocation=values(context.options).map(o=>nativeInvocations.get(o)).find(i=>i?.actorUuid===actor.uuid&&i.tokenUuid===tokenUuid);
+   const invocation=values(context.options).map(o=>nativeInvocations.get(o)).find(i=>i?.actorUuid===actor.uuid&&i.tokenUuid===tokenUuid)??owner;
    const selected=values(game.user?.targets),targetSnapshot=invocation?.targetUuid??(selected.length===1?(selected[0].document??selected[0]).uuid:null);
    // Preserve ordinary player rolls. A pipeline started by the primary GM must
    // stop on handoff before its next roll, publication or mechanical callback.
