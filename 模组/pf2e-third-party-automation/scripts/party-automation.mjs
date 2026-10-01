@@ -3,6 +3,7 @@ import {SerialActions,requireOwner} from './runtime.mjs';
 import {getSourceId,isActiveGM,resolveMessageTargets,upsertOwnedEffect} from './native-context.mjs';
 import {getNativeCastEvents} from './amp-cast-events.mjs';
 import {createDirtyMaintenance,isUnrelatedMaintenanceUpdate,COSMETIC_UPDATE_FIELDS} from './maintenance-events.mjs';
+import {isActualUseMessage} from './usage-events.mjs';
 
 export const PARTY_SOURCES=Object.freeze({
  clue:'Compendium.pf2e.actionspf2e.Item.25WDi1cVUrW92sUj',clueEffect:'Compendium.pf2e.feat-effects.Item.vhSYlQiAQMLuXqoc',
@@ -56,6 +57,7 @@ export function createPartyAutomation({game,fromUuid=globalThis.fromUuid,choose,
  const now=()=>game.time.worldTime;
  const gm=()=>{if(!isActiveGM(game))throw Error('协作能力必须由当前主GM结算。');};
  const resolveAction=item=>{const key=['clue','anoint','guardian'].find(k=>getSourceId(item)===PARTY_SOURCES[k]);return key?'party:'+key:isImperialBloodMagic(item)?'party:imperial':undefined};
+ const requiresActualUse=(_item,action)=>['party:clue','party:anoint','party:guardian'].includes(action);
  const load=async uuid=>{const i=await fromUuid(uuid);if(!i?.toObject)throw Error('无法读取协作能力的原生效果。');const d=i.toObject();delete d._id;return d;};
  const actors=()=>{
   const seen=new Set();
@@ -75,7 +77,7 @@ export function createPartyAutomation({game,fromUuid=globalThis.fromUuid,choose,
  };
  async function targetFor(context){
   const targets=await resolveMessageTargets(context.message,{fromUuid}),source=await sourceToken(context.actor,context.message);
-  if(targets.length!==1||targets[0].actor.uuid===context.actor.uuid)throw Error('使用此能力时请选中一个其他生物作为目标。');
+  if(targets.length!==1||targets[0].actor.uuid===context.actor.uuid)throw Error(`使用此能力时请选中一个其他生物作为目标。能力：${context.item.name}`);
   return {source,target:targets[0]};
  }
  function origin(data,actor,item,token){
@@ -91,8 +93,9 @@ export function createPartyAutomation({game,fromUuid=globalThis.fromUuid,choose,
    let delivered=false;
    try{
    if(action==='party:clue'){
-    const {source,target}=await targetFor(context),cooldown=actor.flags?.[MODULE_ID]?.party?.clueUntil??0;
-    if(cooldown>now())throw Error('线索指引尚未结束10分钟冷却。');
+    const {source,target}=await targetFor(context),cooldown=actor.flags?.[MODULE_ID]?.party?.clueUntil;
+    // World time can be negative; zero is a valid absolute expiry.
+    if(cooldown!=null&&cooldown>now())throw Error('线索指引尚未结束10分钟冷却。');
     const uses=item.system.frequency?.value??item.system.frequency?.max??0;
     if(!frequencyReceipt&&uses<1)throw Error('线索指引没有可用次数。');
     const data=origin(await load(PARTY_SOURCES.clueEffect),actor,item,source);
@@ -153,7 +156,7 @@ export function createPartyAutomation({game,fromUuid=globalThis.fromUuid,choose,
     if(expired&&isActiveGM(game))await item.delete();
    }
    if(!isActiveGM(game))return;
-   const until=actor.flags?.[MODULE_ID]?.party?.clueUntil;if(until&&until<=now()){
+   const until=actor.flags?.[MODULE_ID]?.party?.clueUntil;if(until!=null&&until<=now()){
     const clue=values(actor.items).find(i=>getSourceId(i)===PARTY_SOURCES.clue);
     if(clue?.system.frequency)await clue.update({'system.frequency.value':clue.system.frequency.max},{[MODULE_ID]:{usageInternal:true}});
     await actor.update({[`flags.${MODULE_ID}.party.-=clueUntil`]:null});
@@ -169,6 +172,7 @@ export function createPartyAutomation({game,fromUuid=globalThis.fromUuid,choose,
   });
   on('createChatMessage',m=>{
    if(!isActiveGM(game)||m.flags?.[MODULE_ID]?.usageGenerated)return;
+   if(requiresActualUse(m.item,resolveAction(m.item))&&!isActualUseMessage(m))return;
    const actor=m.actor;if(!actor)return;
    const source=m.item?.sourceId,context=m.flags?.pf2e?.context;
    if(m.item?.slug==='raise-a-shield'){lastActions.set(actor.uuid,{kind:'raise-shield'});return;}
@@ -181,5 +185,5 @@ export function createPartyAutomation({game,fromUuid=globalThis.fromUuid,choose,
   on('deleteToken',all);on('deleteItem',all);on('updateItem',(item,changes={})=>{if(!isUnrelatedMaintenanceUpdate(changes,COSMETIC_UPDATE_FIELDS)&&(item.type==='shield'||getSourceId(item)===PARTY_SOURCES.raiseShieldEffect))return all()});on('updateWorldTime',all);on('updateCombat',(_combat,changes={})=>{if(isUnrelatedMaintenanceUpdate(changes,COSMETIC_UPDATE_FIELDS))return;if('round'in changes||'turn'in changes)lastActions.clear();return all()});on('deleteCombat',()=>{lastActions.clear();return all()});
   return()=>{maintenance.dispose();for(const[n,id]of registrations)Hooks.off(n,id);};
  }
- return {resolveAction,executeUsage,maintain,register,captureUsage:(item,context)=>isImperialBloodMagic(item)?castEvents.captureUsage(item,context):null};
+ return {resolveAction,requiresActualUse,executeUsage,maintain,register,captureUsage:(item,context)=>isImperialBloodMagic(item)?castEvents.captureUsage(item,context):null};
 }
