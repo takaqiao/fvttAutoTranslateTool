@@ -29,6 +29,39 @@ async function setupChoices({game,select=false}){
  return foundry.applications.api.DialogV2.wait({window:{title:select?'选择探索账本':'准备探索账本'},content:`${select?`<label>账本 <select name="rootUUID">${candidates.map(j=>`<option value="${escapeHTML(j.uuid)}">${escapeHTML(j.name)} (${escapeHTML(j.id)})</option>`).join('')}</select></label>`:''}<p>先停止正在运行的恢复，并让相关 GM 和玩家重载到当前版本。准备完成后不会自动开始恢复。</p><label><input type="checkbox" name="issuersStopped" required> 所有旧恢复操作均已停止</label><label><input type="checkbox" name="clientsReloaded" required> 相关客户端均已重载</label><label><input type="checkbox" name="recoveryDisabled" required> 当前没有自动恢复正在执行</label>`,buttons:[{action:'prepare',label:select?'选择账本':'准备账本',callback:(_event,b)=>{const form=new FormData(b.form);return {issuersStopped:form.has('issuersStopped'),clientsReloaded:form.has('clientsReloaded'),recoveryDisabled:form.has('recoveryDisabled'),...select?{rootUUID:form.get('rootUUID')}:{}}}},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});
 }
 const minutes=value=>Math.round(value/60*10)/10;
+function historyAnnotations(activity,sessionStart){
+ const lines=[],duration=activity.durationSource,temporal=activity.temporalSource,options=activity.options??{};
+ const durationLabels={'user-declared':'玩家声明','item-text':'条目说明','table-convention':'本桌约定'};
+ if(duration)lines.push(`时长出处：${durationLabels[duration.type]??'未识别的出处'}${duration.detail?` · ${duration.detail}`:''}`);
+ if(temporal?.type==='user-declared'){
+  const times=[];
+  if(Number.isFinite(activity.observedStart)&&Number.isFinite(activity.observedEnd))times.push(`声明区间：第 ${minutes(activity.observedStart-sessionStart)} → ${minutes(activity.observedEnd-sessionStart)} 分钟`);
+  if(Number.isFinite(activity.notBefore))times.push(`不得早于第 ${minutes(activity.notBefore-sessionStart)} 分钟`);
+  if(Number.isFinite(temporal.recordedAt))times.push(`登记于第 ${minutes(temporal.recordedAt-sessionStart)} 分钟`);
+  lines.push(`时间来源：人工声明${times.length?` · ${times.join('；')}`:''}（相对本次休整开始，不代表原生时间回执）`);
+ }
+ if(options.estimate){
+  const dc={trained:15,expert:20,master:30,legendary:40}[options.rank],reason=options.estimateReason;
+  const reasons={
+   'healing-model-unverified':'患者的治疗修正规则尚未核验','native-healing-model-unverified':'额外治疗规则尚未核验',
+   'patient-hp-model-unverified':'患者的 HP 状态尚未核验','inconsistent-patient-pool':'共用血池的状态不一致',
+   'self-treatment-context-unverified':'自我治疗情境尚未核验','damage-model-unverified':'伤害修正或临时 HP 尚未核验',
+   'action-capacity-after-damage-unverified':'割伤后能否继续治疗尚未核验','skill-assurance-unavailable':'对应技能的 Assurance 不可用',
+   'native-before-roll-unverified':'掷骰前的动态规则尚未核验','native-substitution-conflict':'存在其他替代掷骰规则',
+   'native-roll-twice-unverified':'存在取高或取低掷骰规则'
+  };
+  const verified=!reason&&['verified-prepared-native-context','verified-unconditional-native-context','fixed-selected-dc'].includes(options.estimate);
+  if(!verified)lines.push(`治疗估算暂不可用：${reasons[reason]??'当前条件或规则尚未核验'}${dc?`；采用 DC ${dc}`:''}。`);
+  else{
+   const source=options.estimateSource,skill={medicine:'医疗',nature:'自然',occultism:'神秘'}[source?.skill??options.skill],basis=[skill,dc?`DC ${dc}`:null,(source?.assurance??options.assurance)?'Assurance':null,(source?.riskySurgery??options.riskySurgery)?'激进治疗':null].filter(Boolean);
+   const amounts=[];
+   if(Number.isFinite(activity.expectedNetHealing))amounts.push(`预计净恢复 ${Math.round(activity.expectedNetHealing*10)/10} HP`);
+   if(Number.isFinite(activity.expectedDamage))amounts.push(`预计受到 ${Math.round(activity.expectedDamage*10)/10} HP 伤害`);
+   lines.push(`行动前估算${basis.length?`（${basis.join(' · ')}）`:''}${amounts.length?`：${amounts.join('；')}`:''}。按当时的目标与血池合计，实际结果以原生回执为准。`);
+  }
+ }
+ return lines.map(line=>`<p>${escapeHTML(line)}</p>`).join('');
+}
 function visibleMessage(messages,id){const message=messages?.get?.(id);return message?.id===id&&message.visible===true&&message.isContentVisible===true?message:null}
 /** Render saved facts only; missing proof never grants an execution or application. */
 export function renderRecoveryHistory(data,{actors=[],messages}={}){
@@ -45,7 +78,7 @@ export function renderRecoveryHistory(data,{actors=[],messages}={}){
   for(const [label,ids,chat]of [['检定',a.proof?.checkIds,true],[a.source?.type==='user-record'?'人工登记':'骰点结果',a.proof?.resultIds,true],['完成回执',a.proof?.receiptIds,true],['免疫效果',a.proof?.immunityIds,false],['行动来源',a.source?.messageId?[a.source.messageId]:[],true]]){
    for(const id of ids??[]){if(typeof id!=='string'||!id||seen.has(id))continue;seen.add(id);const text=`${e(label)} <code>${e(id)}</code>`;sources.push(`<li>${chat&&visibleMessage(messages,id)?`<button type="button" class="recovery-evidence-link" data-recovery-message="${e(id)}" aria-label="在聊天中查看${e(label)} ${e(id)}">${text}</button>`:text}</li>`)}
   }
-  return `<li class="recovery-history-entry" data-recovery-activity-id="${e(a.id)}"><p class="recovery-activity-title">${title(a)} · ${e(minutes(a.durationSeconds??a.endsAt-a.startedAt))} 分钟 <strong>${e(evidenceText(a.state))}</strong></p>${a.reason?`<p>${e(evidenceText(a.reason))}</p>`:''}${missing.length?`<ul class="recovery-missing">${missing.map(m=>`<li>${e(evidenceText(m))}</li>`).join('')}</ul>`:''}<details class="recovery-evidence"><summary>来源与回执</summary><p>行动 ID：<code>${e(a.id)}</code></p>${sources.length?`<ul>${sources.join('')}</ul>`:'<p>尚无已保存的来源回执。</p>'}</details></li>`;
+  return `<li class="recovery-history-entry" data-recovery-activity-id="${e(a.id)}"><p class="recovery-activity-title">${title(a)} · ${e(minutes(a.durationSeconds??a.endsAt-a.startedAt))} 分钟 <strong>${e(evidenceText(a.state))}</strong></p>${historyAnnotations(a,data.session.startedAt)}${a.reason?`<p>${e(evidenceText(a.reason))}</p>`:''}${missing.length?`<ul class="recovery-missing">${missing.map(m=>`<li>${e(evidenceText(m))}</li>`).join('')}</ul>`:''}<details class="recovery-evidence"><summary>来源与回执</summary><p>行动 ID：<code>${e(a.id)}</code></p>${sources.length?`<ul>${sources.join('')}</ul>`:'<p>尚无已保存的来源回执。</p>'}</details></li>`;
  }).join('');
  return `${context}<ol class="recovery-history">${rows}</ol>${data.session.review?.note?`<section class="recovery-review"><p>GM 核对说明</p><p>${e(data.session.review.note)}</p></section>`:''}`;
 }
@@ -90,8 +123,31 @@ export function createRecoveryPanel({game,coordinator,capabilities,start,storage
       if(result.requiresReload)globalThis.ui?.notifications?.info?.('账本已选择，请重载页面后再准备恢复。');else if(action==='provision')await storage.initialize(options);
       return this.render(true);
      }if(action==='takeover'){await coordinator.takeover(getSessionId());return this.render(true)}if(action==='activity'){
-      const value=await foundry.applications.api.DialogV2.wait({window:{title:'登记探索行动'},content:`<label>执行者 <select name="actor">${(await capabilities.snapshot(this.actorUUIDs)).map(a=>`<option value="${escapeHTML(a.actorUUID)}">${escapeHTML(a.name)}</option>`).join('')}</select></label><label>行动名称 <input name="label" required></label><label>耗时（分钟） <input name="minutes" type="number" min="0.1" step="0.1" required></label><p>同一执行者按登记顺序排列；不同执行者默认可以并行。治疗与冷却请使用真实动作来源记录。</p>`,buttons:[{action:'record',label:'登记',callback:(_event,b)=>Object.fromEntries(new FormData(b.form))},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});
-      if(!value)return;const seconds=Number(value.minutes)*60;if(!value.label?.trim()||!Number.isFinite(seconds)||seconds<=0)throw Error('请输入行动名称和有效耗时。');await record({id:crypto.randomUUID(),actorUUID:value.actor,patientUUIDs:[],kind:'activity',label:value.label.trim(),durationSeconds:seconds});return this.render(true);
+      const selected=await coordinator.snapshot(getSessionId());
+      if(selected.session?.status!=='recording')throw Error('请先开始手动记录会话。');
+      const actors=await capabilities.snapshot(this.actorUUIDs),history=selected.activities??[],names=new Map(actors.map(a=>[a.actorUUID,a.name]));
+      const value=await foundry.applications.api.DialogV2.wait({window:{title:'登记探索行动'},content:`
+       <label>执行者 <select name="actor">${actors.map(a=>`<option value="${escapeHTML(a.actorUUID)}">${escapeHTML(a.name)}</option>`).join('')}</select></label>
+       <label>行动名称 <input name="label" required></label>
+       <label>耗时 <input name="duration" type="number" min="0" step="any" required><select name="unit"><option value="60">分钟</option><option value="1">秒</option></select></label>
+       <label>时长出处 <select name="durationSource"><option value="user-declared">玩家声明</option><option value="item-text">条目说明</option><option value="table-convention">本桌约定</option></select></label>
+       <label>出处说明 <input name="durationDetail" maxlength="500" placeholder="例如：修理条目写明十分钟"></label>
+       <details><summary>已知时间与前置行动</summary>
+        <p>以下时刻以本次休整开始为第零分钟，可留空。填写相同的开始时刻可声明并行；账本仍会核对执行者、治疗冷却及前置关系。</p>
+        <label>已知开始（分钟） <input name="observedStart" type="number" step="any"></label>
+        <label>已知结束（分钟） <input name="observedEnd" type="number" step="any"></label>
+        <label>不得早于（分钟） <input name="notBefore" type="number" step="any"></label>
+        <label>执行顺序（从零开始，可留空） <input name="order" type="number" min="0" step="1"></label>
+        <label>须先完成 <select name="dependsOn" multiple>${history.map(a=>`<option value="${escapeHTML(a.id)}">${escapeHTML(names.get(a.actorUUID)??a.actorUUID)} · ${escapeHTML(a.options?.label??labels[a.providerId]??a.providerId)}</option>`).join('')}</select></label>
+       </details>
+       <p>这些输入保存为人工声明，不改变世界时间。真实治疗请沿原生动作来源记录。</p>`,buttons:[{action:'record',label:'登记',callback:(_event,b)=>{const form=new FormData(b.form);return {...Object.fromEntries(form),dependsOn:form.getAll('dependsOn')}}},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});
+      if(!value)return;
+      const duration=Number(value.duration),unit=Number(value.unit),seconds=duration*unit;
+      if(!value.label?.trim()||value.duration?.trim()===''||![1,60].includes(unit)||!Number.isFinite(seconds)||seconds<0)throw Error('请输入行动名称和有效耗时。');
+      const declaration={sessionId:selected.session.id,actorUUID:value.actor,label:value.label.trim(),durationSeconds:seconds,durationSource:{type:value.durationSource,...value.durationDetail?.trim()?{detail:value.durationDetail.trim()}:{}},dependsOn:value.dependsOn};
+      for(const field of ['notBefore','observedStart','observedEnd'])if(value[field]?.trim()){const absolute=selected.session.startedAt+Number(value[field])*60;if(!Number.isFinite(absolute))throw Error('请输入有效的行动时刻。');declaration[field]=absolute}
+      if(value.order?.trim()){const order=Number(value.order);if(!Number.isSafeInteger(order)||order<0)throw Error('执行顺序须为非负整数。');declaration.order=order}
+      await record(declaration);return this.render(true);
      }if(action==='reconcile'){await coordinator.reconcile(getSessionId());return this.render(true)}if(action==='resume'){await coordinator.resume(getSessionId());return this.render(true)}if(action==='review'){const note=await foundry.applications.api.DialogV2.wait({window:{title:'核对后结束恢复会话'},content:'<p>请先核对实际 HP、资源、聊天回执和世界时间。结束会话会保留未知记录；旧尝试不会重放。尚未确认的执行仍会占用相应时间与治疗目标，核对说明不会解除这些限制。</p><label>核对说明 <textarea name="note" required></textarea></label>',buttons:[{action:'close',label:'保存核对说明并结束',callback:(_e,b)=>new FormData(b.form).get('note')},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});if(note===null)return;await coordinator.review(getSessionId(),{note,userId:game.user.id});return this.render(true)}if(action==='stop'){await coordinator.stop(getSessionId());return this.render(true)}
      const config={...recoveryDefaults(await capabilities.snapshot(this.actorUUIDs)),...recoveryBudgetPolicy({minutes:Number(content.querySelector('[name=budget]').value),activities:Number(content.querySelector('[name=activityBudget]').value)}),actorUUIDs:this.actorUUIDs,goalsByPool:[...content.querySelectorAll('[data-pool]')].map(el=>({poolUUID:el.dataset.pool,targetHP:Number(el.value)})),riskySurgery:content.querySelector('[name=risky]').checked,requireFullFocus:content.querySelector('[name=focus]').checked,extendTreatment:content.querySelector('[name=extension]').checked,useAssurance:content.querySelector('[name=assurance]').checked,treatmentRank:content.querySelector('[name=rank]').value,manual:action==='record'};
      await game.user.setFlag?.('pf2e-third-party-automation','explorationPolicy',{riskySurgery:config.riskySurgery,requireFullFocus:config.requireFullFocus,useAssurance:config.useAssurance,extendTreatment:config.extendTreatment,treatmentRank:config.treatmentRank,budgetSeconds:config.budgetSeconds,maxActivities:config.maxActivities});await start(config);return this.render(true);

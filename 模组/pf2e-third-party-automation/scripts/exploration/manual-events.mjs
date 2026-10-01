@@ -1,4 +1,5 @@
 import {MODULE_ID} from './schema.mjs';
+import {normalizeManualActivity} from './manual-time.mjs';
 export const WORKBENCH_SOURCE_SHA='b3bac907654522fda62b80da182fc253f7147493a465a82081219fb2a0f1308f';
 export const IMMUNITY_SOURCES=Object.freeze({
  'XDY DO_NOT_IMPORT TW Immunity CD':{kind:'treatment',sha:'aa3aa174524021b06e38f9128fd29196ac5f5da863bd818068a9b2fa0e699d20'},
@@ -69,7 +70,7 @@ export function workbenchFacts(message){
 /** Read-only recorder. No dice, damage application, or immunity writer is injected. */
 export function createManualEvents({game,Hooks,ledger,nativeActions,hpPools,fromUuid,isAuthority=()=>game.user?.isGM&&game.users?.activeGM?.id===game.user.id,sessionId=()=>null,onChange=()=>{}}){
  const seen=new Set(),orders=new Map(),records=new Map(),sourceToActivity=new Map();let evidenceTail=Promise.resolve(),hydratedSession;let unsubscribe,hook,preHook,itemHook;const scopes=new Map();
- async function hydrate(sid){if(!sid||hydratedSession===sid||!isAuthority())return;const saved=await ledger.snapshot?.(sid);seen.clear();orders.clear();records.clear();sourceToActivity.clear();for(const a of saved?.activities??[]){if(!a.source?.manual)continue;seen.add(a.source.messageId??a.id.replace(/^manual:/,''));records.set(a.id,a);orders.set(a.actorUUID,Math.max(orders.get(a.actorUUID)??0,(a.order??0)+1));for(const id of a.proof.resultIds??[])sourceToActivity.set(id,a.id)}hydratedSession=sid;await restoreImmunities()}
+ async function hydrate(sid){if(!sid||hydratedSession===sid||!isAuthority())return;const saved=await ledger.snapshot?.(sid);seen.clear();orders.clear();records.clear();sourceToActivity.clear();for(const a of saved?.activities??[]){if(!a.source?.manual)continue;seen.add(a.source.messageId??a.id.replace(/^manual:/,''));records.set(a.id,a);const next=orders.get(a.actorUUID)??0;orders.set(a.actorUUID,a.temporalSource?.type==='user-declared'?next+1:Math.max(next,(a.order??0)+1));for(const id of a.proof.resultIds??[])sourceToActivity.set(id,a.id)}hydratedSession=sid;await restoreImmunities()}
  async function trustedEnrollment(e,session){
   if(Array.isArray(session?.actorUUIDs)&&(!session.actorUUIDs.includes(e.actorUUID)||(e.patientUUIDs??[]).some(uuid=>!session.actorUUIDs.includes(uuid))))return false;
   if(!game.users||!['treatment','battle-medicine'].includes(e.kind))return true;
@@ -82,16 +83,34 @@ export function createManualEvents({game,Hooks,ledger,nativeActions,hpPools,from
   if(!meta?.lexicalSource||meta.sourceSHA!==WORKBENCH_SOURCE_SHA||meta.useId!==e.useId||meta.actorUUID!==actor.uuid||meta.kind!==e.kind||f?.healerId!==actor.id||token?.actor?.uuid!==meta.patientUUID||!e.patientUUIDs.includes(meta.patientUUID)||!meta.checkIds?.length)return false;
   return meta.checkIds.every(id=>{const check=game.messages.get(id),author=check?.author?.id??check?.author??check?.user?.id??check?.user,c=check?.flags?.pf2e?.context,lexical=check?.flags?.[MODULE_ID]?.explorationManual;return author===uid&&check.speaker?.actor===actor.id&&check.rolls?.[0]?._evaluated===true&&(c?.options?.includes(`exploration-manual-use:${e.useId}`)||lexical?.useId===e.useId&&lexical.actorUUID===actor.uuid&&lexical.sourceSHA===WORKBENCH_SOURCE_SHA)});
  }
- function observe(e){const task=evidenceTail.then(()=>enroll(e));evidenceTail=task.catch(()=>{});return task}
+ function observe(e){
+  e=structuredClone(e);
+  if(e.kind==='activity'){
+   if(e.source?.type!=='user-record'||typeof e.source.userId!=='string'||!e.source.userId)throw Error('manual-source-identity-unproven');
+   e={...normalizeManualActivity(e),id:e.id,expectedSessionId:e.expectedSessionId,kind:'activity',patientUUIDs:[],hpPoolUUIDs:[],source:{type:'user-record',userId:e.source.userId,unverified:true},temporalSource:{type:'user-declared',userId:e.source.userId,recordedAt:game.time.worldTime},missing:['manual-source-requires-review'],checkIds:[],resultIds:[],receiptIds:[],immunityIds:[]};
+  }
+  const task=evidenceTail.then(()=>enroll(e));evidenceTail=task.catch(()=>{});return task;
+ }
  async function enroll(e){
-  const sid=sessionId();if(!sid||!isAuthority()||!e.id)return null;
-  const session=await ledger.getSession?.(sid);if(ledger.getSession&&session?.status!=='recording')return null;await hydrate(sid);if(!await trustedEnrollment(e,session)){onChange({error:'manual-source-identity-unproven'});return null}
+  const sid=sessionId();if(!sid||!isAuthority()||!e.id){if(e.kind==='activity')throw Error('manual-session-changed');return null}
+  const session=await ledger.getSession?.(sid);if(ledger.getSession&&session?.status!=='recording'){if(e.kind==='activity')throw Error('manual-session-changed');return null}await hydrate(sid);if(!await trustedEnrollment(e,session)){if(e.kind==='activity')throw Error('manual-actor-not-allowed');onChange({error:'manual-source-identity-unproven'});return null}
+  if(e.kind==='activity'){
+   if(e.expectedSessionId!==undefined&&e.expectedSessionId!==sid||sessionId()!==sid)throw Error('manual-session-changed');
+   if(e.dependsOn.length){
+    const saved=await ledger.snapshot?.(sid);if(!saved)throw Error('manual-dependency-unavailable');
+    if(e.dependsOn.some(id=>!saved.activities.some(a=>a.id===id&&a.sessionId===sid)))throw Error('manual-dependency-not-in-session');
+   }
+   const user=game.users?.get(e.source.userId),actor=await fromUuid?.(e.actorUUID),current=await ledger.getSession?.(sid);
+   if(!isAuthority()||sessionId()!==sid||e.expectedSessionId!==undefined&&e.expectedSessionId!==sid||ledger.getSession&&current?.status!=='recording')throw Error('manual-session-changed');
+   if(!user?.active||!actor?.testUserPermission?.(user,'OWNER')||!current?.actorUUIDs?.includes(actor.uuid))throw Error('manual-actor-not-allowed');
+  }
   if(hpPools&&['treatment','battle-medicine'].includes(e.kind)){const missing=new Set(e.missing??[]);for(const uuid of e.patientUUIDs??[]){try{const actor=await fromUuid(uuid),pool=hpPools.discover(actor);if(!pool.ready)missing.add('hp-pool-source-unavailable');else if(pool.poolUUID!==uuid)missing.add('shared-hp-completion-unavailable')}catch{missing.add('hp-pool-source-unavailable')}}e={...e,missing:[...missing]}}
-  if(seen.has(e.id)){const old=records.get(`manual:${e.id}`)??await ledger.getActivity?.(`manual:${e.id}`);if(!old||old.state!=='awaiting-evidence')return null;const proof={...old.proof};for(const key of ['checkIds','resultIds','receiptIds','immunityIds'])proof[key]=[...new Set([...(proof[key]??[]),...(e[key]??[])])];const options={...old.options};for(const key of ['sourceDegree','effectiveOutcome','rolledHealing'])if(e[key]!==undefined)options[key]=e[key];const patch={proof,options,...e.treatmentImmunitySeconds!==undefined?{treatmentImmunitySeconds:e.treatmentImmunitySeconds}:{}};const updated={...old,...patch};await ledger.transitionActivity?.(old.id,{expected:['awaiting-evidence'],patch});records.set(old.id,updated);for(const id of proof.resultIds)sourceToActivity.set(id,old.id);return updated}
-  seen.add(e.id);const order=orders.get(e.actorUUID)??0;orders.set(e.actorUUID,order+1);
+  if(seen.has(e.id)){const old=records.get(`manual:${e.id}`)??await ledger.getActivity?.(`manual:${e.id}`);if(!old||old.state!=='awaiting-evidence'||old.kind==='activity'||e.kind==='activity')return null;const proof={...old.proof};for(const key of ['checkIds','resultIds','receiptIds','immunityIds'])proof[key]=[...new Set([...(proof[key]??[]),...(e[key]??[])])];const options={...old.options};for(const key of ['sourceDegree','effectiveOutcome','rolledHealing'])if(e[key]!==undefined)options[key]=e[key];const patch={proof,options,...e.treatmentImmunitySeconds!==undefined?{treatmentImmunitySeconds:e.treatmentImmunitySeconds}:{}};const updated={...old,...patch};await ledger.transitionActivity?.(old.id,{expected:['awaiting-evidence'],patch});records.set(old.id,updated);for(const id of proof.resultIds)sourceToActivity.set(id,old.id);return updated}
+  seen.add(e.id);const nextOrder=orders.get(e.actorUUID)??0,order=e.kind==='activity'?(e.order??nextOrder):nextOrder;orders.set(e.actorUUID,nextOrder+1);
   const start=game.time.worldTime,duration=Number.isFinite(e.durationSeconds)?e.durationSeconds:0;
   try{const input={id:`manual:${e.id}`,sessionId:sid,providerId:'manual',actorUUID:e.actorUUID,patientUUIDs:e.patientUUIDs??[],hpPoolUUIDs:e.hpPoolUUIDs??[],groupId:e.groupId??`manual:${e.id}`,state:'awaiting-evidence',startedAt:start,endsAt:start+duration,
    kind:e.kind,order,durationSeconds:duration,treatmentImmunitySeconds:e.treatmentImmunitySeconds,groupProof:e.groupProof,source:{...e.source,messageId:e.id,manual:true},
+   ...e.kind==='activity'?{durationSource:e.durationSource,temporalSource:e.temporalSource,dependsOn:e.dependsOn,...Object.fromEntries(['notBefore','observedStart','observedEnd'].filter(key=>e[key]!==undefined).map(key=>[key,e[key]]))}:{},
    options:{label:e.label??null,sourceDegree:e.sourceDegree??null,effectiveOutcome:e.effectiveOutcome??null,rolledHealing:e.rolledHealing??null,missing:e.missing??[]},proof:{useId:e.useId??null,checkIds:e.checkIds??[],resultIds:e.resultIds??[e.id],receiptIds:e.receiptIds??[],immunityIds:e.immunityIds??[]}};await ledger.insertActivity(input);records.set(input.id,input);for(const id of input.proof.resultIds)sourceToActivity.set(id,input.id);onChange(input);return input}catch(error){seen.delete(e.id);throw error}
  }
 

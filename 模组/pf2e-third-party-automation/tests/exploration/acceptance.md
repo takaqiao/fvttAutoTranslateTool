@@ -6,6 +6,12 @@
 
 ## 三层验证
 
+### 手动时间声明小批（0.9.25）
+
+此批基于已部署0.9.24，仅增加通用手动声明、时长出处、声明时段、同会话前置关系和面板展示。[实际GM＋玩家报告](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/qa/manual-time-native-2026-10-01T05-54-12-301Z-005f1f95.json)及[一次结果复核](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/manual-time-native-result-review.md)通过：GM真实对话框登记A十分钟，玩家独立客户端登记B同时五分钟和A后续五分钟，重建900秒、certainty为incomplete。作者身份、出处、时段、依赖及空原生proof持久化，刷新后相同。未拥有角色、错误会话及不完整伪治疗凭据拒绝且无新增。
+
+前后各13集合原生GET ACK确认Actor／Item／ChatMessage／Scene／Combat与世界时间0不变，无clock commit；180项安装／HTTP源码一致，五个已停QA世界完整保留。此项仅启用本模组和三个必要依赖，不覆盖Patreon手动免疫、自动检查点接入或治疗效率的新分支。[本批完整源码回归](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/release-0925/source-check.json)为2807／2807、0fail／skip／cancel／todo，152测试文件及176运行脚本语法检查通过。旧报告及十二场景状态保留。
+
 | 层级 | 入口 | 能证明什么 |
 | --- | --- | --- |
 | 调度／状态单元测试 | `node --test tests/exploration/*.test.mjs` | 用确定输入和替身验证时间关系、状态转换、权限、预算、资源和拒绝重放 |
@@ -16,11 +22,11 @@
 
 0.9.23 的 [完整源码测试](C:/Users/Taka/Desktop/fvtt/output/exploration-recovery-20260930/verification/release-history-full-suite.log) 为2294 tests／2294 pass／0 fail／0 skipped；[最终发行验证](C:/Users/Taka/Desktop/fvtt/output/exploration-recovery-20260930/release-tools-0923/release/evidence-verification.json) 绑定固定源码、实际客户端报告与文件表，并保留 `completeTwelveScenarioMatrixPassed:false`。早期 [pre-review-full-suite.log](C:/Users/Taka/Desktop/fvtt/output/exploration-recovery-20260930/verification/pre-review-full-suite.log) 的2008项属于修复前候选；不能作为当前计数。源码测试不代表十二项真实世界验收通过；后续产品修改需重新验证相应源码。
 
-质量 goal 的第一批未发版修复另有 [新鲜集成测试](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/integrated-full-suite-20260930T161050829Z.log)：2338 tests／2338 pass／0 fail／0 skipped。覆盖异步时间取消、命能资格、患者接收上下文、再聚能资格、手动回执授权和免疫恢复时重验 HP 证据。后续候选已补原子账本、私有 driver／OWNER 执行权和原生窗口取消；[最终冻结源码验证](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/owner-candidate-source-verification-20261001T011021862Z.json) 为2767／2767、331个语法检查与diff检查通过。这些结果属于未发版候选，不能回写为已发布 .23 的验收；完整 goal 与十二场景仍未完成。
+质量 goal 的第一批未发版修复另有 [新鲜集成测试](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/integrated-full-suite-20260930T161050829Z.log)：2338 tests／2338 pass／0 fail／0 skipped。覆盖异步时间取消、命能资格、患者接收上下文、再聚能资格、手动回执授权和免疫恢复时重验 HP 证据。后续候选已补原子账本、私有 driver／OWNER 执行权和原生窗口取消；[最终冻结源码验证](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/owner-candidate-source-verification-20261001T011021862Z.json) 为2767／2767、331个语法检查与diff检查通过。这些阶段一结果已于2026-10-01以0.9.24发布部署；[发行验证](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/release-0924/release/evidence-verification.json)绑定2767／2767及下述原生报告，[部署后验证](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/release-0924/postcheck.json)核对179项HTTP文件和世界／服务／配置／其他模组。它们不能回写为已发布 .23 的验收；完整goal与十二场景仍未完成。
 
 ## 质量 goal 阶段一的实际原生证据
 
-2026-10-01 的冻结候选为179个运行文件，来源清单 [source-wire-candidate-1790817157404-35b2f732.json](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/qa/source-wire-candidate-1790817157404-35b2f732.json)。版本字符串仍为0.9.23，未提交、发布或部署。Foundry14.368／PF2e8.5.1使用真实原生骰子；同一GM用户和同一OWNER用户各有两个独立标签页。它证明这些客户端间的唯一执行，不能替代不同GM用户交接、掉线、遭遇和外部时间的完整矩阵。
+2026-10-01 的冻结候选为179个运行文件，来源清单 [source-wire-candidate-1790817157404-35b2f732.json](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/qa/source-wire-candidate-1790817157404-35b2f732.json)。QA执行时版本字符串仍为0.9.23；该冻结运行代码随后以0.9.24独立提交、发布并部署，发行清单和说明按新版本更新。Foundry14.368／PF2e8.5.1使用真实原生骰子；同一GM用户和同一OWNER用户各有两个独立标签页。它证明这些客户端间的唯一执行，不能替代不同GM用户交接、掉线、遭遇和外部时间的完整矩阵。
 
 | 子项 | 已保存的实际证据 |
 | --- | --- |
