@@ -60,3 +60,22 @@ test('a public manual declaration explains its missing source in Chinese without
 test('a saved uncertain clock explains the actual missing world-time source in Chinese',()=>{
  const data=historyFixture();data.clocks[0].reason='world-time-source-unconfirmed';const html=panelUI.renderRecoveryHistory(data);assert.match(html,/世界时间来源回执尚未确认/);assert.doesNotMatch(html,/world-time-source-unconfirmed/);
 });
+
+function checkpointPanelFixture(t,{phase='open',status='running'}={}){
+ const previous=globalThis.foundry;t.after(()=>{globalThis.foundry=previous});globalThis.foundry={applications:{api:{ApplicationV2:class{render(){return this}}}}};
+ const actors=[{actorUUID:'Actor.H',name:'H',hp:{value:20,max:20},focus:{value:1,max:1},pool:{poolUUID:'Actor.H',ready:true},wardCapacity:1}],binding={id:'C',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:0,to:600},calls=[];
+ const data={session:{id:'S',status,manual:false,startedAt:0,cursorAt:0,goalsByPool:[{poolUUID:'Actor.H',targetHP:20}],manualCheckpoint:{...binding,phase}},actors,activities:[],clocks:[]};
+ const game={user:{isGM:true,getFlag:()=>({}),setFlag:async()=>{}},messages:new Map()},coordinator={snapshot:async()=>data,closeManualCheckpoint:async value=>calls.push(['close',value])};
+ const api=panelUI.createRecoveryPanel({game,coordinator,capabilities:{snapshot:async()=>actors},start:async config=>calls.push(['start',config]),getSessionId:()=> 'S'}),app=api.open(['Actor.H']);return {app,data,binding,calls};
+}
+test('an open manual checkpoint shows its waiting instruction and continue action only while open',async t=>{
+ const f=checkpointPanelFixture(t),context=await f.app._prepareContext(),html=await f.app._renderHTML(context);assert.match(html,/name="manualFirstRound"/);assert.match(html,/首轮等待手动治疗/);assert.match(html,/data-recovery="closeManualCheckpoint"/);assert.match(html,/继续本轮/);assert.match(html,/Workbench/);
+ f.data.session.manualCheckpoint.phase='advancing';assert.doesNotMatch(await f.app._renderHTML(await f.app._prepareContext()),/data-recovery="closeManualCheckpoint"/);
+});
+test('continue routes only the current immutable checkpoint binding through the panel action',async t=>{
+ const f=checkpointPanelFixture(t);await f.app.act('closeManualCheckpoint',null);assert.deepEqual(f.calls,[['close',f.binding]]);
+});
+test('the first-round waiting choice reaches start while ordinary starts remain the default',async t=>{
+ const f=checkpointPanelFixture(t,{status:'complete'}),values={budget:{value:'10'},activityBudget:{value:'2'},risky:{checked:false},focus:{checked:true},extension:{checked:false},assurance:{checked:false},rank:{value:'trained'},manualFirstRound:{checked:true}},content={querySelector:selector=>values[selector.match(/name=(\w+)/)[1]],querySelectorAll:()=>[{dataset:{pool:'Actor.H'},value:'20'}]};
+ await f.app.act('start',content);assert.equal(f.calls[0][1].waitForManualFirstRound,true);values.manualFirstRound.checked=false;await f.app.act('start',content);assert.equal(f.calls[1][1].waitForManualFirstRound,false);
+});

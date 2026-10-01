@@ -3,6 +3,20 @@ export const emptyLedger=()=>({sessions:{},activities:{},clocks:{}});
 export const clone=value=>structuredClone(value);
 export function finite(value,label) {if(!Number.isFinite(value))throw Error(`invalid-${label}`);return value}
 export function id(value,label='id') {if(typeof value!=='string'||!value.trim()||['__proto__','constructor','prototype'].includes(value))throw Error(`invalid-${label}`);return value}
+const checkpointFields=['id','sessionId','rootUUID','epoch','observationNonce','from','to'];
+export const checkpointBinding=checkpoint=>Object.fromEntries(checkpointFields.map(key=>[key,checkpoint[key]]));
+export function sameCheckpoint(expected,binding){
+  return !!expected&&!!binding&&typeof binding==='object'&&[Object.prototype,null].includes(Object.getPrototypeOf(binding))&&Reflect.ownKeys(binding).length===checkpointFields.length&&checkpointFields.every(key=>{
+    const field=Object.getOwnPropertyDescriptor(binding,key);return field&&Object.hasOwn(field,'value')&&field.value===expected[key];
+  });
+}
+export function manualSourceIntent(input){
+  const fields=['sourceType','kind','useId','actorUUID','patientUUID','riskySurgery'];
+  if(!input||typeof input!=='object'||![Object.prototype,null].includes(Object.getPrototypeOf(input))||Reflect.ownKeys(input).some(key=>!fields.includes(key)))throw Error('invalid-manual-source-intent');
+  const value={};for(const key of Reflect.ownKeys(input)){const field=Object.getOwnPropertyDescriptor(input,key);if(!Object.hasOwn(field,'value'))throw Error('invalid-manual-source-intent');value[key]=field.value}
+  if(value.sourceType!=='workbench'||value.kind!=='treatment'||value.riskySurgery!==undefined&&typeof value.riskySurgery!=='boolean')throw Error('manual-checkpoint-source-unavailable');
+  for(const key of ['useId','actorUUID','patientUUID'])id(value[key],key);return value;
+}
 export function normalizeNativeOwnerMap(value,actorUUIDs,{manual=false}={}) {
   if(value===undefined)return {};
   if(value===null||typeof value!=='object'||![Object.prototype,null].includes(Object.getPrototypeOf(value)))throw Error('invalid-native-owner-map');

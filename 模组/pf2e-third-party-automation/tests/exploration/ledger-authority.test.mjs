@@ -148,9 +148,10 @@ test('explicit takeover quarantines pending work without issuing another native 
  await assert.rejects(peer.resumeSession('S',{cursorAt:0}),/unresolved-evidence-no-replay/);
 });
 
-test('manual evidence can be appended by a different GM without adopting the driver',async()=>{
+test('recording history can be appended by a different GM without adopting the automatic driver',async()=>{
  const f=server(),driver=f.client('driver'),s=await driver.createSession(session()),peer=f.client('peer','OtherGM');
- const a=await peer.insertActivity(activity('Manual',{state:'awaiting-evidence',source:{manual:true}}));
+ await peer.createSession(session('Recorded',{manual:true,status:'recording'}));
+ const a=await peer.insertActivity(activity('Manual',{sessionId:'Recorded',state:'awaiting-evidence',source:{manual:true}}));
  await peer.transitionActivity(a.id,{expected:['awaiting-evidence'],patch:{state:'confirmed'}});
  assert.equal((await driver.getSession('S')).driver.clientNonce,s.driver.clientNonce);
 });
