@@ -5,6 +5,7 @@ import {withEatStrikeFrame,isEatFortuneProbe} from './eat-fortune.mjs';
 import {createWorkbenchRecallController} from './knowledge-entrypoints.mjs';
 import {AUTOMATIC_KNOWLEDGE_SOURCE,automaticKnowledgeChoices,automaticKnowledgeRound} from './knowledge-automatic.mjs';
 import {knowledgeNativeLabel} from './knowledge-display.mjs';
+import {getNativeOwnerTransientActor} from './native-owner-operations.mjs';
 
 export const KNOWLEDGE_SOURCES=Object.freeze({
  recall:'Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo',automatic:AUTOMATIC_KNOWLEDGE_SOURCE,
@@ -61,6 +62,8 @@ export async function rollKnowledgeD20({game,actor,token,item,globals=globalThis
 
 export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,choose,runNative,strikeMiddleware=null,spellAttackMiddleware=null,globals=globalThis,onError=console.error}={}){
  const queue=new SerialActions();let socket,registered=false;
+ const attackFrameKey=Symbol('knowledgeNativeAttack'),attackFrames=new WeakMap();
+ const strikeUsage=strike=>{const item=strike?.item;return [item?.id,item?.uuid,item?._source?.name??item?.name,item?.altUsageType??null,item?.isMelee,item?.isThrown];};
  const workbench=createWorkbenchRecallController({game,fromUuid,globals,onError,onResolved:message=>processRecall(message)});
  const gm=()=>{if(!isActiveGM(game))throw Error('知识联动必须由当前主GM结算。')};
  const actors=()=>[...new Map([...values(game.actors),...values(game.scenes).flatMap(s=>values(s.tokens).map(t=>t.actor))].filter(Boolean).map(a=>[a.uuid,a])).values()];
@@ -210,42 +213,77 @@ export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,cho
   return queue.run('strategist-claims',()=>settleClaimProof(message,proof));
  }
  const rpc=async(method,payload)=>{if(isActiveGM(game))return method==='claim'?claimAttack(payload,game.user):completeAttack(payload.receipt,payload.result,game.user);if(!socket||!game.users.activeGM)throw Error('需要在线GM处理军师架势的共享攻击机会。');const r=await socket.executeAsUser(`knowledge-${method}`,game.users.activeGM.id,payload);if(!r.ok)throw Error(r.error);return r.value;};
- async function withAttack(actor,params,roll,beforeNative,spellAttack=false){
+ async function withAttack(actor,params,roll,beforeNative,spellAttack=false,usage=null){
   const invoke=next=>{beforeNative?.(next);return roll(next);};
   if(isEatFortuneProbe(params))return invoke(params);
+  // Preparing an actor rebuilds its outer Strike handlers. Let their native
+  // rebind carry this claim once; the original invocation still settles it.
+  if(Object.hasOwn(params,attackFrameKey)){
+   const frame=attackFrames.get(params[attackFrameKey]);
+   try{
+    if(!frame||frame.used||frame.actor!==actor||!usage)throw Error('军师架势原生攻击的承接身份已失效。');
+    frame.assert(params,usage);frame.used=true;
+    try{await frame.confirm(params);frame.assert(params,usage);}catch(error){frame.rejected=true;throw error;}
+    return invoke(params);
+   }catch(error){if(frame&&!frame.used)frame.rejected=true;throw error;}
+  }
   // Spell.rollAttack forwards a TokenDocument; StatisticCheck.roll falls back
   // to the first active token. Strike uses a different native origin selection.
   const spellSource=next=>next.token??values(actor.getActiveTokens?.(true,true))[0]??null;
   const target=tokenDoc(params.target?.getActiveTokens?.(true,true)?.[0]??params.target)??tokenDoc(values(game.user.targets)[0]),token=spellAttack?spellSource(params):sourceToken(actor);if(!target?.uuid||!token)return invoke(params);
   // Do not add an RPC to actors/scenes with no armed marshal.
   if(!actors().some(a=>states(a).some(s=>['pending','claimed'].includes(s.status)&&s.targetUuid===target.uuid)))return invoke(params);
+  const transient=!spellAttack&&getNativeOwnerTransientActor(game,actor),sourceActor=transient?.actor??actor;
   const sourceUuid=token.uuid,sourceScene=token.parent,user=game.user;
   const assertSource=(next=params)=>{
-   if(!spellAttack)return;
-   if(game.user!==user||game.users.get(user?.id)!==user||!actor.testUserPermission?.(user,'OWNER')||token.documentName!=='Token'||token.actor!==actor||token.uuid!==sourceUuid||token.parent!==sourceScene||values(game.scenes).find(scene=>scene.id===sourceScene?.id)!==sourceScene||values(sourceScene?.tokens).find(current=>current.id===token.id)!==token||spellSource(params)!==token||spellSource(next)!==token)throw Error('军师架势法术攻击的原始来源 Token 或角色身份已经变化。');
+   transient?.assertLive();
+   if(game.user!==user||game.users.get(user?.id)!==user||!sourceActor.testUserPermission?.(user,'OWNER')||!actor.testUserPermission?.(user,'OWNER')||token.documentName!=='Token'||token.actor!==sourceActor||token.uuid!==sourceUuid||token.parent!==sourceScene||values(game.scenes).find(scene=>scene.id===sourceScene?.id)!==sourceScene||values(sourceScene?.tokens).find(current=>current.id===token.id)!==token||spellAttack&&(spellSource(params)!==token||spellSource(next)!==token)||transient&&(transient.user!==user||transient.target!==target||actor===sourceActor||actor.uuid!==sourceActor.uuid||actor._source===sourceActor._source))throw Error(`军师架势${spellAttack?'法术':''}攻击的原始来源 Token 或角色身份已经变化。`);
   };
   const confirmSource=async(next=params)=>{
-   if(!spellAttack)return;
-   assertSource(next);const [liveActor,liveToken]=await Promise.all([fromUuid(actor.uuid),fromUuid(sourceUuid)]);assertSource(next);
-   if(liveActor!==actor||liveToken!==token)throw Error('军师架势法术攻击的来源 Token 文档已经替换。');
+   assertSource(next);const [liveActor,liveToken]=await Promise.all([fromUuid(sourceActor.uuid),fromUuid(sourceUuid)]);assertSource(next);
+   if(liveActor!==sourceActor||liveToken!==token)throw Error(`军师架势${spellAttack?'法术':''}攻击的来源 Token 文档已经替换。`);
   };
-  if(spellAttack)await confirmSource();
-  const input={actorUuid:actor.uuid,targetUuid:target.uuid,sourceTokenUuid:token.uuid},start=Date.now();let receipt;
+  await confirmSource();
+  const input={actorUuid:sourceActor.uuid,targetUuid:target.uuid,sourceTokenUuid:token.uuid},start=Date.now();let receipt;
   do{receipt=await rpc('claim',input);if(receipt.busy){assertSource();if(Date.now()-start>60000)throw Error('另一次攻击尚未结束，本次攻击未投骰。');await new Promise(r=>setTimeout(r,100));assertSource();}}while(receipt.busy);
-  if(!receipt.claims.length){if(spellAttack)await confirmSource();return invoke(params);}
-  let rolled=false,enteredNative=false,returned=false,guardRejected=false;try{
-   const started=Date.now();while(!values(actor.items).some(i=>own(i).claim===receipt.id)){if(Date.now()-started>5000)throw Error('军师架势效果尚未同步；本次攻击未投骰。');await new Promise(r=>setTimeout(r,20));}
+  if(!receipt.claims.length){await confirmSource();return invoke(params);}
+  let rolled=false,enteredNative=false,returned=false,guardRejected=false,cloneEffectId,frameId,frame;try{
+   if(receipt.actorUuid!==sourceActor.uuid)throw Error('军师架势攻击回执的角色不匹配。');
+   const claimEffect=()=>values(sourceActor.items).find(i=>i.type==='effect'&&own(i).kind==='strategist-claim'&&own(i).claim===receipt.id&&own(i).targetUuid===target.uuid&&own(i).sourceActor===receipt.claims.map(c=>c.sourceActor).join(',')&&i.flags?.[MODULE_ID]?.nativeEffectKey===`strategist:${receipt.id}`);
+   const started=Date.now();let effect;while(!(effect=claimEffect())){assertSource();if(Date.now()-started>5000)throw Error('军师架势效果尚未同步；本次攻击未投骰。');await new Promise(r=>setTimeout(r,20));}
+   if(transient){
+    assertSource();if(actor._source.items.some(i=>i._id===effect.id))throw Error('军师架势临时效果的文档身份冲突。');cloneEffectId=effect.id;
+    const selectors=['strike-attack-roll','spell-attack-roll'],ephemeralCounts=selectors.map(selector=>actor.synthetics?.ephemeralEffects?.[selector]?.target?.length??0);
+    // PF2e's existing Strike closure resolves a fresh contextual clone from
+    // this source. updateSource prepares its rules without touching the live actor.
+    actor.updateSource({items:[...clone(actor._source.items),effect.toObject()]});
+    const rules=values(actor.rules).filter(r=>r.item?.id===effect.id&&!r.ignored),mark=`strategist-${receipt.id.toLowerCase()}`;
+    if(!actor.synthetics?.tokenMarks?.get(target.uuid)?.includes(mark)||!rules.some(r=>r.key==='TokenMark'&&r.uuid===target.uuid&&r.slug===mark)||!rules.some(r=>r.key==='EphemeralEffect'&&selectors.every(selector=>r.selectors?.includes(selector)))||selectors.some((selector,index)=>actor.synthetics?.ephemeralEffects?.[selector]?.target?.length!==ephemeralCounts[index]+1))throw Error('军师架势临时攻击规则未准备完成；本次攻击未投骰。');
+   }
    const next={...params,options:new Set([...params.options??[],`${option}:claim:${receipt.id}`]),extraRollOptions:[...params.extraRollOptions??[],`${option}:claim:${receipt.id}`],callback:(...args)=>{rolled=!!args[0];return params.callback?.(...args)}};
+   if(usage){
+    const identity=strikeUsage(usage.strike),targetActor=target.actor,marker=`${option}:claim:${receipt.id}`;
+    frameId=Object.freeze({});frame={actor,used:false,rejected:false,assert(next,current){
+     assertSource(next);
+     const currentTarget=tokenDoc(next.target?.getActiveTokens?.(true,true)?.[0]??next.target)??tokenDoc(values(game.user.targets)[0]);
+     if(attackFrames.get(frameId)!==frame||next[attackFrameKey]!==frameId||user.active===false||getNativeOwnerTransientActor(game,actor)!==(transient||null)||currentTarget!==target||target.actor!==targetActor||target.parent!==sourceScene||values(sourceScene?.tokens).find(current=>current.id===target.id)!==target||sourceToken(actor)!==token||current.index!==usage.index||current.strike.variants?.[current.index]!==current.variant||!values(actor.system?.actions).flatMap(strike=>[strike,...strike.altUsages??[]]).includes(current.strike)||current.strike.item?.actor!==actor||strikeUsage(current.strike).some((value,index)=>value!==identity[index])||next.callback!==frame.callback||!values(next.options).includes(marker)||!values(next.extraRollOptions).includes(marker)||!claimEffect()||transient&&!values(actor.items).some(item=>item.id===cloneEffectId&&own(item).claim===receipt.id))throw Error('军师架势原生攻击的来源、目标或多重攻击档位已经变化。');
+    },async confirm(next){await confirmSource(next);if(await fromUuid(target.uuid)!==target)throw Error('军师架势原生攻击的目标 Token 文档已经替换。');},callback:next.callback};
+    attackFrames.set(frameId,frame);next[attackFrameKey]=frameId;
+   }
    // The owner guard runs after claim/effect synchronization, before either
    // automation records native entry. A veto therefore returns the unrolled claim.
-   try{if(spellAttack)await confirmSource(next);beforeNative?.(next);assertSource(next);}catch(error){guardRejected=true;throw error;}
+   try{await confirmSource(next);beforeNative?.(next);assertSource(next);}catch(error){guardRejected=true;throw error;}
    enteredNative=true;const result=await roll(next);returned=true;rolled||=!!result;return result;
-  }finally{if(!enteredNative||returned||rolled)try{await rpc('complete',{receipt,result:{rolled}});}catch(error){if(!guardRejected)throw error;try{Promise.resolve(onError(error)).catch(()=>{});}catch{}}}
+  }finally{
+   if(frameId)attackFrames.delete(frameId);
+   try{if(cloneEffectId&&actor._source.items.some(i=>i._id===cloneEffectId&&own(i).claim===receipt.id))actor.updateSource({items:clone(actor._source.items.filter(i=>i._id!==cloneEffectId||own(i).claim!==receipt.id))});}
+   finally{if(!enteredNative||returned||rolled||frame?.rejected)try{await rpc('complete',{receipt,result:{rolled}});}catch(error){if(!guardRejected)throw error;try{Promise.resolve(onError(error)).catch(()=>{});}catch{}}}
+  }
  }
- function wrapStrike(strike,actor){for(const variant of strike?.variants??[]){const native=variant.roll;if(typeof native!=='function'||native.knowledgeWrapped)continue;const wrapped=async(params={})=>{
+ function wrapStrike(strike,actor){for(const [index,variant]of (strike?.variants??[]).entries()){const native=variant.roll;if(typeof native!=='function'||native.knowledgeWrapped)continue;const wrapped=async(params={})=>{
    const target=tokenDoc(params.target)??tokenDoc(values(game.user.targets)[0]);
    if(values(actor.items).some(i=>own(i).kind==='devise'&&own(i).branch==='skill'&&!i.isExpired&&!expired(own(i).timing)&&own(i).targetUuid===target?.uuid))throw Error('技能策略期间不能打击该生物；可选择其他目标。');
-   const invoke=next=>withAttack(actor,next,claimed=>withEatStrikeFrame({actor,strike,variant,params:claimed},framed=>native.call(variant,framed)));
+   const invoke=next=>withAttack(actor,next,claimed=>withEatStrikeFrame({actor,strike,variant,params:claimed},framed=>native.call(variant,framed)),undefined,false,{strike,variant,index});
    return strikeMiddleware?strikeMiddleware({actor,strike,variant,params,probe:isEatFortuneProbe(params)},invoke):invoke(params);
   };wrapped.knowledgeWrapped=true;variant.roll=wrapped;}return strike;}
  async function recall({actor,item,message,user,action},target,{statistic=null,assurance=false,dc=null,targetUuids=target?[target.uuid]:[]}={}){

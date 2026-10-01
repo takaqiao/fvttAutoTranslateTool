@@ -10,6 +10,7 @@ const operations=message=>message.flags?.[ID]?.nativeOwnerOperations??{};
 const Message=()=>globalThis.CONFIG?.ChatMessage?.documentClass??globalThis.ChatMessage;
 const sessions=new WeakMap();
 const invocations=new WeakMap();
+const transientActors=new WeakMap();
 const typedTypes=new Set(['check','flat','d20','formula-damage']);
 const damageTypes=new Set(['damage','spell-damage','formula-damage']);
 const privateTypes=new Set([...typedTypes,...damageTypes]);
@@ -19,6 +20,11 @@ const publicRequest=request=>Object.fromEntries(['type','statistic','itemUuid','
 export function getNativeOwnerInvocation(game,input){
  const options=input?.options??input?.extraRollOptions??input;
  return values(options).map(option=>invocations.get(game)?.get(option)).find(Boolean)??null;
+}
+
+/** Keep an authenticated transient roller distinct from its live source actor. */
+export function getNativeOwnerTransientActor(game,actor){
+ const binding=transientActors.get(actor);return binding?.game===game?binding:null;
 }
 
 const pinnedTarget=token=>new Proxy(Object.create(Object.getPrototypeOf(token.actor)),{
@@ -158,10 +164,21 @@ export function createNativeOwnerOperations({game,fromUuid=globalThis.fromUuid,s
    }
    await waitFor(()=>operations(message)[operation.nonce]?.committed===true);guard();
   };
-  const roll=await beforeNativeRoll({Hooks,marker,showDialog,commit:operation.requiresCommit?commit:async()=>{},native:operation.requiresCommit?rollNative:()=>rollNative(),assertLive:guard});guard();
-  if(!roll&&!created)return {status:'cancelled'};
-  if(!created)throw Error('原生攻击结果未确认；不能重复投骰。');
-  return {status:'rolled',messageId:created.id};
+  const originalAttackGuard=guard,user=game.user,origins=values(roller.getActiveTokens?.(true,true));
+  // Match PF2e RollContext's controlled/first selection without replacing it.
+  const sourceToken=origins.find(token=>token.object?.controlled)??origins[0]??null,sourceScene=sourceToken?.parent,sourceUuid=sourceToken?.uuid;
+  const binding=roller!==actor?Object.freeze({game,actor,user,target,assertLive(){
+   if(transientActors.get(roller)!==binding)throw Error('本次原生临时角色执行已结束。');originalAttackGuard();
+   if(game.user!==user||game.users.get(user.id)!==user||roller.uuid!==actor.uuid||roller===actor||roller._source===actor._source)throw Error('本次原生临时角色或操作者身份已改变。');
+   if(sourceToken&&(sourceToken.actor!==actor||sourceToken.uuid!==sourceUuid||sourceToken.parent!==sourceScene||values(game.scenes).find(scene=>scene.id===sourceScene?.id)!==sourceScene||values(sourceScene?.tokens).find(token=>token.id===sourceToken.id)!==sourceToken))throw Error('本次原生攻击的来源 Token 文档已经改变。');
+  }}):null;
+  if(binding){transientActors.set(roller,binding);guard=()=>binding.assertLive();}
+  try{
+   const roll=await beforeNativeRoll({Hooks,marker,showDialog,commit:operation.requiresCommit?commit:async()=>{},native:operation.requiresCommit?rollNative:()=>rollNative(),assertLive:guard});guard();
+   if(!roll&&!created)return {status:'cancelled'};
+   if(!created)throw Error('原生攻击结果未确认；不能重复投骰。');
+   return {status:'rolled',messageId:created.id};
+  }finally{if(binding)transientActors.delete(roller);}
  }
  async function executeTyped({message,operation,actor,target,request,guard}){
   const marker=`${ID}:native-operation:${operation.nonce}`,options=new Set(values(request.options)),token=request.tokenUuid?await fromUuid(request.tokenUuid):null,item=request.itemUuid?await fromUuid(request.itemUuid):null;
