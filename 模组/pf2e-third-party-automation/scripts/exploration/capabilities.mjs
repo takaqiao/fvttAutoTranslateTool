@@ -1,5 +1,6 @@
 import {TREAT_WOUNDS_IMMUNITY,sourceId,values} from '../salubrious-kiss-rules.mjs';
 import {canonicalItemSource} from './source-ids.mjs';
+import {preparedTreatmentSelections,simpleTreatmentDamageModel} from './prepared-treatment.mjs';
 export const improvedRefocusSlugs=new Set(['bloodline','bonded','conflux','devoted','domain','hex','inspirational','link','meditative','primal','wardens'].flatMap(name=>[`${name}-focus`,`${name}-wellspring`]));
 export function refocusUnsupported(items){return values(items).filter(i=>!i.isSuppressed&&!i.system?.suppressed&&i.type==='feat'&&improvedRefocusSlugs.has(i.slug??i.system?.slug)).map(i=>i.slug??i.system?.slug)}
 export function treatablePatient(patient,healer){return patient.modeOfBeing==='living'||patient.modeOfBeing==='undead'&&healer.slugs.includes('stitch-flesh')}
@@ -29,17 +30,16 @@ export function createCapabilities({game,fromUuid,hpPools}) {
     const actor=await fromUuid(uuid);if(!actor)throw Error('actor-unavailable');
     const items=values(actor.items).filter(i=>!i.isSuppressed&&!i.system?.suppressed);
     const feats=items.filter(i=>i.type==='feat');const slugs=feats.map(i=>i.slug??i.system?.slug);
-    const statistics={},treatmentEstimate={};for(const skill of ['medicine','nature','occultism']){const stat=actor.getStatistic?.(skill);statistics[skill]={rank:stat?.rank??0,mod:stat?.mod??stat?.check?.mod??null};treatmentEstimate[skill]={ready:false,reason:'native-context-unverified'};
-      try{const extra=[...actor.getRollOptions(['all','skill-check',skill]),'action:treat-wounds',`check:statistic:${skill}`,'check:type:skill',...['exploration','healing','manipulate'].flatMap(t=>[t,`item:trait:${t}`])],check=stat.withRollOptions({extraRollOptions:extra}).check,domains=check.domains;
-       const rules=values(actor.rules).filter(r=>!r.ignored),dynamicRules=rules.some(r=>typeof r.beforeRoll==='function'&&!(r.key==='ActiveEffectLike'&&r.phase!=='beforeRoll'));
-       const dynamic=dynamicRules||check.modifiers.some(m=>m.predicate?.length||m.adjustments?.length)||domains.some(d=>actor.synthetics?.degreeOfSuccessAdjustments?.[d]?.length||actor.synthetics?.rollTwice?.[d]?.length||actor.synthetics?.rollSubstitutions?.[d]?.some(s=>s.required))||slugs.some(s=>['magic-hands','mortal-healing'].includes(s));
-       if(!dynamic){const opts=check.createRollOptions({origin:actor,extraRollOptions:extra}),modifier=new game.pf2e.CheckModifier(skill,{modifiers:check.modifiers},[],opts);if(Number.isFinite(modifier.totalModifier))treatmentEstimate[skill]={ready:true,modifier:modifier.totalModifier,domains:[...domains],options:[...opts],sourceVersion:'8.5.1'}}
-      }catch{}
+    const statistics={},treatmentEstimate={};for(const skill of ['medicine','nature','occultism']){const stat=actor.getStatistic?.(skill);
+      const selections=preparedTreatmentSelections({game,actor,skill,slugs});
+      const rawMod=stat&&Object.getOwnPropertyDescriptor(stat,'mod')?.value;
+      statistics[skill]={rank:stat?.rank??0,mod:Number.isFinite(rawMod)?rawMod:selections.some(selection=>selection.ready)?stat.mod??null:null};
+      treatmentEstimate[skill]={...selections.find(selection=>!selection.riskySurgery&&!selection.assurance),selections};
     }
     const assuranceSkills=feats.filter(i=>(i.slug??i.system?.slug)==='assurance').map(i=>i.flags?.pf2e?.rulesSelections?.assurance??i.flags?.system?.rulesSelections?.assurance).filter(Boolean);
     const now=game.time?.worldTime??0,immunities=items.filter(i=>canonicalItemSource(sourceId(i))===TREAT_WOUNDS_IMMUNITY).map(i=>({id:i.uuid,expiresAt:immunityExpiry(i,now),originActorUUID:i.system?.context?.origin?.actor}));
     const pool=hpPools.discover(actor);const master=pool.poolUUID===uuid?actor:await fromUuid(pool.poolUUID);
-    return {actorUUID:uuid,name:actor.name,level:actor.level,isDead:!!actor.isDead,unconscious:!!actor.hasCondition?.('unconscious'),wounded:!!actor.hasCondition?.('wounded'),modeOfBeing:actor.modeOfBeing,...statistics,treatmentEstimate,healingExpectationReady:!actor.synthetics?.statisticsModifiers?.['healing-received']?.length&&!actor.synthetics?.damageDice?.['healing-received']?.length,slugs,assuranceSkills,items:items.map(i=>({uuid:i.uuid,sourceId:sourceId(i),slug:i.slug??i.system?.slug,type:i.type})),
+    return {actorUUID:uuid,name:actor.name,level:actor.level,isDead:!!actor.isDead,unconscious:!!actor.hasCondition?.('unconscious'),wounded:!!actor.hasCondition?.('wounded'),modeOfBeing:actor.modeOfBeing,...statistics,treatmentEstimate,healingExpectationReady:!actor.synthetics?.modifiers?.['healing-received']?.length&&!actor.synthetics?.statisticsModifiers?.['healing-received']?.length&&!actor.synthetics?.damageDice?.['healing-received']?.length,damageExpectationReady:simpleTreatmentDamageModel({actor,poolUUID:pool.poolUUID}),slugs,assuranceSkills,items:items.map(i=>({uuid:i.uuid,sourceId:sourceId(i),slug:i.slug??i.system?.slug,type:i.type})),
       wardCapacity:wardCapacity({wardMedic:slugs.includes('ward-medic'),medicineRank:statistics.medicine.rank}),
       continualRecovery:slugs.includes('continual-recovery'),riskySurgery:slugs.includes('risky-surgery'),threePecks:feats.some(i=>sourceId(i)==='Compendium.pf2e.feats-srd.Item.Qg5M34t95rtT0sOp'),
       vitalityHealingReady:canReceiveVitalityHealing(actor),hasActiveToken:typeof actor.getActiveTokens==='function'?actor.getActiveTokens(false,true).length>0:undefined,hp:{value:master?.system?.attributes?.hp?.value??0,max:master?.system?.attributes?.hp?.max??0,temp:master?.system?.attributes?.hp?.temp??0},focus:structuredClone(actor.system?.resources?.focus??{value:0,max:0}),pool,immunities,

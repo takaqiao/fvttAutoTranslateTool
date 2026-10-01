@@ -1,0 +1,304 @@
+{
+  "sourceSHA256": "0e4d28849d829f97a2877e6c52e6297c5757578bfe7e173e72c38a8768be8324",
+  "items": [
+    {
+      "sourceId": "Compendium.pf2e.feats-srd.Item.bkZgWFSFV4cAf5Ot",
+      "preparedRules": [
+        {
+          "domain": "medicine",
+          "key": "RollOption",
+          "option": "risky-surgery",
+          "toggleable": true,
+          "slug": null,
+          "priority": 50,
+          "ignored": false,
+          "predicate": [],
+          "requiresEquipped": null,
+          "requiresInvestment": null,
+          "phase": "applyAEs",
+          "suboptions": [],
+          "mergeable": false,
+          "value": false
+        },
+        {
+          "key": "FlatModifier",
+          "predicate": [
+            "action:treat-wounds",
+            "risky-surgery"
+          ],
+          "selector": [
+            "medicine"
+          ],
+          "type": "circumstance",
+          "value": 2,
+          "slug": null,
+          "priority": 100,
+          "ignored": false,
+          "requiresEquipped": null,
+          "requiresInvestment": null,
+          "force": false,
+          "hideIfDisabled": false,
+          "fromEquipment": true,
+          "critical": null,
+          "removeAfterRoll": false,
+          "battleForm": false
+        },
+        {
+          "key": "Note",
+          "predicate": [
+            "action:treat-wounds",
+            "risky-surgery"
+          ],
+          "selector": [
+            "medicine"
+          ],
+          "text": "PF2E.SpecificRule.Feat.RiskySurgery.Note",
+          "title": "{item|name}",
+          "slug": null,
+          "priority": 100,
+          "ignored": false,
+          "requiresEquipped": null,
+          "requiresInvestment": null,
+          "visibility": null,
+          "outcome": [],
+          "battleForm": false
+        },
+        {
+          "adjustment": {
+            "success": "one-degree-better"
+          },
+          "key": "AdjustDegreeOfSuccess",
+          "predicate": [
+            "risky-surgery",
+            "action:treat-wounds"
+          ],
+          "selector": "medicine",
+          "slug": null,
+          "priority": 100,
+          "ignored": false,
+          "requiresEquipped": null,
+          "requiresInvestment": null
+        }
+      ],
+      "rawRules": [
+        {
+          "domain": "medicine",
+          "key": "RollOption",
+          "option": "risky-surgery",
+          "toggleable": true
+        },
+        {
+          "key": "FlatModifier",
+          "predicate": [
+            "action:treat-wounds",
+            "risky-surgery"
+          ],
+          "selector": "medicine",
+          "type": "circumstance",
+          "value": 2
+        },
+        {
+          "key": "Note",
+          "predicate": [
+            "action:treat-wounds",
+            "risky-surgery"
+          ],
+          "selector": "medicine",
+          "text": "PF2E.SpecificRule.Feat.RiskySurgery.Note",
+          "title": "{item|name}"
+        },
+        {
+          "adjustment": {
+            "success": "one-degree-better"
+          },
+          "key": "AdjustDegreeOfSuccess",
+          "predicate": [
+            "risky-surgery",
+            "action:treat-wounds"
+          ],
+          "selector": "medicine"
+        }
+      ],
+      "preparedFlags": {
+        "pf2e": {
+          "rulesSelections": {},
+          "itemGrants": {}
+        }
+      },
+      "rules": [
+        {
+          "index": 0,
+          "key": "RollOption",
+          "sourceIndex": 0,
+          "ignored": false,
+          "label": "Risky Surgery",
+          "constructorName": "RollOptionRuleElement"
+        },
+        {
+          "index": 1,
+          "key": "FlatModifier",
+          "sourceIndex": 1,
+          "ignored": false,
+          "label": "Risky Surgery",
+          "constructorName": "FlatModifierRuleElement"
+        },
+        {
+          "index": 2,
+          "key": "Note",
+          "sourceIndex": 2,
+          "ignored": false,
+          "label": "Risky Surgery",
+          "constructorName": "RollNoteRuleElement"
+        },
+        {
+          "index": 3,
+          "key": "AdjustDegreeOfSuccess",
+          "sourceIndex": 3,
+          "ignored": false,
+          "label": "Risky Surgery",
+          "constructorName": "AdjustDegreeOfSuccessRuleElement"
+        }
+      ]
+    },
+    {
+      "sourceId": "Compendium.pf2e.feats-srd.Item.W6Gl9ePmItfDHji0",
+      "preparedRules": [
+        {
+          "choices": {
+            "config": "skills",
+            "predicate": [
+              {
+                "gte": [
+                  "skill:{choice|value}:rank",
+                  1
+                ]
+              }
+            ]
+          },
+          "flag": "assurance",
+          "key": "ChoiceSet",
+          "prompt": "PF2E.SpecificRule.Prompt.Skill",
+          "selection": "medicine",
+          "slug": null,
+          "priority": 100,
+          "ignored": false,
+          "predicate": [],
+          "requiresEquipped": null,
+          "requiresInvestment": null,
+          "adjustName": true,
+          "actorFlag": false,
+          "rollOption": null
+        },
+        {
+          "key": "SubstituteRoll",
+          "label": "PF2E.SpecificRule.SubstituteRoll.Assurance",
+          "selector": "{item|flags.system.rulesSelections.assurance}",
+          "slug": "assurance",
+          "value": 10,
+          "priority": 100,
+          "ignored": false,
+          "predicate": [],
+          "requiresEquipped": null,
+          "requiresInvestment": null,
+          "required": false,
+          "effectType": "fortune",
+          "removeAfterRoll": false
+        },
+        {
+          "key": "AdjustModifier",
+          "predicate": [
+            "substitute:assurance",
+            {
+              "not": "bonus:type:proficiency"
+            }
+          ],
+          "selector": "{item|flags.system.rulesSelections.assurance}",
+          "suppress": true,
+          "mode": "override",
+          "slug": null,
+          "priority": 50,
+          "ignored": false,
+          "requiresEquipped": null,
+          "requiresInvestment": null,
+          "selectors": [],
+          "relabel": null,
+          "damageType": null,
+          "maxApplications": null,
+          "value": null
+        }
+      ],
+      "rawRules": [
+        {
+          "choices": {
+            "config": "skills",
+            "predicate": [
+              {
+                "gte": [
+                  "skill:{choice|value}:rank",
+                  1
+                ]
+              }
+            ]
+          },
+          "flag": "assurance",
+          "key": "ChoiceSet",
+          "prompt": "PF2E.SpecificRule.Prompt.Skill",
+          "selection": "medicine"
+        },
+        {
+          "key": "SubstituteRoll",
+          "label": "PF2E.SpecificRule.SubstituteRoll.Assurance",
+          "selector": "{item|flags.system.rulesSelections.assurance}",
+          "slug": "assurance",
+          "value": 10
+        },
+        {
+          "key": "AdjustModifier",
+          "predicate": [
+            "substitute:assurance",
+            {
+              "not": "bonus:type:proficiency"
+            }
+          ],
+          "selector": "{item|flags.system.rulesSelections.assurance}",
+          "suppress": true
+        }
+      ],
+      "preparedFlags": {
+        "pf2e": {
+          "rulesSelections": {
+            "assurance": "medicine"
+          },
+          "itemGrants": {}
+        }
+      },
+      "rules": [
+        {
+          "index": 0,
+          "key": "ChoiceSet",
+          "sourceIndex": 0,
+          "ignored": false,
+          "label": "Assurance (Medicine)",
+          "constructorName": "ChoiceSetRuleElement"
+        },
+        {
+          "index": 1,
+          "key": "SubstituteRoll",
+          "sourceIndex": 1,
+          "ignored": false,
+          "label": "Assurance",
+          "constructorName": "SubstituteRollRuleElement"
+        },
+        {
+          "index": 2,
+          "key": "AdjustModifier",
+          "sourceIndex": 2,
+          "ignored": false,
+          "label": "Assurance (Medicine)",
+          "constructorName": "AdjustModifierRuleElement"
+        }
+      ]
+    }
+  ],
+  "systemVersion": "8.5.1"
+}
