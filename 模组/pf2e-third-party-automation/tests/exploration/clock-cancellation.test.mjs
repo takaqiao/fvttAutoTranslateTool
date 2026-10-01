@@ -38,6 +38,14 @@ test('clock cancellation while persistent claim is pending does not issue advanc
   assert.notEqual(result.status,'confirmed');assert.equal((await f.ledger.getClockCommit('C')).nativeIssued,false);
 });
 
+for(const scope of [undefined,{sessionId:'S',leaseNonce:'lease'}])test(`clock ${scope?'targeted':'global'} cancellation covers the initial asynchronous lookup`,async()=>{
+  const f=fixture(),entered=deferred(),release=deferred(),original=f.ledger.getClockCommit;let pending=true;
+  f.ledger.getClockCommit=async id=>{if(pending){pending=false;entered.resolve();await release.promise}return original(id)};
+  const clock=createClock(f),running=clock.advanceTo(commit,{leaseNonce:'lease'});await entered.promise;
+  clock.stop('lookup-stopped',scope);release.resolve();const result=await running;
+  assert.equal(result.reason,'lookup-stopped');assert.equal(f.calls(),0);assert.equal(await original('C'),null);
+});
+
 test('a paused persistent session cannot start a new clock attempt',async()=>{
   const f=fixture();await f.ledger.updateSession('S',{status:'paused'});
   const result=await createClock(f).advanceTo(commit);

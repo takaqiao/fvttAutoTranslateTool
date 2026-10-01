@@ -37,7 +37,14 @@ export function createRefocusAdapter({game,canvas=globalThis.canvas,fromUuid,own
     if(scopes.has(actor.uuid))throw Error('refocus-already-running');
     let resolve,reject,timer;const signal=new Promise((r,j)=>{resolve=r;reject=j});signal.catch(()=>{});
     const scope={activity,ctx,actor,resolve,reject};scopes.set(actor.uuid,scope);
-    try{timer=setTimeout(()=>reject(Error('refocus-evidence-uncertain-no-retry')),timeoutMs);await game.PF2eWorkbench.refocus([actor]);const receipt=await signal;ctx.validate?.();return receipt}
+    try{
+      timer=setTimeout(()=>reject(Error('refocus-evidence-uncertain-no-retry')),timeoutMs);await game.PF2eWorkbench.refocus([actor]);ctx.validate?.();
+      // The GM subscriber does not run on a remote owner tab. The Workbench
+      // wrapper persists this exact intent in the same native focus update.
+      const proof=actor.flags?.[MODULE_ID]?.avRefocusIntent;
+      if(!scope.receipt&&proof?.nonce===activity.id&&proof.actorUuid===actor.uuid&&proof.userId===game.user.id&&proof.startedAt===activity.startedAt&&proof.after===actor.system.resources.focus.value)capture({actor,proof});
+      const receipt=await signal;ctx.validate?.();return receipt;
+    }
     finally{clearTimeout(timer);scopes.delete(actor.uuid);restore?.()}
   }
   return {complete,getCurrent,capture,commitValue:(activity,actor,requested)=>{
@@ -63,7 +70,7 @@ export function createRefocusProvider({game,ledger,capabilities,refocusEvents,sa
     if(!ownerOperations.isActivityContext(ctx,activity.id))throw Error('private-refocus-context-required');
     if(completed.has(activity.id))return completed.get(activity.id);if(running.has(activity.id))return running.get(activity.id);
     const task=(async()=>{
-      const stored=await ledger.getActivity(activity.id);if(!['started','completing'].includes(stored?.state))return {status:'uncertain',reason:'refocus-activity-in-flight'};
+      if(!ownerOperations.isExecutionContext?.(ctx,activity.id)){const stored=await ledger.getActivity(activity.id);if(!['started','completing'].includes(stored?.state))return {status:'uncertain',reason:'refocus-activity-in-flight'}}
       const receipt=await refocusEvents.complete(activity,ctx);ctx.validate?.();
       const healing=activity.options.threePecks?await salubriousKiss.completeActivity(activity,ctx):null;
       const result={status:healing?.status??'confirmed',proof:{useId:activity.id,checkIds:healing?.proof?.checkIds??[],resultIds:healing?.proof?.resultIds??[],receiptIds:[receipt.id,...healing?.proof?.receiptIds??[]],immunityIds:healing?.proof?.immunityIds??[],poolReceipts:healing?.proof?.poolReceipts??[]},focusBefore:receipt.focusBefore,focusAfter:receipt.focusAfter,...healing?{treatment:healing}:{}};

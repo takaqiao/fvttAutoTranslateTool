@@ -130,7 +130,8 @@ export function createSalubriousDamageGuard({game,messagePrivacy,getRollContext=
   const actualActor=request.recipient??patient;
   const expected=params.damage,baseline=strings(params.rollOptions);
   function validate(actor,current){
-   gm();if(!isExplorationContext(ctx,activity.id))fail('没有私有探索完成上下文');ctx.validate();
+   if(!isExplorationContext(ctx,activity.id))fail('没有私有探索完成上下文');ctx.validate();
+   const user=game.user;if(!user?.active||game.users.get(user.id)!==user||!patient.testUserPermission(user,'OWNER'))fail('当前客户端没有患者拥有者权限');
    if(actor!==actualActor||game.time.worldTime<activity.endsAt||game.messages.get(message.id)!==message||message.rolls[0]!==savedRoll||JSON.stringify(savedRoll.toJSON())!==before||current.damage!==expected||current.token!==params.token||current.skipIWR!==(stage==='healing')||current.final!==false||current.outcome!==params.outcome||!strings(current.rollOptions).includes(source)||!strings(current.rollOptions).includes(application)||baseline.some(o=>!strings(current.rollOptions).includes(o)))fail('探索治疗实际原生来源已改变');
   }
   validate(actualActor,params);if(issued.has(application))fail('探索治疗应用已签发');issued.add(application);protectedIds.add(message.id);

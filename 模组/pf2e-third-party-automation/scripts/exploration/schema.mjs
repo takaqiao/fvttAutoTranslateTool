@@ -3,6 +3,18 @@ export const emptyLedger=()=>({sessions:{},activities:{},clocks:{}});
 export const clone=value=>structuredClone(value);
 export function finite(value,label) {if(!Number.isFinite(value))throw Error(`invalid-${label}`);return value}
 export function id(value,label='id') {if(typeof value!=='string'||!value.trim()||['__proto__','constructor','prototype'].includes(value))throw Error(`invalid-${label}`);return value}
+export function normalizeNativeOwnerMap(value,actorUUIDs,{manual=false}={}) {
+  if(value===undefined)return {};
+  if(value===null||typeof value!=='object'||![Object.prototype,null].includes(Object.getPrototypeOf(value)))throw Error('invalid-native-owner-map');
+  const selected=new Set(actorUUIDs??[]),result={};
+  for(const key of Reflect.ownKeys(value)){
+    id(key,'native-owner-actor');const descriptor=Object.getOwnPropertyDescriptor(value,key);
+    if(!descriptor.enumerable||!Object.hasOwn(descriptor,'value')||!selected.has(key))throw Error('invalid-native-owner-map');
+    result[key]=id(descriptor.value,'native-owner-user');
+  }
+  if(manual&&Object.keys(result).length)throw Error('manual-native-owner-map');
+  return result;
+}
 export const activityStates=['planned','started','completing','awaiting-evidence','confirmed','blocked','uncertain','cancelled'];
 export function createActivity(input) {
   const a=clone(input);
@@ -16,7 +28,8 @@ export function createActivity(input) {
   return a;
 }
 export function validateSession(input) {
-  const s=clone(input);id(s.id);finite(s.startedAt,'start');finite(s.budgetEndsAt,'budget');
+  const nativeOwnerByActor=normalizeNativeOwnerMap(input.nativeOwnerByActor,input.actorUUIDs,{manual:input.manual===true});
+  const s={...clone(input),nativeOwnerByActor};id(s.id);finite(s.startedAt,'start');finite(s.budgetEndsAt,'budget');
   if(s.budgetEndsAt<s.startedAt)throw Error('negative-duration');
   s.activityIds??=[];s.goalsByPool??=[];s.assumptions??=[];s.status??='running';s.stopReason??=null;
   return s;

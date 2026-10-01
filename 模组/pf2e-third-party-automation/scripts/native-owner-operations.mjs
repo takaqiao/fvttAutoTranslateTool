@@ -12,26 +12,39 @@ const sessions=new WeakMap();
 
 /** Check.roll awaits this resolver. Payment follows the user's final native
  * acceptance, and a closed dialog leaves resources intact. */
-export async function beforeNativeRoll({Hooks,marker,showDialog,commit,native,assertLive,dialogKind='check'}){
- let committed=false,error;const wrapped=new WeakSet(),dialogs=new Set(),listeners=[];
- const once=async()=>{assertLive?.();if(!committed){await commit();committed=true;}assertLive?.();};
- if(!showDialog){await once();return native(once);}
+export async function beforeNativeRoll({Hooks,marker,showDialog,commit,native,assertLive,dialogKind='check',signal}){
+ let commitTask,error;const wrapped=new WeakSet(),dialogs=new Set(),listeners=[];
+ const validate=()=>{
+  if(error)throw error;
+  if(signal?.aborted)throw signal.reason instanceof Error?signal.reason:Error('Native execution aborted');
+  assertLive?.();
+ };
+ const once=async()=>{validate();await (commitTask??=Promise.resolve().then(()=>{validate();return commit()}));validate();};
+ if(!showDialog){await once();validate();return native(once);}
  if(!Hooks?.on)throw Error('缺少原生检定窗口接口，尚未支付。');
  let abort;const aborted=new Promise((_resolve,reject)=>{abort=reject;});
- const checkLive=()=>{try{if(error)throw error;assertLive?.();}catch(caught){error=caught;for(const dialog of dialogs){dialog.resolve(false);void Promise.resolve(dialog.close?.()).catch(()=>{});}abort(caught);}};
+ const fail=caught=>{error??=caught;for(const dialog of dialogs)dialog.cancel();abort(error);};
+ const checkLive=()=>{try{validate()}catch(caught){fail(caught)}};
+ signal?.addEventListener('abort',checkLive,{once:true});
  if(assertLive)for(const event of ['updateUser','userConnected','updateChatMessage','deleteChatMessage','updateActor','deleteActor'])listeners.push([event,Hooks.on(event,checkLive)]);
  const dialogHook=dialogKind==='damage'?'renderDamageModifierDialog':'renderCheckModifiersDialog';
  const id=Hooks.on(dialogHook,app=>{
   if(!values(app.context?.options).includes(marker)||wrapped.has(app)||typeof app.resolve!=='function')return;
-  wrapped.add(app);dialogs.add(app);const resolve=app.resolve.bind(app);let submitted=false;
-  app.resolve=accepted=>{if(submitted)return;submitted=true;if(!accepted)return resolve(false);return once().then(()=>resolve(true),caught=>{error=caught;return resolve(false);});};
+  wrapped.add(app);const resolve=app.resolve.bind(app);let submitted=false,settled=false,closed=false;
+  const settle=value=>{
+   if(settled)return;
+   if(value)try{validate()}catch(caught){fail(caught);return;}
+   settled=true;return resolve(value);
+  };
+  const dialog={cancel:()=>{settle(false);if(!closed){closed=true;void Promise.resolve(app.close?.()).catch(()=>{})}}};dialogs.add(dialog);
+  app.resolve=accepted=>{if(submitted||settled)return;submitted=true;if(!accepted)return settle(false);return once().then(()=>settle(true),caught=>{fail(caught);return settle(false)});};
   checkLive();
  });
- checkLive();const nativeTask=Promise.resolve().then(()=>{if(error)throw error;return native(once);});
+ checkLive();const nativeTask=Promise.resolve().then(()=>{validate();return native(once);});
  // Preparation can finish after the caller aborts. Keep only this exact-marker
  // render guard until the native promise settles, so a late window also closes.
  nativeTask.then(()=>Hooks.off(dialogHook,id),()=>Hooks.off(dialogHook,id));
- try{const result=await Promise.race([nativeTask,aborted]);if(error)throw error;return result;}finally{for(const[event,id]of listeners)Hooks.off(event,id);}
+ try{const result=await Promise.race([nativeTask,aborted]);if(error)throw error;return result;}finally{signal?.removeEventListener('abort',checkLive);for(const[event,id]of listeners)Hooks.off(event,id);}
 }
 
 /** Native UI belongs to the original owner. Only IDs and evaluated native data

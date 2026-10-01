@@ -16,7 +16,24 @@
 
 0.9.23 的 [完整源码测试](C:/Users/Taka/Desktop/fvtt/output/exploration-recovery-20260930/verification/release-history-full-suite.log) 为2294 tests／2294 pass／0 fail／0 skipped；[最终发行验证](C:/Users/Taka/Desktop/fvtt/output/exploration-recovery-20260930/release-tools-0923/release/evidence-verification.json) 绑定固定源码、实际客户端报告与文件表，并保留 `completeTwelveScenarioMatrixPassed:false`。早期 [pre-review-full-suite.log](C:/Users/Taka/Desktop/fvtt/output/exploration-recovery-20260930/verification/pre-review-full-suite.log) 的2008项属于修复前候选；不能作为当前计数。源码测试不代表十二项真实世界验收通过；后续产品修改需重新验证相应源码。
 
-质量 goal 的第一批未发版修复另有 [新鲜集成测试](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/integrated-full-suite-20260930T161050829Z.log)：2338 tests／2338 pass／0 fail／0 skipped。覆盖异步时间取消、命能资格、患者接收上下文、再聚能资格、手动回执授权和免疫恢复时重验 HP 证据；这份候选结果不能回写为已发布 .23 的验收。跨客户端唯一执行权仍未修复，完整 goal 与十二场景仍未完成；进展及新增证据保存在 `output/exploration-quality-goal-20260930/`。
+质量 goal 的第一批未发版修复另有 [新鲜集成测试](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/integrated-full-suite-20260930T161050829Z.log)：2338 tests／2338 pass／0 fail／0 skipped。覆盖异步时间取消、命能资格、患者接收上下文、再聚能资格、手动回执授权和免疫恢复时重验 HP 证据。后续候选已补原子账本、私有 driver／OWNER 执行权和原生窗口取消；[最终冻结源码验证](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/owner-candidate-source-verification-20261001T011021862Z.json) 为2767／2767、331个语法检查与diff检查通过。这些结果属于未发版候选，不能回写为已发布 .23 的验收；完整 goal 与十二场景仍未完成。
+
+## 质量 goal 阶段一的实际原生证据
+
+2026-10-01 的冻结候选为179个运行文件，来源清单 [source-wire-candidate-1790817157404-35b2f732.json](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/qa/source-wire-candidate-1790817157404-35b2f732.json)。版本字符串仍为0.9.23，未提交、发布或部署。Foundry14.368／PF2e8.5.1使用真实原生骰子；同一GM用户和同一OWNER用户各有两个独立标签页。它证明这些客户端间的唯一执行，不能替代不同GM用户交接、掉线、遭遇和外部时间的完整矩阵。
+
+| 子项 | 已保存的实际证据 |
+| --- | --- |
+| 本地原生治疗、传奇治疗与普通再聚能 | [独立实际审查](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/installed-native-settled-run-independent-review.md)：三个已结算会话，唯一原生结果、应用和各次600秒时钟；首次治疗的旧失败报告保留，只读复验后才执行新的活动 |
+| 玩家OWNER原生治疗、普通再聚能及GM治疗 | [权限完成报告](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/qa/installed-native-wire-permission-completion-2026-10-01T03-33-49-540Z-4ecb4adb.json)：四个已结算活动、四次时间提交累计2400秒，来源绑定的回执与实际刷新复验；OWNER偏好恢复到最初raw flags。旧报告的错误断言仍保留，不重投旧治疗 |
+| OWNER／患者失权及离线拒绝边界 | 同一权限完成报告：施治者失权拒绝，患者失权会话暂停且没有活动／时钟／授权／原生效果，离线OWNER拒绝；[独立审查](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/wire-permission-actual-review.md)。患者暂停不被改称已完成治疗 |
+| 非driver GM中止玩家窗口 | [S1独立实际审查](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/wire-fresh-s1-actual-review.md)：一个OWNER Check窗口、两个认证的私有retired ACK、窗口关闭；没有投骰或HP／资源结果，时间仅提交600秒，未完成执行域保留 |
+| 实际生产超时 | [S2独立实际审查](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/wire-fresh-s2-actual-review.md)：实际到期60005毫秒、driver本地60129毫秒；一个窗口关闭，未触发Stop或投骰。活动与Actor执行保持uncertain／granted，无结果，600秒只计一次 |
+| 远端仙露拒绝边界 | [R6独立实际审查](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/wire-r6-actual-review.md)：真实神秘技能仙露提案在remote-three-pecks-unsupported处暂停；没有执行或时间域。这证明安全拒绝，远端仙露适配仍待收尾 |
+
+原生ObjectField会展开UUID键，候选将physical explorationRevision保存为严格canonical JSON字符串；实际账本合法链、完整文档源与回执已复核。[独立codec审查](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/revision-wire-independent-review.md) 保留合法legacy与非法输入测试。三个历史世界和S1世界已按原生shutdown、锁释放及完整停止库存保全；S2仍保存未知执行域。旧failed报告、claim和未知结果不被清除，以上各次新报告不授权重放旧活动。
+
+阶段一的定向修复与这些实际子项已闭合。后续功能适配、完整十二场景以及全模组审计／实测性能仍须分别完成；本表不把这些待办列为通过。
 
 本次 ownQA 使用 Foundry 14.368、PF2e 8.5.1、Workbench 7.7.5、Toolbelt 3.56.5、Patreon 3.2.29，GM 和普通玩家为不同客户端。证据位于主工作区 `output/exploration-recovery-20260930/`：
 

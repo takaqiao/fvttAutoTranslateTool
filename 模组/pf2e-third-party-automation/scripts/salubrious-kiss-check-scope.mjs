@@ -1,6 +1,7 @@
 import {validateSalubriousPrivacy} from './salubrious-privacy.mjs';
 import {MODULE_ID} from './rules.mjs';
 import {assertSource} from './salubrious-kiss-context.mjs';
+import {beforeNativeRoll} from './native-owner-operations.mjs';
 const marker=nonce=>`${MODULE_ID}:salubrious-check:${nonce}`;
 const options=c=>new Set(c.options??[]);
 
@@ -8,7 +9,7 @@ const options=c=>new Set(c.options??[]);
  * The verified Patreon callback may temporarily force gm/blind. Restore only
  * this source's captured native mode, after rechecking hidden/secret floors.
  * The legacy public-named methods remain aliases for old integration callers. */
-export function createSalubriousCheckScope({game,isExplorationContext=()=>false}){
+export function createSalubriousCheckScope({game,Hooks=globalThis.Hooks,isExplorationContext=()=>false}){
  const scopes=new Map(),contexts=new WeakMap(),exploration=new Map();
  async function runExploration(input,operation){
   if(!isExplorationContext(input.ctx,input.activity.id)||exploration.has(input.activity.id))throw Error('Invalid exploration check context');
@@ -59,10 +60,16 @@ export function createSalubriousCheckScope({game,isExplorationContext=()=>false}
    if(scope){
     const expectedDC={trained:15,expert:20,master:30,legendary:40}[scope.activity.options.rank??'trained'];
     if(explorationMarkers.length!==1||scope.entered||context.actor!==scope.healer||context.type!=='skill-check'||context.dc?.value!==expectedDC||!options(context).has('action:treat-wounds')||!context.domains?.includes(scope.activity.options.skill??'medicine')||!isExplorationContext(scope.ctx,scope.activity.id))throw Error('Exploration native context mismatch');
-    scope.ctx.validate();scope.entered=true;context.skipDialog=true;
+    scope.ctx.validate();scope.entered=true;
     // Assurance is a native substitution, never a roll option that claims a roll.
     if(scope.activity.options.assurance){const substitution=context.substitutions?.find(s=>s.slug==='assurance'&&!s.ignored);if(!substitution||context.substitutions.some(s=>s!==substitution&&s.required))throw Error('Native Assurance substitution unavailable');for(const sub of context.substitutions)sub.selected=sub===substitution;context.options.add('substitute:assurance');check.calculateTotal(context.options)}
-    return wrapped(check,context,event,callback);
+    if(scope.ctx.nativeDialogMode!=='owner-preference'){
+     context.skipDialog=true;
+     return wrapped(check,context,event,callback);
+    }
+    return beforeNativeRoll({Hooks,marker:'exploration-activity:'+scope.activity.id,
+     showDialog:true,signal:scope.ctx.executionSignal,commit:async()=>{},
+     assertLive:()=>scope.ctx.validate(),native:()=>wrapped(check,context,event,callback)});
    }
   }
   const scope=matching(context);if(!scope)return wrapped(check,context,event,callback);

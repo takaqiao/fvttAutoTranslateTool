@@ -44,12 +44,12 @@ test('clock commits cannot retry uncertain or rewrite provenance',async()=>{
   await assert.rejects(ledger.transitionClockCommit('C1',{expected:['uncertain'],patch:{state:'started'}}),/transition/);
   await assert.rejects(ledger.transitionActivity('missing',{expected:['planned'],patch:{state:'started'}}),/conflict/);
 });
-test('readonly store creates nothing; first write creates a private journal',async()=>{
-  let uuid='',created=0,flags;
-  const journal={uuid:'JournalEntry.J1',getFlag:()=>flags,setFlag:async(m,k,s)=>{flags=s}};
-  const game={user:{id:'GM',isGM:true},users:{activeGM:{id:'GM'}},settings:{get:()=>uuid,set:async(m,k,v)=>{uuid=v}}};
-  const store=createDocumentStore({game,fromUuid:async()=>journal,JournalEntry:{create:async data=>{created++;assert.equal(data.ownership.default,0);flags=data.flags['pf2e-third-party-automation'].explorationLedger;return journal}}});
-  assert.deepEqual(await store.read(),{sessions:{},activities:{},clocks:{}});assert.equal(created,0);
-  await store.write({sessions:{S1:session},activities:{},clocks:{}});assert.equal(created,1);
-  await store.write({sessions:{},activities:{},clocks:{}});assert.equal(created,1);
+test('document storage stays readonly until a root is explicitly configured',async()=>{
+  let created=0;
+  const game={user:{id:'GM',isGM:true},users:{activeGM:{id:'GM'}},settings:{get:()=>''}};
+  const store=createDocumentStore({game,JournalEntry:{create:async()=>{created++}}});
+  assert.deepEqual(await store.read(),{sessions:{},activities:{},clocks:{}});
+  assert.equal(store.write,undefined);
+  await assert.rejects(store.transact(state=>{state.sessions.S1=session}),/root-not-configured/);
+  assert.equal(created,0);
 });
