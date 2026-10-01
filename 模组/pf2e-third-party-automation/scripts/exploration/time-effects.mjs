@@ -5,7 +5,8 @@ export function createTimeEffects({capabilities,completionAdapters=[]}) {
   for(const rule of rules){let adapter;for(const a of completionAdapters)if(await a.matches(rule,checkpoint)){adapter=a;break}
    if(!adapter)return last={status:'blocked',reason:'passive-completion-unavailable',rule};selected.add(adapter);
   }
-  for(const a of selected){const result=await a.beforeAdvance(checkpoint);if(result.status!=='ready')return last=result}
+  for(const adapter of completionAdapters)if(await adapter.ownershipAvailable?.(checkpoint))selected.add(adapter);
+  const prepared=[];for(const a of selected){const result=await a.beforeAdvance(checkpoint);if(result.status!=='ready'){for(const ready of prepared)ready.cancel?.(checkpoint,result.reason);return last=result}prepared.push(a)}
   checkpoints.set(checkpoint.id,{selected,rules});return last={status:'ready'};
  }
  async function settle(checkpoint){
@@ -15,5 +16,5 @@ export function createTimeEffects({capabilities,completionAdapters=[]}) {
   const proof=[];for(const a of pending.selected){const result=await a.settle(checkpoint);if(result.status!=='ready'||!result.proof?.length)return last={status:'uncertain',reason:result.reason??'passive-completion-unproven'};proof.push(...result.proof)}
   checkpoints.delete(checkpoint.id);return last={status:'ready',proof};
  }
- return {beforeAdvance,settle,observeRest(event){const result={status:event.invocationId&&event.timeReceipt?.invocationId===event.invocationId?'observed':'uncertain',reason:'external-rest-time-authority',event};rests.push(result);return result},diagnostic:()=>({last,rests:[...rests]})};
+ return {beforeAdvance,settle,invalidate(reason){for(const adapter of completionAdapters)adapter.invalidate?.(reason);checkpoints.clear()},observeRest(event){const result={status:event.invocationId&&event.timeReceipt?.invocationId===event.invocationId?'observed':'uncertain',reason:'external-rest-time-authority',event};rests.push(result);return result},diagnostic:()=>({last,rests:[...rests]})};
 }

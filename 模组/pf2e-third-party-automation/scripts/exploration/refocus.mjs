@@ -47,7 +47,7 @@ export function createRefocusAdapter({game,canvas=globalThis.canvas,fromUuid,own
     }
     finally{clearTimeout(timer);scopes.delete(actor.uuid);restore?.()}
   }
-  return {complete,getCurrent,capture,commitValue:(activity,actor,requested)=>{
+  return {complete,getCurrent,capture,available:()=>typeof game.PF2eWorkbench?.refocus==='function',commitValue:(activity,actor,requested)=>{
     const scope=scopes.get(actor.uuid);if(scope?.activity.id!==activity.id||scope.actor!==actor||!ownerOperations.isActivityContext(scope.ctx,activity.id))throw Error('private-refocus-scope-required');
     scope.ctx.validate?.();assertRefocusEligible(activity,actor);
     // Workbench selects controlled[0]; recheck at the existing synchronous
@@ -62,6 +62,7 @@ export function createRefocusProvider({game,ledger,capabilities,refocusEvents,sa
     const actor=await capabilities.discover(activity.actorUUID);
     if(actor.refocusUnsupported?.length)return {status:'blocked',reason:'refocus-recovery-unadapted'};
     if(actor.isDead||actor.unconscious)return {status:'blocked',reason:'actor-cannot-refocus'};
+    if(refocusEvents?.available?.()===false)return {status:'blocked',reason:'native-refocus-unavailable'};
     if(activity.options.threePecks){if(!actor.threePecks)return {status:'blocked',reason:'three-pecks-unavailable'};return salubriousKiss.claimActivity(activity,ctx)}
     if(actor.focus.value>=actor.focus.max)return {status:'blocked',reason:'focus-already-full'};
     return {status:'started'};
