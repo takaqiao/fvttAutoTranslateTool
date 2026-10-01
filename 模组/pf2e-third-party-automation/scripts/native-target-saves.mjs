@@ -25,7 +25,7 @@ export async function selectNativeTargetSaveOwner({game,actor,casterUser,choose}
  * caster item stay intact while the target's player operates the native save. */
 export function createNativeTargetSaves({game,fromUuid=globalThis.fromUuid,choose,scope,syncTimeoutMs=15000}={}){
  if(!['spell-combination','spiritual-scar'].includes(scope))throw Error('未知的目标豁免来源。');
- const requests=new Map(),ownerPending=new Map();let Hooks,socket;
+ const requests=new Map(),ownerPending=new Map(),completed=new WeakMap();let Hooks,socket;
  const gm=()=>{if(!isActiveGM(game)||!game.user.isGM||game.user.active===false)throw failure();};
  const leader=user=>{if(!user?.isGM||user.active===false||game.users.get(user.id)!==user||game.users.activeGM?.id!==user.id)throw failure();};
  const save=(message,nonce,state)=>message.update({[`flags.${ID}.nativeTargetSaves.${nonce}`]:state});
@@ -69,19 +69,48 @@ export function createNativeTargetSaves({game,fromUuid=globalThis.fromUuid,choos
    timer=setTimeout(()=>finish(Error('目标豁免凭据尚未同步，不能重掷。')),syncTimeoutMs);inspect();
   });
  }
+ const terminalMatches=(operation,terminal)=>operation?.status===terminal?.status&&operation.messageId===terminal.messageId&&(operation.cancelled===true)===(terminal.cancelled===true);
+ function rememberTerminal(source,nonce,entry){
+  const operation=states(source)[nonce];
+  if(source!==entry.docs.source||game.messages.get(source.id)!==source||!entry.terminal||!terminalMatches(operation,entry.terminal)||!sameBinding(operation.binding,entry.binding))return;
+  let entries=completed.get(source);if(!entries)completed.set(source,entries=new Map());
+  entries.set(nonce,{binding:copy(entry.binding),request:copy(entry.request),terminal:copy(entry.terminal)});
+ }
+ function acknowledgeTerminal(source,operation,cached,{messageId,nonce,status,messageIdResult},user){
+  const binding=cached.binding,terminal=cached.terminal;
+  if(game.messages.get(messageId)!==source||binding.sourceMessageId!==messageId||binding.nonce!==nonce||binding.scope!==scope||operation?.scope!==scope||!sameBinding(operation.binding,binding)||!terminalMatches(operation,terminal)||author(source)!==binding.sourceAuthorId||binding.saveUserId!==user?.id||game.users.get(user.id)!==user||binding.requesterId!==game.user.id)throw failure();
+  if(terminal.status==='uncertain'){
+   if(!['uncertain','cancelled'].includes(status)||messageIdResult!==undefined)throw failure();
+   return {status:'uncertain'};
+  }
+  if(terminal.status!=='done')throw failure();
+  if(terminal.cancelled){
+   if(!['cancelled','uncertain'].includes(status)||messageIdResult!==undefined)throw failure();
+   return {status:'cancelled'};
+  }
+  if(status==='done'?messageIdResult!==terminal.messageId:status!=='uncertain'||messageIdResult!==undefined)throw failure();
+  const card=checkProof(binding,cached.request,game.messages.get(terminal.messageId));
+  return {status:'rolled',messageId:card.id};
+ }
  async function stage({messageId,nonce,status,messageIdResult},user){
-  gm();const entry=requests.get(nonce),operation=states(game.messages.get(messageId))[nonce];
+  gm();const source=game.messages.get(messageId),entry=requests.get(nonce),operation=states(source)[nonce];
+  // The GM's card observer can finish before the owner's done RPC arrives.
+  // Retain only privately authenticated terminal requests under the live source
+  // document. Public flags cannot reconstruct this cache or authorize a nonce.
+  if(entry?.terminal&&terminalMatches(operation,entry.terminal))rememberTerminal(source,nonce,entry);
+  const cached=source&&completed.get(source)?.get(nonce);
+  if(cached)return acknowledgeTerminal(source,operation,cached,{messageId,nonce,status,messageIdResult},user);
   if(!entry||entry.docs.source.id!==messageId||!sameBinding(operation?.binding,entry.binding)||operation.binding.saveUserId!==user?.id||operation.binding.requesterId!==game.user.id||operation.scope!==scope)throw failure();
   live(entry.binding,entry.docs,{completed:status==='done'});
   if(status==='done'){
    const card=checkProof(entry.binding,entry.request,game.messages.get(messageIdResult));
    if(operation.status==='done'){if(operation.messageId!==card.id)throw failure();return {status:'rolled',messageId:card.id};}
    if(operation.status!=='started')throw failure();
-   await save(entry.docs.source,nonce,{...operation,status:'done',messageId:card.id});return {status:'rolled',messageId:card.id};
+   entry.terminal={status:'done',messageId:card.id};await save(entry.docs.source,nonce,{...operation,...entry.terminal});return {status:'rolled',messageId:card.id};
   }
   if(status==='started'&&operation.status==='requested'){await save(entry.docs.source,nonce,{...operation,status:'started'});return {status:'started'};}
-  if(status==='cancelled'&&operation.status==='started'){await save(entry.docs.source,nonce,{...operation,status:'done',cancelled:true});return {status:'cancelled'};}
-  if(status==='uncertain'&&operation.status!=='done'){await save(entry.docs.source,nonce,{...operation,status:'uncertain'});return {status:'uncertain'};}
+  if(status==='cancelled'&&operation.status==='started'){entry.terminal={status:'done',cancelled:true};await save(entry.docs.source,nonce,{...operation,...entry.terminal});return {status:'cancelled'};}
+  if(status==='uncertain'&&operation.status!=='done'){entry.terminal={status:'uncertain'};await save(entry.docs.source,nonce,{...operation,...entry.terminal});return {status:'uncertain'};}
   if(status==='started'&&operation.status==='started')return {status:'started'};
   throw failure();
  }
@@ -156,8 +185,8 @@ export function createNativeTargetSaves({game,fromUuid=globalThis.fromUuid,choos
    const state=states(sourceMessage)[nonce];if(state?.status!=='done')throw failure();live(binding,docs,{completed:true});
    if(state.cancelled)return {status:'cancelled'};
    const card=await waitFor(()=>game.messages.get(state.messageId));return {status:'rolled',messageId:card.id,check:checkProof(binding,privateRequest,card)};
-  }catch(error){if(isActiveGM(game)&&states(sourceMessage)[nonce]?.status!=='done')await save(sourceMessage,nonce,{...states(sourceMessage)[nonce],status:'uncertain'}).catch(()=>{});throw error;}
-  finally{Hooks.off('createChatMessage',observer);requests.delete(nonce);}
+  }catch(error){if(isActiveGM(game)&&states(sourceMessage)[nonce]?.status!=='done'){entry.terminal={status:'uncertain'};await save(sourceMessage,nonce,{...states(sourceMessage)[nonce],...entry.terminal}).catch(()=>{});}throw error;}
+  finally{Hooks.off('createChatMessage',observer);rememberTerminal(sourceMessage,nonce,entry);requests.delete(nonce);}
  }
  function register({Hooks:hooks,socket:api}){
   Hooks=hooks;socket=api;
