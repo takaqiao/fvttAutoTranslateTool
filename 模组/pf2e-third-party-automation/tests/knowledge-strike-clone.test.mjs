@@ -3,6 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import path from 'node:path';
 import {createKnowledgeAutomation} from '../scripts/knowledge-automation.mjs';
+import {createWeaponSurgeAutomation} from '../scripts/weapon-surge.mjs';
+import {createCompanionAutomation} from '../scripts/companion-automation.mjs';
 import * as ownerApi from '../scripts/native-owner-operations.mjs';
 import {MODULE_ID as ID} from '../scripts/rules.mjs';
 
@@ -11,6 +13,8 @@ const nativeApp=process.env.FVTT_NATIVE_APP;
 const enabled=!!bundlePath&&fs.existsSync(bundlePath)&&!!nativeApp;
 const bundle=enabled?fs.readFileSync(bundlePath,'utf8'):'';
 const core=enabled?fs.readFileSync(path.join(nativeApp,'common/abstract/document.mjs'),'utf8'):'';
+const coreData=enabled?fs.readFileSync(path.join(nativeApp,'common/abstract/data.mjs'),'utf8'):'';
+const coreClient=enabled?fs.readFileSync(path.join(nativeApp,'client/documents/abstract/client-document.mjs'),'utf8'):'';
 // Reduced from the failed owner's offline snapshot: native unarmed/infusion,
 // the original Marshal states, and unrelated source items that must survive.
 const snapshot=JSON.parse(fs.readFileSync(new URL('./fixtures/knowledge-strike-clone.json',import.meta.url),'utf8').replace(/^\uFEFF/,''));
@@ -25,12 +29,12 @@ const patch=function(changes){for(const[key,value]of Object.entries(changes)){le
 const tick=()=>new Promise(resolve=>setImmediate(resolve));
 async function until(read){for(let n=0;n<50;n++){const value=read();if(value)return value;await tick();}throw Error('native boundary was not reached');}
 
-function fixture({delaySync=false,throwPreparing=false,dropPreparedRule=false,dropPreparedEphemeral=false}={}){
+function fixture({delaySync=false,throwPreparing=false,dropPreparedRule=false,dropPreparedEphemeral=false,nativeRebind=false,rebindDispatch=null}={}){
  const gm={id:'gm',isGM:true,active:true},player={id:'player',isGM:false,active:true,settings:{showCheckDialogs:false}},users=Object.assign(new Map([[gm.id,gm],[player.id,player]]),{activeGM:gm});
- const hooks=new Map(),gmHandlers=new Map(),ownerHandlers=new Map(),messages=new Map(),actors=new Map(),scenes=new Map(),docs=new Map(),windows=[],failures=[];let hookId=0,dice=0,cloneWrites=0,liveSourceWrites=0,pendingSync,showWindow;
+ const hooks=new Map(),gmHandlers=new Map(),ownerHandlers=new Map(),messages=new Map(),actors=new Map(),scenes=new Map(),docs=new Map(),windows=[],failures=[],claimRequests=[],completeRequests=[],rebindEntries=[];let hookId=0,dice=0,cloneWrites=0,liveSourceWrites=0,pendingSync,showWindow;
  const windowShown=new Promise(resolve=>{showWindow=resolve;});
- const Hooks={on(event,fn){const id=++hookId;hooks.set(id,{event,fn});return id;},off(_event,id){hooks.delete(id);},call(event,...args){for(const h of [...hooks.values()])if(h.event===event)h.fn(...args);}};
- const common={users,messages,actors,scenes,time:{worldTime:100},combat:{id:snapshot.combatId,started:true},modules:new Map(),settings:{get:()=> 'public'},pf2e:{settings:{tokens:{nameVisibility:true}},ConditionManager:{conditions:new Map()}}};
+ const Hooks={on(event,fn){const id=++hookId;hooks.set(id,{event,fn});return id;},off(_event,id){hooks.delete(id);},onError(_source,error){throw error;},call(event,...args){for(const h of [...hooks.values()])if(h.event===event)h.fn(...args);}};
+ const common={_documentsReady:true,users,messages,actors,scenes,time:{worldTime:100},combat:{id:snapshot.combatId,started:true},modules:new Map(),settings:{get:()=> 'public'},pf2e:{settings:{tokens:{nameVisibility:true}},ConditionManager:{conditions:new Map()}}};
  const gmGame={...common,user:gm},ownerGame={...common,user:player};
  class Item{
   constructor(data,actor){this._source=structuredClone(data);Object.assign(this,structuredClone(data));this.id=data._id;this.actor=actor;this.uuid=`${actor?.uuid??'Compendium.pf2e.conditionitems'}.Item.${this.id}`;this.flags??={};this.system??={};}
@@ -57,12 +61,17 @@ function fixture({delaySync=false,throwPreparing=false,dropPreparedRule=false,dr
  const Context=new Function('extractEphemeralEffects','StatisticModifier','PCAttackTraitHelpers','getPropertyRuneStrikeAdjustments','getRangeIncrement','M','me','o','g','game','getPropertyRuneDegreeAdjustments','isOffGuardFromFlanking','calculateRangePenalty','he',`${slice('var RollContext = class','}, Ki = class')} };return CheckContext;`)(
   new Function('game','g',`${slice('async function extractEphemeralEffects','function extractRollTwice')};return extractEphemeralEffects;`)(ownerGame,value=>!!value),StatisticModifier,{adjustWeapon(){}},()=>[],()=>null,array=>[...new Set(array)],value=>value!=null,value=>value!=null,value=>!!value,ownerGame,()=>[],()=>false,()=>null,()=>true);
  const rawDocumentClone=method(core,'clone(data={}, context={}) {');
- class Document{
-  constructor(data,context={}){this._source=structuredClone(data);this.parent=context.parent;this.pack=context.pack;this._dependentTokens=new Map();this.prepare();}
+ class Data{_initialize(){}}
+ class Document extends Data{
+  constructor(data,context={}){super();this._source=structuredClone(data);this.parent=context.parent;this.pack=context.pack;this._dependentTokens=new Map();this.schema={_updateCommit(model,_key,copy){model._source=copy;}};this._initialize();}
   toObject(){return structuredClone(this._source);}
+  prepareData(){this.prepare();}
  }
  Document.prototype.clone=new Function('mergeObject',`return class {${rawDocumentClone} #discardInvalidEmbedded(){throw Error('unexpected discard');}};`)(merge).prototype.clone;
- let knowledge;
+ Document.prototype._updateCommit=new Function(`return ({${method(coreData,'_updateCommit(copy, diff, options, _state) {')}})._updateCommit;`)();
+ Document.prototype._initialize=new Function('Parent','game',`return class extends Parent {${method(coreClient,'_initialize(options={}) {')}};`)(Data,ownerGame).prototype._initialize;
+ Document.prototype._safePrepareData=new Function('Hooks',`return ({${method(coreClient,'_safePrepareData() {')}})._safePrepareData;`)(Hooks);
+ let knowledge,prepareStrike;
  class Actor extends Document{
   prepare(){
    this.id=this._source._id;this.uuid=`Actor.${this.id}`;this.type=this._source.type;this.flags=structuredClone(this._source.flags??{});this.alliance=this._source.system?.details?.alliance??'party';this.items=new Map(this._source.items.map(data=>{const item=new Item(data,this);return [item.id,item];}));
@@ -74,11 +83,11 @@ function fixture({delaySync=false,throwPreparing=false,dropPreparedRule=false,dr
    const strike=Object.assign(new StatisticModifier(),{type:'strike',item:weapon,ready:true,altUsages:[],traits:[]});
    const rollStart=bundle.indexOf('roll: async (n = {}) => {',bundle.indexOf('prepareStrike(e, { handsReallyFree:'));
    const body=method(bundle,'roll: async (n = {}) => {',rollStart);
-   const native=new Function('e','O','f','d','x','CheckContext','calculateMAPs','createMAPenalty','k','o','extractNotes','extractRollTwice','extractRollSubstitutions','getPropertyRuneDegreeAdjustments','extractDegreeOfSuccessAdjustments','_loc','_','u','Sa','traitSlugToObject','CONFIG','game','ui','t',`return ({${body}}).roll;`).call(this,weapon,strike,strike.domains,['unarmed','melee'],[],Context,()=>({}),()=>null,[()=>({}),()=>({}),()=>({})],value=>value!=null,()=>[],()=>false,()=>[],()=>[],()=>[],value=>value,'basic-unarmed','melee',{roll:async(_check,context,event,callback)=>{
+   const makeVariant=map=>{const native=new Function('e','O','f','d','x','CheckContext','calculateMAPs','createMAPenalty','k','o','extractNotes','extractRollTwice','extractRollSubstitutions','getPropertyRuneDegreeAdjustments','extractDegreeOfSuccessAdjustments','_loc','_','u','Sa','traitSlugToObject','CONFIG','game','ui','t',`return ({${body}}).roll;`).call(this,weapon,strike,strike.domains,['unarmed','melee'],[],Context,()=>({}),()=>null,[()=>({}),()=>({}),()=>({})],value=>value!=null,()=>[],()=>false,()=>[],()=>[],()=>[],value=>value,'basic-unarmed','melee',{roll:async(_check,context,event,callback)=>{
     const app={context,event,resolve:undefined,close(){this.resolve(false);}};const accepted=new Promise(resolve=>{app.resolve=resolve;});windows.push(app);Hooks.call('renderCheckModifiersDialog',app);showWindow(app);if(!await accepted)return null;
     dice++;const roll={_evaluated:true,total:24,options:{degreeOfSuccess:2}};await callback?.(roll,'success',new Message({speaker:{actor:this.id,scene:context.origin.token.parent.id,token:context.origin.token.id},flags:{pf2e:{origin:{actor:this.uuid,uuid:weapon.uuid},context:{type:'attack-roll',outcome:'success',options:[...context.options],target:{actor:context.target.actor.uuid,token:context.target.token.uuid}}}},rolls:[roll]}));return roll;
-   }},value=>value,{PF2E:{actionTraits:{arcane:'Arcane'}}},ownerGame,{notifications:{warn(){return null;}}},0);
-   strike.variants=[{roll:native.bind(this)}];this.system={actions:[strike]};if(knowledge)knowledge.wrapStrike(strike,this);
+   }},value=>value,{PF2E:{actionTraits:{arcane:'Arcane'}}},ownerGame,{notifications:{warn(){return null;}}},map);return {roll:native.bind(this)};};
+   strike.variants=[0,1,2].map(makeVariant);this.system={actions:[strike]};if(prepareStrike)prepareStrike.call(this,()=>strike);else if(knowledge)knowledge.wrapStrike(strike,this);
   }
   getActiveTokens(){return [...this._dependentTokens.values()];}
   getRollOptions(){return Object.keys(this.flags.pf2e?.rollOptions?.all??{});}
@@ -89,7 +98,7 @@ function fixture({delaySync=false,throwPreparing=false,dropPreparedRule=false,dr
   getStatistic(){return {dc:{value:this.items.has(condition.id)?18:20}};}
   isAllyOf(actor){return this.alliance===actor.alliance;}
   async update(changes){patch.call(this,changes);patch.call(this._source,changes);return this;}
-  updateSource(changes){if(actors.get(this.id)===this)liveSourceWrites++;else cloneWrites++;if(throwPreparing&&changes.items.some(item=>item.flags?.[ID]?.knowledge?.kind==='strategist-claim'))throw Error('clone rule preparation failed');merge(this._source,changes);this.prepare();if(dropPreparedRule)this.synthetics.tokenMarks.clear();if(dropPreparedEphemeral)for(const entry of Object.values(this.synthetics.ephemeralEffects))entry.target.pop();}
+  updateSource(changes){if(actors.get(this.id)===this)liveSourceWrites++;else cloneWrites++;if(throwPreparing&&changes.items.some(item=>item.flags?.[ID]?.knowledge?.kind==='strategist-claim'))throw Error('clone rule preparation failed');this._updateCommit(merge(structuredClone(this._source),changes),changes,{},{});if(dropPreparedRule)this.synthetics.tokenMarks.clear();if(dropPreparedEphemeral)for(const entry of Object.values(this.synthetics.ephemeralEffects))entry.target.pop();}
   async createEmbeddedDocuments(_name,items){
    const data=items.map(item=>({...structuredClone(item),_id:'kCrXSWQeWbfl3QjR'}));const synchronize=()=>{this._source.items.push(...data);this.prepare();};
    if(delaySync){pendingSync=synchronize;return data.map(item=>new Item(item,this));}synchronize();return data.map(item=>this.items.get(item._id));
@@ -110,14 +119,22 @@ function fixture({delaySync=false,throwPreparing=false,dropPreparedRule=false,dr
  const activity=new Message({id:'4QbJ4ie1XYg7jw28',author:player,flags:{pf2e:{origin:{actor:actor.uuid}}}});messages.set(activity.id,activity);
  const fromUuid=async uuid=>docs.get(uuid);
  const gmKnowledge=createKnowledgeAutomation({game:gmGame,fromUuid});knowledge=createKnowledgeAutomation({game:ownerGame,fromUuid});
+ if(nativeRebind){
+  const surge=createWeaponSurgeAutomation({game:ownerGame}),companion=createCompanionAutomation({game:ownerGame,fromUuid,wrapStrike:(strike,actor)=>{
+   knowledge.wrapStrike(surge.wrapStrike(strike,actor),actor);
+   for(const[index,variant]of strike.variants.entries()){const native=variant.roll;variant.roll=params=>{if(!Object.getOwnPropertySymbols(params).some(key=>key.description==='knowledgeNativeAttack'))return native(params);const entry={actor,strike,index,params,native};rebindEntries.push(entry);return rebindDispatch?rebindDispatch(entry):native(params);};}
+   return strike;
+  }});
+  companion.register({Hooks,libWrapper:{register(_id,wrapperPath,handler){if(wrapperPath.endsWith('.prepareStrike'))prepareStrike=handler;},unregister(){}}});assert.equal(typeof prepareStrike,'function');
+ }
  const root=ownerApi.createNativeOwnerOperations({game:gmGame,fromUuid,scope:'clone-test'}),owner=ownerApi.createNativeOwnerOperations({game:ownerGame,fromUuid,scope:'clone-test'});
- const ownerSocket={register(name,handler){ownerHandlers.set(name,handler);},executeAsUser(name,userId,payload){assert.equal(userId,gm.id);return gmHandlers.get(name).call({socketdata:{userId:player.id}},payload);}};
+ const ownerSocket={register(name,handler){ownerHandlers.set(name,handler);},executeAsUser(name,userId,payload){assert.equal(userId,gm.id);if(name==='knowledge-claim')claimRequests.push(payload);if(name==='knowledge-complete')completeRequests.push(payload);return gmHandlers.get(name).call({socketdata:{userId:player.id}},payload);}};
  const gmSocket={register(name,handler){gmHandlers.set(name,handler);},executeAsUser(name,userId,payload){assert.equal(userId,player.id);return ownerHandlers.get(name).call({socketdata:{userId:gm.id}},payload).catch(error=>{failures.push(error);throw error;});}};
  owner.register({Hooks,socket:ownerSocket});root.register({Hooks,socket:gmSocket});knowledge.register({Hooks,socket:ownerSocket});gmKnowledge.register({Hooks,socket:gmSocket});
  const infusion=snapshot.request.transientItems[0];
  let roller;const actorNativeClone=actor.clone.bind(actor);actor.clone=(...args)=>{roller=actorNativeClone(...args);return roller;};
- const run=async()=>{try{return await root.run({actor,message:activity,user:player},{type:'attack',weaponId:'xxPF2ExUNARMEDxx',map:0,targetUuid:enemy.uuid,options:['action:spellstrike'],transientItems:[infusion]});}catch(error){await tick();throw failures[0]??error;}};
- return {run,actor,marshal,hero,enemy,ownerGame,player,gm,infusion,Hooks,windows,windowShown,knowledge,gmKnowledge,Message,docs,fromUuid,get roller(){return roller;},sync(){pendingSync?.();},get counts(){return {dice,cloneWrites,liveSourceWrites};},get state(){return marshal.flags[ID].knowledge.strategistStates[0];}};
+ const run=async(request={})=>{try{return await root.run({actor,message:activity,user:player},{type:'attack',weaponId:'xxPF2ExUNARMEDxx',map:0,targetUuid:enemy.uuid,options:['action:spellstrike'],transientItems:[infusion],...request});}catch(error){await tick();throw failures[0]??error;}};
+ return {run,actor,marshal,hero,enemy,ownerGame,player,gm,infusion,Hooks,windows,windowShown,claimRequests,completeRequests,rebindEntries,knowledge,gmKnowledge,Message,docs,fromUuid,get roller(){return roller;},sync(){pendingSync?.();},get counts(){return {dice,cloneWrites,liveSourceWrites};},get state(){return marshal.flags[ID].knowledge.strategistStates[0];}};
 }
 
 function setup(t,options){const previous=globalThis.CONFIG;t.after(()=>{globalThis.CONFIG=previous;});const f=fixture(options);globalThis.CONFIG={ChatMessage:{documentClass:f.Message}};return f;}
@@ -171,4 +188,56 @@ test('an unrelated ephemeral effect cannot hide a missing prepared Marshal effec
  const f=setup(t,{dropPreparedEphemeral:true});f.actor._source.items.push({_id:'unrelated',name:'Other effect',type:'effect',system:{rules:[{key:'EphemeralEffect',selectors:['strike-attack-roll','spell-attack-roll'],uuid:'Compendium.pf2e.conditionitems.Item.AJh5ex99aV6VTggg',predicate:['never']} ]}});f.actor.prepare();
  const pending=f.run(),outcome=await Promise.race([pending.then(value=>value,error=>error),f.windowShown.then(async app=>{await app.resolve(false);return 'native window opened';})]);await pending.catch(()=>{});
  assert.match(outcome.message??outcome,/未准备完成/);assert.equal(f.windows.length,0);assert.equal(f.state.status,'pending');assert.equal(f.counts.dice,0);assert.equal(f.counts.liveSourceWrites,0);assert.equal(f.roller._source.items.some(item=>item.flags?.[ID]?.knowledge?.kind==='strategist-claim'),false);assert.ok(f.roller._source.items.some(item=>item._id==='unrelated'));assert.ok(f.roller._source.items.some(item=>item._id===f.infusion._id));
+});
+
+test('native preparation rebinds Surge through Knowledge without claiming the same Marshal opportunity twice',{skip:!enabled},async t=>{
+ const f=setup(t,{nativeRebind:true}),pending=f.run();let app;
+ try{await until(()=>f.windows[0]||f.claimRequests.length>1);assert.equal(f.claimRequests.length,1);app=f.windows[0];assert.ok(app);assert.equal(f.counts.dice,0);assert.equal(app.context.dc.value,18);assert.equal(app.context.mapIncreases,0);assert.ok(app.context.traits.includes('arcane'));assert.ok(app.context.item.system.traits.value.includes('magical'));await app.resolve(true);assert.equal((await pending).status,'rolled');assert.equal(f.counts.dice,1);assert.equal(f.windows.length,1);assert.equal(f.completeRequests.length,1);assert.equal(f.state.status,'consumed');assert.deepEqual(f.roller._source.items,[...snapshot.actor.items,f.infusion]);assert.equal(f.counts.liveSourceWrites,0);}
+ finally{if(!app){f.player.active=false;f.Hooks.call('userConnected',f.player,false);await pending.catch(()=>{});}}
+});
+
+test('cancelling the rebound native window returns the one Marshal claim and preserves infusion',{skip:!enabled},async t=>{
+ const f=setup(t,{nativeRebind:true}),{pending,app:shown}=opening(f),app=await shown;await app.resolve(false);assert.equal((await pending).status,'cancelled');
+ assert.equal(f.claimRequests.length,1);assert.equal(f.completeRequests.length,1);assert.equal(f.windows.length,1);assert.equal(f.counts.dice,0);assert.equal(f.state.status,'pending');assert.deepEqual(f.roller._source.items,[...snapshot.actor.items,f.infusion]);assert.deepEqual(f.actor._source.items,snapshot.actor.items);
+});
+
+for(const map of [1,2])test(`native rebind retains the original MAP ${map} closure and its one Marshal claim`,{skip:!enabled},async t=>{
+ const f=setup(t,{nativeRebind:true}),pending=f.run({map}),app=await f.windowShown;assert.equal(app.context.mapIncreases,map);assert.equal(app.context.dc.value,18);assert.ok(app.context.traits.includes('arcane'));assert.ok(app.context.item.system.traits.value.includes('magical'));assert.equal(f.counts.dice,0);
+ await app.resolve(true);assert.equal((await pending).status,'rolled');assert.equal(f.claimRequests.length,1);assert.equal(f.completeRequests.length,1);assert.equal(f.windows.length,1);assert.equal(f.counts.dice,1);assert.equal(f.state.status,'consumed');
+});
+
+test('a live Strike rebinds after its native embedded claim preparation without clone identity grants',{skip:!enabled},async t=>{
+ const f=setup(t,{nativeRebind:true});f.actor.prepare();const pending=f.run({transientItems:[]}),app=await f.windowShown;assert.equal(app.context.dc.value,18);assert.equal(f.counts.dice,0);assert.equal(f.claimRequests.length,1);assert.equal(f.rebindEntries[0].actor,f.actor);assert.equal(ownerApi.getNativeOwnerTransientActor(f.ownerGame,f.actor),null);
+ await app.resolve(true);assert.equal((await pending).status,'rolled');assert.equal(f.completeRequests.length,1);assert.equal(f.windows.length,1);assert.equal(f.counts.dice,1);assert.equal(f.state.status,'consumed');assert.equal(f.counts.liveSourceWrites,0);assert.deepEqual(f.actor._source.items,snapshot.actor.items);
+});
+
+test('owner disconnection closes the rebound manual window and revokes its private continuation',{skip:!enabled},async t=>{
+ const f=setup(t,{nativeRebind:true}),{pending,app:shown}=opening(f);await shown;const entry=f.rebindEntries[0];f.player.active=false;f.Hooks.call('userConnected',f.player,false);await assert.rejects(pending,/离线|身份|连接/);await until(()=>f.state.status==='pending');
+ await assert.rejects(entry.native({...entry.params}),/承接身份已失效/);assert.equal(f.claimRequests.length,1);assert.equal(f.completeRequests.length,1);assert.equal(f.windows.length,1);assert.equal(f.counts.dice,0);assert.deepEqual(f.roller._source.items,[...snapshot.actor.items,f.infusion]);assert.equal(ownerApi.getNativeOwnerTransientActor(f.ownerGame,f.roller),null);
+});
+
+for(const change of ['target','MAP','weapon','actor','source'])test(`a rebound ${change} mismatch cannot carry the Marshal claim into another native attack`,{skip:!enabled},async t=>{
+ let f,other;f=setup(t,{nativeRebind:true,rebindDispatch:({actor,strike,index,params,native})=>{
+  if(change==='target')return native({...params,target:f.hero.object});
+  if(change==='MAP'&&index===0)return strike.variants[1].roll(params);
+  if(change==='weapon')strike.item._source.name='different weapon';
+  if(change==='actor'&&actor!==other)return other.system.actions[0].variants[0].roll(params);
+  if(change==='source')f.hero.actor=f.enemy.actor;
+  return native(params);
+ }});if(change==='actor')other=f.actor.clone({items:[...snapshot.actor.items,f.infusion]},{keepId:true});
+ await assert.rejects(f.run(),/承接身份|来源|身份|档位/);assert.equal(f.claimRequests.length,1);assert.equal(f.completeRequests.length,1);assert.equal(f.windows.length,0);assert.equal(f.counts.dice,0);assert.equal(f.state.status,'pending');assert.equal(f.counts.liveSourceWrites,0);assert.deepEqual(f.roller._source.items,[...snapshot.actor.items,f.infusion]);assert.deepEqual(f.actor._source.items,snapshot.actor.items);
+});
+
+test('a native continuation is accepted once and its private grant expires with the attack promise',{skip:!enabled},async t=>{
+ const f=setup(t,{nativeRebind:true}),{pending,app:shown}=opening(f),app=await shown,entry=f.rebindEntries[0];assert.ok(entry);
+ await assert.rejects(entry.native({...entry.params}),/承接身份已失效/);assert.equal(f.windows.length,1);assert.equal(f.claimRequests.length,1);assert.equal(f.counts.dice,0);
+ await app.resolve(true);assert.equal((await pending).status,'rolled');assert.equal(f.state.status,'consumed');
+ await assert.rejects(entry.native({...entry.params}),/承接身份已失效/);
+ const key=Object.getOwnPropertySymbols(entry.params).find(key=>key.description==='knowledgeNativeAttack');await assert.rejects(entry.native({...entry.params,[key]:Object.freeze({})}),/承接身份已失效/);
+ assert.equal(f.windows.length,1);assert.equal(f.claimRequests.length,1);assert.equal(f.completeRequests.length,1);assert.equal(f.counts.dice,1);
+});
+
+test('public claim options cannot replace a local native continuation grant',{skip:!enabled},async t=>{
+ const f=setup(t,{nativeRebind:true}),pending=f.run({options:['action:spellstrike',`${ID}:knowledge:claim:untrusted`]});const app=await f.windowShown;
+ assert.equal(f.claimRequests.length,1);assert.equal(app.context.dc.value,18);assert.equal(f.counts.dice,0);await app.resolve(false);assert.equal((await pending).status,'cancelled');assert.equal(f.state.status,'pending');assert.equal(f.completeRequests.length,1);
 });
