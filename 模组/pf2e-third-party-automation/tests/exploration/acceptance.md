@@ -6,6 +6,14 @@
 
 ## 三层验证
 
+### 首轮手动治疗检查点候选（未发布）
+
+本批只接固定600秒首轮、单患者非共享池的 Workbench 治疗及另一角色的普通再聚能。[真实GM＋玩家报告](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/qa/manual-checkpoint-native-2026-10-01T10-42-18-168Z-fc1b427c.json) SHA `71ad7614229575e0ba4a0354b37ce2214ee34fbb52b1bbb7c206fb847d9bf27a`：开启后时间0，玩家原生检定大成功、真实治疗26，原按钮应用后HP从1到27；同源一小时免疫保存start=0、expiresAt=3600。点击“继续本轮”只提交一次0→600时钟，手动活动确认、普通Refocus恢复一聚能，两项活动共用本轮。检定／结果／HP回执／免疫均各一项，manual不再次调用治疗执行器；十二个旧世界及187份候选运行文件保持。
+
+[新鲜完整源码检查](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/manual-checkpoint-source-check-1790851403559.json)为3074／3074、166测试文件、180运行脚本与2工具语法通过，零失败／跳过。一次独立产品复核发现封口可能覆盖晚到第二HP回执；[修复证据](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/manual-checkpoint-review-fix.json)保留旧源码两项失败及修复后208项定向回归。通过报告和完整13类原生来源已在新GM客户端只读复核并正常保存关闭：[停止库存](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/qa/patreon-current-preserve-2026-10-01T10-44-45-290Z-a6439f61.json)，SHA `9459fe5ab3b81ce980bdcf4e7fcfa5059b9c8ce48a5f297221665b68fec1f13d`，全部LOCK释放、源码和旧世界保持。此前两个UI操作失败的世界与已投骰结果原样保留，没有重放旧尝试。
+
+候选的版本字段仍为私有0.9.28，不代表已发布或已部署本功能。原生action缺免疫、共享主人回执、群体／延长及其他时长检查点仍待适配；本批不改变十二场景整体状态。
+
 ### 手动时间声明小批（0.9.25）
 
 此批基于已部署0.9.24，仅增加通用手动声明、时长出处、声明时段、同会话前置关系和面板展示。[实际GM＋玩家报告](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/qa/manual-time-native-2026-10-01T05-54-12-301Z-005f1f95.json)及[一次结果复核](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/manual-time-native-result-review.md)通过：GM真实对话框登记A十分钟，玩家独立客户端登记B同时五分钟和A后续五分钟，重建900秒、certainty为incomplete。作者身份、出处、时段、依赖及空原生proof持久化，刷新后相同。未拥有角色、错误会话及不完整伪治疗凭据拒绝且无新增。

@@ -5,7 +5,7 @@ export function expectedHealingPerMinute({outcomeForFace,meanForOutcome,expected
  return (mean-expectedDamage)/(durationSeconds/60);
 }
 export function chooseNext({snapshot,proposals,session,now}){
- const active=(snapshot.activities??[]).filter(a=>a.state==='started'),actors=new Set(active.map(a=>a.actorUUID)),patients=new Set(active.filter(a=>a.providerId==='treat-wounds'||a.options?.threePecks).flatMap(a=>a.patientUUIDs)),pools=new Set(active.flatMap(a=>a.hpPoolUUIDs));
+  const active=(snapshot.activities??[]).filter(a=>a.state==='started'||a.temporalSource?.type==='checkpoint-reservation'&&a.checkpointBinding?.id===session.manualCheckpoint?.id&&['awaiting-evidence','uncertain'].includes(a.state)),actors=new Set(active.map(a=>a.actorUUID)),patients=new Set(active.filter(a=>a.providerId==='treat-wounds'||a.options?.threePecks||a.temporalSource?.type==='checkpoint-reservation').flatMap(a=>a.patientUUIDs)),pools=new Set(active.flatMap(a=>a.hpPoolUUIDs));
  const available=proposals.filter(p=>!actors.has(p.actorUUID)&&!(p.patientTreatmentExclusive&&p.patientUUIDs.some(u=>patients.has(u)))&&!p.hpPoolUUIDs.some(u=>pools.has(u)));
  const ranked=available.filter(p=>p.earliestStart<=now&&now+p.durationSeconds<=session.budgetEndsAt).sort((a,b)=>((b.expectedNetHealing??0)/b.durationSeconds)-((a.expectedNetHealing??0)/a.durationSeconds)||(a.resourceCost?.focus??0)-(b.resourceCost?.focus??0)||(a.expectedDamage??0)-(b.expectedDamage??0)||a.actorUUID.localeCompare(b.actorUUID)||a.patientUUIDs.join().localeCompare(b.patientUUIDs.join()));
  const activities=[];for(const p of ranked){if(actors.has(p.actorUUID)||p.hpPoolUUIDs.some(u=>pools.has(u))||p.patientTreatmentExclusive&&p.patientUUIDs.some(u=>patients.has(u)))continue;activities.push({...p,startedAt:now,endsAt:now+p.durationSeconds});actors.add(p.actorUUID);p.hpPoolUUIDs.forEach(u=>pools.add(u));if(p.patientTreatmentExclusive)p.patientUUIDs.forEach(u=>patients.add(u))}
@@ -15,7 +15,7 @@ export function chooseNext({snapshot,proposals,session,now}){
 export function recoveryProposals({actors,activities,session,now,providerIds}){
  const targets=actors.filter(p=>p.pool?.ready&&!p.isDead&&session.goalsByPool.some(g=>g.poolUUID===p.pool.poolUUID&&p.hp.value<g.targetHP));
  const deficit=p=>Math.max(0,(session.goalsByPool.find(g=>g.poolUUID===p.pool.poolUUID)?.targetHP??p.hp.max)-p.hp.value);
- const ready=p=>Math.max(now,p.cooldownExpiresAt??now,...activities.filter(a=>a.state==='confirmed'&&(a.providerId==='treat-wounds'||a.options?.threePecks)&&a.patientUUIDs.includes(p.actorUUID)&&!a.options?.extensionOf).map(a=>a.startedAt+(a.options.continualRecovery?600:3600)));
+ const ready=p=>Math.max(now,p.cooldownExpiresAt??now,...activities.filter(a=>a.state==='confirmed'&&(a.providerId==='treat-wounds'||a.options?.threePecks||a.temporalSource?.type==='checkpoint-reservation')&&a.patientUUIDs.includes(p.actorUUID)&&!a.options?.extensionOf).map(a=>a.startedAt+(a.options.continualRecovery?600:3600)));
  const proposals=[];
  for(const h of actors.filter(a=>!a.isDead&&!a.unconscious)){
   const options={skill:'medicine',rank:session.treatmentRank??'trained',assurance:session.useAssurance===true&&h.assuranceSkills.includes('medicine'),riskySurgery:session.riskySurgery===true&&h.riskySurgery,continualRecovery:h.continualRecovery};
