@@ -6,6 +6,16 @@
 
 ## 三层验证
 
+### 原生／Patreon 手动免疫小批（0.9.30 候选）
+
+源码 `579a4bef62f5945dfe3ec2f1da334b6fa1e248ab` 的[完整回归](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/native-immunity-source-check-1790861026368.json)为3249／3249、172测试文件、182运行脚本和5工具语法通过，零跳过。一轮独立产品审查发现停止录入与共享池改绑的异步窗口；追加的重复 HP 应用反例与六个原审查反例在合并后的代码通过，新测试覆盖真实 revision 摘要完成后的提交条件。原失败记录保留。
+
+[真实GM＋玩家核验](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/qa/native-manual-immunity-accepted-1790862049312.json)，SHA `97786fa98197d6f2ba52c562c09d2b7661416551880f4758a396679b2727141d`：A由玩家直接创建原一小时免疫，真实治疗20、HP从1到21；B由GM代建持续恢复的原十分钟免疫，真实治疗19、HP从1到20。各有一项检定、治疗结果、HP应用和免疫，原创建完成凭据绑定实际creator、useId、患者、recording会话及start=0。世界时间始终0，没有clock。GM整页刷新前后十三类原生文档、持久化会话／活动／时钟一致，玩家持续观察无新检定、HP、免疫或时间写入。
+
+原验收脚本先后被旧式合法Compendium UUID、画布Token临时加载状态和异步默认Party基线断言中止；核验报告绑定三份原失败报告及原始trace，以首轮已保存Party、持久化账本和完整原生文档补做只读验证。A仅在第一份报告执行一次，B仅在第三份执行一次，没有重投或重新应用。[保存关闭报告](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/qa/native-manual-immunity-preserve-2026-10-01T13-41-02-327Z-83e6f31a.json)，SHA `cc1cb46e1dbff4d60c25c3f4b57f33edbbf97d6cf73676cd41e9160fd1da8bf0`：新GM只读回完整来源后原生关闭世界，全部LOCK释放，十三个旧世界和192份候选运行文件保持。
+
+本批限普通单患者、非共享池手动记录，依赖固定PF2e 8.5.1和Patreon 3.2.29源码及手动免疫补丁；自动首轮检查点仍仅Workbench。共享主人完成、Risky Surgery、多患者、延长及十二场景完整矩阵继续待完成。0.9.30此处仅记录候选实际验收，发行部署另行绑定证据。
+
 ### 首轮手动治疗检查点（0.9.29）
 
 本批只接固定600秒首轮、单患者非共享池的 Workbench 治疗及另一角色的普通再聚能。[真实GM＋玩家报告](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/qa/manual-checkpoint-native-2026-10-01T10-42-18-168Z-fc1b427c.json) SHA `71ad7614229575e0ba4a0354b37ce2214ee34fbb52b1bbb7c206fb847d9bf27a`：开启后时间0，玩家原生检定大成功、真实治疗26，原按钮应用后HP从1到27；同源一小时免疫保存start=0、expiresAt=3600。点击“继续本轮”只提交一次0→600时钟，手动活动确认、普通Refocus恢复一聚能，两项活动共用本轮。检定／结果／HP回执／免疫均各一项，manual不再次调用治疗执行器；十二个旧世界及187份候选运行文件保持。
@@ -94,10 +104,10 @@
 | 4 | 仙露＋再聚能十分钟、subscriber 不重复、满聚能治疗、圣疗循环 | `refocus.test.mjs`、`refocus-quota.test.mjs` | 部分：满聚能仙露、圣疗四次／再聚能三次及普通 Refocus 每次一点已保存；补每次施法聚能消费 receipt、subscriber 全部消息／写入去重查询及完整事件 nonce |
 | 5 | Ward Medic 容量及能力／房规／变体来自 prepared 数据 | `capabilities.test.mjs`、`efficiency.test.mjs` | 部分：实际准备后的盾哥 rank4／容量8、科索斯 rank1、普莱德 QA rank2 已记录；补来源与所有要求的变体／房规资格变化。源JSON熟练度不能替代这些值 |
 | 6 | 召唤师／幻灵独立活动；共用 HP 不重复计算 | `hp-pool.test.mjs`、`policy.test.mjs` | 部分：共用血池真实主人 Promise 写入已确认；补独立并行动作及同效果两目标的去重 |
-| 7 | 手动 Workbench／原生治疗只有一套骰点、HP、免疫与准确来源 | `manual-events.test.mjs`、`manual-proof.test.mjs`、`manual-player.test.mjs`、`patreon-manual-immunity.test.mjs`、`patreon-manual-immunity-owner.test.mjs`、`manual-native-commit-boundary.test.mjs` | 部分：来源绑定 Workbench 玩家轮已保存 HP／免疫回执；旧待核对轮保留。0.9.30 候选补普通单患者、非共享池的原生／Patreon 手动免疫，依赖准确源码补丁；离线测试不替代实际验收。待保存玩家直接创建、GM 代建、原始 Promise 完成、唯一检定／HP／免疫、准确开始／期限及 GM reload 不重放的真实证据，手动记录时间应保持不变。共享主人完成、Risky Surgery、多患者及完整去重矩阵未通过；首轮自动检查点仍仅 Workbench。 |
+| 7 | 手动 Workbench／原生治疗只有一套骰点、HP、免疫与准确来源 | `manual-events.test.mjs`、`manual-proof.test.mjs`、`manual-player.test.mjs`、`patreon-manual-immunity.test.mjs`、`patreon-manual-immunity-owner.test.mjs`、`manual-native-commit-boundary.test.mjs` | 部分：Workbench玩家来源绑定已保存；0.9.30候选普通单患者、非共享池原生／Patreon手动免疫已保存玩家直接创建、GM代建、唯一检定／HP／免疫、原始开始／期限及GM reload不重放的实际证据，世界时间保持0，见本页小批报告。旧待核对轮保留；共享主人完成、Risky Surgery、多患者及完整去重矩阵未通过，首轮自动检查点仍仅Workbench。 |
 | 8 | 目标、连续失败、预算、资格失效后停止，显示真实缺口 | `coordinator.test.mjs`、`panel.test.mjs` | 部分：目标完成和 Assurance failure 后预算暂停已保存；补连续随机失败及资格失效。当前独立连续失败阈值尚未实现，失败循环由时间／活动预算约束 |
 | 9 | 刷新、GM交接、owner离线、遭遇、外部时钟、未知时间不重放 | `clock.test.mjs`、`owner-operations.test.mjs`、`coordinator.test.mjs` | 部分：最终审查补证已保存 GM 接手与整页刷新后同检查／HP／时间不重放，并记录重载期间玩家手动回执追加；详见 final-review-resolution.md。owner离线、遭遇、外部时间、未知时间来源及多客户端竞态的完整实际矩阵仍需补齐；reload 请求返回本身不算通过 |
-| 10 | Patreon 全Party被动恢复在检查点稳定；Calendaria休息一次计时 | `time-effects.test.mjs` | 部分：未选中另一Party的active FastHealing触发passive-completion-unavailable，活动取消、未推进；Calendaria原生休息保存一个28800秒时间事件、探索clocks为空并因外部休息停止。当前无Patreon异步完成适配器；休息事件没有调用nonce，不能精确归因某次advance |
+| 10 | Patreon 全Party被动恢复在检查点稳定；Calendaria休息一次计时 | `time-effects.test.mjs`、`patreon-time-completion.test.mjs` | 部分：0.9.28已保存有符合成员／无符合成员的原生异步效果完成，GM双标签页每轮唯一600秒且无符合成员时零治疗骰／HP，见本页时间小批。保留早期另一Party来源缺失暂停；Calendaria原生休息保存一个28800秒外部时间事件、探索clocks为空并停止。完整Party／来源／被动恢复矩阵和休息调用nonce归因仍待补。 |
 | 11 | 开始／完成上下文、免疫截止与段内到期；拒绝过去回填 | `native-treatment.test.mjs`、`refocus.test.mjs`、`clock.test.mjs` | 部分：活动上下文与多个来源 nonce 已保存；普通结果 expiresAt 为 start＋3600。补原生 Effect start／duration读回、段内到期与拒绝回填 |
 | 12 | 延长失败十分钟；成功一小时，用同结果追加一次，无重掷／重复手术 | `treatment.test.mjs`、`native-treatment.test.mjs`、`coordinator.test.mjs` | 部分：成功3600秒、同check／healing结果及追加receipt已保存；补延长失败十分钟、独立全消息／应用计数和开启手术后未重复手术 |
 
