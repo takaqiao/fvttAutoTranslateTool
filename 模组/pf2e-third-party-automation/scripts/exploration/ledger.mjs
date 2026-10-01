@@ -11,13 +11,14 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
   let tail=Promise.resolve();
   const check=()=>{if(!isAuthority())throw Error('active-gm-required')};
   const localIdentity=()=>{const value=clone(identity());id(value.userId,'runtime-user');id(value.clientNonce,'runtime-client');return value};
-  function mutate(fn) {
+  function mutate(fn,validateCommit) {
     const caller=atomic?localIdentity():null;
     const current=()=>{check();if(atomic&&JSON.stringify(localIdentity())!==JSON.stringify(caller))throw Error('runtime-identity-changed')};
     const result=tail.then(async()=>{
       current();
-      if(atomic){const value=await transact((state,context)=>{current();const value=fn(state,context,caller);current();return value});current();return clone(value)}
-      const state=clone(await read()??emptyLedger());current();const value=fn(state);current();await write(state);current();return clone(value);
+      const validate=()=>{current();validateCommit?.();current();return true};
+      if(atomic){const value=await transact((state,context)=>{current();const value=fn(state,context,caller);current();return value},validateCommit?{validateCommit:validate}:undefined);current();return clone(value)}
+      const state=clone(await read()??emptyLedger());current();const value=fn(state);validate();await write(state);current();return clone(value);
     });
     tail=result.catch(()=>{});return result;
   }
@@ -48,6 +49,8 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
     if(Object.values(state.clocks).some(c=>c.state!=='confirmed')||Object.values(state.activities).some(a=>unresolvedActivity(a)&&(actors.has(a.actorUUID)||a.patientUUIDs.some(u=>actors.has(u))||a.hpPoolUUIDs.some(u=>pools.has(u)))))throw Error('unresolved-evidence-no-replay');
   }
   function transition(collection,key,{expected,patch,...options}) {
+    if(options.evidenceGuard!==undefined&&typeof options.evidenceGuard!=='function')throw Error('synchronous-evidence-guard-required');
+    let validateCommit;
     return mutate((s,context,caller)=>{
       const old=s[collection][key];if(!old||!expected.includes(old.state))throw Error('state-conflict');
       const legal=collection==='clocks'?{started:['confirmed','uncertain'],confirmed:[],uncertain:['confirmed']}:transitions;
@@ -74,8 +77,13 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
         if(collection==='activities'&&patch.state==='confirmed'&&old.executor?.state!=='settled')throw Error('native-completion-required');
         if(collection==='activities'&&old.executor?.state==='settled'&&Object.entries(old.executionResult??{}).some(([key,value])=>key in patch&&canonicalJSON(patch[key])!==canonicalJSON(value)))throw Error('native-result-conflict');
       }
-      s[collection][key]={...old,...clone(patch)};return s[collection][key];
-    });
+      const next={...old,...clone(patch)};
+      validateCommit=()=>{
+        if(options.expectedSessionStatus!==undefined&&s.sessions[old.sessionId]?.status!==options.expectedSessionStatus)throw Error('session-state-conflict');
+        if(options.evidenceGuard){const valid=options.evidenceGuard(next);if(valid&&typeof valid.then==='function')throw Error('synchronous-evidence-guard-required');if(valid!==true)throw Error('manual-evidence-changed')}
+      };
+      validateCommit();s[collection][key]=next;return next;
+    },options.evidenceGuard||options.expectedSessionStatus!==undefined?()=>validateCommit():undefined);
   }
   return {
     quarantineLegacySessions:()=>mutate(s=>{

@@ -59,9 +59,10 @@ export function createRevisionStore({getRootUUID,readRoot,createPage,isAuthority
     // Foundry adds native defaults and stats. The signed protocol content must be unchanged.
     if(saved?._id!==page._id||saved.type!==page.type||saved.name!==page.name||saved.ownership?.default!==0||canonicalJSON(saved.flags?.[MODULE_ID])!==canonicalJSON(page.flags[MODULE_ID]))throw Error('revision-acknowledgement-mismatch');
   }
-  async function submit(loaded,metadata,writer){
+  async function submit(loaded,metadata,writer,validateCommit){
     checkWriter(writer);validateRoot(loaded.raw,loaded.rootUUID);
     const page=pageFor(metadata);
+    if(validateCommit){const valid=validateCommit();if(valid&&typeof valid.then==='function')throw Error('synchronous-evidence-guard-required');if(valid!==true)throw Error('manual-evidence-changed')}
     // The injected transport performs one keepId:true, broadcast:false create, and rejects unknown timeouts.
     const ack=await createPage({rootUUID:loaded.rootUUID,page:structuredClone(page)});
     checkWriter(writer);validateRoot(loaded.raw,loaded.rootUUID);
@@ -83,8 +84,9 @@ export function createRevisionStore({getRootUUID,readRoot,createPage,isAuthority
     // Explicit setup may recognize another initializer's same seed. This never returns an executable grant.
     const current=await load();authority();if(!current.head)throw Error('protocol-not-initialized');return matchGenesis(current,{epoch,expectedSourceDigest});
   }
-  async function transact(fn){
+  async function transact(fn,{validateCommit}={}){
     if(typeof fn!=='function'||fn.constructor?.name==='AsyncFunction')throw Error('synchronous-mutation-required');
+    if(validateCommit!==undefined&&typeof validateCommit!=='function')throw Error('synchronous-evidence-guard-required');
     for(let conflicts=0;;conflicts++){
       authority();const loaded=await load();authority();if(!loaded.head)throw Error('protocol-not-initialized');
       const context=Object.freeze({rootUUID:loaded.rootUUID,epoch:loaded.head.epoch,revision:loaded.head.revision+1,previousDigest:loaded.head.digest});
@@ -92,7 +94,7 @@ export function createRevisionStore({getRootUUID,readRoot,createPage,isAuthority
       if(value&&typeof value.then==='function')throw Error('synchronous-mutation-required');
       const result=structuredClone(value),writer=identity();
       const metadata=await createSuccessorRevision({previous:loaded.head,state:loaded.state,nextState,...writer});
-      if(await submit(loaded,metadata,writer))return result;
+      if(await submit(loaded,metadata,writer,validateCommit))return result;
       if(conflicts>=maxConflicts)throw Error('revision-conflict-limit');
     }
   }
