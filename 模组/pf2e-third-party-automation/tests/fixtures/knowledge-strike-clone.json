@@ -1,0 +1,470 @@
+{
+  "capturedAt": "2026-10-01T09:42:33.579Z",
+  "actor": {
+    "_id": "mC5ltcJkLfQR0HtT",
+    "type": "character",
+    "items": [
+      {
+        "_id": "IxgsXPP4VW33StWQ",
+        "type": "weapon",
+        "name": "长剑 Longsword",
+        "system": {
+          "rules": [],
+          "slug": "longsword"
+        }
+      }
+    ],
+    "flags": {},
+    "system": {
+      "details": {
+        "alliance": "party"
+      }
+    }
+  },
+  "marshal": {
+    "_id": "X7czg4cdjFfCarzB",
+    "type": "character",
+    "items": [
+      {
+        "_id": "gxbMW5yHIvjMceDT",
+        "type": "feat",
+        "name": "军师架势 Strategist Stance",
+        "_stats": {
+          "compendiumSource": "Compendium.pf2e.feats-srd.Item.fJwsZM6WXwP8EStV"
+        },
+        "system": {
+          "rules": []
+        }
+      },
+      {
+        "_id": "GlZSpwJiMayNXu8t",
+        "type": "effect",
+        "name": "架势：军师架势 Strategist Stance (成功)",
+        "_stats": {
+          "compendiumSource": "Compendium.pf2e.feat-effects.Item.z6oLNlBs724PCcR6"
+        },
+        "system": {
+          "rules": [
+            {
+              "choices": [
+                {
+                  "label": "PF2E.Check.Result.Degree.Check.criticalSuccess",
+                  "value": 20
+                },
+                {
+                  "label": "PF2E.Check.Result.Degree.Check.success",
+                  "value": 15
+                }
+              ],
+              "flag": "auraRadius",
+              "key": "ChoiceSet",
+              "prompt": "PF2E.UI.RuleElements.ChoiceSet.Prompt",
+              "selection": 15
+            },
+            {
+              "effects": [
+                {
+                  "affects": "allies",
+                  "uuid": "Compendium.pf2e.feat-effects.Item.no8vv18N7YmEKvOH"
+                }
+              ],
+              "key": "Aura",
+              "radius": "@item.flags.system.rulesSelections.auraRadius",
+              "slug": "marshals-aura",
+              "traits": [
+                "emotion",
+                "visual",
+                "mental"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "_id": "RNXDWT4BYgx8Ycv7",
+        "type": "effect",
+        "name": "架势：军师架势 Strategist Stance (大成功)",
+        "_stats": {
+          "compendiumSource": "Compendium.pf2e.feat-effects.Item.z6oLNlBs724PCcR6"
+        },
+        "system": {
+          "rules": [
+            {
+              "choices": [
+                {
+                  "label": "PF2E.Check.Result.Degree.Check.criticalSuccess",
+                  "value": 20
+                },
+                {
+                  "label": "PF2E.Check.Result.Degree.Check.success",
+                  "value": 15
+                }
+              ],
+              "flag": "auraRadius",
+              "key": "ChoiceSet",
+              "prompt": "PF2E.UI.RuleElements.ChoiceSet.Prompt",
+              "selection": 20
+            },
+            {
+              "effects": [
+                {
+                  "affects": "allies",
+                  "uuid": "Compendium.pf2e.feat-effects.Item.no8vv18N7YmEKvOH"
+                }
+              ],
+              "key": "Aura",
+              "radius": "@item.flags.system.rulesSelections.auraRadius",
+              "slug": "marshals-aura",
+              "traits": [
+                "emotion",
+                "visual",
+                "mental"
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "_id": "XfaukaKf01xftRUF",
+        "type": "effect",
+        "name": "架势：军师架势 Strategist Stance (大成功)",
+        "_stats": {
+          "compendiumSource": "Compendium.pf2e.feat-effects.Item.z6oLNlBs724PCcR6"
+        },
+        "system": {
+          "rules": [
+            {
+              "choices": [
+                {
+                  "label": "PF2E.Check.Result.Degree.Check.criticalSuccess",
+                  "value": 20
+                },
+                {
+                  "label": "PF2E.Check.Result.Degree.Check.success",
+                  "value": 15
+                }
+              ],
+              "flag": "auraRadius",
+              "key": "ChoiceSet",
+              "prompt": "PF2E.UI.RuleElements.ChoiceSet.Prompt",
+              "selection": 20
+            },
+            {
+              "effects": [
+                {
+                  "affects": "allies",
+                  "uuid": "Compendium.pf2e.feat-effects.Item.no8vv18N7YmEKvOH"
+                }
+              ],
+              "key": "Aura",
+              "radius": "@item.flags.system.rulesSelections.auraRadius",
+              "slug": "marshals-aura",
+              "traits": [
+                "emotion",
+                "visual",
+                "mental"
+              ]
+            }
+          ]
+        }
+      }
+    ],
+    "flags": {
+      "pf2e-third-party-automation": {
+        "knowledge": {
+          "strategistTurn": "QHk3wYt6uo8STlOa:1:0",
+          "strategistStates": [
+            {
+              "id": "kurR2RapuFYaS6Ay",
+              "status": "pending",
+              "targetUuid": "Scene.huKU8Yud0jhsrOfA.Token.X4nmDmUDjdC6BpKJ",
+              "sourceTokenUuid": "Scene.huKU8Yud0jhsrOfA.Token.uOwVAAB9XiehBJNw",
+              "combatId": "QHk3wYt6uo8STlOa",
+              "claim": null,
+              "actorUuid": null,
+              "userId": null,
+              "attackerTokenUuid": "Scene.huKU8Yud0jhsrOfA.Token.v2J338UUT0Z2N5hi",
+              "settledClaim": null,
+              "cleanupDone": false
+            }
+          ],
+          "strategist": {
+            "id": "kurR2RapuFYaS6Ay",
+            "status": "pending",
+            "targetUuid": "Scene.huKU8Yud0jhsrOfA.Token.X4nmDmUDjdC6BpKJ",
+            "sourceTokenUuid": "Scene.huKU8Yud0jhsrOfA.Token.uOwVAAB9XiehBJNw",
+            "combatId": "QHk3wYt6uo8STlOa",
+            "claim": null,
+            "actorUuid": null,
+            "userId": null,
+            "attackerTokenUuid": "Scene.huKU8Yud0jhsrOfA.Token.v2J338UUT0Z2N5hi",
+            "settledClaim": null,
+            "cleanupDone": false
+          }
+        }
+      }
+    }
+  },
+  "request": {
+    "type": "attack",
+    "weaponId": "xxPF2ExUNARMEDxx",
+    "altUsageType": "",
+    "map": 0,
+    "targetUuid": "Scene.huKU8Yud0jhsrOfA.Token.X4nmDmUDjdC6BpKJ",
+    "options": [
+      "action:spellstrike",
+      "pf2e-third-party-automation:spell-combination:4QbJ4ie1XYg7jw28",
+      "arcane",
+      "magical",
+      "item:trait:magical"
+    ],
+    "transientItems": [
+      {
+        "_id": "CI7ZxbY4jiLHkyk0",
+        "name": "Spellstrike infusion",
+        "type": "effect",
+        "system": {
+          "duration": {
+            "value": -1,
+            "unit": "unlimited",
+            "expiry": null,
+            "sustained": false
+          },
+          "rules": [
+            {
+              "key": "AdjustStrike",
+              "mode": "add",
+              "property": "traits",
+              "value": "arcane",
+              "definition": [
+                "item:id:xxPF2ExUNARMEDxx"
+              ]
+            },
+            {
+              "key": "AdjustStrike",
+              "mode": "add",
+              "property": "weapon-traits",
+              "value": "magical",
+              "definition": [
+                "item:id:xxPF2ExUNARMEDxx"
+              ]
+            }
+          ],
+          "description": {
+            "value": "",
+            "gm": ""
+          },
+          "publication": {
+            "title": "",
+            "authors": "",
+            "license": "OGL",
+            "remaster": false
+          },
+          "slug": null,
+          "traits": {
+            "otherTags": [],
+            "value": []
+          },
+          "_migration": {
+            "version": null,
+            "previous": null
+          },
+          "level": {
+            "value": 1
+          },
+          "tokenIcon": {
+            "show": true
+          },
+          "unidentified": false,
+          "start": {
+            "value": 0,
+            "initiative": null
+          },
+          "badge": null,
+          "fromSpell": false,
+          "context": null
+        },
+        "img": "systems/pf2e/icons/default-icons/effect.svg",
+        "effects": [],
+        "folder": null,
+        "sort": 0,
+        "ownership": {
+          "default": 0
+        },
+        "flags": {},
+        "_stats": {
+          "coreVersion": "14.368",
+          "systemId": "pf2e",
+          "systemVersion": "8.5.1",
+          "createdTime": null,
+          "modifiedTime": null,
+          "lastModifiedBy": null,
+          "compendiumSource": null,
+          "duplicateSource": null,
+          "exportSource": null
+        }
+      }
+    ],
+    "flags": {
+      "spellCombinationAttack": {
+        "activityMessageId": "4QbJ4ie1XYg7jw28",
+        "index": 0,
+        "kind": "strike"
+      }
+    },
+    "targetActorUuid": "Actor.72JoiBr4UHZ0TrQq"
+  },
+  "preparedStrike": {
+    "slug": "basic-unarmed",
+    "label": "无武装攻击",
+    "variantLabels": [
+      "+11",
+      "+7（MAP -4）",
+      "+3（MAP -8）"
+    ],
+    "item": {
+      "_id": "xxPF2ExUNARMEDxx",
+      "name": "无武装攻击",
+      "type": "weapon",
+      "img": "icons/skills/melee/unarmed-punch-fist.webp",
+      "system": {
+        "description": {
+          "gm": "",
+          "value": ""
+        },
+        "rules": [],
+        "slug": "basic-unarmed",
+        "_migration": {
+          "version": null,
+          "lastMigration": null
+        },
+        "traits": {
+          "otherTags": [],
+          "value": [
+            "agile",
+            "finesse",
+            "nonlethal",
+            "unarmed"
+          ],
+          "rarity": "common",
+          "toggles": {
+            "modular": {
+              "selected": null
+            },
+            "versatile": {
+              "selected": null
+            }
+          }
+        },
+        "publication": {
+          "title": "",
+          "authors": "",
+          "license": "OGL",
+          "remaster": false
+        },
+        "level": {
+          "value": 0
+        },
+        "quantity": 1,
+        "baseItem": null,
+        "bulk": {
+          "value": 0.1
+        },
+        "hp": {
+          "value": 0,
+          "max": 0
+        },
+        "hardness": 0,
+        "price": {
+          "value": {}
+        },
+        "equipped": {
+          "carryType": "worn",
+          "invested": null,
+          "handsHeld": 0,
+          "inSlot": true
+        },
+        "containerId": null,
+        "size": "med",
+        "material": {
+          "type": null,
+          "grade": null
+        },
+        "identification": {
+          "status": "identified",
+          "unidentified": {
+            "name": "",
+            "img": "",
+            "data": {
+              "description": {
+                "value": ""
+              }
+            }
+          }
+        },
+        "usage": {
+          "value": "worngloves"
+        },
+        "category": "unarmed",
+        "group": "brawling",
+        "bonus": {
+          "value": 0
+        },
+        "damage": {
+          "dice": 1,
+          "die": "d4",
+          "damageType": "bludgeoning",
+          "persistent": null
+        },
+        "splashDamage": {
+          "value": 0
+        },
+        "range": null,
+        "expend": null,
+        "ammo": null,
+        "reload": {
+          "value": null
+        },
+        "grade": null,
+        "runes": {
+          "potency": 0,
+          "striking": 0,
+          "property": []
+        },
+        "specific": null,
+        "subitems": []
+      },
+      "effects": [],
+      "folder": null,
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "coreVersion": "14.368",
+        "systemId": "pf2e",
+        "systemVersion": "8.5.1",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null,
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "exportSource": null
+      }
+    },
+    "options": [
+      "action:strike",
+      "self:action:slug:strike",
+      "item:proficiency:rank:1",
+      "proficiency:trained",
+      "agile",
+      "finesse",
+      "nonlethal",
+      "unarmed",
+      "melee"
+    ]
+  },
+  "combatId": "QHk3wYt6uo8STlOa",
+  "sourceTokenUuid": "Scene.huKU8Yud0jhsrOfA.Token.v2J338UUT0Z2N5hi"
+}
