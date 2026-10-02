@@ -1,5 +1,6 @@
 import {selectTreatmentRank} from './efficiency.mjs';
 import {treatablePatient} from './capabilities.mjs';
+import {treatmentFailureState} from './treatment-streaks.mjs';
 export const checkpointDeclaration=a=>a.temporalSource?.type==='checkpoint-declaration';
 export function scheduleCheckpointActivities({registrations,activities,session,from}){
  const reservations=activities.filter(a=>['planned','started'].includes(a.state)),planned=[];
@@ -30,7 +31,8 @@ export function chooseNext({snapshot,proposals,session,now}){
  return {activities,checkpointAt:checkpoints.length?Math.min(...checkpoints):null,reason:checkpoints.length?'ready':available.some(p=>now+p.durationSeconds>session.budgetEndsAt)?'budget':'blocked'};
 }
 export function recoveryProposals({actors,activities,session,now,providerIds}){
- const targets=actors.filter(p=>p.pool?.ready&&!p.isDead&&session.goalsByPool.some(g=>g.poolUUID===p.pool.poolUUID&&p.hp.value<g.targetHP));
+ const failures=treatmentFailureState(activities,session.recoveryGoals?.failureStop,{sessionId:session.id,activityIds:session.activityIds}),blocked=new Set(failures.blockedPatientUUIDs);
+ const targets=actors.filter(p=>!blocked.has(p.actorUUID)&&p.pool?.ready&&!p.isDead&&session.goalsByPool.some(g=>g.poolUUID===p.pool.poolUUID&&p.hp.value<g.targetHP));
  const deficit=p=>Math.max(0,(session.goalsByPool.find(g=>g.poolUUID===p.pool.poolUUID)?.targetHP??p.hp.max)-p.hp.value);
  const ready=p=>Math.max(now,p.cooldownExpiresAt??now,...activities.filter(a=>a.state==='confirmed'&&(a.providerId==='treat-wounds'||a.options?.threePecks||a.temporalSource?.type==='checkpoint-reservation')&&a.patientUUIDs.includes(p.actorUUID)&&!a.options?.extensionOf).map(a=>a.startedAt+(a.options.continualRecovery?600:3600)));
  const proposals=[];
