@@ -46,6 +46,24 @@ export function createHpPools({game,actorUpdateEvents}) {
     scope.forwardError=error;
     const rejected=Promise.reject(error);rejected.catch(()=>{});return rejected;
   }
+  const nativeReceiptSource=receipt=>canonicalJSON(typeof receipt.toObject==='function'?receipt.toObject(true):{speaker:receipt.speaker,flags:receipt.flags});
+  function directHealingNoChange(scope,before,rawBefore,result,receiptBefore) {
+    const {patient,pool,fields}=scope,receipt=result?.receipt,pf=receipt?.flags?.pf2e,c=pf?.context,d=pf?.appliedDamage;
+    if(pool.poolUUID!==patient.uuid||!scope.patientCall||Object.keys(fields??{}).length!==1||
+      fields['system.attributes.hp.value']!==before.value||!Number.isFinite(before.max)||before.max<=0||before.value!==before.max||
+      !rawBefore||rawBefore.value!==before.value||canonicalJSON(patient._source?.system?.attributes?.hp)!==canonicalJSON(rawBefore))return false;
+    const hp=patient.system?.attributes?.hp??{},current=Object.fromEntries(Object.keys(before).map(key=>[key,hp[key]]));
+    if(canonicalJSON(current)!==canonicalJSON(before)||!receipt||game.messages?.get(receipt.id)!==receipt||nativeReceiptSource(receipt)!==receiptBefore||
+      (receipt.author?.id??receipt.author??receipt.user?.id??receipt.user)!==game.user?.id||receipt.speaker?.actor!==patient.id||
+      c?.type!=='damage-taken'||!Array.isArray(c.domains)||c.domains.length!==1||c.domains[0]!=='healing-received'||!Array.isArray(c.options))return false;
+    const prefix=`pf2e-third-party-automation:exploration-apply:${scope.activityId}:`,suffix=`:${patient.uuid}`;
+    const applications=c.options.filter(option=>typeof option==='string'&&option.startsWith(prefix));
+    if(applications.length!==1||!applications[0].endsWith(suffix))return false;
+    const resultId=applications[0].slice(prefix.length,-suffix.length);
+    if(!/^[A-Za-z0-9]+$/.test(resultId)||!c.options.includes(`pf2e-third-party-automation:source:${resultId}:0`))return false;
+    return !!d&&Object.keys(d).length===5&&d.uuid===patient.uuid&&d.isHealing===true&&d.shield===null&&
+      Array.isArray(d.persistent)&&d.persistent.length===0&&Array.isArray(d.updates)&&d.updates.length===0;
+  }
   const unregister=actorUpdateEvents?.addActorUpdateMiddleware(function(wrapped,changes={},options={}){
     const scope=active,fields=hpFields(changes);
     if(manual&&this.uuid===manual.patient.uuid&&Object.keys(fields).length){
@@ -78,6 +96,7 @@ export function createHpPools({game,actorUpdateEvents}) {
     if(shared&&!master.isOwner)throw Error('shared-hp-master-owner-required');
     if(!actorUpdateEvents)throw Error('hp-update-observer-unavailable');
     const hp=master.system?.attributes?.hp??{},before=Object.fromEntries(['value','max','temp','sp'].filter(k=>hp[k]!==undefined).map(k=>[k,structuredClone(hp[k])]));
+    const rawBefore=!shared&&master._source?.system?.attributes?.hp?structuredClone(master._source.system.attributes.hp):null;
     const scope={activityId:activity.id,patient,pool,masterId:shared?master.id:undefined,patientCall:false,masterPromise:null};active=scope;
     // Toolbelt forwards synchronously inside async _preUpdate, after update()
     // has returned its Promise. Bound only this exact original patient boundary;
@@ -97,7 +116,14 @@ export function createHpPools({game,actorUpdateEvents}) {
         if(receipt&&game.messages?.get(receipt.id)===receipt&&c?.type==='damage-taken'&&receipt.flags.pf2e.appliedDamage===null&&receipt.speaker?.actor===patient.id&&c.options?.some(o=>o.startsWith(`pf2e-third-party-automation:exploration-apply:${activity.id}:`)||o===`pf2e-third-party-automation:salubrious-apply:${activity.id}`))return {result,poolReceipt:{activityId:activity.id,actorUUID:pool.poolUUID,noChange:true,receiptId:receipt.id}};
         throw Error('native-hp-forward-unconfirmed');
       }
+      const receiptBefore=!shared&&result?.receipt?nativeReceiptSource(result.receipt):null;
       const saved=await scope.masterPromise;
+      // Foundry filters an empty HP diff and returns undefined. PF2e still
+      // saves a healing receipt with an empty undo delta at full health.
+      if(saved===undefined&&directHealingNoChange(scope,before,rawBefore,result,receiptBefore)){
+        assertCurrentPool(scope);
+        return {result,poolReceipt:{activityId:activity.id,actorUUID:pool.poolUUID,noChange:true,receiptId:result.receipt.id}};
+      }
       if(saved?.uuid!==pool.poolUUID)throw Error('native-hp-forward-unconfirmed');
       const after={...before};for(const [path,value] of Object.entries(scope.fields)){if(path==='system.attributes.hp.value')after.value=value;if(path==='system.attributes.hp.temp')after.temp=value;if(path==='system.attributes.hp.sp.value')after.sp={...before.sp,value}}
       return {result,poolReceipt:{activityId:activity.id,actorUUID:pool.poolUUID,patientUUID:patient.uuid,before,after,fields:scope.fields,provider:pool.provider}};
