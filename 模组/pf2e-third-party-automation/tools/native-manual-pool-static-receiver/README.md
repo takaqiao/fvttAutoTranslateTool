@@ -2,7 +2,7 @@
 
 This private source adapter adds a bounded constant receiving model to the frozen native batch component. It does not install a system, grant an application, create a receipt, or register another patient.
 
-The patcher accepts only the fixed PF2e 8.5.1 bundle SHA `d63da8312831b84905e6866b1dd3f9d93e95c1012955b0177ad2ce8ccf246157`. It verifies all five batch component files and reconstructs its exact `f7f80dcbbf951b840f6472abf76ada9a0a7e4f24370f296801fbb5d795a6d196` output before composing the receiver seam. Altered inputs or component files are rejected. The output directory must be new and outside this checkout; keep the complete bundle in private evidence storage, never in Git or a release ZIP.
+The patcher accepts only the fixed PF2e 8.5.1 bundle SHA `d63da8312831b84905e6866b1dd3f9d93e95c1012955b0177ad2ce8ccf246157`. It verifies all five batch component files and reconstructs its exact `9c8e5f66313e49786b08826a0e1a60dd8605743c523808f7ca2aa941e325f64a` output before composing the receiver seam. Altered inputs or component files are rejected. The output directory must be new and outside this checkout; keep the complete bundle in private evidence storage, never in Git or a release ZIP.
 
 ```powershell
 node tools/native-manual-pool-static-receiver/patch.mjs <fixed-pf2e.mjs> <new-private-directory>
