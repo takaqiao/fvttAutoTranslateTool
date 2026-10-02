@@ -1,6 +1,6 @@
 import {reconstructEarliest} from './timeline.mjs';
-import {checkpointBinding,activityCheckpointBinding,sameActivityCheckpoint,captureRecoveryPreferences} from './schema.mjs';
-import {normalizeRecoveryPreferences,resolveRecoveryGoals} from './recovery-goals.mjs';
+import {checkpointBinding,activityCheckpointBinding,sameActivityCheckpoint} from './schema.mjs';
+import {normalizeRecoveryPreferences,resolveRecoveryGoals,encodeRecoveryPreferences,decodeRecoveryPreferences} from './recovery-goals.mjs';
 import {scheduleCheckpointActivities} from './policy.mjs';
 import {normalizeCheckpointActivity} from './manual-time.mjs';
 import {canonicalJSON} from './revision-codec.mjs';
@@ -11,7 +11,12 @@ export function sessionTimeSummary(data){return data.session.manual?reconstructE
 export function recoveryBudgetPolicy({minutes,activities}){if(!Number.isFinite(minutes)||minutes<=0)throw Error('时间预算应为正数分钟。');if(!Number.isInteger(activities)||activities<1||activities>100)throw Error('行动次数应为1至100。');return {budgetSeconds:minutes*60,maxActivities:activities}}
 export function recoveryDefaults(actors){return {goalsByPool:[...new Map(actors.map(a=>[a.pool.poolUUID,{poolUUID:a.pool.poolUUID,targetHP:a.hp.max}])).values()],allowFiniteResources:false,riskySurgery:false,requireFullFocus:false,budgetSeconds:7200,maxActivities:100}}
 function savedRecoveryPolicy(policy){
- try{return {preferences:captureRecoveryPreferences(policy)??normalizeRecoveryPreferences()}}
+ try{
+  const field=Object.getOwnPropertyDescriptor(policy,'recovery');
+  if(!field){if('recovery' in policy)throw Error('invalid-recovery-preferences');return {preferences:normalizeRecoveryPreferences()}}
+  if(!field.enumerable||!Object.hasOwn(field,'value'))throw Error('invalid-recovery-preferences');
+  return {preferences:decodeRecoveryPreferences(field.value)};
+ }
  catch(error){return {preferences:normalizeRecoveryPreferences(),reason:error.message}}
 }
 function selectedRecoveryPreferences(preferences,actorUUIDs){
@@ -242,7 +247,7 @@ export function createRecoveryPanel({game,coordinator,capabilities,start,storage
      const {goalsByPool}=resolveRecoveryGoals(actors,recovery),config={...recoveryDefaults(actors),goalsByPool,recovery,...recoveryBudgetPolicy({minutes:Number(content.querySelector('[name=budget]').value),activities:Number(content.querySelector('[name=activityBudget]').value)}),actorUUIDs,riskySurgery:content.querySelector('[name=risky]').checked,requireFullFocus:content.querySelector('[name=focus]').checked,extendTreatment:content.querySelector('[name=extension]').checked,useAssurance:content.querySelector('[name=assurance]').checked,treatmentRank:content.querySelector('[name=rank]').value,waitForManualFirstRound:action==='start'&&content.querySelector('[name=manualFirstRound]')?.checked===true,waitForActivityFirstRound:action==='start'&&content.querySelector('[name=activityFirstRound]')?.checked===true,manual:action==='record'};
      if(config.waitForManualFirstRound&&config.waitForActivityFirstRound)throw Error('请选择一种初始登记窗口。');
      const latest=savedRecoveryPolicy(game.user.getFlag?.('pf2e-third-party-automation','explorationPolicy')??{}).preferences;
-     await game.user.setFlag?.('pf2e-third-party-automation','explorationPolicy',{riskySurgery:config.riskySurgery,requireFullFocus:config.requireFullFocus,useAssurance:config.useAssurance,extendTreatment:config.extendTreatment,treatmentRank:config.treatmentRank,budgetSeconds:config.budgetSeconds,maxActivities:config.maxActivities,recovery:{...latest,...recovery,targetIntentsByActor:{...latest.targetIntentsByActor,...recovery.targetIntentsByActor}}});await start(config);return this.render(true);
+     await game.user.setFlag?.('pf2e-third-party-automation','explorationPolicy',{riskySurgery:config.riskySurgery,requireFullFocus:config.requireFullFocus,useAssurance:config.useAssurance,extendTreatment:config.extendTreatment,treatmentRank:config.treatmentRank,budgetSeconds:config.budgetSeconds,maxActivities:config.maxActivities,recovery:encodeRecoveryPreferences({...latest,...recovery,targetIntentsByActor:{...latest.targetIntentsByActor,...recovery.targetIntentsByActor}})});await start(config);return this.render(true);
     }
     async close(options){this.listener?.abort();return super.close(options)}
    }panel=new RecoveryPanel();

@@ -40,7 +40,7 @@ test('submitted mode and stop controls persist selected intent and preserve othe
  await f.app.act('start',f.content);
  assert.deepEqual(f.calls[0].recovery,{version:1,targetIntentsByActor:{[P]:{mode:'percent',value:25}},requireNoWounded:true,failureStop:{enabled:true,limit:2}});
  assert.deepEqual(f.calls[0].goalsByPool,[{poolUUID:P,targetHP:11}]);
- assert.equal(f.saved[0].recovery.targetIntentsByActor[OTHER].value,70);assert.equal(f.saved[0].recovery.requireNoWounded,true);assert.equal(f.saved[0].recovery.failureStop.limit,2);
+ assert.equal(JSON.parse(f.saved[0].recovery).targetIntentsByActor[OTHER].value,70);assert.equal(JSON.parse(f.saved[0].recovery).requireNoWounded,true);assert.equal(JSON.parse(f.saved[0].recovery).failureStop.limit,2);
 });
 
 test('panel captures intention and stop controls before an asynchronous snapshot',async t=>{
@@ -61,7 +61,7 @@ test('absolute clamping preserves the input and explains its current preview',as
  const f=fixture(t);f.actors[0].hp.max=30;f.modes[0].value='absolute';f.values.get(P).value='40';
  f.app.targetActors=f.actors;f.app.updateTargetPreview(f.content);
  assert.equal(f.outputs.get(P).value,'30');assert.match(f.explanations.get(P).textContent,/40.*30/);
- await f.app.act('start',f.content);assert.equal(f.saved[0].recovery.targetIntentsByActor[P].value,40);assert.equal(f.calls[0].goalsByPool[0].targetHP,30);
+ await f.app.act('start',f.content);assert.equal(JSON.parse(f.saved[0].recovery).targetIntentsByActor[P].value,40);assert.equal(f.calls[0].goalsByPool[0].targetHP,30);
 });
 
 test('mode changes and typed values update the preview without saving or starting work',async t=>{
@@ -100,12 +100,12 @@ test('the same panel reuses a new selection and fixes that selection before awai
  const policy={recovery:preferences()};policy.recovery.targetIntentsByActor[B]={mode:'absolute',value:18};
  const entered=deferred(),release=deferred();let gated=false;
  const f=fixture(t,{policy,snapshotGate:async()=>{if(gated){entered.resolve();await release.promise}}});f.actors.push({...f.actors[0],actorUUID:B,name:'Patient B',hp:{value:1,max:30},pool:{poolUUID:B,ready:true}});
- await f.app.act('start',f.content);assert.equal(f.saved[0].recovery.targetIntentsByActor[B].value,18);
+ await f.app.act('start',f.content);assert.equal(JSON.parse(f.saved[0].recovery).targetIntentsByActor[B].value,18);
  assert.equal(f.api.open([B]),f.app);const html=await f.app._renderHTML(await f.app._prepareContext());assert.match(html,/data-target-value[^>]*data-actor="Actor.B"[^>]*value="18"/);assert.doesNotMatch(html,/data-target-mode[^>]*data-actor="Actor.P"/);
  f.modes[0].dataset.actor=B;f.modes[0].value='absolute';f.values.set(B,{value:'18'});gated=true;
  const pending=f.app.act('start',f.content);await entered.promise;f.api.open([P]);f.modes[0].dataset.actor=P;f.values.get(B).value='29';release.resolve();await pending;
  assert.deepEqual(f.calls[1].actorUUIDs,[B]);assert.deepEqual(f.calls[1].recovery.targetIntentsByActor,{[B]:{mode:'absolute',value:18}});assert.deepEqual(f.calls[1].goalsByPool,[{poolUUID:B,targetHP:18}]);
- assert.deepEqual(f.saved[1].recovery.targetIntentsByActor[P],{mode:'percent',value:25});assert.equal(f.saved[1].recovery.targetIntentsByActor[OTHER].value,70);
+ assert.deepEqual(JSON.parse(f.saved[1].recovery).targetIntentsByActor[P],{mode:'percent',value:25});assert.equal(JSON.parse(f.saved[1].recovery).targetIntentsByActor[OTHER].value,70);
 });
 
 test('failure pause names each patient and keeps HP and wounded gaps visible',async t=>{

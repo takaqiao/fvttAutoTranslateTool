@@ -23,7 +23,7 @@ test('the existing pool input previews saved intentions and an unchanged value p
  const f=panelFixture(t);assert.match(await f.app._renderHTML(await f.app._prepareContext()),/data-pool="Actor.P"[^>]*value="11"/);
  await f.app.act('start',f.content);
  assert.deepEqual(f.calls[0].recovery.targetIntentsByActor,{[P]:{mode:'percent',value:25}});
- assert.deepEqual(f.saved[0].recovery.targetIntentsByActor[OTHER],{mode:'absolute',value:70});assert.equal(f.saved[0].requireFullFocus,true);
+ assert.deepEqual(JSON.parse(f.saved[0].recovery).targetIntentsByActor[OTHER],{mode:'absolute',value:70});assert.equal(f.saved[0].requireFullFocus,true);
  f.actors[0].hp.max=81;assert.match(await f.app._renderHTML(await f.app._prepareContext()),/data-pool="Actor.P"[^>]*value="21"/);
  f.target.value='21';await f.app.act('start',f.content);assert.equal(f.calls[1].recovery.targetIntentsByActor[P].value,25);
 });
@@ -31,7 +31,7 @@ test('the existing pool input previews saved intentions and an unchanged value p
 test('editing the existing pool target saves an absolute intention without deleting other patients',async t=>{
  const f=panelFixture(t);await f.app._renderHTML(await f.app._prepareContext());f.target.value='10';await f.app.act('start',f.content);
  assert.deepEqual(f.calls[0].recovery.targetIntentsByActor,{[P]:{mode:'absolute',value:10}});
- assert.deepEqual(f.saved[0].recovery.targetIntentsByActor[OTHER],{mode:'absolute',value:70});
+ assert.deepEqual(JSON.parse(f.saved[0].recovery).targetIntentsByActor[OTHER],{mode:'absolute',value:70});
 });
 
 test('an unchanged rendered target keeps its intention when max changes before clicking start',async t=>{
@@ -51,7 +51,7 @@ test('pool edits update every selected patient in that pool while preserving uns
  const f=panelFixture(t);f.app.actorUUIDs.push('Actor.B');f.actors.push({...f.actors[0],actorUUID:'Actor.B',name:'B'});
  await f.app._renderHTML(await f.app._prepareContext());f.target.value='9';await f.app.act('start',f.content);
  assert.deepEqual(f.calls[0].recovery.targetIntentsByActor,{[P]:{mode:'absolute',value:9},'Actor.B':{mode:'absolute',value:9}});
- assert.equal(f.saved[0].recovery.targetIntentsByActor[OTHER].value,70);
+ assert.equal(JSON.parse(f.saved[0].recovery).targetIntentsByActor[OTHER].value,70);
 });
 
 test('bad saved preferences fall back to max with a visible reason and never execute a getter',async t=>{
@@ -67,7 +67,7 @@ test('an empty pool field is rejected before saving preferences or creating work
 test('saving a selection merges other patient preferences changed during the snapshot await',async t=>{
  const entered=deferred(),release=deferred(),f=panelFixture(t,{snapshotGate:async()=>{entered.resolve();await release.promise}}),pending=f.app.act('start',f.content);
  await entered.promise;f.policy.recovery.targetIntentsByActor[OTHER].value=90;f.policy.recovery.targetIntentsByActor[P].value=80;release.resolve();await pending;
- assert.equal(f.saved[0].recovery.targetIntentsByActor[OTHER].value,90);assert.equal(f.calls[0].recovery.targetIntentsByActor[P].value,25);
+ assert.equal(JSON.parse(f.saved[0].recovery).targetIntentsByActor[OTHER].value,90);assert.equal(f.calls[0].recovery.targetIntentsByActor[P].value,25);
 });
 
 function publicStart(refreshStorage,captured){

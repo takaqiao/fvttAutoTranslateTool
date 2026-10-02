@@ -1,6 +1,7 @@
 const preferenceFields=['version','targetIntentsByActor','requireNoWounded','failureStop'];
 const goalFields=['version','patientTargets','requireNoWounded','failureStop'];
 const patientFields=['patientUUID','poolUUID','intent','basisMaxHP','targetHP'];
+const maximumStoredRecoveryLength=65536;
 
 function plainObject(input,label){
   if(!input||typeof input!=='object'||![Object.prototype,null].includes(Object.getPrototypeOf(input)))throw Error(label);
@@ -72,6 +73,20 @@ export function normalizeRecoveryPreferences(input=undefined){
     targetIntentsByActor[key]=targetIntent(field.value,label);
   }
   return {version:1,targetIntentsByActor,...completionFlags(value,label)};
+}
+
+// Foundry expands dotted UUID keys inside flag objects; a JSON scalar preserves them.
+export function encodeRecoveryPreferences(input){
+  const encoded=JSON.stringify(normalizeRecoveryPreferences(input));
+  if(encoded.length>maximumStoredRecoveryLength)throw Error('invalid-recovery-preferences');
+  return encoded;
+}
+export function decodeRecoveryPreferences(input=undefined){
+  if(typeof input==='string'){
+    if(input.length>maximumStoredRecoveryLength)throw Error('invalid-recovery-preferences');
+    try{input=JSON.parse(input)}catch{throw Error('invalid-recovery-preferences')}
+  }
+  return normalizeRecoveryPreferences(input);
 }
 
 function snapshotField(input,key,label){
