@@ -2,7 +2,8 @@ import {MODULE_ID,manualPoolRequest} from './schema.mjs';
 import {canonicalJSON} from './revision-codec.mjs';
 import {createOwnerTransport,OWNER_TRANSPORT_PROTOCOL} from './owner-transport.mjs';
 import {WORKBENCH_SOURCE_SHA} from './manual-events.mjs';
-import {manualPoolBatchModel} from './manual-pool-model.mjs';
+import {manualPoolBatchModel,MANUAL_POOL_BATCH_SOURCE_SHA} from './manual-pool-model.mjs';
+import {isPatreonSourceQualified} from './patreon-source-qualification.mjs';
 
 const operationId='manual-pool-source';
 const copy=value=>JSON.parse(canonicalJSON(value));
@@ -22,10 +23,11 @@ export function createManualPoolSources({game,Hooks,ledger,fromUuid,hpPools,clie
  const local=()=>started&&game.user.id===userId;
  const issuer=()=>local()&&gm(userId)&&isIssuer()===true;
  const route=(ownerId,actorUUID)=>({protocol:OWNER_TRANSPORT_PROTOCOL,operationId,driverUserId:activeGM()?.id,ownerUserId:ownerId,actorUUID});
- const provider=type=>type==='native-action'?{id:'pf2e',version:'8.5.1',sourceSHA:'d63da8312831b84905e6866b1dd3f9d93e95c1012955b0177ad2ce8ccf246157'}:{id:'xdy-pf2e-workbench',sourceSHA:WORKBENCH_SOURCE_SHA};
+ const provider=type=>type==='native-action'?{id:'pf2e',version:getBatchProvider()?.descriptor?.version===2?String(game.system?.version??''):'8.5.1',sourceSHA:getBatchProvider()?.descriptor?.baseSourceSHA256??'d63da8312831b84905e6866b1dd3f9d93e95c1012955b0177ad2ce8ccf246157'}:{id:'xdy-pf2e-workbench',sourceSHA:WORKBENCH_SOURCE_SHA};
  function providerCurrent(source){
   if(!same(source.provider,provider(source.sourceType)))return false;
-  return source.sourceType!=='native-action'||game.system?.version==='8.5.1';
+  if(source.sourceType!=='native-action')return true;
+  const descriptor=getBatchProvider()?.descriptor;return descriptor?.version===2?manualPoolBatchModel(descriptor):game.system?.version==='8.5.1';
  }
  function providerWitness(type){
   const batch=getBatchProvider();if(!manualPoolBatchModel(batch?.descriptor))return ()=>false;
@@ -92,7 +94,7 @@ export function createManualPoolSources({game,Hooks,ledger,fromUuid,hpPools,clie
   const paid=game.modules?.get('patreon-v3'),descriptor=paid?.api?.explorationManualImmunity?.descriptor;
   // The original provider saves patient metadata before its immunity writer.
   // Wait for that source snapshot, independently of the later create terminal.
-  if(paid?.active===true&&paid.version==='3.2.29'&&descriptor?.version===1&&descriptor.providerVersion==='3.2.29'&&descriptor.pf2eSourceSHA256===provider('native-action').sourceSHA&&!b)return null;
+  if(paid?.active===true&&(isPatreonSourceQualified(descriptor)||paid.version==='3.2.29'&&descriptor?.version===1&&descriptor.providerVersion==='3.2.29'&&descriptor.pf2eSourceSHA256===MANUAL_POOL_BATCH_SOURCE_SHA)&&!b)return null;
   if(c?.target?.actor)return c.target.actor===meta?.patientUUID?c.target.actor:null;
   return c?.target==null&&b?.messageId===entry.check.id&&b.useId===entry.ticket.useId&&b.actorUUID===entry.ticket.actorUUID&&b.patientUUID===meta.patientUUID&&b.targetSnapshot?.type==='patreon-single-target'&&b.targetSnapshot.actorUUID===meta.patientUUID?meta.patientUUID:null;
  }

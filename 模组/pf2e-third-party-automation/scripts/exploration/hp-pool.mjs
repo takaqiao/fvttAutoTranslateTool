@@ -1,4 +1,5 @@
 import {canonicalJSON} from './revision-codec.mjs';
+import {isManualPoolProvider} from './manual-pool-provider.mjs';
 
 export function deduplicatePoolEffects(effects) {
   const selected=new Map();
@@ -132,7 +133,7 @@ export function createHpPools({game,actorUpdateEvents}) {
   async function withManualApplication({permit,provider,validate,request,prepareForward,remoteCompletion,updateActor},patient,operation){
     updateActor??=patient;
     if(active||manual)throw Error('hp-application-busy');
-    if(!actorUpdateEvents||typeof operation!=='function'||typeof validate!=='function'||provider?.descriptor?.sourceSHA256!=='2946fa27eaf0963098f9f48ee48f777c5cf65166b56b043de9404f09813c240f'||provider.descriptor.version!==1||provider.descriptor.hpBaselineGuardVersion!==1||typeof provider.subscribe!=='function')throw Error('manual-pool-provider-unavailable');
+    if(!actorUpdateEvents||typeof operation!=='function'||typeof validate!=='function'||!isManualPoolProvider(provider)||typeof provider.subscribe!=='function')throw Error('manual-pool-provider-unavailable');
     const pool=discover(patient),master=pool.poolUUID===patient.uuid?patient:game.toolbelt?.api?.shareData?.getMasterInMemory(patient);
     if(!pool.ready||!master||pool.poolUUID!==permit.poolUUID||patient.uuid!==permit.selectedPatientUUID||pool.provider!=='pf2e-toolbelt')throw Error('manual-pool-domain-mismatch');
     const direct=pool.poolUUID===patient.uuid;

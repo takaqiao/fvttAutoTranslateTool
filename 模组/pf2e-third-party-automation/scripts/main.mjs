@@ -52,6 +52,7 @@ import {createDisarmRegrip} from './disarm-regrip.mjs';
 import {createShieldDamageAdapter} from './shield-damage-adapter.mjs';
 import {notifyNativeIWRStatus} from './native-iwr-status.mjs';
 import {verifyNativeIWRBridge} from './native-iwr-verification.mjs';
+import {verifyManualPoolProviders} from './exploration/manual-pool-provider.mjs';
 import {createRuneTransfer,registerRuneTransferRuleElement} from './rune-transfer.mjs';
 import {preserveDamageBypassOnAlter} from './native-damage-components.mjs';
 import {createMetapowerProvider,preserveMetapowerOnAlter} from './metapower/provider.mjs';
@@ -161,8 +162,11 @@ Hooks.once('ready',async()=>{
  const salubriousMessagePrivacy=createSalubriousMessagePrivacy({game,Hooks});
  const workbenchPrivacy=await loadSalubriousWorkbench({game});
  if(workbenchPrivacy.ready)salubriousMessagePrivacy.enableWorkbench(workbenchPrivacy);
- let nativeBridgeVerification=Object.freeze({ready:false,reason:'system-source-unavailable'});
- try{const response=await fetch('systems/pf2e/pf2e.mjs',{cache:'no-store',signal:AbortSignal.timeout(10000)});if(response.ok)nativeBridgeVerification=await verifyNativeIWRBridge({game,source:new Uint8Array(await response.arrayBuffer())});}catch{/* Report via the feature diagnostic; other providers still initialize. */}
+ let nativeBridgeVerification=Object.freeze({ready:false,reason:'system-source-unavailable'}),pf2eSource;
+ try{const response=await fetch('systems/pf2e/pf2e.mjs',{cache:'no-store',signal:AbortSignal.timeout(10000)});if(response.ok){pf2eSource=new Uint8Array(await response.arrayBuffer());nativeBridgeVerification=await verifyNativeIWRBridge({game,source:pf2eSource});}}catch{/* Report via the feature diagnostic; other providers still initialize. */}
+ if(pf2eSource&&game.modules.get('pf2e-toolbelt')?.active){
+  try{const response=await fetch('modules/pf2e-toolbelt/scripts/main.js',{cache:'no-store',signal:AbortSignal.timeout(10000)});if(response.ok)await verifyManualPoolProviders({game,pf2eSource,toolbeltSource:new Uint8Array(await response.arrayBuffer())});}catch{/* Missing qualification keeps only the shared-pool adapter unavailable. */}
+ }
  const shieldAdapter=createShieldDamageAdapter({game,nativeBridgeVerification,onError:report,createMessageMiddleware:salubriousMessagePrivacy.createMessageMiddleware});
  const scar=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.version==='8.5.1'?createSpiritualScarProvider({game,fromUuid,nativeAdapter:shieldAdapter,reactionRestriction,getRollContext:roll=>cycle?.getRollContext(roll),followup:createSpiritualScarFollowup({game,fromUuid,Hooks,runTargetSave:targetSaves['spiritual-scar'].run,onError:report}),onError:report}):null;
  const deflection=createTranscendentDeflection({game,fromUuid,choose,reactionRestriction,getRollContext:roll=>cycle?.getRollContext(roll),nativeBridgeAvailable:shieldAdapter.nativeBridgeAvailable,onError:report});

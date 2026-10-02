@@ -1,4 +1,5 @@
 import {canonicalJSON} from './revision-codec.mjs';
+import {isPatreonSourceQualified} from './patreon-source-qualification.mjs';
 
 const providerId='patreon-v3';
 const baseSourceSHA256='89ded325b92fa6b03dcf9257337ae2d628b3e99c987fe22cef9fff4e1837f4e9';
@@ -15,7 +16,7 @@ function sameFields(a,b){
  }catch{return false}
 }
 function supported(descriptor){
- return same(descriptor,{version:2,providerId,providerVersion:'3.2.29',baseSourceSHA256,pf2eSourceSHA256,markedCommitOwnership:'private-prepare.v1'});
+ return isPatreonSourceQualified(descriptor)||same(descriptor,{version:2,providerId,providerVersion:'3.2.29',baseSourceSHA256,pf2eSourceSHA256,markedCommitOwnership:'private-prepare.v1'});
 }
 
 export function createPatreonTimeCompletion({game,runtimeIdentity,getDriverScope,timeoutMs=10000}){

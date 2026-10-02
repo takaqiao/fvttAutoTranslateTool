@@ -1,6 +1,7 @@
 import {MODULE_ID} from './schema.mjs';
 import {canonicalJSON} from './revision-codec.mjs';
 import {canonicalItemSource} from './source-ids.mjs';
+import {isPatreonSourceQualified} from './patreon-source-qualification.mjs';
 
 const descriptor=Object.freeze({version:1,providerId:'patreon-v3',providerVersion:'3.2.29',
  baseSourceSHA256:'89ded325b92fa6b03dcf9257337ae2d628b3e99c987fe22cef9fff4e1837f4e9',
@@ -14,7 +15,8 @@ const copy=value=>JSON.parse(canonicalJSON(value));
 export function createPatreonManualImmunity({game,fromUuid}){
  const provider=()=>game.modules?.get('patreon-v3');
  const api=()=>provider()?.api?.explorationManualImmunity;
- const available=()=>provider()?.active===true&&provider().version==='3.2.29'&&game.system?.version==='8.5.1'&&same(api()?.descriptor,descriptor);
+ const available=()=>provider()?.active===true&&(isPatreonSourceQualified(api()?.descriptor)
+  ||provider().version==='3.2.29'&&game.system?.version==='8.5.1'&&same(api()?.descriptor,descriptor));
  function root(binding){
   if(!binding||!['invocationId','messageId','useId','tag','actorUUID','patientUUID','sourceUserId'].every(key=>typeof binding[key]==='string'&&binding[key])
    ||binding.tag!==`exploration-manual:${binding.useId}`||!Number.isFinite(binding.startedAt))return null;
@@ -31,7 +33,7 @@ export function createPatreonManualImmunity({game,fromUuid}){
   return message;
  }
  async function evidence(proof,activity){
-  if(!proof||!same(proof.descriptor,descriptor)||activity?.source?.type!=='native-action'||activity.kind!=='treatment'
+  if(!proof||!same(proof.descriptor,api()?.descriptor)||activity?.source?.type!=='native-action'||activity.kind!=='treatment'
    ||activity.patientUUIDs?.length!==1||activity.temporalSource?.type==='checkpoint-reservation')return null;
   const binding=proof.binding,message=root(binding);if(!message||activity.proof.useId!==binding.useId||activity.actorUUID!==binding.actorUUID
    ||binding.recordingSessionId&&activity.sessionId!==binding.recordingSessionId
@@ -74,9 +76,9 @@ export function createPatreonManualImmunity({game,fromUuid}){
   const providerAPI=api();if(!available()||typeof providerAPI.subscribe!=='function')return ()=>{};
   let active=true;
   const dispose=providerAPI.subscribe(event=>{
-   if(!active||api()!==providerAPI||!available()||!same(event?.descriptor,descriptor)||!root(event.binding)||typeof event.terminalPromise?.then!=='function')return;
+   if(!active||api()!==providerAPI||!available()||!same(event?.descriptor,providerAPI.descriptor)||!root(event.binding)||typeof event.terminalPromise?.then!=='function')return;
    event.terminalPromise.then(proof=>{
-    if(!active||api()!==providerAPI||!available()||!same(proof?.descriptor,descriptor)||!same(event.binding,proof.binding)||!root(proof.binding))return;
+    if(!active||api()!==providerAPI||!available()||!same(proof?.descriptor,providerAPI.descriptor)||!same(event.binding,proof.binding)||!root(proof.binding))return;
     try{observe(copy(proof))}catch{}
    },()=>{});
   });

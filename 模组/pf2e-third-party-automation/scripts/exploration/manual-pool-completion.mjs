@@ -2,6 +2,7 @@ import {manualPoolRequest,MANUAL_POOL_OPERATION} from './schema.mjs';
 import {canonicalJSON} from './revision-codec.mjs';
 import {createOwnerTransport,OWNER_TRANSPORT_PROTOCOL} from './owner-transport.mjs';
 import {manualHpBaseline,assertManualHpBaseline} from './hp-pool.mjs';
+import {isManualPoolProvider} from './manual-pool-provider.mjs';
 
 const copy=value=>JSON.parse(canonicalJSON(value));
 const same=(a,b)=>canonicalJSON(a)===canonicalJSON(b);
@@ -145,7 +146,7 @@ export function createManualPoolCompletion({game,ledger,fromUuid,hpPools,resolve
  }
  async function withApplication(grant,patient,operation,{updateActor=patient}={}){
   const local=grants.get(grant);if(!local||local.used||!same(local.original,grant)||typeof hpPools?.withManualApplication!=='function')throw Error('manual-pool-private-grant-required');local.used=true;
-  const provider=getProvider();if(provider?.descriptor?.sourceSHA256!=='2946fa27eaf0963098f9f48ee48f777c5cf65166b56b043de9404f09813c240f'||provider.descriptor.hpBaselineGuardVersion!==1)throw Error('manual-pool-provider-unavailable');
+  const provider=getProvider();if(!isManualPoolProvider(provider))throw Error('manual-pool-provider-unavailable');
   const source=await qualify(local.request,userId,{owner:true});
   const permit=await applicationRequest(local.request,'begin',{permit:grant},'applying');
   const {applicationNonce,state,...claimed}=permit;
@@ -159,7 +160,7 @@ export function createManualPoolCompletion({game,ledger,fromUuid,hpPools,resolve
   const ack=await applicationRequest(local.request,'terminal',{permit,...expected,master:proof.master??null},'settled');if(!same(ack,expected))throw Error('manual-pool-terminal-mismatch');return result;
  }
  return {
-  start(){if(started)return;started=true;transport=createOwnerTransport({game,onPacket,timeoutMs,onError});const provider=getProvider();if(provider?.descriptor?.sourceSHA256==='2946fa27eaf0963098f9f48ee48f777c5cf65166b56b043de9404f09813c240f')disposeProvider=provider.subscribe(onProvider)},
+  start(){if(started)return;started=true;transport=createOwnerTransport({game,onPacket,timeoutMs,onError});const provider=getProvider();if(isManualPoolProvider(provider))disposeProvider=provider.subscribe(onProvider)},
   stop(){started=false;disposeProvider?.();disposeProvider=null;for(const scope of applications.values())scope.rejectMaster(Error('manual-pool-stopped-unknown'));applications.clear();transport?.dispose();transport=null},
   claim:input=>send(input,false),lookup:input=>send(input,true),withApplication
  };

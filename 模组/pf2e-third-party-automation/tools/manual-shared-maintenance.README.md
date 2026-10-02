@@ -1,5 +1,7 @@
 # Manual shared-pool maintenance
 
+This is the legacy, exact-baseline manual tool. The default maintenance path from 0.9.32 is the [automatic server startup entry](automatic-source-patches/README.md). Its source matching does not require these version/hash gates or a private preparation plan. Use the procedure below only when deliberately working with the historical frozen pair.
+
 This command prepares, checks, installs and restores the paired PF2e and Toolbelt source adapters. It reuses the existing generators. It changes only `systems/pf2e/pf2e.mjs` and `modules/pf2e-toolbelt/scripts/main.js` beneath the supplied Foundry Data directory.
 
 The supported pair is PF2e 8.5.1 with the native IWR bridge baseline and Toolbelt 3.56.5. Both package IDs and versions must match. Accepted SHA256 values are:
@@ -31,7 +33,7 @@ Before either target changes, the command verifies the complete plan, current to
 
 The two writes are sequential. An IO failure can leave a partial installation. The command keeps the originals, candidates and start record, and attempts to save a separate `failed-*.json` with the observed hashes. It does not silently roll back or retry. After reviewing the evidence and current pair, restore the same plan; if either file has unknown bytes, preserve it and resolve that edit before proceeding.
 
-Retain the existing managed IWR startup configuration. Its rebuild path must regenerate this exact PF2e output. Restart through the established service procedure and refresh all clients after maintenance; this tool does not perform or validate those operations. Retire the pair only after upstream interfaces provide and verify the same original source, patient, receiver selection and OWNER/GM completion evidence.
+When maintaining this historical pair, use a startup entry that preserves both adapters. The current automatic entry recognizes it and skips writes while its original runtime contract remains usable. Restart through the established service procedure and refresh all clients after maintenance; this manual tool does not perform or validate those operations. Retire the pair only after upstream interfaces provide and verify the same original source, patient, receiver selection and OWNER/GM completion evidence.
 
 The isolated regression uses fixed authorized originals supplied explicitly:
 
