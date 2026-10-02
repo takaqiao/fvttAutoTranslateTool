@@ -84,7 +84,8 @@ export async function executeActorAction(actor,action,payload={},user=game.user,
    const now=game.time.worldTime,last=actor.flags?.[MODULE_ID]?.restAt;
    if(Number.isFinite(last)&&now-last<86400)throw Error('记录显示24小时内已经获得休息效果。时间记录有误时由GM重置。');
    const message=game.messages.get(payload.messageId),context=message?.flags?.pf2e?.context;
-   if(message?.speaker.actor!==actor.id||!context?.options?.includes('action:third-party-circadian')||context.dc?.value!==levelDC(actor.level)||context.type!=='skill-check')throw Error('未找到该角色的有效昼夜规律师生存检定。');
+   const sourceToken=message?.speaker?.token?game.scenes?.get(message.speaker.scene)?.tokens?.get(message.speaker.token):null;
+   if(message?.speaker?.actor!==actor.id||message.actor?.uuid!==actor.uuid||message.speaker.token&&sourceToken?.actor?.uuid!==actor.uuid||!context?.options?.includes('action:third-party-circadian')||context.dc?.value!==levelDC(actor.level)||context.type!=='skill-check')throw Error('未找到该角色的有效昼夜规律师生存检定。');
    if(!context.domains?.includes('survival')||(!user.isGM&&message.author?.id!==user.id&&!message.author?.isGM))throw Error('必须使用当前操作者或执行GM的生存检定。');
    if(message.flags?.[MODULE_ID]?.restApplied)throw Error('此检定已经结算过，不能重复使用。');
    const degree=message.rolls[0]?.options.degreeOfSuccess;
