@@ -1,6 +1,7 @@
 import {recoveryProposals,checkpointDeclaration,scheduleCheckpointActivities} from './policy.mjs';
 import {extensionPatients} from './treatment.mjs';
-import {clone,normalizeNativeOwnerMap,checkpointBinding,sameCheckpoint,manualSourceIntent,activityCheckpointBinding,sameActivityCheckpoint} from './schema.mjs';
+import {clone,normalizeNativeOwnerMap,captureRecoveryPreferences,checkpointBinding,sameCheckpoint,manualSourceIntent,activityCheckpointBinding,sameActivityCheckpoint} from './schema.mjs';
+import {resolveRecoveryGoals} from './recovery-goals.mjs';
 import {WORKBENCH_SOURCE_SHA} from './manual-events.mjs';
 export function createCoordinator({ledger,capabilities,providers,clock,policy,isAuthority,now=()=>globalThis.game.time.worldTime,ownerOperations,onChange=()=>{},game=globalThis.game,fromUuid=globalThis.fromUuid,getHpPool,manualEvents}){
  const byId=new Map(providers.map(p=>[p.id,p])),locks=new Map(),contexts=new Map(),runners=new Map(),leases=new Map(),generations=new Map(),checkpointRequests=new Map();
@@ -42,6 +43,21 @@ export function createCoordinator({ledger,capabilities,providers,clock,policy,is
    }
   }};
   validate();return validate;
+ }
+ async function recoveryGoalGuard(recoveryGoals,eligible){
+  const documents=new Map();
+  for(const uuid of new Set(recoveryGoals.patientTargets.flatMap(t=>[t.patientUUID,t.poolUUID]))){if(typeof fromUuid!=='function')throw Error('recovery-document-unavailable');documents.set(uuid,await fromUuid(uuid))}
+  const canonical=uuid=>{
+   const actor=documents.get(uuid);if(!actor||actor.uuid!==uuid)throw Error('recovery-document-changed');
+   const parts=uuid.split('.'),current=parts[0]==='Actor'?game?.actors?.get(parts[1]):game?.scenes?.get(parts[1])?.tokens?.get(parts[3])?.actor;
+   if(current!==actor)throw Error('recovery-document-changed');return actor;
+  };
+  const guard=()=>{check();eligible();for(const target of recoveryGoals.patientTargets){
+   const patient=canonical(target.patientUUID),master=canonical(target.poolUUID),pool=getHpPool?.(patient);
+   if(!pool?.ready||pool.poolUUID!==target.poolUUID)throw Error('recovery-pool-changed');
+   if(master.system?.attributes?.hp?.max!==target.basisMaxHP)throw Error('recovery-max-changed');
+  }return true};
+  guard();return guard;
  }
  function accept(id,session,generation){
   check();if(!atomic)return;
@@ -238,14 +254,20 @@ export function createCoordinator({ledger,capabilities,providers,clock,policy,is
   finally{if(locks.get(id)===lock)locks.delete(id)}
  }
  async function drive(id){const scope=leases.get(id);if(atomic&&!scope)return;if(runners.has(id)&&runners.get(id).scope===scope)return;const runner={scope};runners.set(id,runner);try{while(isAuthority()){await owned(id,scope);const result=await step(id);if(await consumeCheckpointRequest(id,runner,result)||result.status!=='running')break;await Promise.resolve()}}finally{if(runners.get(id)===runner){runners.delete(id);cancelCheckpointRequest(id,'activity-checkpoint-driver-ended')}}}
- async function start(config){check();const nativeOwnerByActor=normalizeNativeOwnerMap(config.nativeOwnerByActor,config.actorUUIDs,{manual:config.manual===true});config={...clone(config),nativeOwnerByActor};const actors=await capabilities.snapshot(config.actorUUIDs);check();const at=now();const goals=config.goalsByPool??[...new Map(actors.map(a=>[a.pool.poolUUID,{poolUUID:a.pool.poolUUID,targetHP:a.hp.max}])).values()];
+ async function start(config){check();const recovery=captureRecoveryPreferences(config),nativeOwnerByActor=normalizeNativeOwnerMap(config.nativeOwnerByActor,config.actorUUIDs,{manual:config.manual===true});if('recoveryGoals' in config)throw Error('invalid-recovery-goals');config={...clone(config),nativeOwnerByActor};delete config.recovery;let actors=await capabilities.snapshot(config.actorUUIDs);check();
   if(config.waitForManualFirstRound&&!config.manual&&(!atomic||(config.budgetSeconds??7200)<600))throw Error('manual-checkpoint-unavailable');
   if(config.waitForActivityFirstRound&&!config.manual&&(!atomic||config.waitForManualFirstRound))throw Error('activity-checkpoint-start-choice-conflict');
-  if(!config.manual){const all=await ledger.all();check();const ids=new Set(config.actorUUIDs),pools=new Set(actors.map(a=>a.pool.poolUUID)),reviewed=row=>!atomic&&row.review&&all.sessions[row.sessionId]?.status==='closed';if(Object.values(all.sessions).some(s=>s.status==='running'))throw Error('recovery-session-already-running');if(Object.values(all.clocks).some(c=>c.state!=='confirmed'&&!reviewed(c))||Object.values(all.activities).some(a=>(!a.source?.manual||a.temporalSource?.type==='checkpoint-reservation')&&!reviewed(a)&&['uncertain','awaiting-evidence','completing','started'].includes(a.state)&&(ids.has(a.actorUUID)||a.patientUUIDs.some(u=>ids.has(u))||a.hpPoolUUIDs.some(u=>pools.has(u)))))throw Error('unresolved-evidence-no-replay')}
-  if(!actors.length||goals.some(g=>!actors.some(a=>a.pool.poolUUID===g.poolUUID&&Number.isFinite(g.targetHP)&&g.targetHP>=0&&g.targetHP<=a.hp.max)))throw Error('invalid-recovery-goals');
+  let prior;
+  const available=all=>{const ids=new Set(config.actorUUIDs),pools=new Set(actors.map(a=>a.pool.poolUUID)),reviewed=row=>!atomic&&row.review&&all.sessions[row.sessionId]?.status==='closed';if(Object.values(all.sessions).some(s=>s.status==='running'))throw Error('recovery-session-already-running');if(Object.values(all.clocks).some(c=>c.state!=='confirmed'&&!reviewed(c))||Object.values(all.activities).some(a=>(!a.source?.manual||a.temporalSource?.type==='checkpoint-reservation')&&!reviewed(a)&&['uncertain','awaiting-evidence','completing','started'].includes(a.state)&&(ids.has(a.actorUUID)||a.patientUUIDs.some(u=>ids.has(u))||a.hpPoolUUIDs.some(u=>pools.has(u)))))throw Error('unresolved-evidence-no-replay')};
+  if(!config.manual){prior=await ledger.all();check();available(prior)}
   const eligible=await nativeOwnerEligibility(config);eligible();
+  let recoveryGoals,guard;
+  if(recovery!==undefined){actors=await capabilities.snapshot(config.actorUUIDs);check();if(prior)available(prior);const resolved=resolveRecoveryGoals(actors,recovery);recoveryGoals=resolved.recoveryGoals;config.goalsByPool=resolved.goalsByPool;guard=await recoveryGoalGuard(recoveryGoals,eligible)}
+  const at=now(),goals=config.goalsByPool??[...new Map(actors.map(a=>[a.pool.poolUUID,{poolUUID:a.pool.poolUUID,targetHP:a.hp.max}])).values()];
+  if(!actors.length||goals.some(g=>!actors.some(a=>a.pool.poolUUID===g.poolUUID&&Number.isFinite(g.targetHP)&&g.targetHP>=0&&g.targetHP<=a.hp.max)))throw Error('invalid-recovery-goals');
+  eligible();
   const id=config.id??crypto.randomUUID(),generation=generations.get(id)??0;
-  const s=await ledger.createSession({...config,id,actorUUIDs:[...new Set(config.actorUUIDs)],startedAt:at,cursorAt:at,budgetEndsAt:at+Math.max(0,config.budgetSeconds??7200),maxActivities:Math.min(100,Math.max(1,config.maxActivities??100)),goalsByPool:goals,status:config.manual?'recording':'running',assumptions:config.assumptions??['different-actors-may-overlap']});
+  const s=await ledger.createSession({...config,id,actorUUIDs:[...new Set(config.actorUUIDs)],startedAt:at,cursorAt:at,budgetEndsAt:at+Math.max(0,config.budgetSeconds??7200),maxActivities:Math.min(100,Math.max(1,config.maxActivities??100)),goalsByPool:goals,...recoveryGoals?{recoveryGoals}:{},status:config.manual?'recording':'running',assumptions:config.assumptions??['different-actors-may-overlap']},{guard});
   if(!config.manual)accept(id,s,generation);
   if(config.waitForManualFirstRound&&!config.manual){await openManualCheckpoint(id);Object.assign(s,await ledger.getSession(id))}
   if(config.waitForActivityFirstRound&&!config.manual){await openActivityCheckpoint(id);Object.assign(s,await ledger.getSession(id))}

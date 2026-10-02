@@ -1,6 +1,15 @@
+import {normalizeRecoveryPreferences,validateRecoveryGoals} from './recovery-goals.mjs';
 export const MODULE_ID='pf2e-third-party-automation';
 export const emptyLedger=()=>({sessions:{},activities:{},clocks:{}});
 export const clone=value=>structuredClone(value);
+export function captureRecoveryPreferences(config){
+  const field=Object.getOwnPropertyDescriptor(config,'recovery');
+  if(!field){if('recovery' in config)throw Error('invalid-recovery-preferences');return undefined}
+  if(!field.enumerable||!Object.hasOwn(field,'value'))throw Error('invalid-recovery-preferences');
+  const preferences=normalizeRecoveryPreferences(field.value);
+  if(config.actorUUIDs!==undefined&&(!Array.isArray(config.actorUUIDs)||Object.keys(preferences.targetIntentsByActor).some(uuid=>!config.actorUUIDs.includes(uuid))))throw Error('invalid-recovery-preferences');
+  return preferences;
+}
 export function finite(value,label) {if(!Number.isFinite(value))throw Error(`invalid-${label}`);return value}
 export function id(value,label='id') {if(typeof value!=='string'||!value.trim()||['__proto__','constructor','prototype'].includes(value))throw Error(`invalid-${label}`);return value}
 export const MANUAL_POOL_OPERATION='manual-pool-application';
@@ -66,7 +75,9 @@ export function createActivity(input) {
 }
 export function validateSession(input) {
   const nativeOwnerByActor=normalizeNativeOwnerMap(input.nativeOwnerByActor,input.actorUUIDs,{manual:input.manual===true});
-  const s={...clone(input),nativeOwnerByActor};id(s.id);finite(s.startedAt,'start');finite(s.budgetEndsAt,'budget');
+  let recoveryGoals;
+  if('recoveryGoals' in input){const field=Object.getOwnPropertyDescriptor(input,'recoveryGoals');if(!field?.enumerable||!Object.hasOwn(field,'value'))throw Error('invalid-recovery-goals');recoveryGoals=validateRecoveryGoals(field.value,input.actorUUIDs,input.goalsByPool)}
+  const s={...clone(input),nativeOwnerByActor,...recoveryGoals?{recoveryGoals}:{}};id(s.id);finite(s.startedAt,'start');finite(s.budgetEndsAt,'budget');
   if(s.budgetEndsAt<s.startedAt)throw Error('negative-duration');
   s.activityIds??=[];s.goalsByPool??=[];s.assumptions??=[];s.status??='running';s.stopReason??=null;
   return s;

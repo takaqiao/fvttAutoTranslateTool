@@ -32,6 +32,10 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
     if(typeof guard!=='function')throw Error('synchronous-checkpoint-guard-required');
     if(guard()!==true)throw Error('activity-checkpoint-changed');
   }
+  function sessionGuard(guard){
+    if(typeof guard!=='function')throw Error('synchronous-session-guard-required');
+    if(guard()!==true)throw Error('recovery-goals-changed');
+  }
   function interruptDeclarations(state,session,reason){
     const checkpoint=session.activityCheckpoint;if(!checkpoint||['settled','interrupted'].includes(checkpoint.phase))return;
     checkpoint.phase='interrupted';
@@ -304,7 +308,7 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
       for(const c of Object.values(s.clocks).filter(clock=>ids.has(clock.sessionId)&&clock.state==='started')){c.state='uncertain';c.reason='legacy-migration-quarantine'}
       return {quarantinedSessionIds};
     }),
-    createSession:async input=>{if('activityCheckpointHistory' in input)throw Error('activity-checkpoint-open-required');if('activityCheckpoint' in input)throw Error('activity-checkpoint-open-required');if('manualCheckpoint' in input)throw Error('manual-checkpoint-open-required');if('manualPoolIssuer' in input)throw Error('manual-pool-issuer-required');const captured=validateSession(input),leaseNonce=atomic?crypto.randomUUID():null;return mutate((s,context,caller)=>{const v=clone(captured);if(s.sessions[v.id])throw Error('duplicate-session');if(atomic){v.protocol=protocol(context);if(v.manual===true)v.manualPoolIssuer={...caller};if(automatic(v)){if(v.status!=='running')throw Error('invalid-initial-session');recoveryAvailable(s,v);v.driver={...caller,leaseNonce}}}s.sessions[v.id]=v;return v})},
+    createSession:async (input,{guard}={})=>{if('activityCheckpointHistory' in input)throw Error('activity-checkpoint-open-required');if('activityCheckpoint' in input)throw Error('activity-checkpoint-open-required');if('manualCheckpoint' in input)throw Error('manual-checkpoint-open-required');if('manualPoolIssuer' in input)throw Error('manual-pool-issuer-required');const captured=validateSession(input),leaseNonce=atomic?crypto.randomUUID():null;if(guard!==undefined)sessionGuard(guard);return mutate((s,context,caller)=>{if(guard!==undefined)sessionGuard(guard);const v=clone(captured);if(s.sessions[v.id])throw Error('duplicate-session');if(atomic){v.protocol=protocol(context);if(v.manual===true)v.manualPoolIssuer={...caller};if(automatic(v)){if(v.status!=='running')throw Error('invalid-initial-session');recoveryAvailable(s,v);v.driver={...caller,leaseNonce}}}s.sessions[v.id]=v;return v},guard===undefined?undefined:()=>sessionGuard(guard))},
     openActivityCheckpoint:(input,{leaseNonce,guard}={})=>{
       const binding=activityCheckpointBinding(input);checkpointGuard(guard);
       return mutate((state,context,caller)=>{
@@ -345,7 +349,7 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
     },
     getSession:key=>get('sessions',key),getActivity:key=>get('activities',key),getClockCommit:key=>get('clocks',key),
     updateSession:(key,patch,options={})=>mutate((s,context,caller)=>{
-      const v=s.sessions[key];if(!v)throw Error('missing-session');if(['id','startedAt','activityIds','driver','protocol','manual','manualPoolIssuer','nativeOwnerByActor','activityCheckpoint','activityCheckpointHistory'].some(k=>k in patch))throw Error('immutable-session');
+      const v=s.sessions[key];if(!v)throw Error('missing-session');if(['id','startedAt','activityIds','goalsByPool','recoveryGoals','driver','protocol','manual','manualPoolIssuer','nativeOwnerByActor','activityCheckpoint','activityCheckpointHistory'].some(k=>k in patch))throw Error('immutable-session');
       if(options.expectedStatus!==undefined&&v.status!==options.expectedStatus)throw Error('session-state-conflict');
       if('manualCheckpoint' in patch){
         if(v.activityCheckpoint&&!['settled','interrupted'].includes(v.activityCheckpoint.phase))throw Error('activity-checkpoint-active');
