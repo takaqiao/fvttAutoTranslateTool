@@ -10,7 +10,7 @@ export function isCurrentDisruptToken(token,game){
   token.object?.document===token);
 }
 
-export const hasDisruptPrey=actor=>values(actor?.items).some(item=>item.type==='feat'&&getSourceId(item)===DISRUPT_PREY_SOURCE);
+export const hasDisruptPrey=actor=>values(actor?.items).some(item=>item.type==='feat'&&getSourceId(item)===DISRUPT_PREY_SOURCE&&!item.suppressed&&!item.isSuppressed&&!item.system?.suppressed);
 
 export function isDisruptPreyTarget(actor,target,game){
  return !!(actor?.uuid&&isCurrentDisruptToken(target,game)&&target.actor.uuid!==actor.uuid&&

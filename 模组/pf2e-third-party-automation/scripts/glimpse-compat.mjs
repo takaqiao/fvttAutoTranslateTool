@@ -20,6 +20,10 @@ export function createGlimpseCompat({game,fromUuid=globalThis.fromUuid,api=()=>g
  const versions=()=>game.system?.id==='pf2e'&&game.system.version==='8.5.1'&&game.modules.get(ENGINE)?.active&&game.modules.get('pf2e-trigger-trove')?.active;
  const safeSetting=()=>{const s=setting();if(s.sources?.some(g=>g.id===GLIMPSE_TRIGGER_ID))throw Error('救赎瞥视模块图已被世界配置覆盖。');return s};
  const ready=()=>glimpseWorld(game)&&initialized&&versions()&&setting().enabled?.includes(GLIMPSE_TRIGGER_ID)&&!setting().disabled?.includes(GLIMPSE_TRIGGER_ID)&&!setting().sources?.some(g=>g.id===GLIMPSE_TRIGGER_ID)&&(!isActiveGM(game)||probed);
+ const currentScope=scope=>{
+  const user=scope.user,enemy=scope.enemy,actor=scope.actor,scene=scope.scene;
+  return isActiveGM(game)&&game.user===user&&game.users.activeGM===user&&game.users.get(user.id)===user&&user.active&&user.isGM&&ready()&&enemy?.uuid===scope.tokenUuid&&actor?.uuid===scope.actorUuid&&enemy.actor===actor&&enemy.parent===scene&&game.scenes.get(scene?.id)===scene&&scene.tokens.get(enemy.id)===enemy&&(actor.isToken?actor.token===enemy:game.actors.get(actor.id)===actor);
+ };
  function register({Hooks}){
   if(registered)return;registered=true;hooksApi=Hooks;
   Hooks.once('triggerEngine.registerNodes',registerNodes=>{
@@ -31,8 +35,8 @@ export function createGlimpseCompat({game,fromUuid=globalThis.fromUuid,api=()=>g
     async _execute(args){
      const scope=scopes.get(args?.key);if(!scope||scope.used||!isActiveGM(game))return true;scope.used=true;
      if(scope.probe){scope.done=true;return true}
-     if(!await scope.authorize())return true;
-     this.setOutputValue('target',{actor:scope.enemy.actor,token:scope.enemy});this.setOutputValue('slug',scope.slug);
+     if(!currentScope(scope)||await scope.authorize()!==true||scopes.get(args.key)!==scope||!currentScope(scope))return true;
+     this.setOutputValue('target',{actor:scope.actor,token:scope.enemy});this.setOutputValue('slug',scope.slug);
      await this.executeNext('out');scope.done=true;return true;
     }
    }
@@ -70,8 +74,9 @@ export function createGlimpseCompat({game,fromUuid=globalThis.fromUuid,api=()=>g
  async function apply({nonce,enemy,expiry,authorize}){
   if(!ready()||!isActiveGM(game)||!/^[A-Za-z0-9-]{1,80}$/.test(nonce))throw Error('救赎瞥视后续未就绪。');
   const slug=slugFor(nonce);if(Array.from(enemy.actor.items.values()).some(i=>i.system?.slug===slug))throw Error('本次救赎瞥视效果已存在，不能重复执行。');
-  await dispatch({enemy,slug,authorize});
-  if(!isActiveGM(game))throw Error('后续期间主GM已改变。');
+  const scope={enemy,slug,authorize,actor:enemy.actor,scene:enemy.parent,tokenUuid:enemy.uuid,actorUuid:enemy.actor.uuid,user:game.user};
+  await dispatch(scope);
+  if(!currentScope(scope))throw Error('后续期间原目标文档或主GM已改变。');
   const effects=exactEffects(enemy,slug);if(!effects.length)throw Error('没有本次原生衰弱效果的确切回执；不能重试。');
   if(effects.length>1)await enemy.actor.deleteEmbeddedDocuments('Item',effects.slice(1).map(i=>i.id));
   await lifecycle.arm({effect:effects[0],expiry,nonce});

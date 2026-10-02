@@ -5,7 +5,7 @@ export const TREAT_WOUNDS_IMMUNITY='Compendium.pf2e.feat-effects.Item.Lb4q2bBAgx
 export const sourceId=item=>item?.sourceId??item?._stats?.compendiumSource??item?.flags?.core?.sourceId;
 export const values=collection=>Array.from(collection?.values?.()??collection??[]);
 export const kissState=doc=>doc?.flags?.[MODULE_ID]?.salubriousKiss??{};
-export const salubriousFeat=actor=>values(actor?.items).find(i=>i.type==='feat'&&sourceId(i)===SALUBRIOUS_SOURCE&&!i.isSuppressed);
+export const salubriousFeat=actor=>values(actor?.items).find(i=>i.type==='feat'&&sourceId(i)===SALUBRIOUS_SOURCE&&!i.suppressed&&!i.isSuppressed&&!i.system?.suppressed);
 const unsupported=new Set(['risky-surgery','mortal-healing','magic-hands','medic-dedication','continual-recovery','ward-medic']);
 export function treatmentTiers(actor,{rankPolicy='selected-skill'}={}){
  if(!salubriousFeat(actor))throw Error('没有当前仙露三吻专长。');
