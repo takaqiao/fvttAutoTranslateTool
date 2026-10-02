@@ -2,6 +2,7 @@ import {test} from 'node:test';import assert from 'node:assert/strict';
 import {classifyResult,createNativeTreatment,medicStackingEffect} from '../../scripts/exploration/native-treatment.mjs';
 import {createSalubriousCheckScope} from '../../scripts/salubrious-kiss-check-scope.mjs';
 import {readFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
 test('verified native context without action field enters once and copied nonce cannot enter',async()=>{
   const fixture=JSON.parse(await readFile(new URL('./fixtures/native-treatment-contract.json',import.meta.url)));
   const ctx={validate:()=>{}},healer={},activity={id:'A1',options:{skill:'medicine',rank:'trained'}};
@@ -25,20 +26,20 @@ function fixture(outcome='criticalSuccess',risky=true,privateRoll=false,template
   const hooks=new Map();let seq=0;const Hooks={on:(name,fn)=>{const id=++seq;hooks.set(id,{name,fn});return id},off:(name,id)=>hooks.delete(id)};
   const fire=(name,...args)=>{for(const h of hooks.values())if(h.name===name)h.fn(...args)};
   const messages=new Map(),healer={uuid:'Actor.H',id:'H',items:[{type:'feat',slug:'risky-surgery'}]},patient={uuid:'Actor.P',id:'P',isOwner:true,createEmbeddedDocuments:async(type,list)=>{assert.equal(list[0].system.duration.value,50);return [{uuid:'Actor.P.Item.Immunity'}]}};
-  patient.getSelfRollOptions=()=>[];patient.getContextualClone=()=>({...patient});
+  patient.getSelfRollOptions=()=>[];patient.getContextualClone=()=>({...patient});const patients=new Map([[patient.uuid,patient]]),outcomesByPatient=new Map();
   let release;const deferred=new Promise(r=>release=r);let called=0;const stages=[];
   const game={user:{id:'G'},time:{worldTime:600},messages,pf2e:{actions:{get:()=>({use:async options=>{
-    called++;const marker=options.rollOptions[0];const check={id:'C',actor:healer,author:{id:'G'},blind:privateRoll,whisper:privateRoll?['G']:[],flags:{pf2e:{context:{action:'treat-wounds',options:[marker],outcome},modifiers:risky?[{slug:'risky-surgery',enabled:true}]:[]}},rolls:[{total:20}]};messages.set('C',check);
-    deferred.then(()=>{let i=0;for(const roll of [risky?dice('{1d8[slashing]}',5):null,outcome==='failure'?null:dice(outcome==='criticalFailure'?'{(1d8)}':'{(4d8)[healing]}',outcome==='criticalFailure'?3:19)].filter(Boolean)){
-      const m={id:`D${++i}`,actor:healer,author:{id:'G'},flags:{pf2e:{origin:{messageId:'C'},context:{options:[marker],outcome}}},rolls:[roll]};fire('preCreateChatMessage',m,m);messages.set(m.id,m);fire('createChatMessage',m);
-    }});return [{actor:healer,message:check,outcome,roll:check.rolls[0]}];
+    called++;const marker=options.rollOptions[0],actualOutcome=outcomesByPatient.get(options.target.uuid)??outcome;const check={id:called===1?'C':`C${called}`,actor:healer,author:{id:'G'},blind:privateRoll,whisper:privateRoll?['G']:[],flags:{pf2e:{context:{action:'treat-wounds',options:[marker],outcome:actualOutcome},modifiers:risky?[{slug:'risky-surgery',enabled:true}]:[]}},rolls:[{total:20}]};messages.set(check.id,check);
+    deferred.then(()=>{let i=0;for(const roll of [risky?dice('{1d8[slashing]}',5):null,actualOutcome==='failure'?null:dice(actualOutcome==='criticalFailure'?'{(1d8)}':'{(4d8)[healing]}',actualOutcome==='criticalFailure'?3:19)].filter(Boolean)){
+      const m={id:check.id==='C'?`D${++i}`:`${check.id}D${++i}`,actor:healer,author:{id:'G'},flags:{pf2e:{origin:{messageId:check.id},context:{options:[marker],outcome:actualOutcome}}},rolls:[roll]};fire('preCreateChatMessage',m,m);messages.set(m.id,m);fire('createChatMessage',m);
+    }});return [{actor:healer,message:check,outcome:actualOutcome,roll:check.rolls[0]}];
   }})}}};
   game.pf2e.DamageRoll=class {constructor(formula){this.formula=formula}async evaluate(){Object.assign(this,dice(this.formula,5));return this}};
-  const native=createNativeTreatment({game,Hooks,createMessage:async data=>{const m={...data,id:'CompatCut',actor:healer,rolls:[dice('{1d8[slashing]}',5)]};fire('preCreateChatMessage',m,m);messages.set(m.id,m);fire('createChatMessage',m);return m},fromUuid:async id=>{if(secondPatientFails&&id==='Actor.Q')throw Error('patient-disappeared');return id.startsWith('Compendium.')?(templateAvailable?{toObject:()=>({type:'effect',system:{}})}:null):id===healer.uuid?healer:patient},ownerOperations:{isActivityContext:(ctx,id)=>ctx.id===id},checkScope:{runExploration:async(s,op)=>op()},damageGuard:{authorizeExploration:async()=>()=>{}},hpPools:{withNativeApplication:async(a,p,op)=>({result:await op(),poolReceipt:{before:{value:50},after:{value:73}}})},apply:async request=>{
-    stages.push(request.stage);const m={id:`R${stages.length}`,author:{id:'G'},speaker:{actor:'P'},flags:{pf2e:{context:{type:'damage-taken',options:[request.source,request.application]},appliedDamage:null}}};fire('preCreateChatMessage',m,m);messages.set(m.id,m);fire('createChatMessage',m);return patient
+  const native=createNativeTreatment({game,Hooks,createMessage:async data=>{const m={...data,id:'CompatCut',actor:healer,rolls:[dice('{1d8[slashing]}',5)]};fire('preCreateChatMessage',m,m);messages.set(m.id,m);fire('createChatMessage',m);return m},fromUuid:async id=>{if(secondPatientFails&&id==='Actor.Q')throw Error('patient-disappeared');return id.startsWith('Compendium.')?(templateAvailable?{toObject:()=>({type:'effect',system:{}})}:null):id===healer.uuid?healer:patients.get(id)??patient},ownerOperations:{isActivityContext:(ctx,id)=>ctx.id===id},checkScope:{runExploration:async(s,op)=>op()},damageGuard:{authorizeExploration:async()=>()=>{}},hpPools:{withNativeApplication:async(a,p,op)=>({result:await op(),poolReceipt:{before:{value:50},after:{value:73}}})},apply:async request=>{
+    stages.push(request.stage);const m={id:`R${stages.length}`,author:{id:'G'},speaker:{actor:request.patient.id},flags:{pf2e:{context:{type:'damage-taken',options:[request.source,request.application]},appliedDamage:null}}};fire('preCreateChatMessage',m,m);messages.set(m.id,m);fire('createChatMessage',m);return request.patient
   },timeoutMs:150});
   const activity={id:'A',actorUUID:'Actor.H',patientUUIDs:['Actor.P'],startedAt:0,endsAt:600,options:{skill:'medicine',rank:'trained',riskySurgery:risky}};
-  return {native,activity,release,stages,get called(){return called},game};
+  return {native,activity,release,stages,get called(){return called},game,patients,outcomesByPatient};
 }
 test('native use return waits delayed persistent results; surgery is applied first',async()=>{
   const f=fixture();let done=false;const result=f.native.run(f.activity,{id:'A'}).then(r=>{done=true;return r});await new Promise(r=>setImmediate(r));assert.equal(done,false);f.release();
@@ -88,4 +89,82 @@ test('actual PF2e stacking function prevents Medic and Robust Health duplicate c
     const mods=[...rules.map(r=>({type:r.type,modifier:r.value,ignored:false})),{type:'circumstance',modifier:robust,ignored:false}];
     assert.equal(24+nativeStack(mods),expected);
   }
+});
+
+let nativeConditionSource;
+async function woundedPatient(uuid,{count=1,locked=false,deleteGate}={}){
+  nativeConditionSource??=readFile(process.env.PF2E_NATIVE_BUNDLE??'C:/Users/Taka/Desktop/fvtt/tmp/fortress-gap-audit-20260925/code/systems/pf2e/pf2e.mjs').then(bytes=>{
+    assert.equal(createHash('sha256').update(bytes).digest('hex'),'d63da8312831b84905e6866b1dd3f9d93e95c1012955b0177ad2ce8ccf246157');
+    const source=bytes.toString('utf8'),decrease=source.indexOf('\n\tasync decreaseCondition(e, { forceRemove: t } = { forceRemove: !1 }) {');
+    const get=source.lastIndexOf('\n\tgetCondition(',decrease),has=source.indexOf('\n\thasCondition(',get),end=source.indexOf('\n\tasync increaseCondition(',decrease);
+    assert.ok(get>0&&has>get&&decrease>has&&end>decrease);
+    return `return {${source.slice(get,has)},${source.slice(has,decrease)},${source.slice(decrease,end)}}`;
+  });
+  const conditions=Array.from({length:count},(_,index)=>({id:`W${index+1}`,key:'wounded',slug:'wounded',active:true,isLocked:locked,value:3,_source:{system:{value:{value:3}}}}));
+  conditions.hasType=name=>conditions.some(condition=>condition.slug===name);
+  const calls={decreases:[],decrements:[],deletions:[]};
+  const game={pf2e:{ConditionManager:{updateConditionValue:async(id,actor,value)=>{
+    calls.decrements.push({id,value});assert.equal(actor,patient);const condition=conditions.find(item=>item.id===id);condition.value=condition._source.system.value.value=value;
+  }}}};
+  const methods=Function('game',await nativeConditionSource)(game);
+  const patient={uuid,id:uuid.split('.').at(-1),isOwner:true,conditions,calls,getCondition:methods.getCondition,hasCondition:methods.hasCondition,
+    decreaseCondition:async function(name,options){calls.decreases.push({name,options});return methods.decreaseCondition.call(this,name,options)},
+    deleteEmbeddedDocuments:async(type,ids)=>{
+      assert.equal(type,'Item');assert.equal(ids.length,1);calls.deletions.push([...ids]);
+      if(deleteGate)await deleteGate;
+      const index=conditions.findIndex(condition=>condition.id===ids[0]);return index<0||conditions[index].isLocked?[]:conditions.splice(index,1);
+    },
+    createEmbeddedDocuments:async(type,list)=>{assert.equal(type,'Item');assert.equal(list.length,1);return [{uuid:`${uuid}.Item.Immunity`}]},
+    getSelfRollOptions:()=>[]};
+  patient.getContextualClone=()=>({...patient});return patient;
+}
+
+test('the pinned native non-force branch decrements wounded 3 rather than removing it',async()=>{
+  const patient=await woundedPatient('Actor.P');await patient.decreaseCondition('wounded',{forceRemove:false});
+  assert.equal(patient.hasCondition('wounded'),true);assert.equal(patient.getCondition('wounded').value,2);
+  assert.deepEqual(patient.calls.decrements,[{id:'W1',value:2}]);assert.deepEqual(patient.calls.deletions,[]);
+});
+
+test('successful treatment awaits the original wounded deletion before confirmation',async()=>{
+  let releaseDelete;const deleteGate=new Promise(resolve=>releaseDelete=resolve),f=fixture('success',false),patient=await woundedPatient('Actor.P',{deleteGate});f.patients.set(patient.uuid,patient);
+  let settled=false;const pending=f.native.run(f.activity,{id:'A'});pending.then(()=>settled=true,()=>settled=true);f.release();
+  try{
+    await new Promise(resolve=>setImmediate(resolve));assert.equal(settled,false);assert.equal(patient.hasCondition('wounded'),true);
+    assert.deepEqual(patient.calls.decreases,[{name:'wounded',options:{forceRemove:true}}]);assert.deepEqual(patient.calls.deletions,[['W1']]);
+  }finally{releaseDelete()}
+  assert.equal((await pending).status,'confirmed');assert.equal(patient.hasCondition('wounded'),false);assert.deepEqual(patient.calls.decrements,[]);assert.equal(f.called,1);
+});
+
+for(const outcome of ['success','criticalSuccess'])test(`${outcome} removes wounded 3 once under the default completion policy`,async()=>{
+  const f=fixture(outcome,false),patient=await woundedPatient('Actor.P');f.patients.set(patient.uuid,patient);
+  const pending=f.native.run(f.activity,{id:'A'});f.release();const result=await pending;
+  assert.equal(result.status,'confirmed');assert.equal(patient.hasCondition('wounded'),false);
+  assert.deepEqual(patient.calls.decreases,[{name:'wounded',options:{forceRemove:true}}]);assert.deepEqual(patient.calls.deletions,[['W1']]);assert.deepEqual(patient.calls.decrements,[]);
+  assert.equal(f.called,1);assert.deepEqual(result.proof.checkIds,['C']);assert.deepEqual(result.proof.immunityIds,['Actor.P.Item.Immunity']);
+});
+
+for(const [name,options] of [['same-slug residual',{count:2}],['locked condition',{locked:true}]])test(`${name} after native wounded removal remains uncertain without replay`,async()=>{
+  const f=fixture('success',false),patient=await woundedPatient('Actor.P',options);f.patients.set(patient.uuid,patient);
+  const pending=f.native.run(f.activity,{id:'A'});f.release();let savedError;
+  await assert.rejects(pending,error=>{savedError=error;assert.equal(error.message,'wounded-removal-unconfirmed');return true});
+  assert.equal(patient.hasCondition('wounded'),true);assert.equal(patient.getCondition('wounded').value,3);
+  assert.deepEqual(patient.calls.decreases,[{name:'wounded',options:{forceRemove:true}}]);assert.deepEqual(patient.calls.deletions,[['W1']]);assert.deepEqual(patient.calls.decrements,[]);
+  assert.deepEqual(savedError.proof.checkIds,['C']);assert.deepEqual(savedError.proof.resultIds,['D1']);assert.deepEqual(savedError.proof.receiptIds,['R1']);assert.deepEqual(savedError.proof.immunityIds,['Actor.P.Item.Immunity']);
+  const reconciliation=await f.native.reconcile({proof:savedError.proof});assert.equal(reconciliation.status,'uncertain');assert.deepEqual(reconciliation.proof,savedError.proof);assert.equal(f.called,1);
+});
+
+for(const outcome of ['failure','criticalFailure'])test(`${outcome} preserves wounded 3 without a removal or decrement`,async()=>{
+  const f=fixture(outcome,false),patient=await woundedPatient('Actor.P');f.patients.set(patient.uuid,patient);
+  const pending=f.native.run(f.activity,{id:'A'});f.release();assert.equal((await pending).status,'confirmed');
+  assert.equal(patient.getCondition('wounded').value,3);assert.equal(patient.hasCondition('wounded'),true);
+  assert.deepEqual(patient.calls,{decreases:[],decrements:[],deletions:[]});assert.equal(f.called,1);
+});
+
+for(const successful of ['Actor.P','Actor.Q'])test(`group wounded removal follows ${successful}'s own successful check`,async()=>{
+  const f=fixture('failure',false),patients=await Promise.all(['Actor.P','Actor.Q'].map(uuid=>woundedPatient(uuid)));
+  for(const patient of patients)f.patients.set(patient.uuid,patient);f.activity.patientUUIDs=patients.map(patient=>patient.uuid);f.outcomesByPatient.set(successful,'success');
+  const pending=f.native.run(f.activity,{id:'A'});f.release();const result=await pending;
+  assert.deepEqual(result.results.map(row=>[row.patientUUID,row.effectiveOutcome,row.proof.checkIds]),patients.map((patient,index)=>[patient.uuid,patient.uuid===successful?'success':'failure',[index===0?'C':'C2']]));
+  for(const patient of patients){assert.equal(patient.hasCondition('wounded'),patient.uuid!==successful);assert.equal(patient.calls.decreases.length,patient.uuid===successful?1:0);assert.deepEqual(patient.calls.decrements,[])}
+  assert.equal(f.called,2);assert.deepEqual(f.stages,['healing']);
 });
