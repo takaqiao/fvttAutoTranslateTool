@@ -64,7 +64,7 @@ for(const kind of ['native','workbench'])for(const change of ['time','provider',
 // retain the authenticated caller rather than calling a private recorder API.
 const publicFixture=fs.readFileSync(new URL('./native-owner-public-runtime.test.mjs',import.meta.url),'utf8');
 let runtimeFixture=region(publicFixture,'function publicRuntimeFixture() {','\nfor(const mapped of');
-const resolver='fromUuid:async uuid=>uuid===actor.uuid?actor:null',registration='await runtime.bind({});await runtime.register({socket:null});';
+const resolver='fromUuid:async uuid=>uuid===actor.uuid?actor:null',registration='await runtime.bind({});await runtime.register({socket});';
 assert.equal(runtimeFixture.split(resolver).length,2);assert.equal(runtimeFixture.split(registration).length,2);
 runtimeFixture=runtimeFixture.replace(resolver,"fromUuid:async uuid=>game.actors.get(uuid.split('.').at(-1))??null").replace(registration,`await configureTab(tab);await runtime.bind({});await runtime.register({socket:{register(name,fn){tab.rpcHandlers??=new Map();tab.rpcHandlers.set(name,fn)},executeAsGM(name,...args){const target=tabs.find(peer=>peer.game.user.isGM);return target.rpcHandlers.get(name).apply({socketdata:{userId}},args)}}});`);
 async function runtimeSources({recording=true}={}){
