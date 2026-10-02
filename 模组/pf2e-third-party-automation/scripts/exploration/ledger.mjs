@@ -2,12 +2,13 @@ import {clone,emptyLedger,createActivity,validateSession,validateClock,id,finite
 import {normalizeCheckpointActivity} from './manual-time.mjs';
 import {canonicalJSON} from './revision-codec.mjs';
 import {checkpointDeclaration,scheduleCheckpointActivities} from './policy.mjs';
+import {medicAvailability} from './finite-medicine.mjs';
 const transitions={
   planned:['started','blocked','cancelled'],started:['completing','awaiting-evidence','blocked','uncertain','cancelled'],
   completing:['awaiting-evidence','confirmed','blocked','uncertain'],
   'awaiting-evidence':['confirmed','uncertain'],confirmed:[],blocked:[],uncertain:['confirmed'],cancelled:[]
 };
-export function createLedger({read,write,transact,isAuthority,identity}) {
+export function createLedger({read,write,transact,isAuthority,identity,now}) {
   const atomic=typeof transact==='function';
   if(atomic&&typeof identity!=='function')throw Error('runtime-identity-required');
   let tail=Promise.resolve();
@@ -27,6 +28,116 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
   const get=async(collection,key)=>clone((await read())[collection]?.[key]??null);
   const automatic=session=>session&&session.manual!==true;
   const protocol=context=>({version:1,rootUUID:id(context.rootUUID,'protocol-root'),epoch:id(context.epoch,'protocol-epoch')});
+  const finiteProofFields=['battleMedicineAttempt','medicBypass'];
+  const ownerProof=proof=>Object.fromEntries(Object.entries(proof??{}).filter(([key])=>!finiteProofFields.includes(key)));
+  const finiteClockCovers=(clock,activity)=>activity.startedAt===activity.endsAt
+    ?clock.from<=activity.startedAt&&clock.to>activity.startedAt||clock.from===activity.startedAt&&clock.to===activity.endsAt
+    :clock.from<activity.endsAt&&clock.to>activity.startedAt;
+  const finiteTime=value=>{if(!Number.isFinite(value)||Math.abs(value)>Number.MAX_SAFE_INTEGER)throw Error('finite-medicine-time-required');return value};
+  const resourceNow=()=>finiteTime(typeof now==='function'?now():undefined);
+  function finiteGuard(guard,label='finite-medicine-source-changed'){
+    if(typeof guard!=='function')throw Error(label+'-guard-required');
+    const valid=guard();if(valid&&typeof valid.then==='function')throw Error('synchronous-evidence-guard-required');if(valid!==true)throw Error(label);
+  }
+  const sameProtocol=(a,b)=>a?.version===1&&b?.version===1&&a.rootUUID===b.rootUUID&&a.epoch===b.epoch;
+  function baselineRows(state,actorUUID){
+    return Object.values(state.sessions).flatMap(session=>{const baseline=session.finiteMedicine?.medicBypass?.baselineByActor?.[actorUUID];return baseline?[{session,baseline}]:[]});
+  }
+  function validateFiniteBaselines(state,session,context,caller){
+    const inputs=session.finiteMedicine?.medicBypass?.baselineByActor??{};
+    let reviewedAt;
+    for(const [actorUUID,baseline] of Object.entries(inputs)){
+      const rows=baselineRows(state,actorUUID),scope=protocol(context),known=new Map();
+      for(const row of rows){
+        if(!sameProtocol(row.session.protocol,scope))throw Error('medic-baseline-scope-mismatch');
+        const prior=known.get(row.baseline.id);if(prior&&canonicalJSON(prior)!==canonicalJSON(row.baseline))throw Error('medic-baseline-conflict');known.set(row.baseline.id,row.baseline);
+      }
+      const successors=new Set([...known.values()].map(b=>b.previousBaselineId).filter(Boolean)),latest=[...known.values()].filter(b=>!successors.has(b.id));
+      if(latest.length>1)throw Error('medic-baseline-predecessor-required');
+      if(known.has(baseline.id)){
+        if(canonicalJSON(known.get(baseline.id))!==canonicalJSON(baseline)||latest[0]?.id!==baseline.id)throw Error('medic-baseline-reference-conflict');continue;
+      }
+      if(baseline.reviewedBy!==caller?.userId)throw Error('medic-baseline-review-identity-required');
+      const at=resourceNow();if(baseline.checkedAt!==at)throw Error('medic-baseline-time-changed');reviewedAt=at;
+      const previous=latest[0];
+      if(!previous){if(baseline.previousBaselineId!==null||baseline.renewal!=='initial')throw Error('medic-baseline-predecessor-required');continue}
+      if(baseline.previousBaselineId!==previous.id||baseline.renewal==='initial'||baseline.itemUUID!==previous.itemUUID||baseline.period!==previous.period)throw Error('medic-baseline-predecessor-required');
+      const view=medicAvailability(state,{actorUUID,itemUUID:previous.itemUUID,baselineId:previous.id,now:at});
+      if(view.state==='uncertain')throw Error('medic-baseline-unknown-no-renewal');
+      if(baseline.period==='hourly'){
+        const uses=Object.values(state.activities).map(a=>a.proof?.medicBypass).filter(c=>c?.baselineId===previous.id&&c.actorUUID===actorUUID&&c.state==='used').map(c=>finiteTime(c.usedAt));
+        if(baseline.renewal!=='hour-window'||at<Math.max(previous.checkedAt,...uses)+3600)throw Error('medic-baseline-hour-window-required');
+      }else if(baseline.renewal!=='new-preparation'||at<=previous.checkedAt)throw Error('medic-baseline-new-preparation-required');
+    }
+    return reviewedAt;
+  }
+  function finiteActivity(state,key,options,caller,context){
+    if(!atomic)throw Error('atomic-finite-medicine-required');const activity=state.activities[key];if(!activity||activity.providerId!=='battle-medicine'||activity.source?.manual)throw Error('battle-medicine-activity-required');
+    const session=driver(state,activity.sessionId,options,caller,true);if(!sameProtocol(session.protocol,protocol(context)))throw Error('medic-baseline-scope-mismatch');
+    return {activity,session};
+  }
+  function finiteBaseline(state,activity,session,{excludeActivity=false}={}){
+    const medicine=session.finiteMedicine;if(medicine?.battleMedicine.enabled!==true)throw Error('battle-medicine-disabled');
+    if(activity.patientUUIDs.length!==1||activity.hpPoolUUIDs.length!==1||activity.options.rank!==(medicine.battleMedicine.rankByActor[activity.actorUUID]??'trained')||typeof activity.options.itemUUID!=='string'||!activity.options.itemUUID.startsWith(activity.actorUUID+'.Item.')||Object.keys(activity.options).some(k=>!['itemUUID','rank','medicBaselineId','medicReceiptId'].includes(k)))throw Error('invalid-battle-medicine-options');
+    if(activity.endsAt-activity.startedAt!==medicine.secondsPerUse)throw Error('invalid-battle-medicine-duration');
+    if(!activity.options.medicBaselineId){if(activity.options.medicReceiptId!==undefined)throw Error('medic-baseline-required');return null}
+    const baseline=medicine.medicBypass.baselineByActor[activity.actorUUID];
+    if(medicine.medicBypass.enabled!==true||medicine.medicBypass.maxUsesByActor[activity.actorUUID]!==1||!baseline||baseline.id!==activity.options.medicBaselineId||activity.options.medicReceiptId!=='medic-bypass:'+activity.id)throw Error('medic-baseline-required');
+    const activities=excludeActivity?Object.fromEntries(Object.entries(state.activities).filter(([id])=>id!==activity.id)):state.activities;
+    const view=medicAvailability({...state,activities},{actorUUID:activity.actorUUID,itemUUID:baseline.itemUUID,baselineId:baseline.id,now:resourceNow()});
+    if(view.state!=='available'||view.remaining!==1)throw Error('medic-bypass-unavailable');return baseline;
+  }
+  function finitePermit(activity,permit){
+    const executor=activity?.executor;
+    if(!executor||['protocol','rootUUID','epoch','revision','sessionId','activityId','operationId','actorUUID','ownerUserId','ownerClientNonce','attemptNonce','permitNonce','leaseNonce','offerId','requestId','commandDigest'].some(field=>executor[field]!==permit?.[field]))throw Error('native-permit-mismatch');
+    return executor;
+  }
+  function finiteScope(state,activity,context){
+    if(!atomic||!sameProtocol(state.sessions[activity.sessionId]?.protocol,protocol(context))||activity.executor&&(activity.executor.rootUUID!==context.rootUUID||activity.executor.epoch!==context.epoch))throw Error('medic-baseline-scope-mismatch');
+  }
+  function consumeBattleMedicine(activity,{permit,checkId,usedAt}){
+    finitePermit(activity,permit);id(checkId,'battle-medicine-check');finiteTime(usedAt);
+    if(!['completing','uncertain'].includes(activity.state)||usedAt!==activity.startedAt||resourceNow()<activity.endsAt)throw Error('battle-medicine-witness-time-conflict');
+    const attempt=activity.proof.battleMedicineAttempt;if(!attempt||attempt.permitNonce!==permit.permitNonce||!['claimed','used'].includes(attempt.state))throw Error('battle-medicine-reservation-required');
+    for(const claim of [attempt,activity.proof.medicBypass].filter(Boolean)){
+      if(claim.permitNonce!==permit.permitNonce)throw Error('native-permit-mismatch');
+      if(claim.state==='used'&&(claim.checkId!==checkId||claim.usedAt!==usedAt))throw Error('battle-medicine-witness-conflict');
+      claim.state='used';claim.checkId=checkId;claim.usedAt=usedAt;
+    }
+  }
+  function reserveBattleMedicine(key,{leaseNonce,guard}={}){
+    let reservedAt;finiteGuard(guard);return mutate((state,context,caller)=>{
+      finiteGuard(guard);const {activity:a,session}=finiteActivity(state,key,{leaseNonce},caller,context);if(a.state!=='planned'||a.executor)throw Error('battle-medicine-reservation-state-conflict');
+      const at=resourceNow();reservedAt=at;
+      if(a.proof.battleMedicineAttempt){if(a.proof.battleMedicineAttempt.state!=='reserved')throw Error('battle-medicine-reservation-state-conflict');finiteBaseline(state,a,session,{excludeActivity:true});return a}
+      const baseline=finiteBaseline(state,a,session),maximum=session.finiteMedicine.battleMedicine.maxUsesByActor[a.actorUUID]??1;
+      const issued=Object.values(state.activities).filter(row=>row.sessionId===session.id&&row.actorUUID===a.actorUUID&&row.providerId==='battle-medicine'&&row.proof?.battleMedicineAttempt&&row.proof.battleMedicineAttempt.state!=='released').length;
+      if(issued>=maximum)throw Error('battle-medicine-budget-exhausted');
+      a.proof.battleMedicineAttempt={id:'battle-medicine-attempt:'+a.id,activityId:a.id,actorUUID:a.actorUUID,state:'reserved',claimedAt:at,permitNonce:null,checkId:null,usedAt:null};
+      if(baseline)a.proof.medicBypass={id:'medic-bypass:'+a.id,baselineId:baseline.id,actorUUID:a.actorUUID,itemUUID:baseline.itemUUID,period:baseline.period,state:'reserved',activityId:a.id,permitNonce:null,claimedAt:at,checkId:null,usedAt:null};return a;
+    },()=>{finiteGuard(guard);if(reservedAt!==undefined&&resourceNow()!==reservedAt)throw Error('finite-medicine-time-changed')});
+  }
+  function cancelBattleMedicineReservation(key,{leaseNonce}={}){
+    return mutate((state,context,caller)=>{const {activity:a}=finiteActivity(state,key,{leaseNonce},caller,context);
+      if(a.state!=='planned'||a.executor||!a.proof.battleMedicineAttempt||Object.values(state.clocks).some(c=>c.sessionId===a.sessionId&&finiteClockCovers(c,a)))throw Error('battle-medicine-reservation-unsafe-release');
+      for(const claim of finiteProofFields.map(k=>a.proof[k]).filter(Boolean)){if(!['reserved','released'].includes(claim.state))throw Error('battle-medicine-reservation-unsafe-release');claim.state='released'}return a;
+    });
+  }
+  function recordMedicUseWitness(key,{permit,checkId,usedAt,guard}){
+    let activity;finiteGuard(guard,'battle-medicine-witness-changed');return mutate((state,context)=>{finiteGuard(guard,'battle-medicine-witness-changed');const a=state.activities[key];if(a?.providerId!=='battle-medicine')throw Error('battle-medicine-activity-required');finiteScope(state,a,context);consumeBattleMedicine(a,{permit,checkId,usedAt});activity=a;return a},()=>{finiteGuard(guard,'battle-medicine-witness-changed');if(resourceNow()<activity.endsAt)throw Error('battle-medicine-witness-time-conflict')});
+  }
+  function noteExternalBattleMedicineUse(input,{guard}={}){
+    const captured=clone(input);finiteGuard(guard,'external-battle-medicine-source-changed');return mutate((state,context)=>{
+      finiteGuard(guard,'external-battle-medicine-source-changed');const session=state.sessions[captured.sessionId],baseline=session?.finiteMedicine?.medicBypass?.baselineByActor[captured.actorUUID];
+      if(!atomic||!baseline||!session.actorUUIDs.includes(captured.actorUUID))throw Error('medic-baseline-required');id(captured.checkId,'external-battle-medicine-check');
+      if(!sameProtocol(session.protocol,protocol(context)))throw Error('medic-baseline-scope-mismatch');
+      if(captured.observedAt!==resourceNow())throw Error('external-battle-medicine-time-changed');
+      if(Object.values(state.activities).some(a=>a.providerId==='battle-medicine'&&(a.proof.checkIds.includes(captured.checkId)||a.proof.battleMedicineAttempt?.checkId===captured.checkId)))throw Error('external-battle-medicine-already-bound');
+      const events=session.finiteMedicineReviewChecks??=[];const prior=events.find(e=>e.checkId===captured.checkId);
+      const event={actorUUID:captured.actorUUID,checkId:captured.checkId,observedAt:captured.observedAt};if(prior){if(canonicalJSON(prior)!==canonicalJSON(event))throw Error('external-battle-medicine-check-conflict');return session}
+      events.push(event);return session;
+    },()=>{finiteGuard(guard,'external-battle-medicine-source-changed');if(captured.observedAt!==resourceNow())throw Error('external-battle-medicine-time-changed')});
+  }
   function noOpenActivityCheckpoint(session){if(session?.activityCheckpoint?.phase==='open')throw Error('activity-checkpoint-open')}
   function checkpointGuard(guard){
     if(typeof guard!=='function')throw Error('synchronous-checkpoint-guard-required');
@@ -142,7 +253,19 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
     let validateCommit;
     return mutate((s,context,caller)=>{
       const old=s[collection][key];if(!old||!expected.includes(old.state))throw Error('state-conflict');
-      const patch=preparePatch?preparePatch(old):inputPatch;
+      const patch=clone(preparePatch?preparePatch(old):inputPatch);
+      if(collection==='activities'&&old.providerId==='battle-medicine'){
+        if(Object.hasOwn(patch,'options')&&canonicalJSON(patch.options)!==canonicalJSON(old.options))throw Error('immutable-provenance');
+        if(Object.hasOwn(patch,'proof')){
+          if(!patch.proof||typeof patch.proof!=='object'||Array.isArray(patch.proof))throw Error('finite-medicine-protected-proof');
+          const savedResult=old.executionResult?.proof;
+          const ownerResult=savedResult&&canonicalJSON(ownerProof(patch.proof))===canonicalJSON(savedResult)&&finiteProofFields.every(k=>!Object.hasOwn(patch.proof,k));
+          if(!ownerResult&&finiteProofFields.some(k=>canonicalJSON(patch.proof[k]??null)!==canonicalJSON(old.proof[k]??null)))throw Error('finite-medicine-protected-proof');
+          for(const key of finiteProofFields)if(Object.hasOwn(old.proof,key))patch.proof[key]=clone(old.proof[key]);
+        }
+        if(patch.state==='started'&&old.proof.battleMedicineAttempt?.state!=='reserved')throw Error('battle-medicine-reservation-required');
+      }
+      if(collection==='activities'&&old.providerId!=='battle-medicine'&&patch.proof&&finiteProofFields.some(k=>Object.hasOwn(patch.proof,k)))throw Error('finite-medicine-protected-proof');
       if(collection==='activities'&&checkpointDeclaration(old)&&Object.keys(patch).some(k=>k!=='review'))throw Error('activity-checkpoint-lifecycle-required');
       if(collection==='activities'&&patch.proof&&canonicalJSON(patch.proof.manualPoolSource??null)!==canonicalJSON(old.proof?.manualPoolSource??null))throw Error('manual-pool-source-required');
       if(collection==='activities'&&patch.proof&&canonicalJSON(patch.proof.poolApplications??null)!==canonicalJSON(old.proof?.poolApplications??null))throw Error('manual-pool-claim-required');
@@ -172,7 +295,7 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
         if(collection==='activities'&&['started','completing'].includes(patch.state)){const session=driver(s,old.sessionId,options,caller,true);noOpenActivityCheckpoint(session)}
         if(collection==='activities'&&old.state==='completing'&&!options.reconcile&&!reviewOnly)driver(s,old.sessionId,options,caller);
         if(collection==='activities'&&patch.state==='confirmed'&&old.executor?.state!=='settled')throw Error('native-completion-required');
-        if(collection==='activities'&&old.executor?.state==='settled'&&Object.entries(old.executionResult??{}).some(([key,value])=>key in patch&&canonicalJSON(patch[key])!==canonicalJSON(value)))throw Error('native-result-conflict');
+        if(collection==='activities'&&old.executor?.state==='settled'&&Object.entries(old.executionResult??{}).some(([key,value])=>key in patch&&canonicalJSON(key==='proof'&&old.providerId==='battle-medicine'?ownerProof(patch[key]):patch[key])!==canonicalJSON(value)))throw Error('native-result-conflict');
       }
       const next={...old,...clone(patch)};
       validateCommit=()=>{
@@ -308,7 +431,21 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
       for(const c of Object.values(s.clocks).filter(clock=>ids.has(clock.sessionId)&&clock.state==='started')){c.state='uncertain';c.reason='legacy-migration-quarantine'}
       return {quarantinedSessionIds};
     }),
-    createSession:async (input,{guard}={})=>{if('activityCheckpointHistory' in input)throw Error('activity-checkpoint-open-required');if('activityCheckpoint' in input)throw Error('activity-checkpoint-open-required');if('manualCheckpoint' in input)throw Error('manual-checkpoint-open-required');if('manualPoolIssuer' in input)throw Error('manual-pool-issuer-required');const captured=validateSession(input),leaseNonce=atomic?crypto.randomUUID():null;if(guard!==undefined)sessionGuard(guard);return mutate((s,context,caller)=>{if(guard!==undefined)sessionGuard(guard);const v=clone(captured);if(s.sessions[v.id])throw Error('duplicate-session');if(atomic){v.protocol=protocol(context);if(v.manual===true)v.manualPoolIssuer={...caller};if(automatic(v)){if(v.status!=='running')throw Error('invalid-initial-session');recoveryAvailable(s,v);v.driver={...caller,leaseNonce}}}s.sessions[v.id]=v;return v},guard===undefined?undefined:()=>sessionGuard(guard))},
+    createSession:async (input,{guard}={})=>{
+      if('finiteMedicineReviewChecks' in input)throw Error('finite-medicine-review-required');
+      if('activityCheckpointHistory' in input)throw Error('activity-checkpoint-open-required');if('activityCheckpoint' in input)throw Error('activity-checkpoint-open-required');if('manualCheckpoint' in input)throw Error('manual-checkpoint-open-required');if('manualPoolIssuer' in input)throw Error('manual-pool-issuer-required');
+      const captured=validateSession(input),leaseNonce=atomic?crypto.randomUUID():null;let reviewedAt;
+      if(guard!==undefined)sessionGuard(guard);
+      return mutate((s,context,caller)=>{
+        if(guard!==undefined)sessionGuard(guard);const v=clone(captured);if(s.sessions[v.id])throw Error('duplicate-session');
+        if(v.finiteMedicine){
+          if(!atomic)throw Error('atomic-finite-medicine-required');
+          reviewedAt=validateFiniteBaselines(s,v,context,caller);
+        }
+        if(atomic){v.protocol=protocol(context);if(v.manual===true)v.manualPoolIssuer={...caller};if(automatic(v)){if(v.status!=='running')throw Error('invalid-initial-session');recoveryAvailable(s,v);v.driver={...caller,leaseNonce}}}
+        s.sessions[v.id]=v;return v;
+      },()=>{if(guard!==undefined)sessionGuard(guard);if(reviewedAt!==undefined&&resourceNow()!==reviewedAt)throw Error('medic-baseline-time-changed')});
+    },
     openActivityCheckpoint:(input,{leaseNonce,guard}={})=>{
       const binding=activityCheckpointBinding(input);checkpointGuard(guard);
       return mutate((state,context,caller)=>{
@@ -349,7 +486,7 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
     },
     getSession:key=>get('sessions',key),getActivity:key=>get('activities',key),getClockCommit:key=>get('clocks',key),
     updateSession:(key,patch,options={})=>mutate((s,context,caller)=>{
-      const v=s.sessions[key];if(!v)throw Error('missing-session');if(['id','startedAt','activityIds','goalsByPool','recoveryGoals','driver','protocol','manual','manualPoolIssuer','nativeOwnerByActor','activityCheckpoint','activityCheckpointHistory'].some(k=>k in patch))throw Error('immutable-session');
+      const v=s.sessions[key];if(!v)throw Error('missing-session');if(['id','startedAt','activityIds','goalsByPool','recoveryGoals','finiteMedicine','finiteMedicineReviewChecks','driver','protocol','manual','manualPoolIssuer','nativeOwnerByActor','activityCheckpoint','activityCheckpointHistory'].some(k=>k in patch))throw Error('immutable-session');
       if(options.expectedStatus!==undefined&&v.status!==options.expectedStatus)throw Error('session-state-conflict');
       if('manualCheckpoint' in patch){
         if(v.activityCheckpoint&&!['settled','interrupted'].includes(v.activityCheckpoint.phase))throw Error('activity-checkpoint-active');
@@ -375,6 +512,7 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
       const a=createActivity(input);if(checkpointDeclaration(a))throw Error('activity-checkpoint-seal-required');if(s.activities[a.id])throw Error('duplicate-activity');const session=s.sessions[a.sessionId];if(!session)throw Error('missing-session');
       if(Object.hasOwn(a.proof,'poolApplications'))throw Error('manual-pool-claim-required');
       if(Object.hasOwn(a.proof,'manualPoolSource'))throw Error('manual-pool-source-required');
+      if(finiteProofFields.some(key=>Object.hasOwn(a.proof,key)))throw Error('finite-medicine-protected-proof');
       if(atomic&&a.source.manual&&automatic(session)){
         if(!boundManual(a))throw Error('manual-checkpoint-reservation-required');const c=manualCheckpoint(s,a,options,caller,context,{open:true});
         if(a.providerId!=='manual'||a.kind!=='treatment'||a.source.type!=='workbench'||a.source.reservationId!==a.id||a.source.useId!==a.proof.useId||a.state!=='awaiting-evidence'||a.executor!==undefined||a.executionResult!==undefined||a.startedAt!==c.from||a.endsAt!==c.to||a.durationSeconds!==600||a.patientUUIDs.length!==1||a.hpPoolUUIDs.length!==1||a.hpPoolUUIDs[0]!==a.patientUUIDs[0]||['checkIds','resultIds','receiptIds','immunityIds'].some(field=>a.proof[field].length)||!a.options.missing.includes('checkpoint-time-confirmation'))throw Error('invalid-manual-reservation');
@@ -397,35 +535,57 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
     upsertClockCommit:(input,options={})=>{let session;const guard=options.guard===undefined?undefined:()=>checkpointGuard(()=>options.guard(session));return mutate((s,context,caller)=>{
       const c=validateClock(input);if(s.clocks[c.id])throw Error('duplicate-clock');if(!s.sessions[c.sessionId])throw Error('missing-session');
       session=s.sessions[c.sessionId];guard?.();
+      if(atomic&&Object.values(s.activities).some(a=>a.sessionId===c.sessionId&&a.providerId==='battle-medicine'&&!a.source?.manual&&['planned','started','completing'].includes(a.state)&&finiteClockCovers(c,a)&&!['reserved','claimed','used'].includes(a.proof.battleMedicineAttempt?.state)))throw Error('battle-medicine-reservation-required');
       if(atomic){noOpenActivityCheckpoint(s.sessions[c.sessionId]);const boundary=Object.values(s.activities).filter(a=>a.sessionId===c.sessionId&&checkpointDeclaration(a)&&['planned','started'].includes(a.state)).flatMap(a=>[a.startedAt,a.endsAt]).filter(at=>at>c.from);if(boundary.some(at=>c.to>at))throw Error('activity-checkpoint-time-boundary')}
       if(atomic){const session=driver(s,c.sessionId,options,caller,true);if(c.state!=='started'||c.evidence.length||['nativeIssued','nativeResolved','effectsSettled','claim','source'].some(k=>k in input))throw Error('initial-clock-claim-required');if(c.gmId!==caller.userId)throw Error('clock-driver-mismatch');if(c.from!==session.cursorAt)throw Error('world-time-conflict');if(session.manualCheckpoint&&session.manualCheckpoint.phase!=='settled'&&(session.manualCheckpoint.phase!=='advancing'||c.id!==session.manualCheckpoint.id||c.from!==session.manualCheckpoint.from||c.to!==session.manualCheckpoint.to))throw Error('manual-checkpoint-clock-required');if(Object.values(s.clocks).some(row=>row.state!=='confirmed'))throw Error('unresolved-clock');c.claim={...protocol(context),revision:context.revision,...session.driver}}
       s.clocks[c.id]=c;return c;
     },guard)},
     transitionClockCommit:(key,options)=>transition('clocks',key,options),
-    claimExecution:(key,input)=>mutate((s,context,caller)=>{
+    reserveBattleMedicine,cancelBattleMedicineReservation,recordMedicUseWitness,noteExternalBattleMedicineUse,
+    finiteMedicineView:async query=>{check();const state=await read();check();return clone(medicAvailability(state,{...query,now:resourceNow()}))},
+    claimExecution:(key,input,{guard}={})=>{let battleMedicine=false;return mutate((s,context,caller)=>{
       if(!atomic)throw Error('atomic-execution-required');const a=s.activities[key];if(!a||a.state!=='completing')throw Error('state-conflict');
       if(a.source?.manual)throw Error('manual-native-execution-forbidden');
       const session=driver(s,a.sessionId,input,caller,true);if(a.executor)throw Error('activity-already-executed');
+      battleMedicine=a.providerId==='battle-medicine';
+      if(battleMedicine){
+        finiteGuard(guard);finiteScope(s,a,context);const attempt=a.proof.battleMedicineAttempt;
+        if(attempt?.state!=='reserved'||attempt.permitNonce!==null)throw Error('battle-medicine-reservation-required');
+        finiteBaseline(s,a,session,{excludeActivity:true});resourceNow();
+      }
       if(input.operationId!==(a.options?.extensionOf?'treatment-extension':a.providerId))throw Error('native-operation-mismatch');
       if(input.ownerUserId!==(a.source?.ownerId??session.driver.userId))throw Error('native-owner-mismatch');
       for(const field of ['ownerUserId','ownerClientNonce','attemptNonce','permitNonce'])id(input[field],field);
       a.executor={protocol:'pf2e-third-party-automation.exploration-owner.v1',rootUUID:context.rootUUID,epoch:context.epoch,revision:context.revision,sessionId:a.sessionId,activityId:a.id,operationId:input.operationId,actorUUID:a.actorUUID,ownerUserId:input.ownerUserId,ownerClientNonce:input.ownerClientNonce,attemptNonce:input.attemptNonce,permitNonce:input.permitNonce,leaseNonce:input.leaseNonce,state:'granted'};
       for(const field of ['offerId','requestId','commandDigest'])if(input[field]!==undefined)a.executor[field]=id(input[field],field);
+      if(battleMedicine)for(const claim of finiteProofFields.map(k=>a.proof[k]).filter(Boolean)){claim.state='claimed';claim.permitNonce=a.executor.permitNonce}
       return a.executor;
-    }),
-    recordExecutionResult:(key,{permit,result})=>mutate(s=>{
+    },()=>{if(battleMedicine){finiteGuard(guard);resourceNow()}})},
+    recordExecutionResult:(key,{permit,result,witnessGuard})=>{let consumes=false,activity;return mutate((s,context)=>{
       if(!atomic)throw Error('atomic-execution-required');const a=s.activities[key],executor=a?.executor;
       if(!executor||['protocol','rootUUID','epoch','revision','sessionId','activityId','operationId','actorUUID','ownerUserId','ownerClientNonce','attemptNonce','permitNonce','leaseNonce','offerId','requestId','commandDigest'].some(field=>executor[field]!==permit?.[field]))throw Error('native-permit-mismatch');
       if(!['completing','uncertain'].includes(a.state)||!['confirmed','blocked','uncertain'].includes(result?.status))throw Error('invalid-native-result');
       const fields=['status','reason','proof','sourceDegree','effectiveOutcome','rolledHealing','medicBonus','expiresAt','resourceReceiptIds','patientUUID','results','focusBefore','focusAfter','treatment'];
       if(Object.keys(result).some(field=>!fields.includes(field)))throw Error('immutable-provenance');
       const checkOnlyFailure=a.providerId==='treat-wounds'&&!a.options?.extensionOf&&!a.options?.riskySurgery&&result.effectiveOutcome==='failure'&&result.proof?.checkIds?.length>0&&result.proof?.resultIds?.length===0;
-      if(result.status==='confirmed'&&(!result.proof||result.proof.useId!==(a.options?.extensionOf??a.id)||!Array.isArray(result.proof.receiptIds)||!result.proof.receiptIds.length&&!checkOnlyFailure))throw Error('native-completion-required');
+      const battleMedicine=a.providerId==='battle-medicine';
+      if(battleMedicine){finiteScope(s,a,context);activity=a}
+      if(finiteProofFields.some(k=>Object.hasOwn(result.proof??{},k)))throw Error('finite-medicine-protected-proof');
+      const battleFailure=battleMedicine&&result.effectiveOutcome==='failure'&&result.proof?.checkIds?.length===1&&result.proof?.resultIds?.length===0&&result.proof?.immunityIds?.length>0;
+      if(result.status==='confirmed'&&(!result.proof||result.proof.useId!==(a.options?.extensionOf??a.id)||!Array.isArray(result.proof.receiptIds)||!result.proof.receiptIds.length&&!checkOnlyFailure&&!battleFailure))throw Error('native-completion-required');
       if(executor.state==='settled'&&canonicalJSON(a.executionResult)!==canonicalJSON(result))throw Error('native-result-conflict');
-      a.executionResult=clone(result);Object.assign(a,clone(result));a.executor={...executor,state:result.status==='confirmed'?'settled':'uncertain'};return a;
-    }),
+      if(battleMedicine){
+        const checks=result.proof?.checkIds??[];
+        if(!Array.isArray(checks)||checks.length>1||result.status==='confirmed'&&(checks.length!==1||!result.proof.immunityIds?.length||a.proof.medicBypass&&!result.resourceReceiptIds?.includes(a.proof.medicBypass.id)))throw Error('native-completion-required');
+        consumes=checks.length===1;
+        if(consumes){finiteGuard(witnessGuard,'battle-medicine-witness-changed');consumeBattleMedicine(a,{permit,checkId:checks[0],usedAt:a.startedAt})}
+      }
+      const protectedProof=Object.fromEntries(finiteProofFields.filter(k=>Object.hasOwn(a.proof,k)).map(k=>[k,clone(a.proof[k])]));
+      a.executionResult=clone(result);Object.assign(a,clone(result));if(battleMedicine)a.proof={...a.proof,...protectedProof};a.executor={...executor,state:result.status==='confirmed'?'settled':'uncertain'};return a;
+    },()=>{if(consumes){finiteGuard(witnessGuard,'battle-medicine-witness-changed');if(resourceNow()<activity.endsAt)throw Error('battle-medicine-witness-time-conflict')}})},
     resumeSession:(key,{cursorAt})=>{const leaseNonce=crypto.randomUUID();return mutate((s,context,caller)=>{
       if(!atomic)throw Error('atomic-resume-required');const session=s.sessions[key];if(!session||session.status!=='paused'||session.manual)throw Error('paused-automatic-session-required');
+      if(session.finiteMedicine&&!sameProtocol(session.protocol,protocol(context)))throw Error('medic-baseline-scope-mismatch');
       if(cursorAt!==session.cursorAt)throw Error('external-world-time-change');recoveryAvailable(s,session,key);
       session.status='running';session.stopReason=null;session.driver={...caller,leaseNonce};session.protocol=protocol(context);return session;
     })},
