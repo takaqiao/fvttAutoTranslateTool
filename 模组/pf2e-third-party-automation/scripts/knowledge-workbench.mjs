@@ -17,13 +17,15 @@ const scoped=(original,overrides)=>new Proxy(Object.create(Object.getPrototypeOf
  getOwnPropertyDescriptor:(_target,key)=>key in original||Object.hasOwn(overrides,key)?{value:Object.hasOwn(overrides,key)?overrides[key]:Reflect.get(original,key,original),writable:false,enumerable:true,configurable:true}:undefined,
 });
 function targetDC(actor){const level=actor.level;if(!Number.isInteger(level))return null;const base=level>20?level*2:14+level+(level<0?0:Math.floor(level/3));const adjustment={common:0,uncommon:2,rare:5,unique:10}[actor.rarity??'common'];return Number.isFinite(adjustment)?base+adjustment:null;}
-export function recallDegree({total,die,dc,domains=[],rollOptions=[],actor}){
+function naturalRollOptions(roll){if(!Array.isArray(roll?.dice))return null;const natural=roll.dice.map(die=>die.results?.find(result=>result.active&&!result.discarded)?.result??null).find(value=>value!=null);return [`check:total:natural:${natural}`,`check:roll:total:natural:${natural}`];}
+export function recallDegree({total,die,dc,domains=[],rollOptions=[],actor,roll}){
  if(!Number.isFinite(total)||!Number.isFinite(dc))return null;
  let degree=total-dc>=10?3:total>=dc?2:total-dc<=-10?0:1;
  if(die===20)degree=Math.min(3,degree+1);else if(die===1)degree=Math.max(0,degree-1);
- const options=[...rollOptions,`check:total:${total}`,`check:total:natural:${die??10}`,`check:total:delta:${total-dc}`];
- const adjustments=domains.flatMap(domain=>(actor?.synthetics?.degreeOfSuccessAdjustments?.[domain]??[]).filter(a=>a.predicate?.test?.(options)??true).flatMap(a=>[a.adjustments?.all??[],a.adjustments?.[outcomes[degree]]??[]].flat()));
- if(adjustments.length)degree=Math.max(...adjustments.map(adjustment=>{const explicit=outcomes.indexOf(adjustment.amount);return explicit>=0?explicit:Number.isFinite(adjustment.amount)?Math.max(0,Math.min(3,degree+adjustment.amount)):degree;}));
+ const nativeNatural=rollOptions.some(option=>option.startsWith('check:total:natural:')||option.startsWith('check:roll:total:natural:'))?[]:roll===undefined?[`check:total:natural:${die??undefined}`,`check:roll:total:natural:${die??undefined}`]:naturalRollOptions(roll);if(!nativeNatural)return null;
+ const options=new Set([...rollOptions,...nativeNatural,`check:total:${total}`,`check:total:delta:${total-dc}`]),adjustments={};
+ for(const domain of domains)for(const entry of actor?.synthetics?.degreeOfSuccessAdjustments?.[domain]??[])if(entry.predicate?.test?.(options)??true)for(const key of ['all',...outcomes])if(entry.adjustments?.[key])adjustments[key]=entry.adjustments[key];
+ for(const key of ['all',...outcomes]){const {amount,label}=adjustments[key]??{};if(!amount||!label||degree===3&&amount===1||degree===0&&amount===-1||key!=='all'&&key!==outcomes[degree])continue;const explicit=outcomes.indexOf(amount);return explicit>=0?explicit:Number.isFinite(amount)?Math.max(0,Math.min(3,degree+amount)):degree;}
  return degree;
 }
 function primarySkills(actor,target){const relevant=new Set();for(const [trait,list]of Object.entries(identify))if(target?.traits?.has?.(trait)||values(target?.traits).includes(trait))for(const skill of list)relevant.add(skill);if(actor.itemTypes?.feat?.some(f=>(f.slug??f.system?.slug)==='unified-theory')&&['religion','occultism','nature'].some(s=>relevant.has(s)))relevant.add('arcana');return [...relevant];}
@@ -124,7 +126,8 @@ export async function captureWorkbenchRecall({game,actor,token,user=game.user,ta
   assertTargets();
   const die=assuranceApplied?null:created.rolls?.[0]?.total;if(!assuranceApplied&&(!Number.isInteger(die)||die<1||die>20))throw Error('Workbench 原始 d20 不可验证。');
  const candidates=[];const scopeTargets=targets.length?targets:[null];
- for(const target of scopeTargets){const allowed=statistic?[statistic]:target?primarySkills(actor,target.actor):skills;for(const probe of probes.values()){if(probe.targetUuid!==(target?.uuid??null)||!allowed.includes(probe.statistic)&&!probe.lore)continue;if(statistic&&probe.statistic!==statistic)continue;const total=(assuranceApplied?10:die)+probe.modifier,effectiveDC=recallDC(actor,target?.actor,statistic,dc);candidates.push({...probe,total,dc:probe.lore&&!statistic?null:effectiveDC,degree:Number.isInteger(probe.nativeDegree)&&probe.nativeDC===effectiveDC?probe.nativeDegree:recallDegree({total,die,dc:probe.lore&&!statistic?null:effectiveDC,domains:probe.domains,rollOptions:probe.rollOptions,actor})});}}
+ const nativeNatural=naturalRollOptions(primaryRoll);
+ for(const target of scopeTargets){const allowed=statistic?[statistic]:target?primarySkills(actor,target.actor):skills;for(const probe of probes.values()){if(probe.targetUuid!==(target?.uuid??null)||!allowed.includes(probe.statistic)&&!probe.lore)continue;if(statistic&&probe.statistic!==statistic)continue;const total=(assuranceApplied?10:die)+probe.modifier,effectiveDC=recallDC(actor,target?.actor,statistic,dc);probe.rollOptions=[...new Set([...probe.rollOptions,...(nativeNatural??[])])];candidates.push({...probe,total,dc:probe.lore&&!statistic?null:effectiveDC,degree:Number.isInteger(probe.nativeDegree)&&probe.nativeDC===effectiveDC?probe.nativeDegree:recallDegree({total,die,dc:probe.lore&&!statistic?null:effectiveDC,domains:probe.domains,rollOptions:probe.rollOptions,actor,roll:primaryRoll})});}}
   const state={schema:1,requestId,actorUuid:actor.uuid,tokenUuid:tokenDocument.uuid,userId:user.id,targetUuids:targets.map(t=>t.uuid),targetActors,origin,statistic,assurance:assuranceApplied,assuranceRequested:assurance,die,candidates,primary:primary?{statistic:primary.statistic,targetUuid:primary.targetUuid}:null,status:primaryRoll?'consuming':'pending'};
  await created.update({[`flags.${MODULE_ID}.workbenchRecall`]:state});
  if(primaryRoll)await consumeKnowledgePrimary({message:created,candidate:candidates.find(candidate=>candidate.statistic===primary.statistic&&candidate.targetUuid===primary.targetUuid)??primary,receipt:receipts.get(`${primary.targetUuid??''}:${primary.statistic}`),roll:primaryRoll});
@@ -158,7 +161,8 @@ export async function finalizeWorkbenchRecall({game,message,user=game.user,stati
  if(!candidate)throw Error('请选择本次已保存的候选技能；不能接收外部检定总值。');
  if(state.result){if(state.result.statistic!==candidate.statistic||Number.isFinite(dc)&&dc!==state.result.dc)throw Error('该次机械结果已锁定；其他技能与 DC 供 GM 信息裁定，不会再次触发收益。');return state.result;}
  const effectiveDC=Number.isFinite(dc)?dc:candidate.dc;if(!Number.isFinite(effectiveDC))return null;
- const result={statistic:candidate.statistic,dc:effectiveDC,total:candidate.total,die:state.die,degree:effectiveDC===candidate.dc?candidate.degree:recallDegree({...candidate,dc:effectiveDC,die:state.die,actor:message.actor}),targetUuid:candidate.targetUuid,assurance:state.assurance};
+ const result={statistic:candidate.statistic,dc:effectiveDC,total:candidate.total,die:state.die,degree:effectiveDC===candidate.dc?candidate.degree:recallDegree({...candidate,dc:effectiveDC,die:state.die,actor:message.actor,roll:message.rolls?.[0]}),targetUuid:candidate.targetUuid,assurance:state.assurance};
+ if(!Number.isInteger(result.degree))return null;
  const options=[...new Set([...message.flags.pf2e.context.options,...candidate.rollOptions,...(state.origin?.rollOptions??[])])];
  await message.update({[`flags.${MODULE_ID}.workbenchRecall`]:{...state,status:'done',result},'flags.pf2e.context.outcome':outcomes[result.degree],'flags.pf2e.context.dc':{value:effectiveDC,visible:false},'flags.pf2e.context.options':options,'flags.pf2e.context.domains':candidate.domains,'flags.pf2e.context.statistic':candidate.statistic});return result;
 }

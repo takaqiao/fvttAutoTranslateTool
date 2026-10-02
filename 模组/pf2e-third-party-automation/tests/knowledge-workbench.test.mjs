@@ -90,9 +90,10 @@ test('native selected substitution stays deterministic and afterRoll sees the ac
  const f=fixture();f.actor.skills.society.substitutions=[{slug:'native-substitute',selected:true,required:true,value:15,effectType:'fortune'}];nativeProbeFixture(f);let after=0;
  f.actor.rules=[{afterRoll({roll,context}){after++;assert.equal(roll.dice.length,0);assert.equal(context.substitutions[0].selected,true);}}];
  const capture=await api.captureWorkbenchRecall({...f,requestId:'native-substitution',targetUuids:[f.target.uuid]});assert.equal(capture.die,15);assert.equal(capture.message.rolls[0].dice.length,0);assert.equal(after,1);assert.equal(capture.candidates[0].total,28);assert.equal(capture.message.flags.pf2e.context.substitutions[0].value,15);
+ assert.ok(capture.candidates[0].rollOptions.includes('check:total:natural:undefined'));assert.ok(capture.candidates[0].rollOptions.includes('check:roll:total:natural:undefined'));assert.equal(capture.candidates[0].rollOptions.includes('check:total:natural:15'),false);
 });
 test('one-use native degree adjustment is captured with the primary DC and survives its effect deletion',async()=>{
- const f=fixture(),adjustment={predicate:{test:()=>true},adjustments:{all:[{amount:1}]}};f.actor.synthetics.degreeOfSuccessAdjustments.society=[adjustment];let after=0;
+ const f=fixture(),adjustment={predicate:{test:()=>true},adjustments:{all:{amount:1,label:'one-use upgrade'}}};f.actor.synthetics.degreeOfSuccessAdjustments.society=[adjustment];let after=0;
  f.actor.rules=[{afterRoll({context}){assert.equal(context.dosAdjustments.length,1,'native StatisticCheck only captures adjustments if supplied a DC');after++;f.actor.synthetics.degreeOfSuccessAdjustments={};}}];
  const capture=await api.captureWorkbenchRecall({...f,requestId:'native-degree-consumption',targetUuids:[f.target.uuid]});assert.equal(after,1);assert.equal(capture.candidates[0].degree,3);
  const result=await api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:{...f.game,user:f.gm},message:capture.message});assert.equal(result.degree,3);
@@ -136,9 +137,9 @@ test('final result can only be selected by an actual GM from the captured native
  const result=await api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:{...f.game,user:f.gm},message:capture.message,user:f.gm,statistic:'society'});assert.equal(result.degree,2);assert.equal(capture.message.flags.pf2e.context.outcome,'success');assert.equal(capture.message.flags.pf2e.context.type,'skill-check');
  await assert.rejects(()=>api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:{...f.game,user:f.gm},message:capture.message,user:f.gm,statistic:'religion',total:99}),/候选|candidate/);
 });
-test('native natural 20/1 and the most favorable adjustment apply once, never stack domains',()=>{
+test('native natural 20/1 and one matching adjustment apply once, never stack domains',()=>{
  assert.ok(api?.recallDegree);assert.equal(api.recallDegree({total:19,die:20,dc:20}),2);assert.equal(api.recallDegree({total:20,die:1,dc:20}),1);
- const adjustment={predicate:{test:()=>true},adjustments:{all:[{amount:1}]}};
+ const adjustment={predicate:{test:()=>true},adjustments:{all:{amount:1,label:'upgrade'}}};
  const actor={synthetics:{degreeOfSuccessAdjustments:{society:[adjustment],'skill-check':[adjustment]}}};
  assert.equal(api.recallDegree({total:19,die:12,dc:20,actor,domains:['society','skill-check']}),2);
 });
