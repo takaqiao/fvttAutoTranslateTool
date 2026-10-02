@@ -111,3 +111,19 @@ test('stored goals reject getters and custom array properties without reading th
   assert.throws(()=>validateRecoveryGoals(input,['Actor.A','Actor.B'],poolGoals()),/invalid-recovery-goals/);assert.equal(reads,0);
   const other=saved();other.patientTargets.extra=true;assert.throws(()=>validateRecoveryGoals(other,['Actor.A','Actor.B'],poolGoals()),/invalid-recovery-goals/);
 });
+
+test('patient recovery needs use the frozen merged pool target and this patient wounded condition',async()=>{
+  const {patientRecoveryNeed}=await helpers();assert.equal(typeof patientRecoveryNeed,'function','patient recovery needs are not implemented');
+  const session={goalsByPool:[{poolUUID:'Actor.M',targetHP:60}],recoveryGoals:{...saved(),requireNoWounded:true}},a={...actor('Actor.A',80,'Actor.M'),hp:{value:40,max:80},wounded:false},b={...actor('Actor.B',80,'Actor.M'),hp:{value:40,max:80},wounded:true};
+  const before=structuredClone({session,a,b});
+  assert.deepEqual(patientRecoveryNeed(a,session),{hp:true,wounded:false});assert.deepEqual(patientRecoveryNeed(b,session),{hp:true,wounded:true});
+  b.hp.value=60;b.hp.max=100;assert.deepEqual(patientRecoveryNeed(b,session),{hp:false,wounded:true});
+  assert.deepEqual({session,a},{session:before.session,a:before.a});
+});
+
+test('legacy and disabled completion flags never create a wounded-only recovery need',async()=>{
+  const {patientRecoveryNeed}=await helpers();assert.equal(typeof patientRecoveryNeed,'function','patient recovery needs are not implemented');
+  const patient={...actor('Actor.A',20),hp:{value:20,max:20},wounded:true},legacy={goalsByPool:[{poolUUID:'Actor.A',targetHP:20}]};
+  assert.deepEqual(patientRecoveryNeed(patient,legacy),{hp:false,wounded:false});
+  assert.deepEqual(patientRecoveryNeed(patient,{...legacy,recoveryGoals:{requireNoWounded:false}}),{hp:false,wounded:false});
+});

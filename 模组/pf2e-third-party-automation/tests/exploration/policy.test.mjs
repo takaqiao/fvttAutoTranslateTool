@@ -14,3 +14,32 @@ test('a confirmed checkpoint treatment keeps its start-based cooldown even when 
  const proposals=recoveryProposals({actors:[healer,patient],activities:[activity],session:{goalsByPool:[{poolUUID:'P',targetHP:20}]},now:600,providerIds:['treat-wounds']});assert.equal(proposals[0].earliestStart,3600);
  activity.options.continualRecovery=true;assert.equal(recoveryProposals({actors:[healer,patient],activities:[activity],session:{goalsByPool:[{poolUUID:'P',targetHP:20}]},now:600,providerIds:['treat-wounds']})[0].earliestStart,600);
 });
+
+function woundedFixture(){
+ const healer={actorUUID:'Actor.H',medicine:{rank:2},nature:{rank:2},slugs:['natural-medicine','risky-surgery'],riskySurgery:true,assuranceSkills:['medicine','nature'],items:[{uuid:'Actor.H.Item.LOH',sourceId:'Compendium.pf2e.spells-srd.Item.zNN9212H2FGfM7VS'}],focus:{value:0,max:1},pool:{poolUUID:'Actor.H',ready:true},hp:{value:20,max:20},threePecks:true,wardCapacity:2};
+ const patient={...healer,actorUUID:'Actor.P',medicine:{rank:0},nature:{rank:0},slugs:[],items:[],threePecks:false,assuranceSkills:[],modeOfBeing:'living',pool:{poolUUID:'Actor.P',ready:true},focus:{value:1,max:1},wounded:true,vitalityHealingReady:true};
+ const session={goalsByPool:[{poolUUID:'Actor.H',targetHP:20},{poolUUID:'Actor.P',targetHP:20}],recoveryGoals:{requireNoWounded:true},treatmentRank:'expert',useAssurance:true,riskySurgery:true};
+ return {healer,patient,session};
+}
+
+test('full HP wounded recovery admits Medicine and Nature TW with the saved options and zero HP deficit',()=>{
+ const {healer,patient,session}=woundedFixture();healer.focus.value=1;const proposals=recoveryProposals({actors:[healer,patient],activities:[],session,now:0,providerIds:['treat-wounds','focus-healing','refocus']});
+ assert.equal(proposals.length,2);assert.ok(proposals.every(p=>p.providerId==='treat-wounds'&&p.patientUUIDs[0]==='Actor.P'&&p.expectedNetHealing===0&&p.options.rank==='expert'&&p.options.assurance===true));
+ assert.deepEqual(proposals.map(p=>[p.options.skill,p.options.riskySurgery]),[['medicine',true],['nature',false]]);
+ session.recoveryGoals.requireNoWounded=false;assert.deepEqual(recoveryProposals({actors:[healer,patient],activities:[],session,now:0,providerIds:['treat-wounds','focus-healing','refocus']}),[]);
+});
+
+test('wounded-only TW keeps both native immunity and the saved start-based cooldown',()=>{
+ const {healer,patient,session}=woundedFixture();patient.cooldownExpiresAt=2400;
+ const activity={providerId:'treat-wounds',state:'confirmed',startedAt:0,patientUUIDs:['Actor.P'],options:{continualRecovery:false}};
+ const proposals=()=>recoveryProposals({actors:[healer,patient],activities:[activity],session,now:600,providerIds:['treat-wounds']});
+ assert.ok(proposals().length);assert.ok(proposals().every(p=>p.earliestStart===3600));activity.options.continualRecovery=true;assert.ok(proposals().every(p=>p.earliestStart===2400));
+ patient.cooldownExpiresAt=null;assert.ok(proposals().every(p=>p.earliestStart===600));
+});
+
+test('Ward leaves two full HP wounded patients in one shared pool as independent single-patient TW candidates',()=>{
+ const {healer,patient,session}=woundedFixture(),other={...patient,actorUUID:'Actor.Q',pool:{poolUUID:'Actor.P',ready:true}};
+ const proposals=recoveryProposals({actors:[healer,patient,other],activities:[],session,now:0,providerIds:['treat-wounds']});
+ assert.ok(proposals.length);assert.ok(proposals.every(p=>p.patientUUIDs.length===1));assert.deepEqual(new Set(proposals.flatMap(p=>p.patientUUIDs)),new Set(['Actor.P','Actor.Q']));
+ const next=chooseNext({snapshot:{},proposals,session:{...session,budgetEndsAt:7200},now:0});assert.equal(next.activities.length,1);assert.equal(next.checkpointAt,600);
+});

@@ -1,6 +1,7 @@
 import {selectTreatmentRank} from './efficiency.mjs';
 import {treatablePatient} from './capabilities.mjs';
 import {treatmentFailureState} from './treatment-streaks.mjs';
+import {patientRecoveryNeed} from './recovery-goals.mjs';
 export const checkpointDeclaration=a=>a.temporalSource?.type==='checkpoint-declaration';
 export function scheduleCheckpointActivities({registrations,activities,session,from}){
  const reservations=activities.filter(a=>['planned','started'].includes(a.state)),planned=[];
@@ -32,21 +33,21 @@ export function chooseNext({snapshot,proposals,session,now}){
 }
 export function recoveryProposals({actors,activities,session,now,providerIds}){
  const failures=treatmentFailureState(activities,session.recoveryGoals?.failureStop,{sessionId:session.id,activityIds:session.activityIds}),blocked=new Set(failures.blockedPatientUUIDs);
- const targets=actors.filter(p=>!blocked.has(p.actorUUID)&&p.pool?.ready&&!p.isDead&&session.goalsByPool.some(g=>g.poolUUID===p.pool.poolUUID&&p.hp.value<g.targetHP));
- const deficit=p=>Math.max(0,(session.goalsByPool.find(g=>g.poolUUID===p.pool.poolUUID)?.targetHP??p.hp.max)-p.hp.value);
+ const patients=actors.filter(p=>!blocked.has(p.actorUUID)&&p.pool?.ready&&!p.isDead),targets=patients.filter(p=>patientRecoveryNeed(p,session).hp),treatmentTargets=patients.filter(p=>{const need=patientRecoveryNeed(p,session);return need.hp||need.wounded});
+ const deficit=p=>Math.max(0,(session.goalsByPool.find(g=>g.poolUUID===p.pool.poolUUID)?.targetHP??p.hp.value)-p.hp.value);
  const ready=p=>Math.max(now,p.cooldownExpiresAt??now,...activities.filter(a=>a.state==='confirmed'&&(a.providerId==='treat-wounds'||a.options?.threePecks||a.temporalSource?.type==='checkpoint-reservation')&&a.patientUUIDs.includes(p.actorUUID)&&!a.options?.extensionOf).map(a=>a.startedAt+(a.options.continualRecovery?600:3600)));
  const proposals=[];
  for(const h of actors.filter(a=>!a.isDead&&!a.unconscious)){
   const options={skill:'medicine',rank:session.treatmentRank??'trained',assurance:session.useAssurance===true&&h.assuranceSkills.includes('medicine'),riskySurgery:session.riskySurgery===true&&h.riskySurgery,continualRecovery:h.continualRecovery};
   const base={actorUUID:h.actorUUID,earliestStart:now,actorExclusive:true,patientTreatmentExclusive:true,resourceCost:{},options};
   if(providerIds.includes('treat-wounds')&&(h.medicine?.rank??0)>=1&&!h.unsupported?.length){
-   const eligible=targets.filter(p=>treatablePatient(p,h)).sort((a,b)=>deficit(b)-deficit(a)||a.actorUUID.localeCompare(b.actorUUID));
+   const eligible=treatmentTargets.filter(p=>treatablePatient(p,h)).sort((a,b)=>deficit(b)-deficit(a)||a.actorUUID.localeCompare(b.actorUUID));
    for(const patient of eligible){const estimate=selectTreatmentRank(h,[patient],{...options,treatmentRank:session.treatmentRank},deficit);if(estimate)proposals.push({...base,providerId:'treat-wounds',patientUUIDs:[patient.actorUUID],hpPoolUUIDs:[patient.pool.poolUUID],durationSeconds:600,earliestStart:ready(patient),options:{...options,rank:estimate.rank,estimate:estimate.estimate,...estimate.estimateReason?{estimateReason:estimate.estimateReason}:{},...estimate.estimateSource?{estimateSource:estimate.estimateSource}:{}},expectedNetHealing:estimate.expectedNetHealing,expectedDamage:estimate.expectedHPDamage??0})}
    const group=[...new Map(eligible.filter(p=>ready(p)===now).map(p=>[p.pool.poolUUID,p])).values()].slice(0,h.wardCapacity??1);
    if(group.length>1){const estimate=selectTreatmentRank(h,group,{...options,treatmentRank:session.treatmentRank},deficit);if(estimate)proposals.push({...base,providerId:'treat-wounds',patientUUIDs:group.map(p=>p.actorUUID),hpPoolUUIDs:group.map(p=>p.pool.poolUUID),durationSeconds:600,options:{...options,rank:estimate.rank,estimate:estimate.estimate,...estimate.estimateReason?{estimateReason:estimate.estimateReason}:{},...estimate.estimateSource?{estimateSource:estimate.estimateSource}:{}},expectedNetHealing:estimate.expectedNetHealing,expectedDamage:estimate.expectedHPDamage??0})}
   }
   if(providerIds.includes('treat-wounds')&&h.slugs.includes('natural-medicine')&&(h.nature?.rank??0)>=1&&!h.unsupported?.length){
-   const eligible=targets.filter(p=>p.modeOfBeing==='living').sort((a,b)=>deficit(b)-deficit(a)||a.actorUUID.localeCompare(b.actorUUID));
+   const eligible=treatmentTargets.filter(p=>p.modeOfBeing==='living').sort((a,b)=>deficit(b)-deficit(a)||a.actorUUID.localeCompare(b.actorUUID));
    const natureOptions={skill:'nature',riskySurgery:false,continualRecovery:h.continualRecovery,assurance:session.useAssurance===true&&h.assuranceSkills.includes('nature')};
    for(const patient of eligible){const estimate=selectTreatmentRank(h,[patient],{...natureOptions,treatmentRank:session.treatmentRank},deficit);if(estimate)proposals.push({...base,providerId:'treat-wounds',patientUUIDs:[patient.actorUUID],hpPoolUUIDs:[patient.pool.poolUUID],durationSeconds:600,earliestStart:ready(patient),options:{...natureOptions,rank:estimate.rank,estimate:estimate.estimate,...estimate.estimateReason?{estimateReason:estimate.estimateReason}:{},...estimate.estimateSource?{estimateSource:estimate.estimateSource}:{}},expectedNetHealing:estimate.expectedNetHealing,expectedDamage:estimate.expectedHPDamage??0})}
    const group=[],pools=new Set();

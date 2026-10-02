@@ -1,7 +1,7 @@
 import {recoveryProposals,checkpointDeclaration,scheduleCheckpointActivities} from './policy.mjs';
 import {extensionPatients} from './treatment.mjs';
 import {clone,normalizeNativeOwnerMap,captureRecoveryPreferences,checkpointBinding,sameCheckpoint,manualSourceIntent,activityCheckpointBinding,sameActivityCheckpoint} from './schema.mjs';
-import {resolveRecoveryGoals} from './recovery-goals.mjs';
+import {resolveRecoveryGoals,patientRecoveryNeed} from './recovery-goals.mjs';
 import {treatmentFailureState} from './treatment-streaks.mjs';
 import {projectCommand,validateExtensionOriginal} from './owner-command.mjs';
 import {WORKBENCH_SOURCE_SHA} from './manual-events.mjs';
@@ -70,8 +70,8 @@ export function createCoordinator({ledger,capabilities,providers,clock,policy,is
  function failureSummary(data){
   const {session,activities,actors}=data,state=treatmentFailureState(activities,session.recoveryGoals?.failureStop,{sessionId:session.id,activityIds:session.activityIds});
   const remaining=actors.filter(a=>state.blockedPatientUUIDs.includes(a.actorUUID)).flatMap(a=>{
-   const targetHP=session.goalsByPool.find(g=>g.poolUUID===a.pool.poolUUID)?.targetHP,hpGap=Math.max(0,(targetHP??a.hp.value)-a.hp.value);
-   return hpGap>0?[{patientUUID:a.actorUUID,poolUUID:a.pool.poolUUID,streak:state.streakByPatient[a.actorUUID],limit:session.recoveryGoals.failureStop.limit,currentHP:a.hp.value,targetHP,hpGap}]:[];
+   const targetHP=session.goalsByPool.find(g=>g.poolUUID===a.pool.poolUUID)?.targetHP,hpGap=Math.max(0,(targetHP??a.hp.value)-a.hp.value),woundedGap=patientRecoveryNeed(a,session).wounded;
+   return hpGap>0||woundedGap?[{patientUUID:a.actorUUID,poolUUID:a.pool.poolUUID,streak:state.streakByPatient[a.actorUUID],limit:session.recoveryGoals.failureStop.limit,currentHP:a.hp.value,targetHP,hpGap,woundedGap}]:[];
   });
   return {...state,remaining};
  }
@@ -246,7 +246,7 @@ export function createCoordinator({ledger,capabilities,providers,clock,policy,is
    if(now()!==s.cursorAt)return await pause(id,'external-world-time-change',scope);
    if(s.activityCheckpoint?.phase==='sealed'){await advanceDeclarations(s,scope);data=await snapshot(id);s=data.session;await owned(id,scope)}
    const active=data.activities.filter(a=>a.state==='started'),pendingDeclarations=data.activities.filter(a=>checkpointDeclaration(a)&&['planned','started'].includes(a.state));
-   const goalsMet=s.goalsByPool.every(g=>data.actors.some(a=>a.pool.poolUUID===g.poolUUID&&a.hp.value>=g.targetHP));
+   const goalsMet=s.goalsByPool.every(g=>data.actors.some(a=>a.pool.poolUUID===g.poolUUID&&a.hp.value>=g.targetHP))&&data.actors.every(a=>!patientRecoveryNeed(a,s).wounded);
    if(!active.length&&!pendingDeclarations.length&&goalsMet&&(!s.requireFullFocus||data.actors.every(a=>a.focus.value>=a.focus.max))){await ledger.updateSession(id,{status:'complete',stopReason:'goals-met'},scopeOptions(scope));if(leases.get(id)===scope)invalidate(id);onChange(id);return {status:'complete'}}
    const activityCount=data.activities.filter(a=>!a.source.manual).length;
    if((activityCount>=s.maxActivities&&!active.length&&!pendingDeclarations.length)||now()>=s.budgetEndsAt)return await pause(id,'budget',scope);

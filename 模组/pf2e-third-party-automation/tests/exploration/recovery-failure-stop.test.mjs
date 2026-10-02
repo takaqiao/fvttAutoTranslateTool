@@ -26,23 +26,23 @@ async function treatmentResult({game,documents,activity,permit,outcomes}){
  return validateNativeResult({game,fromUuid:async uuid=>documents.get(uuid),activity,permit,result});
 }
 
-async function fixture({shared=false,otherHP=20,enabled=true,limit=3,fullFocus=false,patientHealer=false,extraPatient=false}={}){
+async function fixture({shared=false,otherHP=20,enabled=true,limit=3,fullFocus=false,patientHealer=false,extraPatient=false,requireNoWounded=false,patientHP=1,woundedPatients=[P]}={}){
  const server=await authorityFixture(),ledger=server.client('driver'),user={id:'G',active:true,isGM:true},users=new Map([['G',user]]);users.activeGM=user;
- const documents=new Map([H,H2,P,B,POOL,...extraPatient?['Actor.C']:[]].map(uuid=>[uuid,{id:uuid.slice(6),uuid,name:uuid,flags:{},testUserPermission:()=>true,system:{attributes:{hp:{value:[P,POOL,'Actor.C'].includes(uuid)?1:uuid===B?otherHP:20,max:20}},resources:{focus:{value:1,max:1}}}}]));
+ const documents=new Map([H,H2,P,B,POOL,...extraPatient?['Actor.C']:[]].map(uuid=>[uuid,{id:uuid.slice(6),uuid,name:uuid,flags:{},wounded:woundedPatients.includes(uuid),testUserPermission:()=>true,system:{attributes:{hp:{value:[P,POOL].includes(uuid)?patientHP:uuid==='Actor.C'?1:uuid===B?otherHP:20,max:20}},resources:{focus:{value:1,max:1}}}}]));
  const actors=new Map([...documents.values()].map(a=>[a.id,a])),calls={begin:[],complete:[],advance:[]},hooks=new Map();let hookId=0,c;
  const game={user,users,actors,messages:new Map(),time:{worldTime:0,advance:async(dt,options)=>{calls.advance.push(dt);game.time.worldTime+=dt;for(const handler of hooks.values())handler(game.time.worldTime,dt,options,'G')}}};
  const poolUUID=uuid=>shared&&[P,B].includes(uuid)?POOL:uuid,getHpPool=actor=>({ready:true,poolUUID:poolUUID(actor.uuid)});
- const capabilities={snapshot:async uuids=>uuids.map(uuid=>{const actor=documents.get(uuid),master=documents.get(poolUUID(uuid));return {actorUUID:uuid,name:uuid,pool:getHpPool(actor),hp:structuredClone(master.system.attributes.hp),focus:structuredClone(actor.system.resources.focus),medicine:{rank:[H,H2].includes(uuid)||uuid===P&&patientHealer?1:0},nature:{rank:0},slugs:[],items:[],assuranceSkills:[],wardCapacity:2,modeOfBeing:'living',isDead:false,unconscious:false,unsupported:[],refocusUnsupported:[],vitalityHealingReady:true,wounded:uuid===P}})};
+ const capabilities={snapshot:async uuids=>uuids.map(uuid=>{const actor=documents.get(uuid),master=documents.get(poolUUID(uuid));return {actorUUID:uuid,name:uuid,pool:getHpPool(actor),hp:structuredClone(master.system.attributes.hp),focus:structuredClone(actor.system.resources.focus),medicine:{rank:[H,H2].includes(uuid)||uuid===P&&patientHealer?1:0},nature:{rank:0},slugs:[],items:[],assuranceSkills:[],wardCapacity:2,modeOfBeing:'living',isDead:false,unconscious:false,unsupported:[],refocusUnsupported:[],vitalityHealingReady:true,wounded:actor.wounded}})};
  const outcomesByActivity=new Map(),providers=['treat-wounds','refocus','focus-healing'].map(providerId=>({id:providerId,begin:async a=>{calls.begin.push(a);return {status:'started'}},cancel:async()=>{},complete:async a=>{
   calls.complete.push(a);const operationId=a.options?.extensionOf?'treatment-extension':providerId,permit=await ledger.claimExecution(a.id,{...c.executionScope('S'),operationId,ownerUserId:'G',ownerClientNonce:'owner',attemptNonce:'attempt-'+a.id,permitNonce:'permit-'+a.id});
   let result;
   if(providerId==='treat-wounds')result=await treatmentResult({game,documents,activity:a,permit,outcomes:outcomesByActivity.get(a.id)??{}});
   else {const actor=documents.get(a.actorUUID),before=actor.system.resources.focus.value;actor.system.resources.focus.value=Math.min(actor.system.resources.focus.max,before+1);actor.flags[MODULE_ID]={avRefocusIntent:{nonce:a.id,actorUuid:actor.uuid,userId:'G',startedAt:a.startedAt,before,after:actor.system.resources.focus.value}};result=await validateNativeResult({game,fromUuid:async uuid=>documents.get(uuid),activity:a,permit,result:{status:'confirmed',focusBefore:before,focusAfter:actor.system.resources.focus.value,proof:{useId:a.id,checkIds:[],resultIds:[],receiptIds:[a.id],immunityIds:[]}}})}
-  await ledger.recordExecutionResult(a.id,{permit,result});for(const summary of result.results??[])if(healing.has(summary.effectiveOutcome))documents.get(poolUUID(summary.patientUUID)).system.attributes.hp.value=20;return result;
+  await ledger.recordExecutionResult(a.id,{permit,result});for(const summary of result.results??[])if(healing.has(summary.effectiveOutcome)){documents.get(poolUUID(summary.patientUUID)).system.attributes.hp.value=20;documents.get(summary.patientUUID).wounded=false}return result;
  }}));
  const Hooks={on:(_event,fn)=>{hooks.set(++hookId,fn);return hookId},off:(_event,id)=>hooks.delete(id)},clock=createClock({game,Hooks,ledger,isAuthority:()=>true,timeEffects:{beforeAdvance:async()=>({status:'ready'}),settle:async()=>({status:'ready',proof:[]})},confirmationTimeoutMs:100});
  c=createCoordinator({game,fromUuid:async uuid=>documents.get(uuid),getHpPool,ledger,capabilities,providers,clock,policy:chooseNext,isAuthority:()=>true,now:()=>game.time.worldTime,ownerOperations:{createActivityContext:async()=>({}),cancelActivity:async()=>{}}});
- const selected=[H,H2,P,B,...extraPatient?['Actor.C']:[]];await c.start({id:'S',actorUUIDs:selected,budgetSeconds:21600,maxActivities:100,requireFullFocus:fullFocus,autoRun:false,recovery:{version:1,targetIntentsByActor:{},requireNoWounded:false,failureStop:{enabled,limit}}});
+ const selected=[H,H2,P,B,...extraPatient?['Actor.C']:[]];await c.start({id:'S',actorUUIDs:selected,budgetSeconds:21600,maxActivities:100,requireFullFocus:fullFocus,autoRun:false,recovery:{version:1,targetIntentsByActor:{},requireNoWounded,failureStop:{enabled,limit}}});
  const waitUntil=async to=>{const receipt=await clock.advanceTo({id:crypto.randomUUID(),sessionId:'S',from:game.time.worldTime,to},c.executionScope('S'));assert.equal(receipt.status,'confirmed');await ledger.updateSession('S',{cursorAt:game.time.worldTime},c.executionScope('S'))};
  const admit=(id,patientUUIDs=[P],actorUUID=H,options={})=>c.addActivity('S',{id,providerId:'treat-wounds',actorUUID,patientUUIDs,hpPoolUUIDs:[...new Set(patientUUIDs.map(poolUUID))],startedAt:game.time.worldTime,endsAt:game.time.worldTime+600,options:{skill:'medicine',rank:'trained',continualRecovery:false,...options}});
  const seed=async(id,outcomes,actorUUID=H)=>{const a=await admit(id,Object.keys(outcomes),actorUUID);outcomesByActivity.set(id,outcomes);await waitUntil(a.endsAt);const claimed=await ledger.transitionActivity(id,{expected:['started'],patch:{state:'completing'},...c.executionScope('S')}),result=await providers[0].complete(claimed);return ledger.transitionActivity(id,{expected:['completing'],patch:{...result,state:'confirmed'},...c.executionScope('S')})};
@@ -76,7 +76,7 @@ test('other patients and their reachable cooldowns finish before the failure pau
  const f=await fixture({otherHP:1});await f.failures();await f.seed('B-cooldown',{[B]:'failure'});const at=f.game.time.worldTime;
  await f.c.step('S');assert.equal(f.game.time.worldTime,at+3000);assert.equal((await f.ledger.getSession('S')).status,'running');
  await f.c.step('S');assert.equal(f.documents.get(B).system.attributes.hp.value,20);const stopped=await f.c.step('S');assert.equal(stopped.stopReason,'consecutive-treatment-failures');
- const data=await f.c.snapshot('S');assert.deepEqual(data.treatmentFailures,{streakByPatient:{[P]:3,[B]:0},blockedPatientUUIDs:[P],remaining:[{patientUUID:P,poolUUID:P,streak:3,limit:3,currentHP:1,targetHP:20,hpGap:19}]});
+ const data=await f.c.snapshot('S');assert.deepEqual(data.treatmentFailures,{streakByPatient:{[P]:3,[B]:0},blockedPatientUUIDs:[P],remaining:[{patientUUID:P,poolUUID:P,streak:3,limit:3,currentHP:1,targetHP:20,hpGap:19,woundedGap:false}]});
  assert.equal(Object.hasOwn(await f.ledger.getSession('S'),'treatmentFailures'),false);
 });
 
@@ -140,4 +140,40 @@ test('patient filtering also applies to Natural Medicine, focus healing and Thre
 test('disabled failure stopping keeps original proposal eligibility after the same confirmed failures',async()=>{
  const f=await fixture({enabled:false});await f.failures();assert.ok((await f.proposals()).some(a=>a.patientUUIDs.includes(P)));
  await f.c.step('S');assert.equal((await f.ledger.getSession('S')).status,'running');assert.equal(f.game.time.worldTime,10800);
+});
+
+test('full HP wounded patient receives original TW before completion when the frozen option requires it',async()=>{
+ const f=await fixture({patientHP:20,requireNoWounded:true,enabled:false});
+ await f.c.step('S');assert.equal(f.game.time.worldTime,600);assert.equal(f.documents.get(P).wounded,false);assert.equal(f.documents.get(P).system.attributes.hp.value,20);
+ const data=await f.ledger.snapshot('S');assert.equal(data.activities.length,1);assert.deepEqual(data.activities[0].patientUUIDs,[P]);assert.equal(data.activities[0].state,'confirmed');
+ assert.equal((await f.c.step('S')).status,'complete');
+});
+
+test('same pool wounded patients require their own confirmed TW and keep the original shared goal',async()=>{
+ const f=await fixture({shared:true,patientHP:20,requireNoWounded:true,woundedPatients:[P,B]}),before=await f.ledger.getSession('S');
+ await f.c.step('S');assert.equal(f.documents.get(B).wounded,false);assert.equal(f.documents.get(P).wounded,true);assert.equal((await f.ledger.getSession('S')).status,'running');
+ await f.c.step('S');assert.equal(f.documents.get(P).wounded,false);assert.equal(f.game.time.worldTime,1200);assert.equal((await f.c.step('S')).status,'complete');
+ const data=await f.ledger.snapshot('S');assert.deepEqual(data.activities.map(a=>a.patientUUIDs),[[B],[P]]);assert.deepEqual(data.session.goalsByPool,before.goalsByPool);assert.deepEqual(data.session.recoveryGoals,before.recoveryGoals);
+});
+
+test('full HP wounded recovery waits for a failed original treatment cooldown',async()=>{
+ const f=await fixture({patientHP:20,requireNoWounded:true,enabled:false});await f.seed('old-failure',{[P]:'failure'});
+ await f.c.step('S');assert.equal(f.game.time.worldTime,3600);assert.equal(f.documents.get(P).wounded,true);assert.equal((await f.ledger.snapshot('S')).activities.length,1);
+ await f.c.step('S');assert.equal(f.game.time.worldTime,4200);assert.equal(f.documents.get(P).wounded,false);assert.equal((await f.c.step('S')).status,'complete');
+});
+
+test('failure threshold pauses an unmet wounded goal even with no remaining HP gap and never retries on resume',async()=>{
+ const f=await fixture({patientHP:20,requireNoWounded:true,limit:1});await f.seed('failure',{[P]:'failure'});const before=await f.ledger.getSession('S'),calls=f.calls.begin.length;
+ assert.equal((await f.c.step('S')).stopReason,'consecutive-treatment-failures');
+ const data=await f.c.snapshot('S');assert.deepEqual(data.treatmentFailures.remaining,[{patientUUID:P,poolUUID:P,streak:1,limit:1,currentHP:20,targetHP:20,hpGap:0,woundedGap:true}]);
+ assert.equal(f.documents.get(P).wounded,true);assert.equal(f.game.time.worldTime,600);assert.equal(Object.hasOwn(data.session,'treatmentFailures'),false);
+ await f.c.resume('S',{autoRun:false});assert.equal((await f.c.step('S')).stopReason,'consecutive-treatment-failures');assert.equal(f.calls.begin.length,calls);assert.equal(f.game.time.worldTime,600);
+ assert.deepEqual((await f.ledger.getSession('S')).recoveryGoals,before.recoveryGoals);
+});
+
+test('requiring wounded recovery retains independent full Focus completion',async()=>{
+ const f=await fixture({patientHP:20,requireNoWounded:true,fullFocus:true});f.documents.get(P).system.resources.focus.value=0;
+ await f.c.step('S');assert.equal(f.documents.get(P).wounded,false);assert.equal(f.documents.get(P).system.resources.focus.value,1);
+ const activities=(await f.ledger.snapshot('S')).activities;assert.equal(activities.length,2);assert.ok(activities.every(a=>a.state==='confirmed'));
+ assert.equal((await f.c.step('S')).status,'complete');
 });

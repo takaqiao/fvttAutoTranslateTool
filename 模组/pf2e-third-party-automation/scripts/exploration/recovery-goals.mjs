@@ -93,6 +93,10 @@ export function resolveRecoveryGoals(actors,preferences=undefined){
   return {goalsByPool:poolGoals(patientTargets),recoveryGoals:{version:1,patientTargets,requireNoWounded:normalized.requireNoWounded,failureStop:normalized.failureStop}};
 }
 
+export function patientRecoveryNeed(patient,session){
+  return {hp:session.goalsByPool.some(goal=>goal.poolUUID===patient.pool?.poolUUID&&patient.hp.value<goal.targetHP),wounded:session.recoveryGoals?.requireNoWounded===true&&patient.wounded===true};
+}
+
 export function validateRecoveryGoals(input,actorUUIDs,goalsByPool){
   const label='invalid-recovery-goals',value=fields(input,goalFields,label,goalFields);
   if(value.version!==1)throw Error(label);
