@@ -25,7 +25,7 @@ test('the confirmed pool update is persisted separately from the native raw undo
 function fixture(outcome='criticalSuccess',risky=true,privateRoll=false,templateAvailable=true,secondPatientFails=false){
   const hooks=new Map();let seq=0;const Hooks={on:(name,fn)=>{const id=++seq;hooks.set(id,{name,fn});return id},off:(name,id)=>hooks.delete(id)};
   const fire=(name,...args)=>{for(const h of hooks.values())if(h.name===name)h.fn(...args)};
-  const messages=new Map(),healer={uuid:'Actor.H',id:'H',items:[{type:'feat',slug:'risky-surgery'}]},patient={uuid:'Actor.P',id:'P',isOwner:true,createEmbeddedDocuments:async(type,list)=>{assert.equal(list[0].system.duration.value,50);return [{uuid:'Actor.P.Item.Immunity'}]}};
+  const messages=new Map(),healer={uuid:'Actor.H',id:'H',items:[{type:'feat',slug:'risky-surgery'},{type:'feat',slug:'ward-medic'}],getStatistic:()=>({rank:2})},patient={uuid:'Actor.P',id:'P',isOwner:true,createEmbeddedDocuments:async(type,list)=>{assert.equal(list[0].system.duration.value,50);return [{uuid:'Actor.P.Item.Immunity'}]}};
   patient.getSelfRollOptions=()=>[];patient.getContextualClone=()=>({...patient});const patients=new Map([[patient.uuid,patient]]),outcomesByPatient=new Map();
   let release;const deferred=new Promise(r=>release=r);let called=0;const stages=[];
   const game={user:{id:'G'},time:{worldTime:600},messages,pf2e:{actions:{get:()=>({use:async options=>{

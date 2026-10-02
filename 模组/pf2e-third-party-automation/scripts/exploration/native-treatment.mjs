@@ -1,6 +1,6 @@
 import {MODULE_ID} from './schema.mjs';
-import {TREAT_WOUNDS_IMMUNITY} from '../salubrious-kiss-rules.mjs';
-import {cooldown} from './capabilities.mjs';
+import {TREAT_WOUNDS_IMMUNITY,values} from '../salubrious-kiss-rules.mjs';
+import {cooldown,isSuppressedItem,wardCapacity} from './capabilities.mjs';
 import {extensionPatients} from './treatment.mjs';
 const outcomes=['criticalFailure','failure','success','criticalSuccess'];
 const marker=id=>`exploration-activity:${id}`;
@@ -75,6 +75,25 @@ export function createNativeTreatment({game,Hooks,fromUuid,ownerOperations,check
   }
   async function single(activity,patient,ctx) {
     valid(activity,ctx);const healer=await fromUuid(activity.actorUUID);valid(activity,ctx);let check;
+    const feats=()=>values(healer?.items).filter(item=>item.type==='feat'),hasFeat=slug=>feats().some(item=>!isSuppressedItem(item)&&(item.slug??item.system?.slug)===slug);
+    const bakedBonus={expert:5,master:10,legendary:15}[activity.options.rank]??0;
+    const medicBonus=hasFeat('medic-dedication')?bakedBonus:0;
+    const assertQualification=()=>{
+      if(feats().some(item=>(item.slug??item.system?.slug)==='magic-hands')&&!hasFeat('magic-hands'))throw Error('native-suppressed-magic-hands');
+      if(activity.options.riskySurgery&&!hasFeat('risky-surgery'))throw Error('risky-surgery-feat-unavailable');
+      if(activity.options.continualRecovery&&!hasFeat('continual-recovery'))throw Error('continual-recovery-feat-unavailable');
+      if(activity.options.assurance&&!feats().some(item=>!isSuppressedItem(item)&&(item.slug??item.system?.slug)==='assurance'&&(item.flags?.pf2e?.rulesSelections?.assurance??item.flags?.system?.rulesSelections?.assurance)===(activity.options.skill??'medicine')))throw Error('assurance-feat-unavailable');
+      if(activity.patientUUIDs.length>1){const rank=healer.getStatistic?.('medicine')?.rank;
+        if(!Number.isInteger(rank)||rank<1||rank>4||wardCapacity({wardMedic:hasFeat('ward-medic'),medicineRank:rank})<activity.patientUUIDs.length)throw Error('ward-capacity-unqualified');
+      }
+      // PF2e 8.5.1 CheckFeat ignores suppression when baking Medic into the
+      // healing formula. Reject that native formula; do not pretend a zero
+      // recipient adjustment removes it. Keep the same bonus through this use.
+      const activeMedic=hasFeat('medic-dedication');
+      if(bakedBonus&&feats().some(item=>(item.slug??item.system?.slug)==='medic-dedication')&&!activeMedic)throw Error('native-suppressed-medic-bonus');
+      if((activeMedic?bakedBonus:0)!==medicBonus)throw Error('native-medic-qualification-changed');
+    };
+    assertQualification();
     const proof={useId:activity.id,checkIds:[],resultIds:[],receiptIds:[],immunityIds:[],poolReceipts:[]};
     const captured=new Map(),live=marker(activity.id);
     const belongs=m=>m.flags?.pf2e?.context?.options?.includes(live)&&author(m)===game.user.id&&(m.actor===healer||m.speaker?.actor===healer.id);
@@ -89,42 +108,41 @@ export function createNativeTreatment({game,Hooks,fromUuid,ownerOperations,check
     });
     const post=Hooks.on('createChatMessage',m=>{if(belongs(m))captured.set(m.id,m)});
     try{
-      const result=await checkScope.runExploration({activity,healer,patient,ctx},()=>game.pf2e.actions.get('treat-wounds').use({actors:[healer],target:patient,
+      const result=await checkScope.runExploration({activity,healer,patient,ctx,assertQualification},()=>game.pf2e.actions.get('treat-wounds').use({actors:[healer],target:patient,
         selection:{skill:activity.options.skill??'medicine',rank:activity.options.rank??'trained',modifier:0,feats:{'risky-surgery':!!activity.options.riskySurgery,'mortal-healing':false}},rollOptions:[live],message:{create:true}}));
       valid(activity,ctx);check=result?.[0];
       if(check?.actor!==healer||!check.message||game.messages.get(check.message.id)!==check.message||!belongs(check.message)||check.message.flags.pf2e.context.outcome!==check.outcome)throw Error('native-check-unconfirmed');
+      assertQualification();
       if(activity.options.assurance&&(!check.message.flags.pf2e.context.substitutions?.some(s=>s.slug==='assurance'&&s.selected)||check.roll?.dice?.length!==0||check.roll?.terms?.[0]?.number!==10))throw Error('native-assurance-unconfirmed');
       const actualRisky=check.message.flags.pf2e.modifiers?.some(m=>m.slug==='risky-surgery'&&m.enabled)===true;
       const expected=(actualRisky?1:0)+(check.outcome==='failure'?0:1);
       const results=await waitFor(()=>{
         const list=[...captured.values()].filter(m=>m.flags?.pf2e?.origin?.messageId===check.message.id);
         if(list.length>expected)throw Error('ambiguous-native-results');return list.length===expected?list:null;
-      },'createChatMessage');valid(activity,ctx);
+      },'createChatMessage');valid(activity,ctx);assertQualification();
       if(activity.options.riskySurgery&&!actualRisky){
-        if(!healer.items?.some(i=>i.type==='feat'&&(i.slug??i.system?.slug)==='risky-surgery'))throw Error('risky-surgery-feat-unavailable');
         // 8.5.1 keys the callback cut on an enabled circumstance modifier.
-        // Suppression does not cancel the surgery declared at begin. Generate
-        // its one missing native DamageRoll, linked to this saved check.
+        // A competing modifier can disable the bonus of an active feat. Its
+        // one missing native DamageRoll still belongs to this saved check.
         const DamageRoll=game.pf2e.DamageRoll??globalThis.CONFIG?.Dice?.rolls?.find(cls=>cls.name==='DamageRoll');if(!DamageRoll)throw Error('native-damage-roll-unavailable');
-        const cut=await new DamageRoll('{1d8[slashing]}').evaluate();valid(activity,ctx);
+        const cut=await new DamageRoll('{1d8[slashing]}').evaluate();valid(activity,ctx);assertQualification();
         const flags=structuredClone(check.message.flags);flags.pf2e.origin={...flags.pf2e.origin,messageId:check.message.id};
         const surgery=await createMessage({author:game.user.id,speaker:structuredClone(check.message.speaker??{actor:healer.id}),blind:!!check.message.blind,whisper:[...(check.message.whisper??[])],flags,rolls:[cut.toJSON()],flavor:'激进手术：割伤（原生加值被抑制时的兼容阶段）'});
-        valid(activity,ctx);if(game.messages.get(surgery.id)!==surgery)throw Error('surgery-result-unpersisted');results.push(surgery);
+        valid(activity,ctx);assertQualification();if(game.messages.get(surgery.id)!==surgery)throw Error('surgery-result-unpersisted');results.push(surgery);
       }
-      const medicBonus=healer.items?.some?.(i=>i.type==='feat'&&(i.slug??i.system?.slug)==='medic-dedication')?({expert:5,master:10,legendary:15}[activity.options.rank]??0):0;
       const stages=results.map(message=>({message,patient,outcome:check.outcome,medicBonus,stage:classifyResult(message.rolls[0],check.outcome)}));
       if(stages.filter(r=>r.stage==='surgery').length!==((actualRisky||activity.options.riskySurgery)?1:0)||new Set(stages.map(r=>r.stage)).size!==stages.length)throw Error('native-stages-mismatch');
       stages.sort((a,b)=>(a.stage==='surgery'?-1:1)-(b.stage==='surgery'?-1:1));const receiptIds=[];
-      for(const stage of stages){if(patient.isDead)throw Error('patient-died-during-treatment');const saved=await applySavedResult(activity,stage,ctx);receiptIds.push(saved.receiptId);if(saved.poolReceipt)proof.poolReceipts.push(saved.poolReceipt)}
+      for(const stage of stages){assertQualification();if(patient.isDead)throw Error('patient-died-during-treatment');const saved=await applySavedResult(activity,stage,ctx);receiptIds.push(saved.receiptId);if(saved.poolReceipt)proof.poolReceipts.push(saved.poolReceipt)}
       Object.assign(proof,{checkIds:[check.message.id],resultIds:results.map(m=>m.id),receiptIds});
       const expiresAt=cooldown({startedAt:activity.startedAt,finishedAt:activity.endsAt,continualRecovery:activity.options.continualRecovery}).expiresAt;
       if(expiresAt>game.time.worldTime){
-        const template=await fromUuid(TREAT_WOUNDS_IMMUNITY);valid(activity,ctx);if(!template?.toObject)throw Error('native-immunity-template-unavailable');
+        const template=await fromUuid(TREAT_WOUNDS_IMMUNITY);valid(activity,ctx);assertQualification();if(!template?.toObject)throw Error('native-immunity-template-unavailable');
         const data=template.toObject();delete data._id;data.system.duration={value:(expiresAt-game.time.worldTime)/60,unit:'minutes',expiry:'turn-start',sustained:false};data.system.start={value:game.time.worldTime,initiative:null};
         data.system.context={origin:{actor:activity.actorUUID,token:null,item:null,rollOptions:[]},target:{actor:patient.uuid,token:null},roll:null};data.flags={...data.flags,[MODULE_ID]:{exploration:{activityId:activity.id,expiresAt,kind:'immunity'}}};
-        const saved=await patient.createEmbeddedDocuments('Item',[data]);valid(activity,ctx);if(saved.length!==1)throw Error('immunity-unconfirmed');proof.immunityIds.push(saved[0].uuid);
+        const saved=await patient.createEmbeddedDocuments('Item',[data]);valid(activity,ctx);if(saved.length!==1)throw Error('immunity-unconfirmed');proof.immunityIds.push(saved[0].uuid);assertQualification();
       }
-      if(['success','criticalSuccess'].includes(check.outcome)&&patient.hasCondition?.('wounded')){await patient.decreaseCondition('wounded',{forceRemove:true});valid(activity,ctx);if(patient.hasCondition('wounded'))throw Error('wounded-removal-unconfirmed')}
+      assertQualification();if(['success','criticalSuccess'].includes(check.outcome)&&patient.hasCondition?.('wounded')){await patient.decreaseCondition('wounded',{forceRemove:true});valid(activity,ctx);if(patient.hasCondition('wounded'))throw Error('wounded-removal-unconfirmed')}
       return {status:'confirmed',proof,sourceDegree:outcomes.indexOf(check.message.flags.pf2e.context.unadjustedOutcome??check.outcome),effectiveOutcome:check.outcome,rolledHealing:stages.find(r=>r.stage==='healing')?.message.rolls[0].total??null,medicBonus,expiresAt,resourceReceiptIds:[],patientUUID:patient.uuid};
     }catch(error){
       const checkId=check?.message?.id;error.proof={...proof,checkIds:checkId?[checkId]:[],resultIds:[...new Set([...proof.resultIds,...[...captured.values()].filter(m=>m.flags?.pf2e?.origin?.messageId===checkId).map(m=>m.id)])],receiptIds:[...game.messages.values()].filter(m=>m.flags?.pf2e?.context?.type==='damage-taken'&&m.flags.pf2e.context.options?.some(o=>o.startsWith(`${MODULE_ID}:exploration-apply:${activity.id}:`))).map(m=>m.id)};throw error;

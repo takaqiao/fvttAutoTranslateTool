@@ -60,7 +60,7 @@ export function createSalubriousCheckScope({game,Hooks=globalThis.Hooks,isExplor
    if(scope){
     const expectedDC={trained:15,expert:20,master:30,legendary:40}[scope.activity.options.rank??'trained'];
     if(explorationMarkers.length!==1||scope.entered||context.actor!==scope.healer||context.type!=='skill-check'||context.dc?.value!==expectedDC||!options(context).has('action:treat-wounds')||!context.domains?.includes(scope.activity.options.skill??'medicine')||!isExplorationContext(scope.ctx,scope.activity.id))throw Error('Exploration native context mismatch');
-    scope.ctx.validate();scope.entered=true;
+    scope.ctx.validate();scope.assertQualification?.();scope.entered=true;
     // Assurance is a native substitution, never a roll option that claims a roll.
     if(scope.activity.options.assurance){const substitution=context.substitutions?.find(s=>s.slug==='assurance'&&!s.ignored);if(!substitution||context.substitutions.some(s=>s!==substitution&&s.required))throw Error('Native Assurance substitution unavailable');for(const sub of context.substitutions)sub.selected=sub===substitution;context.options.add('substitute:assurance');check.calculateTotal(context.options)}
     if(scope.ctx.nativeDialogMode!=='owner-preference'){
@@ -69,7 +69,7 @@ export function createSalubriousCheckScope({game,Hooks=globalThis.Hooks,isExplor
     }
     return beforeNativeRoll({Hooks,marker:'exploration-activity:'+scope.activity.id,
      showDialog:true,signal:scope.ctx.executionSignal,commit:async()=>{},
-     assertLive:()=>scope.ctx.validate(),native:()=>wrapped(check,context,event,callback)});
+     assertLive:()=>{scope.ctx.validate();scope.assertQualification?.()},native:()=>wrapped(check,context,event,callback)});
    }
   }
   const scope=matching(context);if(!scope)return wrapped(check,context,event,callback);

@@ -2,7 +2,8 @@ import {TREAT_WOUNDS_IMMUNITY,sourceId,values} from '../salubrious-kiss-rules.mj
 import {canonicalItemSource} from './source-ids.mjs';
 import {preparedTreatmentSelections,simpleTreatmentDamageModel} from './prepared-treatment.mjs';
 export const improvedRefocusSlugs=new Set(['bloodline','bonded','conflux','devoted','domain','hex','inspirational','link','meditative','primal','wardens'].flatMap(name=>[`${name}-focus`,`${name}-wellspring`]));
-export function refocusUnsupported(items){return values(items).filter(i=>!i.isSuppressed&&!i.system?.suppressed&&i.type==='feat'&&improvedRefocusSlugs.has(i.slug??i.system?.slug)).map(i=>i.slug??i.system?.slug)}
+export const isSuppressedItem=item=>!!(item?.suppressed||item?.isSuppressed||item?.system?.suppressed);
+export function refocusUnsupported(items){return values(items).filter(i=>!isSuppressedItem(i)&&i.type==='feat'&&improvedRefocusSlugs.has(i.slug??i.system?.slug)).map(i=>i.slug??i.system?.slug)}
 export function treatablePatient(patient,healer){return patient.modeOfBeing==='living'||patient.modeOfBeing==='undead'&&healer.slugs.includes('stitch-flesh')}
 // Numeric native healing bypasses vitality/IWR qualification. Match the
 // existing Salubrious Kiss gate, using this patient's prepared data, not its
@@ -28,7 +29,7 @@ export function immunityExpiry(item,now) {
 export function createCapabilities({game,fromUuid,hpPools}) {
   async function discover(uuid) {
     const actor=await fromUuid(uuid);if(!actor)throw Error('actor-unavailable');
-    const items=values(actor.items).filter(i=>!i.isSuppressed&&!i.system?.suppressed);
+    const items=values(actor.items).filter(i=>!isSuppressedItem(i));
     const feats=items.filter(i=>i.type==='feat');const slugs=feats.map(i=>i.slug??i.system?.slug);
     const statistics={},treatmentEstimate={};for(const skill of ['medicine','nature','occultism']){const stat=actor.getStatistic?.(skill);
       const selections=preparedTreatmentSelections({game,actor,skill,slugs});
