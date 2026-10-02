@@ -41,7 +41,7 @@ export function createFrequencyTracker({now=Date.now,ttl=Infinity,matches=defaul
    const before=observed.get(item.uuid),after=item.system.frequency?.value;
    observed.set(item.uuid,after);
    const proof=options?.[MODULE_ID]?.frequencyReceipt;
-   for(const[id,entry]of receipts)if(now()-entry.observedAt>ttl)receipts.delete(id);
+   if(ttl!==Infinity)for(const[id,entry]of receipts)if(now()-entry.observedAt>ttl)receipts.delete(id);
    if(!proof||typeof proof.id!=='string'||proof.itemUuid!==item.uuid||proof.userId!==userId||proof.before!==before||proof.after!==after||!Number.isInteger(before)||before<1||after!==before-1||receipts.has(proof.id)||consumed.has(proof.id))return null;
    const receipt={id:proof.id,itemUuid:item.uuid,userId,before,after,createdAt:proof.createdAt};
    receipts.set(proof.id,{receipt,observedAt:now()});return receipt;
