@@ -155,11 +155,14 @@ export function createElementalMedicine({game,fromUuid=globalThis.fromUuid,reque
   }
   finally{for(const[event,id]of registrations)hookApi.off(event,id);}
  }
- async function tell(request,p,fact,degree){
+ async function tell(request,p,fact,degree,patient){
   if(p.noticeId||p.noticeStarted)return;
+  const assertPatient=async()=>{const current=await fromUuid(p.patientUuid);gm();if(current!==patient||current?.uuid!==p.patientUuid||own(request).patients.find(row=>row.nonce===p.nonce)?.patientUuid!==p.patientUuid)throw Error('五气养生原患者文档已改变，未发布诊断。');};
+  await assertPatient();
   const text=degree===1?'未能诊断这次病症，未配制新的五行药物。':degree===0?(fact.wrongDiagnosis||'已按照诊断配制并施用了五行药物。'):(fact.correctDiagnosis||'已按照诊断配制并施用了五行药物。');
   await save(request,s=>{s.patients.find(r=>r.nonce===p.nonce).noticeStarted=true;});gm();
-  const recipients=[...new Set([...gmIds(),own(request).userId,...values(game.users).filter(u=>u.active&&game.actors.get(p.patientUuid.split('.').at(-1))?.testUserPermission?.(u,'OWNER')).map(u=>u.id)])];
+  await assertPatient();
+  const recipients=[...new Set([...gmIds(),own(request).userId,...values(game.users).filter(u=>u.active&&patient.testUserPermission?.(u,'OWNER')).map(u=>u.id)])];
   const context={actor:request.actor,patientUuid:p.patientUuid,nonce:p.nonce,text,recipients};
   const message=publishDiagnosis?await publishDiagnosis(context):await createMessage({user:game.user.id,whisper:recipients,speaker:{actor:request.actor.id},content:`<p><strong>五气养生</strong></p><p>${escape(text)}</p>`,flags:{[MODULE_ID]:{elementalMedicineNotice:{nonce:p.nonce,requestUuid:request.uuid}}}});gm();
   if(message?.id)await save(request,s=>{s.patients.find(r=>r.nonce===p.nonce).noticeId=message.id;});
@@ -194,7 +197,7 @@ export function createElementalMedicine({game,fromUuid=globalThis.fromUuid,reque
     await save(request,s=>{const row=s.patients.find(r=>r.nonce===p.nonce);row.state='applied';delete row.duplicates;});
    });
   }
-  p=own(request).patients.find(r=>r.patientUuid===patient.uuid);await tell(request,p,fact,degree);await save(request,s=>{s.patients.find(r=>r.nonce===p.nonce).state='done';});
+  p=own(request).patients.find(r=>r.patientUuid===patient.uuid);await tell(request,p,fact,degree,patient);await save(request,s=>{s.patients.find(r=>r.nonce===p.nonce).state='done';});
  }
  async function execute(request,user,{recoverOnly=false}={}){
   gm();const state=live(request,user,{closed:recoverOnly});if(terminal(state.status))return {status:state.status};
