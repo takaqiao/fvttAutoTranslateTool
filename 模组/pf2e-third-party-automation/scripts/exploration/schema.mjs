@@ -17,6 +17,16 @@ export function manualPoolRequest(input){
   if(new Set(result.patientUUIDs).size!==patients.length)throw Error('invalid-manual-pool-patients');return result;
 }
 const checkpointFields=['id','sessionId','rootUUID','epoch','observationNonce','from','to'];
+const activityCheckpointFields=['id','sessionId','rootUUID','epoch','observationNonce','from'];
+export function activityCheckpointBinding(input){
+  if(!input||typeof input!=='object'||![Object.prototype,null].includes(Object.getPrototypeOf(input))||Reflect.ownKeys(input).length!==activityCheckpointFields.length)throw Error('invalid-activity-checkpoint');
+  const value={};
+  for(const key of activityCheckpointFields){const field=Object.getOwnPropertyDescriptor(input,key);if(!field?.enumerable||!Object.hasOwn(field,'value'))throw Error('invalid-activity-checkpoint');value[key]=key==='from'?finite(field.value,'checkpoint-from'):id(field.value,key)}
+  return value;
+}
+export function sameActivityCheckpoint(expected,binding){
+  const value=activityCheckpointBinding(binding);return !!expected&&activityCheckpointFields.every(key=>value[key]===expected[key]);
+}
 export const checkpointBinding=checkpoint=>Object.fromEntries(checkpointFields.map(key=>[key,checkpoint[key]]));
 export function sameCheckpoint(expected,binding){
   return !!expected&&!!binding&&typeof binding==='object'&&[Object.prototype,null].includes(Object.getPrototypeOf(binding))&&Reflect.ownKeys(binding).length===checkpointFields.length&&checkpointFields.every(key=>{

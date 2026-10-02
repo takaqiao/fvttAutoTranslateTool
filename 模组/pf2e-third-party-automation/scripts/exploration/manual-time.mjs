@@ -1,3 +1,4 @@
+import {activityCheckpointBinding,id} from './schema.mjs';
 const durationTypes=new Set(['user-declared','item-text','table-convention']);
 function record(value){return value!==null&&typeof value==='object'&&[Object.prototype,null].includes(Object.getPrototypeOf(value))}
 function field(input,key){const descriptor=Object.getOwnPropertyDescriptor(input,key);if(descriptor&&!Object.hasOwn(descriptor,'value'))throw Error('invalid-manual-activity');return descriptor?.value}
@@ -22,4 +23,26 @@ export function normalizeManualActivity(input){
  for(const key of ['notBefore','observedStart','observedEnd']){const value=field(input,key);if(value!==undefined){if(!Number.isFinite(value))throw Error('invalid-manual-time');result[key]=value}}
  if((result.observedStart===undefined)!==(result.observedEnd===undefined)||result.observedEnd<result.observedStart)throw Error('invalid-manual-interval');
  return result;
+}
+
+/** A checkpoint declaration carries time constraints, never native evidence or an execution grant. */
+export function normalizeCheckpointActivity(input){
+ const fields=['registrationId','checkpointBinding','actorUUID','label','durationSeconds','durationSource','order','dependsOn','notBefore'];
+ if(!record(input)||Reflect.ownKeys(input).some(key=>!fields.includes(key)))throw Error('invalid-checkpoint-declaration');
+ for(const key of Reflect.ownKeys(input))field(input,key);
+ const binding=activityCheckpointBinding(field(input,'checkpointBinding')),registrationId=id(text(field(input,'registrationId'),200),'registration');
+ const source=field(input,'durationSource');
+ if(source!==undefined&&(!record(source)||Reflect.ownKeys(source).some(key=>!['type','detail'].includes(key))))throw Error('invalid-manual-duration-source');
+ const dependencies=field(input,'dependsOn');
+ if(dependencies!==undefined){
+  if(!Array.isArray(dependencies)||Object.getPrototypeOf(dependencies)!==Array.prototype||dependencies.length>128||Reflect.ownKeys(dependencies).length!==dependencies.length+1)throw Error('invalid-manual-dependency');
+  for(let i=0;i<dependencies.length;i++)id(field(dependencies,String(i)),'dependency');
+ }
+ const result=normalizeManualActivity(input);
+ if(result.notBefore!==undefined&&result.notBefore<binding.from)throw Error('checkpoint-retroactive-time');
+ return {registrationId,checkpointBinding:binding,...result};
+}
+
+export function normalizeManualDeclaration(input){
+ return input&&typeof input==='object'&&Object.hasOwn(input,'checkpointBinding')?normalizeCheckpointActivity(input):normalizeManualActivity(input);
 }
