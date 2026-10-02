@@ -98,8 +98,9 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
   async function lookupCheckpointActivity(inputBinding,registrationId,{authenticatedCaller,actorUUID,guard}={}){
     const binding=activityCheckpointBinding(inputBinding),key=id(registrationId,'registration'),userId=id(authenticatedCaller,'authenticated-caller'),actor=id(actorUUID,'actor');
     check();checkpointGuard(guard);const state=await read();check();checkpointGuard(guard);
-    const checkpoint=state.sessions[binding.sessionId]?.activityCheckpoint;
-    if(!sameActivityCheckpoint(checkpoint,binding))throw Error('activity-checkpoint-mismatch');
+    const session=state.sessions[binding.sessionId];
+    const checkpoint=[session?.activityCheckpoint,...session?.activityCheckpointHistory??[]].find(window=>sameActivityCheckpoint(window,binding));
+    if(!checkpoint)throw Error('activity-checkpoint-mismatch');
     const saved=checkpoint.registrations[key];if(!saved)return null;
     if(saved.source.userId!==userId||saved.declaration.actorUUID!==actor)throw Error('checkpoint-registration-owner-required');
     return clone(saved);

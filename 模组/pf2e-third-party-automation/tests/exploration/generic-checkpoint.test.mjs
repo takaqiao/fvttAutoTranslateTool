@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {authorityFixture} from './authority-fixture.mjs';
 import {createManualRecordBridge} from '../../scripts/exploration/manual-record.mjs';
 import {createLedger} from '../../scripts/exploration/ledger.mjs';
+import {promptActivityDeclaration} from '../../scripts/exploration/panel.mjs';
 
 async function fixture({beforeOpen}={}){
  const store=await authorityFixture(),ledger=store.client('driver');
@@ -93,6 +94,25 @@ test('unknown commit acknowledgement permits only authenticated readback, withou
  assert.equal(saved.ok,true);assert.equal(saved.value.status,'registered');assert.equal(saved.value.permit,undefined);assert.equal(saved.value.executor,undefined);assert.equal(f.store.raw.pages.length,before+1);
  f.actor.testUserPermission=()=>true;const foreign=await lookup.call({socketdata:{userId:'G'}},f.binding,'registration','Actor.A');assert.equal(foreign.ok,false);
  assert.deepEqual((await f.store.read()).clocks,{});
+});
+
+test('lost local lease permits only the known registration readback, not a new window or enrollment',async()=>{
+ const f=await fixture();assert.equal((await f.send()).ok,true);delete f.context.leaseNonce;
+ const before=await f.store.read(),pages=f.store.raw.pages.length;
+ const saved=await f.handlers.get('exploration:lookupCheckpointActivity').call({socketdata:{userId:'P'}},f.binding,'registration','Actor.A');
+ assert.equal(saved.ok,true,saved.error);assert.equal(saved.value.status,'registered');assert.equal(saved.value.permit,undefined);assert.equal(saved.value.executor,undefined);
+ const window=await f.handlers.get('exploration:activityCheckpoint').call({socketdata:{userId:'P'}},'Actor.A');assert.equal(window.ok,false);assert.match(window.error,/session-driver-required/);
+ assert.equal((await f.send({...f.input(),registrationId:'late'})).ok,false);assert.equal(f.store.raw.pages.length,pages);assert.deepEqual(await f.store.read(),before);
+});
+
+test('a form opened before Stop cannot enroll or switch to a later binding',async t=>{
+ const f=await fixture(),previous=globalThis.foundry;let entered,release;const ready=new Promise(resolve=>entered=resolve);
+ t.after(()=>{globalThis.foundry=previous});globalThis.foundry={applications:{api:{DialogV2:{wait:()=>{entered();return new Promise(resolve=>release=resolve)}}}}};
+ const window={binding:{...f.binding},phase:'open'};let submissions=0;
+ const pending=promptActivityDeclaration({actors:[{actorUUID:'Actor.A',name:'A'}],window,record:async value=>{submissions++;assert.deepEqual(value.checkpointBinding,f.binding);const result=await f.send(value);if(!result.ok)throw Error(result.error);return result.value}});
+ await ready;await f.ledger.updateSession('S',{status:'paused'});window.binding.id='later-window';window.binding.from=0;const pages=f.store.raw.pages.length;
+ release({actor:'Actor.A',label:'Search',duration:'5',unit:'60',durationSource:'user-declared',durationDetail:'',notBefore:'',order:'',dependsOn:[]});
+ await assert.rejects(pending,/recovery-session-stopped/);assert.equal(submissions,1);assert.equal(f.store.raw.pages.length,pages);assert.deepEqual((await f.ledger.getSession('S')).activityCheckpoint.registrations,{});assert.deepEqual((await f.store.read()).clocks,{});
 });
 
 test('checkpoint declaration supports zero duration and negative epoch, but not retroactive or invalid values',async()=>{

@@ -6,8 +6,9 @@ import {createLedger} from '../../scripts/exploration/ledger.mjs';
 import {createClock} from '../../scripts/exploration/clock.mjs';
 import {createManualRecordBridge} from '../../scripts/exploration/manual-record.mjs';
 import {chooseNext} from '../../scripts/exploration/policy.mjs';
+import {createRecoveryPanel} from '../../scripts/exploration/panel.mjs';
 
-async function fixture({time=0,budget=1800,maxActivities=1,deficit=false,nativeOwnerByActor}={}){
+async function fixture({time=0,budget=1800,maxActivities=1,deficit=false,nativeOwnerByActor,autoRun=false,waitForActivityFirstRound=false,configure}={}){
  const store=await authorityFixture(),storage=store.storage('driver');let boundary=()=>{};const ledger=createLedger({...storage,transact:(fn,options)=>storage.transact((state,context)=>{const value=fn(state,context);queueMicrotask(()=>boundary(state,context));return value},options),isAuthority:()=>true,identity:()=>({userId:'G',clientNonce:'driver'})}),calls={advance:[],begin:[],complete:[],context:0};let serial=0;const hooks=new Map();
  const users=new Map(['G','P'].map(id=>[id,{id,active:true,isGM:id==='G'}]));users.activeGM=users.get('G');
  const actors=new Map(['H','P','A','B'].map(id=>['Actor.'+id,{id,uuid:'Actor.'+id,testUserPermission:u=>u?.active===true,hp:{value:id==='P'&&deficit?1:20,max:20},focus:{value:1,max:1}}]));
@@ -17,11 +18,11 @@ async function fixture({time=0,budget=1800,maxActivities=1,deficit=false,nativeO
  const Hooks={on:(_,fn)=>{hooks.set(++serial,fn);return serial},off:(_,id)=>hooks.delete(id)},clock=createClock({game,Hooks,ledger,isAuthority:()=>true,confirmationTimeoutMs:30,timeEffects});
  let c;const providers=['treat-wounds','refocus'].map(id=>({id,begin:async a=>{calls.begin.push(a.id);return {status:'started'}},complete:async a=>{calls.complete.push(a.id);const permit=await ledger.claimExecution(a.id,{...c.executionScope('S'),operationId:id,ownerUserId:'G',ownerClientNonce:'driver',attemptNonce:a.id,permitNonce:a.id});const result={status:'confirmed',proof:{useId:a.id,checkIds:[],resultIds:[],receiptIds:['receipt-'+a.id],immunityIds:[]}};await ledger.recordExecutionResult(a.id,{permit,result});for(const uuid of a.patientUUIDs)actors.get(uuid).hp.value=20;if(id==='refocus')actors.get(a.actorUUID).focus.value=1;return result},cancel:async()=>{}}));
  const options={ledger,game,fromUuid:async uuid=>actors.get(uuid),capabilities,providers,clock,policy:chooseNext,isAuthority:()=>true,now:()=>game.time.worldTime,getHpPool:actor=>({ready:true,poolUUID:actor.uuid}),ownerOperations:{createActivityContext:async()=>{calls.context++;return {}},cancelActivity:async()=>{}}};c=createCoordinator(options);
- await c.start({id:'S',actorUUIDs:[...actors.keys()],budgetSeconds:budget,maxActivities,nativeOwnerByActor,autoRun:false});
  const handlers=new Map(),bridge=createManualRecordBridge({game,fromUuid:options.fromUuid,getSession:()=>ledger.getSession('S'),checkpointContext:()=>({sessionId:'S',worldTime:game.time.worldTime,...c.executionScope('S')}),enrollCheckpointActivity:(...args)=>ledger.enrollCheckpointActivity(...args),lookupCheckpointActivity:(...args)=>ledger.lookupCheckpointActivity(...args)});bridge.register({register:(name,fn)=>handlers.set(name,fn)});
  const enroll=async(binding,registrationId,actorUUID,durationSeconds,extra={})=>{const response=await handlers.get('exploration:record').call({socketdata:{userId:'P'}},{registrationId,checkpointBinding:binding,actorUUID,label:registrationId,durationSeconds,...extra});assert.equal(response.ok,true,response.error);return response.value};
  const native=async(id,actorUUID,patientUUIDs=[])=>c.addActivity('S',{id,providerId:patientUUIDs.length?'treat-wounds':'refocus',actorUUID,patientUUIDs,hpPoolUUIDs:[...patientUUIDs],startedAt:game.time.worldTime,endsAt:game.time.worldTime+600});
- return {store,ledger,game,actors,c,clock,calls,enroll,native,options,timeEffects,Hooks,setBoundary:fn=>boundary=fn};
+ const f={store,ledger,game,actors,c,clock,calls,enroll,native,options,timeEffects,Hooks,providers,handlers,setBoundary:fn=>boundary=fn};configure?.(f);
+ await c.start({id:'S',actorUUIDs:[...actors.keys()],budgetSeconds:budget,maxActivities,nativeOwnerByActor,autoRun,waitForActivityFirstRound});return f;
 }
 
 test('an open activity registration window waits without completing goals or advancing',async()=>{
@@ -161,4 +162,88 @@ test('an already-issued clock retains its exact receipt and settlement after lat
  await f.c.step('S');const saved=await f.ledger.snapshot('S'),clock=saved.clocks[0];
  assert.deepEqual(f.calls.advance,[900]);assert.equal(settled,1);assert.equal(f.game.time.worldTime,900);assert.equal(saved.session.cursorAt,900);assert.equal(clock.state,'confirmed');assert.equal(clock.nativeIssued,true);assert.equal(clock.nativeResolved,true);assert.equal(clock.effectsSettled,true);assert.equal(clock.evidence[0].options.pf2eThirdPartyAutomation.exploration.checkpointId,clock.id);assert.equal(saved.activities[0].state,'cancelled');
  await f.c.step('S');const peer=createCoordinator({...f.options,ledger:f.store.client('peer')});await peer.restore('S');assert.deepEqual(f.calls.advance,[900]);
+});
+
+const deferred=()=>{let resolve;return {promise:new Promise(yes=>{resolve=yes}),resolve:(...args)=>resolve(...args)}};
+async function heldAutomatic({completion=false,maxActivities=1}={}){
+ const entered=deferred(),release=deferred(),clockReturned=deferred(),f=await fixture({deficit:true,autoRun:true,maxActivities,configure:f=>{
+  f.actors.get('Actor.H').rank=1;
+  const advance=f.clock.advanceTo;f.clock.advanceTo=async(...args)=>{try{return await advance(...args)}finally{clockReturned.resolve()}};
+  if(completion){const original=f.providers[0].complete;f.providers[0].complete=async(...args)=>{entered.resolve();await release.promise;return original(...args)}}
+  else f.timeEffects.beforeAdvance=async()=>{entered.resolve();await release.promise;return {status:'ready'}};
+ }});await entered.promise;return {...f,release,clockReturned};
+}
+for(const completion of [false,true])test(`ordinary autoRun opens only after the original ${completion?'provider':'clock'} and final step lock settle`,async()=>{
+ const f=await heldAutomatic({completion}),scope=f.c.executionScope('S');let returned=false;
+ const pending=f.c.openActivityCheckpoint('S');pending.then(()=>{returned=true},()=>{});
+ const second=f.c.openActivityCheckpoint('S');second.catch(()=>{});await f.ledger.snapshot('S');
+ assert.equal(returned,false);assert.equal((await f.ledger.getSession('S')).activityCheckpoint,undefined);assert.equal(f.game.time.worldTime,completion?600:0);
+ f.release.resolve();const binding=await pending;assert.deepEqual(await second,binding);
+ const saved=await f.ledger.snapshot('S');assert.equal(binding.from,600);assert.equal(saved.session.cursorAt,600);assert.equal(saved.session.activityCheckpoint.phase,'open');assert.deepEqual(f.c.executionScope('S'),scope);assert.equal(saved.clocks[0].state,'confirmed');assert.equal(saved.activities[0].state,'confirmed');assert.deepEqual(f.calls.advance,[600]);assert.equal(f.calls.complete.length,1);
+ await f.c.closeActivityCheckpoint(binding,{autoRun:false});assert.equal((await f.c.step('S')).status,'complete');assert.deepEqual(f.calls.advance,[600]);
+});
+for(const reason of ['stop','takeover','encounter','offline','root-reset'])test(`a pending automatic window cannot survive ${reason}`,async()=>{
+ const f=await heldAutomatic(),pending=f.c.openActivityCheckpoint('S');pending.catch(()=>{});
+ if(reason==='stop')await f.c.stop('S');if(reason==='takeover')await f.store.client('peer').takeoverSession('S');if(reason==='encounter')f.game.combat={started:true};if(reason==='offline')f.game.user.active=false;if(reason==='root-reset')f.c.invalidate('revision-root-changed');
+ f.release.resolve();await assert.rejects(pending);const saved=await f.ledger.snapshot('S');assert.equal(saved.session.activityCheckpoint,undefined);assert.deepEqual(f.calls.advance,[]);
+});
+test('an unknown original clock rejects pending enrollment without another advance',async()=>{
+ const f=await heldAutomatic(),pending=f.c.openActivityCheckpoint('S');pending.catch(()=>{});f.game.time.advance=async dt=>{f.calls.advance.push(dt);f.game.time.worldTime+=dt};f.release.resolve();await assert.rejects(pending);
+ const saved=await f.ledger.snapshot('S');assert.equal(saved.session.activityCheckpoint,undefined);assert.equal(saved.clocks[0].state,'uncertain');assert.deepEqual(f.calls.advance,[600]);assert.equal(f.calls.complete.length,0);
+});
+test('an unknown open ACK preserves its one saved window without recovering drive permission',async()=>{
+ const f=await heldAutomatic(),open=f.ledger.openActivityCheckpoint;f.ledger.openActivityCheckpoint=(...args)=>{f.store.setAcknowledgement(()=>undefined);return open(...args)};
+ const pending=f.c.openActivityCheckpoint('S');pending.catch(()=>{});f.release.resolve();await assert.rejects(pending,/acknowledgement-unknown/);
+ const saved=await f.ledger.snapshot('S'),pages=f.store.raw.pages.length;assert.equal(saved.session.activityCheckpoint.phase,'open');assert.equal(f.c.executionScope('S'),undefined);assert.deepEqual(f.calls.advance,[600]);assert.equal(saved.activities[0].state,'confirmed');assert.equal((await f.c.step('S')).status,'observing');await assert.rejects(f.c.openActivityCheckpoint('S'),/driver-required/);assert.equal(f.store.raw.pages.length,pages);
+});
+test('the initial generic registration choice opens before ordinary autoRun emits time or native work',async()=>{
+ const f=await fixture({deficit:true,autoRun:true,waitForActivityFirstRound:true,configure:f=>{f.actors.get('Actor.H').rank=1}}),session=await f.ledger.getSession('S');assert.equal(session.activityCheckpoint.phase,'open');assert.equal(session.activityCheckpoint.from,0);assert.deepEqual(f.calls.advance,[]);assert.deepEqual(f.calls.begin,[]);assert.equal(typeof f.c.executionScope('S').leaseNonce,'string');
+});
+test('a late old runner cannot cancel the new lease checkpoint request after Stop and resume',async()=>{
+ const f=await heldAutomatic({maxActivities:2}),old=f.c.openActivityCheckpoint('S');old.catch(()=>{});await f.c.stop('S');await assert.rejects(old);const entered=deferred(),release=deferred();f.timeEffects.beforeAdvance=async()=>{entered.resolve();await release.promise;return {status:'ready'}};
+ await f.c.resume('S');await entered.promise;const pending=f.c.openActivityCheckpoint('S');pending.catch(()=>{});f.release.resolve();await f.clockReturned.promise;await f.ledger.snapshot('S');release.resolve();const binding=await pending;assert.equal(binding.from,600);assert.equal((await f.ledger.getSession('S')).activityCheckpoint.phase,'open');assert.deepEqual(f.calls.advance,[600]);
+});
+
+const activityForm={actor:'Actor.A',label:'Search',duration:'10',unit:'60',durationSource:'user-declared',durationDetail:'',notBefore:'',order:'',dependsOn:[]};
+function ownerDeclarationPanel(f){
+ const counts={records:0,queries:0,lookups:0},owner=createManualRecordBridge({game:{...f.game,user:f.game.users.get('P')}});
+ owner.register({register:()=>{},executeAsGM:async(name,...args)=>f.handlers.get(name).call({socketdata:{userId:'P'}},...args)});
+ const panel=createRecoveryPanel({game:{user:f.game.users.get('P')},getActivityCheckpoint:uuid=>{counts.queries++;return owner.getActivityCheckpoint(uuid)},record:event=>{counts.records++;return owner.record(event)},lookupCheckpointActivity:(...args)=>{counts.lookups++;return owner.lookupCheckpointActivity(...args)}});
+ return {panel,counts};
+}
+function declarationDialog(t,wait){const previous=globalThis.foundry;t.after(()=>{globalThis.foundry=previous});globalThis.foundry={applications:{api:{DialogV2:{wait}}}}}
+test('OWNER declaration rejection before enrollment permits a new window after Stop and resume',async t=>{
+ const f=await fixture(),old=await opened(f),{panel,counts}=ownerDeclarationPanel(f);let entered,release;const ready=new Promise(resolve=>entered=resolve);
+ declarationDialog(t,()=>{entered();return new Promise(resolve=>release=resolve)});const pending=panel.openActivityDeclaration('Actor.A');await ready;
+ await f.c.stop('S');await f.c.resume('S',{autoRun:false});const current=await opened(f);assert.notEqual(current.id,old.id);release({...activityForm});
+ await assert.rejects(pending,/manual-actor-not-allowed|recovery-session-stopped|activity-checkpoint/);const pages=f.store.raw.pages.length;
+ globalThis.foundry.applications.api.DialogV2.wait=async()=>({...activityForm});const saved=await panel.openActivityDeclaration('Actor.A');
+ assert.equal(saved.checkpointBinding.id,current.id);assert.deepEqual(counts,{queries:2,records:2,lookups:0});assert.equal(f.store.raw.pages.length,pages+1);
+});
+test('OWNER declaration with unknown acknowledgement is looked up after time completes without another record',async t=>{
+ const f=await fixture(),binding=await opened(f),{panel,counts}=ownerDeclarationPanel(f);declarationDialog(t,async()=>({...activityForm}));
+ f.store.setAcknowledgement(()=>undefined);await assert.rejects(panel.openActivityDeclaration('Actor.A'),/acknowledgement-unknown/);
+ const saved=Object.values((await f.ledger.getSession('S')).activityCheckpoint.registrations)[0];assert.ok(saved);f.store.setAcknowledgement(ack=>ack);
+ await f.c.closeActivityCheckpoint(binding,{autoRun:false});await f.c.step('S');assert.equal(f.game.time.worldTime,600);
+ const pages=f.store.raw.pages.length,result=await panel.openActivityDeclaration('Actor.A');assert.equal(result.registrationId,saved.registrationId);assert.equal(result.status,'completed');
+ assert.deepEqual(counts,{queries:1,records:1,lookups:1});assert.equal(f.store.raw.pages.length,pages);assert.deepEqual(f.calls.advance,[600]);
+});
+test('a caller rejection flag is rejected before enrollment and cannot forge a definitive result',async()=>{
+ const f=await fixture(),binding=await opened(f),owner=createManualRecordBridge({game:{...f.game,user:f.game.users.get('P')}});
+ owner.register({register:()=>{},executeAsGM:async(name,...args)=>f.handlers.get(name).call({socketdata:{userId:'P'}},...args)});f.store.setAcknowledgement(()=>undefined);
+ await assert.rejects(owner.record({registrationId:'saved',checkpointBinding:binding,actorUUID:'Actor.A',label:'Search',durationSeconds:600,declarationRejected:true}),/invalid-checkpoint-declaration/);
+ assert.deepEqual((await f.ledger.getSession('S')).activityCheckpoint.registrations,{});
+});
+for(const drift of ['OWNER','offline','canonical','root','source-user'])test(`completed registration readback rejects ${drift} drift without a new record`,async()=>{
+ const f=await fixture(),binding=await opened(f);await f.enroll(binding,'saved','Actor.A',600);await f.c.closeActivityCheckpoint(binding,{autoRun:false});await f.c.step('S');
+ const input={...binding};if(drift==='OWNER')f.actors.get('Actor.A').testUserPermission=()=>false;if(drift==='offline')f.game.users.get('P').active=false;if(drift==='canonical')f.game.actors.set('A',{...f.actors.get('Actor.A')});if(drift==='root')input.rootUUID='JournalEntry.OTHER';
+ const pages=f.store.raw.pages.length,response=await f.handlers.get('exploration:lookupCheckpointActivity').call({socketdata:{userId:drift==='source-user'?'G':'P'}},input,'saved','Actor.A');
+ assert.equal(response.ok,false);assert.equal(f.store.raw.pages.length,pages);assert.deepEqual(f.calls.advance,[600]);
+});
+test('OWNER resolves an unknown archived registration before entering the next window without replay',async t=>{
+ const f=await fixture(),old=await opened(f),{panel,counts}=ownerDeclarationPanel(f);declarationDialog(t,async()=>({...activityForm}));f.store.setAcknowledgement(()=>undefined);
+ await assert.rejects(panel.openActivityDeclaration('Actor.A'),/acknowledgement-unknown/);const registered=Object.values((await f.ledger.getSession('S')).activityCheckpoint.registrations)[0];f.store.setAcknowledgement(ack=>ack);
+ await f.c.closeActivityCheckpoint(old,{autoRun:false});await f.c.step('S');const next=await opened(f),session=await f.ledger.getSession('S');assert.notEqual(next.id,old.id);assert.equal(session.activityCheckpointHistory[0].registrations[registered.registrationId].status,'completed');
+ const pages=f.store.raw.pages.length,saved=await panel.openActivityDeclaration('Actor.A');assert.equal(saved.registrationId,registered.registrationId);assert.deepEqual(saved.checkpointBinding,old);assert.equal(saved.status,'completed');assert.equal(f.store.raw.pages.length,pages);assert.deepEqual(counts,{queries:1,records:1,lookups:1});
+ const fresh=await panel.openActivityDeclaration('Actor.A');assert.deepEqual(fresh.checkpointBinding,next);assert.notEqual(fresh.registrationId,saved.registrationId);assert.equal(f.store.raw.pages.length,pages+1);assert.deepEqual(counts,{queries:2,records:2,lookups:1});assert.deepEqual(f.calls.advance,[600]);
 });

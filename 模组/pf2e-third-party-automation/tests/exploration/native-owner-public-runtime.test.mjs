@@ -6,7 +6,7 @@ import {OWNER_TRANSPORT_CHANNEL} from '../../scripts/exploration/owner-transport
 import {samePermit} from '../../scripts/exploration/owner-command.mjs';
 
 function publicRuntimeFixture() {
- const tabs=[],packets=[],documents=[],effects=[],clocks=[],errors=[];
+ const tabs=[],packets=[],documents=[],effects=[],clocks=[],errors=[],manualPackets=[];
  const users=new Map(['G','O','P'].map(id=>[id,{id,isGM:id==='G',active:true,flags:{},getFlag(scope,key){return this.flags[scope]?.[key]},async setFlag(scope,key,value){(this.flags[scope]??={})[key]=value}}]));
  users.activeGM=users.get('G');
  let configured='',raw=null,worldTime=0,nativeGate=null;
@@ -16,7 +16,7 @@ function publicRuntimeFixture() {
  function documentRequest(tab,request,ack){
   documents.push({tab:tab.id,userId:tab.game.user.id,request:structuredClone(request)});
   const envelope={type:request.type,action:request.action,operation:structuredClone(request.operation),broadcast:false,userId:tab.game.user.id};
-  if(request.action==='get')return ack({...envelope,result:raw?[structuredClone(raw)]:[]});
+  if(request.action==='get'){if(raw&&!tab.game.user.isGM)return ack({...envelope,error:{class:'PermissionError',message:'private-ledger'}});return ack({...envelope,result:raw?[structuredClone(raw)]:[]})}
   assert.equal(tab.game.user.isGM,true,'the fixture server authenticates document writers');
   if(request.type==='JournalEntry'){
    assert.equal(raw,null);raw={...structuredClone(request.operation.data[0]),_id:'ROOT000000000001',pages:[]};
@@ -56,7 +56,8 @@ function publicRuntimeFixture() {
   const Hooks={on(event,handler){const id=++hookId;hooks.set(id,[event,handler]);return id},off(event,id){hooks.delete(id)}};
   const runtime=createExplorationRuntime({game,Hooks,fromUuid:async uuid=>uuid===actor.uuid?actor:null,nativeCasts,onError:error=>errors.push(error)});
   globalThis.canvas=previousCanvas;tab.runtime=runtime;tab.boundaries=[];
-  await runtime.bind({});await runtime.register({socket:null});
+  tab.manualHandlers=new Map();const socket={register:(name,handler)=>tab.manualHandlers.set(name,handler),executeAsGM:async(name,...args)=>{const gm=tabs.find(peer=>peer.game.user.id===users.activeGM.id&&peer.id==='driver');manualPackets.push({senderId:userId,name,args:structuredClone(args)});return gm.manualHandlers.get(name).apply({socketdata:{userId}},structuredClone(args))}};
+  await runtime.bind({});await runtime.register({socket});
   // Observe the real adapter call without replacing the registered provider or its context.
   const complete=runtime.refocusAdapter.complete;
   runtime.refocusAdapter.complete=async(activity,ctx)=>{
@@ -85,7 +86,7 @@ function publicRuntimeFixture() {
   while(performance.now()<deadline){const data=await tab.runtime.api.snapshot(id);if(data.session.status!=='running')return data;await new Promise(resolve=>setImmediate(resolve))}
   throw Error('offline-public-runtime-did-not-settle');
  }
- return {tabs,packets,documents,effects,clocks,errors,addTab,provision,finished,get raw(){return raw},holdNative(){
+ return {tabs,packets,documents,effects,clocks,errors,manualPackets,addTab,provision,finished,emitHook,get raw(){return raw},holdNative(){
   let entered,release;const boundary=new Promise(resolve=>{entered=resolve}),wait=new Promise(resolve=>{release=resolve});nativeGate={entered,wait};return {release,async waitForBoundary(){
    let timer;try{await Promise.race([boundary,new Promise((resolve,reject)=>{timer=setTimeout(()=>reject(Error('offline-native-boundary-not-reached')),3000)})])}finally{clearTimeout(timer)}
   }};
@@ -144,4 +145,22 @@ test('public runtime manual start stays recording without an automatic permit or
  const data=await gm.runtime.api.snapshot(session.id);
  assert.equal(data.session.status,'recording');assert.deepEqual(data.session.nativeOwnerByActor,{});assert.deepEqual(data.activities,[]);assert.deepEqual(data.clocks,[]);
  assert.equal(f.effects.length,0);assert.equal(f.clocks.length,0);assert.equal(f.packets.length,0);assert.deepEqual(f.errors,[]);
+});
+
+test('public GM boundary request and OWNER declaration share the authenticated runtime without player ledger access',async t=>{
+ const f=publicRuntimeFixture();t.after(()=>f.dispose());const gm=await f.addTab('driver','G'),owner=await f.addTab('owner','O'),other=await f.addTab('other','P');await f.provision(gm);
+ const gate=f.holdNative();t.after(()=>gate.release());const session=await gm.runtime.api.start({actorUUIDs:['Actor.H'],nativeOwnerByActor:{'Actor.H':'O'},requireFullFocus:true,budgetSeconds:1800,maxActivities:1});await gate.waitForBoundary();
+ const pending=gm.runtime.api.openActivityCheckpoint(session.id);pending.catch(()=>{});assert.equal((await gm.runtime.api.snapshot(session.id)).session.activityCheckpoint,undefined);gate.release();const binding=await pending;
+ const window=await owner.runtime.api.getActivityCheckpoint('Actor.H');assert.deepEqual(window.binding,binding);assert.equal(window.phase,'open');assert.deepEqual(Object.keys(window).sort(),['actor','binding','budgetEndsAt','dependencies','phase']);assert.deepEqual(window.actor,{actorUUID:'Actor.H',name:'Offline Refocus'});assert.equal(window.dependencies.length,1);assert.equal(window.dependencies[0].actorUUID,undefined);
+ await assert.rejects(owner.runtime.api.snapshot(session.id),/root-read-acknowledgement-unknown/);await assert.rejects(other.runtime.api.getActivityCheckpoint('Actor.H'),/actor-not-allowed/);await assert.rejects(owner.runtime.api.openActivityCheckpoint(session.id),/active-gm-required/);
+ const previousFoundry=globalThis.foundry;t.after(()=>{globalThis.foundry=previousFoundry});globalThis.foundry={applications:{api:{DialogV2:{wait:async()=>({actor:'Actor.H',label:'Search',duration:'5',unit:'60',durationSource:'table-convention',durationDetail:'One interval',notBefore:'',order:'',dependsOn:[]})}}}};
+ assert.equal(typeof owner.runtime.api.openActivityDeclaration,'function');const reads=f.documents.filter(row=>row.userId==='O').length;const saved=await owner.runtime.api.open(['Actor.H']);assert.equal(f.documents.filter(row=>row.userId==='O').length,reads);assert.equal(saved.source.userId,'O');assert.deepEqual(await owner.runtime.api.lookupCheckpointActivity(binding,saved.registrationId,'Actor.H'),saved);assert.ok(f.manualPackets.filter(row=>row.name==='exploration:record').every(row=>row.senderId==='O'));
+ await gm.runtime.api.closeActivityCheckpoint(binding);const final=await f.finished(gm,session.id),manual=final.activities.find(a=>a.source.type==='user-record');assert.equal(final.session.status,'complete');assert.equal(final.activities.length,2);assert.equal(manual.executor,undefined);assert.deepEqual(f.clocks.map(row=>row.dt),[600,300]);assert.equal(f.effects.length,1);
+ await assert.rejects(owner.runtime.api.getActivityCheckpoint('Actor.H'),/checkpoint-closed|driver-required/);await assert.rejects(owner.runtime.api.record({registrationId:'late',checkpointBinding:binding,actorUUID:'Actor.H',label:'Late',durationSeconds:300}),/checkpoint|actor-not-allowed/);assert.deepEqual(f.clocks.map(row=>row.dt),[600,300]);assert.deepEqual(f.errors,[]);
+});
+
+for(const reason of ['disconnect','root-change','gm-offline','gm-change'])test(`public runtime ${reason} cancels its one pending window without replaying the original native operation`,async t=>{
+ const f=publicRuntimeFixture();t.after(()=>f.dispose());const gm=await f.addTab('driver','G');await f.provision(gm);const gate=f.holdNative();t.after(()=>gate.release());const session=await gm.runtime.api.start({actorUUIDs:['Actor.H'],requireFullFocus:true,budgetSeconds:1800,maxActivities:1});await gate.waitForBoundary();const pending=gm.runtime.api.openActivityCheckpoint(session.id);pending.catch(()=>{});
+ if(reason==='disconnect')for(const handler of gm.listeners.get('disconnect'))handler();if(reason==='root-change')await gm.game.settings.set(MODULE_ID,'explorationLedgerUUID','JournalEntry.OTHERROOT');if(reason==='gm-offline'){gm.game.user.active=false;f.emitHook('updateUser',gm.game.user)}if(reason==='gm-change'){gm.game.users.activeGM=null;f.emitHook('userConnected',gm.game.user)}
+ await assert.rejects(pending,/disconnected|root-changed|offline|gm-changed/);gate.release();assert.equal(f.clocks.length,1);assert.equal(f.tabs.reduce((n,tab)=>n+tab.boundaries.length,0),1);assert.equal(JSON.stringify(f.raw.pages).includes('activityCheckpoint'),false);
 });

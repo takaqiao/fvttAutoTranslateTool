@@ -79,3 +79,35 @@ test('the first-round waiting choice reaches start while ordinary starts remain 
  const f=checkpointPanelFixture(t,{status:'complete'}),values={budget:{value:'10'},activityBudget:{value:'2'},risky:{checked:false},focus:{checked:true},extension:{checked:false},assurance:{checked:false},rank:{value:'trained'},manualFirstRound:{checked:true}},content={querySelector:selector=>values[selector.match(/name=(\w+)/)[1]],querySelectorAll:()=>[{dataset:{pool:'Actor.H'},value:'20'}]};
  await f.app.act('start',content);assert.equal(f.calls[0][1].waitForManualFirstRound,true);values.manualFirstRound.checked=false;await f.app.act('start',content);assert.equal(f.calls[1][1].waitForManualFirstRound,false);
 });
+
+function declarationDialog(t,values){
+ const previousFoundry=globalThis.foundry,previousData=globalThis.FormData;t.after(()=>{globalThis.foundry=previousFoundry;globalThis.FormData=previousData});
+ globalThis.FormData=class{constructor(form){this.form=form}getAll(key){const value=this.form[key];return Array.isArray(value)?value:value?[value]:[]}*[Symbol.iterator](){for(const [key,value] of Object.entries(this.form))if(!Array.isArray(value))yield [key,value]}};
+ let content;globalThis.foundry={applications:{api:{ApplicationV2:class{render(){return this}},DialogV2:{wait:async options=>{content=options.content;return options.buttons.find(b=>b.action==='record').callback(null,{form:values})}}}}};return ()=>content;
+}
+test('the checkpoint form emits one immutable binding and future timing without historical fields',async t=>{
+ const content=declarationDialog(t,{actor:'Actor.A',label:' Search ',duration:'5',unit:'60',durationSource:'item-text',durationDetail:' One task ',notBefore:'2',order:'1',dependsOn:['D']}),binding={id:'C',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:600},records=[];
+ await panelUI.promptActivityDeclaration({actors:[{actorUUID:'Actor.A',name:'<A>'}],activities:[{id:'D',label:'Prior'}],window:{binding,phase:'open'},record:async event=>{records.push(event);return event}});
+ assert.equal(records.length,1);assert.deepEqual(records[0].checkpointBinding,binding);assert.equal(records[0].durationSeconds,300);assert.equal(records[0].notBefore,720);assert.equal(records[0].order,1);assert.deepEqual(records[0].dependsOn,['D']);assert.deepEqual(records[0].durationSource,{type:'item-text',detail:'One task'});assert.equal(records[0].sessionId,undefined);assert.equal(records[0].observedStart,undefined);assert.equal(records[0].observedEnd,undefined);assert.equal(typeof records[0].registrationId,'string');assert.doesNotMatch(content(),/name="observedStart"|name="observedEnd"/);assert.match(content(),/&lt;A&gt;/);
+});
+test('the existing recording form keeps its historical declaration and session payload',async t=>{
+ declarationDialog(t,{actor:'Actor.A',label:'Repair',duration:'10',unit:'60',durationSource:'user-declared',durationDetail:'',notBefore:'',observedStart:'1',observedEnd:'11',order:'',dependsOn:[]});let saved;
+ await panelUI.promptActivityDeclaration({actors:[{actorUUID:'Actor.A',name:'A'}],session:{id:'S',status:'recording',startedAt:-600},record:async event=>{saved=event}});assert.equal(saved.sessionId,'S');assert.equal(saved.observedStart,-540);assert.equal(saved.observedEnd,60);assert.equal(saved.checkpointBinding,undefined);assert.equal(saved.registrationId,undefined);
+});
+test('a failed checkpoint form submission retains its exact registration for lookup and never retries',async t=>{
+ declarationDialog(t,{actor:'Actor.A',label:'Repair',duration:'1',unit:'60',durationSource:'user-declared',durationDetail:'',notBefore:'',order:'',dependsOn:[]});const binding={id:'C',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:0},error=Error('revision-acknowledgement-unknown');let calls=0;
+ await assert.rejects(panelUI.promptActivityDeclaration({actors:[{actorUUID:'Actor.A',name:'A'}],window:{binding,phase:'open'},record:async()=>{calls++;throw error}}),caught=>{assert.equal(caught,error);assert.deepEqual(caught.declaration.checkpointBinding,binding);assert.equal(typeof caught.declaration.registrationId,'string');return true});assert.equal(calls,1);
+});
+test('the GM panel requests and seals the current generic window without requiring another player',async t=>{
+ const f=checkpointPanelFixture(t);delete f.data.session.manualCheckpoint;f.data.session.activityCheckpoint={id:'A',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:0,phase:'open',registrations:{}};f.data.session.budgetEndsAt=1200;
+ const coordinatorCalls=[];const api=panelUI.createRecoveryPanel({game:{user:{isGM:true,getFlag:()=>({})},messages:new Map()},coordinator:{snapshot:async()=>f.data,openActivityCheckpoint:async id=>coordinatorCalls.push(['open',id]),closeActivityCheckpoint:async b=>coordinatorCalls.push(['close',b])},capabilities:{snapshot:async()=>f.data.actors},getSessionId:()=> 'S'}),app=api.open(['Actor.H']);
+ assert.match(await app._renderHTML(await app._prepareContext()),/data-recovery="closeActivityCheckpoint"/);await app.act('closeActivityCheckpoint',null);assert.equal(coordinatorCalls[0][0],'close');assert.equal(coordinatorCalls[0][1].to,undefined);f.data.session.activityCheckpoint.phase='settled';await app.act('openActivityCheckpoint',null);assert.deepEqual(coordinatorCalls[1],['open','S']);
+});
+test('checkpoint history separates accounted time from unverified rule effects',()=>{
+ const data=historyFixture();data.activities[0]={...data.activities[0],providerId:'manual',source:{type:'user-record'},temporalSource:{type:'checkpoint-declaration'},durationSeconds:300,state:'confirmed'};assert.match(panelUI.renderRecoveryHistory(data),/时间已计入.*规则效果未核验/);
+});
+test('the OWNER form uses the same DTO form and an uncertain attempt is only looked up',async t=>{
+ declarationDialog(t,{actor:'Actor.A',label:'Repair',duration:'1',unit:'60',durationSource:'user-declared',durationDetail:'',notBefore:'',order:'',dependsOn:[]});const binding={id:'C',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:0},error=Error('revision-acknowledgement-unknown');let records=0,queries=0,lookups=0,submitted;
+ const api=panelUI.createRecoveryPanel({game:{user:{id:'P',isGM:false}},getActivityCheckpoint:async()=>{queries++;return {binding,phase:'open',actor:{actorUUID:'Actor.A',name:'A'},dependencies:[]}},record:async event=>{records++;submitted=event;throw error},lookupCheckpointActivity:async(b,id,actor)=>{lookups++;assert.deepEqual(b,binding);assert.equal(id,submitted.registrationId);assert.equal(actor,'Actor.A');const {registrationId,checkpointBinding,...declaration}=submitted;return {registrationId,checkpointBinding,declaration,source:{type:'user-record',userId:'P'}}}});
+ await assert.rejects(api.openActivityDeclaration('Actor.A'),caught=>caught===error);assert.equal((await api.openActivityDeclaration('Actor.A')).registrationId,submitted.registrationId);assert.equal(records,1);assert.equal(queries,1);assert.equal(lookups,1);
+});

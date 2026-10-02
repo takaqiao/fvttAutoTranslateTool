@@ -3,11 +3,12 @@ import {extensionPatients} from './treatment.mjs';
 import {clone,normalizeNativeOwnerMap,checkpointBinding,sameCheckpoint,manualSourceIntent,activityCheckpointBinding,sameActivityCheckpoint} from './schema.mjs';
 import {WORKBENCH_SOURCE_SHA} from './manual-events.mjs';
 export function createCoordinator({ledger,capabilities,providers,clock,policy,isAuthority,now=()=>globalThis.game.time.worldTime,ownerOperations,onChange=()=>{},game=globalThis.game,fromUuid=globalThis.fromUuid,getHpPool,manualEvents}){
- const byId=new Map(providers.map(p=>[p.id,p])),locks=new Map(),contexts=new Map(),runners=new Map(),leases=new Map(),generations=new Map();
+ const byId=new Map(providers.map(p=>[p.id,p])),locks=new Map(),contexts=new Map(),runners=new Map(),leases=new Map(),generations=new Map(),checkpointRequests=new Map();
  const atomic=ledger.atomic===true;
- const check=()=>{if(!isAuthority())throw Error('active-gm-required')};
+ const check=()=>{if(!isAuthority()||game?.user?.active===false)throw Error('active-gm-required')};
  const scopeOptions=scope=>atomic?{leaseNonce:scope?.leaseNonce}:{};
- const invalidate=id=>{leases.delete(id);generations.set(id,(generations.get(id)??0)+1)};
+ function cancelCheckpointRequest(id,reason){const request=checkpointRequests.get(id);if(request){checkpointRequests.delete(id);request.reject(Error(reason))}}
+ const invalidate=(id,reason='session-driver-changed')=>{cancelCheckpointRequest(id,reason);leases.delete(id);generations.set(id,(generations.get(id)??0)+1)};
  function currentScope(id,scope){check();if(atomic&&(!scope||leases.get(id)!==scope))throw Error('session-driver-required')}
  async function owned(id,scope,{running=true}={}){
   currentScope(id,scope);const session=await ledger.getSession(id);currentScope(id,scope);
@@ -48,10 +49,10 @@ export function createCoordinator({ledger,capabilities,providers,clock,policy,is
   const scope=Object.freeze({leaseNonce:session.driver?.leaseNonce});
   if(!scope.leaseNonce||!ledger.ownsSession(session,scope))throw Error('session-driver-required');leases.set(id,scope);
  }
- async function snapshot(id){const data=await ledger.snapshot(id);return {...data,actors:data.session?await capabilities.snapshot(data.session.actorUUIDs):[]}}
+ async function snapshot(id){const data=await ledger.snapshot(id);return {...data,...checkpointRequests.has(id)?{activityCheckpointRequested:true}:{},actors:data.session?await capabilities.snapshot(data.session.actorUUIDs):[]}}
  async function pause(id,reason,scope,explicit=false){
   check();if(!explicit)await owned(id,scope);
-  if(!explicit)currentScope(id,scope);else invalidate(id);
+  if(!explicit)currentScope(id,scope);else invalidate(id,reason);
   if(explicit)clock.stop?.(reason,{sessionId:id});const options=explicit?{}:{...scopeOptions(scope),expectedStatus:'running'};
   const result=await ledger.updateSession(id,{status:'paused',stopReason:reason},options);
   if(!explicit)clock.stop?.(reason,{sessionId:id,...scopeOptions(scope)});
@@ -63,7 +64,7 @@ export function createCoordinator({ledger,capabilities,providers,clock,policy,is
    await byId.get(a.providerId)?.cancel?.(a,contexts.get(a.id));check();if(!explicit)currentScope(id,scope);
    try{await ledger.transitionActivity(a.id,{expected:['planned','started'],patch:{state:'cancelled',reason},...options});contexts.delete(a.id)}catch(error){if(error.message!=='state-conflict')throw error}
   }
-  if(!explicit&&leases.get(id)===scope)invalidate(id);onChange(id);return result;
+  if(!explicit&&leases.get(id)===scope)invalidate(id,reason);onChange(id);return result;
  }
  const stop=(id,reason='user-stopped')=>pause(id,reason,undefined,true);
  async function addActivity(id,input,scope=leases.get(id)){
@@ -99,16 +100,35 @@ export function createCoordinator({ledger,capabilities,providers,clock,policy,is
   const guard=currentSession=>{currentScope(session.id,scope);if(now()!==at)return false;if(currentSession&&(!sameActivityCheckpoint(currentSession.activityCheckpoint,declarationBinding(session.activityCheckpoint))||currentSession.activityCheckpoint.phase!==session.activityCheckpoint.phase||entries.some(({row})=>!currentSession.actorUUIDs.includes(row.declaration.actorUUID))))return false;for(const {row,actor} of entries){const user=game?.users?.get(row.source.userId);if(!user?.active||actor?.uuid!==row.declaration.actorUUID||actor.testUserPermission?.(user,'OWNER')!==true||game?.actors&&game.actors.get(actor.id)!==actor)return false}return true};
   if(!guard())throw Error('activity-checkpoint-changed');return guard;
  }
- async function openActivityCheckpoint(id){
-  const scope=leases.get(id);if(!atomic)throw Error('atomic-activity-checkpoint-required');await owned(id,scope);
-  if(locks.has(id)||runners.has(id))throw Error('session-in-flight');const lock={scope};locks.set(id,lock);let submitted=false;
+ async function openActivityCheckpointAtBoundary(id,scope,runner,request){
+  if(!atomic)throw Error('atomic-activity-checkpoint-required');await owned(id,scope);
+  if(locks.has(id)||runners.has(id)&&runners.get(id)!==runner)throw Error('session-in-flight');const lock={scope};locks.set(id,lock);let submitted=false;
+  const current=()=>{currentScope(id,scope);if(request&&checkpointRequests.get(id)!==request)throw Error('activity-checkpoint-request-cancelled');if(game?.combat?.started)throw Error('encounter-started')};
   try{
-   const session=await owned(id,scope);if(now()!==session.cursorAt)throw Error('external-world-time-change');
+   const session=await owned(id,scope);current();if(now()!==session.cursorAt)throw Error('external-world-time-change');
    if(session.activityCheckpoint?.phase==='open')return declarationBinding(session.activityCheckpoint);
    if(session.activityCheckpoint?.phase==='sealed')throw Error('activity-checkpoint-already-opened');
    const binding={id:crypto.randomUUID(),sessionId:id,rootUUID:session.protocol.rootUUID,epoch:session.protocol.epoch,observationNonce:crypto.randomUUID(),from:session.cursorAt};
-   submitted=true;await ledger.openActivityCheckpoint(binding,{...scopeOptions(scope),guard:()=>{currentScope(id,scope);return locks.get(id)===lock&&now()===binding.from}});await owned(id,scope);onChange(id);return binding;
-  }catch(error){if(submitted)invalidate(id);throw error}finally{if(locks.get(id)===lock)locks.delete(id)}
+   submitted=true;await ledger.openActivityCheckpoint(binding,{...scopeOptions(scope),guard:()=>{current();return locks.get(id)===lock&&now()===binding.from}});await owned(id,scope);current();onChange(id);return binding;
+  }catch(error){if(submitted)invalidate(id,error.message);throw error}finally{if(locks.get(id)===lock)locks.delete(id)}
+ }
+ async function openActivityCheckpoint(id){
+  const scope=leases.get(id);currentScope(id,scope);if(!atomic)throw Error('atomic-activity-checkpoint-required');
+  const runner=runners.get(id);
+  if(runner){
+   if(runner.scope!==scope)throw Error('session-driver-required');
+   const prior=checkpointRequests.get(id);if(prior)return prior.promise;
+   let resolve,reject;const promise=new Promise((yes,no)=>{resolve=yes;reject=no});promise.catch(()=>{});
+   checkpointRequests.set(id,{scope,runner,promise,resolve,reject});onChange(id);return promise;
+  }
+  return openActivityCheckpointAtBoundary(id,scope);
+ }
+ async function consumeCheckpointRequest(id,runner,result){
+  const request=checkpointRequests.get(id);if(!request)return false;
+  if(request.runner!==runner)return false;
+  if(request.scope!==runner.scope||!['running','waiting-activities'].includes(result.status)){cancelCheckpointRequest(id,result.reason??'activity-checkpoint-unavailable');return false}
+  try{const binding=await openActivityCheckpointAtBoundary(id,runner.scope,runner,request);if(checkpointRequests.get(id)!==request)return false;checkpointRequests.delete(id);request.resolve(binding);return true}
+  catch(error){cancelCheckpointRequest(id,error.message);throw error}
  }
  async function closeActivityCheckpoint(input,{autoRun=true}={}){
   const binding=activityCheckpointBinding(input),id=binding.sessionId,scope=leases.get(id);await owned(id,scope);
@@ -217,9 +237,10 @@ export function createCoordinator({ledger,capabilities,providers,clock,policy,is
   }
   finally{if(locks.get(id)===lock)locks.delete(id)}
  }
- async function drive(id){const scope=leases.get(id);if(atomic&&!scope)return;if(runners.has(id)&&runners.get(id).scope===scope)return;const runner={scope};runners.set(id,runner);try{while(isAuthority()){await owned(id,scope);const result=await step(id);if(result.status!=='running')break;await Promise.resolve()}}finally{if(runners.get(id)===runner)runners.delete(id)}}
+ async function drive(id){const scope=leases.get(id);if(atomic&&!scope)return;if(runners.has(id)&&runners.get(id).scope===scope)return;const runner={scope};runners.set(id,runner);try{while(isAuthority()){await owned(id,scope);const result=await step(id);if(await consumeCheckpointRequest(id,runner,result)||result.status!=='running')break;await Promise.resolve()}}finally{if(runners.get(id)===runner){runners.delete(id);cancelCheckpointRequest(id,'activity-checkpoint-driver-ended')}}}
  async function start(config){check();const nativeOwnerByActor=normalizeNativeOwnerMap(config.nativeOwnerByActor,config.actorUUIDs,{manual:config.manual===true});config={...clone(config),nativeOwnerByActor};const actors=await capabilities.snapshot(config.actorUUIDs);check();const at=now();const goals=config.goalsByPool??[...new Map(actors.map(a=>[a.pool.poolUUID,{poolUUID:a.pool.poolUUID,targetHP:a.hp.max}])).values()];
   if(config.waitForManualFirstRound&&!config.manual&&(!atomic||(config.budgetSeconds??7200)<600))throw Error('manual-checkpoint-unavailable');
+  if(config.waitForActivityFirstRound&&!config.manual&&(!atomic||config.waitForManualFirstRound))throw Error('activity-checkpoint-start-choice-conflict');
   if(!config.manual){const all=await ledger.all();check();const ids=new Set(config.actorUUIDs),pools=new Set(actors.map(a=>a.pool.poolUUID)),reviewed=row=>!atomic&&row.review&&all.sessions[row.sessionId]?.status==='closed';if(Object.values(all.sessions).some(s=>s.status==='running'))throw Error('recovery-session-already-running');if(Object.values(all.clocks).some(c=>c.state!=='confirmed'&&!reviewed(c))||Object.values(all.activities).some(a=>(!a.source?.manual||a.temporalSource?.type==='checkpoint-reservation')&&!reviewed(a)&&['uncertain','awaiting-evidence','completing','started'].includes(a.state)&&(ids.has(a.actorUUID)||a.patientUUIDs.some(u=>ids.has(u))||a.hpPoolUUIDs.some(u=>pools.has(u)))))throw Error('unresolved-evidence-no-replay')}
   if(!actors.length||goals.some(g=>!actors.some(a=>a.pool.poolUUID===g.poolUUID&&Number.isFinite(g.targetHP)&&g.targetHP>=0&&g.targetHP<=a.hp.max)))throw Error('invalid-recovery-goals');
   const eligible=await nativeOwnerEligibility(config);eligible();
@@ -227,6 +248,7 @@ export function createCoordinator({ledger,capabilities,providers,clock,policy,is
   const s=await ledger.createSession({...config,id,actorUUIDs:[...new Set(config.actorUUIDs)],startedAt:at,cursorAt:at,budgetEndsAt:at+Math.max(0,config.budgetSeconds??7200),maxActivities:Math.min(100,Math.max(1,config.maxActivities??100)),goalsByPool:goals,status:config.manual?'recording':'running',assumptions:config.assumptions??['different-actors-may-overlap']});
   if(!config.manual)accept(id,s,generation);
   if(config.waitForManualFirstRound&&!config.manual){await openManualCheckpoint(id);Object.assign(s,await ledger.getSession(id))}
+  if(config.waitForActivityFirstRound&&!config.manual){await openActivityCheckpoint(id);Object.assign(s,await ledger.getSession(id))}
   if(config.autoRun!==false&&!config.manual)void drive(s.id).catch(error=>onChange({error:error.message}));onChange(s.id);return s;
  }
  async function recover(id){check();if(atomic||runners.has(id)||locks.has(id))return ledger.getSession(id);const data=await ledger.snapshot(id);if(!data.session||data.session.status!=='running')return data.session;
@@ -247,7 +269,7 @@ export function createCoordinator({ledger,capabilities,providers,clock,policy,is
   if(now()!==session.cursorAt){await pause(id,'external-world-time-change',leases.get(id));throw Error('external-world-time-change')}
   if(autoRun)void drive(id).catch(error=>onChange({error:error.message}));return session;
  }
- async function takeover(id){check();invalidate(id);clock.stop?.('explicit-driver-takeover',{sessionId:id});const session=await ledger.takeoverSession(id);onChange(id);return session}
+ async function takeover(id){check();invalidate(id,'explicit-driver-takeover');clock.stop?.('explicit-driver-takeover',{sessionId:id});const session=await ledger.takeoverSession(id);onChange(id);return session}
  const executionScope=id=>leases.has(id)?{leaseNonce:leases.get(id).leaseNonce}:undefined;
- return {start,step,stop,resume,recover,restore,reconcile,review,addActivity,snapshot,takeover,executionScope,openManualCheckpoint,closeManualCheckpoint,reserveManualSource,manualCheckpointOptions,openActivityCheckpoint,closeActivityCheckpoint};
+ return {start,step,stop,resume,recover,restore,reconcile,review,addActivity,snapshot,takeover,executionScope,openManualCheckpoint,closeManualCheckpoint,reserveManualSource,manualCheckpointOptions,openActivityCheckpoint,closeActivityCheckpoint,invalidate:reason=>{for(const id of new Set([...leases.keys(),...checkpointRequests.keys()]))invalidate(id,reason)}};
 }
