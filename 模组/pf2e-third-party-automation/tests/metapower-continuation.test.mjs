@@ -8,9 +8,10 @@ function setup(t){
  const previous=globalThis.CONFIG;globalThis.CONFIG={Actor:{sheetClasses:{character:{}}},Dice:{rolls:[]}};
  t.after(()=>{if(previous===undefined)delete globalThis.CONFIG;else globalThis.CONFIG=previous});
  const owner={id:'owner'},stranger={id:'stranger'},gm={id:'gm'};
- const actor={uuid:'Actor.a',type:'character',flags:{[ID]:{metapower:{version:1,sequence:2,armed:{nonce:'original',kind:'widen',turn:null},receipts:{original:{status:'committed',nonce:'original'}}}}},items:new Map([['w',{sourceId:METAPOWER_SOURCES.widen}]]),
+ const actor={id:'a',uuid:'Actor.a',type:'character',flags:{[ID]:{metapower:{version:1,sequence:2,armed:{nonce:'original',kind:'widen',turn:null},receipts:{original:{status:'committed',nonce:'original'}}}}},items:new Map([['w',{sourceId:METAPOWER_SOURCES.widen,system:{actionType:{value:'action'},actions:{value:1}}}]]),
   testUserPermission:user=>user.id==='owner'||user.id==='gm',async update(changes){this.flags[ID].metapower=changes[`flags.${ID}.metapower`];return this}};
- const game={user:gm,users:{activeGM:gm},actors:new Map(),scenes:new Map(),modules:new Map(),pf2e:{actions:new Map()}};
+ const users=new Map([[gm.id,gm],[owner.id,owner],[stranger.id,stranger]]);users.activeGM=gm;
+ const game={user:gm,users,actors:new Map([[actor.id,actor]]),scenes:new Map(),modules:new Map(),pf2e:{actions:new Map()}};
  const ledger=createMetapowerLedger({game:{...game,user:gm},fromUuid:async uuid=>uuid===actor.uuid?actor:null});
  const hooks=new Map(),requests=[],errors=[];
  const provider=createMetapowerProvider({game,fromUuid:async uuid=>uuid===actor.uuid?actor:null,onError:e=>errors.push(e)});

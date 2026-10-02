@@ -14,11 +14,13 @@ function mergeFlags(before,changes){
  return result;
 }
 function fixture(){
- const user={id:'owner'},gm={id:'gm'},game={user:gm,users:{activeGM:gm},combat:{id:'combat',round:1,turn:0,combatant:{id:'turn',actor:{uuid:'Actor.a'}}}};
+ const user={id:'owner'},gm={id:'gm'},users=new Map([[user.id,user],[gm.id,gm]]);users.activeGM=gm;
+ const game={user:gm,users,actors:new Map(),messages:new Map(),scenes:new Map(),combat:{id:'combat',round:1,turn:0,combatant:{id:'turn',actor:{uuid:'Actor.a'}}}};
  const actor={uuid:'Actor.a',id:'a',type:'character',level:5,flags:{},items:new Map(),testUserPermission:u=>u===user||u===gm,getRollOptions:()=>['active-power-one:electric-surge'],async update(data){for(const[key,value]of Object.entries(data))if(key===`flags.${ID}.metapower`)this.flags[ID]={...this.flags[ID],metapower:mergeFlags(this.flags[ID]?.metapower,value)}}};
+ game.actors.set(actor.id,actor);
  const item=(id,source)=>{const i={id,uuid:`Actor.a.Item.${id}`,sourceId:source,type:'feat',actor,system:{traits:{value:[]},frequency:{value:1}}};actor.items.set(id,i);return i};
  const siphon=item('s',METAPOWER_SOURCES.siphoning),widen=item('w',METAPOWER_SOURCES.widen),power=item('p',Object.values(POWER_PROFILES).find(p=>p.id==='electric-surge').sourceUuid);
- const documents=new Map([[actor.uuid,actor],...[...actor.items.values()].map(i=>[i.uuid,i])]);
+ const documents=new Map([[actor.uuid,actor],...[...actor.items.values()].map(i=>[i.uuid,i])]),set=documents.set.bind(documents);documents.set=(uuid,document)=>{if(uuid.startsWith('ChatMessage.')){document.id??=uuid.split('.').at(-1);game.messages.set(document.id,document);}return set(uuid,document);};
  return {game,actor,user,siphon,widen,power,documents,service:()=>api.createMetapowerLedger({game,fromUuid:async uuid=>documents.get(uuid)})};
 }
 const begin=(service,f,item,nonce,extra={})=>service.begin({actorUuid:f.actor.uuid,itemUuid:item?.uuid??null,nonce,...extra},f.user);
@@ -61,7 +63,7 @@ test('prepared options and frequency remain native gates; High Voltage has expli
 test('selected discharge requires Charged and pays exactly once only on original card completion',async()=>{
  const f=fixture(),s=f.service();await finish(s,f,await begin(s,f,f.siphon,'one'),f.siphon);
  await assert.rejects(begin(s,f,f.power,'bad',{selection:{discharge:true,baseDistance:60}}),/蓄电/);
- const charge={id:'charge',uuid:'Actor.a.Item.charge',sourceId:'Compendium.battlezoo-eldamon-pf2e.conditions.Item.Bi2aHykg6CZrQCnR',system:{badge:{value:2}},flags:{},async update(p){this.system.badge.value=p['system.badge.value'];this.flags[ID]={payment:p[`flags.${ID}.payment`]}}};f.actor.items.set(charge.id,charge);f.documents.set(charge.uuid,charge);
+ const charge={id:'charge',uuid:'Actor.a.Item.charge',actor:f.actor,sourceId:'Compendium.battlezoo-eldamon-pf2e.conditions.Item.Bi2aHykg6CZrQCnR',system:{badge:{value:2}},flags:{},async update(p){this.system.badge.value=p['system.badge.value'];this.flags[ID]={payment:p[`flags.${ID}.payment`]}}};f.actor.items.set(charge.id,charge);f.documents.set(charge.uuid,charge);
  const r=await begin(s,f,f.power,'two',{selection:{discharge:true,baseDistance:60}});assert.equal(charge.system.badge.value,2);
  await finish(s,f,r,f.power);assert.equal(charge.system.badge.value,1);await finish(f.service(),f,r,f.power);assert.equal(charge.system.badge.value,1);
 });
@@ -95,7 +97,7 @@ test('GM can archive an abandoned lease as uncertain without refunding or rearmi
 });
 test('lost zero-counter deletion response persists payment intent and cannot pay twice',async()=>{
  const f=fixture(),s=f.service();let payments=0;
- const charge={id:'charge',uuid:'Actor.a.Item.charge',sourceId:'Compendium.battlezoo-eldamon-pf2e.conditions.Item.Bi2aHykg6CZrQCnR',system:{badge:{value:1}},flags:{},async update(){payments++;f.actor.items.delete(this.id);f.documents.delete(this.uuid);throw Error('lost deletion response')}};f.actor.items.set(charge.id,charge);f.documents.set(charge.uuid,charge);
+ const charge={id:'charge',uuid:'Actor.a.Item.charge',actor:f.actor,sourceId:'Compendium.battlezoo-eldamon-pf2e.conditions.Item.Bi2aHykg6CZrQCnR',system:{badge:{value:1}},flags:{},async update(){payments++;f.actor.items.delete(this.id);f.documents.delete(this.uuid);throw Error('lost deletion response')}};f.actor.items.set(charge.id,charge);f.documents.set(charge.uuid,charge);
  const r=await begin(s,f,f.power,'pay',{selection:{discharge:true,baseDistance:60}});
  await assert.rejects(finish(s,f,r,f.power),/lost/);assert.equal(f.actor.flags[ID].metapower.receipts.pay.paymentStarted,true);
  await assert.rejects(finish(f.service(),f,r,f.power),/不确定|核对/);assert.equal(payments,1);

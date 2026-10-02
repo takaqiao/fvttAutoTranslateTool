@@ -95,7 +95,7 @@ export function buildChannelSnapshot({kind,item,actor=item?.actor,level=actor?.l
   version:1,kind,powerId:profile.id,powerSourceUuid:profile.sourceUuid,actorUuid:actor?.uuid??null,itemUuid:item?.uuid??null,level,
   traits:[...new Set(strings(item?.traits??item?.system?.traits?.value))],
   associatedTraits:[...new Set([element.trait,element.traitTwo].filter(t=>typeof t==='string'&&t.length))],
-  disruptive:items(actor).some(i=>sourceUuid(i)===METAPOWER_SOURCES.disruptiveSiphon),
+  disruptive:items(actor).some(i=>sourceUuid(i)===METAPOWER_SOURCES.disruptiveSiphon&&!i.suppressed&&!i.isSuppressed&&!i.system?.suppressed),
   siphon:{applies,reason:kind!=='siphoning'?'different-metapower':applies?'direct-damage':'dependent-effect'},
   area,range:range===null?null:(discharge&&!removeRange?2:1)*range,
   discharge,dischargeCost:discharge?1:0,

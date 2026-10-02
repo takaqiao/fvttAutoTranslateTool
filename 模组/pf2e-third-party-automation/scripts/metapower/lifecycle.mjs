@@ -2,6 +2,7 @@ import {SerialActions} from '../runtime.mjs';
 import {metapowerKind,powerProfile,sourceUuid,buildChannelSnapshot} from './rules.mjs';
 export const MODULE_ID='pf2e-third-party-automation';
 const copy=value=>structuredClone(value);
+const same=(a,b)=>a===b||!!a&&!!b&&typeof a==='object'&&typeof b==='object'&&Array.isArray(a)===Array.isArray(b)&&Object.keys(a).length===Object.keys(b).length&&Object.keys(a).every(key=>Object.hasOwn(b,key)&&same(a[key],b[key]));
 export const turnIdentity=(game,actor)=>{
  const encounters=game.combats&&actor?Array.from(game.combats.values()).filter(c=>c.started&&Array.from(c.combatants?.values?.()??c.turns??[]).some(t=>t.actor?.uuid===actor.uuid)):null;
  if(encounters?.length>1)throw Error('角色属于多个已开始的遭遇；请先确定当前遭遇，再使用威能调整。');
@@ -27,27 +28,38 @@ export function validatePowerAdmission(item,{kind,selection={}}={}){
  * ambiguous native completion is archived, never refunded or automatically retried. */
 export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),validateSelection=async()=>{}}){
  const mutate=(payload,user,fn,{render=true}={})=>queue.run(payload.actorUuid,async()=>{
-  if(game.user?.id!==game.users.activeGM?.id)throw Error('只有主GM可以修改威能调整状态。');
+  const gm=game.user;
+  if(!gm?.id||gm!==game.users.activeGM||game.users.get(gm.id)!==gm)throw Error('只有主GM可以修改威能调整状态。');
   const actor=await fromUuid(payload.actorUuid);
   if(!actor||!user||!actor.testUserPermission(user,'OWNER'))throw Error('需要拥有此角色的权限。');
   const state=ledgerState(actor);
+  let saved=copy(state);const guards=[];
+  const assertLive=()=>{
+   if(game.user!==gm||game.users.activeGM!==gm||game.users.get(gm.id)!==gm)throw Error('受理期间主GM已改变；请核对原操作记录。');
+   const token=actor.token,current=actor.isToken?token&&game.scenes?.get(token.parent?.id)?.tokens?.get(token.id)===token&&token.actor===actor:game.actors?.get(actor.id)===actor;
+   if(actor.uuid!==payload.actorUuid||!current||game.users.get(user.id)!==user||!actor.testUserPermission(user,'OWNER'))throw Error('原始角色来源或拥有权限已改变；请核对原操作记录。');
+   if(!same(actor.flags?.[MODULE_ID]?.metapower??{version:1,sequence:0,armed:null,pending:null,receipts:{}},saved))throw Error('原始待处理操作或付款记录已改变；请核对原卡。');
+   for(const guard of guards)guard();
+  };
+  const saveState=async()=>{assertLive();saved=copy(state);await actor.update({[`flags.${MODULE_ID}.metapower`]:state},{render:false});assertLive();};
+  assertLive();
   if(state.armed?.turn!==turnIdentity(game,actor))state.armed=null;
-  const result=await fn(actor,state);
+  const result=await fn(actor,state,{assertLive,saveState,guard:check=>guards.push(check)});
   // Keep source/channel, uncertain and live proofs indefinitely. Ordinary
   // completed actions have no downstream card consumer; their client high-water
   // marks reject replay after the bounded detail archive has been pruned.
   const ordinary=Object.values(state.receipts).filter(r=>r.clientId&&!r.kind&&!r.powerId&&!r.snapshot&&r.nonce!==state.pending&&(!r.delivery||r.delivery.status==='done')&&['committed','cancelled'].includes(r.status)).sort((a,b)=>b.sequence-a.sequence);
   const pruned=ordinary.slice(64);for(const r of pruned)delete state.receipts[r.nonce];
-  if(game.user?.id!==game.users.activeGM?.id)throw Error('受理期间主GM已改变；请核对原操作记录。');
+  assertLive();
   // Foundry merges nested flags: omission alone cannot remove an old receipt.
   const update=copy(state);for(const r of pruned)update.receipts[`-=${r.nonce}`]=null;
-  await actor.update({[`flags.${MODULE_ID}.metapower`]:update},{render});return copy(result);
+  saved=copy(state);await actor.update({[`flags.${MODULE_ID}.metapower`]:update},{render});assertLive();return copy(result);
  });
  const bound=(state,payload,user)=>{
   const r=state.receipts[payload.nonce];if(!r||r.userId!==user.id)throw Error('操作绑定无效。');return r;
  };
  return {
-  begin:(payload,user)=>mutate(payload,user,async(actor,state)=>{
+  begin:(payload,user)=>mutate(payload,user,async(actor,state,live)=>{
    if(typeof payload.nonce!=='string'||!payload.nonce||payload.nonce.length>100)throw Error('操作标识无效。');
    const old=state.receipts[payload.nonce];
    if(old){if(old.userId!==user.id||old.itemUuid!==(payload.itemUuid??null))throw Error('操作来源绑定不匹配。');if(payload.startNative===true)throw Error('此操作已执行；不会重复执行原生操作。');return old;}
@@ -60,9 +72,12 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
    if(state.pending)throw Error('另一项原生动作正在处理；请先完成它，再使用下一项动作。');
    if(Object.values(state.receipts).some(r=>r.delivery&&r.delivery.status!=='done'))throw Error('已提交动作的后续结算等待GM恢复；完成后才能使用下一项动作。');
    const item=payload.itemUuid?await fromUuid(payload.itemUuid):null;
+   live.assertLive();
    if(payload.itemUuid&&(!item||item.actor!==actor||actor.items.get(item.id)!==item))throw Error('需要此角色拥有的原始嵌入条目。');
+   if(item){const source=sourceUuid(item);live.guard(()=>{if(item.actor!==actor||actor.items.get(item.id)!==item||item.uuid!==payload.itemUuid||sourceUuid(item)!==source)throw Error('原始嵌入条目的来源已改变。');});}
    const kind=metapowerKind(item),profile=validatePowerAdmission(item,{kind:state.armed?.kind,selection:payload.selection});
    if(profile)await validateSelection({actor,item,selection:payload.selection??{},kind:state.armed?.kind??'normal',user});
+   live.assertLive();validatePowerAdmission(item,{kind:state.armed?.kind,selection:payload.selection});
    const built=profile?buildChannelSnapshot({kind:state.armed?.kind??'normal',item,selection:payload.selection,policy:{dischargeNonDamage:'remove',dischargeArea:'retain',dischargeRange:'retain',dischargeSaveDowngrade:'retain',highVoltage:'convert'}}):null;
    const snapshot=built?{...built,...(profile.id==='reactive-chain'?{triggerDamage:payload.selection.triggerDamage}:{})}:null;
    const charge=snapshot?.dischargeCost?chargedEffect(actor):null;
@@ -78,7 +93,7 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
    state.pending=r.nonce;state.receipts[r.nonce]=r;return payload.startNative===true?{...r,nativeStartAuthorized:true}:r;
   }),
   start:(payload,user)=>mutate(payload,user,(actor,state)=>{const r=bound(state,payload,user);if(r.status!=='reserved')throw Error('此操作已开始或已完成。');if(r.turn!==turnIdentity(game,actor))throw Error('原生执行前回合已改变；请在当前回合重新使用此动作。');r.status='started';return r},{render:false}),
-  finish:(payload,user)=>mutate(payload,user,async(actor,state)=>{
+  finish:(payload,user)=>mutate(payload,user,async(actor,state,live)=>{
    const r=bound(state,payload,user);
    if(!['reserved','started'].includes(r.status)){
     if(r.status!==payload.status||r.messageUuid!==(payload.messageUuid??null))throw Error('原始聊天卡绑定与已完成操作不匹配。');return r;
@@ -86,23 +101,33 @@ export function createMetapowerLedger({game,fromUuid,queue=new SerialActions(),v
    if(!['committed','cancelled','uncertain'].includes(payload.status))throw Error('原生操作完成状态无效。');
    if(payload.status==='cancelled'&&r.status==='started'&&!(r.entry==='native-check'&&payload.confirmation==='native-check-no-result'))throw Error('已开始的原生动作需要可核验的取消凭据；不会自动退款。');
    if(payload.messageUuid){
-    const m=await fromUuid(payload.messageUuid),proof=m?.flags?.[MODULE_ID]?.metapowerUse;
-    const originMatches=m?.flags?.pf2e?.origin?.uuid===r.itemUuid||m?.flags?.pf2e?.context?.type==='self-effect'&&actor.items.get(m.flags.pf2e.context.item)?.uuid===r.itemUuid;
-    if(!m||proof?.nonce!==r.nonce||proof.actorUuid!==actor.uuid||proof.itemUuid!==r.itemUuid||m.speaker?.actor!==actor.id||(m.author?.id??m.user?.id??m.user)!==user.id||!originMatches)throw Error('原始原生聊天卡绑定无效。');
+    const m=await fromUuid(payload.messageUuid);live.assertLive();
+    live.guard(()=>{
+     const proof=m?.flags?.[MODULE_ID]?.metapowerUse,originMatches=m?.flags?.pf2e?.origin?.uuid===r.itemUuid||m?.flags?.pf2e?.context?.type==='self-effect'&&actor.items.get(m.flags.pf2e.context.item)?.uuid===r.itemUuid;
+     if(!m||m.uuid!==payload.messageUuid||game.messages?.get(m.id)!==m||proof?.nonce!==r.nonce||proof.actorUuid!==actor.uuid||proof.itemUuid!==r.itemUuid||m.speaker?.actor!==actor.id||(m.author?.id??m.user?.id??m.user)!==user.id||!originMatches)throw Error('原始原生聊天卡绑定无效。');
+    });live.assertLive();
    }else if(payload.status==='committed'&&r.itemUuid)throw Error('提交条目使用需要原始原生聊天卡。');
+   if(payload.status==='committed'&&r.itemUuid){const item=actor.items.get(r.itemUuid.split('.').at(-1));live.guard(()=>{if(!item||item.actor!==actor||actor.items.get(item.id)!==item||item.uuid!==r.itemUuid||sourceUuid(item)!==r.sourceUuid)throw Error('原始威能条目的来源已改变。');});live.assertLive();}
    if(payload.status==='committed'&&r.charge){
-    const charge=await fromUuid(r.charge.itemUuid);
+    const charge=await fromUuid(r.charge.itemUuid);live.assertLive();
     if(charge?.flags?.[MODULE_ID]?.payment?.nonce!==r.nonce){
      if(r.paymentStarted)throw Error('放电付款结果不确定；须由GM核对原卡，不得再次付款。');
      if(!charge||charge.system.badge.value!==r.charge.before)throw Error('原生使用期间蓄电已改变；请先核对原卡，再继续。');
+     const source=sourceUuid(charge),payment=copy(charge.flags?.[MODULE_ID]?.payment??null);let paying=true;
+     live.guard(()=>{
+      const current=actor.items.get(charge.id),deleted=!paying&&r.charge.after===0&&!current;
+      if(!deleted&&(charge.actor!==actor||current!==charge||charge.uuid!==r.charge.itemUuid||sourceUuid(charge)!==source||!['Compendium.battlezoo-eldamon-pf2e.conditions.Item.Bi2aHykg6CZrQCnR','Compendium.battlezoo-eldamon-pf2e.conditions.Bi2aHykg6CZrQCnR'].includes(source)||charge.system.badge.value!==(paying?r.charge.before:r.charge.after)||!same(charge.flags?.[MODULE_ID]?.payment??null,paying?payment:{nonce:r.nonce,after:r.charge.after})))throw Error('原始蓄电来源、计数或付款凭据已改变。');
+     });
      // Native PF2e deletes a counter effect at zero, including its GrantItem
      // children. Persist intent before that deletion so a lost response never
      // permits a second payment or silently assumes an unrelated deletion paid.
      r.paymentStarted=true;r.messageUuid=payload.messageUuid;
-     await actor.update({[`flags.${MODULE_ID}.metapower`]:state},{render:false});
+     await live.saveState();
      // Counter and payment proof share one embedded document update. A retry or
      // GM handover sees the proof and cannot charge a second time.
-     await charge.update({'system.badge.value':r.charge.after,[`flags.${MODULE_ID}.payment`]:{nonce:r.nonce,after:r.charge.after}});
+     live.assertLive();await charge.update({'system.badge.value':r.charge.after,[`flags.${MODULE_ID}.payment`]:{nonce:r.nonce,after:r.charge.after}});paying=false;live.assertLive();
+    }else{
+     const source=sourceUuid(charge);live.guard(()=>{if(charge.actor!==actor||actor.items.get(charge.id)!==charge||charge.uuid!==r.charge.itemUuid||sourceUuid(charge)!==source||!['Compendium.battlezoo-eldamon-pf2e.conditions.Item.Bi2aHykg6CZrQCnR','Compendium.battlezoo-eldamon-pf2e.conditions.Bi2aHykg6CZrQCnR'].includes(source)||charge.flags?.[MODULE_ID]?.payment?.nonce!==r.nonce||charge.flags[MODULE_ID].payment.after!==r.charge.after||charge.system.badge.value!==r.charge.after)throw Error('原始放电付款凭据无法确认；须由GM核对原卡。');});live.assertLive();
     }
     r.paymentPaid=true;
    }
