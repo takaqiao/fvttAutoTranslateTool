@@ -26,7 +26,7 @@ export function createHalflingLuckLedger({game,fromUuid=globalThis.fromUuid,queu
  const current=item=>{const state=stateOf(item),record=state.operations?.[state.currentNonce];return record?copy(record):null;};
  const source=(actor,item,user)=>{
   requireTrue(actor?.type==='character'&&!actor.isToken&&game.actors?.get(actor.id)===actor);
-  requireTrue(item?.actor===actor&&actor.items?.get(item.id)===item&&item.type==='feat'&&getSourceId(item)===HALFLING_LUCK_SOURCE);
+  requireTrue(item?.actor===actor&&actor.items?.get(item.id)===item&&item.type==='feat'&&!item.suppressed&&!item.isSuppressed&&!item.system?.suppressed&&getSourceId(item)===HALFLING_LUCK_SOURCE);
   requireTrue(item.system?.actionType?.value==='free'&&item.system?.frequency?.max===1&&item.system.frequency.per==='day');
   requireTrue(user?.id&&game.users?.get(user.id)===user&&actor.testUserPermission?.(user,'OWNER')===true);
   requireTrue(game.users?.activeGM?.isGM===true);

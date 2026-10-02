@@ -2,7 +2,7 @@ import {getSourceId} from './native-context.mjs';
 import {occupiedTraits} from './eat-fortune.mjs';
 
 export const HALFLING_LUCK_SOURCE='Compendium.pf2e.feats-srd.Item.ZbRVqf14RTJJIZXG';
-export const isHalflingLuckItem=item=>item?.type==='feat'&&getSourceId(item)===HALFLING_LUCK_SOURCE;
+export const isHalflingLuckItem=item=>item?.type==='feat'&&!item.suppressed&&!item.isSuppressed&&!item.system?.suppressed&&getSourceId(item)===HALFLING_LUCK_SOURCE;
 const no=reason=>({eligible:false,reason}),outcomes=['criticalFailure','failure','success','criticalSuccess'];
 const options=value=>value==null?[]:value instanceof Set?[...value]:Array.isArray(value)?value:null;
 const canonical=value=>JSON.stringify(value,(_key,entry)=>entry&&typeof entry==='object'&&!Array.isArray(entry)?Object.fromEntries(Object.keys(entry).sort().map(k=>[k,entry[k]])):entry);

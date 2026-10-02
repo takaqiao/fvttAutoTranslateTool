@@ -25,9 +25,11 @@ const Message=()=>globalThis.CONFIG?.ChatMessage?.documentClass??globalThis.Chat
 const clone=data=>globalThis.foundry?.utils?.deepClone?.(data)??structuredClone(data);
 const escape=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const hit=outcome=>['success','criticalSuccess'].includes(outcome);
-const hasSpellstrike=actor=>values(actor?.items).some(i=>getSourceId(i)===S.strike);
-const isConflux=item=>item?.type==='spell'&&hasSpellstrike(item.actor)&&item.system.traits.value.includes('focus')&&item.system.traits.value.includes('magus')&&/[1-3]/.test(item.system.time?.value??'');
-const actionKind=item=>['action','feat'].includes(item?.type)?['strike','swipe','combination'].find(kind=>getSourceId(item)===S[kind]):null;
+const activeItem=item=>!!item&&!item.suppressed&&!item.isSuppressed&&!item.system?.suppressed;
+const spellstrike=actor=>values(actor?.items).find(i=>i.type==='action'&&i.actor===actor&&activeItem(i)&&getSourceId(i)===S.strike);
+const hasSpellstrike=actor=>!!spellstrike(actor);
+const isConflux=item=>item?.type==='spell'&&activeItem(item)&&hasSpellstrike(item.actor)&&item.system.traits.value.includes('focus')&&item.system.traits.value.includes('magus')&&/[1-3]/.test(item.system.time?.value??'');
+const actionKind=item=>activeItem(item)&&['action','feat'].includes(item?.type)?['strike','swipe','combination'].find(kind=>getSourceId(item)===S[kind]):null;
 const hasAttackOrSave=spell=>spell.isAttack||spell.system.traits?.value.includes('attack')||!!spell.system.defense?.save;
 const hasEligibleTime=spell=>/^[12]$|^[12] (?:or|to) [23]$/.test(String(spell.system.time?.value??''));
 const eligibleSpell=spell=>spell?.type==='spell'&&hasAttackOrSave(spell)&&hasEligibleTime(spell);
@@ -79,13 +81,13 @@ export function scaleSpellDamage(roll,multiplier,{critical=false}={}){
 
 /** Source based activities; normal player choices finish before any resource or die is spent. */
 export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose,runTargetSave,onError=()=>{},afterAttack=async()=>{},nativeCasts=getNativeCastEvents({game,fromUuid}),nativeOperations}={}){
- const queue=new SerialActions(),damageContexts=new WeakMap();
+ const queue=new SerialActions(),damageContexts=new WeakMap(),scopes=new WeakMap();
  const ownerOperations=nativeOperations??createNativeOwnerOperations({game,fromUuid,scope:'spell-combination'});
  const damageFromResult=result=>result.nativeRoll??globalThis.CONFIG.Dice.rolls.find(c=>c.name==='DamageRoll').fromData(result.roll);
- const requireGM=()=>{if(!isActiveGM(game))throw Error('主 GM 已交接；旧客户端停止组合活动，已发生的消耗与攻击不会重试。');};
+ const requireGM=document=>{if(!isActiveGM(game))throw Error('主 GM 已交接；旧客户端停止组合活动，已发生的消耗与攻击不会重试。');scopes.get(document)?.assertLive();};
  const resolveAction=item=>{
   const kind=actionKind(item);if(kind)return `spell-combination:${kind}`;
-  if(item?.type==='action'&&own(item).spellstrikeRecharge===true&&hasSpellstrike(item.actor))return 'spell-combination:recharge';
+  if(item?.type==='action'&&activeItem(item)&&own(item).spellstrikeRecharge===true&&hasSpellstrike(item.actor))return 'spell-combination:recharge';
   return isConflux(item)?'spell-combination:conflux':null;
  };
  const requiresActualUse=(item,action)=>action==='spell-combination:combination'&&actionKind(item)==='combination';
@@ -94,21 +96,37 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
  nativeCasts.addActivityMatcher?.(item=>['strike','swipe'].includes(actionKind(item)));
  const captureUsage=(item,context)=>nativeCasts.captureUsage(item,context);
  async function select(actor,user,title,choices){
-  requireGM();
+  requireGM(actor);
   if(!choices.length)throw Error(`${title}：没有合法选项。`);
   if(choices.length===1)return choices[0].value;
   const result=await choose({actor,user,title,choices});
-  requireGM();
+  requireGM(actor);
   if(result===null||result===undefined)return null;
   if(!choices.some(c=>c.value===result))throw Error('组合活动选择已失效。');return result;
  }
- function assertUse(actor,item,message,user,action){
-  if(!isActiveGM(game)||!actor?.testUserPermission(user,'OWNER')||item?.actor?.uuid!==actor.uuid||resolveAction(item)!==action||game.messages.get(message?.id)!==message||(message.author?.id??message.user?.id??message.user)!==user.id||message.flags?.pf2e?.origin?.uuid!==item.uuid)throw Error('无权执行此组合活动。');
+ const demand=(ok,reason='无权执行此组合活动；原操作者、能力或来源已改变，既有消耗与攻击不会重试。')=>{if(!ok)throw Error(reason)};
+ const equal=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+ const actorProof=actor=>({actor,uuid:actor?.uuid,token:actor?.isToken?actor.token:null,scene:actor?.isToken?actor.token?.parent:null,baseActor:actor?.isToken?actor.token?.baseActor:null,actorId:actor?.isToken?actor.token?.actorId:null});
+ function currentActor(p){
+  if(!p.actor?.uuid||p.actor.uuid!==p.uuid)return false;
+  if(!p.token)return !p.actor.isToken&&game.actors?.get(p.actor.id)===p.actor;
+  return p.actor.isToken&&p.actor.token===p.token&&p.token.documentName==='Token'&&p.token.actorLink===false&&p.token.actor===p.actor&&p.token.parent===p.scene&&game.scenes.get(p.scene?.id)===p.scene&&p.scene.tokens.get(p.token.id)===p.token&&p.token.baseActor===p.baseActor&&p.token.actorId===p.actorId&&!!p.baseActor&&game.actors.get(p.actorId)===p.baseActor;
+ }
+ function assertUse(actor,item,message,user,action,scope,{receipt=true}={}){
+  const gm=scope?.gm??game.user;
+  demand(gm?.active===true&&gm.isGM===true&&game.user===gm&&game.users?.get(gm.id)===gm&&game.users.activeGM===gm&&user?.active===true&&game.users.get(user.id)===user);
+  demand(currentActor(scope?.actorProof??actorProof(actor))&&actor.testUserPermission(user,'OWNER')===true&&item?.actor===actor&&actor.items?.get(item.id)===item&&activeItem(item)&&resolveAction(item)===action&&game.messages.get(message?.id)===message&&(message.author?.id??message.user?.id??message.user)===user.id&&message.flags?.pf2e?.origin?.uuid===item.uuid);
+  if(scope){
+   demand(gm.id===scope.gmId&&user.id===scope.userId&&item.uuid===scope.itemUuid&&getSourceId(item)===scope.itemSource);
+   if(scope.parentFeature)demand(actor.items.get(scope.parentFeature.id)===scope.parentFeature&&activeItem(scope.parentFeature)&&getSourceId(scope.parentFeature)===S.strike);
+   if(receipt)demand(equal(own(message).spellCombinationUse,scope.receipt));
+   for(const p of scope.tokens)demand(p.token.documentName==='Token'&&p.token.uuid===p.uuid&&p.token.actor===p.actor&&p.token.parent===p.scene&&game.scenes.get(p.scene?.id)===p.scene&&p.scene.tokens.get(p.token.id)===p.token&&currentActor(p.actorProof),'组合活动的原场景目标已改变；已有消耗与攻击不会重试。');
+  }
   if(requiresActualUse(item,action)&&!isActualUseMessage(message))throw Error('神威连击需要从原技能的实际使用入口执行。');
  }
  async function sourceToken(actor,message,target){
   if(message.speaker?.scene&&message.speaker?.token){
-   const doc=await fromUuid(`Scene.${message.speaker.scene}.Token.${message.speaker.token}`);
+   requireGM(actor);const doc=await fromUuid(`Scene.${message.speaker.scene}.Token.${message.speaker.token}`);requireGM(actor);
    if(doc?.actor?.uuid===actor.uuid&&doc.parent?.id===target.parent?.id)return doc;
    throw Error('组合活动的来源 Token 不匹配。');
   }
@@ -125,7 +143,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   const entries=values(actor.spellcasting?.contents).filter(e=>e.type==='spellcastingEntry');
   const available=[];
   for(const entry of entries){
-   const data=await entry.getSheetData();
+   requireGM(actor);const data=await entry.getSheetData();requireGM(actor);
    for(const group of data.groups??[]){
     if(group.uses?.value===0&&!(entry.isPrepared&&!entry.isFlexible)&&group.id!=='cantrips')continue;
     for(const [slotId,slot] of (group.active??[]).entries()){
@@ -155,9 +173,13 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   if(!eligibleSpell(selected))throw Error('所选法术不满足一或二动作及攻击或豁免要求。');
   return {...choice,spell:selected};
  }
- async function record(message,state,extra={}){requireGM();await message.update({[`flags.${MODULE_ID}.spellCombinationUse`]:{...own(message).spellCombinationUse,state,...extra}});requireGM();}
+ async function record(message,state,extra={}){
+  requireGM(message);const scope=scopes.get(message),next={...own(message).spellCombinationUse,state,...extra};
+  await message.update({[`flags.${MODULE_ID}.spellCombinationUse`]:next});
+  if(scope){scope.assertLive({receipt:false});demand(equal(own(message).spellCombinationUse,next));scope.receipt=clone(next);}requireGM(message);
+ }
  async function attack(actor,strike,target,map,message,index,kind,sequence,user,beforeRoll){
-  requireGM();
+  requireGM(message);
   let created;
   if(kind!=='combination'){
    const infused=actor.clone({items:[...clone(actor._source.items),{_id:globalThis.foundry?.utils?.randomID?.()??'ComboArcane00001',name:'Spellstrike infusion',type:'effect',system:{duration:{value:-1,unit:'unlimited'},rules:[{key:'AdjustStrike',mode:'add',property:'traits',value:'arcane',definition:[`item:id:${strike.item.id}`]},{key:'AdjustStrike',mode:'add',property:'weapon-traits',value:'magical',definition:[`item:id:${strike.item.id}`]}]}}]},{keepId:true});
@@ -169,90 +191,90 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   if(kind==='swipe'&&strike.item.system.traits.value.includes('sweep'))options.add('sweep-bonus');
   const nativeResult=await ownerOperations.run({actor,message,user},{type:'attack',weaponId:strike.item.id,altUsageType:strike.item.altUsageType??'',map,targetUuid:target.uuid,options:[...options],transientItems:nativeTransientItems(strike,actor),flags:{spellCombinationAttack:{activityMessageId:message.id,index,kind}}},async()=>{
   const check=await strike.variants[map].roll({target:target.object,options,event:skipEvent(game,'attack'),createMessage:false,callback:async(_roll,_outcome,raw)=>{
-   requireGM();
+   requireGM(message);
    const data=raw.toObject();delete data._id;
    data.author=message.author?.id??message.user?.id??message.user;
    data.flags={...data.flags,'xdy-pf2e-workbench':{...data.flags?.['xdy-pf2e-workbench'],noAutoDamageRoll:true},[MODULE_ID]:{...data.flags?.[MODULE_ID],usageGenerated:true,spellCombinationAttack:{activityMessageId:message.id,index,kind}}};
    created=await Message().create(data);
-   requireGM();
+   requireGM(message);
   }});
   return !check&&!created?{status:'cancelled'}:created?{status:'rolled',messageId:created.id}:{status:'uncertain'};
   },beforeRoll);
-  requireGM();
+  requireGM(message);
   if(nativeResult.status==='cancelled')throw Object.assign(Error('本次原生攻击已取消。'),{nativeCancelled:true});
   created=game.messages.get(nativeResult.messageId);
   if(!created)throw Error('组合活动的原生攻击未完成，已发生的攻击不会重试。');
   frame.capture(created);
   await afterAttack(created);
-  requireGM();
+  requireGM(message);
   const outcome=created.flags.pf2e.context.outcome;
   sequence.record(frame,outcome);
   await frame.consume();
-  requireGM();
+  requireGM(message);
   return {strike,target,map,message:created,outcome,frame,activityMessage:message,user};
  }
  async function weaponDamage(attack){
-  requireGM();
+  requireGM(attack.activityMessage);
   const {strike,target,map,message,outcome}=attack;if(!hit(outcome))return null;
   const {strike:damageStrike,options:sequenceOptions}=attack.frame.damage(strike);
   const options=new Set([`${MODULE_ID}:bear-attack:${message.id}`,...sequenceOptions]);
   const nativeResult=await ownerOperations.run({actor:strike.item.actor,message:attack.activityMessage,user:attack.user},{type:'damage',weaponId:damageStrike.item.id,altUsageType:damageStrike.item.altUsageType??'',map,targetUuid:target.uuid,critical:outcome==='criticalSuccess',checkContext:clone(message.flags.pf2e.context),options:[...options],transientItems:nativeTransientItems(damageStrike,strike.item.actor)},async()=>{
    const roll=await damageStrike[outcome==='criticalSuccess'?'critical':'damage']({target:target.object,checkContext:message.flags.pf2e.context,mapIncreases:map,options,event:skipEvent(game,'damage'),createMessage:false});return roll?{status:'rolled',nativeRoll:roll}:{status:'cancelled'};
   });
-  requireGM();
+  requireGM(attack.activityMessage);
   if(nativeResult.status!=='rolled')throw Error('攻击已发生，但原生武器伤害尚未完成。');
   const result=damageFromResult(nativeResult);
   damageContexts.set(result,{...clone(message.flags.pf2e.context),manualPrivacy:nativeResult.privacy,sourceType:'attack',domains:['damage','strike-damage'],options:[...attack.frame.damageOptions([...(message.flags.pf2e.context.options??[]),...strike.item.getRollOptions?.('item')??[],...strike.item.actor.getRollOptions?.(['damage','strike-damage'])??[],...options])]});
   return result;
  }
  async function publishSpell({actor,user,message,choice,payment,targets,kind}){
-  requireGM();
+  requireGM(message);
   const raw=await choice.spell.toMessage(null,{create:false,data:{castRank:choice.rank}}),data=raw.toObject();delete data._id;
-  requireGM();
+  requireGM(message);
   data.author=user.id;data.flags??={};data.flags[MODULE_ID]={...data.flags[MODULE_ID],...payment.flags,usageGenerated:true,usageInput:{...data.flags[MODULE_ID]?.usageInput,targetUuids:targets.map(t=>t.uuid)},spellCombination:{activityMessageId:message.id,kind}};
   data.flags.pf2e??={};data.flags.pf2e.origin={...data.flags.pf2e.origin,uuid:choice.spell.uuid,type:'spell',actor:actor.uuid,castRank:choice.rank};
   const card=await Message().create(data);
-  requireGM();
+  requireGM(message);
   await nativeCasts.ensurePaid({actor,item:choice.spell,message:card,user});
-  requireGM();
+  requireGM(message);
   return card;
  }
  async function save(spell,target,attack,card){
-  requireGM();
+  requireGM(attack.activityMessage);
   const defense=spell.system.defense.save,dc=spell.spellcasting?.statistic?.getChatData({item:spell})?.dc?.value;
   const adjust=getSourceId(spell)===S.disintegrate&&attack.outcome==='criticalSuccess';
   const marker=`${MODULE_ID}:spell-combination-save:${card.id}`;
   if(target.actor.type==='character'){
    if(typeof runTargetSave!=='function')throw Error('缺少目标角色的玩家豁免连接，尚未由GM代投。');
    const result=await runTargetSave({sourceActor:spell.actor,sourceItem:spell,sourceMessage:card,target},{statistic:defense.statistic,action:'spell-combination-save',dc:{value:dc},traits:[...spell.system.traits.value],options:[...spell.getRollOptions?.('item')??[],...(defense.basic?['damaging-effect']:[]),marker],rank:spell.rank,overlayIds:[...spell.appliedOverlays?.values?.()??[]],minimumPrivacy:{blind:card.blind===true,whisper:[...card.whisper??[]]},...adjust?{adjustment:'one-degree-worse'}:{}});
-   requireGM();if(result.status!=='rolled')throw Error('目标玩家的原生豁免已取消；既有攻击与支付保留。');
-   const check=result.check;await check.update({[`flags.${MODULE_ID}.usageGenerated`]:true,[`flags.${MODULE_ID}.spellCombinationSave`]:{spellMessageId:card.id,targetUuid:target.uuid,activityMessageId:own(card).spellCombination.activityMessageId}});requireGM();
+   requireGM(attack.activityMessage);if(result.status!=='rolled')throw Error('目标玩家的原生豁免已取消；既有攻击与支付保留。');
+   const check=result.check;await check.update({[`flags.${MODULE_ID}.usageGenerated`]:true,[`flags.${MODULE_ID}.spellCombinationSave`]:{spellMessageId:card.id,targetUuid:target.uuid,activityMessageId:own(card).spellCombination.activityMessageId}});requireGM(attack.activityMessage);
    const outcome=check.flags?.pf2e?.context?.outcome;if(!['criticalFailure','failure','success','criticalSuccess'].includes(outcome))throw Error('原生豁免尚未完成，不会重复投骰。');return outcome;
   }
   const roller=adjust?target.actor.clone({items:[...clone(target.actor._source.items),{_id:globalThis.foundry?.utils?.randomID?.()??'ComboSave0000001',name:spell.name,type:'effect',system:{duration:{value:-1,unit:'unlimited'},rules:[{key:'AdjustDegreeOfSuccess',selector:'saving-throw',predicate:[marker],adjustment:{all:'one-degree-worse'}}]}}]},{keepId:true}):target.actor;
   const statistic=roller.getStatistic(defense.statistic);if(!statistic?.check||!Number.isFinite(dc))throw Error('无法确定该法术的原生豁免与 DC。');
   let outcome;
   const result=await statistic.check.roll({origin:spell.actor,item:spell,token:target,dc:{value:dc},extraRollOptions:[...spell.getRollOptions?.('item')??[],...(defense.basic?['damaging-effect']:[]),marker],skipDialog:false,event:null,createMessage:false,callback:async(_roll,result,raw)=>{
-    requireGM();
+    requireGM(attack.activityMessage);
     outcome=result;const data=raw.toObject();delete data._id;
     data.flags??={};data.flags[MODULE_ID]={...data.flags[MODULE_ID],usageGenerated:true,spellCombinationSave:{spellMessageId:card.id,targetUuid:target.uuid,activityMessageId:own(card).spellCombination.activityMessageId}};
     await Message().create(data);
-    requireGM();
+    requireGM(attack.activityMessage);
    }});
-  requireGM();
+  requireGM(attack.activityMessage);
   if(!result||!['criticalFailure','failure','success','criticalSuccess'].includes(outcome))throw Error('原生豁免尚未完成，不会重复投骰。');
   return outcome;
  }
  async function spellDamage(spell,target,outcome,{saveOutcome,shared,activityMessage,user}={}){
-  requireGM();
+  requireGM(activityMessage);
   const native=shared?.native??await ownerOperations.run({actor:spell.actor,message:activityMessage,user},{type:'spell-damage',spellId:spell.id,rank:spell.rank,overlayIds:[...spell.appliedOverlays?.values?.()??[]],targetUuid:target.uuid},async()=>{
    const data=await spell.getDamage({target,skipDialog:false,event:null});if(!data)return {status:'cancelled'};
    const roll=data.template.damage.roll;if(!roll)throw Error('该法术没有可识别的原生伤害骰。');
    return {status:'rolled',nativeRoll:await roll.evaluate(),context:data.context};
   });if(native.status==='cancelled')return null;
-  requireGM();
+  requireGM(activityMessage);
   let damage=shared?.roll??damageFromResult(native);if(shared){shared.native=native;shared.roll=damage;}
-  requireGM();
+  requireGM(activityMessage);
   const multiplier=saveOutcome?{criticalSuccess:0,success:0.5,failure:1,criticalFailure:2}[saveOutcome]:outcome==='criticalSuccess'?2:1;
   if(multiplier===0)return null;
   if(multiplier!==1)damage=scaleSpellDamage(damage,multiplier,{critical:!saveOutcome&&outcome==='criticalSuccess'});
@@ -260,17 +282,17 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   return damage;
  }
  async function damageCard({actor,message,target,parts,attacks,kind}){
-  requireGM();
+  requireGM(message);
   if(!parts.length)return;
   const docs=[];
   for(const part of parts){
    preserveDamagePartForMerge(part.roll);
    const context=damageContexts.get(part.roll)??{options:part.item.getRollOptions?.('item')??[]};
    const data=await part.roll.toMessage({speaker:message.speaker,flavor:escape(part.item.name),flags:{pf2e:{origin:{uuid:part.item.uuid,type:part.item.type,actor:actor.uuid},context:{type:'damage-roll',sourceType:context.sourceType??(part.item.type==='spell'&&part.item.system.defense?.save?'save':'attack'),outcome:context.outcome??'success',domains:context.domains??['damage'],options:[...context.options??[]],target:{actor:target.actor.uuid,token:target.uuid}}}}},{create:false});
-   requireGM();
+   requireGM(message);
    docs.push(new (Message())(typeof data.toObject==='function'?data.toObject():data));
   }
-  let combined=docs[0];for(const next of docs.slice(1)){requireGM();combined=await game.toolbelt.api.betterChat.mergeDamageMessages(combined,next,{updateMessages:false});requireGM();if(!combined)throw Error('原生伤害合并未完成。');}
+  let combined=docs[0];for(const next of docs.slice(1)){requireGM(message);combined=await game.toolbelt.api.betterChat.mergeDamageMessages(combined,next,{updateMessages:false});requireGM(message);if(!combined)throw Error('原生伤害合并未完成。');}
   if(docs.length>1)preserveMergedDamageBypass(combined.rolls[0],parts.map(part=>part.roll));
   if(attacks.some(a=>a.outcome==='criticalSuccess'))combined.rolls[0].options.degreeOfSuccess=3;
   const data=combined.toObject();delete data._id;Object.assign(data,mergeDamageMessagePrivacy(parts.map(part=>damageContexts.get(part.roll)?.manualPrivacy)));data.flags??={};data.flags.pf2e??={};
@@ -282,26 +304,33 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   data.flags[MODULE_ID]={...data.flags[MODULE_ID],usageGenerated:true,spellCombinationDamage:{activityMessageId:message.id,kind,targetUuid:target.uuid,attacks:attacks.map(a=>({messageId:a.message.id,weaponUuid:a.strike.item.uuid,outcome:a.outcome})),parts:parts.map(p=>({itemUuid:p.item.uuid,total:p.roll.total}))}};
   data.flavor=spellCombinationDamageHeading({game,target,kind})+(data.flavor??'');
   await Message().create(withDamageMessageTarget(data,target.uuid));
-  requireGM();
+  requireGM(message);
  }
  async function executeUsage({actor,item,message,user,action}){
   assertUse(actor,item,message,user,action);
+  const scope={gm:game.user,gmId:game.user.id,userId:user.id,actorProof:actorProof(actor),itemUuid:item.uuid,itemSource:getSourceId(item),parentFeature:['spell-combination:recharge','spell-combination:conflux'].includes(action)?spellstrike(actor):null,receipt:clone(own(message).spellCombinationUse),tokens:[]};
+  scope.assertLive=options=>assertUse(actor,item,message,user,action,scope,options);
+  const captureTokens=docs=>{for(const token of docs)scope.tokens.push({token,uuid:token.uuid,actor:token.actor,scene:token.parent,actorProof:actorProof(token.actor)});scope.assertLive();};
   return queue.run(actor.uuid,async()=>{
-   assertUse(actor,item,message,user,action);
+   scope.assertLive();scopes.set(actor,scope);scopes.set(message,scope);
+   try{
    const prior=own(message).spellCombinationUse;
    if(prior?.state==='done')return '本次组合活动已经结算。';
    if(prior)throw Error('本次组合活动已开始但未完成；为避免重复消耗与攻击，不会自动重试。');
    const kind=action.split(':')[1];
    if(kind==='recharge'||kind==='conflux'){
-    if(kind==='conflux')await nativeCasts.ensurePaid({actor,item,message,user});
-    requireGM();
-    await actor.update({[`flags.${MODULE_ID}.spellstrike`]:{charged:true,messageId:message.id}});await record(message,'done');return '法术打击已充能。';
+    await record(message,'started',{kind});
+    if(kind==='conflux'){requireGM(message);await nativeCasts.ensurePaid({actor,item,message,user});requireGM(message);}
+    requireGM(message);
+    await actor.update({[`flags.${MODULE_ID}.spellstrike`]:{charged:true,messageId:message.id}});requireGM(message);demand(own(actor).spellstrike?.charged===true&&own(actor).spellstrike.messageId===message.id);await record(message,'done');return '法术打击已充能。';
    }
    if(!game.modules.get('pf2e-toolbelt')?.active||typeof game.toolbelt?.api?.betterChat?.mergeDamageMessages!=='function')throw Error('需要已启用的 Toolbelt 原生伤害合并接口，尚未攻击。');
    if(kind!=='combination'&&own(actor).spellstrike?.charged===false)throw Error('法术打击尚未充能；请使用充能动作或施放汇聚法术。');
    const targets=await resolveMessageTargets(message,{game,fromUuid});
+   requireGM(message);captureTokens(targets);
    if(targets.length!==(kind==='swipe'?2:1)||targets.some(t=>!t.object||!t.actor))throw Error(`请选定${kind==='swipe'?'两个相邻的':'一个'}场景目标。`);
    const origin=await sourceToken(actor,message,targets[0]),available=strikes(actor).filter(kind==='combination'?allowedCombinationWeapon:s=>held(s)||unarmed(s.item));
+   captureTokens([origin]);
    const key=await select(actor,user,'选择近战武器或无武装攻击',available.map(s=>({value:strikeKey(s),label:s.item.name})));if(key===null)return {status:'cancelled',result:'已取消。'};
    const selected=available.find(s=>strikeKey(s)===key);let second=null;
    if(kind==='combination'){
@@ -315,33 +344,33 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
    const order=kind==='combination'?await select(actor,user,'神威连击：攻击顺序',[{value:'weapon',label:'先武器，后拳头'},{value:'fist',label:'先拳头，后武器'}]):null;
    if(kind==='combination'&&order===null)return {status:'cancelled',result:'已取消。'};
    const map=Number(tier);let payment;
-   assertUse(actor,item,message,user,action);
+   scope.assertLive();
    // Recheck equipped state and recipient identity after normal player choices.
    const current=strikes(actor).find(s=>strikeKey(s)===key);
    if(!current||!(kind==='combination'?allowedCombinationWeapon(current):held(current)||unarmed(current.item)))throw Error('所选武器的持用状态已改变，尚未攻击。');
    for(const target of targets)requireSceneTarget(actor,origin,target);
    await record(message,'started',{kind,weaponUuid:current.item.uuid,spellUuid:choice?.spell.uuid??null});
    const commitAttack=choice?async()=>{
-    assertUse(actor,item,message,user,action);for(const target of targets)requireSceneTarget(actor,origin,target);
-    payment=await nativeCasts.payForActivity({actor,item:choice.spell,message,user,rank:choice.rank,slotId:choice.slotId});requireGM();
-    await actor.update({[`flags.${MODULE_ID}.spellstrike`]:{charged:false,messageId:message.id}},{render:false});requireGM();
+    scope.assertLive();for(const target of targets)requireSceneTarget(actor,origin,target);
+    payment=await nativeCasts.payForActivity({actor,item:choice.spell,message,user,rank:choice.rank,slotId:choice.slotId});requireGM(message);
+    await actor.update({[`flags.${MODULE_ID}.spellstrike`]:{charged:false,messageId:message.id}},{render:false});requireGM(message);demand(own(actor).spellstrike?.charged===false&&own(actor).spellstrike.messageId===message.id);
    }:undefined;
    try{
-    requireGM();
+    requireGM(message);
     const attacks=[],sequence=createAttackSequence({actor});
     if(kind==='combination'){
      for(const [index,selected]of (order==='fist'?[second,current]:[current,second]).entries()){
-      requireGM();
+      requireGM(message);
       const strike=strikes(actor).find(s=>strikeKey(s)===strikeKey(selected));
       if(!strike||!(fist(strike)||allowedCombinationWeapon(strike)))throw Error('连击的下一把武器已不可用。');
       requireSceneTarget(actor,origin,targets[0]);attacks.push(await attack(actor,strike,targets[0],Math.min(map+index,2),message,index,kind,sequence,user));
      }
-    }else for(const [index,target]of targets.entries()){requireGM();requireSceneTarget(actor,origin,target);attacks.push(await attack(actor,current,target,map,message,index,kind,sequence,user,index===0?commitAttack:undefined));}
+    }else for(const [index,target]of targets.entries()){requireGM(message);requireSceneTarget(actor,origin,target);attacks.push(await attack(actor,current,target,map,message,index,kind,sequence,user,index===0?commitAttack:undefined));}
     const receivesSpell=attack=>choice&&(!spellTarget||attack.target.uuid===spellTarget)&&(kind==='swipe'&&!spellTarget?hit(attack.outcome):choice.spell.isAttack||choice.spell.system.traits.value.includes('attack')?hit(attack.outcome):attack.outcome!=='criticalFailure');
     const eligible=attacks.filter(receivesSpell),spellCard=choice?await publishSpell({actor,user,message,choice,payment,targets:spellTarget?targets.filter(target=>target.uuid===spellTarget):targets,kind}):null;
     const sharedSpellDamage=choice?.spell.system.defense?.save&&!choice.spell.isAttack&&!choice.spell.system.traits.value.includes('attack')?{}:null;
     for(const target of targets){
-     requireGM();
+     requireGM(message);
      const forTarget=attacks.filter(a=>a.target.uuid===target.uuid),parts=[];
      for(const a of forTarget){const damage=await weaponDamage(a);if(damage)parts.push({roll:damage,item:a.strike.item});}
      const spellAttack=forTarget.find(receivesSpell);
@@ -351,14 +380,14 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
       const damage=await spellDamage(spell,target,spellAttack.outcome,{saveOutcome:defense?.basic?outcome:null,shared:sharedSpellDamage,activityMessage:message,user});if(damage)parts.push({roll:damage,item:spell});
       const extra=spellAttack.outcome==='criticalSuccess'&&!defense?criticalSpellPersistentFormula(spell):null;
       if(extra&&damage){
-       requireGM();const result=await ownerOperations.run({actor,message,user},{type:'formula-damage',itemUuid:item.uuid,tokenUuid:origin.uuid,formula:extra});requireGM();
+       requireGM(message);const result=await ownerOperations.run({actor,message,user},{type:'formula-damage',itemUuid:item.uuid,tokenUuid:origin.uuid,formula:extra});requireGM(message);
        if(result.status!=='rolled')throw Error('法术的额外持续伤害投骰已取消；既有攻击、伤害与支付保留，不能自动重投。');
        const roll=result.roll;damageContexts.set(roll,{...damageContexts.get(damage),manualPrivacy:result.privacy});parts.push({roll,item:spell});
       }
      }
      await damageCard({actor,message,target,parts,attacks:forTarget,kind});
     }
-    requireGM();
+    requireGM(message);
     await record(message,'done');return '已完成攻击、法术支付与合并伤害；每个目标按原生伤害卡应用一次。';
    }catch(error){
     if(error.nativeCancelled&&isActiveGM(game)){
@@ -369,6 +398,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
     }
     if(isActiveGM(game))await record(message,'error',{error:String(error.message??error)});throw error;
    }
+   }finally{scopes.delete(actor);scopes.delete(message);}
   });
  }
  async function maintain(actor){
@@ -381,7 +411,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   const id=Hooks.on('pf2e.restForTheNight',actor=>{
    if(!actor?.testUserPermission(game.user,'OWNER')||!hasSpellstrike(actor))return;
    const startedAsGM=isActiveGM(game);
-   queue.run(actor.uuid,()=>{if(startedAsGM)requireGM();return actor.update({[`flags.${MODULE_ID}.spellstrike`]:{charged:true}})}).catch(onError);
+   queue.run(actor.uuid,()=>{if(startedAsGM)requireGM();if(!hasSpellstrike(actor))return;return actor.update({[`flags.${MODULE_ID}.spellstrike`]:{charged:true}})}).catch(onError);
   });
   return()=>{Hooks.off('pf2e.restForTheNight',id);unregister();};
  }

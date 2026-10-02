@@ -1,8 +1,8 @@
 import {MODULE_ID as ID} from './rules.mjs';
-import {isActiveGM} from './native-context.mjs';
+import {getSourceId,isActiveGM} from './native-context.mjs';
 import {runCheckReactionPipeline} from './reaction-checks.mjs';
 import {assessHalflingLuck,isHalflingLuckItem} from './halfling-luck-rules.mjs';
-import {createHalflingLuckLedger} from './halfling-luck-ledger.mjs';
+import {createHalflingLuckLedger,HALFLING_LUCK_SOURCE} from './halfling-luck-ledger.mjs';
 
 const ACTION='halfling-luck:use',RPC='halfling-luck:ledger',PROOF='halfling-luck:proof';
 const values=c=>Array.from(c?.values?.()??c??[]);
@@ -16,10 +16,11 @@ async function sha256(value){return [...new Uint8Array(await globalThis.crypto.s
  */
 export function createHalflingLuckProvider({game,fromUuid=globalThis.fromUuid,choose,originalUse,ledger=createHalflingLuckLedger({game,fromUuid}),assess=assessHalflingLuck,randomId=()=>globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.randomUUID(),onError=()=>{},publish,referencePublisher}={}){
  const scopes=new Map(),authorizations=new Map(),waiters=new Map();let socket,installed=false;
- const feature=a=>values(a?.items).find(isHalflingLuckItem);
+ const exactSource=item=>item?.type==='feat'&&getSourceId(item)===HALFLING_LUCK_SOURCE;
+ const feature=a=>values(a?.items).find(item=>item.actor===a&&isHalflingLuckItem(item));
  const handlesActor=a=>a?.type==='character'&&!a.isToken&&game.actors?.get(a.id)===a&&!!feature(a);
  const resolveAction=i=>isHalflingLuckItem(i)&&handlesActor(i.actor)&&i.actor.items.get(i.id)===i?ACTION:undefined;
- const live=(s,canAct=true)=>handlesActor(s.actor)&&s.actor.items.get(s.item.id)===s.item&&game.users.get(s.user.id)===s.user&&s.user.active&&s.actor.testUserPermission(s.user,'OWNER')===true&&(!canAct||s.actor.canAct===true&&s.actor.isDead!==true);
+ const live=(s,canAct=true)=>handlesActor(s.actor)&&s.actor.items.get(s.item.id)===s.item&&isHalflingLuckItem(s.item)&&s.item.actor===s.actor&&game.users.get(s.user.id)===s.user&&s.user.active&&s.actor.testUserPermission(s.user,'OWNER')===true&&(!canAct||s.actor.canAct===true&&s.actor.isDead!==true);
  function requireScope(s,canAct=true){if(!live(s,canAct)||game.user.id!==s.user.id||game.users.activeGM?.id!==s.gmId)throw Error('半身人幸运的原操作者、能力或主GM已改变；不会重试本次使用。');}
  function evaluate(s){return assess({game,actor:s.actor,item:s.item,user:s.user,check:s.check,...s.captured,requestedCreateMessage:s.requestedCreateMessage});}
  function fingerprintData(s){
@@ -154,17 +155,17 @@ export function createHalflingLuckProvider({game,fromUuid=globalThis.fromUuid,ch
   if(installed)return()=>{};installed=true;socket=api;const hooks=[];
   const on=(name,fn)=>hooks.push([name,Hooks.on(name,fn)]);
   on('preUpdateItem',(item,changes,options,userId)=>{
-   if(!isHalflingLuckItem(item))return;
+   if(!exactSource(item)&&!authorizations.has(item?.uuid))return;
    if(!Object.hasOwn(changes??{},'system.frequency.value')&&!Object.hasOwn(changes?.system?.frequency??{},'value'))return;
    try{beforeUse(item,game.users.get(userId));return ledger.preparePayment(item,changes,options,userId);}catch(error){onError(error);return false;}
   });
   on('updateItem',(item,changes,options,userId)=>{
-   if(!isHalflingLuckItem(item))return;
+   if(!exactSource(item)&&!authorizations.has(item?.uuid))return;
    try{ledger.observePayment(item,changes,options,userId);wake(item);}catch(error){onError(error);}
   });
   socket?.register(PROOF,async function(payload){try{if(!installed)throw Error('Provider已停用。');return {ok:true,value:await prove(payload,this.socketdata?.userId)};}catch(error){return {ok:false,error:String(error.message??error)};}});
   socket?.register(RPC,async function(payload){try{if(!installed)throw Error('Provider已停用。');return {ok:true,value:await dispatch(payload,this.socketdata?.userId)};}catch(error){return {ok:false,error:String(error.message??error)};}});
   return()=>{installed=false;for(const[name,id]of hooks)Hooks.off(name,id);};
  }
- return {handlesActor,interceptCheck,resolveAction,requiresActualUse:item=>!!resolveAction(item),tracksFrequency:isHalflingLuckItem,beforeUse,captureUsage,executeUsage,register};
+ return {handlesActor,interceptCheck,resolveAction,requiresActualUse:item=>!!resolveAction(item),tracksFrequency:exactSource,beforeUse,captureUsage,executeUsage,register};
 }

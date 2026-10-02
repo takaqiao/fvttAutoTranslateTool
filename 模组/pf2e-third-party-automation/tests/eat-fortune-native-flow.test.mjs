@@ -7,7 +7,7 @@ test('Eat Fortune offers its real reaction without geometry and conceals the sou
  const gm={id:'gm',isGM:true,active:true},player={id:'player',active:true},users=new Map([[gm.id,gm],[player.id,player]]);users.activeGM=gm;
  const actor={id:'reactor',uuid:'Actor.reactor',items:new Map(),flags:{},canAct:true,testUserPermission:u=>u===player||u===gm,update:patch};
  const source={id:'source',uuid:'Actor.source',name:'Secret actor',items:new Map(),testUserPermission:u=>u===gm,flags:{[M]:{reactionChecks:{reactions:[{kind:'clock',nonce:'paid-clock',state:'claimed',checkId:'clock-card'}]}}}};
- const item={id:'eat',uuid:`${actor.uuid}.Item.eat`,actor,type:'feat',sourceId:S.eat,system:{frequency:{value:1}},update:patch,toMessage:async()=>({id:'eat-card',flags:{},update:patch})};actor.items.set(item.id,item);
+ const item={id:'eat',uuid:`${actor.uuid}.Item.eat`,actor,type:'feat',sourceId:S.eat,system:{frequency:{value:1}},update:patch,toMessage:async()=>{const card={id:'eat-card',flags:{},update:patch};game.messages.set(card.id,card);return card}};actor.items.set(item.id,item);
  const clock={id:'clock',uuid:`${source.uuid}.Item.clock`,actor:source,type:'feat',sourceId:S.clock};source.items.set(clock.id,clock);
  const scene={id:'scene',tokens:new Map()},make=a=>({id:a.id,uuid:`Scene.scene.Token.${a.id}`,documentName:'Token',actor:a,parent:scene,name:'Secret monster',playersCanSeeName:false,object:{distanceTo(){assert.fail('no distance checks')}}});
  const origin=make(source),reactor=make(actor);scene.tokens.set(origin.id,origin);scene.tokens.set(reactor.id,reactor);

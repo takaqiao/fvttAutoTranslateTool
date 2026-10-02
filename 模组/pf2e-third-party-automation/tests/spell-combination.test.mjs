@@ -10,9 +10,9 @@ function fixture({kind='strike',map=0,outcomes=['success','success'],save='failu
  const actor={id:'pc',uuid:'Actor.pc',type:'character',flags:{[NS]:{spellstrike:{charged}}},level:15,testUserPermission:()=>true,items:[],system:{resources:{focus:{value:3}}},async update(changes){for(const[k,v]of Object.entries(changes))set(this,k,v)}};
  const feat={id:'feature',uuid:'Actor.pc.Item.feature',sourceId:S[kind],type:kind==='swipe'?'feat':'action',actor,system:{rules:[]},name:kind};
  const scene={id:'s',tokens:new Map()};
- const targetDocs=Array.from({length:targets},(_,i)=>({id:`target${i}`,uuid:`Scene.s.Token.target${i}`,documentName:'Token',parent:scene,actor:{uuid:`Actor.target${i}`,type:'npc'},object:{distanceTo:()=>5}}));
+ const targetDocs=Array.from({length:targets},(_,i)=>({id:`target${i}`,uuid:`Scene.s.Token.target${i}`,documentName:'Token',parent:scene,actor:{id:`target${i}`,uuid:`Actor.target${i}`,type:'npc'},object:{distanceTo:()=>5}}));
  for(const target of targetDocs){target.object.document=target;target.actor.getStatistic=()=>({check:{roll:async opts=>{calls.push({kind:'save',opts,target});const raw=new Message({speaker:{actor:target.actor.uuid},flags:{pf2e:{context:{type:'saving-throw',outcome:save,options:opts.extraRollOptions}}},rolls:[roll(20)]});await opts.callback?.(roll(20),save,raw);return roll(20);}}});}
- const origin={id:'pcToken',uuid:'Scene.s.Token.pcToken',parent:scene,actor,object:{distanceTo:()=>5,checkCollision:()=>false}};actor.getActiveTokens=()=>[origin];actor.getReach=()=>5;
+ const origin={id:'pcToken',uuid:'Scene.s.Token.pcToken',documentName:'Token',parent:scene,actor,object:{distanceTo:()=>5,checkCollision:()=>false}};actor.getActiveTokens=()=>[origin];actor.getReach=()=>5;
  for(const token of [origin,...targetDocs])scene.tokens.set(token.id,token);
  const weapons=[{id:'weapon',slug:'sword',system:{equipped:{carryType:'held',handsHeld:1},traits:{value:[]}},isUnarmed:false},{id:'fist',slug:'fist',system:{equipped:{carryType:'worn',handsHeld:0},traits:{value:['unarmed']}},isUnarmed:true}].map(w=>({...w,uuid:`Actor.pc.Item.${w.id}`,name:w.id,actor,type:'weapon',category:w.isUnarmed?'unarmed':'martial',isMelee:true,hands:'1',isEquipped:true,get isHeld(){return this.system.equipped.carryType==='held'},get handsHeld(){return this.system.equipped.handsHeld}}));
  actor.system.actions=weapons.map((item,index)=>({type:'strike',ready:true,item,variants:[0,1,2].map(tier=>({roll:async opts=>{const i=calls.filter(c=>c.kind==='attack').length;calls.push({kind:'attack',index,tier,opts});const raw=new Message({speaker:{actor:'pc'},flags:{pf2e:{origin:{uuid:item.uuid,type:'weapon',actor:actor.uuid},context:{type:'attack-roll',outcome:outcomes[i],options:[...(opts.options??[])],target:{actor:opts.target.document.actor.uuid,token:opts.target.document.uuid}}}},rolls:[roll(25)]});await opts.callback(roll(25),outcomes[i],raw);return roll(25)}})),damage:async opts=>{calls.push({kind:'weapon-damage',index,opts});return roll(10)},critical:async opts=>{calls.push({kind:'weapon-damage',index,opts});return roll(20)}}));
@@ -21,18 +21,19 @@ function fixture({kind='strike',map=0,outcomes=['success','success'],save='failu
  actor.items=[feat,...weapons,spell,entry];actor.items.get=id=>actor.items.find(i=>i.id===id);actor.spellcasting={contents:[entry],collections:[]};
  actor._source={items:[]};actor.clone=changes=>{calls.push({kind:'infusion-clone',changes});return actor};
  class Message{constructor(data){Object.assign(this,data);this.sourceRolls=this.rolls?.map(r=>({...r,options:structuredClone(r.options??{})}));this.isCheckRoll=!!this.rolls?.length&&this.flags?.pf2e?.context?.type!=='damage-roll';}toObject(){return {...this,rolls:this.sourceRolls,flags:structuredClone(this.flags)}}async update(changes){for(const[k,v]of Object.entries(changes))set(this,k,v);return this}static async create(data){const msg=new Message(data);msg.id=`m${messages.length}`;messages.push(msg);game.messages.set(msg.id,msg);return msg}}
- const game={user:{id:'gm',settings:{}},users:{activeGM:{id:'gm'}},messages:new Map(),modules:new Map([['pf2e-toolbelt',{active:true}]]),time:{worldTime:100},toolbelt:{api:{betterChat:{mergeDamageMessages:async(a,b,opts)=>{merges.push({a,b,opts});return new Message({flags:{pf2e:{context:{options:[]}}},rolls:[roll(a.rolls[0].total+b.rolls[0].total)]})}}}}};
+ const gm={id:'gm',settings:{},isGM:true,active:true},player={id:'player',active:true},users=Object.assign(new Map([[gm.id,gm],[player.id,player]]),{activeGM:gm});
+ const game={user:gm,users,actors:new Map([[actor.id,actor],...targetDocs.map(t=>[t.actor.id,t.actor])]),messages:new Map(),modules:new Map([['pf2e-toolbelt',{active:true}]]),time:{worldTime:100},toolbelt:{api:{betterChat:{mergeDamageMessages:async(a,b,opts)=>{merges.push({a,b,opts});return new Message({flags:{pf2e:{context:{options:[]}}},rolls:[roll(a.rolls[0].total+b.rolls[0].total)]})}}}}};
  game.scenes=new Map([[scene.id,scene]]);
  const casts={addMatcher(){},captureUsage(){},register(){return()=>{}},async payForActivity(ctx){calls.push({kind:'payment',ctx});if(consumeFails)throw Error('法术资源不足');return {id:'paid'}},async ensurePaid(ctx){calls.push({kind:'bind-payment',ctx});return{id:'paid'}},async finishActivityWithoutSpell(ctx){calls.push({kind:'finish-payment',ctx})}};
  const chooser=async({title,choices})=>title.includes('多重')?String(map):choices[0].value;
  const nativeOperations={run:async(_ctx,_request,execute,beforeRoll)=>{await beforeRoll?.();return execute();},register(){}};
  assert.equal(typeof api.createSpellCombination,'function');const provider=api.createSpellCombination({game,choose:chooser,fromUuid:async uuid=>[actor,origin,...targetDocs,...actor.items].find(d=>d.uuid===uuid),nativeCasts:casts,nativeOperations});
- const message=new Message({id:'use1',author:{id:'player'},speaker:{actor:'pc'},flags:{pf2e:{origin:{uuid:feat.uuid,type:feat.type,actor:actor.uuid}},[NS]:{usageInput:{actualUse:true,targetUuids:targetDocs.map(t=>t.uuid)}}}});game.messages.set(message.id,message);
- const use=()=>provider.executeUsage({actor,item:feat,message,user:{id:'player'},action:provider.resolveAction(feat)});
+ const message=new Message({id:'use1',author:player,speaker:{actor:'pc'},flags:{pf2e:{origin:{uuid:feat.uuid,type:feat.type,actor:actor.uuid}},[NS]:{usageInput:{actualUse:true,targetUuids:targetDocs.map(t=>t.uuid)}}}});game.messages.set(message.id,message);
+ const use=()=>provider.executeUsage({actor,item:feat,message,user:game.users.get('player'),action:provider.resolveAction(feat)});
  return {provider,actor,feat,spell,entry,origin,targetDocs,calls,messages,merges,game,casts,use,message,Message,weapons,nativeOperations};
 }
 async function setup(options,fn){const previous=globalThis.CONFIG;try{const f=fixture(options);globalThis.CONFIG={ChatMessage:{documentClass:f.Message},Dice:{rolls:[]},PF2E:{}};await fn(f)}finally{globalThis.CONFIG=previous}}
-function runWith(f,options={}){const p=api.createSpellCombination({game:f.game,choose:async({choices})=>choices[0].value,fromUuid:async uuid=>[f.actor,f.origin,...f.targetDocs,...f.actor.items].find(d=>d.uuid===uuid),nativeCasts:f.casts,nativeOperations:f.nativeOperations,...options});return()=>p.executeUsage({actor:f.actor,item:f.feat,message:f.message,user:{id:'player'},action:p.resolveAction(f.feat)});}
+function runWith(f,options={}){const p=api.createSpellCombination({game:f.game,choose:async({choices})=>choices[0].value,fromUuid:async uuid=>[f.actor,f.origin,...f.targetDocs,...f.actor.items].find(d=>d.uuid===uuid),nativeCasts:f.casts,nativeOperations:f.nativeOperations,...options});return()=>p.executeUsage({actor:f.actor,item:f.feat,message:f.message,user:f.game.users.get('player'),action:p.resolveAction(f.feat)});}
 const handoff=f=>{f.game.users.activeGM={id:'new-gm'}};
 test('a PC target save is dispatched to its owner and closing it never rolls on GM',()=>setup({spellSave:true},async f=>{
  f.targetDocs[0].actor.type='character';let requested=0;
@@ -156,7 +157,7 @@ test('queued GM rest stops on handoff instead of overwriting the new GMs dischar
  const provider=api.createSpellCombination({game:f.game,nativeCasts:f.casts,fromUuid:async uuid=>[f.actor,f.origin,...f.targetDocs,...f.actor.items].find(d=>d.uuid===uuid),choose:async({choices})=>{enter();await pending;return choices[0].value},onError:error=>errors.push(error)});
  provider.register({Hooks:{on:(event,callback)=>{assert.equal(event,'pf2e.restForTheNight');onRest=callback;return 1},off(){}}});
  let writes=0;const update=f.actor.update;f.actor.update=async changes=>{writes++;return update.call(f.actor,changes)};
- const use=provider.executeUsage({actor:f.actor,item:f.feat,message:f.message,user:{id:'player'},action:provider.resolveAction(f.feat)});await entered;
+ const use=provider.executeUsage({actor:f.actor,item:f.feat,message:f.message,user:f.game.users.get('player'),action:provider.resolveAction(f.feat)});await entered;
  onRest(f.actor);await new Promise(resolve=>setImmediate(resolve));assert.equal(writes,0);
  handoff(f);f.actor.flags[NS].spellstrike={charged:false,messageId:'new-gm-cast'};release();
  await assert.rejects(use,/GM/);await new Promise(resolve=>setImmediate(resolve));
@@ -340,7 +341,7 @@ test('Spell Swipe enables the native sweep-bonus predicate against both targets'
 test('Overwhelming Combination allows fist first and waits for first-hit providers before the next strike',async()=>{
  const prior=globalThis.CONFIG;try{const f=fixture({kind:'combination'});globalThis.CONFIG={ChatMessage:{documentClass:f.Message}};let after=0;
  const provider=api.createSpellCombination({game:f.game,nativeCasts:f.casts,nativeOperations:f.nativeOperations,fromUuid:async id=>f.targetDocs.find(t=>t.uuid===id),choose:async({title,choices})=>title.includes('攻击顺序')?'fist':title.includes('多重')?'0':choices[0].value,afterAttack:async()=>{after++;f.calls.push({kind:'after-attack'})}});
- await provider.executeUsage({actor:f.actor,item:f.feat,message:f.message,user:{id:'player'},action:provider.resolveAction(f.feat)});
+ await provider.executeUsage({actor:f.actor,item:f.feat,message:f.message,user:f.game.users.get('player'),action:provider.resolveAction(f.feat)});
  assert.deepEqual(f.calls.filter(c=>['attack','after-attack'].includes(c.kind)).map(c=>c.kind),['attack','after-attack','attack','after-attack']);assert.deepEqual(f.calls.filter(c=>c.kind==='attack').map(c=>c.index),[1,0]);assert.equal(after,2);
  }finally{globalThis.CONFIG=prior}
 });

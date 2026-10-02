@@ -6,6 +6,7 @@ import {reactionPermitted} from './reaction-restriction.mjs';
 
 export const EAT_FORTUNE_SOURCES=Object.freeze({eat:'Compendium.pf2e.feats-srd.Item.rFmJVDdB313EibTs',assurance:'Compendium.pf2e.feats-srd.Item.W6Gl9ePmItfDHji0',chrono:'Compendium.pf2e.feats-srd.Item.ygdbkfPPgSoWxaBa',devise:'Compendium.pf2e.feat-effects.Item.XQpTyjXFYYNexyOk',clock:'Compendium.pf2e.feats-srd.Item.3aG0gkHulBIHqqGE'});
 const values=c=>Array.from(c?.values?.()??c??[]),own=d=>d?.flags?.[MODULE_ID]?.reactionChecks??{};
+const activeItem=item=>!!item&&!item.suppressed&&!item.isSuppressed&&!item.system?.suppressed;
 const actorOf=context=>context.actor??(context.origin?.self?context.origin.actor:context.target?.actor);
 const tokenOf=context=>context.token??(context.origin?.self?context.origin.token:context.target?.token);
 const opposite=trait=>trait==='fortune'?'misfortune':'fortune';
@@ -38,7 +39,7 @@ export function selectedFortuneSources(context){
  const token=tokenOf(context),result=[];
  for(const rule of values(actor.rules)){
   const item=rule.item,kind=['assurance','chrono','devise'].find(key=>getSourceId(item)===EAT_FORTUNE_SOURCES[key]);
-  if(!kind||rule.key!=='SubstituteRoll'||rule.ignored||item.isExpired||!(rule.test?.(options)??rule.predicate?.test(options)??true))continue;
+  if(!kind||!activeItem(item)||item.actor!==actor||!values(actor.items).includes(item)||rule.key!=='SubstituteRoll'||rule.ignored||item.isExpired||!(rule.test?.(options)??rule.predicate?.test(options)??true))continue;
   const selector=rule.resolveInjectedProperties(rule.selector);
   if(!(context.domains??[]).includes(selector))continue;
   if(kind==='devise'&&(context.type!=='attack-roll'||!options.has('devise-a-stratagem:attack')||options.has('devise-a-stratagem:skill')||!options.has('target:mark:devise-a-stratagem')||!(context.action==='strike'||selector==='strike-attack-roll')))continue;
@@ -54,31 +55,74 @@ export function createEatFortune({game,reactionRestriction,fromUuid=globalThis.f
  const reactors=new Map(),queue=new SerialActions(),dialogs=new WeakMap(),wrappedDialogs=new WeakSet(),modifierInputs=new WeakSet(),probes=new Map();let socket;
  const requireGM=()=>{if(!isActiveGM(game))throw Error('主GM已交接，吞噬福祸停止；已认领或已付的资源不会自动回滚或重试。')};
  const guarded=async operation=>{requireGM();const result=await operation();requireGM();return result};
- const feature=actor=>values(actor?.items).find(i=>i.type==='feat'&&getSourceId(i)===EAT_FORTUNE_SOURCES.eat);
+ const activeFeature=(actor,item)=>item?.type==='feat'&&item.actor===actor&&activeItem(item)&&getSourceId(item)===EAT_FORTUNE_SOURCES.eat;
+ const feature=actor=>values(actor?.items).find(i=>activeFeature(actor,i));
  const track=actor=>{if(feature(actor))reactors.set(actor.uuid,actor);else reactors.delete(actor?.uuid)};
  const canUse=actor=>!actor.isDead&&actor.canAct!==false&&!actor.hasCondition?.('unconscious')&&!actor.hasCondition?.('stunned');
  const available=actor=>reactionPermitted(actor,reactionRestriction)&&(!reactionEpoch(actor,game)||genericReactionAvailable(actor,game));
  const uses=item=>item.system.frequency?.value??item.system.frequency?.max??0;
  const chooser=actor=>values(game.users).find(u=>u.active&&!u.isGM&&u.character?.uuid===actor.uuid&&actor.testUserPermission(u,'OWNER'))??values(game.users).find(u=>u.active&&!u.isGM&&actor.testUserPermission(u,'OWNER'))??game.user;
- const writeRecord=(actor,nonce,change)=>guarded(()=>actor.update({[`flags.${MODULE_ID}.reactionChecks.reactions`]:(own(actor).reactions??[]).map(r=>r.nonce===nonce?{...r,...change}:r)}));
- async function resolveTrigger(payload,user){
+ const demand=ok=>{if(!ok)throw Error('吞噬福祸的原操作者、能力或来源已改变；已有认领与费用不会回滚或重试。')};
+ const actorProof=actor=>({actor,uuid:actor?.uuid,token:actor?.isToken?actor.token:null,scene:actor?.isToken?actor.token?.parent:null,baseActor:actor?.isToken?actor.token?.baseActor:null,actorId:actor?.isToken?actor.token?.actorId:null});
+ function currentActor(p){
+  if(!p.actor?.uuid||p.actor.uuid!==p.uuid)return false;
+  if(!p.token)return !p.actor.isToken&&game.actors?.get(p.actor.id)===p.actor;
+  return p.actor.isToken&&p.actor.token===p.token&&p.token.documentName==='Token'&&p.token.actorLink===false&&p.token.actor===p.actor&&p.token.parent===p.scene&&game.scenes.get(p.scene?.id)===p.scene&&p.scene.tokens.get(p.token.id)===p.token&&p.token.baseActor===p.baseActor&&p.token.actorId===p.actorId&&!!p.baseActor&&game.actors.get(p.actorId)===p.baseActor;
+ }
+ const tokenProof=token=>({token,uuid:token?.uuid,actor:token?.actor,scene:token?.parent,actorProof:actorProof(token?.actor)});
+ const currentToken=p=>p.token?.documentName==='Token'&&p.token.uuid===p.uuid&&p.token.actor===p.actor&&p.token.parent===p.scene&&game.scenes.get(p.scene?.id)===p.scene&&p.scene.tokens.get(p.token.id)===p.token&&currentActor(p.actorProof);
+ function assertLive(scope,{sourceDeleted=false}={}){
+  requireGM();const {gm,user}=scope;
+  demand(gm?.active===true&&gm.isGM===true&&game.user===gm&&gm.id===scope.gmId&&game.users.get(scope.gmId)===gm&&game.users.activeGM===gm&&user?.active===true&&user.id===scope.userId&&game.users.get(scope.userId)===user);
+  const p=scope.trigger;if(p){
+   demand(currentActor(p.actorProof)&&p.actor.testUserPermission(user,'OWNER')===true);
+   if(p.token)demand(currentToken(p.token));if(p.source)demand(currentToken(p.source));
+   if(p.item){
+    demand(p.item.actor===p.actor&&p.item.uuid===scope.payload.sourceItemUuid);
+    if(scope.sourceConsumed||sourceDeleted)demand(!p.actor.items.has(p.item.id));
+    else demand(p.actor.items.get(p.item.id)===p.item&&activeItem(p.item));
+   }
+   if(p.card){const claim=own(p.actor).reactions?.find(r=>r.kind==='clock'&&r.nonce===scope.payload.clockNonce);demand(game.messages.get(p.card.id)===p.card&&p.card.item===p.item&&own(p.card).kind==='reaction-use'&&own(p.card).nonce===scope.payload.clockNonce&&claim?.state==='claimed'&&claim.checkId===p.card.id&&getSourceId(p.item)===EAT_FORTUNE_SOURCES.clock);}
+   if(p.substitution&&!scope.sourceConsumed&&!sourceDeleted)demand(selectedFortuneSources(p.context).some(s=>s.sourceItemUuid===p.item.uuid&&JSON.stringify(s)===JSON.stringify(p.matched)));
+  }
+  const r=scope.reactor;if(r){demand(currentActor(r.actorProof)&&currentToken(r.token)&&r.owner.active===true&&r.owner.id===r.ownerId&&game.users.get(r.ownerId)===r.owner&&r.actor.testUserPermission(r.owner,'OWNER')===true&&r.actor.items.get(r.item.id)===r.item&&activeFeature(r.actor,r.item));}
+  if(scope.claim){const rows=(own(r.actor).reactions??[]).filter(row=>row.nonce===scope.claim.nonce);demand(rows.length===1&&Object.keys(scope.claim).every(k=>rows[0][k]===scope.claim[k]));}
+  if(scope.card)demand(game.messages.get(scope.card.id)===scope.card);
+ }
+ const step=async(scope,operation)=>{assertLive(scope);const result=await guarded(operation);assertLive(scope);return result};
+ async function writeRecord(actor,nonce,change,scope){
+  await step(scope,()=>actor.update({[`flags.${MODULE_ID}.reactionChecks.reactions`]:(own(actor).reactions??[]).map(r=>r.nonce===nonce?{...r,...change}:r)}));
+  demand(Object.entries(change).every(([key,value])=>own(actor).reactions?.find(r=>r.nonce===nonce)?.[key]===value));
+ }
+ async function resolveTrigger(payload,user,scope){
   requireGM();
   if(!user||typeof payload?.nonce!=='string'||!/^[A-Za-z0-9-]{8,80}$/.test(payload.nonce))throw Error('吞噬福祸检定凭据无效。');
-  const actor=await fromUuid(payload.rollerActorUuid),token=await fromUuid(payload.rollerTokenUuid),item=await fromUuid(payload.sourceItemUuid),source=await fromUuid(payload.sourceTokenUuid);
+  const actor=scope?await step(scope,()=>fromUuid(payload.rollerActorUuid)):await fromUuid(payload.rollerActorUuid);
+  if(scope){if(scope.trigger)demand(scope.trigger.actor===actor);else scope.trigger={actor,actorProof:actorProof(actor)};assertLive(scope);}
+  const token=scope?await step(scope,()=>fromUuid(payload.rollerTokenUuid)):await fromUuid(payload.rollerTokenUuid);
+  if(scope){if(scope.trigger.token)demand(scope.trigger.token.token===token);else scope.trigger.token=tokenProof(token);assertLive(scope);}
+  const item=scope?await step(scope,()=>fromUuid(payload.sourceItemUuid)):await fromUuid(payload.sourceItemUuid);
+  if(scope){if(scope.trigger.item)demand(scope.trigger.item===item);else scope.trigger.item=item;assertLive(scope);}
+  const source=scope?await step(scope,()=>fromUuid(payload.sourceTokenUuid)):await fromUuid(payload.sourceTokenUuid);
+  if(scope){if(scope.trigger.source)demand(scope.trigger.source.token===source);else scope.trigger.source=tokenProof(source);assertLive(scope);}
   requireGM();if(!actor?.testUserPermission?.(user,'OWNER')||token?.documentName!=='Token'||token.actor?.uuid!==actor.uuid||source?.documentName!=='Token'||source.actor?.uuid!==payload.sourceActorUuid||token.parent?.id!==source.parent?.id||item?.actor?.uuid!==actor.uuid)throw Error('吞噬福祸的检定使用者、来源或Token不匹配。');
   if(payload.kind==='clock'){
    const claim=own(actor).reactions?.find(r=>r.kind==='clock'&&r.nonce===payload.clockNonce&&r.state==='claimed'),card=claim&&game.messages.get(claim.checkId);
-   if(getSourceId(item)!==EAT_FORTUNE_SOURCES.clock||payload.effectType!=='fortune'||!claim||card?.item?.uuid!==item.uuid||own(card).kind!=='reaction-use'||own(card).nonce!==payload.clockNonce||!['skill-check','saving-throw'].includes(payload.type))throw Error('Clock 已付反应来源凭据无法确认。');
+   if(getSourceId(item)!==EAT_FORTUNE_SOURCES.clock||!activeItem(item)||payload.effectType!=='fortune'||!claim||card?.item!==item||own(card).kind!=='reaction-use'||own(card).nonce!==payload.clockNonce||!['skill-check','saving-throw'].includes(payload.type))throw Error('Clock 已付反应来源凭据无法确认。');
+   if(scope){if(scope.trigger.card)demand(scope.trigger.card===card);else scope.trigger.card=card;assertLive(scope);}
    if(asSet(payload.options).has('misfortune'))return null;return {actor,token,item,source,matched:payload};
   }
   const context={actor,token,type:payload.type,action:payload.action,domains:payload.domains,options:new Set(payload.options??[]),rollTwice:payload.rollTwice,substitutions:payload.substitutions};
   const matched=selectedFortuneSources(context).find(s=>s.kind===payload.kind&&s.sourceItemUuid===payload.sourceItemUuid&&s.sourceActorUuid===payload.sourceActorUuid&&s.sourceTokenUuid===payload.sourceTokenUuid&&s.slug===payload.slug&&s.value===payload.value&&s.effectType===payload.effectType);
-  if(!matched)return null;return {actor,token,item,source,matched};
+  if(!matched)return null;
+  if(scope){const p=scope.trigger;if(p.substitution)demand(JSON.stringify(p.matched)===JSON.stringify(matched));else Object.assign(p,{substitution:true,matched,context});assertLive(scope);}
+  return {actor,token,item,source,matched};
  }
  async function decide(payload,user){
-  const initial=await resolveTrigger(payload,user);if(!initial)return null;
+  const scope={gm:game.user,gmId:game.user?.id,user,userId:user?.id,payload};assertLive(scope);
+  const initial=await resolveTrigger(payload,user,scope);assertLive(scope);if(!initial)return null;
   return queue.run(`source:${payload.sourceItemUuid}`,async()=>{
-   requireGM();
+   assertLive(scope);
    const existing=values(reactors.values()).flatMap(a=>(own(a).reactions??[]).filter(r=>r.kind==='eat'&&(r.nonce===payload.nonce||payload.clockNonce&&r.clockNonce===payload.clockNonce&&r.sourceActorUuid===payload.sourceActorUuid)));
    if(existing.length)throw Error('吞噬福祸已认领本次检定，不能重放或再次收费。');
    const candidates=values(game.scenes.get(initial.source.parent.id)?.tokens).filter(t=>reactors.has(t.actor?.uuid));
@@ -86,25 +130,27 @@ export function createEatFortune({game,reactionRestriction,fromUuid=globalThis.f
    for(const reactorToken of candidates){
     const actor=reactorToken.actor,item=feature(actor);if(seen.has(actor.uuid))continue;seen.add(actor.uuid);
     if(!item||uses(item)<1||!canUse(actor)||!available(actor))continue;
-    const triggerEpoch=reactionEpoch(actor,game),owner=chooser(actor),answer=await guarded(()=>choose({actor,user:owner,title:`吞噬福祸：${publicTargetName(initial.source,{game,user:owner})}使用${payload.effectType==='fortune'?'幸运':'厄运'}效果`,choices:[{value:'eat',label:'使用吞噬福祸（反应；每日一次）'},{value:'decline',label:'不使用'}]}));
+    const triggerEpoch=reactionEpoch(actor,game),owner=chooser(actor);scope.reactor={actor,actorProof:actorProof(actor),item,token:tokenProof(reactorToken),owner,ownerId:owner.id};assertLive(scope);
+    const answer=await step(scope,()=>choose({actor,user:owner,title:`吞噬福祸：${publicTargetName(initial.source,{game,user:owner})}使用${payload.effectType==='fortune'?'幸运':'厄运'}效果`,choices:[{value:'eat',label:'使用吞噬福祸（反应；每日一次）'},{value:'decline',label:'不使用'}]}));
     if(answer==null||answer==='decline')continue;if(answer!=='eat')throw Error('无效的吞噬福祸选择。');
     const proof=await withReactionReservation(actor,game,async()=>{
-     requireGM();const current=await resolveTrigger(payload,user);requireGM();
+     assertLive(scope);const current=await resolveTrigger(payload,user,scope);assertLive(scope);
      if(!current||reactionEpoch(actor,game)!==triggerEpoch||reactorToken.parent!==current.source.parent||game.scenes.get(reactorToken.parent?.id)?.tokens.get(reactorToken.id)!==reactorToken||!canUse(actor)||feature(actor)?.id!==item.id||uses(item)<1||!available(actor))return null;
      const proof={nonce:payload.nonce,kind:'eat',state:'claimed',epoch:triggerEpoch,time:game.time.worldTime??0,userId:user.id,reactorUserId:owner.id,reactorActorUuid:actor.uuid,reactorTokenUuid:reactorToken.uuid,sourceItemUuid:payload.sourceItemUuid,sourceActorUuid:payload.sourceActorUuid,sourceTokenUuid:payload.sourceTokenUuid,rollerActorUuid:payload.rollerActorUuid,rollerTokenUuid:payload.rollerTokenUuid,sourceKind:payload.kind,effectType:payload.effectType,oppositeTrait:opposite(payload.effectType),disrupted:true,...(payload.clockNonce?{clockNonce:payload.clockNonce}:{})};
-     await guarded(()=>actor.update({[`flags.${MODULE_ID}.reactionChecks.reactions`]:[...(own(actor).reactions??[]),proof]}));
-     await guarded(()=>item.update({'system.frequency.value':uses(item)-1},{[MODULE_ID]:{usageInternal:true}}));
+     await step(scope,()=>actor.update({[`flags.${MODULE_ID}.reactionChecks.reactions`]:[...(own(actor).reactions??[]),proof]}));scope.claim=proof;assertLive(scope);
+     const before=uses(item);await step(scope,()=>item.update({'system.frequency.value':before-1},{[MODULE_ID]:{usageInternal:true}}));demand(item.system.frequency.value===before-1);
      return proof;
-    });if(!proof)continue;
+    });assertLive(scope);if(!proof)continue;
     if(proof.sourceKind==='devise'){
      // The native if-enabled afterRoll deletes this whole attack-stratagem
      // effect. Cancellation must consume it as well, even though a d20 is rolled.
-     const sourceItem=await fromUuid(proof.sourceItemUuid);requireGM();if(!sourceItem||getSourceId(sourceItem)!==EAT_FORTUNE_SOURCES.devise)throw Error('已认领的攻击策略来源消失；不会重试。');
-     await guarded(()=>sourceItem.actor.deleteEmbeddedDocuments('Item',[sourceItem.id]));await writeRecord(actor,proof.nonce,{sourceConsumed:true});
+     const sourceItem=await step(scope,()=>fromUuid(proof.sourceItemUuid));if(sourceItem!==scope.trigger.item||getSourceId(sourceItem)!==EAT_FORTUNE_SOURCES.devise)throw Error('已认领的攻击策略来源消失；不会重试。');
+     assertLive(scope);const deleted=await sourceItem.actor.deleteEmbeddedDocuments('Item',[sourceItem.id]);
+     assertLive(scope,{sourceDeleted:true});demand(Array.isArray(deleted)&&deleted.includes(sourceItem));scope.sourceConsumed=true;await writeRecord(actor,proof.nonce,{sourceConsumed:true},scope);
     }
-    const card=await guarded(()=>item.toMessage());if(!card?.id)throw Error('吞噬福祸已认领，但原生反应卡未确认；不会重试。');
-    await guarded(()=>card.update({[`flags.${MODULE_ID}.usageGenerated`]:true,[`flags.${MODULE_ID}.reactionChecks`]:{kind:'reaction-use',reaction:'eat',nonce:proof.nonce}}));
-    await writeRecord(actor,proof.nonce,{checkId:card.id});return {...proof,checkId:card.id};
+    const card=await step(scope,()=>item.toMessage());if(!card?.id||game.messages.get(card.id)!==card)throw Error('吞噬福祸已认领，但原生反应卡未确认；不会重试。');scope.card=card;assertLive(scope);
+    await step(scope,()=>card.update({[`flags.${MODULE_ID}.usageGenerated`]:true,[`flags.${MODULE_ID}.reactionChecks`]:{kind:'reaction-use',reaction:'eat',nonce:proof.nonce}}));
+    await writeRecord(actor,proof.nonce,{checkId:card.id},scope);return {...proof,checkId:card.id};
    }
    return null;
   });

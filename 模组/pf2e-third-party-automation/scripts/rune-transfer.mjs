@@ -1,12 +1,14 @@
 import {MODULE_ID,hasSource} from './rules.mjs';
 import {SerialActions,requireOwner} from './runtime.mjs';
 import {isEatFortuneProbe} from './eat-fortune.mjs';
+import {getSourceId} from './native-context.mjs';
 
 export const RUNE_TRANSFER_SOURCE='Compendium.pf2e.feats-srd.Item.pe8a7WDz0MIY45uO';
 export const RUNE_TRANSFER_KEY='ThirdPartyCuttingHeavenRunes';
 const KIND='rune-transfer',values=value=>Array.from(value?.values?.()??value?.contents??value??[]);
 const own=item=>item?.flags?.[MODULE_ID]??{};
-const feature=actor=>values(actor?.items).find(item=>hasSource(item,RUNE_TRANSFER_SOURCE));
+const activeFeature=(actor,item)=>item?.type==='feat'&&item.actor===actor&&!item.suppressed&&!item.isSuppressed&&!item.system?.suppressed&&getSourceId(item)===RUNE_TRANSFER_SOURCE;
+const feature=actor=>values(actor?.items).find(item=>activeFeature(actor,item));
 const states=actor=>values(actor?.items).filter(item=>item.type==='effect'&&own(item).kind===KIND);
 const get=(actor,id)=>actor?.items?.get?.(id)??values(actor?.items).find(item=>item.id===id);
 const worlds=new Set(['-','sog','pnvfcgjbf2cjp7gz','team-automation-qa2']);
@@ -56,7 +58,7 @@ export function selectedRuneWeaponId(actor){
 }
 
 export function buildRuneTransferEffect({actor,feat,selectedWeaponId=null,revision=0}){
- if(!hasSource(feat,RUNE_TRANSFER_SOURCE)||!values(actor?.items).includes(feat))throw Error('断天剑碎地拳需要角色实际持有的准确专长。');
+ if(!activeFeature(actor,feat)||!values(actor?.items).includes(feat))throw Error('断天剑碎地拳需要角色实际持有的准确专长。');
  return {name:'断天剑·碎地拳：符文传递',type:'effect',img:feat.img??'icons/svg/aura.svg',system:{description:{value:'符文随当前投入的重拳缠手带自动更新；正常使用断天剑碎地拳可更换选定武器。'},level:{value:1},traits:{value:[],rarity:'common'},duration:{value:-1,unit:'unlimited',expiry:null,sustained:false},tokenIcon:{show:false},rules:[{key:RUNE_TRANSFER_KEY}]},flags:{[MODULE_ID]:{kind:KIND,runeTransfer:{version:1,source:RUNE_TRANSFER_SOURCE,featId:feat.id,selectedWeaponId,revision}}}};
 }
 
@@ -169,7 +171,7 @@ export function createRuneTransfer({game,fromUuid,choose,onError=()=>{}}){
   }
   return strike;
  }
- const resolveAction=item=>hasSource(item,RUNE_TRANSFER_SOURCE)?'rune-transfer:select':null;
+ const resolveAction=item=>activeFeature(item?.actor,item)?'rune-transfer:select':null;
  async function executeUsage({actor,item,user,action}){
   if(action!=='rune-transfer:select'||resolveAction(item)!==action||get(actor,item.id)!==item)throw Error('没有对应的符文选择专长。');
   await select(actor,user,true);const status=runeTransferStatus(actor,game);
