@@ -31,8 +31,8 @@ test('main shared native sheet observers make one real ledger lease and await on
  t.after(()=>{unregister();release()});
  const native=async()=>{
   nativeCalls++;await Promise.resolve();
-  const data=observer.decorate({speaker:{actor:actor.id},author:owner,flags:{pf2e:{origin:{uuid:item.uuid}}}}),message={...data,id:'m',uuid:'ChatMessage.m'};
-  documents.set(message.uuid,message);observer.record([message]);return message;
+  const id=nativeCalls===1?'m':`m${nativeCalls}`,data=observer.decorate({speaker:{actor:actor.id},author:owner,flags:{pf2e:{origin:{uuid:item.uuid}}}}),message={...data,id,uuid:`ChatMessage.${id}`};
+  documents.set(message.uuid,message);game.messages.set(message.id,message);observer.record([message]);return message;
  };
  const app=new Sheet();app.actor=actor;const handlers=paths.get(path).call(app,()=>({'use-action':native}));
  const button={closest:selector=>selector==='[data-item-id]'?{dataset:{itemId:item.id}}:null},result=await handlers['use-action']({},button);
