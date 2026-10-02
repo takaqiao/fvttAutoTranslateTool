@@ -81,6 +81,15 @@ export function appliedDamageAmount(receipt){
   .reduce((sum,u)=>sum+(Number.isFinite(u.value)&&u.value>0?u.value:0),0);
 }
 
+function captureTokenActor(token,game){
+ const actor=token?.actor,baseActor=token?.baseActor,actorId=token?.actorId,actorLink=token?.actorLink,synthetic=actor?.isToken===true;
+ return {actor,current:()=>{
+  if(!actor||!token||token.actor!==actor||token.baseActor!==baseActor||token.actorId!==actorId||token.actorLink!==actorLink||(actor.isToken===true)!==synthetic)return false;
+  if(synthetic)return token.documentName==='Token'&&actor.token===token&&actor.parent===token&&actorLink===false&&!!baseActor&&actorId===baseActor.id&&actor.id===baseActor.id&&game.actors.get(actorId)===baseActor;
+  return baseActor===undefined||baseActor===actor&&actorId===actor.id&&actorLink===true&&game.actors.get(actorId)===baseActor;
+ }};
+}
+
 /** Normal-use provider. All document mutations run on the elected GM. */
 export function createCampaignFeats({game,fromUuid=globalThis.fromUuid,choose,runNative,manualDamageRoll=rollManualDamage,onError=error=>console.error(MODULE_ID,error)}={}){
  const queues=new Map(),hooks=[];
@@ -89,12 +98,17 @@ export function createCampaignFeats({game,fromUuid=globalThis.fromUuid,choose,ru
  const owner=(actor,user)=>{gm();if(actor?.type!=='character'||!user||!actor.testUserPermission?.(user,'OWNER'))throw Error('没有此角色的所有者权限。')};
  const pick=async(actor,user,title,choices)=>{if(!choices.length)throw Error(`${title}：没有合法选项。`);const value=choices.length===1?choices[0].value:await choose?.({actor,user,title,choices});if(!choices.some(c=>c.value===value))throw Error('已取消选择。');return value};
  const saveFlag=(doc,key,value)=>doc.update({[`flags.${MODULE_ID}.${key}`]:value});
- const upsert=async(actor,key,data)=>{
+  const upsert=async(actor,key,data,guard)=>{
+   const guarded=typeof guard==='function';guard??=()=>{};
+   guard();
   const found=values(actor.items).filter(i=>own(i).campaignKey===key);
-  if(!data){if(found.length)await actor.deleteEmbeddedDocuments('Item',found.map(i=>i.id));return}
+   if(!data){if(found.length){await actor.deleteEmbeddedDocuments('Item',found.map(i=>i.id));guard();}return}
   data.flags??={};data.flags[MODULE_ID]={...data.flags[MODULE_ID],campaignKey:key};
-  if(found.length){await found[0].update(data);if(found.length>1)await actor.deleteEmbeddedDocuments('Item',found.slice(1).map(i=>i.id));return found[0]}
-  return (await actor.createEmbeddedDocuments('Item',[data]))[0];
+   const embedded=item=>item?.type==='effect'&&item.actor===actor&&(!item.parent||item.parent===actor)&&actor.items.get(item.id)===item;
+   const saved=item=>embedded(item)&&Object.entries(data.flags[MODULE_ID]).every(([field,value])=>own(item)[field]===value);
+   const original=()=>{if(guarded&&found.some(item=>!embedded(item)))throw Error('竖起盾墙的原始效果文档已改变；保留已有的效果。');};
+   if(found.length){guard();original();await found[0].update(data);guard();if(guarded&&!saved(found[0]))throw Error('竖起盾墙的效果更新未能确认。');if(found.length>1){original();await actor.deleteEmbeddedDocuments('Item',found.slice(1).map(i=>i.id));guard();if(guarded&&found.slice(1).some(item=>actor.items.get(item.id)))throw Error('竖起盾墙的重复效果清理尚未确认。');}if(guarded&&!saved(found[0]))throw Error('竖起盾墙的原始效果已改变。');return found[0]}
+   guard();const result=await actor.createEmbeddedDocuments('Item',[data]);guard();if(guarded&&(!Array.isArray(result)||result.length!==1||!saved(result[0])))throw Error('竖起盾墙的效果创建未能确认；保留待结算回执。');return result[0];
  };
  const targets=async message=>{
   const uuids=[...own(message).usageInput?.targetUuids??[]];
@@ -161,12 +175,37 @@ export function createCampaignFeats({game,fromUuid=globalThis.fromUuid,choose,ru
  }
 
  async function walls(ctx){
-  const {actor,message,user}=ctx;
-  const target=await oneTarget(actor,message,user,'竖起盾墙：选择15尺内盟友',t=>t.actor.uuid!==actor.uuid&&(actor.isAllyOf?.(t.actor)??t.actor.type==='character')&&distance(actor,t)!==null&&distance(actor,t)<=15);
-  const data=await nativeEffect(WALLS_EFFECT);data.system.duration={value:1,unit:'minutes',expiry:'turn-start',sustained:false};data.system.start={value:game.time.worldTime,initiative:actor.combatant?.initiative??null};
-  data.flags={...data.flags,[MODULE_ID]:{kind:'campaign-walls',sourceActorUuid:actor.uuid,sourceMessageId:message.id}};
-  await upsert(actor,`walls:${actor.uuid}`,structuredClone(data));await upsert(target.actor,`walls:${actor.uuid}`,structuredClone(data));
-  return `已为${actor.name}与${target.actor.name}施加竖起盾墙，持续1分钟。`;
+   const {actor,item,message,user}=ctx,originalGM=game.user,sourceOrigin=structuredClone(message.flags?.pf2e?.origin??{}),speaker=structuredClone(message.speaker??{}),input=structuredClone(own(message).usageInput??{});
+   const source=speaker.scene&&speaker.token?game.scenes.get(speaker.scene)?.tokens.get(speaker.token):actorTokens(actor)[0],scene=source?.parent;
+   const targetActors=new Map(values(scene?.tokens).map(token=>[token,token.actor]));
+   const sourceBinding=captureTokenActor(source,game),targetBindings=new Map([...targetActors.keys()].map(token=>[token,captureTokenActor(token,game)]));
+   const assertSource=()=>{
+    owner(actor,user);
+    if(sourceBinding.actor!==actor||!sourceBinding.current())throw Error('竖起盾墙的原始Token与基础Actor已改变。');
+    if(game.user!==originalGM||game.users.activeGM!==originalGM||game.users.get(originalGM.id)!==originalGM)throw Error('竖起盾墙的原始主GM文档已改变。');
+    if(game.users.get(user.id)!==user||actor.items.get(item.id)!==item||item.actor!==actor||!hasSource(item,CAMPAIGN_SOURCES.walls)||item.suppressed===true||item.isSuppressed||item.system?.suppressed||game.messages.get(message.id)!==message||(message.author?.id??message.author??message.user?.id??message.user)!==user.id||message.flags?.pf2e?.origin?.uuid!==item.uuid||message.flags.pf2e.origin.actor!==actor.uuid||JSON.stringify(message.flags.pf2e.origin)!==JSON.stringify(sourceOrigin)||JSON.stringify(message.speaker)!==JSON.stringify(speaker)||JSON.stringify(own(message).usageInput??{})!==JSON.stringify(input)||!source||!scene||game.scenes.get(scene.id)!==scene||scene.tokens.get(source.id)!==source||source.actor!==actor||!actor.isToken&&game.actors.get(actor.id)!==actor||!source.object)throw Error('竖起盾墙的原始来源、权限或Token已改变。');
+   };
+   assertSource();
+   return serial(`walls:${actor.uuid}`,async()=>{
+    assertSource();if(own(message).campaignWalls)throw Error('本条竖起盾墙已经进入结算，不会重复施加效果。');
+    const target=await oneTarget(actor,message,user,'竖起盾墙：选择15尺内盟友',t=>t.actor.uuid!==actor.uuid&&(actor.isAllyOf?.(t.actor)??t.actor.type==='character')&&distance(actor,t)!==null&&distance(actor,t)<=15);
+    const targetActor=targetActors.get(target);let receipt=null;
+    const assertLive=()=>{
+     assertSource();const range=source.object.distanceTo?.(target.object);
+     if(!targetBindings.get(target)?.current())throw Error('竖起盾墙的原始盟友Token与基础Actor已改变。');
+     if(receipt&&JSON.stringify(own(message).campaignWalls)!==JSON.stringify(receipt))throw Error('竖起盾墙的待结算回执已改变；不会重复施加效果。');
+     if(!targetActor||target.parent!==scene||scene.tokens.get(target.id)!==target||target.actor!==targetActor||!targetActor.isToken&&game.actors.get(targetActor.id)!==targetActor||targetActor.uuid===actor.uuid||!(actor.isAllyOf?.(targetActor)??targetActor.type==='character')||!Number.isFinite(range)||range<0||range>15)throw Error('竖起盾墙的原始盟友或15尺范围已改变；保留已有的效果。');
+    };
+    assertLive();const data=await nativeEffect(WALLS_EFFECT);assertLive();
+    data.system.duration={value:1,unit:'minutes',expiry:'turn-start',sustained:false};data.system.start={value:game.time.worldTime,initiative:actor.combatant?.initiative??null};
+    data.flags={...data.flags,[MODULE_ID]:{kind:'campaign-walls',sourceActorUuid:actor.uuid,sourceMessageId:message.id}};
+    receipt={status:'applying',actorUuid:actor.uuid,itemUuid:item.uuid,targetUuid:target.uuid,targetActorUuid:targetActor.uuid};
+    await saveFlag(message,'campaignWalls',receipt);assertLive();
+    await upsert(actor,`walls:${actor.uuid}`,structuredClone(data),assertLive);
+    await upsert(targetActor,`walls:${actor.uuid}`,structuredClone(data),assertLive);
+    assertLive();receipt={...receipt,status:'done'};await saveFlag(message,'campaignWalls',receipt);assertLive();
+    return `已为${actor.name}与${targetActor.name}施加竖起盾墙，持续1分钟。`;
+   });
  }
 
  async function applyParagon(actor,target,user,message){

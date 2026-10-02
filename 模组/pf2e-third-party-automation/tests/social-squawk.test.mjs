@@ -17,7 +17,7 @@ function fixture({reaction='squawk',cancel=false,settled=false,change}={}){
  });
  const item={id:'alarm',uuid:'Actor.hero.Item.alarm',type:'feat',actor,sourceId:'Compendium.pf2e.feats-srd.Item.6ON8DjFXSMITZleX'},squawk={id:'squawk',uuid:'Actor.hero.Item.squawk',type:'feat',actor,sourceId:REACTION_CHECK_SOURCES.squawk,async toMessage(){const card={id:'paid-squawk',author:gm,speaker:{actor:actor.id},item:this,flags:{pf2e:{origin:{actor:actor.uuid,uuid:this.uuid}}},async update(changes){patch(this,changes)}};messages.set(card.id,card);return card}};
  actor.items.set(item.id,item);actor.items.set(squawk.id,squawk);
- const source={id:'activity',author:player,speaker:{actor:actor.id,scene:scene.id,token:origin.id},flags:{}};messages.set(source.id,source);
+ const source={id:'activity',author:player,speaker:{actor:actor.id,scene:scene.id,token:origin.id},flags:{pf2e:{origin:{actor:actor.uuid,uuid:item.uuid}}}};messages.set(source.id,source);
  const documents=new Map([actor,origin,...targets,...targets.map(t=>t.actor)].map(doc=>[doc.uuid,doc]));
  const reactions=createReactionChecks({game,fromUuid:async uuid=>documents.get(uuid),choose:async request=>request.choices.some(c=>c.value==='squawk')?reaction:'visible'});
  const roll={_evaluated:true,total:21,dice:[{faces:20,total:12}],options:{degreeOfSuccess:0,totalModifier:9},termOptions:{},toJSON(){return {class:'CheckRoll',formula:'1d20 + 9',total:this.total,evaluated:true,terms:[{class:'Die',faces:20,options:{...this.termOptions,...this.display?{dsnRole:'d20',dsnRoleManaged:true}:{}},results:[{result:this.dice[0].total,active:true,...this.display?{indexThrow:0}:{}}]}],options:structuredClone(this.options)}},async render(){return '<p>12 + 9 = 21</p>'}};

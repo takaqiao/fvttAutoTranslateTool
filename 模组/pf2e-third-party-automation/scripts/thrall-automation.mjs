@@ -28,6 +28,15 @@ function inRange(source,target){
  return Number.isFinite(distance)&&distance>=0&&distance<=30;
 }
 
+function captureTokenActor(token,game){
+ const actor=token?.actor,baseActor=token?.baseActor,actorId=token?.actorId,actorLink=token?.actorLink,synthetic=actor?.isToken===true;
+ return {actor,current:()=>{
+  if(!actor||!token||token.actor!==actor||token.baseActor!==baseActor||token.actorId!==actorId||token.actorLink!==actorLink||(actor.isToken===true)!==synthetic)return false;
+  if(synthetic)return token.documentName==='Token'&&actor.token===token&&actor.parent===token&&actorLink===false&&!!baseActor&&actorId===baseActor.id&&actor.id===baseActor.id&&game.actors.get(actorId)===baseActor;
+  return baseActor===undefined||baseActor===actor&&actorId===actor.id&&actorLink===true&&game.actors.get(actorId)===baseActor;
+ }};
+}
+
 export function createThrallAutomation({game,fromUuid=globalThis.fromUuid,choose,onError=console.error,castEvents=getNativeCastEvents({game,fromUuid})}={}){
  const queue=new SerialActions(),consumptions=new Map();
  const resolveAction=item=>hasSource(item,CONSUME_THRALL_SOURCE)?'thrall:consume':undefined;
@@ -51,48 +60,81 @@ export function createThrallAutomation({game,fromUuid=globalThis.fromUuid,choose
   return tokens.find(t=>t.uuid===uuid);
  }
  async function executeUsage(context){
-  const {actor,item,message,user,action,frequencyReceipt}=context;gm();requireOwner(actor,user);
+  const {actor,item,message,user,action,frequencyReceipt}=context;gm();requireOwner(actor,user);const originalGM=game.user;
   if(item.actor?.uuid!==actor.uuid||resolveAction(item)!==action||!hasConsume(actor))throw Error('吞噬奴仆来源与使用事件不匹配。');
   if(game.messages?.get?.(message?.id)!==message||(message.author?.id??message.user?.id??message.user)!==user.id)throw Error('吞噬奴仆需要原作者的真实使用消息。');
-  return queue.run(actor.uuid,async()=>{
-   gm();
+   const origin=structuredClone(message.flags?.pf2e?.origin??{}),speaker=structuredClone(message.speaker??{}),inputProof=structuredClone(message.flags?.[MODULE_ID]?.usageInput??{}),pool={...focus(actor)},frequency={max:item.system.frequency?.max,per:item.system.frequency?.per};
+   const sourceProof=[item.sourceId,item._stats?.compendiumSource,item.flags?.core?.sourceId],receiptProof=frequencyReceipt?structuredClone(frequencyReceipt):null;
+   const sourceCandidates=speaker.scene&&speaker.token?[game.scenes.get(speaker.scene)?.tokens.get(speaker.token)]:values(actor.getActiveTokens?.(true,true)).map(tokenDocument);
+   const sourceActors=new Map(sourceCandidates.filter(Boolean).map(token=>[token,token.actor]));
+   const targetActors=new Map(sourceCandidates.flatMap(token=>values(token?.parent?.tokens)).map(token=>[token,token.actor]));
+   const sourceBindings=new Map(sourceCandidates.filter(Boolean).map(token=>[token,captureTokenActor(token,game)])),targetBindings=new Map([...targetActors.keys()].map(token=>[token,captureTokenActor(token,game)]));
+   return queue.run(actor.uuid,async()=>{
+    const assertBase=()=>{
+     gm();requireOwner(actor,user);
+     if(game.user!==originalGM||game.users.activeGM!==originalGM||game.users.get(originalGM.id)!==originalGM)throw Error('吞噬奴仆的原始主GM文档已改变。');
+     const input=message.flags?.[MODULE_ID]?.usageInput,stored=message.flags?.[MODULE_ID]?.usage?.frequencyReceipt;
+     if(game.users.get(user.id)!==user||!actor.isToken&&game.actors.get(actor.id)!==actor||actor.canAct!==true||actor.isDead===true||actor.items.get(item.id)!==item||item.actor!==actor||resolveAction(item)!==action||item.suppressed===true||item.isSuppressed||item.system?.suppressed||game.messages.get(message.id)!==message||(message.author?.id??message.user?.id??message.user)!==user.id||message.flags?.pf2e?.origin?.uuid!==item.uuid||message.flags.pf2e.origin.actor!==actor.uuid||JSON.stringify(message.flags.pf2e.origin)!==JSON.stringify(origin)||JSON.stringify(message.speaker)!==JSON.stringify(speaker)||input?.actualUse!==true||frequency.max!==1||frequency.per!=='day'||item.system.frequency?.max!==frequency.max||item.system.frequency?.per!==frequency.per)throw Error('吞噬奴仆的原始来源、权限或每日资源已改变。');
+     if(JSON.stringify(input)!==JSON.stringify(inputProof)||[item.sourceId,item._stats?.compendiumSource,item.flags?.core?.sourceId].some((value,index)=>value!==sourceProof[index]))throw Error('吞噬奴仆的原始目标记录或能力来源已改变。');
+     if(receiptProof&&(!receiptProof.id||input.frequencyReceiptId!==receiptProof.id||JSON.stringify(stored)!==JSON.stringify(receiptProof)))throw Error('吞噬奴仆的原始付款回执已改变。');
+    };
+    assertBase();
    const receipt=validReceipt(frequencyReceipt,item,user);
    if(frequencyReceipt&&!receipt)throw Error('吞噬奴仆每日次数回执无效。');
-   let stage='validating',paid=receipt;
-   try{
     const prior=state(actor).thrallUse;
     if(prior?.id===message.id)throw Error('这条吞噬奴仆消息已经结算。');
     if(prior&&['claimed','deleting','uncertain'].includes(prior.status))throw Error('上次吞噬奴仆的结果尚未确认，不会再次销毁奴仆。');
+    let stage='validating',paid=receipt,transaction,nativeEntered=false;
+    const samePending=phase=>{const pending=state(actor).thrallUse;return !!pending&&!!transaction&&Object.keys(pending).length===Object.keys(transaction).length&&Object.keys(transaction).every(key=>pending[key]===(key==='status'?phase:transaction[key]));};
+   try{
     if(!receipt&&remaining(item)<1)throw Error('吞噬奴仆每日可用次数已用完。');
     if(Number(focus(actor)?.value)!==0||Number(focus(actor)?.max)<1)throw Error('吞噬奴仆要求聚能点为0，且存在可用聚能池。');
-    const source=await sourceFor(actor,message,user),targets=await resolveMessageTargets(message,{fromUuid});
+     const source=await sourceFor(actor,message,user);assertBase();
+     const scene=source?.parent,sourceActor=source?.actor;
+     const assertSource=()=>{
+      assertBase();
+      if(sourceActors.get(source)!==actor||sourceActor!==actor||!sourceBindings.get(source)?.current()||!scene||game.scenes.get(scene.id)!==scene||scene.tokens.get(source.id)!==source)throw Error('吞噬奴仆的原始使用者Token已改变。');
+     };
+     assertSource();const targets=await resolveMessageTargets(message,{fromUuid});assertSource();
     const specified=message.flags?.[MODULE_ID]?.usageInput?.targetUuids??[];
     if(specified.length&&!targets.length)throw Error('吞噬奴仆选中的目标已不存在。');
     const candidates=(targets.length?targets:values(source.parent?.tokens)).filter(t=>ownedLivingThrall(t,actor)&&inRange(source,t));
     if(targets.length&&candidates.length!==targets.length)throw Error('吞噬奴仆选中的目标必须是30尺内属于自己的存活奴仆。');
     const uuid=await pick(actor,user,'吞噬奴仆：选择摧毁的奴仆',candidates.map(t=>({value:t.uuid,label:t.name??t.actor.name})));
+     assertSource();
     const target=await fromUuid(uuid);
-    gm();
-    if(!ownedLivingThrall(target,actor)||!inRange(source,target)||source.actor?.uuid!==actor.uuid)throw Error('所选奴仆已改变或不在30尺内。');
-    if(Number(focus(actor)?.value)!==0||(!receipt&&remaining(item)<1))throw Error('选择期间聚能点或每日次数已经改变。');
-    const transaction={id:message.id,userId:user.id,targetUuid:target.uuid,itemUuid:item.uuid,status:'claimed',createdAt:game.time?.worldTime??0};
+     const selected=candidates.find(candidate=>candidate.uuid===uuid),targetActor=targetActors.get(selected);
+     const assertLive=(expectedFrequency,phase=null,deleted=false)=>{
+      assertSource();
+      if(phase&&!samePending(phase))throw Error('吞噬奴仆的待结算回执已改变。');
+      if(focus(actor)?.value!==0||focus(actor)?.max!==pool.max||!Number.isInteger(pool.max)||pool.max<1||remaining(item)!==expectedFrequency)throw Error('吞噬奴仆的聚能池或每日次数已经改变。');
+      if(!deleted&&(target!==selected||target?.actor!==targetActor||!targetBindings.get(selected)?.current()||target?.parent!==scene||scene.tokens.get(target.id)!==target||target.uuid!==uuid||!ownedLivingThrall(target,actor)||!inRange(source,target)))throw Error('所选奴仆已改变或不在30尺内。');
+     };
+     assertLive(receipt?0:1);
+     transaction={id:message.id,userId:user.id,sourceTokenUuid:source.uuid,targetUuid:target.uuid,targetActorUuid:targetActor.uuid,itemUuid:item.uuid,frequencyReceiptId:receiptProof?.id??null,focusMax:pool.max,status:'claimed',createdAt:game.time?.worldTime??0};
     await updateState(actor,'thrallUse',transaction);stage='claimed';
-    if(!paid){gm();await item.update({'system.frequency.value':remaining(item)-1},{[MODULE_ID]:{usageInternal:true}});paid=true;}
+     assertLive(paid?0:1,'claimed');
+     if(!paid){await item.update({'system.frequency.value':0},{[MODULE_ID]:{usageInternal:true}});paid=true;assertLive(0,'claimed');}
     transaction.status='deleting';await updateState(actor,'thrallUse',transaction);stage='deleting';
     // Native Token deletion preserves Summons Assistant's destruction hooks.
-    gm();
+     assertLive(0,'deleting');
+     nativeEntered=true;
     await target.delete();
-    if(await fromUuid(target.uuid))throw Error('奴仆销毁尚未确认，不会发放聚能点。');
-    if(Number(focus(actor)?.value)!==0)throw Error('奴仆已销毁，但聚能池同时发生变化；不会覆盖现有聚能点。');
+     const surviving=await fromUuid(target.uuid);assertLive(0,'deleting',true);
+     if(surviving)throw Error('奴仆销毁尚未确认，不会发放聚能点。');
     stage='granting';
     await grant(actor,transaction);
+     assertBase();if(!samePending('complete')||focus(actor)?.value!==1||focus(actor)?.max!==pool.max)throw Error('奴仆已销毁，但原始聚能发放回执尚未确认；不会重试。');
     stage='complete';return `已摧毁${target.name??'所选奴仆'}并恢复1点仅用于坟墓法术的聚能点；已消耗每日次数。`;
    }catch(error){
     if(!isActiveGM(game))throw error;
-    if(stage==='deleting')await updateState(actor,'thrallUse',{...state(actor).thrallUse,status:'uncertain'}).catch(onError);
+     try{assertBase();}catch{throw error;}
+     if(stage==='deleting'&&samePending('deleting'))await updateState(actor,'thrallUse',{...transaction,status:nativeEntered?'uncertain':'rejected'}).catch(onError);
     else if(!['complete','granting'].includes(stage)){
-     if(paid)await item.update({'system.frequency.value':Math.min(item.system.frequency.max,remaining(item)+1)},{[MODULE_ID]:{usageInternal:true}});
-     if(stage==='claimed')await updateState(actor,'thrallUse',{...state(actor).thrallUse,status:'rejected'});
+      if(stage==='claimed'&&!samePending('claimed'))throw error;
+      if(paid&&remaining(item)===0)await item.update({'system.frequency.value':1},{[MODULE_ID]:{usageInternal:true}});
+      assertBase();
+      if(stage==='claimed'&&samePending('claimed'))await updateState(actor,'thrallUse',{...transaction,status:'rejected'});
     }
     throw error;
    }
@@ -106,18 +148,31 @@ export function createThrallAutomation({game,fromUuid=globalThis.fromUuid,choose
 
  async function maintain(actor){
   if(!isActiveGM(game)||!actor?.flags?.[MODULE_ID]?.thrallUse)return;
+  const originalGM=game.user;
   return queue.run(actor.uuid,async()=>{
    gm();
    const transaction=state(actor).thrallUse;
+    if(!transaction?.sourceTokenUuid||!['claimed','deleting','uncertain'].includes(transaction.status))return;
+    const snapshot=JSON.stringify(transaction),item=values(actor.items).find(i=>i.uuid===transaction.itemUuid),message=game.messages.get(transaction.id),user=game.users.get(transaction.userId);
+    const sourceParts=/^Scene\.([^.]+)\.Token\.([^.]+)$/.exec(transaction.sourceTokenUuid),registeredSource=sourceParts&&game.scenes.get(sourceParts[1])?.tokens.get(sourceParts[2]),sourceBinding=captureTokenActor(registeredSource,game);
+    if(sourceBinding.actor!==actor||!sourceBinding.current())return;
+    const source=await fromUuid(transaction.sourceTokenUuid),scene=source?.parent;
+    const current=()=>{
+     gm();
+     if(game.user!==originalGM||game.users.activeGM!==originalGM||game.users.get(originalGM.id)!==originalGM)return false;
+     if(source!==registeredSource||!sourceBinding.current())return false;
+     const receipt=message?.flags?.[MODULE_ID]?.usage?.frequencyReceipt,input=message?.flags?.[MODULE_ID]?.usageInput;
+     return JSON.stringify(state(actor).thrallUse)===snapshot&&!!user&&game.users.get(user.id)===user&&actor.testUserPermission(user,'OWNER')&&actor.canAct===true&&actor.isDead!==true&&(actor.isToken||game.actors.get(actor.id)===actor)&&item?.actor===actor&&actor.items.get(item.id)===item&&hasSource(item,CONSUME_THRALL_SOURCE)&&item.suppressed!==true&&!item.isSuppressed&&!item.system?.suppressed&&item.system.frequency?.max===1&&item.system.frequency?.per==='day'&&game.messages.get(message?.id)===message&&(message?.author?.id??message?.user?.id??message?.user)===user.id&&message.flags?.pf2e?.origin?.uuid===item.uuid&&message.flags.pf2e.origin.actor===actor.uuid&&input?.actualUse===true&&(!transaction.frequencyReceiptId||input.frequencyReceiptId===transaction.frequencyReceiptId&&validReceipt(receipt,item,user)&&receipt.id===transaction.frequencyReceiptId)&&source?.actor===actor&&!!scene&&game.scenes.get(scene.id)===scene&&scene.tokens.get(source.id)===source&&focus(actor)?.value===0&&focus(actor)?.max===transaction.focusMax;
+    };
+    if(!current())return;
    if(transaction?.status==='claimed'){
     // The native delete call is entered only after the deleting phase commits.
-    const item=values(actor.items).find(i=>i.uuid===transaction.itemUuid&&hasSource(i,CONSUME_THRALL_SOURCE));
-    if(!item)return;
-    if(remaining(item)===0){gm();await item.update({'system.frequency.value':1},{[MODULE_ID]:{usageInternal:true}});}
+     if(![0,1].includes(remaining(item)))return;
+     if(remaining(item)===0){await item.update({'system.frequency.value':1},{[MODULE_ID]:{usageInternal:true}});if(!current())return;}
     await updateState(actor,'thrallUse',{...transaction,status:'rejected'});return;
    }
-   if(!['deleting','uncertain'].includes(transaction?.status)||Number(focus(actor)?.value)!==0||!hasConsume(actor))return;
-   if(!/^Scene\.[^.]+\.Token\.[^.]+$/.test(transaction.targetUuid??'')||await fromUuid(transaction.targetUuid))return;
+    if(remaining(item)!==0||!/^Scene\.[^.]+\.Token\.[^.]+$/.test(transaction.targetUuid??''))return;
+    const target=await fromUuid(transaction.targetUuid);if(!current()||remaining(item)!==0||target)return;
    // Final focus/provenance/status were one document update. A committed grant
    // therefore cannot still have deleting/uncertain status after reconnect.
    await grant(actor,transaction);

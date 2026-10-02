@@ -28,6 +28,7 @@ test('Strategist Stance sends its untargeted native check to the source player a
 test('No Cause for Alarm sends shared Diplomacy to its player without borrowing the GM target',async t=>{
  const f=fixture(),old=globalThis.CONFIG;t.after(()=>globalThis.CONFIG=old);globalThis.CONFIG={Canvas:{polygonBackends:{sound:{testCollision:()=>false}}}};
  f.actor.update=async()=>{};const item={id:'alarm',uuid:'Actor.hero.Item.alarm',type:'feat',actor:f.actor,sourceId:'Compendium.pf2e.feats-srd.Item.6ON8DjFXSMITZleX'};let calls=0;
+ f.actor.items.set(item.id,item);f.game.actors=new Map([[f.actor.id,f.actor],[f.target.actor.id,f.target.actor]]);f.origin.documentName='Token';f.message.flags.pf2e={origin:{actor:f.actor.uuid,uuid:item.uuid}};
  const provider=createSocialAutomation({game:f.game,runNative:async(ctx,request)=>{calls++;assert.equal(ctx.user,f.player);assert.equal(request.statistic,'diplomacy');assert.equal(request.targetUuid,undefined);assert.equal(request.dc.visible,false);return {status:'cancelled'};}});
  const result=await provider.executeUsage({...f,item,user:f.player,action:'social:no-cause-for-alarm'});assert.match(result,/取消|未完成/);assert.equal(calls,1);
 });

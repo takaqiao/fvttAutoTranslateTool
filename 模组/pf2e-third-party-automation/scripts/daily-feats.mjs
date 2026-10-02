@@ -7,7 +7,8 @@ const id=i=>i.id??i._id;
 const source=i=>i.sourceId??i._stats?.compendiumSource??i.flags?.core?.sourceId??null;
 const signatureBackup=i=>i.flags?.[MODULE_ID]?.arcaneEvolutionSignature;
 const temporary=i=>i.flags?.[MODULE_ID]?.arcaneEvolutionTemporary===true;
-const ownedFeat=actor=>actor.type==='character'&&values(actor.items).some(i=>i.type==='feat'&&source(i)===ARCANE_EVOLUTION_SOURCE&&!i.isSuppressed&&!i.system?.suppressed);
+const activeFeat=actor=>actor.type==='character'&&values(actor.items).find(i=>i.type==='feat'&&source(i)===ARCANE_EVOLUTION_SOURCE&&i.suppressed!==true&&!i.isSuppressed&&!i.system?.suppressed);
+const ownedFeat=actor=>!!activeFeat(actor);
 const entries=actor=>values(actor.items).filter(i=>i.type==='spellcastingEntry'&&i.system.prepared?.value==='spontaneous'&&i.system.tradition?.value==='arcane');
 const ranks=entry=>Object.entries(entry?.system.slots??{}).filter(([key,slot])=>/^slot(?:[1-9]|10)$/.test(key)&&slot.max>0).map(([key])=>Number(key.slice(4))).sort((a,b)=>a-b);
 function ordinarySpell(item){return item?.type==='spell'&&!item.isCantrip&&!item.isFocusSpell&&!item.isRitual&&!item.system.ritual&&!(item.system.traits?.value??[]).some(t=>['cantrip','focus'].includes(t));}
@@ -59,11 +60,24 @@ export function createCampaignDailies({fromUuid=globalThis.fromUuid}={}){
    return rows;
   },
   process:async options=>{
-   const {actor,rows,updateItem,deleteItem,addItem,messages}=options;requireFeat(actor);
+   const {actor,rows:inputRows,updateItem,deleteItem,addItem,messages}=options;
+   const rows={entry:inputRows.entry,mode:inputRows.mode,signature:inputRows.signature,learned:inputRows.learned,rank:inputRows.rank};
+   requireFeat(actor);const feat=activeFeat(actor);
    const casting=entries(actor),entry=casting.length===1?casting[0]:casting.find(e=>id(e)===rows.entry);
    if(!entry)throw Error('请选择明确的奥术自发施法栏。');
    const available=ranks(entry);if(!available.length)throw Error('该施法栏没有可用的非戏法环位。');
-   let selected=null,spellData=null;
+   let selected=null,spellData=null,learned=null,learnedSpell=null;
+   const assertCurrent=()=>{
+    if(activeFeat(actor)!==feat||!entries(actor).includes(entry)||!ranks(entry).length)throw Error('奥术演化专长或施法栏已改变，未继续每日准备。');
+    if(selected){
+     const rank=selected.system.location.heightenedLevel??selected.system.level?.value;
+     if(!signatureCandidates(actor,[id(entry)]).includes(selected)||!ranks(entry).includes(rank))throw Error('奥术演化的法术库或环位已改变。');
+    }
+    if(learned){
+     const current=getArcaneEvolutionLearned(actor).find(r=>r.uuid===learned.uuid),rank=Number(rows.rank);
+     if(!current||current.item!==learned.item||repertoire(actor,entries(actor).map(id)).some(i=>source(i)===learned.uuid)||!ranks(entry).includes(rank)||!ordinarySpell(learnedSpell)||!learnedSpell.system.traits?.traditions?.includes('arcane')||rank<(learnedSpell.baseRank??learnedSpell.system.level?.value??99))throw Error('奥术演化的已学记录、法术或环位已改变。');
+    }
+   };
    if(rows.mode==='signature'){
     selected=signatureCandidates(actor,[id(entry)]).find(i=>id(i)===rows.signature);
     if(!selected)throw Error('请选择此施法栏中尚非永久标志性法术的有效法术。');
@@ -73,22 +87,28 @@ export function createCampaignDailies({fromUuid=globalThis.fromUuid}={}){
     const known=repertoire(actor,casting.map(id));
     const record=getArcaneEvolutionLearned(actor).find(r=>r.uuid===rows.learned);
     if(!record||known.some(i=>source(i)===record.uuid))throw Error('该法术没有已学记录，或已在法术库中，应选择标志性法术分支。');
-    const spell=record.item??await fromUuid(record.uuid),rank=Number(rows.rank);
+    learned=record;
+    const spell=record.item??await fromUuid(record.uuid),rank=Number(rows.rank);learnedSpell=spell;
     if(!ordinarySpell(spell)||!spell.system.traits?.traditions?.includes('arcane')||!Number.isInteger(rank)||!available.includes(rank)||rank<(spell.baseRank??spell.system.level?.value??99))throw Error('已学法术的学派、类别或所选环位不合法。');
+    if(!record.item&&spell.uuid!==record.uuid)throw Error('已学法术的原始文档不匹配。');
+    assertCurrent();
     spellData=spell.toObject();delete spellData._id;delete spellData.folder;delete spellData.sort;
     spellData.system.location={value:id(entry),heightenedLevel:rank,signature:false};
     spellData.flags={...spellData.flags,[MODULE_ID]:{arcaneEvolutionTemporary:true,learnedSource:record.uuid}};
    }else throw Error('奥术演化每日分支无效。');
    // Every dependent input has been validated before staging any Dailies mutation.
+   assertCurrent();
    for(const item of values(actor.items)){
-    if(signatureBackup(item)&&id(item)!==id(selected??{})){const update=restoreSignature(item);if(update)updateItem(update);}
-    if(temporary(item))deleteItem(item);
+    if(signatureBackup(item)&&id(item)!==id(selected??{})){const update=restoreSignature(item);if(update){assertCurrent();updateItem(update);}}
+    if(temporary(item)){assertCurrent();deleteItem(item);}
    }
    if(selected){
     const before=signatureBackup(selected)??{existed:Object.hasOwn(selected.system.location,'signature'),before:selected.system.location.signature??null};
+    assertCurrent();
     updateItem({_id:id(selected),'system.location.signature':true,[`flags.${MODULE_ID}.arcaneEvolutionSignature`]:before});
     messages.add('spells',{label:'奥术演化：额外标志性法术',selected:selected.name});
    }else{
+    assertCurrent();
     addItem(spellData,true);messages.add('spells',{label:'奥术演化：临时已学法术',selected:spellData.name});
    }
   },
