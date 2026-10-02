@@ -21,34 +21,45 @@ export function registerAvRefocusEvents({game,Hooks,libWrapper,registerActorUpda
  const matched=actor=>actorMatchers.some(test=>test(actor));
  const eventRecords=actor=>actor.flags?.[MODULE_ID]?.refocusEvents??[];
  const saveEvent=(actor,proof,state)=>actor.update({[`flags.${MODULE_ID}.refocusEvents`]:[...eventRecords(actor).filter(r=>r.nonce!==proof.nonce).filter((r,index,list)=>r.state!=='done'||index>=list.length-99),{...proof,state}]});
+ const assertLive=(actor,user,wave,proof)=>{
+  const parts=proof.tokenUuid?.split('.')??[],token=parts.length===4&&parts[0]==='Scene'&&parts[2]==='Token'?game.scenes?.get(parts[1])?.tokens?.get(parts[3]):null;
+  if(!activeGM()||game.users.get(game.user.id)!==game.user||game.users.get(user.id)!==user||user.active===false||!owner(actor,user)||token?.uuid!==proof.tokenUuid||token.actor!==actor||!actor.isToken&&game.actors?.get(actor.id)!==actor||waveOf(actor)!==wave||wave&&(wave.actor!==actor||wave.suppressed||wave.isSuppressed||wave.system?.suppressed)||!same(proof,actor.flags?.[MODULE_ID]?.avRefocusIntent)||get(actor,focusPath)!==proof.after)throw Error('再聚能的原始来源、权限或主 GM 已改变；保存的认领不会重放。');
+ };
  const hook=Hooks.on('updateActor',(actor,changes,options={},userId)=>{
   if(!activeGM())return;
   const proof=options?.[MODULE_ID]?.refocusReceipt,committed=clone(actor.flags?.[MODULE_ID]?.avRefocusIntent??null),user=game.users.get(userId),wave=waveOf(actor);
-  if(!proof||typeof proof.nonce!=='string'||!proof.nonce||proof.userId!==userId||!owner(actor,user)||proof.actorUuid!==actor.uuid||proof.itemUuid!==(wave?.uuid??null)||!wave&&!matched(actor))return;
+  if(!proof||typeof proof.nonce!=='string'||!proof.nonce||proof.userId!==userId||!owner(actor,user)||proof.actorUuid!==actor.uuid||proof.itemUuid!==(wave?.uuid??null))return;
+  const admitted=matched(actor);if(!wave&&!admitted)return;
   if(get(changes,intentPath)?.nonce!==proof.nonce||!same(proof,committed)||!Number.isFinite(proof.before)||!Number.isFinite(proof.after)||proof.before<0||proof.after<proof.before)return;
   const focusChange=get(changes,focusPath),committedFocus=get(actor,focusPath);
   if(committedFocus!==proof.after||focusChange!==undefined&&focusChange!==proof.after)return;
   return run(actor,async()=>{
    if(!activeGM()||!owner(actor,user)||(waveOf(actor)?.uuid??null)!==(wave?.uuid??null))return;
-   const notify=typeof onRefocus==='function'&&matched(actor);
-   if(notify){if(eventRecords(actor).some(r=>r.nonce===proof.nonce))return;await saveEvent(actor,proof,'claimed');}
+   assertLive(actor,user,wave,proof);
+   // Exploration's matcher is a private admission scope. Native completion
+   // consumes it before this asynchronous observer finishes.
+   const notify=typeof onRefocus==='function'&&admitted;
+   if(notify){if(eventRecords(actor).some(r=>r.nonce===proof.nonce))return;await saveEvent(actor,proof,'claimed');assertLive(actor,user,wave,proof);}
    if(wave){const receipts=wave.flags?.[MODULE_ID]?.avRefocusReceipts??[];
    if(!receipts.some(receipt=>receipt.nonce===proof.nonce)){
    // Claim before any awaited rule change: replay or a new active GM cannot
    // erase a later spell's choice with the same Refocus event.
    await wave.update({[`flags.${MODULE_ID}.avRefocusReceipts`]:[...receipts,{nonce:proof.nonce,userId,state:'claimed'}]});
-   const repair=buildAvWaveRepair(wave);if(repair)await wave.update(repair);
+   assertLive(actor,user,wave,proof);
+   const repair=buildAvWaveRepair(wave);if(repair){await wave.update(repair);assertLive(actor,user,wave,proof);}
    await actor.toggleRollOption('all','conservation-of-energy',wave.id,true,'none');
+   assertLive(actor,user,wave,proof);
    if(!hasAvWaveEnergy(actor,'none'))throw Error('未能将热流谐摆恢复中性；本次再聚能回执不会重复处理。');
    await wave.update({[`flags.${MODULE_ID}.avRefocusReceipts`]:(wave.flags?.[MODULE_ID]?.avRefocusReceipts??[]).map(receipt=>receipt.nonce===proof.nonce?{...receipt,state:'done'}:receipt)});
+   assertLive(actor,user,wave,proof);
    }}
    return notify?{actor,user,proof:clone(proof)}:null;
   }).then(async event=>{
    if(!event)return;
    // A target/DC choice must not hold the existing resource queue. Subscribers
    // persist their own treatment stages before invoking any dice or HP writes.
-   try{if(!activeGM())throw Error('Refocus leader changed before subscriber');if(event.proof.privacy){if(!refocusPrivacy)throw Error('Missing exact Refocus note observer');event.proof.noteId=await refocusPrivacy.waitRefocusNote(event);if(!activeGM())throw Error('Refocus leader changed during native note');}await onRefocus(event);await run(actor,()=>{if(!activeGM())throw Error('Refocus leader changed after subscriber');return saveEvent(actor,proof,'done');});}
-   catch(error){if(activeGM())await run(actor,()=>saveEvent(actor,proof,'uncertain'));throw error;}
+   try{assertLive(actor,user,wave,proof);if(event.proof.privacy){if(!refocusPrivacy)throw Error('Missing exact Refocus note observer');event.proof.noteId=await refocusPrivacy.waitRefocusNote(event);assertLive(actor,user,wave,proof);}await onRefocus(event);await run(actor,()=>{assertLive(actor,user,wave,proof);return saveEvent(actor,proof,'done');});}
+   catch(error){if(activeGM())await run(actor,()=>{assertLive(actor,user,wave,proof);return saveEvent(actor,proof,'uncertain');});throw error;}
   }).catch(onError);
  });
  const paths=[];let unregisterActorUpdate;
