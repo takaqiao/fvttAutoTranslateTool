@@ -1,6 +1,7 @@
 import {clone,emptyLedger,createActivity,validateSession,validateClock,id,finite,sameCheckpoint,activityCheckpointBinding,sameActivityCheckpoint,manualPoolRequest,MANUAL_POOL_OPERATION} from './schema.mjs';
 import {normalizeCheckpointActivity} from './manual-time.mjs';
 import {canonicalJSON} from './revision-codec.mjs';
+import {checkpointDeclaration,scheduleCheckpointActivities} from './policy.mjs';
 const transitions={
   planned:['started','blocked','cancelled'],started:['completing','awaiting-evidence','blocked','uncertain','cancelled'],
   completing:['awaiting-evidence','confirmed','blocked','uncertain'],
@@ -31,6 +32,41 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
     if(typeof guard!=='function')throw Error('synchronous-checkpoint-guard-required');
     if(guard()!==true)throw Error('activity-checkpoint-changed');
   }
+  function interruptDeclarations(state,session,reason){
+    const checkpoint=session.activityCheckpoint;if(!checkpoint||['settled','interrupted'].includes(checkpoint.phase))return;
+    checkpoint.phase='interrupted';
+    for(const row of Object.values(checkpoint.registrations)){
+      if(['completed','cancelled','interrupted'].includes(row.status))continue;
+      const activity=state.activities[row.activityId];if(!activity)continue;
+      row.status=activity.state==='started'?'interrupted':'cancelled';
+      activity.state='cancelled';activity.reason=reason;activity.elapsedSeconds=Math.max(0,Math.min(session.cursorAt,activity.endsAt)-activity.startedAt);
+    }
+  }
+  function declarationWindow(state,binding,options,caller,context){
+    if(!atomic)throw Error('atomic-activity-checkpoint-required');
+    const session=driver(state,binding.sessionId,options,caller,true);
+    if(!sameActivityCheckpoint(session.activityCheckpoint,binding)||session.protocol.rootUUID!==binding.rootUUID||session.protocol.epoch!==binding.epoch||context.rootUUID!==binding.rootUUID||context.epoch!==binding.epoch)throw Error('activity-checkpoint-mismatch');
+    if(session.activityCheckpoint.phase!=='sealed')throw Error('activity-checkpoint-closed');return session;
+  }
+  function advanceDeclarations(state,session){
+    const checkpoint=session.activityCheckpoint,at=session.cursorAt;
+    for(const row of Object.values(checkpoint.registrations)){
+      const activity=state.activities[row.activityId];
+      if(!session.actorUUIDs.includes(activity.actorUUID))throw Error('session-actor-required');
+      if(activity.state==='planned'&&activity.startedAt<=at){
+        if(activity.startedAt!==at||activity.dependsOn.some(id=>state.activities[id]?.state!=='confirmed'))throw Error('checkpoint-dependency-incomplete');
+        activity.state='started';row.status='started';
+      }
+      if(activity.state==='started'&&activity.endsAt<=at){
+        let covered=activity.startedAt;
+        for(const clock of Object.values(state.clocks).filter(c=>c.sessionId===session.id&&c.state==='confirmed').sort((a,b)=>a.from-b.from))if(clock.from<=covered&&clock.to>covered)covered=clock.to;
+        if(covered<activity.endsAt)throw Error('confirmed-clock-required');
+        activity.state='confirmed';row.status='completed';activity.elapsedSeconds=activity.durationSeconds;
+      }
+    }
+    if(Object.values(checkpoint.registrations).every(row=>row.status==='completed'))checkpoint.phase='settled';
+    return checkpoint;
+  }
   function checkpointSession(state,binding,options,caller,context){
     if(!atomic)throw Error('atomic-activity-checkpoint-required');
     const session=driver(state,binding.sessionId,options,caller,true);
@@ -55,7 +91,7 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
       }
       if(Object.keys(checkpoint.registrations).length>=128)throw Error('checkpoint-registration-limit');
       for(const dependency of declaration.dependsOn){const activity=state.activities[dependency];if(!activity||activity.sessionId!==session.id||!session.activityIds.includes(dependency)||!['planned','started','confirmed'].includes(activity.state)||activity.executor&&activity.executor.state!=='settled'||unresolvedPool(activity))throw Error('invalid-manual-dependency')}
-      const registration={registrationId,checkpointBinding:binding,declaration,source:{type:'user-record',userId,unverified:true},temporalSource:{type:'checkpoint-declaration',registeredAt:binding.from},status:'registered'};
+      const registration={registrationId,registrationOrder:Object.keys(checkpoint.registrations).length,checkpointBinding:binding,declaration,source:{type:'user-record',userId,unverified:true},temporalSource:{type:'checkpoint-declaration',registeredAt:binding.from},status:'registered'};
       checkpoint.registrations[registrationId]=registration;return registration;
     },()=>checkpointGuard(guard));
   }
@@ -77,7 +113,7 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
   }
   const boundManual=a=>a.source?.manual&&a.temporalSource?.type==='checkpoint-reservation';
   const unresolvedPool=a=>Object.values(a.proof?.poolApplications??{}).some(claim=>claim.state!=='settled');
-  const unresolvedActivity=a=>unresolvedPool(a)||(!a.source?.manual||boundManual(a))&&(a.executor&&a.executor.state!=='settled'||['planned','started','completing','uncertain','awaiting-evidence'].includes(a.state));
+  const unresolvedActivity=a=>unresolvedPool(a)||(!a.source?.manual||boundManual(a)||checkpointDeclaration(a))&&(a.executor&&a.executor.state!=='settled'||['planned','started','completing','uncertain','awaiting-evidence'].includes(a.state));
   function manualCheckpoint(state,activity,options,caller,context,{open=false}={}){
     const session=driver(state,activity.sessionId,options,caller,true),c=session.manualCheckpoint;
     if(!sameCheckpoint(c,options?.checkpointBinding)||!sameCheckpoint(c,activity.checkpointBinding)||c.rootUUID!==session.protocol?.rootUUID||c.epoch!==session.protocol?.epoch||c.rootUUID!==context.rootUUID||c.epoch!==context.epoch||open&&c.phase!=='open'||!['open','sealed','advancing'].includes(c.phase))throw Error('manual-checkpoint-mismatch');
@@ -98,6 +134,7 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
     return mutate((s,context,caller)=>{
       const old=s[collection][key];if(!old||!expected.includes(old.state))throw Error('state-conflict');
       const patch=preparePatch?preparePatch(old):inputPatch;
+      if(collection==='activities'&&checkpointDeclaration(old)&&Object.keys(patch).some(k=>k!=='review'))throw Error('activity-checkpoint-lifecycle-required');
       if(collection==='activities'&&patch.proof&&canonicalJSON(patch.proof.manualPoolSource??null)!==canonicalJSON(old.proof?.manualPoolSource??null))throw Error('manual-pool-source-required');
       if(collection==='activities'&&patch.proof&&canonicalJSON(patch.proof.poolApplications??null)!==canonicalJSON(old.proof?.poolApplications??null))throw Error('manual-pool-claim-required');
       if(collection==='activities'&&Object.keys(old.proof?.poolApplications??{}).length){
@@ -262,19 +299,48 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
       for(const c of Object.values(s.clocks).filter(clock=>ids.has(clock.sessionId)&&clock.state==='started')){c.state='uncertain';c.reason='legacy-migration-quarantine'}
       return {quarantinedSessionIds};
     }),
-    createSession:async input=>{if('activityCheckpoint' in input)throw Error('activity-checkpoint-open-required');if('manualCheckpoint' in input)throw Error('manual-checkpoint-open-required');if('manualPoolIssuer' in input)throw Error('manual-pool-issuer-required');const captured=validateSession(input),leaseNonce=atomic?crypto.randomUUID():null;return mutate((s,context,caller)=>{const v=clone(captured);if(s.sessions[v.id])throw Error('duplicate-session');if(atomic){v.protocol=protocol(context);if(v.manual===true)v.manualPoolIssuer={...caller};if(automatic(v)){if(v.status!=='running')throw Error('invalid-initial-session');recoveryAvailable(s,v);v.driver={...caller,leaseNonce}}}s.sessions[v.id]=v;return v})},
+    createSession:async input=>{if('activityCheckpointHistory' in input)throw Error('activity-checkpoint-open-required');if('activityCheckpoint' in input)throw Error('activity-checkpoint-open-required');if('manualCheckpoint' in input)throw Error('manual-checkpoint-open-required');if('manualPoolIssuer' in input)throw Error('manual-pool-issuer-required');const captured=validateSession(input),leaseNonce=atomic?crypto.randomUUID():null;return mutate((s,context,caller)=>{const v=clone(captured);if(s.sessions[v.id])throw Error('duplicate-session');if(atomic){v.protocol=protocol(context);if(v.manual===true)v.manualPoolIssuer={...caller};if(automatic(v)){if(v.status!=='running')throw Error('invalid-initial-session');recoveryAvailable(s,v);v.driver={...caller,leaseNonce}}}s.sessions[v.id]=v;return v})},
     openActivityCheckpoint:(input,{leaseNonce,guard}={})=>{
       const binding=activityCheckpointBinding(input);checkpointGuard(guard);
       return mutate((state,context,caller)=>{
         checkpointGuard(guard);const session=checkpointSession(state,binding,{leaseNonce},caller,context);
-        if(session.activityCheckpoint)throw Error('activity-checkpoint-already-opened');
+        if(session.activityCheckpoint){
+          if(!['settled','interrupted'].includes(session.activityCheckpoint.phase))throw Error('activity-checkpoint-already-opened');
+          if([session.activityCheckpoint,...session.activityCheckpointHistory??[]].some(old=>old.id===binding.id||old.observationNonce===binding.observationNonce))throw Error('activity-checkpoint-binding-reused');
+          (session.activityCheckpointHistory??=[]).push(clone(session.activityCheckpoint));
+        }
         session.activityCheckpoint={...binding,phase:'open',registrations:{}};return session.activityCheckpoint;
       },()=>checkpointGuard(guard));
     },
     enrollCheckpointActivity,lookupCheckpointActivity,
+    sealActivityCheckpoint:(input,{leaseNonce,registrations,guard}={})=>{
+      const binding=activityCheckpointBinding(input),expected=clone(registrations);checkpointGuard(guard);
+      return mutate((state,context,caller)=>{
+        checkpointGuard(guard);const session=checkpointSession(state,binding,{leaseNonce},caller,context),checkpoint=session.activityCheckpoint;
+        if(!sameActivityCheckpoint(checkpoint,binding)||checkpoint.phase!=='open')throw Error('activity-checkpoint-closed');
+        if(canonicalJSON(checkpoint.registrations)!==canonicalJSON(expected))throw Error('activity-checkpoint-registrations-changed');
+        const activities=Object.values(state.activities).filter(a=>a.sessionId===session.id),plan=scheduleCheckpointActivities({registrations:checkpoint.registrations,activities,session,from:binding.from});
+        for(const item of plan){
+          const row=checkpoint.registrations[item.registrationId],d=row.declaration;
+          if(!session.actorUUIDs.includes(d.actorUUID))throw Error('session-actor-required');
+          const activityId=JSON.stringify(['checkpoint-declaration',binding.id,item.registrationId]);if(state.activities[activityId])throw Error('duplicate-activity');
+          const activity=createActivity({...d,id:activityId,sessionId:session.id,providerId:'manual',patientUUIDs:[],hpPoolUUIDs:[],state:'planned',startedAt:item.startedAt,endsAt:item.endsAt,kind:'activity',source:{...row.source,manual:true},temporalSource:{...row.temporalSource},checkpointBinding:binding,registrationId:item.registrationId});
+          state.activities[activityId]=activity;session.activityIds.push(activityId);row.activityId=activityId;row.status='planned';
+        }
+        checkpoint.phase='sealed';return advanceDeclarations(state,session);
+      },()=>checkpointGuard(guard));
+    },
+    advanceActivityCheckpoint:(input,{leaseNonce,at,guard}={})=>{
+      const binding=activityCheckpointBinding(input);finite(at,'checkpoint-time');checkpointGuard(guard);
+      return mutate((state,context,caller)=>{
+        checkpointGuard(guard);const session=declarationWindow(state,binding,{leaseNonce},caller,context);
+        if(session.cursorAt!==at||Object.values(state.clocks).some(c=>c.state!=='confirmed'))throw Error('unresolved-clock');
+        return advanceDeclarations(state,session);
+      },()=>checkpointGuard(guard));
+    },
     getSession:key=>get('sessions',key),getActivity:key=>get('activities',key),getClockCommit:key=>get('clocks',key),
     updateSession:(key,patch,options={})=>mutate((s,context,caller)=>{
-      const v=s.sessions[key];if(!v)throw Error('missing-session');if(['id','startedAt','activityIds','driver','protocol','manual','manualPoolIssuer','nativeOwnerByActor','activityCheckpoint'].some(k=>k in patch))throw Error('immutable-session');
+      const v=s.sessions[key];if(!v)throw Error('missing-session');if(['id','startedAt','activityIds','driver','protocol','manual','manualPoolIssuer','nativeOwnerByActor','activityCheckpoint','activityCheckpointHistory'].some(k=>k in patch))throw Error('immutable-session');
       if(options.expectedStatus!==undefined&&v.status!==options.expectedStatus)throw Error('session-state-conflict');
       if('manualCheckpoint' in patch){
         if(v.activityCheckpoint&&!['settled','interrupted'].includes(v.activityCheckpoint.phase))throw Error('activity-checkpoint-active');
@@ -288,16 +354,16 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
         if(next.phase==='settled'&&(!s.clocks[next.id]||s.clocks[next.id].state!=='confirmed'||Object.values(s.activities).some(a=>a.sessionId===key&&boundManual(a)&&a.checkpointBinding.id===next.id&&a.state!=='confirmed')))throw Error('checkpoint-completion-required');
       }
       if(atomic&&automatic(v)){
-        if(patch.status==='complete')noOpenActivityCheckpoint(v);
+        if(patch.status==='complete'){noOpenActivityCheckpoint(v);if(v.activityCheckpoint?.phase==='sealed')throw Error('activity-checkpoint-pending')}
         if(patch.status==='recording')throw Error('invalid-session-mode');
         if(patch.status==='running'&&v.status!=='running')throw Error('explicit-resume-required');
         if('leaseNonce' in options||patch.status==='complete'||'cursorAt' in patch&&!options.reconcile)driver(s,key,options,caller);
         if('cursorAt' in patch){finite(patch.cursorAt,'cursor');if(patch.cursorAt<v.cursorAt)throw Error('session-cursor-regression');if(patch.cursorAt!==v.cursorAt&&!Object.values(s.clocks).some(c=>c.sessionId===key&&c.state==='confirmed'&&c.to===patch.cursorAt))throw Error('confirmed-clock-required')}
       }
-      Object.assign(v,clone(patch));if(['paused','closed'].includes(v.status)&&v.manualCheckpoint&&v.manualCheckpoint.phase!=='settled')v.manualCheckpoint.phase='interrupted';if(['paused','closed'].includes(v.status)&&v.activityCheckpoint&&v.activityCheckpoint.phase!=='settled')v.activityCheckpoint.phase='interrupted';return v;
+      Object.assign(v,clone(patch));if(['paused','closed'].includes(v.status))interruptDeclarations(s,v,v.stopReason??v.status);if(['paused','closed'].includes(v.status)&&v.manualCheckpoint&&v.manualCheckpoint.phase!=='settled')v.manualCheckpoint.phase='interrupted';if(['paused','closed'].includes(v.status)&&v.activityCheckpoint&&v.activityCheckpoint.phase!=='settled')v.activityCheckpoint.phase='interrupted';return v;
     }),
     insertActivity:(input,options={})=>mutate((s,context,caller)=>{
-      const a=createActivity(input);if(s.activities[a.id])throw Error('duplicate-activity');const session=s.sessions[a.sessionId];if(!session)throw Error('missing-session');
+      const a=createActivity(input);if(checkpointDeclaration(a))throw Error('activity-checkpoint-seal-required');if(s.activities[a.id])throw Error('duplicate-activity');const session=s.sessions[a.sessionId];if(!session)throw Error('missing-session');
       if(Object.hasOwn(a.proof,'poolApplications'))throw Error('manual-pool-claim-required');
       if(Object.hasOwn(a.proof,'manualPoolSource'))throw Error('manual-pool-source-required');
       if(atomic&&a.source.manual&&automatic(session)){
@@ -313,18 +379,19 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
         if(a.state!=='planned'||a.executor!==undefined||a.executionResult!==undefined)throw Error('initial-activity-claim-required');
         if(Object.hasOwn(session,'nativeOwnerByActor')&&a.source.ownerId!==(Object.hasOwn(session.nativeOwnerByActor,a.actorUUID)?session.nativeOwnerByActor[a.actorUUID]:undefined))throw Error('native-owner-selection-mismatch');
         if(!(session.actorUUIDs??[]).includes(a.actorUUID)||a.patientUUIDs.some(u=>!session.actorUUIDs.includes(u)))throw Error('session-actor-required');
-        if(Object.values(s.activities).some(row=>(!row.source?.manual||boundManual(row))&&row.actorUUID===a.actorUUID&&!['cancelled','blocked'].includes(row.state)&&row.startedAt<a.endsAt&&a.startedAt<row.endsAt))throw Error('actor-activity-overlap');
+        if(Object.values(s.activities).some(row=>(!row.source?.manual||boundManual(row)||checkpointDeclaration(row))&&row.actorUUID===a.actorUUID&&!['cancelled','blocked'].includes(row.state)&&row.startedAt<a.endsAt&&a.startedAt<row.endsAt))throw Error('actor-activity-overlap');
       }
       s.activities[a.id]=a;session.activityIds.push(a.id);return a;
     }),
     transitionActivity:(key,options)=>transition('activities',key,options),
     appendManualEvidence,
-    upsertClockCommit:(input,options={})=>mutate((s,context,caller)=>{
+    upsertClockCommit:(input,options={})=>{let session;const guard=options.guard===undefined?undefined:()=>checkpointGuard(()=>options.guard(session));return mutate((s,context,caller)=>{
       const c=validateClock(input);if(s.clocks[c.id])throw Error('duplicate-clock');if(!s.sessions[c.sessionId])throw Error('missing-session');
-      if(atomic)noOpenActivityCheckpoint(s.sessions[c.sessionId]);
+      session=s.sessions[c.sessionId];guard?.();
+      if(atomic){noOpenActivityCheckpoint(s.sessions[c.sessionId]);const boundary=Object.values(s.activities).filter(a=>a.sessionId===c.sessionId&&checkpointDeclaration(a)&&['planned','started'].includes(a.state)).flatMap(a=>[a.startedAt,a.endsAt]).filter(at=>at>c.from);if(boundary.some(at=>c.to>at))throw Error('activity-checkpoint-time-boundary')}
       if(atomic){const session=driver(s,c.sessionId,options,caller,true);if(c.state!=='started'||c.evidence.length||['nativeIssued','nativeResolved','effectsSettled','claim','source'].some(k=>k in input))throw Error('initial-clock-claim-required');if(c.gmId!==caller.userId)throw Error('clock-driver-mismatch');if(c.from!==session.cursorAt)throw Error('world-time-conflict');if(session.manualCheckpoint&&session.manualCheckpoint.phase!=='settled'&&(session.manualCheckpoint.phase!=='advancing'||c.id!==session.manualCheckpoint.id||c.from!==session.manualCheckpoint.from||c.to!==session.manualCheckpoint.to))throw Error('manual-checkpoint-clock-required');if(Object.values(s.clocks).some(row=>row.state!=='confirmed'))throw Error('unresolved-clock');c.claim={...protocol(context),revision:context.revision,...session.driver}}
       s.clocks[c.id]=c;return c;
-    }),
+    },guard)},
     transitionClockCommit:(key,options)=>transition('clocks',key,options),
     claimExecution:(key,input)=>mutate((s,context,caller)=>{
       if(!atomic)throw Error('atomic-execution-required');const a=s.activities[key];if(!a||a.state!=='completing')throw Error('state-conflict');
@@ -357,7 +424,7 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
       if(!atomic)throw Error('atomic-takeover-required');const session=s.sessions[key];if(!session||!['running','paused'].includes(session.status)||session.manual)throw Error('automatic-session-required');
       session.status='paused';session.stopReason='explicit-driver-takeover';
       if(session.manualCheckpoint&&session.manualCheckpoint.phase!=='settled')session.manualCheckpoint.phase='interrupted';
-      if(session.activityCheckpoint&&session.activityCheckpoint.phase!=='settled')session.activityCheckpoint.phase='interrupted';
+      interruptDeclarations(s,session,'explicit-driver-takeover');
       for(const a of Object.values(s.activities).filter(row=>row.sessionId===key&&(!row.source?.manual||boundManual(row)))){
         if(a.state==='planned'&&!a.executor){a.state='cancelled';a.reason='explicit-driver-takeover'}
         else if(['started','completing'].includes(a.state)){a.state='uncertain';a.reason='explicit-driver-takeover'}
