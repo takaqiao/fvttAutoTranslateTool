@@ -94,6 +94,7 @@ for(const name of ['Arbalest','Needle Darts'])for(const type of ['attack-roll','
 test('Imperial blood magic keeps its existing native-cast payment path without requiring these Party Use routes',async t=>{
  const f=fixture(t);f.source.items.set('imperial',{sourceId:PARTY_SOURCES.imperial});f.source.getRollOptions=()=>['blood-magic:imperial'];const spell={id:'spell',uuid:`${f.source.uuid}.Item.spell`,type:'spell',actor:f.source,sourceId:'Compendium.pf2e.spells-srd.Item.original',system:{traits:{otherTags:['blood-magic-spell']}},getOriginData:()=>({rollOptions:[]})};f.source.items.set(spell.id,spell);const message=f.card(spell);message.item.actor.items.set(spell.id,spell);
  // The native cast path is independently authenticated by ensurePaid.
+ f.game.messages.set(message.id,message);
  const action=f.party.resolveAction(spell);assert.equal(action,'party:imperial');assert.equal(f.party.requiresActualUse?.(spell,action)??false,false);await f.party.executeUsage({actor:f.source,item:spell,message,user:f.game.users.get('owner'),action});assert.equal(f.writes.cast,1);assert.equal(f.writes.effects,1);
 });
 

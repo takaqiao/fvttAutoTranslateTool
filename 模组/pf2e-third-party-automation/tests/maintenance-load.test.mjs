@@ -43,8 +43,9 @@ test('queued work cannot write after losing active GM authority',async t=>{
  const f=party(t);f.add();f.source.attributes.shield.raised=false;const pending=f.provider.maintain(f.target);f.game.users.activeGM={id:'other'};await pending;assert.equal(f.counts().deletes,0);
 });
 test('GM handoff cannot reuse a previous GM Raise Shield receipt',async t=>{
- const f=party(t),gm=f.game.user,guardian={id:'guardian',sourceId:PARTY_SOURCES.guardian},shield={id:'shield'};f.source.items=new Map([[guardian.id,guardian],[shield.id,shield]]);f.source.type='character';f.source.testUserPermission=()=>true;f.s.documentName=f.d.documentName='Token';let created=0;f.target.createEmbeddedDocuments=async()=>{created++;return []};
+ const f=party(t),gm=f.game.user,guardian={id:'guardian',uuid:`${f.source.uuid}.Item.guardian`,type:'feat',actor:f.source,parent:f.source,sourceId:PARTY_SOURCES.guardian},shield={id:'shield',actor:f.source};f.source.items=new Map([[guardian.id,guardian],[shield.id,shield]]);f.source.type='character';f.source.testUserPermission=()=>true;f.s.documentName=f.d.documentName='Token';let created=0;f.target.createEmbeddedDocuments=async()=>{created++;return []};
+ f.game.users.get=id=>id===gm.id?gm:null;f.game.scenes=new Map([[f.s.parent.id,f.s.parent]]);const message={id:'guardian-use',author:gm,speaker:{actor:f.source.id,scene:'s',token:'s'},flags:{pf2e:{origin:{actor:f.source.uuid,uuid:guardian.uuid},context:{target:{token:f.d.uuid}}}}};f.game.messages=new Map([[message.id,message]]);
  await f.hooks.emit('createChatMessage',{actor:f.source,item:{slug:'raise-a-shield'}});
  f.game.users.activeGM={id:'other'};await f.hooks.emit('userConnected',f.game.users.activeGM,true);f.game.users.activeGM=gm;await f.hooks.emit('userConnected',gm,true);
- await assert.rejects(f.provider.executeUsage({actor:f.source,item:guardian,user:gm,action:'party:guardian',message:{speaker:{scene:'s',token:'s'},flags:{pf2e:{context:{target:{token:f.d.uuid}}}}}}),/上一个动作是举盾/);assert.equal(created,0);
+ await assert.rejects(f.provider.executeUsage({actor:f.source,item:guardian,user:gm,action:'party:guardian',message}),/上一个动作是举盾/);assert.equal(created,0);
 });
