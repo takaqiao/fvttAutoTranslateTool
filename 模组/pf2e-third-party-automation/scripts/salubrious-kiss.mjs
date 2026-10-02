@@ -66,7 +66,7 @@ export function createSalubriousKiss({game,fromUuid=globalThis.fromUuid,choose,e
     if(![0,1,2,3].includes(result?.degree)||!result.checkId||result.degree!==1&&!result.damageId||result.degree===1&&result.damageId)throw fail('原生医疗结果不完整');
     claim={...claim,result:{checkId:result.checkId,damageId:result.damageId,degree:result.degree},state:'applying'};validateTarget({states:['rolling']});await contextFor({game,fromUuid,claim});validateTarget({states:['rolling']});await save(actor,claim,()=>validateTarget({states:['rolling','applying']}));
     const source=await fromUuid(TREAT_WOUNDS_IMMUNITY);validateTarget();const immunity=treatmentImmunityData(source.toObject(),claim,game.time.worldTime);validateTarget();
-    const immunities=await write(()=>targetActor.createEmbeddedDocuments('Item',[immunity]),()=>validateTarget());claim.immunityIds=immunities.map(i=>i.uuid);
+    await write(async()=>{const immunities=await targetActor.createEmbeddedDocuments('Item',[immunity]);claim.immunityIds=immunities.map(i=>i.uuid);return immunities;},()=>validateTarget());
     if(result.degree!==1){validateTarget();claim.receipt=await executor.apply(claim,result,explorationScope);validateTarget();}
     validateTarget();if(treatmentOutcome({degree:result.degree,tier:claim.tier}).removeWounded)await write(()=>targetActor.decreaseCondition('wounded',{forceRemove:true}),()=>validateTarget());
     claim.state='done';await save(actor,claim,()=>validateTarget({states:['applying','done']}));await write(()=>{validateTarget();return targetActor.update({[`flags.${MODULE_ID}.salubriousKiss.pending`]:null});},()=>validateTarget({pendingOptional:true}));return claim;
