@@ -32,7 +32,16 @@ export async function sourceFixture(){
  const action={slug:'treat-wounds',variants:new Map(),toActionVariant:()=>new Variant(),use(params){return this.toActionVariant().use(params)}};owner.game.pf2e.actions.set('treat-wounds',action);gm.game.pf2e.actions.set('treat-wounds',action);owner.nativeActions.register();
  return {storage,ledger,gm,owner,peer,actors,healer,patient,token,messages,clients,errors,roll,create,action,privateReads:()=>privateReads,close(){for(const client of clients){client.sources.stop();client.recorder.stop();client.nativeActions.cleanup()}}};
 }
-async function nativeSource(f){await f.action.use({actors:[f.healer],target:f.patient});await flush();return [...f.messages.values()].find(message=>message.isCheckRoll===false)}
+async function nativeSource(f){
+ await f.action.use({actors:[f.healer],target:f.patient});
+ const result=[...f.messages.values()].find(message=>message.isCheckRoll===false),deadline=performance.now()+2000;
+ for(;;){
+  const activity=await f.ledger.getActivity(`manual:${result.flags.pf2e.origin.messageId}`);
+  if(activity?.proof.manualPoolSource&&f.owner.gate({phase:'admit',batch:{message:result}}).isCurrent())return result;
+  assert.ok(performance.now()<deadline,'Native source registration did not finish: '+f.errors.map(error=>error.message).join('; '));
+  await new Promise(resolve=>setTimeout(resolve,1));
+ }
+}
 export async function workbenchSource(f){
  const command=fs.readFileSync(process.env.WORKBENCH_MANUAL_SOURCE??'C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/treat-wounds-actual-command.txt','utf8');assert.equal(createHash('sha256').update(command).digest('hex'),'b3bac907654522fda62b80da182fc253f7147493a465a82081219fb2a0f1308f');
  const getHealSuccess=Function(`${command.slice(command.indexOf('const getHealSuccess ='),command.indexOf('/**\n * Perform a roll'))}\nreturn getHealSuccess;`)();
