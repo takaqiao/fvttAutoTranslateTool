@@ -76,11 +76,15 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
     return session;
   }
   function enrollCheckpointActivity(inputBinding,input,{authenticatedCaller,leaseNonce,guard}={}){
-    const binding=activityCheckpointBinding(inputBinding),event=normalizeCheckpointActivity(input),userId=id(authenticatedCaller,'authenticated-caller');
-    if(!sameActivityCheckpoint(binding,event.checkpointBinding))throw Error('activity-checkpoint-mismatch');
-    checkpointGuard(guard);
+    // Submission, acknowledgement and post-write failures must remain unconfirmed.
+    const rejectBeforeSubmit=fn=>{try{return fn()}catch(error){error.declarationRejected=true;throw error}};
+    const {binding,event,userId}=rejectBeforeSubmit(()=>{
+      const binding=activityCheckpointBinding(inputBinding),event=normalizeCheckpointActivity(input),userId=id(authenticatedCaller,'authenticated-caller');
+      if(!sameActivityCheckpoint(binding,event.checkpointBinding))throw Error('activity-checkpoint-mismatch');
+      checkpointGuard(guard);return {binding,event,userId};
+    });
     const {registrationId,checkpointBinding:ignored,...declaration}=event;
-    return mutate((state,context,caller)=>{
+    return mutate((state,context,caller)=>rejectBeforeSubmit(()=>{
       checkpointGuard(guard);const session=checkpointSession(state,binding,{leaseNonce},caller,context),checkpoint=session.activityCheckpoint;
       if(!sameActivityCheckpoint(checkpoint,binding)||checkpoint.phase!=='open')throw Error('activity-checkpoint-closed');
       if(!session.actorUUIDs.includes(declaration.actorUUID))throw Error('session-actor-required');
@@ -93,7 +97,7 @@ export function createLedger({read,write,transact,isAuthority,identity}) {
       for(const dependency of declaration.dependsOn){const activity=state.activities[dependency];if(!activity||activity.sessionId!==session.id||!session.activityIds.includes(dependency)||!['planned','started','confirmed'].includes(activity.state)||activity.executor&&activity.executor.state!=='settled'||unresolvedPool(activity))throw Error('invalid-manual-dependency')}
       const registration={registrationId,registrationOrder:Object.keys(checkpoint.registrations).length,checkpointBinding:binding,declaration,source:{type:'user-record',userId,unverified:true},temporalSource:{type:'checkpoint-declaration',registeredAt:binding.from},status:'registered'};
       checkpoint.registrations[registrationId]=registration;return registration;
-    },()=>checkpointGuard(guard));
+    }),()=>rejectBeforeSubmit(()=>checkpointGuard(guard)));
   }
   async function lookupCheckpointActivity(inputBinding,registrationId,{authenticatedCaller,actorUUID,guard}={}){
     const binding=activityCheckpointBinding(inputBinding),key=id(registrationId,'registration'),userId=id(authenticatedCaller,'authenticated-caller'),actor=id(actorUUID,'actor');

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {authorityFixture} from './authority-fixture.mjs';
 import {createManualRecordBridge} from '../../scripts/exploration/manual-record.mjs';
 import {createLedger} from '../../scripts/exploration/ledger.mjs';
-import {promptActivityDeclaration} from '../../scripts/exploration/panel.mjs';
+import {createRecoveryPanel,promptActivityDeclaration} from '../../scripts/exploration/panel.mjs';
 
 async function fixture({beforeOpen}={}){
  const store=await authorityFixture(),ledger=store.client('driver');
@@ -85,15 +85,50 @@ for(const mutation of ['revoke','time','session'])test(`final transaction guard 
   const result=fn(state,context);queueMicrotask(()=>{if(mutation==='revoke')f.actor.testUserPermission=()=>false;if(mutation==='time')f.context.worldTime++;if(mutation==='session')f.context.sessionId='other'});return result;
  },options),isAuthority:()=>true,identity:()=>({userId:'G',clientNonce:'driver'})});
  const before=f.store.raw.pages.length,result=await f.send(f.input(),f.makeBridge(writer));assert.equal(result.ok,false);assert.equal(f.store.raw.pages.length,before);
+ assert.equal(result.declarationRejected,true);
 });
 
 test('unknown commit acknowledgement permits only authenticated readback, without another revision or grant',async()=>{
  const f=await fixture();f.store.setAcknowledgement(()=>undefined);const before=f.store.raw.pages.length,result=await f.send();
- assert.equal(result.ok,false);assert.match(result.error,/acknowledgement-unknown/);assert.equal(f.store.raw.pages.length,before+1);
+ assert.equal(result.ok,false);assert.match(result.error,/acknowledgement-unknown/);assert.notEqual(result.declarationRejected,true);assert.equal(f.store.raw.pages.length,before+1);
  const lookup=f.handlers.get('exploration:lookupCheckpointActivity'),saved=await lookup.call({socketdata:{userId:'P'}},f.binding,'registration','Actor.A');
  assert.equal(saved.ok,true);assert.equal(saved.value.status,'registered');assert.equal(saved.value.permit,undefined);assert.equal(saved.value.executor,undefined);assert.equal(f.store.raw.pages.length,before+1);
  f.actor.testUserPermission=()=>true;const foreign=await lookup.call({socketdata:{userId:'G'}},f.binding,'registration','Actor.A');assert.equal(foreign.ok,false);
  assert.deepEqual((await f.store.read()).clocks,{});
+});
+
+test('post-write identity loss keeps the declaration unconfirmed for authenticated lookup',async()=>{
+ const f=await fixture();let clientNonce='driver';
+ const writer=createLedger({...f.store.storage('driver'),isAuthority:()=>true,identity:()=>({userId:'G',clientNonce})});
+ f.store.setAcknowledgement(ack=>{clientNonce='lost';return ack});
+ const before=f.store.raw.pages.length,result=await f.send(f.input(),f.makeBridge(writer));
+ assert.equal(result.ok,false);assert.equal(result.error,'runtime-identity-changed');assert.notEqual(result.declarationRejected,true);assert.equal(f.store.raw.pages.length,before+1);
+ const saved=await f.handlers.get('exploration:lookupCheckpointActivity').call({socketdata:{userId:'P'}},f.binding,'registration','Actor.A');
+ assert.equal(saved.ok,true);assert.equal(saved.value.status,'registered');assert.equal(f.store.raw.pages.length,before+1);
+});
+
+test('a rejected stale OWNER form does not block a fresh form for the same actor',async t=>{
+ const f=await fixture(),previous=globalThis.foundry;let opened,release,forms=0,rejected;
+ const ready=new Promise(resolve=>opened=resolve),values={actor:'Actor.A',label:'Search',duration:'5',unit:'60',durationSource:'user-declared',durationDetail:'',notBefore:'',order:'',dependsOn:[]};
+ t.after(()=>{globalThis.foundry=previous});
+ globalThis.foundry={applications:{api:{DialogV2:{wait:()=>{forms++;if(forms===1){opened();return new Promise(resolve=>release=resolve)}return values}}}}};
+ const playerGame={...f.game,user:f.users.get('P')},calls=[];
+ const player=createManualRecordBridge({game:playerGame,fromUuid:()=>assert.fail('player-private-read'),getSession:()=>assert.fail('player-private-read')});
+ player.register({register:()=>{},executeAsGM:async(name,...args)=>{calls.push(name);return f.handlers.get(name).call({socketdata:{userId:'P'}},...args)}});
+ const panel=createRecoveryPanel({game:playerGame,getActivityCheckpoint:actor=>player.getActivityCheckpoint(actor),record:event=>player.record(event),lookupCheckpointActivity:(...args)=>player.lookupCheckpointActivity(...args)});
+ const pending=panel.openActivityDeclaration('Actor.A');await ready;
+ await f.ledger.updateSession('S',{status:'paused'});delete f.context.leaseNonce;
+ const before=f.store.raw.pages.length;release(values);
+ await assert.rejects(pending,error=>{rejected=error.declaration;assert.equal(error.message,'session-driver-required');assert.equal(error.declarationRejected,true);return true});
+ assert.equal(f.store.raw.pages.length,before);assert.deepEqual((await f.ledger.getSession('S')).activityCheckpoint.registrations,{});
+ const session=await f.ledger.createSession({id:'fresh',actorUUIDs:['Actor.A'],startedAt:-600,cursorAt:-600,budgetEndsAt:1200});
+ const binding={...f.binding,id:'fresh-window',sessionId:'fresh',observationNonce:'fresh-observation'};
+ Object.assign(f.context,{sessionId:'fresh',leaseNonce:session.driver.leaseNonce});
+ await f.ledger.openActivityCheckpoint(binding,{leaseNonce:f.context.leaseNonce,guard:()=>true});
+ const saved=await panel.openActivityDeclaration('Actor.A');
+ assert.equal(forms,2);assert.deepEqual(saved.checkpointBinding,binding);assert.notEqual(saved.registrationId,rejected.registrationId);
+ assert.deepEqual(calls,['exploration:activityCheckpoint','exploration:record','exploration:activityCheckpoint','exploration:record']);
+ assert.deepEqual((await f.ledger.getSession('S')).activityCheckpoint.registrations,{});
 });
 
 test('lost local lease permits only the known registration readback, not a new window or enrollment',async()=>{
@@ -184,7 +219,7 @@ test('malformed binding and accessor payloads do not invoke their getters or rea
 
 test('a rejected or asynchronous private final guard does not append a revision',async()=>{
  const f=await fixture(),before=f.store.raw.pages.length;
- for(const guard of [undefined,()=>false,async()=>true])assert.throws(()=>f.ledger.enrollCheckpointActivity(f.binding,f.input(),{authenticatedCaller:'P',leaseNonce:f.context.leaseNonce,guard}),/checkpoint/);
+ for(const guard of [undefined,()=>false,async()=>true])assert.throws(()=>f.ledger.enrollCheckpointActivity(f.binding,f.input(),{authenticatedCaller:'P',leaseNonce:f.context.leaseNonce,guard}),error=>{assert.match(error.message,/checkpoint/);assert.equal(error.declarationRejected,true);return true});
  assert.equal(f.store.raw.pages.length,before);
 });
 
