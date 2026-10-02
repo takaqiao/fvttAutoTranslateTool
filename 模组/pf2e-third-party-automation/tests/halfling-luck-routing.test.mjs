@@ -4,7 +4,7 @@ import {createReactionChecks,REACTION_CHECK_SOURCES} from '../scripts/reaction-c
 
 function fixture({coexisting=false,middleware=false}={}){
  const actor={id:'roller',uuid:'Actor.roller',type:'character',items:new Map(),flags:{}};
- if(coexisting)actor.items.set('clock',{id:'clock',type:'feat',sourceId:REACTION_CHECK_SOURCES.clock});
+ if(coexisting)actor.items.set('clock',{id:'clock',uuid:`${actor.uuid}.Item.clock`,actor,type:'feat',sourceId:REACTION_CHECK_SOURCES.clock});
  const gm={id:'gm',isGM:true},game={user:gm,users:{activeGM:gm},actors:new Map([[actor.id,actor]]),scenes:[],messages:new Map(),time:{worldTime:0}};
  const registrations=[],calls=[],order=[];let hookId=0;
  const luck={handlesActor:a=>a===actor,interceptCheck:async(native,...args)=>{calls.push(args);order.push('luck');return native(...args)}};

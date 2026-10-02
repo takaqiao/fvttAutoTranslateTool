@@ -106,12 +106,13 @@ export function createReactionChecks({game,reactionRestriction,fromUuid=globalTh
  const canReact=actor=>!actor.isDead&&actor.canAct!==false&&!actor.hasCondition?.('unconscious')&&!actor.hasCondition?.('stunned');
  const resolveAction=item=>item?.type==='action'&&getSourceId(item)===REACTION_CHECK_SOURCES.pointed?'reaction-checks:pointed-question':null;
  const immune=(actor,kind)=>values(actor.items).some(i=>own(i).kind===kind&&(own(i).expiresAt??0)>now());
- const feature=(actor,key)=>values(actor?.items).find(i=>i.type==='feat'&&getSourceId(i)===REACTION_CHECK_SOURCES[key]);
+ const activeFeature=(actor,item,key)=>item?.type==='feat'&&item.actor===actor&&!item.suppressed&&!item.isSuppressed&&!item.system?.suppressed&&getSourceId(item)===REACTION_CHECK_SOURCES[key];
+ const feature=(actor,key)=>values(actor?.items).find(i=>activeFeature(actor,i,key));
  const forget=actor=>{if(!actor?.uuid)return;if(tracked.get(actor.uuid)===actor)tracked.delete(actor.uuid);if(reactors.get(actor.uuid)===actor)reactors.delete(actor.uuid)};
  function liveActor(actor){
   if(!actor?.uuid)return false;if(!actor.isToken)return game.actors?.get?.(actor.id)===actor;
   const token=actor.token,scene=token?.parent;
-  return !!scene&&game.scenes?.get?.(scene.id)===scene&&scene.tokens?.get?.(token.id)===token&&token.actorLink===false&&!!token.baseActor&&game.actors?.get?.(token.actorId)===token.baseActor&&token.actor===actor;
+  return token?.documentName==='Token'&&!!scene&&game.scenes?.get?.(scene.id)===scene&&scene.tokens?.get?.(token.id)===token&&token.actorLink===false&&!!token.baseActor&&game.actors?.get?.(token.actorId)===token.baseActor&&token.actor===actor;
  }
  // PF2e's primary updater already dispatches expiration on combat/world time
  // changes. Never send a competing delete or override removeEffects=false.
@@ -121,52 +122,70 @@ export function createReactionChecks({game,reactionRestriction,fromUuid=globalTh
  const pick=async(actor,user,title,choices)=>{const selected=choices.length===1?choices[0].value:await choose({actor,user,title,choices});if(selected!=null&&!choices.some(c=>c.value===selected))throw Error('无效的规则选择。');return selected};
  function turnEnd(actor){const c=game.combat,index=c?.turns?.findIndex(t=>t.actor?.uuid===actor.uuid)??-1;return c?.started&&index>=0?{combatId:c.id,combatantId:c.turns[index].id,round:c.round+(index<c.turn?1:0),initiative:c.turns[index].initiative}:null}
  function ended(t){const c=game.combat,index=c?.turns?.findIndex(x=>x.id===t.combatantId)??-1;return !c?.started||c.id!==t.combatId||index<0||c.round>t.round||c.round===t.round&&c.turn>index}
- async function mark(actor,key,data){
+ async function mark(actor,key,data,assertLive){
+  const step=async operation=>{assertLive?.();const result=await asReactionGM(operation);assertLive?.();return result;};
   const existing=values(actor.items).filter(i=>i.type==='effect'&&i.flags?.[MODULE_ID]?.nativeEffectKey===key),next=structuredClone(data);delete next._id;
   next.flags={...next.flags,[MODULE_ID]:{...next.flags?.[MODULE_ID],nativeEffectKey:key}};
   // The shared upsert can issue a second write for duplicates: guard both writes.
-  if(existing.length){await asReactionGM(()=>existing[0].update(next));if(existing.length>1)await asReactionGM(()=>actor.deleteEmbeddedDocuments('Item',existing.slice(1).map(i=>i.id)))}
-  else await asReactionGM(()=>actor.createEmbeddedDocuments('Item',[next]));
+  if(existing.length){await step(()=>existing[0].update(next));if(existing.length>1)await step(()=>actor.deleteEmbeddedDocuments('Item',existing.slice(1).map(i=>i.id)))}
+  else await step(()=>actor.createEmbeddedDocuments('Item',[next]));
   track(actor);
  }
- async function reactionCard(actor,item,nonce,kind){
+ async function reactionCard(actor,item,nonce,kind,assertLive){
   // AAT annotates the native card with its exact frequency update. Its wrapper
   // cannot annotate unsaved drafts, so this is a regular posted feature card.
-  const card=await asReactionGM(()=>item.toMessage());if(!card?.id)throw Error('原生反应卡未创建，不能重试已认领反应。');
-  await asReactionGM(()=>card.update({[`flags.${MODULE_ID}.usageGenerated`]:true,[`flags.${MODULE_ID}.reactionChecks`]:{kind:'reaction-use',reaction:kind,nonce}}));return card;
+  assertLive?.();const card=await asReactionGM(()=>item.toMessage());assertLive?.();if(!card?.id||game.messages.get(card.id)!==card)throw Error('原生反应卡未创建，不能重试已认领反应。');
+  assertLive?.();await asReactionGM(()=>card.update({[`flags.${MODULE_ID}.usageGenerated`]:true,[`flags.${MODULE_ID}.reactionChecks`]:{kind:'reaction-use',reaction:kind,nonce}}));assertLive?.();if(game.messages.get(card.id)!==card)throw Error('原始反应卡已改变，不能重试本次认领。');return card;
  }
- async function squawkWitnesses(actor,origin,target){
+ async function squawkWitnesses(actor,origin,target,assertLive){
   const visible=values(origin.parent.tokens).filter(t=>t.actor&&t.actor.uuid!==actor.uuid&&t.actor.canSee!==false&&!t.actor.hasCondition?.('unconscious')&&t.object&&typeof t.object.checkCollision==='function'&&!t.object.checkCollision(origin.object.center,{origin:t.object.center,type:'sight',mode:'any'}));
-  const unique=[...new Map(visible.map(t=>[t.actor.uuid,t])).values()];if(unique.length<=1)return unique;
+  const unique=[...new Map(visible.map(t=>[t.actor.uuid,t])).values()],proofs=unique.map(token=>({token,actor:token.actor,scene:token.parent}));
+  const live=()=>{assertLive?.();for(const p of proofs)if(game.scenes.get(p.scene.id)!==p.scene||p.scene.tokens.get(p.token.id)!==p.token||p.token.actor!==p.actor||!liveActor(p.actor))throw Error('喀咯！的原目击者已改变，反应不再继续。');};live();if(unique.length<=1)return unique;
   const mode=await asReactionGM(()=>pick(actor,game.user,'喀咯！：实际目击本次表现的生物',[{value:'target',label:'只有本次检定目标目击'},{value:'visible',label:`场景内这 ${unique.length} 位有视线的生物均目击`},{value:'select',label:'逐一选择实际目击者'}]));
+  live();
   if(mode==='target')return unique.filter(t=>t.uuid===target.uuid);if(mode==='visible')return unique;if(mode!== 'select')throw Error('尚未确定喀咯的目击者；反应未消费。');
-  const selected=[];while(unique.length){const value=await asReactionGM(()=>pick(actor,game.user,'喀咯！：选择目击者',[{value:'done',label:'完成'},...unique.map(t=>({value:t.uuid,label:t.name??t.actor.name}))]));if(!value||value==='done')break;const index=unique.findIndex(t=>t.uuid===value);selected.push(unique.splice(index,1)[0]);}return selected;
+  const selected=[];while(unique.length){live();const value=await asReactionGM(()=>pick(actor,game.user,'喀咯！：选择目击者',[{value:'done',label:'完成'},...unique.map(t=>({value:t.uuid,label:t.name??t.actor.name}))]));live();if(!value||value==='done')break;const index=unique.findIndex(t=>t.uuid===value);selected.push(unique.splice(index,1)[0]);}return selected;
  }
  async function decideCheckReaction(payload,user){
   if(!isActiveGM(game)||!user||typeof payload?.nonce!=='string'||!/^[A-Za-z0-9-]{8,80}$/.test(payload.nonce))throw Error('反应检定回执或GM权限无效。');
-  const actor=await fromUuid(payload.actorUuid);if(!actor?.testUserPermission?.(user,'OWNER'))throw Error('无权处理这个角色的检定反应。');
+  const gm=game.user,gmId=gm?.id,userId=user.id;
+  const demand=ok=>{if(!ok)throw Error('反应的原操作者、能力或当前来源已改变；已有认领与费用不会回滚或重试。');};
+  const authority=()=>{requireReactionGM();demand(gm?.active===true&&gm.isGM===true&&game.user===gm&&gm.id===gmId&&game.users.get(gmId)===gm&&game.users.activeGM===gm&&user.active===true&&user.id===userId&&game.users.get(userId)===user);};
+  authority();const actor=await fromUuid(payload.actorUuid);authority();
+  const actorToken=actor?.isToken?actor.token:null,actorScene=actorToken?.parent,baseActor=actorToken?.baseActor;
+  let origin=null,target=null,item=null,selected=null,claim=null,witnesses=[];const tokens=[];
+  const captureToken=token=>{demand(token?.documentName==='Token');tokens.push({token,actor:token.actor,scene:token.parent,uuid:token.uuid});};
+  const assertLive=()=>{
+   authority();demand(actor?.uuid===payload.actorUuid&&liveActor(actor)&&actor.testUserPermission?.(user,'OWNER')===true);
+   if(actorToken)demand(actor.token===actorToken&&actorToken.parent===actorScene&&actorToken.baseActor===baseActor);
+   for(const p of tokens)demand(p.token.uuid===p.uuid&&p.token.parent===p.scene&&game.scenes.get(p.scene?.id)===p.scene&&p.scene.tokens.get(p.token.id)===p.token&&p.token.actor===p.actor&&liveActor(p.actor));
+   if(item)demand(actor.items.get(item.id)===item&&activeFeature(actor,item,selected));
+   if(claim){const matches=(own(actor).reactions??[]).filter(r=>r.nonce===payload.nonce);demand(matches.length===1&&['nonce','kind','state','time','epoch','userId'].every(k=>matches[0][k]===claim[k]));}
+  };
+  const step=async operation=>{assertLive();const result=await asReactionGM(operation);assertLive();return result;};assertLive();
   return queue.run(`reaction:${actor.uuid}`,async()=>{
-   requireReactionGM();
+   assertLive();
    if(own(actor).reactions?.some(r=>r.nonce===payload.nonce))return null;
    if(!['skill-check','saving-throw'].includes(payload.type)||![0,1].includes(payload.degree)||!canReact(actor)||!reactionAvailable(actor))return null;
    const triggerEpoch=epoch(actor);
-   const origin=payload.tokenUuid?await fromUuid(payload.tokenUuid):null;if(payload.tokenUuid&&(!origin||origin.actor?.uuid!==actor.uuid||origin.documentName!=='Token'))throw Error('反应的原检定Token来源不匹配。');
+   if(payload.tokenUuid){origin=await step(()=>fromUuid(payload.tokenUuid));demand(origin?.uuid===payload.tokenUuid&&origin.actor===actor);captureToken(origin);assertLive();}
    const clock=feature(actor,'clock'),squawk=feature(actor,'squawk'),choices=[];
    if(clock&&!payload.isReroll&&payload.rerollable!==false&&!payload.fortune&&(clock.system.frequency?.value??clock.system.frequency?.max??0)>0)choices.push({value:'clock',label:'使用倒转光阴（反应；每日1次）'});
-   const target=payload.targetUuid?await fromUuid(payload.targetUuid):null;
+   if(payload.targetUuid){target=await step(()=>fromUuid(payload.targetUuid));demand(target?.uuid===payload.targetUuid);captureToken(target);assertLive();}
    if(squawk&&payload.degree===0&&payload.type==='skill-check'&&payload.domains?.some(d=>['deception','diplomacy','intimidation'].includes(d))&&origin?.object&&target?.object&&target.parent?.id===origin.parent?.id&&target.actor?.uuid!==actor.uuid&&!values(target.actor?.traits??target.actor?.system?.traits?.value).includes('tengu')&&!immune(target.actor,'squawk-immunity'))choices.push({value:'squawk',label:'使用喀咯！（反应；大失败视为失败）'});
    if(!choices.length)return null;
-   const selected=await asReactionGM(()=>pick(actor,user,'本次检定失败：是否使用反应',[...choices,{value:'decline',label:'不使用反应'}]));if(!selected||selected==='decline')return null;
-   const item=selected==='clock'?clock:squawk,witnesses=selected==='squawk'?await squawkWitnesses(actor,origin,target):[];
+   selected=await step(()=>pick(actor,user,'本次检定失败：是否使用反应',[...choices,{value:'decline',label:'不使用反应'}]));if(!selected||selected==='decline')return null;
+   item=selected==='clock'?clock:squawk;assertLive();witnesses=selected==='squawk'?await squawkWitnesses(actor,origin,target,assertLive):[];assertLive();for(const t of witnesses)captureToken(t);assertLive();
    const reserved=await withReactionReservation(actor,game,async()=>{
-    requireReactionGM();
-    if(epoch(actor)!==triggerEpoch||!canReact(actor)||feature(actor,selected)?.id!==item.id||!reactionAvailable(actor)||own(actor).reactions?.some(r=>r.nonce===payload.nonce))return false;
+    assertLive();
+    if(epoch(actor)!==triggerEpoch||!canReact(actor)||!reactionAvailable(actor)||own(actor).reactions?.some(r=>r.nonce===payload.nonce))return false;
     const uses=selected==='clock'?(clock.system.frequency?.value??clock.system.frequency.max):null;if(selected==='clock'&&uses<1)return false;
-    await asReactionGM(()=>actor.update({[`flags.${MODULE_ID}.reactionChecks.reactions`]:[...(own(actor).reactions??[]),{nonce:payload.nonce,kind:selected,state:'claimed',time:now(),epoch:epoch(actor),userId:user.id}]}));
-    if(selected==='clock')await asReactionGM(()=>clock.update({'system.frequency.value':uses-1},{[MODULE_ID]:{usageInternal:true}}));return true;
-   });if(!reserved)return null;
-   for(const t of witnesses)await mark(t.actor,'reaction-checks:squawk-immunity',{name:'喀咯！：暂时免疫',type:'effect',img:item.img??'icons/creatures/birds/corvid-watchful-glowing-red.webp',system:{slug:'squawk-immunity',rules:[],duration:{value:24,unit:'hours',expiry:'turn-start',sustained:false},start:{value:now(),initiative:null},tokenIcon:{show:false}},flags:{[MODULE_ID]:{reactionChecks:{kind:'squawk-immunity',expiresAt:now()+86400,nonce:payload.nonce}}}});
-   const card=await reactionCard(actor,item,payload.nonce,selected);await asReactionGM(()=>actor.update({[`flags.${MODULE_ID}.reactionChecks.reactions`]:(own(actor).reactions??[]).map(r=>r.nonce===payload.nonce?{...r,checkId:card.id}:r)}));return selected;
+    const nextClaim={nonce:payload.nonce,kind:selected,state:'claimed',time:now(),epoch:epoch(actor),userId:user.id};
+    await step(()=>actor.update({[`flags.${MODULE_ID}.reactionChecks.reactions`]:[...(own(actor).reactions??[]),nextClaim]}));claim=nextClaim;assertLive();
+    if(selected==='clock'){await step(()=>clock.update({'system.frequency.value':uses-1},{[MODULE_ID]:{usageInternal:true}}));demand(clock.system.frequency.value===uses-1);}return true;
+   });assertLive();if(!reserved)return null;
+   for(const t of witnesses)await mark(t.actor,'reaction-checks:squawk-immunity',{name:'喀咯！：暂时免疫',type:'effect',img:item.img??'icons/creatures/birds/corvid-watchful-glowing-red.webp',system:{slug:'squawk-immunity',rules:[],duration:{value:24,unit:'hours',expiry:'turn-start',sustained:false},start:{value:now(),initiative:null},tokenIcon:{show:false}},flags:{[MODULE_ID]:{reactionChecks:{kind:'squawk-immunity',expiresAt:now()+86400,nonce:payload.nonce}}}},assertLive);
+   const card=await reactionCard(actor,item,payload.nonce,selected,assertLive);assertLive();await step(()=>actor.update({[`flags.${MODULE_ID}.reactionChecks.reactions`]:(own(actor).reactions??[]).map(r=>r.nonce===payload.nonce?{...r,checkId:card.id}:r)}));demand(game.messages.get(card.id)===card);return selected;
   });
  }
  const decide=async(state,targetSnapshot=null,userSnapshot=null)=>{

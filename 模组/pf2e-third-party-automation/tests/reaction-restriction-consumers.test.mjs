@@ -14,7 +14,7 @@ function basic(){
  const user={id:'gm',isGM:true,active:true},users=new Map([[user.id,user]]);users.activeGM=user;
  const actor={id:'pc',uuid:'Actor.pc',type:'character',items:new Map(),flags:{},canAct:true,isDead:false,testUserPermission:u=>u===user,async update(p){patch(this,p)}};
  const game={user,users,actors:new Map([[actor.id,actor]]),scenes:new Map(),messages:new Map(),modules:new Map(),time:{worldTime:100}};
- const item={id:'clock',uuid:`${actor.uuid}.Item.clock`,type:'feat',actor,sourceId:REACTION_CHECK_SOURCES.clock,system:{frequency:{value:1,max:1}},async update(p){patch(this,p)},async toMessage(){return {id:'paid',flags:{},async update(p){patch(this,p)}}}};actor.items.set(item.id,item);
+ const item={id:'clock',uuid:`${actor.uuid}.Item.clock`,type:'feat',actor,sourceId:REACTION_CHECK_SOURCES.clock,system:{frequency:{value:1,max:1}},async update(p){patch(this,p)},async toMessage(){const card={id:'paid',flags:{},async update(p){patch(this,p)}};game.messages.set(card.id,card);return card}};actor.items.set(item.id,item);
  return {actor,item,game,user};
 }
 for(const status of ['restricted','manual'])test(`Clock ${status} blocks its no-encounter branch without paying or offering`,async()=>{

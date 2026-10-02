@@ -1,4 +1,5 @@
-import { MODULE_ID, findFeature } from "./rules.mjs";
+import { MODULE_ID, SOURCES, normalizeUuid } from "./rules.mjs";
+import { getSourceId } from "./native-context.mjs";
 
 const DAMAGE_BY_TRAIT = Object.freeze({
   air: "slashing", cold: "cold", earth: "bludgeoning", electricity: "electricity",
@@ -6,6 +7,9 @@ const DAMAGE_BY_TRAIT = Object.freeze({
   vitality: "vitality", void: "void", water: "bludgeoning", wood: "piercing",
 });
 const NONCE = /^[A-Za-z0-9_-]{16,64}$/;
+const activeFeature = (actor, key) => Array.from(actor?.items?.values?.() ?? actor?.items ?? [])
+  .find(item => item.type === "feat" && item.actor === actor && !item.suppressed && !item.isSuppressed
+    && !item.system?.suppressed && normalizeUuid(getSourceId(item)) === normalizeUuid(SOURCES[key]));
 
 function sourceTraits(item, options = []) {
   const traits = new Set(item?.traits ?? item?.system?.traits?.value ?? []);
@@ -19,7 +23,7 @@ function sourceTraits(item, options = []) {
 
 /** Only a source-identified Cycle user and an actual, unevaded DamageRoll qualify. */
 export function getCycleTrigger(actor, { damage, item, rollOptions = [], skipIWR = false, final = false, cycleTrait = null } = {}) {
-  if (!findFeature(actor, "cycle") || !findFeature(actor, "attunement") || actor?.isDead) return null;
+  if (!activeFeature(actor, "cycle") || !activeFeature(actor, "attunement") || actor?.isDead) return null;
   if (skipIWR || final || !damage || typeof damage === "number" || !Array.isArray(damage.instances)
     || !Number.isFinite(damage.total) || damage.total <= 0) return null;
   const level = actor.level ?? actor.system?.details?.level?.value;
@@ -112,7 +116,7 @@ export function createCycleAutomation({ onClaim, onComplete = async () => {}, on
       if (!origin) return wrapped(params);
       // Other native post-damage feats need the same exact receipt identity. This
       // adds metadata only; ordinary targets never enter the Cycle RPC/effect path.
-      if (!findFeature(actor, "cycle")) {
+      if (!activeFeature(actor, "cycle")) {
         const rollOptions = new Set(params.rollOptions ?? []);
         rollOptions.add(`${MODULE_ID}:source:${origin.messageId}:${origin.rollIndex}`);
         return wrapped({ ...params, rollOptions });

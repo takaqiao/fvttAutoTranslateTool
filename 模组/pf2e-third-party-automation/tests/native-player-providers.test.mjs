@@ -46,7 +46,7 @@ test('Partial rest sends Survival to the source player and cancellation keeps re
 });
 
 for(const trusted of [true,false])test(`staged owner check ${trusted?'retains':'does not grant an unauthenticated draft'} native failure reactions`,async()=>{
- const f=fixture();f.game.user=f.player;f.game.actors=new Map([[f.actor.id,f.actor]]);f.actor.items.set('clock',{id:'clock',type:'feat',sourceId:REACTION_CHECK_SOURCES.clock});
+ const f=fixture();f.game.user=f.player;f.game.actors=new Map([[f.actor.id,f.actor]]);f.actor.items.set('clock',{id:'clock',uuid:`${f.actor.uuid}.Item.clock`,actor:f.actor,type:'feat',sourceId:REACTION_CHECK_SOURCES.clock});
  let wrapper,rpcs=0,callbacks=0,updates=0,natives=0;
  const provider=createReactionChecks({game:f.game,nativeInvocation:()=>trusted?{actorUuid:f.actor.uuid,tokenUuid:f.origin.uuid,user:f.player,targetUuid:f.target.uuid}:null});
  provider.register({Hooks:{on:()=>1,off(){}},libWrapper:{register(_id,path,fn){if(path==='game.pf2e.Check.roll')wrapper=fn;}},socket:{register(){},async executeAsUser(){rpcs++;return {ok:true,value:null};}}});

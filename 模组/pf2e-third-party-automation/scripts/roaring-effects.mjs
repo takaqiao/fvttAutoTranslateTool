@@ -12,15 +12,28 @@ const demand=(ok,reason)=>{if(!ok)throw Error(`轰然喝彩：${reason}`)};
 const safe=v=>typeof v==='string'&&/^[A-Za-z0-9-]{1,80}$/.test(v)&&!['constructor','prototype'].includes(v);
 const table=actor=>actor?.flags?.[ID]?.roaringApplause?.sources??{};
 const marker=item=>item?.flags?.[ID]?.roaringEffect;
+function actorIdentity(actor){
+ const token=actor?.isToken?actor.token:null;
+ return {actor,uuid:actor?.uuid,token,scene:token?.parent,baseActor:token?.baseActor,actorId:token?.actorId};
+}
+function currentActor(game,p){
+ if(!p.actor?.uuid||p.actor.uuid!==p.uuid)return false;
+ if(!p.token)return !p.actor.isToken&&game.actors?.get(p.actor.id)===p.actor;
+ return p.actor.isToken&&p.actor.token===p.token&&p.token.documentName==='Token'&&p.token.actorLink===false&&p.token.actor===p.actor&&p.token.parent===p.scene&&game.scenes?.get(p.scene?.id)===p.scene&&p.scene.tokens?.get(p.token.id)===p.token&&p.token.baseActor===p.baseActor&&p.token.actorId===p.actorId&&!!p.baseActor&&game.actors?.get(p.actorId)===p.baseActor;
+}
 
 /** Source-local documents only. Native grants supply condition mechanics and
  * cascade behavior; operation receipts prevent repeated creation after doubt. */
 export function createRoaringEffects({game,fromUuid=globalThis.fromUuid,randomId=()=>globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.randomUUID(),onError=()=>{}}={}){
- const queue=new SerialActions();
+ const queue=new SerialActions(),scopes=new WeakMap();
  const get=(actor,nonce)=>{const r=safe(nonce)?table(actor)[nonce]:null;return r?copy(r):null};
  const list=actor=>Object.entries(table(actor)).filter(([nonce,r])=>safe(nonce)&&r?.state?.sourceNonce===nonce).map(([,r])=>copy(r));
- function gm(){demand(game.user?.isGM===true&&isActiveGM(game),'需要当前主GM处理来源效果。')}
- async function live(actor){gm();demand(actor?.uuid&&await fromUuid(actor.uuid)===actor,'目标角色已改变。');gm()}
+ function assertLive(actor){
+  const p=scopes.get(actor),gm=p?.gm;
+  demand(gm?.isGM===true&&gm.active===true&&gm.id===p.gmId&&game.user===gm&&game.users.get(p.gmId)===gm&&game.users.activeGM===gm&&isActiveGM(game),'需要原始当前主GM处理来源效果。');
+  demand(currentActor(game,p.identity),'目标角色已改变。');
+ }
+ async function live(actor){assertLive(actor);demand(await fromUuid(actor.uuid)===actor,'目标角色已改变。');assertLive(actor)}
  function valid(actor,r){
   demand(r?.schema===1&&Number.isSafeInteger(r.revision)&&r.revision>=0&&safe(r.state?.sourceNonce)&&r.state.source?.targetActorUuid===actor.uuid,'来源记录不完整。');
   projectRoaringConditions(r.state);
@@ -32,11 +45,14 @@ export function createRoaringEffects({game,fromUuid=globalThis.fromUuid,randomId
  async function persist(actor,before,after){
   await live(actor);valid(actor,after);
   demand(equal(get(actor,after.state.sourceNonce),before),'来源记录在操作期间已改变。');
-  const result=await actor.update({[`${PATH}.${after.state.sourceNonce}`]:copy(after)});
+  assertLive(actor);const result=await actor.update({[`${PATH}.${after.state.sourceNonce}`]:copy(after)});
   await live(actor);demand(result===actor&&equal(get(actor,after.state.sourceNonce),after),'来源记录未完整保存，请核对本次操作。');return copy(after);
  }
  const change=(actor,before,patch)=>persist(actor,before,{...before,...copy(patch),revision:before.revision+1});
- const run=(actor,fn)=>queue.run(actor.uuid,async()=>{await live(actor);return fn()});
+ const run=(actor,fn)=>{
+  const scope={gm:game.user,gmId:game.user?.id,identity:actorIdentity(actor)};
+  return queue.run(actor.uuid,async()=>{scopes.set(actor,scope);try{await live(actor);return await fn()}finally{scopes.delete(actor)}});
+ };
  async function claim({actor,state,context}){return run(actor,async()=>{
   const before=get(actor,state?.sourceNonce);
   const next={schema:1,revision:0,state:copy(state),context:copy(context),effects:{status:'not-started',operationId:null,parentId:null,children:{slowed:null,fascinated:null},reason:null}};
@@ -90,8 +106,7 @@ export function createRoaringEffects({game,fromUuid=globalThis.fromUuid,randomId
  function inspectReactionParent({actor,nonce}={}){
   const unproven=reason=>({status:'unproven',reason});
   try{
-   const token=actor?.token,scene=token?.parent;
-   const liveActor=actor?.uuid&&(game.actors?.get(actor.id)===actor||token&&game.scenes?.get(scene?.id)===scene&&scene?.tokens?.get(token.id)===token&&token.actor===actor);
+   const liveActor=currentActor(game,actorIdentity(actor));
    if(!liveActor||typeof actor.items?.get!=='function')return unproven('actor-not-live');
    const r=current(actor,nonce);
    if(r.state.sourceNonce!==nonce)return unproven('source-unproven');
@@ -152,6 +167,7 @@ export function createRoaringEffects({game,fromUuid=globalThis.fromUuid,randomId
   const operationId=randomId();demand(safe(operationId),'效果操作标记无效。');
   r=await change(actor,r,{effects:{...r.effects,status:'creating',operationId,rules:expectedRules(r)}});
   try{
+   assertLive(actor);demand(equal(current(actor,nonce),r),'来源在效果创建前已改变。');
    const data=effectData(r),returned=await actor.createEmbeddedDocuments('Item',[data]);await live(actor);
    demand(equal(current(actor,nonce),r),'来源在效果创建期间已改变。');
    const matching=values(actor.items).filter(item=>equal(marker(item),proofFor(r)));
@@ -180,6 +196,7 @@ export function createRoaringEffects({game,fromUuid=globalThis.fromUuid,randomId
   if(parent){
    demand(r.effects.status==='created','本次原生删除结果尚未确认，不会重复删除。');safeCascade(actor,r,parent);
    r=await change(actor,r,{effects:{...r.effects,status:'deleting'}});
+    assertLive(actor);demand(equal(current(actor,nonce),r),'来源在效果删除前已改变。');safeCascade(actor,r,parent);
    const result=await actor.deleteEmbeddedDocuments('Item',[parent.id]);await live(actor);
    demand(Array.isArray(result)&&result.some(item=>item===parent)&&!actor.items.has(parent.id),'原生效果删除未完成。');
   }
@@ -190,6 +207,7 @@ export function createRoaringEffects({game,fromUuid=globalThis.fromUuid,randomId
   const r=current(actor,nonce);demand(r.state.tombstones.fascinated,'尚未记录本来源迷魂的解除事实。');
   const info=r.effects.children.fascinated,child=info?actor.items.get(info.id):null;if(!child)return r;
   demand(ownChild(actor,r,'fascinated',child),'迷魂条件的归属已改变。');
+   assertLive(actor);demand(equal(current(actor,nonce),r),'来源在迷魂删除前已改变。');
   const result=await actor.deleteEmbeddedDocuments('Item',[child.id]);await live(actor);
   demand(Array.isArray(result)&&result.includes(child)&&!actor.items.has(child.id),'本来源迷魂删除未完成。');return current(actor,nonce);
  })}
@@ -199,7 +217,8 @@ export function createRoaringEffects({game,fromUuid=globalThis.fromUuid,randomId
   const parent=actor.items.get(r.effects.parentId);demand(ownParent(actor,r,parent),'原来源效果已改变。');verifyParentRules(r,parent);
   const changes={[`flags.${ID}.roaringTiming`]:copy(r.state.timing)};
   if(finite){demand(r.state.timing.mode==='manual-finite','来源没有进入有限人工计时。');changes['system.start']=copy(r.state.timing.finiteEnvelope.start);changes['system.duration']=copy(r.state.timing.finiteEnvelope.duration);}
-  const result=await parent.update(changes);await live(actor);demand(result===parent&&ownParent(actor,r,parent)&&equal(parent.flags?.[ID]?.roaringTiming,r.state.timing),'来源时长未完整保存。');
+   assertLive(actor);demand(equal(current(actor,nonce),r),'来源在时长保存前已改变。');
+   const result=await parent.update(changes);await live(actor);demand(equal(current(actor,nonce),r)&&result===parent&&ownParent(actor,r,parent)&&equal(parent.flags?.[ID]?.roaringTiming,r.state.timing),'来源时长未完整保存。');
   if(finite)demand(equal(parent.system.start,r.state.timing.finiteEnvelope.start)&&equal(parent.system.duration,r.state.timing.finiteEnvelope.duration),'有限后备时长未确认。');
   return current(actor,nonce);
  })}

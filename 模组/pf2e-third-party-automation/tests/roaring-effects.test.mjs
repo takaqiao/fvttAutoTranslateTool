@@ -5,8 +5,8 @@ import {createRoaringSource,reduceRoaringSource} from '../scripts/roaring-lifecy
 import {createRoaringEffects} from '../scripts/roaring-effects.mjs';
 
 function fixture({outcome='criticalFailure',immunity={},veto=false,lostReply=false,deleteVeto=false,deleteLostReply=false,synthetic=false}={}){
- const gm={id:'gm',isGM:true,active:true},game={user:gm,users:{activeGM:gm},time:{worldTime:10},actors:new Map(),scenes:new Map()},actor={id:'target',uuid:synthetic?'Scene.scene.Token.target.Actor.target':'Actor.target',type:'npc',flags:{},items:new Map()};
- if(synthetic){const scene={id:'scene',tokens:new Map()},token={id:'target',uuid:'Scene.scene.Token.target',parent:scene,actor};scene.tokens.set(token.id,token);game.scenes.set(scene.id,scene);actor.token=token;}else game.actors.set(actor.id,actor);
+ const gm={id:'gm',isGM:true,active:true},users=Object.assign(new Map([[gm.id,gm]]),{activeGM:gm}),game={user:gm,users,time:{worldTime:10},actors:new Map(),scenes:new Map()},actor={id:'target',uuid:synthetic?'Scene.scene.Token.target.Actor.target':'Actor.target',type:'npc',flags:{},items:new Map()};
+ if(synthetic){const baseActor={id:'base',uuid:'Actor.base',type:'npc'},scene={id:'scene',tokens:new Map()},token={id:'target',uuid:'Scene.scene.Token.target',documentName:'Token',actorLink:false,actorId:baseActor.id,baseActor,parent:scene,actor};game.actors.set(baseActor.id,baseActor);scene.tokens.set(token.id,token);game.scenes.set(scene.id,scene);actor.isToken=true;actor.token=token;}else game.actors.set(actor.id,actor);
  const docs=new Map([[actor.uuid,actor]]),calls={create:0,delete:[],update:0};let sequence=0;
  const merge=(target,changes)=>{for(const[k,v]of Object.entries(changes)){const keys=k.split('.');let ptr=target;for(const name of keys.slice(0,-1))ptr=ptr[name]??={};const name=keys.at(-1);if(v&&typeof v==='object'&&!Array.isArray(v))merge(ptr[name]??={},v);else ptr[name]=structuredClone(v);}};
  actor.update=async changes=>{calls.update++;merge(actor,changes);return actor};
