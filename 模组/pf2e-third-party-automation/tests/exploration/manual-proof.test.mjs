@@ -29,7 +29,7 @@ test('Workbench proof waits for source-bound native application and immunity; un
 });
 test('source-pinned immunity observation awaits the original native create and completes only its selected Workbench treatment',async()=>{
  const f=manualEvidenceFixture(),r=f.createRecorder();r.start();await r.observe(f.event);await f.fire(f.receipt());
- let calls=0;f.patient.createEmbeddedDocuments=async(type,data)=>{calls++;assert.equal(type,'Item');assert.equal(data[0].flags['pf2e-third-party-automation'].explorationManualImmunity.messageId,'W');return [{...f.immunity(),flags:data[0].flags}]};
+ let calls=0;f.patient.createEmbeddedDocuments=async(type,data)=>{calls++;assert.equal(type,'Item');assert.equal(data[0].flags['pf2e-third-party-automation'].explorationManualImmunity.messageId,'W');const item={...f.immunity(),flags:data[0].flags};f.patient.items.set(item.id,item);return [item]};
  const observer=r.bindImmunity({message:f.result,token:{id:'T',actor:f.patient},kind:'treatment',sourceSHA:'aa3aa174524021b06e38f9128fd29196ac5f5da863bd818068a9b2fa0e699d20'});
  await observer.createEmbeddedDocuments('Item',[{system:{},flags:{core:{sourceId:'Compendium.pf2e.feat-effects.Lb4q2bBAgxamtix5'}}}]);assert.equal(calls,1);const a=await f.ledger.getActivity('manual:W');assert.equal(a.state,'confirmed');assert.deepEqual(a.proof.immunityIds,['Actor.P.Item.I']);r.stop();
 });

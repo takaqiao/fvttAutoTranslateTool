@@ -226,7 +226,8 @@ Hooks.once('ready',async()=>{
   },onError:report,
  });
  libWrapper.register(MODULE_ID,'CONFIG.Actor.documentClass.prototype.applyDamage',function(wrapped,params){
-  const applyNative=next=>activityResults.applyNativeDamage(this,next,wrapped);
+  const manualPoolFrame=exploration.manualPoolApplication.captureFrame(this,params);
+  const applyNative=next=>exploration.manualPoolApplication.applyNativeDamage(this,next,p=>activityResults.applyNativeDamage(this,p,wrapped),manualPoolFrame);
   // Consume the exact private params grant before any normalization or spread.
   return salubriousDamage.applyDamage(this,params,(treatmentApproved,assertSalubrious)=>disruptDamage.applyDamage(this,treatmentApproved,(approved,assertNative)=>{
    const source=cycle.getRollContext(approved.damage);
@@ -234,6 +235,7 @@ Hooks.once('ready',async()=>{
    return runDamagePipeline({actor:this,params:actual,providers,apply:p=>reactionBudget.applyDamage(this,p,next=>shieldAdapter.applyDamage(this,next,final=>shieldEvents.wrapNativeDamage(this,final,native=>cycle.applyDamage(this,finalParams=>shieldAdapter.withNativeFrame(this,finalParams,checkedParams=>{assertNative();assertSalubrious(this,checkedParams);return glimpse.wrapNativeDamage(this,checkedParams,p=>scar?scar.wrapNativeDamage(this,p,applyNative):applyNative(p))}),native)),destructiveBlock.planFor(next))),onError:report});
   }));
  },'WRAPPER');
+ libWrapper.register(MODULE_ID,'CONFIG.ChatMessage.documentClass.create',function(wrapped,data,...args){return exploration.manualPoolApplication.observeCreate(wrapped,data,...args)},'WRAPPER');
  const rollIndex=CONFIG.Dice.rolls.findIndex(cls=>cls.name==='DamageRoll');
  if(rollIndex<0)throw Error('未找到PF2e DamageRoll，循环能量无法接入。');
  libWrapper.register(MODULE_ID,`CONFIG.Dice.rolls.${rollIndex}.prototype.alter`,function(wrapped,...args){return preserveElectricityOnAlter(this,preserveMetapowerOnAlter(this,preserveDamageBypassOnAlter(this,cycle.alterDamageRoll(this,wrapped,...args),{multiplier:args[0]??1,addend:args[1]??0})))},'WRAPPER');

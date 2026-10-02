@@ -6,7 +6,7 @@
 
 ## 三层验证
 
-### 原生／Patreon 手动免疫小批（0.9.30 候选）
+### 原生／Patreon 手动免疫小批（0.9.30）
 
 源码 `579a4bef62f5945dfe3ec2f1da334b6fa1e248ab` 的[完整回归](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/stage1/native-immunity-source-check-1790861026368.json)为3249／3249、172测试文件、182运行脚本和5工具语法通过，零跳过。一轮独立产品审查发现停止录入与共享池改绑的异步窗口；追加的重复 HP 应用反例与六个原审查反例在合并后的代码通过，新测试覆盖真实 revision 摘要完成后的提交条件。原失败记录保留。
 
@@ -14,7 +14,9 @@
 
 原验收脚本先后被旧式合法Compendium UUID、画布Token临时加载状态和异步默认Party基线断言中止；核验报告绑定三份原失败报告及原始trace，以首轮已保存Party、持久化账本和完整原生文档补做只读验证。A仅在第一份报告执行一次，B仅在第三份执行一次，没有重投或重新应用。[保存关闭报告](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/qa/native-manual-immunity-preserve-2026-10-01T13-41-02-327Z-83e6f31a.json)，SHA `cc1cb46e1dbff4d60c25c3f4b57f33edbbf97d6cf73676cd41e9160fd1da8bf0`：新GM只读回完整来源后原生关闭世界，全部LOCK释放，十三个旧世界和192份候选运行文件保持。
 
-本批限普通单患者、非共享池手动记录，依赖固定PF2e 8.5.1和Patreon 3.2.29源码及手动免疫补丁；自动首轮检查点仍仅Workbench。共享主人完成、Risky Surgery、多患者、延长及十二场景完整矩阵继续待完成。0.9.30此处仅记录候选实际验收，发行部署另行绑定证据。
+本批限普通单患者、非共享池手动记录，依赖固定PF2e 8.5.1和Patreon 3.2.29源码及手动免疫补丁；自动首轮检查点仍仅Workbench。共享主人完成、Risky Surgery、多患者、延长及十二场景完整矩阵继续待完成。
+
+0.9.30 已发布并与 Patreon 手动免疫补丁配对部署。[部署交接](/C:/Users/Taka/Desktop/fvtt/output/exploration-quality-goal-20260930/release-0930/handoff.json)，SHA `490dbcc242a9ba1d8fd00de19640469d7faec8c2de811fc932aa0d91f268f01b`，核对192份本模组运行文件和48份Patreon文件，保留3857个世界文件、其他模组、Core／PF2e、配置与服务。219份可服务文件HTTP字节一致，21份Patreon数据库文件由原生规则返回403，磁盘完整性仍全部核对。原部署回执为installed、safeToReplay=false，不能重放；该发行不表示完整goal或十二场景已完成。
 
 ### 首轮手动治疗检查点（0.9.29）
 

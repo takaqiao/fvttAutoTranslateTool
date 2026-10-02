@@ -44,16 +44,19 @@ export async function registerWorkbenchObservation({game,Hooks,recorder,ChatMess
    const kind=bmtw==='Treat Wounds'?'treatment':'battle-medicine',ward=kind==='treatment'&&healer.items.some(i=>i.slug==='ward-medic');
    const reservation=await recorder.beginCheckpointSource?.({sourceType:'workbench',kind,useId,actorUUID:healer.uuid,patientUUID:target.actor.uuid,riskySurgery:!!isRiskySurgery});
    const context={sourceSHA:WORKBENCH_SOURCE_SHA,adapterSHA,lexicalSource:true,useId,actorUUID:healer.uuid,patientUUID:target.actor.uuid,kind,continualRecovery:healer.items.some(i=>i.slug==='continual-recovery'),riskySurgery:!!isRiskySurgery,checkIds:[],stageIds:[],...reservation?{checkpointReservation:reservation}:{},...(ward?{groupId:`wb:${useId}:${healer.uuid}`,groupProof:`lexical:${WORKBENCH_SOURCE_SHA}:${useId}`}:{})};
-   const mark=data=>({...data,flags:{...data.flags,[MODULE_ID]:{...data.flags?.[MODULE_ID],explorationManual:{...context}}}});
-   const create=async(data,...args)=>{const m=await bases.ChatMessage.create(mark(data),...args);if(!data.flags?.treat_wounds_battle_medicine&&m?.id)context.checkIds.push(m.id);return m};
-   const skill=facade(skillUsed,{roll:async args=>skillUsed.roll({...args,extraRollOptions:[...args.extraRollOptions??[],`exploration-manual-use:${useId}`],callback:async(roll,outcome,message,...rest)=>{if(message?.id)context.checkIds.push(message.id);return args.callback?.(roll,outcome,message,...rest)}})});
-   class DamageRoll extends bases.DamageRoll{async toMessage(data,...args){const m=await super.toMessage(mark(data),...args);if(m?.id&&!data.flags?.treat_wounds_battle_medicine)context.stageIds.push(m.id);return m}}
+   const poolSource=await recorder.beginWorkbenchSource?.({context,healer,target,isCurrent:()=>macro.execute===execute&&macro.command===sourceCommand});
+   const observeCheck=async message=>{if(message?.id&&!context.checkIds.includes(message.id))context.checkIds.push(message.id);await recorder.observeWorkbenchCheck?.(poolSource,message)};
+   const observeResult=message=>recorder.observeWorkbenchResult?.(poolSource,message);
+   const mark=data=>{const marker=recorder.poolMarker?.(poolSource);return {...data,flags:{...data.flags,[MODULE_ID]:{...data.flags?.[MODULE_ID],explorationManual:{...context},...marker?{explorationManualPoolParticipation:marker}:{}}}}};
+   const create=async(data,...args)=>{const m=await bases.ChatMessage.create(mark(data),...args);if(!data.flags?.treat_wounds_battle_medicine&&m?.id)await observeCheck(m);else await observeResult(m);return m};
+   const skill=facade(skillUsed,{roll:async args=>skillUsed.roll({...args,extraRollOptions:[...args.extraRollOptions??[],`exploration-manual-use:${useId}`],callback:async(roll,outcome,message,...rest)=>{await observeCheck(message);return args.callback?.(roll,outcome,message,...rest)}})});
+   class DamageRoll extends bases.DamageRoll{async toMessage(data,...args){const m=await super.toMessage(mark(data),...args);if(m?.id&&!data.flags?.treat_wounds_battle_medicine)context.stageIds.push(m.id);await observeResult(m);return m}}
    // Assurance check creation uses this target's own ChatMessage facade.
    return {skill,DamageRoll,CheckRoll:bases.CheckRoll,ChatMessage:facade(bases.ChatMessage,{create})};
   };
   return original.call(clone,{...input,explorationManualTarget});
  };
- macro.execute=execute;decorated.add(macro);restores.push(()=>{if(macro.execute===execute)macro.execute=original});return macro;
+ macro.execute=execute;decorated.add(macro);recorder.observeWorkbenchProvider?.({macro,isCurrent:()=>game.packs.get('xdy-pf2e-workbench.asymonous-benefactor-macros-internal')===pack&&macro.execute===execute&&macro.command===sourceCommand});restores.push(()=>{if(macro.execute===execute)macro.execute=original});return macro;
  }
  const packs=[pack,game.packs.get('xdy-pf2e-workbench.asymonous-benefactor-macros')].filter(Boolean);
  for(const watchedPack of packs)for(const method of ['getDocument','getDocuments']){
@@ -71,13 +74,13 @@ export function workbenchFacts(message){
   effectiveOutcome:/4d8/.test(formula)&&/healing/.test(formula)?'criticalSuccess':/healing/.test(formula)?'success':f.dos===0?'criticalFailure':f.dos===1?'failure':null,actualFormula:formula};
 }
 /** Read-only recorder. No dice, damage application, or immunity writer is injected. */
-export function createManualEvents({game,Hooks,ledger,nativeActions,hpPools,patreonImmunity,observePatreonTerminal=true,bindRecordingSource,fromUuid,isAuthority=()=>game.user?.isGM&&game.users?.activeGM?.id===game.user.id,sessionId=()=>null,onChange=()=>{},reserveSource,checkpointOptions,onUnknownSource}){
+export function createManualEvents({game,Hooks,ledger,nativeActions,hpPools,manualPoolSources,manualPoolProof,patreonImmunity,observePatreonTerminal=true,bindRecordingSource,fromUuid,isAuthority=()=>game.user?.isGM&&game.users?.activeGM?.id===game.user.id,sessionId=()=>null,onChange=()=>{},reserveSource,checkpointOptions,onUnknownSource}){
  const seen=new Set(),orders=new Map(),records=new Map(),sourceToActivity=new Map(),sourceMarks=new Set();let evidenceTail=Promise.resolve(),hydratedSession;let unsubscribe,patreonDispose,hook,preHook,itemHook;const scopes=new Map();
  const bound=activity=>activity.temporalSource?.type==='checkpoint-reservation';
  async function evidenceOptions(activity){if(!bound(activity))return {};const options=await checkpointOptions?.(activity.checkpointBinding);if(!options)throw Error('session-driver-required');return options}
  const activityForMessage=messageId=>game.messages.get(messageId)?.flags?.[MODULE_ID]?.explorationManual?.checkpointReservation?.activityId??`manual:${messageId}`;
  const beginCheckpointSource=intent=>typeof reserveSource==='function'?reserveSource(null,intent):Promise.resolve(null);
- async function hydrate(sid){if(!sid||hydratedSession===sid||!isAuthority())return;const saved=await ledger.snapshot?.(sid);seen.clear();orders.clear();records.clear();sourceToActivity.clear();for(const a of saved?.activities??[]){if(!a.source?.manual)continue;seen.add(a.source.messageId??a.id.replace(/^manual:/,''));records.set(a.id,a);const next=orders.get(a.actorUUID)??0;orders.set(a.actorUUID,a.temporalSource?.type==='user-declared'?next+1:Math.max(next,(a.order??0)+1));for(const id of a.proof.resultIds??[])sourceToActivity.set(id,a.id)}hydratedSession=sid;await restoreImmunities()}
+ async function hydrate(sid){if(!sid||hydratedSession===sid||!isAuthority())return;const saved=await ledger.snapshot?.(sid);seen.clear();orders.clear();records.clear();sourceToActivity.clear();for(const a of saved?.activities??[]){if(!a.source?.manual)continue;seen.add(a.source.messageId??a.id.replace(/^manual:/,''));records.set(a.id,a);const next=orders.get(a.actorUUID)??0;orders.set(a.actorUUID,a.temporalSource?.type==='user-declared'?next+1:Math.max(next,(a.order??0)+1));for(const id of a.proof.resultIds??[])sourceToActivity.set(id,a.id)}hydratedSession=sid;await restoreImmunities();for(const activity of records.values())if(activity.state==='awaiting-evidence'&&Object.values(activity.proof.poolApplications??{}).some(claim=>claim.state==='settled'))await applyEvidence(activity.id,old=>({proof:{...old.proof}}))}
  async function trustedEnrollment(e,session){
   if(Array.isArray(session?.actorUUIDs)&&(!session.actorUUIDs.includes(e.actorUUID)||(e.patientUUIDs??[]).some(uuid=>!session.actorUUIDs.includes(uuid))))return false;
   if(!game.users||!['treatment','battle-medicine'].includes(e.kind))return true;
@@ -120,7 +123,7 @@ export function createManualEvents({game,Hooks,ledger,nativeActions,hpPools,patr
    if(!isAuthority()||sessionId()!==sid||e.expectedSessionId!==undefined&&e.expectedSessionId!==sid||ledger.getSession&&current?.status!=='recording')throw Error('manual-session-changed');
    if(!user?.active||!actor?.testUserPermission?.(user,'OWNER')||!current?.actorUUIDs?.includes(actor.uuid))throw Error('manual-actor-not-allowed');
   }
-  if(hpPools&&['treatment','battle-medicine'].includes(e.kind)){const missing=new Set(e.missing??[]);for(const uuid of e.patientUUIDs??[]){try{const actor=await fromUuid(uuid),pool=hpPools.discover(actor);if(!pool.ready)missing.add('hp-pool-source-unavailable');else if(pool.poolUUID!==uuid)missing.add('shared-hp-completion-unavailable')}catch{missing.add('hp-pool-source-unavailable')}}e={...e,missing:[...missing]}}
+  if(hpPools&&['treatment','battle-medicine'].includes(e.kind)){const missing=new Set(e.missing??[]),pools=new Set();for(const uuid of e.patientUUIDs??[]){try{const actor=await fromUuid(uuid),pool=hpPools.discover(actor);if(!pool.ready)missing.add('hp-pool-source-unavailable');else{pools.add(pool.poolUUID);if(pool.poolUUID!==uuid||pool.memberUUIDs?.some(member=>member!==uuid))missing.add('shared-hp-completion-unavailable')}}catch{missing.add('hp-pool-source-unavailable')}}e={...e,hpPoolUUIDs:[...pools],missing:[...missing]}}
   if(seen.has(e.id)){const old=records.get(`manual:${e.id}`)??await ledger.getActivity?.(`manual:${e.id}`);if(!old||old.state!=='awaiting-evidence'||old.kind==='activity'||e.kind==='activity')return null;const proof={...old.proof};for(const key of ['checkIds','resultIds','receiptIds','immunityIds'])proof[key]=[...new Set([...(proof[key]??[]),...(e[key]??[])])];const options={...old.options};for(const key of ['sourceDegree','effectiveOutcome','rolledHealing'])if(e[key]!==undefined)options[key]=e[key];const patch={proof,options,...e.treatmentImmunitySeconds!==undefined?{treatmentImmunitySeconds:e.treatmentImmunitySeconds}:{}};const updated={...old,...patch};await ledger.transitionActivity?.(old.id,{expected:['awaiting-evidence'],patch});records.set(old.id,updated);for(const id of proof.resultIds)sourceToActivity.set(id,old.id);return updated}
   seen.add(e.id);const nextOrder=orders.get(e.actorUUID)??0,order=e.kind==='activity'?(e.order??nextOrder):nextOrder;orders.set(e.actorUUID,nextOrder+1);
   const start=game.time.worldTime,duration=Number.isFinite(e.durationSeconds)?e.durationSeconds:0;
@@ -132,7 +135,10 @@ export function createManualEvents({game,Hooks,ledger,nativeActions,hpPools,patr
 
  async function applyEvidence(identity,edit){if(!isAuthority())return;const id=typeof identity==='function'?identity():identity;if(!id)return;const old=await ledger.getActivity?.(id)??records.get(id);if(!old||old.state!=='awaiting-evidence')return;const patch=await edit(structuredClone(old));if(!patch)return;
   // Persisted proof IDs are history; completion must use the currently authorized native receipts.
-  const candidate={...old,...patch},native=candidate.source.type==='native-action',patients=new Map();let immunity,receipts=[];
+  const candidate={...old,...patch},native=candidate.source.type==='native-action',patients=new Map();let immunity,poolProof,receipts=[];
+  const sourceDocuments=[...candidate.proof.checkIds,...candidate.proof.resultIds].map(id=>game.messages.get(id));
+  const sourceSnapshot=()=>canonicalJSON(sourceDocuments.map(message=>message?({speaker:message.speaker,flags:message.flags,rolls:message.rolls?.map(roll=>roll.toJSON?.()??roll)}):null));
+  const sourceBefore=sourceSnapshot();
   if(['treatment','battle-medicine'].includes(candidate.kind)){
    if(candidate.source.type==='native-action'){
     const immunity=await patreonImmunity?.evidence(candidate.proof.nativeImmunity,candidate),missing=new Set(candidate.options.missing.filter(m=>m!=='native-immunity-receipt'));
@@ -141,26 +147,50 @@ export function createManualEvents({game,Hooks,ledger,nativeActions,hpPools,patr
     candidate.options={...candidate.options,missing:[...missing]};
    }
    for(const receiptId of candidate.proof.receiptIds)receipts.push(await resolveReceipt(game.messages.get(receiptId)));
+   for(const resolved of receipts)if(resolved?.patient)patients.set(resolved.patientUUID,resolved.patient);
+   if(candidate.source.type==='workbench')for(const uuid of candidate.patientUUIDs)if(!patients.has(uuid))patients.set(uuid,await fromUuid?.(uuid));
    patch.options=currentApplicationEvidence(candidate,old.options.missing.includes('native-application-receipt'),receipts);
    if(candidate.source.type==='native-action'){
     immunity=await patreonImmunity?.evidence(candidate.proof.nativeImmunity,candidate);
    }
   }
   const options=await evidenceOptions(old);
+  if(!bound(candidate))poolProof=await manualPoolProof?.evidence(candidate);
+  function poolMissing(activity,missing){
+   missing.delete('shared-hp-completion-unavailable');missing.delete('hp-pool-source-unavailable');
+   for(const uuid of activity.patientUUIDs){const patient=patients.get(uuid),pool=patient&&hpPools?.discover(patient);if(!hpPools)continue;if(!pool?.ready||!activity.hpPoolUUIDs.includes(pool.poolUUID))missing.add('hp-pool-source-unavailable');else if(pool.poolUUID!==uuid||pool.memberUUIDs?.some(member=>member!==uuid)){if(poolProof?.poolUUID!==pool.poolUUID||poolProof.isCurrent(activity)!==true)missing.add('shared-hp-completion-unavailable')}}
+  }
   function currentNativeOptions(activity){
    const missing=new Set(activity.options.missing.filter(m=>m!=='native-immunity-receipt'));
    if(immunity?.isCurrent(activity)!==true)missing.add('native-immunity-receipt');
-   for(const uuid of activity.patientUUIDs){const patient=patients.get(uuid),pool=patient&&hpPools?.discover(patient);if(!pool?.ready)missing.add('hp-pool-source-unavailable');else if(pool.poolUUID!==uuid||pool.memberUUIDs?.some(member=>member!==uuid))missing.add('shared-hp-completion-unavailable')}
+   poolMissing(activity,missing);
    return currentApplicationEvidence({...activity,options:{...activity.options,missing:[...missing]}},old.options.missing.includes('native-application-receipt'),receipts);
   }
-  if(native)patch.options=currentNativeOptions({...candidate,options:patch.options??candidate.options});
+  function currentOrdinaryOptions(activity){
+   if(native)return currentNativeOptions(activity);
+   const missing=new Set(activity.options.missing),ids=[...activity.proof.checkIds,...activity.proof.resultIds];
+   if(!sourceDocuments.slice(0,activity.proof.checkIds.length).every(Boolean)||sourceDocuments.every(Boolean)&&(ids.length!==sourceDocuments.length||ids.some((id,index)=>game.messages.get(id)!==sourceDocuments[index])||sourceSnapshot()!==sourceBefore))missing.add('native-source-identity-unproven');
+   poolMissing(activity,missing);
+   for(const uuid of activity.proof.immunityIds){const patient=patients.get(uuid.split('.Item.')[0]),item=patient?.items?.get(uuid.split('.Item.')[1]);if(!item||!immunityEvidence(item,item.flags?.[MODULE_ID]?.explorationManualImmunity?.creatorId))missing.add('native-immunity-receipt')}
+   return currentApplicationEvidence({...activity,options:{...activity.options,missing:[...missing]}},old.options.missing.includes('native-application-receipt'),receipts);
+  }
+  const ordinary=!bound(candidate)&&['native-action','workbench'].includes(candidate.source.type)&&['treatment','battle-medicine'].includes(candidate.kind);
+  if(ordinary)patch.options=currentOrdinaryOptions({...candidate,options:patch.options??candidate.options});
   if(['treatment','battle-medicine'].includes(candidate.kind)){if(!patch.options.missing.length)patch.state='confirmed';else if(patch.state==='confirmed')delete patch.state}
   // The private guard is evaluated inside the ledger mutation and immediately
   // before revision submission. No later UUID lookup can reopen this boundary.
-  const updated=await ledger.transitionActivity?.(id,{expected:['awaiting-evidence'],patch,...options,
-   ...native?{expectedSessionStatus:'recording',...patch.state==='confirmed'?{evidenceGuard:activity=>currentNativeOptions(activity).missing.length===0}:{}}:{}})??{...old,...patch};
+  const ordinaryProof=Object.fromEntries(Object.entries(patch.proof??{}).filter(([key])=>['useId','checkIds','resultIds','receiptIds','immunityIds','nativeImmunity'].includes(key)));
+  const updated=ordinary?await ledger.appendManualEvidence(id,{activity:old,proof:ordinaryProof,
+   resolveOptions:activity=>currentOrdinaryOptions({...activity,options:{...activity.options,...patch.options}})})
+   :await ledger.transitionActivity?.(id,{expected:['awaiting-evidence'],patch,...options})??{...old,...patch};
   records.set(id,updated);onChange(updated);return updated}
  function appendEvidence(identity,edit){const task=evidenceTail.then(async()=>{if(!isAuthority())return;await hydrate(sessionId());return applyEvidence(identity,edit)});evidenceTail=task.catch(()=>{});return task}
+ async function observePoolSource(source){
+  const message=game.messages.get(source.sourceType==='native-action'?source.checkId:source.resultId);let event;
+  if(source.sourceType==='native-action'){event=nativeCheckEvent(message);if(event)event={...event,resultIds:[source.resultId]}}
+  else{const meta=message?.flags?.[MODULE_ID]?.explorationManual,facts=message&&workbenchFacts(message);if(meta&&facts)event={id:message.id,actorUUID:meta.actorUUID,patientUUIDs:[meta.patientUUID],kind:meta.kind,durationSeconds:600,treatmentImmunitySeconds:meta.continualRecovery?600:3600,useId:meta.useId,checkIds:[source.checkId],resultIds:[source.resultId],source:{type:'workbench',sourceSHA:meta.sourceSHA,lexicalSource:true},...facts,missing:['native-application-receipt','native-immunity-receipt']}}
+  if(!event)return null;const activity=await observe(event);return activity??ledger.getActivity(source.activityId);
+ }
  function nativeCheckEvent(message){
   const meta=message?.flags?.[MODULE_ID]?.explorationManualNative,c=message?.flags?.pf2e?.context;
   if(game.messages.get(message?.id)!==message||message?.isCheckRoll===false||!meta?.patientUUID||!c?.options?.includes(meta.tag)||c.origin?.actor!==`Actor.${message.speaker?.actor}`)return null;
@@ -223,7 +253,9 @@ export function createManualEvents({game,Hooks,ledger,nativeActions,hpPools,patr
   const expected=previouslyMissing||required.length>0||activity.proof.receiptIds.length>0,missing=activity.options.missing.filter(m=>m!=='native-application-receipt');
   const stages=activity.source.type==='native-action'?Array.from(game.messages?.contents??game.messages?.values?.()??[]).filter(child=>activity.proof.checkIds.includes(child.flags?.pf2e?.origin?.messageId)):[];
   const nativeStageCount=activity.source.type==='native-action'&&(required.length!==1||stages.length!==1||stages[0]?.id!==required[0])&&!patreonImmunity?.noApplication(activity);
-  const nativeReceiptCount=activity.source.type==='native-action'&&(activity.proof.receiptIds.length!==1||required.some(id=>{
+  const wb=game.messages.get(required[0])?.flags?.[MODULE_ID]?.explorationManual;
+  const singleWorkbench=activity.source.type==='workbench'&&!bound(activity)&&activity.patientUUIDs.length===1&&required.length===1&&wb?.riskySurgery===false&&!wb.stageIds?.length;
+  const nativeReceiptCount=(activity.source.type==='native-action'||singleWorkbench)&&(activity.proof.receiptIds.length!==1||required.some(id=>{
    const resolved=receipts.find(receipt=>receipt?.sourceMessage?.id===id);if(!resolved)return true;
    const current=Array.from(game.messages?.contents??game.messages?.values?.()??[]).filter(message=>{
     const uid=message?.author?.id??message?.author??message?.user?.id??message?.user;
@@ -320,8 +352,10 @@ export function createManualEvents({game,Hooks,ledger,nativeActions,hpPools,patr
     // ordinary native actions on their existing recording path outside it.
     if(reserveSource)await reserveSource(null,{sourceType:'native-action',kind:'treatment',useId:uuid,actorUUID:scope.params.actors?.[0]?.uuid,patientUUID:(scope.params.target?.actor??scope.params.target)?.uuid});
     let recordingSource;try{recordingSource=await bindRecordingSource?.(scope.actors?.[0]?.uuid??scope.params.actors?.[0]?.uuid)}catch{}
-    scope.tagRollOption(tag);scopes.set(tag,{scope,uuid,startedAt:recordingSource?.startedAt??game.time.worldTime,recordingSessionId:recordingSource?.sessionId});
+   scope.tagRollOption(tag);let poolSource;try{poolSource=await manualPoolSources?.beginNative(scope,{useId:uuid,tag})}catch(error){onChange({error:error.message})}
+   scopes.set(tag,{scope,uuid,poolSource,startedAt:recordingSource?.startedAt??game.time.worldTime,recordingSessionId:recordingSource?.sessionId});
    try{const result=await next();for(const row of result??[]){const m=row.message,c=m?.flags?.pf2e?.context;if(game.messages.get(m?.id)!==m||!c?.options?.includes(tag)||row.actor?.uuid!==c.origin?.actor||m.speaker?.actor!==row.actor.id)continue;
+    try{await manualPoolSources?.nativeCheck(poolSource,row)}catch(error){onChange({error:error.message})}
     const patientUUID=m.flags?.[MODULE_ID]?.explorationManualNative?.patientUUID??(scope.params.target?.actor??scope.params.target)?.uuid;
     const event=nativeCheckEvent(m);if(event)await observe(event);else if(patientUUID)await observe({id:m.id,actorUUID:row.actor.uuid,patientUUIDs:[patientUUID],kind:'treatment',durationSeconds:600,treatmentImmunitySeconds:row.actor.items?.some(i=>i.slug==='continual-recovery')?600:3600,useId:uuid,checkIds:[m.id],resultIds:[],source:{type:'native-action',tag},effectiveOutcome:row.outcome,missing:['native-application-receipt','native-immunity-receipt']});}return result;
    }finally{scopes.delete(tag)}
@@ -330,14 +364,14 @@ export function createManualEvents({game,Hooks,ledger,nativeActions,hpPools,patr
    try{
    const c=(data.flags??m.flags)?.pf2e?.context,tag=c?.options?.find(o=>scopes.has(o));if(!tag||c.type&&c.type!=='skill-check')return;const current=scopes.get(tag),target=current.scope.params.target?.actor??current.scope.params.target;
    const actualTarget=typeof c.target?.actor==='string'?c.target.actor:null,patientUUID=actualTarget&&(!target?.uuid||target.uuid===actualTarget)?actualTarget:target?.uuid??null;
-   const flags=data.flags??=m.flags;flags[MODULE_ID]={...flags[MODULE_ID],explorationManualNative:{tag,useId:current.uuid,patientUUID,startedAt:current.startedAt,...current.recordingSessionId?{recordingSessionId:current.recordingSessionId}:{},riskySurgery:current.scope.params.selection?!!current.scope.params.selection.feats?.['risky-surgery']:!!c.options?.includes('risky-surgery')||!!flags.pf2e?.modifiers?.some(i=>i.slug==='risky-surgery'&&i.enabled),continualRecovery:current.scope.params.actors?.[0]?.items?.some?.(i=>i.slug==='continual-recovery')??m.actor?.items?.some?.(i=>i.slug==='continual-recovery')??false}};m.updateSource?.({flags});
+   const flags=data.flags??=m.flags,marker=manualPoolSources?.poolMarker?.(current.poolSource);flags[MODULE_ID]={...flags[MODULE_ID],...marker?{explorationManualPoolParticipation:marker}:{},explorationManualNative:{tag,useId:current.uuid,patientUUID,startedAt:current.startedAt,...current.recordingSessionId?{recordingSessionId:current.recordingSessionId}:{},riskySurgery:current.scope.params.selection?!!current.scope.params.selection.feats?.['risky-surgery']:!!c.options?.includes('risky-surgery')||!!flags.pf2e?.modifiers?.some(i=>i.slug==='risky-surgery'&&i.enabled),continualRecovery:current.scope.params.actors?.[0]?.items?.some?.(i=>i.slug==='continual-recovery')??m.actor?.items?.some?.(i=>i.slug==='continual-recovery')??false}};m.updateSource?.({flags});
    }catch{if(data.flags?.[MODULE_ID])delete data.flags[MODULE_ID].explorationManualNative}
   });
   hook=Hooks?.on('createChatMessage',m=>{
    const native=m.flags?.[MODULE_ID]?.explorationManualNative,c=m.flags?.pf2e?.context;
    if(c?.type==='damage-taken'){captureReceipt(m);return}
    if(native&&c?.options?.includes(native.tag)&&c.origin?.actor===`Actor.${m.speaker?.actor}`){
-    const origin=m.flags.pf2e.origin?.messageId;if(origin){const root=game.messages.get(origin);if(game.messages.get(m.id)!==m||root?.isCheckRoll!==true||root.flags?.[MODULE_ID]?.explorationManualNative?.useId!==native.useId||root.speaker?.actor!==m.speaker?.actor)return;void markResult(m).then(()=>appendEvidence(`manual:${origin}`,old=>{sourceToActivity.set(m.id,old.id);return {proof:{...old.proof,resultIds:[...new Set([...old.proof.resultIds,m.id])]}}})).catch(error=>onChange({error:error.message}));return}
+    const origin=m.flags.pf2e.origin?.messageId;if(origin){const root=game.messages.get(origin);if(game.messages.get(m.id)!==m||root?.isCheckRoll!==true||root.flags?.[MODULE_ID]?.explorationManualNative?.useId!==native.useId||root.speaker?.actor!==m.speaker?.actor)return;void markResult(m).then(async()=>{await manualPoolSources?.nativeResult(m);return appendEvidence(`manual:${origin}`,old=>{sourceToActivity.set(m.id,old.id);return {proof:{...old.proof,resultIds:[...new Set([...old.proof.resultIds,m.id])]}}})}).catch(error=>onChange({error:error.message}));return}
     const event=nativeCheckEvent(m);if(event)void observe(event).catch(error=>onChange({error:error.message}));return}
    const f=m.flags?.[MODULE_ID]?.explorationManual;if(!f?.lexicalSource||f.sourceSHA!==WORKBENCH_SOURCE_SHA)return;
     if(m.rolls?.[0]?._evaluated)void queueResultMark(m).catch(error=>onChange({error:error.message}));
@@ -346,5 +380,14 @@ export function createManualEvents({game,Hooks,ledger,nativeActions,hpPools,patr
     void observe({id:m.id,actorUUID:f.actorUUID,patientUUIDs:[f.patientUUID],kind:f.kind,durationSeconds:f.kind==='treatment'?600:6,treatmentImmunitySeconds:f.kind==='treatment'?(f.continualRecovery?600:3600):undefined,useId:f.useId,groupId:f.groupId,groupProof:f.groupProof,checkpointReservation:f.checkpointReservation,checkIds:f.checkIds??[],resultIds:[...(f.stageIds??[]),m.id],source:{type:'workbench',sourceSHA:f.sourceSHA,adapterSHA:f.adapterSHA,lexicalSource:true,adapter:'target-callback-instrumentation-v1'},...facts,missing:[...noApplication?[]:['native-application-receipt'],'native-immunity-receipt']}).catch(error=>onChange({error:error.message}));
   });
  }
- return {start,stop(){unsubscribe?.();unsubscribe=null;patreonDispose?.();patreonDispose=null;if(hook)Hooks.off('createChatMessage',hook);if(preHook)Hooks.off('preCreateChatMessage',preHook);if(itemHook)Hooks.off('createItem',itemHook);hook=null;preHook=null;itemHook=null},observe,observeNativeImmunity:recordPatreonImmunity,bindImmunity,beginCheckpointSource,flushCheckpoint};
+ return {start,stop(){unsubscribe?.();unsubscribe=null;patreonDispose?.();patreonDispose=null;if(hook)Hooks.off('createChatMessage',hook);if(preHook)Hooks.off('preCreateChatMessage',preHook);if(itemHook)Hooks.off('createItem',itemHook);hook=null;preHook=null;itemHook=null},observe,observeNativeImmunity:recordPatreonImmunity,bindImmunity,beginCheckpointSource,flushCheckpoint,
+  observePoolSource,refreshPoolEvidence:id=>appendEvidence(id,async old=>{
+   const receipts=new Set(old.proof.receiptIds);
+   for(const claim of Object.values(old.proof.poolApplications??{}))if(claim.state==='settled'){
+    const message=game.messages.get(claim.terminal?.receiptId);
+    if(message&&await trustedReceipt(message,old))receipts.add(message.id);
+   }
+   return {proof:{...old.proof,receiptIds:[...receipts]}};
+  }),
+  poolMarker:source=>manualPoolSources?.poolMarker?.(source),observeWorkbenchProvider:witness=>manualPoolSources?.observeWorkbenchProvider?.(witness),beginWorkbenchSource:async source=>{try{return await manualPoolSources?.beginWorkbench(source)}catch(error){onChange({error:error.message});return null}},observeWorkbenchCheck:async(source,message)=>{try{return await manualPoolSources?.workbenchCheck(source,message)}catch(error){onChange({error:error.message})}},observeWorkbenchResult:async(source,message)=>{try{await queueResultMark(message);return await manualPoolSources?.workbenchResult(source,message)}catch(error){onChange({error:error.message})}}};
 }

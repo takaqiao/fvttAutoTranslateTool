@@ -58,14 +58,14 @@ export async function verifyNativeIWRBridge(options={}){
   try{sourceSHA256=await digest(hash,sourceSnapshot);}catch(error){return diagnostic('hash-failed',profile,{detail:String(error.message??error)});}
   let reason=changed();if(reason)return diagnostic(reason,profile);
   if(sourceSHA256===profile.originalSHA256)return diagnostic('bridge-not-installed',profile,{actualSHA256:sourceSHA256});
-  if(sourceSHA256!==profile.patchedSHA256)return diagnostic('unknown-system-source',profile,{actualSHA256:sourceSHA256,expectedSHA256:profile.patchedSHA256});
+  if(sourceSHA256!==profile.patchedSHA256&&sourceSHA256!==profile.sharedManualCompositionSHA256)return diagnostic('unknown-system-source',profile,{actualSHA256:sourceSHA256,expectedSHA256:profile.patchedSHA256});
   if(!matchesProfile(retained,profile))return diagnostic('native-bridge-invalid',profile);
   const methodSource=Function.prototype.toString.call(retained.applyDamage);
   let applyDamageSHA256;
   try{applyDamageSHA256=await digest(hash,methodSource);}catch(error){return diagnostic('hash-failed',profile,{detail:String(error.message??error)});}
   reason=changed();if(reason)return diagnostic(reason,profile);
   if(applyDamageSHA256!==profile.applyDamageSHA256)return diagnostic('native-method-sha-mismatch',profile,{actualSHA256:applyDamageSHA256,expectedSHA256:profile.applyDamageSHA256});
-  const proof=Object.freeze({ready:true,reason:'verified',bridge,systemVersion:profile.systemVersion,patchedSHA256:profile.patchedSHA256,applyDamageSHA256});
+  const proof=Object.freeze({ready:true,reason:'verified',bridge,systemVersion:profile.systemVersion,patchedSHA256:sourceSHA256,applyDamageSHA256});
   snapshots.set(proof,Object.freeze(snapshot));issued.add(proof);
   return proof;
  }catch(error){return diagnostic('verification-error',profile,{detail:String(error.message??error)});}

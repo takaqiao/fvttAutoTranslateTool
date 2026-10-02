@@ -13,6 +13,7 @@ export const NATIVE_IWR_PROFILES=Object.freeze({
   systemVersion:'8.5.1',
   originalSHA256:'8fa38a2fcbf848ad967c75876ca33ebf5a46fb7d6a8cc90d8323c0fb5d471bc7',
   patchedSHA256:'d63da8312831b84905e6866b1dd3f9d93e95c1012955b0177ad2ce8ccf246157',
+  sharedManualCompositionSHA256:'9be357c96dff3d0790edcb0d7889db98cfded0f41f34fd161233ea0bdd0dab11',
   applyDamageSHA256:'cd1d391b7d4c2c8f3b11b903c477a5e6e330343a94ba51dd5ddebbe610adcb5a',
   protocol:NATIVE_IWR_BRIDGE_PROTOCOL,
   callbackSignature:'?.nativeDamageIWR?.(this, arguments[0], f, r, { actorDamage: x - O - ie, shieldDamage: te })',

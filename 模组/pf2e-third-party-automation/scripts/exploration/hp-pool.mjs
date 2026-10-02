@@ -1,3 +1,5 @@
+import {canonicalJSON} from './revision-codec.mjs';
+
 export function deduplicatePoolEffects(effects) {
   const selected=new Map();
   for(const e of effects){const key=JSON.stringify([e.poolUUID,e.effectId]);if(!selected.has(key)||selected.get(key).amount<e.amount)selected.set(key,e)}
@@ -6,8 +8,16 @@ export function deduplicatePoolEffects(effects) {
 const health=a=>a?.modules?.['pf2e-toolbelt']?.shareData?.data?.health===true;
 const changed=(changes,path)=>Object.hasOwn(changes??{},path)?changes[path]:path.split('.').reduce((v,p)=>v?.[p],changes);
 const hpFields=changes=>Object.fromEntries(['system.attributes.hp.value','system.attributes.hp.sp.value','system.attributes.hp.temp'].map(k=>[k,k in changes?changes[k]:k.split('.').reduce((v,p)=>v?.[p],changes)]).filter(([,v])=>v!==undefined));
+export function manualHpBaseline(actor){
+  const hp=actor?.hitPoints??actor?.system?.attributes?.hp,sp=actor?.system?.attributes?.hp?.sp;
+  if(!hp||['value','max','temp'].some(key=>!Number.isFinite(hp[key])||hp[key]<0)||sp!==undefined&&(!sp||['value','max'].some(key=>!Number.isFinite(sp[key])||sp[key]<0)))throw Error('manual-pool-hp-inputs-unavailable');
+  return {value:hp.value,max:hp.max,temp:hp.temp,...sp===undefined?{}:{sp:{value:sp.value,max:sp.max}}};
+}
+export function assertManualHpBaseline(actor,baseline){
+  if(canonicalJSON(manualHpBaseline(actor))!==canonicalJSON(baseline))throw Error('manual-pool-hp-baseline-changed');
+}
 export function createHpPools({game,actorUpdateEvents}) {
-  let active=null,forwarding=null;
+  let active=null,forwarding=null,manual=null;
   function discover(actor) {
     const api=game.toolbelt?.api?.shareData;
     let enabled=false;try{enabled=game.modules?.get('pf2e-toolbelt')?.active===true&&game.settings.get('pf2e-toolbelt','shareData.enabled')===true}catch{}
@@ -38,6 +48,11 @@ export function createHpPools({game,actorUpdateEvents}) {
   }
   const unregister=actorUpdateEvents?.addActorUpdateMiddleware(function(wrapped,changes={},options={}){
     const scope=active,fields=hpFields(changes);
+    if(manual&&this.uuid===manual.patient.uuid&&Object.keys(fields).length){
+      if(this!==manual.updateActor)throw Error('manual-pool-update-instance-mismatch');
+      const pending=manual;pending.checkWrite(changes);if(pending.fields)throw Error('duplicate-patient-hp-write');pending.fields=structuredClone(fields);
+      const promise=wrapped(changes,options);if(pending.direct)pending.observeMaster(promise);return promise;
+    }
     if(forwarding&&Object.keys(fields).length){
       const current=discover(forwarding.patient);
       if(this.uuid!==forwarding.patient.uuid&&this.uuid===current.poolUUID&&this.uuid!==forwarding.pool.poolUUID)return rejectForward(forwarding,Error('hp-pool-domain-changed'));
@@ -56,7 +71,7 @@ export function createHpPools({game,actorUpdateEvents}) {
     try{return wrapped(changes,options)}finally{forwarding=previous}
   });
   async function withNativeApplication(activity,patient,operation) {
-    if(active)throw Error('hp-application-busy');const pool=discover(patient);if(!pool.ready)throw Error(pool.reason);
+    if(active||manual)throw Error('hp-application-busy');const pool=discover(patient);if(!pool.ready)throw Error(pool.reason);
     if(Object.hasOwn(activity,'hpPoolUUIDs')&&(!Array.isArray(activity.hpPoolUUIDs)||!activity.hpPoolUUIDs.includes(pool.poolUUID)))throw Error('hp-pool-domain-changed');
     const shared=pool.poolUUID!==patient.uuid;
     const master=shared?game.toolbelt.api.shareData.getMasterInMemory(patient):patient;
@@ -88,5 +103,73 @@ export function createHpPools({game,actorUpdateEvents}) {
       return {result,poolReceipt:{activityId:activity.id,actorUUID:pool.poolUUID,patientUUID:patient.uuid,before,after,fields:scope.fields,provider:pool.provider}};
     }finally{if(shared&&preUpdate&&patient._preUpdate===preUpdate)patient._preUpdate=originalPreUpdate;active=null}
   }
-  return {discover,withNativeApplication,dispose:()=>unregister?.()};
+  async function withManualApplication({permit,provider,validate,request,prepareForward,remoteCompletion,updateActor},patient,operation){
+    updateActor??=patient;
+    if(active||manual)throw Error('hp-application-busy');
+    if(!actorUpdateEvents||typeof operation!=='function'||typeof validate!=='function'||provider?.descriptor?.sourceSHA256!=='2946fa27eaf0963098f9f48ee48f777c5cf65166b56b043de9404f09813c240f'||provider.descriptor.version!==1||provider.descriptor.hpBaselineGuardVersion!==1||typeof provider.subscribe!=='function')throw Error('manual-pool-provider-unavailable');
+    const pool=discover(patient),master=pool.poolUUID===patient.uuid?patient:game.toolbelt?.api?.shareData?.getMasterInMemory(patient);
+    if(!pool.ready||!master||pool.poolUUID!==permit.poolUUID||patient.uuid!==permit.selectedPatientUUID||pool.provider!=='pf2e-toolbelt')throw Error('manual-pool-domain-mismatch');
+    const direct=pool.poolUUID===patient.uuid;
+    const binding={permitNonce:permit.permitNonce,applicationNonce:permit.applicationNonce,ownerUserId:permit.ownerUserId,patientUUID:patient.uuid,poolUUID:pool.poolUUID};
+    if(updateActor?.uuid!==patient.uuid)throw Error('manual-pool-update-instance-mismatch');
+    const scope={patient,updateActor,pool,masterId:master.id,direct,fields:null,options:null,forwarded:false,masterPromise:null};
+    const check=changes=>{
+      const token=patient.token?.document??patient.token;
+      if(token?token.actor!==patient||token.parent?.tokens?.get(token.id)!==token:game.actors?.get(patient.id)!==patient)throw Error('manual-pool-patient-instance-changed');
+      const current=discover(patient);if(validate()!==true||!current.ready||current.poolUUID!==pool.poolUUID||(!direct&&game.toolbelt.api.shareData.getMasterInMemory(patient)!==master)||(direct&&!master.isOwner))throw Error('manual-pool-evidence-changed');
+      const incoming=changed(changes,'flags.pf2e-toolbelt.shareData');
+      if(incoming!==undefined||changed(changes,'flags.pf2e-toolbelt.shareData.data.master')!==undefined||changed(changes,'flags.pf2e-toolbelt.shareData.data.health')!==undefined)throw Error('hp-pool-domain-changed');
+    };
+    scope.check=check;check();
+    const baseline=manualHpBaseline(master);
+    // The contextual clone can outlive a claim await. Compare all native HP
+    // inputs until the original master write starts, never after its success.
+    const checkWrite=changes=>{
+      check(changes);
+      if(!scope.writeStarted)for(const actor of [master,patient,updateActor])assertManualHpBaseline(actor,baseline);
+    };
+    scope.checkWrite=checkWrite;checkWrite();
+    const hp=master.system?.attributes?.hp??{},before=Object.fromEntries(['value','max','temp','sp'].filter(k=>hp[k]!==undefined).map(k=>[k,structuredClone(hp[k])]));
+    scope.observeMaster=promise=>{
+      scope.forwarded=true;const writer=game.user;
+      scope.masterPromise=(async()=>{if(!promise||typeof promise.then!=='function')throw Error('manual-pool-native-promise-required');const saved=await promise;check();if(saved!==master||game.user!==writer)throw Error('manual-pool-forward-unconfirmed');return {binding,poolUUID:pool.poolUUID,writerUserId:writer.id,fields:scope.fields,before,terminal:'fulfilled'}})();scope.masterPromise.catch(()=>{});
+    };
+    manual=scope;
+    const dispose=provider.subscribe(event=>{
+      if(event.phase==='prepare'&&event.patient===patient){
+        return (async()=>{checkWrite();if(!scope.fields||scope.forwarded||event.options!==scope.options||event.master!==master||canonicalJSON(event.fields)!==canonicalJSON(scope.fields))throw Error('manual-pool-forward-mismatch');scope.forwarded=true;if(!master.isOwner){if(typeof prepareForward!=='function')throw Error('manual-pool-forward-authorization-required');await prepareForward(scope.fields,baseline);checkWrite()}return {binding,validate:()=>{check();return true},beforeWrite:()=>{checkWrite();scope.writeStarted=true;return true}}})();
+      }
+      if(event.phase==='write'&&event.binding?.applicationNonce===binding.applicationNonce){
+        if(!scope.forwarded||scope.masterPromise||event.master!==master||canonicalJSON(event.fields)!==canonicalJSON(scope.fields)||canonicalJSON(event.binding)!==canonicalJSON(binding))throw Error('manual-pool-terminal-mismatch');
+        scope.masterPromise=event.terminalPromise;
+      }
+    });
+    const original=patient._preUpdate;
+    if(typeof original!=='function'){manual=null;dispose();throw Error('manual-pool-native-preupdate-required')}
+    const wrapped=async function(changes,options,...args){
+      if(this!==patient||!manual?.fields)return original.call(this,changes,options,...args);
+      checkWrite(changes);if(canonicalJSON(hpFields(changes))!==canonicalJSON(scope.fields))throw Error('manual-pool-forward-mismatch');scope.options=options;
+      try{
+        const result=await original.call(this,changes,options,...args);
+        // A directly treated master has no Toolbelt forwarding callback. Core
+        // resolves its canonical pre-update before dispatching the saved delta.
+        if(direct){checkWrite(changes);scope.writeStarted=true}
+        return result;
+      }finally{scope.options=null}
+    };
+    patient._preUpdate=wrapped;
+    try{
+      checkWrite();const originalPromise=operation();if(!originalPromise||typeof originalPromise.then!=='function')throw Error('manual-pool-native-promise-required');const result=await originalPromise;check();
+      const receipt=result?.receipt;
+      const receiptCurrent=()=>{const pf=receipt?.flags?.pf2e;return !!receipt&&game.messages?.get(receipt.id)===receipt&&receipt.speaker?.actor===patient.id&&pf?.context?.type==='damage-taken'&&pf.context.options?.includes(`pf2e-third-party-automation:source:${request.resultId}:${request.rollIndex}`)&&!pf.appliedDamage?.isReverted};
+      if(!receiptCurrent())throw Error('manual-pool-receipt-unavailable');const pf=receipt.flags.pf2e,receiptSource=()=>canonicalJSON(typeof receipt.toObject==='function'?receipt.toObject(true):{speaker:receipt.speaker,flags:receipt.flags}),savedReceiptSource=receiptSource();
+      if(!scope.forwarded){checkWrite();if(scope.fields||pf.appliedDamage!==null)throw Error('manual-pool-forward-unconfirmed');return {result,poolReceipt:{actorUUID:pool.poolUUID,patientUUID:patient.uuid,receiptId:receipt.id,noChange:true}}}
+      if(pf.appliedDamage?.uuid!==patient.uuid||pf.appliedDamage.isHealing!==true)throw Error('manual-pool-receipt-unavailable');
+      const terminal=await (scope.masterPromise??remoteCompletion?.(binding));check();
+      if(!receiptCurrent()||receiptSource()!==savedReceiptSource||receipt.flags.pf2e.appliedDamage?.uuid!==patient.uuid||receipt.flags.pf2e.appliedDamage.isHealing!==true)throw Error('manual-pool-receipt-unavailable');
+      if(!terminal||terminal.terminal!=='fulfilled'||terminal.poolUUID!==pool.poolUUID||canonicalJSON(terminal.binding)!==canonicalJSON(binding)||canonicalJSON(terminal.fields)!==canonicalJSON(scope.fields))throw Error('manual-pool-forward-unconfirmed');
+      return {result,poolReceipt:{actorUUID:pool.poolUUID,patientUUID:patient.uuid,receiptId:receipt.id,noChange:false,master:terminal}};
+    }finally{if(patient._preUpdate===wrapped)patient._preUpdate=original;dispose();manual=null}
+  }
+  return {discover,withNativeApplication,withManualApplication,dispose:()=>unregister?.()};
 }

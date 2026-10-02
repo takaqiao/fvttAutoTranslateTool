@@ -3,6 +3,19 @@ export const emptyLedger=()=>({sessions:{},activities:{},clocks:{}});
 export const clone=value=>structuredClone(value);
 export function finite(value,label) {if(!Number.isFinite(value))throw Error(`invalid-${label}`);return value}
 export function id(value,label='id') {if(typeof value!=='string'||!value.trim()||['__proto__','constructor','prototype'].includes(value))throw Error(`invalid-${label}`);return value}
+export const MANUAL_POOL_OPERATION='manual-pool-application';
+export function manualPoolRequest(input){
+  const fields=['sessionId','activityId','actorUUID','sourceType','useId','checkId','resultId','rollIndex','stage','poolUUID','patientUUIDs','batchId','ownerClientNonce','attemptNonce'];
+  if(!input||typeof input!=='object'||![Object.prototype,null].includes(Object.getPrototypeOf(input))||Reflect.ownKeys(input).length!==fields.length)throw Error('invalid-manual-pool-request');
+  const result={};
+  for(const key of fields){const d=Object.getOwnPropertyDescriptor(input,key);if(!d?.enumerable||!Object.hasOwn(d,'value'))throw Error('invalid-manual-pool-request');result[key]=d.value}
+  for(const key of fields.filter(k=>!['patientUUIDs','rollIndex'].includes(k))){id(result[key],`manual-pool-${key}`);if(result[key].length>128||result[key].trim()!==result[key]||/[\u0000-\u001f\u007f]/.test(result[key]))throw Error('invalid-manual-pool-request')}
+  if(!['native-action','workbench'].includes(result.sourceType)||result.stage!=='healing'||!Number.isSafeInteger(result.rollIndex)||result.rollIndex<0||result.rollIndex>31)throw Error('invalid-manual-pool-source');
+  const patients=result.patientUUIDs;
+  if(!Array.isArray(patients)||Object.getPrototypeOf(patients)!==Array.prototype||patients.length<1||patients.length>8||Reflect.ownKeys(patients).length!==patients.length+1)throw Error('invalid-manual-pool-patients');
+  result.patientUUIDs=Array.from({length:patients.length},(_,i)=>{const d=Object.getOwnPropertyDescriptor(patients,String(i));if(!d||!Object.hasOwn(d,'value'))throw Error('invalid-manual-pool-patients');return id(d.value,'manual-pool-patient')});
+  if(new Set(result.patientUUIDs).size!==patients.length)throw Error('invalid-manual-pool-patients');return result;
+}
 const checkpointFields=['id','sessionId','rootUUID','epoch','observationNonce','from','to'];
 export const checkpointBinding=checkpoint=>Object.fromEntries(checkpointFields.map(key=>[key,checkpoint[key]]));
 export function sameCheckpoint(expected,binding){
