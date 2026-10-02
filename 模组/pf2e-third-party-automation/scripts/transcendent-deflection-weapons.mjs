@@ -22,15 +22,19 @@ export function createDeflectionWeapons({game}={}){
    const current=check(actor,weapon,claim),broken=deflectionBroken(weapon);
    if(current.weaponState==='broken'&&broken?.nonce===current.nonce)return weapon;
    if(current.weaponState||current.state!=='claimed')throw Error('武器结算不确定，不会重复拆分或破损。');
-   if(!eligibleDeflectionWeapon(weapon)&&!eligibleDeflectionWeapon(weapon,{melee:actor.system?.actions?.flatMap(s=>[s,...s.altUsages??[]]).find(s=>s.item?.uuid===weapon.uuid&&s.item.isMelee)?.item}))throw Error('选择的武器已经不再合格。');
+   const eligible=()=>eligibleDeflectionWeapon(weapon)||eligibleDeflectionWeapon(weapon,{melee:actor.system?.actions?.flatMap(s=>[s,...s.altUsages??[]]).find(s=>s.item?.uuid===weapon.uuid&&s.item.isMelee)?.item});
+   if(!eligible())throw Error('选择的武器已经不再合格。');
    const quantity=weapon.system.quantity;if(!Number.isInteger(quantity)||quantity<1)throw Error('武器数量无效。');
    const hp=weapon.system.hp,max=hp?.max??0,bt=Math.floor(max/2);
    if(max>0&&(bt<1||hp.value<=bt))throw Error('武器无法变为破损而保留实体。');
-   const spare=quantity>1?weapon.toObject():null,spareId=spare?random():null;
+   const source=weapon.toObject(true),before=JSON.stringify(source),spare=quantity>1?structuredClone(source):null,spareId=spare?random():null;
    if(spare){spare._id=spareId;spare.system.quantity=quantity-1;spare.system.equipped={...spare.system.equipped,carryType:'worn',handsHeld:0};spare.system.containerId=null;delete spare.flags?.[MODULE_ID]?.transcendentDeflection;}
    // Reserve before every physical mutation. A rejected/unknown write never
    // proves it did not occur, so a restart cannot split this stack again.
-   await save(actor,current.nonce,{weaponState:'breaking',weaponPlan:{quantity,spareId,hp:structuredClone(hp??{})}});check(actor,weapon,claim);
+   const plan={quantity,spareId,hp:structuredClone(hp??{})};
+   await save(actor,current.nonce,{weaponState:'breaking',weaponPlan:plan});
+   const reserved=check(actor,weapon,claim);
+   if(reserved.state!=='claimed'||reserved.weaponState!=='breaking'||JSON.stringify(reserved.weaponPlan)!==JSON.stringify(plan)||JSON.stringify(weapon.toObject(true))!==before||weapon.system.quantity!==quantity||JSON.stringify(weapon.system.hp??{})!==JSON.stringify(plan.hp)||!eligible())throw Error('武器或破损认领在等待期间已改变，结算不确定，不会覆盖或再次拆分。');
    await weapon.update({'system.quantity':1,...(max>0?{'system.hp.value':bt}:{}),[`flags.${MODULE_ID}.transcendentDeflection.broken`]:{nonce:current.nonce,claimKey:current.claimKey,actorUuid:actor.uuid,weaponUuid:weapon.uuid,virtualHP:max===0}});check(actor,weapon,claim);
    if(spare){const created=await actor.createEmbeddedDocuments('Item',[spare],{keepId:true});check(actor,weapon,claim);if(created?.length!==1||created[0].id!==spareId)throw Error('备用武器拆分结果不确定。');}
    await save(actor,current.nonce,{weaponState:'broken'});return weapon;

@@ -180,17 +180,28 @@ export function createReactionBudget({game,reactionRestriction,fromUuid=globalTh
    await persist(combatant,{epoch:payload.epoch,entries},reservation.changes);owner(actor,user);return receipt;
   });
  }
- async function finishShield(payload,user){
+ async function finishShield(payload,user,unapplied=null){
   const {actor,token}=await resolveShield(payload,user);
   return withReactionReservation(actor,game,async()=>{
    owner(actor,user);const context=boundEncounter(actor,token,payload),{combatant}=context,ledger=own(combatant).reactionBudget,index=ledger?.entries?.findIndex(e=>e.shield?.nonce===payload.nonce)??-1;
    if(ledger?.epoch!==payload.epoch||index<0)throw Error('盾牌格挡认领回执不存在。');
-   const entries=[...ledger.entries],entry=entries[index],claim=entry.shield;if(claim.userId!==user.id||claim.actorUuid!==actor.uuid||claim.tokenUuid!==token.uuid)throw Error('盾牌格挡认领所有者不匹配。');
+   const entries=[...ledger.entries],entry=entries[index],claim=entry.shield;if(claim.userId!==user.id||claim.actorUuid!==actor.uuid||claim.tokenUuid!==token.uuid||['shieldId','combatId','combatantId','epoch'].some(key=>claim[key]!==payload[key]))throw Error('盾牌格挡认领所有者或来源不匹配。');
+   let message,source;
+   const evidence=()=>JSON.stringify(message.toObject?.(true)??{author:authorId(message),speaker:message.speaker,content:message.content,flags:message.flags});
+   const verifyCard=()=>{
+    const pf=message?.flags?.pf2e;
+    if(!message||game.messages.get(payload.messageId)!==message||authorId(message)!==user.id||message.actor?.uuid!==actor.uuid||message.speaker?.actor!==actor.id||`Scene.${message.speaker?.scene}.Token.${message.speaker?.token}`!==token.uuid||pf?.context?.type!=='damage-taken'||!pf.context.options?.includes(shieldPrefix+payload.nonce)||message.content!==payload.content||typeof payload.content!=='string'||payload.content.length>100000||classifyNativeShieldBlock(message,{token,shieldId:claim.shieldId,nativeBlockNonce:claim.nonce,game})!==payload.blocked||typeof payload.blocked!=='boolean'||source!==undefined&&evidence()!==source)throw Error('原生盾牌格挡回执已改变、结果不明确或不匹配，保留反应认领。');
+   };
+   const verifyUnapplied=()=>{
+    // This proof stays on the executing GM. A socket DTO cannot establish that
+    // a remote native call never entered, even when it reports the same error.
+    const scope=unapplied?.scope;
+    if(payload.messageId||!isUnappliedDamageError(unapplied?.error)||!scope||scopes.get(payload.nonce)!==scope||scope.actor!==actor||scope.token!==token||scope.messageId||JSON.stringify(scope.receipt)!==JSON.stringify(claim))throw Error('未获得确切本地未执行证明，保留认领，需要核对原生结果。');
+   };
    if(payload.messageId){
-    const message=game.messages.get(payload.messageId),pf=message?.flags?.pf2e;
-    if(!message||authorId(message)!==user.id||message.speaker?.actor!==actor.id||`Scene.${message.speaker?.scene}.Token.${message.speaker?.token}`!==token.uuid||pf?.context?.type!=='damage-taken'||!pf.context.options?.includes(shieldPrefix+payload.nonce)||message.content!==payload.content||typeof payload.content!=='string'||payload.content.length>100000)throw Error('原生盾牌格挡回执已改变或不匹配。');
+    message=game.messages.get(payload.messageId);verifyCard();source=evidence();
     if(claim.state==='used'){if(claim.messageId!==message.id)throw Error('同一格挡已绑定另一张伤害回执。');return true;}
-   }
+   }else if(payload.enteredNative===false)verifyUnapplied();
    let changes={};
    if(payload.messageId&&payload.blocked===true){
     entries[index]={...entry,shield:{...claim,state:'used',messageId:payload.messageId}};
@@ -198,13 +209,13 @@ export function createReactionBudget({game,reactionRestriction,fromUuid=globalTh
     if(claim.state!=='pending')return false;
     if(claim.sourceCardId){const restored={...entry};delete restored.shield;entries[index]=restored;}else entries.splice(index,1);
     const stillSpent=slotsFor(actor,context,entries).some(s=>s.kind===claim.resourceSlot&&s.spent);
-    changes=await reactionResources.release(combatant,claim.reaction,{stillSpent});owner(actor,user);boundEncounter(actor,token,payload);
+    changes=await reactionResources.release(combatant,claim.reaction,{stillSpent});owner(actor,user);boundEncounter(actor,token,payload);if(message)verifyCard();else verifyUnapplied();
    }else throw Error('未获得明确原生格挡结果，保留认领，不会返还反应。');
    await persist(combatant,{epoch:ledger.epoch,entries},changes);return payload.blocked===true;
   });
  }
- async function shieldRpc(method,payload){
-  if(isActiveGM(game))return method==='begin'?beginShield(payload,game.user):finishShield(payload,game.user);
+ async function shieldRpc(method,payload,unappliedError=null){
+  if(isActiveGM(game))return method==='begin'?beginShield(payload,game.user):finishShield(payload,game.user,{error:unappliedError,scope:scopes.get(payload.nonce)});
   if(!socket||!game.users.activeGM)throw Error('原生格挡反应记录需要在线主GM。');
   const result=await socket.executeAsUser(`reaction-budget:shield-${method}`,game.users.activeGM.id,payload);if(!result?.ok)throw Error(result?.error??'格挡反应回执失败。');return result.value;
  }
@@ -234,7 +245,7 @@ export function createReactionBudget({game,reactionRestriction,fromUuid=globalTh
    else if(!completed&&!scope.messageId&&isUnappliedDamageError(error))try{
     // The final adapter explicitly proved it never called native damage. Restore
     // only this pending reservation, retaining a previously posted manual card.
-    await shieldRpc('finish',{...payload,enteredNative:false});
+    await shieldRpc('finish',{...payload,enteredNative:false},error);
    }catch(e){try{onError(e)}catch{/* Preserve the original pre-native failure. */}}
    throw error;
   }finally{scopes.delete(payload.nonce);}
