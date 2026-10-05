@@ -1,14 +1,14 @@
 import {test} from 'node:test';import assert from 'node:assert/strict';
 import {createManualEvents,WORKBENCH_SOURCE_SHA} from '../../scripts/exploration/manual-events.mjs';
 import {createLedger} from '../../scripts/exploration/ledger.mjs';
-import {manualEvidenceFixture,flush} from './manual-evidence-fixture.mjs';
+import {manualEvidenceFixture,flush,recordingLedger} from './manual-evidence-fixture.mjs';
 function fixture(){let data={sessions:{S:{id:'S',status:'recording',activityIds:[]}},activities:{},clocks:{}};const handlers=new Map(),messages=new Map(),Hooks={on:(n,f)=>{handlers.set(n,f);return n},off(){}};const game={user:{id:'G'},time:{worldTime:0},messages};const ledger=createLedger({read:async()=>data,write:async s=>{data=s},isAuthority:()=>true});const r=createManualEvents({game,Hooks,ledger,isAuthority:()=>true,sessionId:()=> 'S'});r.start();return {r,game,ledger,handlers,fire:async m=>{messages.set(m.id,m);handlers.get('createChatMessage')(m);for(let i=0;i<5;i++)await new Promise(res=>setImmediate(res))}}}
 test('a source-bound Workbench failure without surgery requires immunity but no nonexistent HP application',async()=>{
  const f=fixture();const m={id:'W',rolls:[],flags:{'pf2e-third-party-automation':{explorationManual:{lexicalSource:true,sourceSHA:WORKBENCH_SOURCE_SHA,useId:'U',actorUUID:'Actor.H',patientUUID:'Actor.P',kind:'treatment',checkIds:['C'],stageIds:[],riskySurgery:false}},treat_wounds_battle_medicine:{id:'T',healerId:'H',dos:1}}};await f.fire(m);assert.deepEqual((await f.ledger.getActivity('manual:W')).options.missing,['native-immunity-receipt']);
- m.id='Risky';m.flags['pf2e-third-party-automation'].explorationManual.riskySurgery=true;m.flags['pf2e-third-party-automation'].explorationManual.stageIds=['Cut'];await f.fire(m);assert.ok((await f.ledger.getActivity('manual:Risky')).options.missing.includes('native-application-receipt'));
+ m.id='Risky';m.flags['pf2e-third-party-automation'].explorationManual.useId='Risky-use';m.flags['pf2e-third-party-automation'].explorationManual.riskySurgery=true;m.flags['pf2e-third-party-automation'].explorationManual.stageIds=['Cut'];await f.fire(m);assert.ok((await f.ledger.getActivity('manual:Risky')).options.missing.includes('native-application-receipt'));
 });
 test('a manual slave receipt cannot confirm the unawaited shared master write',async()=>{
- const records=[],r=createManualEvents({game:{time:{worldTime:0}},ledger:{insertActivity:async a=>records.push(a)},isAuthority:()=>true,sessionId:()=> 'S',fromUuid:async()=>({uuid:'Actor.P'}),hpPools:{discover:()=>({poolUUID:'Actor.Master',ready:true})}});
+ const records=[],r=createManualEvents({game:{time:{worldTime:0}},ledger:recordingLedger(records),isAuthority:()=>true,sessionId:()=> 'S',fromUuid:async()=>({uuid:'Actor.P'}),hpPools:{discover:()=>({poolUUID:'Actor.Master',ready:true})}});
  await r.observe({id:'W',kind:'treatment',actorUUID:'Actor.H',patientUUIDs:['Actor.P'],missing:['native-immunity-receipt']});assert.ok(records[0].options.missing.includes('shared-hp-completion-unavailable'));
 });
 test('native child damage messages attach to one treatment and preserve known cooldown',async()=>{

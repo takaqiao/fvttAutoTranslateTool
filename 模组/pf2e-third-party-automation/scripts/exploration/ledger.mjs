@@ -509,10 +509,28 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
       Object.assign(v,clone(patch));if(['paused','closed'].includes(v.status))interruptDeclarations(s,v,v.stopReason??v.status);if(['paused','closed'].includes(v.status)&&v.manualCheckpoint&&v.manualCheckpoint.phase!=='settled')v.manualCheckpoint.phase='interrupted';if(['paused','closed'].includes(v.status)&&v.activityCheckpoint&&v.activityCheckpoint.phase!=='settled')v.activityCheckpoint.phase='interrupted';return v;
     }),
     insertActivity:(input,options={})=>mutate((s,context,caller)=>{
-      const a=createActivity(input);if(checkpointDeclaration(a))throw Error('activity-checkpoint-seal-required');if(s.activities[a.id])throw Error('duplicate-activity');const session=s.sessions[a.sessionId];if(!session)throw Error('missing-session');
+      const a=createActivity(input);if(checkpointDeclaration(a))throw Error('activity-checkpoint-seal-required');const session=s.sessions[a.sessionId];if(!session)throw Error('missing-session');
       if(Object.hasOwn(a.proof,'poolApplications'))throw Error('manual-pool-claim-required');
       if(Object.hasOwn(a.proof,'manualPoolSource'))throw Error('manual-pool-source-required');
       if(finiteProofFields.some(key=>Object.hasOwn(a.proof,key)))throw Error('finite-medicine-protected-proof');
+      if(options.manualObservation){
+        if(a.providerId!=='manual'||a.source.manual!==true||boundManual(a)||a.executor!==undefined||a.executionResult!==undefined||a.state!=='awaiting-evidence'||session.status!=='recording'||atomic&&session.manual!==true)throw Error('manual-recording-required');
+        if(Object.keys(a.proof).some(key=>!['useId','checkIds','resultIds','receiptIds','immunityIds'].includes(key)))throw Error('invalid-manual-observation');
+        const old=s.activities[a.id];
+        if(old){
+          const saved=createActivity(old),fields=['sessionId','providerId','source','actorUUID','patientUUIDs','hpPoolUUIDs','groupId','kind','startedAt','endsAt','durationSeconds','treatmentImmunitySeconds','groupProof','durationSource','temporalSource','dependsOn','notBefore','observedStart','observedEnd'];
+          if(fields.some(key=>canonicalJSON(saved[key]??null)!==canonicalJSON(a[key]??null))||saved.proof.useId!==a.proof.useId||a.kind==='activity'&&(saved.order!==a.order||canonicalJSON(saved.options)!==canonicalJSON(a.options)))throw Error('manual-source-conflict');
+          if(old.state!=='awaiting-evidence')return old;
+          // Another tab may already have registered the source or settled a
+          // pool claim. Merge only observation IDs into that transaction state.
+          for(const key of ['checkIds','resultIds','receiptIds','immunityIds'])old.proof[key]=[...new Set([...old.proof[key],...a.proof[key]])];
+          for(const key of ['sourceDegree','effectiveOutcome','rolledHealing'])if(a.options[key]!=null)old.options[key]=a.options[key];
+          return old;
+        }
+        if(a.proof.useId&&Object.values(s.activities).some(row=>row.sessionId===a.sessionId&&row.source?.manual&&!boundManual(row)&&row.actorUUID===a.actorUUID&&row.proof.useId===a.proof.useId&&row.patientUUIDs.some(uuid=>a.patientUUIDs.includes(uuid))))throw Error('manual-source-already-enrolled');
+        if(['treatment','battle-medicine'].includes(a.kind))a.order=Math.max(-1,...Object.values(s.activities).filter(row=>row.sessionId===a.sessionId&&row.source?.manual&&row.actorUUID===a.actorUUID).map(row=>row.order??0))+1;
+      }
+      if(s.activities[a.id])throw Error('duplicate-activity');
       if(atomic&&a.source.manual&&automatic(session)){
         if(!boundManual(a))throw Error('manual-checkpoint-reservation-required');const c=manualCheckpoint(s,a,options,caller,context,{open:true});
         if(a.providerId!=='manual'||a.kind!=='treatment'||a.source.type!=='workbench'||a.source.reservationId!==a.id||a.source.useId!==a.proof.useId||a.state!=='awaiting-evidence'||a.executor!==undefined||a.executionResult!==undefined||a.startedAt!==c.from||a.endsAt!==c.to||a.durationSeconds!==600||a.patientUUIDs.length!==1||a.hpPoolUUIDs.length!==1||a.hpPoolUUIDs[0]!==a.patientUUIDs[0]||['checkIds','resultIds','receiptIds','immunityIds'].some(field=>a.proof[field].length)||!a.options.missing.includes('checkpoint-time-confirmation'))throw Error('invalid-manual-reservation');

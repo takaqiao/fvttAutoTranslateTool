@@ -2,6 +2,10 @@ import {createManualEvents,WORKBENCH_SOURCE_SHA,IMMUNITY_SOURCES} from '../../sc
 import {createLedger} from '../../scripts/exploration/ledger.mjs';
 export const M='pf2e-third-party-automation';
 export const flush=async()=>{for(let i=0;i<12;i++)await new Promise(r=>setImmediate(r))};
+export function recordingLedger(records){
+ let state={sessions:{S:{id:'S',manual:true,status:'recording',activityIds:[]}},activities:{},clocks:{}};
+ return createLedger({read:async()=>structuredClone(state),write:async next=>{state=structuredClone(next);records.splice(0,records.length,...Object.values(state.activities))},isAuthority:()=>true});
+}
 export function manualEvidenceFixture(){
  let data={sessions:{S:{id:'S',status:'recording',actorUUIDs:['Actor.H','Actor.P'],activityIds:[]}},activities:{},clocks:{}};
  const users=new Map(['G','HUSER','PUSER','OUTSIDER'].map(id=>[id,{id,isGM:id==='G',active:true}]));users.activeGM=users.get('G');
