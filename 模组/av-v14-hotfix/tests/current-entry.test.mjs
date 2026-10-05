@@ -7,7 +7,7 @@ async function boot(disabled=[]){
  const hooks={},tasks=[],settings=new Map(),calls=[],phases=[],self={};let phase='load';
  const names=['registerLegacyCompat','installGrid','installSundryPatch','installPatreonPatch','installDurationPatch','installTimestampPatch','installTokenizerChatPortraitPatch','installSoundStopPatch','installWayfinderFogPatch','installBbmmHardLocks','registerDsnQualitySettings','installDsnQualityLocks','installTurnLifecyclePatch','installDsnChatRecovery'];
  const g={console:{info(){},error(...args){throw Error(args.join(' '));}},structuredClone,queueMicrotask:fn=>tasks.push(fn),
-   Hooks:{once:(name,fn)=>hooks[name]=fn},captureGridNative:()=>({}),hashSource:async()=>'',ITEM_NAME_HASHES:{},libWrapper:{register(){}},
+   Hooks:{once:(name,fn)=>hooks[name]=fn},hashSource:async()=>'',ITEM_NAME_HASHES:{},libWrapper:{register(){}},
    installChatDeleteCoalescing:()=>true,registerBabeleIndex:()=>({status:()=>({state:'inactive'})}),
    game:{version:'14.368',release:{generation:14},system:{id:'pf2e',version:'8.5.1'},modules:new Map([['av-v14-hotfix',self]]),settings:{register:(id,key,def)=>settings.set(key,def),get:(id,key)=>!disabled.includes(key)}}};
  for(const name of names)g[name]=()=>{calls.push(name);phases.push({name,phase});};
@@ -22,6 +22,14 @@ test('current entry retires old Patreon/Wayfinder installers and exposes new fix
  assert(f.calls.includes('installTurnLifecyclePatch'));assert(f.calls.includes('installDsnChatRecovery'));
  assert.equal(f.status.patches.patreon.status,'retired');assert.equal(f.status.patches.wayfinderFog.status,'retired');
  assert.doesNotThrow(()=>structuredClone(f.status));
+});
+
+test('retired Grid and BBMM repairs neither register switches nor run installers',async()=>{
+ const f=await boot();
+ assert(!f.calls.includes('installGrid'));assert(!f.calls.includes('installBbmmHardLocks'));
+ assert(!f.settings.has('grid'));assert(!f.settings.has('bbmmLocks'));
+ assert.equal(f.status.patches.grid.status,'retired');assert.equal(f.status.patches.bbmmLocks.status,'retired');
+ assert(f.calls.includes('registerDsnQualitySettings'));assert(f.calls.includes('installDsnQualityLocks'));
 });
 test('new fixes honor their world switches',async()=>{
  const f=await boot(['turnLifecycle','dsnChat']);

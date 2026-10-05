@@ -1,8 +1,68 @@
 {
   "provenance": {
-    "version": "6.4.1",
+    "module": "dice-so-nice",
+    "version": "6.4.2",
     "file": "main.js",
-    "sha256": "bddda3aa6729b3520aa503ab044014aff1336d7db67d3983d60b404db17c3f80"
+    "sha256": "8ea57ede46b6b0f6e4367c1d9b1574c93ead3a95e981810945b53e7daf18e236",
+    "capturedAt": "2026-10-05T16:37:40.351580+00:00",
+    "extraction": "Exact excerpts from the captured remote installation; bundle hashes are provenance only.",
+    "fragments": {
+      "queue": {
+        "start": 1710656,
+        "end": 1713683,
+        "sha256": "7253acd493cfc6fd612934ece4c2b30d84f1e04d51827eae9cd945e7a4270f77"
+      },
+      "accumulator": {
+        "start": 1709961,
+        "end": 1710656,
+        "sha256": "37b4b5b33974705d477aedbc8c84656813c92103391aff8551686d0d4a30a25d"
+      },
+      "boxStart": {
+        "start": 1664365,
+        "end": 1664718,
+        "sha256": "a022226b8666a5de569bd756c3936933c137a23ab56b84b925491e01c4dcd993"
+      },
+      "engineStart": {
+        "start": 1617804,
+        "end": 1621818,
+        "sha256": "91b92ea708def66da9c335f384df9bb01d398285fd6f6a7736155af56b600f21"
+      },
+      "boxAnimate": {
+        "start": 1660949,
+        "end": 1664365,
+        "sha256": "d0f022f7cfe344f8bcc596d007a1ec7d259a926c940d25484958f0e74e43f2ce"
+      },
+      "engineComplete": {
+        "start": 1622195,
+        "end": 1623165,
+        "sha256": "a1f4e7f93c8ea5928254b1f37e0baef5f0db9a38e6a5b060b65f6d1a46157fa7"
+      },
+      "engineEffects": {
+        "start": 1623165,
+        "end": 1623346,
+        "sha256": "c4b4d67ee75da62d5f8ce473671ee61dcaa3e9864e62a3a7d857e80f7933e0dd"
+      },
+      "engineFinished": {
+        "start": 1615384,
+        "end": 1615763,
+        "sha256": "753109971257e3590c29ad3f2bc03765db530bc7fb86adf9bbe2477edc694a14"
+      },
+      "engineResult": {
+        "start": 1622019,
+        "end": 1622195,
+        "sha256": "85b89b08722d0b2f0f72c85a457cf1d37ad7607757c732efa8e74743c5938803"
+      },
+      "boxClass": {
+        "start": 1652617,
+        "end": 1670676,
+        "sha256": "b5b291d969cbf3c58ecaa2d0b508af9c68823462b95f0d727a646cee4e837935"
+      },
+      "engineClass": {
+        "start": 1611767,
+        "end": 1623347,
+        "sha256": "102ee20800541f594c26d0964ddd99ea5890f35145201f1350b980464c575b7a"
+      }
+    }
   },
   "queue": "class AnimationQueue{constructor({canvasVisibility:i,pendingThrows:r}){this.canvasVisibility=i,this.pendingThrows=r,this.box=null,this.queue=[],this._currentAnimation=Promise.resolve(),this.hiddenAnimationQueue=[],this.nextAnimation=null,this._nextAnimationHandler()}attach(i){this.box=i}get length(){return this.queue.length}idle(){return this._currentAnimation}enqueue(i,r){return i.dsnConfig=r,new Promise((r,o)=>{this.nextAnimation.addItem({params:i,resolve:r})})}enqueuePersistent(i){i.queuedAt=Date.now();const r=0===this.queue.length&&!this.box.running;return new Promise(o=>{this.nextAnimation.addItem({type:\"persistent\",params:i,resolve:o},{immediate:r})})}deferHidden(i,r){return new Promise(o=>{this.hiddenAnimationQueue.push({data:i,config:r,timestamp:(new Date).getTime(),resolve:o})})}flushHidden(){if(!this.hiddenAnimationQueue.length)return;let i=(new Date).getTime();for(let r=0;r<this.hiddenAnimationQueue.length;r++){let o=this.hiddenAnimationQueue[r];i-o.timestamp>1e4?o.resolve(!1):this.enqueue(o.data,o.config).then(i=>{o.resolve(i)})}this.hiddenAnimationQueue=[]}_settleDroppedBinds(i){const r=[];for(const o of i)if(\"persistent\"===o.type)for(const i of o.params.heldDice??[])i.userData?.pendingBind&&(r.push(i.userData.pendingBind),delete i.userData.pendingBind);r.length&&this.pendingThrows?.noteBindsLanded(r)}async _processQueue(){if(0===this.queue.length)return;const i=this.queue.shift();await i(),this.queue.length>0&&await this._processQueue()}async _nextAnimationHandler(){const i=game.settings.get(\"dice-so-nice\",\"enabledSimultaneousRolls\")?400:0;this.nextAnimation=new Accumulator(i,async i=>{const r=this.queue.length>=10;if(!DsnSettings.isEnabled()||r&&!i.some(i=>\"persistent\"===i.type))return this._settleDroppedBinds(i),i.forEach(i=>i.resolve(!1)),void(this.box.inputHandler&&this.box.inputHandler.clearPendingThrowDice());r&&(i.filter(i=>\"persistent\"!==i.type).forEach(i=>i.resolve(!1)),i=i.filter(i=>\"persistent\"===i.type));const o=i.filter(i=>\"persistent\"!==i.type),c=i.filter(i=>\"persistent\"===i.type),d=o.length>0?DiceNotation.mergeQueuedRollCommands(o):[];let p=null;if(c.length>0){const i=[],r=new Map;let o=null,d=null,g=[],v=1/0;for(const p of c){const c=p.params;i.push(...c.heldDice);for(const[i,o]of c.forcedByMesh)r.set(i,o);!o&&c.roll&&(o=c.roll,d=c.primaries),c.sfxList&&g.push(...c.sfxList),c.queuedAt&&(v=Math.min(v,c.queuedAt))}p={heldDice:i,velocity:c[0].params.velocity,forcedByMesh:r,roll:o,primaries:d,sfxList:g.length>0?g:void 0,queuedAt:Number.isFinite(v)?v:Date.now()}}const g=d.length>0?[...d]:[];if(0===g.length&&p&&g.push([]),0===g.length)return void i.forEach(i=>i.resolve(!1));let v=g.length;this._currentAnimation=this._currentAnimation.then(async()=>{for(let r=0;r<g.length;r++){const o=0===r?p:null;this.queue.push(()=>new Promise(async c=>{this.canvasVisibility.show(),await this.box.startUnifiedBatch(g[r],o,()=>{v--,0===v&&(i.forEach(i=>i.resolve(!0)),this.canvasVisibility.hide()),c()})}))}return this._processQueue()}),await this._currentAnimation})}}",
   "accumulator": "class Accumulator{constructor(i,r){this._delay=i,this._onEnd=r,this._items=[],this._timeoutId=null,this._isProcessing=!1,this._processingPromise=Promise.resolve()}async addItem(i,{immediate:r=!1}={}){this._items.push(i),this._isProcessing||(this._timeoutId&&clearTimeout(this._timeoutId),this._delay&&!r?this._timeoutId=setTimeout(()=>this._process(),this._delay):await this._process())}async _process(){if(0===this._items.length)return;this._isProcessing=!0,this._timeoutId=null;const i=[...this._items];this._items=[];try{await this._onEnd(i)}finally{this._isProcessing=!1,this._items.length>0&&(this._delay?this._timeoutId=setTimeout(()=>this._process(),this._delay):await this._process())}}}",

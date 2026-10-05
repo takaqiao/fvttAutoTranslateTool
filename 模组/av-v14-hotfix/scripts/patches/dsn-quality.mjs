@@ -1,29 +1,28 @@
 import {sha256Fallback} from '../source-hash.mjs';
-import {bbmmCompatibility,readBbmmHardRules} from './bbmm-locks.mjs';
+import {bbmmCompatibility,bbmmRegistryCompatibility,readBbmmHardRules} from './bbmm-rules.mjs';
+import {dsnCompatibility} from './dsn-runtime.mjs';
 
 const fields={
-  shadowQuality:{type:String,value:'low',name:'DsN 阴影质量',choices:{none:'关闭',low:'低',high:'高'}},
+  shadowQuality:{type:String,value:'low',name:'DsN 阴影质量',choices:{none:'关闭',low:'低',medium:'中',high:'高'}},
   useHighDPI:{type:Boolean,value:false,name:'DsN 高 DPI'},
   glow:{type:Boolean,value:false,name:'DsN 辉光'},
   advancedGlass:{type:Boolean,value:false,name:'DsN 高级玻璃'},
   antialiasing:{type:String,value:'none',name:'DsN 抗锯齿',choices:{none:'关闭',msaa:'MSAA',smaa:'SMAA'}}
 };
-// Audited native DiceConfig consumers, DsN 6.4.1. Validate synchronously in
+// Audited native DiceConfig consumers, DsN 6.4.1/6.4.2. Validate synchronously in
 // setup so neither the first renderer nor BBMM's ready sync can race hashing.
 const hashes={
   parseInputs:'32f903886b97b79c8887400fe1bdf71ff47830832f603e4bd68e89ae043e6713',
   _updateObject:'8387b2486be46725baddb47fbb8efc8df60518609e70028408fc7ce144cee3f3',
   _clearUserRecord:'4791bc44f2e96a89047af8390d198bc4ee3a446be9f1bc285b8d3495031157f4',
-  _prepareContext:'d237b5c2ddd181bab469927aeeffc48b737413b180117cd9db4a2572cb09f2d3',
+  _prepareContext:['d237b5c2ddd181bab469927aeeffc48b737413b180117cd9db4a2572cb09f2d3','1d4356aeb8c65be9900b45bd6de2243240aba12429afdc596a9e16bd41958241'],
   getShowcaseAppearance:'a34fd3108315b3e3e215bd8c915c6bb96ae36519784061fdb8ca87c6229f2740',
   onApply:'1274e9de8fb72ea6a9f0a776e2bb45e1ce440b6533dae2611ad5f5340b89189a',
   onReset:'78809ca815488f9a3bf2ca6ab20d771473c74be6adb1dcbb46fd027433e95b5f'
 };
 const factoryHash='e78f559590c60dc25fc14b110ded6778213fad64fe33011c591f5a2cc09aa149';
 const registered=new WeakSet(),installed=new WeakMap();
-const compatibility=runtime=>bbmmCompatibility(runtime)
-  ||(!runtime.game.modules.get('dice-so-nice')?.active?'inactive-dsn':null)
-  ||(runtime.game.modules.get('dice-so-nice').version!=='6.4.1'?'unsupported-dsn':null);
+const compatibility=runtime=>bbmmCompatibility(runtime)||dsnCompatibility(runtime);
 
 export function registerDsnQualitySettings({runtime=globalThis,report=()=>{}}={}){
   const finish=status=>{const result={feature:'dsnQualityLocks',status};report(result);return result;};
@@ -55,7 +54,7 @@ function patchFields(node,path,locked,operators){
 
 export function installDsnQualityLocks({moduleId='av-v14-hotfix',runtime=globalThis,report=()=>{}}={}){
   const finish=status=>{const result={feature:'dsnQualityLocks',status};report(result);return result;};
-  const reason=compatibility(runtime);if(reason)return finish(reason);
+  const reason=compatibility(runtime)||bbmmRegistryCompatibility(runtime);if(reason)return finish(reason);
   const {game,Hooks,libWrapper}=runtime,settings=game.settings;
   if(installed.has(settings))return finish('already-installed');
   if(!registered.has(settings))return finish('settings-conflict');
@@ -69,7 +68,7 @@ export function installDsnQualityLocks({moduleId='av-v14-hotfix',runtime=globalT
   for(const[key,hash]of Object.entries(hashes)){
     const descriptor=descriptors[key];
     if(typeof descriptor?.value!=='function'||!descriptor.writable
-      ||sha256Fallback(Function.prototype.toString.call(descriptor.value))!==hash)return finish('unsupported-source');
+      ||![hash].flat().includes(sha256Fallback(Function.prototype.toString.call(descriptor.value))))return finish('unsupported-source');
   }
   let active=true;const hooks=[],factoryPatches=new Map(),methods={};
   const currentFactory=()=>game.dice3d?.box?.dicefactory??game.dice3d?.DiceFactory;
@@ -81,7 +80,7 @@ export function installDsnQualityLocks({moduleId='av-v14-hotfix',runtime=globalT
   };
   const locks=(user=game.user)=>{
     if(!active)return {};
-    if(compatibility(runtime)||changed()){
+    if(compatibility(runtime)||bbmmRegistryCompatibility(runtime)||changed()){
       active=false;finish('source-changed');return {};
     }
     const rules=readBbmmHardRules(runtime,user),values={};

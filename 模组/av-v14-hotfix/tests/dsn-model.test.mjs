@@ -24,7 +24,7 @@ function setup(){
   setPath(){return this;}setResponseType(){return this;}setRequestHeader(){return this;}setWithCredentials(){return this;}
   load(url,onLoad,onProgress,onError){requests.push({url,fail:onError,succeed:()=>onLoad(JSON.stringify({asset:{version:'2.0'}}))});}
  }
- const game={version:'14.368',modules:new Map([['dice-so-nice',{active:true,version:'6.4.1'}]])};
+ const game={version:'14.368',modules:new Map([['dice-so-nice',{active:true,version:'6.4.2'}]])};
  const shader=function shader(){};
  const context=vm.createContext({game,TextDecoder,ArrayBuffer,FileLoader,ShaderUtils:{applyDiceSoNiceShader:shader},Hooks:{callAll:(...args)=>events.push(args)},LoaderUtils:{extractUrlBase:url=>url.slice(0,url.lastIndexOf('/')+1),resolveURL:(url,base)=>base+url},addUnknownExtensionsToUserData(){},assignExtrasToUserData(){},scene,manager});
  const classes=vm.runInContext(`(()=>{
@@ -119,7 +119,7 @@ test('foreign loader methods keep their native receiver and original two callbac
 
 for(const change of ['version','preset','loader-parse'])test(`unknown ${change} source retains native model loading`,async()=>{
  const f=setup(),native=Object.getPrototypeOf(f.preset).loadModel;
- if(change==='version')f.g.game.modules.get('dice-so-nice').version='6.4.2';
+ if(change==='version')f.g.game.modules.get('dice-so-nice').version='7.0.0';
  if(change==='preset')Object.getPrototypeOf(f.preset).loadModel=function foreign(){};
  if(change==='loader-parse')Object.getPrototypeOf(f.loader).parse=function foreign(){};
  const original=f.preset.loadModel;installDsnChatRecovery({g:f.g});
@@ -161,7 +161,7 @@ test('a native model download failure settles the real AnimationQueue batch befo
  f.g.game.settings={get:(_module,key)=>key==='maxDiceNumber'?20:false};
  Object.assign(f.context,{setTimeout,clearTimeout,DsnSettings:{isEnabled:()=>true},DiceNotation:{mergeQueuedRollCommands:()=>[[{dice:[{}],dsnConfig:{}}]]},Utils:{removeTicker(){}},canvas:{app:{ticker:{add(){}}}}});
  const classes=vm.runInContext(`(()=>{${queueFixture.accumulator};${queueFixture.queue};return {AnimationQueue,Box:class{${queueFixture.boxStart}},Engine:class{${queueFixture.engineStart}}}})()`,f.context);
- const engine=Object.assign(new classes.Engine(),{rolling:false,running:false,diceList:[],deadDiceList:[],persistentDiceList:[],clearDice(){},getVectors(){},diceScene:{display:{innerWidth:1000,innerHeight:800}},async spawnDiceMesh(){await f.preset.loadModel(f.loader);},physicsWorker:{exec(){simulated++;}}});
+ const engine=Object.assign(new classes.Engine(),{rolling:false,running:false,diceList:[],deadDiceList:[],persistentDiceList:[],clearDice(){},getVectors(){},diceScene:{display:{innerWidth:1000,innerHeight:800}},async spawnDiceMesh(){await f.preset.loadModel(f.loader);},checkForAnimatedDice:async()=>false,soundManager:{generateCollisionSounds:()=>[]},physicsWorker:{async exec(name){if(name==='simulateThrow'){simulated++;return {ids:[],quaternionsBuffers:[],positionsBuffers:[],detectedCollides:[],deads:[],iterationsNeeded:0,faceValues:{},finalQuaternions:{}};}return true;}}});
  const box=Object.assign(new classes.Box(),{throwEngine:engine,inputHandler:{clearPendingThrowDice(){}},animateThrow(){}});
  const queue=new classes.AnimationQueue({canvasVisibility:{show(){},hide(){hidden++;}},pendingThrows:{}});queue.attach(box);f.pipeline.queue=queue;
  const installed=installDsnChatRecovery({g:f.g}),state=observe(queue.enqueue({throws:[{}]},{}));
@@ -169,4 +169,9 @@ test('a native model download failure settles the real AnimationQueue batch befo
  assert.equal(state.state,'resolved');assert.equal(state.value,false);assert.equal(hidden,1);
  assert.equal(simulated,0);assert.equal(box._preparingThrow,false);assert.equal(engine.rolling,false);
  assert.equal(f.preset.modelLoading,false);assert.equal(installed.stats.recovered,1);await queue.idle();
+ const next=observe(queue.enqueue({throws:[{}]},{}));await settle();
+ assert.equal(f.requests.length,2);f.requests[1].succeed();await settle();
+ assert.equal(simulated,1);assert.equal(next.state,'pending');assert.equal(typeof engine.callback,'function');
+ engine.callback();await settle();assert.equal(next.state,'resolved');assert.equal(next.value,true);await queue.idle();
+ assert.equal(hidden,2);assert.equal(queue.length,0);assert.equal(installed.stats.recovered,1);
 });

@@ -140,15 +140,15 @@ export function installDsnQueueRecovery({queue,recover}){
       );
     });
   };
-  if (
+  const completionSupported =
     digest(animate) === hashes.boxAnimate &&
     digest(completion) === hashes.engineComplete &&
     digest(effects) === hashes.engineEffects &&
     !Object.hasOwn(box, 'animateThrow') &&
     !Object.hasOwn(engine, 'handlePersistentThrowCompletion') &&
     !Object.hasOwn(engine, 'handleSpecialEffectsInit') &&
-    Object.isExtensible(engine)
-  )
+    Object.isExtensible(engine);
+  if (completionSupported)
     Object.defineProperty(engine, 'handlePersistentThrowCompletion', {
       value: completionWrapper,
       writable: true,
@@ -156,7 +156,7 @@ export function installDsnQueueRecovery({queue,recover}){
     });
   Object.defineProperty(accumulator,'_onEnd',{...onEnd,value:callback});
   Object.defineProperty(box,'startUnifiedBatch',{value:wrapper,writable:true,configurable:true});
-  return {status:'installed',attach,restore(){
+  return {status:'installed',completionStatus:completionSupported?'installed':'unsupported-source',attach,restore(){
     active = false;
     if (
       Object.getOwnPropertyDescriptor(engine, 'handlePersistentThrowCompletion')?.value === completionWrapper

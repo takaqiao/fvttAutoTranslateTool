@@ -1,4 +1,5 @@
 import {sha256Fallback} from '../source-hash.mjs';
+import {dsnCompatibility} from './dsn-runtime.mjs';
 
 const hashes={
   loadModel:'8de674019b0ec5e363828d7b5507d2fff16e88f057de77bca8152590e13a7d64',
@@ -11,7 +12,7 @@ const installations=new WeakMap();
 export function installDsnModelRecovery({g=globalThis}={}){
   const module=g.game?.modules?.get('dice-so-nice');
   if(!module?.active)return {status:'inactive'};
-  if(module.version!=='6.4.1'||g.game.version!=='14.368')return {status:'unsupported-version'};
+  const reason=dsnCompatibility(g);if(reason)return {status:reason};
   const systems=g.game.dice3d?.DiceFactory?.systems,preset=systems?.get('standard')?.dice?.get('d20');
   if(!preset)return {status:'waiting-dsn'};
   const proto=Object.getPrototypeOf(preset),prior=installations.get(proto);
@@ -22,8 +23,7 @@ export function installDsnModelRecovery({g=globalThis}={}){
   let active=true,pendingNativeLoads=0;
   for(const system of systems.values())for(const die of system.dice.values())
     if(Object.getPrototypeOf(die)===proto&&die.modelFile&&!die.modelLoaded&&typeof die.modelLoading?.then==='function')pendingNativeLoads++;
-  const compatible=()=>active&&g.game.modules.get('dice-so-nice')===module&&module.active
-    &&module.version==='6.4.1'&&g.game.version==='14.368'
+  const compatible=()=>active&&g.game.modules.get('dice-so-nice')===module&&!dsnCompatibility(g)
     &&Object.getOwnPropertyDescriptor(proto,'loadModel')?.value===wrapper;
   function wrapper(...args){
     if(!compatible()||Object.getPrototypeOf(this)!==proto||Object.hasOwn(this,'loadModel')

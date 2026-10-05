@@ -1,8 +1,33 @@
 {
   "provenance": {
-    "version": "6.4.1",
+    "module": "dice-so-nice",
+    "version": "6.4.2",
     "file": "main.js",
-    "sha256": "bddda3aa6729b3520aa503ab044014aff1336d7db67d3983d60b404db17c3f80"
+    "sha256": "8ea57ede46b6b0f6e4367c1d9b1574c93ead3a95e981810945b53e7daf18e236",
+    "capturedAt": "2026-10-05T16:37:40.351580+00:00",
+    "extraction": "Exact excerpts from the captured remote installation; bundle hashes are provenance only.",
+    "fragments": {
+      "loadModel": {
+        "start": 627967,
+        "end": 629075,
+        "sha256": "8de674019b0ec5e363828d7b5507d2fff16e88f057de77bca8152590e13a7d64"
+      },
+      "loaderLoad": {
+        "start": 1132790,
+        "end": 1133400,
+        "sha256": "ddf401a139f0a607d7239ec18d6cdc62747b6abb7925d7bf080894d75bdd2209"
+      },
+      "loaderParse": {
+        "start": 1133767,
+        "end": 1135147,
+        "sha256": "8fc6916e53608f400cd4737cec076bfe9239fe19c603e27982cdacb616ca0095"
+      },
+      "parserParse": {
+        "start": 1155560,
+        "end": 1156278,
+        "sha256": "b7917fabadb0d3cc2b8e04150c4f44fbb0e04aca839a9308ddb1cc56a70404cb"
+      }
+    }
   },
   "methods": {
     "loadModel": "loadModel(i=null){return this.modelLoaded||!1!==this.modelLoading||(this.modelLoading=new Promise((r,o)=>{i.load(this.modelFile,i=>{if(i.scene.traverse(function(i){if(i.isMesh){i.userData&&i.userData.hasOwnProperty(\"castShadow\")?i.castShadow=i.userData.castShadow:i.castShadow=!0,i.material.onBeforeCompile=ShaderUtils.applyDiceSoNiceShader;const r=game.dice3d.box.anisotropy;null!==i.material.map&&(i.material.map.anisotropy=r),null!==i.material.normalMap&&(i.material.normalMap.anisotropy=r),null!==i.material.emissiveMap&&(i.material.emissiveMap.anisotropy=r),null!==i.material.roughnessMap&&(i.material.roughnessMap.anisotropy=r),null!==i.material.metalnessMap&&(i.material.metalnessMap.anisotropy=r),i.layers.enableAll(),Hooks.callAll(\"diceSoNiceOnMaterialReady\",i.material,null)}}),\"d2\"===this.shape){const r=i.scene.children[0];if(r.children.length){const i=new Group;for(i.rotation.x=Math.PI/2;r.children.length;)i.add(r.children[0]);r.add(i)}r.isMesh&&r.geometry&&r.geometry.rotateX(Math.PI/2)}this.model=i,this.modelLoaded=!0,Hooks.callAll(\"diceSoNiceModelLoaded\",this),r(i)})})),this.modelLoading}",

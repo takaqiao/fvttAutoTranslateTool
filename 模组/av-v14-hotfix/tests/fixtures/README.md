@@ -27,6 +27,20 @@ node scripts/build-chat-test-fixtures.mjs /path/to/foundry.mjs
 
 The generators write only the named test fixtures. They do not modify the runtime patches, application data, or original source files.
 
+## 0.6.22 source capture
+
+The DsN chat, model and queue fixtures are exact excerpts from the remote installation's 6.4.2 `main.js`, verified against `source-capture.json`. Their required functions and completion consumers match 6.4.1. The DiceConfig `_prepareContext` excerpt was updated for 6.4.2's medium shadow choice and hidden-die filtering. The associated metadata records original bundle SHA-256, fragment offsets and fragment SHA-256; bundle hashes never authorize a runtime patch.
+
+`bbmm-rules-native.json` includes only BBMM 1.4.11's two setting registrations and the native rule writer needed to prove the reader contract. `turn-lifecycle-native.json` records the current remote Reaction 1.4.3, Sustain 1.1.0 and Summons 2.20.2 callback provenance. Historical core and Toolbelt excerpts keep their original provenance.
+
+To regenerate these fixtures from a separately captured remote installation:
+
+```sh
+node scripts/build-current-test-fixtures.mjs /path/to/upstream
+```
+
+The capture's `source-capture.json` must be alongside `upstream`. Only the required function excerpts are published with the hotfix; third-party source bundles are not included.
+
 ## 0.6.2 additions
 
 `duration-core-14.367.json` is the complete unchanged `CalendarData.formatDuration.toString()` captured from the isolated QA browser, with its SHA-256. It also matches the saved core source at line 82039. The test provides core's lazy `objectEntries`/`iterateEntries` helpers and the original duration unit set; native `Intl.DurationFormat` performs actual formatting.

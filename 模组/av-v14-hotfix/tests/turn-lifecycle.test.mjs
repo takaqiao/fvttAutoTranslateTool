@@ -7,7 +7,7 @@ import {readFile} from 'node:fs/promises';
 const fixture = JSON.parse(await readFile(new URL('./fixtures/turn-lifecycle-native.json', import.meta.url), 'utf8'));
 const patchURL = new URL('../scripts/patches/turn-lifecycle.mjs', import.meta.url);
 const install = existsSync(patchURL) ? (await import(patchURL.href)).installTurnLifecyclePatch : () => ({status:'skipped', reason:'missing-patch'});
-const versions = {'pf2e-reaction':'1.4.3', 'pf2e-sustain-reminder':'1.1.0', 'pf2e-summons-assistant':'2.19.0', 'pf2e-toolbelt':'3.56.4'};
+const versions = {'pf2e-reaction':'1.4.3', 'pf2e-sustain-reminder':'1.1.0', 'pf2e-summons-assistant':'2.20.2', 'pf2e-toolbelt':'3.56.4'};
 
 function environment({useChat=true, autoExpire=true, coreVersion='14.368', systemVersion='8.5.1'} = {}) {
   const writes=[], messages=[], renders=[], deleted=[], timers=[], reports=[], prompts=[];
@@ -224,10 +224,18 @@ test('objects that only resemble a temporary Combatant retain the original callb
 });
 
 test('unknown core or system versions leave every native callback untouched',()=>{
-  for(const args of [{coreVersion:'14.369'},{coreVersion:'15.1'},{systemVersion:'8.5.2'}]){
+  for(const args of [{coreVersion:'15.1'},{systemVersion:'9.0.0'}]){
     const f=environment(args),result=f.apply();assert.equal(result.status,'skipped');
     for(const part of ['reaction','sustain','summons'])assert.equal(f.callback(part),f.original[part]);
   }
+});
+
+test('current summons and supported core/system patch releases retain audited callback protections',async()=>{
+ const f=environment({coreVersion:'14.369',systemVersion:'8.5.2'}),result=f.apply();
+ assert.equal(result.parts.summons.status,'installed');assert.equal(result.parts.sustain.status,'installed');
+ assert.equal(result.parts.reaction.status,'installed');
+ const world=f.thrall({world:true});assert.equal(await f.callback('summons')(world.effect,world.info),undefined);
+ assert.equal(f.deleted.length,0);
 });
 
 test('unknown or inactive consumer versions skip independently while known consumers install',()=>{

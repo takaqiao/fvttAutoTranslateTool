@@ -1,0 +1,27 @@
+{
+  "provenance": {
+    "module": "bbmm",
+    "version": "1.4.11",
+    "capturedAt": "2026-10-05T16:37:40.351580+00:00",
+    "files": {
+      "scripts/settings.js": "b97af27385c5c72e41c02b6d06b80cd4a105cd99444fb7c516e3bff6a8c6ef65",
+      "scripts/setting-sync.js": "1911441a47bcc3103341ff41ae145cd2c7fec6c98f8479082e509bc8a6c2af00"
+    },
+    "fragments": {
+      "userSettingSync": {
+        "sha256": "55aa90e018735153d96883a76276fd1803449e8becdf2b6a8f337ea9c48caac3"
+      },
+      "enableUserSettingSync": {
+        "sha256": "0a71d9d4e23396a9140bd545186d44c0b6b43055de74e10cc4b45250209a4f88"
+      },
+      "writeLocks": {
+        "sha256": "2a90336e92738ac7f52fddf9aa9fac4d23775288c5a4482793cb43ee60ef5589"
+      }
+    }
+  },
+  "registrations": {
+    "userSettingSync": "game.settings.register(BBMM_ID, \"userSettingSync\", {\n\t\t\t\tscope: \"world\",\n\t\t\t\tconfig: false,\n\t\t\t\ttype: Object,\n\t\t\t\tdefault: {}\n\t\t\t});",
+    "enableUserSettingSync": "game.settings.register(BBMM_ID, \"enableUserSettingSync\", {\n\t\t\t\tname: LT.sync.EnableName(),\n\t\t\t\thint: LT.sync.EnableHint(),\n\t\t\t\tscope: \"world\",\n\t\t\t\tconfig: true,\n\t\t\t\ttype: Boolean,\n\t\t\t\tdefault: true,\n\t\t\t\trequiresReload: true,\n\t\t\t\tonChange: (v) => {\n\t\t\t\t\ttry {\n\t\t\t\t\t\tDL(`settings.js | bbmm-setting-lock: enableUserSettingSync -> ${v}`);\n\t\t\t\t\t\t// Optional: let connected clients know state changed (no-op if they aren't listening)\n\t\t\t\t\t\tgame.socket?.emit?.(`module.${BBMM_ID}`, { t: \"bbmm-sync-toggle\", enabled: !!v });\n\t\t\t\t\t} catch (err) {\n\t\t\t\t\t\tDL(2, \"settings.js | bbmm-setting-lock: onChange(enableUserSettingSync) error\", err);\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t});"
+  },
+  "writeLocks": "async function _lc_writeLockChanges({ toAdd = [], toRemove = [] } = {}) {\n\t\tconst map    = game.settings.get(BBMM_ID, \"userSettingSync\") || {};\n\t\tconst revMap = game.settings.get(BBMM_ID, \"softLockRevMap\")  || {};\n\t\tconst nonGMIds = (game.users?.contents || []).filter(u => !u.isGM).map(u => u.id);\n\n\t\tlet hardCount = 0, softCount = 0, removeCount = 0;\n\t\tconst softPushes = [], hardPushes = [];\n\t\tlet needsRefresh = false;\n\n\t\tfor (const { namespace, key } of toRemove) {\n\t\t\tconst id = `${namespace}.${key}`;\n\t\t\tif (map[id]) { delete map[id]; removeCount++; needsRefresh = true; }\n\t\t}\n\n\t\tfor (const { namespace, key, lockType, value } of toAdd) {\n\t\t\tconst id  = `${namespace}.${key}`;\n\t\t\tconst cfg = game.settings.settings.get(id);\n\t\t\tif (!cfg || (cfg.scope !== \"user\" && cfg.scope !== \"client\")) continue;\n\n\t\t\tif (lockType === \"locked\") {\n\t\t\t\tmap[id] = { namespace, key, value, requiresReload: !!cfg.requiresReload };\n\t\t\t\thardPushes.push({ namespace, key, value, requiresReload: !!cfg.requiresReload });\n\t\t\t\thardCount++; needsRefresh = true;\n\t\t\t} else if (lockType === \"soft\") {\n\t\t\t\tconst currentRev = Number.isInteger(revMap[id]) ? revMap[id] : 0;\n\t\t\t\tconst newRev = Math.max(Date.now(), currentRev + 1); // epoch-based monotonic rev\n\t\t\t\tmap[id]          = { namespace, key, value, requiresReload: !!cfg.requiresReload, soft: true, rev: newRev };\n\t\t\t\trevMap[id]       = newRev;\n\t\t\t\tsoftPushes.push({ namespace, key, value, requiresReload: !!cfg.requiresReload, softRev: newRev });\n\t\t\t\tsoftCount++; needsRefresh = true;\n\t\t\t}\n\t\t}\n\n\t\tawait game.settings.set(BBMM_ID, \"userSettingSync\", map);\n\t\tif (softPushes.length) await game.settings.set(BBMM_ID, \"softLockRevMap\", revMap);\n\n\t\tif (game.socket && needsRefresh) {\n\t\t\tsetTimeout(() => game.socket.emit(BBMM_SYNC_CH, { t: \"bbmm-sync-refresh\" }), 300);\n\t\t\tfor (const sp of softPushes) {\n\t\t\t\tgame.socket.emit(BBMM_SYNC_CH, {\n\t\t\t\t\tt: \"bbmm-sync-push\", soft: true, softRev: sp.softRev,\n\t\t\t\t\tnamespace: sp.namespace, key: sp.key, value: sp.value,\n\t\t\t\t\ttargets: nonGMIds, requiresReload: sp.requiresReload\n\t\t\t\t});\n\t\t\t}\n\t\t\tfor (const hp of hardPushes) {\n\t\t\t\tgame.socket.emit(BBMM_SYNC_CH, {\n\t\t\t\t\tt: \"bbmm-sync-push\",\n\t\t\t\t\tnamespace: hp.namespace, key: hp.key, value: hp.value,\n\t\t\t\t\ttargets: null, requiresReload: hp.requiresReload\n\t\t\t\t});\n\t\t\t}\n\t\t}\n\n\t\treturn { hardCount, softCount, removeCount };\n\t}\n"
+}

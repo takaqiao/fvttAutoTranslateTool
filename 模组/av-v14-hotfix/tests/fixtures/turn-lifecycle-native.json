@@ -82,5 +82,40 @@
     "actorUpdates": "async#f(e,n){let i={};for(let r of e.rules??[])await r.onUpdateEncounter?.({event:n,actorUpdates:i});await e.update(i),n===\"turn-start\"&&await e.recharge({duration:\"round\"})}",
     "createCombatant": "#k(e,n){let i=n.scene,r=cr(e,{scene:i}),o=getDocumentClass(\"Combatant\");return new o({tokenId:r?.id,actorId:e.id,hidden:!1,sceneId:i?.id},{parent:n})}",
     "invalidSlave": "#S(e){return e.inCombat||!this.#v(e,\"timeEvents\")}"
+  },
+  "currentProvenance": {
+    "capturedAt": "2026-10-05T16:37:40.351580+00:00",
+    "consumers": {
+      "reaction": {
+        "file": "modules/pf2e-reaction/pf2e-reaction.js",
+        "version": "1.4.3",
+        "sha256": "4a81322796ce1c6ed545edc09e1aa3a96a9c8a96dfd034403bf657068ed7036c",
+        "fragment": {
+          "start": 69979,
+          "end": 70619,
+          "sha256": "10132b5536079180ee37a616697daa674ee538f1aba1e691c6baa3f19984df61"
+        }
+      },
+      "sustain": {
+        "file": "modules/pf2e-sustain-reminder/scripts/sustain-main.mjs",
+        "version": "1.1.0",
+        "sha256": "5f4cba45653867e3ea90955c981fbee798c3d836e64deb86ebb93b5913e76276",
+        "fragment": {
+          "start": 0,
+          "end": 4782,
+          "sha256": "5f4cba45653867e3ea90955c981fbee798c3d836e64deb86ebb93b5913e76276"
+        }
+      },
+      "summons": {
+        "file": "modules/pf2e-summons-assistant/scripts/specificClasses/necromancer.js",
+        "version": "2.20.2",
+        "sha256": "6b15c7d170891ceff24cff40ce1ca2dc9bb64c12f8b8eda09611fc2f1d591ea9",
+        "fragment": {
+          "start": 12990,
+          "end": 13208,
+          "sha256": "7bd43e0f663ca75af0ecf96e08ff11739d93a7632d71e578d46f8b0240f75dc4"
+        }
+      }
+    }
   }
 }

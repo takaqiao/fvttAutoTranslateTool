@@ -1,8 +1,9 @@
 import {sha256Fallback} from '../source-hash.mjs';
 import {installDsnQueueRecovery} from './dsn-queue.mjs';
 import {installDsnModelRecovery} from './dsn-model.mjs';
+import {dsnCompatibility} from './dsn-runtime.mjs';
 
-// DsN 6.4.1 main.js. Model errors reject and failed batches continue native
+// Audited DsN 6.4.1/6.4.2 functions. Model errors reject and failed batches continue native
 // chat reveal, preserving permissions and interactive pending throws.
 const hashes={
   renderRolls:'8ed6ad569e58f7a64474f862a9a08a5e27492b2d8cedbe16b9d2ddce76a9caed',
@@ -16,7 +17,7 @@ export function installDsnChatRecovery({g=globalThis,report=()=>{}}={}){
   const finish=result=>{report({feature:'dsnChat',...result});return result;};
   const module=g.game?.modules?.get('dice-so-nice');
   if(!module?.active)return finish({status:'inactive'});
-  if(module.version!=='6.4.1'||g.game?.version!=='14.368')return finish({status:'unsupported-version'});
+  const reason=dsnCompatibility(g);if(reason)return finish({status:reason});
   const pipeline=g.game.dice3d?.pipeline;
   if(!pipeline){
     if(!waiting.has(g.game)&&g.Hooks?.once){
@@ -64,6 +65,7 @@ export function installDsnChatRecovery({g=globalThis,report=()=>{}}={}){
     // readiness wait on that same already-fulfilled promise.
     if(completedReady&&queueRecovery.ready===completedReady)queueRecovery={status:'unsupported-queue'};
     result.queueStatus=queueRecovery.status;
+    result.queueCompletionStatus=queueRecovery.completionStatus??queueRecovery.status;
     if(queueRecovery.attach===attach&&typeof attach==='function'&&!Object.hasOwn(queue,'attach')&&Object.isExtensible(queue))
       Object.defineProperty(queue,'attach',{value:attachWrapper,writable:true,configurable:true});
     else if(queueRecovery.status==='unsupported-queue'&&ownsAttach())delete queue.attach;
@@ -75,15 +77,15 @@ export function installDsnChatRecovery({g=globalThis,report=()=>{}}={}){
         attachQueue(ready);finish(result);
       },()=>{
         if(!current())return;
-        generation++;queueRecovery={status:'unsupported-queue'};result.queueStatus=queueRecovery.status;
+        generation++;queueRecovery={status:'unsupported-queue'};result.queueStatus=queueRecovery.status;result.queueCompletionStatus=queueRecovery.status;
         if(ownsAttach())delete queue.attach;
         finish(result);
       });
     }
     return queueRecovery;
   };
-  const compatible=()=>g.game.modules.get('dice-so-nice')===module&&module.active&&module.version==='6.4.1'
-    &&g.game.version==='14.368'&&g.game.dice3d?.pipeline===pipeline
+  const compatible=()=>g.game.modules.get('dice-so-nice')===module&&!dsnCompatibility(g)
+    &&g.game.dice3d?.pipeline===pipeline
     &&Object.entries(native).every(([key,fn])=>proto[key]===fn&&(key==='renderRolls'?pipeline[key]===wrapper:pipeline[key]===fn));
   function wrapper(...args){
     if(this!==pipeline||!compatible())return native.renderRolls.apply(this,args);

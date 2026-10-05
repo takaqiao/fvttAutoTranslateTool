@@ -11,7 +11,7 @@ const installations = new WeakMap();
 const CONSUMERS = {
   reaction: {id:'pf2e-reaction', version:'1.4.3', hook:'pf2e.startTurn'},
   sustain: {id:'pf2e-sustain-reminder', version:'1.1.0', hook:'pf2e.startTurn'},
-  summons: {id:'pf2e-summons-assistant', version:'2.19.0', hook:'deleteItem'}
+  summons: {id:'pf2e-summons-assistant', major:2, hook:'deleteItem'}
 };
 const skipped = reason => ({status:'skipped', reason});
 
@@ -71,8 +71,8 @@ export function installTurnLifecyclePatch({g = globalThis, report} = {}) {
   const finish = result => {report?.({feature:'turn-lifecycle', ...result}); return result;};
   const skipAll = reason => finish({status:'skipped', reason,
     parts:Object.fromEntries(Object.keys(CONSUMERS).map(key => [key, skipped(reason)]))});
-  if (g.game?.version !== '14.368') return skipAll('core-version-mismatch');
-  if (g.game.system?.id !== 'pf2e' || g.game.system.version !== '8.5.1') return skipAll('system-version-mismatch');
+  if ((g.game?.release?.generation??Number.parseInt(g.game?.version,10)) !== 14) return skipAll('core-version-mismatch');
+  if (g.game.system?.id !== 'pf2e' || Number.parseInt(g.game.system.version,10) !== 8) return skipAll('system-version-mismatch');
   const Hooks = g.Hooks;
   if (!Hooks) return skipAll('hook-api-unavailable');
   const prior = installations.get(Hooks);
@@ -88,14 +88,16 @@ export function installTurnLifecyclePatch({g = globalThis, report} = {}) {
     summons:[Actor, Item, TokenDocument, Scene].every(type => typeof type === 'function')
   };
   const parts = {}, adaptations = [];
-  for (const [key, {id, version, hook}] of Object.entries(CONSUMERS)) {
+  for (const [key, {id, version, major, hook}] of Object.entries(CONSUMERS)) {
     const module = g.game.modules?.get(id);
     if (!module?.active) {parts[key] = skipped('module-inactive'); continue;}
-    if (module.version !== version) {parts[key] = skipped('version-mismatch'); continue;}
+    // Reaction/Sustain callbacks call private helpers whose contracts are not
+    // exposed here. Summons' complete callback is verified below.
+    if (major?Number.parseInt(module.version,10)!==major:module.version!==version) {parts[key] = skipped('version-mismatch'); continue;}
     if (!available[key]) {parts[key] = skipped('document-api-unavailable'); continue;}
     const adapted = adaptNativeHooks({Hooks, callbacks:[{hook, source:CALLBACKS[key], wrap:original => wrappers[key](original, context)}]});
     const {restore, ...diagnostics} = adapted;
-    parts[key] = {...diagnostics, version};
+    parts[key] = {...diagnostics, version:module.version};
     if (adapted.status === 'installed') adaptations.push(adapted);
   }
   if (!adaptations.length) return finish({status:'skipped', reason:'no-supported-consumers', parts});

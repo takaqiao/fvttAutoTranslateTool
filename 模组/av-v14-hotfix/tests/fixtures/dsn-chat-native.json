@@ -1,9 +1,33 @@
 {
   "provenance": {
     "module": "dice-so-nice",
-    "version": "6.4.1",
+    "version": "6.4.2",
     "file": "main.js",
-    "sha256": "bddda3aa6729b3520aa503ab044014aff1336d7db67d3983d60b404db17c3f80"
+    "sha256": "8ea57ede46b6b0f6e4367c1d9b1574c93ead3a95e981810945b53e7daf18e236",
+    "capturedAt": "2026-10-05T16:37:40.351580+00:00",
+    "extraction": "Exact excerpts from the captured remote installation; bundle hashes are provenance only.",
+    "fragments": {
+      "renderRolls": {
+        "start": 1721127,
+        "end": 1722760,
+        "sha256": "8ed6ad569e58f7a64474f862a9a08a5e27492b2d8cedbe16b9d2ddce76a9caed"
+      },
+      "showForRoll": {
+        "start": 1722760,
+        "end": 1723679,
+        "sha256": "a4284a3191192a06efafb1a56b44fb84803e63222cbe5544c404589b392f67b2"
+      },
+      "show": {
+        "start": 1723679,
+        "end": 1724365,
+        "sha256": "59da9bc59811eefe5116e4a12a62ff5beca221e9a29286ea85e2b456a47d9fc8"
+      },
+      "_revealMessage": {
+        "start": 1718364,
+        "end": 1720377,
+        "sha256": "390f9c83fe67f2fa1ea26661741c8bd5bf45342edd537392977befab903c1034"
+      }
+    }
   },
   "methods": {
     "renderRolls": "renderRolls(i,r){this._assignDependentRollOrder(r);for(const i of r??[])this._stampRole(i),this._stampAppearance(i);const o=i._dice3dCurrentAnimId,showMessage=()=>this._revealMessage(i,o);if(\"stream\"!=game.view||game.modules.get(\"0streamutils\")?.active||game.modules.get(\"obs-utils\")?.active){const resolveOwnerForActor=i=>{if(!i?.hasPlayerOwner)return null;let r=game.users.find(r=>!r.isGM&&r.character?.id==i.id);if(!r){const o={...i.ownership};if(o.default!=CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER){delete o.default;const i=Object.keys(o).filter(i=>game.users.get(i)&&!game.users.get(i).isGM);1==i.length&&(r=game.users.get(i[0]))}}return r||null},showRollList=(r,o,c,d,p)=>{const recurse=g=>{this.showForRoll(r[g],o,!1,null,!1,i.id,c,{originalRollTotal:p}).then(()=>{null!=r[g+1]?recurse(g+1):d()})};r.length>0?recurse(0):d()},o=game.settings.get(\"dice-so-nice\",\"forceCharacterOwnerAppearance\"),c=\"2\"===o||\"1\"===o&&i.getFlag(\"core\",\"initiativeRoll\"),d=new Set(r.filter(i=>i.data?.actorId).map(i=>i.data.actorId)).size>1&&c,p=new Map;d?r.forEach(i=>{const r=i.data?.actorId||\"\";p.has(r)||p.set(r,[]),p.get(r).push(i)}):p.set(null,r);const g=[];for(const[r,o]of p){const d=this._buildRollList(o);if(0===d.length)continue;let p=i.author,v=i.speaker;if(c){let o,c=r||d[0].dice?.[0]?.options?.dsnActorId;c&&(o=game.actors.get(c)),!o&&i.speaker&&(o=ChatMessage.getSpeakerActor(i.speaker));const g=resolveOwnerForActor(o);g&&(p=g,c&&(v={actor:c}))}const b=o.reduce((i,r)=>i+(r.total??0),0);g.push(new Promise(i=>showRollList(d,p,v,i,b)))}g.length>0?Promise.all(g).then(()=>showMessage()):showMessage()}else setTimeout(showMessage,2500,i)}",

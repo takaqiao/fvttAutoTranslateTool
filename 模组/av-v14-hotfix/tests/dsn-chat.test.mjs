@@ -10,7 +10,7 @@ function setup({failure=null,hidden=false,pending=false,secret=false}={}){
  const node={classList:{remove:v=>classes.delete(v)},querySelectorAll:()=>[]};
  const user={id:'player'},message={id:'message',author:user,speaker:{actor:'actor'},whisper:secret?['gm']:[],isContentVisible:!secret,content:secret?'???':'12',_dice3dMessageHidden:true,_dice3dPendingRenders:1,_dice3danimating:true};
  const settings=new Map([['forceCharacterOwnerAppearance','0'],['hide3dDiceOnSecretRolls',true]]);
- const game={version:'14.368',release:{generation:14},view:'game',user,settings:{get:(_id,key)=>settings.get(key)},messages:new Map([[message.id,message]]),modules:new Map([['dice-so-nice',{active:true,version:'6.4.1'}]]),actors:new Map(),users:[]};
+ const game={version:'14.368',release:{generation:14},view:'game',user,settings:{get:(_id,key)=>settings.get(key)},messages:new Map([[message.id,message]]),modules:new Map([['dice-so-nice',{active:true,version:'6.4.2'}]]),actors:new Map(),users:[]};
  const ui={chat:{element:{querySelector:()=>node},_shouldShowNotifications:()=>false,scrollBottom(){}},sidebar:{popouts:{}}};
  const context=vm.createContext({game,window:{ui,document:{hidden}},ui,document:{querySelector:()=>null},Hooks:{callAll:(...args)=>events.push(args)},InitiativeMask:{release(){}},CompanionLink:{release:()=>[]},ChatMessage:{getSpeakerActor:()=>null},DsnSettings:{CONFIG:()=>({visibility:'all'}),ALL_CONFIG:()=>({}),ALL_CUSTOMIZATION:()=>({}),isEnabled:()=>true},DiceNotation:class{constructor(roll){if(failure==='notation')throw Error('notation failed');this.throws=[roll];}},setTimeout,CONST:{DOCUMENT_OWNERSHIP_LEVELS:{OWNER:3}}});
  const Native=vm.runInContext('(class Native {'+Object.values(fixture.methods).join('\n')+'})',context);
@@ -43,6 +43,18 @@ test('successful ordered throws retain native metadata and reveal exactly once',
  assert.equal(f.message._dice3dPendingRenders,0);assert.equal(f.errors.length,0);
  assert.equal(f.events.filter(e=>e[0]==='diceSoNiceRollComplete').length,1);
 });
+
+test('supported DsN and Foundry patch labels use function contracts and preserve render return',async()=>{
+ const f=setup();f.g.game.version='14.369';f.g.game.modules.get('dice-so-nice').version='6.5.0';
+ const result=installDsnChatRecovery({g:f.g});assert.equal(result.status,'installed');
+ assert.equal(f.pipeline.renderRolls(f.message,rolls()),undefined);await settle();
+ assert.equal(f.message._dice3dPendingRenders,0);assert.equal(f.errors.length,0);
+});
+
+test('public show rejects invalid notation with the native error after recovery installs',async()=>{
+ const f=setup(),native=f.pipeline.show;assert.equal(installDsnChatRecovery({g:f.g}).status,'installed');
+ assert.equal(f.pipeline.show,native);await assert.rejects(f.pipeline.show({}),/Roll data should be not null/);
+});
 test('recovery preserves secret content and a pending interactive throw',async()=>{
  const f=setup({failure:'queue',secret:true,pending:true});installDsnChatRecovery({g:f.g});
  f.pipeline.renderRolls(f.message,rolls());await settle();
@@ -57,7 +69,7 @@ test('public showForRoll API keeps its own exception behavior',()=>{
 });
 test('unknown versions and foreign pipeline methods remain untouched',()=>{
  for(const kind of ['version','source']){
-  const f=setup();if(kind==='version')f.g.game.modules.get('dice-so-nice').version='6.4.2';else f.pipeline.show=function foreign(){};
+  const f=setup();if(kind==='version')f.g.game.modules.get('dice-so-nice').version='7.0.0';else f.pipeline.show=function foreign(){};
   const original=f.pipeline.renderRolls,result=installDsnChatRecovery({g:f.g});
   assert.equal(f.pipeline.renderRolls,original);assert.notEqual(result.status,'installed');
  }

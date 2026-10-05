@@ -127,7 +127,7 @@ test('accessors, non-native display objects and unsupported PF2e use original po
   const {g}=await environment({systemVersion}),f=nativeFixture(g,[false]);
   if(kind==='accessor')Object.defineProperty(f.icons[0],'visible',{get:()=>false,set(){}});
   if(kind==='subclass')Object.setPrototypeOf(f.icons[0],Object.create(Sprite.prototype));
-  if(kind==='system')g.game.system.version='8.5.2';
+  if(kind==='system')g.game.system.version='9.0.0';
   installSundryPatch({g});g.Hooks.callAll('refreshToken',f.token);assert.equal(f.reads(),1,kind);
  }
 });
@@ -135,7 +135,7 @@ test('accessors, non-native display objects and unsupported PF2e use original po
 test('audited versions read live system eligibility after installation and keep unknown versions on native logic',async()=>{
  const {g}=await environment(),f=nativeFixture(g,[false]);
  assert.equal(installSundryPatch({g}).status,'installed');
- for(const [version,id,expectedReads] of [['8.5.1','pf2e',0],['8.5.2','pf2e',1],['8.5.1','sf2e',2],['8.5.0','pf2e',2]]) {
+ for(const [version,id,expectedReads] of [['8.5.1','pf2e',0],['8.5.2','pf2e',0],['8.5.1','sf2e',1],['8.5.0','pf2e',1]]) {
   g.game.system={id,version};g.Hooks.callAll('refreshToken',f.token);
   assert.equal(f.reads(),expectedReads,id+'/'+version);
   assert.deepEqual(f.view(),{background:false,icons:[false]});

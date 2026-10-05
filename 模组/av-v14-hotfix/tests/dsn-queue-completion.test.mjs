@@ -279,7 +279,9 @@ test('unknown completion sources retain native methods', () => {
       target =
         field === 'animateThrow' ? Object.getPrototypeOf(f.box) : Object.getPrototypeOf(f.engine);
     target[field] = function foreign() {};
-    f.install();
+    const result=f.install();
+    assert.equal(result.status,'installed');
+    assert.equal(result.completionStatus,'unsupported-source');
     assert.equal(Object.hasOwn(f.engine, 'handlePersistentThrowCompletion'), false);
   }
 });
