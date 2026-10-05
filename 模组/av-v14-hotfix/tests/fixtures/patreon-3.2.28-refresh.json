@@ -1,0 +1,12 @@
+{
+  "version": "3.2.28",
+  "originalSha256": "dc85cbea3a111b832e66dea58bdbfe1a591ef34c9975b4730eae9ecffd13970d",
+  "patchedSha256": "d16c9b2d39d847e82f1727b3795aa02c16c3db25185a9f09b15782eb3f6b0184",
+  "extraction": "Exact original source slices; full bundle withheld from test fixtures.",
+  "helpersStart": 142227,
+  "helpersEnd": 143982,
+  "helpers": "async function Ki(a,e){if(y(\"showEffectRelationship\")!==\"always\"||!a.actor||!a.visible||!e.refreshPosition)return;let t=canvas.interface.children.filter(i=>i.tokenId===a.document.uuid);if(t.length)for(let i of t){let n=(await fromUuid(i.tokenOwnerId))?.object;if(!n)continue;let o=i.children[0].text;i.clear(),i.removeChildren(),fa(i,a,n,{label:o})}}r(Ki,\"refreshPosition\");async function Xi(a,e){if(y(\"showEffectRelationship\")!==\"always\"||!a.actor||!a.visible||!e.refreshPosition)return;let t=canvas.interface.children.filter(i=>i.tokenOwnerId===a.document.uuid);if(t.length)for(let i of t){let n=i.children[0].text;i.clear(),i.removeChildren();let o=(await fromUuid(i.tokenId))?.object;o&&fa(i,o,a,{label:n})}}r(Xi,\"refreshPositionOwner\");async function Ji(a,e){if(y(\"showEffectRelationship\")!==\"always\"||!a.actor||!a.visible||!e.redrawEffects)return;let t=a.actor.itemTypes?.effect?.map(i=>{if(!i.system?.context?.origin?.token)return null;let n=i.system.rules.find(o=>o.key===\"GrantItem\"&&Object.keys(CONFIG.PF2E.conditionTypes).includes(o?.flag?.replace(/([a-z])([A-Z])/g,\"$1-$2\")?.toLowerCase()));return n?{name:n.flag.replace(/([a-z])([A-Z])/g,\"$1-$2\").toLowerCase(),e:i}:null}).filter(i=>!!i).reduce(function(i,n){return i[n.e.system?.context?.origin?.token]??={},i[n.e.system?.context?.origin?.token].names??=[],i[n.e.system?.context?.origin?.token].names.push(n.name),i},{});canvas.interface.children.filter(i=>i.tokenId===a.document.uuid).forEach(i=>{i?.destroy({children:!0})});for(let i in t){let n=(await fromUuid(i))?.object;if(!n)continue;let o=new PIXI.Graphics;o._zIndex=300,o.specialLayer=!0,o.tokenId=a.document.uuid,o.tokenOwnerId=n.document.uuid,canvas.interface.addChild(o),fa(o,a,n,{conditions:t[i].names})}}r(Ji,\"refreshEffects\");",
+  "listener": "var ct=class{static{r(this,\"DrawRefreshTokenHook\")}async listen(e,t){await Ki(e,t),await Xi(e,t),await Ji(e,t)}}",
+  "callback": "async(a,e)=>{R.refreshToken.forEach(t=>{t.listen(a,e)})}",
+  "factory": "refreshToken:[new ct]"
+}

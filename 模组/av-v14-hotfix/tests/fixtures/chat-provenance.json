@@ -1,0 +1,46 @@
+{
+  "foundryVersion": "14.367",
+  "source": {
+    "path": "C:\\Users\\Taka\\Desktop\\fvtt\\output\\leak-doctor-20260912\\runtime-tests\\profiles\\source\\foundry.mjs",
+    "sha256": "02248043922e265f368a07922543acb54a7c6402b848ac77e9783093be66545e"
+  },
+  "extraction": "Exact source slices; no method or class text is rewritten or normalized. JSON escapes only encode the original method strings.",
+  "fixtureSha256": {
+    "chat-semaphore.js": "b7cf496d27e9d972ebe37eee20f8ee632e99d0e24288ba20f35bfd90836ea2e2",
+    "chat-methods.json": "bdb2351930b6be04c55ae97f8c27863891c93d76e7ded65abc46c2a9b3034f09"
+  },
+  "fragments": [
+    {
+      "name": "Semaphore",
+      "sourceStartLine": 7599,
+      "sourceEndLine": 7684,
+      "sourceStartCharacter": 246301,
+      "sourceEndCharacter": 248184,
+      "sha256": "b7cf496d27e9d972ebe37eee20f8ee632e99d0e24288ba20f35bfd90836ea2e2"
+    },
+    {
+      "name": "deleteMessage",
+      "sourceStartLine": 130838,
+      "sourceEndLine": 130841,
+      "sourceStartCharacter": 4658434,
+      "sourceEndCharacter": 4658569,
+      "sha256": "92d1f9e6b6093b968eaf74267db69fdc3cbc4947f0f2e1086275aefbc695ffe1"
+    },
+    {
+      "name": "#deleteMessage",
+      "sourceStartLine": 130994,
+      "sourceEndLine": 131029,
+      "sourceStartCharacter": 4665352,
+      "sourceEndCharacter": 4666601,
+      "sha256": "f77ee426328eb55e3291126a7c67eee068cc72061ed0754fea0a1dd3aca38330"
+    },
+    {
+      "name": "#onScrollLog",
+      "sourceStartLine": 130524,
+      "sourceEndLine": 130537,
+      "sourceStartCharacter": 4646097,
+      "sourceEndCharacter": 4646812,
+      "sha256": "ebd2fe2a951e179e2772779a877f8ccca67af49efbf5ad3ffc3092fac78b5949"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "coreVersion": "14.367",
+  "coreSha256": "02248043922e265f368a07922543acb54a7c6402b848ac77e9783093be66545e",
+  "extraction": "Exact original method text, excluding static keyword as Function.prototype.toString does. Context snippets retain private dispatch and class-hook ancestry.",
+  "fragments": {
+    "applicationEvent": {
+      "source": "_doEvent(handler, {async=false, handlerArgs=[], debugText, eventName, hookName, hookArgs=[],\n    hookResponse=false, parentClassHooks=true}={}) {\n\n    // Debug logging\n    if ( debugText && CONFIG.debug.applications ) {\n      console.debug(`${this.constructor.name} | ${debugText}`);\n    }\n\n    // Async Events\n    const response = handler.call(this, ...handlerArgs);\n    if ( async && (response instanceof Promise) ) return response.then(r => {\n      if ( hookResponse ) hookArgs = [...hookArgs, r];\n      this.#dispatchEvent(eventName, hookName, hookArgs, parentClassHooks);\n      return r;\n    });\n\n    // Sync Events\n    else {\n      if ( hookResponse ) hookArgs = [...hookArgs, response];\n      this.#dispatchEvent(eventName, hookName, hookArgs, parentClassHooks);\n      return response;\n    }\n  }",
+      "startLine": 31624,
+      "sha256": "d1a7e27de29f5fe11e75d98263dbc65efad5efd3529eafb61447c9d037d3e823"
+    },
+    "inheritanceChain": {
+      "source": "*inheritanceChain() {\n    let cls = this;\n    while ( cls ) {\n      yield cls;\n      if ( cls === this.BASE_APPLICATION ) return;\n      cls = Object.getPrototypeOf(cls);\n    }\n  }",
+      "startLine": 30369,
+      "sha256": "e860f36e7fe2c9b95d185e6f454b2bb039a29807d824f94dc3f11c92cc0e25b0"
+    },
+    "messageHTML": {
+      "source": "async renderHTML({canDelete, canClose=false, ...rest}={}) {\n    canDelete ??= game.user.isGM; // By default, GM users have the trash-bin icon in the chat log itself\n\n    if ( typeof this.system.renderHTML === \"function\" ) {\n      const html = await this.system.renderHTML({canDelete, canClose, ...rest});\n      Hooks$1.callAll(\"renderChatMessageHTML\", this, html);\n      return html;\n    }\n\n    // Determine some metadata\n    const speakerActor = this.style === CHAT_MESSAGE_STYLES.OOC ? null : this.speakerActor;\n    const data = this.toObject(false);\n    data.content = await TextEditor$1.implementation.enrichHTML(this.content, {rollData: this.getRollData(),\n      secrets: speakerActor?.isOwner ?? game.user.isGM});\n    const isWhisper = this.whisper.length;\n\n    // Construct message data\n    const messageData = {\n      ...rest,\n      canDelete, canClose,\n      message: data,\n      user: game.user,\n      author: this.author,\n      speakerActor,\n      alias: this.alias,\n      cssClass: [\n        this.style === CHAT_MESSAGE_STYLES.IC ? \"ic\" : null,\n        this.style === CHAT_MESSAGE_STYLES.EMOTE ? \"emote\" : null,\n        isWhisper ? \"whisper\" : null,\n        this.blind ? \"blind\": null\n      ].filterJoin(\" \"),\n      isWhisper: this.whisper.length,\n      whisperTo: this.whisper.map(u => game.users.get(u)?.name).filterJoin(\", \")\n    };\n\n    // Render message data specifically for ROLL type messages\n    if ( this.isRoll ) await this.#renderRollContent(messageData);\n    else if ( !this.isContentVisible ) messageData.message.content = this._getHiddenContent();\n\n    // Define a border color\n    if ( this.style === CHAT_MESSAGE_STYLES.OOC ) messageData.borderColor = this.author?.color.css;\n\n    // Render the chat message\n    let html = await foundry.applications.handlebars.renderTemplate(CONFIG.ChatMessage.template, messageData);\n    html = foundry.utils.parseHTML(html);\n\n    // Flag expanded state of dice rolls\n    Hooks$1.callAll(\"renderChatMessageHTML\", this, html, messageData);\n\n    /** @deprecated since v13 */\n    if ( \"renderChatMessage\" in Hooks$1.events ) {\n      foundry.utils.logCompatibilityWarning(\"The renderChatMessage hook is deprecated. Please use \"\n        + \"renderChatMessageHTML instead, which now passes an HTMLElement argument instead of jQuery.\",\n      {since: 13, until: 15, once: true});\n      Hooks$1.callAll(\"renderChatMessage\", this, $(html), messageData);\n    }\n\n    return html;\n  }",
+      "startLine": 49028,
+      "sha256": "5899ae055bb4ac54d44a232edc49a58bf90101afb1dfaddefb51cb539af06847"
+    },
+    "renderMessage": {
+      "source": "async renderMessage(message, options) {\n    const hasGetHTML = foundry.utils.getDefiningClass(message, \"getHTML\") !== ChatMessage$1;\n    const hasRenderHTML = foundry.utils.getDefiningClass(message, \"renderHTML\") !== ChatMessage$1;\n    /** @deprecated since v13 */\n    if ( hasGetHTML && !hasRenderHTML ) {\n      const html = await message.getHTML(options);\n      if ( foundry.utils.getType(html) === \"HTMLElement\" ) return html;\n      if ( foundry.utils.getType(html[0]) === \"HTMLElement\" ) return html[0];\n      throw new Error(`Unable to render ChatMessage [${message.id}] as it did not return an HTMLElement or jQuery.`);\n    }\n    return message.renderHTML(options);\n  }",
+      "startLine": 131209,
+      "sha256": "82023d47f625284e0670d20b6468b74b6abb90a8dce7c8d69e405d8ba6317381"
+    },
+    "popoutHTML": {
+      "source": "async _renderHTML(context, options) {\n    return ChatLog.renderMessage(this.message, { canDelete: false });\n  }",
+      "startLine": 131475,
+      "sha256": "234da83c8ac9c5d1d870f681b008b40992a32da9350fd90f1eb22ae34acce5b2"
+    },
+    "dispatchEvent": {
+      "source": "#dispatchEvent(eventName, hookName, hookArgs, parentClassHooks) {\n\n    // Dispatch event for this Application instance\n    if ( this.constructor.emittedEvents.includes(eventName) ) {\n      this.dispatchEvent(new Event(eventName, { bubbles: true, cancelable: true }));\n    }\n\n    // Call hooks for this Application class\n    if ( hookName ) this.#callHooks(hookName, hookArgs, parentClassHooks);\n  }",
+      "startLine": 31657
+    },
+    "callHooks": {
+      "source": "#callHooks(hookName, hookArgs, parentClassHooks) {\n    if ( parentClassHooks && !hookName.includes(\"{}\") ) hookName += \"{}\";\n    for ( const cls of this.constructor.inheritanceChain() ) {\n      if ( !cls.name ) continue;\n      Hooks$1.callAll(hookName.replace(\"{}\", cls.name), this, ...hookArgs);\n      if ( !parentClassHooks ) break;\n    }\n  }",
+      "startLine": 31676
+    }
+  }
+}
