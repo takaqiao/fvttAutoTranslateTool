@@ -1,0 +1,4 @@
+/main.mjs -text
+/scripts/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
+/styles/** -text whitespace=trailing-space,space-before-tab,cr-at-eol
+/assets/** -text

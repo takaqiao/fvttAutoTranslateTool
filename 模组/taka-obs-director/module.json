@@ -1,0 +1,52 @@
+{
+  "id": "taka-obs-director",
+  "title": "Taka OBS Director",
+  "description": "Recorder-only PF2e map, cast, combat focus and received story images.",
+  "version": "1.0.1",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14",
+    "maximum": "14"
+  },
+  "esmodules": [
+    "main.mjs"
+  ],
+  "styles": [
+    "styles/director.css"
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "pf2e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "8.5.1",
+          "verified": "8.5.1"
+        }
+      }
+    ],
+    "requires": [
+      {
+        "id": "obs-utils",
+        "type": "module"
+      },
+      {
+        "id": "avclient-livekit",
+        "type": "module"
+      },
+      {
+        "id": "lib-wrapper",
+        "type": "module"
+      }
+    ]
+  },
+  "authors": [
+    {
+      "name": "Taka"
+    }
+  ],
+  "url": "https://github.com/takaqiao/fvttAutoTranslateTool/tree/taka-obs-director-v1.0.1/%E6%A8%A1%E7%BB%84/taka-obs-director",
+  "manifest": "https://github.com/takaqiao/fvttAutoTranslateTool/releases/download/taka-obs-director-v1.0.1/module.json",
+  "download": "https://github.com/takaqiao/fvttAutoTranslateTool/releases/download/taka-obs-director-v1.0.1/taka-obs-director-1.0.1.zip",
+  "changelog": "https://github.com/takaqiao/fvttAutoTranslateTool/releases/tag/taka-obs-director-v1.0.1"
+}
