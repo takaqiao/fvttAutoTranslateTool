@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
-import {NATIVE_IWR_PROFILES,NATIVE_DAMAGE_SHAPES,SHARED_MANUAL_SHAPE as shape,NATIVE_IWR_BRIDGE_PROTOCOL,isAutomaticBatchDescriptor,isAutomaticToolDescriptor} from '../../scripts/native-iwr-profiles.mjs';
+import {NATIVE_IWR_PROFILES,NATIVE_DAMAGE_SHAPES,SHARED_MANUAL_SHAPE as shape,TOOL_SOCKET_CONTRACTS,NATIVE_IWR_BRIDGE_PROTOCOL,isAutomaticBatchDescriptor,isAutomaticToolDescriptor} from '../../scripts/native-iwr-profiles.mjs';
 import {sourceText,nativeMethod,batchRegion,flatRegion,stackingRegion,toolRegions,bridgeStatement,automaticDescriptor,observerRegion,TOOL_RECEIVE,TOOL_RECEIVE_PATCHED,TOOL_FORWARD,TOOL_FORWARD_PATCHED} from '../../scripts/native-source-shapes.mjs';
 
 const hash=value=>createHash('sha256').update(value).digest('hex');
@@ -88,7 +88,9 @@ export function buildSharedManualPair({pf2eSource,toolbeltSource,pf2eVersion,too
  if(p){const header=observerRegion(pf,'pf2e').statement;if(header.includes('"sourceContract"'))a=automaticDescriptor(header);pf=removeNativePair(pf)}
  if(t){const header=observerRegion(tb,'toolbelt').statement;if(header.includes('"sourceContract"'))b=automaticDescriptor(header);tb=removeToolPair(tb)}
  if(hash(batchRegion(pf))!==shape.batchOriginal||hash(flatRegion(pf))!==shape.flatOriginal||hash(stackingRegion(pf))!==shape.stacking)throw Error('native-shared-seam-shape');
- const regions=toolRegions(tb);for(const [key,value]of Object.entries(regions))if(hash(value)!==shape['tool'+key[0].toUpperCase()+key.slice(1)])throw Error('toolbelt-source-seam-'+key);
+ const regions=toolRegions(tb),socketContract=TOOL_SOCKET_CONTRACTS.find(contract=>contract.socket===hash(regions.socket));
+ if(!socketContract)throw Error('toolbelt-source-seam-socket');
+ for(const [key,value]of Object.entries(regions))if(hash(value)!==(socketContract[key]??shape['tool'+key[0].toUpperCase()+key.slice(1)]))throw Error('toolbelt-source-seam-'+key);
  if(!tb.includes('r("_preUpdate",this.#h)'))throw Error('toolbelt-source-seam-wrapper');
  const native=buildNativeBridge({source:Buffer.from(pf),version:pf2eVersion});if(native.status!=='unchanged')throw Error('native-shared-seam-bridge-required');
  const installedBridge=buildNativeBridge({source:pf2eSource,version:pf2eVersion});

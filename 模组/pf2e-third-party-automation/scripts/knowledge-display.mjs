@@ -20,8 +20,9 @@ const attr=(tag,name)=>tag.match(new RegExp(`\\b${name}\\s*=\\s*(["'])(.*?)\\1`,
  * unavailable digest APIs and changed headings retain the native output. */
 export async function createWorkbenchDisplay({game,macro,actor,token,targets=[],globals=globalThis}){
  const source=WORKBENCH_DISPLAY_SOURCE,module=game.modules.get(source.module);
- const crypto=globals.crypto??globalThis.crypto;if(!isChineseKnowledgeLocale(game)||!module?.active||module.version!==source.version||macro?.uuid!==source.uuid||macro.type!=='script'||typeof macro.command!=='string'||!crypto?.subtle)return passthrough;
- const command=macro.command.replace(/\r\n/g,'\n'),digest=[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(command)))].map(byte=>byte.toString(16).padStart(2,'0')).join('');if(digest!==source.sha256)return passthrough;
+ const crypto=globals.crypto??globalThis.crypto;if(!isChineseKnowledgeLocale(game)||!module?.active||macro?.uuid!==source.uuid||macro.type!=='script'||typeof macro.command!=='string'||!crypto?.subtle)return passthrough;
+ const original=macro.command,command=original.replace(/\r\n/g,'\n'),digest=[...new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(command)))].map(byte=>byte.toString(16).padStart(2,'0')).join('');
+ if(digest!==source.sha256||game.modules.get(source.module)!==module||module.active!==true||macro.uuid!==source.uuid||macro.type!=='script'||macro.command!==original||!isChineseKnowledgeLocale(game))return passthrough;
  const name=token?.name??actor.name,targetNames=new Set(targets.map(target=>target.actor?.name)),featNotices=new Map(featIds.map(id=>[`${name} has @UUID[Compendium.pf2e.feats-srd.Item.${id}]`,`${name}拥有@UUID[Compendium.pf2e.feats-srd.Item.${id}]`]));
  const content=html=>{
   if(typeof html!=='string'||!html.startsWith('<strong>Recall Knowledge</strong> (Roll: <span'))return html;

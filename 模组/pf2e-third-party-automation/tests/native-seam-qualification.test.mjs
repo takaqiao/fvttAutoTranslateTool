@@ -7,13 +7,14 @@ import {buildNativeBridge,buildSharedManualPair} from '../tools/automatic-source
 import {verifyNativeIWRBridge,isVerifiedNativeIWRBridge} from '../scripts/native-iwr-verification.mjs';
 import {manualPoolBatchModel} from '../scripts/exploration/manual-pool-model.mjs';
 import * as providers from '../scripts/exploration/manual-pool-provider.mjs';
+import {currentToolbelt} from './toolbelt-current-fixture.mjs';
 const hash=value=>createHash('sha256').update(value).digest('hex');
 const base=readFileSync(process.env.PF2E_NATIVE_BUNDLE),toolbelt=readFileSync(process.env.TOOLBELT_MANUAL_SOURCE);
 assert.equal(hash(base),'d63da8312831b84905e6866b1dd3f9d93e95c1012955b0177ad2ce8ccf246157');assert.equal(hash(toolbelt),'2946fa27eaf0963098f9f48ee48f777c5cf65166b56b043de9404f09813c240f');
-function fixture(transform=value=>value){
+function fixture(transform=value=>value,toolSource=toolbelt){
  const game={system:{id:'pf2e',version:'8.5.99'},pf2e:{},modules:new Map()},module={version:'3.99.0',active:true};game.modules.set('pf2e-toolbelt',module);
  const bridged=buildNativeBridge({source:Buffer.concat([base,Buffer.from('\n// changed outside seams\n')]),version:game.system.version});
- const sources=buildSharedManualPair({pf2eSource:bridged.buffer,toolbeltSource:Buffer.concat([toolbelt,Buffer.from('\n// changed outside seams\n')]),pf2eVersion:game.system.version,toolbeltVersion:module.version});
+ const sources=buildSharedManualPair({pf2eSource:bridged.buffer,toolbeltSource:Buffer.concat([toolSource,Buffer.from('\n// changed outside seams\n')]),pf2eVersion:game.system.version,toolbeltVersion:module.version});
  sources.pf2e=transform(sources.pf2e);
  const text=sources.pf2e.toString(),start=text.indexOf('\tasync applyDamage({')+1,end=text.indexOf('\n\tasync undoDamage(',start),applyDamage=Function('return ({'+text.slice(start,end)+'}).applyDamage')();
  const bridge=Object.freeze({...bridged.descriptor,applyDamage});
@@ -40,6 +41,12 @@ test('a system document replacement invalidates an already issued native proof',
 });
 test('provider DTOs alone do not enable a new shared model',async()=>{
  const f=fixture();assert.equal(manualPoolBatchModel(f.game.pf2e.thirdPartyManualPoolBatch.descriptor),false);assert.equal(providers.isManualPoolProvider(f.module.api.explorationManualPool),false);
+});
+test('current socket alias and transport bindings qualify the actual served observers',async()=>{
+ const f=fixture(value=>value,currentToolbelt()),proof=await f.qualify();assert.equal(proof.ready,true,proof.reason);
+ assert.equal(providers.isManualPoolProvider(f.module.api.explorationManualPool),true);
+ f.sources.toolbelt=Buffer.from(f.sources.toolbelt.toString().replace('game.socket.off(`module.${M.id}`,t)','game.socket.on(`module.${M.id}`,t)'));
+ assert.equal((await f.qualify()).ready,false);assert.equal(providers.isManualPoolProvider(f.module.api.explorationManualPool),false);
 });
 test('exact current installed observers qualify across version and unrelated changes',async()=>{
  const f=fixture(),proof=await f.qualify();assert.equal(proof.ready,true,proof.reason);

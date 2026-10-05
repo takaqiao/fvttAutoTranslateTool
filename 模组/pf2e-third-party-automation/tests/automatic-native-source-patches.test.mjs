@@ -7,6 +7,7 @@ import {patchStaticReceiver} from '../tools/native-manual-pool-static-receiver/p
 import {patchToolbeltManualPool} from '../tools/toolbelt-manual-pool/patch.mjs';
 import {verifyNativeIWRBridge} from '../scripts/native-iwr-verification.mjs';
 import {automaticDescriptor,bridgeStatement} from '../scripts/native-source-shapes.mjs';
+import {currentToolbelt} from './toolbelt-current-fixture.mjs';
 
 const hash=value=>createHash('sha256').update(value).digest('hex');
 function input(name,sha){assert.ok(process.env[name],`${name} is required`);const bytes=readFileSync(process.env[name]);assert.equal(hash(bytes),sha,name);return bytes}
@@ -17,6 +18,20 @@ function unbridge(bytes){return Buffer.from(bytes.toString().replace(/\tstatic t
 function change(bytes){return Buffer.concat([bytes,Buffer.from('\n// unrelated upstream change\n')])}
 const bridge=(source=change(unbridge(pf2e)),version='8.5.99')=>builders.buildNativeBridge({source,version});
 const pair=(pf2eSource=bridge().buffer,toolbeltSource=change(toolbelt))=>builders.buildSharedManualPair({pf2eSource,toolbeltSource,pf2eVersion:'8.5.99',toolbeltVersion:'3.99.0'});
+test('current authenticated socket aliases prepare a byte stable pair without a version allowlist',()=>{
+ const first=pair(bridge().buffer,currentToolbelt()),again=pair(first.pf2e,first.toolbelt);
+ assert.equal(again.alreadyPatched,true);assert.deepEqual(again.pf2e,first.pf2e);assert.deepEqual(again.toolbelt,first.toolbelt);
+});
+for(const [name,before,after]of [
+ ['sender','e(c,s)','e(c)'],['type','o.__type__!==t','false'],['active GM','!game.user.isActiveGM','false'],
+ ['await decode','await yA(o)','yA(o)'],['GM local sender','e(o,game.userId)','e(o,o.senderId)'],
+ ['registration','game.socket.on(`module.${M.id}`,t)','game.socket.off(`module.${M.id}`,t)'],
+ ['unregistration','game.socket.off(`module.${M.id}`,t)','game.socket.on(`module.${M.id}`,t)'],
+ ['document decoder','return fromUuid(t)','return t']
+])test(`current socket ${name} changes refuse both files`,()=>{
+ const left=bridge().buffer,right=Buffer.from(currentToolbelt().toString().replace(before,after)),snapshots=[Buffer.from(left),Buffer.from(right)];
+ assert.throws(()=>pair(left,right),/toolbelt-.*seam/);assert.deepEqual(left,snapshots[0]);assert.deepEqual(right,snapshots[1]);
+});
 test('a new version and unrelated bytes preserve the native damage method',()=>{
  const result=bridge();assert.equal(result.status,'patch');assert(Buffer.isBuffer(result.buffer));assert.equal(result.descriptor.version,'8.5.99');
  assert.equal(result.descriptor.sourceSHA256,hash(change(unbridge(pf2e))));

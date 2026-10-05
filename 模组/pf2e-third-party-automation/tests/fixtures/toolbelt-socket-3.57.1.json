@@ -1,0 +1,14 @@
+{
+  "source": "PF2e Toolbelt 3.57.1 scripts/main.js",
+  "sourceSHA256": "ea0aceac2e8198ea47ab760ec7b7c86bbdff6de2aae11bb34c4ef40e7e693d5b",
+  "regionSHA256": {
+    "socket": "fe97a3e4a20c6ce1b297e7f3b62d225632833e09ccd4e43f82c6160864e25b44",
+    "transport": "ad19fcef9658d821cbe27d72d38b4a15f8ab0f66aab52fa556881fddc6efc5eb",
+    "conversion": "186abafaa3017dd447f7d98a9ca4346c542efea9387f37cae5e284221e672679"
+  },
+  "regions": {
+    "socket": "function _e(t,e){let n=!1,i=a(async(o,s)=>{if(o.__type__!==t||!game.user.isActiveGM)return;let c=await yA(o);e(c,s)},\"onSocket\"),r=a(o=>{if(!game.users.activeGM){ui.notifications.error(ie.shared(\"emiting.noGm\"));return}Qo();let s=SA(o);s.__type__=t,Xo(s)},\"emit\");return{get enabled(){return n},async call(o){if(u.isPlainObject(o)){if(game.user.isActiveGM)return e(o,game.userId);r(o)}},emit:r,activate(){this.enabled||!Ne()||(n=!0,zy(i))},disable(){this.enabled&&(n=!1,Ly(i))},toggle(o){o??=!this.enabled,o?this.activate():this.disable()}}}",
+    "transport": "function zy(t){game.socket.on(`module.${M.id}`,t)}a(zy,\"socketOn\");function Ly(t){game.socket.off(`module.${M.id}`,t)}a(Ly,\"socketOff\");function Xo(t){game.socket.emit(`module.${M.id}`,t)}a(Xo,\"socketEmit\");",
+    "conversion": "async function yA(t){let e=t.__converter__,n=t.__source__;delete t.__converter__,delete t.__source__,delete t.__type__,await Promise.all(u.entries(t).map(async()=>{}));let i=n===\"array\"?[]:{};return await Promise.all(u.entries(t).map(async([r,o])=>{i[r]=await vA(o,e[r])})),i}a(yA,\"convertToCallOptions\");async function vA(t,e){switch(e){case\"document\":return fromUuid(t);case\"target\":return bA(t);case\"token\":return(await fromUuid(t))?.object;default:return t}}a(vA,\"convertToCallOption\");async function bA(t){let e=await fromUuid(t.actor);if(e instanceof Actor)return{actor:e,token:t.token&&await fromUuid(t.token)||void 0}}a(bA,\"convertTargetFromPacket\");function TA({actor:t,token:e}){return{actor:t.uuid,token:e?.uuid}}a(TA,\"convertTargetToPacket\");function SA(t){let e={},n=u.mapValues(t,(i,r)=>i instanceof foundry.abstract.Document?(e[r]=\"document\",i.uuid):qo(i)?(e[r]=\"token\",i.document.uuid):zx(i)?(e[r]=\"target\",TA(i)):i);return n.__converter__=e,n.__source__=u.isArray(t)?\"array\":\"object\",n}a(SA,\"convertToEmitOptions\");"
+  }
+}

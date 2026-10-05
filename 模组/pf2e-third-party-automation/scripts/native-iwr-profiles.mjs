@@ -35,5 +35,10 @@ export const SHARED_MANUAL_SHAPE=Object.freeze({
  nativeObserver:'aee30a4c318cc1645ef8bfcb00f53aec4438ed285048225ac0ca687af4d85a42',toolObserver:'43cb15acccea69cf8eea1e2ee50b5e3838358ea0aac70ee18eecf697f6659f98'
 });
 const keys=(value,fields)=>Object.keys(value).sort().join(',')===fields.split(',').sort().join(',');
+// The same authenticated sender contract with two audited minifier bindings.
+export const TOOL_SOCKET_CONTRACTS=Object.freeze([
+ Object.freeze({socket:SHARED_MANUAL_SHAPE.toolSocket,transport:'b5d5ec6227f0c4c03c6147276e9b8681ba238855c7b0e64f3077cd7ccb5f7622',conversion:'1225b9adf3c1269012c1579001a08eff161785cca0c7dd263b95857a6f7fe72d'}),
+ Object.freeze({socket:'fe97a3e4a20c6ce1b297e7f3b62d225632833e09ccd4e43f82c6160864e25b44',transport:'ad19fcef9658d821cbe27d72d38b4a15f8ab0f66aab52fa556881fddc6efc5eb',conversion:'186abafaa3017dd447f7d98a9ca4346c542efea9387f37cae5e284221e672679'})
+]);
 export function isAutomaticBatchDescriptor(value){return !!value&&keys(value,'version,protocol,providerId,providerVersion,baseSourceSHA256,sourceContract,model,staticReceiverModelVersion,receiverPredicateModelVersion')&&value.version===2&&value.protocol==='pf2e-third-party-automation:manual-pool-batch:1'&&value.providerId==='pf2e'&&typeof value.providerVersion==='string'&&/^[a-f0-9]{64}$/.test(value.baseSourceSHA256)&&value.sourceContract===SHARED_MANUAL_SHAPE.id&&value.model==='numeric-static-reception.v1'&&value.staticReceiverModelVersion===1&&value.receiverPredicateModelVersion===1}
 export function isAutomaticToolDescriptor(value){return !!value&&keys(value,'version,hpBaselineGuardVersion,providerId,providerVersion,sourceSHA256,sourceContract')&&value.version===2&&value.hpBaselineGuardVersion===1&&value.providerId==='pf2e-toolbelt'&&typeof value.providerVersion==='string'&&/^[a-f0-9]{64}$/.test(value.sourceSHA256)&&value.sourceContract===SHARED_MANUAL_SHAPE.toolbeltId}

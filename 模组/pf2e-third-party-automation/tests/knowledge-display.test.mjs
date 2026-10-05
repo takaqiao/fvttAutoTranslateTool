@@ -22,9 +22,20 @@ test('scoped notices translate only exact producer sentences and preserve custom
  const display=await make(),known='Compendium.pf2e.feats-srd.Item.1Bt7uCW2WI4sM84P',source=`<strong>Recall Knowledge</strong> (Roll: <span>12</span>)<p>Token Skill has @UUID[${known}]</p><p>Other Actor has @UUID[${known}]</p><p>Token Skill has a custom sentence</p>`;
  assert.equal(display.content(source),`<strong>回忆知识</strong>（骰点：<span>12</span>）<p>Token Skill拥有@UUID[${known}]</p><p>Other Actor has @UUID[${known}]</p><p>Token Skill has a custom sentence</p>`);assert.equal(display.notice("Token Skill tries to remember if they've heard something related to this."),'Token Skill尝试回忆相关知识。');assert.equal(display.notice("Other Actor tries to remember if they've heard something related to this."),"Other Actor tries to remember if they've heard something related to this.");assert.equal(display.notice('No selected token or assigned character'),'未选中棋子或指定角色。');
 });
-test('unknown version, source identity, source fingerprint or changed current text preserves native output',async()=>{
+test('an unknown Workbench label still translates the audited macro',async()=>{
+ const display=await make({game:{...game,modules:new Map([['xdy-pf2e-workbench',{active:true,version:'7.8.0'}]])}});
+ assert.equal(display.enabled,true);assert.equal(display.notice('No selected token or assigned character'),'未选中棋子或指定角色。');
+});
+test('source or module replacement during its digest preserves native output',async()=>{
+ for(const change of ['command','module']){
+  const module={active:true,version:'future'},localGame={...game,modules:new Map([['xdy-pf2e-workbench',module]])},macro={uuid,type:'script',command};
+  const globals={crypto:{subtle:{async digest(...args){const result=await crypto.webcrypto.subtle.digest(...args);if(change==='command')macro.command+='\n';else localGame.modules.set('xdy-pf2e-workbench',{...module});return result}}}};
+  const display=await make({game:localGame,macro,globals});assert.equal(display.enabled,false);
+ }
+});
+test('unknown source identity, source fingerprint or changed current text preserves native output',async()=>{
  const source='<strong>Recall Knowledge</strong><table><tr><th>Skill</th></tr></table>';
- for(const overrides of [{game:{...game,i18n:{lang:'en'}}},{game:{...game,modules:new Map([['xdy-pf2e-workbench',{active:true,version:'7.8.0'}]])}},{macro:{uuid:'Macro.custom',type:'script',command}},{macro:{uuid,type:'script',command:command+'\n'}}]){const display=await make(overrides);assert.equal(display.enabled,false);assert.equal(display.content(source),source);assert.equal(display.notice('No selected token or assigned character'),'No selected token or assigned character');}
+ for(const overrides of [{game:{...game,i18n:{lang:'en'}}},{game:{...game,modules:new Map([['xdy-pf2e-workbench',{active:false}]])}},{macro:{uuid:'Macro.custom',type:'script',command}},{macro:{uuid,type:'script',command:command+'\n'}}]){const display=await make(overrides);assert.equal(display.enabled,false);assert.equal(display.content(source),source);assert.equal(display.notice('No selected token or assigned character'),'No selected token or assigned character');}
  const display=await make();assert.equal(display.content('<strong>Recall Knowledge (Changed)</strong><table><tr><th>Skill</th></tr></table>'),'<strong>Recall Knowledge (Changed)</strong><table><tr><th>Skill</th></tr></table>');
 });
 test('exact macro input accepts only CRLF normalization without changing its source',async()=>{

@@ -17,10 +17,15 @@ export const TOOL_RECEIVE='#g({master:e,...n}){this.isValidMaster(e)&&e.update(n
 export const TOOL_RECEIVE_PATCHED='#g({master:e,__explorationManualPool:x,...n},s){return __toolbeltManualPool.receive(e,n,x,s,()=>this.isValidMaster(e)&&e.update(n))}';
 export const TOOL_FORWARD='m.isOwner?m.update(g):this.#t.emit({master:m,...g})';
 export const TOOL_FORWARD_PATCHED='let x=__toolbeltManualPool.forward(e,m,g,r,()=>m.update(g),p=>this.#t.emit(p));if(x)await x';
-export function toolRegions(source){return {
+export function toolRegions(source){
+ const socket=sourceRegion(source,'function _e(t,e)','a(_e,"createEmitable")','toolbelt-source-seam');
+ const current=socket.includes('await yA(o)');
+ return {
  receive:sourceRegion(source,'#g({master:e,','async#p(','toolbelt-source-seam'),
  forward:sourceRegion(source,'async#h(e,n,i,r,o)','#b(e,n,i,r)','toolbelt-source-seam'),
- socket:sourceRegion(source,'function _e(t,e)','a(_e,"createEmitable")','toolbelt-source-seam'),
+ socket,
+ transport:sourceRegion(source,current?'function zy(t)':'function Ly(t)','a(Xo,"socketEmit");','toolbelt-source-seam')+'a(Xo,"socketEmit");',
+ conversion:sourceRegion(source,current?'async function yA(t)':'async function vA(t)','var yk=','toolbelt-source-seam'),
  validity:sourceRegion(source,'isValidActor(e){return!!e&&e instanceof Actor','isValidSlave(e)','toolbelt-source-seam'),
  binding:sourceRegion(source,'#t=_e(this.path("master")','get key(){return"shareData"}','toolbelt-source-seam')
 }}

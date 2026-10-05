@@ -4,7 +4,7 @@ export const FORCE_BARRAGE_WORKBENCH_SOURCE='Compendium.xdy-pf2e-workbench.asymo
 const SPELL_SOURCE='Compendium.pf2e.spells-srd.Item.gKKqvLohtrSJj3BM';
 function reject(reason){const error=Error(`Force Barrage requires manual handling: ${reason}`);error.code=`force-barrage-${reason}`;throw error}
 function requireBuild(game){
- if(game?.version!=='14.368'||game.system?.id!=='pf2e'||game.system?.version!=='8.5.1')reject('unsupported-system-build');
+ if(Number(game?.release?.generation??String(game?.version??'').split('.')[0])!==14||game.system?.id!=='pf2e'||game.system?.version!=='8.5.1')reject('unsupported-system-build');
  for(const id of ['xdy-pf2e-workbench','pf2e-toolbelt']){
   const module=game.modules?.get(id);if(module?.active!==true)reject(`unsupported-${id}`);
  }
