@@ -3,7 +3,7 @@ import {installDsnQueueRecovery} from './dsn-queue.mjs';
 import {installDsnModelRecovery} from './dsn-model.mjs';
 import {dsnCompatibility} from './dsn-runtime.mjs';
 
-// Audited DsN 6.4.1/6.4.2 functions. Model errors reject and failed batches continue native
+// Audited DsN 6.4.1/6.4.2/6.4.3 functions. Model errors reject and failed batches continue native
 // chat reveal, preserving permissions and interactive pending throws.
 const hashes={
   renderRolls:'8ed6ad569e58f7a64474f862a9a08a5e27492b2d8cedbe16b9d2ddce76a9caed',

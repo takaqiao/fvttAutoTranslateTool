@@ -1,16 +1,18 @@
-import test from 'node:test';
+import test, {describe} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import {installDsnChatRecovery} from '../scripts/patches/dsn-chat.mjs';
 const fixture=JSON.parse(fs.readFileSync(new URL('./fixtures/dsn-chat-native.json',import.meta.url)));
+for(const name of ['dsn-queue-native.json','dsn-queue-6.4.3-native.json'])describe(name,()=>{
+const queueFixture=JSON.parse(fs.readFileSync(new URL('./fixtures/'+name,import.meta.url)));
 const settle=()=>new Promise(resolve=>setImmediate(resolve));
 function setup({failure=null,hidden=false,pending=false,secret=false}={}){
  const errors=[],events=[],queued=[],classes=new Set(['dsn-hide']);
  const node={classList:{remove:v=>classes.delete(v)},querySelectorAll:()=>[]};
  const user={id:'player'},message={id:'message',author:user,speaker:{actor:'actor'},whisper:secret?['gm']:[],isContentVisible:!secret,content:secret?'???':'12',_dice3dMessageHidden:true,_dice3dPendingRenders:1,_dice3danimating:true};
  const settings=new Map([['forceCharacterOwnerAppearance','0'],['hide3dDiceOnSecretRolls',true]]);
- const game={version:'14.368',release:{generation:14},view:'game',user,settings:{get:(_id,key)=>settings.get(key)},messages:new Map([[message.id,message]]),modules:new Map([['dice-so-nice',{active:true,version:'6.4.2'}]]),actors:new Map(),users:[]};
+ const game={version:'14.368',release:{generation:14},view:'game',user,settings:{get:(_id,key)=>settings.get(key)},messages:new Map([[message.id,message]]),modules:new Map([['dice-so-nice',{active:true,version:queueFixture.provenance.version}]]),actors:new Map(),users:[]};
  const ui={chat:{element:{querySelector:()=>node},_shouldShowNotifications:()=>false,scrollBottom(){}},sidebar:{popouts:{}}};
  const context=vm.createContext({game,window:{ui,document:{hidden}},ui,document:{querySelector:()=>null},Hooks:{callAll:(...args)=>events.push(args)},InitiativeMask:{release(){}},CompanionLink:{release:()=>[]},ChatMessage:{getSpeakerActor:()=>null},DsnSettings:{CONFIG:()=>({visibility:'all'}),ALL_CONFIG:()=>({}),ALL_CUSTOMIZATION:()=>({}),isEnabled:()=>true},DiceNotation:class{constructor(roll){if(failure==='notation')throw Error('notation failed');this.throws=[roll];}},setTimeout,CONST:{DOCUMENT_OWNERSHIP_LEVELS:{OWNER:3}}});
  const Native=vm.runInContext('(class Native {'+Object.values(fixture.methods).join('\n')+'})',context);
@@ -81,7 +83,7 @@ test('restore removes only the owned render wrapper and repeated install is idem
  installed.restore();assert.equal(f.pipeline.renderRolls,original);assert.equal(Object.hasOwn(f.pipeline,'renderRolls'),false);
 });
 
-const queueFixture=JSON.parse(fs.readFileSync(new URL('./fixtures/dsn-queue-native.json',import.meta.url)));
+
 function realQueue(f,{persistent=false}={}){
  const {context}=f;let failures=1,simulations=0,hidden=0,landed=[];
  Object.assign(context,{setTimeout,clearTimeout,Utils:{removeTicker(){}},canvas:{app:{ticker:{add(){}}}}});
@@ -234,4 +236,6 @@ test('native resize waits for the replacement engine created asynchronously afte
  assert.equal(resized.box.throwEngine.rolling,false);assert.equal(resized.box._preparingThrow,false);
  assert.equal(q.queue.length,0);assert.equal(q.hidden(),2);
  result.restore();assert.equal(Object.hasOwn(resized.box,'startUnifiedBatch'),false);
+});
+
 });

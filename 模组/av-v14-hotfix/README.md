@@ -1,10 +1,19 @@
-# FVTT v14 Local Hotfix 0.6.22
+# FVTT v14 Local Hotfix 0.6.23
 
-当前核验基线为 Foundry **14.368**、PF2e **8.5.1**、Dice So Nice **6.4.2**、BBMM **1.4.11**、Grid **2.3.1**、Summons Assistant **2.20.2**。本模组按支持的主版本、实际 API 与函数源码契约安装适配；每项可在世界设置中关闭，刷新后生效。契约不匹配或检测到冲突时跳过，对应状态见：
+当前核验基线为 Foundry **14.368**、PF2e **8.5.1**、Dice So Nice **6.4.3**、BBMM **1.4.11**、Grid **2.3.1**、Summons Assistant **2.20.2**。本模组按支持的主版本、实际 API 与函数源码契约安装适配；每项可在世界设置中关闭，刷新后生效。契约不匹配或检测到冲突时跳过，对应状态见：
 
 ```js
 game.modules.get('av-v14-hotfix').api.status()
 ```
+
+## 0.6.23 的 DsN 队列适配
+
+- DsN 6.4.3 新增了启动和收尾 catch，但启动拒绝后仍会保留 `rolling/_preparingThrow`、pending binds 和临时关闭的碰撞。补修释放受影响批次，恢复其碰撞和 binds，让后续投骰继续。
+- 特效、碰撞或位置 worker 收尾拒绝时，该批次返回 `false`，聊天继续沿原生流程恢复。旧批次迟到的特效结果不会结束正在运行的新批次。
+- 队列、Accumulator 回调和动画收尾使用一致的旧版或 6.4.3 来源组合。保留原生 ticker 函数、私有特效闭包及外部 Promise consumers；异步收尾继续前核验画板、engine、worker、函数、callback 与 throws 身份。等待具体 `box.ready`，重建画板时重新安装；未知或混搭来源跳过对应路径。
+- 6.4.3 的聊天、模型和画质函数与已核验来源一致，既有 BBMM 五项画质锁、正常投骰、爆骰、私密及交互 pending 规则保留。新 fixture 独立保存，旧来源记录和历史回归继续保留。
+
+隔离回归涵盖源码契约、失败恢复与并发所有权；实际世界的画面、帧率及第三方完整工作流需另行客户端核验。模型下载失败补修仍需要完整刷新已卡住的旧客户端。
 
 ## 0.6.22 的上游维护
 
@@ -89,10 +98,10 @@ Sundry 与共享回合/奴仆清理使用已验证的原生 Hooks 记录适配�
 
 ## 版本守卫审计
 
-| 路径 | 0.6.22 的守卫与理由 |
+| 路径 | 0.6.23 的守卫与理由 |
 | --- | --- |
 | 包入口及核心补修 | 保留 Foundry generation 14；聊天、时间戳、时长、音频及 Hooks 另有实际 API/源码保护。精确核心标签只用作来源记录。 |
-| DsN 聊天/模型/队列 | 解除精确 6.4.1 / 14.368；保留 DsN 6、Foundry 14、逐函数及回调哈希、实例/原型所有权、具体 ready Promise 与批次所有权。完整文件哈希仅用于 fixture 来源。 |
+| DsN 聊天/模型/队列 | 解除精确 6.4.1 / 14.368；保留 DsN 6、Foundry 14、逐函数及回调哈希、实例/原型所有权、具体 ready Promise 与批次所有权。队列、回调和动画按旧版或 6.4.3 来源组合核验，禁止混搭。完整文件哈希仅用于 fixture 来源。 |
 | DsN 画质 | 解除精确 DsN/BBMM 小版本；保留 DiceConfig 每个消费函数及 factory 哈希。上下文接受已核验的 6.4.1 和 6.4.2 函数，注册表和规则不符合时跳过。 |
 | BBMM reader | BBMM 1、Foundry 14；world Boolean/Object 注册定义、client/user 目标、namespace/key/value/soft 结构。只读取规则，不恢复旧通用设置监听器。 |
 | Grid / BBMM 旧修补 | 已删除运行时守卫和实现，使用当前上游；历史数据保留。 |
@@ -107,7 +116,7 @@ Sundry 与共享回合/奴仆清理使用已验证的原生 Hooks 记录适配�
 
 备份旧目录后，将本目录安装到 `Data/modules/av-v14-hotfix`，在需要的世界启用并完整刷新客户端。退役的 `scripts/patches/patreon.mjs`、`wayfinder-fog.mjs`、`wayfinder-fog-texture.mjs`、`grid.mjs`、`bbmm-locks.mjs` 应从部署目录移除。回退可恢复原目录，或关闭本模组后刷新。
 
-安装清单使用 [av-v14-hotfix-v0.6.22 的 module.json](https://github.com/takaqiao/fvttAutoTranslateTool/releases/download/av-v14-hotfix-v0.6.22/module.json)，下载为同一标签的 `av-v14-hotfix-0.6.22.zip`。本仓库包含多个模组，不能用全仓库 `releases/latest/download` 作为此模组的清单。
+安装清单使用 [av-v14-hotfix-v0.6.23 的 module.json](https://github.com/takaqiao/fvttAutoTranslateTool/releases/download/av-v14-hotfix-v0.6.23/module.json)，下载为同一标签的 `av-v14-hotfix-0.6.23.zip`。本仓库包含多个模组，不能用全仓库 `releases/latest/download` 作为此模组的清单。
 
 运行 `node --test tests/*.test.mjs` 验证隔离回归。原生函数及源码哈希记录在 `tests/fixtures`；音频、设置操作符等测试需本地 Foundry 安装，可用 `FVTT_NATIVE_APP` 指定 `resources/app`。具体运行命令、数量、跳过项和部署哈希以本次修复回执为准。
 

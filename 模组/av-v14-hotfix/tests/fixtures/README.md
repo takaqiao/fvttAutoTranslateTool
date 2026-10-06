@@ -27,13 +27,25 @@ node scripts/build-chat-test-fixtures.mjs /path/to/foundry.mjs
 
 The generators write only the named test fixtures. They do not modify the runtime patches, application data, or original source files.
 
+## 0.6.23 source capture
+
+`dsn-queue-6.4.3-native.json` is a separate fixture from the captured 6.4.3 installation. Its provenance records the bundle and manifest bytes and SHA-256, exact queue/Accumulator/DiceBox/ThrowEngine excerpts, and unchanged chat, model and quality fragment contracts. `dsn-queue-native.json` and the other historical fixtures retain their original 6.4.2 source pins.
+
+The 6.4.3 generator verifies `source-capture.json`, `inventory.json` and the manifest before writing the new fixture. It checks every fragment first and writes only the new queue file:
+
+```sh
+node scripts/build-dsn-643-test-fixture.mjs /path/to/upstream
+```
+
+Both capture files must be alongside `upstream`. Queue completion and chat regressions exercise both source profiles, including asynchronous readiness, failures, late effects and replacement of batch owners during worker cleanup. These fixtures prove isolated behavior and source contracts; they do not measure live-world graphics or frame rate.
+
 ## 0.6.22 source capture
 
 The DsN chat, model and queue fixtures are exact excerpts from the remote installation's 6.4.2 `main.js`, verified against `source-capture.json`. Their required functions and completion consumers match 6.4.1. The DiceConfig `_prepareContext` excerpt was updated for 6.4.2's medium shadow choice and hidden-die filtering. The associated metadata records original bundle SHA-256, fragment offsets and fragment SHA-256; bundle hashes never authorize a runtime patch.
 
 `bbmm-rules-native.json` includes only BBMM 1.4.11's two setting registrations and the native rule writer needed to prove the reader contract. `turn-lifecycle-native.json` records the current remote Reaction 1.4.3, Sustain 1.1.0 and Summons 2.20.2 callback provenance. Historical core and Toolbelt excerpts keep their original provenance.
 
-To regenerate these fixtures from a separately captured remote installation:
+The historical generator requires the original capture schema with a `versions` map. Do not use it to rewrite these source pins from a newer capture:
 
 ```sh
 node scripts/build-current-test-fixtures.mjs /path/to/upstream
