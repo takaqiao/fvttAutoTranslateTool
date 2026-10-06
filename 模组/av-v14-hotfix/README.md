@@ -13,6 +13,7 @@ game.modules.get('av-v14-hotfix').api.status()
 - 队列、Accumulator 回调与完整 DiceBox 使用一致的旧版或 6.4.3 来源组合，并核验实际实例、原型上的 ticker 消费方法。实例使用稳定且可恢复的 ticker wrapper，原生 prototype `animateThrow` 及私有特效闭包继续实际执行。原生 spawn、淡出和清场重新注册也使用同一实例函数；异步收尾继续前核验画板、engine、每批 worker/exec、消费者、callback 与 throws 身份，旧清理等待期间的 ticker 帧不会触碰替换的所有者。
 - 支持已核验的 PersistentDice adapter 对 spawn、clearScene 与 completion 的窄包装，保留其实际函数值及 dispose 身份判断；原生两个 Promise 消费者也适配桥返回的外层 Promise，外部 await/catch 保留原生行为。等待具体 `box.ready`，质量更新或重建画板时重新安装；未知或混搭来源跳过对应路径。`api.status().version` 与清单同为 0.6.23。
 - 在投骰、特效或 worker 等待期间启用、停用 PersistentDice，只有同一画板、engine、worker、callback 和 throws 上完整且已核验的桥安装/拆除才更新该批次的引用；受影响批次明确结算，后批次继续。未知换属在收尾前释放捕获等待为 `false`，保留新所有者的物理状态；未知原生业务异常仍抛出。
+- 持久骰或交互骰保留 ticker 时，下一批原生 spawn/simulate 等待仍可运行正常帧。只有该启动尚未取得 callback/throws、且仍在 `_preparingThrow` 阶段时接受原生 null 状态；取得后撤销继续按严格批次身份处理。
 - 6.4.3 的聊天、模型和画质函数与已核验来源一致，既有 BBMM 五项画质锁、正常投骰、爆骰、私密及交互 pending 规则保留。新 fixture 独立保存，旧来源记录和历史回归继续保留。
 
 隔离回归涵盖源码契约、失败恢复与并发所有权；实际世界的画面、帧率及第三方完整工作流需另行客户端核验。模型下载失败补修仍需要完整刷新已卡住的旧客户端。

@@ -16,6 +16,53 @@ test('worker RPC fixture has the same exact source in both captured DsN profiles
 
 for(const file of ['dsn-queue-native.json','dsn-queue-6.4.3-native.json'])describe(file,()=>{
   const fixture=JSON.parse(fs.readFileSync(new URL('./fixtures/'+file,import.meta.url)));
+  async function retainTicker(f){
+    f.engine.persistentDiceList.push(f.other);f.other.userData.persistentId='legacy';
+    const prior=observe(f.enqueue());await settle();await f.finish();
+    assert.equal(prior.value,true);assert.equal(f.ticker.has(f.box.animateThrow),true);
+  }
+  async function finishFollowing(f,first,second,release){
+    release();await settle();for(let i=0;i<3;i++)await f.finish();
+    assert.equal(first.value,true);assert.equal(second.value,true);
+    const next=observe(f.enqueue());await settle();await f.finish();
+    assert.equal(next.value,true);assert.equal(f.engine.rolling,false);assert.equal(f.engine.running,false);
+    assert.equal(f.box._preparingThrow,false);assert.equal(f.errors.length,0);await f.queue.idle();
+  }
+  for(const patched of [false,true])test((patched?'recovery':'native')+' retained persistent ticker permits an unbound startup and following throws',async()=>{
+    const f=setup(fixture);if(patched)f.install();await retainTicker(f);
+    const release=f.holdWorker('simulate'),first=observe(f.enqueue()),second=observe(f.enqueue());await settle();
+    assert.equal(f.box._preparingThrow,true);assert.equal(f.engine.callback,null);assert.equal(f.engine.throws,null);
+    assert.doesNotThrow(()=>f.ticker.frame());await settle();
+    assert.equal(first.status,'pending');assert.equal(second.status,'pending');
+    await finishFollowing(f,first,second,release);
+  });
+  for(const enabled of [false,true])test('registered enabled='+enabled+' with a retained ticker preserves startup and the next throw',async()=>{
+    const f=setup(fixture);prepareBridge(f);f.install();const settings=prepareRegisteredSettings(f);
+    if(!enabled)await settings.setEnabled(true);await retainTicker(f);
+    const release=f.holdWorker('simulate'),first=observe(f.enqueue()),second=observe(f.enqueue());await settle();
+    await settings.setEnabled(enabled);assert.doesNotThrow(()=>f.ticker.frame());await settle();
+    assert.equal(first.status,'pending');assert.equal(second.status,'pending');
+    await finishFollowing(f,first,second,release);
+    f.engine.persistentDiceList.length=0;await settings.setEnabled(false);
+  });
+  for(const field of ['worker','exec'])test('retained ticker rejects unknown '+field+' replacement during unbound startup',async()=>{
+    const f=setup(fixture);f.install();await retainTicker(f);
+    const release=f.holdWorker('simulate'),first=observe(f.enqueue()),second=observe(f.enqueue());await settle();
+    const calls=[],foreign={rolling:true,exec:(...args)=>{calls.push(args);return Promise.resolve(true);}};
+    if(field==='worker'){f.box.physicsWorker=foreign;f.engine.physicsWorker=foreign;}else f.box.physicsWorker.exec=foreign.exec;
+    assert.doesNotThrow(()=>f.ticker.frame());await settle();
+    assert.equal(first.value,false);assert.equal(second.value,false);assert.deepEqual(calls,[]);assert.equal(foreign.rolling,true);
+    release();await settle();await f.queue.idle();
+  });
+  test('a retained ticker cannot reopen startup after its callback and throws were acquired',async()=>{
+    const f=setup(fixture);f.install();await retainTicker(f);
+    const first=observe(f.enqueue()),second=observe(f.enqueue());await settle();
+    assert.equal(typeof f.engine.callback,'function');assert.notEqual(f.engine.throws,null);
+    f.box._preparingThrow=true;f.engine.callback=null;f.engine.throws=null;
+    assert.doesNotThrow(()=>f.ticker.frame());await settle();
+    assert.equal(first.value,false);assert.equal(second.value,false);assert.equal(f.engine.rolling,true);
+    await f.queue.idle();
+  });
   for(const reenable of [false,true])for(const stage of ['simulate','playback','effects','collisions','positions'])
     test('registered enabled setting '+(reenable?'off/on':'off')+' during '+stage+' continues both batches through native bridge teardown',async()=>{
       const f=setup(fixture);prepareBridge(f);f.install();const settings=prepareRegisteredSettings(f);

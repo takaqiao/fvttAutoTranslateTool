@@ -119,8 +119,13 @@ export function installDsnQueueRecovery({queue,recover,game=globalThis.game,tick
     return true;
   };
   const pendingTail=tail=>current===tail.scope&&tail.scope.tail===tail;
+  const callbackIntact=tail=>{
+    const owned=engine.callback===tail.once&&engine.throws===tail.throws;
+    if(owned)tail.attached=true;
+    return owned;
+  };
   const attachedOwns=tail=>queue.box===box&&box.throwEngine===engine
-    &&engine.callback===tail.once&&engine.throws===tail.throws
+    &&callbackIntact(tail)
     &&box.physicsWorker===tail.worker&&engine.physicsWorker===tail.worker
     &&(box.startUnifiedBatch===wrapper||!active&&box.startUnifiedBatch===start&&!Object.hasOwn(box,'startUnifiedBatch'))
     &&(box.animateThrow===tickerWrapper||!active&&box.animateThrow===animate)
@@ -128,10 +133,15 @@ export function installDsnQueueRecovery({queue,recover,game=globalThis.game,tick
   const owns=tail=>pendingTail(tail)&&attachedOwns(tail);
   const startupOwns=tail=>pendingTail(tail)&&queue.box===box&&box.throwEngine===engine
     &&box.physicsWorker===tail.worker&&engine.physicsWorker===tail.worker
-    &&(engine.callback===null||engine.callback===tail.once)&&(engine.throws===null||engine.throws===tail.throws)
+    &&(callbackIntact(tail)||!tail.attached&&engine.callback===null&&engine.throws===null)
+    &&(box.startUnifiedBatch===wrapper||!active&&box.startUnifiedBatch===start&&!Object.hasOwn(box,'startUnifiedBatch'))
+    &&(!completionSupported||box.animateThrow===tickerWrapper||!active&&box.animateThrow===animate)
     &&boxProto.startUnifiedBatch===start&&engine.startUnifiedBatch===engineStart
     &&engineProto.startUnifiedBatch===engineStart&&!Object.hasOwn(engine,'startUnifiedBatch')
     &&(completionSupported?refreshTail(tail):tail.worker?.exec===tail.workerExec);
+  // A retained native ticker can run while start awaits spawn or simulation.
+  // Its callback is still null until that same native startup acquires it.
+  const frameOwns=tail=>tail.starting&&box._preparingThrow?startupOwns(tail):attachedOwns(tail);
   const audited=()=>active&&box.animateThrow===tickerWrapper&&sourceProfile()!==null;
   const failed=(tail,error)=>{
     recover(error);
@@ -178,7 +188,9 @@ export function installDsnQueueRecovery({queue,recover,game=globalThis.game,tick
     const promise=completion.apply(this,args),tail=current?.tail;
     return this===engine&&tail&&audited()&&owns(tail)?adapt(promise,tail):promise;
   };
-  const guard=tail=>{if((tail.cleaning||tail.ticking)&&!attachedOwns(tail))throw tail.replaced;};
+  const guard=tail=>{
+    if(tail.cleaning&&!attachedOwns(tail)||tail.ticking&&!frameOwns(tail))throw tail.replaced;
+  };
   function createView(tail){
     const engineView=new Proxy(engine,{
       get(target,key){
@@ -202,7 +214,7 @@ export function installDsnQueueRecovery({queue,recover,game=globalThis.game,tick
     if(this!==box||!tail||!pendingTail(tail))return animate.apply(this,args);
     // A normal frame can arrive while stale cleanup is awaiting the worker.
     // Skip only that captured batch; unknown native business exceptions escape.
-    if(!attachedOwns(tail)){
+    if(!frameOwns(tail)){
       if(!tail.completing)abandon(tail);
       return;
     }
@@ -231,7 +243,7 @@ export function installDsnQueueRecovery({queue,recover,game=globalThis.game,tick
     // The worker RPC function may be bridged. Capture its current identity for
     // this batch instead of pinning the installation's exec function.
     const profile=completionSupported?sourceProfile():null;
-    const tail={scope,once,throws:args[0],worker:box.physicsWorker,workerExec:box.physicsWorker?.exec,profile,
+    const tail={scope,once,throws:args[0],worker:box.physicsWorker,workerExec:box.physicsWorker?.exec,profile,starting:true,
       nativeExec:profile==='native'?box.physicsWorker?.exec:box.physicsWorker===initialWorker?initialExec:null,
       completion:engine.handlePersistentThrowCompletion,
       consumers:Object.fromEntries(Object.keys(consumers).map(key=>[key,box[key]])),
@@ -268,7 +280,7 @@ export function installDsnQueueRecovery({queue,recover,game=globalThis.game,tick
       }
       try{queue._settleDroppedBinds(scope.items);}catch(cleanupError){recover(cleanupError);}
       finally{once();}
-    }
+    }finally{tail.starting=false;}
   };
   const completionSupported=digest(box.constructor)===profile.boxClass&&animateHash===profile.boxAnimate
     &&digest(completion)===hashes.engineComplete&&digest(effects)===hashes.engineEffects
