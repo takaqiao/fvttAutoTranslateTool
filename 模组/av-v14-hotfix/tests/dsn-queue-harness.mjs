@@ -1,5 +1,10 @@
 import vm from 'node:vm';
+import fs from 'node:fs';
+import {pathToFileURL} from 'node:url';
 import { installDsnQueueRecovery } from '../scripts/patches/dsn-queue.mjs';
+const installRecovery=process.env.DSN_QUEUE_BASELINE_MODULE
+  ?(await import(pathToFileURL(process.env.DSN_QUEUE_BASELINE_MODULE))).installDsnQueueRecovery:installDsnQueueRecovery;
+const workerFixture=JSON.parse(fs.readFileSync(new URL('./fixtures/dsn-worker-native.json',import.meta.url)));
 export const settle = () => new Promise((resolve) => setImmediate(resolve));
 export const observe = (promise) => {
   const state = { status: 'pending' };
@@ -75,12 +80,13 @@ export function setup(fixture,{ticker:nativeTicker}={}) {
       ';return {AnimationQueue,DiceBox,ThrowEngine};})()',
     context
   );
-  const worker = {
-    async exec(name, args) {
+  const execute=async(name,args)=>{
       workers.push([name, args]);
       if(workerRelease&&((workerRelease.stage==='simulate'&&name==='simulateThrow')
         ||(workerRelease.stage==='collisions'&&name==='setCollisionResponse'&&args.enabled)
-        ||(workerRelease.stage==='positions'&&name==='setBodyPositions')))await workerRelease.promise;
+        ||(workerRelease.stage==='positions'&&name==='setBodyPositions'))){
+        const held=workerRelease;workerRelease=null;await held.promise;
+      }
       if (
         (name === 'setCollisionResponse' && args.enabled && failure === 'collisions') ||
         (name === 'setBodyPositions' && failure === 'positions')
@@ -104,8 +110,17 @@ export function setup(fixture,{ticker:nativeTicker}={}) {
           finalQuaternions: {}
         };
       return true;
-    }
   };
+  const WorkerRPC=vm.runInContext('(class WorkerRPC{'+workerFixture.exec+'})',context);
+  const worker=Object.assign(Object.create(WorkerRPC.prototype),{
+    _messageId:0,_messages:new Map(),_worker:{postMessage([id,args,name]){
+      execute(name,args).then(value=>{
+        const message=worker._messages.get(id);worker._messages.delete(id);message[0](value);
+      },error=>{
+        const message=worker._messages.get(id);worker._messages.delete(id);message[1](error);
+      });
+    }}
+  });
   const scene = { display: { innerWidth: 1000, innerHeight: 800 }, animatedDiceDetected: false },
     factory = { systems: new Map([['standard', { fire() {} }]]) };
   const engine = new classes.ThrowEngine(scene, worker, factory, {
@@ -129,7 +144,7 @@ export function setup(fixture,{ticker:nativeTicker}={}) {
     pendingThrows: { noteBindsLanded: (binds) => landed.push(...binds) }
   });
   queue.attach(box);
-  const install = () => installDsnQueueRecovery({ queue, ticker, game, recover: (error) => errors.push(error) });
+  const install = () => installRecovery({ queue, ticker, game, recover: (error) => errors.push(error) });
   const enqueue = (count = 1) =>
     queue.enqueue(
       { throws: Array.from({ length: count }, () => ({ dice: [], dsnConfig: {} })) },

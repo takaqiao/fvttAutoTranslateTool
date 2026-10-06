@@ -47,6 +47,15 @@ node scripts/build-persistent-bridge-test-fixture.mjs /path/to/upstream
 
 The bridge regressions execute this adapter against both native DsN profiles, in both installation orders, across recovery reinstall and native queue attach after a box rebuild. They preserve the bridge's actual function references and external completion observers. Ticker regressions cover every native animate identity consumer and run the installed Foundry Pixi ticker when `FVTT_NATIVE_APP` is available. The runtime keeps the native prototype function and its closures, with a stable owned instance wrapper for all native ticker registrations.
 
+`dsn-worker-native.json` contains the exact worker RPC `exec` method, independently verified in both captured bundles. `persistent-bridge-settings-0.5.4-native.json` preserves the bridge's actual enable/disable factory, setting registration and constants from the same 0.5.4 capture. Their generators leave the existing queue and adapter fixtures unchanged:
+
+```sh
+node scripts/build-dsn-worker-test-fixture.mjs /current/upstream /legacy/upstream
+node scripts/build-persistent-bridge-settings-test-fixture.mjs /current/upstream
+```
+
+Lifecycle regressions execute actual adapter ready/dispose during simulate, playback, effects, collision and position waits. The setting cases run the captured registered `enabled` onChange callback through the actual bridge factory and adapter, with controlled settings dispatch and small UI resource stubs. They cover successful and rejected batches, both installation orders, coherent off/on transitions and unknown ownership changes. They do not execute the whole module entry's synchronization or a rendered tray; those paths require browser QA.
+
 ## 0.6.22 source capture
 
 The DsN chat, model and queue fixtures are exact excerpts from the remote installation's 6.4.2 `main.js`, verified against `source-capture.json`. Their required functions and completion consumers match 6.4.1. The DiceConfig `_prepareContext` excerpt was updated for 6.4.2's medium shadow choice and hidden-die filtering. The associated metadata records original bundle SHA-256, fragment offsets and fragment SHA-256; bundle hashes never authorize a runtime patch.

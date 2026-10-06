@@ -7,6 +7,7 @@ const hashes={
   engineStart:'91b92ea708def66da9c335f384df9bb01d398285fd6f6a7736155af56b600f21',
   engineComplete:'a1f4e7f93c8ea5928254b1f37e0baef5f0db9a38e6a5b060b65f6d1a46157fa7',
   engineEffects:'c4b4d67ee75da62d5f8ce473671ee61dcaa3e9864e62a3a7d857e80f7933e0dd',
+  workerExec:'9f910bea44df0fe32a3ad4153b4525e556b5ace83ea99ac47124ee8165aa5e91',
   effectsConsumer:'b7d1c7ff49fbd90ed61837a4cd745aa757da7ec1c613f7b3cf7d1590baf3df1d',
   cleanupConsumer:'64fe5498b3b65f88d0f6cc22b10a083567297911d7f81c35a034c33da3d1bbe5'
 };
@@ -23,7 +24,8 @@ const tickerConsumers={
 const bridgeHashes={
   spawnPersistentDie:'d5e1bead9c55dd00887bb905b2db0b0395ea785ea46b84c307656294d6d7492f',
   clearScene:'811288073cc835a47f1f9e8000d3c18a2078941da39b5c1dc77894a02b3f20be',
-  handlePersistentThrowCompletion:'da8629905de5cce5f1c194baebc8f261cf3b7121b3909ce79698c1ba3ed5f162'
+  handlePersistentThrowCompletion:'da8629905de5cce5f1c194baebc8f261cf3b7121b3909ce79698c1ba3ed5f162',
+  exec:'f5d4ddf7ec2834991653d054dfb962f65498d57af099e9c52823e309244e3afd'
 };
 const profiles=[{
   queue:'7253acd493cfc6fd612934ece4c2b30d84f1e04d51827eae9cd945e7a4270f77',
@@ -64,18 +66,21 @@ export function installDsnQueueRecovery({queue,recover,game=globalThis.game,tick
   if(digest(engineStart)!==hashes.engineStart||Object.hasOwn(engine??{},'startUnifiedBatch'))return {status:'unsupported-queue'};
   const completion=engineProto.handlePersistentThrowCompletion,effects=engineProto.handleSpecialEffectsInit;
   const consumers=Object.fromEntries(Object.keys(tickerConsumers).map(key=>[key,boxProto[key]]));
+  const consumerKeys=Object.keys(consumers),consumerEntries=Object.entries(consumers);
   let current=null,playbackTail=null,active=true;
   const dataValue=(owner,key)=>Object.getOwnPropertyDescriptor(owner,key)?.value;
   const bridgeSupported=()=>game?.modules?.get('pf2e-dsn-persistent-bridge')?.active===true
     &&digest(dataValue(box,'spawnPersistentDie'))===bridgeHashes.spawnPersistentDie
     &&digest(dataValue(box,'clearScene'))===bridgeHashes.clearScene
     &&digest(dataValue(engine,'handlePersistentThrowCompletion'))===bridgeHashes.handlePersistentThrowCompletion;
+  const initialWorker=box.physicsWorker,workerProto=initialWorker&&Object.getPrototypeOf(initialWorker);
+  const initialExec=bridgeSupported()?(digest(workerProto?.exec)===hashes.workerExec?workerProto.exec:null):initialWorker?.exec;
   const releasedCompletion=fn=>{
     const owned=ownedCompletions.get(fn);
     return owned?.engine===engine&&owned.native===completion&&!owned.active();
   };
   const nativeCompletion=fn=>fn===completion||releasedCompletion(fn);
-  const validConsumers=()=>Object.entries(consumers).every(([key,fn])=>boxProto[key]===fn
+  const validConsumers=()=>consumerEntries.every(([key,fn])=>boxProto[key]===fn
     &&(box[key]===fn&&!Object.hasOwn(box,key)
       ||bridgeHashes[key]&&bridgeSupported()&&dataValue(box,key)===box[key]));
   const sourcesIntact=()=>Object.getPrototypeOf(box)===boxProto&&Object.getPrototypeOf(engine)===engineProto
@@ -84,31 +89,58 @@ export function installDsnQueueRecovery({queue,recover,game=globalThis.game,tick
     &&boxProto.animateThrow===animate&&engineProto.handlePersistentThrowCompletion===completion
     &&engineProto.handleSpecialEffectsInit===effects&&engine.handleSpecialEffectsInit===effects
     &&!Object.hasOwn(engine,'handleSpecialEffectsInit')&&validConsumers();
-  const completionIntact=()=>{
+  const sourceProfile=()=>{
+    if(!sourcesIntact())return null;
+    if(bridgeSupported())return 'bridge';
     const value=engine.handlePersistentThrowCompletion;
-    return value===completionWrapper||releasedCompletion(value)||bridgeSupported()
-      ||!active&&value===completion&&!Object.hasOwn(engine,'handlePersistentThrowCompletion');
+    return value===completionWrapper||releasedCompletion(value)
+      ||value===completion&&!Object.hasOwn(engine,'handlePersistentThrowCompletion')?'native':null;
+  };
+  const refreshTail=tail=>{
+    const profile=sourceProfile();
+    if(!profile)return false;
+    const nextCompletion=engine.handlePersistentThrowCompletion,nextExec=tail.worker?.exec;
+    const unchanged=consumerKeys.every(key=>tail.consumers[key]===box[key]);
+    if(unchanged&&nextCompletion===tail.completion&&nextExec===tail.workerExec)return true;
+    const next=Object.fromEntries(consumerKeys.map(key=>[key,box[key]]));
+    // ready/dispose replace a complete bridge on the same physical owner.
+    // A single unknown replacement never authorizes another worker executor.
+    const ordinaryUnchanged=Object.entries(next).every(([key,fn])=>bridgeHashes[key]||tail.consumers[key]===fn);
+    const bridgeInstalled=profile==='bridge'&&ordinaryUnchanged
+      &&next.spawnPersistentDie!==tail.consumers.spawnPersistentDie&&next.clearScene!==tail.consumers.clearScene
+      &&nextCompletion!==tail.completion&&digest(nextExec)===bridgeHashes.exec;
+    const bridgeRemoved=tail.profile==='bridge'&&profile==='native'&&ordinaryUnchanged
+      &&(nextExec===tail.workerExec||tail.nativeExec&&nextExec===tail.nativeExec);
+    const restored=!active&&unchanged&&tail.completion===completionWrapper
+      &&nativeCompletion(nextCompletion)&&nextExec===tail.workerExec;
+    if(!bridgeInstalled&&!bridgeRemoved&&!restored)return false;
+    tail.profile=profile;tail.consumers=next;tail.completion=nextCompletion;tail.workerExec=nextExec;
+    if(profile==='native')tail.nativeExec=nextExec;
+    return true;
   };
   const pendingTail=tail=>current===tail.scope&&tail.scope.tail===tail;
   const attachedOwns=tail=>queue.box===box&&box.throwEngine===engine
     &&engine.callback===tail.once&&engine.throws===tail.throws
-    &&box.physicsWorker===tail.worker&&engine.physicsWorker===tail.worker&&tail.worker?.exec===tail.workerExec
+    &&box.physicsWorker===tail.worker&&engine.physicsWorker===tail.worker
     &&(box.startUnifiedBatch===wrapper||!active&&box.startUnifiedBatch===start&&!Object.hasOwn(box,'startUnifiedBatch'))
     &&(box.animateThrow===tickerWrapper||!active&&box.animateThrow===animate)
-    &&sourcesIntact()&&completionIntact()
-    &&Object.entries(tail.consumers).every(([key,fn])=>box[key]===fn)
-    &&(engine.handlePersistentThrowCompletion===tail.completion
-      ||!active&&tail.completion===completionWrapper&&nativeCompletion(engine.handlePersistentThrowCompletion));
+    &&refreshTail(tail);
   const owns=tail=>pendingTail(tail)&&attachedOwns(tail);
   const startupOwns=tail=>pendingTail(tail)&&queue.box===box&&box.throwEngine===engine
-    &&box.physicsWorker===tail.worker&&engine.physicsWorker===tail.worker&&tail.worker?.exec===tail.workerExec
+    &&box.physicsWorker===tail.worker&&engine.physicsWorker===tail.worker
     &&(engine.callback===null||engine.callback===tail.once)&&(engine.throws===null||engine.throws===tail.throws)
     &&boxProto.startUnifiedBatch===start&&engine.startUnifiedBatch===engineStart
-    &&engineProto.startUnifiedBatch===engineStart&&!Object.hasOwn(engine,'startUnifiedBatch');
-  const audited=()=>active&&box.animateThrow===tickerWrapper&&sourcesIntact()&&completionIntact();
+    &&engineProto.startUnifiedBatch===engineStart&&!Object.hasOwn(engine,'startUnifiedBatch')
+    &&(completionSupported?refreshTail(tail):tail.worker?.exec===tail.workerExec);
+  const audited=()=>active&&box.animateThrow===tickerWrapper&&sourceProfile()!==null;
   const failed=(tail,error)=>{
     recover(error);
     if(pendingTail(tail))tail.scope.failed=true;
+  };
+  const abandon=tail=>{
+    failed(tail,tail.replaced);
+    if(completionSupported)ticker.remove(tickerWrapper,box);
+    tail.once(tail.throws);
   };
   // Intercept only the two native consumers. External await/catch retain the
   // original Promise. The bridge's outer Promise receives the same treatment.
@@ -122,6 +154,7 @@ export function installDsnQueueRecovery({queue,recover,game=globalThis.game,tick
     return promise;
   };
   const adapt=(promise,tail)=>intercept(promise,tail,hashes.effectsConsumer,(then,onEffects)=>{
+    tail.completing=true;
     const pending=then.call(promise,()=>owns(tail)?onEffects():undefined);
     return intercept(pending,tail,hashes.cleanupConsumer,(then,onCleanup)=>then
       .call(pending,undefined,error=>failed(tail,error))
@@ -145,7 +178,7 @@ export function installDsnQueueRecovery({queue,recover,game=globalThis.game,tick
     const promise=completion.apply(this,args),tail=current?.tail;
     return this===engine&&tail&&audited()&&owns(tail)?adapt(promise,tail):promise;
   };
-  const guard=tail=>{if(tail.cleaning&&!attachedOwns(tail))throw tail.replaced;};
+  const guard=tail=>{if((tail.cleaning||tail.ticking)&&!attachedOwns(tail))throw tail.replaced;};
   function createView(tail){
     const engineView=new Proxy(engine,{
       get(target,key){
@@ -169,9 +202,16 @@ export function installDsnQueueRecovery({queue,recover,game=globalThis.game,tick
     if(this!==box||!tail||!pendingTail(tail))return animate.apply(this,args);
     // A normal frame can arrive while stale cleanup is awaiting the worker.
     // Skip only that captured batch; unknown native business exceptions escape.
-    if(!attachedOwns(tail))return;
+    if(!attachedOwns(tail)){
+      if(!tail.completing)abandon(tail);
+      return;
+    }
+    tail.ticking=true;
     try{return animate.apply(tail.view,args);}
-    catch(error){if(error!==tail.replaced)throw error;}
+    catch(error){
+      if(error!==tail.replaced)throw error;
+      if(!tail.completing)abandon(tail);
+    }finally{tail.ticking=false;}
   };
   const callback=async function(items){
     const prior=current,scope={items,failed:false};current=scope;
@@ -180,9 +220,7 @@ export function installDsnQueueRecovery({queue,recover,game=globalThis.game,tick
   };
   const wrapper=async function(...args){
     const scope=current;
-    if(this!==box||!scope||queue.box!==box||box.throwEngine!==engine
-      ||boxProto.startUnifiedBatch!==start||engine.startUnifiedBatch!==engineStart
-      ||engineProto.startUnifiedBatch!==engineStart||Object.hasOwn(engine,'startUnifiedBatch'))return start.apply(this,args);
+    if(this!==box||!scope||queue.box!==box)return start.apply(this,args);
     const complete=args[2];let completed=false;
     const once=(...values)=>{
       if(completed)return;
@@ -192,13 +230,26 @@ export function installDsnQueueRecovery({queue,recover,game=globalThis.game,tick
     };
     // The worker RPC function may be bridged. Capture its current identity for
     // this batch instead of pinning the installation's exec function.
-    const tail={scope,once,throws:args[0],worker:box.physicsWorker,workerExec:box.physicsWorker?.exec,
+    const profile=completionSupported?sourceProfile():null;
+    const tail={scope,once,throws:args[0],worker:box.physicsWorker,workerExec:box.physicsWorker?.exec,profile,
+      nativeExec:profile==='native'?box.physicsWorker?.exec:box.physicsWorker===initialWorker?initialExec:null,
       completion:engine.handlePersistentThrowCompletion,
       consumers:Object.fromEntries(Object.keys(consumers).map(key=>[key,box[key]])),
       replaced:Error('DsN cleanup batch was replaced')};
     scope.tail=tail;
+    if(box.throwEngine!==engine||boxProto.startUnifiedBatch!==start||engine.startUnifiedBatch!==engineStart
+      ||engineProto.startUnifiedBatch!==engineStart||Object.hasOwn(engine,'startUnifiedBatch')
+      ||completionSupported&&!audited()){
+      abandon(tail);return;
+    }
     if(completionSupported&&audited()){tail.view=createView(tail);playbackTail=tail;}
-    try{return await start.call(box,args[0],args[1],once);}
+    try{
+      const value=await start.call(box,args[0],args[1],once);
+      if(completionSupported&&pendingTail(tail)&&!attachedOwns(tail)&&!tail.completing){
+        abandon(tail);
+      }
+      return value;
+    }
     catch(error){
       recover(error);
       if(completed)return;
@@ -222,6 +273,7 @@ export function installDsnQueueRecovery({queue,recover,game=globalThis.game,tick
   const completionSupported=digest(box.constructor)===profile.boxClass&&animateHash===profile.boxAnimate
     &&digest(completion)===hashes.engineComplete&&digest(effects)===hashes.engineEffects
     &&Object.entries(tickerConsumers).every(([key,hash])=>digest(consumers[key])===hash)
+    &&(!bridgeSupported()||initialExec!==null)
     &&!Object.hasOwn(box,'animateThrow')&&sourcesIntact()
     &&(engine.handlePersistentThrowCompletion===completion&&!Object.hasOwn(engine,'handlePersistentThrowCompletion')
       ||releasedCompletion(dataValue(engine,'handlePersistentThrowCompletion'))||bridgeSupported())
