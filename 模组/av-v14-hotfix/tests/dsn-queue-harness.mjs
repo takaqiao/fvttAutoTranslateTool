@@ -9,11 +9,27 @@ export const observe = (promise) => {
   );
   return state;
 };
-export function setup(fixture) {
+export function setup(fixture,{ticker:nativeTicker}={}) {
   const errors = [],
     workers = [],
     ticks = [],
     landed = [];
+  const listeners=[];
+  const ticker=nativeTicker??{
+    add(fn,box){ticks.push([fn,box]);listeners.push([fn,box]);return this;},
+    remove(fn,box=null){for(let i=listeners.length-1;i>=0;i--)if(listeners[i][0]===fn&&listeners[i][1]===box)listeners.splice(i,1);return this;},
+    has(fn){return listeners.some(([value])=>value===fn);},
+    frame(){for(const[fn,box]of [...listeners])fn.call(box);},
+    _cancelIfNeeded(){},
+    get _head(){
+      const head={next:null};let previous=head;
+      for(const[fn,box]of listeners){
+        const node={fn,context:box,next:null,destroy(){ticker.remove(fn,box);return this.next;}};
+        previous.next=node;previous=node;
+      }
+      return head;
+    }
+  };
   let failure = null,
     release,workerRelease;
   const game = {
@@ -23,6 +39,7 @@ export function setup(fixture) {
   const bo = {
     renderQueue: [],
     renderSFX() {},
+    clearQueue(){},
     async playSFX() {
       if (failure === 'effects') {
         failure = null;
@@ -37,21 +54,14 @@ export function setup(fixture) {
     r: { DICE_EVENT_TYPE: { RESULT: 1 } },
     setTimeout,
     clearTimeout,
+    performance,
     DsnSettings: { isEnabled: () => true },
     DiceNotation: {
       mergeQueuedRollCommands: (items) =>
         items.flatMap((item) => item.params.throws.map((throwData) => [throwData]))
     },
-    Utils: { removeTicker() {} },
-    canvas: {
-      app: {
-        ticker: {
-          add(fn, box) {
-            ticks.push([fn, box]);
-          }
-        }
-      }
-    }
+    Utils: { removeTicker(fn){let node=ticker._head.next;while(node)node=node.fn===fn?node.destroy():node.next;} },
+    canvas: {app:{ticker}}
   });
   const classes = vm.runInContext(
     '(()=>{' +
@@ -68,7 +78,8 @@ export function setup(fixture) {
   const worker = {
     async exec(name, args) {
       workers.push([name, args]);
-      if(workerRelease&&((workerRelease.stage==='collisions'&&name==='setCollisionResponse'&&args.enabled)
+      if(workerRelease&&((workerRelease.stage==='simulate'&&name==='simulateThrow')
+        ||(workerRelease.stage==='collisions'&&name==='setCollisionResponse'&&args.enabled)
         ||(workerRelease.stage==='positions'&&name==='setBodyPositions')))await workerRelease.promise;
       if (
         (name === 'setCollisionResponse' && args.enabled && failure === 'collisions') ||
@@ -118,7 +129,7 @@ export function setup(fixture) {
     pendingThrows: { noteBindsLanded: (binds) => landed.push(...binds) }
   });
   queue.attach(box);
-  const install = () => installDsnQueueRecovery({ queue, recover: (error) => errors.push(error) });
+  const install = () => installDsnQueueRecovery({ queue, ticker, game, recover: (error) => errors.push(error) });
   const enqueue = (count = 1) =>
     queue.enqueue(
       { throws: Array.from({ length: count }, () => ({ dice: [], dsnConfig: {} })) },
@@ -154,6 +165,7 @@ export function setup(fixture) {
     errors,
     workers,
     ticks,
+    ticker,
     landed,
     held,
     other,

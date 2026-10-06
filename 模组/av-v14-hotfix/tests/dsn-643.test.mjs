@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
+import vm from 'node:vm';
 import {setup,settle,observe} from './dsn-queue-harness.mjs';
 
 const read=name=>JSON.parse(fs.readFileSync(new URL('./fixtures/'+name,import.meta.url)));
@@ -179,4 +180,159 @@ for(const field of ['worker','animate','completion','effects'])test('pending cle
   assert.equal(f.engine.rolling,true);
   assert.equal(f.workers.filter(([name])=>name==='setBodyPositions').length,0);
   await f.queue.idle();
+});
+for(const replacement of ['box','engine','both'])test('startup rejection preserves a replacement '+replacement+' worker',async()=>{
+  const f=setup(current),release=f.holdWorker('simulate'),foreignCalls=[];
+  f.install();f.engine.persistentDiceList.push(f.other);
+  const state=observe(f.enqueue());
+  await settle();
+  const ghostified=f.engine._ghostifiedIds,foreign={exec:(...args)=>{foreignCalls.push(args);return Promise.resolve(true);}};
+  if(replacement==='box'||replacement==='both')f.box.physicsWorker=foreign;
+  if(replacement==='engine'||replacement==='both')f.engine.physicsWorker=foreign;
+  release.reject(Error('old simulation failed'));
+  await settle();
+  assert.equal(state.value,false);
+  assert.equal(f.engine.rolling,true);
+  assert.equal(f.box._preparingThrow,true);
+  assert.equal(f.engine._ghostifiedIds,ghostified);
+  assert.deepEqual(foreignCalls,[]);
+  await f.queue.idle();
+});
+for(const replacement of ['worker','exec'])test('startup recovery rechecks '+replacement+' identity after restoring collisions',async()=>{
+  const f=setup(current);f.install();f.engine.persistentDiceList.push(f.other);f.fail('simulate');
+  const release=f.holdWorker('collisions'),state=observe(f.enqueue());await settle();
+  assert.equal(state.status,'pending');const ghostified=f.engine._ghostifiedIds;
+  if(replacement==='worker')f.engine.physicsWorker={exec(){throw Error('foreign worker');}};
+  else f.box.physicsWorker.exec=function foreign(){throw Error('foreign exec');};
+  assert.doesNotThrow(()=>f.ticker.frame());release();await settle();
+  assert.equal(state.value,false);assert.equal(f.engine.rolling,true);assert.equal(f.box._preparingThrow,true);
+  assert.equal(f.engine._ghostifiedIds,ghostified);await f.queue.idle();
+});
+for(const stage of ['collisions','positions'])test('intermediate ticker frames during stale '+stage+' cleanup neither throw nor touch replacement owners',async()=>{
+  const f=setup(current);
+  f.install();f.engine.persistentDiceList.push(f.other);
+  const state=observe(f.enqueue());await settle();
+  const release=f.holdWorker(stage);await f.finish();
+  const foreignCalls=[],foreign={exec:(...args)=>{foreignCalls.push(args);return Promise.resolve(true);}};
+  f.box.physicsWorker=foreign;f.engine.physicsWorker=foreign;
+  assert.doesNotThrow(()=>f.ticker.frame());
+  assert.doesNotThrow(()=>f.ticker.frame());
+  assert.equal(state.status,'pending');
+  assert.equal(f.engine.rolling,true);assert.deepEqual(foreignCalls,[]);
+  release();await settle();
+  assert.equal(state.value,false);assert.equal(f.engine.rolling,true);
+  assert.deepEqual(foreignCalls,[]);await f.queue.idle();
+});
+test('native delayed persistent fade re-registration retains cleanup ownership protection',async()=>{
+  const f=setup(current);
+  f.install();f.engine.persistentDiceList.push(f.other);
+  f.other.userData.persistentId='older';
+  f.box._startMeshFade=()=>{};
+  f.box.persistentDiceManager.removePersistentDie=async()=>true;
+  const state=observe(f.enqueue());await settle();
+  await f.box.fadeOutPersistentDie('older',1000);
+  assert.equal(f.ticks.at(-1)[1],f.box);
+  const release=f.holdWorker('collisions');await f.finish();
+  let foreignCallbacks=0;
+  const foreign=Object.assign(Object.create(Object.getPrototypeOf(f.engine)),f.engine,
+    {rolling:true,throws:[],_ghostifiedIds:[77],callback(){foreignCallbacks++;}});
+  f.box.throwEngine=foreign;
+  assert.doesNotThrow(()=>f.ticker.frame());
+  release();await settle();
+  assert.equal(state.value,false);assert.equal(foreignCallbacks,0);
+  assert.equal(foreign.rolling,true);assert.deepEqual(foreign._ghostifiedIds,[77]);
+  await f.queue.idle();
+});
+const tickerConsumers=['spawnPersistentDie','removePersistentDie','fadeOutEphemeral','fadeOutPersistentDie','clearAll','clearScene'];
+test('an unknown complete box profile with an added ticker consumer is refused',()=>{
+  const f=setup(current),text=current.boxClass.slice(0,-1)+'extraTicker(){canvas.app.ticker.add(this.animateThrow,this)}}';
+  const Foreign=vm.runInContext('('+text+')',f.context);
+  Object.setPrototypeOf(f.box,Foreign.prototype);
+  assert.equal(f.install().completionStatus,'unsupported-source');
+  assert.equal(Object.hasOwn(f.box,'animateThrow'),false);
+});
+test('an unrelated own native completion alias is retained and refused',()=>{
+  const f=setup(current),native=f.engine.handlePersistentThrowCompletion;
+  f.engine.handlePersistentThrowCompletion=native;
+  assert.equal(f.install().completionStatus,'unsupported-source');
+  assert.equal(f.engine.handlePersistentThrowCompletion,native);
+  assert.equal(Object.hasOwn(f.box,'animateThrow'),false);
+});
+for(const location of ['box-instance','box-prototype','engine-prototype'])test('pending cleanup checks changed '+location+' start consumer',async()=>{
+  const f=setup(current);f.install();f.engine.persistentDiceList.push(f.other);
+  const state=observe(f.enqueue());await settle();const release=f.holdWorker('collisions');await f.finish();
+  const owner=location==='box-instance'?f.box:Object.getPrototypeOf(location==='box-prototype'?f.box:f.engine);
+  owner.startUnifiedBatch=function foreign(){};
+  assert.doesNotThrow(()=>f.ticker.frame());release();await settle();
+  assert.equal(state.value,false);assert.equal(f.engine.rolling,true);await f.queue.idle();
+});
+for(const method of ['spawnPersistentDie','fadeOutEphemeral'])test('native '+method+' retains its stable ticker registration during cleanup',async()=>{
+  const f=setup(current);f.install();f.engine.persistentDiceList.push(f.other);
+  const state=observe(f.enqueue());await settle();const wrapped=f.box.animateThrow;
+  const release=f.holdWorker('collisions');await f.finish();
+  if(method==='spawnPersistentDie'){
+    f.box.persistentDiceEnabled=true;f.box.persistentDiceManager.spawnPersistentDie=async()=>f.held;
+    await f.box.spawnPersistentDie('d20',{});
+  }else{
+    f.engine.diceList.push(f.held);f.box._startMeshFade=()=>{};f.box.fadeOutEphemeral(1000);
+  }
+  assert.equal(f.ticks.at(-1)[0],wrapped);assert.equal(f.ticks.at(-1)[1],f.box);
+  const foreign={exec(){throw Error('foreign worker must not run');}};
+  f.box.physicsWorker=foreign;f.engine.physicsWorker=foreign;
+  assert.doesNotThrow(()=>f.ticker.frame());release();await settle();
+  assert.equal(state.value,false);assert.equal(f.engine.rolling,true);await f.queue.idle();
+});
+for(const method of ['removePersistentDie','clearAll','clearScene'])test('native '+method+' removes the owned ticker identity',async()=>{
+  const f=setup(current);f.install();const wrapped=f.box.animateThrow;f.ticker.add(wrapped,f.box);
+  if(method==='removePersistentDie')f.box.persistentDiceManager.removePersistentDie=async()=>true;
+  else{
+    f.box.initialized=true;f.box.cancelFade=()=>{};f.engine.clearAll=async()=>{};
+    f.box._remoteOutlinePasses=new Map();f.box.diceScene.clearScene=()=>{};
+  }
+  await f.box[method]('older');assert.equal(f.ticker.has(wrapped),false);
+});
+for(const field of tickerConsumers)for(const location of ['prototype','instance'])
+  test('installation refuses a foreign '+location+' '+field+' ticker consumer',()=>{
+    const f=setup(current),native=f.box.animateThrow;
+    (location==='prototype'?Object.getPrototypeOf(f.box):f.box)[field]=function foreign(){};
+    assert.equal(f.install().completionStatus,'unsupported-source');
+    assert.equal(f.box.animateThrow,native);
+    assert.equal(Object.hasOwn(f.engine,'handlePersistentThrowCompletion'),false);
+  });
+for(const field of tickerConsumers)for(const location of ['prototype','instance'])
+  test('pending cleanup preserves a changed '+location+' '+field+' ticker consumer',async()=>{
+    const f=setup(current);f.install();f.engine.persistentDiceList.push(f.other);
+    const state=observe(f.enqueue());await settle();
+    const release=f.holdWorker('collisions');await f.finish();
+    (location==='prototype'?Object.getPrototypeOf(f.box):f.box)[field]=function foreign(){};
+    assert.doesNotThrow(()=>f.ticker.frame());
+    release();await settle();
+    assert.equal(state.value,false);assert.equal(f.engine.rolling,true);
+    assert.equal(f.workers.filter(([name])=>name==='setBodyPositions').length,0);
+    await f.queue.idle();
+  });
+test('ticker restore removes its owned registration and resumes the native function once',async()=>{
+  const f=setup(current),native=f.box.animateThrow,patch=f.install(),state=observe(f.enqueue());
+  await settle();
+  const wrapped=f.box.animateThrow;
+  assert.notEqual(wrapped,native);assert(f.ticker.has(wrapped));
+  patch.restore();
+  assert.equal(f.box.animateThrow,native);assert(!f.ticker.has(wrapped));assert(f.ticker.has(native));
+  await f.finish();assert.equal(state.value,true);await f.queue.idle();
+  assert.equal(f.ticker.has(native),false);
+});
+test('ticker restore leaves a later foreign animate function and registration alone',async()=>{
+  const f=setup(current),patch=f.install(),state=observe(f.enqueue());await settle();
+  const wrapped=f.box.animateThrow,foreign=function foreign(){};
+  f.box.animateThrow=foreign;f.ticker.add(foreign,f.box);
+  patch.restore();
+  assert.equal(f.box.animateThrow,foreign);assert(f.ticker.has(foreign));assert(!f.ticker.has(wrapped));
+  f.engine.rolling=false;f.engine.callback(f.engine.throws);await settle();
+  assert.equal(state.value,true);await f.queue.idle();
+});
+test('native ticker business exceptions retain their original error',async()=>{
+  const f=setup(current);f.install();const state=observe(f.enqueue());await settle();
+  const error=Error('native stats failure');f.box.stats={update(){throw error;}};
+  assert.throws(()=>f.ticker.frame(),value=>value===error);
+  f.box.stats=null;await f.finish();assert.equal(state.value,true);await f.queue.idle();
 });

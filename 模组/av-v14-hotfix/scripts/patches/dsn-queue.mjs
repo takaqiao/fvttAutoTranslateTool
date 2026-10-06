@@ -10,26 +10,47 @@ const hashes={
   effectsConsumer:'b7d1c7ff49fbd90ed61837a4cd745aa757da7ec1c613f7b3cf7d1590baf3df1d',
   cleanupConsumer:'64fe5498b3b65f88d0f6cc22b10a083567297911d7f81c35a034c33da3d1bbe5'
 };
+const tickerConsumers={
+  spawnPersistentDie:'2cf3df32d2d41e2e04aeecaf17ebf1101d220532b980115e18047affa9a84652',
+  removePersistentDie:'30572115ec823800376c44a6f32b59fe7ae7ea85bb91e3db4ae1c8e65cabd5d1',
+  fadeOutEphemeral:'624cbc8456b7ccaab6fde43a6acc8eb4c18367471acd033a5899abd71af2150a',
+  fadeOutPersistentDie:'280fdd16bf37dd51748004fa9e03a9d7447019ed3edb2e02ad5eb925371cf4c6',
+  clearAll:'c57ee0a73ea771033dfd5d7c0e468639598af90854ef7e804a65b74750d50d88',
+  clearScene:'cf3b8fc698b2efaccad912d005f29ffeed3f63cefe9b1e917c3d7dbcc9d2dd8b'
+};
+// The captured PersistentDice adapter installs these together. Keep its actual
+// function values so its own restore comparisons still work.
+const bridgeHashes={
+  spawnPersistentDie:'d5e1bead9c55dd00887bb905b2db0b0395ea785ea46b84c307656294d6d7492f',
+  clearScene:'811288073cc835a47f1f9e8000d3c18a2078941da39b5c1dc77894a02b3f20be',
+  handlePersistentThrowCompletion:'da8629905de5cce5f1c194baebc8f261cf3b7121b3909ce79698c1ba3ed5f162'
+};
 const profiles=[{
   queue:'7253acd493cfc6fd612934ece4c2b30d84f1e04d51827eae9cd945e7a4270f77',
   onEnd:'70de7b37350e4e244dd05a35672dec84e2ebf7e15e482b16d41970a1d620dc7a',
+  boxClass:'b5b291d969cbf3c58ecaa2d0b508af9c68823462b95f0d727a646cee4e837935',
   boxAnimate:'d0f022f7cfe344f8bcc596d007a1ec7d259a926c940d25484958f0e74e43f2ce'
 },{
   queue:'6d28b4d7e4a9e6c998c04630536e705b1696213cc9e5c941d5eac36599f2f865',
   onEnd:'6ce7da61fbe7c5b249e4fd80011dbf30d87437e903b6b680ae4c4dca3f753b9a',
+  boxClass:'bdaa8ba1b22781ac9bf5a7adae39ab8bac12d96cd568fc8f7b6a902a3cfa3a4d',
   boxAnimate:'c722cddba3608fade37e2b526ece24ce64d32ca144ce69bd39bebc072f5f3d12'
 }];
-const digest=fn=>typeof fn==='function'?sha256Fallback(Function.prototype.toString.call(fn)):null;
+const sourceHashes=new WeakMap(),ownedCompletions=new WeakMap();
+const digest=fn=>{
+  if(typeof fn!=='function')return null;
+  if(!sourceHashes.has(fn))sourceHashes.set(fn,sha256Fallback(Function.prototype.toString.call(fn)));
+  return sourceHashes.get(fn);
+};
 
 // Legacy dispatch loses rejections; current dispatch catches them but leaves
 // failed physics behind. Repair only batches from the audited Accumulator.
-export function installDsnQueueRecovery({queue,recover}){
+export function installDsnQueueRecovery({queue,recover,game=globalThis.game,ticker=globalThis.canvas?.app?.ticker}){
   const accumulator=queue?.nextAnimation,box=queue?.box,engine=box?.throwEngine;
   const attach=queue&&Object.getPrototypeOf(queue)?.attach;
   const onEnd=Object.getOwnPropertyDescriptor(accumulator??{},'_onEnd');
   const boxProto=box&&Object.getPrototypeOf(box),engineProto=engine&&Object.getPrototypeOf(engine);
   const start=boxProto?.startUnifiedBatch;
-  const worker=box?.physicsWorker;
   const profile=profiles.find(value=>value.queue===digest(queue?.constructor));
   if(!profile||digest(accumulator?.constructor)!==hashes.accumulator
     ||digest(attach)!==hashes.attach||digest(onEnd?.value)!==profile.onEnd||!onEnd?.writable)return {status:'unsupported-queue'};
@@ -37,14 +58,121 @@ export function installDsnQueueRecovery({queue,recover}){
   if(digest(start)!==hashes.boxStart||!Object.isExtensible(box)||Object.hasOwn(box,'startUnifiedBatch'))return {status:'unsupported-queue'};
   const animate=boxProto.animateThrow,animateHash=digest(animate);
   if(profiles.some(value=>value!==profile&&value.boxAnimate===animateHash))return {status:'unsupported-queue'};
-  // Native attach runs before initialize finishes. The texture-ready hook does
-  // not await the box; recheck all sources after this specific box is ready.
+  // Native attach runs before initialize finishes. Recheck this specific box.
   if(!engine&&typeof box.ready?.then==='function')return {status:'waiting-dsn',attach,ready:box.ready};
-  if(digest(engineProto?.startUnifiedBatch)!==hashes.engineStart||Object.hasOwn(engine??{},'startUnifiedBatch'))return {status:'unsupported-queue'};
-  // Replacing _onEnd affects the next Accumulator dispatch. The current one
-  // retains its original closure. In particular, queue.idle() can resolve just
-  // before Accumulator's finally clears _isProcessing during a native resize.
-  let current=null,active=true;
+  const engineStart=engineProto?.startUnifiedBatch;
+  if(digest(engineStart)!==hashes.engineStart||Object.hasOwn(engine??{},'startUnifiedBatch'))return {status:'unsupported-queue'};
+  const completion=engineProto.handlePersistentThrowCompletion,effects=engineProto.handleSpecialEffectsInit;
+  const consumers=Object.fromEntries(Object.keys(tickerConsumers).map(key=>[key,boxProto[key]]));
+  let current=null,playbackTail=null,active=true;
+  const dataValue=(owner,key)=>Object.getOwnPropertyDescriptor(owner,key)?.value;
+  const bridgeSupported=()=>game?.modules?.get('pf2e-dsn-persistent-bridge')?.active===true
+    &&digest(dataValue(box,'spawnPersistentDie'))===bridgeHashes.spawnPersistentDie
+    &&digest(dataValue(box,'clearScene'))===bridgeHashes.clearScene
+    &&digest(dataValue(engine,'handlePersistentThrowCompletion'))===bridgeHashes.handlePersistentThrowCompletion;
+  const releasedCompletion=fn=>{
+    const owned=ownedCompletions.get(fn);
+    return owned?.engine===engine&&owned.native===completion&&!owned.active();
+  };
+  const nativeCompletion=fn=>fn===completion||releasedCompletion(fn);
+  const validConsumers=()=>Object.entries(consumers).every(([key,fn])=>boxProto[key]===fn
+    &&(box[key]===fn&&!Object.hasOwn(box,key)
+      ||bridgeHashes[key]&&bridgeSupported()&&dataValue(box,key)===box[key]));
+  const sourcesIntact=()=>Object.getPrototypeOf(box)===boxProto&&Object.getPrototypeOf(engine)===engineProto
+    &&boxProto.startUnifiedBatch===start&&engineProto.startUnifiedBatch===engineStart
+    &&engine.startUnifiedBatch===engineStart&&!Object.hasOwn(engine,'startUnifiedBatch')
+    &&boxProto.animateThrow===animate&&engineProto.handlePersistentThrowCompletion===completion
+    &&engineProto.handleSpecialEffectsInit===effects&&engine.handleSpecialEffectsInit===effects
+    &&!Object.hasOwn(engine,'handleSpecialEffectsInit')&&validConsumers();
+  const completionIntact=()=>{
+    const value=engine.handlePersistentThrowCompletion;
+    return value===completionWrapper||releasedCompletion(value)||bridgeSupported()
+      ||!active&&value===completion&&!Object.hasOwn(engine,'handlePersistentThrowCompletion');
+  };
+  const pendingTail=tail=>current===tail.scope&&tail.scope.tail===tail;
+  const attachedOwns=tail=>queue.box===box&&box.throwEngine===engine
+    &&engine.callback===tail.once&&engine.throws===tail.throws
+    &&box.physicsWorker===tail.worker&&engine.physicsWorker===tail.worker&&tail.worker?.exec===tail.workerExec
+    &&(box.startUnifiedBatch===wrapper||!active&&box.startUnifiedBatch===start&&!Object.hasOwn(box,'startUnifiedBatch'))
+    &&(box.animateThrow===tickerWrapper||!active&&box.animateThrow===animate)
+    &&sourcesIntact()&&completionIntact()
+    &&Object.entries(tail.consumers).every(([key,fn])=>box[key]===fn)
+    &&(engine.handlePersistentThrowCompletion===tail.completion
+      ||!active&&tail.completion===completionWrapper&&nativeCompletion(engine.handlePersistentThrowCompletion));
+  const owns=tail=>pendingTail(tail)&&attachedOwns(tail);
+  const startupOwns=tail=>pendingTail(tail)&&queue.box===box&&box.throwEngine===engine
+    &&box.physicsWorker===tail.worker&&engine.physicsWorker===tail.worker&&tail.worker?.exec===tail.workerExec
+    &&(engine.callback===null||engine.callback===tail.once)&&(engine.throws===null||engine.throws===tail.throws)
+    &&boxProto.startUnifiedBatch===start&&engine.startUnifiedBatch===engineStart
+    &&engineProto.startUnifiedBatch===engineStart&&!Object.hasOwn(engine,'startUnifiedBatch');
+  const audited=()=>active&&box.animateThrow===tickerWrapper&&sourcesIntact()&&completionIntact();
+  const failed=(tail,error)=>{
+    recover(error);
+    if(pendingTail(tail))tail.scope.failed=true;
+  };
+  // Intercept only the two native consumers. External await/catch retain the
+  // original Promise. The bridge's outer Promise receives the same treatment.
+  const intercept=(promise,tail,consumer,handle)=>{
+    const then=promise.then;
+    Object.defineProperty(promise,'then',{configurable:true,writable:true,value:function(onFulfilled,onRejected){
+      if(this!==promise||onRejected!==undefined||digest(onFulfilled)!==consumer||!owns(tail))
+        return then.call(this,onFulfilled,onRejected);
+      return handle(then,onFulfilled);
+    }});
+    return promise;
+  };
+  const adapt=(promise,tail)=>intercept(promise,tail,hashes.effectsConsumer,(then,onEffects)=>{
+    const pending=then.call(promise,()=>owns(tail)?onEffects():undefined);
+    return intercept(pending,tail,hashes.cleanupConsumer,(then,onCleanup)=>then
+      .call(pending,undefined,error=>failed(tail,error))
+      .then(async()=>{
+        try{
+          if(owns(tail)){
+            tail.cleaning=true;
+            return await onCleanup();
+          }
+        }catch(error){failed(tail,error);}
+        finally{
+          tail.cleaning=false;
+          if(pendingTail(tail)){
+            if(owns(tail))engine.rolling=false;else tail.scope.failed=true;
+            tail.once(tail.throws);
+          }
+        }
+      }));
+  });
+  const completionWrapper=function(...args){
+    const promise=completion.apply(this,args),tail=current?.tail;
+    return this===engine&&tail&&audited()&&owns(tail)?adapt(promise,tail):promise;
+  };
+  const guard=tail=>{if(tail.cleaning&&!attachedOwns(tail))throw tail.replaced;};
+  function createView(tail){
+    const engineView=new Proxy(engine,{
+      get(target,key){
+        guard(tail);
+        if(key==='handlePersistentThrowCompletion')return (...args)=>{
+          const promise=tail.completion.apply(engine,args);
+          return owns(tail)?adapt(promise,tail):promise;
+        };
+        const value=Reflect.get(target,key,target);
+        return typeof value==='function'?value.bind(target):value;
+      },
+      set(target,key,value){guard(tail);return Reflect.set(target,key,value,target);}
+    });
+    return new Proxy(box,{
+      get(target,key){guard(tail);return key==='throwEngine'?engineView:Reflect.get(target,key,target);},
+      set(target,key,value){guard(tail);return Reflect.set(target,key,value,target);}
+    });
+  }
+  const tickerWrapper=function(...args){
+    const tail=playbackTail;
+    if(this!==box||!tail||!pendingTail(tail))return animate.apply(this,args);
+    // A normal frame can arrive while stale cleanup is awaiting the worker.
+    // Skip only that captured batch; unknown native business exceptions escape.
+    if(!attachedOwns(tail))return;
+    try{return animate.apply(tail.view,args);}
+    catch(error){if(error!==tail.replaced)throw error;}
+  };
   const callback=async function(items){
     const prior=current,scope={items,failed:false};current=scope;
     const tracked=items.map(item=>({...item,resolve:value=>item.resolve(scope.failed?false:value)}));
@@ -53,152 +181,77 @@ export function installDsnQueueRecovery({queue,recover}){
   const wrapper=async function(...args){
     const scope=current;
     if(this!==box||!scope||queue.box!==box||box.throwEngine!==engine
-      ||boxProto.startUnifiedBatch!==start||engine.startUnifiedBatch!==engineProto.startUnifiedBatch
-      ||Object.hasOwn(engine,'startUnifiedBatch')||digest(engineProto.startUnifiedBatch)!==hashes.engineStart)
-      return start.apply(this,args);
-    const complete = args[2];
-    let completed = false;
-    const once = (...values) => {
-      if (completed) return;
-      completed = true;
-      if (scope.tail === tail) scope.tail = null;
+      ||boxProto.startUnifiedBatch!==start||engine.startUnifiedBatch!==engineStart
+      ||engineProto.startUnifiedBatch!==engineStart||Object.hasOwn(engine,'startUnifiedBatch'))return start.apply(this,args);
+    const complete=args[2];let completed=false;
+    const once=(...values)=>{
+      if(completed)return;
+      completed=true;
+      if(scope.tail===tail)scope.tail=null;
       return complete(...values);
     };
-    const tail = {scope, once, throws:args[0]};
-    scope.tail = tail;
-    // Keep the native ticker function and bundle closures. Its context carries
-    // this batch's ownership check through each await in the native cleanup.
-    const view=completionSupported?new Proxy(box,{get(target,key){
-      if(tail.cleaning&&!attachedOwns(tail))throw new Error('DsN cleanup batch was replaced');
-      return Reflect.get(target,key,target);
-    }}):box;
-    try{return await start.call(view,args[0],args[1],once);}
+    // The worker RPC function may be bridged. Capture its current identity for
+    // this batch instead of pinning the installation's exec function.
+    const tail={scope,once,throws:args[0],worker:box.physicsWorker,workerExec:box.physicsWorker?.exec,
+      completion:engine.handlePersistentThrowCompletion,
+      consumers:Object.fromEntries(Object.keys(consumers).map(key=>[key,box[key]])),
+      replaced:Error('DsN cleanup batch was replaced')};
+    scope.tail=tail;
+    if(completionSupported&&audited()){tail.view=createView(tail);playbackTail=tail;}
+    try{return await start.call(box,args[0],args[1],once);}
     catch(error){
       recover(error);
-      // A callback already fired may have started the next batch. Do not reset
-      // that later batch's physics or settle this one a second time.
       if(completed)return;
-      scope.failed=true;
+      scope.failed=true;let ghostified;
       try{
-        if(pendingTail(tail)&&queue.box===box&&box.throwEngine===engine
-          &&(engine.callback===null||engine.callback===once)
-          &&(engine.throws===null||engine.throws===tail.throws)
-          &&boxProto.startUnifiedBatch===start&&engine.startUnifiedBatch===engineProto.startUnifiedBatch
-          &&!Object.hasOwn(engine,'startUnifiedBatch')&&digest(engineProto.startUnifiedBatch)===hashes.engineStart){
-          box._preparingThrow=false;
-          engine.rolling=false;engine.running=false;engine.callback=null;
-          const ghostified=engine._ghostifiedIds;
-          engine._ghostifiedIds=[];
-          if(ghostified?.length)await engine.physicsWorker.exec('setCollisionResponse',{ids:ghostified,enabled:true});
+        if(startupOwns(tail)){
+          ghostified=engine._ghostifiedIds;
+          if(ghostified?.length)await tail.workerExec.call(tail.worker,'setCollisionResponse',{ids:ghostified,enabled:true});
         }
       }catch(cleanupError){recover(cleanupError);}
+      finally{
+        if(startupOwns(tail)&&engine._ghostifiedIds===ghostified){
+          box._preparingThrow=false;
+          engine.rolling=false;engine.running=false;engine.callback=null;engine._ghostifiedIds=[];
+        }
+      }
       try{queue._settleDroppedBinds(scope.items);}catch(cleanupError){recover(cleanupError);}
       finally{once();}
     }
   };
-  const completion = engineProto.handlePersistentThrowCompletion;
-  const effects = engineProto.handleSpecialEffectsInit;
-  const pendingTail = (tail) => current === tail.scope && tail.scope.tail === tail;
-  const attachedOwns = (tail) =>
-    queue.box === box &&
-    box.throwEngine === engine &&
-    engine.callback === tail.once &&
-    engine.throws === tail.throws &&
-    box.physicsWorker === worker &&
-    engine.physicsWorker === worker &&
-    box.animateThrow === animate &&
-    boxProto.animateThrow === animate &&
-    engineProto.handlePersistentThrowCompletion === completion &&
-    (engine.handlePersistentThrowCompletion === completionWrapper ||
-      (!active && engine.handlePersistentThrowCompletion === completion)) &&
-    engine.handleSpecialEffectsInit === effects &&
-    engineProto.handleSpecialEffectsInit === effects;
-  const owns = (tail) => pendingTail(tail) && attachedOwns(tail);
-  const audited = () =>
-    active &&
-    box.animateThrow === animate &&
-    boxProto.animateThrow === animate &&
-    engine.handlePersistentThrowCompletion === completionWrapper &&
-    engineProto.handlePersistentThrowCompletion === completion &&
-    engine.handleSpecialEffectsInit === effects &&
-    engineProto.handleSpecialEffectsInit === effects;
-  const failed = (tail, error) => {
-    recover(error);
-    if (pendingTail(tail)) tail.scope.failed = true;
+  const completionSupported=digest(box.constructor)===profile.boxClass&&animateHash===profile.boxAnimate
+    &&digest(completion)===hashes.engineComplete&&digest(effects)===hashes.engineEffects
+    &&Object.entries(tickerConsumers).every(([key,hash])=>digest(consumers[key])===hash)
+    &&!Object.hasOwn(box,'animateThrow')&&sourcesIntact()
+    &&(engine.handlePersistentThrowCompletion===completion&&!Object.hasOwn(engine,'handlePersistentThrowCompletion')
+      ||releasedCompletion(dataValue(engine,'handlePersistentThrowCompletion'))||bridgeSupported())
+    &&Object.isExtensible(engine)&&typeof ticker?.add==='function'&&typeof ticker?.remove==='function';
+  const registered=fn=>{
+    for(let node=ticker?._head?.next;node;node=node.next)if(node.fn===fn&&node.context===box)return true;
+    return false;
   };
-  // Intercept only the two audited consumers. External await/catch calls keep
-  // the original Promise, and the native closures retain their bundle aliases.
-  const intercept = (promise, tail, consumer, handle) => {
-    const then = promise.then;
-    Object.defineProperty(promise, 'then', {
-      configurable: true,
-      writable: true,
-      value: function (onFulfilled, onRejected) {
-        if (
-          this !== promise ||
-          onRejected !== undefined ||
-          digest(onFulfilled) !== consumer ||
-          !owns(tail)
-        )
-          return then.call(this, onFulfilled, onRejected);
-        return handle(then, onFulfilled);
-      }
-    });
-    return promise;
-  };
-  const completionWrapper = function (...args) {
-    const promise = completion.apply(this, args);
-    const tail = current?.tail;
-    if (this !== engine || !tail || !audited() || !owns(tail)) return promise;
-    return intercept(promise, tail, hashes.effectsConsumer, (then, onEffects) => {
-      const pending = then.call(promise, () => (owns(tail) ? onEffects() : undefined));
-      return intercept(pending, tail, hashes.cleanupConsumer, (then, onCleanup) =>
-        then
-          .call(pending, undefined, (error) => failed(tail, error))
-          .then(async () => {
-            try {
-              if (owns(tail)) {
-                tail.cleaning=true;
-                return await onCleanup();
-              }
-            } catch (error) {
-              failed(tail, error);
-            } finally {
-              tail.cleaning=false;
-              if (pendingTail(tail)) {
-                if (owns(tail)) engine.rolling = false;
-                else tail.scope.failed = true;
-                tail.once(tail.throws);
-              }
-            }
-          })
-      );
-    });
-  };
-  const completionSupported =
-    animateHash === profile.boxAnimate &&
-    digest(completion) === hashes.engineComplete &&
-    digest(effects) === hashes.engineEffects &&
-    !Object.hasOwn(box, 'animateThrow') &&
-    !Object.hasOwn(engine, 'handlePersistentThrowCompletion') &&
-    !Object.hasOwn(engine, 'handleSpecialEffectsInit') &&
-    Object.isExtensible(engine);
-  if (completionSupported)
-    Object.defineProperty(engine, 'handlePersistentThrowCompletion', {
-      value: completionWrapper,
-      writable: true,
-      configurable: true
-    });
+  if(completionSupported){
+    if(nativeCompletion(engine.handlePersistentThrowCompletion)){
+      ownedCompletions.set(completionWrapper,{engine,native:completion,active:()=>active});
+      Object.defineProperty(engine,'handlePersistentThrowCompletion',{value:completionWrapper,writable:true,configurable:true});
+    }
+    const migrate=registered(animate);
+    Object.defineProperty(box,'animateThrow',{value:tickerWrapper,writable:true,configurable:true});
+    if(migrate){ticker.remove(animate,box);ticker.add(tickerWrapper,box);}
+  }
   Object.defineProperty(accumulator,'_onEnd',{...onEnd,value:callback});
   Object.defineProperty(box,'startUnifiedBatch',{value:wrapper,writable:true,configurable:true});
   return {status:'installed',completionStatus:completionSupported?'installed':'unsupported-source',attach,restore(){
-    active = false;
-    if (
-      Object.getOwnPropertyDescriptor(engine, 'handlePersistentThrowCompletion')?.value === completionWrapper
-    ) {
-      delete engine.handlePersistentThrowCompletion;
+    if(!active)return;
+    const migrate=completionSupported&&registered(tickerWrapper),ownAnimate=dataValue(box,'animateThrow')===tickerWrapper;
+    active=false;
+    if(dataValue(engine,'handlePersistentThrowCompletion')===completionWrapper)delete engine.handlePersistentThrowCompletion;
+    if(ownAnimate)delete box.animateThrow;
+    if(migrate){
+      ticker.remove(tickerWrapper,box);
+      if(ownAnimate&&box.animateThrow===animate&&queue.box===box&&box.throwEngine===engine&&sourcesIntact())ticker.add(animate,box);
     }
     if(accumulator._onEnd===callback)Object.defineProperty(accumulator,'_onEnd',onEnd);
-    if(Object.getOwnPropertyDescriptor(box,'startUnifiedBatch')?.value===wrapper)delete box.startUnifiedBatch;
+    if(dataValue(box,'startUnifiedBatch')===wrapper)delete box.startUnifiedBatch;
   }};
 }

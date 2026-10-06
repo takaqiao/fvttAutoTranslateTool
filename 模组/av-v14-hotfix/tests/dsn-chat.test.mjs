@@ -92,7 +92,7 @@ function realQueue(f,{persistent=false}={}){
  const classes=vm.runInContext(`(()=>{${queueFixture.accumulator};${queueFixture.queue};return {AnimationQueue,Box:class{${queueFixture.boxStart}},Engine:class{${queueFixture.engineStart}}}})()`,context);
  const engine=new classes.Engine();
  Object.assign(engine,{rolling:false,running:false,diceList:[],deadDiceList:[],persistentDiceList:[],clearDice(){},diceScene:{display:{innerWidth:1000,innerHeight:800}},getVectors(){},checkForAnimatedDice:async()=>false,soundManager:{generateCollisionSounds:()=>[]},physicsWorker:{async exec(name){if(name==='simulateThrow'){simulations++;if(failures-->0)throw Error('native worker failed');return {ids:[],quaternionsBuffers:[],positionsBuffers:[],detectedCollides:[],deads:[],iterationsNeeded:0,faceValues:{},finalQuaternions:{}};}return true;}}});
- const box=new classes.Box();Object.assign(box,{throwEngine:engine,inputHandler:{clearPendingThrowDice(){}},animateThrow(){}});
+ const box=new classes.Box();Object.assign(box,{throwEngine:engine,physicsWorker:engine.physicsWorker,inputHandler:{clearPendingThrowDice(){}},animateThrow(){}});
  const queue=new classes.AnimationQueue({canvasVisibility:{show(){},hide(){hidden++;}},pendingThrows:{noteBindsLanded:v=>landed.push(...v)}});queue.attach(box);
  f.pipeline.queue=queue;f.g.game.dice3d.box=box;f.settings.set('maxDiceNumber',20);
  return {queue,box,engine,hidden:()=>hidden,simulations:()=>simulations,failNext:()=>failures++,landed};
@@ -101,7 +101,7 @@ function realQueue(f,{persistent=false}={}){
 // _buildDiceBox starts initialize() and attaches immediately. Its ready promise
 // resolves only after async scene/worker setup has created the throw engine.
 function initializingBox(q){
- const box=Object.assign(Object.create(Object.getPrototypeOf(q.box)),{throwEngine:null,inputHandler:null,initialized:false,animateThrow(){}});
+ const box=Object.assign(Object.create(Object.getPrototypeOf(q.box)),{throwEngine:null,physicsWorker:q.box.physicsWorker,inputHandler:null,initialized:false,animateThrow(){}});
  let initialize;
  box.ready=new Promise(resolve=>{initialize=()=>{
   box.throwEngine=Object.assign(new q.engine.constructor(),q.engine);
@@ -185,7 +185,7 @@ test('queue recovery installs after the real DiceBox is attached at diceSoNiceRe
 });
 test('rebuilding the DiceBox replaces only the owned queue recovery wrapper',async()=>{
  const f=setup(),q=realQueue(f),result=installDsnChatRecovery({g:f.g});
- const newBox=Object.assign(Object.create(Object.getPrototypeOf(q.box)),{throwEngine:q.engine,inputHandler:q.box.inputHandler,animateThrow(){}});
+ const newBox=Object.assign(Object.create(Object.getPrototypeOf(q.box)),{throwEngine:q.engine,physicsWorker:q.box.physicsWorker,inputHandler:q.box.inputHandler,animateThrow(){}});
  q.queue.attach(newBox);
  assert.equal(Object.hasOwn(q.box,'startUnifiedBatch'),false);assert.equal(Object.hasOwn(newBox,'startUnifiedBatch'),true);
  f.pipeline.renderRolls(f.message,[rolls()[0]]);await settle();await settle();
@@ -213,7 +213,7 @@ test('native resize in queue.idle continuation stays protected before accumulato
  let newBox,processing;
  await q.queue.idle().then(()=>{
    processing=q.queue.nextAnimation._isProcessing;
-   newBox=Object.assign(Object.create(Object.getPrototypeOf(q.box)),{throwEngine:q.engine,inputHandler:q.box.inputHandler,animateThrow(){}});
+   newBox=Object.assign(Object.create(Object.getPrototypeOf(q.box)),{throwEngine:q.engine,physicsWorker:q.box.physicsWorker,inputHandler:q.box.inputHandler,animateThrow(){}});
    q.queue.attach(newBox);
  });
  await settle();

@@ -13,7 +13,7 @@ import {installTurnLifecyclePatch} from './scripts/patches/turn-lifecycle.mjs';
 import {installDsnChatRecovery} from './scripts/patches/dsn-chat.mjs';
 
 const ID='av-v14-hotfix';
-const state={version:'0.6.22',patches:{patreon:{status:'retired',detail:'Upstream 3.2.29 includes the relationship refresh guards.'},wayfinderFog:{status:'retired',detail:'Wayfinder 14.1.1 replaced the old fog implementation; the 14.0.1 adapter is retired.'},grid:{status:'retired',detail:'Use Grid 2.3.1 distance and undrawn-token aura handling.'},bbmmLocks:{status:'retired',detail:'Use BBMM 1.4.11 submenu hard locks and notifications.'}}};
+const state={version:'0.6.23',patches:{patreon:{status:'retired',detail:'Upstream 3.2.29 includes the relationship refresh guards.'},wayfinderFog:{status:'retired',detail:'Wayfinder 14.1.1 replaced the old fog implementation; the 14.0.1 adapter is retired.'},grid:{status:'retired',detail:'Use Grid 2.3.1 distance and undrawn-token aura handling.'},bbmmLocks:{status:'retired',detail:'Use BBMM 1.4.11 submenu hard locks and notifications.'}}};
 let babele;
 const report=(feature,status,detail)=>{
   if(typeof feature==='object'){const {restore,...data}=feature;state.patches[feature.feature]=data;return;}

@@ -162,7 +162,7 @@ test('a native model download failure settles the real AnimationQueue batch befo
  Object.assign(f.context,{setTimeout,clearTimeout,DsnSettings:{isEnabled:()=>true},DiceNotation:{mergeQueuedRollCommands:()=>[[{dice:[{}],dsnConfig:{}}]]},Utils:{removeTicker(){}},canvas:{app:{ticker:{add(){}}}}});
  const classes=vm.runInContext(`(()=>{${queueFixture.accumulator};${queueFixture.queue};return {AnimationQueue,Box:class{${queueFixture.boxStart}},Engine:class{${queueFixture.engineStart}}}})()`,f.context);
  const engine=Object.assign(new classes.Engine(),{rolling:false,running:false,diceList:[],deadDiceList:[],persistentDiceList:[],clearDice(){},getVectors(){},diceScene:{display:{innerWidth:1000,innerHeight:800}},async spawnDiceMesh(){await f.preset.loadModel(f.loader);},checkForAnimatedDice:async()=>false,soundManager:{generateCollisionSounds:()=>[]},physicsWorker:{async exec(name){if(name==='simulateThrow'){simulated++;return {ids:[],quaternionsBuffers:[],positionsBuffers:[],detectedCollides:[],deads:[],iterationsNeeded:0,faceValues:{},finalQuaternions:{}};}return true;}}});
- const box=Object.assign(new classes.Box(),{throwEngine:engine,inputHandler:{clearPendingThrowDice(){}},animateThrow(){}});
+ const box=Object.assign(new classes.Box(),{throwEngine:engine,physicsWorker:engine.physicsWorker,inputHandler:{clearPendingThrowDice(){}},animateThrow(){}});
  const queue=new classes.AnimationQueue({canvasVisibility:{show(){},hide(){hidden++;}},pendingThrows:{}});queue.attach(box);f.pipeline.queue=queue;
  const installed=installDsnChatRecovery({g:f.g}),state=observe(queue.enqueue({throws:[{}]},{}));
  await settle();assert.equal(f.requests.length,1);f.requests[0].fail(Error('buffer download failed'));await settle();

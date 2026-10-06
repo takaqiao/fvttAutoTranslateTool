@@ -18,8 +18,9 @@ for (const stage of ['collisions', 'positions', 'effects'])
         second = observe(f.enqueue());
       await settle();
       assert.equal(first.status, 'pending');
-      assert.equal(f.box.animateThrow, native);
-      assert.equal(f.ticks[0][0], native);
+      assert.equal(Object.getPrototypeOf(f.box).animateThrow, native);
+      assert.notEqual(f.box.animateThrow,native);
+      assert.equal(f.ticks[0][0],f.box.animateThrow);
       if (stage === 'effects')
         f.engine.diceList.push({ userData: { system: 'standard' }, specialEffects: [{}] });
       f.fail(stage);
@@ -61,7 +62,7 @@ test('persistent SFX rejection preserves affected binds and still restores colli
   );
   await f.queue.idle();
 });
-test('successful native playback waits for effects and preserves the ticker function', async () => {
+test('successful native playback waits for effects and executes the native ticker function', async () => {
   const f = setup(),
     native = f.box.animateThrow;
   f.install();
@@ -75,7 +76,7 @@ test('successful native playback waits for effects and preserves the ticker func
   release();
   await settle();
   assert.equal(state.value, true);
-  assert.equal(f.box.animateThrow, native);
+  assert.equal(Object.getPrototypeOf(f.box).animateThrow, native);
   assert.equal(f.errors.length, 0);
   await f.queue.idle();
 });

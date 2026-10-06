@@ -39,6 +39,14 @@ node scripts/build-dsn-643-test-fixture.mjs /path/to/upstream
 
 Both capture files must be alongside `upstream`. Queue completion and chat regressions exercise both source profiles, including asynchronous readiness, failures, late effects and replacement of batch owners during worker cleanup. These fixtures prove isolated behavior and source contracts; they do not measure live-world graphics or frame rate.
 
+`persistent-bridge-0.5.4-native.json` independently preserves the captured PersistentDice adapter, including its actual ready, wrapper and dispose closures. Its generator checks the capture, inventory, manifest and adapter digest before writing this file:
+
+```sh
+node scripts/build-persistent-bridge-test-fixture.mjs /path/to/upstream
+```
+
+The bridge regressions execute this adapter against both native DsN profiles, in both installation orders, across recovery reinstall and native queue attach after a box rebuild. They preserve the bridge's actual function references and external completion observers. Ticker regressions cover every native animate identity consumer and run the installed Foundry Pixi ticker when `FVTT_NATIVE_APP` is available. The runtime keeps the native prototype function and its closures, with a stable owned instance wrapper for all native ticker registrations.
+
 ## 0.6.22 source capture
 
 The DsN chat, model and queue fixtures are exact excerpts from the remote installation's 6.4.2 `main.js`, verified against `source-capture.json`. Their required functions and completion consumers match 6.4.1. The DiceConfig `_prepareContext` excerpt was updated for 6.4.2's medium shadow choice and hidden-die filtering. The associated metadata records original bundle SHA-256, fragment offsets and fragment SHA-256; bundle hashes never authorize a runtime patch.
