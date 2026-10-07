@@ -1,4 +1,5 @@
 import {createSalubriousMessagePrivacy,loadSalubriousWorkbench} from './salubrious-message-privacy.mjs';
+import {createPilgrimRewards} from './sog-pilgrim-rewards.mjs';
 import {createExplorationRuntime} from './exploration/runtime.mjs';
 import {resolveProviderAction} from './runtime.mjs';
 import {renderSalubriousCard,filterSalubriousDamageContext} from './salubrious-kiss-chat.mjs';
@@ -286,6 +287,8 @@ Hooks.once('ready',async()=>{
  }catch(error){treatmentDiagnostic=Object.freeze({ready:false,installed:false,reason:String(error.message??error),dependency:null});report(error);}
  game.modules.get(MODULE_ID).api={open,request,version:game.modules.get(MODULE_ID).version,repairActiveParty:()=>maintenance(),eldamon:{getContinuations:voltage.getContinuations,continueActivity:voltage.continueActivity,useRefresh:voltage.useRefresh,continueChain:electricity.continueChain,declareShieldTrigger:electricityBasic.declareShieldTrigger,clearMetapower:async(actorOrUuid,options)=>metapower.clearArmed(typeof actorOrUuid==='string'?await fromUuid(actorOrUuid):actorOrUuid,options)},nativeDamageIWR:async(...args)=>{const handled=await shieldAdapter.nativeDamageIWR(...args);electricity.observeNativeIWR(...args,handled);return handled},get nativeIWRCompatibility(){return shieldAdapter.nativeBridgeDiagnostic()},get patreonInitiativeCompatibility(){return patreonInitiativeCompatibility},registerPatreonInitiativeCompatibility:registerPatreonCompatibility,get salubriousKiss(){return treatmentDiagnostic},get defensiveAdvance(){return defensiveAdvance.diagnostic},get glimpseOfRedemption(){return {ready:glimpse.ready()}},get roaringApplause(){return {enabled:!!roaring,...roaring?.diagnostic(),ownedReactionConsumers:!!roaring,reactionChecker:{status:roaringReactionCompatibility?.status??'unavailable',ready:roaringReactionCompatibility?.ready()===true,reason:roaringReactionCompatibility?.reason??null}}},get reactionShieldWallCompatibility(){return reactionShieldWallDiagnostic}};
  game.modules.get(MODULE_ID).api.exploration=exploration.api;
+ const pilgrim=await createPilgrimRewards({game,fromUuid,choose,onError:error=>console.error(MODULE_ID,'pilgrim',error)});
+ if(pilgrim.enabled){pilgrim.register({Hooks,socket});game.modules.get(MODULE_ID).api.pilgrim=pilgrim;}
  await exploration.register({socket});
  notifyNativeIWRStatus({game,diagnostic:shieldAdapter.nativeBridgeDiagnostic(),warn:message=>ui.notifications.warn(message)});
  await maintenance().catch(report);
