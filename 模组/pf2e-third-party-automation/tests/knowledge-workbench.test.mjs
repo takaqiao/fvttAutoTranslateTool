@@ -62,9 +62,9 @@ test('fixed Assurance keeps its zero-dice path without requesting a redundant na
  f.game.pf2e.Check.roll=(check,context,...args)=>{primaryCalls++;assert.equal(context.skipDialog,true);return native(check,context,...args);};
  const capture=await api.captureWorkbenchRecall({...f,requestId:'fixed-assurance-confirmation',targetUuids:[f.target.uuid],statistic:'society',assurance:true});assert.equal(primaryCalls,1);assert.equal(f.die.count,0);assert.equal(capture.candidates[0].total,19);
 });
-test('Assurance cancelled by misfortune must confirm its actual random check and can cancel without consuming effects',async()=>{
+test('conflicted Assurance native null return removes its empty reservation without consuming effects',async()=>{
  const f=fixture(),create=f.globals.ChatMessage.create;f.globals.ChatMessage.create=async data=>{const message=await create(data);message.delete=async()=>f.game.messages.delete(message.id);return message;};f.actor.skills.society.rollTwice='keep-lower';f.actor.skills.society.modifiers=[{type:'proficiency',modifier:9}];f.actor.items=[{_stats:{compendiumSource:'Compendium.pf2e.feats-srd.Item.W6Gl9ePmItfDHji0'},system:{rules:[{key:'ChoiceSet',flag:'assurance',selection:'society'}]}}];let after=0;
- f.actor.rules=[{afterRoll(){after++;}}];f.game.pf2e.Check.roll=async(_check,context)=>{assert.equal(context.skipDialog,false);return null;};
+ f.actor.rules=[{afterRoll(){after++;}}];f.game.pf2e.Check.roll=async(_check,context)=>{assert.equal(context.skipDialog,true);return null;};
  await assert.rejects(()=>api.captureWorkbenchRecall({...f,requestId:'cancel-conflicted-assurance',targetUuids:[f.target.uuid],statistic:'society',assurance:true}),/取消/);assert.equal(f.die.count,0);assert.equal(after,0);assert.equal(f.game.messages.size,0);
 });
 test('safe probes run one real primary native check and consume its one-use rule only after a persistent card claim',async()=>{
@@ -293,16 +293,19 @@ test('incidental native roll options affect captured modifiers before primary se
  const capture=await api.captureWorkbenchRecall({...f,requestId:'origin',targetUuids:[f.target.uuid],origin:{rollOptions:['origin:item:known-weaknesses']}});assert.equal(capture.candidates[0].total,29);
 });
 const nativeBundle=process.env.FVTT_PF2E_BUNDLE??process.env.FVTT_PF2E_RUNTIME??'';
-test('installed native Check opens no ordinary RK dialog and retains one real roll and afterRoll', {skip:!fs.existsSync(nativeBundle)},async()=>{
+test('installed native Check opens no RK dialog for ordinary, specified and Assurance checks', {skip:!fs.existsSync(nativeBundle)},async()=>{
  const bundle=fs.readFileSync(nativeBundle,'utf8'),start=bundle.indexOf('static async roll(e, t = {}, n = null, r) {',bundle.indexOf('Sa = class Check {')),end=bundle.indexOf('let s = [], c = t.isReroll',start);assert.ok(start>=0&&end>start,'installed Check entry source unavailable');
  const prefix=bundle.slice(start+'static async roll(e, t = {}, n = null, r) {'.length,end);
- for(const showCheckDialogs of [false,true]){
+ for(const mode of ['ordinary','specified','assurance','conflicted-assurance'])for(const showCheckDialogs of [false,true]){
   const f=fixture(),native=f.game.pf2e.Check.roll;f.user.settings={showCheckDialogs};f.game.pf2e.settings={metagame:{secretChecks:false}};let dialogs=0,primaryCalls=0,after=0;
+  const assurance=mode==='assurance'||mode==='conflicted-assurance',fixed=mode==='assurance';
+  if(assurance){f.actor.skills.society.modifiers=[{type:'proficiency',modifier:9}];f.actor.items=[{_stats:{compendiumSource:ASSURANCE_SOURCE},system:{rules:[{key:'ChoiceSet',flag:'assurance',selection:'society'}]}}];}
+  if(mode==='conflicted-assurance')f.actor.skills.society.rollTwice='keep-lower';
   class CheckModifiersDialog{constructor(_check,resolve){dialogs++;this.resolve=resolve;}render(){this.resolve(true);}}
   const enter=new Function('game','foundry','CONFIG','CheckModifiersDialog','objectHasKey',`return async function(e,t,n){${prefix};return true;};`)(f.game,{utils:{mergeObject:Object.assign}},{ChatMessage:{modes:{public:0,blind:1}}},CheckModifiersDialog,(object,key)=>Object.hasOwn(object,key));
   f.actor.rules=[{afterRoll(){after++;}}];f.game.pf2e.Check.roll=async(check,context,event,callback)=>{if(!await enter(check,context,event))return null;primaryCalls++;return native(check,context,event,callback);};
-  const capture=await api.captureWorkbenchRecall({...f,requestId:`native-one-click-${showCheckDialogs}`,targetUuids:[f.target.uuid]});
-  assert.equal(dialogs,0);assert.equal(primaryCalls,1);assert.equal(f.die.count,1);assert.equal(after,1);assert.equal(capture.candidates[0].total,25);assert.equal(capture.message.blind,true);assert.match(capture.message.content,/<strong>回忆知识<\/strong>/);assert.equal(capture.message.flags[MODULE_ID].workbenchRecall.probeUse.status,'done');
+  const capture=await api.captureWorkbenchRecall({...f,requestId:`native-one-click-${mode}-${showCheckDialogs}`,targetUuids:[f.target.uuid],statistic:mode==='ordinary'?null:'society',assurance});
+  assert.equal(dialogs,0,`${mode}, dialogs preference ${showCheckDialogs}`);assert.equal(primaryCalls,1);assert.equal(f.die.count,fixed?0:1);assert.equal(after,1);assert.equal(capture.candidates[0].total,fixed?19:25);assert.equal(capture.candidates[0].statistic,'society');assert.equal(capture.message.blind,true);assert.match(capture.message.content,/回忆知识/);assert.equal(capture.message.flags[MODULE_ID].workbenchRecall.probeUse.status,'done');assert.equal(capture.message.flags[MODULE_ID].workbenchRecall.assurance,fixed);
  }
 });
 test('installed PF2e RecallKnowledgeActionVariant bypasses its native player-skill prerequisite through the real prototype', {skip:!fs.existsSync(nativeBundle)},async()=>{
