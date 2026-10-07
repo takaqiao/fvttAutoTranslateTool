@@ -229,7 +229,14 @@ export function createElementalMedicine({game,fromUuid=globalThis.fromUuid,reque
   rest:({actor,removeItem,updateItem})=>{for(const request of values(actor.items).filter(i=>own(i)?.kind==='preparation')){if(terminal(own(request).status))removeItem(request.id);else updateItem({_id:request.id,[`flags.${MODULE_ID}.elementalMedicine.closed`]:true});}},
  };
  function registerDailies(){if(!game.modules.get(DAILIES)?.active)return {status:'inactive'};const api=game.dailies?.api;if(typeof api?.registerCustomDailies!=='function')return {status:'unavailable'};if(registered.has(api))return {status:'already-registered'};api.registerCustomDailies([daily]);registered.add(api);return {status:'registered',keys:[daily.key]};}
- function index(){if(indexed)return;indexed=true;for(const a of values(game.actors).filter(a=>a.type==='character'))for(const request of values(a.items).filter(i=>own(i)?.kind==='preparation'))tracked.set(request.uuid,request);}
+ function index(){
+  if(indexed)return;indexed=true;
+  const iterate=c=>{const entries=c?.values?.()??c??[];return typeof entries[Symbol.iterator]==='function'?entries:Array.from(entries);};
+  for(const actor of iterate(game.actors)){
+   if(actor.type!=='character')continue;
+   for(const request of iterate(actor.items))if(own(request)?.kind==='preparation')tracked.set(request.uuid,request);
+  }
+ }
  async function maintain(){if(!isActiveGM(game))return;index();
   for(const [uuid,request]of tracked){if(request.actor?.items.get(request.id)!==request){tracked.delete(uuid);continue;}const state=own(request),user=game.users.get(state.userId);if(terminal(state.status)||!allowed(request.actor,user)||session.running.has(uuid))continue;try{await prepare(uuid,user,{recoverOnly:true});}catch(error){report(error);}}
  }

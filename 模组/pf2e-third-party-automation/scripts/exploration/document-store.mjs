@@ -2,12 +2,18 @@ import {MODULE_ID,emptyLedger} from './schema.mjs';
 import {canonicalJSON,normalizeLedger,projectRevisionPages} from './revision-codec.mjs';
 import {createRevisionStore} from './revision-store.mjs';
 export const isActiveGM=game=>!!game.user?.isGM&&game.users?.activeGM?.id===game.user.id;
+export const requireGMRead=game=>{if(game.user?.isGM!==true)throw Error('gm-read-required')};
 
 export function createDocumentStore({game,writerClientId=globalThis.crypto.randomUUID(),nonce=()=>globalThis.crypto.randomUUID(),timeoutMs=15000}) {
   if(!Number.isSafeInteger(timeoutMs)||timeoutMs<=0)throw Error('invalid-document-timeout');
   let pinnedRoot=null,requiresReload=false;
   const setting=()=>game.settings.get(MODULE_ID,'explorationLedgerUUID');
   const authority=()=>{if(!isActiveGM(game))throw Error('active-gm-required')};
+  async function readAsGM(operation){
+    requireGMRead(game);const user=game.user,userId=user.id;
+    try{return await operation()}
+    finally{requireGMRead(game);if(game.user!==user||game.user.id!==userId)throw Error('document-user-changed')}
+  }
   const validUUID=uuid=>{if(typeof uuid!=='string'||!/^JournalEntry\.[A-Za-z0-9]{16}$/.test(uuid))throw Error('invalid-revision-root')};
   function getRootUUID(){
     const root=setting();
@@ -26,7 +32,7 @@ export function createDocumentStore({game,writerClientId=globalThis.crypto.rando
     if(!Array.isArray(raw.pages))throw Error('invalid-revision-pages');
   }
   function request(data,{write=false}={}){
-    if(write)authority();
+    if(write)authority();else requireGMRead(game);
     const socket=game.socket,socketId=socket?.id,userId=game.user?.id;
     if(!socket?.connected||!socketId||!userId)throw Error('document-socket-disconnected');
     const wire=structuredClone(data);
@@ -39,7 +45,7 @@ export function createDocumentStore({game,writerClientId=globalThis.crypto.rando
         try{
           if(game.socket!==socket||!socket.connected||socket.id!==socketId)throw Error('document-socket-changed');
           if(game.user?.id!==userId)throw Error('document-user-changed');
-          if(write)authority();
+          if(write)authority();else requireGMRead(game);
           resolve(structuredClone(response));
         }catch(error){reject(error)}
       };
@@ -52,8 +58,9 @@ export function createDocumentStore({game,writerClientId=globalThis.crypto.rando
   function envelope(ack,type,action,userId){return ack?.type===type&&ack.action===action&&ack.userId===userId&&ack.broadcast===false&&!ack.results}
   function sameJSON(left,right){try{return canonicalJSON(left)===canonicalJSON(right)}catch{return false}}
   async function readRoot(rootUUID){
-    validUUID(rootUUID);const id=rootUUID.slice('JournalEntry.'.length),userId=game.user?.id;
+    requireGMRead(game);validUUID(rootUUID);const id=rootUUID.slice('JournalEntry.'.length),userId=game.user?.id;
     const ack=await request({type:'JournalEntry',action:'get',operation:{query:{_id:id},broadcast:false}});
+    requireGMRead(game);
     if(!envelope(ack,'JournalEntry','get',userId)||ack.error||!Array.isArray(ack.result)||!sameJSON(ack.operation?.query,{_id:id}))throw Error('root-read-acknowledgement-unknown');
     if(ack.result.length===0)throw Error('root-not-found');
     if(ack.result.length!==1)throw Error('root-read-acknowledgement-unknown');
@@ -102,8 +109,8 @@ export function createDocumentStore({game,writerClientId=globalThis.crypto.rando
     return configure(rootUUID,before);
   }
   return {
-    read:async()=>getRootUUID()?revisions.read():emptyLedger(),
-    transact:revisions.transact,status:revisions.status,
+    read:()=>readAsGM(()=>getRootUUID()?revisions.read():emptyLedger()),
+    transact:revisions.transact,status:()=>readAsGM(revisions.status),inspect:()=>readAsGM(revisions.inspect),
     initialize:async options=>{setup(options);return revisions.initialize({...options,allowStoppedLegacy:options.allowStoppedLegacy===true})},
     provision,select
   };

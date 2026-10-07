@@ -6,6 +6,7 @@ import {createWorkbenchRecallController} from './knowledge-entrypoints.mjs';
 import {AUTOMATIC_KNOWLEDGE_SOURCE,automaticKnowledgeChoices,automaticKnowledgeRound} from './knowledge-automatic.mjs';
 import {knowledgeNativeLabel} from './knowledge-display.mjs';
 import {getNativeOwnerTransientActor} from './native-owner-operations.mjs';
+import {createDirtyMaintenance,isUnrelatedMaintenanceUpdate,COSMETIC_UPDATE_FIELDS} from './maintenance-events.mjs';
 
 export const KNOWLEDGE_SOURCES=Object.freeze({
  recall:'Compendium.pf2e.actionspf2e.Item.1OagaWtBpVXExToo',automatic:AUTOMATIC_KNOWLEDGE_SOURCE,
@@ -192,9 +193,10 @@ export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,cho
   if(ids.length!==1||!actor||!user||!actor.testUserPermission?.(user,'OWNER')||typeof target!=='string')return null;
   return {claim:ids[0],actor,user,target};
  }
- async function settleClaimProof(message,proof){
-  gm();const matched=[];
+ async function settleClaimProof(message,proof,isCurrent=()=>true){
+  if(!isCurrent(proof.actor))return;gm();const matched=[];
   for(const source of actors())for(const state of states(source)){
+   if(!isCurrent(source)||!isCurrent(proof.actor))return;
    if(state.status==='consumed'&&state.settledClaim?.id===proof.claim&&state.settledClaim.actorUuid===proof.actor.uuid&&state.attackMessageId===message.id){if(!state.cleanupDone)matched.push([source,state.id]);continue;}
    if(state.status!=='claimed'||state.claim!==proof.claim||state.actorUuid!==proof.actor.uuid||state.targetUuid!==proof.target)continue;
    // Native composite activities may be rolled by the GM on behalf of the
@@ -204,8 +206,9 @@ export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,cho
    await saveState(source,{...state,status:'consumed',attackMessageId:message.id,settledClaim:{id:proof.claim,actorUuid:proof.actor.uuid},cleanupDone:false,claim:null,actorUuid:null,userId:null});matched.push([source,state.id]);
   }
   if(matched.length){
+   if(!isCurrent(proof.actor)||matched.some(([source])=>!isCurrent(source)))return;
    gm();const ids=values(proof.actor.items).filter(i=>own(i).kind==='strategist-claim'&&own(i).claim===proof.claim).map(i=>i.id);if(ids.length)await proof.actor.deleteEmbeddedDocuments('Item',ids);
-   for(const [source,id]of matched){const state=states(source).find(s=>s.id===id);if(state?.settledClaim?.id===proof.claim)await saveState(source,{...state,cleanupDone:true});}
+   for(const [source,id]of matched){if(!isCurrent(source)||!isCurrent(proof.actor))return;const state=states(source).find(s=>s.id===id);if(state?.settledClaim?.id===proof.claim)await saveState(source,{...state,cleanupDone:true});}
   }
  }
  async function processClaimCheck(message){
@@ -368,18 +371,54 @@ export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,cho
    }catch(error){if(action==='knowledge:devise'&&frequencyReceipt&&!spent)await item.update({'system.frequency.value':Math.min(item.system.frequency.max,(item.system.frequency.value??0)+1)},{[MODULE_ID]:{usageInternal:true}});throw error;}
   });
  }
- async function maintain(actor){if(!isActiveGM(game)||!actor?.items)return;const remove=values(actor.items).filter(i=>own(i).timing&&expired(own(i).timing)).map(i=>i.id);if(remove.length)await actor.deleteEmbeddedDocuments('Item',remove);await queue.run('strategist-claims',async()=>{
+ // Supplied checks must confirm current GM authority on every call.
+ async function maintain(actor,isCurrent=()=>isActiveGM(game)){
+  if(!isCurrent(actor)||!actor?.items)return;
+  const iterator=actor.items.values?.(),remove=[];
+  for(const item of iterator??values(actor.items))if(own(item).timing){if(expired(own(item).timing))remove.push(item.id)}
+  if(remove.length){
+   if(!isCurrent(actor))return;
+   await actor.deleteEmbeddedDocuments('Item',remove);
+  }
+  if(!isCurrent(actor))return;
+  if(!states(actor).length)return;
+  await queue.run('strategist-claims',async()=>{
+ if(!isCurrent(actor))return;
  const interrupted=new Set(states(actor).flatMap(s=>s.status==='claimed'?[s.claim]:s.settledClaim&&!s.cleanupDone?[s.settledClaim.id]:[]));
-  if(interrupted.size)for(const message of values(game.messages)){const proof=claimProof(message);if(proof&&interrupted.has(proof.claim))await settleClaimProof(message,proof);}
+  if(interrupted.size)for(const message of values(game.messages)){if(!isCurrent(actor))return;const proof=claimProof(message);if(proof&&interrupted.has(proof.claim))await settleClaimProof(message,proof,isCurrent);}
   for(const state of states(actor).filter(s=>s.status==='consumed'&&s.settledClaim&&!s.cleanupDone)){
-   const recipient=await fromUuid(state.settledClaim.actorUuid);if(!recipient?.items)continue;
+   if(!isCurrent(actor))return;const recipient=await fromUuid(state.settledClaim.actorUuid);if(!isCurrent(actor)||!recipient?.items||!isCurrent(recipient))return;
    gm();const ids=values(recipient.items).filter(i=>own(i).kind==='strategist-claim'&&own(i).claim===state.settledClaim.id).map(i=>i.id);if(ids.length)await recipient.deleteEmbeddedDocuments('Item',ids);
+   if(!isCurrent(actor)||!isCurrent(recipient))return;
    await saveState(actor,{...state,cleanupDone:true});
   }
-  const existing=states(actor),keep=existing.filter(s=>has(actor,'stance')&&stance(actor)&&game.combat?.started&&s.combatId===game.combat.id);if(keep.length!==existing.length)await saveStates(actor,keep);
+  if(!isCurrent(actor))return;
+  const existing=states(actor),keep=existing.filter(s=>s.status==='claimed'||s.status==='consumed'&&s.settledClaim&&!s.cleanupDone||has(actor,'stance')&&stance(actor)&&game.combat?.started&&s.combatId===game.combat.id);if(keep.length!==existing.length)await saveStates(actor,keep);
  });}
  function register({Hooks,libWrapper,socket:socketApi,onError:report=onError}={}){
   if(registered)return()=>{};registered=true;socket=socketApi;const unregisterWorkbench=workbench.register({Hooks,libWrapper,socket:socketApi});const registrations=[],on=(name,fn)=>registrations.push([name,Hooks.on(name,(...args)=>Promise.resolve().then(()=>fn(...args)).catch(report))]);
+  let installed=true,maintenance,epoch=0;
+  const invalidate=()=>{epoch++};
+  const maintenanceEnabled=()=>{if(!installed||!registered)return false;if(isActiveGM(game))return true;invalidate();return false};
+  const connection=game.socket,disconnected=()=>{if(installed)invalidate()};connection?.on?.('disconnect',disconnected);
+  const current=actor=>{if(!actor.isToken)return game.actors?.get?.(actor.id)===actor;const token=actor.token;return token?.actor===actor&&game.scenes?.get?.(token.parent?.id)===token.parent&&token.parent?.tokens?.get?.(token.id)===token};
+  const valid=actor=>installed&&registered&&isActiveGM(game)&&current(actor);
+  const buildMaintenance=()=>{
+   const added=[];
+   try{
+    const authorityChanged=()=>{maintenanceEnabled()};for(const name of ['updateUser','userConnected'])added.push([name,Hooks.on(name,authorityChanged)]);
+    maintenance=createDirtyMaintenance({enabled:maintenanceEnabled,run:async()=>{
+     const batchEpoch=epoch,sameBatch=()=>epoch===batchEpoch&&installed&&registered&&isActiveGM(game),cohort=actors();
+     if(!sameBatch())return;
+     for(const actor of cohort){
+      if(!sameBatch())return;
+      await maintain(actor,doc=>epoch===batchEpoch&&valid(actor)&&(doc===actor||valid(doc)));
+     }
+    },onError:report});
+    registrations.push(...added);
+   }catch(error){for(const[name,id]of added)Hooks.off(name,id);maintenance=undefined;throw error}
+  };
+  const requestMaintenance=()=>{if(!maintenanceEnabled())return;if(!maintenance)buildMaintenance();return maintenance.request()};
   if(socket)for(const method of ['claim','complete'])socket.register(`knowledge-${method}`,async function(payload){try{const user=game.users.get(this.socketdata.userId);return {ok:true,value:method==='claim'?await claimAttack(payload,user):await completeAttack(payload.receipt,payload.result,user)}}catch(e){return {ok:false,error:e.message}}});
   // Numeric-DC skill checks omit context.target in PF2e. Snapshot on the creator,
   // never from the executing GM's selection, and never replace native context.
@@ -389,7 +428,7 @@ export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,cho
   });registrations.push(['preCreateChatMessage',pre]);
   on('createChatMessage',processRecall);on('updateChatMessage',processRecall);
   on('createChatMessage',processClaimCheck);on('updateChatMessage',processClaimCheck);
-  on('updateCombat',async()=>{for(const actor of actors())await maintain(actor)});on('deleteCombat',async()=>{for(const actor of actors())await maintain(actor)});on('deleteItem',i=>i.actor&&maintain(i.actor));
+  on('updateCombat',(_combat,changes={})=>isUnrelatedMaintenanceUpdate(changes,COSMETIC_UPDATE_FIELDS)?undefined:requestMaintenance());on('deleteCombat',requestMaintenance);on('deleteItem',i=>i.actor&&maintain(i.actor,doc=>valid(i.actor)&&valid(doc)));
   // PF2e emits this completed-rest hook only on its initiating client.
   on('pf2e.restForTheNight',async actor=>{if(actor?.testUserPermission?.(game.user,'OWNER')&&(has(actor,'monster')||own(actor).days?.length))await actor.update({[`flags.${MODULE_ID}.knowledge.days`]:[],[`flags.${MODULE_ID}.knowledge.dailyEpoch`]:(own(actor).dailyEpoch??0)+1})});
   const path='CONFIG.PF2E.Item.documentClasses.spell.prototype.rollAttack';
@@ -405,7 +444,7 @@ export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,cho
    if(own(this).kind!=='devise'&&hasSource(this,KNOWLEDGE_SOURCES.deviseEffect)&&source&&resolveAction(source)==='knowledge:devise')return false;
    return wrapped(...args);
   },'MIXED');
-  return()=>{unregisterWorkbench();for(const[name,id]of registrations)Hooks.off(name,id);if(libWrapper){libWrapper.unregister(MODULE_ID,path);libWrapper.unregister(MODULE_ID,effectPath);}registered=false;};
+  return()=>{if(!installed)return;installed=false;invalidate();connection?.off?.('disconnect',disconnected);maintenance?.dispose();unregisterWorkbench();for(const[name,id]of registrations)Hooks.off(name,id);if(libWrapper){libWrapper.unregister(MODULE_ID,path);libWrapper.unregister(MODULE_ID,effectPath);}registered=false;};
  }
- return {resolveAction,requiresActualUse:(_item,action)=>['knowledge:recall','knowledge:automatic'].includes(action),executeUsage,register,maintain,processRecall,claimAttack,completeAttack,processClaimCheck,wrapStrike,recallKnowledge:workbench.action,runRecallKnowledge:workbench.run};
+ return {resolveAction,requiresActualUse:(_item,action)=>['knowledge:recall','knowledge:automatic'].includes(action),executeUsage,register,maintain:actor=>maintain(actor),processRecall,claimAttack,completeAttack,processClaimCheck,wrapStrike,recallKnowledge:workbench.action,runRecallKnowledge:workbench.run};
 }

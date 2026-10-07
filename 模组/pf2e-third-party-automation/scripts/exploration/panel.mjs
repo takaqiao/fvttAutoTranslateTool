@@ -169,7 +169,7 @@ function checkpointPreview(data){
  try{const planned=scheduleCheckpointActivities({registrations:checkpoint.registrations,activities:data.activities,session:data.session,from:checkpoint.from}),end=Math.max(checkpoint.from,...planned.map(a=>a.endsAt),...data.activities.filter(a=>['started','planned'].includes(a.state)).map(a=>a.endsAt));return `<p>登记起点：世界时间 ${escapeHTML(checkpoint.from)} 秒；预计共同结束：${escapeHTML(end)} 秒。封口时按最新登记核对预算；规则效果未核验。</p>`}
  catch(error){return `<p class="recovery-unresolved">${error.message==='activity-checkpoint-budget'?'登记超过剩余时间预算，请调整后继续。':'登记的前置行动或执行顺序存在冲突，请核对后继续。'}</p>`}
 }
-export function createRecoveryPanel({game,coordinator,capabilities,start,storage,record,getActivityCheckpoint,lookupCheckpointActivity,getSessionId,onError=console.error}){
+export function createRecoveryPanel({game,coordinator,capabilities,start,storage,prepareContext,record,getActivityCheckpoint,lookupCheckpointActivity,getSessionId,onError=console.error}){
  let panel;const unconfirmed=new Map();
  async function submitDeclaration(options){try{return await promptActivityDeclaration({...options,record})}catch(error){if(error.declaration&&error.declarationRejected!==true){unconfirmed.set(error.declaration.actorUUID,error.declaration);panel?.render(true)}throw error}}
  async function lookupDeclaration(declaration){
@@ -188,7 +188,7 @@ export function createRecoveryPanel({game,coordinator,capabilities,start,storage
    class RecoveryPanel extends ApplicationV2{
     static DEFAULT_OPTIONS={id:'exploration-recovery',classes:['exploration-recovery'],window:{title:'探索恢复',resizable:true},position:{width:610,height:'auto'}};
     actorUUIDs=[];
-    async _prepareContext(){const actors=await capabilities.snapshot(this.actorUUIDs),ledgerStatus=await storage?.status();const id=getSessionId();return {actors,ledgerStatus,policy:game.user.getFlag?.('pf2e-third-party-automation','explorationPolicy')??{},data:id&&ledgerStatus?.state!=='blocked'?await coordinator.snapshot(id):null}}
+    async _prepareContext(){if(prepareContext)return {...await prepareContext(this.actorUUIDs),policy:game.user.getFlag?.('pf2e-third-party-automation','explorationPolicy')??{}};const actors=await capabilities.snapshot(this.actorUUIDs),ledgerStatus=await storage?.status();const id=getSessionId();return {actors,ledgerStatus,policy:game.user.getFlag?.('pf2e-third-party-automation','explorationPolicy')??{},data:id&&ledgerStatus?.state!=='blocked'?await coordinator.snapshot(id):null}}
     async _renderHTML({actors,data,policy,ledgerStatus}){
      const e=escapeHTML,pools=[...new Map(actors.map(a=>[a.pool.poolUUID,a])).values()];
      const saved=savedRecoveryPolicy(policy),preferences=selectedRecoveryPreferences(saved.preferences,actors.map(a=>a.actorUUID));

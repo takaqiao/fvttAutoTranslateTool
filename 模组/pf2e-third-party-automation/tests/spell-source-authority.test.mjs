@@ -7,7 +7,7 @@ const M='C:/Users/Taka/.codex/worktrees/exploration-core-release/fvtt/模组/pf2
 const ID='pf2e-third-party-automation';
 const {createHalflingLuckLedger,HALFLING_LUCK_SOURCE}=await import('../scripts/halfling-luck-ledger.mjs');
 const {createEatFortune,EAT_FORTUNE_SOURCES:E}=await import('../scripts/eat-fortune.mjs');
-const {selectedRuneWeaponId,runeTransferStatus,registerRuneTransferRuleElement,RUNE_TRANSFER_SOURCE,RUNE_TRANSFER_KEY}=await import('../scripts/rune-transfer.mjs');
+const {createRuneTransfer,selectedRuneWeaponId,runeTransferStatus,registerRuneTransferRuleElement,RUNE_TRANSFER_SOURCE,RUNE_TRANSFER_KEY}=await import('../scripts/rune-transfer.mjs');
 const {createSpellCombination,SPELL_COMBINATION_SOURCES:S}=await import('../scripts/spell-combination.mjs');
 assert.ok(process.env.PF2E_NATIVE_BUNDLE,'PF2E_NATIVE_BUNDLE must identify the pinned primary source');const primary=await readFile(process.env.PF2E_NATIVE_BUNDLE,'utf8');assert.equal(createHash('sha256').update(primary).digest('hex'),'d63da8312831b84905e6866b1dd3f9d93e95c1012955b0177ad2ce8ccf246157');
 const suppressFeats=Function(primary.match(/function suppressFeats\(e\) \{[\s\S]*?\n\}/)[0]+';return suppressFeats')();
@@ -122,4 +122,65 @@ test('Cutting Heaven uses the native ABP capacity function without replacing nat
 });
 test('Cutting Heaven late preparation handles only the current selected melee usage and stops if its source becomes suppressed',()=>{
  const f=runes(),original=f.actor.items.get('weapon'),late=f.actor.synthetics.itemAlterations[0];late.applyAlteration({singleItem:{...original,isMelee:false}});assert.equal(f.writes.length,2);late.applyAlteration({singleItem:{...original,altUsageType:'melee'}});assert.equal(f.writes.length,4);suppressFeats([f.item]);late.applyAlteration({singleItem:{...original,altUsageType:'melee'}});assert.equal(f.writes.length,4);
+});
+
+function runeUsage({selected=true,create=false,choose}={}){
+ const choices=[],f=runes(false,({actor,effect,weapon,writes})=>{
+  effect.system={rules:[{key:RUNE_TRANSFER_KEY}]};
+  if(!selected){effect.flags[ID].runeTransfer.selectedWeaponId=null;effect.flags[ID].runeTransfer.revision=0}
+  const attachUpdate=document=>{document.update=async changes=>{writes.push({type:'rune-update',id:document.id,changes:structuredClone(changes)});return apply(document,changes)};return document};attachUpdate(effect);
+  weapon.name='First sword';weapon.uuid=actor.uuid+'.Item.'+weapon.id;
+  const second={...weapon,id:'second',uuid:actor.uuid+'.Item.second',name:'Second sword',system:structuredClone(weapon.system),traits:new Set(weapon.traits)};actor.items.set(second.id,second);
+  actor.createEmbeddedDocuments=async(documentType,data)=>data.map((source,index)=>{const document=attachUpdate({...structuredClone(source),id:'created-state-'+index,uuid:actor.uuid+'.Item.created-state-'+index,actor});writes.push({type:'rune-create',documentType,data:structuredClone(source),id:document.id});actor.items.set(document.id,document);return document});
+  if(create)actor.items.delete(effect.id);
+ });
+ const provider=createRuneTransfer({game:f.game,choose:async request=>{choices.push(request);return choose?choose(request):'second'}}),execute=()=>provider.executeUsage({actor:f.actor,item:f.item,user:f.owner,action:'rune-transfer:select'});
+ return {...f,provider,execute,choices};
+}
+const runeDocumentWrites=f=>f.writes.filter(w=>w.type==='rune-update'||w.type==='rune-create');
+
+test('Cutting Heaven executeUsage selects the second held weapon and non-force readiness preserves it without writes',async()=>{
+ const f=runeUsage();assert.match(await f.execute(),/已保存/);
+ const effect=f.actor.items.get('state'),state=effect.flags[ID].runeTransfer;
+ assert.equal(selectedRuneWeaponId(f.actor),'second');assert.equal(state.revision,2);assert.equal(state.declined,null);assert.deepEqual(effect.system.rules,[{key:RUNE_TRANSFER_KEY}]);
+ assert.deepEqual(f.choices[0].choices.map(c=>c.value),['weapon','second']);assert.equal(f.choices[0].user,f.owner);assert.equal(runeDocumentWrites(f).length,1);
+ assert.deepEqual(runeTransferStatus(f.actor,f.game),{status:'ready',capacity:2,properties:[],transfer:[],skipped:[],selectedWeaponId:'second'});
+ await f.provider.ensureReady(f.actor,f.owner);await f.provider.maintain(f.actor);
+ assert.equal(selectedRuneWeaponId(f.actor),'second');assert.equal(effect.flags[ID].runeTransfer.revision,2);assert.equal(f.choices.length,1);assert.equal(runeDocumentWrites(f).length,1);
+});
+
+test('Cutting Heaven explicit executeUsage reopens selection and advances the saved revision',async()=>{
+ const f=runeUsage();await f.execute();await f.execute();
+ assert.equal(f.choices.length,2);assert.equal(selectedRuneWeaponId(f.actor),'second');assert.equal(f.actor.items.get('state').flags[ID].runeTransfer.revision,3);assert.equal(runeDocumentWrites(f).length,2);
+});
+
+test('Cutting Heaven cancelled explicit selection records decline without erasing an existing choice or revision',async()=>{
+ const f=runeUsage({choose:async()=>null});await f.execute();const state=f.actor.items.get('state').flags[ID].runeTransfer;
+ assert.equal(selectedRuneWeaponId(f.actor),'weapon');assert.equal(state.revision,1);assert.equal(state.declined,'second,weapon');
+ assert.deepEqual(runeDocumentWrites(f).map(w=>w.changes),[{[`flags.${ID}.runeTransfer.declined`]:'second,weapon'}]);
+ await f.provider.ensureReady(f.actor,f.owner);await f.provider.maintain(f.actor);assert.equal(f.choices.length,1);assert.equal(runeDocumentWrites(f).length,1);assert.equal(selectedRuneWeaponId(f.actor),'weapon');assert.equal(state.revision,1);
+});
+
+test('Cutting Heaven cancelled first choice suppresses repeated readiness prompts for the same eligible weapons',async()=>{
+ const f=runeUsage({selected:false,choose:async()=>null});assert.match(await f.execute(),/没有更改/);
+ const effect=f.actor.items.get('state');assert.equal(selectedRuneWeaponId(f.actor),null);assert.equal(effect.flags[ID].runeTransfer.revision,0);assert.equal(effect.flags[ID].runeTransfer.declined,'second,weapon');
+ assert.deepEqual(await f.provider.ensureReady(f.actor,f.owner),{status:'inactive',selectedWeaponId:null});await f.provider.maintain(f.actor);
+ assert.equal(f.choices.length,1);assert.equal(runeDocumentWrites(f).length,1);assert.equal(effect.flags[ID].runeTransfer.revision,0);
+});
+
+for(const [label,change]of [['OWNER',f=>f.setOwned(false)],['weapon eligibility',f=>{f.actor.items.get('second').isHeld=false}],['active native feature',f=>suppressFeats([f.item])]])test(`Cutting Heaven executeUsage chooser await loses ${label} and cannot save a new selection`,async()=>{
+ const f=runeUsage({choose:async()=>{change(f);return 'second'}});await assert.rejects(f.execute());
+ const state=f.actor.items.get('state').flags[ID].runeTransfer;assert.equal(state.selectedWeaponId,'weapon');assert.equal(state.revision,1);assert.deepEqual(runeDocumentWrites(f),[]);assert.equal(f.choices.length,1);
+});
+
+for(const [label,change]of [['allowed world',f=>{f.game.world.id='other-world'}],['character type',f=>{f.actor.type='npc'}],['current Actor',f=>f.game.actors.set(f.actor.id,{...f.actor})],['OWNER',f=>f.setOwned(false)],['exact feat source',f=>{f.item.sourceId='Other.source'}],['active native feature',f=>suppressFeats([f.item])]])test(`Cutting Heaven executeUsage without ${label} rejects before selecting or writing`,async()=>{
+ const f=runeUsage();change(f);await assert.rejects(f.execute());assert.equal(f.choices.length,0);assert.deepEqual(runeDocumentWrites(f),[]);
+});
+
+test('Cutting Heaven executeUsage creates its canonical effect before saving the first selected weapon',async()=>{
+ const f=runeUsage({create:true});assert.match(await f.execute(),/已保存/);
+ const effect=f.actor.items.get('created-state-0'),state=effect.flags[ID].runeTransfer,writes=runeDocumentWrites(f);
+ assert.equal(selectedRuneWeaponId(f.actor),'second');assert.equal(state.revision,1);assert.equal(state.featId,f.item.id);assert.equal(state.source,RUNE_TRANSFER_SOURCE);assert.deepEqual(effect.system.rules,[{key:RUNE_TRANSFER_KEY}]);
+ assert.deepEqual(writes.map(w=>w.type),['rune-create','rune-update']);assert.equal(writes[0].documentType,'Item');assert.equal(writes[0].data.flags[ID].runeTransfer.selectedWeaponId,null);assert.equal(writes[0].data.flags[ID].runeTransfer.revision,0);
+ await f.provider.ensureReady(f.actor,f.owner);await f.provider.maintain(f.actor);assert.equal(f.choices.length,1);assert.equal(runeDocumentWrites(f).length,2);assert.equal(effect.flags[ID].runeTransfer.revision,1);
 });

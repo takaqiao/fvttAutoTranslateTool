@@ -188,7 +188,7 @@ export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeC
   const entry=(sourceNonce,status,reason)=>({sourceNonce,status,reason});
   const unresolved=reason=>({status:'manual',sources:[entry(null,'manual',reason)]});
   if(!installed||game.world?.id!=='ujx5r8oipw7ercdr'||game.system?.id!=='pf2e'||game.system.version!=='8.5.1')return unresolved('provider-unavailable');
-  if(!actor?.uuid||liveActor(actor.uuid)!==actor)return unresolved('actor-not-live');
+  if(!actor?.uuid||indexedActor(actor.uuid)!==actor)return unresolved('actor-not-live');
   const sources=[];
   try{
    const candidates=effects.list(actor)??[];

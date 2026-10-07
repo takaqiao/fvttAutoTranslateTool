@@ -7,6 +7,7 @@ export function createLedgerSetup({game,store,ledger,writerClientId}){
  const requiresQuarantine=seed=>Object.values(seed.sessions).some(session=>session.manual!==true&&session.status==='running'&&!session.protocol&&!session.driver);
  async function describe(value){return {...value,state:!value.initialized?'legacy':requiresQuarantine(await store.read())?'migration-required':'ready'}}
  async function status(){try{return await describe(await store.status())}catch(error){return error.message==='root-not-configured'?{state:'unconfigured'}:{state:'blocked',reason:error.message}}}
+ async function inspect(){try{const {status:value,state}=await store.inspect();return {ledgerStatus:{...value,state:!value.initialized?'legacy':requiresQuarantine(state)?'migration-required':'ready'},ledgerState:state}}catch(error){return {ledgerStatus:error.message==='root-not-configured'?{state:'unconfigured'}:{state:'blocked',reason:error.message},ledgerState:null}}}
  async function quarantine(value){
   const seed=await store.read();authority();
   if(!requiresQuarantine(seed))return {...value,state:'ready'};
@@ -24,5 +25,5 @@ export function createLedgerSetup({game,store,ledger,writerClientId}){
   const initialized=await store.initialize({...options,epoch,expectedSourceDigest:genesis.sourceDigest,allowStoppedLegacy:true});
   authority();return quarantine(initialized);
  }
- return {status,initialize,provision:async options=>{controlled(options);return store.provision(options)},select:async options=>{controlled(options);return store.select(options)}};
+ return {status,inspect,initialize,provision:async options=>{controlled(options);return store.provision(options)},select:async options=>{controlled(options);return store.select(options)}};
 }

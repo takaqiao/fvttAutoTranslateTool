@@ -75,7 +75,8 @@ export function createCoordinator({ledger,capabilities,providers,clock,policy,is
   });
   return {...state,remaining};
  }
- async function snapshot(id){const data=await ledger.snapshot(id),actors=data.session?await capabilities.snapshot(data.session.actorUUIDs):[];return {...data,...checkpointRequests.has(id)?{activityCheckpointRequested:true}:{},actors,...data.session?.stopReason==='consecutive-treatment-failures'?{treatmentFailures:failureSummary({...data,actors})}:{}}}
+ function describeSnapshot(data,actors,id){return {...data,...checkpointRequests.has(id)?{activityCheckpointRequested:true}:{},actors,...data.session?.stopReason==='consecutive-treatment-failures'?{treatmentFailures:failureSummary({...data,actors})}:{}}}
+ async function snapshot(id){const data=await ledger.snapshot(id),actors=data.session?await capabilities.snapshot(data.session.actorUUIDs):[];return describeSnapshot(data,actors,id)}
  async function pause(id,reason,scope,explicit=false){
   check();if(!explicit)await owned(id,scope);
   if(!explicit)currentScope(id,scope);else invalidate(id,reason);
@@ -320,5 +321,5 @@ export function createCoordinator({ledger,capabilities,providers,clock,policy,is
  }
  async function takeover(id){check();invalidate(id,'explicit-driver-takeover');clock.stop?.('explicit-driver-takeover',{sessionId:id});const session=await ledger.takeoverSession(id);onChange(id);return session}
  const executionScope=id=>leases.has(id)?{leaseNonce:leases.get(id).leaseNonce}:undefined;
- return {start,step,stop,resume,recover,restore,reconcile,review,addActivity,snapshot,takeover,executionScope,openManualCheckpoint,closeManualCheckpoint,reserveManualSource,manualCheckpointOptions,openActivityCheckpoint,closeActivityCheckpoint,invalidate:reason=>{for(const id of new Set([...leases.keys(),...checkpointRequests.keys()]))invalidate(id,reason)}};
+ return {start,step,stop,resume,recover,restore,reconcile,review,addActivity,snapshot,describeSnapshot,takeover,executionScope,openManualCheckpoint,closeManualCheckpoint,reserveManualSource,manualCheckpointOptions,openActivityCheckpoint,closeActivityCheckpoint,invalidate:reason=>{for(const id of new Set([...leases.keys(),...checkpointRequests.keys()]))invalidate(id,reason)}};
 }

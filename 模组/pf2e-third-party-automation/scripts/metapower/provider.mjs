@@ -1,5 +1,5 @@
 import {METAPOWER_SOURCES,metapowerKind,powerProfile,sourceUuid,buildChannelSnapshot,siphonMultiplier} from './rules.mjs';
-import {MODULE_ID,createMetapowerLedger,ledgerState,chargedEffect} from './lifecycle.mjs';
+import {MODULE_ID,createMetapowerLedger,chargedEffect} from './lifecycle.mjs';
 import {createMetapowerObserver} from './observer.mjs';
 import {renderMetapowerCard} from './card.mjs';
 import {installActionEntrances,wrapSheetHandlers,createToolbeltEntrance,patchHudController,installLegacyActionBoundary,ensureNativeUseControls} from './entrances.mjs';
@@ -10,6 +10,8 @@ import {createActorStateIndex} from '../actor-state-index.mjs';
 import {ELEMENTAL_POWERS_SOURCE} from '../eldamon-voltage.mjs';
 const values=c=>Array.from(c?.values?.()??c??[]);
 const prefix=`${MODULE_ID}:metapower:`;
+const receiptSnapshot=(actor,nonce)=>structuredClone(actor.flags?.[MODULE_ID]?.metapower?.receipts?.[nonce]);
+const targetSnapshot=(actor,nonce)=>structuredClone(actor.flags?.[MODULE_ID]?.metapower?.receipts?.[nonce]?.selection?.targetUuids);
 /** Ordinary native actions need no transaction while the metapower window is idle.
  * Read live flags: cloning the growing receipt ledger is itself unnecessary here. */
 export function needsMetapowerObservation({actor,item},supportsOriginalUse=()=>false){
@@ -43,7 +45,7 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
   if(game.user?.id!==game.users.activeGM?.id)throw Error('已提交动作的后续结算需要主GM执行。');
   const key=`${actorUuid}:${nonce}`;if(deliveries.has(key))return deliveries.get(key);
   const task=(async()=>{
-   const actor=await fromUuid(actorUuid),initial=ledgerState(actor).receipts[nonce];
+   const actor=await fromUuid(actorUuid),initial=receiptSnapshot(actor,nonce);
    if(initial?.status!=='committed'||!initial.delivery||initial.delivery.status==='done')return initial;
    try{
     const receipt=await ledger.delivery({actorUuid,nonce,status:'started'},game.user),message=await fromUuid(receipt.messageUuid),user=game.users.get(receipt.userId);
@@ -58,29 +60,30 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
     const result=await ledger.delivery({actorUuid,nonce,status:'done'},game.user);
     await message.update({[`flags.${MODULE_ID}.metapowerUse.deliveryStatus`]:'done'});return result;
    }catch(error){
-    const result=await ledger.delivery({actorUuid,nonce,status:'pending',error:error.message},game.user).catch(()=>ledgerState(actor).receipts[nonce]);onError(error);return result;
+    const result=await ledger.delivery({actorUuid,nonce,status:'pending',error:error.message},game.user).catch(()=>receiptSnapshot(actor,nonce));onError(error);return result;
    }
   })().finally(()=>deliveries.delete(key));deliveries.set(key,task);return task;
  }
  async function select(item,input={}){
-  const profile=powerProfile(item),armed=ledgerState(item.actor).armed;
+  const profile=powerProfile(item);
   if(!profile)return {};
+  const armedKind=structuredClone(item.actor.flags?.[MODULE_ID]?.metapower?.armed?.kind);
   let selection={discharge:false};
   if(profile.id!=='high-voltage'){
    const choices=[];
    for(const discharge of [false,true]){
     if(discharge&&!chargedEffect(item.actor))continue;
-    if(discharge&&armed?.kind==='siphoning'&&profile.id==='reactive-chain')continue;
+    if(discharge&&armedKind==='siphoning'&&profile.id==='reactive-chain')continue;
     const distances=profile.areaType?Array.from({length:25},(_,i)=>5+i*5):[null];
     for(const baseDistance of distances){
      const candidate={discharge,...(baseDistance?{baseDistance}:{})};let snapshot;
-     try{snapshot=buildChannelSnapshot({kind:armed?.kind??'normal',item,selection:candidate,policy:{dischargeNonDamage:'remove',dischargeArea:'retain',dischargeRange:'retain',dischargeSaveDowngrade:'retain',highVoltage:'convert'}})}catch{continue}
-     choices.push({value:JSON.stringify(candidate),label:`${discharge?'放电：蓄电 −1':'普通分支'}${snapshot.area?` · ${snapshot.area.distance} 尺` : ''}${armed?.kind==='siphoning'?' · 虹吸':''}`});
+     try{snapshot=buildChannelSnapshot({kind:armedKind??'normal',item,selection:candidate,policy:{dischargeNonDamage:'remove',dischargeArea:'retain',dischargeRange:'retain',dischargeSaveDowngrade:'retain',highVoltage:'convert'}})}catch{continue}
+     choices.push({value:JSON.stringify(candidate),label:`${discharge?'放电：蓄电 −1':'普通分支'}${snapshot.area?` · ${snapshot.area.distance} 尺` : ''}${armedKind==='siphoning'?' · 虹吸':''}`});
     }
    }
    const result=await selectChoice({title:item.name,choices});if(!result)return null;selection=JSON.parse(result);
   }
-  if(beforeChannel){selection=await beforeChannel({item,selection:{...selection,...input},kind:armed?.kind??'normal'});if(!selection||profile.id==='reactive-chain')return selection;}
+  if(beforeChannel){selection=await beforeChannel({item,selection:{...selection,...input},kind:armedKind??'normal'});if(!selection||profile.id==='reactive-chain')return selection;}
   if(profile.reaction){
    const chain=profile.id==='reactive-chain';
    // The actual native reaction Use is already the operator's declaration.
@@ -107,7 +110,7 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
  }
  async function beforeDamage(actor,params){
   const failure=params.damage?.options?.[MODULE_ID]?.metapowerShotFailure;
-  if(failure){const snapshot=await validateDamageProof(failure),source=await fromUuid(failure.actorUuid),targets=ledgerState(source).receipts[failure.nonce]?.selection?.targetUuids,token=await fromUuid(failure.targetTokenUuid);if(snapshot.powerId!=='electric-shot'||failure.targetActorUuid!==actor.uuid||targets?.length!==1||targets[0]!==failure.targetTokenUuid||token?.actor?.uuid!==actor.uuid||(params.token?.document??params.token)?.uuid!==failure.targetTokenUuid)throw Error('电能射击对带电目标的失败伤害绑定原始目标。');}
+  if(failure){const snapshot=await validateDamageProof(failure),source=await fromUuid(failure.actorUuid),targets=targetSnapshot(source,failure.nonce),token=await fromUuid(failure.targetTokenUuid);if(snapshot.powerId!=='electric-shot'||failure.targetActorUuid!==actor.uuid||targets?.length!==1||targets[0]!==failure.targetTokenUuid||token?.actor?.uuid!==actor.uuid||(params.token?.document??params.token)?.uuid!==failure.targetTokenUuid)throw Error('电能射击对带电目标的失败伤害绑定原始目标。');}
   const proof=params.damage?.options?.[MODULE_ID]?.metapowerDamage;if(!proof)return null;
   const snapshot=await validateDamageProof(proof),multiplier=siphonMultiplier(snapshot,actor.traits??actor.system?.traits?.value??[]);
   return {params:multiplier===1?params:{...params,damage:params.damage.alter(multiplier,0)}};
@@ -176,13 +179,13 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
     (root.querySelector('.tab.actions, [data-tab="actions"].tab')??root).append(button);
    }
    root.querySelector('.metapower-reconcile')?.remove();
-   const pending=ledgerState(app.actor).pending;
+   const state=app.actor.flags?.[MODULE_ID]?.metapower,pending=structuredClone(state?.pending);
    root.querySelector('.metapower-delivery-recovery')?.remove();
-   const undelivered=Object.values(ledgerState(app.actor).receipts).find(r=>r.delivery&&r.delivery.status!=='done');
+   const undelivered=Object.values(state?.receipts??{}).find(r=>r.delivery&&r.delivery.status!=='done'),undeliveredNonce=structuredClone(undelivered?.nonce);
    if(undelivered&&game.user.id===game.users.activeGM?.id){
     const button=root.ownerDocument.createElement('button');button.type='button';button.className='metapower-delivery-recovery';button.textContent='恢复已提交动作的后续结算';button.addEventListener('click',async event=>{event.preventDefault();event.stopPropagation();try{
      const result=await globalThis.foundry.applications.api.DialogV2.wait({window:{title:'恢复原始动作后续结算'},content:'<p>重试会使用原始回执与各能力的幂等记录。若原卡已删除或只能手动结算，请先由GM核对并完成频次、蓄电、延迟触发等全部后续，再选择手动结算完成；不会退款或补发效果。</p>',buttons:[{action:'retry',label:'重试原始后续',callback:()=> 'retry'},{action:'manual',label:'GM已手动完成全部后续',callback:()=> 'manual'},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});
-     if(result)await request(result==='retry'?'deliver':'ack-delivery',{actorUuid:app.actor.uuid,nonce:undelivered.nonce,...(result==='manual'?{confirmation:'gm-manual-effects-settled'}:{})});
+     if(result)await request(result==='retry'?'deliver':'ack-delivery',{actorUuid:app.actor.uuid,nonce:undeliveredNonce,...(result==='manual'?{confirmation:'gm-manual-effects-settled'}:{})});
     }catch(error){onError(error)}});(root.querySelector('.tab.actions, [data-tab="actions"].tab')??root).append(button);
    }
    if(pending&&game.user.id===game.users.activeGM?.id){
@@ -205,7 +208,7 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
    const card=game.messages.get(proof.cardId),state=card?.flags?.[MODULE_ID]?.medic;
    return proof.actorUuid===actor.uuid&&state?.actorUuid===actor.uuid&&state.nonce===proof.nonce&&state.status==='treatment'&&card.flags?.pf2e?.origin?.uuid===state.itemUuid;
   }});
-  installLegacyActionBoundary({game,blocked:actor=>eligible(actor)&&!!(ledgerState(actor).armed||ledgerState(actor).pending),onError});
+  installLegacyActionBoundary({game,blocked:actor=>{if(!eligible(actor))return false;const state=actor.flags?.[MODULE_ID]?.metapower;return !!(state?.armed||state?.pending)},onError});
   const index=globalThis.CONFIG.Dice.rolls.findIndex(C=>C.name==='DamageRoll');
   wrap(`CONFIG.Dice.rolls.${index}.prototype.toMessage`,async function(wrapped,data={},options={}){
    const nativeMessage=async(data,options)=>{
@@ -216,7 +219,7 @@ export function createMetapowerProvider({game,fromUuid,onError=console.error,sel
    if(data.flags?.pf2e?.context?.options?.includes(`${MODULE_ID}:electric-shot-failure-half`)){
     if(snapshot.powerId!=='electric-shot')throw Error('基础半伤的失败分支仅适用于电能射击。');
     const targets=values(game.user.targets),target=targets.length===1?targets[0].actor:null,targetTokenUuid=(targets[0]?.document??targets[0])?.uuid;
-    const source=await fromUuid(proof.actorUuid),originalTargets=ledgerState(source).receipts[proof.nonce]?.selection?.targetUuids;
+    const source=await fromUuid(proof.actorUuid),originalTargets=targetSnapshot(source,proof.nonce);
     if(originalTargets?.length!==1||originalTargets[0]!==targetTokenUuid)throw Error('电能射击对已带电目标的失败分支须选择原始目标。');
     if(!target||!values(target.items).some(i=>['Compendium.battlezoo-eldamon-pf2e.conditions.1fZbuJEbVmE3J4XL','Compendium.battlezoo-eldamon-pf2e.conditions.Item.1fZbuJEbVmE3J4XL'].includes(sourceUuid(i))))throw Error('电能射击的基础半伤失败分支需要选定一个已带电的目标。');
     const prior=this.options?.[MODULE_ID]?.metapowerShotFailure;

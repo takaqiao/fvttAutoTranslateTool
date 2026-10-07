@@ -66,10 +66,40 @@ test('other GM ownership and explicit player NONE are permitted write restrictio
 test('root removal or replacement after a read invalidates the pinned runtime',async()=>{
   for(const changed of ['',OTHER]){const f=fixture();await f.store.read();f.setSetting(changed);await assert.rejects(f.store.read(),/root.*changed/);await assert.rejects(f.store.transact(()=>{}),/root.*changed/)}
 });
-test('player can read but only the active GM can write or provision',async()=>{
-  const f=fixture({player:true});assert.equal(isActiveGM(f.game),false);assert.deepEqual(await f.store.read(),seed());
+test('only the active GM can write or provision',async()=>{
+  const f=fixture({player:true});assert.equal(isActiveGM(f.game),false);
   const before=f.requests.length;await assert.rejects(f.initialize(),/active-gm/);await assert.rejects(f.store.transact(()=>{}),/active-gm/);await assert.rejects(f.store.provision(confirmations),/active-gm/);assert.equal(f.requests.length,before);
   f.game.user=f.game.users.get('G2');await assert.rejects(f.initialize(),/active-gm/);
+});
+for(const configured of [ROOT,''])for(const operation of ['read','status','inspect'])test(`player ${operation} is refused before reading ${configured?'configured':'unconfigured'} storage`,async()=>{
+  const f=fixture({player:true,configured});await assert.rejects(f.store[operation](),/gm-read-required/);
+  assert.equal(f.requests.length,0);assert.equal(f.settingsWrites.length,0);assert.equal(f.cacheCalls(),0);
+});
+test('a nonactive GM can read, describe and inspect the private ledger',async()=>{
+  const f=fixture();f.game.user=f.game.users.get('G2');assert.equal(isActiveGM(f.game),false);
+  assert.deepEqual(await f.store.read(),seed());assert.equal((await f.store.status()).initialized,false);assert.deepEqual((await f.store.inspect()).state,seed());
+  assert.equal(f.requests.length,3);assert.equal(f.requests.every(request=>request.action==='get'),true);
+  await assert.rejects(f.store.transact(()=>{}),/active-gm-required/);assert.equal(f.requests.length,3);
+});
+test('truthy nonboolean GM role cannot read the private ledger',async()=>{
+  const f=fixture();f.game.user.isGM=1;await assert.rejects(f.store.read(),/gm-read-required/);assert.equal(f.requests.length,0);
+});
+for(const operation of ['read','status','inspect'])for(const timing of ['before-ack','after-ack','after-read'])test(`${operation} refuses same-user GM demotion ${timing}`,async()=>{
+  const f=fixture();f.setACK((ack,send)=>{
+    if(timing==='before-ack')f.game.user.isGM=false;
+    send(ack);
+    if(timing==='after-ack')f.game.user.isGM=false;
+    if(timing==='after-read')queueMicrotask(()=>{f.game.user.isGM=false});
+  });
+  await assert.rejects(f.store[operation](),/gm-read-required/);assert.equal(f.requests.length,1);assert.equal(f.listenerCount(),0);
+});
+for(const operation of ['read','status','inspect'])for(const change of ['demotion','other-gm','same-id-replacement'])test(`${operation} rejects ${change} during revision projection after its ACK`,async t=>{
+  const f=fixture();await f.initialize();const before=f.requests.length,subtle=globalThis.crypto.subtle,digest=subtle.digest;
+  let entered,release;const boundary=new Promise(resolve=>{entered=resolve}),wait=new Promise(resolve=>{release=resolve});
+  t.after(()=>{release();subtle.digest=digest});subtle.digest=async(...args)=>{entered();await wait;return digest.apply(subtle,args)};
+  const pending=f.store[operation]();pending.catch(()=>{});await boundary;assert.equal(f.requests.length,before+1);assert.equal(f.listenerCount(),0);
+  if(change==='demotion')f.game.user.isGM=false;else if(change==='other-gm')f.game.user=f.game.users.get('G2');else f.game.user={...f.game.user};
+  release();await assert.rejects(pending,change==='demotion'?/gm-read-required/:/document-user-changed/);
 });
 for(const key of Object.keys(confirmations))test(`setup requires explicit ${key} confirmation`,async()=>{
   const f=fixture({configured:''});await assert.rejects(f.store.provision({...confirmations,[key]:false}),/setup-confirmations/);

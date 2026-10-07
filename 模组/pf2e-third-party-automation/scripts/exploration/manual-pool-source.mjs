@@ -137,7 +137,24 @@ export function createManualPoolSources({game,Hooks,ledger,fromUuid,hpPools,clie
  async function accept(source,callerId){
   const input=copy(source),ticket=tickets.get(input.sourceNonce);
   if(!ticket||['sessionId','actorUUID','useId','sourceType','worldTime','sourceUserId','sourceClientNonce'].some(key=>ticket[key]!==input[key])||callerId!==ticket.sourceUserId)throw Error('manual-pool-source-unavailable');
-  const entry=await qualified(input,callerId);await onEnroll(input);if(!entry.isCurrent())throw Error('manual-pool-source-changed');
+  const entry=await qualified(input,callerId);
+  try{await onEnroll(input)}catch(error){
+   if(error.message!=='duplicate-activity')throw error;
+   if(typeof ledger?.getActivity!=='function'||typeof ledger.appendManualEvidence!=='function')throw error;
+   const native=input.sourceType==='native-action',meta=(native?entry.check:entry.result).flags?.[MODULE_ID]?.[native?'explorationManualNative':'explorationManual'];
+   const activityId=`manual:${native?input.checkId:input.resultId}`,resultIds=native?[input.resultId]:[...meta.stageIds??[],input.resultId];
+   const validate=current=>{
+    if(!entry.isCurrent()||!current||current.id!==input.activityId||current.id!==activityId||current.sessionId!==input.sessionId||current.providerId!=='manual'||current.kind!=='treatment'||current.state!=='awaiting-evidence'||current.source?.manual!==true||current.temporalSource?.type==='checkpoint-reservation'
+      ||current.source.type!==input.sourceType||current.source.messageId!==(native?input.checkId:input.resultId)||current.proof?.useId!==input.useId||!same(current.proof.checkIds,[input.checkId])||!Array.isArray(current.proof.resultIds)||current.proof.resultIds.some(id=>!resultIds.includes(id))
+      ||current.actorUUID!==entry.healer.uuid||!same(current.patientUUIDs,[entry.patient.uuid])||!same(current.hpPoolUUIDs,[entry.poolUUID])||current.startedAt!==input.worldTime||current.endsAt!==input.worldTime+600||current.durationSeconds!==600||current.treatmentImmunitySeconds!==(meta.continualRecovery?600:3600)
+      ||current.groupId!==(native?activityId:meta.groupId??activityId)||current.groupProof!==(native?undefined:meta.groupProof))throw Error('manual-pool-source-mismatch');
+    if(native?current.source.tag!==meta.tag:current.source.sourceSHA!==WORKBENCH_SOURCE_SHA||current.source.lexicalSource!==true||!same(meta.checkIds,[input.checkId])||current.source.adapter!==undefined&&current.source.adapter!=='target-callback-instrumentation-v1'||current.source.adapterSHA!==undefined&&current.source.adapterSHA!==meta.adapterSHA)throw Error('manual-pool-source-mismatch');
+    return current.options;
+   };
+   const activity=await ledger.getActivity(input.activityId);validate(activity);
+   await ledger.appendManualEvidence(input.activityId,{activity,proof:{useId:input.useId,checkIds:[input.checkId],resultIds:[input.resultId]},resolveOptions:validate});
+  }
+  if(!entry.isCurrent())throw Error('manual-pool-source-changed');
   await ledger.recordManualPoolSource(input,{evidenceGuard:entry.isCurrent});const observed=sources.get(input.resultId);sources.set(input.resultId,observed?{...entry,isCurrent:()=>entry.isCurrent()&&observed.isCurrent()}:entry);return input;
  }
  async function onPacket(packet,senderId){

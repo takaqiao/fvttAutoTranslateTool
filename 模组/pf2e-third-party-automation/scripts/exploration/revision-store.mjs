@@ -48,6 +48,7 @@ export function createRevisionStore({getRootUUID,readRoot,createPage,isAuthority
     return {rootUUID:root,raw,state,head,genesis};
   }
   function describe(loaded){return {initialized:!!loaded.head,rootUUID:loaded.rootUUID,epoch:loaded.head?.epoch??null,revision:loaded.head?.revision??null,sourceDigest:loaded.genesis?.sourceDigest??null}}
+  async function inspect(){const loaded=await load();rootUUID();validateRoot(loaded.raw,loaded.rootUUID);return {state:structuredClone(loaded.state),status:describe(loaded)}}
   function pageFor(metadata){return {_id:revisionId(metadata.revision),name:`Exploration revision ${metadata.revision}`,type:'text',ownership:{default:0},flags:{[MODULE_ID]:{explorationRevision:encodeRevision(metadata)}}}}
   function sameEnvelope(ack,writer,root){return ack?.type==='JournalEntryPage'&&ack.action==='create'&&ack.broadcast===false&&ack.operation?.parentUuid===root&&ack.userId===writer.writerUserId}
   function duplicate(ack,writer,root,page){
@@ -98,5 +99,5 @@ export function createRevisionStore({getRootUUID,readRoot,createPage,isAuthority
       if(conflicts>=maxConflicts)throw Error('revision-conflict-limit');
     }
   }
-  return {read:async()=>structuredClone((await load()).state),status:async()=>describe(await load()),initialize,transact};
+  return {read:async()=>structuredClone((await load()).state),status:async()=>describe(await load()),inspect,initialize,transact};
 }
