@@ -7,21 +7,27 @@ import {createClock} from '../../scripts/exploration/clock.mjs';
 import {createManualRecordBridge} from '../../scripts/exploration/manual-record.mjs';
 import {chooseNext} from '../../scripts/exploration/policy.mjs';
 import {createRecoveryPanel} from '../../scripts/exploration/panel.mjs';
+import {OWNER_TRANSPORT_CHANNEL} from '../../scripts/exploration/owner-transport.mjs';
 
 async function fixture({time=0,budget=1800,maxActivities=1,deficit=false,nativeOwnerByActor,autoRun=false,waitForActivityFirstRound=false,configure}={}){
  const store=await authorityFixture(),storage=store.storage('driver');let boundary=()=>{};const ledger=createLedger({...storage,transact:(fn,options)=>storage.transact((state,context)=>{const value=fn(state,context);queueMicrotask(()=>boundary(state,context));return value},options),isAuthority:()=>true,identity:()=>({userId:'G',clientNonce:'driver'})}),calls={advance:[],begin:[],complete:[],context:0};let serial=0;const hooks=new Map();
  const users=new Map(['G','P'].map(id=>[id,{id,active:true,isGM:id==='G'}]));users.activeGM=users.get('G');
+ const clients=[],nativePackets=[];
+ const nativeSocket=userId=>{const listeners=new Map();clients.push({userId,listeners});return {on:(name,fn)=>{const set=listeners.get(name)??new Set();set.add(fn);listeners.set(name,set)},off:(name,fn)=>listeners.get(name)?.delete(fn),emit:(name,packet,routing,ack)=>{
+  assert.equal(name,OWNER_TRANSPORT_CHANNEL);assert.deepEqual(routing,{recipients:[packet.receiverUserId]});nativePackets.push({senderId:userId,packet:structuredClone(packet)});
+  for(const client of clients)if(routing.recipients.includes(client.userId))for(const receive of client.listeners.get(name)??[])queueMicrotask(()=>receive(structuredClone(packet),userId));ack?.();
+ }}};
  const actors=new Map(['H','P','A','B'].map(id=>['Actor.'+id,{id,uuid:'Actor.'+id,testUserPermission:u=>u?.active===true,hp:{value:id==='P'&&deficit?1:20,max:20},focus:{value:1,max:1}}]));
- const game={user:users.get('G'),users,actors:new Map([...actors.values()].map(actor=>[actor.id,actor])),time:{worldTime:time,advance:async(dt,options)=>{calls.advance.push(dt);game.time.worldTime+=dt;for(const fn of hooks.values())fn(game.time.worldTime,dt,options,'G')}}};
+ const game={user:users.get('G'),users,socket:nativeSocket('G'),actors:new Map([...actors.values()].map(actor=>[actor.id,actor])),time:{worldTime:time,advance:async(dt,options)=>{calls.advance.push(dt);game.time.worldTime+=dt;for(const fn of hooks.values())fn(game.time.worldTime,dt,options,'G')}}};
  const capabilities={snapshot:async uuids=>uuids.map(uuid=>{const a=actors.get(uuid);return {actorUUID:uuid,hp:{...a.hp},focus:{...a.focus},pool:{poolUUID:uuid,ready:true},medicine:{rank:a.rank??0},modeOfBeing:'living',slugs:[],items:[],assuranceSkills:[],refocusUnsupported:[],unsupported:[],isDead:false,unconscious:false}})};
  const timeEffects={beforeAdvance:async()=>({status:'ready'}),settle:async()=>({status:'ready',proof:[]})};
  const Hooks={on:(_,fn)=>{hooks.set(++serial,fn);return serial},off:(_,id)=>hooks.delete(id)},clock=createClock({game,Hooks,ledger,isAuthority:()=>true,confirmationTimeoutMs:30,timeEffects});
  let c;const providers=['treat-wounds','refocus'].map(id=>({id,begin:async a=>{calls.begin.push(a.id);return {status:'started'}},complete:async a=>{calls.complete.push(a.id);const permit=await ledger.claimExecution(a.id,{...c.executionScope('S'),operationId:id,ownerUserId:'G',ownerClientNonce:'driver',attemptNonce:a.id,permitNonce:a.id});const result={status:'confirmed',proof:{useId:a.id,checkIds:[],resultIds:[],receiptIds:['receipt-'+a.id],immunityIds:[]}};await ledger.recordExecutionResult(a.id,{permit,result});for(const uuid of a.patientUUIDs)actors.get(uuid).hp.value=20;if(id==='refocus')actors.get(a.actorUUID).focus.value=1;return result},cancel:async()=>{}}));
  const options={ledger,game,fromUuid:async uuid=>actors.get(uuid),capabilities,providers,clock,policy:chooseNext,isAuthority:()=>true,now:()=>game.time.worldTime,getHpPool:actor=>({ready:true,poolUUID:actor.uuid}),ownerOperations:{createActivityContext:async()=>{calls.context++;return {}},cancelActivity:async()=>{}}};c=createCoordinator(options);
- const handlers=new Map(),bridge=createManualRecordBridge({game,fromUuid:options.fromUuid,getSession:()=>ledger.getSession('S'),checkpointContext:()=>({sessionId:'S',worldTime:game.time.worldTime,...c.executionScope('S')}),enrollCheckpointActivity:(...args)=>ledger.enrollCheckpointActivity(...args),lookupCheckpointActivity:(...args)=>ledger.lookupCheckpointActivity(...args)});bridge.register({register:(name,fn)=>handlers.set(name,fn)});
+ const handlers=new Map(),bridge=createManualRecordBridge({game,fromUuid:options.fromUuid,getSession:()=>ledger.getSession('S'),checkpointContext:()=>({sessionId:'S',worldTime:game.time.worldTime,...c.executionScope('S')}),ownsSession:(...args)=>ledger.ownsSession(...args),enrollCheckpointActivity:(...args)=>ledger.enrollCheckpointActivity(...args),lookupCheckpointActivity:(...args)=>ledger.lookupCheckpointActivity(...args)});bridge.register({register:(name,fn)=>handlers.set(name,fn)});
  const enroll=async(binding,registrationId,actorUUID,durationSeconds,extra={})=>{const response=await handlers.get('exploration:record').call({socketdata:{userId:'P'}},{registrationId,checkpointBinding:binding,actorUUID,label:registrationId,durationSeconds,...extra});assert.equal(response.ok,true,response.error);return response.value};
  const native=async(id,actorUUID,patientUUIDs=[])=>c.addActivity('S',{id,providerId:patientUUIDs.length?'treat-wounds':'refocus',actorUUID,patientUUIDs,hpPoolUUIDs:[...patientUUIDs],startedAt:game.time.worldTime,endsAt:game.time.worldTime+600});
- const f={store,ledger,game,actors,c,clock,calls,enroll,native,options,timeEffects,Hooks,providers,handlers,setBoundary:fn=>boundary=fn};configure?.(f);
+ const f={store,ledger,game,actors,c,clock,calls,enroll,native,options,timeEffects,Hooks,providers,handlers,nativeSocket,nativePackets,setBoundary:fn=>boundary=fn};configure?.(f);
  await c.start({id:'S',actorUUIDs:[...actors.keys()],budgetSeconds:budget,maxActivities,nativeOwnerByActor,autoRun,waitForActivityFirstRound});return f;
 }
 
@@ -206,8 +212,8 @@ test('a late old runner cannot cancel the new lease checkpoint request after Sto
 
 const activityForm={actor:'Actor.A',label:'Search',duration:'10',unit:'60',durationSource:'user-declared',durationDetail:'',notBefore:'',order:'',dependsOn:[]};
 function ownerDeclarationPanel(f){
- const counts={records:0,queries:0,lookups:0},owner=createManualRecordBridge({game:{...f.game,user:f.game.users.get('P')}});
- owner.register({register:()=>{},executeAsGM:async(name,...args)=>f.handlers.get(name).call({socketdata:{userId:'P'}},...args)});
+ const counts={records:0,queries:0,lookups:0},owner=createManualRecordBridge({game:{...f.game,user:f.game.users.get('P'),socket:f.nativeSocket('P')}});
+ owner.register({register:()=>{},executeAsGM:async(name,...args)=>{assert.equal(name,'exploration:lookupCheckpointActivity');return f.handlers.get(name).call({socketdata:{userId:'P'}},...args)}});
  const panel=createRecoveryPanel({game:{user:f.game.users.get('P')},getActivityCheckpoint:uuid=>{counts.queries++;return owner.getActivityCheckpoint(uuid)},record:event=>{counts.records++;return owner.record(event)},lookupCheckpointActivity:(...args)=>{counts.lookups++;return owner.lookupCheckpointActivity(...args)}});
  return {panel,counts};
 }
@@ -215,10 +221,11 @@ function declarationDialog(t,wait){const previous=globalThis.foundry;t.after(()=
 test('OWNER declaration rejection before enrollment permits a new window after Stop and resume',async t=>{
  const f=await fixture(),old=await opened(f),{panel,counts}=ownerDeclarationPanel(f);let entered,release;const ready=new Promise(resolve=>entered=resolve);
  declarationDialog(t,()=>{entered();return new Promise(resolve=>release=resolve)});const pending=panel.openActivityDeclaration('Actor.A');await ready;
- await f.c.stop('S');await f.c.resume('S',{autoRun:false});const current=await opened(f);assert.notEqual(current.id,old.id);release({...activityForm});
- await assert.rejects(pending,/manual-actor-not-allowed|recovery-session-stopped|activity-checkpoint/);const pages=f.store.raw.pages.length;
+ await f.c.stop('S');await f.c.resume('S',{autoRun:false});const current=await opened(f);assert.notEqual(current.id,old.id);const pages=f.store.raw.pages.length;release({...activityForm});
+ await assert.rejects(pending,error=>error.message==='manual-actor-not-allowed'&&error.declarationRejected===true);assert.equal(f.store.raw.pages.length,pages);assert.deepEqual((await f.ledger.getSession('S')).activityCheckpoint.registrations,{});
  globalThis.foundry.applications.api.DialogV2.wait=async()=>({...activityForm});const saved=await panel.openActivityDeclaration('Actor.A');
  assert.equal(saved.checkpointBinding.id,current.id);assert.deepEqual(counts,{queries:2,records:2,lookups:0});assert.equal(f.store.raw.pages.length,pages+1);
+ assert.deepEqual(f.nativePackets.filter(row=>row.senderId==='P').map(row=>row.packet.status),['window','declaration','window','declaration']);
 });
 test('OWNER declaration with unknown acknowledgement is looked up after time completes without another record',async t=>{
  const f=await fixture(),binding=await opened(f),{panel,counts}=ownerDeclarationPanel(f);declarationDialog(t,async()=>({...activityForm}));
@@ -227,9 +234,10 @@ test('OWNER declaration with unknown acknowledgement is looked up after time com
  await f.c.closeActivityCheckpoint(binding,{autoRun:false});await f.c.step('S');assert.equal(f.game.time.worldTime,600);
  const pages=f.store.raw.pages.length,result=await panel.openActivityDeclaration('Actor.A');assert.equal(result.registrationId,saved.registrationId);assert.equal(result.status,'completed');
  assert.deepEqual(counts,{queries:1,records:1,lookups:1});assert.equal(f.store.raw.pages.length,pages);assert.deepEqual(f.calls.advance,[600]);
+ assert.deepEqual(f.nativePackets.filter(row=>row.senderId==='P').map(row=>row.packet.status),['window','declaration']);
 });
 test('a caller rejection flag is rejected before enrollment and cannot forge a definitive result',async()=>{
- const f=await fixture(),binding=await opened(f),owner=createManualRecordBridge({game:{...f.game,user:f.game.users.get('P')}});
+ const f=await fixture(),binding=await opened(f),owner=createManualRecordBridge({game:{...f.game,user:f.game.users.get('P'),socket:f.nativeSocket('P')}});
  owner.register({register:()=>{},executeAsGM:async(name,...args)=>f.handlers.get(name).call({socketdata:{userId:'P'}},...args)});f.store.setAcknowledgement(()=>undefined);
  await assert.rejects(owner.record({registrationId:'saved',checkpointBinding:binding,actorUUID:'Actor.A',label:'Search',durationSeconds:600,declarationRejected:true}),/invalid-checkpoint-declaration/);
  assert.deepEqual((await f.ledger.getSession('S')).activityCheckpoint.registrations,{});
@@ -246,4 +254,5 @@ test('OWNER resolves an unknown archived registration before entering the next w
  await f.c.closeActivityCheckpoint(old,{autoRun:false});await f.c.step('S');const next=await opened(f),session=await f.ledger.getSession('S');assert.notEqual(next.id,old.id);assert.equal(session.activityCheckpointHistory[0].registrations[registered.registrationId].status,'completed');
  const pages=f.store.raw.pages.length,saved=await panel.openActivityDeclaration('Actor.A');assert.equal(saved.registrationId,registered.registrationId);assert.deepEqual(saved.checkpointBinding,old);assert.equal(saved.status,'completed');assert.equal(f.store.raw.pages.length,pages);assert.deepEqual(counts,{queries:1,records:1,lookups:1});
  const fresh=await panel.openActivityDeclaration('Actor.A');assert.deepEqual(fresh.checkpointBinding,next);assert.notEqual(fresh.registrationId,saved.registrationId);assert.equal(f.store.raw.pages.length,pages+1);assert.deepEqual(counts,{queries:2,records:2,lookups:1});assert.deepEqual(f.calls.advance,[600]);
+ assert.deepEqual(f.nativePackets.filter(row=>row.senderId==='P').map(row=>row.packet.status),['window','declaration','window','declaration']);
 });
