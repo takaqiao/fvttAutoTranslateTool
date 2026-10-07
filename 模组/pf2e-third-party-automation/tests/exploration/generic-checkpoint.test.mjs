@@ -13,17 +13,22 @@ async function fixture({beforeOpen}={}){
  await beforeOpen?.({ledger,session});
  await ledger.openActivityCheckpoint(binding,{leaseNonce:context.leaseNonce,guard:()=>true});
  const users=new Map([['G',{id:'G',isGM:true,active:true}],['P',{id:'P',active:true}]]);users.activeGM=users.get('G');
- const game={user:users.get('G'),users},actor={uuid:'Actor.A',testUserPermission:user=>user?.id==='P'};
+ const nativeClients=[],socketCalls=[];
+ const nativeSocket=userId=>{const listeners=new Map(),value={on:(name,fn)=>{if(!listeners.has(name))listeners.set(name,new Set());listeners.get(name).add(fn)},off:(name,fn)=>listeners.get(name)?.delete(fn),emit:(name,packet,options)=>{
+  if(packet.kind==='continuation')socketCalls.push(packet.status==='window'?'exploration:activityCheckpoint':'exploration:record');
+  for(const client of nativeClients)if(options.recipients.includes(client.userId))for(const receive of client.listeners.get(name)??[])receive(structuredClone(packet),userId);
+ }};nativeClients.push({userId,listeners});return value};
+ const game={user:users.get('G'),users,socket:nativeSocket('G')},actor={uuid:'Actor.A',testUserPermission:user=>user?.id==='P'};
  const handlers=new Map();let resolveActor=async()=>actor;
  const makeBridge=(writer=ledger)=>{
-  const bridge=createManualRecordBridge({game,fromUuid:uuid=>resolveActor(uuid),getSession:()=>writer.getSession(context.sessionId),checkpointContext:()=>({...context}),
+  const bridge=createManualRecordBridge({game,fromUuid:uuid=>resolveActor(uuid),getSession:()=>writer.getSession(context.sessionId),checkpointContext:()=>({...context}),ownsSession:(...args)=>writer.ownsSession(...args),
    enrollCheckpointActivity:(...args)=>writer.enrollCheckpointActivity(...args),lookupCheckpointActivity:(...args)=>writer.lookupCheckpointActivity(...args),observe:()=>{throw Error('recording-route-used')}});
   const local=new Map();bridge.register({register:(name,fn)=>local.set(name,fn)});return local;
  };
  for(const [key,value] of makeBridge())handlers.set(key,value);
  const input=()=>({registrationId:'registration',checkpointBinding:{...binding},actorUUID:'Actor.A',label:'搜索',durationSeconds:900,durationSource:{type:'user-declared',detail:'约定时间'},dependsOn:[]});
  const send=(value=input(),map=handlers)=>map.get('exploration:record').call({socketdata:{userId:'P'}},value);
- return {store,ledger,binding,context,game,actor,users,handlers,makeBridge,input,send,setResolve:fn=>{resolveActor=fn}};
+ return {store,ledger,binding,context,game,actor,users,handlers,makeBridge,input,send,nativeSocket,socketCalls,setResolve:fn=>{resolveActor=fn}};
 }
 
 test('authenticated running declaration reaches the atomic ledger without treatment credentials',async()=>{
@@ -112,15 +117,16 @@ test('a rejected stale OWNER form does not block a fresh form for the same actor
  const ready=new Promise(resolve=>opened=resolve),values={actor:'Actor.A',label:'Search',duration:'5',unit:'60',durationSource:'user-declared',durationDetail:'',notBefore:'',order:'',dependsOn:[]};
  t.after(()=>{globalThis.foundry=previous});
  globalThis.foundry={applications:{api:{DialogV2:{wait:()=>{forms++;if(forms===1){opened();return new Promise(resolve=>release=resolve)}return values}}}}};
- const playerGame={...f.game,user:f.users.get('P')},calls=[];
+ const playerGame={...f.game,user:f.users.get('P'),socket:f.nativeSocket('P')},calls=f.socketCalls;
  const player=createManualRecordBridge({game:playerGame,fromUuid:()=>assert.fail('player-private-read'),getSession:()=>assert.fail('player-private-read')});
  player.register({register:()=>{},executeAsGM:async(name,...args)=>{calls.push(name);return f.handlers.get(name).call({socketdata:{userId:'P'}},...args)}});
  const panel=createRecoveryPanel({game:playerGame,getActivityCheckpoint:actor=>player.getActivityCheckpoint(actor),record:event=>player.record(event),lookupCheckpointActivity:(...args)=>player.lookupCheckpointActivity(...args)});
  const pending=panel.openActivityDeclaration('Actor.A');await ready;
- await f.ledger.updateSession('S',{status:'paused'});delete f.context.leaseNonce;
+ f.actor.testUserPermission=()=>false;
  const before=f.store.raw.pages.length;release(values);
- await assert.rejects(pending,error=>{rejected=error.declaration;assert.equal(error.message,'session-driver-required');assert.equal(error.declarationRejected,true);return true});
+ await assert.rejects(pending,error=>{rejected=error.declaration;assert.equal(error.message,'manual-actor-not-allowed');assert.equal(error.declarationRejected,true);return true});
  assert.equal(f.store.raw.pages.length,before);assert.deepEqual((await f.ledger.getSession('S')).activityCheckpoint.registrations,{});
+ f.actor.testUserPermission=user=>user?.id==='P';await f.ledger.updateSession('S',{status:'paused'});
  const session=await f.ledger.createSession({id:'fresh',actorUUIDs:['Actor.A'],startedAt:-600,cursorAt:-600,budgetEndsAt:1200});
  const binding={...f.binding,id:'fresh-window',sessionId:'fresh',observationNonce:'fresh-observation'};
  Object.assign(f.context,{sessionId:'fresh',leaseNonce:session.driver.leaseNonce});
@@ -200,12 +206,12 @@ test('takeover preserves registrations and rejects the old checkpoint after a ne
 });
 
 test('a player submits and looks up only through the authenticated socket, never the private ledger',async()=>{
- const f=await fixture(),playerGame={...f.game,user:f.users.get('P')};let socketCalls=0;
+ const f=await fixture(),playerGame={...f.game,user:f.users.get('P'),socket:f.nativeSocket('P')};let socketCalls=0;
  const player=createManualRecordBridge({game:playerGame,fromUuid:()=>{throw Error('player-private-read')},getSession:()=>{throw Error('player-private-read')}});
  player.register({register:()=>{},executeAsGM:async(name,...args)=>{socketCalls++;return f.handlers.get(name).call({socketdata:{userId:'P'}},...args)}});
  const registered=await player.record(f.input()),before=f.store.raw.pages.length;
  assert.deepEqual(await player.lookupCheckpointActivity(f.binding,'registration','Actor.A'),registered);
- assert.equal(socketCalls,2);assert.equal(f.store.raw.pages.length,before);
+ assert.equal(socketCalls,1);assert.deepEqual(f.socketCalls,['exploration:record']);assert.equal(f.store.raw.pages.length,before);
 });
 
 test('malformed binding and accessor payloads do not invoke their getters or read actors',async()=>{

@@ -80,10 +80,10 @@ test('the first-round waiting choice reaches start while ordinary starts remain 
  await f.app.act('start',content);assert.equal(f.calls[0][1].waitForManualFirstRound,true);values.manualFirstRound.checked=false;await f.app.act('start',content);assert.equal(f.calls[1][1].waitForManualFirstRound,false);
 });
 
-function declarationDialog(t,values){
+function declarationDialog(t,values,{action='record'}={}){
  const previousFoundry=globalThis.foundry,previousData=globalThis.FormData;t.after(()=>{globalThis.foundry=previousFoundry;globalThis.FormData=previousData});
  globalThis.FormData=class{constructor(form){this.form=form}getAll(key){const value=this.form[key];return Array.isArray(value)?value:value?[value]:[]}*[Symbol.iterator](){for(const [key,value] of Object.entries(this.form))if(!Array.isArray(value))yield [key,value]}};
- let content;globalThis.foundry={applications:{api:{ApplicationV2:class{render(){return this}},DialogV2:{wait:async options=>{content=options.content;return options.buttons.find(b=>b.action==='record').callback(null,{form:values})}}}}};return ()=>content;
+ let content;globalThis.foundry={applications:{api:{ApplicationV2:class{render(){return this}},DialogV2:{wait:async options=>{content=options.content;const button=options.buttons.find(b=>b.action===action);return (await button.callback(null,{form:values}))??button.action}}}}};return ()=>content;
 }
 test('the checkpoint form emits one immutable binding and future timing without historical fields',async t=>{
  const content=declarationDialog(t,{actor:'Actor.A',label:' Search ',duration:'5',unit:'60',durationSource:'item-text',durationDetail:' One task ',notBefore:'2',order:'1',dependsOn:['D']}),binding={id:'C',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:600},records=[];
@@ -106,6 +106,12 @@ test('the GM panel requests and seals the current generic window without requiri
 test('checkpoint history separates accounted time from unverified rule effects',()=>{
  const data=historyFixture();data.activities[0]={...data.activities[0],providerId:'manual',source:{type:'user-record'},temporalSource:{type:'checkpoint-declaration'},durationSeconds:300,state:'confirmed'};assert.match(panelUI.renderRecoveryHistory(data),/时间已计入.*规则效果未核验/);
 });
+test('canceling the OWNER declaration follows Core DialogV2 fallback without recording an activity',async t=>{
+ declarationDialog(t,{}, {action:'cancel'});const binding={id:'C',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:0};let records=0;
+ const api=panelUI.createRecoveryPanel({game:{user:{id:'P',isGM:false}},getActivityCheckpoint:async()=>({binding,phase:'open',actor:{actorUUID:'Actor.A',name:'A'},dependencies:[]}),record:async()=>{records++}});
+ assert.equal(await api.openActivityDeclaration('Actor.A'),null);assert.equal(records,0);
+});
+
 test('the OWNER form uses the same DTO form and an uncertain attempt is only looked up',async t=>{
  declarationDialog(t,{actor:'Actor.A',label:'Repair',duration:'1',unit:'60',durationSource:'user-declared',durationDetail:'',notBefore:'',order:'',dependsOn:[]});const binding={id:'C',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:0},error=Error('revision-acknowledgement-unknown');let records=0,queries=0,lookups=0,submitted;
  const api=panelUI.createRecoveryPanel({game:{user:{id:'P',isGM:false}},getActivityCheckpoint:async()=>{queries++;return {binding,phase:'open',actor:{actorUUID:'Actor.A',name:'A'},dependencies:[]}},record:async event=>{records++;submitted=event;throw error},lookupCheckpointActivity:async(b,id,actor)=>{lookups++;assert.deepEqual(b,binding);assert.equal(id,submitted.registrationId);assert.equal(actor,'Actor.A');const {registrationId,checkpointBinding,...declaration}=submitted;return {registrationId,checkpointBinding,declaration,source:{type:'user-record',userId:'P'}}}});

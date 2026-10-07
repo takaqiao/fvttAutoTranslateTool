@@ -154,7 +154,7 @@ export async function promptActivityDeclaration({actors,activities=[],session,wi
    <label>不得早于（分钟） <input name="notBefore" type="number" min="${binding?'0':''}" step="any"></label>
    <label>执行顺序（从零开始，可留空） <input name="order" type="number" min="0" step="1"></label>
    <label>须先完成 <select name="dependsOn" multiple>${activities.map(a=>`<option value="${escapeHTML(a.id)}">${escapeHTML(names.get(a.actorUUID)??'')} · ${escapeHTML(a.label??a.options?.label??labels[a.providerId]??a.providerId)}</option>`).join('')}</select></label>
-  </details><p>登记仅声明耗时与执行者占用，规则效果不会自动执行。封口继续时共同计时；无需所有成员登记。</p>`,buttons:[{action:'record',label:'登记',callback:(_event,b)=>{const form=new FormData(b.form);return {...Object.fromEntries(form),dependsOn:form.getAll('dependsOn')}}},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});
+  </details><p>登记仅声明耗时与执行者占用，规则效果不会自动执行。封口继续时共同计时；无需所有成员登记。</p>`,buttons:[{action:'record',label:'登记',callback:(_event,b)=>{const form=new FormData(b.form);return {...Object.fromEntries(form),dependsOn:form.getAll('dependsOn')}}},{action:'cancel',label:'取消',callback:()=>false}],rejectClose:false});
  if(!value)return null;
  const duration=Number(value.duration),unit=Number(value.unit),seconds=duration*unit;
  if(!actors.some(a=>a.actorUUID===value.actor)||!value.label?.trim()||value.duration?.trim()===''||![1,60].includes(unit)||!Number.isFinite(seconds)||seconds<0)throw Error('请输入行动名称和有效耗时。');

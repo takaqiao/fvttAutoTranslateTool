@@ -216,7 +216,7 @@ export function createManualEvents({game,Hooks,ledger,nativeActions,hpPools,manu
    return applyEvidence(old.id,()=>({proof:{...candidate.proof,receiptIds:[...receipts],immunityIds:[...new Set([...old.proof.immunityIds,proof.itemUUID])]},options:old.options}));
   });evidenceTail=task.catch(()=>{});return task;
  }
- async function markResult(message){const options=[...(message.flags?.pf2e?.context?.options??[])].filter(o=>!o.startsWith(`${MODULE_ID}:source:`));options.push(`${MODULE_ID}:source:${message.id}:0`);if(message.update)await message.update({'flags.pf2e.context.options':options});return options}
+ async function markResult(message){const options=[...(message.flags?.pf2e?.context?.options??[])].filter(o=>!o.startsWith(`${MODULE_ID}:source:`));options.push(`${MODULE_ID}:source:${message.id}:0`);const changes={'flags.pf2e.context.options':options};if(message.update&&message.canUserModify?.(game.user,'update',changes)!==false)await message.update(changes);return options}
  function queueResultMark(message){const task=markResult(message);sourceMarks.add(task);task.then(()=>sourceMarks.delete(task),()=>sourceMarks.delete(task));return task}
  async function resolveReceipt(message){
   if(!message?.id||game.messages?.get(message.id)!==message)return null;
