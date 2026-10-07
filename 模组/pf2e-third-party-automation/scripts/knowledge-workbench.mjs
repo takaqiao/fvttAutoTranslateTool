@@ -104,7 +104,7 @@ export async function captureWorkbenchRecall({game,actor,token,user=game.user,ta
   // Save the operation before its sole real roll, so an interrupted rendering
   // or rule write cannot cause a retry to throw another secret die.
   created=await BaseMessages.create({content:'<strong>回忆知识</strong>',rolls:[],user:user.id,author:user.id,speaker:Messages.getSpeaker(),blind:true,whisper:BaseMessages.getWhisperRecipients('GM').map(u=>u.id),flags:{pf2e:{context:{type:'skill-check',options:['action:recall-knowledge','secret'],traits:['concentrate','secret']}},[MODULE_ID]:{workbenchRecall:reservation}}});
-  primaryReceipt.primaryContext={...primaryReceipt.context,options:new Set(primaryReceipt.rollOptions),createMessage:false,skipDialog:false,messageMode:'blind',traits:['concentrate','secret'],dc:Number.isFinite(primaryDC)?{value:primaryDC,visible:false}:null};
+  primaryReceipt.primaryContext={...primaryReceipt.context,options:new Set(primaryReceipt.rollOptions),createMessage:false,skipDialog:true,messageMode:'blind',traits:['concentrate','secret'],dc:Number.isFinite(primaryDC)?{value:primaryDC,visible:false}:null};
   // Restore the chosen rule's own beforeRoll state after comparing other skills.
   for(const rule of primaryReceipt.actor.rules?.filter(rule=>!rule.ignored)??[])rule.beforeRoll?.(primaryReceipt.domains,primaryReceipt.primaryContext.options);
   // libWrapper wrapped continuations expire when their frame returns. Re-enter

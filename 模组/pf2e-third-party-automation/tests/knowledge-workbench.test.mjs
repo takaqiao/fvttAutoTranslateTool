@@ -44,17 +44,17 @@ function nativeProbeFixture(f){
  };
  return f;
 }
-test('ordinary RK waits for its sole native confirmation even when the owner disabled roll dialogs',async()=>{
- const f=fixture(),native=f.game.pf2e.Check.roll;f.user.settings={showCheckDialogs:false};let confirm,entered;
- const atDialog=new Promise(resolve=>entered=resolve),approval=new Promise(resolve=>confirm=resolve);let after=0;
- f.actor.rules=[{afterRoll(){after++;}}];f.game.pf2e.Check.roll=async(check,context,event,callback)=>{entered(context);if(!context.skipDialog)await approval;return native(check,context,event,callback);};
- const pending=api.captureWorkbenchRecall({...f,requestId:'owner-confirmation',targetUuids:[f.target.uuid]});const context=await atDialog;
- assert.equal(context.skipDialog,false);assert.equal(context.messageMode,'blind');assert.equal(context.dc.visible,false);assert.equal(f.die.count,0);assert.equal(after,0);
- confirm();const capture=await pending;assert.equal(f.die.count,1);assert.equal(after,1);assert.equal(capture.candidates[0].total,25);assert.deepEqual(capture.message.whisper,['gm']);
+test('ordinary RK rolls once without extra confirmation regardless of the owner roll-dialog preference',async()=>{
+ for(const showCheckDialogs of [false,true]){
+  const f=fixture(),native=f.game.pf2e.Check.roll;f.user.settings={showCheckDialogs};let confirmations=0,primaryCalls=0,after=0;
+  f.actor.rules=[{afterRoll(){after++;}}];f.game.pf2e.Check.roll=async(check,context,event,callback)=>{primaryCalls++;if(!context.skipDialog)confirmations++;assert.equal(context.messageMode,'blind');assert.equal(context.dc.visible,false);return native(check,context,event,callback);};
+  const capture=await api.captureWorkbenchRecall({...f,requestId:`owner-one-click-${showCheckDialogs}`,targetUuids:[f.target.uuid]});
+  assert.equal(confirmations,0);assert.equal(primaryCalls,1);assert.equal(f.die.count,1);assert.equal(after,1);assert.equal(capture.candidates[0].total,25);assert.deepEqual(capture.message.whisper,['gm']);assert.equal(capture.message.flags[MODULE_ID].workbenchRecall.probeUse.status,'done');
+ }
 });
-test('cancelled ordinary RK deletes only its empty reservation and produces no dice or afterRoll effects',async()=>{
+test('ordinary native null return deletes only its empty reservation and produces no dice or afterRoll effects',async()=>{
  const f=fixture(),create=f.globals.ChatMessage.create;f.globals.ChatMessage.create=async data=>{const message=await create(data);message.delete=async()=>f.game.messages.delete(message.id);return message;};let after=0;
- f.actor.rules=[{afterRoll(){after++;}}];f.game.pf2e.Check.roll=async(_check,context)=>context.skipDialog?{unexpectedFastRoll:true}:null;
+ f.actor.rules=[{afterRoll(){after++;}}];f.game.pf2e.Check.roll=async()=>null;
  await assert.rejects(()=>api.captureWorkbenchRecall({...f,requestId:'cancel-confirmation',targetUuids:[f.target.uuid]}),/取消/);assert.equal(f.die.count,0);assert.equal(after,0);assert.equal(f.game.messages.size,0);
 });
 test('fixed Assurance keeps its zero-dice path without requesting a redundant native dialog',async()=>{
@@ -293,6 +293,18 @@ test('incidental native roll options affect captured modifiers before primary se
  const capture=await api.captureWorkbenchRecall({...f,requestId:'origin',targetUuids:[f.target.uuid],origin:{rollOptions:['origin:item:known-weaknesses']}});assert.equal(capture.candidates[0].total,29);
 });
 const nativeBundle=process.env.FVTT_PF2E_BUNDLE??process.env.FVTT_PF2E_RUNTIME??'';
+test('installed native Check opens no ordinary RK dialog and retains one real roll and afterRoll', {skip:!fs.existsSync(nativeBundle)},async()=>{
+ const bundle=fs.readFileSync(nativeBundle,'utf8'),start=bundle.indexOf('static async roll(e, t = {}, n = null, r) {',bundle.indexOf('Sa = class Check {')),end=bundle.indexOf('let s = [], c = t.isReroll',start);assert.ok(start>=0&&end>start,'installed Check entry source unavailable');
+ const prefix=bundle.slice(start+'static async roll(e, t = {}, n = null, r) {'.length,end);
+ for(const showCheckDialogs of [false,true]){
+  const f=fixture(),native=f.game.pf2e.Check.roll;f.user.settings={showCheckDialogs};f.game.pf2e.settings={metagame:{secretChecks:false}};let dialogs=0,primaryCalls=0,after=0;
+  class CheckModifiersDialog{constructor(_check,resolve){dialogs++;this.resolve=resolve;}render(){this.resolve(true);}}
+  const enter=new Function('game','foundry','CONFIG','CheckModifiersDialog','objectHasKey',`return async function(e,t,n){${prefix};return true;};`)(f.game,{utils:{mergeObject:Object.assign}},{ChatMessage:{modes:{public:0,blind:1}}},CheckModifiersDialog,(object,key)=>Object.hasOwn(object,key));
+  f.actor.rules=[{afterRoll(){after++;}}];f.game.pf2e.Check.roll=async(check,context,event,callback)=>{if(!await enter(check,context,event))return null;primaryCalls++;return native(check,context,event,callback);};
+  const capture=await api.captureWorkbenchRecall({...f,requestId:`native-one-click-${showCheckDialogs}`,targetUuids:[f.target.uuid]});
+  assert.equal(dialogs,0);assert.equal(primaryCalls,1);assert.equal(f.die.count,1);assert.equal(after,1);assert.equal(capture.candidates[0].total,25);assert.equal(capture.message.blind,true);assert.match(capture.message.content,/<strong>回忆知识<\/strong>/);assert.equal(capture.message.flags[MODULE_ID].workbenchRecall.probeUse.status,'done');
+ }
+});
 test('installed PF2e RecallKnowledgeActionVariant bypasses its native player-skill prerequisite through the real prototype', {skip:!fs.existsSync(nativeBundle)},async()=>{
  const bundle=fs.readFileSync(nativeBundle,'utf8'),begin=bundle.indexOf('RecallKnowledgeActionVariant = class extends SingleCheckActionVariant {'),end=bundle.indexOf('}, RecallKnowledgeAction =',begin);assert.ok(begin>=0&&end>begin,'installed RK variant source unavailable');
  const source=bundle.slice(begin+'RecallKnowledgeActionVariant = '.length,end+1);class BaseVariant{get slug(){return 'recall-knowledge';}}
