@@ -4,16 +4,12 @@ import {assertSource,currentToken,marker} from './salubrious-kiss-context.mjs';
 import {captureSalubriousPrivacy,validateSalubriousPrivacy,sameSalubriousPrivacy,salubriousPrivacyData,mergeSalubriousAudience,treatmentPrivacyForPatient} from './salubrious-privacy.mjs';
 const verifiedProfiles=new WeakSet();
 // Module versions are unrestricted; retain the native system interface checks.
-export const SALUBRIOUS_WORKBENCH_PROFILE=Object.freeze({coreGeneration:14,system:'8.5.0'});
-export const SALUBRIOUS_WORKBENCH_PROFILES=Object.freeze({
- '8.5.0':SALUBRIOUS_WORKBENCH_PROFILE,
- '8.5.1':Object.freeze({...SALUBRIOUS_WORKBENCH_PROFILE,system:'8.5.1'}),
-});
+export const SALUBRIOUS_WORKBENCH_PROFILE=Object.freeze({coreGeneration:14});
 export async function verifySalubriousWorkbench({game}){
- const p=SALUBRIOUS_WORKBENCH_PROFILES[game.system?.version],dependency=game.modules.get('xdy-pf2e-workbench'),fn=game.PF2eWorkbench?.refocus;
- const current=()=>game.modules.get('xdy-pf2e-workbench')===dependency&&dependency?.active&&game.release?.generation===p.coreGeneration&&game.system?.version===p.system&&game.PF2eWorkbench?.refocus===fn;
- if(!p||!current()||typeof fn!=='function')return Object.freeze({ready:false,reason:'unknown-workbench-profile'});
- const result=Object.freeze({ready:true,profile:Object.freeze({...p,workbench:dependency.version})});verifiedProfiles.add(result);return result;
+ const p=SALUBRIOUS_WORKBENCH_PROFILE,dependency=game.modules.get('xdy-pf2e-workbench'),fn=game.PF2eWorkbench?.refocus;
+ const current=()=>game.modules.get('xdy-pf2e-workbench')===dependency&&dependency?.active&&game.release?.generation===p.coreGeneration&&game.system?.id==='pf2e'&&game.PF2eWorkbench?.refocus===fn;
+ if(!current()||typeof fn!=='function')return Object.freeze({ready:false,reason:'unknown-workbench-profile'});
+ const result=Object.freeze({ready:true,profile:Object.freeze({...p,system:game.system.version,workbench:dependency.version})});verifiedProfiles.add(result);return result;
 }
 // No source download is needed to enable an installed Workbench interface.
 export async function loadSalubriousWorkbench({game}){

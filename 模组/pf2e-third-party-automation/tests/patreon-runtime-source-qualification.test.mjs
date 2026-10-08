@@ -29,7 +29,7 @@ function providerFixture(descriptor,apiName,{providerVersion=descriptor.provider
   subscriptions++;observers.add(observe);gate=options.authorizeMarkedCommit;
   return ()=>{if(observers.delete(observe))disposals++};
  }};
- const game={user:{id:'G'},users:{activeGM:{id:'G'}},time:{worldTime:100},system:{version:pf2eVersion},
+ const game={user:{id:'G'},users:{activeGM:{id:'G'}},time:{worldTime:100},system:{id:'pf2e',version:pf2eVersion},
   modules:new Map([['patreon-v3',{active:true,version:providerVersion,api:{[apiName]:provider}}]])};
  return {game,observers,subscriptions:()=>subscriptions,disposals:()=>disposals,gate:invocation=>gate?.(invocation)};
 }
@@ -139,7 +139,7 @@ function manualPoolFixture(){
  const healer=actors.get('H'),patient=actors.get('P'),messages=new Map(),hooks=new Map();
  const enrolled=[],recorded=[],resolved=[],updated=[];
  const variant={use(){}},action={slug:'treat-wounds',use(){},toActionVariant:()=>variant};
- const game={user,users,actors,messages,time:{worldTime:100},system:{version:'8.5.1'},
+ const game={user,users,actors,messages,time:{worldTime:100},system:{id:'pf2e',version:'8.5.1'},
   pf2e:{actions:new Map([['treat-wounds',action]])},
   modules:new Map([['patreon-v3',{active:true,version:'3.3.0',api:{explorationManualImmunity:{descriptor:qualifiedDescriptor()}}}]])};
  const session={id:'S',manual:true,status:'recording',startedAt:100,actorUUIDs:['Actor.H','Actor.P','Actor.M']};

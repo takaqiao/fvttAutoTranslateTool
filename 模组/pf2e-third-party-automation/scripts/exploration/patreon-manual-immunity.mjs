@@ -13,10 +13,11 @@ const copy=value=>JSON.parse(canonicalJSON(value));
 
 /** Observe only the fixed provider's original create Promise. Item flags alone are not completion. */
 export function createPatreonManualImmunity({game,fromUuid}){
+ const system=game.system,sourceVersion=String(system?.version??'');
  const provider=()=>game.modules?.get('patreon-v3');
  const api=()=>provider()?.api?.explorationManualImmunity;
- const available=()=>provider()?.active===true&&(isPatreonSourceQualified(api()?.descriptor)
-  ||provider().version==='3.2.29'&&game.system?.version==='8.5.1'&&same(api()?.descriptor,descriptor));
+ const available=()=>game.system===system&&system?.id==='pf2e'&&sourceVersion!==''&&system.version===sourceVersion&&provider()?.active===true&&(isPatreonSourceQualified(api()?.descriptor)
+  ||provider().version==='3.2.29'&&same(api()?.descriptor,descriptor));
  function root(binding){
   if(!binding||!['invocationId','messageId','useId','tag','actorUUID','patientUUID','sourceUserId'].every(key=>typeof binding[key]==='string'&&binding[key])
    ||binding.tag!==`exploration-manual:${binding.useId}`||!Number.isFinite(binding.startedAt))return null;
@@ -33,7 +34,7 @@ export function createPatreonManualImmunity({game,fromUuid}){
   return message;
  }
  async function evidence(proof,activity){
-  if(!proof||!same(proof.descriptor,api()?.descriptor)||activity?.source?.type!=='native-action'||activity.kind!=='treatment'
+  if(!proof||proof.sourceVersion!==sourceVersion||!same(proof.descriptor,api()?.descriptor)||activity?.source?.type!=='native-action'||activity.kind!=='treatment'
    ||activity.patientUUIDs?.length!==1||activity.temporalSource?.type==='checkpoint-reservation')return null;
   const binding=proof.binding,message=root(binding);if(!message||activity.proof.useId!==binding.useId||activity.actorUUID!==binding.actorUUID
    ||binding.recordingSessionId&&activity.sessionId!==binding.recordingSessionId
@@ -67,7 +68,7 @@ export function createPatreonManualImmunity({game,fromUuid}){
  }
  function noApplication(activity){
   if(activity.source?.type!=='native-action'||activity.kind!=='treatment'||activity.temporalSource?.type==='checkpoint-reservation')return false;
-  const proof=activity.proof.nativeImmunity,message=proof&&root(proof.binding);
+  const proof=activity.proof.nativeImmunity,message=proof?.sourceVersion===sourceVersion&&root(proof.binding);
   return !!message&&activity.options.effectiveOutcome==='failure'&&message.flags.pf2e.context.outcome==='failure'
    &&Array.isArray(message.flags.pf2e.modifiers)&&activity.proof.resultIds.length===0&&activity.proof.receiptIds.length===0
    &&!Array.from(game.messages?.contents??game.messages?.values?.()??[]).some(child=>child.flags?.pf2e?.origin?.messageId===message.id);
@@ -79,7 +80,7 @@ export function createPatreonManualImmunity({game,fromUuid}){
    if(!active||api()!==providerAPI||!available()||!same(event?.descriptor,providerAPI.descriptor)||!root(event.binding)||typeof event.terminalPromise?.then!=='function')return;
    event.terminalPromise.then(proof=>{
     if(!active||api()!==providerAPI||!available()||!same(proof?.descriptor,providerAPI.descriptor)||!same(event.binding,proof.binding)||!root(proof.binding))return;
-    try{observe(copy(proof))}catch{}
+    try{observe(copy({...proof,sourceVersion}))}catch{}
    },()=>{});
   });
   return ()=>{active=false;dispose?.()};

@@ -18,9 +18,9 @@ async function loadNative(){
   const text=(await readFile(path.join(process.env.FVTT_NATIVE_APP,'client/dice',file),'utf8')).replace(/^import .*?;\r?\n/gm,'').replace('export default class '+name,'globalThis.'+name+'=class '+name);
   vm.runInContext(text,scope,{filename:file});if(name!=='Roll')vm.runInContext(`foundry.dice.terms.${name}=${name};CONFIG.Dice.termTypes.${name}=${name};`,scope);
  }
- const source=await readFile(process.env.PF2E_NATIVE_BUNDLE,'utf8'),start=source.indexOf('xa = class CheckRoll extends Roll {'),end=source.indexOf(', StrikeAttackRoll =',start);
+ const source=await readFile(process.env.PF2E_NATIVE_BUNDLE,'utf8'),start=source.indexOf('class CheckRoll extends Roll {'),end=source.indexOf(', StrikeAttackRoll =',start);
  assert.ok(start>=0&&end>start,'Review installed PF CheckRoll boundaries after an update');
- vm.runInContext('globalThis.CheckRoll='+source.slice(start+5,end)+';',scope);
+ vm.runInContext('globalThis.CheckRoll='+source.slice(start,end)+';',scope);
  vm.runInContext('CONFIG.Dice.rolls=[Roll,CheckRoll];CONFIG.Dice.terms.d=Die;',scope);
  return {CheckRoll:scope.CheckRoll,Die:scope.Die,NumericTerm:scope.NumericTerm,OperatorTerm:scope.OperatorTerm};
 }
@@ -91,7 +91,7 @@ for(const[label,mutate,reason]of [
  ['different maximum',f=>f.item.system.frequency.max=2,'unsupported-feat'],
  ['empty frequency',f=>f.item.system.frequency.value=0,'daily-use-unavailable'],
  ['unprepared frequency',f=>delete f.item.system.frequency.value,'daily-use-unavailable'],
- ['unknown system',f=>f.game.system.version='8.5.0','manual-native-compatibility'],
+ ['unknown system',f=>f.game.system.id='other','manual-native-compatibility'],
  ['other roller',f=>f.roll.options.rollerId='other','manual-native-evidence'],
  ['other actor check',f=>f.context.actor={uuid:'Actor.other'},'manual-native-evidence'],
  ['other card speaker',f=>f.card.speaker.actor='other','manual-native-evidence'],
@@ -194,3 +194,5 @@ test('ordinary privacyProof fields cannot bypass unproven no-message privacy',t=
  const f=fixture(t);f.requestedCreateMessage=false;
  for(const proof of [true,'public',{private:false}]){f.context.privacyProof=proof;rejects(f,'manual-unproven-draft-privacy')}
 });
+
+for(const version of ['8.6.0','9.0.0'])test('native failed-check evidence can use Halfling Luck on PF2e '+version,t=>{const f=fixture(t);f.game.system.version=version;assert.equal(assess(f).eligible,true)});

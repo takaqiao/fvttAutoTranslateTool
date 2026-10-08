@@ -111,7 +111,7 @@ for(const marker of ['const __patreonTimeCompletion=','const __patreonManualImmu
 
 function installGeneratedObservers(bytes,{version,pf2eVersion}){
  const callbacks=[],existingAPI={sibling:7},module={active:true,version,api:existingAPI};
- const user={id:'G'},game={user,users:{activeGM:user},time:{worldTime:100},system:{version:pf2eVersion},
+ const user={id:'G'},game={user,users:{activeGM:user},time:{worldTime:100},system:{id:'pf2e',version:pf2eVersion},
   modules:new Map([['patreon-v3',module]])};
  const context=vm.createContext({game,Hooks:{once(name,fn){assert.equal(name,'init');callbacks.push(fn)}},
   crypto:{randomUUID:()=> 'I'},structuredClone,console});

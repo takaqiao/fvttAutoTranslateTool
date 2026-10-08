@@ -1,9 +1,5 @@
 // Keep the installed callback and wrapper order; third-party versions are unrestricted.
-export const PATREON_TREATMENT_PROFILE=Object.freeze({coreGeneration:14,system:'8.5.0'});
-export const PATREON_TREATMENT_PROFILES=Object.freeze({
- '8.5.0':PATREON_TREATMENT_PROFILE,
- '8.5.1':Object.freeze({...PATREON_TREATMENT_PROFILE,system:'8.5.1'}),
-});
+export const PATREON_TREATMENT_PROFILE=Object.freeze({coreGeneration:14});
 const installations=new WeakMap();
 const unavailable=reason=>Object.freeze({installed:false,reason,dispose:()=>false});
 const entryState=entry=>({entry,fn:entry.fn,packageInfo:entry.package_info,packageId:entry.package_info?.id,target:entry.target,setter:entry.setter,type:entry.type,typeName:entry.type?.name,priority:entry.priority,chain:entry.chain,bind:entry.bind,bound:Array.isArray(entry.bind)?entry.bind.slice():null,wrapper:entry.wrapper});
@@ -32,10 +28,10 @@ export function wrapPatreonTreatmentCheck(original,scope){
  };
 }
 
-export async function installPatreonTreatmentCompatibility({game,libWrapper=globalThis.libWrapper,scope,profile=PATREON_TREATMENT_PROFILES[game?.system?.version]}={}){
+export async function installPatreonTreatmentCompatibility({game,libWrapper=globalThis.libWrapper,scope,profile=PATREON_TREATMENT_PROFILE}={}){
  const dependency=game?.modules?.get('patreon-v3');
  if(!dependency?.active)return unavailable('patreon-inactive');
- if(!profile||game.release?.generation!==profile.coreGeneration||game.system?.version!==profile.system)return unavailable('unknown-dependency-version');
+ if(!profile||game.release?.generation!==profile.coreGeneration||game.system?.id!=='pf2e')return unavailable('unknown-system-interface');
  if(typeof scope?.acquirePatreonPublicScope!=='function')return unavailable('missing-private-treatment-scope');
  const descriptor=Object.getOwnPropertyDescriptor(game.pf2e?.Check??{},'roll'),holder=descriptor?.get?._lib_wrapper;
  if(!holder||holder.name!=='game.pf2e.Check.roll'||holder.is_property!==false||holder.active!==true||holder._outstanding_wrappers!==0||!Array.isArray(holder.getter_data))return unavailable('unsafe-wrapper-holder');

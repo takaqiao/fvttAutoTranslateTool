@@ -1,16 +1,18 @@
-import test from 'node:test';
+import test, {describe} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import {installDsnChatRecovery} from '../scripts/patches/dsn-chat.mjs';
 const fixture=JSON.parse(fs.readFileSync(new URL('./fixtures/dsn-chat-native.json',import.meta.url)));
+for(const name of ['dsn-queue-native.json','dsn-queue-6.4.3-native.json'])describe(name,()=>{
+const queueFixture=JSON.parse(fs.readFileSync(new URL('./fixtures/'+name,import.meta.url)));
 const settle=()=>new Promise(resolve=>setImmediate(resolve));
 function setup({failure=null,hidden=false,pending=false,secret=false}={}){
  const errors=[],events=[],queued=[],classes=new Set(['dsn-hide']);
  const node={classList:{remove:v=>classes.delete(v)},querySelectorAll:()=>[]};
  const user={id:'player'},message={id:'message',author:user,speaker:{actor:'actor'},whisper:secret?['gm']:[],isContentVisible:!secret,content:secret?'???':'12',_dice3dMessageHidden:true,_dice3dPendingRenders:1,_dice3danimating:true};
  const settings=new Map([['forceCharacterOwnerAppearance','0'],['hide3dDiceOnSecretRolls',true]]);
- const game={version:'14.368',release:{generation:14},view:'game',user,settings:{get:(_id,key)=>settings.get(key)},messages:new Map([[message.id,message]]),modules:new Map([['dice-so-nice',{active:true,version:'6.4.2'}]]),actors:new Map(),users:[]};
+ const game={version:'14.368',release:{generation:14},view:'game',user,settings:{get:(_id,key)=>settings.get(key)},messages:new Map([[message.id,message]]),modules:new Map([['dice-so-nice',{active:true,version:queueFixture.provenance.version}]]),actors:new Map(),users:[]};
  const ui={chat:{element:{querySelector:()=>node},_shouldShowNotifications:()=>false,scrollBottom(){}},sidebar:{popouts:{}}};
  const context=vm.createContext({game,window:{ui,document:{hidden}},ui,document:{querySelector:()=>null},Hooks:{callAll:(...args)=>events.push(args)},InitiativeMask:{release(){}},CompanionLink:{release:()=>[]},ChatMessage:{getSpeakerActor:()=>null},DsnSettings:{CONFIG:()=>({visibility:'all'}),ALL_CONFIG:()=>({}),ALL_CUSTOMIZATION:()=>({}),isEnabled:()=>true},DiceNotation:class{constructor(roll){if(failure==='notation')throw Error('notation failed');this.throws=[roll];}},setTimeout,CONST:{DOCUMENT_OWNERSHIP_LEVELS:{OWNER:3}}});
  const Native=vm.runInContext('(class Native {'+Object.values(fixture.methods).join('\n')+'})',context);
@@ -81,7 +83,7 @@ test('restore removes only the owned render wrapper and repeated install is idem
  installed.restore();assert.equal(f.pipeline.renderRolls,original);assert.equal(Object.hasOwn(f.pipeline,'renderRolls'),false);
 });
 
-const queueFixture=JSON.parse(fs.readFileSync(new URL('./fixtures/dsn-queue-native.json',import.meta.url)));
+
 function realQueue(f,{persistent=false}={}){
  const {context}=f;let failures=1,simulations=0,hidden=0,landed=[];
  Object.assign(context,{setTimeout,clearTimeout,Utils:{removeTicker(){}},canvas:{app:{ticker:{add(){}}}}});
@@ -90,7 +92,7 @@ function realQueue(f,{persistent=false}={}){
  const classes=vm.runInContext(`(()=>{${queueFixture.accumulator};${queueFixture.queue};return {AnimationQueue,Box:class{${queueFixture.boxStart}},Engine:class{${queueFixture.engineStart}}}})()`,context);
  const engine=new classes.Engine();
  Object.assign(engine,{rolling:false,running:false,diceList:[],deadDiceList:[],persistentDiceList:[],clearDice(){},diceScene:{display:{innerWidth:1000,innerHeight:800}},getVectors(){},checkForAnimatedDice:async()=>false,soundManager:{generateCollisionSounds:()=>[]},physicsWorker:{async exec(name){if(name==='simulateThrow'){simulations++;if(failures-->0)throw Error('native worker failed');return {ids:[],quaternionsBuffers:[],positionsBuffers:[],detectedCollides:[],deads:[],iterationsNeeded:0,faceValues:{},finalQuaternions:{}};}return true;}}});
- const box=new classes.Box();Object.assign(box,{throwEngine:engine,inputHandler:{clearPendingThrowDice(){}},animateThrow(){}});
+ const box=new classes.Box();Object.assign(box,{throwEngine:engine,physicsWorker:engine.physicsWorker,inputHandler:{clearPendingThrowDice(){}},animateThrow(){}});
  const queue=new classes.AnimationQueue({canvasVisibility:{show(){},hide(){hidden++;}},pendingThrows:{noteBindsLanded:v=>landed.push(...v)}});queue.attach(box);
  f.pipeline.queue=queue;f.g.game.dice3d.box=box;f.settings.set('maxDiceNumber',20);
  return {queue,box,engine,hidden:()=>hidden,simulations:()=>simulations,failNext:()=>failures++,landed};
@@ -99,7 +101,7 @@ function realQueue(f,{persistent=false}={}){
 // _buildDiceBox starts initialize() and attaches immediately. Its ready promise
 // resolves only after async scene/worker setup has created the throw engine.
 function initializingBox(q){
- const box=Object.assign(Object.create(Object.getPrototypeOf(q.box)),{throwEngine:null,inputHandler:null,initialized:false,animateThrow(){}});
+ const box=Object.assign(Object.create(Object.getPrototypeOf(q.box)),{throwEngine:null,physicsWorker:q.box.physicsWorker,inputHandler:null,initialized:false,animateThrow(){}});
  let initialize;
  box.ready=new Promise(resolve=>{initialize=()=>{
   box.throwEngine=Object.assign(new q.engine.constructor(),q.engine);
@@ -183,7 +185,7 @@ test('queue recovery installs after the real DiceBox is attached at diceSoNiceRe
 });
 test('rebuilding the DiceBox replaces only the owned queue recovery wrapper',async()=>{
  const f=setup(),q=realQueue(f),result=installDsnChatRecovery({g:f.g});
- const newBox=Object.assign(Object.create(Object.getPrototypeOf(q.box)),{throwEngine:q.engine,inputHandler:q.box.inputHandler,animateThrow(){}});
+ const newBox=Object.assign(Object.create(Object.getPrototypeOf(q.box)),{throwEngine:q.engine,physicsWorker:q.box.physicsWorker,inputHandler:q.box.inputHandler,animateThrow(){}});
  q.queue.attach(newBox);
  assert.equal(Object.hasOwn(q.box,'startUnifiedBatch'),false);assert.equal(Object.hasOwn(newBox,'startUnifiedBatch'),true);
  f.pipeline.renderRolls(f.message,[rolls()[0]]);await settle();await settle();
@@ -211,7 +213,7 @@ test('native resize in queue.idle continuation stays protected before accumulato
  let newBox,processing;
  await q.queue.idle().then(()=>{
    processing=q.queue.nextAnimation._isProcessing;
-   newBox=Object.assign(Object.create(Object.getPrototypeOf(q.box)),{throwEngine:q.engine,inputHandler:q.box.inputHandler,animateThrow(){}});
+   newBox=Object.assign(Object.create(Object.getPrototypeOf(q.box)),{throwEngine:q.engine,physicsWorker:q.box.physicsWorker,inputHandler:q.box.inputHandler,animateThrow(){}});
    q.queue.attach(newBox);
  });
  await settle();
@@ -234,4 +236,6 @@ test('native resize waits for the replacement engine created asynchronously afte
  assert.equal(resized.box.throwEngine.rolling,false);assert.equal(resized.box._preparingThrow,false);
  assert.equal(q.queue.length,0);assert.equal(q.hidden(),2);
  result.restore();assert.equal(Object.hasOwn(resized.box,'startUnifiedBatch'),false);
+});
+
 });

@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {createSocialAutomation} from '../scripts/social-automation.mjs';
 import {createReactionChecks,runCheckReactionPipeline,REACTION_CHECK_SOURCES} from '../scripts/reaction-checks.mjs';
 import {MODULE_ID as ID} from '../scripts/rules.mjs';
+import {Predicate, adjustments as nativeAdjustments, degree as nativeDegree} from './knowledge-pf2e-860-fixture.mjs';
 
 function patch(doc,changes){for(const[path,value]of Object.entries(changes)){const parts=path.split('.');let at=doc;for(const key of parts.slice(0,-1))at=at[key]??={};at[parts.at(-1)]=structuredClone(value);}}
 function fixture({reaction='squawk',cancel=false,settled=false,change}={}){
@@ -56,6 +57,21 @@ test('owner window cancellation creates no Alarm immunity or final callback',()=
 test('declining Squawk preserves the original native critical failure and ordinary Alarm settlement',()=>setup({reaction:'decline'},async f=>{
  assert.match(await f.run(),/已完成/);assert.deepEqual(f.summaries[0].flags[ID].socialAlarm.outcomes.map(o=>o.degree),['criticalFailure','failure','success','criticalSuccess']);assert.equal(f.game.messages.has('paid-squawk'),false);assert.equal(f.counts.dice,1);
 }));
+
+for(const scenario of [
+ {name:'its own perspective',predicate:['self:level:8',{not:'self:level:5'},'check:total:natural:12','check:roll:total:natural:12',{gte:['check:total:delta',-19]}],options:['self:level:8'],degree:1,fear:[3,2,1,1]},
+ {name:'no global perspective leakage',predicate:['self:level:5'],options:['self:level:8'],degree:0,fear:[3,3,2,1]},
+ {name:'empty entry options',predicate:['self:level:5'],options:[],degree:0,fear:[3,3,2,1]},
+])test(`Alarm matches 8.6 native adjustments with ${scenario.name}`,()=>{
+ const entry={predicate:new Predicate(scenario.predicate),options:new Set(scenario.options),adjustments:{all:{amount:1,label:'8.6 adjustment'}}};
+ return setup({reaction:'decline',change({roll,card}){
+  const context=card.flags.pf2e.context;context.options.push('self:level:5');context.contextualOptions={postRoll:['check:total:21','check:total:natural:12','check:roll:total:natural:12','check:total:delta:-19']};
+  const input={total:21,die:12,dc:40,rollOptions:context.options,dosAdjustments:[entry]},degree=nativeDegree(input);assert.equal(degree,scenario.degree);context.dosAdjustments=nativeAdjustments(input);context.outcome=degree===1?'failure':'criticalFailure';roll.options.degreeOfSuccess=degree;
+ }},async f=>{
+  f.game.pf2e={Predicate};f.actor.synthetics={degreeOfSuccessAdjustments:{diplomacy:[entry]}};
+  assert.match(await f.run(),/已完成/);assert.deepEqual(f.targets.map(target=>target.actor.fear),scenario.fear);assert.equal(f.counts.dice,1);assert.equal(f.summaries.length,1);
+ });
+});
 for(const changed of ['record','record-user','record-state','used-result','nonce','actor','author','payment-author','payment-source','previous-total','previous-degree','previous-die','die-type','roll-option','dos-adjustment','unadjusted-outcome'])test(`a forged Squawk ${changed} cannot bypass the native Alarm degree proof`,()=>setup({change({actor,roll,card,payment}){
  const proof=card.flags[ID].reactionChecks,record=actor.flags[ID].reactionChecks.reactions[0];
  if(changed==='record')actor.flags[ID].reactionChecks.reactions=[];if(changed==='record-user')record.userId='gm';if(changed==='record-state')record.state='uncertain';if(changed==='used-result'){record.state='used';record.resultMessageId='another-check'}if(changed==='nonce')proof.nonce='forged-nonce';if(changed==='actor')proof.actorUuid='Actor.other';if(changed==='author')card.author='gm';if(changed==='payment-author')payment.author={id:'player'};if(changed==='payment-source')payment.flags.pf2e.origin.uuid='Actor.hero.Item.other';if(changed==='previous-total')proof.previousRoll.total=99;if(changed==='previous-degree')proof.previousRoll.options.degreeOfSuccess=2;if(changed==='previous-die')roll.dice[0].total=11;if(changed==='die-type')roll.termOptions.type='poison';if(changed==='roll-option')roll.options.dsnRole='mechanical-metadata';if(changed==='dos-adjustment')card.flags.pf2e.context.dosAdjustments={all:{amount:1,label:'forged'}};if(changed==='unadjusted-outcome')card.flags.pf2e.context.unadjustedOutcome='failure';

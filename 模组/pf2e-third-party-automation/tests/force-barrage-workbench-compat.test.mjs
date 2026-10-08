@@ -35,7 +35,7 @@ test('exports the exact internal macro source and loader',()=>{assert.equal(api.
 for(const [name,change]of [
  ['disabled Workbench',f=>f.game.modules.get('xdy-pf2e-workbench').active=false],
  ['unknown Workbench version',f=>f.game.modules.get('xdy-pf2e-workbench').version='7.7.6'],
- ['unknown PF build',f=>f.game.system.version='8.5.2'],
+ ['another system',f=>f.game.system.id='other'],
  ['unsupported core generation',f=>f.game.version='15.1'],
  ['unknown Toolbelt version',f=>f.game.modules.get('pf2e-toolbelt').version='3.57.0'],
  ['public macro UUID',f=>f.macro.uuid=SOURCE.replace('-internal','')],
@@ -91,3 +91,5 @@ test('each delivered formula and message data match the original audited constru
   assert.deepEqual(p.messageData,originalMessage(a,mmch,{getSpeaker:()=>({actor:'actor',scene:'scene',token:'source'})}));
  }
 });
+
+test('PF2e 8.6 retains the installed native missile count and original payment',nativeOptions,async()=>{const f=fixture();f.game.system.version='8.6.0';const adapter=await load(f);await adapter.run(f.input);assert.equal(f.calls.filter(c=>c[0]==='pay').length,1);assert.equal(publications(f).length,2)});

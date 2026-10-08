@@ -45,9 +45,11 @@ function normalizeRow(data){
  * Reloaded bare rows, all rerolls and ambiguous candidates remain manual.
  */
 export function createRoaringSaveEvidence({game,fromUuid=globalThis.fromUuid,lookupSource,onVerified,onManual,onError=()=>{},randomId=()=>globalThis.crypto.randomUUID()}={}){
+ const system=game.system,systemVersion=system?.version;
+ const currentSystem=()=>game.system===system&&system?.id==='pf2e'&&typeof systemVersion==='string'&&systemVersion.length>0&&system.version===systemVersion;
  const records=new Map(),local=new Map(),pending=new Set(),queue=new SerialActions();
  let socket,Hooks,installed=false,generation=0;const hooks=[];
- function compatible(){return game.system?.id==='pf2e'&&game.system.version==='8.5.1'&&game.modules?.get(TOOL)?.active===true;}
+ function compatible(){return currentSystem()&&game.modules?.get(TOOL)?.active===true;}
  function sourceFor(message){
   if(!compatible()||game.messages?.get(message?.id)!==message||!publicMessage(message))return null;
   const s=lookupSource(message);if(!s||typeof s.then==='function'||!['awaiting-save','active'].includes(s.status)||!bounded(s.sourceNonce)||!bounded(s.castNonce)||s.originalMessageUuid!==message.uuid||s.rank!==3||!Number.isFinite(s.dc)||s.gmId!==game.users.activeGM?.id||sourceKeys.some(k=>s[k]===undefined))return null;

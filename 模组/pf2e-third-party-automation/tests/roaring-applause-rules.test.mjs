@@ -16,10 +16,14 @@ function fixture(){
  const sourceCombatant={id:'source-turn',actor,token,initiative:20,flags:{pf2e:{roundOfLastTurnEnd:3}}};
  const enemyCombatant={id:'enemy-turn',actor:target.actor,token:target,initiative:20,flags:{}};
  const combat={id:'actual',started:true,scene,round:4,turn:0,turns:[sourceCombatant,enemyCombatant]};
- const game={world:{id:'ujx5r8oipw7ercdr'},system:{version:'8.5.1'},user,users,actors:new Map([[actor.id,actor]]),scenes:new Map([[scene.id,scene]]),combats:new Map([[combat.id,combat]]),settings:{get:()=> 'public'}};
+ const game={world:{id:'ujx5r8oipw7ercdr'},system:{id:'pf2e',version:'8.5.1'},user,users,actors:new Map([[actor.id,actor]]),scenes:new Map([[scene.id,scene]]),combats:new Map([[combat.id,combat]]),settings:{get:()=> 'public'}};
  return {game,user,actor,item,entry,options:{rank:3},token,targets:[target],combat,sourceCombatant};
 }
 
+ for(const version of ['8.6.0','9.0.0'])test(`Roaring Applause retains exact cast admission on PF2e ${version}`,()=>{
+  const f=fixture();f.game.system.version=version;assert.equal(assessRoaringCast(f).eligible,true);
+  f.game.system.id='other';assert.equal(assessRoaringCast(f).eligible,false);
+ });
  test('current original and native same-rank variant pass without English duration/target labels',()=>{
   const f=fixture();assert.equal(assessRoaringCast(f).eligible,true);
   const variant={...f.item,original:f.item,system:{...f.item.system,location:{...f.item.system.location,heightenedLevel:3}}};

@@ -11,7 +11,7 @@ assert.ok(setup);
 const construct=new Function('game','fromUuid','choose','showNativeChoice','report','createHalflingLuckProvider',setup+'\nreturn halflingLuck;');
 
 test('bootstrap gives the original player a local native Luck choice without requesting GM-only chooser access',async()=>{
- const user={id:'player',active:true,isGM:false},gm={id:'gm',active:true,isGM:true},game={user,users:{activeGM:gm},world:{id:'ujx5r8oipw7ercdr'},system:{version:'8.5.1'}};
+ const user={id:'player',active:true,isGM:false},gm={id:'gm',active:true,isGM:true},game={user,users:{activeGM:gm},world:{id:'ujx5r8oipw7ercdr'},system:{id:'pf2e',version:'8.5.1'}};
  const actor={testUserPermission:()=>true};let dialogs=0;
  const original=globalThis.foundry;
  globalThis.foundry={applications:{api:{DialogV2:{wait:async options=>{dialogs++;return options.buttons[0].callback();}}}}};
@@ -21,6 +21,8 @@ test('bootstrap gives the original player a local native Luck choice without req
  }finally{globalThis.foundry=original}
 });
 
-test('bootstrap keeps Luck disabled outside the verified fortress/PF version',()=>{
- for(const game of [{world:{id:'cotct'},system:{version:'8.5.1'}},{world:{id:'ujx5r8oipw7ercdr'},system:{version:'8.5.2'}}])assert.equal(construct(game,()=>{},()=>{},showNativeChoice,()=>{},()=>assert.fail('unsupported provider')),null);
+test('bootstrap keeps Luck disabled outside the configured fortress/PF2e system',()=>{
+ for(const game of [{world:{id:'cotct'},system:{id:'pf2e',version:'8.5.1'}},{world:{id:'ujx5r8oipw7ercdr'},system:{id:'other',version:'8.6.0'}}])assert.equal(construct(game,()=>{},()=>{},showNativeChoice,()=>{},()=>assert.fail('unsupported provider')),null);
 });
+
+test('bootstrap constructs the native Luck provider on PF2e 8.6',()=>{const game={world:{id:'ujx5r8oipw7ercdr'},system:{id:'pf2e',version:'8.6.0'}};assert.equal(construct(game,()=>{},()=>{},showNativeChoice,()=>{},()=> 'provider'),'provider')});

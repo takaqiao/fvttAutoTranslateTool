@@ -18,16 +18,16 @@ async function digest(value){return Array.from(new Uint8Array(await crypto.subtl
 export function createManualPoolSources({game,Hooks,ledger,fromUuid,hpPools,clientNonce,getSession,isIssuer,onEnroll,onSettled,onError=()=>{},timeoutMs=10000,getBatchProvider=()=>game.pf2e?.thirdPartyManualPoolBatch}){
  let transport,started=false,batchDispose,updateHook,broker;
  const localUses=new WeakMap(),checks=new Map(),pendingResults=new Map(),sources=new Map(),tickets=new Map(),batches=new Map(),submitted=new Set(),workbenchProviders=new Map();
- const userId=game.user.id,activeGM=()=>game.users.activeGM;
+ const userId=game.user.id,system=game.system,sourceVersion=String(system?.version??''),activeGM=()=>game.users.activeGM;
  const gm=id=>game.users.get(id)?.active===true&&game.users.get(id)?.isGM===true&&activeGM()?.id===id;
- const local=()=>started&&game.user.id===userId;
+ const local=()=>started&&game.user.id===userId&&game.system===system&&system?.id==='pf2e'&&sourceVersion!==''&&system.version===sourceVersion;
  const issuer=()=>local()&&gm(userId)&&isIssuer()===true;
  const route=(ownerId,actorUUID)=>({protocol:OWNER_TRANSPORT_PROTOCOL,operationId,driverUserId:activeGM()?.id,ownerUserId:ownerId,actorUUID});
- const provider=type=>type==='native-action'?{id:'pf2e',version:getBatchProvider()?.descriptor?.version===2?String(game.system?.version??''):'8.5.1',sourceSHA:getBatchProvider()?.descriptor?.baseSourceSHA256??'d63da8312831b84905e6866b1dd3f9d93e95c1012955b0177ad2ce8ccf246157'}:{id:'xdy-pf2e-workbench',sourceSHA:WORKBENCH_SOURCE_SHA};
+ const provider=type=>type==='native-action'?{id:'pf2e',version:sourceVersion,sourceSHA:getBatchProvider()?.descriptor?.baseSourceSHA256??MANUAL_POOL_BATCH_SOURCE_SHA}:{id:'xdy-pf2e-workbench',sourceSHA:WORKBENCH_SOURCE_SHA};
  function providerCurrent(source){
-  if(!same(source.provider,provider(source.sourceType)))return false;
+  if(!local()||source.version!==2||source.sourceVersion!==sourceVersion||!same(source.provider,provider(source.sourceType)))return false;
   if(source.sourceType!=='native-action')return true;
-  const descriptor=getBatchProvider()?.descriptor;return descriptor?.version===2?manualPoolBatchModel(descriptor):game.system?.version==='8.5.1';
+  return manualPoolBatchModel(getBatchProvider()?.descriptor);
  }
  function providerWitness(type){
   const batch=getBatchProvider();if(!manualPoolBatchModel(batch?.descriptor))return ()=>false;
@@ -107,7 +107,7 @@ export function createManualPoolSources({game,Hooks,ledger,fromUuid,hpPools,clie
    if(pool.poolUUID===patient.uuid&&pool.memberUUIDs.length===1){if(result.update)await result.update({[`flags.${MODULE_ID}.explorationManualPoolParticipation`]:null});return}
    if(entry.ticket.sourceType==='native-action'&&result.flags?.pf2e?.origin?.messageId!==entry.check.id)throw Error('manual-pool-source-unavailable');
    if(result.update)await result.update({[`flags.${MODULE_ID}.explorationManualPoolParticipation`]:{sessionId:entry.ticket.sessionId,useId:entry.ticket.useId,poolUUID:pool.poolUUID}});
-   const source={version:1,sessionId:entry.ticket.sessionId,activityId:`manual:${entry.ticket.sourceType==='native-action'?entry.check.id:result.id}`,actorUUID:entry.ticket.actorUUID,patientUUID:patient.uuid,sourceType:entry.ticket.sourceType,useId:entry.ticket.useId,checkId:entry.check.id,resultId:result.id,rollIndex:0,worldTime:entry.ticket.worldTime,sourceUserId:userId,sourceClientNonce:clientNonce,sourceNonce:entry.ticket.sourceNonce,provider:provider(entry.ticket.sourceType),documentsDigest:await digest(documents(entry.check,result))};
+   const source={version:2,sourceVersion,sessionId:entry.ticket.sessionId,activityId:`manual:${entry.ticket.sourceType==='native-action'?entry.check.id:result.id}`,actorUUID:entry.ticket.actorUUID,patientUUID:patient.uuid,sourceType:entry.ticket.sourceType,useId:entry.ticket.useId,checkId:entry.check.id,resultId:result.id,rollIndex:0,worldTime:entry.ticket.worldTime,sourceUserId:userId,sourceClientNonce:clientNonce,sourceNonce:entry.ticket.sourceNonce,provider:provider(entry.ticket.sourceType),documentsDigest:await digest(documents(entry.check,result))};
    entry.source=source;entry.checkSource=documents(entry.check,result);entry.patient=patient;entry.poolUUID=pool.poolUUID;
    const witness=providerWitness(source.sourceType),current=()=>local()&&!entry.invalid&&witness()&&entry.isCurrent()&&checkCurrent(entry,entry.check)&&game.messages.get(result.id)===result&&documents(entry.check,result)===entry.checkSource&&game.time.worldTime===source.worldTime&&hpPools.discover(patient).poolUUID===entry.poolUUID;
    if(!current())throw Error('manual-pool-source-changed');sources.set(result.id,{source,check:entry.check,result,patient,poolUUID:pool.poolUUID,isCurrent:current,ready:()=>entry.publication});

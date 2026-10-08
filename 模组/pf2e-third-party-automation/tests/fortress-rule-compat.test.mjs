@@ -90,7 +90,7 @@ test('configuration maintenance backs up the exact changes, preserves disabled/c
 });
 
 test('unknown worlds, systems and inactive Patreon leave settings unchanged',()=>{
- for(const change of [g=>g.world.id='another-world',g=>g.system.version='8.6.0',g=>g.system.id='sf2e',g=>g.modules.get('patreon-v3').active=false]){
+ for(const change of [g=>g.world.id='another-world',g=>g.system.id='sf2e',g=>g.modules.get('patreon-v3').active=false]){
   const game=world();change(game);const before=original(),result=repair(before,game);assert.deepEqual(result.rules,before);assert.deepEqual(result.changes,[]);
  }
 });
@@ -148,16 +148,18 @@ test('new Uplifting effects are corrected synchronously on the creating player c
  unregister();assert.equal(listeners.size,0);
 });
 
-test('unsupported worlds and system versions install no Uplifting item listener',()=>{
- for(const alter of [g=>g.world.id='another-world',g=>g.system.id='sf2e',g=>g.system.version='8.6.0']){
+test('unsupported worlds and systems install no Uplifting item listener',()=>{
+ for(const alter of [g=>g.world.id='another-world',g=>g.system.id='sf2e']){
   const game=world(),calls=[];alter(game);
   const unregister=api.createFortressRuleCompatibility({game}).register({Hooks:{on:(...args)=>{calls.push(['on',...args]);return 1},off:(...args)=>calls.push(['off',...args])}});
   assert.equal(typeof unregister,'function');unregister();assert.deepEqual(calls,[]);
  }
 });
 
-test('Uplifting maintenance respects active GM, world/version, opt-out and exact source/bug shape',async()=>{
- for(const alter of [f=>f.game.user.id='player',f=>f.game.world.id='other',f=>f.game.system.version='8.6.0',f=>f.actor.flags[NS]={autoRepairDisabled:true},f=>f.item._stats.compendiumSource='custom-effect',f=>f.item.type='feat',f=>f.item.system.rules[1].adjustment={success:'to-critical-success'},f=>f.item.system.rules[1].predicate.push('custom:only')]){
+test('Uplifting maintenance respects active GM, world/system, opt-out and exact source/bug shape',async()=>{
+ for(const alter of [f=>f.game.user.id='player',f=>f.game.world.id='other',f=>f.game.system.id='sf2e',f=>f.actor.flags[NS]={autoRepairDisabled:true},f=>f.item._stats.compendiumSource='custom-effect',f=>f.item.type='feat',f=>f.item.system.rules[1].adjustment={success:'to-critical-success'},f=>f.item.system.rules[1].predicate.push('custom:only')]){
   const f=actorFixture();alter(f);const before=structuredClone(f.item.system.rules),provider=api.createFortressRuleCompatibility?.({game:f.game});await provider?.maintain(f.actor);assert.deepEqual(f.item.system.rules,before);assert.equal(f.actor.updates.length,0);
  }
 });
+
+test('PF2e 8.6 retains exact native fortress rule repairs',()=>{const game=world();game.system.version='8.6.0';assert.equal(repair(original(),game).changes.length,4)});

@@ -25,10 +25,13 @@ function currentActor(game,p){
 /** Source-local documents only. Native grants supply condition mechanics and
  * cascade behavior; operation receipts prevent repeated creation after doubt. */
 export function createRoaringEffects({game,fromUuid=globalThis.fromUuid,randomId=()=>globalThis.foundry?.utils?.randomID?.()??globalThis.crypto.randomUUID(),onError=()=>{}}={}){
+ const system=game.system,systemVersion=system?.version;
+ const currentSystem=()=>game.system===system&&system?.id==='pf2e'&&typeof systemVersion==='string'&&systemVersion.length>0&&system.version===systemVersion;
  const queue=new SerialActions(),scopes=new WeakMap();
  const get=(actor,nonce)=>{const r=safe(nonce)?table(actor)[nonce]:null;return r?copy(r):null};
  const list=actor=>Object.entries(table(actor)).filter(([nonce,r])=>safe(nonce)&&r?.state?.sourceNonce===nonce).map(([,r])=>copy(r));
  function assertLive(actor){
+  demand(currentSystem(),'系统在来源会话期间已改变。');
   const p=scopes.get(actor),gm=p?.gm;
   demand(gm?.isGM===true&&gm.active===true&&gm.id===p.gmId&&game.user===gm&&game.users.get(p.gmId)===gm&&game.users.activeGM===gm&&isActiveGM(game),'需要原始当前主GM处理来源效果。');
   demand(currentActor(game,p.identity),'目标角色已改变。');
@@ -39,7 +42,7 @@ export function createRoaringEffects({game,fromUuid=globalThis.fromUuid,randomId
   projectRoaringConditions(r.state);
   const i=r.context?.immunity;
   demand(r.context?.paymentId===r.state.source.castNonce&&typeof r.context.userId==='string'&&typeof r.context.gmId==='string'&&Number.isFinite(r.context.dc),'施法及DC记录不完整。');
-  demand(i?.checked===true&&i.systemVersion==='8.5.1'&&['spell','slowed','fascinated'].every(k=>typeof i[k]==='boolean'),'免疫结果尚未确认。');
+  demand(currentSystem()&&i?.checked===true&&i.systemVersion===systemVersion&&['spell','slowed','fascinated'].every(k=>typeof i[k]==='boolean'),'免疫结果尚未确认。');
  }
  function current(actor,nonce){const r=get(actor,nonce);valid(actor,r);return r}
  async function persist(actor,before,after){

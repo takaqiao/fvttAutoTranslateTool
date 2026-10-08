@@ -17,7 +17,7 @@ export function createGlimpseCompat({game,fromUuid=globalThis.fromUuid,api=()=>g
  const scopes=new Map();let registered=false,engineReady=false,initialized=false,template,probed=false,wake,lifecycle,hooksApi;
  const readyPromise=new Promise(resolve=>wake=resolve);
  const setting=()=>game.settings.get(ENGINE,SETTING)??{};
- const versions=()=>game.system?.id==='pf2e'&&game.system.version==='8.5.1'&&game.modules.get(ENGINE)?.active&&game.modules.get('pf2e-trigger-trove')?.active;
+ const versions=()=>game.system?.id==='pf2e'&&game.modules.get(ENGINE)?.active&&game.modules.get('pf2e-trigger-trove')?.active;
  const safeSetting=()=>{const s=setting();if(s.sources?.some(g=>g.id===GLIMPSE_TRIGGER_ID))throw Error('救赎瞥视模块图已被世界配置覆盖。');return s};
  const ready=()=>glimpseWorld(game)&&initialized&&versions()&&setting().enabled?.includes(GLIMPSE_TRIGGER_ID)&&!setting().disabled?.includes(GLIMPSE_TRIGGER_ID)&&!setting().sources?.some(g=>g.id===GLIMPSE_TRIGGER_ID)&&(!isActiveGM(game)||probed);
  const currentScope=scope=>{

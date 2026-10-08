@@ -143,7 +143,7 @@ Hooks.once('ready',async()=>{
  const advanceStartup=defensiveAdvanceStartupCompatibility({game,rules:game.modules.get('patreon-v3')?.active?game.settings.get('patreon-v3','rulesV3'):null});
  const defensiveAdvance=createDefensiveAdvance({game,fromUuid,choose,startupCompatibility:advanceStartup,onError:report});
  let glimpse,roaring,roaringReactionCompatibility;
- const reactionRestriction=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'&&game.system.version==='8.5.1'?actor=>roaring?.reactionRestriction(actor)??{status:'manual',sources:[{sourceNonce:null,status:'manual',reason:'provider-initializing'}]}:undefined;
+ const reactionRestriction=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'?actor=>roaring?.reactionRestriction(actor)??{status:'manual',sources:[{sourceNonce:null,status:'manual',reason:'provider-initializing'}]}:undefined;
  const reactionBudget=createReactionBudget({game,fromUuid,reactionRestriction,onError:report,handlesGlimpse:actor=>glimpse?.handlesActor(actor)??false});
  await glimpseCompat.initialize({game}).catch(report);
  glimpse=createGlimpseProvider({game,fromUuid,reactionRestriction,compat:glimpseCompat,getRollContext:roll=>cycle?.getRollContext(roll),onError:report});
@@ -168,7 +168,7 @@ Hooks.once('ready',async()=>{
   try{const response=await fetch('modules/pf2e-toolbelt/scripts/main.js',{cache:'no-store',signal:AbortSignal.timeout(10000)});if(response.ok)await verifyManualPoolProviders({game,pf2eSource,toolbeltSource:new Uint8Array(await response.arrayBuffer())});}catch{/* Missing qualification keeps only the shared-pool adapter unavailable. */}
  }
  const shieldAdapter=createShieldDamageAdapter({game,nativeBridgeVerification,onError:report,createMessageMiddleware:salubriousMessagePrivacy.createMessageMiddleware});
- const scar=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.version==='8.5.1'?createSpiritualScarProvider({game,fromUuid,nativeAdapter:shieldAdapter,reactionRestriction,getRollContext:roll=>cycle?.getRollContext(roll),followup:createSpiritualScarFollowup({game,fromUuid,Hooks,runTargetSave:targetSaves['spiritual-scar'].run,onError:report}),onError:report}):null;
+ const scar=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'?createSpiritualScarProvider({game,fromUuid,nativeAdapter:shieldAdapter,reactionRestriction,getRollContext:roll=>cycle?.getRollContext(roll),followup:createSpiritualScarFollowup({game,fromUuid,Hooks,runTargetSave:targetSaves['spiritual-scar'].run,onError:report}),onError:report}):null;
  const deflection=createTranscendentDeflection({game,fromUuid,choose,reactionRestriction,getRollContext:roll=>cycle?.getRollContext(roll),nativeBridgeAvailable:shieldAdapter.nativeBridgeAvailable,onError:report});
  shieldAdapter.addNativeInterceptor(deflection.interceptNative,{matches:deflection.hasNativePlan});
  const deflectionRepair=createDeflectionRepair({game,fromUuid,onError:report});
@@ -187,8 +187,8 @@ Hooks.once('ready',async()=>{
  const fear=createFearAutomation({game,fromUuid,choose,reactionRestriction,onError:report});
  const familiar=createBardFamiliarProvider({game,fromUuid,onError:report});
  const prayer=game.world?.id==='ujx5r8oipw7ercdr'?createDesperatePrayerProvider({game,fromUuid,choose,onError:report,castEvents:nativeCasts}):null;
- const halflingLuck=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.version==='8.5.1'?createHalflingLuckProvider({game,fromUuid,choose:showNativeChoice,onError:report}):null;
- const forceBarrage=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.version==='8.5.1'?createForceBarrageBridge({game,fromUuid,nativeCasts,onError:report}):null;
+ const halflingLuck=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'?createHalflingLuckProvider({game,fromUuid,choose:showNativeChoice,onError:report}):null;
+ const forceBarrage=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'?createForceBarrageBridge({game,fromUuid,nativeCasts,onError:report}):null;
  roaring=forceBarrage?createRoaringApplause({game,fromUuid,nativeCasts,effects:createRoaringEffects({game,fromUuid,onError:report}),onError:report,onManual:()=>ui.notifications.warn('本次轰然喝彩需要GM核对结果或时长，请查看原施法卡。')}):null;
  const roaringSustain=roaring?createRoaringSustain({game,fromUuid,provider:roaring,reactionCompatibility:()=>({owned:true,checker:roaringReactionCompatibility?.ready()===true}),onError:report}):null;
  if(forceBarrage)nativeCasts.addCastMiddleware(forceBarrage.interceptCast);

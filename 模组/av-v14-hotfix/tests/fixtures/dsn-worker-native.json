@@ -1,0 +1,26 @@
+{
+  "exec": "exec(i,r=null,o=[],c){return new Promise((d,p)=>{const g=this._messageId++;this._messages.set(g,[d,p,c]),this._worker.postMessage([g,r,i],o||[])})}",
+  "sha256": "9f910bea44df0fe32a3ad4153b4525e556b5ace83ea99ac47124ee8165aa5e91",
+  "provenance": [
+    {
+      "version": "6.4.3",
+      "sha256": "c5d68e23c907f11e63c008066c639dce7a6f32c3f14edb90088364d4fe3dbdbe",
+      "bytes": 1964324,
+      "capturedAt": "2026-10-06T05:20:49.324615+00:00",
+      "fragment": {
+        "start": 1431852,
+        "end": 1431999
+      }
+    },
+    {
+      "version": "6.4.2",
+      "sha256": "8ea57ede46b6b0f6e4367c1d9b1574c93ead3a95e981810945b53e7daf18e236",
+      "bytes": 1964091,
+      "capturedAt": "2026-10-05T16:37:40.351580+00:00",
+      "fragment": {
+        "start": 1431852,
+        "end": 1431999
+      }
+    }
+  ]
+}

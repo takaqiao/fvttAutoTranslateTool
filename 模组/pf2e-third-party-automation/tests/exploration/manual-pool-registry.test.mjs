@@ -22,7 +22,7 @@ export async function sourceFixture(options={}){
  function make(id,nonce,issuer){
   const clientLedger=id==='G'?(options.createLedger?.(storage,nonce)??storage.client(nonce)):ledger,recorderLedger=options.recorderLedger?.(clientLedger,nonce)??clientLedger,sourceLedger=options.sourceLedger?.(clientLedger,nonce)??clientLedger;
   const hooks=new Map(),listeners=new Set(),scenes=new Map();scenes.active={tokens:new Map([['T',token]])};
-  const game={user:users.get(id),users,actors,messages,time:{worldTime:100},system:{version:'8.5.1'},scenes,pf2e:{actions:new Map()},socket:{on:(_,fn)=>listeners.add(fn),off:(_,fn)=>listeners.delete(fn),emit(_channel,packet,options){packets.push({nonce,packet:structuredClone(packet)});for(const client of clients.filter(client=>options.recipients.includes(client.game.user.id)))for(const receive of client.listeners)receive(structuredClone(packet),id)}}};
+  const game={user:users.get(id),users,actors,messages,time:{worldTime:100},system:{id:'pf2e',version:options.systemVersion??'8.5.1'},scenes,pf2e:{actions:new Map()},socket:{on:(_,fn)=>listeners.add(fn),off:(_,fn)=>listeners.delete(fn),emit(_channel,packet,options){packets.push({nonce,packet:structuredClone(packet)});for(const client of clients.filter(client=>options.recipients.includes(client.game.user.id)))for(const receive of client.listeners)receive(structuredClone(packet),id)}}};
   const Hooks={on:(event,fn)=>{hooks.set(event,fn);return event},off:event=>hooks.delete(event)},hpPools={discover:()=>({ready:true,provider:'pf2e-toolbelt',poolUUID:'Actor.M',memberUUIDs:['Actor.M','Actor.P']})};let gate;
   const batchProvider={descriptor:{version:1,providerId:'pf2e',providerVersion:'8.5.1',protocol:'pf2e-third-party-automation:manual-pool-batch:1',model:'numeric-empty-reception.v1',baseSourceSHA256:sha},subscribe(_observer,{authorizeBatch}){gate=authorizeBatch;return()=>{}}};
   const nativeActions=getNativeActionEvents({game}),sources=createManualPoolSources({game,Hooks,ledger:id==='G'?sourceLedger:undefined,fromUuid:async uuid=>actors.get(uuid.split('.').at(-1))??(uuid===token.uuid?token:null),hpPools,clientNonce:nonce,isIssuer:()=>issuer,getSession:()=>id==='G'?clientLedger.getSession('S'):(privateReads++,Promise.reject(Error('player-ledger-read'))),getBatchProvider:()=>batchProvider,onEnroll:source=>options.onEnroll?options.onEnroll(source,value):value.recorder.observePoolSource(source),onError:error=>errors.push(error),timeoutMs:100});
@@ -46,6 +46,12 @@ async function nativeSource(f){
   await new Promise(resolve=>setTimeout(resolve,1));
  }
 }
+test('a known source on PF2e 8.6 records its actual runtime and expires after a version change',async t=>{
+ const f=await sourceFixture({systemVersion:'8.6.0'});t.after(()=>f.close());const result=await nativeSource(f),activity=await f.ledger.getActivity(`manual:${result.flags.pf2e.origin.messageId}`);
+ assert.equal(activity.proof.manualPoolSource.version,2);assert.equal(activity.proof.manualPoolSource.provider.version,'8.6.0');assert.equal(activity.proof.manualPoolSource.sourceVersion,'8.6.0');
+ const admission=f.owner.gate({phase:'admit',batch:{message:result}});assert.equal(admission.isCurrent(),true);
+ f.owner.game.system.version='8.6.1';assert.equal(admission.isCurrent(),false);
+});
 export async function workbenchSource(f,options={}){
  const command=fs.readFileSync(process.env.WORKBENCH_MANUAL_SOURCE??'C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/treat-wounds-actual-command.txt','utf8');assert.equal(createHash('sha256').update(command).digest('hex'),'b3bac907654522fda62b80da182fc253f7147493a465a82081219fb2a0f1308f');
  const getHealSuccess=Function(`${command.slice(command.indexOf('const getHealSuccess ='),command.indexOf('/**\n * Perform a roll'))}\nreturn getHealSuccess;`)();

@@ -6,7 +6,7 @@ import {MODULE_ID} from '../../scripts/exploration/schema.mjs';
 function fixture(){
  const gm={id:'G',isGM:true,active:true,getFlag:()=>null},calls=[];
  const users=new Map([['G',gm],['G2',{...gm,id:'G2'}],['P',{...gm,id:'P',isGM:false}]]);users.activeGM=gm;
- const game={user:gm,users,settings:{get:()=>''},modules:new Map(),packs:new Map(),messages:new Map(),actors:{},time:{worldTime:0},system:{version:'8.5.1'},socket:{id:'socket',connected:true,on(){},off(){},emit(){calls.push('emit');throw Error('unexpected-socket-write')}},pf2e:{actions:new Map()}};
+ const game={user:gm,users,settings:{get:()=>''},modules:new Map(),packs:new Map(),messages:new Map(),actors:{},time:{worldTime:0},system:{id:'pf2e',version:'8.5.1'},socket:{id:'socket',connected:true,on(){},off(){},emit(){calls.push('emit');throw Error('unexpected-socket-write')}},pf2e:{actions:new Map()}};
  const nativeCasts={addMatcher(){},addCapture(){},addActorUpdateMiddleware(){},addConsumePolicy(){},addObserver(){}};
  return {game,calls,nativeCasts,Hooks:{on(){},off(){}},fromUuid:async()=>null};
 }
@@ -50,14 +50,26 @@ test('first root provisioning keeps the new runtime available for owner evidence
  await assert.doesNotReject(runtime.ownerOperations.reconcile({id:'Absent',actorUUID:'Actor.None',providerId:'treat-wounds',options:{}}));
 });
 
-test('the panel resumes through the runtime encounter and PF2e version guards',async t=>{
+test('the panel resumes through the runtime encounter and PF2e identity guards',async t=>{
  const before=globalThis.foundry;t.after(()=>{globalThis.foundry=before});globalThis.foundry={applications:{api:{ApplicationV2:class{render(){return this}}}}};
  for(const mode of ['system','encounter']){
   const f=documentFixture();f.seed({sessions:{S:{id:'S',status:'paused',actorUUIDs:[],startedAt:0,cursorAt:0,budgetEndsAt:600,activityIds:[],goalsByPool:[]}},activities:{},clocks:{}});f.game.user.getFlag=()=> 'S';
   const runtime=createExplorationRuntime(f);await runtime.bind({});await runtime.api.storage.initialize({issuersStopped:true,clientsReloaded:true,recoveryDisabled:true});
-  if(mode==='system')f.game.system.version='8.5.2';else f.game.combat={started:true};
+  if(mode==='system')f.game.system.id='other';else f.game.combat={started:true};
   const panel=await runtime.api.open([]);await assert.rejects(panel.act('resume',{}),/encounter-or-system-unavailable/);
  }
+});
+
+test('PF2e 8.6 runtime can start and resume automatic recovery with its actual diagnostic version',async()=>{
+ const f=documentFixture();f.game.system.version='8.6.0';
+ const actor={id:'H',uuid:'Actor.H',name:'Healer',type:'character',items:[],testUserPermission:()=>true,system:{attributes:{hp:{value:20,max:20,temp:0}},resources:{focus:{value:0,max:0}}}};
+ f.fromUuid=async uuid=>uuid===actor.uuid?actor:null;f.game.actors=new Map([['H',actor]]);
+ const runtime=createExplorationRuntime(f);await runtime.bind({});
+ await runtime.api.storage.provision({issuersStopped:true,clientsReloaded:true,recoveryDisabled:true});
+ await runtime.api.storage.initialize({issuersStopped:true,clientsReloaded:true,recoveryDisabled:true});
+ const session=await runtime.api.start({actorUUIDs:[actor.uuid],budgetSeconds:600,autoRun:false});assert.ok(session.id);
+ assert.equal(runtime.api.diagnostic().nativeVersion,'8.6.0');
+ await runtime.api.stop(session.id);await assert.doesNotReject(runtime.api.resume(session.id,{autoRun:false}));
 });
 
 test('runtime initialization quarantines legacy automatic sessions without adopting their driver',async()=>{

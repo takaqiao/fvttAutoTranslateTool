@@ -40,7 +40,7 @@ function provider(){
 
 function ownerFixture(){
  const f=manualEvidenceFixture();f.messages.clear();f.game.time.worldTime=100;
- f.game.system={version:'8.5.1'};f.game.release={generation:14};
+ f.game.system={id:'pf2e',version:'8.5.1'};f.game.release={generation:14};
  f.healer.type='character';f.patient.type='character';
  f.patient.testUserPermission=user=>user?.isGM===true||user?.id==='HUSER';
  f.binding={invocationId:'INV',messageId:'C',useId:'U',tag:'exploration-manual:U',actorUUID:'Actor.H',patientUUID:'Actor.P',sourceUserId:'HUSER',startedAt:100,recordingSessionId:'S'};
@@ -100,7 +100,7 @@ test('an actual creator local terminal reaches the GM only after its original Pr
   assert.equal(f.hub.packets.length,before);assert.equal((await f.activity()).state,'awaiting-evidence');
   resolve(f.terminal());await flush();const activity=await f.activity();
   assert.equal(activity.state,'confirmed');assert.deepEqual(activity.proof.immunityIds,['Actor.P.Item.I']);
-  assert.deepEqual(activity.proof.receiptIds,['R']);assert.deepEqual(activity.proof.nativeImmunity,f.terminal());
+  assert.deepEqual(activity.proof.receiptIds,['R']);assert.deepEqual(activity.proof.nativeImmunity,{...f.terminal(),sourceVersion:'8.5.1'});
   assert.equal(f.commits.length,1);assert.equal(f.patient.items.size,1);assert.equal(f.game.time.worldTime,100);
  }finally{f.stop()}
 });
@@ -196,7 +196,7 @@ test('an owner with no private ledger read access completes from its authenticat
  try{
   assert.deepEqual(f.source,{sessionId:'S',startedAt:100,actorUUID:'Actor.H',userId:'HUSER'});
   await f.emit(Promise.resolve(f.terminal()));const activity=await f.activity();
-  assert.equal(activity.state,'confirmed');assert.deepEqual(activity.proof.nativeImmunity,f.terminal());
+  assert.equal(activity.state,'confirmed');assert.deepEqual(activity.proof.nativeImmunity,{...f.terminal(),sourceVersion:'8.5.1'});
   assert.equal(f.commits.length,1);assert.deepEqual(f.bridgeErrors,[]);
  }finally{f.stop()}
 });

@@ -19,8 +19,8 @@ export const battleCryReactionAvailable=(actor,game,{reactionRestriction}={})=>r
 
 const foe=(actor,target)=>target?.actor&&target.actor.uuid!==actor.uuid&&conscious(target.actor)&&!(actor.isAllyOf?.(target.actor)??false);
 const intimidateImmune=(target,actor)=>values(target.items).some(i=>hasSource(i,DEMORALIZE_IMMUNITY)&&i.isExpired!==true&&i.system?.context?.origin?.actor===actor.uuid);
-function adjustments(game,raw,options){
- const map={};for(const entry of raw){if(entry.predicate&&!(typeof entry.predicate.test==='function'?entry.predicate.test(options):new game.pf2e.Predicate(entry.predicate).test(options)))continue;for(const key of ['all',...OUTCOMES])if(entry.adjustments?.[key])map[key]=structuredClone(entry.adjustments[key]);}return map;
+function adjustments(game,raw,options,checkOptions){
+ const map={};for(const entry of raw){const entryOptions=entry.options?new Set([...checkOptions,...entry.options]):options;if(entry.predicate&&!(typeof entry.predicate.test==='function'?entry.predicate.test(entryOptions):new game.pf2e.Predicate(entry.predicate).test(entryOptions)))continue;for(const key of ['all',...OUTCOMES])if(entry.adjustments?.[key])map[key]=structuredClone(entry.adjustments[key]);}return map;
 }
 const equivalent=(a,b)=>['all',...OUTCOMES].every(key=>a?.[key]?.amount===b?.[key]?.amount&&a?.[key]?.label===b?.[key]?.label);
 
@@ -90,7 +90,8 @@ export function createFearAutomation({game,reactionRestriction,fromUuid=globalTh
    if(bindings.some(({target,actorUuid})=>target.actor?.uuid!==actorUuid||target.parent!==origin.parent||origin.parent.tokens.get(target.id)!==target))throw Error('惊世胡言的原目标在检定期间已改变。');
    const card=checked.check,roll=card.rolls[0],context=card.flags?.pf2e?.context??{},natural=roll.isDeterministic?roll.terms?.find(t=>t.constructor?.name==='NumericTerm')?.total:roll.dice?.find(d=>d.faces===20)?.total;
    const dice={total:roll.total,natural},base=[...(context.options??[]),...(context.contextualOptions?.postRoll??[])].filter(o=>!o.startsWith('check:total:delta:'));
-   const adjustmentFor=dc=>adjustments(game,raw,new Set([...base,`check:total:delta:${roll.total-dc}`])),degree=dc=>degreeForSharedCheck(dice,dc,adjustmentFor(dc)).value;
+   const checkOptions=(context.contextualOptions?.postRoll??[]).filter(option=>!option.startsWith('check:total:delta:'));
+   const adjustmentFor=dc=>adjustments(game,raw,new Set([...base,`check:total:delta:${roll.total-dc}`]),[...checkOptions,`check:total:delta:${roll.total-dc}`]),degree=dc=>degreeForSharedCheck(dice,dc,adjustmentFor(dc)).value;
    const reference=adjustmentFor(dcs[0]),nativeDegree=degreeForSharedCheck(dice,dcs[0],reference);
    if(!equivalent(reference,context.dosAdjustments)||OUTCOMES[nativeDegree.value]!==context.outcome||OUTCOMES[nativeDegree.unadjusted]!==context.unadjustedOutcome)throw Error('惊世胡言成功度无法与原生检定对照，尚未修改目标。');
    for(const [index,target]of unique.entries()){

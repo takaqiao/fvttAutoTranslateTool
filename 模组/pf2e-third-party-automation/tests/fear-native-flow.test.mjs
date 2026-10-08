@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createFearAutomation,FEAR_SOURCES} from '../scripts/fear-automation.mjs';
+import {Predicate, adjustments as nativeAdjustments, degree as nativeDegree} from './knowledge-pf2e-860-fixture.mjs';
 const M='pf2e-third-party-automation';
 const update=async function(changes){for(const[path,value]of Object.entries(changes)){let at=this;const keys=path.split('.');for(const k of keys.slice(0,-1))at=at[k]??={};at[keys.at(-1)]=value;}return this;};
 function fixture(type='attack-roll'){
@@ -60,6 +61,24 @@ test('Disturbing Knowledge uses the author native check and keeps its target DC 
  await f.provider.executeUsage({actor:f.actor,item,message:f.message,user:f.player,action:'fear:disturbing-knowledge'});
  assert.equal(rollRequests.length,1);assert.equal(rollRequests[0].skipDialog,false);assert.equal(rollRequests[0].target.uuid,f.target.actor.uuid);assert.equal(rollRequests[0].dc.visible,false);
  assert.equal(effects.length,1);assert.equal(f.game.messages.get('knowledge-check').author,f.player);assert.doesNotMatch(JSON.stringify(f.message.flags[M]),/"dc"\s*:/);
+});
+
+for(const scenario of [
+ {name:'its own perspective',predicate:['self:level:8',{not:'self:level:5'},'check:total:natural:12','check:roll:total:natural:12',{gte:['check:total:delta',-5]}],options:['self:level:8'],degree:2},
+ {name:'no global perspective leakage',predicate:['self:level:5'],options:['self:level:8'],degree:1},
+ {name:'empty entry options',predicate:['self:level:5'],options:[],degree:1},
+])test(`Disturbing Knowledge matches 8.6 native adjustments with ${scenario.name}`,async()=>{
+ const f=fixture(),effects=[],item={id:'knowledge',uuid:`${f.actor.uuid}.Item.knowledge`,actor:f.actor,type:'feat',sourceId:FEAR_SOURCES.knowledge};f.actor.items.set(item.id,item);f.game.pf2e.Predicate=Predicate;
+ f.message.flags.pf2e={origin:{uuid:item.uuid},context:{}};f.message.flags[M]={usageInput:{actualUse:true,targetUuids:[f.target.uuid]}};
+ const entry={predicate:new Predicate(scenario.predicate),options:new Set(scenario.options),adjustments:{all:{amount:1,label:'8.6 adjustment'}}};f.actor.synthetics={degreeOfSuccessAdjustments:{occultism:[entry]}};
+ let frightened=0,rolls=0;f.target.actor.skills={will:{dc:{value:29}}};f.target.actor.createEmbeddedDocuments=async(_type,data)=>{effects.push(...data);return data;};f.target.actor.increaseCondition=async()=>{frightened++;};
+ f.actor.skills.occultism={rank:3,domains:['occultism'],roll:async args=>{
+  rolls++;const options=[...args.extraRollOptions,'self:level:5'],input={total:24,die:12,dc:29,rollOptions:options,dosAdjustments:[entry]},degree=nativeDegree(input);assert.equal(degree,scenario.degree);
+  const check={id:'knowledge-check',author:f.player,speaker:{actor:f.actor.id},rolls:[{total:24,dice:[{faces:20,total:12,results:[{result:12,active:true}]}]}],flags:{pf2e:{context:{type:'skill-check',dc:args.dc,options,target:{actor:f.target.actor.uuid,token:f.target.uuid},contextualOptions:{postRoll:['check:total:24','check:total:natural:12','check:roll:total:natural:12','check:total:delta:-5']},outcome:degree===2?'success':'failure',unadjustedOutcome:'failure',dosAdjustments:nativeAdjustments(input)}}},update};
+  f.game.messages.set(check.id,check);await args.callback(check.rolls[0],check.flags.pf2e.context.outcome,check);return check.rolls[0];
+ }};
+ await f.provider.executeUsage({actor:f.actor,item,message:f.message,user:f.player,action:'fear:disturbing-knowledge'});
+ assert.equal(rolls,1);assert.equal(effects.length,1);assert.equal(frightened,scenario.degree===2?1:0);
 });
 
 test('a legendary Knowledge check cannot apply its effects to a secondary token relinked during the native dialog',async()=>{

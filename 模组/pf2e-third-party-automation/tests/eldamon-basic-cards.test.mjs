@@ -58,8 +58,8 @@ test('only owned native item cards qualify, including native self-effect shield 
  assert.equal(provider.cardContext(f.message),null);
 });
 
-test('absent Eldamon, another world or another system version installs no card hook',()=>{
- for(const change of [f=>f.game.modules.clear(),f=>f.game.world.id='another',f=>f.game.system.version='8.6.0']){
+test('absent Eldamon, another world or another system installs no card hook',()=>{
+ for(const change of [f=>f.game.modules.clear(),f=>f.game.world.id='another',f=>f.game.system.id='sf2e']){
   const f=fixture();change(f);const provider=f.build();
   provider.register({Hooks:{on:(...args)=>f.hooks.push(args)}});
   assert.equal(f.hooks.length,0);assert.equal(provider.cardContext(f.message),null);

@@ -6,7 +6,7 @@ import {createPatreonManualImmunity} from '../../scripts/exploration/patreon-man
 import {manualEvidenceFixture,flush,M} from './manual-evidence-fixture.mjs';
 
 function fixture({shared=true}={}){
- const f=manualEvidenceFixture();f.messages.clear();f.game.time.worldTime=0;f.game.system={version:'8.5.1'};
+ const f=manualEvidenceFixture();f.messages.clear();f.game.time.worldTime=0;f.game.system={id:'pf2e',version:'8.5.1'};
  const binding={invocationId:'INV',messageId:'C',useId:'U',tag:'exploration-manual:U',actorUUID:'Actor.H',patientUUID:'Actor.P',sourceUserId:'HUSER',startedAt:0,recordingSessionId:'S'};
  const descriptor={version:1,providerId:'patreon-v3',providerVersion:'3.2.29',baseSourceSHA256:'89ded325b92fa6b03dcf9257337ae2d628b3e99c987fe22cef9fff4e1837f4e9',pf2eSourceSHA256:'d63da8312831b84905e6866b1dd3f9d93e95c1012955b0177ad2ce8ccf246157'};
  f.game.modules=new Map([['patreon-v3',{active:true,version:'3.2.29',api:{explorationManualImmunity:{descriptor}}}]]);
@@ -15,7 +15,7 @@ function fixture({shared=true}={}){
  f.receipt=(id='R')=>({id,author:f.users.get('PUSER'),speaker:{actor:'P'},flags:{pf2e:{context:{type:'damage-taken',options:[`${M}:source:D:0`]},appliedDamage:{uuid:'Actor.P',isHealing:true,isReverted:false}}}});
  f.item={id:'I',uuid:'Actor.P.Item.I',actor:f.patient,parent:f.patient,type:'effect',sourceId:'Compendium.pf2e.feat-effects.Item.Lb4q2bBAgxamtix5',system:{start:{value:0},duration:{value:1,unit:'hours',expiry:'turn-start',sustained:false}},flags:{[M]:{explorationManualPatreonImmunity:{...binding,creatorId:'PUSER'}}}};
  f.patient.items.set('I',f.item);f.messages.set('C',f.check);f.messages.set('D',f.child);
- f.terminal={descriptor,binding,creatorId:'PUSER',itemUUID:f.item.uuid,start:0,duration:structuredClone(f.item.system.duration),expiresAt:3600};
+ f.terminal={sourceVersion:'8.5.1',descriptor,binding,creatorId:'PUSER',itemUUID:f.item.uuid,start:0,duration:structuredClone(f.item.system.duration),expiresAt:3600};
  f.source={version:1,sourceNonce:'observed-source'};
  f.claim={state:'applying',terminal:{receiptId:'R'},selectedPatientUUID:'Actor.P',poolUUID:'Actor.M',request:{resultId:'D'}};
  let state={sessions:{S:{id:'S',manual:true,status:'recording',actorUUIDs:['Actor.H','Actor.P'],activityIds:['manual:C']}},activities:{'manual:C':{id:'manual:C',sessionId:'S',providerId:'manual',kind:'treatment',actorUUID:'Actor.H',patientUUIDs:['Actor.P'],hpPoolUUIDs:[shared?'Actor.M':'Actor.P'],state:'awaiting-evidence',startedAt:0,endsAt:600,durationSeconds:600,source:{manual:true,type:'native-action',messageId:'C',tag:binding.tag},options:{effectiveOutcome:'success',missing:['native-immunity-receipt','native-application-receipt',...shared?['shared-hp-completion-unavailable']:[]]},proof:{useId:'U',checkIds:['C'],resultIds:['D'],receiptIds:[],immunityIds:[]}}},clocks:{}};

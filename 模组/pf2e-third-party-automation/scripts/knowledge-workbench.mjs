@@ -18,15 +18,22 @@ const scoped=(original,overrides)=>new Proxy(Object.create(Object.getPrototypeOf
 });
 function targetDC(actor){const level=actor.level;if(!Number.isInteger(level))return null;const base=level>20?level*2:14+level+(level<0?0:Math.floor(level/3));const adjustment={common:0,uncommon:2,rare:5,unique:10}[actor.rarity??'common'];return Number.isFinite(adjustment)?base+adjustment:null;}
 function naturalRollOptions(roll){if(!Array.isArray(roll?.dice))return null;const natural=roll.dice.map(die=>die.results?.find(result=>result.active&&!result.discarded)?.result??null).find(value=>value!=null);return [`check:total:natural:${natural}`,`check:roll:total:natural:${natural}`];}
-export function recallDegree({total,die,dc,domains=[],rollOptions=[],actor,roll}){
+export function recallDegree({total,die,dc,domains=[],rollOptions=[],actor,roll,dosAdjustments,Predicate=globalThis.game?.pf2e?.Predicate}){
  if(!Number.isFinite(total)||!Number.isFinite(dc))return null;
  let degree=total-dc>=10?3:total>=dc?2:total-dc<=-10?0:1;
  if(die===20)degree=Math.min(3,degree+1);else if(die===1)degree=Math.max(0,degree-1);
  const nativeNatural=rollOptions.some(option=>option.startsWith('check:total:natural:')||option.startsWith('check:roll:total:natural:'))?[]:roll===undefined?[`check:total:natural:${die??undefined}`,`check:roll:total:natural:${die??undefined}`]:naturalRollOptions(roll);if(!nativeNatural)return null;
- const options=new Set([...rollOptions,...nativeNatural,`check:total:${total}`,`check:total:delta:${total-dc}`]),adjustments={};
- for(const domain of domains)for(const entry of actor?.synthetics?.degreeOfSuccessAdjustments?.[domain]??[])if(entry.predicate?.test?.(options)??true)for(const key of ['all',...outcomes])if(entry.adjustments?.[key])adjustments[key]=entry.adjustments[key];
+ const checkOptions=[...nativeNatural,...rollOptions.filter(option=>option.startsWith('check:total:natural:')||option.startsWith('check:roll:total:natural:')),`check:total:${total}`,`check:total:delta:${total-dc}`],options=new Set([...rollOptions,...checkOptions]),adjustments={};
+ const entries=dosAdjustments??domains.flatMap(domain=>actor?.synthetics?.degreeOfSuccessAdjustments?.[domain]??[]);
+ for(const entry of entries){const entryOptions=entry.options?new Set([...checkOptions,...entry.options]):options,predicate=entry.predicate;if(predicate&&typeof predicate.test!=='function'&&!Predicate?.test)return null;if(predicate&&!(typeof predicate.test==='function'?predicate.test(entryOptions):Predicate.test(predicate,entryOptions)))continue;for(const key of ['all',...outcomes])if(entry.adjustments?.[key])adjustments[key]=entry.adjustments[key];}
  for(const key of ['all',...outcomes]){const {amount,label}=adjustments[key]??{};if(!amount||!label||degree===3&&amount===1||degree===0&&amount===-1||key!=='all'&&key!==outcomes[degree])continue;const explicit=outcomes.indexOf(amount);return explicit>=0?explicit:Number.isFinite(amount)?Math.max(0,Math.min(3,degree+amount)):degree;}
  return degree;
+}
+function savedAdjustments(context){
+ // StatisticCheck skips extraction without a DC. Preserve the contextual rules
+ // before afterRoll consumes them so a later GM DC can still use that check.
+ const entries=Number.isFinite(context.dc?.value)?context.dosAdjustments:[...new Set(context.domains??[])].flatMap(domain=>context.actor?.synthetics?.degreeOfSuccessAdjustments?.[domain]??[]);
+ return entries?.map(entry=>({adjustments:structuredClone(entry.adjustments),...(entry.predicate?{predicate:entry.predicate.toObject?.()??(Array.isArray(entry.predicate)?structuredClone(entry.predicate):entry.predicate)}:{}),...(entry.options?{options:[...entry.options]}:{})}));
 }
 function primarySkills(actor,target){const relevant=new Set();for(const [trait,list]of Object.entries(identify))if(target?.traits?.has?.(trait)||values(target?.traits).includes(trait))for(const skill of list)relevant.add(skill);if(actor.itemTypes?.feat?.some(f=>(f.slug??f.system?.slug)==='unified-theory')&&['religion','occultism','nature'].some(s=>relevant.has(s)))relevant.add('arcana');return [...relevant];}
 function recallDC(actor,target,statistic,dc){if(Number.isFinite(dc))return dc;if(!target)return null;if(statistic&&(actor.skills[statistic]?.lore||!primarySkills(actor,target).includes(statistic)))return null;return targetDC(target);}
@@ -48,7 +55,7 @@ export async function captureWorkbenchRecall({game,actor,token,user=game.user,ta
   authorization(game,actor,user);const targetUuid=currentTarget;
   const key=`${targetUuid??''}:${slug}`,cached=receipts.get(key);if(cached){await options.callback?.(cached.roll,undefined,cached.message);return cached.roll;}
   const probeTarget=targets.find(target=>target.uuid===targetUuid),probeDC=recallDC(actor,probeTarget?.actor,statistic,dc);
-  try{const captured=await withKnowledgeProbe({actor,statistic:slug,globals},marker=>skill.roll({...options,dc:Number.isFinite(probeDC)?{value:probeDC,visible:false}:null,extraRollOptions:[...new Set([...(options.extraRollOptions??[]),...(origin?.rollOptions??[]),'secret',marker])],callback:(roll,outcome,message)=>{const context=message?.flags?.pf2e?.context??{};if(!Number.isFinite(roll?.options?.totalModifier)||context.type!=='skill-check'||!context.options?.includes('action:recall-knowledge'))throw Error('Workbench 原生技能回执不完整。');probes.set(key,{statistic:slug,label:skill.label??slug,modifier:roll.options.totalModifier,domains:context.domains??[],rollOptions:context.options??[],targetUuid,lore:!!skill.lore});return options.callback?.(roll,outcome,message);}}));if(!captured.receipt.captured)throw Error('原生回忆知识探测接口未接入或已取消；不会再次投骰。');receipts.set(key,captured.receipt);return captured.receipt.roll;}catch(error){fail(error);return null;}
+  try{const captured=await withKnowledgeProbe({actor,statistic:slug,globals},marker=>skill.roll({...options,dc:Number.isFinite(probeDC)?{value:probeDC,visible:false}:null,extraRollOptions:[...new Set([...(options.extraRollOptions??[]),...(origin?.rollOptions??[]),'secret',marker])],callback:(roll,outcome,message)=>{const context=message?.flags?.pf2e?.context??{};if(!Number.isFinite(roll?.options?.totalModifier)||context.type!=='skill-check'||!context.options?.includes('action:recall-knowledge'))throw Error('Workbench 原生技能回执不完整。');probes.set(key,{statistic:slug,label:skill.label??slug,modifier:roll.options.totalModifier,domains:context.domains??[],rollOptions:context.options??[],targetUuid,lore:!!skill.lore});return options.callback?.(roll,outcome,message);}}));if(!captured.receipt.captured)throw Error('原生回忆知识探测接口未接入或已取消；不会再次投骰。');probes.get(key).dosAdjustments=savedAdjustments(captured.receipt.context);receipts.set(key,captured.receipt);return captured.receipt.roll;}catch(error){fail(error);return null;}
  }});
  const scopedActor=scoped(actor,{skills:preparedSkills});
  const scopedToken=scoped(tokenDocument.object??tokenDocument,{actor:scopedActor,document:tokenDocument});
@@ -78,7 +85,7 @@ export async function captureWorkbenchRecall({game,actor,token,user=game.user,ta
   for(const rule of receipt.actor.rules?.filter(rule=>!rule.ignored)??[])rule.beforeRoll?.(receipt.domains,receipt.primaryContext.options);
   if(conflict)receipt.primaryContext.options.add('misfortune');
   primaryRoll=await game.pf2e.Check.roll(receipt.check,receipt.primaryContext,null,async(roll,_outcome,nativeMessage)=>{
-   primaryNativeContext=nativeMessage.flags.pf2e.context;primary.rollOptions=primaryNativeContext.options;primary.modifier=roll.options.totalModifier;primary.nativeDegree=roll.options.degreeOfSuccess;primary.nativeDC=primaryDC;
+   primaryNativeContext=nativeMessage.flags.pf2e.context;primary.rollOptions=primaryNativeContext.options;primary.modifier=roll.options.totalModifier;primary.nativeDegree=roll.options.degreeOfSuccess;primary.nativeDC=primaryDC;primary.dosAdjustments=savedAdjustments(receipt.primaryContext);
    if(!conflict&&(roll.dice.length||roll.total!==10+proficiency||roll.options.totalModifier!==proficiency))throw Error('原生驾轻就熟未保留 10 加熟练值规则。');
    rawRoll=conflict?globals.Roll.fromTerms(roll.dice):await new globals.Roll('10').evaluate({allowInteractive:false});await created.update({rolls:[rawRoll],[`flags.${MODULE_ID}.workbenchRecall.die`]:conflict?rawRoll.total:null});
   });
@@ -111,7 +118,7 @@ export async function captureWorkbenchRecall({game,actor,token,user=game.user,ta
   // the installed public Check boundary with a fresh live wrapper chain.
   primaryRoll=await game.pf2e.Check.roll(primaryReceipt.check,primaryReceipt.primaryContext,null,async(roll,_outcome,nativeMessage)=>{
    primaryNativeContext=nativeMessage.flags.pf2e.context;primary.rollOptions=primaryNativeContext.options;
-   primary.modifier=roll.options.totalModifier;primaryReceipt.roll.options.totalModifier=roll.options.totalModifier;primary.nativeDegree=roll.options.degreeOfSuccess;primary.nativeDC=primaryDC;
+   primary.modifier=roll.options.totalModifier;primaryReceipt.roll.options.totalModifier=roll.options.totalModifier;primary.nativeDegree=roll.options.degreeOfSuccess;primary.nativeDC=primaryDC;primary.dosAdjustments=savedAdjustments(primaryReceipt.primaryContext);
    rawRoll=roll.dice.length?globals.Roll.fromTerms(roll.dice):await new globals.Roll(String(roll.total-roll.options.totalModifier)).evaluate({allowInteractive:false});
    if(!Number.isInteger(rawRoll.total)||rawRoll.total<1||rawRoll.total>20)throw Error('原生回忆知识选中骰点不可验证。');
    await created.update({rolls:[rawRoll],[`flags.${MODULE_ID}.workbenchRecall.die`]:rawRoll.total});
@@ -127,7 +134,7 @@ export async function captureWorkbenchRecall({game,actor,token,user=game.user,ta
   const die=assuranceApplied?null:created.rolls?.[0]?.total;if(!assuranceApplied&&(!Number.isInteger(die)||die<1||die>20))throw Error('Workbench 原始 d20 不可验证。');
  const candidates=[];const scopeTargets=targets.length?targets:[null];
  const nativeNatural=naturalRollOptions(primaryRoll);
- for(const target of scopeTargets){const allowed=statistic?[statistic]:target?primarySkills(actor,target.actor):skills;for(const probe of probes.values()){if(probe.targetUuid!==(target?.uuid??null)||!allowed.includes(probe.statistic)&&!probe.lore)continue;if(statistic&&probe.statistic!==statistic)continue;const total=(assuranceApplied?10:die)+probe.modifier,effectiveDC=recallDC(actor,target?.actor,statistic,dc);probe.rollOptions=[...new Set([...probe.rollOptions,...(nativeNatural??[])])];candidates.push({...probe,total,dc:probe.lore&&!statistic?null:effectiveDC,degree:Number.isInteger(probe.nativeDegree)&&probe.nativeDC===effectiveDC?probe.nativeDegree:recallDegree({total,die,dc:probe.lore&&!statistic?null:effectiveDC,domains:probe.domains,rollOptions:probe.rollOptions,actor,roll:primaryRoll})});}}
+ for(const target of scopeTargets){const allowed=statistic?[statistic]:target?primarySkills(actor,target.actor):skills;for(const probe of probes.values()){if(probe.targetUuid!==(target?.uuid??null)||!allowed.includes(probe.statistic)&&!probe.lore)continue;if(statistic&&probe.statistic!==statistic)continue;const total=(assuranceApplied?10:die)+probe.modifier,effectiveDC=recallDC(actor,target?.actor,statistic,dc);probe.rollOptions=[...new Set([...probe.rollOptions,...(nativeNatural??[])])];candidates.push({...probe,total,dc:probe.lore&&!statistic?null:effectiveDC,degree:Number.isInteger(probe.nativeDegree)&&probe.nativeDC===effectiveDC?probe.nativeDegree:recallDegree({total,die,dc:probe.lore&&!statistic?null:effectiveDC,domains:probe.domains,rollOptions:probe.rollOptions,dosAdjustments:probe.dosAdjustments,Predicate:game.pf2e.Predicate,actor,roll:primaryRoll})});}}
   const state={schema:1,requestId,actorUuid:actor.uuid,tokenUuid:tokenDocument.uuid,userId:user.id,targetUuids:targets.map(t=>t.uuid),targetActors,origin,statistic,assurance:assuranceApplied,assuranceRequested:assurance,die,candidates,primary:primary?{statistic:primary.statistic,targetUuid:primary.targetUuid}:null,status:primaryRoll?'consuming':'pending'};
  await created.update({[`flags.${MODULE_ID}.workbenchRecall`]:state});
  if(primaryRoll)await consumeKnowledgePrimary({message:created,candidate:candidates.find(candidate=>candidate.statistic===primary.statistic&&candidate.targetUuid===primary.targetUuid)??primary,receipt:receipts.get(`${primary.targetUuid??''}:${primary.statistic}`),roll:primaryRoll});
@@ -161,7 +168,7 @@ export async function finalizeWorkbenchRecall({game,message,user=game.user,stati
  if(!candidate)throw Error('请选择本次已保存的候选技能；不能接收外部检定总值。');
  if(state.result){if(state.result.statistic!==candidate.statistic||Number.isFinite(dc)&&dc!==state.result.dc)throw Error('该次机械结果已锁定；其他技能与 DC 供 GM 信息裁定，不会再次触发收益。');return state.result;}
  const effectiveDC=Number.isFinite(dc)?dc:candidate.dc;if(!Number.isFinite(effectiveDC))return null;
- const result={statistic:candidate.statistic,dc:effectiveDC,total:candidate.total,die:state.die,degree:effectiveDC===candidate.dc?candidate.degree:recallDegree({...candidate,dc:effectiveDC,die:state.die,actor:message.actor,roll:message.rolls?.[0]}),targetUuid:candidate.targetUuid,assurance:state.assurance};
+ const result={statistic:candidate.statistic,dc:effectiveDC,total:candidate.total,die:state.die,degree:effectiveDC===candidate.dc?candidate.degree:recallDegree({...candidate,dc:effectiveDC,die:state.die,actor:message.actor,roll:message.rolls?.[0],Predicate:game.pf2e?.Predicate}),targetUuid:candidate.targetUuid,assurance:state.assurance};
  if(!Number.isInteger(result.degree))return null;
  const options=[...new Set([...message.flags.pf2e.context.options,...candidate.rollOptions,...(state.origin?.rollOptions??[])])];
  await message.update({[`flags.${MODULE_ID}.workbenchRecall`]:{...state,status:'done',result},'flags.pf2e.context.outcome':outcomes[result.degree],'flags.pf2e.context.dc':{value:effectiveDC,visible:false},'flags.pf2e.context.options':options,'flags.pf2e.context.domains':candidate.domains,'flags.pf2e.context.statistic':candidate.statistic});return result;

@@ -36,7 +36,7 @@ function publicRuntimeFixture() {
     emitHook('updateActor',actor,data,{},userId);return actor;
    }};
   const tab={id,hooks,listeners,actor};
-  const game={user:users.get(userId),users,actors:new Map([['H',actor]]),messages:new Map(),packs:new Map(),modules:new Map(),system:{version:'8.5.1'},pf2e:{actions:new Map()},
+  const game={user:users.get(userId),users,actors:new Map([['H',actor]]),messages:new Map(),packs:new Map(),modules:new Map(),system:{id:'pf2e',version:'8.5.1'},pf2e:{actions:new Map()},
    settings:{get:(scope,key)=>scope===MODULE_ID&&key==='explorationLedgerUUID'?configured:'',async set(scope,key,value){assert.equal(userId,'G');configured=value;emitHook('updateSetting',{key:`${scope}.${key}`});return value}},
    time:{get worldTime(){return worldTime},async advance(dt,options){assert.equal(userId,'G');worldTime+=dt;clocks.push({tab:id,worldTime,dt,options:structuredClone(options),userId});emitHook('updateWorldTime',worldTime,dt,options,userId);return worldTime}},
    socket:{id:`socket-${id}`,connected:true,on(event,handler){const set=listeners.get(event)??new Set();set.add(handler);listeners.set(event,set)},off(event,handler){listeners.get(event)?.delete(handler)},emit(event,packet,...args){

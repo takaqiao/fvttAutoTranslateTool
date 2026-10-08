@@ -5,12 +5,18 @@ import {recoveryProposals,chooseNext} from '../../scripts/exploration/policy.mjs
 const ranks=['trained','expert','master','legendary'],dcs=[15,20,30,40];
 function fixture({rank=1,risky=false,assurance=false,outcomes=[2],skill='medicine'}={}){
  const selection={riskySurgery:risky,assurance,ready:true,sourceVersion:'8.5.1',modifier:999,source:{actorUUID:'Actor.H',skill,ruleSources:['Item.Rules']},reason:null,outcomesByRank:ranks.slice(0,rank).map((r,i)=>({rank:r,dc:dcs[i],cases:Array.from({length:assurance?1:20},(_,n)=>({weight:assurance?1:0.05,outcome:outcomes[n%outcomes.length]}))}))};
- const healer={actorUUID:'Actor.H',medicine:{rank},nature:{rank},slugs:['risky-surgery'],riskySurgery:true,assuranceSkills:[skill],treatmentEstimate:{[skill]:{ready:false,selections:[selection]}},pool:{ready:true,poolUUID:'Actor.H'},hp:{value:100,max:100,temp:0},modeOfBeing:'living',items:[],focus:{value:0,max:0},wardCapacity:2};
+ const healer={actorUUID:'Actor.H',systemVersion:'8.5.1',medicine:{rank},nature:{rank},slugs:['risky-surgery'],riskySurgery:true,assuranceSkills:[skill],treatmentEstimate:{[skill]:{ready:false,selections:[selection]}},pool:{ready:true,poolUUID:'Actor.H'},hp:{value:100,max:100,temp:0},modeOfBeing:'living',items:[],focus:{value:0,max:0},wardCapacity:2};
  const patient={actorUUID:'Actor.P',pool:{ready:true,poolUUID:'Actor.P'},hp:{value:17,max:100,temp:0},healingExpectationReady:true,damageExpectationReady:true,modeOfBeing:'living',slugs:[],assuranceSkills:[],items:[],focus:{value:0,max:0}};
  const options={skill,treatmentRank:'auto',riskySurgery:risky,assurance};return {healer,patient,selection,options};
 }
 const estimate=(f,patients=[f.patient],deficit=p=>p.hp.max-p.hp.value)=>selectTreatmentRank(f.healer,patients,f.options,deficit);
 const close=(a,b)=>assert.ok(Math.abs(a-b)<1e-8, a+' != '+b);
+test('prepared estimates accept current runtime evidence and reject an earlier system snapshot',()=>{
+ const f=fixture();f.healer.systemVersion='8.6.0';f.selection.sourceVersion='8.6.0';
+ assert.equal(estimate(f).estimate,'verified-prepared-native-context');assert.equal(estimate(f).estimateSource.sourceVersion,'8.6.0');
+ f.selection.sourceVersion='8.5.1';assert.equal(estimate(f).estimate,'fixed-dc-unverified-context');
+ f.selection.sourceVersion='8.6.0';delete f.healer.systemVersion;assert.equal(estimate(f).estimate,'fixed-dc-unverified-context');
+});
 for(const [outcome,net,damage]of [[0,-9,9],[1,-4.5,4.5],[2,4.5,4.5],[3,13.5,4.5]])test('Risky complete discrete branch '+outcome,()=>{const f=fixture({risky:true,outcomes:[outcome]});const r=estimate(f);close(r.expectedNetHealing,net);close(r.expectedHPDamage,damage);assert.equal(r.estimate,'verified-prepared-native-context')});
 test('prepared cases govern outcomes without adding Risky or modifier twice',()=>{const f=fixture({risky:true,outcomes:[1,2]});close(estimate(f).expectedNetHealing,0);assert.equal(estimate(f).estimateSource.skill,'medicine')});
 test('Assurance consumes single prepared outcome without natural-die adjustment and still pays Risky',()=>{const f=fixture({risky:true,assurance:true,outcomes:[2]});close(estimate(f).expectedNetHealing,4.5);close(estimate(f).expectedHPDamage,4.5);f.healer.assuranceSkills=['nature'];assert.equal(estimate(f).estimate,'fixed-dc-unverified-context')});

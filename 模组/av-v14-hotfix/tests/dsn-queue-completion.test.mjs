@@ -1,174 +1,11 @@
-import test from 'node:test';
+import test, {describe} from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
-import { installDsnQueueRecovery } from '../scripts/patches/dsn-queue.mjs';
-const fixture = JSON.parse(
-  fs.readFileSync(new URL('./fixtures/dsn-queue-native.json', import.meta.url))
-);
-const settle = () => new Promise((resolve) => setImmediate(resolve));
-const observe = (promise) => {
-  const state = { status: 'pending' };
-  Promise.resolve(promise).then(
-    (value) => Object.assign(state, { status: 'resolved', value }),
-    (error) => Object.assign(state, { status: 'rejected', error })
-  );
-  return state;
-};
-function setup() {
-  const errors = [],
-    workers = [],
-    ticks = [],
-    landed = [];
-  let failure = null,
-    release;
-  const game = {
-    settings: { get: (_module, key) => (key === 'maxDiceNumber' ? 20 : false) },
-    dice3d: { pendingThrows: { noteBindsLanded: (binds) => landed.push(...binds) } }
-  };
-  const bo = {
-    renderQueue: [],
-    renderSFX() {},
-    async playSFX() {
-      if (failure === 'effects') {
-        failure = null;
-        throw Error('effects failed');
-      }
-      if (release) await release.promise;
-    }
-  };
-  const context = vm.createContext({
-    game,
-    bo,
-    r: { DICE_EVENT_TYPE: { RESULT: 1 } },
-    setTimeout,
-    clearTimeout,
-    DsnSettings: { isEnabled: () => true },
-    DiceNotation: {
-      mergeQueuedRollCommands: (items) =>
-        items.flatMap((item) => item.params.throws.map((throwData) => [throwData]))
-    },
-    Utils: { removeTicker() {} },
-    canvas: {
-      app: {
-        ticker: {
-          add(fn, box) {
-            ticks.push([fn, box]);
-          }
-        }
-      }
-    }
-  });
-  const classes = vm.runInContext(
-    '(()=>{' +
-      fixture.accumulator +
-      ';' +
-      fixture.queue +
-      ';' +
-      fixture.boxClass +
-      ';' +
-      fixture.engineClass +
-      ';return {AnimationQueue,DiceBox,ThrowEngine};})()',
-    context
-  );
-  const worker = {
-    async exec(name, args) {
-      workers.push([name, args]);
-      if (
-        (name === 'setCollisionResponse' && args.enabled && failure === 'collisions') ||
-        (name === 'setBodyPositions' && failure === 'positions')
-      ) {
-        failure = null;
-        throw Error(name + ' failed');
-      }
-      if (name === 'simulateThrow')
-        return {
-          ids: [],
-          quaternionsBuffers: [],
-          positionsBuffers: [],
-          detectedCollides: [],
-          deads: [],
-          iterationsNeeded: 0,
-          faceValues: {},
-          finalQuaternions: {}
-        };
-      return true;
-    }
-  };
-  const scene = { display: { innerWidth: 1000, innerHeight: 800 }, animatedDiceDetected: false },
-    factory = { systems: new Map([['standard', { fire() {} }]]) };
-  const engine = new classes.ThrowEngine(scene, worker, factory, {
-    generateCollisionSounds: () => []
-  });
-  const box = Object.assign(Object.create(classes.DiceBox.prototype), {
-    throwEngine: engine,
-    physicsWorker: worker,
-    diceScene: scene,
-    dicefactory: factory,
-    fadingDice: [],
-    inputHandler: { clearPendingThrowDice() {}, updatePreRoll() {} },
-    persistentDiceManager: {
-      persistentDiceList: engine.persistentDiceList,
-      updateRemoteAnimations() {}
-    },
-    renderScene() {}
-  });
-  const queue = new classes.AnimationQueue({
-    canvasVisibility: { show() {}, hide() {} },
-    pendingThrows: { noteBindsLanded: (binds) => landed.push(...binds) }
-  });
-  queue.attach(box);
-  const install = () => installDsnQueueRecovery({ queue, recover: (error) => errors.push(error) });
-  const enqueue = (count = 1) =>
-    queue.enqueue(
-      { throws: Array.from({ length: count }, () => ({ dice: [], dsnConfig: {} })) },
-      {}
-    );
-  const finish = async () => {
-    engine.iteration = 2;
-    engine.minIterations = 0;
-    engine.iterationsNeeded = 1;
-    box.last_time = Date.now();
-    box.isVisible = false;
-    box.animateThrow();
-    await settle();
-  };
-  const held = { id: 1, userData: { pendingBind: 'current' }, traverse() {} },
-    other = {
-      id: 2,
-      userData: { constrained: true, pendingBind: 'other' },
-      traverse() {},
-      parent: { position: { x: 1, y: 2, z: 3 } }
-    };
-  return {
-    context,
-    game,
-    queue,
-    engine,
-    box,
-    install,
-    enqueue,
-    finish,
-    errors,
-    workers,
-    ticks,
-    landed,
-    held,
-    other,
-    fail: (value) => {
-      failure = value;
-    },
-    holdEffects() {
-      let resolve, reject;
-      const promise = new Promise((r, j) => {
-        resolve = r;
-        reject = j;
-      });
-      release = { promise };
-      return Object.assign(resolve, { reject });
-    }
-  };
-}
+import {setup as nativeSetup, settle, observe} from './dsn-queue-harness.mjs';
+for(const name of ['dsn-queue-native.json','dsn-queue-6.4.3-native.json'])describe(name,()=>{
+const fixture=JSON.parse(fs.readFileSync(new URL('./fixtures/'+name,import.meta.url)));
+const setup=()=>nativeSetup(fixture);
 for (const stage of ['collisions', 'positions', 'effects'])
   test(
     'native playback ' + stage + ' rejection resolves false and starts the next batch',
@@ -181,8 +18,9 @@ for (const stage of ['collisions', 'positions', 'effects'])
         second = observe(f.enqueue());
       await settle();
       assert.equal(first.status, 'pending');
-      assert.equal(f.box.animateThrow, native);
-      assert.equal(f.ticks[0][0], native);
+      assert.equal(Object.getPrototypeOf(f.box).animateThrow, native);
+      assert.notEqual(f.box.animateThrow,native);
+      assert.equal(f.ticks[0][0],f.box.animateThrow);
       if (stage === 'effects')
         f.engine.diceList.push({ userData: { system: 'standard' }, specialEffects: [{}] });
       f.fail(stage);
@@ -224,7 +62,7 @@ test('persistent SFX rejection preserves affected binds and still restores colli
   );
   await f.queue.idle();
 });
-test('successful native playback waits for effects and preserves the ticker function', async () => {
+test('successful native playback waits for effects and executes the native ticker function', async () => {
   const f = setup(),
     native = f.box.animateThrow;
   f.install();
@@ -238,7 +76,7 @@ test('successful native playback waits for effects and preserves the ticker func
   release();
   await settle();
   assert.equal(state.value, true);
-  assert.equal(f.box.animateThrow, native);
+  assert.equal(Object.getPrototypeOf(f.box).animateThrow, native);
   assert.equal(f.errors.length, 0);
   await f.queue.idle();
 });
@@ -537,4 +375,6 @@ test('unknown observers of the first native consumer retain its rejection', asyn
   await f.finish();
   assert.equal(state.value, true);
   await f.queue.idle();
+});
+
 });

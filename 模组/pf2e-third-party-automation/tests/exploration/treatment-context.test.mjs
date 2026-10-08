@@ -1,6 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {treatmentOutcomeRows} from '../../scripts/exploration/treatment-context.mjs';
+import {Predicate,degree} from '../knowledge-pf2e-860-fixture.mjs';
 
 test('twenty deterministic faces preserve native thresholds and natural adjustments',()=>{
  const rows=treatmentOutcomeRows({rank:4,modifier:19,options:new Set()});
@@ -37,4 +38,17 @@ test('per-face predicates receive native facts without changing caller options',
 
 test('unknown degree shapes and invalid context cannot yield verified rows',()=>{
  for(const data of [{rank:0,modifier:1},{rank:5,modifier:1},{rank:1,modifier:Infinity},{rank:1,modifier:1,assurance:'yes'},{rank:1,modifier:1,adjustments:[{adjustments:{success:{label:'x',amount:99}}}]}])assert.throws(()=>treatmentOutcomeRows(data),/invalid-treatment-context/);
+});
+
+for(const ownOptions of [undefined,new Set(),new Set(['origin:level:8']),['origin:level:8']])test(`native PF2e 8.6 adjustment options ${ownOptions===undefined?'inherit':'replace'} the check perspective: ${JSON.stringify(ownOptions?[...ownOptions]:null)}`,()=>{
+ const options=new Set(['action:treat-wounds','self:level:8']),predicate=['self:level:8','check:total:15'];
+ const adjustments=[{predicate:new Predicate(predicate),...(ownOptions===undefined?{}:{options:ownOptions}),adjustments:{success:{label:'context',amount:1}}}];
+ const rows=treatmentOutcomeRows({rank:1,modifier:5,options,adjustments});
+ assert.equal(rows[0].cases[9].outcome,ownOptions===undefined?3:2);
+ for(let die=1;die<=20;die++)assert.equal(rows[0].cases[die-1].outcome,degree({total:die+5,die,dc:15,rollOptions:[...options],dosAdjustments:adjustments}));
+ assert.deepEqual([...options],['action:treat-wounds','self:level:8']);
+});
+test('an adjustment keeps native total predicates in its own option set',()=>{
+ const adjustments=[{predicate:new Predicate('origin:level:8','check:total:15'),options:new Set(['origin:level:8']),adjustments:{success:{label:'opposer',amount:1}}}];
+ assert.equal(treatmentOutcomeRows({rank:1,modifier:5,adjustments})[0].cases[9].outcome,3);
 });

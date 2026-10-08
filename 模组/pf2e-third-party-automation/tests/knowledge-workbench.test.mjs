@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {MODULE_ID} from '../scripts/rules.mjs';
 import {interceptKnowledgeProbe} from '../scripts/knowledge-probes.mjs';
+import {Predicate as NativePredicate, extract as extractNativeAdjustments, degree as nativeDegree} from './knowledge-pf2e-860-fixture.mjs';
 let api;
 try { api = await import('../scripts/knowledge-workbench.mjs'); } catch {}
 const command=fs.readFileSync(process.env.FVTT_WORKBENCH_RECALL_MACRO??new URL('./fixtures/workbench-7.7.5-recall.txt',import.meta.url),'utf8');
@@ -33,8 +34,8 @@ function nativeProbeFixture(f){
  f.game.pf2e={...f.game.pf2e,Modifier,CheckModifier,Check:{roll:(check,context,event,callback)=>interceptKnowledgeProbe(check.native??f.checkNative,check,context,event,callback)}};
  for(const skill of Object.values(f.actor.skills))skill.roll=async options=>{
   const check={slug:skill.slug,modifiers:skill.modifiers,calculateTotal(){this.totalModifier=skill.totalModifier;}};
-  const context={actor:f.actor,origin:{actor:f.actor,token:f.token},token:f.token,type:'skill-check',domains:['skill-check',skill.slug],options:new Set(options.extraRollOptions),rollTwice:skill.rollTwice??false,substitutions:skill.substitutions??[],dosAdjustments:options.dc?Object.values(f.actor.synthetics.degreeOfSuccessAdjustments).flat():[],createMessage:false,skipDialog:true};
-  const native=async(check,context,_event,callback)=>{const cancelled=context.options.has('fortune')&&context.options.has('misfortune'),substitution=cancelled?null:context.substitutions?.find(s=>s.selected),roll=substitution?await new f.globals.Roll(String(substitution.value)).evaluate():await new f.globals.Roll('1d20').roll();if(roll.dice.length){roll.dice[0].total=roll.total;roll.dice[0].results=[{result:roll.total,active:true}];}if(context.rollTwice&&!substitution&&!cancelled){roll.dice[0]={total:18,faces:20,modifiers:['kh'],results:[{result:12,discarded:true},{result:18,active:true}]};roll.total=18;}check.calculateTotal(context.options);roll.total+=check.totalModifier;roll.options.totalModifier=check.totalModifier;roll.options.degreeOfSuccess=api.recallDegree({total:roll.total,die:roll.total-check.totalModifier,dc:context.dc?.value,actor:f.actor,domains:context.domains,rollOptions:[...context.options]});context.outcome=['criticalFailure','failure','success','criticalSuccess'][roll.options.degreeOfSuccess];await callback?.(roll,context.outcome,new f.globals.ChatMessage({flags:{pf2e:{context:{...context,actor:f.actor.id,options:[...context.options],domains:context.domains},modifiers:[]}},flavor:''}));return roll;};
+  const actor=f.contextActor??f.actor,context={actor,origin:{actor,token:f.token},token:f.token,type:'skill-check',domains:['skill-check',skill.slug],dc:options.dc,options:new Set(options.extraRollOptions),rollTwice:skill.rollTwice??false,substitutions:skill.substitutions??[],dosAdjustments:options.dc?(f.degreeAdjustments?.(skill,options)??Object.values(actor.synthetics.degreeOfSuccessAdjustments).flat()):[],createMessage:false,skipDialog:true};
+  const native=async(check,context,_event,callback)=>{const cancelled=context.options.has('fortune')&&context.options.has('misfortune'),substitution=cancelled?null:context.substitutions?.find(s=>s.selected),roll=substitution?await new f.globals.Roll(String(substitution.value)).evaluate():await new f.globals.Roll('1d20').roll();if(roll.dice.length){roll.dice[0].total=roll.total;roll.dice[0].results=[{result:roll.total,active:true}];}if(context.rollTwice&&!substitution&&!cancelled){roll.dice[0]={total:18,faces:20,modifiers:['kh'],results:[{result:12,discarded:true},{result:18,active:true}]};roll.total=18;}check.calculateTotal(context.options);roll.total+=check.totalModifier;roll.options.totalModifier=check.totalModifier;roll.options.degreeOfSuccess=(f.recallDegree??api.recallDegree)({total:roll.total,die:roll.total-check.totalModifier,dc:context.dc?.value,actor:f.actor,domains:context.domains,rollOptions:[...context.options],dosAdjustments:context.dosAdjustments,roll});context.outcome=['criticalFailure','failure','success','criticalSuccess'][roll.options.degreeOfSuccess];await callback?.(roll,context.outcome,new f.globals.ChatMessage({flags:{pf2e:{context:{...context,actor:f.actor.id,options:[...context.options],domains:context.domains},modifiers:[]}},flavor:''}));return roll;};
   f.checkNative=native;
   check.native=native;let active=true;
   // libWrapper invalidates a wrapped continuation when this frame returns.
@@ -97,6 +98,45 @@ test('one-use native degree adjustment is captured with the primary DC and survi
  f.actor.rules=[{afterRoll({context}){assert.equal(context.dosAdjustments.length,1,'native StatisticCheck only captures adjustments if supplied a DC');after++;f.actor.synthetics.degreeOfSuccessAdjustments={};}}];
  const capture=await api.captureWorkbenchRecall({...f,requestId:'native-degree-consumption',targetUuids:[f.target.uuid]});assert.equal(after,1);assert.equal(capture.candidates[0].degree,3);
  const result=await api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:{...f.game,user:f.gm},message:capture.message});assert.equal(result.degree,3);
+});
+
+test('8.6 native adjustment receipts survive serialization, effect consumption and a secondary-skill DC change',async()=>{
+ const f=fixture();f.target.actor.traits=new Set(['construct']);f.actor.skills.arcana.totalModifier=7;f.actor.skills.crafting.totalModifier=8;f.recallDegree=nativeDegree;f.game.pf2e.Predicate=NativePredicate;
+ const self={predicate:new NativePredicate(),adjustments:{all:{amount:1,label:'self'}}},opposing={predicate:new NativePredicate(['self:level:8',{gte:['check:total:delta',-1]}]),adjustments:{all:{amount:-1,label:'opposing'}}};
+ f.actor.synthetics.degreeOfSuccessAdjustments={'skill-check':[self]};Object.assign(f.target.actor,{_source:{flags:{}},getRollOptions:()=>['self:level:8'],synthetics:{opposingDegreeOfSuccessAdjustments:{origin:{'skill-check':[opposing]}}}});
+ f.degreeAdjustments=(skill,options)=>extractNativeAdjustments({self:f.actor,selfRole:'origin',opposer:f.target.actor,domains:['skill-check',skill.slug],options:options.extraRollOptions});
+ let after=0;f.actor.rules=[{afterRoll(){after++;f.actor.synthetics.degreeOfSuccessAdjustments={};f.target.actor.synthetics.opposingDegreeOfSuccessAdjustments={};}}];
+ const capture=await api.captureWorkbenchRecall({...f,requestId:'8.6-saved-adjustments',targetUuids:[f.target.uuid]});
+ assert.equal(capture.candidates.find(candidate=>candidate.statistic==='crafting').degree,1);
+ assert.equal(capture.candidates.find(candidate=>candidate.statistic==='arcana').degree,0);
+ capture.message.flags[MODULE_ID].workbenchRecall=JSON.parse(JSON.stringify(capture.message.flags[MODULE_ID].workbenchRecall));
+ const saved=capture.message.flags[MODULE_ID].workbenchRecall.candidates.find(candidate=>candidate.statistic==='arcana');
+ assert.deepEqual(saved.dosAdjustments.map(entry=>entry.adjustments.all.label),['self','opposing']);assert.deepEqual(saved.dosAdjustments[1].options,['self:level:8']);
+ const result=await api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:{...f.game,user:f.gm},message:capture.message,statistic:'arcana',dc:18});
+ assert.equal(result.degree,1);assert.equal(result.total,19);assert.equal(result.die,12);assert.equal(f.die.count,1);assert.equal(after,1);
+});
+
+for(const lore of [false,true])test(`a later GM DC uses the consumed contextual rules from a ${lore?'Lore':'targetless'} probe without a DC`,async()=>{
+ const f=fixture(),statistic=lore?'sailing-lore':'society';
+ if(lore){f.actor.skills[statistic]={slug:statistic,label:'Sailing Lore',rank:2,totalModifier:13,modifiers:[],lore:true};nativeProbeFixture(f);}
+ f.game.pf2e.Predicate=NativePredicate;
+ const adjustment={predicate:new NativePredicate(['action:recall-knowledge','check:total:natural:12',{gte:['check:total:delta',5]}]),adjustments:{all:{amount:1,label:'consumed contextual upgrade'}}};
+ f.actor.synthetics.degreeOfSuccessAdjustments={'skill-check':[{predicate:new NativePredicate(),adjustments:{all:{amount:-1,label:'base actor downgrade'}}}]};
+ let after=0;f.contextActor={...f.actor,synthetics:{degreeOfSuccessAdjustments:{'skill-check':[adjustment]}},rules:[{afterRoll({context}){assert.equal(context.dc,null);assert.deepEqual(context.dosAdjustments,[]);after++;f.contextActor.synthetics.degreeOfSuccessAdjustments={};adjustment.predicate.push('effect:already-consumed');}}]};
+ const capture=await api.captureWorkbenchRecall({...f,requestId:`no-dc-contextual-${statistic}`,targetUuids:lore?[f.target.uuid]:[],statistic:lore?statistic:null});
+ assert.equal(capture.candidates.find(candidate=>candidate.statistic===statistic).dc,null);
+ capture.message.flags[MODULE_ID].workbenchRecall=JSON.parse(JSON.stringify(capture.message.flags[MODULE_ID].workbenchRecall));
+ const result=await api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:{...f.game,user:f.gm},message:capture.message,statistic,dc:20});
+ assert.equal(result.degree,3);assert.equal(result.total,25);assert.equal(result.die,12);assert.equal(after,1);assert.equal(f.die.count,1);
+});
+
+test('an extracted empty native list at a known DC remains authoritative over actor rules',async()=>{
+ const f=fixture();f.recallDegree=nativeDegree;f.game.pf2e.Predicate=NativePredicate;f.degreeAdjustments=()=>[];
+ f.actor.synthetics.degreeOfSuccessAdjustments={'skill-check':[{predicate:new NativePredicate(),adjustments:{all:{amount:1,label:'excluded by native context'}}}]};
+ const capture=await api.captureWorkbenchRecall({...f,requestId:'known-dc-empty-native',targetUuids:[f.target.uuid]});
+ assert.deepEqual(capture.candidates[0].dosAdjustments,[]);
+ const result=await api.finalizeWorkbenchRecall({fromUuid:f.fromUuid,game:{...f.game,user:f.gm},message:capture.message,dc:21});
+ assert.equal(result.degree,2);assert.equal(result.total,25);assert.equal(f.die.count,1);
 });
 test('installed Workbench macro produces one secret same-die target comparison with native captured modifiers',async()=>{
  assert.ok(api?.captureWorkbenchRecall,'Workbench bridge is missing');const f=fixture();

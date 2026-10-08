@@ -353,8 +353,8 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
     recordManualPoolSource:(input,{evidenceGuard}={})=>{
       if(!atomic||typeof evidenceGuard!=='function')throw Error('manual-pool-source-guard-required');
       const source=clone(input);let validateCommit;
-      const fields=['version','sessionId','activityId','actorUUID','patientUUID','sourceType','useId','checkId','resultId','rollIndex','worldTime','sourceUserId','sourceClientNonce','sourceNonce','provider','documentsDigest'];
-      if(source.version!==1||Object.keys(source).length!==fields.length||Object.keys(source).some(key=>!fields.includes(key))||!['native-action','workbench'].includes(source.sourceType)||source.rollIndex!==0||!/^[a-f0-9]{64}$/.test(source.documentsDigest??''))throw Error('invalid-manual-pool-source');
+      const fields=['version','sourceVersion','sessionId','activityId','actorUUID','patientUUID','sourceType','useId','checkId','resultId','rollIndex','worldTime','sourceUserId','sourceClientNonce','sourceNonce','provider','documentsDigest'];
+      if(source.version!==2||Object.keys(source).length!==fields.length||Object.keys(source).some(key=>!fields.includes(key))||!['native-action','workbench'].includes(source.sourceType)||source.rollIndex!==0||!/^[a-f0-9]{64}$/.test(source.documentsDigest??''))throw Error('invalid-manual-pool-source');
       for(const key of fields.filter(key=>!['version','rollIndex','worldTime','provider','documentsDigest'].includes(key)))id(source[key],key);finite(source.worldTime,'source-time');
       return mutate((s,_context,caller)=>{
         const session=s.sessions[source.sessionId],a=s.activities[source.activityId];

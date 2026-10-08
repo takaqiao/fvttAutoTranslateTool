@@ -14,7 +14,7 @@ export function registerRoaringReactionCompatibility({game,query,libWrapper=glob
  if(!document||!['object','function'].includes(typeof document))return Promise.resolve(unsupported('missing-document'));
  const previous=installations.get(document);if(previous)return previous.promise;
  const world=game?.world,module=game?.modules?.get(REACTION);
- const profileCurrent=()=>game?.world===world&&world?.id===WORLD&&game?.system?.id==='pf2e'&&game.system.version==='8.5.1'&&game.release?.generation===14&&game.modules.get(REACTION)===module&&module?.active===true;
+ const profileCurrent=()=>game?.world===world&&world?.id===WORLD&&game?.system?.id==='pf2e'&&game.release?.generation===14&&game.modules.get(REACTION)===module&&module?.active===true;
  if(!profileCurrent())return Promise.resolve(unsupported('unknown-world-or-dependency-profile'));
  if(typeof query!=='function'||typeof jQuery!=='function'||typeof jQuery._data!=='function'||typeof document.addEventListener!=='function'||typeof document.removeEventListener!=='function'||typeof libWrapper?.register!=='function'||typeof libWrapper?.unregister!=='function')return Promise.resolve(unsupported('missing-native-adapter-interface'));
  const entries=jQuery._data(document,'events')?.click;

@@ -37,7 +37,7 @@ function fixture(){
  const check={domains:['all','skill-check','medicine','check','medicine-check'],modifiers,createRollOptions:({origin,extraRollOptions})=>new Set([...extraRollOptions,...origin.getSelfRollOptions('origin')])};
  const stat={rank:2,check,withRollOptions:()=>{throw Error('new Statistic construction forbidden')}};
  const actor={uuid:'Actor.H',items:[risky,assurance],rules:[{key:'RollOption',domain:'medicine',option:'risky-surgery',value:false,item:risky,beforeRoll:()=>{throw Error('beforeRoll called')}},{key:'AdjustModifier',item:assurance}],getStatistic:()=>stat,getRollOptions:domains=>domains.map(d=>`domain:${d}`),getSelfRollOptions:prefix=>[`${prefix}:level:8`],synthetics:{modifierAdjustments:{medicine:[adjustment]},rollSubstitutions:{medicine:[{slug:'assurance',value:10,required:false,selected:false,effectType:'fortune',predicate:new Predicate()}]},degreeOfSuccessAdjustments:{medicine:[{predicate:new Predicate('risky-surgery','action:treat-wounds'),adjustments:{success:{label:'Risky',amount:1}}}]}}};
- const game={system:{version:'8.5.1'},pf2e:{Predicate,CheckModifier}};
+ const game={system:{id:'pf2e',version:'8.5.1'},pf2e:{Predicate,CheckModifier}};
  return {actor,game,stat,check,modifiers,risky,assurance,adjustment};
 }
 const selected=(f,riskySurgery=false,assurance=false)=>preparedTreatmentSelections({game:f.game,actor:f.actor,skill:'medicine',slugs:['risky-surgery']}).find(s=>s.riskySurgery===riskySurgery&&s.assurance===assurance);
@@ -89,9 +89,21 @@ test('Assurance uses actual proficiency with Risky upgrade and no non-proficienc
  assert.deepEqual(s.outcomesByRank[1].cases,[{weight:1,outcome:3}]);
  assert.equal(f.adjustment.applications,undefined);
 });
-test('unsupported version and an altered canonical source do not become ready',()=>{
- const f=fixture();f.game.system.version='8.6.0';assert.equal(selected(f).ready,false);
- f.game.system.version='8.5.1';f.risky.system.rules[1].value=20;assert.equal(selected(f,true).ready,false);
+for(const version of ['8.6.0','9.0.0'])test(`prepared treatment uses current PF2e ${version} source evidence`,()=>{
+ const f=fixture();f.game.system.version=version;
+ const s=selected(f);assert.equal(s.ready,true,s.reason);assert.equal(s.sourceVersion,version);
+});
+test('Risky Surgery without the removed toggle preserves its modifier and success upgrade',()=>{
+ const f=fixture();f.game.system.version='8.6.0';f.risky.system.rules.shift();f.actor.rules.shift();
+ const ordinary=selected(f),risky=selected(f,true);assert.equal(risky.ready,true,risky.reason);
+ assert.equal(risky.modifier,10);assert.equal(ordinary.outcomesByRank[0].cases[4].outcome,2);assert.equal(risky.outcomesByRank[0].cases[4].outcome,3);
+ assert.equal(risky.sourceVersion,'8.6.0');assert.equal(f.risky.system.rules.length,3);
+ f.risky.system.rules[0].value=20;assert.equal(selected(f,true).ready,false);
+});
+test('another system, missing native API and altered canonical sources do not become ready',()=>{
+ for(const mutate of [f=>f.game.system.id='other',f=>delete f.game.pf2e.CheckModifier,f=>f.risky.system.rules[1].value=20]){
+  const f=fixture();mutate(f);assert.equal(selected(f,true).ready,false);
+ }
 });
 test('unknown adjustment functions, beforeRoll and fortune paths are never executed',()=>{
  for(const alter of [f=>f.actor.synthetics.modifierAdjustments.all=[{suppress:false,test:()=>{throw Error('unknown called')}}],f=>f.actor.rules.push({key:'Unknown',beforeRoll:()=>{throw Error('unknown called')}}),f=>f.actor.synthetics.rollTwice={medicine:[{keep:'higher',predicate:new Predicate()}]}]){const f=fixture();alter(f);assert.equal(selected(f).ready,false);}
@@ -132,6 +144,7 @@ test('capabilities publishes exact selections and patient damage readiness witho
  const f=fixture();f.game.time={worldTime:0};f.actor.system={attributes:{hp:{value:30,max:100,temp:0}}};f.actor.hardness=0;f.actor.attributes={...f.actor.system.attributes,immunities:[],resistances:[],weaknesses:[]};
  const capabilities=createCapabilities({game:f.game,fromUuid:async()=>f.actor,hpPools:{discover:actor=>({poolUUID:actor.uuid,ready:true})}});
  const result=await capabilities.discover(f.actor.uuid);
+ assert.equal(result.systemVersion,'8.5.1');
  assert.equal(result.damageExpectationReady,true);
  assert.equal(result.treatmentEstimate.medicine.selections.find(s=>s.assurance&&s.riskySurgery).ready,true);
  assert.equal(result.treatmentEstimate.medicine.source.actorUUID,f.actor.uuid);

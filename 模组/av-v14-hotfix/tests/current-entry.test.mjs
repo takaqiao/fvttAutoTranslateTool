@@ -15,6 +15,10 @@ async function boot(disabled=[]){
  await setup;phase='ready';hooks.ready();phase='ready-async';for(const task of tasks)await task();
  return {calls,phases,setupSyncCalls,settings,status:self.api.status()};
 }
+test('diagnostic version matches the package manifest',async()=>{
+ const f=await boot(),manifest=JSON.parse(fs.readFileSync(new URL('../module.json',import.meta.url),'utf8'));
+ assert.equal(f.status.version,manifest.version);
+});
 test('current entry retires old Patreon/Wayfinder installers and exposes new fixes',async()=>{
  const f=await boot();
  assert(!f.calls.includes('installPatreonPatch'));assert(!f.calls.includes('installWayfinderFogPatch'));

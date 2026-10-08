@@ -18,11 +18,11 @@ async function sealFixture(t,{remote=false,sealed=true,immunity=false}={}){
  result.rolls[0].formula='2d8[healing]';
  for(const doc of [check,result,f.receipt])doc.toObject=function(){return structuredClone({id:this.id,author:this.author,speaker:this.speaker,rolls:this.rolls??[],flags:this.flags??{}})};
  patient.items=new Map();const hooks=new Map(),Hooks={on:(event,fn)=>{hooks.set(event,fn);return fn},off:(event,fn)=>{if(hooks.get(event)===fn)hooks.delete(event)}};
- const provider={descriptor:{version:1,providerId:'pf2e',providerVersion:'8.5.1',protocol:`${M}:manual-pool-batch:1`,model:'numeric-empty-reception.v1',baseSourceSHA256:sha},subscribe(){return()=>{}}};game.system={version:'8.5.1'};game.pf2e={actions:new Map(),thirdPartyManualPoolBatch:provider};
+ const provider={descriptor:{version:1,providerId:'pf2e',providerVersion:'8.5.1',protocol:`${M}:manual-pool-batch:1`,model:'numeric-empty-reception.v1',baseSourceSHA256:sha},subscribe(){return()=>{}}};game.system={id:'pf2e',version:'8.5.1'};game.pf2e={actions:new Map(),thirdPartyManualPoolBatch:provider};
  const sources=createManualPoolSources({game,Hooks,ledger:f.ledger,fromUuid:async uuid=>f.gm.actors.get(uuid),hpPools:f.gm.pools,clientNonce:'cold-read',getSession:()=>f.ledger.getSession('S'),isIssuer:()=>false});sources.start();t.after(()=>sources.stop());
  const command=fs.readFileSync(process.env.WORKBENCH_MANUAL_SOURCE??'C:/Users/Taka/Desktop/fvtt/output/automation-native-20260930/treat-wounds-actual-command.txt','utf8'),macro={name:'XDY DO_NOT_IMPORT Treat Wounds and Battle Medicine',command,execute(){throw Error('lookup must not execute a macro')},clone(){throw Error('lookup must not clone a macro')}};
  game.packs=new Map([['xdy-pf2e-workbench.asymonous-benefactor-macros-internal',{getDocuments:async()=>[macro]}]]);const cleanup=await registerWorkbenchObservation({game,recorder:{observeWorkbenchProvider:sources.observeWorkbenchProvider}});t.after(cleanup);
- const source={version:1,sessionId:'S',activityId:'manual:R',actorUUID:'Actor.H',patientUUID:'Actor.P',sourceType:'workbench',useId:'U',checkId:'C',resultId:'R',rollIndex:0,worldTime:0,sourceUserId:'O',sourceClientNonce:'O1',sourceNonce:'actual-source-observation',provider:{id:'xdy-pf2e-workbench',sourceSHA:WORKBENCH_SOURCE_SHA},documentsDigest:createHash('sha256').update(canonicalJSON([check.toObject(true),result.toObject(true)])).digest('hex')};
+ const source={version:2,sourceVersion:'8.5.1',sessionId:'S',activityId:'manual:R',actorUUID:'Actor.H',patientUUID:'Actor.P',sourceType:'workbench',useId:'U',checkId:'C',resultId:'R',rollIndex:0,worldTime:0,sourceUserId:'O',sourceClientNonce:'O1',sourceNonce:'actual-source-observation',provider:{id:'xdy-pf2e-workbench',sourceSHA:WORKBENCH_SOURCE_SHA},documentsDigest:createHash('sha256').update(canonicalJSON([check.toObject(true),result.toObject(true)])).digest('hex')};
  // Source registration has its own original-callback tests. This private GM
  // fixture seeds that sealed boundary, then obtains the terminal from the real
  // broker and the fixed original Toolbelt local/socket Promise branches.
@@ -44,6 +44,13 @@ test('an existing independent Workbench immunity and both HP halves confirm on a
 });
 test('document markers without a settled application never create a shared proof',async t=>{
  const f=await sealFixture(t,{sealed:false});f.result.flags[M].explorationManualPoolParticipation={sessionId:'S',useId:'U',poolUUID:'Actor.M'};f.messages.set(f.receipt.id,f.receipt);assert.equal(await f.proof.evidence(await f.activity()),null);assert.equal(f.writes.length,0);
+});
+test('a legacy pending source cannot reuse its old application seal or write during proof lookup',async t=>{
+ const f=await sealFixture(t),read=f.ledger.getActivity;
+ f.ledger.getActivity=async id=>{const activity=await read(id);activity.proof.manualPoolSource.version=1;delete activity.proof.manualPoolSource.sourceVersion;return activity};
+ const writes=f.writes.length,packets=f.packets.length,activity=await f.activity();
+ assert.equal(activity.state,'awaiting-evidence');assert.equal(await f.proof.evidence(activity),null);
+ assert.equal(f.writes.length,writes);assert.equal(f.packets.length,packets);
 });
 for(const [name,change] of [['deleted source',f=>f.messages.delete('R')],['changed roll',f=>{f.result.rolls[0].total=30}],['edited receipt',f=>{f.receipt.flags.pf2e.appliedDamage.isReverted=true}],['lost patient OWNER',f=>{f.patient.testUserPermission=()=>false}],['lost master writer',f=>{f.gm.master.testUserPermission=()=>false}],['pool rebind',f=>{f.game.toolbelt.api.shareData.getMasterInMemory=()=>f.patient}],['time drift',f=>{f.game.time.worldTime=1}],['provider changed',f=>{f.macro.command='changed'}],['provider pack replaced',f=>{f.game.packs.clear()}],['patient collection replaced',f=>{f.game.actors.set('P',{...f.patient})}],['master collection replaced',f=>{f.game.actors.set('M',{...f.gm.master})}],['a second HP receipt',f=>{f.messages.set('receipt2',{...f.receipt,id:'receipt2'})}]])test(`a settled seal is unavailable after ${name}`,async t=>{
  const f=await sealFixture(t);assert.ok(await f.proof.evidence(await f.activity()));change(f);assert.equal(await f.proof.evidence(await f.activity()),null);

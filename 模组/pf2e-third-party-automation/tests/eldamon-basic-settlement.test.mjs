@@ -70,8 +70,8 @@ test('a movement or LOS helper is never needed after the user confirms the trigg
  await f.run();assert.equal(electricityEffects(f.target,E.shocked).length,1);
 });
 
-test('the active GM ledger rejects unsupported worlds, versions or disabled Eldamon even for a valid owner',async()=>{
- for(const change of [f=>f.game.world.id='another',f=>f.game.system.version='8.6.0',f=>f.game.system.id='sf2e',f=>f.game.modules.clear()]){
+test('the active GM ledger rejects unsupported worlds, systems or disabled Eldamon even for a valid owner',async()=>{
+ for(const change of [f=>f.game.world.id='another',f=>f.game.system.id='sf2e',f=>f.game.modules.clear()]){
   const f=setup();change(f);await assert.rejects(f.run());assert.equal(electricityEffects(f.target,E.shocked).length,0);
  }
 });
@@ -138,3 +138,5 @@ test('outside combat manipulation uses native two-round duration; shield request
   assert.equal(result.manualExpiry??false,kind==='shield');
  }
 });
+
+test('PF2e 8.6 keeps native Shocked settlement bound to the original target',async()=>{const f=setup();f.game.system.version='8.6.0';await f.run();assert.equal(electricityEffects(f.target,E.shocked).length,1);assert.equal(electricityEffects(f.caster,E.shocked).length,0)});

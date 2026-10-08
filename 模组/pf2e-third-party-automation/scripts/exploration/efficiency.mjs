@@ -30,7 +30,7 @@ function preparedSelection(context,healer,skill,skillRank,options){
  if(matches.length!==1)return {reason:'prepared-selection-unavailable'};
  const selection=matches[0];
  if(selection.ready!==true)return {reason:typeof selection.reason==='string'&&selection.reason.trim()?selection.reason:'prepared-selection-unavailable'};
- if(selection.sourceVersion!=='8.5.1'||selection.source?.actorUUID!==healer.actorUUID||typeof healer.actorUUID!=='string'||selection.source?.skill!==skill||!Array.isArray(selection.source.ruleSources)||Array.from(selection.source.ruleSources).some(id=>typeof id!=='string'||!id.trim())||new Set(selection.source.ruleSources).size!==selection.source.ruleSources.length)return {reason:'unverified-prepared-source'};
+ if(typeof healer.systemVersion!=='string'||!healer.systemVersion||selection.sourceVersion!==healer.systemVersion||selection.source?.actorUUID!==healer.actorUUID||typeof healer.actorUUID!=='string'||selection.source?.skill!==skill||!Array.isArray(selection.source.ruleSources)||Array.from(selection.source.ruleSources).some(id=>typeof id!=='string'||!id.trim())||new Set(selection.source.ruleSources).size!==selection.source.ruleSources.length)return {reason:'unverified-prepared-source'};
  if(options.assurance&&!healer.assuranceSkills?.includes(skill))return {reason:'skill-assurance-unavailable'};
  const rows=selection.outcomesByRank,count=options.assurance?1:20,weight=1/count;
  if(!Array.isArray(rows)||rows.length!==skillRank)return {reason:'malformed-prepared-outcomes'};

@@ -20,6 +20,9 @@ const transport=o=>({status:o.status,castNonce:o.castNonce,input:copy(o.input),r
  * save, Sustain completion, reaction-resource mutation or reconstructed roll. */
 export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeCasts,effects,saveEvidence,onError=()=>{},onManual:manualNotice=()=>{},onClap=()=>globalThis.ui?.notifications?.info?.('轰然喝彩：目标起回合需要鼓掌（操控）。请GM核对可触发的反应。'),randomId=()=>globalThis.crypto.randomUUID()}={}){
  demand(nativeCasts&&effects,'native Cast and owned effect store required');
+ const system=game.system,systemVersion=system?.version;
+ const currentSystem=()=>game.system===system&&system?.id==='pf2e'&&typeof systemVersion==='string'&&systemVersion.length>0&&system.version===systemVersion;
+
  const scopes=new Map(),byItem=new Map(),queue=new SerialActions(),hooks=[],reported=new Set(),resume=new Set(),lastStarts=new Map();let socket,Hooks,installed=false,electedGM=null,authorityGeneration=0;
  const evidence=saveEvidence??createRoaringSaveEvidence({game,fromUuid,lookupSource,onVerified,onManual,onError,randomId});
  const allActors=()=>[...new Map([...values(game.actors),...values(game.scenes).flatMap(s=>values(s.tokens).map(t=>t.actor))].filter(Boolean).map(a=>[a.uuid,a])).values()];
@@ -63,15 +66,15 @@ export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeC
   return {token,targets:values(game.user.targets).map(t=>t.document??t)};
  }
  function immunity(actor,item){
-  demand(game.pf2e?.settings?.iwr===true&&typeof actor.isImmuneTo==='function','免疫自动化关闭或未知，请手工核对。');
+  demand(currentSystem()&&game.pf2e?.settings?.iwr===true&&typeof actor.isImmuneTo==='function','免疫自动化关闭或未知，请手工核对。');
   const conditions=game.pf2e.ConditionManager?.conditions,slowed=conditions?.get('slowed'),fascinated=conditions?.get('fascinated');
   demand(slowed?.type==='condition'&&slowed.system?.slug==='slowed'&&fascinated?.type==='condition'&&fascinated.system?.slug==='fascinated','缺少准确原生条件来源。');
   demand([[slowed,'slowed'],[fascinated,'fascinated']].every(([item,role])=>item.uuid===CONDITIONS[role]||getSourceId(item)===CONDITIONS[role]),'原生条件来源已改变，不能推断免疫。');
-  const assessment={spell:actor.isImmuneTo(item),slowed:actor.isImmuneTo(slowed),fascinated:actor.isImmuneTo(fascinated),checked:true,systemVersion:'8.5.1'};
+  const assessment={spell:actor.isImmuneTo(item),slowed:actor.isImmuneTo(slowed),fascinated:actor.isImmuneTo(fascinated),checked:true,systemVersion};
   demand(['spell','slowed','fascinated'].every(k=>typeof assessment[k]==='boolean'),'免疫结果无法证明。');return assessment;
  }
  function liveScope(s,{beforePayment=false}={}){
-  demand(installed&&s.user===game.user&&s.user.active&&game.users.activeGM?.id===s.gmId&&game.actors.get(s.actor.id)===s.actor&&s.actor.items.get(s.item.id)===s.item&&s.actor.items.get(s.entry.id)===s.entry&&s.actor.testUserPermission(s.user,'OWNER')===true&&shape(s.item)===s.itemShape,'原客户端来源、所有者或主GM已改变。');
+  demand(installed&&currentSystem()&&s.user===game.user&&s.user.active&&game.users.activeGM?.id===s.gmId&&game.actors.get(s.actor.id)===s.actor&&s.actor.items.get(s.item.id)===s.item&&s.actor.items.get(s.entry.id)===s.entry&&s.actor.testUserPermission(s.user,'OWNER')===true&&shape(s.item)===s.itemShape,'原客户端来源、所有者或主GM已改变。');
   if(beforePayment){const a=assessRoaringCast({...s,item:s.castItem,user:s.user});demand(a.eligible,a.reason??'施法入口已改变。');}
   const c=ownContext(s.actor);demand(c.token===s.token,'原施法者Token已改变。');
   if(beforePayment)demand(same(c.targets.map(t=>t.uuid),s.targets.map(t=>t.uuid)),'付款前原单目标选择已改变。');
@@ -84,7 +87,7 @@ export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeC
   return {identity:copy(identity(s)),fingerprint:s.fingerprint,phase:s.stage,...s.stage==='completed'?{outcome:transport(s.outcome)}:{}};
  }
  async function askProof(data,userId,phase){
-  demand(installed&&isActiveGM(game)&&bounded(data?.sourceNonce)&&/^[a-f0-9]{64}$/.test(data.fingerprint??''),'主GM或施法证明参数无效。');
+  demand(installed&&currentSystem()&&isActiveGM(game)&&bounded(data?.sourceNonce)&&/^[a-f0-9]{64}$/.test(data.fingerprint??''),'主GM或施法证明参数无效。');
   const payload={sourceNonce:data.sourceNonce,fingerprint:data.fingerprint,phase};
   const response=userId===game.user.id?{ok:true,value:await localProof(payload,userId)}:await socket.executeAsUser(PROOF,userId,payload);
   demand(isActiveGM(game)&&response?.ok&&response.value?.identity?.gmId===game.user.id&&response.value.identity.userId===userId&&response.value.phase===phase&&response.value.fingerprint===data.fingerprint&&await hash(response.value.identity)===data.fingerprint,'原客户端真实调用没有确认。');
@@ -92,7 +95,7 @@ export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeC
  }
  async function resolveIdentity(i,{beforePayment=false}={}){
   const actor=await fromUuid(i.actorUuid),item=await fromUuid(i.itemUuid),entry=await fromUuid(i.entryUuid),token=await fromUuid(i.sourceTokenUuid),target=await fromUuid(i.targetUuid),user=game.users.get(i.userId);
-  demand(isActiveGM(game)&&game.user.id===i.gmId&&user?.active&&actor?.items?.get(item?.id)===item&&actor.items.get(entry?.id)===entry&&actor.testUserPermission(user,'OWNER')===true&&item.actor===actor&&entry.actor===actor&&getSourceId(item)===ROARING_APPLAUSE_SOURCE&&shape(item)===i.itemShape,'原生来源或权限不再匹配。');
+  demand(currentSystem()&&isActiveGM(game)&&game.user.id===i.gmId&&user?.active&&actor?.items?.get(item?.id)===item&&actor.items.get(entry?.id)===entry&&actor.testUserPermission(user,'OWNER')===true&&item.actor===actor&&entry.actor===actor&&getSourceId(item)===ROARING_APPLAUSE_SOURCE&&shape(item)===i.itemShape,'原生来源或权限不再匹配。');
   if(beforePayment){const a=assessRoaringCast({game,actor,item,entry,user,options:{rank:3,messageMode:'public'}});demand(a.eligible,a.reason??'原生施法参数无效。');}
   validateRoaringTarget({game,actor,token,targets:[target]});demand(target.actor.uuid===i.targetActorUuid&&same(roaringOwnTurn({game,actor,token}),i.turn),'原目标或准确施法回合不再匹配。');
   const dc=entry.statistic?.withRollOptions?.({item})?.dc?.value??entry.statistic?.dc?.value;demand(dc===i.dc,'原施法DC已经改变。');
@@ -187,7 +190,7 @@ export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeC
  function reactionRestriction(actor){
   const entry=(sourceNonce,status,reason)=>({sourceNonce,status,reason});
   const unresolved=reason=>({status:'manual',sources:[entry(null,'manual',reason)]});
-  if(!installed||game.world?.id!=='ujx5r8oipw7ercdr'||game.system?.id!=='pf2e'||game.system.version!=='8.5.1')return unresolved('provider-unavailable');
+  if(!installed||game.world?.id!=='ujx5r8oipw7ercdr'||!currentSystem())return unresolved('provider-unavailable');
   if(!actor?.uuid||indexedActor(actor.uuid)!==actor)return unresolved('actor-not-live');
   const sources=[];
   try{
@@ -205,7 +208,7 @@ export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeC
      const s=r?.state,i=r?.context?.immunity;
      demand(r?.schema===1&&Number.isSafeInteger(r.revision)&&r.revision>=0&&bounded(nonce)&&!['constructor','prototype'].includes(nonce)&&s.source?.targetActorUuid===actor.uuid,'source-unproven');
      projectRoaringConditions(s);
-     demand(r.context?.paymentId===s.source.castNonce&&typeof r.context.userId==='string'&&typeof r.context.gmId==='string'&&Number.isFinite(r.context.dc)&&i?.checked===true&&i.systemVersion==='8.5.1'&&['spell','slowed','fascinated'].every(k=>typeof i[k]==='boolean'),'source-unproven');
+     demand(r.context?.paymentId===s.source.castNonce&&typeof r.context.userId==='string'&&typeof r.context.gmId==='string'&&Number.isFinite(r.context.dc)&&i?.checked===true&&i.systemVersion===systemVersion&&['spell','slowed','fascinated'].every(k=>typeof i[k]==='boolean'),'source-unproven');
      if(s.status==='ended'||i.spell){sources.push(entry(nonce,'clear',s.status==='ended'?'source-ended':'whole-spell-immune'));continue;}
      const preview=reduceRoaringSource(s,{type:'reconcile',sourceNonce:nonce,observation:observation(s)}).source;
      if(preview.status==='ended'){sources.push(entry(nonce,'clear',preview.termination?.reason??'source-ended'));continue;}
@@ -225,7 +228,7 @@ export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeC
   return {status:sources.some(s=>s.status==='restricted')?'restricted':sources.some(s=>s.status==='manual')?'manual':'clear',sources};
  }
  async function applyLifecycleEvent({actor,nonce,event}){
-  demand(installed&&isActiveGM(game),'生命周期事实必须由当前主GM执行。');
+  demand(installed&&currentSystem()&&isActiveGM(game),'生命周期事实必须由当前主GM执行。');
   return queue.run(actor.uuid,async()=>{
    const generation=authorityGeneration;
    async function applyStep(step){

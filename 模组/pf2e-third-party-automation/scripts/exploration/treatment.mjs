@@ -13,6 +13,7 @@ export function createTreatmentProvider({capabilities,nativeTreatment,ledger,own
   const reserved=new Map();
   async function begin(activity) {
     const healer=await capabilities.discover(activity.actorUUID);
+    if(activity.options.estimateSource&&(typeof healer.systemVersion!=='string'||!healer.systemVersion||activity.options.estimateSource.sourceVersion!==healer.systemVersion))return {status:'blocked',reason:'treatment-estimate-runtime-changed'};
     if(activity.options.extensionOf){const original=await ledger.getActivity(activity.options.extensionOf);if(original?.state!=='confirmed'||extensionPatients(original,activity.patientUUIDs).length!==activity.patientUUIDs.length)return {status:'blocked',reason:'extension-source-unconfirmed'};const patients=await capabilities.snapshot(activity.patientUUIDs);if(healer.isDead||healer.unconscious||patients.some(p=>p.isDead||!p.pool.ready||!treatablePatient(p,healer)))return {status:'blocked',reason:'patient-immune-or-token-or-pool-unavailable'};reserved.set(activity.id,{extension:original});return {status:'started'}}
     const skill=activity.options.skill??'medicine',rank=healer[skill]?.rank??0;
     if(rank<1||({trained:1,expert:2,master:3,legendary:4}[activity.options.rank??'trained']??5)>rank)return {status:'blocked',reason:'skill-or-dc-unqualified'};

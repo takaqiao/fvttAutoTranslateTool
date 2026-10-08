@@ -91,7 +91,7 @@ test('a detached cast cannot lend its enrollment to a direct same-item consume',
  finish();const out=await task;assert.equal(out.status,'completed');assert.equal(out.receipt.slotCommit.before,2);assert.equal(f.counters().consumes,2);
 });
 
-test('same-rank factory uses the installed PF8.5.1 loadVariant body, including late preparation',{skip:!process.env.PF2E_NATIVE_BUNDLE},async()=>{
+test('same-rank factory uses the installed PF2e loadVariant body, including late preparation',{skip:!process.env.PF2E_NATIVE_BUNDLE},async()=>{
  const text=await readFile(process.env.PF2E_NATIVE_BUNDLE,'utf8'),start=text.indexOf('\tloadVariant(e = {}) {'),end=text.indexOf('\n\tgetHeightenLayers(',start);
  assert.ok(start>=0&&end>start,'Review installed native factory boundary after a PF update');
  const scope=vm.createContext({structuredClone});

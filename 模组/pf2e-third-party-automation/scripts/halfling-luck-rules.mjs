@@ -17,7 +17,7 @@ const canonical=value=>JSON.stringify(value,(_key,entry)=>entry&&typeof entry===
  */
 export function assessHalflingLuck({game,actor,item,user,check,context,roll,card,requestedCreateMessage=context?.createMessage!==false}={}){
  try{
-  if(game?.system?.id!=='pf2e'||game.system.version!=='8.5.1')return no('manual-native-compatibility');
+  if(game?.system?.id!=='pf2e')return no('manual-native-compatibility');
   if(actor?.type!=='character'||actor.isToken||game.actors?.get(actor.id)!==actor)return no('actor-unavailable');
   if(!user?.active||game.users?.get(user.id)!==user||actor.testUserPermission?.(user,'OWNER')!==true)return no('not-owner');
   if(actor.canAct!==true||actor.isDead===true)return no('cannot-act');

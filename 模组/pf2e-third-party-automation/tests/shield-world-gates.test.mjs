@@ -55,7 +55,7 @@ test('the fortress addition keeps unrelated worlds and same-name feats outside t
 
 function compatibilityFixture(world=fortress){
  const actor={id:'defender',type:'character',alliance:'party',itemTypes:{feat:[]}},ally={id:'ally',type:'character',alliance:'party',itemTypes:{feat:[]}};
- const game={world:{id:world},release:{generation:14},system:{version:'8.5.1'},modules:new Map([['pf2e-reaction',{active:true,version:'1.4.3'}]]),userId:'gm',combat:{turns:[{id:'defender',actorId:actor.id,actor},{id:'ally',actorId:ally.id,actor:ally}]}};
+ const game={world:{id:world},release:{generation:14},system:{id:'pf2e',version:'8.5.1'},modules:new Map([['pf2e-reaction',{active:true,version:'1.4.3'}]]),userId:'gm',combat:{turns:[{id:'defender',actorId:actor.id,actor},{id:'ally',actorId:ally.id,actor:ally}]}};
  const calls=[];
  const original=async function(item,...args){calls.push([item,...args]);return item.slug==="effect-raise-a-shield"?"shield-wall":'other';};
  const entry={fn:original,id:12,hook:'createItem',once:false},Hooks={events:{createItem:[entry]}};
@@ -74,7 +74,7 @@ test('fortress protects only empty Shield Wall candidates and preserves upstream
 });
 
 test('fortress compatibility still rejects unknown worlds, system interfaces and inactive dependencies',async()=>{
- for(const mutate of [f=>{f.game.world.id='unreviewed-world';},f=>{f.game.modules.get('pf2e-reaction').active=false;},f=>{f.game.system.version='unknown';}]){
+ for(const mutate of [f=>{f.game.world.id='unreviewed-world';},f=>{f.game.modules.get('pf2e-reaction').active=false;},f=>{f.game.system.id='other';}]){
   const f=compatibilityFixture();mutate(f);const result=await f.install();assert.equal(result.status,'unsupported');assert.equal(f.entry.fn,f.original);
  }
  const f=compatibilityFixture();f.game.modules.get('pf2e-reaction').version='future';let reads=0;const result=await f.install({fetchSource:async()=>{reads++;throw Error('unnecessary source read')},hashSource:async()=>{throw Error('unnecessary hash')}});assert.equal(result.status,'installed');assert.equal(reads,0);assert.equal(await f.entry.fn(f.item,{},'gm'),undefined);assert.equal(f.calls.length,0);result.dispose();assert.equal(f.entry.fn,f.original);
@@ -97,3 +97,5 @@ test('audited Reaction callback no longer throws for fortress empty candidates b
  await assert.rejects(f.entry.fn(f.item,{},'gm'),/a is not defined/);
  result.dispose();assert.equal(f.entry.fn,original);
 });
+
+test('PF2e 8.6 keeps the empty Shield Wall protection scoped to exact native candidates',async()=>{const f=compatibilityFixture();f.game.system.version='8.6.0';const r=await f.install();assert.equal(r.status,'installed');assert.equal(await f.entry.fn(f.item,{},'gm'),undefined);f.ally.itemTypes.feat.push({slug:'shield-wall'});assert.equal(await f.entry.fn(f.item,{},'gm'),'shield-wall');r.dispose()});

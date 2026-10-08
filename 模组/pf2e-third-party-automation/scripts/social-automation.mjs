@@ -31,11 +31,11 @@ export function degreeForSharedCheck({total,natural},dc,adjustments={}){
  return {value:unadjusted,unadjusted,adjustment:null};
 }
 
-function adjustmentMap(game,raw,options){
+function adjustmentMap(game,raw,options,checkOptions){
  const result={};
  for(const entry of raw){
-  const predicate=entry.predicate;
-  if(predicate&&!(typeof predicate.test==='function'?predicate.test(options):new game.pf2e.Predicate(predicate).test(options)))continue;
+  const predicate=entry.predicate,entryOptions=entry.options?new Set([...checkOptions,...entry.options]):options;
+  if(predicate&&!(typeof predicate.test==='function'?predicate.test(entryOptions):new game.pf2e.Predicate(predicate).test(entryOptions)))continue;
   for(const key of ['all',...OUTCOMES])if(entry.adjustments?.[key])result[key]=structuredClone(entry.adjustments[key]);
  }
  return result;
@@ -175,13 +175,14 @@ export function createSocialAutomation({game,fromUuid=globalThis.fromUuid,choose
     };
    const result={total:roll.total,natural},baseOptions=[...(context?.options??[]),...(context?.contextualOptions?.postRoll??[])].filter(o=>!o.startsWith('check:total:delta:'));
    const optionsFor=dc=>new Set([...baseOptions,`check:total:delta:${result.total-dc}`]);
-   const reference=adjustmentMap(game,raw,optionsFor(targets[0].dc)),nativeDegree=degreeForSharedCheck(result,targets[0].dc,reference),squawk=paidSquawk(game,actor,user,card,roll,nativeDegree);
+   const checkOptions=(context?.contextualOptions?.postRoll??[]).filter(option=>!option.startsWith('check:total:delta:')),adjustmentFor=dc=>adjustmentMap(game,raw,optionsFor(dc),[...checkOptions,`check:total:delta:${result.total-dc}`]);
+   const reference=adjustmentFor(targets[0].dc),nativeDegree=degreeForSharedCheck(result,targets[0].dc,reference),squawk=paidSquawk(game,actor,user,card,roll,nativeDegree);
     assertCheck();
    if(!equivalent(reference,context?.dosAdjustments)||OUTCOMES[squawk?1:nativeDegree.value]!==context?.outcome||OUTCOMES[nativeDegree.unadjusted]!==context?.unadjustedOutcome)throw Error('此检定的原生成功度修正无法完整对照，尚未更改目标状态；请GM查看原检定。');
    const outcomes=[];
    for(const target of targets){
      assertCheck();assertRecipient(target,true);
-    const degree=degreeForSharedCheck(result,target.dc,adjustmentMap(game,raw,optionsFor(target.dc)));if(squawk&&degree.value===0)degree.value=1;const reduction=degree.value===3?2:degree.value===2?1:0;
+    const degree=degreeForSharedCheck(result,target.dc,adjustmentFor(target.dc));if(squawk&&degree.value===0)degree.value=1;const reduction=degree.value===3?2:degree.value===2?1:0;
      await upsert(target.actor,{name:'无需惊慌：暂时免疫',type:'effect',img:item.img??'icons/svg/aura.svg',system:{slug:'no-cause-for-alarm-immunity',duration:{value:1,unit:'hours',expiry:'turn-start',sustained:false},start:{value:now,initiative:null},rules:[],tokenIcon:{show:false}},flags:{[MODULE_ID]:{kind:'social-alarm-immunity',sourceId:SOURCE,usageMessageId:message.id,checkMessageId:card.id,expiresAt:now+3600}}},()=>{assertCheck();assertRecipient(target);});
      for(let i=0;i<reduction&&target.actor.getCondition('frightened')?.value>0;i++){
       assertCheck();assertRecipient(target);const before=target.expectedFear??target.fear;

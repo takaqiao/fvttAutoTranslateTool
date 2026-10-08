@@ -44,7 +44,7 @@ test('readonly restore leaves saved map intact and performs no new work',async()
 test('exact public runtime start captures the map before its storage await',async()=>{
  // Execute only the existing start closure; bind its environment without initializing runtime/native providers.
  const source=fs.readFileSync(moduleURL('scripts/exploration/runtime.mjs'),'utf8'),begin=source.indexOf('const start=async config=>'),end=source.indexOf('\n async function refreshStorage',begin);assert.ok(begin>0&&end>begin);
- const schema=await import(moduleURL('scripts/exploration/schema.mjs')),release=deferred(),game={user:{setFlag:async()=>{}},system:{version:'8.5.1'}},captured=[];
+ const schema=await import(moduleURL('scripts/exploration/schema.mjs')),release=deferred(),game={user:{setFlag:async()=>{}},system:{id:'pf2e',version:'8.5.1'}},captured=[];
  const names=Object.keys(schema),start=new Function('isActiveGM','game','refreshStorage','coordinator','ledger',...names,'let lastSessionId=null;'+source.slice(begin,end)+';return start')(()=>true,game,()=>release.promise,{start:async config=>{captured.push(structuredClone(config));return {id:'session'}}},{getSession:async()=>null},...names.map(name=>schema[name]));
  const config={actorUUIDs:[H,P],nativeOwnerByActor:{[H]:'O'}},pending=start(config);config.nativeOwnerByActor[H]='N';release.resolve({state:'ready'});await pending;assert.equal(captured[0].nativeOwnerByActor[H],'O');
 });

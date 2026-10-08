@@ -27,8 +27,8 @@ function validRisky(item){
  const original=originalRules(item);
  if(itemSource(item)!==riskySource||!Array.isArray(original))return false;
  const rules=structuredClone(original);
- if(rules[0]?.value!==undefined){if(typeof rules[0].value!=='boolean')return false;delete rules[0].value}
- return same(rules,riskyRules);
+ if(rules[0]?.key==='RollOption'&&rules[0].value!==undefined){if(typeof rules[0].value!=='boolean')return false;delete rules[0].value}
+ return same(rules,riskyRules)||same(rules,riskyRules.slice(1));
 }
 function assuranceSkill(item){return item.flags?.pf2e?.rulesSelections?.assurance??item.flags?.system?.rulesSelections?.assurance}
 function validAssurance(item){
@@ -49,7 +49,7 @@ function knownSuppress(adjustment){
  return same(keys,['getDamageType','getNewValue','slug','suppress','test'])&&adjustment.slug===null&&adjustment.suppress===true&&['test','getNewValue','getDamageType'].every(key=>typeof adjustment[key]==='function');
 }
 function projection({game,actor,skill,slugs,riskySurgery,assurance,source}){
- if(game.system?.version!=='8.5.1'||typeof game.pf2e?.CheckModifier!=='function')fail('native-estimate-version-unverified');
+ if(game.system?.id!=='pf2e'||typeof game.system.version!=='string'||!game.system.version||typeof game.pf2e?.CheckModifier!=='function')fail('native-estimate-api-unverified');
  if(slugs.some(slug=>['magic-hands','mortal-healing'].includes(slug)))fail('native-healing-model-unverified');
  const items=values(actor.items).filter(item=>!item.isSuppressed&&!item.system?.suppressed);
  const riskyItems=items.filter(item=>itemSource(item)===riskySource||item.slug==='risky-surgery'||item.system?.slug==='risky-surgery');
@@ -121,7 +121,7 @@ function projection({game,actor,skill,slugs,riskySurgery,assurance,source}){
  if(riskySurgery&&!degreeAdjustments.some(entry=>same(entry.predicate?.toObject?.(),['risky-surgery','action:treat-wounds'])&&entry.adjustments?.success?.amount===1))fail('native-risky-outcome-unverified');
  if(assurance)options.add('fortune');
  const outcomesByRank=treatmentOutcomeRows({rank:stat.rank,modifier:prepared.totalModifier,assurance,options,adjustments:degreeAdjustments});
- return {riskySurgery,assurance,ready:true,reason:null,sourceVersion:'8.5.1',source,modifier:prepared.totalModifier,domains:[...domains],options:[...options],outcomesByRank};
+ return {riskySurgery,assurance,ready:true,reason:null,sourceVersion:game.system.version,source,modifier:prepared.totalModifier,domains:[...domains],options:[...options],outcomesByRank};
 }
 
 /** Prepare only source-verified, side-effect-free variants of the native check. */
@@ -129,7 +129,7 @@ export function preparedTreatmentSelections({game,actor,skill,slugs=[]}){
  const source={actorUUID:actor.uuid,skill,ruleSources:[...new Set(values(actor.rules).filter(rule=>!rule.ignored).map(rule=>rule.item?.uuid).filter(uuid=>typeof uuid==='string'))]};
  return [false,true].flatMap(riskySurgery=>[false,true].map(assurance=>{
   try{return projection({game,actor,skill,slugs,riskySurgery,assurance,source})}
-  catch(error){return {riskySurgery,assurance,ready:false,reason:error.message,sourceVersion:'8.5.1',source}}
+  catch(error){return {riskySurgery,assurance,ready:false,reason:error.message,sourceVersion:String(game.system?.version??''),source}}
  }));
 }
 

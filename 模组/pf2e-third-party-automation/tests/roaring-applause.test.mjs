@@ -103,7 +103,7 @@ test('wrong live actor, unsupported provider and malformed candidate cannot impl
  f.targetActor.flags[ID]={roaringApplause:{sources:{broken:{schema:1}}}};assert.equal(q(f.targetActor).sources.find(s=>s.sourceNonce==='broken').status,'manual');
  f.clients.gm.provider.cleanup();assert.equal(q(f.targetActor).status,'manual');
 });
-function fixture({immunity={spell:false,slowed:false,fascinated:false},iwr=true,mode='normal',realEffects=false}={}){
+function fixture({version='8.5.1',immunity={spell:false,slowed:false,fascinated:false},iwr=true,mode='normal',realEffects=false}={}){
  const users=new Map([['gm',{id:'gm',active:true,isGM:true}],['player',{id:'player',active:true,isGM:false,targets:new Set()}]]);users.activeGM=users.get('gm');
  const caster={id:'caster',uuid:'Actor.caster',type:'character',isToken:false,canAct:true,isDead:false,flags:{[ID]:{nativeCasts:[]}},items:new Map(),testUserPermission:u=>['gm','player'].includes(u?.id)};
  const targetActor={id:'target',uuid:'Actor.target',type:'npc',isDead:false,flags:{},items:new Map(),isImmuneTo:item=>immunity[item.type==='spell'?'spell':item.system.slug],testUserPermission:u=>u?.id==='gm'};
@@ -125,7 +125,7 @@ function fixture({immunity={spell:false,slowed:false,fascinated:false},iwr=true,
   saveState:async({actor,nonce,state,expectedRevision})=>{const r=records.get(nonce);assert.equal(r.revision,expectedRevision);r.state=copy(state);r.revision++;operations.push('save');return copy(r)},
   materialize:async({nonce})=>{operations.push('materialize');records.get(nonce).effects.status=records.get(nonce).context.immunity.spell?'immune':'created';},end:async({nonce})=>{operations.push('end');records.get(nonce).effects.status='ended';},endFascination:async()=>operations.push('end-fascination'),renew:async()=>operations.push('renew'),restoreFinite:async()=>operations.push('finite')};
  for(const uid of ['gm','player']){
-  const game={world:{id:'ujx5r8oipw7ercdr'},system:{id:'pf2e',version:'8.5.1'},user:users.get(uid),users,actors:new Map([[caster.id,caster],[targetActor.id,targetActor]]),scenes:new Map([[scene.id,scene]]),combats:new Map([[combat.id,combat]]),messages,time:{worldTime:100},settings:{get:()=> 'public'},pf2e:{settings:{iwr},ConditionManager:{conditions:new Map(['slowed','fascinated'].map(slug=>[slug,{type:'condition',uuid:slug==='slowed'?'Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3':'Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg',system:{slug}}]))}}};game.scenes.current=scene;
+  const game={world:{id:'ujx5r8oipw7ercdr'},system:{id:'pf2e',version},user:users.get(uid),users,actors:new Map([[caster.id,caster],[targetActor.id,targetActor]]),scenes:new Map([[scene.id,scene]]),combats:new Map([[combat.id,combat]]),messages,time:{worldTime:100},settings:{get:()=> 'public'},pf2e:{settings:{iwr},ConditionManager:{conditions:new Map(['slowed','fascinated'].map(slug=>[slug,{type:'condition',uuid:slug==='slowed'?'Compendium.pf2e.conditionitems.Item.xYTAsEpcJE1Ccni3':'Compendium.pf2e.conditionitems.Item.AdPVz7rbaVSRxHFg',system:{slug}}]))}}};game.scenes.current=scene;
   if(realEffects&&uid==='gm')Object.assign(effects,createRoaringEffects({game,fromUuid:async u=>docs.get(u),randomId:()=>`op${++serial}`}));
   const handlers=new Map(),hookMap=new Map(),adapters=new Map();
   const socket={register:(n,fn)=>handlers.set(n,fn),executeAsUser:async(n,to,p)=>clients[to].handlers.get(n).call({socketdata:{userId:uid}},copy(p)),executeForEveryone:async(n,p)=>Promise.all(Object.values(clients).map(c=>c.handlers.get(n).call({socketdata:{userId:uid}},copy(p))))};
@@ -318,3 +318,5 @@ test('an unrelated combatant update cannot consume a start while reconciliation 
  await hook(f.enemy,{resource:1},{},'gm');release();await pending;
  assert.equal(f.claps.length,1);assert.equal(Object.keys(f.records.get(r.state.sourceNonce).state.clapReceipts).length,1);
 });
+
+for(const version of ['8.6.0','9.0.0'])test('Roaring Applause captures the running PF2e version '+version,async()=>{const f=await activeReactionSource({version,realEffects:true});const r=f.effects.list(f.targetActor)[0];assert.equal(r.context.immunity.systemVersion,version);assert.equal(r.effects.status,'created');for(const c of Object.values(f.clients))assert.equal(c.provider.reactionRestriction(f.targetActor).status,'restricted');f.game.system.version='changed';assert.equal(f.clients.gm.provider.reactionRestriction(f.targetActor).status,'manual')});

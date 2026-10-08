@@ -56,7 +56,7 @@ function nativeFixture(g, visible=[false,false], info=[]) {
 }
 
 test('native ordinary icons already at the target visibility avoid document construction',async()=>{
- for(const systemVersion of ['8.5.0','8.5.1']) {
+ for(const systemVersion of ['8.5.0','8.5.1','8.6.0','9.0.0']) {
   const {g}=await environment({systemVersion});const f=nativeFixture(g);
   installSundryPatch({g});g.Hooks.callAll('refreshToken',f.token);
   assert.equal(f.reads(),0);assert.deepEqual(f.view(),{background:false,icons:[false,false]});
@@ -122,20 +122,20 @@ test('new native icons and changing durations fall back whenever any visibility 
  }
 });
 
-test('accessors, non-native display objects and unsupported PF2e use original populated logic',async()=>{
+test('accessors, non-native display objects and other systems use original populated logic',async()=>{
  for(const systemVersion of ['8.5.0','8.5.1'])for(const kind of ['accessor','subclass','system']){
   const {g}=await environment({systemVersion}),f=nativeFixture(g,[false]);
   if(kind==='accessor')Object.defineProperty(f.icons[0],'visible',{get:()=>false,set(){}});
   if(kind==='subclass')Object.setPrototypeOf(f.icons[0],Object.create(Sprite.prototype));
-  if(kind==='system')g.game.system.version='9.0.0';
+  if(kind==='system')g.game.system.id='sf2e';
   installSundryPatch({g});g.Hooks.callAll('refreshToken',f.token);assert.equal(f.reads(),1,kind);
  }
 });
 
-test('audited versions read live system eligibility after installation and keep unknown versions on native logic',async()=>{
+test('live system identity and Sprite contracts govern the shortcut across PF2e versions',async()=>{
  const {g}=await environment(),f=nativeFixture(g,[false]);
  assert.equal(installSundryPatch({g}).status,'installed');
- for(const [version,id,expectedReads] of [['8.5.1','pf2e',0],['8.5.2','pf2e',0],['8.5.1','sf2e',1],['8.5.0','pf2e',1]]) {
+ for(const [version,id,expectedReads] of [['8.5.1','pf2e',0],['8.6.0','pf2e',0],['9.0.0','pf2e',0],['8.6.0','sf2e',1],['8.5.0','pf2e',1]]) {
   g.game.system={id,version};g.Hooks.callAll('refreshToken',f.token);
   assert.equal(f.reads(),expectedReads,id+'/'+version);
   assert.deepEqual(f.view(),{background:false,icons:[false]});

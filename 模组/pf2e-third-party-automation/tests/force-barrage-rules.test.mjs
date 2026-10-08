@@ -11,10 +11,14 @@ function fixture(){
  const scene={id:'sc',uuid:'Scene.sc',grid:{type:1,units:'ft',distance:5},tokens:new Map()};
  const token={id:'src',uuid:'Scene.sc.Token.src',documentName:'Token',parent:scene,actor,hidden:false,object:{center:{x:0,y:0},distanceTo:()=>120,checkCollision:()=>false}};scene.tokens.set(token.id,token);
  const target={id:'tar',uuid:'Scene.sc.Token.tar',documentName:'Token',parent:scene,actor:{type:'npc',isDead:false,hasCondition:()=>false},hidden:false,object:{center:{x:500,y:0}}};scene.tokens.set(target.id,target);
- const game={world:{id:'ujx5r8oipw7ercdr'},system:{version:'8.5.1'},users,user,actors:new Map([['a',actor]]),scenes:new Map([['sc',scene]])};
+ const game={world:{id:'ujx5r8oipw7ercdr'},system:{id:'pf2e',version:'8.5.1'},users,user,actors:new Map([['a',actor]]),scenes:new Map([['sc',scene]])};
  game.settings={get:()=> 'public'};token.elevation=0;target.elevation=0;
  return {game,actor,item,entry,user,options:{rank:3,slotId:NaN},token,targets:[target],visibilityConfirmed:true};
 }
+for(const version of ['8.6.0','9.0.0'])test(`Force Barrage retains exact cast admission on PF2e ${version}`,()=>{
+ const f=fixture();f.game.system.version=version;assert.equal(assessForceBarrageCast(f).eligible,true);
+ f.game.system.id='other';assert.equal(assessForceBarrageCast(f).eligible,false);
+});
 test('current spontaneous original Cast and actual native heightened variant admitted without English target name',()=>{
  const f=fixture();assert.equal(assessForceBarrageCast(f).eligible,true);
  const variant=Object.assign(Object.create(Object.getPrototypeOf(f.item)),f.item,{original:f.item,system:{...f.item.system,location:{...f.item.system.location,heightenedLevel:3}}});

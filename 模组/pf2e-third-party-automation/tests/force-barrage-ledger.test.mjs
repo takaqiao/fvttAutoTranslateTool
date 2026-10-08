@@ -145,3 +145,5 @@ test('target stages reject each failed write without acquiring the next permissi
   const before=copy(f.current());f.actor.mode=mode;await assert.rejects(f.ledger[stage](scope));assert.deepEqual(f.current(),before);
  }
 });
+
+test('PF2e 8.6 keeps the exact original paid-cast ledger binding',async()=>{const f=fixture();f.game.system.version='8.6.0';const ctx=await f.paid();assert.equal(f.current().status,'paid');assert.equal(f.current().castNonce,ctx.outcome.castNonce);assert.equal(f.entry.system.slots.slot3.value,1)});

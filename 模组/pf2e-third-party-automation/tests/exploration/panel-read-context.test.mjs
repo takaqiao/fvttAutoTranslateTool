@@ -24,7 +24,7 @@ async function fixture(t,{actorUUIDs=[],selectedUUIDs=actorUUIDs,renderContext=f
  const gm={id:'G',isGM:true,active:true,getFlag:(_module,key)=>key==='explorationSession'?'S':null,setFlag:async()=>{}};
  const other={id:'Other',isGM:true,active:true},player={id:'P',isGM:false,active:true},users=new Map([['G',gm],['Other',other],['P',player]]);users.activeGM=gm;
  let reads=0,writes=0,gate,serial=0;const actorReads=[],actors=new Map([...new Set([...actorUUIDs,...selectedUUIDs])].map(uuid=>{const id=uuid.split('.')[1];return [id,{id,uuid,name:id,items:[],system:{attributes:{hp:{value:10,max:30,temp:0}},resources:{focus:{value:0,max:0}}},getStatistic:()=>({rank:1,mod:7})}]}));
- const game={user:gm,users,settings:{get:()=>rootUUID},modules:new Map(),packs:new Map(),messages:new Map(),actors,scenes:new Map(),time:{worldTime:0},system:{version:'8.5.1'},pf2e:{actions:new Map()},socket:{id:'primary-socket',connected:true,on(){},off(){},emit(event,request,respond){
+ const game={user:gm,users,settings:{get:()=>rootUUID},modules:new Map(),packs:new Map(),messages:new Map(),actors,scenes:new Map(),time:{worldTime:0},system:{id:'pf2e',version:'8.5.1'},pf2e:{actions:new Map()},socket:{id:'primary-socket',connected:true,on(){},off(){},emit(event,request,respond){
   assert.equal(event,'modifyDocument');const {type,action,operation}=request;
   let result=[],error;
   if(type==='JournalEntry'&&action==='get'){reads++;assert.deepEqual(operation.query,{_id:raw._id});result=[structuredClone(raw)]}

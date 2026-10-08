@@ -49,7 +49,7 @@ export function installSundryPatch({g = globalThis, report} = {}) {
       return Reflect.apply(originalRefresh,this,[token,...args]);
     }
     const value = Boolean(token.hover || g.canvas.tokens.highlightObjects);
-    const nativeSprites = g.game.system?.id === 'pf2e' && Number.parseInt(g.game.system.version,10) === 8
+    const nativeSprites = g.game.system?.id === 'pf2e'
       && g.PIXI?.Sprite?.prototype;
     for (const effect of effects.children) {
       if (effect === effects.bg || effect === effects.overlay) continue;

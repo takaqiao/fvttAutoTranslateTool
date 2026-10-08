@@ -5,7 +5,7 @@ import {createRoaringEffects} from '../scripts/roaring-effects.mjs';
 const ID='pf2e-third-party-automation';
 function fixture(synthetic=false){
  const gm={id:'gm',active:true,isGM:true},users=new Map([[gm.id,gm]]);users.activeGM=gm;
- const game={user:gm,users,actors:new Map(),scenes:new Map()},actor={id:'target',uuid:synthetic?'Scene.scene.Token.target.Actor.target':'Actor.target',type:'npc',isToken:synthetic,flags:{},items:new Map()},writes=[];
+ const game={system:{id:'pf2e',version:'8.5.1'},user:gm,users,actors:new Map(),scenes:new Map()},actor={id:'target',uuid:synthetic?'Scene.scene.Token.target.Actor.target':'Actor.target',type:'npc',isToken:synthetic,flags:{},items:new Map()},writes=[];
  let scene,token,baseActor;if(synthetic){baseActor={id:'base',uuid:'Actor.base',type:'npc'};game.actors.set(baseActor.id,baseActor);scene={id:'scene',tokens:new Map()};token={id:'target',uuid:'Scene.scene.Token.target',documentName:'Token',actorId:baseActor.id,baseActor,actorLink:false,actor,parent:scene};scene.tokens.set(token.id,token);game.scenes.set(scene.id,scene);actor.token=token;}else game.actors.set(actor.id,actor);
  actor.update=async changes=>{writes.push('update');for(const [path,value]of Object.entries(changes)){const keys=path.split('.');let object=actor;for(const k of keys.slice(0,-1))object=object[k]??={};object[keys.at(-1)]=structuredClone(value);}return actor;};
  const turn={combatId:'combat',combatantId:'caster',actorUuid:'Actor.caster',tokenUuid:'Scene.scene.Token.caster',started:true,round:4,turn:0,lastTurnEnd:3,order:[{id:'caster',initiative:20,overridePriority:null}]};

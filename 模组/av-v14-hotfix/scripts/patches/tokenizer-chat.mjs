@@ -1,3 +1,10 @@
+import {sha256Fallback} from '../source-hash.mjs';
+
+const RENDER_HTML_HASHES = new Set([
+  '2002b840988a5456d11b20cbd235a2d067d046678af3e1781090c2990849338c', // PF2e 8.5.1
+  '8a7d64e3a8c487efbf6f0ac3ff670af5f9d4719f2e86e18ffcdf9fe0c3075c94' // PF2e 8.6.0
+]);
+
 export function createTokenizerChatPortraitWrapper(){
   return async function(wrapped,...args){
     const html=await wrapped(...args);
@@ -28,10 +35,12 @@ const installed=new WeakSet();
 export function installTokenizerChatPortraitPatch({moduleId='av-v14-hotfix',runtime=globalThis,report=()=>{}}={}){
   const finish=status=>{const result={feature:'tokenizerChat',status};report(result);return result;};
   if((runtime.game?.release?.generation??Number.parseInt(runtime.game?.version,10))!==14)return finish('unsupported-core');
-  if(runtime.game?.system?.id!=='pf2e'||runtime.game.system.version!=='8.5.1')return finish('unsupported-system');
+  if(runtime.game?.system?.id!=='pf2e')return finish('unsupported-system');
   const prototype=runtime.CONFIG?.ChatMessage?.documentClass?.prototype;
   if(typeof prototype?.renderHTML!=='function'||typeof runtime.libWrapper?.register!=='function')return finish('unsupported-runtime');
   if(installed.has(prototype))return finish('already-installed');
+  // Keep setup registration synchronous, before the first chat history render.
+  if(!RENDER_HTML_HASHES.has(sha256Fallback(Function.prototype.toString.call(prototype.renderHTML))))return finish('unsupported-source');
   runtime.libWrapper.register(moduleId,'CONFIG.ChatMessage.documentClass.prototype.renderHTML',createTokenizerChatPortraitWrapper(),'WRAPPER');
   installed.add(prototype);
   return finish('installed');

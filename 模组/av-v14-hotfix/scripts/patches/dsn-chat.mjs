@@ -3,7 +3,7 @@ import {installDsnQueueRecovery} from './dsn-queue.mjs';
 import {installDsnModelRecovery} from './dsn-model.mjs';
 import {dsnCompatibility} from './dsn-runtime.mjs';
 
-// Audited DsN 6.4.1/6.4.2 functions. Model errors reject and failed batches continue native
+// Audited DsN 6.4.1/6.4.2/6.4.3 functions. Model errors reject and failed batches continue native
 // chat reveal, preserving permissions and interactive pending throws.
 const hashes={
   renderRolls:'8ed6ad569e58f7a64474f862a9a08a5e27492b2d8cedbe16b9d2ddce76a9caed',
@@ -60,7 +60,7 @@ export function installDsnChatRecovery({g=globalThis,report=()=>{}}={}){
     queueRecovery?.restore?.();
     const unchanged=compatible()&&pipeline.queue===queue&&queueProto?.attach===attach
       &&(ownsAttach()||(!Object.hasOwn(queue??{},'attach')&&queue?.attach===attach));
-    queueRecovery=unchanged?installDsnQueueRecovery({queue,recover}):{status:'unsupported-queue'};
+    queueRecovery=unchanged?installDsnQueueRecovery({queue,recover,game:g.game,ticker:g.canvas?.app?.ticker}):{status:'unsupported-queue'};
     // A fulfilled ready promise without an engine is unsupported, not another
     // readiness wait on that same already-fulfilled promise.
     if(completedReady&&queueRecovery.ready===completedReady)queueRecovery={status:'unsupported-queue'};

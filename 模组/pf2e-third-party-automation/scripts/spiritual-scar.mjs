@@ -21,7 +21,7 @@ export function createSpiritualScarProvider({game,fromUuid=globalThis.fromUuid,g
  reactionResources=createShieldReactionResources({game,reactionRestriction}),useLedger=createSpiritualScarUseLedger({game,fromUuid}),choose,show=showNativeChoice,originalUse,
  compileResistance=compileSpiritualScarResistance,withResistance=withSpiritualScarResistance,onError=console.error,onManual=()=>globalThis.ui?.notifications?.warn?.('精神伤痕本次抗力来源无法区分，后续意志豁免请手动核对。'),onUnsupported=()=>globalThis.ui?.notifications?.warn?.('合并伤害按原生流程结算；本次精神伤痕请手动处理，自动化未消耗反应或每日次数。')}={}){
  const live=new Map(),plans=new WeakSet(),authorizations=new Map(),pendingWaits=new Set(),queue=new SerialActions();let socket,installation,disposeObserver,closed=false;
- const ready=()=>!closed&&game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'&&game.system.version==='8.5.1'&&nativeAdapter?.nativeBridgeDiagnostic?.().ready===true&&followup?.ready?.()===true&&game.pf2e?.settings?.iwr!==false&&!game.modules?.get('pf2e-auto-action-tracker')?.active;
+ const ready=()=>!closed&&game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'&&nativeAdapter?.nativeBridgeDiagnostic?.().ready===true&&followup?.ready?.()===true&&game.pf2e?.settings?.iwr!==false&&!game.modules?.get('pf2e-auto-action-tracker')?.active;
  const handlesActor=actor=>ready()&&actor?.type==='character'&&!!action(actor);
  const resolveAction=item=>handlesActor(item?.actor)&&action(item.actor)===item?'spiritual-scar:use':undefined;
  const gm=()=>{if(!isActiveGM(game)||!ready())throw Error('精神伤痕主GM或已验证兼容层已改变。');};

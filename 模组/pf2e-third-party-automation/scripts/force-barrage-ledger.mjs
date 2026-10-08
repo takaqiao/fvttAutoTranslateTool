@@ -38,7 +38,7 @@ export function createForceBarrageLedger({game,fromUuid=globalThis.fromUuid,with
  const current=(actor,item)=>read(actor,stateOf(actor).currentByItem?.[item?.id]);
  const gm=()=>requireTrue(game.user?.isGM===true&&isActiveGM(game));
  function source({actor,item,entry,user}){
-  gm();requireTrue(game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'&&game.system.version==='8.5.1');
+  gm();requireTrue(game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e');
   requireTrue(actor?.type==='character'&&!actor.isToken&&game.actors?.get(actor.id)===actor);
   requireTrue(item?.type==='spell'&&item.actor===actor&&actor.items?.get(item.id)===item&&getSourceId(item)===FORCE_BARRAGE_SOURCE);
   requireTrue(entry?.type==='spellcastingEntry'&&entry.actor===actor&&actor.items.get(entry.id)===entry&&item.system?.location?.value===entry.id&&item.system.location.signature===true&&item.system.level?.value===1);

@@ -72,7 +72,7 @@ export function installTurnLifecyclePatch({g = globalThis, report} = {}) {
   const skipAll = reason => finish({status:'skipped', reason,
     parts:Object.fromEntries(Object.keys(CONSUMERS).map(key => [key, skipped(reason)]))});
   if ((g.game?.release?.generation??Number.parseInt(g.game?.version,10)) !== 14) return skipAll('core-version-mismatch');
-  if (g.game.system?.id !== 'pf2e' || Number.parseInt(g.game.system.version,10) !== 8) return skipAll('system-version-mismatch');
+  if (g.game.system?.id !== 'pf2e') return skipAll('unsupported-system');
   const Hooks = g.Hooks;
   if (!Hooks) return skipAll('hook-api-unavailable');
   const prior = installations.get(Hooks);

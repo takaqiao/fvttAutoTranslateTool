@@ -23,7 +23,7 @@ export const ELECTRICITY_BASIC_SOURCES=Object.freeze({
  manipulation:'Compendium.battlezoo-eldamon-pf2e.eldamon-features.Item.h4D0hXhSHqmyBEQN',
 });
 const ID=ELECTRICITY_MODULE_ID,S=ELECTRICITY_SOURCES,copy=x=>structuredClone(x),values=c=>Array.from(c?.values?.()??c??[]);
-export const electricityBasicSettlementEnabled=game=>game?.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'&&game.system.version==='8.5.1'&&game.modules?.get('battlezoo-eldamon-pf2e')?.active===true;
+export const electricityBasicSettlementEnabled=game=>game?.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'&&game.modules?.get('battlezoo-eldamon-pf2e')?.active===true;
 export const electricityBasicCardType=message=>!!message&&!message.isRoll&&!message.isCheckRoll&&!message.isDamageRoll&&!['attack-roll','damage-roll','saving-throw','skill-check','damage-taken'].includes(message.flags?.pf2e?.context?.type);
 export function electricityBasicAction(item){
  const kind=['shield','manipulation'].find(key=>sourceUuid(item)===ELECTRICITY_BASIC_SOURCES[key]);

@@ -1,4 +1,4 @@
-import {SHARED_MANUAL_SHAPE as shape,TOOL_SOCKET_CONTRACTS,NATIVE_DAMAGE_SHAPES,isAutomaticBatchDescriptor,isAutomaticToolDescriptor} from '../native-iwr-profiles.mjs';
+import {SHARED_MANUAL_SHAPE as shape,NATIVE_SHARED_SHAPES,TOOL_SOCKET_CONTRACTS,NATIVE_DAMAGE_SHAPES,isAutomaticBatchDescriptor,isAutomaticToolDescriptor} from '../native-iwr-profiles.mjs';
 import {sourceText,observerRegion,automaticDescriptor,batchRegion,flatRegion,stackingRegion,toolRegions,nativeMethod,TOOL_RECEIVE_PATCHED,TOOL_RECEIVE,TOOL_FORWARD_PATCHED,TOOL_FORWARD} from '../native-source-shapes.mjs';
 
 const batches=new WeakMap(),providers=new WeakMap();
@@ -32,12 +32,13 @@ export async function verifyManualPoolProviders({game,pf2eSource,toolbeltSource,
   else if(a.version!==1||a.providerVersion!=='8.5.1'||a.baseSourceSHA256!=='d63da8312831b84905e6866b1dd3f9d93e95c1012955b0177ad2ce8ccf246157')return unavailable('manual-pool-native-descriptor-mismatch');
   if(b.version===2){if(!isAutomaticToolDescriptor(b)||!same(b,automaticDescriptor(to.statement)))return unavailable('manual-pool-tool-descriptor-mismatch')}
   else if(!legacyTool(b))return unavailable('manual-pool-tool-descriptor-mismatch');
-  if(await digest(po.normalized)!==shape.nativeObserver||await digest(to.normalized)!==shape.toolObserver)return unavailable('manual-pool-observer-seam-mismatch');
   const registration=' __nativeManualPoolStaticReceiver.register(construct,this,r,this.actor.synthetics.modifiers[r]);';
-  if(pf.split(registration).length!==2||pf.split('jm.onInit();__nativeManualPoolBatch.install();').length!==2||tb.split(TOOL_RECEIVE_PATCHED).length!==2||tb.split(TOOL_FORWARD_PATCHED).length!==2)return unavailable('manual-pool-source-seam-partial');
-  if(await digest(batchRegion(pf))!==shape.batchPatched)return unavailable('manual-pool-native-batch-seam-mismatch');
+  const batchSHA=await digest(batchRegion(pf)),nativeShape=NATIVE_SHARED_SHAPES.find(row=>row.batchPatched===batchSHA);
+  if(!nativeShape)return unavailable('manual-pool-native-batch-seam-mismatch');
+  if(await digest(po.normalized)!==nativeShape.nativeObserver||await digest(to.normalized)!==shape.toolObserver)return unavailable('manual-pool-observer-seam-mismatch');
+  if(pf.split(registration).length!==2||pf.split(nativeShape.init+'__nativeManualPoolBatch.install();').length!==2||tb.split(TOOL_RECEIVE_PATCHED).length!==2||tb.split(TOOL_FORWARD_PATCHED).length!==2)return unavailable('manual-pool-source-seam-partial');
   const native=pf.replace(po.region,''),flat=flatRegion(native).replace(registration,'');
-  if(await digest(flat)!==shape.flatOriginal||await digest(stackingRegion(native))!==shape.stacking)return unavailable('manual-pool-native-receiver-seam-mismatch');
+  if(await digest(flat)!==nativeShape.flatOriginal||await digest(stackingRegion(native))!==shape.stacking)return unavailable('manual-pool-native-receiver-seam-mismatch');
   const methodSHA=await digest(nativeMethod(native));if(!NATIVE_DAMAGE_SHAPES.some(p=>p.applyDamageSHA256===methodSHA))return unavailable('manual-pool-native-bridge-seam-mismatch');
   const tool=tb.replace(to.region+'/* end toolbelt manual pool */\n','').replace(TOOL_RECEIVE_PATCHED,TOOL_RECEIVE).replace(TOOL_FORWARD_PATCHED,TOOL_FORWARD);
   const regions=toolRegions(tool),socketSHA=await digest(regions.socket),socketContract=TOOL_SOCKET_CONTRACTS.find(contract=>contract.socket===socketSHA);

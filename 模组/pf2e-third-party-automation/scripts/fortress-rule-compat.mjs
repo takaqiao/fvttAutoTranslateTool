@@ -9,7 +9,7 @@ const copy=value=>structuredClone(value),equal=(a,b)=>JSON.stringify(a)===JSON.s
 const sourceGroup=(group,id,source)=>group?.uuid===id&&group.source?.length===1&&group.source[0]===source;
 const includesAll=(predicate,terms)=>Array.isArray(predicate)&&terms.every(term=>predicate.includes(term));
 
-export const fortressRuleCompatibilityEnabled=game=>game?.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'&&game.system.version==='8.5.1';
+export const fortressRuleCompatibilityEnabled=game=>game?.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e';
 
 /** Configuration maintenance owns the backup/write. Repair only the captured
  * upstream branches; custom predicates and enabled/disabled state survive. */

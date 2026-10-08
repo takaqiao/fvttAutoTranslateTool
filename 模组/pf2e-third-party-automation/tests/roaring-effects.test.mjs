@@ -4,8 +4,8 @@ import {MODULE_ID as ID} from '../scripts/rules.mjs';
 import {createRoaringSource,reduceRoaringSource} from '../scripts/roaring-lifecycle.mjs';
 import {createRoaringEffects} from '../scripts/roaring-effects.mjs';
 
-function fixture({outcome='criticalFailure',immunity={},veto=false,lostReply=false,deleteVeto=false,deleteLostReply=false,synthetic=false}={}){
- const gm={id:'gm',isGM:true,active:true},users=Object.assign(new Map([[gm.id,gm]]),{activeGM:gm}),game={user:gm,users,time:{worldTime:10},actors:new Map(),scenes:new Map()},actor={id:'target',uuid:synthetic?'Scene.scene.Token.target.Actor.target':'Actor.target',type:'npc',flags:{},items:new Map()};
+function fixture({version='8.5.1',outcome='criticalFailure',immunity={},veto=false,lostReply=false,deleteVeto=false,deleteLostReply=false,synthetic=false}={}){
+ const gm={id:'gm',isGM:true,active:true},users=Object.assign(new Map([[gm.id,gm]]),{activeGM:gm}),game={system:{id:'pf2e',version},user:gm,users,time:{worldTime:10},actors:new Map(),scenes:new Map()},actor={id:'target',uuid:synthetic?'Scene.scene.Token.target.Actor.target':'Actor.target',type:'npc',flags:{},items:new Map()};
  if(synthetic){const baseActor={id:'base',uuid:'Actor.base',type:'npc'},scene={id:'scene',tokens:new Map()},token={id:'target',uuid:'Scene.scene.Token.target',documentName:'Token',actorLink:false,actorId:baseActor.id,baseActor,parent:scene,actor};game.actors.set(baseActor.id,baseActor);scene.tokens.set(token.id,token);game.scenes.set(scene.id,scene);actor.isToken=true;actor.token=token;}else game.actors.set(actor.id,actor);
  const docs=new Map([[actor.uuid,actor]]),calls={create:0,delete:[],update:0};let sequence=0;
  const merge=(target,changes)=>{for(const[k,v]of Object.entries(changes)){const keys=k.split('.');let ptr=target;for(const name of keys.slice(0,-1))ptr=ptr[name]??={};const name=keys.at(-1);if(v&&typeof v==='object'&&!Array.isArray(v))merge(ptr[name]??={},v);else ptr[name]=structuredClone(v);}};
@@ -38,10 +38,21 @@ function fixture({outcome='criticalFailure',immunity={},veto=false,lostReply=fal
  const turn={combatId:'combat',combatantId:'caster',actorUuid:'Actor.caster',tokenUuid:'Scene.scene.Token.caster',started:true,round:4,turn:0,lastTurnEnd:3,order:[{id:'caster',initiative:20,overridePriority:null}]};
  let state=createRoaringSource({sourceNonce:'source-one',castNonce:'cast-one',sourceId:'Compendium.pf2e.spells-srd.Item.czO0wbT1i320gcu9',itemUuid:'Actor.caster.Item.spell',entryUuid:'Actor.caster.Item.entry',rank:3,casterActorUuid:'Actor.caster',casterTokenUuid:'Scene.scene.Token.caster',targetActorUuid:actor.uuid,targetTokenUuid:'Scene.scene.Token.target',originalMessageUuid:'ChatMessage.original',completedWorldTime:10,turn,finiteEnvelope:{start:{value:10,initiative:20},duration:{value:1,unit:'rounds',expiry:'turn-end',sustained:false}}});
  state=reduceRoaringSource(state,{type:'save-confirmed',sourceNonce:state.sourceNonce,revision:1,receiptId:'save-one',outcome,observation:{worldTime:10,turn}}).source;
- const context={userId:'owner',gmId:'gm',dc:21,paymentId:'cast-one',immunity:{checked:true,spell:false,slowed:false,fascinated:false,systemVersion:'8.5.1',...immunity}};
+ const context={userId:'owner',gmId:'gm',dc:21,paymentId:'cast-one',immunity:{checked:true,spell:false,slowed:false,fascinated:false,systemVersion:version,...immunity}};
  const effects=createRoaringEffects({game,fromUuid:async uuid=>docs.get(uuid),randomId:()=>`op-${++sequence}`});
  return {game,gm,actor,docs,calls,make,state,turn,context,effects};
 }
+ for(const version of ['8.6.0','9.0.0'])test(`native immunity proof materializes only its captured PF2e ${version} runtime`,async()=>{
+  const f=fixture({version});await f.effects.claim({actor:f.actor,state:f.state,context:f.context});
+  const r=await f.effects.materialize({actor:f.actor,nonce:f.state.sourceNonce});assert.equal(r.effects.status,'created');assert.equal(f.calls.create,1);
+  f.game.system.version='changed';await assert.rejects(f.effects.renew({actor:f.actor,nonce:f.state.sourceNonce}));assert.equal(f.calls.create,1);
+ });
+ test('an immunity proof from another system version cannot authorize an effect',async()=>{
+  const f=fixture({version:'8.6.0',immunity:{systemVersion:'8.5.1'}});await assert.rejects(f.effects.claim({actor:f.actor,state:f.state,context:f.context}));assert.equal(f.calls.update,0);
+ });
+ test('replacing the runtime system invalidates a matching immunity proof',async()=>{
+  const f=fixture();f.game.system={...f.game.system};await assert.rejects(f.effects.claim({actor:f.actor,state:f.state,context:f.context}));assert.equal(f.calls.update,0);
+ });
  for(const outcome of ['failure','criticalFailure'])test(`native alteration preparation preserves exact declared rules for ${outcome}`,async()=>{
   const f=fixture({outcome});await f.effects.claim({actor:f.actor,state:f.state,context:f.context});
   const r=await f.effects.materialize({actor:f.actor,nonce:f.state.sourceNonce});

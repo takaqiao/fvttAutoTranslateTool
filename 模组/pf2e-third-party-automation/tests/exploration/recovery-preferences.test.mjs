@@ -73,7 +73,7 @@ test('saving a selection merges other patient preferences changed during the sna
 function publicStart(refreshStorage,captured){
  const source=fs.readFileSync(new URL('../../scripts/exploration/runtime.mjs',import.meta.url),'utf8'),begin=source.indexOf('const start=async config=>'),end=source.indexOf('\n async function refreshStorage',begin),names=Object.keys(schema);
  assert.ok(begin>0&&end>begin);
- return new Function('isActiveGM','game','refreshStorage','coordinator','ledger',...names,'let lastSessionId=null;'+source.slice(begin,end)+';return start')(()=>true,{user:{setFlag:async()=>{}},system:{version:'8.5.1'}},refreshStorage,{start:async config=>{captured.push(config);return {id:'S'}}},{getSession:async()=>null},...names.map(name=>schema[name]));
+ return new Function('isActiveGM','game','refreshStorage','coordinator','ledger',...names,'let lastSessionId=null;'+source.slice(begin,end)+';return start')(()=>true,{user:{setFlag:async()=>{}},system:{id:'pf2e',version:'8.5.1'}},refreshStorage,{start:async config=>{captured.push(config);return {id:'S'}}},{getSession:async()=>null},...names.map(name=>schema[name]));
 }
 
 test('public runtime captures detached recovery intentions before its storage await',async()=>{

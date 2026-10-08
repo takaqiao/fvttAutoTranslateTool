@@ -9,12 +9,12 @@ const patchURL = new URL('../scripts/patches/turn-lifecycle.mjs', import.meta.ur
 const install = existsSync(patchURL) ? (await import(patchURL.href)).installTurnLifecyclePatch : () => ({status:'skipped', reason:'missing-patch'});
 const versions = {'pf2e-reaction':'1.4.3', 'pf2e-sustain-reminder':'1.1.0', 'pf2e-summons-assistant':'2.20.2', 'pf2e-toolbelt':'3.56.4'};
 
-function environment({useChat=true, autoExpire=true, coreVersion='14.368', systemVersion='8.5.1'} = {}) {
+function environment({useChat=true, autoExpire=true, coreVersion='14.368', systemVersion='8.6.0', systemId='pf2e'} = {}) {
   const writes=[], messages=[], renders=[], deleted=[], timers=[], reports=[], prompts=[];
   const idError = new Error('You must provide an _id for every object in the update data array');
   const g = {console, CONFIG:{debug:{hooks:false}}, CONST:{vtt:'Foundry', DOCUMENT_OWNERSHIP_LEVELS:{OWNER:3}},
     foundry:{documents:{}, canvas:{placeables:{Token:class Token {}}}}, canvas:{ready:false, scene:null},
-    game:{version:coreVersion, release:{generation:Number.parseInt(coreVersion,10)}, system:{id:'pf2e', version:systemVersion},
+    game:{version:coreVersion, release:{generation:Number.parseInt(coreVersion,10)}, system:{id:systemId, version:systemVersion},
       modules:new Map(Object.entries(versions).map(([id,version])=>[id,{active:true,version}])), actors:new Map(),
       user:{id:'gm', isGM:true}, users:new Map([['gm',{id:'gm'}],['player',{id:'player'}]]), time:{worldTime:42},
       settings:{get(module,key){if(module==='pf2e-sustain-reminder'&&key==='useChat')return useChat; return false;}}},
@@ -223,19 +223,21 @@ test('objects that only resemble a temporary Combatant retain the original callb
   await assert.rejects(()=>f.callback('sustain')(foreign),/null.*actor/);
 });
 
-test('unknown core or system versions leave every native callback untouched',()=>{
-  for(const args of [{coreVersion:'15.1'},{systemVersion:'9.0.0'}]){
+test('unknown core versions and other systems leave every native callback untouched',()=>{
+  for(const args of [{coreVersion:'15.1'},{systemId:'sf2e'}]){
     const f=environment(args),result=f.apply();assert.equal(result.status,'skipped');
     for(const part of ['reaction','sustain','summons'])assert.equal(f.callback(part),f.original[part]);
   }
 });
 
-test('current summons and supported core/system patch releases retain audited callback protections',async()=>{
- const f=environment({coreVersion:'14.369',systemVersion:'8.5.2'}),result=f.apply();
+test('audited callbacks retain their protections across PF2e version labels',async()=>{
+ for(const systemVersion of ['8.5.2','8.6.0','9.0.0']){
+ const f=environment({coreVersion:'14.369',systemVersion}),result=f.apply();
  assert.equal(result.parts.summons.status,'installed');assert.equal(result.parts.sustain.status,'installed');
  assert.equal(result.parts.reaction.status,'installed');
  const world=f.thrall({world:true});assert.equal(await f.callback('summons')(world.effect,world.info),undefined);
  assert.equal(f.deleted.length,0);
+ }
 });
 
 test('unknown or inactive consumer versions skip independently while known consumers install',()=>{

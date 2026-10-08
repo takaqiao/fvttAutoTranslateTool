@@ -6,7 +6,7 @@ const M='pf2e-third-party-automation', SOURCE='Compendium.pf2e.spells-srd.Item.c
 class CheckRoll {constructor(){this._evaluated=true;this.total=17;this.options={type:'saving-throw',rollerId:'player',degreeOfSuccess:1};this.terms=[{class:'Die',total:7}];}toJSON(){return {class:'CheckRoll',total:this.total,options:{...this.options},terms:this.terms};}}
 class ChatMessage {constructor(data){Object.assign(this,data);}}
 globalThis.CONFIG={Dice:{rolls:[CheckRoll]},ChatMessage:{documentClass:ChatMessage}};
-function fixture({existingRow=false,throwVerified=false,sparseHelper=false,helperOverrides={}}={}){
+function fixture({version='8.5.1',existingRow=false,throwVerified=false,sparseHelper=false,helperOverrides={}}={}){
  const users=new Map([['gm',{id:'gm',active:true,isGM:true}],['player',{id:'player',active:true,isGM:false}],['stranger',{id:'stranger',active:true,isGM:false}]]);users.activeGM=users.get('gm');
  const targetActor={uuid:'Actor.target',id:'target',testUserPermission:u=>u.id!=='stranger'},caster={uuid:'Actor.caster',id:'caster'};
  const scene={id:'scene',tokens:new Map()},target={documentName:'Token',id:'targetToken',uuid:'Scene.scene.Token.targetToken',actor:targetActor,parent:scene};scene.tokens.set(target.id,target);
@@ -23,7 +23,7 @@ function fixture({existingRow=false,throwVerified=false,sparseHelper=false,helpe
  const docs=new Map([[message.uuid,message],[target.uuid,target]]);
  for(const id of ['gm','player']){
   const handlers=new Map(),hooks=new Map();
-  const game={system:{id:'pf2e',version:'8.5.1'},modules:new Map([['pf2e-toolbelt',{active:true,version:'3.56.2'}]]),user:users.get(id),users,messages:new Map([[message.id,message]]),scenes:new Map([[scene.id,scene]]),pf2e:{settings:{metagame:{results:true}}}};
+  const game={system:{id:'pf2e',version},modules:new Map([['pf2e-toolbelt',{active:true,version:'3.56.2'}]]),user:users.get(id),users,messages:new Map([[message.id,message]]),scenes:new Map([[scene.id,scene]]),pf2e:{settings:{metagame:{results:true}}}};
   const socket={register:(n,fn)=>handlers.set(n,fn),executeAsUser:async(n,to,payload)=>{rpc.push({from:id,to,n});return clients[to].handlers.get(n).call({socketdata:{userId:id}},structuredClone(payload));}};
   const Hooks={on:(name,fn)=>{hooks.set(name,fn);return name},off:name=>hooks.delete(name)};
   const adapter=createRoaringSaveEvidence({game,fromUuid:async uuid=>docs.get(uuid),lookupSource:m=>m===message?source:null,onVerified:async e=>{verified.push(e);if(throwVerified)throw Error('delivery failure');},onManual:async e=>manual.push(e),onError:e=>errors.push(e),randomId:()=>`inv${++serial}`});
@@ -104,3 +104,7 @@ test('rejected second native capture invalidates continuity in the same tick',as
  f.draft.blind=false;assert.equal(f.query('player').status,'unproven');
  await f.idle();assert.equal(f.verified.length,1);assert.equal(f.query('player').status,'unproven');
 });
+
+for(const version of ['8.6.0','9.0.0'])test('native save evidence binds PF2e '+version,async()=>{const f=fixture({version});f.fire();await f.persist();await f.idle();assert.equal(f.verified.length,1);assert.equal(f.verified[0].adjustedOutcome,'failure')});
+
+test('runtime version replacement cannot settle an outstanding native save proof',async()=>{const f=fixture({version:'8.6.0'});f.fire();f.clients.player.game.system.version='8.7.0';await f.persist();await f.idle();assert.equal(f.verified.length,0)});

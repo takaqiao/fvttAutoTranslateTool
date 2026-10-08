@@ -14,7 +14,7 @@ const marker=nonce=>`${M}:spiritual-scar-save:${nonce}`;
  * installed check/reaction middleware. Persist the attempt before the die. */
 export function createSpiritualScarFollowup({game,fromUuid=globalThis.fromUuid,Hooks=globalThis.Hooks,runTargetSave,expiry=createSpiritualScarExpiry({game}),onError=console.error}={}){
  const queue=new SerialActions();
- const ready=()=>game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'&&game.system.version==='8.5.1'&&typeof Hooks?.on==='function'&&typeof Hooks?.off==='function';
+ const ready=()=>game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'&&typeof Hooks?.on==='function'&&typeof Hooks?.off==='function';
  const read=message=>message.flags?.[M]?.spiritualScarFollowup??null;
  async function apply(context){return queue.run(context.damageMessage?.id,async()=>{
   const {claim,actor,fiend,fiendToken,damageMessage,authorize}=context,leader=game.users.activeGM?.id,privateCard=privacy(context.privacy);

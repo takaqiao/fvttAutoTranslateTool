@@ -26,7 +26,7 @@ function degree(face,total,dc,adjustments){
  return outcome;
 }
 
-/** Mirror PF2e 8.5.1's pure degree calculation; no dice or native action runs. */
+/** Mirror the native degree calculation; no dice or native action runs. */
 export function treatmentOutcomeRows({rank,modifier,assurance=false,options=new Set(),adjustments=[]}){
  if(!Number.isInteger(rank)||rank<1||rank>4||!Number.isFinite(modifier)||typeof assurance!=='boolean'||!(options instanceof Set))invalid();
  validateAdjustments(adjustments);
@@ -34,10 +34,10 @@ export function treatmentOutcomeRows({rank,modifier,assurance=false,options=new 
   const dc=dcs[index],faces=assurance?[10]:Array.from({length:20},(_,i)=>i+1);
   const cases=faces.map(face=>{
    const total=face+modifier,natural=assurance?undefined:face;
-   const facts=new Set([...options,`check:total:${total}`,`check:total:natural:${natural}`,`check:roll:total:natural:${natural}`,`check:total:delta:${total-dc}`]);
+   const totals=[`check:total:${total}`,`check:total:natural:${natural}`,`check:roll:total:natural:${natural}`,`check:total:delta:${total-dc}`],facts=new Set([...options,...totals]);
    const selected={};
    for(const entry of adjustments){
-    if(entry.predicate&&!entry.predicate.test(facts))continue;
+    if(entry.predicate&&!entry.predicate.test(entry.options?new Set([...totals,...entry.options]):facts))continue;
     for(const key of ['all',...outcomes])if(entry.adjustments[key])selected[key]={...entry.adjustments[key]};
    }
    return {weight:assurance?1:0.05,outcome:degree(face,total,dc,selected)};

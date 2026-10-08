@@ -9,7 +9,7 @@ const nativeTag='exploration-manual:U';
 
 function nativeFixture({outcome='success'}={}){
  const f=manualEvidenceFixture();f.messages.clear();f.game.time.worldTime=100;
- f.game.system={version:'8.5.1'};f.game.release={generation:14};
+ f.game.system={id:'pf2e',version:'8.5.1'};f.game.release={generation:14};
  f.healer.type='character';f.patient.type='character';
  f.descriptor={version:1,providerId:'patreon-v3',providerVersion:'3.2.29',baseSourceSHA256:sourceSHA,
   pf2eSourceSHA256:'d63da8312831b84905e6866b1dd3f9d93e95c1012955b0177ad2ce8ccf246157'};
@@ -56,6 +56,19 @@ async function recordNative(f,{child=true,receipt=true}={}){
 }
 
 async function finishImmunity(f){await f.saveItem();await f.emit(Promise.resolve(f.terminal()))}
+
+test('known Patreon source records immunity on PF2e 8.6 with current system evidence',async()=>{
+ const f=nativeFixture();f.game.system.version='8.6.0';const recorder=await recordNative(f);
+ try{await finishImmunity(f);const activity=await f.activity();assert.equal(activity.state,'confirmed');assert.equal(activity.proof.nativeImmunity.sourceVersion,'8.6.0')}
+ finally{recorder.stop()}
+});
+test('a saved immunity proof cannot be reused after the PF2e runtime changes',async()=>{
+ const f=nativeFixture(),old=await recordNative(f,{receipt:false});await finishImmunity(f);old.stop();
+ f.game.system.version='8.6.0';const receipt=f.receipt();f.messages.set(receipt.id,receipt);
+ const fresh=f.createRecorder();fresh.start();await flush();
+ try{assert.equal((await f.activity()).state,'awaiting-evidence');assert.ok((await f.activity()).options.missing.includes('native-immunity-receipt'))}
+ finally{fresh.stop()}
+});
 
 function defaultTargetFixture(){
  const f=nativeFixture(),resolveUUID=f.options.fromUuid;

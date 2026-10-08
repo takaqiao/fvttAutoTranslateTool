@@ -51,7 +51,7 @@ async function waitForActivity(f,predicate){
 
 async function nativeFixture(){
  const f=manualEvidenceFixture(),server=await revisionFixture();
- f.messages.clear();f.game.time.worldTime=100;f.game.system={version:'8.5.1'};
+ f.messages.clear();f.game.time.worldTime=100;f.game.system={id:'pf2e',version:'8.5.1'};
  f.healer.type='character';f.patient.type='character';
  const binding={invocationId:'INV',messageId:'C',useId:'U',tag:'exploration-manual:U',actorUUID:'Actor.H',patientUUID:'Actor.P',sourceUserId:'HUSER',startedAt:100,recordingSessionId:'S'};
  const metadata={tag:binding.tag,useId:'U',patientUUID:'Actor.P',startedAt:100,recordingSessionId:'S',riskySurgery:false,continualRecovery:false,patreonImmunity:{...binding}};
@@ -66,7 +66,7 @@ async function nativeFixture(){
  f.item={id:'I',uuid:'Actor.P.Item.I',actor:f.patient,parent:f.patient,type:'effect',sourceId:'Compendium.pf2e.feat-effects.Item.Lb4q2bBAgxamtix5',
   system:{start:{value:100},duration:{value:60,unit:'minutes',expiry:'turn-start',sustained:false},context:{origin:{actor:'Actor.H'}}},
   flags:{[M]:{explorationManualPatreonImmunity:{...binding,creatorId:'G'}}}};
- f.terminal={descriptor,binding,creatorId:'G',itemUUID:f.item.uuid,start:100,duration:{...f.item.system.duration},expiresAt:3700};
+ f.terminal={sourceVersion:'8.5.1',descriptor,binding,creatorId:'G',itemUUID:f.item.uuid,start:100,duration:{...f.item.system.duration},expiresAt:3700};
  f.ledger=server.recorder.ledger;
  f.options={...f.options,ledger:f.ledger,hpPools:{discover:actor=>({poolUUID:actor.uuid,ready:true})},
   fromUuid:async uuid=>f.actors.get(uuid)??[...f.patient.items.values()].find(item=>item.uuid===uuid)};

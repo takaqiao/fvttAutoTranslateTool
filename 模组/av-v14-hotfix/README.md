@@ -1,10 +1,30 @@
-# FVTT v14 Local Hotfix 0.6.22
+# FVTT v14 Local Hotfix 0.6.24
 
-当前核验基线为 Foundry **14.368**、PF2e **8.5.1**、Dice So Nice **6.4.2**、BBMM **1.4.11**、Grid **2.3.1**、Summons Assistant **2.20.2**。本模组按支持的主版本、实际 API 与函数源码契约安装适配；每项可在世界设置中关闭，刷新后生效。契约不匹配或检测到冲突时跳过，对应状态见：
+当前源码及隔离回归基线为 Foundry **14.368**、PF2e **8.6.0**、Dice So Nice **6.4.3**、BBMM **1.4.11**、Grid **2.3.1**、Summons Assistant **2.20.2**。本模组保留 Foundry 14 与各项实际 API、函数源码契约；PF2e 适配不再因系统版本号跳过。每项可在世界设置中关闭，刷新后生效。契约不匹配或检测到冲突时跳过，对应状态见：
 
 ```js
 game.modules.get('av-v14-hotfix').api.status()
 ```
+
+## 0.6.24 的 PF2e 8.6.0 适配
+
+- 名称、Sundry 图标、回合生命周期及 Tokenizer 头像路径解除 PF2e 主版本和精确版本标签，继续检查系统身份与各自的实际接口。名称在异步源码核验期间仍检查系统、版本值、目标及函数身份是否发生变化。
+- 官方 8.6.0 `generateItemName` 与 8.5.1 只差两处编译闭包名称；无基础类型、特定物品和自定义名称仍会先枚举武器表。加入 8.6.0 完整函数哈希，保留提前返回优化及上游生成名称逻辑。
+- 8.6.0 聊天头像为 `scaleX` 增加绝对值处理，仍使用地图缩放、动态环补偿和径向遮罩。Tokenizer 修正继续只处理有 Tokenizer2 flags 的说话者头像。安装时同步核验完整原生 `renderHTML`，接受已核验的 8.5.1/8.6.0 源码；未知实现跳过。
+
+版本号不再代替契约检查。未来 PF2e 若改变目标函数，名称或头像适配仍会报告 `unsupported-source`，需要重新核验。官方函数隔离测试涵盖原生及修正后的头像、物品名称；实际世界渲染与其它模组的包装顺序需客户端核验。
+
+## 0.6.23 的 DsN 队列适配
+
+- DsN 6.4.3 新增了启动和收尾 catch，但启动拒绝后仍会保留 `rolling/_preparingThrow`、pending binds 和临时关闭的碰撞。补修释放受影响批次，恢复其碰撞和 binds，让后续投骰继续。
+- 特效、碰撞或位置 worker 收尾拒绝时，该批次返回 `false`，聊天继续沿原生流程恢复。旧批次迟到的特效结果不会结束正在运行的新批次。
+- 队列、Accumulator 回调与完整 DiceBox 使用一致的旧版或 6.4.3 来源组合，并核验实际实例、原型上的 ticker 消费方法。实例使用稳定且可恢复的 ticker wrapper，原生 prototype `animateThrow` 及私有特效闭包继续实际执行。原生 spawn、淡出和清场重新注册也使用同一实例函数；异步收尾继续前核验画板、engine、每批 worker/exec、消费者、callback 与 throws 身份，旧清理等待期间的 ticker 帧不会触碰替换的所有者。
+- 支持已核验的 PersistentDice adapter 对 spawn、clearScene 与 completion 的窄包装，保留其实际函数值及 dispose 身份判断；原生两个 Promise 消费者也适配桥返回的外层 Promise，外部 await/catch 保留原生行为。等待具体 `box.ready`，质量更新或重建画板时重新安装；未知或混搭来源跳过对应路径。`api.status().version` 与清单同为 0.6.23。
+- 在投骰、特效或 worker 等待期间启用、停用 PersistentDice，只有同一画板、engine、worker、callback 和 throws 上完整且已核验的桥安装/拆除才更新该批次的引用；受影响批次明确结算，后批次继续。未知换属在收尾前释放捕获等待为 `false`，保留新所有者的物理状态；未知原生业务异常仍抛出。
+- 持久骰或交互骰保留 ticker 时，下一批原生 spawn/simulate 等待仍可运行正常帧。只有该启动尚未取得 callback/throws、且仍在 `_preparingThrow` 阶段时接受原生 null 状态；取得后撤销继续按严格批次身份处理。
+- 6.4.3 的聊天、模型和画质函数与已核验来源一致，既有 BBMM 五项画质锁、正常投骰、爆骰、私密及交互 pending 规则保留。新 fixture 独立保存，旧来源记录和历史回归继续保留。
+
+隔离回归涵盖源码契约、失败恢复与并发所有权；实际世界的画面、帧率及第三方完整工作流需另行客户端核验。模型下载失败补修仍需要完整刷新已卡住的旧客户端。
 
 ## 0.6.22 的上游维护
 
@@ -77,11 +97,11 @@ Wayfinder 新版没有等价采纳旧补丁的所有延迟刷新策略，不能�
 | --- | --- |
 | 旧导入器兼容 | 旧 ChatMessage type → style；旧 Scene 图片字段 → levels；现代字段优先。 |
 | 冒险包设置 | 仅 sf2e-murder-in-metal-city 13.2.0 的设置注册兼容；Season of Ghosts 已使用上游。 |
-| PF2e 物品名称 | PF2e 8 主版本，逐函数验证已核验的 8.5.0/8.5.1 源码；对无需自动改名的原生分支提前返回。 |
+| PF2e 物品名称 | 检查 PF2e 身份，逐函数验证已核验的 8.5.0/8.5.1/8.6.0 源码；对无需自动改名的原生分支提前返回。 |
 | 聊天时间戳 | 复用窄式时长格式化器，跳过同文 DOM 写入；保留实际时间变化。 |
 | 批量删除聊天 | 保留核心删除队列及每条删除事件，合并同批动画结束后的布局操作。 |
 | Babele 按需汉化 | 汉化 3.1.2/3.2.1、Babele 2.9.1、libWrapper 1.13.5.1；合并增量索引更新。full 模式走上游。 |
-| Tokenizer2 聊天头像 | PF2e 8.5.1 中有 Tokenizer2 flags 的头像恢复原生尺寸，清除地图缩放引入的遮罩。相关 PF2e issue 以 NOT_PLANNED 关闭，不是已修复。 |
+| Tokenizer2 聊天头像 | 完整原生头像方法符合已核验源码时，有 Tokenizer2 flags 的头像恢复原生尺寸，清除地图缩放引入的遮罩。8.6.0 仍保留原生地图缩放路径。 |
 | 原生缓冲音频停止 | Foundry 14.368 的 STOPPING 状态仍停止底层缓冲音源，保留淡出、暂停及流式音频行为。 |
 | BBMM / DsN 画质硬锁 | BBMM 1 主版本的注册表与规则契约、DsN 6 主版本的逐函数源码契约；读取、保存、重置、画质预览及画板重建遵守已有五项锁。 |
 
@@ -89,25 +109,25 @@ Sundry 与共享回合/奴仆清理使用已验证的原生 Hooks 记录适配�
 
 ## 版本守卫审计
 
-| 路径 | 0.6.22 的守卫与理由 |
+| 路径 | 0.6.24 的守卫与理由 |
 | --- | --- |
 | 包入口及核心补修 | 保留 Foundry generation 14；聊天、时间戳、时长、音频及 Hooks 另有实际 API/源码保护。精确核心标签只用作来源记录。 |
-| DsN 聊天/模型/队列 | 解除精确 6.4.1 / 14.368；保留 DsN 6、Foundry 14、逐函数及回调哈希、实例/原型所有权、具体 ready Promise 与批次所有权。完整文件哈希仅用于 fixture 来源。 |
+| DsN 聊天/模型/队列 | 解除精确 6.4.1 / 14.368；保留 DsN 6、Foundry 14、逐函数及回调哈希、实例/原型所有权、具体 ready Promise 与批次所有权。队列、回调和完整 DiceBox 按旧版或 6.4.3 来源组合核验，实际 ticker 消费方法另行检查；PersistentDice 窄包装按函数源码组合及进行中引用核验。普通批次捕获实际 worker.exec 引用；已装桥的原生恢复引用另核验 worker prototype RPC 源码。完整 bundle 哈希仅用于 fixture 来源。 |
 | DsN 画质 | 解除精确 DsN/BBMM 小版本；保留 DiceConfig 每个消费函数及 factory 哈希。上下文接受已核验的 6.4.1 和 6.4.2 函数，注册表和规则不符合时跳过。 |
 | BBMM reader | BBMM 1、Foundry 14；world Boolean/Object 注册定义、client/user 目标、namespace/key/value/soft 结构。只读取规则，不恢复旧通用设置监听器。 |
 | Grid / BBMM 旧修补 | 已删除运行时守卫和实现，使用当前上游；历史数据保留。 |
-| PF2e 名称 | 解除精确 8.5.0/8.5.1 标签；保留 PF2e 8 与完整目标函数哈希，异步核验期间 system/target/function/version 必须保持同一所有者。 |
-| Sundry | PF2e 小版本标签改为 8 主版本与原生 Sprite 的可写 boolean `visible` 契约。保留 Sundry 1.10.2/1.10.3/1.11.0：已核验的 Hooks 回调引用未暴露的效果选择闭包，回调源码不能独自证明其语义。 |
-| 回合生命周期 | 解除核心 14.368、PF2e 8.5.1 与 Summons 2.19.0 标签；保留 Foundry 14 / PF2e 8、Summons 2、原生 Hooks 源码及严格 Document 关系。Reaction 1.4.3、Sustain 1.1.0 的私有 helper 语义未独立暴露，精确标签保留。 |
+| PF2e 名称 | 解除 PF2e 版本标签；保留 PF2e 身份与完整目标函数哈希，异步核验期间 system/target/function/version 必须保持同一所有者。 |
+| Sundry | 解除 PF2e 版本标签，检查 PF2e 身份与原生 Sprite 的可写 boolean `visible` 契约。保留 Sundry 1.10.2/1.10.3/1.11.0：已核验的 Hooks 回调引用未暴露的效果选择闭包，回调源码不能独自证明其语义。 |
+| 回合生命周期 | 解除核心 14.368、PF2e 版本与 Summons 2.19.0 标签；保留 Foundry 14、PF2e 身份、Summons 2、原生 Hooks 源码及严格 Document 关系。Reaction 1.4.3、Sustain 1.1.0 的私有 helper 语义未独立暴露，精确标签保留。 |
 | Babele 索引 | 保留汉化 3.1.2/3.2.1、Babele 2.9.1、libWrapper 1.13.5.1。已有 helper/native 签名、注册顺序、优先级及 facade 检查不能独自证明未暴露的按需协议和 libWrapper 内部优先级快照语义。 |
 | 旧冒险导入器 | 保留 sf2e-murder-in-metal-city 13.2.0；该设置 shim 没有足以替代标签的上游函数契约。 |
-| Tokenizer | 按用户要求保持原状，包括 PF2e 8.5.1 和头像源码保护。 |
+| Tokenizer | 解除 PF2e 8.5.1 标签；保留 Foundry 14、PF2e 身份与 libWrapper API，新增已核验 8.5.1/8.6.0 完整 `renderHTML` 源码保护。 |
 
 ## 安装、验证与回退
 
 备份旧目录后，将本目录安装到 `Data/modules/av-v14-hotfix`，在需要的世界启用并完整刷新客户端。退役的 `scripts/patches/patreon.mjs`、`wayfinder-fog.mjs`、`wayfinder-fog-texture.mjs`、`grid.mjs`、`bbmm-locks.mjs` 应从部署目录移除。回退可恢复原目录，或关闭本模组后刷新。
 
-安装清单使用 [av-v14-hotfix-v0.6.22 的 module.json](https://github.com/takaqiao/fvttAutoTranslateTool/releases/download/av-v14-hotfix-v0.6.22/module.json)，下载为同一标签的 `av-v14-hotfix-0.6.22.zip`。本仓库包含多个模组，不能用全仓库 `releases/latest/download` 作为此模组的清单。
+安装清单使用 [av-v14-hotfix-v0.6.24 的 module.json](https://github.com/takaqiao/fvttAutoTranslateTool/releases/download/av-v14-hotfix-v0.6.24/module.json)，下载为同一标签的 `av-v14-hotfix-0.6.24.zip`。本仓库包含多个模组，不能用全仓库 `releases/latest/download` 作为此模组的清单。
 
 运行 `node --test tests/*.test.mjs` 验证隔离回归。原生函数及源码哈希记录在 `tests/fixtures`；音频、设置操作符等测试需本地 Foundry 安装，可用 `FVTT_NATIVE_APP` 指定 `resources/app`。具体运行命令、数量、跳过项和部署哈希以本次修复回执为准。
 

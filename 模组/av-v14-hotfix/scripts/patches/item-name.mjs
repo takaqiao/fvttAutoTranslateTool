@@ -1,9 +1,10 @@
 export const ITEM_NAME_HASHES=Object.freeze({
   '8.5.0':'faa5efaa7bc596b4bee8e1c7d9219044c456ae9bbe7acfdc78062db5245201d7',
-  '8.5.1':'28b290589d58d9de5c3eea7a1c05a7a9b4992bb45e5e62816e8f1e97a63a85da'
+  '8.5.1':'28b290589d58d9de5c3eea7a1c05a7a9b4992bb45e5e62816e8f1e97a63a85da',
+  '8.6.0':'740b9d384d5bf5c6cbaea0612f285f5e7159b8aab5e8efb286bacfabb6c63855'
 });
 
-/** Wrapper around the audited PF2e 8.5.0 / 8.5.1 generateItemName implementations.
+/** Wrapper around the audited PF2e 8.5.0 / 8.5.1 / 8.6.0 generateItemName implementations.
  * Only its existing no-op branches are moved before weapon-map allocation.
  * All actual generated names are still calculated by the original function.
  */

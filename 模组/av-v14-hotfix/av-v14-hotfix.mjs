@@ -13,7 +13,7 @@ import {installTurnLifecyclePatch} from './scripts/patches/turn-lifecycle.mjs';
 import {installDsnChatRecovery} from './scripts/patches/dsn-chat.mjs';
 
 const ID='av-v14-hotfix';
-const state={version:'0.6.22',patches:{patreon:{status:'retired',detail:'Upstream 3.2.29 includes the relationship refresh guards.'},wayfinderFog:{status:'retired',detail:'Wayfinder 14.1.1 replaced the old fog implementation; the 14.0.1 adapter is retired.'},grid:{status:'retired',detail:'Use Grid 2.3.1 distance and undrawn-token aura handling.'},bbmmLocks:{status:'retired',detail:'Use BBMM 1.4.11 submenu hard locks and notifications.'}}};
+const state={version:'0.6.24',patches:{patreon:{status:'retired',detail:'Upstream 3.2.29 includes the relationship refresh guards.'},wayfinderFog:{status:'retired',detail:'Wayfinder 14.1.1 replaced the old fog implementation; the 14.0.1 adapter is retired.'},grid:{status:'retired',detail:'Use Grid 2.3.1 distance and undrawn-token aura handling.'},bbmmLocks:{status:'retired',detail:'Use BBMM 1.4.11 submenu hard locks and notifications.'}}};
 let babele;
 const report=(feature,status,detail)=>{
   if(typeof feature==='object'){const {restore,...data}=feature;state.patches[feature.feature]=data;return;}
@@ -48,10 +48,10 @@ Hooks.once('ready',()=>queueMicrotask(async()=>{
   report('runtime','initializing');
   await run('itemNames',async()=>{
     const system=game.system,version=system.version;
-    if(system.id!=='pf2e'||Number.parseInt(version,10)!==8)return report('itemNames','unsupported-system');
+    if(system.id!=='pf2e')return report('itemNames','unsupported-system');
     const target=game.pf2e?.system,original=target?.generateItemName;
     if(typeof original!=='function')return report('itemNames','unsupported-runtime');
-    if(!Object.values(ITEM_NAME_HASHES).includes(await hash(original.toString())))return report('itemNames','unsupported-source');
+    if(!Object.values(ITEM_NAME_HASHES).includes(await hash(Function.prototype.toString.call(original))))return report('itemNames','unsupported-source');
     if((game.release?.generation??Number.parseInt(game.version,10))!==14||game.system!==system||system.id!=='pf2e'||system.version!==version||game.pf2e.system!==target||target.generateItemName!==original)return report('itemNames','source-changed-during-validation');
     target.generateItemName=createItemNameFastPath(original,globalThis);
     report('itemNames','installed');

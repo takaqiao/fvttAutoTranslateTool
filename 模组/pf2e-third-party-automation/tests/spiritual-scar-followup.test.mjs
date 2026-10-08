@@ -53,3 +53,5 @@ test('a PC native Will card drives Slowed without exposing its degree or class D
  }});
  const result=await executor.apply(f.context);assert.equal(result.status,'done');assert.equal(requested,1);assert.equal(f.calls.rolls.length,0);assert.equal(f.calls.created.length,1);const publicReceipt=f.damageMessage.flags[M].spiritualScarFollowup;assert.equal(publicReceipt.messageId,'player-save');assert.equal('dc' in publicReceipt,false);assert.equal('degree' in publicReceipt,false);assert.equal(publicReceipt.status,'done');assert.equal(f.events.size,0);
 });
+
+test('PF2e 8.6 retains the exact native Scar follow-up',async()=>{const f=fixture();f.game.system.version='8.6.0';assert.equal(f.executor.ready(),true);const r=await f.executor.apply(f.context);assert.equal(r.status,'done');assert.equal(f.calls.rolls.length,1);assert.equal(f.calls.created.length,1)});

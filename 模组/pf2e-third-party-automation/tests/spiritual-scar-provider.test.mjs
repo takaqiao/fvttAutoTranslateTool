@@ -96,3 +96,5 @@ test('unregister cancels pending synchronization and removes its temporary hooks
  assert.equal([...f.events.values()].filter(e=>e.name==='updateItem').length,2);f.provider.unregister();
  assert.equal(f.events.size,0);assert.equal(f.provider.ready(),false);await assert.rejects(running);assert.equal(f.calls.native,0);
 });
+
+test('PF2e 8.6 retains native Scar use and reaction settlement',async()=>{const f=await fixture();f.game.system.version='8.6.0';await f.run();assert.equal(f.calls.uses,1);assert.equal(f.calls.native,1)});

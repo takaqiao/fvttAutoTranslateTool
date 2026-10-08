@@ -2,10 +2,6 @@
 // campaigns. It does not implement the Shield Wall reaction.
 const MODULE='pf2e-reaction',EVENT='createItem';
 const TARGETS=new Set(['-','sog','pnvfcgjbf2cjp7gz','ujx5r8oipw7ercdr','team-automation-qa2']);
-const PROFILES=Object.freeze({
- '8.5.0':Object.freeze({coreGeneration:14,system:'8.5.0'}),
- '8.5.1':Object.freeze({coreGeneration:14,system:'8.5.1'}),
-});
 const installations=new WeakMap();
 const sourceOf=fn=>typeof fn==='function'?Function.prototype.toString.call(fn):'';
 const unsupported=reason=>Object.freeze({status:'unsupported',reason,dispose(){}});
@@ -24,8 +20,8 @@ function emptyCandidateRaise(game,item,userId){
 export function registerReactionShieldWallEmptyCompatibility({game,Hooks}={}){
  if(!Hooks||!['object','function'].includes(typeof Hooks))return Promise.resolve(unsupported('missing-hooks'));
  const existing=installations.get(Hooks);if(existing)return existing.promise;
- const module=game?.modules?.get(MODULE),world=game?.world,worldId=world?.id,profile=PROFILES[game?.system?.version];
- const profileCurrent=()=>!!profile&&game?.modules?.get(MODULE)===module&&module?.active===true&&game.release?.generation===profile.coreGeneration&&game.system?.version===profile.system&&game.world===world&&world?.id===worldId&&TARGETS.has(worldId);
+ const module=game?.modules?.get(MODULE),world=game?.world,worldId=world?.id;
+ const profileCurrent=()=>game?.modules?.get(MODULE)===module&&module?.active===true&&game.release?.generation===14&&game.system?.id==='pf2e'&&game.world===world&&world?.id===worldId&&TARGETS.has(worldId);
  if(!profileCurrent())return Promise.resolve(unsupported('unknown-dependency-or-world-profile'));
  const entries=Hooks.events?.[EVENT];
  if(!Array.isArray(entries))return Promise.resolve(unsupported('missing-create-item-hooks'));
