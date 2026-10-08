@@ -101,6 +101,19 @@ test('ending a tree does not overwrite a later equipment change or unrelated sce
  assert.equal(f.item.system.equipped.carryType,'stowed');assert.equal(f.scene.tiles.size,1);assert.ok(f.scene.tiles.has('unrelated'));
 });
 
+test('the top-down tree stays centered on the corpse with a 15-foot texture on different grids',async()=>{
+ for(const distance of [5,10]){
+  const f=fixture('branch');f.scene.grid.distance=distance;
+  await f.areas.tree({item:f.item,source:f.source,target:f.target,nonce:`tree-grid-${distance}`,card:f.card});
+  const tile=[...f.scene.tiles.values()][0],size=f.scene.grid.size*15/distance;
+  assert.deepEqual({x:tile.x,y:tile.y},f.target.object.center);
+  assert.deepEqual({width:tile.width,height:tile.height},{width:size,height:size});
+  assert.deepEqual({x:tile.texture.anchorX,y:tile.texture.anchorY},{x:0.5,y:0.5});
+  assert.equal(tile.texture.src,'modules/pf2e-season-of-ghosts/assets/maps/other/treetops/tree-top01narchy.webp');
+  assert.equal([...f.scene.templates.values()][0].distance,15);
+ }
+});
+
 test('failed native card creation rolls tree resources and equipment back',async()=>{
  const f=fixture('branch');
  await assert.rejects(f.areas.tree({item:f.item,source:f.source,target:f.target,nonce:'tree1234',card:async()=>{throw Error('card failure');}}),/card failure/);

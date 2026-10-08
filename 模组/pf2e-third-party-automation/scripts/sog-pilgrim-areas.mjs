@@ -2,7 +2,7 @@ import {MODULE_ID} from './rules.mjs';
 import {EFFECTS,PILGRIM_FLAG,PilgrimError,values,rewardKey,serializeReward} from './sog-pilgrim-rules.mjs';
 
 const EVENT='tpaSogPilgrimAreaEvent';
-const TREE_TEXTURE='modules/pf2e-summons-assistant/assets/actors/protector_tree.webp';
+const TREE_TEXTURE='modules/pf2e-season-of-ghosts/assets/maps/other/treetops/tree-top01narchy.webp';
 const own=document=>document?.flags?.[MODULE_ID]?.[PILGRIM_FLAG];
 const flags=data=>({[MODULE_ID]:{[PILGRIM_FLAG]:data}});
 const collections={MeasuredTemplate:'templates',Region:'regions',Tile:'tiles'};
@@ -93,8 +93,8 @@ export function createPilgrimAreas({game,fromUuid,media,onError=console.error,ca
   try{
    const template=await add('MeasuredTemplate',{t:'circle',x:position.x,y:position.y,distance:15,direction:0,user:game.user.id,borderColor:kind==='tree'?'#7da56d':'#db91b4',fillColor:kind==='tree'?'#7da56d':'#db91b4'});
    if(kind==='tree'){
-    const size=scene.grid.size*25/scene.grid.distance;
-    await add('Tile',{x:position.x-size/2,y:position.y-size/2,width:size,height:size,texture:{src:TREE_TEXTURE},hidden:false});
+    const size=scene.grid.size*15/scene.grid.distance;
+    await add('Tile',{x:position.x,y:position.y,width:size,height:size,texture:{src:TREE_TEXTURE,anchorX:0.5,anchorY:0.5},hidden:false});
    }else{
     const radius=scene.grid.size*15/scene.grid.distance;
     await add('Region',{name:'花瓣风暴',color:'#db91b4',shapes:[{type:'circle',x:position.x,y:position.y,radius,gridBased:true}],behaviors:[{

@@ -5,11 +5,14 @@ export const PILGRIM_MEDIA = Object.freeze({
  leaf:`modules/${MODULE_ID}/assets/pilgrim-golden-leaf.png`,
  heal:'modules/jb2a_patreon/Library/Generic/Healing/HealingAbility_01_Yellow_400x400.webm',
  leaves:'modules/jb2a_patreon/Library/Generic/Nature/SwirlingLeavesOutburst_01_01_Regular_GreenOrange_400x400.webm',
- storm:'modules/jb2a_patreon/Library/Generic/Nature/SwirlingLeavesLoop01_01_Regular_OrangePink_400x400.webm',
+ storm:'modules/jb2a_patreon/Library/Generic/Nature/SwirlingLeavesLoop02_01_Regular_Pink_400x400.webm',
+ petals:'modules/eskie-effects/assets/Nature/Flower/Particle/Flower_Particle_01_Pink.webm',
  club:'modules/jb2a_patreon/Library/Generic/Weapon_Attacks/Melee/Group02/MeleeAttack02_Club01_01_800x600.webm',
  sword:'modules/jb2a_patreon/Library/Generic/Weapon_Attacks/Melee/Sword01_01_Regular_White_800x600.webm',
  swordSound:'modules/psfx-patreon/library/weapon-attacks/sword/v1/sword-001-00.ogg',
- releaseSound:'modules/psfx-patreon/library/class-features/divine-smite/v1/divine-smite-caster-01.ogg',
+ releaseSound:'modules/psfx-patreon/library/1st-level-spells/cure-wounds/v1/cure-wounds-00.ogg',
+ treeSound:'modules/psfx-patreon/library/1st-level-spells/entangle/vines/v1/entangle-intro.ogg',
+ stormSound:'modules/psfx-patreon/library/cantrips/gust/v1/gust-001.ogg',
  natureSound:'modules/soundfxlibrary/Combat/Single/Spell Whoosh/spell-whoosh-1.mp3',
 });
 export function createPilgrimMedia({game,canvas=globalThis.canvas,fromUuid=globalThis.fromUuid,onError=console.error}={}) {
@@ -37,7 +40,7 @@ export function createPilgrimMedia({game,canvas=globalThis.canvas,fromUuid=globa
   return next.finally(()=>{if(displays.get(key)===next)displays.delete(key);});
  }
  const leafEffect=item=>values(item.actor?.items).find(effect=>effect.type==='effect'&&effect.flags?.[MODULE_ID]?.[PILGRIM_FLAG]?.kind==='leaves'&&effect.flags[MODULE_ID][PILGRIM_FLAG].source===item.uuid&&effect.isExpired!==true&&effect.remainingDuration?.expired!==true);
- const sound=(sequence,file)=>sequence.sound().file(file).volume(0.25).duration(1400).fadeOutAudio(200);
+ const sound=(sequence,file,volume=0.25)=>sequence.sound().file(file).volume(volume).fadeOutAudio(200);
  async function leaves(item,count) {
   return refresh(item,'leaves',async()=>{
    if(count<1)return;
@@ -59,15 +62,18 @@ export function createPilgrimMedia({game,canvas=globalThis.canvas,fromUuid=globa
   if(!ready()||target.parent!==canvas.scene||!target.object)return;
   const sequence=new Sequence();
   sequence.effect().file(PILGRIM_MEDIA.heal).atLocation(target.object).scaleToObject(1.25).opacity(0.75);
-  sound(sequence,PILGRIM_MEDIA.releaseSound);await sequence.play();
+  sound(sequence,PILGRIM_MEDIA.releaseSound,0.22);await sequence.play();
  }
  async function area(item,{kind,scene,position,nonce,effect,template}) {
   if(!ready()||scene!==canvas.scene)return;
   if(kind==='storm'&&(!effect?.uuid||!template?.uuid))throw new Error('花瓣风暴缺少绑定的效果或区域文档。');
   const sequence=new Sequence();
-  if(kind==='storm')sequence.effect().file(PILGRIM_MEDIA.storm).name(name(item,'area',nonce)).atLocation(position).tieToDocuments([item.uuid,effect.uuid,template.uuid]).size(6,{gridUnits:true}).opacity(0.45).persist().fadeIn(300).fadeOut(300);
+  if(kind==='storm'){
+   const mask=new PIXI.Circle(position.x,position.y,scene.grid.size*15/scene.grid.distance),diameter=30/scene.grid.distance;
+   for(const [file,scale,opacity]of [[PILGRIM_MEDIA.storm,1.17,0.65],[PILGRIM_MEDIA.petals,1.2,0.8]])sequence.effect().file(file).name(name(item,'area',nonce)).atLocation(position).tieToDocuments([item.uuid,effect.uuid,template.uuid]).size(diameter*scale,{gridUnits:true}).mask(mask).opacity(opacity).persist().fadeIn(300).fadeOut(300);
+  }
   else sequence.effect().file(PILGRIM_MEDIA.leaves).atLocation(position).size(2,{gridUnits:true}).opacity(0.8);
-  sound(sequence,PILGRIM_MEDIA.natureSound);await sequence.play();
+  sound(sequence,kind==='storm'?PILGRIM_MEDIA.stormSound:PILGRIM_MEDIA.treeSound,kind==='storm'?0.46:0.5);await sequence.play();
  }
  async function clearArea(item,nonce){await end(item,'area',nonce);}
  function nativeStrike(message) {

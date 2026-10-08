@@ -11,7 +11,7 @@ function fixture(t,{matchTrigger,playError,lookup,endAction}={}) {
   section(kind){
    const data={kind};this.sections.push(data);
    const section={};
-   for(const method of ['file','name','attachTo','atLocation','rotateTowards','scaleToObject','spriteOffset','opacity','persist','temporary','tieToDocuments','fadeIn','fadeOut','shape','loopProperty','size','volume','duration','fadeOutAudio'])section[method]=(...args)=>{data[method]=args;return section;};
+   for(const method of ['file','name','attachTo','atLocation','rotateTowards','scaleToObject','spriteOffset','opacity','persist','temporary','tieToDocuments','mask','fadeIn','fadeOut','shape','loopProperty','size','volume','duration','fadeOutAudio'])section[method]=(...args)=>{data[method]=args;return section;};
    return section;
   }
   effect(){return this.section('effect');}
@@ -27,7 +27,7 @@ function fixture(t,{matchTrigger,playError,lookup,endAction}={}) {
  }
  // Sequencer 4.2.3 filters visible effects only, and ignores sceneId in _filterEffects.
  const matching=filter=>effects.filter(effect=>(!filter.name||effect.name?.[0]===filter.name)&&(!filter.effects||filter.effects.includes(effect.id)));
- const globals={Sequence,Sequencer:{EffectManager:{
+ const globals={Sequence,PIXI:{Circle:class Circle{constructor(x,y,radius){Object.assign(this,{x,y,radius});}}},Sequencer:{EffectManager:{
   getEffects(filter){return matching(filter).map(effect=>({id:effect.id,data:{name:effect.name?.[0],sceneId:effect.sceneId}}));},
   async endEffects(filter,push){
    ended.push({filter,push});
@@ -44,7 +44,7 @@ function fixture(t,{matchTrigger,playError,lookup,endAction}={}) {
  const actor={id:'hero',uuid:'Actor.hero',type:'character',items:new Map(),rollOptions:{all:{}}};
  const item={id:'branch',uuid:'Actor.hero.Item.branch',slug:'branch-of-the-great-sugi',type:'weapon',actor,system:{baseItem:'whip',group:'flail',equipped:{carryType:'held',handsHeld:1}},flags:{world:{sogWontonNativeAutomation:{key:'branch-of-the-great-sugi'},sogB2Ch2Resources:{originalSlug:'branch-of-the-great-sugi',fileSha256:'a'.repeat(64)}}}};
  actor.items.set(item.id,item);
- const targetActor={id:'foe',uuid:'Actor.foe',type:'npc'},scene={id:'battle',tokens:new Map()};
+ const targetActor={id:'foe',uuid:'Actor.foe',type:'npc'},scene={id:'battle',tokens:new Map(),grid:{size:100,distance:5}};
  const source={id:'hero',uuid:'Scene.battle.Token.hero',documentName:'Token',actor,parent:scene},target={id:'foe',uuid:'Scene.battle.Token.foe',documentName:'Token',actor:targetActor,parent:scene};
  for(const token of [source,target]){token.object={document:token};scene.tokens.set(token.id,token);}
  const canvas={ready:true,scene},game={user,users,modules:new Map([['sequencer',{active:true}]]),actors:new Map([[actor.id,actor],[targetActor.id,targetActor]]),messages:new Map(),scenes:new Map([[scene.id,scene]])};
@@ -226,11 +226,75 @@ test('unlit scarf reconciliation removes its own glow without affecting other ef
  assert.equal(f.effects.length,0);
 });
 
+for(const {distance,sizes,radius}of [{distance:5,sizes:[7.02,7.2],radius:300},{distance:10,sizes:[3.51,3.6],radius:150}])test(`both storm layers keep a 15-foot mask on a ${distance}-foot grid`,async t=>{
+ const f=fixture(t),area=f.areaDocuments();f.scene.grid.distance=distance;
+ area.position={x:450,y:375};await f.media.area(f.item,area);
+ const layers=f.sections('effect');assert.equal(layers.length,2);
+ assert.deepEqual(layers.map(layer=>layer.file[0]),[
+  'modules/jb2a_patreon/Library/Generic/Nature/SwirlingLeavesLoop02_01_Regular_Pink_400x400.webm',
+  'modules/eskie-effects/assets/Nature/Flower/Particle/Flower_Particle_01_Pink.webm',
+ ]);
+ for(const [index,layer]of layers.entries()){
+  assert.ok(Math.abs(layer.size[0]-sizes[index])<1e-12);assert.deepEqual(layer.size[1],{gridUnits:true});
+  assert.deepEqual(layer.atLocation,[area.position]);assert.deepEqual(layer.opacity,[index===0?0.65:0.8]);
+  assert.deepEqual(layer.name,[`${M}.pilgrim.${f.item.uuid}.areastorm`]);
+  assert.deepEqual(layer.tieToDocuments,[[f.item.uuid,area.effect.uuid,area.template.uuid]]);
+  const mask=layer.mask[0];assert.ok(mask instanceof PIXI.Circle);
+  assert.deepEqual({x:mask.x,y:mask.y,radius:mask.radius},{x:450,y:375,radius});
+  assert.ok(layer.persist);assert.equal(layer.temporary,undefined);
+ }
+ assert.equal(f.stored.length,2);assert.deepEqual(f.errors,[]);
+});
+
+test('storm cleanup removes both layers of one activation and preserves another',async t=>{
+ const f=fixture(t),first=f.areaDocuments('first'),second=f.areaDocuments('second');
+ await f.media.area(f.item,first);await f.media.area(f.item,second);
+ assert.equal(f.stored.length,4);
+ const keep=f.effects.filter(effect=>effect.name[0].endsWith('areasecond'));
+ await f.media.clearArea(f.item,first.nonce);
+ assert.equal(keep.length,2);assert.deepEqual(f.effects,keep);assert.deepEqual(f.stored,keep);
+});
+
+test('both storm layers survive a scene change while their lifecycle documents exist',async t=>{
+ const f=fixture(t),area=f.areaDocuments(),other={id:'elsewhere',tokens:new Map()};
+ await f.media.area(f.item,area);const saved=[...f.stored];assert.equal(saved.length,2);
+ f.enterScene(other);assert.equal(f.effects.length,0);
+ f.enterScene(f.scene);assert.deepEqual(new Set(f.effects),new Set(saved));assert.equal(f.stored.length,2);
+ await f.media.clearArea(f.item,area.nonce);assert.equal(f.effects.length,0);assert.equal(f.stored.length,0);
+});
+
+test('release, tree, and storm activations use distinct sounds at calibrated volumes',async t=>{
+ const f=fixture(t);
+ await f.media.release(f.item,f.target);
+ await f.media.area(f.item,{kind:'tree',scene:f.scene,position:{x:100,y:100},nonce:'tree'});
+ await f.media.area(f.item,f.areaDocuments());
+ assert.deepEqual(f.sections('sound').map(sound=>({file:sound.file[0],volume:sound.volume[0]})),[
+  {file:'modules/psfx-patreon/library/1st-level-spells/cure-wounds/v1/cure-wounds-00.ogg',volume:0.22},
+  {file:'modules/psfx-patreon/library/1st-level-spells/entangle/vines/v1/entangle-intro.ogg',volume:0.5},
+  {file:'modules/psfx-patreon/library/cantrips/gust/v1/gust-001.ogg',volume:0.46},
+ ]);
+ assert.deepEqual(f.errors,[]);
+});
+
+test('activation and attack sounds keep their full natural duration with a short fade out',async t=>{
+ const f=fixture(t);
+ await f.media.release(f.item,f.target);
+ await f.media.area(f.item,{kind:'tree',scene:f.scene,position:{x:100,y:100},nonce:'tree'});
+ await f.media.area(f.item,f.areaDocuments());
+ await f.media.strike(f.message('nature'));
+ f.item.system.baseItem='longsword';f.item.system.group='sword';await f.media.strike(f.message('sword'));
+ const sounds=f.sections('sound');assert.equal(sounds.length,5);
+ for(const sound of sounds){assert.equal(sound.duration,undefined);assert.deepEqual(sound.fadeOutAudio,[200]);}
+ assert.deepEqual(sounds.slice(-2).map(sound=>({file:sound.file[0],volume:sound.volume[0]})),[
+  {file:PILGRIM_MEDIA.natureSound,volume:0.25},{file:PILGRIM_MEDIA.swordSound,volume:0.25},
+ ]);
+});
+
 test('a storm cannot return after its effect, template, or source was deleted off scene',async t=>{
  const f=fixture(t),other={id:'elsewhere',tokens:new Map()};
  for(const key of ['effect','template','source']){
   const area=f.areaDocuments(`storm${key}`);f.documents.set(f.item.uuid,f.item);
-  await f.media.area(f.item,area);assert.equal(f.stored.length,1);
+  await f.media.area(f.item,area);assert.equal(f.stored.length,2);
   f.enterScene(other);f.documents.delete((key==='source'?f.item:area[key]).uuid);
   await f.media.clearArea(f.item,area.nonce);f.enterScene(f.scene);
   assert.equal(f.effects.length,0,`${key} deletion must prevent replay`);
