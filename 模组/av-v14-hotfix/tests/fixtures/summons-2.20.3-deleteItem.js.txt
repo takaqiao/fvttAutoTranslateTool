@@ -1,0 +1,7 @@
+async function autoDeleteThrall(effect, info) {
+	if (!game.user.isGM) return;
+	if (effect.rollOptionSlug !== "thrall-expiration-date") return;
+
+	const tokDoc = info?.parent?.parent;
+	return await tokDoc.delete();
+}

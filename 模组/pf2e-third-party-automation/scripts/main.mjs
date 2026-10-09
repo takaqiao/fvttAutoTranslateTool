@@ -300,7 +300,10 @@ Hooks.on('getHeaderControlsApplicationV2',(app,controls)=>{
  if(game.user.isGM&&actor?.documentName==='Actor'&&actor.type==='character')controls.push({action:'thirdPartyAutomation',label:'第三方维护',icon:'fa-solid fa-wand-magic-sparkles',onClick:()=>open(actor)});
 });
 Hooks.on('getActorSheetHeaderButtons',(app,buttons)=>{
- if(game.user.isGM&&app.actor?.type==='character')buttons.unshift({label:'第三方维护',class:'third-party-automation',icon:'fa-solid fa-wand-magic-sparkles',onclick:()=>open(app.actor)});
+ if(game.user.isGM&&app.actor?.type==='character')buttons.unshift(
+  {label:'探索恢复',class:'exploration-recovery',icon:'fa-solid fa-clock',onclick:()=>game.modules.get(MODULE_ID).api.exploration.open()},
+  {label:'第三方维护',class:'third-party-automation',icon:'fa-solid fa-wand-magic-sparkles',onclick:()=>open(app.actor)}
+ );
 });
 Hooks.on('pf2e.restForTheNight',actor=>onFullRest(actor,request).catch(e=>ui.notifications.error(e.message)));
 Hooks.on('updateCombat',(combat,changes={})=>{if('round'in changes||'turn'in changes)expireCycles(combat).catch(e=>ui.notifications.error(e.message));});

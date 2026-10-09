@@ -319,7 +319,8 @@ export function createKnowledgeAutomation({game,fromUuid=globalThis.fromUuid,cho
    }
    if(action==='knowledge:stance'){
     if(!game.combat?.started)throw Error('军师架势只能在遭遇中使用。');const cooldown=own(actor).stanceCooldown;if(Number.isFinite(cooldown)&&cooldown>now())throw Error('军师架势仍处于1分钟冷却。');
-    const choices=[{value:'society',label:knowledgeNativeLabel(game,'society',actor.skills?.society?.label)},...values(actor.itemTypes?.lore).filter(i=>i.slug==='warfare-lore').map(i=>({value:i.slug,label:i.name}))];
+    const warfare=actor.skills?.['warfare-lore'];
+    const choices=[{value:'society',label:knowledgeNativeLabel(game,'society',actor.skills?.society?.label)},...(warfare?.lore?[{value:'warfare-lore',label:warfare.label}]:[])];
     const selected=await pick(actor,user,'军师架势 · 选择检定',choices);if(!selected)return '已取消进入架势。';
     const stat=actor.getStatistic?.(selected)??actor.skills?.[selected];if(!stat?.check?.roll)throw Error('找不到所选技能的原生检定。');
     let result='未进入军师架势。';const settle=async(roll,outcome)=>{

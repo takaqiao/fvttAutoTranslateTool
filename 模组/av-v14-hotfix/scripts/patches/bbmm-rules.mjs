@@ -4,7 +4,6 @@ export function bbmmCompatibility(runtime){
   const {game}=runtime;
   const module=game?.modules?.get(BBMM);
   if(!module?.active)return 'inactive-bbmm';
-  if(Number.parseInt(module.version,10)!==1)return 'unsupported-bbmm';
   return null;
 }
 

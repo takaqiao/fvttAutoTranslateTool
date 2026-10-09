@@ -1,4 +1,4 @@
-import {registerBabeleIndex,captureBabeleCore} from '../scripts/patches/babele.mjs';
+import {registerBabeleIndex,captureBabeleCore,verifyBabeleIndexSources} from '../scripts/patches/babele.mjs';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
@@ -9,16 +9,18 @@ const source=readFixture('babele-upstream-3.1.2.json');
 const baseline=source;
 const core=readFixture('babele-core-14.367.json');
 const nativeBabele=readFixture('babele-native-2.9.1.json');
-function fn(text,name){return text.functions[name]??'';}
+const contractFixture=readFixture('babele-index-contract.json');
+const contractSources=Object.fromEntries(Object.entries(contractFixture.sections).map(([key,value])=>[key,Object.values(value).join('\n')]));
+function fn(text,name){return contractFixture.sections.translation[name]??text.functions[name]??'';}
 function cls(name){return core[name];}
-const wrapper=source.wrapper;
+const wrapper=contractFixture.sections.translation.registration;
 
 class Collection extends Map { [Symbol.iterator]() { return this.values(); } }
 class Item { static metadata = {indexed:true, collection:'items', embedded:{}}; static schema = {has:()=>true}; }
 function document(id, name, pack='example.items') {
   return Object.assign(new Item(), {id, _id:id, name, pack, isEmbedded:false, documentName:'Item', uuid:pack ? `Compendium.${pack}.Item.${id}` : `Item.${id}`});
 }
-async function harness({beforeCapture=()=>{},beforeRegister=()=>{},expectedState='applied',instrument=true,registrationType='WRAPPER',helperOverride='native',priorities={},registrationOrder=['babele','pf2e_compendium_chn'],translationVersion='3.1.2'}={}) {
+async function harness({beforeCapture=()=>{},beforeRegister=()=>{},expectedState='applied',instrument=true,registrationType='WRAPPER',helperOverride='native',priorities={},registrationOrder=['babele','pf2e_compendium_chn'],translationVersion='3.2.2',contractOverride=contractSources}={}) {
   const timers=new Map(),hooks=new Map();let serial=0;
   const Hooks={on(name,callback){const id=++serial;hooks.set(id,{name,callback});return id;},off(_name,id){hooks.delete(id);}};
   const emit=(name,...args)=>{for(const h of [...hooks.values()])if(h.name===name)h.callback(...args);};
@@ -37,7 +39,7 @@ async function harness({beforeCapture=()=>{},beforeRegister=()=>{},expectedState
   for(const doc of Object.values(docs)){doc._source={name:doc.name};pack.index.set(doc.id,{_id:doc.id,uuid:doc.uuid,name:doc.name});}
   await game.documentIndex.index();
   for(const name of ['scheduleDocumentIndexRebuild','rebuildDocumentIndexCompat','normalizePackId','translateIndexTitles'])vm.runInContext(fn(source,name),c);
-  game.babele.translateIndexTitles=(index,packId)=>c.translateIndexTitles(state,index,packId);
+  vm.runInContext('const state=game.babele.__ondemandPatch;'+contractFixture.sections.translation.facade.replace('babele.','game.babele.'),c);
   const proto=foundry.documents.collections.CompendiumCollection.prototype;
   beforeCapture({g:c,pack,index:game.documentIndex,proto,emit});
   const capture=captureBabeleCore(c),native=proto.indexDocument;
@@ -52,7 +54,8 @@ async function harness({beforeCapture=()=>{},beforeRegister=()=>{},expectedState
     emit('libWrapper.Register',owner,'foundry.documents.collections.CompendiumCollection.prototype.indexDocument',registrationType);
   }
   beforeRegister({g:c,pack,index:game.documentIndex,proto,emit,capture});
-  const registration=registerBabeleIndex({g:c,capture,preserveIndexFlags:helperOverride==='native'?c.preserveIndexFlags:helperOverride});
+  const sourceContract=verifyBabeleIndexSources(contractOverride);
+  const registration=registerBabeleIndex({g:c,capture,sourceContract,preserveIndexFlags:helperOverride==='native'?c.preserveIndexFlags:helperOverride});
   assert.equal(registration.status().state,expectedState,JSON.stringify(registration.status()));
   const counts={full:0,replace:0,removed:0},index=game.documentIndex;
   const full=index.index.bind(index),replace=index.replaceDocument.bind(index),remove=index.removeDocument.bind(index);
@@ -169,13 +172,11 @@ test('an unknown wrapper observed before registration prevents any own-method in
   }});
   assert.equal(Object.hasOwn(h.pack,'indexDocument'),false);assert.equal(Object.hasOwn(h.index,'index'),false);
 });
-test('already wrapped native capture and version drift both fail closed',async()=>{
+test('already wrapped native capture fails closed',async()=>{
   const late=await harness({instrument:false,expectedState:'unsupported',beforeCapture({proto}){
     const original=proto.indexDocument;proto.indexDocument=function(...args){return original.apply(this,args);};
   }});
   assert.equal(Object.hasOwn(late.pack,'indexDocument'),false);assert.match(late.registration.status().reason,/capture/);
-  const changed=await harness({instrument:false,expectedState:'unsupported',beforeRegister({g}){g.game.modules.get('babele').version='2.9.2';}});
-  assert.equal(Object.hasOwn(changed.pack,'indexDocument'),false);assert.equal(Object.hasOwn(changed.index,'index'),false);
 });
 test('full mode installs no instance methods and retains the native bypass',async()=>{
   const h=await harness({instrument:false,expectedState:'not-applicable',beforeRegister({g}){g.game.settings.get=()=>'full';}});
@@ -336,9 +337,93 @@ test('3.2.1 identical translation runtime keeps single-entry indexing and transl
   assert.deepEqual(h.search('World'),[h.world.uuid]);
   assert.equal(h.counts.full,0);assert.equal(h.counts.replace,1);
 });
-test('a newer unverified translation release retains the upstream rebuild',async()=>{
-  const h=await harness({translationVersion:'3.2.2',expectedState:'unsupported'});
+test('current and later releases with the same index contracts retain incremental translated search',async()=>{
+  for(const version of ['3.2.2','9.0.0']){
+    const h=await harness({translationVersion:version,beforeRegister({g}){
+      g.game.modules.get('babele').version='9.0.0';g.game.modules.get('lib-wrapper').version='9.0.0';
+    }});
+    h.update(h.docs.a);await h.flush();
+    assert.equal(h.counts.full,0);assert.equal(h.counts.replace,1);
+    assert.deepEqual(h.search('烈焰'),[h.docs.a.uuid]);
+  }
+});
+
+
+test('a changed title callback or closure retains the original chain instead of bypassing it',async()=>{
+  for(const [before,after] of [
+    ['scheduleDocumentIndexRebuild(state, "indexDocument")','customIndexUpdate(state)'],
+    ['const titles = state.titleIndex?.[packId]?.titles','const titles = state.otherIndex?.[packId]?.titles'],
+    ['translateIndexTitles(state, index, pack);','translateIndexTitles(otherState, index, pack);']
+  ]){
+    const changed={...contractSources,translation:contractSources.translation.replace(before,after)};
+    assert.notEqual(changed.translation,contractSources.translation);
+    const h=await harness({contractOverride:changed,expectedState:'unsupported'});
+    h.update(h.docs.a);await h.flush();
+    assert.equal(h.counts.full,1);assert.equal(h.counts.replace,0);
+    assert.deepEqual(h.search('烈焰'),[h.docs.a.uuid]);
+  }
+});
+
+test('a changed libWrapper ordering contract retains the original wrapper chain',async()=>{
+  const changed={...contractSources,libWrapper:contractSources.libWrapper.replace('t.priority-e.priority','e.priority-t.priority')};
+  const h=await harness({contractOverride:changed,expectedState:'unsupported'});
   h.update(h.docs.a);await h.flush();
   assert.equal(h.counts.full,1);assert.equal(h.counts.replace,0);
-  assert.deepEqual(h.search('烈焰'),[h.docs.a.uuid]);
 });
+
+test('unrelated upstream edits do not disable the index adapter',async()=>{
+  const changed={...contractSources,translation:contractSources.translation+'\nfunction unrelatedFeature(){return "a new release";}'};
+  const h=await harness({contractOverride:changed,translationVersion:'3.2.2'});
+  h.update(h.docs.a);await h.flush();
+  assert.equal(h.counts.full,0);assert.deepEqual(h.search('烈焰'),[h.docs.a.uuid]);
+});
+
+
+test('replacing a verified module or public title facade disables the instance bypass',async()=>{
+  for(const change of [
+    h=>h.game.modules.set('babele',{active:true,version:'2.9.1'}),
+    h=>{h.game.babele.translateIndexTitles=()=>{};}
+  ]){
+    const h=await harness();change(h);
+    assert.equal(h.registration.status().state,'unsupported');
+    h.update(h.docs.a);await h.flush();
+    assert.equal(h.counts.full,1);assert.equal(h.counts.replace,0);
+    assert.deepEqual(h.search('烈焰'),[h.docs.a.uuid]);
+  }
+});
+
+
+test('duplicate or quoted source callbacks cannot authorize the instance bypass',async()=>{
+  const changed=contractSources.translation.replace('scheduleDocumentIndexRebuild(state, "indexDocument")','customIndexUpdate(state)');
+  for(const translation of [
+    contractSources.translation+'\n'+contractFixture.sections.translation.registration,
+    changed+'\n/* '+contractFixture.sections.translation.registration+' */',
+    changed+'\nconst example='+JSON.stringify(contractFixture.sections.translation.registration)+';'
+  ]){
+    const h=await harness({contractOverride:{...contractSources,translation},expectedState:'unsupported'});
+    h.update(h.docs.a);await h.flush();
+    assert.equal(h.counts.full,1);assert.equal(h.counts.replace,0);
+    assert.deepEqual(h.search('烈焰'),[h.docs.a.uuid]);
+  }
+});
+
+for(const name of ['scheduleDocumentIndexRebuild','rebuildDocumentIndexCompat']){
+  test(`a changed ${name} retains its upstream side effects through the original chain`,async()=>{
+    const original=contractFixture.sections.translation[name];
+    const changed=original.replace('{','{\n\tglobalThis.actualUpstreamCacheInvalidation?.();');
+    const contractOverride={...contractSources,translation:contractSources.translation.replace(original,changed)};
+    assert.equal(verifyBabeleIndexSources(contractSources).supported,true);
+    assert.equal(verifyBabeleIndexSources(contractOverride).supported,false);
+    let invalidations=0;
+    const h=await harness({contractOverride,expectedState:'unsupported',beforeRegister({g}){
+      g.actualUpstreamCacheInvalidation=()=>{invalidations++;};
+      vm.runInContext(changed,g);
+    }});
+    assert.equal(Object.hasOwn(h.pack,'indexDocument'),false);
+    h.update(h.docs.a);await h.flush();
+    assert.equal(invalidations,1);
+    assert.equal(h.counts.full,1);assert.equal(h.counts.replace,0);
+    assert.equal(h.registration.status().metrics.nativeCalls,0);
+    assert.deepEqual(h.search('烈焰'),[h.docs.a.uuid]);
+  });
+}

@@ -175,8 +175,8 @@ test('a system override is wrapped separately, while inherited static APIs are n
   assert.equal(targets.includes('CONFIG.Scene.documentClass.prototype.update'), true);
 });
 
-test('only the active audited importer version receives missing adventure settings, without replacing existing ones', () => {
-  for (const [version, active, expected] of [['13.2.0', true, 1], ['13.2.0', false, 0], ['14.0.0', true, 0]]) {
+test('only the active importer receives missing adventure settings, without replacing existing ones', () => {
+  for (const [version, active, expected] of [['13.2.0', true, 1], ['13.2.0', false, 0], ['14.0.0', true, 1]]) {
     const {g, registrations} = environment(version, active);
     const before = g.game.settings.settings.get('present.autoOpenAdventures');
     registerLegacyCompat({g, registerWrapper() {}});
@@ -252,4 +252,13 @@ test('the native configured document classes satisfy the migration contract',t=>
   assert.deepEqual(wrappers.get('ChatMessage.createDocuments').call(BaseChatMessage,value=>value,{type:2}),{style:2});
   assert.deepEqual(wrappers.get('Scene.create').call(BaseScene,value=>value,{img:'map.webp'}),
     {initialLevel:'defaultLevel0000',levels:[{_id:'defaultLevel0000',name:'Default',background:{src:'map.webp'}}]});
+});
+
+test('adventure settings require registration APIs and a usable namespace',()=>{
+ for(const change of [g=>g.game.settings.register=null,g=>g.game.settings.settings=null]){
+  const {g,registrations}=environment();change(g);
+  assert.doesNotThrow(()=>registerLegacyCompat({g,registerWrapper(){}}));assert.equal(registrations.length,0);
+ }
+ const {g,registrations}=environment();g.game.packs=[...g.game.packs,...[{},true,42,' '].map(packageName=>({metadata:{type:'Adventure',packageName}}))];
+ registerLegacyCompat({g,registerWrapper(){}});assert.equal(registrations.length,1);
 });

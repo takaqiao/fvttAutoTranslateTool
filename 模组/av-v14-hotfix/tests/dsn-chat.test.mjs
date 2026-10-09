@@ -4,17 +4,19 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import {installDsnChatRecovery} from '../scripts/patches/dsn-chat.mjs';
 const fixture=JSON.parse(fs.readFileSync(new URL('./fixtures/dsn-chat-native.json',import.meta.url)));
-for(const name of ['dsn-queue-native.json','dsn-queue-6.4.3-native.json'])describe(name,()=>{
+for(const name of ['dsn-queue-native.json','dsn-queue-6.4.3-native.json','dsn-queue-6.4.4-native.json'])describe(name,()=>{
+const fixture=JSON.parse(fs.readFileSync(new URL('./fixtures/'+(name.includes('6.4.4')?'dsn-chat-6.4.4-native.json':'dsn-chat-native.json'),import.meta.url)));
 const queueFixture=JSON.parse(fs.readFileSync(new URL('./fixtures/'+name,import.meta.url)));
 const settle=()=>new Promise(resolve=>setImmediate(resolve));
 function setup({failure=null,hidden=false,pending=false,secret=false}={}){
  const errors=[],events=[],queued=[],classes=new Set(['dsn-hide']);
  const node={classList:{remove:v=>classes.delete(v)},querySelectorAll:()=>[]};
- const user={id:'player'},message={id:'message',author:user,speaker:{actor:'actor'},whisper:secret?['gm']:[],isContentVisible:!secret,content:secret?'???':'12',_dice3dMessageHidden:true,_dice3dPendingRenders:1,_dice3danimating:true};
+ const user={id:'player'},message={id:'message',author:user,getFlag:()=>false,speaker:{actor:'actor'},whisper:secret?['gm']:[],isContentVisible:!secret,content:secret?'???':'12',_dice3dMessageHidden:true,_dice3dPendingRenders:1,_dice3danimating:true};
  const settings=new Map([['forceCharacterOwnerAppearance','0'],['hide3dDiceOnSecretRolls',true]]);
  const game={version:'14.368',release:{generation:14},view:'game',user,settings:{get:(_id,key)=>settings.get(key)},messages:new Map([[message.id,message]]),modules:new Map([['dice-so-nice',{active:true,version:queueFixture.provenance.version}]]),actors:new Map(),users:[]};
  const ui={chat:{element:{querySelector:()=>node},_shouldShowNotifications:()=>false,scrollBottom(){}},sidebar:{popouts:{}}};
  const context=vm.createContext({game,window:{ui,document:{hidden}},ui,document:{querySelector:()=>null},Hooks:{callAll:(...args)=>events.push(args)},InitiativeMask:{release(){}},CompanionLink:{release:()=>[]},ChatMessage:{getSpeakerActor:()=>null},DsnSettings:{CONFIG:()=>({visibility:'all'}),ALL_CONFIG:()=>({}),ALL_CUSTOMIZATION:()=>({}),isEnabled:()=>true},DiceNotation:class{constructor(roll){if(failure==='notation')throw Error('notation failed');this.throws=[roll];}},setTimeout,CONST:{DOCUMENT_OWNERSHIP_LEVELS:{OWNER:3}}});
+ if(fixture.rollRules)vm.runInContext(fixture.rollRules,context);
  const Native=vm.runInContext('(class Native {'+Object.values(fixture.methods).join('\n')+'})',context);
  const pipeline=new Native();
  Object.assign(pipeline,{_assignDependentRollOrder(){},_stampRole(){},_stampAppearance(){},_buildRollList:rolls=>rolls,_showNestedParts(){},pendingThrows:{isPending:()=>pending},messageUpdateHideSelector:'.dice-roll'});
@@ -47,7 +49,7 @@ test('successful ordered throws retain native metadata and reveal exactly once',
 });
 
 test('supported DsN and later Foundry labels use function contracts and preserve render return',async()=>{
- const f=setup();f.g.game.version='15.1';f.g.game.release.generation=15;f.g.game.modules.get('dice-so-nice').version='6.5.0';
+ const f=setup();f.g.game.version='15.1';f.g.game.release.generation=15;f.g.game.modules.get('dice-so-nice').version='7.0.0';
  const result=installDsnChatRecovery({g:f.g});assert.equal(result.status,'installed');
  assert.equal(f.pipeline.renderRolls(f.message,rolls()),undefined);await settle();
  assert.equal(f.message._dice3dPendingRenders,0);assert.equal(f.errors.length,0);
@@ -69,13 +71,46 @@ test('public showForRoll API keeps its own exception behavior',()=>{
  installDsnChatRecovery({g:f.g});assert.equal(f.pipeline.showForRoll,original);
  assert.throws(()=>f.pipeline.showForRoll(rolls()[0]),/notation failed/);
 });
-test('unknown versions and foreign pipeline methods remain untouched',()=>{
- for(const kind of ['version','source']){
-  const f=setup();if(kind==='version')f.g.game.modules.get('dice-so-nice').version='7.0.0';else f.pipeline.show=function foreign(){};
+test('inactive DsN and foreign pipeline methods remain untouched',()=>{
+ for(const kind of ['inactive','source']){
+  const f=setup();if(kind==='inactive')f.g.game.modules.get('dice-so-nice').active=false;else f.pipeline.show=function foreign(){};
   const original=f.pipeline.renderRolls,result=installDsnChatRecovery({g:f.g});
   assert.equal(f.pipeline.renderRolls,original);assert.notEqual(result.status,'installed');
  }
 });
+if(fixture.rollRules){
+ test('actor groups retain owner appearance and ordered rolls after one notation failure',async()=>{
+  const f=setup();f.settings.set('forceCharacterOwnerAppearance','2');
+  const owners=[{id:'owner-a',character:{id:'a'}},{id:'owner-b',character:{id:'b'}}];
+  f.g.game.users.push(...owners);
+  for(const id of ['a','b'])f.g.game.actors.set(id,{id,hasPlayerOwner:true});
+  const NativeNotation=f.context.DiceNotation;
+  f.context.DiceNotation=class extends NativeNotation{constructor(roll,...args){if(roll.total===4)throw Error('one bad model');super(roll,...args);}};
+  const entries=[{dice:[{}],total:12,data:{actorId:'a'}},{dice:[{}],total:4,data:{actorId:'a'}},
+    {dice:[{}],total:3,data:{actorId:'a'}},{dice:[{}],total:8,data:{actorId:'b'}}];
+  assert.equal(installDsnChatRecovery({g:f.g}).status,'installed');
+  f.pipeline.renderRolls(f.message,entries);await settle();
+  assert.deepEqual(f.queued.map(d=>d.throws[0].total).sort((a,b)=>a-b),[3,8,12]);
+  assert.deepEqual(f.queued.filter(d=>d.throws[0].data.actorId==='a').map(d=>d.throws[0].total),[12,3]);
+  assert.deepEqual(f.queued.filter(d=>d.throws[0].data.actorId==='a').map(d=>d.rollTotal),[19,19]);
+  assert.deepEqual(f.events.filter(e=>e[0]==='diceSoNiceRollStart').map(e=>e[2].user.id).sort(),['owner-a','owner-a','owner-a','owner-b']);
+  assert.equal(f.events.filter(e=>e[0]==='diceSoNiceRollComplete').length,1);
+  assert.equal(f.message._dice3dPendingRenders,0);assert.equal(f.message.content,'12');
+ });
+ for(const method of ['animateRolls','_showRollList'])test('unknown '+method+' retains the complete native pipeline',()=>{
+  const f=setup();f.Native.prototype[method]=function foreign(){};
+  const render=f.pipeline.renderRolls;
+  assert.equal(installDsnChatRecovery({g:f.g}).status,'unsupported-source');
+  assert.equal(f.pipeline.renderRolls,render);
+ });
+ test('direct animateRolls callers retain native rejection behavior',async()=>{
+  const f=setup({failure:'notation'}),native=f.pipeline.animateRolls;
+  assert.equal(installDsnChatRecovery({g:f.g}).status,'installed');
+  assert.equal(f.pipeline.animateRolls,native);
+  await assert.rejects(f.pipeline.animateRolls(rolls(),{author:f.g.game.user}),/notation failed/);
+ });
+}
+
 test('restore removes only the owned render wrapper and repeated install is idempotent',()=>{
  const f=setup(),original=f.pipeline.renderRolls;
  const installed=installDsnChatRecovery({g:f.g}),wrapper=f.pipeline.renderRolls;

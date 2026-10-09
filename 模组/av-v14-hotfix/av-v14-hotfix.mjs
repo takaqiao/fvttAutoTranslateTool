@@ -1,19 +1,19 @@
 import {registerLegacyCompat} from './scripts/compat/legacy.mjs';
 import {createItemNameFastPath,ITEM_NAME_HASHES} from './scripts/patches/item-name.mjs';
-import {installSundryPatch} from './scripts/patches/sundry.mjs';
+import {installSundryPatch,prepareSundryPatch} from './scripts/patches/sundry.mjs';
 import {installDurationPatch} from './scripts/patches/duration.mjs';
 import {installTimestampPatch} from './scripts/patches/timestamps.mjs';
 import {installChatDeleteCoalescing} from './scripts/patches/chat.mjs';
-import {registerBabeleIndex} from './scripts/patches/babele.mjs';
+import {registerBabeleIndex,verifyBabeleIndexSources} from './scripts/patches/babele.mjs';
 import {hashSource} from './scripts/source-hash.mjs';
 import {installTokenizerChatPortraitPatch} from './scripts/patches/tokenizer-chat.mjs';
 import {installSoundStopPatch} from './scripts/patches/sound-stop.mjs';
 import {registerDsnQualitySettings,installDsnQualityLocks} from './scripts/patches/dsn-quality.mjs';
-import {installTurnLifecyclePatch} from './scripts/patches/turn-lifecycle.mjs';
+import {installTurnLifecyclePatch,prepareTurnLifecyclePatch} from './scripts/patches/turn-lifecycle.mjs';
 import {installDsnChatRecovery} from './scripts/patches/dsn-chat.mjs';
 
 const ID='av-v14-hotfix';
-const state={version:'0.6.25',patches:{patreon:{status:'retired',detail:'Upstream 3.2.29 includes the relationship refresh guards.'},wayfinderFog:{status:'retired',detail:'Wayfinder 14.1.1 replaced the old fog implementation; the 14.0.1 adapter is retired.'},grid:{status:'retired',detail:'Use Grid 2.3.1 distance and undrawn-token aura handling.'},bbmmLocks:{status:'retired',detail:'Use BBMM 1.4.11 submenu hard locks and notifications.'}}};
+const state={version:'0.6.26',patches:{patreon:{status:'retired',detail:'Upstream 3.2.29 includes the relationship refresh guards.'},wayfinderFog:{status:'retired',detail:'Wayfinder 14.1.1 replaced the old fog implementation; the 14.0.1 adapter is retired.'},grid:{status:'retired',detail:'Use Grid 2.3.1 distance and undrawn-token aura handling.'},bbmmLocks:{status:'retired',detail:'Use BBMM 1.4.11 submenu hard locks and notifications.'}}};
 let babele;
 const report=(feature,status,detail)=>{
   if(typeof feature==='object'){const {restore,...data}=feature;state.patches[feature.feature]=data;return;}
@@ -54,17 +54,29 @@ Hooks.once('ready',()=>queueMicrotask(async()=>{
     target.generateItemName=createItemNameFastPath(original,globalThis);
     report('itemNames','installed');
   });
-  await run('sundry',()=>installSundryPatch({report}));
-  await run('turnLifecycle',()=>installTurnLifecyclePatch({report}));
+  await run('sundry',async()=>{await prepareSundryPatch();return installSundryPatch({report});});
+  await run('turnLifecycle',async()=>{await prepareTurnLifecyclePatch();return installTurnLifecyclePatch({report});});
   await run('dsnChat',()=>installDsnChatRecovery({report}));
   await run('chat',()=>report('chat',installChatDeleteCoalescing({moduleId:ID})?'installed':'unsupported'));
   await run('duration',()=>installDurationPatch({report}));
   await run('timestamps',()=>installTimestampPatch({report}));
   await run('babele',async()=>{
-    let preserveIndexFlags;
-    if(game.modules.get('babele')?.active&&game.modules.get('babele').version==='2.9.1')
-      ({preserveIndexFlags}=await import('../babele/script/foundry/wrapper.js'));
-    babele=registerBabeleIndex({moduleId:ID,preserveIndexFlags});report('babele',babele.status().state);
+    let preserveIndexFlags,sourceContract;
+    const owners=['pf2e_compendium_chn','babele','lib-wrapper'].map(id=>({id,module:game.modules.get(id),version:game.modules.get(id)?.version}));
+    const unchanged=()=>owners.every(({id,module,version})=>module?.active&&game.modules.get(id)===module&&module.version===version);
+    if(unchanged())try{
+      const [translation,wrapper,libWrapper]=await Promise.all([
+        '../pf2e_compendium_chn/babele-ondemand-patch.js','../babele/script/foundry/wrapper.js','../lib-wrapper/lib-wrapper.js'
+      ].map(async path=>{
+        const response=await fetch(new URL(path,import.meta.url));
+        if(!response.ok)throw Error('Unable to read Babele index contract: '+response.status);
+        return response.text();
+      }));
+      sourceContract=verifyBabeleIndexSources({translation,wrapper,libWrapper});
+      if(sourceContract.supported)({preserveIndexFlags}=await import('../babele/script/foundry/wrapper.js'));
+      if(!unchanged())sourceContract={supported:false,reason:'Babele source owner changed during validation.'};
+    }catch(error){sourceContract={supported:false,reason:String(error)};}
+    babele=registerBabeleIndex({moduleId:ID,preserveIndexFlags,sourceContract});report('babele',babele.status().state);
   });
   report('runtime','ready');
 }));

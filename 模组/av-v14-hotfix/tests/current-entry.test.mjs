@@ -2,10 +2,10 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
-const source=fs.readFileSync(new URL('../av-v14-hotfix.mjs',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,'');
+const source=fs.readFileSync(new URL('../av-v14-hotfix.mjs',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,'').replaceAll('import.meta.url',JSON.stringify(new URL('../av-v14-hotfix.mjs',import.meta.url).href));
 async function boot(disabled=[],generation=14){
  const hooks={},tasks=[],settings=new Map(),calls=[],phases=[],self={};let phase='load';
- const names=['registerLegacyCompat','installGrid','installSundryPatch','installPatreonPatch','installDurationPatch','installTimestampPatch','installTokenizerChatPortraitPatch','installSoundStopPatch','installWayfinderFogPatch','installBbmmHardLocks','registerDsnQualitySettings','installDsnQualityLocks','installTurnLifecyclePatch','installDsnChatRecovery'];
+ const names=['prepareSundryPatch','prepareTurnLifecyclePatch','registerLegacyCompat','installGrid','installSundryPatch','installPatreonPatch','installDurationPatch','installTimestampPatch','installTokenizerChatPortraitPatch','installSoundStopPatch','installWayfinderFogPatch','installBbmmHardLocks','registerDsnQualitySettings','installDsnQualityLocks','installTurnLifecyclePatch','installDsnChatRecovery'];
  const g={console:{info(){},error(...args){throw Error(args.join(' '));}},structuredClone,queueMicrotask:fn=>tasks.push(fn),
    Hooks:{once:(name,fn)=>hooks[name]=fn},hashSource:async()=>'',ITEM_NAME_HASHES:{},libWrapper:{register(){}},
    installChatDeleteCoalescing:()=>true,registerBabeleIndex:()=>({status:()=>({state:'inactive'})}),

@@ -1,4 +1,5 @@
 import {adaptNativeHooks} from '../native-hook-adapter.mjs';
+import {matchesDeclarations, sourceTokens} from '../source-contract.mjs';
 
 // Exact installed callback sources; changed upstream implementations are skipped.
 const CALLBACKS = {
@@ -8,12 +9,63 @@ const CALLBACKS = {
 };
 
 const installations = new WeakMap();
+const sustainContracts = new WeakMap();
+const SUSTAIN_CONTRACT = {
+  moduleId:"const moduleId = 'pf2e-sustain-reminder';",
+  susainedEffectPrefix:"const susainedEffectPrefix = 'Sustaining: ';",
+  useChatSetting:"const useChatSetting = 'useChat';",
+  getTokenSustainEffects:`function getTokenSustainEffects(token) {
+    return token.actor.items.filter((item) => item.type === 'effect' && item.name.startsWith(susainedEffectPrefix));
+  }`
+};
 const CONSUMERS = {
-  reaction: {id:'pf2e-reaction', version:'1.4.3', hook:'pf2e.startTurn'},
-  sustain: {id:'pf2e-sustain-reminder', version:'1.1.0', hook:'pf2e.startTurn'},
-  summons: {id:'pf2e-summons-assistant', major:2, hook:'deleteItem'}
+  reaction: {id:'pf2e-reaction', hook:'pf2e.startTurn'},
+  sustain: {id:'pf2e-sustain-reminder', hook:'pf2e.startTurn'},
+  summons: {id:'pf2e-summons-assistant', hook:'deleteItem'}
 };
 const skipped = reason => ({status:'skipped', reason});
+
+export async function prepareTurnLifecyclePatch({g = globalThis} = {}) {
+  const module = g.game?.modules?.get('pf2e-sustain-reminder');
+  if (!module?.active) return skipped('module-inactive');
+  const version = module.version;
+  sustainContracts.delete(module);
+  let result;
+  try {
+    const path = 'modules/pf2e-sustain-reminder/scripts/sustain-main.mjs';
+    const response = await g.fetch(g.foundry?.utils?.getRoute?.(path) ?? path);
+    if (!response.ok) throw new Error('Sustain source unavailable');
+    result = matchesDeclarations(await response.text(), SUSTAIN_CONTRACT)
+      ? {status:'validated'} : skipped('source-contract-mismatch');
+  } catch { result = skipped('source-unavailable'); }
+  if (g.game.modules.get('pf2e-sustain-reminder') !== module || module.version !== version || !module.active) {
+    return skipped('module-changed-during-validation');
+  }
+  sustainContracts.set(module, {...result, version});
+  return result;
+}
+
+function summonsSource(Hooks, hook) {
+  // Upstream changed indentation without changing this complete callback.
+  // Select one matching callback, then let the adapter verify its exact live text.
+  let entries;
+  try {
+    const events = Hooks.events;
+    entries = events && Object.getOwnPropertyDescriptor(events, hook)?.value;
+  } catch { return null; }
+  if (!Array.isArray(entries)) return null;
+  const expected = JSON.stringify(sourceTokens(CALLBACKS.summons).map(token => token.value));
+  const matches = [];
+  for (const entry of entries) {
+    const fn = entry && Object.getOwnPropertyDescriptor(entry, 'fn')?.value;
+    if (typeof fn !== 'function') continue;
+    const source = Reflect.apply(Function.prototype.toString, fn, []);
+    try {
+      if (JSON.stringify(sourceTokens(source).map(token => token.value)) === expected) matches.push(source);
+    } catch { /* Unknown source keeps its original callback. */ }
+  }
+  return matches.length === 1 ? matches[0] : null;
+}
 
 function reactionWrapper(original, {Combatant}) {
   return function(combatant, ...args) {
@@ -27,7 +79,7 @@ function reactionWrapper(original, {Combatant}) {
 }
 
 async function remindActor(g, actor, userId) {
-  // Sustain 1.1.0 reads only token.actor to select effects. The remaining
+  // The verified selector reads only token.actor to select effects. The remaining
   // native logic already uses the Actor; Foundry getSpeaker supports no Token.
   const effects = actor.items.filter(item => item.type === 'effect' && item.name.startsWith('Sustaining: '));
   if (!effects || effects.length === 0) return;
@@ -87,14 +139,20 @@ export function installTurnLifecyclePatch({g = globalThis, report} = {}) {
     summons:[Actor, Item, TokenDocument, Scene].every(type => typeof type === 'function')
   };
   const parts = {}, adaptations = [];
-  for (const [key, {id, version, major, hook}] of Object.entries(CONSUMERS)) {
+  for (const [key, {id, hook}] of Object.entries(CONSUMERS)) {
     const module = g.game.modules?.get(id);
     if (!module?.active) {parts[key] = skipped('module-inactive'); continue;}
-    // Reaction/Sustain callbacks call private helpers whose contracts are not
-    // exposed here. Summons' complete callback is verified below.
-    if (major?Number.parseInt(module.version,10)!==major:module.version!==version) {parts[key] = skipped('version-mismatch'); continue;}
     if (!available[key]) {parts[key] = skipped('document-api-unavailable'); continue;}
-    const adapted = adaptNativeHooks({Hooks, callbacks:[{hook, source:CALLBACKS[key], wrap:original => wrappers[key](original, context)}]});
+    if (key === 'sustain') {
+      const contract = sustainContracts.get(module);
+      if (contract?.version !== module.version || contract?.status !== 'validated') {
+        parts[key] = skipped(contract?.reason ?? 'source-not-validated');
+        continue;
+      }
+    }
+    const source = key === 'summons' ? summonsSource(Hooks, hook) : CALLBACKS[key];
+    if (!source) {parts[key] = skipped('callback-fingerprint-mismatch'); continue;}
+    const adapted = adaptNativeHooks({Hooks, callbacks:[{hook, source, wrap:original => wrappers[key](original, context)}]});
     const {restore, ...diagnostics} = adapted;
     parts[key] = {...diagnostics, version:module.version};
     if (adapted.status === 'installed') adaptations.push(adapted);

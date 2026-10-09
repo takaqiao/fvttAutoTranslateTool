@@ -14,7 +14,7 @@ test('worker RPC fixture has the same exact source in both captured DsN profiles
     '8ea57ede46b6b0f6e4367c1d9b1574c93ead3a95e981810945b53e7daf18e236']);
 });
 
-for(const file of ['dsn-queue-native.json','dsn-queue-6.4.3-native.json'])describe(file,()=>{
+for(const file of ['dsn-queue-native.json','dsn-queue-6.4.3-native.json','dsn-queue-6.4.4-native.json'])describe(file,()=>{
   const fixture=JSON.parse(fs.readFileSync(new URL('./fixtures/'+file,import.meta.url)));
   async function retainTicker(f){
     f.engine.persistentDiceList.push(f.other);f.other.userData.persistentId='legacy';

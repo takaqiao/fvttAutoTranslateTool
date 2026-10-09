@@ -8,7 +8,8 @@ const bbmmFixture=JSON.parse(fs.readFileSync(new URL('./fixtures/bbmm-rules-nati
 export const fixture=JSON.parse(fs.readFileSync(new URL('./fixtures/bbmm-dsn-native.json',import.meta.url)));
 const app=process.env.FVTT_NATIVE_APP??'C:/Program Files/Foundry Virtual Tabletop/resources/app';
 const operatorsURL=pathToFileURL(`${app}/common/data/operators.mjs`);
-assert.equal(createHash('sha256').update(fs.readFileSync(operatorsURL)).digest('hex'),fixture.provenance.files.operators);
+const currentCore=JSON.parse(fs.readFileSync(new URL('./fixtures/foundry-14.369-native.json',import.meta.url)));
+assert.ok([fixture.provenance.files.operators,currentCore.files.operators.sha256].includes(createHash('sha256').update(fs.readFileSync(operatorsURL)).digest('hex')));
 export const operators=await import(operatorsURL.href);
 export const quality={shadowQuality:'low',useHighDPI:false,glow:false,advancedGlass:false,antialiasing:'none'};
 export const high={shadowQuality:'high',useHighDPI:true,glow:true,advancedGlass:true,antialiasing:'msaa'};

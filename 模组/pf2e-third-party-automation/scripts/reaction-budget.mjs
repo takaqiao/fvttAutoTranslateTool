@@ -89,14 +89,49 @@ const sameClaim=(entry,claim)=>!!(claim.checkId&&entry.msgId===claim.checkId||cl
 /** Only the availability recheck and durable claim write belong in this lock. */
 export function withReactionReservation(actor,game,fn){let queue=queues.get(game);if(!queue){queue=new SerialActions();queues.set(game,queue);}return queue.run(actor.uuid,fn);}
 
+// AAT dehydrates dynamic cost functions when saving its combatant log. Its
+// private registry restores these two slugs from the persisted fields below.
+// undefined preserves ordinary accounting; null means the dynamic cost is unproven.
+function aatReactionCost(entry,log){
+ const {cost,slug}=entry;
+ let restored;
+ if(typeof cost==='number'){
+  if(!Number.isFinite(cost))return null;
+  restored=cost;
+ }else{
+  if(typeof cost==='function'||typeof cost==='symbol'||cost!==null&&typeof cost==='object')return null;
+  if(slug==='quickened-casting')restored=0;
+  else if(slug==='force-barrage'){
+   const rank=entry.rank===0?1:entry.rank??1,links=entry.linkedMessages;
+   if(!Number.isInteger(rank)||rank<1||!Array.isArray(links)||links.some(link=>!link||typeof link.type!=='string'))return null;
+   const damage=links.filter(link=>link.type==='damage').length;
+   restored=damage?Math.ceil(damage/(1+Math.floor((rank-1)/2))):1;
+  }else return undefined;
+ }
+ if(entry.category==='spell'&&restored>0){
+  // Keep the full ordered log: a preceding ordinary spell can consume Quickened.
+  const index=log.indexOf(entry);if(index<0)return null;
+  const previous=log.slice(0,index).reverse(),quickened=previous.findIndex(row=>row.slug==='quickened-casting');
+  if(quickened>=0&&!previous.slice(0,quickened).some(row=>row.category==='spell'))restored=Math.max(1,restored-1);
+ }
+ return Math.max(1,restored);
+}
+
 function reactionSlots(actor,game,{pending=[],current=reactionEpoch(actor,game),combatant=combatantFor(actor,game),entriesOverride,excludeClaimKeys=[]}={}){
  if(!current)return [];
  const ledger=own(combatant).reactionBudget;
- let entries=game.modules?.get(AAT)?.active?(combatant.getFlag?.(AAT,'log')??combatant.flags?.[AAT]?.log??[]).filter(e=>e.type==='reaction'):[...(ledger?.epoch===current?ledger.entries??[]:[])];
- if(entriesOverride)entries=[...entriesOverride];
+ const aatLog=game.modules?.get(AAT)?.active?(combatant.getFlag?.(AAT,'log')??combatant.flags?.[AAT]?.log??[]):null;
  const c=game.combat,index=c.turns.indexOf(combatant),hadOwnTurn=c.round>1||index<=c.turn;
  const slots=(hadOwnTurn?Object.entries(restricted):[]).filter(([slug])=>values(actor.items).some(i=>slug==='quick-shield-block'&&(i.sourceId??i._stats?.compendiumSource)?(i.sourceId??i._stats?.compendiumSource)==='Compendium.pf2e.feats-srd.Item.pRqcm5P2ZFihSpVI':(i.slug??i.system?.slug)===slug)).map(([kind,allowed])=>({kind,allowed})).sort((a,b)=>a.allowed.length-b.allowed.length);
  for(let n=0;n<(actor.system?.resources?.reactions?.max||1);n++)slots.push({kind:'generic',allowed:null});
+ // Restore against original entry identity and ordering before filtering or claim copies.
+ let entries=aatLog?aatLog.map(entry=>{
+  if(entry.type!=='reaction')return entry;
+  const cost=aatReactionCost(entry,aatLog);
+  // Unproven dynamic data consumes every potentially eligible slot, in bounded work.
+  return cost===undefined?entry:{...entry,cost:cost??slots.length};
+ }).filter(entry=>entry.type==='reaction'):[...(ledger?.epoch===current?ledger.entries??[]:[])];
+ if(entriesOverride)entries=[...entriesOverride];
  const fear=(own(actor).fear?.reactions??[]).map(r=>({...r,claimKey:r.id?`battle:${r.id}`:null,slug:'demoralize'}));
  const checks=(own(actor).reactionChecks?.reactions??[]).filter(r=>['claimed','used'].includes(r.state)&&['clock','squawk','eat'].includes(r.kind)).map(r=>({...r,claimKey:r.nonce?`check:${r.nonce}`:null,slug:{clock:'turn-back-the-clock',squawk:'squawk',eat:'eat-fortune'}[r.kind]}));
  const paidDisrupt=paidDisruptClaims(actor),disrupt=paidDisrupt.filter(r=>r.epoch===current).map(r=>({...r,slug:'disrupt-prey',cost:1}));

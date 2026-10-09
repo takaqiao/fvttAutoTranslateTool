@@ -1,9 +1,117 @@
+import {sourceTokens, extractDeclaration} from '../source-contract.mjs';
+
 /** Foundry v14 / Babele on-demand adapter. No upstream source or prototype edits. */
 const TARGET = 'pf2e_compendium_chn';
 const PACK_TARGET = 'foundry.documents.collections.CompendiumCollection.prototype.indexDocument';
-const SIGNATURES = Object.freeze({pack: '00f29d8bebbb7ae9', index: 'f5af42c0e64fa640', ready: 'cd61f663b9cd8c1e', preserveIndexFlags: '2f7f5cccb742870f'});
+const SIGNATURES = Object.freeze({pack: '00f29d8bebbb7ae9', index: 'f5af42c0e64fa640', ready: 'cd61f663b9cd8c1e', preserveIndexFlags: '2f7f5cccb742870f', titleFacade: 'd9af55d56d84260a'});
 const captures = new WeakMap();
 const registrations = new WeakMap();
+
+// Check only the declarations and registration seams replaced by the instance adapter.
+const TRANSLATION_DECLARATIONS = Object.freeze({
+  detectHostPackageId: 'a9b4dd6c8ef906f6',
+  safeReadLoadingModeSettings: 'd9db34a06fcc5b37',
+  getPatchLoadingModeSetting: '862903d7c96e4ee5',
+  getLoadingModeSetting: '78771dd73d1b7492',
+  isValidLoadingMode: '7c6d012e79e9c7c8',
+  isOnDemandMode: 'd623e525336ced92',
+  normalizePackId: '53f6a414b8ddceaf',
+  translateIndexTitles: 'f4887a4eb8c266e0',
+  scheduleDocumentIndexRebuild: '27b0e1bb153f67cb',
+  rebuildDocumentIndexCompat: '53d5121a75978104',
+  PATCH_ID: 'fd203821dca1c2d6',
+  BABEL_NAMESPACE: 'debf59056b0ba74b',
+  PATCH_NAMESPACE: 'e9fc61accea456dc',
+  SETTING_LOADING_MODE: 'db1a732ff784ea9a',
+  LOADING_MODES: '309912b85173c0bb'
+});
+const LIB_WRAPPER_DECLARATIONS = Object.freeze({ie: '79118e7ebf4e840c', ne: '76746c11edaa79a8', ae: '3510fd7ee90f0190'});
+const TRANSLATION_SEAMS = [
+  'const stateKey = "__ondemandPatch";',
+  'const state = (babele[stateKey] = babele[stateKey] ?? {});',
+  'babele.translateIndexTitles = (index, pack) => translateIndexTitles(state, index, pack);'
+];
+const LIB_WRAPPER_SEAMS = [
+  'const _=function(e){if(e.id===t)return Number.MAX_VALUE;const r=ie.get(e.key);return void 0!==r?r:0}(c)',
+  'let w={package_info:c,target:n,setter:g,fn:a,type:s,wrapper:u,priority:_,chain:l,perf_mode:p,bind:d};return u.add(w),c.id!=t&&Hooks.callAll(`${i}.Register`,c.id,"number"==typeof n?f:n,s,o,h)',
+  'game.settings.register(t,"module-priorities",{name:"",default:{},type:Object,scope:"world",config:!1,onChange:e=>ae()})'
+];
+
+function tokenSignature(tokens) {
+  let hash = 0xcbf29ce484222325n;
+  for (const char of JSON.stringify(tokens.map(token => token.value))) {
+    hash ^= BigInt(char.charCodeAt(0));
+    hash = BigInt.asUintN(64, hash * 0x100000001b3n);
+  }
+  return hash.toString(16).padStart(16, '0');
+}
+
+function uniqueSeam(tokens, source) {
+  const expected = sourceTokens(source);
+  let matches = 0;
+  for (let offset = 0; offset < tokens.length; offset++) {
+    if (expected.every((token, index) => tokens[offset + index]?.value === token.value)) matches++;
+  }
+  return matches === 1;
+}
+
+function indexRegistration(tokens) {
+  const calls = [];
+  for (let offset = 0; offset < tokens.length; offset++) {
+    if (!['libWrapper', '.', 'register', '('].every((value, index) => tokens[offset + index]?.value === value)) continue;
+    if (tokens[offset + 5]?.value !== ','
+      || ![JSON.stringify(PACK_TARGET), "'" + PACK_TARGET + "'"].includes(tokens[offset + 6]?.value)) continue;
+    const end = tokens[offset + 3].match;
+    calls.push(tokens.slice(offset, end + 2));
+  }
+  return calls.length === 1 ? tokenSignature(calls[0]) : null;
+}
+
+function methodSignature(tokens, name) {
+  const classes = tokens.filter((token, offset) => token.value === 'class'
+    && tokens[offset + 1]?.value === 'Wrapper' && tokens[offset + 2]?.value === '{');
+  if (classes.length !== 1) return null;
+  const body = tokens.indexOf(classes[0]) + 2;
+  const methods = [];
+  for (let offset = body + 1; offset < tokens[body].match; offset++) {
+    if (tokens[offset].value !== name || tokens[offset + 1]?.value !== '(') continue;
+    const body = tokens[offset + 1].match + 1;
+    if (tokens[body]?.value === '{') methods.push(tokens.slice(offset, tokens[body].match + 1));
+  }
+  return methods.length === 1 ? tokenSignature(methods[0]) : null;
+}
+
+export function verifyBabeleIndexSources({translation, wrapper, libWrapper} = {}) {
+  try {
+    for (const [source, declarations, label] of [
+      [translation, TRANSLATION_DECLARATIONS, 'title translation'],
+      [libWrapper, LIB_WRAPPER_DECLARATIONS, 'libWrapper priorities']
+    ]) {
+      for (const [name, expected] of Object.entries(declarations)) {
+        const declaration = extractDeclaration(source, name);
+        if (!declaration || tokenSignature(sourceTokens(declaration)) !== expected) {
+          return {supported: false, reason: 'Unverified ' + label + ' declaration: ' + name};
+        }
+      }
+    }
+    const titleTokens = sourceTokens(translation), wrapperTokens = sourceTokens(wrapper), libTokens = sourceTokens(libWrapper);
+    if (indexRegistration(titleTokens) !== 'a7d28d63c212d1ea'
+      || indexRegistration(wrapperTokens) !== '7340001058cc6fda') {
+      return {supported: false, reason: 'Unverified Babele indexDocument registration callback.'};
+    }
+    if (!TRANSLATION_SEAMS.every(seam => uniqueSeam(titleTokens, seam))) {
+      return {supported: false, reason: 'Unverified title translation facade or captured state.'};
+    }
+    if (!LIB_WRAPPER_SEAMS.every(seam => uniqueSeam(libTokens, seam))
+      || methodSignature(libTokens, 'sort') !== '049c5471d6310f30'
+      || methodSignature(libTokens, 'add') !== '32a89ddeb67b2598') {
+      return {supported: false, reason: 'Unverified libWrapper priority or registration ordering.'};
+    }
+    return {supported: true, reason: null};
+  } catch {
+    return {supported: false, reason: 'Babele index source contract could not be read.'};
+  }
+}
 
 // An exact normalized-source compatibility gate, not a security hash. Never executes source text.
 function signature(fn) {
@@ -111,10 +219,12 @@ function mode(g) {
 }
 
 /** Install only on known, uncustomized pack / document-index instances. */
-export function registerBabeleIndex({moduleId = 'av-v14-hotfix', g = globalThis, capture = earlyCapture, preserveIndexFlags} = {}) {
+export function registerBabeleIndex({moduleId = 'av-v14-hotfix', g = globalThis, capture = earlyCapture, preserveIndexFlags, sourceContract} = {}) {
   const prior = registrations.get(g);
   if (prior?.game === g.game && prior.moduleId === moduleId) return prior.api;
   const verifiedPreserveIndexFlags = signature(preserveIndexFlags) === SIGNATURES.preserveIndexFlags;
+  const modules = new Map([TARGET, 'babele', 'lib-wrapper'].map(id => [id, g.game?.modules?.get?.(id)]));
+  let titleControl;
   let disposed = false, closing = false, indexControl = null, entryTimer = null, fullTimer = null;
   let running = null, queue = new Map(), lastError = null;
   const fullRunning = new Set();
@@ -127,11 +237,10 @@ export function registerBabeleIndex({moduleId = 'av-v14-hotfix', g = globalThis,
     if (!g.game?.babele?.__ondemandPatch) return ['waiting', 'Babele on-demand facade has not initialized.'];
     if (capture.g !== g || !capture.valid) return ['unsupported', 'No verified pre-libWrapper native indexDocument capture.'];
     if (capture.unknown) return ['unsupported', capture.unknown];
-    // 3.2.1 ships byte-identical babele.js and babele-ondemand-patch.js to the
-    // audited 3.1.2 release. Keep an exact allowlist; future releases still fall back.
-    for (const [id, versions] of [[TARGET, ['3.1.2', '3.2.1']], ['babele', ['2.9.1']], ['lib-wrapper', ['1.13.5.1']]]) {
-      const module = g.game.modules.get(id);
-      if (!module?.active || !versions.includes(module.version)) return ['unsupported', `Expected active ${id} ${versions.join(' or ')}.`];
+    if (!sourceContract?.supported) return ['unsupported', sourceContract?.reason ?? 'Babele index source contract was not verified.'];
+    for (const id of [TARGET, 'babele', 'lib-wrapper']) {
+      if (!g.game.modules.get(id)?.active) return ['unsupported', `Expected active ${id}.`];
+      if (g.game.modules.get(id) !== modules.get(id)) return ['unsupported', `The verified ${id} module changed; reload to verify its source.`];
     }
     if (!capture.knownRegistered || !capture.babeleRegistered) return ['waiting', 'Waiting for both verified upstream libWrapper registrations.'];
     if (capture.priorityError) return ['unsupported', capture.priorityError];
@@ -142,8 +251,18 @@ export function registerBabeleIndex({moduleId = 'av-v14-hotfix', g = globalThis,
     if (babeleWrapper.priority !== titleWrapper.priority) {
       return ['unsupported', 'Different effective libWrapper priorities are unsupported; retain the original wrapper chain.'];
     }
-    if (!verifiedPreserveIndexFlags) return ['unsupported', 'Babele preserveIndexFlags helper is missing or its source fingerprint differs from 2.9.1.'];
+    if (!verifiedPreserveIndexFlags) return ['unsupported', 'Babele preserveIndexFlags helper is missing or its source contract changed.'];
     if (typeof g.game.babele.translateIndexTitles !== 'function') return ['unsupported', 'Public title translation API is unavailable.'];
+    if (!titleControl) {
+      if (signature(g.game.babele.translateIndexTitles) !== SIGNATURES.titleFacade) {
+        return ['unsupported', 'Public title translation facade differs from the verified source.'];
+      }
+      titleControl = {babele: g.game.babele, state: g.game.babele.__ondemandPatch, translate: g.game.babele.translateIndexTitles};
+    }
+    if (g.game.babele !== titleControl.babele || g.game.babele.__ondemandPatch !== titleControl.state
+      || g.game.babele.translateIndexTitles !== titleControl.translate) {
+      return ['unsupported', 'The verified title translation facade or state changed.'];
+    }
     if (typeof g.setTimeout !== 'function' || typeof g.clearTimeout !== 'function') return ['unsupported', 'Timer APIs unavailable.'];
     return ['supported', null];
   };

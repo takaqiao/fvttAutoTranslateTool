@@ -1,0 +1,40 @@
+{
+  "source": "PF2e Toolbelt 3.58.4 scripts/main.js",
+  "sourceSHA256": "6acd53e7a5198ef8b9f7a35caae943b4582cabe61ff57bb76572038f61e549da",
+  "regionSHA256": {
+    "receive": "10ff0e183740c1f5f35d604c6cdb457b3e94eb1b0fd3343ada7acf7f1403466a",
+    "forward": "c593ae1650f9c6b726eec7735539db6ae8587b77359c72fd71e13fa26504f4d1",
+    "socket": "a763ce82944d90f2895455895000e898e85234fe8a1d03aaf3b55368676c5c1f",
+    "transport": "f3fa49300b4cb4946a522d0355bbc24e9bf7a0198d2c111b069357d5548558ce",
+    "conversion": "f7aac9d8e32c74636a756656efd1f3670162d188a2c81add1e975f30cadfe2c2",
+    "validity": "cd6440b56acc125dc596a867fde21109dfc1dd5b18f0572d7a2a42c4b2654d90",
+    "binding": "12ccbbd4a64b2e6f617154c6b79f4cd6ef800cb1a87750d14de01f4e62e0de5a"
+  },
+  "regions": {
+    "receive": "#g({master:e,...n}){this.isValidMaster(e)&&e.update(n)}",
+    "forward": "async#h(e,n,i,r,o){let s=i.flags?.[M.id]?.[this.key],c=s?s[\"==data\"]??s.data:void 0,l=c?.master;if(l!==void 0){let f=this.getMasterInMemory(e);f&&f.id!==l&&(r.previousShareMasterId=f.id)}let d=l??this.getMasterId(e),m=d?game.actors.get(d):void 0;if(this.isValidMaster(m)){let f=[];(c?.health??this.#v(e,\"health\"))&&f.push(\"system.attributes.hp.value\",\"system.attributes.hp.sp.value\",\"system.attributes.hp.temp\"),(c?.heroPoints??this.#v(e,\"heroPoints\"))&&f.push(\"system.resources.heroPoints.value\"),(c?.spellcasting??this.#v(e,\"spellcasting\"))&&f.push(\"system.resources.focus.value\");let p=u.pipe(f,u.map(g=>{let h=foundry.utils.getProperty(i,g);if(h!==void 0)return foundry.utils.deleteProperty(i,g),[g,h]}),u.filter(u.isDefined));if(p.length){let g=u.fromEntries(p);m.isOwner?m.update(g):this.#t.emit({master:m,...g})}}return n(i,r,o)}",
+    "socket": "function _e(t,e){let n=!1,i=a(async(o,s)=>{if(o.__type__!==t||!game.user.isActiveGM)return;let c=await IA(o);e(c,s)},\"onSocket\"),r=a(o=>{if(!game.users.activeGM){ui.notifications.error(re.shared(\"emiting.noGm\"));return}Qo();let s=DA(o);s.__type__=t,Yo(s)},\"emit\");return{get enabled(){return n},async call(o){if(u.isPlainObject(o)){if(game.user.isActiveGM)return e(o,game.userId);r(o)}},emit:r,activate(){this.enabled||!Ne()||(n=!0,Ny(i))},disable(){this.enabled&&(n=!1,jy(i))},toggle(o){o??=!this.enabled,o?this.activate():this.disable()}}}",
+    "transport": "function Ny(t){game.socket.on(`module.${M.id}`,t)}a(Ny,\"socketOn\");function jy(t){game.socket.off(`module.${M.id}`,t)}a(jy,\"socketOff\");function Yo(t){game.socket.emit(`module.${M.id}`,t)}a(Yo,\"socketEmit\");",
+    "conversion": "async function IA(t){let e=t.__converter__,n=t.__source__;delete t.__converter__,delete t.__source__,delete t.__type__,await Promise.all(u.entries(t).map(async()=>{}));let i=n===\"array\"?[]:{};return await Promise.all(u.entries(t).map(async([r,o])=>{i[r]=await PA(o,e[r])})),i}a(IA,\"convertToCallOptions\");async function PA(t,e){switch(e){case\"document\":return fromUuid(t);case\"target\":return xA(t);case\"token\":return(await fromUuid(t))?.object;default:return t}}a(PA,\"convertToCallOption\");async function xA(t){let e=await fromUuid(t.actor);if(e instanceof Actor)return{actor:e,token:t.token&&await fromUuid(t.token)||void 0}}a(xA,\"convertTargetFromPacket\");function kA({actor:t,token:e}){return{actor:t.uuid,token:e?.uuid}}a(kA,\"convertTargetToPacket\");function DA(t){let e={},n=u.mapValues(t,(i,r)=>i instanceof foundry.abstract.Document?(e[r]=\"document\",i.uuid):Wo(i)?(e[r]=\"token\",i.document.uuid):jx(i)?(e[r]=\"target\",kA(i)):i);return n.__converter__=e,n.__source__=u.isArray(t)?\"array\":\"object\",n}a(DA,\"convertToEmitOptions\");",
+    "validity": "isValidActor(e){return!!e&&e instanceof Actor&&!e.pack&&game.actors.has(e.id)&&e.isOfType(\"character\",\"npc\")}isValidMaster(e,n){if(!this.isValidActor(e)||n&&e.id===n||this.getMasterInMemory(e))return!1;let i=this.getMasterId(e);return!i||!game.actors.get(i)}",
+    "binding": "#t=_e(this.path(\"master\"),this.#g.bind(this));#e=_e(this.path(\"slave-turn\"),this.#f.bind(this));#n=_e(this.path(\"slave-initiative\"),this.#c.bind(this));"
+  },
+  "oldRegionNormalizedEquality": {
+    "socket": true,
+    "transport": true,
+    "conversion": true
+  },
+  "aliasMap3_57_1to3_58_4": {
+    "yA": "IA",
+    "vA": "PA",
+    "bA": "xA",
+    "TA": "kA",
+    "ie": "re",
+    "SA": "DA",
+    "Xo": "Yo",
+    "zy": "Ny",
+    "Ly": "jy",
+    "qo": "Wo",
+    "zx": "jx"
+  }
+}

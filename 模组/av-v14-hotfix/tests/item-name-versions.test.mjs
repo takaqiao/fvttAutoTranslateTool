@@ -22,8 +22,8 @@ async function boot(version,{sourceVersion=version,hash=hashSource,systemId='pf2
     libWrapper:{register(){}},
     hashSource:async value=>{const result=await hash(value);duringHash?.(runtime,target);return result;},
     registerBabeleIndex:()=>({status:()=>({state:'fixture'})})};
-  for(const name of ['registerLegacyCompat','installSundryPatch','installDurationPatch','installTimestampPatch','installChatDeleteCoalescing','installTokenizerChatPortraitPatch','installSoundStopPatch','registerDsnQualitySettings','installDsnQualityLocks','installTurnLifecyclePatch','installDsnChatRecovery'])runtime[name]=()=>{};
-  vm.runInNewContext(entry.replace(/^import .*;\r?\n/gm,''),runtime);
+  for(const name of ['prepareSundryPatch','prepareTurnLifecyclePatch','registerLegacyCompat','installSundryPatch','installDurationPatch','installTimestampPatch','installChatDeleteCoalescing','installTokenizerChatPortraitPatch','installSoundStopPatch','registerDsnQualitySettings','installDsnQualityLocks','installTurnLifecyclePatch','installDsnChatRecovery'])runtime[name]=()=>{};
+  vm.runInNewContext(entry.replace(/^import .*;\r?\n/gm,'').replaceAll('import.meta.url',JSON.stringify(new URL('../av-v14-hotfix.mjs',import.meta.url).href)),runtime);
   callbacks.init();await callbacks.setup();callbacks.ready();for(const fn of microtasks)await fn();
   return {state:self.api.status().patches.itemNames,reads,writes,current,original,errors};
 }

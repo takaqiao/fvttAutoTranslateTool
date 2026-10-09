@@ -50,3 +50,10 @@ test('matching BBMM rules remain readable on later core generations',()=>{
  const e=harness({generation:15});
  assert.equal(readBbmmHardRules(e.runtime)['example.selected']?.value,false);
 });
+
+test('future BBMM labels retain rules and registry checks',()=>{
+ const e=harness({bbmmVersion:'2.0.0'});
+ assert.equal(readBbmmHardRules(e.runtime)['example.selected']?.value,false);
+ e.registry.get('bbmm.userSettingSync').type=Array;
+ assert.deepEqual(readBbmmHardRules(e.runtime),{});
+});

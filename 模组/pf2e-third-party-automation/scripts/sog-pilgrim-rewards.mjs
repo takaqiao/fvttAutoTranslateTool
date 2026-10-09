@@ -193,7 +193,9 @@ export async function createPilgrimRewards({game,fromUuid,choose,onError=console
   },'WRAPPER');
   for(const actor of values(game.actors))index(actor);
   for(const scene of values(game.scenes))for(const token of values(scene.tokens))if(token.actor?.isToken)index(token.actor);
-  const on=(name,callback)=>Hooks.on(name,(...args)=>Promise.resolve(callback(...args)).catch(report));
+  const on=(name,callback)=>Hooks.on(name,(...args)=>{
+   try{return Promise.resolve(callback(...args)).catch(report);}catch(error){report(error);}
+  });
   const restoreMedia=async actor=>{if(active())await reconcile(actor);await quietMedia(()=>media.reconcile(actor));};
   on('createChatMessage',async message=>{if(active()){await fan.handleStrike(message);await quietMedia(()=>media.strike(message));}});
   on('updateChatMessage',async message=>{if(active()){await fan.handleStrike(message);await quietMedia(()=>media.strike(message));}});

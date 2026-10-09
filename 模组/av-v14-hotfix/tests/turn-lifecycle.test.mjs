@@ -6,10 +6,12 @@ import {readFile} from 'node:fs/promises';
 
 const fixture = JSON.parse(await readFile(new URL('./fixtures/turn-lifecycle-native.json', import.meta.url), 'utf8'));
 const patchURL = new URL('../scripts/patches/turn-lifecycle.mjs', import.meta.url);
-const install = existsSync(patchURL) ? (await import(patchURL.href)).installTurnLifecyclePatch : () => ({status:'skipped', reason:'missing-patch'});
+const patch = existsSync(patchURL) ? await import(patchURL.href) : {};
+const install = patch.installTurnLifecyclePatch ?? (() => ({status:'skipped', reason:'missing-patch'}));
+const currentSummons = await readFile(new URL('./fixtures/summons-2.20.3-deleteItem.js.txt', import.meta.url), 'utf8');
 const versions = {'pf2e-reaction':'1.4.3', 'pf2e-sustain-reminder':'1.1.0', 'pf2e-summons-assistant':'2.20.2', 'pf2e-toolbelt':'3.56.4'};
 
-function environment({useChat=true, autoExpire=true, coreVersion='14.368', systemVersion='8.6.0', systemId='pf2e'} = {}) {
+async function environment({useChat=true, autoExpire=true, coreVersion='14.368', systemVersion='8.6.0', systemId='pf2e', sustainSource=fixture.sustain.script, summonsCallback=fixture.summons.deleteItem, fetchError, beforeResponse, prepare=true} = {}) {
   const writes=[], messages=[], renders=[], deleted=[], timers=[], reports=[], prompts=[];
   const idError = new Error('You must provide an _id for every object in the update data array');
   const g = {console, CONFIG:{debug:{hooks:false}}, CONST:{vtt:'Foundry', DOCUMENT_OWNERSHIP_LEVELS:{OWNER:3}},
@@ -53,7 +55,7 @@ function environment({useChat=true, autoExpire=true, coreVersion='14.368', syste
   vm.runInContext(fixture.sustain.script,g);
   const helpers=['reset','afterReset','count','feat','action','effect','npc','party','sourceEffect'].map(key=>fixture.reaction[key]).join('\n');
   vm.runInContext(`${helpers}\nconst S='pf2e-reaction',Aa='Compendium.pf2e-reaction.reaction-effects.Item.Bq05rfSWsBjNzjwq',w=reactionOptions;Hooks.on('pf2e.startTurn',${fixture.reaction.startTurn});`,g);
-  if(autoExpire)vm.runInContext(`${fixture.summons.deleteItem}\n${fixture.summons.setup}\nsetupAutoDeleteThrallHook();`,g);
+  if(autoExpire)vm.runInContext(`${summonsCallback}\n${fixture.summons.setup}\nsetupAutoDeleteThrallHook();`,g);
   const original={sustain:g.Hooks.events['pf2e.startTurn'][0].fn,reaction:g.Hooks.events['pf2e.startTurn'][1].fn,
     summons:g.Hooks.events.deleteItem?.[0]?.fn};
   const callback=part=>part==='summons'?g.Hooks.events.deleteItem[0].fn:g.Hooks.events['pf2e.startTurn'][part==='sustain'?0:1].fn;
@@ -73,12 +75,14 @@ function environment({useChat=true, autoExpire=true, coreVersion='14.368', syste
     const doc=actor('thrall-actor'),tok=new TokenDocument(doc,scene,id);if(!world)doc.parent=tok;
     const effect=new Item(doc);doc.items.push(effect);return {actor:doc,token:tok,effect,info:{parent:doc}};
   }
+  g.fetch = async url => {assert.equal(String(url), 'modules/pf2e-sustain-reminder/scripts/sustain-main.mjs'); if (fetchError) throw fetchError; beforeResponse?.(g); return {ok:true, text:async()=>sustainSource};};
+  if (prepare) await patch.prepareTurnLifecyclePatch?.({g});
   const apply=()=>install({g,report:report=>reports.push(report)});
   return {g,writes,messages,renders,deleted,timers,reports,prompts,idError,original,callback,actor,combatant,thrall,encounter,scene,apply};
 }
 
 test('installed upstream callbacks reproduce null-token, missing-id and world-Actor expiry failures',async()=>{
-  const f=environment(),temporary=f.combatant({id:null,token:false});
+  const f=await environment(),temporary=f.combatant({id:null,token:false});
   await assert.rejects(f.original.sustain(temporary,f.encounter,'gm'),/null.*actor/);
   await assert.rejects(f.original.reaction(temporary),error=>error===f.idError);
   assert.equal(f.writes.length,1);assert.equal(f.writes[0].key,'state');
@@ -86,7 +90,7 @@ test('installed upstream callbacks reproduce null-token, missing-id and world-Ac
 });
 
 test('null-token shared turn keeps the Actor sustain reminder, ownership and native speaker selection',async()=>{
-  const f=environment(),doc=f.actor();
+  const f=await environment(),doc=f.actor();
   doc.items=[{id:'sustain',type:'effect',name:'Sustaining: Summon'},{id:'ordinary',type:'effect',name:'Ordinary effect'},
     {id:'spell',type:'spell',name:'Sustaining: Not an effect'}];
   const temporary=f.combatant({id:null,token:false,actor:doc});f.apply();
@@ -100,7 +104,7 @@ test('null-token shared turn keeps the Actor sustain reminder, ownership and nat
 
 test('Reaction Checker alone ignores temporary Combatants without generating a persistent identity',async()=>{
   for(const token of [false,true]){
-    const f=environment(),temporary=f.combatant({id:null,token});f.apply();
+    const f=await environment(),temporary=f.combatant({id:null,token});f.apply();
     await f.callback('reaction')(temporary,f.encounter,'gm');
     assert.equal(f.writes.length,0);assert.equal(temporary._id,undefined);assert.equal(temporary.id,null);
     assert.deepEqual(temporary.flags,{});assert.equal(f.prompts.length,0);
@@ -108,7 +112,7 @@ test('Reaction Checker alone ignores temporary Combatants without generating a p
 });
 
 test('persisted combatants keep native reset, bonus reactions, other-combatant updates and reaction effects',async()=>{
-  const f=environment(),doc=f.actor();
+  const f=await environment(),doc=f.actor();
   doc.itemTypes.action.push({slug:'triple-opportunity'});doc.itemTypes.effect.push({slug:'effect-hydra-heads',system:{badge:{value:3}}});
   const real=f.combatant({actor:doc}),ally=f.combatant({id:'ally',token:false,actor:f.actor('ally','character')});
   ally.actor.alliance='party';ally.actor.itemTypes.feat.push({slug:'inexhaustible-countermoves'});f.encounter.combatants.push(real,ally);
@@ -120,7 +124,7 @@ test('persisted combatants keep native reset, bonus reactions, other-combatant u
 });
 
 test('normal token-based sustain uses the original selection and returns the original asynchronous result',async()=>{
-  const left=environment(),right=environment();
+  const left=await environment(),right=await environment();
   for(const f of [left,right]){
     const real=f.combatant();real.actor.items.push({id:'sustain',type:'effect',name:'Sustaining: Summon'});
     f.real=real;
@@ -132,7 +136,7 @@ test('normal token-based sustain uses the original selection and returns the ori
 
 test('missing-token sustain respects useChat and does not change effects or duration',async()=>{
   for(const useChat of [false,true]){
-    const f=environment({useChat}),doc=f.actor();f.apply();
+    const f=await environment({useChat}),doc=f.actor();f.apply();
     await f.callback('sustain')(f.combatant({id:null,token:false,actor:doc}));assert.equal(f.messages.length,0);
     doc.items.push({id:'sustain',type:'effect',name:'Sustaining: Spell',duration:{remaining:6}});
     await f.callback('sustain')(f.combatant({id:null,token:false,actor:doc}));
@@ -141,7 +145,7 @@ test('missing-token sustain respects useChat and does not change effects or dura
 });
 
 test('Toolbelt native turn-start/end still updates actors and effects and dispatches to unrelated consumers',async()=>{
-  const f=environment(),events=[],hooks=[],doc=f.actor('slave','character');f.apply();
+  const f=await environment(),events=[],hooks=[],doc=f.actor('slave','character');f.apply();
   doc.rules=[{onUpdateEncounter:async ({event,actorUpdates})=>{events.push(['rule',event]);actorUpdates.ready=true;}}];
   doc.update=async data=>events.push(['update',{...data}]);doc.recharge=async data=>events.push(['recharge',{...data}]);
   doc.itemTypes.effect=[{onEncounterEvent:async event=>events.push(['effect',event])}];
@@ -164,14 +168,14 @@ test('Toolbelt native turn-start/end still updates actors and effects and dispat
 });
 
 test('expiry of a synthetic thrall deletes only its exact Token and preserves the native result',async()=>{
-  const f=environment(),thrall=f.thrall();
+  const f=await environment(),thrall=f.thrall();
   const other=new f.g.foundry.documents.TokenDocument(thrall.actor,f.scene,'other-token');f.apply();
   assert.equal(await f.callback('summons')(thrall.effect,thrall.info,'gm'),thrall.token);
   assert.deepEqual(f.deleted,[thrall.token]);assert.equal(f.scene.tokens.get('other-token'),other);
 });
 
 test('world-Actor expiry safely skips Token deletion even when matching active Tokens exist',async()=>{
-  const f=environment(),thrall=f.thrall({world:true});f.apply();
+  const f=await environment(),thrall=f.thrall({world:true});f.apply();
   thrall.actor.getActiveTokens=()=>[{document:thrall.token}];
   await f.callback('summons')(thrall.effect,thrall.info,'gm');
   assert.deepEqual(f.deleted,[]);assert.equal(f.scene.tokens.get(thrall.token.id),thrall.token);
@@ -179,7 +183,7 @@ test('world-Actor expiry safely skips Token deletion even when matching active T
 
 test('expiry rejects foreign parents, linked tokens, non-Token parents and non-effect items',async()=>{
   for(const kind of ['foreign-actor','linked','not-token','not-effect','no-info']){
-    const f=environment(),thrall=f.thrall();f.apply();
+    const f=await environment(),thrall=f.thrall();f.apply();
     if(kind==='foreign-actor')thrall.info.parent=f.thrall({id:'foreign-token'}).actor;
     if(kind==='linked')thrall.token.actorLink=true;
     if(kind==='not-token')thrall.actor.parent={delete:async()=>{throw Error('not a Token');}};
@@ -190,7 +194,7 @@ test('expiry rejects foreign parents, linked tokens, non-Token parents and non-e
 });
 
 test('other effects and non-GM callbacks preserve native early returns',async()=>{
-  const f=environment(),thrall=f.thrall({world:true});f.apply();
+  const f=await environment(),thrall=f.thrall({world:true});f.apply();
   thrall.effect.rollOptionSlug='other-effect';assert.equal(await f.callback('summons')(thrall.effect,thrall.info),undefined);
   f.g.game.user.isGM=false;assert.equal(await f.callback('summons')(undefined,undefined),undefined);
   assert.deepEqual(f.deleted,[]);
@@ -198,7 +202,7 @@ test('other effects and non-GM callbacks preserve native early returns',async()=
 
 test('unrelated original errors retain their identity for durable turns, reminders and legal deletion',async()=>{
   for(const part of ['reaction','sustain','summons']){
-    const f=environment(),error=new Error('original-'+part);f.apply();
+    const f=await environment(),error=new Error('original-'+part);f.apply();
     let invoke;
     if(part==='reaction'){const real=f.combatant();real.setFlag=async()=>{throw error;};invoke=()=>f.callback(part)(real);}
     if(part==='sustain'){const real=f.combatant();Object.defineProperty(real.actor,'items',{get(){throw error;}});invoke=()=>f.callback(part)(real);}
@@ -209,7 +213,7 @@ test('unrelated original errors retain their identity for durable turns, reminde
 
 test('null-token reminder errors are propagated unchanged instead of hiding failed chat creation',async()=>{
   for(const operation of ['template','create']){
-    const f=environment(),doc=f.actor(),error=new Error(operation+' failed');
+    const f=await environment(),doc=f.actor(),error=new Error(operation+' failed');
     doc.items.push({id:'sustain',type:'effect',name:'Sustaining: Spell'});f.apply();
     if(operation==='template')f.g.foundry.applications.handlebars.renderTemplate=async()=>{throw error;};
     else f.g.ChatMessage.create=async()=>{throw error;};
@@ -218,22 +222,22 @@ test('null-token reminder errors are propagated unchanged instead of hiding fail
 });
 
 test('objects that only resemble a temporary Combatant retain the original callback behavior',async()=>{
-  const f=environment(),error=new Error('foreign flag operation'),doc=f.actor();f.apply();
+  const f=await environment(),error=new Error('foreign flag operation'),doc=f.actor();f.apply();
   const foreign={id:null,_id:null,token:null,actor:doc,getFlag:()=>undefined,setFlag:async()=>{throw error;}};
   await assert.rejects(()=>f.callback('reaction')(foreign),value=>value===error);
   await assert.rejects(()=>f.callback('sustain')(foreign),/null.*actor/);
 });
 
-test('other systems leave every native callback untouched',()=>{
+test('other systems leave every native callback untouched',async()=>{
   for(const args of [{systemId:'sf2e'}]){
-    const f=environment(args),result=f.apply();assert.equal(result.status,'skipped');
+    const f=await environment(args),result=f.apply();assert.equal(result.status,'skipped');
     for(const part of ['reaction','sustain','summons'])assert.equal(f.callback(part),f.original[part]);
   }
 });
 
 test('audited callbacks retain their protections across core and PF2e version labels',async()=>{
  for(const systemVersion of ['8.5.2','8.6.0','9.0.0']){
- const f=environment({coreVersion:'15.1',systemVersion}),result=f.apply();
+ const f=await environment({coreVersion:'15.1',systemVersion}),result=f.apply();
  assert.equal(result.parts.summons.status,'installed');assert.equal(result.parts.sustain.status,'installed');
  assert.equal(result.parts.reaction.status,'installed');
  const world=f.thrall({world:true});assert.equal(await f.callback('summons')(world.effect,world.info),undefined);
@@ -241,18 +245,18 @@ test('audited callbacks retain their protections across core and PF2e version la
  }
 });
 
-test('unknown or inactive consumer versions skip independently while known consumers install',()=>{
-  for(const [part,id] of [['reaction','pf2e-reaction'],['sustain','pf2e-sustain-reminder'],['summons','pf2e-summons-assistant']])for(const kind of ['version','inactive']){
-    const f=environment();if(kind==='version')f.g.game.modules.get(id).version='999';else f.g.game.modules.get(id).active=false;
+test('inactive consumers skip independently while other consumers install',async()=>{
+  for(const [part,id] of [['reaction','pf2e-reaction'],['sustain','pf2e-sustain-reminder'],['summons','pf2e-summons-assistant']])for(const kind of ['inactive']){
+    const f=await environment();f.g.game.modules.get(id).active=false;
     const result=f.apply();assert.equal(result.status,'installed');assert.equal(result.parts[part].status,'skipped');
     assert.equal(f.callback(part),f.original[part]);
     for(const other of ['reaction','sustain','summons'].filter(key=>key!==part))assert.equal(result.parts[other].status,'installed');
   }
 });
 
-test('unknown callback sources, duplicate listeners and foreign Hook implementations are not overwritten',()=>{
+test('unknown callback sources, duplicate listeners and foreign Hook implementations are not overwritten',async()=>{
   for(const part of ['reaction','sustain','summons'])for(const kind of ['source','duplicate','core-wrapper']){
-    const f=environment();
+    const f=await environment();
     const hook=part==='summons'?'deleteItem':'pf2e.startTurn',index=part==='reaction'?1:0;
     if(kind==='source')f.g.Hooks.events[hook][index].fn=async()=> 'foreign';
     if(kind==='duplicate')f.g.Hooks.on(hook,f.original[part]);
@@ -263,9 +267,9 @@ test('unknown callback sources, duplicate listeners and foreign Hook implementat
   }
 });
 
-test('diagnostics distinguish absent expiry hook, preserve native records and support removal and restore',()=>{
-  const absent=environment({autoExpire:false}),partial=absent.apply();assert.equal(partial.parts.summons.status,'skipped');
-  const f=environment(),Hooks=f.g.Hooks,off=Hooks.off,list=Hooks.events['pf2e.startTurn'],records=[...list],result=f.apply();
+test('diagnostics distinguish absent expiry hook, preserve native records and support removal and restore',async()=>{
+  const absent=await environment({autoExpire:false}),partial=absent.apply();assert.equal(partial.parts.summons.status,'skipped');
+  const f=await environment(),Hooks=f.g.Hooks,off=Hooks.off,list=Hooks.events['pf2e.startTurn'],records=[...list],result=f.apply();
   assert.equal(result.status,'installed');assert.equal(f.apply(),result);assert.equal(f.reports[0].feature,'turn-lifecycle');
   assert.equal(Hooks.events['pf2e.startTurn'],list);assert.deepEqual([...list],records);
   Hooks.off('pf2e.startTurn',f.original.reaction);assert.equal(list.length,1);
@@ -274,7 +278,7 @@ test('diagnostics distinguish absent expiry hook, preserve native records and su
 });
 
 test('null-token reminders use the namespaced template API without a global alias',async()=>{
-  const f=environment({coreVersion:'14.369'}),doc=f.actor();
+  const f=await environment({coreVersion:'14.369'}),doc=f.actor();
   delete f.g.renderTemplate;
   doc.items.push({id:'sustain',type:'effect',name:'Sustaining: Spell'});
   assert.equal(f.apply().parts.sustain.status,'installed');
@@ -283,11 +287,103 @@ test('null-token reminders use the namespaced template API without a global alia
   assert.equal(f.renders[0].path,'modules/pf2e-sustain-reminder/templates/sustain-reminder.hbs');
 });
 
-test('a global template alias cannot enable sustain when the namespaced API is unavailable',()=>{
-  const f=environment();delete f.g.foundry.applications.handlebars.renderTemplate;
+test('a global template alias cannot enable sustain when the namespaced API is unavailable',async()=>{
+  const f=await environment();delete f.g.foundry.applications.handlebars.renderTemplate;
   const result=f.apply();
   assert.equal(result.parts.sustain.status,'skipped');
   assert.equal(result.parts.sustain.reason,'document-api-unavailable');
   assert.equal(f.callback('sustain'),f.original.sustain);
   assert.equal(result.parts.reaction.status,'installed');assert.equal(result.parts.summons.status,'installed');
+});
+
+test('future Summons labels retain strict effect and Token ownership checks',async()=>{
+ const f=await environment();f.g.game.modules.get('pf2e-summons-assistant').version='3.0.0';
+ assert.equal(f.apply().parts.summons.status,'installed');
+ const world=f.thrall({world:true});await f.callback('summons')(world.effect,world.info);
+ assert.equal(f.deleted.length,0);
+ const own=f.thrall();await f.callback('summons')(own.effect,own.info);
+ assert.equal(f.deleted.length,1);
+});
+
+test('future Reaction and Sustain labels retain their narrow turn protections', async () => {
+  const f = await environment();
+  f.g.game.modules.get('pf2e-reaction').version = '99.0.0';
+  f.g.game.modules.get('pf2e-sustain-reminder').version = '99.0.0';
+  await patch.prepareTurnLifecyclePatch?.({g:f.g});
+  const result = f.apply();
+  assert.equal(result.parts.reaction.status, 'installed');
+  assert.equal(result.parts.sustain.status, 'installed');
+  const doc = f.actor();
+  doc.items.push({id:'sustain', type:'effect', name:'Sustaining: Spell'});
+  const temporary = f.combatant({id:null, token:false, actor:doc});
+  await f.callback('reaction')(temporary);
+  await f.callback('sustain')(temporary, f.encounter, 'player');
+  assert.equal(f.writes.length, 0);
+  assert.equal(f.messages.length, 1);
+  assert.equal(f.messages[0].content, 'actor:sustain');
+});
+
+test('changed Sustain selector and constants skip only its callback', async () => {
+  for (const [before, after] of [
+    ["item.type === 'effect'", "item.type === 'spell'"],
+    ["susainedEffectPrefix = 'Sustaining: '", "susainedEffectPrefix = 'Other: '"],
+    ["moduleId = 'pf2e-sustain-reminder'", "moduleId = 'foreign'"],
+    ["useChatSetting = 'useChat'", "useChatSetting = 'other'"]
+  ]) {
+    assert.ok(fixture.sustain.script.includes(before));
+    const f = await environment({sustainSource:fixture.sustain.script.replace(before, after)});
+    const result = f.apply();
+    assert.equal(result.parts.sustain.status, 'skipped', before);
+    assert.equal(f.callback('sustain'), f.original.sustain);
+    assert.equal(result.parts.reaction.status, 'installed');
+    assert.equal(result.parts.summons.status, 'installed');
+    await assert.rejects(() => f.callback('sustain')(f.combatant({token:false})), /null.*actor/);
+  }
+});
+
+test('unrelated Sustain edits do not gate the patch but commented declarations cannot enable it', async () => {
+  const f = await environment({sustainSource:fixture.sustain.script + '\nconst unrelated = true;'});
+  assert.equal(f.apply().parts.sustain.status, 'installed');
+  const source = fixture.sustain.script.replace('function getTokenSustainEffects(token)', '/* function getTokenSustainEffects(token)') + '\n*/';
+  const rejected = await environment({sustainSource:source});
+  assert.equal(rejected.apply().parts.sustain.status, 'skipped');
+  assert.equal(rejected.callback('sustain'), rejected.original.sustain);
+});
+
+test('Sustain source fetch failures and replaced module objects preserve native callbacks', async () => {
+  for (const options of [{prepare:false}, {fetchError:Error('offline')}, {beforeResponse:g=>g.game.modules.set('pf2e-sustain-reminder',{active:true,version:'1.1.0'})}]) {
+    const f = await environment(options), result = f.apply();
+    assert.equal(result.parts.sustain.status, 'skipped');
+    assert.equal(f.callback('sustain'), f.original.sustain);
+    assert.equal(result.parts.reaction.status, 'installed');
+  }
+});
+
+test('current Summons callback formatting still preserves strict Token ownership', async () => {
+  const f = await environment({summonsCallback:currentSummons});
+  f.g.game.modules.get('pf2e-summons-assistant').version = '2.20.3';
+  assert.equal(f.apply().parts.summons.status, 'installed');
+  const world = f.thrall({world:true});
+  await f.callback('summons')(world.effect, world.info);
+  assert.equal(f.deleted.length, 0);
+  const own = f.thrall();
+  await f.callback('summons')(own.effect, own.info);
+  assert.equal(f.deleted[0], own.token);
+});
+
+test('missing Hook event storage skips consumers without throwing', async () => {
+  const f = await environment();
+  f.g.Hooks = {};
+  const result = f.apply();
+  assert.equal(result.status, 'skipped');
+  for (const part of Object.values(result.parts)) assert.equal(part.status, 'skipped');
+});
+
+test('equivalent Summons callbacks with different formatting are still duplicate listeners', async () => {
+  const f = await environment();
+  const duplicate = vm.runInNewContext(`(${currentSummons})`, f.g);
+  f.g.Hooks.on('deleteItem', duplicate);
+  assert.equal(f.apply().parts.summons.status, 'skipped');
+  assert.equal(f.callback('summons'), f.original.summons);
+  assert.equal(f.g.Hooks.events.deleteItem[1].fn, duplicate);
 });

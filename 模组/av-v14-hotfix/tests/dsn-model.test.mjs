@@ -117,9 +117,9 @@ test('foreign loader methods keep their native receiver and original two callbac
  assert.equal(f.preset.modelLoading,promise);
 });
 
-for(const change of ['version','preset','loader-parse'])test(`unknown ${change} source retains native model loading`,async()=>{
+for(const change of ['inactive','preset','loader-parse'])test(`unknown ${change} source retains native model loading`,async()=>{
  const f=setup(),native=Object.getPrototypeOf(f.preset).loadModel;
- if(change==='version')f.g.game.modules.get('dice-so-nice').version='7.0.0';
+ if(change==='inactive')f.g.game.modules.get('dice-so-nice').active=false;
  if(change==='preset')Object.getPrototypeOf(f.preset).loadModel=function foreign(){};
  if(change==='loader-parse')Object.getPrototypeOf(f.loader).parse=function foreign(){};
  const original=f.preset.loadModel;installDsnChatRecovery({g:f.g});

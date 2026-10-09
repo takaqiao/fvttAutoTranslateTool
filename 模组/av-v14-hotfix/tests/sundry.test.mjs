@@ -2,8 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {readFile} from 'node:fs/promises';
-import {installSundryPatch} from '../scripts/patches/sundry.mjs';
+import * as sundryPatch from '../scripts/patches/sundry.mjs';
+const {installSundryPatch} = sundryPatch;
 
+const helperSource = await readFile(new URL('./fixtures/sundry-helpers.js.txt', import.meta.url), 'utf8');
+const moduleSource = await readFile(new URL('./fixtures/sundry-module.js.txt', import.meta.url), 'utf8');
 const original = await readFile(new URL('./fixtures/sundry-1.10.2-tokenEffectHider.js.txt', import.meta.url), 'utf8');
 const constants = await readFile(new URL('./fixtures/sundry-1.10.2-const.js.txt', import.meta.url), 'utf8');
 const coreHooks = JSON.parse(await readFile(new URL('./fixtures/sundry-core-hooks.json', import.meta.url), 'utf8'));
@@ -24,15 +27,21 @@ function hookAPI() {
     ${coreHooks.Hooks}; Hooks$1`,{CONFIG:{debug:{hooks:false}},CONST:{vtt:'Foundry'},console});
 }
 
-async function environment({version = '1.10.2', active = true, mode = 'relevant', types = 'all', modules = [], beforeHooks, systemVersion = '8.5.0'} = {}) {
+async function environment({version = '1.11.0', active = true, mode = 'relevant', types = 'all', modules = [], beforeHooks, systemVersion = '8.5.0', sources = {}, fetchError, beforeResponse, prepare = true, runtimeCode} = {}) {
   const settings = new Map([['hide.effects.token.surface', mode], ['hide.effects.token.enabled-for', types]]);
   const g = {Hooks: hookAPI(), canvas: {tokens: {placeables: [], highlightObjects: false}},
     game: {version:'14.368', system:{id:'pf2e',version:systemVersion}, modules: new Map([['sundry', {version, active}], ...modules.map(id => [id, {active: true}])]),
       settings: {get(namespace, key) {assert.equal(namespace, 'sundry'); return settings.get(key);}}}};
+  const files = {'scripts/lib/tokenEffectHider.js':version === '1.10.2' ? original : version === '1.10.3' ? currentOriginal : updatedOriginal,
+    'scripts/lib/const.js':version === '1.10.2' ? constants : version === '1.10.3' ? currentConstants : updatedConstants,
+    'scripts/lib/helpers.js':helperSource, 'scripts/module.js':moduleSource, ...sources};
+  g.fetch = async url => {if (fetchError) throw fetchError; beforeResponse?.(g); const text = files[String(url).replace('modules/sundry/', '')]; return {ok:text !== undefined, text:async()=>text};};
   beforeHooks?.(g.Hooks);
-  const code = version === '1.11.0' ? updatedCode : version === '1.10.3' ? currentCode : originalCode;
-  await vm.runInNewContext(code, {...g, MODULE_ID: 'sundry', getSetting: key => g.game.settings.get('sundry', key)})(true);
-  return {g, settings};
+  const code = runtimeCode ?? (version === '1.10.2' ? originalCode : version === '1.10.3' ? currentCode : updatedCode);
+  const runtime = {...g, MODULE_ID: 'sundry', getSetting: key => g.game.settings.get('sundry', key)};
+  await vm.runInNewContext(code, runtime)(true);
+  if (prepare) await sundryPatch.prepareSundryPatch?.({g});
+  return {g, settings, runtime};
 }
 
 function fixture(count = 0, info = []) {
@@ -66,12 +75,12 @@ test('native ordinary icons already at the target visibility avoid document cons
  }
 });
 
-test('installed Sundry 1.10.3 avoids unchanged effects and preserves a subsequent real visibility change',async()=>{
+test('the old Sundry loop keeps its native helper calls and visibility changes',async()=>{
  const {g}=await environment({version:'1.10.3',systemVersion:'8.5.1'}),f=nativeFixture(g,[false]);
- installSundryPatch({g});g.Hooks.callAll('refreshToken',f.token);
- assert.equal(f.reads(),0);assert.deepEqual(f.view().icons,[false]);
+ assert.equal(installSundryPatch({g}).status,'skipped');g.Hooks.callAll('refreshToken',f.token);
+ assert.equal(f.reads(),1);assert.deepEqual(f.view().icons,[false]);
  f.token.hover=true;g.Hooks.callAll('refreshToken',f.token);
- assert.equal(f.reads(),1);assert.deepEqual(f.view().icons,[true]);
+ assert.equal(f.reads(),2);assert.deepEqual(f.view().icons,[true]);
 });
 
 test('Sundry 1.11.0 skips unchanged effects and still responds to hover and highlight', async () => {
@@ -237,9 +246,9 @@ test('the two exact callbacks keep their live records, slots, IDs and descriptor
   assert.equal(otherCalls, 1);
 });
 
-test('version mismatch, inactive modules, missing callbacks and duplicate callbacks cause no mutations', async () => {
-  for (const kind of ['version', 'inactive', 'missing', 'duplicate', 'modified']) {
-    const {g} = await environment({version: kind === 'version' ? '1.10.4' : '1.10.2', active: kind !== 'inactive'});
+test('inactive modules, missing callbacks and duplicate callbacks cause no mutations', async () => {
+  for (const kind of ['inactive', 'missing', 'duplicate', 'modified']) {
+    const {g} = await environment({active: kind !== 'inactive'});
     if (kind === 'missing') g.Hooks.off('highlightObjects', g.Hooks.events.highlightObjects[0].id);
     if (kind === 'duplicate') g.Hooks.on('refreshToken', g.Hooks.events.refreshToken[0].fn);
     if (kind === 'modified') {g.Hooks.off('refreshToken', g.Hooks.events.refreshToken[0].id); g.Hooks.on('refreshToken', token => token);}
@@ -400,4 +409,65 @@ test('matching Sundry and Hooks contracts skip repeated icon reads on later core
  const {g}=await environment();g.game.version='15.1';const item=fixture();
  assert.equal(installSundryPatch({g}).status,'installed');g.Hooks.callAll('refreshToken',item.token);
  assert.equal(item.reads(),0);assert.equal(item.view().background,false);
+});
+
+test('Sundry source contracts preserve the shortcut across future module labels', async () => {
+  const {g} = await environment({version:'99.0.0'}), item = nativeFixture(g, [false]);
+  assert.equal(installSundryPatch({g}).status, 'installed');
+  g.Hooks.callAll('refreshToken', item.token);
+  assert.equal(item.reads(), 0);
+  assert.deepEqual(item.view(), {background:false, icons:[false]});
+});
+
+test('an older loop under a future label retains native helper side effects', async () => {
+  const changed = original.replace('return (\n    relevantSlug', 'globalThis.helperCalls++;\n  return (\n    relevantSlug');
+  assert.notEqual(changed, original);
+  const runtimeCode = constants.replaceAll('export const ', 'const ') + '\n'
+    + changed.replace(/^import[\s\S]*?;\r?\n/gm, '').replaceAll('export ', '')
+    + '\nglobalThis.helperCalls = 0; setupHideTokenEffects';
+  const {g, runtime} = await environment({version:'99', runtimeCode, sources:{'scripts/lib/tokenEffectHider.js':changed}});
+  const item = nativeFixture(g, [false], [{slug:'custom'}]);
+  assert.equal(installSundryPatch({g}).status, 'skipped');
+  g.Hooks.callAll('refreshToken', item.token);
+  assert.equal(item.reads(), 1);
+  assert.equal(runtime.helperCalls, 1);
+});
+
+test('changed Sundry dependencies leave the live callbacks and native work intact', async () => {
+  const changes = [
+    ['scripts/lib/tokenEffectHider.js', updatedOriginal.replace('if (token.hover)', 'if (!token.hover)')],
+    ['scripts/lib/tokenEffectHider.js', updatedOriginal.replace('token.effects.bg.visible = value;', 'token.effects.bg.visible = !value;')],
+    ['scripts/lib/tokenEffectHider.js', updatedOriginal.replace('actorType === "character"', 'actorType === "npc"')],
+    ['scripts/lib/tokenEffectHider.js', updatedOriginal.replace('if (shouldShowEffects(token))', 'if (!shouldShowEffects(token))')],
+    ['scripts/lib/tokenEffectHider.js', updatedOriginal.replace('BG_FRAME_SKIP_MODULES.some', 'BG_FRAME_SKIP_MODULES.every')],
+    ['scripts/lib/tokenEffectHider.js', updatedOriginal.replace('"./helpers.js"', '"./foreign.js"')],
+    ['scripts/lib/const.js', constants.replace('"pf2e-effects-halo"', '"foreign-owner"')],
+    ['scripts/lib/helpers.js', helperSource.replace('game.settings.get(MODULE_ID, settingID)', 'false')],
+    ['scripts/module.js', moduleSource.replace('MODULE_ID = "sundry"', 'MODULE_ID = "foreign"')]
+  ];
+  for (const [path, source] of changes) {
+    const {g} = await environment({sources:{[path]:source}}), item = nativeFixture(g, [false]);
+    const callback = g.Hooks.events.refreshToken[0].fn;
+    assert.equal(installSundryPatch({g}).status, 'skipped', path);
+    assert.equal(g.Hooks.events.refreshToken[0].fn, callback);
+    g.Hooks.callAll('refreshToken', item.token);
+    assert.equal(item.reads(), 1);
+  }
+});
+
+test('Sundry ignores unrelated source changes but rejects declarations hidden in comments', async () => {
+  const unrelated = updatedOriginal.replace('const BUTTON_ID =', 'const UNRELATED = true;\nconst BUTTON_ID =');
+  const accepted = await environment({version:'99', sources:{'scripts/lib/tokenEffectHider.js':unrelated}});
+  assert.equal(installSundryPatch({g:accepted.g}).status, 'installed');
+  const decoy = updatedOriginal.replace('function shouldSkipEffectBackground()', '/* function shouldSkipEffectBackground()').replace('export function shouldAlwaysShowEffect', '*/ export function shouldAlwaysShowEffect');
+  const rejected = await environment({sources:{'scripts/lib/tokenEffectHider.js':decoy}});
+  assert.equal(installSundryPatch({g:rejected.g}).status, 'skipped');
+});
+
+test('unavailable source and changed module identity do not enable Sundry', async () => {
+  for (const options of [{prepare:false}, {fetchError:Error('offline')}, {beforeResponse:g=>g.game.modules.set('sundry',{active:true,version:'1.10.2'})}]) {
+    const {g} = await environment(options), callback = g.Hooks.events.refreshToken[0].fn;
+    assert.equal(installSundryPatch({g}).status, 'skipped');
+    assert.equal(g.Hooks.events.refreshToken[0].fn, callback);
+  }
 });

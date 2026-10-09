@@ -3,13 +3,19 @@ import {installDsnQueueRecovery} from './dsn-queue.mjs';
 import {installDsnModelRecovery} from './dsn-model.mjs';
 import {dsnCompatibility} from './dsn-runtime.mjs';
 
-// Audited DsN 6.4.1/6.4.2/6.4.3 functions. Model errors reject and failed batches continue native
+// Audited DsN chat functions. Model errors reject and failed batches continue native
 // chat reveal, preserving permissions and interactive pending throws.
-const hashes={
+const legacyHashes={
   renderRolls:'8ed6ad569e58f7a64474f862a9a08a5e27492b2d8cedbe16b9d2ddce76a9caed',
   showForRoll:'a4284a3191192a06efafb1a56b44fb84803e63222cbe5544c404589b392f67b2',
   show:'59da9bc59811eefe5116e4a12a62ff5beca221e9a29286ea85e2b456a47d9fc8',
   _revealMessage:'390f9c83fe67f2fa1ea26661741c8bd5bf45342edd537392977befab903c1034'
+};
+const currentHashes={...legacyHashes,
+  renderRolls:'6348b905185ca54778ad7c4ef17743db8a98954e911675f8e01a5b059f4a09d6',
+  showForRoll:'6460f5b7b3a6d5cbb2a59c81f7a73c05a405cb6c1ab45d6d8280a59ee4954d73',
+  animateRolls:'63cd49a48e05b37b73b326fc911b7b2d519ae371d0743b1b8396f503f3b82b9c',
+  _showRollList:'2d76c711cb804c715ed74d77fd3915dff62f0e58e23bad692b69f4e5f231c321'
 };
 const installations=new WeakMap(),waiting=new WeakSet();
 
@@ -28,6 +34,8 @@ export function installDsnChatRecovery({g=globalThis,report=()=>{}}={}){
   }
   const prior=installations.get(pipeline);if(prior)return finish(prior);
   const proto=Object.getPrototypeOf(pipeline),native={};
+  const render=Object.getOwnPropertyDescriptor(proto,'renderRolls')?.value;
+  const hashes=typeof render==='function'&&sha256Fallback(Function.prototype.toString.call(render))===currentHashes.renderRolls?currentHashes:legacyHashes;
   for(const [key,hash]of Object.entries(hashes)){
     const descriptor=Object.getOwnPropertyDescriptor(proto,key);
     if(typeof descriptor?.value!=='function'||Object.hasOwn(pipeline,key)
@@ -96,6 +104,10 @@ export function installDsnChatRecovery({g=globalThis,report=()=>{}}={}){
     const view=new Proxy(pipeline,{get(target,key){
       if(key==='showForRoll')return (...values)=>safely(()=>native.showForRoll.apply(view,values));
       if(key==='show')return (...values)=>safely(()=>native.show.apply(view,values));
+      // These native delegates must stay on the recovery view for every actor
+      // group and ordered roll; binding to the pipeline would bypass it.
+      if((key==='animateRolls'||key==='_showRollList')&&native[key])
+        return (...values)=>safely(()=>native[key].apply(view,values));
       if(key==='queue'){
         const queue=target.queue;
         if(!queue||typeof queue!=='object')return queue;

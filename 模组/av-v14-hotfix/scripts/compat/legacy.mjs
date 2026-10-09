@@ -233,13 +233,13 @@ export function registerLegacyCompat({moduleId = 'av-v14-hotfix', g = globalThis
     wrappers.push(target);
   }
 
-  // The current Season of Ghosts importer is fixed; only this audited older importer still reads every pack.
+  // This importer reads the setting for every adventure package. Register only missing definitions.
   const importer = g.game?.modules?.get('sf2e-murder-in-metal-city');
-  if (importer?.active && importer.version === '13.2.0') {
-    const settings = g.game.settings;
+  const settings = g.game?.settings;
+  if (importer?.active && typeof settings?.register === 'function' && typeof settings.settings?.has === 'function') {
     for (const pack of g.game.packs ?? []) {
       const namespace = pack.metadata?.packageName;
-      if (pack.metadata?.type !== 'Adventure' || !namespace || settings.settings.has(`${namespace}.autoOpenAdventures`)) continue;
+      if (pack.metadata?.type !== 'Adventure' || typeof namespace !== 'string' || !namespace.trim() || settings.settings.has(`${namespace}.autoOpenAdventures`)) continue;
       settings.register(namespace, 'autoOpenAdventures', {scope: 'world', config: false, type: Boolean, default: false});
       adventureSettings.push(`${namespace}.autoOpenAdventures`);
     }

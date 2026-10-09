@@ -6,7 +6,7 @@ import {treatmentFailureState} from './treatment-streaks.mjs';
 import {projectCommand,validateExtensionOriginal} from './owner-command.mjs';
 import {WORKBENCH_SOURCE_SHA} from './manual-events.mjs';
 export function createCoordinator({ledger,capabilities,providers,clock,policy,isAuthority,now=()=>globalThis.game.time.worldTime,ownerOperations,onChange=()=>{},game=globalThis.game,fromUuid=globalThis.fromUuid,getHpPool,manualEvents}){
- const byId=new Map(providers.map(p=>[p.id,p])),locks=new Map(),contexts=new Map(),runners=new Map(),leases=new Map(),generations=new Map(),checkpointRequests=new Map();
+ const byId=new Map(providers.map(p=>[p.id,p])),locks=new Map(),contexts=new Map(),runners=new Map(),leases=new Map(),generations=new Map(),checkpointRequests=new Map(),activeStops=new Map();
  const atomic=ledger.atomic===true;
  const check=()=>{if(!isAuthority()||game?.user?.active===false)throw Error('active-gm-required')};
  const scopeOptions=scope=>atomic?{leaseNonce:scope?.leaseNonce}:{};
@@ -77,11 +77,11 @@ export function createCoordinator({ledger,capabilities,providers,clock,policy,is
  }
  function describeSnapshot(data,actors,id){return {...data,...checkpointRequests.has(id)?{activityCheckpointRequested:true}:{},actors,...data.session?.stopReason==='consecutive-treatment-failures'?{treatmentFailures:failureSummary({...data,actors})}:{}}}
  async function snapshot(id){const data=await ledger.snapshot(id),actors=data.session?await capabilities.snapshot(data.session.actorUUIDs):[];return describeSnapshot(data,actors,id)}
- async function pause(id,reason,scope,explicit=false){
+ async function pause(id,reason,scope,explicit=false,expectedStatus){
   check();if(!explicit)await owned(id,scope);
   if(!explicit)currentScope(id,scope);else invalidate(id,reason);
   if(explicit)clock.stop?.(reason,{sessionId:id});const options=explicit?{}:{...scopeOptions(scope),expectedStatus:'running'};
-  const result=await ledger.updateSession(id,{status:'paused',stopReason:reason},options);
+  const result=await ledger.updateSession(id,{status:'paused',stopReason:reason},{...options,...expectedStatus===undefined?{}:{expectedStatus}});
   if(!explicit)clock.stop?.(reason,{sessionId:id,...scopeOptions(scope)});
   if(!explicit){currentScope(id,scope);await owned(id,scope,{running:false})}
   const data=await ledger.snapshot(id);check();if(!explicit)currentScope(id,scope);
@@ -94,6 +94,18 @@ export function createCoordinator({ledger,capabilities,providers,clock,policy,is
   if(!explicit&&leases.get(id)===scope)invalidate(id,reason);onChange(id);return result;
  }
  const stop=(id,reason='user-stopped')=>pause(id,reason,undefined,true);
+ async function stopActive(id,reason){
+  check();if(activeStops.has(id))return activeStops.get(id);
+  const pending=(async()=>{
+   const session=await ledger.getSession(id);check();
+   if(!['running','recording'].includes(session?.status))return session;
+   // Ambient events must not overwrite a completed session or an earlier pause reason.
+   try{return await pause(id,reason,undefined,true,session.status)}
+   catch(error){if(error.message==='session-state-conflict')return ledger.getSession(id);throw error}
+  })();
+  activeStops.set(id,pending);
+  try{return await pending}finally{if(activeStops.get(id)===pending)activeStops.delete(id)}
+ }
  async function failureAdmission(session,proposal,scope){
   if(session.recoveryGoals?.failureStop.enabled!==true||!proposal.patientUUIDs?.length||!['treat-wounds','focus-healing'].includes(proposal.providerId)&&!(proposal.providerId==='refocus'&&proposal.options?.threePecks))return;
   const data=await ledger.snapshot(session.id);await owned(session.id,scope);
@@ -321,5 +333,5 @@ export function createCoordinator({ledger,capabilities,providers,clock,policy,is
  }
  async function takeover(id){check();invalidate(id,'explicit-driver-takeover');clock.stop?.('explicit-driver-takeover',{sessionId:id});const session=await ledger.takeoverSession(id);onChange(id);return session}
  const executionScope=id=>leases.has(id)?{leaseNonce:leases.get(id).leaseNonce}:undefined;
- return {start,step,stop,resume,recover,restore,reconcile,review,addActivity,snapshot,describeSnapshot,takeover,executionScope,openManualCheckpoint,closeManualCheckpoint,reserveManualSource,manualCheckpointOptions,openActivityCheckpoint,closeActivityCheckpoint,invalidate:reason=>{for(const id of new Set([...leases.keys(),...checkpointRequests.keys()]))invalidate(id,reason)}};
+ return {start,step,stop,stopActive,resume,recover,restore,reconcile,review,addActivity,snapshot,describeSnapshot,takeover,executionScope,openManualCheckpoint,closeManualCheckpoint,reserveManualSource,manualCheckpointOptions,openActivityCheckpoint,closeActivityCheckpoint,invalidate:reason=>{for(const id of new Set([...leases.keys(),...checkpointRequests.keys()]))invalidate(id,reason)}};
 }
