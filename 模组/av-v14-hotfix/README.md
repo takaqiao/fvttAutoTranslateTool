@@ -131,7 +131,7 @@ Sundry 与共享回合/奴仆清理使用已验证的原生 Hooks 记录适配�
 
 备份旧目录后，将本目录安装到 `Data/modules/av-v14-hotfix`，在需要的世界启用并完整刷新客户端。退役的 `scripts/patches/patreon.mjs`、`wayfinder-fog.mjs`、`wayfinder-fog-texture.mjs`、`grid.mjs`、`bbmm-locks.mjs` 应从部署目录移除。回退可恢复原目录，或关闭本模组后刷新。
 
-安装清单使用 [av-v14-hotfix-v0.6.24 的 module.json](https://github.com/takaqiao/fvttAutoTranslateTool/releases/download/av-v14-hotfix-v0.6.24/module.json)，下载为同一标签的 `av-v14-hotfix-0.6.24.zip`。本仓库包含多个模组，不能用全仓库 `releases/latest/download` 作为此模组的清单。
+安装清单使用 [av-v14-hotfix-v0.6.25 的 module.json](https://github.com/takaqiao/fvttAutoTranslateTool/releases/download/av-v14-hotfix-v0.6.25/module.json)，下载为同一标签的 `av-v14-hotfix-0.6.25.zip`。本仓库包含多个模组，不能用全仓库 `releases/latest/download` 作为此模组的清单。
 
 运行 `node --test tests/*.test.mjs` 验证隔离回归。原生函数及源码哈希记录在 `tests/fixtures`；音频、设置操作符等测试需本地 Foundry 安装，可用 `FVTT_NATIVE_APP` 指定 `resources/app`。具体运行命令、数量、跳过项和部署哈希以本次修复回执为准。
 
