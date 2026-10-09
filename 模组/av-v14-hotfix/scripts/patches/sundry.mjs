@@ -37,7 +37,6 @@ export function installSundryPatch({g = globalThis, report} = {}) {
   const module = g.game?.modules?.get('sundry');
   if (!module?.active) return finish({status: 'skipped', reason: 'module-inactive'});
   if (!['1.10.2', '1.10.3', '1.11.0'].includes(module.version)) return finish({status: 'skipped', reason: 'version-mismatch'});
-  if ((g.game.release?.generation??Number.parseInt(g.game.version,10)) !== 14) return finish({status: 'skipped', reason: 'core-version-mismatch'});
   const Hooks = g.Hooks;
   if (!Hooks || typeof g.game?.settings?.get !== 'function') return finish({status: 'skipped', reason: 'hook-api-unavailable'});
   const prior = installations.get(Hooks);

@@ -126,10 +126,9 @@ test('restore prevents pending local attachment and repeat installs stay idempot
   const next=await install(e);assert.notEqual(next,result);next.restore();
 });
 
-test('core source, DOM overrides and version mismatches skip without attachment or hooks',async()=>{
-  for(const kind of ['version','source','native','changed-source','changed-native']) {
+test('core source and DOM overrides skip without attachment or hooks',async()=>{
+  for(const kind of ['source','native','changed-source','changed-native']) {
     const e=timestampEnvironment(),{message,element}=e.stamp();e.runtime.document.append(message);
-    if(kind==='version')e.runtime.game.version='15.0';
     if(kind==='source')e.runtime.foundry.applications.api.ApplicationV2.prototype._doEvent=function(){};
     if(kind==='native')Object.defineProperty(e.Node.prototype,'textContent',{get(){return '';},set(){},configurable:true});
     const options={runtime:e.runtime};
@@ -197,4 +196,10 @@ test('native-looking comments in ordinary functions never satisfy DOM native gua
     const result=await installTimestampPatch({runtime:e.runtime});assert.equal(result.status,'unsupported-runtime',kind);
     assert.equal(Object.hasOwn(element,'textContent'),false,kind);assert.equal(hookRecords(e).length,0,kind);
   }
+});
+
+test('matching timestamp contracts avoid redundant writes on later core generations',async()=>{
+ const e=timestampEnvironment(),{message,element}=e.stamp();e.runtime.game.version='15.1';e.runtime.document.append(message);
+ const result=await install(e);element.textContent='1 min ago';assert.equal(element.writes,0);
+ element.textContent='2 min ago';assert.equal(element.writes,1);result.restore();
 });

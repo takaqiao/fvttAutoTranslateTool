@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {attachLegacySchemas} from './legacy-schema-harness.mjs';
 import {readFileSync} from 'node:fs';
 import {registerLegacyCompat} from '../scripts/compat/legacy.mjs';
 
@@ -28,6 +29,7 @@ function setup({overrideBatch = false, failure} = {}) {
     }
   });
   const g = {ChatMessage: Message, CONFIG: {ChatMessage: {documentClass: MessageImpl}}};
+  attachLegacySchemas(g);
   const originalCreate = Message.create;
   const registrations = [];
   registerLegacyCompat({g, registerWrapper(target, callback) {

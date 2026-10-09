@@ -13,7 +13,7 @@ import {installTurnLifecyclePatch} from './scripts/patches/turn-lifecycle.mjs';
 import {installDsnChatRecovery} from './scripts/patches/dsn-chat.mjs';
 
 const ID='av-v14-hotfix';
-const state={version:'0.6.24',patches:{patreon:{status:'retired',detail:'Upstream 3.2.29 includes the relationship refresh guards.'},wayfinderFog:{status:'retired',detail:'Wayfinder 14.1.1 replaced the old fog implementation; the 14.0.1 adapter is retired.'},grid:{status:'retired',detail:'Use Grid 2.3.1 distance and undrawn-token aura handling.'},bbmmLocks:{status:'retired',detail:'Use BBMM 1.4.11 submenu hard locks and notifications.'}}};
+const state={version:'0.6.25',patches:{patreon:{status:'retired',detail:'Upstream 3.2.29 includes the relationship refresh guards.'},wayfinderFog:{status:'retired',detail:'Wayfinder 14.1.1 replaced the old fog implementation; the 14.0.1 adapter is retired.'},grid:{status:'retired',detail:'Use Grid 2.3.1 distance and undrawn-token aura handling.'},bbmmLocks:{status:'retired',detail:'Use BBMM 1.4.11 submenu hard locks and notifications.'}}};
 let babele;
 const report=(feature,status,detail)=>{
   if(typeof feature==='object'){const {restore,...data}=feature;state.patches[feature.feature]=data;return;}
@@ -32,7 +32,6 @@ Hooks.once('init',()=>{
 });
 
 Hooks.once('setup',async()=>{
-  if((game.release?.generation??Number.parseInt(game.version,10))!==14){report('runtime','unsupported-core',game.version);return;}
   // Install the quality bridge before upstream ready synchronization.
   void run('dsnQualityLocks',()=>installDsnQualityLocks({moduleId:ID,report}));
   // Register synchronously in setup so the first chat history render is covered.
@@ -44,7 +43,6 @@ Hooks.once('setup',async()=>{
 });
 
 Hooks.once('ready',()=>queueMicrotask(async()=>{
-  if((game.release?.generation??Number.parseInt(game.version,10))!==14)return;
   report('runtime','initializing');
   await run('itemNames',async()=>{
     const system=game.system,version=system.version;
@@ -52,7 +50,7 @@ Hooks.once('ready',()=>queueMicrotask(async()=>{
     const target=game.pf2e?.system,original=target?.generateItemName;
     if(typeof original!=='function')return report('itemNames','unsupported-runtime');
     if(!Object.values(ITEM_NAME_HASHES).includes(await hash(Function.prototype.toString.call(original))))return report('itemNames','unsupported-source');
-    if((game.release?.generation??Number.parseInt(game.version,10))!==14||game.system!==system||system.id!=='pf2e'||system.version!==version||game.pf2e.system!==target||target.generateItemName!==original)return report('itemNames','source-changed-during-validation');
+    if(game.system!==system||system.id!=='pf2e'||system.version!==version||game.pf2e.system!==target||target.generateItemName!==original)return report('itemNames','source-changed-during-validation');
     target.generateItemName=createItemNameFastPath(original,globalThis);
     report('itemNames','installed');
   });

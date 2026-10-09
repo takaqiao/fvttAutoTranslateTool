@@ -342,14 +342,13 @@ test('restore keeps original slot and descriptors and does not overwrite subsequ
   assert.deepEqual(Object.getOwnPropertyDescriptor(g.Hooks,'off'),nativeOff);
 });
 
-test('unwritable or accessor callback fields, nonnative events and unsupported core skip without mutation',async()=>{
-  for(const kind of ['frozen','accessor','events','core','off']) {
+test('unwritable or accessor callback fields and nonnative events skip without mutation',async()=>{
+  for(const kind of ['frozen','accessor','events','off']) {
     const {g}=await environment(),entry=g.Hooks.events.refreshToken[0],original=entry.fn;
     const highlightEntry=g.Hooks.events.highlightObjects[0],highlight=highlightEntry.fn;
     if(kind==='frozen')Object.freeze(entry);
     if(kind==='accessor')Object.defineProperty(entry,'fn',{get:()=>original,configurable:true});
     if(kind==='events'){const events=g.Hooks.events;Object.defineProperty(g.Hooks,'events',{get:()=>({...events,refreshToken:[entry]}),configurable:true});}
-    if(kind==='core')g.game.version='15.0';
     if(kind==='off')Object.defineProperty(g.Hooks,'off',{writable:false});
     assert.equal(installSundryPatch({g}).status,'skipped',kind);
     assert.equal(entry.fn,original);assert.equal(highlightEntry.fn,highlight);
@@ -395,4 +394,10 @@ test('restoring leaves a subsequent Hooks.off wrapper in place and its native re
   installed.restore();assert.equal(g.Hooks.off,later);
   g.Hooks.off('refreshToken',original);
   assert.equal(calls,1);assert.equal(g.Hooks.events.refreshToken.length,0);
+});
+
+test('matching Sundry and Hooks contracts skip repeated icon reads on later core generations',async()=>{
+ const {g}=await environment();g.game.version='15.1';const item=fixture();
+ assert.equal(installSundryPatch({g}).status,'installed');g.Hooks.callAll('refreshToken',item.token);
+ assert.equal(item.reads(),0);assert.equal(item.view().background,false);
 });

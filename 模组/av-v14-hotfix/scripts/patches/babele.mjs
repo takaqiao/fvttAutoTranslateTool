@@ -127,7 +127,6 @@ export function registerBabeleIndex({moduleId = 'av-v14-hotfix', g = globalThis,
     if (!g.game?.babele?.__ondemandPatch) return ['waiting', 'Babele on-demand facade has not initialized.'];
     if (capture.g !== g || !capture.valid) return ['unsupported', 'No verified pre-libWrapper native indexDocument capture.'];
     if (capture.unknown) return ['unsupported', capture.unknown];
-    if (g.game.release?.generation !== 14) return ['unsupported', 'Only Foundry generation 14 is supported.'];
     // 3.2.1 ships byte-identical babele.js and babele-ondemand-patch.js to the
     // audited 3.1.2 release. Keep an exact allowlist; future releases still fall back.
     for (const [id, versions] of [[TARGET, ['3.1.2', '3.2.1']], ['babele', ['2.9.1']], ['lib-wrapper', ['1.13.5.1']]]) {

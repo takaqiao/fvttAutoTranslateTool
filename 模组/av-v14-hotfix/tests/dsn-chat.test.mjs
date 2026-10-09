@@ -46,8 +46,8 @@ test('successful ordered throws retain native metadata and reveal exactly once',
  assert.equal(f.events.filter(e=>e[0]==='diceSoNiceRollComplete').length,1);
 });
 
-test('supported DsN and Foundry patch labels use function contracts and preserve render return',async()=>{
- const f=setup();f.g.game.version='14.369';f.g.game.modules.get('dice-so-nice').version='6.5.0';
+test('supported DsN and later Foundry labels use function contracts and preserve render return',async()=>{
+ const f=setup();f.g.game.version='15.1';f.g.game.release.generation=15;f.g.game.modules.get('dice-so-nice').version='6.5.0';
  const result=installDsnChatRecovery({g:f.g});assert.equal(result.status,'installed');
  assert.equal(f.pipeline.renderRolls(f.message,rolls()),undefined);await settle();
  assert.equal(f.message._dice3dPendingRenders,0);assert.equal(f.errors.length,0);

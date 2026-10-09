@@ -1,10 +1,14 @@
-# FVTT v14 Local Hotfix 0.6.24
+# FVTT v14 Local Hotfix 0.6.25
 
-当前源码及隔离回归基线为 Foundry **14.368**、PF2e **8.6.0**、Dice So Nice **6.4.3**、BBMM **1.4.11**、Grid **2.3.1**、Summons Assistant **2.20.2**。本模组保留 Foundry 14 与各项实际 API、函数源码契约；PF2e 适配不再因系统版本号跳过。每项可在世界设置中关闭，刷新后生效。契约不匹配或检测到冲突时跳过，对应状态见：
+当前源码及隔离回归基线为 Foundry **14.368**、PF2e **8.6.0**、Dice So Nice **6.4.3**、BBMM **1.4.11**、Grid **2.3.1**、Summons Assistant **2.20.2**。清单保留最低核心版本 14.367 和已验证标签 14.368，移除核心最高版本限制。运行时不再按 Foundry 核心代数或精确版本号跳过，按各项实际 schema、API、函数源码及对象契约决定是否安装；PF2e 适配也不再因系统版本号跳过。每项可在世界设置中关闭，刷新后生效。契约不匹配或检测到冲突时跳过，对应状态见：
 
 ```js
 game.modules.get('av-v14-hotfix').api.status()
 ```
+
+## 0.6.25 的 Foundry 核心版本兼容
+
+移除清单的核心最高版本及运行时的核心代数、精确版本白名单。各补丁继续核对实际 schema、API、函数源码、回调与对象身份；未知契约仍会跳过。回合生命周期继续使用当前运行时文档类和原生消费者接口。第三方版本条件、权限与设置开关保持。
 
 ## 0.6.24 的 PF2e 8.6.0 适配
 
@@ -95,7 +99,7 @@ Wayfinder 新版没有等价采纳旧补丁的所有延迟刷新策略，不能�
 
 | 项目 | 当前范围 |
 | --- | --- |
-| 旧导入器兼容 | 旧 ChatMessage type → style；旧 Scene 图片字段 → levels；现代字段优先。 |
+| 旧导入器兼容 | 核验 ChatMessage 的 type/style 字段、Scene/Level 目标字段类型、嵌入关系及公开创建/更新 API 后，旧 type → style、旧 Scene 图片字段 → levels；现代字段优先。契约不符或运行中更换目标类时原样透传。 |
 | 冒险包设置 | 仅 sf2e-murder-in-metal-city 13.2.0 的设置注册兼容；Season of Ghosts 已使用上游。 |
 | PF2e 物品名称 | 检查 PF2e 身份，逐函数验证已核验的 8.5.0/8.5.1/8.6.0 源码；对无需自动改名的原生分支提前返回。 |
 | 聊天时间戳 | 复用窄式时长格式化器，跳过同文 DOM 写入；保留实际时间变化。 |
@@ -109,19 +113,19 @@ Sundry 与共享回合/奴仆清理使用已验证的原生 Hooks 记录适配�
 
 ## 版本守卫审计
 
-| 路径 | 0.6.24 的守卫与理由 |
+| 路径 | 当前守卫与理由 |
 | --- | --- |
-| 包入口及核心补修 | 保留 Foundry generation 14；聊天、时间戳、时长、音频及 Hooks 另有实际 API/源码保护。精确核心标签只用作来源记录。 |
-| DsN 聊天/模型/队列 | 解除精确 6.4.1 / 14.368；保留 DsN 6、Foundry 14、逐函数及回调哈希、实例/原型所有权、具体 ready Promise 与批次所有权。队列、回调和完整 DiceBox 按旧版或 6.4.3 来源组合核验，实际 ticker 消费方法另行检查；PersistentDice 窄包装按函数源码组合及进行中引用核验。普通批次捕获实际 worker.exec 引用；已装桥的原生恢复引用另核验 worker prototype RPC 源码。完整 bundle 哈希仅用于 fixture 来源。 |
+| 包入口及核心补修 | 解除 Foundry 核心代数与精确版本门槛；聊天、时间戳、时长、音频及 Hooks 保留实际 API/源码保护。旧导入器按 ChatMessage/Scene/Level schema、API 与目标类身份检查，schema 不符不转换输入。核心标签只用作来源和已验证基线记录。 |
+| DsN 聊天/模型/队列 | 解除精确 6.4.1 / 14.368；保留 DsN 6、逐函数及回调哈希、实例/原型所有权、具体 ready Promise 与批次所有权。队列、回调和完整 DiceBox 按旧版或 6.4.3 来源组合核验，实际 ticker 消费方法另行检查；PersistentDice 窄包装按函数源码组合及进行中引用核验。普通批次捕获实际 worker.exec 引用；已装桥的原生恢复引用另核验 worker prototype RPC 源码。完整 bundle 哈希仅用于 fixture 来源。 |
 | DsN 画质 | 解除精确 DsN/BBMM 小版本；保留 DiceConfig 每个消费函数及 factory 哈希。上下文接受已核验的 6.4.1 和 6.4.2 函数，注册表和规则不符合时跳过。 |
-| BBMM reader | BBMM 1、Foundry 14；world Boolean/Object 注册定义、client/user 目标、namespace/key/value/soft 结构。只读取规则，不恢复旧通用设置监听器。 |
+| BBMM reader | BBMM 1；world Boolean/Object 注册定义、client/user 目标、namespace/key/value/soft 结构。只读取规则，不恢复旧通用设置监听器。 |
 | Grid / BBMM 旧修补 | 已删除运行时守卫和实现，使用当前上游；历史数据保留。 |
 | PF2e 名称 | 解除 PF2e 版本标签；保留 PF2e 身份与完整目标函数哈希，异步核验期间 system/target/function/version 必须保持同一所有者。 |
 | Sundry | 解除 PF2e 版本标签，检查 PF2e 身份与原生 Sprite 的可写 boolean `visible` 契约。保留 Sundry 1.10.2/1.10.3/1.11.0：已核验的 Hooks 回调引用未暴露的效果选择闭包，回调源码不能独自证明其语义。 |
-| 回合生命周期 | 解除核心 14.368、PF2e 版本与 Summons 2.19.0 标签；保留 Foundry 14、PF2e 身份、Summons 2、原生 Hooks 源码及严格 Document 关系。Reaction 1.4.3、Sustain 1.1.0 的私有 helper 语义未独立暴露，精确标签保留。 |
+| 回合生命周期 | 解除核心 14.368、PF2e 版本与 Summons 2.19.0 标签；保留 PF2e 身份、Summons 2、原生 Hooks 源码及严格 Document 关系。Reaction 1.4.3、Sustain 1.1.0 的私有 helper 语义未独立暴露，精确标签保留。 |
 | Babele 索引 | 保留汉化 3.1.2/3.2.1、Babele 2.9.1、libWrapper 1.13.5.1。已有 helper/native 签名、注册顺序、优先级及 facade 检查不能独自证明未暴露的按需协议和 libWrapper 内部优先级快照语义。 |
 | 旧冒险导入器 | 保留 sf2e-murder-in-metal-city 13.2.0；该设置 shim 没有足以替代标签的上游函数契约。 |
-| Tokenizer | 解除 PF2e 8.5.1 标签；保留 Foundry 14、PF2e 身份与 libWrapper API，新增已核验 8.5.1/8.6.0 完整 `renderHTML` 源码保护。 |
+| Tokenizer | 解除 PF2e 8.5.1 标签；保留 PF2e 身份与 libWrapper API，新增已核验 8.5.1/8.6.0 完整 `renderHTML` 源码保护。 |
 
 ## 安装、验证与回退
 

@@ -36,15 +36,15 @@ for(const [name,change]of [
  ['disabled Workbench',f=>f.game.modules.get('xdy-pf2e-workbench').active=false],
  ['unknown Workbench version',f=>f.game.modules.get('xdy-pf2e-workbench').version='7.7.6'],
  ['another system',f=>f.game.system.id='other'],
- ['unsupported core generation',f=>f.game.version='15.1'],
  ['unknown Toolbelt version',f=>f.game.modules.get('pf2e-toolbelt').version='3.57.0'],
  ['public macro UUID',f=>f.macro.uuid=SOURCE.replace('-internal','')],
  ['wrong document',f=>f.macro.documentName='Item'],
  ['unknown complete command hash',()=>{}],
 ])test(`rejects ${name} without payment or roll`,async()=>{const f=fixture('unreviewed command');change(f);await assert.rejects(load(f),error=>error.code?.startsWith('force-barrage-'));assert.equal(f.calls.some(c=>c[0]==='pay'||c[0]==='construct'),false)});
-test('an audited macro still runs on the next V14 build',nativeOptions,async()=>{
- const f=fixture();f.game.version='14.369';f.game.release={generation:14};const adapter=await load(f);await adapter.run(f.input);
+for(const version of ['14.369','15.1','25.999'])test(`an audited macro keeps payment and targets on core ${version}`,nativeOptions,async()=>{
+ const f=fixture();f.game.version=version;f.game.release={generation:Number(version.split('.')[0])};const adapter=await load(f);await adapter.run(f.input);
  assert.equal(f.calls.filter(c=>c[0]==='pay').length,1);assert.equal(publications(f).length,2);
+ f.game.modules.get('xdy-pf2e-workbench').active=false;await assert.rejects(adapter.run(f.input));assert.equal(f.calls.filter(c=>c[0]==='pay').length,1);
 });
 test('audited command bytes and nine counts remain those of the original count statement',nativeOptions,async()=>{
  assert.equal(createHash('sha256').update(command).digest('hex'),HASH);

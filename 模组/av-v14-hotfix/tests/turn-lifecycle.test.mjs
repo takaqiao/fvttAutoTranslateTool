@@ -23,6 +23,7 @@ function environment({useChat=true, autoExpire=true, coreVersion='14.368', syste
     reactionOptions:{allReactionEffect:false},
     A:()=>[], N:async (...args)=>prompts.push(args), h:item=>item.uuid, u:()=>0, ja:async()=>prompts.push(['round-one']),
     fromUuid:async()=>({toObject:()=>({type:'effect',system:{badge:{value:0}}})})};
+  g.foundry.applications={handlebars:{renderTemplate:g.renderTemplate}};
   class Scene {constructor(){this.id='scene';this.tokens=new Map();}}
   class TokenDocument {
     constructor(actor,scene,id='token') {Object.assign(this,{actor,parent:scene,id,name:'Thrall token',actorLink:false});scene.tokens.set(id,this);}
@@ -210,7 +211,7 @@ test('null-token reminder errors are propagated unchanged instead of hiding fail
   for(const operation of ['template','create']){
     const f=environment(),doc=f.actor(),error=new Error(operation+' failed');
     doc.items.push({id:'sustain',type:'effect',name:'Sustaining: Spell'});f.apply();
-    if(operation==='template')f.g.renderTemplate=async()=>{throw error;};
+    if(operation==='template')f.g.foundry.applications.handlebars.renderTemplate=async()=>{throw error;};
     else f.g.ChatMessage.create=async()=>{throw error;};
     await assert.rejects(()=>f.callback('sustain')(f.combatant({id:null,token:false,actor:doc})),value=>value===error);
   }
@@ -223,16 +224,16 @@ test('objects that only resemble a temporary Combatant retain the original callb
   await assert.rejects(()=>f.callback('sustain')(foreign),/null.*actor/);
 });
 
-test('unknown core versions and other systems leave every native callback untouched',()=>{
-  for(const args of [{coreVersion:'15.1'},{systemId:'sf2e'}]){
+test('other systems leave every native callback untouched',()=>{
+  for(const args of [{systemId:'sf2e'}]){
     const f=environment(args),result=f.apply();assert.equal(result.status,'skipped');
     for(const part of ['reaction','sustain','summons'])assert.equal(f.callback(part),f.original[part]);
   }
 });
 
-test('audited callbacks retain their protections across PF2e version labels',async()=>{
+test('audited callbacks retain their protections across core and PF2e version labels',async()=>{
  for(const systemVersion of ['8.5.2','8.6.0','9.0.0']){
- const f=environment({coreVersion:'14.369',systemVersion}),result=f.apply();
+ const f=environment({coreVersion:'15.1',systemVersion}),result=f.apply();
  assert.equal(result.parts.summons.status,'installed');assert.equal(result.parts.sustain.status,'installed');
  assert.equal(result.parts.reaction.status,'installed');
  const world=f.thrall({world:true});assert.equal(await f.callback('summons')(world.effect,world.info),undefined);
@@ -270,4 +271,23 @@ test('diagnostics distinguish absent expiry hook, preserve native records and su
   Hooks.off('pf2e.startTurn',f.original.reaction);assert.equal(list.length,1);
   result.restore();result.restore();assert.equal(list.length,1);assert.equal(list[0].fn,f.original.sustain);assert.equal(Hooks.off,off);
   assert.equal(Hooks.events.deleteItem[0].fn,f.original.summons);
+});
+
+test('null-token reminders use the namespaced template API without a global alias',async()=>{
+  const f=environment({coreVersion:'14.369'}),doc=f.actor();
+  delete f.g.renderTemplate;
+  doc.items.push({id:'sustain',type:'effect',name:'Sustaining: Spell'});
+  assert.equal(f.apply().parts.sustain.status,'installed');
+  await f.callback('sustain')(f.combatant({id:null,token:false,actor:doc}),f.encounter,'player');
+  assert.equal(f.messages.length,1);assert.equal(f.messages[0].content,'actor:sustain');
+  assert.equal(f.renders[0].path,'modules/pf2e-sustain-reminder/templates/sustain-reminder.hbs');
+});
+
+test('a global template alias cannot enable sustain when the namespaced API is unavailable',()=>{
+  const f=environment();delete f.g.foundry.applications.handlebars.renderTemplate;
+  const result=f.apply();
+  assert.equal(result.parts.sustain.status,'skipped');
+  assert.equal(result.parts.sustain.reason,'document-api-unavailable');
+  assert.equal(f.callback('sustain'),f.original.sustain);
+  assert.equal(result.parts.reaction.status,'installed');assert.equal(result.parts.summons.status,'installed');
 });

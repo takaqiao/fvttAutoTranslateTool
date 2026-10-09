@@ -98,8 +98,8 @@ test('unknown callback semantics fall through instead of skipping any new behavi
   const f=fixture(['a','b'],{callbackMutation:s=>s.replace('li.remove();','li.remove(); this.extra=(this.extra??0)+1;')});
   await Promise.all(['a','b'].map(id=>f.chat.deleteMessage(id)));finishAll(f);await sleep(15);assert.equal(f.chat.extra,2);assert.equal(f.counts.layouts,2);
 });
-test('other Foundry versions use only native behavior',async()=>{
-  const f=fixture(['a','b'],{version:'15.0'});await Promise.all(['a','b'].map(id=>f.chat.deleteMessage(id)));finishAll(f);await sleep(15);assert.equal(f.counts.layouts,2);
+test('matching native completion still coalesces on later Foundry versions',async()=>{
+  const f=fixture(['a','b'],{version:'15.0'});await Promise.all(['a','b'].map(id=>f.chat.deleteMessage(id)));finishAll(f);await sleep(15);assert.equal(f.counts.layouts,1);assert.equal(f.nodes.size,0);
 });
 test('closed popout and detached nodes complete without refitting a closed application',async()=>{
   const f=fixture(['a','b'],{popout:true});await Promise.all(['a','b'].map(id=>f.chat.deleteMessage(id)));f.chat.rendered=false;f.nodes.clear();finishAll(f);await sleep(15);

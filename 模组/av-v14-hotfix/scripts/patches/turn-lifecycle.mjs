@@ -33,7 +33,7 @@ async function remindActor(g, actor, userId) {
   if (!effects || effects.length === 0) return;
   if (g.game.settings.get('pf2e-sustain-reminder', 'useChat')) {
     const owners = Object.keys(actor.ownership).filter(key => actor.ownership[key] == g.CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER);
-    const content = await g.renderTemplate('modules/pf2e-sustain-reminder/templates/sustain-reminder.hbs', {actor, effects});
+    const content = await g.foundry.applications.handlebars.renderTemplate('modules/pf2e-sustain-reminder/templates/sustain-reminder.hbs', {actor, effects});
     await g.ChatMessage.create({content,
       speaker:g.ChatMessage.getSpeaker({token:null, actor, user:g.game.users.get(userId)}),
       whisper:owners, flags:{'pf2e-sustain-reminder':true}});
@@ -71,7 +71,6 @@ export function installTurnLifecyclePatch({g = globalThis, report} = {}) {
   const finish = result => {report?.({feature:'turn-lifecycle', ...result}); return result;};
   const skipAll = reason => finish({status:'skipped', reason,
     parts:Object.fromEntries(Object.keys(CONSUMERS).map(key => [key, skipped(reason)]))});
-  if ((g.game?.release?.generation??Number.parseInt(g.game?.version,10)) !== 14) return skipAll('core-version-mismatch');
   if (g.game.system?.id !== 'pf2e') return skipAll('unsupported-system');
   const Hooks = g.Hooks;
   if (!Hooks) return skipAll('hook-api-unavailable');
@@ -83,7 +82,7 @@ export function installTurnLifecyclePatch({g = globalThis, report} = {}) {
   const available = {
     reaction:typeof Combatant === 'function',
     sustain:typeof Combatant === 'function' && typeof Actor === 'function'
-      && typeof g.renderTemplate === 'function' && typeof g.ChatMessage?.getSpeaker === 'function'
+      && typeof g.foundry?.applications?.handlebars?.renderTemplate === 'function' && typeof g.ChatMessage?.getSpeaker === 'function'
       && typeof g.ChatMessage?.create === 'function' && typeof g.game.settings?.get === 'function',
     summons:[Actor, Item, TokenDocument, Scene].every(type => typeof type === 'function')
   };

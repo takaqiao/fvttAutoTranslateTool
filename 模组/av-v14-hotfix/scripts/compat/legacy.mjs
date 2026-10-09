@@ -155,24 +155,78 @@ function wrapperTargets(base, implementation, basePath, implementationPath, meth
   return targets;
 }
 
-/** Call during setup, after system classes exist. The caller owns version gating and libWrapper registration. */
+function matchesFields(schema, expected, fields) {
+  if (typeof fields?.SchemaField !== 'function' || !(schema instanceof fields.SchemaField)) return false;
+  return Object.entries(expected).every(([key, type]) => {
+    const field = schema.fields[key];
+    return typeof type === 'string'
+      ? typeof fields[type] === 'function' && field?.constructor === fields[type]
+      : matchesFields(field, type, fields);
+  });
+}
+
+const CHAT_FIELDS = {type: 'DocumentTypeField', style: 'NumberField'};
+const SCENE_FIELDS = {initialLevel: 'DocumentIdField', shiftX: 'NumberField', shiftY: 'NumberField',
+  levels: 'EmbeddedCollectionField', fog: {}};
+const LEVEL_FIELDS = {
+  _id: 'DocumentIdField', name: 'StringField',
+  background: {src: 'FilePathField', tint: 'ColorField', color: 'ColorField', alphaThreshold: 'AlphaField'},
+  foreground: {src: 'FilePathField'}, fog: {src: 'FilePathField'}, elevation: {top: 'NumberField'},
+  textures: {anchorX: 'NumberField', anchorY: 'NumberField', fit: 'StringField',
+    scaleX: 'NumberField', scaleY: 'NumberField', rotation: 'AngleField'}
+};
+
+function legacyContract(g, name) {
+  const base = g[name], implementation = g.CONFIG?.[name]?.documentClass;
+  const fields = g.foundry?.data?.fields, level = g.CONFIG?.Level?.documentClass;
+  const classes = [base, implementation];
+  return receiver => {
+    try {
+      if (g[name] !== base || g.CONFIG?.[name]?.documentClass !== implementation
+        || g.foundry?.data?.fields !== fields) return false;
+      if (receiver !== undefined && !classes.includes(typeof receiver === 'function' ? receiver : receiver?.constructor)) return false;
+      if (!classes.every(cls => typeof cls === 'function' && cls.documentName === name
+        && typeof cls.create === 'function' && typeof cls.createDocuments === 'function')) return false;
+      if (name === 'ChatMessage') return classes.every(cls => matchesFields(cls.schema, CHAT_FIELDS, fields));
+      if (g.CONFIG?.Level?.documentClass !== level || level?.documentName !== 'Level'
+        || !matchesFields(level.schema, LEVEL_FIELDS, fields)) return false;
+      return classes.every(cls => {
+        if (typeof cls.prototype.update !== 'function' || cls.metadata?.embedded?.Level !== 'levels'
+          || cls.metadata.defaultLevelId !== 'defaultLevel0000' || !matchesFields(cls.schema, SCENE_FIELDS, fields)) return false;
+        const schema = cls.schema.fields;
+        return schema.levels.model === level && !LEGACY_ROOT_FIELDS.some(key => own(schema, key))
+          && !own(schema.fog.fields, 'overlay');
+      });
+    } catch {
+      // A schema getter that cannot resolve in this runtime is not a migration target.
+      return false;
+    }
+  };
+}
+
+/** Call during setup, after system classes and their document schemas exist. */
 export function registerLegacyCompat({moduleId = 'av-v14-hotfix', g = globalThis, registerWrapper, report} = {}) {
   if (typeof registerWrapper !== 'function') throw new TypeError('registerLegacyCompat requires registerWrapper');
   const wrappers = [];
   const adventureSettings = [];
   const plans = [];
+  const chatContract = legacyContract(g, 'ChatMessage'), sceneContract = legacyContract(g, 'Scene');
+  const chatSupported = chatContract(), sceneSupported = sceneContract();
   // Native Document.create delegates to implementation.createDocuments before validation.
   // Keep the single-create receiver untouched for consumers such as CotCT's Harrow display.
-  for (const target of wrapperTargets(g.ChatMessage, g.CONFIG?.ChatMessage?.documentClass,
-    'ChatMessage', 'CONFIG.ChatMessage.documentClass', 'createDocuments')) plans.push([target, migrateLegacyChatData]);
-  for (const method of ['create', 'createDocuments']) {
-    for (const target of wrapperTargets(g.Scene, g.CONFIG?.Scene?.documentClass,
-      'Scene', 'CONFIG.Scene.documentClass', method)) plans.push([target, migrateLegacySceneCreateData]);
+  if (chatSupported) for (const target of wrapperTargets(g.ChatMessage, g.CONFIG.ChatMessage.documentClass,
+    'ChatMessage', 'CONFIG.ChatMessage.documentClass', 'createDocuments')) plans.push([target, migrateLegacyChatData, chatContract]);
+  if (sceneSupported) {
+    for (const method of ['create', 'createDocuments']) {
+      for (const target of wrapperTargets(g.Scene, g.CONFIG.Scene.documentClass,
+        'Scene', 'CONFIG.Scene.documentClass', method)) plans.push([target, migrateLegacySceneCreateData, sceneContract]);
+    }
+    for (const target of wrapperTargets(g.Scene, g.CONFIG.Scene.documentClass,
+      'Scene', 'CONFIG.Scene.documentClass', 'update', true)) plans.push([target, null, sceneContract]);
   }
-  for (const target of wrapperTargets(g.Scene, g.CONFIG?.Scene?.documentClass,
-    'Scene', 'CONFIG.Scene.documentClass', 'update', true)) plans.push([target, null]);
-  for (const [target, migrate] of plans) {
+  for (const [target, migrate, supported] of plans) {
     registerWrapper(target, function(wrapped, data, ...args) {
+      if (!supported(this)) return wrapped.call(this, data, ...args);
       const next = migrate ? migrate(data) : migrateLegacySceneUpdateData(this, data);
       return wrapped.call(this, next, ...args);
     }, 'WRAPPER');
@@ -190,7 +244,8 @@ export function registerLegacyCompat({moduleId = 'av-v14-hotfix', g = globalThis
       adventureSettings.push(`${namespace}.autoOpenAdventures`);
     }
   }
-  const result = {wrappers, adventureSettings};
-  report?.({moduleId, feature: 'legacy-compat', status: 'installed', ...result});
+  const result = {wrappers, adventureSettings, chatStatus: chatSupported ? 'installed' : 'unsupported-schema',
+    sceneStatus: sceneSupported ? 'installed' : 'unsupported-schema'};
+  report?.({moduleId, feature: 'legacy-compat', status: wrappers.length || adventureSettings.length ? 'installed' : 'unsupported-schema', ...result});
   return result;
 }

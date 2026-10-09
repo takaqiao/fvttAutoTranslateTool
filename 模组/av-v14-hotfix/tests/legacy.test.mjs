@@ -1,5 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {attachLegacySchemas} from './legacy-schema-harness.mjs';
 import {
   migrateLegacyChatData,
   migrateLegacySceneCreateData,
@@ -138,6 +139,7 @@ function environment(version = '13.2.0', active = true) {
       settings: {settings: values, register(namespace, key, config) {registrations.push({namespace, key, config}); values.set(`${namespace}.${key}`, config);}}
     }
   };
+  attachLegacySchemas(g);
   return {g, registrations};
 }
 
@@ -148,7 +150,7 @@ test('installed wrappers migrate at the public API boundary and preserve receive
     assert.equal(kind, 'WRAPPER'); wrappers.set(target, fn);
   }});
   assert.deepEqual([...wrappers.keys()].sort(), ['ChatMessage.createDocuments', 'Scene.create', 'Scene.createDocuments', 'Scene.prototype.update'].sort());
-  const receiver = {firstLevel: scene.firstLevel};
+  const receiver = Object.assign(new g.Scene(), {firstLevel: scene.firstLevel});
   const operation = Object.freeze({render: false});
   const answer = Promise.resolve('created');
   let seen;
@@ -182,4 +184,72 @@ test('only the active audited importer version receives missing adventure settin
     assert.equal(g.game.settings.settings.get('present.autoOpenAdventures'), before);
     if (expected) assert.deepEqual(registrations[0], {namespace: 'missing', key: 'autoOpenAdventures', config: {scope: 'world', config: false, type: Boolean, default: false}});
   }
+});
+
+for(const kind of ['missing','type','style','api'])test(`incompatible chat ${kind} leaves numeric data untouched`,()=>{
+  const {g}=environment(),wrappers=new Map(),input={type:2,content:'old'};
+  if(kind==='missing')delete g.ChatMessage.schema;
+  if(kind==='type')g.ChatMessage.schema.fields.type=new g.foundry.data.fields.NumberField();
+  if(kind==='style')g.ChatMessage.schema.fields.style=new g.foundry.data.fields.StringField();
+  if(kind==='api')g.CONFIG.ChatMessage.documentClass.createDocuments=undefined;
+  registerLegacyCompat({g,registerWrapper:(target,fn)=>wrappers.set(target,fn)});
+  const wrapper=wrappers.get('ChatMessage.createDocuments');
+  const output=wrapper?wrapper.call(g.ChatMessage,value=>value,input):input;
+  assert.equal(output,input);assert.equal(output.type,2);
+  assert.equal([...wrappers.keys()].some(key=>key.includes('ChatMessage')),false);
+  assert.ok(wrappers.has('Scene.create'));
+});
+
+for(const kind of ['missing','levels','level-model','level-field','root-field','fog-overlay','api'])test(`incompatible scene ${kind} preserves legacy image data`,()=>{
+  const {g}=environment(),wrappers=new Map(),input={img:'map.webp',background:{src:'background.webp'}};
+  const fields=g.foundry.data.fields;
+  if(kind==='missing')delete g.Scene.schema;
+  if(kind==='levels')g.Scene.schema.fields.levels=new fields.ArrayField(new fields.StringField());
+  if(kind==='level-model')g.CONFIG.Level.documentClass=class UnknownLevel {};
+  if(kind==='level-field')g.CONFIG.Level.documentClass.schema.fields.background.fields.src=new fields.NumberField();
+  if(kind==='root-field')g.Scene.schema.fields.background=new fields.SchemaField({src:new fields.FilePathField({categories:['TEXTURE']})});
+  if(kind==='fog-overlay')g.Scene.schema.fields.fog.fields.overlay=new fields.FilePathField({categories:['TEXTURE']});
+  if(kind==='api')g.CONFIG.Scene.documentClass.prototype.update=undefined;
+  registerLegacyCompat({g,registerWrapper:(target,fn)=>wrappers.set(target,fn)});
+  const wrapper=wrappers.get('Scene.create');
+  const output=wrapper?wrapper.call(g.Scene,value=>value,input):input;
+  assert.equal(output,input);assert.equal(output.img,'map.webp');
+  assert.equal([...wrappers.keys()].some(key=>key.startsWith('Scene.')||key.startsWith('CONFIG.Scene.')),false);
+  assert.ok(wrappers.has('ChatMessage.createDocuments'));
+});
+
+test('legacy wrappers recheck the live schema and document owner before transforming input',()=>{
+  for(const kind of ['chat-schema','scene-schema','scene-owner','level-owner','foreign-receiver']){
+    const {g}=environment(),wrappers=new Map();
+    registerLegacyCompat({g,registerWrapper:(target,fn)=>wrappers.set(target,fn)});
+    const input={img:'map.webp'},message={type:2};
+    if(kind==='chat-schema')g.ChatMessage.schema.fields.style=new g.foundry.data.fields.StringField();
+    if(kind==='scene-schema')g.CONFIG.Level.documentClass.schema.fields.fog.fields.src=new g.foundry.data.fields.NumberField();
+    if(kind==='scene-owner')g.CONFIG.Scene.documentClass=class OtherScene {};
+    if(kind==='level-owner')g.CONFIG.Level.documentClass=class OtherLevel {};
+    const target=kind==='chat-schema'?'ChatMessage.createDocuments':'Scene.create';
+    const receiver=kind==='foreign-receiver'?class OtherScene {}:kind==='chat-schema'?g.ChatMessage:g.Scene;
+    const data=kind==='chat-schema'?message:input;
+    assert.equal(wrappers.get(target).call(receiver,value=>value,data),data,kind);
+  }
+});
+
+test('matching native schemas migrate public chat and scene calls on later core generations',()=>{
+  const {g}=environment(),wrappers=new Map();g.game.release={generation:15};g.game.version='15.1';
+  registerLegacyCompat({g,registerWrapper:(target,fn)=>wrappers.set(target,fn)});
+  assert.deepEqual(wrappers.get('ChatMessage.createDocuments').call(g.ChatMessage,value=>value,{type:2}),{style:2});
+  assert.deepEqual(wrappers.get('Scene.create').call(g.Scene,value=>value,{img:'map.webp'}),
+    {initialLevel:'defaultLevel0000',levels:[{_id:'defaultLevel0000',name:'Default',background:{src:'map.webp'}}]});
+});
+
+test('the native configured document classes satisfy the migration contract',t=>{
+  const {BaseChatMessage,BaseScene,BaseLevel}=globalThis.foundry.documents;
+  const previous=globalThis.CONFIG;
+  const CONFIG={ChatMessage:{documentClass:BaseChatMessage},Scene:{documentClass:BaseScene},Level:{documentClass:BaseLevel}};
+  globalThis.CONFIG=CONFIG;t.after(()=>{globalThis.CONFIG=previous;});
+  const g={foundry:globalThis.foundry,CONFIG,ChatMessage:BaseChatMessage,Scene:BaseScene},wrappers=new Map();
+  registerLegacyCompat({g,registerWrapper:(target,fn)=>wrappers.set(target,fn)});
+  assert.deepEqual(wrappers.get('ChatMessage.createDocuments').call(BaseChatMessage,value=>value,{type:2}),{style:2});
+  assert.deepEqual(wrappers.get('Scene.create').call(BaseScene,value=>value,{img:'map.webp'}),
+    {initialLevel:'defaultLevel0000',levels:[{_id:'defaultLevel0000',name:'Default',background:{src:'map.webp'}}]});
 });

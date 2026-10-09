@@ -80,8 +80,8 @@ test('streamed media keeps native pause and unload and never receives buffer sto
 test('unknown source fingerprints decline installation',async t=>{
   const f=await fixture(t,{patched:false});f.Sound.prototype.stop=async function changedStop(){};const result=await f.install();assert.equal(result?.status,'unsupported-source');assert.equal(f.wrapper,undefined);
 });
-test('non-v14 core declines installation',async t=>{
-  const f=await fixture(t,{patched:false});f.game.release.generation=15;const result=await f.install();assert.equal(result?.status,'unsupported-core');assert.equal(f.wrapper,undefined);
+test('matching native Sound still stops buffer sources on later core generations',async t=>{
+  const f=await fixture(t,{patched:false});f.game.release.generation=15;const result=await f.install();assert.equal(result?.status,'installed');const s=f.make();await s.play({loop:true});await s.stop();assert.equal(f.count('stop'),1);
 });
 test('a later instance override follows the original path',async t=>{
   const f=await fixture(t),s=f.make();await s.play({loop:true});s.stop=f.Sound.prototype.stop.bind(s);await s.stop();assert.equal(f.count('stop'),0);

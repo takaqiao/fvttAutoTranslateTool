@@ -49,7 +49,6 @@ function nativeDOM(runtime){
  */
 export async function installTimestampPatch({runtime=globalThis,hash=hashSource,report=()=>{}}={}){
   const finish=(status,extra={})=>{const result={feature:'timestamps',status,...extra};report(result);return result;};
-  if((runtime.game?.release?.generation??Number.parseInt(runtime.game?.version,10))!==14)return finish('unsupported-core');
   const document=runtime.document,Hooks=runtime.Hooks,dom=nativeDOM(runtime);
   if(!dom||!document||typeof Hooks?.on!=='function'||typeof Hooks?.off!=='function'||
     typeof runtime.WeakRef!=='function'||typeof runtime.FinalizationRegistry!=='function'||typeof runtime.queueMicrotask!=='function')return finish('unsupported-runtime');
@@ -62,7 +61,7 @@ export async function installTimestampPatch({runtime=globalThis,hash=hashSource,
   const hashes=await Promise.all(sources.map(s=>hash(Reflect.apply(functionSource,s.descriptor.value,[]))));
   if(hashes.some((value,i)=>value!==sources[i].sha))return finish('unsupported-source');
   const currentSources=coreSources(runtime);
-  if((runtime.game?.release?.generation??Number.parseInt(runtime.game?.version,10))!==14||runtime.document!==document||runtime.Hooks!==Hooks||!dom.unchanged()||
+  if(runtime.document!==document||runtime.Hooks!==Hooks||!dom.unchanged()||
     sources.some((s,i)=>s.target!==currentSources[i].target||!sameDescriptor(s.descriptor,currentSources[i].descriptor)))return finish('source-changed-during-validation');
   const concurrent=installations.get(document);if(concurrent)return concurrent;
 

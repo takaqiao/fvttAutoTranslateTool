@@ -112,9 +112,9 @@ test('replacement failure requests the existing full rebuild and later batches s
   h.retitle('a','晨光 长剑');h.update(h.docs.a);await h.flush();
   assert.equal(h.counts.full,1);assert.deepEqual(h.search('晨光'),[h.docs.a.uuid]);
 });
-test('unsupported generation retains the original full rebuild',async()=>{
+test('matching index contracts keep incremental search on later core generations',async()=>{
   const h=await harness();h.game.release.generation=15;h.update(h.docs.a);await h.flush();
-  assert.equal(h.counts.full,1);assert.deepEqual(h.search('烈焰'),[h.docs.a.uuid]);
+  assert.equal(h.counts.full,0);assert.equal(h.counts.replace,1);assert.deepEqual(h.search('烈焰'),[h.docs.a.uuid]);
 });
 test('missing replacement API falls back without losing translated search',async()=>{
   const h=await harness();h.index.replaceDocument=undefined;h.update(h.docs.a);await h.flush();

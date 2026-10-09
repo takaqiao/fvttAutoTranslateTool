@@ -87,8 +87,8 @@ test('registers once for audited render methods regardless of the PF2e version l
  }
 });
 
-test('unsupported core, other systems and unknown render methods remain untouched',()=>{
-  for(const options of [{generation:13},{systemId:'sf2e'},{unknown:true}]){
+test('other systems and unknown render methods remain untouched',()=>{
+  for(const options of [{systemId:'sf2e'},{unknown:true}]){
     const {runtime,calls}=environment(options);
     if(options.unknown)runtime.CONFIG.ChatMessage.documentClass.prototype.renderHTML=async function(){return 'foreign';};
     assert.match(installTokenizerChatPortraitPatch({runtime}).status,/^unsupported-/);
@@ -179,4 +179,10 @@ test('a later render wrapper keeps the installed correction and repeated install
  assert.equal(installTokenizerChatPortraitPatch({runtime:f.runtime}).status,'already-installed');
  assert.equal(f.calls.length,2);
  await f.message.renderHTML();assert.equal(calls,1);assert.equal(f.image().style.transform,'none');assert.equal(f.image().src,'avatar.webp');
+});
+
+test('matching native portrait renderer is corrected on later core generations',async()=>{
+ const f=environment({generation:15});assert.equal(installTokenizerChatPortraitPatch({runtime:f.runtime}).status,'installed');
+ await f.calls[0][2].call(f.message,f.message.renderHTML.bind(f.message));
+ assert.equal(f.image().style.transform,'none');assert.equal(f.image().style.maskImage,'none');
 });

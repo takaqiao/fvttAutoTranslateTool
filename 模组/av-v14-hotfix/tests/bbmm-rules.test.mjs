@@ -39,9 +39,14 @@ test('only available client/user hard rules with matching identifiers and a valu
 });
 
 test('current account, GM exemption, disabled sync and malformed stores preserve saved data',()=>{
- for(const options of [{gm:true},{sync:false},{bbmmActive:false},{generation:15}]){
+ for(const options of [{gm:true},{sync:false},{bbmmActive:false}]){
   const e=harness(options),before=structuredClone(e.rules);assert.deepEqual(readBbmmHardRules(e.runtime),{});assert.deepEqual(e.rules,before);
  }
  const e=harness();assert.deepEqual(readBbmmHardRules(e.runtime,new e.User('other',false)),{});
  for(const value of [null,[],false,'rules']){e.values.set('bbmm.userSettingSync',value);assert.deepEqual(readBbmmHardRules(e.runtime),{});}
+});
+
+test('matching BBMM rules remain readable on later core generations',()=>{
+ const e=harness({generation:15});
+ assert.equal(readBbmmHardRules(e.runtime)['example.selected']?.value,false);
 });

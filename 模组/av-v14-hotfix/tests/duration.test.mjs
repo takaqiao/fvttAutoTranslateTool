@@ -89,8 +89,14 @@ test('installer verifies source, retains descriptors, and restores only its own 
  const again=await installDurationPatch({runtime});const later=()=> 'other';target.formatDuration=later;again.restore();assert.equal(target.formatDuration,later);
  assert.equal((await installDurationPatch({runtime})).status,'unsupported-source');
 });
-test('installer refuses unsupported core, runtime and changes during asynchronous verification',async()=>{
+test('installer refuses changes during asynchronous verification',async()=>{
  const s=setup(),target={formatDuration:s.original};const runtime={game:{...s.game,version:'14.368'},Intl,foundry:{data:{CalendarData:target}}};
- runtime.game.version='15.0';assert.equal((await installDurationPatch({runtime})).status,'unsupported-core');runtime.game.version='14.368';
  const other=()=>{};assert.equal((await installDurationPatch({runtime,hash:async()=>{target.formatDuration=other;return fixture.sha256;}})).status,'source-changed-during-validation');assert.equal(target.formatDuration,other);
+});
+
+test('matching duration source still formats through the fast path on later core generations',async()=>{
+ const s=setup(),target={formatDuration:s.original},runtime={game:{...s.game,version:'15.1'},Intl,foundry:{data:{CalendarData:target}}};
+ const patch=await installDurationPatch({runtime});assert.equal(patch.status,'installed');
+ assert.notEqual(target.formatDuration,s.original);
+ assert.equal(s.call(target.formatDuration),'5m 3s');patch.restore();
 });
