@@ -1,5 +1,6 @@
 import {test} from 'node:test';import assert from 'node:assert/strict';import {formatSessionResult,escapeHTML,recoveryDefaults,sessionTimeSummary,recoveryBudgetPolicy} from '../../scripts/exploration/panel.mjs';
 import * as panelUI from '../../scripts/exploration/panel.mjs';
+import {readFileSync} from 'node:fs';
 test('earliest under assumptions is distinct from elapsed; deficit is shown',()=>{const text=formatSessionResult({durationSeconds:1800,certainty:'earliest-under-assumptions',remainingHP:12,status:'stopped'});assert.match(text,/最早|假设/);assert.match(text,/30/);assert.match(text,/12/)});
 test('defaults are max HP and no finite resources; actor names escape HTML',()=>{const d=recoveryDefaults([{actorUUID:'A',hp:{value:3,max:42},pool:{poolUUID:'A'}}]);assert.equal(d.goalsByPool[0].targetHP,42);assert.equal(d.allowFiniteResources,false);assert.equal(d.riskySurgery,false);assert.equal(escapeHTML('<b>"A" & B</b>'),'&lt;b&gt;&quot;A&quot; &amp; B&lt;/b&gt;')});
 test('stopped manual sessions remain reconstructed rather than claiming observed zero time',()=>{const s=sessionTimeSummary({session:{manual:true,status:'paused',startedAt:0,cursorAt:0,assumptions:['different-actors-may-overlap']},activities:[{id:'A',actorUUID:'H',durationSeconds:600,order:0}]});assert.equal(s.certainty,'earliest-under-assumptions');assert.equal(s.durationSeconds,600)});
@@ -66,9 +67,11 @@ function mainActions(html){const main=html.match(/<div class="recovery-actions r
 test('idle recovery exposes one start action while keeping its saved controls in closed advanced options',async t=>{
  const f=checkpointPanelFixture(t,{status:'complete'}),html=await f.app._renderHTML(await f.app._prepareContext());
  assert.deepEqual(mainActions(html),['start']);assert.match(html,/data-recovery="start">掷骰恢复并推进时间/);
- const advanced=html.match(/<details class="recovery-advanced"><summary>[^<]+<\/summary>([\s\S]*?)<\/details>/);assert.ok(advanced,'advanced options must start collapsed');
+ const advanced=html.match(/<details class="recovery-advanced"><summary>[^<]+<\/summary>([\s\S]*?)<\/details>\s*<details class="recovery-more">/);assert.ok(advanced,'advanced options must start collapsed, including their nested disclosures');
  for(const name of ['wounded','failureStop','failureLimit','activityFirstRound','manualFirstRound','risky','focus','extension','assurance','rank','budget','activityBudget'])assert.match(advanced[1],new RegExp(`name="${name}"`));
  assert.match(advanced[1],/data-target-mode/);assert.match(advanced[1],/data-target-value/);
+ assert.match(html,/<ul class="recovery-member-summary">[\s\S]*?<\/ul>[\s\S]*?<details class="recovery-advanced">/);
+ assert.match(advanced[1],/<table class="recovery-members">/);assert.match(advanced[1],/class="recovery-policy-grid"/);assert.match(advanced[1],/<details class="recovery-target-preview">/);assert.match(advanced[1],/<details class="recovery-initial-actions"[^>]*>/);
  const more=html.match(/<details class="recovery-more"><summary>更多操作<\/summary>([\s\S]*?)<\/details>/);assert.ok(more);assert.deepEqual(actions(more[1]),['record','refresh']);
 });
 test('unprepared storage shows preparation instead of disabled recovery actions',async t=>{
@@ -98,12 +101,21 @@ test('history and time conflict diagnostics stay readable inside closed full rec
  assert.match(html,/^<details class="recovery-history-details"><summary>完整记录/);assert.match(html,/世界时间已被其他操作改变/);assert.doesNotMatch(html,/external-world-time-change/);
  assert.match(formatSessionResult({durationSeconds:600,certainty:'observed',status:'external-rest-time-authority'}),/世界时间由外部休息操作管理/);
 });
-test('background refresh updates an open panel but cannot reopen it after close',async t=>{
- const previous=globalThis.foundry;t.after(()=>globalThis.foundry=previous);let renders=0;
- globalThis.foundry={applications:{api:{ApplicationV2:class{render(){renders++;this.rendered=true;return this}async close(){this.rendered=false;return this}}}}};
+test('panel sizing applies to content controls without resizing native window buttons',()=>{
+ const css=readFileSync(new URL('../../styles/exploration.css',import.meta.url),'utf8');
+ assert.doesNotMatch(css,/\.exploration-recovery\s+(?:button|label|input)\s*\{/);
+ assert.match(css,/\.recovery-content \.recovery-actions>button\{[^}]*min-width:0[^}]*height:auto[^}]*white-space:normal/);
+ assert.match(css,/\.recovery-content \.recovery-option input\[type="checkbox"\]\{[^}]*width:16px;[^}]*height:16px/);
+ assert.match(css,/@container recovery \(max-width:520px\)\{[^}]*grid-template-columns:minmax\(0,1fr\)/);
+});
+test('background refresh updates an open panel without expanding it or reopening it after close',async t=>{
+ const previous=globalThis.foundry;t.after(()=>globalThis.foundry=previous);let renders=0;const optionsSeen=[];
+ globalThis.foundry={applications:{api:{ApplicationV2:class{render(options){renders++;optionsSeen.push(options);if(options===true||options?.force){this.rendered=true;this.minimized=false}return this}async close(){this.rendered=false;return this}}}}};
  const api=panelUI.createRecoveryPanel({game:{user:{isGM:true}}});assert.equal(api.refresh(),undefined);
- const app=api.open([]);assert.equal(renders,1);api.refresh();assert.equal(renders,2);await app.close();api.refresh();assert.equal(renders,2);assert.equal(app.rendered,false);
- assert.equal(api.open([]),app);assert.equal(renders,3);assert.equal(app.rendered,true);
+ const app=api.open([]);assert.equal(renders,1);api.refresh();assert.equal(renders,2);assert.deepEqual(optionsSeen.at(-1),{force:false});
+ app.minimized=true;api.refresh();assert.equal(renders,3);assert.deepEqual(optionsSeen.at(-1),{force:false});assert.equal(app.minimized,true);
+ await app.close();api.refresh();assert.equal(renders,3);assert.equal(app.rendered,false);
+ assert.equal(api.open([]),app);assert.equal(renders,4);assert.equal(app.rendered,true);assert.equal(app.minimized,false);
 });
 test('a qualified paused session exposes the current-state recovery exit without resuming old attempts',async t=>{
  const f=checkpointPanelFixture(t,{status:'paused'});f.data.canAcceptCurrentTime=true;f.data.worldTime=660;f.data.clocks=[{id:'T',state:'uncertain',from:0,to:600,reason:'time-effects-unconfirmed'}];

@@ -99,3 +99,10 @@ test('audited Reaction callback no longer throws for fortress empty candidates b
 });
 
 test('PF2e 8.6 keeps the empty Shield Wall protection scoped to exact native candidates',async()=>{const f=compatibilityFixture();f.game.system.version='8.6.0';const r=await f.install();assert.equal(r.status,'installed');assert.equal(await f.entry.fn(f.item,{},'gm'),undefined);f.ally.itemTypes.feat.push({slug:'shield-wall'});assert.equal(await f.entry.fn(f.item,{},'gm'),'shield-wall');r.dispose()});
+
+for(const version of ['14.369','15.1','25.999'])test(`core ${version} keeps Shield Wall protection limited to native empty candidates`,async()=>{
+ const f=compatibilityFixture();f.game.version=version;f.game.release.generation=Number(version.split('.')[0]);const r=await f.install();assert.equal(r.status,'installed');
+ assert.equal(await f.entry.fn(f.item,{},'gm'),undefined);assert.equal(f.calls.length,0);
+ f.ally.itemTypes.feat.push({slug:'shield-wall'});assert.equal(await f.entry.fn(f.item,{},'gm'),'shield-wall');
+ f.ally.itemTypes.feat=[];f.game.world={...f.game.world};assert.equal(await f.entry.fn(f.item,{},'gm'),'shield-wall');r.dispose();assert.equal(f.entry.fn,f.original);
+});

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 import {setup as nativeSetup, settle, observe} from './dsn-queue-harness.mjs';
-for(const name of ['dsn-queue-native.json','dsn-queue-6.4.3-native.json'])describe(name,()=>{
+for(const name of ['dsn-queue-native.json','dsn-queue-6.4.3-native.json','dsn-queue-6.4.4-native.json'])describe(name,()=>{
 const fixture=JSON.parse(fs.readFileSync(new URL('./fixtures/'+name,import.meta.url)));
 const setup=()=>nativeSetup(fixture);
 for (const stage of ['collisions', 'positions', 'effects'])

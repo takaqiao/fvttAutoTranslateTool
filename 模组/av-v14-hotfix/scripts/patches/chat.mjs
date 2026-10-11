@@ -29,7 +29,6 @@ function restoreProperty(object, key, replacement, descriptor) {
 }
 
 export function createChatDeleteWrapper({
-  getVersion = () => globalThis.game?.version,
   schedule = (callback, delay) => setTimeout(callback, delay)
 } = {}) {
   const nodeAdapters = new WeakMap();
@@ -145,7 +144,7 @@ export function createChatDeleteWrapper({
 
   return function deleteMessage(wrapped, messageId, ...args) {
     // A card rendered only later by the native queue deliberately falls back.
-    if (Number.parseInt(getVersion(),10) !== 14 || !this.rendered || !/^[A-Za-z0-9_-]+$/.test(messageId)) {
+    if (!this.rendered || !/^[A-Za-z0-9_-]+$/.test(messageId)) {
       return wrapped(messageId, ...args);
     }
     const node = this.element?.querySelector(`.message[data-message-id="${messageId}"]`);
@@ -166,7 +165,6 @@ export function createChatDeleteWrapper({
 
 export function installChatDeleteCoalescing({moduleId, libWrapper = globalThis.libWrapper, ...options} = {}) {
   if (!moduleId || typeof libWrapper?.register !== "function") return false;
-  if (Number.parseInt(options.getVersion?.() ?? globalThis.game?.version,10) !== 14) return false;
   if (typeof globalThis.foundry?.applications?.sidebar?.tabs?.ChatLog?.prototype?.deleteMessage !== 'function') return false;
   libWrapper.register(moduleId, "foundry.applications.sidebar.tabs.ChatLog.prototype.deleteMessage",
     createChatDeleteWrapper(options), "WRAPPER");

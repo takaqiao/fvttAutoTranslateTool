@@ -15,6 +15,7 @@ export function serializeReward(uuid, operation) {
  return next.finally(()=>{if(pending.get(uuid)===next)pending.delete(uuid);});
 }
 export function rewardKey(item) {
+ if(!item)return null;
  const native=item?.flags?.world?.sogWontonNativeAutomation?.key;
  const source=item?.flags?.world?.sogB2Ch2Resources;
  return Object.entries(REWARDS).find(([,r])=>item.type===r.type && native===r.key && source?.originalSlug===r.key && typeof source.fileSha256==='string' && source.fileSha256.length===64)?.[0] ?? null;

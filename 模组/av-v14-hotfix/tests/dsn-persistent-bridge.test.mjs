@@ -12,7 +12,7 @@ test('bridge fixture is the independently captured 0.5.4 adapter',()=>{
   assert.equal(createHash('sha256').update(bridgeFixture.source).digest('hex'),bridgeFixture.provenance.sha256);
   assert.equal(bridgeFixture.provenance.sha256,'82f6035a87e0f4269732a798ed88cb622ba8f036b3d40283bcfc041f9de9f0d8');
 });
-for(const name of ['dsn-queue-native.json','dsn-queue-6.4.3-native.json'])describe(name,()=>{
+for(const name of ['dsn-queue-native.json','dsn-queue-6.4.3-native.json','dsn-queue-6.4.4-native.json'])describe(name,()=>{
   const fixture=JSON.parse(fs.readFileSync(new URL('./fixtures/'+name,import.meta.url)));
   test('a batch-local worker rejection injection restores startup state with the installed bridge',async()=>{
     const f=setup(fixture),pd=prepareBridge(f);f.install();await pd.ready();

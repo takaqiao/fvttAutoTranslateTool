@@ -50,7 +50,6 @@ export function createDurationFastPath(original,runtime=globalThis){
 
 export async function installDurationPatch({runtime=globalThis,hash=hashSource,report=()=>{}}={}){
   const finish=(status,extra={})=>{const result={feature:'duration',status,...extra};report(result);return result;};
-  if((runtime.game?.release?.generation??Number.parseInt(runtime.game?.version,10))!==14)return finish('unsupported-core');
   const target=runtime.foundry?.data?.CalendarData,descriptor=target&&Object.getOwnPropertyDescriptor(target,'formatDuration');
   const original=descriptor?.value,Constructor=runtime.Intl?.DurationFormat;
   const format=typeof Constructor==='function'&&formatMethod(Constructor);

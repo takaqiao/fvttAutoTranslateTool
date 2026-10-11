@@ -34,7 +34,6 @@ export function createTokenizerChatPortraitWrapper(){
 const installed=new WeakSet();
 export function installTokenizerChatPortraitPatch({moduleId='av-v14-hotfix',runtime=globalThis,report=()=>{}}={}){
   const finish=status=>{const result={feature:'tokenizerChat',status};report(result);return result;};
-  if((runtime.game?.release?.generation??Number.parseInt(runtime.game?.version,10))!==14)return finish('unsupported-core');
   if(runtime.game?.system?.id!=='pf2e')return finish('unsupported-system');
   const prototype=runtime.CONFIG?.ChatMessage?.documentClass?.prototype;
   if(typeof prototype?.renderHTML!=='function'||typeof runtime.libWrapper?.register!=='function')return finish('unsupported-runtime');

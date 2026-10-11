@@ -22,8 +22,8 @@ for(const version of ['8.5.1','8.6.0','9.0.0'])test(`world repair and native Ref
  assert.equal((await loadSalubriousWorkbench({game})).ready,false);
 });
 
-test('Refocus still requires the installed callable interface and supported core',async()=>{
- for(const change of [game=>delete game.PF2eWorkbench.refocus,game=>game.release.generation=15,game=>game.modules.get('xdy-pf2e-workbench').active=false]){
+test('Refocus still requires the installed callable interface and active dependency',async()=>{
+ for(const change of [game=>delete game.PF2eWorkbench.refocus,game=>game.modules.get('xdy-pf2e-workbench').active=false]){
   const game=gameFor('8.6.0');change(game);assert.equal((await loadSalubriousWorkbench({game})).ready,false);
  }
 });

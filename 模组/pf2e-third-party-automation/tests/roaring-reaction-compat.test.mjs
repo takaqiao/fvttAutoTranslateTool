@@ -57,3 +57,9 @@ test('actual audited Ma/R/Na/q and delegated click preserve costs or stop before
 });
 
 test('new PF2e versions retain the native reaction entry contract',async()=>{const f=fixture();f.game.system.version='8.6.0';const r=await f.install();assert.equal(r.status,'installed');f.setStatus('restricted');assert.equal(f.get(),false);r.dispose()});
+
+for(const version of ['14.369','15.1','25.999'])test(`core ${version} retains reaction restrictions and runtime identity checks`,async()=>{
+ const f=fixture();f.game.version=version;f.game.release.generation=Number(version.split('.')[0]);const r=await f.install();assert.equal(r.status,'installed');
+ f.setStatus('restricted');assert.equal(f.get(),false);assert.equal((await f.click()).stopped,true);
+ f.game.modules.set(MOD,{...f.module});assert.equal(r.ready(),false);assert.equal(f.get(),true);r.dispose();
+});

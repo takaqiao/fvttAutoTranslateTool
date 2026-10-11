@@ -12,7 +12,7 @@ for(const phase of ['fetch','body'])test(`Workbench initialization never waits o
 });
 test('Workbench readiness uses installed interfaces and accepts arbitrary module versions',async()=>{
  const g=game();g.modules.get('xdy-pf2e-workbench').version='99';assert.equal((await privacy.loadSalubriousWorkbench({game:g,fetch:async()=>{throw Error('unnecessary download')}})).ready,true);
- for(const alter of [x=>x.PF2eWorkbench.refocus=null,x=>x.system.id='other',x=>x.release.generation=13]){const invalid=game();alter(invalid);assert.equal((await privacy.loadSalubriousWorkbench({game:invalid})).ready,false)}
+ for(const alter of [x=>x.PF2eWorkbench.refocus=null,x=>x.system.id='other']){const invalid=game();alter(invalid);assert.equal((await privacy.loadSalubriousWorkbench({game:invalid})).ready,false)}
 });
 test('provider selection short circuits after the first matching action and preserves receiver',()=>{
  const item={},calls=[],first={resolveAction(x){assert.equal(this,first);assert.equal(x,item);calls.push('first')}},second={resolveAction(){calls.push('second');return 'party:guardian'}},third={resolveAction(){throw Error('unrelated provider evaluated')}};

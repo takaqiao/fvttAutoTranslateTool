@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import fs from 'node:fs';
-const source=fs.readFileSync(new URL('../av-v14-hotfix.mjs',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,'');
+const source=fs.readFileSync(new URL('../av-v14-hotfix.mjs',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,'').replaceAll('import.meta.url',JSON.stringify(new URL('../av-v14-hotfix.mjs',import.meta.url).href));
 async function boot(enabled){
   const hooks={},tasks=[],settings=new Map(),self={},calls=[];let phase='load';
   const runtime={console:{info(){},error(){}},structuredClone,queueMicrotask:fn=>tasks.push(fn),Hooks:{once:(name,fn)=>hooks[name]=fn},hashSource:async()=>'',

@@ -11,12 +11,12 @@ export function currentToolbelt(input=fs.readFileSync(process.env.TOOLBELT_MANUA
  }
  return Buffer.from(text);
 }
-export function currentPair(){
+export function currentPair(toolbelt=currentToolbelt()){
  const pf2e=buildNativeBridge({source:fs.readFileSync(process.env.PF2E_NATIVE_BUNDLE),version:'8.5.1'});
- return buildSharedManualPair({pf2eSource:pf2e.buffer,toolbeltSource:currentToolbelt(),pf2eVersion:'8.5.1',toolbeltVersion:'unlisted-label'});
+ return buildSharedManualPair({pf2eSource:pf2e.buffer,toolbeltSource:toolbelt,pf2eVersion:'8.5.1',toolbeltVersion:'unlisted-label'});
 }
-export function socketFixture({remote=true,patched=true}={}){
- const source=(patched?currentPair().toolbelt:currentToolbelt()).toString(),clients=[],writes=[],packets=[];
+export function socketFixture({remote=true,patched=true,socket=currentSocket,toolbeltSource}={}){
+ const toolbelt=toolbeltSource??currentToolbelt(),source=(patched?currentPair(toolbelt).toolbelt:toolbelt).toString(),clients=[],writes=[],packets=[];
  const users=new Map([['G',{id:'G',active:true,isGM:true}],['O',{id:'O',active:true,isGM:false}]]);users.activeGM=users.get('G');
  let finish,reject,alter=packet=>packet;
  const masterPromise=new Promise((resolve,fail)=>{finish=resolve;reject=fail});masterPromise.catch(()=>{});
@@ -31,12 +31,12 @@ export function socketFixture({remote=true,patched=true}={}){
    for(const other of clients)for(const handler of other.handlers)void handler(structuredClone(sent),id);
   }};
   const context=vm.createContext({game,Actor,fromUuid:async uuid=>uuid===master.uuid?master:undefined,Hooks:{once:(_event,fn)=>hooks.push(fn)},
-   a:fn=>fn,M:{id:'pf2e-toolbelt'},Qo(){},Ne:()=>true,qo:()=>false,zx:()=>false,ui:{notifications:{error(){}}},ie:{shared:x=>x},
+   a:fn=>fn,M:{id:'pf2e-toolbelt'},Qo(){},Ne:()=>true,qo:()=>false,zx:()=>false,Wo:()=>false,jx:()=>false,ui:{notifications:{error(){}}},ie:{shared:x=>x},re:{shared:x=>x},
    foundry:{abstract:{Document:Actor},utils:{getProperty:(obj,key)=>obj[key],deleteProperty:(obj,key)=>delete obj[key]}},
    u:{entries:Object.entries,isArray:Array.isArray,mapValues:(obj,fn)=>Object.fromEntries(Object.entries(obj).map(([key,value])=>[key,fn(value,key)])),
     pipe:(value,...fns)=>fns.reduce((v,fn)=>fn(v),value),map:fn=>items=>items.map(fn),filter:fn=>items=>items.filter(fn),isDefined:x=>x!==undefined,fromEntries:Object.fromEntries,isPlainObject:obj=>!!obj&&typeof obj==='object'&&!Array.isArray(obj)}});
   const observer=patched?source.slice(source.indexOf('const __toolbeltManualPool='),source.indexOf('/* end toolbelt manual pool */')):'';
-  vm.runInContext(observer+Object.values(currentSocket.regions).join('\n')+`;globalThis.emitter=_e('direct',(...args)=>globalThis.directCallback(...args));globalThis.Tool=class{#t=_e('master',this.#g.bind(this));constructor(){this.#t.activate()}get key(){return 'shareData'}getMasterInMemory(){return game.actors.get('M')}getMasterId(){return 'M'}isValidMaster(m){return !!m}#v(e,key){return key==='health'}${methods}pre(patient,fields,options={}){return this.#h(patient,async()=>patient,fields,options,game.user.id)}}`,context);
+  vm.runInContext(observer+['socket','transport','conversion'].map(key=>socket.regions[key]).join('\n')+`;globalThis.emitter=_e('direct',(...args)=>globalThis.directCallback(...args));globalThis.Tool=class{#t=_e('master',this.#g.bind(this));constructor(){this.#t.activate()}get key(){return 'shareData'}getMasterInMemory(){return game.actors.get('M')}getMasterId(){return 'M'}isValidMaster(m){return !!m}#v(e,key){return key==='health'}${methods}pre(patient,fields,options={}){return this.#h(patient,async()=>patient,fields,options,game.user.id)}}`,context);
   for(const fn of hooks)fn();const tool=vm.runInContext('new Tool()',context),api=game.modules.get('pf2e-toolbelt').api?.explorationManualPool;
   const row={game,master,patient,handlers,context,tool,api};clients.push(row);return row;
  }

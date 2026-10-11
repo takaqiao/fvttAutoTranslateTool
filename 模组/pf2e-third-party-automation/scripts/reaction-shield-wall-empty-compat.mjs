@@ -21,7 +21,7 @@ export function registerReactionShieldWallEmptyCompatibility({game,Hooks}={}){
  if(!Hooks||!['object','function'].includes(typeof Hooks))return Promise.resolve(unsupported('missing-hooks'));
  const existing=installations.get(Hooks);if(existing)return existing.promise;
  const module=game?.modules?.get(MODULE),world=game?.world,worldId=world?.id;
- const profileCurrent=()=>game?.modules?.get(MODULE)===module&&module?.active===true&&game.release?.generation===14&&game.system?.id==='pf2e'&&game.world===world&&world?.id===worldId&&TARGETS.has(worldId);
+ const profileCurrent=()=>game?.modules?.get(MODULE)===module&&module?.active===true&&game.system?.id==='pf2e'&&game.world===world&&world?.id===worldId&&TARGETS.has(worldId);
  if(!profileCurrent())return Promise.resolve(unsupported('unknown-dependency-or-world-profile'));
  const entries=Hooks.events?.[EVENT];
  if(!Array.isArray(entries))return Promise.resolve(unsupported('missing-create-item-hooks'));

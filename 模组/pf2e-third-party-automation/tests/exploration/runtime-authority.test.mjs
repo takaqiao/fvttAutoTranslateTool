@@ -80,6 +80,53 @@ async function automaticFixture(){
  return {...f,runtime,config:{actorUUIDs:[actor.uuid],budgetSeconds:600,autoRun:false}};
 }
 
+async function waitForSession(runtime,id,status){
+ const deadline=performance.now()+2000;
+ while(performance.now()<deadline){const data=await runtime.api.snapshot(id);if(data.session.status===status)return data;await new Promise(resolve=>setImmediate(resolve))}
+ assert.fail(`runtime session did not become ${status}`);
+}
+
+async function afterRuntimeHooks(runtime,id){
+ await new Promise(resolve=>setImmediate(resolve));
+ for(let i=0;i<4;i++)await runtime.api.snapshot(id);
+ return runtime.api.snapshot(id);
+}
+
+for(const status of ['complete','paused'])test(`ambient encounter and rest hooks preserve a ${status} automatic session`,async()=>{
+ const f=await automaticFixture(),combat={started:false,previous:{round:0},round:0};f.game.combats=[combat];
+ await f.runtime.register({socket:null});
+ const s=await f.runtime.api.start({...f.config,autoRun:status==='complete'});
+ if(status==='paused')await f.runtime.api.stop(s.id);
+ const before=await waitForSession(f.runtime,s.id,status),writes=()=>f.calls.filter(request=>request.action==='create').length,originalWrites=writes();
+ assert.equal(before.session.stopReason,status==='complete'?'goals-met':'user-stopped');assert.equal(f.game.paused,true);
+ const events=[()=>{combat.started=true;combat.round=1;f.emitHook('updateCombat',combat)},()=>{combat.previous.round=1;combat.round=2;f.emitHook('updateCombat',combat)},()=>f.emitHook('pf2e.restForTheNight',f.game.actors.get('H'))];
+ for(const emit of events){
+  emit();const after=await afterRuntimeHooks(f.runtime,s.id);
+  assert.deepEqual(after.session,before.session);assert.deepEqual(after.activities,before.activities);assert.deepEqual(after.clocks,before.clocks);assert.equal(writes(),originalWrites);
+ }
+ assert.equal(f.game.paused,true);assert.equal(f.game.time.worldTime,0);assert.equal(f.pauses.length,1);
+});
+
+test('an automatic recovery stops once when its encounter starts and ignores later combat rounds',async()=>{
+ const f=await automaticFixture(),combat={started:false,previous:{round:0},round:0};f.game.combats=[combat];f.game.combat=combat;
+ let timeAdvances=0,actorWrites=0;f.game.time.advance=async()=>{timeAdvances++};f.game.actors.get('H').update=async()=>{actorWrites++};
+ await f.runtime.register({socket:null});
+ const s=await f.runtime.api.start({...f.config,autoRun:true,waitForActivityFirstRound:true}),binding=await f.runtime.api.openActivityCheckpoint(s.id);
+ assert.equal((await f.runtime.api.snapshot(s.id)).session.status,'running');assert.equal(f.game.paused,true);
+ const writes=()=>f.calls.filter(request=>request.action==='create').length,initialWrites=writes();
+ f.emitHook('updateCombat',combat);assert.equal((await afterRuntimeHooks(f.runtime,s.id)).session.status,'running');assert.equal(writes(),initialWrites);
+ combat.started=true;combat.round=1;f.emitHook('updateCombat',combat);f.emitHook('updateCombat',combat);
+ const stopped=await waitForSession(f.runtime,s.id,'paused');assert.equal(stopped.session.stopReason,'encounter-started');assert.equal(writes(),initialWrites+1);
+ const beforeRounds=f.calls.length;
+ for(const round of [2,3,4]){combat.previous.round=round-1;combat.round=round;f.emitHook('updateCombat',combat)}
+ await new Promise(resolve=>setImmediate(resolve));assert.equal(f.calls.length,beforeRounds);
+ f.emitHook('pf2e.restForTheNight',f.game.actors.get('H'));const after=await afterRuntimeHooks(f.runtime,s.id);
+ assert.deepEqual(after.session,stopped.session);assert.equal(writes(),initialWrites+1);
+ await assert.rejects(f.runtime.api.closeActivityCheckpoint(binding),/session-driver-required|recovery-session-stopped/);
+ await assert.rejects(f.runtime.api.resume(s.id),/encounter-or-system-unavailable/);
+ assert.deepEqual(after.activities,[]);assert.deepEqual(after.clocks,[]);assert.equal(timeAdvances,0);assert.equal(actorWrites,0);assert.equal(f.game.time.worldTime,0);assert.equal(f.game.paused,true);assert.equal(f.pauses.length,1);
+});
+
 test('automatic runtime broadcasts pause once and leaves stop and resume paused',async()=>{
  const f=await automaticFixture(),session=await f.runtime.api.start(f.config);
  assert.equal(f.game.paused,true);assert.deepEqual(f.pauses,[{paused:true,options:{broadcast:true}}]);

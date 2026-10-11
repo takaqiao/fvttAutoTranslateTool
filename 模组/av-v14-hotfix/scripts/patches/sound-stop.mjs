@@ -24,8 +24,6 @@ const ownValue=(object,key)=>Object.getOwnPropertyDescriptor(object,key)?.value;
 
 export async function installSoundStopPatch({moduleId='av-v14-hotfix',runtime=globalThis,report=()=>{}}={}){
   const finish=status=>{const result={feature:'soundStop',status};report(result);return result;};
-  const core14=()=>(runtime.game?.release?.generation??Number.parseInt(runtime.game?.version,10))===14;
-  if(!core14())return finish('unsupported-core');
   const Sound=runtime.foundry?.audio?.Sound,Buffer=runtime.AudioBuffer,Source=runtime.AudioBufferSourceNode;
   const prototype=Sound?.prototype,nodePrototype=Source?.prototype,nodeStop=nodePrototype?.stop;
   if(!prototype||typeof Buffer!=='function'||typeof nodeStop!=='function'||typeof runtime.libWrapper?.register!=='function'
@@ -36,7 +34,7 @@ export async function installSoundStopPatch({moduleId='av-v14-hotfix',runtime=gl
     if(typeof fn!=='function'||await hashSource(Function.prototype.toString.call(fn))!==HASHES[key])return finish('unsupported-source');
   }
   const states=Sound.STATES;
-  const unchanged=(includeStop=true)=>core14()&&runtime.foundry?.audio?.Sound===Sound&&runtime.AudioBuffer===Buffer
+  const unchanged=(includeStop=true)=>runtime.foundry?.audio?.Sound===Sound&&runtime.AudioBuffer===Buffer
     &&runtime.AudioBufferSourceNode===Source&&nodePrototype.stop===nodeStop&&Sound.STATES===states
     &&Object.entries(native).every(([key,fn])=>key==='constructor'||(!includeStop&&key==='_stop')||descriptorFunction(prototype,key)===fn);
   if(!unchanged())return finish('source-changed-during-validation');

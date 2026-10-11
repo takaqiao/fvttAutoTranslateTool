@@ -38,7 +38,6 @@ export async function registerPatreonInitiativeCompatibility({game,Hooks,isProvi
  if(installedByHooks.has(Hooks))return installedByHooks.get(Hooks);
  const unsupported=reason=>({status:'unsupported',reason,dispose(){}});
  if(!game?.modules?.get(PATREON)?.active)return unsupported('Patreon is inactive');
- if(game.release?.generation!==14)return unsupported('Unknown Foundry hook profile');
  const pair=nativePair(Hooks);if(!pair)return unsupported('Unknown or ambiguous Patreon hook signature');
  let active=true;
  const canHandle=(message,actor,gm,token)=>{
@@ -66,8 +65,8 @@ export async function registerPatreonInitiativeCompatibility({game,Hooks,isProvi
   return pair.fn.call(this,messageView,...args);
  };
  const {registrations}=pair;
- // Foundry V14 stores the same HookedFunction in events and its private ID
- // map. Change only that entry's writable callback, preserving IDs and order.
+ // Change only the verified entry's writable callback, preserving IDs and order
+ // for Foundry's event list and private ID map.
  if(registrations.some(({event,entry,index})=>Hooks.events[event]?.[index]!==entry||entry.fn!==pair.fn||Object.getOwnPropertyDescriptor(entry,'fn')?.writable!==true))return unsupported('Patreon hook changed before registration');
  for(const {entry}of registrations)entry.fn=wrapper;
  const result={status:'installed',sourceSHA256:null,version:game.modules.get(PATREON).version,foundryVersion:game.version,hookEntries:registrations.map(({event,entry,index})=>({event,id:entry.id,index})),dispose(){
