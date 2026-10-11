@@ -133,13 +133,15 @@ test('waiting for cooldown also rechecks the saved owner before spending time',a
  assert.equal((await f.c.step('session')).status,'paused');assert.equal(f.calls.clock,0);
 });
 for(const boundary of ['document-resolution','final-owned-read'])test('actual Toolbelt relink during '+boundary+' prevents clock submission',async()=>{
- let f,pools,armed=false;
- const relink=()=>{f.documents.get(P).modules={'pf2e-toolbelt':{shareData:{data:{health:true}}}};f.documents.get(MASTER).testUserPermission=u=>u.isGM;armed=false};
- f=await fixture({poolHook:actor=>pools.discover(actor),snapshotGate:async()=>{if(pools)f.stats[1].pool=pools.discover(f.documents.get(P))},resolveHook:async uuid=>{if(armed&&boundary==='document-resolution'&&uuid===P)relink()},beginHook:async()=>({status:'started'})});
+ let f,pools,armed=false,relinkedAt=null;
+ const relink=at=>{f.documents.get(P).modules={'pf2e-toolbelt':{shareData:{data:{health:true}}}};f.documents.get(MASTER).testUserPermission=u=>u.isGM;relinkedAt=at;armed=false};
+ f=await fixture({poolHook:actor=>pools.discover(actor),snapshotGate:async()=>{if(pools)f.stats[1].pool=pools.discover(f.documents.get(P))},resolveHook:async uuid=>{if(armed&&boundary==='document-resolution'&&uuid===P)relink('document-resolution')},beginHook:async()=>({status:'started'})});
  f.game.modules=new Map([['pf2e-toolbelt',{active:true}]]);f.game.settings={get:()=>true};f.game.toolbelt={api:{shareData:{getMasterInMemory:()=>f.documents.get(MASTER),getSlavesInMemory:()=>[]}}};pools=createHpPools({game:f.game});
  await f.start();await f.c.addActivity('session',proposal);
- let snapshotReads=0;const originalSnapshot=f.ledger.snapshot,originalGet=f.ledger.getSession;
- f.ledger.snapshot=async id=>{const value=await originalSnapshot(id);if(value.activities.some(a=>a.state==='started')&&++snapshotReads===2)armed=true;return value};
- f.ledger.getSession=async id=>{const value=await originalGet(id);if(armed&&boundary==='final-owned-read')relink();return value};
- const result=await f.c.step('session');assert.equal(pools.discover(f.documents.get(P)).poolUUID,MASTER);assert.equal(f.documents.get(MASTER).testUserPermission(f.game.users.get('O')),false);assert.equal(result.status,'paused');assert.equal(f.calls.clock,0);assert.equal(f.calls.complete,0);
+ const originalSnapshot=f.ledger.snapshot,originalGet=f.ledger.getSession;
+ f.ledger.snapshot=async id=>{const value=await originalSnapshot(id);if(relinkedAt===null&&value.activities.some(a=>a.state==='started'))armed=true;return value};
+ f.ledger.getSession=async id=>{const value=await originalGet(id);if(armed&&boundary==='final-owned-read')relink('final-owned-read');return value};
+ assert.equal(pools.discover(f.documents.get(P)).poolUUID,P);assert.equal(f.documents.get(MASTER).testUserPermission(f.game.users.get('O')),true);
+ const result=await f.c.step('session');assert.equal(relinkedAt,boundary);assert.equal(pools.discover(f.documents.get(P)).poolUUID,MASTER);assert.equal(f.documents.get(MASTER).testUserPermission(f.game.users.get('O')),false);assert.equal(result.status,'paused');assert.equal(f.calls.clock,0);assert.equal(f.calls.complete,0);
+ assert.equal((await f.ledger.getSession('session')).stopReason,'native-owner-pool-changed');
 });

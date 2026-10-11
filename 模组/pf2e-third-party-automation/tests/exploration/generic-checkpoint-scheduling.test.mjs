@@ -47,6 +47,13 @@ test('600 native treatment and parallel 900 declaration advance 600 then 300 wit
  assert.equal((await f.c.step('S')).status,'running');assert.equal(f.game.time.worldTime,900);assert.equal((await declarations(f))[0].state,'confirmed');assert.deepEqual(f.calls.advance,[600,300]);assert.equal(f.calls.context,1);assert.equal((await f.c.step('S')).status,'complete');
  const a=(await declarations(f))[0];assert.equal(a.source.type,'user-record');assert.equal(a.temporalSource.type,'checkpoint-declaration');assert.equal(a.executor,undefined);assert.deepEqual(a.proof,{useId:null,checkIds:[],resultIds:[],receiptIds:[],immunityIds:[]});assert.deepEqual(a.patientUUIDs,[]);
 });
+test('external time after a confirmed declaration clock pauses without completing the declared action',async()=>{
+ const f=await fixture({time:-900}),binding=await opened(f);await f.enroll(binding,'search','Actor.A',600);await f.c.closeActivityCheckpoint(binding,{autoRun:false});
+ const advance=f.clock.advanceTo;f.clock.advanceTo=async(...args)=>{const receipt=await advance(...args);f.game.time.worldTime=-240;return receipt};
+ await f.c.step('S');const data=await f.ledger.snapshot('S');assert.equal(data.session.status,'paused');assert.equal(data.session.stopReason,'external-world-time-change');assert.equal(data.session.cursorAt,-300);
+ assert.equal(data.activities[0].state,'cancelled');assert.equal(data.session.activityCheckpoint.registrations.search.status,'interrupted');assert.equal(data.clocks[0].state,'confirmed');assert.equal(f.game.time.worldTime,-240);assert.deepEqual(f.calls.advance,[600]);assert.deepEqual(f.calls.complete,[]);
+});
+
 test('one executor 300 plus 300 and another 600 share 600; order controls only same actor',async()=>{
  const f=await fixture(),b=await opened(f);await f.enroll(b,'second','Actor.A',300,{order:2});await f.enroll(b,'first','Actor.A',300,{order:1});await f.enroll(b,'parallel','Actor.B',600);await f.c.closeActivityCheckpoint(b,{autoRun:false});
  const schedule=Object.fromEntries((await declarations(f)).map(a=>[a.label,[a.startedAt,a.endsAt]]));assert.deepEqual(schedule,{first:[0,300],second:[300,600],parallel:[0,600]});await f.c.step('S');await f.c.step('S');assert.deepEqual(f.calls.advance,[300,300]);assert.ok((await declarations(f)).every(a=>a.state==='confirmed'));assert.equal(f.calls.context,0);

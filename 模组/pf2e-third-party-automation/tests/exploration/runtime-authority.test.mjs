@@ -4,11 +4,12 @@ import {createExplorationRuntime} from '../../scripts/exploration/runtime.mjs';
 import {MODULE_ID} from '../../scripts/exploration/schema.mjs';
 
 function fixture(){
- const gm={id:'G',isGM:true,active:true,getFlag:()=>null},calls=[];
+ const gm={id:'G',isGM:true,active:true,getFlag:()=>null},calls=[],pauses=[];
  const users=new Map([['G',gm],['G2',{...gm,id:'G2'}],['P',{...gm,id:'P',isGM:false}]]);users.activeGM=gm;
  const game={user:gm,users,settings:{get:()=>''},modules:new Map(),packs:new Map(),messages:new Map(),actors:{},time:{worldTime:0},system:{id:'pf2e',version:'8.5.1'},socket:{id:'socket',connected:true,on(){},off(){},emit(){calls.push('emit');throw Error('unexpected-socket-write')}},pf2e:{actions:new Map()}};
  const nativeCasts={addMatcher(){},addCapture(){},addActorUpdateMiddleware(){},addConsumePolicy(){},addObserver(){}};
- return {game,calls,nativeCasts,Hooks:{on(){},off(){}},fromUuid:async()=>null};
+ game.paused=false;game.togglePause=(paused,options)=>{pauses.push({paused,options});game.paused=paused;return paused};
+ return {game,calls,pauses,nativeCasts,Hooks:{on(){},off(){}},fromUuid:async()=>null};
 }
 function documentFixture(){
  const f=fixture(),hooks=new Map(),listeners=new Map();let configured='',raw;
@@ -72,11 +73,57 @@ test('PF2e 8.6 runtime can start and resume automatic recovery with its actual d
  await runtime.api.stop(session.id);await assert.doesNotReject(runtime.api.resume(session.id,{autoRun:false}));
 });
 
+async function automaticFixture(){
+ const f=documentFixture(),actor={id:'H',uuid:'Actor.H',name:'Healer',type:'character',items:[],testUserPermission:()=>true,system:{attributes:{hp:{value:20,max:20,temp:0}},resources:{focus:{value:0,max:0}}}};
+ f.fromUuid=async uuid=>uuid===actor.uuid?actor:null;f.game.actors=new Map([['H',actor]]);
+ const runtime=createExplorationRuntime(f);await runtime.bind({});await runtime.api.storage.provision({issuersStopped:true,clientsReloaded:true,recoveryDisabled:true});await runtime.api.storage.initialize({issuersStopped:true,clientsReloaded:true,recoveryDisabled:true});
+ return {...f,runtime,config:{actorUUIDs:[actor.uuid],budgetSeconds:600,autoRun:false}};
+}
+
+test('automatic runtime broadcasts pause once and leaves stop and resume paused',async()=>{
+ const f=await automaticFixture(),session=await f.runtime.api.start(f.config);
+ assert.equal(f.game.paused,true);assert.deepEqual(f.pauses,[{paused:true,options:{broadcast:true}}]);
+ await f.runtime.api.stop(session.id);await f.runtime.api.resume(session.id,{autoRun:false});assert.equal(f.pauses.length,1);assert.equal(f.game.paused,true);
+ await f.runtime.api.stop(session.id);f.game.paused=false;await f.runtime.api.resume(session.id,{autoRun:false});assert.equal(f.pauses.length,2);assert.equal(f.game.paused,true);
+});
+
+test('opening the panel and manual recording preserve the current pause state',async t=>{
+ const before=globalThis.foundry;t.after(()=>{globalThis.foundry=before});globalThis.foundry={applications:{api:{ApplicationV2:class{render(){return this}}}}};
+ const f=await automaticFixture();await f.runtime.api.open(['Actor.H']);assert.equal(f.game.paused,false);assert.deepEqual(f.pauses,[]);
+ assert.equal((await f.runtime.api.start({...f.config,manual:true})).status,'recording');assert.equal(f.game.paused,false);assert.deepEqual(f.pauses,[]);
+});
+
+for(const mode of ['throws','unconfirmed'])test(`runtime refuses to create a session when pause ${mode}`,async()=>{
+ const f=await automaticFixture();f.game.togglePause=()=>{if(mode==='throws')throw Error('socket disconnected')};f.calls.length=0;
+ await assert.rejects(f.runtime.api.start(f.config),/game-pause-failed/);assert.equal(f.calls.some(request=>request.action==='create'),false);
+});
+
+test('nonactive GMs cannot pause the game through automatic recovery',async()=>{
+ const f=await automaticFixture();f.game.user=f.game.users.get('G2');
+ await assert.rejects(f.runtime.api.start(f.config),/active-gm-required/);assert.equal(f.game.paused,false);assert.deepEqual(f.pauses,[]);
+});
+
+test('a user change inside the pause hook prevents session creation',async()=>{
+ const f=await automaticFixture(),toggle=f.game.togglePause;f.game.togglePause=(...args)=>{toggle(...args);f.game.user=f.game.users.get('G2')};f.calls.length=0;
+ await assert.rejects(f.runtime.api.start(f.config),/active-gm-required|exploration-user-changed/);assert.equal(f.calls.some(request=>request.action==='create'),false);
+});
+
 test('runtime initialization quarantines legacy automatic sessions without adopting their driver',async()=>{
  const f=documentFixture();f.seed({sessions:{S:{id:'S',status:'running',manual:false,actorUUIDs:[],startedAt:0,cursorAt:0,budgetEndsAt:600,activityIds:[],goalsByPool:[]}},activities:{},clocks:{}});f.game.user.getFlag=()=> 'S';
  const runtime=createExplorationRuntime(f);await runtime.bind({});assert.equal((await runtime.api.storage.status()).state,'legacy');
  const prepared=await runtime.api.storage.initialize({issuersStopped:true,clientsReloaded:true,recoveryDisabled:true});assert.equal(prepared.state,'ready');
  const data=await runtime.api.snapshot('S');assert.equal(data.session.status,'paused');assert.equal(data.session.stopReason,'legacy-migration-quarantine');assert.equal(data.session.driver,undefined);
+});
+
+test('public current-time recovery uses the active GM and the current world time',async()=>{
+ const f=documentFixture();f.game.time.worldTime=-600;
+ f.seed({sessions:{S:{id:'S',status:'paused',actorUUIDs:[],startedAt:-1200,cursorAt:-1200,budgetEndsAt:600,activityIds:[],goalsByPool:[]}},activities:{},clocks:{}});
+ const runtime=createExplorationRuntime(f);await runtime.bind({});await runtime.api.storage.initialize({issuersStopped:true,clientsReloaded:true,recoveryDisabled:true});
+ const view=await runtime.api.snapshot('S');assert.equal(view.canAcceptCurrentTime,true);assert.equal(view.worldTime,-600);
+ f.game.user=f.game.users.get('G2');const count=f.calls.length;
+ await assert.rejects(runtime.api.acceptCurrentTime('S',{expectedWorldTime:-600,note:'Reviewed'}),/active-gm-required/);assert.equal(f.calls.length,count);
+ f.game.user=f.game.users.get('G');const result=await runtime.api.acceptCurrentTime('S',{expectedWorldTime:-600,note:'Reviewed',userId:'forged'});
+ assert.equal(result.status,'closed');assert.equal(result.recoveryReview.userId,'G');assert.equal(result.recoveryReview.at,-600);assert.equal(f.game.time.worldTime,-600);
 });
 
 const privateState=()=>({sessions:{S:{id:'S',status:'paused',actorUUIDs:[],startedAt:0,cursorAt:0,budgetEndsAt:600,activityIds:[],goalsByPool:[],label:'private-session-marker'}},activities:{},clocks:{}});

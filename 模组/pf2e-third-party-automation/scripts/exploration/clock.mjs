@@ -31,7 +31,8 @@ export function createClock({game,Hooks,ledger,timeEffects,isAuthority,confirmat
    const result=await Promise.race([Promise.all([call,observed]).then(([,r])=>r),new Promise(yes=>{deadlineTimer=setTimeout(()=>yes(null),confirmationTimeoutMs)})]);
    authority();if(!result||foreign||game.time.worldTime!==commit.to)throw Error('world-time-source-unconfirmed');
    await ledger.transitionClockCommit(commit.id,{expected:['started'],patch:{nativeIssued:true,nativeResolved:true,evidence:[receipt]},...scope});await eligible();
-   const effects=await timeEffects.settle(commit);await eligible();if(effects.status!=='ready'||game.time.worldTime!==commit.to)throw Error(effects.reason??'time-effects-unconfirmed');
+   const effects=await timeEffects.settle(commit);await eligible();if(effects.status!=='ready')throw Error(effects.reason??'time-effects-unconfirmed');
+   // Keep this checkpoint's proof; the coordinator checks for later world-time changes.
    const saved=await ledger.transitionClockCommit(commit.id,{expected:['started'],patch:{state:'confirmed',effectsSettled:true,evidence:[receipt,...effects.proof??[]]},...scope});authority();return {status:'confirmed',commit:saved};
   }catch(error){if(committed&&isAuthority())await ledger.transitionClockCommit(commit.id,{expected:['started'],patch:{state:'uncertain',nativeIssued,reason:error.message},...scope}).catch(()=>{});return {status:committed?'uncertain':'blocked',reason:error.message,commit}}
   finally{attempts.delete(slot);if(hook)Hooks.off('updateWorldTime',hook);clearTimeout(timer);clearTimeout(deadlineTimer);if(active===slot)active=null}

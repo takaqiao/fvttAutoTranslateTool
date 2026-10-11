@@ -11,24 +11,24 @@ import {readFile} from 'node:fs/promises';
 
 const M='pf2e-third-party-automation',CD='aa3aa174524021b06e38f9128fd29196ac5f5da863bd818068a9b2fa0e699d20';
 const drain=async()=>{for(let i=0;i<8;i++)await new Promise(resolve=>setImmediate(resolve))};
-async function fixture({continualRecovery=true,beforeLookup=async()=>{}}={}){
+async function fixture({continualRecovery=true,beforeLookup=async()=>{},pauseGame=()=>{}}={}){
  const store=await authorityFixture(),ledger=store.client('driver'),users=new Map(['G','HUSER','PUSER','OUT'].map(id=>[id,{id,active:true,isGM:id==='G'}]));users.activeGM=users.get('G');
  const actors=new Map(),hooks=new Map(),messages=new Map(),updates=[],counts={clock:0,healing:0,immunity:0,refocus:0,automaticTreatment:0};let serial=0,c,r;
  for(const [id,owner] of [['H','HUSER'],['P','PUSER'],['F','HUSER']])actors.set(`Actor.${id}`,{id,uuid:`Actor.${id}`,name:id,items:new Map(),owner,testUserPermission:u=>u?.isGM===true||u?.id===owner,hp:{value:id==='P'?1:20,max:20},focus:{value:id==='F'?0:1,max:1}});
  const healer=actors.get('Actor.H'),patient=actors.get('Actor.P'),focusActor=actors.get('Actor.F'),token={id:'T',actor:patient},scenes=new Map();scenes.active={tokens:new Map([['T',token]])};
  const fire=(name,...args)=>{for(const h of hooks.values())if(h.name===name)h.fn(...args)};
  const Hooks={on:(name,fn)=>{const id=++serial;hooks.set(id,{name,fn});return id},off:(_name,id)=>hooks.delete(id)};
- const game={user:users.get('G'),users,actors,messages,scenes,time:{worldTime:0,advance:async(dt,options)=>{counts.clock++;game.time.worldTime+=dt;fire('updateWorldTime',game.time.worldTime,dt,options,'G');for(const item of patient.items.values())if(item.system.start.value+item.system.duration.value*60<=game.time.worldTime){item.isExpired=true;item.remainingDuration={expired:true}}}}};
+ const game={user:users.get('G'),users,actors,messages,scenes,paused:false,time:{worldTime:0,advance:async(dt,options)=>{counts.clock++;game.time.worldTime+=dt;fire('updateWorldTime',game.time.worldTime,dt,options,'G');for(const item of patient.items.values())if(item.system.start.value+item.system.duration.value*60<=game.time.worldTime){item.isExpired=true;item.remainingDuration={expired:true}}}}};
  const fromUuid=async uuid=>{await beforeLookup(uuid);return actors.get(uuid)??[...patient.items.values()].find(item=>item.uuid===uuid)};
  const hpPools={discover:actor=>({poolUUID:actor.uuid,ready:true})};
  const capabilities={discover:async uuid=>(await capabilities.snapshot([uuid]))[0],snapshot:async uuids=>uuids.map(uuid=>{const a=actors.get(uuid);return {actorUUID:uuid,name:a.name,hp:{...a.hp},focus:{...a.focus},pool:hpPools.discover(a),isDead:false,unconscious:false,modeOfBeing:'living',medicine:{rank:0},slugs:[],items:[],assuranceSkills:[],continualRecovery:uuid===healer.uuid&&continualRecovery,refocusUnsupported:[],hasActiveToken:true}})};
  const ownerOperations={createActivityContext:async()=>({}),isActivityContext:()=>true,isExecutionContext:()=>true,cancelActivity:async()=>{}};
- const refocus=createRefocusProvider({game,ledger,capabilities,ownerOperations,refocusEvents:{available:()=>true,complete:async a=>{assert.equal(game.time.worldTime,600);counts.refocus++;const before=focusActor.focus.value;focusActor.focus.value=1;return {id:a.id,focusBefore:before,focusAfter:1}}}});
+ const refocus=createRefocusProvider({game,ledger,capabilities,ownerOperations,salubriousKiss:{},refocusEvents:{available:()=>true,complete:async a=>{assert.equal(game.time.worldTime,600);counts.refocus++;const before=focusActor.focus.value;focusActor.focus.value=1;return {id:a.id,focusBefore:before,focusAfter:1}}}});
  const providers=[{id:'treat-wounds',begin:async()=>{counts.automaticTreatment++;return {status:'started'}},complete:()=>assert.fail('manual source must not call automatic treatment')},{...refocus,complete:async(a,ctx)=>{const scope=c.executionScope('S'),permit=await ledger.claimExecution(a.id,{...scope,operationId:'refocus',ownerUserId:'G',ownerClientNonce:'driver',attemptNonce:'attempt',permitNonce:'permit'}),result=await refocus.complete(a,ctx);await ledger.recordExecutionResult(a.id,{permit,result});return result}}];
  const clock=createClock({game,Hooks,ledger,isAuthority:()=>true,timeEffects:{beforeAdvance:async()=>({status:'ready'}),settle:async()=>({status:'ready',proof:[]})},confirmationTimeoutMs:100});
  const bridge=createManualRecordBridge({game,fromUuid,getSession:()=>ledger.getSession('S'),observe:e=>r.observe(e),reserveSource:(binding,intent,callerId)=>c.reserveManualSource(binding,intent,callerId)});
  r=createManualEvents({game,Hooks,ledger,fromUuid,hpPools,isAuthority:()=>true,sessionId:()=> 'S',onChange:value=>updates.push(value),reserveSource:(binding,intent)=>bridge.reserveSource(binding,intent),checkpointOptions:binding=>c.manualCheckpointOptions(binding)});
- c=createCoordinator({game,fromUuid,getHpPool:hpPools.discover,ledger,capabilities,providers,clock,policy:chooseNext,isAuthority:()=>true,now:()=>game.time.worldTime,ownerOperations,manualEvents:r});r.start();
+ c=createCoordinator({game,fromUuid,getHpPool:hpPools.discover,ledger,capabilities,providers,clock,policy:chooseNext,isAuthority:()=>true,now:()=>game.time.worldTime,pauseGame:async()=>{await pauseGame(game);game.paused=true},ownerOperations,manualEvents:r});r.start();
  const config={id:'S',actorUUIDs:[...actors.keys()],budgetSeconds:600,requireFullFocus:true,waitForManualFirstRound:true,autoRun:false};
  const start=()=>c.start(config),reserve=(binding,intent={})=>c.reserveManualSource(binding,{sourceType:'workbench',kind:'treatment',useId:'U',actorUUID:healer.uuid,patientUUID:patient.uuid,...intent},'HUSER');
  async function nativeTreatment(binding,{duration=continualRecovery?10:60,start=0}={}){
@@ -43,6 +43,33 @@ async function fixture({continualRecovery=true,beforeLookup=async()=>{}}={}){
  }
  return {store,ledger,game,c,r,bridge,actors,healer,patient,counts,start,reserve,nativeTreatment,fire,drain,hpPools,updates};
 }
+
+test('continuing a manual first round re-pauses before automatic Refocus and time advancement',async()=>{
+ const f=await fixture(),s=await f.start(),binding=await f.c.openManualCheckpoint(s.id);await f.nativeTreatment(binding);f.game.paused=false;
+ const advance=f.game.time.advance;f.game.time.advance=async(...args)=>{assert.equal(f.game.paused,true);return advance(...args)};
+ const result=await f.c.closeManualCheckpoint(binding,{autoRun:false});assert.equal(result.status,'running',JSON.stringify(result));
+ assert.equal(f.game.paused,true);assert.equal(f.game.time.worldTime,600);assert.equal(f.counts.clock,1);assert.equal(f.counts.refocus,1);assert.equal(f.counts.healing,1);
+ assert.equal((await f.ledger.snapshot(s.id)).activities.find(a=>a.source.manual).state,'confirmed');
+});
+
+for(const interruption of ['time-change','pause-failed'])test(`manual continuation preserves native evidence after ${interruption} during pause`,async()=>{
+ let armed=false;const f=await fixture({pauseGame:async game=>{if(!armed)return;await new Promise(resolve=>setImmediate(resolve));if(interruption==='time-change')game.time.worldTime=1;else throw Error('game-pause-failed')}}),s=await f.start(),binding=await f.c.openManualCheckpoint(s.id),native=await f.nativeTreatment(binding);
+ const before=await f.ledger.getActivity(native.reservation.activityId);f.game.paused=false;armed=true;
+ if(interruption==='pause-failed')await assert.rejects(f.c.closeManualCheckpoint(binding,{autoRun:false}),/game-pause-failed/);
+ else assert.equal((await f.c.closeManualCheckpoint(binding,{autoRun:false})).status,'paused');
+ const data=await f.ledger.snapshot(s.id);assert.equal(data.session.status,'paused');assert.equal(data.session.stopReason,interruption==='time-change'?'external-world-time-change':'game-pause-failed');
+ assert.deepEqual(await f.ledger.getActivity(before.id),before);assert.equal(data.activities.length,1);assert.equal(data.clocks.length,0);assert.equal(f.counts.clock,0);assert.equal(f.counts.refocus,0);assert.equal(f.counts.healing,1);
+});
+
+for(const boundary of ['receipt','completing-claim'])test(`external time after manual ${boundary} pauses before Refocus or manual completion`,async()=>{
+ const f=await fixture(),s=await f.start(),binding=await f.c.openManualCheckpoint(s.id);await f.nativeTreatment(binding);
+ const transition=f.ledger.transitionClockCommit;f.ledger.transitionClockCommit=async(...args)=>{const result=await transition(...args);if(boundary==='receipt'&&result.state==='confirmed')f.game.time.worldTime=660;return result};
+ const claim=f.ledger.transitionActivity;f.ledger.transitionActivity=async(...args)=>{const result=await claim(...args);if(boundary==='completing-claim'&&args[1].patch.state==='completing')f.game.time.worldTime=660;return result};
+ const result=await f.c.closeManualCheckpoint(binding,{autoRun:false}),data=await f.ledger.snapshot('S');
+ assert.equal(result.status,'paused');assert.equal(data.session.stopReason,'external-world-time-change');assert.equal(data.session.cursorAt,600);assert.equal(f.game.time.worldTime,660);
+ assert.equal(data.clocks[0].state,'confirmed');assert.equal(data.activities.find(a=>a.source.manual).state,'awaiting-evidence');assert.equal(f.counts.refocus,0);assert.equal(f.counts.clock,1);assert.equal(f.counts.healing,1);
+ const refocus=data.activities.find(a=>a.providerId==='refocus');assert.equal(refocus.state,boundary==='completing-claim'?'blocked':'cancelled');assert.equal(refocus.executor,undefined);
+});
 
 test('a first manual window waits at zero with no automatic begin or native time',async()=>{
  const f=await fixture(),s=await f.start();assert.equal((await f.c.step(s.id)).status,'waiting-manual');assert.equal(f.game.time.worldTime,0);assert.deepEqual(f.counts,{clock:0,healing:0,immunity:0,refocus:0,automaticTreatment:0});assert.equal(s.manualCheckpoint.phase,'open');

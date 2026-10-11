@@ -6,10 +6,10 @@ import {OWNER_TRANSPORT_CHANNEL} from '../../scripts/exploration/owner-transport
 import {samePermit} from '../../scripts/exploration/owner-command.mjs';
 
 function publicRuntimeFixture() {
- const tabs=[],packets=[],documents=[],effects=[],clocks=[],errors=[],manualPackets=[];
+ const tabs=[],packets=[],documents=[],effects=[],clocks=[],errors=[],manualPackets=[],pauses=[];
  const users=new Map(['G','O','P'].map(id=>[id,{id,isGM:id==='G',active:true,flags:{},getFlag(scope,key){return this.flags[scope]?.[key]},async setFlag(scope,key,value){(this.flags[scope]??={})[key]=value}}]));
  users.activeGM=users.get('G');
- let configured='',raw=null,worldTime=0,nativeGate=null;
+ let configured='',raw=null,worldTime=0,nativeGate=null,paused=false;
  const actorSource={id:'H',uuid:'Actor.H',name:'Offline Refocus',type:'character',level:1,modeOfBeing:'living',flags:{},system:{attributes:{hp:{value:20,max:20,negativeHealing:false}},resources:{focus:{value:0,max:1}}}};
  function apply(document,data){for(const [path,value]of Object.entries(data)){const keys=path.split('.');let at=document;for(const key of keys.slice(0,-1))at=at[key]??={};at[keys.at(-1)]=structuredClone(value)}}
  function emitHook(event,...args){for(const tab of tabs)for(const [name,handler]of tab.hooks.values())if(name===event)handler(...args)}
@@ -37,8 +37,9 @@ function publicRuntimeFixture() {
    }};
   const tab={id,hooks,listeners,actor};
   const game={user:users.get(userId),users,actors:new Map([['H',actor]]),messages:new Map(),packs:new Map(),modules:new Map(),system:{id:'pf2e',version:'8.5.1'},pf2e:{actions:new Map()},
+   get paused(){return paused},togglePause(state,{broadcast=false}={}){assert.equal(userId,'G');assert.equal(broadcast,true);pauses.push({tab:id,state});paused=state;emitHook('pauseGame',state);return state},
    settings:{get:(scope,key)=>scope===MODULE_ID&&key==='explorationLedgerUUID'?configured:'',async set(scope,key,value){assert.equal(userId,'G');configured=value;emitHook('updateSetting',{key:`${scope}.${key}`});return value}},
-   time:{get worldTime(){return worldTime},async advance(dt,options){assert.equal(userId,'G');worldTime+=dt;clocks.push({tab:id,worldTime,dt,options:structuredClone(options),userId});emitHook('updateWorldTime',worldTime,dt,options,userId);return worldTime}},
+   time:{get worldTime(){return worldTime},async advance(dt,options){assert.equal(userId,'G');assert.equal(game.paused,true);worldTime+=dt;clocks.push({tab:id,worldTime,dt,options:structuredClone(options),userId});emitHook('updateWorldTime',worldTime,dt,options,userId);return worldTime}},
    socket:{id:`socket-${id}`,connected:true,on(event,handler){const set=listeners.get(event)??new Set();set.add(handler);listeners.set(event,set)},off(event,handler){listeners.get(event)?.delete(handler)},emit(event,packet,...args){
     if(event==='modifyDocument')return documentRequest(tab,packet,args[0]);
     assert.equal(event,OWNER_TRANSPORT_CHANNEL);const [routing,ack]=args;
@@ -86,7 +87,7 @@ function publicRuntimeFixture() {
   while(performance.now()<deadline){const data=await tab.runtime.api.snapshot(id);if(data.session.status!=='running')return data;await new Promise(resolve=>setImmediate(resolve))}
   throw Error('offline-public-runtime-did-not-settle');
  }
- return {tabs,packets,documents,effects,clocks,errors,manualPackets,addTab,provision,finished,emitHook,get raw(){return raw},holdNative(){
+ return {tabs,packets,documents,effects,clocks,errors,manualPackets,pauses,addTab,provision,finished,emitHook,get raw(){return raw},holdNative(){
   let entered,release;const boundary=new Promise(resolve=>{entered=resolve}),wait=new Promise(resolve=>{release=resolve});nativeGate={entered,wait};return {release,async waitForBoundary(){
    let timer;try{await Promise.race([boundary,new Promise((resolve,reject)=>{timer=setTimeout(()=>reject(Error('offline-native-boundary-not-reached')),3000)})])}finally{clearTimeout(timer)}
   }};
@@ -100,6 +101,7 @@ for(const mapped of [true,false])test(`public runtime ${mapped?'mapped OWNER':'d
  const gate=f.holdNative();t.after(()=>gate.release());
  const config={actorUUIDs:['Actor.H'],requireFullFocus:true,budgetSeconds:1200,maxActivities:1,...mapped?{nativeOwnerByActor:{'Actor.H':'O'}}:{}};
  const session=await driver.runtime.api.start(config);
+ assert.equal(driver.game.paused,true);assert.equal(ownerOne.game.paused,true);assert.deepEqual(f.pauses,[{tab:'driver',state:true}]);
  await assert.rejects(peer.runtime.api.start(config),/recovery-session-already-running/);
  await assert.rejects(ownerOne.runtime.api.start(config),/active-gm-required/);
  await gate.waitForBoundary();
@@ -117,6 +119,7 @@ for(const mapped of [true,false])test(`public runtime ${mapped?'mapped OWNER':'d
  assert.equal(activity.executor.state,'settled');assert.equal(activity.executor.ownerUserId,mapped?'O':'G');
  assert.equal(data.clocks.length,1);assert.equal(data.clocks[0].state,'confirmed');assert.equal(data.clocks[0].evidence[0].options.pf2eThirdPartyAutomation.exploration.sessionId,session.id);
  assert.equal(f.clocks.length,1);assert.equal(f.clocks[0].dt,600);assert.equal(f.effects.length,1);
+ assert.equal(driver.game.paused,true);assert.deepEqual(f.pauses,[{tab:'driver',state:true}]);
  const winner=f.tabs.find(tab=>tab.id===f.effects[0].tab);assert.ok(winner);
  assert.equal(winner.game.user.id,mapped?'O':'G');assert.equal(winner.boundaries.length,1);
  assert.equal(winner.boundaries[0].mode,mapped?'owner-preference':'automatic');assert.equal(winner.boundaries[0].signal.aborted,false);
@@ -145,6 +148,7 @@ test('public runtime manual start stays recording without an automatic permit or
  const data=await gm.runtime.api.snapshot(session.id);
  assert.equal(data.session.status,'recording');assert.deepEqual(data.session.nativeOwnerByActor,{});assert.deepEqual(data.activities,[]);assert.deepEqual(data.clocks,[]);
  assert.equal(f.effects.length,0);assert.equal(f.clocks.length,0);assert.equal(f.packets.length,0);assert.deepEqual(f.errors,[]);
+ assert.equal(gm.game.paused,false);assert.deepEqual(f.pauses,[]);
 });
 
 test('public GM boundary request and OWNER declaration share the authenticated runtime without player ledger access',async t=>{

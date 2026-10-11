@@ -6,7 +6,7 @@ import {normalizeCheckpointActivity} from './manual-time.mjs';
 import {canonicalJSON} from './revision-codec.mjs';
 export const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const labels={'goals-met':'恢复目标完成',running:'恢复中',recording:'手动记录中',paused:'已停止',confirmed:'已确认',started:'进行中',completing:'结算中','awaiting-evidence':'待核对证据',uncertain:'结果未知',blocked:'无法继续',cancelled:'已取消','treat-wounds':'治疗伤势',refocus:'再聚能',manual:'手动行动','focus-healing':'圣疗','user-stopped':'已手动停止',budget:'达到预算',closed:'已核对结束','client-context-lost':'客户端已重载，请核对后接续','gm-reviewed-closed':'GM 已核对结束，未知结果保留','refocus-recovery-unadapted':'特殊再聚能规则尚未适配，请手动处理','consecutive-treatment-failures':'达到连续治疗失败上限'};
-export function formatSessionResult(record){return `${record.certainty==='observed'?'已确认经过':record.certainty==='contradictory'?'记录存在矛盾，推算':record.certainty==='incomplete'?'证据不完整，按假设推算最早':'按并行假设推算最早'} ${Math.round(record.durationSeconds/60*10)/10} 分钟；尚缺 ${record.remainingHP??0} HP；${labels[record.status]??record.status??''}`}
+export function formatSessionResult(record){return `${record.certainty==='observed'?'已确认经过':record.certainty==='contradictory'?'记录存在矛盾，推算':record.certainty==='incomplete'?'证据不完整，按假设推算最早':'按并行假设推算最早'} ${Math.round(record.durationSeconds/60*10)/10} 分钟；尚缺 ${record.remainingHP??0} HP；${evidenceText(record.status)??''}`}
 export function sessionTimeSummary(data){return data.session.manual?reconstructEarliest({startedAt:data.session.startedAt,activities:data.activities,assumptions:data.session.assumptions}):{durationSeconds:data.session.cursorAt-data.session.startedAt,certainty:'observed'}}
 export function recoveryBudgetPolicy({minutes,activities}){if(!Number.isFinite(minutes)||minutes<=0)throw Error('时间预算应为正数分钟。');if(!Number.isInteger(activities)||activities<1||activities>100)throw Error('行动次数应为1至100。');return {budgetSeconds:minutes*60,maxActivities:activities}}
 export function recoveryDefaults(actors){return {goalsByPool:[...new Map(actors.map(a=>[a.pool.poolUUID,{poolUUID:a.pool.poolUUID,targetHP:a.hp.max}])).values()],allowFiniteResources:false,riskySurgery:false,requireFullFocus:false,budgetSeconds:7200,maxActivities:100}}
@@ -41,6 +41,11 @@ function treatmentFailureSummary(data){
  return `<section class="recovery-failures" aria-label="连续治疗失败"><p>以下患者已停止新的恢复；已保存结果保留。</p><ul>${remaining.map(p=>`<li>${escapeHTML(data.actors.find(a=>a.actorUUID===p.patientUUID)?.name??p.patientUUID)}：连续失败 ${p.streak} / ${p.limit}；HP ${p.currentHP} / ${p.targetHP}（尚缺 ${p.hpGap} HP）${p.woundedGap?'；wounded 尚未清除':''}。</li>`).join('')}</ul></section>`;
 }
 const evidenceLabels={
+ 'game-pause-failed':'未能暂停游戏，请由 GM 暂停后重试',
+ 'exploration-clock-pause-unavailable':'无法确认日历停钟状态。Calendaria 的时间提交间隔需大于 1 秒，请核对后重试',
+ 'exploration-clock-still-running':'游戏已暂停，但日历仍在运行；请停止日历时钟后重试',
+ 'exploration-clock-pause-unconfirmed':'日历停钟前的时间尚未提交完成，请稍后重试',
+ 'accepted-current-state':'已确认当前状态，可开始新的恢复',
  'native-application-receipt':'缺少原生 HP 应用回执','native-immunity-receipt':'缺少原生免疫回执',
  'checkpoint-time-confirmation':'等待本轮十分钟时间确认','native-manual-source-unavailable':'尚未完成本轮 Workbench 治疗',
  'native-immunity-timing-unconfirmed':'原生免疫的开始时刻或冷却时长尚未确认','native-source-identity-unproven':'原生治疗来源尚未确认',
@@ -51,6 +56,7 @@ const evidenceLabels={
  'inconsistent-group':'群体行动的执行者或时长不一致','missing-dependency':'缺少前置行动','dependency-cycle':'前置行动顺序存在循环',
  'observed-before-ready':'记录时间早于可开始时间','activity-uncertain':'行动结果未知','activity-blocked':'行动未能继续','activity-cancelled':'行动已取消',
  'world-time-source-unconfirmed':'世界时间来源回执尚未确认','world-time-conflict':'世界时间与计划不一致',
+ 'external-world-time-change':'世界时间已被其他操作改变，请核对当前状态','external-rest-time-authority':'世界时间由外部休息操作管理，恢复已停止',
  'world-time-conflict-after-claim':'保存提交声明后世界时间发生变化','clock-never-replayed':'时间提交尚未确认，保留原尝试',
  'clock-in-flight':'已有时间提交正在执行','time-effects-unconfirmed':'时间相关效果尚未完成确认',
  'passive-completion-unavailable':'被动恢复尚无可确认完成的适配','passive-completion-unproven':'被动恢复缺少完成回执',
@@ -60,7 +66,7 @@ const evidenceText=value=>labels[value]??evidenceLabels[value]??value;
 function ledgerSetupControls(status){
  if(!status||status.state==='ready')return '';
  const migrating=['legacy','migration-required'].includes(status.state),text=status.state==='unconfigured'?'先准备探索账本，再启动恢复。':migrating?'已有探索历史需要升级账本。升级会保留记录，暂停旧的恢复任务，并保留尚未确认的尝试。恢复任务由你另行启动。':`探索账本暂不可用：${evidenceText(status.reason)}。请选择仍存在且仅供 GM 管理的账本。`;
- return `<section class="recovery-unresolved"><p>${escapeHTML(text)}</p>${status.state==='unconfigured'?'<button type="button" data-recovery="provision">创建并准备探索账本</button>':migrating?'<button type="button" data-recovery="initialize">升级探索账本</button>':''}<button type="button" data-recovery="selectLedger">选择已有账本</button></section>`;
+ return `<section class="recovery-unresolved"><p>${escapeHTML(text)}</p>${status.state==='unconfigured'?'<button type="button" data-recovery="provision">创建并准备探索账本</button>':migrating?'<button type="button" data-recovery="initialize">升级探索账本</button>':'<button type="button" data-recovery="selectLedger">选择已有账本</button>'}</section>`;
 }
 async function setupChoices({game,select=false}){
  const candidates=Array.from(game.journal?.contents??[]).filter(j=>j.flags?.['pf2e-third-party-automation']?.explorationLedger||j.flags?.['pf2e-third-party-automation']?.explorationLedgerRoot);
@@ -119,7 +125,7 @@ export function renderRecoveryHistory(data,{actors=[],messages}={}){
   }
   return `<li class="recovery-history-entry" data-recovery-activity-id="${e(a.id)}"><p class="recovery-activity-title">${title(a)} · ${e(minutes(a.durationSeconds??a.endsAt-a.startedAt))} 分钟 <strong>${e(evidenceText(a.state))}</strong></p>${historyAnnotations(a,data.session.startedAt)}${a.reason?`<p>${e(evidenceText(a.reason))}</p>`:''}${missing.length?`<ul class="recovery-missing">${missing.map(m=>`<li>${e(evidenceText(m))}</li>`).join('')}</ul>`:''}<details class="recovery-evidence"><summary>来源与回执</summary><p>行动 ID：<code>${e(a.id)}</code></p>${sources.length?`<ul>${sources.join('')}</ul>`:'<p>尚无已保存的来源回执。</p>'}</details></li>`;
  }).join('');
- return `${context}<ol class="recovery-history">${rows}</ol>${data.session.review?.note?`<section class="recovery-review"><p>GM 核对说明</p><p>${e(data.session.review.note)}</p></section>`:''}`;
+ return `<details class="recovery-history-details"><summary>完整记录（${history.length} 项行动）</summary>${context}<ol class="recovery-history">${rows}</ol>${data.session.review?.note?`<section class="recovery-review"><p>GM 核对说明</p><p>${e(data.session.review.note)}</p></section>`:''}</details>`;
 }
 /** Navigate an existing visible source through V14's native ChatLog; never repost it. */
 export async function showRecoveryMessage(id,{game=globalThis.game,chat=globalThis.ui?.chat}={}){
@@ -170,6 +176,7 @@ function checkpointPreview(data){
  catch(error){return `<p class="recovery-unresolved">${error.message==='activity-checkpoint-budget'?'登记超过剩余时间预算，请调整后继续。':'登记的前置行动或执行顺序存在冲突，请核对后继续。'}</p>`}
 }
 export function createRecoveryPanel({game,coordinator,capabilities,start,storage,prepareContext,record,getActivityCheckpoint,lookupCheckpointActivity,getSessionId,onError=console.error}){
+ const reportError=error=>onError(evidenceLabels[error.message]?new Error(evidenceLabels[error.message],{cause:error}):error);
  let panel;const unconfirmed=new Map();
  async function submitDeclaration(options){try{return await promptActivityDeclaration({...options,record})}catch(error){if(error.declaration&&error.declarationRejected!==true){unconfirmed.set(error.declaration.actorUUID,error.declaration);panel?.render(true)}throw error}}
  async function lookupDeclaration(declaration){
@@ -192,7 +199,7 @@ export function createRecoveryPanel({game,coordinator,capabilities,start,storage
     async _renderHTML({actors,data,policy,ledgerStatus}){
      const e=escapeHTML,pools=[...new Map(actors.map(a=>[a.pool.poolUUID,a])).values()];
      const saved=savedRecoveryPolicy(policy),preferences=selectedRecoveryPreferences(saved.preferences,actors.map(a=>a.actorUUID));
-     const active=data?.session?.status==='running',manual=data?.session?.status==='recording',ready=!storage||ledgerStatus?.state==='ready',activityOpen=active&&data.session.activityCheckpoint?.phase==='open';
+     const active=data?.session?.status==='running',manual=data?.session?.status==='recording',ready=ledgerStatus?ledgerStatus.state==='ready':!storage,activityOpen=active&&data.session.activityCheckpoint?.phase==='open';
      const resolved=actors.every(a=>a.pool.ready)?resolveRecoveryGoals(actors,preferences):null,preview=resolved?.goalsByPool??recoveryDefaults(actors).goalsByPool;
      this.targetActors=structuredClone(actors);this.targetPreview={actorUUIDs:actors.map(a=>a.actorUUID),goalsByPool:preview.map(g=>({...g}))};
      const rows=actors.map(a=>{
@@ -204,7 +211,34 @@ export function createRecoveryPanel({game,coordinator,capabilities,start,storage
      const history=data?.activities??[],paused=data?.session?.status==='paused',unresolved=history.filter(a=>['uncertain','awaiting-evidence','completing','started'].includes(a.state)),unknownClocks=(data?.clocks??[]).filter(c=>c.state!=='confirmed');let result='选择成员后，一次启动恢复。';
      if(data){const remaining=data.session.goalsByPool.reduce((n,g)=>n+Math.max(0,g.targetHP-(data.actors.find(a=>a.pool.poolUUID===g.poolUUID)?.hp.value??0)),0);const reconstruction=sessionTimeSummary(data);result=formatSessionResult({...reconstruction,remainingHP:remaining,status:data.session.stopReason??data.session.status})}
      if(saved.reason)result+=` 保存的恢复偏好无效，已使用最大 HP：${saved.reason}`;
-     return `<div class="recovery-content">${ledgerSetupControls(ledgerStatus)}<p class="recovery-time" role="status">${e(result)}</p>${treatmentFailureSummary(data)}<table><thead><tr><th>成员 / 共用血池</th><th>当前 HP</th><th>下次启动目标</th></tr></thead><tbody>${rows}</tbody></table>${targetPreview}<fieldset ${active||!ready?'disabled':''}><legend>恢复策略</legend>${stopControls}<label><input type="checkbox" name="activityFirstRound" ${data?.session?.waitForActivityFirstRound?'checked':''}> 启动后先登记其他行动</label><p>登记耗时后封口继续；无需所有成员登记。与首轮手动治疗窗口择一使用。</p><label><input type="checkbox" name="manualFirstRound" ${data?.session?.waitForManualFirstRound?'checked':''}> 首轮等待手动治疗</label><p>首轮可用 Workbench 治疗一位非共用血池患者，原生应用 HP 并创建免疫后继续本轮；同轮的普通再聚能共用十分钟。等待时世界时间不推进。</p><label><input type="checkbox" name="risky" ${(data?.session?.riskySurgery??policy.riskySurgery)?'checked':''}> 激进治疗：先受到真实 1d8 伤害</label><label><input type="checkbox" name="focus" ${(data?.session?.requireFullFocus??policy.requireFullFocus)?'checked':''}> 结束时补满聚能</label><label><input type="checkbox" name="extension" ${(data?.session?.extendTreatment??policy.extendTreatment)?'checked':''}> 成功后允许延长至一小时</label><label><input type="checkbox" name="assurance" ${(data?.session?.useAssurance??policy.useAssurance)?'checked':''}> 优先使用对应技能的 Assurance</label><label>治疗 DC <select name="rank">${['auto','trained','expert','master','legendary'].map((rank,i)=>`<option value="${rank}" ${(data?.session?.treatmentRank??policy.treatmentRank??'trained')===rank?'selected':''}>${['自动',15,20,30,40][i]}（${['未知情境回落15','受训','专家','大师','传奇'][i]}）</option>`).join('')}</select></label><label>时间预算（分钟） <input name="budget" type="number" min="1" value="${(data?.session?.budgetEndsAt&&data?.session?.startedAt!==undefined?(data.session.budgetEndsAt-data.session.startedAt):policy.budgetSeconds??7200)/60}"></label><label>最多行动次数 <input name="activityBudget" type="number" min="1" max="100" value="${data?.session?.maxActivities??policy.maxActivities??100}"></label><p>圣疗与再聚能可循环使用。每日次数、法术位和消耗品保持关闭。条件修正未核验时采用选定 DC。</p></fieldset>${active&&data.session.manualCheckpoint?.phase==='open'?'<p class="recovery-unresolved">正在等待本轮 Workbench 手动治疗。完成原生 HP 应用和免疫后，点击继续本轮。</p>':''}${checkpointPreview(data)}${data?.activityCheckpointRequested?'<p role="status">已请求登记，等待当前原生行动与时间完成。</p>':''}<div class="recovery-actions">${active&&ready&&data.session.manualCheckpoint?.phase==='open'?'<button type="button" data-recovery="closeManualCheckpoint">继续本轮</button>':''}<button type="button" data-recovery="start" ${active||manual||!ready?'disabled':''}>按真实掷骰恢复</button><button type="button" data-recovery="record" ${active||manual||!ready?'disabled':''}>记录手动行动</button>${active&&ready&&!activityOpen&&!data.activityCheckpointRequested&&(!data.session.manualCheckpoint||data.session.manualCheckpoint.phase==='settled')?'<button type="button" data-recovery="openActivityCheckpoint">下一检查点登记</button>':''}${activityOpen&&ready?'<button type="button" data-recovery="closeActivityCheckpoint">封口并继续</button>':''}<button type="button" data-recovery="activity" ${(manual||activityOpen)&&ready&&!unconfirmed.size?'':'disabled'}>登记其他行动</button>${unconfirmed.size?'<button type="button" data-recovery="lookupActivity">查回上次登记</button>':''}<button type="button" data-recovery="stop" ${(active||manual)&&ready?'':'disabled'}>停止</button><button type="button" data-recovery="reconcile" ${paused&&ready?'':'disabled'}>核对已保存回执</button><button type="button" data-recovery="resume" ${paused&&ready&&!data.session.manual&&!unresolved.length&&!unknownClocks.length?'':'disabled'}>继续已确认会话</button><button type="button" data-recovery="review" ${paused&&ready?'':'disabled'}>核对后结束会话</button>${active&&ready&&!data.session.manual?'<button type="button" data-recovery="takeover">接管并停止</button>':''}<button type="button" data-recovery="refresh">刷新</button></div>${renderRecoveryHistory(data,{actors,messages:game.messages})}<details><summary>能力与限制</summary>${actors.map(a=>`<p>${e(a.name)}：医疗 ${a.medicine?.rank??0}；群体治疗 ${a.wardCapacity} 人；聚能 ${a.focus.value}/${a.focus.max}${a.pool.ready?'':`；${e(a.pool.reason)}`}${a.refocusUnsupported?.length?`；特殊再聚能规则需手动处理 ${e(a.refocusUnsupported.join(', '))}`:''}${a.unsupported?.length?`；需手动核对 ${e(a.unsupported.join(', '))}`:''}</p>`).join('')}</details></div>`;
+     const canStart=ready&&!active&&!manual&&!paused&&!data?.canAcceptCurrentTime,canResume=paused&&ready&&!data.session.manual&&!unresolved.length&&!unknownClocks.length&&(!Number.isFinite(game.time?.worldTime)||game.time.worldTime===data.session.cursorAt);
+     const mainActions=[
+      active&&ready&&data.session.manualCheckpoint?.phase==='open'?'<button type="button" data-recovery="closeManualCheckpoint">继续本轮</button>':'',
+      activityOpen&&ready?'<button type="button" data-recovery="closeActivityCheckpoint">封口并继续</button>':'',
+      canStart?'<button type="button" data-recovery="start">掷骰恢复并推进时间</button>':'',
+      (active||manual)&&ready?'<button type="button" data-recovery="stop">停止</button>':'',
+      paused&&ready?'<button type="button" data-recovery="reconcile">核对已保存回执</button>':'',
+      canResume?'<button type="button" data-recovery="resume">继续已确认会话</button>':'',
+      ready&&data?.canAcceptCurrentTime?'<button type="button" data-recovery="acceptCurrentTime">按当前状态继续</button>':'',
+      paused&&ready?'<button type="button" data-recovery="review">核对后结束会话</button>':''
+     ].join('');
+     const moreActions=[
+      canStart?'<button type="button" data-recovery="record">记录手动行动</button>':'',
+      active&&ready&&!activityOpen&&!data.activityCheckpointRequested&&(!data.session.manualCheckpoint||data.session.manualCheckpoint.phase==='settled')?'<button type="button" data-recovery="openActivityCheckpoint">下一检查点登记</button>':'',
+      (manual||activityOpen)&&ready&&!unconfirmed.size?'<button type="button" data-recovery="activity">登记其他行动</button>':'',
+      unconfirmed.size?'<button type="button" data-recovery="lookupActivity">查回上次登记</button>':'',
+      active&&ready&&!data.session.manual?'<button type="button" data-recovery="takeover">接管并停止</button>':'',
+      ledgerStatus&&ledgerStatus.state!=='blocked'?'<button type="button" data-recovery="selectLedger">选择已有账本</button>':'',
+      '<button type="button" data-recovery="refresh">刷新</button>'
+     ].join('');
+     return `<div class="recovery-content">${ledgerSetupControls(ledgerStatus)}<p class="recovery-time" role="status">${e(result)}</p>${treatmentFailureSummary(data)}
+      <ul class="recovery-members">${actors.map(a=>`<li><span>${e(a.name)}</span><span>${a.hp.value} / ${a.hp.max} HP</span></li>`).join('')}</ul>
+      ${active&&data.session.manualCheckpoint?.phase==='open'?'<p class="recovery-unresolved">正在等待本轮 Workbench 手动治疗。完成原生 HP 应用和免疫后，点击继续本轮。</p>':''}${checkpointPreview(data)}${data?.activityCheckpointRequested?'<p role="status">已请求登记，等待当前原生行动与时间完成。</p>':''}
+      ${data?.session?.recoveryReview?'<p role="status">已保留旧记录并确认当前状态。点击“掷骰恢复并推进时间”开始新的恢复。</p>':''}
+      <div class="recovery-actions recovery-main-actions">${mainActions}</div>
+      <details class="recovery-advanced"><summary>恢复目标与高级选项</summary><table><thead><tr><th>成员 / 共用血池</th><th>当前 HP</th><th>下次启动目标</th></tr></thead><tbody>${rows}</tbody></table>${targetPreview}<fieldset ${active||!ready?'disabled':''}><legend>恢复策略</legend>${stopControls}<label><input type="checkbox" name="activityFirstRound" ${data?.session?.waitForActivityFirstRound?'checked':''}> 启动后先登记其他行动</label><p>登记耗时后封口继续；无需所有成员登记。与首轮手动治疗窗口择一使用。</p><label><input type="checkbox" name="manualFirstRound" ${data?.session?.waitForManualFirstRound?'checked':''}> 首轮等待手动治疗</label><p>首轮可用 Workbench 治疗一位非共用血池患者，原生应用 HP 并创建免疫后继续本轮；同轮的普通再聚能共用十分钟。等待时世界时间不推进。</p><label><input type="checkbox" name="risky" ${(data?.session?.riskySurgery??policy.riskySurgery)?'checked':''}> 激进治疗：先受到真实 1d8 伤害</label><label><input type="checkbox" name="focus" ${(data?.session?.requireFullFocus??policy.requireFullFocus)?'checked':''}> 结束时补满聚能</label><label><input type="checkbox" name="extension" ${(data?.session?.extendTreatment??policy.extendTreatment)?'checked':''}> 成功后允许延长至一小时</label><label><input type="checkbox" name="assurance" ${(data?.session?.useAssurance??policy.useAssurance)?'checked':''}> 优先使用对应技能的 Assurance</label><label>治疗 DC <select name="rank">${['auto','trained','expert','master','legendary'].map((rank,i)=>`<option value="${rank}" ${(data?.session?.treatmentRank??policy.treatmentRank??'trained')===rank?'selected':''}>${['自动',15,20,30,40][i]}（${['未知情境回落15','受训','专家','大师','传奇'][i]}）</option>`).join('')}</select></label><label>时间预算（分钟） <input name="budget" type="number" min="1" value="${(data?.session?.budgetEndsAt&&data?.session?.startedAt!==undefined?(data.session.budgetEndsAt-data.session.startedAt):policy.budgetSeconds??7200)/60}"></label><label>最多行动次数 <input name="activityBudget" type="number" min="1" max="100" value="${data?.session?.maxActivities??policy.maxActivities??100}"></label><p>圣疗与再聚能可循环使用。每日次数、法术位和消耗品保持关闭。条件修正未核验时采用选定 DC。</p></fieldset></details>
+      <details class="recovery-more"><summary>更多操作</summary><div class="recovery-actions">${moreActions}</div><details><summary>能力与限制</summary>${actors.map(a=>`<p>${e(a.name)}：医疗 ${a.medicine?.rank??0}；群体治疗 ${a.wardCapacity} 人；聚能 ${a.focus.value}/${a.focus.max}${a.pool.ready?'':`；${e(a.pool.reason)}`}${a.refocusUnsupported?.length?`；特殊再聚能规则需手动处理 ${e(a.refocusUnsupported.join(', '))}`:''}${a.unsupported?.length?`；需手动核对 ${e(a.unsupported.join(', '))}`:''}</p>`).join('')}</details></details>
+      ${renderRecoveryHistory(data,{actors,messages:game.messages})}</div>`;
     }
     updateTargetPreview(content){
      const error=content.querySelector('[data-target-error]');
@@ -215,14 +249,20 @@ export function createRecoveryPanel({game,coordinator,capabilities,start,storage
       if(error)error.textContent='';
      }catch{if(error)error.textContent='请核对目标和共用血池：百分比为0–100，绝对 HP 为非负整数，连续失败次数为1–100。'}
     }
-    _replaceHTML(result,content){content.innerHTML=result;this.listener?.abort();this.listener=new AbortController();content.addEventListener('click',event=>{const source=event.target.closest('[data-recovery-message]');if(source){event.preventDefault();void showRecoveryMessage(source.dataset.recoveryMessage,{game}).then(shown=>{if(!shown)globalThis.ui?.notifications?.warn?.('来源消息已删除、不可见或未能载入，请核对保存的来源 ID。')}).catch(onError);return}const action=event.target.closest('[data-recovery]')?.dataset.recovery;if(!action)return;void this.act(action,content).catch(onError)},{signal:this.listener.signal});
+    _replaceHTML(result,content){content.innerHTML=result;this.listener?.abort();this.listener=new AbortController();content.addEventListener('click',event=>{const source=event.target.closest('[data-recovery-message]');if(source){event.preventDefault();void showRecoveryMessage(source.dataset.recoveryMessage,{game}).then(shown=>{if(!shown)globalThis.ui?.notifications?.warn?.('来源消息已删除、不可见或未能载入，请核对保存的来源 ID。')}).catch(reportError);return}const action=event.target.closest('[data-recovery]')?.dataset.recovery;if(!action)return;void this.act(action,content).catch(reportError)},{signal:this.listener.signal});
      const update=event=>{
       if(!event.target.closest('[data-target-mode],[data-target-value],[name=wounded],[name=failureStop],[name=failureLimit]'))return;
       if(Object.hasOwn(event.target.dataset,'targetMode')){const mode=event.target.value,input=content.querySelector(`[data-target-value][data-actor="${event.target.dataset.actor}"]`);input.hidden=mode==='max';input.disabled=mode==='max';input.step=mode==='percent'?'any':'1';if(mode==='percent')input.max='100';else input.removeAttribute('max');if(mode!=='max'&&!String(input.value).trim())input.value=mode==='percent'?'100':String(this.targetActors.find(a=>a.actorUUID===event.target.dataset.actor).hp.max)}
       this.updateTargetPreview(content);
      };for(const type of ['input','change'])content.addEventListener(type,update,{signal:this.listener.signal});
     }
-    async act(action,content){if(action==='refresh')return this.render(true);if(['provision','initialize','selectLedger'].includes(action)){
+    async act(action,content){if(action==='acceptCurrentTime'){
+      const id=getSessionId(),selected=await coordinator.snapshot(id);if(!selected.canAcceptCurrentTime)throw Error('当前状态暂不能接续，请刷新后核对未确认的治疗和时间。');
+      const expectedWorldTime=selected.worldTime;
+      const confirmed=await foundry.applications.api.DialogV2.wait({window:{title:'按当前状态继续'},content:'<p>请确认当前 HP、资源和游戏内时间已核对。旧的附带效果仍未核实；旧骰点、HP 应用和时间推进均不会重放。</p><p>确认后保留旧记录并结束旧会话，再点击“掷骰恢复并推进时间”开始新的恢复。</p>',buttons:[{action:'accept',label:'确认当前状态',callback:()=>true},{action:'cancel',label:'取消',callback:()=>false}],rejectClose:false});
+      if(confirmed!==true)return;
+      await coordinator.acceptCurrentTime(id,{expectedWorldTime,note:'GM 已核对当前 HP、资源和世界时间；旧附带效果未核实，保留旧记录，不重放骰点、HP 应用或时间推进。'});return this.render(true);
+     }if(action==='refresh')return this.render(true);if(['provision','initialize','selectLedger'].includes(action)){
       if(!storage)throw Error('exploration-storage-unavailable');const options=await setupChoices({game,select:action==='selectLedger'});if(!options)return;
       const result=await storage[action==='selectLedger'?'select':action](options);
       if(result.requiresReload)globalThis.ui?.notifications?.info?.('账本已选择，请重载页面后再准备恢复。');else if(action==='provision')await storage.initialize(options);
@@ -254,5 +294,5 @@ export function createRecoveryPanel({game,coordinator,capabilities,start,storage
   }
   panel.actorUUIDs=actorUUIDs??Array.from(game.actors.party?.members??[]).filter(a=>a.type==='character').map(a=>a.uuid);return panel.render(true);
  }
- return {open,openActivityDeclaration,refresh:()=>panel?.render(true)};
+ return {open,openActivityDeclaration,refresh:()=>panel?.rendered?panel.render(false):undefined};
 }

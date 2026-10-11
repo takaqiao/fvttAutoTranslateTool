@@ -61,12 +61,72 @@ test('a saved uncertain clock explains the actual missing world-time source in C
  const data=historyFixture();data.clocks[0].reason='world-time-source-unconfirmed';const html=panelUI.renderRecoveryHistory(data);assert.match(html,/世界时间来源回执尚未确认/);assert.doesNotMatch(html,/world-time-source-unconfirmed/);
 });
 
+const actions=html=>[...html.matchAll(/data-recovery="([^"]+)"/g)].map(match=>match[1]);
+function mainActions(html){const main=html.match(/<div class="recovery-actions recovery-main-actions">([\s\S]*?)<\/div>/);assert.ok(main,'the main actions must be distinct from optional controls');assert.doesNotMatch(main[1],/disabled/);return actions(main[1])}
+test('idle recovery exposes one start action while keeping its saved controls in closed advanced options',async t=>{
+ const f=checkpointPanelFixture(t,{status:'complete'}),html=await f.app._renderHTML(await f.app._prepareContext());
+ assert.deepEqual(mainActions(html),['start']);assert.match(html,/data-recovery="start">掷骰恢复并推进时间/);
+ const advanced=html.match(/<details class="recovery-advanced"><summary>[^<]+<\/summary>([\s\S]*?)<\/details>/);assert.ok(advanced,'advanced options must start collapsed');
+ for(const name of ['wounded','failureStop','failureLimit','activityFirstRound','manualFirstRound','risky','focus','extension','assurance','rank','budget','activityBudget'])assert.match(advanced[1],new RegExp(`name="${name}"`));
+ assert.match(advanced[1],/data-target-mode/);assert.match(advanced[1],/data-target-value/);
+ const more=html.match(/<details class="recovery-more"><summary>更多操作<\/summary>([\s\S]*?)<\/details>/);assert.ok(more);assert.deepEqual(actions(more[1]),['record','refresh']);
+});
+test('unprepared storage shows preparation instead of disabled recovery actions',async t=>{
+ const f=checkpointPanelFixture(t),context={...await f.app._prepareContext(),data:null,ledgerStatus:{state:'unconfigured'}},html=await f.app._renderHTML(context);
+ assert.deepEqual(mainActions(html),[]);assert.ok(actions(html).includes('provision'));assert.doesNotMatch(html,/<button[^>]*disabled/);
+ assert.match(html,/<details class="recovery-more">[\s\S]*data-recovery="selectLedger"/);
+});
+test('running recovery shows only stop and the current checkpoint continuation as primary actions',async t=>{
+ const f=checkpointPanelFixture(t);assert.deepEqual(mainActions(await f.app._renderHTML(await f.app._prepareContext())),['closeManualCheckpoint','stop']);
+ f.data.session.manualCheckpoint.phase='settled';assert.deepEqual(mainActions(await f.app._renderHTML(await f.app._prepareContext())),['stop']);
+ f.data.session.activityCheckpoint={id:'A',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:0,phase:'open',registrations:{}};
+ assert.deepEqual(mainActions(await f.app._renderHTML(await f.app._prepareContext())),['closeActivityCheckpoint','stop']);
+});
+test('paused sessions keep review exits visible and expose resume only after evidence is resolved',async t=>{
+ const f=checkpointPanelFixture(t,{status:'paused'});f.data.session.stopReason='time-effects-unconfirmed';f.data.clocks=[{id:'T',state:'uncertain',from:0,to:600,reason:'time-effects-unconfirmed'}];
+ let html=await f.app._renderHTML(await f.app._prepareContext());assert.deepEqual(mainActions(html),['reconcile','review']);assert.match(html,/<p class="recovery-time"[^>]*>[^<]*时间相关效果尚未完成确认/);assert.doesNotMatch(html,/time-effects-unconfirmed/);
+ f.data.clocks[0].state='confirmed';html=await f.app._renderHTML(await f.app._prepareContext());assert.deepEqual(mainActions(html),['reconcile','resume','review']);
+ f.data.session.manual=true;assert.deepEqual(mainActions(await f.app._renderHTML(await f.app._prepareContext())),['reconcile','review']);
+});
+test('a world-time conflict cannot offer ordinary resume even when all receipts are confirmed',async t=>{
+ const f=checkpointPanelFixture(t,{status:'paused'});f.game.time={worldTime:600};
+ assert.deepEqual(mainActions(await f.app._renderHTML(await f.app._prepareContext())),['reconcile','review']);
+ f.game.time.worldTime=0;assert.deepEqual(mainActions(await f.app._renderHTML(await f.app._prepareContext())),['reconcile','resume','review']);
+});
+test('history and time conflict diagnostics stay readable inside closed full records',()=>{
+ const data=historyFixture();data.clocks[0].reason='external-world-time-change';const html=panelUI.renderRecoveryHistory(data);
+ assert.match(html,/^<details class="recovery-history-details"><summary>完整记录/);assert.match(html,/世界时间已被其他操作改变/);assert.doesNotMatch(html,/external-world-time-change/);
+ assert.match(formatSessionResult({durationSeconds:600,certainty:'observed',status:'external-rest-time-authority'}),/世界时间由外部休息操作管理/);
+});
+test('background refresh updates an open panel but cannot reopen it after close',async t=>{
+ const previous=globalThis.foundry;t.after(()=>globalThis.foundry=previous);let renders=0;
+ globalThis.foundry={applications:{api:{ApplicationV2:class{render(){renders++;this.rendered=true;return this}async close(){this.rendered=false;return this}}}}};
+ const api=panelUI.createRecoveryPanel({game:{user:{isGM:true}}});assert.equal(api.refresh(),undefined);
+ const app=api.open([]);assert.equal(renders,1);api.refresh();assert.equal(renders,2);await app.close();api.refresh();assert.equal(renders,2);assert.equal(app.rendered,false);
+ assert.equal(api.open([]),app);assert.equal(renders,3);assert.equal(app.rendered,true);
+});
+test('a qualified paused session exposes the current-state recovery exit without resuming old attempts',async t=>{
+ const f=checkpointPanelFixture(t,{status:'paused'});f.data.canAcceptCurrentTime=true;f.data.worldTime=660;f.data.clocks=[{id:'T',state:'uncertain',from:0,to:600,reason:'time-effects-unconfirmed'}];
+ let html=await f.app._renderHTML(await f.app._prepareContext());assert.ok(mainActions(html).includes('acceptCurrentTime'));assert.ok(!mainActions(html).includes('resume'));assert.match(html,/data-recovery="acceptCurrentTime">按当前状态继续/);
+ f.data.session.status='closed';html=await f.app._renderHTML(await f.app._prepareContext());assert.deepEqual(mainActions(html),['acceptCurrentTime']);
+ f.data.canAcceptCurrentTime=false;html=await f.app._renderHTML(await f.app._prepareContext());assert.ok(!actions(html).includes('acceptCurrentTime'));
+});
+test('accepting the current state requires confirmation and binds the displayed world time without starting recovery',async t=>{
+ const previous=globalThis.foundry;t.after(()=>globalThis.foundry=previous);let answer=true,dialog;const accepted=[],selected={canAcceptCurrentTime:true,worldTime:660};
+ globalThis.foundry={applications:{api:{ApplicationV2:class{render(){return this}},DialogV2:{wait:async options=>{dialog=options;selected.worldTime=720;return answer}}}}};
+ const coordinator={snapshot:async id=>{assert.equal(id,'S');return selected},acceptCurrentTime:async(...args)=>accepted.push(args)};
+ const api=panelUI.createRecoveryPanel({game:{user:{isGM:true}},coordinator,getSessionId:()=> 'S',start:()=>assert.fail('accepting the current state must not start new recovery')}),app=api.open([]);
+ await app.act('acceptCurrentTime',null);assert.equal(accepted.length,1);assert.equal(accepted[0][0],'S');assert.equal(accepted[0][1].expectedWorldTime,660);assert.match(accepted[0][1].note,/HP.*资源.*世界时间/);assert.match(dialog.content,/未核实/);assert.match(dialog.content,/不.*重放/);
+ for(const cancelled of [false,null,'cancel']){answer=cancelled;await app.act('acceptCurrentTime',null)}assert.equal(accepted.length,1);
+ selected.canAcceptCurrentTime=false;answer=true;await assert.rejects(app.act('acceptCurrentTime',null),/当前状态/);assert.equal(accepted.length,1);
+});
+
 function checkpointPanelFixture(t,{phase='open',status='running'}={}){
  const previous=globalThis.foundry;t.after(()=>{globalThis.foundry=previous});globalThis.foundry={applications:{api:{ApplicationV2:class{render(){return this}}}}};
  const actors=[{actorUUID:'Actor.H',name:'H',hp:{value:20,max:20},focus:{value:1,max:1},pool:{poolUUID:'Actor.H',ready:true},wardCapacity:1}],binding={id:'C',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:0,to:600},calls=[];
  const data={session:{id:'S',status,manual:false,startedAt:0,cursorAt:0,goalsByPool:[{poolUUID:'Actor.H',targetHP:20}],manualCheckpoint:{...binding,phase}},actors,activities:[],clocks:[]};
  const game={user:{isGM:true,getFlag:()=>({}),setFlag:async()=>{}},messages:new Map()},coordinator={snapshot:async()=>data,closeManualCheckpoint:async value=>calls.push(['close',value])};
- const api=panelUI.createRecoveryPanel({game,coordinator,capabilities:{snapshot:async()=>actors},start:async config=>calls.push(['start',config]),getSessionId:()=> 'S'}),app=api.open(['Actor.H']);return {app,data,binding,calls};
+ const api=panelUI.createRecoveryPanel({game,coordinator,capabilities:{snapshot:async()=>actors},start:async config=>calls.push(['start',config]),getSessionId:()=> 'S'}),app=api.open(['Actor.H']);return {app,data,binding,calls,game};
 }
 test('an open manual checkpoint shows its waiting instruction and continue action only while open',async t=>{
  const f=checkpointPanelFixture(t),context=await f.app._prepareContext(),html=await f.app._renderHTML(context);assert.match(html,/name="manualFirstRound"/);assert.match(html,/首轮等待手动治疗/);assert.match(html,/data-recovery="closeManualCheckpoint"/);assert.match(html,/继续本轮/);assert.match(html,/Workbench/);

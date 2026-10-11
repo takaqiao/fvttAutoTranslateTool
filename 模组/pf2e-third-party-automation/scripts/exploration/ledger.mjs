@@ -3,6 +3,7 @@ import {normalizeCheckpointActivity} from './manual-time.mjs';
 import {canonicalJSON} from './revision-codec.mjs';
 import {checkpointDeclaration,scheduleCheckpointActivities} from './policy.mjs';
 import {medicAvailability} from './finite-medicine.mjs';
+import {exactNativeClock,clockBlocksRecovery,currentTimeRecoveryReason} from './current-time-recovery.mjs';
 const transitions={
   planned:['started','blocked','cancelled'],started:['completing','awaiting-evidence','blocked','uncertain','cancelled'],
   completing:['awaiting-evidence','confirmed','blocked','uncertain'],
@@ -187,7 +188,7 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
     const session=driver(state,binding.sessionId,options,caller,true);
     if(!automatic(session)||session.protocol?.rootUUID!==binding.rootUUID||session.protocol?.epoch!==binding.epoch||context.rootUUID!==binding.rootUUID||context.epoch!==binding.epoch||session.cursorAt!==binding.from)throw Error('activity-checkpoint-mismatch');
     if(session.manualCheckpoint&&!['settled','interrupted'].includes(session.manualCheckpoint.phase))throw Error('manual-checkpoint-active');
-    if(Object.values(state.clocks).some(c=>c.state!=='confirmed')||Object.values(state.activities).some(a=>a.sessionId===session.id&&(unresolvedPool(a)||a.executor&&a.executor.state!=='settled'||['completing','uncertain','awaiting-evidence'].includes(a.state))))throw Error('unresolved-evidence-no-replay');
+    if(Object.values(state.clocks).some(c=>clockBlocksRecovery(state,c))||Object.values(state.activities).some(a=>a.sessionId===session.id&&(unresolvedPool(a)||a.executor&&a.executor.state!=='settled'||['completing','uncertain','awaiting-evidence'].includes(a.state))))throw Error('unresolved-evidence-no-replay');
     return session;
   }
   function enrollCheckpointActivity(inputBinding,input,{authenticatedCaller,leaseNonce,guard}={}){
@@ -239,14 +240,11 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
     if(!sameCheckpoint(c,options?.checkpointBinding)||!sameCheckpoint(c,activity.checkpointBinding)||c.rootUUID!==session.protocol?.rootUUID||c.epoch!==session.protocol?.epoch||c.rootUUID!==context.rootUUID||c.epoch!==context.epoch||open&&c.phase!=='open'||!['open','sealed','advancing'].includes(c.phase))throw Error('manual-checkpoint-mismatch');
     return c;
   }
-  const exactClock=c=>c.nativeResolved===true&&c.effectsSettled===true&&c.evidence.some(r=>{
-    const e=r.options?.pf2eThirdPartyAutomation?.exploration;
-    return e?.checkpointId===c.id&&e.sessionId===c.sessionId&&e.gmId===c.gmId&&e.expectedFrom===c.from&&e.expectedTo===c.to&&r.userId===c.gmId&&r.worldTime===c.to&&r.dt===c.to-c.from;
-  });
+  const exactClock=c=>c.effectsSettled===true&&exactNativeClock(c);
   function recoveryAvailable(state,session,exceptSession){
     if(Object.values(state.sessions).some(s=>s.id!==exceptSession&&s.status==='running'&&!s.manual))throw Error('recovery-session-already-running');
     const actors=new Set(session.actorUUIDs??[]),pools=new Set((session.goalsByPool??[]).map(g=>g.poolUUID));
-    if(Object.values(state.clocks).some(c=>c.state!=='confirmed')||Object.values(state.activities).some(a=>unresolvedActivity(a)&&(actors.has(a.actorUUID)||a.patientUUIDs.some(u=>actors.has(u))||a.hpPoolUUIDs.some(u=>pools.has(u)))))throw Error('unresolved-evidence-no-replay');
+    if(Object.values(state.clocks).some(c=>clockBlocksRecovery(state,c))||Object.values(state.activities).some(a=>unresolvedActivity(a)&&(actors.has(a.actorUUID)||a.patientUUIDs.some(u=>actors.has(u))||a.hpPoolUUIDs.some(u=>pools.has(u)))))throw Error('unresolved-evidence-no-replay');
   }
   function transition(collection,key,{expected,patch:inputPatch,...options},preparePatch) {
     if(options.evidenceGuard!==undefined&&typeof options.evidenceGuard!=='function')throw Error('synchronous-evidence-guard-required');
@@ -432,6 +430,7 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
       return {quarantinedSessionIds};
     }),
     createSession:async (input,{guard}={})=>{
+      if('recoveryReview' in input)throw Error('recovery-review-required');
       if('finiteMedicineReviewChecks' in input)throw Error('finite-medicine-review-required');
       if('activityCheckpointHistory' in input)throw Error('activity-checkpoint-open-required');if('activityCheckpoint' in input)throw Error('activity-checkpoint-open-required');if('manualCheckpoint' in input)throw Error('manual-checkpoint-open-required');if('manualPoolIssuer' in input)throw Error('manual-pool-issuer-required');
       const captured=validateSession(input),leaseNonce=atomic?crypto.randomUUID():null;let reviewedAt;
@@ -480,13 +479,13 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
       const binding=activityCheckpointBinding(input);finite(at,'checkpoint-time');checkpointGuard(guard);
       return mutate((state,context,caller)=>{
         checkpointGuard(guard);const session=declarationWindow(state,binding,{leaseNonce},caller,context);
-        if(session.cursorAt!==at||Object.values(state.clocks).some(c=>c.state!=='confirmed'))throw Error('unresolved-clock');
+        if(session.cursorAt!==at||Object.values(state.clocks).some(c=>clockBlocksRecovery(state,c)))throw Error('unresolved-clock');
         return advanceDeclarations(state,session);
       },()=>checkpointGuard(guard));
     },
     getSession:key=>get('sessions',key),getActivity:key=>get('activities',key),getClockCommit:key=>get('clocks',key),
     updateSession:(key,patch,options={})=>mutate((s,context,caller)=>{
-      const v=s.sessions[key];if(!v)throw Error('missing-session');if(['id','startedAt','activityIds','goalsByPool','recoveryGoals','finiteMedicine','finiteMedicineReviewChecks','driver','protocol','manual','manualPoolIssuer','nativeOwnerByActor','activityCheckpoint','activityCheckpointHistory'].some(k=>k in patch))throw Error('immutable-session');
+      const v=s.sessions[key];if(!v)throw Error('missing-session');if(['id','startedAt','activityIds','goalsByPool','recoveryGoals','recoveryReview','finiteMedicine','finiteMedicineReviewChecks','driver','protocol','manual','manualPoolIssuer','nativeOwnerByActor','activityCheckpoint','activityCheckpointHistory'].some(k=>k in patch))throw Error('immutable-session');
       if(options.expectedStatus!==undefined&&v.status!==options.expectedStatus)throw Error('session-state-conflict');
       if('manualCheckpoint' in patch){
         if(v.activityCheckpoint&&!['settled','interrupted'].includes(v.activityCheckpoint.phase))throw Error('activity-checkpoint-active');
@@ -555,7 +554,7 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
       session=s.sessions[c.sessionId];guard?.();
       if(atomic&&Object.values(s.activities).some(a=>a.sessionId===c.sessionId&&a.providerId==='battle-medicine'&&!a.source?.manual&&['planned','started','completing'].includes(a.state)&&finiteClockCovers(c,a)&&!['reserved','claimed','used'].includes(a.proof.battleMedicineAttempt?.state)))throw Error('battle-medicine-reservation-required');
       if(atomic){noOpenActivityCheckpoint(s.sessions[c.sessionId]);const boundary=Object.values(s.activities).filter(a=>a.sessionId===c.sessionId&&checkpointDeclaration(a)&&['planned','started'].includes(a.state)).flatMap(a=>[a.startedAt,a.endsAt]).filter(at=>at>c.from);if(boundary.some(at=>c.to>at))throw Error('activity-checkpoint-time-boundary')}
-      if(atomic){const session=driver(s,c.sessionId,options,caller,true);if(c.state!=='started'||c.evidence.length||['nativeIssued','nativeResolved','effectsSettled','claim','source'].some(k=>k in input))throw Error('initial-clock-claim-required');if(c.gmId!==caller.userId)throw Error('clock-driver-mismatch');if(c.from!==session.cursorAt)throw Error('world-time-conflict');if(session.manualCheckpoint&&session.manualCheckpoint.phase!=='settled'&&(session.manualCheckpoint.phase!=='advancing'||c.id!==session.manualCheckpoint.id||c.from!==session.manualCheckpoint.from||c.to!==session.manualCheckpoint.to))throw Error('manual-checkpoint-clock-required');if(Object.values(s.clocks).some(row=>row.state!=='confirmed'))throw Error('unresolved-clock');c.claim={...protocol(context),revision:context.revision,...session.driver}}
+      if(atomic){const session=driver(s,c.sessionId,options,caller,true);if(c.state!=='started'||c.evidence.length||['nativeIssued','nativeResolved','effectsSettled','claim','source'].some(k=>k in input))throw Error('initial-clock-claim-required');if(c.gmId!==caller.userId)throw Error('clock-driver-mismatch');if(c.from!==session.cursorAt)throw Error('world-time-conflict');if(session.manualCheckpoint&&session.manualCheckpoint.phase!=='settled'&&(session.manualCheckpoint.phase!=='advancing'||c.id!==session.manualCheckpoint.id||c.from!==session.manualCheckpoint.from||c.to!==session.manualCheckpoint.to))throw Error('manual-checkpoint-clock-required');if(Object.values(s.clocks).some(row=>clockBlocksRecovery(s,row)))throw Error('unresolved-clock');c.claim={...protocol(context),revision:context.revision,...session.driver}}
       s.clocks[c.id]=c;return c;
     },guard)},
     transitionClockCommit:(key,options)=>transition('clocks',key,options),
@@ -601,6 +600,21 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
       const protectedProof=Object.fromEntries(finiteProofFields.filter(k=>Object.hasOwn(a.proof,k)).map(k=>[k,clone(a.proof[k])]));
       a.executionResult=clone(result);Object.assign(a,clone(result));if(battleMedicine)a.proof={...a.proof,...protectedProof};a.executor={...executor,state:result.status==='confirmed'?'settled':'uncertain'};return a;
     },()=>{if(consumes){finiteGuard(witnessGuard,'battle-medicine-witness-changed');if(resourceNow()<activity.endsAt)throw Error('battle-medicine-witness-time-conflict')}})},
+    acceptCurrentTime:async(key,{expectedWorldTime,note,guard}={})=>{
+      if(!atomic)throw Error('atomic-current-time-recovery-required');finite(expectedWorldTime,'world-time');
+      if(typeof note!=='string'||!note.trim())throw Error('review-note-required');
+      const validate=()=>{
+        if(typeof guard!=='function')throw Error('synchronous-recovery-guard-required');
+        const valid=guard();if(valid?.then||valid!==true)throw Error('recovery-state-changed');
+        if(typeof now!=='function'||now()!==expectedWorldTime)throw Error('external-world-time-change');
+      };
+      validate();return mutate((state,_context,caller)=>{
+        validate();const reason=currentTimeRecoveryReason(state,key);if(reason)throw Error(reason);
+        const session=state.sessions[key];session.status='closed';session.stopReason='accepted-current-state';
+        session.recoveryReview={disposition:'accepted-current-state',userId:caller.userId,at:expectedWorldTime,clockIds:Object.values(state.clocks).filter(clock=>clock.sessionId===key&&clock.state!=='confirmed').map(clock=>clock.id),note:note.trim().slice(0,2000)};
+        return session;
+      },validate);
+    },
     resumeSession:(key,{cursorAt})=>{const leaseNonce=crypto.randomUUID();return mutate((s,context,caller)=>{
       if(!atomic)throw Error('atomic-resume-required');const session=s.sessions[key];if(!session||session.status!=='paused'||session.manual)throw Error('paused-automatic-session-required');
       if(session.finiteMedicine&&!sameProtocol(session.protocol,protocol(context)))throw Error('medic-baseline-scope-mismatch');
