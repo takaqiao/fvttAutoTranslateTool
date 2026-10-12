@@ -2,11 +2,15 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {socketFixture as makeSocketFixture,currentSocket} from './toolbelt-current-fixture.mjs';
+import {TOOL_SHAPE} from '../scripts/native-source-shapes.mjs';
 
 const latestSocket=JSON.parse(readFileSync(new URL('./fixtures/toolbelt-socket-3.58.4.json',import.meta.url)));
 const latestSource=readFileSync(process.env.TOOLBELT_CURRENT_SOURCE);
-for(const [label,socket] of [['3.57.1',currentSocket],['3.58.4',latestSocket]]){
-const socketFixture=options=>makeSocketFixture({...options,socket,toolbeltSource:label==='3.58.4'?latestSource:undefined});
+const builds=[['3.57.1',currentSocket],['3.58.4',latestSocket,latestSource]];
+// The reference shape holds the 3.59.0 socket regions; the bundle itself is an optional local input.
+if(process.env.TOOLBELT_3590_SOURCE)builds.push(['3.59.0',{regions:TOOL_SHAPE},readFileSync(process.env.TOOLBELT_3590_SOURCE)]);
+for(const [label,socket,toolbeltSource] of builds){
+const socketFixture=options=>makeSocketFixture({...options,socket,toolbeltSource});
 
 const binding={permitNonce:'permit',applicationNonce:'application',ownerUserId:'O',patientUUID:'Actor.P',poolUUID:'Actor.M'};
 function subscribe(f,{authorized=true}={}){

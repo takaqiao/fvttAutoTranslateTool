@@ -40,8 +40,6 @@ export const SHARED_MANUAL_SHAPE=Object.freeze({
  id:'pf2e-shared-manual:1',toolbeltId:'toolbelt-shared-manual:1',
  batchOriginal:'d139b4ab1e3c3ca72d5ca9a680f8adbc236c70959ca3c69ca6d6aa33118a696d',batchPatched:'3fb62d29f88fdfb530bd499f2f7e9ea1b29857081f5a4a3a417f53cbab582570',
  flatOriginal:'e0ff925c70305599bb26b5f3e4cf1c745510e84d31788b5f89abfc55b8f8d8dc',stacking:'c47f085d0b258d7ec4dadb37dfa7d68b17ff8e51d31af7173dc4605a99a37cba',
- toolReceive:'10ff0e183740c1f5f35d604c6cdb457b3e94eb1b0fd3343ada7acf7f1403466a',toolForward:'c593ae1650f9c6b726eec7735539db6ae8587b77359c72fd71e13fa26504f4d1',
- toolSocket:'326a59c68139226442b5c9cc441a8e9e2a269efa1ff95b5dc5c57ef2b8411b7a',toolValidity:'cd6440b56acc125dc596a867fde21109dfc1dd5b18f0572d7a2a42c4b2654d90',toolBinding:'4e7df87b048f39bd9f4ffa641f92c913c31f1ad36b93699779e7a8e22e7c3e04',
  nativeObserver:'aee30a4c318cc1645ef8bfcb00f53aec4438ed285048225ac0ca687af4d85a42',toolObserver:'43cb15acccea69cf8eea1e2ee50b5e3838358ea0aac70ee18eecf697f6659f98'
 });
 // PF2e 8.6.0 renames DamageRoll, Modifier and the API initializer; 8.6.1
@@ -54,11 +52,5 @@ export const NATIVE_SHARED_SHAPES=Object.freeze([
  Object.freeze({batchOriginal:'a700f08cb6de82fbc65fce4aa8202d2e315c5dbb648f8532fd1fe609c0927320',batchPatched:'d46e1ab50657083bc619b9e3cba3b7382e99413b2acf69680e95ff19ac2ac897',flatOriginal:'f876b500e255635eb5bea585838a41e33fe8cabb38d62487402cab76217251dd',stacking:'cf66f5bc249822044d6e5a483b25d3a8b592f7bb68a94e826ac798c58755f23d',init:'Fm.onInit();',troopIterator:'_t',receiverRule:'q',receiverPredicate:'Wn',nativeObserver:'35dd811d725745b1bab007d47ac1c67943e2da6c73a7e1266d739b0e8f57ee71'})
 ]);
 const keys=(value,fields)=>Object.keys(value).sort().join(',')===fields.split(',').sort().join(',');
-// The same authenticated sender contract with audited minifier bindings.
-export const TOOL_SOCKET_CONTRACTS=Object.freeze([
- Object.freeze({socket:SHARED_MANUAL_SHAPE.toolSocket,transport:'b5d5ec6227f0c4c03c6147276e9b8681ba238855c7b0e64f3077cd7ccb5f7622',conversion:'1225b9adf3c1269012c1579001a08eff161785cca0c7dd263b95857a6f7fe72d'}),
- Object.freeze({socket:'fe97a3e4a20c6ce1b297e7f3b62d225632833e09ccd4e43f82c6160864e25b44',transport:'ad19fcef9658d821cbe27d72d38b4a15f8ab0f66aab52fa556881fddc6efc5eb',conversion:'186abafaa3017dd447f7d98a9ca4346c542efea9387f37cae5e284221e672679'}),
- Object.freeze({socket:'a763ce82944d90f2895455895000e898e85234fe8a1d03aaf3b55368676c5c1f',transport:'f3fa49300b4cb4946a522d0355bbc24e9bf7a0198d2c111b069357d5548558ce',conversion:'f7aac9d8e32c74636a756656efd1f3670162d188a2c81add1e975f30cadfe2c2',binding:'12ccbbd4a64b2e6f617154c6b79f4cd6ef800cb1a87750d14de01f4e62e0de5a'})
-]);
 export function isAutomaticBatchDescriptor(value){return !!value&&keys(value,'version,protocol,providerId,providerVersion,baseSourceSHA256,sourceContract,model,staticReceiverModelVersion,receiverPredicateModelVersion')&&value.version===2&&value.protocol==='pf2e-third-party-automation:manual-pool-batch:1'&&value.providerId==='pf2e'&&typeof value.providerVersion==='string'&&/^[a-f0-9]{64}$/.test(value.baseSourceSHA256)&&value.sourceContract===SHARED_MANUAL_SHAPE.id&&value.model==='numeric-static-reception.v1'&&value.staticReceiverModelVersion===1&&value.receiverPredicateModelVersion===1}
 export function isAutomaticToolDescriptor(value){return !!value&&keys(value,'version,hpBaselineGuardVersion,providerId,providerVersion,sourceSHA256,sourceContract')&&value.version===2&&value.hpBaselineGuardVersion===1&&value.providerId==='pf2e-toolbelt'&&typeof value.providerVersion==='string'&&/^[a-f0-9]{64}$/.test(value.sourceSHA256)&&value.sourceContract===SHARED_MANUAL_SHAPE.toolbeltId}

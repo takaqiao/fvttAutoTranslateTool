@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
-import {NATIVE_IWR_PROFILES,NATIVE_DAMAGE_SHAPES,NATIVE_SHARED_SHAPES,SHARED_MANUAL_SHAPE as shape,TOOL_SOCKET_CONTRACTS,NATIVE_IWR_BRIDGE_PROTOCOL,isAutomaticBatchDescriptor,isAutomaticToolDescriptor} from '../../scripts/native-iwr-profiles.mjs';
-import {sourceText,nativeMethod,batchRegion,flatRegion,stackingRegion,toolRegions,bridgeStatement,automaticDescriptor,observerRegion,TOOL_RECEIVE,TOOL_RECEIVE_PATCHED,TOOL_FORWARD,TOOL_FORWARD_PATCHED} from '../../scripts/native-source-shapes.mjs';
+import {NATIVE_IWR_PROFILES,NATIVE_DAMAGE_SHAPES,NATIVE_SHARED_SHAPES,SHARED_MANUAL_SHAPE as shape,NATIVE_IWR_BRIDGE_PROTOCOL,isAutomaticBatchDescriptor,isAutomaticToolDescriptor} from '../../scripts/native-iwr-profiles.mjs';
+import {sourceText,nativeMethod,batchRegion,flatRegion,stackingRegion,toolSeams,bridgeStatement,automaticDescriptor,observerRegion} from '../../scripts/native-source-shapes.mjs';
 
 const hash=value=>createHash('sha256').update(value).digest('hex');
 const components={
@@ -82,7 +82,8 @@ function removeToolPair(tb){
  const expected=read('toolbelt-manual-pool/observer.js').split('/* end toolbelt manual pool */')[0];
  if(normalized(observed.region)!==normalized(expected))throw Error('toolbelt-source-seam-observer');
  if(!observed.statement.includes('"sourceContract"')&&observed.statement!==expected.match(/ const descriptor=Object.freeze\([^\n]+\);/)?.[0])throw Error('toolbelt-source-seam-descriptor');
- tb=once(tb,observed.region+'/* end toolbelt manual pool */\n','','toolbelt-source-seam');tb=once(tb,TOOL_RECEIVE_PATCHED,TOOL_RECEIVE,'toolbelt-source-seam');return once(tb,TOOL_FORWARD_PATCHED,TOOL_FORWARD,'toolbelt-source-seam');
+ const seams=toolSeams(once(tb,observed.region+'/* end toolbelt manual pool */\n','','toolbelt-source-seam'));
+ if(!seams.installed)throw Error('toolbelt-source-seam-partial');return seams.original;
 }
 export function buildSharedManualPair({pf2eSource,toolbeltSource,pf2eVersion,toolbeltVersion}={}){
  let pf=sourceText(pf2eSource),tb=sourceText(toolbeltSource);
@@ -93,10 +94,7 @@ export function buildSharedManualPair({pf2eSource,toolbeltSource,pf2eVersion,too
  if(t){const header=observerRegion(tb,'toolbelt').statement;if(header.includes('"sourceContract"'))b=automaticDescriptor(header);tb=removeToolPair(tb)}
  const batchSHA=hash(batchRegion(pf)),contract=NATIVE_SHARED_SHAPES.find(row=>row.batchOriginal===batchSHA);
  if(!contract||hash(flatRegion(pf))!==contract.flatOriginal||hash(stackingRegion(pf))!==contract.stacking)throw Error('native-shared-seam-shape');
- const regions=toolRegions(tb),socketContract=TOOL_SOCKET_CONTRACTS.find(contract=>contract.socket===hash(regions.socket));
- if(!socketContract)throw Error('toolbelt-source-seam-socket');
- for(const [key,value]of Object.entries(regions))if(hash(value)!==(socketContract[key]??shape['tool'+key[0].toUpperCase()+key.slice(1)]))throw Error('toolbelt-source-seam-'+key);
- if(!tb.includes('r("_preUpdate",this.#h)'))throw Error('toolbelt-source-seam-wrapper');
+ const seams=toolSeams(tb);
  const native=buildNativeBridge({source:Buffer.from(pf),version:pf2eVersion});if(native.status!=='unchanged')throw Error('native-shared-seam-bridge-required');
  const installedBridge=buildNativeBridge({source:pf2eSource,version:pf2eVersion});
  const legacy=hash(pf2eSource)===legacyPF&&hash(toolbeltSource)===legacyTB&&pf2eVersion==='8.5.1'&&toolbeltVersion==='3.56.5';
@@ -107,7 +105,7 @@ export function buildSharedManualPair({pf2eSource,toolbeltSource,pf2eVersion,too
  const original=batchRegion(pf),patched=instrumentBatch(original,contract);if(hash(patched)!==contract.batchPatched)throw Error('native-shared-seam-output');
  const observerSource=batchObserver(stackingRegion(pf),contract);if(hash(normalized(observerSource))!==contract.nativeObserver)throw Error('native-shared-seam-observer');
  pf=once(pf,original,setDescriptor(observerSource,pd)+patched);pf=once(pf,flatPush,flatPatched);pf=once(pf,contract.init,contract.init+'__nativeManualPoolBatch.install();');
- tb=once(tb,TOOL_RECEIVE,TOOL_RECEIVE_PATCHED,'toolbelt-source-seam');tb=once(tb,TOOL_FORWARD,TOOL_FORWARD_PATCHED,'toolbelt-source-seam');
+ tb=seams.patched;
  const observer=setDescriptor(read('toolbelt-manual-pool/observer.js'),td).replace("if(module?.version!=='3.56.5')return;","if(!module)return;");
  const complete=buildNativeBridge({source:Buffer.from(pf),version:pf2eVersion});
  const toolOutput=tb.startsWith('\uFEFF')?'\uFEFF'+observer+tb.slice(1):observer+tb;

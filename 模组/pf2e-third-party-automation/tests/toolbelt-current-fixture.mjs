@@ -5,6 +5,9 @@ import {buildNativeBridge,buildSharedManualPair} from '../tools/automatic-source
 export const currentSocket=JSON.parse(fs.readFileSync(new URL('./fixtures/toolbelt-socket-3.57.1.json',import.meta.url)));
 export function currentToolbelt(input=fs.readFileSync(process.env.TOOLBELT_MANUAL_SOURCE)){
  let text=input.toString();
+ // 3.57.1 names socketOn zy, which this older bundle already gives to another function.
+ const taken='async function zy(t,e,n)';if(text.split(taken).length!==2)throw Error('current-socket-fixture-boundary');
+ text=text.replace(taken,'async function zy$(t,e,n)');
  for(const [start,end,key]of [['function _e(t,e)','a(_e,"createEmitable")','socket'],['function Ly(t)','var yA;','transport'],['async function vA(t)','var yk=','conversion']]){
   const a=text.indexOf(start),b=text.indexOf(end,a);if(a<0||b<a)throw Error('current-socket-fixture-boundary');
   text=text.slice(0,a)+currentSocket.regions[key]+text.slice(b);
@@ -32,6 +35,8 @@ export function socketFixture({remote=true,patched=true,socket=currentSocket,too
   }};
   const context=vm.createContext({game,Actor,fromUuid:async uuid=>uuid===master.uuid?master:undefined,Hooks:{once:(_event,fn)=>hooks.push(fn)},
    a:fn=>fn,M:{id:'pf2e-toolbelt'},Qo(){},Ne:()=>true,qo:()=>false,zx:()=>false,Wo:()=>false,jx:()=>false,ui:{notifications:{error(){}}},ie:{shared:x=>x},re:{shared:x=>x},
+   // The same bundle helpers under their 3.59.0 names.
+   A:{id:'pf2e-toolbelt'},ea(){},Ko:()=>false,Jx:()=>false,ne:{shared:x=>x},
    foundry:{abstract:{Document:Actor},utils:{getProperty:(obj,key)=>obj[key],deleteProperty:(obj,key)=>delete obj[key]}},
    u:{entries:Object.entries,isArray:Array.isArray,mapValues:(obj,fn)=>Object.fromEntries(Object.entries(obj).map(([key,value])=>[key,fn(value,key)])),
     pipe:(value,...fns)=>fns.reduce((v,fn)=>fn(v),value),map:fn=>items=>items.map(fn),filter:fn=>items=>items.filter(fn),isDefined:x=>x!==undefined,fromEntries:Object.fromEntries,isPlainObject:obj=>!!obj&&typeof obj==='object'&&!Array.isArray(obj)}});

@@ -1,5 +1,5 @@
-import {SHARED_MANUAL_SHAPE as shape,NATIVE_SHARED_SHAPES,TOOL_SOCKET_CONTRACTS,NATIVE_DAMAGE_SHAPES,isAutomaticBatchDescriptor,isAutomaticToolDescriptor} from '../native-iwr-profiles.mjs';
-import {sourceText,observerRegion,automaticDescriptor,batchRegion,flatRegion,stackingRegion,toolRegions,nativeMethod,TOOL_RECEIVE_PATCHED,TOOL_RECEIVE,TOOL_FORWARD_PATCHED,TOOL_FORWARD} from '../native-source-shapes.mjs';
+import {SHARED_MANUAL_SHAPE as shape,NATIVE_SHARED_SHAPES,NATIVE_DAMAGE_SHAPES,isAutomaticBatchDescriptor,isAutomaticToolDescriptor} from '../native-iwr-profiles.mjs';
+import {sourceText,observerRegion,automaticDescriptor,batchRegion,flatRegion,stackingRegion,toolSeams,nativeMethod} from '../native-source-shapes.mjs';
 
 const batches=new WeakMap(),providers=new WeakMap();
 const LEGACY_TOOL='2946fa27eaf0963098f9f48ee48f777c5cf65166b56b043de9404f09813c240f';
@@ -36,15 +36,11 @@ export async function verifyManualPoolProviders({game,pf2eSource,toolbeltSource,
   const batchSHA=await digest(batchRegion(pf)),nativeShape=NATIVE_SHARED_SHAPES.find(row=>row.batchPatched===batchSHA);
   if(!nativeShape)return unavailable('manual-pool-native-batch-seam-mismatch');
   if(await digest(po.normalized)!==nativeShape.nativeObserver||await digest(to.normalized)!==shape.toolObserver)return unavailable('manual-pool-observer-seam-mismatch');
-  if(pf.split(registration).length!==2||pf.split(nativeShape.init+'__nativeManualPoolBatch.install();').length!==2||tb.split(TOOL_RECEIVE_PATCHED).length!==2||tb.split(TOOL_FORWARD_PATCHED).length!==2)return unavailable('manual-pool-source-seam-partial');
+  let tool;try{tool=toolSeams(tb.replace(to.region+'/* end toolbelt manual pool */\n',''))}catch{return unavailable('manual-pool-tool-seam-mismatch')}
+  if(pf.split(registration).length!==2||pf.split(nativeShape.init+'__nativeManualPoolBatch.install();').length!==2||!tool.installed)return unavailable('manual-pool-source-seam-partial');
   const native=pf.replace(po.region,''),flat=flatRegion(native).replace(registration,'');
   if(await digest(flat)!==nativeShape.flatOriginal||await digest(stackingRegion(native))!==nativeShape.stacking)return unavailable('manual-pool-native-receiver-seam-mismatch');
   const methodSHA=await digest(nativeMethod(native));if(!NATIVE_DAMAGE_SHAPES.some(p=>p.applyDamageSHA256===methodSHA))return unavailable('manual-pool-native-bridge-seam-mismatch');
-  const tool=tb.replace(to.region+'/* end toolbelt manual pool */\n','').replace(TOOL_RECEIVE_PATCHED,TOOL_RECEIVE).replace(TOOL_FORWARD_PATCHED,TOOL_FORWARD);
-  const regions=toolRegions(tool),socketSHA=await digest(regions.socket),socketContract=TOOL_SOCKET_CONTRACTS.find(contract=>contract.socket===socketSHA);
-  if(!socketContract)return unavailable('manual-pool-tool-seam-mismatch');
-  for(const [key,value]of Object.entries(regions))if(await digest(value)!==(socketContract[key]??shape['tool'+key[0].toUpperCase()+key.slice(1)]))return unavailable('manual-pool-tool-seam-mismatch');
-  if(!tool.includes('r("_preUpdate",this.#h)')||!current(snapshot))return unavailable('manual-pool-source-changed');
   const pf2eSHA256=await digest(pf2eSource),toolbeltSHA256=await digest(toolbeltSource);
   if(a.version===2)batches.set(batchDescriptor,snapshot);if(b.version===2)providers.set(provider,snapshot);
   return Object.freeze({ready:true,reason:'verified-source-seams',pf2eSHA256,toolbeltSHA256});
