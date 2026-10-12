@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {compileGlimpseResistance,withGlimpseResistance,repentParams,glimpseMarker} from '../scripts/glimpse-native.mjs';
+import {compileGlimpseResistance,withGlimpseResistance,repentParams,glimpseMarker,glimpseLevelSupported} from '../scripts/glimpse-native.mjs';
 const template=()=>({type:'effect',name:'Native',system:{rules:[{key:'Resistance',type:'all-damage',value:'@item.origin.level+2'}],context:null}});
 test('native resistance keeps all-damage semantics and is restricted to its actual call nonce',async()=>{
  const native={type:'all-damage',value:7,exceptions:[],doubleVs:[],test:o=>!o.has('bypass'),getDoubledValue:()=>7};let compiled;
@@ -19,3 +19,10 @@ test('unknown template / failed original scaling stops before native and preserv
 });
 test('Repent uses exactly native final zero semantics with source token/item retained',()=>{const token={},item={},damage={instances:[{persistent:true}]},p=repentParams({damage,token,item,shieldBlockRequest:true,rollOptions:new Set(['original'])},'once');assert.equal(p.damage,0);assert.equal(p.final,true);assert.equal(p.shieldBlockRequest,false);assert.equal(p.token,token);assert.equal(p.item,item);assert.deepEqual([...p.rollOptions],['original',glimpseMarker('once')]);assert.equal(damage.instances.length,1)});
 test('an expired compendium start cannot disable the private invocation-scoped clone',()=>{const original=template();original.system.start={value:0,initiative:null};original.system.duration={unit:'rounds',value:1,expiry:'turn-start',sustained:false};let compiled;const native={type:'all-damage',value:7,exceptions:[],doubleVs:[],test:()=>true,getDoubledValue:()=>7},actor={attributes:{resistances:[]},getContextualClone(_options,[effect]){compiled=effect;const expired=effect.system.duration.unit!=='unlimited'&&effect.system.start.value+6<186;return {attributes:{resistances:expired?[]:[native]}}}};const result=compileGlimpseResistance({actor,template:original,champion:{uuid:'Actor.champ',level:5},ability:{uuid:'Actor.champ.Item.g'},nonce:'one'});assert.equal(result.value,7);assert.deepEqual(compiled.system.rules,original.system.rules);assert.equal(original.system.duration.unit,'rounds');assert.equal(actor.attributes.resistances.length,0)});
+test('levels below the relentless reaction compile the published resistance; later levels stop before native',()=>{
+ const actor=level=>({attributes:{resistances:[]},getContextualClone:()=>({attributes:{resistances:[{type:'all-damage',value:level+2,exceptions:[],doubleVs:[],test:()=>true,getDoubledValue:()=>level+2}]}})});
+ const compile=(level,sheet=level)=>compileGlimpseResistance({actor:actor(sheet),template:template(),champion:{uuid:'Actor.champ',level},ability:{uuid:'Actor.champ.Item.g'},nonce:'n'});
+ for(const level of [5,6,8])assert.equal(compile(level).value,level+2);
+ for(const level of [9,11,undefined,5.5])assert.throws(()=>compile(level,9),/等级/);
+ assert.deepEqual([0,1,5,8,9].map(glimpseLevelSupported),[false,true,true,true,false]);
+});

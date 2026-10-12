@@ -1,10 +1,13 @@
 import {MODULE_ID} from './rules.mjs';
 export const glimpseMarker=nonce=>`${MODULE_ID}:glimpse:${nonce}`;
+// Relentless Reaction (level 9) and Exalted Reaction (level 11) change this
+// reaction and are not supported; below them only the resistance scales with level.
+export const glimpseLevelSupported=level=>Number.isInteger(level)&&level>=1&&level<9;
 export function validGlimpseTemplate(template){const r=template?.system?.rules;return template?.type==='effect'&&r?.length===1&&Object.keys(r[0]).sort().join(',')==='key,type,value'&&r[0].key==='Resistance'&&r[0].type==='all-damage'&&r[0].value==='@item.origin.level+2'}
 /** Prepare the published rule through PF2e; the rule-element predicate itself
  * is not retained by the resulting Resistance, so guard the native instance. */
 export function compileGlimpseResistance({actor,template,champion,ability,nonce,options=[]}){
- if(!validGlimpseTemplate(template)||champion?.level!==5||typeof actor.getContextualClone!=='function')throw Error('救赎瞥视原生抗力模板或等级无法验证。');
+ if(!validGlimpseTemplate(template)||!glimpseLevelSupported(champion?.level)||typeof actor.getContextualClone!=='function')throw Error('救赎瞥视原生抗力模板或等级无法验证。');
  const effect=structuredClone(template);
  // Contextual clones embed their supplied source data immediately: unlike
  // createEmbeddedDocuments, this path does not assign new document IDs.

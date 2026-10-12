@@ -5,7 +5,7 @@ import {withReactionReservation,genericReactionAvailable} from './reaction-budge
 import {createShieldReactionResources} from './shield-reaction-resources.mjs';
 import {requireReactionPermitted} from './reaction-restriction.mjs';
 import {GLIMPSE_SOURCES as S,glimpseSourceId,glimpseEncounter,glimpseCandidates,glimpseClaims,findGlimpseClaim,resolveGlimpseSource,validateGlimpseSource} from './glimpse-source.mjs';
-import {compileGlimpseResistance,withGlimpseResistance,repentParams,glimpseMarker} from './glimpse-native.mjs';
+import {compileGlimpseResistance,withGlimpseResistance,repentParams,glimpseMarker,glimpseLevelSupported} from './glimpse-native.mjs';
 import {glimpseWorld} from './glimpse-compat.mjs';
 import {glimpseExpiryFor} from './glimpse-expiry.mjs';
 const values=c=>Array.from(c?.values?.()??c??[]),author=m=>m?.author?.id??m?.user?.id??m?.user,random=()=>globalThis.foundry?.utils?.randomID?.(24)??crypto.randomUUID(),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b),brand=Symbol('native-glimpse-scope');
@@ -15,7 +15,7 @@ const keyOf=s=>`${s.damageMessageId}:${s.rollIndex}:${s.tokenUuid}`;
 export function createGlimpseProvider({game,reactionRestriction,fromUuid=globalThis.fromUuid,getRollContext,compat,choose,publishUse,reactionResources=createShieldReactionResources({game,reactionRestriction}),show=showNativeChoice,onError=console.error,onUnsupported=()=>globalThis.ui?.notifications?.warn?.('本次伤害按原生流程结算；救赎瞥视未自动触发，也未消耗反应。如适用，请手动处理。')}={}){
  const live=new Map(),plans=new WeakSet(),queue=new SerialActions(),pendingUses=new Map();let socket,installation;
  const ready=()=>glimpseWorld(game)&&compat?.ready()&&!game.modules?.get('pf2e-auto-action-tracker')?.active&&game.pf2e?.settings?.iwr!==false;
- const handlesActor=actor=>ready()&&actor?.type==='character'&&actor.level===5&&[S.glimpse,S.aura].every(source=>values(actor.items).some(i=>glimpseSourceId(i)===source))&&!values(actor.items).some(i=>glimpseSourceId(i)===S.weight);
+ const handlesActor=actor=>ready()&&actor?.type==='character'&&glimpseLevelSupported(actor.level)&&[S.glimpse,S.aura].every(source=>values(actor.items).some(i=>glimpseSourceId(i)===source))&&!values(actor.items).some(i=>glimpseSourceId(i)===S.weight);
  const owner=(actor,user)=>!!user?.active&&actor?.testUserPermission?.(user,'OWNER')===true;
  const gm=()=>{if(!isActiveGM(game)||!ready())throw Error('救赎瞥视主GM、世界或已验证兼容层已改变。');};
  const preferred=actor=>{const users=values(game.users).filter(u=>owner(actor,u));return users.find(u=>!u.isGM&&(u.character?.uuid===actor.uuid||u.character?.id===actor.id))??users.find(u=>!u.isGM)??users.find(u=>u.id===game.users.activeGM?.id)};

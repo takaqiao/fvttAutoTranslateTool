@@ -1,6 +1,7 @@
 import {isCurrentDisruptToken} from './disrupt-prey-rules.mjs';
 import {MODULE_ID} from './rules.mjs';
 import {hasNativeDamageStrike} from './native-damage-strike.mjs';
+import {glimpseLevelSupported} from './glimpse-native.mjs';
 export const GLIMPSE_SOURCES=Object.freeze({glimpse:'Compendium.pf2e.actionspf2e.Item.tuZnRWHixLArvaIf',aura:'Compendium.pf2e.classfeatures.Item.0x76o5OxgEmvqIDp',resistance:'Compendium.pf2e.feat-effects.Item.DawVHfoPKbPJsz4k',weight:'Compendium.pf2e.feats-srd.Item.2c9awqDem5OLK47S'});
 export const glimpseSourceId=item=>item?.sourceId??item?._stats?.compendiumSource??item?.flags?.core?.sourceId;
 export const glimpseClaims=combatant=>combatant?.flags?.[MODULE_ID]?.glimpseClaims??[];
@@ -31,7 +32,7 @@ export function glimpseCandidates(context,game){
   if(glimpseEncounter(enemy,game).combat!==encounter)return [];
   return [...new Set(encounter.turns.map(combatant=>combatant.token).filter(token=>token?.parent===victim.parent))].flatMap(token=>{
    const actor=token.actor,items=Array.from(actor?.items?.values?.()??[]),ability=items.find(i=>glimpseSourceId(i)===GLIMPSE_SOURCES.glimpse&&i.system?.actionType?.value==='reaction');
-   if(!isCurrentDisruptToken(token,game)||actor?.type!=='character'||actor.level!==5||actor.uuid===ally.uuid||actor.canAct!==true||actor.isDead||actor.hasCondition?.('unconscious')||!ability||!items.some(i=>glimpseSourceId(i)===GLIMPSE_SOURCES.aura)||items.some(i=>glimpseSourceId(i)===GLIMPSE_SOURCES.weight)||actor.isEnemyOf?.(enemy.actor)!==true||actor.isAllyOf?.(ally)!==true)return [];
+   if(!isCurrentDisruptToken(token,game)||actor?.type!=='character'||!glimpseLevelSupported(actor.level)||actor.uuid===ally.uuid||actor.canAct!==true||actor.isDead||actor.hasCondition?.('unconscious')||!ability||!items.some(i=>glimpseSourceId(i)===GLIMPSE_SOURCES.aura)||items.some(i=>glimpseSourceId(i)===GLIMPSE_SOURCES.weight)||actor.isEnemyOf?.(enemy.actor)!==true||actor.isAllyOf?.(ally)!==true)return [];
    const aura=token.auras?.get?.('champions-aura');if(!aura||aura.containsToken?.(enemy)!==true||aura.containsToken?.(victim)!==true)return [];
    try{const bound=glimpseEncounter(token,game);return bound.combat===encounter?[{actor,token,ability,...bound}]:[]}catch{return []}
   });
