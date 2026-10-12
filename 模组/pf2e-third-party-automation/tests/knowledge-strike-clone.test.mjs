@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {createKnowledgeAutomation} from '../scripts/knowledge-automation.mjs';
 import {createWeaponSurgeAutomation} from '../scripts/weapon-surge.mjs';
-import {createCompanionAutomation} from '../scripts/companion-automation.mjs';
+import {registerStrikeWrapper} from '../scripts/strike-wrapper.mjs';
 import * as ownerApi from '../scripts/native-owner-operations.mjs';
 import {MODULE_ID as ID} from '../scripts/rules.mjs';
 
@@ -120,12 +120,12 @@ function fixture({delaySync=false,throwPreparing=false,dropPreparedRule=false,dr
  const fromUuid=async uuid=>docs.get(uuid);
  const gmKnowledge=createKnowledgeAutomation({game:gmGame,fromUuid});knowledge=createKnowledgeAutomation({game:ownerGame,fromUuid});
  if(nativeRebind){
-  const surge=createWeaponSurgeAutomation({game:ownerGame}),companion=createCompanionAutomation({game:ownerGame,fromUuid,wrapStrike:(strike,actor)=>{
+  const surge=createWeaponSurgeAutomation({game:ownerGame}),wrapStrike=(strike,actor)=>{
    knowledge.wrapStrike(surge.wrapStrike(strike,actor),actor);
    for(const[index,variant]of strike.variants.entries()){const native=variant.roll;variant.roll=params=>{if(!Object.getOwnPropertySymbols(params).some(key=>key.description==='knowledgeNativeAttack'))return native(params);const entry={actor,strike,index,params,native};rebindEntries.push(entry);return rebindDispatch?rebindDispatch(entry):native(params);};}
    return strike;
-  }});
-  companion.register({Hooks,libWrapper:{register(_id,wrapperPath,handler){if(wrapperPath.endsWith('.prepareStrike'))prepareStrike=handler;},unregister(){}}});assert.equal(typeof prepareStrike,'function');
+  };
+  registerStrikeWrapper({game:ownerGame,wrapStrike,libWrapper:{register(_id,wrapperPath,handler){if(wrapperPath.endsWith('.prepareStrike'))prepareStrike=handler;},unregister(){}}});assert.equal(typeof prepareStrike,'function');
  }
  const root=ownerApi.createNativeOwnerOperations({game:gmGame,fromUuid,scope:'clone-test'}),owner=ownerApi.createNativeOwnerOperations({game:ownerGame,fromUuid,scope:'clone-test'});
  const ownerSocket={register(name,handler){ownerHandlers.set(name,handler);},executeAsUser(name,userId,payload){assert.equal(userId,gm.id);if(name==='knowledge-claim')claimRequests.push(payload);if(name==='knowledge-complete')completeRequests.push(payload);return gmHandlers.get(name).call({socketdata:{userId:player.id}},payload);}};

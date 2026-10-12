@@ -58,7 +58,7 @@ function inReach(companion,bearToken,target){
  return !origin.checkCollision(other.center,{origin:origin.center,type:'move',mode:'any'});
 }
 
-export function createCompanionAutomation({game,fromUuid=globalThis.fromUuid,wrapStrike,runNative,manualDamageRoll=rollManualDamage,onError=()=>{}}={}){
+export function createCompanionAutomation({game,fromUuid=globalThis.fromUuid,runNative,manualDamageRoll=rollManualDamage,onError=()=>{}}={}){
  const queues=new Map();let registered=false,socket=null;
  const serial=(key,fn)=>{const task=(queues.get(key)??Promise.resolve()).catch(()=>{}).then(fn);queues.set(key,task);task.finally(()=>{if(queues.get(key)===task)queues.delete(key)}).catch(()=>{});return task};
  const resolveAction=item=>['action','feat'].includes(item?.type)&&sourceOf(item)===SOURCE.support?'companion:bear-support':null;
@@ -259,24 +259,6 @@ export function createCompanionAutomation({game,fromUuid=globalThis.fromUuid,wra
   if(socket)for(const[method,fn]of [['companion-support-claim',claimApplications],['companion-support-complete',completeApplications]])socket.register(method,async function(payload){
    try{return {ok:true,value:await fn(payload,game.users.get(this.socketdata.userId))};}catch(error){return {ok:false,error:error.message};}
   });
-  const strikePath='CONFIG.PF2E.Actor.documentClasses.character.prototype.prepareStrike';
-  if(libWrapper)libWrapper.register(MODULE_ID,strikePath,function(wrapped,...args){
-   const strike=wrapped(...args),firstRoll=strike?.variants?.[0]?.roll;
-   for(const method of ['damage','critical']){
-    const native=strike?.[method];if(typeof native!=='function')continue;
-    strike[method]=async function(params={}){
-     // Native PF2e chat buttons and Workbench pass this exact context object.
-     // No search by most recent weapon, name, actor, or target is permitted.
-     const attack=params.checkContext&&values(game.messages).find(m=>m.isCheckRoll&&m.flags.pf2e.context===params.checkContext);
-     const options=new Set(params.options??[]);
-     if(attack)options.add(`${MODULE_ID}:bear-attack:${attack.id}`);
-     return native.call(this,{...params,options});
-    };
-   }
-   const result=wrapStrike?.(strike,this)??strike;
-   if(typeof firstRoll==='function'&&typeof result?.variants?.[0]?.roll==='function')for(const alias of ['attack','roll'])if(result[alias]===firstRoll)result[alias]=result.variants[0].roll;
-   return result;
-  },'WRAPPER');
   const on=(name,fn)=>registrations.push([name,Hooks.on(name,(...args)=>Promise.resolve().then(()=>fn(...args)).catch(report))]);
   on('createChatMessage',handleAttack);
   on('updateChatMessage',message=>handleAttack(message));
@@ -289,7 +271,7 @@ export function createCompanionAutomation({game,fromUuid=globalThis.fromUuid,wra
    for(const element of root?.querySelectorAll?.('.damage-application,.damage-buttons,[data-action="applyDamage"]')??[])element.hidden=true;
   });
   if(libWrapper)game.actors.get(KNOWN_PAIR.master)?.reset?.();
-  return ()=>{for(const[name,id]of registrations)Hooks.off(name,id);if(libWrapper)libWrapper.unregister(MODULE_ID,strikePath);registered=false;};
+  return ()=>{for(const[name,id]of registrations)Hooks.off(name,id);registered=false;};
  }
  return {resolveAction,executeUsage,register,maintain,beforeDamage,afterDamage};
 }
