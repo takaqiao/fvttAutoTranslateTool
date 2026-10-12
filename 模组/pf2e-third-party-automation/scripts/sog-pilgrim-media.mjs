@@ -22,24 +22,31 @@ export function createPilgrimMedia({game,canvas=globalThis.canvas,fromUuid=globa
  const ready=()=>leader()&&localReady();
  const tokens=item=>values(canvas?.scene?.tokens).filter(t=>t.parent===canvas.scene&&t.actor?.uuid===item.actor?.uuid&&t.object);
  const name=(item,kind,suffix='')=>`${MODULE_ID}.pilgrim.${item.uuid}.${kind}${suffix}`;
+ // Sequencer 4.2.3 ignores sceneId when filtering visible effects.
+ const shown=label=>Sequencer.EffectManager.getEffects({name:label}).filter(effect=>effect.data.name===label&&effect.data.sceneId===canvas.scene.id);
  async function end(item,kind,suffix='',local=false) {
   if(!(local?localReady():ready()))return;
-  const label=name(item,kind,suffix),sceneId=canvas.scene.id;
-  // Sequencer 4.2.3 ignores sceneId when filtering visible effects.
-  const effects=Sequencer.EffectManager.getEffects({name:label}).filter(effect=>effect.data.name===label&&effect.data.sceneId===sceneId).map(effect=>effect.id);
-  await Sequencer.EffectManager.endEffects({effects,sceneId},!local);
+  await Sequencer.EffectManager.endEffects({effects:shown(name(item,kind,suffix)).map(effect=>effect.id),sceneId:canvas.scene.id},!local);
+ }
+ async function endRebuilt(label) {
+  const effects=shown(label).filter(effect=>effect.data.temporary).map(effect=>effect.id);
+  if(effects.length)await Sequencer.EffectManager.endEffects({effects,sceneId:canvas.scene.id},false);
+ }
+ function serialize(key,task) {
+  const next=(displays.get(key)??Promise.resolve()).catch(()=>{}).then(task);
+  displays.set(key,next);
+  return next.finally(()=>{if(displays.get(key)===next)displays.delete(key);});
  }
  function refresh(item,kind,render) {
-  const key=name(item,kind),scene=canvas?.scene;
-  const next=(displays.get(key)??Promise.resolve()).catch(()=>{}).then(async()=>{
+  const scene=canvas?.scene;
+  return serialize(name(item,kind),async()=>{
    if(!localReady()||canvas.scene!==scene)return;
    await end(item,kind,'',true);
    if(localReady()&&canvas.scene===scene&&item.actor?.items.get(item.id)===item)await render();
   });
-  displays.set(key,next);
-  return next.finally(()=>{if(displays.get(key)===next)displays.delete(key);});
  }
- const leafEffect=item=>values(item.actor?.items).find(effect=>effect.type==='effect'&&effect.flags?.[MODULE_ID]?.[PILGRIM_FLAG]?.kind==='leaves'&&effect.flags[MODULE_ID][PILGRIM_FLAG].source===item.uuid&&effect.isExpired!==true&&effect.remainingDuration?.expired!==true);
+ const liveEffect=(item,kind)=>values(item.actor?.items).find(effect=>effect.type==='effect'&&effect.flags?.[MODULE_ID]?.[PILGRIM_FLAG]?.kind===kind&&effect.flags[MODULE_ID][PILGRIM_FLAG].source===item.uuid&&effect.isExpired!==true&&effect.remainingDuration?.expired!==true);
+ const leafEffect=item=>liveEffect(item,'leaves');
  const sound=(sequence,file,volume=0.25)=>sequence.sound().file(file).volume(volume).fadeOutAudio(200);
  async function leaves(item,count) {
   return refresh(item,'leaves',async()=>{
@@ -64,16 +71,40 @@ export function createPilgrimMedia({game,canvas=globalThis.canvas,fromUuid=globa
   sequence.effect().file(PILGRIM_MEDIA.heal).atLocation(target.object).scaleToObject(1.25).opacity(0.75);
   sound(sequence,PILGRIM_MEDIA.releaseSound,0.22);await sequence.play();
  }
+ function stormLayers(sequence,item,{scene,position,nonce,effect,template},rebuilt=false) {
+  const mask=new PIXI.Circle(position.x,position.y,scene.grid.size*15/scene.grid.distance),diameter=30/scene.grid.distance;
+  for(const [file,scale,opacity]of [[PILGRIM_MEDIA.storm,1.17,0.65],[PILGRIM_MEDIA.petals,1.2,0.8]]){
+   const layer=sequence.effect().file(file).name(name(item,'area',nonce)).atLocation(position).tieToDocuments([item.uuid,effect.uuid,template.uuid]).size(diameter*scale,{gridUnits:true}).mask(mask).opacity(opacity).persist().fadeIn(300).fadeOut(300);
+   if(rebuilt)layer.temporary();
+  }
+ }
  async function area(item,{kind,scene,position,nonce,effect,template}) {
   if(!ready()||scene!==canvas.scene)return;
   if(kind==='storm'&&(!effect?.uuid||!template?.uuid))throw new Error('花瓣风暴缺少绑定的效果或区域文档。');
   const sequence=new Sequence();
-  if(kind==='storm'){
-   const mask=new PIXI.Circle(position.x,position.y,scene.grid.size*15/scene.grid.distance),diameter=30/scene.grid.distance;
-   for(const [file,scale,opacity]of [[PILGRIM_MEDIA.storm,1.17,0.65],[PILGRIM_MEDIA.petals,1.2,0.8]])sequence.effect().file(file).name(name(item,'area',nonce)).atLocation(position).tieToDocuments([item.uuid,effect.uuid,template.uuid]).size(diameter*scale,{gridUnits:true}).mask(mask).opacity(opacity).persist().fadeIn(300).fadeOut(300);
-  }
+  if(kind==='storm')stormLayers(sequence,item,{scene,position,nonce,effect,template});
   else sequence.effect().file(PILGRIM_MEDIA.leaves).atLocation(position).size(2,{gridUnits:true}).opacity(0.8);
   sound(sequence,kind==='storm'?PILGRIM_MEDIA.stormSound:PILGRIM_MEDIA.treeSound,kind==='storm'?0.46:0.5);await sequence.play();
+ }
+ // Sequencer 4.3.0 no longer replays saved effects that are not attached to a placeable, so a storm
+ // missing after a reload or scene change is rebuilt here from its own documents.
+ function restoreStorm(item) {
+  const scene=canvas?.scene;
+  return serialize(name(item,'area'),async()=>{
+   if(!localReady()||canvas.scene!==scene||item.actor?.items.get(item.id)!==item)return;
+   const effect=liveEffect(item,'storm'),data=effect?.flags[MODULE_ID][PILGRIM_FLAG],use=item.flags?.[MODULE_ID]?.[PILGRIM_FLAG]?.use;
+   // The GM broadcasts the saved storm before the activation leaves pending; rebuilding earlier would double it.
+   if(data?.sceneId!==scene.id||use?.status==='pending'&&use.nonce===data.nonce)return;
+   const template=scene.templates.get(data.resourceRefs.find(ref=>ref.type==='MeasuredTemplate')?.id);
+   if(!template)return;
+   const label=name(item,'area',data.nonce),copies=shown(label);
+   // Sequencer's own copy wins: it never left this client, or a version that replays saved effects restored it.
+   if(copies.some(copy=>!copy.data.temporary))return endRebuilt(label);
+   if(copies.length)return;
+   const sequence=new Sequence();
+   stormLayers(sequence,item,{scene,position:data.position,nonce:data.nonce,effect,template},true);
+   await sequence.play({local:true});
+  });
  }
  async function clearArea(item,nonce){await end(item,'area',nonce);}
  function nativeStrike(message) {
@@ -124,10 +155,18 @@ export function createPilgrimMedia({game,canvas=globalThis.canvas,fromUuid=globa
    if(current()&&message.flags?.[MODULE_ID]?.pilgrimStrike===true)await sequence.play();
   }finally{strikes.delete(message.id);}
  }
- async function deleted(item){const key=rewardKey(item);if(key==='fan')await leaves(item,0);if(key==='scarf')await scarf(item,false);}
+ async function deleted(item) {
+  const key=rewardKey(item),data=item.flags?.[MODULE_ID]?.[PILGRIM_FLAG];
+  if(key==='fan')await leaves(item,0);if(key==='scarf')await scarf(item,false);
+  // A rebuilt storm has ids of its own, so the GM's broadcast end cannot reach it on other clients.
+  if(item.type==='effect'&&data?.kind==='storm'){
+   const source={uuid:data.source};
+   await serialize(name(source,'area'),async()=>{if(localReady())await endRebuilt(name(source,'area',data.nonce));});
+  }
+ }
  async function reconcile(actor) {
   if(!localReady())return;
-  for(const item of values(actor.items)){if(rewardKey(item)==='fan')await leaves(item,leafEffect(item)?.system.badge?.value??0);if(rewardKey(item)==='scarf')await scarf(item,actor.rollOptions?.all?.['wonton-ghost-scarf:lit']===true);}
+  for(const item of values(actor.items)){if(rewardKey(item)==='fan')await leaves(item,leafEffect(item)?.system.badge?.value??0);if(rewardKey(item)==='scarf')await scarf(item,actor.rollOptions?.all?.['wonton-ghost-scarf:lit']===true);if(rewardKey(item)==='hairpin')await restoreStorm(item);}
  }
  const quiet=operation=>async(...args)=>{try{return await operation(...args);}catch(error){onError(error);}};
  return {leaves:quiet(leaves),scarf:quiet(scarf),release:quiet(release),area:quiet(area),clearArea:quiet(clearArea),strike:quiet(strike),deleted:quiet(deleted),reconcile:quiet(reconcile)};

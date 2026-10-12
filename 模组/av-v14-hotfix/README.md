@@ -1,10 +1,21 @@
-# FVTT v14 Local Hotfix 0.6.26
+# FVTT v14 Local Hotfix 0.6.27
 
-当前源码及隔离回归基线为 Foundry **14.369**、PF2e **8.6.0**、Dice So Nice **6.4.4**、BBMM **1.4.11**、Grid **2.5.0**、Summons Assistant **2.20.3**。清单保留最低核心版本 14.367 和已验证标签 14.369，移除核心最高版本限制。运行时不再按 Foundry 核心代数或精确版本号跳过，按各项实际 schema、API、函数源码及对象契约决定是否安装；PF2e 适配也不再因系统版本号跳过。每项可在世界设置中关闭，刷新后生效。契约不匹配或检测到冲突时跳过，对应状态见：
+当前源码及隔离回归基线为 Foundry **14.369**、PF2e **8.6.1**、汉化合集（`pf2e_compendium_chn`）**3.2.3**、Dice So Nice **6.4.4**、BBMM **1.4.11**、Grid **2.5.0**、Summons Assistant **2.20.3**。清单保留最低核心版本 14.367 和已验证标签 14.369，移除核心最高版本限制。运行时不再按 Foundry 核心代数或精确版本号跳过，按各项实际 schema、API、函数源码及对象契约决定是否安装；PF2e 适配也不再因系统版本号跳过。每项可在世界设置中关闭，刷新后生效。契约不匹配或检测到冲突时跳过，对应状态见：
 
 ```js
 game.modules.get('av-v14-hotfix').api.status()
 ```
+
+## 0.6.27 的 PF2e 8.6.1 适配
+
+PF2e 8.6.1 的构建更换了压缩名，`generateItemName` 和聊天消息 `renderHTML` 的函数文本随之改变；0.6.26 在 8.6.1 上对名称和头像两项报告 `unsupported-source` 并跳过。汉化合集 3.2.3 改写了索引回调，0.6.26 的索引契约也不再匹配。
+
+- 物品名称：官方 8.6.1 `generateItemName` 与 8.6.0 相比，符文数据和强化符文标签两个编译闭包换了名称（共五处引用），另有一个以 `return` 结束的 `if` 之后省去了 `else`，执行路径相同。加入 8.6.1 完整函数哈希，提前返回优化及上游生成名称逻辑不变。
+- 聊天头像：8.6.1 `renderHTML` 与 8.6.0 相比，监听器对象和 DamageRoll 类两个编译闭包换了名称，四个私有方法改用短名；头像缩放与遮罩的语句没有变化。加入 8.6.1 完整方法哈希，Tokenizer 修正的范围不变。
+- 8.5.0、8.5.1、8.6.0 的登记全部保留，仍在这些版本上的世界行为不变。
+- 汉化索引：汉化合集 3.2.3 的索引回调不再请求整库重建，改为按文档替换或移除索引条目，自带合并、串行执行和失败后的整库重建。读到这种源码时，索引适配报告为 `retired` 并附说明，不包装合集，也不注册监听。判断依据是唯一的 `indexDocument` 注册回调及其调用的顶层函数，不读汉化模块的版本号；3.2.2 等仍请求整库重建的源码继续按原契约核验，优化照常安装。
+
+名称和头像仍按完整函数文本登记。PF2e 之后的更新只要改动这两个函数的任何字节，包括只更换压缩名，这两项会再次报告 `unsupported-source`，需要重新核验后登记。隔离测试用官方 8.6.1 函数涵盖原生及修正后的头像、物品名称，并用 3.2.3 的索引源码涵盖退役判定；实际世界渲染与其它模组的包装顺序需客户端核验。
 
 ## 0.6.26 的第三方接口兼容
 
@@ -112,11 +123,11 @@ Wayfinder 新版没有等价采纳旧补丁的所有延迟刷新策略，不能�
 | --- | --- |
 | 旧导入器兼容 | 核验 ChatMessage 的 type/style 字段、Scene/Level 目标字段类型、嵌入关系及公开创建/更新 API 后，旧 type → style、旧 Scene 图片字段 → levels；现代字段优先。契约不符或运行中更换目标类时原样透传。 |
 | 冒险包设置 | 启用 sf2e-murder-in-metal-city 时，仅补可用 API 下缺失的 Adventure 设置定义；Season of Ghosts 已使用上游。 |
-| PF2e 物品名称 | 检查 PF2e 身份，逐函数验证已核验的 8.5.0/8.5.1/8.6.0 源码；对无需自动改名的原生分支提前返回。 |
+| PF2e 物品名称 | 检查 PF2e 身份，逐函数验证已核验的 8.5.0/8.5.1/8.6.0/8.6.1 源码；对无需自动改名的原生分支提前返回。 |
 | 聊天时间戳 | 复用窄式时长格式化器，跳过同文 DOM 写入；保留实际时间变化。 |
 | 批量删除聊天 | 保留核心删除队列及每条删除事件，合并同批动画结束后的布局操作。 |
-| Babele 按需汉化 | 局部索引、模式及优先级契约通过后合并增量索引更新；full 模式走上游。 |
-| Tokenizer2 聊天头像 | 完整原生头像方法符合已核验源码时，有 Tokenizer2 flags 的头像恢复原生尺寸，清除地图缩放引入的遮罩。8.6.0 仍保留原生地图缩放路径。 |
+| Babele 按需汉化 | 局部索引、模式及优先级契约通过后合并增量索引更新；full 模式走上游。汉化模块自带逐条索引更新时（3.2.3 的源码即如此）报告 `retired`，不安装。 |
+| Tokenizer2 聊天头像 | 完整原生头像方法符合已核验源码时，有 Tokenizer2 flags 的头像恢复原生尺寸，清除地图缩放引入的遮罩。8.6.0/8.6.1 仍保留原生地图缩放路径。 |
 | 原生缓冲音频停止 | Foundry 14.368 的 STOPPING 状态仍停止底层缓冲音源，保留淡出、暂停及流式音频行为。 |
 | BBMM / DsN 画质硬锁 | BBMM 注册表与规则契约、DsN 逐函数源码契约；读取、保存、重置、画质预览及画板重建遵守已有五项锁。 |
 
@@ -134,18 +145,18 @@ Sundry 与共享回合/奴仆清理使用已验证的原生 Hooks 记录适配�
 | PF2e 名称 | 解除 PF2e 版本标签；保留 PF2e 身份与完整目标函数哈希，异步核验期间 system/target/function/version 必须保持同一所有者。 |
 | Sundry | 解除 PF2e 版本标签，检查 PF2e 身份与原生 Sprite 的可写 boolean `visible` 契约。可见性循环、设置读取、背景规则及绑定采用局部源码契约，另核验真实 Hooks 回调；旧循环保持上游。 |
 | 回合生命周期 | 解除核心 14.368、PF2e 版本与 Summons 2.19.0 标签；保留 PF2e 身份、原生 Hooks 回调及严格 Document 关系。Sustain 的私有效果筛选与常量另行核验，Reaction 只跳过无持久 ID 的同类参战者。 |
-| Babele 索引 | 解除三个模块版本标签；按实际索引注册回调、按需及标题闭包、libWrapper 优先级读取与排序接缝核验，保留 helper/native 签名、注册唯一性、顺序和 facade 所有权。 |
+| Babele 索引 | 解除三个模块版本标签；按实际索引注册回调、按需及标题闭包、libWrapper 优先级读取与排序接缝核验，保留 helper/native 签名、注册唯一性、顺序和 facade 所有权。索引回调不再请求整库重建、改调含逐条替换与移除的顶层函数时按源码判定退役，不看版本号。 |
 | 旧冒险导入器 | 解除 sf2e-murder-in-metal-city 标签；检查模块启用、Adventure 类型、有效 namespace、缺失设置和注册 API。 |
-| Tokenizer | 解除 PF2e 8.5.1 标签；保留 PF2e 身份与 libWrapper API，新增已核验 8.5.1/8.6.0 完整 `renderHTML` 源码保护。 |
+| Tokenizer | 解除 PF2e 8.5.1 标签；保留 PF2e 身份与 libWrapper API，新增已核验 8.5.1/8.6.0/8.6.1 完整 `renderHTML` 源码保护。 |
 
 ## 安装、验证与回退
 
 备份旧目录后，将本目录安装到 `Data/modules/av-v14-hotfix`，在需要的世界启用并完整刷新客户端。退役的 `scripts/patches/patreon.mjs`、`wayfinder-fog.mjs`、`wayfinder-fog-texture.mjs`、`grid.mjs`、`bbmm-locks.mjs` 应从部署目录移除。回退可恢复原目录，或关闭本模组后刷新。
 
-安装清单使用 [av-v14-hotfix-v0.6.26 的 module.json](https://github.com/takaqiao/fvttAutoTranslateTool/releases/download/av-v14-hotfix-v0.6.26/module.json)，下载为同一标签的 `av-v14-hotfix-0.6.26.zip`。本仓库包含多个模组，不能用全仓库 `releases/latest/download` 作为此模组的清单。
+安装清单使用 [av-v14-hotfix-v0.6.27 的 module.json](https://github.com/takaqiao/fvttAutoTranslateTool/releases/download/av-v14-hotfix-v0.6.27/module.json)，下载为同一标签的 `av-v14-hotfix-0.6.27.zip`。本仓库包含多个模组，不能用全仓库 `releases/latest/download` 作为此模组的清单。
 
 运行 `node --test tests/*.test.mjs` 验证隔离回归。原生函数及源码哈希记录在 `tests/fixtures`；音频、设置操作符等测试需本地 Foundry 安装，可用 `FVTT_NATIVE_APP` 指定 `resources/app`。具体运行命令、数量、跳过项和部署哈希以本次修复回执为准。
 
-本安装包只包含 Hotfix 自己的文件。另有第三方自动化的 GM 举盾结算修复、Sequencer 动画取消修复和 Trigger Engine 来源类型检查，单独记录与部署，不由此安装包代替。Narrator、Party Automation、Prime 及世界地图资源不属于本包。
+本安装包只包含 Hotfix 自己的文件。另有第三方自动化的 GM 举盾结算修复、Sequencer 4.2.3 动画取消修复和 Trigger Engine 来源类型检查，单独记录与部署，不由此安装包代替。Sequencer 4.3.0 的 `_initialize` 与 `_createSprite` 已自带初始化取消保护，使用 4.3.0 的世界不需要该文件补丁。Narrator、Party Automation、Prime 及世界地图资源不属于本包。
 
 本版没有通过删灯、删声音、改区域或改变画质目标来处理卡顿。实际一层地图右键拖动仍需使用修复后的客户端采样确认。

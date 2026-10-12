@@ -55,7 +55,7 @@ function uniqueSeam(tokens, source) {
   return matches === 1;
 }
 
-function indexRegistration(tokens) {
+function indexRegistrationCalls(tokens) {
   const calls = [];
   for (let offset = 0; offset < tokens.length; offset++) {
     if (!['libWrapper', '.', 'register', '('].every((value, index) => tokens[offset + index]?.value === value)) continue;
@@ -64,7 +64,32 @@ function indexRegistration(tokens) {
     const end = tokens[offset + 3].match;
     calls.push(tokens.slice(offset, end + 2));
   }
+  return calls;
+}
+
+function indexRegistration(tokens) {
+  const calls = indexRegistrationCalls(tokens);
   return calls.length === 1 ? tokenSignature(calls[0]) : null;
+}
+
+// The translation module owns incremental indexing once its only indexDocument
+// callback no longer requests a full rebuild and instead calls a declared helper
+// that replaces and removes single DocumentIndex entries. Any other shape stays
+// on the declaration contract below.
+function upstreamIncrementalIndex(source) {
+  let calls;
+  try { calls = indexRegistrationCalls(sourceTokens(source)); } catch { return false; }
+  if (calls.length !== 1 || calls[0].some(token => token.value === 'scheduleDocumentIndexRebuild')) return false;
+  const [callback] = calls;
+  const helpers = new Set(callback.filter((token, index) => token.kind === 'identifier'
+    && callback[index + 1]?.value === '(' && !['.', '?.'].includes(callback[index - 1]?.value)).map(token => token.value));
+  return [...helpers].some(name => {
+    const declaration = extractDeclaration(source, name);
+    if (!declaration) return false;
+    const declared = sourceTokens(declaration);
+    return ['replaceDocument', 'removeDocument'].every(method => declared.some((token, index) =>
+      token.value === method && declared[index - 1]?.value === '.' && declared[index + 1]?.value === '('));
+  });
 }
 
 function methodSignature(tokens, name) {
@@ -83,6 +108,10 @@ function methodSignature(tokens, name) {
 
 export function verifyBabeleIndexSources({translation, wrapper, libWrapper} = {}) {
   try {
+    if (upstreamIncrementalIndex(translation)) {
+      return {supported: false, retired: true,
+        reason: 'The translation module replaces changed document index entries itself; this adapter is retired.'};
+    }
     for (const [source, declarations, label] of [
       [translation, TRANSLATION_DECLARATIONS, 'title translation'],
       [libWrapper, LIB_WRAPPER_DECLARATIONS, 'libWrapper priorities']
@@ -232,6 +261,7 @@ export function registerBabeleIndex({moduleId = 'av-v14-hotfix', g = globalThis,
   const metrics = {nativeCalls: 0, batches: 0, replaced: 0, removed: 0, fullRebuilds: 0};
   const capability = () => {
     if (disposed) return ['disposed', 'Adapter disposed.'];
+    if (sourceContract?.retired) return ['retired', sourceContract.reason];
     if (!g.game?.modules?.get?.(TARGET)?.active) return ['inactive', 'Translation module is not active.'];
     if (mode(g) === 'full') return ['not-applicable', 'Effective Babele loading mode is full; retain the upstream bypass.'];
     if (!g.game?.babele?.__ondemandPatch) return ['waiting', 'Babele on-demand facade has not initialized.'];
@@ -415,6 +445,11 @@ export function registerBabeleIndex({moduleId = 'av-v14-hotfix', g = globalThis,
   const add = (name, callback) => {
     if (typeof g.Hooks?.on === 'function') hooks.push([name, g.Hooks.on(name, callback)]);
   };
+  const releaseCapture = () => {
+    for (const [name, id] of capture.hooks) g.Hooks.off(name, id);
+    capture.hooks.length = 0;
+    capture.valid = false;
+  };
   const api = Object.freeze({
     scan,
     status() {
@@ -446,13 +481,16 @@ export function registerBabeleIndex({moduleId = 'av-v14-hotfix', g = globalThis,
         if (Object.getOwnPropertyDescriptor(index, 'index')?.value === indexAdapter) delete index.index;
         if (Object.getOwnPropertyDescriptor(index, 'ready')?.get === readyAdapter) delete index.ready;
       }
-      for (const [name, id] of capture.hooks) g.Hooks.off(name, id);
-      capture.hooks.length = 0;
-      capture.valid = false;
+      releaseCapture();
       disposed = true;
     }
   });
   registrations.set(g, {game: g.game, moduleId, api});
+  if (sourceContract?.retired) {
+    // A retired adapter installs nothing, so the early capture has no further use.
+    releaseCapture();
+    return api;
+  }
   capture.listeners.add(scan);
   add('ready', scan);
   add('babele.ready', scan);

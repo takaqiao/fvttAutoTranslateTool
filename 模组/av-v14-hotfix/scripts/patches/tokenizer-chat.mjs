@@ -2,7 +2,8 @@ import {sha256Fallback} from '../source-hash.mjs';
 
 const RENDER_HTML_HASHES = new Set([
   '2002b840988a5456d11b20cbd235a2d067d046678af3e1781090c2990849338c', // PF2e 8.5.1
-  '8a7d64e3a8c487efbf6f0ac3ff670af5f9d4719f2e86e18ffcdf9fe0c3075c94' // PF2e 8.6.0
+  '8a7d64e3a8c487efbf6f0ac3ff670af5f9d4719f2e86e18ffcdf9fe0c3075c94', // PF2e 8.6.0
+  'c6186757b90ffd1d5d50a414080c6719585a12b7df1e8ad32cc4ba2150199497' // PF2e 8.6.1
 ]);
 
 export function createTokenizerChatPortraitWrapper(){

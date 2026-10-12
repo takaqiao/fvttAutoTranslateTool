@@ -14,13 +14,19 @@ const contractSources=Object.fromEntries(Object.entries(contractFixture.sections
 function fn(text,name){return contractFixture.sections.translation[name]??text.functions[name]??'';}
 function cls(name){return core[name];}
 const wrapper=contractFixture.sections.translation.registration;
+const baselineUpstream={declarations:['scheduleDocumentIndexRebuild','rebuildDocumentIndexCompat','normalizePackId','translateIndexTitles'].map(name=>fn(source,name)),wrapper};
+// Exact 3.2.3 declarations: the translation module replaces index entries itself.
+const current=readFixture('babele-upstream-3.2.3.json');
+const currentUpstream={declarations:Object.values(current.declarations),wrapper:current.wrapper};
+const currentTranslation=registration=>[...currentUpstream.declarations,registration].join('\n');
+const currentSources={...contractSources,translation:currentTranslation(current.wrapper)};
 
 class Collection extends Map { [Symbol.iterator]() { return this.values(); } }
 class Item { static metadata = {indexed:true, collection:'items', embedded:{}}; static schema = {has:()=>true}; }
 function document(id, name, pack='example.items') {
   return Object.assign(new Item(), {id, _id:id, name, pack, isEmbedded:false, documentName:'Item', uuid:pack ? `Compendium.${pack}.Item.${id}` : `Item.${id}`});
 }
-async function harness({beforeCapture=()=>{},beforeRegister=()=>{},expectedState='applied',instrument=true,registrationType='WRAPPER',helperOverride='native',priorities={},registrationOrder=['babele','pf2e_compendium_chn'],translationVersion='3.2.2',contractOverride=contractSources}={}) {
+async function harness({beforeCapture=()=>{},beforeRegister=()=>{},expectedState='applied',instrument=true,registrationType='WRAPPER',helperOverride='native',priorities={},registrationOrder=['babele','pf2e_compendium_chn'],translationVersion='3.2.2',contractOverride=contractSources,upstream=baselineUpstream}={}) {
   const timers=new Map(),hooks=new Map();let serial=0;
   const Hooks={on(name,callback){const id=++serial;hooks.set(id,{name,callback});return id;},off(_name,id){hooks.delete(id);}};
   const emit=(name,...args)=>{for(const h of [...hooks.values()])if(h.name===name)h.callback(...args);};
@@ -38,7 +44,7 @@ async function harness({beforeCapture=()=>{},beforeRegister=()=>{},expectedState
   const docs={a:document('a','Old Sword'),b:document('b','Old Staff'),u:document('u','Unrelated Shield')},world=document('w','World Treasure',null);game.items.push(world);
   for(const doc of Object.values(docs)){doc._source={name:doc.name};pack.index.set(doc.id,{_id:doc.id,uuid:doc.uuid,name:doc.name});}
   await game.documentIndex.index();
-  for(const name of ['scheduleDocumentIndexRebuild','rebuildDocumentIndexCompat','normalizePackId','translateIndexTitles'])vm.runInContext(fn(source,name),c);
+  for(const code of upstream.declarations)vm.runInContext(code,c);
   vm.runInContext('const state=game.babele.__ondemandPatch;'+contractFixture.sections.translation.facade.replace('babele.','game.babele.'),c);
   const proto=foundry.documents.collections.CompendiumCollection.prototype;
   beforeCapture({g:c,pack,index:game.documentIndex,proto,emit});
@@ -46,7 +52,7 @@ async function harness({beforeCapture=()=>{},beforeRegister=()=>{},expectedState
   vm.runInContext(nativeBabele.helper,c);
   vm.runInContext(nativeBabele.titleReset.code,c);
   const nativeWrapper=vm.runInContext('('+nativeBabele.callback+')',c);
-  vm.runInContext(wrapper,c);
+  vm.runInContext(upstream.wrapper,c);
   const callbacks={babele:nativeWrapper,pf2e_compendium_chn:c.wrapper};
   for(const owner of registrationOrder){
     const previous=proto.indexDocument,callback=callbacks[owner];
@@ -427,3 +433,52 @@ for(const name of ['scheduleDocumentIndexRebuild','rebuildDocumentIndexCompat'])
     assert.deepEqual(h.search('烈焰'),[h.docs.a.uuid]);
   });
 }
+
+test('3.2.3 replaces changed index entries itself, so the adapter retires and installs nothing',async()=>{
+  const sourceContract=verifyBabeleIndexSources(currentSources);
+  assert.equal(sourceContract.supported,false);assert.equal(sourceContract.retired,true);
+  const h=await harness({upstream:currentUpstream,contractOverride:currentSources,translationVersion:'3.2.3',expectedState:'retired'});
+  const status=h.registration.status();
+  assert.equal(status.applied,false);assert.equal(status.attachedPacks,0);assert.equal(status.reason,sourceContract.reason);
+  assert.equal(Object.hasOwn(h.pack,'indexDocument'),false);assert.equal(h.hooks.size,0);
+  h.update(h.docs.a);await h.flush();
+  assert.deepEqual(h.search('Old Sword'),[]);assert.deepEqual(h.search('烈焰'),[h.docs.a.uuid]);
+  assert.deepEqual(h.search('Unrelated'),[h.docs.u.uuid]);assert.deepEqual(h.search('World'),[h.world.uuid]);
+  assert.equal(h.counts.full,0);assert.equal(h.counts.replace,1);
+  assert.equal(h.registration.status().metrics.nativeCalls,0);
+});
+
+test('retirement follows the upstream source, not the translation version label',async()=>{
+  for(const translationVersion of ['3.2.2','9.0.0']){
+    const h=await harness({upstream:currentUpstream,contractOverride:currentSources,translationVersion,expectedState:'retired'});
+    h.update(h.docs.a);h.update(h.docs.b);await h.flush();
+    assert.equal(h.counts.full,0);assert.equal(h.counts.replace,2);assert.equal(Object.hasOwn(h.pack,'indexDocument'),false);
+  }
+  const older=await harness({translationVersion:'3.2.3'});
+  older.update(older.docs.a);await older.flush();
+  assert.equal(older.registration.status().metrics.nativeCalls,1);assert.equal(older.counts.replace,1);
+});
+
+test('other upstream shapes are never mistaken for built-in incremental indexing',async()=>{
+  const call='scheduleDocumentIndexEntryReplace(state, document);',helper=current.declarations.scheduleDocumentIndexEntryReplace;
+  assert.ok(current.wrapper.includes(call));
+  const stillRebuilds=current.wrapper.replace(call,call+'\n\t\t\t\tscheduleDocumentIndexRebuild(state, "indexDocument");');
+  const quoted=contractSources.translation+'\n/* '+current.wrapper+' */\n'+helper;
+  for(const [label,translation] of Object.entries({
+    'callback still requests a full rebuild':currentTranslation(stillRebuilds),
+    'callback calls an undeclared helper':currentTranslation(current.wrapper.replace(call,'customIndexUpdate(state, document);')),
+    'duplicate registration':currentTranslation(current.wrapper)+'\n'+current.wrapper,
+    'helper only mentions the entry API in a comment':currentTranslation(current.wrapper).replace(helper,
+      'function scheduleDocumentIndexEntryReplace(state, document) {\n\t// documentIndex.replaceDocument(document); documentIndex.removeDocument(document);\n\tscheduleDocumentIndexRebuild(state, "indexDocument-fallback");\n}'),
+    'registration only quoted beside the 3.2.2 callback':quoted
+  })){
+    const result=verifyBabeleIndexSources({...contractSources,translation});
+    assert.equal(result.retired,undefined,label);assert.equal(result.supported,translation===quoted,label);
+  }
+  const h=await harness({upstream:{...currentUpstream,wrapper:stillRebuilds},
+    contractOverride:{...contractSources,translation:currentTranslation(stillRebuilds)},expectedState:'unsupported'});
+  assert.equal(Object.hasOwn(h.pack,'indexDocument'),false);assert.notEqual(h.hooks.size,0);
+  h.update(h.docs.a);await h.flush();
+  assert.equal(h.counts.full,1);assert.equal(h.registration.status().metrics.nativeCalls,0);
+  assert.deepEqual(h.search('烈焰'),[h.docs.a.uuid]);
+});

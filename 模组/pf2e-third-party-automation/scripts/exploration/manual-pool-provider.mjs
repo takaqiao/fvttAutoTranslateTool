@@ -38,7 +38,7 @@ export async function verifyManualPoolProviders({game,pf2eSource,toolbeltSource,
   if(await digest(po.normalized)!==nativeShape.nativeObserver||await digest(to.normalized)!==shape.toolObserver)return unavailable('manual-pool-observer-seam-mismatch');
   if(pf.split(registration).length!==2||pf.split(nativeShape.init+'__nativeManualPoolBatch.install();').length!==2||tb.split(TOOL_RECEIVE_PATCHED).length!==2||tb.split(TOOL_FORWARD_PATCHED).length!==2)return unavailable('manual-pool-source-seam-partial');
   const native=pf.replace(po.region,''),flat=flatRegion(native).replace(registration,'');
-  if(await digest(flat)!==nativeShape.flatOriginal||await digest(stackingRegion(native))!==shape.stacking)return unavailable('manual-pool-native-receiver-seam-mismatch');
+  if(await digest(flat)!==nativeShape.flatOriginal||await digest(stackingRegion(native))!==nativeShape.stacking)return unavailable('manual-pool-native-receiver-seam-mismatch');
   const methodSHA=await digest(nativeMethod(native));if(!NATIVE_DAMAGE_SHAPES.some(p=>p.applyDamageSHA256===methodSHA))return unavailable('manual-pool-native-bridge-seam-mismatch');
   const tool=tb.replace(to.region+'/* end toolbelt manual pool */\n','').replace(TOOL_RECEIVE_PATCHED,TOOL_RECEIVE).replace(TOOL_FORWARD_PATCHED,TOOL_FORWARD);
   const regions=toolRegions(tool),socketSHA=await digest(regions.socket),socketContract=TOOL_SOCKET_CONTRACTS.find(contract=>contract.socket===socketSHA);

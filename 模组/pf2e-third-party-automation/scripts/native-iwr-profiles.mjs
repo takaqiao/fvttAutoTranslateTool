@@ -22,10 +22,19 @@ export const NATIVE_IWR_PROFILES=Object.freeze({
 
 // These contracts cover local native semantics; upstream bundle hashes and
 // versions remain diagnostics on the automatic source path.
+// Each row names the minified applyDamage locals its inserted lines read:
+// shield (damage stopped by the shield's hardness), hardnessApplied (actor
+// hardness actually subtracted, which is below the hardness value when less
+// damage is left), shieldDamage (damage the shield itself takes) and
+// healthDelta (the calculateHealthDelta result). The callback and the
+// prevention assignment are composed from the same names, so one row cannot
+// mix two releases' bindings.
+const damageShape=row=>Object.freeze({...row,callbackSignature:`?.nativeDamageIWR?.(this, arguments[0], f, r, { actorDamage: x - ${row.shield} - ${row.hardnessApplied}, shieldDamage: ${row.shieldDamage} })`});
 export const NATIVE_DAMAGE_SHAPES=Object.freeze([
- Object.freeze({id:'pf2e-apply-damage:O:2',originalSHA256:'3f4ef8c14ff22bb2c8722648a68f5c84d3b48aeb8aa9cd1bc00b78e7cf61780a',applyDamageSHA256:'e1d69d11d7a4202673bd432a0f9780d082c9e8f83941910f95da6bc0db955a00',callbackSignature:NATIVE_IWR_PROFILES['8.5.1'].callbackSignature,shield:'O'}),
- Object.freeze({id:'pf2e-apply-damage:O:1',originalSHA256:'de3c5091f79733be48a87e504ecb0c030ad882e72cd336c7a83f9f92476d0feb',applyDamageSHA256:NATIVE_IWR_PROFILES['8.5.1'].applyDamageSHA256,callbackSignature:NATIVE_IWR_PROFILES['8.5.1'].callbackSignature,shield:'O'}),
- Object.freeze({id:'pf2e-apply-damage:D:1',originalSHA256:'d21ac5f5ead5f00025de8cd66586e77489b474f444c5273382ec0e305bc3f741',applyDamageSHA256:NATIVE_IWR_PROFILES['8.5.0'].applyDamageSHA256,callbackSignature:NATIVE_IWR_PROFILES['8.5.0'].callbackSignature,shield:'D'})
+ damageShape({id:'pf2e-apply-damage:D:2',originalSHA256:'e5dbe9e6f44d6b28cce84c72b291f4f54f7d0aa4a2a5583066e9078e282912e7',applyDamageSHA256:'4235d69229778f923d73edfac89725d0afebe14e7f68e378fe0114b0ef71ad94',shield:'D',hardnessApplied:'ae',shieldDamage:'ne',healthDelta:'oe'}),
+ damageShape({id:'pf2e-apply-damage:O:2',originalSHA256:'3f4ef8c14ff22bb2c8722648a68f5c84d3b48aeb8aa9cd1bc00b78e7cf61780a',applyDamageSHA256:'e1d69d11d7a4202673bd432a0f9780d082c9e8f83941910f95da6bc0db955a00',shield:'O',hardnessApplied:'ie',shieldDamage:'te',healthDelta:'ae'}),
+ damageShape({id:'pf2e-apply-damage:O:1',originalSHA256:'de3c5091f79733be48a87e504ecb0c030ad882e72cd336c7a83f9f92476d0feb',applyDamageSHA256:NATIVE_IWR_PROFILES['8.5.1'].applyDamageSHA256,shield:'O',hardnessApplied:'ie',shieldDamage:'te',healthDelta:'ae'}),
+ damageShape({id:'pf2e-apply-damage:D:1',originalSHA256:'d21ac5f5ead5f00025de8cd66586e77489b474f444c5273382ec0e305bc3f741',applyDamageSHA256:NATIVE_IWR_PROFILES['8.5.0'].applyDamageSHA256,shield:'D',hardnessApplied:'ie',shieldDamage:'ne',healthDelta:'ae'})
 ]);
 export const SHARED_MANUAL_SHAPE=Object.freeze({
  id:'pf2e-shared-manual:1',toolbeltId:'toolbelt-shared-manual:1',
@@ -35,11 +44,14 @@ export const SHARED_MANUAL_SHAPE=Object.freeze({
  toolSocket:'326a59c68139226442b5c9cc441a8e9e2a269efa1ff95b5dc5c57ef2b8411b7a',toolValidity:'cd6440b56acc125dc596a867fde21109dfc1dd5b18f0572d7a2a42c4b2654d90',toolBinding:'4e7df87b048f39bd9f4ffa641f92c913c31f1ad36b93699779e7a8e22e7c3e04',
  nativeObserver:'aee30a4c318cc1645ef8bfcb00f53aec4438ed285048225ac0ca687af4d85a42',toolObserver:'43cb15acccea69cf8eea1e2ee50b5e3838358ea0aac70ee18eecf697f6659f98'
 });
-// PF2e 8.6.0 renames DamageRoll, Modifier and the API initializer. Each row
-// keeps those audited bindings together; unknown local changes still fail.
+// PF2e 8.6.0 renames DamageRoll, Modifier and the API initializer; 8.6.1
+// renames them again along with the troop iterator and reflows the stacking
+// loop. Each row keeps those audited bindings together; unknown local changes
+// still fail.
 export const NATIVE_SHARED_SHAPES=Object.freeze([
- Object.freeze({batchOriginal:SHARED_MANUAL_SHAPE.batchOriginal,batchPatched:SHARED_MANUAL_SHAPE.batchPatched,flatOriginal:SHARED_MANUAL_SHAPE.flatOriginal,init:'jm.onInit();',receiverRule:'Y',receiverPredicate:'Hn',nativeObserver:SHARED_MANUAL_SHAPE.nativeObserver}),
- Object.freeze({batchOriginal:'79954c84891ec4c9ced17ca2548de6c1e525e3e9d9bb6b0161c2096d35e642e3',batchPatched:'0e9b7b560205176460536a6ca8f3dd4699dfe08f3ab6cdc7cecdba2917bd8c03',flatOriginal:'f876b500e255635eb5bea585838a41e33fe8cabb38d62487402cab76217251dd',init:'Nm.onInit();',receiverRule:'q',receiverPredicate:'Un',nativeObserver:'4af3b9ce7299921f61bb7e62335d5e2a1d55257d44449e5af41b844b4020e65d'})
+ Object.freeze({batchOriginal:SHARED_MANUAL_SHAPE.batchOriginal,batchPatched:SHARED_MANUAL_SHAPE.batchPatched,flatOriginal:SHARED_MANUAL_SHAPE.flatOriginal,stacking:SHARED_MANUAL_SHAPE.stacking,init:'jm.onInit();',troopIterator:'gt',receiverRule:'Y',receiverPredicate:'Hn',nativeObserver:SHARED_MANUAL_SHAPE.nativeObserver}),
+ Object.freeze({batchOriginal:'79954c84891ec4c9ced17ca2548de6c1e525e3e9d9bb6b0161c2096d35e642e3',batchPatched:'0e9b7b560205176460536a6ca8f3dd4699dfe08f3ab6cdc7cecdba2917bd8c03',flatOriginal:'f876b500e255635eb5bea585838a41e33fe8cabb38d62487402cab76217251dd',stacking:SHARED_MANUAL_SHAPE.stacking,init:'Nm.onInit();',troopIterator:'gt',receiverRule:'q',receiverPredicate:'Un',nativeObserver:'4af3b9ce7299921f61bb7e62335d5e2a1d55257d44449e5af41b844b4020e65d'}),
+ Object.freeze({batchOriginal:'a700f08cb6de82fbc65fce4aa8202d2e315c5dbb648f8532fd1fe609c0927320',batchPatched:'d46e1ab50657083bc619b9e3cba3b7382e99413b2acf69680e95ff19ac2ac897',flatOriginal:'f876b500e255635eb5bea585838a41e33fe8cabb38d62487402cab76217251dd',stacking:'cf66f5bc249822044d6e5a483b25d3a8b592f7bb68a94e826ac798c58755f23d',init:'Fm.onInit();',troopIterator:'_t',receiverRule:'q',receiverPredicate:'Wn',nativeObserver:'35dd811d725745b1bab007d47ac1c67943e2da6c73a7e1266d739b0e8f57ee71'})
 ]);
 const keys=(value,fields)=>Object.keys(value).sort().join(',')===fields.split(',').sort().join(',');
 // The same authenticated sender contract with audited minifier bindings.

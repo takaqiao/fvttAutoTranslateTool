@@ -1,0 +1,86 @@
+{
+  "version": "3.2.3",
+  "declarations": {
+    "documentIndexOperations": "const documentIndexOperations = new WeakMap();",
+    "documentIndexRecoveries": "const documentIndexRecoveries = new WeakMap();",
+    "scheduleDocumentIndexRebuild": "function scheduleDocumentIndexRebuild(state, reason = \"manual\") {\n\tif (!state) return;\n\tstate.documentIndexRebuildRequested = true;\n\tif (state.documentIndexRebuildTimer != null) return;\n\ttracePatch(\"scheduleDocumentIndexRebuild queued\", { reason });\n\tstate.documentIndexRebuildTimer = globalThis.setTimeout(async () => {\n\t\tstate.documentIndexRebuildRequested = false;\n\t\ttry {\n\t\t\ttracePatch(\"scheduleDocumentIndexRebuild firing\", { reason });\n\t\t\tawait rebuildDocumentIndexCompat();\n\t\t\tlogPatch(\"documentIndex rebuilt\", { reason });\n\t\t} catch {\n\t\t\ttracePatch(\"scheduleDocumentIndexRebuild failed\", { reason });\n\t\t} finally {\n\t\t\tstate.documentIndexRebuildTimer = null;\n\t\t\t// Keep at most one follow-up for changes received during this rebuild.\n\t\t\tif (state.documentIndexRebuildRequested) scheduleDocumentIndexRebuild(state, \"queued-changes\");\n\t\t}\n\t}, 50);\n}",
+    "clearDocumentIndexData": "function clearDocumentIndexData(documentIndex) {\n\tfor (const key of Object.keys(documentIndex.trees ?? {})) delete documentIndex.trees[key];\n\tfor (const key of Object.keys(documentIndex.uuids ?? {})) delete documentIndex.uuids[key];\n}",
+    "assertSharedDocumentIndexData": "function assertSharedDocumentIndexData(documentIndex, builder) {\n\tif (builder.trees !== documentIndex.trees || builder.uuids !== documentIndex.uuids) {\n\t\tthrow new Error(\"Document index recovery builder replaced the shared search data\");\n\t}\n}",
+    "prepareDocumentIndexOperation": "async function prepareDocumentIndexOperation(documentIndex) {\n\tconst nativeReady = documentIndex.ready;\n\tconst recovery = documentIndexRecoveries.get(documentIndex);\n\t// Only bypass the exact native promise which failed. A new native build must be awaited.\n\tconst builder = recovery && recovery.failedReady === nativeReady ? recovery.builder : documentIndex;\n\ttry {\n\t\tawait (builder === documentIndex ? nativeReady : builder.ready);\n\t} catch (error) {\n\t\t// The native index may have started a newer build while we were waiting.\n\t\tif (documentIndex.ready !== nativeReady) return prepareDocumentIndexOperation(documentIndex);\n\t\ttracePatch(\"documentIndex recovering rejected ready\", { error: error?.message ?? String(error) });\n\t\t// Game.documentIndex and DocumentIndex.ready are read-only. Keep the singleton\n\t\t// and its public dictionaries, but use a fresh builder with an unpoisoned ready.\n\t\tconst fresh = new documentIndex.constructor();\n\t\tif (fresh === documentIndex || typeof fresh.index !== \"function\"\n\t\t\t|| !documentIndex.trees || !documentIndex.uuids) {\n\t\t\tthrow new Error(\"Document index does not support recovery with a fresh builder\", { cause: error });\n\t\t}\n\t\tfresh.trees = documentIndex.trees;\n\t\tfresh.uuids = documentIndex.uuids;\n\t\tassertSharedDocumentIndexData(documentIndex, fresh);\n\t\t// Shared dictionaries also receive normal core document updates while index()\n\t\t// awaits packs. Copying a completed snapshot back would lose those updates.\n\t\tclearDocumentIndexData(documentIndex);\n\t\tawait fresh.index();\n\t\tassertSharedDocumentIndexData(documentIndex, fresh);\n\t\t// Record only a successful recovery. A failed attempt is retried by a later\n\t\t// queued operation, never an unbounded retry loop within this operation.\n\t\tdocumentIndexRecoveries.set(documentIndex, { failedReady: nativeReady, builder: fresh });\n\t\tif (documentIndex.ready !== nativeReady) return prepareDocumentIndexOperation(documentIndex);\n\t\treturn { builder: fresh, rebuilt: true };\n\t}\n\tif (documentIndex.ready !== nativeReady) return prepareDocumentIndexOperation(documentIndex);\n\tassertSharedDocumentIndexData(documentIndex, builder);\n\tif (builder === documentIndex) documentIndexRecoveries.delete(documentIndex);\n\treturn { builder, rebuilt: false };\n}",
+    "queueDocumentIndexOperation": "function queueDocumentIndexOperation(documentIndex, operation) {\n\tconst previous = documentIndexOperations.get(documentIndex) ?? Promise.resolve();\n\tconst pending = previous.catch(() => {}).then(async () => {\n\t\tconst prepared = await prepareDocumentIndexOperation(documentIndex);\n\t\treturn operation(prepared);\n\t});\n\t// Publish the barrier before any await, including the wait for the native index.\n\tdocumentIndexOperations.set(documentIndex, pending);\n\tconst release = () => {\n\t\tif (documentIndexOperations.get(documentIndex) === pending) documentIndexOperations.delete(documentIndex);\n\t};\n\tpending.then(release, release);\n\treturn pending;\n}",
+    "scheduleDocumentIndexEntryReplace": "function scheduleDocumentIndexEntryReplace(state, document) {\n\tconst documentIndex = game.documentIndex;\n\tif (!document?.uuid || !document?.pack\n\t\t|| typeof documentIndex?.replaceDocument !== \"function\"\n\t\t|| typeof documentIndex?.removeDocument !== \"function\") {\n\t\tscheduleDocumentIndexRebuild(state, \"indexDocument-fallback\");\n\t\treturn;\n\t}\n\tconst entries = state.documentIndexEntries ??= new Map();\n\tentries.set(document.uuid, document);\n\tif (state.documentIndexEntryTimer != null) return;\n\tstate.documentIndexEntryTimer = globalThis.setTimeout(async () => {\n\t\ttry {\n\t\t\tawait queueDocumentIndexOperation(documentIndex, () => {\n\t\t\t\tif (game.documentIndex !== documentIndex) throw new Error(\"Document index changed while waiting\");\n\t\t\t\t// Include updates received while waiting, then let reentrant updates form the next batch.\n\t\t\t\tconst batch = Array.from(entries.values());\n\t\t\t\tentries.clear();\n\t\t\t\tfor (const doc of batch) {\n\t\t\t\t\tconst pack = game.packs?.get?.(doc.pack);\n\t\t\t\t\tif (pack?.index?.get?.(doc.id)) documentIndex.replaceDocument(doc);\n\t\t\t\t\telse documentIndex.removeDocument(doc);\n\t\t\t\t}\n\t\t\t});\n\t\t} catch {\n\t\t\tentries.clear();\n\t\t\tscheduleDocumentIndexRebuild(state, \"indexDocument-fallback\");\n\t\t} finally {\n\t\t\tstate.documentIndexEntryTimer = null;\n\t\t\tif (entries.size) scheduleDocumentIndexEntryReplace(state, entries.values().next().value);\n\t\t}\n\t}, 50);\n}",
+    "rebuildDocumentIndexCompat": "async function rebuildDocumentIndexCompat() {\n\tconst documentIndex = game.documentIndex;\n\tif (!documentIndex || typeof documentIndex.index !== \"function\") {\n\t\ttracePatch(\"rebuildDocumentIndexCompat skipped: no index API\");\n\t\treturn;\n\t}\n\ttracePatch(\"rebuildDocumentIndexCompat start\", {\n\t\ttreeCount: Object.keys(documentIndex?.trees ?? {}).length,\n\t\tuuidCount: Object.keys(documentIndex?.uuids ?? {}).length,\n\t});\n\tawait queueDocumentIndexOperation(documentIndex, async ({ builder, rebuilt }) => {\n\t\t// Preparing a new recovery builder already performs the requested full rebuild.\n\t\tif (rebuilt) return;\n\t\tclearDocumentIndexData(documentIndex);\n\t\tawait builder.index();\n\t\tassertSharedDocumentIndexData(documentIndex, builder);\n\t});\n\ttracePatch(\"rebuildDocumentIndexCompat end\", {\n\t\ttreeCount: Object.keys(documentIndex?.trees ?? {}).length,\n\t\tuuidCount: Object.keys(documentIndex?.uuids ?? {}).length,\n\t});\n}",
+    "normalizePackId": "function normalizePackId(pack) {\n\tif (!pack) return null;\n\tif (typeof pack === \"string\") return pack;\n\tif (typeof pack?.collection === \"string\") return pack.collection;\n\tif (typeof pack?.metadata?.id === \"string\") return pack.metadata.id;\n\treturn null;\n}",
+    "translateIndexTitles": "function translateIndexTitles(state, index, packId) {\n\tconst titles = state.titleIndex?.[packId]?.titles;\n\tif (!titles || !index) return index;\n\n\tconst applyEntry = (entry, keyFromIndex = null) => {\n\t\tif (!entry) return;\n\t\tif (entry.translated || entry?.flags?.babele?.translated) return;\n\n\t\tconst keyCandidates = [keyFromIndex, entry._id, entry.originalName, entry.name].filter(\n\t\t\t(v) => typeof v === \"string\" && v.length,\n\t\t);\n\t\tlet translatedName = null;\n\t\tfor (const k of keyCandidates) {\n\t\t\ttranslatedName = titles[k];\n\t\t\tif (typeof translatedName === \"string\" && translatedName.length) break;\n\t\t}\n\t\tif (typeof translatedName !== \"string\" || !translatedName.length) return;\n\n\t\tentry.originalName = entry.originalName ?? entry.name;\n\t\tentry.name = translatedName;\n\t\tentry.translated = true;\n\t\tentry.hasTranslation = true;\n\t\tentry.flags = foundry.utils.mergeObject(entry.flags ?? {}, {\n\t\t\tbabele: {\n\t\t\t\ttranslated: true,\n\t\t\t\thasTranslation: true,\n\t\t\t\toriginalName: entry.originalName,\n\t\t\t},\n\t\t});\n\t};\n\n\tfor (const raw of index) {\n\t\tif (Array.isArray(raw)) applyEntry(raw[1], raw[0]);\n\t\telse applyEntry(raw);\n\t}\n\treturn index;\n}"
+  },
+  "wrapper": "libWrapper.register(\n\t\tPATCH_ID,\n\t\t\"foundry.documents.collections.CompendiumCollection.prototype.indexDocument\",\n\t\tfunction (wrapped, ...args) {\n\t\t\ttracePatch(\"indexDocument enter\", {\n\t\t\t\tpackId: normalizePackId(this),\n\t\t\t\tdocumentId: args?.[0]?.id ?? args?.[0]?._id ?? null,\n\t\t\t});\n\t\t\tconst out = wrapped(...args);\n\t\t\tif (!isOnDemandMode()) return out;\n\n\t\t\ttry {\n\t\t\t\tconst document = args?.[0];\n\t\t\t\tconst id = document?.id ?? document?._id;\n\t\t\t\tconst packId = normalizePackId(this);\n\t\t\t\tconst babele = game.babele;\n\t\t\t\tconst state = babele?.__ondemandPatch;\n\t\t\t\tif (!id || !packId || !state) return out;\n\n\t\t\t\tconst entry = this.index?.get?.(id);\n\t\t\t\tif (!entry) return out;\n\n\t\t\t\tif (entry.originalName == null) {\n\t\t\t\t\tentry.originalName = document?.originalName ?? document?.name ?? entry.name;\n\t\t\t\t}\n\n\t\t\t\ttranslateIndexTitles(state, [entry], packId);\n\t\t\t\tscheduleDocumentIndexEntryReplace(state, document);\n\t\t\t\ttracePatch(\"indexDocument applied\", {\n\t\t\t\t\tpackId,\n\t\t\t\t\tdocumentId: id,\n\t\t\t\t\tentryName: entry?.name ?? null,\n\t\t\t\t\toriginalName: entry?.originalName ?? null,\n\t\t\t\t});\n\t\t\t} catch {\n\t\t\t\ttracePatch(\"indexDocument failed\", { packId: normalizePackId(this) });\n\t\t\t}\n\n\t\t\treturn out;\n\t\t},\n\t\t\"WRAPPER\",\n\t);",
+  "provenance": {
+    "module": "pf2e_compendium_chn",
+    "file": "babele-ondemand-patch.js",
+    "sha256": "0a8a7aee3d82f1a9f1a8e9f7cf11a3b21224cc0f1e98bb61e77bfdfc50c9bed7",
+    "bytes": 135638,
+    "extraction": "Exact UTF-8 source slices of top-level declarations and the indexDocument libWrapper registration; no newline translation.",
+    "fragments": {
+      "documentIndexOperations": {
+        "start": 1547,
+        "end": 1593,
+        "sha256": "ca665ea357a7f1fd793b61bda176205a7cf41e1895735094781a016640545fad"
+      },
+      "documentIndexRecoveries": {
+        "start": 1594,
+        "end": 1640,
+        "sha256": "8097fd5ba7b20e97a1ea3cf5a6972ed1ad0b528d989ea682aa84bf2b0927a585"
+      },
+      "scheduleDocumentIndexRebuild": {
+        "start": 78168,
+        "end": 79022,
+        "sha256": "2940133cde530921ffde65861111e8e182b731eaa531ecb9f22d02a2a793a228"
+      },
+      "clearDocumentIndexData": {
+        "start": 79024,
+        "end": 79258,
+        "sha256": "de632bc39f78671aeb917dab4c5707edc2e41b59c583d013b6eed2d89e65f207"
+      },
+      "assertSharedDocumentIndexData": {
+        "start": 79260,
+        "end": 79502,
+        "sha256": "c92ecf2c79dcd6c8462414ce320a585811f81ead3a25808e039d3a9b2a414819"
+      },
+      "prepareDocumentIndexOperation": {
+        "start": 79504,
+        "end": 81738,
+        "sha256": "215eafdd0408ec73675e17d0670994a5427172018a1ee1b1fc8ea0b86a192811"
+      },
+      "queueDocumentIndexOperation": {
+        "start": 81740,
+        "end": 82381,
+        "sha256": "f314a3ab4f2ce6e874e2d671dc7116b2c492e3cc8654d436b03fc00c4cf0e775"
+      },
+      "scheduleDocumentIndexEntryReplace": {
+        "start": 82383,
+        "end": 83748,
+        "sha256": "257209bb49c4a74009a73d727abdbcb323b32397af6e938e137b13f190c77af8"
+      },
+      "rebuildDocumentIndexCompat": {
+        "start": 83750,
+        "end": 84657,
+        "sha256": "adcb1c0e9808fec4361daf213c45659fd4a1cc3fd319c57e9de4b3921584ef69"
+      },
+      "normalizePackId": {
+        "start": 84659,
+        "end": 84913,
+        "sha256": "e449e2ea838f0c88a2ff2f3ae36036137db8c6cc973471e5d92a4a35c507095d"
+      },
+      "translateIndexTitles": {
+        "start": 109968,
+        "end": 111099,
+        "sha256": "8d24bd676aa79d0380a925b2eae5c292bd3c0648810d4d2ca69dd552897f19d0"
+      },
+      "indexDocument wrapper registration": {
+        "start": 133953,
+        "end": 135161,
+        "sha256": "4efbc5f2dcc4b42881cf1c29c0baeccc3dc05663c513fb1ffb35953337ceb7de"
+      }
+    }
+  }
+}

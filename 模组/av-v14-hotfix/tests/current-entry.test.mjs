@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 const source=fs.readFileSync(new URL('../av-v14-hotfix.mjs',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,'').replaceAll('import.meta.url',JSON.stringify(new URL('../av-v14-hotfix.mjs',import.meta.url).href));
-async function boot(disabled=[],generation=14){
+async function boot(disabled=[],generation=14,{globals={},modules=[]}={}){
  const hooks={},tasks=[],settings=new Map(),calls=[],phases=[],self={};let phase='load';
  const names=['prepareSundryPatch','prepareTurnLifecyclePatch','registerLegacyCompat','installGrid','installSundryPatch','installPatreonPatch','installDurationPatch','installTimestampPatch','installTokenizerChatPortraitPatch','installSoundStopPatch','installWayfinderFogPatch','installBbmmHardLocks','registerDsnQualitySettings','installDsnQualityLocks','installTurnLifecyclePatch','installDsnChatRecovery'];
  const g={console:{info(){},error(...args){throw Error(args.join(' '));}},structuredClone,queueMicrotask:fn=>tasks.push(fn),
@@ -11,6 +11,8 @@ async function boot(disabled=[],generation=14){
    installChatDeleteCoalescing:()=>true,registerBabeleIndex:()=>({status:()=>({state:'inactive'})}),
    game:{version:`${generation}.369`,release:{generation},system:{id:'pf2e',version:'8.5.1'},modules:new Map([['av-v14-hotfix',self]]),settings:{register:(id,key,def)=>settings.set(key,def),get:(id,key)=>!disabled.includes(key)}}};
  for(const name of names)g[name]=()=>{calls.push(name);phases.push({name,phase});};
+ for(const id of modules)g.game.modules.set(id,{active:true,version:'fixture'});
+ Object.assign(g,globals);
  vm.runInNewContext(source,g);phase='init';hooks.init();phase='setup';const setup=hooks.setup(),setupSyncCalls=[...calls];
  await setup;phase='ready';hooks.ready();phase='ready-async';for(const task of tasks)await task();
  return {calls,phases,setupSyncCalls,settings,status:self.api.status()};
@@ -18,6 +20,23 @@ async function boot(disabled=[],generation=14){
 test('diagnostic version matches the package manifest',async()=>{
  const f=await boot(),manifest=JSON.parse(fs.readFileSync(new URL('../module.json',import.meta.url),'utf8'));
  assert.equal(f.status.version,manifest.version);
+});
+test('translation 3.2.3 retires the index adapter through the real source check and reports why',async()=>{
+ const upstream=JSON.parse(fs.readFileSync(new URL('./fixtures/babele-upstream-3.2.3.json',import.meta.url),'utf8'));
+ const translation=[...Object.values(upstream.declarations),upstream.wrapper].join('\n'),fetched=[];
+ const babele=await import('../scripts/patches/babele.mjs'),runtime={game:{}};
+ const registerBabeleIndex=options=>babele.registerBabeleIndex({...options,g:runtime,capture:babele.captureBabeleCore(runtime)});
+ const fetch=async url=>{fetched.push(String(url));return {ok:true,text:async()=>String(url).includes('/pf2e_compendium_chn/')?translation:''};};
+ const f=await boot([],14,{globals:{URL,fetch,registerBabeleIndex,verifyBabeleIndexSources:babele.verifyBabeleIndexSources},modules:['pf2e_compendium_chn','babele','lib-wrapper']});
+ assert.equal(fetched.length,3);
+ assert.equal(f.status.patches.babele.status,'retired');
+ assert.match(f.status.patches.babele.detail,/replaces changed document index entries itself/);
+ assert.equal(f.status.babele.state,'retired');assert.equal(f.status.babele.applied,false);assert.equal(f.status.babele.attachedPacks,0);
+});
+test('an unverified translation source is still reported as unsupported, without a retirement detail',async()=>{
+ const registerBabeleIndex=()=>({status:()=>({state:'unsupported',reason:'Unverified title translation declaration: example'})});
+ const f=await boot([],14,{globals:{registerBabeleIndex}});
+ assert.equal(f.status.patches.babele.status,'unsupported');assert.equal(Object.hasOwn(f.status.patches.babele,'detail'),false);
 });
 test('current entry retires old Patreon/Wayfinder installers and exposes new fixes',async()=>{
  const f=await boot();

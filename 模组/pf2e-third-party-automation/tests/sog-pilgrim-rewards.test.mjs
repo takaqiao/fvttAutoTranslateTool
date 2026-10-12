@@ -136,3 +136,31 @@ test('player cosmetics restore after Sequencer is ready and follow native leaf c
   assert.equal(played.length,3);assert.equal(played.at(-1).count,3);
  }finally{for(const [key,value]of Object.entries(previous))if(value===undefined)delete globalThis[key];else globalThis[key]=value;}
 });
+
+test('a player client rebuilds a missing storm once Sequencer has loaded its saved effects',async()=>{
+ const previous={Sequence:globalThis.Sequence,Sequencer:globalThis.Sequencer,PIXI:globalThis.PIXI};
+ const played=[],registered=new Map();
+ class Sequence {
+  constructor(){this.count=0;}
+  effect(){this.count++;return this;}
+  async play(options){played.push({count:this.count,options});}
+ }
+ for(const method of ['file','name','atLocation','tieToDocuments','size','mask','opacity','persist','temporary','fadeIn','fadeOut'])Sequence.prototype[method]=function(){return this;};
+ globalThis.Sequence=Sequence;globalThis.PIXI={Circle:class Circle{}};
+ globalThis.Sequencer={EffectManager:{getEffects:()=>[],endEffects:async()=>{}}};
+ try{
+  const template={id:'template',uuid:'Scene.scene.MeasuredTemplate.template'};
+  const scene={id:'scene',tokens:new Map(),templates:new Map([[template.id,template]]),grid:{size:100,distance:5}};
+  const actor={uuid:'Actor.owner',items:new Map()},hairpin={...item('hairpin-of-blooming-flowers','equipment'),id:'hairpin',uuid:'Actor.owner.Item.hairpin',actor};
+  const effect={id:'storm',uuid:'Actor.owner.Item.storm',type:'effect',actor,flags:{'pf2e-third-party-automation':{sogPilgrim:{kind:'storm',source:hairpin.uuid,nonce:'storm-use',sceneId:scene.id,position:{x:100,y:100},resourceRefs:[{type:'MeasuredTemplate',id:template.id,uuid:template.uuid}]}}}};
+  actor.items.set(hairpin.id,hairpin);actor.items.set(effect.id,effect);
+  const game={system:{id:'pf2e'},world:{id:'sog'},user:{id:'player'},users:{activeGM:{id:'gm'}},actors:[actor],scenes:new Map([['scene',scene]]),modules:new Map([['sequencer',{active:true}]])};
+  const canvas={ready:false,scene};
+  const api=await createPilgrimRewards({game,canvas,fromUuid:async()=>null});
+  api.register({Hooks:{on:(name,handler)=>registered.set(name,handler)},socket:{register(){}}});
+  canvas.ready=true;
+  await registered.get('canvasReady')();assert.equal(played.length,0);
+  await registered.get('sequencerEffectManagerReady')();
+  assert.deepEqual(played,[{count:2,options:{local:true}}]);
+ }finally{for(const [key,value]of Object.entries(previous))if(value===undefined)delete globalThis[key];else globalThis[key]=value;}
+});

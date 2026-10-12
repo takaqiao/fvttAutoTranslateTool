@@ -9,7 +9,8 @@ const entry=await readFile(new URL('../av-v14-hotfix.mjs',import.meta.url),'utf8
 const sources={
   '8.5.0':await readFile(new URL('./generate-item-name-original.js.txt',import.meta.url),'utf8'),
   '8.5.1':await readFile(new URL('./fixtures/generate-item-name-8.5.1.js.txt',import.meta.url),'utf8'),
-  '8.6.0':await readFile(new URL('./fixtures/generate-item-name-8.6.0.js.txt',import.meta.url),'utf8')
+  '8.6.0':await readFile(new URL('./fixtures/generate-item-name-8.6.0.js.txt',import.meta.url),'utf8'),
+  '8.6.1':await readFile(new URL('./fixtures/generate-item-name-8.6.1.js.txt',import.meta.url),'utf8')
 };
 async function boot(version,{sourceVersion=version,hash=hashSource,systemId='pf2e',duringHash,transformOriginal=value=>value}={}){
   const callbacks={},microtasks=[],settings=new Map(),self={},errors=[];
@@ -28,7 +29,15 @@ async function boot(version,{sourceVersion=version,hash=hashSource,systemId='pf2
   return {state:self.api.status().patches.itemNames,reads,writes,current,original,errors};
 }
 
-for(const version of ['8.5.0','8.5.1','8.6.0'])test(`entry installs names for the audited ${version} release function`,async()=>{
+test('each registered digest is the module hash of its own audited release function',async()=>{
+ assert.deepEqual(Object.keys(naming.ITEM_NAME_HASHES),Object.keys(sources));
+ for(const [version,source] of Object.entries(sources)){
+  const text=Function.prototype.toString.call(vm.runInNewContext('('+source+')'));
+  assert.equal(await hashSource(text),naming.ITEM_NAME_HASHES[version],version);
+ }
+ assert.equal(new Set(Object.values(naming.ITEM_NAME_HASHES)).size,Object.keys(sources).length);
+});
+for(const version of ['8.5.0','8.5.1','8.6.0','8.6.1'])test(`entry installs names for the audited ${version} release function`,async()=>{
  const r=await boot(version);assert.deepEqual(r.errors,[]);assert.equal(r.state.status,'installed');
  assert.equal(r.writes,1);assert.notEqual(r.current,r.original);
  const item={isOfType:()=>true,baseType:null,name:'custom item'};
@@ -54,9 +63,9 @@ test('a system version change during validation does not install a stale naming 
 });
 
 test('PF2e version labels do not replace the exact audited naming function contract',async()=>{
- for(const version of ['8.5.2','8.6.0','9.0.0']){
-  const known=await boot(version,{sourceVersion:'8.6.0'});assert.equal(known.state.status,'installed');
-  const foreign=await boot(version,{sourceVersion:'8.6.0',hash:()=> 'unknown'});
+ for(const sourceVersion of ['8.6.0','8.6.1'])for(const version of ['8.5.2','8.6.0','8.6.1','9.0.0']){
+  const known=await boot(version,{sourceVersion});assert.equal(known.state.status,'installed');
+  const foreign=await boot(version,{sourceVersion,hash:()=> 'unknown'});
   assert.equal(foreign.state.status,'unsupported-source');assert.equal(foreign.writes,0);
  }
 });

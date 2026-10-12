@@ -36,6 +36,12 @@ test('fixture regions match the current upstream source bytes',()=>{
  assert.equal(createHash('sha256').update(source).digest('hex'),fixture.sourceSHA256);
  for(const region of Object.values(fixture.regions))assert.ok(source.includes(region));
 });
+test('AAT 0.19.2 keeps every fixture region byte for byte',()=>{
+ assert.ok(process.env.AAT_0192_SOURCE,'AAT_0192_SOURCE must point to the original 0.19.2 main.js');
+ const bytes=readFileSync(process.env.AAT_0192_SOURCE),source=bytes.toString('utf8');
+ assert.equal(createHash('sha256').update(bytes).digest('hex'),'8bdba3f00da2a727103a026d39fa43646730f78ee40e5f1ad91e52c0d0e76174');
+ for(const [name,region]of Object.entries(fixture.regions))assert.equal(source.split(region).length,2,name);
+});
 
 for(const rank of [1,3,7,undefined])for(const damage of [0,1,2,4])for(const max of [1,2,3])for(const type of ['action','reaction'])
  test(`native dynamic cost: rank=${rank}, damage=${damage}, reactions=${max}, type=${type}`,()=>{

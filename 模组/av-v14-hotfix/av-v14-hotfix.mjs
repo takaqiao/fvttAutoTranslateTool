@@ -13,7 +13,7 @@ import {installTurnLifecyclePatch,prepareTurnLifecyclePatch} from './scripts/pat
 import {installDsnChatRecovery} from './scripts/patches/dsn-chat.mjs';
 
 const ID='av-v14-hotfix';
-const state={version:'0.6.26',patches:{patreon:{status:'retired',detail:'Upstream 3.2.29 includes the relationship refresh guards.'},wayfinderFog:{status:'retired',detail:'Wayfinder 14.1.1 replaced the old fog implementation; the 14.0.1 adapter is retired.'},grid:{status:'retired',detail:'Use Grid 2.3.1 distance and undrawn-token aura handling.'},bbmmLocks:{status:'retired',detail:'Use BBMM 1.4.11 submenu hard locks and notifications.'}}};
+const state={version:'0.6.27',patches:{patreon:{status:'retired',detail:'Upstream 3.2.29 includes the relationship refresh guards.'},wayfinderFog:{status:'retired',detail:'Wayfinder 14.1.1 replaced the old fog implementation; the 14.0.1 adapter is retired.'},grid:{status:'retired',detail:'Use Grid 2.3.1 distance and undrawn-token aura handling.'},bbmmLocks:{status:'retired',detail:'Use BBMM 1.4.11 submenu hard locks and notifications.'}}};
 let babele;
 const report=(feature,status,detail)=>{
   if(typeof feature==='object'){const {restore,...data}=feature;state.patches[feature.feature]=data;return;}
@@ -76,7 +76,8 @@ Hooks.once('ready',()=>queueMicrotask(async()=>{
       if(sourceContract.supported)({preserveIndexFlags}=await import('../babele/script/foundry/wrapper.js'));
       if(!unchanged())sourceContract={supported:false,reason:'Babele source owner changed during validation.'};
     }catch(error){sourceContract={supported:false,reason:String(error)};}
-    babele=registerBabeleIndex({moduleId:ID,preserveIndexFlags,sourceContract});report('babele',babele.status().state);
+    babele=registerBabeleIndex({moduleId:ID,preserveIndexFlags,sourceContract});
+    const {state:status,reason}=babele.status();report('babele',status,status==='retired'?reason:undefined);
   });
   report('runtime','ready');
 }));

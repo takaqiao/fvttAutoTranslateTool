@@ -28,7 +28,7 @@ function fixture(t,{matchTrigger,playError,lookup,endAction}={}) {
  // Sequencer 4.2.3 filters visible effects only, and ignores sceneId in _filterEffects.
  const matching=filter=>effects.filter(effect=>(!filter.name||effect.name?.[0]===filter.name)&&(!filter.effects||filter.effects.includes(effect.id)));
  const globals={Sequence,PIXI:{Circle:class Circle{constructor(x,y,radius){Object.assign(this,{x,y,radius});}}},Sequencer:{EffectManager:{
-  getEffects(filter){return matching(filter).map(effect=>({id:effect.id,data:{name:effect.name?.[0],sceneId:effect.sceneId}}));},
+  getEffects(filter){return matching(filter).map(effect=>({id:effect.id,data:{name:effect.name?.[0],sceneId:effect.sceneId,temporary:!!effect.temporary}}));},
   async endEffects(filter,push){
    ended.push({filter,push});
    for(const effect of matching(filter)){effects.splice(effects.indexOf(effect),1);const index=stored.indexOf(effect);if(index>=0)stored.splice(index,1);}
@@ -44,7 +44,7 @@ function fixture(t,{matchTrigger,playError,lookup,endAction}={}) {
  const actor={id:'hero',uuid:'Actor.hero',type:'character',items:new Map(),rollOptions:{all:{}}};
  const item={id:'branch',uuid:'Actor.hero.Item.branch',slug:'branch-of-the-great-sugi',type:'weapon',actor,system:{baseItem:'whip',group:'flail',equipped:{carryType:'held',handsHeld:1}},flags:{world:{sogWontonNativeAutomation:{key:'branch-of-the-great-sugi'},sogB2Ch2Resources:{originalSlug:'branch-of-the-great-sugi',fileSha256:'a'.repeat(64)}}}};
  actor.items.set(item.id,item);
- const targetActor={id:'foe',uuid:'Actor.foe',type:'npc'},scene={id:'battle',tokens:new Map(),grid:{size:100,distance:5}};
+ const targetActor={id:'foe',uuid:'Actor.foe',type:'npc'},scene={id:'battle',tokens:new Map(),templates:new Map(),grid:{size:100,distance:5}};
  const source={id:'hero',uuid:'Scene.battle.Token.hero',documentName:'Token',actor,parent:scene},target={id:'foe',uuid:'Scene.battle.Token.foe',documentName:'Token',actor:targetActor,parent:scene};
  for(const token of [source,target]){token.object={document:token};scene.tokens.set(token.id,token);}
  const canvas={ready:true,scene},game={user,users,modules:new Map([['sequencer',{active:true}]]),actors:new Map([[actor.id,actor],[targetActor.id,targetActor]]),messages:new Map(),scenes:new Map([[scene.id,scene]])};
@@ -60,8 +60,10 @@ function fixture(t,{matchTrigger,playError,lookup,endAction}={}) {
   game.messages.set(id,message);return message;
  }
  const sections=kind=>played.flat().filter(section=>section.kind===kind);
- function enterScene(next){
+ // replay:false models Sequencer 4.3.0, which skips saved effects stored on the scene itself.
+ function enterScene(next,{replay=true}={}){
   canvas.scene=next;effects.length=0;
+  if(!replay)return;
   for(let index=stored.length-1;index>=0;index--){
    const effect=stored[index],tied=[effect.tieToDocuments?.[0]??[]].flat();
    if(tied.some(uuid=>!documents.has(uuid)))stored.splice(index,1);
@@ -69,10 +71,14 @@ function fixture(t,{matchTrigger,playError,lookup,endAction}={}) {
   }
  }
  function areaDocuments(nonce='storm'){
-  const effect={id:nonce,uuid:`Actor.hero.Item.${nonce}`,type:'effect',actor};
   const template={id:nonce,uuid:`Scene.battle.MeasuredTemplate.${nonce}`,parent:scene};
-  documents.set(effect.uuid,effect);documents.set(template.uuid,template);actor.items.set(effect.id,effect);
+  const effect={id:nonce,uuid:`Actor.hero.Item.${nonce}`,type:'effect',actor,flags:{[M]:{sogPilgrim:{kind:'storm',source:item.uuid,nonce,sceneId:scene.id,position:{x:100,y:100},resourceRefs:[{type:'MeasuredTemplate',id:template.id,uuid:template.uuid}]}}}};
+  documents.set(effect.uuid,effect);documents.set(template.uuid,template);actor.items.set(effect.id,effect);scene.templates.set(template.id,template);
   return {kind:'storm',scene,position:{x:100,y:100},nonce,effect,template};
+ }
+ function hairpinStorm(){
+  item.type='equipment';item.flags.world.sogWontonNativeAutomation.key='hairpin-of-blooming-flowers';item.flags.world.sogB2Ch2Resources.originalSlug='hairpin-of-blooming-flowers';
+  return areaDocuments();
  }
  function fanEffect(count=2){
   item.flags.world.sogWontonNativeAutomation.key='spirit-fan';item.flags.world.sogB2Ch2Resources.originalSlug='spirit-fan';
@@ -80,7 +86,7 @@ function fixture(t,{matchTrigger,playError,lookup,endAction}={}) {
   const effect={id:'leaves',uuid:'Actor.hero.Item.leaves',type:'effect',actor,system:{badge:{type:'counter',value:count}},flags:{[M]:{sogPilgrim:{kind:'leaves',source:item.uuid}}},isExpired:false,remainingDuration:{expired:false}};
   actor.items.set(effect.id,effect);documents.set(effect.uuid,effect);return effect;
  }
- return {media,options,game,canvas,actor,item,source,target,scene,message,played,ended,effects,stored,playOptions,documents,enterScene,areaDocuments,fanEffect,errors,writes,queries,sections};
+ return {media,options,game,canvas,actor,item,source,target,scene,message,played,ended,effects,stored,playOptions,documents,enterScene,areaDocuments,hairpinStorm,fanEffect,errors,writes,queries,sections};
 }
 
 test('an active Trigger Animations attack leaves only the hit decoration',async t=>{
@@ -305,6 +311,81 @@ test('a storm cannot return after its effect, template, or source was deleted of
 test('a storm without its own lifecycle documents never creates an orphan visual',async t=>{
  const f=fixture(t);await f.media.area(f.item,{kind:'storm',scene:f.scene,position:{x:100,y:100},nonce:'missing'});
  assert.equal(f.stored.length,0);assert.equal(f.played.length,0);assert.equal(f.errors.length,1);
+});
+
+for(const user of ['gm','player'])test(`a reloaded ${user} client rebuilds both storm layers when Sequencer does not replay them`,async t=>{
+ const f=fixture(t),area=f.hairpinStorm();await f.media.area(f.item,area);
+ const saved=[...f.stored];assert.equal(saved.length,2);
+ f.game.user={id:user};f.enterScene(f.scene,{replay:false});assert.equal(f.effects.length,0);
+ await f.media.reconcile(f.actor);
+ assert.equal(f.effects.length,2);assert.deepEqual(f.playOptions.at(-1),{local:true});
+ for(const [index,layer]of f.effects.entries()){
+  for(const key of ['file','name','atLocation','tieToDocuments','size','mask','opacity','fadeIn','fadeOut'])assert.deepEqual(layer[key],saved[index][key],key);
+  assert.ok(layer.persist);assert.ok(layer.temporary);
+ }
+ assert.deepEqual(f.stored,saved);assert.equal(f.sections('sound').length,1);
+ await f.media.reconcile(f.actor);
+ assert.equal(f.effects.length,2);assert.equal(f.played.length,2);assert.deepEqual(f.errors,[]);
+});
+
+test('a saved storm that Sequencer replays is not rebuilt',async t=>{
+ const f=fixture(t),area=f.hairpinStorm(),other={id:'elsewhere',tokens:new Map()};
+ await f.media.area(f.item,area);const saved=[...f.stored];
+ f.enterScene(other);await f.media.reconcile(f.actor);assert.equal(f.effects.length,0);
+ f.enterScene(f.scene);await f.media.reconcile(f.actor);
+ assert.equal(f.effects.length,2);assert.deepEqual(new Set(f.effects),new Set(saved));
+ assert.equal(f.played.length,1);assert.equal(f.ended.length,0);
+});
+
+test('a replay that lands beside a local rebuild leaves only the saved storm',async t=>{
+ const f=fixture(t),area=f.hairpinStorm();await f.media.area(f.item,area);const saved=[...f.stored];
+ f.enterScene(f.scene,{replay:false});await f.media.reconcile(f.actor);assert.equal(f.effects.length,2);
+ f.effects.push(...saved);await f.media.reconcile(f.actor);
+ assert.deepEqual(f.effects,saved);assert.deepEqual(f.stored,saved);
+ assert.equal(f.played.length,2);assert.equal(f.ended.at(-1).push,false);
+});
+
+test('a client that never reloaded keeps its original storm without a second copy',async t=>{
+ const f=fixture(t),area=f.hairpinStorm();await f.media.area(f.item,area);const original=[...f.effects];
+ for(const user of ['gm','player']){f.game.user={id:user};await f.media.reconcile(f.actor);}
+ assert.equal(original.length,2);assert.deepEqual(f.effects,original);
+ assert.equal(f.played.length,1);assert.equal(f.ended.length,0);
+});
+
+test('an ended storm is removed from a client that rebuilt it and does not return',async t=>{
+ const f=fixture(t),area=f.hairpinStorm();await f.media.area(f.item,area);
+ f.game.user={id:'player'};f.enterScene(f.scene,{replay:false});await f.media.reconcile(f.actor);assert.equal(f.effects.length,2);
+ const keep={id:'other',name:['other-module.storm'],sceneId:f.scene.id,temporary:[]};f.effects.push(keep);
+ f.scene.templates.delete(area.template.id);f.actor.items.delete(area.effect.id);
+ await f.media.deleted(area.effect);
+ assert.deepEqual(f.effects,[keep]);assert.ok(f.ended.every(({push})=>push===false));
+ await f.media.reconcile(f.actor);
+ assert.deepEqual(f.effects,[keep]);assert.equal(f.played.length,2);assert.deepEqual(f.errors,[]);
+});
+
+test('a storm that expired, belongs to another scene, or lost its template is not rebuilt',async t=>{
+ const f=fixture(t),area=f.hairpinStorm(),flag=area.effect.flags[M].sogPilgrim;
+ area.effect.isExpired=true;await f.media.reconcile(f.actor);area.effect.isExpired=false;
+ area.effect.remainingDuration={expired:true};await f.media.reconcile(f.actor);delete area.effect.remainingDuration;
+ flag.sceneId='elsewhere';await f.media.reconcile(f.actor);flag.sceneId=f.scene.id;
+ f.scene.templates.delete(area.template.id);await f.media.reconcile(f.actor);
+ assert.equal(f.played.length,0);assert.deepEqual(f.errors,[]);
+ f.scene.templates.set(area.template.id,area.template);await f.media.reconcile(f.actor);
+ assert.equal(f.effects.length,2);
+});
+
+test('a rebuild waits while the GM is still resolving the activation that broadcasts the storm',async t=>{
+ const f=fixture(t),area=f.hairpinStorm(),use={nonce:area.nonce,operation:'storm',status:'pending'};
+ f.item.flags[M]={sogPilgrim:{use}};f.game.user={id:'player'};
+ await f.media.reconcile(f.actor);assert.equal(f.played.length,0);
+ use.status='done';await f.media.reconcile(f.actor);
+ assert.equal(f.effects.length,2);assert.equal(f.stored.length,0);
+});
+
+test('overlapping reconciliations rebuild a missing storm once',async t=>{
+ const f=fixture(t);f.hairpinStorm();
+ await Promise.all([f.media.reconcile(f.actor),f.media.reconcile(f.actor)]);
+ assert.equal(f.effects.length,2);assert.equal(f.played.length,1);
 });
 
 test('leaf counts and scarf light are rebuilt after scene changes without saved stale visuals',async t=>{

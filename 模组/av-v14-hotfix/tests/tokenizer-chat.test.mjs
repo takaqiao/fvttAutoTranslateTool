@@ -76,8 +76,16 @@ test('preserves upstream arguments, null results and rendering errors',async()=>
   await assert.rejects(wrapper.call({},async()=>{throw error;}),e=>e===error);
 });
 
+test('8.6.1 render method differs from 8.6.0 only in two compiler closure names and four mangled private names',()=>{
+ const current=native['8.6.1'].renderHTML,prior=native['8.6.0'].renderHTML;
+ assert.notEqual(current,prior);
+ assert.equal(current.replace('Ds.listen(','Ts.listen(').replace('instanceof un ','instanceof ln ')
+  .replace('this.#e(','this.#highlightDoS(').replace('this.#t(','this.#appendSetAsInitiative(')
+  .replace('this.#n(','this.#onHoverIn(').replace('this.#r(','this.#onHoverOut('),prior);
+});
+
 test('registers once for audited render methods regardless of the PF2e version label',()=>{
- for(const sourceVersion of ['8.5.1','8.6.0'])for(const version of [sourceVersion,'9.0.0']){
+ for(const sourceVersion of ['8.5.1','8.6.0','8.6.1'])for(const version of [sourceVersion,'9.0.0']){
   const {runtime,calls}=environment({sourceVersion,version});
   assert.equal(installTokenizerChatPortraitPatch({runtime}).status,'installed');
   assert.equal(installTokenizerChatPortraitPatch({runtime}).status,'already-installed');
@@ -103,7 +111,7 @@ test('a forged toString does not authorize an unknown render method',()=>{
  assert.equal(installTokenizerChatPortraitPatch({runtime}).status,'unsupported-source');assert.equal(calls.length,0);
 });
 
-for(const sourceVersion of ['8.5.1','8.6.0']){
+for(const sourceVersion of ['8.5.1','8.6.0','8.6.1']){
  test(`native ${sourceVersion} still applies map scaling and masking to Tokenizer portraits`,async()=>{
   const f=environment({sourceVersion});await f.message.renderHTML();
   assert.match(f.image().style.transform,/^scale\(2\.5/);
@@ -130,22 +138,24 @@ for(const sourceVersion of ['8.5.1','8.6.0']){
  });
 }
 
-test('8.6.0 mirrored token scale still needs the Tokenizer chat correction',async()=>{
- const f=environment();f.actor.prototypeToken.texture.scaleX=-2;
- await f.message.renderHTML();assert.match(f.image().style.transform,/^scale\(2\.5/);
- await createTokenizerChatPortraitWrapper().call(f.message,async()=>f.html);
- assert.equal(f.image().style.transform,'none');assert.equal(f.image().style.maskImage,'none');
-});
+for(const sourceVersion of ['8.6.0','8.6.1']){
+ test(`${sourceVersion} mirrored token scale still needs the Tokenizer chat correction`,async()=>{
+  const f=environment({sourceVersion});f.actor.prototypeToken.texture.scaleX=-2;
+  await f.message.renderHTML();assert.match(f.image().style.transform,/^scale\(2\.5/);
+  await createTokenizerChatPortraitWrapper().call(f.message,async()=>f.html);
+  assert.equal(f.image().style.transform,'none');assert.equal(f.image().style.maskImage,'none');
+ });
 
-test('changed native portrait selectors, scaling, masking or visibility are declined',()=>{
- for(const [before,after] of [['header.message-header','header.changed-header'],['Math.abs(e.texture.scaleX ?? 1)','1'],
-   ['a.style.maskImage =','a.style.background ='],['&& this.isContentVisible','&& true']]){
-  const renderSource=native['8.6.0'].renderHTML.replace(before,after);
-  const f=environment({renderSource}),original=f.runtime.CONFIG.ChatMessage.documentClass.prototype.renderHTML;
-  assert.equal(installTokenizerChatPortraitPatch({runtime:f.runtime}).status,'unsupported-source',before);
-  assert.equal(f.calls.length,0);assert.equal(f.runtime.CONFIG.ChatMessage.documentClass.prototype.renderHTML,original);
- }
-});
+ test(`changed native ${sourceVersion} portrait selectors, scaling, masking or visibility are declined`,()=>{
+  for(const [before,after] of [['header.message-header','header.changed-header'],['Math.abs(e.texture.scaleX ?? 1)','1'],
+    ['a.style.maskImage =','a.style.background ='],['&& this.isContentVisible','&& true']]){
+   const renderSource=native[sourceVersion].renderHTML.replace(before,after);
+   const f=environment({renderSource}),original=f.runtime.CONFIG.ChatMessage.documentClass.prototype.renderHTML;
+   assert.equal(installTokenizerChatPortraitPatch({runtime:f.runtime}).status,'unsupported-source',before);
+   assert.equal(f.calls.length,0);assert.equal(f.runtime.CONFIG.ChatMessage.documentClass.prototype.renderHTML,original);
+  }
+ });
+}
 
 // Small synchronous wrapper dispatcher for installation-order checks. Browser
 // libWrapper internals and its priority configuration are outside this fixture.

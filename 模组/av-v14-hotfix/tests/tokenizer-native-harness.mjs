@@ -16,7 +16,7 @@ export function environment({sourceVersion='8.6.0', version=sourceVersion, gener
   const listeners = {listen:async()=>{}};
   const runtime = {Base, console,
     game:{release:{generation}, system:{id:systemId,version}, settings:{get:()=>true}},
-    K:{enrichHTML:async text=>text}, ws:listeners, Ts:listeners, cn:DamageRoll, ln:DamageRoll,
+    K:{enrichHTML:async text=>text}, ws:listeners, Ts:listeners, Ds:listeners, cn:DamageRoll, ln:DamageRoll, un:DamageRoll,
     CONST:{CHAT_MESSAGE_STYLES:{OOC:1}}, canvas:{ready:false},
     foundry:{helpers:{media:{ImageHelper:{hasImageExtension:value=>/\.webp(?:\?|$)/.test(value)}}}},
     isDefaultTokenImage:()=>false, createHTMLElement:(tag,options)=>({tag,...options}),
@@ -28,9 +28,11 @@ export function environment({sourceVersion='8.6.0', version=sourceVersion, gener
   };
   // The complete native render method runs unchanged. Other chat-card listeners
   // and private hover/initiative methods are outside this portrait fixture.
+  // 8.6.1 mangles those four private names to #e, #t, #n and #r.
   const ChatMessage = vm.runInNewContext(`(class ChatMessage extends Base {
     ${renderSource}
     #highlightDoS(){} #appendSetAsInitiative(){} #onHoverIn(){} #onHoverOut(){}
+    #e(){} #t(){} #n(){} #r(){}
   })`,runtime);
   runtime.CONFIG = {ChatMessage:{documentClass:ChatMessage}};
   const actor = {name:'Speaker',img:'avatar.webp',flags:{'tokenizer-2':{layerStack:[{}]}},
