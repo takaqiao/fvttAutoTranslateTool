@@ -6,7 +6,7 @@ import * as gates from '../scripts/world-gates.mjs';
 const teams=['-','sog','pnvfcgjbf2cjp7gz','avecnu','team-automation-qa2'],fortress='ujx5r8oipw7ercdr';
 
 test('ECNU shares every shield-chain gate with the other audited teams',()=>{
- for(const name of ['DESTRUCTIVE_BLOCK_WORLDS','RUNE_TRANSFER_WORLDS','DISRUPT_PREY_WORLDS','NATIVE_IWR_STATUS_WORLDS'])assert.deepEqual([...gates[name]].sort(),[...teams].sort(),name);
+ for(const name of ['DESTRUCTIVE_BLOCK_WORLDS','RUNE_TRANSFER_WORLDS','NATIVE_IWR_STATUS_WORLDS'])assert.deepEqual([...gates[name]].sort(),[...teams].sort(),name);
  for(const name of ['SHIELD_BLOCK_WORLDS','SHIELD_WALL_COMPAT_WORLDS','REACTION_CHECKER_SETTING_WORLDS'])assert.deepEqual([...gates[name]].sort(),[...teams,fortress].sort(),name);
 });
 

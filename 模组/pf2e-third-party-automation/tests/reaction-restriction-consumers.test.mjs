@@ -5,8 +5,6 @@ import {EAT_FORTUNE_SOURCES} from '../scripts/eat-fortune.mjs';
 import {createFearAutomation,battleCryReactionAvailable,FEAR_SOURCES} from '../scripts/fear-automation.mjs';
 import {createTranscendentDeflection} from '../scripts/transcendent-deflection.mjs';
 import {TRANSCENDENT_DEFLECTION_SOURCE} from '../scripts/transcendent-deflection-rules.mjs';
-import {createDisruptPrey} from '../scripts/disrupt-prey.mjs';
-import {DISRUPT_PREY_SOURCE} from '../scripts/disrupt-prey-rules.mjs';
 import {fixture as damageFixture} from './glimpse-fixture.mjs';
 const M='pf2e-third-party-automation';
 function patch(doc,changes){for(const [path,value]of Object.entries(changes)){let at=doc;const keys=path.split('.');for(const k of keys.slice(0,-1))at=at[k]??={};at[keys.at(-1)]=structuredClone(value)}}
@@ -80,10 +78,4 @@ for(const moment of ['initial','after-choice'])test(`Battle Cry factory forwards
  const provider=createFearAutomation({game:f.game,fromUuid:f.fromUuid,reactionRestriction:()=>({status}),choose:async()=>{prompts++;status='restricted';return f.enemyToken.uuid}});
  if(moment==='initial')await provider.battleCry(message,f.user.id);else await assert.rejects(provider.battleCry(message,f.user.id),/改变/);
  assert.equal(prompts,moment==='initial'?0:1);assert.equal(nativeCalls,0);assert.equal(f.actor.flags[M]?.fear?.reactions?.length??0,0);
-});
-for(const moment of ['initial','after-source-proof'])test(`Disrupt Prey refuses a restriction ${moment}`,async()=>{
- const f=meleeFixture(DISRUPT_PREY_SOURCE);f.game.combat=f.combat;f.actor.synthetics={tokenMarks:new Map([[f.enemyToken.uuid,['hunted-prey']]])};let status=moment==='initial'?'restricted':'clear',prompts=0,executions=0;
- const provider=createDisruptPrey({game:f.game,fromUuid:f.fromUuid,reactionRestriction:()=>({status}),choose:async c=>{prompts++;return c.choices[0].value},validateSource:async(_e,c)=>{if(c.stage==='claim')status='manual';return true},performStrike:async()=>{executions++}});
- const event={eventId:'event',nonce:'disrupt-test',actorUuid:f.actor.uuid,tokenUuid:f.token.uuid,sourceActorUuid:f.enemy.uuid,sourceTokenUuid:f.enemyToken.uuid,sourceUserId:f.user.id,kind:'stand',phase:'after-action'};
- const result=await provider.handleConfirmed(event);assert.equal(result.status,'ineligible');assert.equal(prompts,moment==='initial'?0:1);assert.equal(executions,0);assert.equal(f.actor.flags[M]?.disruptPrey?.reactions?.length??0,0);
 });

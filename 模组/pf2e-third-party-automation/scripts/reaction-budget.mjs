@@ -64,25 +64,12 @@ export function shieldEncounter(actor,token,game){
  if(!Number.isInteger(combat.round)||!Number.isInteger(combat.turn)||combat.turn<0)throw Error('实际遭遇的回合状态尚未确定，不能自动记录盾牌格挡。');
  return {...result,epoch:`${combat.id}:${combat.round-(index>combat.turn?1:0)}`};
 }
-const disruptPaidStates=new Set(['claimed','attack-rolled','damage-rolled','applying','done','uncertain']);
-const disruptIdentity=(proof,actor)=>typeof proof?.nonce==='string'&&proof.nonce.length>0&&proof.claimKey===`disrupt:${proof.nonce}`&&proof.actorUuid===actor?.uuid;
-const paidDisruptClaims=actor=>(own(actor).disruptPrey?.reactions??[]).filter(r=>disruptPaidStates.has(r.state)&&disruptIdentity(r,actor));
 const paidDeflectionClaims=actor=>(own(actor).transcendentDeflection?.reactions??[]).filter(r=>['claimed','prevented','done','uncertain'].includes(r.state)&&typeof r.nonce==='string'&&r.nonce&&r.claimKey===`deflect:${r.nonce}`&&r.actorUuid===actor.uuid).map(r=>({...r,cost:1,slug:'transcendent-deflection'}));
 const paidCastClaims=actor=>(own(actor).nativeCasts??[]).filter(r=>['paid','used','disrupted','uncertain'].includes(r.state)&&r.actorUuid===actor.uuid&&r.nativeCastScope?.castNonce===r.id&&r.sourceAction?.type==='reaction'&&r.sourceAction.value===1&&typeof r.sourceAction.epoch==='string').map(r=>({...r,epoch:r.sourceAction.epoch,cost:1,slug:'cast-a-spell',claimKey:`cast:${r.id}`,checkId:r.messageId}));
 function provenCastClaim(message,actor,game){
- const proof=own(message).nativeCast??own(message).disruptPreySourceStopped,stopped=!!own(message).disruptPreySourceStopped;
+ const proof=own(message).nativeCast;
  if(!message?.id||game.messages?.get?.(message.id)!==message||!proof||message.rolls?.length||message.speaker?.actor!==actor.id||proof.actorUuid!==actor.uuid||proof.userId!==authorId(message))return null;
- const matches=paidCastClaims(actor).filter(r=>r.id===proof.id&&r.itemUuid===proof.itemUuid&&r.userId===proof.userId&&(!r.messageId||r.messageId===message.id)&&(!r.nativeCastScope.tokenUuid||r.nativeCastScope.tokenUuid===`Scene.${message.speaker.scene}.Token.${message.speaker.token}`)&&(stopped||message.flags?.pf2e?.origin?.uuid===r.itemUuid&&(!message.flags.pf2e.origin.actor||message.flags.pf2e.origin.actor===actor.uuid)));
- return matches.length===1?matches[0]:null;
-}
-// A delayed native/RPC card belongs to the epoch of its durable payment. Only
-// an exact live attack and its paid source claim can establish that epoch; a
-// marker's epoch, a log claimKey alone, or a similar weapon cannot do so.
-function provenDisruptClaim(message,actor,game,claims){
- const pf=message?.flags?.pf2e,context=pf?.context,proof=own(message).disruptPreyReaction;
- const author=message?.author??game.users?.get?.(authorId(message??{}));
- if(!message?.id||game.messages?.get?.(message.id)!==message||!author||!actor.testUserPermission?.(author,'OWNER')||message.actor?.uuid!==actor.uuid||message.speaker?.actor!==actor.id||context?.type!=='attack-roll'||context.action!=='strike'||context.isReroll||!message.rolls?.length||!context.options?.includes('action:reaction')||!context.options.includes('action:disrupt-prey')||!disruptIdentity(proof,actor))return null;
- const matches=(claims??paidDisruptClaims(actor)).filter(claim=>/^[A-Za-z0-9_-]{1,80}$/.test(claim.nonce)&&typeof claim.epoch==='string'&&claim.epoch.length>0&&claim.nonce===proof.nonce&&claim.claimKey===proof.claimKey&&claim.userId===author.id&&(!claim.checkId||claim.checkId===message.id)&&(!proof.weaponKey||proof.weaponKey===claim.weaponKey)&&typeof claim.itemUuid==='string'&&pf.origin?.actor===actor.uuid&&pf.origin.uuid===claim.itemUuid&&`Scene.${message.speaker.scene}.Token.${message.speaker.token}`===claim.tokenUuid&&typeof claim.targetActorUuid==='string'&&context.target?.actor===claim.targetActorUuid&&typeof claim.targetUuid==='string'&&context.target?.token===claim.targetUuid);
+ const matches=paidCastClaims(actor).filter(r=>r.id===proof.id&&r.itemUuid===proof.itemUuid&&r.userId===proof.userId&&(!r.messageId||r.messageId===message.id)&&(!r.nativeCastScope.tokenUuid||r.nativeCastScope.tokenUuid===`Scene.${message.speaker.scene}.Token.${message.speaker.token}`)&&message.flags?.pf2e?.origin?.uuid===r.itemUuid&&(!message.flags.pf2e.origin.actor||message.flags.pf2e.origin.actor===actor.uuid));
  return matches.length===1?matches[0]:null;
 }
 const sameClaim=(entry,claim)=>!!(claim.checkId&&entry.msgId===claim.checkId||claim.claimKey&&entry.claimKey===claim.claimKey);
@@ -134,23 +121,15 @@ function reactionSlots(actor,game,{pending=[],current=reactionEpoch(actor,game),
  if(entriesOverride)entries=[...entriesOverride];
  const fear=(own(actor).fear?.reactions??[]).map(r=>({...r,claimKey:r.id?`battle:${r.id}`:null,slug:'demoralize'}));
  const checks=(own(actor).reactionChecks?.reactions??[]).filter(r=>['claimed','used'].includes(r.state)&&['clock','squawk','eat'].includes(r.kind)).map(r=>({...r,claimKey:r.nonce?`check:${r.nonce}`:null,slug:{clock:'turn-back-the-clock',squawk:'squawk',eat:'eat-fortune'}[r.kind]}));
- const paidDisrupt=paidDisruptClaims(actor),disrupt=paidDisrupt.filter(r=>r.epoch===current).map(r=>({...r,slug:'disrupt-prey',cost:1}));
  const casts=paidCastClaims(actor);
  const glimpse=glimpseClaims(combatant).filter(r=>['paid','native','followup','done','uncertain'].includes(r.status)&&r.actorUuid===actor.uuid&&r.tokenUuid===combatant.token?.uuid&&r.combatId===c.id&&r.combatantId===combatant.id&&typeof r.nonce==='string'&&r.nonce&&r.claimKey===`glimpse:${r.nonce}`).map(r=>({...r,cost:1,slug:'glimpse-of-redemption',checkId:r.messageId}));
  const scar=paidSpiritualScarClaims(actor,combatant,c);
  // AAT only stores a message ID. Its create hook can finish before the provider
  // writes that ID back to the pending claim: derive identity from that exact
  // live native card, never from a recent-message or weapon-name search.
- if(paidDisrupt.length)entries=entries.flatMap(entry=>{
-  const claim=provenDisruptClaim(game.messages?.get?.(entry.msgId),actor,game,paidDisrupt);
-  return !claim?[entry]:claim.epoch!==current?[]:[{...entry,claimKey:claim.claimKey}];
- });
  if(casts.length)entries=entries.flatMap(entry=>{const claim=provenCastClaim(game.messages?.get?.(entry.msgId),actor,game);return !claim?[entry]:claim.epoch!==current?[]:[{...entry,claimKey:claim.claimKey,slug:claim.slug}];});
  if(scar.length)entries=entries.flatMap(entry=>{const claim=provenSpiritualScarReactionCard(game.messages?.get?.(entry.msgId),actor,game);return !claim?[entry]:claim.epoch!==current?[]:[{...entry,claimKey:claim.claimKey,slug:claim.slug}];});
- // AAT may label a reaction Strike by its weapon or generic action. The exact
- // paid claim identifies its slot eligibility without modifying AAT's log.
- for(const claim of disrupt)for(let i=0;i<entries.length;i++)if(sameClaim(entries[i],claim))entries[i]={...entries[i],slug:claim.slug,cost:1};
- for(const claim of [...fear,...checks,...disrupt,...casts,...glimpse,...scar,...paidDeflectionClaims(actor),...pending])if(claim.epoch===current&&!entries.some(e=>sameClaim(e,claim)))entries.push({type:'reaction',cost:claim.cost??1,slug:claim.slug??'demoralize',msgId:claim.checkId,claimKey:claim.claimKey});
+ for(const claim of [...fear,...checks,...casts,...glimpse,...scar,...paidDeflectionClaims(actor),...pending])if(claim.epoch===current&&!entries.some(e=>sameClaim(e,claim)))entries.push({type:'reaction',cost:claim.cost??1,slug:claim.slug??'demoralize',msgId:claim.checkId,claimKey:claim.claimKey});
  for(const entry of entries.filter(e=>!excludeClaimKeys.includes(e.claimKey)))for(let n=0;n<Math.max(1,Number(entry.cost)||0);n++){const slot=slots.find(s=>!s.spent&&(!entry.shield?.resourceSlot||s.kind===entry.shield.resourceSlot)&&(!s.allowed||entry.msgId==='System'||s.allowed.includes(entry.slug)));if(slot){slot.spent=true;slot.entry=entry;}}
  return slots;
 }
@@ -159,7 +138,7 @@ export function genericReactionAvailable(actor,game,options={}){return reactionP
  * currently unable to react is separate from having spent the resource. */
 export function genericReactionSpent(actor,game,{excludeClaimKeys=[]}={}){return !reactionSlots(actor,game,{excludeClaimKeys}).some(s=>!s.spent&&!s.allowed);}
 
-function reactionData(message,item,actor){
+function reactionData(message,item){
  const context=message.flags?.pf2e?.context??{},proof=own(message).reactionChecks;
  if(context.isReroll||proof?.kind==='check-reaction-result'||['damage-roll','damage-taken'].includes(context.type))return null;
  const options=context.options??[],rolled=message.rolls?.length>0;
@@ -167,8 +146,6 @@ function reactionData(message,item,actor){
  const glyph=/class=["'][^"']*\baction-glyph\b[^"']*["'][^>]*>\s*R\s*</.test(message.flavor??'');
  const itemReaction=!rolled&&(!context.type||['self-effect','spell-cast'].includes(context.type))&&item?.actor&&(['reaction'].includes(item.system?.actionType?.value)||item.system?.time?.value==='reaction');
  if(!(rolled&&(marker||glyph)||itemReaction))return null;
- const disrupt=own(message).disruptPreyReaction;
- if(context.type==='attack-roll'&&rolled&&options.includes('action:reaction')&&options.includes('action:disrupt-prey')&&disruptIdentity(disrupt,actor))return {type:'reaction',msgId:message.id,cost:1,slug:'disrupt-prey',claimKey:disrupt.claimKey};
  const action=options.find(o=>/^action:[a-z][a-z-]*$/.test(o)&&!['action:reaction','action:free'].includes(o))?.slice(7);
  const battle=options.find(o=>o.startsWith(`${MODULE_ID}:battle-cry:`))?.slice(`${MODULE_ID}:battle-cry:`.length);
  const claimKey=battle?`battle:${battle}`:proof?.kind==='reaction-use'&&proof.nonce?`check:${proof.nonce}`:null;
@@ -300,7 +277,7 @@ export function createReactionBudget({game,reactionRestriction,fromUuid=globalTh
   const combat=encounter();if(!combat)return false;
   const bounded={combat,modules:game.modules,messages:game.messages,users:game.users};
   const receipt=own(message).reactionBudget,epoch=reactionEpoch(actor,bounded),current=()=>encounter()===combat&&epoch===reactionEpoch(actor,bounded);
-  if(!epoch||receipt?.epoch&&receipt.epoch!==epoch&&!own(message).disruptPreyReaction&&!provenCastClaim(message,actor,game)&&!provenGlimpseReactionCard(message,actor,game)&&!provenSpiritualScarReactionCard(message,actor,game))return false;
+  if(!epoch||receipt?.epoch&&receipt.epoch!==epoch&&!provenCastClaim(message,actor,game)&&!provenGlimpseReactionCard(message,actor,game)&&!provenSpiritualScarReactionCard(message,actor,game))return false;
   // Queue before resolving the item: a competing automatic reaction must wait
   // for this already-posted native reaction to be persisted first.
   return withReactionReservation(actor,game,async()=>{
@@ -312,14 +289,13 @@ export function createReactionBudget({game,reactionRestriction,fromUuid=globalTh
    // The native card can arrive before its paid claim has acquired messageId.
    // Unsupported actors and unavailable providers retain manual accounting.
    if(!glimpse&&glimpseSourceId(item)===GLIMPSE_SOURCES.glimpse&&handlesGlimpse(actor))return false;
-   const cast=provenCastClaim(message,actor,game),scar=provenSpiritualScarReactionCard(message,actor,game),known=cast??glimpse??scar,entry=known?{type:'reaction',cost:1,slug:known.slug,msgId:message.id,claimKey:known.claimKey}:reactionData(message,item,actor);if(!entry)return false;
-   const paid=known??provenDisruptClaim(message,actor,game);
-   if(paid&&paid.epoch!==epoch){
+   const cast=provenCastClaim(message,actor,game),scar=provenSpiritualScarReactionCard(message,actor,game),known=cast??glimpse??scar,entry=known?{type:'reaction',cost:1,slug:known.slug,msgId:message.id,claimKey:known.claimKey}:reactionData(message,item);if(!entry)return false;
+   if(known&&known.epoch!==epoch){
     // Keep the current combatant ledger untouched, even when it already has a
     // different reaction. Stamp only this verified card for duplicate delivery.
-    if(receipt?.epoch===paid.epoch)return false;
+    if(receipt?.epoch===known.epoch)return false;
     if(!isActiveGM(game))return false;
-    await message.update({[`flags.${MODULE_ID}.reactionBudget`]:{epoch:paid.epoch,actorUuid:actor.uuid,combatantId:combatantFor(actor,bounded)?.id}});
+    await message.update({[`flags.${MODULE_ID}.reactionBudget`]:{epoch:known.epoch,actorUuid:actor.uuid,combatantId:combatantFor(actor,bounded)?.id}});
     return true;
    }
    const combatant=combatantFor(actor,bounded),previous=own(combatant).reactionBudget,entries=previous?.epoch===epoch?[...previous.entries??[]]:[],index=entries.findIndex(e=>e.msgId===entry.msgId||(glimpse??scar)&&e.claimKey===(glimpse??scar).claimKey);

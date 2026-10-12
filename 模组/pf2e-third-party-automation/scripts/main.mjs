@@ -36,11 +36,6 @@ import {createGlimpseProvider} from './glimpse-of-redemption.mjs';
 import {createSpiritualScarProvider} from './spiritual-scar.mjs';
 import {createSpiritualScarFollowup} from './spiritual-scar-followup.mjs';
 import {getNativeCastEvents} from './amp-cast-events.mjs';
-import {createDisruptPrey} from './disrupt-prey.mjs';
-import {createDisruptPreyEvents} from './disrupt-prey-events.mjs';
-import {createDisruptPreyExecutor} from './disrupt-prey-executor.mjs';
-import {createDisruptPreyDamageGuard} from './disrupt-prey-damage-guard.mjs';
-import {createDisruptPreySourceCost} from './disrupt-prey-source-cost.mjs';
 import {createDestructiveBlock} from './destructive-block.mjs';
 import {createDisarmingBlock} from './disarming-block.mjs';
 import {createShieldBlockEvents} from './shield-block-events.mjs';
@@ -82,7 +77,7 @@ import {createNativeOwnerOperations} from './native-owner-operations.mjs';
 import {createCycleCoordinator} from './cycle-coordinator.mjs';
 import {createCycleAutomation,addCycleReactionButtons} from './cycle-automation.mjs';
 import {createPanel,createUsageExecutor,executeActorAction,onFullRest,expireCycles,requireOwner,SerialActions} from './runtime.mjs';
-import {DEFENSIVE_ADVANCE_WORLDS,DESPERATE_PRAYER_WORLDS,DISRUPT_PREY_WORLDS,FORCE_BARRAGE_WORLDS,HALFLING_LUCK_WORLDS,REACTION_CHECKER_SETTING_WORLDS,ROARING_APPLAUSE_WORLDS,SPIRITUAL_SCAR_WORLDS} from './world-gates.mjs';
+import {DEFENSIVE_ADVANCE_WORLDS,DESPERATE_PRAYER_WORLDS,FORCE_BARRAGE_WORLDS,HALFLING_LUCK_WORLDS,REACTION_CHECKER_SETTING_WORLDS,ROARING_APPLAUSE_WORLDS,SPIRITUAL_SCAR_WORLDS} from './world-gates.mjs';
 let socket,coordinator,cycle,maintenance,providers=[];
 const report=e=>{console.error(MODULE_ID,e);ui.notifications.error(e.message);};
 const glimpseCompat=createGlimpseCompat({game,fromUuid});
@@ -147,11 +142,6 @@ Hooks.once('ready',async()=>{
  await glimpseCompat.initialize({game}).catch(report);
  glimpse=createGlimpseProvider({game,fromUuid,reactionRestriction,compat:glimpseCompat,getRollContext:roll=>cycle?.getRollContext(roll),onError:report});
  const nativeCasts=getNativeCastEvents({game,fromUuid});
- const disruptDamage=createDisruptPreyDamageGuard({game,getRollContext:roll=>cycle?.getRollContext(roll)});
- const disruptExecutor=createDisruptPreyExecutor({game,fromUuid,Hooks,authorizeDamage:context=>disruptDamage.authorize(context)});
- const sourceCost=createDisruptPreySourceCost({game});let disrupt;
- const disruptEvents=createDisruptPreyEvents({game,fromUuid,handleConfirmed:event=>disrupt.handleConfirmed(event),onSourceStopped:(context,result)=>sourceCost.stopped(context,result),onError:report});
- disrupt=createDisruptPrey({game,fromUuid,choose,reactionRestriction,validateSource:(event,context)=>disruptEvents.validateSource(event,context),performStrike:context=>disruptExecutor.performStrike(context),onError:report});
  const destructiveBlock=createDestructiveBlock({game,fromUuid,choose});
  let shieldEvents;
  const disarmingBlock=createDisarmingBlock({game,fromUuid,choose,validateConfirmed:event=>shieldEvents.validateConfirmed(event),onError:report});
@@ -228,11 +218,11 @@ Hooks.once('ready',async()=>{
   const manualPoolFrame=exploration.manualPoolApplication.captureFrame(this,params);
   const applyNative=next=>exploration.manualPoolApplication.applyNativeDamage(this,next,p=>activityResults.applyNativeDamage(this,p,wrapped),manualPoolFrame);
   // Consume the exact private params grant before any normalization or spread.
-  return salubriousDamage.applyDamage(this,params,(treatmentApproved,assertSalubrious)=>disruptDamage.applyDamage(this,treatmentApproved,(approved,assertNative)=>{
+  return salubriousDamage.applyDamage(this,params,(approved,assertSalubrious)=>{
    const source=cycle.getRollContext(approved.damage);
    const actual=source?{...approved,rollOptions:[...new Set([...(approved.rollOptions??[]),`${MODULE_ID}:source:${source.messageId}:${source.rollIndex}`])]}:approved;
-   return runDamagePipeline({actor:this,params:actual,providers,apply:p=>reactionBudget.applyDamage(this,p,next=>shieldAdapter.applyDamage(this,next,final=>shieldEvents.wrapNativeDamage(this,final,native=>cycle.applyDamage(this,finalParams=>shieldAdapter.withNativeFrame(this,finalParams,checkedParams=>{assertNative();assertSalubrious(this,checkedParams);return glimpse.wrapNativeDamage(this,checkedParams,p=>scar?scar.wrapNativeDamage(this,p,applyNative):applyNative(p))}),native)),destructiveBlock.planFor(next))),onError:report});
-  }));
+   return runDamagePipeline({actor:this,params:actual,providers,apply:p=>reactionBudget.applyDamage(this,p,next=>shieldAdapter.applyDamage(this,next,final=>shieldEvents.wrapNativeDamage(this,final,native=>cycle.applyDamage(this,finalParams=>shieldAdapter.withNativeFrame(this,finalParams,checkedParams=>{assertSalubrious(this,checkedParams);return glimpse.wrapNativeDamage(this,checkedParams,p=>scar?scar.wrapNativeDamage(this,p,applyNative):applyNative(p))}),native)),destructiveBlock.planFor(next))),onError:report});
+  });
  },'WRAPPER');
  libWrapper.register(MODULE_ID,'CONFIG.ChatMessage.documentClass.create',function(wrapped,data,...args){return exploration.manualPoolApplication.observeCreate(wrapped,data,...args)},'WRAPPER');
  const rollIndex=CONFIG.Dice.rolls.findIndex(cls=>cls.name==='DamageRoll');
@@ -242,9 +232,7 @@ Hooks.once('ready',async()=>{
  const legacyUsage=createUsageExecutor({cycleUse:(actor,message,user)=>coordinator.use(actor,message,user),runNative:ownerRolls.rest.run}),usageQueue=new SerialActions();
  const resolveAction=item=>defaultUsageAction(item)??resolveProviderAction(providers,item);
  reactionBudget.register({Hooks,socket});
- disruptExecutor.register({socket});
  salubriousExecutor.register({socket});
- if(DISRUPT_PREY_WORLDS.has(game.world?.id))disruptEvents.register({Hooks,libWrapper,socket,castEvents:nativeCasts});
  shieldAdapter.register({libWrapper});
  deflectionRepair.register({Hooks,socket});
  elementalMedicine.register({Hooks,socket});

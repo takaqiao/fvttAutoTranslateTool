@@ -8,7 +8,6 @@ const TEAM_QA='team-automation-qa2',PILGRIM_QA='sog-pilgrim-qa';
 const SHIELD_TEAMS=[AV3,SOG,FOTRP,ECNU,TEAM_QA];
 export const DESTRUCTIVE_BLOCK_WORLDS=new Set(SHIELD_TEAMS);
 export const RUNE_TRANSFER_WORLDS=new Set(SHIELD_TEAMS);
-export const DISRUPT_PREY_WORLDS=new Set(SHIELD_TEAMS);
 export const NATIVE_IWR_STATUS_WORLDS=new Set(SHIELD_TEAMS);
 export const SHIELD_BLOCK_WORLDS=new Set([...SHIELD_TEAMS,FORTRESS]);
 export const SHIELD_WALL_COMPAT_WORLDS=new Set([...SHIELD_TEAMS,FORTRESS]);
