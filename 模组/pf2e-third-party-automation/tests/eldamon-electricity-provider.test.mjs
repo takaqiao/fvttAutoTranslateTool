@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {createEldamonElectricityProvider,preserveElectricityOnAlter} from '../scripts/eldamon-electricity-provider.mjs';
 import {fixture} from './eldamon-electricity-fixture.mjs';
 import {destructiveBlockAmounts} from '../scripts/shield-damage-adapter.mjs';
-import {ELECTRICITY_SOURCES as S,electricityEffects,electricityState} from '../scripts/eldamon-electricity.mjs';
+import {ELECTRICITY_SOURCES as S,ELECTRICITY_BASIC_SOURCES as BASIC,electricityEffects,electricityState} from '../scripts/eldamon-electricity.mjs';
 const ID='pf2e-third-party-automation';
 test('electricity application indexes source cards once and releases deleted chat references',async()=>{
  const f=fixture(),hooks=new Map(),provider=createEldamonElectricityProvider({game:f.game,fromUuid:async uuid=>f.docs.get(uuid)});
@@ -95,7 +95,7 @@ test('Destructive Block final native proof overrides earlier IWR amount; uncerta
 });
 
 test('native damage publication stamps durable source identity shared by altered target rolls',async()=>{
- const gm={id:'gm',targets:new Set([{document:{uuid:'Scene.s.Token.a'}}])},game={user:gm,users:{activeGM:gm},messages:new Map()};
+ const gm={id:'gm',targets:new Set([{document:{uuid:'Scene.s.Token.a'}}])},game={user:gm,users:{activeGM:gm},messages:new Map(),actors:new Map([['holder',{uuid:'Actor.holder',items:[{sourceId:S.surge}]}]])};
  const provider=createEldamonElectricityProvider({game,fromUuid:async()=>null});
  assert.equal(typeof provider.interceptDamageMessage,'function');
  const roll={instances:[{type:'electricity',total:13}],options:{}},data={flags:{pf2e:{context:{type:'damage-roll',options:[]}}}};
@@ -153,3 +153,33 @@ test('active-GM channel delivery retains the original card author even after tha
  await provider.onCommittedChannel({receipt:f.receipt,message:f.card});
  assert.equal([...f.caster.items.values()].filter(i=>i.sourceId==='Compendium.battlezoo-eldamon-pf2e.conditions.Item.Bi2aHykg6CZrQCnR').length,1);
 });
+
+// The shared fixture's caster owns Electric Surge. Without it no actor has an electricity source.
+function withoutSources(){
+ const f=fixture();f.caster.items.delete(f.power.id);
+ const hooks=new Map(),Hooks={on(name,fn){hooks.set(name,[...hooks.get(name)??[],fn])}},fire=(name,...args)=>{for(const fn of hooks.get(name)??[])fn(...args)};
+ const provider=createEldamonElectricityProvider({game:f.game,fromUuid:async uuid=>f.docs.get(uuid)});provider.register({Hooks});
+ async function publish(){
+  const roll={instances:[{type:'electricity',total:13}],options:{}},data={flags:{pf2e:{context:{type:'damage-roll',options:[]}}}},options={};let seen;
+  await provider.interceptDamageMessage(roll,data,options,async(...args)=>{seen=args});return {roll,data,options,seen};
+ }
+ // The card itself is already stamped, as one published while a source existed would be.
+ const apply=()=>{const source=f.source();fire('createChatMessage',source,{},f.gm.id);return provider.beforeDamage(f.target,{damage:source.rolls[0],token:f.tokens[1],item:f.power})};
+ return {f,fire,publish,apply};
+}
+test('electricity damage is stamped and recorded only while some actor has an electricity source',async()=>{
+ const {f,fire,publish,apply}=withoutSources(),records=()=>Object.keys(electricityState(f.target).damage).length;
+ const before=await publish();assert.equal(before.seen[0],before.data);assert.equal(before.seen[1],before.options);assert.deepEqual(before.roll.options,{});
+ assert.equal(await apply(),null);assert.deepEqual(f.target.flags,{});
+ const chain=f.item(f.outsider,'chain',S.chain,{type:'feat'});fire('createItem',chain);
+ const stamped=await publish();assert.ok(stamped.roll.options[ID].electricitySource.nonce);assert.equal(stamped.seen[0].flags[ID].electricitySource.nonce,stamped.roll.options[ID].electricitySource.nonce);
+ assert.ok((await apply()).receipt);assert.equal(records(),1);
+ f.outsider.items.delete(chain.id);fire('deleteItem',chain);
+ const after=await publish();assert.equal(after.seen[0],after.data);assert.deepEqual(after.roll.options,{});
+ assert.equal(await apply(),null);assert.equal(records(),1);
+});
+for(const [name,source]of [['a Shocked effect',S.shocked],['a Charged effect under its legacy compendium id',S.charged.replace('.Item.','.')],['the electricity element feature',BASIC.element]])
+ test(`${name} on any actor keeps electricity damage recorded without a power owner`,async()=>{
+  const {f,fire,apply}=withoutSources();fire('createItem',f.item(f.other,'left',source));
+  assert.ok((await apply()).receipt);
+ });

@@ -39,6 +39,11 @@ const visibleTo=(message,user)=>!!message&&!!user&&(user.isGM===true||!message.b
 const tokenUuid=s=>s?.scene&&s?.token?`Scene.${s.scene}.Token.${s.token}`:null;
 const normalized=s=>s?.replace(/(\.conditions)\.(?!Item\.)/,'$1.Item.');
 export const electricityEffects=(actor,source)=>values(actor?.items).filter(i=>normalized(sourceUuid(i))===source);
+/** An actor that can start or settle electricity work: the element feature, a
+ * reviewed power or Resistant Shell, or a Charged or Shocked effect left by
+ * someone else, which that actor's next electricity damage still has to settle. */
+const TRACKED_SOURCES=new Set([...Object.values(S),ELECTRICITY_BASIC_SOURCES.element]);
+export const hasElectricitySource=actor=>values(actor?.items).some(i=>TRACKED_SOURCES.has(normalized(sourceUuid(i))));
 export const electricityState=actor=>copy(actor?.flags?.[ID]?.electricity??{version:1,damage:{},operations:{},pendingShocks:{}});
 const liveToken=t=>t?.documentName==='Token'&&t.actor&&t.parent?.tokens?.get(t.id)===t;
 const ownCharge=i=>i?.flags?.[ID]?.electricityCharge?.ownPower===true;

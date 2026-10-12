@@ -1,5 +1,5 @@
 import {ELECTRICITY_MODULE_ID as ID,ELECTRICITY_SOURCES as S,ELECTRICITY_APPLY_PREFIX as APPLY,ELECTRICITY_SOURCE_PREFIX as SOURCE,
- classifyElectricityDamage,createElectricityLedger,electricityState,electricityEffects,receiptMatches} from './eldamon-electricity.mjs';
+ classifyElectricityDamage,createElectricityLedger,electricityState,electricityEffects,hasElectricitySource,receiptMatches} from './eldamon-electricity.mjs';
 import {sourceUuid} from './metapower/rules.mjs';
 import {showNativeChoice,publicTargetName} from './native-context.mjs';
 import {createActorStateIndex} from './actor-state-index.mjs';
@@ -34,6 +34,9 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
   return Object.keys(state?.pendingShocks??{}).length>0||Object.values(state?.operations??{}).some(r=>r.status==='started')||
    electricityEffects(actor,S.charged).length>0||electricityEffects(actor,S.shocked).some(item=>item.flags?.[ID]?.electricityShock?.expires);
  }});
+ // Most worlds roll electricity damage with no electricity element in play. With
+ // no source on any actor, a stamped card or an application record settles nothing.
+ const sourceActors=createActorStateIndex({game,matches:hasElectricitySource}),tracked=()=>sourceActors.values().length>0;
  const active=()=>game.user?.id===game.users.activeGM?.id;
  async function rpc(method,payload){
   if(active())return ledger[method](payload,game.user);
@@ -42,7 +45,7 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
   if(!result?.ok){const error=Error(result?.error??'主 GM 尚未返回电元素结算结果，请核对原操作，勿重复使用。');if(method==='confirmedAction'&&result?.electricityNotApplied===true)error.electricityNotApplied=true;throw error}return result.value;
  }
  async function interceptDamageMessage(roll,data={},options={},native){
-  if(classifyElectricityDamage(roll)==='none')return native(data,options);
+  if(classifyElectricityDamage(roll)==='none'||!tracked())return native(data,options);
   const opts=data.flags?.pf2e?.context?.options??[],markers=opts.filter(o=>o.startsWith(`${ID}:metapower:`));
   const nonce=random(),nativeTargets=data.flags?.['pf2e-toolbelt']?.targetHelper?.targets;
   let effectKey=`damage:${nonce}`,targetUuids=Array.isArray(nativeTargets)?nativeTargets:values(game.user.targets).map(t=>(t.document??t).uuid),channel=false,area=false;
@@ -67,7 +70,7 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
   return native(next,options);
  }
  async function beforeDamage(actor,params){
-  const kind=classifyElectricityDamage(params.damage);if(kind==='none'||params.final)return null;
+  const kind=classifyElectricityDamage(params.damage);if(kind==='none'||params.final||!tracked())return null;
   const target=params.token?.document??params.token;if(!currentToken(target)||target.actor.uuid!==actor.uuid||!target.actor.testUserPermission?.(game.user,'OWNER'))return null;
   const sourceNonce=params.damage?.options?.[ID]?.electricitySource?.nonce;if(!sourceNonce)return null;
   const matches=sourceMessages(sourceNonce);if(matches.length!==1)return null;
@@ -213,7 +216,7 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
   (root.querySelector('.message-content')??root).append(block);
  }
  function register({Hooks,socket:api}={}){
-  socket=api;activeActors.register(Hooks);receipts.seed();
+  socket=api;activeActors.register(Hooks);sourceActors.register(Hooks);receipts.seed();
   for(const method of ['channel','beginDamage','finishDamage','confirmMixed','candidates','interact','confirmedAction','basicUse'])socket?.register(`electricity:${method}`,async function(payload){try{return {ok:true,value:await ledger[method](payload,game.users.get(this.socketdata.userId))}}catch(error){return {ok:false,error:error.message,...(method==='confirmedAction'&&error.electricityNotApplied===true?{electricityNotApplied:true}:{})}}});
   Hooks.on('preCreateChatMessage',decorateReceipt);
   Hooks.on('createChatMessage',(message,options,userId)=>{receipts.remember(message);rememberSource(message);capture(message,options,userId);if(active())ledger.check(message).catch(onError)});
