@@ -21,7 +21,6 @@ import {registerReactionShieldWallEmptyCompatibility} from './reaction-shield-wa
 import {createFearAutomation} from './fear-automation.mjs';
 import {registerPatreonInitiativeCompatibility as installPatreonInitiativeCompatibility} from './patreon-initiative-compat.mjs';
 import {createScareToDeath} from './scare-to-death.mjs';
-import {createElementalMedicine} from './elemental-medicine.mjs';
 import {createSalubriousCheckScope} from './salubrious-kiss-check-scope.mjs';
 import {createSalubriousExecutor} from './salubrious-kiss-executor.mjs';
 import {createSalubriousKiss} from './salubrious-kiss.mjs';
@@ -162,7 +161,6 @@ Hooks.once('ready',async()=>{
  const deflection=createTranscendentDeflection({game,fromUuid,choose,reactionRestriction,getRollContext:roll=>cycle?.getRollContext(roll),nativeBridgeAvailable:shieldAdapter.nativeBridgeAvailable,onError:report});
  shieldAdapter.addNativeInterceptor(deflection.interceptNative,{matches:deflection.hasNativePlan});
  const deflectionRepair=createDeflectionRepair({game,fromUuid,onError:report});
- const elementalMedicine=createElementalMedicine({game,fromUuid,onError:report});
  const exploration=createExplorationRuntime({game,Hooks,fromUuid,nativeCasts,onError:report});
  const salubriousCheckScope=createSalubriousCheckScope({game,isExplorationContext:exploration.ownerOperations.isActivityContext});
  const salubriousDamage=createSalubriousDamageGuard({game,messagePrivacy:salubriousMessagePrivacy,getRollContext:roll=>cycle?.getRollContext(roll),isExplorationContext:exploration.ownerOperations.isActivityContext});
@@ -234,10 +232,8 @@ Hooks.once('ready',async()=>{
  salubriousExecutor.register({socket});
  shieldAdapter.register({libWrapper});
  deflectionRepair.register({Hooks,socket});
- elementalMedicine.register({Hooks,socket});
  for(const owner of Object.values(ownerRolls))owner.register({Hooks,socket});
  for(const owner of Object.values(targetSaves))owner.register({Hooks,socket});
- elementalMedicine.registerDailies();
  registerStrikeWrapper({game,libWrapper,wrapStrike:(strike,actor)=>providers.reduce((s,p)=>p.wrapStrike?.(s,actor)??s,strike)});
  for(const p of providers)p.register?.({Hooks,libWrapper,socket,onError:report});
  if(roaring)await roaring.reconcile().catch(report);
@@ -273,7 +269,6 @@ Hooks.once('ready',async()=>{
  await exploration.register({socket});
  notifyNativeIWRStatus({game,diagnostic:shieldAdapter.nativeBridgeDiagnostic(),warn:message=>ui.notifications.warn(message)});
  await maintenance().catch(report);
- await elementalMedicine.maintain().catch(report);
 });
 Hooks.on('getHeaderControlsApplicationV2',(app,controls)=>{
  const actor=app.actor??app.document;
