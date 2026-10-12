@@ -1,6 +1,7 @@
 import {MODULE_ID} from './rules.mjs';
 import {showNativeChoice} from './native-context.mjs';
 import {EFFECTS,PILGRIM_FLAG,PilgrimError,values,rewardKey,usableReward,scarfBranch,serializeReward} from './sog-pilgrim-rules.mjs';
+import {SOG_PILGRIM_WORLDS} from './world-gates.mjs';
 
 const names={release:'灵魂连携 ◆◆',shift:'变型 ◆',tree:'余烬重生 ◆◆◆',restore:'恢复武器 ◇',scarf:'启动围巾 ◆',storm:'花瓣风暴 ◆◆'};
 const state=item=>item.flags?.[MODULE_ID]?.[PILGRIM_FLAG]??{};
@@ -29,7 +30,7 @@ export function assertAvailable(current,operation,now) {
 }
 
 export async function createPilgrimRewards({game,fromUuid,choose,onError=console.error,canvas=globalThis.canvas}={}) {
- const enabled=game.system?.id==='pf2e'&&['sog','sog-pilgrim-qa'].includes(game.world?.id);
+ const enabled=game.system?.id==='pf2e'&&SOG_PILGRIM_WORLDS.has(game.world?.id);
  if(!enabled)return {register(){},enabled:false};
  const [{createPilgrimFan},{createPilgrimAreas},{createPilgrimMedia},{createPilgrimShift}]=await Promise.all([import('./sog-pilgrim-fan.mjs'),import('./sog-pilgrim-areas.mjs'),import('./sog-pilgrim-media.mjs'),import('./sog-pilgrim-shift.mjs')]);
  const media=createPilgrimMedia({game,canvas,fromUuid,onError});

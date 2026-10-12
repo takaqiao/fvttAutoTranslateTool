@@ -2,13 +2,15 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {createNativeChooser,showNativeChoice} from '../scripts/native-context.mjs';
+import {HALFLING_LUCK_WORLDS} from '../scripts/world-gates.mjs';
 
 // Exercise the actual bootstrap's provider construction with both real choice
 // adapters: a GM-only adapter cannot serve the original player's local Check.
 const main=readFileSync(new URL('../scripts/main.mjs',import.meta.url),'utf8');
 const setup=main.split(/\r?\n/).find(line=>line.trimStart().startsWith('const halflingLuck='));
 assert.ok(setup);
-const construct=new Function('game','fromUuid','choose','showNativeChoice','report','createHalflingLuckProvider',setup+'\nreturn halflingLuck;');
+const build=new Function('HALFLING_LUCK_WORLDS','game','fromUuid','choose','showNativeChoice','report','createHalflingLuckProvider',setup+'\nreturn halflingLuck;');
+const construct=(...args)=>build(HALFLING_LUCK_WORLDS,...args);
 
 test('bootstrap gives the original player a local native Luck choice without requesting GM-only chooser access',async()=>{
  const user={id:'player',active:true,isGM:false},gm={id:'gm',active:true,isGM:true},game={user,users:{activeGM:gm},world:{id:'ujx5r8oipw7ercdr'},system:{id:'pf2e',version:'8.5.1'}};

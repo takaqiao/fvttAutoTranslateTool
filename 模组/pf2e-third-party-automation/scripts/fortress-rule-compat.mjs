@@ -1,6 +1,7 @@
 import {MODULE_ID} from './rules.mjs';
 import {getSourceId,isActiveGM} from './native-context.mjs';
 import {SerialActions} from './runtime.mjs';
+import {FORTRESS_RULE_COMPAT_WORLDS} from './world-gates.mjs';
 
 const ALBATROSS='FTGjyYBZJ4JCpTZw',HANDS='fzUfZcstmQZGGwcJ';
 const OVERTURE='Compendium.pf2e.spell-effects.Item.ITErgFRfydm1xmnW';
@@ -9,7 +10,7 @@ const copy=value=>structuredClone(value),equal=(a,b)=>JSON.stringify(a)===JSON.s
 const sourceGroup=(group,id,source)=>group?.uuid===id&&group.source?.length===1&&group.source[0]===source;
 const includesAll=(predicate,terms)=>Array.isArray(predicate)&&terms.every(term=>predicate.includes(term));
 
-export const fortressRuleCompatibilityEnabled=game=>game?.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e';
+export const fortressRuleCompatibilityEnabled=game=>FORTRESS_RULE_COMPAT_WORLDS.has(game?.world?.id)&&game.system?.id==='pf2e';
 
 /** Configuration maintenance owns the backup/write. Repair only the captured
  * upstream branches; custom predicates and enabled/disabled state survive. */

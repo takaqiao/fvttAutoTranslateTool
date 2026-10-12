@@ -2,6 +2,7 @@ import {MODULE_ID,hasSource} from './rules.mjs';
 import {SerialActions,requireOwner} from './runtime.mjs';
 import {isEatFortuneProbe} from './eat-fortune.mjs';
 import {getSourceId} from './native-context.mjs';
+import {RUNE_TRANSFER_WORLDS} from './world-gates.mjs';
 
 export const RUNE_TRANSFER_SOURCE='Compendium.pf2e.feats-srd.Item.pe8a7WDz0MIY45uO';
 export const RUNE_TRANSFER_KEY='ThirdPartyCuttingHeavenRunes';
@@ -11,7 +12,6 @@ const activeFeature=(actor,item)=>item?.type==='feat'&&item.actor===actor&&!item
 const feature=actor=>values(actor?.items).find(item=>activeFeature(actor,item));
 const states=actor=>values(actor?.items).filter(item=>item.type==='effect'&&own(item).kind===KIND);
 const get=(actor,id)=>actor?.items?.get?.(id)??values(actor?.items).find(item=>item.id===id);
-const worlds=new Set(['-','sog','pnvfcgjbf2cjp7gz','team-automation-qa2']);
 // PF2e 8.5 equipment pack Usage entries. Mechanical rune effects remain native.
 const ordinaryRunes=new Set('ancestralEchoing anchoring ashen astral authorized bane brilliant calledLastwall coating conducting corrosive deathdrinking decaying demolishing earthbinding energizing energyVulnerability fearsome flaming flickering frost ghostTouch giantKilling greaterAnchoring greaterAshen greaterAstral greaterBrilliant greaterCorrosive greaterDecaying greaterEnergyVulnerability greaterFearsome greaterFlaming greaterFrost greaterGiantKilling greaterHauling greaterImpactful greaterShock greaterThundering grievous hauling hopeful impactful impossible merciful nightmare pacifying quickstrike shock thundering underwater vitalizing'.split(' '));
 const meleeRunes=new Set('animated deflecting extending fanged greaterExtending greaterFanged greaterRooting greaterVitalizing hooked majorFanged majorRooting rooting shifting spellReservoir trueRooting'.split(' '));
@@ -71,7 +71,7 @@ export function registerRuneTransferRuleElement(game){
  class CuttingHeavenRunes extends Base{
   constructor(data,options){super({...data,priority:1000},options)}
   beforePrepareData(){
-   if(this.ignored||!worlds.has(game.world?.id)||states(this.actor).length!==1||states(this.actor)[0]!==this.item)return;
+   if(this.ignored||!RUNE_TRANSFER_WORLDS.has(game.world?.id)||states(this.actor).length!==1||states(this.actor)[0]!==this.item)return;
    const id=selectedRuneWeaponId(this.actor);if(!id)return;
    if(this.actor.rollOptions?.all)this.actor.rollOptions.all[`${MODULE_ID}:cutting-weapon:${id}`]=true;
    const apply=weapon=>{
@@ -101,7 +101,7 @@ export function registerRuneTransferRuleElement(game){
 export function createRuneTransfer({game,fromUuid,choose,onError=()=>{}}){
  const queue=new SerialActions(),readyMarker=Symbol('rune-transfer-ready');let socket,registered=false;
  const activeGM=()=>game.user?.isGM&&game.user.id===game.users?.activeGM?.id;
- const real=actor=>actor?.type==='character'&&worlds.has(game.world?.id)&&(actor.isToken?actor.token?.actor===actor:game.actors?.get?.(actor.id)===actor);
+ const real=actor=>actor?.type==='character'&&RUNE_TRANSFER_WORLDS.has(game.world?.id)&&(actor.isToken?actor.token?.actor===actor:game.actors?.get?.(actor.id)===actor);
  const guard=(actor,user)=>{if(!activeGM())throw Error('符文选择必须由当前主GM处理。');if(!real(actor))throw Error('符文选择只能保存到实际角色。');if(user)requireOwner(actor,user)};
  const candidates=actor=>values(actor.items).filter(item=>!!eligibleUsage(item));
  const fingerprint=actor=>candidates(actor).map(i=>i.id).sort().join(',');

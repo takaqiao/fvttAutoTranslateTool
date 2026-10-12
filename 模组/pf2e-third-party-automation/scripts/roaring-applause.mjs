@@ -3,6 +3,7 @@ import {createRoaringSource,reduceRoaringSource,projectRoaringConditions} from '
 import {createRoaringSaveEvidence} from './roaring-save-evidence.mjs';
 import {isActiveGM,getSourceId} from './native-context.mjs';
 import {SerialActions} from './runtime.mjs';
+import {ROARING_APPLAUSE_WORLDS} from './world-gates.mjs';
 
 const ID='pf2e-third-party-automation',KIND='roaring-applause';
 const PROOF='roaring-applause:proof',COMPLETE='roaring-applause:complete',NOTICE='roaring-applause:notice';
@@ -190,7 +191,7 @@ export function createRoaringApplause({game,fromUuid=globalThis.fromUuid,nativeC
  function reactionRestriction(actor){
   const entry=(sourceNonce,status,reason)=>({sourceNonce,status,reason});
   const unresolved=reason=>({status:'manual',sources:[entry(null,'manual',reason)]});
-  if(!installed||game.world?.id!=='ujx5r8oipw7ercdr'||!currentSystem())return unresolved('provider-unavailable');
+  if(!installed||!ROARING_APPLAUSE_WORLDS.has(game.world?.id)||!currentSystem())return unresolved('provider-unavailable');
   if(!actor?.uuid||indexedActor(actor.uuid)!==actor)return unresolved('actor-not-live');
   const sources=[];
   try{

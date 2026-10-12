@@ -3,6 +3,7 @@ import {roaringOwnTurn,ROARING_APPLAUSE_SOURCE} from './roaring-applause-rules.m
 import {isActiveGM,publicTargetName} from './native-context.mjs';
 import {projectRoaringConditions} from './roaring-lifecycle.mjs';
 import {SerialActions} from './runtime.mjs';
+import {ROARING_APPLAUSE_WORLDS} from './world-gates.mjs';
 
 const PROOF='roaring-sustain:proof',RECORD='roaring-sustain:record';
 const copy=structuredClone,values=c=>Array.from(c?.values?.()??c??[]);
@@ -78,7 +79,7 @@ export function createRoaringSustain({game,fromUuid=globalThis.fromUuid,provider
  }
  async function observe(scope,next){
   if(!installed||scope.action!==game.pf2e?.actions?.get('sustain')||scope.slug!=='sustain'||scope.params.message?.create===false)return next();
-  if(game.world?.id!=='ujx5r8oipw7ercdr'||game.system?.id!=='pf2e')return next();
+  if(!ROARING_APPLAUSE_WORLDS.has(game.world?.id)||game.system?.id!=='pf2e')return next();
   const candidates=sources().filter(({record:r})=>scope.actors.some(a=>a.uuid===r.state.source.casterActorUuid)&&r.state.status==='active');
   if(!candidates.length)return next();
   demand(scope.actors.length===1&&scope.user===game.user,'多个角色或不明操作者的维持请手工处理。');

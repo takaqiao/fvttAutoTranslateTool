@@ -1,5 +1,6 @@
 import {MODULE_ID} from './rules.mjs';
 import {EFFECTS,PILGRIM_FLAG,PilgrimError,values,rewardKey,serializeReward} from './sog-pilgrim-rules.mjs';
+import {SOG_PILGRIM_WORLDS} from './world-gates.mjs';
 
 const EVENT='tpaSogPilgrimAreaEvent';
 const TREE_TEXTURE='modules/pf2e-season-of-ghosts/assets/maps/other/treetops/tree-top01narchy.webp';
@@ -19,7 +20,7 @@ function eventKey(event) {
 }
 
 export function createPilgrimAreas({game,fromUuid,media,onError=console.error,canvas=globalThis.canvas}={}) {
- const active=()=>game.user?.id===game.users.activeGM?.id&&game.system?.id==='pf2e'&&['sog','sog-pilgrim-qa'].includes(game.world?.id);
+ const active=()=>game.user?.id===game.users.activeGM?.id&&game.system?.id==='pf2e'&&SOG_PILGRIM_WORLDS.has(game.world?.id);
  const ending=new Set();
  const quietMedia=async operation=>{try{await operation();}catch(error){onError(error);}};
  const currentScene=source=>{

@@ -3,6 +3,7 @@ import {getSourceId,isActiveGM} from './native-context.mjs';
 import {SerialActions} from './runtime.mjs';
 import {SPIRITUAL_SCAR_SOURCE} from './spiritual-scar-native.mjs';
 import {SCAR_SLOWED,createSpiritualScarExpiry} from './spiritual-scar-expiry.mjs';
+import {SPIRITUAL_SCAR_WORLDS} from './world-gates.mjs';
 const OUTCOMES=['criticalFailure','failure','success','criticalSuccess'],PATH=`flags.${M}.spiritualScarFollowup`;
 const values=c=>Array.from(c?.values?.()??c??[]),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b),author=m=>m?.author?.id??m?.user?.id??m?.user;
 const fail=reason=>Error(`精神伤痕后续结算未确认：${reason}；不会自动重掷或重复创建缓慢。`);
@@ -14,7 +15,7 @@ const marker=nonce=>`${M}:spiritual-scar-save:${nonce}`;
  * installed check/reaction middleware. Persist the attempt before the die. */
 export function createSpiritualScarFollowup({game,fromUuid=globalThis.fromUuid,Hooks=globalThis.Hooks,runTargetSave,expiry=createSpiritualScarExpiry({game}),onError=console.error}={}){
  const queue=new SerialActions();
- const ready=()=>game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'&&typeof Hooks?.on==='function'&&typeof Hooks?.off==='function';
+ const ready=()=>SPIRITUAL_SCAR_WORLDS.has(game.world?.id)&&game.system?.id==='pf2e'&&typeof Hooks?.on==='function'&&typeof Hooks?.off==='function';
  const read=message=>message.flags?.[M]?.spiritualScarFollowup??null;
  async function apply(context){return queue.run(context.damageMessage?.id,async()=>{
   const {claim,actor,fiend,fiendToken,damageMessage,authorize}=context,leader=game.users.activeGM?.id,privateCard=privacy(context.privacy);

@@ -2,9 +2,9 @@ import {MODULE_ID,hasSource} from './rules.mjs';
 import {SerialActions} from './runtime.mjs';
 import {isActiveGM} from './native-context.mjs';
 import {classifyNativeShieldBlock,shieldEncounter} from './reaction-budget.mjs';
+import {SHIELD_BLOCK_WORLDS} from './world-gates.mjs';
 
 const SOURCE='Compendium.pf2e.feats-srd.Item.dSSwRyuhKTq1VubX';
-const worlds=new Set(['-','sog','pnvfcgjbf2cjp7gz','ujx5r8oipw7ercdr','team-automation-qa2']);
 const prefix=`${MODULE_ID}:shield-event:`,budgetPrefix=`${MODULE_ID}:native-shield:`;
 const fields=['actorUuid','tokenUuid','attackerActorUuid','attackerTokenUuid','attackItemUuid','weaponUuid','damageMessageId','rollIndex'];
 const values=c=>Array.from(c?.values?.()??c??[]),records=actor=>actor?.flags?.[MODULE_ID]?.shieldBlockEvents?.records??[];
@@ -25,7 +25,7 @@ async function fingerprint(message){
 /** Observe a native block independently from its optional reaction accounting. */
 export function createShieldBlockEvents({game,fromUuid=globalThis.fromUuid,resolveSource,validateSource,onConfirmed=async()=>{},onError=console.error}={}){
  const queue=new SerialActions(),scopes=new Map(),dispatches=new Map(),liveClaims=new Map(),scopeKey=Symbol('shield-block-event');let socket;
- const eligible=actor=>worlds.has(game.world?.id)&&actor?.type==='character'&&feature(actor);
+ const eligible=actor=>SHIELD_BLOCK_WORLDS.has(game.world?.id)&&actor?.type==='character'&&feature(actor);
  const owner=(actor,user)=>{if(!isActiveGM(game)||!user||!actor?.testUserPermission?.(user,'OWNER'))throw Error('格挡事件需要当前主GM验证原操作者。')};
  async function documents(payload,user){
   const actor=await fromUuid(payload.actorUuid),token=await fromUuid(payload.tokenUuid);owner(actor,user);

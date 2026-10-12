@@ -1,4 +1,5 @@
 import {getSourceId} from './native-context.mjs';
+import {FORCE_BARRAGE_WORLDS} from './world-gates.mjs';
 
 export const FORCE_BARRAGE_SOURCE='Compendium.pf2e.spells-srd.Item.gKKqvLohtrSJj3BM';
 const values=c=>Array.from(c?.values?.()??c??[]);
@@ -7,7 +8,7 @@ export const isForceBarrageItem=item=>item?.type==='spell'&&getSourceId(item)===
 
 /** Admission is call-local. Owning this spell never enrolls other actor casts. */
 export function assessForceBarrageCast({game,actor,item,entry,user=game.user,options={}}={}){
- if(game?.world?.id!=='ujx5r8oipw7ercdr'||actor?.type!=='character'||actor.isToken||!isForceBarrageItem(item)||options.consume===false||options.message===false)return {handled:false,eligible:false};
+ if(!FORCE_BARRAGE_WORLDS.has(game?.world?.id)||actor?.type!=='character'||actor.isToken||!isForceBarrageItem(item)||options.consume===false||options.message===false)return {handled:false,eligible:false};
  if(game.system?.id!=='pf2e')return fail('力场飞弹原施法接线需要 PF2e 系统。');
  const base=item.original??item;
  if(actor?.type!=='character'||actor.isToken||game.actors?.get(actor.id)!==actor||item.actor!==actor||base.actor!==actor||actor.items?.get(base.id)!==base||item.uuid!==base.uuid||!isForceBarrageItem(base)||!user?.active||game.users?.get(user.id)!==user||actor.testUserPermission?.(user,'OWNER')!==true)return fail('需要现役角色、原始法术和当前所有者的实际施法。');

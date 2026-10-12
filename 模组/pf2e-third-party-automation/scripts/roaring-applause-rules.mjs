@@ -1,4 +1,5 @@
 import {getSourceId} from './native-context.mjs';
+import {ROARING_APPLAUSE_WORLDS} from './world-gates.mjs';
 
 export const ROARING_APPLAUSE_SOURCE='Compendium.pf2e.spells-srd.Item.czO0wbT1i320gcu9';
 const values=c=>Array.from(c?.values?.()??c??[]);
@@ -9,7 +10,7 @@ export const roaringTurnPriority=combatant=>combatant.overridePriority?.(combata
 
 /** Admit this original invocation, without enrolling the owner's other spells. */
 export function assessRoaringCast({game,actor,item,entry,user=game?.user,options={}}={}){
- if(game?.world?.id!=='ujx5r8oipw7ercdr'||actor?.type!=='character'||actor.isToken||!isSource(item)||options.consume===false||options.message===false)return {handled:false,eligible:false};
+ if(!ROARING_APPLAUSE_WORLDS.has(game?.world?.id)||actor?.type!=='character'||actor.isToken||!isSource(item)||options.consume===false||options.message===false)return {handled:false,eligible:false};
  if(game.system?.id!=='pf2e')return fail('轰然喝彩接入需要 PF2e 系统。');
  const base=item.original??item;
  if(game.actors?.get(actor.id)!==actor||actor.items?.get(base.id)!==base||item.actor!==actor||base.actor!==actor||item.uuid!==base.uuid||!isSource(base)||!user?.active||game.users?.get(user.id)!==user||actor.testUserPermission?.(user,'OWNER')!==true)return fail('需要原始法术、当前角色与其所有者的实际施法。');

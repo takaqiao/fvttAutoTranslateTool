@@ -1,7 +1,7 @@
+import {SHIELD_WALL_COMPAT_WORLDS} from './world-gates.mjs';
 // Only protects the empty Shield Wall candidate branch in the audited
 // campaigns. It does not implement the Shield Wall reaction.
 const MODULE='pf2e-reaction',EVENT='createItem';
-const TARGETS=new Set(['-','sog','pnvfcgjbf2cjp7gz','ujx5r8oipw7ercdr','team-automation-qa2']);
 const installations=new WeakMap();
 const sourceOf=fn=>typeof fn==='function'?Function.prototype.toString.call(fn):'';
 const unsupported=reason=>Object.freeze({status:'unsupported',reason,dispose(){}});
@@ -21,7 +21,7 @@ export function registerReactionShieldWallEmptyCompatibility({game,Hooks}={}){
  if(!Hooks||!['object','function'].includes(typeof Hooks))return Promise.resolve(unsupported('missing-hooks'));
  const existing=installations.get(Hooks);if(existing)return existing.promise;
  const module=game?.modules?.get(MODULE),world=game?.world,worldId=world?.id;
- const profileCurrent=()=>game?.modules?.get(MODULE)===module&&module?.active===true&&game.system?.id==='pf2e'&&game.world===world&&world?.id===worldId&&TARGETS.has(worldId);
+ const profileCurrent=()=>game?.modules?.get(MODULE)===module&&module?.active===true&&game.system?.id==='pf2e'&&game.world===world&&world?.id===worldId&&SHIELD_WALL_COMPAT_WORLDS.has(worldId);
  if(!profileCurrent())return Promise.resolve(unsupported('unknown-dependency-or-world-profile'));
  const entries=Hooks.events?.[EVENT];
  if(!Array.isArray(entries))return Promise.resolve(unsupported('missing-create-item-hooks'));

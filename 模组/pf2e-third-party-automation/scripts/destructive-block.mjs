@@ -2,14 +2,14 @@ import {hasSource} from './rules.mjs';
 import {isActiveGM} from './native-context.mjs';
 import {reactionEpoch} from './reaction-budget.mjs';
 import {DESTRUCTIVE_BLOCK_SOURCE} from './shield-damage-adapter.mjs';
+import {DESTRUCTIVE_BLOCK_WORLDS} from './world-gates.mjs';
 
-const worlds=new Set(['-','sog','pnvfcgjbf2cjp7gz','team-automation-qa2']);
 const INDESTRUCTIBLE='Compendium.pf2e.equipment-srd.Item.SUbYk6B1iPoGyyjh';
 const values=c=>Array.from(c?.values?.()??c??[]);
 export function createDestructiveBlock({game,fromUuid=globalThis.fromUuid,choose}={}){
  const planKey=Symbol('destructive-block-plan');let socket;
  const feat=actor=>values(actor?.items).find(i=>hasSource(i,DESTRUCTIVE_BLOCK_SOURCE));
- const supported=()=>worlds.has(game.world?.id)&&!game.modules?.get('pf2e-auto-action-tracker')?.active;
+ const supported=()=>DESTRUCTIVE_BLOCK_WORLDS.has(game.world?.id)&&!game.modules?.get('pf2e-auto-action-tracker')?.active;
  const eligible=actor=>{const shield=actor?.heldShield,s=actor?.attributes?.shield;return supported()&&actor?.type==='character'&&feat(actor)&&shield&&shield.id===s?.itemId&&s.raised&&!s.broken&&!s.destroyed&&shield._source?.system?.hp?.value>0&&!hasSource(shield,INDESTRUCTIBLE)};
  function validate(actor,token,payload,user){
   if(!isActiveGM(game)||!user||!actor?.testUserPermission?.(user,'OWNER'))throw Error('破坏性格挡需要当前主GM验证本次操作者。');

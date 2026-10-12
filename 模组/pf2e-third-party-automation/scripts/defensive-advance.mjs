@@ -5,6 +5,7 @@ import {isActualUseMessage} from './usage-events.mjs';
 import {DEFENSIVE_ADVANCE_SOURCE} from './defensive-advance-compat.mjs';
 import {defensiveAdvanceContext,defensiveAdvanceMeleeChoices} from './defensive-advance-rules.mjs';
 import {rollDefensiveAdvanceStrike,defensiveAdvanceStrikeProof} from './defensive-advance-native.mjs';
+import {DEFENSIVE_ADVANCE_WORLDS} from './world-gates.mjs';
 
 const values=c=>Array.from(c?.values?.()??c??[]),own=m=>m?.flags?.[MODULE_ID]?.defensiveAdvance,input=m=>m?.flags?.[MODULE_ID]?.defensiveAdvanceInput;
 const author=m=>m?.author?.id??m?.user?.id??m?.user;
@@ -15,7 +16,7 @@ const shieldReady=a=>{const s=a.attributes?.shield;return !!(s?.itemId&&s.raised
  * The operator moves on the map; a reload/GM migration never replays this Use. */
 export function createDefensiveAdvance({game,fromUuid=globalThis.fromUuid,choose,startupCompatibility,shieldSyncTimeoutMs=15000}={}){
  const startup=Object.freeze({...startupCompatibility}),queue=new SerialActions(),ownerEntered=new Set();let socket,Hooks;
- const resolveAction=item=>game.world?.id==='ujx5r8oipw7ercdr'&&item?.type==='feat'&&getSourceId(item)===DEFENSIVE_ADVANCE_SOURCE?'defensive-advance':null;
+ const resolveAction=item=>DEFENSIVE_ADVANCE_WORLDS.has(game.world?.id)&&item?.type==='feat'&&getSourceId(item)===DEFENSIVE_ADVANCE_SOURCE?'defensive-advance':null;
  function compatibility(){
   if(startup.status!=='ready')throw Error(startup.reason??'列盾突进启动配置尚未就绪；请修复配置后整页刷新，再使用手工后续流程。');
   const p=game.modules?.get('patreon-v3');if(!p?.active)throw Error('列盾突进的 Patreon 执行器已变化。');

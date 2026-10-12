@@ -85,6 +85,7 @@ import {createNativeOwnerOperations} from './native-owner-operations.mjs';
 import {createCycleCoordinator} from './cycle-coordinator.mjs';
 import {createCycleAutomation,addCycleReactionButtons} from './cycle-automation.mjs';
 import {createPanel,createUsageExecutor,executeActorAction,onFullRest,expireCycles,requireOwner,SerialActions} from './runtime.mjs';
+import {DEFENSIVE_ADVANCE_WORLDS,DESPERATE_PRAYER_WORLDS,DISRUPT_PREY_WORLDS,FORCE_BARRAGE_WORLDS,HALFLING_LUCK_WORLDS,REACTION_CHECKER_SETTING_WORLDS,ROARING_APPLAUSE_WORLDS,SPIRITUAL_SCAR_WORLDS} from './world-gates.mjs';
 let socket,coordinator,cycle,maintenance,providers=[];
 const report=e=>{console.error(MODULE_ID,e);ui.notifications.error(e.message);};
 const glimpseCompat=createGlimpseCompat({game,fromUuid});
@@ -144,7 +145,7 @@ Hooks.once('ready',async()=>{
  const advanceStartup=defensiveAdvanceStartupCompatibility({game,rules:game.modules.get('patreon-v3')?.active?game.settings.get('patreon-v3','rulesV3'):null});
  const defensiveAdvance=createDefensiveAdvance({game,fromUuid,choose,startupCompatibility:advanceStartup,onError:report});
  let glimpse,roaring,roaringReactionCompatibility;
- const reactionRestriction=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'?actor=>roaring?.reactionRestriction(actor)??{status:'manual',sources:[{sourceNonce:null,status:'manual',reason:'provider-initializing'}]}:undefined;
+ const reactionRestriction=ROARING_APPLAUSE_WORLDS.has(game.world?.id)&&game.system?.id==='pf2e'?actor=>roaring?.reactionRestriction(actor)??{status:'manual',sources:[{sourceNonce:null,status:'manual',reason:'provider-initializing'}]}:undefined;
  const reactionBudget=createReactionBudget({game,fromUuid,reactionRestriction,onError:report,handlesGlimpse:actor=>glimpse?.handlesActor(actor)??false});
  await glimpseCompat.initialize({game}).catch(report);
  glimpse=createGlimpseProvider({game,fromUuid,reactionRestriction,compat:glimpseCompat,getRollContext:roll=>cycle?.getRollContext(roll),onError:report});
@@ -169,7 +170,7 @@ Hooks.once('ready',async()=>{
   try{const response=await fetch('modules/pf2e-toolbelt/scripts/main.js',{cache:'no-store',signal:AbortSignal.timeout(10000)});if(response.ok)await verifyManualPoolProviders({game,pf2eSource,toolbeltSource:new Uint8Array(await response.arrayBuffer())});}catch{/* Missing qualification keeps only the shared-pool adapter unavailable. */}
  }
  const shieldAdapter=createShieldDamageAdapter({game,nativeBridgeVerification,onError:report,createMessageMiddleware:salubriousMessagePrivacy.createMessageMiddleware});
- const scar=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'?createSpiritualScarProvider({game,fromUuid,nativeAdapter:shieldAdapter,reactionRestriction,getRollContext:roll=>cycle?.getRollContext(roll),followup:createSpiritualScarFollowup({game,fromUuid,Hooks,runTargetSave:targetSaves['spiritual-scar'].run,onError:report}),onError:report}):null;
+ const scar=SPIRITUAL_SCAR_WORLDS.has(game.world?.id)&&game.system?.id==='pf2e'?createSpiritualScarProvider({game,fromUuid,nativeAdapter:shieldAdapter,reactionRestriction,getRollContext:roll=>cycle?.getRollContext(roll),followup:createSpiritualScarFollowup({game,fromUuid,Hooks,runTargetSave:targetSaves['spiritual-scar'].run,onError:report}),onError:report}):null;
  const deflection=createTranscendentDeflection({game,fromUuid,choose,reactionRestriction,getRollContext:roll=>cycle?.getRollContext(roll),nativeBridgeAvailable:shieldAdapter.nativeBridgeAvailable,onError:report});
  shieldAdapter.addNativeInterceptor(deflection.interceptNative,{matches:deflection.hasNativePlan});
  const deflectionRepair=createDeflectionRepair({game,fromUuid,onError:report});
@@ -187,9 +188,9 @@ Hooks.once('ready',async()=>{
  const campaign=createCampaignFeats({game,fromUuid,choose,runNative:ownerRolls.campaign.run,onError:report});
  const fear=createFearAutomation({game,fromUuid,choose,reactionRestriction,onError:report});
  const familiar=createBardFamiliarProvider({game,fromUuid,onError:report});
- const prayer=game.world?.id==='ujx5r8oipw7ercdr'?createDesperatePrayerProvider({game,fromUuid,choose,onError:report,castEvents:nativeCasts}):null;
- const halflingLuck=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'?createHalflingLuckProvider({game,fromUuid,choose:showNativeChoice,onError:report}):null;
- const forceBarrage=game.world?.id==='ujx5r8oipw7ercdr'&&game.system?.id==='pf2e'?createForceBarrageBridge({game,fromUuid,nativeCasts,onError:report}):null;
+ const prayer=DESPERATE_PRAYER_WORLDS.has(game.world?.id)?createDesperatePrayerProvider({game,fromUuid,choose,onError:report,castEvents:nativeCasts}):null;
+ const halflingLuck=HALFLING_LUCK_WORLDS.has(game.world?.id)&&game.system?.id==='pf2e'?createHalflingLuckProvider({game,fromUuid,choose:showNativeChoice,onError:report}):null;
+ const forceBarrage=FORCE_BARRAGE_WORLDS.has(game.world?.id)&&game.system?.id==='pf2e'?createForceBarrageBridge({game,fromUuid,nativeCasts,onError:report}):null;
  roaring=forceBarrage?createRoaringApplause({game,fromUuid,nativeCasts,effects:createRoaringEffects({game,fromUuid,onError:report}),onError:report,onManual:()=>ui.notifications.warn('本次轰然喝彩需要GM核对结果或时长，请查看原施法卡。')}):null;
  const roaringSustain=roaring?createRoaringSustain({game,fromUuid,provider:roaring,reactionCompatibility:()=>({owned:true,checker:roaringReactionCompatibility?.ready()===true}),onError:report}):null;
  if(forceBarrage)nativeCasts.addCastMiddleware(forceBarrage.interceptCast);
@@ -203,7 +204,7 @@ Hooks.once('ready',async()=>{
  nativeCasts.addCastMiddleware(({item,options},native)=>options.consume===false||options.message===false?native():metapower.observe({actor:item.actor,entry:'spell'},native));
  providers=[createCompanionAutomation({game,fromUuid,choose,runNative:ownerRolls.companion.run,onError:report,wrapStrike:(strike,actor)=>providers.reduce((s,p)=>p.wrapStrike?.(s,actor)??s,strike)}),createDualStrikeAutomation({game,fromUuid,choose,onError:report}),runeTransfer,campaign,createKnowledgeAutomation({game,fromUuid,choose,runNative:ownerRolls.knowledge.run,onError:report}),createAvAutomation({game,fromUuid,choose,runNative:ownerRolls.av.run,onError:report,refocusSubscribers:[treatmentRefocus,exploration.refocusSubscriber],refocusPrivacy:salubriousMessagePrivacy,explorationRefocus:exploration.refocusAdapter}),createPartyAutomation({game,fromUuid,choose,onError:report}),createSocialAutomation({game,fromUuid,choose,runNative:ownerRolls.social.run,onError:report}),createThrallAutomation({game,fromUuid,choose,onError:report}),createReactionChecks({game,fromUuid,choose,runNative:ownerRolls.reaction.run,nativeInvocation:ownerRolls.reaction.getInvocation,reactionRestriction,onError:report,halflingLuck,nativeCheckMiddleware:(wrapped,...args)=>prayerCheck((...checked)=>familiar.interceptCheck((...accompanied)=>electricity.interceptCheck((...electric)=>metapower.interceptCheck((...next)=>weaponSurge.interceptCheck((...surged)=>salubriousCheckScope.interceptCheck(wrapped,...surged),...next),...electric),...accompanied),...checked),...args)}),fear,createScareToDeath({game,fromUuid,choose,onError:report}),createSpellCombination({game,fromUuid,choose,runTargetSave:targetSaves['spell-combination'].run,onError:report,afterAttack:message=>campaign.processCheck(message)}),deflection,destructiveBlock,disarmingBlock,disarmRegrip,shieldEvents,salubriousKiss];
  const onRulesChanged=()=>{if(fortressRuleCompatibilityEnabled(game)&&game.modules.get('patreon-v3')?.active)ui.notifications.warn('Patreon 规则已修复；请所有已在线客户端刷新一次，使规则修复生效。',{permanent:true})};
- const configuration=createConfigurationMaintenance({game,onRulesChanged,repairs:[buildAvPatreonRepairs,buildPartyPatreonRepairs,buildKnowledgePatreonRepairs,rules=>buildFortressPatreonRepairs(rules,{game}),...game.world?.id==='ujx5r8oipw7ercdr'?[buildDefensiveAdvancePatreonRepairs]:[]],settings:[{module:'pf2e-ranged-combat',key:'postActionToChat',value:2,when:g=>Array.from(g.actors.party?.members??[]).some(a=>[KNOWLEDGE_SOURCES.monster,KNOWLEDGE_SOURCES.hunt].every(source=>a.items.some(i=>i.sourceId===source))),reason:'猎物指定保留完整原生技能卡，供怪物猎手知识联动读取原始操作者与目标。'},{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:g=>['-','sog','pnvfcgjbf2cjp7gz','ujx5r8oipw7ercdr','team-automation-qa2'].includes(g.world?.id),transform:value=>Array.isArray(value)?value.filter(slug=>slug!=='disarming-block'):value,reason:'卸武格挡改由实际格挡回执接原生自由动作缴械，避免重复提示或再次收取反应。'}]});
+ const configuration=createConfigurationMaintenance({game,onRulesChanged,repairs:[buildAvPatreonRepairs,buildPartyPatreonRepairs,buildKnowledgePatreonRepairs,rules=>buildFortressPatreonRepairs(rules,{game}),...DEFENSIVE_ADVANCE_WORLDS.has(game.world?.id)?[buildDefensiveAdvancePatreonRepairs]:[]],settings:[{module:'pf2e-ranged-combat',key:'postActionToChat',value:2,when:g=>Array.from(g.actors.party?.members??[]).some(a=>[KNOWLEDGE_SOURCES.monster,KNOWLEDGE_SOURCES.hunt].every(source=>a.items.some(i=>i.sourceId===source))),reason:'猎物指定保留完整原生技能卡，供怪物猎手知识联动读取原始操作者与目标。'},{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:g=>REACTION_CHECKER_SETTING_WORLDS.has(g.world?.id),transform:value=>Array.isArray(value)?value.filter(slug=>slug!=='disarming-block'):value,reason:'卸武格挡改由实际格挡回执接原生自由动作缴械，避免重复提示或再次收取反应。'}]});
  await configuration().catch(report);
  if(glimpseWorld(game)){
   const cache=createGlimpseReactionCache({game});await cache.initialize().catch(report);
@@ -250,7 +251,7 @@ Hooks.once('ready',async()=>{
  reactionBudget.register({Hooks,socket});
  disruptExecutor.register({socket});
  salubriousExecutor.register({socket});
- if(['-','sog','pnvfcgjbf2cjp7gz','team-automation-qa2'].includes(game.world?.id))disruptEvents.register({Hooks,libWrapper,socket,castEvents:nativeCasts});
+ if(DISRUPT_PREY_WORLDS.has(game.world?.id))disruptEvents.register({Hooks,libWrapper,socket,castEvents:nativeCasts});
  shieldAdapter.register({libWrapper});
  deflectionRepair.register({Hooks,socket});
  elementalMedicine.register({Hooks,socket});
