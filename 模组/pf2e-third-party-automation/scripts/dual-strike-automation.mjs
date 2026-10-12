@@ -186,7 +186,7 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
    data.flags[MODULE_ID]={...data.flags[MODULE_ID],usageGenerated:true,dualStrike:{usageMessageId:message.id,kind:action,map,attacks:hits.map(h=>({messageId:h.attackMessage.id,weaponUuid:h.strike.item.uuid,actorUuid:actor.uuid}))}};
    data.flavor=`<h4 class="action">${twin?'双重攻击':'双重切割'}：合并伤害</h4>${data.flavor??''}`;
    await messageClass().create(withDamageMessageTarget(data,target.uuid));
-   return cancelled?{status:'cancelled',result:'第二次攻击已取消；第一次攻击的伤害卡已生成，按原生流程应用。'}:`已完成两次攻击，${hits.length}次命中；合并伤害只需应用一次，熊支援会随之自动结算。`;
+   return cancelled?{status:'cancelled',result:'第二次攻击已取消；第一次攻击的伤害卡已生成，按原生流程应用。'}:`已完成两次攻击，${hits.length}次命中；合并伤害只需应用一次。`;
   });
  }
  return {resolveAction,executeUsage,maintain,register:({Hooks,socket}={})=>{ownerOperations.register({Hooks,socket});return()=>{};}};

@@ -4,8 +4,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import {createCampaignFeats} from '../scripts/campaign-feats.mjs';
 import * as api from '../scripts/damage-message-targets.mjs';
-const NS='pf2e-third-party-automation',ENEMY='Scene.scene.Token.enemy',RANGED='pf2e-ranged-combat';
-const own=d=>d?.flags?.[NS]??{},values=c=>Array.from(c??[]);
+const NS='pf2e-third-party-automation',ENEMY='Scene.scene.Token.enemy';
 test('binding a damage card preserves metadata and leaves the source object unchanged without module APIs',()=>{
  assert.equal(typeof api.withDamageMessageTarget,'function');
  const data={flavor:'original',flags:{pf2e:{context:{target:{token:ENEMY}}},[NS]:{usageGenerated:true},'pf2e-toolbelt':{otherSetting:true,targetHelper:{targets:['Scene.scene.Token.old'],splashTargets:['Scene.scene.Token.splash'],applied:{prior:{0:true}},saveVariants:{null:{saves:{}}}}}}};
@@ -42,24 +41,6 @@ test('campaign custom damage publishes its proven recipient for Toolbelt',async(
  assert.deepEqual(Array.from(published[0].flags['pf2e-toolbelt']?.targetHelper?.targets??[]),[ENEMY]);
  assert.equal(published[0].flags.pf2e.context.target.token,ENEMY);
  assert.equal(published[0].flags[NS].campaignAttackMessageId,'check');
-});
-test('bear support card keeps the hit target rather than its companion speaker',async()=>{
- const published=[],DamageRoll=rollClass(published),supportId='Compendium.pf2e-animal-companions.AC-Support.Item.AvDlo1mgxXd7ZA8W';
- const master={uuid:'Actor.master',flags:{[RANGED]:{animalCompanionId:'bear'}},testUserPermission:()=>true};
- const companion={uuid:'Actor.bear',items:[{sourceId:supportId,uuid:'Actor.bear.Item.support',system:{traits:{}}}]};
- const effect={flags:{[NS]:{masterUuid:master.uuid,processed:[],startedAt:0,companionTokenUuid:'Scene.scene.Token.bear'}},async update(change){this.flags[NS].processed=change[`flags.${NS}.processed`]}};
- const target={uuid:ENEMY,actor:{uuid:'Actor.enemy'}},bear={uuid:'Scene.scene.Token.bear',actor:companion};
- const attack={id:'attack',isCheckRoll:true,timestamp:1,speaker:{actor:'master'},author:{id:'player'},flags:{pf2e:{origin:{type:'weapon',actor:master.uuid},context:{type:'attack-roll',outcome:'success',target:{actor:'Actor.enemy',token:ENEMY},options:[]}}}};
- const handleAttack=extracted('companion-automation.mjs','async function handleAttack(','async function expire(',{
-  MODULE_ID:NS,RANGED,SOURCE:{support:supportId},game:{messages:new Map([[attack.id,attack]]),actors:new Map([['master',master],['bear',companion]]),users:new Map([['player',{id:'player'}]])},
-  authority:()=>true,ownFlags:own,linkedMaster:()=>master,serial:(_key,callback)=>callback(),supports:()=>[effect],isExpired:()=>false,
-  fromUuid:async uuid=>uuid===ENEMY?target:bear,inReach:()=>true,values,sourceOf:i=>i.sourceId,
-  CONFIG:{Dice:{rolls:[DamageRoll]}},manualDamageRoll:async({roll})=>roll.evaluate(),manualDamagePrivacy:()=>null,ChatMessage:{getSpeaker:()=>({actor:'bear'})},withDamageMessageTarget:api.withDamageMessageTarget,
- });
- await handleAttack(attack);
- assert.equal(published.length,1);
- assert.deepEqual(Array.from(published[0].flags['pf2e-toolbelt']?.targetHelper?.targets??[]),[ENEMY]);
- assert.equal(published[0].speaker.actor,'bear');
 });
 test('campaign custom damage waits for the native window and closing it cannot publish damage',async()=>{
  const published=[],DamageRoll=rollClass(published),target={uuid:ENEMY,actor:{uuid:'Actor.enemy'}},actor={id:'pc',uuid:'Actor.pc'},item={uuid:'Actor.pc.Item.ability',type:'action'};let accept;const pending=new Promise(resolve=>accept=resolve);
