@@ -18,7 +18,6 @@ import {createSocialAutomation} from './social-automation.mjs';
 import {createThrallAutomation} from './thrall-automation.mjs';
 import {createReactionChecks} from './reaction-checks.mjs';
 import {registerReactionShieldWallEmptyCompatibility} from './reaction-shield-wall-empty-compat.mjs';
-import {registerRoaringReactionCompatibility} from './roaring-reaction-compat.mjs';
 import {createFearAutomation} from './fear-automation.mjs';
 import {registerPatreonInitiativeCompatibility as installPatreonInitiativeCompatibility} from './patreon-initiative-compat.mjs';
 import {createScareToDeath} from './scare-to-death.mjs';
@@ -31,13 +30,10 @@ import {installPatreonTreatmentCompatibility} from './patreon-treatment-compat.m
 import {createTranscendentDeflection} from './transcendent-deflection.mjs';
 import {createDeflectionRepair} from './transcendent-deflection-repair.mjs';
 import {createReactionBudget} from './reaction-budget.mjs';
-import {createGlimpseCompat,glimpseWorld} from './glimpse-compat.mjs';
+import {createGlimpseCompat} from './glimpse-compat.mjs';
 import {createGlimpseProvider} from './glimpse-of-redemption.mjs';
 import {createSpiritualScarProvider} from './spiritual-scar.mjs';
 import {createSpiritualScarFollowup} from './spiritual-scar-followup.mjs';
-import {glimpseReactionSetting,canSuppressGlimpseReminder,GLIMPSE_REACTION_REASON} from './glimpse-reaction-setting.mjs';
-import {registerGlimpseConfigurationEvents} from './glimpse-configuration-events.mjs';
-import {createGlimpseReactionCache} from './glimpse-reaction-cache.mjs';
 import {getNativeCastEvents} from './amp-cast-events.mjs';
 import {createDisruptPrey} from './disrupt-prey.mjs';
 import {createDisruptPreyEvents} from './disrupt-prey-events.mjs';
@@ -144,7 +140,7 @@ Hooks.once('ready',async()=>{
  const weaponSurge=createWeaponSurgeAutomation({game});
  const advanceStartup=defensiveAdvanceStartupCompatibility({game,rules:game.modules.get('patreon-v3')?.active?game.settings.get('patreon-v3','rulesV3'):null});
  const defensiveAdvance=createDefensiveAdvance({game,fromUuid,choose,startupCompatibility:advanceStartup,onError:report});
- let glimpse,roaring,roaringReactionCompatibility;
+ let glimpse,roaring;
  const reactionRestriction=ROARING_APPLAUSE_WORLDS.has(game.world?.id)&&game.system?.id==='pf2e'?actor=>roaring?.reactionRestriction(actor)??{status:'manual',sources:[{sourceNonce:null,status:'manual',reason:'provider-initializing'}]}:undefined;
  const reactionBudget=createReactionBudget({game,fromUuid,reactionRestriction,onError:report,handlesGlimpse:actor=>glimpse?.handlesActor(actor)??false});
  await glimpseCompat.initialize({game}).catch(report);
@@ -192,7 +188,7 @@ Hooks.once('ready',async()=>{
  const halflingLuck=HALFLING_LUCK_WORLDS.has(game.world?.id)&&game.system?.id==='pf2e'?createHalflingLuckProvider({game,fromUuid,choose:showNativeChoice,onError:report}):null;
  const forceBarrage=FORCE_BARRAGE_WORLDS.has(game.world?.id)&&game.system?.id==='pf2e'?createForceBarrageBridge({game,fromUuid,nativeCasts,onError:report}):null;
  roaring=forceBarrage?createRoaringApplause({game,fromUuid,nativeCasts,effects:createRoaringEffects({game,fromUuid,onError:report}),onError:report,onManual:()=>ui.notifications.warn('本次轰然喝彩需要GM核对结果或时长，请查看原施法卡。')}):null;
- const roaringSustain=roaring?createRoaringSustain({game,fromUuid,provider:roaring,reactionCompatibility:()=>({owned:true,checker:roaringReactionCompatibility?.ready()===true}),onError:report}):null;
+ const roaringSustain=roaring?createRoaringSustain({game,fromUuid,provider:roaring,reactionCompatibility:()=>({owned:true,checker:false}),onError:report}):null;
  if(forceBarrage)nativeCasts.addCastMiddleware(forceBarrage.interceptCast);
  if(roaring)nativeCasts.addCastMiddleware(roaring.interceptCast);
  if(prayer){nativeCasts.addActorMatcher(prayer.isManagedActor);nativeCasts.addConsumePolicy(prayer.consumePolicy);nativeCasts.addCastMiddleware(prayer.interceptCast);}
@@ -206,12 +202,6 @@ Hooks.once('ready',async()=>{
  const onRulesChanged=()=>{if(fortressRuleCompatibilityEnabled(game)&&game.modules.get('patreon-v3')?.active)ui.notifications.warn('Patreon 规则已修复；请所有已在线客户端刷新一次，使规则修复生效。',{permanent:true})};
  const configuration=createConfigurationMaintenance({game,onRulesChanged,repairs:[buildAvPatreonRepairs,buildPartyPatreonRepairs,buildKnowledgePatreonRepairs,rules=>buildFortressPatreonRepairs(rules,{game}),...DEFENSIVE_ADVANCE_WORLDS.has(game.world?.id)?[buildDefensiveAdvancePatreonRepairs]:[]],settings:[{module:'pf2e-ranged-combat',key:'postActionToChat',value:2,when:g=>Array.from(g.actors.party?.members??[]).some(a=>[KNOWLEDGE_SOURCES.monster,KNOWLEDGE_SOURCES.hunt].every(source=>a.items.some(i=>i.sourceId===source))),reason:'猎物指定保留完整原生技能卡，供怪物猎手知识联动读取原始操作者与目标。'},{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:g=>REACTION_CHECKER_SETTING_WORLDS.has(g.world?.id),transform:value=>Array.isArray(value)?value.filter(slug=>slug!=='disarming-block'):value,reason:'卸武格挡改由实际格挡回执接原生自由动作缴械，避免重复提示或再次收取反应。'}]});
  await configuration().catch(report);
- if(glimpseWorld(game)){
-  const cache=createGlimpseReactionCache({game});await cache.initialize().catch(report);
-  const actors=()=>[...game.actors.contents,...game.scenes.contents.flatMap(scene=>scene.tokens.contents.map(token=>token.actor).filter(Boolean))];
-  const reconcile=createConfigurationMaintenance({game,settings:[{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:glimpseWorld,transform:(value,g)=>glimpseReactionSetting(value,g,cache.ready()&&canSuppressGlimpseReminder(actors(),glimpse)),reason:GLIMPSE_REACTION_REASON}]});
-  await registerGlimpseConfigurationEvents({game,Hooks,reconcile,onError:report}).reconcileNow();
- }
  providers.unshift(activityResults,weaponSurge,glimpse,...scar?[scar]:[],voltage,electricity);
  providers.push(metapower,createEldamonDataRepair({game}),createMedicActions({game,fromUuid,choose,onError:report}),familiar,defensiveAdvance,...prayer?[prayer]:[]);
  const electricityBasic=createEldamonBasicSettlement({game,fromUuid,basicUse:electricity.basicUse,apply:payload=>electricity.confirmedAction(payload),onError:report});
@@ -278,7 +268,6 @@ Hooks.once('ready',async()=>{
  const registerPatreonCompatibility=async()=>patreonInitiativeCompatibility=await installPatreonInitiativeCompatibility({game,Hooks,isProviderReady:()=>providers.includes(fear)});
  await registerPatreonCompatibility();
  const reactionShieldWall=await registerReactionShieldWallEmptyCompatibility({game,Hooks});
- if(roaring)roaringReactionCompatibility=await registerRoaringReactionCompatibility({game,query:reactionRestriction});
  const reactionShieldWallDiagnostic=Object.freeze({status:reactionShieldWall.status,reason:reactionShieldWall.reason??null,scope:reactionShieldWall.scope??null,sourceSHA256:reactionShieldWall.sourceSHA256??null,callbackSHA256:reactionShieldWall.callbackSHA256??null,hook:reactionShieldWall.hook?Object.freeze({...reactionShieldWall.hook}):null});
  // All existing Check providers are registered first. This bridge changes only
  // the verified Patreon entry.fn; it does not reorder or register Check again.
