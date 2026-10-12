@@ -1,19 +1,12 @@
-import {getSourceId} from './native-context.mjs';
+import {getSourceId,isCurrentSceneToken} from './native-context.mjs';
 
 export const DISRUPT_PREY_SOURCE='Compendium.pf2e.feats-srd.Item.qav9ec9cR4lFcz3C';
 const values=c=>Array.from(c?.values?.()??c??[]);
 
-/** Require the live scene document and its actual canvas object, never a UUID-shaped copy. */
-export function isCurrentDisruptToken(token,game){
- return !!(token?.documentName==='Token'&&token.id&&token.uuid&&token.actor?.uuid&&
-  game?.scenes?.get(token.parent?.id)===token.parent&&token.parent?.tokens?.get(token.id)===token&&
-  token.object?.document===token);
-}
-
 export const hasDisruptPrey=actor=>values(actor?.items).some(item=>item.type==='feat'&&getSourceId(item)===DISRUPT_PREY_SOURCE&&!item.suppressed&&!item.isSuppressed&&!item.system?.suppressed);
 
 export function isDisruptPreyTarget(actor,target,game){
- return !!(actor?.uuid&&isCurrentDisruptToken(target,game)&&target.actor.uuid!==actor.uuid&&
+ return !!(actor?.uuid&&isCurrentSceneToken(target,game)&&target.actor.uuid!==actor.uuid&&
   actor.synthetics?.tokenMarks?.get(target.uuid)?.includes('hunted-prey'));
 }
 
@@ -42,7 +35,7 @@ export function getDisruptPreyReadyMeleeStrikes(actor){
 }
 
 export function getDisruptPreyMeleeOptions({actor,token,target,game}){
- if(!isCurrentDisruptToken(token,game)||token.actor.uuid!==actor?.uuid||
+ if(!isCurrentSceneToken(token,game)||token.actor.uuid!==actor?.uuid||
   token.parent!==target?.parent||!isDisruptPreyTarget(actor,target,game))return [];
  return getDisruptPreyReadyMeleeStrikes(actor).flatMap(candidate=>{
   const distance=token.object.distanceTo?.(target.object,{reach:candidate.reach});

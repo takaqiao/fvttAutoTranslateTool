@@ -1,6 +1,5 @@
 import {MODULE_ID} from './rules.mjs';
-import {getSourceId} from './native-context.mjs';
-import {isCurrentDisruptToken} from './disrupt-prey-rules.mjs';
+import {getSourceId,isCurrentSceneToken} from './native-context.mjs';
 
 export const TRANSCENDENT_DEFLECTION_SOURCE='Compendium.pf2e.feats-srd.Item.WglDQlEtHnZ2eFhW';
 const values=c=>Array.from(c?.values?.()??c??[]);
@@ -19,7 +18,7 @@ function eligibleDeflectionMelee(item,{held=true,melee=item}={}){
 export const eligibleDeflectionWeapon=(item,options={})=>eligibleDeflectionMelee(item,options)&&!(options.melee??item)?.system?.traits?.value?.includes('artifact');
 export function getTranscendentDeflectionOptions({game,actor,token,attacker,victim}){
  if(!deflectionFeat(actor)||actor.canAct===false||actor.isDead||actor.hasCondition?.('unconscious')||
-  ![token,attacker,victim].every(t=>isCurrentDisruptToken(t,game))||token.actor!==actor||
+  ![token,attacker,victim].every(t=>isCurrentSceneToken(t,game))||token.actor!==actor||
   token.parent!==attacker.parent||token.parent!==victim.parent||!actor.isEnemyOf?.(attacker.actor)||
   actor.uuid!==victim.actor.uuid&&!actor.isAllyOf?.(victim.actor))return [];
  const result=[],seen=new Set();

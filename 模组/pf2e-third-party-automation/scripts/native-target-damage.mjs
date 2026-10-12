@@ -1,5 +1,5 @@
 import {MODULE_ID} from './rules.mjs';
-import {isCurrentDisruptToken} from './disrupt-prey-rules.mjs';
+import {isCurrentSceneToken} from './native-context.mjs';
 
 const applicationPrefix=`${MODULE_ID}:disrupt-apply:`,sourcePrefix=`${MODULE_ID}:source:`;
 
@@ -32,7 +32,7 @@ export async function prepareNativeTargetDamage({game,message,target,rollIndex=0
  const fail=reason=>{throw Error(`Cannot prepare native target damage: ${reason}`)};
  const current=()=>{
   if(typeof message?.id!=='string'||!message.id||game?.messages?.get(message.id)!==message)fail('damage message is not the current document');
-  if(!isCurrentDisruptToken(target,game))fail('target is not a current scene Token document');
+  if(!isCurrentSceneToken(target,game))fail('target is not a current scene Token document');
   const context=message.flags?.pf2e?.context;
   if(context?.type!=='damage-roll'||context.target?.token!==target.uuid||context.target?.actor!==target.actor.uuid)fail('damage context does not name this exact target actor and token');
   return context;

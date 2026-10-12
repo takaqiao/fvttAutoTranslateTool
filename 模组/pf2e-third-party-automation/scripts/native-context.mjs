@@ -3,6 +3,12 @@ import {requireOwner} from './runtime.mjs';
 
 export const getSourceId=item=>item?.sourceId??item?._stats?.compendiumSource??item?.flags?.core?.sourceId??null;
 export const isActiveGM=game=>!!game?.users?.activeGM?.id&&game.user?.id===game.users.activeGM.id;
+/** Require the live scene document and its actual canvas object, never a UUID-shaped copy. */
+export function isCurrentSceneToken(token,game){
+ return !!(token?.documentName==='Token'&&token.id&&token.uuid&&token.actor?.uuid&&
+  game?.scenes?.get(token.parent?.id)===token.parent&&token.parent?.tokens?.get(token.id)===token&&
+  token.object?.document===token);
+}
 /** Choice text is delivered to this recipient, which can differ from the GM. */
 export function publicTargetName(token,{game,user=game?.user}={}){
  const target=token?.document??token;

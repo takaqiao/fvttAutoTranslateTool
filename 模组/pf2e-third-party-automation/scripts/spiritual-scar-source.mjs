@@ -1,4 +1,4 @@
-import {isCurrentDisruptToken} from './disrupt-prey-rules.mjs';
+import {isCurrentSceneToken} from './native-context.mjs';
 
 const no=unsupportedReason=>({verified:false,unsupportedReason});
 const serial=value=>JSON.stringify(value,(_key,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.fromEntries(Object.entries(v).sort(([a],[b])=>a.localeCompare(b))):v);
@@ -35,7 +35,7 @@ export function hasIncomingScarDamage(params){
 }
 
 async function inspect({game,fromUuid,actor,token,message,rollIndex}){
- if(!isCurrentDisruptToken(token,game)||token.actor.uuid!==actor?.uuid)return no('recipient-unavailable');
+ if(!isCurrentSceneToken(token,game)||token.actor.uuid!==actor?.uuid)return no('recipient-unavailable');
  if(!message?.id||game.messages.get(message.id)!==message||!message.isDamageRoll||!Number.isSafeInteger(rollIndex)||rollIndex<0)return no('native-damage-card-unavailable');
  if(message.flags?.['pf2e-toolbelt']?.betterChat?.mergeDamage)return no('merged-source-unproven');
  const roll=message.rolls?.[rollIndex],pf=message.flags?.pf2e,context=pf?.context,origin=pf?.origin;
@@ -69,7 +69,7 @@ async function inspect({game,fromUuid,actor,token,message,rollIndex}){
   if(!currentSourceItem(item,sourceActor)||item.uuid!==origin.uuid||origin.type!=null&&item.type!==origin.type)return no('source-item-unavailable');
  }
  const digest=await hash(before);
- if(game.messages.get(message.id)!==message||before!==evidence(message,rollIndex)||!isCurrentDisruptToken(token,game)||token.actor.uuid!==actor.uuid)return no('source-evidence-changed');
+ if(game.messages.get(message.id)!==message||before!==evidence(message,rollIndex)||!isCurrentSceneToken(token,game)||token.actor.uuid!==actor.uuid)return no('source-evidence-changed');
  if(!authorized()||!sourceCurrent())return no('source-author-or-fiend-changed');
  if(item&&(!currentSourceItem(item,sourceActor)||item.uuid!==origin.uuid||origin.type!=null&&item.type!==origin.type))return no('source-item-changed');
  const snapshot=Object.freeze({schema:1,kind:'spiritual-scar',damageMessageId:message.id,rollIndex,actorUuid:actor.uuid,tokenUuid:token.uuid,

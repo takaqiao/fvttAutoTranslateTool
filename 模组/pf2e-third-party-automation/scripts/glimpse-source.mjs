@@ -1,4 +1,4 @@
-import {isCurrentDisruptToken} from './disrupt-prey-rules.mjs';
+import {isCurrentSceneToken} from './native-context.mjs';
 import {MODULE_ID} from './rules.mjs';
 import {hasNativeDamageStrike} from './native-damage-strike.mjs';
 import {glimpseLevelSupported} from './glimpse-native.mjs';
@@ -32,7 +32,7 @@ export function glimpseCandidates(context,game){
   if(glimpseEncounter(enemy,game).combat!==encounter)return [];
   return [...new Set(encounter.turns.map(combatant=>combatant.token).filter(token=>token?.parent===victim.parent))].flatMap(token=>{
    const actor=token.actor,items=Array.from(actor?.items?.values?.()??[]),ability=items.find(i=>glimpseSourceId(i)===GLIMPSE_SOURCES.glimpse&&i.system?.actionType?.value==='reaction');
-   if(!isCurrentDisruptToken(token,game)||actor?.type!=='character'||!glimpseLevelSupported(actor.level)||actor.uuid===ally.uuid||actor.canAct!==true||actor.isDead||actor.hasCondition?.('unconscious')||!ability||!items.some(i=>glimpseSourceId(i)===GLIMPSE_SOURCES.aura)||items.some(i=>glimpseSourceId(i)===GLIMPSE_SOURCES.weight)||actor.isEnemyOf?.(enemy.actor)!==true||actor.isAllyOf?.(ally)!==true)return [];
+   if(!isCurrentSceneToken(token,game)||actor?.type!=='character'||!glimpseLevelSupported(actor.level)||actor.uuid===ally.uuid||actor.canAct!==true||actor.isDead||actor.hasCondition?.('unconscious')||!ability||!items.some(i=>glimpseSourceId(i)===GLIMPSE_SOURCES.aura)||items.some(i=>glimpseSourceId(i)===GLIMPSE_SOURCES.weight)||actor.isEnemyOf?.(enemy.actor)!==true||actor.isAllyOf?.(ally)!==true)return [];
    const aura=token.auras?.get?.('champions-aura');if(!aura||aura.containsToken?.(enemy)!==true||aura.containsToken?.(victim)!==true)return [];
    try{const bound=glimpseEncounter(token,game);return bound.combat===encounter?[{actor,token,ability,...bound}]:[]}catch{return []}
   });
@@ -54,7 +54,7 @@ function evidence(message,index){
  return serial({author:message.author?.id??message.user?.id??message.user,speaker:message.speaker,pf:message.flags?.pf2e,helper:helperEvidence(message.flags?.['pf2e-toolbelt']?.targetHelper),roll:typeof roll==='string'?JSON.parse(roll):roll});
 }
 async function inspect({game,fromUuid,actor,token,message,rollIndex}){
- if(!isCurrentDisruptToken(token,game)||token.actor.uuid!==actor?.uuid)return no('recipient-unavailable');
+ if(!isCurrentSceneToken(token,game)||token.actor.uuid!==actor?.uuid)return no('recipient-unavailable');
  if(!message?.id||game.messages.get(message.id)!==message||!message.isDamageRoll||rollIndex!==0)return no('not-primary-attack-damage');
  if(message.flags?.['pf2e-toolbelt']?.betterChat?.mergeDamage)return no('combined-attacks-unsupported');
  const roll=message.rolls?.[rollIndex],pf=message.flags?.pf2e,c=pf?.context,o=pf?.origin;
@@ -65,7 +65,7 @@ async function inspect({game,fromUuid,actor,token,message,rollIndex}){
  if(Array.isArray(targets)&&targets.length&&!targets.includes(token.uuid))return no('source-target-mismatch');
  if(![c.target,pf.target].some(t=>t?.token===token.uuid)&&!(Array.isArray(targets)&&targets.includes(token.uuid)))return no('recipient-not-recorded');
  const before=evidence(message,rollIndex),s=message.speaker,attacker=await fromUuid(`Scene.${s?.scene}.Token.${s?.token}`);
- if(!isCurrentDisruptToken(attacker,game)||attacker.parent!==token.parent||attacker.actor.id!==s.actor||attacker.actor.uuid!==o.actor||c.actor!=null&&c.actor!==attacker.actor.id||c.token!=null&&c.token!==attacker.id)return no('attacker-provenance-mismatch');
+ if(!isCurrentSceneToken(attacker,game)||attacker.parent!==token.parent||attacker.actor.id!==s.actor||attacker.actor.uuid!==o.actor||c.actor!=null&&c.actor!==attacker.actor.id||c.token!=null&&c.token!==attacker.id)return no('attacker-provenance-mismatch');
  const authorId=message.author?.id??message.user?.id??message.user,user=game.users?.get?.(authorId);
  const authorized=()=>!!user&&game.users.get(authorId)===user&&(user.isGM===true||attacker.actor.testUserPermission?.(user,'OWNER')===true);
  if(!authorized())return no('attacker-author-unauthorized');

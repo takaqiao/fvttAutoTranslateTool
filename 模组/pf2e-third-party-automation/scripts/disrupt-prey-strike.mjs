@@ -1,5 +1,6 @@
 import {MODULE_ID} from './rules.mjs';
-import {getDisruptPreyMeleeOptions,isCurrentDisruptToken} from './disrupt-prey-rules.mjs';
+import {isCurrentSceneToken} from './native-context.mjs';
+import {getDisruptPreyMeleeOptions} from './disrupt-prey-rules.mjs';
 import {nativeRollEvent} from './manual-native-roll.mjs';
 import {beforeNativeRoll} from './native-owner-operations.mjs';
 
@@ -14,7 +15,7 @@ const failure=text=>Error(`扰乱狩猎：${text}；不会自动重掷。`);
 
 function checkOwner({game,actor,token,target,claim}){
  if(actor?.type!=='character'||!game.user?.id||game.user.id!==claim?.userId||game.users?.get(claim.userId)!==game.user||!actor.testUserPermission?.(game.user,'OWNER'))throw failure('必须由确切反应拥有者的客户端执行');
- if(!isCurrentDisruptToken(token,game)||!isCurrentDisruptToken(target,game)||token.actor!==actor||token.parent!==target.parent||claim.actorUuid!==actor.uuid||claim.tokenUuid!==token.uuid||claim.targetActorUuid!==target.actor.uuid||(claim.targetTokenUuid??claim.targetUuid)!==target.uuid||claim.targetUuid!=null&&claim.targetUuid!==target.uuid)throw failure('当前角色、Token或认领目标来源不匹配');
+ if(!isCurrentSceneToken(token,game)||!isCurrentSceneToken(target,game)||token.actor!==actor||token.parent!==target.parent||claim.actorUuid!==actor.uuid||claim.tokenUuid!==token.uuid||claim.targetActorUuid!==target.actor.uuid||(claim.targetTokenUuid??claim.targetUuid)!==target.uuid||claim.targetUuid!=null&&claim.targetUuid!==target.uuid)throw failure('当前角色、Token或认领目标来源不匹配');
  if(typeof claim.nonce!=='string'||!claim.nonce||typeof claim.claimKey!=='string'||!claim.claimKey||typeof claim.weaponKey!=='string'||!Number.isInteger(claim.map)||claim.map<0||claim.map>2)throw failure('反应认领标识或MAP无效');
 }
 function currentOption(context){

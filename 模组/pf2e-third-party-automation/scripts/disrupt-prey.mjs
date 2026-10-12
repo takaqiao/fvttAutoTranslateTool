@@ -1,6 +1,6 @@
 import {MODULE_ID} from './rules.mjs';
-import {isActiveGM} from './native-context.mjs';
-import {getDisruptPreyMeleeOptions,isCurrentDisruptToken} from './disrupt-prey-rules.mjs';
+import {isActiveGM,isCurrentSceneToken} from './native-context.mjs';
+import {getDisruptPreyMeleeOptions} from './disrupt-prey-rules.mjs';
 import {genericReactionAvailable,reactionEpoch,withReactionReservation} from './reaction-budget.mjs';
 
 const values=c=>Array.from(c?.values?.()??c??[]),own=actor=>actor?.flags?.[MODULE_ID]?.disruptPrey??{events:[],reactions:[]};
@@ -43,7 +43,7 @@ export function createDisruptPrey({game,reactionRestriction,fromUuid=globalThis.
   if(actor?.uuid!==event.actorUuid)return null;
   return {actor,token,target};
  }
- const currentContext=(context,event)=>!!(context&&isCurrentDisruptToken(context.token,game)&&isCurrentDisruptToken(context.target,game)&&context.token.actor.uuid===event.actorUuid&&context.target.actor.uuid===event.sourceActorUuid&&context.token.parent===context.target.parent);
+ const currentContext=(context,event)=>!!(context&&isCurrentSceneToken(context.token,game)&&isCurrentSceneToken(context.target,game)&&context.token.actor.uuid===event.actorUuid&&context.target.actor.uuid===event.sourceActorUuid&&context.token.parent===context.target.parent);
  async function validSource(event,context,stage,choice=null){
   gm();const allowed=await validateSource(event,{...context,stage,choice});gm();return allowed===true;
  }

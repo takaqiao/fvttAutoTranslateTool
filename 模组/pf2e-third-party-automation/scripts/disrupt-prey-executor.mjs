@@ -1,6 +1,6 @@
 import {MODULE_ID} from './rules.mjs';
-import {isActiveGM} from './native-context.mjs';
-import {getDisruptPreyMeleeOptions,isCurrentDisruptToken} from './disrupt-prey-rules.mjs';
+import {isActiveGM,isCurrentSceneToken} from './native-context.mjs';
+import {getDisruptPreyMeleeOptions} from './disrupt-prey-rules.mjs';
 import {rollDisruptPreyAttack,rollDisruptPreyDamage} from './disrupt-prey-strike.mjs';
 import {prepareNativeTargetDamage} from './native-target-damage.mjs';
 
@@ -49,7 +49,7 @@ export function createDisruptPreyExecutor({game,fromUuid=globalThis.fromUuid,Hoo
  }
  async function contextFor(actor,record){
   const claim=record.claim,token=await fromUuid(claim.tokenUuid),target=await fromUuid(claim.targetUuid),user=game.users.get(claim.userId);
-  if(!same(recorded(actor,claim.nonce),claim)||!isCurrentDisruptToken(token,game)||!isCurrentDisruptToken(target,game)||token.actor!==actor||target.actor.uuid!==claim.targetActorUuid||target.actor.id!==claim.targetActorId||token.parent!==target.parent||!user?.active||!actor.testUserPermission?.(user,'OWNER'))throw fail('真实拥有者、角色或Token来源已变');
+  if(!same(recorded(actor,claim.nonce),claim)||!isCurrentSceneToken(token,game)||!isCurrentSceneToken(target,game)||token.actor!==actor||target.actor.uuid!==claim.targetActorUuid||target.actor.id!==claim.targetActorId||token.parent!==target.parent||!user?.active||!actor.testUserPermission?.(user,'OWNER'))throw fail('真实拥有者、角色或Token来源已变');
   const option=getDisruptPreyMeleeOptions({game,actor,token,target}).find(o=>o.key===claim.weaponKey);
   if(!option||option.itemUuid!==claim.itemUuid||typeof option.strike.variants?.[claim.map]?.roll!=='function')throw fail('准确武器、持握、猎物或触及已变');
   return {actor,token,target,user,option:{...option,map:claim.map},claim:structuredClone(claim)};
@@ -123,7 +123,7 @@ export function createDisruptPreyExecutor({game,fromUuid=globalThis.fromUuid,Hoo
     stageReady(fresh,payload.stage,payload.checkId);
     const assertLive=()=>{
      requesterGM(requester);const live=basicClaim(actor,payload.nonce,payload.claimKey);
-     if(!live||!same(live.claim,context.claim)||game.user!==context.user||game.users.get(context.user.id)!==context.user||!context.user.active||!actor.testUserPermission?.(context.user,'OWNER')||!isCurrentDisruptToken(context.token,game)||context.token.actor!==actor||!isCurrentDisruptToken(context.target,game)||context.target.actor.uuid!==context.claim.targetActorUuid||context.target.actor.id!==context.claim.targetActorId)throw fail('原生确认期间拥有者、来源或认领已变');
+     if(!live||!same(live.claim,context.claim)||game.user!==context.user||game.users.get(context.user.id)!==context.user||!context.user.active||!actor.testUserPermission?.(context.user,'OWNER')||!isCurrentSceneToken(context.token,game)||context.token.actor!==actor||!isCurrentSceneToken(context.target,game)||context.target.actor.uuid!==context.claim.targetActorUuid||context.target.actor.id!==context.claim.targetActorId)throw fail('原生确认期间拥有者、来源或认领已变');
      stageReady(live,payload.stage,payload.checkId);
      if(!getDisruptPreyMeleeOptions({...context,game}).some(option=>option.key===context.claim.weaponKey&&option.itemUuid===context.claim.itemUuid))throw fail('原生确认期间准确武器来源已变');
      if(attack)cardProof(attack,context.claim,'attack');
@@ -157,7 +157,7 @@ export function createDisruptPreyExecutor({game,fromUuid=globalThis.fromUuid,Hoo
     if(!record||!same(record.claim,context.claim))throw fail('拥有者执行期间持久认领已变');stageReady(record,stage,payload.checkId);
     const attempts=(context.actor.flags?.[MODULE_ID]?.disruptPreyExecutions?.records??[]).filter(r=>r.nonce===context.claim.nonce&&r.stage===stage);
     if(attempts.length>1||attempts[0]&&(!same(attempts[0],context.claim)||!['started','done'].includes(attempts[0].status)))throw fail('原拥有者阶段记录不唯一或未确认');
-    if(!isCurrentDisruptToken(context.token,game)||context.token.actor!==context.actor||!isCurrentDisruptToken(context.target,game)||context.target.actor.uuid!==context.claim.targetActorUuid||context.target.actor.id!==context.claim.targetActorId)throw fail('原生结果等待期间来源或目标已变');
+    if(!isCurrentSceneToken(context.token,game)||context.token.actor!==context.actor||!isCurrentSceneToken(context.target,game)||context.target.actor.uuid!==context.claim.targetActorUuid||context.target.actor.id!==context.claim.targetActorId)throw fail('原生结果等待期间来源或目标已变');
     if(attempts[0]?.status==='done'){if(!bounded(attempts[0].messageId))throw fail('原拥有者完成记录没有准确卡ID');return {messageId:attempts[0].messageId};}
     if(!context.user.active||game.users.get(context.user.id)!==context.user||!context.actor.testUserPermission(context.user,'OWNER'))throw fail('拥有者已离线或原来源已变');
     return null;

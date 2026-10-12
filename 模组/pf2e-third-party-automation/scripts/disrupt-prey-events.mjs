@@ -1,7 +1,7 @@
 import {MODULE_ID} from './rules.mjs';
-import {isActiveGM} from './native-context.mjs';
+import {isActiveGM,isCurrentSceneToken} from './native-context.mjs';
 import {getNativeCastEvents} from './amp-cast-events.mjs';
-import {hasDisruptPrey,isCurrentDisruptToken,isDisruptPreyTarget,getDisruptPreyMeleeOptions} from './disrupt-prey-rules.mjs';
+import {hasDisruptPrey,isDisruptPreyTarget,getDisruptPreyMeleeOptions} from './disrupt-prey-rules.mjs';
 import {prepareDisruptMovementCheckpoints} from './disrupt-prey-movement.mjs';
 
 const values=c=>Array.from(c?.values?.()??c??[]),doc=t=>t?.document??t;
@@ -40,7 +40,7 @@ export function createDisruptPreyEvents({game,fromUuid=globalThis.fromUuid,handl
   removeToken(token.uuid);
   // Token.actor can lazily construct a synthetic NPC. Verify an already
   // rendered current-scene object before touching that getter.
-  if(token.parent!==renderedScene()||token.object?.document!==token||!isCurrentDisruptToken(token,game))return;
+  if(token.parent!==renderedScene()||token.object?.document!==token||!isCurrentSceneToken(token,game))return;
   const actor=token.actor,tokens=actorTokens.get(actor.uuid)??new Map();tokens.set(token.uuid,token);actorTokens.set(actor.uuid,tokens);tracked.set(token.uuid,{actorUuid:actor.uuid});
   if(!hasDisruptPrey(actor))return;
   const marks=[];for(const [targetUuid,labels]of token.actor.synthetics?.tokenMarks??[]){
@@ -50,7 +50,7 @@ export function createDisruptPreyEvents({game,fromUuid=globalThis.fromUuid,handl
  }
  function rebuildIndex(){targets.clear();indexed.clear();tracked.clear();actorTokens.clear();for(const token of values(renderedScene()?.tokens))indexToken(token);}
  function refreshActor(actor){if(actor?.uuid)for(const token of values(actorTokens.get(actor.uuid)))indexToken(token);}
- const possible=token=>values(targets.get(token?.uuid)).filter(r=>isCurrentDisruptToken(r.token,game)&&r.token.parent===token.parent&&isDisruptPreyTarget(r.actor,token,game));
+ const possible=token=>values(targets.get(token?.uuid)).filter(r=>isCurrentSceneToken(r.token,game)&&r.token.parent===token.parent&&isDisruptPreyTarget(r.actor,token,game));
  const isPreyActor=actor=>values(actor?.getActiveTokens?.(true,true)).map(doc).some(token=>possible(token).length);
  function clearLine(token,target){
   // Native V14 checkCollision uses the document position, independent of an
@@ -61,17 +61,17 @@ export function createDisruptPreyEvents({game,fromUuid=globalThis.fromUuid,handl
   const options=getDisruptPreyMeleeOptions({...reactor,target,game});return options.some(o=>!choice||o.key===(choice.key??choice.weaponKey))&&clearLine(reactor.token,target);
  };
  function sourceToken(actor){
-  const controlled=values(game.user.getActiveTokens?.()).map(doc).filter(t=>t.actor?.uuid===actor.uuid&&isCurrentDisruptToken(t,game));
-  const candidates=controlled.length?controlled:values(actor.getActiveTokens?.(true,true)).map(doc).filter(t=>isCurrentDisruptToken(t,game)&&(!game.scenes.current||t.parent===game.scenes.current));
+  const controlled=values(game.user.getActiveTokens?.()).map(doc).filter(t=>t.actor?.uuid===actor.uuid&&isCurrentSceneToken(t,game));
+  const candidates=controlled.length?controlled:values(actor.getActiveTokens?.(true,true)).map(doc).filter(t=>isCurrentSceneToken(t,game)&&(!game.scenes.current||t.parent===game.scenes.current));
   return candidates.length===1?candidates[0]:null;
  }
  function openScope(kind,actor,token,extra={}){
-  if(!sourceOwner(actor)||!isCurrentDisruptToken(token,game)||token.actor!==actor)throw Error('扰乱狩猎来源操作者或Token已经失效。');
+  if(!sourceOwner(actor)||!isCurrentSceneToken(token,game)||token.actor!==actor)throw Error('扰乱狩猎来源操作者或Token已经失效。');
   const scope={id:randomId(),kind,actor,token,user:game.user,leader:game.users.activeGM?.id,turn:turn(game),events:new Map(),active:true,stage:'ready',...extra};scopes.set(scope.id,scope);return scope;
  }
  function closeScope(scope){scope.active=false;scopes.delete(scope.id);if(movementScopes.get(scope.token.uuid)===scope)movementScopes.delete(scope.token.uuid);}
  function currentScope(scope){
-  return !!(installed&&scope?.active&&scopes.get(scope.id)===scope&&scope.user===game.user&&sourceOwner(scope.actor,scope.user)&&turn(game)===scope.turn&&(!scope.user.isGM||scope.user.id===game.users.activeGM?.id)&&isCurrentDisruptToken(scope.token,game)&&scope.token.actor===scope.actor);
+  return !!(installed&&scope?.active&&scopes.get(scope.id)===scope&&scope.user===game.user&&sourceOwner(scope.actor,scope.user)&&turn(game)===scope.turn&&(!scope.user.isGM||scope.user.id===game.users.activeGM?.id)&&isCurrentSceneToken(scope.token,game)&&scope.token.actor===scope.actor);
  }
  function castProof(scope){
   const c=scope.cast,receipt=scope.actor.flags?.[MODULE_ID]?.nativeCasts?.find(r=>r.id===c?.castNonce);
@@ -97,7 +97,7 @@ export function createDisruptPreyEvents({game,fromUuid=globalThis.fromUuid,handl
   await Promise.all([settleVisualMovement(token),settleVisualMovement(target)]);
   const proof=await probeSource(event,request.scopeId);if(!isActiveGM(game)||!proof||proof.scopeId!==request.scopeId||proof.turn!==turn(game))return false;
   const user=game.users.get(event.sourceUserId);
-  if(!sourceOwner(target?.actor,user)||!active(target.actor)||!isCurrentDisruptToken(target,game)||target.uuid!==event.sourceTokenUuid||target.actor.uuid!==event.sourceActorUuid||actor?.uuid!==event.actorUuid||token?.uuid!==event.tokenUuid||!eligible({actor,token},target,choice)||!samePosition(proof.position,position(target)))return false;
+  if(!sourceOwner(target?.actor,user)||!active(target.actor)||!isCurrentSceneToken(target,game)||target.uuid!==event.sourceTokenUuid||target.actor.uuid!==event.sourceActorUuid||actor?.uuid!==event.actorUuid||token?.uuid!==event.tokenUuid||!eligible({actor,token},target,choice)||!samePosition(proof.position,position(target)))return false;
   if(event.kind==='spell'){
    const receipt=target.actor.flags?.[MODULE_ID]?.nativeCasts?.find(r=>r.id===proof.castId);
    if(receipt?.state!=='paid'||receipt.userId!==event.sourceUserId||receipt.nativeCastScope?.tokenUuid!==target.uuid||receipt.nativeCastScope.castNonce!==proof.castId||['actorUuid','itemUuid','entryUuid','rank','slotId','focusPoints','overlayIds','sourceId'].some(k=>JSON.stringify(receipt[k]??null)!==JSON.stringify(proof.input?.[k]??null)))return false;

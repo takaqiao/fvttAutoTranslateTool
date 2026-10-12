@@ -1,4 +1,4 @@
-import {isCurrentDisruptToken} from './disrupt-prey-rules.mjs';
+import {isCurrentSceneToken} from './native-context.mjs';
 import {hasNativeDamageStrike} from './native-damage-strike.mjs';
 const no=unsupportedReason=>({verified:false,unsupportedReason}),values=c=>Array.from(c?.values?.()??c??[]);
 const serial=value=>JSON.stringify(value,(_k,v)=>v&&typeof v==='object'&&!Array.isArray(v)?Object.fromEntries(Object.entries(v).sort(([a],[b])=>a.localeCompare(b))):v);
@@ -16,7 +16,7 @@ function evidence(message,index){
  return serial({author:message.author?.id??message.user?.id??message.user,speaker:message.speaker,pf:message.flags?.pf2e,helper:helperEvidence(message.flags?.['pf2e-toolbelt']?.targetHelper),roll:typeof roll==='string'?JSON.parse(roll):roll});
 }
 async function inspect({game,fromUuid,actor,token,message,rollIndex}){
- if(!isCurrentDisruptToken(token,game)||token.actor.uuid!==actor?.uuid)return no('recipient-unavailable');
+ if(!isCurrentSceneToken(token,game)||token.actor.uuid!==actor?.uuid)return no('recipient-unavailable');
  if(!message?.id||game.messages.get(message.id)!==message||!message.isDamageRoll||rollIndex!==0)return no('not-primary-attack-damage');
  if(message.flags?.['pf2e-toolbelt']?.betterChat?.mergeDamage)return no('combined-attacks-unsupported');
  const roll=message.rolls?.[rollIndex],pf=message.flags?.pf2e,c=pf?.context,o=pf?.origin;
@@ -26,7 +26,7 @@ async function inspect({game,fromUuid,actor,token,message,rollIndex}){
  const targets=message.flags?.['pf2e-toolbelt']?.targetHelper?.targets;
  if(Array.isArray(targets)&&targets.length&&!targets.includes(token.uuid))return no('source-target-mismatch');
  const before=evidence(message,rollIndex),s=message.speaker,attacker=await fromUuid(`Scene.${s?.scene}.Token.${s?.token}`);
- if(!isCurrentDisruptToken(attacker,game)||attacker.parent!==token.parent||attacker.actor.id!==s.actor||attacker.actor.uuid!==o.actor||c.actor!=null&&c.actor!==attacker.actor.id||c.token!=null&&c.token!==attacker.id)return no('attacker-provenance-mismatch');
+ if(!isCurrentSceneToken(attacker,game)||attacker.parent!==token.parent||attacker.actor.id!==s.actor||attacker.actor.uuid!==o.actor||c.actor!=null&&c.actor!==attacker.actor.id||c.token!=null&&c.token!==attacker.id)return no('attacker-provenance-mismatch');
  const authorId=message.author?.id??message.user?.id??message.user,user=game.users?.get?.(authorId);
  const authorized=()=>!!user&&game.users.get(authorId)===user&&(user.isGM===true||attacker.actor.testUserPermission?.(user,'OWNER')===true);
  if(!authorized())return no('attacker-author-unauthorized');

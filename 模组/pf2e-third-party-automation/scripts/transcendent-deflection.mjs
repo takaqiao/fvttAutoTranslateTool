@@ -1,9 +1,8 @@
 import {MODULE_ID} from './rules.mjs';
 import {SerialActions} from './runtime.mjs';
-import {isActiveGM} from './native-context.mjs';
+import {isActiveGM,isCurrentSceneToken} from './native-context.mjs';
 import {genericReactionAvailable,reactionEpoch,withReactionReservation} from './reaction-budget.mjs';
 import {deflectionFeat,deflectionBroken,getTranscendentDeflectionOptions,getDeflectionSwapWeapons} from './transcendent-deflection-rules.mjs';
-import {isCurrentDisruptToken} from './disrupt-prey-rules.mjs';
 import {resolveDeflectionSource,validateDeflectionSource} from './transcendent-deflection-source.mjs';
 import {createDeflectionWeapons} from './transcendent-deflection-weapons.mjs';
 import {reactionPermitted} from './reaction-restriction.mjs';
@@ -51,7 +50,7 @@ export function createTranscendentDeflection({game,reactionRestriction,fromUuid=
  }
  function assertPaidChoice(option,context,claim,{broken=false}={}){
   const {actor,token,user}=option,weapon=actor.items.get(option.weapon.id);
-  if(!owner(actor,user)||!isCurrentDisruptToken(token,game)||token.actor!==actor||token.parent!==context.token.parent||reactionEpoch(actor,game)!==claim.epoch||encounter()!==claim.encounter||!deflectionFeat(actor)||actor.canAct===false||actor.isDead||actor.hasCondition?.('unconscious')||!actor.isEnemyOf?.(context.attacker.actor)||actor.uuid!==context.actor.uuid&&!actor.isAllyOf?.(context.actor))throw Error('支付期间反应拥有者、触及或角色状态已改变。');
+  if(!owner(actor,user)||!isCurrentSceneToken(token,game)||token.actor!==actor||token.parent!==context.token.parent||reactionEpoch(actor,game)!==claim.epoch||encounter()!==claim.encounter||!deflectionFeat(actor)||actor.canAct===false||actor.isDead||actor.hasCondition?.('unconscious')||!actor.isEnemyOf?.(context.attacker.actor)||actor.uuid!==context.actor.uuid&&!actor.isAllyOf?.(context.actor))throw Error('支付期间反应拥有者、触及或角色状态已改变。');
   if(!broken){if(!getTranscendentDeflectionOptions({game,actor,token,attacker:context.attacker,victim:context.token}).some(o=>o.weaponUuid===claim.weaponUuid))throw Error('支付期间武器或触及已改变。');return;}
   if(weapon?.uuid!==claim.weaponUuid||deflectionBroken(weapon)?.nonce!==claim.nonce||weapon.system.equipped?.carryType!=='held'||!(weapon.system.equipped.handsHeld>0))throw Error('破损后的确切武器持握已改变。');
   const strike=values(actor.system?.actions).flatMap(s=>[s,...values(s.altUsages)]).find(s=>s.item?.uuid===weapon.uuid&&(s.item.altUsageType??null)===option.usage),item=strike?.item;

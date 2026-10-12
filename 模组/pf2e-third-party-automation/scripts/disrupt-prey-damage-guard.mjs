@@ -1,6 +1,5 @@
 import {MODULE_ID} from './rules.mjs';
-import {isActiveGM,markUnappliedDamageError} from './native-context.mjs';
-import {isCurrentDisruptToken} from './disrupt-prey-rules.mjs';
+import {isActiveGM,isCurrentSceneToken,markUnappliedDamageError} from './native-context.mjs';
 import {withReactionReservation} from './reaction-budget.mjs';
 
 const sourcePrefix=`${MODULE_ID}:source:`,damagePrefix=`${MODULE_ID}:disrupt-damage:`,applyPrefix=`${MODULE_ID}:disrupt-apply:`;
@@ -53,13 +52,13 @@ export function createDisruptPreyDamageGuard({game,getRollContext=()=>null,Damag
  }
  function inspect({reactor,actor,message,target,claim:requested,params}){
   gm();
-  if(!reactor?.uuid||game.messages?.get(message?.id)!==message||message.actor!==reactor||!isCurrentDisruptToken(target,game)||target.actor.uuid!==actor?.uuid)fail('角色、聊天卡或目标不是当前准确文档。');
+  if(!reactor?.uuid||game.messages?.get(message?.id)!==message||message.actor!==reactor||!isCurrentSceneToken(target,game)||target.actor.uuid!==actor?.uuid)fail('角色、聊天卡或目标不是当前准确文档。');
   const claim=stateOf(reactor).reactions?.find(r=>r.nonce===requested?.nonce&&r.eventId===requested?.eventId);
   if(!claim||claim.actorUuid!==reactor.uuid||claim.actorId!==reactor.id||claim.claimKey!==`disrupt:${claim.nonce}`||!/^[A-Za-z0-9_-]{1,80}$/.test(claim.nonce)||claim.state!=='applying'||claim.applicationUserId!==game.user.id||![2,3].includes(claim.degree)||!claim.checkId||claim.damageMessageId!==message.id||claim.targetUuid!==target.uuid||claim.targetActorUuid!==target.actor.uuid||claim.targetActorId!==target.actor.id)fail('本次持久伤害认领不处于当前 GM 的应用阶段。');
   const pf=message.flags?.pf2e,context=pf?.context,options=strings(context?.options),author=game.users.get(claim.userId);
   if(authorId(message)!==claim.userId||!author||!reactor.testUserPermission?.(author,'OWNER')||message.speaker?.actor!==claim.actorId||speakerToken(message)!==claim.tokenUuid||context?.type!=='damage-roll'||pf.origin?.actor!==reactor.uuid||pf.origin?.uuid!==claim.itemUuid||context.target?.token!==target.uuid||context.target?.actor!==target.actor.uuid||options.filter(o=>o.startsWith(damagePrefix)).length!==1||!options.includes(damagePrefix+claim.nonce)||!options.includes(`${MODULE_ID}:bear-attack:${claim.checkId}`)||options.includes('action:reaction')||options.includes('trait:reaction'))fail('原生伤害卡来源或原攻击标识不符。');
   const sourceToken=game.scenes?.get(message.speaker.scene)?.tokens?.get(message.speaker.token);
-  if(!isCurrentDisruptToken(sourceToken,game)||sourceToken.actor!==reactor||sourceToken.parent!==target.parent)fail('原攻击 Token 已失效。');
+  if(!isCurrentSceneToken(sourceToken,game)||sourceToken.actor!==reactor||sourceToken.parent!==target.parent)fail('原攻击 Token 已失效。');
   const NativeRoll=rollClass(),roll=message.rolls?.[0];
   if(typeof NativeRoll!=='function'||!(roll instanceof NativeRoll)||!(params?.damage instanceof NativeRoll)||serializedRoll(roll)!==JSON.stringify(claim.damageRoll)||params.damage.total!==roll.total)fail('伤害骰子与已确认的原生结果不符。');
   serializedRoll(params.damage);
