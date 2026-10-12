@@ -193,6 +193,7 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
    if(!values(actor.items).some(i=>sourceUuid(i)==='Compendium.battlezoo-eldamon-pf2e.eldamon-features.Item.naawsnBug9EOpzfN'))continue;
    await refreshOutsideEncounter({actor,nonce:`encounter:${combat.id}`});
   }
+  await discardSpentRecords();
  }
  function renderReceipt(message,html){
   if(message.isContentVisible===false||message.flags?.pf2e?.context?.type!=='damage-taken')return;
@@ -215,6 +216,15 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
   }
   (root.querySelector('.message-content')??root).append(block);
  }
+ // On GM world entry and after each encounter ends. A token's source data is read first: asking an
+ // unlinked token for its actor builds a synthetic one, which is only wanted
+ // where the token carries records of its own.
+ async function discardSpentRecords(){
+  const recorded=flags=>Object.keys(flags?.[ID]?.electricity?.damage??{}).length>0;
+  const actors=values(game.actors).filter(actor=>recorded(actor.flags));
+  for(const scene of values(game.scenes))for(const token of values(scene.tokens))if(!token.actorLink&&recorded(token._source?.delta?.flags))actors.push(token.actor);
+  for(const actor of actors)if(actor)await ledger.prune(actor).catch(onError);
+ }
  function register({Hooks,socket:api}={}){
   socket=api;activeActors.register(Hooks);sourceActors.register(Hooks);receipts.seed();
   for(const method of ['channel','beginDamage','finishDamage','confirmMixed','candidates','interact','confirmedAction','basicUse'])socket?.register(`electricity:${method}`,async function(payload){try{return {ok:true,value:await ledger[method](payload,game.users.get(this.socketdata.userId))}}catch(error){return {ok:false,error:error.message,...(method==='confirmedAction'&&error.electricityNotApplied===true?{electricityNotApplied:true}:{})}}});
@@ -225,6 +235,7 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
   for(const phase of ['start','end'])Hooks.on(`pf2e.${phase}Turn`,(combatant,combat)=>{if(active())return ledger.expire({combat,combatant,phase,actors:activeActors.values()}).catch(onError)});
   Hooks.on('deleteCombat',combat=>encounterEnded(combat).catch(onError));
   Hooks.on('updateCombat',(combat,changes)=>{if((changes.round===0||changes.round===null)&&!combat.started)encounterEnded(combat).catch(onError)});
+  if(active())discardSpentRecords().catch(onError);
  }
  // Startup recovery can settle only the unique current native receipt. There is
  // no retry of applyDamage and no reconstruction from a generic HP update.

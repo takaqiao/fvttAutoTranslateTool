@@ -280,4 +280,31 @@ test('native reaction availability is queried against the actual source encounte
  const ledger=createElectricityLedger({game:f.game,fromUuid:async id=>f.docs.get(id),reactionAvailable:(actor,bounded)=>{observed=bounded.combat;assert.equal(actor,f.caster);return false;}});
  assert.deepEqual(await ledger.candidates({actorUuid:f.caster.uuid,sourceTokenUuid:f.tokens[0].uuid,selection:{targetUuids:[f.tokens[2].uuid],discharge:false},kind:'normal'},f.owner),[]);assert.equal(observed,f.combat);
 });
+
+const recorded=actor=>Object.keys(electricityState(actor).damage);
+test('an application outside any encounter drops the finished records in the same write that adds its own',async()=>{
+ const f=fixture();useFoundryFlagUpdates(f.target);f.combat.started=false;
+ const first=await f.damage();await first.finish();assert.deepEqual(recorded(f.target),[first.payload.nonce]);
+ let writes=0;const update=f.target.update;f.target.update=async function(...args){writes++;return update.apply(this,args)};
+ const second=await f.damage();assert.equal(writes,1);assert.deepEqual(recorded(f.target),[second.payload.nonce]);
+});
+test('finished records stay through a running encounter whatever their frame, and the current one still backs Reactive Chain',async()=>{
+ const f=fixture();useFoundryFlagUpdates(f.target);f.item(f.other,'shock',S.shocked);const earlier=await f.damage();await earlier.finish();
+ f.combat.turn=1;const current=await f.damage();await current.finish();await f.ledger().prune(f.target);
+ assert.deepEqual(recorded(f.target),[earlier.payload.nonce,current.payload.nonce]);
+ const candidates=await f.ledger().candidates(chainPayload(f),f.owner);assert.equal(candidates.length,1);assert.equal(candidates[0].evidence.nonce,current.payload.nonce);
+});
+test('outside any encounter only the records that can still be settled survive',async()=>{
+ const f=fixture();useFoundryFlagUpdates(f.target);
+ const finished=await f.damage(),pending=await f.damage(),mixed=await f.damage(f.target,{kind:'mixed',amount:21}),orphan=await f.damage(),orphanMixed=await f.damage(f.target,{kind:'mixed',amount:21});
+ await finished.finish();for(const application of [mixed,orphanMixed])assert.equal((await application.finish()).status,'needs-attribution');
+ for(const {payload} of [orphan,orphanMixed]){f.game.messages.delete(payload.sourceNonce);f.docs.delete(payload.sourceMessageUuid);}
+ await f.ledger().prune(f.target);assert.equal(recorded(f.target).length,5,'the shared encounter is running');
+ f.combat.started=false;await f.ledger().prune(f.target);
+ assert.deepEqual(recorded(f.target).sort(),[pending.payload.nonce,mixed.payload.nonce].sort());
+ let writes=0;f.target.update=async()=>{writes++};await f.ledger().prune(f.target);assert.equal(writes,0);
+});
+test('dropping spent records is refused away from the active GM',async()=>{
+ const f=fixture();f.game.user=f.owner;await assert.rejects(f.ledger().prune(f.target),/主 GM/);
+});
 export {fixture};

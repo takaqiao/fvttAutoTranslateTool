@@ -151,8 +151,9 @@ export function createElectricityLedger({game,reactionRestriction,fromUuid,recei
  const save=async(actor,state,options={})=>{
   gm();const path=`flags.${ID}.electricity`,update={[path]:state};
   // Native updates recursively merge: omission alone cannot consume or expire
-  // a pending effect. Delete only removed entries inside this provider's map.
-  for(const key of Object.keys(actor.flags?.[ID]?.electricity?.pendingShocks??{}))if(!Object.hasOwn(state.pendingShocks,key))update[`${path}.pendingShocks.-=${key}`]=null;
+  // a pending effect, or drop a damage record. Delete only removed entries
+  // inside this provider's two maps.
+  for(const map of ['pendingShocks','damage'])for(const key of Object.keys(actor.flags?.[ID]?.electricity?.[map]??{}))if(!Object.hasOwn(state[map],key))update[`${path}.${map}.-=${key}`]=null;
   await actor.update(update,options);
  };
  const mutate=(actor,fn)=>queue.run(actor.uuid,async()=>{gm();return fn(electricityState(actor));});
@@ -234,6 +235,19 @@ export function createElectricityLedger({game,reactionRestriction,fromUuid,recei
  async function verified(record){
   try{await validateSource(record);}catch{return false;}const m=await fromUuid(record.receiptUuid);
   return !!m&&game.messages.get(m.id)===m&&receiptMatches(m,record)&&fingerprint(m)===record.fingerprint;
+ }
+ // Every reader of a finished record needs a running encounter: Reactive Chain
+ // for the creature hit and for others hit by the same effect, and a channel
+ // check that follows its damage for the caster. With none running, a finished
+ // record has no reader, and one whose source card is gone cannot be settled.
+ async function discardSpent(state){
+  if(values(game.combats).some(c=>c.started))return false;
+  let removed=false;
+  for(const [nonce,r]of Object.entries(state.damage)){
+   const source=await fromUuid(r.sourceMessageUuid);
+   if(r.status==='confirmed'&&r.lifecycleDone===true||!source||game.messages.get(source.id)!==source){delete state.damage[nonce];removed=true;}
+  }
+  return removed;
  }
  async function chainFacts({actor,selection,kind,user},record){
   const evidence=selection.electricityEvidence,source=await fromUuid(record.tokenUuid),target=await fromUuid(evidence?.targetUuid),caster=await fromUuid(evidence?.sourceTokenUuid);
@@ -339,6 +353,7 @@ export function createElectricityLedger({game,reactionRestriction,fromUuid,recei
    if(!liveToken(token)||token.actor.uuid!==actor.uuid||!/^[A-Za-z0-9_-]{8,100}$/.test(payload.nonce??'')||!['pure','mixed'].includes(payload.kind))throw Error('本次原生电击伤害应用记录无效。');
    const source=await validateSource(payload);
    return mutate(actor,async state=>{if(state.damage[payload.nonce])throw Error('本次电击伤害应用已记录，不能重复提交。');
+    await discardSpent(state);
     const r={...copy(payload),sourceFingerprint:sourceFingerprint(source),sourceTargets:copy(sourceTargets(source)),userId:user.id,status:'pending',frame:frame(electricityEncounter(game,actor.uuid,token.uuid))};state.damage[r.nonce]=r;await save(actor,state);return copy(r);});
   },
   async finishDamage(payload,user){
@@ -427,5 +442,6 @@ export function createElectricityLedger({game,reactionRestriction,fromUuid,recei
    return mutate(actor,state=>charge(actor,state,`refresh:${nonce}`,{clear:true}));
   },
   async interact(payload,user){const actor=await fromUuid(payload.actorUuid);owner(actor,user);if(payload.confirmed!==true||!payload.nonce)throw Error('请声明已经完成本次交互动作。');return mutate(actor,state=>remove(actor,state,`interact:${payload.nonce}`));},
+  async prune(actor){gm();return mutate(actor,async state=>{if(await discardSpent(state))await save(actor,state,{render:false});});},
  };
 }

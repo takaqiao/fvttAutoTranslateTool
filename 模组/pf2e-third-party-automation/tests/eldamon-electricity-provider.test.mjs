@@ -183,3 +183,37 @@ for(const [name,source]of [['a Shocked effect',S.shocked],['a Charged effect und
   const {f,fire,apply}=withoutSources();fire('createItem',f.item(f.other,'left',source));
   assert.ok((await apply()).receipt);
  });
+
+// One finished record on a world actor and one on an unlinked token's own delta, beside a token without any.
+async function worldEntry({asGM=true,running=false,prepare=()=>{}}={}){
+ const f=fixture();f.combat.started=running;const done=await f.damage();await done.finish();
+ const spent={version:1,damage:{spent:{nonce:'spent',status:'confirmed',lifecycleDone:true,sourceMessageUuid:done.payload.sourceMessageUuid}},operations:{},pendingShocks:{}};
+ const reads={},patches=[],errors=[],synthetic=(id,flags)=>({id,uuid:`Scene.s.Token.${id}.Actor.${id}`,items:new Map(),flags,async update(patch){patches.push(patch)}});
+ const token=(id,delta,actor)=>[id,{id,actorLink:false,_source:{delta},get actor(){reads[id]=(reads[id]??0)+1;return actor}}];
+ f.game.scenes=new Map([['s',{id:'s',tokens:new Map([token('minion',{flags:{[ID]:{electricity:spent}}},synthetic('minion',{[ID]:{electricity:structuredClone(spent)}})),token('bystander',{},synthetic('bystander',{}))])}]]);
+ prepare(f);if(!asGM)f.game.user=f.owner;
+ createEldamonElectricityProvider({game:f.game,fromUuid:async uuid=>f.docs.get(uuid),onError:error=>errors.push(error)}).register({Hooks:{on(){}}});
+ await new Promise(resolve=>setImmediate(resolve));
+ return {f,reads,patches,errors,kept:Object.keys(electricityState(f.target).damage).length};
+}
+test('GM world entry drops spent damage records, building only the unlinked token actors that carry their own',async()=>{
+ const player=await worldEntry({asGM:false});assert.equal(player.kept,1);assert.deepEqual(player.patches,[]);
+ const gm=await worldEntry();assert.equal(gm.kept,0);assert.deepEqual(gm.errors,[]);
+ assert.equal(gm.patches.length,1);assert.equal(gm.patches[0][`flags.${ID}.electricity.damage.-=spent`],null);assert.deepEqual(gm.patches[0][`flags.${ID}.electricity`].damage,{});
+ // The two actor indexes already read every token actor while seeding; the entry pass adds one read where records exist.
+ assert.equal(gm.reads.minion,player.reads.minion+1);assert.equal(gm.reads.bystander,player.reads.bystander);
+ const running=await worldEntry({running:true});assert.equal(running.kept,1);assert.deepEqual(running.patches,[]);
+});
+test('a failed world-entry write is reported without stopping the remaining actors or the registration',async()=>{
+ const entry=await worldEntry({prepare:f=>{f.target.update=async()=>{throw Error('offline')}}});
+ assert.deepEqual(entry.errors.map(error=>error.message),['offline']);assert.equal(entry.kept,1);assert.equal(entry.patches.length,1);
+});
+test('an ended encounter drops the finished records it leaves behind, once no other encounter is running',async()=>{
+ const f=fixture(),hooks=new Map(),errors=[],settle=()=>new Promise(resolve=>setImmediate(resolve)),kept=()=>Object.keys(electricityState(f.target).damage).length;
+ const fire=(name,...args)=>{for(const fn of hooks.get(name)??[])fn(...args)},done=await f.damage();await done.finish();
+ createEldamonElectricityProvider({game:f.game,fromUuid:async uuid=>f.docs.get(uuid),onError:error=>errors.push(error)}).register({Hooks:{on(name,fn){hooks.set(name,[...hooks.get(name)??[],fn])}}});
+ await settle();assert.equal(kept(),1,'world entry during the encounter keeps it');
+ const elsewhere={id:'elsewhere',started:true,round:1,turn:0,turns:[],combatants:[]};f.game.combats.set(elsewhere.id,elsewhere);
+ f.game.combats.delete(f.combat.id);fire('deleteCombat',f.combat);await settle();assert.equal(kept(),1,'another encounter is still running');
+ elsewhere.started=false;elsewhere.round=0;fire('updateCombat',elsewhere,{round:0});await settle();assert.equal(kept(),0);assert.deepEqual(errors,[]);
+});
