@@ -1,4 +1,3 @@
-import {sha256Fallback} from '../source-hash.mjs';
 import {bbmmCompatibility,bbmmRegistryCompatibility,readBbmmHardRules} from './bbmm-rules.mjs';
 import {dsnCompatibility} from './dsn-runtime.mjs';
 
@@ -9,20 +8,12 @@ const fields={
   advancedGlass:{type:Boolean,value:false,name:'DsN 高级玻璃'},
   antialiasing:{type:String,value:'none',name:'DsN 抗锯齿',choices:{none:'关闭',msaa:'MSAA',smaa:'SMAA'}}
 };
-// Audited native DiceConfig consumers, DsN 6.4.1/6.4.2. Validate synchronously in
-// setup so neither the first renderer nor BBMM's ready sync can race hashing.
-const hashes={
-  parseInputs:'32f903886b97b79c8887400fe1bdf71ff47830832f603e4bd68e89ae043e6713',
-  _updateObject:'8387b2486be46725baddb47fbb8efc8df60518609e70028408fc7ce144cee3f3',
-  _clearUserRecord:'4791bc44f2e96a89047af8390d198bc4ee3a446be9f1bc285b8d3495031157f4',
-  _prepareContext:['d237b5c2ddd181bab469927aeeffc48b737413b180117cd9db4a2572cb09f2d3','1d4356aeb8c65be9900b45bd6de2243240aba12429afdc596a9e16bd41958241'],
-  getShowcaseAppearance:'a34fd3108315b3e3e215bd8c915c6bb96ae36519784061fdb8ca87c6229f2740',
-  onApply:'1274e9de8fb72ea6a9f0a776e2bb45e1ce440b6533dae2611ad5f5340b89189a',
-  onReset:'78809ca815488f9a3bf2ca6ab20d771473c74be6adb1dcbb46fd027433e95b5f'
-};
-const factoryHash='e78f559590c60dc25fc14b110ded6778213fad64fe33011c591f5a2cc09aa149';
+// The DiceConfig methods whose results reach DsN's renderer and saved flags.
+// Only their shape is required, so a rebuilt or re-minified DsN keeps the locks.
+const wrappedMethods=['parseInputs','getShowcaseAppearance','_prepareContext'];
 const registered=new WeakSet(),installed=new WeakMap();
 const compatibility=runtime=>bbmmCompatibility(runtime)||dsnCompatibility(runtime);
+const isObject=value=>value!==null&&typeof value==='object';
 
 export function registerDsnQualitySettings({runtime=globalThis,report=()=>{}}={}){
   const finish=status=>{const result={feature:'dsnQualityLocks',status};report(result);return result;};
@@ -64,12 +55,8 @@ export function installDsnQualityLocks({moduleId='av-v14-hotfix',runtime=globalT
   if(!prototype||typeof userPrototype?.getFlag!=='function'||typeof libWrapper?.register!=='function'
     ||typeof libWrapper?.unregister!=='function'||typeof Hooks?.off!=='function'
     ||typeof operators?.ForcedDeletion!=='function'||typeof operators?.ForcedReplacement?.get!=='function')return finish('unsupported-runtime');
-  const descriptors=Object.fromEntries(Object.keys(hashes).map(key=>[key,Object.getOwnPropertyDescriptor(prototype,key)]));
-  for(const[key,hash]of Object.entries(hashes)){
-    const descriptor=descriptors[key];
-    if(typeof descriptor?.value!=='function'||!descriptor.writable
-      ||![hash].flat().includes(sha256Fallback(Function.prototype.toString.call(descriptor.value))))return finish('unsupported-source');
-  }
+  const descriptors=Object.fromEntries(wrappedMethods.map(key=>[key,Object.getOwnPropertyDescriptor(prototype,key)]));
+  if(Object.values(descriptors).some(descriptor=>typeof descriptor?.value!=='function'||!descriptor.writable))return finish('unsupported-source');
   let active=true;const hooks=[],factoryPatches=new Map(),methods={};
   const currentFactory=()=>game.dice3d?.box?.dicefactory??game.dice3d?.DiceFactory;
   const changed=()=>{
@@ -105,8 +92,7 @@ export function installDsnQualityLocks({moduleId='av-v14-hotfix',runtime=globalT
     const target=Object.getPrototypeOf(factory),previous=factoryPatches.get(target);
     if(previous){if(factory.setQualitySettings!==previous.wrapper){active=false;finish('source-changed');}return;}
     const descriptor=Object.getOwnPropertyDescriptor(target,'setQualitySettings');
-    if(typeof descriptor?.value!=='function'||!descriptor.writable||factory.setQualitySettings!==descriptor.value
-      ||sha256Fallback(Function.prototype.toString.call(descriptor.value))!==factoryHash){active=false;finish('unsupported-factory-source');return;}
+    if(typeof descriptor?.value!=='function'||!descriptor.writable||factory.setQualitySettings!==descriptor.value){active=false;finish('unsupported-factory-source');return;}
     const wrapper=function(options,...args){
       const locked=locks();
       return descriptor.value.call(this,Object.keys(locked).length?{...options,...locked}:options,...args);
@@ -114,15 +100,24 @@ export function installDsnQualityLocks({moduleId='av-v14-hotfix',runtime=globalT
     Object.defineProperty(target,'setQualitySettings',{...descriptor,value:wrapper});
     factoryPatches.set(target,{descriptor,wrapper});
   };
+  // A player's showcase config and render context always carry every quality
+  // key. A locked key missing there means DsN renamed the option: the lock
+  // would be inert and the dead key would be persisted to the user's flags.
+  const overlay=(value,locked)=>{
+    if(Object.keys(locked).some(key=>!Object.hasOwn(value,key))){active=false;finish('source-changed');return false;}
+    Object.assign(value,locked);return true;
+  };
+  // Parsed form data omits the disabled (locked) controls, and the factory
+  // takes options from any caller, so neither is held to that check.
   methods.parseInputs=function(...args){
     const value=descriptors.parseInputs.value.apply(this,args);
-    if(this.isUser)Object.assign(value,locks(this.document));
+    if(this.isUser&&isObject(value))Object.assign(value,locks(this.document));
     return value;
   };
   methods.getShowcaseAppearance=function(...args){
     attachFactory(currentFactory());
     const value=descriptors.getShowcaseAppearance.value.apply(this,args);
-    if(this.isUser){const locked=locks(this.document);Object.assign(value,locked);controls(this.element,locked);}
+    if(this.isUser&&isObject(value)){const locked=locks(this.document);if(overlay(value,locked))controls(this.element,locked);}
     return value;
   };
   methods._prepareContext=async function(...args){
@@ -130,7 +125,7 @@ export function installDsnQualityLocks({moduleId='av-v14-hotfix',runtime=globalT
     // factory must be protected before that native async render begins.
     attachFactory(currentFactory());
     const value=await descriptors._prepareContext.value.apply(this,args);
-    if(this.isUser)Object.assign(value,locks(this.document));
+    if(this.isUser&&isObject(value))overlay(value,locks(this.document));
     return value;
   };
   const flagTarget='CONFIG.User.documentClass.prototype.getFlag';

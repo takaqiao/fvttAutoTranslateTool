@@ -2,8 +2,11 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import {harness,optionalPatch,quality,high,plain,apply,operators} from './bbmm-harness.mjs';
 const patch=await optionalPatch('dsn-quality');
-function setup(opts,before){const e=harness(opts);before?.(e);e.register=()=>patch.registerDsnQualitySettings?.({runtime:e.runtime});e.register();e.install=()=>patch.installDsnQualityLocks?.({runtime:e.runtime});e.result=e.install();return e;}
+function setup(opts,before){const e=harness(opts);before?.(e);e.reports=[];e.register=()=>patch.registerDsnQualitySettings?.({runtime:e.runtime});e.register();e.install=()=>patch.installDsnQualityLocks?.({runtime:e.runtime,report:r=>e.reports.push(r)});e.result=e.install();return e;}
 const checkQuality=value=>{for(const[k,v]of Object.entries(quality))assert.equal(value[k],v,k);};
+const wrapped=['parseInputs','getShowcaseAppearance','_prepareContext'],unwrapped=['_updateObject','_clearUserRecord','onApply','onReset'];
+const proto=e=>e.context.DiceConfig.prototype;
+const retired=e=>e.reports.some(r=>r.status==='source-changed');
 test('five existing BBMM rule IDs reconnect as client settings',()=>{const e=setup();for(const k of Object.keys(quality)){const cfg=e.registry.get('bbmm.dsnQuality.'+k);assert.equal(cfg?.scope,'client');assert.equal(cfg.config,true);assert.equal(cfg.requiresReload,true);}});
 
 test('patch labels do not disable verified BBMM and DsN contracts',()=>{
@@ -64,10 +67,57 @@ for(const[name,opts]of Object.entries({GM:{gm:true},soft:{soft:true},disabled:{s
 test('other users and Actor/world-role dialogs remain unaffected',()=>{const e=setup();assert.equal(new e.User('other',false).getFlag('dice-so-nice','settings').glow,true);const app=e.makeApp();app.isUser=false;assert.equal(app.parseInputs({glow:true}).glow,true);});
 test('unlocking and invalid rule values immediately stop enforcing those fields',()=>{const e=setup();delete e.rules['bbmm.dsnQuality.glow'];e.rules['bbmm.dsnQuality.shadowQuality'].value='invalid';e.rules['bbmm.dsnQuality.useHighDPI'].value='false';const got=e.context.DsnSettings.CONFIG();assert.equal(got.glow,true);assert.equal(got.shadowQuality,'high');assert.equal(got.useHighDPI,true);assert.equal(got.advancedGlass,false);});
 test('the form disables only locked quality controls',async()=>{const e=setup(),fields=Object.fromEntries([...Object.keys(quality),'soundsVolume'].map(k=>[k,{disabled:false}]));const root={querySelectorAll:s=>[fields[s.match(/name="([^"]+)"/)[1]]].filter(Boolean)};await e.call('renderDiceConfig',e.makeApp(),root);for(const k of Object.keys(quality))assert.equal(fields[k].disabled,true);assert.equal(fields.soundsVolume.disabled,false);});
-for(const key of ['parseInputs','_updateObject','_clearUserRecord','_prepareContext','getShowcaseAppearance','onApply','onReset'])test('unknown native '+key+' fails closed without partial wrappers',()=>{const e=setup({},e=>{e.context.DiceConfig.prototype[key]=function changed(){};});assert.equal(e.result?.status,'unsupported-source');assert.equal(e.wrappers.size,0);assert.equal(e.game.user.getFlag('dice-so-nice','settings').glow,true);});
+test('wrapped methods with other function bodies still install and lock',async()=>{
+ const e=setup({},e=>{for(const key of wrapped){const native=proto(e)[key];proto(e)[key]=function(...args){return native.apply(this,args);};}}),app=e.makeApp();
+ assert.equal(e.result.status,'installed');
+ checkQuality(app.parseInputs(high));checkQuality(app.getShowcaseAppearance());checkQuality(await app._prepareContext({}));
+});
+for(const key of wrapped)test(key+' that is not a writable function declines without partial wrappers',()=>{
+ for(const spoil of [p=>{p[key]=1;},p=>Object.defineProperty(p,key,{writable:false}),p=>{delete p[key];}]){
+  let before;const snapshot=e=>wrapped.map(k=>Object.getOwnPropertyDescriptor(proto(e),k));
+  const e=setup({},e=>{spoil(proto(e));before=snapshot(e);});
+  assert.equal(e.result?.status,'unsupported-source');assert.equal(e.wrappers.size,0);assert.deepEqual(snapshot(e),before);
+  assert.equal(e.game.user.getFlag('dice-so-nice','settings').glow,true);
+ }
+});
+test('the native consumers that are not wrapped may be absent',()=>{
+ const e=setup({},e=>{for(const key of unwrapped)delete proto(e)[key];});
+ assert.equal(e.result.status,'installed');checkQuality(e.context.DsnSettings.CONFIG());checkQuality(e.makeApp().parseInputs(high));
+});
+test('a wrapped method that returns no object passes its result through and keeps the locks',async()=>{
+ for(const key of wrapped)for(const value of [null,undefined,'text']){
+  const e=setup({},e=>{proto(e)[key]=function(){return value;};});
+  assert.equal(e.result.status,'installed');assert.equal(await e.makeApp()[key]({}),value);
+  assert.equal(retired(e),false);checkQuality(e.game.user.getFlag('dice-so-nice','settings'));
+ }
+});
+// Stands in for a DsN that renamed the glow option.
+const renameGlow=(e,key)=>{
+ const native=proto(e)[key],rename=value=>{value.bloom=value.glow;delete value.glow;return value;};
+ proto(e)[key]=function(...args){const value=native.apply(this,args);return typeof value?.then==='function'?value.then(rename):rename(value);};
+};
+test('showcase config and render context that carry every locked key are overlaid',async()=>{
+ const e=setup(),app=e.makeApp();app.reset=true;
+ checkQuality(app.getShowcaseAppearance());checkQuality(await app._prepareContext({}));assert.equal(retired(e),false);
+});
+for(const key of ['getShowcaseAppearance','_prepareContext'])test(key+' without a locked key is left alone and retires the bridge',async()=>{
+ const e=setup({},e=>renameGlow(e,key)),app=e.makeApp();app.reset=true;
+ assert.equal(e.result.status,'installed');
+ const value=await app[key]({});
+ assert.equal(value.bloom,true);assert.equal(Object.hasOwn(value,'glow'),false);assert.equal(value.shadowQuality,'high');
+ assert.equal(e.reports.at(-1).status,'source-changed');assert.equal(e.controls.glow.checked,true);
+ assert.equal(e.game.user.getFlag('dice-so-nice','settings').glow,true);
+ const change={flags:{'dice-so-nice':{settings:{glow:true}}}};await e.call('preUpdateUser',e.game.user,change);
+ assert.deepEqual(change,{flags:{'dice-so-nice':{settings:{glow:true}}}});
+});
+test('parsed form data without the locked keys is overlaid all the same',()=>{
+ const e=setup(),got=e.makeApp().parseInputs({soundsVolume:.2});
+ checkQuality(got);assert.equal(got.soundsVolume,.2);assert.equal(retired(e),false);
+});
 test('an existing adapter setting is left intact and prevents double installation',()=>{const e=setup({},e=>e.registry.set('bbmm.dsnQuality.glow',{scope:'client',type:Boolean,default:true}));assert.equal(e.result?.status,'settings-conflict');assert.equal(e.registry.get('bbmm.dsnQuality.glow').default,true);assert.equal(e.wrappers.size,0);});
 test('repeated install and registration do not layer wrappers; restore retains a later foreign method',()=>{const e=setup();assert.equal(e.register()?.status,'already-registered');assert.equal(e.install()?.status,'already-installed');const foreign=function(){return{glow:true};};e.context.DiceConfig.prototype.parseInputs=foreign;e.result.restore();assert.equal(e.context.DiceConfig.prototype.parseInputs,foreign);assert.equal(e.game.user.getFlag('dice-so-nice','settings').glow,true);assert.equal(e.wrappers.size,0);});
-test('later source replacement retires the bridge before another read or write',async()=>{const e=setup();e.context.DiceConfig.prototype._updateObject=function changed(){};assert.equal(e.game.user.getFlag('dice-so-nice','settings').glow,true);const change={flags:{'dice-so-nice':{settings:{glow:true}}}};await e.call('preUpdateUser',e.game.user,change);assert.deepEqual(change,{flags:{'dice-so-nice':{settings:{glow:true}}}});});
+for(const key of wrapped)test('later replacement of '+key+' retires the bridge before another read or write',async()=>{const e=setup();proto(e)[key]=function changed(){};assert.equal(e.game.user.getFlag('dice-so-nice','settings').glow,true);const change={flags:{'dice-so-nice':{settings:{glow:true}}}};await e.call('preUpdateUser',e.game.user,change);assert.deepEqual(change,{flags:{'dice-so-nice':{settings:{glow:true}}}});});
+test('later replacement of a method that is not wrapped keeps the locks',()=>{const e=setup();for(const key of unwrapped)proto(e)[key]=function changed(){};checkQuality(e.game.user.getFlag('dice-so-nice','settings'));assert.equal(retired(e),false);});
 const checkFactory=f=>checkQuality({...f,antialiasing:f.aa});
 test('native preset preview clamps factory, showcase input and overwritten disabled controls',async()=>{const e=setup(),app=e.makeApp();app.onApply();await e.flush();checkFactory(e.factory);checkQuality(app.showcaseView.last);assert.equal(e.factory.realisticLighting,true);assert.equal(e.controls.glow.checked,false);assert.equal(e.updates.length,0);});
 test('native reset and immediate render keep shared factory locked before any save',async()=>{const e=setup(),app=e.makeApp();app.onReset();const data=await app.renderPromise;checkFactory(e.factory);checkQuality(data);assert.equal(e.updates.length,0);});
@@ -75,7 +125,9 @@ test('preview is covered before the asynchronous diceSoNiceReady notification',a
 test('factory clamp preserves receiver, return, additional args and original argument',async()=>{const e=setup();await e.call('diceSoNiceReady',e.game.dice3d);const options={...high,bumpMapping:true,ambiance:'foyer_1k'},before=structuredClone(options);assert.equal(e.factory.setQualitySettings(options,'extra'),undefined);checkFactory(e.factory);assert.deepEqual(options,before);assert.equal(e.factory.realisticLighting,true);const fresh=new e.context.DiceFactory();fresh.setQualitySettings(options);checkFactory(fresh);});
 test('unlocked and GM factory calls keep native quality',async()=>{for(const opts of [{gm:true},{sync:false},{soft:true}]){const e=setup(opts);await e.call('diceSoNiceReady',e.game.dice3d);e.factory.setQualitySettings(high);assert.equal(e.factory.glow,true);}});
 test('factory replacement retires all enforcement and restore preserves foreign method',async()=>{const e=setup();await e.call('diceSoNiceReady',e.game.dice3d);const foreign=function(){};Object.getPrototypeOf(e.factory).setQualitySettings=foreign;assert.equal(e.game.user.getFlag('dice-so-nice','settings').glow,true);e.result.restore();assert.equal(Object.getPrototypeOf(e.factory).setQualitySettings,foreign);});
-test('an unknown initial factory leaves every lock path inactive',()=>{const e=setup({},e=>{Object.getPrototypeOf(e.factory).setQualitySettings=function foreign(){};});assert.equal(e.result.status,'unsupported-factory-source');assert.equal(e.game.user.getFlag('dice-so-nice','settings').glow,true);assert.equal(e.makeApp().parseInputs(high).glow,true);});
+test('an initial factory method with another function body is still clamped',()=>{const e=setup({},e=>{const target=Object.getPrototypeOf(e.factory),native=target.setQualitySettings;target.setQualitySettings=function(...args){return native.apply(this,args);};});assert.equal(e.result.status,'installed');e.factory.setQualitySettings(high);checkFactory(e.factory);});
+test('an initial factory method that is overridden on the instance or read-only leaves every lock path inactive',()=>{for(const spoil of [f=>{f.setQualitySettings=function foreign(){};},f=>Object.defineProperty(Object.getPrototypeOf(f),'setQualitySettings',{writable:false})]){const e=setup({},e=>spoil(e.factory));assert.equal(e.result.status,'unsupported-factory-source');assert.equal(e.game.user.getFlag('dice-so-nice','settings').glow,true);assert.equal(e.makeApp().parseInputs(high).glow,true);}});
+test('factory options without the locked keys are overlaid all the same',()=>{const e=setup();e.factory.setQualitySettings({bumpMapping:true});checkFactory(e.factory);assert.equal(e.factory.realisticLighting,true);assert.equal(retired(e),false);});
 test('a later own factory override retires the bridge without overwriting that override',()=>{const e=setup(),foreign=function(){};e.factory.setQualitySettings=foreign;assert.equal(e.game.user.getFlag('dice-so-nice','settings').glow,true);e.result.restore();assert.equal(e.factory.setQualitySettings,foreign);});
 
 test('matching quality contracts enforce native reads and writes on later core generations',async()=>{

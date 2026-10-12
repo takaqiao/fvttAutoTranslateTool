@@ -208,44 +208,34 @@ function legacyContract(g, name) {
 export function registerLegacyCompat({moduleId = 'av-v14-hotfix', g = globalThis, registerWrapper, report} = {}) {
   if (typeof registerWrapper !== 'function') throw new TypeError('registerLegacyCompat requires registerWrapper');
   const wrappers = [];
-  const adventureSettings = [];
   const plans = [];
+  // Calls whose data actually needed migrating, per entry point.
+  const stats = {chat: 0, sceneCreate: 0, sceneUpdate: 0};
   const chatContract = legacyContract(g, 'ChatMessage'), sceneContract = legacyContract(g, 'Scene');
   const chatSupported = chatContract(), sceneSupported = sceneContract();
   // Native Document.create delegates to implementation.createDocuments before validation.
   // Keep the single-create receiver untouched for consumers such as CotCT's Harrow display.
   if (chatSupported) for (const target of wrapperTargets(g.ChatMessage, g.CONFIG.ChatMessage.documentClass,
-    'ChatMessage', 'CONFIG.ChatMessage.documentClass', 'createDocuments')) plans.push([target, migrateLegacyChatData, chatContract]);
+    'ChatMessage', 'CONFIG.ChatMessage.documentClass', 'createDocuments')) plans.push([target, migrateLegacyChatData, chatContract, 'chat']);
   if (sceneSupported) {
     for (const method of ['create', 'createDocuments']) {
       for (const target of wrapperTargets(g.Scene, g.CONFIG.Scene.documentClass,
-        'Scene', 'CONFIG.Scene.documentClass', method)) plans.push([target, migrateLegacySceneCreateData, sceneContract]);
+        'Scene', 'CONFIG.Scene.documentClass', method)) plans.push([target, migrateLegacySceneCreateData, sceneContract, 'sceneCreate']);
     }
     for (const target of wrapperTargets(g.Scene, g.CONFIG.Scene.documentClass,
-      'Scene', 'CONFIG.Scene.documentClass', 'update', true)) plans.push([target, null, sceneContract]);
+      'Scene', 'CONFIG.Scene.documentClass', 'update', true)) plans.push([target, null, sceneContract, 'sceneUpdate']);
   }
-  for (const [target, migrate, supported] of plans) {
+  for (const [target, migrate, supported, counter] of plans) {
     registerWrapper(target, function(wrapped, data, ...args) {
       if (!supported(this)) return wrapped.call(this, data, ...args);
       const next = migrate ? migrate(data) : migrateLegacySceneUpdateData(this, data);
+      if (next !== data) stats[counter]++;
       return wrapped.call(this, next, ...args);
     }, 'WRAPPER');
     wrappers.push(target);
   }
-
-  // This importer reads the setting for every adventure package. Register only missing definitions.
-  const importer = g.game?.modules?.get('sf2e-murder-in-metal-city');
-  const settings = g.game?.settings;
-  if (importer?.active && typeof settings?.register === 'function' && typeof settings.settings?.has === 'function') {
-    for (const pack of g.game.packs ?? []) {
-      const namespace = pack.metadata?.packageName;
-      if (pack.metadata?.type !== 'Adventure' || typeof namespace !== 'string' || !namespace.trim() || settings.settings.has(`${namespace}.autoOpenAdventures`)) continue;
-      settings.register(namespace, 'autoOpenAdventures', {scope: 'world', config: false, type: Boolean, default: false});
-      adventureSettings.push(`${namespace}.autoOpenAdventures`);
-    }
-  }
-  const result = {wrappers, adventureSettings, chatStatus: chatSupported ? 'installed' : 'unsupported-schema',
-    sceneStatus: sceneSupported ? 'installed' : 'unsupported-schema'};
-  report?.({moduleId, feature: 'legacy-compat', status: wrappers.length || adventureSettings.length ? 'installed' : 'unsupported-schema', ...result});
+  const result = {wrappers, chatStatus: chatSupported ? 'installed' : 'unsupported-schema',
+    sceneStatus: sceneSupported ? 'installed' : 'unsupported-schema', stats};
+  report?.({moduleId, feature: 'legacy-compat', status: wrappers.length ? 'installed' : 'unsupported-schema', ...result});
   return result;
 }

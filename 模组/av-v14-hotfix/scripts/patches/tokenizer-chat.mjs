@@ -1,17 +1,10 @@
-import {sha256Fallback} from '../source-hash.mjs';
-
-const RENDER_HTML_HASHES = new Set([
-  '2002b840988a5456d11b20cbd235a2d067d046678af3e1781090c2990849338c', // PF2e 8.5.1
-  '8a7d64e3a8c487efbf6f0ac3ff670af5f9d4719f2e86e18ffcdf9fe0c3075c94', // PF2e 8.6.0
-  'c6186757b90ffd1d5d50a414080c6719585a12b7df1e8ad32cc4ba2150199497' // PF2e 8.6.1
-]);
-
 export function createTokenizerChatPortraitWrapper(){
   return async function(wrapped,...args){
     const html=await wrapped(...args);
     const flags=this.speakerActor?.flags?.['tokenizer-2'];
     if(!this.isContentVisible||!flags||!Object.keys(flags).length)return html;
-    const image=html?.querySelector(':scope > header.message-header > .portrait > img');
+    // Any other render result (a string, a fragment-less value) passes through untouched.
+    const image=html?.querySelector?.(':scope > header.message-header > .portrait > img');
     if(image){
       const actor=this.speakerActor,token=this.token??actor.prototypeToken;
       const subject=token?.ring?.enabled?token.ring.subject?.texture:null;
@@ -40,7 +33,6 @@ export function installTokenizerChatPortraitPatch({moduleId='av-v14-hotfix',runt
   if(typeof prototype?.renderHTML!=='function'||typeof runtime.libWrapper?.register!=='function')return finish('unsupported-runtime');
   if(installed.has(prototype))return finish('already-installed');
   // Keep setup registration synchronous, before the first chat history render.
-  if(!RENDER_HTML_HASHES.has(sha256Fallback(Function.prototype.toString.call(prototype.renderHTML))))return finish('unsupported-source');
   runtime.libWrapper.register(moduleId,'CONFIG.ChatMessage.documentClass.prototype.renderHTML',createTokenizerChatPortraitWrapper(),'WRAPPER');
   installed.add(prototype);
   return finish('installed');

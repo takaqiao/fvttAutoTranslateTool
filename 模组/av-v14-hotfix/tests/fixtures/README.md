@@ -1,27 +1,23 @@
 # Standalone regression fixtures
 
-The Babele and Chat tests load the module's actual `scripts/patches/babele.mjs` and `scripts/patches/chat.mjs`. Their fixtures contain only the needed original source excerpts, not the full Foundry bundle. No `output` directory, installed Foundry instance, network, or npm dependencies are needed to run them.
+The Chat tests load the module's actual `scripts/patches/chat.mjs`. Their fixtures contain only the needed original source excerpts, not the full Foundry bundle. No `output` directory, installed Foundry instance, network, or npm dependencies are needed to run them.
 
 From the module directory, using the verified Node 26.7.0 runtime:
 
 ```sh
-node --test tests/babele-instance.test.mjs tests/babele-boundary.test.mjs tests/chat-coalescing.test.mjs
+node --test tests/chat-coalescing.test.mjs
 ```
 
-Expected: 49 Babele + 19 Chat = 68 passing tests. Chat's optional `BASELINE` environment variable selects the original behavior for a deliberate regression control; leave it unset for the actual patch tests.
+Expected: 21 passing tests. The optional `BASELINE` environment variable selects the original behavior for a deliberate regression control (the one test of the module's own installer is skipped under it); leave it unset for the actual patch tests.
 
-- `babele-core-14.367.json`: StringTree, WordTree, DocumentIndex, and native CompendiumCollection.indexDocument.
-- `babele-upstream-3.1.2.json`: the unchanged Chinese translation wrapper and the few helper functions required by the tests.
-- `babele-lib-wrapper-1.13.5.1.json`: the actual enum factory and package identity check used by compatibility tests.
 - `chat-semaphore.js` / `chat-methods.json`: Semaphore and the three native ChatLog methods used by the tests.
 - Each `*-provenance.json` records original source SHA-256, source locations, extraction details, and fragment hashes. Source paths in metadata are historical provenance, not test dependencies.
 
-These Babele/Chat source fixtures occupy 32,401 bytes combined (39,131 bytes including their provenance JSON). Foundry method bodies remain unchanged. Babele extraction normalizes line endings and trims only outer whitespace; Chat uses exact original slices.
+Foundry method bodies remain unchanged; Chat uses exact original slices.
 
 Fixtures are committed/generated once. Regeneration alone requires the separately supplied original source files:
 
 ```sh
-node scripts/build-babele-test-fixtures.mjs /path/to/foundry.mjs /path/to/babele-ondemand-patch.js /path/to/lib-wrapper.js
 node scripts/build-chat-test-fixtures.mjs /path/to/foundry.mjs
 ```
 
@@ -29,23 +25,13 @@ The generators write only the named test fixtures. They do not modify the runtim
 
 ## PF2e 8.6.0 and 8.6.1 source capture
 
-`generate-item-name-8.6.0.js.txt`, `generate-item-name-8.6.1.js.txt` and `tokenizer-chat-native.json` preserve exact official PF2e function excerpts. The latter contains the complete 8.5.1, 8.6.0 and 8.6.1 `ChatMessagePF2e.renderHTML` methods. Provenance records release URLs, bundle and fragment SHA-256, and source offsets. Bundle hashes identify the source files; runtime guards hash the target functions.
+`generate-item-name-8.6.0.js.txt`, `generate-item-name-8.6.1.js.txt` and `tokenizer-chat-native.json` preserve exact official PF2e function excerpts. The latter contains the complete 8.5.1, 8.6.0 and 8.6.1 `ChatMessagePF2e.renderHTML` methods. Provenance records release URLs, bundle and fragment SHA-256, and source offsets. Bundle hashes identify the source files. Since 0.6.28 no runtime guard hashes these two functions.
 
 ```sh
 node scripts/build-pf2e-test-fixtures.mjs /8.5.1/pf2e.mjs /8.6.0/pf2e.mjs /8.6.1/pf2e.mjs
 ```
 
-The generator verifies all three official bundle hashes before writing. Each render method is sliced up to its own closing brace, because 8.6.1 renames the private member that follows it. Naming regressions compare native outputs, generated names and map enumeration. Portrait tests execute the complete unmodified render methods with a small DOM fixture and isolated non-portrait listeners; they cover the registered wrapper, hidden/OOC messages, ordinary portraits and mirrored token scale. The 8.6.1 cases also assert that each function equals its 8.6.0 counterpart once the renamed compiler closures and private members are restored (plus, for item names, one `else` dropped after a returning branch), and that every registered item-name digest is the module hash of its fixture function. These checks do not replace browser rendering or third-party wrapper-order QA.
-
-## pf2e_compendium_chn 3.2.3 source capture
-
-`babele-upstream-3.2.3.json` holds the 3.2.3 `indexDocument` libWrapper registration and the eleven top-level declarations it depends on, as exact slices of `babele-ondemand-patch.js`. Provenance records the file SHA-256, its byte length, and each fragment's offsets and SHA-256. `babele-index-contract.json` and `babele-upstream-3.1.2.json` continue to supply the earlier callback, which requests a full rebuild.
-
-```sh
-node scripts/build-babele-323-test-fixture.mjs /3.2.3/babele-ondemand-patch.js
-```
-
-The generator verifies the file hash before writing and locates the declarations and the single registration with the module's own source tokenizer. The retirement regressions execute this unmodified callback against the Foundry DocumentIndex fixture: the adapter reports `retired`, wraps no pack and registers no hook, while the upstream callback replaces the changed entry itself. Further cases confirm that the decision follows the source rather than the version label, and that the adapter is not treated as retired when the callback still requests a full rebuild, calls an undeclared helper or is registered twice, or when the registration or the index API calls appear only in comments.
+The generator verifies all three official bundle hashes before writing. Each render method is sliced up to its own closing brace, because 8.6.1 renames the private member that follows it. Naming regressions compare native outputs, generated names and map enumeration. Portrait tests execute the complete unmodified render methods with a small DOM fixture and isolated non-portrait listeners; they cover the registered wrapper, hidden/OOC messages, ordinary portraits and mirrored token scale. The 8.6.1 cases also assert that each function equals its 8.6.0 counterpart once the renamed compiler closures and private members are restored (plus, for item names, one `else` dropped after a returning branch). The installer regressions run the self-check against all three official functions and against altered copies whose early returns were removed. These checks do not replace browser rendering or third-party wrapper-order QA.
 
 ## 0.6.23 source capture
 
@@ -92,6 +78,10 @@ The capture's `source-capture.json` must be alongside `upstream`. Only the requi
 
 ## 0.6.2 additions
 
-`duration-core-14.367.json` is the complete unchanged `CalendarData.formatDuration.toString()` captured from the isolated QA browser, with its SHA-256. It also matches the saved core source at line 82039. The test provides core's lazy `objectEntries`/`iterateEntries` helpers and the original duration unit set; native `Intl.DurationFormat` performs actual formatting.
-
 `patreon-3.2.28-refresh.json` contains only the three relation helpers, listener, outer callback and closed-array declaration needed for regression tests, with original full-bundle and prior source-patch digests. The full paid module bundle is not included. `hook-harness.mjs` shares the existing exact core Hooks fixture between Sundry, Patreon and broker lifecycle tests.
+
+## 0.6.28 removals
+
+The index adapter and the duration formatter cache were retired, and the timestamp repair no longer reads core source. Their fixtures (`babele-*.json`, `duration-core-14.367.json`, `timestamps-core-14.367.json`), the two Babele generators and their tests were removed with them. Earlier sections describe only fixtures that still exist.
+
+Item names, the chat portrait, buffered audio stop, chat timestamps and the DsN quality locks no longer compare function text at runtime. The PF2e and DsN excerpts stay as test inputs: the regressions run the unmodified upstream functions, and additionally run altered copies to show that a changed function body still installs and that each runtime guard stands down when its precondition fails.

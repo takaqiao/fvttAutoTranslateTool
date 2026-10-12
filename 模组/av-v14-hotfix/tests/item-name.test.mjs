@@ -46,6 +46,15 @@ test('mapping edits and shield-over-weapon precedence are read anew on each call
   e.reset();assert.equal(e.fast(fixture),'ShieldCollision');assert.equal(e.enumerations(),0);
   delete e.shields.collision;assert.equal(e.fast(item('weapon','collision','WeaponCollision')),e.original(item('weapon','collision','WeaponCollision')));
 });
+// Without runes either label ends in the item's own name, so only a runed item shows which label was compared.
+test('a runed weapon whose base is in both maps is compared with the shield label, as in the merged map',()=>{
+  const e=environment(),runed={system:{runes:{potency:1,striking:0,property:[]},material:{type:null},grade:null}};
+  assert.notEqual(e.original(item('weapon','collision','ShieldCollision',runed)),'ShieldCollision');
+  for(const name of ['ShieldCollision','WeaponCollision']){const fixture=item('weapon','collision',name,runed);assert.equal(e.fast(fixture),e.original(fixture));}
+});
+test('a base type missing from the maps returns the name without enumerating them',()=>{
+  const e=environment();assert.equal(e.fast(item('weapon','missing','Unknown')),'Unknown');assert.equal(e.enumerations(),0);
+});
 test('merged weapon maps ignore inherited and non-enumerable entries just like object spread',()=>{
   const e=environment();Object.setPrototypeOf(e.weapons,{inherited:'Inherited'});Object.defineProperty(e.shields,'hidden',{value:'Hidden',enumerable:false});
   for(const fixture of [item('weapon','inherited','Inherited'),item('weapon','hidden','Hidden'),item('weapon','toString','Custom')])assert.equal(e.fast(fixture),e.original(fixture));

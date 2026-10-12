@@ -84,7 +84,7 @@ test('8.6.1 render method differs from 8.6.0 only in two compiler closure names 
   .replace('this.#n(','this.#onHoverIn(').replace('this.#r(','this.#onHoverOut('),prior);
 });
 
-test('registers once for audited render methods regardless of the PF2e version label',()=>{
+test('registers once for each native render method regardless of the PF2e version label',()=>{
  for(const sourceVersion of ['8.5.1','8.6.0','8.6.1'])for(const version of [sourceVersion,'9.0.0']){
   const {runtime,calls}=environment({sourceVersion,version});
   assert.equal(installTokenizerChatPortraitPatch({runtime}).status,'installed');
@@ -95,20 +95,24 @@ test('registers once for audited render methods regardless of the PF2e version l
  }
 });
 
-test('other systems and unknown render methods remain untouched',()=>{
-  for(const options of [{systemId:'sf2e'},{unknown:true}]){
-    const {runtime,calls}=environment(options);
-    if(options.unknown)runtime.CONFIG.ChatMessage.documentClass.prototype.renderHTML=async function(){return 'foreign';};
-    assert.match(installTokenizerChatPortraitPatch({runtime}).status,/^unsupported-/);
-    assert.equal(calls.length,0);
-  }
+test('other systems remain untouched',()=>{
+  const {runtime,calls}=environment({systemId:'sf2e'});
+  assert.equal(installTokenizerChatPortraitPatch({runtime}).status,'unsupported-system');
+  assert.equal(calls.length,0);
 });
 
-test('a forged toString does not authorize an unknown render method',()=>{
- const {runtime,calls}=environment({version:'8.5.1'}),prototype=runtime.CONFIG.ChatMessage.documentClass.prototype;
- const original=prototype.renderHTML,foreign=async function(){return null;};
- foreign.toString=()=>original.toString();prototype.renderHTML=foreign;
- assert.equal(installTokenizerChatPortraitPatch({runtime}).status,'unsupported-source');assert.equal(calls.length,0);
+test('a render result without querySelector is returned untouched instead of throwing',async()=>{
+  const wrapper=createTokenizerChatPortraitWrapper(),{message}=fixture();
+  for(const value of ['<li>text</li>',42,{outerHTML:'<li></li>'},{querySelector:null}])assert.equal(await wrapper.call(message,async()=>value),value);
+});
+
+test('any render implementation is wrapped, and HTML without the portrait is returned as it came',async()=>{
+ const f=environment(),queried=[],bare={querySelector(value){queried.push(value);return null;}};
+ f.runtime.CONFIG.ChatMessage.documentClass.prototype.renderHTML=async function(){return bare;};
+ assert.equal(installTokenizerChatPortraitPatch({runtime:f.runtime}).status,'installed');
+ assert.equal(f.calls.length,1);
+ assert.equal(await f.calls[0][2].call(f.message,f.message.renderHTML.bind(f.message)),bare);
+ assert.deepEqual(queried,[selector]);assert.deepEqual(Object.keys(bare),['querySelector']);
 });
 
 for(const sourceVersion of ['8.5.1','8.6.0','8.6.1']){
@@ -146,13 +150,17 @@ for(const sourceVersion of ['8.6.0','8.6.1']){
   assert.equal(f.image().style.transform,'none');assert.equal(f.image().style.maskImage,'none');
  });
 
- test(`changed native ${sourceVersion} portrait selectors, scaling, masking or visibility are declined`,()=>{
+ test(`changed native ${sourceVersion} portrait code is still wrapped, and only a portrait it emits is corrected`,async()=>{
   for(const [before,after] of [['header.message-header','header.changed-header'],['Math.abs(e.texture.scaleX ?? 1)','1'],
     ['a.style.maskImage =','a.style.background ='],['&& this.isContentVisible','&& true']]){
    const renderSource=native[sourceVersion].renderHTML.replace(before,after);
-   const f=environment({renderSource}),original=f.runtime.CONFIG.ChatMessage.documentClass.prototype.renderHTML;
-   assert.equal(installTokenizerChatPortraitPatch({runtime:f.runtime}).status,'unsupported-source',before);
-   assert.equal(f.calls.length,0);assert.equal(f.runtime.CONFIG.ChatMessage.documentClass.prototype.renderHTML,original);
+   assert.notEqual(renderSource,native[sourceVersion].renderHTML,before);
+   const f=environment({renderSource});
+   assert.equal(installTokenizerChatPortraitPatch({runtime:f.runtime}).status,'installed',before);
+   assert.equal(await f.calls[0][2].call(f.message,f.message.renderHTML.bind(f.message)),f.html);
+   // The harness only knows the native header selector, so that variant emits no portrait.
+   if(after==='header.changed-header')assert.equal(f.image(),null);
+   else{assert.equal(f.image().style.transform,'none',before);assert.equal(f.image().style.maskImage,'none',before);}
   }
  });
 }
@@ -169,15 +177,13 @@ function enableWrapperChain(f){
  };
 }
 
-test('a pre-existing render wrapper stays in place and reports unsupported-source',async()=>{
+test('the correction installs on top of a pre-existing render wrapper and both run',async()=>{
  const f=environment(),reports=[];enableWrapperChain(f);
  let calls=0;
  f.runtime.libWrapper.register('portrait-module','CONFIG.ChatMessage.documentClass.prototype.renderHTML',async function(wrapped,...args){calls++;return wrapped(...args);},'WRAPPER');
- const original=f.runtime.CONFIG.ChatMessage.documentClass.prototype.renderHTML;
- assert.equal(installTokenizerChatPortraitPatch({runtime:f.runtime,report:value=>reports.push(value)}).status,'unsupported-source');
- assert.equal(f.calls.length,1);assert.equal(reports[0].status,'unsupported-source');
- assert.equal(f.runtime.CONFIG.ChatMessage.documentClass.prototype.renderHTML,original);
- await f.message.renderHTML();assert.equal(calls,1);assert.match(f.image().style.transform,/^scale\(2\.5/);
+ assert.equal(installTokenizerChatPortraitPatch({runtime:f.runtime,report:value=>reports.push(value)}).status,'installed');
+ assert.equal(f.calls.length,2);assert.deepEqual(reports,[{feature:'tokenizerChat',status:'installed'}]);
+ await f.message.renderHTML();assert.equal(calls,1);assert.equal(f.image().style.transform,'none');assert.equal(f.image().src,'avatar.webp');
 });
 
 test('a later render wrapper keeps the installed correction and repeated install adds no wrapper',async()=>{

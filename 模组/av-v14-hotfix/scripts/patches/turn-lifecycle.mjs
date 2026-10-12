@@ -67,13 +67,19 @@ function summonsSource(Hooks, hook) {
   return matches.length === 1 ? matches[0] : null;
 }
 
-function reactionWrapper(original, {Combatant}) {
+// Summons Assistant registers its expiry callback only while this setting is on.
+function thrallExpiryDisabled(g) {
+  try { return !g.game.settings.get('pf2e-summons-assistant', 'necromancer.thrall.auto-expire'); }
+  catch { return false; }
+}
+
+function reactionWrapper(original, {Combatant, stats}) {
   return function(combatant, ...args) {
     // Toolbelt's shared-turn Combatant is not an encounter document. Every
     // Reaction Checker action here assumes a persistent Combatant (including
     // reaction chat cards that later resolve its id), so none belongs to this
     // temporary object. Other Hook consumers still receive the original object.
-    if (combatant instanceof Combatant && combatant.id == null && combatant._id == null) return;
+    if (combatant instanceof Combatant && combatant.id == null && combatant._id == null) {stats.reaction++; return;}
     return Reflect.apply(original, this, [combatant, ...args]);
   };
 }
@@ -92,16 +98,17 @@ async function remindActor(g, actor, userId) {
   }
 }
 
-function sustainWrapper(original, {g, Actor, Combatant}) {
+function sustainWrapper(original, {g, Actor, Combatant, stats}) {
   return function(combatant, encounter, userId, ...args) {
     if (combatant instanceof Combatant && combatant.token === null && combatant.actor instanceof Actor) {
+      stats.sustain++;
       return remindActor(g, combatant.actor, userId);
     }
     return Reflect.apply(original, this, [combatant, encounter, userId, ...args]);
   };
 }
 
-function summonsWrapper(original, {g, Actor, Item, TokenDocument, Scene}) {
+function summonsWrapper(original, {g, Actor, Item, TokenDocument, Scene, stats}) {
   return function(effect, info, ...args) {
     // Keep native early returns and errors for all other effects and clients.
     if (!g.game.user.isGM || effect?.rollOptionSlug !== 'thrall-expiration-date') {
@@ -113,7 +120,7 @@ function summonsWrapper(original, {g, Actor, Item, TokenDocument, Scene}) {
     if (!(effect instanceof Item) || effect.type !== 'effect' || effect.parent !== actor
       || !(actor instanceof Actor) || actor.isToken !== true
       || !(token instanceof TokenDocument) || actor.token !== token || token.actorLink !== false
-      || !(token.parent instanceof Scene)) return;
+      || !(token.parent instanceof Scene)) {stats.summons++; return;}
     return Reflect.apply(original, this, [effect, info, ...args]);
   };
 }
@@ -129,7 +136,9 @@ export function installTurnLifecyclePatch({g = globalThis, report} = {}) {
   const prior = installations.get(Hooks);
   if (prior) return finish(prior);
   const {Actor, Combatant, Item, TokenDocument, Scene} = g.foundry?.documents ?? {};
-  const context = {g, Actor, Combatant, Item, TokenDocument, Scene};
+  // Times each wrapper took over from the upstream callback.
+  const stats = {reaction: 0, sustain: 0, summons: 0};
+  const context = {g, Actor, Combatant, Item, TokenDocument, Scene, stats};
   const wrappers = {reaction:reactionWrapper, sustain:sustainWrapper, summons:summonsWrapper};
   const available = {
     reaction:typeof Combatant === 'function',
@@ -143,6 +152,7 @@ export function installTurnLifecyclePatch({g = globalThis, report} = {}) {
     const module = g.game.modules?.get(id);
     if (!module?.active) {parts[key] = skipped('module-inactive'); continue;}
     if (!available[key]) {parts[key] = skipped('document-api-unavailable'); continue;}
+    if (key === 'summons' && thrallExpiryDisabled(g)) {parts[key] = skipped('feature-disabled'); continue;}
     if (key === 'sustain') {
       const contract = sustainContracts.get(module);
       if (contract?.version !== module.version || contract?.status !== 'validated') {
@@ -158,7 +168,7 @@ export function installTurnLifecyclePatch({g = globalThis, report} = {}) {
     if (adapted.status === 'installed') adaptations.push(adapted);
   }
   if (!adaptations.length) return finish({status:'skipped', reason:'no-supported-consumers', parts});
-  const result = {status:'installed', parts, restore() {
+  const result = {status:'installed', parts, stats, restore() {
     for (const adapted of [...adaptations].reverse()) adapted.restore();
     if (installations.get(Hooks) === result) installations.delete(Hooks);
   }};

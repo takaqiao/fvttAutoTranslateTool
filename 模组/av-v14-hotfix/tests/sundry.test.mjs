@@ -471,3 +471,42 @@ test('unavailable source and changed module identity do not enable Sundry', asyn
     assert.equal(g.Hooks.events.refreshToken[0].fn, callback);
   }
 });
+
+test('hiding switched off in Sundry is reported as disabled before any source is fetched', async () => {
+  const {g} = await environment({types: 'none', prepare: false});
+  let fetched = 0;
+  const fetch = g.fetch;
+  g.fetch = async (...args) => {fetched++; return fetch(...args);};
+  assert.deepEqual(await sundryPatch.prepareSundryPatch({g}), {status: 'skipped', reason: 'feature-disabled'});
+  assert.equal(fetched, 0);
+  const reports = [], before = g.Hooks.events.refreshToken[0].fn;
+  assert.deepEqual(installSundryPatch({g, report: value => reports.push(value)}), {status: 'skipped', reason: 'feature-disabled'});
+  assert.deepEqual(reports, [{feature: 'sundry', status: 'skipped', reason: 'feature-disabled'}]);
+  assert.equal(g.Hooks.events.refreshToken[0].fn, before);
+});
+
+test('an unreadable Sundry setting falls through to the ordinary source checks', async () => {
+  const {g} = await environment({prepare: false});
+  const get = g.game.settings.get;
+  g.game.settings.get = () => {throw new Error('not registered');};
+  assert.deepEqual(await sundryPatch.prepareSundryPatch({g}), {status: 'validated'});
+  g.game.settings.get = get;
+  assert.equal(installSundryPatch({g}).status, 'installed');
+});
+
+test('hit counters separate shortcut refreshes from delegated ones', async () => {
+  const {g} = await environment();
+  const f = nativeFixture(g), reports = [];
+  const result = installSundryPatch({g, report: value => reports.push(value)});
+  assert.deepEqual(result.stats, {fast: 0, delegated: 0});
+  assert.equal(reports.at(-1).stats, result.stats);
+  g.Hooks.callAll('refreshToken', f.token);
+  assert.deepEqual(result.stats, {fast: 1, delegated: 0});
+  f.icons[0].visible = true;
+  g.Hooks.callAll('refreshToken', f.token);
+  assert.deepEqual(result.stats, {fast: 1, delegated: 1});
+  g.canvas.tokens.placeables = [f.token, f.token];
+  g.Hooks.callAll('highlightObjects', false);
+  assert.deepEqual(result.stats, {fast: 3, delegated: 1});
+  assert.doesNotThrow(() => structuredClone(result.stats));
+});

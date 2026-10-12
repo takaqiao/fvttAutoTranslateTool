@@ -34,6 +34,13 @@ const MODULE_CONTRACT = {MODULE_ID:"const MODULE_ID = \"sundry\";"};
 const BACKGROUND_CONTRACT = {BG_FRAME_SKIP_MODULES:"const BG_FRAME_SKIP_MODULES = [\n  \"pf2e-dorako-ux\",\n  \"pathfinder-ui\",\n  \"pf2e-effects-halo\",\n];"};
 const installations = new WeakMap();
 const sourceContracts = new WeakMap();
+const disabled = () => ({status:'skipped', reason:'feature-disabled'});
+
+// Sundry registers neither callback while this setting is "none".
+function hidingDisabled(g) {
+  try { return g.game.settings.get('sundry', 'hide.effects.token.enabled-for') === 'none'; }
+  catch { return false; }
+}
 
 /** Validate only the source dependencies used by the unchanged-icon shortcut. */
 export async function prepareSundryPatch({g = globalThis} = {}) {
@@ -41,6 +48,7 @@ export async function prepareSundryPatch({g = globalThis} = {}) {
   if (!module?.active) return {status:'skipped', reason:'module-inactive'};
   const version = module.version;
   sourceContracts.delete(module);
+  if (hidingDisabled(g)) return disabled();
   let result;
   try {
     const files = await Promise.all(['lib/tokenEffectHider.js', 'lib/const.js', 'lib/helpers.js', 'module.js'].map(async path => {
@@ -80,6 +88,7 @@ export function installSundryPatch({g = globalThis, report} = {}) {
   const finish = result => {report?.({feature: 'sundry', ...result}); return result;};
   const module = g.game?.modules?.get('sundry');
   if (!module?.active) return finish({status: 'skipped', reason: 'module-inactive'});
+  if (hidingDisabled(g)) return finish(disabled());
   const contract = sourceContracts.get(module);
   if (contract?.version !== module.version || contract?.status !== 'validated') return finish({status:'skipped', reason:contract?.reason ?? 'source-not-validated'});
   const Hooks = g.Hooks;
@@ -87,10 +96,15 @@ export function installSundryPatch({g = globalThis, report} = {}) {
   const prior = installations.get(Hooks);
   if (prior) return finish(prior);
   let originalRefresh;
+  const stats = {fast: 0, delegated: 0};
+  function delegate(receiver, args) {
+    stats.delegated++;
+    return Reflect.apply(originalRefresh,receiver,args);
+  }
   function refresh(token, ...args) {
     const effects = token?.effects;
     if (!token?.actor || !effects?.bg || !Array.isArray(effects.children)) {
-      return Reflect.apply(originalRefresh,this,[token,...args]);
+      return delegate(this,[token,...args]);
     }
     const value = Boolean(token.hover || g.canvas.tokens.highlightObjects);
     const nativeSprites = g.game.system?.id === 'pf2e'
@@ -100,13 +114,14 @@ export function installSundryPatch({g = globalThis, report} = {}) {
       // The verified loop skips its private helper when visibility already matches.
       // Inspect current children on every call: no effect/time/Actor cache.
       if (!nativeSprites || !effect || Object.getPrototypeOf(effect) !== nativeSprites) {
-        return Reflect.apply(originalRefresh,this,[token,...args]);
+        return delegate(this,[token,...args]);
       }
       const visible = Object.getOwnPropertyDescriptor(effect,'visible');
       if (!visible?.writable || typeof visible.value !== 'boolean' || visible.value !== value) {
-        return Reflect.apply(originalRefresh,this,[token,...args]);
+        return delegate(this,[token,...args]);
       }
     }
+    stats.fast++;
     if (!enabledFor(token.actor.type, g.game.settings.get('sundry', 'hide.effects.token.enabled-for'))) return;
     if (!BACKGROUND_OWNERS.some(id => g.game.modules.get(id)?.active)) {
       effects.bg.visible = value;
@@ -124,7 +139,7 @@ export function installSundryPatch({g = globalThis, report} = {}) {
   if (adapted.status !== 'installed') return finish(adapted);
 
   const result = {
-    ...adapted, version: module.version,
+    ...adapted, version: module.version, stats,
     restore() {
       adapted.restore();
       if (installations.get(Hooks) === result) installations.delete(Hooks);

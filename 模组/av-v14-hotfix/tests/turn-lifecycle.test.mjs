@@ -11,7 +11,7 @@ const install = patch.installTurnLifecyclePatch ?? (() => ({status:'skipped', re
 const currentSummons = await readFile(new URL('./fixtures/summons-2.20.3-deleteItem.js.txt', import.meta.url), 'utf8');
 const versions = {'pf2e-reaction':'1.4.3', 'pf2e-sustain-reminder':'1.1.0', 'pf2e-summons-assistant':'2.20.2', 'pf2e-toolbelt':'3.56.4'};
 
-async function environment({useChat=true, autoExpire=true, coreVersion='14.368', systemVersion='8.6.0', systemId='pf2e', sustainSource=fixture.sustain.script, summonsCallback=fixture.summons.deleteItem, fetchError, beforeResponse, prepare=true} = {}) {
+async function environment({useChat=true, autoExpire=true, summonsSetting=()=>autoExpire, coreVersion='14.368', systemVersion='8.6.0', systemId='pf2e', sustainSource=fixture.sustain.script, summonsCallback=fixture.summons.deleteItem, fetchError, beforeResponse, prepare=true} = {}) {
   const writes=[], messages=[], renders=[], deleted=[], timers=[], reports=[], prompts=[];
   const idError = new Error('You must provide an _id for every object in the update data array');
   const g = {console, CONFIG:{debug:{hooks:false}}, CONST:{vtt:'Foundry', DOCUMENT_OWNERSHIP_LEVELS:{OWNER:3}},
@@ -19,7 +19,7 @@ async function environment({useChat=true, autoExpire=true, coreVersion='14.368',
     game:{version:coreVersion, release:{generation:Number.parseInt(coreVersion,10)}, system:{id:systemId, version:systemVersion},
       modules:new Map(Object.entries(versions).map(([id,version])=>[id,{active:true,version}])), actors:new Map(),
       user:{id:'gm', isGM:true}, users:new Map([['gm',{id:'gm'}],['player',{id:'player'}]]), time:{worldTime:42},
-      settings:{get(module,key){if(module==='pf2e-sustain-reminder'&&key==='useChat')return useChat; return false;}}},
+      settings:{get(module,key){if(module==='pf2e-sustain-reminder'&&key==='useChat')return useChat; if(module==='pf2e-summons-assistant'&&key==='necromancer.thrall.auto-expire')return summonsSetting(); return false;}}},
     renderTemplate:async (path,data)=>{renders.push({path,data});return `${data.actor.id}:${data.effects.map(effect=>effect.id).join(',')}`;},
     setTimeout(fn,delay){timers.push({fn,delay});return timers.length;},
     reactionOptions:{allReactionEffect:false},
@@ -386,4 +386,27 @@ test('equivalent Summons callbacks with different formatting are still duplicate
   assert.equal(f.apply().parts.summons.status, 'skipped');
   assert.equal(f.callback('summons'), f.original.summons);
   assert.equal(f.g.Hooks.events.deleteItem[1].fn, duplicate);
+});
+
+test('a switched-off thrall expiry is reported as disabled rather than as a source mismatch',async()=>{
+  const off=await environment({autoExpire:false}),result=off.apply();
+  assert.deepEqual(result.parts.summons,{status:'skipped',reason:'feature-disabled'});assert.equal(result.status,'installed');
+  // The setting on with no registered callback is a real mismatch.
+  const missing=await environment({autoExpire:false,summonsSetting:()=>true});
+  assert.equal(missing.apply().parts.summons.reason,'callback-fingerprint-mismatch');
+  // An unreadable setting falls through to the callback check.
+  const unreadable=await environment({summonsSetting:()=>{throw Error('not registered');}});
+  assert.equal(unreadable.apply().parts.summons.status,'installed');
+});
+
+test('hit counters record each takeover of an upstream callback and nothing else',async()=>{
+  const f=await environment(),result=f.apply();
+  assert.deepEqual(result.stats,{reaction:0,sustain:0,summons:0});assert.equal(f.reports.at(-1).stats,result.stats);
+  const linked=f.thrall();await f.callback('summons')(linked.effect,linked.info);
+  assert.equal(f.deleted.length,1);assert.deepEqual(result.stats,{reaction:0,sustain:0,summons:0});
+  const temporary=f.combatant({id:null,token:false});
+  await f.callback('reaction')(temporary,f.encounter,'gm');await f.callback('sustain')(temporary,f.encounter,'gm');
+  const world=f.thrall({world:true,id:'other'});await f.callback('summons')(world.effect,world.info);
+  assert.equal(f.deleted.length,1);assert.deepEqual(result.stats,{reaction:1,sustain:1,summons:1});
+  assert.doesNotThrow(()=>structuredClone(result.stats));
 });

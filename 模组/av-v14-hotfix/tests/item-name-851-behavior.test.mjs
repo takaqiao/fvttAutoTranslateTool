@@ -58,10 +58,6 @@ test('invalid arguments keep the original failure behavior',()=>{
   const e=environment();for(const fixture of [null,{},undefined]){assert.throws(()=>e.original(fixture));assert.throws(()=>e.fast(fixture));}
 });
 
-test('official release function source SHA is exact for the supported 8.5.1 profile',async()=>{
-  const {createHash}=await import('node:crypto');const e=environment();
-  assert.equal(createHash('sha256').update(Function.prototype.toString.call(e.original)).digest('hex'),'28b290589d58d9de5c3eea7a1c05a7a9b4992bb45e5e62816e8f1e97a63a85da');
-});
 test('8.5.1 naming function differs from 8.5.0 only in two compiler closure names',async()=>{
   const old=await readFile(new URL("./generate-item-name-original.js.txt",import.meta.url),'utf8');
   assert.equal(source.replaceAll('Jn.','Kn.').replaceAll('Es[','_s['),old.trimEnd());

@@ -169,3 +169,31 @@ test('overlapping same-node deletes behind a pending queue release every adapter
   assert.equal(node.animate,original);assert.equal(f.animations.length,2);
   finishAll(f);await sleep(15);assert.equal(f.counts.layouts,1);
 });
+
+test('batch counters record how many completions each flush coalesced',async()=>{
+  const stats={batches:0,messages:0},ids=['a','b','c'],f=fixture(ids,{sharedWrapper:createChatDeleteWrapper({stats})});
+  await Promise.all(ids.map(id=>f.chat.deleteMessage(id,{deleteAll:true})));
+  assert.deepEqual(stats,{batches:0,messages:0});
+  finishAll(f);await sleep(15);assert.deepEqual(stats,{batches:1,messages:3});
+  f.add('d');await f.chat.deleteMessage('d');finishAll(f);await sleep(15);
+  assert.deepEqual(stats,{batches:2,messages:4});
+});
+test('installation reports its outcome with live batch counters',{skip:Boolean(process.env.BASELINE)},async()=>{
+  const {installChatDeleteCoalescing}=await import('../scripts/patches/chat.mjs');
+  class ChatLog {deleteMessage(){}}
+  const registrations=[],reports=[];
+  const runtime={foundry:{applications:{sidebar:{tabs:{ChatLog}}}},libWrapper:{register:(...args)=>registrations.push(args)}};
+  const result=installChatDeleteCoalescing({moduleId:'test',runtime,report:value=>reports.push(value)});
+  assert.equal(result.status,'installed');assert.deepEqual(result.stats,{batches:0,messages:0});
+  assert.deepEqual(reports,[{feature:'chat',status:'installed',stats:result.stats}]);assert.equal(reports[0].stats,result.stats);
+  assert.equal(registrations.length,1);
+  assert.deepEqual([registrations[0][0],registrations[0][1],typeof registrations[0][2],registrations[0][3]],
+    ['test','foundry.applications.sidebar.tabs.ChatLog.prototype.deleteMessage','function','WRAPPER']);
+  assert.doesNotThrow(()=>structuredClone(result));
+  for(const options of [{moduleId:'test',runtime:{...runtime,libWrapper:{}}},{moduleId:'test',runtime:{...runtime,foundry:{}}},{runtime}]){
+    const seen=[];
+    assert.deepEqual(installChatDeleteCoalescing({...options,report:value=>seen.push(value)}),{status:'unsupported'});
+    assert.deepEqual(seen,[{feature:'chat',status:'unsupported'}]);
+  }
+  assert.equal(registrations.length,1);
+});

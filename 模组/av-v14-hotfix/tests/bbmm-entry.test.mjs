@@ -5,7 +5,7 @@ import fs from 'node:fs';
 const source=fs.readFileSync(new URL('../av-v14-hotfix.mjs',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,'').replaceAll('import.meta.url',JSON.stringify(new URL('../av-v14-hotfix.mjs',import.meta.url).href));
 async function boot(enabled){
   const hooks={},tasks=[],settings=new Map(),self={},calls=[];let phase='load';
-  const runtime={console:{info(){},error(){}},structuredClone,queueMicrotask:fn=>tasks.push(fn),Hooks:{once:(name,fn)=>hooks[name]=fn},hashSource:async()=>'',
+  const runtime={console:{info(){},warn(){},error(){}},structuredClone,queueMicrotask:fn=>tasks.push(fn),Hooks:{once:(name,fn)=>hooks[name]=fn},
     game:{version:'14.368',release:{generation:14},modules:new Map([['av-v14-hotfix',self]]),settings:{register:(id,key,value)=>settings.set(key,value),get:(id,key)=>enabled.includes(key)}},
     registerDsnQualitySettings:({report})=>{calls.push(['register',phase]);report?.({feature:'dsnQualityLocks',status:'registered'});},
     installDsnQualityLocks:({report})=>{calls.push(['dsn',phase]);report({feature:'dsnQualityLocks',status:'installed',restore(){}});},

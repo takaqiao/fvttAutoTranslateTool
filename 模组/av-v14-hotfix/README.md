@@ -1,12 +1,74 @@
-# FVTT v14 Local Hotfix 0.6.27
+# FVTT v14 Local Hotfix 0.6.28
 
-当前源码及隔离回归基线为 Foundry **14.369**、PF2e **8.6.1**、汉化合集（`pf2e_compendium_chn`）**3.2.3**、Dice So Nice **6.4.4**、BBMM **1.4.11**、Grid **2.5.0**、Summons Assistant **2.20.3**。清单保留最低核心版本 14.367 和已验证标签 14.369，移除核心最高版本限制。运行时不再按 Foundry 核心代数或精确版本号跳过，按各项实际 schema、API、函数源码及对象契约决定是否安装；PF2e 适配也不再因系统版本号跳过。每项可在世界设置中关闭，刷新后生效。契约不匹配或检测到冲突时跳过，对应状态见：
+当前源码及隔离回归基线为 Foundry **14.369**、PF2e **8.6.1**、Dice So Nice **6.4.4**、BBMM **1.4.11**、Sundry **1.11.0**、Summons Assistant **2.20.3**。清单保留最低核心版本 14.367 和已验证标签 14.369，没有核心最高版本限制。运行时不按 Foundry、PF2e 或第三方模组的版本号决定装不装。每项可在世界设置中关闭，刷新后生效。该装而没装上的修正会在控制台输出一行警告并写明原因；全部状态和各项实际生效的次数见：
 
 ```js
 game.modules.get('av-v14-hotfix').api.status()
 ```
 
+## 0.6.28：退役三处、去掉一批源码指纹、没装上的会说明原因
+
+### 退役
+
+- **汉化索引增量更新**（开关 `babele`）。汉化合集 3.2.3 自己按条目更新索引。0.6.27 已经判定不安装，但每次加载仍要抓三份源码来确认这一点。
+- **聊天时间戳格式化缓存**（开关 `duration`）。在 14.369 上因为源码指纹失配一直没装上，收益也只有每次刷新几毫秒。
+- **旧导入器兼容里的冒险包设置预注册**。只为 Murder in Metal City 的导入器补 `autoOpenAdventures` 定义。聊天 `type` 和场景旧字段两段兼容保留，开关仍是 `legacy`。代价：Murder in Metal City 13.2.0 的导入器在就绪时会向世界里每个带冒险合集的包读这个设置，没有预注册时它会在控制台报一次「设置未注册」，它自己的自动打开提示随之中断，别的模组不受影响。目前没有世界启用这个模组；要启用，先把它升到 14.0.0 再看。
+
+世界里 `babele`、`duration` 两个开关已保存的值留在数据库里，不迁移也不删除，只是不再注册和读取。`api.status()` 里这三处显示为 `retired` 并附说明；顶层的 `babele` 字段去掉了。
+
+### 不再比对函数文本的五项
+
+以前这五项拿目标函数全文的 SHA-256 决定装不装，上游改一个字节（包括只换压缩名）就静默停用。现在不比对文本，各自靠下面的检查：
+
+| 项目 | 去掉的指纹 | 现在靠什么 |
+| --- | --- | --- |
+| PF2e 物品名称 | 4 个整函数哈希 | 安装前自检：在世界角色身上和世界物品里的护甲、盾、武器（最多 2000 件）中找一件 PF2e 会为它生成名字的（带符文、材质或品级），把「没有基础类型」「特定物品」「名字被改过」三个条件各翻转一次，原函数每次都原样返回物品名才算这一条验过，三条都验过才安装；现有的物品也各比对一遍原函数和快路径。有一处不一致报 `behavior-mismatch` 不安装，`detail.claim` 写明是哪一条；找不到会被生成名字的物品时报 `skipped / no-generated-name-sample` 不安装。探测只读，不改世界物品。 |
+| Tokenizer2 聊天头像 | 3 个整方法哈希 | 只改返回的消息里 `header.message-header > .portrait > img` 这一个元素；找不到就原样返回。 |
+| 原生缓冲音频停止 | 14 个成员哈希 | 安装时记下这 14 个成员的函数身份，每次停止前核对身份、状态、缓冲区和节点；有一项对不上就走原路径。 |
+| 聊天时间戳 | 4 个核心方法哈希 | 不读核心源码。包住核心的周期刷新：刷新进行期间给每个时间戳元素临时挂一个 `textContent` 访问器，内容相同的写入不执行，其余照常；刷新结束即摘掉。核心自己的循环原样执行。 |
+| BBMM / DsN 画质硬锁 | 9 个方法哈希 | 只要求实际包装的三个 DiceConfig 方法和工厂的 `setQualitySettings` 是可写的函数；返回值不是对象时原样返回；预览外观或渲染上下文里缺少被锁的键时判定上游改了选项名，停用并报 `source-changed`。这个检查要到玩家打开 DsN 设置窗口时才会触发。 |
+
+代价要说清楚：这五项以后在上游改了函数体的版本上也会安装，是否仍然正确由上表的运行时检查兜底，不再有「文本变了就一律不装」这道闸。物品名称的自检是抽样核对，不是等价证明：三个条件只在找到的第一件样本上验，也就是一种物品类型、一种符文和材质的组合；上游若只对某一类物品、或只在某种组合下改了规则，验不到。
+
+聊天时间戳的包装在 `setup` 里注册，早于聊天栏首次渲染；核心是在那一刻把刷新方法绑进定时器的。核心将来如果把这个方法改成异步，状态会变成 `ineffective / async-refresh`。
+
+### 仍按源码文本识别目标的
+
+DsN 的聊天恢复、模型加载和队列（38 个哈希），原生 Hooks 记录适配器（7 个），Sundry、Sustain、Reaction、Summons 的回调文本，以及批量删除聊天的收尾闭包。这些修正要改写上游的私有流程，认错目标的后果比不装更糟，所以照旧：对不上就跳过。和以前不同的是，跳过时控制台会有警告。
+
+PersistentDice 桥的配合代码（队列修补里的四个函数指纹和相关分支）保留。
+
+### 诊断
+
+控制台：
+
+- 每一项的每种结果输出一行；结果没变时不重复输出，计数变化不算结果变化。
+- 该装而没装上的用 `console.warn`，格式是 `av-v14-hotfix | <开关名> is not active: <状态> (<原因>)`。有多个独立部分的项（`turnLifecycle` 的三段，`legacy` 的聊天和场景，`dsnChat` 的队列和模型）逐部分列出。
+- 启动流程走完后，如果还有没装上的，再汇总输出一行。之后状态变化（比如别的模组中途改了被包装的函数）照样单独输出。
+- 不算问题、只用 `console.info` 的情况：开关关着；对应的第三方模组没启用；系统不是 PF2e；DsN 还没就绪（无画布模式下一直如此）；上游自己的功能开关关着（Sundry 的「隐藏效果」为 none，Summons 的奴仆自动到期关着，这两种报 `skipped / feature-disabled`）；物品名称找不到会被生成名字的样本（世界里还没有带符文、材质或品级的护甲、盾、武器；上游改成按名字做判断时也会落到这里）。
+
+`api.status()`：
+
+- `patches.runtime` 在启动流程进行中是 `{status:'initializing', step, since, waitedMs}`，`step` 是正在执行的开关名；走完后是 `{status:'ready', elapsedMs}`。据此可以分清「还在加载」和「卡在某一步」。
+- 状态键和世界开关同名：`legacy-compat` 改为 `legacy`，`turn-lifecycle` 改为 `turnLifecycle`。
+- 已安装的项带 `stats`，是从本次加载起累计的次数，刷新页面归零，不写入世界数据：
+
+| 键 | 计数 | 含义 |
+| --- | --- | --- |
+| `itemNames` | `fast` / `delegated` | 快路径直接返回 / 交回原函数 |
+| `legacy` | `chat` / `sceneCreate` / `sceneUpdate` | 确实迁移了旧字段的调用次数 |
+| `sundry` | `fast` / `delegated` | 跳过上游回调的刷新 / 交回上游回调 |
+| `timestamps` | `skipped` / `written` | 拦下的同文写入 / 放行的写入 |
+| `chat` | `batches` / `messages` | 合并的批次 / 批次里的消息数，两者之差是省掉的收尾次数 |
+| `soundStop` | `extraStops` | 补停底层音源的次数 |
+| `turnLifecycle` | `reaction` / `sustain` / `summons` | 三段各自接管上游回调的次数 |
+| `dsnChat` | `recovered` | 动画失败后恢复聊天的次数 |
+
+隔离回归覆盖以上各项；实际世界里的渲染、多人客户端和其它模组的包装顺序需要在客户端核验。
+
 ## 0.6.27 的 PF2e 8.6.1 适配
+
+以下各节是历史记录。其中按完整函数文本登记名称、头像、音频、时间戳和画质的做法，以及索引适配，已被 0.6.28 取代。
 
 PF2e 8.6.1 的构建更换了压缩名，`generateItemName` 和聊天消息 `renderHTML` 的函数文本随之改变；0.6.26 在 8.6.1 上对名称和头像两项报告 `unsupported-source` 并跳过。汉化合集 3.2.3 改写了索引回调，0.6.26 的索引契约也不再匹配。
 
@@ -114,6 +176,9 @@ Dice So Nice 的修复针对已复现的动画失败及队列等待，不涵盖�
 | Wayfinder 独立 SIMD 文件补丁 | 退役时的 14.1.1 已使用官方文件；无需恢复旧 14.0.1。 |
 | Grid 距离、夹击与光环 | 删除安装入口、设置、监听器和运行时实现；自 2.3.1 起全部使用上游。 |
 | BBMM 旧玩家设置值恢复 | 删除安装入口、设置与旧事件监听器；当前 1.4.11 子菜单硬锁和通知使用上游。五项 DsN 画质桥继续保留。 |
+| 汉化索引增量更新 | 0.6.28 删除安装入口、设置及实现。汉化合集 3.2.3 的索引回调自己按条目替换和移除。 |
+| 聊天时间戳格式化缓存 | 0.6.28 删除安装入口、设置及实现。14.369 上已不匹配，收益很小。 |
+| 冒险包设置预注册 | 0.6.28 从旧导入器兼容里删除。只服务于 Murder in Metal City 的导入器。 |
 
 Wayfinder 新版没有等价采纳旧补丁的所有延迟刷新策略，不能据此宣称全部寻路或拖图卡顿已解决。已保存的旧世界设置可以留在数据库中，不再注册或读取，也不需要为清理设置写入世界数据。
 
@@ -122,14 +187,12 @@ Wayfinder 新版没有等价采纳旧补丁的所有延迟刷新策略，不能�
 | 项目 | 当前范围 |
 | --- | --- |
 | 旧导入器兼容 | 核验 ChatMessage 的 type/style 字段、Scene/Level 目标字段类型、嵌入关系及公开创建/更新 API 后，旧 type → style、旧 Scene 图片字段 → levels；现代字段优先。契约不符或运行中更换目标类时原样透传。 |
-| 冒险包设置 | 启用 sf2e-murder-in-metal-city 时，仅补可用 API 下缺失的 Adventure 设置定义；Season of Ghosts 已使用上游。 |
-| PF2e 物品名称 | 检查 PF2e 身份，逐函数验证已核验的 8.5.0/8.5.1/8.6.0/8.6.1 源码；对无需自动改名的原生分支提前返回。 |
-| 聊天时间戳 | 复用窄式时长格式化器，跳过同文 DOM 写入；保留实际时间变化。 |
+| PF2e 物品名称 | 检查 PF2e 身份，安装前在世界物品上逐条验证三个提前返回的条件；对无需自动改名的原生分支提前返回。 |
+| 聊天时间戳 | 核心周期刷新时跳过同文 DOM 写入；保留实际时间变化。 |
 | 批量删除聊天 | 保留核心删除队列及每条删除事件，合并同批动画结束后的布局操作。 |
-| Babele 按需汉化 | 局部索引、模式及优先级契约通过后合并增量索引更新；full 模式走上游。汉化模块自带逐条索引更新时（3.2.3 的源码即如此）报告 `retired`，不安装。 |
-| Tokenizer2 聊天头像 | 完整原生头像方法符合已核验源码时，有 Tokenizer2 flags 的头像恢复原生尺寸，清除地图缩放引入的遮罩。8.6.0/8.6.1 仍保留原生地图缩放路径。 |
-| 原生缓冲音频停止 | Foundry 14.368 的 STOPPING 状态仍停止底层缓冲音源，保留淡出、暂停及流式音频行为。 |
-| BBMM / DsN 画质硬锁 | BBMM 注册表与规则契约、DsN 逐函数源码契约；读取、保存、重置、画质预览及画板重建遵守已有五项锁。 |
+| Tokenizer2 聊天头像 | 有 Tokenizer2 flags 的头像恢复原生尺寸，清除地图缩放引入的遮罩。8.6.0/8.6.1 仍保留原生地图缩放路径。 |
+| 原生缓冲音频停止 | STOPPING 状态下仍停止底层缓冲音源，保留淡出、暂停及流式音频行为。 |
+| BBMM / DsN 画质硬锁 | BBMM 注册表与规则契约、DsN 方法形状检查；读取、保存、重置、画质预览及画板重建遵守已有五项锁。 |
 
 Sundry 与共享回合/奴仆清理使用已验证的原生 Hooks 记录适配器，保留监听 ID、槽位、once 及其它监听器。Grid 已无本地适配或重复监听器。
 
@@ -137,25 +200,24 @@ Sundry 与共享回合/奴仆清理使用已验证的原生 Hooks 记录适配�
 
 | 路径 | 当前守卫与理由 |
 | --- | --- |
-| 包入口及核心补修 | 解除 Foundry 核心代数与精确版本门槛；聊天、时间戳、时长、音频及 Hooks 保留实际 API/源码保护。旧导入器按 ChatMessage/Scene/Level schema、API 与目标类身份检查，schema 不符不转换输入。核心标签只用作来源和已验证基线记录。 |
+| 包入口及核心补修 | 没有 Foundry 核心代数或精确版本门槛。批量删除聊天和 Hooks 适配器保留源码文本保护；时间戳和音频自 0.6.28 起只做 API 与身份检查。旧导入器按 ChatMessage/Scene/Level schema、API 与目标类身份检查，schema 不符不转换输入。核心标签只用作来源和已验证基线记录。 |
 | DsN 聊天/模型/队列 | 解除精确 6.4.1 / 14.368；保留逐函数及回调哈希、实例/原型所有权、具体 ready Promise 与批次所有权。队列、回调和完整 DiceBox 按旧版或 6.4.3 来源组合核验，实际 ticker 消费方法另行检查；PersistentDice 窄包装按函数源码组合及进行中引用核验。普通批次捕获实际 worker.exec 引用；已装桥的原生恢复引用另核验 worker prototype RPC 源码。完整 bundle 哈希仅用于 fixture 来源。 |
-| DsN 画质 | 解除精确 DsN/BBMM 小版本；保留 DiceConfig 每个消费函数及 factory 哈希。上下文接受已核验的 6.4.1 和 6.4.2 函数，注册表和规则不符合时跳过。 |
+| DsN 画质 | 没有 DsN/BBMM 版本门槛；自 0.6.28 起不比对函数文本，检查三个被包装方法和 factory 方法的形状、返回值类型和被锁的键是否还在。注册表和规则不符合时跳过。 |
 | BBMM reader | world Boolean/Object 注册定义、client/user 目标、namespace/key/value/soft 结构。只读取规则，不恢复旧通用设置监听器。 |
 | Grid / BBMM 旧修补 | 已删除运行时守卫和实现，使用当前上游；历史数据保留。 |
-| PF2e 名称 | 解除 PF2e 版本标签；保留 PF2e 身份与完整目标函数哈希，异步核验期间 system/target/function/version 必须保持同一所有者。 |
+| PF2e 名称 | 没有 PF2e 版本门槛；自 0.6.28 起不比对函数文本，保留 PF2e 身份检查，安装前同步自检分支判定。 |
 | Sundry | 解除 PF2e 版本标签，检查 PF2e 身份与原生 Sprite 的可写 boolean `visible` 契约。可见性循环、设置读取、背景规则及绑定采用局部源码契约，另核验真实 Hooks 回调；旧循环保持上游。 |
 | 回合生命周期 | 解除核心 14.368、PF2e 版本与 Summons 2.19.0 标签；保留 PF2e 身份、原生 Hooks 回调及严格 Document 关系。Sustain 的私有效果筛选与常量另行核验，Reaction 只跳过无持久 ID 的同类参战者。 |
-| Babele 索引 | 解除三个模块版本标签；按实际索引注册回调、按需及标题闭包、libWrapper 优先级读取与排序接缝核验，保留 helper/native 签名、注册唯一性、顺序和 facade 所有权。索引回调不再请求整库重建、改调含逐条替换与移除的顶层函数时按源码判定退役，不看版本号。 |
-| 旧冒险导入器 | 解除 sf2e-murder-in-metal-city 标签；检查模块启用、Adventure 类型、有效 namespace、缺失设置和注册 API。 |
-| Tokenizer | 解除 PF2e 8.5.1 标签；保留 PF2e 身份与 libWrapper API，新增已核验 8.5.1/8.6.0/8.6.1 完整 `renderHTML` 源码保护。 |
+| Babele 索引、旧冒险导入器 | 0.6.28 已退役，运行时不再有对应代码。 |
+| Tokenizer | 没有 PF2e 版本门槛；保留 PF2e 身份与 libWrapper API 检查，自 0.6.28 起不比对 `renderHTML` 文本。 |
 
 ## 安装、验证与回退
 
-备份旧目录后，将本目录安装到 `Data/modules/av-v14-hotfix`，在需要的世界启用并完整刷新客户端。退役的 `scripts/patches/patreon.mjs`、`wayfinder-fog.mjs`、`wayfinder-fog-texture.mjs`、`grid.mjs`、`bbmm-locks.mjs` 应从部署目录移除。回退可恢复原目录，或关闭本模组后刷新。
+备份旧目录后，将本目录安装到 `Data/modules/av-v14-hotfix`，在需要的世界启用并完整刷新客户端。退役的 `scripts/patches/patreon.mjs`、`wayfinder-fog.mjs`、`wayfinder-fog-texture.mjs`、`grid.mjs`、`bbmm-locks.mjs`、`babele.mjs`、`duration.mjs` 应从部署目录移除。回退可恢复原目录，或关闭本模组后刷新。
 
-安装清单使用 [av-v14-hotfix-v0.6.27 的 module.json](https://github.com/takaqiao/fvttAutoTranslateTool/releases/download/av-v14-hotfix-v0.6.27/module.json)，下载为同一标签的 `av-v14-hotfix-0.6.27.zip`。本仓库包含多个模组，不能用全仓库 `releases/latest/download` 作为此模组的清单。
+安装清单使用 [av-v14-hotfix-v0.6.28 的 module.json](https://github.com/takaqiao/fvttAutoTranslateTool/releases/download/av-v14-hotfix-v0.6.28/module.json)，下载为同一标签的 `av-v14-hotfix-0.6.28.zip`。本仓库包含多个模组，不能用全仓库 `releases/latest/download` 作为此模组的清单。
 
-运行 `node --test tests/*.test.mjs` 验证隔离回归。原生函数及源码哈希记录在 `tests/fixtures`；音频、设置操作符等测试需本地 Foundry 安装，可用 `FVTT_NATIVE_APP` 指定 `resources/app`。具体运行命令、数量、跳过项和部署哈希以本次修复回执为准。
+运行 `node --test tests/*.test.mjs` 验证隔离回归。原生函数摘录及其来源记录在 `tests/fixtures`；音频、设置操作符等测试需本地 Foundry 安装，可用 `FVTT_NATIVE_APP` 指定 `resources/app`。具体运行命令、数量、跳过项和部署哈希以本次修复回执为准。
 
 本安装包只包含 Hotfix 自己的文件。另有第三方自动化的 GM 举盾结算修复、Sequencer 4.2.3 动画取消修复和 Trigger Engine 来源类型检查，单独记录与部署，不由此安装包代替。Sequencer 4.3.0 的 `_initialize` 与 `_createSprite` 已自带初始化取消保护，使用 4.3.0 的世界不需要该文件补丁。Narrator、Party Automation、Prime 及世界地图资源不属于本包。
 

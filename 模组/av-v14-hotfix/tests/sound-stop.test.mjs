@@ -77,8 +77,30 @@ test('streamed media keeps native pause and unload and never receives buffer sto
   const f=await fixture(t),s=f.make();s.buffer=null;let paused=0,removed=0;s.element={duration:1000,currentTime:0,play(){},pause(){paused++;},remove(){removed++;},src:'stream'};
   await s.play();await s.stop();assert.equal(paused,1);assert.equal(removed,1);assert.equal(s.element,null);assert.equal(f.count('stop'),0);
 });
-test('unknown source fingerprints decline installation',async t=>{
-  const f=await fixture(t,{patched:false});f.Sound.prototype.stop=async function changedStop(){};const result=await f.install();assert.equal(result?.status,'unsupported-source');assert.equal(f.wrapper,undefined);
+test('Sound members with other function bodies are still wrapped',async t=>{
+  const f=await fixture(t,{patched:false}),{stop,_createNodes}=f.Sound.prototype;
+  f.Sound.prototype.stop=function(...args){return stop.apply(this,args);};
+  f.Sound.prototype._createNodes=function(...args){return _createNodes.apply(this,args);};
+  assert.equal(f.install().status,'installed');
+  const s=f.make();await s.play({loop:true});await s.stop();assert.equal(f.count('stop'),1);
+});
+for(const key of ['_disconnectPipeline','sourceNode','gain'])test(`a Sound without its own ${key} is not wrapped`,async t=>{
+  const f=await fixture(t,{patched:false});delete f.Sound.prototype[key];
+  assert.equal(f.install().status,'unsupported-runtime');assert.equal(f.wrapper,undefined);
+});
+test('installation returns its result synchronously',async t=>{
+  const f=await fixture(t,{patched:false}),result=f.install();
+  assert.ok(!(result instanceof Promise));assert.equal(result.status,'installed');
+});
+test('the extra stop counter rises on a completed stop only and travels with every later report',async t=>{
+  const f=await fixture(t),{stats}=f.reports.at(-1);assert.deepEqual(stats,{extraStops:0});
+  const s=f.make();await s.play({loop:true});await s.stop();assert.equal(stats.extraStops,1);
+  const own=f.make();await own.play({loop:true});own.stop=f.Sound.prototype.stop.bind(own);await own.stop();assert.equal(stats.extraStops,1);
+  const failing=f.make();await failing.play({loop:true});failing.sourceNode.failStop=true;await failing.stop();
+  assert.equal(stats.extraStops,1);assert.equal(f.reports.at(-1).status,'native-stop-failed');assert.equal(f.reports.at(-1).stats,stats);
+  f.runtime.Hooks.callAll('libWrapper.Register','other-module','foundry.audio.Sound.prototype._stop','MIXED',{},42);
+  assert.equal(f.reports.at(-1).status,'foreign-wrapper');assert.equal(f.reports.at(-1).stats,stats);
+  const later=f.make();await later.play({loop:true});await later.stop();assert.equal(stats.extraStops,1);
 });
 test('matching native Sound still stops buffer sources on later core generations',async t=>{
   const f=await fixture(t,{patched:false});f.game.release.generation=15;const result=await f.install();assert.equal(result?.status,'installed');const s=f.make();await s.play({loop:true});await s.stop();assert.equal(f.count('stop'),1);
@@ -100,9 +122,10 @@ test('cancelling delayed resume does not stop its unstarted replacement node',as
   const play=s.play({delay:1});await f.tick();const stop=s.stop();await Promise.all([play,stop]);
   assert.equal(f.count('start'),1);assert.equal(f.count('stopAttempt'),1);assert.equal(s.sourceNode,undefined);
 });
-test('a source changed while hashing is not wrapped',async t=>{
-  const f=await fixture(t,{patched:false});const installation=f.install();f.Sound.prototype.pause=function changedPause(){};
-  assert.equal((await installation).status,'source-changed-during-validation');assert.equal(f.wrapper,undefined);
+test('a node stop accessor that yields another function per read is not wrapped',async t=>{
+  const f=await fixture(t,{patched:false});
+  Object.defineProperty(f.runtime.AudioBufferSourceNode.prototype,'stop',{configurable:true,get(){return function(){};}});
+  assert.equal(f.install().status,'source-changed-during-validation');assert.equal(f.wrapper,undefined);
 });
 test('a later prototype change falls back to the original path',async t=>{
   const f=await fixture(t),s=f.make();await s.play({loop:true});const prior=f.Sound.prototype.play;f.Sound.prototype.play=function(...args){return prior.apply(this,args);};

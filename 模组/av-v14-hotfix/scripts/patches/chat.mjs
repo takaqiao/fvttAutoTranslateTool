@@ -29,7 +29,8 @@ function restoreProperty(object, key, replacement, descriptor) {
 }
 
 export function createChatDeleteWrapper({
-  schedule = (callback, delay) => setTimeout(callback, delay)
+  schedule = (callback, delay) => setTimeout(callback, delay),
+  stats = {batches: 0, messages: 0}
 } = {}) {
   const nodeAdapters = new WeakMap();
   const batches = new WeakMap();
@@ -38,6 +39,9 @@ export function createChatDeleteWrapper({
     if (batches.get(app) !== batch) return;
     batches.delete(app);
     const records = batch.records;
+    // messages - batches is the number of native completions coalesced away.
+    stats.batches++;
+    stats.messages += records.length;
     const last = records.at(-1);
     try {
       const nodes = new Set(records.map(record => record.node));
@@ -163,10 +167,12 @@ export function createChatDeleteWrapper({
   };
 }
 
-export function installChatDeleteCoalescing({moduleId, libWrapper = globalThis.libWrapper, ...options} = {}) {
-  if (!moduleId || typeof libWrapper?.register !== "function") return false;
-  if (typeof globalThis.foundry?.applications?.sidebar?.tabs?.ChatLog?.prototype?.deleteMessage !== 'function') return false;
+export function installChatDeleteCoalescing({moduleId, runtime = globalThis, libWrapper = runtime.libWrapper, report, ...options} = {}) {
+  const finish = result => {report?.({feature: 'chat', ...result}); return result;};
+  if (!moduleId || typeof libWrapper?.register !== "function"
+    || typeof runtime.foundry?.applications?.sidebar?.tabs?.ChatLog?.prototype?.deleteMessage !== 'function') return finish({status: 'unsupported'});
+  const stats = {batches: 0, messages: 0};
   libWrapper.register(moduleId, "foundry.applications.sidebar.tabs.ChatLog.prototype.deleteMessage",
-    createChatDeleteWrapper(options), "WRAPPER");
-  return true;
+    createChatDeleteWrapper({...options, stats}), "WRAPPER");
+  return finish({status: 'installed', stats});
 }

@@ -124,7 +124,9 @@ test('explicit dotted fields inside a modern level also win over legacy peer fie
   });
 });
 
-function environment(version = '13.2.0', active = true) {
+// The importer and its adventure packs stay in the fixture: the retired
+// pre-registration must no longer touch them.
+function environment() {
   class Message { static create() {} static createDocuments() {} }
   class MessageImpl extends Message {}
   class Scene { static create() {} static createDocuments() {} update() {} }
@@ -134,7 +136,7 @@ function environment(version = '13.2.0', active = true) {
   const g = {
     ChatMessage: Message, Scene,
     CONFIG: {ChatMessage: {documentClass: MessageImpl}, Scene: {documentClass: SceneImpl}},
-    game: {modules: new Map([['sf2e-murder-in-metal-city', {active, version}]]),
+    game: {modules: new Map([['sf2e-murder-in-metal-city', {active: true, version: '13.2.0'}]]),
       packs: [{metadata: {type: 'Adventure', packageName: 'missing'}}, {metadata: {type: 'Adventure', packageName: 'present'}}, {metadata: {type: 'Actor', packageName: 'actors'}}],
       settings: {settings: values, register(namespace, key, config) {registrations.push({namespace, key, config}); values.set(`${namespace}.${key}`, config);}}
     }
@@ -175,15 +177,53 @@ test('a system override is wrapped separately, while inherited static APIs are n
   assert.equal(targets.includes('CONFIG.Scene.documentClass.prototype.update'), true);
 });
 
-test('only the active importer receives missing adventure settings, without replacing existing ones', () => {
-  for (const [version, active, expected] of [['13.2.0', true, 1], ['13.2.0', false, 0], ['14.0.0', true, 1]]) {
-    const {g, registrations} = environment(version, active);
-    const before = g.game.settings.settings.get('present.autoOpenAdventures');
-    registerLegacyCompat({g, registerWrapper() {}});
-    assert.equal(registrations.length, expected);
-    assert.equal(g.game.settings.settings.get('present.autoOpenAdventures'), before);
-    if (expected) assert.deepEqual(registrations[0], {namespace: 'missing', key: 'autoOpenAdventures', config: {scope: 'world', config: false, type: Boolean, default: false}});
-  }
+test('the retired adventure-setting pre-registration no longer registers anything for the active importer', () => {
+  const {g, registrations} = environment();
+  const reports = [];
+  const result = registerLegacyCompat({g, registerWrapper() {}, report: value => reports.push(value)});
+  assert.equal(registrations.length, 0);
+  assert.deepEqual([...g.game.settings.settings.keys()], ['present.autoOpenAdventures']);
+  assert.equal(Object.hasOwn(result, 'adventureSettings'), false);
+  assert.equal(reports.length, 1);
+  assert.equal(reports[0].feature, 'legacy-compat');
+  assert.equal(reports[0].status, 'installed');
+  assert.equal(Object.hasOwn(reports[0], 'adventureSettings'), false);
+});
+
+test('without a supported schema the importer alone no longer makes the feature count as installed', () => {
+  const {g, registrations} = environment();
+  delete g.ChatMessage.schema;
+  delete g.Scene.schema;
+  const reports = [];
+  const result = registerLegacyCompat({g, registerWrapper() {assert.fail('no wrapper expected');}, report: value => reports.push(value)});
+  assert.deepEqual(result.wrappers, []);
+  assert.equal(registrations.length, 0);
+  assert.deepEqual([reports[0].status, reports[0].chatStatus, reports[0].sceneStatus], ['unsupported-schema', 'unsupported-schema', 'unsupported-schema']);
+});
+
+test('hit counters count only calls whose data was migrated, once per public call', () => {
+  const {g} = environment();
+  const wrappers = new Map(), reports = [];
+  const {stats} = registerLegacyCompat({g, registerWrapper: (target, fn) => wrappers.set(target, fn), report: value => reports.push(value)});
+  assert.equal(reports[0].stats, stats);
+  assert.deepEqual(stats, {chat: 0, sceneCreate: 0, sceneUpdate: 0});
+  const pass = value => value;
+  const modernMessage = {type: 'base', content: 'new'}, modernScene = {name: 'Modern'};
+  assert.equal(wrappers.get('ChatMessage.createDocuments').call(g.ChatMessage, pass, modernMessage), modernMessage);
+  assert.equal(wrappers.get('Scene.create').call(g.Scene, pass, modernScene), modernScene);
+  assert.equal(wrappers.get('Scene.prototype.update').call(Object.assign(new g.Scene(), {firstLevel: scene.firstLevel}), pass, modernScene), modernScene);
+  assert.deepEqual(stats, {chat: 0, sceneCreate: 0, sceneUpdate: 0});
+  wrappers.get('ChatMessage.createDocuments').call(g.ChatMessage, pass, [{type: 2}, {type: 'base'}]);
+  // Native create delegates to createDocuments with the data already migrated.
+  const created = wrappers.get('Scene.create').call(g.Scene, pass, {img: 'map.webp'});
+  wrappers.get('Scene.createDocuments').call(g.Scene, pass, created);
+  wrappers.get('Scene.prototype.update').call(Object.assign(new g.Scene(), {firstLevel: scene.firstLevel}), pass, {img: 'map.webp'});
+  assert.deepEqual(stats, {chat: 1, sceneCreate: 1, sceneUpdate: 1});
+  // A wrapper that stood down because the live schema changed does not count.
+  g.ChatMessage.schema.fields.style = new g.foundry.data.fields.StringField();
+  wrappers.get('ChatMessage.createDocuments').call(g.ChatMessage, pass, {type: 2});
+  assert.equal(stats.chat, 1);
+  assert.doesNotThrow(() => structuredClone(stats));
 });
 
 for(const kind of ['missing','type','style','api'])test(`incompatible chat ${kind} leaves numeric data untouched`,()=>{
@@ -252,13 +292,4 @@ test('the native configured document classes satisfy the migration contract',t=>
   assert.deepEqual(wrappers.get('ChatMessage.createDocuments').call(BaseChatMessage,value=>value,{type:2}),{style:2});
   assert.deepEqual(wrappers.get('Scene.create').call(BaseScene,value=>value,{img:'map.webp'}),
     {initialLevel:'defaultLevel0000',levels:[{_id:'defaultLevel0000',name:'Default',background:{src:'map.webp'}}]});
-});
-
-test('adventure settings require registration APIs and a usable namespace',()=>{
- for(const change of [g=>g.game.settings.register=null,g=>g.game.settings.settings=null]){
-  const {g,registrations}=environment();change(g);
-  assert.doesNotThrow(()=>registerLegacyCompat({g,registerWrapper(){}}));assert.equal(registrations.length,0);
- }
- const {g,registrations}=environment();g.game.packs=[...g.game.packs,...[{},true,42,' '].map(packageName=>({metadata:{type:'Adventure',packageName}}))];
- registerLegacyCompat({g,registerWrapper(){}});assert.equal(registrations.length,1);
 });
