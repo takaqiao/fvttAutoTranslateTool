@@ -161,9 +161,11 @@ Hooks.once('ready',async()=>{
  const workbenchPrivacy=await loadSalubriousWorkbench({game});
  if(workbenchPrivacy.ready)salubriousMessagePrivacy.enableWorkbench(workbenchPrivacy);
  let nativeBridgeVerification=Object.freeze({ready:false,reason:'system-source-unavailable'}),pf2eSource;
- try{const response=await fetch('systems/pf2e/pf2e.mjs',{cache:'no-store',signal:AbortSignal.timeout(10000)});if(response.ok){pf2eSource=new Uint8Array(await response.arrayBuffer());nativeBridgeVerification=await verifyNativeIWRBridge({game,source:pf2eSource});}}catch{/* Report via the feature diagnostic; other providers still initialize. */}
+ // Revalidate rather than bypass the HTTP cache: the verified bytes are still
+ // the server's current file, and an unchanged bundle costs a 304 instead of a download.
+ try{const response=await fetch('systems/pf2e/pf2e.mjs',{cache:'no-cache',signal:AbortSignal.timeout(10000)});if(response.ok){pf2eSource=new Uint8Array(await response.arrayBuffer());nativeBridgeVerification=await verifyNativeIWRBridge({game,source:pf2eSource});}}catch{/* Report via the feature diagnostic; other providers still initialize. */}
  if(pf2eSource&&game.modules.get('pf2e-toolbelt')?.active){
-  try{const response=await fetch('modules/pf2e-toolbelt/scripts/main.js',{cache:'no-store',signal:AbortSignal.timeout(10000)});if(response.ok)await verifyManualPoolProviders({game,pf2eSource,toolbeltSource:new Uint8Array(await response.arrayBuffer())});}catch{/* Missing qualification keeps only the shared-pool adapter unavailable. */}
+  try{const response=await fetch('modules/pf2e-toolbelt/scripts/main.js',{cache:'no-cache',signal:AbortSignal.timeout(10000)});if(response.ok)await verifyManualPoolProviders({game,pf2eSource,toolbeltSource:new Uint8Array(await response.arrayBuffer())});}catch{/* Missing qualification keeps only the shared-pool adapter unavailable. */}
  }
  const shieldAdapter=createShieldDamageAdapter({game,nativeBridgeVerification,onError:report,createMessageMiddleware:salubriousMessagePrivacy.createMessageMiddleware});
  const scar=SPIRITUAL_SCAR_WORLDS.has(game.world?.id)&&game.system?.id==='pf2e'?createSpiritualScarProvider({game,fromUuid,nativeAdapter:shieldAdapter,reactionRestriction,getRollContext:roll=>cycle?.getRollContext(roll),followup:createSpiritualScarFollowup({game,fromUuid,Hooks,runTargetSave:targetSaves['spiritual-scar'].run,onError:report}),onError:report}):null;

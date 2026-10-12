@@ -11,7 +11,7 @@ function readySource() {
 test('actual ready initialization qualifies the fetched pair before exploration creates its readers', async () => {
  const events = [], pf = Uint8Array.of(1, 2, 3), tb = Uint8Array.of(4, 5), game = {system: {id: 'pf2e'}, modules: new Map([['pf2e-toolbelt', {active: true}]])};
  const bridgeProof = {ready: true};
- const fetch = async (url, options) => { events.push(url); assert.equal(options.cache, 'no-store'); return {ok: true, arrayBuffer: async () => url.startsWith('systems/') ? pf.buffer : tb.buffer}; };
+ const fetch = async (url, options) => { events.push(url); assert.equal(options.cache, 'no-cache'); return {ok: true, arrayBuffer: async () => url.startsWith('systems/') ? pf.buffer : tb.buffer}; };
  const result = await readySource()(fetch, game, async input => { assert.deepEqual(input.source, pf); return bridgeProof; }, async input => { assert.equal(input.game, game); assert.deepEqual(input.pf2eSource, pf); assert.deepEqual(input.toolbeltSource, tb); events.push('pair-qualified'); return {ready: true}; });
  assert.equal(result, bridgeProof);
  assert.deepEqual(events, ['systems/pf2e/pf2e.mjs', 'modules/pf2e-toolbelt/scripts/main.js', 'pair-qualified']);
