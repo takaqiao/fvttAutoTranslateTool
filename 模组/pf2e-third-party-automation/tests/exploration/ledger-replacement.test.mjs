@@ -40,7 +40,8 @@ async function world({seed,initialized=true,configured=OLD}={}){
   if(initialized){const genesis=await createGenesisRevision({rootUUID:OLD,epoch:'old-epoch',nonce:'old-genesis',writerUserId:'G',writerClientId:'earlier-tab',seed});raw.pages.push({_id:revisionId(0),name:'Exploration revision 0',type:'text',ownership:{default:0},flags:{[MODULE_ID]:{explorationRevision:encodeRevision(genesis)}}})}
   docs.set(OLD,raw);
  }
- const gm={id:'G',isGM:true,active:true,getFlag:(_scope,key)=>flags[key]??null,setFlag:async(_scope,key,value)=>{flags[key]=value},unsetFlag:async(_scope,key)=>{delete flags[key]}};
+ // Foundry runs updateUser on the client that changed the user as well, so clearing the flag reaches this page's own hook.
+ const gm={id:'G',isGM:true,active:true,getFlag:(_scope,key)=>flags[key]??null,setFlag:async(_scope,key,value)=>{flags[key]=value},unsetFlag:async(_scope,key)=>{delete flags[key];for(const handler of hooks.get('updateUser')??[])handler(gm)}};
  const users=new Map([['G',gm],['G2',{id:'G2',isGM:true,active:true}]]);users.activeGM=gm;
  const actors=new Map([['H',20],['P',1]].map(([id,hp])=>[id,{id,uuid:`Actor.${id}`,name:id,type:'character',items:[],testUserPermission:()=>true,system:{attributes:{hp:{value:hp,max:20,temp:0}},resources:{focus:{value:0,max:0}}}}]));
  const game={user:gm,users,actors,modules:new Map(),packs:new Map(),messages:new Map(),time:{worldTime:9000},system:{id:'pf2e',version:'8.6.1'},pf2e:{actions:new Map()},paused:false,togglePause:paused=>{game.paused=paused;return paused},
@@ -62,7 +63,7 @@ async function world({seed,initialized=true,configured=OLD}={}){
    const ack={type,action,operation:structuredClone(operation),broadcast:false,userId,result,...error?{error}:{}};
    queueMicrotask(()=>alterACK?alterACK(ack,respond,request):respond(ack));
   }}};
- const store=name=>createDocumentStore({game,writerClientId:name,nonce:()=>`nonce-${++sequence}`,timeoutMs:500,today:()=>'2026-10-13'});
+ const store=name=>createDocumentStore({game,writerClientId:name,nonce:()=>`nonce-${++sequence}`,timeoutMs:500,rootStamp:()=>'2026-10-13 21:07'});
  function client(name){const tab=store(name),ledger=createLedger({...tab,isAuthority:()=>true,identity:()=>({userId:game.user.id,clientNonce:name})});return {store:tab,ledger,setup:createLedgerSetup({game,store:tab,ledger,writerClientId:name})}}
  function runtime(){
   hooks=new Map();const errors=[],nativeCasts={addMatcher(){},addCapture(){},addActorUpdateMiddleware(){},addConsumePolicy(){},addObserver(){}};
@@ -97,7 +98,7 @@ test('replacement creates an initialized empty root, then moves the setting and 
  assert.deepEqual(w.events,[`root ${NEW}`,`page ${NEW}`,`setting ${NEW}`]);
  const root=w.docs.get(NEW);assert.equal(root.ownership.default,0);
  // The archive keeps its name; the new root is told apart by the day it was made.
- assert.equal(root.name,'探索活动账本 2026-10-13');assert.equal(w.docs.get(OLD).name,'探索活动账本');
+ assert.equal(root.name,'探索活动账本 2026-10-13 21:07');assert.equal(w.docs.get(OLD).name,'探索活动账本');
 assert.deepEqual(root.pages.map(page=>page._id),[revisionId(0)]);
  const genesis=decodeRevision(root.pages[0].flags[MODULE_ID].explorationRevision);assert.equal(genesis.rootUUID,NEW);assert.equal(genesis.revision,0);assert.deepEqual(genesis.seed,emptyLedger());
  assert.deepEqual(root.flags[MODULE_ID].explorationLedger,emptyLedger());assert.equal(root.flags[MODULE_ID].explorationLedgerRoot.schemaVersion,1);
@@ -193,7 +194,8 @@ test('the panel replaces a ledger whose stopped sessions block recovery, and the
  const waiting=await render(panel);assert.match(waiting,/探索账本已切换，请重载页面后再继续。/);assert.deepEqual(actionsIn(waiting),['refresh']);
  await assert.rejects(page.api.start(config),/exploration-ledger-setup-required/);
  // Its selection went with the old ledger, so an encounter or a rest before the reload finds nothing to stop and reports nothing.
- page.emitHook('updateCombat',{started:true,previous:{round:0},round:1});page.emitHook('pf2e.restForTheNight',w.game.actors.get('H'));
+ // Clearing the flag already ran this page's updateUser hook; a player connecting runs the same one. Neither reaches for a ledger.
+ page.emitHook('updateCombat',{started:true,previous:{round:0},round:1});page.emitHook('pf2e.restForTheNight',w.game.actors.get('H'));page.emitHook('userConnected',w.game.users.get('G2'));
  await new Promise(resolve=>setImmediate(resolve));assert.deepEqual(page.errors,[]);
  // The reload. This GM's flag may still name a session of the old ledger; the new one holds no such session.
  w.flags.explorationSession='M';
@@ -258,7 +260,7 @@ test('replacement is offered only for a ready ledger this panel can reach',async
 test('the replacement dialog states what is left behind, and replaces only with the three confirmations it collected',async t=>{
  const f=panelFixture(t,{answer:press('replace',confirmations)});await f.app.act('replaceLedger',null);
  assert.equal(f.ui.dialogs.length,1);const {content}=f.ui.dialogs[0];
- for(const line of ['旧账本里还有 5 场没结束的会话、1 个未确认的时钟。','换新之后它们不再阻挡，也不会被重放；以角色卡上现在的 HP 和世界时间为准。','旧账本原样保留为归档。新账本的名字带今天的日期，清理归档时别删错。','有限药品的跨会话用量会从新账本重新算起。'])assert.ok(content.includes(`<p>${line}</p>`),line);
+ for(const line of ['旧账本里还有 5 场没结束的会话、1 个未确认的时钟。','换新之后它们不再阻挡，也不会被重放；以角色卡上现在的 HP 和世界时间为准。','旧账本原样保留为归档。新账本的名字带今天的日期和时间，清理归档时别删错。','有限药品的跨会话用量会从新账本重新算起。'])assert.ok(content.includes(`<p>${line}</p>`),line);
  for(const [name,label] of [['issuersStopped','所有旧恢复操作均已停止'],['clientsReloaded','相关客户端均已重载'],['recoveryDisabled','当前没有自动恢复正在执行']])assert.ok(content.includes(`<input type="checkbox" name="${name}" required> ${label}</label>`),name);
  assert.deepEqual(f.calls,[['preview'],['replace',confirmations]]);assert.deepEqual(f.ui.infos,['账本已更换，请重载页面后再准备恢复。']);assert.deepEqual(f.renders,[true]);
 });

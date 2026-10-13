@@ -52,7 +52,7 @@ test('the panel renders every session an earlier version stopped, and offers eac
  for(const id of ['A','B','C','D','M']){const actions=mainActions(await f.render(id));assert.ok(actions.includes('review'),id);assert.ok(!actions.includes('start'),id)}
  const unsettled=await f.render('D');assert.match(unsettled,/<summary>首轮登记<\/summary>/);assert.doesNotMatch(unsettled,/首轮手动/);
  // What a blocked start throws has a Chinese reading wherever a reason is shown.
- assert.match(formatSessionResult({durationSeconds:0,remainingHP:0,status:'unresolved-evidence-no-replay'}),/旧会话还有未确认的结果或时间，需先核对/);
+ assert.match(formatSessionResult({durationSeconds:0,remainingHP:0,status:'unresolved-evidence-no-replay'}),/旧会话还有未确认的结果或时间；先在那场会话里处理，处理不了可换新账本/);
 assert.ok(!mainActions(unsettled).includes('resume'));assert.match(unsettled,/时间相关效果尚未完成确认/);assert.doesNotMatch(unsettled,/time-effects-unconfirmed/);
  assert.match(await f.render('M'),/已确认经过 0 分钟/);assert.equal(f.game.paused,false);assert.deepEqual(f.pauses,[]);
 });
@@ -119,7 +119,8 @@ test('the ledger refuses every field the retired features used to write',async()
 
 // Earlier versions could leave a shared-pool claim (on a manual recording) or a first-round reservation (in an
 // automatic session) unsettled. Nothing writes them now; one that is still there blocks a new or resumed recovery
-// for the same members until a GM reviews its session, as it did then.
+// for the same members, as it did then. Reviewing its session closes the session and leaves the row unsettled, so
+// the block stays; replacing the ledger is the way past it.
 test('an unsettled pool claim or checkpoint reservation from an earlier version still blocks recovery for its members',async()=>{
  const config={actorUUIDs:[H,P],startedAt:9000,cursorAt:9000,budgetEndsAt:16200,goalsByPool:[{poolUUID:P,targetHP:20}]};
  const row=(id,sessionId,patch)=>({id,sessionId,providerId:'manual',actorUUID:H,patientUUIDs:[P],hpPoolUUIDs:[P],startedAt:0,endsAt:600,durationSeconds:600,order:0,state:'awaiting-evidence',options:{missing:[]},proof:{useId:id,checkIds:[],resultIds:[],receiptIds:[],immunityIds:[]},source:{manual:true,type:'workbench'},...patch});

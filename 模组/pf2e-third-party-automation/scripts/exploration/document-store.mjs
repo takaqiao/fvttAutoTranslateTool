@@ -4,9 +4,9 @@ import {createRevisionStore} from './revision-store.mjs';
 export const isActiveGM=game=>!!game.user?.isGM&&game.users?.activeGM?.id===game.user.id;
 export const requireGMRead=game=>{if(game.user?.isGM!==true)throw Error('gm-read-required')};
 
-const localDate=()=>{const d=new Date(),two=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${two(d.getMonth()+1)}-${two(d.getDate())}`};
+const localMinute=()=>{const d=new Date(),two=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${two(d.getMonth()+1)}-${two(d.getDate())} ${two(d.getHours())}:${two(d.getMinutes())}`};
 
-export function createDocumentStore({game,writerClientId=globalThis.crypto.randomUUID(),nonce=()=>globalThis.crypto.randomUUID(),timeoutMs=15000,today=localDate}) {
+export function createDocumentStore({game,writerClientId=globalThis.crypto.randomUUID(),nonce=()=>globalThis.crypto.randomUUID(),timeoutMs=15000,rootStamp=localMinute}) {
   if(!Number.isSafeInteger(timeoutMs)||timeoutMs<=0)throw Error('invalid-document-timeout');
   let pinnedRoot=null,requiresReload=false;
   const setting=()=>game.settings.get(MODULE_ID,'explorationLedgerUUID');
@@ -112,7 +112,7 @@ export function createDocumentStore({game,writerClientId=globalThis.crypto.rando
   async function replace(options){
     setup(options);const before=setting();
     if(!before)throw Error('root-not-configured');
-    const rootUUID=await createRoot(`探索活动账本 ${today()}`);
+    const rootUUID=await createRoot(`探索活动账本 ${rootStamp()}`);
     try{
       const epoch=nonce(),genesis=await createGenesisRevision({rootUUID,epoch,nonce:nonce(),writerUserId:game.user.id,writerClientId:typeof writerClientId==='function'?writerClientId():writerClientId,seed:emptyLedger()});
       await revisionsFor(()=>rootUUID).initialize({epoch,expectedSourceDigest:genesis.sourceDigest,allowStoppedLegacy:true});

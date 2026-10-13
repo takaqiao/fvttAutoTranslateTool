@@ -57,7 +57,7 @@ const evidenceLabels={
  'clock-in-flight':'已有时间提交正在执行','time-effects-unconfirmed':'时间相关效果尚未完成确认',
  'passive-completion-unavailable':'被动恢复尚无可确认完成的适配','passive-completion-unproven':'被动恢复缺少完成回执',
  'missing-passive-checkpoint':'缺少被动恢复检查点','passive-rules-changed':'检查点内的被动恢复规则发生变化',
- 'unresolved-evidence-no-replay':'旧会话还有未确认的结果或时间，需先核对',
+ 'unresolved-evidence-no-replay':'旧会话还有未确认的结果或时间；先在那场会话里处理，处理不了可换新账本',
  'replace-ledger-session-active':'仍有恢复会话在进行，请先停止再换新账本','replace-ledger-ready-required':'探索账本尚未就绪，暂不能换新'
 };
 const evidenceText=value=>labels[value]??evidenceLabels[value]??value;
@@ -75,7 +75,7 @@ async function setupChoices({game,select=false}){
  return foundry.applications.api.DialogV2.wait({window:{title:select?'选择探索账本':'准备探索账本'},content:`${select?`<label>账本 <select name="rootUUID">${candidates.map(j=>`<option value="${escapeHTML(j.uuid)}">${escapeHTML(j.name)} (${escapeHTML(j.id)})</option>`).join('')}</select></label>`:''}<p>先停止正在运行的恢复，并让相关 GM 和玩家重载到当前版本。准备完成后不会自动开始恢复。</p>${setupConfirmations}`,buttons:[{action:'prepare',label:select?'选择账本':'准备账本',callback:(_event,b)=>{const form=new FormData(b.form);return {...confirmedSetup(form),...select?{rootUUID:form.get('rootUUID')}:{}}}},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});
 }
 async function replaceChoices({unfinishedSessions,unconfirmedClocks}){
- return foundry.applications.api.DialogV2.wait({window:{title:'换新探索账本'},content:`<p>旧账本里还有 ${escapeHTML(unfinishedSessions)} 场没结束的会话、${escapeHTML(unconfirmedClocks)} 个未确认的时钟。</p><p>换新之后它们不再阻挡，也不会被重放；以角色卡上现在的 HP 和世界时间为准。</p><p>旧账本原样保留为归档。新账本的名字带今天的日期，清理归档时别删错。</p><p>有限药品的跨会话用量会从新账本重新算起。</p>${setupConfirmations}`,buttons:[{action:'replace',label:'换新账本',callback:(_event,b)=>confirmedSetup(new FormData(b.form))},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});
+ return foundry.applications.api.DialogV2.wait({window:{title:'换新探索账本'},content:`<p>旧账本里还有 ${escapeHTML(unfinishedSessions)} 场没结束的会话、${escapeHTML(unconfirmedClocks)} 个未确认的时钟。</p><p>换新之后它们不再阻挡，也不会被重放；以角色卡上现在的 HP 和世界时间为准。</p><p>旧账本原样保留为归档。新账本的名字带今天的日期和时间，清理归档时别删错。</p><p>有限药品的跨会话用量会从新账本重新算起。</p>${setupConfirmations}`,buttons:[{action:'replace',label:'换新账本',callback:(_event,b)=>confirmedSetup(new FormData(b.form))},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});
 }
 const minutes=value=>Math.round(value/60*10)/10;
 function historyAnnotations(activity){
