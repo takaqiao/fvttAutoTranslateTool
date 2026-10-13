@@ -158,6 +158,16 @@ test('stopped sessions and an unconfirmed clock are counted, then left behind in
  assert.deepEqual(await reloaded.setup.replacePreview(),{unfinishedSessions:0,unconfirmedClocks:0});
 });
 
+// The README tells a GM who deleted the live ledger instead of the archive how to get back.
+test('after the live ledger is deleted by mistake, the archive can be selected again and replaced once more',async()=>{
+ const w=await world({seed:stoppedLedger()});await w.client('this-tab').setup.replace(confirmations);w.docs.delete(NEW);
+ const lost=w.client('reloaded-tab');assert.deepEqual(await lost.setup.status(),{state:'blocked',reason:'root-not-found'});
+ await assert.rejects(lost.setup.replace(confirmations),/root-not-found/);
+ assert.equal((await lost.setup.select({...confirmations,rootUUID:OLD})).requiresReload,true);assert.equal(w.setting(),OLD);
+ const back=w.client('second-reload');assert.equal((await back.setup.status()).state,'ready');
+ const again=await back.setup.replace(confirmations);assert.equal(again.previousRootUUID,OLD);assert.notEqual(again.rootUUID,NEW);assert.equal(w.setting(),again.rootUUID);
+ const status=await w.client('third-reload').setup.status();assert.equal(status.state,'ready');assert.equal(status.revision,0);
+});
 test('only an active GM with every confirmation can replace, and only a ready ledger',async()=>{
  const refused=async(w,error)=>{const {setup}=w.client('this-tab');await assert.rejects(setup.replace(confirmations),error);await assert.rejects(setup.replacePreview(),error);assert.deepEqual(writes(w),[]);assert.deepEqual(w.settingsWrites,[])};
  const legacy=await world({seed:stoppedLedger(),initialized:false});assert.equal((await legacy.client('status').setup.status()).state,'legacy');await refused(legacy,/replace-ledger-ready-required/);
