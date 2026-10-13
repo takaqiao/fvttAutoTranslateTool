@@ -1,16 +1,18 @@
 # Automatic source patch maintenance
 
-The managed Linux startup entry restores the necessary PF2e, Toolbelt and Patreon source observations before Foundry loads them. Matching original source is patched automatically. Package versions and full-file hashes describe the input; they do not authorize a patch. A changed critical seam is reported for adaptation.
+The managed Linux startup entry restores the necessary PF2e and Patreon source observations before Foundry loads them. Matching original source is patched automatically. Package versions and full-file hashes describe the input; they do not authorize a patch. A changed critical seam is reported for adaptation.
 
 The fixed targets under the configured Foundry data path are:
 
 | Group | File | Observation |
 |---|---|---|
-| native | `Data/systems/pf2e/pf2e.mjs` | IWR continuation and original shared-pool application |
-| native | `Data/modules/pf2e-toolbelt/scripts/main.js` | original owner/GM shared-pool completion |
+| native | `Data/systems/pf2e/pf2e.mjs` | IWR continuation |
+| native | `Data/modules/pf2e-toolbelt/scripts/main.js` | none; read as a member of the group and never written |
 | patreon | `Data/modules/patreon-v3/src/index.js` | original world-time effects and treatment immunity completion |
 
-Both native candidates must match before either native file changes. Patreon is independent. Existing runtime hooks remain in this module. These file observations retain original input, returned Promises and private handlers that the public hooks do not expose reliably.
+Only the PF2e file of the native group is written. Toolbelt stays a member so that a pending record from an earlier release, which can name both files, still recovers: its file has to be present and readable, and its contents no longer have to match a seam. Patreon is independent. Existing runtime hooks remain in this module. These file observations retain original input, returned Promises and private handlers that the public hooks do not expose reliably.
+
+Releases before 0.9.45 also wrote manual shared-pool patches into PF2e and Toolbelt. They are no longer written and are not removed: an installed one stays until its package updates, and this module no longer subscribes to it.
 
 Already patched source is skipped. Before replacing source, the entry saves original bytes in `Backups/pf2e-third-party-patches`, checks generated syntax and rechecks the source, package manifests and idle service guard. Replacements use temporary files in the source directory. A pending record contains only changed members of this fixed group. If a write fails or startup was interrupted between native replacements, the next idle start restores the known originals before rebuilding. An entirely installed pending group is finalized. Unknown later edits or corrupt backups stop that group's recovery and are preserved for inspection.
 
