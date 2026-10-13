@@ -111,3 +111,26 @@ test('the ledger refuses every field the retired features used to write',async()
  for(const field of ['manual','manualCheckpoint','manualPoolIssuer'])await assert.rejects(ledger.updateSession('S',{[field]:true},options),/immutable-session/);
  const state=await ledger.all();assert.deepEqual(state.activities,{});assert.deepEqual(Object.keys(state.sessions),['S']);
 });
+
+// Earlier versions could leave a shared-pool claim (on a manual recording) or a first-round reservation (in an
+// automatic session) unsettled. Nothing writes them now; one that is still there blocks a new or resumed recovery
+// for the same members until a GM reviews its session, as it did then.
+test('an unsettled pool claim or checkpoint reservation from an earlier version still blocks recovery for its members',async()=>{
+ const config={actorUUIDs:[H,P],startedAt:9000,cursorAt:9000,budgetEndsAt:16200,goalsByPool:[{poolUUID:P,targetHP:20}]};
+ const row=(id,sessionId,patch)=>({id,sessionId,providerId:'manual',actorUUID:H,patientUUIDs:[P],hpPoolUUIDs:[P],startedAt:0,endsAt:600,durationSeconds:600,order:0,state:'awaiting-evidence',options:{missing:[]},proof:{useId:id,checkIds:[],resultIds:[],receiptIds:[],immunityIds:[]},source:{manual:true,type:'workbench'},...patch});
+ const claim=state=>row('claimed','M',{state:'confirmed',proof:{useId:'claimed',checkIds:['check'],resultIds:['result'],receiptIds:[],immunityIds:[],poolApplications:{one:{state}}}});
+ const reservation=temporalSource=>row('reserved','A',temporalSource?{temporalSource}:{});
+ const seeded=async activity=>{
+  const sessions={A:savedSession('A',0,{cursorAt:600}),M:manualSession('M',1800)};sessions[activity.sessionId].activityIds=[activity.id];
+  return (await authorityFixture({sessions,activities:{[activity.id]:activity},clocks:{}})).client('this-tab');
+ };
+ for(const activity of [claim('pending'),reservation({type:'checkpoint-reservation'})]){
+  await assert.rejects((await seeded(activity)).createSession({id:'NEW',...config}),/unresolved-evidence-no-replay/,activity.id);
+  await assert.rejects((await seeded(activity)).resumeSession('A',{cursorAt:600}),/unresolved-evidence-no-replay/,activity.id);
+ }
+ // The same rows once settled, or without the reservation, do not block.
+ for(const activity of [claim('settled'),reservation()]){
+  assert.equal((await (await seeded(activity)).createSession({id:'NEW',...config})).status,'running',activity.id);
+  assert.equal((await (await seeded(activity)).resumeSession('A',{cursorAt:600})).status,'running',activity.id);
+ }
+});

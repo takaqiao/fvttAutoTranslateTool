@@ -231,7 +231,10 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
     if(running&&session.status!=='running')throw Error('recovery-session-stopped');
     return session;
   }
-  const unresolvedActivity=a=>(!a.source?.manual||checkpointDeclaration(a))&&(a.executor&&a.executor.state!=='settled'||['planned','started','completing','uncertain','awaiting-evidence'].includes(a.state));
+  // Nothing writes pool claims or checkpoint reservations any more. One an earlier version left unsettled still blocks, as it did then.
+  const boundManual=a=>a.source?.manual&&a.temporalSource?.type==='checkpoint-reservation';
+  const unresolvedPool=a=>Object.values(a.proof?.poolApplications??{}).some(claim=>claim.state!=='settled');
+  const unresolvedActivity=a=>unresolvedPool(a)||(!a.source?.manual||boundManual(a)||checkpointDeclaration(a))&&(a.executor&&a.executor.state!=='settled'||['planned','started','completing','uncertain','awaiting-evidence'].includes(a.state));
   const exactClock=c=>c.effectsSettled===true&&exactNativeClock(c);
   function recoveryAvailable(state,session,exceptSession){
     if(Object.values(state.sessions).some(s=>s.id!==exceptSession&&s.status==='running'&&!s.manual))throw Error('recovery-session-already-running');
