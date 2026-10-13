@@ -4,7 +4,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {authorityFixture} from './authority-fixture.mjs';
 import {createCoordinator} from '../../scripts/exploration/coordinator.mjs';
-import {createRecoveryPanel} from '../../scripts/exploration/panel.mjs';
+import {createRecoveryPanel,formatSessionResult} from '../../scripts/exploration/panel.mjs';
 import {chooseNext} from '../../scripts/exploration/policy.mjs';
 import {resolveRecoveryGoals} from '../../scripts/exploration/recovery-goals.mjs';
 
@@ -50,7 +50,10 @@ const manualRow=(sessionId,at)=>({id:'late',sessionId,providerId:'manual',actorU
 test('the panel renders every session an earlier version stopped, and offers each a reviewed close',async t=>{
  const f=await world(t,stoppedWorld());
  for(const id of ['A','B','C','D','M']){const actions=mainActions(await f.render(id));assert.ok(actions.includes('review'),id);assert.ok(!actions.includes('start'),id)}
- const unsettled=await f.render('D');assert.ok(!mainActions(unsettled).includes('resume'));assert.match(unsettled,/时间相关效果尚未完成确认/);assert.doesNotMatch(unsettled,/time-effects-unconfirmed/);
+ const unsettled=await f.render('D');assert.match(unsettled,/<summary>首轮登记<\/summary>/);assert.doesNotMatch(unsettled,/首轮手动/);
+ // What a blocked start throws has a Chinese reading wherever a reason is shown.
+ assert.match(formatSessionResult({durationSeconds:0,remainingHP:0,status:'unresolved-evidence-no-replay'}),/旧会话还有未确认的结果或时间，需先核对/);
+assert.ok(!mainActions(unsettled).includes('resume'));assert.match(unsettled,/时间相关效果尚未完成确认/);assert.doesNotMatch(unsettled,/time-effects-unconfirmed/);
  assert.match(await f.render('M'),/已确认经过 0 分钟/);assert.equal(f.game.paused,false);assert.deepEqual(f.pauses,[]);
 });
 
@@ -67,6 +70,8 @@ test('a stopped manual session cannot be resumed although its cursor equals the 
 test('a stopped manual session takes no new activity and closes after review with its saved fields intact',async t=>{
  const setup=stoppedWorld(),f=await world(t,setup);
  await assert.rejects(f.ledger.insertActivity(manualRow('M',9000)),/manual-recording-unavailable/);
+ // Nor a row of any other kind, written past the coordinator.
+ await assert.rejects(f.ledger.insertActivity({id:'direct',sessionId:'M',providerId:'treat-wounds',actorUUID:H,patientUUIDs:[P],hpPoolUUIDs:[P],startedAt:9000,endsAt:9600,state:'planned',source:{type:'coordinator'}}),/manual-recording-unavailable/);
  await assert.rejects(f.coordinator.addActivity('M',{providerId:'treat-wounds',actorUUID:H,patientUUIDs:[P],hpPoolUUIDs:[P],startedAt:9000,endsAt:9600,options:{}}),/session-driver-required/);
  await f.act('M','review');
  const closed=await f.ledger.getSession('M'),{status,stopReason,review,...kept}=closed,{status:oldStatus,stopReason:oldReason,...saved}=setup.seed.sessions.M;
@@ -85,7 +90,7 @@ function recordingWorld(){
 test('a recording session left running shows only stop, takes no new activity, and can be stopped and closed',async t=>{
  const setup=recordingWorld(),f=await world(t,setup),html=await f.render('R');
  assert.deepEqual(mainActions(html),['stop']);assert.ok(!allActions(html).some(action=>['activity','record','openActivityCheckpoint','takeover'].includes(action)));assert.match(html,/Treat Wounds/);
- await assert.rejects(f.ledger.insertActivity(manualRow('R',600)),/manual-recording-unavailable/);
+ await assert.rejects(f.ledger.insertActivity(manualRow('R',600)),/manual-recording-unavailable/);await assert.rejects(f.ledger.insertActivity({id:'direct',sessionId:'R',providerId:'treat-wounds',actorUUID:H,patientUUIDs:[P],hpPoolUUIDs:[P],startedAt:600,endsAt:1200,state:'planned',source:{type:'coordinator'}}),/manual-recording-unavailable/);
  await f.act('R','stop');
  const stopped=await f.ledger.getSession('R');assert.equal(stopped.status,'paused');assert.equal(stopped.stopReason,'user-stopped');assert.equal(stopped.driver,undefined);assert.deepEqual(stopped.activityIds,['seen']);
  assert.deepEqual(await f.ledger.getActivity('seen'),setup.seed.activities.seen);assert.equal(f.game.paused,false);assert.deepEqual(f.pauses,[]);

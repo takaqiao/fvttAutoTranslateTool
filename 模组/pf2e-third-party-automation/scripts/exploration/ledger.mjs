@@ -370,8 +370,9 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
       if(Object.hasOwn(a.proof,'manualPoolSource'))throw Error('manual-pool-source-required');
       if(finiteProofFields.some(key=>Object.hasOwn(a.proof,key)))throw Error('finite-medicine-protected-proof');
       if(s.activities[a.id])throw Error('duplicate-activity');
-      // Declared activities are created by sealActivityCheckpoint; no other caller may add a manual row.
-      if(a.source.manual)throw Error('manual-recording-unavailable');
+      // Declared activities are created by sealActivityCheckpoint; no other caller may add a manual row,
+      // and nothing is added to a manual session an earlier version saved.
+      if(a.source.manual||session.manual)throw Error('manual-recording-unavailable');
       if(atomic){
         driver(s,a.sessionId,options,caller,true);
         noOpenActivityCheckpoint(session);

@@ -4,7 +4,9 @@ import {createRevisionStore} from './revision-store.mjs';
 export const isActiveGM=game=>!!game.user?.isGM&&game.users?.activeGM?.id===game.user.id;
 export const requireGMRead=game=>{if(game.user?.isGM!==true)throw Error('gm-read-required')};
 
-export function createDocumentStore({game,writerClientId=globalThis.crypto.randomUUID(),nonce=()=>globalThis.crypto.randomUUID(),timeoutMs=15000}) {
+const localDate=()=>{const d=new Date(),two=n=>String(n).padStart(2,'0');return `${d.getFullYear()}-${two(d.getMonth()+1)}-${two(d.getDate())}`};
+
+export function createDocumentStore({game,writerClientId=globalThis.crypto.randomUUID(),nonce=()=>globalThis.crypto.randomUUID(),timeoutMs=15000,today=localDate}) {
   if(!Number.isSafeInteger(timeoutMs)||timeoutMs<=0)throw Error('invalid-document-timeout');
   let pinnedRoot=null,requiresReload=false;
   const setting=()=>game.settings.get(MODULE_ID,'explorationLedgerUUID');
@@ -87,9 +89,9 @@ export function createDocumentStore({game,writerClientId=globalThis.crypto.rando
     if(!requiresReload)pinnedRoot=rootUUID;
     return {rootUUID,requiresReload};
   }
-  async function createRoot(){
+  async function createRoot(name='探索活动账本'){
     const userId=game.user.id,marker={schemaVersion:1,setupNonce:nonce()};
-    const data={name:'探索活动账本',ownership:{default:0},flags:{[MODULE_ID]:{explorationLedger:emptyLedger(),explorationLedgerRoot:marker}}};
+    const data={name,ownership:{default:0},flags:{[MODULE_ID]:{explorationLedger:emptyLedger(),explorationLedgerRoot:marker}}};
     const ack=await request({type:'JournalEntry',action:'create',operation:{render:false,renderSheet:false,data:[data],broadcast:false}},{write:true});
     if(!envelope(ack,'JournalEntry','create',userId)||ack.error||!Array.isArray(ack.result)||ack.result.length!==1)throw Error('root-create-acknowledgement-unknown');
     const raw=ack.result[0],rootUUID=`JournalEntry.${raw?._id}`;validUUID(rootUUID);validateRoot(raw,rootUUID);
@@ -106,10 +108,11 @@ export function createDocumentStore({game,writerClientId=globalThis.crypto.rando
   }
   // Starts an empty ledger beside the configured one, which is never written and stays as the archive.
   // Genesis goes into the new root before the setting moves, so the next runtime opens it initialized instead of as legacy data.
+  // The new root carries the day it was made in its name: a GM clearing out archives can tell it from the one it replaced.
   async function replace(options){
     setup(options);const before=setting();
     if(!before)throw Error('root-not-configured');
-    const rootUUID=await createRoot();
+    const rootUUID=await createRoot(`探索活动账本 ${today()}`);
     try{
       const epoch=nonce(),genesis=await createGenesisRevision({rootUUID,epoch,nonce:nonce(),writerUserId:game.user.id,writerClientId:typeof writerClientId==='function'?writerClientId():writerClientId,seed:emptyLedger()});
       await revisionsFor(()=>rootUUID).initialize({epoch,expectedSourceDigest:genesis.sourceDigest,allowStoppedLegacy:true});

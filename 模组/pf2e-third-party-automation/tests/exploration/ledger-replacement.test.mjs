@@ -62,7 +62,7 @@ async function world({seed,initialized=true,configured=OLD}={}){
    const ack={type,action,operation:structuredClone(operation),broadcast:false,userId,result,...error?{error}:{}};
    queueMicrotask(()=>alterACK?alterACK(ack,respond,request):respond(ack));
   }}};
- const store=name=>createDocumentStore({game,writerClientId:name,nonce:()=>`nonce-${++sequence}`,timeoutMs:500});
+ const store=name=>createDocumentStore({game,writerClientId:name,nonce:()=>`nonce-${++sequence}`,timeoutMs:500,today:()=>'2026-10-13'});
  function client(name){const tab=store(name),ledger=createLedger({...tab,isAuthority:()=>true,identity:()=>({userId:game.user.id,clientNonce:name})});return {store:tab,ledger,setup:createLedgerSetup({game,store:tab,ledger,writerClientId:name})}}
  function runtime(){
   hooks=new Map();const errors=[],nativeCasts={addMatcher(){},addCapture(){},addActorUpdateMiddleware(){},addConsumePolicy(){},addObserver(){}};
@@ -95,7 +95,10 @@ test('replacement creates an initialized empty root, then moves the setting and 
  assert.equal(w.setting(),NEW);assert.deepEqual(w.settingsWrites,[NEW]);
  // Genesis is on the new root before the setting names it, so no runtime ever opens that root as legacy data.
  assert.deepEqual(w.events,[`root ${NEW}`,`page ${NEW}`,`setting ${NEW}`]);
- const root=w.docs.get(NEW);assert.equal(root.ownership.default,0);assert.deepEqual(root.pages.map(page=>page._id),[revisionId(0)]);
+ const root=w.docs.get(NEW);assert.equal(root.ownership.default,0);
+ // The archive keeps its name; the new root is told apart by the day it was made.
+ assert.equal(root.name,'探索活动账本 2026-10-13');assert.equal(w.docs.get(OLD).name,'探索活动账本');
+assert.deepEqual(root.pages.map(page=>page._id),[revisionId(0)]);
  const genesis=decodeRevision(root.pages[0].flags[MODULE_ID].explorationRevision);assert.equal(genesis.rootUUID,NEW);assert.equal(genesis.revision,0);assert.deepEqual(genesis.seed,emptyLedger());
  assert.deepEqual(root.flags[MODULE_ID].explorationLedger,emptyLedger());assert.equal(root.flags[MODULE_ID].explorationLedgerRoot.schemaVersion,1);
  for(const operation of [()=>store.read(),()=>store.status(),()=>store.inspect(),()=>store.transact(()=>{})])await assert.rejects(operation(),/revision-root-changed/);
@@ -245,7 +248,7 @@ test('replacement is offered only for a ready ledger this panel can reach',async
 test('the replacement dialog states what is left behind, and replaces only with the three confirmations it collected',async t=>{
  const f=panelFixture(t,{answer:press('replace',confirmations)});await f.app.act('replaceLedger',null);
  assert.equal(f.ui.dialogs.length,1);const {content}=f.ui.dialogs[0];
- for(const line of ['旧账本里还有 5 场没结束的会话、1 个未确认的时钟。','换新之后它们不再阻挡，也不会被重放；以角色卡上现在的 HP 和世界时间为准。','旧账本原样保留为归档，可以在日志栏里自行删除。','有限药品的跨会话用量会从新账本重新算起。'])assert.ok(content.includes(`<p>${line}</p>`),line);
+ for(const line of ['旧账本里还有 5 场没结束的会话、1 个未确认的时钟。','换新之后它们不再阻挡，也不会被重放；以角色卡上现在的 HP 和世界时间为准。','旧账本原样保留为归档。新账本的名字带今天的日期，清理归档时别删错。','有限药品的跨会话用量会从新账本重新算起。'])assert.ok(content.includes(`<p>${line}</p>`),line);
  for(const [name,label] of [['issuersStopped','所有旧恢复操作均已停止'],['clientsReloaded','相关客户端均已重载'],['recoveryDisabled','当前没有自动恢复正在执行']])assert.ok(content.includes(`<input type="checkbox" name="${name}" required> ${label}</label>`),name);
  assert.deepEqual(f.calls,[['preview'],['replace',confirmations]]);assert.deepEqual(f.ui.infos,['账本已更换，请重载页面后再准备恢复。']);assert.deepEqual(f.renders,[true]);
 });
