@@ -74,6 +74,19 @@ test('unprepared storage shows preparation instead of disabled recovery actions'
  assert.deepEqual(mainActions(html),[]);assert.ok(actions(html).includes('provision'));assert.doesNotMatch(html,/<button[^>]*disabled/);
  assert.match(html,/<details class="recovery-more">[\s\S]*data-recovery="selectLedger"/);
 });
+test('a ledger switched under this page asks for a reload instead of another selection',async t=>{
+ const f=checkpointPanelFixture(t),context=await f.app._prepareContext(),render=ledgerStatus=>f.app._renderHTML({...context,data:null,ledgerStatus});
+ const switched=await render({state:'blocked',reason:'revision-root-changed'});
+ assert.match(switched,/<section class="recovery-unresolved"><p>探索账本已切换，请重载页面后再继续。<\/p><\/section>/);assert.deepEqual(actions(switched),['refresh']);assert.doesNotMatch(switched,/探索账本暂不可用|revision-root-changed/);
+ // Every other blocked ledger still names its reason and offers the selection.
+ const missing=await render({state:'blocked',reason:'root-not-found'});
+ assert.match(missing,/探索账本暂不可用：root-not-found。请选择仍存在且仅供 GM 管理的账本。/);assert.deepEqual(actions(missing),['selectLedger','refresh']);
+});
+test('a session stopped by an encounter reports the stop in Chinese',async t=>{
+ assert.equal(formatSessionResult({durationSeconds:600,remainingHP:3,status:'encounter-started'}),'已确认经过 10 分钟；尚缺 3 HP；遭遇已开始，恢复已停止');
+ const f=checkpointPanelFixture(t,{status:'paused'});f.data.session.stopReason='encounter-started';
+ const html=await f.app._renderHTML(await f.app._prepareContext());assert.match(html,/<p class="recovery-time"[^>]*>[^<]*遭遇已开始，恢复已停止/);assert.doesNotMatch(html,/encounter-started/);
+});
 test('running recovery shows only stop and the current checkpoint continuation as primary actions',async t=>{
  const f=checkpointPanelFixture(t);assert.deepEqual(mainActions(await f.app._renderHTML(await f.app._prepareContext())),['stop']);
  f.data.session.activityCheckpoint={id:'A',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:0,phase:'open',registrations:{}};

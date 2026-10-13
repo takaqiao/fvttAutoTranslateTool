@@ -1,5 +1,6 @@
 import {isActiveGM} from './document-store.mjs';
 import {createGenesisRevision} from './revision-codec.mjs';
+import {clockBlocksRecovery} from './current-time-recovery.mjs';
 
 export function createLedgerSetup({game,store,ledger,writerClientId}){
  const authority=()=>{if(!isActiveGM(game))throw Error('active-gm-required')};
@@ -25,5 +26,18 @@ export function createLedgerSetup({game,store,ledger,writerClientId}){
   const initialized=await store.initialize({...options,epoch,expectedSourceDigest:genesis.sourceDigest,allowStoppedLegacy:true});
   authority();return quarantine(initialized);
  }
- return {status,inspect,initialize,provision:async options=>{controlled(options);return store.provision(options)},select:async options=>{controlled(options);return store.select(options)}};
+ // Replacement abandons whatever the ledger still holds open, so it needs a ready ledger that nothing is running or recording in.
+ async function replaceable(){
+  authority();const {status:value,state}=await store.inspect();authority();
+  if(!value.initialized||requiresQuarantine(state))throw Error('replace-ledger-ready-required');
+  if(Object.values(state.sessions).some(session=>['running','recording'].includes(session.status)))throw Error('replace-ledger-session-active');
+  return state;
+ }
+ // What stays behind in the archive: sessions that never reached complete or closed, and clocks that would block a new recovery.
+ async function replacePreview(){
+  const state=await replaceable();
+  return {unfinishedSessions:Object.values(state.sessions).filter(session=>!['complete','closed'].includes(session.status)).length,unconfirmedClocks:Object.values(state.clocks).filter(clock=>clockBlocksRecovery(state,clock)).length};
+ }
+ async function replace(options){controlled(options);await replaceable();return store.replace(options)}
+ return {status,inspect,initialize,provision:async options=>{controlled(options);return store.provision(options)},select:async options=>{controlled(options);return store.select(options)},replacePreview,replace};
 }

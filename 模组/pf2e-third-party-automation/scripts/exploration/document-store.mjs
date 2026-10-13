@@ -1,5 +1,5 @@
 import {MODULE_ID,emptyLedger} from './schema.mjs';
-import {canonicalJSON,normalizeLedger,projectRevisionPages} from './revision-codec.mjs';
+import {canonicalJSON,normalizeLedger,projectRevisionPages,createGenesisRevision} from './revision-codec.mjs';
 import {createRevisionStore} from './revision-store.mjs';
 export const isActiveGM=game=>!!game.user?.isGM&&game.users?.activeGM?.id===game.user.id;
 export const requireGMRead=game=>{if(game.user?.isGM!==true)throw Error('gm-read-required')};
@@ -66,9 +66,10 @@ export function createDocumentStore({game,writerClientId=globalThis.crypto.rando
     if(ack.result.length!==1)throw Error('root-read-acknowledgement-unknown');
     const raw=ack.result[0];validateRoot(raw,rootUUID);return raw;
   }
-  const revisions=createRevisionStore({getRootUUID,readRoot,
+  const revisionsFor=rootSource=>createRevisionStore({getRootUUID:rootSource,readRoot,
     createPage:({rootUUID,page})=>request({type:'JournalEntryPage',action:'create',operation:{parentUuid:rootUUID,keepId:true,render:false,renderSheet:false,data:[page],broadcast:false}},{write:true}),
     isAuthority:()=>isActiveGM(game),canUseRoot:approvedRoot,writerUserId:()=>game.user?.id,writerClientId,nonce});
+  const revisions=revisionsFor(getRootUUID);
 
   function setup(options){
     authority();
@@ -86,18 +87,34 @@ export function createDocumentStore({game,writerClientId=globalThis.crypto.rando
     if(!requiresReload)pinnedRoot=rootUUID;
     return {rootUUID,requiresReload};
   }
-  async function provision(options){
-    setup(options);const before=setting();
-    if(before)throw Error('root-already-configured');
-    if(pinnedRoot)throw Error('revision-root-changed');
+  async function createRoot(){
     const userId=game.user.id,marker={schemaVersion:1,setupNonce:nonce()};
     const data={name:'探索活动账本',ownership:{default:0},flags:{[MODULE_ID]:{explorationLedger:emptyLedger(),explorationLedgerRoot:marker}}};
     const ack=await request({type:'JournalEntry',action:'create',operation:{render:false,renderSheet:false,data:[data],broadcast:false}},{write:true});
     if(!envelope(ack,'JournalEntry','create',userId)||ack.error||!Array.isArray(ack.result)||ack.result.length!==1)throw Error('root-create-acknowledgement-unknown');
     const raw=ack.result[0],rootUUID=`JournalEntry.${raw?._id}`;validUUID(rootUUID);validateRoot(raw,rootUUID);
     if(raw.name!==data.name||raw.pages.length||!sameJSON(raw.flags?.[MODULE_ID],data.flags[MODULE_ID]))throw Error('root-create-acknowledgement-mismatch');
+    return rootUUID;
+  }
+  async function provision(options){
+    setup(options);const before=setting();
+    if(before)throw Error('root-already-configured');
+    if(pinnedRoot)throw Error('revision-root-changed');
+    const rootUUID=await createRoot();
     try{return {...await configure(rootUUID,before),initialized:false}}
     catch(error){error.rootUUID=rootUUID;throw error}
+  }
+  // Starts an empty ledger beside the configured one, which is never written and stays as the archive.
+  // Genesis goes into the new root before the setting moves, so the next runtime opens it initialized instead of as legacy data.
+  async function replace(options){
+    setup(options);const before=setting();
+    if(!before)throw Error('root-not-configured');
+    const rootUUID=await createRoot();
+    try{
+      const epoch=nonce(),genesis=await createGenesisRevision({rootUUID,epoch,nonce:nonce(),writerUserId:game.user.id,writerClientId:typeof writerClientId==='function'?writerClientId():writerClientId,seed:emptyLedger()});
+      await revisionsFor(()=>rootUUID).initialize({epoch,expectedSourceDigest:genesis.sourceDigest,allowStoppedLegacy:true});
+      return {...await configure(rootUUID,before),previousRootUUID:before,initialized:true};
+    }catch(error){error.rootUUID=rootUUID;throw error}
   }
   async function select(options){
     setup(options);const rootUUID=options.rootUUID,before=setting();
@@ -112,6 +129,6 @@ export function createDocumentStore({game,writerClientId=globalThis.crypto.rando
     read:()=>readAsGM(()=>getRootUUID()?revisions.read():emptyLedger()),
     transact:revisions.transact,status:()=>readAsGM(revisions.status),inspect:()=>readAsGM(revisions.inspect),
     initialize:async options=>{setup(options);return revisions.initialize({...options,allowStoppedLegacy:options.allowStoppedLegacy===true})},
-    provision,select
+    provision,select,replace
   };
 }

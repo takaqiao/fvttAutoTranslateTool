@@ -4,7 +4,7 @@ import {scheduleCheckpointActivities} from './policy.mjs';
 import {normalizeCheckpointActivity} from './manual-time.mjs';
 import {canonicalJSON} from './revision-codec.mjs';
 export const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const labels={'goals-met':'恢复目标完成',running:'恢复中',recording:'手动记录中',paused:'已停止',confirmed:'已确认',started:'进行中',completing:'结算中','awaiting-evidence':'待核对证据',uncertain:'结果未知',blocked:'无法继续',cancelled:'已取消','treat-wounds':'治疗伤势',refocus:'再聚能',manual:'手动行动','focus-healing':'圣疗','user-stopped':'已手动停止',budget:'达到预算',closed:'已核对结束','client-context-lost':'客户端已重载，请核对后接续','gm-reviewed-closed':'GM 已核对结束，未知结果保留','refocus-recovery-unadapted':'特殊再聚能规则尚未适配，请手动处理','consecutive-treatment-failures':'达到连续治疗失败上限'};
+const labels={'goals-met':'恢复目标完成',running:'恢复中',recording:'手动记录中',paused:'已停止',confirmed:'已确认',started:'进行中',completing:'结算中','awaiting-evidence':'待核对证据',uncertain:'结果未知',blocked:'无法继续',cancelled:'已取消','treat-wounds':'治疗伤势',refocus:'再聚能',manual:'手动行动','focus-healing':'圣疗','user-stopped':'已手动停止','encounter-started':'遭遇已开始，恢复已停止',budget:'达到预算',closed:'已核对结束','client-context-lost':'客户端已重载，请核对后接续','gm-reviewed-closed':'GM 已核对结束，未知结果保留','refocus-recovery-unadapted':'特殊再聚能规则尚未适配，请手动处理','consecutive-treatment-failures':'达到连续治疗失败上限'};
 export function formatSessionResult(record){return `已确认经过 ${Math.round(record.durationSeconds/60*10)/10} 分钟；尚缺 ${record.remainingHP??0} HP；${evidenceText(record.status)??''}`}
 export function sessionTimeSummary(data){return {durationSeconds:data.session.cursorAt-data.session.startedAt}}
 export function recoveryBudgetPolicy({minutes,activities}){if(!Number.isFinite(minutes)||minutes<=0)throw Error('时间预算应为正数分钟。');if(!Number.isInteger(activities)||activities<1||activities>100)throw Error('行动次数应为1至100。');return {budgetSeconds:minutes*60,maxActivities:activities}}
@@ -56,17 +56,25 @@ const evidenceLabels={
  'world-time-conflict-after-claim':'保存提交声明后世界时间发生变化','clock-never-replayed':'时间提交尚未确认，保留原尝试',
  'clock-in-flight':'已有时间提交正在执行','time-effects-unconfirmed':'时间相关效果尚未完成确认',
  'passive-completion-unavailable':'被动恢复尚无可确认完成的适配','passive-completion-unproven':'被动恢复缺少完成回执',
- 'missing-passive-checkpoint':'缺少被动恢复检查点','passive-rules-changed':'检查点内的被动恢复规则发生变化'
+ 'missing-passive-checkpoint':'缺少被动恢复检查点','passive-rules-changed':'检查点内的被动恢复规则发生变化',
+ 'replace-ledger-session-active':'仍有恢复会话在进行，请先停止再换新账本','replace-ledger-ready-required':'探索账本尚未就绪，暂不能换新'
 };
 const evidenceText=value=>labels[value]??evidenceLabels[value]??value;
 function ledgerSetupControls(status){
  if(!status||status.state==='ready')return '';
+ // Once the configured ledger changes, this page can use neither ledger until it reloads; the page that made the switch also refuses another selection.
+ if(status.state==='blocked'&&status.reason==='revision-root-changed')return '<section class="recovery-unresolved"><p>探索账本已切换，请重载页面后再继续。</p></section>';
  const migrating=['legacy','migration-required'].includes(status.state),text=status.state==='unconfigured'?'先准备探索账本，再启动恢复。':migrating?'已有探索历史需要升级账本。升级会保留记录，暂停旧的恢复任务，并保留尚未确认的尝试。恢复任务由你另行启动。':`探索账本暂不可用：${evidenceText(status.reason)}。请选择仍存在且仅供 GM 管理的账本。`;
  return `<section class="recovery-unresolved"><p>${escapeHTML(text)}</p>${status.state==='unconfigured'?'<button type="button" data-recovery="provision">创建并准备探索账本</button>':migrating?'<button type="button" data-recovery="initialize">升级探索账本</button>':'<button type="button" data-recovery="selectLedger">选择已有账本</button>'}</section>`;
 }
+const setupConfirmations='<label class="recovery-option"><input type="checkbox" name="issuersStopped" required> 所有旧恢复操作均已停止</label><label class="recovery-option"><input type="checkbox" name="clientsReloaded" required> 相关客户端均已重载</label><label class="recovery-option"><input type="checkbox" name="recoveryDisabled" required> 当前没有自动恢复正在执行</label>';
+const confirmedSetup=form=>({issuersStopped:form.has('issuersStopped'),clientsReloaded:form.has('clientsReloaded'),recoveryDisabled:form.has('recoveryDisabled')});
 async function setupChoices({game,select=false}){
  const candidates=Array.from(game.journal?.contents??[]).filter(j=>j.flags?.['pf2e-third-party-automation']?.explorationLedger||j.flags?.['pf2e-third-party-automation']?.explorationLedgerRoot);
- return foundry.applications.api.DialogV2.wait({window:{title:select?'选择探索账本':'准备探索账本'},content:`${select?`<label>账本 <select name="rootUUID">${candidates.map(j=>`<option value="${escapeHTML(j.uuid)}">${escapeHTML(j.name)} (${escapeHTML(j.id)})</option>`).join('')}</select></label>`:''}<p>先停止正在运行的恢复，并让相关 GM 和玩家重载到当前版本。准备完成后不会自动开始恢复。</p><label class="recovery-option"><input type="checkbox" name="issuersStopped" required> 所有旧恢复操作均已停止</label><label class="recovery-option"><input type="checkbox" name="clientsReloaded" required> 相关客户端均已重载</label><label class="recovery-option"><input type="checkbox" name="recoveryDisabled" required> 当前没有自动恢复正在执行</label>`,buttons:[{action:'prepare',label:select?'选择账本':'准备账本',callback:(_event,b)=>{const form=new FormData(b.form);return {issuersStopped:form.has('issuersStopped'),clientsReloaded:form.has('clientsReloaded'),recoveryDisabled:form.has('recoveryDisabled'),...select?{rootUUID:form.get('rootUUID')}:{}}}},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});
+ return foundry.applications.api.DialogV2.wait({window:{title:select?'选择探索账本':'准备探索账本'},content:`${select?`<label>账本 <select name="rootUUID">${candidates.map(j=>`<option value="${escapeHTML(j.uuid)}">${escapeHTML(j.name)} (${escapeHTML(j.id)})</option>`).join('')}</select></label>`:''}<p>先停止正在运行的恢复，并让相关 GM 和玩家重载到当前版本。准备完成后不会自动开始恢复。</p>${setupConfirmations}`,buttons:[{action:'prepare',label:select?'选择账本':'准备账本',callback:(_event,b)=>{const form=new FormData(b.form);return {...confirmedSetup(form),...select?{rootUUID:form.get('rootUUID')}:{}}}},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});
+}
+async function replaceChoices({unfinishedSessions,unconfirmedClocks}){
+ return foundry.applications.api.DialogV2.wait({window:{title:'换新探索账本'},content:`<p>旧账本里还有 ${escapeHTML(unfinishedSessions)} 场没结束的会话、${escapeHTML(unconfirmedClocks)} 个未确认的时钟。</p><p>换新之后它们不再阻挡，也不会被重放；以角色卡上现在的 HP 和世界时间为准。</p><p>旧账本原样保留为归档，可以在日志栏里自行删除。</p><p>有限药品的跨会话用量会从新账本重新算起。</p>${setupConfirmations}`,buttons:[{action:'replace',label:'换新账本',callback:(_event,b)=>confirmedSetup(new FormData(b.form))},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false});
 }
 const minutes=value=>Math.round(value/60*10)/10;
 function historyAnnotations(activity){
@@ -184,6 +192,8 @@ export function createRecoveryPanel({game,coordinator,capabilities,start,storage
     actorUUIDs=[];
     async _prepareContext(){if(prepareContext)return {...await prepareContext(this.actorUUIDs),policy:game.user.getFlag?.('pf2e-third-party-automation','explorationPolicy')??{}};const actors=await capabilities.snapshot(this.actorUUIDs),ledgerStatus=await storage?.status();const id=getSessionId();return {actors,ledgerStatus,policy:game.user.getFlag?.('pf2e-third-party-automation','explorationPolicy')??{},data:id&&ledgerStatus?.state!=='blocked'?await coordinator.snapshot(id):null}}
     async _renderHTML({actors,data,policy,ledgerStatus}){
+     // A selected id the ledger does not hold, such as a session of the ledger this one replaced, is no session.
+     if(!data?.session)data=null;
      const e=escapeHTML,pools=[...new Map(actors.map(a=>[a.pool.poolUUID,a])).values()];
      const saved=savedRecoveryPolicy(policy),preferences=selectedRecoveryPreferences(saved.preferences,actors.map(a=>a.actorUUID));
      const active=data?.session?.status==='running',manual=data?.session?.status==='recording',ready=ledgerStatus?ledgerStatus.state==='ready':!storage,activityOpen=active&&data.session.activityCheckpoint?.phase==='open';
@@ -218,6 +228,7 @@ export function createRecoveryPanel({game,coordinator,capabilities,start,storage
       unconfirmed.size?'<button type="button" data-recovery="lookupActivity">查回上次登记</button>':'',
       active&&ready&&!data.session.manual?'<button type="button" data-recovery="takeover">接管并停止</button>':'',
       ledgerStatus&&ledgerStatus.state!=='blocked'?'<button type="button" data-recovery="selectLedger">选择已有账本</button>':'',
+      storage&&ledgerStatus?.state==='ready'?`<button type="button" data-recovery="replaceLedger"${active||manual?' disabled':''}>换新账本</button><span>当前账本 ${e(ledgerStatus.revision+1)} 页</span>`:'',
       '<button type="button" data-recovery="refresh">刷新</button>'
      ].join('');
      return `<div class="recovery-content">${ledgerSetupControls(ledgerStatus)}<p class="recovery-time" role="status">${e(result)}</p>${treatmentFailureSummary(data)}
@@ -256,6 +267,9 @@ export function createRecoveryPanel({game,coordinator,capabilities,start,storage
       const result=await storage[action==='selectLedger'?'select':action](options);
       if(result.requiresReload)globalThis.ui?.notifications?.info?.('账本已选择，请重载页面后再准备恢复。');else if(action==='provision')await storage.initialize(options);
       return this.render(true);
+     }if(action==='replaceLedger'){
+      if(!storage)throw Error('exploration-storage-unavailable');const options=await replaceChoices(await storage.replacePreview());if(!options)return;
+      await storage.replace(options);globalThis.ui?.notifications?.info?.('账本已更换，请重载页面后再准备恢复。');return this.render(true);
      }if(action==='openActivityCheckpoint'){await coordinator.openActivityCheckpoint(getSessionId());return this.render(true)}if(action==='closeActivityCheckpoint'){
       const selected=await coordinator.snapshot(getSessionId());if(selected.session?.status!=='running'||selected.session.activityCheckpoint?.phase!=='open')throw Error('探索登记窗口已关闭。');await coordinator.closeActivityCheckpoint(activityBinding(selected.session.activityCheckpoint));return this.render(true);
      }if(action==='lookupActivity'){for(const declaration of unconfirmed.values())await lookupDeclaration(declaration);return this.render(true)}if(action==='takeover'){await coordinator.takeover(getSessionId());return this.render(true)}if(action==='activity'){
