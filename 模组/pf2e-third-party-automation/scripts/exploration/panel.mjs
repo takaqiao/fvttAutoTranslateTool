@@ -1,4 +1,3 @@
-import {reconstructEarliest} from './timeline.mjs';
 import {checkpointBinding,activityCheckpointBinding,sameActivityCheckpoint} from './schema.mjs';
 import {normalizeRecoveryPreferences,resolveRecoveryGoals,encodeRecoveryPreferences,decodeRecoveryPreferences} from './recovery-goals.mjs';
 import {scheduleCheckpointActivities} from './policy.mjs';
@@ -7,7 +6,7 @@ import {canonicalJSON} from './revision-codec.mjs';
 export const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const labels={'goals-met':'恢复目标完成',running:'恢复中',recording:'手动记录中',paused:'已停止',confirmed:'已确认',started:'进行中',completing:'结算中','awaiting-evidence':'待核对证据',uncertain:'结果未知',blocked:'无法继续',cancelled:'已取消','treat-wounds':'治疗伤势',refocus:'再聚能',manual:'手动行动','focus-healing':'圣疗','user-stopped':'已手动停止',budget:'达到预算',closed:'已核对结束','client-context-lost':'客户端已重载，请核对后接续','gm-reviewed-closed':'GM 已核对结束，未知结果保留','refocus-recovery-unadapted':'特殊再聚能规则尚未适配，请手动处理','consecutive-treatment-failures':'达到连续治疗失败上限'};
 export function formatSessionResult(record){return `${record.certainty==='observed'?'已确认经过':record.certainty==='contradictory'?'记录存在矛盾，推算':record.certainty==='incomplete'?'证据不完整，按假设推算最早':'按并行假设推算最早'} ${Math.round(record.durationSeconds/60*10)/10} 分钟；尚缺 ${record.remainingHP??0} HP；${evidenceText(record.status)??''}`}
-export function sessionTimeSummary(data){return data.session.manual?reconstructEarliest({startedAt:data.session.startedAt,activities:data.activities,assumptions:data.session.assumptions}):{durationSeconds:data.session.cursorAt-data.session.startedAt,certainty:'observed'}}
+export function sessionTimeSummary(data){return {durationSeconds:data.session.cursorAt-data.session.startedAt,certainty:'observed'}}
 export function recoveryBudgetPolicy({minutes,activities}){if(!Number.isFinite(minutes)||minutes<=0)throw Error('时间预算应为正数分钟。');if(!Number.isInteger(activities)||activities<1||activities>100)throw Error('行动次数应为1至100。');return {budgetSeconds:minutes*60,maxActivities:activities}}
 export function recoveryDefaults(actors){return {goalsByPool:[...new Map(actors.map(a=>[a.pool.poolUUID,{poolUUID:a.pool.poolUUID,targetHP:a.hp.max}])).values()],allowFiniteResources:false,riskySurgery:false,requireFullFocus:false,budgetSeconds:7200,maxActivities:100}}
 function savedRecoveryPolicy(policy){

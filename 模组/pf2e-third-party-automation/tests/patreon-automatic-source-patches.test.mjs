@@ -7,7 +7,6 @@ import {buildPatreonSource} from '../tools/automatic-source-patches/patreon.mjs'
 import {patchPatreon} from '../tools/patreon-time-completion/patch-patreon-v5.mjs';
 import {patchPatreonManualImmunity} from '../tools/patreon-manual-immunity/patch.mjs';
 import {createPatreonTimeCompletion} from '../scripts/exploration/patreon-time-completion.mjs';
-import {createPatreonManualImmunity} from '../scripts/exploration/patreon-manual-immunity.mjs';
 
 const hash=bytes=>createHash('sha256').update(bytes).digest('hex');
 const sourcePath=process.env.PATREON_AUTOMATIC_SOURCE;
@@ -138,21 +137,11 @@ async function assertGeneratedAdapters(result,versions){
  }
  // Browser modules share a realm; normalize only the VM-to-host fixture boundary.
  const hostTime={descriptor:JSON.parse(JSON.stringify(timeAPI.descriptor)),subscribe:(...args)=>timeAPI.subscribe(...args)};
- let subscriptions=0,disposals=0;
- const hostImmunity={descriptor:JSON.parse(JSON.stringify(immunityAPI.descriptor)),subscribe(observe){
-  subscriptions++;const dispose=immunityAPI.subscribe(observe);
-  return ()=>{disposals++;dispose()};
- }};
- const hostGame={...game,modules:new Map([['patreon-v3',{...module,api:{...module.api,
-  explorationTimeCompletion:hostTime,explorationManualImmunity:hostImmunity}}]])};
+ const hostGame={...game,modules:new Map([['patreon-v3',{...module,api:{...module.api,explorationTimeCompletion:hostTime}}]])};
  const time=createPatreonTimeCompletion({game:hostGame,runtimeIdentity:()=>({userId:'G',clientNonce:'client'}),
   getDriverScope:()=>({leaseNonce:'lease'}),timeoutMs:1000});
  try{assert.deepEqual(await time.beforeAdvance({id:'C',sessionId:'S',from:100,to:700,gmId:'G'}),{status:'ready'})}
  finally{time.invalidate('test-finished')}
- const immunity=createPatreonManualImmunity({game:hostGame,fromUuid:async()=>null});
- const dispose=immunity.subscribe(()=>{});
- try{assert.equal(subscriptions,1)}finally{dispose()}
- assert.equal(disposals,1);
  assert.equal(module.api,game.modules.get('patreon-v3').api);assert.equal(module.api.sibling,7);
 }
 

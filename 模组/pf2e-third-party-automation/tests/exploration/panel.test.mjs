@@ -1,9 +1,8 @@
-import {test} from 'node:test';import assert from 'node:assert/strict';import {formatSessionResult,escapeHTML,recoveryDefaults,sessionTimeSummary,recoveryBudgetPolicy} from '../../scripts/exploration/panel.mjs';
+import {test} from 'node:test';import assert from 'node:assert/strict';import {formatSessionResult,escapeHTML,recoveryDefaults,recoveryBudgetPolicy} from '../../scripts/exploration/panel.mjs';
 import * as panelUI from '../../scripts/exploration/panel.mjs';
 import {readFileSync} from 'node:fs';
 test('earliest under assumptions is distinct from elapsed; deficit is shown',()=>{const text=formatSessionResult({durationSeconds:1800,certainty:'earliest-under-assumptions',remainingHP:12,status:'stopped'});assert.match(text,/最早|假设/);assert.match(text,/30/);assert.match(text,/12/)});
 test('defaults are max HP and no finite resources; actor names escape HTML',()=>{const d=recoveryDefaults([{actorUUID:'A',hp:{value:3,max:42},pool:{poolUUID:'A'}}]);assert.equal(d.goalsByPool[0].targetHP,42);assert.equal(d.allowFiniteResources,false);assert.equal(d.riskySurgery,false);assert.equal(escapeHTML('<b>"A" & B</b>'),'&lt;b&gt;&quot;A&quot; &amp; B&lt;/b&gt;')});
-test('stopped manual sessions remain reconstructed rather than claiming observed zero time',()=>{const s=sessionTimeSummary({session:{manual:true,status:'paused',startedAt:0,cursorAt:0,assumptions:['different-actors-may-overlap']},activities:[{id:'A',actorUUID:'H',durationSeconds:600,order:0}]});assert.equal(s.certainty,'earliest-under-assumptions');assert.equal(s.durationSeconds,600)});
 test('user budget is configurable beyond the default two hours and rejects invalid requests',()=>{assert.deepEqual(recoveryBudgetPolicy({minutes:150,activities:8}),{budgetSeconds:9000,maxActivities:8});for(const minutes of [NaN,0,-1,Infinity])assert.throws(()=>recoveryBudgetPolicy({minutes,activities:8}),/预算/);assert.throws(()=>recoveryBudgetPolicy({minutes:30,activities:2.5}),/次数/)});
 
 const message=id=>({id,visible:true,isContentVisible:true,update:()=>assert.fail('evidence navigation must not update messages')});
@@ -15,10 +14,6 @@ test('history names patients and exposes deduplicated missing evidence with esca
 test('history source controls require saved messages visible to the current user; receipt nonces stay plain',()=>{
  assert.equal(typeof panelUI.renderRecoveryHistory,'function');const data=historyFixture(),messages=new Map([['C',message('C')],['D',{...message('D'),isContentVisible:false}],['R',{...message('R'),visible:false}]]),html=panelUI.renderRecoveryHistory(data,{messages});
  assert.deepEqual([...html.matchAll(/data-recovery-message="([^"]+)"/g)].map(m=>m[1]),['C']);assert.match(html,/refocus-nonce/);assert.match(html,/Actor\.P\.Item\.I/);assert.equal((html.match(/<code>R<\/code>/g)??[]).length,1);
-});
-test('proven group timeline gaps are attached to each affected history member',()=>{
- assert.equal(typeof panelUI.renderRecoveryHistory,'function');const data=historyFixture();data.activities=['A','B'].map(id=>({...data.activities[0],id,groupId:'G',groupProof:'lexical-proof',observedStart:-1200,observedEnd:-600,options:{},proof:{}}));const html=panelUI.renderRecoveryHistory(data);
- assert.equal((html.match(/记录时间早于可开始时间/g)??[]).length,2);
 });
 test('paused clock context shows its interval relative to a negative session epoch and retains the reason',()=>{
  assert.equal(typeof panelUI.renderRecoveryHistory,'function');const html=panelUI.renderRecoveryHistory(historyFixture());assert.match(html,/第 0 → 10 分钟/);assert.match(html,/时间提交.*结果未知.*clock-event-unconfirmed/);assert.match(html,/尚未确认/);assert.match(html,/治疗者 &lt;H&gt;/);

@@ -43,7 +43,6 @@ import {createDisarmRegrip} from './disarm-regrip.mjs';
 import {createShieldDamageAdapter} from './shield-damage-adapter.mjs';
 import {notifyNativeIWRStatus} from './native-iwr-status.mjs';
 import {verifyNativeIWRBridge} from './native-iwr-verification.mjs';
-import {verifyManualPoolProviders} from './exploration/manual-pool-provider.mjs';
 import {createRuneTransfer,registerRuneTransferRuleElement} from './rune-transfer.mjs';
 import {preserveDamageBypassOnAlter} from './native-damage-components.mjs';
 import {createMetapowerProvider,preserveMetapowerOnAlter} from './metapower/provider.mjs';
@@ -153,9 +152,6 @@ Hooks.once('ready',async()=>{
  // Revalidate rather than bypass the HTTP cache: the verified bytes are still
  // the server's current file, and an unchanged bundle costs a 304 instead of a download.
  try{const response=await fetch('systems/pf2e/pf2e.mjs',{cache:'no-cache',signal:AbortSignal.timeout(10000)});if(response.ok){pf2eSource=new Uint8Array(await response.arrayBuffer());nativeBridgeVerification=await verifyNativeIWRBridge({game,source:pf2eSource});}}catch{/* Report via the feature diagnostic; other providers still initialize. */}
- if(pf2eSource&&game.modules.get('pf2e-toolbelt')?.active){
-  try{const response=await fetch('modules/pf2e-toolbelt/scripts/main.js',{cache:'no-cache',signal:AbortSignal.timeout(10000)});if(response.ok)await verifyManualPoolProviders({game,pf2eSource,toolbeltSource:new Uint8Array(await response.arrayBuffer())});}catch{/* Missing qualification keeps only the shared-pool adapter unavailable. */}
- }
  const shieldAdapter=createShieldDamageAdapter({game,nativeBridgeVerification,onError:report,createMessageMiddleware:salubriousMessagePrivacy.createMessageMiddleware});
  const scar=SPIRITUAL_SCAR_WORLDS.has(game.world?.id)&&game.system?.id==='pf2e'?createSpiritualScarProvider({game,fromUuid,nativeAdapter:shieldAdapter,reactionRestriction,getRollContext:roll=>cycle?.getRollContext(roll),followup:createSpiritualScarFollowup({game,fromUuid,Hooks,runTargetSave:targetSaves['spiritual-scar'].run,onError:report}),onError:report}):null;
  const deflection=createTranscendentDeflection({game,fromUuid,choose,reactionRestriction,getRollContext:roll=>cycle?.getRollContext(roll),nativeBridgeAvailable:shieldAdapter.nativeBridgeAvailable,onError:report});
@@ -212,8 +208,7 @@ Hooks.once('ready',async()=>{
   },onError:report,
  });
  libWrapper.register(MODULE_ID,'CONFIG.Actor.documentClass.prototype.applyDamage',function(wrapped,params){
-  const manualPoolFrame=exploration.manualPoolApplication.captureFrame(this,params);
-  const applyNative=next=>exploration.manualPoolApplication.applyNativeDamage(this,next,p=>activityResults.applyNativeDamage(this,p,wrapped),manualPoolFrame);
+  const applyNative=next=>activityResults.applyNativeDamage(this,next,wrapped);
   // Consume the exact private params grant before any normalization or spread.
   return salubriousDamage.applyDamage(this,params,(approved,assertSalubrious)=>{
    const source=cycle.getRollContext(approved.damage);
@@ -221,7 +216,6 @@ Hooks.once('ready',async()=>{
    return runDamagePipeline({actor:this,params:actual,providers,apply:p=>reactionBudget.applyDamage(this,p,next=>shieldAdapter.applyDamage(this,next,final=>shieldEvents.wrapNativeDamage(this,final,native=>cycle.applyDamage(this,finalParams=>shieldAdapter.withNativeFrame(this,finalParams,checkedParams=>{assertSalubrious(this,checkedParams);return glimpse.wrapNativeDamage(this,checkedParams,p=>scar?scar.wrapNativeDamage(this,p,applyNative):applyNative(p))}),native)),destructiveBlock.planFor(next))),onError:report});
   });
  },'WRAPPER');
- libWrapper.register(MODULE_ID,'CONFIG.ChatMessage.documentClass.create',function(wrapped,data,...args){return exploration.manualPoolApplication.observeCreate(wrapped,data,...args)},'WRAPPER');
  const rollIndex=CONFIG.Dice.rolls.findIndex(cls=>cls.name==='DamageRoll');
  if(rollIndex<0)throw Error('未找到PF2e DamageRoll，循环能量无法接入。');
  libWrapper.register(MODULE_ID,`CONFIG.Dice.rolls.${rollIndex}.prototype.alter`,function(wrapped,...args){return preserveElectricityOnAlter(this,preserveMetapowerOnAlter(this,preserveDamageBypassOnAlter(this,cycle.alterDamageRoll(this,wrapped,...args),{multiplier:args[0]??1,addend:args[1]??0})))},'WRAPPER');

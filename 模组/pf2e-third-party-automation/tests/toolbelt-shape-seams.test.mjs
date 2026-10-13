@@ -7,9 +7,7 @@ import vm from 'node:vm';
 import {spawnSync} from 'node:child_process';
 import {buildNativeBridge,buildSharedManualPair} from '../tools/automatic-source-patches/native.mjs';
 import {TOOL_SHAPE,toolSeams,observerRegion} from '../scripts/native-source-shapes.mjs';
-import {verifyManualPoolProviders,isManualPoolProvider} from '../scripts/exploration/manual-pool-provider.mjs';
 import {native861Source,hash} from './native-iwr-861-fixture.mjs';
-import {receiverContext} from './native-iwr-861-receiver-fixture.mjs';
 import {referenceToolbelt,edited,editedRegion,otherNames,renamed,renamedSeams} from './toolbelt-shape-fixture.mjs';
 
 // Upstream files are read from the environment and never stored here. A case
@@ -90,31 +88,6 @@ test(`${label} under another consistent set of names is patched in those names`,
  assert.ok(seams.patched.includes('let x=__toolbeltManualPool.forward($02,$0s,$0u,$0a,()=>$0s.update($0u),$0t=>this.#w0.emit($0t));if(x)await x'));
  assert.equal(toolSeams(seams.patched).original,other);
  const built=pair(Buffer.from(other));assert.equal(built.alreadyPatched,false);same(restored(built.toolbelt),other);
-});
-
-async function served(toolbeltSource=Buffer.from(source)){
- const module={version:'3.59.0',active:true},sources=pair(toolbeltSource);
- const hooks=[],context=receiverContext(sources.pf2e.toString()),game=context.game;
- Object.assign(game,{system:{id:'pf2e',version:'8.6.1'},modules:new Map([['pf2e-toolbelt',module]])});context.Hooks={once:(_event,fn)=>hooks.push(fn)};
- vm.runInContext('__nativeManualPoolBatch.install();',context);
- vm.runInContext(sources.toolbelt.toString().split('/* end toolbelt manual pool */')[0],context);for(const hook of hooks)hook();
- return {module,sources,qualify:()=>verifyManualPoolProviders({game,pf2eSource:sources.pf2e,toolbeltSource:sources.toolbelt,hash})};
-}
-test(`${label} served with its installed seam qualifies the Toolbelt provider`,async()=>{
- for(const toolbeltSource of [source,other]){
-  const f=await served(Buffer.from(toolbeltSource)),proof=await f.qualify();
-  assert.equal(proof.ready,true,proof.reason);assert.equal(proof.toolbeltSHA256,hash(f.sources.toolbelt));
-  assert.equal(isManualPoolProvider(f.module.api.explorationManualPool),true);
- }
-});
-test(`${label} served with a changed or missing seam does not qualify`,async()=>{
- const f=await served(),installed=f.sources.toolbelt.toString();
- f.sources.toolbelt=Buffer.from(edited(installed,'()=>this.isValidMaster(e)&&e.update(n)','()=>e.update(n)'));
- assert.deepEqual({...await f.qualify()},{ready:false,reason:'manual-pool-tool-seam-mismatch'});
- assert.equal(isManualPoolProvider(f.module.api.explorationManualPool),false);
- f.sources.toolbelt=Buffer.from(observer(installed)+source);
- assert.deepEqual({...await f.qualify()},{ready:false,reason:'manual-pool-source-seam-partial'});
- f.sources.toolbelt=Buffer.from(installed);assert.equal((await f.qualify()).ready,true);
 });
 
 }

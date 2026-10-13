@@ -1,10 +1,9 @@
 import {recoveryProposals,checkpointDeclaration,scheduleCheckpointActivities} from './policy.mjs';
 import {extensionPatients} from './treatment.mjs';
-import {clone,normalizeNativeOwnerMap,captureRecoveryPreferences,checkpointBinding,sameCheckpoint,manualSourceIntent,activityCheckpointBinding,sameActivityCheckpoint} from './schema.mjs';
+import {clone,normalizeNativeOwnerMap,captureRecoveryPreferences,checkpointBinding,sameCheckpoint,activityCheckpointBinding,sameActivityCheckpoint} from './schema.mjs';
 import {resolveRecoveryGoals,patientRecoveryNeed} from './recovery-goals.mjs';
 import {treatmentFailureState} from './treatment-streaks.mjs';
 import {projectCommand,validateExtensionOriginal} from './owner-command.mjs';
-import {WORKBENCH_SOURCE_SHA} from './manual-events.mjs';
 import {clockBlocksRecovery,currentTimeRecoveryReason} from './current-time-recovery.mjs';
 export function createCoordinator({ledger,capabilities,providers,clock,policy,isAuthority,now=()=>globalThis.game.time.worldTime,pauseGame=()=>{},ownerOperations,onChange=()=>{},game=globalThis.game,fromUuid=globalThis.fromUuid,getHpPool,manualEvents}){
  const byId=new Map(providers.map(p=>[p.id,p])),locks=new Map(),contexts=new Map(),runners=new Map(),leases=new Map(),generations=new Map(),checkpointRequests=new Map(),activeStops=new Map();
@@ -215,17 +214,6 @@ export function createCoordinator({ledger,capabilities,providers,clock,policy,is
   if(!sameCheckpoint(session.manualCheckpoint,binding)||!['open','sealed','advancing'].includes(session.manualCheckpoint.phase))throw Error('manual-checkpoint-mismatch');
   return {...scopeOptions(scope),checkpointBinding:clone(binding)};
  }
- async function reserveManualSource(binding,intent,callerId){
-  intent=manualSourceIntent(intent);const scope=leases.get(binding?.sessionId),session=await owned(binding?.sessionId,scope),c=session.manualCheckpoint;
-  if(!sameCheckpoint(c,binding)||c.phase!=='open')throw Error('manual-checkpoint-closed');
-  if(now()!==c.from||locks.has(session.id))throw Error('manual-checkpoint-unavailable');
-  const user=game?.users?.get(callerId),actor=await fromUuid?.(intent.actorUUID),patient=await fromUuid?.(intent.patientUUID),actors=await capabilities.snapshot([intent.actorUUID,intent.patientUUID]);await owned(session.id,scope);
-  const healer=actors.find(a=>a.actorUUID===intent.actorUUID),target=actors.find(a=>a.actorUUID===intent.patientUUID),pool=getHpPool?.(patient)??target?.pool;
-  if(!user?.active||!actor||actor.uuid!==intent.actorUUID||actor.testUserPermission?.(user,'OWNER')!==true||!session.actorUUIDs.includes(intent.actorUUID)||!session.actorUUIDs.includes(intent.patientUUID))throw Error('manual-actor-owner-required');
-  if(healer?.isDead||healer?.unconscious||target?.isDead||!patient||patient.uuid!==intent.patientUUID||!pool?.ready||pool.poolUUID!==patient.uuid||target?.pool?.poolUUID!==patient.uuid||now()!==c.from)throw Error('manual-checkpoint-patient-unavailable');
-  const id=crypto.randomUUID(),a={id,sessionId:session.id,providerId:'manual',actorUUID:intent.actorUUID,patientUUIDs:[intent.patientUUID],hpPoolUUIDs:[intent.patientUUID],state:'awaiting-evidence',startedAt:c.from,endsAt:c.to,durationSeconds:600,kind:'treatment',order:0,treatmentImmunitySeconds:healer.continualRecovery?600:3600,checkpointBinding:clone(binding),temporalSource:{type:'checkpoint-reservation'},source:{type:'workbench',sourceSHA:WORKBENCH_SOURCE_SHA,lexicalSource:true,manual:true,reservationId:id,useId:intent.useId,userId:callerId},options:{continualRecovery:!!healer.continualRecovery,riskySurgery:!!intent.riskySurgery,missing:['native-application-receipt','native-immunity-receipt','checkpoint-time-confirmation']},proof:{useId:intent.useId,checkIds:[],resultIds:[],receiptIds:[],immunityIds:[]}};
-  await ledger.insertActivity(a,{...scopeOptions(scope),checkpointBinding:binding});await owned(session.id,scope);onChange(session.id);return {reservationId:id,activityId:id,checkpointBinding:clone(binding)};
- }
  async function closeManualCheckpoint(binding,{autoRun=true}={}){
   const id=binding?.sessionId,scope=leases.get(id),session=await owned(id,scope),c=session.manualCheckpoint;
   if(!sameCheckpoint(c,binding)||c.phase!=='open')throw Error('manual-checkpoint-closed');
@@ -361,5 +349,5 @@ export function createCoordinator({ledger,capabilities,providers,clock,policy,is
  }
  async function takeover(id){check();invalidate(id,'explicit-driver-takeover');clock.stop?.('explicit-driver-takeover',{sessionId:id});const session=await ledger.takeoverSession(id);onChange(id);return session}
  const executionScope=id=>leases.has(id)?{leaseNonce:leases.get(id).leaseNonce}:undefined;
- return {start,step,stop,stopActive,resume,recover,restore,reconcile,review,acceptCurrentTime,addActivity,snapshot,describeSnapshot,takeover,executionScope,openManualCheckpoint,closeManualCheckpoint,reserveManualSource,manualCheckpointOptions,openActivityCheckpoint,closeActivityCheckpoint,invalidate:reason=>{for(const id of new Set([...leases.keys(),...checkpointRequests.keys()]))invalidate(id,reason)}};
+ return {start,step,stop,stopActive,resume,recover,restore,reconcile,review,acceptCurrentTime,addActivity,snapshot,describeSnapshot,takeover,executionScope,openManualCheckpoint,closeManualCheckpoint,manualCheckpointOptions,openActivityCheckpoint,closeActivityCheckpoint,invalidate:reason=>{for(const id of new Set([...leases.keys(),...checkpointRequests.keys()]))invalidate(id,reason)}};
 }
