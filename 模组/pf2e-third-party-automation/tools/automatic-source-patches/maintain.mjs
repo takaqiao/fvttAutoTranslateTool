@@ -12,7 +12,7 @@ const targets = {
  toolbelt: {file: 'Data/modules/pf2e-toolbelt/scripts/main.js', manifest: 'Data/modules/pf2e-toolbelt/module.json', id: 'pf2e-toolbelt'},
  patreon: {file: 'Data/modules/patreon-v3/src/index.js', manifest: 'Data/modules/patreon-v3/module.json', id: 'patreon-v3'}
 };
-const groups = {native: ['pf2e', 'toolbelt'], patreon: ['patreon']};
+export const groups = {native: ['pf2e', 'toolbelt'], patreon: ['patreon']};
 const sameIdentity = (a, b) => a.dev === b.dev && a.ino === b.ino && a.size === b.size && a.mtimeMs === b.mtimeMs;
 
 async function readRegular(filename, io) {
@@ -132,15 +132,16 @@ async function recoverPending({group, dataPath, directory, io, idle}) {
  await io.unlink(filename); await syncDirectory(directory, io);
 }
 
-async function buildGroup(group, snapshots, builders) {
+export async function buildGroup(group, snapshots, builders) {
  const bytes = role => snapshots[role].source.bytes;
  const version = role => snapshots[role].version;
  if (group === 'native') {
   const bridge = await builders.buildNativeBridge({source: bytes('pf2e'), version: version('pf2e')});
   assert(Buffer.isBuffer(bridge.buffer), 'PF2e builder did not return source bytes');
-  const pair = await builders.buildSharedManualPair({pf2eSource: bridge.buffer, toolbeltSource: bytes('toolbelt'), pf2eVersion: version('pf2e'), toolbeltVersion: version('toolbelt')});
-  assert(Buffer.isBuffer(pair.pf2e) && Buffer.isBuffer(pair.toolbelt), 'Shared manual-pool builder did not return both source files');
-  return {pf2e: pair.pf2e, toolbelt: pair.toolbelt};
+  // Toolbelt is no longer patched. It stays a member of the group so that a
+  // pending record from an earlier release still recovers, and every member
+  // needs an output, so its bytes go back exactly as they were read.
+  return {pf2e: bridge.buffer, toolbelt: bytes('toolbelt')};
  }
  const paid = await builders.buildPatreonSource({source: bytes('patreon'), version: version('patreon'), pf2eVersion: snapshots.pf2eVersion});
  assert(Buffer.isBuffer(paid.buffer), 'Patreon builder did not return source bytes');
@@ -148,7 +149,7 @@ async function buildGroup(group, snapshots, builders) {
 }
 async function defaultBuilders() {
  const [native, patreon] = await Promise.all([import('./native.mjs'), import('./patreon.mjs')]);
- return {buildNativeBridge: native.buildNativeBridge, buildSharedManualPair: native.buildSharedManualPair, buildPatreonSource: patreon.buildPatreonSource};
+ return {buildNativeBridge: native.buildNativeBridge, buildPatreonSource: patreon.buildPatreonSource};
 }
 
 export async function maintainSourcePatches({dataPath, assertIdle, builders, io = fs, syntaxCheck = checkSyntax, report = value => console.log(JSON.stringify(value))} = {}) {
