@@ -31,7 +31,7 @@ async function panelFixture(t,stored,{snapshotGate}={}){
  }},messages:new Map()};
  const actors=[{actorUUID:P,name:'Patient P',hp:{value:1,max:60},focus:{value:0,max:0},pool:{poolUUID:P,ready:true},wardCapacity:1}];
  const app=createRecoveryPanel({game,coordinator:{},getSessionId:()=>null,capabilities:{snapshot:async()=>{await snapshotGate?.();return actors}},start:async config=>calls.push(config)}).open([P]);
- const mode={dataset:{targetMode:'',actor:P},value:'absolute'},target={value:'80'},fields={budget:{value:'120'},activityBudget:{value:'100'},risky:{checked:false},focus:{checked:true},extension:{checked:false},assurance:{checked:false},rank:{value:'trained'},manualFirstRound:{checked:false},activityFirstRound:{checked:false},wounded:{checked:true},failureStop:{checked:true},failureLimit:{value:'2'}};
+ const mode={dataset:{targetMode:'',actor:P},value:'absolute'},target={value:'80'},fields={budget:{value:'120'},activityBudget:{value:'100'},risky:{checked:false},focus:{checked:true},extension:{checked:false},assurance:{checked:false},rank:{value:'trained'},activityFirstRound:{checked:false},wounded:{checked:true},failureStop:{checked:true},failureLimit:{value:'2'}};
  const content={querySelector:selector=>selector.includes('data-target-value')?target:fields[selector.match(/\[name=(\w+)\]/)?.[1]],querySelectorAll:selector=>selector==='[data-target-mode]'?[mode]:[]};
  return {field,state,source,saved,calls,app,mode,target,content};
 }

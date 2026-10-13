@@ -1,5 +1,7 @@
 import {canonicalJSON} from './revision-codec.mjs';
 
+// No script calls this. It stays exported for tests/exploration/manual-pool-batch.test.mjs:
+// tools/native-manual-pool-static-receiver/patch.mjs pins that test file's hash and refuses to load when it changes.
 export function deduplicatePoolEffects(effects) {
   const selected=new Map();
   for(const e of effects){const key=JSON.stringify([e.poolUUID,e.effectId]);if(!selected.has(key)||selected.get(key).amount<e.amount)selected.set(key,e)}

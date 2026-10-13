@@ -11,12 +11,12 @@ const socketlibSource=fs.readFileSync(process.env.FVTT_SOCKETLIB_SOURCE??'C:/Use
 assert.equal(createHash('sha256').update(socketlibSource).digest('hex'),'5643449d1e355b4b773b4675eea99f09003c8aad254dca5bf74008386aec7fd8');
 const turn=async()=>{for(let i=0;i<40;i++)await new Promise(resolve=>setImmediate(resolve))};
 
-async function fixture({timeoutMs=1000,manualWindow=false,beforeActor=async()=>{},editRequest=()=>{}}={}){
+async function fixture({timeoutMs=1000,beforeActor=async()=>{},editRequest=()=>{}}={}){
  const store=await authorityFixture(),ledger=store.client('driver');
  const session=await ledger.createSession({id:'S',actorUUIDs:['Actor.A'],startedAt:0,cursorAt:0,budgetEndsAt:900});
- const binding={id:'C',sessionId:'S',rootUUID:store.rootUUID,epoch:'epoch',observationNonce:'observation',from:0,...manualWindow?{to:600}:{}};
- if(manualWindow)await ledger.updateSession('S',{manualCheckpoint:{...binding,phase:'open'}},{leaseNonce:session.driver.leaseNonce});else await ledger.openActivityCheckpoint(binding,{leaseNonce:session.driver.leaseNonce,guard:()=>true});
- const actor={id:'A',uuid:'Actor.A',name:'A',testUserPermission:user=>['G','P'].includes(user?.id)},clients=[],packets=[],replies=[];let playerReads=0,reservations=0;
+ const binding={id:'C',sessionId:'S',rootUUID:store.rootUUID,epoch:'epoch',observationNonce:'observation',from:0};
+ await ledger.openActivityCheckpoint(binding,{leaseNonce:session.driver.leaseNonce,guard:()=>true});
+ const actor={id:'A',uuid:'Actor.A',name:'A',testUserPermission:user=>['G','P'].includes(user?.id)},clients=[],packets=[],replies=[];let playerReads=0;
  function make(role,userId){
   const users=new Map(['G','P','X'].map(id=>[id,{id,active:true,isGM:id==='G',isSelf:id===userId}]));users.activeGM=users.get('G');
   const listeners=new Map(),game={user:users.get(userId),userId,users,actors:new Map([['A',actor]]),time:{worldTime:0}};
@@ -30,7 +30,7 @@ async function fixture({timeoutMs=1000,manualWindow=false,beforeActor=async()=>{
   vm.runInContext(socketlibSource.replace(/^import \* as errors from "\.\/errors\.js";\s*/,'')+'\nglobalThis.NativeSocketlibSocket=SocketlibSocket;',context);
   const nativeSocket=new context.NativeSocketlibSocket('pf2e-third-party-automation','module'),writer=store.client(role),scope={sessionId:'S',worldTime:0,...role==='driver'?{leaseNonce:session.driver.leaseNonce}:{}};
   const privateRead=fn=>{if(userId==='P'){playerReads++;throw Error('player-private-read')}return fn()};
-  const bridge=createManualRecordBridge({game,timeoutMs,fromUuid:async()=>{await beforeActor(role);return privateRead(()=>actor)},getSession:()=>privateRead(()=>writer.getSession('S')),getActivities:async()=>privateRead(()=>writer.snapshot('S').then(saved=>saved.activities)),checkpointContext:()=>({...scope}),ownsSession:(...args)=>writer.ownsSession(...args),enrollCheckpointActivity:(...args)=>writer.enrollCheckpointActivity(...args),lookupCheckpointActivity:(...args)=>writer.lookupCheckpointActivity(...args),observe:()=>assert.fail('recording-route-used'),reserveSource:async captured=>{if(!writer.ownsSession(await writer.getSession('S'),scope))throw Error('session-driver-required');reservations++;return {activityId:'reserved',reservationId:'reserved',checkpointBinding:captured}}});
+  const bridge=createManualRecordBridge({game,timeoutMs,fromUuid:async()=>{await beforeActor(role);return privateRead(()=>actor)},getSession:()=>privateRead(()=>writer.getSession('S')),getActivities:async()=>privateRead(()=>writer.snapshot('S').then(saved=>saved.activities)),checkpointContext:()=>({...scope}),ownsSession:(...args)=>writer.ownsSession(...args),enrollCheckpointActivity:(...args)=>writer.enrollCheckpointActivity(...args),lookupCheckpointActivity:(...args)=>writer.lookupCheckpointActivity(...args)});
   const client={role,game,listeners,nativeSocket,bridge,scope,writer};clients.push(client);bridge.register(nativeSocket);return client;
  }
  const driver=make('driver','G'),peer=make('peer','G'),player=make('player','P');
@@ -43,7 +43,7 @@ async function fixture({timeoutMs=1000,manualWindow=false,beforeActor=async()=>{
  }
  const input=()=>({registrationId:'registration',checkpointBinding:{...binding},actorUUID:'Actor.A',label:'Search',durationSeconds:300,durationSource:{type:'user-declared',detail:'agreed'},dependsOn:[]});
  const deliver=(reply,senderId='G')=>{for(const client of clients)for(const fn of client.listeners.get(reply.name)??[])fn(structuredClone(reply.packet),senderId)};
- return {store,ledger,binding,driver,peer,player,actor,packets,replies,request,input,deliver,reservations:()=>reservations,playerReads:()=>playerReads,dispose(){for(const client of clients)client.bridge.invalidate?.('test-finished')}};
+ return {store,ledger,binding,driver,peer,player,actor,packets,replies,request,input,deliver,playerReads:()=>playerReads,dispose(){for(const client of clients)client.bridge.invalidate?.('test-finished')}};
 }
 
 for(const order of ['peer-first','driver-first'])test(`Player checkpoint window accepts only the driver response with ${order} delivery`,async t=>{
@@ -74,18 +74,6 @@ test('a caller cannot turn an unknown commit into a pre-write rejection through 
  const before=f.store.raw.pages.length,result=await f.request(()=>f.player.bridge.record(f.input()),'peer-first');
  assert.equal(result.ok,false);assert.match(result.error.message,/acknowledgement-unknown/);assert.notEqual(result.error.declarationRejected,true);
  assert.equal(f.store.raw.pages.length,before+1);assert.equal(Object.keys((await f.ledger.getSession('S')).activityCheckpoint.registrations).length,1);assert.equal(f.playerReads(),0);
-});
-
-for(const order of ['peer-first','driver-first'])test(`a bound manual reservation reaches only the driver with ${order} delivery`,async t=>{
- const f=await fixture({manualWindow:true});t.after(()=>f.dispose());const intent={sourceType:'workbench',kind:'treatment',useId:'use',actorUUID:'Actor.A',patientUUID:'Actor.A'};
- const result=await f.request(()=>f.player.bridge.reserveSource(f.binding,intent),order);
- assert.equal(result.ok,true,result.error?.message);assert.deepEqual(result.value.checkpointBinding,f.binding);assert.equal(result.replies.length,1);assert.equal(result.replies[0].role,'driver');assert.equal(f.reservations(),1);assert.equal(f.playerReads(),0);
-});
-
-test('a normal unbound treatment has no reservation when no manual checkpoint is open',async t=>{
- const f=await fixture();t.after(()=>f.dispose());delete f.driver.scope.leaseNonce;
- const result=await f.request(()=>f.player.bridge.reserveSource(null,{sourceType:'workbench',kind:'treatment',useId:'use',actorUUID:'Actor.A',patientUUID:'Actor.A'}),'peer-first');
- assert.equal(result.ok,true,result.error?.message);assert.equal(result.value,null);assert.equal(f.reservations(),0);assert.equal(f.packets.filter(row=>row.packet.operationId==='manual-record-driver').length,0);assert.equal(f.playerReads(),0);
 });
 
 test('an absent session driver leaves one window request unknown without a retry',async t=>{
@@ -139,8 +127,14 @@ test('checkpoint native routing cannot fall back to socketlib when the native tr
  await assert.rejects(bridge.getActivityCheckpoint('Actor.A'),/manual-record-native-unavailable/);assert.equal(fallback,0);
 });
 
-for(const status of ['declaration','reservation'])test(`a ${status} request cannot substitute another inner actor`,async t=>{
- const f=await fixture({manualWindow:status==='reservation',editRequest:packet=>{if(packet.status===status)(status==='declaration'?packet.command.event:packet.command.intent).actorUUID='Actor.OTHER'}});t.after(()=>f.dispose());const before=f.store.raw.pages.length;
- const call=status==='declaration'?()=>f.player.bridge.record(f.input()):()=>f.player.bridge.reserveSource(f.binding,{sourceType:'workbench',kind:'treatment',useId:'use',actorUUID:'Actor.A',patientUUID:'Actor.A'}),result=await f.request(call,'peer-first');
- assert.equal(result.ok,false);assert.equal(result.error.message,'manual-driver-request-mismatch');assert.equal(f.store.raw.pages.length,before);assert.equal(f.reservations(),0);assert.equal(f.playerReads(),0);
+test('a declaration request cannot substitute another inner actor',async t=>{
+ const f=await fixture({editRequest:packet=>{if(packet.status==='declaration')packet.command.event.actorUUID='Actor.OTHER'}});t.after(()=>f.dispose());const before=f.store.raw.pages.length;
+ const result=await f.request(()=>f.player.bridge.record(f.input()),'peer-first');
+ assert.equal(result.ok,false);assert.equal(result.error.message,'manual-driver-request-mismatch');assert.equal(f.store.raw.pages.length,before);assert.equal(f.playerReads(),0);
+});
+
+test('a reservation command from an older client gets no reply and writes nothing',async t=>{
+ const f=await fixture({timeoutMs:100,editRequest:packet=>{if(packet.status==='declaration')packet.status='reservation'}});t.after(()=>f.dispose());const before=f.store.raw.pages.length;
+ await assert.rejects(f.player.bridge.record(f.input()),/timeout-unknown-no-retry/);
+ assert.deepEqual(f.replies,[]);assert.equal(f.store.raw.pages.length,before);assert.equal(f.playerReads(),0);
 });

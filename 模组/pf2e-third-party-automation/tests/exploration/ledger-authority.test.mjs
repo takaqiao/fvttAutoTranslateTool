@@ -148,12 +148,14 @@ test('explicit takeover quarantines pending work without issuing another native 
  await assert.rejects(peer.resumeSession('S',{cursorAt:0}),/unresolved-evidence-no-replay/);
 });
 
-test('recording history can be appended by a different GM without adopting the automatic driver',async()=>{
+test('a leftover recording session takes no new history and a different GM can still stop and close it',async()=>{
  const f=server(),driver=f.client('driver'),s=await driver.createSession(session()),peer=f.client('peer','OtherGM');
  await peer.createSession(session('Recorded',{manual:true,status:'recording'}));
- const a=await peer.insertActivity(activity('Manual',{sessionId:'Recorded',state:'awaiting-evidence',source:{manual:true}}));
- await peer.transitionActivity(a.id,{expected:['awaiting-evidence'],patch:{state:'confirmed'}});
- assert.equal((await driver.getSession('S')).driver.clientNonce,s.driver.clientNonce);
+ await assert.rejects(peer.insertActivity(activity('Manual',{sessionId:'Recorded',state:'awaiting-evidence',source:{manual:true}})),/manual-recording-unavailable/);
+ assert.deepEqual(f.read().activities,{});assert.deepEqual(f.read().sessions.Recorded.activityIds,[]);
+ assert.equal((await peer.updateSession('Recorded',{status:'paused',stopReason:'user-stopped'},{expectedStatus:'recording'})).status,'paused');
+ assert.equal((await peer.updateSession('Recorded',{status:'closed',stopReason:'gm-reviewed-closed',review:{note:'checked'}})).status,'closed');
+ assert.equal(f.read().sessions.Recorded.driver,undefined);assert.equal((await driver.getSession('S')).driver.clientNonce,s.driver.clientNonce);
 });
 
 test('strict transactional ledgers require a runtime identity at construction',()=>{

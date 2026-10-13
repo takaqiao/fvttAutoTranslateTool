@@ -14,7 +14,7 @@ function panelFixture(t,{policy={recovery:preferences()},snapshotGate}={}){
  const actors=[{actorUUID:P,name:'P',hp:{value:1,max:41},focus:{value:0,max:0},pool:{poolUUID:P,ready:true},wardCapacity:1}],calls=[],saved=[];
  const game={user:{isGM:true,getFlag:()=>policy,setFlag:async(_module,_key,value)=>{saved.push(value);policy=value}},messages:new Map()};
  const app=createRecoveryPanel({game,coordinator:{},getSessionId:()=>null,capabilities:{snapshot:async()=>{await snapshotGate?.();return actors}},start:async config=>calls.push(config)}).open([P]);
- const fields={budget:{value:'120'},activityBudget:{value:'100'},risky:{checked:false},focus:{checked:true},extension:{checked:false},assurance:{checked:false},rank:{value:'trained'},manualFirstRound:{checked:false},activityFirstRound:{checked:false}},target={dataset:{pool:P},value:'11'};
+ const fields={budget:{value:'120'},activityBudget:{value:'100'},risky:{checked:false},focus:{checked:true},extension:{checked:false},assurance:{checked:false},rank:{value:'trained'},activityFirstRound:{checked:false}},target={dataset:{pool:P},value:'11'};
  const content={querySelector:selector=>fields[selector.match(/name=(\w+)/)[1]],querySelectorAll:()=>[target]};
  return {app,actors,calls,saved,content,target,policy};
 }

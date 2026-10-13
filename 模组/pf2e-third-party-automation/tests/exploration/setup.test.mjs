@@ -135,8 +135,10 @@ test('a setup delayed before quarantine cannot pause a newly resumed protocol se
  release();assert.equal((await pending).state,'ready');assert.deepEqual(await current.ledger.getSession('Old'),resumed);assert.equal(resumed.driver.clientNonce,'current');assert.equal(resumed.status,'running');
 });
 
-test('controlled migration keeps manual recording appendable without adopting an automatic driver',async()=>{
+test('controlled migration leaves manual recording stoppable, closed to new history and without an automatic driver',async()=>{
  const f=await migrationFixture(),c=f.client('setup');await c.setup.initialize(confirmations);
- const a=await c.ledger.insertActivity({id:'ManualEntry',sessionId:'Manual',providerId:'manual',actorUUID:'Actor.H',patientUUIDs:[],hpPoolUUIDs:[],startedAt:0,endsAt:600,state:'awaiting-evidence',source:{manual:true,type:'user-record'}});
- assert.equal(a.state,'awaiting-evidence');const manual=await c.ledger.getSession('Manual');assert.equal(manual.status,'recording');assert.equal(manual.driver,undefined);assert.deepEqual(manual.activityIds,['ManualEntry']);
+ await assert.rejects(c.ledger.insertActivity({id:'ManualEntry',sessionId:'Manual',providerId:'manual',actorUUID:'Actor.H',patientUUIDs:[],hpPoolUUIDs:[],startedAt:0,endsAt:600,state:'awaiting-evidence',source:{manual:true,type:'user-record'}}),/manual-recording-unavailable/);
+ const manual=await c.ledger.getSession('Manual');assert.equal(manual.status,'recording');assert.equal(manual.driver,undefined);assert.deepEqual(manual.activityIds,[]);
+ assert.equal((await c.ledger.updateSession('Manual',{status:'paused',stopReason:'user-stopped'},{expectedStatus:'recording'})).status,'paused');
+ const closed=await c.ledger.updateSession('Manual',{status:'closed',stopReason:'gm-reviewed-closed',review:{note:'checked'}});assert.equal(closed.status,'closed');assert.equal(closed.driver,undefined);
 });

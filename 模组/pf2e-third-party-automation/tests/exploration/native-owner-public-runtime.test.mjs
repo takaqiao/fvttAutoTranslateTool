@@ -142,11 +142,10 @@ for(const mapped of [true,false])test(`public runtime ${mapped?'mapped OWNER':'d
  assert.deepEqual(f.errors,[]);
 });
 
-test('public runtime manual start stays recording without an automatic permit or offline native effect',async t=>{
- const f=publicRuntimeFixture();t.after(()=>f.dispose());const gm=await f.addTab('driver','G');await f.provision(gm);
- const session=await gm.runtime.api.start({actorUUIDs:['Actor.H'],manual:true,requireFullFocus:true});
- const data=await gm.runtime.api.snapshot(session.id);
- assert.equal(data.session.status,'recording');assert.deepEqual(data.session.nativeOwnerByActor,{});assert.deepEqual(data.activities,[]);assert.deepEqual(data.clocks,[]);
+test('public runtime refuses a manual start without a session, an automatic permit or an offline native effect',async t=>{
+ const f=publicRuntimeFixture();t.after(()=>f.dispose());const gm=await f.addTab('driver','G');await f.provision(gm);const pages=structuredClone(f.raw.pages);
+ await assert.rejects(gm.runtime.api.start({actorUUIDs:['Actor.H'],manual:true,requireFullFocus:true}),/manual-recording-unavailable/);
+ assert.deepEqual(f.raw.pages,pages);
  assert.equal(f.effects.length,0);assert.equal(f.clocks.length,0);assert.equal(f.packets.length,0);assert.deepEqual(f.errors,[]);
  assert.equal(gm.game.paused,false);assert.deepEqual(f.pauses,[]);
 });

@@ -1,11 +1,11 @@
 import {isActiveGM} from './document-store.mjs';
 import {normalizeManualDeclaration} from './manual-time.mjs';
-import {manualSourceIntent,checkpointBinding,sameCheckpoint,activityCheckpointBinding,sameActivityCheckpoint,id} from './schema.mjs';
+import {activityCheckpointBinding,sameActivityCheckpoint,id} from './schema.mjs';
 import {createOwnerTransport,OWNER_TRANSPORT_PROTOCOL} from './owner-transport.mjs';
 const driverOperation='manual-record-driver';
-const driverCommands=new Set(['window','declaration','reservation']);
+const driverCommands=new Set(['window','declaration']);
 /** Only a human's generic declaration crosses this bridge, never treatment credentials. */
-export function createManualRecordBridge({game,fromUuid,getSession,getActivities,observe,reserveSource,checkpointContext,ownsSession,enrollCheckpointActivity,lookupCheckpointActivity,timeoutMs=10000}){
+export function createManualRecordBridge({game,fromUuid,getSession,getActivities,checkpointContext,ownsSession,enrollCheckpointActivity,lookupCheckpointActivity,timeoutMs=10000}){
  let socket,transport,registered=false,generation=0,clientNonce=crypto.randomUUID();const handled=new Map();
  function localScope(){if(!isActiveGM(game)||game.user.active!==true)return null;const scope=checkpointContext?.();return typeof scope?.leaseNonce==='string'?{...scope,user:game.user,generation}:null}
  async function currentDriver(scope=localScope()){
@@ -20,11 +20,10 @@ export function createManualRecordBridge({game,fromUuid,getSession,getActivities
   if(handled.size>=256){const oldest=[...handled].find(([,done])=>done);if(!oldest)return;handled.delete(oldest[0])}handled.set(key,false);
   let value,error;
   try{
-   const command=packet.command,binding=packet.status==='declaration'?command?.event?.checkpointBinding:packet.status==='reservation'?command?.binding:null;
-   if(!command||command.actorUUID!==packet.actorUUID||packet.status!=='window'&&!binding||packet.status==='declaration'&&command.event.actorUUID!==packet.actorUUID||packet.status==='reservation'&&command.intent?.actorUUID!==packet.actorUUID||binding&&(packet.sessionId!==binding.sessionId||packet.rootUUID!==binding.rootUUID||packet.epoch!==binding.epoch))throw Error('manual-driver-request-mismatch');
+   const command=packet.command,binding=packet.status==='declaration'?command?.event?.checkpointBinding:null;
+   if(!command||command.actorUUID!==packet.actorUUID||packet.status!=='window'&&!binding||packet.status==='declaration'&&command.event.actorUUID!==packet.actorUUID||binding&&(packet.sessionId!==binding.sessionId||packet.rootUUID!==binding.rootUUID||packet.epoch!==binding.epoch))throw Error('manual-driver-request-mismatch');
    if(packet.status==='window')value=await currentWindow(command.actorUUID,senderId);
-   else if(packet.status==='declaration')value=await receive(command.event,senderId);
-   else value=await receiveReservation(command.binding,command.intent,senderId);
+   else value=await receive(command.event,senderId);
   }catch(failure){error=failure}
   if(scope.generation!==generation)return;handled.set(key,true);
   // A restored or superseded tab must never win the reply race, even when its
@@ -63,30 +62,15 @@ export function createManualRecordBridge({game,fromUuid,getSession,getActivities
   if(!options.guard()||latest?.status!=='running'||latest.activityCheckpoint?.phase!=='open'||!sameActivityCheckpoint(latest.activityCheckpoint,binding)||latest.driver?.leaseNonce!==options.leaseNonce||!latest.actorUUIDs.includes(actorUUID))throw Error('activity-checkpoint-changed');
   return {binding,phase:'open',actor:{actorUUID,name:actor.name??actorUUID},budgetEndsAt:latest.budgetEndsAt,dependencies:activities.filter(a=>a.actorUUID===actorUUID&&a.sessionId===binding.sessionId&&['planned','started','confirmed'].includes(a.state)&&(!a.executor||a.executor.state==='settled')).slice(-128).map(a=>({id:a.id,label:a.label??a.options?.label??a.providerId,state:a.state}))};
  }
+ // A declaration is only accepted for a registration window; there is no other record to add it to.
+ function windowDeclaration(event){event=normalizeManualDeclaration(event);if(!event.checkpointBinding)throw Error('activity-checkpoint-closed');return event}
  async function receive(event,callerId){
-  event=normalizeManualDeclaration(event);
-  if(event.checkpointBinding){
-   let options;
-   try{
-    options=await checkpointActor(event.checkpointBinding,event.actorUUID,callerId);
-    if(typeof enrollCheckpointActivity!=='function')throw Error('activity-checkpoint-unavailable');
-   }catch(error){error.declarationRejected=true;throw error}
-   return enrollCheckpointActivity(event.checkpointBinding,event,options);
-  }
-  if(!isActiveGM(game))throw Error('active-gm-required');const user=game.users.get(callerId);if(!user?.active)throw Error('caller-offline');
-  const actor=await fromUuid(event?.actorUUID),session=await getSession();
-  if(!isActiveGM(game)||!user.active||!actor?.testUserPermission(user,'OWNER')||session?.status!=='recording'||!session.actorUUIDs.includes(actor.uuid))throw Error('manual-actor-not-allowed');
-  if(event.sessionId!==undefined&&event.sessionId!==session.id)throw Error('manual-session-changed');
-  return observe({...event,id:crypto.randomUUID(),expectedSessionId:session.id,actorUUID:actor.uuid,patientUUIDs:[],kind:'activity',source:{type:'user-record',userId:callerId,unverified:true},missing:['manual-source-requires-review']});
- }
- async function receiveReservation(binding,intent,callerId){
-  if(!isActiveGM(game))throw Error('active-gm-required');const session=await getSession();
-  if(!session?.manualCheckpoint||session.status!=='running'){if(binding)throw Error('manual-checkpoint-unavailable');return null}
-  if(session.status!=='running'||session.manualCheckpoint.phase!=='open')throw Error('manual-checkpoint-closed');
-  intent=manualSourceIntent(intent);const user=game.users.get(callerId),actor=await fromUuid(intent.actorUUID);
-  if(!isActiveGM(game)||!user?.active||actor?.uuid!==intent.actorUUID||actor.testUserPermission?.(user,'OWNER')!==true||!session.actorUUIDs.includes(actor.uuid))throw Error('manual-actor-owner-required');
-  if(binding&&!sameCheckpoint(session.manualCheckpoint,binding))throw Error('manual-checkpoint-mismatch');
-  if(typeof reserveSource!=='function')throw Error('session-driver-required');return reserveSource(binding??checkpointBinding(session.manualCheckpoint),intent,callerId);
+  event=windowDeclaration(event);let options;
+  try{
+   options=await checkpointActor(event.checkpointBinding,event.actorUUID,callerId);
+   if(typeof enrollCheckpointActivity!=='function')throw Error('activity-checkpoint-unavailable');
+  }catch(error){error.declarationRejected=true;throw error}
+  return enrollCheckpointActivity(event.checkpointBinding,event,options);
  }
  async function lookup(binding,registrationId,actorUUID,callerId){
   binding=activityCheckpointBinding(binding);id(registrationId,'registration');id(actorUUID,'actor');
@@ -98,14 +82,11 @@ export function createManualRecordBridge({game,fromUuid,getSession,getActivities
   if(typeof lookupCheckpointActivity!=='function')throw Error('activity-checkpoint-unavailable');
   return lookupCheckpointActivity(binding,registrationId,{authenticatedCaller:callerId,actorUUID,guard});
  }
- return {register(api){socket=api;if(!registered){registered=true;registerDriverTransport()}socket?.register('exploration:activityCheckpoint',async function(actorUUID){try{return {ok:true,value:await currentWindow(actorUUID,this.socketdata?.userId)}}catch(error){return {ok:false,error:error.message}}});socket?.register('exploration:lookupCheckpointActivity',async function(binding,registrationId,actorUUID){try{return {ok:true,value:await lookup(binding,registrationId,actorUUID,this.socketdata?.userId)}}catch(error){return {ok:false,error:error.message}}});socket?.register('exploration:reserveSource',async function(binding,intent){try{return {ok:true,value:await receiveReservation(binding,intent,this.socketdata?.userId)}}catch(error){return {ok:false,error:error.message}}});socket?.register('exploration:record',async function(event){try{return {ok:true,value:await receive(event,this.socketdata?.userId)}}catch(error){return {ok:false,error:error.message,...error.declarationRejected===true?{declarationRejected:true}:{}}}})},invalidate(){generation++;clientNonce=crypto.randomUUID();transport?.dispose();transport=null;handled.clear();if(registered)registerDriverTransport()},async getActivityCheckpoint(actorUUID){
+ return {register(api){socket=api;if(!registered){registered=true;registerDriverTransport()}socket?.register('exploration:activityCheckpoint',async function(actorUUID){try{return {ok:true,value:await currentWindow(actorUUID,this.socketdata?.userId)}}catch(error){return {ok:false,error:error.message}}});socket?.register('exploration:lookupCheckpointActivity',async function(binding,registrationId,actorUUID){try{return {ok:true,value:await lookup(binding,registrationId,actorUUID,this.socketdata?.userId)}}catch(error){return {ok:false,error:error.message}}});socket?.register('exploration:record',async function(event){try{return {ok:true,value:await receive(event,this.socketdata?.userId)}}catch(error){return {ok:false,error:error.message,...error.declarationRejected===true?{declarationRejected:true}:{}}}})},invalidate(){generation++;clientNonce=crypto.randomUUID();transport?.dispose();transport=null;handled.clear();if(registered)registerDriverTransport()},async getActivityCheckpoint(actorUUID){
   id(actorUUID,'actor');if(await currentDriver())return currentWindow(actorUUID,game.user.id);return requestDriver('window',actorUUID,{actorUUID});
- },async reserveSource(binding,intent){
-  if(binding){if(!sameCheckpoint(binding,binding))throw Error('invalid-manual-checkpoint');binding=checkpointBinding(binding);intent=manualSourceIntent(intent);if(await currentDriver())return receiveReservation(binding,intent,game.user.id);return requestDriver('reservation',intent.actorUUID,{actorUUID:intent.actorUUID,binding,intent},binding)}
-  if(isActiveGM(game))return receiveReservation(binding,intent,game.user.id);if(!game.users.activeGM?.active&&!binding)return null;if(!socket)throw Error('manual-record-socket-unavailable');const response=await socket.executeAsGM('exploration:reserveSource',binding,intent);if(!response?.ok)throw Error(response?.error??'manual-reservation-unconfirmed');return response.value;
  },async lookupCheckpointActivity(binding,registrationId,actorUUID){
   binding=activityCheckpointBinding(binding);id(registrationId,'registration');id(actorUUID,'actor');
   if(isActiveGM(game))return lookup(binding,registrationId,actorUUID,game.user.id);if(!socket)throw Error('manual-record-socket-unavailable');
   const response=await socket.executeAsGM('exploration:lookupCheckpointActivity',binding,registrationId,actorUUID);if(!response?.ok)throw Error(response?.error??'manual-lookup-unconfirmed');return response.value;
- },async record(event){event=normalizeManualDeclaration(event);if(event.checkpointBinding){if(await currentDriver())return receive(event,game.user.id);return requestDriver('declaration',event.actorUUID,{actorUUID:event.actorUUID,event},event.checkpointBinding)}if(isActiveGM(game))return receive(event,game.user.id);if(!socket)throw Error('manual-record-socket-unavailable');const response=await socket.executeAsGM('exploration:record',event);if(!response?.ok){const error=Error(response?.error??'manual-record-unconfirmed');if(response?.declarationRejected===true)error.declarationRejected=true;throw error}return response.value}};
+ },async record(event){event=windowDeclaration(event);if(await currentDriver())return receive(event,game.user.id);return requestDriver('declaration',event.actorUUID,{actorUUID:event.actorUUID,event},event.checkpointBinding)}};
 }

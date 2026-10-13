@@ -21,20 +21,6 @@ export function captureFiniteMedicine(config){
 }
 export function finite(value,label) {if(!Number.isFinite(value))throw Error(`invalid-${label}`);return value}
 export function id(value,label='id') {if(typeof value!=='string'||!value.trim()||['__proto__','constructor','prototype'].includes(value))throw Error(`invalid-${label}`);return value}
-export const MANUAL_POOL_OPERATION='manual-pool-application';
-export function manualPoolRequest(input){
-  const fields=['sessionId','activityId','actorUUID','sourceType','useId','checkId','resultId','rollIndex','stage','poolUUID','patientUUIDs','batchId','ownerClientNonce','attemptNonce'];
-  if(!input||typeof input!=='object'||![Object.prototype,null].includes(Object.getPrototypeOf(input))||Reflect.ownKeys(input).length!==fields.length)throw Error('invalid-manual-pool-request');
-  const result={};
-  for(const key of fields){const d=Object.getOwnPropertyDescriptor(input,key);if(!d?.enumerable||!Object.hasOwn(d,'value'))throw Error('invalid-manual-pool-request');result[key]=d.value}
-  for(const key of fields.filter(k=>!['patientUUIDs','rollIndex'].includes(k))){id(result[key],`manual-pool-${key}`);if(result[key].length>128||result[key].trim()!==result[key]||/[\u0000-\u001f\u007f]/.test(result[key]))throw Error('invalid-manual-pool-request')}
-  if(!['native-action','workbench'].includes(result.sourceType)||result.stage!=='healing'||!Number.isSafeInteger(result.rollIndex)||result.rollIndex<0||result.rollIndex>31)throw Error('invalid-manual-pool-source');
-  const patients=result.patientUUIDs;
-  if(!Array.isArray(patients)||Object.getPrototypeOf(patients)!==Array.prototype||patients.length<1||patients.length>8||Reflect.ownKeys(patients).length!==patients.length+1)throw Error('invalid-manual-pool-patients');
-  result.patientUUIDs=Array.from({length:patients.length},(_,i)=>{const d=Object.getOwnPropertyDescriptor(patients,String(i));if(!d||!Object.hasOwn(d,'value'))throw Error('invalid-manual-pool-patients');return id(d.value,'manual-pool-patient')});
-  if(new Set(result.patientUUIDs).size!==patients.length)throw Error('invalid-manual-pool-patients');return result;
-}
-const checkpointFields=['id','sessionId','rootUUID','epoch','observationNonce','from','to'];
 const activityCheckpointFields=['id','sessionId','rootUUID','epoch','observationNonce','from'];
 export function activityCheckpointBinding(input){
   if(!input||typeof input!=='object'||![Object.prototype,null].includes(Object.getPrototypeOf(input))||Reflect.ownKeys(input).length!==activityCheckpointFields.length)throw Error('invalid-activity-checkpoint');
@@ -45,20 +31,7 @@ export function activityCheckpointBinding(input){
 export function sameActivityCheckpoint(expected,binding){
   const value=activityCheckpointBinding(binding);return !!expected&&activityCheckpointFields.every(key=>value[key]===expected[key]);
 }
-export const checkpointBinding=checkpoint=>Object.fromEntries(checkpointFields.map(key=>[key,checkpoint[key]]));
-export function sameCheckpoint(expected,binding){
-  return !!expected&&!!binding&&typeof binding==='object'&&[Object.prototype,null].includes(Object.getPrototypeOf(binding))&&Reflect.ownKeys(binding).length===checkpointFields.length&&checkpointFields.every(key=>{
-    const field=Object.getOwnPropertyDescriptor(binding,key);return field&&Object.hasOwn(field,'value')&&field.value===expected[key];
-  });
-}
-export function manualSourceIntent(input){
-  const fields=['sourceType','kind','useId','actorUUID','patientUUID','riskySurgery'];
-  if(!input||typeof input!=='object'||![Object.prototype,null].includes(Object.getPrototypeOf(input))||Reflect.ownKeys(input).some(key=>!fields.includes(key)))throw Error('invalid-manual-source-intent');
-  const value={};for(const key of Reflect.ownKeys(input)){const field=Object.getOwnPropertyDescriptor(input,key);if(!Object.hasOwn(field,'value'))throw Error('invalid-manual-source-intent');value[key]=field.value}
-  if(value.sourceType!=='workbench'||value.kind!=='treatment'||value.riskySurgery!==undefined&&typeof value.riskySurgery!=='boolean')throw Error('manual-checkpoint-source-unavailable');
-  for(const key of ['useId','actorUUID','patientUUID'])id(value[key],key);return value;
-}
-export function normalizeNativeOwnerMap(value,actorUUIDs,{manual=false}={}) {
+export function normalizeNativeOwnerMap(value,actorUUIDs) {
   if(value===undefined)return {};
   if(value===null||typeof value!=='object'||![Object.prototype,null].includes(Object.getPrototypeOf(value)))throw Error('invalid-native-owner-map');
   const selected=new Set(actorUUIDs??[]),result={};
@@ -67,7 +40,6 @@ export function normalizeNativeOwnerMap(value,actorUUIDs,{manual=false}={}) {
     if(!descriptor.enumerable||!Object.hasOwn(descriptor,'value')||!selected.has(key))throw Error('invalid-native-owner-map');
     result[key]=id(descriptor.value,'native-owner-user');
   }
-  if(manual&&Object.keys(result).length)throw Error('manual-native-owner-map');
   return result;
 }
 export const activityStates=['planned','started','completing','awaiting-evidence','confirmed','blocked','uncertain','cancelled'];
@@ -84,7 +56,7 @@ export function createActivity(input) {
 }
 export function validateSession(input) {
   const finiteMedicine=captureFiniteMedicine(input);
-  const nativeOwnerByActor=normalizeNativeOwnerMap(input.nativeOwnerByActor,input.actorUUIDs,{manual:input.manual===true});
+  const nativeOwnerByActor=normalizeNativeOwnerMap(input.nativeOwnerByActor,input.actorUUIDs);
   let recoveryGoals;
   if('recoveryGoals' in input){const field=Object.getOwnPropertyDescriptor(input,'recoveryGoals');if(!field?.enumerable||!Object.hasOwn(field,'value'))throw Error('invalid-recovery-goals');recoveryGoals=validateRecoveryGoals(field.value,input.actorUUIDs,input.goalsByPool)}
   const s={...clone(input),nativeOwnerByActor,...recoveryGoals?{recoveryGoals}:{},...finiteMedicine===undefined?{}:{finiteMedicine}};id(s.id);finite(s.startedAt,'start');finite(s.budgetEndsAt,'budget');

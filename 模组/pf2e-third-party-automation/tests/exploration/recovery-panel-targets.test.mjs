@@ -12,7 +12,7 @@ function fixture(t,{policy={recovery:preferences()},data=null,snapshotGate}={}){
  const game={user:{isGM:true,getFlag:()=>policy,setFlag:async(_module,_key,value)=>{saved.push(value);policy=value}},messages:new Map()};
  const api=createRecoveryPanel({game,coordinator:{snapshot:async()=>data,resume:async id=>resumed.push(id)},getSessionId:()=>data?.session.id??null,capabilities:{snapshot:async uuids=>{await snapshotGate?.();return actors.filter(a=>uuids.includes(a.actorUUID))}},start:async config=>calls.push(config)}),app=api.open([P]);
  const modes=[{dataset:{targetMode:'',actor:P},value:'percent'}],values=new Map([[P,{value:'25'}]]);
- const fields={budget:{value:'120'},activityBudget:{value:'100'},risky:{checked:false},focus:{checked:true},extension:{checked:false},assurance:{checked:false},rank:{value:'trained'},manualFirstRound:{checked:false},activityFirstRound:{checked:false},wounded:{checked:false},failureStop:{checked:false},failureLimit:{value:'3'}};
+ const fields={budget:{value:'120'},activityBudget:{value:'100'},risky:{checked:false},focus:{checked:true},extension:{checked:false},assurance:{checked:false},rank:{value:'trained'},activityFirstRound:{checked:false},wounded:{checked:false},failureStop:{checked:false},failureLimit:{value:'3'}};
  const outputs=new Map([[P,{value:'11',textContent:'11'}]]),explanations=new Map([[P,{textContent:''}]]),error={textContent:''};
  const content={querySelector:selector=>{
   const name=selector.match(/\[name=(\w+)\]/)?.[1];if(name)return fields[name];

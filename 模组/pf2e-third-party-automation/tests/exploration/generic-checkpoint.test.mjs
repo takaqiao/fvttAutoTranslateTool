@@ -22,7 +22,7 @@ async function fixture({beforeOpen}={}){
  const handlers=new Map();let resolveActor=async()=>actor;
  const makeBridge=(writer=ledger)=>{
   const bridge=createManualRecordBridge({game,fromUuid:uuid=>resolveActor(uuid),getSession:()=>writer.getSession(context.sessionId),checkpointContext:()=>({...context}),ownsSession:(...args)=>writer.ownsSession(...args),
-   enrollCheckpointActivity:(...args)=>writer.enrollCheckpointActivity(...args),lookupCheckpointActivity:(...args)=>writer.lookupCheckpointActivity(...args),observe:()=>{throw Error('recording-route-used')}});
+   enrollCheckpointActivity:(...args)=>writer.enrollCheckpointActivity(...args),lookupCheckpointActivity:(...args)=>writer.lookupCheckpointActivity(...args)});
   const local=new Map();bridge.register({register:(name,fn)=>local.set(name,fn)});return local;
  };
  for(const [key,value] of makeBridge())handlers.set(key,value);
@@ -181,10 +181,10 @@ test('open registration window cannot admit native work, start existing work, co
  assert.equal(f.store.raw.pages.length,before);
 });
 
-test('checkpoint authority is private and separate from session patching and WB600',async()=>{
+test('checkpoint authority is private; a session patch can write neither it nor the retired manual window',async()=>{
  const f=await fixture();
  await assert.rejects(f.ledger.updateSession('S',{activityCheckpoint:{...f.binding,phase:'open',registrations:{}}}),/immutable-session/);
- await assert.rejects(f.ledger.updateSession('S',{manualCheckpoint:{...f.binding,to:0,phase:'open'}},{leaseNonce:f.context.leaseNonce}),/activity-checkpoint-active/);
+ await assert.rejects(f.ledger.updateSession('S',{manualCheckpoint:{...f.binding,to:0,phase:'open'}},{leaseNonce:f.context.leaseNonce}),/immutable-session/);
  await assert.rejects(f.ledger.createSession({id:'forged',startedAt:0,budgetEndsAt:600,activityCheckpoint:f.binding}),/activity-checkpoint-open-required/);
  const other=f.makeBridge(f.store.client('other-tab'));assert.equal((await f.send(f.input(),other)).ok,false);
  await f.ledger.updateSession('S',{status:'paused'});assert.equal((await f.ledger.getSession('S')).activityCheckpoint.phase,'interrupted');assert.equal((await f.send()).ok,false);
@@ -229,8 +229,8 @@ test('a rejected or asynchronous private final guard does not append a revision'
  assert.equal(f.store.raw.pages.length,before);
 });
 
-test('a checkpoint cannot open over unknown native time or execution, or an existing WB window',async()=>{
- for(const mode of ['clock','executor','workbench']){
+test('a checkpoint cannot open over unknown native time or execution',async()=>{
+ for(const mode of ['clock','executor']){
   const store=await authorityFixture(),ledger=store.client('driver'),session=await ledger.createSession({id:'S',actorUUIDs:['Actor.A'],startedAt:0,cursorAt:0,budgetEndsAt:1200}),options={leaseNonce:session.driver.leaseNonce};
   const binding={id:'C',sessionId:'S',rootUUID:store.rootUUID,epoch:'epoch',observationNonce:'observation',from:0};
   if(mode==='clock')await ledger.upsertClockCommit({id:'clock',sessionId:'S',gmId:'G',from:0,to:600,state:'started'},options);
@@ -239,7 +239,6 @@ test('a checkpoint cannot open over unknown native time or execution, or an exis
    await ledger.transitionActivity('activity',{...options,expected:['planned'],patch:{state:'started'}});
    await ledger.transitionActivity('activity',{...options,expected:['started'],patch:{state:'completing'}});
   }
-  if(mode==='workbench')await ledger.updateSession('S',{manualCheckpoint:{...binding,to:600,phase:'open'}},options);
-  const before=store.raw.pages.length;await assert.rejects(ledger.openActivityCheckpoint(binding,{...options,guard:()=>true}),/unresolved-evidence|manual-checkpoint-active/);assert.equal(store.raw.pages.length,before);
+  const before=store.raw.pages.length;await assert.rejects(ledger.openActivityCheckpoint(binding,{...options,guard:()=>true}),/unresolved-evidence/);assert.equal(store.raw.pages.length,before);
  }
 });

@@ -1,7 +1,7 @@
 import {test} from 'node:test';import assert from 'node:assert/strict';import {formatSessionResult,escapeHTML,recoveryDefaults,recoveryBudgetPolicy} from '../../scripts/exploration/panel.mjs';
 import * as panelUI from '../../scripts/exploration/panel.mjs';
 import {readFileSync} from 'node:fs';
-test('earliest under assumptions is distinct from elapsed; deficit is shown',()=>{const text=formatSessionResult({durationSeconds:1800,certainty:'earliest-under-assumptions',remainingHP:12,status:'stopped'});assert.match(text,/最早|假设/);assert.match(text,/30/);assert.match(text,/12/)});
+test('the session result reports confirmed elapsed time and the remaining deficit',()=>{const text=formatSessionResult({durationSeconds:1800,remainingHP:12,status:'stopped'});assert.match(text,/已确认经过 30 分钟/);assert.match(text,/尚缺 12 HP/);assert.doesNotMatch(text,/最早|假设/)});
 test('defaults are max HP and no finite resources; actor names escape HTML',()=>{const d=recoveryDefaults([{actorUUID:'A',hp:{value:3,max:42},pool:{poolUUID:'A'}}]);assert.equal(d.goalsByPool[0].targetHP,42);assert.equal(d.allowFiniteResources,false);assert.equal(d.riskySurgery,false);assert.equal(escapeHTML('<b>"A" & B</b>'),'&lt;b&gt;&quot;A&quot; &amp; B&lt;/b&gt;')});
 test('user budget is configurable beyond the default two hours and rejects invalid requests',()=>{assert.deepEqual(recoveryBudgetPolicy({minutes:150,activities:8}),{budgetSeconds:9000,maxActivities:8});for(const minutes of [NaN,0,-1,Infinity])assert.throws(()=>recoveryBudgetPolicy({minutes,activities:8}),/预算/);assert.throws(()=>recoveryBudgetPolicy({minutes:30,activities:2.5}),/次数/)});
 
@@ -63,11 +63,11 @@ test('idle recovery exposes one start action while keeping its saved controls in
  const f=checkpointPanelFixture(t,{status:'complete'}),html=await f.app._renderHTML(await f.app._prepareContext());
  assert.deepEqual(mainActions(html),['start']);assert.match(html,/data-recovery="start">掷骰恢复并推进时间/);
  const advanced=html.match(/<details class="recovery-advanced"><summary>[^<]+<\/summary>([\s\S]*?)<\/details>\s*<details class="recovery-more">/);assert.ok(advanced,'advanced options must start collapsed, including their nested disclosures');
- for(const name of ['wounded','failureStop','failureLimit','activityFirstRound','manualFirstRound','risky','focus','extension','assurance','rank','budget','activityBudget'])assert.match(advanced[1],new RegExp(`name="${name}"`));
+ for(const name of ['wounded','failureStop','failureLimit','activityFirstRound','risky','focus','extension','assurance','rank','budget','activityBudget'])assert.match(advanced[1],new RegExp(`name="${name}"`));
  assert.match(advanced[1],/data-target-mode/);assert.match(advanced[1],/data-target-value/);
  assert.match(html,/<ul class="recovery-member-summary">[\s\S]*?<\/ul>[\s\S]*?<details class="recovery-advanced">/);
  assert.match(advanced[1],/<table class="recovery-members">/);assert.match(advanced[1],/class="recovery-policy-grid"/);assert.match(advanced[1],/<details class="recovery-target-preview">/);assert.match(advanced[1],/<details class="recovery-initial-actions"[^>]*>/);
- const more=html.match(/<details class="recovery-more"><summary>更多操作<\/summary>([\s\S]*?)<\/details>/);assert.ok(more);assert.deepEqual(actions(more[1]),['record','refresh']);
+ const more=html.match(/<details class="recovery-more"><summary>更多操作<\/summary>([\s\S]*?)<\/details>/);assert.ok(more);assert.deepEqual(actions(more[1]),['refresh']);assert.doesNotMatch(html,/manualFirstRound|首轮等待手动治疗|记录手动行动/);
 });
 test('unprepared storage shows preparation instead of disabled recovery actions',async t=>{
  const f=checkpointPanelFixture(t),context={...await f.app._prepareContext(),data:null,ledgerStatus:{state:'unconfigured'}},html=await f.app._renderHTML(context);
@@ -75,8 +75,7 @@ test('unprepared storage shows preparation instead of disabled recovery actions'
  assert.match(html,/<details class="recovery-more">[\s\S]*data-recovery="selectLedger"/);
 });
 test('running recovery shows only stop and the current checkpoint continuation as primary actions',async t=>{
- const f=checkpointPanelFixture(t);assert.deepEqual(mainActions(await f.app._renderHTML(await f.app._prepareContext())),['closeManualCheckpoint','stop']);
- f.data.session.manualCheckpoint.phase='settled';assert.deepEqual(mainActions(await f.app._renderHTML(await f.app._prepareContext())),['stop']);
+ const f=checkpointPanelFixture(t);assert.deepEqual(mainActions(await f.app._renderHTML(await f.app._prepareContext())),['stop']);
  f.data.session.activityCheckpoint={id:'A',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:0,phase:'open',registrations:{}};
  assert.deepEqual(mainActions(await f.app._renderHTML(await f.app._prepareContext())),['closeActivityCheckpoint','stop']);
 });
@@ -94,7 +93,7 @@ test('a world-time conflict cannot offer ordinary resume even when all receipts 
 test('history and time conflict diagnostics stay readable inside closed full records',()=>{
  const data=historyFixture();data.clocks[0].reason='external-world-time-change';const html=panelUI.renderRecoveryHistory(data);
  assert.match(html,/^<details class="recovery-history-details"><summary>完整记录/);assert.match(html,/世界时间已被其他操作改变/);assert.doesNotMatch(html,/external-world-time-change/);
- assert.match(formatSessionResult({durationSeconds:600,certainty:'observed',status:'external-rest-time-authority'}),/世界时间由外部休息操作管理/);
+ assert.match(formatSessionResult({durationSeconds:600,status:'external-rest-time-authority'}),/世界时间由外部休息操作管理/);
 });
 test('panel sizing applies to content controls without resizing native window buttons',()=>{
  const css=readFileSync(new URL('../../styles/exploration.css',import.meta.url),'utf8');
@@ -128,23 +127,17 @@ test('accepting the current state requires confirmation and binds the displayed 
  selected.canAcceptCurrentTime=false;answer=true;await assert.rejects(app.act('acceptCurrentTime',null),/当前状态/);assert.equal(accepted.length,1);
 });
 
-function checkpointPanelFixture(t,{phase='open',status='running'}={}){
+function checkpointPanelFixture(t,{status='running'}={}){
  const previous=globalThis.foundry;t.after(()=>{globalThis.foundry=previous});globalThis.foundry={applications:{api:{ApplicationV2:class{render(){return this}}}}};
- const actors=[{actorUUID:'Actor.H',name:'H',hp:{value:20,max:20},focus:{value:1,max:1},pool:{poolUUID:'Actor.H',ready:true},wardCapacity:1}],binding={id:'C',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:0,to:600},calls=[];
- const data={session:{id:'S',status,manual:false,startedAt:0,cursorAt:0,goalsByPool:[{poolUUID:'Actor.H',targetHP:20}],manualCheckpoint:{...binding,phase}},actors,activities:[],clocks:[]};
- const game={user:{isGM:true,getFlag:()=>({}),setFlag:async()=>{}},messages:new Map()},coordinator={snapshot:async()=>data,closeManualCheckpoint:async value=>calls.push(['close',value])};
- const api=panelUI.createRecoveryPanel({game,coordinator,capabilities:{snapshot:async()=>actors},start:async config=>calls.push(['start',config]),getSessionId:()=> 'S'}),app=api.open(['Actor.H']);return {app,data,binding,calls,game};
+ const actors=[{actorUUID:'Actor.H',name:'H',hp:{value:20,max:20},focus:{value:1,max:1},pool:{poolUUID:'Actor.H',ready:true},wardCapacity:1}],calls=[];
+ const data={session:{id:'S',status,manual:false,startedAt:0,cursorAt:0,goalsByPool:[{poolUUID:'Actor.H',targetHP:20}]},actors,activities:[],clocks:[]};
+ const game={user:{isGM:true,getFlag:()=>({}),setFlag:async()=>{}},messages:new Map()},coordinator={snapshot:async()=>data};
+ const api=panelUI.createRecoveryPanel({game,coordinator,capabilities:{snapshot:async()=>actors},start:async config=>calls.push(['start',config]),getSessionId:()=> 'S'}),app=api.open(['Actor.H']);return {app,data,calls,game};
 }
-test('an open manual checkpoint shows its waiting instruction and continue action only while open',async t=>{
- const f=checkpointPanelFixture(t),context=await f.app._prepareContext(),html=await f.app._renderHTML(context);assert.match(html,/name="manualFirstRound"/);assert.match(html,/首轮等待手动治疗/);assert.match(html,/data-recovery="closeManualCheckpoint"/);assert.match(html,/继续本轮/);assert.match(html,/Workbench/);
- f.data.session.manualCheckpoint.phase='advancing';assert.doesNotMatch(await f.app._renderHTML(await f.app._prepareContext()),/data-recovery="closeManualCheckpoint"/);
-});
-test('continue routes only the current immutable checkpoint binding through the panel action',async t=>{
- const f=checkpointPanelFixture(t);await f.app.act('closeManualCheckpoint',null);assert.deepEqual(f.calls,[['close',f.binding]]);
-});
-test('the first-round waiting choice reaches start while ordinary starts remain the default',async t=>{
- const f=checkpointPanelFixture(t,{status:'complete'}),values={budget:{value:'10'},activityBudget:{value:'2'},risky:{checked:false},focus:{checked:true},extension:{checked:false},assurance:{checked:false},rank:{value:'trained'},manualFirstRound:{checked:true}},content={querySelector:selector=>values[selector.match(/name=(\w+)/)[1]],querySelectorAll:()=>[{dataset:{pool:'Actor.H'},value:'20'}]};
- await f.app.act('start',content);assert.equal(f.calls[0][1].waitForManualFirstRound,true);values.manualFirstRound.checked=false;await f.app.act('start',content);assert.equal(f.calls[1][1].waitForManualFirstRound,false);
+test('the first-round registration choice reaches start while ordinary starts remain the default',async t=>{
+ const f=checkpointPanelFixture(t,{status:'complete'}),values={budget:{value:'10'},activityBudget:{value:'2'},risky:{checked:false},focus:{checked:true},extension:{checked:false},assurance:{checked:false},rank:{value:'trained'},activityFirstRound:{checked:true}},content={querySelector:selector=>values[selector.match(/name=(\w+)/)[1]],querySelectorAll:()=>[{dataset:{pool:'Actor.H'},value:'20'}]};
+ await f.app.act('start',content);assert.equal(f.calls[0][1].waitForActivityFirstRound,true);values.activityFirstRound.checked=false;await f.app.act('start',content);assert.equal(f.calls[1][1].waitForActivityFirstRound,false);
+ for(const [,config] of f.calls){assert.equal(Object.hasOwn(config,'manual'),false);assert.equal(Object.hasOwn(config,'waitForManualFirstRound'),false)}
 });
 
 function declarationDialog(t,values,{action='record'}={}){
@@ -157,16 +150,17 @@ test('the checkpoint form emits one immutable binding and future timing without 
  await panelUI.promptActivityDeclaration({actors:[{actorUUID:'Actor.A',name:'<A>'}],activities:[{id:'D',label:'Prior'}],window:{binding,phase:'open'},record:async event=>{records.push(event);return event}});
  assert.equal(records.length,1);assert.deepEqual(records[0].checkpointBinding,binding);assert.equal(records[0].durationSeconds,300);assert.equal(records[0].notBefore,720);assert.equal(records[0].order,1);assert.deepEqual(records[0].dependsOn,['D']);assert.deepEqual(records[0].durationSource,{type:'item-text',detail:'One task'});assert.equal(records[0].sessionId,undefined);assert.equal(records[0].observedStart,undefined);assert.equal(records[0].observedEnd,undefined);assert.equal(typeof records[0].registrationId,'string');assert.doesNotMatch(content(),/name="observedStart"|name="observedEnd"/);assert.match(content(),/&lt;A&gt;/);
 });
-test('the existing recording form keeps its historical declaration and session payload',async t=>{
- declarationDialog(t,{actor:'Actor.A',label:'Repair',duration:'10',unit:'60',durationSource:'user-declared',durationDetail:'',notBefore:'',observedStart:'1',observedEnd:'11',order:'',dependsOn:[]});let saved;
- await panelUI.promptActivityDeclaration({actors:[{actorUUID:'Actor.A',name:'A'}],session:{id:'S',status:'recording',startedAt:-600},record:async event=>{saved=event}});assert.equal(saved.sessionId,'S');assert.equal(saved.observedStart,-540);assert.equal(saved.observedEnd,60);assert.equal(saved.checkpointBinding,undefined);assert.equal(saved.registrationId,undefined);
+test('the declaration form does not open without an open registration window',async t=>{
+ const content=declarationDialog(t,{actor:'Actor.A',label:'Repair',duration:'10',unit:'60',durationSource:'user-declared',durationDetail:'',notBefore:'',order:'',dependsOn:[]}),binding={id:'C',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:0};let records=0;
+ for(const window of [undefined,{binding,phase:'sealed'}])await assert.rejects(panelUI.promptActivityDeclaration({actors:[{actorUUID:'Actor.A',name:'A'}],window,record:async()=>{records++}}),/探索登记窗口已关闭/);
+ assert.equal(records,0);assert.equal(content(),undefined);
 });
 test('a failed checkpoint form submission retains its exact registration for lookup and never retries',async t=>{
  declarationDialog(t,{actor:'Actor.A',label:'Repair',duration:'1',unit:'60',durationSource:'user-declared',durationDetail:'',notBefore:'',order:'',dependsOn:[]});const binding={id:'C',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:0},error=Error('revision-acknowledgement-unknown');let calls=0;
  await assert.rejects(panelUI.promptActivityDeclaration({actors:[{actorUUID:'Actor.A',name:'A'}],window:{binding,phase:'open'},record:async()=>{calls++;throw error}}),caught=>{assert.equal(caught,error);assert.deepEqual(caught.declaration.checkpointBinding,binding);assert.equal(typeof caught.declaration.registrationId,'string');return true});assert.equal(calls,1);
 });
 test('the GM panel requests and seals the current generic window without requiring another player',async t=>{
- const f=checkpointPanelFixture(t);delete f.data.session.manualCheckpoint;f.data.session.activityCheckpoint={id:'A',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:0,phase:'open',registrations:{}};f.data.session.budgetEndsAt=1200;
+ const f=checkpointPanelFixture(t);f.data.session.activityCheckpoint={id:'A',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:0,phase:'open',registrations:{}};f.data.session.budgetEndsAt=1200;
  const coordinatorCalls=[];const api=panelUI.createRecoveryPanel({game:{user:{isGM:true,getFlag:()=>({})},messages:new Map()},coordinator:{snapshot:async()=>f.data,openActivityCheckpoint:async id=>coordinatorCalls.push(['open',id]),closeActivityCheckpoint:async b=>coordinatorCalls.push(['close',b])},capabilities:{snapshot:async()=>f.data.actors},getSessionId:()=> 'S'}),app=api.open(['Actor.H']);
  assert.match(await app._renderHTML(await app._prepareContext()),/data-recovery="closeActivityCheckpoint"/);await app.act('closeActivityCheckpoint',null);assert.equal(coordinatorCalls[0][0],'close');assert.equal(coordinatorCalls[0][1].to,undefined);f.data.session.activityCheckpoint.phase='settled';await app.act('openActivityCheckpoint',null);assert.deepEqual(coordinatorCalls[1],['open','S']);
 });

@@ -40,7 +40,7 @@ test('a new runtime binds its transaction identity and exposes controlled setup'
 
 test('binding and restoring an unconfigured runtime do not create storage or issue native work',async()=>{
  const f=fixture(),runtime=createExplorationRuntime(f);await runtime.bind({});
- await assert.rejects(runtime.api.start({actorUUIDs:[],manual:true}),/exploration-ledger-setup-required/);
+ await assert.rejects(runtime.api.start({actorUUIDs:[]}),/exploration-ledger-setup-required/);
  await assert.rejects(runtime.api.storage.initialize({issuersStopped:true,clientsReloaded:true,recoveryDisabled:true}),/root-not-configured/);assert.equal(f.calls.length,0);
 });
 
@@ -134,10 +134,10 @@ test('automatic runtime broadcasts pause once and leaves stop and resume paused'
  await f.runtime.api.stop(session.id);f.game.paused=false;await f.runtime.api.resume(session.id,{autoRun:false});assert.equal(f.pauses.length,2);assert.equal(f.game.paused,true);
 });
 
-test('opening the panel and manual recording preserve the current pause state',async t=>{
+test('opening the panel and a refused manual start preserve the current pause state',async t=>{
  const before=globalThis.foundry;t.after(()=>{globalThis.foundry=before});globalThis.foundry={applications:{api:{ApplicationV2:class{render(){return this}}}}};
  const f=await automaticFixture();await f.runtime.api.open(['Actor.H']);assert.equal(f.game.paused,false);assert.deepEqual(f.pauses,[]);
- assert.equal((await f.runtime.api.start({...f.config,manual:true})).status,'recording');assert.equal(f.game.paused,false);assert.deepEqual(f.pauses,[]);
+ await assert.rejects(f.runtime.api.start({...f.config,manual:true}),/manual-recording-unavailable/);assert.equal(f.game.paused,false);assert.deepEqual(f.pauses,[]);
 });
 
 for(const mode of ['throws','unconfirmed'])test(`runtime refuses to create a session when pause ${mode}`,async()=>{
@@ -193,7 +193,7 @@ for(const configured of [true,false])for(const operation of ['snapshot','status'
 test('a nonactive GM retains public storage and snapshot reads',async()=>{
  const f=documentFixture();f.seed(privateState());f.game.user=f.game.users.get('G2');f.game.user.getFlag=()=> 'S';
  const runtime=createExplorationRuntime(f);await runtime.bind({});assert.equal((await runtime.api.storage.status()).state,'legacy');
- assert.equal((await runtime.api.snapshot('S')).session.label,'private-session-marker');await assert.rejects(runtime.api.start({actorUUIDs:[],manual:true}),/active-gm-required/);
+ assert.equal((await runtime.api.snapshot('S')).session.label,'private-session-marker');await assert.rejects(runtime.api.start({actorUUIDs:[]}),/active-gm-required/);
  assert.equal(f.calls.every(request=>request.action==='get'),true);
 });
 for(const change of ['demotion','other-gm','same-id-replacement'])test(`public snapshot rejects ${change} while resolving its actors`,async()=>{

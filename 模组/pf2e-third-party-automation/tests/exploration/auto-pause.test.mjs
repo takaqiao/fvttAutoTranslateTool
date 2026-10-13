@@ -38,10 +38,12 @@ test('resume pauses the game while stop leaves it paused',async()=>{
  f.game.paused=false;assert.equal((await f.coordinator.resume(s.id,{autoRun:false})).status,'running');assert.equal(f.game.paused,true);
 });
 
-test('manual recording and invalid starts do not pause the game',async()=>{
+test('refused manual starts and invalid starts neither pause the game nor create a session',async()=>{
  const f=await fixture();f.setPauseEffect(()=>assert.fail('unneeded pause'));
  await assert.rejects(f.coordinator.start({actorUUIDs:['Actor.H'],goalsByPool:[{poolUUID:'Actor.H',targetHP:30}],autoRun:false}),/invalid-recovery-goals/);
- const s=await f.coordinator.start({actorUUIDs:['Actor.H'],manual:true});assert.equal(s.status,'recording');assert.equal(f.game.paused,false);
+ await assert.rejects(f.coordinator.start({actorUUIDs:['Actor.H'],manual:true}),/manual-recording-unavailable/);
+ await assert.rejects(f.coordinator.start({actorUUIDs:['Actor.H'],waitForManualFirstRound:true,autoRun:false}),/manual-checkpoint-unavailable/);
+ assert.equal(f.game.paused,false);assert.deepEqual((await f.ledger.all()).sessions,{});
 });
 
 test('pause failure prevents session creation and new activity execution',async()=>{
