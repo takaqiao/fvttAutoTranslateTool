@@ -5,10 +5,10 @@
 在 Foundry 模组安装器中填写：
 
 ```text
-https://github.com/takaqiao/fvttAutoTranslateTool/releases/download/taka-obs-director-v1.0.2/module.json
+https://github.com/takaqiao/fvttAutoTranslateTool/releases/download/taka-obs-director-v1.0.3/module.json
 ```
 
-Foundry VTT 最低版本为 14；需要 PF2e、OBS Utils、LiveKit AVClient 和 libWrapper。启用后，在模组设置中指定录制账号。只在该账号的 Director 生效时暂停已核验的 OBS Utils 摄像机广播；其余 pan 回调、接收跟随和停止后的恢复继续工作。未知 sender 或多个匹配 listener 保持原样。
+Foundry VTT 最低版本为 14；需要 PF2e、OBS Utils、LiveKit AVClient 和 libWrapper。启用后，在模组设置中指定录制账号。只在该账号的 Director 生效时暂停 OBS Utils 的摄像机广播（`canvasPan` 上名为 `socketCanvas` 的监听）；其余 pan 回调、接收跟随和停止后的恢复继续工作。找不到这个监听或有多个时保持原样。OBS Utils 5.3.1 起，录制账号进场景时和 OBS 端刷新时各会单独广播一次视角，这两次不经过 `canvasPan`，不在暂停范围内。
 
 安装包只含模组运行文件和现有美术。OBS 场景、配置、录制账号设置和世界数据由各自环境维护。
 

@@ -179,7 +179,7 @@ test('non-recorder and unavailable modules keep all original callbacks', () => {
   }
 });
 
-test('multiple exact senders fail closed without removing either', () => {
+test('multiple senders fail closed without removing either', () => {
   const f = fixture();
   f.hooks.on('canvasPan', f.makeSender());
   const original = [...f.hooks.events.canvasPan];
@@ -190,23 +190,59 @@ test('multiple exact senders fail closed without removing either', () => {
   assert.equal(f.counts.ordinaryPan, 1);
 });
 
-test('same-name listeners with a different body are never removed', () => {
+test('the OBS Utils 5.3.1 sender, whose body changed, is still paused and restored', () => {
   const f = fixture();
   f.hooks.off('canvasPan', f.sender);
-  let unrelated = 0;
-  function socketCanvas(_canvas, position) { unrelated += position.x + 1; }
-  // An overridden toString must not masquerade as the upstream callback.
-  socketCanvas.toString = () => Function.prototype.toString.call(f.sender);
+  const getLocalViewport = () => ({ x: 0, y: 0, scale: 1 });
+  const getSetting = () => 'smooth';
+  const dragReleaseEmit = () => { f.counts.sends++; };
+  const throttledEmit = () => { f.counts.sends++; };
+  const smoothedEmit = () => { f.counts.sends++; };
+  // The registered sender body shipped by OBS Utils 5.3.1 (dist/socket-gYkh4oxK.js).
+  function socketCanvas(_canvas, position) {
+    const local = getLocalViewport();
+    const x = position.x ?? local?.x;
+    const y = position.y ?? local?.y;
+    const scale = position.scale ?? local?.scale;
+    if (typeof x !== "number" || typeof y !== "number" || typeof scale !== "number") return;
+    if (!Number.isFinite(x) || !Number.isFinite(y) || !Number.isFinite(scale)) return;
+    const viewport = {
+      x,
+      y,
+      scale
+    };
+    const mode = getSetting("cameraTrackingMode") ?? "smooth";
+    if (mode === "dragRelease") dragReleaseEmit(viewport);
+    else if (mode === "raw") throttledEmit(viewport);
+    else smoothedEmit(viewport);
+  }
   f.hooks.on('canvasPan', socketCanvas);
+  f.game.modules.get('obs-utils').version = '5.3.1';
+  const restore = f.suspend();
+  f.pan(30);
+  assert.equal(f.counts.sends, 0);
+  assert.equal(f.counts.ordinaryPan, 30);
+  restore();
+  f.pan();
+  assert.equal(f.counts.sends, 1);
+  assert.equal(f.hooks.events.canvasPan.filter(({ fn }) => fn === socketCanvas).length, 1);
+});
+
+test('listeners under another name are never removed, even when they send', () => {
+  const f = fixture();
+  f.hooks.off('canvasPan', f.sender);
+  function socketCanvasInternal(...args) { f.sender(...args); }
+  const bound = f.sender.bind(null);
+  for (const listener of [socketCanvasInternal, bound, (...args) => f.sender(...args)]) f.hooks.on('canvasPan', listener);
   const original = [...f.hooks.events.canvasPan];
   f.suspend()();
   assert.deepEqual(f.hooks.events.canvasPan, original);
   f.pan();
-  assert.equal(unrelated, 1);
+  assert.equal(f.counts.sends, 3);
   assert.equal(f.counts.ordinaryPan, 1);
 });
 
-test('sender is recognized by its body and name, independent of hook order', () => {
+test('sender is recognized by its name, independent of hook order', () => {
   const f = fixture();
   f.hooks.off('canvasPan', f.sender);
   f.hooks.off('canvasPan', f.ordinaryPan);

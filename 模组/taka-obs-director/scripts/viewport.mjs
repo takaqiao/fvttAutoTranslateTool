@@ -1,15 +1,10 @@
 const PAN_HOOK = 'canvasPan';
-// Audited OBS Utils socket-Bdx6f0PS.js sender; require its complete body.
-const SENDER_SOURCE = `function socketCanvas(_canvas, position) {
-  const mode = getSetting("cameraTrackingMode") ?? "smooth";
-  if (mode === "dragRelease") dragReleaseEmit(position);
-  else if (mode === "raw") throttledEmit(position);
-  else smoothedEmit(position);
-}`.replace(/\s+/g, '');
+// OBS Utils registers its camera broadcast as the named function socketCanvas. Its build is not minified, so the
+// name is stable while the body changes between releases (5.3.1 completes partial pans before sending).
+const SENDER_NAME = 'socketCanvas';
 
 function isSender(fn) {
-  return typeof fn === 'function' && fn.name === 'socketCanvas'
-    && Function.prototype.toString.call(fn).replace(/\s+/g, '') === SENDER_SOURCE;
+  return typeof fn === 'function' && fn.name === SENDER_NAME;
 }
 
 /** Pause only the active recorder's recurring pan broadcast; return its cleanup. */
