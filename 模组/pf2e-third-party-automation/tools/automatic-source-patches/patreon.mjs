@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
-import {PATREON_SOURCE_SEAMS,isPatreonSourceQualified} from '../../scripts/exploration/patreon-source-qualification.mjs';
+import {PATREON_SOURCE_SEAMS,PATREON_SOURCE_SHAPES,isPatreonSourceQualified} from '../../scripts/exploration/patreon-source-qualification.mjs';
+import {createShapeBinding,normalizeSourceShape} from '../../scripts/source-shape-match.mjs';
 
 const hash=value=>createHash('sha256').update(value).digest('hex');
 const legacySHA='6b664250f325838850a716c791b3a41df4265899d39377fb8b9b10ad083b10a0';
@@ -9,10 +10,10 @@ const legacyDescriptor={version:2,markedCommitOwnership:'private-prepare.v1',pro
  pf2eSourceSHA256:'d63da8312831b84905e6866b1dd3f9d93e95c1012955b0177ad2ce8ccf246157'};
 const marker='/*pf2e-third-party-automation:patreon-original-seams.v1:';
 const regions={
- time:['Hooks.on("updateWorldTime",','r(Mn,"handleFastHealingTime");'],
- manualImmunity:['async function Ma(','r(Ma,"treatWounds");'],
- createItem:['async function p(','r(p,"addItemToActor");']
+ time:'handleFastHealingTime',manualImmunity:'treatWounds',createItem:'addItemToActor'
 };
+const helpers={k:'isActiveGM',y:'getSetting',Rn:'handleDecrementWithTime',Mn:'handleFastHealingTime',
+ wn:'uniq',Ma:'treatWounds',b:'createItemObjectUuid',p:'addItemToActor',x:'executeAsGM',Ge:'updateMessageFlags'};
 const timeChanges=[
  ['Hooks.on("updateWorldTime",(a,e,t,i)=>{k()&&(y("fastHealingTime")&&Mn(e),Rn())});',
   'Hooks.on("updateWorldTime",(a,e,t,i)=>{if(k()&&__patreonTimeCompletion.owned()){const x=__patreonTimeCompletion.begin(a,e,t,i),work=[];if(!__patreonTimeCompletion.authorize(x))return;try{y("fastHealingTime")&&work.push(Mn(e,x));work.push(Rn(x));}catch(error){work.push(Promise.reject(error));__patreonTimeCompletion.publish(x,work);throw error;}__patreonTimeCompletion.publish(x,work);}});'],
@@ -41,23 +42,69 @@ function once(source,before,after,name){
  if(!before||source.split(before).length!==2)fail('patreon-'+name+'-seam-ambiguous');
  return source.replace(before,after);
 }
+function registered(source,label){
+ const matches=[...source.matchAll(new RegExp('([\\w$]+)\\(([\\w$]+),"'+label+'"\\);','g'))];
+ if(matches.length!==1)fail('patreon-'+label+'-seam-ambiguous');
+ return matches[0];
+}
 function region(source,name){
- const [start,end]=regions[name];
+ const registration=registered(source,regions[name]);
+ const start=name==='time'?'Hooks.on("updateWorldTime",':'async function '+registration[2]+'(',end=registration[0];
  if(source.split(start).length!==2||source.split(end).length!==2)fail('patreon-'+name+'-seam-ambiguous');
  const from=source.indexOf(start),to=source.indexOf(end,from);
  if(to<from)fail('patreon-'+name+'-seam-unavailable');
  return source.slice(from,to+end.length);
 }
-function qualify(source){
+function bindings(source){
+ const names={};let wrapper;
+ for(const [reference,label]of Object.entries(helpers)){
+  const registration=registered(source,label);
+  if(wrapper&&wrapper!==registration[1])fail('patreon-helper-registration-changed');
+  wrapper=registration[1];names[reference]=registration[2];
+ }
+ const unique=(pattern)=>{
+  const matches=[...source.matchAll(pattern)];
+  if(matches.length!==1)fail('patreon-helper-seam-ambiguous');
+  return matches[0][1];
+ };
+ names.r=wrapper;
+ names.u=unique(/\bvar ([\w$]+)="patreon-v3"/g);
+ names.h=unique(/\b([\w$]+)\.DamageRoll=CONFIG\.Dice\.rolls\.find\(([\w$]+)=>\2\.name==="DamageRoll"\)/g);
+ names.$t=unique(/([\w$]+)="addItemToActor"/g);
+ const create=()=>{const binding=createShapeBinding({fixed:['ui']});for(const [a,b]of Object.entries(names))binding.match(a,b);return binding};
+ // Seed normalization with the helper identities. A renamed local region must
+ // still call the same registered helpers, module and dice class.
+ return {create,prefix:Object.values(names).join(';')+';'};
+}
+function qualify(source,shaped=false){
  const found={};
+ const context=shaped?bindings(source):null;
  for(const name of Object.keys(regions)){
   found[name]=region(source,name);
-  if(hash(found[name])!==PATREON_SOURCE_SEAMS[name])fail('patreon-'+name+'-seam-changed');
+  const actual=shaped?hash(normalizeSourceShape(context.prefix+found[name],{fixed:['ui']})):hash(found[name]);
+  if(actual!==(shaped?PATREON_SOURCE_SHAPES:PATREON_SOURCE_SEAMS)[name])fail('patreon-'+name+'-seam-changed');
  }
  return found;
 }
-function change(source,pairs,name,inverse=false){
- for(const [before,after] of inverse?[...pairs].reverse():pairs)source=once(source,inverse?after:before,inverse?before:after,name);
+function change(source,pairs,name,inverse=false,context){
+ if(!context){
+  for(const [before,after] of inverse?[...pairs].reverse():pairs)source=once(source,inverse?after:before,inverse?before:after,name);
+  return source;
+ }
+ const binding=context.create(),replacements=[];
+ for(const pair of pairs){
+  const [before,after]=inverse?[...pair].reverse():pair,matches=[];
+  const startsWithName=/^[A-Za-z_$]/.test(before);
+  for(let at=0;at<source.length;at++){
+   if(startsWithName?!/[A-Za-z_$]/.test(source[at])||/[\w$]/.test(source[at-1]??''):source[at]!==before[0])continue;
+   try{matches.push({at,end:context.create().match(before,source,{at})})}catch(error){if(!error.message.startsWith('source-shape-'))throw error}
+  }
+  if(matches.length!==1)fail('patreon-'+name+'-anchor-ambiguous');
+  const {at,end}=matches[0];
+  try{binding.match(before,source,{at})}catch{fail('patreon-'+name+'-anchor-changed')}
+  replacements.push({at,end,after});
+ }
+ for(const {at,end,after}of replacements.sort((a,b)=>b.at-a.at))source=source.slice(0,at)+binding.render(after)+source.slice(end);
  return source;
 }
 function readObserver(file,expected){
@@ -81,24 +128,27 @@ function observers(descriptor){
  return {time,immunity};
 }
 function descriptorFor(source,version,pf2eVersion){
- return {version:3,providerId:'patreon-v3',providerVersion:typeof version==='string'&&version?version:'unknown',
+ const text=source.toString(),raw=Object.keys(regions).every(name=>hash(region(text,name))===PATREON_SOURCE_SEAMS[name]);
+ return {version:raw?3:4,providerId:'patreon-v3',providerVersion:typeof version==='string'&&version?version:'unknown',
   pf2eVersion:typeof pf2eVersion==='string'&&pf2eVersion?pf2eVersion:'unknown',sourceSHA256:hash(source),
-  qualification:'patreon-original-seams.v1',seams:{...PATREON_SOURCE_SEAMS},markedCommitOwnership:'private-prepare.v1'};
+  qualification:raw?'patreon-original-seams.v1':'patreon-source-shapes.v1',
+  seams:{...(raw?PATREON_SOURCE_SEAMS:PATREON_SOURCE_SHAPES)},markedCommitOwnership:'private-prepare.v1'};
 }
 const qualificationMarker=descriptor=>marker+Buffer.from(JSON.stringify(descriptor)).toString('base64')+'*/';
-function compose(source,observed,prefix=''){
- const found=qualify(source);
- source=once(source,found.time,prefix+observed.time+change(found.time,timeChanges,'time'),'time');
- source=once(source,found.manualImmunity,observed.immunity+change(found.manualImmunity,immunityChanges,'manualImmunity'),'manualImmunity');
- return once(source,found.createItem,change(found.createItem,itemChanges,'createItem'),'createItem');
+function compose(source,observed,prefix='',shaped=false){
+ const found=qualify(source,shaped),context=shaped?bindings(source):null;
+ source=once(source,found.time,prefix+observed.time+change(found.time,timeChanges,'time',false,context),'time');
+ source=once(source,found.manualImmunity,observed.immunity+change(found.manualImmunity,immunityChanges,'manualImmunity',false,context),'manualImmunity');
+ return once(source,found.createItem,change(found.createItem,itemChanges,'createItem',false,context),'createItem');
 }
-const patch=(source,descriptor)=>compose(source,observers(descriptor),qualificationMarker(descriptor));
-function recoverOriginal(source,observed,prefix=''){
+const patch=(source,descriptor)=>compose(source,observers(descriptor),qualificationMarker(descriptor),descriptor.version===4);
+function recoverOriginal(source,observed,prefix='',shaped=false){
  let original=once(source,prefix+observed.time,'','patched-time-observer');
  original=once(original,observed.immunity,'','patched-immunity-observer');
+ const context=shaped?bindings(original):null;
  for(const [name,pairs] of [['time',timeChanges],['manualImmunity',immunityChanges],['createItem',itemChanges]]){
   const found=region(original,name);
-  original=once(original,found,change(found,pairs,name,true),name);
+  original=once(original,found,change(found,pairs,name,true,context),name);
  }
  return original;
 }
@@ -109,7 +159,7 @@ function recover(source){
  let descriptor;
  try{descriptor=JSON.parse(Buffer.from(encoded,'base64').toString('utf8'))}catch{fail('patreon-patched-descriptor-invalid')}
  if(!isPatreonSourceQualified(descriptor))fail('patreon-patched-descriptor-invalid');
- const original=recoverOriginal(source,observers(descriptor),qualificationMarker(descriptor));
+ const original=recoverOriginal(source,observers(descriptor),qualificationMarker(descriptor),descriptor.version===4);
  // sourceSHA256 records the original at patch creation. Region qualification,
  // rather than that historical whole-file hash, governs later startups.
  if(patch(original,descriptor)!==source)fail('patreon-patched-source-changed');

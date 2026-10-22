@@ -98,6 +98,21 @@ function classify(tokens,within,pinned){
  return tokens;
 }
 
+/** A stable token representation for hashing a region without storing its
+ * source. Names receive numbers in first-use order; all other tokens retain
+ * their text. Uses the same rename rules as createShapeBinding. */
+export function normalizeSourceShape(source,{fixed=[],within}={}){
+ const tokens=scan(source,0,Infinity);
+ if(tokens.unsupported!==undefined)refuse('source-shape-unsupported',{offset:tokens.unsupported});
+ const names=[undefined,new Map(),new Map()];
+ return JSON.stringify(classify(tokens,within,new Set([...GLOBALS,...fixed])).map(token=>{
+  const table=names[token.role];
+  if(!table)return [token.kind,token.text];
+  if(!table.has(token.text))table.set(token.text,table.size);
+  return [token.role,table.get(token.text)];
+ }));
+}
+
 /** One renaming shared by every region matched through it.
  * `fixed` lists short host globals that must stay verbatim. */
 export function createShapeBinding({fixed=[]}={}){
