@@ -1,10 +1,25 @@
-# FVTT v14 Local Hotfix 0.6.28
+# FVTT v14 Local Hotfix 0.6.29
 
 当前源码及隔离回归基线为 Foundry **14.369**、PF2e **8.6.1**、Dice So Nice **6.4.4**、BBMM **1.4.11**、Sundry **1.11.0**、Summons Assistant **2.20.3**。清单保留最低核心版本 14.367 和已验证标签 14.369，没有核心最高版本限制。运行时不按 Foundry、PF2e 或第三方模组的版本号决定装不装。每项可在世界设置中关闭，刷新后生效。该装而没装上的修正会在控制台输出一行警告并写明原因；全部状态和各项实际生效的次数见：
 
 ```js
 game.modules.get('av-v14-hotfix').api.status()
 ```
+
+## 0.6.29：旧 Quench 动画的手动维护工具
+
+AA8 忽略 schema 4 的自定义动画，旧 Quench 可能因此回退到全局同名配置。`scripts/maintenance/quench-aa8.mjs` 提供纯函数 `migrateQuenchFlags(flags)`，只接受已核对的蓝色水花配置：施法者位置、重复 3 次、无声音和附加效果、非持续。其他配置会抛出错误，避免丢失未支持的定制。
+
+该工具没有启动钩子；安装升级不会修改世界物品。维护时先备份原 flags，显式导入工具，将返回的种子交给 AA8 原生模型补全和验证：
+
+```js
+const {migrateQuenchFlags} = await import('/modules/av-v14-hotfix/scripts/maintenance/quench-aa8.mjs');
+const candidate = AutomatedAnimations.DataModels.validateEntry(migrateQuenchFlags(savedFlags));
+```
+
+确认候选后应整体替换 `flags.autoanimations`，不能与旧字段合并，也不能只把版本数字改成 5。维护者需自行限定目标、核对当前值并保存备份；这段示例只构造候选，不写文档。
+
+转换遵循 [AA7 的 schema 5 迁移](https://github.com/theripper93/autoanimations/blob/7.1.10/src/mergeScripts/items/merges/version05.js)：空的延迟、尺寸、不透明度分别转为 `0`、`1`、`1`。重复间隔明确为 `0`，三份效果几乎同时开始，播放完自然结束；不会变成持续的区域模板或添加水声。
 
 ## 0.6.28：退役三处、去掉一批源码指纹、没装上的会说明原因
 
@@ -215,7 +230,7 @@ Sundry 与共享回合/奴仆清理使用已验证的原生 Hooks 记录适配�
 
 备份旧目录后，将本目录安装到 `Data/modules/av-v14-hotfix`，在需要的世界启用并完整刷新客户端。退役的 `scripts/patches/patreon.mjs`、`wayfinder-fog.mjs`、`wayfinder-fog-texture.mjs`、`grid.mjs`、`bbmm-locks.mjs`、`babele.mjs`、`duration.mjs` 应从部署目录移除。回退可恢复原目录，或关闭本模组后刷新。
 
-安装清单使用 [av-v14-hotfix-v0.6.28 的 module.json](https://github.com/takaqiao/fvttAutoTranslateTool/releases/download/av-v14-hotfix-v0.6.28/module.json)，下载为同一标签的 `av-v14-hotfix-0.6.28.zip`。本仓库包含多个模组，不能用全仓库 `releases/latest/download` 作为此模组的清单。
+安装清单使用 [av-v14-hotfix-v0.6.29 的 module.json](https://github.com/takaqiao/fvttAutoTranslateTool/releases/download/av-v14-hotfix-v0.6.29/module.json)，下载为同一标签的 `av-v14-hotfix-0.6.29.zip`。本仓库包含多个模组，不能用全仓库 `releases/latest/download` 作为此模组的清单。
 
 运行 `node --test tests/*.test.mjs` 验证隔离回归。原生函数摘录及其来源记录在 `tests/fixtures`；音频、设置操作符等测试需本地 Foundry 安装，可用 `FVTT_NATIVE_APP` 指定 `resources/app`。具体运行命令、数量、跳过项和部署哈希以本次修复回执为准。
 
