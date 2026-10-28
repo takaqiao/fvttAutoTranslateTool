@@ -1,0 +1,235 @@
+/* 建卡服卡面顶部的同步状态条。卡面的 form 占满 .window-content 的高度，插了状态条后要让 form 能收缩 */
+.taka-charsync-bar {
+  flex: 0 0 auto;
+  padding: 0.375rem 0.75rem;
+  border-bottom: 1px solid #b5a688;
+  border-left: 4px solid #6b6455;
+  background: #f1ead8;
+  color: #191813;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.window-content > .taka-charsync-bar + form {
+  min-height: 0;
+}
+
+.taka-charsync-bar p {
+  margin: 0.125rem 0;
+}
+
+.taka-charsync-header,
+.taka-charsync-submission {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.5rem;
+}
+
+.taka-charsync-header > p,
+.taka-charsync-submission > p {
+  flex: 1 1 auto;
+}
+
+.taka-charsync-bar details {
+  margin-top: 0.25rem;
+}
+
+.taka-charsync-bar summary {
+  cursor: pointer;
+}
+
+.taka-charsync-details > summary {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.taka-charsync-bar .taka-charsync-relation {
+  margin-top: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.taka-charsync-relation button {
+  margin-left: 0.5rem;
+}
+
+.taka-charsync-secondary,
+.taka-charsync-submissions {
+  font-size: 0.75rem;
+}
+
+.taka-charsync-bar summary:focus-visible,
+.taka-charsync-bar button:focus-visible {
+  outline: 2px solid #6b6455;
+  outline-offset: 2px;
+}
+
+.taka-charsync-bar ul {
+  max-height: 7.5rem;
+  margin: 0.25rem 0;
+  padding-left: 1.25rem;
+  overflow-y: auto;
+}
+
+.taka-charsync-bar code {
+  font-size: 0.75rem;
+}
+
+.taka-charsync-bar .taka-charsync-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+  margin-top: 0.25rem;
+}
+
+.taka-charsync-bar button {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.taka-charsync-bar .taka-charsync-campaign button {
+  margin-left: 0.5rem;
+}
+
+.taka-charsync-bar .taka-charsync-warning {
+  color: #a8322d;
+}
+
+.taka-charsync-bar[data-state="synced"] {
+  border-left-color: #3d7a3a;
+}
+
+.taka-charsync-bar[data-state="draft"],
+.taka-charsync-bar[data-state="submitted"] {
+  border-left-color: #b58a1b;
+}
+
+.taka-charsync-bar[data-state="conflict"],
+.taka-charsync-bar[data-state="error"] {
+  border-left-color: #a8322d;
+  background: #f6e1dc;
+}
+
+.taka-charsync-bar[data-state="paused"] {
+  border-left-color: #8a8a8a;
+}
+
+/* 主服角色目录上的「角色卡同步」按钮和它的待处理角标 */
+.taka-charsync-panel-button {
+  position: relative;
+}
+
+.taka-charsync-badge {
+  flex: 0 0 auto;
+  min-width: 1.25rem;
+  margin-left: 0.25rem;
+  padding: 0 0.3rem;
+  border-radius: 0.625rem;
+  background: #a8322d;
+  color: #fff;
+  font-size: 0.75rem;
+  line-height: 1.25rem;
+  text-align: center;
+}
+
+.taka-charsync-badge[hidden] {
+  display: none;
+}
+
+/* 主服 GM 的同步面板 */
+#taka-charsync-panel .window-content {
+  overflow-y: auto;
+}
+
+.taka-charsync-panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.4;
+}
+
+.taka-charsync-panel-body section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.taka-charsync-panel-body h3 {
+  margin: 0;
+  border-bottom: 1px solid currentColor;
+  font-size: 0.9375rem;
+}
+
+.taka-charsync-panel-body p {
+  margin: 0;
+}
+
+.taka-charsync-panel-body .taka-charsync-note {
+  opacity: 0.8;
+}
+
+.taka-charsync-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  padding: 0.375rem 0.5rem;
+  border: 1px solid #b5a688;
+  border-left: 4px solid #6b6455;
+  border-radius: 3px;
+}
+
+.taka-charsync-card header {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.taka-charsync-pending {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.taka-charsync-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.25rem 0.5rem;
+  padding-left: 0.5rem;
+  border-left: 3px solid #b58a1b;
+}
+
+.taka-charsync-item[data-reason="stale"],
+.taka-charsync-item[data-reason="error"],
+.taka-charsync-item[data-reason="conflict"] {
+  border-left-color: #a8322d;
+}
+
+.taka-charsync-item[data-reason="paused"] {
+  border-left-color: #8a8a8a;
+}
+
+.taka-charsync-panel-body .taka-charsync-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.taka-charsync-panel-body button {
+  flex: 0 0 auto;
+  width: auto;
+  height: auto;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
