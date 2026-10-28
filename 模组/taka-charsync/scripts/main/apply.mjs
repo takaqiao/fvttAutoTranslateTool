@@ -9,6 +9,7 @@ import { canonicalJson } from '../lib/canon.mjs';
 import { describeChanges } from '../lib/change-summary.mjs';
 import { OWN_FLAG } from '../lib/rules.mjs';
 import { copyRuleError } from '../lib/rule-validation.mjs';
+import {currentModuleUsage, documentModuleUsage, moduleUsageHTML} from './module-usage.mjs';
 import { cleanDoc, importFull } from '../foundry/import.mjs';
 import { snapshotActorMedia } from '../foundry/media.mjs';
 import { fetchPublished, getCopies, getHistoryDoc, getMeta, getPublishDir } from '../foundry/published.mjs';
@@ -315,14 +316,18 @@ async function mergeVersion(actor, {pred, ref, masterId, clean = cleanDoc}) {
   }
   const sides = {actorId: actor.id, masterId};
   const base = clean(onMainSide(await requireHistory(pred), pred, sides));
-  const char = clean(onMainSide(await requireHistory(ref), ref, sides));
+  const source = await requireHistory(ref);
+  const char = clean(onMainSide(source, ref, sides));
   const captured = actor.toObject();
   const {docs: [frozenMain]} = await snapshotActorMedia([clean(captured)]);
   const main = clean(frozenMain);
   const {doc, conflicts} = mergeBuildChanges({base, main, char});
   const mainHp = main.system.attributes?.hp;
   if (mainHp && doc.system.attributes?.hp) doc.system.attributes.hp.value = mainHp.value;
-  return {main, doc, captured, conflicts: conflicts.filter(conflict => conflict.scope !== 'actor' || conflict.path !== HP_PATH)};
+  return {
+    main, doc, captured, moduleUsage: documentModuleUsage(doc, source.flags?.[OWN_FLAG]?.copy?.moduleUsage),
+    conflicts: conflicts.filter(conflict => conflict.scope !== 'actor' || conflict.path !== HP_PATH),
+  };
 }
 
 // 文档换到主服这张卡上：换 id，魔宠的主人换成主服主人
@@ -435,6 +440,9 @@ async function addHpGain(actor, before) {
 // 返回给悄悄话用的变动
 async function writeCard(target, doc, flags, {hpBefore, written}) {
   const before = cleanDoc(target.toObject());
+  // 非法替换条目会保留旧条目；保留它们的包名目录，证据仍从实际写入的文档重新读取。
+  const previousModules = documentModuleUsage(before).map(({id, title}) => ({id, title, evidence: []}));
+  flags.applied.moduleUsage = [...new Map([...previousModules, ...flags.applied.moduleUsage].map(entry => [entry.id, entry])).values()];
   const dropped = await importFull(target, doc, {flags});
   written.push(target);
   if (hpBefore) await addHpGain(target, hpBefore);
@@ -463,10 +471,10 @@ async function createActor(doc, {id, ownership, folder, flags}) {
 }
 
 // 建卡服新建、主服还没有的同伴：在主服新建，所有者和文件夹照主服主人
-function createCompanion({sourceId, id, ref, doc}, master, at) {
+function createCompanion({sourceId, id, ref, doc, moduleUsage = documentModuleUsage(doc)}, master, at) {
   return createActor(doc, {
     id, ownership: foundry.utils.deepClone(master.ownership), folder: master.folder?.id ?? null,
-    flags: {charId: sourceId, applied: {ref, at, undoPath: null, level: levelOf(doc)}},
+    flags: {charId: sourceId, applied: {ref, at, undoPath: null, level: levelOf(doc), moduleUsage}},
   });
 }
 
@@ -537,7 +545,7 @@ async function rollBack(error, {master, written, created, snapshots}) {
  * `consumed` 里的版本同一次记进主人的 `undone`。主人导入之后哪一步失败，都把写过的卡恢复、删掉新建的同伴再抛错；
  * 只有悄悄话发不出去不算失败。
  */
-async function writeCards(actor, {doc, ref, level, conflicts, updated, created, skipped, hpGain, consumed = [], title, captured}) {
+async function writeCards(actor, {doc, ref, level, conflicts, updated, created, skipped, hpGain, consumed = [], title, captured, moduleUsage = documentModuleUsage(doc)}) {
   const at = Date.now();
   const existing = [actor, ...updated.map(entry => entry.actor)];
   // 快照既存成撤回点文件，也留在内存里给失败时恢复用
@@ -552,7 +560,7 @@ async function writeCards(actor, {doc, ref, level, conflicts, updated, created, 
     }
   }
 
-  const applied = {ref, at, undoPath: undoPaths.get(actor.id), level};
+  const applied = {ref, at, undoPath: undoPaths.get(actor.id), level, moduleUsage};
   if (updated.length) applied.companions = updated.map(entry => entry.actor.id);
   if (created.length) applied.createdCompanions = created.map(entry => entry.id);
   const flags = {...ownFlags(actor), applied};
@@ -567,7 +575,7 @@ async function writeCards(actor, {doc, ref, level, conflicts, updated, created, 
     for (const entry of updated) {
       const companionFlags = {
         ...ownFlags(entry.actor),
-        applied: {ref: entry.ref, at, undoPath: undoPaths.get(entry.actor.id), level: levelOf(entry.doc)},
+        applied: {ref: entry.ref, at, undoPath: undoPaths.get(entry.actor.id), level: levelOf(entry.doc), moduleUsage: entry.moduleUsage ?? documentModuleUsage(entry.doc)},
       };
       const companionReport = await writeCard(entry.actor, entry.doc, companionFlags, {hpBefore: hpBefore.get(entry.actor.id), written});
       parts.push(`<p>同伴「${escape(entry.actor.name)}」一起写入</p>`, cardReport({...companionReport, conflicts: entry.conflicts}));
@@ -583,6 +591,7 @@ async function writeCards(actor, {doc, ref, level, conflicts, updated, created, 
   if (skipped.length) {
     parts.push(`<p>跳过的同伴：${skipped.map(entry => `「${escape(entry.name || entry.id)}」（${entry.why}）`).join('、')}</p>`);
   }
+  parts.push(moduleUsageHTML(currentModuleUsage([...existing, ...createdActors])));
   await whisperOrWarn(actor.id, parts.join(''));
 }
 
@@ -619,14 +628,16 @@ async function prepareLevel(actor, copy, meta, {preview = false} = {}) {
     if (target) {
       const clean = preview ? doc => preparePreviewActor(doc, previewMaster).toObject() : cleanDoc;
       const merged = await mergeVersion(target, {pred: companionCopy.pred, ref, masterId: actor.id, clean});
-      updated.push({actor: target, ref, doc: merged.doc, conflicts: merged.conflicts, captured: merged.captured});
+      updated.push({actor: target, ref, doc: merged.doc, conflicts: merged.conflicts, captured: merged.captured, moduleUsage: merged.moduleUsage});
     } else {
       const id = companionIdFor(sourceId, companionCopy.name);
-      created.push({sourceId, id, ref, doc: normalizeCopy(await requireHistory(ref), {actorId: id, masterId: actor.id})});
+      const source = await requireHistory(ref);
+      const doc = normalizeCopy(source, {actorId: id, masterId: actor.id});
+      created.push({sourceId, id, ref, doc, moduleUsage: documentModuleUsage(doc, source.flags?.[OWN_FLAG]?.copy?.moduleUsage)});
     }
   }
   return {
-    doc, ref: copyRef(copy), level, conflicts: master.conflicts, captured: master.captured,
+    doc, ref: copyRef(copy), level, conflicts: master.conflicts, captured: master.captured, moduleUsage: master.moduleUsage,
     updated, created, skipped, hpGain: true, previewMaster,
     title: `套用了建卡服提交的 ${copy.level} 级副本`,
   };
@@ -643,7 +654,7 @@ export async function applyWhole(actor, version, options = {}) {
   return 'applied';
 }
 
-function prepareWhole(actor, {doc, ref}, {companions = [], skippedCompanions = [], consumed = []} = {}) {
+function prepareWhole(actor, {doc, ref, moduleUsage}, {companions = [], skippedCompanions = [], consumed = []} = {}) {
   const masterDoc = asMainCard(doc, {actorId: actor.id, masterId: null});
   const xp = actor._source.system.details?.xp;
   if (xp && masterDoc.system.details) masterDoc.system.details.xp = foundry.utils.deepClone(xp);
@@ -652,14 +663,15 @@ function prepareWhole(actor, {doc, ref}, {companions = [], skippedCompanions = [
   for (const companion of companions) {
     if (companion.actor) {
       const companionDoc = asMainCard(companion.doc, {actorId: companion.actor.id, masterId: actor.id});
-      updated.push({actor: companion.actor, ref: companion.ref, doc: companionDoc, conflicts: []});
+      updated.push({actor: companion.actor, ref: companion.ref, doc: companionDoc, conflicts: [], moduleUsage: documentModuleUsage(companionDoc, companion.moduleUsage)});
     } else {
       const id = companionIdFor(companion.sourceId, companion.doc.name);
-      created.push({sourceId: companion.sourceId, id, ref: companion.ref, doc: asMainCard(companion.doc, {actorId: id, masterId: actor.id})});
+      const doc = asMainCard(companion.doc, {actorId: id, masterId: actor.id});
+      created.push({sourceId: companion.sourceId, id, ref: companion.ref, doc, moduleUsage: documentModuleUsage(doc, companion.moduleUsage)});
     }
   }
   return {
-    doc: masterDoc, ref, level: levelOf(masterDoc), conflicts: [], updated, created, skipped: skippedCompanions, hpGain: false, consumed,
+    doc: masterDoc, ref, level: levelOf(masterDoc), moduleUsage: documentModuleUsage(masterDoc, moduleUsage), conflicts: [], updated, created, skipped: skippedCompanions, hpGain: false, consumed,
     title: ref.kind === 'copy' ? '整卡覆盖成玩家「整卡同步」提交的版本' : '整卡覆盖成建卡服现在的版本',
   };
 }
@@ -677,16 +689,18 @@ export async function applyForce(actor, copy, {meta} = {}) {
 
 async function prepareForce(actor, copy, meta) {
   const ref = copyRef(copy);
-  const doc = normalizeCopy(await requireHistory(ref), {actorId: actor.id, masterId: null});
+  const source = await requireHistory(ref);
+  const doc = normalizeCopy(source, {actorId: actor.id, masterId: null});
   const {found, skipped} = await companionCopies(meta, copy);
   const companions = [];
   for (const {sourceId, copy: companionCopy} of found) {
     const ref = copyRef(companionCopy);
     const target = mainActorOf(meta, sourceId);
-    const companionDoc = normalizeCopy(await requireHistory(ref), {actorId: target?.id ?? sourceId, masterId: actor.id});
-    companions.push({actor: target, sourceId, doc: companionDoc, ref});
+    const source = await requireHistory(ref);
+    const companionDoc = normalizeCopy(source, {actorId: target?.id ?? sourceId, masterId: actor.id});
+    companions.push({actor: target, sourceId, doc: companionDoc, ref, moduleUsage: source.flags?.[OWN_FLAG]?.copy?.moduleUsage});
   }
-  return prepareWhole(actor, {doc, ref}, {companions, skippedCompanions: skipped, consumed: [refKey(ref)]});
+  return prepareWhole(actor, {doc, ref, moduleUsage: source.flags?.[OWN_FLAG]?.copy?.moduleUsage}, {companions, skippedCompanions: skipped, consumed: [refKey(ref)]});
 }
 
 // 建卡服上主人是这张卡、还没进映射的魔宠（玩家新建的）。要读了 working 才知道主人是谁
@@ -778,14 +792,15 @@ async function importNewCard({cardId, ref, source, owner, replaceId, meta, compa
   const prepared = companions.map(companion => {
     const companionId = companionIdFor(companion.sourceId, companion.source.name);
     if (companionId === id) throw new Error('主人和同伴的目标 id 冲突，没有动卡');
-    return {...companion, id: companionId, doc: onMainSide(companion.source, companion.ref, {actorId: companionId, masterId: id})};
+    const doc = onMainSide(companion.source, companion.ref, {actorId: companionId, masterId: id});
+    return {...companion, id: companionId, doc, moduleUsage: documentModuleUsage(doc, companion.source.flags?.[OWN_FLAG]?.copy?.moduleUsage)};
   });
   const worldUser = meta.users?.[owner]?.[game.world.id];
   if (!worldUser) throw new Error('卡主在本团没有对应的账号，不能导入');
   const {NONE, OWNER} = CONST.DOCUMENT_OWNERSHIP_LEVELS;
   const ownership = {default: replaced?.ownership.default ?? NONE, [worldUser]: OWNER};
   const at = Date.now();
-  const applied = {ref, at, undoPath: null, level: levelOf(doc)};
+  const applied = {ref, at, undoPath: null, level: levelOf(doc), moduleUsage: documentModuleUsage(doc, source.flags?.[OWN_FLAG]?.copy?.moduleUsage)};
   if (prepared.length) applied.createdCompanions = prepared.map(entry => entry.id);
   const created = [], retired = [], reports = [];
   let master;
@@ -819,7 +834,7 @@ async function importNewCard({cardId, ref, source, owner, replaceId, meta, compa
     throw new Error(`${errorMessage(rolledBack)}；旧卡恢复没有做完：${failures.join('；')}`, {cause: error});
   }
   const replacedNote = archived.length ? `，旧卡及同伴${nameList(archived.map(actor => actor.name))}已移进「${ARCHIVE_FOLDER}」` : '';
-  await whisperOrWarn(master.id, `<p><strong>${escape(master.name)}</strong>：建卡服的新卡已导入${replacedNote}</p>${reports.join('')}`);
+  await whisperOrWarn(master.id, `<p><strong>${escape(master.name)}</strong>：建卡服的新卡已导入${replacedNote}</p>${reports.join('')}${moduleUsageHTML(currentModuleUsage(created))}`);
   return master.id;
 }
 
@@ -943,7 +958,7 @@ function preparePreviewActor(doc, master = null) {
   return new PreviewFamiliar(source);
 }
 
-function previewCard({actor = null, doc, conflicts = [], hpGain = false, master = null, prepared = null}, label) {
+function previewCard({actor = null, doc, conflicts = [], hpGain = false, master = null, prepared = null, moduleUsage = documentModuleUsage(doc)}, label) {
   const before = actor ? preparePreviewActor(actor.toObject(), master).toObject() : {};
   prepared ??= preparePreviewActor(doc, master);
   const after = prepared.toObject();
@@ -955,7 +970,7 @@ function previewCard({actor = null, doc, conflicts = [], hpGain = false, master 
   }
   const summary = describeChanges(before, after);
   return `<section><h3>${escape(label)}「${escape(doc.name)}」</h3>`
-    + (summary.html || '<p>没有内容变动。</p>') + formatSummary(NO_CHANGES, conflicts) + '</section>';
+    + (summary.html || '<p>没有内容变动。</p>') + formatSummary(NO_CHANGES, conflicts) + moduleUsageHTML(moduleUsage) + '</section>';
 }
 
 /** 按实际套用计划预览主人和同伴；整卡覆盖保留主服经验，普通提交使用三方合并结果。 */
@@ -967,9 +982,9 @@ export async function previewPending(item) {
     const {ref, source, companions} = await newCopySources(copy, meta);
     const doc = onMainSide(source, ref, {actorId: copy.cardId, masterId: null});
     const master = preparePreviewActor(doc);
-    const parts = [previewCard({doc, prepared: master}, '新增主人')];
+    const parts = [previewCard({doc, prepared: master, moduleUsage: documentModuleUsage(doc, source.flags?.[OWN_FLAG]?.copy?.moduleUsage)}, '新增主人')];
     for (const companion of companions) {
-      parts.push(previewCard({doc: onMainSide(companion.source, companion.ref, {actorId: companion.sourceId, masterId: copy.cardId}), master}, '新增同伴'));
+      parts.push(previewCard({doc: onMainSide(companion.source, companion.ref, {actorId: companion.sourceId, masterId: copy.cardId}), master, moduleUsage: documentModuleUsage(companion.source, companion.source.flags?.[OWN_FLAG]?.copy?.moduleUsage)}, '新增同伴'));
     }
     return parts.join('');
   }

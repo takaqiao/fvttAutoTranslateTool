@@ -1,6 +1,7 @@
 // 建卡服：提交冻结副本（升级、新卡、整卡同步）、撤回、副本锁和 GM 清理。
 import { copyIdFor, forceCopyIdFor, refKey, sameRef } from '../lib/chain.mjs';
 import { OWN_FLAG } from '../lib/rules.mjs';
+import { collectModuleUsage } from '../lib/module-usage.mjs';
 import { importFull } from '../foundry/import.mjs';
 import { snapshotActorMedia } from '../foundry/media.mjs';
 import { getHistoryDoc, getMainLatest, getMeta } from '../foundry/published.mjs';
@@ -115,6 +116,7 @@ async function levelPred(actor, {level, base, card}) {
 // 冻结一张卡：换上副本 id、带后缀的名字、「已提交」文件夹和副本记号。token 名不动，套用时 normalizeCopy 换回
 function frozenData(source, copy, folder) {
   const data = source.toObject();
+  copy.moduleUsage = collectModuleUsage(data, game.modules?.values() ?? []);
   data._id = copy.copyId;
   data.name = `${source.name}${NAME_SUFFIX[copy.kind](copy.level)}`;
   data.folder = folder;

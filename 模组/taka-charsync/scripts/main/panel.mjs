@@ -1,6 +1,7 @@
 // 主服 GM 的同步面板、角色目录上的入口按钮、登录时的待处理弹框和定时检查。面板上的操作只在 activeGM 的客户端可用，
 // 和定时检查一样经 `exclusive` 排队写卡。
 import { OWN_FLAG } from '../lib/rules.mjs';
+import {currentModuleUsage, moduleUsageHTML, openModuleManagement} from './module-usage.mjs';
 import { formatClock, formatTime } from '../lib/time.mjs';
 import { getCopies, getMeta } from '../foundry/published.mjs';
 import {
@@ -248,6 +249,17 @@ class SyncPanel extends ApplicationV2 {
     }
 
     const cards = campaignCards(meta);
+    const synced = new Set(Object.values(meta.cards ?? {}).filter(card => card.world === game.world.id).map(card => card.mainId));
+    const actors = game.actors.contents.filter(actor => {
+      const own = actor._source.flags?.[OWN_FLAG] ?? {};
+      return !own.retired && (synced.has(actor.id) || own.charId || own.applied);
+    });
+    const modules = moduleUsageHTML(currentModuleUsage(actors));
+    if (modules) {
+      parts.push('<section><h3>同步角色的模组提示</h3>', modules,
+        this.#button('打开模组管理', {manageModules: true}),
+        '<p class="taka-charsync-note">由 GM 在模组管理中勾选并确认依赖；保存后按 Foundry 提示重载世界。</p></section>');
+    }
     parts.push('<section><h3>本团的卡</h3>');
     if (!cards.length) parts.push('<p>本团还没有对应到建卡服的卡。</p>');
     for (const entry of cards) parts.push(this.#cardRow(meta, entry, check));
@@ -361,6 +373,7 @@ class SyncPanel extends ApplicationV2 {
     const handler = this.#handlers[Number(target.dataset.index)];
     if (!handler || this.#busy) return;
     if (handler.preview) return showPreview(handler.preview);
+    if (handler.manageModules) return openModuleManagement();
     this.#busy = true;
     for (const button of this.element.querySelectorAll('button[data-action="run"]')) button.disabled = true;
     try {

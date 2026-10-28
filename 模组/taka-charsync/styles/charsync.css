@@ -233,3 +233,14 @@
   font-size: 0.75rem;
   line-height: 1.4;
 }
+
+.taka-charsync-module-usage {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow-wrap: anywhere;
+}
+
+.taka-charsync-module-usage ul {
+  margin: 0.25rem 0;
+}
