@@ -3,6 +3,7 @@ import {WAVE_SOURCE,isAvWaveSpell} from './av-wave-repair.mjs';
 const clone=value=>globalThis.foundry?.utils?.deepClone?.(value)??structuredClone(value);
 const source=item=>item?.sourceId??item?._stats?.compendiumSource??item?.flags?.core?.sourceId??null;
 const ampOption=option=>option==='amp-spell'||option==='alternate-amp'||option.startsWith('alternate-amp:');
+const registrations=new WeakMap();
 
 /** PF2e rebuilds RuleElements from _source on every contextual clone. Restore
  * only the native amp toggles in an ephemeral actor, never the live actor. */
@@ -33,10 +34,13 @@ export function buildAvDamageCloneChanges(actor,cast,wave){
  return {items,flags:{pf2e:{rollOptions:{all}}}};
 }
 
-export function registerAvDamageSnapshot({game,libWrapper}={}){
+export function registerAvDamageSnapshot({game,libWrapper,interceptRollDamage}={}){
  if(!libWrapper)return ()=>{};
- const contextual=new WeakSet(),path='CONFIG.PF2E.Item.documentClasses.spell.prototype.rollDamage';
- libWrapper.register(MODULE_ID,path,async function(wrapped,event,mapIncreases){
+ const path='CONFIG.PF2E.Item.documentClasses.spell.prototype.rollDamage';
+ let state=registrations.get(game);
+ if(!state){
+ state={consumers:new Set()};const contextual=new WeakSet();
+ const snapshot=async function(wrapped,event,mapIncreases){
   if(contextual.has(this.actor))return wrapped(event,mapIncreases);
   const messageId=event?.target?.closest?.('[data-message-id]')?.dataset.messageId;
   const message=game.messages.get(messageId),cast=message?.flags?.[MODULE_ID]?.avCast,origin=message?.flags?.pf2e?.origin;
@@ -60,6 +64,19 @@ export function registerAvDamageSnapshot({game,libWrapper}={}){
   // Call the public method on the temporary document so all other wrappers and
   // the native DamageContext still execute. The WeakSet stops our recursion.
   return spell.rollDamage(event,mapIncreases);
+ };
+ // libWrapper allows one registration per package and method. Keep the AV
+ // snapshot as that owner while other spell-roll consumers join its call.
+ libWrapper.register(MODULE_ID,path,function(wrapped,event,mapIncreases){
+  const interceptors=[...state.consumers].map(c=>c.interceptRollDamage).filter(Boolean);
+  const invoke=(index,...args)=>index===interceptors.length?snapshot.call(this,wrapped,...args):interceptors[index].call(this,(...next)=>invoke(index+1,...next),...args);
+  return invoke(0,event,mapIncreases);
  },'MIXED');
- return ()=>libWrapper.unregister(MODULE_ID,path);
+ registrations.set(game,state);
+ }
+ const consumer={interceptRollDamage};state.consumers.add(consumer);
+ return()=>{
+  if(!state.consumers.delete(consumer)||state.consumers.size)return;
+  libWrapper.unregister(MODULE_ID,path);registrations.delete(game);
+ };
 }

@@ -7,7 +7,7 @@ function fixture(){
  const gm={id:'gm',isGM:true,active:true},user={id:'player',active:true},users=new Map([[gm.id,gm],[user.id,user]]);users.activeGM=gm;
  const actor={id:'caster',uuid:'Actor.caster',type:'character',canAct:true,isDead:false,items:new Map(),flags:{[ID]:{keep:'unchanged'},'pf2e-reaction':{state:false}},testUserPermission:u=>u===gm||u===user};
  const entry={id:'entry',uuid:'Actor.caster.Item.entry',type:'spellcastingEntry',actor,flags:{},system:{prepared:{value:'spontaneous'},tradition:{value:'occult'},slots:{slot1:{value:3,max:3},slot2:{value:3,max:3},slot3:{value:2,max:2}}}};
- const item={id:'spell',uuid:'Actor.caster.Item.spell',type:'spell',actor,sourceId:SOURCE,system:{level:{value:1},location:{value:entry.id,signature:true},traits:{value:['concentrate','manipulate']}}};
+ const item={id:'spell',uuid:'Actor.caster.Item.spell',type:'spell',rank:1,actor,sourceId:SOURCE,system:{level:{value:1},location:{value:entry.id,signature:true},traits:{value:['concentrate','manipulate']}}};
  actor.items.set(entry.id,entry);actor.items.set(item.id,item);
  const scene={id:'scene',uuid:'Scene.scene',tokens:new Map()};
  const token={id:'source',uuid:'Scene.scene.Token.source',documentName:'Token',parent:scene,actor,actorLink:true};
@@ -42,7 +42,7 @@ test('two same-item claims across ledger instances serialize and only one obtain
  const f=fixture(),second=f.make(),r=await Promise.allSettled([f.claim(),second.claim({...f.scope,invocationId:'invocation-two'})]);assert.equal(r.filter(v=>v.status==='fulfilled').length,1);assert.equal(f.writes.length,1);
 });
 for(const [name,change]of [
- ['wrong source',f=>{f.item.sourceId='wrong'}],['wrong rank',f=>{f.allocation.rank=4}],['wrong actions',f=>{f.allocation.actions=0}],['fractional allocation',f=>{f.allocation.targets[0].count=1.5}],['negative allocation',f=>{f.allocation.targets[0].count=-1}],['NaN allocation',f=>{f.allocation.targets[0].count=NaN}],['duplicate targets',f=>{f.allocation.targets[1].targetUuid=f.targets[0].uuid}],['all zero',f=>{for(const t of f.allocation.targets)t.count=0}],['bad fingerprint',f=>{f.scope.fingerprint='nothex'}],['missing prepared slot',f=>{delete f.entry.system.slots.slot3.value}],['no slots',f=>{f.entry.system.slots.slot3.value=0}],['not signature',f=>{f.item.system.location.signature=false}],['prepared entry',f=>{f.entry.system.prepared.value='prepared'}],['non-occult entry',f=>{f.entry.system.tradition.value='arcane'}],['dead',f=>{f.actor.isDead=true}],['missing canAct',f=>{delete f.actor.canAct}],['inactive author',f=>{f.user.active=false}],['not GM',f=>{f.game.user=f.user}],['wrong owner',f=>{f.actor.testUserPermission=()=>false}],['replaced actor',f=>{f.game.actors.set(f.actor.id,{...f.actor})}],['replaced item',f=>{f.actor.items.set(f.item.id,{...f.item})}],['wrong entry',f=>{f.item.system.location.value='other'}],['source token deleted',f=>{f.scene.tokens.delete(f.token.id)}],['target moved',f=>{f.targets[0].parent={id:'other'}}],
+ ['wrong source',f=>{f.item.sourceId='wrong'}],['wrong rank',f=>{f.allocation.rank=4}],['wrong actions',f=>{f.allocation.actions=0}],['fractional allocation',f=>{f.allocation.targets[0].count=1.5}],['negative allocation',f=>{f.allocation.targets[0].count=-1}],['NaN allocation',f=>{f.allocation.targets[0].count=NaN}],['duplicate targets',f=>{f.allocation.targets[1].targetUuid=f.targets[0].uuid}],['all zero',f=>{for(const t of f.allocation.targets)t.count=0}],['bad fingerprint',f=>{f.scope.fingerprint='nothex'}],['missing prepared slot',f=>{delete f.entry.system.slots.slot3.value}],['no slots',f=>{f.entry.system.slots.slot3.value=0}],['non-signature heightening',f=>{f.item.system.location.signature=false}],['prepared entry',f=>{f.entry.system.prepared.value='prepared'}],['non-occult entry',f=>{f.entry.system.tradition.value='arcane'}],['dead',f=>{f.actor.isDead=true}],['missing canAct',f=>{delete f.actor.canAct}],['inactive author',f=>{f.user.active=false}],['not GM',f=>{f.game.user=f.user}],['wrong owner',f=>{f.actor.testUserPermission=()=>false}],['replaced actor',f=>{f.game.actors.set(f.actor.id,{...f.actor})}],['replaced item',f=>{f.actor.items.set(f.item.id,{...f.item})}],['wrong entry',f=>{f.item.system.location.value='other'}],['source token deleted',f=>{f.scene.tokens.delete(f.token.id)}],['target moved',f=>{f.targets[0].parent={id:'other'}}],
 ])test(`claim rejects ${name} before writing`,async()=>{const f=fixture();change(f);await assert.rejects(f.claim());assert.equal(f.writes.length,0)});
 
 test('startCast persists one permission and does not hold the resource lock over native continuation',async()=>{
@@ -147,3 +147,27 @@ test('target stages reject each failed write without acquiring the next permissi
 });
 
 test('PF2e 8.6 keeps the exact original paid-cast ledger binding',async()=>{const f=fixture();f.game.system.version='8.6.0';const ctx=await f.paid();assert.equal(f.current().status,'paid');assert.equal(f.current().castNonce,ctx.outcome.castNonce);assert.equal(f.entry.system.slots.slot3.value,1)});
+
+test('a non-signature first-rank allocation obtains one cast permission without changing slots',async()=>{
+ const f=fixture();f.item.system.location.signature=false;f.allocation.rank=1;
+ f.allocation.targets[0].count=2;f.allocation.targets[1].count=1;
+ const slots=copy(f.entry.system.slots),ctx=await f.casting();
+ assert.equal(f.current().status,'casting');assert.equal(f.current().allocation.rank,1);
+ assert.equal(f.ledger.assertCastIntent(ctx),true);assert.deepEqual(f.entry.system.slots,slots);
+ assert.equal(f.item.system.location.signature,false);await assert.rejects(f.ledger.startCast(ctx));
+});
+
+test('ledger refuses unsupported non-signature ranks without creating a claim',async()=>{
+ for(const [knownRank,castRank] of [[1,2],[1,3],[3,1],[3,3]]){
+  const f=fixture();f.item.system.location.signature=false;f.item.rank=knownRank;f.allocation.rank=castRank;
+  await assert.rejects(f.claim());assert.equal(f.writes.length,0);
+ }
+});
+
+test('changing the learned rank after claim revokes non-signature cast permission',async()=>{
+ const f=fixture();f.item.system.location.signature=false;f.allocation.rank=1;
+ f.allocation.targets[0].count=2;f.allocation.targets[1].count=1;
+ const claim=await f.claim(),writes=f.writes.length;f.item.rank=3;
+ await assert.rejects(f.ledger.startCast({...f.scope,nonce:claim.nonce}));
+ assert.equal(f.writes.length,writes);assert.equal(f.current().status,'claimed');
+});

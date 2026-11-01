@@ -11,7 +11,7 @@ test('ECNU shares every shield-chain gate with the other audited teams',()=>{
 });
 
 test('fortress and pilgrim features stay limited to their own worlds',()=>{
- for(const name of ['DEFENSIVE_ADVANCE_WORLDS','DESPERATE_PRAYER_WORLDS','ELECTRICITY_SETTLEMENT_WORLDS','FORCE_BARRAGE_WORLDS','FORTRESS_RULE_COMPAT_WORLDS','HALFLING_LUCK_WORLDS','ROARING_APPLAUSE_WORLDS','SPIRITUAL_SCAR_WORLDS'])assert.deepEqual([...gates[name]],[fortress],name);
+ for(const name of ['DEFENSIVE_ADVANCE_WORLDS','DESPERATE_PRAYER_WORLDS','ELECTRICITY_SETTLEMENT_WORLDS','SPIRITUAL_SCAR_WORLDS'])assert.deepEqual([...gates[name]],[fortress],name);
  assert.deepEqual([...gates.GLIMPSE_WORLDS].sort(),[fortress,'team-automation-qa2'].sort());
  assert.deepEqual([...gates.SOG_PILGRIM_WORLDS].sort(),['sog','sog-pilgrim-qa'].sort());
 });
@@ -27,4 +27,10 @@ test('world ids are written only in world-gates.mjs',()=>{
 
 test('every exported gate is a set of world ids',()=>{
  for(const [name,gate] of Object.entries(gates)){assert.ok(gate instanceof Set,name);for(const id of gate)assert.equal(typeof id,'string',name);}
+});
+
+test('bob-2 enables only its approved existing providers',()=>{
+ for(const name of ['FORCE_BARRAGE_WORLDS','FORTRESS_RULE_COMPAT_WORLDS','HALFLING_LUCK_WORLDS','ROARING_APPLAUSE_WORLDS'])assert.deepEqual([...gates[name]].sort(),[fortress,'bob-2'].sort(),name);
+ assert.deepEqual([...gates.BOB2_AUTOMATION_WORLDS],['bob-2']);
+ for(const [name,gate] of Object.entries(gates))if(!['BOB2_AUTOMATION_WORLDS','FORCE_BARRAGE_WORLDS','FORTRESS_RULE_COMPAT_WORLDS','HALFLING_LUCK_WORLDS','ROARING_APPLAUSE_WORLDS'].includes(name))assert.equal(gate.has('bob-2'),false,name);
 });

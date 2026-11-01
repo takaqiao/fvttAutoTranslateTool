@@ -13,7 +13,7 @@ function wrapperFixture(){
  const context=vm.createContext({MODULE_ID:'pf2e-third-party-automation',libWrapper:{register(_id,path,fn){assert.equal(path,'CONFIG.Actor.documentClass.prototype.applyDamage');wrapper=fn}},
   activityResults:{applyNativeDamage:(_actor,params,native)=>native(params)},salubriousDamage:{async applyDamage(_actor,params,next){await Promise.resolve();return next({...params},()=>{})}},
   cycle:{getRollContext:()=>null,applyDamage:(_actor,next,params)=>next(params)},providers:[],
-  runDamagePipeline:({params,apply})=>apply(params),reactionBudget:pass,shieldAdapter:{...pass,withNativeFrame:(_actor,params,next)=>next(params)},shieldEvents:{wrapNativeDamage:(_actor,params,next)=>next(params)},destructiveBlock:{planFor:()=>null},glimpse:{wrapNativeDamage:(_actor,params,next)=>next(params)},scar:null,report:error=>assert.fail(error.message)});
+  runDamagePipeline:({params,apply})=>apply(params),reactionBudget:pass,combinations:pass,shieldAdapter:{...pass,withNativeFrame:(_actor,params,next)=>next(params)},shieldEvents:{wrapNativeDamage:(_actor,params,next)=>next(params)},destructiveBlock:{planFor:()=>null},glimpse:{wrapNativeDamage:(_actor,params,next)=>next(params)},scar:null,report:error=>assert.fail(error.message)});
  vm.runInContext(source.slice(start,end),context);
  return {run:()=>wrapper.call(actor,native,original),writes:()=>writes,actor};
 }

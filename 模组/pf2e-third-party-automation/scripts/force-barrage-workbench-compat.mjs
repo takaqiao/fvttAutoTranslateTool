@@ -1,4 +1,5 @@
 import {getSourceId} from './native-context.mjs';
+import {isForceBarrageRankAllowed} from './force-barrage-rules.mjs';
 
 export const FORCE_BARRAGE_WORKBENCH_SOURCE='Compendium.xdy-pf2e-workbench.asymonous-benefactor-macros-internal.Macro.784iD1y6DBFSB5d2';
 const SPELL_SOURCE='Compendium.pf2e.spells-srd.Item.gKKqvLohtrSJj3BM';
@@ -44,7 +45,7 @@ export async function loadForceBarrageWorkbench({game=globalThis.game,fromUuid=g
   const missiles=getMissileCount({rank,actions}),original=item?.original??item;
   if(!actor||game.actors?.get(actor.id)!==actor||actor.type!=='character'||actor.isOwner!==true||actor.canAct!==true||actor.isDead===true)reject('ineligible-caster');
   if(original?.type!=='spell'||getSourceId(original)!==SPELL_SOURCE||actor.items?.get(original.id)!==original||original.actor!==actor||item.actor!==actor||item.uuid!==original.uuid)reject('wrong-owned-spell');
-  if(entry?.actor!==actor||actor.items?.get(entry.id)!==entry||entry.type!=='spellcastingEntry'||entry.system?.prepared?.value!=='spontaneous'||original.system?.location?.value!==entry.id||original.system.location.signature!==true)reject('unsupported-spell-entry');
+  if(entry?.actor!==actor||actor.items?.get(entry.id)!==entry||entry.type!=='spellcastingEntry'||entry.system?.prepared?.value!=='spontaneous'||original.system?.location?.value!==entry.id||!isForceBarrageRankAllowed(original,rank))reject('unsupported-spell-entry');
   const slots=entry.system?.slots?.[`slot${rank}`]?.value;
   if(!Number.isInteger(slots)||slots<1)reject('unavailable-slot');
   const source=liveToken(game,token);if(source.actor!==actor)reject('wrong-caster-token');

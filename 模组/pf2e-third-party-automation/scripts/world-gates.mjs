@@ -1,6 +1,6 @@
 // Which worlds each feature runs in. World ids are written here and nowhere
 // else: to open or merge a campaign, edit this file instead of forking the module.
-const AV3='-',SOG='sog',FOTRP='pnvfcgjbf2cjp7gz',FORTRESS='ujx5r8oipw7ercdr',ECNU='avecnu';
+const AV3='-',SOG='sog',FOTRP='pnvfcgjbf2cjp7gz',FORTRESS='ujx5r8oipw7ercdr',ECNU='avecnu',BOB2='bob-2';
 // QA worlds; they do not exist on the live server.
 const TEAM_QA='team-automation-qa2',PILGRIM_QA='sog-pilgrim-qa';
 
@@ -13,16 +13,19 @@ export const SHIELD_BLOCK_WORLDS=new Set([...SHIELD_TEAMS,FORTRESS]);
 export const SHIELD_WALL_COMPAT_WORLDS=new Set([...SHIELD_TEAMS,FORTRESS]);
 export const REACTION_CHECKER_SETTING_WORLDS=new Set([...SHIELD_TEAMS,FORTRESS]);
 
-// The fortress campaign only.
+// Campaign-specific providers.
 export const DEFENSIVE_ADVANCE_WORLDS=new Set([FORTRESS]);
 export const DESPERATE_PRAYER_WORLDS=new Set([FORTRESS]);
 export const ELECTRICITY_SETTLEMENT_WORLDS=new Set([FORTRESS]);
-export const FORCE_BARRAGE_WORLDS=new Set([FORTRESS]);
-export const FORTRESS_RULE_COMPAT_WORLDS=new Set([FORTRESS]);
-export const HALFLING_LUCK_WORLDS=new Set([FORTRESS]);
-export const ROARING_APPLAUSE_WORLDS=new Set([FORTRESS]);
+export const FORCE_BARRAGE_WORLDS=new Set([FORTRESS,BOB2]);
+export const FORTRESS_RULE_COMPAT_WORLDS=new Set([FORTRESS,BOB2]);
+export const HALFLING_LUCK_WORLDS=new Set([FORTRESS,BOB2]);
+export const ROARING_APPLAUSE_WORLDS=new Set([FORTRESS,BOB2]);
 export const SPIRITUAL_SCAR_WORLDS=new Set([FORTRESS]);
 export const GLIMPSE_WORLDS=new Set([FORTRESS,TEAM_QA]);
 
 // SoG pilgrim rewards.
 export const SOG_PILGRIM_WORLDS=new Set([SOG,PILGRIM_QA]);
+
+// Current bob-2 character links; other campaigns retain their existing providers.
+export const BOB2_AUTOMATION_WORLDS=new Set([BOB2]);

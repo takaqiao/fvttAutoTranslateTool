@@ -163,3 +163,6 @@ test('Uplifting maintenance respects active GM, world/system, opt-out and exact 
 });
 
 test('PF2e 8.6 retains exact native fortress rule repairs',()=>{const game=world();game.system.version='8.6.0';assert.equal(repair(original(),game).changes.length,4)});
+test('bob-2 item compatibility does not enroll the old Albatross and Lay on Hands setting repairs',()=>{
+ const game=world();game.world.id='bob-2';const before=original(),result=repair(before,game);assert.deepEqual(result.rules,before);assert.deepEqual(result.changes,[]);
+});

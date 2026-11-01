@@ -2,6 +2,7 @@ import {MODULE_ID as ID} from './rules.mjs';
 import {isActiveGM,getSourceId} from './native-context.mjs';
 import {prepareWeaponSurgeDamageSnapshotItems} from './weapon-surge.mjs';
 import {nativeRollEvent,manualDamageRoll as rollManualDamage,manualDamagePrivacy as damagePrivacy,confirmManualFlatCheck,restrictNativePrivacy} from './manual-native-roll.mjs';
+import {rollNativeUpliftingAid} from './bob2-rule-links-native.mjs';
 
 const values=collection=>Array.from(collection?.values?.()??collection??[]);
 const clone=data=>structuredClone(data);
@@ -216,7 +217,10 @@ export function createNativeOwnerOperations({game,fromUuid=globalThis.fromUuid,s
     const native=request.checkMethod==='roll'?statistic:statistic?.check??statistic;if(typeof native?.roll!=='function')throw Error('原生技能或豁免统计不可用。');
     // A value-only DC cannot inherit the owner's unrelated selected creature.
     if(!target&&parameters.dc){parameters.dc={...parameters.dc};delete parameters.dc.slug;delete parameters.dc.statistic;}
-    roll=await beforeNativeRoll({Hooks,marker,showDialog:true,commit,assertLive:guard,native:()=>native.roll(parameters)});
+    if(request.nativeAction==='aid'){
+     if(request.statistic!=='performance'||request.action!=='aid'||request.sourceUuid!=='Compendium.pf2e.actionspf2e.Item.HCl3pzVefiv9ZKQW')throw Error('序曲协助必须来自原生协助动作与表演检定。');
+     roll=await beforeNativeRoll({Hooks,marker,showDialog:true,commit,assertLive:guard,native:()=>rollNativeUpliftingAid({game,actor,target:target?.object,dc:request.dc,options,event:nativeRollEvent(game,'check'),callback})});
+    }else roll=await beforeNativeRoll({Hooks,marker,showDialog:true,commit,assertLive:guard,native:()=>native.roll(parameters)});
    }else{
     if(!game.pf2e?.Check?.roll||!game.pf2e?.CheckModifier)throw Error('原生检定接口不可用。');
     if(request.type==='flat'){if(!await confirmFlatCheck({label:request.label??'平检',dc:request.dc?.visible===false?undefined:request.dc?.value}))return {status:'cancelled'};guard();await commit();}

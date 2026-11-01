@@ -1,7 +1,7 @@
 import {MODULE_ID} from './rules.mjs';
 import {getSourceId,isActiveGM} from './native-context.mjs';
 import {SerialActions} from './runtime.mjs';
-import {FORTRESS_RULE_COMPAT_WORLDS} from './world-gates.mjs';
+import {FORTRESS_RULE_COMPAT_WORLDS,BOB2_AUTOMATION_WORLDS} from './world-gates.mjs';
 
 const ALBATROSS='FTGjyYBZJ4JCpTZw',HANDS='fzUfZcstmQZGGwcJ';
 const OVERTURE='Compendium.pf2e.spell-effects.Item.ITErgFRfydm1xmnW';
@@ -16,7 +16,7 @@ export const fortressRuleCompatibilityEnabled=game=>FORTRESS_RULE_COMPAT_WORLDS.
  * upstream branches; custom predicates and enabled/disabled state survive. */
 export function buildFortressPatreonRepairs(original,{game}={}){
  const rules=copy(original),changes=[],patreon=game?.modules?.get('patreon-v3');
- if(!fortressRuleCompatibilityEnabled(game)||patreon?.active!==true)return {rules,changes};
+ if(!fortressRuleCompatibilityEnabled(game)||BOB2_AUTOMATION_WORLDS.has(game?.world?.id)||patreon?.active!==true)return {rules,changes};
  const change=(object,key,after,path,reason)=>{const before=copy(object[key]);object[key]=copy(after);changes.push({path,before,after:copy(after),reason})};
  const albatross=rules?.[ALBATROSS];
  if(sourceGroup(albatross,ALBATROSS,'Compendium.pf2e.spells-srd.Item.93SjFTGJUTTmAt6j')&&Array.isArray(albatross.complexRules)){
@@ -42,15 +42,32 @@ export function buildFortressPatreonRepairs(original,{game}={}){
  return {rules,changes};
 }
 
-function upliftingRepair(item){
+function upliftingRepair(item,{aidOnly=false}={}){
  if(item?.type!=='effect'||getSourceId(item)!==OVERTURE)return null;
  const before=item._source?.system?.rules??item.system?.rules;
  if(!Array.isArray(before))return null;
- const candidates=before.map((rule,index)=>({rule,index})).filter(({rule})=>rule.key==='AdjustDegreeOfSuccess'&&rule.selector==='performance'&&equal(rule.adjustment,{success:'one-degree-better'})&&equal(rule.predicate,[{lte:['skill:performance:rank',3]}]));
+ const candidates=before.map((rule,index)=>({rule,index})).filter(({rule})=>rule.key==='AdjustDegreeOfSuccess'&&rule.selector==='performance'&&(equal(rule.adjustment,{success:'one-degree-better'})||aidOnly&&equal(rule.adjustment,{failure:'one-degree-better'}))&&equal(rule.predicate,[{lte:['skill:performance:rank',3]}]));
  if(candidates.length!==1)return null;
  const rules=copy(before);rules[candidates[0].index].adjustment={failure:'one-degree-better'};
+ if(aidOnly){
+  rules[candidates[0].index].predicate.push('action:aid');
+  for(const rule of rules)if(rule.key==='AdjustDegreeOfSuccess'&&rule.selector==='performance'&&equal(rule.adjustment,{all:'to-critical-success'})&&equal(rule.predicate,[{gte:['skill:performance:rank',4]}]))rule.predicate.push('action:aid');
+ }
  const prior=item.flags?.[MODULE_ID]?.fortressRuleRepair;
  return {'system.rules':rules,[`flags.${MODULE_ID}.fortressRuleRepair`]:{version:1,before:{'system.rules':copy(before),...copy(prior?.before??{})}}};
+}
+
+function bolsterMindRepair(item){
+ if(item?.type!=='effect'||getSourceId(item)!=='Compendium.pf2e.feat-effects.Item.52owimBcCQNBuNfM')return null;
+ const before=item._source?.system?.rules??item.system?.rules;if(!Array.isArray(before))return null;
+ const rules=copy(before);
+ for(const rule of rules){
+  if(rule.key==='Note'&&rule.text==='PF2E.SpecificRule.BastionOfBlasphemies.Background.BloodedByTheDead.BolsterTheMind.Note'&&equal(rule.selector,['saving-throw'])&&equal(rule.predicate,['blooded-by-the-dead:bolster-the-fury','item:trait:incapacitation']))rule.predicate=['blooded-by-the-dead:bolster-the-mind','item:trait:incapacitation','item:trait:mental'];
+  if(rule.key==='FlatModifier'&&rule.value===2&&rule.type===undefined&&equal(rule.selector,['will'])&&equal(rule.predicate,['blooded-by-the-dead:bolster-the-mind','item:slug:dominate','origin:trait:vampire']))rule.type='circumstance';
+ }
+ if(equal(before,rules))return null;
+ const prior=item.flags?.[MODULE_ID]?.fortressRuleRepair;
+ return {'system.rules':rules,[`flags.${MODULE_ID}.fortressRuleRepair`]:{version:2,before:{'system.rules':copy(before),...copy(prior?.before??{})}}};
 }
 
 /** A creating client repairs its own new effect synchronously. Existing owned
@@ -58,12 +75,13 @@ function upliftingRepair(item){
 export function createFortressRuleCompatibility({game}){
  const queue=new SerialActions();
  const eligible=actor=>fortressRuleCompatibilityEnabled(game)&&actor&&!actor.flags?.[MODULE_ID]?.autoRepairDisabled;
+ const patchItem=item=>upliftingRepair(item,{aidOnly:BOB2_AUTOMATION_WORLDS.has(game.world.id)})??(BOB2_AUTOMATION_WORLDS.has(game.world.id)?bolsterMindRepair(item):null);
  return {
   maintain:async actor=>{
    if(!eligible(actor)||!isActiveGM(game))return;
    return queue.run(actor.uuid,async()=>{
     if(!eligible(actor)||!isActiveGM(game))return;
-    const updates=values(actor.items).flatMap(item=>{const patch=upliftingRepair(item);return patch?[{_id:item.id??item._id,...patch}]:[]});
+    const updates=values(actor.items).flatMap(item=>{const patch=patchItem(item);return patch?[{_id:item.id??item._id,...patch}]:[]});
     if(updates.length)await actor.updateEmbeddedDocuments('Item',updates);
    });
   },
@@ -71,7 +89,7 @@ export function createFortressRuleCompatibility({game}){
    if(!fortressRuleCompatibilityEnabled(game))return()=>{};
    const id=Hooks.on('preCreateItem',(item,_data,_options,userId)=>{
     if(userId!==game.user?.id||!eligible(item.actor))return;
-    const patch=upliftingRepair(item);if(patch)item.updateSource(patch);
+    const patch=patchItem(item);if(patch)item.updateSource(patch);
    });
    return()=>Hooks.off('preCreateItem',id);
   },

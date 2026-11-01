@@ -6,6 +6,9 @@ const values=c=>Array.from(c?.values?.()??c??[]);
 const fail=reason=>({handled:true,eligible:false,reason});
 export const isForceBarrageItem=item=>item?.type==='spell'&&getSourceId(item)===FORCE_BARRAGE_SOURCE;
 
+// Use the learned spell's rank: a cast variant can carry an unlearned rank.
+export const isForceBarrageRankAllowed=(original,rank)=>original.system.location?.signature===true||rank===1&&original.rank===1;
+
 /** Admission is call-local. Owning this spell never enrolls other actor casts. */
 export function assessForceBarrageCast({game,actor,item,entry,user=game.user,options={}}={}){
  if(!FORCE_BARRAGE_WORLDS.has(game?.world?.id)||actor?.type!=='character'||actor.isToken||!isForceBarrageItem(item)||options.consume===false||options.message===false)return {handled:false,eligible:false};
@@ -13,8 +16,9 @@ export function assessForceBarrageCast({game,actor,item,entry,user=game.user,opt
  const base=item.original??item;
  if(actor?.type!=='character'||actor.isToken||game.actors?.get(actor.id)!==actor||item.actor!==actor||base.actor!==actor||actor.items?.get(base.id)!==base||item.uuid!==base.uuid||!isForceBarrageItem(base)||!user?.active||game.users?.get(user.id)!==user||actor.testUserPermission?.(user,'OWNER')!==true)return fail('需要现役角色、原始法术和当前所有者的实际施法。');
  if(!game.users.activeGM?.active||actor.canAct!==true||actor.isDead===true)return fail('需要在线主GM及能够行动的施法者。');
- if(entry?.actor!==actor||actor.items.get(entry.id)!==entry||entry.type!=='spellcastingEntry'||entry.isSpontaneous!==true||entry.system.prepared?.value!=='spontaneous'||entry.system.tradition?.value!=='occult'||base.system.location?.value!==entry.id||item.system.location?.value!==entry.id||base.system.location?.signature!==true)return fail('当前桥仅支持本施法条目的自发施法招牌法术。');
+ if(entry?.actor!==actor||actor.items.get(entry.id)!==entry||entry.type!=='spellcastingEntry'||entry.isSpontaneous!==true||entry.system.prepared?.value!=='spontaneous'||entry.system.tradition?.value!=='occult'||base.system.location?.value!==entry.id||item.system.location?.value!==entry.id)return fail('当前桥仅支持本施法条目的自发施法法术。');
  const rank=options.rank??item.rank,slot=entry.system.slots?.[`slot${rank}`];
+ if(!isForceBarrageRankAllowed(base,rank))return fail('非招牌力场飞弹只支持法术列表中实际学会的1环施法。');
  if(!Number.isInteger(rank)||rank<1||rank>3||!Number.isInteger(slot?.max)||slot.max<1||!Number.isInteger(slot?.value)||slot.value<1||slot.value>slot.max||item.atWill||item.isCantrip||(item.system.cast?.focusPoints??0)!==0)return fail('需要当前1至3环的可用原生法术位。');
  if((options.messageMode??game.settings?.get('core','messageMode'))!=='public'||options.rollMode&&options.rollMode!=='publicroll')return fail('当前分弹接线只支持公开施法；私密模式请手工处理。');
  if(values(item.appliedOverlays).length||Object.keys(base.system.overlays??{}).length||base.flags?.['pf2e-toolbelt']?.actionable?.linked||base.flags?.['pf2e-toolbelt']?.linked)return fail('法术覆盖或另接宏尚未验证，未接管本次施法。');

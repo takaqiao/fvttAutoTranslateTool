@@ -1,6 +1,7 @@
 import {MODULE_ID as ID} from './rules.mjs';
 import {getSourceId,isActiveGM} from './native-context.mjs';
 import {FORCE_BARRAGE_WORLDS} from './world-gates.mjs';
+import {isForceBarrageRankAllowed} from './force-barrage-rules.mjs';
 
 export const FORCE_BARRAGE_SOURCE='Compendium.pf2e.spells-srd.Item.gKKqvLohtrSJj3BM';
 const PATH=`flags.${ID}.forceBarrage`,terminal=new Set(['cancelled','rejected','disrupted','delivered','uncertain']);
@@ -42,7 +43,7 @@ export function createForceBarrageLedger({game,fromUuid=globalThis.fromUuid,with
   gm();requireTrue(FORCE_BARRAGE_WORLDS.has(game.world?.id)&&game.system?.id==='pf2e');
   requireTrue(actor?.type==='character'&&!actor.isToken&&game.actors?.get(actor.id)===actor);
   requireTrue(item?.type==='spell'&&item.actor===actor&&actor.items?.get(item.id)===item&&getSourceId(item)===FORCE_BARRAGE_SOURCE);
-  requireTrue(entry?.type==='spellcastingEntry'&&entry.actor===actor&&actor.items.get(entry.id)===entry&&item.system?.location?.value===entry.id&&item.system.location.signature===true&&item.system.level?.value===1);
+  requireTrue(entry?.type==='spellcastingEntry'&&entry.actor===actor&&actor.items.get(entry.id)===entry&&item.system?.location?.value===entry.id&&item.system.level?.value===1);
   requireTrue(entry.system?.prepared?.value==='spontaneous'&&entry.system.tradition?.value==='occult');
   requireTrue(user?.active===true&&game.users?.get(user.id)===user&&actor.testUserPermission?.(user,'OWNER')===true);
  }
@@ -51,6 +52,7 @@ export function createForceBarrageLedger({game,fromUuid=globalThis.fromUuid,with
  function recordFor(scope){
   source(scope);requireTrue(validId(scope.nonce));const state=stateOf(scope.actor),r=state.operations?.[scope.nonce];
   requireTrue(state.currentByItem?.[scope.item.id]===scope.nonce&&r?.nonce===scope.nonce&&r.actorUuid===scope.actor.uuid&&r.itemUuid===scope.item.uuid&&r.entryUuid===scope.entry.uuid&&r.userId===scope.user.id&&r.gmId===game.users.activeGM.id);
+  requireTrue(isForceBarrageRankAllowed(scope.item,r.allocation.rank));
   if(scope.fingerprint!==undefined)requireTrue(scope.fingerprint===r.fingerprint);
   return r;
  }
@@ -62,7 +64,7 @@ export function createForceBarrageLedger({game,fromUuid=globalThis.fromUuid,with
   const sum=allocation.targets.reduce((n,t)=>n+t.count,0);requireTrue(Number.isSafeInteger(sum)&&sum>0);
  }
  async function allocationLive(scope,allocation){
-  allocationShape(allocation);const sourceToken=await fromUuid(allocation.sourceTokenUuid),scene=sourceToken?.parent;
+  allocationShape(allocation);requireTrue(isForceBarrageRankAllowed(scope.item,allocation.rank));const sourceToken=await fromUuid(allocation.sourceTokenUuid),scene=sourceToken?.parent;
   requireTrue(sourceToken?.documentName==='Token'&&sourceToken.actor===scope.actor&&sourceToken.actorLink===true&&game.scenes?.get(scene?.id)===scene&&scene.tokens?.get(sourceToken.id)===sourceToken);
   for(const {targetUuid}of allocation.targets){const t=await fromUuid(targetUuid);requireTrue(t?.documentName==='Token'&&t.parent===scene&&scene.tokens.get(t.id)===t&&['character','npc','familiar'].includes(t.actor?.type));}
  }

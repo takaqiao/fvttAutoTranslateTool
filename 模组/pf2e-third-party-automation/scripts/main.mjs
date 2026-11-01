@@ -1,3 +1,10 @@
+import {createDualStrikeCriticalCompatibility} from './dual-strike-critical-compat.mjs';
+import {createBob2SwashbucklerProvider,buildBob2SwashbucklerPatreonRepairs} from './bob2-swashbuckler.mjs';
+import {createBob2RuleLinks,buildBob2RuleLinkRepairs} from './bob2-rule-links.mjs';
+import {createMagusAnalysis} from './magus-analysis.mjs';
+import {createCommunalHealing} from './communal-healing.mjs';
+import {createCounterPerformance} from './counter-performance.mjs';
+import {createBravery} from './bravery.mjs';
 import {createSalubriousMessagePrivacy,loadSalubriousWorkbench} from './salubrious-message-privacy.mjs';
 import {createPilgrimRewards} from './sog-pilgrim-rewards.mjs';
 import {createExplorationRuntime} from './exploration/runtime.mjs';
@@ -74,7 +81,7 @@ import {createNativeOwnerOperations} from './native-owner-operations.mjs';
 import {createCycleCoordinator} from './cycle-coordinator.mjs';
 import {createCycleAutomation,addCycleReactionButtons} from './cycle-automation.mjs';
 import {createPanel,createUsageExecutor,executeActorAction,onFullRest,expireCycles,requireOwner,SerialActions} from './runtime.mjs';
-import {DEFENSIVE_ADVANCE_WORLDS,DESPERATE_PRAYER_WORLDS,FORCE_BARRAGE_WORLDS,HALFLING_LUCK_WORLDS,REACTION_CHECKER_SETTING_WORLDS,ROARING_APPLAUSE_WORLDS,SPIRITUAL_SCAR_WORLDS} from './world-gates.mjs';
+import {BOB2_AUTOMATION_WORLDS,DEFENSIVE_ADVANCE_WORLDS,DESPERATE_PRAYER_WORLDS,FORCE_BARRAGE_WORLDS,HALFLING_LUCK_WORLDS,REACTION_CHECKER_SETTING_WORLDS,ROARING_APPLAUSE_WORLDS,SPIRITUAL_SCAR_WORLDS} from './world-gates.mjs';
 let socket,coordinator,cycle,maintenance,providers=[];
 const report=e=>{console.error(MODULE_ID,e);ui.notifications.error(e.message);};
 const glimpseCompat=createGlimpseCompat({game,fromUuid});
@@ -127,7 +134,7 @@ async function useCycleFromCard(actor,source){
 }
 Hooks.once('ready',async()=>{
  const choose=createNativeChooser({game,send:(userId,payload)=>socket.executeAsUser('native-choice',userId,payload)});
- const ownerRolls=Object.fromEntries(['campaign','av','knowledge','social','reaction','rest'].map(scope=>[scope,createNativeOwnerOperations({game,fromUuid,scope})]));
+ const ownerRolls=Object.fromEntries(['campaign','av','knowledge','social','reaction','rest','bob2-rules','counter-performance'].map(scope=>[scope,createNativeOwnerOperations({game,fromUuid,scope})]));
  const targetSaves=Object.fromEntries(['spell-combination','spiritual-scar'].map(scope=>[scope,createNativeTargetSaves({game,fromUuid,choose,scope})]));
  const activityResults=createActivityResultLifecycle({game,getRollContext:roll=>cycle?.getRollContext(roll),onError:report});
  const weaponSurge=createWeaponSurgeAutomation({game});
@@ -170,6 +177,16 @@ Hooks.once('ready',async()=>{
  const campaign=createCampaignFeats({game,fromUuid,choose,runNative:ownerRolls.campaign.run,onError:report});
  const fear=createFearAutomation({game,fromUuid,choose,reactionRestriction,onError:report});
  const familiar=createBardFamiliarProvider({game,fromUuid,onError:report});
+ const swashbuckler=createBob2SwashbucklerProvider({game,fromUuid,choose:showNativeChoice,onError:report});
+ const ruleLinks=createBob2RuleLinks({game,fromUuid,choose,runNative:ownerRolls['bob2-rules'].run,castEvents:nativeCasts});
+ const knowledge=createKnowledgeAutomation({game,fromUuid,choose,runNative:ownerRolls.knowledge.run,onError:report});
+ const magusAnalysis=createMagusAnalysis({game,fromUuid,choose,runRecallKnowledge:knowledge.runRecallKnowledge});
+ const communalHealing=createCommunalHealing({game,fromUuid,choose,onError:report,castEvents:nativeCasts});
+ const counterPerformance=createCounterPerformance({game,fromUuid,nativeCasts,runNative:ownerRolls['counter-performance'].run});
+ nativeCasts.addMatcher(counterPerformance.matches);
+ nativeCasts.addCapture('counterPerformanceInput',counterPerformance.captureCast);
+ nativeCasts.addCastMiddleware(counterPerformance.interceptCast);
+ const combinations=createSpellCombination({game,fromUuid,choose,runTargetSave:targetSaves['spell-combination'].run,onError:report,afterAttack:message=>campaign.processCheck(message),volatileSparkEnabled:BOB2_AUTOMATION_WORLDS.has(game.world?.id),getRollContext:roll=>cycle?.getRollContext(roll)});
  const prayer=DESPERATE_PRAYER_WORLDS.has(game.world?.id)?createDesperatePrayerProvider({game,fromUuid,choose,onError:report,castEvents:nativeCasts}):null;
  const halflingLuck=HALFLING_LUCK_WORLDS.has(game.world?.id)&&game.system?.id==='pf2e'?createHalflingLuckProvider({game,fromUuid,choose:showNativeChoice,onError:report}):null;
  const forceBarrage=FORCE_BARRAGE_WORLDS.has(game.world?.id)&&game.system?.id==='pf2e'?createForceBarrageBridge({game,fromUuid,nativeCasts,onError:report}):null;
@@ -178,20 +195,21 @@ Hooks.once('ready',async()=>{
  if(forceBarrage)nativeCasts.addCastMiddleware(forceBarrage.interceptCast);
  if(roaring)nativeCasts.addCastMiddleware(roaring.interceptCast);
  if(prayer){nativeCasts.addActorMatcher(prayer.isManagedActor);nativeCasts.addConsumePolicy(prayer.consumePolicy);nativeCasts.addCastMiddleware(prayer.interceptCast);}
- const prayerCheck=(native,...args)=>interceptKnowledgeProbe((...checked)=>prayer?prayer.interceptCheck(native,...checked):native(...checked),...args);
+ const prayerCheck=(native,...args)=>swashbuckler.interceptCheck((...selected)=>ruleLinks.interceptCheck((...ruled)=>interceptKnowledgeProbe((...checked)=>prayer?prayer.interceptCheck(native,...checked):native(...checked),...ruled),...selected),...args);
  let metapower,electricity;
  const voltage=createEldamonVoltageProvider({game,fromUuid,onError:report,getRollContext:roll=>cycle?.getRollContext(roll),observe:(...args)=>metapower.observe(...args),onRefresh:context=>electricity.onRefresh(context)});
  electricity=createEldamonElectricityProvider({game,fromUuid,reactionRestriction,onError:report,refreshOutsideEncounter:voltage.refreshOutsideEncounter,useOwnedAction:(item,event)=>metapower.observe({actor:item.actor,item},()=>game.toolbelt.api.actionable.useAction(event,item))});
  metapower=createMetapowerProvider({game,fromUuid,onError:report,supportsOriginalUse:item=>providers.some(p=>p.resolveAction?.(item)?.startsWith('medic:')||['glimpse:use','defensive-advance'].includes(p.resolveAction?.(item))),beforeChannel:electricity.beforeChannel,validateSelection:electricity.validateSelection,interceptDamageMessage:electricity.interceptDamageMessage,onCommittedChannel:async context=>{await voltage.onCommittedChannel(context);await electricity.onCommittedChannel(context)}});
  nativeCasts.addCastMiddleware(({item,options},native)=>options.consume===false||options.message===false?native():metapower.observe({actor:item.actor,entry:'spell'},native));
- providers=[createDualStrikeAutomation({game,fromUuid,choose,onError:report}),runeTransfer,campaign,createKnowledgeAutomation({game,fromUuid,choose,runNative:ownerRolls.knowledge.run,onError:report}),createAvAutomation({game,fromUuid,choose,runNative:ownerRolls.av.run,onError:report,refocusSubscribers:[treatmentRefocus,exploration.refocusSubscriber],refocusPrivacy:salubriousMessagePrivacy,explorationRefocus:exploration.refocusAdapter}),createPartyAutomation({game,fromUuid,choose,onError:report}),createSocialAutomation({game,fromUuid,choose,runNative:ownerRolls.social.run,onError:report}),createThrallAutomation({game,fromUuid,choose,onError:report}),createReactionChecks({game,fromUuid,choose,runNative:ownerRolls.reaction.run,nativeInvocation:ownerRolls.reaction.getInvocation,reactionRestriction,onError:report,halflingLuck,nativeCheckMiddleware:(wrapped,...args)=>prayerCheck((...checked)=>familiar.interceptCheck((...accompanied)=>electricity.interceptCheck((...electric)=>metapower.interceptCheck((...next)=>weaponSurge.interceptCheck((...surged)=>salubriousCheckScope.interceptCheck(wrapped,...surged),...next),...electric),...accompanied),...checked),...args)}),fear,createScareToDeath({game,fromUuid,choose,onError:report}),createSpellCombination({game,fromUuid,choose,runTargetSave:targetSaves['spell-combination'].run,onError:report,afterAttack:message=>campaign.processCheck(message)}),deflection,destructiveBlock,disarmingBlock,disarmRegrip,shieldEvents,salubriousKiss];
+ providers=[createDualStrikeAutomation({game,fromUuid,choose,onError:report}),runeTransfer,campaign,knowledge,createAvAutomation({game,fromUuid,choose,runNative:ownerRolls.av.run,onError:report,refocusSubscribers:[treatmentRefocus,exploration.refocusSubscriber],refocusPrivacy:salubriousMessagePrivacy,explorationRefocus:exploration.refocusAdapter}),createPartyAutomation({game,fromUuid,choose,onError:report}),createSocialAutomation({game,fromUuid,choose,runNative:ownerRolls.social.run,onError:report}),createThrallAutomation({game,fromUuid,choose,onError:report}),createReactionChecks({game,fromUuid,choose,runNative:ownerRolls.reaction.run,nativeInvocation:ownerRolls.reaction.getInvocation,reactionRestriction,onError:report,halflingLuck,nativeCheckMiddleware:(wrapped,...args)=>prayerCheck((...checked)=>familiar.interceptCheck((...accompanied)=>electricity.interceptCheck((...electric)=>metapower.interceptCheck((...next)=>weaponSurge.interceptCheck((...surged)=>salubriousCheckScope.interceptCheck(wrapped,...surged),...next),...electric),...accompanied),...checked),...args)}),fear,createScareToDeath({game,fromUuid,choose,onError:report}),combinations,deflection,destructiveBlock,disarmingBlock,disarmRegrip,shieldEvents,salubriousKiss];
  const onRulesChanged=()=>{if(fortressRuleCompatibilityEnabled(game)&&game.modules.get('patreon-v3')?.active)ui.notifications.warn('Patreon 规则已修复；请所有已在线客户端刷新一次，使规则修复生效。',{permanent:true})};
- const configuration=createConfigurationMaintenance({game,onRulesChanged,repairs:[buildAvPatreonRepairs,buildPartyPatreonRepairs,buildKnowledgePatreonRepairs,rules=>buildFortressPatreonRepairs(rules,{game}),...DEFENSIVE_ADVANCE_WORLDS.has(game.world?.id)?[buildDefensiveAdvancePatreonRepairs]:[]],settings:[{module:'pf2e-ranged-combat',key:'postActionToChat',value:2,when:g=>Array.from(g.actors.party?.members??[]).some(a=>[KNOWLEDGE_SOURCES.monster,KNOWLEDGE_SOURCES.hunt].every(source=>a.items.some(i=>i.sourceId===source))),reason:'猎物指定保留完整原生技能卡，供怪物猎手知识联动读取原始操作者与目标。'},{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:g=>REACTION_CHECKER_SETTING_WORLDS.has(g.world?.id),transform:value=>Array.isArray(value)?value.filter(slug=>slug!=='disarming-block'):value,reason:'卸武格挡改由实际格挡回执接原生自由动作缴械，避免重复提示或再次收取反应。'}]});
+ await createDualStrikeCriticalCompatibility({game}).initialize().catch(report);
+ const configuration=createConfigurationMaintenance({game,onRulesChanged,repairs:[buildAvPatreonRepairs,buildPartyPatreonRepairs,buildKnowledgePatreonRepairs,rules=>buildFortressPatreonRepairs(rules,{game}),rules=>buildBob2SwashbucklerPatreonRepairs(rules,{game}),rules=>buildBob2RuleLinkRepairs(rules,{game}),...DEFENSIVE_ADVANCE_WORLDS.has(game.world?.id)?[buildDefensiveAdvancePatreonRepairs]:[]],settings:[{module:'pf2e-ranged-combat',key:'postActionToChat',value:2,when:g=>Array.from(g.actors.party?.members??[]).some(a=>[KNOWLEDGE_SOURCES.monster,KNOWLEDGE_SOURCES.hunt].every(source=>a.items.some(i=>i.sourceId===source))),reason:'猎物指定保留完整原生技能卡，供怪物猎手知识联动读取原始操作者与目标。'},{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:g=>REACTION_CHECKER_SETTING_WORLDS.has(g.world?.id),transform:value=>Array.isArray(value)?value.filter(slug=>slug!=='disarming-block'):value,reason:'卸武格挡改由实际格挡回执接原生自由动作缴械，避免重复提示或再次收取反应。'}]});
  await configuration().catch(report);
  providers.unshift(activityResults,weaponSurge,glimpse,...scar?[scar]:[],voltage,electricity);
  providers.push(metapower,createEldamonDataRepair({game}),createMedicActions({game,fromUuid,choose,onError:report}),familiar,defensiveAdvance,...prayer?[prayer]:[]);
  const electricityBasic=createEldamonBasicSettlement({game,fromUuid,basicUse:electricity.basicUse,apply:payload=>electricity.confirmedAction(payload),onError:report});
- providers.push(createFortressRuleCompatibility({game}),electricityBasic);
+ providers.push(createFortressRuleCompatibility({game}),electricityBasic,swashbuckler,ruleLinks,magusAnalysis,communalHealing,counterPerformance,createBravery({game,onError:report}));
  if(halflingLuck)providers.push(halflingLuck);
  if(forceBarrage)providers.push(forceBarrage);
  // Prayer subscribes first so a genuine Sustain still closes its action window.
@@ -208,7 +226,7 @@ Hooks.once('ready',async()=>{
   },onError:report,
  });
  libWrapper.register(MODULE_ID,'CONFIG.Actor.documentClass.prototype.applyDamage',function(wrapped,params){
-  const applyNative=next=>activityResults.applyNativeDamage(this,next,wrapped);
+  const applyNative=next=>activityResults.applyNativeDamage(this,next,checked=>combinations.applyDamage(this,checked,wrapped));
   // Consume the exact private params grant before any normalization or spread.
   return salubriousDamage.applyDamage(this,params,(approved,assertSalubrious)=>{
    const source=cycle.getRollContext(approved.damage);

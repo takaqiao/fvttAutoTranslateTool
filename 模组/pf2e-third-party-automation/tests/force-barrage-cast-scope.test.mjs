@@ -4,6 +4,10 @@ import {createNativeCastEvents} from '../scripts/amp-cast-events.mjs';
 import {MODULE_ID as ID} from '../scripts/rules.mjs';
 import {readFile} from 'node:fs/promises';
 import vm from 'node:vm';
+import {createForceBarrageBridge} from '../scripts/force-barrage.mjs';
+import {FORCE_BARRAGE_SOURCE} from '../scripts/force-barrage-rules.mjs';
+import {FORCE_BARRAGE_WORKBENCH_SOURCE} from '../scripts/force-barrage-workbench-compat.mjs';
+const barrageCommand=process.env.FVTT_FORCE_BARRAGE_MACRO?await readFile(process.env.FVTT_FORCE_BARRAGE_MACRO,'utf8'):null;
 
 function fixture({detached=false,veto=false,noHook=false,lostReply=false,deferred=false}={}){
  const wrappers=new Map(),rpc=new Map(),hooks=new Map(),writes=[],docs=new Map(),gm={id:'gm',active:true},player={id:'player',active:true};
@@ -31,7 +35,7 @@ function fixture({detached=false,veto=false,noHook=false,lostReply=false,deferre
  const casts=createNativeCastEvents({game,fromUuid:async uuid=>docs.get(uuid),messageTimeoutMs:30});
  const emit=async(spell,rank)=>{
   const options={actualCast:true,data:{castRank:rank}},flags=casts.captureUsage(spell,{options});
-  const message={id:`m${++messages}`,uuid:`ChatMessage.m${messages}`,author:game.user,rolls:[],blind:false,whisper:[],flags:{[ID]:flags,pf2e:{origin:{uuid:spell.uuid,actor:actor.uuid},context:{type:'spell-cast'}}}};
+  const message={id:`m${++messages}`,uuid:`ChatMessage.m${messages}`,author:game.user,rolls:[],blind:false,whisper:[],speaker:{actor:actor.id,scene:'scene',token:'source'},flags:{[ID]:flags,pf2e:{origin:{uuid:spell.uuid,actor:actor.uuid,castRank:rank},context:{type:'spell-cast'}}}};
   game.messages.set(message.id,message);docs.set(message.uuid,message);
   casts.captureMessageOutcome(spell,options,{message,castNonce:flags?.nativeCast?.id});return message;
  };
@@ -41,7 +45,7 @@ function fixture({detached=false,veto=false,noHook=false,lostReply=false,deferre
  const cast=(spell=item,options={rank:1,slotId:NaN})=>wrappers.get('CONFIG.PF2E.Item.documentClasses.spellcastingEntry.prototype.cast').call(entry,detached?(s,o)=>{nativeCast(s,o);}:nativeCast,spell,options);
  const enroll=(data={sourceTokenUuid:null,messageMode:'public',bridgeNonce:'bridge-one',fingerprint:'a'.repeat(64)})=>casts.addCastMiddleware(({item:spell},next)=>spell===item?next.withOutcome({kind:'force-barrage',data}):next());
  const adapter={validate:()=>true,consumePolicy:async(context,next)=>{context.expectSlotCommit({before:entry.system.slots[`slot${context.payload.rank}`].value,changes:()=>({})});return next()}};
- return {game,gm,player,actor,entry,item,other,casts,wrappers,rpc,hooks,writes,cast,enroll,adapter,emit,docs,socket,counters:()=>({consumes,messages,castCalls})};
+ return {game,gm,player,actor,entry,item,other,casts,wrappers,rpc,hooks,writes,cast,enroll,adapter,emit,docs,socket,Hooks,counters:()=>({consumes,messages,castCalls})};
 }
 
 test('outcome enrollment leaves other spells and independent consumes unmanaged',async()=>{
@@ -209,4 +213,53 @@ test('ordinary enrolled casts retain their existing untimed receipt shape',async
  const f=fixture();f.casts.addInvocationAdapter('force-barrage',f.adapter);f.enroll();
  const out=await f.cast();assert.equal(Object.hasOwn(out,'completedWorldTime'),false);
  assert.equal(Object.hasOwn(out.receipt,'completedWorldTime'),false);
+});
+
+async function barrageFixture({cancel=false}={}){
+ const f=fixture();f.gm.isGM=true;f.game.world={id:'ujx5r8oipw7ercdr'};f.game.system={id:'pf2e',version:'8.6.1'};
+ f.game.modules=new Map(['xdy-pf2e-workbench','pf2e-toolbelt'].map(id=>[id,{active:true}]));
+ f.actor.isOwner=true;f.actor.itemTypes={feat:[],effect:[]};
+ f.entry.system.tradition={value:'occult'};
+ for(const slot of Object.values(f.entry.system.slots))slot.max=slot.value;
+ f.item.sourceId=FORCE_BARRAGE_SOURCE;f.item.link='@UUID[Actor.pc.Item.spell]{Force Barrage}';
+ Object.assign(f.item.system,{location:{value:f.entry.id,signature:false},level:{value:1},rules:[],overlays:{},traits:{value:['concentrate','force','manipulate']},range:{value:'120 feet'},area:null,duration:{value:'',sustained:false},damage:{0:{applyMod:false,category:null,formula:'1d4+1',kinds:['damage'],materials:[],type:'force'}}});
+ const scene={id:'scene',uuid:'Scene.scene',tokens:new Map()};
+ const token={id:'source',uuid:'Scene.scene.Token.source',documentName:'Token',parent:scene,actor:f.actor,actorLink:true};
+ const target={id:'target',uuid:'Scene.scene.Token.target',documentName:'Token',parent:scene,actor:{type:'npc',isOwner:true},name:'Target',displayName:50};
+ for(const doc of [token,target]){scene.tokens.set(doc.id,doc);f.docs.set(doc.uuid,doc);}
+ f.game.scenes=new Map([[scene.id,scene]]);f.actor.getActiveTokens=()=>[token];
+ const macro={uuid:FORCE_BARRAGE_WORKBENCH_SOURCE,documentName:'Macro',type:'script',command:barrageCommand};f.docs.set(macro.uuid,macro);
+ let rolled=0,published=0;
+ class DamageRoll{
+  constructor(formula){this.formula=formula}
+  evaluate(){rolled++;this.total=6;return this}
+  toJSON(){return {class:'DamageRoll',formula:this.formula,evaluated:true,total:this.total,terms:[{class:'NumericTerm',number:this.total,options:{flavor:'force'}}]}}
+  async toMessage(data){
+   if((f.hooks.get('preCreateChatMessage')??[]).some(fn=>fn(data)===false))return;
+   const id=`damage${++published}`,message={...data,id,uuid:`ChatMessage.${id}`,documentName:'ChatMessage',user:f.gm,isDamageRoll:true,rolls:[this]};
+   f.game.messages.set(id,message);f.docs.set(message.uuid,message);return message;
+  }
+ }
+ globalThis.CONFIG.Dice={rolls:[DamageRoll]};globalThis.ChatMessage={getSpeaker:()=>({actor:f.actor.id,scene:scene.id,token:token.id})};
+ const bridge=createForceBarrageBridge({game:f.game,nativeCasts:f.casts,fromUuid:async uuid=>f.docs.get(uuid),getContext:()=>({token,targets:[target]}),
+  choose:async()=>cancel?null:{actions:3,allocations:[{targetUuid:target.uuid,count:3}]},manualDamageRoll:async({roll})=>roll.evaluate()});
+ bridge.register({Hooks:f.Hooks,socket:f.socket});f.casts.addCastMiddleware(bridge.interceptCast);
+ return {...f,damageCounts:()=>({rolled,published})};
+}
+
+test('non-signature Cast pays its first-rank native slot once and delivers the bound allocation',{skip:!barrageCommand},async()=>{
+ const f=await barrageFixture();await f.cast();
+ assert.deepEqual(f.counters(),{consumes:1,messages:1,castCalls:1});assert.deepEqual(f.damageCounts(),{rolled:1,published:1});
+ assert.equal(f.entry.system.slots.slot1.value,2);assert.equal(f.entry.system.slots.slot3.value,2);assert.equal(f.item.system.location.signature,false);
+ const state=f.actor.flags[ID],record=Object.values(state.forceBarrage.operations)[0],receipt=state.nativeCasts[0];
+ assert.equal(record.status,'delivered');assert.equal(record.allocation.rank,1);assert.equal(record.targets[0].count,3);
+ assert.equal(state.nativeCasts.length,1);assert.equal(receipt.slotCommit.cost,1);assert.equal(receipt.slotCommit.before,3);assert.equal(receipt.slotCommit.after,2);
+ const replay=await f.rpc.get('native-cast-pay').call({socketdata:{userId:'gm'}},{...receipt,id:receipt.id});
+ assert.equal(replay.ok,false);assert.equal(f.entry.system.slots.slot1.value,2);assert.equal(f.counters().consumes,1);
+});
+
+test('cancelling a non-signature allocation leaves native slots and cast receipts untouched',{skip:!barrageCommand},async()=>{
+ const f=await barrageFixture({cancel:true});await f.cast();
+ assert.deepEqual(f.counters(),{consumes:0,messages:0,castCalls:0});assert.deepEqual(f.damageCounts(),{rolled:0,published:0});
+ assert.equal(f.entry.system.slots.slot1.value,3);assert.equal(f.actor.flags[ID],undefined);assert.equal(f.item.system.location.signature,false);
 });

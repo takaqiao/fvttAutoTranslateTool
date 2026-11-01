@@ -5,7 +5,7 @@ import {FORCE_BARRAGE_SOURCE,assessForceBarrageCast,validateForceBarrageTargets,
 function fixture(){
  const user={id:'u',active:true},actor={id:'a',uuid:'Actor.a',type:'character',canAct:true,isDead:false,items:new Map(),testUserPermission:u=>u===user};
  const entry={id:'e',uuid:'Actor.a.Item.e',type:'spellcastingEntry',actor,isSpontaneous:true,system:{prepared:{value:'spontaneous'},tradition:{value:'occult'},slots:{slot1:{value:2,max:3},slot2:{value:2,max:3},slot3:{value:1,max:2}}}};
- const item={id:'s',uuid:'Actor.a.Item.s',type:'spell',sourceId:FORCE_BARRAGE_SOURCE,actor,spellcasting:entry,flags:{},system:{location:{value:'e',signature:true},level:{value:1},rules:[],overlays:{},traits:{value:['concentrate','force','manipulate']},time:{value:'1 to 3'},range:{value:'120 feet'},area:null,duration:{value:'',sustained:false},damage:{0:{applyMod:false,category:null,formula:'1d4+1',kinds:['damage'],materials:[],type:'force'}}}};
+ const item={id:'s',uuid:'Actor.a.Item.s',type:'spell',rank:1,sourceId:FORCE_BARRAGE_SOURCE,actor,spellcasting:entry,flags:{},system:{location:{value:'e',signature:true},level:{value:1},rules:[],overlays:{},traits:{value:['concentrate','force','manipulate']},time:{value:'1 to 3'},range:{value:'120 feet'},area:null,duration:{value:'',sustained:false},damage:{0:{applyMod:false,category:null,formula:'1d4+1',kinds:['damage'],materials:[],type:'force'}}}};
  actor.items.set('s',item);actor.items.set('e',entry);
  const users=new Map([['u',user]]);users.activeGM={id:'gm',active:true};
  const scene={id:'sc',uuid:'Scene.sc',grid:{type:1,units:'ft',distance:5},tokens:new Map()};
@@ -64,4 +64,21 @@ test('Core14 implicit private defaults still stop before payment',()=>{
 test('NPC and synthetic-token Cast routes are not enrolled; current bridge requires the audited occult entry',()=>{
  for(const change of [f=>f.actor.type='npc',f=>f.actor.isToken=true]){const f=fixture();change(f);assert.equal(assessForceBarrageCast(f).handled,false);}
  const f=fixture();f.entry.system.tradition={value:'arcane'};assert.equal(assessForceBarrageCast(f).eligible,false);
+});
+
+for(const signature of [false,undefined])test(`a non-signature first-rank repertoire spell uses its available native slot (${signature})`,()=>{
+ const f=fixture();f.item.system.location.signature=signature;f.options.rank=1;
+ const result=assessForceBarrageCast(f);
+ assert.equal(result.eligible,true);assert.equal(result.rank,1);assert.equal(result.base,f.item);
+ assert.equal(f.item.system.location.signature,signature);assert.equal(f.entry.system.slots.slot1.value,2);
+});
+
+test('non-signature admission uses the original repertoire rank, not a heightened cast variant',()=>{
+ const f=fixture();f.item.system.location.signature=false;
+ for(const rank of [2,3]){
+  const variant={...f.item,rank,original:f.item,system:{...f.item.system,location:{...f.item.system.location,heightenedLevel:rank}}};
+  assert.equal(assessForceBarrageCast({...f,item:variant,options:{rank}}).eligible,false);
+ }
+ f.item.rank=3;f.item.system.location.heightenedLevel=3;f.options.rank=1;
+ assert.equal(assessForceBarrageCast(f).eligible,false);
 });

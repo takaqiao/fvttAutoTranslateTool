@@ -13,7 +13,7 @@ const nativeOptions={skip:!command&&'Set FVTT_FORCE_BARRAGE_MACRO to the audited
 function fixture(commandOverride=command??'unreviewed command'){
  const calls=[],actor={id:'actor',uuid:'Actor.actor',type:'character',canAct:true,isDead:false,isOwner:true,items:new Map(),itemTypes:{feat:[],effect:[]}};
  const entry={id:'entry',uuid:'Actor.actor.Item.entry',actor,type:'spellcastingEntry',system:{prepared:{value:'spontaneous'},slots:{slot1:{value:3},slot2:{value:3},slot3:{value:2}}}};
- const item={id:'spell',uuid:'Actor.actor.Item.spell',actor,type:'spell',_stats:{compendiumSource:SPELL},system:{location:{value:'entry',signature:true}},link:'@UUID[Actor.actor.Item.spell]{Force Barrage}'};
+ const item={id:'spell',uuid:'Actor.actor.Item.spell',actor,type:'spell',rank:1,_stats:{compendiumSource:SPELL},system:{location:{value:'entry',signature:true}},link:'@UUID[Actor.actor.Item.spell]{Force Barrage}'};
  actor.items.set(entry.id,entry);actor.items.set(item.id,item);
  const scene={id:'scene',uuid:'Scene.scene',tokens:new Map()};
  function token(id,owner=true){const document={id,uuid:`Scene.scene.Token.${id}`,parent:scene,name:'Creature',displayName:50,texture:{src:'portrait.webp'},actor:{name:'Creature',isOwner:owner}};scene.tokens.set(id,document);return document}
@@ -66,7 +66,7 @@ for(const [name,change]of [
  ['NaN',f=>f.input.allocations[0].count=NaN],['infinity',f=>f.input.allocations[0].count=Infinity],['negative',f=>f.input.allocations[0].count=-1],['fraction',f=>f.input.allocations[0].count=4.5],['string',f=>f.input.allocations[0].count='4'],
  ['too few',f=>f.input.allocations[0].count=3],['too many',f=>f.input.allocations[0].count=5],['no allocation',f=>f.input.allocations=null],['empty',f=>f.input.allocations=[]],
  ['duplicate target',f=>f.input.allocations[1]={...f.input.allocations[0],count:2}],['mismatched UUID',f=>f.input.allocations[0].targetUuid=f.targetB.uuid],['deleted target',f=>f.scene.tokens.delete(f.targetA.id)],
- ['wrong actor',f=>f.input.actor={...f.actor}],['nonowned source',f=>f.actor.isOwner=false],['wrong spell source',f=>f.item._stats.compendiumSource='unknown'],['prepared entry',f=>f.entry.system.prepared.value='prepared'],['not signature',f=>f.item.system.location.signature=false],['empty slot',f=>f.entry.system.slots.slot3.value=0],
+ ['wrong actor',f=>f.input.actor={...f.actor}],['nonowned source',f=>f.actor.isOwner=false],['wrong spell source',f=>f.item._stats.compendiumSource='unknown'],['prepared entry',f=>f.entry.system.prepared.value='prepared'],['non-signature heightening',f=>f.item.system.location.signature=false],['empty slot',f=>f.entry.system.slots.slot3.value=0],
  ['future damage bonus',f=>f.actor.itemTypes.feat.push({slug:'sorcerous-potency'})],['cannot act',f=>f.actor.canAct=false],['missing bridge',f=>f.input.bridge=null],
 ])test(`rejects ${name} before payment`,nativeOptions,async()=>{const f=fixture(),adapter=await load(f);change(f);await assert.rejects(adapter.run(f.input),error=>error.code?.startsWith('force-barrage-'));assert.deepEqual(f.calls.map(c=>c[0]),['load'])});
 test('a legitimate heightened variant keeps its live original spell identity',nativeOptions,async()=>{const f=fixture(),adapter=await load(f);f.input.item={...f.item,original:f.item};await adapter.run(f.input);assert.equal(publications(f).length,2)});
@@ -93,3 +93,21 @@ test('each delivered formula and message data match the original audited constru
 });
 
 test('PF2e 8.6 retains the installed native missile count and original payment',nativeOptions,async()=>{const f=fixture();f.game.system.version='8.6.0';const adapter=await load(f);await adapter.run(f.input);assert.equal(f.calls.filter(c=>c[0]==='pay').length,1);assert.equal(publications(f).length,2)});
+
+test('a non-signature first-rank cast retains Workbench allocation and native damage formulas',nativeOptions,async()=>{
+ const f=fixture();f.item.system.location.signature=false;f.input.rank=1;
+ f.input.allocations[0].count=2;f.input.allocations[1].count=1;
+ const adapter=await load(f),result=await adapter.run(f.input);
+ assert.equal(result.status,'completed');assert.equal(result.missiles,3);
+ assert.deepEqual(publications(f).map(p=>p.roll.formula),['(2d4 + 2)[force]','(1d4 + 1)[force]']);
+ assert.equal(f.calls.filter(c=>c[0]==='pay').length,1);assert.equal(f.item.system.location.signature,false);
+});
+
+test('Workbench refuses unsupported non-signature ranks before invoking payment',nativeOptions,async()=>{
+ for(const [knownRank,castRank] of [[1,2],[1,3],[3,1],[3,3]]){
+  const f=fixture();f.item.system.location.signature=false;f.item.rank=knownRank;f.input.rank=castRank;
+  f.input.item={...f.item,original:f.item,rank:castRank};
+  const adapter=await load(f);await assert.rejects(adapter.run(f.input));
+  assert.deepEqual(f.calls.map(c=>c[0]),['load']);
+ }
+});

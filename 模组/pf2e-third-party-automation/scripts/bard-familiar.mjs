@@ -2,6 +2,7 @@ import {MODULE_ID as ID} from './rules.mjs';
 import {getNativeCastEvents} from './amp-cast-events.mjs';
 import {getSourceId,isActiveGM} from './native-context.mjs';
 import {isActualUseMessage} from './usage-events.mjs';
+import {BOB2_AUTOMATION_WORLDS} from './world-gates.mjs';
 
 export const BARD_FAMILIAR_SOURCES=Object.freeze({
  focus:'Compendium.pf2e.familiar-abilities.Item.jdlefpPcSCIe27vO',
@@ -100,9 +101,23 @@ export function createBardFamiliarProvider({game,fromUuid=globalThis.fromUuid,on
   const next=new game.pf2e.CheckModifier(check.slug,{modifiers:check.modifiers},[bonus],context.options);
   return native(next,context,...args);
  }
+ async function rechargeFamiliars(master){
+  const currentMaster=()=>game.system?.id==='pf2e'&&BOB2_AUTOMATION_WORLDS.has(game.world?.id)&&master?.type==='character'&&game.actors.get(master.id)===master&&owner(master,game.user);
+  if(!currentMaster())return;
+  return castEvents.withActorResourceLock(master,async()=>{
+   if(!currentMaster())return;
+   for(const familiar of values(game.actors)){
+    if(masterOf(familiar)!==master||!owner(familiar,game.user))continue;
+    const usedFocus=values(familiar.items).some(item=>ability(item,S.focus)&&item.system.frequency?.per==='day'&&item.system.frequency.value<item.system.frequency.max);
+    if(usedFocus)await familiar.recharge({duration:'day'});
+   }
+  });
+ }
  function register({Hooks}={}){
   const hooks=[],sheets=new Map(),on=(event,fn)=>hooks.push([event,Hooks.on(event,fn)]);
   const release=app=>{const prior=sheets.get(app);if(!prior)return;prior.element.removeEventListener('click',prior.listener,true);sheets.delete(app);};
+  // PF2e emits this only on the client that completed the master's rest.
+  on('pf2e.restForTheNight',master=>rechargeFamiliars(master).catch(onError));
   on('preUpdateItem',(item,changes,options,userId)=>{
    if(!resolveAction(item)||item.system.frequency?.value!==1||(changes['system.frequency.value']??changes.system?.frequency?.value)!==0)return;
    const nonce=randomId(),master=masterOf(item.actor);if(!boundedId(nonce)||!master)return;

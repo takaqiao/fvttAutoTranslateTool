@@ -1,6 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
 import {createDualStrikeAutomation} from '../scripts/dual-strike-automation.mjs';
+import {createNativeCastEvents} from '../scripts/amp-cast-events.mjs';
+import {createBravery} from '../scripts/bravery.mjs';
 let api={};try{api=await import('../scripts/spell-combination.mjs')}catch(e){if(e.code!=='ERR_MODULE_NOT_FOUND')throw e}
 const NS='pf2e-third-party-automation',S={strike:'Compendium.pf2e.actionspf2e.Item.QDW9H8XLIjuW2fE4',swipe:'Compendium.pf2e.feats-srd.Item.Fs88vjez9px2mmrC',combination:'Compendium.pf2e.actionspf2e.Item.zUWj4zmBNWOTzeFJ'};
 const set=(o,p,v)=>{const bits=p.split('.');let at=o;for(const k of bits.slice(0,-1))at=at[k]??={};at[bits.at(-1)]=v;};
@@ -398,4 +401,151 @@ test('Combination accepts Toolbelt native original use-action marker without the
 }));
 for(const kind of ['strike','swipe'])test(`${kind} preserves existing original-card behavior without actualUse`,()=>setup({kind},async f=>{
  delete f.message.flags[NS].usageInput.actualUse;await f.use();assert.ok(f.calls.some(c=>c.kind==='attack'));assert.equal(f.message.flags[NS].spellCombinationUse.state,'done');
+}));
+
+const volatileSource='Compendium.pf2e.classfeatures.Item.aRDNtB0mh6MMRSKf';
+const boomingSource='Compendium.pf2e.spells-srd.Item.DNvfKfDSs9DstDfT';
+function firearm(f,{study=true,concussive=true}={}){
+ f.game.modules.set('pf2e-ranged-combat',{active:true});
+ if(study)f.actor.items.push({id:'study',actor:f.actor,type:'feat',sourceId:volatileSource,system:{}});
+ const weapon=f.weapons[0];weapon.isMelee=false;weapon.isRanged=true;weapon.system.group='firearm';weapon.system.traits.value=concussive?['concussive']:[];
+ return weapon;
+}
+for(const slug of ['double-barreled-pistol','mace-multipistol'])test(`Volatile Spark uses the held ${slug} native ranged Strike and pays once`,()=>setup({},async f=>{
+ firearm(f).slug=slug;let confirmed=0;
+ const use=runWith(f,{volatileSparkEnabled:true,choose:async({title,choices})=>{if(title.includes('第一射程增量'))confirmed++;return choices[0].value;}});
+ await use();await use();assert.equal(confirmed,1);assert.equal(f.calls.filter(c=>c.kind==='attack')[0].index,0);assert.equal(f.calls.filter(c=>c.kind==='payment').length,1);assert.equal(f.actor.flags[NS].spellstrike.charged,false);
+ assert.equal(f.calls.find(c=>c.kind==='attack').opts.consumeAmmo,undefined,'Ranged Combat owns ammunition');
+}));
+for(const mode of ['no-study','gate-off','crossbow'])test(`ranged Spellstrike remains unavailable for ${mode}`,()=>setup({},async f=>{
+ const gun=firearm(f,{study:mode!=='no-study'});if(mode==='crossbow')gun.system.group='bow';
+ const seen=[];await runWith(f,{volatileSparkEnabled:mode!=='gate-off',choose:async({title,choices})=>{if(title.includes('攻击'))seen.push(...choices);return choices[0].value;}})();
+ assert.equal(f.calls.find(c=>c.kind==='attack').index,1);
+}));
+test('a Volatile Spark combination firearm retains its melee mode without a range prompt',()=>setup({},async f=>{
+ firearm(f);const melee={...f.actor.system.actions[0],item:{...f.weapons[0],isMelee:true,isRanged:false,altUsageType:'melee'}};f.actor.system.actions[0].altUsages=[melee];
+ await runWith(f,{volatileSparkEnabled:true,choose:async({title,choices})=>{assert(!title.includes('第一射程增量'));return title.includes('武器')?choices.find(c=>c.value.endsWith(':melee')).value:choices[0].value;}})();
+ assert.equal(f.calls.filter(c=>c.kind==='attack').length,1);
+}));
+test('declining the first range increment leaves resources and charge intact',()=>setup({},async f=>{
+ firearm(f);const result=await runWith(f,{volatileSparkEnabled:true,choose:async({title,choices})=>title.includes('第一射程增量')?'cancel':choices[0].value})();
+ assert.equal(result.status,'cancelled');assert.equal(f.calls.filter(c=>c.kind==='attack'||c.kind==='payment').length,0);assert.equal(f.actor.flags[NS].spellstrike.charged,true);
+}));
+test('a native empty-firearm refusal does not pay for Spellstrike',()=>setup({},async f=>{
+ firearm(f);const result=await runWith(f,{volatileSparkEnabled:true,nativeOperations:{run:async()=>({status:'cancelled'}),register(){}}})();
+ assert.equal(result.status,'cancelled');assert.equal(f.calls.filter(c=>c.kind==='payment').length,0);assert.equal(f.actor.flags[NS].spellstrike.charged,true);
+}));
+test('concussive Spellstrike keeps one native damage application with a targeted spell provenance',()=>setup({},async f=>{
+ firearm(f);await runWith(f,{volatileSparkEnabled:true})();
+ const damage=f.messages.filter(m=>m.flags[NS]?.spellCombinationDamage);assert.equal(damage.length,1);assert.equal(f.merges.length,1);
+ assert.equal(damage[0].flags[NS].volatileSparkSpellDamage.spellUuid,f.spell.uuid);assert.equal(damage[0].flags[NS].volatileSparkSpellDamage.targetUuid,f.targetDocs[0].uuid);
+ assert.equal(damage[0].rolls[0].total,26);
+}));
+for(const outcome of ['failure','criticalFailure','success'])test(`Booming Blast ${outcome} still rolls Will and charges exactly once`,()=>setup({outcomes:[outcome],save:'criticalFailure',charged:false},async f=>{
+ firearm(f);const spellstrike={...f.feat,id:'spellstrike',uuid:'Actor.pc.Item.spellstrike'};f.actor.items.push(spellstrike);
+ Object.assign(f.feat,{type:'spell',sourceId:boomingSource,spellcasting:f.entry,rank:3});f.feat.system={traits:{value:['focus','magus','mental','emotion']},time:{value:'1'}};
+ const condition=nativeFrightened(f,{current:3});
+ const use=runWith(f,{volatileSparkEnabled:true});await use();await use();
+ assert.equal(f.calls.filter(c=>c.kind==='attack').length,1);assert.equal(f.calls.filter(c=>c.kind==='save').length,1);assert.equal(f.calls.find(c=>c.kind==='save').opts.dc.value,35);
+ assert.equal(condition.changes,0);assert.equal(condition.value,3);assert.equal(f.calls.filter(c=>c.kind==='bind-payment').length,1);assert.equal(f.actor.flags[NS].spellstrike.charged,true);
+}));
+test('Reloading Cascade owns one reload and never recharges Spellstrike',()=>setup({charged:false},async f=>{
+ firearm(f);f.feat.sourceId='Compendium.pf2e.actionspf2e.Item.tmbf6xouEnRXCnKR';let reloads=0;
+ const use=runWith(f,{volatileSparkEnabled:true,volatileSparkReload:{async run(ctx){reloads++;assert.equal(ctx.weaponId,'weapon');ctx.assertLive();return {status:'done'}},register(){}}});
+ await use();await use();assert.equal(reloads,1);assert.equal(f.actor.flags[NS].spellstrike.charged,false);assert.equal(f.calls.filter(c=>c.kind==='payment'||c.kind==='bind-payment'||c.kind==='attack').length,0);
+}));
+test('Reloading Cascade display card cannot reload or create a stance',()=>setup({},async f=>{
+ firearm(f);f.feat.sourceId='Compendium.pf2e.actionspf2e.Item.tmbf6xouEnRXCnKR';delete f.message.flags[NS].usageInput.actualUse;
+ await assert.rejects(runWith(f,{volatileSparkEnabled:true,volatileSparkReload:{run(){throw Error('unexpected reload')},register(){}}})(),/实际使用/);
+}));
+test('maintenance grants the original Reloading Cascade once even when Recharge already exists',()=>setup({},async f=>{
+ firearm(f);f.actor.items.push({type:'action',flags:{[NS]:{spellstrikeRecharge:true}}});const created=[];
+ f.actor.createEmbeddedDocuments=async(_type,items)=>{created.push(...items);f.actor.items.push(...items.map(i=>({...i,actor:f.actor,sourceId:i._stats.compendiumSource})));};
+ const source='Compendium.pf2e.actionspf2e.Item.tmbf6xouEnRXCnKR',provider=api.createSpellCombination({game:f.game,volatileSparkEnabled:true,nativeCasts:f.casts,nativeOperations:f.nativeOperations,fromUuid:async uuid=>uuid===source?{toObject:()=>({_id:'native',type:'action',name:'Reloading Cascade',system:{actions:{value:1}}})}:null});
+ await provider.maintain(f.actor);await provider.maintain(f.actor);assert.equal(created.length,1);assert.equal(created[0]._stats.compendiumSource,source);assert.equal(created[0]._id,undefined);
+}));
+test('mixed weapon and spell fire is a single card with an explicit manual resistance notice',()=>setup({},async f=>{
+ firearm(f);f.actor.system.actions[0].damage=async()=>{const r=roll(10);r.instances=[{type:'fire',total:10}];return r};
+ f.spell.getDamage=async()=>{const r=roll(16);r.instances=[{type:'fire',total:16}];return {template:{damage:{roll:r}},context:{options:[]}}};
+ await runWith(f,{volatileSparkEnabled:true})();const cards=f.messages.filter(m=>m.flags[NS]?.spellCombinationDamage);assert.equal(cards.length,1);
+ assert.deepEqual(cards[0].flags[NS].volatileSparkSpellDamage.types,[]);assert.deepEqual(cards[0].flags[NS].volatileSparkSpellDamage.mixedTypes,['fire']);assert.match(cards[0].flavor,/GM.*调整栏/);
+}));
+for(const [save,value] of [['failure',1],['criticalFailure',2],['success',0],['criticalSuccess',0]])test(`Booming Blast ${save} applies frightened ${value} without replacing the native Strike`,()=>setup({outcomes:['failure'],save,charged:false},async f=>{
+ firearm(f);f.actor.items.push({...f.feat,id:'spellstrike',uuid:'Actor.pc.Item.spellstrike'});
+ Object.assign(f.feat,{type:'spell',sourceId:boomingSource,spellcasting:f.entry,rank:3});f.feat.system={traits:{value:['focus','magus','mental','emotion']},time:{value:'1'}};
+ const condition=nativeFrightened(f);
+ await runWith(f,{volatileSparkEnabled:true})();assert.equal(condition.value,value);assert.equal(f.calls.filter(c=>c.kind==='attack').length,1);
+ const opts=f.calls.find(c=>c.kind==='attack').opts.options;assert(opts.has('action:booming-blast'));assert(!opts.has('action:spellstrike'));
+ assert(!opts.has('item:trait:magical'),'Booming Blast does not infuse its firearm Strike');
+}));
+test('cancelled Booming Blast native Strike does not spend focus or recharge',()=>setup({charged:false},async f=>{
+ firearm(f);f.actor.items.push({...f.feat,id:'spellstrike',uuid:'Actor.pc.Item.spellstrike'});
+ Object.assign(f.feat,{type:'spell',sourceId:boomingSource,spellcasting:f.entry});f.feat.system={traits:{value:['focus','magus']},time:{value:'1'}};
+ const result=await runWith(f,{volatileSparkEnabled:true,nativeOperations:{run:async()=>({status:'cancelled'}),register(){}}})();
+ assert.equal(result.status,'cancelled');assert.equal(f.calls.filter(c=>c.kind==='bind-payment'||c.kind==='save').length,0);assert.equal(f.actor.flags[NS].spellstrike.charged,false);
+}));
+test('ranged Spellstrike requires its current ammunition provider before committing resources',()=>setup({},async f=>{
+ firearm(f);f.game.modules.delete('pf2e-ranged-combat');await assert.rejects(runWith(f,{volatileSparkEnabled:true})(),/Ranged Combat/);assert.equal(f.calls.filter(c=>c.kind==='payment'||c.kind==='attack').length,0);
+}));
+function paidBooming(f){
+ firearm(f);f.actor.items.push({...f.feat,id:'spellstrike',uuid:'Actor.pc.Item.spellstrike'});
+ Object.assign(f.feat,{type:'spell',sourceId:boomingSource,spellcasting:f.entry,rank:3});f.feat.system={traits:{value:['focus','magus']},time:{value:'1'},location:{value:'entry'},cast:{focusPoints:1}};
+ const input={actorUuid:f.actor.uuid,itemUuid:f.feat.uuid,sourceId:boomingSource,entryUuid:f.entry.uuid,rank:3,slotId:null,focusPoints:1,overlayIds:[]};
+ f.actor.flags[NS].nativeCasts=[{...input,id:'native-cast',userId:'player',state:'paid'}];f.actor.system.resources.focus.value=2;
+ f.message.flags[NS].nativeCast={id:'native-cast',actorUuid:f.actor.uuid,itemUuid:f.feat.uuid,userId:'player'};f.message.flags[NS].nativeCastInput=input;
+ f.message.flags.pf2e.context={type:'spell-cast'};delete f.message.flags[NS].usageInput.actualUse;
+ Object.assign(f.targetDocs[0].actor,{getCondition:()=>null,increaseCondition:async()=>{}});
+ return createNativeCastEvents({game:f.game,fromUuid:async uuid=>[f.actor,...f.actor.items].find(d=>d.uuid===uuid)});
+}
+test('the real native cast coordinator accepts a paid actualCast card without an action actualUse marker',()=>setup({outcomes:['failure'],charged:false},async f=>{
+ const casts=paidBooming(f),use=runWith(f,{volatileSparkEnabled:true,nativeCasts:casts});await use();await use();
+ assert.equal(f.actor.system.resources.focus.value,2);assert.equal(f.actor.flags[NS].nativeCasts[0].state,'used');assert.equal(f.actor.flags[NS].nativeCasts[0].messageId,f.message.id);
+ assert.equal(f.actor.flags[NS].spellstrike.charged,true);assert.equal(f.calls.filter(c=>c.kind==='attack').length,1);
+}));
+test('a paid native Cast keeps its focus payment and conflux recharge when its subsequent Strike is cancelled',()=>setup({charged:false},async f=>{
+ const casts=paidBooming(f),result=await runWith(f,{volatileSparkEnabled:true,nativeCasts:casts,nativeOperations:{run:async()=>({status:'cancelled'}),register(){}}})();
+ assert.equal(result.status,'cancelled');assert.match(result.result,/已支付|已经支付/);assert.equal(f.actor.system.resources.focus.value,2);assert.equal(f.actor.flags[NS].nativeCasts[0].state,'used');assert.equal(f.actor.flags[NS].spellstrike.charged,true);
+}));
+test('a paid native Cast cancelling at the firearm choice remains a single recorded conflux',()=>setup({charged:false},async f=>{
+ const casts=paidBooming(f);f.actor.system.actions.push({...f.actor.system.actions[0],item:{...f.weapons[0],id:'otherGun'}});
+ const use=runWith(f,{volatileSparkEnabled:true,nativeCasts:casts,choose:async()=>null});const result=await use();await assert.rejects(use(),/重试|未完成/);
+ assert.equal(result.status,'cancelled');assert.equal(f.actor.system.resources.focus.value,2);assert.equal(f.actor.flags[NS].spellstrike.charged,true);assert.equal(f.calls.filter(c=>c.kind==='attack').length,0);
+}));
+test('Booming Blast preserves native immunity to its mental or emotion spell',()=>setup({outcomes:['failure'],save:'criticalFailure'},async f=>{
+ const casts=paidBooming(f);let conditions=0;
+ f.targetDocs[0].actor.isImmuneTo=item=>item===f.feat;f.targetDocs[0].actor.increaseCondition=async()=>{conditions++};
+ await runWith(f,{volatileSparkEnabled:true,nativeCasts:casts})();assert.equal(conditions,0);
+}));
+
+function nativeFrightened(f,{current=0,bravery=false}={}){
+ const source=readFileSync(process.env.PF2E_NATIVE_861_BUNDLE,'utf8');
+ const section=(start,end)=>{const begin=source.indexOf(start),finish=source.indexOf(end,begin+start.length);assert(begin>=0&&finish>begin);return source.slice(begin,finish);};
+ const increase=section('\n\tasync increaseCondition(','\n\tasync toggleCondition('),update=section('\n\tstatic async updateConditionValue(','\n}, zl =').replace('static ','');
+ const actor=f.targetDocs[0].actor,items=new Map(),hooks=new Map(),wrappers=new Map();let changes=0;
+ Object.assign(actor,{items,prototypeToken:{},isOfType:type=>type==='creature',getCondition:slug=>[...items.values()].find(item=>item.slug===slug)??null});
+ Object.defineProperty(actor,'itemTypes',{get:()=>({condition:[...items.values()].filter(item=>item.type==='condition')})});
+ const document=value=>({id:'frightened',type:'condition',actor,flags:{},_source:{system:{slug:'frightened',value:{value}}},get system(){return this._source.system},get slug(){return this.system.slug},get value(){return this.system.value.value},active:true,isLocked:false,isOfType:type=>type==='condition',updateSource(data){for(const[key,value]of Object.entries(data))set(this._source,key,value)},async update(data){changes++;hooks.get('preUpdateItem')?.(this,data,{},f.game.user.id);this.updateSource(data);return this},async delete(){items.delete(this.id)}});
+ if(current)items.set('frightened',document(current));
+ actor.createEmbeddedDocuments=async(_type,data)=>{
+  changes++;const documents=data.map(data=>document(data.system.value.value));
+  await wrappers.get('CONFIG.Item.documentClass._preCreateOperation')?.(async()=>{},documents,{},f.game.user);
+  for(const item of documents)items.set(item.id,item);return documents;
+ };
+ const game={pf2e:{ConditionManager:{getCondition:()=>({toObject:()=>({type:'condition',system:{slug:'frightened',value:{value:1}}})}),...Function('tupleHasValue',`return {${update}}`)((list,item)=>list.includes(item))}}};
+ Object.assign(actor,Function('game','Math',`return {${increase}}`)(game,{clamp:(value,min,max)=>Math.min(Math.max(value,min),max)}));
+ if(bravery){
+  actor.type='character';items.set('bravery',{type:'feat',sourceId:'Compendium.pf2e.classfeatures.Item.GJKJafDGuX4BeAeN'});
+  f.game.world={id:'bob-2'};f.game.system={id:'pf2e'};
+  createBravery({game:f.game}).register({Hooks:{on:(name,callback)=>hooks.set(name,callback)},libWrapper:{register:(_module,key,callback)=>wrappers.set(key,callback)}});
+ }
+ return {get value(){return actor.getCondition('frightened')?.value??0},get changes(){return changes}};
+}
+for(const [current,save,expected] of [[1,'criticalFailure',2],[3,'criticalFailure',3],[0,'failure',1],[0,'criticalFailure',2]])test(`Booming Blast uses native condition semantics: frightened ${current}, ${save} -> ${expected}`,()=>setup({outcomes:['failure'],save},async f=>{
+ const casts=paidBooming(f),condition=nativeFrightened(f,{current}),use=runWith(f,{volatileSparkEnabled:true,nativeCasts:casts});
+ await use();await use();assert.equal(condition.value,expected);assert.equal(condition.changes,current===3?0:1);
+}));
+for(const [current,save,expected] of [[0,'failure',0],[0,'criticalFailure',1],[1,'criticalFailure',1],[3,'criticalFailure',3]])test(`Booming Blast lets Bravery reduce native frightened once: ${current}, ${save} -> ${expected}`,()=>setup({outcomes:['failure'],save},async f=>{
+ const casts=paidBooming(f),condition=nativeFrightened(f,{current,bravery:true});
+ const use=runWith(f,{volatileSparkEnabled:true,nativeCasts:casts,runTargetSave:async()=>({status:'rolled',check:await f.Message.create({flags:{pf2e:{context:{type:'saving-throw',outcome:save}}}})})});
+ await use();await use();assert.equal(condition.value,expected);assert.equal(condition.changes,current===3?0:1);
 }));

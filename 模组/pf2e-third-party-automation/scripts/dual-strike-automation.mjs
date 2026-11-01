@@ -7,6 +7,7 @@ import {createAttackSequence} from './activity-attack-sequence.mjs';
 import {createNativeOwnerOperations,nativeTransientItems} from './native-owner-operations.mjs';
 import {nativeRollEvent} from './manual-native-roll.mjs';
 import {mergeDamageMessagePrivacy} from './damage-message-privacy.mjs';
+import {DUAL_STRIKE_CRITICAL_MARKER,dualStrikeSwordAutomationReady} from './dual-strike-critical-compat.mjs';
 
 const SOURCES={
  twin:'Compendium.pf2e.feats-srd.Item.Gw0wGXikhAhiGoud',
@@ -150,7 +151,7 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
     });
     if(nativeDamage.status!=='rolled')throw Error('攻击已发生，但原生伤害尚未完成。');
     const roll=nativeDamage.nativeRoll??globalThis.CONFIG.Dice.rolls.find(c=>c.name==='DamageRoll').fromData(nativeDamage.roll);
-    hits.push({roll,strike,attackMessage,outcome,privacy:nativeDamage.privacy});
+    hits.push({roll,strike,attackMessage,outcome,privacy:nativeDamage.privacy,context:nativeDamage.context});
    }
    if(!hits.length)return cancelled?{status:'cancelled',result:'第二次攻击已取消；第一次攻击未命中。'}:'两次攻击均未命中。';
    if(!twin){
@@ -184,6 +185,19 @@ export function createDualStrikeAutomation({game,fromUuid=globalThis.fromUuid,ch
    data.flags.pf2e.origin={uuid:hits[0].strike.item.uuid,type:'weapon',actor:actor.uuid};
    data.flags.pf2e.context={...data.flags.pf2e.context,type:'damage-roll',sourceType:'attack',domains:['damage','strike-damage'],options:[...new Set([...(data.flags.pf2e.context?.options??[]),...hits.some(h=>h.outcome==='criticalSuccess')?['check:outcome:critical-success']:[],...hits.map(h=>`${MODULE_ID}:bear-attack:${h.attackMessage.id}`)])],target:{actor:target.actor.uuid,token:target.uuid}};
    data.flags[MODULE_ID]={...data.flags[MODULE_ID],usageGenerated:true,dualStrike:{usageMessageId:message.id,kind:action,map,attacks:hits.map(h=>({messageId:h.attackMessage.id,weaponUuid:h.strike.item.uuid,actorUuid:actor.uuid}))}};
+   if(!twin&&dualStrikeSwordAutomationReady(game)){
+    const criticalSpecializations=hits.flatMap((hit,index)=>{
+     const options=hit.context?.options??[];
+     return hit.outcome==='criticalSuccess'&&options.includes('critical-specialization')&&options.includes('item:group:sword')?
+      [{weaponUuid:hit.strike.item.uuid,attackMessageId:hit.attackMessage.id,options:['critical-specialization',`crit-item-${index+1}:group:sword`]}]:[];
+    });
+    if(criticalSpecializations.length){
+     // Keep each eligible crit separate: a normal sword hit cannot borrow the
+     // other weapon's critical specialization. Patreon already accepts these keys.
+     data.flags[MODULE_ID].dualStrike.criticalSpecializations=criticalSpecializations;
+     data.flags.pf2e.context.options.push(DUAL_STRIKE_CRITICAL_MARKER,...new Set(criticalSpecializations.flatMap(hit=>hit.options)));
+    }
+   }
    data.flavor=`<h4 class="action">${twin?'双重攻击':'双重切割'}：合并伤害</h4>${data.flavor??''}`;
    await messageClass().create(withDamageMessageTarget(data,target.uuid));
    return cancelled?{status:'cancelled',result:'第二次攻击已取消；第一次攻击的伤害卡已生成，按原生流程应用。'}:`已完成两次攻击，${hits.length}次命中；合并伤害只需应用一次。`;

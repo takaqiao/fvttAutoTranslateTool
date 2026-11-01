@@ -435,16 +435,17 @@ export function createCampaignFeats({game,fromUuid=globalThis.fromUuid,choose,ru
  async function cleanEffects(actor){
   if(!activeGM(game)||!actor?.items)return;
   return serial(`clean:${actor.uuid}`,async()=>{
-  const combat=game.combat;
+  const combat=game.combat,shatter=[];
   const expired=values(actor.items).filter(item=>{
    const data=own(item),timing=data.timing;
+   if(data.kind==='campaign-shatter')shatter.push(item);
    if(!timing||!['campaign-cutting','campaign-frightened-floor'].includes(data.kind))return false;
    const index=combat?.turns?.findIndex(c=>c.id===timing.combatantId)??-1;
    return !combat?.started||combat.id!==timing.combatId||index<0||combat.round>timing.endRound||(combat.round===timing.endRound&&(timing.expiry==='turn-start'?combat.turn>=index:combat.turn>index));
   });
   if(expired.length)await actor.deleteEmbeddedDocuments('Item',expired.map(i=>i.id));
   if(!actor.hasCondition?.('frightened')){
-   const remove=values(actor.items).filter(i=>own(i).kind==='campaign-shatter');
+   const remove=expired.length?values(actor.items).filter(i=>own(i).kind==='campaign-shatter'):shatter;
    if(remove.length)await actor.deleteEmbeddedDocuments('Item',remove.map(i=>i.id));
   }
   });
@@ -514,8 +515,8 @@ export function createCampaignFeats({game,fromUuid=globalThis.fromUuid,choose,ru
   const maintenance=safe(async item=>{if(!activeGM(game)||!item?.actor)return;await maintain(item.actor);await cleanEffects(item.actor)});
   on('createItem',maintenance);on('updateItem',maintenance);on('deleteItem',maintenance);
   const allActors=()=>[...values(game.actors),...values(game.scenes).flatMap(scene=>values(scene.tokens).map(t=>t.actor).filter(Boolean))];
-  on('updateCombat',safe(async()=>{for(const actor of new Map(allActors().map(a=>[a.uuid,a])).values())await cleanEffects(actor)}));
-  on('deleteCombat',safe(async()=>{for(const actor of new Map(allActors().map(a=>[a.uuid,a])).values())await cleanEffects(actor)}));
+  on('updateCombat',safe(async()=>{if(!activeGM(game))return;for(const actor of new Map(allActors().map(a=>[a.uuid,a])).values())await cleanEffects(actor)}));
+  on('deleteCombat',safe(async()=>{if(!activeGM(game))return;for(const actor of new Map(allActors().map(a=>[a.uuid,a])).values())await cleanEffects(actor)}));
   return ()=>{for(const [name,id]of hooks.splice(0))Hooks.off(name,id)};
  }
  return {resolveAction,executeUsage,register,maintain,processCheck,applyParagon,processDamageReceipt,beforeDamage,cleanEffects,linkDamageCard};

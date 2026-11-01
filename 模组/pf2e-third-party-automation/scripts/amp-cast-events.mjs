@@ -53,7 +53,10 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
   invocationGM(payload.invocation);if(proof!==true)throw Error('原操作者没有本次真实施法调用，未授权支付。');
  }
  function input(item,{rank=item.rank,slotId}={}){
-  return {actorUuid:item.actor.uuid,itemUuid:item.uuid,sourceId:source(item),entryUuid:item.spellcasting?.uuid??item.actor.items.get(item.system.location?.value)?.uuid,
+  const entry=item.spellcasting??item.actor.items.get(item.system.location?.value);
+  // Native sheets pass Number(undefined) when a nonprepared entry has no slot index.
+  if(Number.isNaN(slotId)&&entry?.isPrepared===false)slotId=null;
+  return {actorUuid:item.actor.uuid,itemUuid:item.uuid,sourceId:source(item),entryUuid:entry?.uuid,
    rank,slotId:slotId??null,focusPoints:item.system.cast?.focusPoints??0,overlayIds:values(item.appliedOverlays)};
  }
  async function resolve(payload,user){
@@ -412,8 +415,9 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
     try{
      if(enrollment){enrollments.set(scope.castNonce,scope);liveEnrollment(scope);if(scope.invocation.data.sourceTokenUuid!==scope.tokenContext.tokenUuid)throw Error('原生施法调用的来源Token与冻结分配不一致。');}
      // PF2e intentionally skips consume for at-will spells. Confirm that native
-     // exemption through the same payment coordinator before running policies.
-     if(policies.length&&item.atWill){
+     // exemption through the payment coordinator for policies and matched
+     // providers that need the original Cast's zero-cost receipt.
+     if(item.atWill&&options.consume!==false&&options.message!==false&&(policies.length||matches(item))){
       trackConsume(scope,consumeForCast(scope,scope.input));
       if(!await scope.consumeTask){if(scope.error)throw scope.error;return scope.terminal;}
      }
