@@ -131,13 +131,14 @@ test('a transaction after preparing UI reads the current server revision and rec
  await assert.rejects(transaction,/active-gm-required/);assert.equal(f.counts().writes,writes);
 });
 
-test('resume after displaying an earlier UI snapshot rejects a session closed by another client',async t=>{
+test('resume after displaying an earlier UI snapshot still rejects a closed legacy session',async t=>{
  const f=await fixture(t);await f.panel._prepareContext();await f.peer.transact(state=>{state.sessions.S.status='closed'});f.resetCounts();
- await assert.rejects(f.runtime.api.resume('S',{autoRun:false}),/paused-automatic-session-required/);assert.equal(f.counts().writes,0);assert.ok(f.counts().reads>0);
+ await assert.rejects(f.runtime.api.resume('S',{autoRun:false}),/legacy-recovery-view-only/);assert.equal(f.counts().writes,0);assert.ok(f.counts().reads>0);
 });
 
 test('GM demotion while revision hashing is awaited rejects the prepared view',async t=>{
  const f=await fixture(t),entered=deferred(),release=deferred(),subtle=globalThis.crypto.subtle,original=subtle.digest;let first=true;
+ await f.peer.transact(state=>{state.sessions.S.revisionMarker=1});
  t.after(()=>{release.resolve();subtle.digest=original});subtle.digest=async function(...args){if(first){first=false;entered.resolve();await release.promise}return original.apply(this,args)};
  f.resetCounts();const preparing=f.panel._prepareContext();preparing.catch(()=>{});await entered.promise;f.gm.isGM=false;release.resolve();
  await assert.rejects(preparing,/gm-read-required/);assert.deepEqual(f.counts(),{reads:1,writes:0});

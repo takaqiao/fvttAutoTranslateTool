@@ -50,7 +50,7 @@ const manualRow=(sessionId,at)=>({id:'late',sessionId,providerId:'manual',actorU
 test('the panel renders every session an earlier version stopped, and offers each a reviewed close',async t=>{
  const f=await world(t,stoppedWorld());
  for(const id of ['A','B','C','D','M']){const actions=mainActions(await f.render(id));assert.ok(actions.includes('review'),id);assert.ok(!actions.includes('start'),id)}
- const unsettled=await f.render('D');assert.match(unsettled,/<summary>首轮登记<\/summary>/);assert.doesNotMatch(unsettled,/首轮手动/);
+ const unsettled=await f.render('D');assert.match(unsettled,/旧版恢复会话仅供查看、核对、停止和关闭/);assert.doesNotMatch(unsettled,/首轮登记|首轮手动/);
  // What a blocked start throws has a Chinese reading wherever a reason is shown.
  assert.match(formatSessionResult({durationSeconds:0,remainingHP:0,status:'unresolved-evidence-no-replay'}),/旧会话还有未确认的结果或时间；先在那场会话里处理，处理不了可换新账本/);
 assert.ok(!mainActions(unsettled).includes('resume'));assert.match(unsettled,/时间相关效果尚未完成确认/);assert.doesNotMatch(unsettled,/time-effects-unconfirmed/);
@@ -60,11 +60,11 @@ assert.ok(!mainActions(unsettled).includes('resume'));assert.match(unsettled,/�
 test('a stopped manual session cannot be resumed although its cursor equals the world time and nothing is unresolved',async t=>{
  const f=await world(t,stoppedWorld()),pages=f.server.raw.pages.length;
  assert.deepEqual(mainActions(await f.render('M')),['reconcile','review']);
- await assert.rejects(f.act('M','resume'),/paused-automatic-session-required/);await assert.rejects(f.coordinator.resume('M',{autoRun:false}),/paused-automatic-session-required/);
+ await assert.rejects(f.act('M','resume'),/旧版恢复会话不能继续/);await assert.rejects(f.coordinator.resume('M',{autoRun:false}),/paused-automatic-session-required/);
  await assert.rejects(f.ledger.resumeSession('M',{cursorAt:9000}),/paused-automatic-session-required/);await assert.rejects(f.ledger.takeoverSession('M'),/automatic-session-required/);
  assert.equal(f.server.raw.pages.length,pages);assert.equal(f.game.paused,false);assert.deepEqual(f.pauses,[]);assert.equal(f.coordinator.executionScope('M'),undefined);
- // Only the manual flag separates it from a session that would be offered a resume.
- const twin=stoppedWorld();twin.seed.sessions.M.manual=false;assert.ok(mainActions(await (await world(t,twin)).render('M')).includes('resume'));
+ // Automatic sessions from the native driver are also historical now.
+ const twin=stoppedWorld();twin.seed.sessions.M.manual=false;assert.ok(!mainActions(await (await world(t,twin)).render('M')).includes('resume'));
 });
 
 test('a stopped manual session takes no new activity and closes after review with its saved fields intact',async t=>{

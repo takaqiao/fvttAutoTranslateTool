@@ -17,18 +17,23 @@ const clone=value=>globalThis.foundry?.utils?.deepClone?.(value)??structuredClon
 export function buildAvWaveRepair(item){
  const sourceId=source(item);
  if(sourceId!==WAVE_SOURCE)return null;
- const rules=clone(item.system.rules),changes=[],prior=item.flags?.[MODULE_ID]?.avWaveRepair;
- for(const[index,rule]of rules.entries()){
+ let rules=item.system.rules;const changes=[],prior=item.flags?.[MODULE_ID]?.avWaveRepair;
+ for(const index of rules.keys()){
+  const rule=rules[index];
   const list=rule.predicate?.length===1?rule.predicate[0]?.or:null;
   const original=Array.isArray(list)&&list.length===ORIGINAL.length&&ORIGINAL.every(s=>list.includes(s));
   const intermediate=prior?.sourceId===WAVE_SOURCE&&Array.isArray(list)&&list.length===WAVE_SPELL_SLUGS.length&&WAVE_SPELL_SLUGS.every(s=>list.includes('item:slug:'+s));
   if(rule.key!=='DamageAlteration'||rule.mode!=='override'||rule.property!=='damage-type'||rule.slug!=='base'||JSON.stringify(rule.selectors)!=='["spell-damage"]'||rule.value!=='{item|flags.system.rulesSelections.conservationOfEnergy}'||(!original&&!intermediate))continue;
-  const before=clone(rule.predicate);rule.predicate=[{or:WAVE_SPELL_SLUGS.map(s=>'item:slug:'+s)},{or:['conservation-of-energy:fire','conservation-of-energy:cold']}];changes.push({index,path:'predicate',before,after:clone(rule.predicate)});
+  if(!changes.length)rules=clone(rules);
+  const repaired=rules[index],before=clone(repaired.predicate);repaired.predicate=[{or:WAVE_SPELL_SLUGS.map(s=>'item:slug:'+s)},{or:['conservation-of-energy:fire','conservation-of-energy:cold']}];changes.push({index,path:'predicate',before,after:clone(repaired.predicate)});
  }
  const recognized=changes.length||rules.some(r=>r.key==='DamageAlteration'&&JSON.stringify(r.predicate)===JSON.stringify([{or:WAVE_SPELL_SLUGS.map(s=>'item:slug:'+s)},{or:['conservation-of-energy:fire','conservation-of-energy:cold']}])&&r.value==='{item|flags.system.rulesSelections.conservationOfEnergy}');
  if(!recognized)return null;
- for(const[index,rule]of rules.entries())if(rule.key==='RollOption'&&rule.option==='conservation-of-energy'&&rule.alwaysActive&&rule.placement==='spellcasting'&&Array.isArray(rule.suboptions)&&rule.suboptions.length===2&&['fire','cold'].every(s=>rule.suboptions.some(o=>o.value===s))){
-  const before=clone(rule.suboptions);rule.suboptions=[{label:'中性（再聚能）',value:'none'},...rule.suboptions];changes.push({index,path:'suboptions',before,after:clone(rule.suboptions)});
+ for(const index of rules.keys()){
+  const rule=rules[index];
+  if(rule.key!=='RollOption'||rule.option!=='conservation-of-energy'||!rule.alwaysActive||rule.placement!=='spellcasting'||!Array.isArray(rule.suboptions)||rule.suboptions.length!==2||!['fire','cold'].every(s=>rule.suboptions.some(o=>o.value===s)))continue;
+  if(!changes.length)rules=clone(rules);
+  const repaired=rules[index],before=clone(repaired.suboptions);repaired.suboptions=[{label:'中性（再聚能）',value:'none'},...repaired.suboptions];changes.push({index,path:'suboptions',before,after:clone(repaired.suboptions)});
  }
  if(!changes.length)return null;
  return {'system.rules':rules,[`flags.${MODULE_ID}.avWaveRepair`]:{...prior,sourceId,reason:'PF2e 8.5 granted spell UUIDs and legal Refocus neutrality',changes:[...(prior?.changes??[]),...changes]}};

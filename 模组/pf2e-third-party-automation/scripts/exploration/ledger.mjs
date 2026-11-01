@@ -4,6 +4,7 @@ import {canonicalJSON} from './revision-codec.mjs';
 import {checkpointDeclaration,scheduleCheckpointActivities} from './policy.mjs';
 import {medicAvailability} from './finite-medicine.mjs';
 import {exactNativeClock,clockBlocksRecovery,currentTimeRecoveryReason} from './current-time-recovery.mjs';
+import {computedSession,computedBatch,computedBatchIndex,pendingComputed,reviewedComputed,computedGuard,captureComputedBatch,computedDigest,captureComputedTransition,transitionComputed,saveComputedSummary} from './computed-ledger.mjs';
 const transitions={
   planned:['started','blocked','cancelled'],started:['completing','awaiting-evidence','blocked','uncertain','cancelled'],
   completing:['awaiting-evidence','confirmed','blocked','uncertain'],
@@ -187,7 +188,7 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
     if(!atomic)throw Error('atomic-activity-checkpoint-required');
     const session=driver(state,binding.sessionId,options,caller,true);
     if(!automatic(session)||session.protocol?.rootUUID!==binding.rootUUID||session.protocol?.epoch!==binding.epoch||context.rootUUID!==binding.rootUUID||context.epoch!==binding.epoch||session.cursorAt!==binding.from)throw Error('activity-checkpoint-mismatch');
-    if(Object.values(state.clocks).some(c=>clockBlocksRecovery(state,c))||Object.values(state.activities).some(a=>a.sessionId===session.id&&(a.executor&&a.executor.state!=='settled'||['completing','uncertain','awaiting-evidence'].includes(a.state))))throw Error('unresolved-evidence-no-replay');
+    if(Object.values(state.clocks).some(c=>blocksClockRecovery(state,c))||Object.values(state.activities).some(a=>a.sessionId===session.id&&(a.executor&&a.executor.state!=='settled'||['completing','uncertain','awaiting-evidence'].includes(a.state))))throw Error('unresolved-evidence-no-replay');
     return session;
   }
   function enrollCheckpointActivity(inputBinding,input,{authenticatedCaller,leaseNonce,guard}={}){
@@ -231,21 +232,88 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
     if(running&&session.status!=='running')throw Error('recovery-session-stopped');
     return session;
   }
+  function computedDriver(state,key,options,caller,context,running=true){
+    if(!atomic||!computedSession(state.sessions[key]))throw Error('computed-session-required');
+    const session=driver(state,key,options,caller,running);
+    if(!sameProtocol(session.protocol,protocol(context)))throw Error('computed-scope-mismatch');
+    if(reviewedComputed(session))throw Error('computed-session-closed');return session;
+  }
+  function computedRecord(state,key,batchId){
+    const session=state.sessions[key],batch=state.activities[batchId];
+    if(!computedSession(session))throw Error('computed-session-required');
+    if(!computedBatch(batch)||batch.sessionId!==key||!session.computedRecovery.batches.some(row=>row.id===batchId))throw Error('missing-computed-batch');return batch;
+  }
+  function syncComputedIndex(session,batch){
+    const index=session.computedRecovery.batches.findIndex(row=>row.id===batch.id);
+    session.computedRecovery.batches[index]=computedBatchIndex(batch);
+  }
+  async function beginComputedCalculation(key,{leaseNonce,guard}={}){
+    computedGuard(guard);return mutate((state,context,caller)=>{
+      computedGuard(guard);const session=computedDriver(state,key,{leaseNonce},caller,context);
+      if(pendingComputed(session))throw Error('unresolved-computed-batch');
+      session.computedRecovery.pendingCalculation={from:session.cursorAt};return session.computedRecovery.pendingCalculation;
+    },()=>computedGuard(guard));
+  }
+  async function claimComputedBatch(key,input,{leaseNonce,guard}={}){
+    const payload=captureComputedBatch(input);computedGuard(guard);const digest=await computedDigest(payload);
+    return mutate((state,context,caller)=>{
+      computedGuard(guard);const session=computedDriver(state,key,{leaseNonce},caller,context),batches=session.computedRecovery.batches;
+      if(state.activities[payload.id]||batches.some(batch=>batch.id===payload.id))throw Error('duplicate-computed-batch');
+      if(batches.some(batch=>batch.state!=='confirmed'))throw Error('unresolved-computed-batch');
+      const previous=batches.at(-1),boundary=session.computedRecovery.pendingBoundary,calculation=session.computedRecovery.pendingCalculation;
+      if(boundary&&(boundary.from!==payload.from||boundary.to!==payload.to))throw Error('computed-boundary-conflict');
+      if(calculation&&calculation.from!==payload.from)throw Error('computed-boundary-conflict');
+      if(payload.from<session.startedAt||payload.to>session.budgetEndsAt||previous&&payload.from<previous.to||payload.from!==session.cursorAt&&payload.to!==session.cursorAt)throw Error('computed-boundary-conflict');
+      const batch={...clone(payload),kind:'computed-recovery-batch',sessionId:key,providerId:'computed-recovery',actorUUID:session.actorUUIDs[0],patientUUIDs:clone(session.actorUUIDs),hpPoolUUIDs:session.goalsByPool.map(goal=>goal.poolUUID),startedAt:payload.from,endsAt:payload.to,groupId:payload.id,source:{type:'computed-recovery'},options:{},proof:{useId:null,checkIds:[],resultIds:[],receiptIds:[],immunityIds:[]},digest,state:'claimed',receipts:{}};
+      state.activities[batch.id]=batch;batches.push(computedBatchIndex(batch));return batch;
+    },()=>computedGuard(guard));
+  }
+  async function transitionComputedBatch(key,batchId,input,{leaseNonce,guard}={}){
+    const change=captureComputedTransition(input),validate=()=>{if(change.state!=='uncertain'||guard!==undefined)computedGuard(guard)};
+    validate();return mutate((state,context,caller)=>{
+      validate();const session=computedDriver(state,key,{leaseNonce},caller,context,change.state!=='uncertain'),batch=computedRecord(state,key,batchId);
+      transitionComputed(session,batch,change);syncComputedIndex(session,batch);return batch;
+    },validate);
+  }
+  async function finishComputedSession(key,input,{leaseNonce,guard}={}){
+    const finish=JSON.parse(canonicalJSON(input));
+    if(Object.keys(finish).some(field=>!['status','stopReason','summary','simulationState'].includes(field))||!['complete','paused'].includes(finish.status))throw Error('invalid-computed-finish');
+    computedGuard(guard);return mutate((state,context,caller)=>{
+      computedGuard(guard);const session=computedDriver(state,key,{leaseNonce},caller,context);
+      if(pendingComputed(session))throw Error('unresolved-computed-batch');noOpenActivityCheckpoint(session);
+      if(Object.values(state.clocks).some(clock=>clock.sessionId===key&&clock.state!=='confirmed'))throw Error('unresolved-evidence-no-replay');
+      saveComputedSummary(session,finish);session.status=finish.status;session.stopReason=finish.stopReason??null;return session;
+    },()=>computedGuard(guard));
+  }
+  async function reviewComputedSession(key,{note,userId,at}={}){
+    if(typeof note!=='string'||!note.trim())throw Error('review-note-required');finite(at,'computed-review-time');
+    const validate=()=>{if(typeof now==='function'&&now()!==at)throw Error('computed-review-time-changed')};
+    validate();return mutate((state,context,caller)=>{
+      const session=state.sessions[key];if(!atomic||!computedSession(session)||!['paused','closed'].includes(session.status))throw Error('paused-computed-session-required');
+      if(!sameProtocol(session.protocol,protocol(context)))throw Error('computed-scope-mismatch');
+      if(userId!==undefined&&userId!==caller.userId)throw Error('computed-review-identity-required');
+      validate();session.status='closed';session.stopReason='closed-without-replay';
+      session.computedRecovery.review={disposition:'closed-without-replay',userId:caller.userId,at,note:note.trim().slice(0,2000)};return session;
+    },validate);
+  }
   // Nothing writes pool claims or checkpoint reservations any more. One an earlier version left unsettled still blocks, as it did then.
   const boundManual=a=>a.source?.manual&&a.temporalSource?.type==='checkpoint-reservation';
   const unresolvedPool=a=>Object.values(a.proof?.poolApplications??{}).some(claim=>claim.state!=='settled');
-  const unresolvedActivity=a=>unresolvedPool(a)||(!a.source?.manual||boundManual(a)||checkpointDeclaration(a))&&(a.executor&&a.executor.state!=='settled'||['planned','started','completing','uncertain','awaiting-evidence'].includes(a.state));
+  const unresolvedActivity=a=>!computedBatch(a)&&(unresolvedPool(a)||(!a.source?.manual||boundManual(a)||checkpointDeclaration(a))&&(a.executor&&a.executor.state!=='settled'||['planned','started','completing','uncertain','awaiting-evidence'].includes(a.state)));
   const exactClock=c=>c.effectsSettled===true&&exactNativeClock(c);
+  const blocksClockRecovery=(state,clock)=>!reviewedComputed(state.sessions[clock.sessionId])&&clockBlocksRecovery(state,clock);
   function recoveryAvailable(state,session,exceptSession){
     if(Object.values(state.sessions).some(s=>s.id!==exceptSession&&s.status==='running'&&!s.manual))throw Error('recovery-session-already-running');
+    if(Object.values(state.sessions).some(s=>pendingComputed(s)&&!reviewedComputed(s)))throw Error('unresolved-evidence-no-replay');
     const actors=new Set(session.actorUUIDs??[]),pools=new Set((session.goalsByPool??[]).map(g=>g.poolUUID));
-    if(Object.values(state.clocks).some(c=>clockBlocksRecovery(state,c))||Object.values(state.activities).some(a=>unresolvedActivity(a)&&(actors.has(a.actorUUID)||a.patientUUIDs.some(u=>actors.has(u))||a.hpPoolUUIDs.some(u=>pools.has(u)))))throw Error('unresolved-evidence-no-replay');
+    if(Object.values(state.clocks).some(c=>blocksClockRecovery(state,c))||Object.values(state.activities).some(a=>unresolvedActivity(a)&&(actors.has(a.actorUUID)||a.patientUUIDs.some(u=>actors.has(u))||a.hpPoolUUIDs.some(u=>pools.has(u)))))throw Error('unresolved-evidence-no-replay');
   }
   function transition(collection,key,{expected,patch:inputPatch,...options},preparePatch) {
     if(options.evidenceGuard!==undefined&&typeof options.evidenceGuard!=='function')throw Error('synchronous-evidence-guard-required');
     let validateCommit;
     return mutate((s,context,caller)=>{
       const old=s[collection][key];if(!old||!expected.includes(old.state))throw Error('state-conflict');
+      if(collection==='activities'&&computedBatch(old))throw Error('computed-batch-lifecycle-required');
       const patch=clone(preparePatch?preparePatch(old):inputPatch);
       if(collection==='activities'&&old.providerId==='battle-medicine'){
         if(Object.hasOwn(patch,'options')&&canonicalJSON(patch.options)!==canonicalJSON(old.options))throw Error('immutable-provenance');
@@ -262,7 +330,7 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
       if(collection==='activities'&&checkpointDeclaration(old)&&Object.keys(patch).some(k=>k!=='review'))throw Error('activity-checkpoint-lifecycle-required');
       const legal=collection==='clocks'?{started:['confirmed','uncertain'],confirmed:[],uncertain:['confirmed']}:transitions;
       if(patch.state&&!legal[old.state]?.includes(patch.state))throw Error('illegal-transition');
-      const immutable=collection==='clocks'?['id','sessionId','from','to','gmId','claim','source']:['id','sessionId','providerId','actorUUID','patientUUIDs','hpPoolUUIDs','startedAt','endsAt','source','groupId','executor','executionResult','checkpointBinding','temporalSource'];
+      const immutable=collection==='clocks'?['id','sessionId','from','to','gmId','claim','source']:['id','sessionId','kind','providerId','actorUUID','patientUUIDs','hpPoolUUIDs','startedAt','endsAt','source','groupId','executor','executionResult','checkpointBinding','temporalSource'];
       if(immutable.some(k=>k in patch&&JSON.stringify(patch[k])!==JSON.stringify(old[k])))throw Error('immutable-provenance');
       if(atomic&&(collection==='clocks'||!old.source?.manual)){
         const reviewOnly=Object.keys(patch).every(k=>k==='review');
@@ -298,6 +366,8 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
       return {quarantinedSessionIds};
     }),
     createSession:async (input,{guard}={})=>{
+      if('computedRecovery' in input)throw Error('computed-claim-required');
+      if(input.executionMode!==undefined&&input.executionMode!=='computed-v1')throw Error('invalid-session-mode');
       if('recoveryReview' in input)throw Error('recovery-review-required');
       if('finiteMedicineReviewChecks' in input)throw Error('finite-medicine-review-required');
       if('activityCheckpointHistory' in input)throw Error('activity-checkpoint-open-required');if('activityCheckpoint' in input)throw Error('activity-checkpoint-open-required');if('manualCheckpoint' in input)throw Error('manual-checkpoint-open-required');if('manualPoolIssuer' in input)throw Error('manual-pool-issuer-required');
@@ -309,10 +379,16 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
           if(!atomic)throw Error('atomic-finite-medicine-required');
           reviewedAt=validateFiniteBaselines(s,v,context,caller);
         }
+        if(computedSession(v)){
+          if(!atomic||v.manual||v.status!=='running'||v.cursorAt!==v.startedAt||v.activityIds.length)throw Error('invalid-computed-session');
+          v.computedRecovery={version:1,batches:[],summary:null};
+        }
         if(atomic){v.protocol=protocol(context);if(automatic(v)){if(v.status!=='running')throw Error('invalid-initial-session');recoveryAvailable(s,v);v.driver={...caller,leaseNonce}}}
         s.sessions[v.id]=v;return v;
       },()=>{if(guard!==undefined)sessionGuard(guard);if(reviewedAt!==undefined&&resourceNow()!==reviewedAt)throw Error('medic-baseline-time-changed')});
     },
+    beginComputedCalculation,claimComputedBatch,transitionComputedBatch,finishComputedSession,reviewComputedSession,
+    getComputedBatch:async(key,batchId)=>clone(computedRecord(await read(),key,batchId)),
     openActivityCheckpoint:(input,{leaseNonce,guard}={})=>{
       const binding=activityCheckpointBinding(input);checkpointGuard(guard);
       return mutate((state,context,caller)=>{
@@ -347,13 +423,14 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
       const binding=activityCheckpointBinding(input);finite(at,'checkpoint-time');checkpointGuard(guard);
       return mutate((state,context,caller)=>{
         checkpointGuard(guard);const session=declarationWindow(state,binding,{leaseNonce},caller,context);
-        if(session.cursorAt!==at||Object.values(state.clocks).some(c=>clockBlocksRecovery(state,c)))throw Error('unresolved-clock');
+        if(session.cursorAt!==at||Object.values(state.clocks).some(c=>blocksClockRecovery(state,c)))throw Error('unresolved-clock');
         return advanceDeclarations(state,session);
       },()=>checkpointGuard(guard));
     },
     getSession:key=>get('sessions',key),getActivity:key=>get('activities',key),getClockCommit:key=>get('clocks',key),
     updateSession:(key,patch,options={})=>mutate((s,context,caller)=>{
-      const v=s.sessions[key];if(!v)throw Error('missing-session');if(['id','startedAt','activityIds','goalsByPool','recoveryGoals','recoveryReview','finiteMedicine','finiteMedicineReviewChecks','driver','protocol','manual','manualCheckpoint','manualPoolIssuer','nativeOwnerByActor','activityCheckpoint','activityCheckpointHistory'].some(k=>k in patch))throw Error('immutable-session');
+      const v=s.sessions[key];if(!v)throw Error('missing-session');if(['id','startedAt','activityIds','goalsByPool','recoveryGoals','recoveryReview','finiteMedicine','finiteMedicineReviewChecks','driver','protocol','manual','manualCheckpoint','manualPoolIssuer','nativeOwnerByActor','activityCheckpoint','activityCheckpointHistory','executionMode','computedRecovery','computedInitialActors'].some(k=>k in patch)||computedSession(v)&&'actorUUIDs' in patch)throw Error('immutable-session');
+      if(computedSession(v)&&patch.status==='complete')throw Error('computed-finish-required');
       if(options.expectedStatus!==undefined&&v.status!==options.expectedStatus)throw Error('session-state-conflict');
       if(atomic&&automatic(v)){
         if(patch.status==='complete'){noOpenActivityCheckpoint(v);if(v.activityCheckpoint?.phase==='sealed')throw Error('activity-checkpoint-pending')}
@@ -361,10 +438,15 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
         if(patch.status==='running'&&v.status!=='running')throw Error('explicit-resume-required');
         if('leaseNonce' in options||patch.status==='complete'||'cursorAt' in patch&&!options.reconcile)driver(s,key,options,caller);
         if('cursorAt' in patch){finite(patch.cursorAt,'cursor');if(patch.cursorAt<v.cursorAt)throw Error('session-cursor-regression');if(patch.cursorAt!==v.cursorAt&&!Object.values(s.clocks).some(c=>c.sessionId===key&&c.state==='confirmed'&&c.to===patch.cursorAt))throw Error('confirmed-clock-required')}
+        if(computedSession(v)&&'cursorAt' in patch&&patch.cursorAt!==v.cursorAt){
+          if(v.computedRecovery.pendingBoundary)throw Error('unresolved-computed-boundary');
+          if(!v.computedRecovery.batches.some(batch=>batch.state!=='confirmed'))v.computedRecovery.pendingBoundary={from:v.cursorAt,to:patch.cursorAt};
+        }
       }
       Object.assign(v,clone(patch));if(['paused','closed'].includes(v.status))interruptDeclarations(s,v,v.stopReason??v.status);if(['paused','closed'].includes(v.status)&&v.activityCheckpoint&&v.activityCheckpoint.phase!=='settled')v.activityCheckpoint.phase='interrupted';return v;
     }),
     insertActivity:(input,options={})=>mutate((s,context,caller)=>{
+      if(computedBatch(input)||input.providerId==='computed-recovery')throw Error('computed-batch-lifecycle-required');
       const a=createActivity(input);if(checkpointDeclaration(a))throw Error('activity-checkpoint-seal-required');const session=s.sessions[a.sessionId];if(!session)throw Error('missing-session');
       if(Object.hasOwn(a.proof,'poolApplications'))throw Error('manual-pool-claim-required');
       if(Object.hasOwn(a.proof,'manualPoolSource'))throw Error('manual-pool-source-required');
@@ -389,13 +471,14 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
       session=s.sessions[c.sessionId];guard?.();
       if(atomic&&Object.values(s.activities).some(a=>a.sessionId===c.sessionId&&a.providerId==='battle-medicine'&&!a.source?.manual&&['planned','started','completing'].includes(a.state)&&finiteClockCovers(c,a)&&!['reserved','claimed','used'].includes(a.proof.battleMedicineAttempt?.state)))throw Error('battle-medicine-reservation-required');
       if(atomic){noOpenActivityCheckpoint(s.sessions[c.sessionId]);const boundary=Object.values(s.activities).filter(a=>a.sessionId===c.sessionId&&checkpointDeclaration(a)&&['planned','started'].includes(a.state)).flatMap(a=>[a.startedAt,a.endsAt]).filter(at=>at>c.from);if(boundary.some(at=>c.to>at))throw Error('activity-checkpoint-time-boundary')}
-      if(atomic){const session=driver(s,c.sessionId,options,caller,true);if(c.state!=='started'||c.evidence.length||['nativeIssued','nativeResolved','effectsSettled','claim','source'].some(k=>k in input))throw Error('initial-clock-claim-required');if(c.gmId!==caller.userId)throw Error('clock-driver-mismatch');if(c.from!==session.cursorAt)throw Error('world-time-conflict');if(Object.values(s.clocks).some(row=>clockBlocksRecovery(s,row)))throw Error('unresolved-clock');c.claim={...protocol(context),revision:context.revision,...session.driver}}
+      if(atomic){const session=driver(s,c.sessionId,options,caller,true);if(c.state!=='started'||c.evidence.length||['nativeIssued','nativeResolved','effectsSettled','claim','source'].some(k=>k in input))throw Error('initial-clock-claim-required');if(c.gmId!==caller.userId)throw Error('clock-driver-mismatch');if(c.from!==session.cursorAt)throw Error('world-time-conflict');if(Object.values(s.clocks).some(row=>blocksClockRecovery(s,row)))throw Error('unresolved-clock');c.claim={...protocol(context),revision:context.revision,...session.driver}}
       s.clocks[c.id]=c;return c;
     },guard)},
     transitionClockCommit:(key,options)=>transition('clocks',key,options),
     reserveBattleMedicine,cancelBattleMedicineReservation,recordMedicUseWitness,noteExternalBattleMedicineUse,
     finiteMedicineView:async query=>{check();const state=await read();check();return clone(medicAvailability(state,{...query,now:resourceNow()}))},
     claimExecution:(key,input,{guard}={})=>{let battleMedicine=false;return mutate((s,context,caller)=>{
+      if(computedBatch(s.activities[key]))throw Error('computed-batch-lifecycle-required');
       if(!atomic)throw Error('atomic-execution-required');const a=s.activities[key];if(!a||a.state!=='completing')throw Error('state-conflict');
       if(a.source?.manual)throw Error('manual-native-execution-forbidden');
       const session=driver(s,a.sessionId,input,caller,true);if(a.executor)throw Error('activity-already-executed');
@@ -414,6 +497,7 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
       return a.executor;
     },()=>{if(battleMedicine){finiteGuard(guard);resourceNow()}})},
     recordExecutionResult:(key,{permit,result,witnessGuard})=>{let consumes=false,activity;return mutate((s,context)=>{
+      if(computedBatch(s.activities[key]))throw Error('computed-batch-lifecycle-required');
       if(!atomic)throw Error('atomic-execution-required');const a=s.activities[key],executor=a?.executor;
       if(!executor||['protocol','rootUUID','epoch','revision','sessionId','activityId','operationId','actorUUID','ownerUserId','ownerClientNonce','attemptNonce','permitNonce','leaseNonce','offerId','requestId','commandDigest'].some(field=>executor[field]!==permit?.[field]))throw Error('native-permit-mismatch');
       if(!['completing','uncertain'].includes(a.state)||!['confirmed','blocked','uncertain'].includes(result?.status))throw Error('invalid-native-result');
@@ -452,6 +536,8 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
     },
     resumeSession:(key,{cursorAt})=>{const leaseNonce=crypto.randomUUID();return mutate((s,context,caller)=>{
       if(!atomic)throw Error('atomic-resume-required');const session=s.sessions[key];if(!session||session.status!=='paused'||session.manual)throw Error('paused-automatic-session-required');
+      if(pendingComputed(session))throw Error('unresolved-computed-batch');
+      if(computedSession(session)&&!sameProtocol(session.protocol,protocol(context)))throw Error('computed-scope-mismatch');
       if(session.finiteMedicine&&!sameProtocol(session.protocol,protocol(context)))throw Error('medic-baseline-scope-mismatch');
       if(cursorAt!==session.cursorAt)throw Error('external-world-time-change');recoveryAvailable(s,session,key);
       session.status='running';session.stopReason=null;session.driver={...caller,leaseNonce};session.protocol=protocol(context);return session;
@@ -459,6 +545,9 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
     takeoverSession:key=>mutate(s=>{
       if(!atomic)throw Error('atomic-takeover-required');const session=s.sessions[key];if(!session||!['running','paused'].includes(session.status)||session.manual)throw Error('automatic-session-required');
       session.status='paused';session.stopReason='explicit-driver-takeover';
+      for(const index of session.computedRecovery?.batches??[])if(['pending','claimed'].includes(index.state)){
+        const batch=computedRecord(s,key,index.id);batch.state='uncertain';batch.reason='explicit-driver-takeover';syncComputedIndex(session,batch);
+      }
       interruptDeclarations(s,session,'explicit-driver-takeover');
       for(const a of Object.values(s.activities).filter(row=>row.sessionId===key&&!row.source?.manual)){
         if(a.state==='planned'&&!a.executor){a.state='cancelled';a.reason='explicit-driver-takeover'}
@@ -470,6 +559,10 @@ export function createLedger({read,write,transact,isAuthority,identity,now}) {
     ownsSession:(session,options={})=>!atomic||session?.driver?.userId===localIdentity().userId&&session?.driver?.clientNonce===localIdentity().clientNonce&&session?.driver?.leaseNonce===options.leaseNonce,
     atomic,
     all:async()=>clone(await read()),
-    snapshot:async key=>{const s=await read();return clone({session:s.sessions[key]??null,activities:Object.values(s.activities).filter(a=>a.sessionId===key),clocks:Object.values(s.clocks).filter(c=>c.sessionId===key)})}
+    snapshot:async key=>{
+      const s=await read(),session=clone(s.sessions[key]??null);
+      if(computedSession(session))session.computedRecovery.batches=session.computedRecovery.batches.map(batch=>clone(computedRecord(s,key,batch.id)));
+      return clone({session,activities:Object.values(s.activities).filter(a=>a.sessionId===key&&!computedBatch(a)),clocks:Object.values(s.clocks).filter(c=>c.sessionId===key)});
+    }
   };
 }

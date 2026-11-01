@@ -54,8 +54,7 @@ test('first root provisioning keeps the new runtime available for owner evidence
 test('the panel resumes through the runtime encounter and PF2e identity guards',async t=>{
  const before=globalThis.foundry;t.after(()=>{globalThis.foundry=before});globalThis.foundry={applications:{api:{ApplicationV2:class{render(){return this}}}}};
  for(const mode of ['system','encounter']){
-  const f=documentFixture();f.seed({sessions:{S:{id:'S',status:'paused',actorUUIDs:[],startedAt:0,cursorAt:0,budgetEndsAt:600,activityIds:[],goalsByPool:[]}},activities:{},clocks:{}});f.game.user.getFlag=()=> 'S';
-  const runtime=createExplorationRuntime(f);await runtime.bind({});await runtime.api.storage.initialize({issuersStopped:true,clientsReloaded:true,recoveryDisabled:true});
+  const f=await automaticFixture(),runtime=f.runtime,session=await runtime.api.start(f.config);await runtime.api.stop(session.id);
   if(mode==='system')f.game.system.id='other';else f.game.combat={started:true};
   const panel=await runtime.api.open([]);await assert.rejects(panel.act('resume',{}),/encounter-or-system-unavailable/);
  }
@@ -111,7 +110,7 @@ test('an automatic recovery stops once when its encounter starts and ignores lat
  const f=await automaticFixture(),combat={started:false,previous:{round:0},round:0};f.game.combats=[combat];f.game.combat=combat;
  let timeAdvances=0,actorWrites=0;f.game.time.advance=async()=>{timeAdvances++};f.game.actors.get('H').update=async()=>{actorWrites++};
  await f.runtime.register({socket:null});
- const s=await f.runtime.api.start({...f.config,autoRun:true,waitForActivityFirstRound:true}),binding=await f.runtime.api.openActivityCheckpoint(s.id);
+ const s=await f.runtime.api.start({...f.config,autoRun:false});
  assert.equal((await f.runtime.api.snapshot(s.id)).session.status,'running');assert.equal(f.game.paused,true);
  const writes=()=>f.calls.filter(request=>request.action==='create').length,initialWrites=writes();
  f.emitHook('updateCombat',combat);assert.equal((await afterRuntimeHooks(f.runtime,s.id)).session.status,'running');assert.equal(writes(),initialWrites);
@@ -122,7 +121,7 @@ test('an automatic recovery stops once when its encounter starts and ignores lat
  await new Promise(resolve=>setImmediate(resolve));assert.equal(f.calls.length,beforeRounds);
  f.emitHook('pf2e.restForTheNight',f.game.actors.get('H'));const after=await afterRuntimeHooks(f.runtime,s.id);
  assert.deepEqual(after.session,stopped.session);assert.equal(writes(),initialWrites+1);
- await assert.rejects(f.runtime.api.closeActivityCheckpoint(binding),/session-driver-required|recovery-session-stopped/);
+ await assert.rejects(f.runtime.api.openActivityCheckpoint(s.id),/computed-manual-checkpoint-unavailable/);
  await assert.rejects(f.runtime.api.resume(s.id),/encounter-or-system-unavailable/);
  assert.deepEqual(after.activities,[]);assert.deepEqual(after.clocks,[]);assert.equal(timeAdvances,0);assert.equal(actorWrites,0);assert.equal(f.game.time.worldTime,0);assert.equal(f.game.paused,true);assert.equal(f.pauses.length,1);
 });

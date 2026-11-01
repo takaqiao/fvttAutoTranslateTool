@@ -44,6 +44,14 @@ export const electricityEffects=(actor,source)=>values(actor?.items).filter(i=>n
  * someone else, which that actor's next electricity damage still has to settle. */
 const TRACKED_SOURCES=new Set([...Object.values(S),ELECTRICITY_BASIC_SOURCES.element]);
 export const hasElectricitySource=actor=>values(actor?.items).some(i=>TRACKED_SOURCES.has(normalized(sourceUuid(i))));
+export function hasActiveElectricity(actor){
+ const state=actor.flags?.[ID]?.electricity;
+ if(Object.keys(state?.pendingShocks??{}).length>0||Object.values(state?.operations??{}).some(r=>r.status==='started'))return true;
+ return values(actor.items).some(item=>{
+  const source=normalized(sourceUuid(item));
+  return source===S.charged||source===S.shocked&&item.flags?.[ID]?.electricityShock?.expires;
+ });
+}
 export const electricityState=actor=>copy(actor?.flags?.[ID]?.electricity??{version:1,damage:{},operations:{},pendingShocks:{}});
 const liveToken=t=>t?.documentName==='Token'&&t.actor&&t.parent?.tokens?.get(t.id)===t;
 const ownCharge=i=>i?.flags?.[ID]?.electricityCharge?.ownPower===true;

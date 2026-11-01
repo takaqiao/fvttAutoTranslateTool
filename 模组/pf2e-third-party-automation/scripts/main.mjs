@@ -4,6 +4,8 @@ import {createBob2RuleLinks,buildBob2RuleLinkRepairs} from './bob2-rule-links.mj
 import {createMagusAnalysis} from './magus-analysis.mjs';
 import {createCommunalHealing} from './communal-healing.mjs';
 import {createCounterPerformance} from './counter-performance.mjs';
+import {createDeathsCall} from './deaths-call.mjs';
+import {createPremonitionOfAvoidance} from './premonition-of-avoidance.mjs';
 import {createBravery} from './bravery.mjs';
 import {createSalubriousMessagePrivacy,loadSalubriousWorkbench} from './salubrious-message-privacy.mjs';
 import {createPilgrimRewards} from './sog-pilgrim-rewards.mjs';
@@ -178,6 +180,7 @@ Hooks.once('ready',async()=>{
  const fear=createFearAutomation({game,fromUuid,choose,reactionRestriction,onError:report});
  const familiar=createBardFamiliarProvider({game,fromUuid,onError:report});
  const swashbuckler=createBob2SwashbucklerProvider({game,fromUuid,choose:showNativeChoice,onError:report});
+ const premonition=createPremonitionOfAvoidance({game,choose:showNativeChoice,onError:report});
  const ruleLinks=createBob2RuleLinks({game,fromUuid,choose,runNative:ownerRolls['bob2-rules'].run,castEvents:nativeCasts});
  const knowledge=createKnowledgeAutomation({game,fromUuid,choose,runNative:ownerRolls.knowledge.run,onError:report});
  const magusAnalysis=createMagusAnalysis({game,fromUuid,choose,runRecallKnowledge:knowledge.runRecallKnowledge});
@@ -186,6 +189,10 @@ Hooks.once('ready',async()=>{
  nativeCasts.addMatcher(counterPerformance.matches);
  nativeCasts.addCapture('counterPerformanceInput',counterPerformance.captureCast);
  nativeCasts.addCastMiddleware(counterPerformance.interceptCast);
+ const deathsCall=createDeathsCall({game,fromUuid,nativeCasts,onError:report});
+ nativeCasts.addMatcher(deathsCall.matches);
+ nativeCasts.addCapture('deathsCallInput',deathsCall.captureCast);
+ nativeCasts.addCastMiddleware(deathsCall.interceptCast);
  const combinations=createSpellCombination({game,fromUuid,choose,runTargetSave:targetSaves['spell-combination'].run,onError:report,afterAttack:message=>campaign.processCheck(message),volatileSparkEnabled:BOB2_AUTOMATION_WORLDS.has(game.world?.id),getRollContext:roll=>cycle?.getRollContext(roll)});
  const prayer=DESPERATE_PRAYER_WORLDS.has(game.world?.id)?createDesperatePrayerProvider({game,fromUuid,choose,onError:report,castEvents:nativeCasts}):null;
  const halflingLuck=HALFLING_LUCK_WORLDS.has(game.world?.id)&&game.system?.id==='pf2e'?createHalflingLuckProvider({game,fromUuid,choose:showNativeChoice,onError:report}):null;
@@ -195,7 +202,7 @@ Hooks.once('ready',async()=>{
  if(forceBarrage)nativeCasts.addCastMiddleware(forceBarrage.interceptCast);
  if(roaring)nativeCasts.addCastMiddleware(roaring.interceptCast);
  if(prayer){nativeCasts.addActorMatcher(prayer.isManagedActor);nativeCasts.addConsumePolicy(prayer.consumePolicy);nativeCasts.addCastMiddleware(prayer.interceptCast);}
- const prayerCheck=(native,...args)=>swashbuckler.interceptCheck((...selected)=>ruleLinks.interceptCheck((...ruled)=>interceptKnowledgeProbe((...checked)=>prayer?prayer.interceptCheck(native,...checked):native(...checked),...ruled),...selected),...args);
+ const prayerCheck=(native,...args)=>premonition.interceptCheck((...saved)=>swashbuckler.interceptCheck((...selected)=>ruleLinks.interceptCheck((...ruled)=>interceptKnowledgeProbe((...checked)=>prayer?prayer.interceptCheck(native,...checked):native(...checked),...ruled),...selected),...saved),...args);
  let metapower,electricity;
  const voltage=createEldamonVoltageProvider({game,fromUuid,onError:report,getRollContext:roll=>cycle?.getRollContext(roll),observe:(...args)=>metapower.observe(...args),onRefresh:context=>electricity.onRefresh(context)});
  electricity=createEldamonElectricityProvider({game,fromUuid,reactionRestriction,onError:report,refreshOutsideEncounter:voltage.refreshOutsideEncounter,useOwnedAction:(item,event)=>metapower.observe({actor:item.actor,item},()=>game.toolbelt.api.actionable.useAction(event,item))});
@@ -209,7 +216,7 @@ Hooks.once('ready',async()=>{
  providers.unshift(activityResults,weaponSurge,glimpse,...scar?[scar]:[],voltage,electricity);
  providers.push(metapower,createEldamonDataRepair({game}),createMedicActions({game,fromUuid,choose,onError:report}),familiar,defensiveAdvance,...prayer?[prayer]:[]);
  const electricityBasic=createEldamonBasicSettlement({game,fromUuid,basicUse:electricity.basicUse,apply:payload=>electricity.confirmedAction(payload),onError:report});
- providers.push(createFortressRuleCompatibility({game}),electricityBasic,swashbuckler,ruleLinks,magusAnalysis,communalHealing,counterPerformance,createBravery({game,onError:report}));
+ providers.push(createFortressRuleCompatibility({game}),electricityBasic,swashbuckler,ruleLinks,magusAnalysis,communalHealing,counterPerformance,deathsCall,createBravery({game,onError:report}));
  if(halflingLuck)providers.push(halflingLuck);
  if(forceBarrage)providers.push(forceBarrage);
  // Prayer subscribes first so a genuine Sustain still closes its action window.

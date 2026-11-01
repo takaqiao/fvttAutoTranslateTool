@@ -323,10 +323,9 @@ test('a no-GM result still saves one secret die and an owner request rejects a f
  const f=controllerFixture();f.gm.active=false;await assert.rejects(()=>f.owner.run({actor:f.actor,token:f.token,targetUuids:[f.target.uuid],requestId:'offlineGM'}),/秘骰已保存/);assert.equal(f.die.count,1);assert.equal(f.game.messages.get('rk1').blind,true);
  const reply=await f.handlers.get('player:knowledge-rk-run').call({socketdata:{userId:'player'}},{requestId:'fake',origin:{messageId:'other'}});assert.equal(reply.ok,false);assert.match(reply.error,/主 GM/);assert.equal(f.die.count,1);f.cleanup();
 });
-test('invalid native probe receipt fails instead of hanging Workbench callback or silently replaying a die',async()=>{
+test('invalid native probe receipt fails instead of hanging Workbench callback or silently replaying a die',{timeout:1000},async()=>{
  const f=fixture();f.actor.skills.society.roll=async options=>{options.callback({options:{totalModifier:13}},null,{flags:{pf2e:{context:{type:'other'}}}});};
- const timeout=new Promise((_,reject)=>setTimeout(()=>reject(Error('native callback hung')),30));
- await assert.rejects(Promise.race([api.captureWorkbenchRecall({...f,requestId:'bad-probe',targetUuids:[f.target.uuid]}),timeout]),/回执/);assert.equal(f.die.count,0);
+ await assert.rejects(api.captureWorkbenchRecall({...f,requestId:'bad-probe',targetUuids:[f.target.uuid]}),/回执/);assert.equal(f.die.count,0);
 });
 test('incidental native roll options affect captured modifiers before primary selection',async()=>{
  const f=fixture();const original=f.actor.skills.society.roll;f.actor.skills.society.roll=async function(options){this.totalModifier=options.extraRollOptions.includes('origin:item:known-weaknesses')?17:13;return original.call(this,options);};

@@ -11,6 +11,18 @@
 .recovery-content .recovery-members th:last-child{width:54%}
 .recovery-content .recovery-members :is(th,td){padding:8px;vertical-align:top;overflow-wrap:anywhere}
 .recovery-content .recovery-members td:nth-child(2){white-space:nowrap;font-variant-numeric:tabular-nums}
+.recovery-content .recovery-computed-summary{min-width:0}
+.recovery-content .recovery-results-scroll{max-width:100%;overflow-x:auto}
+.recovery-content .recovery-results{width:100%;min-width:640px;table-layout:fixed;margin:0}
+.recovery-content .recovery-results :is(th,td){padding:8px;text-align:left;vertical-align:top;word-break:normal;overflow-wrap:normal}
+.recovery-content .recovery-results th{white-space:nowrap}
+.recovery-content .recovery-results th:first-child{width:28%}
+.recovery-content .recovery-results th:nth-child(2){width:27%}
+.recovery-content .recovery-results th:nth-child(3){width:16%}
+.recovery-content .recovery-results th:nth-child(4){width:13%}
+.recovery-content .recovery-results th:last-child{width:16%}
+.recovery-content .recovery-results td:is(:nth-child(2),:nth-child(3),:nth-child(4)){white-space:nowrap;font-variant-numeric:tabular-nums}
+.recovery-content .recovery-results td:is(:first-child,:last-child){overflow-wrap:anywhere}
 .recovery-content .recovery-target-controls{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .recovery-content .recovery-target-controls select{flex:1 1 110px;min-width:0;width:auto}
 .recovery-content .recovery-target-controls input{flex:0 1 80px;width:80px;min-width:0}

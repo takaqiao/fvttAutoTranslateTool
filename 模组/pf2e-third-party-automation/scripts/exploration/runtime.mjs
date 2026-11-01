@@ -1,3 +1,7 @@
+import {createComputedRecovery,computedMode} from './computed-recovery.mjs';
+import {createComputedDocuments,computedActorStamp} from './computed-documents.mjs';
+import {enhanceComputedActors} from './computed-rules.mjs';
+import {values} from '../salubrious-kiss-rules.mjs';
 import {createManualRecordBridge} from './manual-record.mjs';
 import {createGamePause} from './game-pause.mjs';
 import {createLedgerSetup} from './setup.mjs';
@@ -42,7 +46,28 @@ export function createExplorationRuntime({game,Hooks,fromUuid,JournalEntry=globa
   const treatment=createTreatmentProvider({capabilities,nativeTreatment,ledger,ownerOperations}),refocus=createRefocusProvider({game,ledger,capabilities,refocusEvents:refocusAdapter,salubriousKiss,ownerOperations}),focus=createFocusHealingProvider({game,Hooks,fromUuid,ownerOperations,castEvents:nativeCasts,nativeTreatment});
   ownerOperations.registerOperation('refocus',refocus.complete);ownerOperations.registerOperation('focus-healing',focus.complete);focus.register();
   const providers=[treatment,{...refocus,complete:a=>ownerOperations.runActivityWithOwner(a,'refocus')},{...focus,complete:a=>ownerOperations.runActivityWithOwner(a,'focus-healing')}];
-  coordinator=createCoordinator({game,fromUuid,getHpPool:actor=>hpPools.discover(actor),ledger,capabilities,providers,clock,policy:chooseNext,isAuthority:()=>isActiveGM(game),now:()=>game.time.worldTime,ownerOperations,onChange:()=>panel?.refresh(),pauseGame:createGamePause({game,Hooks})});
+  const legacy=createCoordinator({game,fromUuid,getHpPool:actor=>hpPools.discover(actor),ledger,capabilities,providers,clock,policy:chooseNext,isAuthority:()=>isActiveGM(game),now:()=>game.time.worldTime,ownerOperations,onChange:()=>panel?.refresh(),pauseGame:createGamePause({game,Hooks})});
+  const prepareActors=async uuids=>{const actors=await enhanceComputedActors({actors:await capabilities.snapshot(uuids),game,fromUuid});return Promise.all(actors.map(async actor=>({...actor,executionStamp:computedActorStamp(await fromUuid(actor.actorUUID))})));};
+  const timeBoundary=async uuids=>{
+   let segmented=game.modules.get('patreon-v3')?.active===true,until=Infinity;
+   const selected=await Promise.all(uuids.map(fromUuid)),parties=values(game.actors).filter(actor=>actor.type==='party');
+   const actors=[...new Map([...selected,...parties.flatMap(party=>values(party.members))].filter(Boolean).map(actor=>[actor.uuid,actor])).values()];
+   for(const actor of actors)for(const item of values(actor.items)){
+    if(item.type!=='effect'||item.isExpired===true)continue;segmented=true;
+    const unit={rounds:6,minutes:60,hours:3600,days:86400}[item.system?.duration?.unit],end=item.system?.start?.value+item.system?.duration?.value*unit;
+    if(Number.isFinite(end)&&end>game.time.worldTime)until=Math.min(until,end);
+   }
+   return {segmented,until};
+  };
+  const computed=createComputedRecovery({game,ledger,capabilities,clock,prepareActors,timeBoundary,isAuthority:()=>isActiveGM(game),pauseGame:createGamePause({game,Hooks}),documents:createComputedDocuments({game,fromUuid,getHpPool:actor=>hpPools.discover(actor)}),onChange:()=>panel?.refresh()});
+  const route=async(id,method,...args)=>{const session=await ledger.getSession(id),driver=session?.executionMode===computedMode?computed:legacy;return driver[method](id,...args)};
+  coordinator={...legacy,start:computed.start,snapshot:id=>route(id,'snapshot'),stop:(id,reason)=>route(id,'stop',reason),stopActive:(id,reason)=>route(id,'stopActive',reason),takeover:id=>route(id,'takeover'),reconcile:id=>route(id,'reconcile'),review:(id,options)=>route(id,'review',options),
+   resume:(id,options)=>computed.resume(id,options),
+   describeSnapshot:(data,actors,...args)=>data.session?.executionMode===computedMode?computed.describeSnapshot(data,actors):legacy.describeSnapshot(data,actors,...args),
+   executionScope:id=>computed.executionScope(id)??legacy.executionScope(id),
+   openActivityCheckpoint:async()=>{throw Error('computed-manual-checkpoint-unavailable')},closeActivityCheckpoint:async()=>{throw Error('computed-manual-checkpoint-unavailable')},
+   invalidate:reason=>{computed.invalidate(reason);legacy.invalidate(reason)}
+  };
   const panelActions=Object.freeze({snapshot:id=>api.snapshot(id),stop:id=>api.stop(id),resume:id=>api.resume(id),takeover:id=>api.takeover(id),reconcile:id=>api.reconcile(id),review:(id,options)=>api.review(id,options),acceptCurrentTime:(id,options)=>api.acceptCurrentTime(id,options),openActivityCheckpoint:id=>api.openActivityCheckpoint(id),closeActivityCheckpoint:(binding,options)=>api.closeActivityCheckpoint(binding,options)});
   panel=createRecoveryPanel({game,coordinator:panelActions,capabilities,start,prepareContext:preparePanelContext,storage:{status:refreshStorage,provision:options=>storageAction('provision',options),initialize:options=>storageAction('initialize',options),select:options=>storageAction('select',options),replace:replaceLedger,replacePreview:()=>readAsGM(()=>setup.replacePreview())},record:event=>api.record(event),getActivityCheckpoint:actorUUID=>api.getActivityCheckpoint(actorUUID),lookupCheckpointActivity:(...args)=>api.lookupCheckpointActivity(...args),getSessionId:()=>lastSessionId,onError});diagnostic={status:'initializing',...diagnosticMetadata};
   if(game.user?.isGM!==true){storageReady=false;lastSessionId=null;diagnostic.status='gm-read-required';return}

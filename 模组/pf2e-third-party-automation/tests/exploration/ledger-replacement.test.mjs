@@ -224,7 +224,7 @@ test('a selection left over from the replaced ledger renders as no session, and 
  let selected='M';const app=createRecoveryPanel({game:w.game,coordinator,capabilities,storage:{status:setup.status},start:config=>coordinator.start({...config,autoRun:false}),getSessionId:()=>selected}).open([H,P]);
  assert.equal((await coordinator.snapshot('M')).session,null);
  const html=await app._renderHTML(await app._prepareContext());
- assert.deepEqual(mainActions(html),['start']);assert.match(html,/选择成员后，一次启动恢复。/);assert.match(moreActions(html),/data-recovery="replaceLedger">换新账本/);
+ assert.deepEqual(mainActions(html),['start']);assert.match(html,/选择成员和策略，计算恢复并推进时间。/);assert.match(moreActions(html),/data-recovery="replaceLedger">换新账本/);
  const session=await coordinator.start({actorUUIDs:[H,P],autoRun:false});assert.equal(session.status,'running');selected=session.id;
  assert.deepEqual(mainActions(await app._renderHTML(await app._prepareContext())),['stop']);
 });

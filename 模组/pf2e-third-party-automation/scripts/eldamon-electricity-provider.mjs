@@ -1,5 +1,5 @@
 import {ELECTRICITY_MODULE_ID as ID,ELECTRICITY_SOURCES as S,ELECTRICITY_APPLY_PREFIX as APPLY,ELECTRICITY_SOURCE_PREFIX as SOURCE,
- classifyElectricityDamage,createElectricityLedger,electricityState,electricityEffects,hasElectricitySource,receiptMatches} from './eldamon-electricity.mjs';
+ classifyElectricityDamage,createElectricityLedger,electricityState,electricityEffects,hasElectricitySource,hasActiveElectricity,receiptMatches} from './eldamon-electricity.mjs';
 import {sourceUuid} from './metapower/rules.mjs';
 import {showNativeChoice,publicTargetName} from './native-context.mjs';
 import {createActorStateIndex} from './actor-state-index.mjs';
@@ -29,11 +29,7 @@ export function createEldamonElectricityProvider({game,reactionRestriction,fromU
   if(!sourceCards){sourceCards=new Map();for(const message of values(game.messages))rememberSource(message)}
   return [...sourceCards.get(nonce)??[]].filter(message=>game.messages.get(message.id)===message&&message.flags?.[ID]?.electricitySource?.nonce===nonce);
  }
- const activeActors=createActorStateIndex({game,matches:actor=>{
-  const state=actor.flags?.[ID]?.electricity;
-  return Object.keys(state?.pendingShocks??{}).length>0||Object.values(state?.operations??{}).some(r=>r.status==='started')||
-   electricityEffects(actor,S.charged).length>0||electricityEffects(actor,S.shocked).some(item=>item.flags?.[ID]?.electricityShock?.expires);
- }});
+ const activeActors=createActorStateIndex({game,matches:hasActiveElectricity});
  // Most worlds roll electricity damage with no electricity element in play. With
  // no source on any actor, a stamped card or an application record settles nothing.
  const sourceActors=createActorStateIndex({game,matches:hasElectricitySource}),tracked=()=>sourceActors.values().length>0;

@@ -79,7 +79,7 @@ test('mode changes and typed values update the preview without saving or startin
 
 test('a paused session displays its frozen target separately from the next-start intention',async t=>{
  const recoveryGoals={version:1,patientTargets:[{patientUUID:P,poolUUID:P,intent:{mode:'percent',value:25},basisMaxHP:41,targetHP:11}],requireNoWounded:false,failureStop:{enabled:false,limit:3}};
- const session={id:'S',manual:false,status:'paused',stopReason:'user-stopped',startedAt:0,cursorAt:0,goalsByPool:[{poolUUID:P,targetHP:11}],recoveryGoals};
+ const session={id:'S',executionMode:'computed-v1',manual:false,status:'paused',stopReason:'user-stopped',startedAt:0,cursorAt:0,goalsByPool:[{poolUUID:P,targetHP:11}],recoveryGoals};
  const f=fixture(t,{data:{session,actors:[{pool:{poolUUID:P},hp:{value:1}}],activities:[],clocks:[]}});f.actors[0].hp.max=81;
  const html=await f.app._renderHTML(await f.app._prepareContext());
  assert.match(html,/会话目标[^<]*11/);assert.match(html,/启动时最大 HP[^<]*41/);assert.match(html,/data-pool="Actor.P"[^>]*value="21"/);
@@ -88,7 +88,7 @@ test('a paused session displays its frozen target separately from the next-start
 
 test('changing the current pool mapping cannot hide or replace frozen patient targets',async t=>{
  const oldPool='Actor.OLD',newPool='Actor.NEW',recoveryGoals={version:1,patientTargets:[{patientUUID:P,poolUUID:oldPool,intent:{mode:'percent',value:25},basisMaxHP:40,targetHP:10},{patientUUID:B,poolUUID:newPool,intent:{mode:'absolute',value:18},basisMaxHP:20,targetHP:18}],requireNoWounded:false,failureStop:{enabled:false,limit:3}};
- const session={id:'S',manual:false,status:'paused',stopReason:'user-stopped',startedAt:0,cursorAt:0,goalsByPool:[{poolUUID:oldPool,targetHP:10},{poolUUID:newPool,targetHP:18}],recoveryGoals};
+ const session={id:'S',executionMode:'computed-v1',manual:false,status:'paused',stopReason:'user-stopped',startedAt:0,cursorAt:0,goalsByPool:[{poolUUID:oldPool,targetHP:10},{poolUUID:newPool,targetHP:18}],recoveryGoals};
  const f=fixture(t,{data:{session,actors:[{actorUUID:P,pool:{poolUUID:newPool},hp:{value:1}}],activities:[],clocks:[]}});f.actors[0].pool.poolUUID=newPool;f.actors[0].hp.max=20;
  const html=await f.app._renderHTML(await f.app._prepareContext());
  assert.match(html,/会话目标 10 HP；启动时最大 HP 40/);assert.doesNotMatch(html,/共享执行目标 18/);assert.match(html,/data-pool="Actor.NEW"[^>]*value="5"/);

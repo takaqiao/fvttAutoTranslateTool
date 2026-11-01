@@ -2,7 +2,7 @@ import {MODULE_ID,emptyLedger} from './schema.mjs';
 import {canonicalJSON,normalizeLedger,revisionId,createGenesisRevision,createSuccessorRevision,projectRevisionPages,encodeRevision,decodeRevision} from './revision-codec.mjs';
 
 export function createRevisionStore({getRootUUID,readRoot,createPage,isAuthority,canUseRoot,writerUserId,writerClientId,nonce,maxConflicts=8}) {
-  let pinnedRoot,knownHead=null;const knownDigests=new Map();
+  let pinnedRoot,knownHead=null,projectionMemo=null,loadOrder=0;const knownDigests=new Map();
   if(!Number.isSafeInteger(maxConflicts)||maxConflicts<0)throw Error('invalid-conflict-limit');
 
   function rootUUID(){
@@ -36,15 +36,23 @@ export function createRevisionStore({getRootUUID,readRoot,createPage,isAuthority
     if(!knownHead||head.revision>knownHead.revision)knownHead=structuredClone(head);
   }
   async function load(){
-    const root=rootUUID(),baseline=knownHead,raw=structuredClone(await readRoot(root));rootUUID();validateRoot(raw,root);
+    const root=rootUUID(),baseline=knownHead,order=++loadOrder,raw=structuredClone(await readRoot(root));rootUUID();validateRoot(raw,root);
     const protocol=raw.pages.some(page=>page?._id?.startsWith('er')||page?.flags?.[MODULE_ID]?.explorationRevision!==undefined);
     if(!protocol){
       if(baseline)throw Error('known-head-regression');
       return {rootUUID:root,raw,state:normalizeLedger(raw.flags?.[MODULE_ID]?.explorationLedger??emptyLedger()),head:null,genesis:null};
     }
+    const pagesKey=canonicalJSON(raw.pages),memo=projectionMemo;
+    if(memo?.pagesKey===pagesKey&&(!baseline||memo.head.revision>=baseline.revision)){
+      rootUUID();remember(memo.head,memo.chain);
+      return {rootUUID:root,raw,state:memo.state,head:memo.head,genesis:memo.genesis};
+    }
     const {state,head}=await projectRevisionPages({rootUUID:root,pages:raw.pages,knownHead:baseline});
-    rootUUID();remember(head,raw.pages.map(page=>page.flags?.[MODULE_ID]?.explorationRevision).filter(revision=>revision!==undefined).map(decodeRevision));
+    rootUUID();const chain=raw.pages.map(page=>page.flags?.[MODULE_ID]?.explorationRevision).filter(revision=>revision!==undefined).map(decodeRevision);remember(head,chain);
     const genesis=decodeRevision(raw.pages.find(page=>page._id===revisionId(0)).flags[MODULE_ID].explorationRevision);
+    // Only a fully verified server read seeds this private projection. Exact ACKs
+    // still advance knownHead, so an older read cannot satisfy a later baseline.
+    if(!projectionMemo||head.revision>projectionMemo.head.revision||head.revision===projectionMemo.head.revision&&order>projectionMemo.order)projectionMemo={pagesKey,state,head,genesis,chain,order};
     return {rootUUID:root,raw,state,head,genesis};
   }
   function describe(loaded){return {initialized:!!loaded.head,rootUUID:loaded.rootUUID,epoch:loaded.head?.epoch??null,revision:loaded.head?.revision??null,sourceDigest:loaded.genesis?.sourceDigest??null}}

@@ -267,3 +267,92 @@ test('controlled legacy genesis with different epochs still accepts only one ini
  assert.equal(outcomes.filter(r=>r.status==='fulfilled').length,1);assert.equal(outcomes.filter(r=>r.status==='rejected'&&r.reason.message==='genesis-epoch-conflict').length,1);
  assert.deepEqual(f.raw.flags[M].explorationLedger,legacy);assert.equal(f.raw.pages.length,1);
 });
+
+function countDigests(t){
+ const original=globalThis.crypto.subtle.digest;let calls=0;
+ globalThis.crypto.subtle.digest=function(...args){calls++;return original.apply(this,args)};
+ t.after(()=>{globalThis.crypto.subtle.digest=original});return ()=>calls;
+}
+
+test('unchanged full pages reuse a verified projection while every snapshot still reads the server',async t=>{
+ const f=fixture(),store=await f.initialized(),digests=countDigests(t),before=f.counts().reads;
+ const first=await store.read(),verified=digests();assert.ok(verified>0);
+ first.activities.A.state='caller-edit';const view=await store.inspect();view.state.sessions.S.status='caller-edit';view.status.epoch='caller-edit';
+ assert.deepEqual(await store.read(),seed());assert.equal((await store.status()).epoch,'epoch-1');
+ assert.equal(f.counts().reads,before+4);assert.equal(digests(),verified,'identical pages must not repeat SHA verification');
+ await assert.rejects(store.transact(state=>{state.activities.A.state='failed-mutation';throw Error('cancelled')}),/cancelled/);
+ assert.deepEqual(await store.read(),seed());assert.equal(digests(),verified);assert.equal(f.counts().creates,1);
+});
+
+test('cached pages never cache root privacy, approval, or write authority',async()=>{
+ const f=fixture();await f.initialized();let approved=true,authorized=true,checks=0;
+ const store=f.client({canUseRoot:()=>{checks++;return approved},isAuthority:()=>authorized});await store.read();const firstChecks=checks;
+ await store.read();assert.ok(checks>firstChecks);
+ f.raw.ownership.default=1;await assert.rejects(store.read(),/root-not-private/);f.raw.ownership.default=0;
+ approved=false;await assert.rejects(store.inspect(),/root-not-approved/);approved=true;
+ authorized=false;await assert.rejects(store.transact(()=>{}),/active-gm-required/);assert.equal(f.counts().creates,1);
+});
+
+for(const [name,change]of Object.entries({
+ body:page=>page.text={content:'edited outside the signed revision'},
+ ownership:page=>page.ownership={default:0,G:2},
+ name:page=>page.name='renamed',
+ type:page=>page.type='image',
+ flags:page=>page.flags.other={value:'changed'}
+}))test(`an old page ${name} change forces full projection even when its signed head is unchanged`,async t=>{
+ const f=fixture(),store=await f.initialized();await store.transact(state=>{state.activities.A.state='completing'});await store.read();
+ const digests=countDigests(t);change(f.raw.pages[0]);assert.equal((await store.read()).activities.A.state,'completing');assert.ok(digests()>0);
+ const verified=digests();await store.read();assert.equal(digests(),verified);
+});
+
+for(const [name,change,reason]of [
+ ['signed replacement',pages=>changeSavedMetadata(pages[0],metadata=>{metadata.nonce='replacement'}),/digest/],
+ ['old page deletion',pages=>pages.shift(),/not-initialized|chain-gap/],
+ ['last page deletion',pages=>pages.pop(),/known-head-regression/],
+ ['page ID replacement',pages=>pages[0]._id=revisionId(9),/page-id-mismatch/]
+])test(`cached projection does not hide ${name}`,async()=>{
+ const f=fixture(),store=await f.initialized();await store.transact(state=>{state.activities.A.state='completing'});await store.read();
+ change(f.raw.pages);await assert.rejects(store.read(),reason);await assert.rejects(store.transact(()=>{}),reason);assert.equal(f.counts().creates,2);
+});
+
+for(const [name,value,reason]of [['nonfinite',NaN,/invalid-json-number/],['undefined',undefined,/unsupported-json-value/]])test(`a ${name} page array entry cannot alias an earlier null entry`,async()=>{
+ const f=fixture(),store=await f.initialized();f.raw.pages[0].text={blocks:[null]};await store.read();f.raw.pages[0].text.blocks[0]=value;
+ await assert.rejects(store.read(),reason);
+});
+
+test('a sparse page field cannot alias an earlier array containing null',async()=>{
+ const f=fixture(),store=await f.initialized();f.raw.pages[0].text={blocks:[null]};await store.read();delete f.raw.pages[0].text.blocks[0];
+ await assert.rejects(store.read(),/invalid-dense-json-array/);
+});
+
+test('cached projection remains pinned to its original root',async()=>{
+ const f=fixture();await f.initialized();let root=ROOT;const store=f.client({getRootUUID:()=>root});await store.read();root='JournalEntry.OTHER00000000001';
+ await assert.rejects(store.read(),/revision-root-changed/);await assert.rejects(store.status(),/revision-root-changed/);
+});
+
+test('an exact ACK neither seeds a projection memo nor makes an older memo pass a new load baseline',async t=>{
+ const f=fixture(),store=await f.initialized();await store.read();const old=structuredClone(f.raw.pages);
+ await store.transact(state=>{state.activities.A.state='completing'});const current=structuredClone(f.raw.pages),digests=countDigests(t);
+ f.raw.pages=old;await assert.rejects(store.read(),/known-head-regression/);
+ f.raw.pages=current;const before=digests();assert.equal((await store.read()).activities.A.state,'completing');assert.ok(digests()>before,'an ACK must not seed a verified read projection');
+ const verified=digests();await store.read();assert.equal(digests(),verified);
+});
+
+test('an old read can hit its earlier memo after a newer ACK without lowering the high-water mark',async t=>{
+ const f=await overlappingFixture();await f.store.read();const gate=f.holdRead(),pending=f.store.read();await gate.captured.promise;
+ await f.store.transact(state=>{state.sessions.FAST={status:'recording'}});const digests=countDigests(t);gate.release.resolve();assert.deepEqual(await pending,seed());assert.equal(digests(),0);
+ f.raw.pages.pop();await assert.rejects(f.store.read(),/known-head-regression/);
+});
+
+test('an overlapping old full projection cannot overwrite the newer verified memo',async t=>{
+ const f=await overlappingFixture();await f.store.read();const gate=f.holdRead(),pending=f.store.read();await gate.captured.promise;
+ await f.store.transact(state=>{state.sessions.FAST={status:'recording'}});await f.store.read();gate.release.resolve();assert.deepEqual(await pending,seed());
+ const digests=countDigests(t);assert.equal((await f.store.read()).sessions.FAST.status,'recording');assert.equal(digests(),0);
+ f.raw.pages.pop();await assert.rejects(f.store.read(),/known-head-regression/);
+});
+
+test('an older read of page text cannot overwrite the latest verified pages at the same revision',async t=>{
+ const f=await overlappingFixture();f.raw.pages[0].text={content:'old'};await f.store.read();const gate=f.holdRead(),pending=f.store.read();await gate.captured.promise;
+ f.raw.pages[0].text.content='new';await f.store.read();gate.release.resolve();assert.deepEqual(await pending,seed());
+ const digests=countDigests(t);await f.store.read();assert.equal(digests(),0);
+});

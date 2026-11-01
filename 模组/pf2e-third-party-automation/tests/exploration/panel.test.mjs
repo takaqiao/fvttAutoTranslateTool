@@ -61,12 +61,12 @@ const actions=html=>[...html.matchAll(/data-recovery="([^"]+)"/g)].map(match=>ma
 function mainActions(html){const main=html.match(/<div class="recovery-actions recovery-main-actions">([\s\S]*?)<\/div>/);assert.ok(main,'the main actions must be distinct from optional controls');assert.doesNotMatch(main[1],/disabled/);return actions(main[1])}
 test('idle recovery exposes one start action while keeping its saved controls in closed advanced options',async t=>{
  const f=checkpointPanelFixture(t,{status:'complete'}),html=await f.app._renderHTML(await f.app._prepareContext());
- assert.deepEqual(mainActions(html),['start']);assert.match(html,/data-recovery="start">掷骰恢复并推进时间/);
+ assert.deepEqual(mainActions(html),['start']);assert.match(html,/data-recovery="start">计算恢复并推进时间/);
  const advanced=html.match(/<details class="recovery-advanced"><summary>[^<]+<\/summary>([\s\S]*?)<\/details>\s*<details class="recovery-more">/);assert.ok(advanced,'advanced options must start collapsed, including their nested disclosures');
- for(const name of ['wounded','failureStop','failureLimit','activityFirstRound','risky','focus','extension','assurance','rank','budget','activityBudget'])assert.match(advanced[1],new RegExp(`name="${name}"`));
+ for(const name of ['wounded','failureStop','failureLimit','risky','focus','extension','rank','budget','activityBudget'])assert.match(advanced[1],new RegExp(`name="${name}"`));
  assert.match(advanced[1],/data-target-mode/);assert.match(advanced[1],/data-target-value/);
  assert.match(html,/<ul class="recovery-member-summary">[\s\S]*?<\/ul>[\s\S]*?<details class="recovery-advanced">/);
- assert.match(advanced[1],/<table class="recovery-members">/);assert.match(advanced[1],/class="recovery-policy-grid"/);assert.match(advanced[1],/<details class="recovery-target-preview">/);assert.match(advanced[1],/<details class="recovery-initial-actions"[^>]*>/);
+ assert.match(advanced[1],/<table class="recovery-members">/);assert.match(advanced[1],/class="recovery-policy-grid"/);assert.match(advanced[1],/<details class="recovery-target-preview">/);
  const more=html.match(/<details class="recovery-more"><summary>更多操作<\/summary>([\s\S]*?)<\/details>/);assert.ok(more);assert.deepEqual(actions(more[1]),['refresh']);assert.doesNotMatch(html,/manualFirstRound|首轮等待手动治疗|记录手动行动/);
 });
 test('unprepared storage shows preparation instead of disabled recovery actions',async t=>{
@@ -87,10 +87,10 @@ test('a session stopped by an encounter reports the stop in Chinese',async t=>{
  const f=checkpointPanelFixture(t,{status:'paused'});f.data.session.stopReason='encounter-started';
  const html=await f.app._renderHTML(await f.app._prepareContext());assert.match(html,/<p class="recovery-time"[^>]*>[^<]*遭遇已开始，恢复已停止/);assert.doesNotMatch(html,/encounter-started/);
 });
-test('running recovery shows only stop and the current checkpoint continuation as primary actions',async t=>{
+test('running recovery only offers stop even if an old checkpoint remains saved',async t=>{
  const f=checkpointPanelFixture(t);assert.deepEqual(mainActions(await f.app._renderHTML(await f.app._prepareContext())),['stop']);
  f.data.session.activityCheckpoint={id:'A',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:0,phase:'open',registrations:{}};
- assert.deepEqual(mainActions(await f.app._renderHTML(await f.app._prepareContext())),['closeActivityCheckpoint','stop']);
+ assert.deepEqual(mainActions(await f.app._renderHTML(await f.app._prepareContext())),['stop']);
 });
 test('paused sessions keep review exits visible and expose resume only after evidence is resolved',async t=>{
  const f=checkpointPanelFixture(t,{status:'paused'});f.data.session.stopReason='time-effects-unconfirmed';f.data.clocks=[{id:'T',state:'uncertain',from:0,to:600,reason:'time-effects-unconfirmed'}];
@@ -143,14 +143,14 @@ test('accepting the current state requires confirmation and binds the displayed 
 function checkpointPanelFixture(t,{status='running'}={}){
  const previous=globalThis.foundry;t.after(()=>{globalThis.foundry=previous});globalThis.foundry={applications:{api:{ApplicationV2:class{render(){return this}}}}};
  const actors=[{actorUUID:'Actor.H',name:'H',hp:{value:20,max:20},focus:{value:1,max:1},pool:{poolUUID:'Actor.H',ready:true},wardCapacity:1}],calls=[];
- const data={session:{id:'S',status,manual:false,startedAt:0,cursorAt:0,goalsByPool:[{poolUUID:'Actor.H',targetHP:20}]},actors,activities:[],clocks:[]};
+ const data={session:{id:'S',status,executionMode:'computed-v1',manual:false,startedAt:0,cursorAt:0,goalsByPool:[{poolUUID:'Actor.H',targetHP:20}]},actors,activities:[],clocks:[]};
  const game={user:{isGM:true,getFlag:()=>({}),setFlag:async()=>{}},messages:new Map()},coordinator={snapshot:async()=>data};
  const api=panelUI.createRecoveryPanel({game,coordinator,capabilities:{snapshot:async()=>actors},start:async config=>calls.push(['start',config]),getSessionId:()=> 'S'}),app=api.open(['Actor.H']);return {app,data,calls,game};
 }
-test('the first-round registration choice reaches start while ordinary starts remain the default',async t=>{
+test('stale first-round and Assurance controls do not enter a new computed start',async t=>{
  const f=checkpointPanelFixture(t,{status:'complete'}),values={budget:{value:'10'},activityBudget:{value:'2'},risky:{checked:false},focus:{checked:true},extension:{checked:false},assurance:{checked:false},rank:{value:'trained'},activityFirstRound:{checked:true}},content={querySelector:selector=>values[selector.match(/name=(\w+)/)[1]],querySelectorAll:()=>[{dataset:{pool:'Actor.H'},value:'20'}]};
- await f.app.act('start',content);assert.equal(f.calls[0][1].waitForActivityFirstRound,true);values.activityFirstRound.checked=false;await f.app.act('start',content);assert.equal(f.calls[1][1].waitForActivityFirstRound,false);
- for(const [,config] of f.calls){assert.equal(Object.hasOwn(config,'manual'),false);assert.equal(Object.hasOwn(config,'waitForManualFirstRound'),false)}
+ await f.app.act('start',content);assert.equal(f.calls[0][1].recoveryStrategy,'success-first');values.activityFirstRound.checked=false;await f.app.act('start',content);
+ for(const [,config] of f.calls){for(const key of ['manual','waitForManualFirstRound','waitForActivityFirstRound','useAssurance'])assert.equal(Object.hasOwn(config,key),false)}
 });
 
 function declarationDialog(t,values,{action='record'}={}){
@@ -172,10 +172,11 @@ test('a failed checkpoint form submission retains its exact registration for loo
  declarationDialog(t,{actor:'Actor.A',label:'Repair',duration:'1',unit:'60',durationSource:'user-declared',durationDetail:'',notBefore:'',order:'',dependsOn:[]});const binding={id:'C',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:0},error=Error('revision-acknowledgement-unknown');let calls=0;
  await assert.rejects(panelUI.promptActivityDeclaration({actors:[{actorUUID:'Actor.A',name:'A'}],window:{binding,phase:'open'},record:async()=>{calls++;throw error}}),caught=>{assert.equal(caught,error);assert.deepEqual(caught.declaration.checkpointBinding,binding);assert.equal(typeof caught.declaration.registrationId,'string');return true});assert.equal(calls,1);
 });
-test('the GM panel requests and seals the current generic window without requiring another player',async t=>{
+test('the GM panel refuses opening or sealing a saved legacy recovery window',async t=>{
  const f=checkpointPanelFixture(t);f.data.session.activityCheckpoint={id:'A',sessionId:'S',rootUUID:'JournalEntry.ROOT',epoch:'E',observationNonce:'N',from:0,phase:'open',registrations:{}};f.data.session.budgetEndsAt=1200;
  const coordinatorCalls=[];const api=panelUI.createRecoveryPanel({game:{user:{isGM:true,getFlag:()=>({})},messages:new Map()},coordinator:{snapshot:async()=>f.data,openActivityCheckpoint:async id=>coordinatorCalls.push(['open',id]),closeActivityCheckpoint:async b=>coordinatorCalls.push(['close',b])},capabilities:{snapshot:async()=>f.data.actors},getSessionId:()=> 'S'}),app=api.open(['Actor.H']);
- assert.match(await app._renderHTML(await app._prepareContext()),/data-recovery="closeActivityCheckpoint"/);await app.act('closeActivityCheckpoint',null);assert.equal(coordinatorCalls[0][0],'close');assert.equal(coordinatorCalls[0][1].to,undefined);f.data.session.activityCheckpoint.phase='settled';await app.act('openActivityCheckpoint',null);assert.deepEqual(coordinatorCalls[1],['open','S']);
+ delete f.data.session.executionMode;
+ assert.doesNotMatch(await app._renderHTML(await app._prepareContext()),/data-recovery="closeActivityCheckpoint"/);await assert.rejects(app.act('closeActivityCheckpoint',null),/登记/);f.data.session.activityCheckpoint.phase='settled';await assert.rejects(app.act('openActivityCheckpoint',null),/登记/);assert.deepEqual(coordinatorCalls,[]);
 });
 test('checkpoint history separates accounted time from unverified rule effects',()=>{
  const data=historyFixture();data.activities[0]={...data.activities[0],providerId:'manual',source:{type:'user-record'},temporalSource:{type:'checkpoint-declaration'},durationSeconds:300,state:'confirmed'};assert.match(panelUI.renderRecoveryHistory(data),/时间已计入.*规则效果未核验/);

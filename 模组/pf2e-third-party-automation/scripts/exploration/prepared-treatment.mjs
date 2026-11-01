@@ -14,6 +14,11 @@ const assuranceSelector='{item|flags.system.rulesSelections.assurance}';
 function canonical(value){return Array.isArray(value)?value.map(canonical):value&&typeof value==='object'?Object.fromEntries(Object.keys(value).sort().map(key=>[key,canonical(value[key])])):value}
 const same=(a,b)=>JSON.stringify(canonical(a))===JSON.stringify(canonical(b));
 const fail=reason=>{throw Error(reason)};
+const speedDomains=new Set(['speed','land-speed','fly-speed','swim-speed','climb-speed','burrow-speed']);
+function unrelatedAdjustment(rule,domains){
+ const selectors=Array.isArray(rule.selector)?rule.selector:[rule.selector];
+ return selectors.length>0&&selectors.every(selector=>typeof selector==='string'&&!selector.includes('{')&&(domains?!domains.has(selector):speedDomains.has(selector)));
+}
 const itemSource=item=>canonicalItemSource(sourceId(item));
 function originalRules(item){
  // PF2e adds schema defaults and normalizes selectors in the prepared rules.
@@ -48,7 +53,7 @@ function knownSuppress(adjustment){
  const keys=Object.keys(adjustment).filter(key=>key!=='applications').sort();
  return same(keys,['getDamageType','getNewValue','slug','suppress','test'])&&adjustment.slug===null&&adjustment.suppress===true&&['test','getNewValue','getDamageType'].every(key=>typeof adjustment[key]==='function');
 }
-function projection({game,actor,skill,slugs,riskySurgery,assurance,source}){
+function projection({game,actor,skill,slugs,riskySurgery,assurance,source,context={}}){
  if(game.system?.id!=='pf2e'||typeof game.system.version!=='string'||!game.system.version||typeof game.pf2e?.CheckModifier!=='function')fail('native-estimate-api-unverified');
  if(slugs.some(slug=>['magic-hands','mortal-healing'].includes(slug)))fail('native-healing-model-unverified');
  const items=values(actor.items).filter(item=>!item.isSuppressed&&!item.system?.suppressed);
@@ -62,32 +67,40 @@ function projection({game,actor,skill,slugs,riskySurgery,assurance,source}){
 
  // The first check getter can construct StatisticCheck and run adjustments.
  // Establish source safety before reading that getter or a statistic's mod.
- const synthetics=actor.synthetics??{},rules=values(actor.rules).filter(rule=>!rule.ignored);
+ const synthetics=actor.synthetics??{},rules=values(actor.rules).filter(rule=>!rule.ignored),stat=actor.getStatistic?.(skill);
+ const statisticDomains=Object.getOwnPropertyDescriptor(stat??{},'domains')?.value,statisticData=Object.getOwnPropertyDescriptor(stat??{},'data')?.value;
+ const anticipatedDomains=Array.isArray(statisticDomains)?new Set([...statisticDomains,...statisticData?.check?.domains??[],'check',`${stat.slug??skill}-check`]):null;
  if(rules.filter(rule=>rule.key==='AdjustModifier'&&matching.includes(rule.item)).length!==matching.length)fail('native-assurance-rule-unverified');
  for(const [domain,entries] of Object.entries(synthetics.modifierAdjustments??{})){
+  if(anticipatedDomains?!anticipatedDomains.has(domain):speedDomains.has(domain))continue;
   const expected=assuranceItems.filter(item=>assuranceSkill(item)===domain);
   if(!Array.isArray(entries)||entries.length!==expected.length||entries.some(entry=>!knownSuppress(entry)))fail('native-modifier-adjustment-unverified');
  }
  for(const rule of rules){
-  if(rule.key==='AdjustModifier'&&!assuranceItems.includes(rule.item))fail('native-adjustment-source-unverified');
+  if(rule.key==='AdjustModifier'&&!assuranceItems.includes(rule.item)&&!unrelatedAdjustment(rule,anticipatedDomains))fail('native-adjustment-source-unverified');
   if(typeof rule.beforeRoll==='function'&&rule.key!=='RollOption'&&!(rule.key==='ActiveEffectLike'&&rule.phase!=='beforeRoll'))fail('native-before-roll-unverified');
  }
 
  // Read the already prepared statistic. Constructing another Statistic can run
  // modifier adjustment closures before we have established their safety.
- const stat=actor.getStatistic?.(skill),check=stat?.check,domains=check?.domains;
+ const check=stat?.check,domains=check?.domains;
  if(!Number.isInteger(stat?.rank)||stat.rank<1||stat.rank>4||!Array.isArray(domains)||!domains.includes(skill)||!Array.isArray(check.modifiers))fail('native-statistic-unverified');
- const extra=[...actor.getRollOptions(['all','skill-check','medicine']),'action:treat-wounds',`check:statistic:${skill}`,'check:type:skill',...['exploration','healing','manipulate'].flatMap(trait=>[trait,`item:trait:${trait}`])];
+ const extra=[...actor.getRollOptions(context.rollDomains??['all','skill-check','medicine']),'action:treat-wounds',`check:statistic:${skill}`,'check:type:skill',...(context.traits??['exploration','healing','manipulate']).flatMap(trait=>[trait,`item:trait:${trait}`]),...context.extraRollOptions??[]];
  if(stat.base?.slug)extra.push(`check:statistic:base:${stat.base.slug}`);
- const options=check.createRollOptions({origin:actor,extraRollOptions:extra});
- if(!(options instanceof Set)||options.has('fortune')||options.has('misfortune'))fail('native-roll-options-unverified');
+ const initialOptions=check.createRollOptions({origin:actor,extraRollOptions:extra,...context.item?{item:context.item}:{}});
+ if(!(initialOptions instanceof Set)||initialOptions.has('fortune')||initialOptions.has('misfortune'))fail('native-roll-options-unverified');
+ const options=new Set(initialOptions);
  if(skill!=='medicine'&&options.has('risky-surgery'))fail('native-nature-risky-context-unverified');
  for(const rule of rules){
-  if(rule.key==='AdjustModifier'&&!assuranceItems.includes(rule.item))fail('native-adjustment-source-unverified');
+  if(rule.key==='AdjustModifier'&&!assuranceItems.includes(rule.item)&&!unrelatedAdjustment(rule,new Set(domains)))fail('native-adjustment-source-unverified');
   if(typeof rule.beforeRoll!=='function')continue;
   if(rule.key==='ActiveEffectLike'&&rule.phase!=='beforeRoll')continue;
   if(rule.key==='RollOption'&&typeof rule.domain==='string'&&!rule.domain.includes('{')&&!domains.includes(rule.domain))continue;
   if(rule.key==='RollOption'&&rule.domain==='medicine'&&rule.option==='risky-surgery'&&typeof rule.value==='boolean'&&!rule.suboptions?.length&&riskyItems.includes(rule.item))continue;
+  if(rule.key==='RollOption'&&typeof rule.domain==='string'&&!rule.domain.includes('{')&&typeof rule.option==='string'&&/^[a-z0-9:-]+$/.test(rule.option)&&typeof rule.value==='boolean'&&!rule.suboptions?.length&&!rule.selection&&!rule.count&&rule.toggleable!=='totm'&&(!rule._source||rule._source.option===rule.option)&&(!rule.alwaysActive||rule.value)){
+   if(testPredicate(rule.predicate,options,game)){if(rule.value)options.add(rule.option);else options.delete(rule.option)}
+   continue;
+  }
   fail('native-before-roll-unverified');
  }
  if(riskySurgery)options.add('risky-surgery');else if(skill==='medicine')options.delete('risky-surgery');
@@ -125,10 +138,10 @@ function projection({game,actor,skill,slugs,riskySurgery,assurance,source}){
 }
 
 /** Prepare only source-verified, side-effect-free variants of the native check. */
-export function preparedTreatmentSelections({game,actor,skill,slugs=[]}){
+export function preparedTreatmentSelections({game,actor,skill,slugs=[],context={}}){
  const source={actorUUID:actor.uuid,skill,ruleSources:[...new Set(values(actor.rules).filter(rule=>!rule.ignored).map(rule=>rule.item?.uuid).filter(uuid=>typeof uuid==='string'))]};
  return [false,true].flatMap(riskySurgery=>[false,true].map(assurance=>{
-  try{return projection({game,actor,skill,slugs,riskySurgery,assurance,source})}
+  try{return projection({game,actor,skill,slugs,riskySurgery,assurance,source,context})}
   catch(error){return {riskySurgery,assurance,ready:false,reason:error.message,sourceVersion:String(game.system?.version??''),source}}
  }));
 }
