@@ -61,10 +61,9 @@ test('ordinary, forced, initial and create/delete renders keep the native path',
   await e.render(e.movement(undefined,{force:true}));assert.notEqual(e.elements[0],entry);
 });
 
-test('search, elevation, hidden and locked filters retain the same results without replacing entries',async()=>{
+test('search, hidden and locked filters retain the same results without replacing entries',async()=>{
   for(const configure of [
     e=>{e.tab._searchFilter.rgx=/^b$/;},
-    e=>{e.documents[0].elevation=0;e.documents[1].elevation=20;e.tab._filterState.elevation.bottom=10;},
     e=>{e.documents[0].hidden=true;e.tab._filterState.hidden=false;},
     e=>{e.documents[0].locked=true;e.tab._filterState.locked=false;}
   ]){
@@ -72,6 +71,21 @@ test('search, elevation, hidden and locked filters retain the same results witho
     assert.equal(e.elements[0],entry);assert.deepEqual(e.elements.map(row=>row.hidden),[true,false]);
     assert.deepEqual([...e.tab._filterState.visible],[e.documents[1]]);
   }
+});
+
+test('height filters and filter dialogs preserve native deactivation and rebuilding',async()=>{
+ for(const state of ['height','dialog','both']){
+  const e=await installed(),entry=e.elements[0];let closed=0;
+  e.documents[0].elevation=0;e.documents[1].elevation=20;
+  if(state!=='dialog')e.tab._filterState.elevation={bottom:10,top:30};
+  if(state!=='height')e.tab._filterState.dialog={close(){closed++;return Promise.resolve();}};
+  await e.render();
+  assert.notEqual(e.elements[0],entry,state+' must use the native render');
+  assert.equal(e.tab._filterState.elevation.bottom,-Infinity);
+  assert.equal(e.tab._filterState.elevation.top,Infinity);
+  assert.deepEqual(e.elements.map(row=>row.hidden),[false,false]);
+  assert.equal(closed,state==='height'?0:1);
+ }
 });
 
 test('a changed visible membership rebuilds the directory for GM and player',async()=>{
@@ -136,7 +150,7 @@ test('unknown preparation and render consumers prevent installation or delegate 
   if(baseline)return;
   for(const [owner,name] of [['PlaceableDirectory','_canRender'],['PlaceableDirectory','_prepareContext'],
     ['PlaceableDirectory','_onRender'],['PlaceableDirectory','_renderTab'],['PlaceableTab','_prepareEntry'],
-    ['PlaceableTab','_prepareDirectoryContext'],['PlaceableTab','_getEntryLabel'],['PlaceableTab','_onRender'],
+    ['PlaceableTab','_prepareDirectoryContext'],['PlaceableTab','_getEntryLabel'],['PlaceableTab','_onRender'],['PlaceableTab','_onDeactivateTab'],
     ['TokenTab','_prepareEntry'],['TokenTab','_prepareDirectoryContext'],['PlaceableTab','_applyFilters'],
     ['AbstractSidebarTab','render'],['ApplicationV2','render']]){
     const e=directoryEnvironment();e.classes[owner].prototype[name]=function(){return true;};
@@ -158,7 +172,7 @@ test('new overrides of inherited render or presentation methods keep their side 
   if(baseline)return;
   for(const [owner,name] of [['TokenTab','_getEntryLabel'],['TokenTab','_applyFilters'],['TokenTab','render'],
     ['PlaceableDirectory','render'],['TokenTab','_preparePartContext'],['TokenTab','_prepareSearchContext'],
-    ['TokenTab','_configureRenderParts']]){
+    ['TokenTab','_configureRenderParts'],['TokenTab','_onDeactivateTab']]){
     const e=directoryEnvironment();e.classes[owner].prototype[name]=function(){return 'custom';};
     assert.equal(install({runtime:e.runtime}).status,'unsupported-source',`${owner}.${name}`);
     const after=await installed();after.tab[name]=function(){return 'custom';};
@@ -206,7 +220,7 @@ test('guard-read failures delegate, and native filter failures still propagate',
   e.tab.element.querySelectorAll=()=>{throw Error('DOM unavailable');};
   assert.equal(e.canRender(),true);e.tab.element.querySelectorAll=query;
   const failure=Error('filter state unavailable');
-  Object.defineProperty(e.tab._filterState,'elevation',{get(){throw failure;}});
+  e.tab.schema.getField=()=>{throw failure;};
   assert.throws(()=>wrapper.call(e.directory,()=>true,e.movement()),error=>error===failure);
   assert.equal(e.elements[0],entry);
 });

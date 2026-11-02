@@ -96,6 +96,10 @@
     "PlaceableTab._configureRenderParts": {
       "line": 139728,
       "sha256": "ae92fc9cf0791fd01ca7899fab433398253180ad62b61e7bbfb9304ef72c6983"
+    },
+    "PlaceableTab._onDeactivateTab": {
+      "line": 140074,
+      "sha256": "d3568d4d11672db0a08b470d5b2b42d2fc86e9aa17b7cd46afc79a50cf89c179"
     }
   },
   "methods": {
@@ -121,6 +125,7 @@
     "TokenTab._prepareEntry": "async _prepareEntry(entry, context) {\n    context = await super._prepareEntry(entry, context);\n    context.levelId = entry.level;\n    return context;\n  }",
     "PlaceableTab._preparePartContext": "async _preparePartContext(partId, context, options) {\n    context = await super._preparePartContext(partId, context, options);\n    switch ( partId ) {\n      case \"directory\": return this._prepareDirectoryContext(context, options);\n      case \"search\": return this._prepareSearchContext(context, options);\n    }\n    return context;\n  }",
     "PlaceableTab._prepareSearchContext": "async _prepareSearchContext(context, options) {\n    const hasLevels = (this.schema.has(\"levels\") || this.schema.has(\"level\")) && (canvas.scene?.levels.size > 1);\n    const canCreate = this.collectionName === \"regions\";\n    const { label, labelPlural } = this.documentClass.metadata;\n    context.labels = {\n      create: _loc(\"SIDEBAR.Create\", { type: _loc(label) }),\n      placeholder: _loc(\"SIDEBAR.PLACEABLES.Search.placeholder\", { name: _loc(labelPlural) })\n    };\n    const { elevation, levels } = this._filterState;\n    const state = foundry.utils.mergeObject(this._filterState, {\n      filteredByLevel: !!levels.size\n    }, { inplace: false });\n    const filters = [\n      {\n        action: \"filterViewed\",\n        active: PlaceableTab.#filterViewed,\n        cssClass: \"fa-solid fa-image\",\n        tooltip: \"SIDEBAR.PLACEABLES.Filter.Viewed\"\n      },\n      {\n        action: \"filterByLevel\",\n        active: state.filteredByLevel,\n        cssClass: \"fa-solid fa-layer-group\",\n        tooltip: \"SIDEBAR.PLACEABLES.Filter.Level\"\n      },\n      {\n        action: \"openFilter\",\n        active: Number.isFinite(elevation.bottom) || Number.isFinite(elevation.top),\n        cssClass: \"fa-solid fa-filter\",\n        tooltip: \"SIDEBAR.PLACEABLES.Filter.Tooltip\"\n      }\n    ];\n    Object.assign(context, { canCreate, filters, hasLevels, state });\n    return context;\n  }",
-    "PlaceableTab._configureRenderParts": "_configureRenderParts(options) {\n    const parts = super._configureRenderParts(options);\n    parts.directory.templates.push(this.constructor.DIRECTORY_PARTIAL, this.constructor.ENTRY_PARTIAL);\n    return parts;\n  }"
+    "PlaceableTab._configureRenderParts": "_configureRenderParts(options) {\n    const parts = super._configureRenderParts(options);\n    parts.directory.templates.push(this.constructor.DIRECTORY_PARTIAL, this.constructor.ENTRY_PARTIAL);\n    return parts;\n  }",
+    "PlaceableTab._onDeactivateTab": "_onDeactivateTab() {\n    this._filterState.elevation = { bottom: -Infinity, top: Infinity };\n    this._filterState.visible.clear();\n    this._filterState.dialog?.close();\n    // Preserve filtered levels when moving between tabs.\n  }"
   }
 }

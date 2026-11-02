@@ -49,7 +49,6 @@ export function directoryEnvironment({gm=true,mutateSource=source=>source}={}){
       static #filterViewed=true;
       constructor(options){super();this.options=options;}
       ${methods('PlaceableTab')}
-      _onDeactivateTab(){}
       _onDragStart(){}
       _onHoverInEntry(){}
       _onHoverOutEntry(){}

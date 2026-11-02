@@ -91,6 +91,12 @@ const SOURCES={
     context.locked = entry.locked;
     return context;
   }`,
+  "PlaceableTab._onDeactivateTab": `_onDeactivateTab() {
+    this._filterState.elevation = { bottom: -Infinity, top: Infinity };
+    this._filterState.visible.clear();
+    this._filterState.dialog?.close();
+    // Preserve filtered levels when moving between tabs.
+  }`,
   "PlaceableTab._onRender": `async _onRender(context, options) {
     await super._onRender(context, options);
     new DragDrop.implementation({
@@ -263,7 +269,7 @@ const expected=new Map(Object.entries(SOURCES).map(([name,source])=>[name,tokens
 const directoryMethods={render:'AbstractSidebarTab',_prepareContext:'PlaceableDirectory',_onRender:'PlaceableDirectory',
   _renderTab:'PlaceableDirectory'};
 const tabMethods={render:'ApplicationV2',_prepareDirectoryContext:'TokenTab',_prepareEntry:'TokenTab',
-  _getEntryLabel:'PlaceableTab',_onRender:'PlaceableTab',_applyFilters:'PlaceableTab',_matchesFilter:'PlaceableTab',
+  _getEntryLabel:'PlaceableTab',_onRender:'PlaceableTab',_onDeactivateTab:'PlaceableTab',_applyFilters:'PlaceableTab',_matchesFilter:'PlaceableTab',
   _hasAdvancedFilters:'PlaceableTab',_getPlaceableFromElement:'PlaceableTab',_preparePartContext:'PlaceableTab',
   _prepareSearchContext:'PlaceableTab',_configureRenderParts:'PlaceableTab'};
 
@@ -333,6 +339,9 @@ export function installTokenDirectoryPerformancePatch({moduleId='av-v14-hotfix',
       ||scene.apps?.[directory.id]!==directory||canvas.activeLayer?.options.name!=='tokens'
       ||directory.tabGroups?.sheet!=='tokens'||tab.collectionName!=='tokens'||tab.layer!==canvas.tokens
       ||tab.options.directory!==directory)return false;
+    // Native _renderTab resets height filters and closes their dialog before rebuilding.
+    const {elevation,dialog}=tab._filterState;
+    if(elevation?.bottom!==-Infinity||elevation?.top!==Infinity||dialog)return false;
     if(directoryConsumers.some(([name,fn])=>directory[name]!==fn)||tabConsumers.some(([name,fn])=>tab[name]!==fn))return false;
     for(const {prototype,name,fn,getter} of records){
       if(name==='_canRender')continue; // libWrapper owns this descriptor after registration.
