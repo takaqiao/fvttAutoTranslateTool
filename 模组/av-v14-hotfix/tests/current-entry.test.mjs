@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 const source=fs.readFileSync(new URL('../av-v14-hotfix.mjs',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,'').replaceAll('import.meta.url',JSON.stringify(new URL('../av-v14-hotfix.mjs',import.meta.url).href));
-const names=['prepareSundryPatch','prepareTurnLifecyclePatch','registerLegacyCompat','installGrid','installSundryPatch','installPatreonPatch','installDurationPatch','installTimestampPatch','installItemNameFastPath','installChatDeleteCoalescing','installTokenizerChatPortraitPatch','installSoundStopPatch','installWayfinderFogPatch','installBbmmHardLocks','registerDsnQualitySettings','installDsnQualityLocks','installTurnLifecyclePatch','installDsnChatRecovery','registerBabeleIndex','installTokenDirectoryPerformancePatch'];
+const names=['prepareSundryPatch','prepareTurnLifecyclePatch','registerLegacyCompat','installGrid','installSundryPatch','installPatreonPatch','installDurationPatch','installTimestampPatch','installItemNameFastPath','installChatDeleteCoalescing','installTokenizerChatPortraitPatch','installSoundStopPatch','installWayfinderFogPatch','installBbmmHardLocks','registerDsnQualitySettings','installDsnQualityLocks','installTurnLifecyclePatch','installDsnChatRecovery','registerBabeleIndex','installTokenDirectoryPerformancePatch','installCalendariaHudPatch'];
 async function boot(disabled=[],generation=14,{globals={},modules=[],manual=false,throwOnError=true}={}){
  const hooks={},tasks=[],settings=new Map(),calls=[],phases=[],self={},logs=[];let phase='load';
  const log=level=>(...args)=>{logs.push({level,text:String(args[0]),args});if(level==='error'&&throwOnError)throw Error(args.join(' '));};
@@ -34,7 +34,7 @@ test('retired index, duration and adventure-setting repairs keep a reason but no
  assert(!f.calls.includes('installDurationPatch'));assert(!f.calls.includes('registerBabeleIndex'));
  assert.equal(Object.hasOwn(f.status,'babele'),false);
  for(const file of ['../scripts/patches/babele.mjs','../scripts/patches/duration.mjs'])assert.equal(fs.existsSync(new URL(file,import.meta.url)),false,file);
- assert.deepEqual([...f.settings.keys()].sort(),['chat','dsnChat','dsnQualityLocks','itemNames','legacy','soundStop','sundry','timestamps','tokenDirectory','tokenizerChat','turnLifecycle']);
+ assert.deepEqual([...f.settings.keys()].sort(),['calendariaHud','chat','dsnChat','dsnQualityLocks','itemNames','legacy','soundStop','sundry','timestamps','tokenDirectory','tokenizerChat','turnLifecycle']);
 });
 test('every imported module file exists and exports the names the entry uses',async()=>{
  const entry=fs.readFileSync(new URL('../av-v14-hotfix.mjs',import.meta.url),'utf8');
@@ -86,6 +86,16 @@ test('the timestamp wrapper registers synchronously in setup, before the awaited
 test('ready installs run in order, each exactly once, after setup',async()=>{
  const f=await boot(),ready=f.phases.filter(call=>call.phase==='ready-async').map(call=>call.name);
  assert.deepEqual(ready,['installItemNameFastPath','prepareSundryPatch','installSundryPatch','prepareTurnLifecyclePatch','installTurnLifecyclePatch','installDsnChatRecovery','installChatDeleteCoalescing']);
+});
+
+test('Calendaria HUD optimization installs during setup and honors its reload switch',async()=>{
+ const f=await boot([],14,{globals:{installCalendariaHudPatch:reporting('calendariaHud',{status:'installed',stats:{adapted:0,skipped:0,written:0}})}});
+ assert.equal(f.settings.get('calendariaHud')?.default,true);
+ assert.equal(f.settings.get('calendariaHud')?.requiresReload,true);
+ assert.equal(f.status.patches.calendariaHud?.status,'installed');
+ const enabled=await boot();assert.deepEqual(enabled.phases.filter(call=>call.name==='installCalendariaHudPatch').map(call=>call.phase),['setup']);
+ const disabled=await boot(['calendariaHud']);assert(!disabled.calls.includes('installCalendariaHudPatch'));
+ assert.equal(disabled.status.patches.calendariaHud.status,'disabled');
 });
 
 test('token directory optimization installs during setup and honors its reload switch',async()=>{

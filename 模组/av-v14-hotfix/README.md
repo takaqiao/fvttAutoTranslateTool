@@ -1,10 +1,19 @@
-# FVTT v14 Local Hotfix 0.6.29
+# FVTT v14 Local Hotfix 0.6.30
 
 当前源码及隔离回归基线为 Foundry **14.369**、PF2e **8.6.1**、Dice So Nice **6.4.4**、BBMM **1.4.11**、Sundry **1.11.0**、Summons Assistant **2.20.3**。清单保留最低核心版本 14.367 和已验证标签 14.369，没有核心最高版本限制。运行时不按 Foundry、PF2e 或第三方模组的版本号决定装不装。每项可在世界设置中关闭，刷新后生效。该装而没装上的修正会在控制台输出一行警告并写明原因；全部状态和各项实际生效的次数见：
 
 ```js
 game.modules.get('av-v14-hotfix').api.status()
 ```
+
+## 0.6.30：日历 HUD 与 Token 目录更新
+
+- **Calendaria HUD 文本更新**（开关 `calendariaHud`）：保留 visual tick 和世界时间回调的完整执行，只在回调期间拦下时间、日期纯文本节点的同值 `textContent` 写入。秒显示、跨日、倒退、月相 HTML 和天体更新继续走 Calendaria；不隐藏 HUD，不停时钟，也不降低更新频率。
+- **原生 Token 目录移动更新**（开关 `tokenDirectory`）：已渲染的原生停靠目录收到纯 x/y 更新，且可见成员与 DOM 一致时，保留原生过滤更新，省去条目 HTML 重建。名称、隐藏、锁定、层、高度、创建删除、未知字段、混合批次、弹出目录和自定义目录继续走原生。
+
+两项默认开启，在 `setup` 同步安装，分别关闭后刷新生效。状态键与开关同名：`calendariaHud.stats` 的 `adapted` 是接管的 HUD 回调数，`skipped` / `written` 是拦下的同文写入 / 放行的写入；`tokenDirectory.stats` 的 `skipped` / `delegated` 是省去重建 / 交回原生的次数。
+
+本轮新增修正针对 Foundry 14.369、PF2e 8.6.1 和 Calendaria 1.4.8 的实际源码及隔离浏览器核验。Token 目录核对23个原生方法/getter及消费者；Calendaria核对HUD和核心Hooks契约，只接管本次HUD渲染新注册的两条回调。源码、包装链或节点结构不符时保留原路径；版本数字本身不决定是否安装。Calendaria 未启用时报告 `skipped / module-inactive`。
 
 ## 0.6.29：旧 Quench 动画的手动维护工具
 
