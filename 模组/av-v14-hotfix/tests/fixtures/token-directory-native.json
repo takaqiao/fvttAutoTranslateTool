@@ -1,0 +1,126 @@
+{
+  "coreVersion": "14.369",
+  "source": {
+    "path": "public/scripts/foundry.mjs",
+    "sha256": "4a2608414c41e114d96f6b662e9ac7120ad3beec9dbab5fa4d2920a13fa841ba"
+  },
+  "fragments": {
+    "ApplicationV2.render": {
+      "line": 30631,
+      "sha256": "090860a07a384702ac7bf46bb30160bcf7aba91cd051f7c0b5e7aa29b77b0fec"
+    },
+    "AbstractSidebarTab.render": {
+      "line": 130250,
+      "sha256": "4121f1d51aa3ea5c257f911a137564ef5439f1f10cf5429ec5482c6e38b24288"
+    },
+    "AbstractSidebarTab.isPopout": {
+      "line": 130188,
+      "sha256": "4c47b1a4b0ba99624623318f7c4cb9960ebf6c904a3465d0945858699ab4ebab"
+    },
+    "PlaceableDirectory.tab": {
+      "line": 142631,
+      "sha256": "e32031c5925bfbf0f5ebdc254853079b627c8d91d50ea9f98924a471f45a8595"
+    },
+    "PlaceableDirectory._canRender": {
+      "line": 142650,
+      "sha256": "a2e5fc29f3d7acc14cca383d81ca3e851ab8c88b6698989ef3b4dce851c5338b"
+    },
+    "PlaceableDirectory._onRender": {
+      "line": 142699,
+      "sha256": "afebd1a03b0d13068f2a23f5e0cea03ee9b5097473b2b07c2fc73d7ee6fc16b7"
+    },
+    "PlaceableDirectory._prepareContext": {
+      "line": 142708,
+      "sha256": "2aafab36e6d32189fff4a1c130608033e182c33333d98478f7e51df10e6e453a"
+    },
+    "PlaceableDirectory._renderTab": {
+      "line": 142726,
+      "sha256": "5dd992ba329ed2e43e1828c526ea5db1fcd6f78c29157f621668dcbb68aed8f5"
+    },
+    "PlaceableTab.collectionName": {
+      "line": 139595,
+      "sha256": "71dbff33e99a23dc4972178caffe31fb1d3f24a605f6739af31f917015461cab"
+    },
+    "PlaceableTab.layer": {
+      "line": 139615,
+      "sha256": "d1b1bf020a932d50f1e19e53eeaf5d6a7e3b268fc684ae69ce408a3a9851e9f5"
+    },
+    "PlaceableTab._getEntryLabel": {
+      "line": 139742,
+      "sha256": "fbffba1bccc0365941d9efe96786c82ba5ba722ac54ff60934aa825f242a2c05"
+    },
+    "PlaceableTab._prepareDirectoryContext": {
+      "line": 139766,
+      "sha256": "976e1c609f469c5951753a0152961624075d2d7b3525644e52ada41c64f94744"
+    },
+    "PlaceableTab._prepareEntry": {
+      "line": 139792,
+      "sha256": "c652d33ea54d0aa094c29669641a5eb543e2671dd6a2c19cd6b8dc2bb310be6c"
+    },
+    "PlaceableTab._onRender": {
+      "line": 140211,
+      "sha256": "5577aa57b14f785c35b295271d29beedb946114bdfad6d9f3f400f070be49eb8"
+    },
+    "PlaceableTab._applyFilters": {
+      "line": 140294,
+      "sha256": "d53bb769c2abbd22ddc964e7a9c7581d7baa8091f51658b41131ab7433f06475"
+    },
+    "PlaceableTab._matchesFilter": {
+      "line": 140357,
+      "sha256": "2a1d026714db8a46ac0bc54ce1ee51d4fd2a03e5d3f4cdb21fc1da3f2a24716e"
+    },
+    "PlaceableTab._hasAdvancedFilters": {
+      "line": 140368,
+      "sha256": "eb73d5954958f949b7b8f27288fafc659a4835feb5db203da0f17d0038a98b48"
+    },
+    "PlaceableTab._getPlaceableFromElement": {
+      "line": 140396,
+      "sha256": "0f83fbf8719f6c4ef643aeaa03ff172ef3f81a256b5941919bdd4602176414e5"
+    },
+    "TokenTab._prepareDirectoryContext": {
+      "line": 144225,
+      "sha256": "bd8ee3aeb60338685d46605e4eeea887cf1d9635301e2f23a3c8448f6db8721b"
+    },
+    "TokenTab._prepareEntry": {
+      "line": 144252,
+      "sha256": "7d45559eb60290947e8fbe6e4fd4748c28095adf2c5aac58a3d1fc8d12cca990"
+    },
+    "PlaceableTab._preparePartContext": {
+      "line": 139801,
+      "sha256": "3c5bde24ddfb7bff5537f13bd787c29a38e3e5d30d720408f4a94b7a3bef0646"
+    },
+    "PlaceableTab._prepareSearchContext": {
+      "line": 139819,
+      "sha256": "335c4a2e05bbf3fc6120d89a9f07ed2505f62d9a213d275f8d396fba9bb45b05"
+    },
+    "PlaceableTab._configureRenderParts": {
+      "line": 139728,
+      "sha256": "ae92fc9cf0791fd01ca7899fab433398253180ad62b61e7bbfb9304ef72c6983"
+    }
+  },
+  "methods": {
+    "ApplicationV2.render": "async render(options={}, _options={}) {\n    if ( typeof options === \"boolean\" ) options = Object.assign(_options, {force: options});\n    return this.#semaphore.add(this.#render.bind(this), options);\n  }",
+    "AbstractSidebarTab.render": "async render(options, _options) {\n    if ( this.popout?.rendered ) this.popout.render(options, _options);\n    return super.render(options, _options);\n  }",
+    "AbstractSidebarTab.isPopout": "get isPopout() {\n    return this.options.window.frame;\n  }",
+    "PlaceableDirectory.tab": "get tab() {\n    return this.#tab;\n  }",
+    "PlaceableDirectory._canRender": "_canRender(options) {\n    if ( game.settings.get(\"core\", \"noCanvas\") ) return false;\n    const { renderContext } = options;\n    if ( !renderContext ) return true;\n    const layerName = this.tabGroups.sheet;\n    if ( !layerName ) return true;\n    const layerClass = CONFIG.Canvas.layers[layerName].layerClass;\n    const collection = foundry.utils.getDocumentClass(layerClass.documentName).metadata.collection;\n    return [`create${collection}`, `update${collection}`, `delete${collection}`].includes(renderContext);\n  }",
+    "PlaceableDirectory._onRender": "async _onRender(context, options) {\n    await super._onRender(context, options);\n    await this._renderTab(context, options);\n    if ( canvas.scene ) canvas.scene.apps[this.id] = this;\n  }",
+    "PlaceableDirectory._prepareContext": "async _prepareContext(options) {\n    await canvas.initializing;\n    const activeLayer = canvas.activeLayer?.options.name;\n    const layerClass = CONFIG.Canvas.layers[activeLayer]?.layerClass;\n    if ( CONFIG[layerClass?.documentName]?.sidebar ) this.tabGroups.sheet = activeLayer;\n    this.tabGroups.sheet ??= \"tokens\";\n    return super._prepareContext(options);\n  }",
+    "PlaceableDirectory._renderTab": "async _renderTab(context, options) {\n    this.#tab?._onDeactivateTab();\n    const tab = this.tabGroups.sheet;\n    let app = this.#tabs[tab];\n    if ( !app ) {\n      const { layerClass } = CONFIG.Canvas.layers[tab] ?? {};\n      const { sidebar } = CONFIG[layerClass?.documentName] ?? {};\n      if ( !sidebar ) return;\n      const collectionName = foundry.documents.Scene.getCollectionName(layerClass.documentName);\n      app = new sidebar.applicationClass({ collectionName, directory: this });\n      this.#tabs[tab] = app;\n    }\n    this.#tab = app;\n    await app.render({ force: true });\n    app.element.dataset.applicationPart = \"tab\";\n    const prior = this.element.querySelector(\"[data-application-part=tab]\");\n    if ( app.element !== prior ) prior.replaceWith(app.element);\n  }",
+    "PlaceableTab.collectionName": "get collectionName() {\n    return this.options.collectionName;\n  }",
+    "PlaceableTab.layer": "get layer() {\n    return canvas?.getCollectionLayer(this.collectionName);\n  }",
+    "PlaceableTab._getEntryLabel": "_getEntryLabel(entry) {\n    return entry.name || entry.id;\n  }",
+    "PlaceableTab._prepareDirectoryContext": "async _prepareDirectoryContext(context, options) {\n    const controlled = Object.fromEntries(this.layer.controlled.map(o => [o.id, o]));\n    context.directoryPartial = this.constructor.DIRECTORY_PARTIAL;\n    context.entryPartial = this.constructor.ENTRY_PARTIAL;\n    const promises = [];\n    for ( const entry of canvas.scene?.[this.collectionName] ?? [] ) {\n      if ( !entry.visible ) continue;\n      const { id } = entry;\n      const css = id in controlled ? \"active\" : \"\";\n      const ctx = { css, id, label: this._getEntryLabel(entry) };\n      promises.push(this._prepareEntry(entry, ctx));\n    }\n    context.entries = await Promise.all(promises);\n    context.entries.sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));\n    return context;\n  }",
+    "PlaceableTab._prepareEntry": "async _prepareEntry(entry, context) {\n    context.hidden = entry.hidden;\n    context.locked = entry.locked;\n    return context;\n  }",
+    "PlaceableTab._onRender": "async _onRender(context, options) {\n    await super._onRender(context, options);\n    new DragDrop.implementation({\n      dragSelector: \"[data-entry-id]\",\n      permissions: {\n        dragstart: () => true,\n        drop: () => false\n      },\n      callbacks: {\n        dragstart: this._onDragStart.bind(this)\n      }\n    }).bind(this.element);\n    this._searchFilter.bind(this.element);\n    for ( const li of this.element.querySelectorAll(\"[data-entry-id]\") ) {\n      li.addEventListener(\"pointerenter\", this._onHoverInEntry.bind(this), { passive: true });\n      li.addEventListener(\"pointerleave\", this._onHoverOutEntry.bind(this), { passive: true });\n    }\n    this._applyFilters();\n  }",
+    "PlaceableTab._applyFilters": "_applyFilters() {\n    if ( !this.layer || !canvas.ready ) return; // Still drawing.\n    let releasedObject = false;\n    const viewed = PlaceableTab.#filterViewed;\n    const { elevation, levels, visible, hidden: hiddenState, locked: lockedState } = this._filterState;\n    visible.clear();\n    const { cleanQuery } = this._searchFilter.constructor;\n    const elevationField = this.schema.getField(\"elevation\");\n    const hasElevationRange = elevationField instanceof foundry.data.fields.SchemaField;\n    const hasElevation = hasElevationRange || (elevationField instanceof foundry.data.fields.NumberField);\n    for ( const li of this.element.querySelectorAll(\"[data-entry-id]\") ) {\n      const entry = this._getPlaceableFromElement(li);\n      const matchesName = this._searchFilter.rgx?.test(cleanQuery(this._getEntryLabel(entry))) !== false;\n      let matchesElevation = true;\n      if ( hasElevationRange ) {\n        const {bottom, top, topInclusive=true} = entry.elevation;\n        const a = Math.max(bottom, elevation.bottom);\n        const b = Math.min(top, elevation.top);\n        if ( topInclusive || (bottom === top) || (top > b) ) matchesElevation = a <= b;\n        else matchesElevation = a < b;\n      } else if ( hasElevation ) {\n        matchesElevation = (entry.elevation >= elevation.bottom) && (entry.elevation <= elevation.top);\n      }\n      const matchesLevel = !levels.size || levels.some(level => entry.locatedInLevel(level));\n      const matchesHidden = (hiddenState === null) || (entry.hidden === hiddenState);\n      const matchesLocked = (lockedState === null) || (entry.locked === lockedState);\n      let hidden = !matchesName || !matchesElevation || !matchesLevel || !matchesHidden || !matchesLocked\n        || (viewed && !entry.viewed);\n      if ( !hidden ) hidden = !this._matchesFilter(entry);\n      if ( hidden ) {\n        if ( entry.rendered && entry.object.controlled ) {\n          entry.object.release({ renderSidebar: false });\n          releasedObject = true;\n        }\n        li.classList.remove(\"active\");\n      }\n      else visible.add(entry);\n      li.hidden = hidden;\n    }\n    // Recompute grouped category counts from visible entries.\n    for ( const group of this.element.querySelectorAll(\".placeable-group\") ) {\n      const meta = group.querySelector(\".group-header .meta\");\n      if ( meta ) {\n        const count = group.querySelectorAll(\"[data-entry-id]\").values().reduce((n, li) => n + (li.hidden ? 0 : 1), 0);\n        meta.textContent = `(${count})`;\n      }\n    }\n    this.layer.setAllRenderFlags({ refreshState: true });\n    const filter = this.element.querySelector(\"search [data-action=openFilter]\");\n    if ( filter ) filter.ariaPressed = String(this._hasAdvancedFilters());\n    ui.placeables?._updateFilterPip();\n    if ( releasedObject && (game.activeTool === \"select\") ) ui.placeablesPalette?.render();\n  }",
+    "PlaceableTab._matchesFilter": "_matchesFilter(entry) {\n    return true;\n  }",
+    "PlaceableTab._hasAdvancedFilters": "_hasAdvancedFilters() {\n    const { elevation, hidden, locked } = this._filterState;\n    return Number.isFinite(elevation.bottom) || Number.isFinite(elevation.top) || (hidden !== null)\n      || (locked !== null);\n  }",
+    "PlaceableTab._getPlaceableFromElement": "_getPlaceableFromElement(element) {\n    const { entryId } = element.closest(\"[data-entry-id]\")?.dataset ?? {};\n    return canvas.scene.getEmbeddedCollection(this.collectionName).get(entryId);\n  }",
+    "TokenTab._prepareDirectoryContext": "async _prepareDirectoryContext(context, options) {\n    context = await super._prepareDirectoryContext(context, options);\n    if ( (canvas.scene?.levels.size ?? 0) <= 1 ) return context;\n    const noLevel = [];\n    const groups = {};\n    for ( const entry of context.entries ) {\n      const level = canvas.scene.levels.get(entry.levelId);\n      if ( level ) {\n        const group = groups[level.id] ??= { id: level.id, label: level.name, entries: [] };\n        group.entries.push(entry);\n      }\n      else noLevel.push(entry);\n    }\n    context.groups = canvas.scene.levels.reverseSorted.reduce((arr, l) => {\n      const group = groups[l.id];\n      if ( group?.entries.length ) arr.push(group);\n      return arr;\n    }, []);\n    if ( noLevel.length ) context.groups.push({\n      label: _loc(\"SIDEBAR.PLACEABLES.Categories.NoLevel\"), entries: noLevel\n    });\n    return context;\n  }",
+    "TokenTab._prepareEntry": "async _prepareEntry(entry, context) {\n    context = await super._prepareEntry(entry, context);\n    context.levelId = entry.level;\n    return context;\n  }",
+    "PlaceableTab._preparePartContext": "async _preparePartContext(partId, context, options) {\n    context = await super._preparePartContext(partId, context, options);\n    switch ( partId ) {\n      case \"directory\": return this._prepareDirectoryContext(context, options);\n      case \"search\": return this._prepareSearchContext(context, options);\n    }\n    return context;\n  }",
+    "PlaceableTab._prepareSearchContext": "async _prepareSearchContext(context, options) {\n    const hasLevels = (this.schema.has(\"levels\") || this.schema.has(\"level\")) && (canvas.scene?.levels.size > 1);\n    const canCreate = this.collectionName === \"regions\";\n    const { label, labelPlural } = this.documentClass.metadata;\n    context.labels = {\n      create: _loc(\"SIDEBAR.Create\", { type: _loc(label) }),\n      placeholder: _loc(\"SIDEBAR.PLACEABLES.Search.placeholder\", { name: _loc(labelPlural) })\n    };\n    const { elevation, levels } = this._filterState;\n    const state = foundry.utils.mergeObject(this._filterState, {\n      filteredByLevel: !!levels.size\n    }, { inplace: false });\n    const filters = [\n      {\n        action: \"filterViewed\",\n        active: PlaceableTab.#filterViewed,\n        cssClass: \"fa-solid fa-image\",\n        tooltip: \"SIDEBAR.PLACEABLES.Filter.Viewed\"\n      },\n      {\n        action: \"filterByLevel\",\n        active: state.filteredByLevel,\n        cssClass: \"fa-solid fa-layer-group\",\n        tooltip: \"SIDEBAR.PLACEABLES.Filter.Level\"\n      },\n      {\n        action: \"openFilter\",\n        active: Number.isFinite(elevation.bottom) || Number.isFinite(elevation.top),\n        cssClass: \"fa-solid fa-filter\",\n        tooltip: \"SIDEBAR.PLACEABLES.Filter.Tooltip\"\n      }\n    ];\n    Object.assign(context, { canCreate, filters, hasLevels, state });\n    return context;\n  }",
+    "PlaceableTab._configureRenderParts": "_configureRenderParts(options) {\n    const parts = super._configureRenderParts(options);\n    parts.directory.templates.push(this.constructor.DIRECTORY_PARTIAL, this.constructor.ENTRY_PARTIAL);\n    return parts;\n  }"
+  }
+}
