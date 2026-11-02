@@ -28,7 +28,7 @@ export function createAttackSequence({actor}){
   if(fact.traits.has('sweep')&&fact.target&&prior.some(entry=>entry.fact.target&&entry.fact.target!==fact.target))attackOptions.add('sweep-bonus');
   if(valid&&history.some(entry=>twinPair(entry.fact,fact)))bonuses.push({trait:'twin',slug:'activity-twin',label:'PF2E.Item.Weapon.Twin.SecondPlus',value:'@weapon.system.damage.dice'});
   if(fact.traits.has('forceful')&&prior.length)bonuses.push({trait:'forceful',slug:`activity-forceful-${prior.length===1?'second':'third'}`,label:`PF2E.Item.Weapon.Forceful.${prior.length===1?'Second':'Third'}`,value:prior.length===1?'@weapon.system.damage.dice':'2 * @weapon.system.damage.dice'});
-  const state={fact,valid,recorded:false},effects=createNextStrikeEffectFrame({actor,strike,target});
+  const effects=createNextStrikeEffectFrame({actor,strike,target}),state={fact,valid,recorded:false,effects};
   const frame={attackOptions,capture:effects.capture,consume:effects.consume,damageOptions:effects.damageOptions,snapshot:effects.snapshot,transientItems:effects.transientItems,damage(current){
    if(current.item.actor?.uuid!==actor.uuid||usageKey(current)!==fact.usage)return {strike:current,options:new Set()};
    current=effects.damage(current);
@@ -53,5 +53,9 @@ export function createAttackSequence({actor}){
   const state=frames.get(frame);if(!state?.valid||state.recorded||!outcomes.has(outcome))return false;
   state.recorded=true;history.push({fact:state.fact,outcome});return true;
  }
- return {begin,record};
+ function recordFlatCheckFailure(frame){
+  const state=frames.get(frame);if(!state?.valid||state.recorded||!state.effects.recordFlatCheckFailure())return false;
+  state.recorded=true;history.push({fact:state.fact,outcome:'flat-check-failed'});return true;
+ }
+ return {begin,record,recordFlatCheckFailure};
 }

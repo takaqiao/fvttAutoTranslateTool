@@ -1,6 +1,6 @@
 import {MODULE_ID} from './rules.mjs';
 import {withDamageMessageTarget} from './damage-message-targets.mjs';
-import {getSourceId,isActiveGM,resolveMessageTargets} from './native-context.mjs';
+import {getSourceId,isActiveGM,resolveMessageTargets,nativeStrikeChoiceLabel} from './native-context.mjs';
 import {SerialActions} from './runtime.mjs';
 import {getNativeCastEvents} from './amp-cast-events.mjs';
 import {preserveDamagePartForMerge,preserveMergedDamageBypass} from './native-damage-components.mjs';
@@ -340,7 +340,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   captureTokens(targets);
   const origin=await sourceToken(actor,message,targets[0]);captureTokens([origin]);
   for(const target of targets)requireSceneTarget(actor,origin,target);
-  const available=strikes(actor).filter(heldFirearm),key=await select(actor,user,'裂胆鸣爆：选择已装填火器',available.map(s=>({value:strikeKey(s),label:s.item.name})));
+  const available=strikes(actor).filter(heldFirearm),key=await select(actor,user,'裂胆鸣爆：选择已装填火器',available.map(s=>({value:strikeKey(s),label:nativeStrikeChoiceLabel(s)})));
   if(key===null)return cancelled();
   const targetKey=await select(actor,user,'裂胆鸣爆：选择枪击目标',spellCombinationTargetChoices({game,targets,user}));
   if(targetKey===null)return cancelled();
@@ -386,7 +386,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
    if(prior)throw Error('本次组合活动已开始但未完成；为避免重复消耗与攻击，不会自动重试。');
    const kind=action.split(':')[1];
    if(kind==='reload'){
-    const available=strikes(actor).filter(heldFirearm),key=await select(actor,user,'填弹奔涌：选择要装填的火器',available.map(s=>({value:strikeKey(s),label:s.item.name})));
+    const available=strikes(actor).filter(heldFirearm),key=await select(actor,user,'填弹奔涌：选择要装填的火器',available.map(s=>({value:strikeKey(s),label:nativeStrikeChoiceLabel(s)})));
     if(key===null)return {status:'cancelled',result:'已取消。'};
     const selected=available.find(s=>strikeKey(s)===key);
     await record(message,'reloading',{kind,userId:user.id,weaponId:selected.item.id});
@@ -410,14 +410,14 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
    if(targets.length!==(kind==='swipe'?2:1)||targets.some(t=>!t.object||!t.actor))throw Error(`请选定${kind==='swipe'?'两个相邻的':'一个'}场景目标。`);
    const origin=await sourceToken(actor,message,targets[0]),available=strikes(actor).filter(kind==='combination'?allowedCombinationWeapon:s=>allowedStrike(actor,s,kind));
    captureTokens([origin]);
-   const key=await select(actor,user,volatile(actor)&&kind==='strike'?'选择武器或无武装攻击':'选择近战武器或无武装攻击',available.map(s=>({value:strikeKey(s),label:s.item.name})));if(key===null)return {status:'cancelled',result:'已取消。'};
+   const key=await select(actor,user,volatile(actor)&&kind==='strike'?'选择武器或无武装攻击':'选择近战武器或无武装攻击',available.map(s=>({value:strikeKey(s),label:nativeStrikeChoiceLabel(s)})));if(key===null)return {status:'cancelled',result:'已取消。'};
    const selected=available.find(s=>strikeKey(s)===key);let second=null;
    if(heldFirearm(selected)){
     const confirmation=await select(actor,user,'确认目标位于火器第一射程增量内',[{value:'confirm',label:'确认在第一射程增量内'},{value:'cancel',label:'取消本次法术打击'}]);
     if(confirmation!=='confirm')return {status:'cancelled',result:'已取消，未支付法术或消耗充能。'};
    }
    if(kind==='combination'){
-    const fists=strikes(actor).filter(fist),fistKey=await select(actor,user,'选择拳头攻击',fists.map(s=>({value:strikeKey(s),label:s.item.name})));if(fistKey===null)return {status:'cancelled',result:'已取消。'};second=fists.find(s=>strikeKey(s)===fistKey);
+    const fists=strikes(actor).filter(fist),fistKey=await select(actor,user,'选择拳头攻击',fists.map(s=>({value:strikeKey(s),label:nativeStrikeChoiceLabel(s)})));if(fistKey===null)return {status:'cancelled',result:'已取消。'};second=fists.find(s=>strikeKey(s)===fistKey);
    }
    for(const target of targets)requireSceneTarget(actor,origin,target);
    const choice=kind==='combination'?null:await chooseSpell(actor,user);if(kind!=='combination'&&!choice)return {status:'cancelled',result:'已取消。'};

@@ -72,3 +72,17 @@ test('concurrent external deletion is harmless but a real deletion failure stops
  const g=fixture(),failed=g.begin();failed.capture(g.message);g.actor.deleteEmbeddedDocuments=async()=>{g.writes.push('attempt');throw Error('database unavailable')};
  await assert.rejects(failed.consume(),/database unavailable/);await assert.rejects(failed.consume(),/database unavailable/);assert.deepEqual(g.writes,['attempt']);
 });
+
+test('a confirmed flat-check failure consumes Tumble once without manufacturing attack or damage facts',async()=>{
+ const f=fixture(),unrelated={...f.effect,id:'other',sourceId:'Compendium.other.effects.Item.Other'};f.actor.items.push(unrelated);const frame=f.begin();assert.equal(typeof frame.recordFlatCheckFailure,'function');
+ assert.equal(frame.recordFlatCheckFailure(),true);assert.equal(frame.recordFlatCheckFailure(),false);assert.equal(frame.capture(f.message),false);
+ await Promise.all([frame.consume(),frame.consume()]);assert.deepEqual(f.writes,[{type:'Item',ids:['tumble']}]);assert.deepEqual(f.actor.items,[unrelated]);assert.deepEqual([...frame.damageOptions()],[]);assert.deepEqual(frame.transientItems(),[]);
+});
+for(const change of ['refresh','replace','later'])test(`flat-check failure preserves a ${change} Tumble use`,async()=>{
+ const f=fixture();if(change==='later')f.actor.items=[];const frame=f.begin();assert.equal(typeof frame.recordFlatCheckFailure,'function');
+ if(change==='refresh')f.effect.system.start.value=101;else if(change==='replace')f.actor.items=[{...f.effect}];else f.actor.items.push(f.effect);
+ frame.recordFlatCheckFailure();await frame.consume();assert.deepEqual(f.writes,[]);assert.equal(f.actor.items.length,1);
+});
+test('a captured native Strike cannot later be changed into a flat-check failure',async()=>{
+ const f=fixture(),frame=f.begin();frame.capture(f.message);assert.equal(typeof frame.recordFlatCheckFailure,'function');assert.equal(frame.recordFlatCheckFailure(),false);await frame.consume();assert.equal(f.writes.length,1);assert(frame.damageOptions().has(OFF_GUARD));
+});

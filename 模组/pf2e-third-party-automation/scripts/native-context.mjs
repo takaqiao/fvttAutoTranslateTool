@@ -16,7 +16,6 @@ export function publicTargetName(token,{game,user=game?.user}={}){
  return visible?target?.name??target?.actor?.name??'目标':'目标';
 }
 const values=collection=>Array.from(collection?.values?.()??collection??[]);
-const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const unappliedDamageErrors=new WeakSet();
 /** Brand only failures known to precede the native damage call; never serialize. */
 export function markUnappliedDamageError(error){
@@ -55,6 +54,11 @@ export async function upsertOwnedEffect(actor,key,data){
  return (await actor.createEmbeddedDocuments('Item',[next]))[0];
 }
 
+export function nativeStrikeChoiceLabel(strike){
+ const item=strike.item,mode=item.isMelee?'近战':item.isRanged?(item.isThrown?'远程（投掷）':'远程'):null;
+ return mode?`${mode} · ${item.name}`:item.name;
+}
+
 export function validateNativeChoices(choices){
  if(!Array.isArray(choices)||choices.length<1||choices.length>100||choices.some(c=>typeof c?.value!=='string'||!c.value||c.value.length>256||typeof c.label!=='string'||c.label.length>500)||new Set(choices.map(c=>c.value)).size!==choices.length)throw Error('规则选择列表无效。');
  return choices.map(({value,label})=>({value,label}));
@@ -63,8 +67,10 @@ export async function showNativeChoice({title,choices}){
  const options=validateNativeChoices(choices);
  if(options.length===1)return options[0].value;
  return globalThis.foundry.applications.api.DialogV2.wait({
+  classes:['tpa-native-choice'],position:{width:560},
   window:{title:String(title??'规则选择').slice(0,200)},content:'<p>请选择本次能力的规则分支。</p>',
-  buttons:options.map((option,index)=>({action:`choice-${index}`,label:escapeHTML(option.label),callback:()=>option.value})),rejectClose:false,
+  // Foundry 14 renders button labels with innerText, not HTML.
+  buttons:options.map((option,index)=>({action:`choice-${index}`,label:option.label,callback:()=>option.value})),rejectClose:false,
  });
 }
 

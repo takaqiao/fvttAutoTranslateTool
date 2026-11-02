@@ -16,21 +16,27 @@ export function createNextStrikeEffectFrame({actor,strike,target,consumeTumble=t
  const weaponUuid=item?.uuid,targetUuid=target?.uuid;
  const effects=valid?values(actor.items).filter(effect=>effect.type==='effect'&&effect.id&&!effect.isExpired&&(consumeTumble&&getSourceId(effect)===TUMBLE_BEHIND||isWeaponSurgeFor(effect,item.id))).map(effect=>({effect,revision:revision(effect)})):[];
  const surge=effects.filter(entry=>isWeaponSurgeFor(entry.effect,item.id));
- let record=valid?createWeaponSurgeSnapshot(actor,item,surge.map(entry=>entry.effect)):null,captured=false,offGuard=false,consumption,reroll=false;
+ let record=valid?createWeaponSurgeSnapshot(actor,item,surge.map(entry=>entry.effect)):null,attempted=false,captured=false,offGuard=false,consumption,reroll=false;
  function capture(message,{confirmedNativeStrike=false}={}){
-  if(captured||!valid)return false;
+  if(attempted||!valid)return false;
   const flags=message?.flags?.pf2e,context=flags?.context;
   if(flags?.origin?.uuid!==weaponUuid||context?.type!=='attack-roll'||!outcomes.has(context.outcome)&&!(confirmedNativeStrike&&context.outcome==null))return false;
   const saved=context.weaponSurgeSnapshot;
   if(saved!=null&&!validWeaponSurgeSnapshot(saved,actor,item))return false;
-  captured=true;
+  attempted=captured=true;
   if(validWeaponSurgeSnapshot(saved,actor,item))record=structuredClone(saved);
   reroll=context.isReroll===true;
   offGuard=!!targetUuid&&context.target?.token===targetUuid&&context.options?.includes(OFF_GUARD)===true;
   return true;
  }
+ // A failed pre-attack flat check spends the Strike, but supplies no attack
+ // result or witnessed off-guard for a later damage roll.
+ function recordFlatCheckFailure(){
+  if(attempted||!valid)return false;
+  attempted=true;return true;
+ }
  function consume(){
-  if(!captured)return Promise.resolve(false);
+  if(!attempted)return Promise.resolve(false);
   return consumption??=(async()=>{
    // Do not delete a replacement or refreshed effect granted after this roll.
    const live=values(actor.items),ids=effects.filter(entry=>!reroll&&live.includes(entry.effect)&&revision(entry.effect)===entry.revision&&(getSourceId(entry.effect)===TUMBLE_BEHIND||isWeaponSurgeFor(entry.effect,item.id)&&record.effects.some(data=>JSON.stringify(data)===JSON.stringify(weaponSurgeSourceData(entry.effect))))).map(entry=>entry.effect.id);
@@ -59,5 +65,5 @@ export function createNextStrikeEffectFrame({actor,strike,target,consumeTumble=t
   const copy=owner.clone({items:prepareWeaponSurgeDamageSnapshotItems(owner,transientItems())},{keepId:true});
   return values(copy.system.actions).flatMap(action=>[action,...action.altUsages??[]]).find(action=>action.item?.id===item.id&&(action.item.altUsageType??'')===(current.item.altUsageType??''))??current;
  }
- return {capture,consume,damageOptions,snapshot,transientItems,damage};
+ return {capture,recordFlatCheckFailure,consume,damageOptions,snapshot,transientItems,damage};
 }

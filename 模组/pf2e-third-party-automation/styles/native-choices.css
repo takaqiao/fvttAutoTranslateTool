@@ -1,0 +1,29 @@
+.application.dialog.tpa-native-choice {
+  max-width: calc(100vw - 32px);
+}
+
+.tpa-native-choice .form-footer {
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  max-height: min(60vh, 32rem);
+  overflow-y: auto;
+  gap: 0.5rem;
+  padding: 3px;
+}
+
+.tpa-native-choice .form-footer button {
+  flex: 0 0 auto;
+  justify-content: flex-start;
+  height: auto;
+  min-height: 2.75rem;
+  padding: 0.6rem 0.8rem;
+  text-align: left;
+  white-space: normal;
+  line-height: 1.4;
+}
+
+.tpa-native-choice .form-footer button span {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}

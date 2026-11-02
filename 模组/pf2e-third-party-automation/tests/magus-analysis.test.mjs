@@ -74,6 +74,23 @@ test('concurrent and reloaded processing of one Use card cannot recharge a later
  assert.equal(f.targetActor.writes.length,1);
 });
 
+test('a rejected charge update cannot report Analysis as completed',async()=>{
+ const f=fixture();f.actor.update=async()=>undefined;
+ await assert.rejects(()=>f.provider().executeUsage(f.context()),/充能.*未保存/);
+ assert.equal(f.actor.flags[MODULE_ID].spellstrike.charged,false);
+ assert.equal(f.message.flags[MODULE_ID].magusAnalysis.status,'rolled');
+ assert.equal(f.rolls,1);
+});
+
+test('a rejected immunity update cannot recharge without recording target immunity',async()=>{
+ const f=fixture();f.targetActor.update=async()=>undefined;
+ await assert.rejects(()=>f.provider().executeUsage(f.context()),/免疫.*未保存/);
+ assert.equal(f.actor.flags[MODULE_ID].spellstrike.charged,false);
+ assert.equal(f.targetActor.flags[MODULE_ID]?.magusAnalysisImmunity,undefined);
+ assert.equal(f.message.flags[MODULE_ID].magusAnalysis.status,'rolled');
+ assert.equal(f.rolls,1);
+});
+
 test('immunity rejects a new activity through 24 hours and expires on world time',async()=>{
  const f=fixture();await f.provider().executeUsage(f.context());
  f.message=f.card('use2');f.game.time.worldTime=87399;

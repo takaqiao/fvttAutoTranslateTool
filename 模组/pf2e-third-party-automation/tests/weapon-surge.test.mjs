@@ -141,3 +141,13 @@ test('real PF2e DamageDice body prepares the frozen native spirit d6 at ranks 1,
   const prepared=actor.synthetics.damageDice['sword-damage'][0]({selectors:['sword-damage']});assert.equal(prepared.diceNumber,dice);assert.equal(prepared.damageType,'spirit');assert.equal(prepared.dieSize,'d6');assert.equal(data.system.rules.find(rule=>rule.key==='FlatModifier').value,1);assert.equal(data.system.rules.find(rule=>rule.key==='AdjustStrike').value,'sanctified');
  }
 });
+
+test('a failed flat check consumes only the frozen Surge for the attempted weapon',async()=>{
+ const f=fixture();f.add(surge('bow-surge',5,'bow'));const frame=f.begin();assert.equal(typeof frame.recordFlatCheckFailure,'function');assert.equal(frame.recordFlatCheckFailure(),true);
+ await Promise.all([frame.consume(),frame.consume()]);assert.deepEqual(f.writes,[['surge']]);assert.equal(f.actor.items.has('bow-surge'),true);assert.deepEqual(frame.transientItems(),[]);assert.equal(frame.damage(f.strike),f.strike);assert.deepEqual(f.clones,[]);
+});
+for(const change of ['refresh','replace','later'])test(`flat-check failure leaves a ${change} Weapon Surge untouched`,async()=>{
+ const f=fixture();if(change==='later'){f.actor.items.delete('surge');f.actor._source.items=[];}const frame=f.begin();assert.equal(typeof frame.recordFlatCheckFailure,'function');
+ if(change==='refresh')f.effect.system.start.value=101;else if(change==='replace')f.add(surge());else f.add(surge('new'));
+ frame.recordFlatCheckFailure();await frame.consume();assert.deepEqual(f.writes,[]);assert(f.actor.items.has(change==='later'?'new':'surge'));
+});

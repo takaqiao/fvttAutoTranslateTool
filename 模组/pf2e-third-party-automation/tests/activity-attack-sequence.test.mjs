@@ -85,3 +85,23 @@ test('captured off-guard cannot leak into a different weapon or actor through th
  assert.deepEqual([...frame.damage(f.b).options],[]);
  assert.deepEqual([...frame.damage({item:{...f.a.item,actor:{uuid:'Actor.other'}}}).options],[]);
 });
+
+test('a failed flat check records one attempted Strike without inventing an attack outcome',async()=>{
+ const f=fixture();for(const s of [f.a,f.b])s.item.system.traits.value=['twin'];
+ const first=f.sequence.begin(f.a,f.target('Token.one'));assert.equal(typeof f.sequence.recordFlatCheckFailure,'function');
+ assert.equal(f.sequence.recordFlatCheckFailure(first),true);assert.equal(f.sequence.recordFlatCheckFailure(first),false);assert.equal(f.sequence.record(first,'success'),false);
+ const second=f.sequence.begin(f.b,f.target('Token.one'));f.sequence.record(second,'success');second.damage(f.b);
+ assert.equal(rules(f).length,1);assert(rules(f)[0].predicate.includes('item:trait:twin'));
+});
+
+test('flat-check attempt history belongs to its own activity and does not claim Backswing',()=>{
+ const f=fixture(),first=f.sequence.begin(f.a,f.target('Token.one')),other=createAttackSequence({actor:f.actor});assert.equal(typeof f.sequence.recordFlatCheckFailure,'function');
+ assert.equal(other.recordFlatCheckFailure(first),false);assert.equal(f.sequence.recordFlatCheckFailure(first),true);
+ const next=f.sequence.begin(f.a,f.target('Token.two'));assert.equal(next.attackOptions.has('backswing-bonus'),false);
+ f.sequence.record(next,'success');next.damage(f.a);assert.equal(rules(f)[0].value,'@weapon.system.damage.dice');
+});
+
+test('a foreign weapon cannot record a failed flat-check attempt',()=>{
+ const f=fixture(),foreign={item:{...f.a.item,actor:{uuid:'Actor.other'}}},frame=f.sequence.begin(foreign,f.target('Token.one'));assert.equal(typeof f.sequence.recordFlatCheckFailure,'function');assert.equal(f.sequence.recordFlatCheckFailure(frame),false);
+ const next=f.sequence.begin(f.a,f.target('Token.two'));f.sequence.record(next,'success');next.damage(f.a);assert.equal(f.clones.length,0);
+});

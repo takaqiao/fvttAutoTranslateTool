@@ -52,11 +52,11 @@ test('a PC target native degree continues the already paid spell with its select
  assert.equal(requested,1);assert.equal(f.calls.filter(c=>c.kind==='save').length,0);assert.equal(f.calls.filter(c=>c.kind==='payment').length,1);assert.equal(f.calls.filter(c=>c.kind==='spell-damage').length,1);assert.equal(f.merges.length,1);
  const card=f.messages.find(m=>m.flags?.[NS]?.spellCombinationSave);assert.equal(card.author.id,'target-player');assert.equal(card.flags[NS].usageGenerated,true);
 }));
-function dualUse(f,{takedown=false}={}){
+function dualUse(f,{takedown=false,map=0}={}){
  f.feat.type='feat';f.feat.sourceId=takedown?'Compendium.pf2e.feats-srd.Item.Gw0wGXikhAhiGoud':'Compendium.pf2e.feats-srd.Item.onde0SxLoxLBTnvm';
  f.feat.system.rules=[{key:'FlatModifier',predicate:[{or:['double-slice-second',NS+':double-slice-second']}]}];
  f.weapons[1].system.equipped={carryType:'held',handsHeld:1};
- const provider=createDualStrikeAutomation({game:f.game,nativeOperations:f.nativeOperations,fromUuid:async uuid=>[f.origin,...f.targetDocs].find(d=>d.uuid===uuid),choose:async({choices})=>choices[0].value});
+ const provider=createDualStrikeAutomation({game:f.game,nativeOperations:f.nativeOperations,fromUuid:async uuid=>[f.origin,...f.targetDocs].find(d=>d.uuid===uuid),choose:async({title,choices})=>title.includes('多重')?String(map):choices[0].value});
  return ()=>provider.executeUsage({actor:f.actor,item:f.feat,message:f.message,user:{id:'player'},action:takedown?'dual:twin-takedown':'dual:double-slice'});
 }
 function twinPair(f){
@@ -66,6 +66,21 @@ function twinPair(f){
  // circumstance stacking and critical multiplication.
  f.actor.clone=changes=>{f.calls.push({kind:'twin-clone',changes});return {system:{actions:f.actor.system.actions.map(s=>({...s,damage:async opts=>{f.calls.push({kind:'twin-damage',opts,item:s.item});return roll(11)},critical:async opts=>{f.calls.push({kind:'twin-damage',opts,item:s.item});return roll(22)}}))}}};
 }
+for(const mode of ['attack','all'])test(`dual Strike rejects Patreon ${mode} flat checks before spending the activity`,()=>setup({},async f=>{
+ f.game.modules.set('patreon-v3',{active:true});
+ let current=mode;f.game.settings={get:(module,key)=>module==='patreon-v3'&&key==='flatCheck'?current:undefined};
+ const use=dualUse(f);
+ await assert.rejects(use(),/Patreon.*平检/);
+ assert.equal(f.actor.flags[NS].dualStrikeUses,undefined);
+ assert.equal(f.calls.filter(call=>['attack','weapon-damage'].includes(call.kind)).length,0);
+ assert.equal(f.messages.length,0);
+ current='no';await use();
+ assert.equal(f.calls.filter(call=>call.kind==='attack').length,2);
+}));
+test('an inactive Patreon module does not block a dual Strike',()=>setup({},async f=>{
+ f.game.modules.set('patreon-v3',{active:false});f.game.settings={get:()=> 'attack'};
+ await dualUse(f)();assert.equal(f.calls.filter(call=>call.kind==='attack').length,2);
+}));
 test('combination native attack and damage are dispatched to the original owner',()=>setup({kind:'combination'},async f=>{
  const requests=[];
  await runWith(f,{nativeOperations:{async run(ctx,request,execute){assert.equal(ctx.user.id,'player');assert.equal(ctx.message,f.message);requests.push(request);return execute();},register(){}}})();
@@ -75,6 +90,7 @@ test('combination native attack and damage are dispatched to the original owner'
 test('dual Strikes and damage are dispatched to the original owner',()=>setup({},async f=>{
  const requests=[];f.nativeOperations.run=async(ctx,request,execute)=>{assert.equal(ctx.user.id,'player');requests.push(request);return execute();};
  await dualUse(f)();assert.deepEqual(requests.map(request=>request.type),['attack','damage','attack','damage']);
+ for(const request of requests.filter(r=>r.type==='attack')){assert.equal(request.automaticFlatChecks,true);assert.equal(request.tokenUuid,f.origin.uuid);assert.equal(request.targetUuid,f.targetDocs[0].uuid);}
 }));
 test('cancelled first Spellstrike native window preserves its spell resource and charge',()=>setup({},async f=>{
  const result=await runWith(f,{nativeOperations:{run:async()=>({status:'cancelled'}),register(){}}})();
@@ -427,6 +443,28 @@ test('a Volatile Spark combination firearm retains its melee mode without a rang
  await runWith(f,{volatileSparkEnabled:true,choose:async({title,choices})=>{assert(!title.includes('第一射程增量'));return title.includes('武器')?choices.find(c=>c.value.endsWith(':melee')).value:choices[0].value;}})();
  assert.equal(f.calls.filter(c=>c.kind==='attack').length,1);
 }));
+
+for(const mode of ['melee','ranged'])test(`Spellstrike labels the combination weapon ${mode} mode and dispatches that exact usage`,()=>setup({},async f=>{
+ const base=f.actor.system.actions[0];firearm(f).name='同名组合武器 Combination Weapon';
+ base.altUsages=[{...base,item:{...base.item,isMelee:true,isRanged:false,altUsageType:'melee'}}];
+ const requests=[],native=f.nativeOperations.run;let rangePrompts=0;
+ f.nativeOperations.run=async(context,request,...args)=>{requests.push(request);return native(context,request,...args);};
+ await runWith(f,{volatileSparkEnabled:true,choose:async({title,choices})=>{
+  if(title.includes('武器')){
+   const ranged=choices.find(choice=>choice.value==='weapon:'),melee=choices.find(choice=>choice.value==='weapon:melee');
+   assert.match(ranged.label,/^远程 · 同名组合武器 Combination Weapon$/);
+   assert.match(melee.label,/^近战 · 同名组合武器 Combination Weapon$/);
+   return mode==='melee'?melee.value:ranged.value;
+  }
+  if(title.includes('第一射程增量'))rangePrompts++;
+  return choices[0].value;
+ }})();
+ const usages=requests.filter(request=>['attack','damage'].includes(request.type));
+ assert.deepEqual(usages.map(({weaponId,altUsageType})=>({weaponId,altUsageType})),[{weaponId:'weapon',altUsageType:mode==='melee'?'melee':''},{weaponId:'weapon',altUsageType:mode==='melee'?'melee':''}]);
+ assert.equal(rangePrompts,mode==='ranged'?1:0);
+ assert.equal(f.calls.filter(call=>call.kind==='payment').length,1);
+ assert.equal(f.actor.flags[NS].spellstrike.charged,false);
+}));
 test('declining the first range increment leaves resources and charge intact',()=>setup({},async f=>{
  firearm(f);const result=await runWith(f,{volatileSparkEnabled:true,choose:async({title,choices})=>title.includes('第一射程增量')?'cancel':choices[0].value})();
  assert.equal(result.status,'cancelled');assert.equal(f.calls.filter(c=>c.kind==='attack'||c.kind==='payment').length,0);assert.equal(f.actor.flags[NS].spellstrike.charged,true);
@@ -548,4 +586,48 @@ for(const [current,save,expected] of [[0,'failure',0],[0,'criticalFailure',1],[1
  const casts=paidBooming(f),condition=nativeFrightened(f,{current,bravery:true});
  const use=runWith(f,{volatileSparkEnabled:true,nativeCasts:casts,runTargetSave:async()=>({status:'rolled',check:await f.Message.create({flags:{pf2e:{context:{type:'saving-throw',outcome:save}}}})})});
  await use();await use();assert.equal(condition.value,expected);assert.equal(condition.changes,current===3?0:1);
+}));
+
+function flatCheckResults(f,statuses,{onFailed=()=>{}}={}){
+ const requests=[],native=f.nativeOperations.run;
+ f.nativeOperations.run=async(ctx,request,...args)=>{
+  requests.push(request);if(request.type!=='attack')return native(ctx,request,...args);
+  const index=request.flags.dualStrikeAttack.index,status=statuses[index];
+  if(status==='cancelled')return {status};
+  if(status!=='flat-check-failed')return native(ctx,request,...args);
+  const receipt=await f.Message.create({speaker:{actor:f.actor.id},flags:{pf2e:{origin:{uuid:`${f.actor.uuid}.Item.${request.weaponId}`},context:{type:'flat-check'}}},rolls:[]});
+  await onFailed(index);return {status,messageId:receipt.id};
+ };return requests;
+}
+for(const takedown of [false,true])for(const map of [0,1,2])test(`a failed first flat check continues ${takedown?'Twin Takedown':'Double Slice'} at MAP ${map}`,()=>setup({},async f=>{
+ f.actor.signature='hunter';f.targetDocs[0].actor.getRollOptions=()=>['self:prey:hunter'];twinPair(f);
+ const requests=flatCheckResults(f,['flat-check-failed','rolled']),use=dualUse(f,{takedown,map});await use();await use();
+ const attacks=requests.filter(r=>r.type==='attack');assert.equal(attacks.length,2);assert.deepEqual(attacks.map(r=>r.map),[map,takedown?Math.min(map+1,2):map]);assert(attacks.every(r=>r.automaticFlatChecks===true&&r.tokenUuid===f.origin.uuid));
+ assert.deepEqual(f.calls.filter(c=>c.kind==='attack').map(c=>[c.index,c.tier]),[[1,takedown?Math.min(map+1,2):map]]);assert.equal(f.calls.filter(c=>c.kind==='twin-damage').length,1);assert.equal(f.messages.filter(m=>m.flags[NS]?.dualStrike).length,1);assert.equal(f.messages.at(-1).rolls[0].total,11);assert.equal(f.merges.length,0);
+ assert.equal(f.messages.filter(m=>m.flags[NS]?.dualStrikeAttack).length,1);assert.equal(f.messages.find(m=>m.flags[NS]?.dualStrikeAttack).flags[NS].dualStrikeAttack.index,1);
+}));
+
+test('two failed flat checks publish no attack or damage and cannot be retried',()=>setup({},async f=>{
+ const requests=flatCheckResults(f,['flat-check-failed','flat-check-failed']),use=dualUse(f),result=await use();await use();
+ assert.match(result,/两次.*平检.*失败/);assert.equal(requests.length,2);assert.equal(f.calls.filter(c=>['attack','weapon-damage'].includes(c.kind)).length,0);assert.equal(f.messages.filter(m=>m.flags[NS]?.dualStrike||m.flags[NS]?.dualStrikeAttack).length,0);assert.equal(f.merges.length,0);
+}));
+
+test('a failed second flat check keeps only the first critical damage',()=>setup({outcomes:['criticalSuccess']},async f=>{
+ const requests=flatCheckResults(f,['rolled','flat-check-failed']);await dualUse(f)();assert.deepEqual(requests.map(r=>r.type),['attack','damage','attack']);assert.equal(f.calls.filter(c=>c.kind==='attack').length,1);assert.equal(f.messages.at(-1).rolls[0].total,20);assert.equal(f.messages.at(-1).rolls[0].options.degreeOfSuccess,3);assert.equal(f.merges.length,0);
+}));
+
+test('a failed first flat check followed by cancellation has no fabricated miss or damage',()=>setup({},async f=>{
+ flatCheckResults(f,['flat-check-failed','cancelled']);const result=await dualUse(f)();assert.equal(result.status,'cancelled');assert.match(result.result,/平检.*失败/);assert.equal(f.calls.filter(c=>c.kind==='attack').length,0);assert.equal(f.messages.filter(m=>m.flags[NS]?.dualStrike).length,0);
+}));
+
+test('canceling the first native attack still stops before the second attempt',()=>setup({},async f=>{
+ const requests=flatCheckResults(f,['cancelled','rolled']);const result=await dualUse(f)();assert.equal(result.status,'cancelled');assert.equal(requests.length,1);assert.equal(f.calls.filter(c=>c.kind==='attack').length,0);
+}));
+
+for(const handover of [false,true])test(`flat-check failure ${handover?'stops on GM handoff':'consumes only recognized next-Strike effects before the next attempt'}`,()=>setup({},async f=>{
+ const effects=[{id:'tumble',type:'effect',sourceId:'Compendium.patreon-v3.effects.Item.Vh5E1Qgp34sTKfVs',system:{start:{value:100},rules:[]}},{id:'surge',type:'effect',sourceId:'Compendium.pf2e.spell-effects.Item.qlz0sJIvqc0FdUdr',flags:{system:{rulesSelections:{spellEffectWeaponSurge:'weapon'}}},system:{start:{value:100},rules:[]}},{id:'unrelated',type:'effect',sourceId:'Compendium.other.Item.nextAttack',system:{rules:[]}}];
+ for(const e of effects)e.toObject=()=>({_id:e.id,type:e.type,_stats:{compendiumSource:e.sourceId},system:structuredClone(e.system),flags:structuredClone(e.flags??{})});f.actor.items.push(...effects);
+ const deleted=[];f.actor.deleteEmbeddedDocuments=async(_type,ids)=>{deleted.push(...ids);f.actor.items=f.actor.items.filter(item=>!ids.includes(item.id));};
+ const requests=flatCheckResults(f,['flat-check-failed','cancelled'],{onFailed:()=>{if(handover)handoff(f);}}),use=dualUse(f);
+ if(handover){await assert.rejects(use(),/GM/);assert.deepEqual(deleted,[]);assert.equal(requests.length,1);}else{await use();assert.deepEqual(deleted,['tumble','surge']);assert(f.actor.items.some(item=>item.id==='unrelated'));assert.equal(requests.length,2);}
 }));

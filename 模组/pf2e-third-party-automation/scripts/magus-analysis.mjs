@@ -61,7 +61,7 @@ export function createMagusAnalysis({game,fromUuid=globalThis.fromUuid,choose,ru
     checkReceipt(check,state,actor,user);
    }else{
     if(own(targetActor).magusAnalysisImmunity?.until>game.time.worldTime)throw Error('该目标仍临时免疫魔战士分析。');
-    const hit=await pick(actor,user,`魔战士分析 · 本轮此前是否已用打击命中${publicTargetName(target,{game,user})}？`,[{value:'no',label:'未命中，不加值'},{value:'yes',label:'已命中，本次检定+1环境加值'}]);
+    const hit=await pick(actor,user,`魔战士分析 · 本回合此前是否已用打击命中${publicTargetName(target,{game,user})}？`,[{value:'no',label:'未命中，不加值'},{value:'yes',label:'已命中，本次检定+1环境加值'}]);
     if(hit===null)return {status:'cancelled',result:'已取消魔战士分析。'};
     const skills=new Set(['arcana','crafting','medicine','nature','occultism','religion','society']);
     const choices=Object.entries(actor.skills??{}).filter(([slug,skill])=>skills.has(slug)||skill.lore).map(([slug,skill])=>({value:slug,label:knowledgeNativeLabel(game,slug,skill.label)}));
@@ -86,7 +86,11 @@ export function createMagusAnalysis({game,fromUuid=globalThis.fromUuid,choose,ru
    const immunity=own(targetActor).magusAnalysisImmunity;
    if(immunity?.messageId!==message.id)await targetActor.update({[`flags.${MODULE_ID}.magusAnalysisImmunity`]:{until:state.attemptedAt+86400,messageId:message.id,actorUuid:actor.uuid}});
    await assertLive();
+   const savedImmunity=own(targetActor).magusAnalysisImmunity;
+   if(savedImmunity?.messageId!==message.id||savedImmunity.actorUuid!==actor.uuid||savedImmunity.until!==state.attemptedAt+86400)throw Error('魔战士分析的目标免疫未保存；本次检定已记录，不会重复投骰。');
    if(own(actor).spellstrike?.messageId!==message.id)await actor.update({[`flags.${MODULE_ID}.spellstrike`]:{charged:true,messageId:message.id}});
+   await assertLive();
+   if(own(actor).spellstrike?.charged!==true||own(actor).spellstrike.messageId!==message.id)throw Error('魔战士分析的法术打击充能未保存；本次检定已记录，不会重复投骰。');
    await save(message,{...state,status:'done'});
    return summary;
   });

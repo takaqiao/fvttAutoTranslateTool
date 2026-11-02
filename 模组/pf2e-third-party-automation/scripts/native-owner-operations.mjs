@@ -1,8 +1,9 @@
 import {MODULE_ID as ID} from './rules.mjs';
-import {isActiveGM,getSourceId} from './native-context.mjs';
+import {isActiveGM,getSourceId,isCurrentSceneToken} from './native-context.mjs';
 import {prepareWeaponSurgeDamageSnapshotItems} from './weapon-surge.mjs';
 import {nativeRollEvent,manualDamageRoll as rollManualDamage,manualDamagePrivacy as damagePrivacy,confirmManualFlatCheck,restrictNativePrivacy} from './manual-native-roll.mjs';
 import {rollNativeUpliftingAid} from './bob2-rule-links-native.mjs';
+import {FLAT_CHECK_HELPER,assertDualStrikeFlatCheckCompatibility,prepareDualStrikeFlatChecks,verifyDualStrikeFlatCheck} from './dual-strike-flat-checks.mjs';
 
 const values=collection=>Array.from(collection?.values?.()??collection??[]);
 const clone=data=>structuredClone(data);
@@ -16,6 +17,7 @@ const typedTypes=new Set(['check','flat','d20','formula-damage']);
 const damageTypes=new Set(['damage','spell-damage','formula-damage']);
 const privateTypes=new Set([...typedTypes,...damageTypes]);
 const publicRequest=request=>Object.fromEntries(['type','statistic','itemUuid','sourceUuid','tokenUuid','targetUuid','targetActorUuid','checkKind','weaponId','altUsageType','map','critical','spellId','rank','overlayIds'].filter(key=>request[key]!==undefined).map(key=>[key,request[key]]));
+const nativeSourceToken=actor=>{const tokens=values(actor.getActiveTokens?.(true,true));return tokens.find(token=>token.object?.controlled)??tokens[0]??null;};
 
 /** Only a locally authenticated native execution can establish its target. */
 export function getNativeOwnerInvocation(game,input){
@@ -43,7 +45,7 @@ export async function beforeNativeRoll({Hooks,marker,showDialog,commit,native,as
   assertLive?.();
  };
  const once=async()=>{validate();await (commitTask??=Promise.resolve().then(()=>{validate();return commit()}));validate();};
- if(!showDialog){await once();validate();return native(once);}
+ if(!showDialog){await once();validate();return native(once,validate);}
  if(!Hooks?.on)throw Error('缺少原生检定窗口接口，尚未支付。');
  let abort;const aborted=new Promise((_resolve,reject)=>{abort=reject;});
  const fail=caught=>{error??=caught;for(const dialog of dialogs)dialog.cancel();abort(error);};
@@ -63,7 +65,7 @@ export async function beforeNativeRoll({Hooks,marker,showDialog,commit,native,as
   app.resolve=accepted=>{if(submitted||settled)return;submitted=true;if(!accepted)return settle(false);return once().then(()=>settle(true),caught=>{fail(caught);return settle(false)});};
   checkLive();
  });
- checkLive();const nativeTask=Promise.resolve().then(()=>{validate();return native(once);});
+ checkLive();const nativeTask=Promise.resolve().then(()=>{validate();return native(once,validate);});
  // Preparation can finish after the caller aborts. Keep only this exact-marker
  // render guard until the native promise settles, so a late window also closes.
  nativeTask.then(()=>Hooks.off(dialogHook,id),()=>Hooks.off(dialogHook,id));
@@ -113,8 +115,12 @@ export function createNativeOwnerOperations({game,fromUuid=globalThis.fromUuid,s
  }
  async function executeNative({message,operation,actor,guard,request=operation.request}){
   const target=request.targetUuid?await fromUuid(request.targetUuid):null;guard();
+  const automatic=request.automaticFlatChecks===true,dual=request.flags?.dualStrikeAttack;
+  if(automatic&&(scope!=='dual-strike'||request.type!=='attack'||dual?.usageMessageId!==message.id||![0,1].includes(dual.index)||!request.tokenUuid))throw Error('自动平检只能用于本次双击攻击入口。');
+  if(automatic)assertDualStrikeFlatCheckCompatibility(game);
+  const token=automatic?await fromUuid(request.tokenUuid):null;guard();
   const originalGuard=guard;
-  guard=()=>{originalGuard();if(request.targetUuid&&(!target?.actor||!target.object||target.uuid!==request.targetUuid||target.actor.uuid!==request.targetActorUuid))throw Error('原生操作的原目标已改变。');};guard();
+  guard=()=>{originalGuard();if(request.targetUuid&&(!target?.actor||!target.object||target.uuid!==request.targetUuid||target.actor.uuid!==request.targetActorUuid))throw Error('原生操作的原目标已改变。');if(automatic&&(!isCurrentSceneToken(token,game)||token.actor!==actor||nativeSourceToken(actor)!==token||!isCurrentSceneToken(target,game)||token.parent!==target.parent))throw Error('双击平检的原生来源或目标Token已改变。');};guard();
   if(typedTypes.has(request.type))return executeTyped({message,operation,actor,target,request,guard});
   const showDialog=true;
   const options=new Set(request.options??[]),event=nativeRollEvent(game,request.type==='attack'?'check':'damage');
@@ -146,13 +152,18 @@ export function createNativeOwnerOperations({game,fromUuid=globalThis.fromUuid,s
    }finally{if(hook!==undefined)Hooks.off('renderDamageModifierDialog',hook);}
   }
   if(request.type!=='attack')throw Error('不支持的原生执行类型。');
-  let created;
+  let created,flatCheck;
   const rollNative=async commit=>strike.variants[request.map].roll({target:target.object,options,event,createMessage:false,callback:async(_roll,_outcome,raw)=>{
    // A native caller can explicitly suppress its dialog. Its evaluated callback
    // is the last safe payment boundary before publishing the actual check.
    if(commit)await commit();
    guard();const data=raw.toObject();delete data._id;data.author=game.user.id;
+   if(automatic&&data.flags?.pf2e?.context?.type!=='attack-roll'){await Message().create(data);guard();return;}
    data.flags={...data.flags,'xdy-pf2e-workbench':{...data.flags?.['xdy-pf2e-workbench'],noAutoDamageRoll:true},[ID]:{...data.flags?.[ID],...request.flags,usageGenerated:true,nativeOwnerOperation:{activityMessageId:message.id,nonce:operation.nonce,scope}}};
+   if(flatCheck){
+    data.flags[FLAT_CHECK_HELPER]={...data.flags[FLAT_CHECK_HELPER],flatchecks:clone(flatCheck.flatchecks),revealed:true};data.flags[ID].dualStrikeFlatCheckId=flatCheck.messageId;
+    const privacy=restrictNativePrivacy({blind:data.blind===true,whisper:[...data.whisper??[]]},flatCheck.privacy,game.user.id);data.blind=privacy.blind;data.whisper=privacy.whisper;data.flags.pf2e.context.messageMode=privacy.messageMode;
+   }
    created=await Message().create(data);guard();
   }});
   const commit=async()=>{
@@ -165,9 +176,9 @@ export function createNativeOwnerOperations({game,fromUuid=globalThis.fromUuid,s
    }
    await waitFor(()=>operations(message)[operation.nonce]?.committed===true);guard();
   };
-  const originalAttackGuard=guard,user=game.user,origins=values(roller.getActiveTokens?.(true,true));
+  const originalAttackGuard=guard,user=game.user;
   // Match PF2e RollContext's controlled/first selection without replacing it.
-  const sourceToken=origins.find(token=>token.object?.controlled)??origins[0]??null,sourceScene=sourceToken?.parent,sourceUuid=sourceToken?.uuid;
+  const sourceToken=nativeSourceToken(roller),sourceScene=sourceToken?.parent,sourceUuid=sourceToken?.uuid;
   const binding=roller!==actor?Object.freeze({game,actor,user,target,assertLive(){
    if(transientActors.get(roller)!==binding)throw Error('本次原生临时角色执行已结束。');originalAttackGuard();
    if(game.user!==user||game.users.get(user.id)!==user||roller.uuid!==actor.uuid||roller===actor||roller._source===actor._source)throw Error('本次原生临时角色或操作者身份已改变。');
@@ -175,6 +186,10 @@ export function createNativeOwnerOperations({game,fromUuid=globalThis.fromUuid,s
   }}):null;
   if(binding){transientActors.set(roller,binding);guard=()=>binding.assertLive();}
   try{
+   if(automatic){
+    flatCheck=await beforeNativeRoll({Hooks,marker,showDialog:true,commit:async()=>{},assertLive:guard,native:(_commit,assertLive)=>prepareDualStrikeFlatChecks({game,Message:Message(),message,operation,actor,strike,token,target,request,options,guard:assertLive})});guard();
+    if(flatCheck&&flatCheck.status!=='passed')return {status:flatCheck.status,...flatCheck.messageId?{messageId:flatCheck.messageId}:{}};
+   }
    const roll=await beforeNativeRoll({Hooks,marker,showDialog,commit:operation.requiresCommit?commit:async()=>{},native:operation.requiresCommit?rollNative:()=>rollNative(),assertLive:guard});guard();
    if(!roll&&!created)return {status:'cancelled'};
    if(!created)throw Error('原生攻击结果未确认；不能重复投骰。');
@@ -286,6 +301,11 @@ export function createNativeOwnerOperations({game,fromUuid=globalThis.fromUuid,s
   if(saved?.status==='done'){
    if(response&&JSON.stringify(response)!==JSON.stringify(saved.result))throw Error('原生执行回复与原卡记录不符。');
    const result=clone(saved.result);
+   if(result.status==='flat-check-failed'){
+    if(scope!=='dual-strike'||request.type!=='attack'||request.automaticFlatChecks!==true)throw Error('本次原生操作不接受双击平检失败回执。');
+    const receipt=await waitFor(()=>game.messages.get(result.messageId));
+    verifyDualStrikeFlatCheck({game,receipt,message,operation:saved,actor,request,status:'failed'});return result;
+   }
    if(damageTypes.has(request.type)&&result.status==='rolled'){
     const receipt=await waitFor(()=>game.messages.get(result.messageId)),proof=receipt.flags?.[ID]?.nativeOwnerDamageResult,whisper=values(receipt.whisper);
     if(author(receipt)!==user.id||receipt.speaker?.actor!==actor.id||receipt.blind!==true||!whisper.length||whisper.some(id=>!game.users.get(id)?.isGM)||receipt.rolls?.length||receipt.flags?.pf2e?.context||proof?.nonce!==nonce||proof.scope!==scope||proof.activityMessageId!==message.id||proof.actorUuid!==actor.uuid||proof.type!==request.type||JSON.stringify(proof.request)!==JSON.stringify(publicRequest(request)))throw Error('原生伤害凭据与本次操作者、来源或受众不符。');
@@ -312,6 +332,10 @@ export function createNativeOwnerOperations({game,fromUuid=globalThis.fromUuid,s
    if(request.type==='attack'&&result.status==='rolled'){
     const check=await waitFor(()=>game.messages.get(result.messageId)),proof=check.flags?.[ID]?.nativeOwnerOperation,context=check.flags?.pf2e?.context;
     if(author(check)!==user.id||proof?.nonce!==nonce||proof.activityMessageId!==message.id||context?.type!=='attack-roll'||context.target?.token!==request.targetUuid||context.target?.actor!==request.targetActorUuid||target.actor?.uuid!==request.targetActorUuid||check.flags?.pf2e?.origin?.actor!==actor.uuid)throw Error('原生攻击消息与本次操作者或目标不符。');
+    if(request.automaticFlatChecks===true&&game.modules?.get(FLAT_CHECK_HELPER)?.active){
+     const receiptId=check.flags[ID]?.dualStrikeFlatCheckId;if(!receiptId)throw Error('原生攻击缺少本次平检凭据。');
+     const receipt=await waitFor(()=>game.messages.get(receiptId)),preflight=verifyDualStrikeFlatCheck({game,receipt,message,operation:saved,actor,request,status:'passed'});if(JSON.stringify(preflight.flatchecks)!==JSON.stringify(check.flags[FLAT_CHECK_HELPER]?.flatchecks)||check.flags[FLAT_CHECK_HELPER]?.revealed!==true)throw Error('原生攻击的平检结果与本次凭据不符。');
+    }
    }
    return result;
   }
