@@ -36,27 +36,44 @@ for(const degree of [0,1,2,3])test(`a completed native Recall Knowledge degree $
  const f=fixture({degree}),provider=f.provider();await provider.executeUsage(f.context());
  assert.deepEqual(f.actor.flags[MODULE_ID].spellstrike,{charged:true,messageId:'use1'});
  assert.equal(f.targetActor.flags[MODULE_ID].magusAnalysisImmunity.until,87400);
- assert.equal(f.rolls,1);assert.equal(f.nativeInputs[0].statistic,'arcana');
+ assert.equal(f.rolls,1);assert.equal(f.nativeInputs[0].statistic,null);
  assert.deepEqual(f.nativeInputs[0].targetUuids,[f.target.uuid]);
  assert.equal(f.message.flags[MODULE_ID].knowledge.recall.userId,f.player.id);
 });
 
 test('only explicit confirmation of the earlier hit enables the existing circumstance modifier',async()=>{
  for(const [hit,expected]of [['yes',true],['no',false]]){
-  const f=fixture({hit,statistic:'warfare-lore'});await f.provider().executeUsage(f.context());
+  const f=fixture({hit});await f.provider().executeUsage(f.context());
   const options=f.nativeInputs[0].origin.rollOptions;
   assert.equal(new Predicate(...f.item.system.rules[0].predicate).test(new Set(options)),expected);
   assert.equal(options.filter(option=>option==='maguss-analysis').length,expected?1:0);
-  assert.equal(f.nativeInputs[0].statistic,'warfare-lore');
  }
 });
 
-test('closing either necessary choice leaves charging and immunity untouched',async()=>{
- for(const selection of [{hit:null},{statistic:null}]){
-  const f=fixture(selection);const result=await f.provider().executeUsage(f.context());
-  assert.equal(result.status,'cancelled');assert.equal(f.rolls,0);
-  assert.equal(f.actor.flags[MODULE_ID].spellstrike.charged,false);assert.equal(f.targetActor.writes.length,0);
- }
+test('closing the earlier-hit confirmation leaves charging and immunity untouched',async()=>{
+ const f=fixture({hit:null});const result=await f.provider().executeUsage(f.context());
+ assert.equal(result.status,'cancelled');assert.equal(f.rolls,0);
+ assert.equal(f.actor.flags[MODULE_ID].spellstrike.charged,false);assert.equal(f.targetActor.writes.length,0);
+});
+
+test('new Analysis operations ask only about the earlier hit and leave the skill to Workbench',async()=>{
+ const f=fixture({statistic:null});await f.provider().executeUsage(f.context());
+ assert.equal(f.choices.length,1);assert.equal(f.rolls,1);
+ assert.equal(f.message.flags[MODULE_ID].magusAnalysis.statistic,null);
+ assert.equal(f.message.flags[MODULE_ID].knowledge.recall.statistic,null);
+ assert.equal(f.actor.flags[MODULE_ID].spellstrike.charged,true);
+});
+
+for(const statistic of [null,'arcana','warfare-lore'])test(`saved Analysis with statistic ${statistic} resumes without another choice or roll`,async()=>{
+ const f=fixture(),state={status:'rolling',messageId:f.message.id,actorUuid:f.actor.uuid,itemUuid:f.item.uuid,userId:f.player.id,targetUuid:f.target.uuid,targetActorUuid:f.targetActor.uuid,tokenUuid:f.token.uuid,requestId:'magus-analysis:use1',statistic,hit:true};
+ f.message.flags[MODULE_ID].magusAnalysis=state;
+ await f.runRecallKnowledge({targetUuids:[f.target.uuid],requestId:state.requestId,statistic,origin:{messageId:f.message.id,itemUuid:f.item.uuid,rollOptions:['action:recall-knowledge','maguss-analysis']}});
+ await f.provider().executeUsage(f.context());
+ assert.equal(f.rolls,1);assert.equal(f.choices.length,0);
+ assert.equal(f.message.flags[MODULE_ID].magusAnalysis.statistic,statistic);
+ assert.equal(f.message.flags[MODULE_ID].magusAnalysis.status,'done');
+ assert.equal(f.actor.flags[MODULE_ID].spellstrike.charged,true);
+ assert.equal(f.targetActor.flags[MODULE_ID].magusAnalysisImmunity.until,87400);
 });
 
 test('native cancellation never recharges and the same activity cannot roll again',async()=>{
@@ -115,7 +132,7 @@ test('a foreign or public Recall Knowledge receipt cannot charge the source acto
  }
 });
 
-function attachWorkbench(f,{cancel=false}={}){
+function attachWorkbench(f,{cancel=false,traits=['dragon'],modifiers={}}={}){
  const command=fs.readFileSync(process.env.FVTT_WORKBENCH_RECALL_MACRO??new URL('./fixtures/workbench-7.7.5-recall.txt',import.meta.url),'utf8');
  const AsyncFunction=Object.getPrototypeOf(async function(){}).constructor;
  const macro={uuid:'Compendium.xdy-pf2e-workbench.asymonous-benefactor-macros-internal.Macro.xcFr7PWwG5OVALNJ',type:'script',command,execute:scope=>new AsyncFunction(...Object.keys(scope),command)(...Object.values(scope))};
@@ -126,7 +143,7 @@ function attachWorkbench(f,{cancel=false}={}){
  }
  const fromUuid=f.fromUuid;f.fromUuid=async uuid=>uuid===macro.uuid?macro:fromUuid(uuid);
  Object.assign(f.game,{system:{id:'pf2e'},settings:{get:()=> 'none'},modules:new Map([['xdy-pf2e-workbench',{active:true,version:'7.7.5'}]])});
- Object.assign(f.target.actor,{name:'Enemy',level:5,traits:new Set(['dragon']),rarity:'common',getSelfRollOptions:()=>['target:trait:dragon'],isOfType:()=>true});
+ Object.assign(f.target.actor,{name:'Enemy',level:5,traits:new Set(traits),rarity:'common',getSelfRollOptions:()=>traits.map(trait=>`target:trait:${trait}`),isOfType:()=>true});
  f.actor.name='Magus';f.actor.itemTypes={feat:[f.item],lore:[]};f.actor.rules=[];f.actor.synthetics={degreeOfSuccessAdjustments:{}};
  f.token.object={document:f.token,actor:f.actor};f.target.object={document:f.target,actor:f.target.actor};
  class Messages{
@@ -153,7 +170,7 @@ function attachWorkbench(f,{cancel=false}={}){
  f.game.pf2e={Predicate,Check:{roll:(...args)=>interceptKnowledgeProbe(native,...args)}};
  f.actor.skills=Object.fromEntries(['arcana','crafting','medicine','nature','occultism','religion','society'].map(slug=>[slug,{slug,label:slug,rank:1,modifiers:[],async roll(parameters){
   const modifier=f.item.system.rules.find(rule=>rule.key==='FlatModifier');
-  const check={slug,modifiers:[],calculateTotal(options){this.totalModifier=5+(new Predicate(...modifier.predicate).test(options)?modifier.value:0);}};
+  const check={slug,modifiers:[],calculateTotal(options){this.totalModifier=(modifiers[slug]??5)+(new Predicate(...modifier.predicate).test(options)?modifier.value:0);}};
   const context={actor:f.actor,origin:{actor:f.actor,token:f.token},token:f.token,type:'skill-check',domains:['skill-check',slug],dc:parameters.dc,options:new Set(parameters.extraRollOptions),dosAdjustments:[],createMessage:false};
   return interceptKnowledgeProbe(native,check,context,null,parameters.callback);
  }}]));
@@ -169,6 +186,17 @@ test('the real Workbench controller and macro preserve a failed secret attempt a
  assert.equal(recall.result.degree,0);assert.equal(recall.result.total,9);assert.equal(recall.resolved,true);
  assert.equal(f.actor.flags[MODULE_ID].spellstrike.charged,true);assert.equal(f.targetActor.flags[MODULE_ID].magusAnalysisImmunity.until,87400);
  assert.equal(f.message.flags[MODULE_ID].knowledge.recall.workbenchOperation.messageId,'native-rk');
+});
+
+test('Analysis uses the real Workbench automatic candidates and their strongest applicable skill',async()=>{
+ const f=fixture({ownerIsGM:true});attachWorkbench(f,{traits:['beast'],modifiers:{arcana:5,nature:11,society:20}});
+ await f.provider().executeUsage(f.context());
+ const recall=f.game.messages.get('native-rk').flags[MODULE_ID].workbenchRecall;
+ assert.equal(recall.statistic,null);assert.equal(f.choices.length,1);assert.equal(f.rolls,1);
+ assert.deepEqual(recall.candidates.map(candidate=>[candidate.statistic,candidate.modifier,candidate.total]),[['arcana',6,9],['nature',12,15]]);
+ assert.equal(recall.result.statistic,'nature');assert.equal(recall.result.degree,1);
+ assert.equal(f.actor.flags[MODULE_ID].spellstrike.charged,true);
+ assert.equal(f.targetActor.flags[MODULE_ID].magusAnalysisImmunity.until,87400);
 });
 
 test('the real Workbench controller null roll removes its reservation without charging or immunity',async()=>{

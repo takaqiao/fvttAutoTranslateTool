@@ -2,7 +2,6 @@ import {MODULE_ID} from './rules.mjs';
 import {SerialActions,requireOwner} from './runtime.mjs';
 import {getSourceId,isActiveGM,resolveMessageTargets,publicTargetName} from './native-context.mjs';
 import {isActualUseMessage} from './usage-events.mjs';
-import {knowledgeNativeLabel} from './knowledge-display.mjs';
 import {BOB2_AUTOMATION_WORLDS} from './world-gates.mjs';
 
 export const MAGUS_ANALYSIS_SOURCE='Compendium.pf2e.feats-srd.Item.0yPbPVEESwB6Bdfw';
@@ -63,16 +62,11 @@ export function createMagusAnalysis({game,fromUuid=globalThis.fromUuid,choose,ru
     if(own(targetActor).magusAnalysisImmunity?.until>game.time.worldTime)throw Error('该目标仍临时免疫魔战士分析。');
     const hit=await pick(actor,user,`魔战士分析 · 本回合此前是否已用打击命中${publicTargetName(target,{game,user})}？`,[{value:'no',label:'未命中，不加值'},{value:'yes',label:'已命中，本次检定+1环境加值'}]);
     if(hit===null)return {status:'cancelled',result:'已取消魔战士分析。'};
-    const skills=new Set(['arcana','crafting','medicine','nature','occultism','religion','society']);
-    const choices=Object.entries(actor.skills??{}).filter(([slug,skill])=>skills.has(slug)||skill.lore).map(([slug,skill])=>({value:slug,label:knowledgeNativeLabel(game,slug,skill.label)}));
-    if(!choices.length)throw Error('没有可用于回忆知识的原生技能。');
-    const statistic=await pick(actor,user,'魔战士分析 · 选择回忆知识技能',choices);
-    if(statistic===null)return {status:'cancelled',result:'已取消魔战士分析。'};
     await assertLive();
     const token=values(actor.getActiveTokens?.(true,true)).map(value=>value.document??value).find(value=>value.id===message.speaker?.token&&value.parent?.id===message.speaker?.scene);
     if(!token)throw Error('本次魔战士分析缺少原始角色Token。');
     if(typeof runRecallKnowledge!=='function')throw Error('回忆知识原生入口不可用。');
-    const requestId=`magus-analysis:${message.id}`;
+    const requestId=`magus-analysis:${message.id}`,statistic=null;
     state={status:'rolling',messageId:message.id,actorUuid:actor.uuid,itemUuid:item.uuid,userId:user.id,targetUuid:target.uuid,targetActorUuid:targetActor.uuid,tokenUuid:token.uuid,requestId,statistic,hit:hit==='yes'};
     // Workbench's existing owner RPC authenticates this source-card binding.
     await message.update({[`flags.${MODULE_ID}.magusAnalysis`]:state,[`flags.${MODULE_ID}.knowledge.recall`]:{actorUuid:actor.uuid,targetUuid:target.uuid,targetUuids:[target.uuid],itemId:item.id,action:ctx.action,userId:user.id,requestId,statistic,assurance:false,dc:null}});

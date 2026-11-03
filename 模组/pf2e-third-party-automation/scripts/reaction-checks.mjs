@@ -264,7 +264,7 @@ export function createReactionChecks({game,reactionRestriction,fromUuid=globalTh
    await mark(actor,`reaction-checks:pointed-benefit:${target.uuid}`,data);
   }
   const narrative=degree>=2?'目标必须直接回答（可以说谎）；已建立察觉DC及本回合指定策略打击效果。':degree===0?'目标可以拒绝回答，并且对提问者的态度降低一阶。':'目标可以拒绝回答。';
-  await asReactionGM(()=>globalThis.ChatMessage.create({speaker:globalThis.ChatMessage.getSpeaker({actor,token:origin}),whisper:values(game.users).filter(u=>u.isGM).map(u=>u.id),content:`<p>${escape(recipient.name)}：${OUTCOMES[degree]}。${narrative} 暂时免疫针对讯问1小时。</p>`,flags:{[MODULE_ID]:{usageGenerated:true,reactionChecks:{kind:'pointed-result',usageId:message.id,checkId:card.id,degree,targetUuid:target.uuid}}}}));
+  await asReactionGM(()=>globalThis.ChatMessage.create({speaker:globalThis.ChatMessage.getSpeaker({actor,token:origin}),whisper:values(game.users).filter(u=>u.isGM).map(u=>u.id),content:`<p>${escape(recipient.name)}：${OUTCOMES[degree]}。${narrative} 暂时免疫针对讯问1小时。</p>`,flags:{[MODULE_ID]:{usageGenerated:true,reactionChecks:{kind:'pointed-result',usageId:message.id,checkId:card.id,degree,targetUuid:target.uuid}}}},{notify:false,scroll:false}));
   return '已完成针对讯问的交涉检定、对应效果与1小时暂时免疫。';
  }
  async function executeUsage(ctx){if(!isActiveGM(game)||!ctx.actor?.testUserPermission(ctx.user,'OWNER')||ctx.item?.actor?.uuid!==ctx.actor.uuid||resolveAction(ctx.item)!==ctx.action)throw Error('针对讯问的来源或操作权限无效。');return queue.run('reaction-checks:pointed',()=>pointed(ctx))}

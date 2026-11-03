@@ -37,11 +37,11 @@ function fixture({reaction='squawk',cancel=false,settled=false,change}={}){
  }});
  return {game,actor,targets,source,item,counts,summaries,run:()=>provider.executeUsage({actor,item,message:source,user:player,action:'social:no-cause-for-alarm'})};
 }
-async function setup(options,callback){const config=globalThis.CONFIG,Chat=globalThis.ChatMessage;try{globalThis.CONFIG={Canvas:{polygonBackends:{sound:{testCollision:()=>false}}}};const f=fixture(options);globalThis.ChatMessage={getSpeaker:()=>({actor:f.actor.id}),create:async data=>{f.summaries.push(data);return {id:'summary',...data}}};await callback(f)}finally{globalThis.CONFIG=config;globalThis.ChatMessage=Chat}}
+async function setup(options,callback){const config=globalThis.CONFIG,Chat=globalThis.ChatMessage;try{globalThis.CONFIG={Canvas:{polygonBackends:{sound:{testCollision:()=>false}}}};const f=fixture(options);globalThis.ChatMessage={getSpeaker:()=>({actor:f.actor.id}),create:async (data,options)=>{f.summaryOptions=options;f.summaries.push(data);return {id:'summary',...data}}};await callback(f)}finally{globalThis.CONFIG=config;globalThis.ChatMessage=Chat}}
 const socialEffects=actor=>[...actor.items.values()].filter(item=>item.flags?.[ID]?.kind==='social-alarm-immunity');
 
 test('real GM-paid Squawk pipeline settles shared Alarm once and converts only raw critical failures',()=>setup({},async f=>{
- assert.match(await f.run(),/已完成/);assert.deepEqual(f.counts,{dice:1,callbacks:1,finalCards:1,pipelinePublications:0});
+ assert.match(await f.run(),/已完成/);assert.deepEqual(f.summaryOptions,{notify:false,scroll:false});assert.deepEqual(f.counts,{dice:1,callbacks:1,finalCards:1,pipelinePublications:0});
  assert.deepEqual(f.summaries[0].flags[ID].socialAlarm.outcomes.map(o=>o.degree),['failure','failure','success','criticalSuccess']);assert.deepEqual(f.targets.map(t=>t.actor.fear),[3,3,2,1]);assert.deepEqual(f.targets.map(t=>socialEffects(t.actor).length),[1,1,1,1]);
  assert.match(await f.run(),/已结算/);assert.equal(f.counts.dice,1);assert.equal(f.summaries.length,1);assert.deepEqual(f.targets.map(t=>socialEffects(t.actor).length),[1,1,1,1]);
 }));

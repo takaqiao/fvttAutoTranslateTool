@@ -191,7 +191,7 @@ export function createSocialAutomation({game,fromUuid=globalThis.fromUuid,choose
     outcomes.push({actorUuid:target.actor.uuid,tokenUuid:target.token.uuid,dc:target.dc,degree:OUTCOMES[degree.value],before:target.fear,after:target.actor.getCondition('frightened')?.value??0});
    }
     assertCheck();for(const target of targets)assertRecipient(target);
-   await globalThis.ChatMessage.create({speaker:globalThis.ChatMessage.getSpeaker({actor,token:origin}),whisper:values(game.users).filter(u=>u.isGM).map(u=>u.id),content:`<p>无需惊慌：一次交涉检定（${roll.total}），${escape(language)}。</p><ul>${outcomes.map(o=>`<li>${escape(targets.find(t=>t.actor.uuid===o.actorUuid).actor.name)}：${escape(o.degree)}，惊惧 ${o.before} → ${o.after}；暂时免疫1小时。</li>`).join('')}</ul>`,flags:{[MODULE_ID]:{usageGenerated:true,socialAlarm:{usageMessageId:message.id,checkMessageId:card.id,language,outcomes,skipped}}}});
+   await globalThis.ChatMessage.create({speaker:globalThis.ChatMessage.getSpeaker({actor,token:origin}),whisper:values(game.users).filter(u=>u.isGM).map(u=>u.id),content:`<p>无需惊慌：一次交涉检定（${roll.total}），${escape(language)}。</p><ul>${outcomes.map(o=>`<li>${escape(targets.find(t=>t.actor.uuid===o.actorUuid).actor.name)}：${escape(o.degree)}，惊惧 ${o.before} → ${o.after}；暂时免疫1小时。</li>`).join('')}</ul>`,flags:{[MODULE_ID]:{usageGenerated:true,socialAlarm:{usageMessageId:message.id,checkMessageId:card.id,language,outcomes,skipped}}}},{notify:false,scroll:false});
    return '已完成无需惊慌的交涉检定、惊惧调整与1小时暂时免疫。';
   });
  }

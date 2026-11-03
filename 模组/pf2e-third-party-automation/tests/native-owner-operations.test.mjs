@@ -11,7 +11,7 @@ function fixture({cancel=false,offline=false}={}){
  const actor={uuid:'Actor.pc',id:'pc',testUserPermission:u=>u.id==='player',items:new Map(),system:{actions:[]}},target={uuid:'Scene.s.Token.t',actor:{uuid:'Actor.t'},object:{}};
  const item={id:'weapon',uuid:'Actor.pc.Item.weapon',type:'weapon',actor};actor.items.set(item.id,item);
  let current;
- class Message{constructor(data){Object.assign(this,data)}toObject(){return {...this}}static async create(data){const message=new Message({...data,id:'check'});messages.set(message.id,message);return message;}}
+ class Message{constructor(data){Object.assign(this,data)}toObject(){return {...this}}static async create(data,options){const message=new Message({...data,id:'check'});message.creationOptions=options;messages.set(message.id,message);return message;}}
  actor.system.actions=[{type:'strike',item,variants:[{async roll(options){calls.push({user:current.user.id,options});if(cancel)return null;await options.callback({},'success',new Message({speaker:{actor:'pc'},flags:{pf2e:{origin:{uuid:item.uuid,actor:actor.uuid},context:{type:'attack-roll',outcome:'success',target:{token:target.uuid,actor:target.actor.uuid}}}},rolls:[{total:20}]}));return {};}}]}];
  const card={id:'activity',author:player,flags:{pf2e:{origin:{actor:actor.uuid}}},async update(changes){for(const[path,value]of Object.entries(changes))set(this,path,value);hooks.call('updateChatMessage',this);}};messages.set(card.id,card);
  const gmGame={user:gm,users,messages},ownerGame={user:player,users,messages},docs=new Map([[actor.uuid,actor],[target.uuid,target]]),handlers=new Map(),gmHandlers=new Map();
@@ -195,7 +195,7 @@ for(const type of ['damage','spell-damage']){
   assert.deepEqual(payload.privateRequest.checkContext,native.request.checkContext);assert.deepEqual(payload.privateRequest.options,native.request.options);
   assert.equal(JSON.stringify(operation).includes('hidden-'),false);assert.equal(JSON.stringify(operation).includes('"total"'),false);
   const receipt=f.gmGame.messages.get(result.messageId),proof=receipt.flags[ID].nativeOwnerDamageResult;
-  assert.equal(receipt.author,'player');assert.equal(receipt.blind,true);assert.deepEqual(receipt.whisper,['gm']);assert.deepEqual(receipt.rolls,[]);assert.equal(receipt.flags.pf2e,undefined);
+  assert.equal(receipt.author,'player');assert.equal(receipt.blind,true);assert.deepEqual(receipt.whisper,['gm']);assert.deepEqual(receipt.rolls,[]);assert.equal(receipt.flags.pf2e,undefined);assert.deepEqual(receipt.creationOptions,{notify:false,scroll:false});
   assert.equal(proof.type,type);assert.equal(proof.actorUuid,f.actor.uuid);assert.equal(proof.nonce,operation.nonce);
   assert.deepEqual(proof.roll,native.rollJSON);assert.deepEqual(result.roll,native.rollJSON,'legacy consumers still receive roll JSON, not an evaluated instance');
   assert.deepEqual(result.privacy,{messageMode:'blind',blind:true,whisper:['gm']});assert.deepEqual(result.context.domains,['damage']);assert.deepEqual(result.context.traits,['fire']);assert.ok(result.context.options.includes('hidden-damage-option'));

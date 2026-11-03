@@ -73,7 +73,7 @@ export async function prepareDualStrikeFlatChecks({game,Message,message,operatio
  const whisper=values(game.users).filter(user=>user.isGM).map(user=>user.id);if(!whisper.length)throw Error('没有GM可保存双击平检凭据。');
  Object.assign(data,{author:game.user.id,speaker:{...data.speaker,actor:actor.id,scene:token.parent.id,token:token.id},blind:true,whisper,content:`<p>${title}</p>`});
  data.flags={...data.flags,pf2e:{...data.flags?.pf2e,context:{target:{token:target.uuid,actor:target.actor.uuid},options:[...rollOptions]}},[ID]:{usageGenerated:true,dualStrikeFlatCheck:proof},'xdy-pf2e-workbench':{noAutoDamageRoll:true}};
- const receipt=await Message.create(data);guard();
+ const receipt=await Message.create(data,{notify:false,scroll:false});guard();
  if(!receipt?.id||game.messages.get(receipt.id)!==receipt)throw Error('双击平检凭据没有保存，尚未攻击，不能重复投骰。');
  const checks=clone(receipt.flags?.[FLAT_CHECK_HELPER]?.flatchecks??{});nativeExceptions(actor,rollOptions,checks);
  const required=Object.values(checks);
@@ -92,7 +92,7 @@ export async function prepareDualStrikeFlatChecks({game,Message,message,operatio
     guard();if(saved||evaluated?._evaluated!==true||!dieTotal(evaluated.total))throw Error('双击平检结果不唯一或无效，不能重复投骰。');
     const flatData=native.toObject();delete flatData._id;flatData.author=game.user.id;
     flatData.flags={...flatData.flags,[ID]:{usageGenerated:true,dualStrikeFlatCheckRoll:{receiptId:receipt.id,nonce:operation.nonce}}};
-    saved=await Message.create(flatData);guard();
+    saved=await Message.create(flatData,{notify:false,scroll:false});guard();
     if(!saved?.id||game.messages.get(saved.id)!==saved)throw Error('双击原生平检没有保存，不能重复投骰。');
    });guard();
    if(!roll&&!saved){await receipt.update({[`flags.${ID}.dualStrikeFlatCheck.status`]:'cancelled',content:`<p>${title}已取消</p>`});guard();return {status:'cancelled'};}

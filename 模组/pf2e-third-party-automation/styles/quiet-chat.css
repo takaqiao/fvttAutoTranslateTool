@@ -1,0 +1,10 @@
+.chat-log .message.tpa-quiet-message,
+#chat-notifications .message.tpa-quiet-message {
+  display: none !important;
+}
+
+.tpa-quiet-note {
+  margin-top: 0.5em;
+  padding-top: 0.5em;
+  border-top: 1px solid var(--color-border-light-primary);
+}

@@ -37,10 +37,10 @@ async function fixture(options,run){
   async update(changes){mergeObject(this.data,changes,{applyOperators:true});mutateReceipt?.(this);Hooks.call('updateChatMessage',this);return this;}
   static applyMode(data,mode){return {...data,...privacy(mode)};}
   static getSpeaker({actor,token}){return {actor:actor.id,scene:token.parent.id,token:token.id};}
-  static async create(data){
+  static async create(data,options){
    if(missing&&data.flags?.[ID]?.dualStrikeFlatCheck)return undefined;
    const message=new Message(data);if(await utility.bt.call(message,async()=>undefined)===false)return undefined;
-   message.id=`message-${++seq}`;message.data._id=message.id;messages.set(message.id,message);published.push(message);Hooks.call('createChatMessage',message);return message;
+   message.id=`message-${++seq}`;message.data._id=message.id;messages.set(message.id,message);message.creationOptions=options;published.push(message);Hooks.call('createChatMessage',message);return message;
   }
  }
  class Adjustments{
@@ -239,4 +239,10 @@ test('changing the native source in the original attack window rejects acceptanc
   f.Hooks.call('renderCheckModifiersDialog',app);other.object.controlled=true;await app.resolve(true);if(await accepted)dice++;return null;
  };
  await assert.rejects(f.attack(),/来源|Token|未确认/);assert.equal(f.flatDice(),1);assert.equal(dice,0);assert.equal(f.entries.size,0);
+}));
+
+test('flat-check intent and native evidence do not notify or move the chat log',()=>fixture({},async f=>{
+ await f.attack();
+ const receipts=f.published.filter(message=>message.flags[ID]?.dualStrikeFlatCheck||message.flags[ID]?.dualStrikeFlatCheckRoll);
+ assert.equal(receipts.length,2);for(const message of receipts)assert.deepEqual(message.creationOptions,{notify:false,scroll:false});
 }));

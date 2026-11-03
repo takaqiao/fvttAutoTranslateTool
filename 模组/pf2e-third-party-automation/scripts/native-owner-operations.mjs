@@ -110,7 +110,7 @@ export function createNativeOwnerOperations({game,fromUuid=globalThis.fromUuid,s
  }
  async function saveDamageResult({message,operation,actor,request,roll,privacy,context,guard}){
   const whisper=values(game.users).filter(user=>user.isGM).map(user=>user.id);if(!whisper.length)throw Error('没有GM可保存原生伤害凭据。');
-  const proof=await Message().create({author:game.user.id,speaker:{actor:actor.id},blind:true,whisper,rolls:[],content:'<p>原生伤害投骰凭据；最终伤害由原活动继续结算。</p>',flags:{[ID]:{nativeOwnerDamageResult:{activityMessageId:message.id,nonce:operation.nonce,scope,actorUuid:actor.uuid,type:request.type,request:publicRequest(request),roll:roll.toJSON(),privacy,...context?{context}:{}}}}});guard();
+  const proof=await Message().create({author:game.user.id,speaker:{actor:actor.id},blind:true,whisper,rolls:[],content:'<p>原生伤害投骰凭据；最终伤害由原活动继续结算。</p>',flags:{[ID]:{nativeOwnerDamageResult:{activityMessageId:message.id,nonce:operation.nonce,scope,actorUuid:actor.uuid,type:request.type,request:publicRequest(request),roll:roll.toJSON(),privacy,...context?{context}:{}}}}},{notify:false,scroll:false});guard();
   if(!proof?.id||game.messages.get(proof.id)!==proof)throw Error('原生伤害凭据没有保存，不能自动重投。');return {status:'rolled',messageId:proof.id};
  }
  async function executeNative({message,operation,actor,guard,request=operation.request}){
