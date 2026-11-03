@@ -5,6 +5,7 @@ import {createNextStrikeEffectFrame} from '../scripts/next-strike-effects.mjs';
 import {createAttackSequence} from '../scripts/activity-attack-sequence.mjs';
 import {createKnowledgeAutomation} from '../scripts/knowledge-automation.mjs';
 import {beforeNativeRoll} from '../scripts/native-owner-operations.mjs';
+import {validWeaponSurgeSnapshot,weaponSurgeTransientItems} from '../scripts/weapon-surge-snapshot.mjs';
 let api={};try{api=await import('../scripts/weapon-surge.mjs')}catch(error){if(error.code!=='ERR_MODULE_NOT_FOUND')throw error}
 const ID='pf2e-third-party-automation',SOURCE='Compendium.pf2e.spell-effects.Item.qlz0sJIvqc0FdUdr';
 const clone=structuredClone;
@@ -20,6 +21,75 @@ function fixture(){
  actor.clone=function(changes){clones.push(clone(changes));const copy={...actor,_source:clone(changes),items:new Map(changes.items.map(data=>[data._id,{...data,id:data._id}]))};copy.system={actions:[makeStrike(copy)]};return copy};
  const begin=()=>createNextStrikeEffectFrame({actor,strike,target});return {actor,effect,strike,target,message,writes,clones,add,begin};
 }
+function shieldFixture(slug='shield-spikes'){
+ const f=fixture(),calls=[];f.actor.items.delete('surge');f.actor._source.items=f.actor._source.items.filter(item=>item._id!=='surge');
+ const prepareShield=(owner,item)=>{
+  item.subitems=new Map(item.system.subitems.map(data=>[data._id,{...clone(data),id:data._id,uuid:`${item.uuid}.Item.${data._id}`,actor:owner,parentItem:item}]));return item;
+ };
+ const makeStrike=(owner,item)=>({type:'strike',item,variants:[{roll:async()=>null}],...Object.fromEntries(['damage','critical'].map(method=>[method,async params=>{
+  calls.push({method,weaponUuid:item.uuid});return {method,weaponUuid:item.uuid,items:owner._source.items,options:params.options};
+ }]))});
+ const addShield=(id,weaponId=slug)=>{
+  const shield=prepareShield(f.actor,f.add({_id:id,type:'shield',system:{subitems:[{_id:weaponId,type:'weapon',system:{slug,traits:{value:[]}}}]}}));
+  return makeStrike(f.actor,shield.subitems.get(weaponId));
+ };
+ const strike=addShield('shield');Object.assign(f.strike,strike);f.message.flags.pf2e.origin.uuid=strike.item.uuid;
+ f.actor.clone=function(changes){
+  f.clones.push(clone(changes));const copy={...f.actor,_source:clone(changes),items:new Map(),system:{actions:[]}};
+  for(const data of changes.items){
+   const item={...clone(data),id:data._id,uuid:`${copy.uuid}.Item.${data._id}`,actor:copy};copy.items.set(item.id,item);
+   if(item.type==='shield')for(const subitem of prepareShield(copy,item).subitems.values())copy.system.actions.push(makeStrike(copy,subitem));
+  }
+  return copy;
+ };
+ return {...f,calls,addShield};
+}
+for(const slug of ['shield-spikes','shield-boss'])for(const method of ['damage','critical'])test(`a saved empty ${slug} snapshot reaches native ${method}`,async()=>{
+ const f=shieldFixture(slug),record=f.begin().snapshot(),provider=api.createWeaponSurgeAutomation({game:{user:{targets:new Set()}}});
+ f.message.flags.pf2e.context.weaponSurgeSnapshot=record;provider.wrapStrike(f.strike,f.actor);
+ const result=await f.strike[method]({checkContext:f.message.flags.pf2e.context,options:['other']});
+ assert.equal(result.method,method);assert.equal(result.weaponUuid,`Actor.hero.Item.shield.Item.${slug}`);assert.deepEqual(f.calls,[{method,weaponUuid:result.weaponUuid}]);assert.equal(result.options.has('other'),true);assert.deepEqual(f.writes,[]);
+});
+for(const slug of ['shield-spikes','shield-boss'])test(`an empty ${slug} snapshot survives capture and owner expansion`,async()=>{
+ const f=shieldFixture(slug),frame=f.begin();f.message.flags.pf2e.context.weaponSurgeSnapshot=frame.snapshot();
+ assert.equal(frame.capture(f.message),true);await frame.consume();
+ const items=api.prepareWeaponSurgeDamageSnapshotItems(f.actor,frame.transientItems()),record=items.find(item=>item.flags?.[ID]?.weaponSurgeSnapshot).flags[ID].weaponSurgeSnapshot;
+ assert.equal(record.weaponUuid,`Actor.hero.Item.shield.Item.${slug}`);assert.deepEqual(record.effects,[]);assert.deepEqual(items.filter(item=>item.type!=='effect'),f.actor._source.items);assert.deepEqual(f.writes,[]);
+});
+for(const method of ['damage','critical'])test(`delayed shield ${method} keeps its consumed Surge and the exact parent shield`,async()=>{
+ const f=shieldFixture(),other=f.addShield('other-shield');f.actor._source.items.sort((a,b)=>Number(b._id==='other-shield')-Number(a._id==='other-shield'));
+ f.add(surge('shield-surge',5,'shield-spikes'));const frame=f.begin();f.message.flags.pf2e.context.weaponSurgeSnapshot=frame.snapshot();
+ assert.equal(frame.capture(f.message),true);await frame.consume();f.add(surge('later',9,'shield-spikes'));
+ const provider=api.createWeaponSurgeAutomation({game:{user:{targets:new Set()}}});provider.wrapStrike(f.strike,f.actor);
+ const result=await f.strike[method]({checkContext:f.message.flags.pf2e.context,options:['self:effect:spell-effect-weapon-surge']});
+ assert.equal(result.weaponUuid,'Actor.hero.Item.shield.Item.shield-spikes');assert.notEqual(result.weaponUuid,other.item.uuid);
+ const effects=result.items.filter(item=>item.system?.rules?.some(rule=>rule.key==='DamageDice'));
+ assert.equal(effects.length,1);assert.equal(effects[0].system.level.value,5);assert.equal(result.options.has('self:effect:spell-effect-weapon-surge'),false);assert.deepEqual(f.writes,[['shield-surge']]);assert.equal(f.actor.items.get('later').system.level.value,9);
+ const expanded=api.prepareWeaponSurgeDamageSnapshotItems(f.actor.clone({items:result.items}),result.items.filter(item=>item.flags?.[ID]));
+ assert.equal(expanded.filter(item=>item.system?.rules?.some(rule=>rule.key==='DamageDice')).length,1);
+});
+for(const invalid of ['missing-parent','wrong-parent','foreign-actor','missing-child','non-weapon','path-as-id'])test(`a ${invalid} shield snapshot is rejected with and without a selected weapon`,()=>{
+ const f=shieldFixture(),record=f.begin().snapshot();f.addShield('other-shield','other-spikes');
+ if(invalid==='missing-parent')record.weaponUuid='Actor.hero.Item.missing.Item.shield-spikes';
+ if(invalid==='wrong-parent')record.weaponUuid='Actor.hero.Item.other-shield.Item.shield-spikes';
+ if(invalid==='foreign-actor')record.weaponUuid='Actor.other.Item.shield.Item.shield-spikes';
+ if(invalid==='missing-child'){record.weaponId='missing';record.weaponUuid='Actor.hero.Item.shield.Item.missing';}
+ if(invalid==='non-weapon')f.strike.item.type='equipment';
+ if(invalid==='path-as-id')record.weaponId='shield.Item.shield-spikes';
+ assert.equal(validWeaponSurgeSnapshot(record,f.actor,f.strike.item),false);assert.equal(validWeaponSurgeSnapshot(record,f.actor),false);
+ assert.throws(()=>api.prepareWeaponSurgeDamageSnapshotItems(f.actor,weaponSurgeTransientItems(record)),/快照无效/);assert.deepEqual(f.writes,[]);
+});
+test('a real subitem on another shield cannot replace the selected shield weapon',()=>{
+ const f=shieldFixture(),other=f.addShield('other-shield'),record=f.begin().snapshot();record.weaponUuid=other.item.uuid;
+ assert.equal(validWeaponSurgeSnapshot(record,f.actor),true);assert.equal(validWeaponSurgeSnapshot(record,f.actor,f.strike.item),false);
+});
+test('top-level inventory and synthetic weapon snapshots retain their accepted identities',()=>{
+ const f=fixture();for(const id of ['sword','synthetic']){
+  const weapon={id,uuid:`Actor.hero.Item.${id}`,type:'weapon',actor:f.actor},frame=createNextStrikeEffectFrame({actor:f.actor,strike:{item:weapon},target:f.target}),record=frame.snapshot();
+  assert.equal(validWeaponSurgeSnapshot(record,f.actor,weapon),true);assert.equal(validWeaponSurgeSnapshot(record,f.actor),true);
+  const items=api.prepareWeaponSurgeDamageSnapshotItems(f.actor,weaponSurgeTransientItems(record));assert.equal(items.find(item=>item.flags?.[ID]?.weaponSurgeSnapshot).flags[ID].weaponSurgeSnapshot.weaponId,id);
+ }
+});
 for(const outcome of ['success','criticalSuccess','failure','criticalFailure'])test(`the next bound weapon ${outcome} consumes exactly its original Weapon Surge`,async()=>{
  const f=fixture(),frame=f.begin();f.message.flags.pf2e.context.outcome=outcome;assert.equal(frame.capture(f.message),true);await frame.consume();assert.deepEqual(f.writes,[['surge']]);assert.equal(f.actor.items.has('sword'),true);
 });

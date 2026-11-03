@@ -14,7 +14,13 @@ export function createWeaponSurgeSnapshot(actor,weapon,effects=[]){
  return {schema:1,actorUuid:actor.uuid,weaponId:weapon.id,weaponUuid:weapon.uuid,nonce:uid(),effects:effects.map(weaponSurgeSourceData)};
 }
 export function validWeaponSurgeSnapshot(record,actor,weapon){
- return record?.schema===1&&record.actorUuid===actor?.uuid&&typeof record.weaponId==='string'&&!!record.weaponId&&record.weaponUuid===`${actor.uuid}.Item.${record.weaponId}`&&(!weapon||record.weaponId===weapon.id&&record.weaponUuid===weapon.uuid)&&typeof record.nonce==='string'&&!!record.nonce&&Array.isArray(record.effects)&&record.effects.length<=20&&record.effects.every(item=>typeof item?._id==='string'&&isWeaponSurgeFor(item,record.weaponId)&&Array.isArray(item.system?.rules));
+ if(record?.schema!==1||record.actorUuid!==actor?.uuid||typeof record.weaponId!=='string'||!record.weaponId||record.weaponId.includes('.'))return false;
+ if(weapon&&(record.weaponId!==weapon.id||record.weaponUuid!==weapon.uuid))return false;
+ const validUuid=record.weaponUuid===`${actor.uuid}.Item.${record.weaponId}`||Array.from(actor.items?.values?.()??actor.items??[]).some(parent=>{
+  const subitem=parent.subitems?.get(record.weaponId);
+  return subitem?.type==='weapon'&&subitem.id===record.weaponId&&subitem.uuid===record.weaponUuid;
+ });
+ return validUuid&&typeof record.nonce==='string'&&!!record.nonce&&Array.isArray(record.effects)&&record.effects.length<=20&&record.effects.every(item=>typeof item?._id==='string'&&isWeaponSurgeFor(item,record.weaponId)&&Array.isArray(item.system?.rules));
 }
 export function weaponSurgeTransientItems(record){
  return [{_id:uid(),name:'本次攻击：激发武器快照',type:'effect',system:{slug:'tpa-weapon-surge-snapshot',duration:{value:-1,unit:'unlimited'},rules:[]},flags:{[MODULE_ID]:{weaponSurgeSnapshot:copy(record)}}}];

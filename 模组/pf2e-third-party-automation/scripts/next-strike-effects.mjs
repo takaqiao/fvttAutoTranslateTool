@@ -63,7 +63,7 @@ export function createNextStrikeEffectFrame({actor,strike,target,consumeTumble=t
   const owner=current.item.actor;
   if(!record.effects.length&&!values(owner.items).some(effect=>isWeaponSurgeFor(effect,item.id)))return current;
   const copy=owner.clone({items:prepareWeaponSurgeDamageSnapshotItems(owner,transientItems())},{keepId:true});
-  return values(copy.system.actions).flatMap(action=>[action,...action.altUsages??[]]).find(action=>action.item?.id===item.id&&(action.item.altUsageType??'')===(current.item.altUsageType??''))??current;
+  return values(copy.system.actions).flatMap(action=>[action,...action.altUsages??[]]).find(action=>action.item?.id===item.id&&action.item.uuid===weaponUuid&&(action.item.altUsageType??'')===(current.item.altUsageType??''))??current;
  }
  return {capture,recordFlatCheckFailure,consume,damageOptions,snapshot,transientItems,damage};
 }
