@@ -332,7 +332,7 @@ test('Overwhelming Combination does not transfer same-weapon history from sword 
  assert.equal(f.calls.filter(c=>c.kind==='infusion-clone').length,0);
 }));
 test('single-target Spell Swipe affects only the selected target with the spell',()=>setup({kind:'swipe'},async f=>{await f.use();assert.equal(f.calls.filter(c=>c.kind==='spell-damage').length,1);assert.equal(f.calls.filter(c=>c.kind==='weapon-damage').length,2);assert.equal(f.merges.length,1)}));
-test('discharged Spellstrike rejects use before payment or attack',()=>setup({charged:false},async f=>{await assert.rejects(f.use,/充能/);assert.equal(f.calls.length,0)}));
+test('discharged Spellstrike rejects use before payment or attack',()=>setup({},async f=>{encounter(f,'c1');f.actor.flags[NS].spellstrike={charged:false,messageId:'earlier',combatId:'c1'};await assert.rejects(f.use,/充能/);assert.equal(f.calls.length,0)}));
 test('unavailable spell resources cause no attack or discharge',()=>setup({consumeFails:true},async f=>{await assert.rejects(f.use,/资源/);assert.equal(f.calls.filter(c=>c.kind==='attack').length,0);assert.equal(f.actor.flags[NS].spellstrike.charged,true)}));
 test('replaying the original activity cannot spend or attack twice',()=>setup({},async f=>{await f.use();await f.use();assert.equal(f.calls.filter(c=>c.kind==='payment').length,1);assert.equal(f.calls.filter(c=>c.kind==='attack').length,1)}));
 test('a partial native attack failure cannot replay an already paid activity',()=>setup({},async f=>{f.actor.system.actions[0].variants[0].roll=async()=>{f.calls.push({kind:'attack'});throw Error('native failure')};await assert.rejects(f.use,/native failure/);await assert.rejects(f.use,/未完成|重试|确认/);assert.equal(f.calls.filter(c=>c.kind==='payment').length,1);assert.equal(f.calls.filter(c=>c.kind==='attack').length,1)}));
@@ -630,4 +630,72 @@ for(const handover of [false,true])test(`flat-check failure ${handover?'stops on
  const deleted=[];f.actor.deleteEmbeddedDocuments=async(_type,ids)=>{deleted.push(...ids);f.actor.items=f.actor.items.filter(item=>!ids.includes(item.id));};
  const requests=flatCheckResults(f,['flat-check-failed','cancelled'],{onFailed:()=>{if(handover)handoff(f);}}),use=dualUse(f);
  if(handover){await assert.rejects(use(),/GM/);assert.deepEqual(deleted,[]);assert.equal(requests.length,1);}else{await use();assert.deepEqual(deleted,['tumble','surge']);assert(f.actor.items.some(item=>item.id==='unrelated'));assert.equal(requests.length,2);}
+}));
+
+function encounter(f,id,{started=true,actor=f.actor}={}){f.game.combats??=new Map();f.game.combats.set(id,{id,started,combatants:new Map([[`${id}-member`,{actor}]])});}
+test('a Spellstrike spent in an earlier encounter is charged when the next encounter starts',()=>setup({},async f=>{
+ f.actor.flags[NS].spellstrike={charged:false,messageId:'earlier',combatId:'c1'};encounter(f,'c1',{started:false});encounter(f,'c2');
+ await f.use();assert.equal(f.calls.filter(c=>c.kind==='payment').length,1);assert.equal(f.calls.filter(c=>c.kind==='attack').length,1);
+ assert.deepEqual(f.actor.flags[NS].spellstrike,{charged:false,messageId:f.message.id,combatId:'c2'});
+}));
+test('a charge spent outside a started encounter, or by an older version, does not block Spellstrike',()=>setup({},async f=>{
+ encounter(f,'c1',{started:false});encounter(f,'c2',{actor:{uuid:'Actor.someone-else'}});
+ for(const spent of [{charged:false,messageId:'exploration',combatId:null},{charged:false,messageId:'legacy'},{charged:false,messageId:'other-fight',combatId:'c2'}]){
+  f.actor.flags[NS].spellstrike=spent;delete f.message.flags[NS].spellCombinationUse;await f.use();
+ }
+ assert.equal(f.calls.filter(c=>c.kind==='attack').length,3);assert.equal(f.actor.flags[NS].spellstrike.combatId,null);
+}));
+function comboFlatResults(f,statuses){
+ const requests=[],native=f.nativeOperations.run;f.game.modules.set('pf2e-flatcheck-helper',{active:true});
+ f.nativeOperations.run=async(ctx,request,...args)=>{
+  requests.push(request);const status=request.type==='attack'?statuses[request.flags.spellCombinationAttack.index]:null;
+  if(status==='cancelled')return {status};
+  if(status!=='flat-check-failed')return native(ctx,request,...args);
+  const receipt=await f.Message.create({speaker:{actor:f.actor.id},flags:{pf2e:{context:{type:'flat-check'}}},rolls:[]});return {status:'flat-check-failed',messageId:receipt.id};
+ };return requests;
+}
+for(const kind of ['strike','swipe','combination'])test(`${kind} resolves flat checks from its source token before each attack`,()=>setup({kind},async f=>{
+ const requests=comboFlatResults(f,[]);await f.use();
+ const attacks=requests.filter(r=>r.type==='attack');assert.equal(attacks.length,kind==='strike'?1:2);
+ for(const [index,request]of attacks.entries()){assert.equal(request.automaticFlatChecks,true);assert.equal(request.tokenUuid,f.origin.uuid);assert.equal(request.flags.spellCombinationAttack.index,index);}
+}));
+for(const spellSave of [false,true])test(`a failed Spellstrike flat check spends the ${spellSave?'save':'attack'} spell and charge but rolls nothing`,()=>setup({spellSave},async f=>{
+ encounter(f,'c1');comboFlatResults(f,['flat-check-failed']);
+ const result=await f.use();assert.match(result,/平检未通过/);
+ assert.equal(f.calls.filter(c=>c.kind==='payment').length,1);assert.equal(f.calls.filter(c=>['attack','weapon-damage','spell-damage','save'].includes(c.kind)).length,0);
+ assert.deepEqual(f.actor.flags[NS].spellstrike,{charged:false,messageId:f.message.id,combatId:'c1'});
+ assert.equal(f.messages.filter(m=>m.flags?.[NS]?.spellCombination).length,1);assert.equal(f.messages.filter(m=>m.flags?.[NS]?.spellCombinationDamage).length,0);assert.equal(f.merges.length,0);
+ assert.equal(f.message.flags[NS].spellCombinationUse.state,'done');assert.equal(await f.use(),'本次组合活动已经结算。');assert.equal(f.calls.filter(c=>c.kind==='payment').length,1);
+}));
+test('Spell Swipe pays once when its first target fails the flat check and still strikes the second',()=>setup({kind:'swipe',outcomes:['success']},async f=>{
+ comboFlatResults(f,['flat-check-failed','rolled']);const result=await f.use();
+ assert.equal(f.calls.filter(c=>c.kind==='payment').length,1);assert.deepEqual(f.calls.filter(c=>c.kind==='attack').map(c=>c.opts.target.document.uuid),[f.targetDocs[1].uuid]);
+ const damage=f.messages.filter(m=>m.flags?.[NS]?.spellCombinationDamage);assert.equal(damage.length,1);assert.equal(damage[0].flags[NS].spellCombinationDamage.targetUuid,f.targetDocs[1].uuid);
+ assert.equal(damage[0].flags[NS].spellCombinationDamage.attacks.length,1);assert.match(result,/1 次平检未通过/);
+}));
+test('Overwhelming Combination keeps the hit whose flat check passed',()=>setup({kind:'combination',outcomes:['success']},async f=>{
+ comboFlatResults(f,['flat-check-failed','rolled']);await f.use();
+ assert.equal(f.calls.filter(c=>c.kind==='payment').length,0);assert.equal(f.calls.filter(c=>c.kind==='attack').length,1);assert.equal(f.calls.filter(c=>c.kind==='weapon-damage').length,1);
+ const damage=f.messages.filter(m=>m.flags?.[NS]?.spellCombinationDamage);assert.equal(damage.length,1);assert.equal(damage[0].flags[NS].spellCombinationDamage.attacks.length,1);
+}));
+test('Booming Blast with a failed flat check still charges and rolls Will without weapon damage',()=>setup({outcomes:[],save:'failure',charged:false},async f=>{
+ firearm(f);f.actor.items.push({...f.feat,id:'spellstrike',uuid:'Actor.pc.Item.spellstrike'});
+ Object.assign(f.feat,{type:'spell',sourceId:boomingSource,spellcasting:f.entry,rank:3});f.feat.system={traits:{value:['focus','magus','mental','emotion']},time:{value:'1'}};
+ const condition=nativeFrightened(f);comboFlatResults(f,['flat-check-failed']);
+ const result=await runWith(f,{volatileSparkEnabled:true})();assert.match(result,/平检未通过/);
+ assert.equal(f.calls.filter(c=>['attack','weapon-damage'].includes(c.kind)).length,0);assert.equal(f.calls.filter(c=>c.kind==='save').length,1);assert.equal(f.calls.filter(c=>c.kind==='bind-payment').length,1);
+ assert.equal(f.actor.flags[NS].spellstrike.charged,true);assert.equal(condition.value,1);
+}));
+for(const [name,arrange] of [
+ ['Utility Buttons is disabled',f=>f.game.modules.delete('pf2e-flatcheck-helper')],
+ ['Patreon rolls attack flat checks itself',f=>{f.game.modules.set('patreon-v3',{active:true});f.game.settings={get:(module,key)=>module==='patreon-v3'&&key==='flatCheck'?'attack':undefined};}],
+ ['Utility cannot resolve a synthetic weapon',f=>{f.actor.items.splice(f.actor.items.findIndex(item=>item.id==='weapon'),1);}],
+])test(`Spellstrike keeps the native attack path when ${name}`,()=>setup({},async f=>{
+ const requests=comboFlatResults(f,[]);arrange(f);await f.use();
+ const attack=requests.find(r=>r.type==='attack');assert.equal(attack.automaticFlatChecks,undefined);assert.equal(attack.tokenUuid,undefined);assert.equal(f.calls.filter(c=>c.kind==='attack').length,1);
+}));
+test('Spell Swipe cancelled after a failed first flat check reports the payment it kept',()=>setup({kind:'swipe'},async f=>{
+ encounter(f,'c1');comboFlatResults(f,['flat-check-failed','cancelled']);const result=await f.use();
+ assert.equal(result.status,'cancelled');assert.match(result.result,/已支付法术/);assert.equal(f.calls.filter(c=>c.kind==='payment').length,1);assert.equal(f.calls.filter(c=>c.kind==='attack').length,0);
+ assert.equal(f.actor.flags[NS].spellstrike.charged,false);assert.equal(f.messages.filter(m=>m.flags?.[NS]?.spellCombination).length,1);
 }));

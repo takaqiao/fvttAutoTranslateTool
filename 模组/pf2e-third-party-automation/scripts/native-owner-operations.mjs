@@ -3,7 +3,7 @@ import {isActiveGM,getSourceId,isCurrentSceneToken} from './native-context.mjs';
 import {prepareWeaponSurgeDamageSnapshotItems} from './weapon-surge.mjs';
 import {nativeRollEvent,manualDamageRoll as rollManualDamage,manualDamagePrivacy as damagePrivacy,confirmManualFlatCheck,restrictNativePrivacy} from './manual-native-roll.mjs';
 import {rollNativeUpliftingAid} from './bob2-rule-links-native.mjs';
-import {FLAT_CHECK_HELPER,assertDualStrikeFlatCheckCompatibility,prepareDualStrikeFlatChecks,verifyDualStrikeFlatCheck} from './dual-strike-flat-checks.mjs';
+import {FLAT_CHECK_HELPER,assertDualStrikeFlatCheckCompatibility,automaticFlatCheckIndex,prepareDualStrikeFlatChecks,verifyDualStrikeFlatCheck} from './dual-strike-flat-checks.mjs';
 
 const values=collection=>Array.from(collection?.values?.()??collection??[]);
 const clone=data=>structuredClone(data);
@@ -115,12 +115,12 @@ export function createNativeOwnerOperations({game,fromUuid=globalThis.fromUuid,s
  }
  async function executeNative({message,operation,actor,guard,request=operation.request}){
   const target=request.targetUuid?await fromUuid(request.targetUuid):null;guard();
-  const automatic=request.automaticFlatChecks===true,dual=request.flags?.dualStrikeAttack;
-  if(automatic&&(scope!=='dual-strike'||request.type!=='attack'||dual?.usageMessageId!==message.id||![0,1].includes(dual.index)||!request.tokenUuid))throw Error('自动平检只能用于本次双击攻击入口。');
+  const automatic=request.automaticFlatChecks===true;
+  if(automatic&&(automaticFlatCheckIndex(scope,request,message.id)===null||!request.tokenUuid))throw Error('自动平检只能用于本次双击或法术打击的攻击入口。');
   if(automatic)assertDualStrikeFlatCheckCompatibility(game);
   const token=automatic?await fromUuid(request.tokenUuid):null;guard();
   const originalGuard=guard;
-  guard=()=>{originalGuard();if(request.targetUuid&&(!target?.actor||!target.object||target.uuid!==request.targetUuid||target.actor.uuid!==request.targetActorUuid))throw Error('原生操作的原目标已改变。');if(automatic&&(!isCurrentSceneToken(token,game)||token.actor!==actor||nativeSourceToken(actor)!==token||!isCurrentSceneToken(target,game)||token.parent!==target.parent))throw Error('双击平检的原生来源或目标Token已改变。');};guard();
+  guard=()=>{originalGuard();if(request.targetUuid&&(!target?.actor||!target.object||target.uuid!==request.targetUuid||target.actor.uuid!==request.targetActorUuid))throw Error('原生操作的原目标已改变。');if(automatic&&(!isCurrentSceneToken(token,game)||token.actor!==actor||nativeSourceToken(actor)!==token||!isCurrentSceneToken(target,game)||token.parent!==target.parent))throw Error('攻击前平检的原生来源或目标Token已改变。');};guard();
   if(typedTypes.has(request.type))return executeTyped({message,operation,actor,target,request,guard});
   const showDialog=true;
   const options=new Set(request.options??[]),event=nativeRollEvent(game,request.type==='attack'?'check':'damage');
@@ -302,7 +302,7 @@ export function createNativeOwnerOperations({game,fromUuid=globalThis.fromUuid,s
    if(response&&JSON.stringify(response)!==JSON.stringify(saved.result))throw Error('原生执行回复与原卡记录不符。');
    const result=clone(saved.result);
    if(result.status==='flat-check-failed'){
-    if(scope!=='dual-strike'||request.type!=='attack'||request.automaticFlatChecks!==true)throw Error('本次原生操作不接受双击平检失败回执。');
+    if(request.automaticFlatChecks!==true||automaticFlatCheckIndex(scope,request,message.id)===null)throw Error('本次原生操作不接受平检失败回执。');
     const receipt=await waitFor(()=>game.messages.get(result.messageId));
     verifyDualStrikeFlatCheck({game,receipt,message,operation:saved,actor,request,status:'failed'});return result;
    }

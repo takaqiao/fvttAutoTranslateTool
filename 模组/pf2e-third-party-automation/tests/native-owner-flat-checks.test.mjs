@@ -246,3 +246,20 @@ test('flat-check intent and native evidence do not notify or move the chat log',
  const receipts=f.published.filter(message=>message.flags[ID]?.dualStrikeFlatCheck||message.flags[ID]?.dualStrikeFlatCheckRoll);
  assert.equal(receipts.length,2);for(const message of receipts)assert.deepEqual(message.creationOptions,{notify:false,scroll:false});
 }));
+
+const spellstrikeTag=f=>({options:['action:spellstrike'],flags:{spellCombinationAttack:{activityMessageId:f.card.id,index:0,kind:'strike'}}});
+for(const [total,passed]of [[11,true],[10,false]])test(`a Spellstrike against a hidden target resolves flat check ${total} before the owner's strike`,()=>fixture({scope:'spell-combination',condition:'hidden',total},async f=>{
+ const result=await f.attack(spellstrikeTag(f));assert.equal(result.status,passed?'rolled':'flat-check-failed');assert.equal(f.flatDice(),1);assert.equal(f.attacks(),passed?1:0);
+ assert.equal(f.published.filter(message=>message.flags[HELPER]?.hiddenMsg).length,0);
+ if(passed){const message=f.messages.get(result.messageId);assert.equal(message.flags[HELPER].revealed,true);assert.equal(message.flags[HELPER].flatchecks.target.roll,11);assert.equal(message.flags[ID].spellCombinationAttack.index,0);}
+}));
+for(const condition of ['concealed','hidden'])test(`Sure Strike skips a ${condition} target's flat check for a Spellstrike`,()=>fixture({scope:'spell-combination',condition,total:1,effects:[{sourceId:sureStrike}]},async f=>{
+ const result=await f.attack(spellstrikeTag(f));assert.equal(result.status,'rolled');assert.equal(f.flatDice(),0);assert.equal(f.attacks(),1);
+ const message=f.messages.get(result.messageId);assert.equal(message.flags[HELPER].revealed,true);assert.deepEqual(message.flags[HELPER].flatchecks,{});
+ assert.equal(f.published.filter(message=>message.flags[HELPER]?.hiddenMsg).length,0);
+}));
+test('a preflight tag only authorizes its own activity scope',async()=>{
+ await fixture({scope:'spell-combination'},async f=>{await assert.rejects(f.attack(),/入口|未确认/);assert.equal(f.flatDice(),0);assert.equal(f.attacks(),0);});
+ await fixture({},async f=>{await assert.rejects(f.attack(spellstrikeTag(f)),/入口|未确认/);assert.equal(f.flatDice(),0);assert.equal(f.attacks(),0);});
+ await fixture({scope:'spell-combination'},async f=>{await assert.rejects(f.attack({flags:{spellCombinationAttack:{activityMessageId:'another-card',index:0,kind:'strike'}}}),/入口|未确认/);assert.equal(f.attacks(),0);});
+});

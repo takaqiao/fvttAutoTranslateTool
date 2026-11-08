@@ -13,6 +13,7 @@ import {mergeDamageMessagePrivacy} from './damage-message-privacy.mjs';
 import {VOLATILE_SPARK_SOURCES as V,hasVolatileSpark,heldFirearm} from './volatile-spark.mjs';
 import {createVolatileSparkReload} from './volatile-spark-reload.mjs';
 import {createVolatileSparkDamage,volatileSparkDamageParts} from './volatile-spark-damage.mjs';
+import {canPreflightFlatChecks} from './dual-strike-flat-checks.mjs';
 export {preserveDamagePartForMerge} from './native-damage-components.mjs';
 
 export const SPELL_COMBINATION_SOURCES=Object.freeze({
@@ -85,6 +86,10 @@ export function scaleSpellDamage(roll,multiplier,{critical=false}={}){
 /** Source based activities; normal player choices finish before any resource or die is spent. */
 export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose,runTargetSave,onError=()=>{},afterAttack=async()=>{},nativeCasts=getNativeCastEvents({game,fromUuid}),nativeOperations,volatileSparkEnabled=false,volatileSparkReload,getRollContext}={}){
  const queue=new SerialActions(),damageContexts=new WeakMap(),scopes=new WeakMap();
+ // Recharging is one action and free outside encounters, so a spent charge only
+ // blocks within the started encounter it was spent in.
+ const encounterIds=actor=>new Set(values(game.combats).filter(combat=>combat?.started===true&&values(combat.combatants).some(c=>c?.actor?.uuid===actor.uuid)).map(combat=>combat.id));
+ const spentThisEncounter=actor=>{const spent=own(actor).spellstrike;return spent?.charged===false&&typeof spent.combatId==='string'&&encounterIds(actor).has(spent.combatId);};
  const ownerOperations=nativeOperations??createNativeOwnerOperations({game,fromUuid,scope:'spell-combination'});
  const volatile=actor=>volatileSparkEnabled&&hasVolatileSpark(actor);
  const reloading=volatileSparkReload??createVolatileSparkReload({game,fromUuid});
@@ -187,7 +192,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   await message.update({[`flags.${MODULE_ID}.spellCombinationUse`]:next});
   if(scope){scope.assertLive({receipt:false});demand(equal(own(message).spellCombinationUse,next));scope.receipt=clone(next);}requireGM(message);
  }
- async function attack(actor,strike,target,map,message,index,kind,sequence,user,beforeRoll){
+ async function attack(actor,strike,target,map,message,index,kind,sequence,user,beforeRoll,origin){
   requireGM(message);
   if(heldFirearm(strike)&&!game.modules.get('pf2e-ranged-combat')?.active)throw Error('火器组合活动需要启用 Ranged Combat 的原生弹药处理。');
   let created;
@@ -199,7 +204,11 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   const options=new Set([`action:${kind==='combination'?'overwhelming-combination':kind==='swipe'?'spell-swipe':kind==='booming'?'booming-blast':'spellstrike'}`,`${MODULE_ID}:spell-combination:${message.id}`,...frame.attackOptions]);
   if(kind==='combination')options.add('overwhelming-combination');else if(kind!=='booming'){options.add('arcane');options.add('magical');options.add('item:trait:magical');}
   if(kind==='swipe'&&strike.item.system.traits.value.includes('sweep'))options.add('sweep-bonus');
-  const nativeResult=await ownerOperations.run({actor,message,user},{type:'attack',weaponId:strike.item.id,altUsageType:strike.item.altUsageType??'',map,targetUuid:target.uuid,options:[...options],transientItems:nativeTransientItems(strike,actor),flags:{spellCombinationAttack:{activityMessageId:message.id,index,kind}}},async()=>{
+  // Flat checks resolve before the attack, as for dual Strikes: Utility Buttons
+  // would otherwise hide the card this activity waits for. Sure Strike and
+  // Blind-Fight exemptions skip the check entirely.
+  const preflight=canPreflightFlatChecks(game,actor,strike.item)?{tokenUuid:origin.uuid,automaticFlatChecks:true}:{};
+  const nativeResult=await ownerOperations.run({actor,message,user},{type:'attack',weaponId:strike.item.id,altUsageType:strike.item.altUsageType??'',map,targetUuid:target.uuid,...preflight,options:[...options],transientItems:nativeTransientItems(strike,actor),flags:{spellCombinationAttack:{activityMessageId:message.id,index,kind}}},async()=>{
   const check=await strike.variants[map].roll({target:target.object,options,event:skipEvent(game,'attack'),createMessage:false,callback:async(_roll,_outcome,raw)=>{
    requireGM(message);
    const data=raw.toObject();delete data._id;
@@ -212,6 +221,13 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   },beforeRoll);
   requireGM(message);
   if(nativeResult.status==='cancelled')throw Object.assign(Error('本次原生攻击已取消。'),{nativeCancelled:true});
+  if(nativeResult.status==='flat-check-failed'){
+   // The Strike was still attempted: its spell and charge are spent and
+   // next-Strike effects are used, but nothing is rolled against the target.
+   await beforeRoll?.();requireGM(message);
+   sequence.recordFlatCheckFailure(frame);await frame.consume();requireGM(message);
+   return {strike,target,map,message:null,outcome:'flat-check-failed',frame,activityMessage:message,user};
+  }
   created=game.messages.get(nativeResult.messageId);
   if(!created)throw Error('组合活动的原生攻击未完成，已发生的攻击不会重试。');
   frame.capture(created);
@@ -358,7 +374,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
   const target=targets.find(t=>t.uuid===targetKey);
   await record(message,'started',{kind:'booming',weaponUuid:selected.item.uuid});
   try{
-   const result=await attack(actor,selected,target,Number(tier),message,0,'booming',createAttackSequence({actor}),user,chargeConflux);
+   const result=await attack(actor,selected,target,Number(tier),message,0,'booming',createAttackSequence({actor}),user,chargeConflux,origin);
    const damage=await weaponDamage(result);
    if(damage)await damageCard({actor,message,target,parts:[{roll:damage,item:selected.item}],attacks:[result],kind:'booming'});
    for(const recipient of saveTargets){
@@ -367,7 +383,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
     if(value>(recipient.actor.getCondition('frightened')?.value??0)&&!recipient.actor.isImmuneTo?.(item))await recipient.actor.increaseCondition('frightened',{value,max:value});
     requireGM(message);
    }
-   await record(message,'done');return '裂胆鸣爆已完成火器打击、所选敌人的 Will 豁免与惊惧；法术打击已充能。';
+   await record(message,'done');return `裂胆鸣爆已完成${result.outcome==='flat-check-failed'?'火器打击（平检未通过，未进行攻击掷骰）':'火器打击'}、所选敌人的 Will 豁免与惊惧；法术打击已充能。`;
   }catch(error){
    if(error.nativeCancelled)return cancelled();
    if(isActiveGM(game))await record(message,'error',{error:String(error.message??error)});throw error;
@@ -404,7 +420,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
     await actor.update({[`flags.${MODULE_ID}.spellstrike`]:{charged:true,messageId:message.id}});requireGM(message);demand(own(actor).spellstrike?.charged===true&&own(actor).spellstrike.messageId===message.id);await record(message,'done');return '法术打击已充能。';
    }
    if(!game.modules.get('pf2e-toolbelt')?.active||typeof game.toolbelt?.api?.betterChat?.mergeDamageMessages!=='function')throw Error('需要已启用的 Toolbelt 原生伤害合并接口，尚未攻击。');
-   if(kind!=='combination'&&own(actor).spellstrike?.charged===false)throw Error('法术打击尚未充能；请使用充能动作或施放汇聚法术。');
+   if(kind!=='combination'&&spentThisEncounter(actor))throw Error('法术打击尚未充能；请使用充能动作或施放汇聚法术。');
    const targets=await resolveMessageTargets(message,{game,fromUuid});
    requireGM(message);captureTokens(targets);
    if(targets.length!==(kind==='swipe'?2:1)||targets.some(t=>!t.object||!t.actor))throw Error(`请选定${kind==='swipe'?'两个相邻的':'一个'}场景目标。`);
@@ -436,7 +452,7 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
    const commitAttack=choice?async()=>{
     scope.assertLive();for(const target of targets)requireSceneTarget(actor,origin,target);
     payment=await nativeCasts.payForActivity({actor,item:choice.spell,message,user,rank:choice.rank,slotId:choice.slotId});requireGM(message);
-    await actor.update({[`flags.${MODULE_ID}.spellstrike`]:{charged:false,messageId:message.id}},{render:false});requireGM(message);demand(own(actor).spellstrike?.charged===false&&own(actor).spellstrike.messageId===message.id);
+    await actor.update({[`flags.${MODULE_ID}.spellstrike`]:{charged:false,messageId:message.id,combatId:[...encounterIds(actor)][0]??null}},{render:false});requireGM(message);demand(own(actor).spellstrike?.charged===false&&own(actor).spellstrike.messageId===message.id);
    }:undefined;
    try{
     requireGM(message);
@@ -446,10 +462,11 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
       requireGM(message);
       const strike=strikes(actor).find(s=>strikeKey(s)===strikeKey(selected));
       if(!strike||!(fist(strike)||allowedCombinationWeapon(strike)))throw Error('连击的下一把武器已不可用。');
-      requireSceneTarget(actor,origin,targets[0]);attacks.push(await attack(actor,strike,targets[0],Math.min(map+index,2),message,index,kind,sequence,user));
+      requireSceneTarget(actor,origin,targets[0]);attacks.push(await attack(actor,strike,targets[0],Math.min(map+index,2),message,index,kind,sequence,user,undefined,origin));
      }
-    }else for(const [index,target]of targets.entries()){requireGM(message);requireSceneTarget(actor,origin,target);attacks.push(await attack(actor,current,target,map,message,index,kind,sequence,user,index===0?commitAttack:undefined));}
-    const receivesSpell=attack=>choice&&(!spellTarget||attack.target.uuid===spellTarget)&&(kind==='swipe'&&!spellTarget?hit(attack.outcome):choice.spell.isAttack||choice.spell.system.traits.value.includes('attack')?hit(attack.outcome):attack.outcome!=='criticalFailure');
+    }else for(const [index,target]of targets.entries()){requireGM(message);requireSceneTarget(actor,origin,target);attacks.push(await attack(actor,current,target,map,message,index,kind,sequence,user,index===0?commitAttack:undefined,origin));}
+    // A failed flat check leaves the target unaffected, even by a save spell.
+    const receivesSpell=attack=>choice&&!!attack.message&&(!spellTarget||attack.target.uuid===spellTarget)&&(kind==='swipe'&&!spellTarget?hit(attack.outcome):choice.spell.isAttack||choice.spell.system.traits.value.includes('attack')?hit(attack.outcome):attack.outcome!=='criticalFailure');
     const eligible=attacks.filter(receivesSpell),spellCard=choice?await publishSpell({actor,user,message,choice,payment,targets:spellTarget?targets.filter(target=>target.uuid===spellTarget):targets,kind}):null;
     const sharedSpellDamage=choice?.spell.system.defense?.save&&!choice.spell.isAttack&&!choice.spell.system.traits.value.includes('attack')?{}:null;
     for(const target of targets){
@@ -468,16 +485,20 @@ export function createSpellCombination({game,fromUuid=globalThis.fromUuid,choose
        const roll=result.roll;damageContexts.set(roll,{...damageContexts.get(damage),manualPrivacy:result.privacy});parts.push({roll,item:spell});
       }
      }
-     await damageCard({actor,message,target,parts,attacks:forTarget,kind,volatileSpell:kind==='strike'&&volatile(actor)&&heldFirearm(current)&&current.item.system.traits.value.includes('concussive')&&parts.some(p=>p.item.type==='spell')});
+     await damageCard({actor,message,target,parts,attacks:forTarget.filter(a=>a.message),kind,volatileSpell:kind==='strike'&&volatile(actor)&&heldFirearm(current)&&current.item.system.traits.value.includes('concussive')&&parts.some(p=>p.item.type==='spell')});
     }
     requireGM(message);
-    await record(message,'done');return '已完成攻击、法术支付与合并伤害；每个目标按原生伤害卡应用一次。';
+    await record(message,'done');
+    const flatFailures=attacks.filter(a=>a.outcome==='flat-check-failed').length;
+    if(flatFailures)return `${flatFailures===attacks.length?'平检未通过':`有 ${flatFailures} 次平检未通过`}，该击没有攻击或伤害掷骰${choice?'；法术已支付、法术打击充能已消耗':''}。${flatFailures<attacks.length?'其余攻击已按原生伤害卡结算。':''}`;
+    return '已完成攻击、法术支付与合并伤害；每个目标按原生伤害卡应用一次。';
    }catch(error){
     if(error.nativeCancelled&&isActiveGM(game)){
      if(payment&&!values(game.messages).some(card=>own(card).spellCombination?.activityMessageId===message.id))await publishSpell({actor,user,message,choice,payment,targets:spellTarget?targets.filter(target=>target.uuid===spellTarget):targets,kind});
      await record(message,'cancelled',{error:undefined});
      const rolled=values(game.messages).some(card=>own(card).spellCombinationAttack?.activityMessageId===message.id);
-     return {status:'cancelled',result:rolled?'后续攻击已取消；已经投出的攻击和本次支付保留，可沿原生攻击卡处理。':'本次攻击已取消，未支付法术或消耗充能。'};
+     // A failed flat check already paid without any attack card.
+     return {status:'cancelled',result:rolled?'后续攻击已取消；已经投出的攻击和本次支付保留，可沿原生攻击卡处理。':payment?'后续攻击已取消；平检未通过的那一击已支付法术并消耗法术打击充能。':'本次攻击已取消，未支付法术或消耗充能。'};
     }
     if(isActiveGM(game))await record(message,'error',{error:String(error.message??error)});throw error;
    }
