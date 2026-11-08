@@ -263,3 +263,16 @@ test('cancelling a non-signature allocation leaves native slots and cast receipt
  assert.deepEqual(f.counters(),{consumes:0,messages:0,castCalls:0});assert.deepEqual(f.damageCounts(),{rolled:0,published:0});
  assert.equal(f.entry.system.slots.slot1.value,3);assert.equal(f.actor.flags[ID],undefined);assert.equal(f.item.system.location.signature,false);
 });
+
+// pf2e-hud casts with {rank,slotId:<row index>}; PF2e ignores slotId for spontaneous entries.
+test('a spontaneous HUD row index is not a slot and pays like the sheet button',async()=>{
+ const f=fixture();f.casts.addInvocationAdapter('force-barrage',f.adapter);f.enroll();
+ const out=await f.cast(f.item,{rank:1,slotId:2});
+ assert.equal(out.status,'completed');assert.equal(out.input.slotId,null);assert.equal(out.receipt.slotId,null);
+ assert.equal(out.receipt.slotCommit.before,3);assert.equal(out.receipt.slotCommit.after,2);
+ assert.deepEqual(f.counters(),{consumes:1,messages:1,castCalls:1});
+});
+test('a prepared entry keeps its integer slot and is not enrolled',async()=>{
+ const f=fixture();f.entry.isSpontaneous=false;f.entry.system.prepared.value='prepared';f.casts.addInvocationAdapter('force-barrage',f.adapter);f.enroll();
+ await assert.rejects(f.cast(f.item,{rank:1,slotId:2}));assert.equal(f.counters().consumes,0);
+});

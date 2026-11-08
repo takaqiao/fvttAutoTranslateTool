@@ -188,3 +188,19 @@ test('the real Reaction availability function sees the adapter payment', {skip:!
  await assert.rejects(budget.applyDamage(f.actor,f.params,async()=>{assert.equal(available(f.combatant,'shield-block'),false);throw markUnappliedDamageError(Error('verified before native'))}),/verified before native/);
  assert.equal(available(f.combatant,'shield-block'),true);
 });
+
+// PF2e applies chat damage to getContextualClone(): same UUID, different object.
+// Roaring Applause treats only the live scene/world Actor as current.
+const liveOnly=(f,live='clear')=>actor=>actor===f.actor?{status:live,sources:[]}:{status:'manual',sources:[{sourceNonce:null,status:'manual',reason:'actor-not-live'}]};
+test('Shield Block on a PF2e contextual clone checks reaction restriction on the live token actor',async()=>{
+ let f;f=fixture({reaction:true,reactionRestriction:a=>liveOnly(f)(a)});
+ const clone={...f.actor};assert.notEqual(clone,f.token.actor);
+ await f.budget.applyDamage(clone,f.params,f.native);
+ assert.equal(f.count(),1);assert.equal(f.entries()[0].shield.state,'used');assert.deepEqual(f.errors,[]);
+});
+test('a restricted live actor still blocks Shield Block reached through its contextual clone',async()=>{
+ let f;f=fixture({reaction:true,reactionRestriction:a=>liveOnly(f,'restricted')(a)});
+ const before=structuredClone(f.combatant.flags);
+ await assert.rejects(f.budget.applyDamage({...f.actor},f.params,f.native),/禁止.*反应|不能.*反应/);
+ assert.equal(f.count(),0);assert.deepEqual(f.combatant.flags,before);
+});

@@ -240,13 +240,16 @@ export function createReactionBudget({game,reactionRestriction,fromUuid=globalTh
  async function applyDamage(actor,params,apply){
   const damage=typeof params.damage==='number'?params.damage:params.damage?.total,token=params.token?.document??params.token;
   if(game.modules?.get(AAT)?.active||!params.shieldBlockRequest||params.final||!Number.isFinite(damage)||damage<=0||!shieldReady(actor)||token?.actor?.uuid!==actor.uuid)return apply(params);
-  let context;try{requireReactionPermitted(actor,reactionRestriction);context=shieldEncounter(actor,token,game);}catch(error){throw markUnappliedDamageError(error);}if(!context)return apply(params);
+  // PF2e applies chat damage to getContextualClone(), never the live document.
+  // Reaction restrictions belong to the live token actor checked above.
+  const live=token.actor;
+  let context;try{requireReactionPermitted(live,reactionRestriction);context=shieldEncounter(actor,token,game);}catch(error){throw markUnappliedDamageError(error);}if(!context)return apply(params);
   if(!actor.testUserPermission?.(game.user,'OWNER'))throw Error('无权使用这个角色的盾牌格挡。');
   const payload={nonce:globalThis.foundry?.utils?.randomID?.(24)??globalThis.crypto.randomUUID(),actorUuid:actor.uuid,tokenUuid:token.uuid,shieldId:actor.attributes.shield.itemId,combatId:context.combat.id,combatantId:context.combatant.id,epoch:context.epoch};
   let receipt;try{receipt=await shieldRpc('begin',payload);}catch(error){throw markUnappliedDamageError(error);}
   if(!receipt)return apply(params);
   const scope={actor,token,receipt};scopes.set(payload.nonce,scope);let completed=false;
-  try{try{boundEncounter(actor,token,payload);requireReactionPermitted(actor,reactionRestriction);}catch(error){throw markUnappliedDamageError(error);}const result=await apply({...params,rollOptions:new Set([...params.rollOptions??[],shieldPrefix+payload.nonce])});completed=true;
+  try{try{boundEncounter(actor,token,payload);requireReactionPermitted(live,reactionRestriction);}catch(error){throw markUnappliedDamageError(error);}const result=await apply({...params,rollOptions:new Set([...params.rollOptions??[],shieldPrefix+payload.nonce])});completed=true;
    try{await shieldRpc('finish',{...payload,messageId:scope.messageId??null,content:scope.content??null,blocked:scope.blocked});}catch(error){try{onError(error)}catch{/* Native damage already completed; preserve its result. */}}
    return result;
   }

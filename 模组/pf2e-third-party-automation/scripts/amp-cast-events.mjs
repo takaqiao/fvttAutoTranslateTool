@@ -461,8 +461,9 @@ export function createNativeCastEvents({game,fromUuid=globalThis.fromUuid,messag
      if(!(privateItem instanceof Spell)||privateItem===original||privateItem===item||privateItem.original!==original||privateItem.actor!==item.actor||privateItem.uuid!==item.uuid||privateItem.rank!==rank||privateItem.spellcasting!==this||values(privateItem.appliedOverlays).length||source(privateItem)!==source(original))throw Error('原生法术未能提供独立的本次调用实例。');
      item=privateItem;
      enrollment={kind,data:JSON.parse(serialized),gmId:game.users.activeGM.id};
-     // A spontaneous button has no prepared-slot index; no other route changes.
-     if(this.isSpontaneous===true&&(options.slotId===undefined||Number.isNaN(options.slotId)))options={...options,slotId:null};
+     // Spontaneous entries have no prepared slot: the sheet passes NaN and
+     // pf2e-hud its row index, and native consume ignores both. Prepared is unchanged.
+     if(this.isSpontaneous===true&&options.slotId!==null)options={...options,slotId:null};
      return next();
     };
     return chain[index]({item,options,entry:this},next);
