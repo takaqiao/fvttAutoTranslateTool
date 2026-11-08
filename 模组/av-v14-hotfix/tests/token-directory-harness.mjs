@@ -89,7 +89,7 @@ export function directoryEnvironment({gm=true,mutateSource=source=>source}={}){
   function add(id,values={}){
     const doc={id,name:id,x:0,y:0,hidden:false,locked:false,elevation:0,level:'level',viewed:true,rendered:true,
       get visible(){return game.user.isGM||!this.hidden;},...values};
-    doc.object={id,controlled:false,release:options=>{events.push(['release',id,options]);doc.object.controlled=false;}};
+    doc.object={id,document:doc,controlled:false,release:options=>{events.push(['release',id,options]);doc.object.controlled=false;}};
     documents.push(doc);elements.push(row({id,label:doc.name}));return doc;
   }
   const movement=(changes=[{_id:'a',x:4000}],extra={})=>({renderContext:'updatetokens',renderData:changes,force:false,...extra});

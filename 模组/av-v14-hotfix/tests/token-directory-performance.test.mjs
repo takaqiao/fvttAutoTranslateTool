@@ -267,3 +267,113 @@ test('guard-read failures delegate, and native filter failures still propagate',
   assert.throws(()=>wrapper.call(e.directory,()=>true,e.movement()),error=>error===failure);
   assert.equal(e.elements[0],entry);
 });
+
+// Sidebar visibility as core reports it: the active primary tab and the expanded state.
+async function sidebarInstalled({tab='chat',expanded=true,hooks=true}={}){
+  const e=directoryEnvironment();e.add('a');e.add('b');
+  e.sidebar={tabGroups:{primary:tab},expanded};e.runtime.ui.sidebar=e.sidebar;
+  Object.defineProperty(e.directory,'active',{configurable:true,get:()=>e.sidebar.tabGroups.primary==='placeables'});
+  e.hooks={};
+  if(hooks)e.runtime.Hooks={on:(name,fn)=>{e.hooks[name]=fn;}};
+  e.result=install({runtime:e.runtime,deferHidden:true});
+  await e.render({force:true});
+  e.events.length=0;
+  return e;
+}
+
+test('while the directory cannot be seen, selection and token updates reuse its entries',async()=>{
+  if(baseline)return;
+  for(const view of [{tab:'chat'},{tab:'placeables',expanded:false}]){
+    const e=await sidebarInstalled(view),[token,other]=e.documents,entry=e.elements[0];
+    await e.render({});
+    assert.equal(e.elements[0],entry,JSON.stringify(view));
+    // Core changes a token's viewed state through its levels, which renders as an update.
+    token.viewed=false;
+    await e.render(e.movement([{_id:'a',levels:['other']}]));
+    assert.equal(e.elements[0],entry);
+    assert.deepEqual([...e.tab._filterState.visible],[other],'the canvas filter still sees current documents');
+    token.name='Renamed';
+    await e.render(e.movement([{_id:'a',name:'Renamed'}]));
+    await e.render(e.movement([{_id:'a',delta:{system:{attributes:{hp:{value:3}}}}}]));
+    assert.equal(e.elements[0],entry);
+    assert.equal(e.result.stats.deferred,4);
+    assert.equal(e.result.deferHidden,true);
+  }
+});
+
+test('a deferred selection reruns the filters only when it selected something they hide',async()=>{
+  if(baseline)return;
+  const e=await sidebarInstalled(),[token,other]=e.documents,entry=e.elements[0];
+  e.canvas.tokens.controlled=[other.object];
+  await e.render({});
+  assert.deepEqual(e.events.map(event=>event[0]),[],'nothing to release, so no layer-wide refresh');
+  assert.equal(e.elements[0],entry);
+  e.tab._searchFilter.rgx=/^b$/;await e.render(e.movement([{_id:'b',name:'b'}]));
+  e.events.length=0;
+  token.object.controlled=true;e.canvas.tokens.controlled=[token.object,other.object];
+  await e.render({});
+  assert.equal(token.object.controlled,false,'the hidden selection is released as natively');
+  assert.deepEqual(e.events.map(event=>event[0]),['release','flags','palette']);
+  assert.equal(e.elements[0],entry);
+});
+
+test('showing the directory again rebuilds it once',async()=>{
+  if(baseline)return;
+  const e=await sidebarInstalled(),entry=e.elements[0];
+  await e.render({});assert.equal(e.elements[0],entry);
+  e.hooks.changeSidebarTab(e.runtime.ui.chat);
+  assert.equal(e.elements[0],entry,'another tab does not rebuild');
+  e.sidebar.tabGroups.primary='placeables';e.hooks.changeSidebarTab(e.directory);
+  await new Promise(resolve=>setImmediate(resolve));
+  assert.notEqual(e.elements[0],entry);
+  assert.equal(e.result.stats.flushed,1);
+  const rebuilt=e.elements[0];e.hooks.changeSidebarTab(e.directory);await new Promise(resolve=>setImmediate(resolve));
+  assert.equal(e.elements[0],rebuilt,'a current directory is not rebuilt again');
+  // Expanding a collapsed sidebar on the directory tab.
+  e.sidebar.expanded=false;await e.render({});assert.equal(e.elements[0],rebuilt);
+  e.hooks.collapseSidebar(e.sidebar,true);assert.equal(e.elements[0],rebuilt);
+  e.sidebar.expanded=true;e.hooks.collapseSidebar(e.sidebar,false);await new Promise(resolve=>setImmediate(resolve));
+  assert.notEqual(e.elements[0],rebuilt);
+  assert.equal(e.result.stats.flushed,2);
+});
+
+test('stale entries that come into view without a sidebar event rebuild on the next render',async()=>{
+  if(baseline)return;
+  const e=await sidebarInstalled(),entry=e.elements[0];
+  await e.render({});assert.equal(e.elements[0],entry);
+  e.sidebar.tabGroups.primary='placeables';
+  await e.render();
+  assert.notEqual(e.elements[0],entry,'even a coordinate-only update');
+  const current=e.elements[0];await e.render();assert.equal(e.elements[0],current);
+});
+
+test('a visible, popped-out or unknown directory and changing entries keep the native render',async()=>{
+  if(baseline)return;
+  for(const [label,configure,options] of [
+    ['visible',e=>{e.sidebar.tabGroups.primary='placeables';},{}],
+    ['popout',e=>{e.directory.popout={rendered:true,render(){}};},{}],
+    ['unknown tab state',e=>{Object.defineProperty(e.directory,'active',{configurable:true,value:undefined});},{}],
+    ['unknown sidebar',e=>{delete e.runtime.ui.sidebar;},{}],
+    ['forced',()=>{},{force:true}],
+    ['tabs',()=>{},{tabs:true}],
+    ['create',()=>{},{renderContext:'createtokens'}],
+    ['delete',()=>{},{renderContext:'deletetokens'}],
+    ['context without changes',()=>{},{renderContext:'updatetokens'}],
+    ['change without id',()=>{},{renderContext:'updatetokens',renderData:[{name:'x'}]}],
+    ['data without context',()=>{},{renderData:[{_id:'a'}]}],
+    ['new visible entry',e=>{e.documents.push({...e.documents[0],id:'c',get visible(){return true;}});},{}]
+  ]){
+    const e=await sidebarInstalled(),entry=e.elements[0];configure(e);
+    await e.render(options);
+    assert.notEqual(e.elements[0],entry,label);
+  }
+});
+
+test('without sidebar hooks nothing is deferred',async()=>{
+  if(baseline)return;
+  const e=await sidebarInstalled({hooks:false}),entry=e.elements[0];
+  assert.equal(e.result.deferHidden,false);
+  await e.render({});
+  assert.notEqual(e.elements[0],entry);
+  assert.deepEqual(Object.keys(e.result.stats),['skipped','delegated']);
+});

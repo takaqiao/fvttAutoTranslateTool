@@ -240,10 +240,21 @@ function visibleEntriesMatch(scene,tab,changes){
   return visible.size===0;
 }
 
-/** Keep the native filter update while avoiding unchanged Token directory HTML. */
-export function installTokenDirectoryPerformancePatch({moduleId='av-v14-hotfix',runtime=globalThis,report=()=>{}}={}){
+// Any token update, as long as every change names a token.
+function tokenChanges(changes){
+  return Array.isArray(changes)&&changes.length>0&&changes.every(change=>change&&typeof change==='object'
+    &&!Array.isArray(change)&&typeof change._id==='string'&&!!change._id);
+}
+
+/**
+ * Keep the native filter update while avoiding unchanged Token directory HTML.
+ * With deferHidden, the directory is also not rebuilt while the player cannot see
+ * it, and is rebuilt once when its sidebar tab is shown again.
+ */
+export function installTokenDirectoryPerformancePatch({moduleId='av-v14-hotfix',runtime=globalThis,report=()=>{},deferHidden=false}={}){
   const stats={skipped:0,delegated:0};
-  const finish=status=>{const result={feature:'tokenDirectory',status,stats};report(result);return result;};
+  let defer=false;
+  const finish=status=>{const result={feature:'tokenDirectory',status,stats,deferHidden:defer};report(result);return result;};
   const tabs=runtime.foundry?.applications?.sidebar?.tabs;
   const classes={...tabs,ApplicationV2:runtime.foundry?.applications?.api?.ApplicationV2,
     AbstractSidebarTab:runtime.foundry?.applications?.sidebar?.AbstractSidebarTab};
@@ -259,11 +270,41 @@ export function installTokenDirectoryPerformancePatch({moduleId='av-v14-hotfix',
   if(directoryConsumers.some(([name,fn])=>PlaceableDirectory.prototype[name]!==fn)
     ||tabConsumers.some(([name,fn])=>TokenTab.prototype[name]!==fn))return finish('unsupported-source');
   const scenes=new WeakMap();
+  // Directories whose entries were last rebuilt before a deferred render.
+  const stale=new WeakSet();
+  const plainOptions=options=>!options.force&&!options.isFirstRender
+    &&Reflect.ownKeys(options).every(key=>['renderContext','renderData','force','isFirstRender'].includes(key));
+
+  // Whether the in-sidebar directory can currently be seen. Unknown counts as seen.
+  function visible(directory){
+    const sidebar=runtime.ui?.sidebar,active=directory.active;
+    if(typeof active!=='boolean'||typeof sidebar?.expanded!=='boolean')return true;
+    return active&&sidebar.expanded;
+  }
 
   function canSkip(directory,options,sameScene){
-    if(!sameScene||options.renderContext!=='updatetokens'||options.force||options.isFirstRender
-      ||Reflect.ownKeys(options).some(key=>!['renderContext','renderData','force','isFirstRender'].includes(key))
-      ||!coordinates(options.renderData))return false;
+    if(!sameScene||options.renderContext!=='updatetokens'||!plainOptions(options)||!coordinates(options.renderData))return false;
+    return stock(directory)&&visibleEntriesMatch(runtime.canvas.scene,directory.tab,options.renderData);
+  }
+
+  // Selection changes render without a context; token updates with one. Either
+  // way the entries stay the same set, which the canvas filter reads.
+  function canDefer(directory,options,sameScene){
+    if(!sameScene||!plainOptions(options)||visible(directory))return false;
+    const {renderContext,renderData}=options;
+    const selection=renderContext===undefined&&renderData===undefined;
+    if(!selection&&!(renderContext==='updatetokens'&&tokenChanges(renderData)))return false;
+    if(!stock(directory)||!visibleEntriesMatch(runtime.canvas.scene,directory.tab,renderData??[]))return false;
+    return selection?'selection':'update';
+  }
+
+  // A selection changes none of the filter inputs. The filters only have work to
+  // do when something they hide got selected, which they then release; otherwise
+  // they would just refresh every token on the layer once more.
+  const filtersSettled=tab=>tab.layer.controlled.every(object=>tab._filterState.visible.has(object.document));
+
+  // The native directory, tab and filter state the skipped render would have rebuilt.
+  function stock(directory){
     const {canvas,CONFIG,ui}=runtime,scene=canvas?.scene,tab=directory.tab;
     if(!canvas?.ready||!scene||directory!==ui?.placeables||directory.isPopout||directory.popout?.rendered
       ||Object.getPrototypeOf(directory)!==PlaceableDirectory.prototype||Object.getPrototypeOf(tab)!==TokenTab.prototype
@@ -281,26 +322,50 @@ export function installTokenDirectoryPerformancePatch({moduleId='av-v14-hotfix',
       const descriptor=Object.getOwnPropertyDescriptor(prototype,name);
       if((getter?descriptor?.get:descriptor?.value)!==fn)return false;
     }
-    return visibleEntriesMatch(scene,tab,options.renderData);
+    return true;
   }
 
   runtime.libWrapper.register(moduleId,TARGET,function(wrapped,options){
     // WRAPPER must call the next consumer, including its veto or exception.
     const result=wrapped(options);
-    let skip=false;
+    let skip=false,deferred=false,refilter=true;
     if(result===true){
       try{
         const scene=runtime.canvas?.scene,sameScene=scenes.has(this)&&scenes.get(this)===scene;
         scenes.set(this,scene);
-        skip=canSkip(this,options,sameScene);
-      }catch{/* An unreadable directory continues through its ordinary render. */}
+        // Stale entries that have come into view take the first render that arrives.
+        if(!(stale.has(this)&&visible(this))){
+          skip=canSkip(this,options,sameScene);
+          deferred=!skip&&defer&&canDefer(this,options,sameScene);
+          if(deferred==='selection')refilter=!filtersSettled(this.tab);
+        }
+      }catch{
+        // An unreadable directory continues through its ordinary render.
+        skip=deferred=false;
+      }
     }
-    if(!skip){stats.delegated++;return result;}
+    if(!skip&&!deferred){
+      stats.delegated++;
+      if(result===true)stale.delete(this);
+      return result;
+    }
     // Filters also release newly hidden selections and refresh canvas flags.
-    this.tab._applyFilters();
-    stats.skipped++;
+    if(refilter)this.tab._applyFilters();
+    if(skip)stats.skipped++;
+    else{stats.deferred++;stale.add(this);}
     return false;
   },'WRAPPER');
   installed.add(PlaceableDirectory.prototype);
+
+  if(deferHidden&&typeof runtime.Hooks?.on==='function'){
+    defer=true;stats.deferred=0;stats.flushed=0;
+    const flush=directory=>{
+      if(!directory||!stale.has(directory)||!visible(directory))return;
+      stale.delete(directory);stats.flushed++;
+      directory.render({force:true});
+    };
+    runtime.Hooks.on('changeSidebarTab',app=>flush(app));
+    runtime.Hooks.on('collapseSidebar',(_sidebar,collapsed)=>{if(!collapsed)flush(runtime.ui?.placeables);});
+  }
   return finish('installed');
 }

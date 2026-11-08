@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 const source=fs.readFileSync(new URL('../av-v14-hotfix.mjs',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,'').replaceAll('import.meta.url',JSON.stringify(new URL('../av-v14-hotfix.mjs',import.meta.url).href));
-const names=['prepareSundryPatch','prepareTurnLifecyclePatch','registerLegacyCompat','installGrid','installSundryPatch','installPatreonPatch','installDurationPatch','installTimestampPatch','installItemNameFastPath','installChatDeleteCoalescing','installTokenizerChatPortraitPatch','installSoundStopPatch','installWayfinderFogPatch','installBbmmHardLocks','registerDsnQualitySettings','installDsnQualityLocks','installTurnLifecyclePatch','installDsnChatRecovery','registerBabeleIndex','installTokenDirectoryPerformancePatch','installCalendariaHudPatch','installToolbeltCoverPatch'];
+const names=['prepareSundryPatch','prepareTurnLifecyclePatch','registerLegacyCompat','installGrid','installSundryPatch','installPatreonPatch','installDurationPatch','installTimestampPatch','installItemNameFastPath','installChatDeleteCoalescing','installTokenizerChatPortraitPatch','installSoundStopPatch','installWayfinderFogPatch','installBbmmHardLocks','registerDsnQualitySettings','installDsnQualityLocks','installTurnLifecyclePatch','installDsnChatRecovery','registerBabeleIndex','installTokenDirectoryPerformancePatch','installCalendariaHudPatch','installToolbeltCoverPatch','installBobTileCachePatch','installHudTrackerPatch'];
 async function boot(disabled=[],generation=14,{globals={},modules=[],manual=false,throwOnError=true}={}){
  const hooks={},tasks=[],settings=new Map(),calls=[],phases=[],self={},logs=[];let phase='load';
  const log=level=>(...args)=>{logs.push({level,text:String(args[0]),args});if(level==='error'&&throwOnError)throw Error(args.join(' '));};
@@ -34,7 +34,7 @@ test('retired index, duration and adventure-setting repairs keep a reason but no
  assert(!f.calls.includes('installDurationPatch'));assert(!f.calls.includes('registerBabeleIndex'));
  assert.equal(Object.hasOwn(f.status,'babele'),false);
  for(const file of ['../scripts/patches/babele.mjs','../scripts/patches/duration.mjs'])assert.equal(fs.existsSync(new URL(file,import.meta.url)),false,file);
- assert.deepEqual([...f.settings.keys()].sort(),['calendariaHud','chat','dsnChat','dsnQualityLocks','itemNames','legacy','soundStop','sundry','timestamps','tokenDirectory','tokenizerChat','toolbeltCover','turnLifecycle']);
+ assert.deepEqual([...f.settings.keys()].sort(),['bobTileCache','calendariaHud','chat','dsnChat','dsnQualityLocks','hudTracker','itemNames','legacy','soundStop','sundry','timestamps','tokenDirectory','tokenDirectoryHidden','tokenizerChat','toolbeltCover','turnLifecycle']);
 });
 test('every imported module file exists and exports the names the entry uses',async()=>{
  const entry=fs.readFileSync(new URL('../av-v14-hotfix.mjs',import.meta.url),'utf8');
@@ -106,6 +106,32 @@ test('token directory optimization installs during setup and honors its reload s
  const enabled=await boot();assert.deepEqual(enabled.phases.filter(call=>call.name==='installTokenDirectoryPerformancePatch').map(call=>call.phase),['setup']);
  const disabled=await boot(['tokenDirectory']);assert(!disabled.calls.includes('installTokenDirectoryPerformancePatch'));
  assert.equal(disabled.status.patches.tokenDirectory.status,'disabled');
+});
+
+test('hiding the token directory defers rebuilds only with its own switch',async()=>{
+ const seen=[];const capture=({deferHidden,report})=>{seen.push(deferHidden);report({feature:'tokenDirectory',status:'installed',stats:{skipped:0,delegated:0},deferHidden});};
+ await boot([],14,{globals:{installTokenDirectoryPerformancePatch:capture}});
+ await boot(['tokenDirectoryHidden'],14,{globals:{installTokenDirectoryPerformancePatch:capture}});
+ assert.deepEqual(seen,[true,false]);
+ const f=await boot();
+ assert.equal(f.settings.get('tokenDirectoryHidden')?.default,true);
+ assert.equal(f.settings.get('tokenDirectoryHidden')?.requiresReload,true);
+});
+
+for(const [key,installer,result] of [
+ ['bobTileCache','installBobTileCachePatch',{status:'installed',stats:{pyramids:0,loadedMB:0,evictedTiles:0,unloaded:0}}],
+ ['hudTracker','installHudTrackerPatch',{status:'installed',stats:{rendered:0,throttled:0,dropped:0,identical:0},adopted:false}]
+])test(`${key} installs during setup and honors its reload switch`,async()=>{
+ const f=await boot([],14,{globals:{[installer]:reporting(key,result)}});
+ assert.equal(f.settings.get(key)?.default,true);
+ assert.equal(f.settings.get(key)?.requiresReload,true);
+ assert.equal(f.status.patches[key]?.status,'installed');
+ assert.deepEqual(f.lines('warn'),[]);
+ const enabled=await boot();assert.deepEqual(enabled.phases.filter(call=>call.name===installer).map(call=>call.phase),['setup']);
+ const disabled=await boot([key]);assert(!disabled.calls.includes(installer));
+ assert.equal(disabled.status.patches[key].status,'disabled');
+ const inactive=await boot([],14,{globals:{[installer]:reporting(key,{status:'inactive',reason:'module-inactive'})}});
+ assert.deepEqual(inactive.lines('warn'),[]);
 });
 
 test('Toolbelt cover correction installs during setup and honors its reload switch',async()=>{
