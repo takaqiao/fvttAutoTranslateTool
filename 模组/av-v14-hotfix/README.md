@@ -1,10 +1,21 @@
-# FVTT v14 Local Hotfix 0.6.31
+# FVTT v14 Local Hotfix 0.6.32
 
 当前源码及隔离回归基线为 Foundry **14.369**、PF2e **8.6.1**、Dice So Nice **6.4.4**、BBMM **1.4.11**、Sundry **1.11.0**、Summons Assistant **2.20.3**。清单保留最低核心版本 14.367 和已验证标签 14.369，没有核心最高版本限制。运行时不按 Foundry、PF2e 或第三方模组的版本号决定装不装。每项可在世界设置中关闭，刷新后生效。该装而没装上的修正会在控制台输出一行警告并写明原因；全部状态和各项实际生效的次数见：
 
 ```js
 game.modules.get('av-v14-hotfix').api.status()
 ```
+
+## 0.6.32：Toolbelt 自动掩护的两处修正
+
+新开关 `toolbeltCover`，默认开启，在 `setup` 安装，关闭后刷新生效。Toolbelt 没启用时报告 `skipped / module-inactive`。两处都改在 Toolbelt 的 Auto Cover 工具实例上，不改它的文件。实例通过 `game.toolbelt.debug.tools.autoCover` 取得：读的那一刻临时打开 `CONFIG.debug['pf2e-toolbelt']`，读完立即还原。
+
+- **墙**（`parts.walls`）：Toolbelt 3.60 起的墙默认模式「Cover if Movement」，说明写的是「墙同时限制移动时才给掩护」，但过滤条件是 `edge.isLimited("move")`。核心的 `Edge#isLimited` 只认 `LIMITED`，而墙的移动限制只有 NONE、NORMAL 两档，条件永远不成立，所以一面墙也排除不掉：开着的门、只挡视线／光／声音的墙都给标准掩护。现在把解析出的 `move` 按这面墙当前的边改成 `normal`（限制移动）或 `none`（不限制，开着的门在核心里所有限制都是 NONE）。逐墙设成「Provide Cover / No Cover」的照原样；Stealthy 通过 `calculateWallCover` 算的掩护同样生效。
+- **潜行**（`parts.stealth`）：Stealthy 开着 `useToolbeltCover` 时，会在卡片上把每个观察者的掩护直接加到躲藏／潜行的检定总值上。Toolbelt 也会在这类检定带目标时往检定里加掩护修正，于是被选中的观察者算两次，其他观察者也白得这份加值。Stealthy 是在总值外面做加法，碰不到 PF2e 的同类加值取最高规则。所以 Stealthy 启用并开着这一项时，Toolbelt 为技能检定算出的掩护按「无」返回，由 Stealthy 按观察者各算一次。攻击检定和不带检定上下文的掩护高亮不受影响；Stealthy 关掉这一项时修正自动让路。
+
+状态：`toolbeltCover.stats` 的 `wallsWithCover` / `wallsWithoutCover` 是「Cover if Movement」墙被判成有／无掩护的次数，`stealthDeferred` 是让给 Stealthy 的技能检定数。
+
+核验：本机隔离 Foundry 14.368 + PF2e 8.7.0 + Toolbelt 3.61.3 + Stealthy 1.3.1。修正关闭时，开着的门、只挡视线的墙、只挡声音的墙都返回 `standard`；躲藏（骰面 9，选中隔墙的观察者）总值含 Toolbelt 的 +2，Stealthy 再加 +2，对隔墙观察者的差值是 +3（应为 +1），对无墙观察者是 +1（应为 −1）。修正开启后，这三种墙返回 `none`，墙和关着的门仍为 `standard`，逐墙设成 Provide Cover 的开着的门为 `standard`；躲藏总值不再含掩护，Stealthy 只加一次；攻击检定在关门时 DC 12、开门时 DC 10（AC 10）。
 
 ## 0.6.31：三处安装前检查改按能力判断
 

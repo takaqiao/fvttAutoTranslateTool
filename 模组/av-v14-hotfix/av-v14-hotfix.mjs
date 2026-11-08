@@ -10,9 +10,10 @@ import {installTurnLifecyclePatch,prepareTurnLifecyclePatch} from './scripts/pat
 import {installDsnChatRecovery} from './scripts/patches/dsn-chat.mjs';
 import {installTokenDirectoryPerformancePatch} from './scripts/patches/token-directory-performance.mjs';
 import {installCalendariaHudPatch} from './scripts/patches/calendaria-hud.mjs';
+import {installToolbeltCoverPatch} from './scripts/patches/toolbelt-cover.mjs';
 
 const ID='av-v14-hotfix';
-const state={version:'0.6.31',patches:{patreon:{status:'retired',detail:'Upstream 3.2.29 includes the relationship refresh guards.'},wayfinderFog:{status:'retired',detail:'Wayfinder 14.1.1 replaced the old fog implementation; the 14.0.1 adapter is retired.'},grid:{status:'retired',detail:'Use Grid 2.3.1 distance and undrawn-token aura handling.'},bbmmLocks:{status:'retired',detail:'Use BBMM 1.4.11 submenu hard locks and notifications.'},babele:{status:'retired',detail:'Translation 3.2.3 replaces changed document index entries itself.'},duration:{status:'retired',detail:'The timestamp formatter cache saved a few milliseconds per refresh and no longer matched core 14.369.'},legacyAdventureSettings:{status:'retired',detail:'The Murder in Metal City importer setting pre-registration is retired; legacy keeps the chat type and scene field migrations.'}}};
+const state={version:'0.6.32',patches:{patreon:{status:'retired',detail:'Upstream 3.2.29 includes the relationship refresh guards.'},wayfinderFog:{status:'retired',detail:'Wayfinder 14.1.1 replaced the old fog implementation; the 14.0.1 adapter is retired.'},grid:{status:'retired',detail:'Use Grid 2.3.1 distance and undrawn-token aura handling.'},bbmmLocks:{status:'retired',detail:'Use BBMM 1.4.11 submenu hard locks and notifications.'},babele:{status:'retired',detail:'Translation 3.2.3 replaces changed document index entries itself.'},duration:{status:'retired',detail:'The timestamp formatter cache saved a few milliseconds per refresh and no longer matched core 14.369.'},legacyAdventureSettings:{status:'retired',detail:'The Murder in Metal City importer setting pre-registration is retired; legacy keeps the chat type and scene field migrations.'}}};
 // Patches report under their own names; status keys follow the world switches.
 const ALIASES={'legacy-compat':'legacy','turn-lifecycle':'turnLifecycle'};
 // Everything else means a repair that should be running is not, and is warned about.
@@ -55,7 +56,7 @@ const status=()=>{
 };
 
 Hooks.once('init',()=>{
-  for(const [key,name] of Object.entries({legacy:'旧导入器数据兼容',itemNames:'PF2e 物品名称性能优化',sundry:'Sundry 效果图标刷新优化',timestamps:'聊天时间戳 DOM 更新优化',chat:'批量删除聊天性能优化',tokenizerChat:'Tokenizer2 聊天头像缩放与遮罩修正',soundStop:'原生缓冲音频停止修正',dsnQualityLocks:'BBMM / DsN 画质硬锁适配',turnLifecycle:'共享回合与奴仆到期兼容修正',dsnChat:'DsN 动画失败后恢复聊天与队列',tokenDirectory:'原生 Token 目录移动更新优化',calendariaHud:'Calendaria HUD 文本更新优化'}))
+  for(const [key,name] of Object.entries({legacy:'旧导入器数据兼容',itemNames:'PF2e 物品名称性能优化',sundry:'Sundry 效果图标刷新优化',timestamps:'聊天时间戳 DOM 更新优化',chat:'批量删除聊天性能优化',tokenizerChat:'Tokenizer2 聊天头像缩放与遮罩修正',soundStop:'原生缓冲音频停止修正',dsnQualityLocks:'BBMM / DsN 画质硬锁适配',turnLifecycle:'共享回合与奴仆到期兼容修正',dsnChat:'DsN 动画失败后恢复聊天与队列',tokenDirectory:'原生 Token 目录移动更新优化',calendariaHud:'Calendaria HUD 文本更新优化',toolbeltCover:'Toolbelt 自动掩护：开着的门与潜行重复加值修正'}))
     game.settings.register(ID,key,{name,scope:'world',config:true,type:Boolean,default:true,requiresReload:true});
   game.modules.get(ID).api={status};
   void run('dsnQualityLocks',()=>registerDsnQualitySettings({report}));
@@ -71,6 +72,8 @@ Hooks.once('setup',async()=>{
   void run('timestamps',()=>installTimestampPatch({moduleId:ID,report}));
   void run('tokenDirectory',()=>installTokenDirectoryPerformancePatch({moduleId:ID,report}));
   void run('calendariaHud',()=>installCalendariaHudPatch({moduleId:ID,report}));
+  // Toolbelt builds its tools at load and only computes cover at roll or highlight time.
+  void run('toolbeltCover',()=>installToolbeltCoverPatch({report}));
   // Register before DsN starts its ready-time model preloads.
   void run('dsnChat',()=>installDsnChatRecovery({report}));
   await run('legacy',()=>registerLegacyCompat({moduleId:ID,registerWrapper:(target,fn,type)=>libWrapper.register(ID,target,fn,type),report}));

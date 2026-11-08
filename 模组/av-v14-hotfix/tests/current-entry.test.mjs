@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 const source=fs.readFileSync(new URL('../av-v14-hotfix.mjs',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,'').replaceAll('import.meta.url',JSON.stringify(new URL('../av-v14-hotfix.mjs',import.meta.url).href));
-const names=['prepareSundryPatch','prepareTurnLifecyclePatch','registerLegacyCompat','installGrid','installSundryPatch','installPatreonPatch','installDurationPatch','installTimestampPatch','installItemNameFastPath','installChatDeleteCoalescing','installTokenizerChatPortraitPatch','installSoundStopPatch','installWayfinderFogPatch','installBbmmHardLocks','registerDsnQualitySettings','installDsnQualityLocks','installTurnLifecyclePatch','installDsnChatRecovery','registerBabeleIndex','installTokenDirectoryPerformancePatch','installCalendariaHudPatch'];
+const names=['prepareSundryPatch','prepareTurnLifecyclePatch','registerLegacyCompat','installGrid','installSundryPatch','installPatreonPatch','installDurationPatch','installTimestampPatch','installItemNameFastPath','installChatDeleteCoalescing','installTokenizerChatPortraitPatch','installSoundStopPatch','installWayfinderFogPatch','installBbmmHardLocks','registerDsnQualitySettings','installDsnQualityLocks','installTurnLifecyclePatch','installDsnChatRecovery','registerBabeleIndex','installTokenDirectoryPerformancePatch','installCalendariaHudPatch','installToolbeltCoverPatch'];
 async function boot(disabled=[],generation=14,{globals={},modules=[],manual=false,throwOnError=true}={}){
  const hooks={},tasks=[],settings=new Map(),calls=[],phases=[],self={},logs=[];let phase='load';
  const log=level=>(...args)=>{logs.push({level,text:String(args[0]),args});if(level==='error'&&throwOnError)throw Error(args.join(' '));};
@@ -34,7 +34,7 @@ test('retired index, duration and adventure-setting repairs keep a reason but no
  assert(!f.calls.includes('installDurationPatch'));assert(!f.calls.includes('registerBabeleIndex'));
  assert.equal(Object.hasOwn(f.status,'babele'),false);
  for(const file of ['../scripts/patches/babele.mjs','../scripts/patches/duration.mjs'])assert.equal(fs.existsSync(new URL(file,import.meta.url)),false,file);
- assert.deepEqual([...f.settings.keys()].sort(),['calendariaHud','chat','dsnChat','dsnQualityLocks','itemNames','legacy','soundStop','sundry','timestamps','tokenDirectory','tokenizerChat','turnLifecycle']);
+ assert.deepEqual([...f.settings.keys()].sort(),['calendariaHud','chat','dsnChat','dsnQualityLocks','itemNames','legacy','soundStop','sundry','timestamps','tokenDirectory','tokenizerChat','toolbeltCover','turnLifecycle']);
 });
 test('every imported module file exists and exports the names the entry uses',async()=>{
  const entry=fs.readFileSync(new URL('../av-v14-hotfix.mjs',import.meta.url),'utf8');
@@ -106,6 +106,17 @@ test('token directory optimization installs during setup and honors its reload s
  const enabled=await boot();assert.deepEqual(enabled.phases.filter(call=>call.name==='installTokenDirectoryPerformancePatch').map(call=>call.phase),['setup']);
  const disabled=await boot(['tokenDirectory']);assert(!disabled.calls.includes('installTokenDirectoryPerformancePatch'));
  assert.equal(disabled.status.patches.tokenDirectory.status,'disabled');
+});
+
+test('Toolbelt cover correction installs during setup and honors its reload switch',async()=>{
+ const f=await boot([],14,{globals:{installToolbeltCoverPatch:reporting('toolbeltCover',{status:'installed',parts:{walls:{status:'installed'},stealth:{status:'installed'}},stats:{wallsWithCover:0,wallsWithoutCover:0,stealthDeferred:0}})}});
+ assert.equal(f.settings.get('toolbeltCover')?.default,true);
+ assert.equal(f.settings.get('toolbeltCover')?.requiresReload,true);
+ assert.equal(f.status.patches.toolbeltCover?.status,'installed');
+ assert.deepEqual(f.lines('warn'),[]);
+ const enabled=await boot();assert.deepEqual(enabled.phases.filter(call=>call.name==='installToolbeltCoverPatch').map(call=>call.phase),['setup']);
+ const disabled=await boot(['toolbeltCover']);assert(!disabled.calls.includes('installToolbeltCoverPatch'));
+ assert.equal(disabled.status.patches.toolbeltCover.status,'disabled');
 });
 
 test('later core generations reach independently guarded installers and ready diagnostics',async()=>{
