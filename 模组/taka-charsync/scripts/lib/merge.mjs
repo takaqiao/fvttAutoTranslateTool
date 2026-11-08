@@ -1,7 +1,7 @@
-import { canonicalJson, stripVolatile } from './canon.mjs';
+import { canonicalJson, MIGRATION_KEY, stripVolatile } from './canon.mjs';
 import {combineMediaMetadata, managedMediaHash, MEDIA_FLAG, mediaComparisonDocs} from './media.mjs';
 import {
-  LOCAL_ACTOR_KEYS, LOCAL_ITEM_KEYS, OWN_FLAG, ownerOfActorPath, ownerOfItem, ownerOfItemPath,
+  keepLocalMigration, LOCAL_ACTOR_KEYS, LOCAL_ITEM_KEYS, OWN_FLAG, ownerOfActorPath, ownerOfItem, ownerOfItemPath,
 } from './rules.mjs';
 
 /**
@@ -34,7 +34,7 @@ function pick(doc, keys) {
   return out;
 }
 
-// 比较内容时与内容哈希一致，忽略各层的 _stats、ownership、sort。包一层再交给 stripVolatile，
+// 比较内容时与内容哈希一致，忽略各层的 _stats、ownership、sort、_migration。包一层再交给 stripVolatile，
 // 免得它把被比较的这棵子树自己的 folder 键当成角色的文件夹去掉。
 const comparable = value => canonicalJson(stripVolatile({value}).value);
 const same = (a, b) => comparable(a) === comparable(b);
@@ -69,8 +69,11 @@ function mergeValue(base, main, char, path, ctx, compared = [base, main, char]) 
     const baseObject = isObject(base) ? base : {};
     const out = {};
     for (const key of new Set([...Object.keys(main), ...Object.keys(char)])) {
-      const value = mergeValue(baseObject[key], main[key], char[key], path ? `${path}.${key}` : key, ctx,
-        compared.map(value => value?.[key]));
+      // 迁移记录比较时已经去掉，这里也不逐键合并、不记冲突，取写入方那份
+      const value = key === MIGRATION_KEY
+        ? (ctx.target === 'main' ? main : char)[key]
+        : mergeValue(baseObject[key], main[key], char[key], path ? `${path}.${key}` : key, ctx,
+          compared.map(value => value?.[key]));
       if (value !== undefined) out[key] = value;
     }
     return out;
@@ -201,7 +204,8 @@ function mergeEmbedded(scope, baseList, mainList, charList, target, conflicts, c
 
 /**
  * 三方合并两边的角色卡。四份都是经数据模型清洗过的 actor 源（带 `items`、`effects` 数组），
- * `target` 是要写入的一方：`LOCAL_ACTOR_KEYS`、`flags[OWN_FLAG]` 和已有条目的 `LOCAL_ITEM_KEYS` 取它那份。
+ * `target` 是要写入的一方：`LOCAL_ACTOR_KEYS`、`flags[OWN_FLAG]` 和已有条目的 `LOCAL_ITEM_KEYS` 取它那份，
+ * 角色和已有条目的 `system._migration` 也取它那份（`keepLocalMigration`）。
  * `actorOwner` 可为特定同步范围指定 Actor 字段冲突归属；省略时使用通用规则。
  * `comparisonDocs` 供构筑投影复用原始三份文档的媒体比较表，顺序为 base、main、char；不会写回。
  * @param {{base:object, main:object, char:object, target:'main'|'char', actorOwner?:(path:string) => Side, comparisonDocs?:object[]}} input
@@ -229,7 +233,8 @@ export function merge3({base, main, char, target, actorOwner = ownerOfActorPath,
   };
   if (targetDoc.flags?.[OWN_FLAG] !== undefined) doc.flags = {...doc.flags, [OWN_FLAG]: targetDoc.flags[OWN_FLAG]};
 
-  const detached = structuredClone(doc);
+  // 只有一方改过的子树整棵取那一方，里面的迁移记录也跟着过来，这里换回写入方的
+  const detached = keepLocalMigration(structuredClone(doc), targetDoc);
   combineMediaMetadata(detached, [base, main, char]);
   const changed = canonicalJson(stripVolatile(detached)) !== canonicalJson(stripVolatile(targetDoc));
   return {doc: detached, conflicts, changed};

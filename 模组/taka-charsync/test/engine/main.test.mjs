@@ -13,6 +13,7 @@ import { loadConfig, loadSeed } from '../../engine/config.mjs';
 import { loadClassicLevel } from '../../engine/leveldb.mjs';
 import { createContext, tick } from '../../engine/main.mjs';
 import { contentHash } from '../../scripts/lib/canon.mjs';
+import { contentHash017 } from '../helpers/content-hash-017.mjs';
 
 const ENGINE = fileURLToPath(new URL('../../engine/main.mjs', import.meta.url));
 const WORLD = '-';
@@ -1065,6 +1066,52 @@ test('history cleanup runs once a day and keeps every referenced version', async
   fs.writeFileSync(published(fixture.mainData, `history/main-${'d'.repeat(32)}.json`), '{}');
   await tick(gcCtx, later + 60 * 60 * 1000);
   assert.ok(fs.existsSync(published(fixture.mainData, `history/main-${'d'.repeat(32)}.json`)), 'no second cleanup within a day');
+});
+
+test('after the content hash changes, main cards are republished once and the history their bases point at stays', async () => {
+  const fixture = await buildFixture('rehash');
+  const migration = {version: 0.961, previous: {schema: 0.959, foundry: '14.370', system: '8.7.0'}};
+  const migrated = mainActors()[0];
+  migrated.system._migration = migration;
+  migrated.items[0].system._migration = migration;
+  await makeDb(path.join(fixture.mainData, 'worlds', WORLD, 'data', 'actors'), actorRows(migrated));
+  status = {active: false, version: '14.370'};
+  await tick(contextFor(fixture));
+  const entryRel = `main/${WORLD}/${CARD}.json`;
+  const entry = readPublished(fixture.mainData, entryRel);
+  const oldHash = await contentHash017(entry.doc);
+  assert.notEqual(oldHash, entry.hash, 'the migration record no longer counts towards the hash');
+
+  // 改成 0.1.7 引擎会留下的样子：主服版本、起步基线和工作卡的基线都记旧哈希
+  for (const dataDir of [fixture.mainData, fixture.charData]) {
+    fs.writeFileSync(published(dataDir, entryRel), JSON.stringify({...entry, hash: oldHash}));
+    fs.renameSync(published(dataDir, `history/main-${entry.hash}.json`), published(dataDir, `history/main-${oldHash}.json`));
+  }
+  const bootstrapFile = path.join(fixture.root, 'state', 'bootstrap.json');
+  const bootstrap = JSON.parse(fs.readFileSync(bootstrapFile, 'utf8'));
+  bootstrap[CARD].ref = {kind: 'main', hash: oldHash};
+  fs.writeFileSync(bootstrapFile, JSON.stringify(bootstrap));
+  const working = charActors()[0];
+  working.flags['taka-charsync'].base = {kind: 'main', hash: oldHash};
+  await makeDb(fixture.charActorsDir, [actorRows(working)[0]]);
+
+  const restarted = contextFor(fixture);
+  const report = await tick(restarted);
+
+  assert.deepEqual(report.errors, []);
+  for (const dataDir of [fixture.mainData, fixture.charData]) {
+    const republished = readPublished(dataDir, entryRel);
+    assert.equal(republished.hash, entry.hash);
+    assert.deepEqual(republished.doc, entry.doc);
+    assert.deepEqual(readPublished(dataDir, `history/main-${entry.hash}.json`), entry.doc);
+    assert.deepEqual(readPublished(dataDir, `history/main-${oldHash}.json`), entry.doc);
+  }
+  assert.deepEqual(readPublished(fixture.mainData, 'meta.json').bootstrap[CARD], {kind: 'main', hash: oldHash});
+
+  await tick(restarted, Date.now() + 100 * 24 * 60 * 60 * 1000);
+  for (const dataDir of [fixture.mainData, fixture.charData]) {
+    assert.ok(fs.existsSync(published(dataDir, `history/main-${oldHash}.json`)), 'the working-card base and the bootstrap still use it');
+  }
 });
 
 test('the CLI with --once --dry writes only under dryOutDir and prints the report as its last line', async () => {

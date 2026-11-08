@@ -1,5 +1,9 @@
 // 内容哈希只看卡的内容：挪文件夹、改排序、改权限、Foundry 刷新时间戳都不算变化。
-const VOLATILE_KEYS = new Set(['_stats', 'ownership', 'sort']);
+// PF2e 的迁移记录 `system._migration` 也不算：它记的是这台服务器上迁到的版本和迁移前的版本，两台各迁各的，
+// 迁移前的版本对不上（例如主服从 0.959 迁上来、建卡服记的是 0.961）。两边数据版本是否一致由 chain.mjs 的
+// syncAllowed 把关；写入时留写入方自己那份，见 rules.mjs 的 keepLocalMigration。
+export const MIGRATION_KEY = '_migration';
+const VOLATILE_KEYS = new Set(['_stats', 'ownership', 'sort', MIGRATION_KEY]);
 
 function stripNested(value) {
   if (Array.isArray(value)) return value.map(stripNested);
@@ -11,7 +15,7 @@ function stripNested(value) {
   return out;
 }
 
-/** 去掉每一层的 `_stats`、`ownership`、`sort` 和顶层的 `folder`，返回新对象，不改入参。 */
+/** 去掉每一层的 `_stats`、`ownership`、`sort`、`_migration` 和顶层的 `folder`，返回新对象，不改入参。 */
 export function stripVolatile(doc) {
   const stripped = stripNested(doc);
   delete stripped.folder;

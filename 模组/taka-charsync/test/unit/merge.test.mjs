@@ -221,6 +221,57 @@ test('nothing changed on either side', () => {
   assert.deepEqual(conflicts, []);
 });
 
+// PF2e 迁移后写下的记录：两台服务器各迁各的，迁移前的版本不同
+const migration = previous => ({version: 0.961, previous: {schema: previous, foundry: '14.370', system: '8.7.0'}});
+function migrate(doc, previous) {
+  doc.system._migration = migration(previous);
+  for (const entry of doc.items) entry.system._migration = migration(previous);
+}
+
+test('sides that differ only in migration records do not conflict and each target keeps its own', () => {
+  const {base, main, char} = sides(m => migrate(m, 0.959), c => migrate(c, 0.961));
+  for (const target of ['main', 'char']) {
+    const source = target === 'main' ? main : char;
+    const {doc, conflicts, changed} = merge3({base, main, char, target});
+    assert.deepEqual(conflicts, [], target);
+    assert.equal(changed, false, target);
+    assert.deepEqual(doc.system._migration, source.system._migration, target);
+    for (const entry of doc.items) assert.deepEqual(entry.system._migration, find(source, entry._id).system._migration, `${target} ${entry._id}`);
+  }
+});
+
+test('a one-sided edit next to differing migration records does not carry the other record across', () => {
+  const {base, main, char} = sides(m => migrate(m, 0.959), c => {
+    migrate(c, 0.961);
+    c.system.details.level.value = 7;
+    find(c, 'F1').system.location = 'class-6';
+    c.items.push(item('F9', 'feat', 'Feat Nine', {_migration: migration(0.961)}));
+  });
+  const {doc, conflicts} = merge3({base, main, char, target: 'main'});
+  assert.deepEqual(conflicts, []);
+  assert.equal(doc.system.details.level.value, 7);
+  assert.equal(find(doc, 'F1').system.location, 'class-6');
+  assert.deepEqual(doc.system._migration, main.system._migration);
+  assert.deepEqual(find(doc, 'F1').system._migration, find(main, 'F1').system._migration);
+  assert.deepEqual(find(doc, 'F9').system._migration, migration(0.961), 'a new item keeps the record its data was migrated under');
+});
+
+test('real conflicts are still reported next to differing migration records', () => {
+  const {base, main, char} = sides(
+    m => { migrate(m, 0.959); m.system.details.level.value = 7; find(m, 'F1').system.location = 'class-6'; },
+    c => { migrate(c, 0.961); c.system.details.level.value = 8; find(c, 'F1').system.location = 'class-8'; },
+  );
+  const {doc, conflicts} = merge3({base, main, char, target: 'main'});
+  assert.deepEqual(conflicts.map(({scope, id = null, path, winner}) => [scope, id, path, winner]), [
+    ['actor', null, 'system.details.level.value', 'char'],
+    ['item', 'F1', 'system.location', 'char'],
+  ]);
+  assert.equal(doc.system.details.level.value, 8);
+  assert.equal(find(doc, 'F1').system.location, 'class-8');
+  assert.deepEqual(doc.system._migration, main.system._migration);
+  assert.deepEqual(find(doc, 'F1').system._migration, find(main, 'F1').system._migration);
+});
+
 test('skill-issue flag conflict goes to the char server', () => {
   const {base, main, char} = sides(m => { m.flags['pf2e-skill-issue'] = {v: 1}; }, c => { c.flags['pf2e-skill-issue'] = {v: 2}; });
   const {doc} = merge3({base, main, char, target: 'main'});

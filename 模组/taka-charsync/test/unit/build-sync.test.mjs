@@ -151,4 +151,46 @@ for (const target of ['main', 'char']) {
     assert.equal(ordinary.doc.img, 'main.webp');
     assert.equal(ordinary.doc.system.abilities.str.mod, 2);
   });
+
+  test(`${target} target ignores PF2e migration records, keeps its own and still merges build edits`, () => {
+    const docs = versions();
+    for (const doc of Object.values(docs)) doc.items.push(item('feat2', 'feat'));
+    // 基线是主服迁移前那版；主服从 0.959 迁上来，建卡服记的迁移前版本是 0.961
+    migrate(docs.base, 0.959, 0.958);
+    migrate(docs.main, 0.961, 0.959);
+    migrate(docs.char, 0.961, 0.961);
+    const clean = mergeBuildChanges({...docs, target});
+    assert.deepEqual(clean.conflicts, []);
+    assert.equal(clean.changed, false);
+    assertOwnMigration(clean.doc, docs[target]);
+
+    byId(docs.char, 'feat2').name = 'Draft choice';
+    byId(docs.main, 'feat').system.level = {value: 2};
+    byId(docs.char, 'feat').system.level = {value: 3};
+    docs.char.items.push(item('new-feat', 'feat', {_migration: migration(0.961, 0.961)}));
+    const edited = mergeBuildChanges({...docs, target});
+    assert.deepEqual(edited.conflicts.map(({id, path, winner}) => [id, path, winner]), [['feat', 'system.level.value', 'char']]);
+    assert.equal(byId(edited.doc, 'feat2').name, 'Draft choice');
+    assert.equal(byId(edited.doc, 'feat').system.level.value, 3);
+    assertOwnMigration(edited.doc, docs[target]);
+    assert.deepEqual(byId(edited.doc, 'new-feat').system._migration, migration(0.961, 0.961));
+  });
+}
+
+function migration(version, previous) {
+  return {version, previous: {schema: previous, foundry: '14.370', system: '8.7.0'}};
+}
+
+function migrate(doc, version, previous) {
+  doc.system._migration = migration(version, previous);
+  for (const entry of doc.items) entry.system._migration = migration(version, previous);
+}
+
+// 角色和写入方已有的条目都是写入方自己的迁移记录
+function assertOwnMigration(doc, own) {
+  assert.deepEqual(doc.system._migration, own.system._migration);
+  for (const entry of doc.items) {
+    const ownEntry = byId(own, entry._id);
+    if (ownEntry) assert.deepEqual(entry.system._migration, ownEntry.system._migration, entry._id);
+  }
 }

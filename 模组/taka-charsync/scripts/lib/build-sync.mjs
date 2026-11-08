@@ -2,7 +2,7 @@ import {canonicalJson, stripVolatile} from './canon.mjs';
 import {copyAppearanceGroups, mergeAppearanceGroups} from './appearance.mjs';
 import {merge3} from './merge.mjs';
 import {combineMediaMetadata, mediaComparisonDocs} from './media.mjs';
-import {isAppearancePath, LOCAL_ACTOR_KEYS, LOCAL_ITEM_KEYS, OWN_FLAG} from './rules.mjs';
+import {isAppearancePath, keepLocalMigration, LOCAL_ACTOR_KEYS, LOCAL_ITEM_KEYS, OWN_FLAG} from './rules.mjs';
 
 const BUILD_TYPES = new Set([
   'feat', 'class', 'ancestry', 'heritage', 'background', 'spell', 'spellcastingEntry', 'lore', 'action', 'deity',
@@ -155,6 +155,8 @@ export function mergeBuildChanges({base, main, char, target = 'main'}) {
       if (current.has(item._id)) copyLocalKeys(item, current.get(item._id), LOCAL_ITEM_KEYS);
     }
   }
+  // 角色的非构筑字段和受保护的库存整份取自主服，写入建卡服时迁移记录要换回建卡服自己的
+  keepLocalMigration(doc, targetDoc);
   const conflicts = merged.conflicts.filter(conflict => conflict.scope === 'actor'
     ? buildActorPath(conflict.path, main.type) : conflict.scope === 'item' && !protectedIds.has(conflict.id));
   conflicts.push(...appearance.conflicts);

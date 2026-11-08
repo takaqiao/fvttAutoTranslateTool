@@ -145,3 +145,40 @@ test('ordinary automatic apply stops at appearance and ability conflicts until t
   assert.equal(env.actor._source.img, env.char.img);
   assert.equal(env.actor.system.abilities.str.mod, 4);
 });
+
+// 主服从 0.959 迁上来，建卡服记的迁移前版本是 0.961
+const migration = (version, previous) => ({version, previous: {schema: previous, foundry: '14.370', system: '8.7.0'}});
+function migrate(doc, version, previous) {
+  doc.system._migration = migration(version, previous);
+  for (const entry of doc.items) entry.system._migration = migration(version, previous);
+}
+
+test('after the main world migrates, a submitted build edit still applies automatically and main keeps its migration records', async () => {
+  const env = await scenario(char => {
+    migrate(char, 0.961, 0.961);
+    byId(char, 'feat').name = 'Updated feat';
+    char.items.push(item('new-feat', 'feat', {_migration: migration(0.961, 0.961)}));
+  }, {mainChange: main => migrate(main, 0.961, 0.959)});
+  assert.equal(await applyCopy(env.actor, env.copy), 'applied');
+  const doc = env.actor.toObject();
+  assert.equal(byId(doc, 'feat').name, 'Updated feat');
+  assert.deepEqual(doc.system._migration, migration(0.961, 0.959));
+  for (const entry of doc.items.filter(entry => entry._id !== 'new-feat')) {
+    assert.deepEqual(entry.system._migration, migration(0.961, 0.959), entry._id);
+  }
+  assert.deepEqual(byId(doc, 'new-feat').system._migration, migration(0.961, 0.961));
+});
+
+test('force apply keeps the main migration records of the card and of the items it already has', async () => {
+  const env = await scenario(char => {
+    migrate(char, 0.961, 0.961);
+    byId(char, 'gold').system.quantity = 999;
+    char.items.push(item('new-gear', 'equipment', {_migration: migration(0.961, 0.961)}));
+  }, {kind: 'force', mainChange: main => migrate(main, 0.961, 0.959)});
+  await applyForce(env.actor, env.copy);
+  const doc = env.actor.toObject();
+  assert.equal(byId(doc, 'gold').system.quantity, 999);
+  assert.deepEqual(doc.system._migration, migration(0.961, 0.959));
+  assert.deepEqual(byId(doc, 'gold').system._migration, migration(0.961, 0.959));
+  assert.deepEqual(byId(doc, 'new-gear').system._migration, migration(0.961, 0.961));
+});

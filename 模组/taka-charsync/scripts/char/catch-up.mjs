@@ -3,7 +3,7 @@ import { normalizeCopy, planCatchUp, refKey, sameRef, syncAllowed } from '../lib
 import { summarize } from '../lib/merge.mjs';
 import { mergeBuildChanges } from '../lib/build-sync.mjs';
 import { canonicalJson, stripVolatile } from '../lib/canon.mjs';
-import { OWN_FLAG } from '../lib/rules.mjs';
+import { keepLocalMigration, OWN_FLAG } from '../lib/rules.mjs';
 import { formatTime } from '../lib/time.mjs';
 import { cleanDoc, importFull } from '../foundry/import.mjs';
 import { snapshotActorMedia } from '../foundry/media.mjs';
@@ -85,13 +85,14 @@ async function createDraftBackup(actor) {
 }
 
 /**
- * 先把卡另存成草稿备份，再整卡导入主服最新版本。备份建不出来就不动卡。
+ * 先把卡另存成草稿备份，再整卡导入主服最新版本（角色和已有条目的迁移记录留卡上自己的）。备份建不出来就不动卡。
  * `withdrawCopies`：主服直接改过等级时为 true，最后撤回本卡主服没套用的副本；放弃草稿不动已提交的副本。
  */
 async function resetToMain(actor, {own, mainLatest, masterId, withdrawCopies}) {
   const backup = await createDraftBackup(actor);
   const flags = ownFlagsAfter(own, {kind: 'main', hash: mainLatest.hash}, [], mainLatest.hash);
-  const imported = await importFull(actor, onCharSide(mainLatest.doc, masterId), {flags});
+  const doc = keepLocalMigration(foundry.utils.deepClone(onCharSide(mainLatest.doc, masterId)), actor._source);
+  const imported = await importFull(actor, doc, {flags});
   if (withdrawCopies) await withdrawUnapplied(actor, mainLatest.applied);
   return {action: 'reset', backupId: backup.id, backupName: backup.name, ...imported, readAt: mainLatest.readAt};
 }
@@ -121,7 +122,8 @@ async function mergeFromMain(actor, {own, plan, baseDoc, mainLatest, masterId, s
  * - `merge`：基线、主服最新版、卡三份清洗后三方合并，内容有变才整卡导入；`base` 记成主服最新版，
  *   合并冲突记进 `flags.taka-charsync.conflicts`（`{at, mainHash, list}`），没有冲突就清掉。
  * - `reset`：主服直接改过等级。先另存草稿备份，再导入主服最新版，撤回本卡主服没套用的副本。
- * - `none`：同版本也校正库存与游戏状态，保留构筑草稿；内容无变化不导入，缺 `base` 时补写。
+ * - `none`：同版本（哈希不同但内容相同也算）也校正库存与游戏状态，保留构筑草稿；内容无变化不导入，
+ *   缺 `base` 或 `base` 的哈希旧了时补写。
  * - `wait`：主服版本或基线文档还没发布；`paused`：两边规则版本不一致；`unmapped`：没有对应的主服卡。都不动卡。
  *
  * @returns {Promise<{action: 'none'|'merge'|'reset'|'wait'|'paused'|'unmapped', changed?: boolean, summary?: object,
@@ -148,15 +150,23 @@ export async function catchUpCard(actor, {meta}) {
 
   // 只取 planCatchUp 会查到的版本：现有基线；主服套用了、基线还没吸收的本卡副本或建卡服版本。
   // 别的卡的副本要读了文档才知道归属，所以副本一律读
-  const current = base ?? bootstrap;
+  let current = base ?? bootstrap;
   if (current && !(await load(current))) return {action: 'wait'};
+  // 内容哈希的算法改过时（例如 0.1.8 起不计迁移记录），引擎会把内容没变的主服卡按新哈希重发一次。
+  // 基线和主服最新版内容相同（按内容哈希的口径比）就是同一个版本：按同版本跟上，不清掉上次留下的冲突记录。
+  if (current?.kind === 'main' && current.hash !== mainLatest.hash
+      && canonicalJson(stripVolatile(versions.get(refKey(current)).doc))
+        === canonicalJson(stripVolatile(onCharSide(mainLatest.doc, masterId)))) {
+    current = {kind: 'main', hash: mainLatest.hash};
+    await load(current);
+  }
   const {applied} = mainLatest;
   const absorbed = current && sameRef(applied, versions.get(refKey(current)).applied);
   const appliedHere = applied?.kind === 'copy' || (applied?.kind === 'char' && applied.cardId === actor.id);
   if (appliedHere && !absorbed && !(await load(applied))) return {action: 'wait'};
 
   const plan = planCatchUp({
-    cardId: actor.id, mapped: true, base, bootstrap, mainLatest,
+    cardId: actor.id, mapped: true, base: current, bootstrap, mainLatest,
     levelOf: ref => versions.get(refKey(ref))?.level,
     copyCard: ref => versions.get(refKey(ref))?.cardId ?? null,
     appliedAt: ref => versions.get(refKey(ref))?.applied ?? null,

@@ -1,8 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {catchUpCard} from '../../scripts/char/catch-up.mjs';
+import {contentHash} from '../../scripts/lib/canon.mjs';
 import {OWN_FLAG} from '../../scripts/lib/rules.mjs';
 import {actorDoc, applyEnvironment} from '../helpers/apply-environment.mjs';
+import {contentHash017} from '../helpers/content-hash-017.mjs';
 
 const item = (_id, type, system = {}) => ({_id, type, name: _id, system, effects: []});
 const byId = (doc, id) => doc.items.find(entry => entry._id === id);
@@ -92,4 +94,72 @@ test('familiar follow maps its master to the working owner and keeps its ability
   await catchUpCard(env.actor, {meta: env.meta});
   assert.deepEqual(env.actor.system.master, {id: 'working-owner', ability: 'cha'});
   assert.equal(env.actor.system.attributes.hp.value, 12);
+});
+
+const migration = (version, previous) => ({version, previous: {schema: previous, foundry: '14.370', system: '8.7.0'}});
+function migrate(doc, version, previous) {
+  doc.system._migration = migration(version, previous);
+  for (const entry of doc.items) entry.system._migration = migration(version, previous);
+}
+
+test('following a main card that just migrated keeps the working card migration records and reports no conflict', async () => {
+  const env = scenario();
+  migrate(env.base, 0.959, 0.958);
+  migrate(env.main, 0.961, 0.959);
+  env.main.system.attributes.hp.value = 4;
+  migrate(env.actor._source, 0.961, 0.961);
+  env.actor._source.items.push(item('draft', 'feat', {_migration: migration(0.961, 0.961)}));
+  env.actor.refresh();
+  const result = await catchUpCard(env.actor, {meta: env.meta});
+  assert.equal(result.action, 'merge');
+  assert.deepEqual(result.conflicts, []);
+  assert.equal(env.actor.system.attributes.hp.value, 4);
+  assert.ok(byId(env.actor._source, 'draft'));
+  assert.deepEqual(env.actor._source.system._migration, migration(0.961, 0.961));
+  for (const entry of env.actor._source.items) assert.deepEqual(entry.system._migration, migration(0.961, 0.961), entry._id);
+  assert.equal(env.actor._source.flags[OWN_FLAG].conflicts, undefined);
+});
+
+test('a reset to the main version keeps the migration records of items the working card already has', async () => {
+  const env = scenario();
+  globalThis.Actor.create = data => Actor.implementation.create(data);
+  migrate(env.main, 0.961, 0.959);
+  env.main.system.details.level.value = 3;
+  env.latest.level = 3;
+  env.main.items.push(item('class-feature', 'feat', {_migration: migration(0.961, 0.959)}));
+  migrate(env.actor._source, 0.961, 0.961);
+  env.actor.refresh();
+  const result = await catchUpCard(env.actor, {meta: env.meta});
+  assert.equal(result.action, 'reset');
+  assert.equal(env.actor._source.system.details.level.value, 3);
+  assert.deepEqual(env.actor._source.system._migration, migration(0.961, 0.961));
+  assert.deepEqual(byId(env.actor._source, 'feat').system._migration, migration(0.961, 0.961));
+  assert.deepEqual(byId(env.actor._source, 'class-feature').system._migration, migration(0.961, 0.959),
+    'an item new to the card keeps the record its data was migrated under');
+});
+
+test('a base published before the hash change is the same version when main republishes the same content', async () => {
+  const env = scenario();
+  for (const doc of [env.base, env.main]) migrate(doc, 0.961, 0.959);
+  const oldHash = await contentHash017(env.base);
+  const newHash = await contentHash(env.main);
+  assert.notEqual(oldHash, newHash, 'the hash function did change for this card');
+  env.files.delete('history/main-base.json');
+  env.files.set(`history/main-${oldHash}.json`, env.base);
+  env.latest.hash = newHash;
+  migrate(env.actor._source, 0.961, 0.961);
+  env.actor._source.items.push(item('draft', 'feat'));
+  const pending = {at: 1, mainHash: oldHash, list: [{scope: 'item', id: 'feat', name: 'feat', path: 'name', winner: 'char'}]};
+  env.actor._source.flags[OWN_FLAG] = {base: {kind: 'main', hash: oldHash}, conflicts: pending};
+  env.actor.refresh();
+  const before = structuredClone(env.actor._source);
+
+  const result = await catchUpCard(env.actor, {meta: env.meta});
+
+  assert.equal(result.action, 'none');
+  assert.deepEqual(env.actor._source.flags[OWN_FLAG], {base: {kind: 'main', hash: newHash}, conflicts: pending});
+  assert.deepEqual({...env.actor._source, flags: {}}, {...before, flags: {}}, 'the card content is untouched');
+  assert.deepEqual(env.writes.map(entry => Object.keys(entry.data)), [['flags']]);
+  assert.equal((await catchUpCard(env.actor, {meta: env.meta})).action, 'none');
+  assert.equal(env.writes.length, 1);
 });

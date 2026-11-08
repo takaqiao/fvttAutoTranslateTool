@@ -14,6 +14,21 @@ test('volatile fields are ignored at every level', async () => {
   assert.equal(await contentHash(a), await contentHash(b));
 });
 
+test('PF2e migration records are ignored on the actor, its items and embedded spells', async () => {
+  const migration = previous => ({version: 0.961, previous: {schema: previous, foundry: '14.370', system: '8.7.0'}});
+  const doc = previous => ({
+    system: {_migration: migration(previous), details: {level: {value: 3}}},
+    items: [
+      {_id: 'f', type: 'feat', system: {_migration: migration(previous), level: {value: 1}}},
+      {_id: 's', type: 'consumable', system: {_migration: migration(previous), spell: {system: {_migration: migration(previous)}}}},
+    ],
+  });
+  assert.equal(await contentHash(doc(0.959)), await contentHash(doc(0.961)));
+  const edited = doc(0.959);
+  edited.items[0].system.level.value = 2;
+  assert.notEqual(await contentHash(edited), await contentHash(doc(0.959)));
+});
+
 test('an item field change changes the hash', async () => {
   const a = {items: [{_id: 'i', system: {quantity: 1}}]};
   assert.notEqual(await contentHash(a), await contentHash({items: [{_id: 'i', system: {quantity: 2}}]}));

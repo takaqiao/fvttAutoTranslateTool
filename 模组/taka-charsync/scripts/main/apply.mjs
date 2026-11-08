@@ -7,7 +7,7 @@ import { formatSummary, summarize } from '../lib/merge.mjs';
 import { mergeBuildChanges } from '../lib/build-sync.mjs';
 import { canonicalJson } from '../lib/canon.mjs';
 import { describeChanges } from '../lib/change-summary.mjs';
-import { OWN_FLAG } from '../lib/rules.mjs';
+import { keepLocalMigration, OWN_FLAG } from '../lib/rules.mjs';
 import { copyRuleError } from '../lib/rule-validation.mjs';
 import {currentModuleUsage, documentModuleUsage, moduleUsageHTML} from './module-usage.mjs';
 import { cleanDoc, importFull } from '../foundry/import.mjs';
@@ -644,7 +644,8 @@ async function prepareLevel(actor, copy, meta, {preview = false} = {}) {
 }
 
 /**
- * 整卡覆盖（手动同步）：主服卡整张换成 `doc`，只保留 id、所有者、文件夹、同步记号和经验，不补血量。
+ * 整卡覆盖（手动同步）：主服卡整张换成 `doc`，只保留 id、所有者、文件夹、同步记号、经验，以及角色和已有条目的
+ * PF2e 迁移记录（`keepLocalMigration`），不补血量。
  * `companions` 每项 `{actor, sourceId, doc, ref}`，`actor` 为 null 的是主服还没有的同伴，新建；魔宠的主人换成主服主人。
  * `skippedCompanions` 只列进悄悄话；`consumed` 是写入时一起记进 `undone` 的版本。撤回点、失败时的恢复同 `applyCopy`。
  * @returns {Promise<'applied'>}
@@ -655,14 +656,14 @@ export async function applyWhole(actor, version, options = {}) {
 }
 
 function prepareWhole(actor, {doc, ref, moduleUsage}, {companions = [], skippedCompanions = [], consumed = []} = {}) {
-  const masterDoc = asMainCard(doc, {actorId: actor.id, masterId: null});
+  const masterDoc = keepLocalMigration(asMainCard(doc, {actorId: actor.id, masterId: null}), actor._source);
   const xp = actor._source.system.details?.xp;
   if (xp && masterDoc.system.details) masterDoc.system.details.xp = foundry.utils.deepClone(xp);
   const updated = [];
   const created = [];
   for (const companion of companions) {
     if (companion.actor) {
-      const companionDoc = asMainCard(companion.doc, {actorId: companion.actor.id, masterId: actor.id});
+      const companionDoc = keepLocalMigration(asMainCard(companion.doc, {actorId: companion.actor.id, masterId: actor.id}), companion.actor._source);
       updated.push({actor: companion.actor, ref: companion.ref, doc: companionDoc, conflicts: [], moduleUsage: documentModuleUsage(companionDoc, companion.moduleUsage)});
     } else {
       const id = companionIdFor(companion.sourceId, companion.doc.name);
