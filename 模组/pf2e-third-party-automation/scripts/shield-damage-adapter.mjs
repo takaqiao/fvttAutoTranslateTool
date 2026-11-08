@@ -2,7 +2,7 @@ import {MODULE_ID,hasSource} from './rules.mjs';
 import {SerialActions} from './runtime.mjs';
 import {reactionEpoch} from './reaction-budget.mjs';
 import {markUnappliedDamageError} from './native-context.mjs';
-import {NATIVE_IWR_PROFILES,NATIVE_IWR_BRIDGE_PROTOCOL} from './native-iwr-profiles.mjs';
+import {NATIVE_IWR_BRIDGE_PROTOCOL} from './native-iwr-profiles.mjs';
 import {isVerifiedNativeIWRBridge} from './native-iwr-verification.mjs';
 
 export const DESTRUCTIVE_BLOCK_SOURCE='Compendium.pf2e.feats-srd.Item.dY0jhJOEj6DHc0ud';
@@ -59,11 +59,11 @@ export function createShieldDamageAdapter({game,createMessageMiddleware,nativeBr
   try{return isVerifiedNativeIWRBridge(nativeBridgeVerification,game,getNativeBridge());}catch{return false;}
  }
  function nativeBridgeDiagnostic(){
-  const ready=nativeBridgeAvailable(),version=game.system?.version??null,profile=Object.hasOwn(NATIVE_IWR_PROFILES,version)?NATIVE_IWR_PROFILES[version]:null;
+  const ready=nativeBridgeAvailable(),version=game.system?.version??null;
   let bridge;try{bridge=getNativeBridge();}catch{/* Availability failures must not block ordinary damage. */}
   const field=key=>bridge?Object.getOwnPropertyDescriptor(bridge,key)?.value??null:null;
-  const reason=ready?null:game.system?.id!=='pf2e'||!profile?'unsupported-system-version':nativeBridgeVerification?.ready===false?nativeBridgeVerification.reason:nativeBridgeVerification?.ready===true&&nativeBridgeVerification.bridge?'native-iwr-proof-invalidated':'native-iwr-verification-required';
-  return Object.freeze({ready,status:ready?'ready':'unsupported',reason,systemVersion:version,bridgeVersion:field('version'),protocol:field('protocol'),expectedSourceSHA256:profile?.originalSHA256??null,expectedPatchedSHA256:profile?.patchedSHA256??null,verifiedSystemSHA256:ready?nativeBridgeVerification.patchedSHA256:null,verifiedApplyDamageSHA256:ready?nativeBridgeVerification.applyDamageSHA256:null,requiresVerifiedSystemBridge:!ready,unavailableFeatures:Object.freeze(ready?[]:['transcendent-deflection'])});
+  const reason=ready?null:game.system?.id!=='pf2e'?'unsupported-system':nativeBridgeVerification?.ready===false?nativeBridgeVerification.reason:nativeBridgeVerification?.ready===true&&nativeBridgeVerification.bridge?'native-iwr-proof-invalidated':'native-iwr-verification-required';
+  return Object.freeze({ready,status:ready?'ready':'unsupported',reason,systemVersion:version,bridgeVersion:field('version'),protocol:field('protocol'),sourceContract:field('sourceContract'),verifiedSystemSHA256:ready?nativeBridgeVerification.patchedSHA256:null,verifiedApplyDamageSHA256:ready?nativeBridgeVerification.applyDamageSHA256:null,requiresVerifiedSystemBridge:!ready,unavailableFeatures:Object.freeze(ready?[]:['transcendent-deflection'])});
  }
  const addNativeInterceptor=(callback,{matches=()=>true}={})=>{if(typeof callback!=='function'||typeof matches!=='function')throw Error('原生伤害拦截器及匹配器必须是函数。');interceptors.set(callback,matches);return()=>interceptors.delete(callback);};
  /** Internal observation only: no live documents, mutable native result or

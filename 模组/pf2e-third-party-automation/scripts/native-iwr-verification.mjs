@@ -1,5 +1,5 @@
-import {NATIVE_IWR_PROFILES,NATIVE_DAMAGE_SHAPES,NATIVE_IWR_BRIDGE_PROTOCOL} from './native-iwr-profiles.mjs';
-import {sourceText,nativeMethod,bridgeStatement,automaticDescriptor} from './native-source-shapes.mjs';
+import {NATIVE_IWR_PROFILES,NATIVE_IWR_BRIDGE_PROTOCOL,isNativeDamageContract} from './native-iwr-profiles.mjs';
+import {sourceText,nativeMethod,bridgeStatement,automaticDescriptor,bindNativeDamage} from './native-source-shapes.mjs';
 
 const issued=new WeakSet(),snapshots=new WeakMap();
 const fields=['version','sourceSHA256','protocol','applyDamage'];
@@ -30,7 +30,8 @@ function descriptor(bridge){
  return values;
 }
 const sameDescriptor=(a,b)=>a===null||b===null?a===b:[...fields,'sourceContract','methodSHA256'].every(key=>a[key]===b[key]);
-const matchesProfile=(d,p)=>d&&typeof d.applyDamage==='function'&&(p.sourceContract?d.sourceContract===p.sourceContract&&d.methodSHA256===p.applyDamageSHA256&&d.protocol===NATIVE_IWR_BRIDGE_PROTOCOL&&/^[a-f0-9]{64}$/.test(d.sourceSHA256):d.version===p.systemVersion&&d.sourceSHA256===p.originalSHA256&&d.protocol===p.protocol);
+const sha256=value=>typeof value==='string'&&/^[a-f0-9]{64}$/.test(value);
+const matchesProfile=(d,p)=>d&&typeof d.applyDamage==='function'&&(p.sourceContract?d.sourceContract===p.sourceContract&&isNativeDamageContract(d.sourceContract)&&sha256(d.methodSHA256)&&d.protocol===NATIVE_IWR_BRIDGE_PROTOCOL&&sha256(d.sourceSHA256):d.version===p.systemVersion&&d.sourceSHA256===p.originalSHA256&&d.protocol===p.protocol);
 function currentSystem(snapshot){
  return snapshot.game?.system===snapshot.system&&snapshot.system?.id==='pf2e'&&snapshot.system.version===snapshot.profile.systemVersion;
 }
@@ -51,9 +52,9 @@ export async function verifyNativeIWRBridge(options={}){
   const sourceSnapshot=typeof source==='string'?source:new Uint8Array(source);
   let bridge;
   try{bridge=getNativeBridge();}catch(error){return diagnostic('native-bridge-unavailable',profile,{detail:String(error.message??error)});}
-  const retained=descriptor(bridge),seam=retained?.sourceContract&&NATIVE_DAMAGE_SHAPES.find(p=>p.id===retained.sourceContract);
-  if(seam)profile={systemVersion:version,sourceContract:seam.id,applyDamageSHA256:seam.applyDamageSHA256};
-  if(!profile)return diagnostic('unsupported-system-profile',null);
+  const retained=descriptor(bridge),shaped=isNativeDamageContract(retained?.sourceContract);
+  if(shaped)profile={systemVersion:version,sourceContract:retained.sourceContract};
+  if(!profile)return diagnostic(bridge==null?'missing-native-iwr-bridge':'unsupported-system-profile',null);
   const nativeClass=getNativeBridge===defaultBridge?globalThis.CONFIG?.Actor?.documentClass:null;
   const snapshot={game,system,profile,bridge,retained,nativeClass};
   const changed=()=>{
@@ -66,21 +67,26 @@ export async function verifyNativeIWRBridge(options={}){
   let sourceSHA256;
   try{sourceSHA256=await digest(hash,sourceSnapshot);}catch(error){return diagnostic('hash-failed',profile,{detail:String(error.message??error)});}
   let reason=changed();if(reason)return diagnostic(reason,profile);
-  if(!seam){
+  let servedMethod;
+  if(!shaped){
    if(sourceSHA256===profile.originalSHA256)return diagnostic('bridge-not-installed',profile,{actualSHA256:sourceSHA256});
    if(sourceSHA256!==profile.patchedSHA256&&sourceSHA256!==profile.sharedManualCompositionSHA256)return diagnostic('unknown-system-source',profile,{actualSHA256:sourceSHA256,expectedSHA256:profile.patchedSHA256});
   }else{
    const text=sourceText(sourceSnapshot),served=automaticDescriptor(bridgeStatement(text));
    if((text.match(/const thirdPartyIWR/g)??[]).length!==1||['version','sourceSHA256','protocol','sourceContract','methodSHA256'].some(key=>served[key]!==retained[key]))return diagnostic('native-bridge-invalid',profile);
-   const servedSHA=await digest(hash,nativeMethod(text));reason=changed();if(reason)return diagnostic(reason,profile);
-   if(servedSHA!==seam.applyDamageSHA256)return diagnostic('native-source-seam-mismatch',profile,{actualSHA256:servedSHA});
+   servedMethod=nativeMethod(text);
+   if(!bindNativeDamage(servedMethod,'patched'))return diagnostic('native-source-seam-mismatch',profile);
   }
   if(!matchesProfile(retained,profile))return diagnostic('native-bridge-invalid',profile);
   const methodSource=Function.prototype.toString.call(retained.applyDamage);
+  // The retained function has to be the served method, which carries the shape
+  // check over to it; the recorded method hash then only has to agree with both.
+  if(shaped&&methodSource!==servedMethod)return diagnostic('native-method-sha-mismatch',profile);
   let applyDamageSHA256;
   try{applyDamageSHA256=await digest(hash,methodSource);}catch(error){return diagnostic('hash-failed',profile,{detail:String(error.message??error)});}
   reason=changed();if(reason)return diagnostic(reason,profile);
-  if(applyDamageSHA256!==profile.applyDamageSHA256)return diagnostic('native-method-sha-mismatch',profile,{actualSHA256:applyDamageSHA256,expectedSHA256:profile.applyDamageSHA256});
+  const expected=shaped?retained.methodSHA256:profile.applyDamageSHA256;
+  if(applyDamageSHA256!==expected)return diagnostic('native-method-sha-mismatch',profile,{actualSHA256:applyDamageSHA256,expectedSHA256:expected});
   const proof=Object.freeze({ready:true,reason:'verified',bridge,systemVersion:profile.systemVersion,patchedSHA256:sourceSHA256,applyDamageSHA256});
   snapshots.set(proof,Object.freeze(snapshot));issued.add(proof);
   return proof;

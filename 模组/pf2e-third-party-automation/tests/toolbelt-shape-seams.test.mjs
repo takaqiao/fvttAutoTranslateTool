@@ -7,6 +7,7 @@ import vm from 'node:vm';
 import {spawnSync} from 'node:child_process';
 import {buildNativeBridge,buildSharedManualPair} from '../tools/automatic-source-patches/native.mjs';
 import {TOOL_SHAPE,toolSeams,observerRegion} from '../scripts/native-source-shapes.mjs';
+import {NATIVE_DAMAGE_CONTRACT} from '../scripts/native-iwr-profiles.mjs';
 import {native861Source,hash} from './native-iwr-861-fixture.mjs';
 import {referenceToolbelt,edited,editedRegion,otherNames,renamed,renamedSeams} from './toolbelt-shape-fixture.mjs';
 
@@ -129,9 +130,14 @@ test('the live PF2e 8.6.1 pair takes Toolbelt 3.59.0 without touching PF2e',{ski
 });
 
 for(const [label,pf2e]of [['original',pf2eOriginal],['patched',pf2ePatched]])test(`${label} PF2e 8.6.1 and Toolbelt 3.58.4 still give the pair 0.9.41 installed`,{skip:!(pf2e&&toolbelt3584&&toolbelt3584Patched)},()=>{
- const built=pair(toolbelt3584,buildNativeBridge({source:pf2e,version:'8.6.1'}).buffer,'3.58.4');
+ const bridged=buildNativeBridge({source:pf2e,version:'8.6.1'}).buffer,built=pair(toolbelt3584,bridged,'3.58.4');
  assert.equal(built.alreadyPatched,false);same(built.toolbelt,toolbelt3584Patched);
- if(pf2ePatched)same(built.pf2e,pf2ePatched);
+ if(!pf2ePatched)return;
+ // On the original, a bridge built now names the shape contract where 0.9.41
+ // named the 8.6.1 bytes, and the manual batch records that bridge as its base.
+ const earlierContract=text=>text.replace(`"sourceContract":"${NATIVE_DAMAGE_CONTRACT}"`,'"sourceContract":"pf2e-apply-damage:D:2"');
+ const earlier=label==='original'?Buffer.from(earlierContract(built.pf2e.toString()).replace(hash(bridged),hash(earlierContract(bridged.toString())))):built.pf2e;
+ same(earlier,pf2ePatched);
 });
 
 test('the pair 0.9.41 installed is recognized and restored to Toolbelt 3.58.4',{skip:!(pf2ePatched&&toolbelt3584&&toolbelt3584Patched)},()=>{

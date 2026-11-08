@@ -1,4 +1,5 @@
 import {createShapeBinding} from './source-shape-match.mjs';
+import {APPLY_DAMAGE_REFERENCE} from './apply-damage-reference.mjs';
 
 export function sourceText(source){
  if(typeof source==='string')return source;
@@ -12,6 +13,35 @@ export function sourceRegion(source,start,end,reason='native-source-seam'){
  return source.slice(from,to);
 }
 export const nativeMethod=source=>sourceRegion(source,'\tasync applyDamage({','\n\tasync undoDamage(').slice(1);
+// The applyDamage locals the inserted lines read, under their reference names:
+// damage is what is left after IWR, dice and modifiers; iwr the IWR result;
+// shield the damage the shield's hardness stops; hardnessApplied the actor
+// hardness actually subtracted, which is below the hardness value when less
+// damage is left; shieldDamage the damage the shield itself takes; healthDelta
+// the calculateHealthDelta result.
+const DAMAGE_LOCALS=Object.freeze({damage:'x',iwr:'f',rollOptions:'r',shield:'D',hardnessApplied:'ae',shieldDamage:'ne',healthDelta:'oe'});
+/** Insert the IWR continuation before the health delta of an unpatched
+ * applyDamage whose locals are named `names`. */
+export function insertDamageCallback(method,names){
+ const anchor=`\t\tlet ${names.healthDelta} = this.calculateHealthDelta({`;
+ if(method.split(anchor).length!==2)throw Error('native-bridge-seam-ambiguous');
+ const at=method.indexOf(anchor),{damage,iwr,rollOptions,shield,hardnessApplied,shieldDamage}=names;
+ return method.slice(0,at)
+  +`\t\tconst thirdPartyIWR = game.modules.get(\`pf2e-third-party-automation\`)?.api?.nativeDamageIWR?.(this, arguments[0], ${iwr}, ${rollOptions}, { actorDamage: ${damage} - ${shield} - ${hardnessApplied}, shieldDamage: ${shieldDamage} });\n`
+  +`\t\tif (thirdPartyIWR && await thirdPartyIWR === true) ${damage} = ${shield} + ${hardnessApplied};\n`
+  +method.slice(at);
+}
+export const NATIVE_DAMAGE_REFERENCE=Object.freeze({original:APPLY_DAMAGE_REFERENCE,patched:insertDamageCallback(APPLY_DAMAGE_REFERENCE,DAMAGE_LOCALS)});
+/** Bind a release's applyDamage to the reference `form`, 'original' or
+ * 'patched'. Returns the renaming, or null when the method is another shape. */
+export function bindNativeDamage(method,form){
+ const binding=createShapeBinding({fixed:['ui']});
+ try{if(binding.match(NATIVE_DAMAGE_REFERENCE[form],method,{within:'class'})!==method.length)return null}
+ catch(error){if(String(error.message).startsWith('source-shape-'))return null;throw error}
+ return binding;
+}
+/** The locals of a method bound by bindNativeDamage, in the method's own names. */
+export const nativeDamageLocals=binding=>Object.fromEntries(Object.entries(DAMAGE_LOCALS).map(([role,name])=>[role,binding.render(name)]));
 export const batchRegion=source=>sourceRegion(source,'async function applyDamageFromMessage(','async function shiftAdjustDamage(');
 export const flatRegion=source=>sourceRegion(source,'\tbeforePrepareData() {\n\t\tif (this.ignored) return;\n\t\tlet e = this.getReducedLabel()','\tasync afterRoll(');
 export const stackingRegion=source=>sourceRegion(source,'var HIGHER_BONUS =','var StatisticModifier =');

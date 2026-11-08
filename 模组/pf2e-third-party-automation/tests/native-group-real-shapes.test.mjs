@@ -7,6 +7,7 @@ import path from 'node:path';
 import {maintainSourcePatches,buildGroup,groups} from '../tools/automatic-source-patches/maintain.mjs';
 import {buildNativeBridge,buildSharedManualPair} from '../tools/automatic-source-patches/native.mjs';
 import {automaticDescriptor,observerRegion} from '../scripts/native-source-shapes.mjs';
+import {NATIVE_DAMAGE_CONTRACT} from '../scripts/native-iwr-profiles.mjs';
 import {native861Source,hash} from './native-iwr-861-fixture.mjs';
 import {referenceToolbelt} from './toolbelt-shape-fixture.mjs';
 
@@ -113,8 +114,11 @@ test(`original PF2e and Toolbelt change PF2e only: ${label}`,{skip:!toolbelt},as
  await installsBridgeOnly(t,toolbelt,'3.59.0');
 });
 
-test('the bridge now installed on the 8.6.1 release is the source the server\'s manual patch was built on',{skip:!(process.env.PF2E_NATIVE_861_BUNDLE&&pf2eInstalled)},()=>{
- assert.equal(hash(pf2eBridged),automaticDescriptor(observerRegion(pf2eInstalled.toString(),'pf2e').statement).baseSourceSHA256);
+// Releases up to 0.9.51 named the 8.6.1 bytes in the bridge descriptor; a bridge built now names the shape.
+test('the bridge now installed on the 8.6.1 release differs from the source the server\'s manual patch was built on only in its contract',{skip:!(process.env.PF2E_NATIVE_861_BUNDLE&&pf2eInstalled)},()=>{
+ const earlier=Buffer.from(pf2eBridged.toString().replace(`"sourceContract":"${NATIVE_DAMAGE_CONTRACT}"`,'"sourceContract":"pf2e-apply-damage:D:2"'));
+ assert.notDeepEqual(earlier,pf2eBridged);
+ assert.equal(hash(earlier),automaticDescriptor(observerRegion(pf2eInstalled.toString(),'pf2e').statement).baseSourceSHA256);
 });
 
 test('a Toolbelt build the manual seam refused no longer holds back the bridge',async t=>{

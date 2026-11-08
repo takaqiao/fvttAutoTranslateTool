@@ -59,7 +59,7 @@ export function createCounterPerformance({game,fromUuid=globalThis.fromUuid,nati
  const scopes=new Map(),queue=new SerialActions();
  const enabled=()=>BOB2_AUTOMATION_WORLDS.has(game.world?.id)&&game.system?.id==='pf2e';
  const matches=item=>enabled()&&sourceMatches(item);
- const compatible=()=>game.system?.id==='pf2e'&&game.modules?.get(TOOL)?.active===true&&game.modules.get(TOOL).version==='3.59.2';
+ const compatible=()=>game.system?.id==='pf2e'&&game.modules?.get(TOOL)?.active===true;
  const assertGM=ctx=>demand(isActiveGM(game)&&game.messages.get(ctx.message.id)===ctx.message&&author(ctx.message)===ctx.user.id&&ctx.actor.testUserPermission(ctx.user,'OWNER')&&matches(ctx.item)&&ctx.actor.items.get(ctx.item.id)===ctx.item,'施法来源、所有者或主GM已改变。');
  function candidates(){
   const result=[];
@@ -75,7 +75,7 @@ export function createCounterPerformance({game,fromUuid=globalThis.fromUuid,nati
   return result.slice(0,40);
  }
  async function inspect(input){
-  demand(compatible(),'需要已核对的 Toolbelt 3.59.2 原豁免结果卡。');
+  demand(compatible(),'需要启用 Toolbelt 的原豁免结果卡。');
   const source=game.messages.get(input?.sourceMessageId),h=helper(source),variant=h?.saveVariants?.[input?.variantId];
   demand(publicMessage(source)&&h?.private!==true&&variant&&same({dc:variant.dc,statistic:variant.statistic,basic:variant.basic??false,item:h.item??null},input.source),'原豁免卡或DC已改变。');
   demand(Array.isArray(input.targets)&&input.targets.length>0&&input.targets.length<=100&&new Set(input.targets.map(row=>row.targetUuid)).size===input.targets.length,'没有明确的原豁免目标。');
@@ -88,7 +88,7 @@ export function createCounterPerformance({game,fromUuid=globalThis.fromUuid,nati
  }
  async function interceptCast({item,options={}},native){
   if(!matches(item)||options.consume===false||options.message===false)return native();
-  demand(compatible(),'需要已核对的 Toolbelt 3.59.2 原豁免结果卡。');
+  demand(compatible(),'需要启用 Toolbelt 的原豁免结果卡。');
   demand(item.actor?.testUserPermission(game.user,'OWNER')&&game.users.activeGM?.id,'需要原施法者与在线主GM。');
   demand(!scopes.has(item.uuid),'本次施法选择尚未完成。');
   const available=candidates();demand(available.length,'没有可选的公开原豁免骰；先完成触发豁免，再从原生 Cast 使用本法术。');

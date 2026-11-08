@@ -145,8 +145,15 @@ test('cancelling Performance after accepted Cast records the spent spell without
  assert.equal(f.source.flags[TOOL].targetHelper.saveVariants.null.saves.a.value,17);
 });
 
-test('private saves, unsupported Toolbelt versions and missing original dice cannot be selected',async()=>{
- for(const change of [f=>f.source.blind=true,f=>f.game.modules.get(TOOL).version='4.0.0',f=>f.source.flags[TOOL].targetHelper.saveVariants.null.saves={}]){
+test('another Toolbelt version still updates the selected original save',async()=>{
+ for(const version of ['3.61.3','4.0.0']){
+  const f=fixture();f.game.modules.get(TOOL).version=version;await f.cast();await f.execute();
+  assert.equal(f.casts.length,1);assert.equal(f.source.flags[TOOL].targetHelper.saveVariants.null.saves.a.value,25);
+ }
+});
+
+test('private saves, an inactive Toolbelt and missing original dice cannot be selected',async()=>{
+ for(const change of [f=>f.source.blind=true,f=>f.game.modules.get(TOOL).active=false,f=>f.source.flags[TOOL].targetHelper.saveVariants.null.saves={}]){
   const f=fixture();change(f);await assert.rejects(f.cast(),/原豁免|Toolbelt/);assert.equal(f.casts.length,0);
  }
 });

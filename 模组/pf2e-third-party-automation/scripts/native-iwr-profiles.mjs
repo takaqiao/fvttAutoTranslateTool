@@ -1,4 +1,5 @@
-/** Exact, independently audited PF2e release bytes. Safe for browser imports. */
+/** Exact, independently audited PF2e 8.5 release bytes. They identify bridges
+ * installed before descriptors named a source contract. Safe for browser imports. */
 export const NATIVE_IWR_BRIDGE_PROTOCOL='pf2e-third-party-automation:iwr:2';
 export const NATIVE_IWR_PROFILES=Object.freeze({
  '8.5.0':Object.freeze({
@@ -7,7 +8,6 @@ export const NATIVE_IWR_PROFILES=Object.freeze({
   patchedSHA256:'b4335fa31d1c7b36e100522e6fa3ced7c24075abb14b01a49f16a518e9fa4ec8',
   applyDamageSHA256:'fdd09b9ff0acfda43025fb9972e98143a4afa645e97bd6c49b9c4263139952a0',
   protocol:NATIVE_IWR_BRIDGE_PROTOCOL,
-  callbackSignature:'?.nativeDamageIWR?.(this, arguments[0], f, r, { actorDamage: x - D - ie, shieldDamage: ne })',
  }),
  '8.5.1':Object.freeze({
   systemVersion:'8.5.1',
@@ -16,26 +16,17 @@ export const NATIVE_IWR_PROFILES=Object.freeze({
   sharedManualCompositionSHA256:'9be357c96dff3d0790edcb0d7889db98cfded0f41f34fd161233ea0bdd0dab11',
   applyDamageSHA256:'cd1d391b7d4c2c8f3b11b903c477a5e6e330343a94ba51dd5ddebbe610adcb5a',
   protocol:NATIVE_IWR_BRIDGE_PROTOCOL,
-  callbackSignature:'?.nativeDamageIWR?.(this, arguments[0], f, r, { actorDamage: x - O - ie, shieldDamage: te })',
  }),
 });
 
-// These contracts cover local native semantics; upstream bundle hashes and
-// versions remain diagnostics on the automatic source path.
-// Each row names the minified applyDamage locals its inserted lines read:
-// shield (damage stopped by the shield's hardness), hardnessApplied (actor
-// hardness actually subtracted, which is below the hardness value when less
-// damage is left), shieldDamage (damage the shield itself takes) and
-// healthDelta (the calculateHealthDelta result). The callback and the
-// prevention assignment are composed from the same names, so one row cannot
-// mix two releases' bindings.
-const damageShape=row=>Object.freeze({...row,callbackSignature:`?.nativeDamageIWR?.(this, arguments[0], f, r, { actorDamage: x - ${row.shield} - ${row.hardnessApplied}, shieldDamage: ${row.shieldDamage} })`});
-export const NATIVE_DAMAGE_SHAPES=Object.freeze([
- damageShape({id:'pf2e-apply-damage:D:2',originalSHA256:'e5dbe9e6f44d6b28cce84c72b291f4f54f7d0aa4a2a5583066e9078e282912e7',applyDamageSHA256:'4235d69229778f923d73edfac89725d0afebe14e7f68e378fe0114b0ef71ad94',shield:'D',hardnessApplied:'ae',shieldDamage:'ne',healthDelta:'oe'}),
- damageShape({id:'pf2e-apply-damage:O:2',originalSHA256:'3f4ef8c14ff22bb2c8722648a68f5c84d3b48aeb8aa9cd1bc00b78e7cf61780a',applyDamageSHA256:'e1d69d11d7a4202673bd432a0f9780d082c9e8f83941910f95da6bc0db955a00',shield:'O',hardnessApplied:'ie',shieldDamage:'te',healthDelta:'ae'}),
- damageShape({id:'pf2e-apply-damage:O:1',originalSHA256:'de3c5091f79733be48a87e504ecb0c030ad882e72cd336c7a83f9f92476d0feb',applyDamageSHA256:NATIVE_IWR_PROFILES['8.5.1'].applyDamageSHA256,shield:'O',hardnessApplied:'ie',shieldDamage:'te',healthDelta:'ae'}),
- damageShape({id:'pf2e-apply-damage:D:1',originalSHA256:'d21ac5f5ead5f00025de8cd66586e77489b474f444c5273382ec0e305bc3f741',applyDamageSHA256:NATIVE_IWR_PROFILES['8.5.0'].applyDamageSHA256,shield:'D',hardnessApplied:'ie',shieldDamage:'ne',healthDelta:'ae'})
-]);
+// A bridge descriptor names the audited applyDamage shape it was built under.
+// The method is compared with NATIVE_DAMAGE_REFERENCE (native-source-shapes.mjs)
+// by rename-equivalence; upstream bundle hashes and versions are recorded as
+// evidence only. Earlier releases wrote one id per release's bytes of that same
+// shape, and the files they installed still qualify by shape.
+export const NATIVE_DAMAGE_CONTRACT='pf2e-apply-damage:shape:1';
+const EARLIER_DAMAGE_CONTRACTS=['pf2e-apply-damage:D:2','pf2e-apply-damage:O:2','pf2e-apply-damage:O:1','pf2e-apply-damage:D:1'];
+export const isNativeDamageContract=id=>id===NATIVE_DAMAGE_CONTRACT||EARLIER_DAMAGE_CONTRACTS.includes(id);
 export const SHARED_MANUAL_SHAPE=Object.freeze({
  id:'pf2e-shared-manual:1',toolbeltId:'toolbelt-shared-manual:1',
  batchOriginal:'d139b4ab1e3c3ca72d5ca9a680f8adbc236c70959ca3c69ca6d6aa33118a696d',batchPatched:'3fb62d29f88fdfb530bd499f2f7e9ea1b29857081f5a4a3a417f53cbab582570',

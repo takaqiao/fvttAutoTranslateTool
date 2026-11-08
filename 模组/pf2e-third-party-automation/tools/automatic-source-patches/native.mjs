@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
-import {NATIVE_IWR_PROFILES,NATIVE_DAMAGE_SHAPES,NATIVE_SHARED_SHAPES,SHARED_MANUAL_SHAPE as shape,NATIVE_IWR_BRIDGE_PROTOCOL,isAutomaticBatchDescriptor,isAutomaticToolDescriptor} from '../../scripts/native-iwr-profiles.mjs';
-import {sourceText,nativeMethod,batchRegion,flatRegion,stackingRegion,toolSeams,bridgeStatement,automaticDescriptor,observerRegion} from '../../scripts/native-source-shapes.mjs';
+import {NATIVE_IWR_PROFILES,NATIVE_DAMAGE_CONTRACT,NATIVE_SHARED_SHAPES,SHARED_MANUAL_SHAPE as shape,NATIVE_IWR_BRIDGE_PROTOCOL,isNativeDamageContract,isAutomaticBatchDescriptor,isAutomaticToolDescriptor} from '../../scripts/native-iwr-profiles.mjs';
+import {sourceText,nativeMethod,batchRegion,flatRegion,stackingRegion,toolSeams,bridgeStatement,automaticDescriptor,observerRegion,NATIVE_DAMAGE_REFERENCE,bindNativeDamage,nativeDamageLocals,insertDamageCallback} from '../../scripts/native-source-shapes.mjs';
 
 const hash=value=>createHash('sha256').update(value).digest('hex');
 const components={
@@ -12,34 +12,40 @@ const components={
 const read=file=>{const bytes=fs.readFileSync(new URL('../'+file,import.meta.url));if(hash(bytes)!==components[file])throw Error('native-source-seam-component');return bytes.toString('utf8')};
 const once=(s,a,b,reason='native-source-seam')=>{if(s.split(a).length!==2)throw Error(reason+'-ambiguous');return s.replace(a,b)};
 const legacyPF='9be357c96dff3d0790edcb0d7889db98cfded0f41f34fd161233ea0bdd0dab11',legacyTB='6937743860c8b2fbeef1037bb99792307cb3fbe7a2540ae0b1ac7010a16a5d90';
-const methodAnchor='\tasync applyDamage({',healthAnchor=contract=>`\t\tlet ${contract.healthDelta} = this.calculateHealthDelta({`;
+const methodAnchor='\tasync applyDamage({';
 function bridgeLine(descriptor){return '\tstatic thirdPartyNativeIWRBridge = Object.freeze('+JSON.stringify(descriptor).slice(0,-1)+',"applyDamage":this.prototype.applyDamage});'}
+const bridgeDescriptor=(source,version,method)=>({version:String(version??''),sourceSHA256:hash(source),protocol:NATIVE_IWR_BRIDGE_PROTOCOL,sourceContract:NATIVE_DAMAGE_CONTRACT,methodSHA256:hash(method)});
+const legacyStatement=profile=>`\tstatic thirdPartyNativeIWRBridge = Object.freeze({ version: "${profile.systemVersion}", sourceSHA256: "${profile.originalSHA256}", protocol: "${profile.protocol}", applyDamage: this.prototype.applyDamage });`;
+/** Qualify applyDamage by its shape and install the IWR continuation in the
+ * method's own names. The version and hashes in the descriptor record the
+ * input; they do not select or authorize the patch. */
 export function buildNativeBridge({source,version}={}){
- let text=sourceText(source),method=nativeMethod(text),digest=hash(method),contract=NATIVE_DAMAGE_SHAPES.find(p=>p.originalSHA256===digest||p.applyDamageSHA256===digest);
- if(!contract)throw Error('native-bridge-seam-method');
+ const text=sourceText(source),method=nativeMethod(text);
  const hasBridge=text.includes('thirdPartyNativeIWRBridge'),hasCallback=text.includes('thirdPartyIWR');
- if(digest===contract.originalSHA256&&(hasBridge||hasCallback))throw Error('native-bridge-seam-partial');
- if(digest===contract.applyDamageSHA256){
-  if(!hasBridge||(text.match(/const thirdPartyIWR/g)??[]).length!==1)throw Error('native-bridge-seam-partial');
-  const statement=bridgeStatement(text),profile=NATIVE_IWR_PROFILES[version],full=hash(source);
-  if(profile&&[profile.patchedSHA256,profile.sharedManualCompositionSHA256].includes(full))return {status:'unchanged',buffer:Buffer.from(source),descriptor:{version,sourceSHA256:profile.originalSHA256,protocol:profile.protocol}};
-  if(statement.includes('"sourceContract"')){
-   const descriptor=automaticDescriptor(statement);
-   if(descriptor.sourceContract!==contract.id||descriptor.methodSHA256!==contract.applyDamageSHA256||descriptor.protocol!==NATIVE_IWR_BRIDGE_PROTOCOL||!/^[a-f0-9]{64}$/.test(descriptor.sourceSHA256))throw Error('native-bridge-seam-descriptor');
-   return {status:'unchanged',buffer:Buffer.from(source),descriptor};
-  }
-  const legacy=NATIVE_IWR_PROFILES[contract.shield==='O'?'8.5.1':'8.5.0'];
-  const expected=`\tstatic thirdPartyNativeIWRBridge = Object.freeze({ version: "${legacy.systemVersion}", sourceSHA256: "${legacy.originalSHA256}", protocol: "${legacy.protocol}", applyDamage: this.prototype.applyDamage });`;
-  if(statement!==expected)throw Error('native-bridge-seam-descriptor');
-  const descriptor={version:String(version??''),sourceSHA256:hash(source),protocol:NATIVE_IWR_BRIDGE_PROTOCOL,sourceContract:contract.id,methodSHA256:contract.applyDamageSHA256};
-  return {status:'patch',buffer:Buffer.from(once(text,statement,bridgeLine(descriptor))),descriptor};
+ const original=bindNativeDamage(method,'original');
+ if(original){
+  if(hasBridge||hasCallback)throw Error('native-bridge-seam-partial');
+  const patched=insertDamageCallback(method,nativeDamageLocals(original));
+  // The patched reference rendered in this build's names is the independent expectation.
+  if(patched!==original.render(NATIVE_DAMAGE_REFERENCE.patched,{within:'class'}))throw Error('native-bridge-seam-output');
+  const descriptor=bridgeDescriptor(source,version,patched),at=text.indexOf(methodAnchor);
+  const output=text.slice(0,at)+bridgeLine(descriptor)+'\n\t'+patched+text.slice(at+1+method.length);
+  if(nativeMethod(output)!==patched)throw Error('native-bridge-seam-output');
+  return {status:'patch',buffer:Buffer.from(output),descriptor};
  }
- const descriptor={version:String(version??''),sourceSHA256:hash(source),protocol:NATIVE_IWR_BRIDGE_PROTOCOL,sourceContract:contract.id,methodSHA256:contract.applyDamageSHA256};
- text=once(text,methodAnchor,bridgeLine(descriptor)+'\n'+methodAnchor);
- const health=healthAnchor(contract);
- text=once(text,health,`\t\tconst thirdPartyIWR = game.modules.get(\`pf2e-third-party-automation\`)?.api${contract.callbackSignature};\n\t\tif (thirdPartyIWR && await thirdPartyIWR === true) x = ${contract.shield} + ${contract.hardnessApplied};\n`+health);
- if(hash(nativeMethod(text))!==contract.applyDamageSHA256)throw Error('native-bridge-seam-output');
- return {status:'patch',buffer:Buffer.from(text),descriptor};
+ if(!bindNativeDamage(method,'patched'))throw Error('native-bridge-seam-method');
+ if(!hasBridge||(text.match(/const thirdPartyIWR/g)??[]).length!==1)throw Error('native-bridge-seam-partial');
+ const statement=bridgeStatement(text),profile=NATIVE_IWR_PROFILES[version],full=hash(source);
+ if(profile&&[profile.patchedSHA256,profile.sharedManualCompositionSHA256].includes(full))return {status:'unchanged',buffer:Buffer.from(source),descriptor:{version,sourceSHA256:profile.originalSHA256,protocol:profile.protocol}};
+ if(statement.includes('"sourceContract"')){
+  const descriptor=automaticDescriptor(statement);
+  if(!isNativeDamageContract(descriptor.sourceContract)||descriptor.methodSHA256!==hash(method)||descriptor.protocol!==NATIVE_IWR_BRIDGE_PROTOCOL||!/^[a-f0-9]{64}$/.test(descriptor.sourceSHA256))throw Error('native-bridge-seam-descriptor');
+  return {status:'unchanged',buffer:Buffer.from(source),descriptor};
+ }
+ // A bridge from before descriptors named a contract gets one; its method stays as it is.
+ if(!Object.values(NATIVE_IWR_PROFILES).some(legacy=>statement===legacyStatement(legacy)))throw Error('native-bridge-seam-descriptor');
+ const descriptor=bridgeDescriptor(source,version,method);
+ return {status:'patch',buffer:Buffer.from(once(text,statement,bridgeLine(descriptor))),descriptor};
 }
 function batchObserver(stack,contract){
  let observer=read('native-manual-pool-batch/observer.js');

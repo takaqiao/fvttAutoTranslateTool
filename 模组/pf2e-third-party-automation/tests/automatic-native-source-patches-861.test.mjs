@@ -4,11 +4,12 @@ import vm from 'node:vm';
 import {readFileSync} from 'node:fs';
 import {buildNativeBridge,buildSharedManualPair} from '../tools/automatic-source-patches/native.mjs';
 import {verifyNativeIWRBridge,isVerifiedNativeIWRBridge} from '../scripts/native-iwr-verification.mjs';
-import {NATIVE_IWR_PROFILES,NATIVE_DAMAGE_SHAPES,NATIVE_SHARED_SHAPES} from '../scripts/native-iwr-profiles.mjs';
-import {sourceText,nativeMethod,batchRegion,flatRegion,stackingRegion,observerRegion,automaticDescriptor,bridgeStatement} from '../scripts/native-source-shapes.mjs';
+import {NATIVE_DAMAGE_CONTRACT,NATIVE_SHARED_SHAPES} from '../scripts/native-iwr-profiles.mjs';
+import {sourceText,nativeMethod,batchRegion,flatRegion,stackingRegion,observerRegion,automaticDescriptor,bridgeStatement,NATIVE_DAMAGE_REFERENCE,bindNativeDamage,nativeDamageLocals} from '../scripts/native-source-shapes.mjs';
 import {native860} from './native-iwr-860-fixture.mjs';
 import {native861,native861Source,hash} from './native-iwr-861-fixture.mjs';
 import {receiverContext} from './native-iwr-861-receiver-fixture.mjs';
+import {DAMAGE_CASES,assertCallback} from './native-damage-harness.mjs';
 
 const source=native861Source();
 assert.ok(process.env.TOOLBELT_CURRENT_SOURCE,'TOOLBELT_CURRENT_SOURCE is required');
@@ -16,7 +17,6 @@ const toolbelt=readFileSync(process.env.TOOLBELT_CURRENT_SOURCE);
 assert.equal(hash(toolbelt),'6acd53e7a5198ef8b9f7a35caae943b4582cabe61ff57bb76572038f61e549da');
 const bridge=(input=source,version='8.6.1')=>buildNativeBridge({source:input,version});
 const pair=(pf2eSource=bridge().buffer,toolbeltSource=toolbelt)=>buildSharedManualPair({pf2eSource,toolbeltSource,pf2eVersion:'8.6.1',toolbeltVersion:'3.58.4'});
-const damageShape=NATIVE_DAMAGE_SHAPES.find(row=>row.id==='pf2e-apply-damage:D:2');
 const sharedShape=NATIVE_SHARED_SHAPES.find(row=>row.batchOriginal===native861.regionSHA256.batchRegion);
 
 test('the 8.6.1 fixture holds the release bundle seams verbatim',{skip:!process.env.PF2E_NATIVE_861_BUNDLE},()=>{
@@ -26,25 +26,28 @@ test('the 8.6.1 fixture holds the release bundle seams verbatim',{skip:!process.
  assert.equal(text.split(native861.init).length,2);
 });
 
-test('registered 8.6.1 input hashes and bindings are those of the release seams',()=>{
+test('the damage reference and registered shared bindings are those of the 8.6.1 release seams',()=>{
  const text=sourceText(source);
- assert.equal(damageShape.originalSHA256,hash(nativeMethod(text)));
+ assert.equal(NATIVE_DAMAGE_REFERENCE.original,nativeMethod(text));
  assert.equal(sharedShape.batchOriginal,hash(batchRegion(text)));assert.equal(sharedShape.flatOriginal,hash(flatRegion(text)));assert.equal(sharedShape.stacking,hash(stackingRegion(text)));
  assert.equal(sharedShape.init,native861.init);assert.equal(sharedShape.receiverRule,native861.receiverBindings.ruleElement);assert.equal(sharedShape.receiverPredicate,native861.receiverBindings.predicate);
 });
 
-test('every damage shape composes its callback from its own locals',()=>{
- const rows=Object.fromEntries(NATIVE_DAMAGE_SHAPES.map(row=>[row.id,row]));assert.equal(Object.keys(rows).length,NATIVE_DAMAGE_SHAPES.length);
- for(const id of ['pf2e-apply-damage:O:2','pf2e-apply-damage:O:1'])assert.equal(rows[id].callbackSignature,NATIVE_IWR_PROFILES['8.5.1'].callbackSignature);
- assert.equal(rows['pf2e-apply-damage:D:1'].callbackSignature,NATIVE_IWR_PROFILES['8.5.0'].callbackSignature);
- assert.equal(damageShape.callbackSignature,'?.nativeDamageIWR?.(this, arguments[0], f, r, { actorDamage: x - D - ae, shieldDamage: ne })');
+test('each release composes its callback from the locals bound in its own method',()=>{
+ const locals=method=>nativeDamageLocals(bindNativeDamage(method,'original'));
+ assert.deepEqual(locals(native861.regions.nativeMethod),{damage:'x',iwr:'f',rollOptions:'r',shield:'D',hardnessApplied:'ae',shieldDamage:'ne',healthDelta:'oe'});
+ assert.deepEqual(locals(native860.regions.nativeMethod),{damage:'x',iwr:'f',rollOptions:'r',shield:'O',hardnessApplied:'ie',shieldDamage:'te',healthDelta:'ae'});
+ const patched=nativeMethod(bridge().buffer.toString());
+ assert.ok(patched.includes('?.nativeDamageIWR?.(this, arguments[0], f, r, { actorDamage: x - D - ae, shieldDamage: ne });\n\t\tif (thirdPartyIWR && await thirdPartyIWR === true) x = D + ae;\n\t\tlet oe = this.calculateHealthDelta({'));
 });
 
 test('audited 8.6.1 damage source builds independently of the manifest version',()=>{
  const result=bridge(source,'unlisted-release');
  assert.equal(result.status,'patch');assert.equal(result.descriptor.version,'unlisted-release');
- assert.equal(result.descriptor.sourceSHA256,hash(source));assert.equal(result.descriptor.sourceContract,'pf2e-apply-damage:D:2');
+ assert.equal(result.descriptor.sourceSHA256,hash(source));assert.equal(result.descriptor.sourceContract,NATIVE_DAMAGE_CONTRACT);
+ // The method bytes the 0.9.41 to 0.9.51 releases installed on 8.6.1.
  assert.equal(hash(nativeMethod(result.buffer.toString())),'4235d69229778f923d73edfac89725d0afebe14e7f68e378fe0114b0ef71ad94');
+ assert.equal(result.descriptor.methodSHA256,'4235d69229778f923d73edfac89725d0afebe14e7f68e378fe0114b0ef71ad94');
  const again=bridge(result.buffer);assert.equal(again.status,'unchanged');assert.deepEqual(again.buffer,result.buffer);
 });
 
@@ -98,7 +101,7 @@ test('8.6.1 served source and retained native function receive identity bound IW
  const result=pair(),text=result.pf2e.toString(),applyDamage=Function('return ({'+nativeMethod(text)+'}).applyDamage')();
  const retained=Object.freeze({...automaticDescriptor(bridgeStatement(text)),applyDamage}),game={system:{id:'pf2e',version:'8.6.1'}};
  const proof=await verifyNativeIWRBridge({game,source:result.pf2e,getNativeBridge:()=>retained,hash});
- assert.equal(proof.ready,true,proof.reason);assert.equal(proof.patchedSHA256,hash(result.pf2e));assert.equal(proof.applyDamageSHA256,damageShape.applyDamageSHA256);
+ assert.equal(proof.ready,true,proof.reason);assert.equal(proof.patchedSHA256,hash(result.pf2e));assert.equal(proof.applyDamageSHA256,hash(nativeMethod(text)));
  assert.equal(isVerifiedNativeIWRBridge(proof,game,retained),true);
  assert.equal(isVerifiedNativeIWRBridge({...proof},game,retained),false);
  assert.equal(isVerifiedNativeIWRBridge(proof,game,Object.freeze({...retained})),false);
@@ -138,35 +141,6 @@ for(const [name,before,after]of [
  assert.deepEqual(changed,snapshots[0]);assert.deepEqual(toolbelt,snapshots[1]);
 });
 
-// Runs applyDamage up to calculateHealthDelta and reports the delta it was about to apply.
-function healthDelta(methodSource,prevent){
- const calls=[],stop=Error('health-delta-captured');
- const context=vm.createContext({game:{modules:new Map([['pf2e-third-party-automation',{api:{async nativeDamageIWR(...args){calls.push(args);return prevent}}}]])},extractNotes:()=>[],applyStackingRules:()=>0,_loc:value=>value});
- const applyDamage=vm.runInContext('({'+methodSource+'}).applyDamage',context);
- return async({damage,hardness,block})=>{
-  let delta;
-  const params={damage,token:{name:'Target'},shieldBlockRequest:block,rollOptions:new Set(['target:fixture'])};
-  const actor={hitPoints:{value:30,max:30,temp:0},heldShield:{id:'shield',_source:{system:{hp:{value:20}}}},hardness,synthetics:{rollNotes:{}},
-   attributes:{hp:{},shield:{itemId:'shield',hardness:5,raised:true,hp:{value:20}}},isOfType:type=>type==='character',
-   calculateHealthDelta(value){delta=value.delta;throw stop}};
-  await assert.rejects(applyDamage.call(actor,params),error=>error===stop);
-  return {delta,calls,actor,params};
- };
-}
-// The shield has hardness 5. In the middle two rows the actor's hardness exceeds
-// what is left of the damage, so the applied hardness is smaller than the
-// hardness value and the two must not be interchanged.
-for(const [name,input,nativeDelta,shieldDamage]of [
- ['a blocked hit above both hardness values',{damage:15,hardness:3,block:true},7,10],
- ['hardness 5 against 3 damage left after a block',{damage:8,hardness:5,block:true},0,3],
- ['hardness 5 against an unblocked hit of 3',{damage:3,hardness:5,block:false},0,0],
- ['an unblocked hit above hardness',{damage:20,hardness:5,block:false},15,0],
-])for(const prevent of [false,true])test(`8.6.1 callback on ${name} keeps native amounts when prevention is ${prevent}`,async()=>{
- const native=await healthDelta(nativeMethod(source.toString()))(input);
- assert.equal(native.delta,nativeDelta);assert.equal(native.calls.length,0);
- const patched=await healthDelta(nativeMethod(bridge().buffer.toString()),prevent)(input),[actor,params,result,rollOptions,amounts]=patched.calls[0];
- assert.equal(patched.calls.length,1);assert.equal(actor,patched.actor);assert.equal(params,patched.params);
- assert.equal(result.finalDamage,input.damage);assert.equal(rollOptions,patched.params.rollOptions);
- assert.deepEqual({...amounts},{actorDamage:native.delta,shieldDamage});
- assert.equal(patched.delta,prevent?0:native.delta);
+for(const row of DAMAGE_CASES)for(const prevent of [false,true])test(`8.6.1 callback on ${row[0]} keeps native amounts when prevention is ${prevent}`,async()=>{
+ await assertCallback(nativeMethod(source.toString()),nativeMethod(bridge().buffer.toString()),row,prevent);
 });
