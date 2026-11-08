@@ -258,6 +258,19 @@ for(const kind of ['missing','levels','level-model','level-field','root-field','
   assert.ok(wrappers.has('ChatMessage.createDocuments'));
 });
 
+// Core 14.370 declares Level elevation with ExtendedNumberField.
+test('a NumberField subclass for level elevation still migrates, a non-number field does not',()=>{
+  for(const kind of ['subclass','string']){
+    const {g}=environment(),wrappers=new Map(),fields=g.foundry.data.fields;
+    const ExtendedNumber=class extends fields.NumberField {};
+    g.CONFIG.Level.documentClass.schema.fields.elevation.fields.top=kind==='subclass'?new ExtendedNumber():new fields.StringField();
+    registerLegacyCompat({g,registerWrapper:(target,fn)=>wrappers.set(target,fn)});
+    assert.equal(wrappers.has('Scene.create'),kind==='subclass',kind);
+    assert.ok(wrappers.has('ChatMessage.createDocuments'));
+    if(kind==='subclass')assert.equal(wrappers.get('Scene.create').call(g.Scene,value=>value,{foregroundElevation:20}).levels[0].elevation.top,20);
+  }
+});
+
 test('legacy wrappers recheck the live schema and document owner before transforming input',()=>{
   for(const kind of ['chat-schema','scene-schema','scene-owner','level-owner','foreign-receiver']){
     const {g}=environment(),wrappers=new Map();

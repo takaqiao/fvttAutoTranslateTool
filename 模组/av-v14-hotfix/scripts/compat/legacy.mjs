@@ -155,12 +155,14 @@ function wrapperTargets(base, implementation, basePath, implementationPath, meth
   return targets;
 }
 
+// A subclass keeps the value type the migration writes; core 14.370 declares
+// Level elevation with ExtendedNumberField, a NumberField subclass.
 function matchesFields(schema, expected, fields) {
   if (typeof fields?.SchemaField !== 'function' || !(schema instanceof fields.SchemaField)) return false;
   return Object.entries(expected).every(([key, type]) => {
     const field = schema.fields[key];
     return typeof type === 'string'
-      ? typeof fields[type] === 'function' && field?.constructor === fields[type]
+      ? typeof fields[type] === 'function' && field instanceof fields[type]
       : matchesFields(field, type, fields);
   });
 }

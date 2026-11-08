@@ -107,14 +107,68 @@ for(const failure of [false,true])test('6.4.3 late effects '+(failure?'rejection
   assert.equal(second.value,true);
   await f.queue.idle();
 });
-for(const field of ['onEnd','boxAnimate'])test('mixed legacy/current '+field+' contracts are skipped',()=>{
+test('mixed legacy/current onEnd contracts are skipped',()=>{
   const f=setup(current),old=setup(legacy);
-  if(field==='onEnd')f.queue.nextAnimation._onEnd=old.queue.nextAnimation._onEnd;
-  else Object.getPrototypeOf(f.box).animateThrow=Object.getPrototypeOf(old.box).animateThrow;
+  f.queue.nextAnimation._onEnd=old.queue.nextAnimation._onEnd;
   assert.equal(f.install().status,'unsupported-queue');
   assert.equal(Object.hasOwn(f.box,'startUnifiedBatch'),false);
   assert.equal(Object.hasOwn(f.engine,'handlePersistentThrowCompletion'),false);
 });
+// One failed playback resolves false and the next batch still completes.
+async function releasesFailedBatch(f){
+  assert.equal(f.install().completionStatus,'installed');
+  f.engine.persistentDiceList.push(f.other);
+  const first=observe(f.enqueue()),second=observe(f.enqueue());
+  await settle();
+  f.fail('collisions');
+  await f.finish();
+  assert.equal(first.value,false);
+  assert.equal(second.status,'pending');
+  assert.equal(f.errors.length,1);
+  await f.finish();
+  assert.equal(second.value,true);
+  assert.equal(f.engine.rolling,false);
+  await f.queue.idle();
+}
+const method=(f,text)=>vm.runInContext('({'+text+'})',f.context);
+test('the 6.4.2 animateThrow on the 6.4.3 queue keeps completion recovery',async()=>{
+  const f=setup(current);
+  Object.getPrototypeOf(f.box).animateThrow=method(f,legacy.boxAnimate).animateThrow;
+  await releasesFailedBatch(f);
+});
+test('a DiceBox changed outside the members the adapter uses keeps completion recovery',async()=>{
+  // 6.4.4 -> 6.4.5 changed only this argument in update().
+  const fixture=read('dsn-queue-6.4.4-native.json'),boxClass=fixture.boxClass.replace('volume:i.volume','volume:i.soundsVolume');
+  assert.notEqual(boxClass,fixture.boxClass);
+  await releasesFailedBatch(setup({...fixture,boxClass}));
+});
+test('an animateThrow change outside its completion closures keeps completion recovery',async()=>{
+  const f=setup(current),text=current.boxAnimate.replace('this.stats&&this.stats.update()','this.stats?.update()');
+  assert.notEqual(text,current.boxAnimate);
+  Object.getPrototypeOf(f.box).animateThrow=method(f,text).animateThrow;
+  await releasesFailedBatch(f);
+});
+test('an animateThrow without both recognised completion closures keeps the native path',()=>{
+  const f=setup(current),text=current.boxAnimate.replace('()=>this.throwEngine.handleSpecialEffectsInit()','()=>this.throwEngine.handleSpecialEffectsInit(!0)');
+  assert.notEqual(text,current.boxAnimate);
+  Object.getPrototypeOf(f.box).animateThrow=method(f,text).animateThrow;
+  const result=f.install();
+  assert.equal(result.status,'installed');assert.equal(result.completionStatus,'unsupported-source');
+  assert.equal(Object.hasOwn(f.box,'animateThrow'),false);
+});
+test('rewritten async engine steps keep completion recovery',async()=>{
+  const f=setup(current),proto=Object.getPrototypeOf(f.engine),{handleSpecialEffectsInit:effects}=proto;
+  proto.handleSpecialEffectsInit=async function(){return effects.call(this);};
+  await releasesFailedBatch(f);
+});
+for(const member of ['handlePersistentThrowCompletion','handleSpecialEffectsInit'])
+  test('a missing engine '+member+' keeps the native path',()=>{
+    const f=setup(current);
+    delete Object.getPrototypeOf(f.engine)[member];
+    const result=f.install();
+    assert.equal(result.status,'installed');assert.equal(result.completionStatus,'unsupported-source');
+    assert.equal(Object.hasOwn(f.box,'animateThrow'),false);
+  });
 test('changing throw identity during effects leaves foreign physics untouched and releases only its batch',async()=>{
   const f=setup(current);
   assert.equal(f.install().completionStatus,'installed');
@@ -244,11 +298,34 @@ test('native delayed persistent fade re-registration retains cleanup ownership p
   await f.queue.idle();
 });
 const tickerConsumers=['spawnPersistentDie','removePersistentDie','fadeOutEphemeral','fadeOutPersistentDie','clearAll','clearScene'];
-test('an unknown complete box profile with an added ticker consumer is refused',()=>{
-  const f=setup(current),text=current.boxClass.slice(0,-1)+'extraTicker(){canvas.app.ticker.add(this.animateThrow,this)}}';
-  const Foreign=vm.runInContext('('+text+')',f.context);
+const extendBox=(f,members)=>{
+  const Foreign=vm.runInContext('('+current.boxClass.slice(0,-1)+members+'})',f.context);
   Object.setPrototypeOf(f.box,Foreign.prototype);
-  assert.equal(f.install().completionStatus,'unsupported-source');
+  return Foreign;
+};
+test('an added this.animateThrow reader is accepted and tracked like the native consumers',async()=>{
+  const f=setup(current),Foreign=extendBox(f,'extraTicker(){canvas.app.ticker.add(this.animateThrow,this)}');
+  assert.equal(f.install().completionStatus,'installed');
+  f.box.extraTicker();
+  assert.equal(f.ticks.at(-1)[0],f.box.animateThrow);assert.notEqual(f.box.animateThrow,Foreign.prototype.animateThrow);
+  f.engine.persistentDiceList.push(f.other);
+  const state=observe(f.enqueue());await settle();
+  const release=f.holdWorker('collisions');await f.finish();
+  Foreign.prototype.extraTicker=function foreign(){};
+  assert.doesNotThrow(()=>f.ticker.frame());
+  release();await settle();
+  assert.equal(state.value,false);assert.equal(f.engine.rolling,true);
+  await f.queue.idle();
+});
+for(const [label,members] of [
+  ['reading the ticker callback from the prototype','extraTicker(){canvas.app.ticker.add(DiceBox.prototype.animateThrow,this)}'],
+  ['reading the ticker callback by string key','extraTicker(){canvas.app.ticker.add(this["animateThrow"],this)}'],
+  ['reading the ticker callback in an accessor','get ticking(){return this.animateThrow}'],
+  ['with a private member','#frames=0;countFrame(){this.#frames++}']
+])test('a DiceBox '+label+' keeps the native completion path',()=>{
+  const f=setup(current);extendBox(f,members);
+  const result=f.install();
+  assert.equal(result.status,'installed');assert.equal(result.completionStatus,'unsupported-source');
   assert.equal(Object.hasOwn(f.box,'animateThrow'),false);
 });
 test('an unrelated own native completion alias is retained and refused',()=>{

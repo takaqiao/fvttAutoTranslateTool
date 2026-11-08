@@ -5,20 +5,12 @@ const hashes={
   accumulator:'37b4b5b33974705d477aedbc8c84656813c92103391aff8551686d0d4a30a25d',
   boxStart:'a022226b8666a5de569bd756c3936933c137a23ab56b84b925491e01c4dcd993',
   engineStart:'91b92ea708def66da9c335f384df9bb01d398285fd6f6a7736155af56b600f21',
-  engineComplete:'a1f4e7f93c8ea5928254b1f37e0baef5f0db9a38e6a5b060b65f6d1a46157fa7',
-  engineEffects:'c4b4d67ee75da62d5f8ce473671ee61dcaa3e9864e62a3a7d857e80f7933e0dd',
   workerExec:'9f910bea44df0fe32a3ad4153b4525e556b5ace83ea99ac47124ee8165aa5e91',
   effectsConsumer:'b7d1c7ff49fbd90ed61837a4cd745aa757da7ec1c613f7b3cf7d1590baf3df1d',
   cleanupConsumer:'64fe5498b3b65f88d0f6cc22b10a083567297911d7f81c35a034c33da3d1bbe5'
 };
-const tickerConsumers={
-  spawnPersistentDie:'2cf3df32d2d41e2e04aeecaf17ebf1101d220532b980115e18047affa9a84652',
-  removePersistentDie:'30572115ec823800376c44a6f32b59fe7ae7ea85bb91e3db4ae1c8e65cabd5d1',
-  fadeOutEphemeral:'624cbc8456b7ccaab6fde43a6acc8eb4c18367471acd033a5899abd71af2150a',
-  fadeOutPersistentDie:'280fdd16bf37dd51748004fa9e03a9d7447019ed3edb2e02ad5eb925371cf4c6',
-  clearAll:'c57ee0a73ea771033dfd5d7c0e468639598af90854ef7e804a65b74750d50d88',
-  clearScene:'cf3b8fc698b2efaccad912d005f29ffeed3f63cefe9b1e917c3d7dbcc9d2dd8b'
-};
+// Native DiceBox members that add or remove the ticker callback.
+const tickerConsumers=['spawnPersistentDie','removePersistentDie','fadeOutEphemeral','fadeOutPersistentDie','clearAll','clearScene'];
 // The captured PersistentDice adapter installs these together. Keep its actual
 // function values so its own restore comparisons still work.
 const bridgeHashes={
@@ -29,21 +21,66 @@ const bridgeHashes={
 };
 const profiles=[{
   queue:'7253acd493cfc6fd612934ece4c2b30d84f1e04d51827eae9cd945e7a4270f77',
-  onEnd:'70de7b37350e4e244dd05a35672dec84e2ebf7e15e482b16d41970a1d620dc7a',
-  boxClass:'b5b291d969cbf3c58ecaa2d0b508af9c68823462b95f0d727a646cee4e837935',
-  boxAnimate:'d0f022f7cfe344f8bcc596d007a1ec7d259a926c940d25484958f0e74e43f2ce'
+  onEnd:'70de7b37350e4e244dd05a35672dec84e2ebf7e15e482b16d41970a1d620dc7a'
 },{
   queue:'6d28b4d7e4a9e6c998c04630536e705b1696213cc9e5c941d5eac36599f2f865',
-  onEnd:'6ce7da61fbe7c5b249e4fd80011dbf30d87437e903b6b680ae4c4dca3f753b9a',
-  boxClass:'bdaa8ba1b22781ac9bf5a7adae39ab8bac12d96cd568fc8f7b6a902a3cfa3a4d',
-  boxAnimate:'c722cddba3608fade37e2b526ece24ce64d32ca144ce69bd39bebc072f5f3d12'
+  onEnd:'6ce7da61fbe7c5b249e4fd80011dbf30d87437e903b6b680ae4c4dca3f753b9a'
 }];
 const sourceHashes=new WeakMap(),ownedCompletions=new WeakMap();
+const sourceOf=fn=>Function.prototype.toString.call(fn);
 const digest=fn=>{
   if(typeof fn!=='function')return null;
-  if(!sourceHashes.has(fn))sourceHashes.set(fn,sha256Fallback(Function.prototype.toString.call(fn)));
+  if(!sourceHashes.has(fn))sourceHashes.set(fn,sha256Fallback(sourceOf(fn)));
   return sourceHashes.get(fn);
 };
+const isAsync=fn=>Object.prototype.toString.call(fn)==='[object AsyncFunction]';
+const count=(text,pattern)=>text.match(pattern)?.length??0;
+const animateNames=/(?<![\w$])animateThrow(?![\w$])/g,animateReads=/(?<![\w$.])this\s*\.\s*animateThrow(?![\w$])/g;
+// Owned playback runs animateThrow with a Proxy receiver, where private members throw.
+const privateMember=/(?:\.|[{};])\s*(?:static\s+)?(?:async\s+)?(?:get\s+|set\s+)?\*?\s*#[A-Za-z_$]|#[A-Za-z_$][\w$]*\s+in\s/;
+
+// The DiceBox members that read the ticker callback, checked by shape rather
+// than by class hash. Every read must be this.animateThrow so the instance
+// wrapper is what they add and remove. Null when the class reads it any other
+// way, or a native consumer no longer reads it (a replacement may hold the
+// prototype function itself).
+function boxTickerConsumers(boxProto){
+  const DiceBox=boxProto.constructor;
+  if(typeof DiceBox!=='function'||typeof Object.getOwnPropertyDescriptor(boxProto,'animateThrow')?.value!=='function')return null;
+  const text=sourceOf(DiceBox);
+  // The class text holds the one declaration; every other mention is a read.
+  if(privateMember.test(text)||count(text,animateNames)!==count(text,animateReads)+1)return null;
+  const consumers={};
+  for(const key of Reflect.ownKeys(boxProto)){
+    if(key==='constructor'||key==='animateThrow'||key==='startUnifiedBatch')continue;
+    const {value,get,set}=Object.getOwnPropertyDescriptor(boxProto,key);
+    if([get,set].some(fn=>typeof fn==='function'&&count(sourceOf(fn),animateNames)))return null;
+    if(typeof value!=='function')continue;
+    const source=sourceOf(value),reads=count(source,animateReads);
+    if(count(source,animateNames)!==reads||!reads&&tickerConsumers.includes(key))return null;
+    if(reads)consumers[key]=value;
+  }
+  return consumers;
+}
+
+// intercept() recognises the two completion consumers by digest. They are
+// closures created inside animateThrow, so look for both among its then()
+// arguments; otherwise the adapter would install and never engage.
+function createsCompletionConsumers(animate){
+  const text=sourceOf(animate),found=new Set();
+  for(let at=text.indexOf('.then(');at>=0;at=text.indexOf('.then(',at+1)){
+    let depth=0,quote=null;
+    for(let index=at+5;index<text.length;index++){
+      const char=text[index];
+      if(quote){if(char==='\\')index++;else if(char===quote)quote=null;continue;}
+      if(char==='"'||char==="'"||char==='`'){quote=char;continue;}
+      if(depth===1&&(char===','||char===')')){found.add(sha256Fallback(text.slice(at+6,index)));break;}
+      if('([{'.includes(char))depth++;
+      else if(')]}'.includes(char))depth--;
+    }
+  }
+  return found.has(hashes.effectsConsumer)&&found.has(hashes.cleanupConsumer);
+}
 
 // Legacy dispatch loses rejections; current dispatch catches them but leaves
 // failed physics behind. Repair only batches from the audited Accumulator.
@@ -58,14 +95,13 @@ export function installDsnQueueRecovery({queue,recover,game=globalThis.game,tick
     ||digest(attach)!==hashes.attach||digest(onEnd?.value)!==profile.onEnd||!onEnd?.writable)return {status:'unsupported-queue'};
   if(!box)return {status:'waiting-dsn',attach};
   if(digest(start)!==hashes.boxStart||!Object.isExtensible(box)||Object.hasOwn(box,'startUnifiedBatch'))return {status:'unsupported-queue'};
-  const animate=boxProto.animateThrow,animateHash=digest(animate);
-  if(profiles.some(value=>value!==profile&&value.boxAnimate===animateHash))return {status:'unsupported-queue'};
+  const animate=boxProto.animateThrow;
   // Native attach runs before initialize finishes. Recheck this specific box.
   if(!engine&&typeof box.ready?.then==='function')return {status:'waiting-dsn',attach,ready:box.ready};
   const engineStart=engineProto?.startUnifiedBatch;
   if(digest(engineStart)!==hashes.engineStart||Object.hasOwn(engine??{},'startUnifiedBatch'))return {status:'unsupported-queue'};
   const completion=engineProto.handlePersistentThrowCompletion,effects=engineProto.handleSpecialEffectsInit;
-  const consumers=Object.fromEntries(Object.keys(tickerConsumers).map(key=>[key,boxProto[key]]));
+  const tickerSource=boxTickerConsumers(boxProto),consumers=tickerSource??{};
   const consumerKeys=Object.keys(consumers),consumerEntries=Object.entries(consumers);
   let current=null,playbackTail=null,active=true;
   const dataValue=(owner,key)=>Object.getOwnPropertyDescriptor(owner,key)?.value;
@@ -282,9 +318,9 @@ export function installDsnQueueRecovery({queue,recover,game=globalThis.game,tick
       finally{once();}
     }finally{tail.starting=false;}
   };
-  const completionSupported=digest(box.constructor)===profile.boxClass&&animateHash===profile.boxAnimate
-    &&digest(completion)===hashes.engineComplete&&digest(effects)===hashes.engineEffects
-    &&Object.entries(tickerConsumers).every(([key,hash])=>digest(consumers[key])===hash)
+  // The adapter chains on the promises of both engine steps.
+  const completionSupported=tickerSource!==null&&createsCompletionConsumers(animate)
+    &&isAsync(completion)&&isAsync(effects)
     &&(!bridgeSupported()||initialExec!==null)
     &&!Object.hasOwn(box,'animateThrow')&&sourcesIntact()
     &&(engine.handlePersistentThrowCompletion===completion&&!Object.hasOwn(engine,'handlePersistentThrowCompletion')

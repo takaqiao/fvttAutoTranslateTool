@@ -116,59 +116,6 @@ const SOURCES={
     }
     this._applyFilters();
   }`,
-  "PlaceableTab._applyFilters": `_applyFilters() {
-    if ( !this.layer || !canvas.ready ) return; // Still drawing.
-    let releasedObject = false;
-    const viewed = PlaceableTab.#filterViewed;
-    const { elevation, levels, visible, hidden: hiddenState, locked: lockedState } = this._filterState;
-    visible.clear();
-    const { cleanQuery } = this._searchFilter.constructor;
-    const elevationField = this.schema.getField("elevation");
-    const hasElevationRange = elevationField instanceof foundry.data.fields.SchemaField;
-    const hasElevation = hasElevationRange || (elevationField instanceof foundry.data.fields.NumberField);
-    for ( const li of this.element.querySelectorAll("[data-entry-id]") ) {
-      const entry = this._getPlaceableFromElement(li);
-      const matchesName = this._searchFilter.rgx?.test(cleanQuery(this._getEntryLabel(entry))) !== false;
-      let matchesElevation = true;
-      if ( hasElevationRange ) {
-        const {bottom, top, topInclusive=true} = entry.elevation;
-        const a = Math.max(bottom, elevation.bottom);
-        const b = Math.min(top, elevation.top);
-        if ( topInclusive || (bottom === top) || (top > b) ) matchesElevation = a <= b;
-        else matchesElevation = a < b;
-      } else if ( hasElevation ) {
-        matchesElevation = (entry.elevation >= elevation.bottom) && (entry.elevation <= elevation.top);
-      }
-      const matchesLevel = !levels.size || levels.some(level => entry.locatedInLevel(level));
-      const matchesHidden = (hiddenState === null) || (entry.hidden === hiddenState);
-      const matchesLocked = (lockedState === null) || (entry.locked === lockedState);
-      let hidden = !matchesName || !matchesElevation || !matchesLevel || !matchesHidden || !matchesLocked
-        || (viewed && !entry.viewed);
-      if ( !hidden ) hidden = !this._matchesFilter(entry);
-      if ( hidden ) {
-        if ( entry.rendered && entry.object.controlled ) {
-          entry.object.release({ renderSidebar: false });
-          releasedObject = true;
-        }
-        li.classList.remove("active");
-      }
-      else visible.add(entry);
-      li.hidden = hidden;
-    }
-    // Recompute grouped category counts from visible entries.
-    for ( const group of this.element.querySelectorAll(".placeable-group") ) {
-      const meta = group.querySelector(".group-header .meta");
-      if ( meta ) {
-        const count = group.querySelectorAll("[data-entry-id]").values().reduce((n, li) => n + (li.hidden ? 0 : 1), 0);
-        meta.textContent = \`(\${count})\`;
-      }
-    }
-    this.layer.setAllRenderFlags({ refreshState: true });
-    const filter = this.element.querySelector("search [data-action=openFilter]");
-    if ( filter ) filter.ariaPressed = String(this._hasAdvancedFilters());
-    ui.placeables?._updateFilterPip();
-    if ( releasedObject && (game.activeTool === "select") ) ui.placeablesPalette?.render();
-  }`,
   "PlaceableTab._matchesFilter": `_matchesFilter(entry) {
     return true;
   }`,
@@ -176,10 +123,6 @@ const SOURCES={
     const { elevation, hidden, locked } = this._filterState;
     return Number.isFinite(elevation.bottom) || Number.isFinite(elevation.top) || (hidden !== null)
       || (locked !== null);
-  }`,
-  "PlaceableTab._getPlaceableFromElement": `_getPlaceableFromElement(element) {
-    const { entryId } = element.closest("[data-entry-id]")?.dataset ?? {};
-    return canvas.scene.getEmbeddedCollection(this.collectionName).get(entryId);
   }`,
   "TokenTab._prepareDirectoryContext": `async _prepareDirectoryContext(context, options) {
     context = await super._prepareDirectoryContext(context, options);
@@ -217,41 +160,6 @@ const SOURCES={
     }
     return context;
   }`,
-  "PlaceableTab._prepareSearchContext": `async _prepareSearchContext(context, options) {
-    const hasLevels = (this.schema.has("levels") || this.schema.has("level")) && (canvas.scene?.levels.size > 1);
-    const canCreate = this.collectionName === "regions";
-    const { label, labelPlural } = this.documentClass.metadata;
-    context.labels = {
-      create: _loc("SIDEBAR.Create", { type: _loc(label) }),
-      placeholder: _loc("SIDEBAR.PLACEABLES.Search.placeholder", { name: _loc(labelPlural) })
-    };
-    const { elevation, levels } = this._filterState;
-    const state = foundry.utils.mergeObject(this._filterState, {
-      filteredByLevel: !!levels.size
-    }, { inplace: false });
-    const filters = [
-      {
-        action: "filterViewed",
-        active: PlaceableTab.#filterViewed,
-        cssClass: "fa-solid fa-image",
-        tooltip: "SIDEBAR.PLACEABLES.Filter.Viewed"
-      },
-      {
-        action: "filterByLevel",
-        active: state.filteredByLevel,
-        cssClass: "fa-solid fa-layer-group",
-        tooltip: "SIDEBAR.PLACEABLES.Filter.Level"
-      },
-      {
-        action: "openFilter",
-        active: Number.isFinite(elevation.bottom) || Number.isFinite(elevation.top),
-        cssClass: "fa-solid fa-filter",
-        tooltip: "SIDEBAR.PLACEABLES.Filter.Tooltip"
-      }
-    ];
-    Object.assign(context, { canCreate, filters, hasLevels, state });
-    return context;
-  }`,
   "PlaceableTab._configureRenderParts": `_configureRenderParts(options) {
     const parts = super._configureRenderParts(options);
     parts.directory.templates.push(this.constructor.DIRECTORY_PARTIAL, this.constructor.ENTRY_PARTIAL);
@@ -259,12 +167,26 @@ const SOURCES={
   }`,
 };
 
-function tokens(source){
+// Checked for what the skipped render needs instead of by text. Core 14.370
+// added null-scene guards to all three without changing that.
+const CAPABILITIES={
+  // The skip calls this in place of a rebuild, so it must still recompute the
+  // hidden state of every existing entry element.
+  "PlaceableTab._applyFilters":source=>source.some(token=>token.kind==='literal'&&token.value.slice(1,-1)==='[data-entry-id]')
+    &&source.some((token,index)=>token.value==='.'&&source[index+1]?.value==='hidden'&&source[index+2]?.value==='='),
+  // Resolves those elements for _applyFilters.
+  "PlaceableTab._getPlaceableFromElement":()=>true,
+  // The skip leaves the search part as last rendered.
+  "PlaceableTab._prepareSearchContext":()=>true
+};
+
+function parse(source){
   // The shared tokenizer predates private fields. Reserve a spelling that
   // cannot collide with an ordinary identifier in either compared source.
   if(source.includes('__avPrivate_'))throw new SyntaxError('Reserved source identifier');
-  return JSON.stringify(sourceTokens(source.replaceAll('#','__avPrivate_')).map(token=>token.value));
+  return sourceTokens(source.replaceAll('#','__avPrivate_'));
 }
+const tokens=source=>JSON.stringify(parse(source).map(token=>token.value));
 const expected=new Map(Object.entries(SOURCES).map(([name,source])=>[name,tokens(source)]));
 const directoryMethods={render:'AbstractSidebarTab',_prepareContext:'PlaceableDirectory',_onRender:'PlaceableDirectory',
   _renderTab:'PlaceableDirectory'};
@@ -273,14 +195,25 @@ const tabMethods={render:'ApplicationV2',_prepareDirectoryContext:'TokenTab',_pr
   _hasAdvancedFilters:'PlaceableTab',_getPlaceableFromElement:'PlaceableTab',_preparePartContext:'PlaceableTab',
   _prepareSearchContext:'PlaceableTab',_configureRenderParts:'PlaceableTab'};
 
+function member(classes,key){
+  const [owner,name]=key.split('.'),prototype=classes[owner]?.prototype;
+  const descriptor=prototype&&Object.getOwnPropertyDescriptor(prototype,name);
+  const fn=descriptor?.value??descriptor?.get;
+  return typeof fn==='function'?{prototype,name,fn,getter:!!descriptor.get}:null;
+}
+const sourceOf=fn=>Reflect.apply(Function.prototype.toString,fn,[]);
+
 function contracts(classes){
   const records=[];
   for(const [key,source] of expected){
-    const [owner,name]=key.split('.'),prototype=classes[owner]?.prototype;
-    const descriptor=prototype&&Object.getOwnPropertyDescriptor(prototype,name);
-    const fn=descriptor?.value??descriptor?.get;
-    if(typeof fn!=='function'||tokens(Reflect.apply(Function.prototype.toString,fn,[]))!==source)return null;
-    records.push({prototype,name,fn,getter:!!descriptor.get});
+    const record=member(classes,key);
+    if(!record||tokens(sourceOf(record.fn))!==source)return null;
+    records.push(record);
+  }
+  for(const [key,accepts] of Object.entries(CAPABILITIES)){
+    const record=member(classes,key);
+    if(!record||record.getter||!accepts(parse(sourceOf(record.fn))))return null;
+    records.push(record);
   }
   return records;
 }

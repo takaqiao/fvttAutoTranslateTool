@@ -168,6 +168,49 @@ test('comments, whitespace and version labels do not disable recognized sources'
   e.runtime.game.version='99.999';const entry=e.elements[0];await e.render();assert.equal(e.elements[0],entry);
 });
 
+// The null-scene guards core 14.370 added to the three capability-checked methods.
+function core14370(source){
+  for(const [from,to] of [
+    ['const entry = this._getPlaceableFromElement(li);','const entry = this._getPlaceableFromElement(li);\n      if ( !entry ) continue;'],
+    ['return canvas.scene.getEmbeddedCollection(','return canvas.scene?.getEmbeddedCollection('],
+    ['const canCreate = this.collectionName === "regions";','const canCreate = !!canvas.scene && (this.collectionName === "regions");'],
+    ['tooltip: "SIDEBAR.PLACEABLES.Filter.Level"\n','tooltip: "SIDEBAR.PLACEABLES.Filter.Level",\n        disabled: !canvas.scene\n']
+  ]){
+    assert.ok(source.includes(from),from);
+    source=source.replace(from,to);
+  }
+  return source;
+}
+
+test('core 14.370 null-scene guards keep the coordinate-only update',async()=>{
+  const e=await installed({mutateSource:core14370}),[token,other]=e.documents,entry=e.elements[0];
+  assert.equal(e.result?.status,'installed');
+  token.viewed=false;
+  await e.render();
+  assert.equal(e.elements[0],entry);
+  assert.equal(e.elements[0].hidden,true);
+  assert.deepEqual([...e.tab._filterState.visible],[other]);
+  await e.render(e.movement([{_id:'a',name:'Renamed'}]));
+  assert.notEqual(e.elements[0],entry);
+});
+
+test('a missing or unusable capability-checked method prevents installation',()=>{
+  if(baseline)return;
+  for(const [label,spoil] of [
+    ['missing _applyFilters',proto=>{delete proto._applyFilters;}],
+    ['missing _getPlaceableFromElement',proto=>{delete proto._getPlaceableFromElement;}],
+    ['missing _prepareSearchContext',proto=>{delete proto._prepareSearchContext;}],
+    ['getter _applyFilters',proto=>{Object.defineProperty(proto,'_applyFilters',{get:()=>()=>{},configurable:true});}],
+    ['_applyFilters without entry visibility',proto=>{
+      proto._applyFilters=function(){for(const li of this.element.querySelectorAll("[data-entry-id]"))li.classList.remove("active");};
+    }]
+  ]){
+    const e=directoryEnvironment();spoil(e.classes.PlaceableTab.prototype);
+    assert.equal(install({runtime:e.runtime}).status,'unsupported-source',label);
+    assert.equal(e.registrations.length,0,label);
+  }
+});
+
 test('new overrides of inherited render or presentation methods keep their side effects',async()=>{
   if(baseline)return;
   for(const [owner,name] of [['TokenTab','_getEntryLabel'],['TokenTab','_applyFilters'],['TokenTab','render'],

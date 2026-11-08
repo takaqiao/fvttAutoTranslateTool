@@ -1,10 +1,20 @@
-# FVTT v14 Local Hotfix 0.6.30
+# FVTT v14 Local Hotfix 0.6.31
 
 当前源码及隔离回归基线为 Foundry **14.369**、PF2e **8.6.1**、Dice So Nice **6.4.4**、BBMM **1.4.11**、Sundry **1.11.0**、Summons Assistant **2.20.3**。清单保留最低核心版本 14.367 和已验证标签 14.369，没有核心最高版本限制。运行时不按 Foundry、PF2e 或第三方模组的版本号决定装不装。每项可在世界设置中关闭，刷新后生效。该装而没装上的修正会在控制台输出一行警告并写明原因；全部状态和各项实际生效的次数见：
 
 ```js
 game.modules.get('av-v14-hotfix').api.status()
 ```
+
+## 0.6.31：三处安装前检查改按能力判断
+
+Foundry 14.370 和 Dice So Nice 6.4.5 改了上游文本，下面三项因此没装上、退回原生。修正本身没有改，只放宽装不装的判断：
+
+- **Token 目录移动更新**（`tokenDirectory`）：`PlaceableTab` 的 `_applyFilters`、`_getPlaceableFromElement`、`_prepareSearchContext` 不再逐词比对原文（14.370 给它们加了空场景保护）。现在要求三者是 `PlaceableTab` 原型上的普通方法、`TokenTab` 没有覆盖；`_applyFilters` 还要遍历 `[data-entry-id]` 条目并重设 `hidden`，因为省去重建时由它代替重绘刷新筛选结果。其余 21 个方法和 getter 仍逐词比对。
+- **旧导入器兼容的场景部分**（`legacy`）：schema 字段类型改用 `instanceof` 判断，接受子类。14.370 的 Level `elevation` 改用 `NumberField` 的子类 `ExtendedNumberField`。
+- **DsN 动画收尾恢复**（`dsnChat` 的 `queueCompletionStatus`）：不再核对整个 DiceBox 类、`animateThrow`、两个引擎方法和六个 ticker 消费方法的 SHA-256，改为检查：DiceBox 里对 `animateThrow` 的引用都是 `this.animateThrow`，原有的六个消费方法仍这样引用，新增的同类方法一并跟踪身份；类里没有私有成员，因为接管期间 `animateThrow` 以 Proxy 为接收者运行；`animateThrow` 里仍有队列按摘要识别的两个收尾闭包；`handlePersistentThrowCompletion` 和 `handleSpecialEffectsInit` 是异步函数。队列、Accumulator、`attach`、两个 `startUnifiedBatch`、worker `exec`、两个收尾闭包和 PersistentDice 桥仍按摘要核对。
+
+隔离测试和离线探针用 Foundry 14.369 / 14.370 的实际方法和 schema、DsN 6.4.2–6.4.5 的实际类核过；实际世界中的效果需客户端核验。
 
 ## 0.6.30：日历 HUD 与 Token 目录更新
 
@@ -225,7 +235,7 @@ Sundry 与共享回合/奴仆清理使用已验证的原生 Hooks 记录适配�
 | 路径 | 当前守卫与理由 |
 | --- | --- |
 | 包入口及核心补修 | 没有 Foundry 核心代数或精确版本门槛。批量删除聊天和 Hooks 适配器保留源码文本保护；时间戳和音频自 0.6.28 起只做 API 与身份检查。旧导入器按 ChatMessage/Scene/Level schema、API 与目标类身份检查，schema 不符不转换输入。核心标签只用作来源和已验证基线记录。 |
-| DsN 聊天/模型/队列 | 解除精确 6.4.1 / 14.368；保留逐函数及回调哈希、实例/原型所有权、具体 ready Promise 与批次所有权。队列、回调和完整 DiceBox 按旧版或 6.4.3 来源组合核验，实际 ticker 消费方法另行检查；PersistentDice 窄包装按函数源码组合及进行中引用核验。普通批次捕获实际 worker.exec 引用；已装桥的原生恢复引用另核验 worker prototype RPC 源码。完整 bundle 哈希仅用于 fixture 来源。 |
+| DsN 聊天/模型/队列 | 解除精确 6.4.1 / 14.368；保留逐函数及回调哈希、实例/原型所有权、具体 ready Promise 与批次所有权。队列和回调按旧版或 6.4.3 来源核验；自 0.6.31 起 DiceBox、`animateThrow`、两个引擎方法和 ticker 消费方法改按形状检查（`this.animateThrow` 引用、无私有成员、收尾闭包仍在、引擎步骤为异步函数）；PersistentDice 窄包装按函数源码组合及进行中引用核验。普通批次捕获实际 worker.exec 引用；已装桥的原生恢复引用另核验 worker prototype RPC 源码。完整 bundle 哈希仅用于 fixture 来源。 |
 | DsN 画质 | 没有 DsN/BBMM 版本门槛；自 0.6.28 起不比对函数文本，检查三个被包装方法和 factory 方法的形状、返回值类型和被锁的键是否还在。注册表和规则不符合时跳过。 |
 | BBMM reader | world Boolean/Object 注册定义、client/user 目标、namespace/key/value/soft 结构。只读取规则，不恢复旧通用设置监听器。 |
 | Grid / BBMM 旧修补 | 已删除运行时守卫和实现，使用当前上游；历史数据保留。 |
