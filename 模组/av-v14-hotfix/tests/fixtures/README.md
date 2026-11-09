@@ -85,3 +85,47 @@ The capture's `source-capture.json` must be alongside `upstream`. Only the requi
 The index adapter and the duration formatter cache were retired, and the timestamp repair no longer reads core source. Their fixtures (`babele-*.json`, `duration-core-14.367.json`, `timestamps-core-14.367.json`), the two Babele generators and their tests were removed with them. Earlier sections describe only fixtures that still exist.
 
 Item names, the chat portrait, buffered audio stop, chat timestamps and the DsN quality locks no longer compare function text at runtime. The PF2e and DsN excerpts stay as test inputs: the regressions run the unmodified upstream functions, and additionally run altered copies to show that a changed function body still installs and that each runtime guard stands down when its precondition fails.
+
+## 0.6.34 additions
+
+`item-activations-14.3.3.json` holds pf2e-item-activations 14.3.3's `generate-activation.js` and `on-create.js` whole, the marker/activate/deactivate part of `activate.js`, the ready-time `TEXT` setup and `setModuleFlag` from `misc.js`, the `SPECIFIC_*` tables from `const.js`, the module's `code` and `traits` strings in `cn` and `en`, and the homebrew feat traits from its manifest. From the official PF2e 8.7.0 bundle it takes `sluggify` and `CONFIG.PF2E.actionTraits` (resolved from the bundle's object literals); labels come from PF2e's `en.json` and pf2_cn's `zh_Hans.json`. `samples` are activation paragraphs from world item descriptions, with the item's name and slug and nothing else from the item. Provenance records the SHA-256 of every source file.
+
+```sh
+node scripts/build-item-activations-test-fixture.mjs /pf2e-item-activations /8.7.0/pf2e.mjs /8.7.0/lang/en.json /pf2_cn/zh_Hans/zh_Hans.json samples.json
+```
+
+`pf2e-8.7.0-token-size.json` holds exact slices of the official PF2e 8.7.0 bundle: `ActiveEffectPF2e.applyChange`, `ActorPF2e#applyActiveEffects`, the `ActorSizePF2e` class and the size list it indexes. Provenance records the bundle SHA-256 and each slice's offsets and SHA-256.
+
+```sh
+node scripts/build-pf2e-870-token-test-fixture.mjs /8.7.0/pf2e.mjs
+```
+
+Both generators check the PF2e bundle digest before writing. The Item Activations regressions run the module's own generator and `augmentAction` in a VM, drop invalid traits and sort the rest as PF2e does before `preCreateItem`, and then run the hook. The TokenImage regressions run the unmodified `applyChange` over a recording parent class, and altered copies (the #23641 gate, renamed minified names, a changed branch). The battle form regressions run the real size class and queue method under a stand-in core Actor and battle form; they do not run PF2e's BattleForm rule element.
+
+`sound-stop.test.mjs` was removed with the buffered audio stop repair; it had no fixture of its own. `turn-lifecycle-native.json` keeps the Reaction 1.4.3 callback, which the tests now use to show that callback stays native.
+
+The pf2e-item-activations sources in `item-activations-14.3.3.json` are copied under the module's MIT license (https://github.com/ChasarooniZ/pf2e-item-activations):
+
+```text
+MIT License
+
+Copyright (c) 2020 Repository Owner
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```

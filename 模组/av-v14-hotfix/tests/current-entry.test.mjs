@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 const source=fs.readFileSync(new URL('../av-v14-hotfix.mjs',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,'').replaceAll('import.meta.url',JSON.stringify(new URL('../av-v14-hotfix.mjs',import.meta.url).href));
-const names=['prepareSundryPatch','prepareTurnLifecyclePatch','registerLegacyCompat','installGrid','installSundryPatch','installPatreonPatch','installDurationPatch','installTimestampPatch','installItemNameFastPath','installChatDeleteCoalescing','installTokenizerChatPortraitPatch','installSoundStopPatch','installWayfinderFogPatch','installBbmmHardLocks','registerDsnQualitySettings','installDsnQualityLocks','installTurnLifecyclePatch','installDsnChatRecovery','registerBabeleIndex','installTokenDirectoryPerformancePatch','installCalendariaHudPatch','installToolbeltCoverPatch','installBobTileCachePatch','installHudTrackerPatch'];
+const names=['prepareSundryPatch','prepareTurnLifecyclePatch','registerLegacyCompat','installGrid','installSundryPatch','installPatreonPatch','installDurationPatch','installTimestampPatch','installItemNameFastPath','installChatDeleteCoalescing','installTokenizerChatPortraitPatch','installWayfinderFogPatch','installBbmmHardLocks','registerDsnQualitySettings','installDsnQualityLocks','installTurnLifecyclePatch','installDsnChatRecovery','registerBabeleIndex','installTokenDirectoryPerformancePatch','installCalendariaHudPatch','installToolbeltCoverPatch','installBobTileCachePatch','installHudTrackerPatch','installItemActivationsCnPatch','installTokenImageScalePatch','installBattleFormSizePatch'];
 async function boot(disabled=[],generation=14,{globals={},modules=[],manual=false,throwOnError=true}={}){
  const hooks={},tasks=[],settings=new Map(),calls=[],phases=[],self={},logs=[];let phase='load';
  const log=level=>(...args)=>{logs.push({level,text:String(args[0]),args});if(level==='error'&&throwOnError)throw Error(args.join(' '));};
@@ -25,16 +25,16 @@ test('diagnostic version matches the package manifest',async()=>{
  const f=await boot(),manifest=JSON.parse(fs.readFileSync(new URL('../module.json',import.meta.url),'utf8'));
  assert.equal(f.status.version,manifest.version);
 });
-test('retired index, duration and adventure-setting repairs keep a reason but no switch, installer or module file',async()=>{
+test('retired index, duration, adventure-setting, sound-stop and Reaction repairs keep a reason but no switch, installer or module file',async()=>{
  const f=await boot();
- for(const key of ['babele','duration'])assert.equal(f.settings.has(key),false,key);
- for(const key of ['babele','duration','legacyAdventureSettings']){
+ for(const key of ['babele','duration','soundStop','turnLifecycleReaction'])assert.equal(f.settings.has(key),false,key);
+ for(const key of ['babele','duration','legacyAdventureSettings','soundStop','turnLifecycleReaction']){
   assert.equal(f.status.patches[key].status,'retired',key);assert.equal(typeof f.status.patches[key].detail,'string',key);
  }
- assert(!f.calls.includes('installDurationPatch'));assert(!f.calls.includes('registerBabeleIndex'));
+ assert(!f.calls.includes('installDurationPatch'));assert(!f.calls.includes('registerBabeleIndex'));assert(!f.calls.includes('installSoundStopPatch'));
  assert.equal(Object.hasOwn(f.status,'babele'),false);
- for(const file of ['../scripts/patches/babele.mjs','../scripts/patches/duration.mjs'])assert.equal(fs.existsSync(new URL(file,import.meta.url)),false,file);
- assert.deepEqual([...f.settings.keys()].sort(),['bobTileCache','calendariaHud','chat','dsnChat','dsnQualityLocks','hudTracker','itemNames','legacy','soundStop','sundry','timestamps','tokenDirectory','tokenDirectoryHidden','tokenizerChat','toolbeltCover','turnLifecycle']);
+ for(const file of ['../scripts/patches/babele.mjs','../scripts/patches/duration.mjs','../scripts/patches/sound-stop.mjs'])assert.equal(fs.existsSync(new URL(file,import.meta.url)),false,file);
+ assert.deepEqual([...f.settings.keys()].sort(),['battleFormSize','bobTileCache','calendariaHud','chat','dsnChat','dsnQualityLocks','hudTracker','itemActivationsCn','itemNames','legacy','sundry','timestamps','tokenDirectory','tokenDirectoryHidden','tokenImageScale','tokenizerChat','toolbeltCover','turnLifecycle']);
 });
 test('every imported module file exists and exports the names the entry uses',async()=>{
  const entry=fs.readFileSync(new URL('../av-v14-hotfix.mjs',import.meta.url),'utf8');
@@ -145,9 +145,33 @@ test('Toolbelt cover correction installs during setup and honors its reload swit
  assert.equal(disabled.status.patches.toolbeltCover.status,'disabled');
 });
 
+for(const [key,installer,phase,result] of [
+ ['tokenImageScale','installTokenImageScalePatch','init',{status:'installed',stats:{applied:0}}],
+ ['battleFormSize','installBattleFormSizePatch','init',{status:'installed',stats:{resized:0,unmatched:0}}],
+ ['itemActivationsCn','installItemActivationsCnPatch','setup',{status:'installed',hook:1,stats:{renamed:0,traitsFilled:0,labelsDropped:0}}]
+])test(`${key} installs during ${phase} and honors its reload switch`,async()=>{
+ const f=await boot([],14,{globals:{[installer]:reporting(key,result)}});
+ assert.equal(f.settings.get(key)?.default,true);
+ assert.equal(f.settings.get(key)?.requiresReload,true);
+ assert.equal(f.status.patches[key]?.status,'installed');
+ assert.deepEqual(f.lines('warn'),[]);
+ const enabled=await boot();assert.deepEqual(enabled.phases.filter(call=>call.name===installer).map(call=>call.phase),[phase]);
+ const disabled=await boot([key]);assert(!disabled.calls.includes(installer));
+ assert.equal(disabled.status.patches[key].status,'disabled');
+});
+test('a fix already in PF2e, or Item Activations not enabled, stays quiet',async()=>{
+ const f=await boot([],14,{globals:{
+  installTokenImageScalePatch:reporting('tokenImageScale',{status:'skipped',reason:'upstream-fixed'}),
+  installItemActivationsCnPatch:reporting('itemActivationsCn',{status:'skipped',reason:'module-inactive'})}});
+ assert.deepEqual(f.lines('warn'),[]);
+ assert(f.lines('info').includes('av-v14-hotfix | tokenImageScale: skipped (upstream-fixed)'));
+ const changed=await boot([],14,{globals:{installBattleFormSizePatch:reporting('battleFormSize',{status:'unsupported-source'})}});
+ assert(changed.lines('warn').includes('av-v14-hotfix | battleFormSize is not active: unsupported-source'));
+});
+
 test('later core generations reach independently guarded installers and ready diagnostics',async()=>{
  const f=await boot([],15);
- assert(f.calls.includes('registerLegacyCompat'));assert(f.calls.includes('installSoundStopPatch'));
+ assert(f.calls.includes('registerLegacyCompat'));assert(f.calls.includes('installTokenImageScalePatch'));
  assert(f.calls.includes('installDsnChatRecovery'));assert(f.calls.includes('installSundryPatch'));
  assert.equal(f.status.patches.runtime.status,'ready');assert.equal(typeof f.status.patches.runtime.elapsedMs,'number');
 });
@@ -155,7 +179,7 @@ test('later core generations reach independently guarded installers and ready di
 test('status keys follow the world switches rather than the internal feature names',async()=>{
  const f=await boot([],14,{globals:{
   registerLegacyCompat:reporting('legacy-compat',{moduleId:'av-v14-hotfix',status:'installed',chatStatus:'installed',sceneStatus:'installed'}),
-  installTurnLifecyclePatch:reporting('turn-lifecycle',{status:'installed',parts:{reaction:{status:'installed'}}})}});
+  installTurnLifecyclePatch:reporting('turn-lifecycle',{status:'installed',parts:{sustain:{status:'installed'}}})}});
  assert.equal(f.status.patches.legacy.status,'installed');assert.equal(f.status.patches.legacy.feature,'legacy');
  assert.equal(f.status.patches.turnLifecycle.status,'installed');
  assert.equal(Object.hasOwn(f.status.patches,'legacy-compat'),false);assert.equal(Object.hasOwn(f.status.patches,'turn-lifecycle'),false);
@@ -183,30 +207,30 @@ test('expected idle states stay quiet',async()=>{
   installTokenizerChatPortraitPatch:reporting('tokenizerChat',{status:'unsupported-system'}),
   installTimestampPatch:reporting('timestamps',{status:'already-installed'}),
   installTurnLifecyclePatch:reporting('turn-lifecycle',{status:'skipped',reason:'no-supported-consumers',parts:{
-   reaction:{status:'skipped',reason:'module-inactive'},sustain:{status:'skipped',reason:'module-inactive'},summons:{status:'skipped',reason:'feature-disabled'}}})}});
+   sustain:{status:'skipped',reason:'module-inactive'},summons:{status:'skipped',reason:'feature-disabled'}}})}});
  assert.deepEqual(f.lines('warn'),[]);
  const info=f.lines('info');
  assert(info.includes('av-v14-hotfix | sundry: skipped (feature-disabled)'));assert(info.includes('av-v14-hotfix | dsnChat: waiting-dsn'));
- assert(info.includes('av-v14-hotfix | turnLifecycle: skipped (no-supported-consumers, reaction module-inactive, sustain module-inactive, summons feature-disabled)'));
+ assert(info.includes('av-v14-hotfix | turnLifecycle: skipped (no-supported-consumers, sustain module-inactive, summons feature-disabled)'));
 });
 test('an installed repair whose parts are still waiting says so without warning',async()=>{
  const f=await boot([],14,{globals:{
   installDsnChatRecovery:reporting('dsnChat',{status:'installed',queueStatus:'waiting-dsn',queueCompletionStatus:'waiting-dsn',modelStatus:'installed'}),
-  installTurnLifecyclePatch:reporting('turn-lifecycle',{status:'installed',parts:{reaction:{status:'skipped',reason:'module-inactive'},sustain:{status:'installed'},summons:{status:'skipped',reason:'feature-disabled'}}})}});
+  installTurnLifecyclePatch:reporting('turn-lifecycle',{status:'installed',parts:{sustain:{status:'skipped',reason:'module-inactive'},summons:{status:'installed'}}})}});
  assert.deepEqual(f.lines('warn'),[]);
  assert(f.lines('info').includes('av-v14-hotfix | dsnChat: installed (queueStatus waiting-dsn, queueCompletionStatus waiting-dsn)'));
- assert(f.lines('info').includes('av-v14-hotfix | turnLifecycle: installed (reaction module-inactive, summons feature-disabled)'));
+ assert(f.lines('info').includes('av-v14-hotfix | turnLifecycle: installed (sustain module-inactive)'));
 });
 test('partial failures inside an installed repair are named',async()=>{
  const f=await boot([],14,{globals:{
   registerLegacyCompat:reporting('legacy-compat',{status:'installed',chatStatus:'installed',sceneStatus:'unsupported-schema'}),
   installDsnChatRecovery:reporting('dsnChat',{status:'installed',queueStatus:'unsupported-queue',queueCompletionStatus:'unsupported-queue',modelStatus:'waiting-dsn'}),
   installTurnLifecyclePatch:reporting('turn-lifecycle',{status:'installed',parts:{
-   reaction:{status:'skipped',reason:'callback-fingerprint-mismatch',hook:'pf2e.startTurn',matches:0},sustain:{status:'installed'},summons:{status:'skipped',reason:'feature-disabled'}}})}});
+   sustain:{status:'skipped',reason:'callback-fingerprint-mismatch',hook:'pf2e.startTurn',matches:0},summons:{status:'installed'}}})}});
  const warnings=f.lines('warn');
  assert(warnings.includes('av-v14-hotfix | legacy is not active: sceneStatus unsupported-schema'));
  assert(warnings.includes('av-v14-hotfix | dsnChat is not active: queueStatus unsupported-queue; queueCompletionStatus unsupported-queue'));
- assert(warnings.includes('av-v14-hotfix | turnLifecycle is not active: reaction skipped (callback-fingerprint-mismatch)'));
+ assert(warnings.includes('av-v14-hotfix | turnLifecycle is not active: sustain skipped (callback-fingerprint-mismatch)'));
 });
 test('counters stay live in status and never cause another log line; a changed outcome does',async()=>{
  const stats={fast:0,delegated:0};let report;

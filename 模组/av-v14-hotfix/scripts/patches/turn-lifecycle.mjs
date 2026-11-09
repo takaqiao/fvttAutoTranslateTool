@@ -2,8 +2,8 @@ import {adaptNativeHooks} from '../native-hook-adapter.mjs';
 import {matchesDeclarations, sourceTokens} from '../source-contract.mjs';
 
 // Exact installed callback sources; changed upstream implementations are skipped.
+// The Reaction Checker part was retired in 0.6.34: no world enables pf2e-reaction any more.
 const CALLBACKS = {
-  "reaction": "async a=>{await Na(a,!0),await Ha(a),d(a?.actor)&&A().forEach(e=>{var t=F(e.actor,\"petrifying-glance\");t&&u(a.token,e.token<=30)&&N(h(t),e)});var e=H(a?.actor,\"scapegoat-parallel-self\");e&&await N(h(e),a),1===combat.round&&await ja(a),w.allReactionEffect&&setTimeout(async function(){var e=Ga(a.actor,Aa);!game.settings.get(\"pf2e\",\"automation.removeExpiredEffects\")&&e?await e.update({\"system.start.value\":game.time.worldTime}):((e=(await fromUuid(Aa)).toObject()).system.badge.value=Oa(a),game.settings.get(S,\"customReactionIcon\")&&(e.img=game.settings.get(S,\"customReactionIcon\")),await a.actor.createEmbeddedDocuments(\"Item\",[e]))},300)}",
   "sustain": "async (combatant, encounter, userId) => {\n\tconst { token, actor } = combatant;\n\tconst sustainedEffects = getTokenSustainEffects(token);\n\tif(!sustainedEffects || sustainedEffects.length === 0)\n\t\treturn;\n\t\n\tconst useChat = game.settings.get(moduleId, useChatSetting);\n\n\tif( useChat ) {\n\t\tlet templateData = {};\n\t\ttemplateData.actor = actor;\n\t\ttemplateData.effects = sustainedEffects;\n\t\t// Owners include players with specific setting and game masters\n\t\tconst owners = Object.keys(actor.ownership).filter((key) => actor.ownership[key] == CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER);\n\t\t\n\t\tconst content = await renderTemplate(`modules/${moduleId}/templates/sustain-reminder.hbs`, templateData);\n\t\t\n\t\tawait ChatMessage.create({\n\t\t\tcontent: content,\n\t\t\tspeaker: ChatMessage.getSpeaker({ token, actor, user: game.users.get(userId) }),\n\t\t\twhisper: owners,\n\t\t\tflags: {[`${moduleId}`]: true }\n\t\t});\n\t}\n}",
   "summons": "async function autoDeleteThrall(effect, info) {\n  if (!game.user.isGM) return;\n  if (effect.rollOptionSlug !== \"thrall-expiration-date\") return;\n\n  const tokDoc = info?.parent?.parent;\n  return await tokDoc.delete();\n}"
 };
@@ -19,7 +19,6 @@ const SUSTAIN_CONTRACT = {
   }`
 };
 const CONSUMERS = {
-  reaction: {id:'pf2e-reaction', hook:'pf2e.startTurn'},
   sustain: {id:'pf2e-sustain-reminder', hook:'pf2e.startTurn'},
   summons: {id:'pf2e-summons-assistant', hook:'deleteItem'}
 };
@@ -71,17 +70,6 @@ function summonsSource(Hooks, hook) {
 function thrallExpiryDisabled(g) {
   try { return !g.game.settings.get('pf2e-summons-assistant', 'necromancer.thrall.auto-expire'); }
   catch { return false; }
-}
-
-function reactionWrapper(original, {Combatant, stats}) {
-  return function(combatant, ...args) {
-    // Toolbelt's shared-turn Combatant is not an encounter document. Every
-    // Reaction Checker action here assumes a persistent Combatant (including
-    // reaction chat cards that later resolve its id), so none belongs to this
-    // temporary object. Other Hook consumers still receive the original object.
-    if (combatant instanceof Combatant && combatant.id == null && combatant._id == null) {stats.reaction++; return;}
-    return Reflect.apply(original, this, [combatant, ...args]);
-  };
 }
 
 async function remindActor(g, actor, userId) {
@@ -137,11 +125,10 @@ export function installTurnLifecyclePatch({g = globalThis, report} = {}) {
   if (prior) return finish(prior);
   const {Actor, Combatant, Item, TokenDocument, Scene} = g.foundry?.documents ?? {};
   // Times each wrapper took over from the upstream callback.
-  const stats = {reaction: 0, sustain: 0, summons: 0};
+  const stats = {sustain: 0, summons: 0};
   const context = {g, Actor, Combatant, Item, TokenDocument, Scene, stats};
-  const wrappers = {reaction:reactionWrapper, sustain:sustainWrapper, summons:summonsWrapper};
+  const wrappers = {sustain:sustainWrapper, summons:summonsWrapper};
   const available = {
-    reaction:typeof Combatant === 'function',
     sustain:typeof Combatant === 'function' && typeof Actor === 'function'
       && typeof g.foundry?.applications?.handlebars?.renderTemplate === 'function' && typeof g.ChatMessage?.getSpeaker === 'function'
       && typeof g.ChatMessage?.create === 'function' && typeof g.game.settings?.get === 'function',

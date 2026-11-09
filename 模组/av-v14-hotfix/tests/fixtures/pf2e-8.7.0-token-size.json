@@ -1,0 +1,34 @@
+{
+  "provenance": {
+    "systemVersion": "8.7.0",
+    "release": "https://github.com/foundryvtt/pf2e/releases/tag/pf2e-8.7.0",
+    "bundleSha256": "c9a2f176c388b211ef62c4d39fa5061a3525feebad8ca7cf50a82d2e6e0c1da3",
+    "extraction": "Exact UTF-8 source slices; start and end are offsets into the bundle.",
+    "fragments": {
+      "activeEffectApplyChange": {
+        "start": 1104861,
+        "end": 1106320,
+        "sourceSha256": "4bf40277ca8e55dd9190a5ed8db797f0ded685e40e0976aa00930c5503247b4a"
+      },
+      "actorApplyActiveEffects": {
+        "start": 1177046,
+        "end": 1177941,
+        "sourceSha256": "16496ef773f44ffded668e722c6ea57319a745a6aad2146049006a617c292c76"
+      },
+      "actorSize": {
+        "start": 109107,
+        "end": 111653,
+        "sourceSha256": "654274283f875e5a4a1a970af008eeeaa9dfa263db290dcb251f90b3938fa974"
+      },
+      "sizes": {
+        "start": 108763,
+        "end": 108828,
+        "sourceSha256": "21b8a5e66704fc3f7d858abb33f0f429ed1309d1a332203480967fc040a79c0e"
+      }
+    }
+  },
+  "activeEffectApplyChange": "static applyChange(e, t, n) {\n\t\tif (e.documentName !== `Token`) return super.applyChange(e, t, n);\n\t\tswitch (t.key) {\n\t\t\tcase `detectionModes.basicSight`:\n\t\t\tcase `detectionModes.lightPerception`: {\n\t\t\t\tif (Number(game.release.version) >= 14.37 || !M(t.value)) break;\n\t\t\t\tlet r = Number(t.value.range ?? 1 / 0), i = {\n\t\t\t\t\tenabled: t.value.enabled,\n\t\t\t\t\trange: r\n\t\t\t\t};\n\t\t\t\treturn n?.modifyTarget && foundry.utils.setProperty(e, t.key, i), { [t.key]: i };\n\t\t\t}\n\t\t\tcase `detectionModes.hearing`: {\n\t\t\t\tif (Number(game.release.version) >= 14.37 || !M(t.value)) break;\n\t\t\t\tlet r = Number(e.parent?.flags.pf2e?.hearingRange ?? 1 / 0), i = {\n\t\t\t\t\tenabled: !!t.value.enabled,\n\t\t\t\t\trange: r\n\t\t\t\t};\n\t\t\t\treturn n?.modifyTarget && (e.detectionModes.hearing = i), { [t.key]: i };\n\t\t\t}\n\t\t\tcase `disposition`:\n\t\t\t\tif (e._source.disposition === CONST.TOKEN_DISPOSITIONS.SECRET) return {};\n\t\t\t\tbreak;\n\t\t\tcase `sight.range`: {\n\t\t\t\tif (Number(game.release.version) >= 14.37) break;\n\t\t\t\tlet r = Number(t.value ?? 1 / 0);\n\t\t\t\treturn n?.modifyTarget && (e.sight.range = r), { [t.key]: r };\n\t\t\t}\n\t\t\tcase `width`:\n\t\t\tcase `height`:\n\t\t\tcase `depth`:\n\t\t\t\tif (!e.linkToActorSize) return {};\n\t\t\t\tbreak;\n\t\t\tcase `texture.scaleX`:\n\t\t\tcase `texture.scaleY`: {\n\t\t\t\tif (!e.autoscale) return {};\n\t\t\t\tlet n = Math.sign(Number(foundry.utils.getProperty(e._source, t.key)));\n\t\t\t\tt = {\n\t\t\t\t\t...t,\n\t\t\t\t\tvalue: n * Number(t.value)\n\t\t\t\t};\n\t\t\t\tbreak;\n\t\t\t}\n\t\t}\n\t\treturn super.applyChange(e, t, n);\n\t}",
+  "actorApplyActiveEffects": "applyActiveEffects(e) {\n\t\tif (super.applyActiveEffects(e), e !== `final`) return;\n\t\tlet t = this.tokenActiveEffectChanges.initial ?? [], n = {\n\t\t\ttype: `override`,\n\t\t\tpriority: 50,\n\t\t\tphase: `initial`\n\t\t}, r = {\n\t\t\t...n,\n\t\t\tkey: `disposition`\n\t\t};\n\t\tswitch (this.alliance) {\n\t\t\tcase `party`:\n\t\t\t\tr.value = CONST.TOKEN_DISPOSITIONS.FRIENDLY;\n\t\t\t\tbreak;\n\t\t\tcase `opposition`:\n\t\t\t\tr.value = CONST.TOKEN_DISPOSITIONS.HOSTILE;\n\t\t\t\tbreak;\n\t\t\tdefault: r.value = CONST.TOKEN_DISPOSITIONS.NEUTRAL;\n\t\t}\n\t\tt.push(r);\n\t\tlet i = this.system.traits?.size;\n\t\tif (!i) return;\n\t\tlet a = i.tokenDimensions, o = i.value === `sm` ? .8 : 1;\n\t\tt.push({\n\t\t\t...n,\n\t\t\tkey: `width`,\n\t\t\tvalue: a.width\n\t\t}, {\n\t\t\t...n,\n\t\t\tkey: `height`,\n\t\t\tvalue: a.height\n\t\t}, {\n\t\t\t...n,\n\t\t\tkey: `depth`,\n\t\t\tvalue: a.depth\n\t\t}, {\n\t\t\t...n,\n\t\t\tkey: `texture.scaleX`,\n\t\t\tvalue: o\n\t\t}, {\n\t\t\t...n,\n\t\t\tkey: `texture.scaleY`,\n\t\t\tvalue: o\n\t\t});\n\t}",
+  "actorSize": "class ActorSizePF2e {\n\tvalue;\n\tlong;\n\twide;\n\thigh;\n\tget tokenDimensions() {\n\t\treturn {\n\t\t\twidth: this.wide / 5,\n\t\t\theight: this.long / 5,\n\t\t\tdepth: this.high / 5\n\t\t};\n\t}\n\tstatic #e = {\n\t\ttiny: {\n\t\t\tlong: 2.5,\n\t\t\twide: 2.5\n\t\t},\n\t\tsm: {\n\t\t\tlong: 5,\n\t\t\twide: 5\n\t\t},\n\t\tmed: {\n\t\t\tlong: 5,\n\t\t\twide: 5\n\t\t},\n\t\tlg: {\n\t\t\tlong: 10,\n\t\t\twide: 10\n\t\t},\n\t\thuge: {\n\t\t\tlong: 15,\n\t\t\twide: 15\n\t\t},\n\t\tgrg: {\n\t\t\tlong: 20,\n\t\t\twide: 20\n\t\t}\n\t};\n\tstatic #t = {\n\t\tgrg: 5,\n\t\thuge: 4,\n\t\tlg: 3,\n\t\tmed: 2,\n\t\tsm: 1,\n\t\ttiny: 0\n\t};\n\tconstructor(e) {\n\t\t(typeof e.value != `string` || e.smallIsMedium && e.value === `sm`) && (e.value = `med`), this.value = e.value;\n\t\tlet t = ActorSizePF2e.#e[e.value] ?? ActorSizePF2e.#e.med;\n\t\tthis.long = e.long ?? t.long, this.wide = e.wide ?? t.wide, this.high = e.high ?? this.wide;\n\t}\n\tequals(e, { smallIsMedium: t = !1 } = {}) {\n\t\tlet n = e instanceof ActorSizePF2e ? e : new ActorSizePF2e({ value: e });\n\t\treturn this.getEffectiveSize(this.value, { smallIsMedium: t }) === this.getEffectiveSize(n.value, { smallIsMedium: t });\n\t}\n\tisLargerThan(e, { smallIsMedium: t = !1 } = {}) {\n\t\tlet n = e instanceof ActorSizePF2e ? e : new ActorSizePF2e({ value: e }), r = this.getEffectiveSize(this.value, { smallIsMedium: t }), i = this.getEffectiveSize(n.value, { smallIsMedium: t });\n\t\treturn ActorSizePF2e.#t[r] > ActorSizePF2e.#t[i];\n\t}\n\tisSmallerThan(e, { smallIsMedium: t = !1 } = {}) {\n\t\tlet n = e instanceof ActorSizePF2e ? e : new ActorSizePF2e({ value: e }), r = this.getEffectiveSize(this.value, { smallIsMedium: t }), i = this.getEffectiveSize(n.value, { smallIsMedium: t });\n\t\treturn ActorSizePF2e.#t[r] < ActorSizePF2e.#t[i];\n\t}\n\tdifference(e, { smallIsMedium: t = !1 } = {}) {\n\t\tlet n = this.getEffectiveSize(this.value, { smallIsMedium: t }), r = this.getEffectiveSize(e.value, { smallIsMedium: t });\n\t\treturn ActorSizePF2e.#t[n] - ActorSizePF2e.#t[r];\n\t}\n\tgetEffectiveSize(e, { smallIsMedium: t }) {\n\t\treturn t && e === `sm` ? `med` : e;\n\t}\n\tincrement({ skipSmall: e = !1 } = {}) {\n\t\tthis.value = this.value === `tiny` && e ? `med` : this.value === `sm` && e ? `lg` : this.value === `grg` ? `grg` : Dn[Dn.indexOf(this.value) + 1];\n\t\tlet t = ActorSizePF2e.#e[this.value];\n\t\tthis.long = t.long, this.wide = t.wide;\n\t}\n\tdecrement({ skipSmall: e = !1 } = {}) {\n\t\tlet t = this.value === `med` && e || this.value === `tiny`;\n\t\tthis.value = t ? `tiny` : Dn[Dn.indexOf(this.value) - 1];\n\t\tlet n = ActorSizePF2e.#e[this.value];\n\t\tthis.long = n.long, this.wide = n.wide;\n\t}\n\ttoString() {\n\t\treturn _loc(CONFIG.PF2E.actorSizes[this.value]);\n\t}\n}",
+  "sizes": "Object.freeze([\n\t`tiny`,\n\t`sm`,\n\t`med`,\n\t`lg`,\n\t`huge`,\n\t`grg`\n])"
+}

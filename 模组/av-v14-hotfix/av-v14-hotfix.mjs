@@ -4,7 +4,6 @@ import {installSundryPatch,prepareSundryPatch} from './scripts/patches/sundry.mj
 import {installTimestampPatch} from './scripts/patches/timestamps.mjs';
 import {installChatDeleteCoalescing} from './scripts/patches/chat.mjs';
 import {installTokenizerChatPortraitPatch} from './scripts/patches/tokenizer-chat.mjs';
-import {installSoundStopPatch} from './scripts/patches/sound-stop.mjs';
 import {registerDsnQualitySettings,installDsnQualityLocks} from './scripts/patches/dsn-quality.mjs';
 import {installTurnLifecyclePatch,prepareTurnLifecyclePatch} from './scripts/patches/turn-lifecycle.mjs';
 import {installDsnChatRecovery} from './scripts/patches/dsn-chat.mjs';
@@ -13,14 +12,17 @@ import {installCalendariaHudPatch} from './scripts/patches/calendaria-hud.mjs';
 import {installToolbeltCoverPatch} from './scripts/patches/toolbelt-cover.mjs';
 import {installBobTileCachePatch} from './scripts/patches/bob-tile-cache.mjs';
 import {installHudTrackerPatch} from './scripts/patches/hud-tracker.mjs';
+import {installItemActivationsCnPatch} from './scripts/patches/item-activations-cn.mjs';
+import {installTokenImageScalePatch} from './scripts/patches/token-image-scale.mjs';
+import {installBattleFormSizePatch} from './scripts/patches/battle-form-size.mjs';
 
 const ID='av-v14-hotfix';
-const state={version:'0.6.33',patches:{patreon:{status:'retired',detail:'Upstream 3.2.29 includes the relationship refresh guards.'},wayfinderFog:{status:'retired',detail:'Wayfinder 14.1.1 replaced the old fog implementation; the 14.0.1 adapter is retired.'},grid:{status:'retired',detail:'Use Grid 2.3.1 distance and undrawn-token aura handling.'},bbmmLocks:{status:'retired',detail:'Use BBMM 1.4.11 submenu hard locks and notifications.'},babele:{status:'retired',detail:'Translation 3.2.3 replaces changed document index entries itself.'},duration:{status:'retired',detail:'The timestamp formatter cache saved a few milliseconds per refresh and no longer matched core 14.369.'},legacyAdventureSettings:{status:'retired',detail:'The Murder in Metal City importer setting pre-registration is retired; legacy keeps the chat type and scene field migrations.'}}};
+const state={version:'0.6.34',patches:{patreon:{status:'retired',detail:'Upstream 3.2.29 includes the relationship refresh guards.'},wayfinderFog:{status:'retired',detail:'Wayfinder 14.1.1 replaced the old fog implementation; the 14.0.1 adapter is retired.'},grid:{status:'retired',detail:'Use Grid 2.3.1 distance and undrawn-token aura handling.'},bbmmLocks:{status:'retired',detail:'Use BBMM 1.4.11 submenu hard locks and notifications.'},babele:{status:'retired',detail:'Translation 3.2.3 replaces changed document index entries itself.'},duration:{status:'retired',detail:'The timestamp formatter cache saved a few milliseconds per refresh and no longer matched core 14.369.'},legacyAdventureSettings:{status:'retired',detail:'The Murder in Metal City importer setting pre-registration is retired; legacy keeps the chat type and scene field migrations.'},soundStop:{status:'retired',detail:'Core 14.370 _stop stops a buffer source in the STOPPING state itself (core #14763).'},turnLifecycleReaction:{status:'retired',detail:'No world enables Reaction Checker; turnLifecycle keeps the Sustain and Summons parts.'}}};
 // Patches report under their own names; status keys follow the world switches.
 const ALIASES={'legacy-compat':'legacy','turn-lifecycle':'turnLifecycle'};
 // Everything else means a repair that should be running is not, and is warned about.
 const QUIET=new Set(['installed','registered','retired','disabled','ready','initializing','already-installed','already-registered','waiting-dsn','inactive','inactive-dsn','inactive-bbmm','unsupported-system']);
-const QUIET_REASONS=new Set(['module-inactive','feature-disabled','unsupported-system','no-generated-name-sample']);
+const QUIET_REASONS=new Set(['module-inactive','feature-disabled','unsupported-system','no-generated-name-sample','upstream-fixed']);
 const SUBSTATUS=['chatStatus','sceneStatus','queueStatus','queueCompletionStatus','modelStatus'];
 const signatures=new Map();
 function gaps(data){
@@ -58,9 +60,12 @@ const status=()=>{
 };
 
 Hooks.once('init',()=>{
-  for(const [key,name] of Object.entries({legacy:'旧导入器数据兼容',itemNames:'PF2e 物品名称性能优化',sundry:'Sundry 效果图标刷新优化',timestamps:'聊天时间戳 DOM 更新优化',chat:'批量删除聊天性能优化',tokenizerChat:'Tokenizer2 聊天头像缩放与遮罩修正',soundStop:'原生缓冲音频停止修正',dsnQualityLocks:'BBMM / DsN 画质硬锁适配',turnLifecycle:'共享回合与奴仆到期兼容修正',dsnChat:'DsN 动画失败后恢复聊天与队列',tokenDirectory:'原生 Token 目录移动更新优化',tokenDirectoryHidden:'原生 Token 目录：侧栏看不见时延后重绘（需同时开启上一项）',calendariaHud:'Calendaria HUD 文本更新优化',toolbeltCover:'Toolbelt 自动掩护：开着的门与潜行重复加值修正',bobTileCache:'亵渎堡垒地图：卸载久未看到的瓦片',hudTracker:'PF2e HUD 浮动先攻栏：合并重绘、内容不变不重画'}))
+  for(const [key,name] of Object.entries({legacy:'旧导入器数据兼容',itemNames:'PF2e 物品名称性能优化',sundry:'Sundry 效果图标刷新优化',timestamps:'聊天时间戳 DOM 更新优化',chat:'批量删除聊天性能优化',tokenizerChat:'Tokenizer2 聊天头像缩放与遮罩修正',dsnQualityLocks:'BBMM / DsN 画质硬锁适配',turnLifecycle:'共享回合与奴仆到期兼容修正',dsnChat:'DsN 动画失败后恢复聊天与队列',tokenDirectory:'原生 Token 目录移动更新优化',tokenDirectoryHidden:'原生 Token 目录：侧栏看不见时延后重绘（需同时开启上一项）',calendariaHud:'Calendaria HUD 文本更新优化',toolbeltCover:'Toolbelt 自动掩护：开着的门与潜行重复加值修正',bobTileCache:'亵渎堡垒地图：卸载久未看到的瓦片',hudTracker:'PF2e HUD 浮动先攻栏：合并重绘、内容不变不重画',itemActivationsCn:'Item Activations：中文描述生成的启动项去掉多余破折号、补上特征',tokenImageScale:'PF2e：未开自动缩放的 Token 也套用 TokenImage 的缩放（#23627）',battleFormSize:'PF2e：战斗形态改变 Token 体型（#23652）'}))
     game.settings.register(ID,key,{name,scope:'world',config:true,type:Boolean,default:true,requiresReload:true});
   game.modules.get(ID).api={status};
+  // World documents, tokens included, are prepared before setup; these apply while they are.
+  void run('tokenImageScale',()=>installTokenImageScalePatch({moduleId:ID,report}));
+  void run('battleFormSize',()=>installBattleFormSizePatch({moduleId:ID,report}));
   void run('dsnQualityLocks',()=>registerDsnQualitySettings({report}));
 });
 
@@ -69,7 +74,6 @@ Hooks.once('setup',async()=>{
   void run('dsnQualityLocks',()=>installDsnQualityLocks({moduleId:ID,report}));
   // Register synchronously in setup so the first chat history render is covered.
   void run('tokenizerChat',()=>installTokenizerChatPortraitPatch({moduleId:ID,report}));
-  void run('soundStop',()=>installSoundStopPatch({moduleId:ID,report}));
   // The chat log binds its periodic refresh on first render, right after setup.
   void run('timestamps',()=>installTimestampPatch({moduleId:ID,report}));
   void run('tokenDirectory',()=>installTokenDirectoryPerformancePatch({moduleId:ID,report,deferHidden:enabled('tokenDirectoryHidden')}));
@@ -79,6 +83,8 @@ Hooks.once('setup',async()=>{
   // The tracker is adopted on its first render; the tile budget checks the canvas on a timer.
   void run('hudTracker',()=>installHudTrackerPatch({report}));
   void run('bobTileCache',()=>installBobTileCachePatch({report}));
+  // Item Activations creates its actions from ready on.
+  void run('itemActivationsCn',()=>installItemActivationsCnPatch({report}));
   // Register before DsN starts its ready-time model preloads.
   void run('dsnChat',()=>installDsnChatRecovery({report}));
   await run('legacy',()=>registerLegacyCompat({moduleId:ID,registerWrapper:(target,fn,type)=>libWrapper.register(ID,target,fn,type),report}));

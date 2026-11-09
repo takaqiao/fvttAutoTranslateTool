@@ -102,25 +102,13 @@ test('null-token shared turn keeps the Actor sustain reminder, ownership and nat
   assert.equal(f.renders[0].data.actor,doc);assert.equal(temporary.token,null);assert.equal(temporary.id,null);
 });
 
-test('Reaction Checker alone ignores temporary Combatants without generating a persistent identity',async()=>{
-  for(const token of [false,true]){
-    const f=await environment(),temporary=f.combatant({id:null,token});f.apply();
-    await f.callback('reaction')(temporary,f.encounter,'gm');
-    assert.equal(f.writes.length,0);assert.equal(temporary._id,undefined);assert.equal(temporary.id,null);
-    assert.deepEqual(temporary.flags,{});assert.equal(f.prompts.length,0);
-  }
-});
-
-test('persisted combatants keep native reset, bonus reactions, other-combatant updates and reaction effects',async()=>{
-  const f=await environment(),doc=f.actor();
-  doc.itemTypes.action.push({slug:'triple-opportunity'});doc.itemTypes.effect.push({slug:'effect-hydra-heads',system:{badge:{value:3}}});
-  const real=f.combatant({actor:doc}),ally=f.combatant({id:'ally',token:false,actor:f.actor('ally','character')});
-  ally.actor.alliance='party';ally.actor.itemTypes.feat.push({slug:'inexhaustible-countermoves'});f.encounter.combatants.push(real,ally);
-  f.g.reactionOptions.allReactionEffect=true;f.apply();await f.callback('reaction')(real);
-  assert.deepEqual(real.flags,{'pf2e-reaction':{'triple-opportunity':1,'hydra-heads':2,state:true}});
-  assert.equal(ally.getFlag('pf2e-reaction','inexhaustible-countermoves'),1);
-  assert.equal(f.timers.length,1);assert.equal(f.timers[0].delay,300);await f.timers[0].fn();
-  assert.equal(f.prompts[0][0],'effect');assert.equal(f.prompts[0][2][0].system.badge.value,4);
+test('the retired Reaction Checker part leaves its turn-start callback native and is not reported',async()=>{
+  const f=await environment(),result=f.apply(),temporary=f.combatant({id:null,token:false});
+  assert.equal(result.status,'installed');
+  assert.equal(f.callback('reaction'),f.original.reaction);
+  assert.deepEqual(Object.keys(result.parts).sort(),['summons','sustain']);
+  assert.deepEqual(Object.keys(result.stats).sort(),['summons','sustain']);
+  await assert.rejects(f.callback('reaction')(temporary),error=>error===f.idError);
 });
 
 test('normal token-based sustain uses the original selection and returns the original asynchronous result',async()=>{
@@ -145,7 +133,9 @@ test('missing-token sustain respects useChat and does not change effects or dura
 });
 
 test('Toolbelt native turn-start/end still updates actors and effects and dispatches to unrelated consumers',async()=>{
-  const f=await environment(),events=[],hooks=[],doc=f.actor('slave','character');f.apply();
+  const f=await environment(),events=[],hooks=[],doc=f.actor('slave','character');
+  // Reaction Checker is not enabled in any world and its part is retired.
+  f.g.Hooks.off('pf2e.startTurn',f.original.reaction);f.apply();
   doc.rules=[{onUpdateEncounter:async ({event,actorUpdates})=>{events.push(['rule',event]);actorUpdates.ready=true;}}];
   doc.update=async data=>events.push(['update',{...data}]);doc.recharge=async data=>events.push(['recharge',{...data}]);
   doc.itemTypes.effect=[{onEncounterEvent:async event=>events.push(['effect',event])}];
@@ -164,7 +154,7 @@ test('Toolbelt native turn-start/end still updates actors and effects and dispat
   assert.deepEqual(events,[['rule','turn-start'],['update',{ready:true}],['recharge',{duration:'round'}],['effect','turn-start'],['familiar','turn-start'],
     ['condition',null],['effect','turn-end'],['familiar','turn-end']]);
   assert.deepEqual(hooks.map(([kind,c,enc,user])=>[kind,c.id,c.actor.id,enc.id,user]),[['start',null,'slave','encounter','gm'],['end',null,'slave','encounter','gm']]);
-  assert.equal(f.writes.length,0);assert.equal(doc.timeEvents,true);assert.equal(f.g.Hooks.events['pf2e.startTurn'].length,3);
+  assert.equal(f.writes.length,0);assert.equal(doc.timeEvents,true);assert.equal(f.g.Hooks.events['pf2e.startTurn'].length,2);
 });
 
 test('expiry of a synthetic thrall deletes only its exact Token and preserves the native result',async()=>{
@@ -201,10 +191,9 @@ test('other effects and non-GM callbacks preserve native early returns',async()=
 });
 
 test('unrelated original errors retain their identity for durable turns, reminders and legal deletion',async()=>{
-  for(const part of ['reaction','sustain','summons']){
+  for(const part of ['sustain','summons']){
     const f=await environment(),error=new Error('original-'+part);f.apply();
     let invoke;
-    if(part==='reaction'){const real=f.combatant();real.setFlag=async()=>{throw error;};invoke=()=>f.callback(part)(real);}
     if(part==='sustain'){const real=f.combatant();Object.defineProperty(real.actor,'items',{get(){throw error;}});invoke=()=>f.callback(part)(real);}
     if(part==='summons'){const thrall=f.thrall();thrall.token.failure=error;invoke=()=>f.callback(part)(thrall.effect,thrall.info);}
     await assert.rejects(invoke,errorValue=>errorValue===error);
@@ -222,9 +211,8 @@ test('null-token reminder errors are propagated unchanged instead of hiding fail
 });
 
 test('objects that only resemble a temporary Combatant retain the original callback behavior',async()=>{
-  const f=await environment(),error=new Error('foreign flag operation'),doc=f.actor();f.apply();
-  const foreign={id:null,_id:null,token:null,actor:doc,getFlag:()=>undefined,setFlag:async()=>{throw error;}};
-  await assert.rejects(()=>f.callback('reaction')(foreign),value=>value===error);
+  const f=await environment(),doc=f.actor();f.apply();
+  const foreign={id:null,_id:null,token:null,actor:doc,getFlag:()=>undefined,setFlag:async()=>{throw Error('foreign flag operation');}};
   await assert.rejects(()=>f.callback('sustain')(foreign),/null.*actor/);
 });
 
@@ -239,25 +227,24 @@ test('audited callbacks retain their protections across core and PF2e version la
  for(const systemVersion of ['8.5.2','8.6.0','9.0.0']){
  const f=await environment({coreVersion:'15.1',systemVersion}),result=f.apply();
  assert.equal(result.parts.summons.status,'installed');assert.equal(result.parts.sustain.status,'installed');
- assert.equal(result.parts.reaction.status,'installed');
  const world=f.thrall({world:true});assert.equal(await f.callback('summons')(world.effect,world.info),undefined);
  assert.equal(f.deleted.length,0);
  }
 });
 
 test('inactive consumers skip independently while other consumers install',async()=>{
-  for(const [part,id] of [['reaction','pf2e-reaction'],['sustain','pf2e-sustain-reminder'],['summons','pf2e-summons-assistant']])for(const kind of ['inactive']){
+  for(const [part,id] of [['sustain','pf2e-sustain-reminder'],['summons','pf2e-summons-assistant']])for(const kind of ['inactive']){
     const f=await environment();f.g.game.modules.get(id).active=false;
     const result=f.apply();assert.equal(result.status,'installed');assert.equal(result.parts[part].status,'skipped');
     assert.equal(f.callback(part),f.original[part]);
-    for(const other of ['reaction','sustain','summons'].filter(key=>key!==part))assert.equal(result.parts[other].status,'installed');
+    for(const other of ['sustain','summons'].filter(key=>key!==part))assert.equal(result.parts[other].status,'installed');
   }
 });
 
 test('unknown callback sources, duplicate listeners and foreign Hook implementations are not overwritten',async()=>{
-  for(const part of ['reaction','sustain','summons'])for(const kind of ['source','duplicate','core-wrapper']){
+  for(const part of ['sustain','summons'])for(const kind of ['source','duplicate','core-wrapper']){
     const f=await environment();
-    const hook=part==='summons'?'deleteItem':'pf2e.startTurn',index=part==='reaction'?1:0;
+    const hook=part==='summons'?'deleteItem':'pf2e.startTurn',index=0;
     if(kind==='source')f.g.Hooks.events[hook][index].fn=async()=> 'foreign';
     if(kind==='duplicate')f.g.Hooks.on(hook,f.original[part]);
     if(kind==='core-wrapper')f.g.Hooks.callAll=function(){};
@@ -293,7 +280,7 @@ test('a global template alias cannot enable sustain when the namespaced API is u
   assert.equal(result.parts.sustain.status,'skipped');
   assert.equal(result.parts.sustain.reason,'document-api-unavailable');
   assert.equal(f.callback('sustain'),f.original.sustain);
-  assert.equal(result.parts.reaction.status,'installed');assert.equal(result.parts.summons.status,'installed');
+  assert.equal(result.parts.summons.status,'installed');
 });
 
 test('future Summons labels retain strict effect and Token ownership checks',async()=>{
@@ -305,20 +292,16 @@ test('future Summons labels retain strict effect and Token ownership checks',asy
  assert.equal(f.deleted.length,1);
 });
 
-test('future Reaction and Sustain labels retain their narrow turn protections', async () => {
+test('future Sustain labels retain the narrow turn protection', async () => {
   const f = await environment();
-  f.g.game.modules.get('pf2e-reaction').version = '99.0.0';
   f.g.game.modules.get('pf2e-sustain-reminder').version = '99.0.0';
   await patch.prepareTurnLifecyclePatch?.({g:f.g});
   const result = f.apply();
-  assert.equal(result.parts.reaction.status, 'installed');
   assert.equal(result.parts.sustain.status, 'installed');
   const doc = f.actor();
   doc.items.push({id:'sustain', type:'effect', name:'Sustaining: Spell'});
   const temporary = f.combatant({id:null, token:false, actor:doc});
-  await f.callback('reaction')(temporary);
   await f.callback('sustain')(temporary, f.encounter, 'player');
-  assert.equal(f.writes.length, 0);
   assert.equal(f.messages.length, 1);
   assert.equal(f.messages[0].content, 'actor:sustain');
 });
@@ -335,7 +318,6 @@ test('changed Sustain selector and constants skip only its callback', async () =
     const result = f.apply();
     assert.equal(result.parts.sustain.status, 'skipped', before);
     assert.equal(f.callback('sustain'), f.original.sustain);
-    assert.equal(result.parts.reaction.status, 'installed');
     assert.equal(result.parts.summons.status, 'installed');
     await assert.rejects(() => f.callback('sustain')(f.combatant({token:false})), /null.*actor/);
   }
@@ -355,7 +337,7 @@ test('Sustain source fetch failures and replaced module objects preserve native 
     const f = await environment(options), result = f.apply();
     assert.equal(result.parts.sustain.status, 'skipped');
     assert.equal(f.callback('sustain'), f.original.sustain);
-    assert.equal(result.parts.reaction.status, 'installed');
+    assert.equal(result.parts.summons.status, 'installed');
   }
 });
 
@@ -401,12 +383,12 @@ test('a switched-off thrall expiry is reported as disabled rather than as a sour
 
 test('hit counters record each takeover of an upstream callback and nothing else',async()=>{
   const f=await environment(),result=f.apply();
-  assert.deepEqual(result.stats,{reaction:0,sustain:0,summons:0});assert.equal(f.reports.at(-1).stats,result.stats);
+  assert.deepEqual(result.stats,{sustain:0,summons:0});assert.equal(f.reports.at(-1).stats,result.stats);
   const linked=f.thrall();await f.callback('summons')(linked.effect,linked.info);
-  assert.equal(f.deleted.length,1);assert.deepEqual(result.stats,{reaction:0,sustain:0,summons:0});
+  assert.equal(f.deleted.length,1);assert.deepEqual(result.stats,{sustain:0,summons:0});
   const temporary=f.combatant({id:null,token:false});
-  await f.callback('reaction')(temporary,f.encounter,'gm');await f.callback('sustain')(temporary,f.encounter,'gm');
+  await f.callback('sustain')(temporary,f.encounter,'gm');
   const world=f.thrall({world:true,id:'other'});await f.callback('summons')(world.effect,world.info);
-  assert.equal(f.deleted.length,1);assert.deepEqual(result.stats,{reaction:1,sustain:1,summons:1});
+  assert.equal(f.deleted.length,1);assert.deepEqual(result.stats,{sustain:1,summons:1});
   assert.doesNotThrow(()=>structuredClone(result.stats));
 });

@@ -1,10 +1,47 @@
-# FVTT v14 Local Hotfix 0.6.33
+# FVTT v14 Local Hotfix 0.6.34
 
-当前源码及隔离回归基线为 Foundry **14.369**、PF2e **8.6.1**、Dice So Nice **6.4.4**、BBMM **1.4.11**、Sundry **1.11.0**、Summons Assistant **2.20.3**。清单保留最低核心版本 14.367 和已验证标签 14.369，没有核心最高版本限制。运行时不按 Foundry、PF2e 或第三方模组的版本号决定装不装。每项可在世界设置中关闭，刷新后生效。该装而没装上的修正会在控制台输出一行警告并写明原因；全部状态和各项实际生效的次数见：
+当前源码及隔离回归基线为 Foundry **14.369**、PF2e **8.6.1**、Dice So Nice **6.4.4**、BBMM **1.4.11**、Sundry **1.11.0**、Summons Assistant **2.20.3**；0.6.34 新增的三项按 Foundry 14.370、PF2e 8.7.0、Item Activations 14.3.3 核过。清单保留最低核心版本 14.367，已验证标签自 0.6.34 起只写大版本 `14`，没有核心最高版本限制。运行时不按 Foundry、PF2e 或第三方模组的版本号决定装不装。每项可在世界设置中关闭，刷新后生效。该装而没装上的修正会在控制台输出一行警告并写明原因；全部状态和各项实际生效的次数见：
 
 ```js
 game.modules.get('av-v14-hotfix').api.status()
 ```
+
+## 0.6.34：退役两处，新增三处 PF2e 8.7.0 与 Item Activations 修正
+
+### 退役
+
+- **原生缓冲音频停止**（开关 `soundStop`）。Foundry 14.370 的 `Sound#_stop` 自己会停掉处于 STOPPING 状态的缓冲音源（核心 #14763），这项在 14.370 上是多余的。清单最低版本仍是 14.367，留在 14.367–14.369 的世界会失去这项修正。
+- **回合生命周期里的 Reaction Checker 部分**。已经没有世界启用 `pf2e-reaction`。`turnLifecycle` 只剩 Sustain 和 Summons 两段；Reaction Checker 的回合开始回调保持原样，也不再比对它的文本。
+
+`api.status()` 里这两处显示为 `retired`（键是 `soundStop` 和 `turnLifecycleReaction`）并附说明；`turnLifecycle` 的 `parts` 和 `stats` 不再有 `reaction`。世界里 `soundStop` 开关已保存的值留在数据库里，不再注册和读取。部署时把 `scripts/patches/sound-stop.mjs` 从部署目录删掉。
+
+### 新增的三个开关
+
+都默认开启，关闭后刷新生效。
+
+- **Item Activations 中文启动项**（开关 `itemActivationsCn`，在 `setup` 安装；`pf2e-item-activations` 没启用时报告 `skipped / module-inactive`）：模组把物品描述里每个以「启动」开头的粗体段落生成一个动作，名字是「启动项: 」加上粗体文字去掉一个「—」，特征取段落里第一组半角括号。中文合集写的是「启动——释放龙息」「（专注，操作）」，生成的动作就叫「启动项: —释放龙息」，也没有自己的特征（半角括号里的中文不是有效特征，PF2e 建文档时丢掉）。现在在 `preCreateItem` 里改模组正要创建的动作：
+  - 按 `flags["pf2e-item-activations"].grantedBy` 认动作，模组生成的每个动作都带这个 flag；不按名字认。
+  - 名字里「启动项: 」后面多出的「—」「―」去掉；去掉后什么都不剩就不改。停用动作前面的「[X] 」保留。
+  - 动作除了模组自己加的 `activation`、`invested` 没有别的特征时，读粗体名字后面的第一组全角括号（或者装着中文的半角括号），按「，」「,」「、」拆开，用本地化后的特征名反查 `CONFIG.PF2E.actionTraits`。只收恰好对上一个特征的；对不上的丢掉并计数；一个都对不上就不改。粗体名字里的英文注释括号（「燃火（Stoke Flames）」）不读。
+  - `system.slug` 和 flags 不动。模组按 `grantedBy._id` 找自己的动作，按 `system.slug` 判断动作是否已经存在；slug 是模组用改之前的名字生成的，sluggify 后和改过的名字一样，所以这项修正前后建的动作在模组看来仍是同一个，不会重复创建。
+  - 已经建好的动作不改。
+  - 英文描述不受影响：半角括号里的英文特征模组自己会读。
+  - 已知对不上的：「想象」（旧版启动组件 envision）不是 PF2e 8.7.0 的特征名，计入 `labelsDropped`。
+- **TokenImage 缩放**（开关 `tokenImageScale`，在 `init` 安装）：PF2e #23627。8.7.0 的 `ActiveEffectPF2e.applyChange` 对没开自动缩放的 token 一律丢掉 `texture.scaleX` / `texture.scaleY`。这道门本来是给按体型推出的缩放（`initial` 阶段）用的；TokenImage 规则元素的缩放在 `final` 阶段，也被一起丢了，开关这类效果时 token 大小不变。上游 #23641（11-07 合并，还没有进正式版）改成只拦 `initial` 阶段。这里用 libWrapper 包住同一个方法做同样的事：目标是 token、键是缩放、不是 `initial` 阶段、没开自动缩放，四条都满足时，照原分支保留镜像（源数据里缩放为负就取反），交给核心的 `applyChange`；其余调用照原样。不改 `pf2e.mjs`。
+  - 安装前检查方法形状：类型守卫、`switch (change.key)`、只有一个同时标着两个缩放键的分支、末尾交给父类，按词法比对；参数和分支里声明的变量按位置比，换了压缩名也认。分支是 #23641 改过的样子时报告 `skipped / upstream-fixed`，不包装，也不警告；两种都不是时报告 `unsupported-source`。不比对版本号和哈希。
+  - 在 `init` 安装，因为世界文档（包括 token）在 `setup` 之前就准备好了。
+- **战斗形态改变 token 体型**（开关 `battleFormSize`，在 `init` 安装）：PF2e #23652，上游还没修。8.7.0 的 `ActorPF2e#applyActiveEffects` 在角色的 `final` 阶段按当时的体型把 token 的宽、高、深和缩放排进队列；战斗形态到 `afterPrepareData` 才改体型，那时队列里还是原来的体型。token 在角色准备完以后才读队列。现在包住 `BattleForm` 规则元素的 `afterPrepareData`：它改了体型，并且队列里 PF2e 自己的那五条（`initial` 阶段、优先级 50 的 override，不带 `effect`）正好是按改之前的体型算出来的值（尺寸取 `tokenDimensions`，缩放小型 0.8、其余 1），就按改之后的体型重写这五条。
+  - 队列不是这个样子（被别的模组改过，或者某个键重复、缺失）就不动，计入 `unmatched`。上游以后改成在规则元素之后才排队列，或者提前改体型，这里就没有可改的，自然让路。
+  - 效果自己写的 `token.width` 一类不受影响。
+  - 要求 `BattleForm` 原型上有自己的 `afterPrepareData`，否则报告 `unsupported-source`。
+
+状态：
+
+- `itemActivationsCn.stats`：`renamed` / `traitsFilled` 是改了名字 / 补了特征的动作数，`labelsDropped` 是对不上特征的标签数。
+- `tokenImageScale.stats.applied`：放行的非 `initial` 阶段缩放次数。
+- `battleFormSize.stats`：`resized` 是按战斗形态重写的队列数，`unmatched` 是体型变了但队列对不上、没有动的次数。
+
+核验：Item Activations 用模组 14.3.3 的 `generateActivations`、`augmentAction`、`deactivateAction` 原文，PF2e 8.7.0 的特征表和 sluggify，pf2_cn 的特征译名，以及世界物品描述里的 11 段启动段落（双破折号、单破折号、全角多特征、半角中文、无特征、对不上的标签、英文）核过。另两项用 PF2e 8.7.0 的 `ActiveEffectPF2e.applyChange`、`ActorPF2e#applyActiveEffects` 和 `ActorSizePF2e` 原文核过。离线探针在线上的 `pf2e.mjs` 和官方 8.7.0 上，这两项都装上了；战斗形态那项跑的是 `BattleForm` 自己的 `afterPrepareData`，其余私有步骤换成空函数，改体型那步换成直接设成新体型。三项都没有在实际 Foundry 里跑过，token 的实际显示和 Item Activations 的实际建卡要在客户端确认。
 
 ## 0.6.33：长时间开团的三处卡顿
 
@@ -114,7 +151,7 @@ PersistentDice 桥的配合代码（队列修补里的四个函数指纹和相�
 控制台：
 
 - 每一项的每种结果输出一行；结果没变时不重复输出，计数变化不算结果变化。
-- 该装而没装上的用 `console.warn`，格式是 `av-v14-hotfix | <开关名> is not active: <状态> (<原因>)`。有多个独立部分的项（`turnLifecycle` 的三段，`legacy` 的聊天和场景，`dsnChat` 的队列和模型）逐部分列出。
+- 该装而没装上的用 `console.warn`，格式是 `av-v14-hotfix | <开关名> is not active: <状态> (<原因>)`。有多个独立部分的项（`turnLifecycle` 的两段，`legacy` 的聊天和场景，`dsnChat` 的队列和模型）逐部分列出。
 - 启动流程走完后，如果还有没装上的，再汇总输出一行。之后状态变化（比如别的模组中途改了被包装的函数）照样单独输出。
 - 不算问题、只用 `console.info` 的情况：开关关着；对应的第三方模组没启用；系统不是 PF2e；DsN 还没就绪（无画布模式下一直如此）；上游自己的功能开关关着（Sundry 的「隐藏效果」为 none，Summons 的奴仆自动到期关着，这两种报 `skipped / feature-disabled`）；物品名称找不到会被生成名字的样本（世界里还没有带符文、材质或品级的护甲、盾、武器；上游改成按名字做判断时也会落到这里）。
 
@@ -131,8 +168,7 @@ PersistentDice 桥的配合代码（队列修补里的四个函数指纹和相�
 | `sundry` | `fast` / `delegated` | 跳过上游回调的刷新 / 交回上游回调 |
 | `timestamps` | `skipped` / `written` | 拦下的同文写入 / 放行的写入 |
 | `chat` | `batches` / `messages` | 合并的批次 / 批次里的消息数，两者之差是省掉的收尾次数 |
-| `soundStop` | `extraStops` | 补停底层音源的次数 |
-| `turnLifecycle` | `reaction` / `sustain` / `summons` | 三段各自接管上游回调的次数 |
+| `turnLifecycle` | `sustain` / `summons` | 两段各自接管上游回调的次数（0.6.34 起没有 `reaction`） |
 | `dsnChat` | `recovered` | 动画失败后恢复聊天的次数 |
 
 隔离回归覆盖以上各项；实际世界里的渲染、多人客户端和其它模组的包装顺序需要在客户端核验。
@@ -250,6 +286,8 @@ Dice So Nice 的修复针对已复现的动画失败及队列等待，不涵盖�
 | 汉化索引增量更新 | 0.6.28 删除安装入口、设置及实现。汉化合集 3.2.3 的索引回调自己按条目替换和移除。 |
 | 聊天时间戳格式化缓存 | 0.6.28 删除安装入口、设置及实现。14.369 上已不匹配，收益很小。 |
 | 冒险包设置预注册 | 0.6.28 从旧导入器兼容里删除。只服务于 Murder in Metal City 的导入器。 |
+| 原生缓冲音频停止 | 0.6.34 删除安装入口、设置及实现。核心 14.370 的 `_stop` 自己停掉 STOPPING 状态的缓冲音源（核心 #14763）。 |
+| 共享回合兼容的 Reaction Checker 部分 | 0.6.34 从回合生命周期里删除。已经没有世界启用 `pf2e-reaction`。 |
 
 Wayfinder 新版没有等价采纳旧补丁的所有延迟刷新策略，不能据此宣称全部寻路或拖图卡顿已解决。已保存的旧世界设置可以留在数据库中，不再注册或读取，也不需要为清理设置写入世界数据。
 
@@ -262,8 +300,10 @@ Wayfinder 新版没有等价采纳旧补丁的所有延迟刷新策略，不能�
 | 聊天时间戳 | 核心周期刷新时跳过同文 DOM 写入；保留实际时间变化。 |
 | 批量删除聊天 | 保留核心删除队列及每条删除事件，合并同批动画结束后的布局操作。 |
 | Tokenizer2 聊天头像 | 有 Tokenizer2 flags 的头像恢复原生尺寸，清除地图缩放引入的遮罩。8.6.0/8.6.1 仍保留原生地图缩放路径。 |
-| 原生缓冲音频停止 | STOPPING 状态下仍停止底层缓冲音源，保留淡出、暂停及流式音频行为。 |
 | BBMM / DsN 画质硬锁 | BBMM 注册表与规则契约、DsN 方法形状检查；读取、保存、重置、画质预览及画板重建遵守已有五项锁。 |
+| Item Activations 中文启动项 | 模组正要创建的动作去掉名字里多余的破折号，没有特征时按本地化特征名补上；slug、flags 和已有的动作不动。 |
+| TokenImage 缩放 | 没开自动缩放的 token 也套用非 `initial` 阶段的缩放，按 PF2e #23641。 |
+| 战斗形态体型 | 战斗形态改了体型时，按新体型重写 PF2e 排给 token 的尺寸和缩放。 |
 
 Sundry 与共享回合/奴仆清理使用已验证的原生 Hooks 记录适配器，保留监听 ID、槽位、once 及其它监听器。Grid 已无本地适配或重复监听器。
 
@@ -271,22 +311,25 @@ Sundry 与共享回合/奴仆清理使用已验证的原生 Hooks 记录适配�
 
 | 路径 | 当前守卫与理由 |
 | --- | --- |
-| 包入口及核心补修 | 没有 Foundry 核心代数或精确版本门槛。批量删除聊天和 Hooks 适配器保留源码文本保护；时间戳和音频自 0.6.28 起只做 API 与身份检查。旧导入器按 ChatMessage/Scene/Level schema、API 与目标类身份检查，schema 不符不转换输入。核心标签只用作来源和已验证基线记录。 |
+| 包入口及核心补修 | 没有 Foundry 核心代数或精确版本门槛。批量删除聊天和 Hooks 适配器保留源码文本保护；时间戳自 0.6.28 起只做 API 与身份检查；音频那项 0.6.34 退役。旧导入器按 ChatMessage/Scene/Level schema、API 与目标类身份检查，schema 不符不转换输入。核心标签只用作来源和已验证基线记录。 |
 | DsN 聊天/模型/队列 | 解除精确 6.4.1 / 14.368；保留逐函数及回调哈希、实例/原型所有权、具体 ready Promise 与批次所有权。队列和回调按旧版或 6.4.3 来源核验；自 0.6.31 起 DiceBox、`animateThrow`、两个引擎方法和 ticker 消费方法改按形状检查（`this.animateThrow` 引用、无私有成员、收尾闭包仍在、引擎步骤为异步函数）；PersistentDice 窄包装按函数源码组合及进行中引用核验。普通批次捕获实际 worker.exec 引用；已装桥的原生恢复引用另核验 worker prototype RPC 源码。完整 bundle 哈希仅用于 fixture 来源。 |
 | DsN 画质 | 没有 DsN/BBMM 版本门槛；自 0.6.28 起不比对函数文本，检查三个被包装方法和 factory 方法的形状、返回值类型和被锁的键是否还在。注册表和规则不符合时跳过。 |
 | BBMM reader | world Boolean/Object 注册定义、client/user 目标、namespace/key/value/soft 结构。只读取规则，不恢复旧通用设置监听器。 |
 | Grid / BBMM 旧修补 | 已删除运行时守卫和实现，使用当前上游；历史数据保留。 |
 | PF2e 名称 | 没有 PF2e 版本门槛；自 0.6.28 起不比对函数文本，保留 PF2e 身份检查，安装前同步自检分支判定。 |
 | Sundry | 解除 PF2e 版本标签，检查 PF2e 身份与原生 Sprite 的可写 boolean `visible` 契约。可见性循环、设置读取、背景规则及绑定采用局部源码契约，另核验真实 Hooks 回调；旧循环保持上游。 |
-| 回合生命周期 | 解除核心 14.368、PF2e 版本与 Summons 2.19.0 标签；保留 PF2e 身份、原生 Hooks 回调及严格 Document 关系。Sustain 的私有效果筛选与常量另行核验，Reaction 只跳过无持久 ID 的同类参战者。 |
+| 回合生命周期 | 解除核心 14.368、PF2e 版本与 Summons 2.19.0 标签；保留 PF2e 身份、原生 Hooks 回调及严格 Document 关系。Sustain 的私有效果筛选与常量另行核验。Reaction 部分 0.6.34 退役。 |
 | Babele 索引、旧冒险导入器 | 0.6.28 已退役，运行时不再有对应代码。 |
 | Tokenizer | 没有 PF2e 版本门槛；保留 PF2e 身份与 libWrapper API 检查，自 0.6.28 起不比对 `renderHTML` 文本。 |
 | 亵渎堡垒瓦片 | 没有模组版本门槛，也不比对源码；按模组文件头写明的节点结构检查每个节点，并核对未加载的层确实显示最近一个已加载上级。任何一项不符就整套不卸载。 |
 | PF2e HUD 先攻栏 | 没有 pf2e-hud 版本门槛；按应用 id 认出先攻栏，要求 `_replaceHTML` 仍把渲染结果整块写进 `innerHTML`，并且 `render`、`close`、`_replaceHTML`、`_onRender` 没有被别人在实例上覆盖。 |
+| Item Activations | 没有模组版本门槛，不读模组源码；按 `grantedBy` flag 认动作，只改名字和特征。 |
+| TokenImage 缩放 | 没有 PF2e 版本门槛，不比对哈希；按词法核对 `applyChange` 的守卫、`switch`、缩放分支和末尾调用，压缩名按位置比；已是 #23641 的形状就不装。 |
+| 战斗形态体型 | 没有 PF2e 版本门槛，不比对源码；要求 `BattleForm` 原型自己的 `afterPrepareData`，只改值正好是 PF2e 按旧体型算出的那五条队列项。 |
 
 ## 安装、验证与回退
 
-备份旧目录后，将本目录安装到 `Data/modules/av-v14-hotfix`，在需要的世界启用并完整刷新客户端。退役的 `scripts/patches/patreon.mjs`、`wayfinder-fog.mjs`、`wayfinder-fog-texture.mjs`、`grid.mjs`、`bbmm-locks.mjs`、`babele.mjs`、`duration.mjs` 应从部署目录移除。回退可恢复原目录，或关闭本模组后刷新。
+备份旧目录后，将本目录安装到 `Data/modules/av-v14-hotfix`，在需要的世界启用并完整刷新客户端。退役的 `scripts/patches/patreon.mjs`、`wayfinder-fog.mjs`、`wayfinder-fog-texture.mjs`、`grid.mjs`、`bbmm-locks.mjs`、`babele.mjs`、`duration.mjs`、`sound-stop.mjs` 应从部署目录移除。回退可恢复原目录，或关闭本模组后刷新。
 
 安装清单使用 [av-v14-hotfix-v0.6.29 的 module.json](https://github.com/takaqiao/fvttAutoTranslateTool/releases/download/av-v14-hotfix-v0.6.29/module.json)，下载为同一标签的 `av-v14-hotfix-0.6.29.zip`。本仓库包含多个模组，不能用全仓库 `releases/latest/download` 作为此模组的清单。
 
