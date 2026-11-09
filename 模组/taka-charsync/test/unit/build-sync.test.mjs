@@ -1,9 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {mergeBuildChanges, projectBuildChanges} from '../../scripts/lib/build-sync.mjs';
+import {describeChanges} from '../../scripts/lib/change-summary.mjs';
 import {merge3} from '../../scripts/lib/merge.mjs';
 import {OWN_FLAG} from '../../scripts/lib/rules.mjs';
 import {actorDoc} from '../helpers/apply-environment.mjs';
+import {activation, activationIds, charm, setEnabled} from '../helpers/item-activations.mjs';
 
 const item = (_id, type, system = {}) => ({_id, type, name: _id, system, effects: []});
 const byId = (doc, id) => doc.items.find(entry => entry._id === id);
@@ -176,6 +178,90 @@ for (const target of ['main', 'char']) {
     assert.deepEqual(byId(edited.doc, 'new-feat').system._migration, migration(0.961, 0.961));
   });
 }
+
+// 两边都有一件 charm，且都还没有启动项（14.3.3 之前中文描述的物品不生成）
+const withCharm = (...extra) => {
+  const docs = versions();
+  for (const doc of Object.values(docs)) doc.items.push(charm(), ...structuredClone(extra));
+  return docs;
+};
+
+for (const target of ['main', 'char']) {
+  test(`${target} target keeps only main's activations when both servers generated their own for one item`, () => {
+    const docs = withCharm();
+    docs.main.items.push(activation('act-main', charm()));
+    docs.char.items.push(activation('act-char', charm()));
+    byId(docs.char, 'feat').name = 'Draft choice';
+    const result = mergeBuildChanges({...docs, target});
+    assert.deepEqual(activationIds(result.doc), ['act-main']);
+    assert.deepEqual(byId(result.doc, 'act-main'), byId(docs.main, 'act-main'));
+    assert.deepEqual(byId(result.doc, 'charm'), byId(docs.main, 'charm'));
+    assert.equal(byId(result.doc, 'feat').name, 'Draft choice');
+    assert.deepEqual(result.conflicts, []);
+  });
+
+  test(`${target} target treats the casting entry and spells a spell item generated like its other activations`, () => {
+    const docs = withCharm();
+    for (const [side, prefix] of [['main', 'm'], ['char', 'c']]) {
+      docs[side].items.push(activation(`${prefix}-entry`, charm(), {type: 'spellcastingEntry'}),
+        activation(`${prefix}-spell`, charm(), {type: 'spell'}));
+    }
+    const result = mergeBuildChanges({...docs, target});
+    assert.deepEqual(activationIds(result.doc), ['m-entry', 'm-spell']);
+    assert.deepEqual(result.conflicts, []);
+  });
+
+  test(`${target} target does not carry activations of gear that only the build server has`, () => {
+    const docs = withCharm();
+    const gear = {...charm(), _id: 'test-gear', name: 'test-gear'};
+    docs.char.items.push(gear, activation('act-test', gear, {enabled: false}));
+    const result = mergeBuildChanges({...docs, target});
+    assert.equal(byId(result.doc, 'test-gear'), undefined);
+    assert.equal(byId(result.doc, 'act-test'), undefined);
+    assert.deepEqual(result.conflicts, []);
+  });
+
+  test(`${target} target takes main's activation state without a conflict when both servers toggled the item`, () => {
+    const docs = withCharm(activation('act', charm()));
+    byId(docs.main, 'charm').system.equipped.invested = false;
+    setEnabled(byId(docs.main, 'act'), false);
+    // 建卡服上撤了投资又重新投资
+    setEnabled(setEnabled(byId(docs.char, 'act'), false), true);
+    const result = mergeBuildChanges({...docs, target});
+    assert.deepEqual(byId(result.doc, 'act'), byId(docs.main, 'act'));
+    assert.deepEqual(byId(result.doc, 'charm'), byId(docs.main, 'charm'));
+    assert.deepEqual(result.conflicts, []);
+  });
+
+  test(`${target} target drops the activations of an item main sold, even after the build server toggled them`, () => {
+    const docs = withCharm(activation('act', charm(), {enabled: true}));
+    docs.main.items = docs.main.items.filter(entry => !['charm', 'act'].includes(entry._id));
+    byId(docs.char, 'charm').system.equipped.invested = false;
+    setEnabled(byId(docs.char, 'act'), false);
+    const result = mergeBuildChanges({...docs, target});
+    assert.equal(byId(result.doc, 'charm'), undefined);
+    assert.equal(byId(result.doc, 'act'), undefined);
+    assert.deepEqual(result.conflicts, []);
+  });
+
+  test(`${target} target keeps main's item and its activations when the build server deleted the item`, () => {
+    const docs = withCharm(activation('act', charm(), {enabled: true}));
+    docs.char.items = docs.char.items.filter(entry => !['charm', 'act'].includes(entry._id));
+    const result = mergeBuildChanges({...docs, target});
+    assert.deepEqual(byId(result.doc, 'charm'), byId(docs.main, 'charm'));
+    assert.deepEqual(byId(result.doc, 'act'), byId(docs.main, 'act'));
+    assert.deepEqual(result.conflicts, []);
+  });
+}
+
+test('a working card that differs from main only by activations has no build draft', () => {
+  const {main} = withCharm(activation('act', charm(), {enabled: true}));
+  const card = structuredClone(main);
+  setEnabled(byId(card, 'act'), false);
+  card.items.push(activation('act-char', charm(), {enabled: false}));
+  // 和状态条判断草稿的口径一致
+  assert.equal(describeChanges(main, projectBuildChanges(main, card)).changed, false);
+});
 
 function migration(version, previous) {
   return {version, previous: {schema: previous, foundry: '14.370', system: '8.7.0'}};

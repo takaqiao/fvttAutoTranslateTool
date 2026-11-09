@@ -84,9 +84,15 @@ function projectItem(current, candidate) {
   return out;
 }
 
+// pf2e-item-activations 给物品生成的启动项（动作；法术物品还会生成施法列表和法术），它按 `grantedBy._id` 认出各件物品的启动项。
+// 生成它们的只有实物和效果，都是主服的库存与状态，启动项的开关也跟着物品的投资、穿戴走，所以和父物品一样整份取主服那份，
+// 不按构筑三方合并：否则两边各自生成的会并成两份，物品卖掉或在建卡服删掉时启动项会被单独复活或删掉。
+const isItemActivation = item => Boolean(item.flags?.['pf2e-item-activations']?.grantedBy?._id);
+
 // 同 id 任何一版属于库存或状态条目，就完整保留主服那份；改 type 不会改变这条边界。
 function protectedItemIds(...docs) {
-  return new Set(docs.flatMap(doc => (doc.items ?? []).filter(item => !BUILD_TYPES.has(item.type)).map(item => item._id)));
+  return new Set(docs.flatMap(doc => (doc.items ?? [])
+    .filter(item => !BUILD_TYPES.has(item.type) || isItemActivation(item)).map(item => item._id)));
 }
 
 /** 将 candidate 的构筑与外观投影到 before，其余内容保留 before；返回独立副本，供草稿摘要和普通套用共用。 */

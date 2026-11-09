@@ -3,15 +3,17 @@ import assert from 'node:assert/strict';
 import {applyCopy, applyForce, previewPending} from '../../scripts/main/apply.mjs';
 import {actorDoc, applyEnvironment, makeCopy} from '../helpers/apply-environment.mjs';
 import {freezeMediaFixtures} from '../helpers/media-fixtures.mjs';
+import {activation, activationIds, charm, setEnabled} from '../helpers/item-activations.mjs';
 
 const item = (_id, type, system = {}, flags = {}) => ({_id, type, name: _id, system, flags, effects: []});
 const byId = (doc, id) => doc.items.find(entry => entry._id === id);
 
-async function scenario(change, {mainChange = () => {}, kind = 'level'} = {}) {
+async function scenario(change, {mainChange = () => {}, kind = 'level', baseItems = []} = {}) {
   const env = applyEnvironment();
   const actor = env.mapped('source');
   let base = actorDoc(actor.id);
   base.items = [
+    ...structuredClone(baseItems),
     item('sword', 'weapon', {quantity: 1, containerId: null, equipped: {carryType: 'held', handsHeld: 1}}),
     item('gold', 'treasure', {quantity: 42, price: {value: {gp: 1}}}),
     item('potion', 'consumable', {quantity: 2}),
@@ -181,4 +183,30 @@ test('force apply keeps the main migration records of the card and of the items 
   assert.deepEqual(doc.system._migration, migration(0.961, 0.959));
   assert.deepEqual(byId(doc, 'gold').system._migration, migration(0.961, 0.959));
   assert.deepEqual(byId(doc, 'new-gear').system._migration, migration(0.961, 0.961));
+});
+
+test('activations toggled on both servers do not stop automatic apply, and main keeps its own', async () => {
+  const gear = {...charm(), _id: 'test-gear', name: 'test-gear'};
+  const env = await scenario(char => {
+    setEnabled(setEnabled(byId(char, 'act'), false), true);
+    char.items.push(gear, activation('act-test', gear, {enabled: false}));
+    byId(char, 'feat').name = 'Updated feat';
+  }, {baseItems: [charm(), activation('act', charm())], mainChange(main) {
+    byId(main, 'charm').system.equipped.invested = false;
+    setEnabled(byId(main, 'act'), false);
+  }});
+  assert.doesNotMatch(await previewPending({actorId: env.actor.id, copy: env.copy}), /启动/);
+  assert.equal(await applyCopy(env.actor, env.copy), 'applied');
+  const doc = env.actor.toObject();
+  for (const id of ['charm', 'act']) assert.deepEqual(byId(doc, id), byId(env.main, id));
+  assert.equal(byId(doc, 'test-gear'), undefined);
+  assert.equal(byId(doc, 'act-test'), undefined);
+  assert.equal(byId(doc, 'feat').name, 'Updated feat');
+});
+
+test('activations both servers generated for one item are not duplicated on main', async () => {
+  const env = await scenario(char => { char.items.push(activation('act-char', charm())); },
+    {baseItems: [charm()], mainChange: main => main.items.push(activation('act-main', charm()))});
+  assert.equal(await applyCopy(env.actor, env.copy), 'applied');
+  assert.deepEqual(activationIds(env.actor.toObject()), ['act-main']);
 });

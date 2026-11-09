@@ -5,6 +5,7 @@ import {contentHash} from '../../scripts/lib/canon.mjs';
 import {OWN_FLAG} from '../../scripts/lib/rules.mjs';
 import {actorDoc, applyEnvironment} from '../helpers/apply-environment.mjs';
 import {contentHash017} from '../helpers/content-hash-017.mjs';
+import {activation, activationIds, charm} from '../helpers/item-activations.mjs';
 
 const item = (_id, type, system = {}) => ({_id, type, name: _id, system, effects: []});
 const byId = (doc, id) => doc.items.find(entry => entry._id === id);
@@ -162,4 +163,54 @@ test('a base published before the hash change is the same version when main repu
   assert.deepEqual(env.writes.map(entry => Object.keys(entry.data)), [['flags']]);
   assert.equal((await catchUpCard(env.actor, {meta: env.meta})).action, 'none');
   assert.equal(env.writes.length, 1);
+});
+
+test('following main brings main\'s activations and drops those the build server generated itself', async () => {
+  const env = scenario();
+  const gear = {...charm(), _id: 'test-gear', name: 'test-gear'};
+  env.base.items.push(charm());
+  env.main.items.push(charm(), activation('act-main', charm(), {enabled: true}));
+  env.actor._source.items.push(charm(), activation('act-char', charm()), gear, activation('act-test', gear, {enabled: false}),
+    item('draft', 'feat'));
+  env.actor.refresh();
+  const result = await catchUpCard(env.actor, {meta: env.meta});
+  assert.equal(result.action, 'merge');
+  assert.deepEqual(result.conflicts, []);
+  assert.deepEqual(activationIds(env.actor._source), ['act-main']);
+  assert.deepEqual(byId(env.actor._source, 'act-main'), byId(env.main, 'act-main'));
+  assert.deepEqual(byId(env.actor._source, 'charm'), byId(env.main, 'charm'));
+  assert.equal(byId(env.actor._source, 'test-gear'), undefined);
+  assert.ok(byId(env.actor._source, 'draft'));
+});
+
+test('the one-off hash upgrade of a 0.1.8 base still holds when the card carries activations', async () => {
+  const env = scenario();
+  for (const doc of [env.base, env.main]) {
+    doc.items.push(charm(), activation('act-main', charm(), {enabled: true}));
+    migrate(doc, 0.961, 0.959);
+  }
+  const oldHash = await contentHash017(env.base);
+  const newHash = await contentHash(env.main);
+  env.files.delete('history/main-base.json');
+  env.files.set(`history/main-${oldHash}.json`, env.base);
+  env.latest.hash = newHash;
+  const working = env.actor._source;
+  working.items.push(charm(), activation('act-main', charm(), {enabled: true}), activation('act-char', charm(), {enabled: true}));
+  migrate(working, 0.961, 0.961);
+  working.items.push(item('draft', 'feat'));
+  const pending = {at: 1, mainHash: oldHash, list: [{scope: 'item', id: 'feat', name: 'feat', path: 'name', winner: 'char'}]};
+  working.flags[OWN_FLAG] = {base: {kind: 'main', hash: oldHash}, conflicts: pending};
+  env.actor.refresh();
+
+  const result = await catchUpCard(env.actor, {meta: env.meta});
+
+  // 同版本跟上：只校正启动项这类主服状态，基线记号换成新哈希，上次的冲突记录还在
+  assert.equal(result.action, 'merge');
+  assert.deepEqual(result.conflicts, []);
+  assert.deepEqual(env.actor._source.flags[OWN_FLAG], {base: {kind: 'main', hash: newHash}, conflicts: pending});
+  assert.deepEqual(activationIds(env.actor._source), ['act-main']);
+  assert.ok(byId(env.actor._source, 'draft'));
+  const writes = env.writes.length;
+  assert.equal((await catchUpCard(env.actor, {meta: env.meta})).action, 'none');
+  assert.equal(env.writes.length, writes);
 });
