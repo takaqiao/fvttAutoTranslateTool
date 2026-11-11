@@ -1,6 +1,6 @@
 import {MODULE_ID as M} from './rules.mjs';
 import {isActiveGM} from './native-context.mjs';
-import {PILGRIM_FLAG,PilgrimError,EFFECTS,values,rewardKey,usableReward,serializeReward} from './sog-pilgrim-rules.mjs';
+import {PILGRIM_FLAG,PILGRIM_SYNC,PilgrimError,EFFECTS,values,rewardKey,usableReward,serializeReward,sightBlocked,tokenDistance} from './sog-pilgrim-rules.mjs';
 
 const duration={value:1,unit:'minutes',expiry:'turn-start',sustained:false};
 const same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
@@ -8,6 +8,10 @@ const kinds=new Set(['leaves','light']);
 const traits=actor=>actor?.traits instanceof Set?actor.traits:new Set(actor?.system?.traits?.value??[]);
 const creature=actor=>actor?.isOfType?.('character','npc')===true;
 const validStart=start=>Number.isFinite(start?.value)&&start.value>=0&&(start.initiative===null||Number.isFinite(start.initiative));
+const degrees={criticalFailure:0,failure:1,success:2,criticalSuccess:3};
+// PF2e deletes the original card just before it posts the reroll card; a much later reroll cannot be its replacement.
+const REROLL_WINDOW=60000;
+const synced={[PILGRIM_SYNC]:true};
 
 /** The physical fan holds both hit receipts and the independent leaf starts. */
 export function getFanState(item) {
@@ -18,9 +22,9 @@ export function getFanState(item) {
  };
 }
 
-export function createPilgrimFan({game,fromUuid=globalThis.fromUuid,media={},onError=error=>console.error(M,error),
+export function createPilgrimFan({game,fromUuid=globalThis.fromUuid,media={},onError=error=>console.error(M,error),canvas=globalThis.canvas,clock=Date.now,
  nativeRemaining=(data,actor)=>new globalThis.CONFIG.Item.documentClass(data,{parent:actor}).remainingDuration}={}) {
- const known=new Map();
+ const known=new Map(),deleted=new Map();
  const currentToken=token=>token?.documentName==='Token'&&game.scenes?.get(token.parent?.id)===token.parent&&token.parent.tokens?.get(token.id)===token;
  const currentActor=actor=>actor?.isToken?currentToken(actor.token)&&actor.token.actor===actor:game.actors?.get(actor?.id)===actor;
  const owned=item=>rewardKey(item)==='fan'&&currentActor(item.actor)&&item.actor.type==='character'&&!traits(item.actor).has('eidolon')&&item.actor.items?.get(item.id)===item;
@@ -47,7 +51,7 @@ export function createPilgrimFan({game,fromUuid=globalThis.fromUuid,media={},onE
  }
  async function remove(actor,uuid) {
   authority();const effects=ownedEffects(actor,uuid);
-  if(effects.length){await actor.deleteEmbeddedDocuments('Item',effects.map(effect=>effect.id));authority();if(ownedEffects(actor,uuid).length)throw new PilgrimError('灵扇光芒未能熄灭，请核对效果。');}
+  if(effects.length){await actor.deleteEmbeddedDocuments('Item',effects.map(effect=>effect.id),synced);authority();if(ownedEffects(actor,uuid).length)throw new PilgrimError('灵扇光芒未能熄灭，请核对效果。');}
  }
  async function syncEffect(item,kind,state) {
   source(item);
@@ -63,39 +67,65 @@ export function createPilgrimFan({game,fromUuid=globalThis.fromUuid,media={},onE
   if(effect){
    const patch={};
    for(const key of ['duration','start','context','badge'])if(!same(effect._source?.system?.[key]??effect.system[key],data.system[key]))patch[`system.${key}`]=data.system[key];
-   if(Object.keys(patch).length){await effect.update(patch);source(item);}
+   if(Object.keys(patch).length){await effect.update(patch,synced);source(item);}
   }else{
    [effect]=await item.actor.createEmbeddedDocuments('Item',[data]);source(item);
    if(!effect||item.actor.items.get(effect.id)!==effect)throw new PilgrimError('金叶效果未能保存，请核对灵扇。');
    // PF2e resets an embedded effect's start on creation, including restoration.
-   if(!same(effect._source?.system?.start??effect.system.start,data.system.start)){await effect.update({'system.start':data.system.start});source(item);}
+   if(!same(effect._source?.system?.start??effect.system.start,data.system.start)){await effect.update({'system.start':data.system.start},synced);source(item);}
   }
   if(!same(effect._source?.system?.start??effect.system.start,data.system.start)||kind==='leaves'&&effect.system.badge?.value!==state.leaves.length)throw new PilgrimError('金叶数量或时限未能保存，请核对灵扇。');
-  if(existing.length>1){await item.actor.deleteEmbeddedDocuments('Item',existing.slice(1).map(other=>other.id));source(item);}
+  if(existing.length>1){await item.actor.deleteEmbeddedDocuments('Item',existing.slice(1).map(other=>other.id),synced);source(item);}
  }
  async function sync(item,state) {
   if(!state.leaves.length)await remove(item.actor,item.uuid);
   else{await syncEffect(item,'leaves',state);await syncEffect(item,'light',state);}
   await play('leaves',item,state.leaves.length);
  }
- async function hitSource(message) {
+ /** A saved attack with the fan; a miss matters only as a reroll, which may put out the leaf it replaces. */
+ async function strikeSource(message) {
   if(!isActiveGM(game)||!message?.id||game.messages?.get(message.id)!==message||message.isCheckRoll!==true)return null;
-  const item=message.item,actor=message.actor,pf=message.flags?.pf2e,c=pf?.context,roll=message.rolls?.[0],degree=c?.outcome==='success'?2:c?.outcome==='criticalSuccess'?3:null;
-  if(!item||!owned(item)||!usableReward(item)||actor!==item.actor||pf.origin?.actor!==actor.uuid||pf.origin.uuid!==item.uuid||c?.type!=='attack-roll'||degree===null||c.isReroll||message.isReroll||roll?._evaluated!==true||!Number.isFinite(roll.total)||roll.total<0||roll.options?.degreeOfSuccess!==degree||!Number.isFinite(c.dc?.value)||c.dc.value<=0)return null;
+  const item=message.item,actor=message.actor,pf=message.flags?.pf2e,c=pf?.context,roll=message.rolls?.[0],degree=degrees[c?.outcome]??null;
+  if(!item||!owned(item)||!usableReward(item)||actor!==item.actor||pf.origin?.actor!==actor.uuid||pf.origin.uuid!==item.uuid||c?.type!=='attack-roll'||degree===null||roll?._evaluated!==true||!Number.isFinite(roll.total)||roll.total<0||roll.options?.degreeOfSuccess!==degree||!Number.isFinite(c.dc?.value)||c.dc.value<=0)return null;
+  const hit=degree>=2,reroll=c.isReroll===true||message.isReroll===true;
+  if(!hit&&!reroll)return null;
   const target=await fromUuid(c.target?.token);
   if(!isActiveGM(game)||!currentToken(target)||!creature(target.actor)||target.actor.isDead===true||c.target.actor!==target.actor.uuid||!owned(item)||message.actor!==item.actor||game.messages.get(message.id)!==message)return null;
-  return {item,target};
+  return {item,target,hit,reroll};
+ }
+ /** Runs synchronously in deleteChatMessage, before the reroll card that replaces the message arrives. */
+ function recordDeleted(message) {
+  const item=message?.item,origin=message?.flags?.pf2e?.origin?.uuid;
+  if(!isActiveGM(game)||rewardKey(item)!=='fan'||item.uuid!==origin||!getFanState(item).hitIds.includes(message.id))return;
+  deleted.set(message.id,{source:origin,target:message.flags.pf2e.context?.target?.token,at:clock()});
+ }
+ function replacedHit(message,item) {
+  const now=clock(),target=message.flags.pf2e.context.target?.token;let found=null;
+  for(const [id,entry]of deleted){
+   if(now-entry.at>REROLL_WINDOW)deleted.delete(id);
+   else if(entry.source===item.uuid&&entry.target===target&&(!found||entry.at>=deleted.get(found).at))found=id;
+  }
+  if(found)deleted.delete(found);
+  return found;
  }
  async function handleStrike(message) {
-  const binding=await hitSource(message);if(!binding)return null;
+  const binding=await strikeSource(message);if(!binding)return null;
   const {item,target}=binding;known.set(item.uuid,item);
   return serializeReward(item.uuid,async()=>{
-   const current=await hitSource(message);if(!current||current.item!==item||current.target!==target)return null;
+   const current=await strikeSource(message);if(!current||current.item!==item||current.target!==target)return null;
    const state=getFanState(item),leaves=validLeaves(item,state);
    if(state.hitIds.includes(message.id)){
     if(!same(leaves,state.leaves)){state.leaves=leaves;await save(item,state);await sync(item,state);}
     return null;
    }
+   const original=current.reroll?replacedHit(message,item):null;
+   if(original){
+    const next=current.hit?
+     {leaves:leaves.map(leaf=>leaf.messageId===original?{...leaf,messageId:message.id}:leaf),hitIds:state.hitIds.map(id=>id===original?message.id:id)}:
+     {leaves:leaves.filter(leaf=>leaf.messageId!==original),hitIds:state.hitIds.filter(id=>id!==original)};
+    await save(item,next);await sync(item,next);return next.leaves.length;
+   }
+   if(!current.hit)return null;
    const start={value:game.time.worldTime,initiative:game.combat?.combatant?.initiative??null};
    if(!validStart(start))throw new PilgrimError('无法确认金叶亮起的时刻，请核对灵扇。');
    const count=traits(target.actor).has('undead')?3:Math.min(leaves.length+1,3);
@@ -138,9 +168,10 @@ export function createPilgrimFan({game,fromUuid=globalThis.fromUuid,media={},onE
   if(!currentToken(target)||!creature(target.actor)||target.actor.isDead||traits(target.actor).has('construct')&&!traits(target.actor).has('undead'))throw new PilgrimError('请选择一个活物或不死生物。');
   const tokens=(selectedSource?[selectedSource]:item.actor.token?[item.actor.token]:item.actor.getActiveTokens?.(true,true)??[]).map(token=>token.document??token).filter(token=>currentToken(token)&&token.actor===item.actor&&token.parent===target.parent);
   const token=tokens.length===1?tokens[0]:null;
-  if(!token?.object||!target.object||target.hidden||item.actor.canSee===false||item.actor.hasCondition?.('blinded')||item.actor.getCondition?.('blinded')||typeof token.object.distanceTo!=='function'||typeof token.object.checkCollision!=='function')throw new PilgrimError('请选择你能看见、且在 30 尺内的目标。');
-  const distance=token.object.distanceTo(target.object);
-  if(!Number.isFinite(distance)||distance<0||distance>30||token.object.checkCollision(target.object.center,{origin:token.object.center,type:'sight',mode:'any'}))throw new PilgrimError('请选择你能看见、且在 30 尺内的目标。');
+  if(!token||target.hidden||item.actor.canSee===false||item.actor.hasCondition?.('blinded')||item.actor.getCondition?.('blinded'))throw new PilgrimError('请选择你能看见、且在 30 尺内的目标。');
+  // Walls are checked here only when this GM views the scene; otherwise the requester's own check stands.
+  const distance=tokenDistance(token,target);
+  if(!Number.isFinite(distance)||distance<0||distance>30||sightBlocked(canvas,token,target)===true)throw new PilgrimError('请选择你能看见、且在 30 尺内的目标。');
   if(validLeaves(item).length!==3)throw new PilgrimError('需要三片金叶全部亮起。');
   return traits(target.actor).has('undead');
  }
@@ -155,5 +186,18 @@ export function createPilgrimFan({game,fromUuid=globalThis.fromUuid,media={},onE
   // Publication is the release boundary; later time changes cannot undo it.
   await clearAfterRelease(item);await play('release',item,target);return {messageId:message.id};
  }
- return {handleStrike,reconcile,release,clearAfterRelease,getState:getFanState};
+ /** A GM's own edit of the leaf counter: added leaves start now, removed leaves are the oldest. */
+ async function adjust(effect,count) {
+  const uuid=effect?.flags?.[M]?.[PILGRIM_FLAG]?.source,item=values(effect?.actor?.items).find(other=>other.uuid===uuid);
+  if(!isActiveGM(game)||!owned(item)||effect.flags[M][PILGRIM_FLAG].kind!=='leaves'||!Number.isInteger(count))return null;
+  return serializeReward(uuid,async()=>{
+   if(!isActiveGM(game)||!owned(item)||!usableReward(item))return null;
+   const state=getFanState(item),leaves=validLeaves(item,state).sort((a,b)=>a.start.value-b.start.value),wanted=Math.max(0,Math.min(3,count));
+   const start={value:game.time.worldTime,initiative:game.combat?.combatant?.initiative??null};
+   while(leaves.length<wanted)leaves.push({messageId:'gm-adjusted',start:{...start}});
+   const next={leaves:leaves.slice(leaves.length-wanted),hitIds:state.hitIds};
+   await save(item,next);await sync(item,next);return wanted;
+  });
+ }
+ return {handleStrike,recordDeleted,reconcile,release,clearAfterRelease,adjust,validLeaves:item=>validLeaves(item),getState:getFanState};
 }

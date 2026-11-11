@@ -1,0 +1,29 @@
+.sog-pilgrim-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+}
+
+.sog-pilgrim-actions > span {
+  display: inline-flex;
+  flex: 1 1 auto;
+}
+
+.sog-pilgrim-actions button {
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 1.75rem;
+  padding: 0.25rem 0.5rem;
+  white-space: normal;
+  line-height: 1.3;
+}
+
+/* The reason tooltip sits on the wrapper; let the pointer reach it. */
+.sog-pilgrim-actions button:disabled {
+  pointer-events: none;
+}
+
+.sog-pilgrim-notice p {
+  margin: 0.25rem 0;
+}

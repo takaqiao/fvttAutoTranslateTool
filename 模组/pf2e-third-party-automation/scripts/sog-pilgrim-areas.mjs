@@ -1,5 +1,5 @@
 import {MODULE_ID} from './rules.mjs';
-import {EFFECTS,PILGRIM_FLAG,PilgrimError,values,rewardKey,serializeReward} from './sog-pilgrim-rules.mjs';
+import {EFFECTS,PILGRIM_FLAG,PilgrimError,durationText,values,rewardKey,serializeReward,tokenCenter} from './sog-pilgrim-rules.mjs';
 import {SOG_PILGRIM_WORLDS} from './world-gates.mjs';
 
 const EVENT='tpaSogPilgrimAreaEvent';
@@ -22,20 +22,20 @@ function eventKey(event) {
 export function createPilgrimAreas({game,fromUuid,media,onError=console.error,canvas=globalThis.canvas}={}) {
  const active=()=>game.user?.id===game.users.activeGM?.id&&game.system?.id==='pf2e'&&SOG_PILGRIM_WORLDS.has(game.world?.id);
  const ending=new Set();
- const quietMedia=async operation=>{try{await operation();}catch(error){onError(error);}};
+ const quiet=async operation=>{try{await operation();}catch(error){onError(error);}};
  const currentScene=source=>{
   const scene=source?.parent;
-  if(!scene||canvas?.scene!==scene||scene.tokens.get(source.id)!==source||!source.object?.center)throw new PilgrimError('请让GM打开角色所在场景。');
+  if(!scene||game.scenes?.get(scene.id)!==scene||scene.tokens.get(source.id)!==source)throw new PilgrimError('请在角色所在的场景中使用。');
   return scene;
  };
  function validatePlacement({item,source,position,range}) {
-  currentScene(source);
+  const scene=currentScene(source);
   if(source.actor?.uuid!==item.actor?.uuid||!Number.isFinite(position?.x)||!Number.isFinite(position?.y))throw new PilgrimError('请重新选择区域位置。');
-  const distance=canvas.grid.measurePath([source.object.center,position]).distance;
+  const distance=scene.grid.measurePath([tokenCenter(source),position]).distance;
   if(!Number.isFinite(distance)||distance>range)throw new PilgrimError('所选位置超出范围。');
  }
  async function pick({item,source}) {
-  currentScene(source);
+  if(canvas?.scene!==currentScene(source)||!source.object)throw new PilgrimError('请先打开角色所在的场景。');
   if(!game.modules.get('sequencer')?.active||!globalThis.Sequencer?.Crosshair?.show)throw new PilgrimError('暂时无法放置区域，请联系GM。');
   const position=await Sequencer.Crosshair.show({
    t:'circle',distance:15,distanceMin:15,distanceMax:15,lockManualRotation:true,
@@ -58,7 +58,7 @@ export function createPilgrimAreas({game,fromUuid,media,onError=console.error,ca
    }
   }
   const source=await fromUuid(data.source);
-  if(source)await quietMedia(()=>media.clearArea(source,data.nonce));
+  if(source)await quiet(()=>media.clearArea(source,data.nonce));
  }
  async function restoreEquipment(item,data) {
   if(!item||!data.equippedBefore||item.actor?.items.get(item.id)!==item)return;
@@ -77,7 +77,7 @@ export function createPilgrimAreas({game,fromUuid,media,onError=console.error,ca
    if(remove&&effect.actor?.items.get(effect.id)===effect)await effect.actor.deleteEmbeddedDocuments('Item',[effect.id]);
   }finally{ending.delete(data.nonce);}
  }
- async function create({item,source,position,nonce,kind,card}) {
+ async function create({item,source,position,nonce,kind,card,announce}) {
   if(!active())throw new PilgrimError('请等待GM在线后使用。');
   const scene=currentScene(source),resources=[];
   const effectSource=await fromUuid('Item.'+EFFECTS[kind]);
@@ -107,11 +107,14 @@ export function createPilgrimAreas({game,fromUuid,media,onError=console.error,ca
    row.system.start={value:game.time.worldTime,initiative:game.combat?.combatant?.initiative??null};
    [effect]=await item.actor.createEmbeddedDocuments('Item',[row]);
    if(!effect)throw new PilgrimError('效果尚未生效，请联系GM核对。');
-   if(kind==='tree')await item.update({'system.equipped.carryType':'dropped','system.equipped.handsHeld':0});
-   await card({item,nonce,gm:true,...kind==='tree'?{
-    formula:'(3d8+8)[healing]',label:'余烬重生：15尺内所有生物恢复生命值。能看见杉树的不死生物与魔族获得惊惧1；保留更高的惊惧值，且无法降至1以下。结束条件由GM裁定。',
-   }:{formula:'{1d10[slashing],1d10[vitality]}',label:'花瓣风暴：生物进入风暴或在其中开始回合时结算。',save:{type:'reflex',dc:23}}});
-   await quietMedia(()=>media.area(item,{kind,scene,position,nonce,template,effect}));
+   const lasting=durationText(row.system.duration);
+   if(kind==='tree'){
+    await item.update({'system.equipped.carryType':'dropped','system.equipped.handsHeld':0});
+    // The healing card is the published result; a lost notice must not undo it.
+    await card({item,nonce,gm:false,formula:'(3d8+8)[healing]',label:'余烬重生：15尺内所有生物恢复生命值。能看见杉树的不死生物与魔族获得惊惧1；保留更高的惊惧值，且无法降至1以下。结束条件由GM裁定。'});
+    await quiet(()=>announce({item,nonce,text:`余烬重生：大杉枝在尸体上化为杉树，15 尺内所有生物恢复生命值；能看见杉树的不死生物与魔族惊惧 1。${lasting}。`}));
+   }else await announce({item,nonce,text:`花瓣风暴：15 尺爆发，${lasting}。生物进入风暴或在其中开始回合时受到 1d10 挥砍和 1d10 命能伤害，DC 23 基础反射豁免。`});
+   await quiet(()=>media.area(item,{kind,scene,position,nonce,template,effect}));
    return {effectId:effect.id,templateId:template.id,...data};
   }catch(error){
    try{
@@ -122,15 +125,15 @@ export function createPilgrimAreas({game,fromUuid,media,onError=console.error,ca
    throw error;
   }
  }
- async function tree({item,source,target,nonce,card}) {
+ async function tree({item,source,target,nonce,card,announce}) {
   const scene=currentScene(source);
-  if(target?.parent!==scene||scene.tokens.get(target.id)!==target||!target.object?.center)throw new PilgrimError('请重新选择触及内的尸体。');
-  return create({item,source,position:target.object.center,nonce,kind:'tree',card});
+  if(target?.parent!==scene||scene.tokens.get(target.id)!==target)throw new PilgrimError('请重新选择触及内的尸体。');
+  return create({item,source,position:tokenCenter(target),nonce,kind:'tree',card,announce});
  }
- async function storm({item,source,position,nonce,card}) {
+ async function storm({item,source,position,nonce,card,announce}) {
   if(!position)return null;
   validatePlacement({item,source,position,range:60});
-  return create({item,source,position,nonce,kind:'storm',card});
+  return create({item,source,position,nonce,kind:'storm',card,announce});
  }
  async function restore({item,user}) {
   if(!active()||!item.actor.testUserPermission(user,'OWNER'))throw new PilgrimError('请使用你持有的物品。');
@@ -167,7 +170,8 @@ export function createPilgrimAreas({game,fromUuid,media,onError=console.error,ca
    if(!(own(effect).resourceRefs??[]).some(ref=>ref.type==='Region'&&ref.id===region.id))return;
    const nonce=`${data.nonce}:${key}`;
    if(values(game.messages).some(message=>own(message)?.source===item.uuid&&own(message).nonce===nonce))return;
-   await card({item,formula:'{1d10[slashing],1d10[vitality]}',label:'花瓣风暴',nonce,target:token,save:{type:'reflex',dc:23},gm:true});
+   // A player rolls the save from the card, so it must see it.
+   await card({item,formula:'{1d10[slashing],1d10[vitality]}',label:'花瓣风暴',nonce,target:token,save:{type:'reflex',dc:23},gm:!token.actor.hasPlayerOwner});
   });
  }
  return {pick,validatePlacement,tree,storm,restore,reconcile,deleted,register};

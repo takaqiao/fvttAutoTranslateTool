@@ -16,30 +16,37 @@ function fixture(){
  const user={id:'gm',active:true,isGM:true},users=new Map([['gm',user]]);users.activeGM=user;
  const actor={id:'self',uuid:'Actor.self',type:'character',isDead:false,canSee:true,items:new Map(),isOfType(...types){return types.includes(this.type)},getActiveTokens(){return [origin.object]},getCondition(){return null}};
  const item={id:'fan',uuid:'Actor.self.Item.fan',type:'weapon',actor,flags:{world:{sogWontonNativeAutomation:{key:'spirit-fan'},sogB2Ch2Resources:{originalSlug:'spirit-fan',fileSha256:'a'.repeat(64)}},[M]:{sogPilgrim:{use:{nonce:'provider'}}}},system:{equipped:{carryType:'held',handsHeld:1}},async update(changes){apply(this,changes);return this}};actor.items.set(item.id,item);
- const scene={id:'s',uuid:'Scene.s',tokens:new Map()},origin={id:'o',uuid:'Scene.s.Token.o',documentName:'Token',parent:scene,actor,hidden:false},targetActor={id:'other',uuid:'Actor.other',type:'npc',isDead:false,traits:new Set(),isOfType(...types){return types.includes(this.type)}},target={id:'t',uuid:'Scene.s.Token.t',documentName:'Token',parent:scene,actor:targetActor,hidden:false};scene.tokens.set('o',origin);scene.tokens.set('t',target);
- origin.object={document:origin,center:{x:0,y:0},distanceTo:()=>20,checkCollision:()=>false};target.object={document:target,center:{x:100,y:0},isVisible:true};
+ const scene={id:'s',uuid:'Scene.s',tokens:new Map(),grid:{size:100,distance:5,isSquare:true}},origin={id:'o',uuid:'Scene.s.Token.o',documentName:'Token',parent:scene,actor,hidden:false,x:0,y:0,width:1,height:1,elevation:0},targetActor={id:'other',uuid:'Actor.other',type:'npc',isDead:false,traits:new Set(),isOfType(...types){return types.includes(this.type)}},target={id:'t',uuid:'Scene.s.Token.t',documentName:'Token',parent:scene,actor:targetActor,hidden:false,x:300,y:0,width:1,height:1,elevation:0};scene.tokens.set('o',origin);scene.tokens.set('t',target);
+ origin.object={document:origin,center:{x:50,y:50},checkCollision:()=>false};target.object={document:target,center:{x:350,y:50},isVisible:true};const canvas={scene};
  const game={user,users,actors:new Map([['self',actor],['other',targetActor]]),scenes:new Map([['s',scene]]),messages:new Map(),time:{worldTime:100},combat:null};
  const templates=new Map(['leaves','light'].map((kind,i)=>[`Item.${i?'53ad48c5ad472dcf':'e3f4b1e0c69e0cba'}`,{type:'effect',name:kind,system:{duration:{value:kind==='leaves'?-1:1,unit:kind==='leaves'?'unlimited':'minutes',expiry:kind==='leaves'?null:'turn-start',sustained:false},start:{value:0,initiative:null},badge:kind==='leaves'?{type:'counter',value:0,min:0,max:3}:null,rules:kind==='light'?[{key:'TokenLight',value:{bright:20,dim:40}}]:[],description:{value:'',gm:''},context:null},flags:{},toObject(){const {toObject,...data}=this;return clone(data)}}]));
  const docs=new Map([actor,item,origin,target,targetActor,...templates.values()].filter(d=>d.uuid).map(d=>[d.uuid,d]));
  for(const [uuid,template]of templates)docs.set(uuid,template);
- const mediaCalls=[],errors=[],writes=[];let seq=0;
+ const mediaCalls=[],errors=[],writes=[],operations=[];let seq=0,now=1000000;
  actor.createEmbeddedDocuments=async(_type,data)=>data.map(source=>{
-  const effect={...clone(source),id:`e${++seq}`,uuid:`Actor.self.Item.e${seq}`,actor,async update(changes){writes.push(changes);apply(this,changes);return this}};actor.items.set(effect.id,effect);return effect;
+  const effect={...clone(source),id:`e${++seq}`,uuid:`Actor.self.Item.e${seq}`,actor,async update(changes,options){writes.push(changes);operations.push({update:changes,options});apply(this,changes);return this}};actor.items.set(effect.id,effect);return effect;
  });
- actor.deleteEmbeddedDocuments=async(_type,ids)=>{for(const id of ids)actor.items.delete(id);return []};
+ actor.deleteEmbeddedDocuments=async(_type,ids,options)=>{operations.push({remove:ids,options});for(const id of ids)actor.items.delete(id);return []};
  const nativeRemaining=(data,parent)=>{
   assert.equal(parent,actor,'Expiry is bound to the fan wielder');
   const remaining=data.system.start.value+60-game.time.worldTime,current=game.combat?.combatant;
   return {remaining,expired:remaining<0||remaining===0&&(!current?.actor||current.actor===parent&&(data.system.start.initiative??0)===(current.initiative??0))};
  };
- const options={game,fromUuid:async uuid=>docs.get(uuid),nativeRemaining,media:{async leaves(_item,count){mediaCalls.push(['leaves',count])},async release(){mediaCalls.push(['release'])}},onError:error=>errors.push(error)};
+ const options={game,canvas,clock:()=>now,fromUuid:async uuid=>docs.get(uuid),nativeRemaining,media:{async leaves(_item,count){mediaCalls.push(['leaves',count])},async release(){mediaCalls.push(['release'])}},onError:error=>errors.push(error)};
  const fan=createPilgrimFan(options),state=()=>item.flags[M].sogPilgrim.fan,effects=kind=>[...actor.items.values()].filter(e=>e.flags?.[M]?.sogPilgrim?.kind===kind);
  function message(id='hit',overrides={}){
   const message={id,uuid:`ChatMessage.${id}`,actor,item,isCheckRoll:true,flags:{pf2e:{origin:{actor:actor.uuid,uuid:item.uuid},context:{type:'attack-roll',outcome:'success',target:{actor:targetActor.uuid,token:target.uuid},dc:{value:20}}}},rolls:[{_evaluated:true,total:22,options:{degreeOfSuccess:2}}],...overrides};game.messages.set(id,message);return message;
  }
  async function charge(){targetActor.traits.add('undead');await fan.handleStrike(message());targetActor.traits.clear();}
  const card=async data=>{const saved={id:'release',uuid:'ChatMessage.release',...data};game.messages.set(saved.id,saved);return saved};
- return {game,user,actor,item,scene,origin,target,targetActor,fan,options,message,state,effects,mediaCalls,errors,writes,charge,card};
+ // PF2e deletes the original card before it creates the reroll card.
+ function reroll(id,original,{hit=true}={}){
+  if(original)game.messages.delete(original.id);
+  const card=message(id);card.flags.pf2e.context.isReroll=true;
+  if(!hit){card.flags.pf2e.context.outcome='failure';card.rolls[0].options.degreeOfSuccess=1;}
+  return card;
+ }
+ return {game,user,actor,item,scene,origin,target,targetActor,canvas,fan,options,message,reroll,state,effects,mediaCalls,errors,writes,operations,charge,card,tick:ms=>{now+=ms}};
 }
 
 test('a saved native success adds one timed leaf and preserves provider state',async()=>{
@@ -107,7 +114,6 @@ test('unheld, unproven, rerolled, failed and malformed attacks never add leaves'
   (_f,m)=>m.isCheckRoll=false,
   (_f,m)=>m.flags.pf2e.context.type='damage-roll',
   (_f,m)=>m.flags.pf2e.context.outcome='failure',
-  (_f,m)=>m.flags.pf2e.context.isReroll=true,
   (_f,m)=>m.rolls[0].options.degreeOfSuccess=1,
   (_f,m)=>m.rolls[0].total=-1,
   (_f,m)=>m.flags.pf2e.context.target.actor='Actor.unrelated',
@@ -159,7 +165,7 @@ test('no release occurs with construct, dead, noncreature or out-of-range target
   if(kind==='construct')f.targetActor.traits.add('construct');
   if(kind==='dead')f.targetActor.isDead=true;
   if(kind==='hazard')f.targetActor.type='hazard';
-  if(kind==='range')f.origin.object.distanceTo=()=>35;
+  if(kind==='range')f.target.x=700;
   if(kind==='sight')f.origin.object.checkCollision=()=>true;
   if(kind==='hidden')f.target.hidden=true;
   if(kind==='blind')f.actor.canSee=false;
@@ -222,4 +228,74 @@ test('an unpersisted release card cannot consume leaves',async()=>{
 
 test('media failures are reported and never block counting or a successful release',async()=>{
  const f=fixture(),failure=Error('media unavailable');f.options.media={leaves:async()=>{throw failure},release:async()=>{throw failure}};const fan=createPilgrimFan(f.options);f.targetActor.traits.add('undead');await fan.handleStrike(f.message());f.targetActor.traits.clear();await fan.release({item:f.item,target:f.target,nonce:'use',card:f.card});assert.equal(f.state().leaves.length,0);assert.equal(f.errors.includes(failure),true);
+});
+
+test('a GM viewing another scene measures release range on the token scene and leaves sight to the requester',async()=>{
+ const f=fixture();await f.charge();f.canvas.scene={id:'elsewhere'};f.origin.object.checkCollision=()=>true;
+ await f.fan.release({item:f.item,source:f.origin,target:f.target,nonce:'away',card:f.card});assert.equal(f.state().leaves.length,0);
+ const far=fixture();await far.charge();far.canvas.scene={id:'elsewhere'};far.target.x=700;
+ await assert.rejects(far.fan.release({item:far.item,source:far.origin,target:far.target,nonce:'far',card:far.card}),/30 尺/);
+ const bare=fixture();await bare.charge();bare.canvas.scene=null;delete bare.origin.object;delete bare.target.object;
+ await bare.fan.release({item:bare.item,source:bare.origin,target:bare.target,nonce:'bare',card:bare.card});assert.equal(bare.state().leaves.length,0);
+});
+
+test('only unexpired leaves count as lit',async()=>{
+ const f=fixture();await f.fan.handleStrike(f.message('first'));f.game.time.worldTime=130;await f.fan.handleStrike(f.message('second'));
+ f.game.time.worldTime=161;
+ assert.deepEqual(f.fan.validLeaves(f.item).map(leaf=>leaf.messageId),['second']);assert.equal(f.state().leaves.length,2);
+});
+
+test('a hit reroll of a counted hit moves the leaf to the new card without adding one',async()=>{
+ const f=fixture(),original=f.message('first');await f.fan.handleStrike(original);
+ f.fan.recordDeleted(original);f.tick(500);f.game.time.worldTime=105;
+ const card=f.reroll('again',original);await f.fan.handleStrike(card);await f.fan.handleStrike(card);
+ assert.deepEqual(f.state(),{leaves:[{messageId:'again',start:{value:100,initiative:null}}],hitIds:['again']});
+ assert.equal(f.effects('leaves')[0].system.badge.value,1);
+});
+
+test('a missed reroll of a counted hit puts that leaf out',async()=>{
+ const f=fixture();await f.fan.handleStrike(f.message('one'));f.game.time.worldTime=110;
+ const second=f.message('two');await f.fan.handleStrike(second);
+ f.fan.recordDeleted(second);await f.fan.handleStrike(f.reroll('two-again',second,{hit:false}));
+ assert.deepEqual(f.state(),{leaves:[{messageId:'one',start:{value:100,initiative:null}}],hitIds:['one']});
+ assert.equal(f.effects('leaves')[0].system.badge.value,1);
+});
+
+test('a missed reroll of an undead hit puts out every leaf that hit lit',async()=>{
+ const f=fixture();f.targetActor.traits.add('undead');const hit=f.message('undead');await f.fan.handleStrike(hit);
+ f.fan.recordDeleted(hit);await f.fan.handleStrike(f.reroll('undead-again',hit,{hit:false}));
+ assert.equal(f.state().leaves.length,0);assert.equal(f.effects('leaves').length,0);assert.equal(f.effects('light').length,0);
+});
+
+test('a hit reroll of an uncounted miss adds a leaf like any hit',async()=>{
+ const f=fixture(),miss=f.message('miss');miss.flags.pf2e.context.outcome='failure';miss.rolls[0].options.degreeOfSuccess=1;
+ await f.fan.handleStrike(miss);f.fan.recordDeleted(miss);assert.equal(f.state(),undefined);
+ await f.fan.handleStrike(f.reroll('miss-again',miss));
+ assert.deepEqual(f.state().leaves.map(leaf=>leaf.messageId),['miss-again']);
+});
+
+test('a counted hit deleted long before a reroll is not taken as the rerolled card',async()=>{
+ const f=fixture(),original=f.message('old');await f.fan.handleStrike(original);
+ f.fan.recordDeleted(original);f.tick(120000);
+ await f.fan.handleStrike(f.reroll('late',original));assert.equal(f.state().leaves.length,2);
+ const g=fixture(),other=g.message('other');await g.fan.handleStrike(other);g.fan.recordDeleted(other);
+ const card=g.reroll('elsewhere',other);card.flags.pf2e.context.target.token='Scene.s.Token.unrelated';
+ await g.fan.handleStrike(card);assert.deepEqual(g.state().hitIds,['other']);
+});
+
+test('a GM-set leaf count is adopted: new leaves start now and the oldest go out first',async()=>{
+ const f=fixture();await f.fan.handleStrike(f.message('one'));f.game.time.worldTime=110;await f.fan.handleStrike(f.message('two'));
+ f.game.time.worldTime=120;await f.fan.adjust(f.effects('leaves')[0],3);
+ assert.deepEqual(f.state().leaves.map(leaf=>leaf.start.value),[100,110,120]);assert.equal(f.effects('leaves')[0].system.badge.value,3);
+ await f.fan.adjust(f.effects('leaves')[0],1);
+ assert.deepEqual(f.state().leaves.map(leaf=>leaf.start.value),[120]);assert.equal(f.effects('leaves')[0].system.badge.value,1);
+ await f.fan.reconcile(f.actor);assert.equal(f.state().leaves.length,1);assert.equal(f.effects('leaves')[0].system.badge.value,1);
+ const leaves=f.effects('leaves')[0];f.actor.items.delete(leaves.id);await f.fan.adjust(leaves,0);
+ assert.equal(f.state().leaves.length,0);assert.equal(f.effects('light').length,0);assert.deepEqual(f.state().hitIds,['one','two']);
+});
+
+test('leaf effect writes made by the fan carry the sync mark',async()=>{
+ const f=fixture();await f.fan.handleStrike(f.message('one'));f.game.time.worldTime=110;await f.fan.handleStrike(f.message('two'));f.game.time.worldTime=171;await f.fan.reconcile(f.actor);
+ assert.ok(f.operations.some(operation=>operation.remove));
+ for(const operation of f.operations)assert.equal(operation.options?.tpaPilgrimSync,true);
 });

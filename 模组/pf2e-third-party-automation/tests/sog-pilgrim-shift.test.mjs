@@ -1,6 +1,8 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {createPilgrimShift} from '../scripts/sog-pilgrim-shift.mjs';
+import {PilgrimError} from '../scripts/sog-pilgrim-rules.mjs';
+import {playerError} from '../scripts/sog-pilgrim-rewards.mjs';
 
 const M='pf2e-third-party-automation',PACK='pf2e.equipment-srd';
 const clone=value=>structuredClone(value);
@@ -201,4 +203,14 @@ test('select rejects forged choices and a branch released while its dialog was o
  globalThis.foundry.applications.api.DialogV2.wait=async()=>{f.item.system.equipped.handsHeld=0;return f.forms[0].uuid};
  await assert.rejects(f.shift.select(f.item));
  assert.equal(f.writes.length,0);
+});
+
+test('shift failures reach the player with their own reason',async t=>{
+ const f=fixture();f.item.system.equipped.handsHeld=0;
+ await assert.rejects(f.shift.apply({item:f.item,formUuid:f.forms[0].uuid}),error=>error instanceof PilgrimError&&playerError(error)==='请先持握大杉枝。');
+ const g=fixture([weapon('longsword',{'system.usage.value':'held-in-two-hands'})]);
+ await assert.rejects(g.shift.apply({item:g.item,formUuid:g.forms[0].uuid}),error=>playerError(error)==='只能变成普通的单手近战武器。');
+ dialog(t,async()=>`Compendium.${PACK}.Item.unlisted`);
+ const h=fixture();
+ await assert.rejects(h.shift.select(h.item),error=>playerError(error)==='请选择目录中的单手近战武器。');
 });

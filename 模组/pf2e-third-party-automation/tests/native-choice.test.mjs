@@ -34,3 +34,16 @@ test('closing a native choice keeps cancellation and a single option needs no wi
   assert.equal(opened,1);
  }finally{globalThis.foundry=previous;}
 });
+
+test('a native choice can say what is being chosen while other callers keep the default prompt',async()=>{
+ const previous=globalThis.foundry;const configs=[];
+ globalThis.foundry={applications:{api:{DialogV2:{wait:async options=>{configs.push(options);return null;}}}}};
+ try{
+  const choices=[{value:'a',label:'A'},{value:'b',label:'B'}];
+  await native.showNativeChoice({title:'选择围巾缠绕的武器',prompt:'选择围巾缠绕的武器 <手持>',choices});
+  await native.showNativeChoice({choices});
+  assert.equal(configs[0].window.title,'选择围巾缠绕的武器');
+  assert.equal(configs[0].content,'<p>选择围巾缠绕的武器 &lt;手持&gt;</p>');
+  assert.equal(configs[1].content,'<p>请选择本次能力的规则分支。</p>');
+ }finally{globalThis.foundry=previous;}
+});

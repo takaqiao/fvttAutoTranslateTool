@@ -63,12 +63,12 @@ export function validateNativeChoices(choices){
  if(!Array.isArray(choices)||choices.length<1||choices.length>100||choices.some(c=>typeof c?.value!=='string'||!c.value||c.value.length>256||typeof c.label!=='string'||c.label.length>500)||new Set(choices.map(c=>c.value)).size!==choices.length)throw Error('规则选择列表无效。');
  return choices.map(({value,label})=>({value,label}));
 }
-export async function showNativeChoice({title,choices}){
+export async function showNativeChoice({title,choices,prompt='请选择本次能力的规则分支。'}){
  const options=validateNativeChoices(choices);
  if(options.length===1)return options[0].value;
  return globalThis.foundry.applications.api.DialogV2.wait({
   classes:['tpa-native-choice'],position:{width:560},
-  window:{title:String(title??'规则选择').slice(0,200)},content:'<p>请选择本次能力的规则分支。</p>',
+  window:{title:String(title??'规则选择').slice(0,200)},content:`<p>${String(prompt).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]))}</p>`,
   // Foundry 14 renders button labels with innerText, not HTML.
   buttons:options.map((option,index)=>({action:`choice-${index}`,label:option.label,callback:()=>option.value})),rejectClose:false,
  });

@@ -1,6 +1,9 @@
 import {MODULE_ID} from './rules.mjs';
 import {PILGRIM_FLAG,rewardKey,values} from './sog-pilgrim-rules.mjs';
 
+const degrees={criticalFailure:0,failure:1,success:2,criticalSuccess:3};
+const HAUNT='wonton-ghost-scarf:haunt-context';
+
 export const PILGRIM_MEDIA = Object.freeze({
  leaf:`modules/${MODULE_ID}/assets/pilgrim-golden-leaf.png`,
  heal:'modules/jb2a_patreon/Library/Generic/Healing/HealingAbility_01_Yellow_400x400.webm',
@@ -14,12 +17,17 @@ export const PILGRIM_MEDIA = Object.freeze({
  treeSound:'modules/psfx-patreon/library/1st-level-spells/entangle/vines/v1/entangle-intro.ogg',
  stormSound:'modules/psfx-patreon/library/cantrips/gust/v1/gust-001.ogg',
  natureSound:'modules/soundfxlibrary/Combat/Single/Spell Whoosh/spell-whoosh-1.mp3',
+ scarfStrands:'modules/jb2a_patreon/Library/Generic/Marker/EnergyStrands_01_Regular_Grey_600x600.webm',
+ scarfSound:'modules/psfx-patreon/library/cantrips/mending/v1/mending-with-cast-001.ogg',
+ scarfDrift:'modules/jb2a_patreon/Library/Generic/Marker/EnergyStrandsOverlay_01_Regular_Grey_600x600.webm',
 });
 export function createPilgrimMedia({game,canvas=globalThis.canvas,fromUuid=globalThis.fromUuid,onError=console.error}={}) {
  const strikes=new Set(),displays=new Map();
  const leader=()=>game.user?.id===game.users.activeGM?.id;
  const localReady=()=>game.modules.get('sequencer')?.active&&typeof globalThis.Sequence==='function'&&canvas?.ready&&!!canvas.scene;
- const ready=()=>leader()&&localReady();
+ const ready=(requester=false)=>(requester||leader())&&localReady();
+ /** Whether the active GM's own broadcast reaches this scene; otherwise the requester plays it. */
+ const shows=scene=>!!(ready()&&scene&&canvas.scene===scene);
  const tokens=item=>values(canvas?.scene?.tokens).filter(t=>t.parent===canvas.scene&&t.actor?.uuid===item.actor?.uuid&&t.object);
  const name=(item,kind,suffix='')=>`${MODULE_ID}.pilgrim.${item.uuid}.${kind}${suffix}`;
  // Sequencer 4.2.3 ignores sceneId when filtering visible effects.
@@ -65,8 +73,26 @@ export function createPilgrimMedia({game,canvas=globalThis.canvas,fromUuid=globa
    await sequence.play({local:true});
   });
  }
- async function release(item,target) {
-  if(!ready()||target.parent!==canvas.scene||!target.object)return;
+ async function haunt(item,on) {
+  return refresh(item,'haunt',async()=>{
+   if(!on)return;
+   const sequence=new Sequence();
+   for(const token of tokens(item)){
+    const attach=effect=>effect.name(name(item,'haunt')).attachTo(token.object,{bindAlpha:true,bindVisibility:true}).tieToDocuments(item.uuid).persist().temporary().fadeIn(300).fadeOut(300);
+    attach(sequence.effect().file(PILGRIM_MEDIA.scarfDrift)).scaleToObject(1.35).opacity(0.5).loopProperty('sprite','rotation',{from:-6,to:6,duration:3200,pingPong:true});
+    attach(sequence.effect()).shape('circle',{radius:0.6,gridUnits:true,fillColor:'#f2f6fa',fillAlpha:0.1,lineColor:'#dfe8f2',lineSize:1}).opacity(0.4).loopProperty('alphaFilter','alpha',{from:0.25,to:0.5,duration:3000,pingPong:true});
+   }
+   await sequence.play({local:true});
+  });
+ }
+ async function scarfCast(item,{scene,requester=false}={}) {
+  if(!ready(requester)||!scene||scene!==canvas.scene)return;
+  const sequence=new Sequence();
+  for(const token of tokens(item))sequence.effect().file(PILGRIM_MEDIA.scarfStrands).attachTo(token.object,{bindAlpha:true,bindVisibility:true}).scaleToObject(1.4).opacity(0.85);
+  sound(sequence,PILGRIM_MEDIA.scarfSound,0.4);await sequence.play();
+ }
+ async function release(item,target,{requester=false}={}) {
+  if(!ready(requester)||target.parent!==canvas.scene||!target.object)return;
   const sequence=new Sequence();
   sequence.effect().file(PILGRIM_MEDIA.heal).atLocation(target.object).scaleToObject(1.25).opacity(0.75);
   sound(sequence,PILGRIM_MEDIA.releaseSound,0.22);await sequence.play();
@@ -78,8 +104,8 @@ export function createPilgrimMedia({game,canvas=globalThis.canvas,fromUuid=globa
    if(rebuilt)layer.temporary();
   }
  }
- async function area(item,{kind,scene,position,nonce,effect,template}) {
-  if(!ready()||scene!==canvas.scene)return;
+ async function area(item,{kind,scene,position,nonce,effect,template,requester=false}) {
+  if(!ready(requester)||scene!==canvas.scene)return;
   if(kind==='storm'&&(!effect?.uuid||!template?.uuid))throw new Error('花瓣风暴缺少绑定的效果或区域文档。');
   const sequence=new Sequence();
   if(kind==='storm')stormLayers(sequence,item,{scene,position,nonce,effect,template});
@@ -114,7 +140,8 @@ export function createPilgrimMedia({game,canvas=globalThis.canvas,fromUuid=globa
   if(!owned||owned.actor!==actor||owned.uuid!==item.uuid||rewardKey(owned)!=='branch')return false;
   // PF2e prepares alternate usage Items outside the actor's embedded collection.
   if(owned!==item&&!values(actor.system?.actions).some(action=>[action,...action.altUsages??[]].some(usage=>usage.type==='strike'&&usage.item===item)))return false;
-  const degree=context?.outcome==='success'?2:context?.outcome==='criticalSuccess'?3:null;
+  // The branch scatters leaves on every swing, hit or miss.
+  const degree=degrees[context?.outcome]??null;
   return message.isCheckRoll===true&&context?.type==='attack-roll'&&pf.origin?.uuid===item.uuid&&pf.origin?.actor===actor.uuid&&degree!==null&&roll?._evaluated===true&&Number.isFinite(roll.total)&&roll.options?.degreeOfSuccess===degree;
  }
  async function existingAttack(item) {
@@ -157,7 +184,7 @@ export function createPilgrimMedia({game,canvas=globalThis.canvas,fromUuid=globa
  }
  async function deleted(item) {
   const key=rewardKey(item),data=item.flags?.[MODULE_ID]?.[PILGRIM_FLAG];
-  if(key==='fan')await leaves(item,0);if(key==='scarf')await scarf(item,false);
+  if(key==='fan')await leaves(item,0);if(key==='scarf'){await scarf(item,false);await haunt(item,false);}
   // A rebuilt storm has ids of its own, so the GM's broadcast end cannot reach it on other clients.
   if(item.type==='effect'&&data?.kind==='storm'){
    const source={uuid:data.source};
@@ -166,8 +193,8 @@ export function createPilgrimMedia({game,canvas=globalThis.canvas,fromUuid=globa
  }
  async function reconcile(actor) {
   if(!localReady())return;
-  for(const item of values(actor.items)){if(rewardKey(item)==='fan')await leaves(item,leafEffect(item)?.system.badge?.value??0);if(rewardKey(item)==='scarf')await scarf(item,actor.rollOptions?.all?.['wonton-ghost-scarf:lit']===true);if(rewardKey(item)==='hairpin')await restoreStorm(item);}
+  for(const item of values(actor.items)){if(rewardKey(item)==='fan')await leaves(item,leafEffect(item)?.system.badge?.value??0);if(rewardKey(item)==='scarf'){await scarf(item,actor.rollOptions?.all?.['wonton-ghost-scarf:lit']===true);await haunt(item,actor.rollOptions?.all?.[HAUNT]===true);}if(rewardKey(item)==='hairpin')await restoreStorm(item);}
  }
  const quiet=operation=>async(...args)=>{try{return await operation(...args);}catch(error){onError(error);}};
- return {leaves:quiet(leaves),scarf:quiet(scarf),release:quiet(release),area:quiet(area),clearArea:quiet(clearArea),strike:quiet(strike),deleted:quiet(deleted),reconcile:quiet(reconcile)};
+ return {shows,leaves:quiet(leaves),scarf:quiet(scarf),scarfCast:quiet(scarfCast),release:quiet(release),area:quiet(area),clearArea:quiet(clearArea),strike:quiet(strike),deleted:quiet(deleted),reconcile:quiet(reconcile)};
 }

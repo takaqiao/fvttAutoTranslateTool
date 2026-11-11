@@ -1,11 +1,10 @@
 import {MODULE_ID as M} from './rules.mjs';
-import {PILGRIM_FLAG,values,rewardKey,usableReward} from './sog-pilgrim-rules.mjs';
+import {PILGRIM_FLAG,PilgrimError,escapeHTML,values,rewardKey,usableReward} from './sog-pilgrim-rules.mjs';
 
 const PACK='pf2e.equipment-srd';
 const formPattern=/^Compendium\.pf2e\.equipment-srd\.Item\.[A-Za-z0-9]+$/;
 const magicalTraits=new Set(['magical','arcane','divine','occult','primal','artifact','cursed','tech','analog']);
 const indexFields=['slug','baseItem','category','group','level.value','damage','traits.value','usage.value','range','runes','material','specific'].map(key=>`system.${key}`);
-const escapeHTML=value=>String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function baseType(data) {
  const s=data?.system;
  if(typeof s?.slug!=='string'||!s.slug)return null;
@@ -37,13 +36,13 @@ export function createPilgrimShift({game,fromUuid=globalThis.fromUuid}={}) {
   actor.token?.actor===actor&&game.scenes?.get(actor.token.parent?.id)===actor.token.parent&&actor.token.parent?.tokens?.get(actor.token.id)===actor.token:
   !!actor&&game.actors?.get(actor.id)===actor;
  function source(item,actor=item?.actor) {
-  if(rewardKey(item)!=='branch'||item.actor!==actor||!currentActor(actor)||actor.items?.get(item.id)!==item||!usableReward(item))throw Error('请先持握大杉枝。');
-  if(values(actor.items).some(effect=>effect.type==='effect'&&effect.flags?.[M]?.[PILGRIM_FLAG]?.kind==='tree'&&effect.flags[M][PILGRIM_FLAG].source===item.uuid))throw Error('请先将大杉枝恢复为武器。');
+  if(rewardKey(item)!=='branch'||item.actor!==actor||!currentActor(actor)||actor.items?.get(item.id)!==item||!usableReward(item))throw new PilgrimError('请先持握大杉枝。');
+  if(values(actor.items).some(effect=>effect.type==='effect'&&effect.flags?.[M]?.[PILGRIM_FLAG]?.kind==='tree'&&effect.flags[M][PILGRIM_FLAG].source===item.uuid))throw new PilgrimError('请先将大杉枝恢复为武器。');
  }
  async function list() {
   if(!choices){
    const pack=game.packs?.get(PACK);
-   if(!pack)throw Error('无法读取武器目录，请联系主持人。');
+   if(!pack)throw new PilgrimError('无法读取武器目录，请联系主持人。');
    choices=pack.getIndex({fields:indexFields}).then(index=>values(index).filter(baseWeapon).map(entry=>({value:`Compendium.${PACK}.Item.${entry._id}`,label:entry.name})).filter(choice=>formPattern.test(choice.value)).sort((a,b)=>a.label.localeCompare(b.label)));
    choices.catch(()=>{choices=undefined});
   }
@@ -52,22 +51,22 @@ export function createPilgrimShift({game,fromUuid=globalThis.fromUuid}={}) {
  async function select(item) {
   const actor=item?.actor;source(item,actor);
   const options=await list();source(item,actor);
-  if(!options.length)throw Error('没有可变成的单手近战武器。');
+  if(!options.length)throw new PilgrimError('没有可变成的单手近战武器。');
   const selected=await globalThis.foundry.applications.api.DialogV2.wait({
    window:{title:'大杉枝变型'},content:`<div class="form-group"><label for="sog-pilgrim-form">武器形态</label><select id="sog-pilgrim-form" name="formUuid">${options.map(option=>`<option value="${escapeHTML(option.value)}">${escapeHTML(option.label)}</option>`).join('')}</select></div>`,
    buttons:[{action:'shift',label:'变型',default:true,callback:(_event,button)=>button.form.elements.formUuid.value},{action:'cancel',label:'取消',callback:()=>null}],rejectClose:false,
   });
   if(selected===null||selected===undefined||selected===false)return null;
   source(item,actor);
-  if(!options.some(option=>option.value===selected))throw Error('请选择目录中的单手近战武器。');
+  if(!options.some(option=>option.value===selected))throw new PilgrimError('请选择目录中的单手近战武器。');
   return selected;
  }
  async function apply({item,formUuid}) {
   const actor=item?.actor;source(item,actor);
-  if(typeof formUuid!=='string'||!formPattern.test(formUuid))throw Error('请选择目录中的单手近战武器。');
+  if(typeof formUuid!=='string'||!formPattern.test(formUuid))throw new PilgrimError('请选择目录中的单手近战武器。');
   const target=await fromUuid(formUuid);source(item,actor);
   const data=target?.toObject?.();
-  if(target?.uuid!==formUuid||!baseWeapon(data)||target.isMelee!==true||target.hands!=='1'||target.category==='unarmed')throw Error('只能变成普通的单手近战武器。');
+  if(target?.uuid!==formUuid||!baseWeapon(data)||target.isMelee!==true||target.hands!=='1'||target.category==='unarmed')throw new PilgrimError('只能变成普通的单手近战武器。');
   const before=item.toObject().system,s=data.system,base=baseType(data),patch={
    'system.baseItem':base,'system.category':s.category,'system.group':s.group??null,
    'system.traits.value':[...new Set([...s.traits.value,...(item.system.traits.value.includes('magical')?['magical']:[])])],
@@ -82,7 +81,7 @@ export function createPilgrimShift({game,fromUuid=globalThis.fromUuid}={}) {
   replaceObject(patch,'system.traits.config',before.traits?.config,s.traits.config??{});
   await item.update(patch);source(item,actor);
   const saved=item.toObject().system;
-  if(saved.baseItem!==base||saved.category!==s.category||saved.group!==(s.group??null)||saved.damage.dice!==s.damage.dice||saved.damage.die!==s.damage.die||saved.damage.damageType!==s.damage.damageType)throw Error('大杉枝的形态未能保存，请联系主持人核对。');
+  if(saved.baseItem!==base||saved.category!==s.category||saved.group!==(s.group??null)||saved.damage.dice!==s.damage.dice||saved.damage.die!==s.damage.die||saved.damage.damageType!==s.damage.damageType)throw new PilgrimError('大杉枝的形态未能保存，请联系主持人核对。');
   return item;
  }
  return {select,apply};

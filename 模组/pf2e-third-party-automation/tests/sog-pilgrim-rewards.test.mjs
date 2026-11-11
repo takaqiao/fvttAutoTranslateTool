@@ -1,8 +1,62 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {rewardKey,usableReward,scarfBranch} from '../scripts/sog-pilgrim-rules.mjs';
-import {activationOperations,assertAvailable,createPilgrimRewards,hasPublishedUse,playerError,prepareScarfChoices} from '../scripts/sog-pilgrim-rewards.mjs';
+import {rewardKey,usableReward,scarfBranch,activationOf,tokenDistance,sightBlocked} from '../scripts/sog-pilgrim-rules.mjs';
+import {activationOperations,assertAvailable,createPilgrimRewards,hasPublishedUse,operationStatus,playerError,prepareScarfChoices,scarfWeaponChoices} from '../scripts/sog-pilgrim-rewards.mjs';
 const item=(key,type='weapon')=>({type,actor:{},system:{equipped:{carryType:type==='weapon'?'held':'worn',handsHeld:1,invested:true}},flags:{world:{sogWontonNativeAutomation:{key},sogB2Ch2Resources:{originalSlug:key,fileSha256:'a'.repeat(64)}}}});
+const withState=(base,state)=>({...base,flags:{...base.flags,'pf2e-third-party-automation':{sogPilgrim:state}}});
+test('generated activation actions map to the reward operation their paragraph describes',()=>{
+ const actor={items:new Map()};
+ for(const [id,key,type]of [['fan','spirit-fan','weapon'],['scarf','ghost-scarf','equipment'],['hairpin','hairpin-of-blooming-flowers','equipment'],['branch','branch-of-the-great-sugi','weapon']])actor.items.set(id,{...item(key,type),id,actor});
+ actor.items.set('book',{id:'book',type:'equipment',actor,flags:{}});
+ const action=(id,system={actions:{value:2},actionType:{value:'action'}})=>({type:'action',actor,system,flags:{'pf2e-item-activations':{enabled:true,grantedBy:{_id:id}}}});
+ assert.deepEqual(activationOf(action('fan')),{reward:actor.items.get('fan'),operation:'release'});
+ assert.equal(activationOf(action('scarf')).operation,'scarf');
+ assert.equal(activationOf(action('hairpin')).operation,'storm');
+ assert.equal(activationOf(action('branch',{actions:{value:3},actionType:{value:'action'}})).operation,'tree');
+ assert.equal(activationOf(action('branch',{actions:{value:null},actionType:{value:'free'}})).operation,'restore');
+ for(const other of [action('branch'),action('book'),action('missing'),{...action('fan'),type:'feat'},{type:'action',actor,system:{},flags:{}}])assert.equal(activationOf(other),null);
+});
+test('token distance follows PF2e edge-to-edge measurement on the token scene grid without a canvas',()=>{
+ const square={grid:{size:100,distance:5,isSquare:true}},gridless={grid:{size:100,distance:5,isSquare:false,measurePath:([a,b])=>({distance:Math.hypot(b.x-a.x,b.y-a.y)/20})}};
+ const token=(x,y,{width=1,height=1,elevation=0,parent=square}={})=>({parent,x,y,width,height,elevation});
+ assert.equal(tokenDistance(token(0,0),token(100,0)),5);
+ assert.equal(tokenDistance(token(0,0),token(700,0)),35);
+ assert.equal(tokenDistance(token(0,0),token(600,600)),45);
+ assert.equal(tokenDistance(token(0,0,{width:2,height:2}),token(300,0)),10);
+ assert.equal(tokenDistance(token(0,0),token(100,0,{elevation:10})),10);
+ assert.equal(tokenDistance(token(120,20,{width:0.5,height:0.5}),token(300,0)),10);
+ assert.equal(tokenDistance(token(0,0),token(0,0)),0);
+ assert.equal(tokenDistance(token(0,0,{parent:gridless}),token(300,400,{parent:gridless})),25);
+});
+test('sight is judged only by a client that has drawn the token scene',()=>{
+ const scene={},blocked={center:{x:1,y:1},checkCollision:()=>true},open={...blocked,checkCollision:()=>false};
+ const source={parent:scene,object:blocked},target={parent:scene,object:{center:{x:2,y:2}}};
+ assert.equal(sightBlocked({scene},source,target),true);
+ assert.equal(sightBlocked({scene},{...source,object:open},target),false);
+ assert.equal(sightBlocked({scene:{}},source,target),null);
+ assert.equal(sightBlocked(undefined,source,target),null);
+ assert.equal(sightBlocked({scene},{parent:scene},target),null);
+});
+test('activation buttons show what blocks them and why',()=>{
+ const fan=item('spirit-fan'),scarf=item('ghost-scarf','equipment'),branch=item('branch-of-the-great-sugi');
+ assert.deepEqual(operationStatus(fan,'release',{now:0,leaves:2}),{label:'灵魂连携 ◆◆ · 金叶 2/3',reason:'需要三片亮起的金叶。'});
+ assert.deepEqual(operationStatus(fan,'release',{now:0,leaves:3}),{label:'灵魂连携 ◆◆ · 金叶 3/3'});
+ assert.deepEqual(operationStatus(withState(fan,{lastUse:{release:1000}}),'release',{now:2200,leaves:3}),{label:'灵魂连携 ◆◆ · 冷却 40 分钟',reason:'灵魂连携每小时只能使用一次。'});
+ assert.deepEqual(operationStatus(withState(scarf,{spent:true}),'scarf',{now:0}),{label:'启动围巾 ◆ · 今日已用',reason:'今日已经启动；完成每日休息后恢复。'});
+ assert.deepEqual(operationStatus(withState(scarf,{use:{status:'pending'}}),'scarf',{now:0}),{label:'启动围巾 ◆ · 待核对',reason:'上次启动尚待核对，请联系GM。'});
+ assert.deepEqual(operationStatus({...scarf,system:{equipped:{carryType:'worn',invested:false}}},'scarf',{now:0}),{label:'启动围巾 ◆',reason:'请先佩戴并投资该物品。'});
+ assert.deepEqual(operationStatus({...branch,system:{equipped:{carryType:'worn',handsHeld:0}}},'tree',{now:0}),{label:'余烬重生 ◆◆◆',reason:'请先持用该武器。'});
+ assert.deepEqual(operationStatus(branch,'shift',{now:0,tree:true}),{label:'变型 ◆',reason:'请先将大杉枝恢复为武器。'});
+ assert.deepEqual(operationStatus({...branch,system:{equipped:{carryType:'dropped',handsHeld:0}}},'restore',{now:0,tree:true}),{label:'恢复武器 ◇'});
+ assert.deepEqual(operationStatus(branch,'restore',{now:0,tree:false}),{label:'恢复武器 ◇',reason:'大杉枝已经处于武器形态。'});
+ assert.deepEqual(operationStatus(item('hairpin-of-blooming-flowers','equipment'),'storm',{now:0}),{label:'花瓣风暴 ◆◆'});
+});
+test('scarf weapon choices put held weapons first and name the effect each would gain',()=>{
+ const weapon=(id,name,carryType,runes=[])=>({id,name,system:{equipped:{carryType},runes:{property:runes}}});
+ assert.deepEqual(scarfWeaponChoices([weapon('bow','长弓','worn'),weapon('sword','长剑','held',['ghostTouch']),weapon('staff','长棍','stowed',['astral','ghostTouch'])]),[
+  {value:'sword',label:'长剑（手持） · 星魂'},{value:'bow',label:'长弓 · 幽冥'},{value:'staff',label:'长棍 · 护佑'},
+ ]);
+});
 test('a copied reward retains its identity without trusting its Chinese name',()=>{
  const fan=item('spirit-fan');fan.name='铁扇';assert.equal(rewardKey(fan),'fan');
  fan.flags.world.sogB2Ch2Resources.originalSlug='another-fan';assert.equal(rewardKey(fan),null);
@@ -62,15 +116,17 @@ test('reward cards use the registered PF2e DamageRoll when it is not exported on
   const api=await createPilgrimRewards({game,fromUuid:async()=>null});
   await api.card({item:{uuid:'Actor.actor.Item.reward',type:'equipment',actor:{uuid:'Actor.actor'}},formula:'{1d10[slashing],1d10[vitality]}',label:'花瓣风暴',nonce:'native-card',gm:true,save:{type:'reflex',dc:23}});
   assert.equal(published.length,1);assert.equal(published[0].formula,'{1d10[slashing],1d10[vitality]}');
-  assert.deepEqual(published[0].data.whisper,['gm']);
+  assert.deepEqual(published[0].data.whisper,['gm']);assert.equal(published[0].options.messageMode,'gm');
   assert.equal(published[0].data.flags.pf2e.origin.uuid,'Actor.actor.Item.reward');
+  await api.card({item:{uuid:'Actor.actor.Item.reward',type:'equipment',actor:{uuid:'Actor.actor'}},formula:'(3d8+8)[healing]',label:'灵魂连携',nonce:'public-card'});
+  assert.equal(published[1].data.whisper,undefined);assert.equal(published[1].options.messageMode,'public');
  }finally{for(const [key,value]of Object.entries(previous))if(value===undefined)delete globalThis[key];else globalThis[key]=value;}
 });
 
 test('partial placement and unrelated cards cannot complete an uncertain activation',()=>{
  const item={uuid:'Actor.actor.Item.reward'};
- const use={nonce:'same-use',operation:'storm'};
- const mark=(source,nonce)=>({flags:{'pf2e-third-party-automation':{sogPilgrim:{generated:true,source,nonce}}}});
+ const use={nonce:'same-use',operation:'tree'};
+ const mark=(source,nonce,extra={})=>({flags:{'pf2e-third-party-automation':{sogPilgrim:{generated:true,source,nonce,...extra}}}});
  const game={messages:new Map(),actors:new Map()};
  game.messages.set('wrong-use',{...mark(item.uuid,'another-use'),isDamageRoll:true});
  assert.equal(hasPublishedUse(item,use,game),false);
@@ -78,6 +134,11 @@ test('partial placement and unrelated cards cannot complete an uncertain activat
  assert.equal(hasPublishedUse(item,use,game),false);
  game.messages.set('committed-card',{...mark(item.uuid,use.nonce),isDamageRoll:true});
  assert.equal(hasPublishedUse(item,use,game),true);
+ const storm={nonce:'storm-use',operation:'storm'};
+ game.messages.set('storm-damage',{...mark(item.uuid,storm.nonce),isDamageRoll:true});
+ assert.equal(hasPublishedUse(item,storm,game),false);
+ game.messages.set('storm-notice',{flags:{'pf2e-third-party-automation':{sogPilgrim:{announce:true,source:item.uuid,nonce:storm.nonce}}}});
+ assert.equal(hasPublishedUse(item,storm,game),true);
 });
 
 test('internal errors are kept out of player notices',()=>{

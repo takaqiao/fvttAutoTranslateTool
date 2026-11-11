@@ -129,7 +129,7 @@ test('concurrent message hooks and a reconnected service play a hit once',async 
  assert.deepEqual(f.writes[0],{[`flags.${M}.pilgrimStrike`]:true});
 });
 
-test('only a saved native successful attack from the owned branch can play',async t=>{
+test('only a saved native attack with a consistent outcome from the owned branch can play',async t=>{
  const f=fixture(t);
  const cases=[
   message=>{message.flags.pf2e.context.outcome='failure';},
@@ -451,4 +451,45 @@ test('an animation error releases the local refresh queue and leaves native rule
  await f.media.leaves(f.item,2);await f.media.leaves(f.item,0);
  assert.deepEqual(f.errors,[error]);assert.equal(f.effects.length,0);
  assert.deepEqual({system:f.item.system,flags:f.item.flags,effect:effect.system},before);
+});
+
+test('a missed branch strike still swings and scatters leaves with its usual sound',async t=>{
+ const f=fixture(t),miss=f.message('miss');miss.flags.pf2e.context.outcome='failure';miss.rolls[0].options.degreeOfSuccess=1;
+ await f.media.strike(miss);
+ assert.deepEqual(f.sections('effect').map(section=>section.file[0]),[club,PILGRIM_MEDIA.leaves]);
+ assert.deepEqual(f.sections('sound').map(section=>section.file[0]),[PILGRIM_MEDIA.natureSound]);
+ const fumble=f.message('fumble');fumble.flags.pf2e.context.outcome='criticalFailure';fumble.rolls[0].options.degreeOfSuccess=0;
+ await f.media.strike(fumble);assert.equal(f.played.length,2);
+});
+
+test('scarf activation wraps the wearer in silver strands with its own sound',async t=>{
+ const f=fixture(t);await f.media.scarfCast(f.item,{scene:f.scene});
+ assert.equal(PILGRIM_MEDIA.scarfStrands,'modules/jb2a_patreon/Library/Generic/Marker/EnergyStrands_01_Regular_Grey_600x600.webm');
+ assert.deepEqual(f.sections('effect').map(section=>section.file[0]),[PILGRIM_MEDIA.scarfStrands]);
+ assert.deepEqual(f.sections('effect')[0].attachTo,[f.source.object,{bindAlpha:true,bindVisibility:true}]);
+ assert.deepEqual(f.sections('sound').map(sound=>({file:sound.file[0],volume:sound.volume[0],fade:sound.fadeOutAudio[0]})),[{file:'modules/psfx-patreon/library/cantrips/mending/v1/mending-with-cast-001.ogg',volume:0.4,fade:200}]);
+ assert.deepEqual(f.playOptions,[undefined]);
+});
+
+test('a requester plays activation media only when asked to and only on its own scene',async t=>{
+ const f=fixture(t),tree={kind:'tree',scene:f.scene,position:{x:100,y:100},nonce:'tree'};f.game.user={id:'player'};
+ await f.media.release(f.item,f.target);await f.media.scarfCast(f.item,{scene:f.scene});await f.media.area(f.item,tree);
+ assert.equal(f.played.length,0);assert.equal(f.media.shows(f.scene),false);
+ await f.media.release(f.item,f.target,{requester:true});await f.media.scarfCast(f.item,{scene:f.scene,requester:true});await f.media.area(f.item,{...tree,requester:true});
+ assert.equal(f.played.length,3);assert.deepEqual(f.playOptions,[undefined,undefined,undefined]);
+ await f.media.scarfCast(f.item,{scene:{id:'elsewhere'},requester:true});assert.equal(f.played.length,3);
+ f.game.user={id:'gm'};assert.equal(f.media.shows(f.scene),true);assert.equal(f.media.shows({id:'elsewhere'}),false);
+});
+
+test('a scarf in a haunted encounter shows drifting ends and a silver light until the context ends',async t=>{
+ const f=fixture(t),option='wonton-ghost-scarf:haunt-context';
+ f.item.type='equipment';f.item.flags.world.sogWontonNativeAutomation.key='ghost-scarf';f.item.flags.world.sogB2Ch2Resources.originalSlug='ghost-scarf';
+ f.actor.rollOptions.all[option]=true;await f.media.reconcile(f.actor);
+ assert.equal(f.effects.length,2);
+ assert.ok(f.effects.every(effect=>effect.name[0]===`${M}.pilgrim.${f.item.uuid}.haunt`&&effect.persist&&effect.temporary&&effect.loopProperty));
+ assert.ok(f.effects.some(effect=>effect.file?.[0]===PILGRIM_MEDIA.scarfDrift));
+ assert.ok(f.effects.every(effect=>effect.attachTo[1].bindVisibility===true));
+ f.actor.rollOptions.all[option]=false;await f.media.reconcile(f.actor);assert.equal(f.effects.length,0);
+ f.actor.rollOptions.all[option]=true;await f.media.reconcile(f.actor);assert.equal(f.effects.length,2);
+ await f.media.deleted(f.item);assert.equal(f.effects.length,0);
 });
