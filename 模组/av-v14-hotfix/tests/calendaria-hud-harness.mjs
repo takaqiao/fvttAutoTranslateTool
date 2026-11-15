@@ -4,11 +4,12 @@ import {nativeHooks} from './hook-harness.mjs';
 import {timestampEnvironment} from './timestamps-harness.mjs';
 
 const fixture=JSON.parse(readFileSync(new URL('./fixtures/calendaria-hud.json',import.meta.url),'utf8'));
-export const TICK='calendaria.visualTick',WORLD='calendaria.worldTimeUpdated';
+export const TICK='calendaria.visualTick',WORLD='calendaria.worldTimeUpdated',HUD_SOURCE=fixture.HUD;
 
 // Run the captured HUD, including its private methods. Layout and canvas drawing
 // are external here; Text replacement counts are verified in the browser too.
-export function calendariaEnvironment({source=fixture.HUD}={}){
+// `aliases` gives a module binding a second name, for a source whose bindings were renamed.
+export function calendariaEnvironment({source=fixture.HUD,aliases={}}={}){
   const {Node,Text,Element:BaseElement}=timestampEnvironment(),Hooks=nativeHooks();
   const state={time:'09:00',date:'Day 1',sky:0,timers:[],renders:[],format:null,attach:null};
   class Element extends BaseElement{
@@ -53,10 +54,12 @@ export function calendariaEnvironment({source=fixture.HUD}={}){
     bs:value=>value,Ts:()=>{state.sky++;return [];},vs:()=>0,he:()=>false,
     foundry:{applications:{ux:{Draggable:{implementation:class{_onDragMouseDown(){}}}}}},
     window:{innerWidth:1200,innerHeight:800},setTimeout:fn=>{state.timers.push(fn);return state.timers.length;},clearTimeout(){}};
+  for(const [alias,name] of Object.entries(aliases))globals[alias]=globals[name];
   const HUD=vm.runInNewContext(`(${source})`,globals),registrations=[];
   const libWrapper={
+    // Like libWrapper, resolve the target when registering; a test may install another HUD class.
     register(moduleId,target,fn,type){
-      const descriptor=Object.getOwnPropertyDescriptor(HUD.prototype,'_onRender');
+      const prototype=runtime.CALENDARIA.apps.HUD.prototype,descriptor=Object.getOwnPropertyDescriptor(prototype,'_onRender');
       const data={package_info:{id:moduleId},fn,type};
       let chain=descriptor.get?._lib_wrapper,get=descriptor.get;
       if(!chain){
@@ -66,7 +69,7 @@ export function calendariaEnvironment({source=fixture.HUD}={}){
           return fn?Reflect.apply(fn,this,[chain._wrapped.bind(this),...args]):Reflect.apply(chain._wrapped,this,args);
         }
         get=()=>handler;get._lib_wrapper=chain;
-        Object.defineProperty(HUD.prototype,'_onRender',{get,set(value){chain._wrapped=value;},configurable:true});
+        Object.defineProperty(prototype,'_onRender',{get,set(value){chain._wrapped=value;},configurable:true});
       }
       chain.records.push(data);
       registrations.push({moduleId,target,fn,type,chain,descriptor,get,data});return registrations.length;

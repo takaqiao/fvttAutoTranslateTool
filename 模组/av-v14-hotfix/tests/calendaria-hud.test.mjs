@@ -1,11 +1,26 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {existsSync} from 'node:fs';
-import {calendariaEnvironment,TICK,WORLD} from './calendaria-hud-harness.mjs';
+import vm from 'node:vm';
+import {createHash} from 'node:crypto';
+import {existsSync,readFileSync} from 'node:fs';
+import {calendariaEnvironment,HUD_SOURCE,TICK,WORLD} from './calendaria-hud-harness.mjs';
 import {adaptNativeHooks} from '../scripts/native-hook-adapter.mjs';
 
 const url=new URL('../scripts/patches/calendaria-hud.mjs',import.meta.url);
 const install=existsSync(url)?(await import(url)).installCalendariaHudPatch:()=>({status:'missing'});
+const sourceOf=fn=>Function.prototype.toString.call(fn);
+const METHODS=['_onRender','_onClose'];
+// Each edit changes what HUD#_onRender or HUD#_onClose does, in any Calendaria build.
+const LOGIC_EDITS={
+  'render registers the tick callback on every render':source=>source.replace(/this\.(#[\w$]+)\|\|\(this\.\1=Hooks\.on\(([\w$]+)\.VISUAL_TICK/,'(this.$1=Hooks.on($2.VISUAL_TICK'),
+  'render registers the world time callback with once':source=>source.replace(/Hooks\.on\(([\w$]+)\.WORLD_TIME_UPDATED/,'Hooks.once($1.WORLD_TIME_UPDATED'),
+  'close leaves the tick callback registered':source=>source.replace(/Hooks\.off\(([\w$]+)\.VISUAL_TICK,this\.#[\w$]+\),/,'')
+};
+function assertNotInstalled(env,name){
+  const result=install({runtime:env.runtime});
+  assert.equal(result.status,'skipped',name);assert.equal(result.reason,'hud-source-mismatch',name);
+  assert.equal(env.registrations.length,0,name);
+}
 function patched(options){
   const env=calendariaEnvironment(options),reports=[];
   const result=install({runtime:env.runtime,report:report=>reports.push(report)});
@@ -121,6 +136,71 @@ test('unknown HUD or Hooks functions cannot install',()=>{
     assert.notEqual(install({runtime:env.runtime}).status,'installed',mode);assert.equal(env.registrations.length,0,mode);
   }
 });
+
+test('renamed module bindings and private members still install and adapt',async()=>{
+  // As a new build does: two private members trade names and two module bindings get new ones.
+  const source=HUD_SOURCE.replace(/#(?:er|tr)(?![\w$])/g,name=>name==='#er'?'#tr':'#er')
+    .replace(/(?<![\w$.#])E(?=\.)/g,'Q').replace(/(?<![\w$.#])hr(?=\()/g,'Zr');
+  const env=calendariaEnvironment({source,aliases:{Q:'E',Zr:'hr'}}),native=calendariaEnvironment().HUD.prototype;
+  for(const key of METHODS)assert.notEqual(sourceOf(env.HUD.prototype[key]),sourceOf(native[key]),key);
+  const result=install({runtime:env.runtime});assert.equal(result.status,'installed',JSON.stringify(result));
+  env.render();env.tick();assert.equal(env.hud.element.nodes['.time'].writes,0);assert.equal(result.stats.adapted,2);
+  await env.hud._onClose({});assert.equal(env.Hooks.events[TICK].length+env.Hooks.events[WORLD].length,0);
+});
+
+test('a render or close method with changed logic cannot install',()=>{
+  const native=calendariaEnvironment().HUD.prototype;
+  for(const [name,edit] of Object.entries(LOGIC_EDITS)){
+    const env=calendariaEnvironment({source:edit(HUD_SOURCE)});
+    assert.ok(METHODS.some(key=>sourceOf(env.HUD.prototype[key])!==sourceOf(native[key])),name);
+    assertNotInstalled(env,name);
+  }
+});
+
+// Released calendaria.mjs builds are not kept in this repository; each variable names a saved
+// copy, identified by its file hash so the test cannot silently read a different build.
+const calendariaBuilds=[
+  {version:'1.4.8',env:'CALENDARIA_148_BUNDLE',bundle:'e61fae03050b57933708f5c5a78af628a9f572e164f543d31038d803d4049d13',renamed:false},
+  {version:'1.4.10',env:'CALENDARIA_1410_BUNDLE',bundle:'f48803e81141cd8daf8a2506c4653c9087ca86d2de1f4261c4703e5ba3466494',renamed:true}];
+// The HUD class is the shortest slice from its declaration that compiles. Evaluating it runs only
+// its static fields: its base is the harness Application, every other free name an inert stand-in.
+function bundledHud(bundle,Application,edit=source=>source){
+  const start=bundle.lastIndexOf('class ',bundle.indexOf('id:"calendaria-hud"'));
+  for(let end=bundle.indexOf('}',start);end!==-1&&end<start+60000;end=bundle.indexOf('}',end+1)){
+    const source=bundle.slice(start,end+1);
+    try{new vm.Script(`(${source})`);}catch{continue;/* The slice still ends inside the class body. */}
+    const [,mixin,base]=source.match(/^class [\w$]+ extends\(([\w$]+)\(([\w$]+)\)\)\{/);
+    const names=new Map([[mixin,Base=>Base],[base,Application]]);
+    const inert=new Proxy(function(){'use strict';},{get:(_target,key)=>key===Symbol.toPrimitive?()=>'':inert,apply:()=>inert,construct:()=>inert});
+    const scope=new Proxy({},{has:(_target,key)=>typeof key==='string',get:(_target,key)=>typeof key!=='string'?undefined:names.has(key)?names.get(key):inert});
+    return vm.runInNewContext(`with(scope){(${edit(source)})}`,{scope});
+  }
+  assert.fail('Calendaria HUD class does not compile');
+}
+
+for(const {version,env:variable,bundle:digest,renamed} of calendariaBuilds){
+  const path=process.env[variable];
+  test(`Calendaria ${version} HUD is recognised by its render and close shapes`,{skip:path?false:`${variable} is not set`},()=>{
+    const bytes=readFileSync(path);
+    assert.equal(createHash('sha256').update(bytes).digest('hex'),digest);
+    const text=bytes.toString('utf8'),env=calendariaEnvironment(),HUD=bundledHud(text,env.Application),{prototype}=HUD;
+    const native=Object.fromEntries(METHODS.map(key=>[key,sourceOf(prototype[key])]));
+    for(const key of METHODS){
+      assert.ok(text.includes(native[key]),key);
+      // The fixture is 1.4.8's class; 1.4.10 renames these methods' minified names and nothing else.
+      assert.equal(native[key]!==sourceOf(env.HUD.prototype[key]),renamed,key);
+    }
+    const original=prototype._onRender;env.runtime.CALENDARIA.apps.HUD=HUD;
+    const result=install({runtime:env.runtime});assert.equal(result.status,'installed',JSON.stringify(result));
+    assert.equal(Object.getOwnPropertyDescriptor(prototype,'_onRender').get._lib_wrapper._wrapped,original);
+    result.restore();
+    for(const [name,edit] of Object.entries(LOGIC_EDITS)){
+      const env=calendariaEnvironment(),changed=bundledHud(text,env.Application,edit);
+      assert.ok(METHODS.some(key=>sourceOf(changed.prototype[key])!==native[key]),name);
+      env.runtime.CALENDARIA.apps.HUD=changed;assertNotInstalled(env,name);
+    }
+  });
+}
 
 test('an unknown or asynchronous later render chain remains unadapted',async()=>{
   for(const mode of ['wrapper','listener','method','base','async']){

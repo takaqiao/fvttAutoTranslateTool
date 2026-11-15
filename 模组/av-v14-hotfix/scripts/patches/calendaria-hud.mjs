@@ -1,5 +1,14 @@
+import {normalizeSourceShape} from '../source-shape.mjs';
+import {sha256Fallback} from '../source-hash.mjs';
+
 const TARGET='CALENDARIA.apps.HUD.prototype._onRender';
 const EVENTS=['calendaria.visualTick','calendaria.worldTimeUpdated'];
+// HUD#_onRender registers the two callbacks this patch adapts, and HUD#_onClose removes them by
+// hook ID. Every Calendaria build renames its minified bindings and private members, so both
+// methods are compared by shape (see source-shape.mjs): a rename keeps the patch, a change in their
+// logic stands it down. The reviewed shapes are those of 1.4.8, unchanged in 1.4.10.
+const RENDER_SHAPES=['ffe72b505cedaeaa40bdd9f4af1f5a0a7c70a52841fc39e6d23060ff75396adb'];
+const CLOSE_SHAPES=['9d8f57c838d0f11be120e1e1ab357738b509e8a52462cb4f090a3924b6d476a4'];
 const LABELS=[
   ['.time',[':scope > .center > .time-wrapper > span.time',':scope > .center > .slice > .slice-overlay > span.time']],
   ['.date',[':scope > .section.left > .info-panel > span.date']]
@@ -11,6 +20,13 @@ function fingerprint(fn){
   let hash=2166136261;
   for(const character of Reflect.apply(functionToString,fn,[]))hash=Math.imul(hash^character.charCodeAt(0),16777619);
   return (hash>>>0).toString(16).padStart(8,'0');
+}
+function shaped(fn,shapes){
+  if(typeof fn!=='function')return false;
+  let shape;
+  try{shape=normalizeSourceShape(Reflect.apply(functionToString,fn,[]));}
+  catch(error){if(error.message==='source-shape-unsupported')return false;throw error;}
+  return shapes.includes(sha256Fallback(shape));
 }
 function sameDescriptor(left,right){
   return !!left&&!!right&&Reflect.ownKeys(left).length===Reflect.ownKeys(right).length
@@ -127,8 +143,8 @@ export function installCalendariaHudPatch({moduleId='av-v14-hotfix',runtime=glob
     ||typeof runtime.WeakRef!=='function'&&typeof WeakRef!=='function'||!inheritedText(runtime))return finish('unsupported-runtime');
   let original;
   try{original=originalRender(prototype);}catch{return finish('skipped','hud-source-mismatch');}
-  if(fingerprint(HUD)!=='66ad2b08'||fingerprint(original)!=='ba49bfc8'
-    ||fingerprint(Object.getOwnPropertyDescriptor(prototype,'_onClose')?.value)!=='59073946')return finish('skipped','hud-source-mismatch');
+  if(!shaped(original,RENDER_SHAPES)||!shaped(Object.getOwnPropertyDescriptor(prototype,'_onClose')?.value,CLOSE_SHAPES))
+    return finish('skipped','hud-source-mismatch');
   if(!knownHooks(Hooks))return finish('skipped','core-hooks-fingerprint-mismatch');
   const hookDescriptors=Object.fromEntries(['events','on','callAll'].map(key=>[key,Object.getOwnPropertyDescriptor(Hooks,key)]));
   const parent=Object.getPrototypeOf(prototype),parents=methodChain(parent,'_onRender'),close=methodChain(prototype,'_onClose');

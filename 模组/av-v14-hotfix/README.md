@@ -1,10 +1,21 @@
-# FVTT v14 Local Hotfix 0.6.34
+# FVTT v14 Local Hotfix 0.6.35
 
 当前源码及隔离回归基线为 Foundry **14.369**、PF2e **8.6.1**、Dice So Nice **6.4.4**、BBMM **1.4.11**、Sundry **1.11.0**、Summons Assistant **2.20.3**；0.6.34 新增的三项按 Foundry 14.370、PF2e 8.7.0、Item Activations 14.3.3 核过。清单保留最低核心版本 14.367，已验证标签自 0.6.34 起只写大版本 `14`，没有核心最高版本限制。运行时不按 Foundry、PF2e 或第三方模组的版本号决定装不装。每项可在世界设置中关闭，刷新后生效。该装而没装上的修正会在控制台输出一行警告并写明原因；全部状态和各项实际生效的次数见：
 
 ```js
 game.modules.get('av-v14-hotfix').api.status()
 ```
+
+## 0.6.35：Calendaria HUD 改按方法形状认
+
+Calendaria 1.4.10 重新压缩打包，HUD 类的压缩名和私有成员名都换了。`calendariaHud` 原先比对整个 HUD 类和 `_onRender`、`_onClose` 的源码指纹，在 1.4.10 上因此报告 `skipped / hud-source-mismatch`，HUD 退回原生。修正本身没有改，只改装不装的判断：
+
+- 不再比对 HUD 类的源码，只看这项修正实际依赖的两个方法：`_onRender` 注册它接管的 visual tick 和世界时间两条回调，`_onClose` 按 hook ID 移除这两条。
+- 两个方法按形状比（`scripts/source-shape.mjs`，与 Extra 用的同一套）：逐个词法单元比，压缩短名（三个字符以内的标识符）和私有成员名只要一一对应地换名就算相同；属性名、字符串、较长的名字和标点照原样比。只是重新压缩的构建照常装上；方法里的逻辑改了（比如每次渲染都注册回调、改用 `Hooks.once`、关闭时不再移除回调），仍报告 `skipped / hud-source-mismatch` 并在控制台警告，HUD 保持原生行为。
+- 登记的形状取自 1.4.8，1.4.10 的两个方法与它一致。不比对 Calendaria 的版本号。
+- 其余检查不变：核心 Hooks 契约、libWrapper 包装链、每次渲染新注册的两条回调记录，以及时间、日期节点在 HUD 模板里的位置。
+
+核验：行为回归照旧用 1.4.8 的 HUD 类；另用它造了两类变体：只换名（两个私有成员互换名字、两个模块级绑定改名）的照常装上并接管回调，改了上述逻辑的装不上。设了 `CALENDARIA_148_BUNDLE`、`CALENDARIA_1410_BUNDLE` 时，再从原版 `calendaria.mjs` 里取出 1.4.8 和 1.4.10 的 HUD 类，两版都能装上，加上同样的逻辑改动后都装不上。1.4.10 只核对了安装判断，HUD 的实际显示没有在 Foundry 里跑过。
 
 ## 0.6.34：退役两处，新增三处 PF2e 8.7.0 与 Item Activations 修正
 
@@ -326,6 +337,7 @@ Sundry 与共享回合/奴仆清理使用已验证的原生 Hooks 记录适配�
 | Item Activations | 没有模组版本门槛，不读模组源码；按 `grantedBy` flag 认动作，只改名字和特征。 |
 | TokenImage 缩放 | 没有 PF2e 版本门槛，不比对哈希；按词法核对 `applyChange` 的守卫、`switch`、缩放分支和末尾调用，压缩名按位置比；已是 #23641 的形状就不装。 |
 | 战斗形态体型 | 没有 PF2e 版本门槛，不比对源码；要求 `BattleForm` 原型自己的 `afterPrepareData`，只改值正好是 PF2e 按旧体型算出的那五条队列项。 |
+| Calendaria HUD | 没有 Calendaria 版本门槛；自 0.6.35 起不比对 HUD 类，`_onRender`、`_onClose` 按形状比，压缩短名和私有成员名换了也认。核心 Hooks 仍按函数指纹核对；包装链、新注册的两条回调和时间、日期节点在每次渲染和回调时检查。 |
 
 ## 安装、验证与回退
 
@@ -333,7 +345,7 @@ Sundry 与共享回合/奴仆清理使用已验证的原生 Hooks 记录适配�
 
 安装清单使用 [av-v14-hotfix-v0.6.29 的 module.json](https://github.com/takaqiao/fvttAutoTranslateTool/releases/download/av-v14-hotfix-v0.6.29/module.json)，下载为同一标签的 `av-v14-hotfix-0.6.29.zip`。本仓库包含多个模组，不能用全仓库 `releases/latest/download` 作为此模组的清单。
 
-运行 `node --test tests/*.test.mjs` 验证隔离回归。原生函数摘录及其来源记录在 `tests/fixtures`；音频、设置操作符等测试需本地 Foundry 安装，可用 `FVTT_NATIVE_APP` 指定 `resources/app`。具体运行命令、数量、跳过项和部署哈希以本次修复回执为准。
+运行 `node --test tests/*.test.mjs` 验证隔离回归。原生函数摘录及其来源记录在 `tests/fixtures`；音频、设置操作符等测试需本地 Foundry 安装，可用 `FVTT_NATIVE_APP` 指定 `resources/app`。Calendaria 原版源码的两项用 `CALENDARIA_148_BUNDLE`、`CALENDARIA_1410_BUNDLE` 指向 1.4.8、1.4.10 的 `calendaria.mjs`（按文件 SHA-256 核对），未设置时跳过；这两个文件不放进仓库。具体运行命令、数量、跳过项和部署哈希以本次修复回执为准。
 
 本安装包只包含 Hotfix 自己的文件。另有第三方自动化的 GM 举盾结算修复、Sequencer 4.2.3 动画取消修复和 Trigger Engine 来源类型检查，单独记录与部署，不由此安装包代替。Sequencer 4.3.0 的 `_initialize` 与 `_createSprite` 已自带初始化取消保护，使用 4.3.0 的世界不需要该文件补丁。Narrator、Party Automation、Prime 及世界地图资源不属于本包。
 

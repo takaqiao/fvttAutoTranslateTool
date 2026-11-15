@@ -129,3 +129,9 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
+
+## 0.6.35 changes
+
+`calendaria-hud.json` still holds Calendaria 1.4.8's HUD class as the runtime reports it. Since 0.6.35 the runtime no longer fingerprints that class; it compares the shapes of `_onRender` and `_onClose` (`scripts/source-shape.mjs`). The regressions run the class unchanged, with two private members trading names and two module bindings renamed, and with three edits to the logic of those two methods.
+
+Two more tests read the released bundles named by `CALENDARIA_148_BUNDLE` and `CALENDARIA_1410_BUNDLE` and check each file's SHA-256. Each takes the HUD class as the shortest slice from its declaration that compiles and evaluates it; only its static fields run, with the harness Application as base and an inert stand-in for every other free name. The installer runs on that class and on the same three edits. The tests are skipped when the variables are unset; the bundles are not part of this repository.
