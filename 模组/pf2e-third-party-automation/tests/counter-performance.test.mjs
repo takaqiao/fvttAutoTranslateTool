@@ -15,7 +15,8 @@ function document(data){
 function row(total,die=10,success='failure'){
  return {die,statistic:'will',value:total,success,private:false,rerolled:false,dosAdjustments:{},modifiers:[],notes:[],unadjustedOutcome:success,roll:JSON.stringify({class:'CheckRoll',total,evaluated:true,options:{type:'saving-throw',degreeOfSuccess:['criticalFailure','failure','success','criticalSuccess'].indexOf(success)},terms:[{class:'Die',faces:20,results:[{result:die,active:true}],total:die}]})};
 }
-function fixture({answers=['singing','source:null','yes','yes','confirm'],total=25,die=12,applied={},cancelRoll=false}={}){
+const BOTH=['Scene.scene.Token.a','Scene.scene.Token.b'];
+function fixture({answers=[],setup={performance:'singing',targets:BOTH},itemTraits=[],total=25,die=12,applied={},cancelRoll=false}={}){
  assert.equal(typeof module.createCounterPerformance,'function','Counter Performance provider must expose its native Cast entry');
  const gm={id:'gm',isGM:true,active:true},user={id:'owner',isGM:false,active:true};
  const actor=document({id:'bard',uuid:'Actor.bard',name:'Bard',system:{resources:{focus:{value:2}}},items:new Map(),testUserPermission:u=>['gm','owner'].includes(u?.id)});
@@ -25,7 +26,8 @@ function fixture({answers=['singing','source:null','yes','yes','confirm'],total=
  const source=document({id:'source',uuid:'ChatMessage.source',blind:false,whisper:[],content:'Enemy spell',flags:{[TOOL]:{targetHelper:helper}}});
  const message=document({id:'cast',uuid:'ChatMessage.cast',author:user,speaker:{actor:actor.id},blind:false,whisper:[],rolls:[],flags:{pf2e:{origin:{uuid:item.uuid,actor:actor.uuid,type:'spell'}},[ID]:{nativeCast:{id:'payment',actorUuid:actor.uuid,itemUuid:item.uuid,userId:user.id}}}});
  const messages=new Map([[source.id,source],[message.id,message]]),game={world:{id:'bob-2'},user,users:new Map([[gm.id,gm],[user.id,user]]),actors:new Map([[actor.id,actor]]),messages,system:{id:'pf2e',version:'8.6.1'},modules:new Map([[TOOL,{active:true,version:'3.59.2'}]])};game.users.activeGM=gm;
- const rolls=[],payments=[],casts=[],choices=[];
+ const items=new Map([['Actor.enemy.Item.spell',{name:'恐惧术 Fear',system:{traits:{value:itemTraits}}}]]);
+ const rolls=[],payments=[],casts=[],choices=[],setups=[];
  const nativeCasts={async ensurePaid(context){payments.push(context);return {id:'payment'};}};
  const runNative=async(context,request)=>{
   rolls.push(request);if(cancelRoll)return {status:'cancelled'};
@@ -33,12 +35,48 @@ function fixture({answers=['singing','source:null','yes','yes','confirm'],total=
   const check=document({id:'performance',uuid:'ChatMessage.performance',author:user,speaker:{actor:actor.id},blind:false,whisper:[],flags:{pf2e:{context:{type:'skill-check',options:['check:statistic:performance']}}},rolls:[roll]});messages.set(check.id,check);return {status:'rolled',check};
  };
  let executeNative=runNative;
- const provider=module.createCounterPerformance({game,nativeCasts,runNative:(...args)=>executeNative(...args),fromUuid:async uuid=>tokens.get(uuid)??messages.get(uuid.split('.').at(-1)),chooseCast:async options=>{choices.push(options);return answers.shift();}});
+ const provider=module.createCounterPerformance({game,nativeCasts,runNative:(...args)=>executeNative(...args),fromUuid:async uuid=>tokens.get(uuid)??items.get(uuid)??messages.get(uuid.split('.').at(-1)),chooseCast:async options=>{choices.push(options);return answers.shift();},chooseSetup:async options=>{setups.push(options);return typeof setup==='function'?setup(options):clone(setup);}});
  const ctx={actor,item,entry,user,message};
  const cast=async()=>provider.interceptCast({item,entry,options:{}},async()=>{casts.push('cast');actor.system.resources.focus.value--;message.flags[ID].counterPerformanceInput=provider.captureCast(item);return message;});
  const execute=async()=>{game.user=gm;return provider.executeUsage(ctx);};
- return {provider,actor,item,entry,user,gm,game,ctx,message,source,tokens,rolls,payments,casts,choices,cast,execute,setRunNative:fn=>executeNative=fn,runNative};
+ return {provider,actor,item,entry,user,gm,game,ctx,message,source,tokens,rolls,payments,casts,choices,setups,cast,execute,setRunNative:fn=>executeNative=fn,runNative};
 }
+
+test('one save card skips the card chooser and the form names the trigger, not a message ID',async()=>{
+ const f=fixture();f.actor.isAllyOf=actor=>actor.id==='a';await f.cast();
+ assert.equal(f.choices.length,0);assert.equal(f.setups.length,1);
+ const form=f.setups[0];
+ assert.match(form.trigger,/恐惧术 Fear/);assert.match(form.trigger,/意志豁免/);assert.doesNotMatch(form.trigger,/source/);
+ assert.deepEqual(form.targets.map(row=>[row.uuid,row.checked]),[['Scene.scene.Token.a',true],['Scene.scene.Token.b',false]]);
+ assert.match(form.targets[0].label,/原豁免 17，失败/);assert.match(form.targets[1].label,/不是盟友/);
+ assert.equal(form.performances.length,9);assert.equal(f.casts.length,1);
+});
+
+test('an auditory trigger lists only auditory performances and refuses a visual one',async()=>{
+ const f=fixture({itemTraits:['auditory','mental'],setup:{performance:'dance',targets:BOTH}});
+ await assert.rejects(f.cast(),/不符/);
+ const values=f.setups[0].performances.map(choice=>choice.value);
+ assert.ok(values.includes('singing'));assert.ok(!values.includes('dance'));assert.match(f.setups[0].hint,/听觉/);
+ assert.equal(f.casts.length,0);
+});
+
+test('several save cards are offered by name and the chosen one is bound',async()=>{
+ const f=fixture({answers:['second:null']});
+ const helper=structuredClone(f.source.flags[TOOL].targetHelper);helper.saveVariants.null.statistic='reflex';
+ const second={...f.source,id:'second',uuid:'ChatMessage.second',flags:{[TOOL]:{targetHelper:helper}}};
+ f.game.messages.set(second.id,second);
+ await f.cast();
+ const labels=f.choices[0].choices.map(choice=>choice.label);
+ assert.ok(labels.every(label=>!/source|second/.test(label)),labels.join(' | '));
+ assert.match(labels[0],/反射豁免/);assert.match(labels[1],/意志豁免/);
+ assert.equal(f.message.flags[ID]?.counterPerformanceInput?.sourceMessageId,'second');
+});
+
+test('the next cast preselects the performance used last time',async()=>{
+ const f=fixture({setup:{performance:'strings',targets:BOTH}});await f.cast();
+ f.message.flags[ID].counterPerformanceInput=undefined;await f.cast();
+ assert.equal(f.setups[1].performance,'strings');
+});
 
 test('native Cast binds selected original saves, rolls Performance once and updates only the lower total',async()=>{
  const f=fixture(),before=clone(f.source.flags[TOOL].targetHelper.saveVariants.null.saves);
@@ -60,10 +98,10 @@ test('native Cast binds selected original saves, rolls Performance once and upda
  assert.equal(f.message.flags[ID].counterPerformance.status,'done');
 });
 
-test('closing pre-cast choices or declining the trigger never calls native Cast',async()=>{
- for(const answers of [[null],['singing','source:null','yes','yes','cancel']]){
-  const f=fixture({answers});await f.cast();assert.equal(f.casts.length,0);assert.equal(f.actor.system.resources.focus.value,2);assert.equal(f.provider.captureCast(f.item),undefined);
- }
+test('closing the form or ticking nobody never calls native Cast',async()=>{
+ const closed=fixture({setup:null});await closed.cast();
+ const empty=fixture({setup:{performance:'singing',targets:[]}});await assert.rejects(empty.cast(),/没有勾选/);
+ for(const f of [closed,empty]){assert.equal(f.casts.length,0);assert.equal(f.actor.system.resources.focus.value,2);assert.equal(f.provider.captureCast(f.item),undefined);}
 });
 
 test('original natural 20 success is not worsened by a higher Performance total',async()=>{
@@ -84,7 +122,7 @@ test('Performance natural 20 and natural 1 use their own dice with original save
 });
 
 test('visual performance uses current native variant and traits, and only explicitly selected targets change',async()=>{
- const f=fixture({answers:['dance','source:null','yes','no','confirm']});await f.cast();await f.execute();
+ const f=fixture({setup:{performance:'dance',targets:['Scene.scene.Token.a']}});await f.cast();await f.execute();
  assert.ok(f.rolls[0].traits.includes('move'));assert.ok(f.rolls[0].traits.includes('visual'));assert.ok(!f.rolls[0].traits.includes('auditory'));
  assert.equal(f.source.flags[ID].counterPerformance.cast.results.length,1);
 });
@@ -108,7 +146,7 @@ test('a second queued cast cannot roll again for original saves already resolved
 test('display cards and consume:false bypass settlement and never acquire a payment',async()=>{
  const f=fixture();delete f.message.flags[ID].nativeCast;
  await f.provider.interceptCast({item:f.item,entry:f.entry,options:{consume:false}},async()=>{f.casts.push('display');});
- await f.execute();assert.equal(f.rolls.length,0);assert.equal(f.payments.length,0);assert.equal(f.choices.length,0);
+ await f.execute();assert.equal(f.rolls.length,0);assert.equal(f.payments.length,0);assert.equal(f.choices.length,0);assert.equal(f.setups.length,0);
 });
 
 test('a same-name spell from a different source is not intercepted',async()=>{
@@ -154,7 +192,7 @@ test('another Toolbelt version still updates the selected original save',async()
 
 test('private saves, an inactive Toolbelt and missing original dice cannot be selected',async()=>{
  for(const change of [f=>f.source.blind=true,f=>f.game.modules.get(TOOL).active=false,f=>f.source.flags[TOOL].targetHelper.saveVariants.null.saves={}]){
-  const f=fixture();change(f);await assert.rejects(f.cast(),/原豁免|Toolbelt/);assert.equal(f.casts.length,0);
+  const f=fixture();change(f);await assert.rejects(f.cast(),/豁免|Toolbelt/);assert.equal(f.casts.length,0);
  }
 });
 
