@@ -1,10 +1,22 @@
-# FVTT v14 Local Hotfix 0.6.35
+# FVTT v14 Local Hotfix 0.6.36
 
 当前源码及隔离回归基线为 Foundry **14.369**、PF2e **8.6.1**、Dice So Nice **6.4.4**、BBMM **1.4.11**、Sundry **1.11.0**、Summons Assistant **2.20.3**；0.6.34 新增的三项按 Foundry 14.370、PF2e 8.7.0、Item Activations 14.3.3 核过。清单保留最低核心版本 14.367，已验证标签自 0.6.34 起只写大版本 `14`，没有核心最高版本限制。运行时不按 Foundry、PF2e 或第三方模组的版本号决定装不装。每项可在世界设置中关闭，刷新后生效。该装而没装上的修正会在控制台输出一行警告并写明原因；全部状态和各项实际生效的次数见：
 
 ```js
 game.modules.get('av-v14-hotfix').api.status()
 ```
+
+## 0.6.36：Toolbelt 拆分叠放物品不再逐行强制排版
+
+新开关 `toolbeltSplitLayout`，默认开启，在 `setup` 安装，关闭后刷新生效。Toolbelt 没启用时报告 `skipped / module-inactive`。不改 Toolbelt 的文件，也不包它的方法。
+
+Toolbelt 的「拆分物品」（`betterInventory.splitItem`，每个用户自己的设置）在每次 `renderActorSheet` 时把库存里数量大于 1 的数字换成拆分链接。它逐行先读数量 `<span>` 的 `innerText`，再替换这个 `<span>` 的子节点；`innerText` 要排版才能算，上一行刚改过 DOM，所以每一行都逼浏览器同步重排一次整页。亵渎堡垒一团 11-17 的世界副本里，队伍表单每次重绘这一项要 8–9 ms，每多一行叠放物品约多 0.6 ms；关掉这个设置只要 0.2–0.4 ms。
+
+这个 `<span>` 里只有 PF2e 模板写进去的数量（`{{item.quantity}}`），文本内容就是同一个值，不用排版。修正在 `setup` 注册一个 `renderActorSheet` 钩子，排在 Toolbelt 的前面（Toolbelt 在 `ready` 才注册）：拆分开着、当前用户拥有这张卡时，给库存页每个数量 `<span>` 加一个自己的 `innerText`，读的是去掉首尾空白的 `textContent`；有人写 `innerText` 时去掉这层，交给原生的写入。渲染钩子是同步跑完的，第一次加的时候排一个微任务，整串钩子（包括 Toolbelt 的）跑完就把这些属性全部删掉。拆分链接、点击拆分和数量显示都不变。
+
+状态：`toolbeltSplitLayout.stats` 的 `renders` 是接管过的渲染次数，`spans` 是加过属性的数量节点数。
+
+核验：隔离测试用按 Toolbelt 3.61.3 原样写的替身钩子和会计排版次数的替身 DOM：没有修正时 3 行叠放逼出 3 次排版，有修正时 0 次，拆分结果相同，微任务后属性都删掉。另在本机亵渎堡垒一团副本（Foundry 14.370、PF2e 8.7.1、Toolbelt 3.61.3，GM 三项都开）里量队伍表单库存页：库存 45 行（43 行叠放）时 `renderActorSheet` 从 26.4 ms 降到 0.9 ms，85 行（83 行叠放）时从 51.0 ms 降到 1.8 ms（叠放行是测试时另加的消耗品，各取 4 次平均）；副本原样的 3 行叠放从 3.4 ms 降到 0.4 ms。拆分链接数照旧，钩子顺序在 Toolbelt 之前；连续渲染 3 次，渲染钩子运行时 5 个数量节点都带着这层属性，`_render` 结束后表单和整页上都是 0 个。线上开团的效果要等下一次卡顿记录。
 
 ## 0.6.35：Calendaria HUD 改按方法形状认
 
@@ -338,6 +350,7 @@ Sundry 与共享回合/奴仆清理使用已验证的原生 Hooks 记录适配�
 | TokenImage 缩放 | 没有 PF2e 版本门槛，不比对哈希；按词法核对 `applyChange` 的守卫、`switch`、缩放分支和末尾调用，压缩名按位置比；已是 #23641 的形状就不装。 |
 | 战斗形态体型 | 没有 PF2e 版本门槛，不比对源码；要求 `BattleForm` 原型自己的 `afterPrepareData`，只改值正好是 PF2e 按旧体型算出的那五条队列项。 |
 | Calendaria HUD | 没有 Calendaria 版本门槛；自 0.6.35 起不比对 HUD 类，`_onRender`、`_onClose` 按形状比，压缩短名和私有成员名换了也认。核心 Hooks 仍按函数指纹核对；包装链、新注册的两条回调和时间、日期节点在每次渲染和回调时检查。 |
+| Toolbelt 拆分叠放 | 没有 Toolbelt 版本门槛，不读它的源码；只认 `pf2e-toolbelt.betterInventory.splitItem` 设置、库存页 `.tab.inventory .items [data-item-id] .quantity span` 这组选择器。Toolbelt 不再读 `innerText` 时修正只是空转。 |
 
 ## 安装、验证与回退
 

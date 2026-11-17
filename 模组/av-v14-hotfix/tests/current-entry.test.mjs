@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 const source=fs.readFileSync(new URL('../av-v14-hotfix.mjs',import.meta.url),'utf8').replace(/^import .*;\r?\n/gm,'').replaceAll('import.meta.url',JSON.stringify(new URL('../av-v14-hotfix.mjs',import.meta.url).href));
-const names=['prepareSundryPatch','prepareTurnLifecyclePatch','registerLegacyCompat','installGrid','installSundryPatch','installPatreonPatch','installDurationPatch','installTimestampPatch','installItemNameFastPath','installChatDeleteCoalescing','installTokenizerChatPortraitPatch','installWayfinderFogPatch','installBbmmHardLocks','registerDsnQualitySettings','installDsnQualityLocks','installTurnLifecyclePatch','installDsnChatRecovery','registerBabeleIndex','installTokenDirectoryPerformancePatch','installCalendariaHudPatch','installToolbeltCoverPatch','installBobTileCachePatch','installHudTrackerPatch','installItemActivationsCnPatch','installTokenImageScalePatch','installBattleFormSizePatch'];
+const names=['prepareSundryPatch','prepareTurnLifecyclePatch','registerLegacyCompat','installGrid','installSundryPatch','installPatreonPatch','installDurationPatch','installTimestampPatch','installItemNameFastPath','installChatDeleteCoalescing','installTokenizerChatPortraitPatch','installWayfinderFogPatch','installBbmmHardLocks','registerDsnQualitySettings','installDsnQualityLocks','installTurnLifecyclePatch','installDsnChatRecovery','registerBabeleIndex','installTokenDirectoryPerformancePatch','installCalendariaHudPatch','installToolbeltCoverPatch','installToolbeltSplitLayoutPatch','installBobTileCachePatch','installHudTrackerPatch','installItemActivationsCnPatch','installTokenImageScalePatch','installBattleFormSizePatch'];
 async function boot(disabled=[],generation=14,{globals={},modules=[],manual=false,throwOnError=true}={}){
  const hooks={},tasks=[],settings=new Map(),calls=[],phases=[],self={},logs=[];let phase='load';
  const log=level=>(...args)=>{logs.push({level,text:String(args[0]),args});if(level==='error'&&throwOnError)throw Error(args.join(' '));};
@@ -34,7 +34,7 @@ test('retired index, duration, adventure-setting, sound-stop and Reaction repair
  assert(!f.calls.includes('installDurationPatch'));assert(!f.calls.includes('registerBabeleIndex'));assert(!f.calls.includes('installSoundStopPatch'));
  assert.equal(Object.hasOwn(f.status,'babele'),false);
  for(const file of ['../scripts/patches/babele.mjs','../scripts/patches/duration.mjs','../scripts/patches/sound-stop.mjs'])assert.equal(fs.existsSync(new URL(file,import.meta.url)),false,file);
- assert.deepEqual([...f.settings.keys()].sort(),['battleFormSize','bobTileCache','calendariaHud','chat','dsnChat','dsnQualityLocks','hudTracker','itemActivationsCn','itemNames','legacy','sundry','timestamps','tokenDirectory','tokenDirectoryHidden','tokenImageScale','tokenizerChat','toolbeltCover','turnLifecycle']);
+ assert.deepEqual([...f.settings.keys()].sort(),['battleFormSize','bobTileCache','calendariaHud','chat','dsnChat','dsnQualityLocks','hudTracker','itemActivationsCn','itemNames','legacy','sundry','timestamps','tokenDirectory','tokenDirectoryHidden','tokenImageScale','tokenizerChat','toolbeltCover','toolbeltSplitLayout','turnLifecycle']);
 });
 test('every imported module file exists and exports the names the entry uses',async()=>{
  const entry=fs.readFileSync(new URL('../av-v14-hotfix.mjs',import.meta.url),'utf8');
@@ -120,7 +120,8 @@ test('hiding the token directory defers rebuilds only with its own switch',async
 
 for(const [key,installer,result] of [
  ['bobTileCache','installBobTileCachePatch',{status:'installed',stats:{pyramids:0,loadedMB:0,evictedTiles:0,unloaded:0}}],
- ['hudTracker','installHudTrackerPatch',{status:'installed',stats:{rendered:0,throttled:0,dropped:0,identical:0},adopted:false}]
+ ['hudTracker','installHudTrackerPatch',{status:'installed',stats:{rendered:0,throttled:0,dropped:0,identical:0},adopted:false}],
+ ['toolbeltSplitLayout','installToolbeltSplitLayoutPatch',{status:'installed',stats:{renders:0,spans:0}}]
 ])test(`${key} installs during setup and honors its reload switch`,async()=>{
  const f=await boot([],14,{globals:{[installer]:reporting(key,result)}});
  assert.equal(f.settings.get(key)?.default,true);
