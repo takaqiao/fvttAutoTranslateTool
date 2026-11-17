@@ -3,7 +3,13 @@ import {getSourceId} from './native-context.mjs';
 
 export const WEAPON_SURGE_SOURCE='Compendium.pf2e.spell-effects.Item.qlz0sJIvqc0FdUdr';
 export const WEAPON_SURGE_OPTION=`${MODULE_ID}:weapon-surge:`;
-const selection=item=>item?.flags?.system?.rulesSelections?.spellEffectWeaponSurge;
+const SELECTION_FLAG='spellEffectWeaponSurge';
+// PF2e stores the chosen weapon on the ChoiceSet rule source. rulesSelections only
+// exists on a prepared document, so saved snapshot data carries the rule alone.
+const selection=item=>{
+ const rule=Array.isArray(item?.system?.rules)?item.system.rules.find(rule=>rule?.key==='ChoiceSet'&&rule.flag===SELECTION_FLAG):null;
+ return rule?.selection??item?.flags?.pf2e?.rulesSelections?.[SELECTION_FLAG]??item?.flags?.system?.rulesSelections?.[SELECTION_FLAG];
+};
 const own=item=>item?.flags?.[MODULE_ID]??{};
 const copy=data=>structuredClone(data);
 export const weaponSurgeSourceData=item=>copy(item.toObject?.()??item._source??item);
