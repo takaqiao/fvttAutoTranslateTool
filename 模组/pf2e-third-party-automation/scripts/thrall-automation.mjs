@@ -22,7 +22,7 @@ export function ownedLivingThrall(token,actor){
 }
 
 /** Uses native distance without the special ten-foot melee-reach diagonal rule. */
-function inRange(source,target){
+export function inRange(source,target){
  if(!source?.object||!target?.object||source.parent?.id!==target.parent?.id)return false;
  const distance=source.object.distanceTo?.(target.object);
  return Number.isFinite(distance)&&distance>=0&&distance<=30;
