@@ -59,7 +59,7 @@ import {preserveDamageBypassOnAlter} from './native-damage-components.mjs';
 import {createMetapowerProvider,preserveMetapowerOnAlter} from './metapower/provider.mjs';
 import {createEldamonElectricityProvider,preserveElectricityOnAlter} from './eldamon-electricity-provider.mjs';
 import {createEldamonBasicSettlement} from './eldamon-basic-settlement.mjs';
-import {createFortressRuleCompatibility,buildFortressPatreonRepairs,fortressRuleCompatibilityEnabled} from './fortress-rule-compat.mjs';
+import {createFortressRuleCompatibility,buildFortressPatreonRepairs} from './fortress-rule-compat.mjs';
 import {createEldamonDataRepair} from './eldamon-data-repair.mjs';
 import {createMedicActions} from './medic-actions.mjs';
 import {createBardFamiliarProvider} from './bard-familiar.mjs';
@@ -86,7 +86,7 @@ import {createCycleCoordinator} from './cycle-coordinator.mjs';
 import {createCycleAutomation,addCycleReactionButtons} from './cycle-automation.mjs';
 import {createPanel,createUsageExecutor,executeActorAction,onFullRest,expireCycles,requireOwner,SerialActions} from './runtime.mjs';
 import {BOB2_AUTOMATION_WORLDS,DEFENSIVE_ADVANCE_WORLDS,DESPERATE_PRAYER_WORLDS,FORCE_BARRAGE_WORLDS,HALFLING_LUCK_WORLDS,REACTION_CHECKER_SETTING_WORLDS,ROARING_APPLAUSE_WORLDS,SPIRITUAL_SCAR_WORLDS} from './world-gates.mjs';
-let socket,coordinator,cycle,maintenance,providers=[];
+let socket,coordinator,cycle,maintenance,configuration,providers=[];
 const report=e=>{console.error(MODULE_ID,e);ui.notifications.error(e.message);};
 const glimpseCompat=createGlimpseCompat({game,fromUuid});
 glimpseCompat.register({Hooks});
@@ -212,9 +212,9 @@ Hooks.once('ready',async()=>{
  metapower=createMetapowerProvider({game,fromUuid,onError:report,supportsOriginalUse:item=>providers.some(p=>p.resolveAction?.(item)?.startsWith('medic:')||['glimpse:use','defensive-advance'].includes(p.resolveAction?.(item))),beforeChannel:electricity.beforeChannel,validateSelection:electricity.validateSelection,interceptDamageMessage:electricity.interceptDamageMessage,onCommittedChannel:async context=>{await voltage.onCommittedChannel(context);await electricity.onCommittedChannel(context)}});
  nativeCasts.addCastMiddleware(({item,options},native)=>options.consume===false||options.message===false?native():metapower.observe({actor:item.actor,entry:'spell'},native));
  providers=[createDualStrikeAutomation({game,fromUuid,choose,onError:report}),runeTransfer,campaign,knowledge,createAvAutomation({game,fromUuid,choose,runNative:ownerRolls.av.run,onError:report,refocusSubscribers:[treatmentRefocus,exploration.refocusSubscriber],refocusPrivacy:salubriousMessagePrivacy,explorationRefocus:exploration.refocusAdapter}),createPartyAutomation({game,fromUuid,choose,onError:report}),createSocialAutomation({game,fromUuid,choose,runNative:ownerRolls.social.run,onError:report}),createThrallAutomation({game,fromUuid,choose,onError:report}),createThrallCharge({game,fromUuid,choose,onError:report}),createReactionChecks({game,fromUuid,choose,runNative:ownerRolls.reaction.run,nativeInvocation:ownerRolls.reaction.getInvocation,reactionRestriction,onError:report,halflingLuck,nativeCheckMiddleware:(wrapped,...args)=>prayerCheck((...checked)=>familiar.interceptCheck((...accompanied)=>electricity.interceptCheck((...electric)=>metapower.interceptCheck((...next)=>weaponSurge.interceptCheck((...surged)=>salubriousCheckScope.interceptCheck(wrapped,...surged),...next),...electric),...accompanied),...checked),...args)}),fear,createScareToDeath({game,fromUuid,choose,onError:report}),combinations,deflection,destructiveBlock,disarmingBlock,disarmRegrip,shieldEvents,salubriousKiss];
- const onRulesChanged=()=>{if(fortressRuleCompatibilityEnabled(game)&&game.modules.get('patreon-v3')?.active)ui.notifications.warn('Patreon 规则已修复；请所有已在线客户端刷新一次，使规则修复生效。',{permanent:true})};
+ const onRulesChanged=()=>{if(game.modules.get('patreon-v3')?.active)ui.notifications.warn('Patreon 规则已修复；请所有已在线客户端刷新一次，使规则修复生效。',{permanent:true})};
  await createDualStrikeCriticalCompatibility({game}).initialize().catch(report);
- const configuration=createConfigurationMaintenance({game,onRulesChanged,repairs:[buildAvPatreonRepairs,buildPartyPatreonRepairs,buildKnowledgePatreonRepairs,rules=>buildFortressPatreonRepairs(rules,{game}),rules=>buildBob2SwashbucklerPatreonRepairs(rules,{game}),rules=>buildBob2RuleLinkRepairs(rules,{game}),...DEFENSIVE_ADVANCE_WORLDS.has(game.world?.id)?[buildDefensiveAdvancePatreonRepairs]:[]],settings:[{module:'pf2e-ranged-combat',key:'postActionToChat',value:2,when:g=>Array.from(g.actors.party?.members??[]).some(a=>[KNOWLEDGE_SOURCES.monster,KNOWLEDGE_SOURCES.hunt].every(source=>a.items.some(i=>i.sourceId===source))),reason:'猎物指定保留完整原生技能卡，供怪物猎手知识联动读取原始操作者与目标。'},{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:g=>REACTION_CHECKER_SETTING_WORLDS.has(g.world?.id),transform:value=>Array.isArray(value)?value.filter(slug=>slug!=='disarming-block'):value,reason:'卸武格挡改由实际格挡回执接原生自由动作缴械，避免重复提示或再次收取反应。'}]});
+ configuration=createConfigurationMaintenance({game,onRulesChanged,repairs:[buildAvPatreonRepairs,buildPartyPatreonRepairs,buildKnowledgePatreonRepairs,rules=>buildFortressPatreonRepairs(rules,{game}),rules=>buildBob2SwashbucklerPatreonRepairs(rules,{game}),rules=>buildBob2RuleLinkRepairs(rules,{game}),...DEFENSIVE_ADVANCE_WORLDS.has(game.world?.id)?[buildDefensiveAdvancePatreonRepairs]:[]],settings:[{module:'pf2e-ranged-combat',key:'postActionToChat',value:2,when:g=>Array.from(g.actors.party?.members??[]).some(a=>[KNOWLEDGE_SOURCES.monster,KNOWLEDGE_SOURCES.hunt].every(source=>a.items.some(i=>i.sourceId===source))),reason:'猎物指定保留完整原生技能卡，供怪物猎手知识联动读取原始操作者与目标。'},{module:'pf2e-reaction',key:'builtinReactionsEnabled',when:g=>REACTION_CHECKER_SETTING_WORLDS.has(g.world?.id),transform:value=>Array.isArray(value)?value.filter(slug=>slug!=='disarming-block'):value,reason:'卸武格挡改由实际格挡回执接原生自由动作缴械，避免重复提示或再次收取反应。'}]});
  await configuration().catch(report);
  providers.unshift(activityResults,weaponSurge,glimpse,...scar?[scar]:[],voltage,electricity);
  providers.push(metapower,createEldamonDataRepair({game}),createMedicActions({game,fromUuid,choose,onError:report}),familiar,defensiveAdvance,...prayer?[prayer]:[]);
@@ -309,6 +309,9 @@ Hooks.on('deleteCombat',combat=>expireCycles(combat,true).catch(e=>ui.notificati
 Hooks.on('createItem',item=>maintenance?.(item.actor).catch(report));
 Hooks.on('updateActor',actor=>{if(actor.type==='party')maintenance?.().catch(report);});
 Hooks.on('updateSetting',setting=>{if(setting.key==='pf2e.activeParty')maintenance?.().catch(report);});
+// After ready, Patreon writes its bundled rules (rulesV3, then ruleVersion3) and
+// overwrites its forceIds groups; repeat the repairs. A pass after our own write finds nothing to change.
+for(const hook of ['createSetting','updateSetting'])Hooks.on(hook,setting=>{if(['patreon-v3.rulesV3','patreon-v3.ruleVersion3'].includes(setting.key))configuration?.().catch(report);});
 Hooks.on('updateUser',(_user,changes={})=>{if(!isUnrelatedMaintenanceUpdate(changes,[...COSMETIC_UPDATE_FIELDS,'color','avatar']))maintenance?.().catch(report);});
 Hooks.on('createChatMessage',message=>cycle?.recordDamageMessage(message));
 Hooks.on('updateChatMessage',message=>{
