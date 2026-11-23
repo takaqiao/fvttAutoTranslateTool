@@ -41,6 +41,20 @@ export function buildKnowledgePatreonRepairs(original){
  return {rules,changes};
 }
 
+/** Patreon rules 212 also run huntPrey on postInfo cards. Ranged Combat intercepts
+ * every Hunt Prey card and, at chat level 2 (TPA sets it for Monster Hunter), re-posts
+ * it with toMessage after creating its own Hunted Prey effect; that card is postInfo. */
+export function buildHuntPreyPatreonRepairs(original,{game}={}){
+ const rules=clone(original),changes=[],gate='origin:item:hunt-prey';
+ if(game?.modules?.get('pf2e-ranged-combat')?.active!==true||game.settings.get('pf2e-ranged-combat','postActionToChat')!==2)return {rules,changes};
+ for(const[id,group]of Object.entries(rules??{}))for(const[index,rule]of(group.handlerRules??[]).entries()){
+  if(group.source?.length!==0||rule.triggerType!=='postInfo'||rule.value!=='huntPrey'||!Array.isArray(rule.predicate)||!rule.predicate.includes(gate)||rule.predicate.some(p=>p?.not===gate))continue;
+  const before=clone(rule.predicate);rule.predicate.push({not:gate});
+  changes.push({path:`${id}.handlerRules.${index}.predicate`,before,after:clone(rule.predicate),reason:'Ranged Combat 已为重发的完整猎杀目标卡建立猎物效果，Patreon 不再按这张卡另建一套。'});
+ }
+ return {rules,changes};
+}
+
 export function buildStrategistAttackEffect({targetUuid,claim,sourceActor}){
  if(!/^Scene\.[^.]+\.Token\.[^.]+$/.test(targetUuid)||!claim)throw Error('军师架势需要明确Token及攻击回执。');
  return {type:'effect',name:'军师架势：下一次攻击',img:'icons/sundries/gaming/chess-knight-white-glass.webp',system:{description:{value:''},level:{value:1},traits:{value:[]},duration:{unit:'unlimited',value:-1,expiry:null,sustained:false},tokenIcon:{show:false},rules:[
