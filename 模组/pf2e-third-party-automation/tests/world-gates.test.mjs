@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFileSync,readdirSync} from 'node:fs';
 import * as gates from '../scripts/world-gates.mjs';
 
-const teams=['avvvvvv','-','sog','pnvfcgjbf2cjp7gz','avecnu','team-automation-qa2'],fortress='ujx5r8oipw7ercdr';
+const teams=['avvvvvv','-','sog','sog-2','pnvfcgjbf2cjp7gz','avecnu','team-automation-qa2'],fortress='ujx5r8oipw7ercdr';
 const shieldGates=['DESTRUCTIVE_BLOCK_WORLDS','RUNE_TRANSFER_WORLDS','NATIVE_IWR_STATUS_WORLDS','SHIELD_BLOCK_WORLDS','SHIELD_WALL_COMPAT_WORLDS','REACTION_CHECKER_SETTING_WORLDS'];
 
 test('ECNU shares every shield-chain gate with the other audited teams',()=>{
@@ -15,10 +15,14 @@ test('AV group one joins the shield chain and no campaign-specific feature',()=>
  for(const [name,gate] of Object.entries(gates))assert.equal(gate.has('avvvvvv'),shieldGates.includes(name),name);
 });
 
+test('SoG group two opens exactly the gates of group one',()=>{
+ for(const [name,gate] of Object.entries(gates))assert.equal(gate.has('sog-2'),gate.has('sog'),name);
+});
+
 test('fortress and pilgrim features stay limited to their own worlds',()=>{
  for(const name of ['DEFENSIVE_ADVANCE_WORLDS','DESPERATE_PRAYER_WORLDS','ELECTRICITY_SETTLEMENT_WORLDS','SPIRITUAL_SCAR_WORLDS'])assert.deepEqual([...gates[name]],[fortress],name);
  assert.deepEqual([...gates.GLIMPSE_WORLDS].sort(),[fortress,'team-automation-qa2'].sort());
- assert.deepEqual([...gates.SOG_PILGRIM_WORLDS].sort(),['sog','sog-pilgrim-qa'].sort());
+ assert.deepEqual([...gates.SOG_PILGRIM_WORLDS].sort(),['sog','sog-2','sog-pilgrim-qa'].sort());
 });
 
 test('world ids are written only in world-gates.mjs',()=>{
