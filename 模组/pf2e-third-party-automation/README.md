@@ -1,4 +1,12 @@
-# PF2e 第三方自动化补全 0.9.59
+# PF2e 第三方自动化补全 0.9.60
+
+## 0.9.60 跟上 Patreon 3.2.32 与 Trigger Trove 2.5.0
+
+- Patreon 3.2.32 自带规则版本 212。主GM进入世界时，Patreon 发现世界里存的规则版本较旧，就同步自带规则，把 Self effect、Panache、Hunt Prey 三组整组盖回原版。TPA 对 Self effect（出谋划策配合已知弱点时不再多建一份自身效果）和 Panache（飞刀手的投掷终结技）的修改随之丢失，以前要到下次登录才补回。现在 Patreon 写入 `rulesV3` 或 `ruleVersion3` 后，TPA 马上再修一遍；TPA 自己写入后的那一遍找不到要改的地方，不会循环。修复后提示所有客户端刷新的通知，现在凡是启用 Patreon 的世界都会弹出，不再只限亵渎堡垒一团和二团。
+- Trigger Trove 2.5.0 把「Critical Specialization」改成新 ID `NzgcT7S1lbrIAVRb`，并加了斧专精。亵渎堡垒二团的双斩剑专精兼容以前只认旧 ID `6JdDvJY9YKdxoi2o`，换版后既不检查也不写入。现在两个 ID 都认，以 Trove 实际带的那张图为准：TPA 以前建的旧图世界副本换成新图副本，同样排除双斩已确认的剑重击专精，斧专精保留；`enabled` 里的旧 ID 原位换成新 ID。不是 TPA 建的副本照旧报错，不覆盖。
+- Patreon 212 给 Hunt Prey 加了 postInfo 处理器。Ranged Combat 会拦下每一张猎杀目标卡，自己建猎物效果，聊天等级为 2 时（TPA 为有怪物猎手的队伍设成 2）再把动作卡完整重发一次，Patreon 把这张卡当作 postInfo，于是游侠身上会多一个 PF2e 的「效果：猎杀目标」，猎物身上多一个 Patreon 标记。启用 Ranged Combat 且聊天等级为 2 时，TPA 让这条 postInfo 处理器不再匹配；self-effect 那条不动。
+
+更新文件后整页刷新客户端，不需要重启服务器。尚未在 Foundry 里实机验证。
 
 ## 0.9.59 修复激发武器命中后伤害按钮报错
 
